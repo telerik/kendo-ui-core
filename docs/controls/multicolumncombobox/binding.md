@@ -3,7 +3,7 @@ title: Data Binding
 page_title: jQuery MultiColumnComboBox Documentation - Data Binding
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and bind the widget to local data arrays or remote data services."
 slug: databinding_kendoui_multicolumncombobox
-position: 2
+position: 3
 ---
 
 # Data Binding
@@ -20,6 +20,7 @@ To initialize the MultiColumnComboBox by binding the widget to a local data arra
 
 The following example demonstrates how to initialize the MultiColumnComboBox through the `<input>` element.
 
+```dojo
     <input id="comboBox" />
 
     <script>
@@ -38,11 +39,13 @@ The following example demonstrates how to initialize the MultiColumnComboBox thr
         });
       });
     </script>
+```
 
 ## Binding to Remote Data
 
 Remote data binding is useful for larger datasets so that the items are loaded on demand upon display. To initialize the ComboBox by binding the widget to remote data arrays and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). You can use the DataSource for serving data from various data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
+```dojo
     <input id="comboBox" />
 
     <script>
@@ -66,6 +69,7 @@ Remote data binding is useful for larger datasets so that the items are loaded o
         });
     });
     </script>
+```
 
 ## See Also
 

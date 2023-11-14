@@ -8,7 +8,7 @@ position: 2
 
 # Getting Started with the ExpansionPanel 
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery ExpansionPanel .
+This guide demonstrates how to get up and running with the Kendo UI for jQuery ExpansionPanel.
 
 After the completion of this guide, you will achieve the following end result:
 

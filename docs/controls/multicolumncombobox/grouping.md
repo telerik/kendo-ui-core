@@ -3,7 +3,7 @@ title: Grouping
 page_title: jQuery MultiColumnComboBox Documentation - Grouping
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and configure its grouping functionality."
 slug: grouping_kendoui_multicolumncombobox_widget
-position: 5
+position: 6
 ---
 
 # Grouping

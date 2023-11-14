@@ -36,6 +36,12 @@ To initialize the MultiColumnComboBox, use any of the following approaches:
 * [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})
 * [Appearance]({% slug appearance_kendoui_multicolumncombobox_widget %})
 
+## Next Steps
+
+* [Getting Started with the Kendo UI MultiColumnComboBox for jQuery]({% slug getting_started_kendoui_multicolumncombobox_component %})
+* [Basic Usage of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
+* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+
 ## See Also
 
 * [Basic Usage of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)

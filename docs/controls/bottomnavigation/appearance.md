@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery BottomNavigation Documentation
 description: "Learn how to customize the appearance of the jQuery BottomNavigation."
 slug: appearance_bottomnavigation_widget
-position: 3
+position: 4
 ---
 
 # Appearance 

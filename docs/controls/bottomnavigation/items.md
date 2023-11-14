@@ -3,7 +3,7 @@ title: Items
 page_title: jQuery BottomNavigation Documentation - Items
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to configure the items of the component."
 slug: items_bottomnavigation_widget
-position: 2
+position: 3
 ---
 
 # Items

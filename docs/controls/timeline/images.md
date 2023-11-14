@@ -3,7 +3,7 @@ title: Images
 page_title: jQuery Timeline Documentation - Images
 description: "Adding images in the Kendo UI jQuery Timeline card."
 slug: images_kendoui_timeline_widget
-position: 4
+position: 5
 ---
 
 # Images
