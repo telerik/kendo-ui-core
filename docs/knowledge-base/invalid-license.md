@@ -24,21 +24,12 @@ res_type: kb
 
 An invalid or missing Kendo UI for jQuery license triggers the following behavior on pages that contain any incorrectly licensed Kendo UI components:
 
-* A warning message similar to the one below will be logged in the browser's console.
-
-    ```console
-    License activation failed for
-    @progress/kendo-ui v.2022.3.1109
-    No license found.
-    See https://docs.telerik.com/kendo-ui/intro/installation/using-license-code for more information.
-    ```
-
 * A watermark will appear over select components.
 
     * Example of a watermark in the `Light Theme`:
-       ![Watermark over Grid with Light Theme](../knowledge-base/images/watermark-light-theme.PNG)     
+       ![Watermark over Grid with Light Theme](../knowledge-base/images/watermark-light-theme.png)     
     * Example of a watermark in the `Dark Theme`:
-       ![Watermark over Grid with Dark Theme](../knowledge-base/images/watermark-dark-theme.PNG)
+       ![Watermark over Grid with Dark Theme](../knowledge-base/images/watermark-dark-theme.png)
 
 * A banner will appear on pages that use unlicensed Kendo UI for jQuery components.
     
@@ -46,6 +37,9 @@ An invalid or missing Kendo UI for jQuery license triggers the following behavio
 
     * Clicking the ? button of the banner will take you to the Kendo UI for jQuery licensing documentation.
     * Clicking the X button of the banner will close the banner until the page is reloaded or a license is activated.
+
+* A warning message similar to the one below will be logged in the browser's console.
+    ![Browser console message: License activation failed for @progress/kendo-ui. No license found.](../knowledge-base/images/license-warning.png)
 
 ## Cause
 

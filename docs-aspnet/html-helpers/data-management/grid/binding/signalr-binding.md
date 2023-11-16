@@ -197,7 +197,6 @@ Instruct the data source to use SignalR protocol for transmitting and operating 
                 .Sortable()
                 .DataSource(dataSource => dataSource
                     .SignalR()
-                    .AutoSync(true)
                     .Transport(tr => tr
                         .Promise("hubStart")
                         .Hub("hub")

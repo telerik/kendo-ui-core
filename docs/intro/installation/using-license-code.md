@@ -12,14 +12,19 @@ Using any Kendo UI for jQuery scripts that are [installed through NPM]({% slug k
 
 Providing a license file is not required when using distribution methods such as NuGet, Bower, and locally downloaded Kendo UI commercial bundles.
 
-A missing license file triggers [a banner, a watermark, and causes a message]({% slug invalid-license %}) similar to this one to appear in the browser's console:
+A missing license file causes [a banner, a watermark, and a message in the browser's console]({% slug invalid-license %} to appear:
 
-```console
-License activation failed for
-@progress/kendo-ui v.2022.3.1109
-No license found.
-See https://docs.telerik.com/kendo-ui/intro/installation/using-license-code for more information.
-```
+* Example of a watermark in the Light Theme
+    ![Watermark over Grid with Light Theme](../../knowledge-base/images/watermark-light-theme.png) 
+ 
+* Example of a watermark in the Dark Theme
+    ![Watermark over Grid with Dark Theme](../../knowledge-base/images/watermark-dark-theme.png)
+
+* A banner on pages that use unlicensed Kendo UI for jQuery components
+    ![Banner](../../knowledge-base/images/banner.png)
+
+* A message in the browser's console
+    ![Browser console message: License activation failed for @progress/kendo-ui. No license found.](../../knowledge-base/images/license-warning.png)
 
 To add a Kendo UI license file to your application:
 

@@ -12,14 +12,19 @@ Using any [Kendo UI client-side assets]({% slug copyclientresources_aspnetmvc6_a
 
 Providing a license file is not required when using locally downloaded client-side assets that come with the commercial [MSI installer]({% slug msi_install_aspnetmvc6_aspnetmvc %}) or [commercial ZIP and 7Z asset archives]({% slug using_local_client_side_resources %}#adding-the-resources).
 
-A missing license file triggers [a banner, a watermark, and causes a message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) similar to this one to appear in the browser's console:
+A missing license file causes [a banner, a watermark, and a message in the browser's console]({% slug invalid-license %} to appear:
 
-```console
-License activation failed for
-@progress/kendo-ui v{{ site.cdnVersion }}
-No license found.
-See https://docs.telerik.com/kendo-ui/intro/installation/using-license-code for more information.
-```
+* Example of a watermark in the Light Theme
+    ![Watermark over Grid with Light Theme](../images/watermark-light-theme.png) 
+ 
+* Example of a watermark in the Dark Theme
+    ![Watermark over Grid with Dark Theme](../images/watermark-dark-theme.png)
+
+* A banner on pages that use unlicensed Kendo UI for jQuery components
+    ![Banner](../images/banner.png)
+
+* A message in the browser's console
+    ![Browser console message: License activation failed for @progress/kendo-ui. No license found.](../images/license-warning.png)
 
 To add a client-side assets license file to your application:
 
