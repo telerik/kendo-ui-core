@@ -1285,6 +1285,40 @@ The node that is to be removed.
     console.log($("#treeview").find(".k-item").length); // logs 1
     </script>
 
+### scrollTo
+
+Scrolls to a visible node in the TreeView. Behaves in a similar way to calling `scrollIntoView({ block: 'nearest' })` method of the item element. The `scrollTo` method will not expand collapsed parents, hence will not scroll if the node is not visible.
+
+#### Parameters
+
+##### node `jQuery`
+
+The node to which the TreeView should scroll and make it visible.
+
+#### Example
+
+    <div id="treeview" style="max-height: 90px"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        {
+          text: "foo",
+          expanded: true,
+          items: [
+            { text: "bar" },
+            { text: "biz" },
+            { text: "baz" }
+          ]
+        }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+
+    var baz = treeview.findByText("baz");
+    treeview.scrollTo(baz);
+    </script>
+
 ### select
 
 Gets or sets the selected node.
