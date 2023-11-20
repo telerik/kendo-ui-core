@@ -352,7 +352,7 @@ var __meta__ = {
         }
 
         if (options.items) {
-            $(element).children("ul").children("li").each(function(i) {
+            $(element).children("div").children("ul").children("li").each(function(i) {
                 storeItemSelectEventHandler(this, options.items[i]);
             });
         }

@@ -2,6 +2,14 @@
 
     var isFunction = kendo.isFunction;
     describe("util", function() {
+        var container;
+
+        beforeEach(function() {
+            container = $("<div/>").appendTo(document.body);
+        });
+        afterEach(function() {
+            container.remove();
+        });
 
         it("true for functions", function() {
             assert.isOk(isFunction(function() { }));
@@ -33,6 +41,30 @@
 
         it("outer height pass correctly includeMargin", function() {
             assert.isOk(kendo._outerHeight(undefined, undefined) === 0);
+        });
+
+        it("outer width is calculated correctly for hidden elements", function() {
+            var visible, hidden;
+            container.append("<div class='visible'><span>abcd</span><button>abcd</button></div><div class='hidden'><span>abcd</span><button>abcd</button></div>");
+
+            visible = container.find(".visible");
+            hidden = container.find(".hidden");
+
+            hidden.css("display", "none");
+
+            assert.isOk(kendo._outerWidth(visible) === kendo._outerWidth(hidden, false, true));
+        });
+
+        it("outer height is calculated correctly for hidden elements", function() {
+            var visible, hidden;
+            container.append("<div class='visible'><span>abcd</span><button>abcd</button></div><div class='hidden'><span>abcd</span><button>abcd</button></div>");
+
+            visible = container.find(".visible");
+            hidden = container.find(".hidden");
+
+            hidden.css("display", "none");
+
+            assert.isOk(kendo._outerHeight(visible) === kendo._outerHeight(hidden, false, true));
         });
 
         var toCamelCase = kendo.toCamelCase;

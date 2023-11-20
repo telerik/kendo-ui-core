@@ -1247,8 +1247,22 @@ function pad(number, digits, end) {
     };
 
     kendo._round = round;
-    kendo._outerWidth = function(element, includeMargin) { return $(element).outerWidth(includeMargin || false) || 0; };
-    kendo._outerHeight = function(element, includeMargin) { return $(element).outerHeight(includeMargin || false) || 0; };
+    kendo._outerWidth = function(element, includeMargin, calculateFromHidden) {
+        element = $(element);
+        if (calculateFromHidden) {
+            return getHiddenDimensions(element, includeMargin).width;
+        }
+
+        return $(element).outerWidth(includeMargin || false) || 0;
+    };
+    kendo._outerHeight = function(element, includeMargin, calculateFromHidden) {
+        element = $(element);
+        if (calculateFromHidden) {
+            return getHiddenDimensions(element, includeMargin).height;
+        }
+
+        return $(element).outerHeight(includeMargin || false) || 0;
+    };
     kendo.toString = toString;
 })();
 
@@ -1835,6 +1849,25 @@ function pad(number, digits, end) {
         };
     }
 
+    function getHiddenDimensions(element, includeMargin) {
+        var clone, width, height;
+
+        clone = element.clone();
+        clone.css("display", "");
+        clone.css("visibility", "hidden");
+        clone.appendTo($("body"));
+
+        width = clone.outerWidth(includeMargin || false);
+        height = clone.outerHeight(includeMargin || false);
+
+        clone.remove();
+
+        return {
+            width: width || 0,
+            height: height || 0
+        };
+    }
+
     function wrap(element, autosize, resize, shouldCorrectWidth = true) {
         var percentage,
             outerWidth = kendo._outerWidth,
@@ -1849,12 +1882,13 @@ function pad(number, digits, end) {
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
                 percentHeight = percentRegExp.test(height),
-                forceWidth = element.hasClass("k-tooltip") || element.is(".k-menu-horizontal.k-context-menu");
+                forceDimensions = element.hasClass("k-tooltip") || element.is(".k-menu-horizontal.k-context-menu"),
+                calculateFromHidden = element.hasClass("k-tooltip");
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width) || forceWidth)) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
-            if (!percentHeight && (!autosize || (autosize && height)) || element.is(".k-menu-horizontal.k-context-menu")) { height = outerHeight(element); }
+            if (!percentWidth && (!autosize || (autosize && width) || forceDimensions)) { width = autosize ? outerWidth(element, false, calculateFromHidden) + 1 : outerWidth(element, false, calculateFromHidden); }
+            if (!percentHeight && (!autosize || (autosize && height)) || forceDimensions) { height = outerHeight(element, false, calculateFromHidden); }
 
             element.wrap(
                 $("<div/>")

@@ -406,6 +406,25 @@ it("Adding dynamic content element renders properly on root and inner levels", f
     m.destroy();
 });
 
+it("Select handler for sub-menu items is attached correctly with append", function() {
+    var m = new kendo.ui.Menu("<ul></ul>");
+
+    m.append([
+        {
+            text: "Item 1",
+            items: [{text: "Sub Item 1", select: () => alert("Sub Item 1 select")}, { text: "Sub Item 2" }]
+        },
+        {
+            text: "Item 2",
+          	select: () => alert("Item 2 select")
+        }
+    ]);
+
+    assert.isOk(m.element.children("li:first").find(".k-menu-popup li:first .k-link").data("selectHandler"));
+
+    m.destroy();
+});
+
 it("The new group of a newly inserted node is not visible", function() {
     var m = new kendo.ui.Menu("<ul id='menu'> <li >Item 1</li> <li class='target'> Item 2 </li> <li> Item 3 </li> </ul>");
 
