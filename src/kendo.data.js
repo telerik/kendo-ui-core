@@ -4176,7 +4176,7 @@ var __meta__ = {
                     that._addRange(that._observe(result.data));
 
                     if (options.skip + options.take > result.data.length) {
-                        options.skip = result.data.length - options.take;
+                        options.skip = Math.max(0, result.data.length - options.take);
                     }
 
                     that.view(query.range(options.skip, options.take).toArray());

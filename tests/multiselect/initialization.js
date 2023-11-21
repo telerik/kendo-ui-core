@@ -34,6 +34,13 @@
         assert.isOk(wrapper.hasClass("k-multiselect"));
     });
 
+    it("MultiSelect input has data-validate attribute set to false", function() {
+        var multiselect = new MultiSelect(select),
+            input = multiselect.input;
+
+        assert.isOk(input.data("validate") === false);
+    });
+
     it("MultiSelect copies className of the element to the wrapper", function() {
         var multiselect = new MultiSelect(select.addClass("test")),
             wrapper = multiselect.wrapper;

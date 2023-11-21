@@ -12,8 +12,6 @@ The Tooltip displays a popup hint for a specific HTML element.
 
 You can define its content either as static text or load it dynamically with AJAX. The Tooltip provides default configuration options such as relatively positioning it to the target, events for displaying the widget, auto-hiding behavior, setting its height and width.
 
-// add an image here
-
 ![Kendo UI for jQuery Tooltip Overview](tooltip-overview.png)
 
 ## Functionality and Features
