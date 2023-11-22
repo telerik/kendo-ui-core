@@ -1,27 +1,27 @@
 ---
 title: Export
 page_title: Export
-description: "Learn the Export Options of the Telerik UI ArcGauge component for {{ site.framework }}."
+description: "Explore the export options of the Telerik UI ArcGauge component for {{ site.framework }}."
 slug: export_arcgaugehelper_aspnetcore
 position: 4
 ---
 
-# Arc Gauge Export
+# Export
 
-The Telerik UI ArcGauge for {{ site.framework }} export relies on the [Telerik UI DrawingAPI library](https://docs.telerik.com/kendo-ui/framework/drawing/dom-elements/overview). It enables you to export the content to:
+The ArcGauge export functionality relies on the [Kendo UI Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/overview). It enables you to export the ArcGauge to any of the following formats:
 
-* [Export as PDF](#export-to-pdf)
+* [Export to PDF](#export-to-pdf)
 
-* [Export as Image](#export-to-image)
+* [Export as Image](#export-as-image)
 
-* [Export as SVG](#export-to-svg)
+* [Export as SVG](#export-as-svg)
 
-## Export as PDF
+## Export to PDF
 
-The arc gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
+The ArcGauge allows you to retrieve the PDF representation of the content through the [`exportPDF()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a remote endpoint or downloaded client-side.
 
 ```HtmlHelper        
-    <button class='export-pdf k-button'>Export as PDF</button>
+    <button class='export-pdf k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export to PDF</button>
     
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
@@ -31,9 +31,12 @@ The arc gauge allows you to retrieve the PDF representation of the content via t
 
     <script>
         $(document).ready( function () {
-            $(".export-pdf").click(function () {
+            $(".export-pdf").on("click", function () {
                 var gauge = $("#gauge").getKendoArcGauge();
-                gauge.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function (data) {
+                gauge.exportPDF({ 
+                    paperSize: "auto", 
+                    margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } 
+                }).done(function (data) {
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
@@ -46,7 +49,7 @@ The arc gauge allows you to retrieve the PDF representation of the content via t
 ```
 {% if site.core %}
 ```TagHelper
-    <button class='export-pdf k-button'>Export as PDF</button>
+    <button class='export-pdf k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export to PDF</button>
 
     <kendo-arcgauge name="gauge" value="65">
         <scale major-unit="20" minor-unit="5">
@@ -55,9 +58,12 @@ The arc gauge allows you to retrieve the PDF representation of the content via t
 
     <script>
         $(document).ready( function () {
-            $(".export-pdf").click(function () {
+            $(".export-pdf").on("click", function () {
                 var gauge = $("#gauge").getKendoArcGauge();
-                gauge.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function (data) {
+                gauge.exportPDF({ 
+                    paperSize: "auto", 
+                    margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } 
+                }).done(function (data) {
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
@@ -72,10 +78,10 @@ The arc gauge allows you to retrieve the PDF representation of the content via t
 
 ## Export as Image
 
-The arc gauge allows you to retrieve the Image representation of the content via the [exportImage method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
+You can retrieve the image representation of the ArcGauge content by using the [`exportImage()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded client-side.
 
 ```HtmlHelper     
-    <button class='export-img k-button'>Export as Image</button>
+    <button class='export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as Image</button>
 
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
@@ -100,7 +106,7 @@ The arc gauge allows you to retrieve the Image representation of the content via
 ```
 {% if site.core %}
 ```TagHelper
-    <button class='export-img k-button'>Export as Image</button>
+    <button class='export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as Image</button>
     
     <kendo-arcgauge name="gauge" value="65">
         <scale major-unit="20" minor-unit="5">
@@ -126,10 +132,10 @@ The arc gauge allows you to retrieve the Image representation of the content via
 
 ## Export as SVG
 
-The arc gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content via the [exportSVG method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
+You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportsvg) to export the ArcGauge as a Scalable Vector Graphics (SVG). The `base64` result can be forwarded to a service or downloaded on the client.
 
 ```HtmlHelper        
-    <button class='export-svg k-button'>Export as SVG</button>
+    <button class='export-svg k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as SVG</button>
 
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
@@ -154,7 +160,7 @@ The arc gauge allows you to retrieve the Scalable Vector Graphics (SVG) represen
 ```
 {% if site.core %}
 ```TagHelper
-    <button class='export-svg k-button'>Export as SVG</button>
+    <button class='export-svg k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as SVG</button>
     
     <kendo-arcgauge name="gauge" value="65">
         <scale major-unit="20" minor-unit="5">
@@ -182,4 +188,4 @@ The arc gauge allows you to retrieve the Scalable Vector Graphics (SVG) represen
 ## See Also
 
 * [Overview of the ArcGauge]({%slug overview_arcgaugehelper_aspnetcore%})
-* [scale of the ArcGauge]({%slug scale_arcgaugehelper_aspnetcore%})
+* [Configuring the ArcGauge Colors]({%slug colors_arcgaugehelper_aspnetcore%})

@@ -3,7 +3,7 @@ title: Data Binding
 page_title: Kendo UI for jQuery TaskBoard Documentation - TaskBoard Data Binding
 description: "Get started with the Kendo UI for jQuery TaskBoard and bind the component to local or remote data."
 slug: databinding_kendoui_taskboard_widget
-position: 2
+position: 3
 ---
 
 # Data Binding

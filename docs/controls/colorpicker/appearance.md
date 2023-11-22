@@ -1,14 +1,14 @@
 ---
 title: Appearance
 page_title: jQuery ColorPicker Documentation - Appearance
-description: "Learn how to apply different styling options to the ColorPicker widget."
+description: "Learn how to apply different styling options to the ColorPicker component."
 slug: appearance_kendoui_colorpicker_widget
-position: 5
+position: 6
 ---
 
 # Appearance
 
-> As of Kendo UI R1 2022, the jQuery ColorPicker widget has new rendering and styling options.
+> As of Kendo UI R1 2022, the jQuery ColorPicker component has new rendering and styling options.
 
 In this article, you will find information about the rendering of the Kendo UI ColorPicker.
 
@@ -58,7 +58,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 ### Rounded
 
-The `rounded` option controls how much border radius is applied to the tags for the selected items in the widget. The structure of the class is `k-rounded-{size}`.
+The `rounded` option controls how much border radius is applied to the tags for the selected items in the component. The structure of the class is `k-rounded-{size}`.
 
 The following values are available for the [`rounded`](/api/javascript/ui/colorpicker/configuration/rounded) option:
 
@@ -205,7 +205,7 @@ The following example demonstrates the full version of the old rendering:
 
 The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements:
 
-- The `span` element controls the overall appearance of the widget and has the following class structure:
+- The `span` element controls the overall appearance of the component and has the following class structure:
 
   ```html
   <span class="k-colorpicker k-picker k-icon-picker k-picker-solid k-picker-md k-rounded-md">

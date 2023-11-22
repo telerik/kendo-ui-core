@@ -3,7 +3,7 @@ title: Resources
 page_title: Kendo UI for jQuery TaskBoard Documentation - Resources
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn how to configure its resources."
 slug: resources_kendoui_taskboard_widget
-position: 7
+position: 8
 ---
 
 # Resources

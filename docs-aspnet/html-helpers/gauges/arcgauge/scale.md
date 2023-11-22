@@ -6,21 +6,21 @@ slug: scale_arcgaugehelper_aspnetcore
 position: 2
 ---
 
-## Arc Gauge Scale
+# Scale
 
-The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values, pointers and labels. It can be customized by adding the  `Scale` option to the widget. The `Scale` exposes the following child options:
+The ArcGauge has a scale that renders the values, pointers and labels. You can customize it through the `Scale` option. The `Scale` exposes the following options:
 
-* [Min and Max](#min-and-max)
+* [`Min` and `Max`](#min-and-max)
 
-* [MinorUnit and MajorUnit](#minorunit-and-majorunit)
+* [`MinorUnit` and `MajorUnit`](#minorunit-and-majorunit)
 
-* [Reverse](#reverse)
+* [`Reverse`](#reverse)
 
 ## Min and Max
 
-* The `Min` (`double`) sets the lowest value of the widget.
+* The `Min` (`double`) sets the lowest value of the component scale.
 
-* The `Max` (`double`) sets the maximum value of the widget.
+* The `Max` (`double`) sets the highest value of the component scale.
 
 ```HtmlHelper
     @(Html.Kendo().ArcGauge()
@@ -40,9 +40,9 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
 
 ## MinorUnit and MajorUnit
 
-* The `MajorUnit` (`double`) parameter controls the interval between the major unit divisions of the widget. The values provided to the arc gauge's `Pointer` will render as a `MajorUnit` tick. The labels will be rendered next to the `MajorUnit` ticks.
+* The `MajorUnit` (`double`) option controls the interval between the major unit divisions of the component scale. The values provided to the ArcGauge's pointer will render as a `MajorUnit` tick. The labels will be rendered next to the `MajorUnit` ticks.
 
-* The `MinorUnit` (`double`) parameter controls the interval between the minor unit divisions of the widget.
+* The `MinorUnit` (`double`) parameter controls the interval between the minor unit divisions of the component scale.
 
 ```HtmlHelper
     @(Html.Kendo().ArcGauge()
@@ -62,7 +62,7 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
 
 ## Reverse
 
-Reverses the scale direction - values are increased counterclockwise.
+The `Reverse()` option reverses the scale direction - the values increase counterclockwise.
 
 ````HtmlHelper
     @(Html.Kendo().ArcGauge()

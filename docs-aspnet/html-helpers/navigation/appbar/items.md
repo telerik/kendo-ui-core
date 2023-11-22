@@ -8,17 +8,19 @@ position: 2
 
 # Items
 
-The `Items` represent the content of the AppBar. The `Items` configuration accepts a collection of objects that will be rendered inside the AppBar widget. There are two types of items that developers can choose from:
+The `Items` represent the content of the AppBar. The `Items` configuration accepts a collection of objects that will be rendered inside the AppBar. The component provides two types of items:
 
 * [Content Items](#content-items)
 * [Spacer](#spacer)
 
 ## Content Items
 
-There are two approaches to using templates with **Content Items**:
-* You can use the `Template` option exposed by `ContentItem` to consume and render HTML. 
-* You can supply a `kendo.template` to the configuration by using the `TemplateId` option. 
-The following example shows how to utilize both of them:
+You can configure the **Content Items** by using templates as per the following approaches:
+
+* Use the `Template` option exposed by `ContentItem` to consume and render HTML. 
+* Supply a [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview) to the item by using the `TemplateId` option. 
+
+The following example showcases how to use both template options to define the AppBar items.
 
 ```HtmlHelper
     @(Html.Kendo().AppBar()
@@ -63,7 +65,7 @@ The following example shows how to utilize both of them:
 
 ## Spacer
 
-The `Spacer` item could be utilized to easily separate the content items from each other.
+The `Spacer` item creates a `span` element to add space and separate the content items from each other. 
 
 ```HtmlHelper
     @(Html.Kendo().AppBar()
@@ -91,5 +93,5 @@ The `Spacer` item could be utilized to easily separate the content items from ea
 
 ## See Also
 
-* [Overview of the AppBar (Demo)](https://demos.telerik.com/{{ site.platform }}/appbar/index)
+* [Overview of the AppBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/appbar/index)
 * [Server-Side API](/api/appbar)

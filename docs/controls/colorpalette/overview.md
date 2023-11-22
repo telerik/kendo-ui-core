@@ -73,6 +73,12 @@ As of Kendo UI R3 2022, you can initialize the ColorGradient from an `input` ele
 * [Color Presets]({% slug presets_kendoui_colorpalette_widget %})&mdash;The widget provides a set of predefined color palettes.
 * [Accessibility]({% slug accessibility_kendoui_colorpalette_widget %})&mdash;The ColorPalette supports various accessibility standards.
 
+## Next Steps 
+
+* [Getting Started with the Kendo UI ColorPalette for jQuery]({% slug getting_started_kendoui_colorpalette_widget %})
+* [Basic Usage of the ColorPalette (Demo)](https://demos.telerik.com/kendo-ui/colorpalette/index)
+* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+
 ## See Also
 
 * [Overview of the ColorPalette (Demo)](https://demos.telerik.com/kendo-ui/colorpalette/index)

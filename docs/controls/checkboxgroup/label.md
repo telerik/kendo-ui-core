@@ -3,7 +3,7 @@ title: Label
 page_title: jQuery CheckBoxGroup Documentation - Label
 description: "Get started with the jQuery CheckBoxGroup by Kendo UI and learn how to configure the label of the widget."
 slug: label_checkboxgroup_widget
-position: 3
+position: 4
 ---
 
 # Label

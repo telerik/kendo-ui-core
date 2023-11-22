@@ -10,69 +10,19 @@ position: 1
 
 The Kendo UI for jQuery ColorGradient renders a gradient (a hue and an alpha slider) and inputs to manually enter a desired color. You can directly add the widget to the page instead of rendering it in a popup.
 
-* [Demo page for the ColorGradient](https://demos.telerik.com/kendo-ui/colorgradient/index)
-
-## Basic Configuration
-
-To initialize the ColorGradient, use a `div` element. The following example shows a basic implementation of the widget.
-
-```dojo
-    <div id="colorgradient"></div>
-
-    <script>
-        $(document).ready(function(){
-            $("#colorgradient").kendoColorGradient();
-        });
-    </script>
-```
-
-As of Kendo UI R3 2022, you can initialize the ColorGradient from an `input` element and use it for value submission. The widget is also supported as an editor in the Kendo Form.
-
-```dojo
-    <form id="myForm"></form>
-
-    <script>
-      $("#myForm").kendoForm({
-        formData: {
-          ID: 1,
-          Name: "John Doe",
-          Address: 3,
-          Color: "red"
-        },
-        items: [
-          {
-            field: "Name",
-            validation: { required: true }
-          },
-          {
-            field: "Address",
-            editor:"DropDownList",
-            editorOptions:{
-              dataTextField:"text",
-              dataValueField:"id",
-              dataSource: {
-                data: [
-                  {text:"Sofia", id:1},
-                  {text:"London", id:2},
-                  {text:"New York", id:3}
-                ]
-              }
-            }
-          },
-          {
-            field: "Color",
-            editor:"ColorGradient"
-          }
-        ]
-      });
-    </script>
-```
+![Kendo UI for jQuery ColorGradient with Basic Configuration](basic-colorgradient.png)
 
 ## Functionality and Features
 
 * [Contrast Tool]({% slug contrast_tool_kendoui_colorgradient_widget %})&mdash;The widget provides a color contrast tool, which checks the contrast ratio between two colors.
 * [Formats]({% slug rgb_hex_kendoui_colorgradient_widget %})&mdash;The widget supports RGB and HEX input formats.
 * [Accessibility]({% slug accessibility_kendoui_colorgradient_widget %})&mdash;The ColorGradient supports various accessibility standards.
+
+## Next Steps 
+
+* [Getting Started with the Kendo UI ColorGradient for jQuery]({% slug getting_started_kendoui_colorgradient_widget %})
+* [Basic Usage of the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/index)
+* [JavaScript API Reference of the ColorGradient](/api/javascript/ui/colorgradient)
 
 ## See Also
 

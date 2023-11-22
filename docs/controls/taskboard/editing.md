@@ -3,7 +3,7 @@ title: Editing
 page_title: Kendo UI for jQuery TaskBoard Documentation - Editing
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn how to implement its editing functionality."
 slug: editing_kendoui_taskboard_widget
-position: 5
+position: 6
 ---
 
 # Editing

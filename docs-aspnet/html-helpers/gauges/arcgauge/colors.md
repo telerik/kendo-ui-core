@@ -6,9 +6,9 @@ slug: colors_arcgaugehelper_aspnetcore
 position: 3
 ---
 
-## Arc Gauge Colors
+# Colors
 
-The scale of the ArcGauge can be configured to show different colors for the different values. This allows for a diversified usage of the widget. The `Colors` option accepts a set of ranges with a respective `Color` option:
+The scale of the ArcGauge can be configured to show different colors based on the current value. The `Colors` option accepts a set of ranges with a respective `Color` option.
 
 ````HtmlHelper
     @(Html.Kendo().ArcGauge()
@@ -43,4 +43,4 @@ The scale of the ArcGauge can be configured to show different colors for the dif
 ## See Also
 
 * [Overview of the ArcGauge]({%slug overview_arcgaugehelper_aspnetcore%})
-* [scale of the ArcGauge]({%slug scale_arcgaugehelper_aspnetcore%})
+* [Configuring the ArcGauge Scale]({%slug scale_arcgaugehelper_aspnetcore%})

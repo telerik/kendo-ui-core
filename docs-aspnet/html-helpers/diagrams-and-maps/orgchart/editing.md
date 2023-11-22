@@ -155,7 +155,17 @@ The following example demonstrates how to configure the OrgChart to use editing.
     }
 ```
 
+## Disable the Editing
+
+For disabling the Edit functionality set the `Eitable` configuration to `false`:
+
+```
+.Editable(false)
+```
+
+
 ## See Also
 
 * [Editing in the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/editing)
 * [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)
+* [A REPL example of disabled editing of an OrgChart](https://netcorerepl.telerik.com/wHvlPRbz45LXGqZX00)

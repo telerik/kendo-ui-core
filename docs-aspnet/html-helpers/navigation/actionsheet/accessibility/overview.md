@@ -6,7 +6,7 @@ slug: htmlhelpers_accessibility_actionsheet_aspnetcore
 position: 1
 ---
 
-# ActionSheet Accessibility
+# Accessibility
 
 The ActionSheet is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 

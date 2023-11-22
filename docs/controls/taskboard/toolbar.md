@@ -3,7 +3,7 @@ title: Toolbar
 page_title: Kendo UI for jQuery TaskBoard Documentation - Toolbar
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn how to configure its toolbar."
 slug: toolbar_kendoui_taskboard_widget
-position: 9
+position: 10
 ---
 
 # Toolbar

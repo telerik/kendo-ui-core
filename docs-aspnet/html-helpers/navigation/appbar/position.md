@@ -8,27 +8,27 @@ position: 3
 
 # Positioning
 
-The AppBar widget enables you to set its [Position](#position) and its [Position mode](#position-mode).
+The AppBar allows you to set its [Position](#position) and its [Position mode](#position-mode).
 
 ## Position
 
-The `Position` option of the Telerik UI AppBar defines where the widget has to be positioned on the page. The predefined position options are the following:
+The `Position` option of the AppBar defines where the component has to be positioned on the page. The available position options are:
 
-* `None` - no positioning CSS style are applied
-* `Top` - places the AppBar at the top of the page
-* `Bottom` - places the AppBar at the bottom of the page
+* `None`&mdash;No positioning CSS styles are applied.
+* `Top`&mdash;Places the AppBar at the top of the page.
+* `Bottom`&mdash;Places the AppBar at the bottom of the page.
 
 ## Position Mode
 
-The `PositionMode` option defines the position of the component relative to its parent container or viewport. The predefined **Position Mode** options are the following:
+The `PositionMode` option defines the position of the component relative to its parent container or viewport. The predefined position modes are:
 
-* `Static` - positions the AppBar according to the normal flow of the page.
-* `Sticky` - sticks the AppBar to a given position(top or bottom).
-* `Fixed`- positions the AppBar relative to the viewport.
+* `Static`&mdash;Positions the AppBar according to the normal flow of the page.
+* `Sticky`&mdash;Sticks the AppBar to a given position (top or bottom).
+* `Fixed`&mdash;Positions the AppBar relative to the viewport.
 
-> In order to use the `Sticky` or `Fixed` position mode of the AppBar, the `Position` has to be set either to `Top` or `Bottom`.
+> To use the `Sticky` or `Fixed` position mode of the AppBar, the `Position` has to be set either to `Top` or `Bottom`.
 
 ## See Also
 
-* [Positioning of the AppBar (Demo)](https://demos.telerik.com/{{ site.platform }}/appbar/position)
+* [Positioning of the AppBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/appbar/position)
 * [Server-Side API](/api/appbar)

@@ -14,11 +14,11 @@ The `Items` configuration allows you to set specific attributes of the ActionShe
 
 - Text
 - Icon
-- Group (items can be segregated in two groups - top and bottom.)
+- Group (items can be segregated in two groups - top and bottom)
 - Description 
 - Click event handler name
 
-The following example demonstrates the possible options for the `Items` configuration of the ActionSheet widget:
+The following example demonstrates the possible options for the `Items` configuration of the ActionSheet component.
 
 ```HtmlHelper
     @(Html.Kendo().ActionSheet()
@@ -59,4 +59,7 @@ The following example demonstrates the possible options for the `Items` configur
 ## See Also
 
 * [Overview of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet)
-* [Server-Side API](/api/actionsheet)
+* [Server-Side API of the ActionSheet HtmlHelper](/api/actionsheet)
+{% if site.core %}
+* [Server-Side API of the ActionSheet TagHelper](/api/taghelpers/actionsheet)
+{% endif %}
