@@ -17025,6 +17025,7 @@ declare namespace kendo.dataviz.ui {
         margin?: number | ChartYAxisItemLabelsMargin | undefined;
         mirror?: boolean | undefined;
         padding?: number | ChartYAxisItemLabelsPadding | undefined;
+        position?: string | undefined;
         rotation?: number |ChartYAxisItemLabelsRotation | undefined;
         skip?: number | undefined;
         step?: number | undefined;

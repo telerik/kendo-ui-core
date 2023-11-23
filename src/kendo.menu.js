@@ -1512,7 +1512,7 @@ var __meta__ = {
             var that = this;
             var element = $(e.currentTarget);
             var popupOpener = element.data(POPUP_OPENER_ATTR);
-            var hasChildren = (element.children(animationContainerSelector).length || element.children(groupSelector).length) || popupOpener;
+            var hasChildren = element.children(popupSelector).length || popupOpener;
             var $window = $(window);
 
             if (popupOpener) {

@@ -68,7 +68,30 @@ To activate Kendo UI for jQuery, you can use any of the license files associated
 
 No, if you use CDN and Kendo UI for jQuery versions released prior to R3 2022 or NPM versions released prior to R2 2022, you don’t need to set up the licensing.
 
->caution Do not include a license file when using Kendo UI versions prior to R3 2022. Including a license file with those versions will cause a `KendoLicensing is not defined` error. 
+>caution Do not include a license file when using Kendo UI versions prior to R3 2022. Including a license file with those versions will cause a `KendoLicensing is not defined` error.
+
+## I have a `KendoLicensing is not defined` error in the console. What should I do?
+
+If you are using Kendo UI versions after `R3 2022` and loading the required scrips asynchronously you need to properly chain the scrips loading order. `loadScript` is an async method and thus it does not reassure that the `kendo.all.min.js` is loaded before loading the `kendo-ui-license.js`.
+
+```js
+      Promise.all([
+        loadScript(this, ScriptsPath + '/jquery-3.7.0.min.js'),
+        loadScript(this, ScriptsPath + '/kendo.all.min.js'),
+        loadStyle(this, StylesPath + '/jquery-ui.min.css'),
+        loadStyle(this, StylesPath + '/Kendo.css'),
+        loadStyle(this, StylesPath + '/kendo.common.min.css'),
+      ])
+        .then(() => {
+        loadScript(this, ScriptsPath + '/kendo-ui-license.js').then(() => {
+          console.log('Files loaded');
+          this.scriptsLoaded = true; 
+        });
+      })
+        .catch(error => {
+        console.error('Error loading KendoUI', error);
+      });
+```
 
 ## Related Articles
 

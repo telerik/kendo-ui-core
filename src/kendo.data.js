@@ -3140,12 +3140,11 @@ var __meta__ = {
             try {
                 for (var i = 0; i < items.length; i ++) {
                     var item = items[i];
-                    var model = this._createNewModel(item);
 
                     this._eachItem(this._data, function(dataItems) {
                         for (var idx = 0; idx < dataItems.length; idx++) {
                             var dataItem = dataItems.at(idx);
-                            if (dataItem.id === model.id) {
+                            if (dataItem.uid === item.uid) {
                                 moved.push(dataItem);
                                 dataItems.splice(index >= idx ? --index : index, 0, dataItems.splice(idx, 1)[0]);
                                 index++;
