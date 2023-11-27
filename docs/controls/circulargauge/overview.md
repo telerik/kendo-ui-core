@@ -14,27 +14,21 @@ The widget supports full customization of the Center Text, as well as, rich Scal
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-* [Demo page for the CircularGauge](https://demos.telerik.com/kendo-ui/circular-gauge/index)
-
-## Initializing the CircularGauge
-
-To create the CircularGauge, use a `div` element and, optionally, set a height and width by using CSS.
-
-    <div id="circular-gauge"></div>
-
-The following example demonstrates how to initialize the CircularGauge with its default configuration.
-
-	$(document).ready(function() {
-    	$("#circular-gauge").kendoCircularGauge();
-   	});
+![Kendo UI for jQuery CircularGauge with Basic Configuration](circulargauge-getting-started.png)
 
 ## Functionality and Features
 
-* [Color ranges]({% slug colorranges_kendoui_circulargauge %})
-* [Scale options]({% slug scale_kendoui_circulargauge %})
-* [Templates]({% slug centertemplate_kendoui_circulargauge %})
+* [Color ranges]({% slug colorranges_kendoui_circulargauge %})—The CircularGauge allows you to set different colors per each range.
+* [Scale options]({% slug scale_kendoui_circulargauge %})—The CircularGauge provides an option to customize the scale appearance, by setting labels, ticks, background color, etc.
+* [Templates]({% slug centertemplate_kendoui_circulargauge %})—You can use templates to customize the content inside the center of the CircularGauge.
+
+## Next Steps
+
+* [Getting Started with the Kendo UI CircularGauge for jQuery]({% slug getting_started_kendoui_circulargauge_component %})
+* [Basic Usage of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/index)
+* [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
 
 ## See Also
 
-* [Basic Usage of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/index)
+* [Overview of the CircularGauge (Demo)](https://demos.telerik.com/kendo-ui/circular-gauge/index)
 * [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)

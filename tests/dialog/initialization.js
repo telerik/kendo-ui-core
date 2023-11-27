@@ -123,6 +123,14 @@
             assert.equal(dialog.wrapper.find(".k-dialog-actions > .k-button").length, 1);
         });
 
+        it("string action text does not violate CSP", function() {
+            var dialog = createDialog({
+                actions: [{ text: "OK" }]
+            });
+
+            assert.equal(dialog.wrapper.find(".k-dialog-actions > .k-button").length, 1);
+        });
+
         it("setting an primary acition in options adds a primary button", function() {
             var dialog = createDialog({
                 actions: [{

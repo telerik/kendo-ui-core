@@ -42,11 +42,11 @@ These Grid editing files look like this:
 
 And they are automatically placed inside the Views/Shared folder when you create a new Telerik project. You can also acquire them manually from the installation folder of Progress Telerik UI for MVC.
 
-![Folder location](images/editor-templates-1.png)
+<img src="images/editor-templates-1.png" alt="Folder location" style="width: 400px;">
 
  Previously, there was alternative way of adding such editors - in the Content folder of the project.
 
- ![Folder location](images/editor-templates-2.png)
+<img src="images/editor-templates-2.png" alt="Content location" style="width: 400px;">
 
  The extention .ascx is an old file type which is coming from Web Forms technology and old versions of MVC, but it is no longer supported in MVC 5. Therefore, it should be avoided and only .cshtml files should be used going onward.
 
@@ -56,7 +56,7 @@ And they are automatically placed inside the Views/Shared folder when you create
  At the end of 2022, Telerik UI for MVC dropped the support of MVC 3 and 4 and switched to maintaining only System.MVC version 5.2.9.0+:
 https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/ui-for-asp-net-mvc-r3-2022-(version-2022-3-913)
 
- ![Folder location](images/editor-templates-3.png)
+<img src="images/editor-templates-3.png" alt="MVC drop" style="width: 400px;">
 
 Having these files still in the project was causing several build errors for our users:
 
@@ -68,15 +68,17 @@ Having these files still in the project was causing several build errors for our
    - msbuild SolutionName.sln /p:PrecompileBeforePublish=true
     `<PrecompileBeforePublish>True</PrecompileBeforePublish>`
 
+
 **2. Type or namespace definition, or end-of-file expected**
 
 This error will appear when the editor files (for example Boolean.ascx) will have their 'Build Action' property set to 'Compile'.
+
 
 **3. 'HtmlHelper' does not contain a definition for 'Kendo' and no accessible extension method 'Kendo' accepting a first argument of type 'HtmlHelper' could be found (are you missing a using directive or an assembly)**
 
 This might be thrown because of unsuccessful build due to one of the previous errors or a missing reference. Ensure that all references are added and then Rebuild the project.
 
- ## Solution
+## Solution
 
 We have decided to remove the old .ascx editing files from the NuGet package and they will no longer be included with the R1 2024 release version. Upgrading the version of Telerik.UI.for.AspNet.Mvc5 package should no longer cause these errors.
 

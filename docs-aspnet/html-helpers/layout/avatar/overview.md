@@ -3,7 +3,7 @@ title: Overview
 page_title: Avatar Overview
 description: "Learn the basics when working with the Telerik UI Avatar HtmlHelper for {{ site.framework }}."
 slug: overview_avatarhelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Avatar Overview
@@ -34,39 +34,25 @@ The following example demonstrates how to initialize an Avatar component.
 ```
 {% endif %}
 
-## Referencing Existing Instances
-
-You can access an existing Avatar instance by using the `.data()` jQuery method which gets executed by the jQuery object of the originating element.
-
-```HtmlHelper
-    @(Html.Kendo().Avatar()
-        .Name("avatar")
-        .Type(AvatarType.Text)
-        .Text("MJ")
-    )
-```
-{% if site.core %}
-```TagHelper
-    <kendo-avatar name="avatar"
-        type="AvatarType.Text"
-        text="MJ">
-    </kendo-avatar>
-```
-{% endif %}
-```JavaScript
-    <script>
-        var avatar = $('#avatar').data('kendoAvatar');
-    </script>
-```
-
 ## Accessibility and Keyboard Navigation
 
 The `Alt` option can be used when the `Type` is set to `Image`. This value will be used to populate the alt attribute of the `<img>` element.
 
 The Avatar is a non-focusable element.
 
+## Functionality and Features
+
+* [Appearance]({% slug appearance_avatar_aspnetcore %})&mdash;Use different configuration settings to control the styling of the component.
+
+## Next Steps
+
+* [Getting Started with the Avatar]({% slug avatar_getting_started %})
+* [Overview of the Avatar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/index)
+{% if site.core %}
+* [Overview of the Avatar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/avatar/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [Overview of the Avatar (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/index)
+* [Integrating the Avatar for {{ site.framework }} into a Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/gridintegration)
 * [JavaScript API Reference of the Avatar](https://docs.telerik.com/kendo-ui/api/javascript/ui/avatar)

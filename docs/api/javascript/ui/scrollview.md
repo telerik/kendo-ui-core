@@ -621,6 +621,79 @@ The initial page that will be displayed.
     });
     </script>
 
+### pagerOverlay `String`*(default: "none")*
+
+Sets an overlay background color for the pager. It can be configured to one of the three possible values:
+- `none` - no background overlay is set
+- `dark` - sets a dark-colored background overlay
+- `light` - sets a light-colored background overlay
+
+#### Example
+
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
+    </script>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
+
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: true,
+            pagerOverlay: "dark"
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
+        }
+    </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
+
 ### template `String`*(default: "#:data#")*
 
 The template for rendering the content of the pages. By default, the ScrollView renders a `div` element for every page.

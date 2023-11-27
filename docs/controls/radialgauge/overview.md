@@ -12,24 +12,23 @@ The [Kendo UI RadialGauge widget](https://demos.telerik.com/kendo-ui/radial-gaug
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-## Initializingthe RadialGauge
+![Kendo UI for jQuery RadialGauge with Basic Configuration](radialgauge-getting-started.png)
 
-To create the RadialGauge, use a `div` element and optionally set a height and width by using CSS.
-
-    <div id="radial-gauge"></div>
-
-The following example demonstrates how to initialize the RadialGauge with its default configuration.
-
-	$(document).ready(function() {
-    	$("#radial-gauge").kendoRadialGauge();
-   	});
 
 ## Functionality and Features
 
-* [Scale options]({% slug saleoptions_kendoui_radialgauge %})
-* [Multiple pointers]({% slug pointers_kendoui_radialgauge %})
+* [Scale options]({% slug saleoptions_kendoui_radialgauge %})—The RadialGauge provides an option to customize the scale appearance, by setting labels, ticks, background color, etc.
+* [Multiple pointers]({% slug pointers_kendoui_radialgauge %})—You can render multiple pointers and highlight multiple values. 
+
+
+## Next Steps
+
+* [Getting Started with the Kendo UI RadialGauge for jQuery]({% slug getting_started_kendoui_radialgauge_component %})
+* [Basic Usage of the RadialGauge (Demo)](https://demos.telerik.com/kendo-ui/radial-gauge/index)
+* [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
+
 
 ## See Also
 
-* [Basic Usage of the RadialGauge (Demo)](https://demos.telerik.com/kendo-ui/radial-gauge/index)
+* [Overview of the RadialGauge (Demo)](https://demos.telerik.com/kendo-ui/radial-gauge/index)
 * [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)

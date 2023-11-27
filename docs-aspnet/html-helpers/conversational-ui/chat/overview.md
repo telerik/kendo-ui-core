@@ -4,7 +4,7 @@ page_title: Chat Overview
 description: "Learn the basics when working with the Telerik UI Chat component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/chat, /helpers/conversational-ui/chat/overview
 slug: htmlhelpers_chat_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Chat Overview
@@ -82,12 +82,20 @@ The following example demonstrates the available configuration options supported
 
 ## Functionality and Features
 
-The Chat provides an option for creating a [Peer-to-Peer Chat application by using SignalR]({% slug htmlhelpers_chat_aspnetcore_signalr %}).   
+* [Toolbar]({% slug htmlhelpers_chat_toolbar_aspnetcore %})—The component allows you to add toolbar actions for achieving a more user-friendly conversational UI.
+* [Peer-to-Peer Chat]({% slug htmlhelpers_chat_aspnetcore_signalr %})—The Chat provides an option for creating a peer-to-peer Chat application by using SignalR.
 
-## See Also
+## Next Steps
 
-* [Basic Usage of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
+* [Getting Started with the Chat]({% slug aspnetcore_chat_getting_started %})
+* [Basic Usage of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/)
 {% if site.core %}
 * [Chat in Razor Pages]({% slug htmlhelpers_chat_razorpage_aspnetcore %})
 {% endif %}
+
+
+## See Also
+
+* [Client-Side API of the Chat for {{ site.framework}}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
 * [Server-Side API of the Chat for {{ site.framework }}](/api/chat)
+* [Knowledge Base Section](/knowledge-base)

@@ -12,27 +12,23 @@ The ArcGauge represents a value on a circular arc.
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-* [Demo page for the ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)
-
-## Initializing the ArcGauge
-
-To create the ArcGauge, use a `div` element and, optionally, set a height and width by using CSS.
-
-    <div id="arc-gauge"></div>
-
-The following example demonstrates how to initialize the ArcGauge with its default configuration.
-
-	$(document).ready(function() {
-    	$("#arc-gauge").kendoArcGauge();
-   	});
+![Kendo UI for jQuery ArcGauge with Basic Configuration](arcgauge-getting-started.png)
 
 ## Functionality and Features
 
-* [Color ranges]({% slug colorranges_kendoui_arcgauge %})
-* [Scale options]({% slug scale_kendoui_arcgauge %})
-* [Templates]({% slug centertemplate_kendoui_arcgauge %})
+* [Color ranges]({% slug colorranges_kendoui_arcgauge %})—The component allows you to set different colors for each range.
+* [Scale options]({% slug scale_kendoui_arcgauge %})—The ArcGauge provides an option to customize the scale appearance by setting labels, ticks, background color, and so on.
+* [Templates]({% slug centertemplate_kendoui_arcgauge %})—You can use templates to customize the ArcGauge center.
+
+
+## Next Steps
+
+* [Getting Started with the Kendo UI ArcGauge for jQuery]({% slug getting_started_kendoui_arcgauge_component %})
+* [Basic Usage of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
+* [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
+
 
 ## See Also
 
-* [Basic Usage of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
+* [Overview of the ArcGauge (Demo)](https://demos.telerik.com/kendo-ui/arc-gauge/index)
 * [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)

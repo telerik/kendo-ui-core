@@ -10180,6 +10180,7 @@ declare namespace kendo.ui {
         navigatable?: boolean | undefined;
         pageable?: boolean | ScrollViewPageable | undefined;
         page?: number | undefined;
+        pagerOverlay?: string | "none" | "dark" | "light" | undefined;
         template?: string | undefined;
         velocityThreshold?: number | undefined;
         change?(e: ScrollViewChangeEvent): void;

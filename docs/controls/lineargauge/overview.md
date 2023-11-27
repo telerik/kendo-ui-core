@@ -12,34 +12,15 @@ The LinearGauge represents values on a linear scale.
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-* [Demo page for the LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)
+![Kendo UI for jQuery LinearGauge with Basic Configuration](lineargauge-getting-started.png)
 
-## Initializing the LinearGauge
+## Next Steps
 
-To create the LinearGauge, use a `div` element and, optionally, set a height and width by using CSS.
-
-    <div id="linear-gauge"></div>
-
-The following example demonstrates how to initialize the LinearGauge with its default configuration.
-
-       $(document).ready(function() {
-           $("#linear-gauge").kendoLinearGauge();
-       });
-    </p>
-
-The following example demonstrates how to create a horizontal LinearGauge with a value of `20` and a minimum value of `10`.
-
-        $("#linear-gauge").kendoLinearGauge({
-            pointer: {
-                value: 20
-            },
-            scale: {
-                min: 10,
-                vertical: false
-            }
-        });
+* [Getting Started with the Kendo UI LinearGauge for jQuery]({% slug getting_started_kendoui_lineargauge_component %})
+* [Basic Usage of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/index)
+* [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
 
 ## See Also
 
-* [Basic Usage of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/index)
+* [Overview of the LinearGauge (Demo)](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 * [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)

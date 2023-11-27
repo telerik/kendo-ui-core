@@ -452,6 +452,8 @@ var __meta__ = {
 
             this.length = idx;
             this._parent = parentFn.bind(this);
+            this._loadPromises = [];
+            this._loadedNodes = [];
         },
         at: function(index) {
             var item = this[index];
