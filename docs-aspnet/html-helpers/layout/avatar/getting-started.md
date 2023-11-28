@@ -110,6 +110,7 @@ The configuration options `Size`, `FillMode`, `Border`, `Rounded`, etc. allow yo
         </kendo-avatar>
     </div>
 ```
+{% endif %}
 
 ## 4. (Optional) Reference Existing Avatar Instances
 

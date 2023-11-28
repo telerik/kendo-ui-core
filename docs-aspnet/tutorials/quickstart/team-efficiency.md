@@ -232,83 +232,57 @@ With the database upgraded, use the scaffolding wizard to create an interactive 
 
 #### Overview
 
-The scaffolding wizard will aid you in creating the view by providing point-and-click configuration screen. Use the scaffolding wizard to create an interactive Kendo UI Grid view of invoices for the Team Efficiency Dashboard. By enabling grid features such as sorting, paging, and exporting, users will be able to analyze and share data in a familiar way.
+The scaffolding wizard will aid you in creating the view by providing point-and-click configuration screen. Use the scaffolding wizard to create an interactive Kendo UI Grid view of orders for the Team Efficiency Dashboard. By enabling grid features such as sorting, paging, and exporting, users will receive the opportunity to analyze and share data in a familiar way.
 
-#### Exercise: Scaffold a Grid View of Invoices
+#### Exercise: Scaffold a Grid View of Orders
 
-1. Start the scaffolding wizard by right-clicking **Controllers** > **Add** > **New Scaffolded Item**. The Scaffolder should be automatically installed. In case it is not, navigate to `\wrappers\aspnetmvc\Scaffolding` and click on **KendoScaffolderExtension.vsix** to install the Scaffolder manually.
+1. Start the scaffolding wizard by right-clicking at the Project > **Telerik UI for ASP.NET {{ site.product_short}}** > **Add new Scaffolded Item**:
 
     ![{{ site.product_short }} New Scaffolded Item](images/chapter3/new-scaffolded-item.png)
 
-1. Choose **Kendo UI Scaffolder** and click **Add** to continue.
-
-    ![{{ site.product_short }} Kendo Scaffolder](images/chapter3/add-kendo-scaffolder.png)
-
-1. Notice that the Scaffolder is capable of creating Grid, Chart, and Scheduler views for both C# and JavaScript. For this guide you'll be using the Telerik UI for MVC Grid scaffolding option. Choose **Telerik UI for MVC Grid** and click **Add** to continue.
+1. Notice that the Scaffolder is capable of creating TreeList, Grid, Scheduler, ListView, Gantt, Form, Editor, and Chart. For this guide you have to choose **Grid**.
 
     ![{{ site.product_short }} Grid Scaffolding Option](images/chapter3/grid-scaffolder.png)
 
-1. From the **Telerik UI for MVC Grid** scaffolding dialog, the Grid's model options, Grid options and events are defined. The Model Options control the following settings:
+1. From the **Create a new grid page* scaffolding dialog, the Page Name for the Grid, the name of the component, the Data Binding for the Model, the CRUD Operations, and the Features of the Grid are defined. 
 
-    - **Controller Name**&mdash;The name of the controller created by the Scaffolder.
-    - **View Name**&mdash;The name of the created view, which will display the scaffolded grid.
-    - **Model Class**&mdash;The model the Scaffolder which will be used to build the view.
-    - **Data Context Class**&mdash;The Entity Framework DbContext used to connect the view to the data.
+    The Data Binding options are the following:
 
-1. Define the Grid's model options using the following values:
+    - **Model name**&mdash;The name of the Model created by the Scaffolder.
+    - **Model id**&mdash;The id of the Model in the scaffolded grid.
 
-    - **Controller Name**: **InvoiceController**
-    - **View Name**: **Index**
-    - **Model Class**: **Invoice**
-    - **Data Context Class**: **NorthwindDBContext**
+    ![{{site.product_short}} Grid Data Binding options](images/chapter3/grid-databinding-options.png)
 
-    ![{{ site.product_short }} Grid Model Options](images/chapter3/grid-model-options.jpg)
+    Define the CRUD Operations for the scaffolded Grid:
 
-    The Grid options control which features are scaffolded and enabled on the Grid, including:
+    - **Controller Name**&mdash;The name of the Controller.
+    - **Action read**&mdash;The name of the Read Action Method in the Controller.
+    - **Action create**&mdash;The name of the Create Action Method in the Controller.
+    - **Action update**&mdash;The name of the Update Action Method in the Controller.
+    - **Action delete**&mdash;The name of the Delete Action Method in the Controller.
 
-    - `DataSource` Type&mdash;`Ajax`, `Server`, or `WebApi`.
-    - `Editable`&mdash;Enable the editing, configure the edit mode (`InLine`, `InCell` or `PopUp`) and the operations to be included (`Create`, `Update`, `Destroy`).
-    - `Filterable`&mdash;Enable the filtering of the Grid and select the filter mode.
-    - `Column Menu`&mdash;Enable the column menu.
-    - `Navigatable`&mdash;Enable the keyboard navigation.
-    - `Pageable`&mdash;Enable the paging of the Grid.
-    - `Reorderable`&mdash;Enable the column reordering.
-    - `Scrollable`&mdash;Enable the scrolling of the Grid table.
-    - `Selectable`&mdash;Enable the selection and specify the selection mode and type.
-    - `Sortable`&mdash;Enable the sorting and specify the sorting mode.
-    - `Excel Export`&mdash;Enable the Excel export functionality.
-    - `PDF Export`&mdash;Enable the PDF export functionality.
+    ![{{ site.product_short }} Grid CRUD operations](images/chapter3/grid-crud-operations.png)
 
-1. Define the Grid's options by setting the following values:
+    Choose the Features for the Grid:
 
-    - `unchecked` Scrollable
-    - `checked` Sortable
-    - `checked` Pageable
-    - `checked` Excel Export
-    - `checked` PDF Export
+    - **Edit mode**&mdash;The Grid supports various `editing modes` that allow you to control the way the data is represented.
+    - **Pageable**&mdash;To control the `paging` in the Grid, use the Pageable option.
+    - **Resizable**&mdash;To control the `resizing` settings of the columns in the Grid.
+    - **Reordable**&mdash;To control the `reordable` settings of the columns in the Grid.
+    - **Sortable**&mdash;To control the `sorting` configuration of the items in the columns.
+    - **Filterable**&mdash;To control the `filtering` functionality for the items in the columns.
+    - **Column menu**&mdash;To control the `column menu` configuration of the columns in the Grid.
+    - **Scrollable**&mdash;To control the `scrollable` configuration of the Grid.
+    - **Groupable**&mdash;To control the `groupable` configuration of the items in the Grid.
 
-    ![{{ site.product_short }} Grid Options](images/chapter3/grid-options.jpg)
+    ![{{site.product_short}} Grid Features](images/chapter3/grid-features.png)
 
-1. Click **Add** to continue and create the scaffolded items.
-
-    The Scaffolder will create the following files:
-
-    - `Controllers/InvoiceController.cs`&mdash;This controller has the actions for the features selected in the scaffolding wizard.
-        - `Index`&mdash;Returns the view.
-        - `Invoices_Read`&mdash;Gets all invoices from the database and returns a JSON formatted `DataSourceRequest` object. The `DataSourceRequest` will contain the current grid request information (page, sort, group, and filter).
-        - `Excel_Export_Save`&mdash;Creates an XLS exported File result.
-        - `Pdf_Export_Save`&mdash;Creates a PDF exported File result.
-    - `Views/Invoice/Index.cshtml`&mdash;This view contains the markup and HTML helper responsible for rendering the Grid control.
-
-1. Run the application and navigate to `/Invoice/index` to see the generated Grid control. You should see the following output.
-
-    ![{{ site.product_short }} Invoices Grid](images/chapter3/invoices-grid.jpg)
 
 Now that the Telerik UI for MVC Scaffolder has generated a starting point for working with the Grid, you can modify the scaffolded code to meet your needs. In the next chapter we'll do just that.
 
 ## Kendo UI Grid
 
-In this chapter you will modify the scaffolded Grid code to further customize the Grid's appearance. Additionally, you'll be incorporating the Grid into the Team Efficiency Dashboard's main view.
+In this chapter you will modify the scaffolded Grid code to further customize the appearance of the Grid. Additionally, you'll be incorporating the Grid into the main view of the Team Efficiency Dashboard.
 
 ### Configuring Kendo UI Grid Options
 

@@ -17,77 +17,107 @@ res_type: kb
   <td>Product</td>
   <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Visual Studio Version</td>
-  <td>Visual Studio 2017</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
- </tr>
 </table>
 
 ## Description
 
-How can I add an item or an image to a custom Editor tool?
+How can I add an SVG or FontAwesome icon to a custom Editor tool?
 
 ## Solution
 
 When you create a custom tool, it depends on the further CSS stylization whether to render an image or an icon in its appearance.
 
-To add such visual elements, use the automatically generated class name taken from the tool and follow the `k-i-[ToolName]` pattern.
+To add an SVG icon:
 
-The following example demonstrates how to decorate your own custom tool with a background image or a FontAwesome icon.
+1. Target the default icon using the `k-icon` class and the title ofthe custom tool. For example, `$('.k-editor [title="My tool"] k-icon')` .
+2. Use the [`kendo.ui.icon`](/api/javascript/ui/ui/methods/icon)method and set the needed icon.
+
+
+The following example demonstrates how to decorate your own custom tool with a SVG icon.
 
 ```dojo
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<style>
-  /* Using plain image for the background. */
+    <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px"></textarea>
 
-  .k-editor .k-i-my-tool
-  {
-      background: 50% 50% no-repeat url(https://demos.telerik.com/kendo-ui/content/web/16x16/Chart.png);
-  }
-
-  /* Using a FontAwesome icon for the background. */
-
-  .k-editor .k-i-my-second-tool:before
-  {
-      font-family: FontAwesome;
-      content: "\f09e";
-      font-size:16px;
-  }
-</style>
-
-<textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
-</textarea>
-
-
-<script>
-    $("#editor").kendoEditor({
+    <script>
+      $("#editor").kendoEditor({
         tools: [ "bold", "italic", "underline",
                 {
-                    name: "myTool",
-                    tooltip: "My tool",
-                    exec: function(e) {
-                        // My code.
-                    }
+                  name: "myTool",
+                  tooltip: "My tool",
+                  exec: function(e) {
+                    // My code.
+                  }
                 },
                 {
-                    name: "mySecondTool",
-                    tooltip: "My second tool",
-                    exec: function(e) {
-                        // My code.
-                    }
+                  name: "mySecondTool",
+                  tooltip: "My second tool",
+                  exec: function(e) {
+                    // My code.
+                  }
                 }
-              ]
-    });
-</script>
+               ]
+      });
+
+
+      kendo.ui.icon($('.k-editor [title="My tool"] .k-icon'), { icon: 'camera' });
+      kendo.ui.icon($('.k-editor [title="My second tool"] .k-icon'), { icon: 'rss' });
+    </script>
 ```
+
+To add FontAwesome icon you can also target the default icon element and use CSS content property.
+The following example demonstrates how to decorate your own custom tool with a FontAwesome icon.
+
+```dojo
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <div id="example">
+      <div class="demo-section wide">
+        <textarea id="editor" rows="10" cols="30" style="width:100%; height:790px" aria-label="editor">
+        </textarea>
+
+        <script>
+          kendo.setDefaults('iconType', 'font');
+        </script>
+
+        <style>
+          .k-editor .k-toolbar-tool[title="Custom tool 1"] .k-icon:before {
+            font-family: FontAwesome;
+            content: "\f09e";
+          }
+
+          .k-editor .k-toolbar-tool[title="Custom tool 2"] .k-icon:before {
+            font-family: FontAwesome;
+            content: "\f061";
+          }
+        </style>
+
+        <script>
+          $("#editor").kendoEditor({
+            tools: [
+              {
+                name: "custom-tool-1",
+                tooltip: "Custom tool 1",
+                exec: function (e) {
+                  var editor = $("#editor").data("kendoEditor");
+                  editor.exec("inserthtml", { value: "<hr />" });
+                }
+              },
+              {
+                name: "custom-tool-2",
+                tooltip: "Custom tool 2",
+                exec: function (e) {
+                  var editor = $("#editor").data("kendoEditor");
+                  editor.exec("inserthtml", { value: "<hr />" });
+                }
+              }
+            ]
+          });
+        </script>
+
+      </div>
+    </div>
+```
+
 
 ## See Also
 

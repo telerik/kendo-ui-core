@@ -712,6 +712,17 @@ function pad(number, digits, end) {
         return culture || kendo.cultures.current;
     }
 
+    function appendDesignatorsToCultures(calendars) {
+        // Don't ask. It's temporary.
+        if ((calendars.standard.AM && calendars.standard.AM.length)
+        && (calendars.standard.PM && calendars.standard.PM.length)
+        && (calendars.standard.AM.indexOf("PMA0") < 0)
+        && (calendars.standard.AM.indexOf("AM") > -1 || calendars.standard.PM.indexOf("PM") > -1)) {
+            calendars.standard.AM.push("a", "A", "PMa", "PMA", "PMa0", "PMA0");
+            calendars.standard.PM.push("p", "P", "AMp", "AMP", "AMp0", "AMP0");
+        }
+    }
+
     kendo.culture = function(cultureName) {
         var cultures = kendo.cultures, culture;
 
@@ -720,6 +731,7 @@ function pad(number, digits, end) {
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
         } else {
+            appendDesignatorsToCultures(cultures.current.calendars);
             return cultures.current;
         }
     };
@@ -1368,6 +1380,7 @@ function pad(number, digits, end) {
                 }
                 return i;
             },
+            longestDesignatorLength = (designators) => Array.from(designators).sort((a, b) => b.length - a.length)[0].length,
             getNumber = function(size) {
                 var rg, match, part = "";
                 if (size === 2) {
@@ -1393,7 +1406,7 @@ function pad(number, digits, end) {
                 }
                 return null;
             },
-            getIndexByName = function(names, lower) {
+            getIndexByName = function(names, lower, subLength) {
                 var i = 0,
                     length = names.length,
                     name, nameLength,
@@ -1404,7 +1417,7 @@ function pad(number, digits, end) {
                 for (; i < length; i++) {
                     name = names[i];
                     nameLength = name.length;
-                    subValue = value.substr(valueIdx, nameLength);
+                    subValue = value.substr(valueIdx, subLength || nameLength); // The `subLength` is part of the appendDesignatorsToCultures logic.
 
                     if (lower) {
                         subValue = subValue.toLowerCase();
@@ -1571,8 +1584,8 @@ function pad(number, digits, end) {
                         pmDesignators = mapDesignators(pmDesignators);
                     }
 
-                    pmHour = getIndexByName(pmDesignators);
-                    if (!pmHour && !getIndexByName(amDesignators)) {
+                    pmHour = getIndexByName(pmDesignators, false, longestDesignatorLength(pmDesignators));
+                    if (!pmHour && !getIndexByName(amDesignators, false, longestDesignatorLength(amDesignators))) {
                         return null;
                     }
                 }
