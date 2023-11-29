@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Filter component for {{ site.framework }}."
 previous_url: /helpers/data-management/filter/overview
 slug: htmlhelpers_filter_aspnetcore_overview
-position: 1
+position: 0
 ---
 
 # Filter Component Overview
@@ -161,9 +161,9 @@ public class SampleData
 
 ## Functionality and Features
 
-* [Setting the operators]({% slug htmlhelpers_filter_aspnetcore_choose_operators %})
-* [Persisting the state]({% slug htmlhelpers_filter_aspnetcore_store_settings %})
-* [Globalization]({% slug globalization_filter_aspnetcore %})
+* [Setting the operators]({% slug htmlhelpers_filter_aspnetcore_choose_operators %})&mdash;You can defining which filter operators will be displayed in the filtering drop-down.
+* [Persisting the state]({% slug htmlhelpers_filter_aspnetcore_store_settings %})&mdash;The Filter enables you to store its filter expression and restore its state for the user.
+* [Globalization]({% slug globalization_filter_aspnetcore %})&mdash;The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
 
 ## Referencing Existing Instances
 
@@ -181,6 +181,7 @@ To refer to an existing Filter instance use the `jQuery.data()` method. Once a r
 ## See Also
 
 * [Basic Usage of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/index)
+* [Getting Started with the Filter]({% slug aspnetcore_filter_getting_started %})
 {% if site.core %}
 * [Basic Usage of the Filter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/filter/tag-helper)
 * [Filter in Razor Pages]({% slug razorpages_filterhelper_aspnetcore %})
