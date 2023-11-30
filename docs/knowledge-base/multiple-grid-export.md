@@ -74,11 +74,13 @@ Each Grid is exported in a separate Excel sheet. For additional information abou
         sheets: sheets
       });
 
-      // save the new workbook,b
-      kendo.saveAs({
-        dataURI: workbook.toDataURL(),
-        fileName: "ProductsAndOrders.xlsx"
-      })
+      // save the new workbook
+      workbook.toDataURLAsync().then(function(dataURL) {
+          kendo.saveAs({
+            dataURI: dataURL,
+            fileName: "ProductsAndOrders.xlsx"
+          });
+      });
     });
   });
 

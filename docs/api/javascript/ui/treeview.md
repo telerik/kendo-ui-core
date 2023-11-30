@@ -521,14 +521,27 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
     <div id="treeview"></div>
     <script>
-    $("#treeview").kendoTreeView({
-      loadOnDemand: true,
-      dataSource: [
-        { text: "foo", items: [
-          { text: "bar" }
-        ] }
-      ]
-    });
+      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      homogeneous = new kendo.data.HierarchicalDataSource({
+        transport: {
+          read: {
+            url: serviceRoot + "/Employees",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "EmployeeId",
+            hasChildren: "HasEmployees"
+          }
+        }
+      });
+
+      $("#treeview").kendoTreeView({
+        dataSource: homogeneous,
+        loadOnDemand: false,
+        dataTextField: "FullName"
+      });
     </script>
 
 ### messages `Object`

@@ -47,7 +47,7 @@ This article showcases how to dynamically generate the Kendo UI Grid by using th
     <script>
       var isDateField =[];
       $.ajax({
-        url: "https://www.mocky.io/v2/5835e736110000020e0c003c",
+        url: "https://run.mocky.io/v3/073ca8a1-6fe6-44f5-a33d-182a7788d3a4",
         dataType: "jsonp",
         success: function(result) {
           generateGrid(result);

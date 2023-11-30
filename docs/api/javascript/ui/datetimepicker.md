@@ -789,7 +789,7 @@ If set to `true` a week of the year will be shown on the left side of the calend
     <script>
     $("#datetimepicker").kendoDateTimePicker({
         format: "yyyy/MM/dd hh:mm tt",
-        parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
+        parseFormats: ["MMMM yyyy", "HH:mm tt"] //format also will be added to parseFormats
     });
     </script>
 

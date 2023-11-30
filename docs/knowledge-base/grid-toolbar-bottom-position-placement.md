@@ -28,7 +28,7 @@ How can I change the position of the toolbar and place it at the bottom of the G
 
 ## Solution
 
-Use the `$("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));` jQuery configuration to place the toolbar under the content of the Grid.
+Use the `$("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-container"));` jQuery configuration to place the toolbar under the content of the Grid.
 
 The following example demonstrates how to display a toolbar above the pager and at the bottom of a Grid which uses batch editing.
 
@@ -92,7 +92,7 @@ The following example demonstrates how to display a toolbar above the pager and 
           });
 
           // Sets toolbar under the Grid body
-          $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));
+          $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-container"));
         });
       </script>
     </div>

@@ -906,6 +906,7 @@ var __meta__ = {
             var that = this;
             clearTimeout(that._busy);
             that._arrowIcon.removeClass(LOADING);
+            that._arrowIcon.find("svg").show();
             that._focused.attr("aria-busy", false);
             that._busy = null;
             that._toggleCloseVisibility();
