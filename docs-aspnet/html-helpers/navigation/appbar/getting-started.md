@@ -260,8 +260,7 @@ The AppBar exposes the [`Resize`](/api/kendo.mvc.ui.fluent/appbareventbuilder) e
 
 ## 5. (Optional) Reference Existing AppBar Instances
 
-You can reference the AppBar instances that you have created and build on top of their existing configuration:
-
+You can reference the AppBar instances that you have created and build on top of their existing configuration.
 Use the `id` attribute of the component instance to get its reference.
 
 ```script

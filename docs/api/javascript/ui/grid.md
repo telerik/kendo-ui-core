@@ -2586,15 +2586,13 @@ HTML attributes of the column header. The grid renders a table header cell (`<th
       columns: [{
         field: "name",
         headerAttributes: {
-          "class": "table-header-cell !k-text-right",
+          "class": "table-header-cell !k-justify-content-right",
           style: "font-size: 14px"
         }
       }],
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
-
-The table header cell will look like this: `<th class="table-header-cell" style="text-align: right; font-size: 14px">name</th>`.
 
 ### columns.headerTemplate `String|Function`
 

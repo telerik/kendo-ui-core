@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: MediaPlayer Overview
-description: "Learn the basics when working with the Telerik UI MediaPlayer for {{ site.framework }}."
+description: "The Telerik UI MediaPlayer component for {{ site.framework }} provides a styled UI video and audio player."
 previous_url: /helpers/html-helpers/mediaplayer, /helpers/media/mediaplayer/overview
 slug: htmlhelpers_mediaplayer_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} MediaPlayer Overview
@@ -98,9 +98,9 @@ The following example demonstrates the basic configuration of the MediaPlayer.
 
 ## Functionality and Features
 
-* [Adding multiple sources]({% slug htmlhelpers_mediaplayer_multiplesources_aspnetcore %})
-* [Globalization]({% slug globalization_mediaplayer_aspnetcore %})
-* [Accessibility]({% slug htmlhelpers_mediaplayer_accessibility_overview_aspnetcore %})
+* [Adding multiple sources]({% slug htmlhelpers_mediaplayer_multiplesources_aspnetcore %})&mdash;You can set different sources to the component simultaneously.
+* [Globalization]({% slug globalization_mediaplayer_aspnetcore %})&mdash;The MediaPlayer provides localization capability.
+* [Accessibility]({% slug htmlhelpers_mediaplayer_accessibility_overview_aspnetcore %})&mdash;The component was designed with accessibility in mind.
 
 ## Events
 
@@ -216,11 +216,15 @@ To reference an existing MediaPlayer instance, use the [`jQuery.data()`](http://
 {% endif %}
 
 
+## Next Steps
+
+* [Getting Started with the MediaPlayer]({% slug aspnetcore_mediaplayer_getting_started %})
+* [Basic Usage of the MediaPlayer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/index)
+{% if site.core %}
+* [MediaPlayer in Razor Pages]({% slug razorpages_mediaplayer_aspnetcore %})
+{% endif %}
+
 ## See Also
 
-* [Basic Usage of the MediaPlayer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/index)
-* [Using the API of the MediaPlayer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/api)
-{% if site.core %}
-* [Media Player in Razor Pages]({% slug htmlhelpers_mediaplayer_razorpage_aspnetcore %})
-{% endif %}
-* [Server-Side API of the MediaPlayer for {{ site.framework }}](/api/mediaplayer)
+* [Using the API of the MediaPlayer (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/api)
+* [Knowledge Base Section](/knowledge-base)

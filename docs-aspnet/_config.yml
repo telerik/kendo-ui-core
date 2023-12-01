@@ -663,6 +663,9 @@ navigation:
         isNew: true
      "*tooltip":
         title: "Tooltip"
+     "*togglebutton":
+        title: "ToggleButton"
+        isNew: true
      "*toolbar":
         title: "ToolBar"
      "*treelist":

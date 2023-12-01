@@ -29,7 +29,7 @@ Specifies a group of ToggleButtons the current instance belongs to. The string w
         });
     </script>
 
-### selected `String` *(default: false)*
+### selected `Boolean` *(default: false)*
 
 Specifies the selected state of the ToggleButtons. If set to `true` the widget will be initially selected.
 

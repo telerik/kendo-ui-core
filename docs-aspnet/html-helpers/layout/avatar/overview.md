@@ -55,4 +55,4 @@ The Avatar is a non-focusable element.
 ## See Also
 
 * [Integrating the Avatar for {{ site.framework }} into a Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/gridintegration)
-* [JavaScript API Reference of the Avatar](https://docs.telerik.com/kendo-ui/api/javascript/ui/avatar)
+* [Knowledge Base Section](/knowledge-base)

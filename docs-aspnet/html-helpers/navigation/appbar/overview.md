@@ -6,7 +6,7 @@ slug: htmlhelpers_appbar_aspnetcore_overview
 position: 0
 ---
 
-# AppBar Overview
+# {{ site.framework }} AppBar Overview
 
 {% if site.core %}
 The Telerik UI AppBar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI AppBar widget.

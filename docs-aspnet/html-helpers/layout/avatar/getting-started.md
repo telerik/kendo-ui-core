@@ -78,7 +78,7 @@ Use the Avatar HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
 
 ## 3. Customize the Appearance of the Avatar
 
-The configuration options `Size`, `FillMode`, `Border`, `Rounded`, etc. allow you to control the appearance of the Avatar component.
+The configuration options like `Size`, `FillMode`, `Border`, `Rounded`, and more allow you to control the appearance of the Avatar component.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

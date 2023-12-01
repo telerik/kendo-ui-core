@@ -661,6 +661,8 @@ navigation:
         title: "TimeDurationPicker"
     "*tooltip":
         title: "Tooltip"
+    "*togglebutton":
+        title: "ToggleButton"
     "*toolbar":
         title: "ToolBar"
     "*treelist":
@@ -2208,6 +2210,7 @@ intro_columns:
       "Menu": "overview_kendoui_menu_widget"
       "PanelBar": "overview_kendoui_panelbar_widget"
       "SplitButton": "overview_kendoui_splitbutton_widget"
+      "ToggleButton": "overview_kendoui_togglebutton"
       "Stepper": "overview_stepper_widget"
       "TabStrip": "overview_kendoui_tabstrip_widget"
       "Timeline": "overview_kendoui_timeline_widget"

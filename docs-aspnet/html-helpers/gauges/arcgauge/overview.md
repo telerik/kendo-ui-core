@@ -7,7 +7,7 @@ slug: overview_arcgaugehelper_aspnetcore
 position: 0
 ---
 
-# ArcGauge Overview
+# {{ site.framework }} ArcGauge Overview
 
 {% if site.core %}
 The Telerik UI ArcGauge TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ArcGauge widget.

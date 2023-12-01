@@ -14,6 +14,11 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 ![Kendo UI for jQuery LinearGauge with Basic Configuration](lineargauge-getting-started.png)
 
+## Functionality and Features
+
+* [Scale options]({% slug scale_kendoui_lineargauge %})—The LinearGauge provides an option to customize the scale appearance, by setting labels, ticks, background color, etc.
+* [Multiple pointers]({% slug pointers_kendoui_lineargauge %})—You can render multiple pointers and highlight multiple values. 
+
 ## Next Steps
 
 * [Getting Started with the Kendo UI LinearGauge for jQuery]({% slug getting_started_kendoui_lineargauge_component %})

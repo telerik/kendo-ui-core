@@ -6,7 +6,7 @@ slug: htmlhelpers_actionsheet_aspnetcore
 position: 0
 ---
 
-# ActionSheet Overview
+# {{ site.framework }} ActionSheet Overview
 
 {% if site.core %}
 The Telerik UI ActionSheet TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ActionSheet widget.
