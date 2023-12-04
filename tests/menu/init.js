@@ -51,6 +51,10 @@ it('.k-menu is placed on root element', function() {
     assert.isOk(menu.element.is(".k-menu"));
 });
 
+it('.k-header is placed on root element', function() {
+    assert.isOk(menu.element.is(".k-header"));
+});
+
 it('groups are both k-group and k-menu-group', function() {
     assert.isOk(menu.element.find("ul").is(".k-menu-group.k-group"));
 });

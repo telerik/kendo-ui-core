@@ -4,7 +4,7 @@ page_title: Map Overview
 description: "Learn the basics when working with the Telerik UI Map component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/map, /helpers/diagrams-and-maps/map/overview
 slug: htmlhelpers_map_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Map Overview
@@ -168,53 +168,11 @@ The following example demonstrates the basic configuration for the Map component
 ```
 {% endif %}
 
-## Events
+## Next Steps
 
-For a complete example on basic Map events, refer to the [demo on using the events of the Map](https://demos.telerik.com/{{ site.platform }}/map/events).
-
-```HtmlHelper
-    @(Html.Kendo().Map()
-        .Name("map")
-        .Layers(layers =>
-        {
-            layers.Add()
-                .Type(MapLayerType.Tile)
-                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
-                .Subdomains("a", "b", "c");
-        })
-        .Events(e => e
-            .Reset("mapReset")
-        )
-    )
-    <script>
-        function mapReset(e) {
-            // Handle the reset event.
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    @{
-        var subdomains = new string[] { "a", "b", "c" };
-    }
-
-    <kendo-map name="map" on-reset="mapReset">
-        <layers>
-            <layer type="MapLayerType.Tile"
-                   url-template="https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
-                   subdomains="subdomains"
-                   attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>">
-            </layer>
-        </layers>
-    </kendo-map>
-    
-    <script>
-        function mapReset(e) {
-            // Handle the reset event.
-        }
-    </script>
-```
-{% endif %}
+* [Getting Started with the Map]({% slug aspnetcore_map_getting_started %})
+* [Basic Usage of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/index)
+* [Map Events]({% slug events_map_aspnetcore %})
 
 ## See Also
 

@@ -4780,11 +4780,14 @@ Gets the number of available pages.
     var dataSource = new kendo.data.DataSource({
       data: [
         { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      pageSize: 1
+        { name: "John Doe", age: 33 },
+        { name: "James Doe", age: 34 },
+        { name: "Tom Doe", age: 35 }
+    ],
+    pageSize: 2,
+    total: 4
     });
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+    /* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataSource.totalPages());   // displays "2"
     </script>
 

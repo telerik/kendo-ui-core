@@ -97,7 +97,11 @@ const configMap = (name) => ({
         addKendoVersion(),
         name === 'kendo.core.js' || isBundle(name) ? polyfill(['jquery']) : null,
         nodeResolve(),
-        buble()
+        buble({
+            transforms: {
+                asyncAwait: false
+            }
+        })
     ]
 });
 

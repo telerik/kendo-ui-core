@@ -122,7 +122,11 @@ gulp.task("custom", function() {
             external: ['jquery'],
             treeshake: false,
             plugins: [
-                require('@rollup/plugin-buble')(),
+                require('@rollup/plugin-buble')({
+                    transforms: {
+                        asyncAwait: false
+                    }
+                }),
                 require('@rollup/plugin-virtual')({
                     custom: `
                         import 'jquery';

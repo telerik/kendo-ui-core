@@ -108,6 +108,7 @@ To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.d
 * [Basic Usage of the FlatColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/index)
 {% if site.core %}
 * [Basic Usage of the FlatColorPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/flatcolorpicker/tag-helper)
+{% endif %}
 
 ## See Also
 

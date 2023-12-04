@@ -1421,7 +1421,7 @@ var __meta__ = {
                 items;
 
             element.removeClass("k-menu-horizontal k-menu-vertical");
-            element.addClass("k-widget k-reset k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
+            element.addClass("k-widget k-reset k-header k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
 
             if (this.options.orientation === "vertical") {
                 element.attr("aria-orientation", "vertical");

@@ -198,7 +198,7 @@ You can continue experimenting with the code sample above by running it in the T
 ## Next Steps
 
 * [Playlists]({% slug htmlhelpers_mediaplayer_playlists_aspnetcore %})
-* [Razor Page]({% slug htmlhelpers_mediaplayer_razorpage_aspnetcore %})
+* [Multiple Sources]({% slug htmlhelpers_mediaplayer_multiplesources_aspnetcore %})
 
 ## See Also
 
