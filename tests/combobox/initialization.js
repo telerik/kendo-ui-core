@@ -73,6 +73,7 @@
             assert.equal(text.val(), "test");
             assert.equal(text.attr("autocomplete"), autocompleteAttr);
             assert.equal(text.attr("name"), "combo1_input");
+            assert.isOk(text.attr(kendo.attr("skip")));
         });
 
         it("text input should be wrapped with span", function() {

@@ -220,9 +220,7 @@ To reference an existing MediaPlayer instance, use the [`jQuery.data()`](http://
 
 * [Getting Started with the MediaPlayer]({% slug aspnetcore_mediaplayer_getting_started %})
 * [Basic Usage of the MediaPlayer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/index)
-{% if site.core %}
-* [MediaPlayer in Razor Pages]({% slug razorpages_mediaplayer_aspnetcore %})
-{% endif %}
+* [Multiple Sources]({% slug htmlhelpers_mediaplayer_multiplesources_aspnetcore %})
 
 ## See Also
 

@@ -6337,6 +6337,7 @@ declare namespace kendo.ui {
     interface GridColumnMenu {
         columns?: boolean | GridColumnMenuColumns | undefined;
         filterable?: boolean | undefined;
+        clearAllFilters?: boolean | undefined;
         sortable?: boolean | undefined;
         messages?: GridColumnMenuMessages | undefined;
         componentType?: string | undefined;

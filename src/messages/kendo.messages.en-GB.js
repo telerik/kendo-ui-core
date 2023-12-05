@@ -49,6 +49,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortAscending": "Sort Ascending",
   "sortDescending": "Sort Descending",
   "filter": "Filter",
+  "clearAllFilters": "Clear All Filters",
   "column": "Column",
   "columns": "Columns",
   "columnVisibility": "Column Visibility",
@@ -519,6 +520,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "commands": {
     "cancel": "Cancel changes",
     "canceledit": "Cancel",
+    "columns": "Columns",
     "create": "Add new record",
     "destroy": "Delete",
     "edit": "Edit",

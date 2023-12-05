@@ -1052,6 +1052,7 @@ var __meta__ = {
                 })
                 .show();
 
+            input.attr(kendo.attr("skip"), true);
             if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);
             }
