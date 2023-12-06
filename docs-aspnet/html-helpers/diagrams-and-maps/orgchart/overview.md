@@ -85,6 +85,8 @@ The following example demonstrates the basic configuration of the OrgChart compo
     )
 ```
 {% endif %}
+
+{% if site.mvc %}
 ```Controller
     public JsonResult Read([DataSourceRequest] DataSourceRequest request)
     {
@@ -99,6 +101,22 @@ The following example demonstrates the basic configuration of the OrgChart compo
         return Json(data, JsonRequestBehavior.AllowGet);
     }
 ```
+{% else %}
+```Controller
+    public JsonResult Read([DataSourceRequest] DataSourceRequest request)
+    {
+        List<OrgChartEmployeeViewModel> data = new List<OrgChartEmployeeViewModel>()
+        {
+            new OrgChartEmployeeViewModel() { ID = 1, Name = "Clevey Thrustfield", Title = "CEO", ParentID = null, Expanded = true, Avatar = "../content/web/orgchart/people/1.jpg"  },
+            new OrgChartEmployeeViewModel() { ID = 2, Name = "Sean Russel", Title = "Financial Manager", ParentID = 1, Expanded = true, Avatar = "../content/web/orgchart/people/2.jpg"  },
+            new OrgChartEmployeeViewModel() { ID = 3, Name = "Andrew Berry", Title = "Team Lead", ParentID = 1, Expanded = true, Avatar = "../content/web/orgchart/people/3.jpg"  },
+            new OrgChartEmployeeViewModel() { ID = 4, Name = "Dilyana Newman", Title = "Accountant", ParentID = 2, Expanded = false, Avatar = "../content/web/orgchart/people/4.jpg"  }
+        };
+
+        return Json(data);
+    }
+```
+{% endif %}
 
 ## Functionality and Features
 

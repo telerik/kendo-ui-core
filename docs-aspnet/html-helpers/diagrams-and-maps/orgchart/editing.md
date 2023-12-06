@@ -157,7 +157,7 @@ The following example demonstrates how to configure the OrgChart to use editing.
 
 ## Disable the Editing
 
-For disabling the Edit functionality set the `Eitable` configuration to `false`:
+For disabling the Edit functionality set the `Editable` configuration to `false`:
 
 ```
 .Editable(false)

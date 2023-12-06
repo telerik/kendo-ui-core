@@ -138,6 +138,19 @@ To get data from the selected rows, use the `Change` event of the Grid:
         }
     </script>
 
+## Clearing Selected Row Data
+
+To clear the selected row data, use the [`clearSelectionMethod`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection).
+
+```
+<script>
+    function clearSelection(){ // Custom function.
+        var grid = $("#grid").data("kendoGrid");
+        grid.clearSelection();
+    }
+</script>
+```
+
 ## See Also
 
 * [Multiple Selection by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)

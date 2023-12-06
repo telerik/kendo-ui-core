@@ -118,6 +118,8 @@ To use the Validator with the `DataAnnotation` attributes:
 
 To implement a custom validation attribute, include a `ShippedDate` field to the model and implement a `GreaterDateAttribute` attribute that will check whether the selected `ShippedDate` value is greater than the selected `OrderDate`.
 
+{% if site.mvc %}
+
 1. Create a `class` that inherits from `ValidationAttribute` and `IClientValidatable`, and implement the `IsValid` and `GetClientValidationRules` methods.
 
             [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
@@ -153,7 +155,52 @@ To implement a custom validation attribute, include a `ShippedDate` field to the
                     yield return rule;
                 }
             }
+{% else %}
 
+1. Create a `class` that inherits from the `ValidationAttribute` class and implements the `IClientModelValidator` interface, and add the `IsValid` and `AddValidation` methods.
+
+            [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+            public class GreaterDateAttribute : ValidationAttribute, IClientModelValidator
+            {
+                public string EarlierDateField { get; set; }
+
+                protected override ValidationResult IsValid(object value, ValidationContext         validationContext)
+                {
+                    DateTime? date = value != null ? (DateTime?)value : null;
+                    var earlierDateValue = validationContext.ObjectType.GetProperty(EarlierDateField)
+                        .GetValue(validationContext.ObjectInstance, null);
+                    DateTime? earlierDate = earlierDateValue != null ? (DateTime?)earlierDateValue : null;
+
+                    if (date.HasValue && earlierDate.HasValue && date <= earlierDate)
+                    {
+                        return new ValidationResult(ErrorMessage);
+                    }
+
+                    return ValidationResult.Success;
+                }
+
+                public void AddValidation(ClientModelValidationContext context)
+                {
+                    MergeAttribute(context.Attributes, "data-val", "true");
+                    var errorMessage = FormatErrorMessage(context.ModelMetadata.GetDisplayName());
+                    MergeAttribute(context.Attributes, "data-val-greaterdate", errorMessage);
+
+                    context.Attributes["earlierdate"] = EarlierDateField;
+                }
+
+                // Helper method
+                private bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+                {
+                    if (attributes.ContainsKey(key))
+                    {
+                        return false;
+                    }
+                    attributes.Add(key, value);
+                    return true;
+                }
+            }
+
+{% endif %}
 2. Decorate the `ShippedDate` property with the newly implemented attribute.
 
             public class OrderViewModel
@@ -201,6 +248,7 @@ To implement a custom validation attribute, include a `ShippedDate` field to the
                 </fieldset>
             }
 
+            {% if site.mvc %}
             <script>
                 $(function () {
                     $("form").kendoValidator({
@@ -223,6 +271,44 @@ To implement a custom validation attribute, include a `ShippedDate` field to the
                     });
                 });
             </script>
+            {% else %}
+            <script>
+                $(function () {
+                    $("form").kendoValidator({
+                        rules: {
+                            greaterdate: function (input) {
+                                if (input.is("[data-val-greaterdate]") && input.val() != "") {
+                                    var date = kendo.parseDate(input.val()),
+                                        earlierDate = kendo.parseDate($("[name='" + input.attr("earlierdate") + "']").val());
+                                    return !date || !earlierDate || earlierDate.getTime() < date.getTime();
+                                }
+
+                                return true;
+                            }
+                        },
+                        messages: {
+                            greaterdate: function (input) {
+                                return input.attr("data-val-greaterdate");
+                            }
+                        }
+                    });
+                });
+            </script>
+            {% endif %}
+
+3. To trigger the custom serve-side validation employed from the attribute, use the `ModelState.IsValid` property
+
+            [HttpPost]
+            public IActionResult Submit(OrderViewModel model)
+            {
+                if (!ModelState.IsValid)
+                {
+                    // Handle error
+                }
+        
+                return View(model);
+            }
+
 
 ## Applying Custom Attributes in Editable Helpers
 

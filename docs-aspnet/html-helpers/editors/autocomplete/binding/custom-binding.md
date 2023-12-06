@@ -113,6 +113,7 @@ The following example demonstrates how to configure the AutoComplete to send par
 
 The following example demonstrates how the `GetProducts` method is used.
 
+    {% if site.mvc %}
     public JsonResult GetProducts(string text)
     {
         var northwind = new SampleEntities();
@@ -134,6 +135,29 @@ The following example demonstrates how the `GetProducts` method is used.
 
         return Json(products, JsonRequestBehavior.AllowGet);
     }
+    {% else %}
+    public JsonResult GetProducts(string text)
+    {
+        var northwind = new SampleEntities();
+
+        var products = northwind.Products.Select(product => new ProductViewModel
+                {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                UnitPrice = product.UnitPrice ?? 0,
+                UnitsInStock = product.UnitsInStock ?? 0,
+                UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                Discontinued = product.Discontinued
+                });
+
+        if (!string.IsNullOrEmpty(text))
+        {
+            products = products.Where(p => p.ProductName.Contains(text));
+        }
+
+        return Json(products);
+    }
+    {% endif %}
 
 ## See Also
 

@@ -43,7 +43,15 @@ To bind the Diagram to remote data, specify the `DataSource` option. You can eit
         <shape-defaults visual="visualTemplate"></shape-defaults>
     </kendo-diagram>
 ```
-{% endif %}
+```Controller
+        public ActionResult _OrgChart()
+        {
+            return Json(DiagramDataRepository.OrgChart());
+            // The returned data from the remote endpoint has to be in JSON format.
+        }
+```
+{% else %}
+
 ```Controller
         public ActionResult _OrgChart()
         {
@@ -51,6 +59,7 @@ To bind the Diagram to remote data, specify the `DataSource` option. You can eit
             // The returned data from the remote endpoint has to be in JSON format.
         }
 ```
+{% endif %}
 
 ## Customizing the Appearance
 

@@ -116,6 +116,8 @@ The following example demonstrates how to define the TreeList.
         public bool hasChildren { get; set; }
     }
 ```
+
+{% if site.mvc %}
 ```Controller
  public JsonResult All([DataSourceRequest] DataSourceRequest request)
     {
@@ -143,6 +145,36 @@ The following example demonstrates how to define the TreeList.
     }
 
 ```
+{% else %}
+
+```Controller
+ public JsonResult All([DataSourceRequest] DataSourceRequest request)
+    {
+        var result = GetDirectory().ToTreeDataSourceResult(request,
+            e => e.EmployeeId,
+            e => e.ReportsTo,
+            e => e
+        );
+
+        return Json(result);
+    }
+```
+```AsyncController  
+    public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
+    {
+        var northwind = new NortwindEntities();
+
+        var result = await northwind.Employees.ToTreeDataSourceResultAsync(request,
+            employee => employee.EmployeeID,
+            employee => employee.ReportsTo,
+            employee => e
+        );
+
+        return Json(result);
+    }
+
+```
+{% endif %}
 
 {% if site.mvc %}
 1. Build and run the application.

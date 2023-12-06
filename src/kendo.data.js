@@ -4487,7 +4487,7 @@ var __meta__ = {
                 lastItem = group.items[Math.min(groupItemsSkip + take, groupItemCount - 1)];
 
                 if (firstItem.notFetched) {
-                    that.getGroupItems(group, options, parents, callback, math.max(math.floor(groupItemsSkip / pageSize), 0) * pageSize, math.round((groupItemsSkip + pageSize) / pageSize));
+                    that.getGroupItems(group, options, parents, callback, groupItemsSkip, math.round((groupItemsSkip + pageSize) / pageSize));
                     return true;
                 }
 
@@ -4524,9 +4524,9 @@ var __meta__ = {
 
             if (subgroups && subgroups.length) {
                 data.group = subgroups;
-                data.groupPaging = true;
             }
 
+            data.groupPaging = true;
             clearTimeout(that._timeout);
             that._timeout = setTimeout(function() {
                 that._queueRequest(data, function() {
