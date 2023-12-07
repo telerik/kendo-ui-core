@@ -106,19 +106,6 @@ Sets a value controlling the size of the component. Can also be set to the follo
     });
     </script>
 
-### value `String`*(default: "")*
-
-The value attribute of the widget input element.
-
-#### Example
-
-    <input id="checkbox" />
-    <script>
-        $("#checkbox").kendoCheckBox({
-            value: "John Doe"
-        });
-    </script>
-
 ## Methods
 
 ### check
