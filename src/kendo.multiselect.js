@@ -646,7 +646,7 @@ var __meta__ = {
             var that = this,
                 filterValue = that.input.val().toLowerCase(),
                 listViewFilter = that.listView.dataSource.filter(),
-                listViewFilterValue;
+                listViewFilterValue = "";
 
             if (listViewFilter && listViewFilter.filters.length > 0) {
                 listViewFilterValue = (listViewFilter.filters[0].value || "").toString().toLowerCase();

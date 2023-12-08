@@ -12,7 +12,7 @@ Using any Kendo UI for jQuery scripts that are [installed through NPM]({% slug k
 
 Providing a license file is not required when using distribution methods such as NuGet, Bower, and locally downloaded Kendo UI commercial bundles.
 
-A missing license file causes [a banner, a watermark, and a message in the browser's console]({% slug invalid-license %} to appear:
+A missing license file causes [a banner, a watermark, and a message in the browser's console]({% slug invalid-license %}) to appear:
 
 * Example of a watermark in the Light Theme
     ![Watermark over Grid with Light Theme](../../knowledge-base/images/watermark-light-theme.png) 

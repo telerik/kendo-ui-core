@@ -112,6 +112,28 @@
         assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
+    it("MultiSelect does not rebind twice after filter", function() {
+        popuplateSelect();
+
+        var calls = 0;
+        var multiselect = new MultiSelect(select, {
+            delay: 0
+        });
+
+        multiselect.search("Option1");
+        multiselect.ul.children().first().click();
+
+        multiselect.bind("dataBound", () => {
+            calls++;
+        });
+
+        multiselect.input.blur();
+
+        multiselect.open();
+
+        assert.equal(calls, 1);
+    });
+
     it("MultiSelect allows selection after filter rebind", function() {
         popuplateSelect();
 

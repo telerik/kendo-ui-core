@@ -79,7 +79,7 @@ The `columnMenu` configuration setting accepts a `columns.groups` array that ena
 
 ## Column Menu Types
 
-As of R1 2021 version of the Kendo UI suite, the Grid component introduces the `modern` render mode that aims to deliver a fresh look and feel. It aims to enhance the existing rendering and deliver a fresh and modern look and feel. 
+As of R1 2021 version of the Kendo UI suite, the Grid component introduces the `modern` render mode that aims to deliver a fresh look and feel. It aims to enhance the existing rendering and deliver a fresh and modern look and feel.
 
 By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern`, configure the options of the component as follows:
 
@@ -123,6 +123,56 @@ As of R3 2023 version of the Kendo UI, the Grid component supports a new `tabbed
 As of R3 2022, the Kendo UI Grid enables the developer to disable the columnMenu for specific columns.
 
 To take advantage of this feature, use the [`columns.columnMenu`](/api/javascript/ui/grid/configuration/columns.columnMenu) property.
+
+## Global Column Menu
+
+As of R1 2024, the Kendo UI Grid has a new built-in toolbar command - `columns`. It creates a button in the toolbar that opens a Column Menu with commands applicable for all columns, such as showing and hiding of columns, clearing all filters and autosizing all columns. This functionality can be observed in the [Toolbar Columns Menu](https://demos.telerik.com/kendo-ui/grid/toolbar-columns-menu) demo.
+
+```dojo
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        toolbar: [
+          "save",
+          "excel",
+          "columns", // default built-in button to open the global columns menu
+          {
+              // customizing the button tо open the global columns menu
+              name: "columns",
+              text: "Show me the columns",
+              // showText: "overflow",// hide text, show icon only
+              // type: "button", // default value
+              // icon: "columns", // default value
+              icon: "eye",
+              // fillMode: "flat", // default value
+              // overflow: "never", // default value
+          }
+        ],
+        resizable: true,
+        columnMenu: {
+          autoSize: true,
+          clearAllFilters: true,
+          columns: {
+              sort: "asc",
+          }
+        }
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Mike Doe", age: 31 },
+            { name: "Tom Doe", age: 35 },
+            { name: "Danny Doe", age: 37 }
+          ]
+        }
+      });
+    </script>
+```
+
 
 ## KB Articles on Column Menu
 

@@ -23,14 +23,14 @@
             kendo.destroy(Mocha.fixture);
         });
 
-        it("adds tabindex", function() {
-            div.kendoTabStrip();
-            assert.equal(div.attr("tabindex"), 0);
+        it("adds tabindex to tabGroup", function() {
+            var tabstrip = div.kendoTabStrip().getKendoTabStrip();
+            assert.equal(tabstrip.tabGroup.attr("tabindex"), 0);
         });
 
         it("persists tabindex", function() {
-            div.attr("tabindex", 1).kendoTabStrip();
-            assert.equal(div.attr("tabindex"), 1);
+            var tabstrip = div.attr("tabindex", 1).kendoTabStrip().getKendoTabStrip();
+            assert.equal(tabstrip.tabGroup.attr("tabindex"), 1);
         });
 
         it("does not select anything if no items", function() {
@@ -57,18 +57,18 @@
             addItems(2);
 
             div.focus();
-            div.blur();
+            document.activeElement.blur();
 
             var first = div.find(".k-item:first");
             assert.isOk(!first.hasClass("k-focus"));
         });
 
         it("selects next item on key DOWN", function() {
-            div.kendoTabStrip({ tabPosition: "left" });
+            let tabstrip = div.kendoTabStrip({ tabPosition: "left" }).getKendoTabStrip();
             addItems(2);
 
             div.focus();
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.DOWN
             });
@@ -87,7 +87,7 @@
 
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.DOWN
             });
@@ -107,7 +107,7 @@
 
             tabstrip._current(div.find(".k-item:last"));
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.RIGHT
             });
@@ -123,12 +123,12 @@
             div.focus();
             tabstrip.activateTab(div.find(".k-item:first"));
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.RIGHT
             });
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.LEFT
             });
@@ -145,7 +145,7 @@
 
             tabstrip._current(div.find(".k-item:last"));
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.UP
             });
@@ -160,7 +160,7 @@
             var tabstrip = div.data("kendoTabStrip");
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.LEFT
             });
@@ -177,7 +177,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.DOWN
             });
@@ -193,7 +193,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.RIGHT
             });
@@ -209,7 +209,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.LEFT
             });
@@ -225,7 +225,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.UP
             });
@@ -241,7 +241,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.UP
             });
@@ -257,7 +257,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.LEFT
             });
@@ -273,7 +273,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.DOWN
             });
@@ -289,7 +289,7 @@
             tabstrip.select(0);
             div.focus();
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.RIGHT
             });
@@ -307,7 +307,7 @@
             tabstrip.enable(div.find(".k-item").eq(1), false);
             tabstrip._current(div.find(".k-item:last"));
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.UP
             });
@@ -328,7 +328,7 @@
             div.focus();
             tabstrip._current(item);
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.ENTER
             });
@@ -346,7 +346,7 @@
             div.focus();
             tabstrip._current(item);
 
-            div.trigger({
+            tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.SPACEBAR
             });
@@ -375,7 +375,7 @@
             assert.equal(tabstrip._click(div.find(".k-item").eq(1)), true);
         });
 
-        it("focuses wrapper on item click", function() {
+        it("focuses tabGroup on item click", function() {
             var tabStripHtml = $('<div><ul></ul></div>').appendTo(Mocha.fixture);
             var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
 
@@ -391,15 +391,15 @@
                 text: 'Tab 2'
             });
 
-            tabStripHtml.find(".k-item:first").click();
+            tabStripHtml.find(".k-item:first").trigger("click");
 
-            assert.equal(ts.wrapper[0], document.activeElement);
+            assert.equal(ts.tabGroup[0], document.activeElement);
 
             ts.destroy();
             tabStripHtml.remove();
         });
 
-        it("does not focus wrapper when click input element", function() {
+        it("does not focus wrapper or tabGroup when click input element", function() {
             var tabStripHtml = $('<div><ul></ul></div>').appendTo(Mocha.fixture);
             var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
 
@@ -420,6 +420,7 @@
             $("#input1").click();
 
             assert.notEqual(ts.wrapper[0], document.activeElement);
+            assert.notEqual(ts.tabGroup[0], document.activeElement);
 
             ts.destroy();
             tabStripHtml.remove();

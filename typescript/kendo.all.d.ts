@@ -6636,6 +6636,14 @@ declare namespace kendo.ui {
         title?: string | undefined;
     }
 
+    interface GridSelectableOptions {
+        dragToSelect?: boolean | undefined;
+        mode: string | undefined;
+        ignoreOverlapped: boolean | undefined;
+        cellAggregates: boolean | any[] | undefined;
+        checkboxSelection: boolean | undefined;
+    }
+
     interface GridScrollable {
         virtual?: boolean|string | undefined;
         endless?: boolean | undefined;
@@ -6720,11 +6728,12 @@ declare namespace kendo.ui {
         rowTemplate?: string|Function | undefined;
         scrollable?: boolean | GridScrollable | undefined;
         search?: GridSearch | undefined;
-        selectable?: boolean|string | undefined;
+        selectable?: boolean|string|GridSelectableOptions | undefined;
         size?: string | undefined;
         sortable?: boolean | GridSortable | undefined;
         toolbar?: string | Function | (string | GridToolbarItem)[] | ToolBarItem[] | undefined;
         width?: number|string | undefined;
+        statusBarTemplate?: string | Function | undefined;
         beforeEdit?(e: GridBeforeEditEvent): void;
         cancel?(e: GridCancelEvent): void;
         cellClose?(e: GridCellCloseEvent): void;
@@ -6784,6 +6793,7 @@ declare namespace kendo.ui {
     }
 
     interface GridChangeEvent extends GridEvent {
+        cellAggregates?: any | undefined;
     }
 
     interface GridChangingEvent extends GridEvent {

@@ -3889,7 +3889,7 @@ Configures the ContextMenus of the Grid.
 
 ### contextMenu.body `Array`
 
-Configures the items of the ContextMenu for the table body element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
+Configures the items of the ContextMenu for the table body element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc".
 
 You can also specify a custom item and accosiate it with a command.
 
@@ -3955,7 +3955,7 @@ Specifies the command of the item.
 
 ### contextMenu.groups `Array`
 
-Configures the items of the ContextMenu for the group elements in the Grid header. Those are some valid predifined tools: "separator", "moveGroupPrevious", "moveGroupNext". 
+Configures the items of the ContextMenu for the group elements in the Grid header. Those are some valid predifined tools: "separator", "moveGroupPrevious", "moveGroupNext".
 
 You can also specify a custom item and accosiate it with a command.
 
@@ -4019,7 +4019,7 @@ Specifies the command of the item.
 
 ### contextMenu.head `Array`
 
-Configures the items of the ContextMenu for the table head element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc". 
+Configures the items of the ContextMenu for the table head element. Those are some valid predifined tools: "separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc".
 
 You can also specify a custom item and accosiate it with a command.
 
@@ -9331,6 +9331,114 @@ Can also be set to the following string values:
 
 > Check [Selection](https://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
 
+### selectable.cellAggregates `Boolean|Array`
+
+If set to `true` all aggregates will be calculated and made available to the Status Bar. The cellAggregates property also accepts an array in case only some of the aggregates should be calculated.
+
+The available aggregates are:
+
+* `count` - the count of all selected cells(excluding command/selectable/draggable column) but including template columns without fields.
+* `max` - for numeric cells - the biggest numeric value across all of the selected cells/rows.
+* `min` - for numeric cells - the smallest numeric value across all of the selected cells/rows.
+* `sum` - for numeric cells - the sum of all numeric values from the selected cells/rows.
+* `average` - for numeric cells - the average of all numeric values from the selected cells/rows.
+* `earliest` - for date cells.
+* `latest` - for date cells.
+* `isTrue` - for boolean cells - the count of all selected cells with value `true`.
+* `isFalse` - for boolean cells - the count of all selected cells with value `false`.
+
+#### Example - enable cell aggregates
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+          data: [
+              { id: 1, name: "Jane Doe", age: 30 },
+              { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+              model: {
+                  id: "id"
+              }
+          }
+      },
+      selectable: {
+        mode: "multiple, row",
+        cellAggregates: true
+      },
+      statusBarTemplate: ({aggregates}) => `Count: ${aggregates.count}, Max: ${aggregates.max}`
+    });
+    </script>
+
+#### Example - customize the calculated cell aggregates
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+          data: [
+              { id: 1, name: "Jane Doe", age: 30 },
+              { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+              model: {
+                  id: "id"
+              }
+          }
+      },
+      selectable: {
+        mode: "multiple, row",
+        cellAggregates: ["sum", "count", "earliest", "isTrue", "max"]
+      },
+      statusBarTemplate: ({aggregates}) => `Count: ${aggregates.count}, Max: ${aggregates.max}`
+    });
+    </script>
+
+
+### selectable.checkboxSelection `Boolean` *(default: false)*
+
+When set to `true`, the grid.selectable will not be initialized. Should be enabled when both checkbox selection for the Grid and cell aggregates are required.
+
+#### Example 
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { selectable: true },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+          data: [
+              { id: 1, name: "Jane Doe", age: 30 },
+              { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+              model: {
+                  id: "id"
+              }
+          }
+      },
+      selectable: {
+        mode: "multiple, row",
+        cellAggregates: true,
+        checkboxSelection: true
+      },
+      statusBarTemplate: ({aggregates}) => `Count: ${aggregates.count}, Sum: ${aggregates.sum}`
+    });
+    </script>
+
+
 ### selectable.dragToSelect `Boolean` *(default: true)*
 
 When set to `true`, the user can drag to select multiple Grid rows or cells.
@@ -9573,6 +9681,35 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
     });
     </script>
 
+### statusBarTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the Status Bar/Aggregates Bar.
+
+#### Example
+
+    $("#grid").kendoGrid({
+        columns: [
+            { field: "name" },
+            { field: "age" }
+        ],
+        dataSource: {
+            data: [
+                { id: 1, name: "Jane Doe", age: 30 },
+                { id: 2, name: "John Doe", age: 33 }
+            ],
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        },
+        selectable: {
+            mode: "cell",
+            cellAggregates: true
+        },
+        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+    });
+
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole grid Toolbar,
@@ -9595,6 +9732,8 @@ The "excel" command exports the grid data in MS Excel format. Fires [`excelExpor
 The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) grid event.
 
 The "search" built-in search panel for the grid.
+
+The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
 
 #### Example - configure the Grid Toolbar as a string template
 
@@ -12231,6 +12370,10 @@ The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/
 
 The widget instance which fired the event.
 
+##### e.cellAggregates
+
+The calculated cell aggregates. Available if `selectable.cellAggregates` is enabled.
+
 #### Example - get the selected data item(s) when using row selection
 
     <div id="grid"></div>
@@ -12240,10 +12383,17 @@ The widget instance which fired the event.
           { field: "name" },
           { field: "age" }
         ],
-        dataSource: [
-          { name: "Jane Doe", age: 30 },
-          { name: "John Doe", age: 33 }
-        ],
+        dataSource: {
+            data: [
+                { id: 1, name: "Jane Doe", age: 30 },
+                { id: 2, name: "John Doe", age: 33 }
+            ],
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        },
         selectable: "multiple, row",
         change: function(e) {
           var selectedRows = this.select();

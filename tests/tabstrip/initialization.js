@@ -33,11 +33,11 @@
         it("navigatable should attach the keydown handler only if true", function() {
             tabstrip = new kendo.ui.TabStrip(dom, { navigatable: false });
 
-            assert.isOk(!$._data(tabstrip.wrapper[0], "events").keydown, "No keydown event attached");
+            assert.isOk(!$._data(tabstrip.tabGroup[0], "events").keydown, "No keydown event attached");
 
             tabstrip.setOptions({ navigatable: true });
 
-            assert.isOk($._data(tabstrip.wrapper[0], "events").keydown, "Keydown event attached");
+            assert.isOk($._data(tabstrip.tabGroup[0], "events").keydown, "Keydown event attached");
         });
 
         it("applies a default top tab position CSS class", function() {
