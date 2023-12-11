@@ -51,6 +51,51 @@ For a runnable example, refer to the [Custom tools Editor Demo](https://demos.te
            ]
        });
 
+
+## Extending the Editor with a Custom Tool
+
+To extend the Editor with a custom tool:
+
+1. Create a custom command through the `kendo.ui.editor.Command.extend` method
+    ```
+        var MyCustomCommand = kendo.ui.editor.Command.extend({
+          exec: function (e) {
+             // Custom Logic.
+          }
+        });
+    ```
+
+1. Insert the Command in the Editor widget object instance.
+
+    ```
+        kendo.ui.editor.MyCustomCommand = MyCustomCommand;
+    ```
+
+1. Register the tool by using the built-in `registerTool()` method.
+
+    ```
+         kendo.ui.editor.EditorUtils.registerTool(
+          'MyCustomCommand', new kendo.ui.editor.Tool({
+              command: MyCustomCommand, 
+              ui:{
+                  type:"button",
+                  component: "Button",
+                  componentOptions: {
+                  		 themeColor: "success",
+                        click: () => $("#editor").getKendoEditor().exec    ("MyCustomCommand", "test")
+                  }
+              }
+        }));
+     ```
+
+1. Initialize the Editor
+
+        $("#editor").kendoEditor({
+            tools: [
+               "MyCustomCommand"
+            ]
+        });
+
 ## See Also
 
 * [Using the Tools of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/all-tools)

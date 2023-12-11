@@ -339,6 +339,94 @@ The following example demonstrates the same scenarios implemented using Kendo Te
 ```
 {% endif %}
 
+## Extending the Editor with a Custom Tool
+
+To extend the Editor with a custom tool:
+
+1. Create a custom command through the `kendo.ui.editor.Command.extend` method
+
+    ```
+         var MyCustomCommand = kendo.ui.editor.Command.extend({
+           exec: function (e) {
+              // Custom Logic.
+           }
+         });
+    ```
+
+1. Insert the Command in the Editor widget object instance.
+
+    ```
+        kendo.ui.editor.MyCustomCommand = MyCustomCommand;
+    ```
+1. Register the tool by using the built-in `registerTool()` method.
+
+    ```
+          kendo.ui.editor.EditorUtils.registerTool(
+           'MyCustomCommand', new kendo.ui.editor.Tool({
+               command: MyCustomCommand, 
+               ui:{
+                   type:"button",
+                   component: "Button",
+                   componentOptions: {
+                   		 themeColor: "success",
+                         click: () => $("#editor").getKendoEditor().exec    ("MyCustomCommand", "test")
+                   }
+               }
+           }));
+    ```
+
+1. Use either the `CustomButton()` or `CustomTemplate()` configurations for single or multiple action scenario.
+
+    ```HtmlHelper
+       @(Html.Kendo().Editor()
+        .Name("editor")
+        .HtmlAttributes(new { style = "width: 100%; height:790px" })
+        .Tools(tools => tools
+          .Clear()
+          .CustomButton(button => button
+              .Name("ToggleFullScreen")
+              .Template(Html.Kendo().Template()
+                  .AddComponent(component => component
+                      .Button()
+                      .Name("toggleFullScreen")
+                      .Icon("toggle-full-screen-mode")
+                      .Events(events => events.Click("onClick"))
+                  )                
+              )
+          )
+        )
+      )
+    ```
+    {% if site.core %}
+    ```TagHelper
+      <kendo-editor name="editor">
+             <tools>
+                 <tool name="ToggleFullScreen">
+                     <tool-template>
+                         <kendo-button name="toggleFullScreen"
+                                       icon="toggle-full-screen-mode"
+                                       on-click="onClick">
+                         </kendo-button>
+                     </tool-template>
+                 </tool>
+             </tools>
+      </kendo-editor>
+    ```
+    {% endif %}
+
+1. Within an event handler in the custom tool, execute the required command by using the [`exec()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/exec) method.
+
+    ```
+        <script>
+            function onClick(e){
+            
+                $("#editor").getKendoEditor().exec("ToggleFullScreen");
+            }
+        </script>
+    ```
+
+> Note that the tool name should correspond with the registered command.
+
 ## See Also
 
 * [Default Tools by the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/all-tools)

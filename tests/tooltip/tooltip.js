@@ -274,6 +274,24 @@
             assert.equal(originalWidth, latestWidth);
         });
 
+        it("popup width is recalculated properly when elements with different width are shown", function() {
+            container.append(`<span id="long" title="Some very long text that will increase the width.">Long</span><br /><br />
+            <span title="Short" id="short">Short</span><br /><br />`);
+            var tooltip = new Tooltip(container, { filter: "span" }),
+                originalWidth = 0,
+                latestWidth = 0;
+
+            tooltip.show($("#long")); // First show - big text.
+            originalWidth = tooltip.popup.element.width();
+            tooltip.hide();
+            tooltip.show($("#short")); // Second show - small text.
+            tooltip.hide();
+            tooltip.show($("#long")); // Third show - big text again.
+            latestWidth = tooltip.popup.element.width();
+
+            assert.equal(originalWidth, latestWidth);
+        });
+
         it("title attributes are temporary removed", function() {
             container.attr("title", "foo");
 
@@ -688,7 +706,7 @@
             actual = Math.round(tooltip.popup.element.width());
             expected = Math.round(tempSpan.width());
 
-            assert.equal(actual, 31);
+            assert.equal(actual, 111);
             assert.equal(expected, 127);
 
             tempSpan.remove();

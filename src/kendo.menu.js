@@ -277,9 +277,11 @@ var __meta__ = {
         if (!item.children(LINK_SELECTOR).length) {
             item.contents() // exclude groups, real links, templates and empty text nodes
                 .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType === 3 && !kendo.trim(this.nodeValue))); })
-                .wrapAll("<span class='" + LINK + "'></span>")
+                // adding role=none to span elements inside li[role=menuitem]
+                // to make screen readers announce submenus #telerik/kendo-ui-core/issues/6942
+                .wrapAll("<span class='" + LINK + "' role='none'></span>")
                 .filter(function(idx, elm) { return elm.nodeType === 3; })
-                .wrap("<span class='k-menu-link-text'></span>");
+                .wrap("<span class='k-menu-link-text' role='none'></span>");
         }
 
         updateArrow(item);
@@ -2301,7 +2303,7 @@ var __meta__ = {
                         text = encode(text);
                     }
 
-                    return `<span class='k-menu-link-text'>${text}</span>`;
+                    return `<span class='k-menu-link-text' role='none'>${text}</span>`;
                 });
             }
 
@@ -2326,7 +2328,7 @@ var __meta__ = {
                     var imgAttributes = fieldAccessor("imageAttr")(item);
                     var tag = url ? 'a' : 'span';
 
-                    return `<${tag} class='${rendering.textClass(item)}' ${url ? `href='${url}'` : ''} >` +
+                    return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${url}'` : ''} >` +
                         (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
                         this.templates.sprite(item) +
                         this.options.template(data) +

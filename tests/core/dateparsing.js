@@ -985,6 +985,11 @@
             assert.deepEqual(result, new Date(2023, 6, 21, 11, 39, 48));
         });
 
+        it("parseDate does not trim out zeroes when there are only two characters", function() {
+            var result = parse("2023/07/21 3:01 AM", "yyyy/MM/dd h:mm tt", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 3, 1, 0));
+        });
+
         it("parseExact method parses date string with UTC 'Z' zone designator", function() {
             var utcDate = new Date(Date.UTC(2014, 4, 21, 0, 0, 0));
             var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz");
