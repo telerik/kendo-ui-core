@@ -84,6 +84,8 @@ We have decided to remove the old .ascx editing files from the NuGet package and
 
 The alternative solution is to remove the old .ascx editor template files manually from the project.
 
+**Previously, old versions of MVC also supported View Engine of type "WebForms". If you have any issues building the project after upgrading to version 2024+, you can switch to View Engine mode "Razor".**
+
 ## More {{ site.framework }} Grid Resources
 
 * [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
