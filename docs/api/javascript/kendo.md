@@ -930,11 +930,12 @@ Wraps the generated code in a `with` block. This allows the usage of unqualified
 the performance of the template.
 
 ###### Example
-    var template = kendo.template("<strong>#: data.name #</strong>", { useWithBlock: false }); // Note that "data." is used to qualify the field
+    <script>
+    	var template = kendo.template("<strong>#: data.name #</strong>", { useWithBlock: false }); // Note that "data." is used to qualify the field
 
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(template({ name: "John Doe" })); // outputs "<strong>John Doe</strong>"
-
+    	console.log(template({ name: "John Doe" })); // outputs "<strong>John Doe</strong>"
+    </script>
 ### throttle
 
 Limits the number of calls to a function to one for a specified amount of time.
