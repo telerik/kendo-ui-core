@@ -52,9 +52,9 @@ The Cross-Site Request Forgery is generally initiated by a malicious script and 
 
 The anti-forgery tokens are used to ensure that a form or a request has been submitted by the user and not by a malicious script. The also called request validation tokens are hidden inputs that have a randomly generated value that cannot be read by a script.
 
-The following examples demonstrate the steps for implementing the CSFR token validation.
+The following examples demonstrate the steps for implementing the CSRF token validation.
 
-1. Include the CSFR token in the page.
+1. Include the CSRF token in the page.
 
   ```
       Html.AntiForgeryToken()
