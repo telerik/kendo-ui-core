@@ -10004,7 +10004,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](toolbar.name)` option would be used as the button text instead.
+The text displayed by the command button. If not set the [name](toolbar.name) option would be used as the button text instead.
 
 #### Example - set the text of the toolbar button
 
