@@ -33,7 +33,7 @@ The following example demonstrates how to create a linear trendline for Categori
         .Series(series =>
         {
             series.Bar(new double[] { 56000 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
-            series.LinearTrendline().For("Total Visitors).Name("Visotors Trend (LINEAR)");
+            series.LinearTrendline().For("Total Visitors").Name("Visitors Trend (LINEAR)");
         })
         .CategoryAxis(axis => axis
             .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
@@ -70,7 +70,7 @@ The following example demonstrates how to create a linear trendline for Categori
             </series-item>
             <series-item type="ChartSeriesType.LinearTrendline"
                         for="Total Visitors"
-                        name="Visotors Trend (LINEAR)">
+                        name="Visitors Trend (LINEAR)">
                         </series-item>
         </series>
         <value-axis>
@@ -90,6 +90,71 @@ The following example demonstrates how to create a linear trendline for Categori
     </kendo-chart>
 ```
 {% endif %}
+
+### Exponential Trendline
+
+Exponential trendlines are most suitable for data sets with accelerating rate of growth or decline. They can be used only for positive values.
+
+The following example demonstrates how to create a exponential trendline for Categorical series.
+
+
+### Logarithmic Trendline
+
+Logarithmic trendlines are best suited for data sets that grow quickly at the beginning and then taper off. They can only be use with both positive and negative values.
+
+The following example demonstrates how to create a logarithmic trendline for Categorical series.
+
+
+### Power Trendline
+
+Power trendlines are suitable for data that has a steady increase or decrease in the rate of growth or decline. They can be used only with positive values.
+
+The following example demonstrates how to create a power trendline for Categorical series.
+
+```
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Series(series =>
+        {
+            series.Bar(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name("World");
+            series.PowerTrendline().For("World").Name("Sales Forecast (POWER)");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(2005, 2006, 2007, 2008, 2009)
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Shared(true))
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{
+        var categories = new string[] { 2005, 2006, 2007, 2008, 2009 };
+    }
+    <kendo-chart name="chart">
+        <category-axis>
+            <category-axis-item categories="categories">
+            </category-axis-item>
+        </category-axis>
+        <series>
+            <series-item type="ChartSeriesType.Bar"
+                        name="World"
+                        data="new double[] { 15.7, 16.7, 20, 23.5, 26.6 }">
+            </series-item>
+            <series-item type="ChartSeriesType.PowerTrendline"
+                        for="World"
+                        name="Sales Forecast (POWER)">
+                        </series-item>
+        </series>
+        <tooltip shared="true" visible="true">
+        </tooltip>
+    </kendo-chart>
+```
+{% endif %}
+
 
 ### Moving Average Trendline
 
@@ -111,7 +176,7 @@ The following example demonstrates how to create a moving average trendline for 
         .Series(series =>
         {
             series.Bar(new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
-            series.MovingAverageTrendline().For("Total Visitors).Name("Visotors Trend (LINEAR)")
+            series.MovingAverageTrendline().For("Total Visitors").Name("Visitors Trend (LINEAR)")
                 .Trendline(trendline=>trendline.Period(4));
         })
         .CategoryAxis(axis => axis
@@ -149,7 +214,7 @@ The following example demonstrates how to create a moving average trendline for 
             </series-item>
             <series-item type="ChartSeriesType.MovingAverageTrendline"
                         for="Total Visitors"
-                        name="Visotors Trend (M.AVG)">
+                        name="Visitors Trend (M.AVG)">
                 <trendline period="4"></trendline>
             </series-item>
         </series>
@@ -170,6 +235,13 @@ The following example demonstrates how to create a moving average trendline for 
     </kendo-chart>
 ```
 {% endif %}
+
+## Forecasts
+
+To create a forecast, extend the trendline by specifying the number of intervals using the [series.trendline.after](/api/javascript/dataviz/ui/chart#configuration-series.trendline.after) setting. It's also possible to extend the forecast in reverse direction using the [series.trendline.before](/api/javascript/dataviz/ui/chart#configuration-series.trendline.before) setting. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported for **linear**, **exponential**, **logarithmic** and **power** trendlines. The parent series must be either a [Date Series]({% slug htmlhelpers_charts_dateseries_aspnetcore %}), "scatter" or "scatterLine".
+
 
 ## Data Binding
 

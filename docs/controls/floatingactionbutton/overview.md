@@ -12,51 +12,21 @@ The FloatingActionButton is a UI component that is tied to the most logical acti
 
 The FloatingActionButton floats in the application above other items, and its main action directly corresponds to the content on the screen. Apart from being a single button with a single action, the FloatingActionButton can also be configured to display additional related actions or speed dial actions.
 
-* [Demo page for the FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index)
+![Kendo UI for jQuery FloatingActionButton Overview](floatingactionbutton-overview.PNG)
 
-## Initializing the FloatingActionButton
-
-The following example demonstrates how to initialize the FloatingActionButton.
-
-```dojo
-    <div id="fab"></div>
-
-    <script>
-        $(document).ready(function () {
-            $("#fab").kendoFloatingActionButton({
-                align: "bottom end",
-                alignOffset:{
-                    x: 50,
-                    y: 50
-                },
-                positionMode: "absolute",
-                themeColor: "primary",
-                icon: "share",
-                size: "medium",
-                items: [{
-                    label: "Download",
-                    icon: "download",
-                    click: function () { console.log("download action"); }
-                }, {
-                    label: "Print",
-                    icon: "print",
-                    click: function () { console.log("print action"); },
-                }, {
-                    label: "Email",
-                    icon: "envelope",
-                    click: function () { console.log("email action"); }
-                }]
-            });
-        });
-    </script>
-```
 
 ## Functionality and Features
 
-* [Alignment]({% slug alignment_floatingactionbutton_widget %})
-* [Appearance]({% slug appearance_floatingactionbutton_widget %})
-* [Templates]({% slug templates_floatingactionbutton_widget %})
-* [Accessibility]({% slug accessibility_kendoui_floatingactionbutton_widget %})
+* [Alignment]({% slug alignment_floatingactionbutton_widget %})&mdash;The FloatingActionButton provides options that allow you to manipulate the position of the component.
+* [Appearance]({% slug appearance_floatingactionbutton_widget %})&mdash;You can set the size, color, icon, and text of the FloatingActionButton by using the built-in appearance options.
+* [Templates]({% slug templates_floatingactionbutton_widget %})&mdash;The item templates allow you to control the rendering of the items in the FloatingActionButton popup.
+* [Accessibility]({% slug accessibility_kendoui_floatingactionbutton_widget %})&mdash;The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_floatingactionbutton_jquery %}).
+
+## Next Steps
+
+* [Getting Started with the Kendo UI FloatingActionButton for jQuery]({% slug getting_started_kendoui_floatingactionbutton_widget %})
+* [Appearance of the FloatingActionButton]({% slug appearance_floatingactionbutton_widget %})
+* [Templates in the FloatingActionButton]({% slug templates_floatingactionbutton_widget %})
 
 ## See Also
 

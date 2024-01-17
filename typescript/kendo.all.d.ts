@@ -445,6 +445,41 @@ declare namespace kendo {
 
 }
 
+declare namespace kendo.chat{
+    class ChatMessageBox extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+        styles?(options: any): void;
+    }
+
+    class ChatToolBar extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+        styles?(options: any): void;
+    }
+
+    class ChatView extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+        styles?(options: any): void;
+    }
+
+    class Component extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    interface Templates {
+       heroCard?(): void;
+       message?(): void;
+    }
+
+    function getComponent(componentName: string): void;
+    function getTemplate(templateName: string): kendo.chat.Templates | string;
+    function registerComponent(componentName: string, component: kendo.chat.Component): void;
+    function registerTemplate(templateName: string, template: string | Function): void;
+}
+
 declare namespace kendo.effects {
     function enable(): void;
     function disable(): void;
@@ -2847,12 +2882,15 @@ declare namespace kendo.ui {
         constructor(element: Element, options?: ChatOptions);
 
 
+        clearUserTypingIndicator(sender: any): void;
         getUser(): any;
         postMessage(message: string): void;
+        removeTypingIndicator(): void;
         renderAttachments(options: any, sender: any): void;
         renderMessage(message: any, sender: any): void;
         renderSuggestedActions(suggestedActions: any): void;
-
+        renderUserTypingIndicator(sender: any): void;
+        toggleToolbar(skipEffects: boolean): void;
     }
 
     interface ChatMessages {
@@ -4842,6 +4880,11 @@ declare namespace kendo.ui {
         serialization?: string|Function | undefined;
     }
 
+    interface EditorNonSplittableTagsOnPaste {
+        tag?: string | undefined;
+        unwrap?: boolean | undefined;
+    }
+
     interface EditorMessages {
         auto?: string | undefined;
         accessibilityTab?: string | undefined;
@@ -5047,6 +5090,7 @@ declare namespace kendo.ui {
         imageBrowser?: EditorImageBrowser | undefined;
         fileBrowser?: EditorFileBrowser | undefined;
         navigateOnTab?: boolean | undefined;
+        nonSplittableTagsOnPaste?: string[] | EditorNonSplittableTagsOnPaste[] | undefined;
         change?(e: EditorEvent): void;
         execute?(e: EditorExecuteEvent): void;
         keydown?(e: EditorEvent): void;
@@ -6701,6 +6745,7 @@ declare namespace kendo.ui {
     interface GridOptions {
         name?: string | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
+        allowPaste?: boolean | undefined;
         altRowTemplate?: string|Function | undefined;
         autoBind?: boolean | undefined;
         columnResizeHandleWidth?: number | undefined;
@@ -6764,6 +6809,7 @@ declare namespace kendo.ui {
         groupExpand?(e: GridGroupExpandEvent): void;
         navigate?(e: GridNavigateEvent): void;
         page?(e: GridPageEvent): void;
+        paste?(e: GridPasteEvent): void;
         pdfExport?(e: GridPdfExportEvent): void;
         remove?(e: GridRemoveEvent): void;
         save?(e: GridSaveEvent): void;
@@ -6918,6 +6964,11 @@ declare namespace kendo.ui {
 
     interface GridPageEvent extends GridEvent {
         page?: number | undefined;
+    }
+
+    interface GridPasteEvent extends GridEvent {
+        items?: any[] | undefined;
+        type?: string | undefined;
     }
 
     interface GridPdfExportEvent extends GridEvent {
@@ -14898,6 +14949,9 @@ declare namespace kendo.dataviz.ui {
     }
 
 
+    type ChartMarkerType = 'square' | 'circle' | 'triangle' | 'cross' | 'rect' | 'roundedRect';
+    type ChartDashType = 'dash' | 'dashDot' | 'dot' | 'longDash' | 'longDashDot' | 'longDashDotDot' | 'solid';
+
     class Chart extends kendo.ui.Widget {
 
         static fn: Chart;
@@ -15474,8 +15528,45 @@ declare namespace kendo.dataviz.ui {
         labels?: ChartLegendInactiveItemsLabels | undefined;
     }
 
+    interface ChartLegendItemMarkersBorder {
+        color?: string | Function | undefined;
+        dashType?: string | Function | undefined;
+    }
+
+    interface ChartLegendItemMarkers {
+        background?: string | Function | undefined;
+        border?: Function | ChartLegendItemMarkersBorder | undefined;
+        borderRadius?: Function | number | undefined;
+        type?: string | Function | undefined;
+        visible?: boolean | Function | undefined;
+        visual?: Function | undefined;
+    }
+
+    interface ChartLegendItemHighlight {
+        markers?: ChartLegendItemMarkers;
+        visible?: boolean | Function | undefined;
+    }
+
+    interface ChartLegendItemLine {
+        color?: string | Function | undefined;
+        opacity?: number | Function | undefined;
+        dashType?: ChartDashType | Function | undefined;
+    }
+
+    interface ChartLegendItemArea {
+        background?: string | Function | undefined;
+        opacity?: number | Function | undefined;
+    }
+
+    type ChartLegendItemType = 'line' | 'area';
+
     interface ChartLegendItem {
+        area?: ChartLegendItemArea;
         cursor?: string | undefined;
+        highlight?: ChartLegendItemHighlight;
+        line?: ChartLegendItemLine;
+        markers?: ChartLegendItemMarkers;
+        type?: ChartLegendItemType;
         visual?: Function | undefined;
     }
 
@@ -15810,6 +15901,7 @@ declare namespace kendo.dataviz.ui {
 
     interface ChartSeriesItemLabels {
         align?: string | undefined;
+        ariaTemplate?: string|Function | undefined;
         background?: string|Function | undefined;
         border?: ChartSeriesItemLabelsBorder | undefined;
         color?: string|Function | undefined;
@@ -16047,6 +16139,7 @@ declare namespace kendo.dataviz.ui {
         highlight?: ChartSeriesItemHighlight | undefined;
         holeSize?: number | undefined;
         labels?: ChartSeriesItemLabels | undefined;
+        legendItem?: ChartLegendItem | undefined;
         line?: string | ChartSeriesItemLine | undefined;
         lowField?: string | undefined;
         margin?: number | ChartSeriesItemMargin | undefined;
@@ -16178,6 +16271,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface ChartSeriesDefaultsLabels {
+        ariaTemplate?: string|Function | undefined;
         background?: string | undefined;
         border?: ChartSeriesDefaultsLabelsBorder | undefined;
         color?: string | undefined;
@@ -16356,6 +16450,7 @@ declare namespace kendo.dataviz.ui {
         background?: string | undefined;
         border?: ChartTitleBorder | undefined;
         color?: string | undefined;
+        description?: string | undefined;
         font?: string | undefined;
         margin?: number | ChartTitleMargin | undefined;
         padding?: number | ChartTitlePadding | undefined;
@@ -20658,11 +20753,6 @@ declare namespace kendo.dataviz.ui {
         markers?: StockChartLegendInactiveItemsMarkers | undefined;
     }
 
-    interface StockChartLegendItem {
-        cursor?: string | undefined;
-        visual?: Function | undefined;
-    }
-
     interface StockChartLegendLabels {
         color?: string | undefined;
         font?: string | undefined;
@@ -20672,7 +20762,7 @@ declare namespace kendo.dataviz.ui {
     interface StockChartLegend {
         background?: string | undefined;
         border?: StockChartLegendBorder | undefined;
-        item?: StockChartLegendItem | undefined;
+        item?: ChartLegendItem | undefined;
         labels?: StockChartLegendLabels | undefined;
         margin?: number|any | undefined;
         offsetX?: number | undefined;
@@ -21285,6 +21375,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface StockChartSeriesItemLabels {
+        ariaTemplate?: string|Function | undefined;
         background?: string|Function | undefined;
         border?: StockChartSeriesItemLabelsBorder | undefined;
         color?: string|Function | undefined;
@@ -21456,6 +21547,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface StockChartSeriesDefaultsLabels {
+        ariaTemplate?: string|Function | undefined;
         background?: string | undefined;
         border?: StockChartSeriesDefaultsLabelsBorder | undefined;
         color?: string | undefined;

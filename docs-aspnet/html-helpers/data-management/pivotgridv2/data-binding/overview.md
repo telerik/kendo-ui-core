@@ -6,7 +6,7 @@ slug: databinding_pivotgridv2helper_aspnetcore
 position: 1
 ---
 
-# Data Binding
+# Data Binding Overview
 
 The PivotGridV2 for {{ site.framework }} supports Ajax data binding to an HTTP accessible Online Analytical Processing (OLAP) and binding to local flat data.
 

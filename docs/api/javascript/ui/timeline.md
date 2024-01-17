@@ -1,7 +1,7 @@
 ---
 title: Timeline
 page_title: Configuration, methods and events of Kendo UI Timeline
-description: You will learn how to configure Timeline widget, which shows events over time. 
+description: You will learn how to configure Timeline widget, which shows events over time.
 res_type: api
 component: timeline
 ---
@@ -47,7 +47,7 @@ dataSource instance is fired. By default, `autoBind` is set to `true` and the wi
 
 ### alternatingMode `Boolean`*(default: false)*
 
-Indicates whether events should be positioned on both sides of the timeline axis. By default all events are displayed on the right side of the timeline axis. 
+Indicates whether events should be positioned on both sides of the timeline axis. By default all events are displayed on the right side of the timeline axis.
 
 #### Example
 
@@ -109,7 +109,7 @@ Sets the orienation of the timeline axis. The widget expects "horizontal" or "ve
 
 ### collapsibleEvents `Boolean`*(default: false)*
 
-Enables the events in the Kendo UI Timeline to be expandable or collapsible. When enabled initially all events are collapsed. 
+Enables the events in the Kendo UI Timeline to be expandable or collapsible. When enabled initially all events are collapsed.
 
 #### Example
 
@@ -217,7 +217,7 @@ Sets the field of the data item that provides the description information for th
             orientation: "vertical"
         });
     });
-          
+
     var data = [
       {
         "description1": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
@@ -249,19 +249,19 @@ Sets the field of the data item that provides information when the given event h
 #### Example
 
     <div id="timeline"></div>
-    
+
     <script>
       $(document).ready(function () {
         var dataArray = [
-          { "id": 1, "title": "Bowling tournament", 
-           "subtitle": "Location: Sterling Lanes", 
-           "description": "Summer Bowling tournament in Michigan", 
-           "date1": "2025-06-30T21:00:00.000Z", 
+          { "id": 1, "title": "Bowling tournament",
+           "subtitle": "Location: Sterling Lanes",
+           "description": "Summer Bowling tournament in Michigan",
+           "date1": "2025-06-30T21:00:00.000Z",
            "actions": [{ "text": "Visit the Bowling tournament page" }] },
-          { "id": 2, 
-           "title": "Charlie's first football game", 
-           "subtitle": "Location: City Football Stadium", 
-           "description": "Call coach Williams", 
+          { "id": 2,
+           "title": "Charlie's first football game",
+           "subtitle": "Location: City Football Stadium",
+           "description": "Call coach Williams",
            "date1": "2022-10-22T21:00:00.000Z" }
         ];
 
@@ -312,7 +312,7 @@ Sets the field of the data item that provides the value for the alt attribute of
             orientation: "vertical"
         });
     });
-          
+
     var data = [
       {
         "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
@@ -363,7 +363,7 @@ Sets the field of the data item that provides the images information for the eve
             orientation: "vertical"
         });
     });
-          
+
     var data = [
       {
         "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
@@ -414,7 +414,7 @@ Sets the field of the data item that provides the subtitle information for the e
             orientation: "vertical"
         });
     });
-          
+
     var data = [
       {
         "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
@@ -465,7 +465,7 @@ Sets the field of the data item that provides the title information for the even
             orientation: "vertical"
         });
     });
-          
+
     var data = [
       {
         "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
@@ -532,10 +532,10 @@ Specifies the template used to render the event details.
       <div class="k-card-body">
           <div class="k-card-description">
           <p>#=data.description#</p>
-          # var images = data.images; 
+          # var images = data.images;
           if(images && images.length > 0) { #
-            <img src="#=images[0].src#" class="k-card-image">
-            <img src="#=images[1].src#" class="k-card-image">
+            <img src="#=images[0].src#" class="k-card-media">
+            <img src="#=images[1].src#" class="k-card-media">
           # } #
           </div>
       </div>
@@ -605,7 +605,7 @@ Sets specific height for the event in horizontal mode.
 
 ### eventWidth `Number`*(default: 400)*
 
-Sets specific width for the event in vertical mode. 
+Sets specific width for the event in vertical mode.
 
 > This method is supported only in vertical mode.
 
@@ -673,9 +673,9 @@ If set to `false`, the event's date label will be hidden.
 
 ## Methods
 
-### expand 
+### expand
 
-Expands an event. 
+Expands an event.
 
 > This method is supported only in vertical mode.
 
@@ -716,9 +716,9 @@ A string, a DOM element, or a jQuery object which represents the event. A string
     timeline.expand(firstEvent);
     </script>
 
-### collapse 
+### collapse
 
-Collapse an event. 
+Collapse an event.
 
 > This method is supported only in vertical mode.
 
@@ -762,9 +762,9 @@ A string, a DOM element, or a jQuery object which represents the event. A string
     });
     </script>
 
-### open 
+### open
 
-Open event details. 
+Open event details.
 
 > This method is supported only in horizontal mode.
 
@@ -910,7 +910,7 @@ Switches to the previous portion of events with animation.
     timeline.previous();
     </script>
 
-### redraw 
+### redraw
 
 Redraws the Timeline widget.
 

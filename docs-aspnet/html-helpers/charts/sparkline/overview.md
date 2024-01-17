@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: Sparkline Overview
-description: "Learn the basics when working with the Telerik UI Sparkline component for {{ site.framework }}."
+description: "The Telerik UI Sparkline component for {{ site.framework }} provides a compact chart component without the typical elements."
 slug: overview_sparklineshelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Sparkline Overview
@@ -57,8 +57,8 @@ To create the Sparklines, add the component tags to the view and provide it with
 
 ## Functionality and Features
 
-* [Data binding]({% slug overview_sparklinesdatabinding_aspnetcore %})
-* [Axes configuration]({% slug axesconfig_sparklines_aspnetcore %})
+* [Data binding]({% slug overview_sparklinesdatabinding_aspnetcore %})&mdash;You can bind the chart directly to a database.
+* [Axes configuration]({% slug axesconfig_sparklines_aspnetcore %})&mdash;You can customize the configuration of the axes.
 
 ## See Also
 

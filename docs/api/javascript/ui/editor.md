@@ -1869,6 +1869,82 @@ If set to `true` this configuration option would enable Tab-based navigation amo
       });
     </script>
 
+### nonSplittableTagsOnPaste `Array` *(default: [])*
+
+When pasting a block element inside an element such as a list `ul`, the list gets split in half and the block element is inserted between the two `ul` elements.
+
+This configuration enables you to specify elements for which the above behavior will be ignored.
+
+#### Example
+
+    <h4>Create a list using the editor toolbar command and then click the paste button.</h4>
+    <button id="paste">Paste</button>
+    <textarea id="editor"></textarea>
+    <script>
+      var editor = $("#editor").kendoEditor({
+        nonSplittableTagsOnPaste: ["ul"],
+        tools: [
+          "insertUnorderedList"
+        ]
+      }).data("kendoEditor");
+
+      $("#paste").on("click", () => {
+        var editor = $("#editor").data("kendoEditor");
+        editor.paste("<p>New content</p>");
+      });
+    </script>
+
+### nonSplittableTagsOnPaste.tag `String`
+
+An extension of the `nonSplittableTagsOnPaste` configuration. You can specify an array of objects instead of array of strings if you want to configure additional settings.
+
+#### Example
+
+    <h4>Create a list using the editor toolbar command and then click the paste button.</h4>
+    <button id="paste">Paste</button>
+    <textarea id="editor"></textarea>
+    <script>
+      var editor = $("#editor").kendoEditor({
+        nonSplittableTagsOnPaste: [{
+          tag: "ul",
+          unwrap: false
+        }],
+        tools: [
+          "insertUnorderedList"
+        ]
+      }).data("kendoEditor");
+
+      $("#paste").on("click", () => {
+        var editor = $("#editor").data("kendoEditor");
+        editor.paste("<p>New content</p>");
+      });
+    </script>
+
+### nonSplittableTagsOnPaste.unwrap `Boolean` *(default: true)*
+
+By default the pasted content will be unwrapped from its parent elements when the `nonSplittableTagsOnPaste` configuration is enabled. This property enables you to stop that behavior.
+
+#### Example
+
+    <h4>Create a list using the editor toolbar command and then click the paste button.</h4>
+    <button id="paste">Paste</button>
+    <textarea id="editor"></textarea>
+    <script>
+      var editor = $("#editor").kendoEditor({
+        nonSplittableTagsOnPaste: [{
+          tag: "ul",
+          unwrap: false
+        }],
+        tools: [
+          "insertUnorderedList"
+        ]
+      }).data("kendoEditor");
+
+      $("#paste").on("click", () => {
+        var editor = $("#editor").data("kendoEditor");
+        editor.paste("<p>New content</p>");
+      });
+    </script>
 
 ### pasteCleanup `Object`
 

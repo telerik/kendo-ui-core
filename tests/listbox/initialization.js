@@ -169,28 +169,6 @@
             assert.equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
         });
 
-        it("tollbar element is inserted before list when position is top", function() {
-            listbox = createListBoxWithToolbar({
-                toolbar: {
-                    position: "top",
-                    tools: [REMOVE]
-                }
-            });
-
-            assert.equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
-        });
-
-        it("tollbar element is inserted after list when position is bottom", function() {
-            listbox = createListBoxWithToolbar({
-                toolbar: {
-                    position: "bottom",
-                    tools: [REMOVE]
-                }
-            });
-
-            assert.equal(listbox.wrapper.find(".k-list-scroller").next()[0], listbox.toolbar.element[0]);
-        });
-
         it("when providing a template function the rendered content is wrapped in a li element", function() {
             listbox = createListBox({
                 template: kendo.template(({ text }) => `<div>${kendo.htmlEncode(text)}</div>`)

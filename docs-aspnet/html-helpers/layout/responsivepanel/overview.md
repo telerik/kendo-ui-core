@@ -1,13 +1,13 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn more about the Telerik UI Responsive Panel component for {{ site.framework }}, and use it in your next project."
+description: "Learn more about the Telerik UI Responsive Panel component for {{ site.framework }}, and use it in your project."
 previous_url: /helpers/html-helpers/responsivepanel, /helpers/navigation/responsivepanel/overview
 slug: htmlhelpers_responsivepanel_aspnetcore
-position: 1
+position: 0
 ---
 
-# {{ site.framework }} ResponsivePanel Overview
+# {{ site.framework }} Responsive Panel Overview
 
 {% if site.core %}
 The Telerik UI Responsive Panel TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Responsive Panel widget.
@@ -15,8 +15,7 @@ The Telerik UI Responsive Panel TagHelper and HtmlHelper for {{ site.framework }
 The Telerik UI Responsive Panel HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Responsive Panel widget.
 {% endif %}
 
-The Responsive Panel allows you to hide part of a page content on small screens. The Component collapses a content element when a `breakpoint` is reached. The collapsed content is then expanded by a button with the `k-rpanel-toggle` class. To set the placement of the expandable content, use the `orientation` option.
-
+The Responsive Panel allows you to hide part of a page content on small screens. The component collapses a content element when a specified `breakpoint` is reached. The collapsed content is then expanded by a button with the `k-rpanel-toggle` class. To set the placement of the expandable content, use the `Orientation` option.
 
 * [Demo page for the Responsive Panel HtmlHelper](https://demos.telerik.com/{{ site.platform }}/responsive-panel/index)
 {% if site.core %}
@@ -44,7 +43,7 @@ The following example demonstrates how to define the Responsive Panel.
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Responsive Panel.
+The following example demonstrates a basic configuration of the Responsive Panel.
 
 ```HtmlHelper
     <div class="dash-head">
@@ -103,12 +102,20 @@ The following example demonstrates the basic configuration of the Responsive Pan
 ```
 {% endif %}
 
-> The Telerik UI ResponsivePanel accepts any HTML that is passed in the `Content` option. For more advanced scenarios, pass custom HTML of your choice.  
+> The Telerik UI Responsive Panel component accepts any HTML that is passed in the `Content` option. For more advanced scenarios, pass custom HTML of your choice.  
+
+## Next Steps
+
+* [Getting Started with the Responsive Panel]({% slug responsive_panel_getting_started %})
+* [Basic Usage of the Responsive Panel HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/responsive-panel)
+{% if site.core %}
+* [Basic Usage of the Responsive Panel TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/responsive-panel/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [ResponsivePanel Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)
-* [Basic Usage of the Responsive Pane HtmlHelper for {{ site.framework }} Demol](https://demos.telerik.com/{{ site.platform }}/responsivepanel/index)
+* [Server-Side API of the Responsive Panel](/api/responsivepanel)
 {% if site.core %}
-* [Basic Usage of the Responsive Panel TagHelper for {{ site.framework }} Demo](https://demos.telerik.com/aspnet-core/responsivepanel/tag-helper)
+* [Server-Side API of the Responsive Panel TagHelper](/api/taghelpers/responsivepanel)
 {% endif %}
+* [Knowledge Base Section](/knowledge-base)

@@ -100,10 +100,10 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
                             <h5 class='k-card-subtitle'>Greece, Santorini</h5>
                         </div>
                     </div>
-                    <img class='k-card-image' alt='seaview' src=' " + @Url.Content("~/shared/web/cards/seaview-appartments.png")  + @" ' />
+                    <img class='k-card-media' alt='seaview' src=' " + @Url.Content("~/shared/web/cards/seaview-appartments.png")  + @" ' />
                     <div class='k-card-body'><p>A luxurious two-bedroom apartment with the best views over Santorini</p></div>
                     <span class='k-card-separator'></span>
-                    <div class='k-card-actions'>
+                    <div class='k-actions k-card-actions'>
                         <span class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
                     </div>
                 </div>")
@@ -125,10 +125,10 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
                             <h5 class='k-card-subtitle'>Greece, Santorini</h5>
                         </div>
                     </div>
-                    <img class='k-card-image' alt='seaview' src='~/shared/web/cards/seaview-appartments.png' />
+                    <img class='k-card-media' alt='seaview' src='~/shared/web/cards/seaview-appartments.png' />
                     <div class='k-card-body'><p>A luxurious two-bedroom apartment with the best views over Santorini</p></div>
                     <span class='k-card-separator'></span>
-                    <div class='k-card-actions'>
+                    <div class='k-actions k-card-actions'>
                         <span class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
                     </div>
                 </div>
@@ -163,7 +163,7 @@ The ExpansionPanel exposes [events](/api/kendo.mvc.ui.fluent/expansionpanelevent
         .Events(ev => ev.Expand("onExpand").Collapse("onCollapse"))
         .Content("")
      )
-     
+
      <script>
         function onExpand() {
             $(".k-expander-header").css("background-color","#c1e2eb");
@@ -179,7 +179,7 @@ The ExpansionPanel exposes [events](/api/kendo.mvc.ui.fluent/expansionpanelevent
 ```TagHelper
 	<kendo-expansionpanel name="expPanel" on-expand="onExpand" on-collapse="onCollapse">
         <content>
-            
+
         </content>
     </kendo-expansionpanel>
 
@@ -187,7 +187,7 @@ The ExpansionPanel exposes [events](/api/kendo.mvc.ui.fluent/expansionpanelevent
         function onExpand() {
             $(".k-expander-header").css("background-color","#c1e2eb");
         }
-        
+
         function onCollapse() {
             $(".k-expander-header").css("background-color","inherit");
         }

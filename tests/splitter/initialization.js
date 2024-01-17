@@ -9,7 +9,6 @@
         it("constructor adds classes to container", function() {
             splitter = create({}, 1);
 
-            assert.isOk(splitter.dom.hasClass("k-widget"));
             assert.isOk(splitter.dom.hasClass("k-splitter"));
 
             splitter = create({ orientation: "vertical" }, 1);

@@ -43,6 +43,8 @@ The table below describes the minimum required version of Visual Studio based on
 | 2.2               | Visual Studio 2017 version 15.9 or higher. |
 | 2.1               | Visual Studio 2017 version 15.7 or higher. |
 
+>The R1 2024 release will be the last release that supports .NET versions older than 6.0. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).
+
 ### Dependencies and Requirements
 
 To create .NET Core applications, you need to install the `.NET Core SDK`. Follow the instructions from the [official .NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/install/sdk?pivots=os-windows).
@@ -59,16 +61,16 @@ For a full list of the `.NET Core` requirements, see [.NET Core dependencies and
 * [SharePoint 2013](https://docs.microsoft.com/en-us/sharepoint/) and later.
 
 >As of the R3 2022 release, MVC 3 and MVC 4 are no longer supported by {{ site.product }}.
+>The R1 2024 release will be the last release that supports .NET Framework versions older than 4.6.2. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET Framework versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).  
 
 {% endif %}
-
-> Following [Microsoft's announcement about Internet Explorer (IE) being officially retired and out of support](https://learn.microsoft.com/en-us/lifecycle/announcements/internet-explorer-11-end-of-support), the {{ site.product }} and Kendo UI products will no longer support IE as of their R1 2023 release. The components will not be tested against and no fixes will be implemented for any IE version. If your project requires you to use the UI components in IE, it is recommended that you download a product version that is prior to {{ site.product }} R1 2023.
 
 ## Web Browsers Support
 
 The {{ site.product }} helpers and framework components deliver support for all popular browsers. However, depending on the specifics of your project, the components you use, and the versions of the helpers, their browser support may vary. For example, advanced component features usually require more recent browser versions.
 
 >To allow the browsers to run the scripts required by the Telerik components, enable JavaScript on all of them.
+> Following [Microsoft's announcement about Internet Explorer (IE) being officially retired and out of support](https://learn.microsoft.com/en-us/lifecycle/announcements/internet-explorer-11-end-of-support), the {{ site.product }} and Kendo UI products will no longer support IE as of their R1 2023 release. The components will not be tested against and no fixes will be implemented for any IE version. If your project requires you to use the UI components in IE, it is recommended that you download a product version that is prior to {{ site.product }} R1 2023.
 
 ### Regular Support
 

@@ -1142,7 +1142,6 @@ var __meta__ = {
             var that = this;
             var toolbarOptions = that.options.toolbar;
             var position = toolbarOptions.position || RIGHT;
-            var toolbarInsertion = position === BOTTOM ? "insertAfter" : "insertBefore";
             var tools = toolbarOptions.tools || [];
             var messages = that.options.messages;
 
@@ -1150,7 +1149,7 @@ var __meta__ = {
             that.wrapper.removeClass(TOOLBAR_POSITION_CLASS_NAMES.join(SPACE));
 
             if (tools.length && tools.length > 0) {
-                var toolbarElement = $(that.templates.toolbar)[toolbarInsertion](that._innerWrapper);
+                var toolbarElement = $(that.templates.toolbar).insertBefore(that._innerWrapper);
                 that.toolbar = new ToolBar(toolbarElement, extend({}, toolbarOptions, { listBox: that, messages: messages }));
                 that.wrapper.addClass(TOOLBAR_CLASS + DASH + position);
             }

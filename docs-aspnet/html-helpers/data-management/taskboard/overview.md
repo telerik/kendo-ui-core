@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about its features and how to initialize the component."
 slug: htmlhelpers_taskboard_aspnetcore_overview
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} TaskBoard Overview
@@ -14,7 +14,7 @@ The Telerik UI TaskBoard TagHelper and HtmlHelper for {{ site.framework }} are s
 The Telerik UI TaskBoard HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI TaskBoard widget.
 {% endif %}
 
-The {{ site.framework }} TaskBoard allows you to easily organize items and keep track of their state. The component provides a clean and user-friendly interface and enables you to manage tasks, notes, projects, people, or other kinds of items. The TaskBoard displays columns (lanes), which can represent different types of project/task statuses. Tasks are visualized as cards, which are easily customizable through templates. You can reorder cards within the columns, or drag and drop them onto another column.
+The {{ site.framework }} TaskBoard allows you to easily organize items and keep track of their state. The component provides a clean and user-friendly interface and enables you to manage tasks, notes, projects, people, or other kinds of items. The TaskBoard displays columns (lanes), which can represent different types of project/task statuses. Tasks are visualized as cards, which are customizable through templates. You can reorder cards within the columns, or drag and drop them onto another column.
 
 * [TaskBoard demos](https://demos.telerik.com/{{ site.platform }}/taskboard/index)
 
@@ -148,28 +148,36 @@ The following example demonstrates how to initialize the TaskBoard.
 
 ## Functionality and Features
 
+| Feature | Description |
+|---------|-------------|
+| [Data Binding]({% slug htmlhelpers_taskboard_aspnetcore_databinding %}) | The TaskBoard provides options for binding it to local and remote data. |
+| [Cards]({% slug htmlhelpers_taskboard_aspnetcore_cards %}) | The TaskBoard displays tasks, notes, projects, or other types of items as cards. |
+| [Columns]({% slug htmlhelpers_taskboard_aspnetcore_columns %}) | The TaskBoard displays cards grouped by criteria in columns (lanes). |
+| [Editing]({% slug htmlhelpers_taskboard_aspnetcore_editing %}) | The TaskBoard allows column and card editing. By default, editing in the TaskBoard is enabled for both columns and cards. |
+| [Resources]({% slug htmlhelpers_taskboard_aspnetcore_resources %}) | The component allows you to configure resources&mdash;optional metadata that can be associated with a card. |
+| [Search]({% slug htmlhelpers_taskboard_aspnetcore_search %}) | You can utilize a built-in search tool in the TaskBoard's toolbar that allows you to search through the cards data. |
+| [Templates]({% slug htmlhelpers_taskboard_aspnetcore_templates %}) | You are able to control the rendering of columns, cards, and popup headers with the use of [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview) or the [Template Component](https://docs.telerik.com/{{ site.platform }}/html-helpers/template/overview). |
+| [Toolbar]({% slug htmlhelpers_taskboard_aspnetcore_toolbar %}) | The built-in toolbar of the component allows you to use existing tools or to create new custom ones. |
+| [Accessibility]({% slug htmlhelpers_taskboard_aspnetcore_accessibility %}) | The TaskBoard is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Globalization]({% slug htmlhelpers_taskboard_aspnetcore_globalization %}) | The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support). |
+
+## Next Steps
+
+* [Getting Started with the TaskBoard]({% slug taskboard_aspnetcore_get_started %})
+* [Basic Usage of the TaskBoard HtmlHelper for {{site.framework}} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/index)
+{% if site.core %}
+* [Basic Usage of the TaskBoard TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/taskboard/tag-helper)
+{% endif %}
 * [Data Binding]({% slug htmlhelpers_taskboard_aspnetcore_databinding %})
-* [Cards]({% slug htmlhelpers_taskboard_aspnetcore_cards %})
-* [Columns]({% slug htmlhelpers_taskboard_aspnetcore_columns %})
-* [Editing]({% slug htmlhelpers_taskboard_aspnetcore_editing %})
-* [Resources]({% slug htmlhelpers_taskboard_aspnetcore_resources %})
-* [Search]({% slug htmlhelpers_taskboard_aspnetcore_search %})
-* [Templates]({% slug htmlhelpers_taskboard_aspnetcore_templates %})
-* [Toolbar]({% slug htmlhelpers_taskboard_aspnetcore_toolbar %})
-* [Accessibility]({% slug htmlhelpers_taskboard_aspnetcore_accessibility %})
-* [Globalization]({% slug htmlhelpers_taskboard_aspnetcore_globalization %})
-
-## Referencing Existing Instances
-
-To get a reference to an existing TaskBoard instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [TaskBoard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard#methods) to control its behavior.
-
-        $(document).ready(function() {
-            // The Name() of the TaskBoard is used to get its client-side instance.
-            var taskBoard = $("#taskBoard").data("kendoTaskBoard");
-        });
 
 ## See Also
 
-* [Overview of the TaskBoard (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/index)
-* [Data Binding]({% slug htmlhelpers_taskboard_aspnetcore_databinding %})
-* [JavaScript API Reference of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [Using the API of the TaskBoard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/api)
+* [Client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [Server-side API](/api/taskboard)
+{% if site.core %}
+* [Forum Discussions](https://www.telerik.com/forums/aspnet-core-ui?tagId=1735)
+{% else %}
+* [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=1736)
+{% endif %}
+* [Knowledge Base Section](/knowledge-base)

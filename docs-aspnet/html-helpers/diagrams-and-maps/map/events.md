@@ -368,5 +368,5 @@ The following example demonstrates how to subscribe to events by a template dele
 ## See Also
 
 * [Using the API of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/api)
-* [Map Server-Side API](/api/filter)
+* [Map Server-Side API](/api/map)
 * [Map Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/map)

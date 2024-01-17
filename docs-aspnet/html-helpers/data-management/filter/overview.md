@@ -161,7 +161,7 @@ public class SampleData
 
 ## Functionality and Features
 
-* [Setting the operators]({% slug htmlhelpers_filter_aspnetcore_choose_operators %})&mdash;You can defining which filter operators will be displayed in the filtering drop-down.
+* [Setting the operators]({% slug htmlhelpers_filter_aspnetcore_choose_operators %})&mdash;You can define which filter operators will be displayed in the filtering drop-down.
 * [Persisting the state]({% slug htmlhelpers_filter_aspnetcore_store_settings %})&mdash;The Filter enables you to store its filter expression and restore its state for the user.
 * [Globalization]({% slug globalization_filter_aspnetcore %})&mdash;The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
 

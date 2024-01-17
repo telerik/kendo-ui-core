@@ -418,13 +418,14 @@ var __meta__ = {
             if (that.visible()) {
                 wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).hide());
 
-                that.wrapper.removeClass("k-animation-container-shown");
                 that._toggleResize(false);
 
                 if (that._closing || that._trigger(CLOSE)) {
                     that._toggleResize(true);
                     return;
                 }
+
+                that.wrapper.removeClass("k-animation-container-shown");
 
                 // Close all inclusive popups.
                 that.element.find(".k-popup").each(function() {

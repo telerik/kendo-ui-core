@@ -641,7 +641,7 @@ var __meta__ = {
                     if (!composite) {
                         value = that.wrap(value, field, function() { return that; });
                     }
-                    if (!that._set(field, value) || field.indexOf("(") >= 0 || field.indexOf("[") >= 0) {
+                    if ((!that._set(field, value) || field.indexOf("(") >= 0 || field.indexOf("[") >= 0)) {
                         that.trigger(CHANGE, { field: field });
                     }
                 }

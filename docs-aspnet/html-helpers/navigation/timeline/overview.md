@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/overview
 slug: overview_htmlhelpers_timeline_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Timeline Overview
@@ -160,166 +160,6 @@ public class TimelineEventActionModel
 * [Images]({%slug images_htmlhelpers_timeline_aspnetcore %})
 * [Templates]({%slug templates_htmlhelpers_timeline_aspnetcore %})
 
-
-## Events
-
-For a complete example on the Timeline events, refer to the [demo on using the events of the Timeline in {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/timeline/events).
-
-You can provide an event handler through its [JavaScript function name](#handling-events-by-handler-name), or by [specifying an inline function in a template](#handling-events-by-template-delegate).
-
-### Handling Events by Handler Name
-
-The following example demonstrates how to subscribe to events by using a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-        .Name("Timeline")
-        .Events(ev =>
-         {
-            ev.Change("onChange");
-            ev.Navigate("onNavigate");
-            ev.DataBound("onDataBound");
-            ev.ActionClick("onActionClick");
-         })
-        .DataDateField("EventDate")
-        .DataDescriptionField("Description")
-        .DataSubTitleField("Subtitle")
-        .DataTitleField("Title")
-        .DataImagesField("Images")
-        .DataActionsField("Actions")
-        .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
-    )
-
-    <script>
-        function onChange(e) {
-                    console.log("OnChange: " + e.dataItem.Title);
-                }
-
-                function onNavigate(e) {
-                    console.log("OnNavigate: " + e.action);
-                }
-
-                function onActionClick(e) {
-                    console.log("OnActionClick: " + e.element.text());
-                }
-
-                function onDataBound(e) {
-                    console.log("OnDataBound: " + e.sender.dataSource.view().length);
-                }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-timeline name="Timeline"
-                    datadatefield="EventDate"
-                    datatitlefield="Title"
-                    datasubtitlefield="Subtitle"
-                    datadescriptionfield="Description"
-                    dataactionsfield="Actions"
-                    dataimagesfield="Images"
-                    on-change="onChange"
-                    on-navigate="onNavigate"
-                    on-data-bound="onDataBound"
-                    on-action-click="onActionClick">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("GetTimelineData", "Timeline")" />
-            </transport>
-            <schema>
-                <model>
-                    <fields>
-                        <field name="EventDate" type="date"></field>
-                        <field name="Title" type="string"></field>
-                        <field name="Subtitle" type="string"></field>
-                        <field name="Description" type="string"></field>
-                    </fields>
-                </model>
-            </schema>
-        </datasource>
-    </kendo-timeline>
-
-    <script>
-        function onChange(e) {
-                    console.log("OnChange: " + e.dataItem.Title);
-                }
-
-                function onNavigate(e) {
-                    console.log("OnNavigate: " + e.action);
-                }
-
-                function onActionClick(e) {
-                    console.log("OnActionClick: " + e.element.text());
-                }
-
-                function onDataBound(e) {
-                    console.log("OnDataBound: " + e.sender.dataSource.view().length);
-                }
-    </script>
-```
-{% endif %}
-
-### Handling Events by Template Delegate
-
-The following example demonstrates how to subscribe to events by using a template delegate.
-
-```HtmlHelper
-@(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-    .Name("Timeline")
-    .Events(e =>
-        e.Change(@<text>
-            function(e) {
-                // Handle the Change event inline.
-            }
-        </text>)
-       .Navigate(@<text>
-            function(e) {
-                // Handle the Navigate event inline.
-            }
-        </text>)
-     )
-    .DataDateField("EventDate")
-    .DataDescriptionField("Description")
-    .DataSubTitleField("Subtitle")
-    .DataTitleField("Title")
-    .DataImagesField("Images")
-    .DataActionsField("Actions")
-    .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
-)
-```
-{% if site.core %}
-```TagHelper
-    <kendo-timeline name="Timeline"
-                    datadatefield="EventDate"
-                    datatitlefield="Title"
-                    datasubtitlefield="Subtitle"
-                    datadescriptionfield="Description"
-                    dataactionsfield="Actions"
-                    dataimagesfield="Images"
-                    on-change="function(e){
-                        // Handle the Change event inline.
-                    }"
-                    on-navigate="function(e) {
-                        // Handle the Navigate event inline.
-                    }">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("GetTimelineData", "Timeline")" />
-            </transport>
-            <schema>
-                <model>
-                    <fields>
-                        <field name="EventDate" type="date"></field>
-                        <field name="Title" type="string"></field>
-                        <field name="Subtitle" type="string"></field>
-                        <field name="Description" type="string"></field>
-                    </fields>
-                </model>
-            </schema>
-        </datasource>
-    </kendo-timeline>
-```
-{% endif %}
-
 ## Referencing Existing Instances
 
 To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
@@ -383,6 +223,11 @@ To access an existing Timeline instance, use the `.data()` jQuery method, execut
     </script>
 ```
 {% endif %}
+
+## Next Steps
+* [Getting Started with the Timeline]({% slug aspnetcore_timeline_getting_started %})
+* [Basic Usage of the Timeline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/index)
+* [Timeline Events]({% slug events_timeline_aspnetcore %})
 
 ## See Also
 

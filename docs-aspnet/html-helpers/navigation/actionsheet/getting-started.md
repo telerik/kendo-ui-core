@@ -79,7 +79,7 @@ Use the ActionSheet HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 
 ## 3. Configure the Card and the Button
 
-The next step is to define the Card and the Button components—the ActionSheet will be displayed on top of the Card when the Button is clicked. 
+The next step is to define the Card and the Button components—the ActionSheet will be displayed on top of the Card when the Button is clicked.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -91,7 +91,7 @@ The next step is to define the Card and the Button components—the ActionSheet 
                     <h5 class="k-card-title">Rome</h5>
                     <h6 class="k-card-subtitle">Capital of Italy</h6>
                 </div>
-                <img class="k-card-image" alt="Telerik UI for ASP.NET Core ActionSheet Rome" src="~/shared/web/cards/rome.jpg" />
+                <img class="k-card-media" alt="Telerik UI for ASP.NET Core ActionSheet Rome" src="~/shared/web/cards/rome.jpg" />
                 <div class="k-card-body">
                     <p>Rome is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display.</p>
                     <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
@@ -127,7 +127,7 @@ The next step is to define the Card and the Button components—the ActionSheet 
                     <h5 class="k-card-title">Rome</h5>
                     <h6 class="k-card-subtitle">Capital of Italy</h6>
                 </div>
-                <img class="k-card-image" alt="Telerik UI for ASP.NET Core ActionSheet Rome" src="~/shared/web/cards/rome.jpg" />
+                <img class="k-card-media" alt="Telerik UI for ASP.NET Core ActionSheet Rome" src="~/shared/web/cards/rome.jpg" />
                 <div class="k-card-body">
                     <p>Rome is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display.</p>
                     <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>

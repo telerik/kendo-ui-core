@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI LinearGauge component for {{ site.framework }}."
 previous_url: /helpers/gauges/lineargauge/overview
 slug: overview_lineargaugehelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} LinearGauge Overview
@@ -93,22 +93,17 @@ The LinearGauge configuration options are passed as attributes.
 ```
 {% endif %}
 
-## Referencing Existing Instances
+## Functionality and Features
 
-To reference an existing Telerik UI LinearGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+* [Scale](https://docs.telerik.com/aspnet-core/html-helpers/gauges/lineargauge/scale)—The component's scale configuration renders the values, pointers and label.
+* [Pointers](https://docs.telerik.com/aspnet-core/html-helpers/gauges/lineargauge/pointers)—The `Pointers`` configuration controls the values that will be marked on the scale.
+* [Export](https://docs.telerik.com/aspnet-core/html-helpers/gauges/lineargauge/export)—You can export the LinearGauge to a PDF, raster or vector image.
 
-        // Place the following after the LinearGauge for {{ site.framework }} declaration.
-        <script>
-        $(function() {
-        // The Name() of the LinearGauge is used to get its client-side instance.
-            var gauge = $("#linearGauge").data("kendoLinearGauge");
-        });
-        </script>
+## Next Steps
+
+* [Getting Started with the LinearGauge]({% slug lineargauge_getting_started %})
+* [Basic Usage of the LinearGauge HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/linear-gauge/index)
 
 ## See Also
 
-* [Basic Usage of the LinearGauge HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/linear-gauge/index)
-{% if site.core %}
-* [Basic Usage of the LinearGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/tag-helper)
-{% endif %}
-* [Server-Side API](/api/lineargauge)
+* [Knowledge Base Section](/knowledge-base)

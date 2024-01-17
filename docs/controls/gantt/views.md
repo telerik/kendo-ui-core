@@ -15,6 +15,7 @@ The Gantt supports the following views:
 - `day`&mdash;The timeline is divided into separate days and hours.
 - `week`&mdash;The timeline is divided into weeks and days.
 - `month`&mdash;The timeline is divided into months and weeks.
+- `year`&mdash;The timeline is divided into months.
 
 To enable, disable, or further configure individual views, use the [`views`](/api/web/gantt#configuration-views) option.
 
@@ -26,7 +27,8 @@ The following example demonstrates how to enable all scheduler views.
       views: [
         "day", // A view configuration can be a string (the view type) or an object (the view configuration).
         { type: "week", selected: true }, // The Week view will appear as initially selected.
-        "month"
+        "month",
+        "year"
       ],
       dataSource: [
         {

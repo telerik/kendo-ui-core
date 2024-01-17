@@ -8,7 +8,7 @@ position: 4
 
 # Columns
 
-The TaskBoard displays cards grouped by certain criteria in columns (lanes). Different aspects of the columns such as column width, the use of templates, the buttons rendered in the columns, etc., can be controlled through the `ColumnSettings` configuration. It has effect over all columns. 
+The TaskBoard displays cards grouped by specific criteria in columns (lanes). Different aspects of the columns such as column width, the buttons rendered in the columns, and others can be controlled through the `ColumnSettings` configuration. The `ColumnSettings` configuration affects all columns. 
 
 ## Column Settings
 

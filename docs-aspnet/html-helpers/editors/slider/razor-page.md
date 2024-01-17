@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Slider component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_slider_razorpage_aspnetcore
-position: 2
+position: 3
 ---
 
 # Slider in Razor Pages

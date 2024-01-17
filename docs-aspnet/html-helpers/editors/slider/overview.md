@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI Slider for {{ site.framework }}."
 previous_url: /helpers/editors/slider/overview
 slug: overview_sliderhelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Slider Overview
@@ -62,7 +62,7 @@ The following example demonstrates how to how to define the Slider.
 
 ## Basic Configuration
 
-The Slider configuration options are passed as attributes.
+The Slider configuration options are passed as attributes. The following example demonstrates the basic configuration for the Slider component.
 
 ```HtmlHelper
     @(Html.Kendo().Slider()
@@ -89,94 +89,21 @@ The Slider configuration options are passed as attributes.
 ```
 {% endif %}
 
+## Functionality and Features
 
-## Events
+* [Appearance]({% slug slider_appearance %})&mdash;Use different configuration settings that control the styling of the component.
+* [Events]({% slug events_slider %})&mdash;Handle the component events and implement any custom functionality.
+* [Accessibility](https://demos.telerik.com/{{ site.platform }}/slider/keyboard-navigation)&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
-You can subscribe to all Slider events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/{{ site.platform }}/slider/events).
+## Next Steps
 
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    @(Html.Kendo().Slider()
-          .Name("slider")
-          .Events(e => e
-                .Change("change")
-                .Slide("slide")
-          )
-    )
-    <script>
-        function change(e) {
-            // Handle the change event.
-        }
-
-        function slide(e) {
-            // Handle the slide event.
-        }
-    </script>
-```
+* [Getting Started with the Slider]({% slug slider_getting_started %})
+* [Basic Usage of the Slider HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider)
 {% if site.core %}
-```TagHelper
-    <kendo-slider name="slider"
-        on-change="change"
-        on-slide="slide"
-    </kendo-slider>
-    <script>
-        function change(e) {
-            // Handle the change event.
-        }
-
-        function slide(e) {
-            // Handle the slide event.
-        }
-    </script>
-```
+* [Basic Usage of the Slider TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/tag-helper)
 {% endif %}
-
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-```HtmlHelper
-    @(Html.Kendo().Slider()
-        .Name("slider")
-        .Events(e => e
-            .Change(@<text>
-              function(e) {
-                  // Handle the change event inline.
-              }
-            </text>)
-            .Slide(@<text>
-              function(e) {
-                  // Handle the slide event inline.
-              }
-              </text>)
-        )
-    )
-```
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI Slider for {{ site.framework }} declaration.
-    <script>
-        $(function() {
-            // The Name() of the Slider is used to get its client-side instance.
-            var slider = $("#slider").data("kendoSlider");
-        });
-    </script>
-```
 
 ## See Also
 
-* [Basic Usage by the Slider HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider)
-{% if site.core %}
-* [Basic Usage of the Slider TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/tag-helper)
-* [Slider in Razor Pages]({% slug htmlhelpers_slider_razorpage_aspnetcore %})
-{% endif %}
-* [Using the API of the Slider HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider/api)
-* [Server-Side API](/api/slider)
+* [Using the API of the Slider for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider/api)
+* [Knowledge Base Section](/knowledge-base)

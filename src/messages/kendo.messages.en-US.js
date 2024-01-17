@@ -1244,6 +1244,8 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
 if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
+  "nameBox": "Name Box",
+  "formulaInput": "Formula Input",
   "errors": {
     "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet.",
     "filterRangeContainingMerges": "Cannot create a filter within a range containing merges",

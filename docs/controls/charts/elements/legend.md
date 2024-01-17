@@ -78,6 +78,65 @@ To exclude series from the legend, set their [`visibleInLegend`](/api/javascript
     });
     </script>
 
+## Configuring the Legend Items
+
+The legend item types and settings are derived from the series configuration.
+
+To customize the legend item for each series, use the series [`legendItem`](/api/javascript/dataviz/ui/chart/configuration/series.legendItem) options.
+
+The following example shows how to customize the Legend Item of a given series:
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        name: "Fibonacci",
+        type: "line",
+        data: [1, 2, 3, 5],
+        markers: { type: 'square' }
+      }, {
+        name: "Squares",
+        type: "line",
+        data: [0, 1, 4, 9],
+        legendItem: {
+          type: 'area',
+          area: {
+            opacity: 0.5
+          }
+        }
+      }]
+    });
+    </script>
+
+
+To configure the legend items for all series, use the legend [`seriesDefaults.legendItem`](/api/javascript/dataviz/ui/chart/configuration/seriesDefaults.legendItem) option.
+
+The following example shows how to set the legend items for all series:
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        name: "Fibonacci",
+        type: "line",
+        data: [1, 2, 3, 5],
+        markers: { type: 'square' }
+      }, {
+        name: "Squares",
+        type: "line",
+        data: [0, 1, 4, 9]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          type: 'area',
+          area: {
+            opacity: 0.5
+          }
+        }
+      }
+    });
+    </script>
+
 ## Customizing the Position
 
 To control the position of the legend, use any of the following supported `position` values:

@@ -12,6 +12,7 @@ The TextArea converts a `<textarea>` element into a styled textarea.
 
 ![Kendo UI for jQuery TextArea Overview](textarea-overview.png)
 
+> The TextArea component is available as of [`Kendo UI R3 2020`](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2020) release.
 
 ## Functionality and Features
 

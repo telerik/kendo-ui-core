@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI ScrollView for {{ site.framework }}."
 previous_url: /helpers/media/scrollview/overview
 slug: htmlhelpers_scrollview_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} ScrollView Overview
@@ -240,8 +240,9 @@ To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()
     </script>
 ```
 
-## See Also
+## Next Steps
 
+* [Getting Started with the ScrollView]({% slug aspnetcore_scrollview_getting_started %})
 * [Basic Usage of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/index)
 {% if site.core %}
 * [Basic Usage of the ScrollView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)

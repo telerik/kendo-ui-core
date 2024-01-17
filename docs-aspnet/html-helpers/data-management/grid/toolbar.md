@@ -16,8 +16,10 @@ You can configure the Toolbar and include any of the built-in commands:
 
 ```HtmlHelper
     .ToolBar(toolbar=> {
+        toolbar.Columns();
         toolbar.Create();
         toolbar.Save();
+        toolbar.Paste();
         toolbar.Pdf();
         toolbar.Excel();
         toolbar.Search();
@@ -28,8 +30,10 @@ You can configure the Toolbar and include any of the built-in commands:
 {% if site.core %}
 ```TagHelper
     <toolbar>
+        <toolbar-button name="columns"></toolbar-button> 
         <toolbar-button name="create"></toolbar-button> 
         <toolbar-button name="save"></toolbar-button> 
+        <toolbar-button name="paste"></toolbar-button>
         <toolbar-button name="pdf"></toolbar-button>
         <toolbar-button name="excel"></toolbar-button>
         <toolbar-button name="search"></toolbar-button>
@@ -42,8 +46,10 @@ You can configure the Toolbar and include any of the built-in commands:
 
 | Command | Description | Resources|
 |---|---|---|
+| Columns | Displays a global column menu. | [Column menu documentation]({% slug columnmenu_aspnet_grid %}#global-column-menu) |
 | Create | Adds an empty data item to the grid.| [Editing functionality documentation]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}) |
 | Save | Persists any data changes done by the end user.|[Editing functionality documentation]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}) |
+| Paste | Enables the built-in paste operations.| [Clipboard documentation]({% slug htmlhelpers_grid_clipboard %})|
 | Pdf | Exports the grid data in PDF format.| [PDF Export documentation]({% slug pdfexport_gridhelper_aspnetcore %})|
 | Excel | Exports the grid data in MS Excel format.| [Excel Export documentation]({% slug excelexport_gridhelper_aspnetcore %})|
 | Search | Adds the built-in search panel for the Grid.| [Search Panel documentation]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})|

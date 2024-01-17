@@ -8263,19 +8263,385 @@ The fields which can be used in the template are:
 
 ### legend.item `Object`
 
-The chart legend item configuration.
+The configuration of the Chart legend item.
+
+To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/chart#configuration-series.legendItem) settings of the series.
+
+#### Example - disable highlight of legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        data: [4, 5, 6]
+      }],
+      legend: {
+        item: {
+          highlight: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+#### Example - display legacy style markers in the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+          /* Use these settings to emulate the legacy legend item rendering */
+          legendItem: {
+              type: 'line',
+              line: {
+                  dashType: 'solid',
+              },
+              markers: {
+                  visible: false
+              },
+              highlight: {
+                  visible: false
+              }
+          },
+      }
+    });
+    </script>
+
+### legend.item.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "area",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "area",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      legend: {
+        item: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### legend.item.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
 
 ### legend.item.cursor `String`
 The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### legend.item.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### legend.item.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### legend.item.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### legend.item.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### legend.item.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### legend.item.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### legend.item.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### legend.item.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### legend.item.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### legend.item.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### legend.item.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      legend: {
+        item: {
+          line: {
+            color: "#777",
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### legend.item.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### legend.item.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: "green"
+        },
+        data: [1, 2, 3]
+      }],
+      legend: {
+        item: {
+          markers: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### legend.item.markers.border `Object|Function`
+
+The border of the markers.
+
+### legend.item.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### legend.item.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### legend.item.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### legend.item.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### legend.item.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          name: "Series A",
+          data: [1, 2, 3]
+        }],
+        legend: {
+          position: "bottom",
+          item: {
+            markers: {
+              visual: function (e) {
+                var origin = e.rect.origin;
+                var center = e.rect.center();
+                var bottomRight = e.rect.bottomRight();
+
+                var path = new kendo.drawing.Path({
+                  fill: {
+                    color: e.options.border.color
+                  }
+                })
+                .moveTo(origin.x, bottomRight.y)
+                .lineTo(bottomRight.x, bottomRight.y)
+                .lineTo(center.x, origin.y)
+                .close();
+
+                return path;
+              }
+            }
+          }
+        }
+      });
+    </script>
+
+### legend.item.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
 
 ### legend.item.visual `Function`
 
 A function that can be used to create a custom visual for the legend items. The available argument fields are:
 
-* options - the item options.
-* createVisual - a function that can be used to get the default visual.
-* series - the item series.
-* pointIndex - the index of the point in the series. Available for pie, donut, pyramid and funnel series.
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
 
 #### Example - using custom visual for the legend items
 
@@ -13238,7 +13604,7 @@ The data item field which contains the series value. **The field name should be 
 
 The name of the parent series of the trendline.
 
-> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" or "movingAverageTrendline".
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
 
 #### Example - set the trendline parent series fromField
 
@@ -13326,7 +13692,7 @@ The data item field which contains the series to value.
 
 The trendline configuration options.
 
-> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" or "movingAverageTrendline".
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
 
 #### Example - set the trendline options
 
@@ -13373,7 +13739,7 @@ The trendline configuration options.
 
 The trendline forecast settings. By default, the trendline does not display a forecast.
 
-> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline" and the parent series are either date series, "scatter" or "scatterLine" series.
+> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
 
 #### Example - set the trendline forecast
 
@@ -14639,6 +15005,43 @@ The supported values for "funnel" and "pyramid" are:
     });
     </script>
 
+### series.labels.ariaTemplate `String | Function`
+
+The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+
+The fields which can be used in the template are:
+
+*   category - the category name. Available for area, bar, column, bubble, donut, line and pie series.
+*   dataItem - the original data item used to construct the point. Will be null if binding to array.
+*   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
+*   series - the data series
+*   value - the point value. Can be a number or object containing each bound field.
+
+#### Example
+
+```pseudo
+    $("#chart").kendoChart({
+         title: {
+             text: "My Chart Title"
+         },
+         series: [
+             {
+                 type: "area",
+                 name: "Series 1",
+                 data: [200, 450, 300, 125],
+                 labels: {
+                     template: "#= value #%",
+                     ariaTemplate: "The value for #= series.name # in #= category # is #= value #",
+                     visible: true
+                 }
+             }
+         ],
+         categoryAxis: {
+             categories: [2000, 2001, 2002, 2003]
+         }
+    });
+```
+
 ### series.labels.background `String|Function`
 
 The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
@@ -15484,6 +15887,383 @@ The fields which can be used in the template are:
 
 If set to `true` the chart will display the series **to** labels. By default chart series **to** labels are not displayed.
 
+### series.legendItem `Object`
+
+The configuration of the Chart legend item for this series.
+
+#### Example - override the legend item type for the series
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          type: "area"
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series A",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        legendItem: {
+          type: "area"
+        },
+        data: [4, 5, 6]
+      }]
+    });
+    </script>
+
+### series.legendItem.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "area",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "area",
+        name: "Series B",
+        data: [4, 5, 6],
+        legendItem: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.legendItem.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### series.legendItem.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
+
+### series.legendItem.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### series.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### series.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### series.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### series.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### series.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### series.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### series.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### series.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### series.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### series.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### series.legendItem.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series B",
+        data: [4, 5, 6],
+        legendItem: {
+          line: {
+            color: "#777",
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.legendItem.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### series.legendItem.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### series.legendItem.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: "green"
+        },
+        data: [1, 2, 3],
+        legendItem: {
+          markers: {
+            visible: false
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.legendItem.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### series.legendItem.markers.border `Object|Function`
+
+The border of the markers.
+
+### series.legendItem.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### series.legendItem.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### series.legendItem.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### series.legendItem.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### series.legendItem.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          name: "Series A",
+          data: [1, 2, 3],
+          legendItem: {
+            markers: {
+              visual: function (e) {
+                var origin = e.rect.origin;
+                var center = e.rect.center();
+                var bottomRight = e.rect.bottomRight();
+
+                var path = new kendo.drawing.Path({
+                  fill: {
+                    color: e.options.border.color
+                  }
+                })
+                .moveTo(origin.x, bottomRight.y)
+                .lineTo(bottomRight.x, bottomRight.y)
+                .lineTo(center.x, origin.y)
+                .close();
+
+                return path;
+              }
+            }
+          }
+        }]
+      });
+    </script>
+
+### series.legendItem.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
+
+### series.legendItem.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            name: "Series 1",
+            data: [1, 2, 3],
+            legendItem: {
+              visual: function (e) {
+                var color = e.options.markers.background;
+                var labelColor = e.options.labels.color;
+                var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+                var layout = new kendo.drawing.Layout(rect, {
+                  spacing: 5,
+                  alignItems: "center"
+                });
+
+                var marker = new kendo.drawing.Path({
+                  fill: {
+                    color: color
+                  }
+                }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+                var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                  fill: {
+                    color: labelColor
+                  }
+                });
+
+                layout.append(marker, label);
+                layout.reflow()
+
+                return layout;
+              }
+            }
+          }
+        ]
+      });
+    </script>
+
 ### series.line `String|Object`
 
 The chart line configuration options.
@@ -15614,7 +16394,10 @@ The data field containing the low value.
       series: [
         {
           type: "candlestick",
-          lowField: "lowPrice",
+          openField: "open",
+          closeField: "lowPrice",
+          lowField: "low",
+          highField: "high",
           data: [
             { open: 1, high: 2, low: 0.5, lowPrice: 1.5},
             { open: 2, high: 3, low: 1, lowPrice: 1.5}
@@ -17606,6 +18389,9 @@ The supported values are:
 * [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
 * [`line`](/controls/charts/chart-types/line-charts)
 * [`linearTrendline`](/controls/charts/elements/trendlines)
+* [`exponentialTrendline`](/controls/charts/elements/trendlines)
+* [`logarithmicTrendline`](/controls/charts/elements/trendlines)
+* [`powerTrendline`](/controls/charts/elements/trendlines)
 * [`movingAverageTrendline`](/controls/charts/elements/trendlines)
 * [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)
@@ -19009,6 +19795,45 @@ The chart series label configuration.
     });
     </script>
 
+### seriesDefaults.labels.ariaTemplate `String | Function`
+
+The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+
+The fields which can be used in the template are:
+
+*   category - the category name. Available for area, bar, column, bubble, donut, line and pie series.
+*   dataItem - the original data item used to construct the point. Will be null if binding to array.
+*   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
+*   series - the data series
+*   value - the point value. Can be a number or object containing each bound field.
+
+#### Example
+
+```pseudo
+    $("#chart").kendoChart({
+         title: {
+             text: "My Chart Title"
+         },
+         seriesDefaults: {
+              type: "area",
+              labels: {
+                  template: "#= value #%",
+                  ariaTemplate: "The value for #= series.name # in #= category # is #= value #",
+                  visible: true
+              }
+          },
+         series: [
+             {
+                 name: "Series 1",
+                 data: [200, 450, 300, 125]
+             }
+         ],
+         categoryAxis: {
+             categories: [2000, 2001, 2002, 2003]
+         }
+    });
+```
+
 ### seriesDefaults.labels.background `String`
 
 The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
@@ -19829,6 +20654,392 @@ The line chart series options. Accepts all values supported by the [series](/api
         data: [1, 2]
       }]
     });
+    </script>
+
+### seriesDefaults.legendItem `Object`
+
+The configuration of the Chart legend item for this series.
+
+#### Example - override the legend item type for the series
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        markers: {
+          visible: true
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series A",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          type: "area"
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "area",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "area",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          area: {
+            opacity: 0.1
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### seriesDefaults.legendItem.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
+
+### seriesDefaults.legendItem.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### seriesDefaults.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### seriesDefaults.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### seriesDefaults.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### seriesDefaults.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### seriesDefaults.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### seriesDefaults.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### seriesDefaults.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### seriesDefaults.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### seriesDefaults.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### seriesDefaults.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### seriesDefaults.legendItem.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          line: {
+            color: "#777"
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### seriesDefaults.legendItem.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### seriesDefaults.legendItem.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: "green"
+        },
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          markers: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### seriesDefaults.legendItem.markers.border `Object|Function`
+
+The border of the markers.
+
+### seriesDefaults.legendItem.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### seriesDefaults.legendItem.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### seriesDefaults.legendItem.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### seriesDefaults.legendItem.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### seriesDefaults.legendItem.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          name: "Series A",
+          data: [1, 2, 3]
+        }],
+        seriesDefaults: {
+          legendItem: {
+            markers: {
+              visual: function (e) {
+                var origin = e.rect.origin;
+                var center = e.rect.center();
+                var bottomRight = e.rect.bottomRight();
+
+                var path = new kendo.drawing.Path({
+                  fill: {
+                    color: e.options.border.color
+                  }
+                })
+                .moveTo(origin.x, bottomRight.y)
+                .lineTo(bottomRight.x, bottomRight.y)
+                .lineTo(center.x, origin.y)
+                .close();
+
+                return path;
+              }
+            }
+          }
+        }
+      });
+    </script>
+
+### seriesDefaults.legendItem.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
+
+### seriesDefaults.legendItem.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            name: "Series 1",
+            data: [1, 2, 3]
+          }
+        ],
+        seriesDefaults: {
+          legendItem: {
+            visual: function (e) {
+              var color = e.options.markers.background;
+              var labelColor = e.options.labels.color;
+              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+              var layout = new kendo.drawing.Layout(rect, {
+                spacing: 5,
+                alignItems: "center"
+              });
+
+              var marker = new kendo.drawing.Path({
+                fill: {
+                  color: color
+                }
+              }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+              var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                fill: {
+                  color: labelColor
+                }
+              });
+
+              layout.append(marker, label);
+              layout.reflow()
+
+              return layout;
+            }
+          }
+        }
+      });
     </script>
 
 ### seriesDefaults.ohlc `Object`
@@ -22090,6 +23301,29 @@ The text color of the title. Accepts a valid CSS color string, including hex and
       series: [{
          data: [1, 2, 3]
       }]
+    });
+    </script>
+
+### title.description `String`
+
+The accessible description of the Chart. The description is announced by screen readers when the Chart is focused.
+
+#### Example - set the chart description
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Fibonacci numbers"
+        description: "A column chart displaying the first 10 Fibonacci numbers",
+        position: "bottom"
+      },
+      series: [
+        {
+          type: 'column',
+          data: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+        }
+      ]
     });
     </script>
 

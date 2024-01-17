@@ -990,6 +990,11 @@
             assert.deepEqual(result, new Date(2023, 6, 21, 3, 1, 0));
         });
 
+        it("parseDate works correctly with cultures that include dots", function() {
+            var result = parse("21.07.2023", "dd.MM.yyyy", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21));
+        });
+
         it("parseExact method parses date string with UTC 'Z' zone designator", function() {
             var utcDate = new Date(Date.UTC(2014, 4, 21, 0, 0, 0));
             var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz");

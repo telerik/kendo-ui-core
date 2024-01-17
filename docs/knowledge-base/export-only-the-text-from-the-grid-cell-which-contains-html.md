@@ -17,18 +17,6 @@ component: grid
   <td>Product</td>
   <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 7 64bit</td>
- </tr>
- <tr>
-  <td>Browser</td>
-  <td>IE For PC</td>
- </tr>
- <tr>
-  <td>Browser Version</td>
-  <td>Version 11.0.9600.18537</td>
- </tr>
 </table>
 
 ## Description
@@ -41,4 +29,61 @@ How can I avoid the display of HTML content in the output Excel file and show ju
 
 Configure the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event by setting only the text value to the cells with jQuery.
 
-For the full implementation of the solution, refer to [this Dojo](https://dojo.telerik.com/EtESI).
+```dojo
+    <style>
+      .k-grouping-row{
+        color:red;
+        text-align: right;
+      }
+    </style>
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        excelExport:function(e){
+          var rows = e.workbook.sheets[0].rows;
+
+          for (var ri = 0; ri < rows.length; ri++) {
+            var row = rows[ri];
+
+            for (var ci = 0; ci < row.cells.length; ci++) {
+              var cell = row.cells[ci];
+              if (cell.value && ($(cell.value).text() != "")) {
+                // Use jQuery.fn.text to remove the HTML and get only the text
+                cell.value = $(cell.value).text();
+                // Set the alignment
+                cell.hAlign = "right";
+              }
+            }
+          }
+        },
+        groupable:true,
+        toolbar: ["excel"],
+        excel: {
+          filterable: false
+        },
+        columns: [
+          { field: "name",
+           groupHeaderTemplate:'<span style="float:right">#= value # kk</span>',
+           footerTemplate: "<div style='float:right'>Count: #: count #</div>  "
+          },
+          { field: "age",
+           footerTemplate: "<div>Min: #: min #</div><div>Max: #: max #</div>"
+          }
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+          ],
+          group:[
+            {field:'name'}
+          ],
+          aggregate: [
+            { field: "name", aggregate: "count" },
+            { field: "age", aggregate: "min" },
+            { field: "age", aggregate: "max" }
+          ]
+        }
+      });
+    </script>
+```

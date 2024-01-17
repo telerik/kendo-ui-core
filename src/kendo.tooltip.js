@@ -242,6 +242,14 @@ var __meta__ = {
             return this.options.showOn && this.options.showOn.match(/click/);
         },
 
+        _recalculatePopupDimensions: function() {
+            var that = this;
+            that.popup.wrapper.css("height", kendo._outerHeight(that.popup.element) + "px");
+            that.popup.wrapper.css("width", kendo._outerWidth(that.popup.element) + "px");
+            that.popup.position();
+            that._positionCallout();
+        },
+
         _positionCallout: function() {
             var that = this,
                 position = that.options.position,
@@ -439,6 +447,27 @@ var __meta__ = {
             }
         },
 
+        _verifyContentLoaded() {
+            var that = this,
+                content = that.content,
+                resources = content.find('[src]'),
+                length = resources.length,
+                loaded = 0;
+
+                if (length === 0) {
+                    that._recalculatePopupDimensions();
+                    return;
+                }
+
+                resources.on('load', function() {
+                    loaded++;
+
+                  if (length === loaded) {
+                    that._recalculatePopupDimensions();
+                  }
+                });
+        },
+
         _ajaxRequest: function(options) {
             var that = this,
                 successFn = function(data) {
@@ -446,11 +475,7 @@ var __meta__ = {
 
                     that.content.html(data);
 
-                    if (kendo._outerHeight(that.popup.element) > kendo._outerHeight(that.popup.wrapper)) {
-                        that.popup.wrapper.css("height", kendo._outerHeight(that.popup.element) + "px");
-                        that.popup.position();
-                        that._positionCallout();
-                    }
+                    that._verifyContentLoaded();
 
                     that.trigger(CONTENTLOAD);
                 };
@@ -461,6 +486,8 @@ var __meta__ = {
                 cache: false,
                 error: function(xhr, status) {
                     kendo.ui.progress(that.content, false);
+
+                    that._recalculatePopupDimensions();
 
                     that.trigger(ERROR, { status: status, xhr: xhr });
                 },

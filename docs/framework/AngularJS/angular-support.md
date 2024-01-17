@@ -6,11 +6,29 @@ slug: supportedversions_kendoui
 position: 6
 ---
 
-# AngularJS Support
+## KendoUI for AngularJS Support Status
 
-> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. 
-> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+R1 2022 was the last release where the Kendo UI team added logic around the jQuery components to offer features for AngularJS 1.x and the last release with official support for AngularJS 1.x.
 
+**This does not impact Kendo UI for Angular (2+)**, which will continue to be developed and follow the official Angular LTS schedule.
+
+More information can be found here=> [Kendo UI and AngularJS 1.x Support End of Life Plans (telerik.com)](https://www.telerik.com/blogs/kendo-ui-angularjs-1.x-support-end-life-plans)
+
+### AngularJS officially deprecated as of January 2022
+
+Google announced that code will remain accessible on [GitHub](https://github.com/angular/angular.js), [npm](https://www.npmjs.com/package/angular), [Bower](https://github.com/angular/bower-angular) and [Release archive](https://code.angularjs.org/1.8.2), however the GitHub repository will be archived (no new issues or pull requests can be submitted).
+
+See [https://goo.gle/angularjs-end-of-life](https://goo.gle/angularjs-end-of-life) for the full details.
+
+Visit [angular.dev](https://angular.dev/reference/releases#deprecation-policy) for the actively supported Angular.
+
+## Extended Long Term Support
+
+If you need extended support for deprecated versions of Angular, you should consider:
+
+[HeroDevs](https://www.herodevs.com/support)
+
+## Usage of AngularJS Directives
 To activate the AngularJS directives, install the AngularJS library. Just like jQuery, the minified format of the AngularJS library is located is in the `js` directory of the downloaded Kendo UI bundle.
 
 > * Unlike their dependency on jQuery, the Kendo UI distributions can function correctly without AngularJS.

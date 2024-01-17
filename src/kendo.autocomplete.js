@@ -472,14 +472,18 @@ var __meta__ = {
 
         _clearText: $.noop,
 
-        _resetFocusItem: function() {
+        _highlightFirst: function() {
             var index = this.options.highlightFirst ? 0 : -1;
 
+            this.listView.focus(index);
+        },
+
+        _resetFocusItem: function() {
             if (this.options.virtual) {
                 this.listView.scrollTo(0);
             }
 
-            this.listView.focus(index);
+            this._highlightFirst();
         },
 
         _listBound: function() {
@@ -505,6 +509,8 @@ var __meta__ = {
                 if (options.suggest && isActive && that._inputValue()) {
                     that.suggest(data[0]);
                 }
+
+                that._highlightFirst();
             }
 
             if (that._open) {

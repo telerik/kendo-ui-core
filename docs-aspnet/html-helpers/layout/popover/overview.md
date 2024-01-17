@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: Overview
-description: "Get started with the Telerik UI PopOver component for {{ site.framework }} and learn how to initialize and configure it."
+description: "Discover the Telerik UI for {{ site.framework }} PopOver component and its features like custom action buttons and built-in customization options."
 slug: htmlhelpers_overview_popover
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} PopOver Overview
@@ -168,12 +168,21 @@ To reference an existing PopOver instance, use the [`jQuery.data()`](https://api
     </script>
 ```
 
-## See Also
+## Functionality and Features
 
+* [Templates]({% slug htmlhelpers_templates_popover %})—The Popover allows you to use the Header and Body options to customize the component content.
+* [Events]({% slug events_popover %})—The PopOver emits events that allow you to implement custom functionality.
+
+## Next Steps
+
+* [Getting Started with the PopOver]({% slug getting_started_popover %})
 * [Basic Usage of the PopOver HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover)
 {% if site.core %}
-* [Basic Usage of the PopOver TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover/tag-helper)
+* [Basic Usage of the PopOver TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/popover/tag-helper)
 {% endif %}
-* [Using the API of the PopOver HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover/api)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover)
-* [Server-Side API](/api/popover)
+
+## See Also
+
+* [Using the API of the PopOver for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover/api)
+* [Knowledge Base Section](/knowledge-base)
+

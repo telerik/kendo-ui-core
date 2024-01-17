@@ -69,11 +69,6 @@ function uglifyScripts(stream) {
         .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
 }
 
-function distThirdParty() {
-    return gulp.src('src/{jquery,pako,jszip}*.*')
-        .pipe(gulp.dest('dist/js'));
-}
-
 function minScripts() {
     return gulp.src(['dist/js/kendo.*.js', 'dist/js/cultures/*.js', 'dist/js/messages/*.js'], { base: "dist/js" })
         .pipe(filter(file => !/\.min\.js/.test(file.path)))
@@ -96,7 +91,7 @@ gulp.task('js-license', function() {
 });
 
 gulp.task("scripts", gulp.series(gulp.parallel(compileMjsScripts,
-    gulp.series(compileScripts, gulp.parallel(distThirdParty, minScripts))
+    gulp.series(compileScripts, minScripts)
 ), mjsMin, 'js-license'));
 
 gulp.task("custom", function() {

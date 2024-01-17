@@ -6,7 +6,9 @@ const themesVersion = packageJson.devDependencies[
 ].replace(/[\^~\*x]/, "");
 
 exports.beforeTestFiles = [
-    `https://kendo.cdn.telerik.com/themes/${themesVersion}/default/default-ocean-blue.css`,
+    themesVersion.indexOf("dev") > -1 ?
+        "node_modules/@progress/kendo-theme-default/dist/all.css"
+        : `https://kendo.cdn.telerik.com/themes/${themesVersion}/default/default-ocean-blue.css`,
     { pattern: 'dist/styles/**/*.*', watched: true, included: false },
     { pattern: 'tests/window/blank.html', watched: true, included: false },
     { pattern: 'tests/**/*-fixture.html' }

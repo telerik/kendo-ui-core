@@ -338,8 +338,9 @@ var __meta__ = {
 
             var item = that._focus();
             var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+            var selectedIndex = that.select();
 
-            if (value !== that.value() && that.trigger("select", { dataItem: dataItem, item: item })) {
+            if (value !== that.value() && selectedIndex !== -1 && that.trigger("select", { dataItem: dataItem, item: item })) {
                 that.value(value);
                 return;
             }

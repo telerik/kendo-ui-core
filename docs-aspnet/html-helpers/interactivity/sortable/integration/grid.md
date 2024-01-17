@@ -220,7 +220,7 @@ The following example demonstrates how to send the `newIndex` and `oldIndex` to 
 
 * The Sortable does not work as expected with a Grid that has its paging or virtual scrolling enabled.
 
-  The Sortable operates with the existing DOM. It is not aware of the Grid or of its DataSource. If paging or virtual scrolling are enabled, the Grid will render only the elements which belong to the current page. As a result, the sorting will be limited to the current page only.
+  The Sortable operates with the existing DOM. The component is not aware of the Grid or of its DataSource. If paging or virtual scrolling are enabled, the Grid will render only the elements which belong to the current page. As a result, the sorting will be limited to the current page only.
 
 * The Sortable does not work as expected with a grouped Grid.
 

@@ -632,5 +632,23 @@
 
             assert.equal(textbox.wrapper.prev().text(), "123");
         });
+
+        it("setOptions does not remove disabled state", function() {
+            input.attr("disabled", true);
+            var textbox = new NumericTextBox(input);
+
+            textbox.setOptions({});
+
+            assert.isOk(textbox.element.is("[disabled]"));
+        });
+
+        it("setOptions does not remove readonly state", function() {
+            input.attr("readonly", true);
+            var textbox = new NumericTextBox(input);
+
+            textbox.setOptions({});
+
+            assert.isOk(textbox.element.is("[readonly]"));
+        });
     });
 }());

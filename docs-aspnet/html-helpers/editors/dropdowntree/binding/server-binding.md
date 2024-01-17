@@ -12,6 +12,10 @@ Local data is the data that is available on the client when the DropDownTree is 
 
 You can bind the DropDownTree locally on the server by passing the appropriate collection to the component's `BindTo()` method.
 
+{% if site.core %}
+> As of the R1 2024, the DropDownTree TagHelper will require explicit supplementation to a collection of type `DropDownTreeItemModel` instead of the `DropDownTreeItemBase`.
+{% endif %}
+
 1. Pass the data to the view through `ViewData`.
 
         public IActionResult Index()

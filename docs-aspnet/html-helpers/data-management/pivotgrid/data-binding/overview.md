@@ -1,12 +1,12 @@
 ---
-title: Data Binding
-page_title: Data Binding
-description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn about the OLAP cube configuration for performing Ajax data binding with the Telerik UI PivotGrid component for {{ site.framework }}."
+title: Overview
+page_title: Data Binding Overview
+description: "Learn about the OLAP cube configuration and how to set up the Telerik UI for {{ site.framework }} PivotGrid component for online and flat data locally and remotely."
 slug: databinding_pivotgridhelper_aspnetcore
 position: 1
 ---
 
-# Data Binding
+# Data Binding Overview
 
 The PivotGrid for {{ site.framework }} supports Ajax data binding to an HTTP accessible Online Analytical Processing (OLAP) cube and to flat data.
 

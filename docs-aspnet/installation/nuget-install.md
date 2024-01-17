@@ -11,7 +11,7 @@ position: 3
 
 This article describes how to configure your system for the Telerik NuGet source and then use it to install {{ site.product }} in your project. 
 
-[NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a NuGet feed with official {{ site.product }} releases and service packs. These packages are available only for registered users with an active trial or commercial license. In the Telerik NuGet feed, you will see only the packages that are licensed to your account.
+[NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a private NuGet feed with official {{ site.product }} releases and service packs. In the Telerik NuGet feed, you will see packages that your account has a license for; trials (active) and commerical (active and expired).
 
 {% if site.core %}
 >tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}) to add Telerik UI to the project.
@@ -174,8 +174,10 @@ The NuGet feed provides the following packages related to UI for ASP.NET Core an
 - `Telerik.UI.for.AspNet.Core`&mdash;Telerik UI for ASP.NET Core Commercial.
 - `Telerik.UI.for.AspNet.Core.Trial`&mdash;Telerik UI for ASP.NET Core Trial.
 {% else %}
-- `Telerik.UI.for.AspNet.Mvc5`&mdash;Telerik UI for ASP.NET MVC 5 Commercial.
-- `Telerik.UI.for.AspNet.Mvc5.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Trial.
+- `Telerik.UI.for.AspNet.Mvc5.Lite`&mdash;Telerik UI for ASP.NET MVC 5 Lite. Installs only the `Kendo.Mvc.dll` assembly and the ready-to-use editor templates based on Telerik UI for ASP.NET components.
+- `Telerik.UI.for.AspNet.Mvc5`&mdash;Telerik UI for ASP.NET MVC 5 Commercial. Installs the `Kendo.Mvc.dll` assembly, the ready-to-use editor templates based on Telerik UI for ASP.NET components, the CSS files used by the themes, and the Kendo JavaScript files.
+- `Telerik.UI.for.AspNet.Mvc5.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Trial. Installs a trial version of the `Kendo.Mvc.dll` assembly and the rest of the files included in the Commercial package.
+- `Telerik.UI.for.AspNet.Mvc5.Trial.Lite`&mdash;Telerik UI for ASP.NET MVC 5 Trial Lite. Installs a trial version of the `Kendo.Mvc.dll` assembly and the ready-to-use editor templates based on Telerik UI for ASP.NET components.
 
 >As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
 {% endif %}

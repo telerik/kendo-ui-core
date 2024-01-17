@@ -1,19 +1,22 @@
 ---
 title: QR Code Types
 page_title: QR Code Types
-description: "Try the different types of Telerik UI QRCode component for {{ site.framework }}."
+description: "Explore the different overlay types of Telerik UI QRCode component for {{ site.framework }}."
 slug: types_qrcodehelper_aspnetcore
 position: 3
 ---
 
-Kendo UI QR Code supports different types of overlay.
+# QR Code Types
 
-# Swiss QR Type
+The QRCode component supports different overlay types.
 
-The QRCode component supports the [Swiss QR Code format](https://blog.xsuite.com/en/swiss-qr-code). Enabling the `Swiss` Type of the overlay will add a swiss cross in the QR Code. 
+## Swiss QR Type
 
-The following implementation demonstrates the code needed for the Swiss Type:
+The [Swiss QR Code format](https://blog.xsuite.com/en/swiss-qr-code) adds a **Swiss** cross in the QR code. You can enable it by setting the `Type("swiss")` option of the `Overaly()` configuration.
 
+![{{ site.product_short }} Swiss Type](images/swissType.png)
+
+The following implementation demonstrates the QRCode component with Swiss overlay:
 
 ```HtmlHelper
     @(Html.Kendo().QRCode()
@@ -22,7 +25,6 @@ The following implementation demonstrates the code needed for the Swiss Type:
          .Overlay(o => o.Type("swiss").Width(26).Height(26))
          .Size(173)
     )
-
 ```
 {% if site.core %}
 ```TagHelper
@@ -33,29 +35,28 @@ The following implementation demonstrates the code needed for the Swiss Type:
     <kendo-qrcode name="qrSwiss" value="@value" size="173">
         <overlay type="swiss" height="26" width="26" />
     </kendo-qrcode>
-
 ```
 {% endif %}
-Overview of the Swiss Type:
 
-![{{ site.product_short }} Swiss Type](images/swissType.png)
+For runnable example on the Swiss type, refer to the following online demo:
 
-* [Demo showing Swiss QR Code format](https://demos.telerik.com/{{ site.platform }}/qrcode/swiss)
+* [Swiss QR Code of the QRCode for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/swiss)
 
-# QRCode Image Type
+## QRCode Image Type
 
-The image type of the overlay is adding an image in the QR Code.
+The Image type of the overlay adds an image in the QR code.
 
-The following implementation demonstrates the code needed for the Image Type:
+![{{ site.product_short }} Image Type](images/imageType.png)
+
+The following implementation demonstrates how to configure the image type in the QRCode component:
 
 ```HtmlHelper
     @(Html.Kendo().QRCode()
-            .Name("qrImage")
-            .Value("https://docs.telerik.com/aspnet-mvc/html-helpers/barcodes/qrcode/types")
-            .Overlay(o => o.ImageUrl("https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg").Height(40).Width(40))
-            .Size(173)
+        .Name("qrImage")
+        .Value("https://docs.telerik.com/aspnet-mvc/html-helpers/barcodes/qrcode/types")
+        .Overlay(o => o.ImageUrl("https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg").Height(40).Width(40))
+        .Size(173)
     )
-
 ```
 {% if site.core %}
 ```TagHelper
@@ -64,13 +65,10 @@ The following implementation demonstrates the code needed for the Image Type:
     </kendo-qrcode>
 ```
 {% endif %}
-Overview of the Image Type:
 
-![{{ site.product_short }} Image Type](images/imageType.png)
+For runnable sample on the QRCode defined with an Image type, refer to the following online demo:
 
-* [Demo of QRCode with image](https://demos.telerik.com/{{ site.platform }}/qrcode/image)
-
-
+* [Adding a Custom Logo of the QRCode for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/image)
 
 ## See Also
 

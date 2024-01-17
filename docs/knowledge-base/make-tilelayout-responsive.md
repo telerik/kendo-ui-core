@@ -35,22 +35,22 @@ You can use the [`setOptions()`] method of the TileLayout to update its [`column
 
     <!-- container templates -->
     <script id="barcelona" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/barcelona.jpg")" />
+            <img class="k-card-media" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/barcelona.jpg")" />
     </script>
     <script id="sofia" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/sofia.jpg")" />
+            <img class="k-card-media" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/sofia.jpg")" />
     </script>
     <script id="rome" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/rome.jpg")" />
+            <img class="k-card-media" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/rome.jpg")" />
     </script>
     <script id="sa" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/south-africa.jpg")" />
+            <img class="k-card-media" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/south-africa.jpg")" />
     </script>
     <script id="sanfran" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/sanfran.jpg")" />
+            <img class="k-card-media" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/sanfran.jpg")" />
     </script>
     <script id="seaview" type="text/x-kendo-template">
-            <img class="k-card-image" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/seaview-appartments.png")" />
+            <img class="k-card-media" draggable="false" src="https://demos.telerik.com/kendo-ui/content/web/cards/seaview-appartments.png")" />
     </script>
 
     <script>
@@ -129,7 +129,7 @@ You can use the [`setOptions()`] method of the TileLayout to update its [`column
     </script>
 
     <style>
-      .k-card-image {
+      .k-card-media {
         width: 385px;
         height: 290px;
       }

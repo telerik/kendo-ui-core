@@ -3,7 +3,7 @@ title: Items
 page_title: jQuery SkeletonContainer Documentation - Items
 description: "Learn how to configure the items in the jQuery SkeletonContainer by Kendo UI."
 slug: items_kendoui_skeletoncontainer_widget
-position: 2
+position: 3
 ---
 
 # Items 

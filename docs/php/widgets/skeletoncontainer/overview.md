@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Skele
             ->template('<div class="k-card">
             <div class="k-card-header">
                 <div>
-                    <span data-shape-circle class="k-card-image avatar"></span>
+                    <span data-shape-circle class="k-card-media avatar"></span>
                 </div>
                 <div class="user-info">
                     <span data-shape-text class="k-card-title"></span>

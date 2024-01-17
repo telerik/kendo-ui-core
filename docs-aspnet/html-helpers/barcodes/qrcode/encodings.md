@@ -8,13 +8,13 @@ position: 2
 
 # Encoding
 
-The different types of QRCde values support different conventions accordingly.
+The different types of QRCode values support different conventions.
 
-In many cases, the value of the QRCode is processed by the device in a special way. For example, geolocations are displayed in the Global Positioning System (GPS) or Map application on the device, URLs are opened by the browser, and so on.
+Often, the value of the QRCode is processed by the device in a special way. For example, geolocations are displayed in the Global Positioning System (GPS) or Map application on the device, URLs are opened by the browser, and so on.
 
 ## URL
 
-To encode the text of a URL, for example, https://www.telerik.com/, encode the `https://www.telerik.com/` URL text in the QRCode. Include the `http://` protocol to ensure it is recognized as a URL.
+To encode the text of a URL, for example, https://www.telerik.com/, encode the `https://www.telerik.com/` URL text in the QRCode. Include the `http://` protocol to ensure that the value recognized as a URL.
 
 ## Email Addresses
 
@@ -34,9 +34,9 @@ Similar to email addresses, to encode an SMS short code or number, create an SMS
 
 ## Geolocations
 
-To encode a point on the earth, including altitude, use a geo URI. For example, to encode the Progress office in Bulgaria, encode `geo:42.65049,23.37925,100`. As a result, readers can either open a local mapping application to this location, such as [Google Maps](https://www.google.bg/maps/), and zoom accordingly, or a link to this location on a mapping website such as Google Maps in the web browser of the device.
+To encode a point on the earth, including altitude, use a geo URI. For example, to encode the Progress office in Bulgaria, encode `geo:42.65049,23.37925,100`. As a result, readers can either open a local mapping application to this location, such as [Google Maps](https://www.google.bg/maps/), and zoom, or a link to this location on a mapping website such as Google Maps in the web browser of the device.
 
 ## See Also
 
-* [Basic Usage of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/index)
+* [Basic Usage of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode)
 * [Server-Side API](/api/qrcode)

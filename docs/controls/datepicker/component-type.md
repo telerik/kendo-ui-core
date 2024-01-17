@@ -20,7 +20,7 @@ By default, the DatePicker is initialized with the `classic` render mode. In ord
 
 As a result, the appearance of the widget is alternated. 
 
-![Kendo UI for jQuery DatePicker Comparison between the content types](../../../images/modern-classic-datepicker.png)
+![Kendo UI for jQuery DatePicker Comparison between the content types](../../images/modern-classic-datepicker.png)
 
 ## See Also
 

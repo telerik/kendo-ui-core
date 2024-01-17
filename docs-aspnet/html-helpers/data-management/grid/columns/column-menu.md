@@ -12,7 +12,37 @@ The column menu allows users to quickly access column-related operations like so
 
 To enable the column menu, use the `ColumnMenu(true)` method. As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/{{site.platform}}/grid/column-menu).
 
-> As of the R3 2022 release, the Grid also provides the option to set this property on individual Column level. You can disable the menu for a specific column by setting it to `.ColumnMenu(false)`.
+> As of the R3 2022 release, you can disable the column menu for a specific column by using `.ColumnMenu(false)`.
+
+## Global Column Menu
+
+As of {{ site.product }} R1 2024, you can display the column menu in the Grid's [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar%}) instead of in each column's header. The global column menu allows you to control the columns' visibility and clear all filters applied to the Grid through a single button.
+
+The following example shows how to set up the global column menu and enable the clear-all-filters button.
+
+```HtmlHelper
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("grid")
+        .ToolBar(toolbar => toolbar.Columns())
+        .ColumnMenu(menu =>
+        {
+            menu.ClearAllFilters(true);
+        })
+        ...
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+        <toolbar-button name="columns"></toolbar-button></toolbar>
+        <column-menu clear-all-filters="true"></column-menu>
+        <!--Other configuration-->
+    </kendo-grid>
+```
+{% endif %}
+
+For a runnable example with the global column menu, see the [Grid Global Column Menu demo](https://demos.telerik.com/{{site.platform}}/grid/global-column-menu).
 
 ## Column Reordering
 

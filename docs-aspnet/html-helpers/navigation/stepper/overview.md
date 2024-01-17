@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Stepper component for {{ site.framework }}."
+description: "The Telerik UI Stepper component for {{ site.framework }} provides a styled UI component for progressive handling of workflow."
 slug: htmlhelpers_stepper_aspnetcore_overview
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} Stepper Overview
@@ -101,17 +101,21 @@ You can subscribe to all Stepper events.
 
 ## Functionality and Features
 
-* [Icons]({% slug htmlhelpers_stepper_aspnetcore_icons %})
-* [Steps]({% slug htmlhelpers_stepper_aspnetcore_steps %})
-* [Appearance]({% slug htmlhelpers_stepper_aspnetcore_appearance %})
-* [Operation modes]({% slug htmlhelpers_stepper_aspnetcore_operation_modes %})
-* [Accessibility]({% slug accessibility_aspnetcore_stepper %})
+* [Icons]({% slug htmlhelpers_stepper_aspnetcore_icons %})&mdash;The Stepper enables you to customize the rendered icons.
+* [Steps]({% slug htmlhelpers_stepper_aspnetcore_steps %})&mdash;The component provides different configuration options for its steps.
+* [Appearance]({% slug htmlhelpers_stepper_aspnetcore_appearance %})&mdash;The Stepper enables you to customize its final appearance.
+* [Operation modes]({% slug htmlhelpers_stepper_aspnetcore_operation_modes %})&mdash;The component provides the capability of operation modes.
+* [Accessibility]({% slug accessibility_aspnetcore_stepper %})&mdash;The Stepper is compatible with the global accessibility requirements.
+
+## Next Steps
+
+* [Getting Started with the Stepper]({% slug aspnetcore_stepper_getting_started %})
+* [Basic Usage of the Stepper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/index)
+{% if site.core %}
+* [Stepper in Razor Pages]({% slug htmlhelpers_stepper_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the Stepper HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/index)
-{% if site.core %}
-* [Basic Usage of the Stepper TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/stepper/tag-helper)
-* [Stepper in Razor Pages]({% slug htmlhelpers_stepper_razorpage_aspnetcore %})
-{% endif %}
-* [Using the API of the Stepper HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/api)
+* [Using the API of the Stepper (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/api)
+* [Knowledge Base Section](/knowledge-base)

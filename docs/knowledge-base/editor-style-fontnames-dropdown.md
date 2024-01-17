@@ -76,7 +76,7 @@ How can I style the names of each font in the `fontNames` drop-down of the Edito
         ]
     });
 
-  	var cb = $("select.k-fontName").data("kendoComboBox");      	
+  	var cb = $(".k-combobox [data-command='fontName']").data("kendoComboBox");     	
   	cb.setOptions({
     	template: "<span style='font-family: #: text #'>#: text #</span>"
     });

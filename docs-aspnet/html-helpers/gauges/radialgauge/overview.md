@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI RadialGauge component for {{ site.framework }}."
+description: "Discover the Telerik UI RadialGauge component for {{ site.framework }} and learn how to initialize and configure the component."
 previous_url: /helpers/gauges/radialgauge/overview
 slug: overview_radialgaugehelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} RadialGauge Overview
@@ -15,7 +15,7 @@ The Telerik UI RadialGauge TagHelper and HtmlHelper for {{ site.framework }} are
 The Telerik UI RadialGauge HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI RadialGauge widget.
 {% endif %}
 
-The RadialGauge represents values on a circular arc.
+The RadialGauge represents values on a radial arc.
 
 * [Demo page for the RadialGauge HtmlHelper](https://demos.telerik.com/{{ site.platform }}/radial-gauge/index)
 {% if site.core %}
@@ -62,10 +62,21 @@ To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`
             });
         </script>
 
-## See Also
+## Functionality and Features
 
+* [Scale]({% slug scale_radialgaugehelper_aspnetcore %})—You can control how the scale of the Radial Gauge renders the values, pointers and labels.
+* [Pointers]({% slug pointers_radialgaugehelper_aspnetcore %})—The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the values that will be marked on the scale.
+* [Export]({% slug export_radialgaugehelper_aspnetcore %})—You can export the Radial Gauge as an image, SVG, or a PDF file.
+
+## Next Steps
+
+* [Getting Started with Radial Gauge]({% slug radialgauge_getting_started %})
 * [Basic Usage of the RadialGauge HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge/index)
 {% if site.core %}
-* [Basic Usage of the RadialGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/tag-helper)
+* [Basic Usage of the RadialGauge TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/tag-helper)
 {% endif %}
-* [Server-Side API](/api/radialgauge)
+
+## See Also
+
+* [Using the API of the Radial Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge/api)
+* [Knowledge Base Section](/knowledge-base)

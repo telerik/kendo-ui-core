@@ -3,7 +3,7 @@ title: Items
 page_title: jQuery SplitButton Documentation - Items
 description: "Get started with the jQuery SplitButton by Kendo UI and use the items options it provides."
 slug: items_kendoui_splitbutton_widget
-position: 2
+position: 3
 ---
 
 # Items

@@ -6,13 +6,13 @@ slug: slider_appearance
 position: 2
 ---
 
-# Slider Appearance
+# Appearance
 
 > As of the R1 2022 release, the Slider uses a brand new rendering.
 
 In this article, you will find information about the new rendering of the {{ site.product }} Slider.
 
-For additional information regarding the decision behind these changes, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
+For additional information on the decision behind these changes, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
 
 ## Old vs New Rendering
 
@@ -86,7 +86,7 @@ The following example demonstrates the full version of the old rendering:
 
 The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements.
 
-With the new rendering additional classes are applied to the **Increase** and **Decrease** buttons inside the Slider. For additional information regarding the new button rendering, visit the [Button Styling]({% slug button_appearance %}) article.
+With the new rendering additional classes are applied to the **Increase** and **Decrease** buttons inside the Slider. For more information on the new button rendering, visit the [Button Styling]({% slug button_appearance %}) article.
 
 The new rendering of the Slider component consists of the following elements:
 

@@ -3,7 +3,7 @@ title: Alignment
 page_title: jQuery FloatingActionButton Documentation
 description: "Learn about the alignment options of the jQuery FloatingActionButton by Kendo UI and learn how to configure the positioning of the widget."
 slug: alignment_floatingactionbutton_widget
-position: 2
+position: 3
 ---
 
 # Alignment 

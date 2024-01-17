@@ -3,7 +3,7 @@ title: Row Resizing
 page_title: jQuery Grid Documentation - Row Resizing
 description: "Get started with the jQuery Grid by Kendo UI and learn all about the Row Resizing feature."
 slug: rowresize_kendoui_grid
-position: 14
+position: 15
 ---
 
 # Row Row Resizing

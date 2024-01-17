@@ -8,9 +8,9 @@ position: 0
 
 # {{ site.framework }} FileManager Overview
 
-The {{ site.product }} FileManager is an Explorer-like component enabling you to manage file and folders. 
+The {{ site.product }} FileManager is an Explorer-like component that enables you to manage files and folders and provides you with a rich API for customization.
 
-It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeView]({% slug htmlhelpers_treeview_aspnetcore %}), [Toolbar]({% slug htmlhelpers_toolbar_aspnetcore %}), [Breadcrumb]({% slug htmlhelpers_breadcrumb_aspnetcore_overview %}).
+The component allows you to show additional information about the selected file in a Preview Pane that you can customize through templates and that you can show or hide through a switch button. The component is built entirely with Kendo UI for jQuery components: [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeView]({% slug htmlhelpers_treeview_aspnetcore %}), [Toolbar]({% slug htmlhelpers_toolbar_aspnetcore %}), and [Breadcrumb]({% slug htmlhelpers_breadcrumb_aspnetcore_overview %}).
 
 {% if site.core %}
 The Telerik UI FileManager TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI FileManager widget. To add the component to your ASP.NET Core app, you can use either.
@@ -26,9 +26,9 @@ The Telerik UI FileManager HtmlHelper for {{ site.framework }} is a server-side 
 
 ## Initializing the FileManager
 
-The following example demonstrates the initialization of the FileManager with remote binding. The file structure is served as JSON though the FileManager DataSource object.
+The following example demonstrates the initialization of the FileManager with remote binding. The file structure is served as JSON through the FileManager DataSource object.
 
-> As of the 2022 R3 release, the `Selectable` mechanism is altered. The `Change` event will now be fired only when Selection/Deselection is performed.
+> As of the 2022 R3 release, the `Selectable` mechanism has a new behavior. The `Change` event fires only when performing selection or deselection.
 
 ```HtmlHelper
    @(Html.Kendo().FileManager()
@@ -136,33 +136,32 @@ The following example demonstrates the initialization of the FileManager with re
             }
         }
 ```
-## Referencing Existing Instances
-
-To refer to an existing FileManager instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [FileManager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager#methods) to control its behavior.
-
-        var filemanager = $("#filemanager").data("kendoFileManager");
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_filemanager_aspnetcore_binding_overview %})
-* [ContextMenu]({% slug htmlhelpers_filemanager_aspnetcore_contextmenu %})
-* [Drag and Drop]({% slug htmlhelpers_filemanager_aspnetcore_dragndrop %})
-* [Views]({% slug htmlhelpers_filemanager_aspnetcore_views %})
-* [Navigation]({% slug htmlhelpers_filemanager_aspnetcore_navigation %})
-* [PreviewPane]({% slug htmlhelpers_filemanager_aspnetcore_previewpane %})
-* [Search]({% slug htmlhelpers_filemanager_aspnetcore_search %})
-* [Sort]({% slug htmlhelpers_filemanager_aspnetcore_sort %})
-* [Toolbar Commands]({% slug htmlhelpers_filemanager_aspnetcore_toolbar %})
-* [Accessibility]({% slug accessibility_aspnetcore_filemanager %})
-* [Globalization]({% slug globalization_filemanager_aspnetcore %})
+| Feature | Description |
+|---------|-------------|
+| [Data binding]({% slug htmlhelpers_filemanager_aspnetcore_binding_overview  %}) | You can bind the FileManager to remote data. |
+| [ContextMenu]({% slug htmlhelpers_filemanager_aspnetcore_contextmenu %}) | The FileManager enables you to easily execute FileManager commands on the selected file or folder.  |
+| [Drag and Drop]({% slug htmlhelpers_filemanager_aspnetcore_dragndrop %}) | The FileManager allows you to drag and drop files from the different FileManager views (GridView, ListView). |
+| [Views]({% slug htmlhelpers_filemanager_aspnetcore_views %}) | The FileManager provides the Grid and List built-in views for content visualization. |
+| [Navigation]({% slug htmlhelpers_filemanager_aspnetcore_navigation %}) | The FileManager exposes the ability to drill down to the specific file you need to manipulate. |
+| [PreviewPane]({% slug htmlhelpers_filemanager_aspnetcore_previewpane %}) |The Preview Pane in the FileManager enables you to show additional information about the selected files or folders in the view. |
+| [Search]({% slug htmlhelpers_filemanager_aspnetcore_search %}) | The FileManager comes with a search panel out-of-the-box and allows you to quickly find the needed files. |
+| [Sort]({% slug htmlhelpers_filemanager_aspnetcore_sort %}) | FileManager provides a built-in sort functionality, which allows you to sort the files and folders. |
+| [Toolbar Commands]({% slug htmlhelpers_filemanager_aspnetcore_toolbar %}) | You can incorporate a ToolBar component that contains a variety of built-in commands.|
+| [Accessibility]({% slug accessibility_aspnetcore_filemanager %}) | The FileManager is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation. |
+| [Globalization]({% slug accessibility_aspnetcore_filemanager %}) | The FileManager supports globalization by combining the translation of component messages (localization) and their adaptation to specific cultures. |
 
-Visit the [Client API section](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager) for full description of the configurations methods and events of the Kendo UI for jQuery FileManager component.
+## Next Steps
 
-## See Also
-
-* [Basic Usage of the FileManager (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
+* [Getting Start with the FileManager]({% slug filemanager_aspnetcore_getting_started %})
+* [Basic Usage of the FileManager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
 {% if site.core %}
 * [FileManager in Razor Pages]({% slug htmlhelpers_filemanager_razorpage_aspnetcore %})
 {% endif %}
-* [Binding Overview of the FileManager]({% slug htmlhelpers_filemanager_aspnetcore_binding_overview %})
-* [Globalization in {{ site.product }}]({% slug overview_globalization_core %})
+
+## See Also
+
+* [Using the API of the FileManager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/api)
+* [Knowledge Base Section](/knowledge-base)

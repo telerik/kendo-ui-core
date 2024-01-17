@@ -11,6 +11,9 @@ position: 9
 
 The immutable feature enables you to add HTML elements that cannot be edited by the user.
 
+
+Although the immutable elements can not be modified, they can be removed. The actions that can be performed to remove an immutable element are described in the [Removing Immutable Elements](#removing-immutable-elements) section.
+
 ## Enabling Immutable Elements
 
 To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, you also need to enable the [`immutables`](/api/javascript/ui/editor/configuration/immutables) option.
@@ -49,7 +52,6 @@ The `immutables.serialization` configuration option accepts the following parame
                 ],
                 immutables: {
                     serialization: "<div></div>"
-                    }
                 }
             });
         </script>
@@ -70,7 +72,6 @@ The `immutables.serialization` configuration option accepts the following parame
                 ],
                 immutables: {
                     serialization: "<#= data.nodeName # data=\"immutable-element\"></#= data.nodeName #>"
-                    }
                 }
             });
         </script>
@@ -93,7 +94,6 @@ The `immutables.serialization` configuration option accepts the following parame
                     serialization: function(node) {
                         var tagName = node.tagName;
                         return "<" + tagName + ">" + "</" + tagName + ">";
-                        }
                     }
                 }
             });
@@ -149,6 +149,18 @@ To decorate all `contenteditable="false"` elements and improve user experience (
         });
     </script>
 ```
+
+### Removing Immutable Elements
+
+The content of the immutable elements can not be edited, their format or text can not be modified. However, the immutable elements can be deleted.
+
+The immutable elements will be removed when one of the following actions is performed:
+
+- When the entire element or part of it is selected and you press the `backspace` or `delete` keys.
+- If the entire element or portion of it is selected and then you start typing.
+- When the immutable element is an inner part of the selection, the selection starts before the immutable element and ends after it and you press the `delete` key. 
+- When the cursor is located right before the immutable element and the `delete` button is pressed 
+- When the cursor is located right after the immutable element and the `backspace` button is pressed.
 
 ## See Also
 

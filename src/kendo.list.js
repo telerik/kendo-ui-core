@@ -2813,6 +2813,11 @@ var __meta__ = {
             var scrollTop = content.scrollTop;
             var itemHeight = $(element.children[0]).height();
             var itemIndex = Math.floor(scrollTop / itemHeight) || 0;
+
+            if (element.childElementCount == 0) {
+                return null;
+            }
+
             var item = element.children[itemIndex] || element.lastChild;
             var forward = item.offsetTop < scrollTop;
 

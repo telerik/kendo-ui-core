@@ -4385,7 +4385,7 @@ The data item or data items to append to the data source.
 
 Updates the specified data items without marking them as "dirty". The data source will not sync data items appended via `pushUpdate`. If the data items are not found (using `schema.model.id`), they will be appended.
 
-> The difference between `pushUpdate` and updating items via their `set` method is that items updated via `set` are synced with the remote service.
+> The difference between `pushUpdate` and updating items via their [`set`](/api/javascript/data/observableobject/methods/set) method is that items updated via [`set`](/api/javascript/data/observableobject/methods/set) are synced with the remote service.
 
 #### Parameters
 

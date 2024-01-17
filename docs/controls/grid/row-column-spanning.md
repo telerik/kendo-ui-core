@@ -3,7 +3,7 @@ title: Row and Column Spanning
 page_title: jQuery Grid Documentation - Row and Column Spanning
 description: "Get started with the jQuery Grid by Kendo UI and learn all about the Row and Column Spanning feature."
 slug: row_column_spanning__kendoui_grid
-position: 15
+position: 16
 ---
 
 # Row and Column Spanning

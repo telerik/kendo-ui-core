@@ -26,7 +26,7 @@ The Kendo UI ColorPicker supports the following styling options:
 
 ### Size
 
-The `size` option controls how big or small the ColorPicker component looks. The structure of the class is `k-input-{size}`.
+The `size` option controls how big or small the ColorPicker component looks. The structure of the class is `k-picker-{size}`.
 
 The following values are available for the [`size`](/api/javascript/ui/colorpicker/configuration/size) option:
 

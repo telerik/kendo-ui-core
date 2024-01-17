@@ -4,7 +4,7 @@ page_title: Overview
 description: "Learn the basics when working with the Telerik UI QRCode component for {{ site.framework }}."
 previous_url: /helpers/barcodes/qrcode/overview
 slug: overview_qrcodehelper_aspnetcore
-position: 1
+position: 0
 ---
 
 # {{ site.framework }} QRCode Overview
@@ -34,10 +34,10 @@ To see the component in action, check the examples:
 
 The following example demonstrates how to define the QRCode.
 
-
 ```HtmlHelper
     @(Html.Kendo().QRCode()
       .Name("qrUrl")
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -46,32 +46,29 @@ The following example demonstrates how to define the QRCode.
 {% endif %}
 
 
-### Basic Configuration
+## Basic Configuration
 
 To configure the QRCode, pass the configuration options as attributes, for example:
 
-* The name of the QRcode is mandatory&mdash;it specifies the "id" attribute of the widget.
-
-* The value attribute allows you to set the initial value of the widget.
-
-* The error correction level allows you to control the density of the QRcode image.
+* The name of the QRCode is mandatory&mdash;it specifies the `id` and the `name` attributes of the QRCode element.
+* The `Value()` option allows you to set the initial QRCode value.
+* The error correction level allows you to control the density of the QRCode image. You can specify it by using the `ErrorCorrection()` method.
 
 ```HtmlHelper
-    Html.Kendo().QRCode()
+    @(Html.Kendo().QRCode()
         .Name("qrUrl")
         .Value("https://docs.telerik.com/aspnet-core/introduction")
         .ErrorCorrection(QRErrorCorrectionLevel.M)
         .Size(150)
         .Border(border => border.Color("#AA11AA").Width(2))
     )
-)
 ```
 {% if site.core %}
 ```TagHelper
     <kendo-qrcode name="qrUrl" 
-                  value="https://docs.telerik.com/aspnet-core/introduction" 
-                  error-correction="QRErrorCorrectionLevel.M 
-                  size=" 150">
+        value="https://docs.telerik.com/aspnet-core/introduction" 
+        error-correction="QRErrorCorrectionLevel.M 
+        size=" 150">
         <border color="#AA11AA" width="2" />
     </kendo-qrcode>
 ```
@@ -79,22 +76,18 @@ To configure the QRCode, pass the configuration options as attributes, for examp
 
 ## Functionality and Features
 
-The QRCode supports a set of [encoding conventions]({% slug encoding_qrcode_aspnetcore_helper %}).
+* [Encoding]({% slug encoding_qrcode_aspnetcore_helper %})&mdash;The QRCode supports a set of encoding conventions.
+* [Types]({% slug types_qrcodehelper_aspnetcore %})&mdash;Explore the available types of overlay.
 
-## Referencing Existing Instances
+## Next Steps
 
-To reference an existing QRCode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
-
-    // Place the following after the declaration of the QRCode for {{ site.framework }}.
-    <script>
-        $(function() {
-            // The Name() of the QRCode is used to get its client-side instance.
-            var qrcode = $("#qrcode").data("kendoQRCode");
-        });
-    </script>
+* [Getting Started with the QRCode]({% slug qrcode_getting_started %})
+* [Basic Usage of the QRCode HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode)
+{% if site.core %}
+* [Basic Usage of the QRCode TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/index)
-* [Using the API of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/api)
-* [Server-Side API](/api/qrcode)
+* [Using the API of the QRCode for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/api)
+* [Knowledge Base Section](/knowledge-base)

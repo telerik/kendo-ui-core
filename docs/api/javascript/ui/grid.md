@@ -63,6 +63,31 @@ Changes the delimeter between the items on the same row. Use this option if you 
     });
     </script>
 
+### allowPaste `Boolean` *(default: false)*
+
+If set to `true` and the selection functionality of the Grid is enabled, the user can paste the current textual content of the clipboard into the Grid.
+
+#### Example - enable allowPaste
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["paste"], // Creates a dropdownlist that enables you to switch between replace and insert modes.
+        selectable: "multiple cell",
+        allowPaste: true,
+        columns: [
+            { field: "productName" },
+            { field: "category" }
+        ],
+        dataSource: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+        ]
+    });
+    </script>
+
 ### altRowTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. Be default the grid renders a table row (`<tr>`) for every data source item.
@@ -72,6 +97,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
 #### Example - specify alternating row template
 
+  <div id="grid"></div>
     <script>
       let encode = kendo.htmlEncode;
 
@@ -879,7 +905,7 @@ The JavaScript function executed on initialization of the row which will determi
 The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
-> **Note:** When the dataSource property is set one should also set the [dataTextField](columns.dataTextField) and [dataValueField](columns.dataValueField).
+> **Note:** When the dataSource property is set one should also set the [dataTextField](/api/javascript/ui/grid/configuration/columns.datatextfield) and [dataValueField](/api/javascript/ui/grid/configuration/columns.datavaluefield).
 
 ### columns.dataTextField `String`
 
@@ -3369,6 +3395,32 @@ If set to `true` the column menu would allow the user to filter the grid. By def
 * `"classic"` - Uses the standard rendering of the column menu.
 * `"modern"` - Uses new rendering with a fresh and modern look and feel.
 * `"tabbed"` - Uses the rendering of the `"modern"` menu, but splits its content into different tabs.
+
+### columnMenu.clearAllFilters `Boolean` *(default: false)*
+
+If set to `true`, the global column menu will render a button to allow the user to clear all filters applied to the grid.
+
+#### Example 
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      toolbar: ["columns"],
+      columnMenu: {
+          componentType: "modern",
+          clearAllFilters: true
+      },
+      filterable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
@@ -9732,9 +9784,13 @@ The "excel" command exports the grid data in MS Excel format. Fires [`excelExpor
 
 The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) grid event.
 
-The "search" built-in search panel for the grid.
+The "search" command renders the built-in search panel for the grid.
+
+The "columns" command renders a global column menu.
 
 The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
+
+The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
 
 #### Example - configure the Grid Toolbar as a string template
 
@@ -10744,6 +10800,8 @@ A string, DOM element or jQuery object which represents the group table row. A s
     var grid = $("#grid").data("kendoGrid");
     grid.collapseGroup(".k-grouping-row:contains(Beverages)");
     </script>
+
+> How to collapse all Groups in Grid by Default you can find in [this article](/knowledge-base/grid-collapse-groups).
 
 ### collapseRow
 
@@ -14542,6 +14600,52 @@ The widget instance which fired the event.
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.page);
       });
+    </script>
+
+### paste
+
+Fired when the user pastes data using the Grid's built-in paste mechanism.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.items `Array`
+
+The updated or added rows from the paste operation.
+
+##### e.type `String`
+
+The type of the paste operation—`replace` or `insert`.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["paste"], // Creates a dropdownlist that enables you to switch between replace and insert modes.
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id:1, name: "Jane Doe", age: 30 },
+        { id:2, name: "John Doe", age: 33 }
+      ],
+      allowPaste: true,
+      navigatable: true,
+      selectable: {
+        mode: "multiple cell"
+      },
+      paste: function(e) {
+	      /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.items, e.type);
+      }
+    });
     </script>
 
 ### pdfExport

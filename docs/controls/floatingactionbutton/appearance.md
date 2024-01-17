@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery FloatingActionButton Documentation
 description: "Learn how to customize the jQuery FloatingActionButton by Kendo UI by setting its size, color, icon and text."
 slug: appearance_floatingactionbutton_widget
-position: 3
+position: 4
 ---
 
 # Appearance

@@ -292,10 +292,17 @@ var __meta__ = {
 
             that._label();
 
-            that._editable({
-                readonly: that.options.readonly,
-                disable: !that.options.enable
-            });
+            if (options.enable !== undefined || options.readonly !== undefined) {
+                that._editable({
+                    readonly: options.readonly,
+                    disable: !options.enable
+                });
+            } else {
+                that._editable({
+                    readonly: that.element.attr("readonly") !== undefined ? Boolean(that.element.attr("readonly")) : that.options.readonly,
+                    disable: that.element.attr("disabled") !== undefined ? Boolean(that.element.attr("disabled")) : !that.options.enable
+                });
+            }
 
             if (options.value !== undefined) {
                 that.value(options.value);

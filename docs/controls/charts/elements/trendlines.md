@@ -13,7 +13,9 @@ The Chart supports the following types of trendlines - Linear Trendline and Movi
 
 ### Linear Trendline
 
-A linear trendline is usually used to show if a particular quantity is increasing or decreasing in time.
+A linear trendline is typically used to show if a particular value is increasing or decreasing in time.
+
+Linear trendlines are best suited for data sets that have a steady rate of change. They can be used with both positive and negative values.
 
 The following example demonstrates how to create a linear trendline for Categorical series.
 
@@ -28,15 +30,144 @@ The following example demonstrates how to create a linear trendline for Categori
                 },
                 {
                     name: 'Sales Forecast (LINEAR)',
-                    type: 'linearTrendline', // linearTrendline, movingAverageTrendline
+                    type: 'linearTrendline',
                     for: 'World',
-                    color:"lime"
+                    color: 'lime',
+                    forecast: {
+                        after: 3
+                    }
                 }
             ],
             tooltip: {
                 visible: true,
                 shared: true
-            },            
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            }
+        });
+    </script>
+```
+
+### Exponential Trendline
+
+Exponential trendlines are most suitable for data sets with accelerating rate of growth or decline. They can be used only for positive values.
+
+The following example demonstrates how to create a exponential trendline for Categorical series.
+
+```dojo
+    <div id="chart"></div>
+    <script>
+        $("#chart").kendoChart({
+            series: [
+                {
+                    name: "Growth",
+                    data: [15.7, 32.7, 40, 84.5, 126.6]
+                },
+                {
+                    name: 'Sales Forecast (EXP)',
+                    type: 'exponentialTrendline',
+                    for: 'Growth',
+                    color: 'lime'
+                }
+            ],
+            tooltip: {
+                visible: true,
+                shared: true
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            }
+        });
+    </script>
+```
+
+### Logarithmic Trendline
+
+Logarithmic trendlines are best suited for data sets that grow quickly at the beginning and then taper off. They can only be use with both positive and negative values.
+
+The following example demonstrates how to create a logarithmic trendline for Categorical series.
+
+```dojo
+    <div id="chart"></div>
+    <script>
+        $("#chart").kendoChart({
+            series: [
+                {
+                    name: "Growth",
+                    data: [-5.07, 12.7, 22, 24.5, 26.6]
+                },
+                {
+                    name: 'Sales Forecast (LOG)',
+                    type: 'logarithmicTrendline',
+                    for: 'Growth',
+                    color: 'lime'
+                }
+            ],
+            tooltip: {
+                visible: true,
+                shared: true
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            }
+        });
+```
+
+### Power Trendline
+
+Power trendlines are suitable for data that has a steady increase or decrease in the rate of growth or decline. They can be used only with positive values.
+
+The following example demonstrates how to create a power trendline for Categorical series.
+
+```dojo
+    <div id="chart"></div>
+    <script>
+        $("#chart").kendoChart({
+            series: [
+                {
+                    name: "World",
+                    data: [15.7, 16.7, 20, 23.5, 26.6]
+                },
+                {
+                    name: 'Sales Forecast (POWER)',
+                    type: 'powerTrendline',
+                    for: 'World',
+                    color: 'lime'
+                }
+            ],
+            tooltip: {
+                visible: true,
+                shared: true
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            }
+        });
+    </script>
+```
+
+
+```dojo
+    <div id="chart"></div>
+    <script>
+        $("#chart").kendoChart({
+            series: [
+                {
+                    name: "World",
+                    data: [15.7, 16.7, 20, 23.5, 26.6]
+                },
+                {
+                    name: 'Sales Forecast (LINEAR)',
+                    type: 'linearTrendline',
+                    for: 'World',
+                    color: "lime"
+                }
+            ],
+            tooltip: {
+                visible: true,
+                shared: true
+            },
             categoryAxis: {
                 categories: [2005, 2006, 2007, 2008, 2009]
             }
@@ -61,21 +192,75 @@ The following example demonstrates how to create a moving average trendline for 
                 },
                 {
                     name: 'Sales Forecast (Moving AVG.)',
-                    type: 'movingAverageTrendline', // linearTrendline, movingAverageTrendline
+                    type: 'movingAverageTrendline',
                     for: 'World',
-                    color:"lime"
+                    color:'lime'
                 }
             ],
             tooltip: {
                 visible: true,
                 shared: true
-            },            
+            },
             categoryAxis: {
                 categories: [2005, 2006, 2007, 2008, 2009]
-            }     
+            }
         });
     </script>
 ```
+
+## Forecasts
+
+To create a forecast, extend the trendline by specifying the number of intervals using the [series.trendline.after](/api/javascript/dataviz/ui/chart#configuration-series.trendline.after) setting. It's also possible to extend the forecast in reverse direction using the [series.trendline.before](/api/javascript/dataviz/ui/chart#configuration-series.trendline.before) setting. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported for **linear**, **exponential**, **logarithmic** and **power** trendlines. The parent series must be either a [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine".
+
+#### Example - set the trendline forecast
+
+	  <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              date: new Date(2021, 0, 1),
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              date: new Date(2021, 3, 1),
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              date: new Date(2021, 6, 1),
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              date: new Date(2021, 9, 1),
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "date"
+      }, {
+        name: "Sales Trend",
+        type: "linearTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          forecast: {
+            before: 3,
+            after: 5
+          }
+        }
+      }]
+    });
+    </script>
 
 ## Data Binding
 

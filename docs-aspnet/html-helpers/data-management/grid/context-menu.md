@@ -55,6 +55,7 @@ The table below lists the default Context Menu commands.
 |`ExportExcel`  | Exports the Grid to Excel             |
 |`SortAsc`      | Sorts the items in ascending direction|
 |`SortDesc`     | Sorts the items in descending direction|
+|`Paste`        | Indicates that the [pasting functionality]({% slug htmlhelpers_grid_clipboard %}) of the Grid is enabled |
 
 The following example demonstrates how you can customize the Context Menu using the default commands:
 
@@ -70,6 +71,7 @@ The following example demonstrates how you can customize the Context Menu using 
                 head.Separator();
                 head.ExportPDF().Text("Generate Pdf File").Icon("file"); //modify the built-in text for the comand and change the icon
                 head.ExportExcel();
+                head.Paste();
             })
             .Body(body => {
                 body.Edit();
@@ -97,6 +99,7 @@ The following example demonstrates how you can customize the Context Menu using 
             <context-menu-item name="separator"/>
             <context-menu-item name="exportPdf" text="Generate PDF file" icon="file" /> //modify the built-in text for the comand and change the icon
             <context-menu-item name="exportExcel"/>
+            <context-menu-item name="paste"/>
         </head>
         <body>
             <context-menu-item name="edit" />

@@ -27,6 +27,12 @@ How can I create a Download command in the context menu of the FileManager compo
 
 As of {{ site.product }} version R1 2020 SP1, the `kendo.ui.filemanager` namespace exposes the `FileManagerCommand` class that you can extend and implement a download command.
 
+Include [Font Icons](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage) for [`SpriteCssClass`](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager/configuration/contextmenu.items.spritecssclass) by referencing the following link extracted from [unpkg](https://unpkg.com/):
+
+```html
+<link rel="stylesheet" href="http://unpkg.com/%40progress/kendo-font-icons/dist/index.css" rel="stylesheet" type="text/css" />
+```
+
 Initialize the {{ site.product }} FileManager and define a Download command for the Context Menu.
 
 ```View
@@ -34,7 +40,7 @@ Initialize the {{ site.product }} FileManager and define a Download command for 
   ...
         .ContextMenu(context => context.Items(items =>
         {
-            items.Add("download").Command("DownloadCommand").Text("Download").SpriteCssClass("k-icon k-i-download");
+            items.Add("download").Command("DownloadCommand").Text("Download").SpriteCssClass("k-icon k-font-icon k-i-download");
         }))
     )
 ```

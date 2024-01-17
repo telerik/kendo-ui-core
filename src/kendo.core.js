@@ -1315,7 +1315,8 @@ function pad(number, digits, end) {
         numberRegExp = {
             2: /^\d{1,2}/,
             3: /^\d{1,3}/,
-            4: /^\d{4}/
+            4: /^\d{4}/,
+            exact3: /^\d{3}/
         },
         objectToString = {}.toString;
 
@@ -1390,7 +1391,7 @@ function pad(number, digits, end) {
                 }
 
                 // If the value comes in the form of 021, 022, 023 we must trim the leading zero otherwise the result will be 02 in all three cases instead of 21/22/23.
-                if (shouldUnpadZeros && part.trim().length === 3 && Number.isInteger(Number(part)) && Number(part) > 0) {
+                if (shouldUnpadZeros && part.match(numberRegExp.exact3) && Number.isInteger(Number(part)) && Number(part) > 0) {
                     part = unpadZero(part);
                 } else {
                     part = value.substr(valueIdx, size);

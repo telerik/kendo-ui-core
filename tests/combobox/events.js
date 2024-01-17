@@ -567,6 +567,20 @@ it("select event is not raised no item is focused", function() {
     combobox.input.press(kendo.keys.ENTER);
 });
 
+it("select event is not raised on focusout", function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: false,
+        dataSource: ["foo"],
+        select: function(e) {
+            assert.isOk(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.focus();
+    combobox.input.val("abcd");
+    combobox.input.trigger("focusout");
+});
+
 it("select is raised when down arrow is clicked", function() {
     combobox = input.kendoComboBox({
         highlightFirst: false,

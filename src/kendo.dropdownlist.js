@@ -154,6 +154,7 @@ var __meta__ = {
             name: "DropDownList",
             enabled: true,
             autoBind: true,
+            _allowFilterPaste: true, // Related to the paste functionality in the Grid. In certain cases the focus remains on the dropdownlist and the paste action is executed on it instead of the Grid.
             index: 0,
             text: null,
             value: null,
@@ -606,7 +607,9 @@ var __meta__ = {
         },
 
         _filterPaste: function() {
-            this._search();
+            if (this.options._allowFilterPaste) {
+                this._search();
+            }
         },
 
         _attachFocusHandlers: function() {

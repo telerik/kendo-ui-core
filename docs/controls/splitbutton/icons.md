@@ -3,7 +3,7 @@ title: Icon SplitButton
 page_title: jQuery SplitButton Documentation - Icon SplitButton
 description: "Get started with the jQuery SplitButton by Kendo UI and add background, image, or font icons to enhance the visualization of the widget."
 slug: icons_kendoui_splitbutton_widget
-position: 4
+position: 5
 ---
 
 # Icons

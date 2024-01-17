@@ -3,7 +3,7 @@ title: Context Menu
 page_title: jQuery Grid Documentation - Context Menu
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable the ContextMenu."
 slug: context_menu_kendoui_grid
-position: 15
+position: 17
 ---
 
 # Context Menu

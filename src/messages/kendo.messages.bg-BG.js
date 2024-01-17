@@ -340,6 +340,7 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
   "nameBox": "Име на клетка",
+  "formulaInput": "Поле за формула",
   "errors": {
     "shiftingNonblankCells": "Не може да се вмъкнат клетки поради възможност от загуба на данни. Изберете друга локация за вмъкване на клетки или изтрийте данни от края на работния лист."
   },

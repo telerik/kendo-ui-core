@@ -84,7 +84,7 @@ Use the DataSource HtmlHelper {% if site.core %}or TagHelper{% endif %} to add t
 
 * Use the `Name()` configuration method to assign a name to the instance of the helper&mdash;this is mandatory as its value is used for   the `name` of the DataSource element.
 * Add the `Ajax()` configuration option&mdash;this formats the request filter, sort, group, page, page size, and aggregates and requires you to configure a `[DataSourceRequest]DataSourceRequest request ` parameter in the [controller action](#4-declare-the-read-action) and extend the response with the `ToDataSourceResult`, which will handle data operations automatically.
-* Configure the `Read` transport and set the end point for the [Read operation](https://docs.telerik.com/aspnet-core/html-helpers/datasource/crud#read).  
+* Configure the `Read` transport and set the end point for the [Read operation](https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/crud#read).  
 * Set the `PageSize` to determine how many items to include in each response of the server.
 
 ```HtmlHelper

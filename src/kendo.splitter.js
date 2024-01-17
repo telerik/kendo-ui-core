@@ -236,7 +236,7 @@ var __meta__ = {
             var that = this;
 
             this.element
-                .addClass("k-widget").addClass("k-splitter")
+                .addClass("k-splitter")
                 .children()
                     .each(function(i, pane) {
                         if (pane.nodeName.toLowerCase() != "script") {

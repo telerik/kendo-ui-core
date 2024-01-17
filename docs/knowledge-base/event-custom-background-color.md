@@ -37,6 +37,8 @@ How can I use the event template to render events with a specific background col
 
 ## Solution
 
+1. Add a CSS class to the wrapper element in the [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) and use it to style the events.
+
 The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
