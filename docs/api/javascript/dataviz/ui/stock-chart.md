@@ -4719,7 +4719,7 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The configuration of the Chart legend item.
 
-To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/chart#configuration-series.legendItem) settings of the series.
+To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/stock-chart#configuration-series.legendItem) settings of the series.
 
 #### Example - disable highlight of legend items
 
@@ -5026,7 +5026,7 @@ Defaults to the series opacity.
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
 
 #### Example - override marker settings for the legend
 
@@ -5770,7 +5770,7 @@ The text of the title.
 The visibility of the title.
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
+Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/stock-chart/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.
@@ -6278,11 +6278,17 @@ Each series type has a different set of options.
 
 The type of the series. Available types:
 
-* area
-* column
-* line
-* candlestick, ohlc
-* bullet
+* `area`
+* `candlestick`
+* `column`
+* `exponentialTrendline`
+* `line`
+* `linearTrendline`
+* `logarithmicTrendline`
+* `movingAverageTrendline`
+* `ohlc`
+* `polynomialTrendline`
+* `powerTrendline`
 
 ### series.dashType `String`*(default: "solid")*
 
@@ -6373,6 +6379,322 @@ The data field containing the current value.
 The data field containing the target value.
 
 ** Available for bullet and verticalBullet series. **
+
+### series.for `String`
+
+The name of the parent series of the trendline.
+
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to
+> "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
+
+#### Example - set the trendline parent series for field
+
+	  <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-07-01"),
+                price: 105
+            }, {
+                date: new Date("2021-10-01"),
+                price: 105
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Trend (LINEAR)",
+            type: "linearTrendline",
+            for: "Price"
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline `Object`
+
+The trendline configuration options.
+
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
+
+#### Example - set the trendline options
+
+	  <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-07-01"),
+                price: 105
+            }, {
+                date: new Date("2021-10-01"),
+                price: 105
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Average",
+            type: "movingAverageTrendline",
+            for: "Price",
+            trendline: {
+              period: 3
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline.forecast `Object`
+
+The trendline forecast settings. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
+
+#### Example - set the trendline forecast
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-02-01"),
+                price: 141
+            }, {
+                date: new Date("2021-03-01"),
+                price: 151
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-05-01"),
+                price: 111
+            }, {
+                date: new Date("2021-06-01"),
+                price: 111
+            }, {
+                date: new Date("2021-07-01"),
+                price: 145
+            }, {
+                date: new Date("2021-08-01"),
+                price: 125
+            }, {
+                date: new Date("2021-09-01"),
+                price: 145
+            }, {
+                date: new Date("2021-10-01"),
+                price: 135
+            }, {
+                date: new Date("2021-11-01"),
+                price: 155
+            }, {
+                date: new Date("2021-12-01"),
+                price: 185
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Forecast",
+            type: "linearTrendline",
+            for: "Price",
+            trendline: {
+                forecast: {
+                    before: 3,
+                    after: 20
+                }
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline.forecast.before `Number` *(default: 0)*
+
+The number of intervals to extend the trendline before the first data point.
+
+### series.trendline.forecast.after `Number` *(default: 0)*
+
+The number of intervals to extend the trendline after the last data point.
+
+### series.trendline.order `Number` *(default: 2)*
+
+The order (degree) of the Polynomial trendline. The default value is 2.
+
+Accepted values are from 2 to 6:
+* 2: a Quadratic polynomial trendline with a single extreme point (minimum or maximum) point.
+* 3: a Cubic polynomial trendline with up to 2 extreme points.
+* 4: a polynomial trendline of 4th degree with up to 3 extreme points.
+* 5: a polynomial trendline of 5th degree with up to 4 extreme points.
+* 6: a polynomial trendline of 6th degree with up to 5 extreme points.
+
+#### Example - set the polynomial trendline order (degree)
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-02-01"),
+                price: 141
+            }, {
+                date: new Date("2021-03-01"),
+                price: 151
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-05-01"),
+                price: 111
+            }, {
+                date: new Date("2021-06-01"),
+                price: 111
+            }, {
+                date: new Date("2021-07-01"),
+                price: 145
+            }, {
+                date: new Date("2021-08-01"),
+                price: 125
+            }, {
+                date: new Date("2021-09-01"),
+                price: 145
+            }, {
+                date: new Date("2021-10-01"),
+                price: 135
+            }, {
+                date: new Date("2021-11-01"),
+                price: 155
+            }, {
+                date: new Date("2021-12-01"),
+                price: 185
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Trend",
+            type: "polynomialTrendline",
+            for: "Price",
+            trendline: {
+                order: 3
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline.period `Number` *(default: 2)*
+
+The number of intervals to take when calculating averages. The value should be an integer greater than 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "movingAverageTrendline".
+
+#### Example - set the moving average trendline period
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-02-01"),
+                price: 141
+            }, {
+                date: new Date("2021-03-01"),
+                price: 151
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-05-01"),
+                price: 111
+            }, {
+                date: new Date("2021-06-01"),
+                price: 111
+            }, {
+                date: new Date("2021-07-01"),
+                price: 145
+            }, {
+                date: new Date("2021-08-01"),
+                price: 125
+            }, {
+                date: new Date("2021-09-01"),
+                price: 145
+            }, {
+                date: new Date("2021-10-01"),
+                price: 135
+            }, {
+                date: new Date("2021-11-01"),
+                price: 155
+            }, {
+                date: new Date("2021-12-01"),
+                price: 185
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Average",
+            type: "movingAverageTrendline",
+            for: "Price",
+            trendline: {
+                period: 3
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
 
 ### series.name `String`
 
@@ -7129,7 +7451,7 @@ Defaults to the series opacity.
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
 
 #### Example - override marker settings for the legend
 
@@ -8435,7 +8757,7 @@ Defaults to the series opacity.
 
 The configuration of the Chart legend item markers.
 
-By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
 
 #### Example - override marker settings for the legend
 
@@ -11564,7 +11886,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart#methods-exportImage)
+Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/stock-chart#methods-exportImage)
 
 #### Parameters
 
@@ -11584,7 +11906,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart#methods-exportPDF)
+Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/stock-chart#methods-exportPDF)
 
 #### Parameters
 
@@ -11598,7 +11920,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart#methods-exportSVG)
+Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/stock-chart#methods-exportSVG)
 
 #### Parameters
 

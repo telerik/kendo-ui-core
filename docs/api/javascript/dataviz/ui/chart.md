@@ -13604,11 +13604,12 @@ The data item field which contains the series value. **The field name should be 
 
 The name of the parent series of the trendline.
 
-> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to
+> "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
 
-#### Example - set the trendline parent series fromField
+#### Example - set the trendline parent series for field
 
-	<div id="chart"></div>
+	  <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
       dataSource: {
@@ -13692,7 +13693,8 @@ The data item field which contains the series to value.
 
 The trendline configuration options.
 
-> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to
+> "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
 
 #### Example - set the trendline options
 
@@ -13725,7 +13727,7 @@ The trendline configuration options.
         field: "count",
         categoryField: "period"
       }, {
-        name: "Sales Trend",
+        name: "Average",
         type: "movingAverageTrendline",
         for: "Sales By Quarter",
         trendline: {
@@ -13796,6 +13798,60 @@ The number of intervals to extend the trendline before the first data point.
 ### series.trendline.forecast.after `Number` *(default: 0)*
 
 The number of intervals to extend the trendline after the last data point.
+
+### series.trendline.order `Number` *(default: 2)*
+
+The order (degree) of the Polynomial trendline. The default value is 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "polynomialTrendline".
+
+Accepted values are from 2 to 6:
+* 2: a Quadratic polynomial trendline with a single extreme point (minimum or maximum) point.
+* 3: a Cubic polynomial trendline with up to 2 extreme points.
+* 4: a polynomial trendline of 4th degree with up to 3 extreme points.
+* 5: a polynomial trendline of 5th degree with up to 4 extreme points.
+* 6: a polynomial trendline of 6th degree with up to 5 extreme points.
+
+#### Example - set the polynomial trendline order (degree)
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        dataSource: {
+            data: [
+            {
+                period: "2021 Q1",
+                count: 369590.0
+            },
+            {
+                period: "2021 Q2",
+                count: 793564.0
+            },
+            {
+                period: "2021 Q3",
+                count: 1441133.0
+            },
+            {
+                period: "2021 Q4",
+                count: 1233020.0
+            }
+            ]
+        },
+        series: [{
+            name: "Sales By Quarter",
+            type: "line",
+            field: "count",
+            categoryField: "period"
+        }, {
+            name: "Sales Trend",
+            type: "polynomialTrendline",
+            for: "Sales By Quarter",
+            trendline: {
+                order: 3
+            }
+        }]
+    });
+    </script>
 
 ### series.trendline.period `Number` *(default: 2)*
 
@@ -18392,6 +18448,7 @@ The supported values are:
 * [`exponentialTrendline`](/controls/charts/elements/trendlines)
 * [`logarithmicTrendline`](/controls/charts/elements/trendlines)
 * [`powerTrendline`](/controls/charts/elements/trendlines)
+* [`polynomialTrendline`](/controls/charts/elements/trendlines)
 * [`movingAverageTrendline`](/controls/charts/elements/trendlines)
 * [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
 * [`pie`](/controls/charts/chart-types/pie-charts)

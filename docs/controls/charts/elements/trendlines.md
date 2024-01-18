@@ -98,7 +98,7 @@ The following example demonstrates how to create a logarithmic trendline for Cat
                     data: [-5.07, 12.7, 22, 24.5, 26.6]
                 },
                 {
-                    name: 'Sales Forecast (LOG)',
+                    name: 'Trend (LOG)',
                     type: 'logarithmicTrendline',
                     for: 'Growth',
                     color: 'lime'
@@ -147,6 +147,19 @@ The following example demonstrates how to create a power trendline for Categoric
     </script>
 ```
 
+### Polynomial Trendline
+
+Polynomial trendlines are best suited for data series that alternates between growth and decline.
+
+This type of trendlines accepts an [series.trendline.order](/api/javascript/dataviz/ui/chart#configuration-series.trendline.order) parameter that specifies the degree of the polynomial.
+The default order is 2. Accepted values are from 2 to 6:
+* 2: a Quadratic polynomial with a single extreme point (minimum or maximum) point.
+* 3: a Cubic polynomial with up to 2 extreme points.
+* 4: a polynomial of 4th degree with up to 3 extreme points.
+* 5: a polynomial of 5th degree with up to 4 extreme points.
+* 6: a polynomial of 6th degree with up to 5 extreme points.
+
+The following example demonstrates how to create a polynomial trendline for Categorical series.
 
 ```dojo
     <div id="chart"></div>
@@ -158,10 +171,13 @@ The following example demonstrates how to create a power trendline for Categoric
                     data: [15.7, 16.7, 20, 23.5, 26.6]
                 },
                 {
-                    name: 'Sales Forecast (LINEAR)',
-                    type: 'linearTrendline',
-                    for: 'World',
-                    color: "lime"
+                    name: "Trend (POLY)",
+                    type: "polynomialTrendline",
+                    for: "World",
+                    color: "lime",
+                    trendline: {
+                        order: 3
+                    }
                 }
             ],
             tooltip: {
@@ -191,10 +207,10 @@ The following example demonstrates how to create a moving average trendline for 
                     data: [15.7, 16.7, 20, 23.5, 26.6]
                 },
                 {
-                    name: 'Sales Forecast (Moving AVG.)',
-                    type: 'movingAverageTrendline',
-                    for: 'World',
-                    color:'lime'
+                    name: "Moving Average",
+                    type: "movingAverageTrendline",
+                    for: "World",
+                    color:"lime"
                 }
             ],
             tooltip: {
