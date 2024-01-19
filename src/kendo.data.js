@@ -3927,7 +3927,7 @@ var __meta__ = {
                 options.aggregate = convertDescriptorsField(options.aggregate, that.reader.model);
             }
 
-            if (!that.options.groupPaging) {
+            if (!that.options.groupPaging || !(that.options.serverPaging && that.options.serverGrouping)) {
                 delete options.groupPaging;
             }
 
@@ -4527,6 +4527,7 @@ var __meta__ = {
             }
 
             data.groupPaging = true;
+
             clearTimeout(that._timeout);
             that._timeout = setTimeout(function() {
                 that._queueRequest(data, function() {

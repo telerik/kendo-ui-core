@@ -288,8 +288,11 @@ var __meta__ = {
                 } else {
                     if (width <= 600) {
                         info.hide();
-                    }
-                    if (options.numeric) {
+                        if (options.numeric) {
+                            that._numericSelect.show();
+                            that.list.hide();
+                        }
+                    } else if (options.numeric) {
                         that._numericSelect.hide();
                     }
                 }

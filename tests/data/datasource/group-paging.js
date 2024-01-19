@@ -342,10 +342,11 @@
             assert.equal(updateOuterRangesLengthStub.calls("_updateOuterRangesLength"), 1);
         });
 
-        it("_params includes a groupPaging parameter if groupPaging is enabled", function() {
+        it("_params does not include groupPaging parameter if groupPaging is enabled but server operations are false", function() {
             var dataSource = remoteDataSource(null, {
                 total: 100,
                 serverPaging: false,
+                serverGrouping: false,
                 group: {
                     field: 'ShipAddress'
                 },
@@ -354,7 +355,7 @@
 
             var params = dataSource._params();
 
-            assert.isOk(typeof params.groupPaging != "undefined");
+            assert.isOk(typeof params.groupPaging == "undefined");
         });
 
         it("_params does not include a groupPaging parameter if groupPaging is not enabled", function() {

@@ -1235,6 +1235,7 @@ var __meta__ = {
                 animation: list.options.animation,
                 isRtl: support.isRtl(list.wrapper),
                 autosize: list.options.autoWidth,
+                autowidth: list.options.autoWidth,
                 activate: () => {
                     this._refreshFloatingLabel();
                 },

@@ -54,6 +54,13 @@ it("container with percent width produces wrapper with percent width", function(
     assert.isOk(wrap.children()[0].style.width == "50%");
 });
 
+it("k-child-animation-container has auto width when autowidth is set to true", function() {
+    span.width("100px");
+
+    kendo.wrap(span, true, undefined, undefined, true);
+    assert.isOk(span.parent().attr("style") === "width: auto;");
+});
+
     });
 }());
 

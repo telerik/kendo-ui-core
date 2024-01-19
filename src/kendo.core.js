@@ -1882,7 +1882,7 @@ function pad(number, digits, end) {
         };
     }
 
-    function wrap(element, autosize, resize, shouldCorrectWidth = true) {
+    function wrap(element, autosize, resize, shouldCorrectWidth = true, autowidth) {
         var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
@@ -1908,7 +1908,7 @@ function pad(number, digits, end) {
                 $("<div/>")
                 .addClass("k-child-animation-container")
                 .css({
-                    width: width,
+                    width: autowidth ? "auto" : width,
                     height: height
                 }));
             parent = element.parent();

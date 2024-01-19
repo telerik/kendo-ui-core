@@ -166,6 +166,7 @@ var __meta__ = {
             viewport: window,
             copyAnchorStyles: true,
             autosize: false,
+            autowidth: false,
             modal: false,
             adjustSize: {
                 width: 0,
@@ -270,7 +271,7 @@ var __meta__ = {
                     that._toggleResize(true);
                 }
 
-                that.wrapper = wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap, shouldCorrectWidth)
+                that.wrapper = wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap, shouldCorrectWidth, options.autowidth)
                     .css({
                         overflow: HIDDEN,
                         display: "block",
