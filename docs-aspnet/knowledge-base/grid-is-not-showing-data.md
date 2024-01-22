@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
+  <td>Grid for Progress® Telerik® UI for {{ site.framework }}</td>
  </tr>
 </table>
 

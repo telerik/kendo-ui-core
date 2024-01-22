@@ -14,7 +14,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
 
 1. Define a command column for the `Edit` and `Destroy` commands.
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+        @(Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
             {
@@ -25,11 +25,11 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
                 // Add the "Edit" and "Destroy" commands.
                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
             })
-        %>
+        )
 
 1. Set the editing mode to `InLine`.
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+        @(Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
             {
@@ -41,11 +41,11 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             })
             // Set the edit mode to "InLine".
             .Editable(editable => editable.Mode(GridEditMode.InLine))
-        %>
+        )
 
 1. Add the `Create` command to the Grid toolbar.
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+        @(Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
             {
@@ -58,11 +58,11 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             // Add the "Create" command.
             .ToolBar(commands => commands.Create())
             .Editable(editable => editable.Mode(GridEditMode.InLine))
-        %>
+        )
 
 1. Specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+        @(Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
             {
@@ -83,11 +83,11 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
                 .Destroy(destroy => destroy.Action("Destroy", "Home"))
                 // <-- Configure CRUD.
             )
-        %>
+        )
 
 1. Specify the property of the model which is the unique identifier (primary key).
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+        @(Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
             {
@@ -108,14 +108,220 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
                 .Update(update => update.Action("Update", "Home"))
                 .Destroy(destroy => destroy.Action("Destroy", "Home"))
             )
-        %>
+        )
+        
 
 1. Implement the `Read` action method.
 
+    ```Index
         public ActionResult Index()
         {
-            return View(ProductRepository.All());
+            return View(ProductService.GetAll());
         }
+    ```
+    ```ProductService
+        public class ProductService : IDisposable
+        {
+            private static bool UpdateDatabase = false;
+            private DemoDBContext entities;
+
+            public ProductService(DemoDBContext entities)
+            {
+                this.entities = entities;
+            }
+
+            public IList<ProductViewModel> GetAll()
+            {
+                bool IsWebApiRequest = HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith("~/api");
+                IList<ProductViewModel> result = null;
+
+                if (!IsWebApiRequest)
+                {
+                    result = HttpContext.Current.Session["Products"] as IList<ProductViewModel>;
+                }
+
+                if (result == null || UpdateDatabase)
+                {
+                    var data = entities.Products.ToList();
+                    result = data.Select(product => new ProductViewModel
+                    {
+                        ProductID = product.ProductID,
+                        ProductName = product.ProductName,
+                        UnitPrice = product.UnitPrice.HasValue ? product.UnitPrice.Value : default(decimal),
+                        UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
+                        QuantityPerUnit = product.QuantityPerUnit,
+                        Discontinued = product.Discontinued,
+                        UnitsOnOrder = product.UnitsOnOrder.HasValue ? (int)product.UnitsOnOrder.Value : default(int),
+                        CategoryID = product.CategoryID,
+                        Category = new CategoryViewModel()
+                        {
+                            CategoryID = product.Category.CategoryID,
+                            CategoryName = product.Category.CategoryName
+                        },
+                        LastSupply = DateTime.Today
+                    }).ToList();
+
+                    if (!IsWebApiRequest)
+                    {
+                        HttpContext.Current.Session["Products"] = result;
+                    }
+                }
+
+                return result;
+            }
+
+            public IEnumerable<ProductViewModel> Read()
+            {
+                return GetAll();
+            }
+
+            public void Create(ProductViewModel product)
+            {
+                if (!UpdateDatabase)
+                {
+                    var first = GetAll().OrderByDescending(e => e.ProductID).FirstOrDefault();
+                    var id = (first != null) ? first.ProductID : 0;
+
+                    product.ProductID = id + 1;
+
+                    if (product.CategoryID == null)
+                    {
+                        product.CategoryID = 1;
+                    }
+
+                    if (product.Category == null)
+                    {
+                        product.Category = new CategoryViewModel() { CategoryID = 1, CategoryName = "Beverages" };
+                    }
+
+                    GetAll().Insert(0, product);
+                }
+                else
+                {
+                    var entity = new Product();
+
+                    entity.ProductName = product.ProductName;
+                    entity.UnitPrice = product.UnitPrice;
+                    entity.UnitsInStock = (short)product.UnitsInStock;
+                    entity.Discontinued = product.Discontinued;
+                    entity.CategoryID = product.CategoryID;
+
+                    if (entity.CategoryID == null)
+                    {
+                        entity.CategoryID = 1;
+                    }
+
+                    if (product.Category != null)
+                    {
+                        entity.CategoryID = product.Category.CategoryID;
+                    }
+
+                    entities.Products.Add(entity);
+                    entities.SaveChanges();
+
+                    product.ProductID = entity.ProductID;
+                }
+            }
+
+            public void Update(ProductViewModel product)
+            {
+                if (!UpdateDatabase)
+                {
+                    var target = One(e => e.ProductID == product.ProductID);
+
+                    if (target != null)
+                    {
+                        target.ProductName = product.ProductName;
+                        target.UnitPrice = product.UnitPrice;
+                        target.UnitsInStock = product.UnitsInStock;
+                        target.Discontinued = product.Discontinued;
+
+                        if (product.CategoryID == null)
+                        {
+                            product.CategoryID = 1;
+                        }
+
+                        if (product.Category != null)
+                        {
+                            product.CategoryID = product.Category.CategoryID;
+                        }
+                        else
+                        {
+                            product.Category = new CategoryViewModel()
+                            {
+                                CategoryID = (int)product.CategoryID,
+                                CategoryName = entities.Categories.Where(s => s.CategoryID == product.CategoryID).Select(s => s.CategoryName).First()
+                            };
+                        }
+                        
+                        target.CategoryID = product.CategoryID;
+                        target.Category = product.Category;
+                    }
+                }
+                else
+                {
+                    var entity = new Product();
+
+                    entity.ProductID = product.ProductID;
+                    entity.ProductName = product.ProductName;
+                    entity.UnitPrice = product.UnitPrice;
+                    entity.UnitsInStock = (short)product.UnitsInStock;
+                    entity.Discontinued = product.Discontinued;
+                    entity.CategoryID = product.CategoryID;
+
+                    if (product.Category != null)
+                    {
+                        entity.CategoryID = product.Category.CategoryID;
+                    }
+
+                    entities.Products.Attach(entity);
+                    entities.Entry(entity).State = EntityState.Modified;
+                    entities.SaveChanges();
+                }
+            }
+
+            public void Destroy(ProductViewModel product)
+            {
+                if (!UpdateDatabase)
+                {
+                    var target = GetAll().FirstOrDefault(p => p.ProductID == product.ProductID);
+                    if (target != null)
+                    {
+                        GetAll().Remove(target);
+                    }
+                }
+                else
+                {
+                    var entity = new Product();
+
+                    entity.ProductID = product.ProductID;
+
+                    entities.Products.Attach(entity);
+
+                    entities.Products.Remove(entity);
+
+                    var orderDetails = entities.OrderDetails.Where(pd => pd.ProductID == entity.ProductID);
+
+                    foreach (var orderDetail in orderDetails)
+                    {
+                        entities.OrderDetails.Remove(orderDetail);
+                    }
+
+                    entities.SaveChanges();
+                }
+            }
+
+            public ProductViewModel One(Func<ProductViewModel, bool> predicate)
+            {
+                return GetAll().FirstOrDefault(predicate);
+            }
+
+            public void Dispose()
+            {
+                entities.Dispose();
+            }
+        }
+    ```    
 
 1. Implement the `Create` action method.
 
@@ -125,7 +331,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             if (ModelState.IsValid)
             {
                 // The model is valid. Insert the product and re-display the Grid.
-                ProductRepository.Insert(product);
+                ProductService.Create(product);
                 // GridRouteValues() is an extension method which returns the
                 // route values defining the Grid state - current page, sort expression, filter etc.
                 RouteValueDictionary routeValues = this.GridRouteValues();
@@ -134,7 +340,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             }
 
             // The model is invalid. Render the current view to show any validation errors.
-            return View("Index", ProductRepository.All());
+            return View("Index", ProductService.GetAll());
         }
 
 1. Implement the `Update` action method.
@@ -145,7 +351,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             if (ModelState.IsValid)
             {
                 // The model is valid. Update the product and re-display the Grid.
-                ProductRepository.Update(product);
+                ProductService.Update(product);
 
                 // GridRouteValues() is an extension method which returns the
                 // route values defining the Grid state - current page, sort expression, filter etc.
@@ -155,7 +361,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             }
 
             // The model is invalid. Render the current view to show any validation errors.
-            return View("Index", ProductRepository.All());
+            return View("Index", ProductService.GetAll());
         }
 
 1. Implement the `Destroy` action method.
@@ -164,7 +370,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
         public ActionResult Destroy(int productID)
         {
             // Find a product with ProductID equal to the id action parameter.
-            Product product = ProductRepository.One(p => p.ProductID == productID);
+            Product product = ProductService.One(p => p.ProductID == productID);
 
             RouteValueDictionary routeValues;
 
@@ -179,7 +385,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
             }
 
             // Delete the record.
-            ProductRepository.Delete(product);
+            ProductService.Destroy(product);
 
             routeValues = this.GridRouteValues();
 

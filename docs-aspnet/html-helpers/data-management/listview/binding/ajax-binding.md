@@ -225,21 +225,21 @@ To pass additional parameters to the action method:
 
 By default, the Telerik UI ListView for {{ site.framework }} requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
 
-    ```HtmlHelper
-        .DataSource(dataSource => dataSource
-            .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
-            .Read(read => read.Action("Orders_Read", "ListView"))
-        )
-    ```
-    {% if site.core %}
-    ```TagHelper
-        <datasource type="DataSourceTagHelperType.Ajax" server-operation="false">
-            <transport>
-                <read url="@Url.Action("Orders_Read", "ListView")"/>
-            </transport>
-        </datasource>
-    ```
-    {% endif %}
+```HtmlHelper
+    .DataSource(dataSource => dataSource
+        .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
+        .Read(read => read.Action("Orders_Read", "ListView"))
+    )
+```
+{% if site.core %}
+```TagHelper
+    <datasource type="DataSourceTagHelperType.Ajax" server-operation="false">
+        <transport>
+            <read url="@Url.Action("Orders_Read", "ListView")"/>
+        </transport>
+    </datasource>
+```
+{% endif %}
 
 ## See Also
 

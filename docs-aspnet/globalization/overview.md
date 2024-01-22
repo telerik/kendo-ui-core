@@ -73,6 +73,8 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
             kendo.culture("es-ES");
         </script>
 
+>tip You can find the complete list of available cultures in the [Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/tree/master/src/cultures).
+
 ## Matching Cultures
 
 The cultures that are set on the client and on the server have to match. This ensures that dates and numbers are displayed and parsed correctly.

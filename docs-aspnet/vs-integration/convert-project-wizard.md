@@ -15,6 +15,15 @@ The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{
 
 {% if site.core %}
 > The Convert Project Wizard does not support converting Razor Pages projects and projects with .Net version 5.
+> The Convert Project Wizard is independent from the Visual Studio version and requires:
+ - A .NET Core project version 3.1, 6, 7 or 8
+ - The `Microsoft.NET.Sdk.Web` to be included as property of the project file
+    ```
+        <Project Sdk="Microsoft.NET.Sdk.Web">
+            <!-- omitted for brevity -->
+        </Project>
+    ```
+Alternatively, the `Microsoft.NET.Sdk.Web` can be included with the following dependendcies as well `Microsoft.AspNetCore`, `Microsoft.AspNetCore.App`, `Microsoft.AspNetCore.All`.
 {% endif %}
 
 ## Using the Convert Project Wizard

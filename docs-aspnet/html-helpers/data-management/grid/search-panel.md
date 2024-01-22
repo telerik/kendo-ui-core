@@ -122,9 +122,9 @@ The default search panel message is `Search...`. You can modify it by using the 
 
 * When filtering is enabled, the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
 
-## KB Articles on Aggregates
+## KB Articles on Grid Search
 
-* [Calculate Custom Aggregates by Unique Value in Grid]({% slug grid-searchbox-date-filtering %})
+* [Search Values by Date in Grid {{ site.framework}}]({% slug grid-searchbox-date-filtering %})
 * [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also

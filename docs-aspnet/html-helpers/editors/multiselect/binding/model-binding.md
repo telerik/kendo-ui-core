@@ -41,7 +41,7 @@ Local data is the data that is available on the client when the MultiSelect is i
 1. Add the MultiSelect to the view and bind it to a property of the view model.
 
     ```HtmlHelper
-        @model MvcApplication1.Models.ProductViewModel
+        @model Application1.Models.ProductViewModel
 
         @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
             .DataValueField("OrderID")
@@ -51,7 +51,7 @@ Local data is the data that is available on the client when the MultiSelect is i
     ```
     {% if site.core %}
     ```TagHelper
-        @model MvcApplication1.Models.ProductViewModel
+        @model Application1.Models.ProductViewModel
 
         <kendo-multiselect for="SelectedOrders"
                            datavaluefield="OrderID"
@@ -102,7 +102,7 @@ You can configure the MultiSelect to get its data from a remote source by making
 1. Add the MultiSelect to the view and configure its DataSource to use remote data.
 
     ```HtmlHelper
-        @model MvcApplication1.Models.ProductViewModel
+        @model Application1.Models.ProductViewModel
 
         @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
             .Filter(FilterType.Contains)
@@ -120,7 +120,7 @@ You can configure the MultiSelect to get its data from a remote source by making
     ```
     {% if site.core %}
     ```TagHelper
-        @model MvcApplication1.Models.ProductViewModel
+        @model Application1.Models.ProductViewModel
 
         <kendo-multiselect for="SelectedOrders"
                            filter="FilterType.Contains"

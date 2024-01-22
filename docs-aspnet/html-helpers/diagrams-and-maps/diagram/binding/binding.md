@@ -18,6 +18,7 @@ To bind the Diagram to remote data, specify the `DataSource` option. You can eit
     @(Html.Kendo().Diagram()
             .Name("diagram")
             .DataSource(dataSource => dataSource
+                // the default type of the DataSource is Custom
                 .Read(read => read
                     .Action("_OrgChart", "Diagram")
                 )
