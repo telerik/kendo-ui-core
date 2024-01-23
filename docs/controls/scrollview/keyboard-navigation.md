@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: jQuery ScrollView Documentation - Keyboard Navigation
 description: "Get started with the jQuery ScrollView by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_scrollview_jquery
-position: 2
+position: 3
 ---
 
 # Keyboard Navigation

@@ -385,7 +385,11 @@ The text messages displayed in the field menu.
                 filter: "Filter",
                 include: "Include Fields...",
                 clear: "Clear",
-                reset: "Reset"
+                reset: "Reset",
+                moveToColumns: "Move to Columns",
+                moveToRows: "Move to Rows",
+                movePrevious: "Move as Previous",
+                moveNext: "Move as Next",
             }
         },
         dataSource: {
@@ -634,6 +638,130 @@ The text of the reset button in the filter includes menu item.
         messages: {
             fieldMenu: {
                 reset: "Clear"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+### messages.fieldMenu.moveToColumns `String` *(default: "Move to Columns")*
+
+The text of the move to columns action in the menu.
+
+#### Example
+
+    <div id="configurator"></div>
+    <script>
+    $("#configurator").kendoPivotConfiguratorV2({
+        filterable: true,
+        messages: {
+            fieldMenu: {
+                moveToColumns: "Move to Columns"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+### messages.fieldMenu.moveToRows `String` *(default: "Move to Rows")*
+
+The text of the move to rows action in the menu.
+
+#### Example
+
+    <div id="configurator"></div>
+    <script>
+    $("#configurator").kendoPivotConfiguratorV2({
+        filterable: true,
+        messages: {
+            fieldMenu: {
+                moveToRows: "Move to Rows"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+### messages.fieldMenu.moveNext `String` *(default: "Move as Next")*
+
+The text of the move as next action in the menu.
+
+#### Example
+
+    <div id="configurator"></div>
+    <script>
+    $("#configurator").kendoPivotConfiguratorV2({
+        filterable: true,
+        messages: {
+            fieldMenu: {
+                moveNext: "Move as Next"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+### messages.fieldMenu.movePrevious `String` *(default: "Move as Previous")*
+
+The text of the move as previous action in the menu.
+
+#### Example
+
+    <div id="configurator"></div>
+    <script>
+    $("#configurator").kendoPivotConfiguratorV2({
+        filterable: true,
+        messages: {
+            fieldMenu: {
+                movePrevious: "Move as Previous"
             }
         },
         dataSource: {

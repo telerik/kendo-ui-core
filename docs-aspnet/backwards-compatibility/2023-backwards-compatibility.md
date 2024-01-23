@@ -3,7 +3,7 @@ title: 2023 Releases
 page_title: 2023 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2023."
 slug: breakingchanges_2023
-position: 1
+position: 2
 ---
 
 # 2023 Releases

@@ -58,6 +58,33 @@ Specifies the page width at which the widget will be hidden and its toggle butto
         });
     </script>
 
+### nonce `String` *(default: "")*
+
+Specifies the nonce attribute that will be set to the inline style injected in the `<head>` tag containing the dynamic media query styles.
+
+#### Example
+
+    <header>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
+        Logo
+    </header>
+
+    <nav id="navigation">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+    </nav>
+
+    <article>
+        Content
+    </article>
+
+    <script>
+        $("#navigation").kendoResponsivePanel({
+            orientation: "top",
+            nonce: "test1234"
+        });
+    </script>
+
 ### orientation `String` *(default: "left")*
 
 Specifies the direction from which the hidden element will open up, once the toggle button has been activated. Valid values are "left", "right", and "top".

@@ -104,6 +104,10 @@ The following example demonstrates a basic configuration of the Responsive Panel
 
 > The Telerik UI Responsive Panel component accepts any HTML that is passed in the `Content` option. For more advanced scenarios, pass custom HTML of your choice.  
 
+## CSP Compliance
+
+The Responsive Panel relies on inline styles to create dynamic media queries. If strict [CSP mode]({% slug troubleshooting_content_security_policy_aspnetmvc %}) is enabled for the applicaiton you can use the [`.Nonce`](/api/kendo.mvc.ui.fluent/responsivepanelbuilder#noncesystemstring) configuration option and specify a nonce attribute that will be set to the inline style injected in the `head` tag, containing the dynamic media query styles.
+
 ## Next Steps
 
 * [Getting Started with the Responsive Panel]({% slug responsive_panel_getting_started %})

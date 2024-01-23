@@ -226,6 +226,7 @@ Sets the minimum distance in pixels that should be left between the border and t
     });
     </script>
 
+
 ### renderAs `String` *(default: "svg")*
 
 Sets the preferred rendering engine.
@@ -236,7 +237,8 @@ The supported values are:
 * "canvas" - renders the widget as a Canvas element, if available.
 * "svg" - renders the widget as inline SVG document, if available
 
-### Example - Render as SVG, if supported
+
+#### Example - Render as SVG, if supported
 
     <div id="qrCode"></div>
     <script>

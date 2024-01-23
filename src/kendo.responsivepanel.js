@@ -84,6 +84,11 @@ var __meta__ = {
             var head = $("head,body")[0];
             var style = document.createElement('style');
 
+            var nonce = this.options.nonce;
+            if (nonce) {
+                style.setAttribute("nonce", nonce);
+            }
+
             head.appendChild(style);
 
             if (style.styleSheet) {
@@ -95,6 +100,7 @@ var __meta__ = {
         options: {
             name: "ResponsivePanel",
             content: "",
+            nonce: "",
             orientation: "left",
             toggleButton: ".k-rpanel-toggle",
             breakpoint: 640,

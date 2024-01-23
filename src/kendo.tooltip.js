@@ -35,9 +35,9 @@ var __meta__ = {
         REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
         TEMPLATE = ({ autoHide, callout, dir }) =>
-            `<div role="tooltip" class="k-widget k-tooltip${!autoHide ? ' k-tooltip-closable' : ''}">` +
+            `<div role="tooltip" class="k-tooltip${!autoHide ? ' k-tooltip-closable' : ''}">` +
                 '<div class="k-tooltip-content"></div>' +
-                (!autoHide ? `<div class="k-tooltip-button">${kendo.ui.icon($('<a href="#" title="Close"></a>'), { icon: "x" })}</div>` : '') +
+                (!autoHide ? `<div class="k-tooltip-button">${kendo.ui.icon($('<span title="Close"></span>'), { icon: "x" })}</div>` : '') +
                 (callout ? `<div class="k-callout k-callout-${dir}"></div>` : '') +
             '</div>',
         IFRAMETEMPLATE = kendo.template(({ content }) =>

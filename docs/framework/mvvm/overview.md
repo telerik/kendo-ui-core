@@ -22,7 +22,8 @@ The View-Model part of the MVVM handles the exposing of the data objects from th
 
 * The MVVM pattern works only with [external templates]({% slug getting_started_external_templates %}), thus the [CSP compatible templates]({% slug csp_templates %}) cannot be used in an MVVM scenario.
 * Set numeric options as strings. Some Kendo UI widgets accept string options, which represent numbers and can be parsed as such, for example, `<input data-role="maskedtextbox" data-mask="09">`. This mask will be parsed as a number and the widget will receive a single 9-digit in its initialization method, instead of a `"09"` string. In such scenarios, the widget options must be [set with custom MVVM binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %}).
-* Bindings are not JavaScript code. Although bindings look like JavaScript code, they are not. The `<div data-bind="text: person.name.toLowerCase()"></div>` chunk of code is not a valid Kendo UI MVVM binding declaration. If a value from the View-Model requires processing before displaying it in the View, a method must be created and used instead.
+* Bindings are not JavaScript code. Although bindings look like JavaScript code, they are not. The `<div data-bind="text: person.name.toLowerCase()"></div>` chunk of code is not a valid Kendo UI MVVM binding declaration. If a value from the View-Model requires processing before displaying it in the View, a method must be created and used instead. Note: Although the approach was working with older Kendo UI for jQuery versions, with the [CSP compliance improvements]({% slug troubleshooting_content_security_policy_kendoui %}) introduced with the 2023 R1 release, the approach could not be used. 
+
 
         <div data-bind="text: person.lowerCaseName"></div>
 

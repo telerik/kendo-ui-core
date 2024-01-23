@@ -70,6 +70,8 @@ To download the {{ site.product }} binaries with the components, you can use eit
 * Archives with setup files&mdash;from the downloads section of your [Telerik account](https://www.telerik.com/account), you can get `.zip` and `.7z` files that include the Telerik UI for ASP.NET MVC binaries and the client-side JavaScript and CSS files. The [files included in the archive]({% slug msi_install_aspnetmvc6_aspnetmvc %}#distribution-contents) are identical with those that you get when you use the automated installer, but you don't get the automatic NuGet configuration and the Visual Studio extensions.
 {% endif %}
 
+> As of R1 2024, all of the binaries and NuGet packages will be digitally signed {% if site.core %}. {% else %} and the `telerik.ui.for.aspnetmvc.hotfix.{VERSION}.commercial.digitally-signed` package will be deprecated.{% endif %}
+
 ## Providing the Client-Side Resources
 
 Regardless of the method that you use to download and install the {{ site.product }} binaries, you must always [include the client-side JavaScript and CSS files in your project]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}). The reason is that the {{ site.product }} are server-side wrappers for the [Kendo UI for jQuery widgets](https://www.telerik.com/kendo-jquery-ui).

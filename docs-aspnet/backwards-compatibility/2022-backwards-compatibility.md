@@ -3,7 +3,7 @@ title: 2022 Releases
 page_title: 2022 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2022."
 slug: breakingchanges_2022
-position: 2
+position: 3
 ---
 
 # 2022 Releases

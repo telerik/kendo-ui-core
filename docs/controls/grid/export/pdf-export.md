@@ -28,6 +28,7 @@ To initiate PDF export through code, call the [`saveAsPdf`](/api/javascript/ui/g
 
 > * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the PDF file.
+> * When the Grid is exported to PDF, the [`dataBound`](/api/javascript/ui/grid/events/databound) event is fired. This is needed as the Grid has to page itself in order to allow the drawing mechanism to copy the content. This also allows modifying the content of the Grid before it is exported to PDF.
 
 The following example demonstrates how to enable the PDF export functionality of the Grid.
 

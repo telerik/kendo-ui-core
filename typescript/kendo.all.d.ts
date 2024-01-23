@@ -8916,6 +8916,10 @@ declare namespace kendo.ui {
         include?: string;
         clear?: string;
         reset?: string;
+        moveToColumns?: string;
+        moveToRows?: string;
+        movePrevious?: string;
+        moveNext?: string;
         operators?: PivotConfiguratorV2MessagesFieldMenuOperators;
     }
 
@@ -9708,6 +9712,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         autoClose?: boolean | undefined;
         breakpoint?: number | undefined;
+        nonce?: string | undefined;
         orientation?: string | undefined;
         toggleButton?: string | undefined;
         close?(e: ResponsivePanelEvent): void;
