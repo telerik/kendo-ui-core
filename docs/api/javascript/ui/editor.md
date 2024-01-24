@@ -1856,6 +1856,22 @@ The title of the Wrap Text option in Table Wizard.
     });
     </script>
 
+### nonce `String`
+
+When strict CSP is enabled a `nonce` can be provided for the inline styles. The passed value would be used as the nonce attribute for the inline styles in the content area iframe, the placeholder inline style and the link tags loading external stylesheets in the content area.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                nonce: "kendoNonce"
+            });
+        });
+    </script>
+
 ### navigateOnTab `Boolean` *(default: false)*
 
 If set to `true` this configuration option would enable Tab-based navigation among Editor ToolBar items. By default navigation is arrow-based.
@@ -4705,6 +4721,22 @@ Defines text for search box placeholder.
         }
       }
     });
+    </script>
+
+### unsafeInline `Boolean` *(default: true)*
+
+When set to false, the decoration applied by the Formatting tool dropdown will be skipped and the values will appear as plain text options.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                unsafeInline: false
+            });
+        });
     </script>
 
 ## Fields

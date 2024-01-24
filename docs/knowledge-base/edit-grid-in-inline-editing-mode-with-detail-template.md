@@ -61,6 +61,8 @@ The following example demonstrates how to edit records by using a different deta
     { id: 2, from: "John Doe", to: "Jane Doe", cc: "Manager", text: "Other message content" }
   ];
 
+  var sampleDataNextID = data.length + 1;
+
 $("#grid").kendoGrid({
   columns: [
     { field: "from" },
@@ -76,17 +78,18 @@ $("#grid").kendoGrid({
       },
       update: function(options){
         var updatedItem = options.data;
+        // Save the updated item to the original datasource.
+        data.splice(updatedItem.id - 1, 1, updatedItem);
 
-            // Save the updated item to the original datasource.
-            data.splice(updatedItem.id - 1, 1, updatedItem);
-
-            // On success.
-            options.success();
+        // On success.
+        options.success();
       },
       create: function(options){
-        options.data.id = data.length;
+        options.data.id = sampleDataNextID++;
+        // Save data item to the original datasource.
         data.push(options.data);
-        options.success()
+        // On success.
+        options.success(options.data);
       },
       destroy: function(options){
         var indexToDelete;

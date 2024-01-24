@@ -236,7 +236,7 @@ If a jQuery element is passed as the first it will render an icon classes and co
 
 ##### options `Object|String` *(required)*
 
-If `string` is provided it will attempt to render a valid SVG icon from the predefined kendo svg collection (`kendo.ui.svgIcons`). Or add class for the font icon by preffixing with `k-i-`. Check teh available options in FontIcon or SvgIcon API sections.
+If a `string` is provided, it will attempt to render a valid SVG icon from the predefined kendo svg collection (`kendo.ui.svgIcons`). Or add class for the font icon by prefixing with `k-i-`. Check the available options in the [`FontIcon`](/styles-and-layout/sass-themes/font-icons) or the [`SvgIcon`](/styles-and-layout/sass-themes/svg-icons) API sections.
 
 #### Example - extending an element
 

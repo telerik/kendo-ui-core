@@ -171,6 +171,14 @@ The following example demonstrates the basic configuration of the Editor.
 | [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})| You can choose between the default styling options for the Editor's content or add your custom styles.|
 | [Accessibility]({% slug accessibility_aspnetcore_editor %})| The Editor is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
 
+## CSP Compliance
+
+The Editor component relies on inline styles for several of its features. If strict [CSP mode]({% slug troubleshooting_content_security_policy_aspnetmvc %}) is enabled for the application you can use the following configuration options to make the Editor component CSP-compliant:
+
+* Use the [`.Nonce`](/api/kendo.mvc.ui.fluent/editorbuilder#noncesystemstring) configuration and pass a value for the nonce attribute. The passed value would be used as the nonce attribute for the inline styles in the content area iframe, the placeholder inline style and the link tags loading external stylesheets in the content area.
+* Use the [`.UnsafeInline`](/api/kendo.mvc.ui.fluent/editorbuilder#unsafeinlinesystemboolean) configuration and set it to `false`, so no inline styles are used by the Formatting tool. As a result no decoration will be applied to the Formatting tool dropdown and the formated values will appear as plain text. Actual formatting will be applied (for example if the content of the Editor is exported to MS Word), but the applied format will not be visible in the Editor component, due to the enabled strict CSP mode.
+
+
 ## Next Steps
 
 * [Getting Started with the Editor]({% slug aspnetcore_editor_getting_started %})

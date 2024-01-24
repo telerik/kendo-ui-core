@@ -5091,6 +5091,8 @@ declare namespace kendo.ui {
         fileBrowser?: EditorFileBrowser | undefined;
         navigateOnTab?: boolean | undefined;
         nonSplittableTagsOnPaste?: string[] | EditorNonSplittableTagsOnPaste[] | undefined;
+        nonce?: string | undefined;
+        unsafeInline?: boolean | undefined;
         change?(e: EditorEvent): void;
         execute?(e: EditorExecuteEvent): void;
         keydown?(e: EditorEvent): void;

@@ -31,6 +31,8 @@ res_type: kb
  </tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+
 ## Description
 
 How can I create a custom ToolBar template in an AngularJS application using the Kendo UI Grid for jQuery?
@@ -39,36 +41,41 @@ How can I create a custom ToolBar template in an AngularJS application using the
 
 The following example demonstrates how to create a custom ToolBar template in AngularJS applications.
 
+> The example loads Kendo UI 2023.3.1010 version.
 
 ```dojo
-<div id="example" ng-app="KendoDemos">
-  <div ng-controller="MyCtrl">
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
 
-      <script id="template" type="text/x-kendo-template">
-          {{ gridName }}
-          <a class="k-button" href="\#" ng-click="toolbarClick()">Command</a>
-      </script>
+    <div id="example" ng-app="KendoDemos">
+      <div ng-controller="MyCtrl">
 
-      <div kendo-grid
-         k-toolbar="toolbarTemplate"
-         k-columns="[{ title: 'foo' , field: 'foo' },
-                    { title: 'bar' , field: 'bar' }]"
-         k-data-source="data">
+        <script id="template" type="text/x-kendo-template">
+            <button id="textButton" ng-click="toolbarClick()" data-role="button" class="k-button k-button-sm k-rounded-md k-button-solid k-button-solid-base" type="button" role="button">
+              <span class="k-button-text">Command</span>
+          </button>
+        </script>
+
+        <div kendo-grid
+             k-toolbar="toolbarTemplate"
+             k-columns="[{ title: 'foo' , field: 'foo' },
+                        { title: 'bar' , field: 'bar' }]"
+             k-data-source="data">
+        </div>
       </div>
-  </div>
-</div>
+    </div>
 
-<script>
-    function MyCtrl($scope) {
+    <script>
+      function MyCtrl($scope) {
         $scope.data = new kendo.data.DataSource({ data: [{foo: "foo", bar: "bar"}] });
         $scope.gridName = "My Grid";
         $scope.toolbarTemplate = $("#template").html();
         $scope.toolbarClick = function() { console.log("click"); }
-    }
+      }
 
-    angular.module("KendoDemos", ["kendo.directives"])
-           .controller("MyCtrl", MyCtrl);
-</script>
+      angular.module("KendoDemos", ["kendo.directives"])
+        .controller("MyCtrl", MyCtrl);
+    </script>
 ```
 
 ## See Also
