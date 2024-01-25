@@ -14,7 +14,7 @@
             var widget = new TextArea(textarea),
                 wrapper = widget.wrapper;
 
-            assert.equal(wrapper[0].className, "k-input k-textarea k-input-solid k-input-md k-rounded-md k-resize-none");
+            assert.equal(wrapper[0].className, "k-input k-textarea k-input-solid k-input-md k-rounded-md !k-flex-col");
         });
 
         it("Should set placeholder", function() {
@@ -91,11 +91,11 @@
             assert.isOk(widget.wrapper.hasClass("test"));
         });
 
-        it("sets the width of the textarea to 100%", function() {
+        it("removes inline style set to textarea element", function() {
             var widget = new TextArea(textarea.css("width", "200px"));
 
             assert.equal(widget.wrapper[0].style.width, "200px");
-            assert.equal(widget.element[0].style.width, "100%");
+            assert.equal(widget.element[0].style.width, "");
         });
 
         it("sets the k-focus class on focusin", function() {
@@ -147,12 +147,12 @@
             assert.equal(widget.element.attr("rows"), 42);
         });
 
-        it("Should set resize inline style when resizable is specified", function() {
+        it("Should set k-resize class to textarea when resizable is specified", function() {
             var widget = new TextArea(textarea, {
-                resizable: "both"
+                resize: "both"
             });
 
-            assert.isOk(widget.element.attr("style").indexOf("both") !== -1);
+            assert.isOk(widget.element.hasClass("k-resize"));
         });
 
         it("styling options - fillMode", function() {
@@ -184,7 +184,7 @@
                 resize: "both"
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-resize"));
+            assert.isOk(widget.element.hasClass("k-resize"));
         });
 
         it("styling options - resize horizontal", function() {
@@ -192,7 +192,7 @@
                 resize: "horizontal"
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-resize-x"));
+            assert.isOk(widget.element.hasClass("k-resize-x"));
         });
 
         it("styling options - resize vertical", function() {
@@ -200,7 +200,7 @@
                 resize: "vertical"
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-resize-y"));
+            assert.isOk(widget.element.hasClass("k-resize-y"));
         });
 
         it("styling options - resize none", function() {
@@ -208,7 +208,7 @@
                 resize: "none"
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-resize-none"));
+            assert.isOk(widget.element.hasClass("k-resize-none"));
         });
 
         it("styling options - overflow", function() {
@@ -250,6 +250,20 @@
             assert.isNotOk(widget.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
             assert.isNotOk(widget.wrapper.hasClass("k-input-md")); // Does not add default class for the option
             assert.isOk(widget.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
+        });
+
+        it("Should add !k-flex-row class when layoutFlow is 'horizontal'", function() {
+            var widget = new TextArea(textarea, { layoutFlow: "horizontal" });
+            var wrapper = widget.wrapper;
+
+            assert.isTrue(wrapper[0].classList.contains("!k-flex-row"));
+        });
+
+        it("Should add !k-flex-col class when layoutFlow is 'vertical'", function() {
+            var widget = new TextArea(textarea, { layoutFlow: "vertical" });
+            var wrapper = widget.wrapper;
+
+            assert.isTrue(wrapper[0].classList.contains("!k-flex-col"));
         });
     });
 }());

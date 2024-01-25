@@ -1,6 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.floatinglabel.js";
 import "./kendo.icons.js";
+import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
 var __meta__ = {
     id: "maskedtextbox",
@@ -118,6 +119,12 @@ var __meta__ = {
 
             that._label();
             that._applyCssClasses();
+
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, suffixInsertAfter: that._validationIcon });
+            if (that.floatingLabel) {
+                that.floatingLabel.refresh();
+            }
+
             kendo.notify(that);
         },
 
@@ -133,7 +140,13 @@ var __meta__ = {
             label: null,
             size: "medium",
             fillMode: "solid",
-            rounded: "medium"
+            rounded: "medium",
+            prefixOptions: {
+                separator: true
+            },
+            suffixOptions: {
+                separator: true
+            }
         },
 
         events: [

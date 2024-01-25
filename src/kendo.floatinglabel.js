@@ -18,7 +18,11 @@ var __meta__ = {
         FOCUSED = "k-focus",
         STATEDISABLED = "k-disabled",
         NOCLICKCLASS = "k-no-click",
-        STATEREADONLY = "k-readonly";
+        STATEREADONLY = "k-readonly",
+        FLOATINGLABEL_OFFSET_Y = "--kendo-floating-label-offset-y",
+        FLOATINGLABEL_OFFSET_X = "--kendo-floating-label-offset-x",
+        FLOATINGLABEL_FOCUS_OFFSET_Y = "--kendo-floating-label-focus-offset-y",
+        FLOATINGLABEL_FOCUS_OFFSET_X = "--kendo-floating-label-focus-offset-x";
 
     var FloatingLabel = Widget.extend({
         init: function(element, options) {
@@ -70,6 +74,14 @@ var __meta__ = {
         refresh: function() {
             var that = this;
             var element = that.element;
+            var inputInner = that.options.widget.wrapper.find(".k-input-inner");
+            if (inputInner.length > 0) {
+                var labelHeight = that.element.find("> .k-input-label").height();
+                var offsetX = inputInner.position().left + Number.parseInt(inputInner.css('padding-left'));
+                var offsetY = inputInner.position().top + Number.parseInt(inputInner.css('padding-top')) + labelHeight;
+                element[0].style.setProperty(FLOATINGLABEL_OFFSET_X, offsetX + "px");
+                element[0].style.setProperty(FLOATINGLABEL_OFFSET_Y, offsetY + "px");
+            }
 
             element
                 .removeClass(EMPTY)

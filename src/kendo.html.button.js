@@ -134,7 +134,7 @@ var __meta__ = {
 
     kendo.cssProperties.registerValues("HTMLButton", [{
         prop: "fillMode",
-        values: kendo.cssProperties.fillModeValues.concat(["link"])
+        values: kendo.cssProperties.fillModeValues.concat(["link", "clear"])
     }, {
         prop: "rounded",
         values: kendo.cssProperties.roundedValues.concat([['full', 'full']])

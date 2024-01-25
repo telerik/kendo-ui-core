@@ -221,7 +221,7 @@ import "./kendo.html.button.js";
 
         kendo.cssProperties.registerValues("Button", [{
             prop: "fillMode",
-            values: kendo.cssProperties.fillModeValues.concat(["link"])
+            values: kendo.cssProperties.fillModeValues.concat(["link", "clear"])
         }, {
             prop: "rounded",
             values: kendo.cssProperties.roundedValues.concat([['full', 'full']])

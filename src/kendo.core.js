@@ -5127,6 +5127,7 @@ function pad(number, digits, end) {
     var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
     var resizeValues = [ ['both', 'resize'], ['horizontal', 'resize-x'], ['vertical', 'resize-y'] ];
     var overflowValues = [ 'auto', 'hidden', 'visible', 'scroll', 'clip' ];
+    var layoutFlowValues = [ ['vertical', '!k-flex-col'], ['horizontal', '!k-flex-row'] ];
 
     kendo.cssProperties = (function() {
         var defaultValues = {},
@@ -5215,6 +5216,8 @@ function pad(number, digits, end) {
                     prefix = "k-";
                 } else if (propName === "overflow") {
                     prefix = "k-overflow-";
+                } else if (propName === "layoutFlow") {
+                    prefix = "";
                 } else {
                     prefix = widgetProperties[PREFIX];
                 }
@@ -5235,6 +5238,7 @@ function pad(number, digits, end) {
         registerCssClasses("rounded", roundedValues);
         registerCssClasses("resize", resizeValues);
         registerCssClasses("overflow", overflowValues);
+        registerCssClasses("layoutFlow", layoutFlowValues);
 
         return {
             positionModeValues: positionModeValues,

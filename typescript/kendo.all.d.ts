@@ -2338,6 +2338,8 @@ declare namespace kendo.ui {
         suggest?: boolean | undefined;
         headerTemplate?: string|Function | undefined;
         template?: string|Function | undefined;
+        prefixOptions? : BasePrefixSuffixOptions | undefined;
+        suffixOptions? : BasePrefixSuffixOptions | undefined;
         value?: string | undefined;
         valuePrimitive?: boolean | undefined;
         virtual?: boolean | AutoCompleteVirtual | undefined;
@@ -3558,6 +3560,8 @@ declare namespace kendo.ui {
         placeholder?: string | undefined;
         popup?: ComboBoxPopup | undefined;
         rounded?: string | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         size?: string | undefined;
         suggest?: boolean | undefined;
         syncValueAndText?: boolean | undefined;
@@ -3770,6 +3774,12 @@ declare namespace kendo.ui {
     interface BaseLabel {
         content?: string| Function | undefined;
         floating?: boolean | undefined;
+    }
+
+    interface BasePrefixSuffixOptions {
+        icon?: string | undefined;
+        template?: string | Function | undefined;
+        separator?: boolean | undefined;
     }
 
     class DateInput extends kendo.ui.Widget {
@@ -7472,6 +7482,8 @@ declare namespace kendo.ui {
         rules?: any;
         size?: string | undefined;
         unmaskOnPost?: boolean | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         value?: string | undefined;
         change?(e: MaskedTextBoxChangeEvent): void;
     }
@@ -7784,6 +7796,8 @@ declare namespace kendo.ui {
         placeholder?: string | undefined;
         popup?: MultiColumnComboBoxPopup | undefined;
         rounded?: string | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         size?: string | undefined;
         suggest?: boolean | undefined;
         syncValueAndText?: boolean | undefined;
@@ -7939,6 +7953,8 @@ declare namespace kendo.ui {
         itemTemplate?: string|Function | undefined;
         tagTemplate?: string|Function | undefined;
         tagMode?: string | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         value?: any;
         valuePrimitive?: boolean | undefined;
         virtual?: boolean | MultiSelectVirtual | undefined;
@@ -8205,6 +8221,8 @@ declare namespace kendo.ui {
         restrictDecimals?: boolean | undefined;
         round?: boolean | undefined;
         rounded?: string | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         selectOnFocus?: boolean | undefined;
         size?: string | undefined;
         spinners?: boolean | undefined;
@@ -11838,9 +11856,12 @@ declare namespace kendo.ui {
         placeholder?: string | undefined;
         readonly?: boolean | undefined;
         rows?: number | undefined;
+        layoutFlow?: string | undefined;
         value?: string | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         size?: string | undefined;
         overflow?: string | undefined;
         resize?: string | undefined;
@@ -11891,6 +11912,8 @@ declare namespace kendo.ui {
         placeholder?: string | undefined;
         readonly?: boolean | undefined;
         value?: string | undefined;
+        prefixOptions?: BasePrefixSuffixOptions | undefined;
+        suffixOptions?: BasePrefixSuffixOptions | undefined;
         fillMode?: string | undefined;
         rounded?: string | undefined;
         size?: string | undefined;

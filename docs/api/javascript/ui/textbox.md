@@ -132,6 +132,67 @@ The hint displayed by the widget when it is empty. Not set by default.
         });
     </script>
 
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        });
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify prefix adornment icon
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            prefixOptions: {
+                icon: "search"
+            }
+        })
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`,
+                separator: false
+            }
+        })
+    </script>
+
 ### readonly `Boolean` *(default: false)*
 
 If set to `true`, the widget will be readonly and will not allow user input. The widget is not readonly by default and allows user input.
@@ -162,6 +223,67 @@ Sets a value controlling the border radius. Can also be set to the following str
     $("#textbox").kendoTextBox({
         rounded: "large"
     });
+    </script>
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify suffix adornment icon
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            suffixOptions: {
+                icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`,
+                separator: false
+            }
+        })
     </script>
 
 ### value `String`*(default: "")*

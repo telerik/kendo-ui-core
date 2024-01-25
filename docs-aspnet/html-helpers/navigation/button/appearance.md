@@ -78,6 +78,7 @@ The following options are available for the `FillMode` configuration:
 - `Outline`
 - `Flat`
 - `Link`
+- `Clear`
 - `None`
 
 ### ThemeColor

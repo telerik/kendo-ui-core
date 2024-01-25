@@ -42,6 +42,20 @@
             assert.isOk(button.hasClass("k-button-link-primary"));
         });
 
+        it("Button element applies fillMode clear classes specified in styles options", function() {
+            getButton().kendoButton({
+                size: "large",
+                rounded: "full",
+                fillMode: "clear",
+                themeColor: "primary"
+            });
+
+            assert.isOk(button.hasClass("k-button-lg"));
+            assert.isOk(button.hasClass("k-rounded-full"));
+            assert.isOk(button.hasClass("k-button-clear"));
+            assert.isOk(button.hasClass("k-button-clear-primary"));
+        });
+
         it("Button has inner element with class k-button-text", function() {
             getButton().kendoButton();
 

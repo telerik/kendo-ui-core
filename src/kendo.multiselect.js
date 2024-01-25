@@ -4,6 +4,7 @@ import "./kendo.virtuallist.js";
 import "./kendo.html.chip.js";
 import "./kendo.html.chiplist.js";
 import "./kendo.html.button.js";
+import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
 var __meta__ = {
     id: "multiselect",
@@ -151,6 +152,11 @@ var __meta__ = {
             that._toggleCloseVisibility();
             that._applyCssClasses();
 
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: that._loading });
+            if (that.floatingLabel) {
+                that.floatingLabel.refresh();
+            }
+
             kendo.notify(that);
         },
 
@@ -185,6 +191,12 @@ var __meta__ = {
             tagTemplate: "",
             groupTemplate: (data) => encode(data),
             fixedGroupTemplate: (data) => encode(data),
+            prefixOptions: {
+                separator: true
+            },
+            suffixOptions: {
+                separator: true
+            },
             clearButton: true,
             autoWidth: false,
             popup: null,

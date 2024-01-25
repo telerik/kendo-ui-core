@@ -54,6 +54,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/butto
 - `outline`
 - `flat`
 - `link`
+- `clear`
 - `none`
 
 The default fillMode value is `solid` and is applied to the button element through the `k-button-solid` class.

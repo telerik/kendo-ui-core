@@ -60,6 +60,20 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     });
     </script>
 
+
+### layoutFlow `String` *(default: "vertical")*
+
+This option is used to specify the layout flow of the component. Can also be set to the following string values: `vertical` or `horizontal`.
+
+#### Example - specify layout flow
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            layoutFlow: "horizontal"
+        })
+    </script>
+
 ### label `String|Function|Object` *(default: null)*
 
 Adds a label before the textarea. If the textarea has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
@@ -184,6 +198,68 @@ The hint displayed by the widget when it is empty. Not set by default.
         })
     </script>
 
+
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <textarea id="prefix"></textarea>
+    <script>
+        $("#prefix").kendoTextArea({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}${kendo.ui.icon("pencil")}${kendo.ui.icon("gear")}`
+            }
+        });
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}${kendo.ui.icon("pencil")}${kendo.ui.icon("gear")}`
+            }
+        })
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify prefix adornment icon
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            prefixOptions: {
+                icon: "pencil"
+            }
+        })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}${kendo.ui.icon("pencil")}${kendo.ui.icon("gear")}`,
+                separator: false
+            }
+        })
+    </script>
+
 ### readonly `Boolean` *(default: false)*
 
 If set to `true`, the widget will be readonly and will not allow user input. The widget is not readonly by default and allows user input.
@@ -246,6 +322,68 @@ Sets a value controlling the border radius. Can also be set to the following str
         rounded: "large"
     });
     </script>
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <textarea id="suffix"></textarea>
+    <script>
+        $("#suffix").kendoTextArea({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}${kendo.ui.icon("pencil")}${kendo.ui.icon("gear")}`
+            }
+        });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify suffix adornment icon
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            suffixOptions: {
+                icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}${kendo.ui.icon("pencil")}${kendo.ui.icon("gear")}`
+            }
+        })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}${kendo.ui.icon("pencil")}${kendo.ui.icon("gear")}`,
+                separator: false
+            }
+        })
+    </script>
+
 
 ### value `String`*(default: "")*
 

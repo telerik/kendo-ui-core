@@ -241,6 +241,70 @@ The hint displayed by the widget when it is empty. Not set by default.
     });
     </script>
 
+
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        });
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify prefix adornment icon
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            prefixOptions: {
+                icon:"search"
+            }
+        })
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`,
+                separator: false
+            }
+        })
+    </script>
+
+
+
 ### restrictDecimals `Boolean`*(default: false)*
 
  Specifies whether the decimals length should be restricted during typing. The length of the fraction is defined by the `decimals` value.
@@ -350,6 +414,70 @@ Sets a value controlling size of the component. Can also be set to the following
     <script>
     $("#numerictextbox").kendoNumericTextBox();
     </script>
+
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify suffix adornment icon
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            suffixOptions: {
+                icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`,
+                separator: false
+            }
+        })
+    </script>
+
+
 
 ### upArrowText `String`*(default: "Increase value")*
 

@@ -1,6 +1,7 @@
 import "./kendo.list.js";
 import "./kendo.mobile.scroller.js";
 import "./kendo.virtuallist.js";
+import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
 var __meta__ = {
     id: "autocomplete",
@@ -142,6 +143,8 @@ var __meta__ = {
 
             that._resetFocusItemHandler = that._resetFocusItem.bind(that);
 
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: that._loading });
+
             kendo.notify(that);
             that._toggleCloseVisibility();
             that._applyCssClasses();
@@ -160,6 +163,12 @@ var __meta__ = {
             template: "",
             groupTemplate: (data) => encode(data),
             fixedGroupTemplate: (data) => encode(data),
+            prefixOptions: {
+                separator: true
+            },
+            suffixOptions: {
+                separator: true
+            },
             dataTextField: "",
             minLength: 1,
             enforceMinLength: false,

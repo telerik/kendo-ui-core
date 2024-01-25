@@ -1281,6 +1281,119 @@ The available "x" positions are:
       }
     </style>
 
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment configuration
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      });
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        prefixOptions: {
+          icon: "search"
+        }
+      })
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`,
+          separator: false
+        }
+      })
+    </script>
+
 ### rounded `String`*(default: "medium")*
 
 Sets a value controlling the border radius. Can also be set to the following string values:
@@ -1336,6 +1449,119 @@ Sets a value controlling size of the component. Can also be set to the following
         ],
         size: "large"
       });
+    </script>
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment configuration
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify suffix adornment icon
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        suffixOptions: {
+          icon: "search"
+        }
+      })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoMultiColumnComboBox({
+        label: "MultiColumnComboBox",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`,
+          separator: false
+        }
+      })
     </script>
 
 ### suggest `Boolean`*(default: false)*

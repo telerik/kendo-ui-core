@@ -1,6 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.floatinglabel.js";
 import "./kendo.icons.js";
+import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
 var __meta__ = {
     id: "textbox",
@@ -56,8 +57,13 @@ var __meta__ = {
                 that._icon();
             }
 
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options });
+
             kendo.notify(that);
             that._applyCssClasses();
+            if (that.floatingLabel) {
+                that.floatingLabel.refresh();
+            }
         },
 
         events: [
@@ -75,7 +81,13 @@ var __meta__ = {
             rounded: "medium",
             size: "medium",
             fillMode: "solid",
-            icon: null
+            icon: null,
+            prefixOptions: {
+                separator: true
+            },
+            suffixOptions: {
+                separator: true
+            }
         },
 
         value: function(value) {
