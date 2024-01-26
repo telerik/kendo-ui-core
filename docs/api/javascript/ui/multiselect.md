@@ -125,9 +125,25 @@ Controls whether to bind the widget to the data source on initialization.
         <option>Item2</option>
     </select>
     <script>
-    $("#multiselect").kendoMultiSelect({
-        autoBind: false
-    });
+        $("#multiselect").kendoMultiSelect({
+          placeholder: "Select products...",
+          dataTextField: "ProductName",
+          dataValueField: "ProductID",
+          dataBound: function(){
+            //Alert will be displayed when the data is bound to the component
+            alert('Data is bound')
+          },
+          autoBind: false,
+          dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+              read: {
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+              }
+            }
+          }
+        });
     </script>
 
 ### autoClose `Boolean`*(default: true)*

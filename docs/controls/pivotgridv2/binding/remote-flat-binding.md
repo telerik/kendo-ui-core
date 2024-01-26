@@ -2,8 +2,8 @@
 title: Remote Flat Binding
 page_title: jQuery PivotGridV2 Documentation - Remote Flat Data Binding
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to bind it to a local array of data."
-slug: localbinding_kendoui_pivotgridv2
-position: 4
+slug: remote_flat_binding_kendoui_pivotgridv2
+position: 5
 ---
 
 # Remote Flat Data Binding

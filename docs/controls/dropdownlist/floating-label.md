@@ -15,7 +15,10 @@ To implement a [floating label in the Kendo UI for jQuery DropDownList](/api/jav
 The following example demonstrates how to set the floating label as a string:
 
 ```dojo 
-    <select id="dropdownlist"></select>
+    <div class="container" style="width: 300px;"> 
+      <input id="dropdownlist" style="width: 100%;"/>
+    </div>
+
 
     <script>
     let data = [
@@ -42,7 +45,10 @@ The following example demonstrates how to set the floating label as a string:
 The following example demonstrates how to set the floating label from a function:
 
 ```dojo 
-    <select id="dropdownlist"></select>
+    <div class="container" style="width: 300px;"> 
+      <input id="dropdownlist" style="width: 100%;"/>
+    </div>
+
 
     <script>
     let data = [

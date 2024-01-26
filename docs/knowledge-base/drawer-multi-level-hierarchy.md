@@ -159,12 +159,12 @@ The following example demonstrates the full implementation of the approach.
     <!-- END OF DRAWER CONTENT -->
 
     <script>
-       // Show the drawer when the "Show Drawer" button is clicked.
-       $("#show").on("click", function(e) {
+      // Show the drawer when the "Show Drawer" button is clicked.
+      $("#show").on("click", function(e) {
         var drawerInstance = $("#drawer").data().kendoDrawer;
         drawerInstance.show();
       });
-      
+
       // Hide the drawer when the "Hide Drawer" button is clicked.
       $("#hide").on("click", function(e) {
         var drawerInstance = $("#drawer").data().kendoDrawer;
@@ -200,8 +200,9 @@ The following example demonstrates the full implementation of the approach.
 
         // Check if the element is a parent and add an icon for the expand arrow.
         if(isParent) {
-          element += "<span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></span>";
+          element += "<span class='k-spacer'></span><span class='k-icon chevron-right'></span>";
         }
+
 
         // If the element is a parent, add a line separator too.
         let separator = isParent ? `<li data-role='drawer-separator' ${level > 0 ? "class='hidden'" : ""}></li>` : "";
@@ -215,17 +216,17 @@ The following example demonstrates the full implementation of the approach.
       $(document).ready(function () {
         $("#drawer").kendoDrawer({
           template: `<ul>
-      						${addItem("GettingStarted", "Getting Started", null, true, "k-i-information", 0)}
-                  ${addItem("ThemeSupport", "Supported Themes", "GettingStarted", true, "k-i-palette", 1)}
-                  ${addItem("Kendo", "About Kendo UI", "ThemeSupport", true, "k-i-question", 2)}
-                  ${addItem("FourthLevel", "Fourth Level Menu", "Kendo", false, "k-i-question", 3)}
-                  ${addItem("AnotherFourthLevel", "Another Fourth Menu", "Kendo", false, "k-i-question", 3)}
-                  ${addItem("Third ", "Third Menu", "Kendo", false, "k-i-question", 3)}
-                  ${addItem("Fourth", "Some Additional Menu", "Kendo", false, "k-i-question", 3)}
-                  ${addItem("Overview", "Overview", null, true, "k-i-zoom", 0)}
-                  ${addItem("About", "About Kendo UI", "Overview", false, "k-i-question", 1)}
-                  ${addItem("All", "All Kendo UI Components", "Overview", false, "k-i-js", 1)}
-                  ${addItem("Popular", "Most Popular Components", null, false, "k-i-style-builder", 0)}
+                  ${addItem("GettingStarted", "Getting Started", null, true, "information", 0)}
+                  ${addItem("ThemeSupport", "Supported Themes", "GettingStarted", true, "palette", 1)}
+                  ${addItem("Kendo", "About Kendo UI", "ThemeSupport", true, "question", 2)}
+                  ${addItem("FourthLevel", "Fourth Level Menu", "Kendo", false, "question", 3)}
+                  ${addItem("AnotherFourthLevel", "Another Fourth Menu", "Kendo", false, "question", 3)}
+                  ${addItem("Third ", "Third Menu", "Kendo", false, "question", 3)}
+                  ${addItem("Fourth", "Some Additional Menu", "Kendo", false, "question", 3)}
+                  ${addItem("Overview", "Overview", null, true, "zoom", 0)}
+                  ${addItem("About", "About Kendo UI", "Overview", false, "question", 1)}
+                  ${addItem("All", "All Kendo UI Components", "Overview", false, "js", 1)}
+                  ${addItem("Popular", "Most Popular Components", null, false, "border-radius", 0)}
       </ul>`,
           mode: "push",
           itemClick: onItemClick,
@@ -237,13 +238,31 @@ The following example demonstrates the full implementation of the approach.
           minHeight: 330,
           swipeToOpen: true,
           hide: onHide
-        });
+        });		
+		
+		    kendo.ui.icon($(".information"), { icon: 'info-circle' });
 
-        function onItemClick(e) {
+		    if($(".palette")){
+		    		kendo.ui.icon($(".palette"), { icon: 'palette' });
+		    }
+
+		    if($(".question")){
+		    	kendo.ui.icon($(".question"), { icon: 'question-circle' });
+		    }
+
+		    if($(".zoom")){
+		    		kendo.ui.icon($(".zoom"), { icon: 'zoom-in' });
+		    }
+
+		    if($(".js")){
+		    		kendo.ui.icon($(".js"), { icon: 'js' });
+		    }	
+
+        function onItemClick(e) {          
           if (!e.item.hasClass("k-drawer-separator")) {
             var drawerContainer = e.sender.drawerContainer;
-            var expandIcon = e.item.find("span.k-i-arrow-chevron-right");
-            var collapseIcon = e.item.find("span.k-i-arrow-chevron-down");
+            var expandIcon = e.item.find("span.chevron-right");
+            var collapseIcon = e.item.find("span.chevron-down");
             let id = e.item.find(".k-item-text").data("id");
             let children = drawerContainer.find("[data-parent='"+id+"']");
             // Hide the content of the current menu/submenu.
@@ -259,13 +278,15 @@ The following example demonstrates the full implementation of the approach.
                   $(x).prev().removeClass("hidden");
                 }
               });
-              expandIcon.removeClass("k-i-arrow-chevron-right").addClass("k-i-arrow-chevron-down");
+              expandIcon.removeClass("chevron-right").addClass("chevron-down");              
+        kendo.ui.icon($(".chevron-down"), { icon: 'chevron-down' });
             }
 
             // If the menu is expanded, collapse all of its children on click.
             if(collapseIcon.length) {
               collapseAll(children, collapseIcon, drawerContainer);
-              collapseIcon.addClass("k-i-arrow-chevron-right").removeClass("k-i-arrow-chevron-down");
+              collapseIcon.addClass("chevron-right").removeClass("chevron-down");
+              kendo.ui.icon($(".chevron-right"), { icon: 'chevron-right' });
             }
 
             // Retrieve all parents of the clicked element.
@@ -290,12 +311,16 @@ The following example demonstrates the full implementation of the approach.
 
             // Collapse all of the submenus when the drawer is hidden.
             collapseAll(children, null, container);
-            menu.find("span.k-i-arrow-chevron-down").addClass("k-i-arrow-chevron-right").removeClass("k-i-arrow-chevron-down");
+            menu.find("span.chevron-down").addClass("chevron-right").removeClass("chevron-down");
+            kendo.ui.icon($(".chevron-right"), { icon: 'chevron-right' });
           });
         }
 
         var drawerInstance = $("#drawer").data().kendoDrawer;
         drawerInstance.show();
+
+        kendo.ui.icon($(".chevron-right"), { icon: 'chevron-right' });
+
 
         // Collapses all children when a parent item is clicked or when the Drawer is hidden.
         function collapseAll(children, collapseIcon, drawerContainer) {
@@ -303,7 +328,7 @@ The following example demonstrates the full implementation of the approach.
             let isParent = $(x).data("is-parent");
 
             let id = $(x).find(".k-item-text").data("id");
-            collapseIcon = $(x).find("span.k-i-arrow-chevron-down");
+            collapseIcon = $(x).find("span.chevron-down");
             children = drawerContainer.find("[data-parent='"+id+"']");
 
             if(isParent) {
@@ -316,7 +341,11 @@ The following example demonstrates the full implementation of the approach.
               $(x).prev().addClass("hidden");
             }
 
-            collapseIcon.addClass("k-i-arrow-chevron-right").removeClass("k-i-arrow-chevron-down");
+            collapseIcon.addClass("chevron-right").removeClass("chevron-down");
+			if($(".chevron-right").length > 0){
+			kendo.ui.icon($(".chevron-right"), { icon: 'chevron-right' });
+			}
+            
           });
         }
 

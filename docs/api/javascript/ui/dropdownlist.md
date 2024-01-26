@@ -1102,6 +1102,9 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
     });
 
     viewModel.bind("change", function(ev) {
+      //result when the second item is selected in the $("#dropdownPrimitive") DropDownList: value: {"id":2,"name":"Tea"}
+      //result when the second item is selected in the $("#dropdown") DropDownList: value: 2
+
       if (ev.field === "selectedProduct") {
         console.log("value: " + JSON.stringify(this.get(ev.field)));
       } else if (ev.field === "selectedProductId") {
