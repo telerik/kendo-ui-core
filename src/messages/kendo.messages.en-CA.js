@@ -653,6 +653,50 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
 });
 }
 
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+  kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+    $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+      "title": "Settings",
+      "cancelButtonText": "Cancel",
+      "applyButtonText": "Apply",
+      "measures": "Select some fields to begin setup",
+      "columns": "Select some fields to begin setup",
+      "rows": "Select some fields to begin setup"
+    });
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+  kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+    $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+      "apply": "Apply",
+      "sortAscending": "Sort Ascending",
+      "sortDescending": "Sort Descending",
+      "filterFields": "Fields Filter",
+      "filter": "Filter",
+      "include": "Include Fields...",
+      "clear": "Clear",
+      "reset": "Reset",
+      "moveToColumns": "Move to Columns",
+      "moveToRows": "Move to Rows",
+      "movePrevious": "Move previous",
+      "moveNext": "Move next",
+      "filterOperatorsDropDownLabel": "Region Filter Operators",
+      "filterValueTextBoxLabel": "Region Filter Value",
+      "operators": {
+          "contains": "Contains",
+          "doesnotcontain": "Does not contain",
+          "startswith": "Starts with",
+          "endswith": "Ends with",
+          "eq": "Is equal to",
+          "neq": "Is not equal to"
+      }
+    });
+}
+
 /* RecurrenceEditor messages */
 
 if (kendo.ui.RecurrenceEditor) {

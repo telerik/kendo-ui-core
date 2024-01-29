@@ -42,7 +42,7 @@ The following example shows how to set up the global column menu and enable the 
 ```
 {% endif %}
 
-For a runnable example with the global column menu, see the [Grid Global Column Menu demo](https://demos.telerik.com/{{site.platform}}/grid/global-column-menu).
+For a runnable example with the global column menu, see the [Grid Global Column Menu demo](https://demos.telerik.com/{{site.platform}}/grid/toolbar-columns-menu).
 
 ## Column Reordering
 
