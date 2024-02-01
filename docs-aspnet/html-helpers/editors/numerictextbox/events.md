@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI NumericTextBox component for {{ site.framework }}."
 slug: events_numerictextbox_aspnetcore
-position: 7
+position: 8
 ---
 
 # Events

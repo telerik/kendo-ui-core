@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 slug: events_multicolumncombobox_aspnetcore
-position: 9
+position: 10
 ---
 
 # Events

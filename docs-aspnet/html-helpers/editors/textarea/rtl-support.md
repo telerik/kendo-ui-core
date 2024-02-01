@@ -3,7 +3,7 @@ title: RTL Support
 page_title: Right-to-Left Support
 description: "Use the Right-to-Left (RTL) feature of the TextArea component for {{ site.framework }} to render content for RTL languages."
 slug: rtl_textarea_aspnetcore
-position: 3
+position: 4
 ---
 
 # Right-to-Left Support

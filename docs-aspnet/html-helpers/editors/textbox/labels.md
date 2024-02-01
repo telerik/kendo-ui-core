@@ -3,7 +3,7 @@ title: Labels
 page_title: Labels
 description: "Learn the basics when working with the Telerik UI Labels for TextBox for {{ site.framework }}."
 slug: htmlhelpers_labels_textbox
-position: 2
+position: 3
 ---
 # Label Overview
 

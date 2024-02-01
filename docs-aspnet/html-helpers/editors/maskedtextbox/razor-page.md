@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI MaskedTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_maskedtextboxhelper_aspnetcore
-position: 5
+position: 6
 ---
 
 # MaskedTextBox in Razor Pages
