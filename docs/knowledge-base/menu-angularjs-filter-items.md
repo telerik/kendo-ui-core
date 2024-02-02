@@ -22,6 +22,8 @@ component: menu
  </tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+
 ## Description
 
 How can I have an Angular filter function for the Menu items?
@@ -30,7 +32,12 @@ How can I have an Angular filter function for the Menu items?
 
 In the `dataSource`, use the `text` property of the Menu item.
 
-```
+> The example loads Kendo UI 2023.3.1010 version.
+
+```dojo
+	  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+	  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    
     <div class="demo-section k-content" ng-controller="MyCtrl">
       <h4 style="padding-top: 2em;">Preview</h4>
       <ul kendo-menu

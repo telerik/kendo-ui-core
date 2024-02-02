@@ -23,9 +23,11 @@ component: grid
  </tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+
 ## Description
 
-I can't seem to get the `k-row-template` and `k-detail-template` to work together using the directive mechanism. The row renders fine, but when I click on the expand button, I get the following error:
+I can't get the `k-row-template` and `k-detail-template` to work together using the directive mechanism. The row renders fine, but when I click on the expand button, I get the following error:
 
 ```
     Uncaught TypeError: Cannot convert undefined or null to object
@@ -59,7 +61,12 @@ I can't seem to get the `k-row-template` and `k-detail-template` to work togethe
         </kendo-grid>
     ```
 
+> The example loads Kendo UI 2023.3.1010 version.
+
 ```dojo
+	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions">

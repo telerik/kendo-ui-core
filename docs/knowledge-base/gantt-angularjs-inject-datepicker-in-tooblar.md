@@ -18,6 +18,7 @@ component: gantt
  </tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
 
 ## Description
 
@@ -28,7 +29,12 @@ How can I insert a Kendo UI DatePicker widget into the toolbar of the Kendo UI G
 1. Pass a template to the Gantt toolbar with a single input element.
 1. In the `dataBound` event of the Gantt, initialize the DatePicker and assign a handler for its `change` event.
 
+> The below example loads Kendo UI 2023.3.1010 version.
+
 ```dojo
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+
 <div ng-app="KendoDemo" ng-controller="MyCtrl">
   <div kendo-gantt="theGantt" k-options="ganttOptions"></div>    
 </div>
