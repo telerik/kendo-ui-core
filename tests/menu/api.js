@@ -435,6 +435,19 @@ it("The new group of a newly inserted node is not visible", function() {
     m.destroy();
 });
 
+it("Appending a li item to a parent li adds it to a <ul> instead of the popup wrapper", function() {
+    var m = new kendo.ui.Menu("<ul id='menu'> <li >Item 1</li> <li class='target'> Item 2 </li> <li> Item 3 </li> </ul>");
+
+    const li = $("<li></li>", {
+        text: "New Item"
+    });
+    const ref = m.element.find(">li:nth-child(3)");
+    m.append(li, ref);
+    assert.equal(ref.find(".k-group").children().length, 1);
+
+    m.destroy();
+});
+
 it("_itemHasChildren returns true when there is content item", function() {
     var m = new kendo.ui.Menu("<ul></ul>");
 

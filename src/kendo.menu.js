@@ -951,6 +951,8 @@ var __meta__ = {
                 });
             }
 
+            parent = parent.is(popupSelector) ? parent.find(groupSelector).first() : parent;
+
             return { items: items, group: parent };
         },
 

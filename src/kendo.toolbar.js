@@ -1257,6 +1257,7 @@ var __meta__ = {
             var that = this,
                 componentOptions = component.componentOptions,
                 componentMessages = componentOptions.messages,
+                componentPlaceholder = componentOptions.placeholder,
                 attributes = $.extend({}, that._mapAttributes(component, messages), component.attributes),
                 options;
 
@@ -1281,6 +1282,10 @@ var __meta__ = {
                 Object.keys(componentMessages).forEach((key) => {
                     component.componentOptions.messages[key] = messages[componentMessages[key]] || componentMessages[key];
                 });
+            }
+
+            if (componentPlaceholder) {
+                component.componentOptions.placeholder = messages[componentPlaceholder] || componentPlaceholder;
             }
 
             Object.keys(componentOptions).forEach((key) => {

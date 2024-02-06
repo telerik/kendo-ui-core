@@ -97,12 +97,12 @@ var __meta__ = {
             if (options.actions && options.actions.length > 0) {
                 for (var i = 0; i < options.actions.length; i++) {
                     var action = options.actions[i];
-                    that.actionsWrapper.append($(`<span class='k-chip-action ${action.iconClass ? action.iconClass : ''}'>${kendo.ui.icon({ icon: action.icon, iconClass: "k-chip-icon" })}</span>`).attr(action.attr ? action.attr : {}));
+                    that.actionsWrapper.append($(`<span class='k-chip-action ${action.iconClass ? action.iconClass : ''}'>${kendo.ui.icon({ icon: action.icon, iconClass: "k-chip-icon", size: "small" })}</span>`).attr(action.attr ? action.attr : {}));
                 }
             }
 
             if (options.removable) {
-                that.actionsWrapper.append($(`<span class='k-chip-action k-chip-remove-action'>${kendo.ui.icon({ icon: options.removeIcon, iconClass: "k-chip-icon" })}</span>`).attr(options.removableAttr));
+                that.actionsWrapper.append($(`<span class='k-chip-action k-chip-remove-action'>${kendo.ui.icon({ icon: options.removeIcon, iconClass: "k-chip-icon", size: "small" })}</span>`).attr(options.removableAttr));
             }
         }
     });

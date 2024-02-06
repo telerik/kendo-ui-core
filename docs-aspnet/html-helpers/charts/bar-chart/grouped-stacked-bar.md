@@ -9,6 +9,8 @@ slug: barcharts_aspnetcore_htmlhelper_stacked_and_grouped_bars
 
 Usually, the data series in a stacked column or bar chart have one stack per category. There are scenarios in which you might want to arrange your data so that the chart appears to have more than one stack per category.
 
+A stacked and grouped bar chart is possible only when each series is defined.
+
 In this demo, you can see how to group stacked columns to display the World population compared by age and sex in a specific period of time by setting the Stack() method, which sets the name of the stack that the series belong to:
 
 series.Column(new int[] { 1100941, 1139797, 1172929, 1184435, 1184654 }).Name("0-19").Stack("Female");
