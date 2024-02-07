@@ -953,7 +953,7 @@ var __meta__ = {
 
             name = typeof (field.field) === STRING ? field.field : name;
 
-            if (!field.nullable) {
+            if (!field.nullable || field.defaultValue) {
                 value = proto.defaults[originalName !== name ? originalName : name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
 
                 if (typeof value === "function") {

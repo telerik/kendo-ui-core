@@ -5225,6 +5225,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         text?: string | undefined;
         spriteCssClass?: string | undefined;
+        icon?: string | undefined;
         command?: string | undefined;
     }
 

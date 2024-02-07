@@ -635,6 +635,36 @@ Specifies the text of the item.
 ### contextMenu.items.spriteCssClass `String`
 Specifies the spriteCssClass of the item.
 
+### contextMenu.items.icon `String`
+
+Specifies the icon of the item.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                items: [
+                    {
+                        text: "delete",
+                        icon: "pencil"
+                    }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "post",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### contextMenu.items.command `String`
 Specifies the command of the item.
 
