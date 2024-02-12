@@ -9,7 +9,7 @@ import polyfill from 'rollup-plugin-polyfill';
     input: `${root}/${name}`,
     output: [{
         format: "esm",
-        dir: `./dist/raw-mjs/${options.dir}`,
+        dir: `./dist/mjs/${options.dir}`,
         sourcemap: false,
         plugins: [
             addKendoVersion()
@@ -31,7 +31,7 @@ const configMap = (name) => ({
     input: `${root}/${name}`,
     output: [{
             format: 'esm',
-            dir: './dist/raw-mjs',
+            dir: './dist/mjs',
             sourcemap: false,
             plugins: [
                 addKendoVersion()

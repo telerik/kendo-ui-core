@@ -56,9 +56,6 @@ function renameModules(match) {
 const terserOptions = {
     mangle: {
         reserved: [ "define", "KendoLicensing" ]
-    },
-    format: {
-        comments: "all"
     }
 };
 
@@ -73,15 +70,14 @@ function uglifyScripts(stream) {
 }
 
 function minScripts() {
-    return gulp.src(['dist/raw-js/kendo.*.js', 'dist/raw-js/cultures/*.js', 'dist/raw-js/messages/*.js'], { base: "dist/raw-js" })
-        .pipe(gulp.dest('dist/js')) // copy the unminified files alongside the minified ones.
+    return gulp.src(['dist/js/kendo.*.js', 'dist/js/cultures/*.js', 'dist/js/messages/*.js'], { base: "dist/js" })
         .pipe(filter(file => !/\.min\.js/.test(file.path)))
         .pipe(flatmap(uglifyScripts))
         .pipe(gulp.dest('dist/js'));
 }
 
 function mjsMin() {
-    return gulp.src(['dist/raw-mjs/kendo.*.js', 'dist/raw-mjs/cultures/*.js', 'dist/raw-mjs/messages/*.js'], { base: "dist/raw-mjs" })
+    return gulp.src(['dist/mjs/kendo.*.js', 'dist/mjs/cultures/*.js', 'dist/mjs/messages/*.js'], { base: "dist/mjs" })
         .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
         .pipe(terser(terserOptions))
         .pipe(sourcemaps.write("./"))
@@ -89,12 +85,9 @@ function mjsMin() {
 }
 
 gulp.task('js-license', function() {
-    return gulp.src(['dist/raw-js/**/kendo.*.js', 'dist/raw-mjs/**/kendo.*.js'], { base: './dist' })
+    return gulp.src(['dist/js/**/kendo.*.js', 'dist/mjs/**/kendo.*.js'], { base: './dist' })
         .pipe(flatmap(license))
-        .pipe(gulp.dest((file) => {
-            file.dirname = file.dirname.replace('raw-', '');
-            return 'dist/temp';
-        }));
+        .pipe(gulp.dest('dist/temp'));
 });
 
 gulp.task("scripts", gulp.series(gulp.parallel(compileMjsScripts,
