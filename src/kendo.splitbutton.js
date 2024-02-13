@@ -48,6 +48,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
 
+            options = options || {};
             options.enabled = options.enabled !== false && !$(element).prop(DISABLED);
             Widget.fn.init.call(that, element, options);
 
@@ -347,7 +348,9 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
-            that.menu.destroy();
+            if (that.menu) {
+                that.menu.destroy();
+            }
 
             that.element.off(NS);
 

@@ -12,7 +12,35 @@ The {{ site.product }} Chart supports customization of its legend, which display
 > * Series without a specified name will not display legend items.
 > * To render a legend item for the Pie, Donut, and Funnel series, set the [`categoryField`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring) of the items.
 
+## Configuring the Legend Items
+
+The legend item types and settings are derived from the series configuration.
+
 To customize the legend, use the [`Legend`](/api/kendo.mvc.ui.fluent/chartbuilder#legendsystemaction) configuration option.
+
+The following example shows how to customize the Legend Item of a given series:
+
+```HtmlHelper
+        .Series(series =>
+        {
+            series.Line(new double[] { 4.54, 3.32, 2.71 }).Name("World")
+            .LegendItem(li => li
+                .Markers(m => m.Type(ChartMarkerShape.Triangle))
+                .Type("line")
+                .Area(a => a.Opacity(0.5))
+                .Highlight(h => h.Visible(true).Markers(hm => hm.Type(ChartMarkerShape.Rect))));
+```
+
+
+You can also configure the legend items for all series. The following example shows how to do that:
+
+```HtmlHelper
+        .SeriesDefaults(sd => sd.Line()
+                .LegendItem(li => li
+                .Markers(m => m.Type(ChartMarkerShape.Triangle))
+                .Type("line")
+                .Area(a => a.Opacity(0.5)))
+```
 
 ## Positioning and Orientation
 

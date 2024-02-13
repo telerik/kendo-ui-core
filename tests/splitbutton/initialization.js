@@ -130,6 +130,25 @@
             assert.isOk(button.next().hasClass("k-rounded-sm"));
             assert.isOk(splitButton.wrapper.hasClass("k-rounded-sm"));
         });
+
+        it('initialization with no options does not error out', function() {
+            try {
+                let splitButton = new SplitButton(button);
+                assert.isOk(true); // No error occurred
+            } catch (error) {
+                assert.fail(error); // An error occurred
+            }
+        });
+
+        it('initialization with no items does not error out on destroy', function() {
+            try {
+                let splitButton = new SplitButton(button, {});
+                splitButton.destroy();
+                assert.isOk(true); // No error occurred
+            } catch (error) {
+                assert.fail(error); // An error occurred
+            }
+        });
     });
 
     describe("SplitButton menu button initialization", function() {
