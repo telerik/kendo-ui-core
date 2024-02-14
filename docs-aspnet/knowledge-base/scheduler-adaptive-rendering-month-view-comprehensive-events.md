@@ -80,7 +80,7 @@ I am using Adaptive Rendering mode for the Scheduler in Month View. The users ne
         }
     ```
 
-Refer to [this Telerik REPL sample](https://netcorerepl.telerik.com/QRPFmsPf10mKzlqK18) that showcases the suggested example.
+Refer to [this Telerik REPL sample](https://netcorerepl.telerik.com/QRPFmsPf10mKzlqK18) that showcases the suggested approach.
 ## More {{ site.framework }} Scheduler Resources
 
 * [{{ site.framework }} Scheduler Documentation]({%slug htmlhelpers_scheduler_aspnetcore%})

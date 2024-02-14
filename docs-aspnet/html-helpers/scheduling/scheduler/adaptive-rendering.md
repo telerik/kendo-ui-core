@@ -96,6 +96,11 @@ The following example demonstrates how to configure the adaptive rendering mode 
 ```
 {% endif %}
 
+## KB Articles on Scheduler Adaptive Rendering
+
+* [Comprehensive Month Events in Scheduler with Adaptive Rendering]({% slug scheduler-adaptive-rendering-month-view-comprehensive-events %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Adaptive Rendering by the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/adaptive-rendering)
