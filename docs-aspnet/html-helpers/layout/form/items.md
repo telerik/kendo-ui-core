@@ -38,7 +38,7 @@ The following example shows how to set the `Label` of an item. Enabling the `Opt
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items">
+    <kendo-form name="exampleForm" form-data="@Model" method="POST" action="Items">
         <validatable validate-on-blur="true" validation-summary="true" />
         <form-items>
             <form-item type="group">
@@ -93,7 +93,7 @@ The following example shows how to set the `Hint` of an item. The hint is displa
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items">
+    <kendo-form name="exampleForm" form-data="@Model" method="POST" action="Items">
         <validatable validate-on-blur="true" validation-summary="true" />
         <form-items>
                 <form-items>
@@ -184,7 +184,7 @@ With the `Editor` option you can explicitly configure an editor to be used for a
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items"  >
+    <kendo-form name="exampleForm" form-data="@Model" method="POST" action="Items"  >
         <validatable validate-on-blur="true" validation-summary="true" />
         <form-items>
             <form-item type="group">
@@ -277,6 +277,25 @@ You can implement custom editor by using the editor option as a function as foll
     }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-form name="formExample" method="POST" action="Index">
+        <form-items>
+            <form-item field="Description" editor-handler="customTextareaEditor">
+                <item-label text="Description:" />
+            </form-item>  
+        </form-items>
+    </kendo-form>
+
+    <script>
+        function customTextareaEditor(container, options) {
+            $('<textarea class="k-textarea" data-bind="value: ' + options.field + '" name="' + options.field + '"/>')
+                .appendTo(container);
+        }
+    </script>
+```
+{% endif %}
+
 
 ## See Also
 

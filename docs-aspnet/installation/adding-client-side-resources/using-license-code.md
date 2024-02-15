@@ -68,11 +68,11 @@ The following table shows the most common location where you can include the lic
 {% if site.core %}
 |Type of Application|Common Locations
 |:---|:---
-|ASP.NET Core applications|<ul><li><code>./wwwroot</code></li><li><code>./wwwroot/scripts</code></li><li><code>./wwwroot/js</code></li></ul>
+|ASP.NET Core applications|<ul><li><code>~/wwwroot</code></li><li><code>~/wwwroot/scripts</code></li><li><code>~/wwwroot/js</code></li></ul>
 {% else %}
 |Type of Application|Common Locations
 |:---|:---
-|ASP.NET MVC applications|<ul><li><code>./</code></li><li><code>./Scripts</code></li></ul>
+|ASP.NET MVC applications|<ul><li><code>~/</code></li><li><code>~/Scripts</code></li></ul>
 {% endif %}
 
 ## Step 3: Add a Reference to the License File
@@ -83,7 +83,7 @@ Add the `kendo-ui-license.js` file as a script reference right after the `kendo.
     ```html
     <script src="https://kendo.cdn.telerik.com/***/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/***/kendo.aspnetmvc.min.js"></script>
-    <script src="./kendo-ui-license.js"></script>
+    <script src="~/kendo-ui-license.js"></script>
 
     <!-- Rest of the HTML -->
     ```
@@ -97,7 +97,7 @@ Add the `kendo-ui-license.js` file as a script reference right after the `kendo.
     <script src="https://kendo.cdn.telerik.com/***/kendo.fx.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/***/kendo.window.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/***/kendo.aspnetmvc.min.js"></script>
-    <script src="./kendo-ui-license.js"></script>
+    <script src="~/kendo-ui-license.js"></script>
 
     <!-- Rest of the HTML -->
     ```

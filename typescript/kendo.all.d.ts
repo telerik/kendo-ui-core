@@ -443,9 +443,17 @@ declare namespace kendo {
         replace(location: string, silent?: boolean): void;
     }
 
+    function touchDelta(touch1: Touch, touch2: Touch): {
+        center: {
+            x: number;
+            y: number;
+        }
+        distance: number;
+    }
+
 }
 
-declare namespace kendo.chat{
+declare namespace kendo.chat {
     class ChatMessageBox extends  kendo.Class {
         init?(options: any): void;
         exec?(): void;

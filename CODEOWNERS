@@ -3,9 +3,9 @@
 # MVC/Core Docs owners
 /docs-aspnet/ @eyupyusein @alestoya @yanisslav @aleksandarevangelatov @StoyanGoranov @mihaela-lukanova @antonmironovv @VicTachev @IvanDanchev
 # Source owners
-/src/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog
-/tests/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog
-/typescript/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog
+/src/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog @iordanGrancharov
+/tests/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog @iordanGrancharov
+/typescript/ @Iankodj @ag-petrov @pepinho24 @gdenchevprog @iordanGrancharov
 # Infrastructure owners
 /build/ @Iankodj @ag-petrov
 gulpfile.js @Iankodj @ag-petrov @pepinho24 @gdenchevprog
