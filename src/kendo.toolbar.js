@@ -1827,15 +1827,9 @@ var __meta__ = {
             hasVisibleChildren = this.overflowMenu.element.children(":not(." + STATE_HIDDEN + ", ." + POPUP + ")").length > 0;
 
             if (hasVisibleChildren) {
-                this.overflowAnchor.css({
-                    visibility: "visible",
-                    width: NOTHING
-                });
+                this.overflowAnchor.removeClass(STATE_HIDDEN);
             } else {
-                this.overflowAnchor.css({
-                    visibility: HIDDEN,
-                    width: "1px"
-                });
+                this.overflowAnchor.addClass(STATE_HIDDEN);
             }
         }
     });

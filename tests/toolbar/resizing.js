@@ -127,7 +127,7 @@
             container.width(400);
             toolbar.resize();
 
-            var button = toolbar.element.find(".k-button").last();
+            var button = toolbar.element.find(".k-toolbar-button").last();
 
             assert.isOk(button.is(":visible"));
 
@@ -214,7 +214,7 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is not visible when there are no items in the overflow popup container");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"), "Overflow anchor is not visible when there are no items in the overflow popup container");
         });
 
         it("Overflow anchor is shown after resize if the overflow popup container is NOT empty", function() {
@@ -229,13 +229,13 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is hidden before the resize");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"), "Overflow anchor is hidden before the resize");
 
             container.width(100);
 
             toolbar.resize();
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");
+            assert.isNotOk(toolbar.overflowAnchor.hasClass("k-hidden"), "Overflow anchor is visible after the resize");
         });
     });
 
@@ -260,7 +260,7 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"));
         });
 
         it("hide method hides overflow buttons", function() {
@@ -294,7 +294,7 @@
             toolbar.hide("#foo");
             toolbar.hide("#bar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"));
         });
 
     });
