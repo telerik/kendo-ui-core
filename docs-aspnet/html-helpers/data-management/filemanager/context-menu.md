@@ -22,7 +22,25 @@ The built-in items in the ContextMenu are `rename` and `delete`. You can define 
             items.Add("rename");
             items.Add("delete");
         })) 
-        ...
+        .DataSource(ds =>
+        {
+            ds.Read(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Read", "FileManagerData")
+            );
+            ds.Destroy(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Destroy", "FileManagerData")
+            );
+            ds.Create(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Create", "FileManagerData")
+            );
+            ds.Update(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Update", "FileManagerData")
+            );
+        })
     )
 ```
 {% if site.core %}
@@ -99,6 +117,37 @@ To add a custom command to the context menu of the FileManager, follow the instu
         }); 
     ```
 
+## ContextMenu Icons
+
+The ContextMenu enables you to add the traditional [Kendo Web Font Icons](https://docs.telerik.com/aspnet-core/styles-and-layout/sass-themes/font-icons#list-of-font-icons) in order to enhance the look and feel of the incorporated ContextMenu items.
+
+> If the built-in `Rename` and `Delete` commands are to be added, it is mandatory to configure all the required `Text()`, `Command()` and `Icon()` configurations.
+
+```HtmlHelper
+    .ContextMenu(context =>
+    {
+        context.Items(items =>
+        {
+            items.Add("rename");
+            items.Add("delete").Text("Delete").Command("DeleteCommand").Icon("x");
+            items.Add("custom").Text("Files Selected").Command("CustomCommand").Icon("info-circle");
+        });
+    })
+```
+{% if site.core %}
+```TagHelper
+    <context-menu enabled="true">
+         <items>
+             <item name="rename">
+             </item>
+             <item name="delete" command="DeleteCommand" text="Delete" icon="x">
+             </item>
+             <item name="custom" command="CustomCommand" text="Files Selected" icon="info-circle">
+             </item>
+         </items>
+    </context-menu>
+```
+{% endif %}
 
 ## See Also
 
