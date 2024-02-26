@@ -3893,7 +3893,8 @@ var __meta__ = {
                     filter: that._filter,
                     group: that._group,
                     aggregate: that._aggregate,
-                    groupPaging: !!that._groupPaging
+                    groupPaging: !!that._groupPaging,
+                    isExcelExportRequest: that.options.isExcelExportRequest
                 }, data);
 
             if (!that.options.serverPaging) {
@@ -3929,6 +3930,10 @@ var __meta__ = {
 
             if (!that.options.groupPaging || !(that.options.serverPaging && that.options.serverGrouping)) {
                 delete options.groupPaging;
+            }
+
+            if (!that.options.isExcelExportRequest) {
+                delete options.isExcelExportRequest;
             }
 
             return options;

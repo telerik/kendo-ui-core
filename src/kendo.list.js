@@ -1898,8 +1898,16 @@ var __meta__ = {
                 form = formId ? $("#" + formId) : element.closest("form");
 
             if (form[0]) {
-                that._resetHandler = function() {
+                that._resetHandler = function(e) {
+                    if (that.options._shouldPreventDefaultReset) {
+                        e.preventDefault();
+                    }
+
                     setTimeout(function() {
+                        if (that.options._removeDataItems) {
+                            that.listView._dataItems = [];
+                        }
+
                         that.value(that._initial);
                     });
                 };
@@ -2453,6 +2461,7 @@ var __meta__ = {
                 }
 
                 added = that._select(indices);
+
             }
 
             if (added.length || removed.length) {
@@ -2461,6 +2470,7 @@ var __meta__ = {
                     added: added,
                     removed: removed
                 });
+
             }
 
             return deferred;
@@ -2707,6 +2717,7 @@ var __meta__ = {
             }
 
             for (; idx < indices.length; idx++) {
+
                 index = indices[idx];
                 dataItem = data[index];
 
@@ -2726,7 +2737,6 @@ var __meta__ = {
                     dataItem: dataItem
                 });
             }
-
             return added;
         },
 

@@ -3503,7 +3503,7 @@ declare namespace kendo.ui {
         suggest(value: string): void;
         text(): string;
         text(text: string): void;
-        toggle(toggle: boolean): void;
+        toggle(toggle?: boolean): void;
         value(): string;
         value(value: string): void;
 
@@ -4431,7 +4431,7 @@ declare namespace kendo.ui {
         setDataSource(dataSource: kendo.data.DataSource): void;
         text(): string;
         text(text: string): void;
-        toggle(toggle: boolean): void;
+        toggle(toggle?: boolean): void;
         value(): string;
         value(value: string): void;
 

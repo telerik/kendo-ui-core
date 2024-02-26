@@ -828,7 +828,7 @@
             }, 200);
         });
 
-        it("form reset support", function(done) {
+        it("form reset support - after selection", function(done) {
             input.attr("value", "123");
 
             var form = $("<form/>").appendTo(Mocha.fixture).append(input);
@@ -844,6 +844,25 @@
             setTimeout(function() {
                 assert.equal(combobox.element.val(), "123");
                 assert.equal(combobox.input.val(), "123");
+                done();
+            }, 150);
+        });
+
+        it("form reset support - value provided as option", function(done) {
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input);
+
+            var combobox = new ComboBox(input, {
+                placeholder: "Select product",
+                dataTextField: "ProductName",
+                dataValueField: "ProductID",
+                value: 1,
+                dataSource: [{ ProductID: 1, ProductName: 'test' }]
+            });
+
+            form[0].reset();
+
+            setTimeout(function() {
+                assert.equal(combobox.text(), "test");
                 done();
             }, 150);
         });

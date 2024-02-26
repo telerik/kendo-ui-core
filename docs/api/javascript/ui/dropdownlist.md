@@ -1776,7 +1776,7 @@ Opens or closes the widget popup.
 
 #### Parameters
 
-##### toggle `Boolean`
+##### toggle `Boolean` *(optional)*
 
 Defines the whether to open/close the drop-down list.
 

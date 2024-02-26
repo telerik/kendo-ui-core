@@ -2035,6 +2035,11 @@ var __meta__ = {
     }
 
     function unbindElementTree(element, destroyWidgets) {
+
+        if (!element) {
+            return;
+        }
+
         unbindElement(element, destroyWidgets);
 
         unbindElementChildren(element, destroyWidgets);

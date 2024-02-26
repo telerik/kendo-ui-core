@@ -64,6 +64,9 @@
                 '<script id="parent-nested-function-template" type="text/x-kendo-template">' +
                 '<li data-bind="text: foo.foo"></li>' +
                 '</script>' +
+                '<script id="dateinput-template" type="text/x-kendo-template">' +
+                '<li><div><input type="text" data-role="dateinput" data-bind="value: birthday"/></div></li>' +
+                '</script>' +
                 '<script id="primitive-template" type="text/x-kendo-template">' +
                 '<span>#= data #</span>' +
                 '</script>'
@@ -85,6 +88,20 @@
 
             assert.equal(dom.find("option").text(), "foo");
             assert.equal(dom.find("option").val(), "1");
+        });
+
+        it("dateinput should not throw error on unbind", function() {
+            dom = $('<ul data-template="dateinput-template" data-bind="source: products"></ul>');
+
+            var viewModel = kendo.observable({
+                products: [
+                  { birthday: new Date() }
+                ]
+                });
+
+            kendo.bind(dom, viewModel);
+
+            assert.doesNotThrow(function(){ viewModel.trigger("change", { field: "products" }); })
         });
 
         it("select binding to data source", function() {

@@ -138,7 +138,7 @@ The following example demonstrates the basic configuration of the MultiSelect. T
                        item-template="<span class=product-id-id> #= ProductID #</span> #= ProductName #"
                        value='new[] {2, 7}'
                        height="520"
-                       tag-mode="@MultiSelectTagMode.Single"
+                       tag-mode="single"
                        on-change="onChange"
                        on-select="onSelect"
                        on-deselect="OnDeselect"
