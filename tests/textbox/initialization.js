@@ -46,7 +46,7 @@
                 readonly: true
             });
 
-            assert.isOk(textbox.wrapper.hasClass("k-no-click"));
+            assert.isOk(textbox.wrapper.hasClass("k-readonly"));
         });
 
         it("Should get value from input", function() {

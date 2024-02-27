@@ -254,7 +254,7 @@ var __meta__ = {
 
                 if (floating) {
                     that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
-                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that, useReadOnlyClass: true });
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
                     that._floatingLabelContainer.addClass(TEXTAREACONTAINER);
                 }
 

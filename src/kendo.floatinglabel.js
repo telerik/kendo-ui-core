@@ -17,7 +17,6 @@ var __meta__ = {
         EMPTY = "k-empty",
         FOCUSED = "k-focus",
         STATEDISABLED = "k-disabled",
-        NOCLICKCLASS = "k-no-click",
         STATEREADONLY = "k-readonly",
         FLOATINGLABEL_OFFSET_Y = "--kendo-floating-label-offset-y",
         FLOATINGLABEL_OFFSET_X = "--kendo-floating-label-offset-x",
@@ -53,7 +52,6 @@ var __meta__ = {
         options: {
             name: 'FloatingLabel',
             widget: null,
-            useReadOnlyClass: false,
             floatCheck: ({ element }) => !element.val()
         },
 
@@ -116,14 +114,14 @@ var __meta__ = {
             if (!readonly && !disable) {
                 element
                     .removeClass(STATEDISABLED)
-                    .removeClass(that.options.useReadOnlyClass ? STATEREADONLY : NOCLICKCLASS);
+                    .removeClass(STATEREADONLY);
 
                 element.on("focusin" + NS, that.refresh.bind(that));
                 element.on("focusout" + NS, that.refresh.bind(that));
             } else {
                 element
                     .toggleClass(STATEDISABLED, disable)
-                    .toggleClass(that.options.useReadOnlyClass ? STATEREADONLY : NOCLICKCLASS, readonly);
+                    .toggleClass(STATEREADONLY, readonly);
             }
         }
     });

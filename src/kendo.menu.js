@@ -1218,7 +1218,7 @@ var __meta__ = {
 
                     scrollButtons = backwardBtn.add(forwardBtn).appendTo(popup.wrapper);
 
-                    that._initScrolling(popup.element, backwardBtn, forwardBtn, isHorizontal);
+                    that._initScrolling(that.element, backwardBtn, forwardBtn, isHorizontal);
                     if (!skipMouseEvents) {
                         scrollButtons.on(MOUSEENTER + NS, function() {
                             var overflowWrapper = that._overflowWrapper();
@@ -1236,7 +1236,7 @@ var __meta__ = {
                         });
                     }
                 }
-                that._toggleScrollButtons(popup.element, scrollButtons.first(), scrollButtons.last(), isHorizontal);
+                that._toggleScrollButtons(that.element, scrollButtons.first(), scrollButtons.last(), isHorizontal);
             }, timeout);
         },
 
@@ -2448,7 +2448,7 @@ var __meta__ = {
                 that._openedPopups = {};
 
                 that._popupsWrapper = (that.element.parent().is(childAnimationContainerSelector) ? that.element.closes(animationContainerSelector) : that.element)
-                    .wrap("<div class='k-popups-wrapper " + options.orientation + "'></div>").parent();
+                    .wrap("<div class='k-menu-scroll-wrapper " + options.orientation + "'></div>").parent();
 
                 if (that.options.orientation == "horizontal") {
                     removeSpacesBetweenItems(that.element);

@@ -327,6 +327,45 @@
         menuContainer.remove();
     });
 
+    it("Scrollable context menu renders buttons", function(done) {
+        var menuContainer = $(`<div id="target">Target</div>
+        <ul id="context-menu" style="width:150px; height:150px;">
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+          <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        </ul>`).appendTo(Mocha.fixture);
+        var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#target", scrollable: true });
+
+        contextMenu.open();
+
+        setTimeout(() => {
+            assert.isOk(contextMenu._popupsWrapper.find(".k-scroll-down").is(":visible"));
+            contextMenu.element.scrollTop(130);
+            contextMenu._toggleScrollButtons(contextMenu.element, $(".k-scroll-up"), $(".k-scroll-down"), false);
+            assert.isOk(contextMenu._popupsWrapper.find(".k-scroll-up").is(":visible"));
+            contextMenu.destroy();
+            menuContainer.remove();
+            done();
+        }, 250);
+
+    });
+
     it('overflow context menu - setOptions reattach events', function() {
         mockFunc(kendo.ui.ContextMenu.fn, "_detachMenuEventsHandlers", assertOk);
         mockFunc(kendo.ui.ContextMenu.fn, "_destroyOverflow", assertOk);

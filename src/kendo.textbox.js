@@ -25,7 +25,7 @@ var __meta__ = {
         FOCUSED = "k-focus",
         LABELCLASSES = "k-label k-input-label",
         STATEDISABLED = "k-disabled",
-        NOCLICKCLASS = "k-no-click",
+        STATEREADONLY = "k-readonly",
         ARIA_DISABLED = "aria-disabled";
 
     var TextBox = Widget.extend({
@@ -187,7 +187,7 @@ var __meta__ = {
                        .attr(ARIA_DISABLED, false);
 
                 wrapper.removeClass(STATEDISABLED)
-                        .removeClass(NOCLICKCLASS);
+                        .removeClass(STATEREADONLY);
 
                 element.on("focusin" + NS, that._focusin.bind(that));
                 element.on("focusout" + NS, that._focusout.bind(that));
@@ -199,7 +199,7 @@ var __meta__ = {
                        .attr(ARIA_DISABLED, disable);
 
                 wrapper.toggleClass(STATEDISABLED, disable)
-                        .toggleClass(NOCLICKCLASS, readonly);
+                        .toggleClass(STATEREADONLY, readonly);
             }
         },
 

@@ -70,7 +70,7 @@ it('UL elements inside content don\'t get k-menu-group class', function() {
 
 it('menu is inside scroll wrapper', function() {
     menu.setOptions({ scrollable: true, orientation: "horizontal" });
-    assert.isOk(menu.element.parent().is("div.k-popups-wrapper.horizontal"));
+    assert.isOk(menu.element.parent().is("div.k-menu-scroll-wrapper.horizontal"));
 });
 
 

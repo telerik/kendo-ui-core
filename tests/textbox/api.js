@@ -43,7 +43,7 @@
 
             assert.equal(textbox.element.attr("readonly"), undefined);
             assert.equal(textbox.element.attr("disabled"), "disabled");
-            assert.isOk(!textbox.wrapper.hasClass("k-no-click"));
+            assert.isOk(!textbox.wrapper.hasClass("k-readonly"));
             assert.isOk(textbox.wrapper.hasClass("k-disabled"));
         });
 
@@ -53,7 +53,7 @@
             textbox.readonly(true);
 
             assert.equal(input.attr("readonly"), "readonly");
-            assert.isOk(textbox.wrapper.hasClass("k-no-click"));
+            assert.isOk(textbox.wrapper.hasClass("k-readonly"));
         });
 
         it("readonly(false) should remove readonly attributes", function() {
@@ -63,7 +63,7 @@
             textbox.readonly(false);
 
             assert.equal(input.attr("readonly"), undefined);
-            assert.isNotOk(textbox.wrapper.hasClass("k-no-click"));
+            assert.isNotOk(textbox.wrapper.hasClass("k-readonly"));
         });
 
         it("readonly() removes disabled attribute and disabled class", function() {
@@ -74,7 +74,7 @@
 
             assert.equal(textbox.element.attr("readonly"), "readonly");
             assert.equal(textbox.element.attr("disabled"), undefined);
-            assert.isOk(textbox.wrapper.hasClass("k-no-click"));
+            assert.isOk(textbox.wrapper.hasClass("k-readonly"));
             assert.isOk(!textbox.wrapper.hasClass("k-disabled"));
         });
 
