@@ -88,6 +88,27 @@ You can bind the DropDownTree locally on the server by passing the appropriate c
 ```
 {% endif %}
 
+## Mapping Objects to DropDownTreeItemModels
+
+When using server binding you can map a collection of object to a collection of DropDownTreeItemModel, expected by the DropDownTree, via the [BindTo overload](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#bindtosystemcollectionsienumerablesystemaction). By default, the items will be serialized with the default JSON configuation of the [DropDownTree items]({% slug htmlhelpers_dropdowntree_items_aspnetcore %}). If an initial value is set or the `DropDownTreeFor(m=>m)` overload is used and the DataTextField and DataValueField of the mapped objects are different thatn the default `text` and `value` fields, set the DataTextField and DataValueField configuration options, to ensure proper model binding.
+
+```HtmlHelper
+    @(Html.Kendo().DropDownTreeFor(m => m.SelectedOptions)
+        .Checkboxes(true)
+        .DataTextField("OptionName")
+        .DataValueField("OptionValue")
+        .AutoBind(true)
+        .BindTo((IEnumerable<Options>)ViewBag.DropDownTreeData, (NavigationBindingFactory<DropDownTreeItem> mappings) =>
+        {
+            mappings.For<Options>(binding => binding.ItemDataBound((item, option) =>
+            {
+                item.Text = option.OptionName;
+                item.Value = option.OptionValue;
+            }));
+        })
+    )
+
+```
 
 ## See Also
 

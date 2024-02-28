@@ -162,6 +162,8 @@ The duration of the open animation in milliseconds.
 
  Specifies a list of dates, which are shown in the time drop-down list. If not set, the TimePicker will auto-generate the available times.
 
+ > This configuration works only with the [`classic component type`](/api/javascript/ui/timepicker/configuration/componenttype).
+
 
 #### Example
 

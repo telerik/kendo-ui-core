@@ -146,10 +146,13 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/QwOFwYbU29KigMrU43
                             // insert the detail sheet rows after the master row
                             [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
                         }
-                        // save the workbook
-                        kendo.saveAs({
-                            dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
+
+                        // Save the workbook.
+                        new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
+                            kendo.saveAs($.extend({
+                            dataURI: data,
                             fileName: "Export.xlsx"
+                            }));
                         });
                     });
             }

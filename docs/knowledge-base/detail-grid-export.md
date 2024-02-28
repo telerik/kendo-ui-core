@@ -306,10 +306,12 @@ The following example demonstrates how to export a detail Grid to Excel includin
         }
 
         // Save the workbook.
-        kendo.saveAs({
-          dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
-          fileName: "Export.xlsx"
-        })
+        new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
+            kendo.saveAs($.extend({
+              dataURI: data,
+              fileName: "Export.xlsx"
+            }));
+        });
       });
     },
     columns: [
