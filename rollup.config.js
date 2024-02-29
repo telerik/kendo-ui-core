@@ -64,7 +64,7 @@ const resourcesConfig = (name, options = {}) => ({
     input: `${root}/${name}`,
     output: [{
         format: "umd",
-        dir: `./dist/js/${options.dir}`,
+        dir: `./dist/raw-js/${options.dir}`,
         sourcemap: false,
         ...baseOptions
     }],
@@ -84,7 +84,7 @@ const configMap = (name) => ({
     input: `${root}/${name}`,
     output: [{
         format: 'umd',
-        dir: './dist/js',
+        dir: './dist/raw-js',
         sourcemap: false,
         name: name.replace('.', ''),
         ...baseOptions
