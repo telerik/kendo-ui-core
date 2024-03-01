@@ -411,7 +411,7 @@ The path to the image or a base64 string.
         $("#imageEditor").kendoImageEditor();
         var imageEditor = $("#imageEditor").data("kendoImageEditor");
 
-        imageEditor.drawImage("image.jpg").done(function (image) {
+        imageEditor.drawImage("https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg").done(function (image) {
             imageEditor.drawCanvas(image);
         }).fail(function (ev) {
             alert("Something went wrong!");

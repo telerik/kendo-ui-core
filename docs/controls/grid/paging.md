@@ -53,7 +53,7 @@ As of the Kendo UI 2017 R3 release, the Grid enables you to toggle the visibilit
 * If after a `delete` or a `filter` operation, or an update in the `pageSize` the total number of items in the data source becomes lower than the `pageSize` value, the pager will be hidden.
 * If after an `insert` or a `filter` operation, or an update in the `pageSize` the total number of items in the data source becomes greater than or equal to the `pageSize` value, the pager will be displayed.
 
-For a runnable example, refer to the [demo on controlling the pager visibility in the Grid](https://demos.telerik.com/kendo-ui/grid/pager-visibility).
+For a runnable example, refer to the [demo on controlling the pager visibility in the Grid](https://demos.telerik.com/kendo-ui/grid/pager-functionality).
 
 ## KB Articles on Paging
 
@@ -62,5 +62,5 @@ For a runnable example, refer to the [demo on controlling the pager visibility i
 
 ## See Also
 
-* [Pager Visibility by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/pager-visibility)
+* [Pager Visibility by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/pager-functionality)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

@@ -86,9 +86,9 @@ To continue using font icons as the default icon type, call the `kendo.setDefaul
 </script>
 ```
 
-Alternatively, you can set the default icon type on the server:
-
 {% if site.core %}
+Alternatively, you can set the default icon type in the minimal hosting model of the application.
+
 ```C#
     services.AddKendo(x =>
     {
@@ -96,6 +96,8 @@ Alternatively, you can set the default icon type on the server:
     });
 ```
 {% else %}
+Alternatively, you can set the default icon type on the server. Namely, within the `Global.asax.cs` file.
+
 ```C#
     KendoMvc.Setup(x =>
     {

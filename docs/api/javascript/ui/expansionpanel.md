@@ -151,9 +151,17 @@ A whitespace-delimited string of animation effects that are used when an item is
         });
     </script>
 
-### collapseIconClass `String` *(default: "k-icon k-i-arrow-chevron-up")*
+### collapseIconClass `String` *(default: "chevron-up")*
 
-The class of the collapse icon.
+The name of the collapse icon.
+
+    <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <script>
+      $("#expansionPanel").kendoExpansionPanel({
+        collapseIconClass: "minus"
+      });
+    </script>
 
 ### disabled `Boolean` *(default: false)*
 
@@ -183,9 +191,17 @@ If set to true the widget will be expanded by default.
         });
     </script>
 
-### expandIconClass `String` *(default: "k-icon k-i-arrow-chevron-down")*
+### expandIconClass `String` *(default: "chevron-down")*
 
-The class of the collapse icon.
+The class of the expand icon.
+
+    <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <script>
+      $("#expansionPanel").kendoExpansionPanel({
+        expandIconClass: "plus"
+      });
+    </script>
 
 ### height `Number|String`
 
