@@ -55,6 +55,8 @@ You can configure the AutoComplete to get its data from a remote source by makin
 
 1. Create an action that returns the data as a JSON result.
 
+    {% if site.mvc %}
+    ```C#
         public ActionResult Index()
         {
             return View(new ProductViewModel
@@ -75,6 +77,31 @@ You can configure the AutoComplete to get its data from a remote source by makin
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
+    ```
+    {% else %}
+    ```C#
+        public ActionResult Index()
+        {
+            return View(new ProductViewModel
+            {
+                ProductID = 4,
+                ProductName = "ProductName4"
+            });
+        }
+
+        public JsonResult GetProductsAjax()
+        {
+            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
+            {
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
+
+            return Json(products);
+        }
+
+    ```
+    {% endif %}
 
 1. Add the AutoComplete to the view and configure its DataSource to use remote data.
 

@@ -318,6 +318,8 @@ var __meta__ = {
 
             if (options.value !== undefined) {
                 that.value(options.value);
+            } else if (that._value !== undefined) {
+                that.value(that._value);
             }
         },
 
@@ -371,7 +373,7 @@ var __meta__ = {
             adjusted = that._adjust(value);
 
             if (value !== adjusted) {
-                return;
+                value = NULL;
             }
 
             that._update(value);

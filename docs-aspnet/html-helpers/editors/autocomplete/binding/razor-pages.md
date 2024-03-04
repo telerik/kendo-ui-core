@@ -20,12 +20,13 @@ For the complete project, refer to the [AutoComplete in Razor Pages example](htt
 
 In order to set up the AutoComplete component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
-```tab-HtmlHelper(csthml)        
+```tab-HtmlHelper(cshtml)        
+    @model IndexModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
-    @(Html.Kendo().AutoComplete()
-            .Name("autocomplete")
+    @(Html.Kendo().AutoCompleteFor(model => model.ShipName)
             .DataTextField("ShipName")
             .Filter("contains")
             .MinLength(3)
@@ -53,30 +54,36 @@ In order to set up the AutoComplete component bindings, you need to configure th
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-autocomplete name="autocomplete"
-                    datatextfield="ShipName"
-                    filter="FilterType.Contains"
-                    min-length="3">
-    <datasource type="DataSourceTagHelperType.Custom"
-                server-filtering="true">
-        <transport>
-            <read url="/AutoComplete/AutoCompleteCRUDOperations?handler=Read" data="dataFunction" />
-        </transport>
-    </datasource>
-
-</kendo-autocomplete>
+    <kendo-autocomplete for="ShipName"
+                        datatextfield="ShipName"
+                        filter="FilterType.Contains"
+                        min-length="3">
+        <datasource type="DataSourceTagHelperType.Custom"
+                    server-filtering="true">
+            <transport>
+                <read url="/AutoComplete/AutoCompleteCRUDOperations?    handler=Read" data="dataFunction" />
+            </transport>
+        </datasource>
+    
+    </kendo-autocomplete>
 ```
 {% endif %}
 ```tab-PageModel(cshtml.cs)
-   public JsonResult OnGetRead(string filterValue)
+        public class IndexModel : PageModel
         {
-            if (filterValue != null)
+            [BindProperty]
+            public string ShipName { get; set; }
+            
+            public JsonResult OnGetRead(string filterValue)
             {
-                //orders is the DBContext
-                var filteredData = orders.Where(p => p.ShipName.Contains(filterValue)); 
-                return new JsonResult(filteredData);
+                if (filterValue != null)
+                {
+                    //orders is the DBContext
+                    var filteredData = orders.Where(p => p.ShipName.Contains     (filterValue)); 
+                    return new JsonResult(filteredData);
+                }
+                return new JsonResult(orders);
             }
-            return new JsonResult(orders);
         }
 ```
 

@@ -533,7 +533,7 @@
             kendo.culture('en-EN');
         });
 
-        it("NumericTextBox setOptons works as expected", function() {
+        it("NumericTextBox setOptions works as expected", function() {
             var textbox = new NumericTextBox(input, {
                 min: 1,
                 max: 20,
@@ -555,7 +555,33 @@
             assert.equal(textbox.value(), 14);
         });
 
-        it("NumericTextBox setOptons correctly shows spinners", function() {
+        it("NumericTextBox setOptions max property is smaller than initial value", function() {
+            var textbox = new NumericTextBox(input, {
+                value: 10,
+                placeholder: "test"
+            });
+            textbox.setOptions({
+                max: 5,
+                placeholder: "new holder"
+            });
+
+            assert.equal(textbox.value(), null);
+        });
+
+        it("NumericTextBox setOptions max property is larger than initial value", function() {
+            var textbox = new NumericTextBox(input, {
+                value: 10,
+                placeholder: "test"
+            });
+            textbox.setOptions({
+                max: 15,
+                placeholder: "new holder"
+            });
+
+            assert.equal(textbox.value(), 10);
+        });
+
+        it("NumericTextBox setOptions correctly shows spinners", function() {
             var textbox = new NumericTextBox(input, {
                 spinners: false
             });
@@ -580,7 +606,7 @@
             assert.equal(textbox.value(), 11);
         });
 
-        it("NumericTextBox setOptons correctly sets spinners size", function() {
+        it("NumericTextBox setOptions correctly sets spinners size", function() {
             var textbox = new NumericTextBox(input, {
                 spinners: true
             });
@@ -593,7 +619,7 @@
             assert.equal(textbox._arrowsWrap.find(".k-button-lg").length, 2);
         });
 
-        it("NumericTextBox setOptons correctly hides spinners", function() {
+        it("NumericTextBox setOptions correctly hides spinners", function() {
             var textbox = new NumericTextBox(input, {
                 spinners: true
             });
