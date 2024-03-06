@@ -1246,6 +1246,14 @@
             assert.equal(dom[0].hasAttribute("readonly"), false);
         });
 
+        it("readonly attribute has higher priority that enabled", function() {
+            dom = $('<input data-role="textbox" data-bind="enabled: isEnabled" readonly/>');
+            kendo.bind(dom, { isEnabled: true });
+
+            assert.equal(dom[0].readOnly, true);
+            assert.equal(dom[0].hasAttribute("readonly"), true);
+        });
+
         it("bind to parent property with nested kendo.bind", function() {
             var viewModel = kendo.observable({
                 foo: {

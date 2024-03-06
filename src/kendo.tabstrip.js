@@ -927,12 +927,15 @@ var __meta__ = {
         },
 
         _active: function() {
-            var item = this.tabGroup.children().filter("." + ACTIVESTATE);
+            var that = this;
+            setTimeout(function() {
+                var item = that.tabGroup.children().filter("." + ACTIVESTATE);
 
-            item = item[0] ? item : this._endItem("first");
-            if (item[0]) {
-                this._current(item);
-            }
+                item = item[0] ? item : that._endItem("first");
+                if (item[0]) {
+                    that._current(item);
+                }
+            }, 100);
         },
 
         _animations: function(options) {
@@ -949,6 +952,10 @@ var __meta__ = {
             var that = this,
                 options = that.options;
 
+            that.tabGroup
+                .on(CLICK + NS, ".k-disabled .k-link", false)
+                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, that._itemClick.bind(that));
+
             that.wrapper.on("focus" + NS, function() { that.tabGroup.trigger("focus"); });
 
             that.tabGroup
@@ -961,10 +968,6 @@ var __meta__ = {
             if (options.navigatable) {
                 that.tabGroup.on("keydown" + NS, that._keyDownProxy);
             }
-
-            that.tabGroup
-                .on(CLICK + NS, ".k-disabled .k-link", false)
-                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, that._itemClick.bind(that));
         },
 
         _click: function(item) {
@@ -978,7 +981,7 @@ var __meta__ = {
                 neighbours = item.parent().children(),
                 oldFocusedTab = neighbours.filter("." + FOCUSEDSTATE);
 
-            if (item.closest(".k-widget")[0] != that.wrapper[0]) {
+            if (item.closest(".k-tabstrip")[0] != that.wrapper[0]) {
                 return;
             }
 
@@ -1091,9 +1094,7 @@ var __meta__ = {
             }
 
             if (candidate) {
-                if (!candidate.hasClass(ACTIVESTATE)) {
-                    candidate.addClass(FOCUSEDSTATE);
-                }
+                candidate.addClass(FOCUSEDSTATE);
             }
 
             that._focused = candidate;

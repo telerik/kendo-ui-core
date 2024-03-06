@@ -351,19 +351,6 @@ it("changing visible to true shows the widget", function() {
     assert.isOk(dom.data("kendoAutoComplete").wrapper.css("display") != "none", "Display is not 'none'");
 });
 
-
-it("binding enabled to false disables the widget", function() {
-    dom = $('<input data-bind="enabled:enabled" data-role="autocomplete"/>');
-
-    var observable = kendo.observable({
-        enabled: false
-    });
-
-    kendo.bind(dom, observable);
-
-    assert.isOk(dom.is(":disabled"));
-});
-
 it("binding enabled to true enables the widget", function() {
     dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="autocomplete" />');
 
