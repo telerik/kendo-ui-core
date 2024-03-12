@@ -40,7 +40,11 @@ Change the `table-layout` to `fixed`.
 
 To remove the misalignment of the columns and headers when the Grid is resized, provide at least one column without a specified width so that it can freely adjust.
 
+## KB Articles on Grid Column Widths
+
+* [Auto Fit Column Width of the Grid for {{ site.framework}}]({% slug grid-autofit-all-columns-width %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
-* [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)
