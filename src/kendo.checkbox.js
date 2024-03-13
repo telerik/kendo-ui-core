@@ -22,7 +22,8 @@ var __meta__ = {
             encoded: true,
             label: null,
             rounded: "medium",
-            size: "medium"
+            size: "medium",
+            wrapperClass: "k-checkbox-wrap"
         },
 
         RENDER_INPUT: kendo.html.renderCheckBox,

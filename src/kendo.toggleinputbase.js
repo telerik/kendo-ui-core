@@ -122,8 +122,15 @@ var __meta__ = {
             inputMethod(that.element, $.extend({}, options));
             that.element.removeClass('input-validation-error');
 
-            that.wrapper = that.element;
-        }
+            that.wrapper = that.element.wrap(`<span class="${options.wrapperClass}"></span>`).parent();
+        },
+
+        setOptions: function(options) {
+            this._clearCssClasses(options, this.element);
+            this._setEvents(options);
+            $.extend(this.options, options);
+            this._applyCssClasses(this.element);
+        },
     });
 
     ui.plugin(ToggleInputBase);
