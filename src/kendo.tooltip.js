@@ -353,7 +353,7 @@ var __meta__ = {
                 that.element.on("mouseenter" + NS, that.options.filter, that._mouseenter.bind(that));
             }
 
-            if (this.options.autoHide && this._isShownOnMouseEnter()) {
+            if (this.options.autoHide && this._isShownOnMouseEnter() && this.options.position !== "center") {
                 that.element.on("mouseleave" + NS, that.options.filter, that._mouseleave.bind(that));
             }
 

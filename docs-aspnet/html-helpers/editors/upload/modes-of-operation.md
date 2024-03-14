@@ -41,6 +41,7 @@ An Upload in the synchronous mode behaves like a regular file input&mdash;the se
 </form>
 ```
 {% endif %}
+{% if site.core %}
 ```Controller
 public IWebHostEnvironment WebHostEnvironment { get; set; }
 
@@ -73,6 +74,40 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
     return View("Result");
 }
 ```
+{% else %}
+```Controller
+public IWebHostEnvironment WebHostEnvironment { get; set; }
+
+public UploadController(IWebHostEnvironment webHostEnvironment)
+{
+    WebHostEnvironment = webHostEnvironment;
+}
+
+public ActionResult Submit(IEnumerable<HttpPostedFileBase> files)
+{
+    // The Name of the Upload component is "files".
+    if (files != null)
+    {
+        foreach (var file in files)
+        {
+            var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            // Some browsers send file names with full path.
+            // The demo is interested only in the file name.
+            var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
+
+            using (var fileStream = new FileStream(physicalPath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+        }
+    }
+
+    return View("Result");
+}
+```
+{% endif %}
 
 ## Asynchronous Mode
 
@@ -97,6 +132,8 @@ An Upload in the asynchronous mode requires dedicated server handlers to store a
 </kendo-upload>
 ```
 {% endif %}
+
+{% if site.core %}
 ```Controller
 public IWebHostingEnvironment WebHostEnvironment { get; set; }
 
@@ -154,6 +191,66 @@ public ActionResult Remove(string[] fileNames)
     return Content("");
 }
 ```
+{% else %}
+```Controller
+public IWebHostingEnvironment WebHostEnvironment { get; set; }
+
+public UploadController(IWebHostEnvironment webHostEnvironment)
+{
+    WebHostEnvironment = webHostEnvironment;
+}
+
+public async Task<ActionResult> SaveAsync(IEnumerable<HttpPostedFileBase> files)
+{
+    // The Name of the Upload component is "files".
+    if (files != null)
+    {
+        foreach (var file in files)
+        {
+            var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            // Some browsers send file names with full path.
+            // We are only interested in the file name.
+            var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
+
+            using (var fileStream = new FileStream(physicalPath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+        }
+    }
+
+    // Return an empty string to signify success.
+    return Content("");
+}
+
+public ActionResult Remove(string[] fileNames)
+{
+    // The parameter of the Remove action must be called "fileNames".
+
+    if (fileNames != null)
+    {
+        foreach (var fullName in fileNames)
+        {
+            var fileName = Path.GetFileName(fullName);
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
+
+            // TODO: Verify user permissions.
+
+            if (System.IO.File.Exists(physicalPath))
+            {
+                System.IO.File.Delete(physicalPath);
+            }
+        }
+    }
+
+    // Return an empty string to signify success.
+    return Content("");
+}
+```
+{% endif %}
+
 
 ### Handlers
 

@@ -1,5 +1,5 @@
 (function() {
-    var KICONCLOSE = ".k-dialog-close";
+    var KICONCLOSE = "[data-role='close']";
 
     function createDialog(options, element) {
         element = element || $("<div class='dialog'>dialog content</div>").appendTo(Mocha.fixture);

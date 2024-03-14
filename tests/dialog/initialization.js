@@ -40,7 +40,7 @@
             assert.isOk(wrapper.is(".k-window.k-dialog"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar.k-dialog-titlebar"));
             assert.isOk(wrapperChildren.eq(0).children().eq(1).is(".k-window-titlebar-actions.k-dialog-titlebar-actions"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-titlebar-action.k-dialog-titlebar-action.k-dialog-close"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-titlebar-action.k-dialog-titlebar-action.k-button"));
             assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-svg-icon.k-svg-i-x"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content.k-dialog-content"));
             assert.equal(wrapper.find(".k-dialog-actions").length, 0);
@@ -54,7 +54,7 @@
             var wrapperChildren = wrapper.children();
 
             assert.isOk(wrapper.is(".k-dialog.k-window"));
-            assert.isOk(wrapperChildren.eq(0).is(".k-dialog-titlebar-action.k-dialog-close"));
+            assert.isOk(wrapperChildren.eq(0).is(".k-dialog-titlebar-action.k-button"));
             assert.isOk(wrapperChildren.eq(0).children().eq(0).is(".k-svg-icon.k-svg-i-x"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.equal(wrapper.find(".k-dialog-actions").length, 0);
@@ -69,8 +69,8 @@
             });
             var wrapper = dialog.wrapper;
 
-            assert.equal(wrapper.find(".k-dialog-titlebar-action.k-dialog-close").attr("aria-label"), testMessage);
-            assert.equal(wrapper.find(".k-dialog-titlebar-action.k-dialog-close").attr("title"), testMessage);
+            assert.equal(wrapper.find(".k-dialog-titlebar-action.k-button").attr("aria-label"), testMessage);
+            assert.equal(wrapper.find(".k-dialog-titlebar-action.k-button").attr("title"), testMessage);
         });
 
         it("hide close button", function() {
@@ -82,13 +82,12 @@
             assert.isOk(!wrapperChildren.eq(0).is(".k-i-x"));
         });
 
-        it("title=false does not render title and adds css class", function() {
+        it("title=false does not render title", function() {
             var dialog = createDialog({
                 title: false
             });
 
             assert.equal(dialog.wrapper.find(".k-dialog-titlebar").length, 0);
-            assert.isOk(dialog.wrapper.is(".k-dialog-titleless"));
         });
 
         it("set title text from options", function() {
@@ -238,7 +237,7 @@ console.log(wrapper.find(".k-dialog-actions > .k-button:first")[0]);
                 modal: true
             });
 
-            assert.equal($(".k-overlay").length, 0);
+            assert.isNotOk($(".k-overlay").is(":visible"));
         });
 
         it("construction of modal dialog with visible false does not destroy other dialog overlay", function() {
@@ -264,7 +263,7 @@ console.log(wrapper.find(".k-dialog-actions > .k-button:first")[0]);
             }).getKendoDialog();
 
             assert.equal(dialog.element.attr("tabindex"), 10);
-            assert.equal(dialog.wrapper.find(".k-dialog-close").attr("tabindex"), 10);
+            assert.equal(dialog.wrapper.find(".k-window-titlebar-actions .k-button").attr("tabindex"), 10);
             assert.equal(dialog.wrapper.find(".k-button").attr("tabindex"), 10);
         });
 
@@ -282,7 +281,7 @@ console.log(wrapper.find(".k-dialog-actions > .k-button:first")[0]);
             });
             var actionbar = dialog.wrapper.find(".k-dialog-actions");
 
-            assert.isOk(actionbar.hasClass("k-justify-content-stretch"));
+            assert.isOk(actionbar.hasClass("k-actions-stretched"));
             assert.equal(actionbar.find(".k-button").eq(0).width, actionbar.find(".k-button").eq(1).width);
         });
 
@@ -293,7 +292,7 @@ console.log(wrapper.find(".k-dialog-actions > .k-button:first")[0]);
             });
             var actionbar = dialog.wrapper.find(".k-dialog-actions");
 
-            assert.isOk(actionbar.hasClass("k-justify-content-end"));
+            assert.isOk(actionbar.hasClass("k-actions-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 
@@ -340,7 +339,7 @@ console.log(wrapper.find(".k-dialog-actions > .k-button:first")[0]);
             });
             var actionbar = dialog.wrapper.find(".k-dialog-actions");
 
-            assert.isOk(actionbar.hasClass("k-justify-content-end"));
+            assert.isOk(actionbar.hasClass("k-actions-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 
@@ -357,41 +356,6 @@ console.log(wrapper.find(".k-dialog-actions > .k-button:first")[0]);
         afterEach(function() {
             moduleOptions.afterEach();
             $("#before,#after").remove();
-        });
-
-        it("adds aria-hidden", function() {
-            var node = $("<div class='dialog'>foo</div>").appendTo(Mocha.fixture);
-            Mocha.fixture.before("<div id='before'>before</div>");
-            Mocha.fixture.after("<div id='after'>after</div>");
-
-            dialog = createDialog({ modal: true, visible: true }, node);
-
-            assert.equal($("#before").attr("aria-hidden"), "true");
-            assert.equal($("#after").attr("aria-hidden"), "true");
-        });
-
-        it("aria-hidden is removed on close", function() {
-            var node = $("<div class='dialog'>foo</div>").appendTo(Mocha.fixture);
-            Mocha.fixture.before("<div id='before'>before</div>");
-            Mocha.fixture.after("<div id='after'>after</div>");
-
-            dialog = createDialog({ modal: true, visible: true }, node);
-            dialog.close();
-
-            assert.equal($("#before").attr("aria-hidden"), null);
-            assert.equal($("#after").attr("aria-hidden"), null);
-        });
-
-        it("restores initial aria-hidden value on close", function() {
-            var node = $("<div class='dialog'>foo</div>").appendTo(Mocha.fixture);
-            Mocha.fixture.before("<div id='before' aria-hidden='true'>before</div>");
-            Mocha.fixture.after("<div id='after'>after</div>");
-
-            dialog = createDialog({ modal: true, visible: true }, node);
-            dialog.close();
-
-            assert.equal($("#before").attr("aria-hidden"), "true");
-            assert.equal($("#after").attr("aria-hidden"), null);
         });
 
         it("focuses visible modal dialog on init", function() {

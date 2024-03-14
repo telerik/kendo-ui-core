@@ -21,20 +21,17 @@ import "./kendo.icons.js";
             encode = kendo.htmlEncode,
             NS = "kendoWindow",
             KDIALOG = ".k-dialog",
+            KDIALOGWRAP = ".k-dialog-wrapper",
             KWINDOW = ".k-window",
-            KICONCLOSE = ".k-dialog-close",
+            KCLOSE = "[data-role='close']",
             KCONTENTCLASS = "k-window-content k-dialog-content",
             KCONTENTSELECTOR = ".k-window-content",
             KSCROLL = "k-scroll",
-            KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-dialog-titlebar",
             KBUTTONGROUP = ".k-dialog-actions",
             // KACTIONS = ".k-actions",
             KBUTTON = ".k-button",
-            KALERT = "k-alert",
-            KCONFIRM = "k-confirm",
-            KPROMPT = "k-prompt",
             KTEXTBOX = ".k-input-inner",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
@@ -62,8 +59,7 @@ import "./kendo.icons.js";
                 promptInput: "Input"
             },
             ceil = Math.ceil,
-            templates,
-            overlaySelector = ":not(link,meta,script,style)";
+            templates;
 
         function defined(x) {
             return (typeof x != "undefined");
@@ -105,6 +101,12 @@ import "./kendo.icons.js";
 
                 that._createDialog();
                 wrapper = that.wrapper = element.closest(KDIALOG);
+                that.dialogWrapper = wrapper.closest(KDIALOGWRAP);
+
+                if (!options.modal && that._isDialog()) {
+                    that.dialogWrapper.width(that.wrapper.width());
+                    that.dialogWrapper.height(that.wrapper.height());
+                }
 
                 if (options._defaultFocus === undefined) {
                     that._defaultFocus = element[0];
@@ -116,7 +118,7 @@ import "./kendo.icons.js";
                 this._tabKeyTrap = new TabKeyTrap(wrapper);
 
                 if (!that.options.visible) {
-                    that.wrapper.hide();
+                    that.dialogWrapper.hide();
                 } else {
                     that._triggerOpen();
                 }
@@ -145,14 +147,14 @@ import "./kendo.icons.js";
                     that._createActionbar(that.wrapper);
                 }
 
-                that.wrapper.show();
+                that.dialogWrapper.show();
                 that._closable(that.wrapper);
 
                 that.wrapper.removeClass(SIZE[sizeClass]);
                 that._dimensions();
 
                 if (!options.visible) {
-                    that.wrapper.hide();
+                    that.dialogWrapper.hide();
                 } else {
                     that._triggerOpen();
                 }
@@ -162,10 +164,12 @@ import "./kendo.icons.js";
                 }
 
                 if (typeof options.modal !== "undefined") {
-                    var visible = that.options.visible !== false;
                     that._enableDocumentScrolling();
-                    that._overlay(options.modal && visible);
                 }
+            },
+
+            _isDialog: function() {
+                return this.options.name === "Dialog";
             },
 
             _dimensions: function() {
@@ -265,58 +269,6 @@ import "./kendo.icons.js";
                 return actionbarHeight + titlebarHeight;
             },
 
-            _overlay: function(visible) {
-                var overlay = this.appendTo.children(KOVERLAY),
-                    wrapper = this.wrapper;
-
-
-                if (!overlay.length) {
-                    overlay = $(templates.overlay);
-                }
-
-                overlay
-                    .insertBefore(wrapper[0])
-                    .toggle(visible)
-                    .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
-
-                if (visible) {
-                    this._waiAriaOverlay();
-                }
-                else {
-                    this._removeWaiAriaOverlay();
-                }
-
-                if (this.options.modal.preventScroll) {
-                    this._stopDocumentScrolling();
-                }
-
-                return overlay;
-            },
-
-            _waiAriaOverlay: function() {
-                var node = this.wrapper;
-
-                this._overlayedNodes = node.prevAll(overlaySelector).add(node.nextAll(overlaySelector))
-                    .each(function() {
-                        var jthis = $(this);
-                        jthis.data("ariaHidden", jthis.attr("aria-hidden"));
-                        jthis.attr("aria-hidden", "true");
-                    });
-            },
-
-            _removeWaiAriaOverlay: function() {
-                return this._overlayedNodes && this._overlayedNodes.each(function() {
-                    var node = $(this);
-                    var hiddenValue = node.data("ariaHidden");
-                    if (hiddenValue) {
-                        node.attr("aria-hidden", hiddenValue);
-                    }
-                    else {
-                        node.removeAttr("aria-hidden");
-                    }
-                });
-            },
-
             _closeClick: function(e) {
                 e.preventDefault();
                 this.close(false);
@@ -347,17 +299,15 @@ import "./kendo.icons.js";
                     titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
 
-                wrapper.toggleClass("k-rtl", isRtl);
-
                 content.addClass(KCONTENTCLASS);
                 that.appendTo.append(wrapper);
+                wrapper = wrapper.find(".k-dialog");
+                wrapper.toggleClass("k-rtl", isRtl);
 
                 if (options.title !== false) {
                     wrapper.append(titlebar);
                     titlebar.attr("id", titleId);
                     wrapper.attr("aria-labelledby", titleId);
-                } else {
-                    wrapper.addClass(KTITLELESS);
                 }
 
                 that._closable(wrapper);
@@ -382,7 +332,7 @@ import "./kendo.icons.js";
                 var options = that.options;
                 var titlebar = wrapper.children(KDIALOGTITLEBAR);
                 var titlebarActions = titlebar.find(".k-window-titlebar-actions");
-                var closeAction = titlebarActions.length ? titlebarActions.find(".k-dialog-close") : wrapper.find(".k-dialog-close");
+                var closeAction = titlebarActions.length ? titlebarActions.find(KCLOSE) : wrapper.find(KCLOSE);
 
                 closeAction.remove();
 
@@ -397,7 +347,7 @@ import "./kendo.icons.js";
                     wrapper.autoApplyNS(NS);
                     that.element.autoApplyNS(NS);
 
-                    wrapper.find(KICONCLOSE)
+                    wrapper.find(KCLOSE)
                         .on("click", that._closeClick.bind(that))
                         .on("keydown", that._closeKeyHandler.bind(that));
 
@@ -407,7 +357,7 @@ import "./kendo.icons.js";
 
             _createActionbar: function(wrapper) {
                 var isStretchedLayout = (this.options.buttonLayout === "stretched");
-                var buttonLayout = isStretchedLayout ? "stretch" : "end";
+                var buttonLayout = isStretchedLayout ? "stretched" : "end";
                 var actionbar = $(templates.actionbar({ buttonLayout: buttonLayout }));
 
                 this._addButtons(actionbar);
@@ -427,9 +377,8 @@ import "./kendo.icons.js";
                     action = actions[i];
                     text = that._mergeTextWithOptions(action);
 
-                    $(templates.action(action))
+                    $(templates.action(action, text))
                         .autoApplyNS(NS)
-                        .html(text)
                         .appendTo(actionbar)
                         .addClass(action.cssClass)
                         .data("action", action.action)
@@ -451,7 +400,7 @@ import "./kendo.icons.js";
             _tabindex: function(target) {
                 var that = this;
                 var wrapper = that.wrapper;
-                var closeBtn = wrapper.find(KICONCLOSE);
+                var closeBtn = wrapper.find(KCLOSE);
                 var actionButtons = wrapper.find(KBUTTONGROUP + " " + KBUTTON);
 
                 Widget.fn._tabindex.call(this, target);
@@ -463,7 +412,7 @@ import "./kendo.icons.js";
             },
 
             _actionClick: function(e) {
-                if (this.wrapper.is(VISIBLE)) {
+                if (this.dialogWrapper.is(VISIBLE)) {
                     this._runActionBtn(e.currentTarget);
                 }
             },
@@ -494,23 +443,24 @@ import "./kendo.icons.js";
             _triggerOpen: function() {
                 var that = this;
                 var options = that.options;
-                var wrapper = that.wrapper;
 
                 that.toFront();
                 that._triggerInitOpen();
                 that.trigger(OPEN);
                 if (options.modal) {
-                    that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                    if (options.modal.preventScroll) {
+                        that._stopDocumentScrolling();
+                    }
                     that._focusDialog();
                 }
             },
 
             open: function() {
                 var that = this,
-                    wrapper = that.wrapper,
+                    wrapper = that.dialogWrapper,
                     showOptions = this._animationOptions(OPEN),
                     options = that.options,
-                    overlay, otherModalsVisible;
+                    overlay;
 
                 this._triggerInitOpen();
 
@@ -524,18 +474,19 @@ import "./kendo.icons.js";
                     that.toFront();
                     options.visible = true;
                     if (options.modal) {
-                        otherModalsVisible = !!that._modals().length;
-                        overlay = that._overlay(otherModalsVisible);
+                        overlay = wrapper.find(KOVERLAY);
+
+                        if (options.modal.preventScroll) {
+                            that._stopDocumentScrolling();
+                        }
 
                         overlay.kendoStop(true, true);
 
-                        if (showOptions.duration && kendo.effects.Fade && !otherModalsVisible) {
+                        if (showOptions.duration && kendo.effects.Fade) {
                             var overlayFx = kendo.fx(overlay).fadeIn();
                             overlayFx.duration(showOptions.duration || 0);
                             overlayFx.endValue(0.5);
                             overlayFx.play();
-                        } else {
-                            overlay.css("opacity", 0.5);
                         }
 
                         overlay.show();
@@ -579,13 +530,13 @@ import "./kendo.icons.js";
 
             toFront: function() {
                 var that = this,
-                    wrapper = that.wrapper,
+                    wrapper = that.dialogWrapper,
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex;
 
                 that.center();
 
-                $(KWINDOW).each(function(i, element) {
+                $(KWINDOW + "," + KDIALOGWRAP).each(function(i, element) {
                     var windowObject = $(element),
                         zIndexNew = windowObject.css(ZINDEX);
 
@@ -598,7 +549,6 @@ import "./kendo.icons.js";
                     wrapper.css(ZINDEX, zIndex + 2);
                 }
 
-                that.element.find("> .k-overlay").remove();
                 wrapper = null;
 
                 return that;
@@ -616,7 +566,7 @@ import "./kendo.icons.js";
 
             _close: function(systemTriggered) {
                 var that = this,
-                    wrapper = that.wrapper,
+                    wrapper = that.dialogWrapper,
                     options = that.options,
                     showOptions = this._animationOptions("open"),
                     hideOptions = this._animationOptions("close");
@@ -628,7 +578,7 @@ import "./kendo.icons.js";
                     that._closing = true;
 
                     options.visible = false;
-                    this._removeOverlay();
+                    this._handleDocumentScrolling();
 
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
@@ -648,7 +598,7 @@ import "./kendo.icons.js";
 
             _center: function() {
                 var that = this,
-                    wrapper = that.wrapper,
+                    wrapper = that.dialogWrapper,
                     documentWindow = $(window),
                     scrollTop = 0,
                     scrollLeft = 0,
@@ -677,23 +627,15 @@ import "./kendo.icons.js";
                 this._trackResize = false;
             },
 
-            _removeOverlay: function() {
+            _handleDocumentScrolling: function() {
                 var modals = this._modals();
                 var options = this.options;
                 var hideOverlay = options.modal && !modals.length;
 
-                if (hideOverlay) {
-                    this._overlay(false).remove();
-
-                    if (options.modal.preventScroll) {
-                        this._enableDocumentScrolling();
-                    }
-                } else if (modals.length) {
-                    this._object(modals.last())._overlay(true);
-
-                    if (options.modal.preventScroll) {
-                        this._stopDocumentScrolling();
-                    }
+                if (hideOverlay && options.modal.preventScroll) {
+                    this._enableDocumentScrolling();
+                } else if (modals.length && options.modal.preventScroll) {
+                     this._stopDocumentScrolling();
                 }
             },
 
@@ -780,7 +722,7 @@ import "./kendo.icons.js";
                     previousFocus = that._previousFocus;
 
                 that._closing = false;
-                that.wrapper.hide().css("opacity", "");
+                that.dialogWrapper.hide().css("opacity", "");
                 that.trigger(HIDE);
 
                 if (that.options.modal) {
@@ -800,7 +742,7 @@ import "./kendo.icons.js";
             _modals: function() {
                 var that = this;
 
-                var zStack = $(KWINDOW).filter(function() {
+                var zStack = $(KWINDOW + "," + KDIALOGWRAP).filter(function() {
                     var modal = that._object($(this));
 
                     return modal &&
@@ -820,7 +762,7 @@ import "./kendo.icons.js";
             },
 
             _object: function(element) {
-                var content = element.children(KCONTENTSELECTOR);
+                var content = element.find(KCONTENTSELECTOR);
                 var widget = kendo.widgetInstance(content);
 
                 if (widget) {
@@ -838,8 +780,8 @@ import "./kendo.icons.js";
 
                 kendo.destroy(that.wrapper);
 
-                that.wrapper.remove();
-                that.wrapper = that.element = $();
+                that.dialogWrapper.remove();
+                that.dialogWrapper = that.wrapper = that.element = $();
             },
 
             _destroy: function() {
@@ -848,7 +790,7 @@ import "./kendo.icons.js";
 
                 that.wrapper.off(ns);
                 that.element.off(ns);
-                that.wrapper.find(KICONCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(ns);
+                that.wrapper.find(KCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(ns);
                 that._stopCenterOnResize();
             },
 
@@ -866,12 +808,10 @@ import "./kendo.icons.js";
 
                 if (html === false) {
                     titlebar.remove();
-                    wrapper.addClass(KTITLELESS);
                 } else {
                     if (!titlebar.length) {
                         titlebar = $(templates.titlebar(options)).prependTo(wrapper);
                         title = titlebar.children(KDIALOGTITLE);
-                        wrapper.removeClass(KTITLELESS);
                     }
                     title.html(encodedHtml);
                 }
@@ -881,7 +821,7 @@ import "./kendo.icons.js";
                 return that;
             },
 
-            content: function(html, data) {
+            content: function(html) {
                 var that = this,
                     content = that.wrapper.children(KCONTENTSELECTOR);
 
@@ -1004,7 +944,6 @@ import "./kendo.icons.js";
             _init: function(element, options) {
                 var that = this;
                 PopupBox.fn._init.call(that, element, options);
-                that.wrapper.addClass(KALERT);
             },
 
             options: {
@@ -1026,7 +965,6 @@ import "./kendo.icons.js";
             _init: function(element, options) {
                 var that = this;
                 PopupBox.fn._init.call(that, element, options);
-                that.wrapper.addClass(KCONFIRM);
                 that.result = $.Deferred();
             },
 
@@ -1059,7 +997,6 @@ import "./kendo.icons.js";
             _init: function(element, options) {
                 var that = this;
                 PopupBox.fn._init.call(that, element, options);
-                that.wrapper.addClass(KPROMPT);
                 that._createPrompt();
                 that.result = $.Deferred();
             },
@@ -1119,20 +1056,19 @@ import "./kendo.icons.js";
         };
 
         templates = {
-            wrapper: template(() => "<div class='k-window k-dialog' role='dialog'></div>"),
-            action: template((data) => `<button type='button' class='k-button k-button-md k-rounded-md k-button-solid ${data.primary ? 'k-button-solid-primary' : 'k-button-solid-base'}'></button>`),
+            wrapper: template((options) => `<div class='k-dialog-wrapper'>${options.modal ? '<div class="k-overlay"></div>' : ''}<div class='k-window k-dialog' role='dialog'></div></div>`),
+            action: template((data, text) => `<button type='button' class='k-button k-button-md k-rounded-md k-button-solid ${data.primary ? 'k-button-solid-primary' : 'k-button-solid-base'}'><span class="k-button-text">${encode(text)}</span></button>`),
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar k-dialog-titlebar'>" +
                     `<span class='k-window-title k-dialog-title'>${encode(title)}</span>` +
-                    "<div class='k-window-titlebar-actions k-dialog-titlebar-actions k-hstack'></div>" +
+                    "<div class='k-window-titlebar-actions k-dialog-titlebar-actions'></div>" +
                 "</div>"
             ),
-            close: template(({ messages }) => `<button class="k-window-titlebar-action k-dialog-titlebar-action k-button k-button-md k-button-flat k-button-flat-base k-rounded-md k-icon-button k-dialog-close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>
+            close: template(({ messages }) => `<button class="k-window-titlebar-action k-dialog-titlebar-action k-button k-button-md k-button-flat k-button-flat-base k-rounded-md k-icon-button" data-role="close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>
                                                     ${kendo.ui.icon({ icon: "x", iconClass: "k-button-icon" })}
                                                 </button>`),
-            actionbar: template(({ buttonLayout }) => `<div class='k-dialog-actions k-actions k-hstack k-justify-content-${encode(buttonLayout)}'></div>`),
-            overlay: "<div class='k-overlay'></div>",
-            alertWrapper: template(() => "<div class='k-window k-dialog' role='alertdialog'></div>"),
+            actionbar: template(({ buttonLayout }) => `<div class='k-dialog-actions k-actions k-actions-horizontal k-window-actions k-actions-${encode(buttonLayout)}'></div>`),
+            alertWrapper: template(() => "<div class='k-dialog-wrapper'><div class='k-overlay'></div><div class='k-window k-dialog' role='alertdialog'></div></div>"),
             alert: "<div></div>",
             confirm: "<div></div>",
             prompt: "<div></div>",

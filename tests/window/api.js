@@ -207,18 +207,6 @@
             assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
         });
 
-        it("closing a modal window moves overlay before previous Kendo Dialog too", function() {
-            var dialog = createDialog({
-                modal: true
-            }),
-                overlappingDialog = createWindow({
-                    modal: true
-                });
-
-            overlappingDialog.close();
-            assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
-        });
-
         it("closing a modal window removes overlay if previous modal has containment enabled", function() {
             $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(Mocha.fixture);
             var dialog = createWindow({

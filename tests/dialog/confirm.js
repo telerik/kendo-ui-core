@@ -20,7 +20,7 @@
             var wrapper = confirmDialog.wrapper;
             var wrapperChildren = wrapper.children();
 
-            assert.isOk(wrapper.is(".k-confirm.k-dialog.k-window"));
+            assert.isOk(wrapper.is(".k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.isOk(wrapperChildren.eq(2).is(".k-dialog-actions"));
@@ -94,7 +94,7 @@
 
     describe("kendo.confirm method", function() {
         afterEach(function() {
-            Mocha.fixture.closest("body").find(".k-confirm .k-window-content").each(function(idx, element) {
+            Mocha.fixture.closest("body").find(".k-window-content").each(function(idx, element) {
                 $(element).data("kendoConfirm").destroy();
             });
             Mocha.fixture.closest("body").find(".k-overlay").remove();
@@ -102,22 +102,22 @@
 
         it("opens Confirm dialog", function() {
             kendo.confirm();
-            assert.equal($(".k-confirm").length, 1);
+            assert.equal($(".k-dialog").length, 1);
         });
 
         it("text argument sets Confirm dialog content", function() {
             kendo.confirm("message");
-            assert.equal($(".k-confirm .k-window-content").html(), "message");
+            assert.equal($(".k-window-content").html(), "message");
         });
 
         it("ok calls chained done handler", function() {
             kendo.confirm("message").done(function() { assert.isOk(true); });
-            $(".k-confirm .k-window-content").data("kendoConfirm").wrapper.find(".k-button:first").click();
+            $(".k-window-content").data("kendoConfirm").wrapper.find(".k-button:first").click();
         });
 
         it("cancel calls chained fail handler", function() {
             kendo.confirm("message").fail(function() { assert.isOk(true); });
-            $(".k-confirm .k-window-content").data("kendoConfirm").wrapper.find(".k-button:eq(1)").click();
+            $(".k-window-content").data("kendoConfirm").wrapper.find(".k-button:eq(1)").click();
         });
     });
 }());

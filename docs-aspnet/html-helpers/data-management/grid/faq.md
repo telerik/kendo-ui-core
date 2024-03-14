@@ -488,6 +488,7 @@ The following example demonstrates how to convert the processed data.
             OrderID = o.OrderID,
             CustomerName = o.Customer.ContactName
         });
+        return Json(result);
     }
 
 ## How can I avoid circular reference exceptions?

@@ -20,7 +20,7 @@
             var wrapper = promptDialog.wrapper;
             var wrapperChildren = wrapper.children();
 
-            assert.isOk(wrapper.is(".k-prompt.k-dialog.k-window"));
+            assert.isOk(wrapper.is(".k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.isOk(wrapperChildren.eq(2).children(":first").is(".k-textbox"));
@@ -105,7 +105,7 @@
 
     describe("kendo.prompt method", function() {
         afterEach(function() {
-            Mocha.fixture.closest("body").find(".k-prompt .k-window-content").each(function(idx, element) {
+            Mocha.fixture.closest("body").find(".k-window-content").each(function(idx, element) {
                 $(element).data("kendoPrompt").destroy();
             });
             Mocha.fixture.closest("body").find(".k-overlay").remove();
@@ -113,12 +113,12 @@
 
         it("opens Prompt dialog", function() {
             kendo.prompt();
-            assert.equal($(".k-prompt").length, 1);
+            assert.equal($(".k-dialog").length, 1);
         });
 
         it("text argument sets Prompt dialog content", function() {
             kendo.prompt("message");
-            assert.equal($(".k-prompt .k-window-content").html(), "message");
+            assert.equal($(".k-window-content").html(), "message");
         });
 
         it("value sets default prompt value", function() {
@@ -128,12 +128,12 @@
 
         it("ok calls chained done handler with prompt value argument", function() {
             kendo.prompt("message", "test value").done(function(arg) { assert.equal(arg, "test value"); });
-            $(".k-prompt .k-window-content").data("kendoPrompt").wrapper.find(".k-button:first").click();
+            $(".k-window-content").data("kendoPrompt").wrapper.find(".k-button:first").click();
         });
 
         it("cancel calls chained fail handler with prompt value argument", function() {
             kendo.prompt("message", "test value").fail(function(arg) { assert.equal(arg, "test value"); });
-            $(".k-prompt .k-window-content").data("kendoPrompt").wrapper.find(".k-button:eq(1)").click();
+            $(".k-window-content").data("kendoPrompt").wrapper.find(".k-button:eq(1)").click();
         });
     });
 }());

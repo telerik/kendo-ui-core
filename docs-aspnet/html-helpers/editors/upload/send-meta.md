@@ -55,6 +55,23 @@ To send metadata over to the `Save()` handler:
 
 4. Process the file and the associated description. The description, and any other fields of the `e.data` object, will be serialized in the `POST` request.
 
+    {% if site.core %}
+    ```Controller
+        public ActionResult ChunkSave(IEnumerable<IFormFile> files, string fileDescription)
+        {
+            // use the files and their associated meta data
+        }
+    ```
+    {% else %}
+    ```Controller
+        public ActionResult ChunkSave(IEnumerable<HttpPostedFileBase> files, string fileDescription)
+        {
+            // use the files and their associated meta data
+        }
+    ```
+    {% endif %}
+
+
 ## Receiving Metadata
 
 The `save` handler can sometimes produce a result that needs to be routed back to the page. The Upload requires a response in a JSON format with a `Content-Type` set to `"text/plain"`. Responses that are not empty and in a format other than JSON are treated as a server error.

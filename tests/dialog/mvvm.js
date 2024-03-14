@@ -132,7 +132,7 @@
 
             var dialog = dom.data("kendoDialog");
 
-            assert.isOk(dialog.wrapper.css("display") == "none");
+            assert.isOk(dialog.dialogWrapper.css("display") == "none");
         });
 
         it("set width and height through data attribute", function() {

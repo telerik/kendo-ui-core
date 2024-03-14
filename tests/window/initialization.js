@@ -399,6 +399,21 @@
             assert.isOk(!clientObject.options.visible);
         });
 
+        it("visible:false option is inferred from content element with a k-hidden class", function() {
+            var div = $("<div class='k-hidden'>foo</div>").appendTo(
+                Mocha.fixture
+            ),
+            clientObject;
+
+            div.kendoWindow();
+
+            clientObject = div.data("kendoWindow");
+
+            assert.isOk(clientObject.wrapper.is(":hidden"));
+            assert.equal(div.css("display"), "block");
+            assert.isOk(!clientObject.options.visible);
+        });
+
         it("visible:true option is inferred from content element", function() {
             var div = $("<div>foo</div>").appendTo(Mocha.fixture),
                 clientObject;
