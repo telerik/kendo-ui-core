@@ -94,9 +94,95 @@ The following example demonstrates how to add a custom command to the Toolbar:
 ```
 {% endif %} 
 
-As of {{site.product}} R3 2023 SP1 you can use the [Template component]({% slug htmlhelpers_overview_template %}) to define custom ToolBar commands, alongside the default ToolBar commands.
 
-The following example demonstrates how you can add a Button and DropDownList components to the Grid's Toolbar, along with a default `Excel` command:
+## Toolbar Template
+
+The {{site.product}} Grid also supports using a template for the Toolbar. You can define a template by using the [`ClientTemplate()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#clienttemplatesystemstring) or the [`ClientTemplateid()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#clienttemplateidsystemstring) configuration options.{% if site.core %} For TagHelper Grid configuration use the `client-template` or `client-template-id` properties.
+{% endif %} 
+
+```HtmlHelper
+    .ToolBar(toolbar => {
+        toolbar.ClientTemplateId("GridToolbarTemplate");
+    })
+```
+{% if site.core %}
+```TagHelper
+    <toolbar client-template-id="GridToolbarTemplate">
+    </toolbar>
+```
+{% endif %} 
+
+When you use a Toolbar Template, and you also want to use a built-in command, then add the markup for the desired command. The following example demonstrates how to add the `Pdf` and `Search` commands to the Toolbar Template.
+
+```HtmlHelper
+    <script id="GridToolbarTemplate" type="text/x-kendo-template">
+        <div class="refreshBtnContainer">
+            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+        </div>
+        
+        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+        
+        <div class="toolbar">
+            <label class="category-label" for="category">Show products by category:</label>
+            @(Html.Kendo().DropDownList()
+            .Name("categories")
+            .OptionLabel("All")
+            .DataTextField("CategoryName")
+            .DataValueField("CategoryID")
+            .AutoBind(false)
+            .Events(e => e.Change("categoriesChange"))
+            .HtmlAttributes(new { style = "width: 150px;" })
+            .DataSource(ds =>
+            {
+                ds.Read("ToolbarTemplate_Categories", "Grid");
+            })
+            .ToClientTemplate()
+        )
+        </div>
+        
+        <span class="k-textbox k-grid-search k-display-flex">
+            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+            <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
+        </span>
+    </script>
+```
+{% if site.core %}
+```TagHelper
+    <script id="GridToolbarTemplate" type="text/html">
+        <div class="refreshBtnContainer">
+            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+        </div>
+        
+        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+        
+        <div class="toolbar">
+            <label class="category-label" for="category">Show products by category:</label>
+            <kendo-dropdownlist name="categories" style="width:150px"
+                                datatextfield="CategoryName"
+                                datavaluefield="CategoryId"
+                                option-label="All"
+                                auto-bind="false"
+                                on-change="categoriesChange"
+                                is-in-client-template="true">
+                <datasource type="DataSourceTagHelperType.Custom">
+                    <transport>
+                        <read url="@Url.Action("ToolbarTemplate_Categories", "Grid")" />
+                    </transport>
+                </datasource>
+            </kendo-dropdownlist>
+        </div>
+        
+        <span class="k-textbox k-grid-search k-display-flex">
+            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+            <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
+        </span>
+    </script>
+```
+{% endif %} 
+
+As of {{site.product}} `R3 2023 SP1` release you can use the [Template component]({% slug htmlhelpers_overview_template %}) to define custom ToolBar commands, alongside the default ToolBar commands.
+
+The following example demonstrates how you can add a Button and DropDownList components to the Grid's Toolbar, along with a default `Excel` command demonstrated in the [{{site.product}} Grid Toolbar Template Demo](https://demos.telerik.com/{{site.platform}}/grid/toolbar-template).
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -186,95 +272,10 @@ The following example demonstrates how you can add a Button and DropDownList com
     </script>
 ```
 
-## Toolbar Template
-
-The {{site.product}} Grid also supports using a template for the Toolbar. You can define a template by using the [`ClientTemplate()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#clienttemplatesystemstring) or the [`ClientTemplateid()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#clienttemplateidsystemstring) configuration options.{% if site.core %} For TagHelper Grid configuration use the `client-template` or `client-template-id` properties.
-{% endif %} 
-
-```HtmlHelper
-    .ToolBar(toolbar => {
-        toolbar.ClientTemplateId("GridToolbarTemplate");
-    })
-```
-{% if site.core %}
-```TagHelper
-    <toolbar client-template-id="GridToolbarTemplate">
-    </toolbar>
-```
-{% endif %} 
-
-When you use a Toolbar Template, and you also want to use a built-in command, then add the markup for the desired command. The following example demonstrates how to add the `Pdf` and `Search` commands to the Toolbar Template demonstrated in the [{{site.product}} Grid Toolbar Template Demo](https://demos.telerik.com/{{site.platform}}/grid/toolbar-template).
-
-```HtmlHelper
-    <script id="GridToolbarTemplate" type="text/x-kendo-template">
-        <div class="refreshBtnContainer">
-            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
-        </div>
-        
-        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
-        
-        <div class="toolbar">
-            <label class="category-label" for="category">Show products by category:</label>
-            @(Html.Kendo().DropDownList()
-            .Name("categories")
-            .OptionLabel("All")
-            .DataTextField("CategoryName")
-            .DataValueField("CategoryID")
-            .AutoBind(false)
-            .Events(e => e.Change("categoriesChange"))
-            .HtmlAttributes(new { style = "width: 150px;" })
-            .DataSource(ds =>
-            {
-                ds.Read("ToolbarTemplate_Categories", "Grid");
-            })
-            .ToClientTemplate()
-        )
-        </div>
-        
-        <span class="k-textbox k-grid-search k-display-flex">
-            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
-            <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
-        </span>
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <script id="GridToolbarTemplate" type="text/html">
-        <div class="refreshBtnContainer">
-            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
-        </div>
-        
-        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
-        
-        <div class="toolbar">
-            <label class="category-label" for="category">Show products by category:</label>
-            <kendo-dropdownlist name="categories" style="width:150px"
-                                datatextfield="CategoryName"
-                                datavaluefield="CategoryId"
-                                option-label="All"
-                                auto-bind="false"
-                                on-change="categoriesChange"
-                                is-in-client-template="true">
-                <datasource type="DataSourceTagHelperType.Custom">
-                    <transport>
-                        <read url="@Url.Action("ToolbarTemplate_Categories", "Grid")" />
-                    </transport>
-                </datasource>
-            </kendo-dropdownlist>
-        </div>
-        
-        <span class="k-textbox k-grid-search k-display-flex">
-            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
-            <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
-        </span>
-    </script>
-```
-{% endif %} 
-
 {% if site.mvc %}
 ### Server-side rendering of the ToolBar Template
 
-Rendering of the Toolbar on the server is supported via the [`.Template()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#templatesystemaction) configuration. The following example demonstrates how to define a server-side ToolBar Template:
+Rendering of the Toolbar on the server is supported by using the [`.Template()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory#templatesystemaction) configuration. The following example demonstrates how to define a server-side ToolBar Template.
 
 ```HtmlHelper
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()

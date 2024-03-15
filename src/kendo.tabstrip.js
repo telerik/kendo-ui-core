@@ -325,7 +325,7 @@ var __meta__ = {
                     .css("z-index");
 
                 item.addClass(ACTIVESTATE);
-                that._current(item);
+                that._current(item, true);
 
                 that.trigger("change");
 
@@ -361,7 +361,7 @@ var __meta__ = {
                     item.attr(ARIA_SELECTED, true);
                     that.tabGroup.attr("aria-activedescendant", item.attr("id"));
 
-                    that._current(item);
+                    that._current(item, true);
 
                     contentElement
                         .addClass(ACTIVESTATE)
@@ -1019,6 +1019,7 @@ var __meta__ = {
             }
 
             if (that.activateTab(item)) {
+                that._current(item);
                 prevent = true;
             }
 
@@ -1081,7 +1082,7 @@ var __meta__ = {
             return { tabs: tabs, contents: contents, newTabsCreated: newTabsCreated };
         },
 
-        _current: function(candidate) {
+        _current: function(candidate, preventFocus) {
             var that = this,
                 focused = that._focused;
 
@@ -1089,11 +1090,15 @@ var __meta__ = {
                 return focused;
             }
 
+            if (focused && candidate && focused[0] === candidate[0]) {
+                focused = false;
+            }
+
             if (focused) {
                 focused.removeClass(FOCUSEDSTATE);
             }
 
-            if (candidate) {
+            if (candidate && !preventFocus) {
                 candidate.addClass(FOCUSEDSTATE);
             }
 
