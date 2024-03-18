@@ -26,7 +26,9 @@ The Template allows you to incorporate multiple helper components into the templ
 The Template HtmlHelper provides the following configuration options:
 
 * `AddComponent()` specifies the declaration of the Telerik UI helper that will be integrated into the specified component.
-* `AddHtml()` adds `HTML` code to the template. It accepts a single `string` parameter.
+* `AddHtml()` adds `HTML` code to the template. It accepts a `string` and `delegate` parameter arguments.
+
+> The delegate overload can only be used with conventional HTML tags and {% if site.core %} the ASP.NET Core framework's common [HtmlHelpers](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperinputextensions?view=aspnetcore-8.0) or [TagHelpers](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/?view=aspnetcore-8.0) {% else %} the ASP.NET MVC framework's common [HtmlHelpers](https://learn.microsoft.com/en-us/dotnet/api/system.web.webpages.html.htmlhelper.anonymousobjecttohtmlattributes?view=aspnet-webpages-3.2) {% endif %}. To declare Telerik components, use the `AddComponent()` configuration.
 
 {% if site.core %}
 When using the TagHelper mode of the Template component, you can insert the component declaration and any `HTML` code within the `<{parentTagName}-{templateOption}>` tag.
@@ -52,7 +54,7 @@ Since the Template is an integration component and cannot be used independently,
                 .AddHtml("</div")
             );
         })
-        //Other configuration
+        // Other configuration
     )
 ```
 {% if site.core %}
@@ -118,7 +120,7 @@ The examples below show how to use the Template component to create custom edito
             })
             .ToolBar(tool => tool.Create())
             .Editable(editable => editable.Mode(GridEditMode.InLine))
-            //Other configuration
+            // Other configuration
         )
     ```
     ```ShipNameEditor.cshtml
@@ -169,7 +171,7 @@ The examples below show how to use the Template component to create custom edito
             })
             .ToolBar(tool => tool.Create())
             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateComponentName("CustomGridEditor"))
-            //Other configuration
+            // Other configuration
         )
     ```
     ```CustomGridEditor.cshtml
@@ -237,7 +239,7 @@ The following snippet demonstrates defining a template for a Grid column by usin
         {
             columns.Bound(p => p.ShipName).ClientTemplate("<span style='color:red;'><strong>#=ShipName#</strong></span>");
         })
-        //Other configuration
+        // Other configuration
     )
 ```
 {% if site.core %}
@@ -254,16 +256,23 @@ The following snippet demonstrates defining a template for a Grid column by usin
 ```
 {% endif %}
 
-The next snippet shows the new approach for defining a CSP Grid column template through the Template component.
+The next snippet shows the new approach for defining a CSP Grid column template through the Template component with a delegate overload.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Columns(columns =>
         {
-            columns.Bound(p => p.ShipName).ClientTemplate(Html.Kendo().Template().AddHtml("<span style='color:red;'><strong>${data.ShipName}</strong></span>"));
+            columns.Bound(p => p.ShipName).ClientTemplate(Html.Kendo()
+                    .Template()
+                    .AddHtml(@<text>
+                        <span style='color:red;'>
+                            <strong>${data.ShipName}</strong>
+                        </span>
+                    </text>)
+            );
         })
-        //Other configuration
+        // Other configuration
     )
 ```
 {% if site.core %}
@@ -332,13 +341,27 @@ The next snippet shows how to replace the inline client TaskBoard templating opt
     @(Html.Kendo().TaskBoard<CardViewModel, Resource>()
         .Name("taskBoard")
         .Template(Html.Kendo().Template()
-            .AddHtml("<div class=\"template-container\"><div class=\"template-header\" id='${data.ID}'><span class=\"template-title\">${data.Title}</span><span class=\"template-menu\">${data.cardMenuButton}</span></div>")
-            .AddHtml("<p>${data.Description}</p><p>${kendo.toString( new Date(data.Start + \"Z\"), \"MMMM dd\")}  -  ${kendo.toString(new Date(data.End + \"Z\") , \"MMMM dd\")}</p></div>")
+            .AddHtml(@<text>
+                <div class="template-container">
+                    <div class="template-header" id='${data.ID}'>
+                        <span class="template-title">${data.Title}</span>
+                        <span class="template-menu">
+                            ${data.cardMenuButton}
+                        </span>
+                    </div>
+                <p>${data.Description}</p>
+                <p>
+                    ${kendo.toString( new Date(data.Start + "Z"), "MMMM dd")}  -  ${kendo.toString(new Date(data.End +  "Z") , "MMMM dd")}
+                </p>
+                </div>
+            </text>)
          )
         .Editable(editable => editable
-            .HeaderTemplate(Html.Kendo().Template().AddHtml("<span style='color: green;'>Custom Task editor template</span>"))
+            .HeaderTemplate(Html.Kendo().Template()
+                .AddHtml("<span style='color: green;'>Custom Task editor template</span>")
+            )
         )
-        //Other configuration
+        // Other configuration
     )
 ```
 {% if site.core %}

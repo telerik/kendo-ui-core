@@ -2607,6 +2607,8 @@ The available editor commands are:
         - **fontName**, **fontSize**, **foreColor**, **backColor**
 *   Alignment
         - **justifyLeft**, **justifyCenter**, **justifyRight**, **justifyFull**
+*   Spacing
+        - **lineHeight**
 *   Lists
         - **insertUnorderedList**, **insertOrderedList**, **indent**, **outdent**
 *   Links, images and files
@@ -2625,6 +2627,8 @@ The available editor commands are:
         - **pdf**
 *   Format painter
         - **copyFormat**, **applyFormat**
+*   Formatting marks
+        - **formattingMarks**
 
 #### Example
 

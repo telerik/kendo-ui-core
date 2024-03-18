@@ -3246,11 +3246,12 @@ var __meta__ = {
                 promise = $.when
                  .apply(null, promises)
                  .then(function() {
-                    var idx, length;
+                    var idx, length, changedItems = [];
 
                     for (idx = 0, length = arguments.length; idx < length; idx++) {
                         if (arguments[idx]) {
                             that._accept(arguments[idx]);
+                            changedItems = arguments[idx].models;
                         }
                     }
 
@@ -3258,7 +3259,7 @@ var __meta__ = {
 
                     that._syncEnd();
 
-                    that._change({ action: "sync" });
+                    that._change({ action: "sync", changedItems: changedItems });
 
                     that.trigger(SYNC);
 
@@ -4032,6 +4033,25 @@ var __meta__ = {
             that._total = total;
         },
 
+        _operationsForUpdatedFields: function() {
+            const that = this,
+                updatedFields = that._updatedFields || [],
+                operations = {};
+
+            let found = false,
+                stringified;
+
+            operations.sort = that._sort;
+            operations.filter = that._filter;
+            operations.group = that._group;
+            operations.aggregate = that._aggregate;
+
+            stringified = stringify(operations);
+            found = updatedFields.some(u => stringified.indexOf((`"field":"${u}"`)) > -1);
+
+            return !found;
+        },
+
         _pushInDestroyed: function(model) {
             var isPushed = this._destroyed.find(function(item) {
                 return item.uid === model.uid;
@@ -4049,6 +4069,14 @@ var __meta__ = {
                     if (!e.items[idx].isNew || !e.items[idx].isNew()) {
                         that._pushInDestroyed(e.items[idx]);
                     }
+                }
+            }
+
+            if (e) {
+                e.partialUpdate = that._operationsForUpdatedFields();
+
+                if (e.action === "itemchange" && e.items && e.items[0] && e.items[0].dirtyFields) {
+                    that._updatedFields = Object.keys(e.items[0].dirtyFields);
                 }
             }
 
