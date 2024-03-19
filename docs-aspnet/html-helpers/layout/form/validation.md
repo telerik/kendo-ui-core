@@ -252,7 +252,7 @@ The following example demonstrates custom validation of the `LastName` and `Reti
     }
 ```
 
-## Custom Validation
+## DataAnnotation Attributes
 
 The Form component supports DataAnnotation attributes and will configure the editors and the built-in validation based on the DataAnnotation attributes set for the model properties. The following table summarizes the supported DataAnnotation attributes:
 

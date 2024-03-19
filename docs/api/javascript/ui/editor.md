@@ -4727,6 +4727,25 @@ Defines text for search box placeholder.
     });
     </script>
 
+### formattingMarksRefreshDelay `Number|Boolean` *(default: 250)*
+
+The delay in milliseconds before the formatting marks are refreshed. This feature is useful for performance optimization as the formatting marks are re-rendered any time the user presses a key. If the user is typing very fast or holding down a key, the delay will prevent the re-rendering from being executed multiple times.
+
+The visual effect from this configuration is that the marks will briefly disappear while the user is typing. You can set the value to `false` to fully turn off this behavior.
+
+#### Example
+
+    <textarea id="editor"><p>Some text with several spaces that demonstrates<br /> the re-rendering of the marks.</p></textarea>
+
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                tools: ["formattingMarks"],
+                formattingMarksRefreshDelay: false
+            });
+        });
+    </script>
+
 ### unsafeInline `Boolean` *(default: true)*
 
 When set to false, the decoration applied by the Formatting tool dropdown will be skipped and the values will appear as plain text options.

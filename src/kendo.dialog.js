@@ -103,17 +103,17 @@ import "./kendo.icons.js";
                 wrapper = that.wrapper = element.closest(KDIALOG);
                 that.dialogWrapper = wrapper.closest(KDIALOGWRAP);
 
-                if (!options.modal && that._isDialog()) {
-                    that.dialogWrapper.width(that.wrapper.width());
-                    that.dialogWrapper.height(that.wrapper.height());
-                }
-
                 if (options._defaultFocus === undefined) {
                     that._defaultFocus = element[0];
                 }
 
                 that._tabindex(element);
                 that._dimensions();
+
+                if (!options.modal && that._isDialog()) {
+                    that.dialogWrapper.width(that.wrapper.width());
+                    that.dialogWrapper.height(that.wrapper.height());
+                }
 
                 this._tabKeyTrap = new TabKeyTrap(wrapper);
 

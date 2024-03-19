@@ -11,7 +11,7 @@ position: 3
 
 This article describes how to configure your system for the Telerik NuGet source and then use it to install {{ site.product }} in your project.
 
-[NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a private NuGet feed with official {{ site.product }} releases and service packs. In the Telerik NuGet feed, you will see packages that your account has a license for; trials (active) and commerical (active and expired).
+[NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a private NuGet feed with official {{ site.product }} releases and service packs. In the Telerik NuGet feed, you will see packages that your account has a license for; trials (active) and commercial (active and expired).
 
 {% if site.core %}
 >tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}) to add Telerik UI to the project.
@@ -21,7 +21,9 @@ This article describes how to configure your system for the Telerik NuGet source
 
 ## Setting Up the Telerik NuGet Feed
 
-The Telerik NuGet feed allows you instant access to various Telerik and Kendo packages that you can install in your project. Before you can use the Telerik NuGet Feed as a **Package source**, you must configure your machine by utilizing any of the following methods:
+The Telerik NuGet feed allows you instant access to various Telerik and Kendo packages that you can install in your project. You can access either the latest or older versions of the suites.
+
+Before you can use the Telerik NuGet Feed as a **Package source**, you must configure your machine by utilizing any of the following methods:
 
 * [Use the NuGet Package Manager in Visual Studio](#setup-with-the-nuget-package-manager).
 
