@@ -48,6 +48,7 @@ The following example demonstrates the default tool methods of the Editor.
             .FontName()
             .FontSize()
             .ForeColor()
+            .FormatPainter()
             .BackColor()
             .Pdf()
             .Print()
@@ -151,6 +152,8 @@ The following example demonstrates the default tool methods of the Editor.
             <tool name="fontSize">
             </tool>
             <tool name="foreColor">
+            </tool>
+            <tool name="formatPainter">
             </tool>
             <tool name="backColor">
             </tool>

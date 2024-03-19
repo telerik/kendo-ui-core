@@ -8,7 +8,7 @@ position: 15
 
 # Context Menu
 
-The {{site.product}} Grid provides a built-in ContextMenu to show the user available options, such as CRUD operations, selection and export options. A ContextMenu is shown when the user right-clicks on the Grid's table `body` or `head` elements.
+The {{site.product}} Grid provides a built-in ContextMenu to show the user available options, such as CRUD operations, selection and export options. The ContextMenu opens when the user right-clicks on the Grid's table `body` or `head` elements.
 
 By default, the Context Menu of the Telerik UI Grid for {{ site.framework }} is disabled.
 
@@ -118,7 +118,9 @@ The following example demonstrates how you can customize the Context Menu using 
 
 ### Custom Commands
 
-You can also register custom commands for the Context Menu. The following example demonstrates how to implement a custom command:
+You can also register custom commands for the Context Menu. To add custom commands in the ContextMenu that opens when the user right-clicks on the Grid's table `body` element, use the `Body()` configuration. To add custom commands in the ContextMenu that opens when the user right-clicks on the Grid's table `header` element, use the `Head()` configuration.
+
+The following example demonstrates how to implement a custom command that appears in the table header ContextMenu.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -127,7 +129,7 @@ You can also register custom commands for the Context Menu. The following exampl
             .Head(head => {
                 head.Create();
                 head.Separator();
-                head.Custom("myTool").Text("My Tool).Icon("gear");
+                head.Custom("myTool").Text("My Custom Tool").Icon("gear"); // "myTool" is the name of the command that will be displayed as "My Custom Tool". 
             })
         ) 
         ...
@@ -140,7 +142,7 @@ You can also register custom commands for the Context Menu. The following exampl
         <head>
             <context-menu-item name="create"/>
             <context-menu-item name="separator"/>
-            <context-menu-item name="myTool" text="My Tool" icon="gear" command="myToolCommand"/>
+            <context-menu-item name="myTool" text="My Custom Tool" icon="gear" command="myToolCommand"/> <!-- "myTool" is the name of the command that will be displayed as "My Custom Tool". -->
         </head>
     </context-menu>
    </kendo-grid>

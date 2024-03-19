@@ -8,10 +8,10 @@ position: 6
 
 # Using iframe
 
-You can force the Window to display its content in an `<iframe>` element by using the `Iframe(true)` configuration method.
+You can force the Window to display its content in an [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) element by using the `Iframe(true)` configuration method. In this case, the Window content will be loaded into an HTML page that is embedded into the current HTML page. 
 
-> * Loading HTML fragments (partial content) inside an `iframe` is not correct. iframe pages have to include a `DOCTYPE`, `html`, `head`, and `body` tags, just like a standard web page does.
-> * Avoid using iframes on iOS devices because they are not scrollable and always expand to match the content.
+> * Loading HTML fragments (partial content) inside an `iframe` is not correct. Like standard web pages, `iframe` pages have to include a `DOCTYPE`, `html`, `head`, and `body` tags.
+> * Avoid using an `iframe` on iOS devices because iOS devices do not support `iframe` scrolling and always expand to match the content.
 
 The following example demonstrates how to access the `window` and `document` objects inside the `iframe`. To achieve this, the nested page has to belong to the same domain as the main page. The `iframe` is accessed through the `element` of the Window.
 

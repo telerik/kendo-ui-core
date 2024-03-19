@@ -17,14 +17,14 @@ The ASP.NET Razor Pages framework was introduced in ASP.NET Core 2.0 as an alter
 * The `@page` directive placed at the top of the page makes it a Razor Page. The page contains both HTML and server-side logic, which you include by using Razor syntax. 
 
 * The `@model` directive specifies the type of the data that the page is expected to work with. The page uses the PageModel class itself as a view model. The required data is exposed as properties.
-* The page handles requests directly, without using a controller. A naming convention is used to find the appropriate handler method to execute in the PageModel class. Handler methods are prefixed with the word `On` followed by the HTTP verb used for the request that they process: `OnGet`, `OnPost`, `OnGetAsync` and `OnPostAsync`. Following this convention, additional handlers can be included, for example `OnGetHelloWorld`.
+* The page handles requests directly, without using a controller. A naming convention is used to find the proper handler method to execute in the PageModel class. Handler methods are prefixed with the word `On` followed by the HTTP verb used for the request that they process: `OnGet`, `OnPost`, `OnGetAsync` and `OnPostAsync`. Following this convention, additional handlers can be included, for example `OnGetHelloWorld`.
 * Razor Pages automatically implement anti-forgery validation, which protects against cross-site request forgery (XSRF/CSRF) attacks.
 
 You can find more information on Razor Pages in the [Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/)
 
 ## Using Telerik UI for ASP.NET Core in a Razor Pages Project
 
-There are two alternative approaches for adding Telerik UI for ASP.NET Core to a new Razor Pages project:
+The two alternative approaches for adding Telerik UI for ASP.NET Core to a new Razor Pages project are:
 
 * Use the [Telerik Extensions for Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %}) to create a new project. The [**GRID RAZOR PAGES**]({% slug newprojectwizards_visualstudio_aspnetcore %}#available-templates) template scaffolds a Razor Pages sample, which contains a Grid with enabled CRUD operations. The benefit of this approach is that the template will add the necessary configuration and dependencies automatically. You can focus on adding and configuring the UI components you need. 
 * Use the default Visual Studio <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-6.0&tabs=visual-studio" target="_blank">**ASP.NET Core Web App**</a> template, which is based on the ASP.NET Razor Pages framework. Do not use the **Web Application (Model-View-Controller)** template.
@@ -46,6 +46,19 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
+    ```
+
+1. Configure the JSON serialization options of the application in the `Program.cs` file. For more information, refer to the [JSON Serialization article]({% slug jsonserialization_core %}).
+
+    ```Program.cs
+
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+        builder.Services.AddKendo();
+        ...
+
     ```
 
 1. Declare the Grid and setup the CRUD URLs in its `DataSource` configuration. Set the DataSource `Model.Id` configuration. The URL in these methods must refer to the name of the handler method in the `PageModel`:
@@ -304,7 +317,7 @@ Razor pages are automatically protected from [XSRF/CSRF](https://docs.microsoft.
 
 ## Known Limitations
 
-Razor Pages use `Page` in their routing mechanism which interferes with `GET` requests made by the Kendo UI DataSource. As a result, only `POST` requests should be used when paging is required.
+Razor Pages use `Page` in their routing mechanism which interferes with `GET` requests made by the Kendo UI DataSource. As a result, only `POST` requests must be used when paging is required.
 
 ## See Also
 

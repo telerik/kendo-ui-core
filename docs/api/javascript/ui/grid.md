@@ -11244,9 +11244,9 @@ Hides the specified grid column.
 
 #### Parameters
 
-##### column `Number|String|Object`
+##### column `Number|String|Object|Array`
 
-The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
+The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
 
 When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -11257,7 +11257,7 @@ When using multicolumn headers, using an index will hide a top-level column toge
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { field: "age" }
+        { field: "age" },
       ],
       dataSource: [
           { name: "Jane Doe", age: 30 },
@@ -11307,6 +11307,25 @@ When using multicolumn headers, using an index will hide a top-level column toge
     });
     var grid = $("#grid").data("kendoGrid");
     grid.hideColumn(grid.columns[0].columns[1]);
+    </script>
+
+#### Example - hide a column by array of mixed values
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { field: "height" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30, height: 1.75 },
+          { name: "John Doe", age: 33, height: 1.82 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.hideColumn([0, 'age']);
     </script>
 
 ### items
@@ -11979,9 +11998,9 @@ Shows the specified column.
 
 #### Parameters
 
-##### column `Number|String|Object`
+##### column `Number|String|Object|Array`
 
-The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
+The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection, or array of indexes, or array of fields, or array of column objects obtained from the collection of columns, or array of mixed values.
 
 When using multicolumn headers, using an index will hide a top-level column together with all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -12043,6 +12062,26 @@ When using multicolumn headers, using an index will hide a top-level column toge
     var grid = $("#grid").data("kendoGrid");
     grid.hideColumn(grid.columns[0].columns[1]);
     </script>
+
+#### Example - show a hidden columns by array of mixed values
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", hidden: true },
+        { field: "age", hidden: true },
+        { field: "height" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30, height: 1.75 },
+          { name: "John Doe", age: 33, height: 1.78 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.showColumn([1, "age"]);
+    </script>
+
 
 ### stickColumn
 

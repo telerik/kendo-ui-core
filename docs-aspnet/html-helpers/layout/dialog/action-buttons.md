@@ -10,7 +10,48 @@ position: 3
 
 The Dialog action buttons allow you to provide specific interaction to users.
 
-Each button has a text and an action handler attached to it. Generally, each button closes the Dialog as its last action but you can cancel this from the custom action handler. The order of the values in the `Actions()` configuration method determines the order in which the action buttons are rendered in the Dialog. You can also define a button as `Primary(true)`.
+Each defined button has a text and an action handler attached to it. By default, the action buttons close the Dialog, but you can prevent the Dialog from closing by setting the respective action handler to return `false`.
+
+```HtmlHelper
+    @(Html.Kendo().Dialog()
+        .Name("dialog")
+        .Title("Software Update")
+        ...
+        {
+            actions.Add().Text("Ok");
+            actions.Add().Text("Cancel").Action("onCancel");
+        })
+    )
+
+    <script type="text/javascript">
+        function onCancel(e) {
+            alert("Cancel action was clicked");
+            return false; // Returning false will prevent the closing of the Dialog.
+        }
+    </script>
+```
+{% if site.core %}
+```TagHelper
+  <kendo-dialog name="dialog" title="Software Update">
+        <actions>
+            <action text="Ok">
+            </action>
+            <action text="Cancel" action="onCancel">
+            </action>
+        </actions>
+        <!-- Other configuration -->
+    </kendo-dialog>
+
+    <script type="text/javascript">
+        function onCancel(e) {
+            alert("Cancel action was clicked");
+            return false; // Returning false will prevent the closing of the Dialog.
+        }
+    </script>
+```
+{% endif %}
+
+The order of the values in the `Actions()` configuration method determines the order in which the action buttons are rendered in the Dialog. You can also define a button as `Primary(true)`.
 
 The following example demonstrates how to set three action buttons in a Dialog with a `stretched` layout. The last button has an `Action()` event handler attached and is set as `Primary(true)`.
 

@@ -5110,6 +5110,7 @@ declare namespace kendo.ui {
         navigateOnTab?: boolean | undefined;
         nonSplittableTagsOnPaste?: string[] | EditorNonSplittableTagsOnPaste[] | undefined;
         nonce?: string | undefined;
+        formattingMarksRefreshDelay?: number | boolean | undefined;
         unsafeInline?: boolean | undefined;
         change?(e: EditorEvent): void;
         execute?(e: EditorExecuteEvent): void;
@@ -6330,6 +6331,7 @@ declare namespace kendo.ui {
         hideColumn(column: number): void;
         hideColumn(column: string): void;
         hideColumn(column: any): void;
+        hideColumn(column: any[]): void;
         items(): any;
         lockColumn(column: number): void;
         lockColumn(column: string): void;
@@ -6353,6 +6355,7 @@ declare namespace kendo.ui {
         showColumn(column: number): void;
         showColumn(column: string): void;
         showColumn(column: any): void;
+        showColumn(column: any[]): void;
         stickColumn(column: number): void;
         stickColumn(column: string): void;
         unlockColumn(column: number): void;
