@@ -64,17 +64,20 @@ The following example demonstrates how the Loader can be used as a building bloc
     <script>
         var loadingPanelVisible = false;
         $("#loader").kendoLoader({
-        	visible:false
+            visible:false
         });
+      	$(".k-loading-panel").hide();
         $("button").click(function(){
           var loader = $("#loader").data("kendoLoader");
           loadingPanelVisible = !loadingPanelVisible;
           if (loadingPanelVisible) {
             $("button").text('Hide Loading Panel');
             loader.show();
+            $(".k-loading-panel").show();
           } else {
             $("button").text('Show Loading Panel');
             loader.hide();
+            $(".k-loading-panel").hide();
           }
         })
     </script>
