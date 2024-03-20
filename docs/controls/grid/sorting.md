@@ -33,7 +33,7 @@ The Grid supports the following sort modes:
 
 ### Single-Column Sorting
 
-By default, the Grid applies single-column sorting when `sortable` is set to `true`. You can also configure the single-column sort mode by setting the `mode` option of `editable` to `single`.
+By default, the Grid applies single-column sorting when `sortable` is set to `true`. You can also configure the single-column sort mode by setting the `mode` option of `sortable` to `single`.
 
     $("#grid").kendoGrid({
          sortable: true
@@ -42,7 +42,7 @@ By default, the Grid applies single-column sorting when `sortable` is set to `tr
 
 ### Multi-Column Sorting
 
-To enable multi-column sorting, set the `mode` option of `editable` to `multiple`.
+To enable multi-column sorting, set the `mode` option of `sortable` to `multiple`.
 
     $("#grid").kendoGrid({
         sortable: {
@@ -55,7 +55,7 @@ To enable multi-column sorting, set the `mode` option of `editable` to `multiple
 
 Mixed Sorting allows users to [single-sort](#single-column-sorting) columns by clicking their title and [multi-sort](#multi-column-sorting) columns by holding the `CTRL` key and clicking the columns' title. A single-click (without holding the the `CTRL` key) on any column un-sorts the currently sorted columns and applies single-sorting to the clicked column.
 
-To enable multi-column sorting, set the `mode` option of `editable` property to `multiple`.
+To enable multi-column sorting, set the `mode` option of `sortable` property to `mixed`.
 
     $("#grid").kendoGrid({
         sortable: {
