@@ -956,6 +956,7 @@ var __meta__ = {
             var visible = that.popup.visible();
             var dir = 0;
             var activeItemIdx;
+            var handled = false;
 
             if (key !== keys.ENTER) {
                 this._multipleSelection = false;
@@ -970,6 +971,7 @@ var __meta__ = {
                     if (!listView.focus()) {
                         listView.focusFirst();
                     }
+                    e.stopPropagation();
                     return;
                 }
 
@@ -992,6 +994,7 @@ var __meta__ = {
                 } else {
                     listView.focusFirst();
                 }
+                handled = true;
 
             } else if (key === keys.UP) {
                 if (visible) {
@@ -1010,6 +1013,7 @@ var __meta__ = {
                         }
                     }
                 }
+                handled = true;
                 e.preventDefault();
             } else if ((key === keys.LEFT && !isRtl) || (key === keys.RIGHT && isRtl)) {
                 if (!hasValue) {
@@ -1018,11 +1022,13 @@ var __meta__ = {
                         that.currentTag(tag);
                     }
                 }
+                handled = true;
             } else if ((key === keys.RIGHT && !isRtl) || (key === keys.LEFT && isRtl)) {
                 if (!hasValue && tag) {
                     tag = tag.next(CHIP);
                     that.currentTag(tag[0] ? tag : null);
                 }
+                handled = true;
             } else if (e.ctrlKey && !e.altKey && key === keys.A && visible && !that.options.virtual) {
                 this._multipleSelection = true;
                 if (this._getSelectedIndices().length === listView.items().length) {
@@ -1032,8 +1038,10 @@ var __meta__ = {
                 if (listView.items().length) {
                     that._selectRange(0, listView.items().length - 1);
                 }
+                handled = true;
             } else if (key === keys.ENTER && visible) {
                 if (!listView.focus()) {
+                    e.stopPropagation();
                     return;
                 }
 
@@ -1043,6 +1051,7 @@ var __meta__ = {
                     this._multipleSelection = false;
                      if (listView.focus().hasClass(SELECTEDCLASS)) {
                         that._close();
+                        e.stopPropagation();
                         return;
                     }
                 }
@@ -1051,6 +1060,7 @@ var __meta__ = {
                     that._change();
                     that._close();
                 });
+                handled = true;
             } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
                 if (that._activeItem && listView.focus() && listView.focus()[0] === that._activeItem[0]) {
                     that._activeItem = null;
@@ -1061,6 +1071,7 @@ var __meta__ = {
                 that._select(listView.focus()).done(function() {
                     that._change();
                 });
+                handled = true;
                 e.preventDefault();
             } else if (key === keys.SPACEBAR && e.shiftKey && visible && !that.options.virtual) {
                 var activeIndex = listView.getElementIndex(that._getActiveItem());
@@ -1069,7 +1080,7 @@ var __meta__ = {
                 if (activeIndex !== undefined && currentIndex !== undefined) {
                     that._selectRange(activeIndex, currentIndex);
                 }
-
+                handled = true;
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
@@ -1082,6 +1093,7 @@ var __meta__ = {
                 }
 
                 that.close();
+                handled = true;
             } else if (key === keys.HOME) {
                 if (visible) {
                     if (!listView.focus()) {
@@ -1099,6 +1111,7 @@ var __meta__ = {
                         that.currentTag($(tag));
                     }
                 }
+                handled = true;
             } else if (key === keys.END) {
                 if (visible) {
                     if (!listView.focus()) {
@@ -1119,6 +1132,7 @@ var __meta__ = {
                         that.currentTag($(tag));
                     }
                 }
+                handled = true;
             } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
                 that._state = ACCEPT;
 
@@ -1127,6 +1141,7 @@ var __meta__ = {
 
                     that._change();
                     that._close();
+                    e.stopPropagation();
                     return;
                 }
 
@@ -1137,14 +1152,21 @@ var __meta__ = {
                 if (tag && tag[0]) {
                     that._removeTag(tag, true);
                 }
+                handled = true;
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
                 e.preventDefault();
 
                 var direction = key === keys.PAGEDOWN ? 1 : -1;
                 listView.scrollWith(direction * listView.screenHeight());
+                handled = true;
             } else {
                 clearTimeout(that._typingTimeout);
                 that._search();
+                handled = true;
+            }
+
+            if (handled) {
+                e.stopPropagation();
             }
         },
 

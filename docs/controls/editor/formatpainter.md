@@ -3,7 +3,7 @@ title: Format Painter
 page_title: jQuery Editor Documentation - Format Painter
 description: "Get started with the jQuery Editor by Kendo UI and learn how to use its Format Painter tool."
 slug: format_painter_editor_widget
-position: 8
+position: 9
 ---
 
 # Format Painter

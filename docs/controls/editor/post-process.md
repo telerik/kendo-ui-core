@@ -3,7 +3,7 @@ title: Post-Processing Content
 page_title: jQuery Editor Documentation - Post-Processing Content
 description: "Get started with the jQuery Editor by Kendo UI and learn how to post-process its content so it fits your needs."
 slug: post_process_content_editor_widget
-position: 11
+position: 12
 ---
 
 # Post-Processing Content

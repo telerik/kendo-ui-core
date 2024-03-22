@@ -1182,7 +1182,7 @@ var __meta__ = {
                 list.mediumMQL.onEnter(list._createActionSheet.bind(list));
                 list.smallMQL
                     .onEnter(() => {
-                        if (!list.popup) {
+                        if (!list.popup || !list.popup.fullscreen) {
                             list._createActionSheet();
                         }
 

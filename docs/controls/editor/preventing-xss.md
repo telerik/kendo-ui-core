@@ -3,7 +3,7 @@ title: Preventing Cross-Site Scripting
 page_title: jQuery Editor Documentation - Preventing Cross-Site Scripting
 description: "Get started with the jQuery Editor by Kendo UI and learn about the security implications of allowing an HTML editing in your pages and how to secure them."
 slug: prevent_xss_editor_widget
-position: 12
+position: 13
 ---
 
 # Preventing Cross-Site Scripting

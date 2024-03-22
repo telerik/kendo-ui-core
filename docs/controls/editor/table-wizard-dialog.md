@@ -28,7 +28,7 @@ To insert a new table by using the **Table Wizard** dialog:
 To modify an existing table or a table cell:
 
 1. Select the table or the table cell to edit.
-1. Click the **Table Wizard** tool in the toolbar.
+1. Click the **Table Properties** or **Cell Properties** tool in the toolbar.
 
 > You can resize the table rows and columns by dragging the cell border with the mouse and without using the **Table Wizard** dialog.
 
@@ -52,6 +52,8 @@ The **Table** tab provides the following options:
 * **Rows**&mdash;Defines the rows of the table.
 * **Cell Spacing**&mdash;Specifies the space between the cells ([`cellspacing` attribute](http://www.w3schools.com/tags/att_table_cellspacing.asp)).
 * **Cell Padding**&mdash;Specifies the padding in the cells ([`cellpadding` attribute](http://www.w3schools.com/tags/att_table_cellpadding.asp)).
+* **Independent Cell Paddings** (available as of 2024.1.319 release)&mdash;Specifies individual padding in the cells for `top`, `right`, `bottom` and `left`.
+![Independent Table Paddings](cell-paddings.png)
 * **Alignment**&mdash;Specifies the text alignment in the cells.
 * **Background**&mdash;Specifies the background color of the table.
 * **CSS Class**&mdash;Defines the class names for the table element (white space-separated).
@@ -69,6 +71,8 @@ The **Cell** tab provides the following options:
 * **Height**&mdash;Changes the height of the cell or cells (in pixels, em, or percent).
 * **Cell Margin**&mdash;Defines the margin of the cell or cells.
 * **Cell Padding**&mdash;Defines the padding of the cell or cells.
+* **Independent Cell Paddings** (available as of 2024.1.319 release)&mdash;Specifies individual padding of the cell or cells for `top`, `right`, `bottom` and `left`.
+![Independent Cell Paddings](cell-paddings.png)
 * **Alignment**&mdash;Specifies the text alignment of the cell or cells.
 * **Background**&mdash;Specifies the background color of the cell or cells.
 * **CSS Class**&mdash;Defines class names for the cells (white space-separated).
