@@ -196,7 +196,7 @@ Specifies the image of the item.
 
 ### items.spriteCssClass `String`
 
-Specifies custom css class added to the srite icon element of the item.
+Specifies custom css class added to the sprite icon element of the item.
 
 ### items.text `String`
 
