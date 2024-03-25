@@ -178,6 +178,11 @@ Initialize the submodule repository
 git submodule update --init
 ```
 
+Install dependencies:
+```bash
+npm install
+```
+
 Run the build script:
 ```bash
 npm run build
@@ -278,6 +283,6 @@ This project has been released under the [Apache License, version 2.0](http://ww
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*Copyright © 2023 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.*
+*Copyright © 2024 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.*
 
 *Progress, Telerik, and certain product names used herein are trademarks or registered trademarks of Progress Software Corporation and/or one of its subsidiaries or affiliates in the U.S. and/or other countries.*

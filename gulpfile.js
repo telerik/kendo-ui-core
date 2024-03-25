@@ -127,6 +127,7 @@ gulp.task("custom", function() {
             external: ['jquery'],
             treeshake: false,
             plugins: [
+                require("@rollup/plugin-node-resolve").nodeResolve(),
                 require('@rollup/plugin-virtual')({
                     custom: `
                         import 'jquery';
