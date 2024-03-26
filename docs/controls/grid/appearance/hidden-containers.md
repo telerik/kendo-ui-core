@@ -18,6 +18,7 @@ You can identify that the Grid is initialized in a hidden state if any of the fo
 * The vertical scrollbar is not visible even though [virtual scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) is enabled.
 * Frozen columns are too narrow and non-frozen columns are not visible.
 * The pager may not appear or may be the smallest responsive pager instead of the full one
+* The reordering of the rows may not work as expected. 
 
 To handle the behavior that is related to the initialization of the Grid inside a hidden container, use any of the following approaches:
 * Delay the initialization of the Grid or change the order in which various Kendo UI components are initialized, so that the Grid is initialized after its element becomes visible.

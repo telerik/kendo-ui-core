@@ -44,7 +44,7 @@ Note: when using align, make sure the badge container has [css position](https:/
 
 ### cutoutBorder `Boolean` *(default: false)*
 
-Specifies wether or not to render additional "cutout" border around the badge.
+Specifies whether or not to render additional "cutout" border around the badge.
 
 #### Example
 

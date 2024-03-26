@@ -38,7 +38,7 @@ How can I initialize a Kendo UI for jQuery Grid in a Kendo UI for jQuery TabStri
 
 ## Solution
 
-The example below demonstrates how to use the `activate` event when initializing the Grid within the TabStrip so as it is resized according to the dimensions of its container.
+1. The example below demonstrates how to use the `activate` event when initializing the Grid within the TabStrip so as it is resized according to the dimensions of its container.
 
 > In addition to the Kendo UI TabStrip, you can apply the suggested approach to the PanelBar and Window which also act as hidden containers for the Grid.
 
@@ -86,6 +86,54 @@ The example below demonstrates how to use the `activate` event when initializing
           });
         </script>
     </body>
+```
+
+
+2.  If the Grid component is nested inside a hidden container in order for reordable rows to work as expected, it should be visible before initialization. A way to handle the current case scenario, the Grid can be initialized in the activate event of the TabStrip component.
+
+```dojo
+      <button id="openBtn">Open</button>
+
+      <div id="tabstrip">
+        <ul>
+          <li id="tab1">Tab 1</li>
+          <li id="tab2">Tab 2</li>
+        </ul>
+        <div><div id="grid"></div></div>
+        <div>Content 2</div>
+      </div>
+
+      <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+      <script>
+        var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+
+
+
+        //apply the activate event, which is thrown only after the animation is played out
+        tabstrip.one("activate", function() {
+          var grid = $("#grid").kendoGrid({
+            dataSource: {
+              data: products,
+              pageSize: 5
+            },
+            height: 200,
+            reorderable: {
+              rows: true
+            },
+            scrollable: true,
+            columns: [
+              "ProductName",
+              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px" },
+              { field: "UnitsInStock", title: "Units In Stock", width: "130px" },
+              { field: "Discontinued", width: "130px" }
+            ]
+          }).data("kendoGrid");
+        });
+
+        $("#openBtn").click(function(e) {
+          tabstrip.activateTab($("#tab1"));
+        });
+      </script>
 ```
 
 ## See Also

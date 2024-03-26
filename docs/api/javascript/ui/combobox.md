@@ -1541,11 +1541,13 @@ The zero-based index of the data record.
 
     var combobox = $("#combobox").data("kendoComboBox");
 
-    // get the dataItem corresponding to the selectedIndex.
+    // get the dataItem corresponding to the selectedIndex. Result can be seen in the browser console.
     var dataItem = combobox.dataItem();
+    console.log(dataItem.name);
 
-    // get the dataItem corresponding to the passed index.
-    var dataItem = combobox.dataItem(0);
+    // get the dataItem corresponding to the passed index. Result can be seen in the browser console.
+    dataItem = combobox.dataItem(0);
+    console.log(dataItem.name);
     </script>
 
 ### destroy

@@ -64,7 +64,7 @@ You can display an icon in the Badge by configuring the [icon](/api/javascript/u
 
 ## 4. Set the theme color of the Badge.
 
-You can configure the Badge [themeColor](/api/javascript/ui/badge/configuration/themeColor).
+You can configure the Badge [themeColor](/api/javascript/ui/badge/configuration/themecolor).
 
 ```html
 <span id="badge">Badge</span>

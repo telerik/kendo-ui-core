@@ -15029,8 +15029,7 @@ If invoked, prevents the save action. In "incell" [editable.mode](/api/javascrip
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { field: "age" },
-        { command: "destroy" }
+        { field: "age" }
       ],
       dataSource: {
         data:[

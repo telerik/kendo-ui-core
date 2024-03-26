@@ -50,8 +50,8 @@ Configure a `buttonsTemplate` and add the html for the reset button. On click of
           },
           buttonsTemplate:'<div class="k-form-buttons">'+
           '<button class="k-button k-primary k-form-submit" type="submit">Submit</button>'+
-          '<button class="k-button k-form-clear">Clear</button>'+
-          '<button id="btn" onclick="custom()" class="k-button">Custom Reset button</button>'+
+          '<button class="k-button k-form-clear" type="button">Clear</button>'+
+          '<button id="btn" onclick="custom()" class="k-button" type="button">Custom Reset button</button>'+
           '</div>',
           submit: function(e) {
             e.preventDefault();

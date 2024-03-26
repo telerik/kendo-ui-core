@@ -55,9 +55,11 @@ After the completion of this guide, you will achieve the following result:
         ]
       });
       $("#export").on("click", () => {
-        kendo.saveAs({
-          dataURI: workbook.toDataURL(),
-          fileName: "Test.xlsx"
+        workbook.toDataURLAsync().then(function(dataURL) {
+            kendo.saveAs({
+              dataURI: dataURL,
+              fileName: "Test.xlsx"
+            });
         });
       });
     </script>
@@ -151,7 +153,9 @@ The workbook has an array of sheets. Sheets have rows and rows have cells.
 Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
 ```javascript
-let data = workbook.toDataURL();
+      workbook.toDataURLAsync().then(function(dataURL) {
+         
+      });
 ```
 
 ## 5. Save the Generated Excel File
@@ -159,9 +163,11 @@ let data = workbook.toDataURL();
 Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save the Excel file on the client machine.
 
 ```javascript
-      kendo.saveAs({
-        dataURI: data,
-        fileName: "Test.xlsx"
+      workbook.toDataURLAsync().then(function(dataURL) {
+          kendo.saveAs({
+            dataURI: dataURL,
+            fileName: "Test.xlsx"
+          });
       });
 ```
 
