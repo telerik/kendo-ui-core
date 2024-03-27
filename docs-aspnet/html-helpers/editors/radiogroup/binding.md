@@ -8,7 +8,7 @@ position: 2
 
 # Binding
 
-When using the RadioGroup component, you can bind the radio button items by using the [Items()](#items) method or the [Bindto()](#bindto) method.
+When using the RadioGroup component, you can bind the radio button items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
 
 ## Items method
 
@@ -111,6 +111,123 @@ You can configure the items in the RadioGroup widget by using the BindTo method.
         </kendo-radiogroup>
     ```
     {% endif %}
+
+
+## Model Binding
+
+You can implement model binding both with [local](#items-method) and [remote data](#bindto-method).
+
+> The RadioGroup component is not accustomed to complex object-binding scenarios.
+
+### Model Binding with Local Data
+
+```HtmlHelper
+    @model RadioGroupModel
+
+    @(Html.Kendo().RadioGroupFor(model => model.RadioGroupGroupValue)
+        .Name("radiogroup")
+        .Items(items =>
+        {
+            items.Add().Label("Phone (SMS)").Value("1");
+            items.Add().Label("E-mail").Value("2");
+            items.Add().Label("None").Value("3");
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    @model RadioGroupModel
+
+    <kendo-radiogroup for="RadioGroupGroupValue">
+        <kendo-radiogroup-items>
+            <kendo-radiogroup-item value="1" label="Phone (SMS)"></kendo-radiogroup-item>
+            <kendo-radiogroup-item value="2" label="E-mail"></kendo-radiogroup-item>
+            <kendo-radiogroup-item value="3" label="None"></kendo-radiogroup-item>
+        </kendo-radiogroup-items>
+    </kendo-radiogroup>
+```
+{% endif %}
+
+```Controller
+    public IActionResult Index()
+    {
+        var model = new RadioGroupModel
+        {
+            RadioGroupGroupValue = new List<string>() { "1" }
+        };  
+
+        return View(model);
+    }
+```
+```Model
+    public class RadioGroupModel
+    {
+        public string[] RadioGroupGroupValue { get; set; }
+    }
+```
+
+### Model Binding with Remote Data
+
+```HtmlHelper
+    @model RadioGroupModel
+
+    @(Html.Kendo().RadioGroupFor(model => model.RadioGroupGroupValue)
+         .HtmlAttributes(new { style = "height: auto;" })
+         .Layout(radiogroupLayout.Vertical)
+         .BindTo((List<IInputGroupItem>)ViewData["radiogroupItems"])
+    )
+```
+{% if site.core %}
+```TagHelper
+    @model RadioGroupModel
+
+    <kendo-radiogroup  for="RadioGroupGroupValue"
+                       value="Model.RadioGroupGroupValue"
+                       bind-to='(List<IInputGroupItem>)ViewData["radiogroupItems"]'>
+    </kendo-radiogroup>
+```
+{% endif %}
+
+```Controller
+        private List<InputGroupItemModel> GetRadioGroupItems()
+         => new List<InputGroupItemModel>()
+            {
+                new InputGroupItemModel()
+                {
+                    Label = "Yes",
+                    Value = "one"
+                },
+                 new InputGroupItemModel()
+                {
+                    Label = "No",
+                    Value = "two"
+                },
+                  new InputGroupItemModel()
+                {
+                    Label = "N/A",
+                    Value = "three"
+                }
+            };
+
+        public IActionResult Index()
+        {
+            var model = new RadioGroupModel
+            {
+                RadioGroupGroupValue = new List<string>() { "one" }
+            };
+
+            ViewData["RadioGroupItems"] = GetRadioGroupItems();
+
+            return View(model);
+        }
+```
+
+```Model
+    public class RadioGroupModel
+    {
+        public string[] RadioGroupGroupValue { get; set; }
+    }
+```
 
 ## See Also
 
