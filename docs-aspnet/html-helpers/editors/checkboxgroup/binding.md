@@ -118,6 +118,123 @@ You can configure the items in the CheckBoxGroup widget by using the BindTo meth
     ```
     {% endif %}
 
+
+## Model Binding
+
+You can implement model binding both with [local](#items-method) and [remote data](#bindto-method).
+
+> The CheckBoxGroup component is not accustomed to complex object-binding scenarios.
+
+### Model Binding with Local Data
+
+```HtmlHelper
+    @model CheckBoxGroupModel
+
+    @(Html.Kendo().CheckBoxGroupFor(model => model.CheckBoxGroupValue)
+        .Name("checkboxgroup")
+        .Items(i =>
+        {
+            i.Add().Label("English").Value("1");
+            i.Add().Label("Spanish").Value("2");
+            i.Add().Label("Russian").Value("3");
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    @model CheckBoxGroupModel
+
+    <kendo-checkboxgroup for="CheckBoxGroupValue">
+        <kendo-checkboxgroup-items>
+            <kendo-checkboxgroup-item value="1" label="English"></kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="2" label="Spanish"></kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="3" label="Russian"></kendo-checkboxgroup-item>
+        </kendo-checkboxgroup-items>
+    </kendo-checkboxgroup>
+```
+{% endif %}
+
+```Controller
+    public IActionResult Index()
+    {
+        var model = new CheckBoxGroupModel
+        {
+            CheckBoxGroupValue = new List<string>() { "1" }
+        };  
+
+        return View(model);
+    }
+```
+```Model
+    public class CheckBoxGroupModel
+    {
+        public string[] CheckBoxGroupValue { get; set; }
+    }
+```
+
+### Model Binding with Remote Data
+
+```HtmlHelper
+    @model CheckBoxGroupModel
+
+    @(Html.Kendo().CheckBoxGroupFor(model => model.CheckBoxGroupValue)
+         .HtmlAttributes(new { style = "height: auto;" })
+         .Layout(CheckBoxGroupLayout.Vertical)
+         .BindTo((List<IInputGroupItem>)ViewData["CheckBoxGroupItems"])
+    )
+```
+{% if site.core %}
+```TagHelper
+    @model CheckBoxGroupModel
+
+    <kendo-checkboxgroup for="CheckBoxGroupValue"
+                         value="Model.CheckBoxGroupValue"
+                         bind-to='(List<IInputGroupItem>)ViewData["CheckBoxGroupItems"]'>
+    </kendo-checkboxgroup>
+```
+{% endif %}
+
+```Controller
+        private List<InputGroupItemModel> GetCheckBoxGroupItems()
+         => new List<InputGroupItemModel>()
+            {
+                new InputGroupItemModel()
+                {
+                    Label = "Yes",
+                    Value = "one"
+                },
+                 new InputGroupItemModel()
+                {
+                    Label = "No",
+                    Value = "two"
+                },
+                  new InputGroupItemModel()
+                {
+                    Label = "N/A",
+                    Value = "three"
+                }
+            };
+
+        public IActionResult Index()
+        {
+            var model = new CheckBoxGroupModel
+            {
+                CheckBoxGroupValue = new List<string>() { "one" }
+            };
+
+            ViewData["CheckBoxGroupItems"] = GetCheckBoxGroupItems();
+
+            return View(model);
+        }
+```
+
+```Model
+    public class CheckBoxGroupModel
+    {
+        public string[] CheckBoxGroupValue { get; set; }
+    }
+```
+
 ## See Also
 
 * [Server-Side API](/api/checkboxgroup)
