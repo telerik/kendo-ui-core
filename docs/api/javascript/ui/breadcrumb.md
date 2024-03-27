@@ -84,7 +84,7 @@ Defines the type of the item "rootitem" or "item".
 
 ### items.href `String`
 
-Defines the navigation link's url of the item (rendered if `navigation` is `true`).
+Defines the navigation link's url of the item (rendered if `navigational` is `true`).
 
 ### items.text `String`
 
