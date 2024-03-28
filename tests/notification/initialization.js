@@ -107,7 +107,7 @@
 
             var defaultFunc = notification._getCompiled();
             var params = { typeIcon: "info", content: "foo", closeButton: false };
-            var infoCircleIcon = kendo.ui.icon($('<span title="info"></span>'),{ icon: "info-circle" });
+            var infoCircleIcon = kendo.ui.icon($('<span class="k-notification-status" title="info"></span>'),{ icon: "info-circle" });
             var defaultOutput = `${infoCircleIcon}<div class="k-notification-content">foo</div>`;
             assert.equal(typeof defaultFunc, "function");
             assert.equal(defaultFunc(params), defaultOutput);
@@ -308,7 +308,7 @@
 
             notification.show("foo");
 
-            assert.isOk($(".k-notification").find(".k-close-icon").is(":visible"));
+            assert.isOk($(".k-notification").find(".k-notification-actions .k-icon").is(":visible"));
         });
 
         it("clicking on static notification hides it when button is pressed", function() {
@@ -321,7 +321,7 @@
 
             notification.show("foo");
 
-            $(".k-notification").find(".k-close-icon").click();
+            $(".k-notification").find(".k-notification-actions .k-icon").click();
 
             assert.equal($(".k-notification").length, 0);
         });
@@ -335,7 +335,7 @@
 
             notification.show("foo");
 
-            $(".k-notification").find(".k-close-icon").click();
+            $(".k-notification").find(".k-notification-actions .k-icon").click();
 
             assert.equal($(".k-notification").length, 0);
         });
@@ -690,13 +690,13 @@
 
             notification.show("foo");
 
-            $(".k-notification").find(".k-close-icon").click();
+            $(".k-notification").find(".k-notification-actions .k-icon").click();
 
             assert.equal($(".k-notification").length, 1);
 
             setTimeout(function() {
 
-                $(".k-notification").find(".k-close-icon").click();
+                $(".k-notification").find(".k-notification-actions .k-icon").click();
                 assert.equal($(".k-notification").length, 0);
 
                 done();
@@ -744,7 +744,7 @@
 
             notification.show("foo");
 
-            assert.isOk(notification.element.find(".k-notification-actions .k-notification-close-action .k-close-icon").length);
+            assert.isOk(notification.element.find(".k-notification-actions .k-notification-close-action .k-icon").length);
         });
 
     });

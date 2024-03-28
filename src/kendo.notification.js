@@ -26,8 +26,7 @@ var __meta__ = {
         SHOW = "show",
         HIDE = "hide",
         KNOTIFICATION = "k-notification",
-        KCLOSEICONCLASS = "k-close-icon",
-        KCLOSEICONSELECTOR = `.k-notification-actions .${KCLOSEICONCLASS}`,
+        KCLOSEICONSELECTOR = `.k-notification-actions .k-icon`,
         KHIDING = "k-hiding",
         INFO = "info",
         SUCCESS = "success",
@@ -43,13 +42,13 @@ var __meta__ = {
         WRAPPER = '<div role="alert" aria-live="polite" class="k-notification"></div>',
         GET_TEMPLATE_FUNC = (encodeContent) =>
             ({ typeIcon, content, closeButton }) =>
-                kendo.ui.icon($(`<span title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) +
+                kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) +
                 `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>`,
         TEMPLATE = GET_TEMPLATE_FUNC(false),
         SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true),
         defaultActions = {
             close: {
-                template: kendo.ui.icon($('<span aria-hidden="true" title="Hide"></span>'), { icon: "x", iconClass: KCLOSEICONCLASS })
+                template: kendo.ui.icon($('<span aria-hidden="true" title="Hide"></span>'), { icon: "x" })
             }
         };
 

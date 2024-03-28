@@ -8528,6 +8528,39 @@ Exports all grid pages, starting from the first one.
     grid.saveAsPDF();
     </script>
 
+### pdf.forcePageBreak `String` *(default: null)*
+
+Forces the page to break before each element that matches the applied CSS selector.
+
+> **Note:** Setting the paperSize to `auto` will override this configuration.
+
+#### Example - force page break
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["pdf"],
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: {
+        data: [{ name: "Jane Doe"},
+               { name: "John Doe"},
+               { name: "Tim Doe"},
+               { name: "Alice Doe"}],
+        pageSize: 2
+      },
+      pdf: {
+        allPages: true,
+        paperSize: "A4",
+        repeatHeaders: true,
+        forcePageBreak: ".k-master-row:nth-child(2n)",
+      }
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.saveAsPDF();
+    </script>
+
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
