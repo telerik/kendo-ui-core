@@ -2833,6 +2833,30 @@ so the two should not be used at the same time.
     });
     </script>
 
+### columns.resizable `Boolean` *(default: true)*
+
+If set to `false` the column will become non-resizable, while all the other columns remaining resizable in the the grid component.
+In order for this property to work, grid's `resizable` property must be set to `true`
+
+#### Example - non-resizable column
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      resizable: true,
+      columns: [
+        { field: "id", width: 250, resizable: false }, //column will not be resizable anymore
+        { field: "name", width: 250 }, 
+        { field: "age", width: 250 } 
+      ],
+      dataSource: [
+          { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
+          { id: 2, name: "John Doe", age: 55, city: "New York" }
+      ]
+    });
+    </script>
+
+
 ### columns.selectable `Boolean` *(default: false)*
 
 If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/javascript/ui/grid/events/change) event is fired when a row is selected.

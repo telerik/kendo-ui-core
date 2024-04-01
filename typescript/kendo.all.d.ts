@@ -6505,6 +6505,7 @@ declare namespace kendo.ui {
         media?: string | undefined;
         minResizableWidth?: number | undefined;
         minScreenWidth?: number | undefined;
+        resizable?: boolean | undefined;
         selectable?: boolean | undefined;
         sortable?: boolean | GridColumnSortable | undefined;
         sticky?: boolean | undefined;

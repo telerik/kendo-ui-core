@@ -13,7 +13,7 @@ The resizing behavior of the Grid columns depends on whether scrolling is enable
 
 For a runnable example, refer to the [demo on resizing columns in the Grid](https://demos.telerik.com/kendo-ui/grid/column-resizing).
 
-When scrolling is disabled and a Grid column is resized, other columns change widths too, so that the sum of all column widths remains constant. If both the columns and the Grid `<div>` already have their minimum possible widths applied, then the resizing of the columns stops working. In such scenarios, use either of the following approaches:
+When scrolling is disabled and a Grid column is resized, other columns, including the ones with `resizable` set to `false`, change widths too, so that the sum of all column widths remains constant. If both the columns and the Grid `<div>` already have their minimum possible widths applied, then the resizing of the columns stops working. In such scenarios, use either of the following approaches:
 * Apply a larger width to the Grid, or
 * Enable scrolling.
 
