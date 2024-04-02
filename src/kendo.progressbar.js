@@ -44,6 +44,7 @@ var __meta__ = {
         PRECISION = 3,
         templates = {
             progressStatus: "<span class='k-progress-status-wrap " + LABEL_POSITION_END + "'><span class='k-progress-status'></span></span>",
+            noProgressStatus: "<span class='k-progress-status-wrap " + LABEL_POSITION_END + "'></span>",
             announceElement: '<span aria-live="polite" class="k-sr-only k-progress-announce"></span>'
         };
 
@@ -208,6 +209,8 @@ var __meta__ = {
                     } else {
                         that.progressStatus.text(that._calculatePercentage(initialValue).toFixed() + "%");
                     }
+                } else {
+                    that.wrapper.prepend(templates.noProgressStatus);
                 }
             }
         },
@@ -472,6 +475,8 @@ var __meta__ = {
                 that.progressWrapper.append(templates.progressStatus);
 
                 that.progressStatus = that.wrapper.find("." + KPROGRESSSTATUS);
+            } else {
+                that.progressWrapper.prepend(templates.noProgressStatus);
             }
         },
 

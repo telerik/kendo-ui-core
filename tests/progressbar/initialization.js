@@ -491,10 +491,10 @@
                 showStatus: false
             });
 
-            assert.isOk(pb.wrapper.is(":empty"));
+            assert.equal(pb.wrapper.html(), '<span class="k-progress-status-wrap k-progress-end"></span>');
         });
 
-        it("ProgressBar contains empty div for progress wrapper when value is not equal to min and showStatus is false", function() {
+        it("ProgressBar contains a nested empty div for progress wrapper when value is not equal to min and showStatus is false", function() {
             var pb = new ProgressBar(container, {
                 min: 10,
                 value: 20,
@@ -504,7 +504,7 @@
             var progressWrapper = pb.wrapper.find(".k-selected");
 
             assert.equal(progressWrapper.length, 1);
-            assert.isOk(progressWrapper.is(":empty"));
+            assert.equal(progressWrapper.html(), '<span class="k-progress-status-wrap k-progress-end"></span>');
         });
 
         it("Size of progress wrapper div reflects value when value is not equal to min and showStatus is false", function() {
