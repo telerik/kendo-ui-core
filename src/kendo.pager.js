@@ -98,8 +98,6 @@ var __meta__ = {
             var that = this, page, totalPages;
             var buttonSize = "";
             var dropDownClasses = "";
-            var width;
-            var info;
 
             Widget.fn.init.call(that, element, options);
 
@@ -274,31 +272,7 @@ var __meta__ = {
             $(window).on("resize" + NS, that._resizeHandler);
 
             that._navigatable();
-
-            if (that.options.responsive) {
-                width = that.element.outerWidth();
-                info = that.element.find(".k-pager-info");
-                if (width <= 480) {
-                    info.hide();
-                    that.element.find(".k-pager-sizes").children().hide();
-                    if (options.numeric) {
-                        that._numericSelect.show();
-                        that.list.hide();
-                    }
-                } else {
-                    if (width <= 600) {
-                        info.hide();
-                        if (options.numeric) {
-                            that._numericSelect.show();
-                            that.list.hide();
-                        }
-                    } else if (options.numeric) {
-                        that._numericSelect.hide();
-                    }
-                }
-            } else if (that._numericSelect) {
-                that._numericSelect.hide();
-            }
+            that._responsive();
 
             kendo.notify(that);
         },
@@ -419,6 +393,7 @@ var __meta__ = {
 
         _resize: function(size) {
             var that = this;
+            that._responsive(size);
             if (!that.element.is(":visible") || !that._lastWidth || !that.options.responsive) {
                 return;
             }
@@ -442,6 +417,7 @@ var __meta__ = {
                     that._adaptiveStep(i, true);
                 }
             }
+
             that._lastWidth = size.width;
         },
 
@@ -555,6 +531,45 @@ var __meta__ = {
 
         _createDataSource: function(options) {
             this.dataSource = kendo.data.DataSource.create(options.dataSource);
+        },
+
+        _responsive: function(size) {
+            var that = this;
+            var options = that.options;
+            var width;
+            var info;
+
+            if (options.responsive) {
+                width = that.element.outerWidth();
+
+                if (size && size.width > 0) {
+                    width = size.width;
+                }
+
+                info = that.element.find(".k-pager-info");
+
+                if (width <= 480) {
+                    info.hide();
+                    that.element.find(".k-pager-sizes").children().hide();
+                    if (options.numeric) {
+                        that._numericSelect.show();
+                        that.list.hide();
+                    }
+                } else {
+                    if (width <= 600) {
+                        info.hide();
+                        if (options.numeric) {
+                            that._numericSelect.show();
+                            that.list.hide();
+                        }
+                    } else if (options.numeric) {
+                        that._numericSelect.hide();
+                        that.list.show();
+                    }
+                }
+            } else if (that._numericSelect) {
+                that._numericSelect.hide();
+            }
         },
 
         refresh: function(e) {
