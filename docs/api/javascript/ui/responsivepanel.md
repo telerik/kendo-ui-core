@@ -228,6 +228,8 @@ Opens the responsive panel.
             var panel = $("#navigation").data("kendoResponsivePanel");
             panel.open();
         });
+
+        kendo.ui.icon($(".k-i-menu"), {icon: "menu"});
     </script>
 
 ## Events

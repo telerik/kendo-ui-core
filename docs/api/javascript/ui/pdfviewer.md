@@ -38,7 +38,7 @@ Specifies the PDF.JS configuration options. Including `pdfjs` is mandatory.
 
 Specifies the default file to be displayed.
 
-#### Example - Pass an URL to load a file
+#### Example
 
     <div id="pdfviewer"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -52,40 +52,6 @@ Specifies the default file to be displayed.
             }
         });
     </script>
-
-#### Example - Pass a base64 string to load a file
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-
-    <div id="pdfViewer">
-    </div>
-    <script>
-      var data;
-      var request = new XMLHttpRequest();
-      request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);
-      request.responseType = 'blob';
-      request.onload = function() {
-        var reader = new FileReader();
-        reader.readAsDataURL(request.response);
-        reader.onload =  function(e){
-
-          const string = e.target.result;
-          const substring = ",";
-
-          data = string.substring(string.indexOf(substring)+1); 
-          var pdfViewer = $("#pdfViewer").kendoPDFViewer({
-            width: "100%",
-            height: 700
-          }).data("kendoPDFViewer");
-
-          pdfViewer.fromFile({data: data})
-        };
-      };
-      request.send();
-    </script> 
 
 ### pdfjsProcessing.file.cMapUrl `String`
 
@@ -976,7 +942,8 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
 
 > To run the below example, open it in Dojo
 
-#### Example
+#### Example - pass an URL to load a file
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
         <script>
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
@@ -1012,6 +979,40 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
                 });
             });
         </script>
+
+#### Example - Pass a base64 string to load a file
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+
+    <div id="pdfViewer">
+    </div>
+    <script>
+      var data;
+      var request = new XMLHttpRequest();
+      request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);
+      request.responseType = 'blob';
+      request.onload = function() {
+        var reader = new FileReader();
+        reader.readAsDataURL(request.response);
+        reader.onload =  function(e){
+
+          const string = e.target.result;
+          const substring = ",";
+
+          data = string.substring(string.indexOf(substring)+1); 
+          var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+            width: "100%",
+            height: 700
+          }).data("kendoPDFViewer");
+
+          pdfViewer.fromFile({data: data})
+        };
+      };
+      request.send();
+    </script> 
 
 ### activatePage
 Loads and scrolls to the page by number.

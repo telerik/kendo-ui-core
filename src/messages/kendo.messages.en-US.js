@@ -529,6 +529,10 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
 if (kendo.ui.Grid) {
 kendo.ui.Grid.prototype.options.messages =
 $.extend(true, kendo.ui.Grid.prototype.options.messages,{
+  "loader": {
+    "loading": "Loading...",
+    "exporting": "Exporting..."
+  },
   "commands": {
     "cancel": "Cancel changes",
     "canceledit": "Cancel",

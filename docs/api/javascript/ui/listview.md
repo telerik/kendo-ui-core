@@ -2665,7 +2665,7 @@ The event handler function context (available via the `this` keyword) will be se
       <div class="item">
         <p>#: name # || #: age #</p>
           <div class="edit-buttons">
-            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+             <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
       </div>
       </div>
     </script>

@@ -471,7 +471,7 @@ var __meta__ = {
         _allowPreventDefault: function(target) {
             var disallowedSelectors = ".k-table-td";
             // Required for the paste event in the Grid to work in Chrome.
-            return !$(target).is(disallowedSelectors);
+            return !$(target).is(disallowedSelectors) || !this.options.allowPaste;
         },
 
         _allowSelection: function(target) {

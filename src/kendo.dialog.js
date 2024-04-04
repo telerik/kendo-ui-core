@@ -474,8 +474,7 @@ import "./kendo.icons.js";
                     that.toFront();
                     options.visible = true;
                     if (options.modal) {
-                        overlay = wrapper.find(KOVERLAY);
-
+                        overlay = that.dialogWrapper.find(KOVERLAY);
                         if (options.modal.preventScroll) {
                             that._stopDocumentScrolling();
                         }
@@ -488,11 +487,11 @@ import "./kendo.icons.js";
                             overlayFx.endValue(0.5);
                             overlayFx.play();
                         }
+                        that.dialogWrapper.show();
 
-                        overlay.show();
                     }
 
-                    wrapper.show().kendoStop().kendoAnimate({
+                    (options.modal ? that.wrapper : that.dialogWrapper).show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
                         complete: that._openAnimationEnd.bind(that)
@@ -580,7 +579,7 @@ import "./kendo.icons.js";
                     options.visible = false;
                     this._handleDocumentScrolling();
 
-                    wrapper.kendoStop().kendoAnimate({
+                    (options.modal ? that.wrapper : that.dialogWrapper).kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
