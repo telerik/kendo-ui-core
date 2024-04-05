@@ -92,7 +92,7 @@ The following example demonstrates how to persist the collapsed state of grouped
 
       $(function () {
         var grid = $("#grid").data("kendoGrid");
-        grid.table.on("click", ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function (e) {
+        grid.table.on("click", ".k-grouping-row .k-svg-i-caret-alt-down, .k-grouping-row .k-svg-i-caret-alt-right", function (e) {
           var row = $(this).closest("tr"),
               groupKey = rowGroupKey(row, grid);
 
