@@ -34,8 +34,6 @@ var __meta__ = {
         VISIBLE = "visible",
         EFFECTS = "effects",
         ACTIVE = "k-active",
-        ACTIVEBORDER = "k-state-border",
-        ACTIVEBORDERREGEXP = /k-state-border-(\w+)/,
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
         DOCUMENT_ELEMENT = $(document.documentElement),
@@ -197,7 +195,7 @@ var __meta__ = {
             }
 
             if (that.options.anchor != BODY) {
-                that._hideDirClass();
+                that._hideActiveClass();
             }
 
             that._closing = false;
@@ -301,7 +299,7 @@ var __meta__ = {
                 animation = that._openAnimation();
 
                 if (options.anchor != BODY && !that.element.hasClass("k-tooltip")) {
-                    that._showDirClass(animation);
+                    that._addActiveClass();
                 }
 
                 parent.hide();
@@ -367,36 +365,23 @@ var __meta__ = {
             return animation;
         },
 
-        _hideDirClass: function() {
+        _hideActiveClass: function() {
             var anchor = $(this.options.anchor);
-            var direction = ((anchor.attr("class") || "").match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
-            var dirClass = ACTIVEBORDER + "-" + direction;
-
             anchor
-                .removeClass(dirClass)
                 .children(ACTIVECHILDREN)
-                .removeClass(ACTIVE)
-                .removeClass(dirClass);
+                .removeClass(ACTIVE);
 
-            this.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
         },
 
-        _showDirClass: function(animation) {
-            var direction = animation.effects.slideIn ? animation.effects.slideIn.direction : "down";
-            var dirClass = ACTIVEBORDER + "-" + direction;
-
+        _addActiveClass: function() {
             $(this.options.anchor)
-                .addClass(dirClass)
                 .children(ACTIVECHILDREN)
-                .addClass(ACTIVE)
-                .addClass(dirClass);
+                .addClass(ACTIVE);
         },
 
         position: function() {
             if (this.visible()) {
                 this.flipped = this._position();
-                //this._hideDirClass();
-                //this._showDirClass(this._openAnimation());
             }
         },
 

@@ -751,27 +751,6 @@
             assert.equal(anchor.css("font-style"), div.css("font-style"));
         });
 
-        it("add direction class to the anchor and popup", function() {
-            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo($("#qunit-fixture"));
-            popup = new Popup(div, { anchor: anchor });
-            popup.open();
-
-            assert.equal(anchor.hasClass("k-state-border-down"), true);
-            assert.equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), true);
-        });
-
-        it("removes direction class from the anchor and popup", function() {
-            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo($("#qunit-fixture"));
-            popup = new Popup(div, { anchor: anchor });
-
-            popup.open();
-            popup.close();
-
-            assert.equal(anchor.hasClass("k-state-border-down"), false);
-            assert.equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), false);
-            assert.equal(div.hasClass("k-state-border-up"), false);
-        });
-
         it("calculate position correctly when content height is 'auto'", function() {
             popup = new Popup(div, { anchor: anchor });
             popup.open();
