@@ -12,21 +12,6 @@ Represents the Kendo UI TextArea widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
-### cols `Number` *(default: 20)*
-
-The visible width of the text control, in average character widths.
-
-#### Example - specify width
-
-    <textarea id="description"></textarea>
-    <script>
-        $("#description").kendoTextArea({
-            rows:20,
-            cols:30,
-            resizable: "vertical"
-        })
-    </script>
-
 ### enable `Boolean` *(default: true)*
 
 If set to `false`, the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.
@@ -37,7 +22,6 @@ If set to `false`, the widget will be disabled and will not allow user input. Th
     <script>
         $("#description").kendoTextArea({
             rows:20,
-            cols:30,
             enable: false
         })
     </script>

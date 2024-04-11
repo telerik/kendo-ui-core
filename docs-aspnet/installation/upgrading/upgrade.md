@@ -112,7 +112,14 @@ To upgrade your project with the Upgrade Project Wizard, refer to the following 
 
 ## See Also
 
+* [Upgrade Troubleshooting]({% slug upgrade_aspnetcore_troubleshooting %})
 * [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 
 {% endif %}
+
+
+## See Also
+
+* [Upgrade Troubleshooting]({% slug upgrade_aspnetcore_troubleshooting %})
+* [Telerik UI for ASP.NET Core Download and Installation]({% slug downloadinstall_aspnetcore %})
