@@ -16,7 +16,7 @@
         }
 
         function clearColor(colorpicker) {
-            colorpicker._selector.element.find(".k-coloreditor-reset").trigger("click");
+            colorpicker._selector.element.find(".k-button[data-command]").trigger("click");
         }
 
         it("clear button removes selected color", function() {

@@ -534,7 +534,7 @@ import "../kendo.icons.js";
                 contrastRatioTemplate = kendo.template(({ messages, ratio }) =>
                                             '<div class="k-contrast-ratio">' +
                                                 `<span class="k-contrast-ratio-text">${encode(messages.contrastRatio)} ${encode(kendo.toString(ratio, "n2"))}</span>` +
-                                                '<span class="k-contrast-validation k-text-success">' +
+                                                '<span class="k-contrast-validation !k-text-success">' +
                                                     (ratio > 4.5 ?  kendo.ui.icon("check") : '') +
                                                     (ratio > 7 ?  kendo.ui.icon("check") : '') +
                                             '</span></div>'),
@@ -542,9 +542,9 @@ import "../kendo.icons.js";
                                             '<div>' +
                                                 `<span>${encode(level)}: ${encode(limit)} </span>` +
                                                 (ratio > limit ?
-                                                `<span class="k-contrast-validation k-text-success">${encode(messages.pass)} ${kendo.ui.icon("check")}</span>`
+                                                `<span class="k-contrast-validation !k-text-success">${encode(messages.pass)} ${kendo.ui.icon("check")}</span>`
                                                 :
-                                                `<span class="k-contrast-validation k-text-error">${encode(messages.fail)} ${kendo.ui.icon("x")}</span>`) +
+                                                `<span class="k-contrast-validation !k-text-error">${encode(messages.fail)} ${kendo.ui.icon("x")}</span>`) +
                                             '</div>'),
                 output = "";
 

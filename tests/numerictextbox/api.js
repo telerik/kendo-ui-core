@@ -628,7 +628,6 @@
             });
 
             assert.equal(textbox._arrowsWrap.is(":visible"), false);
-            assert.equal(textbox.wrapper.hasClass("k-expand-padding"), true);
         });
 
         it("floating numbers should be calculated correctly when using spinners", function() {

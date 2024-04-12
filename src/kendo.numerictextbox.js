@@ -272,7 +272,6 @@ var __meta__ = {
             var that = this;
             Widget.fn.setOptions.call(that, options);
 
-            that.wrapper.toggleClass("k-expand-padding", !that.options.spinners);
             that._text.prop("placeholder", that.options.placeholder);
             that._placeholder(that.options.placeholder);
             that.element.attr({
@@ -429,7 +428,6 @@ var __meta__ = {
 
             if (!spinners) {
                 arrows.parent().toggle(spinners);
-                that.wrapper.addClass("k-expand-padding");
             }
 
             that._upArrow = arrows.eq(0);

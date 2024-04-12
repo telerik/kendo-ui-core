@@ -133,7 +133,7 @@ import "../kendo.html.button.js";
 
             that.wrapper
                 .on(KEYDOWN_NS, bind(that._keydown, that))
-                .on(CLICK_NS, ".k-coloreditor-reset", function () {
+                .on(CLICK_NS, ".k-button[data-command]", function () {
                     that._clearColor = true;
                     that._updateUI(null);
                     that._view.value(null);
@@ -309,7 +309,7 @@ import "../kendo.html.button.js";
                         '<div class="k-spacer"></div>' +
                         '<div class="k-coloreditor-header-actions k-hstack">' +
                             (options.clearButton ?
-                            html.renderButton(`<button class="k-coloreditor-reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "droplet-slash" }, buttonOptions))
+                            html.renderButton(`<button data-command="reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "droplet-slash" }, buttonOptions))
                             : '') +
                             (options.preview ?
                             '<div class="k-coloreditor-preview k-vstack">' +

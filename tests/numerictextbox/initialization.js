@@ -145,7 +145,6 @@
             });
 
             assert.isOk(!textbox._upArrow.parent().is(":visible"));
-            assert.isOk(textbox.wrapper.hasClass("k-expand-padding"));
         });
 
         it("NumericTextBox gets the placeholder value from the element", function() {
