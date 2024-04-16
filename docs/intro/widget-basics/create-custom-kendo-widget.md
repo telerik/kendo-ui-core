@@ -37,8 +37,13 @@ Kendo UI provides options for you to create your own components by inheriting fr
     	        // The base call to initialize the component.
     	        Widget.fn.init.call(this, element, options);
 
+                // Add styling classes only for the updated components 
+                //$(element).parent().addClass("k-input-solid k-input-md k-rounded-md");
+
     	    }
     	});
+
+>Some components received new rendering improving their style options. This requires adding the styling classes for these components in the `init` function. [Here is a list](https://docs.telerik.com/kendo-ui/styles-and-layout/components-rendering-overview#updated-components) of the updated components.
 
 1. If you are extending a component, the call to the base is what translates your component from declarative initialization or the standard imperative initialization, and merges all the base options and custom options. Declare those options right under the `init` statement. Anything that you declare in the `options` object will be available for the user to pass as either a configuration value or as a `data` attribute.
 

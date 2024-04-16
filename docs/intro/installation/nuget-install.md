@@ -86,6 +86,8 @@ Regardless of the package installation approach you choose, after the installati
 
 ![Kendo UI for jQuery Folder Structure](../../images/kendo-folder-structure.png)
 
+> The installation approach with the NuGet works only with .NET MVC projects that have the `Content` and `Scripts` folders. In a .NET Core(and newer) projects, the resources(scripts and styles) must be copied manually in the `wwwroot` folder.
+
 ### Install with the Package Manager Dialog
 
 To install the Kendo UI for jQuery packages by using the **Package Manager** dialog:  
