@@ -75,18 +75,24 @@ To insert a new table by using the Table Wizard dialog:
 1. Click the **Create Table** tool.
 1. To open the dialog, click the **Table Wizard** button.
 1. Configure the table you want to insert.
-1. Click the **OK** button.
+1. Click the **Confirm** button.
+
+![Telerik UI for {{ site.framework }} Editor Table Wizard](./images/table-wizard.png)
 
 To quickly create a plain table, click the **Create Table** tool and choose the row and column dimensions. 
+
+![Telerik UI for {{ site.framework }} Editor Create Table Tool](./images/table-wizard-open.png)
 
 ## Editing a Table
 
 To modify an existing table or a table cell:
 
 1. Select the table or the table cell to edit.
-1. Click the Table Wizard tool in the toolbar.
+1. Click the **Table Properties** or **Cell Properties** tool in the toolbar.
 
 > You can resize the table rows and columns by dragging the cell border with the mouse and without using the Table Wizard dialog.
+
+![Telerik UI for {{ site.framework }} Editor Table Editing](./images/table-wizard-edit.png)
 
 The table and cell options that are available in the **Table Wizard** are displayed in the following three tabs:
 
@@ -108,6 +114,8 @@ The **Table** tab provides the following options:
 * **Rows**&mdash;Defines the rows of the table.
 * **Cell Spacing**&mdash;Specifies the space between the cells ([`cellspacing` attribute](http://www.w3schools.com/tags/att_table_cellspacing.asp)).
 * **Cell Padding**&mdash;Specifies the padding in the cells ([`cellpadding` attribute](http://www.w3schools.com/tags/att_table_cellpadding.asp)).
+* **Independent Cell Paddings** (available as of the `2024 Q2` release)&mdash;Specifies individual padding in the cells for `top`, `right`, `bottom` and `left`.
+![Independent Table Paddings](./images/cell-paddings.png)
 * **Alignment**&mdash;Specifies the text alignment in the cells.
 * **Background**&mdash;Specifies the background color of the table.
 * **CSS Class**&mdash;Defines the class names for the table element (white space-separated).
@@ -125,6 +133,8 @@ The **Cell** tab provides the following options:
 * **Height**&mdash;Changes the height of the cell or cells (in pixels, em, or percent).
 * **Cell Margin**&mdash;Defines the margin of the cell or cells.
 * **Cell Padding**&mdash;Defines the padding of the cell or cells.
+* **Independent Cell Paddings** (available as of the `2024 Q2` release)&mdash;Specifies individual padding in the cells for `top`, `right`, `bottom` and `left`.
+![Independent Table Paddings](./images/cell-paddings.png)
 * **Alignment**&mdash;Specifies the text alignment of the cell or cells.
 * **Background**&mdash;Specifies the background color of the cell or cells.
 * **CSS Class**&mdash;Defines class names for the cells (white space-separated).
