@@ -32,7 +32,7 @@ To use the **Convert Project Wizard**, install the {{ site.product }} [Visual St
 
 To start the wizard, use either the **Extensions** menu in VS or the context menu in the **Solution Explorer**:
 
-- You can start the **Convert Project Wizard** from the Extensions menu at the top. In Visual Studio 2019, click **Extensions** > **Telerik** > **{{ site.product }}** > **Convert to Telerik Application**.
+- You can start the **Convert Project Wizard** from the Extensions menu at the top. In Visual Studio's Solution Explorer select the project, not the solution, click **Extensions** > **Telerik** > **{{ site.product }}** > **Convert to Telerik Application**.
 
 {% if site.core %}
 ![{{ site.product_short }} Convert Wizard in VS from Extensions](../vs-integration/images/select-wizard.png)

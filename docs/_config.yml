@@ -562,6 +562,8 @@ navigation:
         title: "Gantt"
     "*imageeditor":
         title: "Image Editor"
+    "*propertygrid":
+        title: "PropertyGrid"
     "*pivotgrid":
         title: "PivotGrid"
     "*pivotgridv2":
@@ -1884,6 +1886,12 @@ defaults:
     values:
         component: "pivotgridv2"
 
+-
+    scope:
+        path: "controls/propertygrid"
+    values:
+        component: "propertygrid"
+
 
 -
     scope:
@@ -2107,6 +2115,7 @@ intro_columns:
       "Pager": "overview_kendoui_pager_widget"
       "PivotGrid": "overview_kendoui_pivotgrid_widget"
       "PivotGridV2": "overview_kendoui_pivotgridv2_widget"
+      "PropertyGrid": "overview_kendoui_propertygrid"
       "Spreadsheet": "overview_spreadsheet_widget"
       "TaskBoard": "overview_kendoui_taskboard_widget"
       "TreeList": "overview_kendoui_treelist_widget"
