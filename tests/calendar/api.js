@@ -17,7 +17,7 @@ it("navigate method render view using default values", function() {
         date = new Date(),
         firstVisibleDate = kendo.calendar.firstVisibleDay(date);
 
-    assert.equal(cal.element.find(".k-content").find("a:first").html(), firstVisibleDate.getDate());
+    assert.equal(cal.element.find(".k-calendar-table").find("span:first").html(), firstVisibleDate.getDate());
 });
 
 it("navigate method render view depending on given date and view", function() {
@@ -26,7 +26,7 @@ it("navigate method render view depending on given date and view", function() {
 
     cal.navigate(date, 2);
 
-    assert.equal(cal.element.find(".k-content").find("a:first").html(), "1999");
+    assert.equal(cal.element.find(".k-calendar-table").find("span:first").html(), "2000");
 });
 
 it("navigate method should disable._prevArrow if cannot navigate to past", function() {
@@ -392,7 +392,7 @@ it("value method should update selection of the view", function() {
 
         cal.value(value);
 
-    assert.isOk(cal.element.find(".k-content td").eq(19).hasClass("k-selected"));
+    assert.isOk(cal.element.find(".k-calendar-table td").eq(19).hasClass("k-selected"));
 });
 
 it("value should clear _value if null", function() {
@@ -402,7 +402,7 @@ it("value should clear _value if null", function() {
     cal.value(null);
 
     assert.equal(cal.value(), null);
-    assert.equal(cal.element.find(".k-content td:has(k-selected)").length, 0);
+    assert.equal(cal.element.find(".k-calendar-table td:has(k-selected)").length, 0);
 });
 
 it("value should not accept value lower than min", function() {
@@ -649,8 +649,8 @@ it("today link should be disabled when min() with bigger then today", function()
     stub(cal, "navigate");
     cal._today.click();
 
-    assert.isOk(!div.find(".k-footer").find(".k-button-md").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-button-md").hasClass("k-disabled"));
+    assert.isOk(!div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-nav-today"));
+    assert.isOk(div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -664,8 +664,8 @@ it("today link should be disabled when max() with less then today", function() {
     stub(cal, "navigate");
     cal._today.click();
 
-    assert.isOk(!div.find(".k-footer").find(".k-button-md").hasClass("k-nav-today"));
-    assert.isOk(div.find(".k-footer").find(".k-button-md").hasClass("k-disabled"));
+    assert.isOk(!div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-nav-today"));
+    assert.isOk(div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-disabled"));
     assert.equal(cal.calls("navigate"), 0);
 });
 
@@ -763,7 +763,7 @@ it("setOptions updates footer", function() {
         footer: false
     });
 
-    assert.isOk(!div.find(".k-footer").is(":visible"));
+    assert.isOk(!div.find(".k-calendar-footer").is(":visible"));
 });
 
 it("setOptions preserves options.dates", function() {
@@ -871,7 +871,7 @@ it("today link is disabled if the respecitve date is disabled", function() {
         disableDates: ["mo", "tu", "we", "th", "fr", "sa", "su"]
     });
     calendar.max(max);
-    assert.equal($(".k-footer>button").hasClass("k-disabled"), true);
+    assert.equal($(".k-calendar-footer>button").hasClass("k-disabled"), true);
 });
 
 it("_current is not set if date is disabled", function() {

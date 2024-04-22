@@ -13,7 +13,7 @@
                 '        <ul>' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -30,7 +30,7 @@
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -47,7 +47,7 @@
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -83,7 +83,7 @@
                 '    </li>' +
                 '    <li class="k-panelbar-item"><span class="k-link k-header">Tasks<span' +
                 '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">Shared Tasks</span>' +
@@ -94,9 +94,9 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-panelbar-item k-active"><span class="k-link k-header k-selected">Notes<span' +
+                '    <li class="k-panelbar-item k-expanded"><span class="k-link k-header k-selected">Notes<span' +
                 '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '        <ul class="k-group" style="display: block;">' +
+                '        <ul class="k-panelbar-group" style="display: block;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Notes</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">Notes List</span>' +
@@ -109,10 +109,10 @@
                 '    </li>' +
                 '    <li class="k-panelbar-item"><span class="k-link k-header">Folders List<span' +
                 '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -129,7 +129,7 @@
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -146,7 +146,7 @@
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -188,7 +188,7 @@
 
             item2.find('> .k-link').click();
 
-            assert.equal(item.find('.k-group').css("display"), "block");
+            assert.equal(item.find('.k-panelbar-group').css("display"), "block");
         });
 
         it('clicking item should collapse other and fire collapse on it', function() {
@@ -203,7 +203,7 @@
 
             item2.find('> .k-link').trigger('click');
 
-            assert.equal(item.find('.k-group').css("display"), "none");
+            assert.equal(item.find('.k-panelbar-group').css("display"), "none");
             assert.equal(collapseItem, item[0]);
         });
 
@@ -213,31 +213,31 @@
             item.find('> .k-link').trigger('click');
             item.find('> .k-link').trigger('click');
 
-            assert.equal(item.find('.k-group').css("display"), "block");
+            assert.equal(item.find('.k-panelbar-group').css("display"), "block");
         });
 
         it('clicking subItem should not collapse headerItem', function() {
             var item = getRootItem(0);
             item.find('> .k-link').trigger('click');
-            var subItem = item.find('> .k-group').children()[0];
+            var subItem = item.find('> .k-panelbar-group').children()[0];
 
             $(subItem).find('> .k-link').trigger('click');
 
-            assert.equal(item.find('.k-group').css("display"), "block");
+            assert.equal(item.find('.k-panelbar-group').css("display"), "block");
         });
 
         it('clicking sub item should collapse siblings', function() {
             var item = getRootItem(4);
             panelbar.expand(item, false);
 
-            var subItem1 = item.find('> .k-panel').children().eq(0);
+            var subItem1 = item.find('> .k-panelbar-group').children().eq(0);
             var subItem2 = subItem1.next();
 
             subItem1.find('> .k-link').trigger('click');
             subItem2.find('> .k-link').trigger('click');
 
-            assert.equal(subItem1.find('> .k-panel').css("display"), "none");
-            assert.equal(subItem2.find('> .k-panel').css("display"), "block");
+            assert.equal(subItem1.find('> .k-panelbar-group').css("display"), "none");
+            assert.equal(subItem2.find('> .k-panelbar-group').css("display"), "block");
         });
     });
 }());

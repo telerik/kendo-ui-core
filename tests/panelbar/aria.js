@@ -77,18 +77,18 @@
             assert.equal(items.eq(1).attr("role"), "treeitem");
         });
 
-        it("PanelBar adds role group to the k-group elements", function() {
+        it("PanelBar adds role group to the k-panelbar-group elements", function() {
             addItems(2);
             addItems(2, ul.find(".k-panelbar-item:first"));
 
-            var items = ul.find(".k-group");
+            var items = ul.find(".k-panelbar-group");
             assert.equal(items.eq(0).attr("role"), "group");
         });
 
         it("PanelBar adds role group during init", function() {
             var panel = $("<ul id='test'><li>Test<ul><li>Inner item</li></ul></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            var items = panel.find(".k-group");
+            var items = panel.find(".k-panelbar-group");
             assert.equal(items.eq(0).attr("role"), "group");
         });
 
@@ -212,19 +212,19 @@
 
             addItems(2, last);
 
-            assert.equal(last.find(".k-group").attr("aria-hidden"), "true");
+            assert.equal(last.find(".k-panelbar-group").attr("aria-hidden"), "true");
         });
 
-        it("PanelBar adds aria-hidden to k-group on init", function() {
+        it("PanelBar adds aria-hidden to k-panelbar-group on init", function() {
             var panel = $("<ul id='test2'><li>Test<ul><li>Inner</li></ul></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            assert.equal(panel.find(".k-group").attr("aria-hidden"), "true");
+            assert.equal(panel.find(".k-panelbar-group").attr("aria-hidden"), "true");
         });
 
         it("PanelBar adds aria-hidden to content on init", function() {
             var panel = $("<ul id='test2'><li>Test<div>Inner</div></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
-            assert.equal(panel.find(".k-content").attr("aria-hidden"), "true");
+            assert.equal(panel.find(".k-panelbar-content").attr("aria-hidden"), "true");
         });
 
         it("PanelBar adds aria-disabled attr", function() {

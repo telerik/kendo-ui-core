@@ -89,7 +89,7 @@ it("click on cell should persist _viewedValue", function() {
     instance.navigateUp(); //year view
     instance.navigateUp(); //decade view
 
-    div.find("tbody").find("td:not(.k-other-month):first").click(); //click "2000" cell
+    div.find("tbody").find("td:eq(1)").click(); //click "2000" cell
     div.find("tbody").find("td:last").prev().click(); //click "Nov" cell
 
     assert.deepEqual(instance.current(), date);

@@ -213,11 +213,11 @@
         it("PanelBar selects prev nested and visible item", function() {
             addItems(2);
             addItems(2, ul.children(":first"));
-            addItems(2, ul.children(":first").children(".k-group").children(":last"));
+            addItems(2, ul.children(":first").children(".k-panelbar-group").children(":last"));
 
             ul.focus();
             panelbar.expand(ul.children(":first"));
-            panelbar.expand(ul.children(":first").children(".k-group").children(":last"));
+            panelbar.expand(ul.children(":first").children(".k-panelbar-group").children(":last"));
             panelbar._current(ul.children(":last"));
 
             ul.trigger({
@@ -226,8 +226,8 @@
             });
 
             assert.isOk(ul.children(":first")
-                .children(".k-group").children(":last")
-                .children(".k-group").children(":last")
+                .children(".k-panelbar-group").children(":last")
+                .children(".k-panelbar-group").children(":last")
                 .children("span.k-link")
                 .hasClass("k-focus"));
         });
@@ -261,7 +261,7 @@
                 keyCode: keys.UP
             });
 
-            assert.isOk(ul.children(":last").children(".k-group").children(":last").children(".k-link").hasClass("k-focus"));
+            assert.isOk(ul.children(":last").children(".k-panelbar-group").children(":last").children(".k-link").hasClass("k-focus"));
         });
 
         it("PanelBar expands current focused item on Enter", function() {
@@ -276,7 +276,7 @@
                 keyCode: keys.ENTER
             });
 
-            assert.isOk(ul.children(":first").children(".k-group:visible")[0]);
+            assert.isOk(ul.children(":first").children(".k-panelbar-group:visible")[0]);
         });
 
         it("PanelBar selects item on Enter", function() {
@@ -311,7 +311,7 @@
                 keyCode: keys.ENTER
             });
 
-            assert.isOk(!ul.children(":first").children(".k-group").is(":visible"));
+            assert.isOk(!ul.children(":first").children(".k-panelbar-group").is(":visible"));
         });
 
         it("PanelBar makes clicked element focused", function() {

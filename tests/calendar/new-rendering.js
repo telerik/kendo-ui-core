@@ -37,7 +37,7 @@
         it("calendar header should contain three anchor tags when componentType is set to classic", function() {
             var cal = new Calendar(div);
 
-            assert.equal(cal.element.find(".k-header a").length, 3);
+            assert.equal(cal.element.find(".k-header span.k-button").length, 3);
         });
 
         it("calendar header should contain today navigation link", function() {
@@ -53,7 +53,7 @@
                 componentType: 'modern'
             });
 
-            assert.equal(cal.element.find(".k-footer").length, 0);
+            assert.equal(cal.element.find(".k-calendar-footer").length, 0);
         });
 
         it("calendar should not call _footer when componentType is set to modern and setOptions is called", function() {
@@ -76,14 +76,6 @@
             var cal = new Calendar(div);
 
             assert.equal(cal.element.find(".k-calendar-monthview").length, 1);
-        });
-
-        it("calendar table element should contain k-calendar-content class when componentType is set to modern", function() {
-            var cal = new Calendar(div, {
-                componentType: 'modern'
-            });
-
-            assert.equal(cal.element.find(".k-calendar-content").length, 1);
         });
 
         it("calendar table element should not contain k-calendar-content class when componentType is set to classic", function() {

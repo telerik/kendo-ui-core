@@ -105,7 +105,7 @@
                 ]
             });
 
-            var dataItem = panelbarObject.dataItem(panelbar.find(".k-group").find(".k-panelbar-item:last"));
+            var dataItem = panelbarObject.dataItem(panelbar.find(".k-panelbar-group").find(".k-panelbar-item:last"));
 
             panelbarObject.dataSource.remove(dataItem);
 
@@ -501,7 +501,7 @@
 
             foo.append(new ExtendedNode({ text: "bar" }));
 
-            assert.isOk(!panelbar.find(".k-panelbar-item .k-group").is(":visible"));
+            assert.isOk(!panelbar.find(".k-panelbar-item .k-panelbar-group").is(":visible"));
         });
 
         it("populating hierarchical datasource before initialization", function() {
@@ -592,11 +592,11 @@
 
             panelbarObject.collapse(".k-panelbar-item:first");
 
-            panelbar.find(".k-panelbar-item .k-group").attr("marked", "marked");
+            panelbar.find(".k-panelbar-item .k-panelbar-group").attr("marked", "marked");
 
             panelbarObject.expand(".k-panelbar-item:first");
 
-            assert.isOk(!panelbar.find(".k-panelbar-item:first .k-group").attr("marked"));
+            assert.isOk(!panelbar.find(".k-panelbar-item:first .k-panelbar-group").attr("marked"));
         });
 
         it("collapse method does not fetch data from server", function() {

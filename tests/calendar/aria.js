@@ -83,7 +83,7 @@ it("Calendar adds gridcell to YEAR view's cells", function() {
 
 it("Calendar adds aria-label role to YEAR view's cells links", function() {
     instance.navigateUp();
-    var cells = div.find("table td a[aria-label]");
+    var cells = div.find("table td span[aria-label]");
     var names = kendo.culture().calendar.months.names;
 
     assert.equal(cells.length, 12);

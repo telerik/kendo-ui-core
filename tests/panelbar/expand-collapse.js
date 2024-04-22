@@ -10,7 +10,7 @@
                 '<ul id="panelbar">' +
                 '    <li class="k-panelbar-item"><span class="k-link k-header">Mail<span' +
                 '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
-                '        <ul style="display: none;" class="k-group">' +
+                '        <ul style="display: none;" class="k-panelbar-group">' +
                 '            <li class="k-panelbar-item"><span class="k-link">Personal Folders</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">Deleted Items</span>' +
@@ -29,7 +29,7 @@
                 '    </li>' +
                 '    <li class="k-panelbar-item k-disabled"><span class="k-link k-header">Contacts<span' +
                 '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Contacts</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">Address Cards</span>' +
@@ -42,7 +42,7 @@
                 '    </li>' +
                 '    <li class="k-panelbar-item"><span class="k-link k-header">Tasks<span' +
                 '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">Shared Tasks</span>' +
@@ -53,9 +53,9 @@
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-panelbar-item k-active"><span class="k-link k-header k-selected">Notes<span' +
+                '    <li class="k-panelbar-item k-expanded"><span class="k-link k-header k-selected">Notes<span' +
                 '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '        <ul class="k-group" style="display: block;">' +
+                '        <ul class="k-panelbar-group" style="display: block;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Notes</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">Notes List</span>' +
@@ -68,12 +68,12 @@
                 '    </li>' +
                 '    <li class="k-panelbar-item"><span class="k-link k-header">Folders List<span' +
                 '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Client.Net</span>' +
                 '            </li>' +
                 '            <li class="k-panelbar-item"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
-                '                <ul style="display: none;" class="k-group">' +
+                '                <ul style="display: none;" class="k-panelbar-group">' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +
                 '                    <li class="k-panelbar-item"><a href="#"' +
@@ -116,7 +116,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.equal(item.find(".k-group").css("display"), "none");
+            assert.equal(item.find(".k-panelbar-group").css("display"), "none");
         });
 
         it("clicking expanded items should toggle arrow", function() {
@@ -132,7 +132,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.equal(item.find(".k-group").css("display"), "block");
+            assert.equal(item.find(".k-panelbar-group").css("display"), "block");
         });
 
         it("clicking collapsed items should toggle arrow", function() {
@@ -148,7 +148,7 @@
 
             item.find("> .k-link").trigger("click");
 
-            assert.equal(item.find(".k-group .k-group").css("display"), "none");
+            assert.equal(item.find(".k-panelbar-group .k-panelbar-group").css("display"), "none");
         });
 
         it("clicking child group items should not collapse root group", function() {
@@ -158,7 +158,7 @@
 
             item.find(".k-panelbar-item > .k-link").trigger("click");
 
-            assert.equal(item.find(".k-group").css("display"), "block");
+            assert.equal(item.find(".k-panelbar-group").css("display"), "block");
         });
 
         it("clicking arrows toggles child groups", function() {
@@ -166,7 +166,7 @@
 
             item.find("> .k-link > .k-icon,> .k-link > .k-svg-icon").trigger("click");
 
-            assert.equal(item.find(".k-group").css("display"), "none");
+            assert.equal(item.find(".k-panelbar-group").css("display"), "none");
         });
 
         it("expanded items should have k-expanded class", function() {

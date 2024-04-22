@@ -91,7 +91,7 @@
 
             item.trigger("click");
 
-            assert.equal(item.parent().find(".k-content").css("display"), "none");
+            assert.equal(item.parent().find(".k-panelbar-content").css("display"), "none");
         });
 
         it("clicking collapsed content items should toggle arrow", function(done) {
@@ -118,7 +118,7 @@
             var item = getRootItem(2);
 
             panelbar.bind("contentLoad", function() {
-                assert.isOk(item.parent().hasClass("k-active"));
+                assert.isOk(item.parent().hasClass("k-expanded"));
                 panelbar.unbind("contentLoad");
                 done();
             });
@@ -135,7 +135,7 @@
                     '    <li><a>Pure ASP.NET MVC components</a>' +
                     '       <div></div>' +
                     '   </li>' +
-                    '   <li class="k-active"><a>Completely Open Source</a>' +
+                    '   <li class="k-expanded"><a>Completely Open Source</a>' +
                     '       <div></div>' +
                     '   </li>' +
                     '</ul>'
@@ -153,7 +153,7 @@
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                assert.equal(item.parent().find(".k-content").css("display"), "flow-root");
+                assert.equal(item.parent().find(".k-panelbar-content").css("display"), "flow-root");
                 panelbar.unbind("contentLoad");
                 done();
             });

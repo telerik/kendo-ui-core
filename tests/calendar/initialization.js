@@ -55,7 +55,7 @@ it("render the header", function() {
 it("render table after header", function() {
     var cal = new Calendar(div);
 
-    assert.isOk(cal.element.find(".k-content")[0]);
+    assert.isOk(cal.element.find(".k-calendar-table")[0]);
 });
 
 it("render month view when init", function() {
@@ -65,13 +65,13 @@ it("render month view when init", function() {
     assert.equal(div.find(".k-calendar-nav-fast").find(".k-button-text").html(), "November 2011");
     assert.isOk(!!div.find(".k-calendar-nav-fast").attr("title"));
     assert.equal(div.find(".k-calendar-nav-fast").attr("title"), cal.options.messages.navigateTo + cal.options.messages.parentViews.month);
-    assert.equal(div.find(".k-content").find("a").length, 42);
+    assert.equal(div.find(".k-calendar-table").find("span").length, 42);
 });
 
 it("render year view when init", function() {
     var date = new Date(2011, 10, 10);
     var cal = new Calendar(div, { value: date, start: "year" });
-    var anchors = cal.element.find(".k-content").find("a");
+    var anchors = cal.element.find(".k-calendar-table").find("span");
     var january = kendo.culture().calendar.months.namesAbbr[0];
 
     assert.equal(div.find(".k-calendar-nav-fast").find(".k-button-text").html(), "2011");
@@ -84,24 +84,24 @@ it("render year view when init", function() {
 it("render decade view when init", function() {
     var date = new Date(2011, 10, 10),
     cal = new Calendar(div, { start: "decade", value: date }),
-    anchors = cal.element.find(".k-content").find("a");
+    anchors = cal.element.find(".k-calendar-table").find("span");
 
     assert.equal(div.find(".k-calendar-nav-fast").find(".k-button-text").html(), "2010-2019");
     assert.isOk(!!div.find(".k-calendar-nav-fast").attr("title"));
     assert.equal(div.find(".k-calendar-nav-fast").attr("title"), cal.options.messages.navigateTo + cal.options.messages.parentViews.decade);
-    assert.equal(anchors.length, 12);
-    assert.equal(anchors.eq(0).html(), "2009");
+    assert.equal(anchors.length, 10);
+    assert.equal(anchors.eq(0).html(), "2010");
 });
 
 it("render century view when init", function() {
     var date = new Date(2011, 10, 10),
     cal = new Calendar(div, { start: "century", value: date, max: new Date(2200, 10, 10) }),
-    anchors = cal.element.find(".k-content").find("a");
+    anchors = cal.element.find(".k-calendar-table").find("span");
 
     assert.equal(div.find(".k-calendar-nav-fast").find(".k-button-text").html(), "2000-2099");
     assert.isOk(!div.find(".k-calendar-nav-fast").attr("title"));
-    assert.equal(anchors.length, 12);
-    assert.equal(anchors.eq(0).html(), "1990 - 1999");
+    assert.equal(anchors.length, 10);
+    assert.equal(anchors.eq(0).html(), "2000 - 2009");
 });
 
 it("calendar should wire TD click event", function() {
@@ -168,7 +168,7 @@ it("today link should have k-nav-today", function() {
 
     stub(cal, "navigate");
 
-    var link = div.find(".k-footer").find(".k-button-md");
+    var link = div.find(".k-calendar-footer").find(".k-button-md");
 
     link.click();
 
@@ -185,7 +185,7 @@ it("today link should not have k-nav-today", function() {
 
     stub(cal, "_todayClick");
 
-    var link = div.find(".k-footer").find(".k-button-md");
+    var link = div.find(".k-calendar-footer").find(".k-button-md");
     link.click();
 
     assert.isOk(!link.hasClass("k-calendar-nav-today"));
@@ -201,7 +201,7 @@ it("today link sets today not now", function() {
 
     stub(cal, "_todayClick");
 
-    div.find(".k-footer").find(".k-button-md").click();
+    div.find(".k-calendar-footer").find(".k-button-md").click();
 
     assert.equal(+cal.value(), +new Date(today.getFullYear(), today.getMonth(), today.getDate()));
 });
@@ -219,7 +219,7 @@ it("_footer(false) should hide the footer", function() {
 
     cal._footer(false);
 
-    assert.isOk(!cal.element.find(".k-footer").is("visible"));
+    assert.isOk(!cal.element.find(".k-calendar-footer").is("visible"));
 });
 
 it("footer:true should render footer", function() {
@@ -248,7 +248,7 @@ it("footer honours culture option", function() {
 
     var culture = kendo.getCulture("bg-BG");
     var format = culture.calendars.standard.patterns["d"];
-    var link = div.find(".k-footer").find(".k-button-md");
+    var link = div.find(".k-calendar-footer").find(".k-button-md");
 
     assert.equal(link.children().first().html(), kendo.toString(new Date(), "D", culture));
     assert.equal(link.attr("title"), kendo.toString(new Date(), "D", culture));
@@ -374,7 +374,7 @@ it("Century view support dates less then 200 year", function() {
     prevButton.click();
 
     // first decade should be 100 - 1009
-    var firstDecade = cal.element.find(".k-content td:has(.k-link:not(.k-disabled)):not(.k-out-of-range) .k-link");
+    var firstDecade = cal.element.find(".k-calendar-table td:has(.k-link:not(.k-disabled)):not(.k-empty) .k-link");
     assert.equal(firstDecade.html(), "100 - 109");
 });
 

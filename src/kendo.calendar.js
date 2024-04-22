@@ -26,9 +26,9 @@ var __meta__ = {
         getCulture = kendo.getCulture,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template((data) => `<td class="${data.cssClass}" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-${data.ns}value="${data.dateString}">${data.value}</a></td>`),
-        emptyCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-out-of-range"><a class="k-link"></a></td>'),
-        otherMonthCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-out-of-range">&nbsp;</td>'),
+        cellTemplate = template((data) => `<td class="${data.cssClass}" role="gridcell"><span tabindex="-1" class="k-link" data-href="#" data-${data.ns}value="${data.dateString}">${data.value}</span></td>`),
+        emptyCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-empty"></td>'),
+        otherMonthCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-empty">&nbsp;</td>'),
         weekNumberTemplate = template((data) => `<td class="k-calendar-td k-alt">${data.weekNumber}</td>`),
         outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
@@ -47,10 +47,10 @@ var __meta__ = {
         DISABLED = "k-disabled",
         FOCUSED = "k-focus",
         OTHERMONTH = "k-other-month",
-        OUTOFRANGE = "k-out-of-range",
+        EMPTYCELL = "k-empty",
         TODAY = "k-calendar-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
-        CELLSELECTORVALID = "td:has(.k-link):not(." + DISABLED + "):not(." + OUTOFRANGE + ")",
+        CELLSELECTORVALID = "td:has(.k-link):not(." + DISABLED + "):not(." + EMPTYCELL + ")",
         WEEKCOLUMNSELECTOR = "td:not(:has(.k-link))",
         SELECTED = "k-selected",
         BLUR = "blur" + ns,
@@ -76,12 +76,12 @@ var __meta__ = {
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size, isRtl }) => `<div class="k-header k-hstack">
-            <a tabindex="-1" href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></a>
-            <a tabindex="-1" href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>
-            <a tabindex="-1" href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</a>
+            <span tabindex="-1" data-href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</span>
         </div>`,
-        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages, isRtl }) => `<div class="k-calendar-header k-hstack">
-            <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-base k-rounded-md">
+        MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages, isRtl }) => `<div class="k-calendar-header">
+            <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
                 <span class="k-button-text"></span>
             </button>
             <span class="k-spacer"></span>
@@ -89,7 +89,7 @@ var __meta__ = {
                 <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
                 </button>
-                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
+                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md" role="link">
                     <span class="k-button-text">${kendo.htmlEncode(messages.today)}</span>
                 </button>
                 <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
@@ -128,14 +128,14 @@ var __meta__ = {
             }
 
             id = element
-                .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
+                .addClass("k-calendar k-calendar-md " + (options.weekNumber ? " k-week-number" : ""))
                 .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
-                .on(KEYDOWN_NS, "table.k-content", that._move.bind(that))
-                .on(CLICK + " touchend", CELLSELECTOR, function(e) {
+                .on(KEYDOWN_NS, "table.k-calendar-table", that._move.bind(that))
+                .on(CLICK + " touchend", CELLSELECTORVALID, function(e) {
                     var link = e.currentTarget.firstChild,
                         value = toDateObject(link);
 
-                    if (link.href.indexOf("#") != -1) {
+                    if ($(link).data("href").indexOf("#") != -1) {
                         e.preventDefault();
                     }
 
@@ -146,7 +146,7 @@ var __meta__ = {
                             that._click($(link));
                     }
                 })
-                .on("mouseup" + ns, "table.k-content, .k-footer", function() {
+                .on("mouseup" + ns, "table.k-calendar-table, .k-calendar-footer", function() {
                     that._focusView(that.options.focusOnNav !== false);
                 })
                 .attr(ID);
@@ -157,7 +157,7 @@ var __meta__ = {
                             last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
                         that.selectable.selectRange(first, last);
                         that.selectable.trigger(CHANGE, { event: e });
-                        that._current = that._value = toDateObject(last.find("a"));
+                        that._current = that._value = toDateObject(last.find("span"));
                         that._setCurrent(that._current);
                 });
             }
@@ -251,7 +251,7 @@ var __meta__ = {
                 },
                 hasFooter: true,
                 linksSelector: ".k-button",
-                contentClasses: "k-calendar-table k-content"
+                contentClasses: "k-calendar-table"
             },
             "modern": {
                 header: {
@@ -259,7 +259,7 @@ var __meta__ = {
                 },
                 hasFooter: false,
                 linksSelector: ".k-button",
-                contentClasses: "k-calendar-table k-content k-calendar-content"
+                contentClasses: "k-calendar-table"
             }
         },
 
@@ -286,7 +286,7 @@ var __meta__ = {
             if (that.options.hasFooter) {
                 that._footer(that.footer);
             } else {
-                that.element.find(".k-footer").hide();
+                that.element.find(".k-calendar-footer").hide();
                 that._toggle();
             }
             that._index = views[that.options.start];
@@ -452,7 +452,6 @@ var __meta__ = {
 
                 that._aria();
 
-                addClassToViewContainer(to, currentView.name);
                 var replace = from && from.data("start") === to.data("start");
                 that._animate({
                     from: from,
@@ -617,7 +616,7 @@ var __meta__ = {
                 //excludes the anchor element
                 inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,span.k-svg-icon.k-svg-i-caret-alt-down,span.k-svg-icon.k-svg-i-caret-alt-up",
                 multiple: selectableOptions.multiple,
-                filter: "table.k-month:eq(0) " + CELLSELECTORVALID,
+                filter: "table.k-calendar-table:eq(0) " + CELLSELECTORVALID,
                 change: that._onSelect.bind(that),
                 relatedTarget: that._onRelatedTarget.bind(that)
             });
@@ -627,7 +626,7 @@ var __meta__ = {
             var that = this;
 
             if (that.selectable.options.multiple && target.is(CELLSELECTORVALID)) {
-                that._current = toDateObject(target.find("a"));
+                that._current = toDateObject(target.find("span"));
                 that._setCurrent(that._current);
             }
 
@@ -643,7 +642,7 @@ var __meta__ = {
                     $(eventArgs.event.currentTarget).addClass("k-selected");
                 }
                 else {
-                    that._click($(eventArgs.event.currentTarget).find("a"));
+                    that._click($(eventArgs.event.currentTarget).find("span"));
                 }
                 return;
             }
@@ -654,7 +653,7 @@ var __meta__ = {
                 }
                 else {
                     that._cellsBySelector(CELLSELECTORVALID).each(function(index, element) {
-                        var value = toDateObject($(element).find("a"));
+                        var value = toDateObject($(element).find("span"));
                         that._deselect(value);
                     });
                     that._addSelectedCellsToArray();
@@ -664,7 +663,7 @@ var __meta__ = {
                 that._rangeSelection(that._cell);
             }
             else if ($(eventArgs.event.currentTarget).is(CELLSELECTOR)) {
-                that.value(toDateObject($(eventArgs.event.currentTarget).find("a")));
+                that.value(toDateObject($(eventArgs.event.currentTarget).find("span")));
             }
             else {
                 that._selectDates = [];
@@ -685,7 +684,7 @@ var __meta__ = {
         //when ctrl key is clicked
         _toggleSelection: function(currentCell) {
             var that = this,
-                date = toDateObject(currentCell.find("a"));
+                date = toDateObject(currentCell.find("span"));
                 if (currentCell.hasClass("k-selected")) {
                     that._selectDates.push(date);
                 }
@@ -697,12 +696,12 @@ var __meta__ = {
         //shift selection
         _rangeSelection: function(toDateCell, startDate) {
             var that = this,
-                fromDate = startDate || toDateObject(that.selectable.value().first().find("a")),
-                toDate = toDateObject(toDateCell.find("a")),
+                fromDate = startDate || toDateObject(that.selectable.value().first().find("span")),
+                toDate = toDateObject(toDateCell.find("span")),
                 daysDifference;
 
             if (that.selectable._lastActive || that._value) {
-                fromDate = that.selectable._lastActive ? toDateObject(that.selectable._lastActive.find("a")) : new Date(+that._value);
+                fromDate = that.selectable._lastActive ? toDateObject(that.selectable._lastActive.find("span")) : new Date(+that._value);
             } else {
                 that.selectable._lastActive = startDate ? that._cellByDate(that._view.toDateString(startDate), CELLSELECTORVALID) : that.selectable.value().first();
             }
@@ -739,8 +738,8 @@ var __meta__ = {
 
         _dateInView: function(date) {
             var that = this,
-                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID).first().find("a")),
-                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID).last().find("a"));
+                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID).first().find("span")),
+                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID).last().find("span"));
 
             return +date <= +lastDateInView && +date >= +firstDateInView;
         },
@@ -755,7 +754,7 @@ var __meta__ = {
                 return !isDisabled(currentValue);
             } else {
                 index = that.wrapper.find("." + FOCUSED).index();
-                cell = that.wrapper.find(".k-content td").eq(index + cellIndex);
+                cell = that.wrapper.find(".k-calendar-table td").eq(index + cellIndex);
                 return cell.is(CELLSELECTORVALID) || !isDisabled(currentValue);
             }
         },
@@ -820,7 +819,7 @@ var __meta__ = {
                   else if ((key == keys.ENTER || key == keys.SPACEBAR) && that._isMultipleSelection()) {
                     that._keyboardToggleSelection(e);
 
-                    var focusedDate = toDateObject($(that._cell[0]).find("a"));
+                    var focusedDate = toDateObject($(that._cell[0]).find("span"));
                     that._setCurrent(focusedDate);
 
                 }
@@ -849,7 +848,7 @@ var __meta__ = {
             } else {
                 if (key == keys.ENTER || key == keys.SPACEBAR) {
                     if (view.name == "month" && that._isMultipleSelection()) {
-                        that.value(toDateObject($(that._cell.find("a"))));
+                        that.value(toDateObject($(that._cell.find("span"))));
                         that.selectable._lastActive = $(that._cell[0]);
                         that.trigger(CHANGE);
                     }
@@ -910,7 +909,7 @@ var __meta__ = {
             if (!that._dateInView(currentValue)) {
                 that._selectDates = [];
 
-                fromDate = that.selectable._lastActive ? toDateObject(that.selectable._lastActive.find("a")) : currentValue;
+                fromDate = that.selectable._lastActive ? toDateObject(that.selectable._lastActive.find("span")) : currentValue;
                 daysDifference = daysBetweenTwoDates(fromDate, new Date(+currentValue));
 
                 addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);
@@ -921,7 +920,7 @@ var __meta__ = {
                 that.trigger(CHANGE);
                 return;
             }
-            that.selectable.options.filter = that.wrapper.find("table").length > 1 && +currentValue > +that._current ? "table.k-month:eq(1) " + CELLSELECTORVALID : "table.k-month:eq(0) " + CELLSELECTORVALID;
+            that.selectable.options.filter = that.wrapper.find("table").length > 1 && +currentValue > +that._current ? "table.k-calendar-table:eq(1) " + CELLSELECTORVALID : "table.k-calendar-table:eq(0) " + CELLSELECTORVALID;
             that._setCurrent(currentValue);
             that._current = currentValue;
 
@@ -929,7 +928,7 @@ var __meta__ = {
 
             that.trigger(CHANGE);
 
-            that.selectable.options.filter = "table.k-month:eq(0) " + CELLSELECTORVALID;
+            that.selectable.options.filter = "table.k-calendar-table:eq(0) " + CELLSELECTORVALID;
         },
 
         _keyboardToggleSelection: function(event) {
@@ -1172,7 +1171,7 @@ var __meta__ = {
             var viewWrapper = element.children(".k-calendar-view");
 
             if (!viewWrapper[0]) {
-                viewWrapper = $("<div class='k-calendar-view' />").insertAfter(element.find(HEADERSELECTOR));
+                viewWrapper = $("<div class='k-calendar-view k-align-items-start k-justify-content-center k-hstack' />").insertAfter(element.find(HEADERSELECTOR));
             }
         },
 
@@ -1180,7 +1179,7 @@ var __meta__ = {
             var that = this,
             today = getToday(),
             element = that.element,
-            footer = element.find(".k-footer");
+            footer = element.find(".k-calendar-footer");
 
             if (!template) {
                 that._toggle(false);
@@ -1189,8 +1188,8 @@ var __meta__ = {
             }
 
             if (!footer[0]) {
-                footer = $(`<div class="k-footer">
-                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-md k-button-flat k-button-flat-primary k-rounded-md">
+                footer = $(`<div class="k-calendar-footer">
+                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-md k-button-flat k-button-flat-primary k-rounded-md" role="link">
                         <span class="k-button-text"></span>
                     </button>
                 </div>`).appendTo(element);
@@ -1244,8 +1243,8 @@ var __meta__ = {
             currentValue = new DATE(+that._current);
 
             if (that._isMultipleSelection()) {
-                var firstDayCurrentMonth = that._table.find("td:not(.k-other-month):not(.k-out-of-range)").has(".k-link").first();
-                currentValue = toDateObject(firstDayCurrentMonth.find("a"));
+                var firstDayCurrentMonth = that._table.find("td:not(." + OTHERMONTH + "):not(." + EMPTYCELL + ")").has(".k-link").first();
+                currentValue = toDateObject(firstDayCurrentMonth.find("span"));
                 that._current = new Date(+currentValue);
             }
 
@@ -1370,13 +1369,13 @@ var __meta__ = {
                 footerTemplate = (data) => `${kendo.toString(data,"D",options.culture)}`;
 
             that.month = {
-                content: (data) => `<td class="${data.cssClass}" role="gridcell"><a tabindex="-1" class="k-link ${data.linkClass}" href="${data.url}" ${kendo.attr(VALUE)}="${data.dateString}" title="${data.title}">${executeTemplate(content, data) || data.value}</a></td>`,
+                content: (data) => `<td class="${data.cssClass}" role="gridcell"><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${data.url}" ${kendo.attr(VALUE)}="${data.dateString}" title="${data.title}">${executeTemplate(content, data) || data.value}</span></td>`,
                 empty: (data) => `<td role="gridcell">${executeTemplate(empty, data) || "&nbsp;"}</td>`,
-                weekNumber: (data) => `<td class="k-alt">${executeTemplate(weekNumber, data) || data.weekNumber}</td>`
+                weekNumber: (data) => `<td class="k-calendar-td k-alt">${executeTemplate(weekNumber, data) || data.weekNumber}</td>`
             };
 
             that.year = {
-                content: template((data) => `<td class="${data.cssClass}" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-${data.ns}value="${data.dateString}" aria-label="${data.label}">${data.value}</a></td>`)
+                content: template((data) => `<td class="${data.cssClass}" role="gridcell"><span tabindex="-1" class="k-link" data-href="#" data-${data.ns}value="${data.dateString}" aria-label="${data.label}">${data.value}</span></td>`)
             };
 
             if (footer && footer !== true) {
@@ -1612,7 +1611,7 @@ var __meta__ = {
                     html = "";
 
                 if (options.showHeader) {
-                    html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
+                    html += '<table tabindex="0" role="grid" class="k-calendar-table" cellspacing="0">';
                         html += '<caption class="k-calendar-caption k-meta-header">';
                             html += this.title(options.date);
                         html += '</caption>';
@@ -1695,7 +1694,7 @@ var __meta__ = {
                 html = "";
 
                 if (options.showHeader) {
-                    html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
+                    html += '<table tabindex="0" role="grid" class="k-calendar-table" cellspacing="0">';
                         html += '<caption class="k-meta-header">';
                             html += this.title(options.date, options.min, options.max);
                         html += '</caption>';
@@ -1714,7 +1713,7 @@ var __meta__ = {
                         var cssClass = [ "k-calendar-td" ];
 
                         if (idx === 0 || idx === 11) {
-                            cssClass.push(OTHERMONTH);
+                            cssClass.push(EMPTYCELL);
                         }
 
                         return {
@@ -1769,7 +1768,7 @@ var __meta__ = {
                 }
 
                 if (options.showHeader) {
-                    html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
+                    html += '<table tabindex="0" role="grid" class="k-calendar-table" cellspacing="0">';
                         html += '<caption class="k-calendar-caption k-meta-header">';
                             html += this.title(options.date, options.min, options.max);
                         html += '</caption>';
@@ -1790,7 +1789,7 @@ var __meta__ = {
                             end = start + 9;
 
                         if (idx === 0 || idx === 11) {
-                            cssClass.push(OTHERMONTH);
+                            cssClass.push(EMPTYCELL);
                         }
 
                         if (start < min) {
@@ -1871,7 +1870,7 @@ var __meta__ = {
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
             otherMonthTemplate = options.otherMonthCellTemplate || otherMonthCellTemplate,
-            html = options.html || '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0"><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">';
+            html = options.html || '<table tabindex="0" role="grid" class="k-calendar-table" cellspacing="0"><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">';
 
         if (isWeekColumnVisible) {
             html += weekNumber(weekNumberBuild(start));
@@ -1891,7 +1890,7 @@ var __meta__ = {
 
             data = build(start, idx, options.disableDates);
 
-            html += (data.cssClass.indexOf(OTHERMONTH) !== -1 && !otherMonth) ? otherMonthTemplate(data) : isInRange(start, min, max) ? content(data) : empty(data);
+            html += (data.cssClass.indexOf(OTHERMONTH) !== -1 && !otherMonth) ? otherMonthTemplate(data) : isInRange(start, min, max) && data.cssClass.indexOf(EMPTYCELL) === -1 ? content(data) : empty(data);
 
             setter(start, 1);
         }
@@ -2018,10 +2017,6 @@ var __meta__ = {
         }
     }
 
-    function addClassToViewContainer(element, currentView) {
-        element.addClass("k-" + currentView);
-    }
-
     function inArray(date, dates) {
         for (var i = 0, length = dates.length; i < length; i++) {
             if (date === +dates[i]) {
@@ -2125,7 +2120,6 @@ var __meta__ = {
     calendar.isEqualDate = isEqualDate;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
-    calendar.addClassToViewContainer = addClassToViewContainer;
     calendar.normalize = normalize;
     calendar.viewsEnum = views;
     calendar.disabled = getDisabledExpr;

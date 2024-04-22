@@ -49,7 +49,7 @@
 
             assert.deepEqual(calendar.current(), value);
 
-            assert.isOk(div.find("a[data-value='2018/2/1']").closest("td").hasClass("k-other-month"));
+            assert.isOk(div.find("span[data-value='2018/2/1']").closest("td").hasClass("k-other-month"));
         });
 
         //MONTH View
@@ -640,28 +640,28 @@
         it("skips disabled date to the left", function() {
             calendar._move({ keyCode: keys.LEFT, preventDefault: $.noop });
 
-            assert.equal($(".k-focus > a").text(), 19);
+            assert.equal($(".k-focus > span").text(), 19);
         });
 
         it("skips disabled date to the right", function() {
             calendar.value(new Date(2015, 9, 19));
             calendar._move({ keyCode: keys.RIGHT, preventDefault: $.noop });
 
-            assert.equal($(".k-focus > a").text(), 22);
+            assert.equal($(".k-focus > span").text(), 22);
         });
 
         it("skips disabled date when navigated between weeks UP", function() {
             calendar.value(new Date(2015, 9, 28));
             calendar._move({ keyCode: keys.UP, preventDefault: $.noop });
 
-            assert.equal($(".k-focus > a").text(), 7);
+            assert.equal($(".k-focus > span").text(), 7);
         });
 
         it("skips disabled date when navigated between weeks DOWN", function() {
             calendar.value(new Date(2015, 9, 7));
             calendar._move({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-            assert.equal($(".k-focus > a").text(), 28);
+            assert.equal($(".k-focus > span").text(), 28);
         });
 
         it("do not navigate to disabled date in the min range", function() {
@@ -669,7 +669,7 @@
             calendar.min(new Date(2015, 9, 13));
             calendar._move({ keyCode: keys.LEFT, preventDefault: $.noop });
 
-            assert.equal($(".k-focus > a").text(), 15);
+            assert.equal($(".k-focus > span").text(), 15);
         });
 
 
@@ -677,7 +677,7 @@
             var max = new Date(2015, 9, 23);
             calendar.max(max);
             calendar._move({ keyCode: keys.RIGHT, preventDefault: $.noop });
-            var focusedValue = new Date($(".k-focus > a").data("value")).getDate();
+            var focusedValue = new Date($(".k-focus > span").data("value")).getDate();
             assert.equal(focusedValue, 22);
         });
 
@@ -769,7 +769,7 @@
             calendar.value(new Date(2015, 11, 16));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                specificDateCell = calendar.element.find("td").has("a[data-value='2015/11/25']");
+                specificDateCell = calendar.element.find("td").has("span[data-value='2015/11/25']");
 
             currentCell.trigger("click");
 
@@ -788,7 +788,7 @@
 
             nextPeriodButton.trigger("click");
 
-            var specificDateCell = calendar.element.find("td").has("a[data-value='2015/11/10']");
+            var specificDateCell = calendar.element.find("td").has("span[data-value='2015/11/10']");
 
             specificDateCell.trigger(event);
             assert.equal(calendar.selectDates().length, 25);
@@ -803,7 +803,7 @@
 
             currentCell.trigger("click");
             prevButton.trigger("click");
-            var specificDateCell = calendar.element.find("td").has("a[data-value='2015/9/20']");
+            var specificDateCell = calendar.element.find("td").has("span[data-value='2015/9/20']");
 
             specificDateCell.trigger(event);
             assert.equal(calendar.selectDates().length, 22);
@@ -819,11 +819,11 @@
 
             currentCell.trigger("click");
             prevButton.trigger("click");
-            var specificDateCell = calendar.element.find("td").has("a[data-value='2015/9/20']");
+            var specificDateCell = calendar.element.find("td").has("span[data-value='2015/9/20']");
 
             specificDateCell.trigger(event);
 
-            var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/9/10']");
+            var anotherSpecificDateCell = calendar.element.find("td").has("span[data-value='2015/9/10']");
             anotherSpecificDateCell.trigger(secondEvent);
             assert.equal(calendar.selectDates().length, 32);
             assert.equal(calendar.element.find(".k-selected").length, 29);
@@ -838,10 +838,10 @@
 
             currentCell.trigger("click");
             prevButton.trigger("click");
-            var specificDateCell = calendar.element.find("td").has("a[data-value='2015/9/20']");
+            var specificDateCell = calendar.element.find("td").has("span[data-value='2015/9/20']");
 
             specificDateCell.trigger(event);
-            var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/9/25']");
+            var anotherSpecificDateCell = calendar.element.find("td").has("span[data-value='2015/9/25']");
             anotherSpecificDateCell.trigger(secondEvent);
             assert.equal(calendar.selectDates().length, 17);
             assert.equal(calendar.element.find(".k-selected").length, 14);
@@ -851,13 +851,13 @@
             calendar.value(new Date(2015, 10, 10));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                specificDateCell = calendar.element.find("td").has("a[data-value='2015/10/20']"),
+                specificDateCell = calendar.element.find("td").has("span[data-value='2015/10/20']"),
                 secondEvent = $.Event("click", { shiftKey: true });
 
             currentCell.trigger("click");
             specificDateCell.trigger(event);
 
-            var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/10/25']");
+            var anotherSpecificDateCell = calendar.element.find("td").has("span[data-value='2015/10/25']");
             anotherSpecificDateCell.trigger(secondEvent);
 
             assert.equal(calendar.selectDates().length, 16);
@@ -868,13 +868,13 @@
             calendar.value(new Date(2015, 10, 10));
             var currentCell = $(".k-selected"),
                 event = $.Event("click", { shiftKey: true }),
-                specificDateCell = calendar.element.find("td").has("a[data-value='2015/10/20']"),
+                specificDateCell = calendar.element.find("td").has("span[data-value='2015/10/20']"),
                 secondEvent = $.Event("click", { shiftKey: true });
 
             currentCell.trigger("click");
             specificDateCell.trigger(event);
 
-            var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/10/25']");
+            var anotherSpecificDateCell = calendar.element.find("td").has("span[data-value='2015/10/25']");
             anotherSpecificDateCell.trigger(secondEvent);
 
             assert.equal(calendar.selectDates().length, 16);
@@ -915,7 +915,7 @@
         it("move with keyboard when next selection does not exists on current view navigates", function() {
             var event = { keyCode: keys.LEFT, preventDefault: $.noop },
                 cell = calendar.element.find("tbody").find("td.k-other-month").eq(0),
-                date = toDateObject(cell.find("a"));
+                date = toDateObject(cell.find("span"));
             calendar.bind("navigate", function(e) {
                 assert.isOk(true);
             });
@@ -927,11 +927,11 @@
         it("move with keyboard to next view and focses the date in the view", function() {
             var event = { keyCode: keys.LEFT, preventDefault: $.noop },
                 cell = calendar.element.find("tbody").find("td.k-other-month").eq(0),
-                date = toDateObject(cell.find("a"));
+                date = toDateObject(cell.find("span"));
 
             calendar._current = date;
             calendar._move(event);
-            var focusedDate = toDateObject(div.find("tbody").find("td.k-focus").find("a"));
+            var focusedDate = toDateObject(div.find("tbody").find("td.k-focus").find("span"));
             assert.equal(focusedDate.getDate() + 1, date.getDate());
         });
 
