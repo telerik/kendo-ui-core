@@ -2185,6 +2185,80 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class AIPrompt extends kendo.ui.Widget {
+        static fn: AIPrompt;
+
+        options: AIPromptOptions;
+
+        element: JQuery;
+
+        static extend(proto: Object): AIPrompt;
+
+        constructor(element: Element, options?: AIPromptOptions);
+
+        activeView(): number;
+        activeView(index: number): void;
+        activeView(index: string): void;
+
+        addPromptOutput(promptOutput: AIPromptPromptOutput): void;
+
+        getViews(): AIPromptView[] | any[];
+    }
+
+    interface AIPromptPromptOutput {
+        id: string;
+        prompt: string;
+        output: string;
+    }
+
+    interface AIPromptEvent {
+        sender: AIPrompt;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface AIPromptOptions {
+        name?: string | undefined;
+        activeView?: number | string | undefined;
+        views?: AIPromptView[] | any[] | undefined;
+        promptOutputs?: AIPromptPromptOutput[] | any[] | undefined;
+        promptSuggestionItemTemplate?: string | Function | undefined;
+        promptSuggestions?: string[] | any[] | undefined;
+        toolbarItems?: ToolBarItem[] | any[] | undefined;
+        showOutputRating?: boolean | undefined;
+        messages?: AIPromptMessages | undefined;
+
+        commandExecute?(e: AIPromptEvent): void;
+        promptRequest?(e: AIPromptEvent): void;
+        outputRatingChange?(e: AIPromptEvent): void;
+        outputCopy?(e: AIPromptEvent): void;
+    }
+
+    interface AIPromptMessages {
+        commandsView?: string | undefined;
+        promptView?: string | undefined;
+        outputView?: string | undefined;
+        customView?: string | undefined;
+        copyOutput?: string | undefined;
+        generateOutput?: string | undefined;
+        outputRetryTitle?: string | undefined;
+        outputTitle?: string | undefined;
+        promptPlaceHolder?: string | undefined;
+        promptSuggestions?: string | undefined;
+        retryGeneration?: string | undefined;
+    }
+
+    interface AIPromptView {
+        buttonText?: string | undefined;
+        buttonIcon?: string | undefined;
+        type?: string | undefined;
+        name?: string | undefined;
+        viewTemplate?: string | Function | undefined;
+        footerTemplate?: string | Function | undefined;
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
     class Alert extends kendo.ui.Dialog {
 
         static fn: Alert;

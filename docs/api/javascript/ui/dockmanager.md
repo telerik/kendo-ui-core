@@ -1,14 +1,14 @@
 ---
 title: DockManager
 page_title: Configuration, methods and events of Kendo UI DockManager
-description: Configuration options, methods and events for the Kendo UI DockManager widget. 
+description: Configuration options, methods and events for the Kendo UI DockManager widget.
 res_type: api
 component: dockmanager
 ---
 
 # kendo.ui.DockManager
 
-Represents the Kendo UI TaskBoard. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI DockManager. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 

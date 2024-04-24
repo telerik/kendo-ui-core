@@ -128,15 +128,18 @@ navigation:
     "controls/charts/elements":
         title: "Elements"
         position: 6
+    "controls/charts/sankey":
+        title: "Sankey"
+        position: 7
     "controls/charts/sparkline":
         title: "Sparkline"
-        position: 7
+        position: 8
     "controls/charts/stockchart":
         title: "StockChart"
-        position: 8
+        position: 9
     "controls/charts/treemap":
         title: "TreeMap"
-        position: 9
+        position: 10
     "controls/orgchart":
         title: "OrgChart"
     "controls/window/how-to":
@@ -461,6 +464,8 @@ navigation:
         title: "CircularGauge"
     "*radialgauge":
         title: "RadialGauge"
+    "*sankey":
+        title: "Sankey"
     "*sparkline":
         title: "Sparkline"
     "*stockchart":
@@ -1952,6 +1957,12 @@ defaults:
         path: "controls/sortable"
     values:
         component: "sortable"
+
+-
+    scope:
+        path: "controls/charts/sankey"
+    values:
+        component: "sankey"
 
 -
     scope:

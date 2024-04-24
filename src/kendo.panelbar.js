@@ -66,7 +66,9 @@ var __meta__ = {
             text: "dataTextField",
             url: "dataUrlField",
             spriteCssClass: "dataSpriteCssClassField",
-            imageUrl: "dataImageUrlField"
+            imageUrl: "dataImageUrlField",
+            icon: "dataIconField",
+            iconClass: "dataIconClassField",
         },
         itemIcon,
         rendering = {
@@ -271,7 +273,8 @@ var __meta__ = {
             loadOnDemand: true,
             expandMode: "multiple",
             template: null,
-            dataTextField: null
+            dataTextField: null,
+            selectable: true
         },
 
         destroy: function() {
@@ -304,12 +307,13 @@ var __meta__ = {
                     options.template = template(options.template);
               } else if (!options.template) {
                   options.template = template((data) => {
-                      var text = fieldAccessor("text")(data.item);
-                      if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {
-                          return `<span class='k-panelbar-item-text'>${text}</span>`;
-                      } else {
-                          return `<span class='k-panelbar-item-text'>${encode(text)}</span>`;
-                      }
+                     var text = fieldAccessor("text")(data.item);
+
+                     if (data.item.encoded !== false) {
+                         text = encode(text);
+                     }
+
+                     return `<span class='k-panelbar-item-text'>${text}</span>`;
                   });
                 }
 
@@ -326,12 +330,16 @@ var __meta__ = {
                      var url = fieldAccessor("url")(item);
                      var imageUrl = fieldAccessor("imageUrl")(item);
                      var spriteCssClass = fieldAccessor("spriteCssClass")(item);
+                     var icon = fieldAccessor("icon")(item);
+                     var iconClass = fieldAccessor("iconClass")(item);
+                     iconClass = iconClass ? " " + iconClass : "";
                      var contentUrl = contentUrl(item);
                      var tag = url || contentUrl ? 'a' : 'span';
 
                     return `<${tag} class='${textClass(item)}' ${contentUrl}${textAttributes(url)}>` +
                         (imageUrl ? `<img class='k-panelbar-item-icon k-image' alt='' src='${imageUrl}' />` : '') +
                         (spriteCssClass ? `<span class='k-sprite ${spriteCssClass}'></span>` : '') +
+                        (icon ? kendo.ui.icon($("<span></span>"), { icon: icon, iconClass: "k-panelbar-item-icon" + iconClass }) : '') +
                         panelBar.options.template({ panelBar, item, arrow, textClass, textAttributes, contentUrl }) +
                         arrow({ panelBar, item, arrow, textClass, arrowIconOptions, textAttributes, contentUrl }) +
                     `</${tag}>`;
@@ -755,7 +763,9 @@ var __meta__ = {
                     { field: "text" },
                     { field: "url" },
                     { field: "spriteCssClass" },
-                    { field: "imageUrl" }
+                    { field: "imageUrl" },
+                    { field: "icon" },
+                    { field: "iconClass" }
                 ];
             }
 
@@ -1630,6 +1640,12 @@ var __meta__ = {
                 item = link.parent(ITEM),
                 selected = that._selected,
                 dataItem = that.dataItem(item);
+
+            if (that.options.selectable == false) {
+                that._current(item[0] ? item : null);
+
+                return;
+            }
 
             if (selected) {
                 selected.attr(ARIA_SELECTED, false);

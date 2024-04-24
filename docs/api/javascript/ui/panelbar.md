@@ -295,6 +295,44 @@ Sets an array with the URLs from which the **PanelBar** items content to be load
         });
     </script>
 
+### dataIconField `String` *(default: "icon")*
+
+Sets the field of the data item that provides the icon name of the **PanelBar** nodes.
+
+#### Example - specify icon name field
+
+    <ul id="panelbar"></ul>
+    <script>
+    var items = [
+      { text: "Ask AI", myIconField: "sparkles", myIconClassField: "my-class" },
+      { text: "Comment", myIconField: "comment", myIconClassField: "my-class" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataIconField: "myIconField",
+      dataIconClassField: "myIconClassField",
+      dataSource: items
+    });
+    </script>
+
+### dataIconClassField `String` *(default: "icon")*
+
+Sets the field of the data item that provides the custom class for the icon element of the **PanelBar** nodes.
+
+#### Example - specify field for custom icon class
+
+    <ul id="panelbar"></ul>
+    <script>
+    var items = [
+      { text: "Ask AI", myIconField: "sparkles", myIconClassField: "my-class" },
+      { text: "Comment", myIconField: "comment", myIconClassField: "my-class" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataIconField: "myIconField",
+      dataIconClassField: "myIconClassField",
+      dataSource: items
+    });
+    </script>
+
 ### dataImageUrlField `String` *(default: null)*
 
 Sets the field of the data item that provides the image URL of the **PanelBar** nodes.
