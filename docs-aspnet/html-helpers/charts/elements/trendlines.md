@@ -19,7 +19,7 @@ A linear trendline is usually used to show if a particular quantity is increasin
 
 The following example demonstrates how to create a linear trendline for Categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Site Visitors Stats")
@@ -92,7 +92,7 @@ Exponential trendlines are most suitable for data sets with accelerating rate of
 
 The following example demonstrates how to create a exponential trendline for Categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -142,7 +142,7 @@ Logarithmic trendlines are best suited for data sets that grow quickly at the be
 
 The following example demonstrates how to create a logarithmic trendline for Categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -192,7 +192,7 @@ Power trendlines are suitable for data that has a steady increase or decrease in
 
 The following example demonstrates how to create a power trendline for Categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -251,7 +251,7 @@ The default order is 2. Accepted values are from 2 to 6:
 
 The following example demonstrates how to create a polynomial trendline for Categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -303,7 +303,7 @@ The moving average trendline is used to smooth out the variations in the data by
 
 The following example demonstrates how to create a moving average trendline for Categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Site Visitors Stats")
@@ -385,7 +385,7 @@ To create a forecast, extend the trendline by specifying the number of intervals
 
 The following example demonstrates how to create a forecast.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Site Visitors Stats")

@@ -225,6 +225,11 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
         <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://kendo.cdn.telerik.com;">
     ```
 
+1. Add the links used in the _Layout such as for example - `kendostatic`, `jquery`, and `unpkg(jszip)`:
+
+    ```
+        <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://cdn.kendostatic.com https://code.jquery.com https://unpkg.com/;" />
+    ```
 
 ## See Also
 

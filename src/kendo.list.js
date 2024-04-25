@@ -245,6 +245,7 @@ var __meta__ = {
             }));
 
             that._inputLabel = that.label.element;
+            that._refreshFloatingLabel();
         },
 
         _floatCheck: function() {

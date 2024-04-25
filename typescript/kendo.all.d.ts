@@ -5126,10 +5126,20 @@ declare namespace kendo.ui {
         title?: string | undefined;
     }
 
+    interface EditorResizableMin {
+        minWidth?: number;
+        minHeight?: number;
+    }
+
+    interface EditorResizableMax {
+        maxWidth?: number;
+        maxHeight?: number;
+    }
+
     interface EditorResizable {
         content?: boolean | undefined;
-        min?: number | undefined;
-        max?: number | undefined;
+        min?: number | EditorResizableMin | undefined;
+        max?: number | EditorResizableMax | undefined;
         toolbar?: boolean | undefined;
     }
 

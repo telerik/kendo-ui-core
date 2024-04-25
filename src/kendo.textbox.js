@@ -24,6 +24,7 @@ var __meta__ = {
         INPUT_EV = "input",
         FOCUSED = "k-focus",
         LABELCLASSES = "k-label k-input-label",
+        FLOATINGLABELCLASS = "k-floating-label",
         STATEDISABLED = "k-disabled",
         STATEREADONLY = "k-readonly",
         ARIA_DISABLED = "aria-disabled";
@@ -243,8 +244,7 @@ var __meta__ = {
                     id = options.name + "_" + kendo.guid();
                     element.attr("id", id);
                 }
-
-                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+                that._inputLabel = $("<label class='" + (floating ? FLOATINGLABELCLASS : LABELCLASSES) + "' for='" + id + "'>" + labelText + "</label>'")[floating ? "insertAfter" : "insertBefore"](that.wrapper);
             }
         },
 

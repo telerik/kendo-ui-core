@@ -908,6 +908,7 @@ var __meta__ = {
 
         _popup: function() {
             Select.fn._popup.call(this);
+            this.popup.element.addClass("k-dropdownlist-popup");
             this.popup.one("open", this._popupOpen.bind(this));
         },
 

@@ -74,7 +74,7 @@ var __meta__ = {
             var element = that.element;
             var inputInner = that.options.widget.wrapper.find(".k-input-inner");
             if (inputInner.length > 0) {
-                var labelHeight = that.element.find("> .k-input-label").height();
+                var labelHeight = that.element.find("> .k-floating-label").height();
                 var offsetX = inputInner.position().left + Number.parseInt(inputInner.css('padding-left'));
                 var offsetY = inputInner.position().top + Number.parseInt(inputInner.css('padding-top')) + labelHeight;
                 element[0].style.setProperty(FLOATINGLABEL_OFFSET_X, offsetX + "px");

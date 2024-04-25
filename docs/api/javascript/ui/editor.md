@@ -2432,9 +2432,9 @@ If enabled, the editor renders a resize handle to allow users to resize it.
     });
     </script>
 
-### resizable.min `Number`
+### resizable.min `Number|Object`
 
-The minimum height that the editor can be resized to.
+The minimum height that the editor can be resized to. If set to an object the user can restrict both min width and height values.
 
 #### Example
 
@@ -2447,7 +2447,73 @@ The minimum height that the editor can be resized to.
     });
     </script>
 
-### resizable.max `Number`
+### resizable.min.minWidth `Number`
+
+The minimum width that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        min: {
+          minWidth: 500
+        }
+      }
+    });
+    </script>
+
+### resizable.min.minHeight `Number`
+
+The minimum height that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        min: {
+          minHeight: 500
+        }
+      }
+    });
+    </script>
+
+### resizable.max `Number|Object`
+
+The maximum height that the editor can be resized to. If set to an object the user can restrict both max width and height values.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        max: 600
+      }
+    });
+    </script>
+
+### resizable.max.maxWidth `Number`
+
+The maximum width that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        max: {
+          maxWidth: 500
+        }
+      }
+    });
+    </script>
+
+### resizable.max.maxHeight `Number`
 
 The maximum height that the editor can be resized to.
 
@@ -2457,7 +2523,9 @@ The maximum height that the editor can be resized to.
     <script>
     $("#editor").kendoEditor({
       resizable: {
-        max: 600
+        max: {
+          maxHeight: 500
+        }
       }
     });
     </script>

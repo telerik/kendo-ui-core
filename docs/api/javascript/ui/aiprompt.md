@@ -611,7 +611,7 @@ The index of the active view or the name of the view to show. If no argument is 
 
 Adds a prompt output to the `promptOutputs` collection. If the active views is `OutputView`, calls the view's `addPromptOutput` method.
 
-##### Parameters
+#### Parameters
 
 ##### promptOutput `Object`
 

@@ -41,6 +41,7 @@ var __meta__ = {
         SYMBOL = "symbol",
         CLASS_ICON = "k-icon",
         LABELCLASSES = "k-label k-input-label",
+        FLOATINGLABELCLASS = "k-floating-label",
         SELECTED = "k-selected",
         STATEDISABLED = "k-disabled",
         STATEINVALID = "k-invalid",
@@ -919,7 +920,7 @@ var __meta__ = {
                     element.attr("id", id);
                 }
 
-                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+                that._inputLabel = $("<label class='" + (floating ? FLOATINGLABELCLASS : LABELCLASSES) + "' for='" + id + "'>" + labelText + "</label>'")[floating ? "insertAfter" : "insertBefore"](that.wrapper);
 
                 if ((that.element.attr("disabled") === undefined) && (that.element.attr("readonly") === undefined)) {
                     that._inputLabel.on("click" + ns, that.focus.bind(that));
