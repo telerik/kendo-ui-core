@@ -106,6 +106,20 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
+### autoCorrectParts `Boolean`*(default: true)*
+
+Sets a value that indicates whether to automatically correct the segment when out of range. In order to work, `dateInput` prop should be set to `true`.
+
+#### Example - sets the autoCorrectParts
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        autoCorrectParts: true
+    });
+    </script>
+
 ### componentType `String`*(default: "classic")*
 
  Specifies the component type of the widget.

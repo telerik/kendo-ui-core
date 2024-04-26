@@ -404,7 +404,7 @@ var __meta__ = {
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var target = $(e.target);
-            var closeButton = target.closest(".k-multiselect-toggle-button, .k-chip").children("[class*='-i-caret-alt-down']")[0];
+            var closeButton = target.closest(".k-input-button, .k-chip").children("[class*='-i-caret-alt-down']")[0];
             var removeButton = target.closest("[class*='-i-x']")[0];
 
             if (notInput && !(removeButton && kendo.support.mobileOS) && e.cancelable) {
@@ -1675,19 +1675,24 @@ var __meta__ = {
             this._loading = $('<span class="k-icon k-i-loading k-input-loading-icon ' + HIDDENCLASS + '"></span>').insertAfter(this._inputValuesContainer);
         },
 
+        _popup: function() {
+            List.fn._popup.call(this);
+            this.popup.element.addClass("k-multiselect-popup");
+        },
+
         _clearButton: function() {
             List.fn._clearButton.call(this);
 
             if (this.options.clearButton) {
                 this._clear.insertAfter(this._inputValuesContainer);
-                this.wrapper.addClass("k-multiselect-clearable");
             }
         },
 
         _arrowButton: function() {
             var arrowTitle = encode(this.options.messages.downArrow),
-                arrow = $(html.renderButton('<button type="button" aria-label="' + arrowTitle + '" class="k-input-button k-multiselect-toggle-button"></button>', $.extend({}, this.options, {
-                    icon: "caret-alt-down"
+                arrow = $(html.renderButton('<button type="button" aria-label="' + arrowTitle + '" class="k-input-button"></button>', $.extend({}, this.options, {
+                    icon: "caret-alt-down",
+                    rounded: null
                 })));
 
             if (this._arrow) {

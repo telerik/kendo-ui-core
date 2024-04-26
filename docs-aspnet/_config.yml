@@ -439,9 +439,6 @@ navigation:
      "deployment":
         title: "Deployment"
         position: 11
-     "integration-with-other-telerik-products":
-        title: "Integration with other Telerik Products"
-        position: 12
      "cloud-integration":
         title: "Cloud Integration"
         position: 13
@@ -743,11 +740,6 @@ defaults:
         editable: false
         res_type: api
         kind: api
--
-    scope:
-        path: "integration-with-other-telerik-products"
-    values:
-        title_prefix: "Capture ASP.NET Core"
 -
     scope:
         path: "html-helpers/barcodes/barcode"

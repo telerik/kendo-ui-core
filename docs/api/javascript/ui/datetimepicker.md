@@ -121,6 +121,20 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### autoCorrectParts `Boolean`*(default: true)*
+
+Sets a value that indicates whether to automatically correct the segment when out of range. In order to work, `dateInput` prop should be set to `true`.
+
+#### Example - sets the autoCorrectParts
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        dateInput: true,
+        autoCorrectParts: true
+    });
+    </script>
+
 ### componentType `String`*(default: "classic")*
 
  Specifies the component type of the widget.

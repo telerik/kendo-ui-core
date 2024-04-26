@@ -122,6 +122,20 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### autoCorrectParts `Boolean`*(default: true)*
+
+Sets a value that indicates whether to automatically correct the segment when out of range. In order to work, `dateInput` prop should be set to `true`.
+
+#### Example - sets the autoCorrectParts
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true,
+        autoCorrectParts: true
+    });
+    </script>
+
 ### autoFill `Boolean`*(default: false)*
 
  When enabled, the DatePicker will autofill the rest of the date to the current date when the component loses focus. For example, entering only the date, month or year portion of the date and blurring the component, the missing sections will be automatically completed.
