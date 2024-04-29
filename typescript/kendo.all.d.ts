@@ -9575,6 +9575,213 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class PropertyGrid extends kendo.ui.Widget {
+
+        static fn: TreeList;
+
+        options: PropertyGrid;
+
+        columns: any;
+        table: JQuery;
+        tbody: JQuery;
+        content: JQuery;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PropertyGrid;
+
+        constructor(element: Element, options?: PropertyGridOptions);
+
+        dataItem(row: string): kendo.data.TreeListModel;
+        dataItem(row: Element): kendo.data.TreeListModel;
+        dataItem(row: JQuery): kendo.data.TreeListModel;
+        edit(cell: JQuery): void;
+        model(): Object;
+        model(model: Object, items: Array<PropertyGridItem>): void;
+        resetState(): void;
+        saveState(): void;
+        select(): JQuery;
+        select(row: Element): void;
+        select(row: JQuery): void;
+        toggleDetails(): void;
+        toggleGroup(row: string): void;
+        toggleGroup(row: Element): void;
+        toggleGroup(row: JQuery): void;
+        toggleItem(row: string): JQueryPromise<any>;
+        toggleItem(row: Element): JQueryPromise<any>;
+        toggleItem(row: JQuery): JQueryPromise<any>;
+    }
+
+    interface PropertyGridOptions {
+        name?: string | undefined;
+        columns?: PropertyGridColumns | undefined;
+        contextMenu?: boolean | PropertyGridContextMenu | undefined
+        editMode?: boolean | string | undefined;
+        excel?: PropertyGridExcel | undefined;
+        groupable?: boolean | undefined;
+        height?: Number | undefined;
+        items?: Array<PropertyGridItem> | undefined;
+        messages?: PropertyGridMessages | undefined;
+        model?: Object | undefined;
+        navigatable?: boolean | undefined;
+        pdf?: PropertyGridPdf | undefined;
+        resizable?: boolean | undefined;
+        showDetails?: boolean | undefined;
+        scrollable?: boolean | undefined;
+        toolbar?: PropertyGridToolbarItem[] | ToolBarItem[] | any | undefined;
+        width?: Number | undefined;
+        beforeEdit?(e: TreeListBeforeEditEvent): void;
+        cancel?(e: TreeListCancelEvent): void;
+        cellClose?(e: TreeListCellCloseEvent): void;
+        change?(e: TreeListChangeEvent): void;
+        collapse?(e: TreeListCollapseEvent): void;
+        edit?(e: TreeListEditEvent): void;
+        excelExport?(e: TreeListExcelExportEvent): void;
+        expand?(e: TreeListExpandEvent): void;
+        groupCollapse?(e: TreeListExpandEvent): void;
+        groupExpand?(e: TreeListExpandEvent): void;
+        pdfExport?(e: TreeListPdfExportEvent): void;
+        save?(e: TreeListSaveEvent): void;
+        columnResize?(e: TreeListColumnResizeEvent): void;
+    }
+
+    interface PropertyGridContextMenuItem {
+        name?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        command?: string | undefined;
+    }
+
+    interface PropertyGridContextMenu extends ContextMenuOptions {
+        body?: GridContextMenuItem[] | undefined;
+    }
+
+    interface PropertyGridColumns {
+        fieldColumn?: PropertyGridColumn | undefined;
+        valueColumn?: PropertyGridColumn | undefined;
+    }
+
+    interface PropertyGridColumn {
+        width?: Number | undefined;
+    }
+
+    interface PropertyGridItem {
+        description?: string | undefined;
+        editable?: boolean | Function | undefined;
+        editor?: string | Function | undefined;
+        editorOptions?: Object | undefined;
+        field?: string | undefined;
+        format?: string | undefined;
+        group?: string | undefined;
+        items?: Array<PropertyGridItem> | undefined;
+        template?: string | Function | undefined;
+    }
+
+    interface PropertyGridMessages {
+        defaultGroupName?: string | undefined;
+        commands?: PropertyGridMessagesCommands | undefined;
+    }
+
+    interface PropertyGridMessagesCommands {
+        search?: string | undefined;
+        sort?: string | undefined;
+        details?: string | undefined;
+        group?: string | undefined;
+        excel?: string | undefined;
+        pdf?: string | undefined;
+    }
+
+    interface PropertyGridToolbarItem {
+        click?: Function | undefined;
+        icon?: string | undefined;
+        imageClass?: string | undefined;
+        name?: string | undefined;
+        text?: string | undefined;
+    }
+
+    interface TreeListPdfMargin {
+        bottom?: number|string | undefined;
+        left?: number|string | undefined;
+        right?: number|string | undefined;
+        top?: number|string | undefined;
+    }
+
+    interface PropertyGridPdf extends TreeListPdf {
+
+    }
+
+    interface PropertyGridExcel extends TreeListExcel {
+
+    }
+
+    interface PropertyGridEvent {
+        sender: PropertyGrid;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface PropertyGridBeforeEditEvent extends PropertyGridEvent {
+        model?: kendo.data.Model | undefined;
+    }
+
+    interface PropertyGridCancelEvent extends PropertyGridEvent {
+        container?: JQuery | undefined;
+        model?: kendo.data.TreeListModel | undefined;
+    }
+
+    interface PropertyGridCloseEvent extends PropertyGridEvent {
+        container?: JQuery | undefined;
+        model?: kendo.data.Model | undefined;
+        type?: string | undefined;
+    }
+
+    interface PropertyGridChangeEvent extends PropertyGridEvent {
+    }
+
+    interface PropertyGridCollapseEvent extends PropertyGridEvent {
+        model?: kendo.data.TreeListModel | undefined;
+    }
+
+    interface PropertyGridExpandEvent extends PropertyGridEvent {
+        model?: kendo.data.TreeListModel | undefined;
+    }
+
+    interface PropertyGridGroupCollapseEvent extends PropertyGridEvent {
+        group?: any
+        element?: JQuery | undefined;
+    }
+
+    interface PropertyGridGroupExpandEvent extends PropertyGridEvent {
+        group?: any;
+        element?: JQuery | undefined;
+    }
+
+    interface PropertyGridEditEvent extends PropertyGridEvent {
+        container?: JQuery | undefined;
+        model?: kendo.data.TreeListModel | undefined;
+    }
+
+    interface PropertyGridExcelExportEvent extends PropertyGridEvent {
+        data?: any;
+        workbook?: any;
+    }
+
+    interface PropertyGridPdfExportEvent extends PropertyGridEvent {
+        promise?: JQueryPromise<any> | undefined;
+    }
+
+    interface PropertyGridSaveEvent extends PropertyGridEvent {
+        model?: kendo.data.TreeListModel | undefined;
+        container?: JQuery | undefined;
+    }
+
+    interface PropertyGridColumnResizeEvent extends PropertyGridEvent {
+        column?: any;
+        newWidth?: number | undefined;
+        oldWidth?: number | undefined;
+    }
+
     class RadioButton extends kendo.ui.Widget {
         static fn: RadioButton;
 

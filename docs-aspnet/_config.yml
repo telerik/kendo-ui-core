@@ -620,6 +620,8 @@ navigation:
         title: "PivotGrid"
      "*pivotgridv2":
         title: "PivotGridV2"
+     "*propertygrid":
+        title: "PropertyGrid"
      "*scheduler":
         title: "Scheduler"
      "*scrollview":
@@ -800,6 +802,11 @@ defaults:
         path: "html-helpers/data-management/treelist"
     values:
         title_prefix: "ASP.NET Core TreeList Component"
+-
+    scope:
+        path: "html-helpers/data-management/propertygrid"
+    values:
+        title_prefix: "ASP.NET Core PropertyGrid Component"
 -
     scope:
         path: "html-helpers/datasource"
