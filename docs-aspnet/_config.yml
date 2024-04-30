@@ -475,6 +475,8 @@ navigation:
         title: "State Management"
      "*how-to":
         title: "How To"
+     "*propertygrid":
+        title: "PropertyGrid"
      "*grid":
         title: "Grid"
      "*drawer":
@@ -620,8 +622,6 @@ navigation:
         title: "PivotGrid"
      "*pivotgridv2":
         title: "PivotGridV2"
-     "*propertygrid":
-        title: "PropertyGrid"
      "*scheduler":
         title: "Scheduler"
      "*scrollview":

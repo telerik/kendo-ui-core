@@ -51,7 +51,7 @@ var __meta__ = {
 
     var cssClasses = {
         popup: "k-menu-popup",
-        list: "k-group k-menu-group k-reset",
+        list: "k-menu-group",
         listItem: "k-item k-menu-item",
         menuItem: "k-menu-item",
         itemText: "k-menu-link-text",
@@ -261,8 +261,6 @@ var __meta__ = {
 
         adjustPopupWidth: function(width) {
             var that = this;
-
-            that.element.addClass("k-split-wrapper");
 
             that.element.css({
                 "min-width": width

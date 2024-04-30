@@ -115,7 +115,6 @@
             var dropDownButton = new DropDownButton(button, { items: defaultItems });
 
             assert.isOk(dropDownButton.menu.list.hasClass("k-menu-group"));
-            assert.isOk(dropDownButton.menu.list.hasClass("k-group"));
             assert.equal(dropDownButton.menu.list.attr("id"), "buttonElm_buttonmenu");
         });
 

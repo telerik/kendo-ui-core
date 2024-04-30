@@ -174,7 +174,6 @@
             var splitButton = new SplitButton(button, { items: defaultItems });
 
             assert.isOk(splitButton.menu.list.hasClass("k-menu-group"));
-            assert.isOk(splitButton.menu.list.hasClass("k-group"));
             assert.equal(splitButton.menu.list.attr("id"), "buttonElm_buttonmenu");
         });
 

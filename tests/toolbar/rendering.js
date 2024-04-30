@@ -1746,7 +1746,7 @@
             assert.isOk(splitButton.hasClass("k-rounded-md"));
         });
 
-        it("split container has k-group k-menu-group k-reset k-menu-group-md classes", function() {
+        it("split container has k-menu-group k-menu-group-md classes", function() {
             container.kendoToolBar({
                 items: [
                     {
@@ -1762,9 +1762,7 @@
 
             var splitContainer = $("[data-role=buttonmenu] > ul");
 
-            assert.isOk(splitContainer.hasClass("k-group"));
             assert.isOk(splitContainer.hasClass("k-menu-group"));
-            assert.isOk(splitContainer.hasClass("k-reset"));
             assert.isOk(splitContainer.hasClass("k-menu-group-md"));
         });
 

@@ -358,7 +358,7 @@ In addition, you can control the width and height of the PropertyGrid by setting
 ```
 {% endif %}
 
-## 5. Handle the PropertyGrid Events
+## 6. Handle the PropertyGrid Events
 
 The PropertyGrid exposes events that you can handle and further customize the functionality of the component. In this tutorial, you will use the exposed `Edit` event to log the current state of the model in the browser's console.
 
@@ -395,7 +395,7 @@ The PropertyGrid exposes events that you can handle and further customize the fu
 ```
 {% endif %}
 
-## 6. (Optional) Reference Existing PropertyGrid Instances
+## 7. (Optional) Reference Existing PropertyGrid Instances
 
 Referencing existing component instances allows you to build on top of their configuration. To reference an existing PropertyGrid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
 
