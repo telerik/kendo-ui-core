@@ -23,6 +23,7 @@ The following table lists the Section 508 and WCAG compliance levels of support 
 |Component |WCAG 2.2| Accessibility Example |
 |:---          |:---|:---
 |ActionSheet   |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/actionsheet)|
+|AIPrompt      |AA | n/a|
 |AppBar	       |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/appbar)|
 |AutoComplete  |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/autocomplete)|
 |Avatar        |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/avatar)|

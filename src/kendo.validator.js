@@ -229,7 +229,7 @@ var __meta__ = {
                 step: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[step]").length && input.val() !== "") {
                         var min = parseFloat(input.attr("min")) || 0,
-                            step = parseFloat(input.attr("step")) || 1,
+                            step = kendo.parseFloat(input.attr("step")) || 1,
                             val = parseFloat(input.val()),
                             decimals = numberOfDecimalDigits(step),
                             raise;

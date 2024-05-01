@@ -5903,6 +5903,67 @@ The name of the toolbar command. Can be either a built-in ("create", "excel", or
       });
     </script>
 
+
+### toolbar.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/javascript/ui/toolbar/configuration/items.template)
+
+#### Example - set the template as a function
+
+    <div id="treelist"></div>
+    <script id="template" type="text/x-kendo-template">
+    <a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
+    </script>
+    <script>
+    function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("Toolbar command is clicked!");
+      return false;
+    }
+    $("#treelist").kendoTreeList({
+      toolbar: [
+        { template: kendo.template($("#template").html()) }
+      ],
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+> Check [Toolbar template](https://demos.telerik.com/kendo-ui/treelist/toolbar-template) for a live demo.
+
+#### Example - set the template as a string
+
+    <div id="treelist"></div>
+    <script>
+    function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("Toolbar command is clicked!");
+      return false;
+    }
+    $("#treelist").kendoTreeList({
+      toolbar: [
+        {
+          template: '<a class="k-button" href="\\#" onclick="return toolbar_click()">Command</a>'
+        }
+      ],
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+
 ### toolbar.text `String`
 
 The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/javascript/ui/treelist#configuration-toolbar.name)` option as the button text instead.

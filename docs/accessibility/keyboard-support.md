@@ -24,6 +24,7 @@ Keyboard support in Kendo UI maps access-key combinations and ensures that users
 
 Besides the `accesskey` attribute support, most Kendo UI components also offer a series of keyboard controls for interacting with them. The specific keyboard shortcuts supported by each component are provided in the following keyboard examples.
 
+- [AIPrompt](https://demos.telerik.com/kendo-ui/aiprompt/keyboard-navigation)
 - [AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/keyboard-navigation)
 - [BottomNavigation](https://demos.telerik.com/kendo-ui/bottomnavigaiton/keyboard-navigation)
 - [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/keyboard-navigation)

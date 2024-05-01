@@ -680,6 +680,8 @@ navigation:
         title: "Upload"
     "*window":
         title: "Window"
+    "*aiprompt":
+        title: "AIPrompt"
     "*hello-kendo-ui":
         title: "Hello Kendo UI"
     "*home-page":
