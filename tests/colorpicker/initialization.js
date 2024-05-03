@@ -108,5 +108,24 @@
 
             assert.isOk(!cp.wrapper.hasClass("k-disabled"));
         });
+
+        it("sets value when option is set", function() {
+            const COLOR = "#008000";
+
+            var dom = $("<input tabindex='5' />").appendTo(Mocha.fixture).kendoColorPicker({
+                value: COLOR
+            });
+            assert.equal(dom.val(), COLOR);
+        });
+
+        it("sets value option with higher specificity when value attribute is declared", function() {
+            const COLOR = "#008000";
+
+            var dom = $("<input tabindex='5' color='red' />").appendTo(Mocha.fixture).kendoColorPicker({
+                value: COLOR
+            });
+
+            assert.equal(dom.val(), COLOR);
+        });
     });
 }());

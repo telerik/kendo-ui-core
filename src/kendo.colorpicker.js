@@ -69,12 +69,7 @@ var __meta__ = {
             options = that.options = kendo.deepExtend({}, that.options, options);
             element = that.element;
 
-            var value = element.attr("value") || element.val();
-            if (value) {
-                value = parseColor(value, true);
-            } else {
-                value = parseColor(options.value, true);
-            }
+            let value = parseColor(options.value || element.attr("value") || element.val(), true);
             that._value = options.value = value;
 
             var _buttonHtml = kendo.html.renderButton('<button class="k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, that.options, {
