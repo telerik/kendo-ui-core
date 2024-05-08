@@ -702,7 +702,7 @@ baseurl: /aspnet-core
 cdnVersion: "2024.1.319"
 
 ## The themes CDN used
-themesCdnVersion: "7.2.1"
+themesCdnVersion: "8.0.0"
 
 ## The MVC Core version used
 mvcCoreVersion: "2024.1.319"

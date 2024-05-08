@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2024.1.319
+// Type definitions for Kendo UI Professional v2024.2.514
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -12212,6 +12212,7 @@ declare namespace kendo.ui {
     interface TextBoxOptions {
         name?: string | undefined;
         enable?: boolean | undefined;
+        clearButton?: boolean | undefined;
         label?: string | Function | TextBoxLabel | undefined;
         placeholder?: string | undefined;
         readonly?: boolean | undefined;

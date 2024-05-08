@@ -4062,7 +4062,7 @@ var __meta__ = {
         },
 
         _change: function(e) {
-            var that = this, idx, length, action = e ? e.action : "";
+            let that = this, idx, items, length, action = e ? e.action : "";
 
             if (action === "remove") {
                 for (idx = 0, length = e.items.length; idx < length; idx++) {
@@ -4073,17 +4073,22 @@ var __meta__ = {
             }
 
             if (e) {
-                e.partialUpdate = that._operationsForUpdatedFields();
+                items = e.items || [];
+                e.partialUpdate = that._operationsForUpdatedFields() && !that._preventPartialUpdate;
 
-                if (e.action === "itemchange" && e.items && e.items[0] && e.items[0].dirtyFields) {
+                if (e.action === "itemchange" && items.some(i => i.dirtyFields)) {
                     that._updatedFields = Object.keys(e.items[0].dirtyFields);
                 }
             }
 
             if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
+                if (action === "add") {
+                    that._preventPartialUpdate = true;
+                }
 
                 var handler = function(args) {
                     if (args.action === "sync") {
+                        that._preventPartialUpdate = false;
                         that.unbind("change", handler);
                         that._updateTotalForAction(action, e.items);
                     }

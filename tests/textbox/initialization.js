@@ -155,6 +155,15 @@
             assert.isOk(textbox.wrapper.hasClass("k-rounded-lg"));
         });
 
+        it("clear button is rendered as expected", function() {
+            var textbox = new TextBox(input, {
+                value: "large",
+                clearButton: true
+            });
+
+            assert.isOk(textbox.wrapper.find(".k-clear-value").length);
+        });
+
         it("styling options - checks for valid options", function() {
             var textbox = new TextBox(input, {
                 size: "large"

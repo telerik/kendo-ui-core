@@ -12,6 +12,20 @@ Represents the Kendo UI TextBox widget. Inherits from [Widget](/api/javascript/u
 
 ## Configuration
 
+### clearButton `Boolean` *(default: false)*
+
+If set to `true`, will render a button that can be used to clear the value.
+
+#### Example - disable the widget
+
+    <input id="textbox" />
+    <script>
+        $("#textbox").kendoTextBox({
+            value: "John",
+            clearButton: true
+        });
+    </script>
+
 ### enable `Boolean` *(default: true)*
 
 If set to `false`, the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.

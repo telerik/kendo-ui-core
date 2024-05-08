@@ -71,5 +71,18 @@
             assert.equal(textbox._suffixContainer.next().hasClass("k-input-separator"), false);
         });
 
+        it("clear button is rendered as after suffix container", function() {
+            var textbox = new TextBox(input, {
+                suffixOptions: {
+                    template: () => "<span>suffix</span>",
+                    separator: false
+                },
+                value: "large",
+                clearButton: true
+            });
+
+            assert.equal(textbox.wrapper.find(".k-clear-value").prev()[0], textbox._suffixContainer[0]);
+        });
+
     });
 }());

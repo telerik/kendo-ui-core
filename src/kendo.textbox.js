@@ -27,6 +27,7 @@ var __meta__ = {
         FLOATINGLABELCLASS = "k-floating-label",
         STATEDISABLED = "k-disabled",
         STATEREADONLY = "k-readonly",
+        HIDDENCLASS = "k-hidden",
         ARIA_DISABLED = "aria-disabled";
 
     var TextBox = Widget.extend({
@@ -59,6 +60,10 @@ var __meta__ = {
             }
 
             addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options });
+            that._clearButton();
+            if (that._clear) {
+                that._clear.on("click" + NS + " touchend" + NS, that._clearValue.bind(that));
+            }
 
             kendo.notify(that);
             that._applyCssClasses();
@@ -76,6 +81,7 @@ var __meta__ = {
             name: 'TextBox',
             value: '',
             readonly: false,
+            clearButton: false,
             enable: true,
             placeholder: '',
             label: null,
@@ -100,6 +106,8 @@ var __meta__ = {
 
             that._value = value;
             that.element.val(value);
+
+            value ? that._showClear() : that._hideClear();
 
             if (that.floatingLabel) {
                 that.floatingLabel.refresh();
@@ -145,6 +153,11 @@ var __meta__ = {
                 that.floatingLabel.destroy();
             }
 
+            if (that._clear) {
+                that._clear.off(NS);
+                that._clear = null;
+            }
+
             that.element.off(NS);
             that.element[0].style.width = "";
             that.element.removeClass(INPUT);
@@ -171,6 +184,45 @@ var __meta__ = {
 
             kendo.deepExtend(this.options, options);
             this.init(this.element, this.options);
+        },
+
+        _clearValue: function(e) {
+            this.element.val("");
+            this.element.focus();
+            this.trigger(CHANGE, { value: "", originalEvent: e });
+            this._hideClear();
+        },
+
+        _hideClear: function() {
+            if (this._clear) {
+                this._clear.addClass(HIDDENCLASS);
+            }
+        },
+
+        _showClear: function() {
+            if (this._clear) {
+                this._clear.removeClass(HIDDENCLASS);
+            }
+        },
+
+        _clearButton: function() {
+            let that = this;
+
+            if (!that._clear) {
+                that._clear = $(`<span unselectable="on" class="k-clear-value" title="Clear">${kendo.ui.icon("x")}</span>`).attr({
+                    "role": "button",
+                    "tabIndex": -1
+                });
+                that._clear.appendTo(that.wrapper);
+            }
+
+            if (!that.options.clearButton) {
+                that._clear.remove();
+            }
+
+            if (!that.element.val()) {
+                that._hideClear();
+            }
         },
 
         _editable: function(options) {
@@ -267,6 +319,7 @@ var __meta__ = {
             that._value = newValue;
 
             that.trigger(CHANGE, { value: newValue, originalEvent: e });
+            newValue ? that._showClear() : that._hideClear();
         },
 
         _wrapper: function() {
