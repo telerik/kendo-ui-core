@@ -4686,6 +4686,10 @@ declare namespace kendo.ui {
         position?: string | undefined;
     }
 
+    interface DropDownTreeLoadOnDemand {
+        valueMapper?: Function | undefined,
+    }
+
     interface DropDownTreeOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
@@ -4713,7 +4717,7 @@ declare namespace kendo.ui {
         footerTemplate?: string|Function | undefined;
         height?: string|number | undefined;
         ignoreCase?: boolean | undefined;
-        loadOnDemand?: boolean | undefined;
+        loadOnDemand?: DropDownTreeLoadOnDemand | boolean | undefined;
         messages?: DropDownTreeMessages | undefined;
         minLength?: number | undefined;
         noDataTemplate?: string|Function|boolean | undefined;
@@ -20756,6 +20760,209 @@ declare namespace kendo.dataviz.ui {
         originalEvent?: any;
     }
 
+    class Sankey extends kendo.ui.Widget {
+
+        static fn: Sankey;
+
+        options: SankeyOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Sankey;
+
+        constructor(element: Element, options?: SankeyOptions, theme?: SankeyTheme);
+
+        destroy(): void;
+        setOptions(options: any): void;
+        exportVisual(options?: SankeyExportVisualOptions): kendo.drawing.Group;
+        linkClick(e?: SankeyEvent): void;
+        linkLeave(e?: SankeyEvent): void;
+        linkEnter(e?: SankeyEvent): void;
+        nodeClick(e?: SankeyEvent): void;
+        nodeEnter(e?: SankeyEvent): void;
+        nodeLeave(e?: SankeyEvent): void;
+    }
+
+    interface SankeyEvent {
+        sender: Sankey;
+        originalEvent: Event;
+        type: string;
+        targetType: 'node' | 'link';
+        dataItem: SankeyLinkDataItem | SankeyNodeDataItem;
+        preventDefault(): void;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface SankeyLinkDataItem extends SankeyLink {
+        source: SankeyNodeDataItem;
+        target: SankeyNodeDataItem;
+    }
+    
+    interface SankeyNodeDataItem extends SankeyNode {
+        sourceLinks: SankeyLinkDataItem[];
+        targetLinks: SankeyLinkDataItem[];
+    }
+    
+
+    interface SankeyExportVisualOptions {
+        width?: number | undefined;
+        height?: number | undefined;
+        options?: SankeyOptions | undefined;
+    }
+
+    interface SankeyOptions {
+        data: {
+            links: SankeyLink[] | undefined;
+            nodes: SankeyNode[] | undefined;
+        };
+    
+        labels?: SankeyLabel | undefined;
+        links?: SankeyLink | undefined;
+        nodes?: SankeyNode | undefined;
+        disableAutoLayout?: boolean | undefined;
+        title?: SankeyTitle | undefined;
+        legend?: SankeyLegend | undefined;
+        tooltips?: SankeyTooltips | undefined;
+        
+    }
+
+    interface SankeyTheme {
+        labels?: SankeyLabel | undefined;
+        links?: SankeyLink | undefined;
+        nodes?: SankeyNode | undefined;
+        nodesColors: string[] | undefined;
+    }
+
+    interface SankeyTitle {
+        align?: 'center' | 'left' | 'right' | undefined;
+        background?: string | undefined;
+        border?: SankeyBorder | undefined;
+        color?: string | undefined;
+        font?: string | undefined;
+        margin?: SankeyMargin | number | undefined;
+        padding?: SankeyPadding | number | undefined;
+        position?: 'top' | 'bottom' | undefined;
+        text?: string | undefined;
+        description?: string | undefined;
+        visible?: boolean | undefined;
+    }
+
+    interface SankeyLink {
+        sourceId: string | number | undefined;
+        targetId: string | number | undefined;
+        value: number | undefined;
+        colorType?: 'static' | 'source' | 'target' | undefined;
+        color?: string | undefined;
+        opacity?: number | undefined;
+        highlight?: SankeyLinkHighlight | undefined;
+    }
+
+    interface SankeyLinkHighlight {
+        opacity?: number | undefined;
+        inactiveOpacity?: number | undefined;
+    }
+
+    interface SankeyLabel {
+        text?: string | undefined;
+        visible?: boolean | undefined;
+        font?: string | undefined;
+        color?: string | undefined;
+        opacity?: number | undefined;
+        align?: 'left' | 'right' | 'center' | undefined;
+        position?: 'inside' | 'before' | 'after' | undefined;
+        padding?: number | SankeyPadding | undefined;
+        margin?: {
+            left?: number | undefined;
+            right?: number | undefined;
+        };
+        border?: SankeyBorder | undefined;
+        offset?: SankeyOffset | undefined;
+        stroke?: {
+            color?: string | undefined;
+            width?: number | undefined;
+            lineJoin?: 'round' | 'bevel' | 'miter' | undefined;
+        };
+    }
+
+    interface SankeyNode {
+        id: string | number | undefined;
+        label: SankeyLabel | undefined;
+        color?: string | undefined;
+        opacity?: number | undefined;
+        offset?: SankeyOffset | undefined;
+        padding?: number | undefined;
+        width?: number | undefined;
+        align?: 'stretch' | 'left' | 'right' | undefined;
+    }
+
+    interface SankeyLegend {
+        align?: 'start' | 'center' | 'end' | undefined;
+        background?: string | undefined;
+        border?: SankeyBorder | undefined;
+        height?: number | undefined;
+        item?: {
+            areaBackground?: string | undefined;
+            areaOpacity?: number | undefined;
+            cursor?: string | undefined;
+            visual?: any | undefined;
+        };
+        labels?: {
+            color?: string | undefined;
+            font?: string | undefined;
+            margin?: SankeyBorder | number | undefined;
+            padding?: SankeyPadding | number | undefined;
+        };
+        margin?: SankeyMargin | number | undefined;
+        offsetX?: number | undefined;
+        offsetY?: number | undefined;
+        orientation?: 'vertical' | 'horizontal' | undefined;
+        padding?: SankeyPadding | number | undefined;
+        position?: 'top' | 'bottom' | 'left' | 'right' | 'custom' | undefined;
+        reverse?: boolean | undefined;
+        spacing?: number | undefined;
+        title?: SankeyLegendTitle | undefined;
+        visible?: boolean | undefined;
+        width?: number | undefined;
+    }
+
+    interface SankeyLegendTitle {
+        align?: 'center' | 'left' | 'right' | undefined;
+        background?: string | undefined;
+        border?: SankeyBorder | undefined;
+        color?: string | undefined;
+        font?: string | undefined;
+        margin?: SankeyMargin | number | undefined;
+        padding?: SankeyPadding | number | undefined;
+        position?: 'top' | 'bottom' | undefined;
+        text?: string | undefined;
+        visible?: boolean | undefined;
+    }
+
+    interface SankeyTooltips {
+        followPointer?: boolean | undefined;
+        delay?: number | undefined;
+    }
+
+    interface SankeyBorder {
+        color?: string | undefined;
+        dashType?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface SankeyMargin {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
+    }
+
+    interface SankeyOffset {
+        left?: number;
+        top?: number;
+    }
+
+    interface SankeyPadding extends SankeyMargin {}
 
     class StockChart extends kendo.ui.Widget {
 

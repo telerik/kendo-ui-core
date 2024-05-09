@@ -237,15 +237,19 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
 1. The HTML that is output by components is rendered over the Kendo UI templates. They allow you to pre-compile HTML and inject data or expressions, which are evaluated, into the HTML and a DOM fragment is returned as an HTML string. Nearly all components in Kendo UI allow you to specify some kind of a template in addition to the default template that a component uses. To do this, first add the template to the `options` object and set its value to an empty string. Contrary to other configuration settings, do not set its default value here.
 
-        options: {
-            name: "Repeater",
-            autoBind: true,
-            template: ""
-        }
+```
+    options: {
+        name: "Repeater",
+        autoBind: true,
+        template: ""
+    }
+```
 
 1. Set the default value by adding a line directly under the call to the base component initialization. This pre-compiles the template passed in by the user, or uses a default template. In the case of this Repeater, write out `strong` tags wrapped in paragraphs, and then reference the `data` object, which will be a string if you pass an array of strings. If you pass objects to the template, the default template renders `[object Object]`.
 
-       that.template = kendo.template(that.options.template || "<p><strong>#= data #</strong></p>")
+```
+    that.template = kendo.template(that.options.template || "<p><strong>#= data #</strong></p>")
+```
 
 ## Implementing refresh Functions
 
@@ -549,32 +553,32 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
 
   In the following complete example, note that when you add an item to the `DataSource`, it is immediately reflected in the Repeater component.
 
-      ```dojo
-              <label for="newItem">Enter A New Item</label>
-              <input id="newItem" data-bind="value: newItem" class="k-input" />
-              <button class="k-button" data-bind="click: add">Add Item</button>
+```dojo
+    <label for="newItem">Enter A New Item</label>
+    <input id="newItem" data-bind="value: newItem" class="k-input" />
+    <button class="k-button" data-bind="click: add">Add Item</button>
 
-              <div data-role="repeater" data-bind="source: items" data-template="template"></div>
+    <div data-role="repeater" data-bind="source: items" data-template="template"></div>
 
-              <script type="text/x-kendo-template" id="template">
-                  <div style="color: salmon; margin-right: 10px'"><h1>#= data #</h1></div>
-              </script>
+    <script type="text/x-kendo-template" id="template">
+        <div style="color: salmon; margin-right: 10px'"><h1>#= data #</h1></div>
+    </script>
 
-      <script>
-      var viewModel = kendo.observable({
-          items: ["item1", "item2", "item3"],
-          newItem: null,
-          add: function(e) {
-              if (this.get("newItem")) {
-                  this.get("items").push(this.get("newItem"));
-              }
-          }
-      });
+    <script>
+    var viewModel = kendo.observable({
+        items: ["item1", "item2", "item3"],
+        newItem: null,
+        add: function(e) {
+            if (this.get("newItem")) {
+                this.get("items").push(this.get("newItem"));
+            }
+        }
+    });
 
-      kendo.bind(document.body, viewModel);
-      </script>
+    kendo.bind(document.body, viewModel);
+    </script>
 
-      ```
+```
 
 ## Working with Value-Bound Components
 
@@ -613,7 +617,6 @@ The following examples demonstrate how to create a simple input v that selects t
               kendo.ui.plugin(SelectedTextBox);
           })(jQuery);
 
-  <!--_-->
 1. Add a `value` method.
 
           var SelectedTextBox = kendo.ui.Widget.extend({

@@ -24,7 +24,6 @@ var __meta__ = {
         TOOLBAR = "toolbar",
         KTOOLBAR = "k-toolbar",
         KBUTTON = "k-button",
-        TOGGLE_BUTTON = "k-toggle-button",
         BUTTON_GROUP = "k-button-group",
         SPLIT_BUTTON = "k-split-button",
         MENU_BUTTON = "k-menu-button",
@@ -272,7 +271,7 @@ var __meta__ = {
         },
 
         getSelectedFromGroup: function(groupName) {
-            return this.element.find(DOT + TOGGLE_BUTTON + "[data-group='" + groupName + "']").filter(DOT + STATE_SELECTED);
+            return this.element.find("[data-group='" + groupName + "']").filter(DOT + STATE_SELECTED);
         },
 
         hide: function(candidate) {
@@ -1413,14 +1412,14 @@ var __meta__ = {
 
         _onClick: function(e) {
             var el = e.target,
-                togglable = el.hasClass(TOGGLE_BUTTON),
+                togglable = el.hasClass("k-toolbar-toggle-button"),
                 group = el.data(GROUP);
 
             if (!togglable) {
                 this.trigger(CLICK, { id: e.id, target: e.target, originalEvent: e.originalEvent || e.event });
             }
 
-            if (togglable && group && this.element.find("[data-group=" + group + "]").length > 1) {
+            if (group && this.element.find("[data-group=" + group + "]").length > 1) {
                 if (el.hasClass(STATE_SELECTED)) {
                     e.preventDefault();
                 }

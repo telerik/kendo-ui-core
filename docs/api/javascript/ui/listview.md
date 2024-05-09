@@ -2546,19 +2546,87 @@ The event handler function context (available via the `this` keyword) will be se
 #### Example
 
     <script type="text/x-kendo-tmpl" id="template">
-    <div> #:name#
-      	<div>
-           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+			<div> #:name#
+    	  <div>
+			    <button class="edit k-edit-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button">
+            <span class="k-icon k-svg-icon k-svg-i-pencil k-button-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+ 			<div>Name: <input type="text" data-bind="value:name" name="name" required="required" />
+   		  <div>
+   			  <button class="update k-update-button" type="button"></button>
+      	  <button class="cancel k-cancel-button" type="button"></button>
+        </div>
+      </div>
+    </script>
+
+    <div id="listView"></div>
+    <script>
+      $("#listView").kendoListView({
+        template: kendo.template($("#template").html()),
+        editTemplate: kendo.template($("#editTemplate").html()),
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
+            }
+          }
+        },
+        dataBound: function() {
+          kendo.ui.icon($(".k-svg-i-pencil"), { icon: 'pencil' });
+        }
+      });
+
+      var listView = $("#listView").data("kendoListView");
+      // bind to the edit event
+      listView.bind("edit", function(e) {
+        $(".update").kendoButton({
+          icon: "check"
+        });
+
+        $(".cancel").kendoButton({
+          icon: "cancel",
+          click: function() {
+            setTimeout(function() {
+              kendo.ui.icon($(".k-svg-i-pencil"), { icon: 'pencil' });
+            });
+          }
+        });
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Editing of item with id " + e.model.id);
+      });
+    </script>
+
+#### To set after initialization
+
+    <script type="text/x-kendo-tmpl" id="template">
+			<div> #:name#
+    	<div>
+			<button class="edit k-edit-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button">
+         <span class="k-icon k-svg-icon k-svg-i-pencil k-button-icon" aria-hidden="true"></span>
+      </button>
       </div>
       </div>
     </script>
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
-     <div>
-       Name: <input type="text" data-bind="value:name" name="name" required="required" />
-       <div>
-           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
-           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+ 			<div>Name: <input type="text" data-bind="value:name" name="name" required="required" />
+   		<div>
+   			<button class="update k-update-button" type="button"></button>
+      	<button class="cancel k-cancel-button" type="button"></button>
       </div>
       </div>
     </script>
@@ -2584,59 +2652,27 @@ The event handler function context (available via the `this` keyword) will be se
             }
           }
         },
-        edit: function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-          console.log("Editing of item with id " + e.model.id);
+        dataBound: function() {
+          kendo.ui.icon($(".k-svg-i-pencil"), { icon: 'pencil' });
         }
       });
-    </script>
 
-#### To set after initialization
-
-    <script type="text/x-kendo-tmpl" id="template">
-    <div> #:name#
-      	<div>
-           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
-      	</div>
-      </div>
-    </script>
-
-    <script type="text/x-kendo-tmpl" id="editTemplate">
-     <div>
-       Name: <input type="text" data-bind="value:name" name="name" required="required" />
-       <div>
-           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
-           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
-      </div>
-      </div>
-    </script>
-
-    <div id="listView"></div>
-    <script>
-      $("#listView").kendoListView({
-        template: kendo.template($("#template").html()),
-        editTemplate: kendo.template($("#editTemplate").html()),
-        dataSource: {
-          data: [
-            { id: 1, name: "Jane Doe", age: 47 },
-            { id: 2, name: "John Doe", age: 50 }
-          ],
-          schema: {
-            model: {
-              id: "id",
-              fields: {
-                id: { type: "number" },
-                name: { type: "string" },
-                age: { type: "number" }
-              }
-            }
-          }
-        }
-      });
       var listView = $("#listView").data("kendoListView");
       // bind to the edit event
       listView.bind("edit", function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        $(".update").kendoButton({
+          icon: "check"
+        });
+
+        $(".cancel").kendoButton({
+          icon: "cancel",
+          click: function() {
+            setTimeout(function() {
+              kendo.ui.icon($(".k-svg-i-pencil"), { icon: 'pencil' });
+            });
+          }
+        });
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing of item with id " + e.model.id);
       });
     </script>

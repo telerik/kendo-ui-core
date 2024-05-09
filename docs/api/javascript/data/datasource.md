@@ -3708,6 +3708,8 @@ The optional function which is executed when the remote request is finished. The
 
 Gets or sets the filter configuration.
 
+A list of the supported operators you can find in this filter [operator configuration article](/api/javascript/data/datasource/configuration/filter#filteroperator).
+
 #### Parameters
 
 ##### value `Object` *(optional)*

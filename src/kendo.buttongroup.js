@@ -18,8 +18,7 @@ var __meta__ = {
     var Button = ui.Button;
     var keys = kendo.keys;
     var NS = ".kendoButtonGroup";
-    var KWIDGET = "k-widget";
-    var KBUTTONGROUP = "k-button-group";
+    var KBUTTONGROUP = "k-button-group k-button-group-solid";
     var KBUTTON = "k-button";
     var SELECTED = "k-selected";
     var DISABLED = "k-disabled";
@@ -48,7 +47,7 @@ var __meta__ = {
             that._buttons = that._renderItems(that.options.items);
 
             that.element
-                .addClass(KWIDGET + EMPTY + KBUTTONGROUP)
+                .addClass(EMPTY + KBUTTONGROUP)
                 .attr("role", "group");
 
             that._enable = true;
@@ -242,6 +241,13 @@ var __meta__ = {
             }
         },
 
+        _decorateButtons: function(buttons) {
+            if (buttons.length) {
+                $(buttons[0].element).addClass("k-group-start");
+                $(buttons[buttons.length - 1].element).addClass("k-group-end");
+            }
+        },
+
         _renderItems: function(items) {
             var that = this,
                 groupOptions = that.options,
@@ -273,6 +279,7 @@ var __meta__ = {
             }
 
             if (!items) {
+                that._decorateButtons(buttons);
                 return buttons;
             }
 
@@ -300,6 +307,8 @@ var __meta__ = {
                     that.selectedIndices.push(index);
                 }
             });
+
+            that._decorateButtons(buttons);
 
             return buttons;
         },

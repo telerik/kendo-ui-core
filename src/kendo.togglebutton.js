@@ -17,7 +17,6 @@ import "./kendo.button.js";
             NS = ".kendoToggleButton",
             ARIA_PRESSED = "aria-pressed",
             SELECTED = "k-selected",
-            TOGGLE_BUTTON = "k-toggle-button",
             DATA_GROUP = "data-group",
             ID = "id";
 
@@ -30,7 +29,6 @@ import "./kendo.button.js";
                 element = that.wrapper = that.element;
                 options = that.options;
 
-                element.addClass(TOGGLE_BUTTON);
 
                 that._selected = options.selected === true ? true : false;
                 that.toggle(that._selected);

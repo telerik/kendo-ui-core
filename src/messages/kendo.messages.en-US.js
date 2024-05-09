@@ -1722,4 +1722,13 @@ if (kendo.dataviz.ui.Map) {
     });
 }
 
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+  kendo.dataviz.ui.Sankey.prototype.options.messages =
+  $.extend(true, kendo.ui.Captcha.prototype.options.messages,{
+      "tooltipUnits": "{0} Units"
+  });
+}
+
 })(window.kendo.jQuery);

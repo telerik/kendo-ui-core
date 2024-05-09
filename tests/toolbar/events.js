@@ -265,10 +265,8 @@
                 ]
             });
 
-            var buttons = container.find(".k-toggle-button");
-
+            var buttons = container.find(".k-toolbar-toggle-button");
             click(buttons.eq(0));
-
             assert.isOk(buttons.eq(0).hasClass("k-selected"), "First button is selected");
             assert.isOk(!buttons.eq(1).hasClass("k-selected"), "Second button is deselected");
 

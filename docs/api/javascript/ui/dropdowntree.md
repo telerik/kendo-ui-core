@@ -766,7 +766,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
         });
     </script>
 
-### loadOnDemand `Boolean` *(default: false)*
+### loadOnDemand `Object|Boolean` *(default: false)*
 
 Indicates whether the child DataSources should be fetched lazily when parent groups get expanded.
 Setting this to true causes loading the child DataSources when expanding the parent node.
@@ -784,6 +784,40 @@ Setting this to true causes loading the child DataSources when expanding the par
                     ]
                 }
             ]
+        });
+    </script>
+
+### loadOnDemand.valueMapper `Function`
+
+The component calls the valueMapper function when the component receives a value, that is not fetched from the remote server yet. The component will pass the selected value(s) in the valueMapper function. In turn, the valueMapper implementation should return the respective data item(s) ids.
+
+> The valueMapper needs `dataSource.schema` to work properly.
+
+#### Example
+
+    <input id="dropdowntree">
+    <script>
+        $("#dropdowntree").kendoDropDownTree({
+            loadOnDemand: {
+                    valueMapper: function (options) {
+                    options.success([[2, 8]]);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                        dataType: "jsonp"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "EmployeeId",
+                        hasChildren: "HasEmployees"
+                    }
+                }
+            },
+            value: '8'
         });
     </script>
 

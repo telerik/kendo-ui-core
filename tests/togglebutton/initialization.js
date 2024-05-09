@@ -16,12 +16,6 @@
             }
         });
 
-        it("initialization adds a k-toggle-button class", function() {
-            button.kendoToggleButton();
-
-            assert.isOk(button.hasClass("k-toggle-button"));
-        });
-
         it("initialization adds a k-selected class if button is selected", function() {
             button.kendoToggleButton({
                 selected: true

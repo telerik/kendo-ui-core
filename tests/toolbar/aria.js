@@ -173,7 +173,7 @@
                 ]
             });
 
-            var buttons = container.find(".k-toggle-button");
+            var buttons = container.find(".k-toolbar-toggle-button");
 
             assert.equal(buttons.eq(0).attr("aria-pressed"), "false");
             assert.equal(buttons.eq(1).attr("aria-pressed"), "true");
@@ -191,7 +191,7 @@
                 ]
             }).data("kendoToolBar");
 
-            var buttons = toolbar.element.find(".k-toggle-button");
+            var buttons = toolbar.element.find(".k-button");
 
             assert.equal(buttons.eq(0).attr("aria-pressed"), "false");
             assert.equal(buttons.eq(1).attr("aria-pressed"), "true");

@@ -553,17 +553,6 @@
 
         /* TOGGLE BUTTON */
 
-        it("toggleButton has k-toggle-button class", function() {
-            container.kendoToolBar({
-                items: [
-                    { type: "button", togglable: true, text: "foo" }
-                ]
-            });
-
-            assert.isOk(container.find(".k-toggle-button").length);
-            assert.equal(container.children().text(), "foo", "ToggleButton has correct text");
-        });
-
         it("by default toggleButton does not have k-selected class", function() {
             container.kendoToolBar({
                 items: [
@@ -571,7 +560,7 @@
                 ]
             });
 
-            assert.isOk(!container.find(".k-toggle-button.k-selected").length);
+            assert.isOk(!container.find(".k-toolbar-toggle-button.k-selected").length);
         });
 
         it("toggleButton with selected: true receives k-selected class", function() {
@@ -582,7 +571,7 @@
                 ]
             });
 
-            assert.isOk(container.find(".k-toggle-button.k-selected").length);
+            assert.isOk(container.find(".k-toolbar-toggle-button.k-selected").length);
             assert.equal($(".k-link.k-selected").length, 2);
         });
 
@@ -593,7 +582,7 @@
                 ]
             });
 
-            assert.isOk(!container.find(".k-toggle-button").data("group"));
+            assert.isOk(!container.find(".k-button").data("group"));
         });
 
         it("toggle button with group has data-group attribute set", function() {
@@ -604,7 +593,7 @@
                 ]
             });
 
-            var buttons = container.find(".k-toggle-button");
+            var buttons = container.find(".k-button");
 
             assert.equal(buttons.eq(0).data("group"), "foo");
             assert.equal(buttons.eq(1).data("group"), "foo");

@@ -1,4 +1,5 @@
 import "./kendo.data.js";
+import { valueMapperOptions } from "./utils/valueMapper.js";
 
 var __meta__ = {
     id: "virtuallist",
@@ -614,16 +615,8 @@ var __meta__ = {
 
             //prefetch the items
             if (typeof that.options.valueMapper === "function") {
-                that.options.valueMapper({
-                    value: (this.options.selectable === "multiple") ? value : value[0],
-                    success: function(response) {
-                        if (mapValueTo === "index") {
-                            that.mapValueToIndex(response);
-                        } else if (mapValueTo === "dataItem") {
-                            that.mapValueToDataItem(response);
-                        }
-                    }
-                });
+                const callback = mapValueTo === 'index' ? that.mapValueToIndex : that.mapValueToDataItem;
+                that.options.valueMapper(valueMapperOptions(this.options, value, callback.bind(that)));
             } else {
                  if (!that.value()[0]) {
                      that.select([-1]);

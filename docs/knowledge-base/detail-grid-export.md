@@ -37,6 +37,8 @@ The following examples demonstrate how to export detail Grids to Excel and merge
 
 To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
+>With JsZip version 3.x the synchronous methods were deprecated, so you must use the async methods to get the dataURL
+
 The following example demonstrates how to export a detail Grid to Excel including its all pages and details.
 
 ```dojo
@@ -132,6 +134,13 @@ The following example demonstrates how to export a detail Grid to Excel includin
           fileName: "Export.xlsx"
         });
 
+        // When using  jsZip version 3.x use the following as the synchronous methods were deprecated
+        //new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
+        //  kendo.saveAs($.extend({
+        //    dataURI: data,
+        //      fileName: "Export.xlsx"
+        //  }));
+        //});
 
       });
     },
