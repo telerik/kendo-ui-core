@@ -871,14 +871,16 @@ Reverses the axis direction - values increase from right to left and from top to
 
 The position of the gauge.
 
-### theme `String`
+### theme `String` *(default: "sass")*
 
-The gauge theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+The gauge theme. With versions prior to R1 2023 this can be either the respective LESS theme from the list below or "sass".
+When set to "sass" the gauge will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
 The supported values are:
 
-* "sass" - special value, see notes
+* "sass"
 * "black"
 * "blueopal"
 * "bootstrap"

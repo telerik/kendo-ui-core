@@ -34,7 +34,7 @@ When a server error occurs, the complete server response is logged in the consol
 * Firefox&mdash;Install [Firebug](https://getfirebug.com) and enable the **Console** tab.
 * Chrome&mdash;Open the JavaScript console (`Ctrl`+`Shift`+`J`).
 * Safari&mdash;Enable the **Develop** menu from the **Preferences**/**Advanced** dialog. Open the error console from the **Develop** menu.
-* Any browser&mdash;Use a debugging proxy like [Fiddler](https://www.telerik.com/fiddler) or [Charles](http://www.charlesproxy.com/) to obtain the server response.
+* Any browser&mdash;Use a debugging proxy like [Charles](http://www.charlesproxy.com/) to obtain the server response.
 
 ## See Also
 

@@ -56,9 +56,11 @@ The Supported values are:
 * horizontal
 * vertical
 
-### theme `String` *(default: "default")*
+### theme `String` *(default: "sass")*
 
 The theme of the TreeMap.
+
+Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
 ### valueField `String` *(default: "value")*
 

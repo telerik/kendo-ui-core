@@ -4007,6 +4007,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DatePickerAnimation | undefined;
+        autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
         componentType?: string | undefined;
         culture?: string | undefined;
@@ -4199,6 +4200,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DateTimePickerAnimation | undefined;
+        autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
         culture?: string | undefined;
         dateInput?: boolean | undefined;
@@ -12290,6 +12292,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | TimePickerAnimation | undefined;
+        autoCorrectParts?: boolean | undefined;
         culture?: string | undefined;
         dateInput?: boolean | undefined;
         dates?: any;
