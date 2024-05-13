@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.selectable.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+let __meta__ = {
     id: "calendar",
     name: "Calendar",
     category: "web",
@@ -11,7 +11,7 @@ var __meta__ = {
 };
 
 (function($, undefined) {
-    var kendo = window.kendo,
+    let kendo = window.kendo,
         support = kendo.support,
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -21,6 +21,7 @@ var __meta__ = {
         adjustDST = kendo.date.adjustDST,
         weekInYear = kendo.date.weekInYear,
         Selectable = kendo.ui.Selectable,
+        RangeSelectable = kendo.ui.RangeSelectable,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
         getCulture = kendo.getCulture,
@@ -34,6 +35,10 @@ var __meta__ = {
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
         KEYDOWN_NS = "keydown" + ns,
+        DOT = ".",
+        EMPTY = " ",
+        TABLE = "table",
+        CALENDAR_VIEW = "k-calendar-view",
         ID = "id",
         MIN = "min",
         LEFT = "left",
@@ -50,6 +55,8 @@ var __meta__ = {
         EMPTYCELL = "k-empty",
         TODAY = "k-calendar-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
+        START = "start",
+        END = "end",
         CELLSELECTORVALID = "td:has(.k-link):not(." + DISABLED + "):not(." + EMPTYCELL + ")",
         WEEKCOLUMNSELECTOR = "td:not(:has(.k-link))",
         SELECTED = "k-selected",
@@ -142,7 +149,7 @@ var __meta__ = {
                     if (that._view.name == "month" && that.options.disableDates(value)) {
                         return;
                     }
-                    if (that._view.name != "month" || options.selectable == "single") {
+                    if (that._view.name != "month" || that._isSingleSelection()) {
                             that._click($(link));
                     }
                 })
@@ -151,12 +158,23 @@ var __meta__ = {
                 })
                 .attr(ID);
 
-            if (that._isMultipleSelection() && that.options.weekNumber) {
+            if (that.options.weekNumber) {
                 element.on(CLICK, WEEKCOLUMNSELECTOR, function(e) {
                         var first = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).first(),
-                            last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
-                        that.selectable.selectRange(first, last);
-                        that.selectable.trigger(CHANGE, { event: e });
+                            last = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
+
+                        if (that._isMultipleSelection()) {
+                            that.selectable._lastActive = last;
+                            that.selectable.selectRange(first, last);
+                            that.selectable.trigger(CHANGE, { event: e });
+                        }
+
+                        if (that._isRangeSelection()) {
+                            that.rangeSelectable._lastActive = last;
+                            that.rangeSelectable.range(first, last);
+                            that.rangeSelectable.change();
+                        }
+
                         that._current = that._value = toDateObject(last.find("span"));
                         that._setCurrent(that._current);
                 });
@@ -193,6 +211,13 @@ var __meta__ = {
             if (that._isMultipleSelection() && options.selectDates.length > 0) {
                 that.selectDates(options.selectDates);
             }
+
+            that._range = options.range;
+
+            if (that._isRangeSelection()) {
+                that.selectRange(that._range);
+            }
+
             kendo.notify(that);
         },
 
@@ -203,17 +228,21 @@ var __meta__ = {
             max: new DATE(2099, 11, 31),
             dates: [],
             disableDates: null,
+            allowReverse: false,
+            centuryCellsFormat: "long",
             url: "",
             culture: "",
             footer: "",
             format: "",
             month: {},
             weekNumber: false,
+            range: { start: null, end: null, target: START },
             selectable: "single",
             selectDates: [],
             start: MONTH,
             depth: MONTH,
             size: "medium",
+            showOtherMonthDays: true,
             animation: {
                 horizontal: {
                     effects: SLIDE,
@@ -442,7 +471,8 @@ var __meta__ = {
                     url: options.url,
                     dates: options.dates,
                     format: options.format,
-                    otherMonth: true,
+                    showOtherMonthDays: options.showOtherMonthDays,
+                    centuryCellsFormat: options.centuryCellsFormat,
                     culture: culture,
                     disableDates: options.disableDates,
                     isWeekColumnVisible: options.weekNumber,
@@ -473,7 +503,7 @@ var __meta__ = {
                 that._visualizeSelectedDatesInView();
             }
 
-            if (that.options.selectable === "single") {
+            if (that._isSingleSelection()) {
                 if (view === views[options.depth] && that._value && !that.options.disableDates(that._value)) {
                     that._selectCell(that._value);
                 }
@@ -529,6 +559,7 @@ var __meta__ = {
                 that._selectDates = [date];
                 that.selectable._lastActive = null;
             }
+
             if (old && value === null && that._cell) {
                 that._cell.removeClass(SELECTED);
             } else {
@@ -546,7 +577,7 @@ var __meta__ = {
 
             table.attr("aria-labelledby", this._title.attr("id"));
 
-            if (this._view.name === "month" && this.options.selectable === "multiple") {
+            if (this._view.name === "month" && this._isMultipleSelection()) {
                 table.attr("aria-multiselectable", "true");
             }
         },
@@ -597,29 +628,122 @@ var __meta__ = {
             }
         },
 
+        _isSingleSelection: function() {
+            let selectable = this.options.selectable,
+            selectableOptions = Selectable.parseOptions(selectable);
+            return selectableOptions.single;
+        },
+
         _isMultipleSelection: function() {
-            var that = this;
-            return that.options.selectable === "multiple";
+            let selectable = this.options.selectable,
+            selectableOptions = Selectable.parseOptions(selectable);
+            return selectableOptions.multiple;
+        },
+
+        _isRangeSelection: function() {
+            let selectable = this.options.selectable,
+            selectableOptions = Selectable.parseOptions(selectable);
+            return selectableOptions.range;
         },
 
         _selectable: function() {
-            var that = this;
-            if (!that._isMultipleSelection()) {
+            let that = this,
+                selectable = that.options.selectable,
+                selectableOptions = Selectable.parseOptions(selectable);
+
+            if (!that._isMultipleSelection() && !that._isRangeSelection()) {
                 return;
             }
 
-            var selectable = that.options.selectable,
-            selectableOptions = Selectable.parseOptions(selectable);
+            if (that.rangeSelectable) {
+                that.rangeSelectable.destroy();
+                that.rangeSelectable = null;
+            }
 
-            that.selectable = new Selectable(that.wrapper, {
-                aria: true,
-                //excludes the anchor element
-                inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,span.k-svg-icon.k-svg-i-caret-alt-down,span.k-svg-icon.k-svg-i-caret-alt-up",
-                multiple: selectableOptions.multiple,
-                filter: "table.k-calendar-table:eq(0) " + CELLSELECTORVALID,
-                change: that._onSelect.bind(that),
-                relatedTarget: that._onRelatedTarget.bind(that)
-            });
+            if (selectableOptions.range) {
+                that.rangeSelectable = new RangeSelectable(that.wrapper, {
+                    widget: that,
+                    filter: ".k-calendar-monthview table " + CELLSELECTORVALID,
+                    cellSelector: CELLSELECTOR,
+                    cellSelectorValid: CELLSELECTORVALID,
+                    change: that._onSelect.bind(that),
+                    reverse: that.options.allowReverse,
+                    resetOnStart: true,
+                    ns: ns
+                });
+
+                that.element.addClass("k-calendar-range");
+            } else {
+                that.selectable = new Selectable(that.wrapper, {
+                    aria: true,
+                    //excludes the anchor element
+                    inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,span.k-svg-icon.k-svg-i-caret-alt-down,span.k-svg-icon.k-svg-i-caret-alt-up",
+                    multiple: selectableOptions.multiple,
+                    filter: "table.k-calendar-table:eq(0) " + CELLSELECTORVALID,
+                    change: that._onSelect.bind(that),
+                    relatedTarget: that._onRelatedTarget.bind(that)
+                });
+            }
+        },
+
+        _restoreSelection: function() {
+            const that = this;
+            let range;
+
+            that._preventChange = true;
+
+            if (that._isRangeSelection()) {
+                range = that.selectRange();
+
+                if (!range || !range.start) {
+                    that._preventChange = false;
+                    return;
+                }
+
+                that.selectRange(range);
+            }
+
+            that._preventChange = false;
+        },
+
+        selectRange: function(range) {
+            const that = this, view = that._view;
+            let startInRange, endInRange, visibleRange;
+
+            if (range === undefined) {
+                return that._range;
+            }
+
+            that._range = range;
+
+            if (!range.start) {
+                return;
+            }
+
+            visibleRange = that._visibleRange();
+
+            startInRange = that._dateInViews(range.start);
+            endInRange = range.end && that._dateInViews(range.end);
+
+            if (!startInRange && endInRange) {
+                that.rangeSelectable.selectTo(that._cellByDate(view.toDateString(range.end)));
+            }
+
+            if (startInRange && endInRange) {
+                that.rangeSelectable.range(that._cellByDate(view.toDateString(range.start)), that._cellByDate(view.toDateString(range.end)), false, that.options.allowReverse);
+            }
+
+            if (range.end && startInRange && !endInRange) {
+                that.rangeSelectable.selectFrom(that._cellByDate(view.toDateString(range.start)));
+            }
+
+            if (!range.end && startInRange) {
+                that.rangeSelectable.start(that._cellByDate(view.toDateString(range.start)));
+            }
+
+            if (+visibleRange.start > +range.start && +visibleRange.end < +range.end) {
+                that.rangeSelectable.mid(that.element.find(CELLSELECTORVALID));
+            }
         },
 
         _onRelatedTarget: function(target) {
@@ -633,9 +757,52 @@ var __meta__ = {
         },
 
         _onSelect: function(e) {
-            var that = this,
+            let that = this,
                 eventArgs = e,
+                range,
+                useEnd = e.sender._useEnd,
+                useStart = e.sender._useStart,
+                initialRange,
+                start,
+                end,
+                value,
+                target,
                 selectableOptions = Selectable.parseOptions(that.options.selectable);
+
+            if (that._isRangeSelection()) {
+                range = e.sender.range();
+                initialRange = that.selectRange() || {};
+                target = initialRange.target;
+                if (range.start && range.start.length) {
+                    start = toDateObject(range.start.find("span"));
+                }
+
+                if (range.end && range.end.length) {
+                    end = toDateObject(range.end.find("span"));
+                }
+
+                if (target === END) {
+                    target = START;
+                } else {
+                    target = END;
+                }
+
+                that._range = { start: useStart ? initialRange.start : start, end: useEnd ? initialRange.end : end, target: target };
+
+                if (!that._preventChange) {
+                    that.trigger(CHANGE);
+                }
+
+                value = end || start;
+
+                if (end && !that._dateInViews(end)) {
+                    value = start;
+                }
+
+                that.selectRange(that._range);
+                that.value(value);
+                return;
+            }
 
             if (!selectableOptions.multiple) {
                 if ($(eventArgs.event.currentTarget).is("td") && !$(eventArgs.event.currentTarget).hasClass("k-selected")) {
@@ -679,6 +846,11 @@ var __meta__ = {
                 that.selectable.destroy();
                 that.selectable = null;
             }
+
+            if (that.rangeSelectable) {
+                that.rangeSelectable.destroy();
+                that.rangeSelectable = null;
+            }
         },
 
         //when ctrl key is clicked
@@ -711,6 +883,13 @@ var __meta__ = {
             addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);
 
             that._visualizeSelectedDatesInView();
+        },
+
+        _visibleRange: function() {
+            let table = this.element.find(DOT + CALENDAR_VIEW + EMPTY + TABLE),
+                firstDateInView = toDateObject(table.first().find(CELLSELECTOR).first().find("span")),
+                lastDateInView = toDateObject(table.last().find(CELLSELECTOR).last().find("span"));
+            return { start: firstDateInView, end: lastDateInView };
         },
 
         _cellsBySelector: function(selector) {
@@ -759,6 +938,17 @@ var __meta__ = {
             }
         },
 
+        _dateInViews: function(date) {
+            let that = this,
+                tables = that.element.find(".k-calendar-view table"),
+                firstDateInView = toDateObject(tables.first().find(CELLSELECTOR).first().find("span")),
+                lastDateInView = toDateObject(tables.last().find(CELLSELECTOR).last().find("span"));
+
+            date = new Date(date.toDateString());
+
+            return +date <= +lastDateInView && +date >= +firstDateInView;
+        },
+
         _move: function(e) {
             var that = this,
                 options = that.options,
@@ -770,7 +960,7 @@ var __meta__ = {
                 currentValue = new DATE(+that._current),
                 isRtl = that.isRtl(),
                 isDisabled = that.options.disableDates,
-                value, prevent, method, temp;
+                value, prevent, method, temp, cell, focusedCell, lastActive;
 
             if (e.target === that._table[0]) {
                 that._active = true;
@@ -840,10 +1030,39 @@ var __meta__ = {
                     min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
                     if (that._isMultipleSelection()) {
                         that._keyboardRangeSelection(e, currentValue);
-                    }
-                    else {
+                    } else if (that._isRangeSelection()) {
+                        if (!that._dateInViews(currentValue)) {
+                            if (value > 0) {
+                                that.navigateToFuture();
+                            } else {
+                                that.navigateToPast();
+                            }
+                        }
+                    } else {
                         that._focus(currentValue);
                     }
+                }
+
+                if (that.rangeSelectable) {
+                    cell = that._cellByDate(view.toDateString(currentValue));
+                    lastActive = toDateObject((that.rangeSelectable._lastActive || focusedCell).find("span"));
+                    if (!that._dateInViews(lastActive)) {
+                        if (+lastActive > +currentValue) {
+                            that.rangeSelectable._end = that.rangeSelectable._lastActive;
+                            that.rangeSelectable.selectFrom(cell);
+                        } else {
+                            that.rangeSelectable.selectTo(cell);
+                        }
+                    } else {
+                        if (that.rangeSelectable._end && that.rangeSelectable._end.is("." + FOCUSED)) {
+                            that.rangeSelectable._lastActive = that.rangeSelectable._start;
+                        } else {
+                            that.rangeSelectable._lastActive = that._cellByDate(view.toDateString(lastActive));
+                        }
+                        that.rangeSelectable.range(that.rangeSelectable._lastActive, cell);
+                    }
+                    that.rangeSelectable.change();
+                    that._setCurrent(currentValue);
                 }
             } else {
                 if (key == keys.ENTER || key == keys.SPACEBAR) {
@@ -851,8 +1070,9 @@ var __meta__ = {
                         that.value(toDateObject($(that._cell.find("span"))));
                         that.selectable._lastActive = $(that._cell[0]);
                         that.trigger(CHANGE);
-                    }
-                    else {
+                    } else if (that.rangeSelectable) {
+                        that.rangeSelectable.change();
+                    } else {
                         that._click($(that._cell[0].firstChild));
                     }
                     prevent = true;
@@ -1092,7 +1312,7 @@ var __meta__ = {
                     cell.removeClass(SELECTED);
                 }
 
-                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR : "td:not(." + OTHERMONTH + ")");
+                cell = that._cellByDate(value, CELLSELECTOR);
 
                 that._selectedCell = cell;
                 cell.addClass(SELECTED)
@@ -1111,7 +1331,7 @@ var __meta__ = {
                     cell[0].removeAttribute(ID);
                 }
 
-                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR : "td:not(." + OTHERMONTH + ")");
+                cell = that._cellByDate(value, that._isMultipleSelection() ? CELLSELECTOR : "td:not(." + OTHERMONTH + ")");
 
                 that._cell = cell;
 
@@ -1258,6 +1478,7 @@ var __meta__ = {
                 }
 
                 that.navigate(currentValue);
+                that._restoreSelection();
             }
         },
 
@@ -1454,7 +1675,7 @@ var __meta__ = {
                     culture = options.culture,
                     navigateUrl = options.url,
                     showHeader = options.showHeader,
-                    otherMonth = options.otherMonth,
+                    showOtherMonthDays = options.showOtherMonthDays,
                     isWeekColumnVisible = options.isWeekColumnVisible,
                     hasUrl = navigateUrl && dates[0],
                     currentCalendar = getCalendarInfo(culture),
@@ -1496,7 +1717,7 @@ var __meta__ = {
                     weekNumber: options.weekNumber,
                     min: createDate(min.getFullYear(), min.getMonth(), min.getDate()),
                     max: createDate(max.getFullYear(), max.getMonth(), max.getDate()),
-                    otherMonth: otherMonth,
+                    showOtherMonthDays: showOtherMonthDays,
                     content: options.content,
                     lastDayOfMonth: lastDayOfMonth,
                     empty: options.empty,
@@ -1703,16 +1924,16 @@ var __meta__ = {
                 }
 
                 return view({
-                    start: createDate(year - year % 10 - 1, 0, 1),
+                    start: createDate(year - year % 10, 0, 1),
                     min: createDate(options.min.getFullYear(), 0, 1),
                     max: createDate(options.max.getFullYear(), 0, 1),
-                    otherMonth: options.otherMonth,
+                    showOtherMonthDays: options.showOtherMonthDays,
                     html: html,
                     setter: this.setDate,
                     build: function(date, idx) {
                         var cssClass = [ "k-calendar-td" ];
 
-                        if (idx === 0 || idx === 11) {
+                        if (idx === 10 || idx === 11) {
                             cssClass.push(EMPTYCELL);
                         }
 
@@ -1777,10 +1998,10 @@ var __meta__ = {
                 }
 
                 return view({
-                    start: createDate(year - year % 100 - 10, 0, 1),
+                    start: createDate(year - year % 100, 0, 1),
                     min: createDate(minYear, 0, 1),
                     max: createDate(maxYear, 0, 1),
-                    otherMonth: options.otherMonth,
+                    showOtherMonthDays: options.showOtherMonthDays,
                     html: html,
                     setter: this.setDate,
                     build: function(date, idx) {
@@ -1788,7 +2009,7 @@ var __meta__ = {
                         var start = date.getFullYear(),
                             end = start + 9;
 
-                        if (idx === 0 || idx === 11) {
+                        if (idx === 10 || idx === 11) {
                             cssClass.push(EMPTYCELL);
                         }
 
@@ -1802,7 +2023,7 @@ var __meta__ = {
 
                         return {
                             ns: kendo.ns,
-                            value: start + " - " + end,
+                            value: options.centuryCellsFormat === "long" ? `${start} - ${end}` : start,
                             dateString: toDateString(date),
                             cssClass: cssClass.join(" ")
                         };
@@ -1864,7 +2085,7 @@ var __meta__ = {
             length = options.cells || 12,
             isWeekColumnVisible = options.isWeekColumnVisible,
             cellsPerRow = options.perRow || 4,
-            otherMonth = options.otherMonth,
+            showOtherMonthDays = options.showOtherMonthDays,
             lastDayOfMonth = options.lastDayOfMonth,
             weekNumber = options.weekNumber || weekNumberTemplate,
             content = options.content || cellTemplate,
@@ -1881,7 +2102,7 @@ var __meta__ = {
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row" class="k-calendar-tr">';
                 if (isWeekColumnVisible) {
-                    html += otherMonth || (+start <= +lastDayOfMonth) ? weekNumber(weekNumberBuild(start)) : weekNumber({ weekNumber: "&nbsp;" });
+                    html += showOtherMonthDays || (+start <= +lastDayOfMonth) ? weekNumber(weekNumberBuild(start)) : weekNumber({ weekNumber: "&nbsp;" });
                 }
             }
 
@@ -1890,7 +2111,15 @@ var __meta__ = {
 
             data = build(start, idx, options.disableDates);
 
-            html += (data.cssClass.indexOf(OTHERMONTH) !== -1 && !otherMonth) ? otherMonthTemplate(data) : isInRange(start, min, max) && data.cssClass.indexOf(EMPTYCELL) === -1 ? content(data) : empty(data);
+            if (data.cssClass.indexOf(OTHERMONTH) !== -1 && !showOtherMonthDays) {
+                html += otherMonthTemplate(data);
+            } else {
+                if (isInRange(start, min, max) && data.cssClass.indexOf(EMPTYCELL) === -1) {
+                    html += content(data);
+                } else {
+                    html += empty(data);
+                }
+            }
 
             setter(start, 1);
         }

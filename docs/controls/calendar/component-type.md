@@ -1,7 +1,7 @@
 ---
 title: Calendar Component Types
-page_title: jQuery DatePicker Documentation - Calendar Component Types
-description: "Get started with the jQuery DatePicker by Kendo UI and learn how to enable the modern component type."
+page_title: jQuery Calendar Documentation - Calendar Component Types
+description: "Get started with the jQuery Calendar by Kendo UI and learn how to enable the modern component type."
 slug: componenttypes_calendar
 position: 8
 ---

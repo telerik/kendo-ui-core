@@ -31,7 +31,6 @@ var __meta__ = {
         DETACH = "detach",
         sizzleErrorRegExp = /unrecognized expression/;
 
-    var bodyRegExp = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i;
     var LOAD_START = "loadStart";
     var LOAD_COMPLETE = "loadComplete";
     var SHOW_START = "showStart";
@@ -621,8 +620,8 @@ var __meta__ = {
                 views,
                 view;
 
-            if (bodyRegExp.test(html)) {
-                html = RegExp.$1;
+            if (html.indexOf("<body") > -1) {
+                html = $("<div>").append(html).html();
             }
 
             sandbox[0].innerHTML = html;
@@ -643,6 +642,7 @@ var __meta__ = {
 
             container.append(views);
 
+            html = null; // Garbage collection.
             return this._createView(view);
         },
 

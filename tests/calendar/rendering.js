@@ -176,7 +176,7 @@ it("month view renders days", function() {
     div.html(calendar.views[0].content({
         date: currDate,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         content: template.content,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
@@ -199,7 +199,7 @@ it("header is correctly rendered for month view", function() {
         date: day,
         empty: template.empty,
         content: template.content,
-        otherMonth: true,
+        showOtherMonthDays: true,
         showHeader: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
@@ -217,7 +217,7 @@ it("header is correctly rendered for year view", function() {
         date: day,
         empty: template.empty,
         content: template.content,
-        otherMonth: true,
+        showOtherMonthDays: true,
         showHeader: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
@@ -235,7 +235,7 @@ it("header is correctly rendered for decade view", function() {
         date: day,
         empty: template.empty,
         content: template.content,
-        otherMonth: true,
+        showOtherMonthDays: true,
         showHeader: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
@@ -253,7 +253,7 @@ it("header is correctly rendered for century view", function() {
         date: day,
         empty: template.empty,
         content: template.content,
-        otherMonth: true,
+        showOtherMonthDays: true,
         showHeader: true,
         min: new Date(2000, 10, 10),
         max: new Date(2099, 10, 10),
@@ -331,7 +331,7 @@ it("month view renderer honors firstDayOfWeek property", function() {
     div.html(calendar.views[0].content({
         date: today,
         disableDates: $.noop,
-        otherMonth: true,
+        showOtherMonthDays: true,
         empty: template.empty,
         content: template.content,
         min: today,
@@ -350,7 +350,7 @@ it("month view honors firstVisibleDay", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         content: template.content,
         disableDates: $.noop,
         min: new Date(2000, 10, 10),
@@ -367,7 +367,7 @@ it("month view renders anchor in td with title", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         content: template.content,
         disableDates: $.noop,
         min: new Date(2000, 10, 10),
@@ -385,7 +385,7 @@ it("month view renders anchor in td with title depending on the options.culture"
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         content: template.content,
         culture: "bg-BG",
         disableDates: $.noop,
@@ -453,7 +453,7 @@ it("month view should render k-other-month style", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         disableDates: $.noop,
@@ -464,14 +464,14 @@ it("month view should render k-other-month style", function() {
     assert.equal(div.find("tbody tr:last").find("td.k-other-month").length, 5);
 });
 
-it("month view should not render weekNumber if otherMonth is false and the week is empty", function() {
+it("month view should not render weekNumber if showOtherMonthDays is false and the week is empty", function() {
     var today = new Date(2020, 6, 10);
 
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
         messages: { weekColumnHeader: "" },
-        otherMonth: false,
+        showOtherMonthDays: false,
         isWeekColumnVisible: true,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
@@ -488,7 +488,7 @@ it("month view should not render k-other-month to last day of month", function()
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         disableDates: $.noop,
@@ -509,7 +509,7 @@ it("month view do not apply k-other-month to the first day of the month", functi
         date: today,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
-        otherMonth: true,
+        showOtherMonthDays: true,
         empty: template.empty,
         disableDates: $.noop,
         content: template.content
@@ -544,7 +544,7 @@ it("month view renders k-weekend", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        otherMonth: true,
+        showOtherMonthDays: true,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         disableDates: $.noop,
@@ -633,7 +633,7 @@ it("year view renders meta view  4x3 cells", function() {
 
     div.html(calendar.views[1].content({
         date: today,
-        otherMonth: true,
+        showOtherMonthDays: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -714,7 +714,7 @@ it("decade view renders meta view  4x3 cells", function() {
 
     div.html(calendar.views[2].content({
         date: today,
-        otherMonth: true,
+        showOtherMonthDays: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -773,7 +773,8 @@ it("century view renders meta view  4x3 cells", function() {
 
     div.html(calendar.views[3].content({
         date: today,
-        otherMonth: true,
+        showOtherMonthDays: true,
+        centuryCellsFormat: "long",
         min: new Date(1800, 10, 10),
         max: new Date(2220, 10, 10)
     }));
@@ -790,7 +791,8 @@ it("century view renders only years in range", function() {
     div.html(calendar.views[3].content({
         date: today,
         min: today,
-        max: today
+        max: today,
+        centuryCellsFormat: "long"
     }));
 
     assert.equal(div.find("tbody").find("td:not(.k-empty) > span").length, 1);
@@ -802,7 +804,7 @@ it("century view does not render decades less then min", function() {
 
     div.html(calendar.views[3].content({
         date: today,
-        min: new Date(1900, 0, 1),
+        min: new Date(1920, 0, 1),
         max: new Date(1950, 0, 1)
     }));
 

@@ -21,6 +21,8 @@ It allows the user to select a date range from a calendar or through a direct in
 * [Selected Dates]({% slug selecteddates_kendoui_daterangepicker %})&mdash;The DateRangePicker allows you to render pre-selected dates and define date ranges.
 * [Start View and Navigation Depth]({% slug navdepth_kendoui_daterangepicker %})&mdash;The component allows you to change the default view.
 * [Calendar Types]({% slug calendartypes_kendoui_daterangepicker %})&mdash;You can use a specific calendar type out of the supported DateTimePicker ones.
+* [Reverse Selection]({% slug reverse_selection_daterangepicker %})&mdash;The component allows you to pick an end date which is before the start date.
+* [Buttons]({% slug buttons_daterangepicker %})&mdash;Learn more about the buttons supported by the component.
 
 
 ## Next Steps

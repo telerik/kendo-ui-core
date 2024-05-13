@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.userevents.js";
 
-var __meta__ = {
+let __meta__ = {
     id: "selectable",
     name: "Selectable",
     category: "framework",
@@ -10,8 +10,9 @@ var __meta__ = {
 };
 
 (function($, undefined) {
-    var kendo = window.kendo,
+    let kendo = window.kendo,
         Widget = kendo.ui.Widget,
+        support = kendo.support,
         abs = Math.abs,
         ARIASELECTED = "aria-selected",
         SELECTED = "k-selected",
@@ -22,6 +23,20 @@ var __meta__ = {
         NS = ".kendoSelectable",
         UNSELECT = "unselect",
         UNSELECTING = "k-unselecting",
+        HOVER = "k-hover",
+        MID = "k-range-mid",
+        SPLITEND = "k-range-split-end",
+        SPLITSTART = "k-range-split-start",
+        RANGESTART = "k-range-start",
+        RANGEEND = "k-range-end",
+        START = "start",
+        END = "end",
+        NONE = "none",
+        MOUSEENTER = "mouseenter",
+        MOUSELEAVE = "mouseleave",
+        TOUCHSTART = "touchstart",
+        TOUCHMOVE = "touchmove",
+        TOUCHEND = "touchend",
         INPUTSELECTOR_ICONSSELECTOR_FONT = "span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,.k-icon.k-i-caret-alt-down,.k-icon.k-i-caret-alt-right,.k-icon.k-i-caret-alt-left",
         INPUTSELECTOR_ICONSSELECTOR_SVG = INPUTSELECTOR_ICONSSELECTOR_FONT.replaceAll('k-i', 'k-svg-i'),
         INPUTSELECTOR_SVG_PARTS = INPUTSELECTOR_ICONSSELECTOR_SVG.split(",").map((selector) => selector + " *").join(","),
@@ -43,17 +58,20 @@ var __meta__ = {
             })();
         })($);
 
-    var Selectable = Widget.extend({
+    const Selectable = Widget.extend({
         init: function(element, options) {
-            var that = this,
+            let that = this,
                 multiple,
-                dragToSelect;
+                dragToSelect,
+                selectableClass;
 
             Widget.fn.init.call(that, element, options);
 
+            selectableClass = that.selectableClass = that.options.selectableClass || SELECTABLE;
+
             that._marquee = $("<div class='k-marquee'><div class='k-marquee-color'></div></div>");
             that._lastActive = null;
-            that.element.addClass(SELECTABLE);
+            that.element.addClass(selectableClass);
 
             that.relatedTarget = that.options.relatedTarget;
 
@@ -63,7 +81,7 @@ var __meta__ = {
             that.userEvents = new kendo.UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
-                filter: (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter,
+                filter: (!supportEventDelegation ? "." + selectableClass + " " : "") + that.options.filter,
                 tap: that._tap.bind(that),
                 touchAction: multiple ? "none" : "pan-x pan-y"
             });
@@ -94,6 +112,7 @@ var __meta__ = {
             ignoreOverlapped: false,
             addIdToRanges: false,
             toggleable: false,
+            selectableClass: ""
         },
 
         _isElement: function(target) {
@@ -113,7 +132,7 @@ var __meta__ = {
         },
 
         _tap: function(e) {
-            var target = $(e.target),
+            let target = $(e.target),
                 that = this,
                 options = that.options,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey,
@@ -125,7 +144,7 @@ var __meta__ = {
                 buttonCode = e.event.button;
 
             //in case of hierarchy or right-click
-            if (!that._isElement(target.closest("." + SELECTABLE)) || whichCode && whichCode == 3 || buttonCode && buttonCode == 2) {
+            if (!that._isElement(target.closest("." + that.selectableClass)) || whichCode && whichCode == 3 || buttonCode && buttonCode == 2) {
                 return;
             }
 
@@ -190,7 +209,7 @@ var __meta__ = {
         },
 
         _start: function(e) {
-            var that = this,
+            let that = this,
                 target = $(e.target),
                 selectedClass = that.options.selectedClass || SELECTED,
                 selected = target.hasClass(selectedClass),
@@ -209,7 +228,7 @@ var __meta__ = {
             that._downTarget = target;
 
             //in case of hierarchy
-            if (!that._isElement(target.closest("." + SELECTABLE))) {
+            if (!that._isElement(target.closest("." + that.selectableClass))) {
                 that.userEvents.cancel();
                 return;
             }
@@ -540,12 +559,381 @@ var __meta__ = {
         }
     });
 
+    const RangeSelectable = Widget.extend({
+        init: function(element, options) {
+            let that = this,
+            ns,
+            cellSelectorValid;
+
+            Widget.fn.init.call(that, element, options);
+
+            that.widget = options.widget;
+            ns = options.ns;
+            cellSelectorValid = options.filter;
+
+            that.userEvents = new kendo.UserEvents(that.element, {
+                global: true,
+                allowSelection: true,
+                filter: that.options.filter,
+                tap: that._tap.bind(that),
+                touchAction: NONE
+            });
+
+            if (support.touch) {
+                element.on(TOUCHSTART + ns, cellSelectorValid, that._mouseEnter.bind(that))
+                    .on(TOUCHEND + ns + " " + TOUCHMOVE + ns, cellSelectorValid, that._mouseLeave.bind(that));
+            } else {
+                element.on(MOUSEENTER + ns, cellSelectorValid, that._mouseEnter.bind(that))
+                    .on(MOUSELEAVE + ns, cellSelectorValid, that._mouseLeave.bind(that));
+            }
+        },
+
+        events: [CHANGE],
+
+        options: {
+            name: "RangeSelectable",
+            filter: ">*",
+            inputSelectors: INPUTSELECTOR,
+            resetOnStart: false,
+            multiple: false,
+            dragToSelect: true,
+            cellSelector: "*",
+            ns: "",
+            reverse: false,
+            relatedTarget: $.noop
+        },
+
+        destroy: function() {
+            let that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.userEvents.destroy();
+            that.widget = null;
+
+            that._lastActive = that.element = that.userEvents = that._start = that._end = null;
+        },
+
+        _allowSelection: function(target) {
+            if ($(target).is(this.options.inputSelectors)) {
+                this.userEvents.cancel();
+                return false;
+            }
+
+            return true;
+        },
+
+        _mouseEnter: function(e) {
+            let that = this,
+                cell = $(e.currentTarget),
+                range;
+
+            cell.addClass(HOVER);
+
+            range = that.widget.selectRange();
+
+            if (that.options.resetOnStart && range.end) {
+                return;
+            }
+
+            if (range.target === START && that._end) {
+                that.range(cell, that._end, true, that.options.reverse);
+            }
+
+            if (range.target === END) {
+                that.range(that._start, cell, true, that.options.reverse);
+            }
+        },
+
+        _mouseLeave: function(e) {
+            $(e.currentTarget).removeClass(HOVER);
+        },
+
+        start: function(element, preventFlagUpdate) {
+            if (element === undefined || element === null) {
+                return this._start;
+            }
+
+            element.addClass(SELECTED + " " + RANGESTART).attr(ARIASELECTED, true);
+
+            if (!preventFlagUpdate) {
+                this._start = element;
+            }
+        },
+
+        end: function(element, preventFlagUpdate) {
+            if (element === undefined || element === null) {
+                return this._start;
+            }
+
+            element.addClass(SELECTED + " " + RANGEEND).attr(ARIASELECTED, true);
+
+            if (!preventFlagUpdate) {
+                this._end = element;
+            }
+        },
+
+        mid: function(elements) {
+            let tables = this.element.find("table"),
+                options = this.options;
+
+            elements.addClass(MID).attr(ARIASELECTED, true);
+            tables.each(function() {
+                let that = $(this);
+                let lastCell = that.find(options.cellSelectorValid).last();
+                let firstCell = that.find(options.cellSelectorValid).first();
+
+                if (lastCell.hasClass(MID)) {
+                    lastCell.addClass(SPLITEND);
+                }
+
+                if (firstCell.hasClass(MID)) {
+                    firstCell.addClass(SPLITSTART);
+                }
+            });
+        },
+
+        clear: function(clearVariables) {
+            let options = this.options;
+            this.element.find(options.cellSelector)
+                .removeClass(MID + " " + SPLITEND + " " + SPLITSTART);
+
+            this.clearStartEnd();
+
+            if (clearVariables) {
+                this._start = this._end = null;
+            }
+        },
+
+        clearStartEnd: function() {
+            let that = this, options = that.options;
+            that.element.find(options.cellSelector).removeClass(RANGESTART + " " + SELECTED + " " + RANGEEND).removeAttr(ARIASELECTED);
+        },
+
+        selectFrom: function(start) {
+            let that = this,
+                options = this.options,
+                items,
+                startIdx;
+
+            items = that.element.find(options.cellSelector);
+
+            startIdx = $.inArray($(start)[0], items);
+
+            that.clear();
+            that.start(start);
+
+            items = items.filter(function(index) {
+                return index > startIdx;
+            });
+            that.mid(items);
+        },
+
+        selectTo: function(end) {
+            let that = this,
+                options = this.options,
+                items,
+                endIdx;
+
+            items = that.element.find(options.cellSelector);
+
+            endIdx = $.inArray($(end)[0], items);
+
+            that.clear();
+
+            items = items.filter(function(index) {
+                return index < endIdx;
+            });
+            that.mid(items);
+            that.end($(end));
+        },
+
+        range: function(start, end, preventFlagUpdate, invert) {
+            let that = this,
+                options = this.options,
+                items,
+                startIdx,
+                endIdx;
+
+            if (start === undefined) {
+                return { start: that._start, end: that._end };
+            }
+
+            items = that.element.find(options.cellSelector);
+
+            startIdx = $.inArray($(start)[0], items);
+            endIdx = $.inArray($(end)[0], items);
+
+            if (!start || (start && !start.length)) {
+                that._useStart = true;
+            }
+
+            that.clear();
+
+            if (start) {
+                that.start($(start), preventFlagUpdate);
+            }
+
+            items = items.filter(function(index) {
+               if (endIdx < 0 || (!start && startIdx < 0)) {
+                   return;
+               }
+
+                return (index > startIdx && index < endIdx) || options.reverse && (index < startIdx && index > endIdx);
+            });
+
+            that.mid(items);
+
+            if (end) {
+                that.end($(end), preventFlagUpdate);
+            } else {
+                that._useEnd = true;
+            }
+
+            if (startIdx > endIdx && invert) {
+                that.clearStartEnd();
+                that.start($(end), true);
+                that.end($(start), true);
+            }
+        },
+
+        change: function() {
+            this.trigger(CHANGE);
+        },
+
+        _clearFlags: function() {
+            this._useStart = this._useEnd = false;
+        },
+
+        _tap: function(e) {
+            let target = $(e.target),
+                that = this,
+                range = that.widget.selectRange() || {},
+                start = range.start,
+                end = range.end,
+                currentDate = kendo.calendar.toDateObject($(target).find("span")),
+                options = that.options,
+                resetOnStart = options.resetOnStart;
+
+            that._lastActive = target;
+
+            if (!start && !end) {
+                that.clear(true);
+                if (range.target === START) {
+                    that.start(target);
+                }
+
+                if (range.target === END) {
+                    that.end(target);
+                }
+
+                that._clearFlags();
+                that.trigger(CHANGE);
+                return;
+            }
+
+            if (!start && end) {
+                if (range.target === END) {
+                    that.end(target);
+                } else {
+                    if (+currentDate > +range.end && !options.reverse) {
+                        that.clear(true);
+                        that.start(target);
+                    } else {
+                        that.range(target, that._end, false, true);
+                    }
+                }
+                that.trigger(CHANGE);
+                that._clearFlags();
+                return;
+            }
+
+            if (start && !end) {
+                if (range.target === END && !options.reverse && +start > +currentDate) {
+                    that.clear(true);
+
+                    if (resetOnStart) {
+                        that.start(target);
+                    } else {
+                        that.end(target);
+                    }
+                } else if (range.target === START) {
+                    that.start(target);
+                } else {
+                    that.range(that._start, target, false, true);
+                }
+                that.trigger(CHANGE);
+                that._clearFlags();
+                return;
+            }
+
+            if (start && end) {
+                if (!options.reverse) {
+                    if (+start > +currentDate && range.target === END) {
+                        that.clear(true);
+                        if (resetOnStart) {
+                            that.start(target);
+                            that.end(null);
+                            range.target = START;
+                        } else {
+                            that.start(null);
+                            that.end(target);
+                        }
+                        that.trigger(CHANGE);
+                        return;
+                    }
+
+                    if (+start < +currentDate && range.target === START) {
+                        if (+currentDate > +range.end) {
+                            that.clear(true);
+                            that.start(target);
+                            that.end(null);
+                        } else {
+                            that.range(target, that._end);
+                        }
+                        that.trigger(CHANGE);
+                        return;
+                    }
+
+                    if (range.target === START) {
+                        that.range(target, that._end);
+                    }
+
+                    if (range.target === END) {
+                        that.range(that._start, target);
+                    }
+
+                    that.trigger(CHANGE);
+                    return;
+                }
+
+                if (resetOnStart) {
+                    if (range.target === START) {
+                        that.range(target, that._end, false, true);
+                    } else {
+                        that.range(that._start, target, false, true);
+                    }
+                } else {
+                    if (range.target === START) {
+                        that.start(target);
+                    } else {
+                        that.end(target);
+                    }
+                }
+
+                that.trigger(CHANGE);
+            }
+        }
+    });
+
     Selectable.parseOptions = function(selectable) {
         var selectableMode = selectable.mode || selectable;
         var asLowerString = typeof selectableMode === "string" && selectableMode.toLowerCase();
         return {
             multiple: asLowerString && asLowerString.indexOf("multiple") > -1,
-            cell: asLowerString && asLowerString.indexOf("cell") > -1
+            cell: asLowerString && asLowerString.indexOf("cell") > -1,
+            range: asLowerString && asLowerString.indexOf("range") > -1,
+            single: asLowerString && asLowerString.indexOf("single") > -1
         };
     };
 
@@ -590,6 +978,7 @@ var __meta__ = {
     }
 
     kendo.ui.plugin(Selectable);
+    kendo.ui.plugin(RangeSelectable);
 
 })(window.kendo.jQuery);
 export default kendo;

@@ -2822,6 +2822,8 @@ declare namespace kendo.ui {
         navigateUp(): void;
         selectDates(): any;
         selectDates(dates: any): void;
+        range(): any;
+        range(range: CalendarRange): void;
         value(): Date;
         value(value: Date): void;
         value(value: string): void;
@@ -2848,6 +2850,10 @@ declare namespace kendo.ui {
     }
 
     interface CalendarOptions {
+        allowReverse?: boolean | undefined;
+        showOtherMonthDays?: boolean | undefined;
+        centuryCellsFormat?: "long" | "short" | undefined;
+        range?: CalendarRange | undefined
         name?: string | undefined;
         culture?: string | undefined;
         dates?: any;
@@ -2871,6 +2877,12 @@ declare namespace kendo.ui {
         sender: Calendar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface CalendarRange {
+        start?: Date | undefined;
+        end?: Date | undefined;
+        target: "start" | "end" | undefined;
     }
 
     class Captcha extends kendo.ui.Widget {
@@ -4094,10 +4106,15 @@ declare namespace kendo.ui {
     interface DateRangePickerRange {
         start?: Date | undefined;
         end?: Date | undefined;
+        target?: "start" | "end" | undefined;
     }
 
     interface DateRangePickerOptions {
         name?: string | undefined;
+        allowReverse?: boolean | undefined;
+        autoClose?: boolean | undefined;
+        calendarButton?: boolean | undefined;
+        clearButton?: boolean | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         ARIATemplate?: string | undefined;
         culture?: string | undefined;
@@ -8155,9 +8172,13 @@ declare namespace kendo.ui {
     interface MultiViewCalendarRange {
         start?: Date | undefined;
         end?: Date | undefined;
+        target?: "start" | "end" | undefined;
     }
 
     interface MultiViewCalendarOptions {
+        allowReverse?: boolean | undefined;
+        showOtherMonthDays?: boolean | undefined;
+        centuryCellsFormat?: "long" | "short" | undefined;
         name?: string | undefined;
         culture?: string | undefined;
         dates?: any;

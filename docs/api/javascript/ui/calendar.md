@@ -12,6 +12,38 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### allowReverse `Boolean` *(default: false)*
+
+Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to **range**.
+
+#### Example - enable reverse selection
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range",
+            allowReverse: true,
+            showOtherMonthDays: false
+        });
+    </script>
+
+### centuryCellsFormat `String`*(default: "long")*
+
+ Specifies the format of the century cells.
+
+* `"long"` - The cells will display a decade range **2000-2009**, **2010-2019**.
+* `"short"` - The cells will display just the starting year of the decade **2000**, **2010**.
+
+#### Example - render the short version of the century cells
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            centuryCellsFormat: "short",
+            start: "century"
+        });
+    </script>
+
 ### componentType `String`*(default: "classic")*
 
  Specifies the component type of the widget.
@@ -410,7 +442,7 @@ Allows customization of the text of the Today button present in the widget in it
 
 ### selectable `String`  *(default: "single")*
 
-By default user is able to select a single date. The property can also be set to "multiple" in order the multiple  date selection to be enabled. More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.
+By default user is able to select a single date. The property can also be set to **multiple** or **range**. More information about the different selection modes can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.
 
 #### Example - enable the multiple selection
 
@@ -482,6 +514,35 @@ The following settings are available for the **start** value:
     <script>
         $("#calendar").kendoCalendar({
             value: new Date(2012, 0, 1)
+        });
+    </script>
+
+### range `Object`*(default: { start: null, end: null })*
+
+Specifies an initial range selection. This option is available only when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to `range`. 
+
+#### Example - specify the selected range of the component
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range",
+            range: { start: new Date(2024, 3, 3), end: new Date(2024, 3, 13) }
+        });
+    </script>
+
+### showOtherMonthDays `Boolean`*(default: true)*
+
+When this configuration is enabled, the calendar will render days from the previous and next months in the current view.
+
+> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/javascript/ui/calendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
+
+#### Example - Hide dates from the other months
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            showOtherMonthDays: false
         });
     </script>
 

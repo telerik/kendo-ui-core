@@ -30,8 +30,8 @@ To perform the multiple date selection, the user can also use the keyboard:
    <div id="calendar"></div>
    <script>
     $("#calendar").kendoCalendar({
-		selectable: "multiple"
-	});
+		  selectable: "multiple"
+	  });
   </script>
 ```
 
@@ -41,9 +41,9 @@ The following image demonstrates a Calendar with selected multiple dates.
 
 ## Range Date Selection
 
-The Calendar enables the range date selection over the keyboard.
+The Calendar enables the range date selection over the keyboard. As of R2 2024 release, the component supports `range` selection through the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option.
 
-The usage of the `Shift` key allows the user to select a range of dates in the same month or across different months:
+The usage of the `Shift` key allows the user to select a range of dates in the same month or across different months when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to `multiple`:
 
 * `Shift` + mouse-clicking specific dates&mdash;Selects all dates between the most recently selected one (with `Space` or mouse click) and the clicked cell.
 * `Shift` + mouse clicking specific dates&mdash;If no previous selection was made, selects all dates from the beginning to the clicked cell.

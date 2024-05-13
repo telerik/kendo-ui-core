@@ -1,6 +1,6 @@
 import "./kendo.core.js";
 
-var __meta__ = {
+let __meta__ = {
     id: "validator",
     name: "Validator",
     category: "web",
@@ -10,7 +10,7 @@ var __meta__ = {
 
 
 (function($, undefined) {
-    var kendo = window.kendo,
+    let kendo = window.kendo,
         Widget = kendo.ui.Widget,
         NS = ".kendoValidator",
         INVALIDMSG = "k-invalid-msg",
@@ -25,7 +25,7 @@ var __meta__ = {
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
         emailRegExp = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i,
-        urlRegExp = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
+        ALLOWED_URL_PROTOCOLS = ["http:", "https:", "ftp:", "ftps:"],
         INPUTSELECTOR = ":input:not(:button,[type=submit],[type=reset],[disabled],[readonly])",
         CHECKBOXSELECTOR = ":checkbox:not([disabled],[readonly])",
         NUMBERINPUTSELECTOR = "[type=number],[type=range]",
@@ -246,7 +246,15 @@ var __meta__ = {
                     return matcher(input, "[type=email],[" + kendo.attr("type") + "=email]", emailRegExp);
                 },
                 url: function(input) {
-                    return matcher(input, "[type=url],[" + kendo.attr("type") + "=url]", urlRegExp);
+                    if (input.filter("[type=url],[" + kendo.attr("type") + "=url]").length && input.val() !== "") {
+                        try {
+                            const url = new URL(input.val());
+                            return ALLOWED_URL_PROTOCOLS.includes(url.protocol);
+                        } catch {
+                            return false;
+                        }
+                    }
+                    return true;
                 },
                 date: function(input) {
                     if (input.filter("[type^=date],[" + kendo.attr("type") + "=date]").length && input.val() !== "") {

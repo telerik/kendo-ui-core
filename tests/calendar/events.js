@@ -81,7 +81,7 @@ it("navigate event should raise navigate event when change view", function() {
 });
 
 it("click on cell should persist _viewedValue", function() {
-    var date = new Date(2000, 10, 22, 22, 22, 22),
+    var date = new Date(2001, 10, 22, 22, 22, 22),
         instance = new Calendar(div, {
             value: date
         });

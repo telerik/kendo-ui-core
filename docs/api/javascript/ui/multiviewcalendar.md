@@ -12,6 +12,37 @@ Represents the Kendo UI MultiViewCalendar widget. Inherits from [Widget](/api/ja
 
 ## Configuration
 
+### allowReverse `Boolean` *(default: false)*
+
+Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/javascript/ui/multiviewcalendar/configuration/selectable) configuration is set to **range**.
+
+#### Example - enable reverse selection
+
+    <div id="multiViewCalendar"></div>
+    <script>
+        $("#multiViewCalendar").kendoMultiViewCalendar({
+            selectable: "range",
+            allowReverse: true
+        });
+    </script>
+
+### centuryCellsFormat `String`*(default: "long")*
+
+ Specifies the format of the century cells.
+
+* `"long"` - The cells will display a decade range **2000-2009**, **2010-2019**.
+* `"short"` - The cells will display just the starting year of the decade **2000**, **2010**.
+
+#### Example - render the short version of the century cells
+
+    <div id="multiViewCalendar"></div>
+    <script>
+        $("#multiViewCalendar").kendoMultiViewCalendar({
+            centuryCellsFormat: "short",
+            start: "century"
+        });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.
@@ -439,6 +470,21 @@ The following settings are available for the **start** value:
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({
             value: new Date(2012, 0, 1)
+        });
+    </script>
+
+### showOtherMonthDays `Boolean`*(default: false)*
+
+When this configuration is enabled, the MultiViewCalendar will render days from the previous and next months in the current views.
+
+> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/javascript/ui/multiviewcalendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
+
+#### Example - Show dates from the other months
+
+    <div id="multiViewCalendar"></div>
+    <script>
+        $("#multiViewCalendar").kendoCalendar({
+            showOtherMonthDays: true
         });
     </script>
 

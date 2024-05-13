@@ -11,6 +11,32 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
 
 ## Configuration
 
+### allowReverse `Boolean` *(default: false)*
+
+Enables the user to select an end date that is before the start date.
+
+#### Example - enable reverse selection
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            allowReverse: true
+        });
+    </script>
+
+### autoClose `Boolean` *(default: true)*
+
+Specifies whether the calendar popup should close automatically when a range is selected.
+
+#### Example - prevent the popup closure
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            autoClose: false
+        });
+    </script>
+
 ### adaptiveMode `String`*(default: "none")*
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
@@ -30,6 +56,32 @@ Specifies the adaptive rendering of the component. The supported values are: `no
     $("#daterangepicker").kendoDateRangePicker({
         ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
     });
+    </script>
+
+### calendarButton `Boolean` *(default: false)*
+
+If this configuration is enabled, a calendar button will appear inside the date inputs. This is similar to the calendar button in the DatePicker component. The calendar popup will be opened only when the button is clicked. Clicking inside the input itself will have no effect.
+
+#### Example - render the calendar buttons
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            calendarButton: true
+        });
+    </script>
+
+### clearButton `Boolean` *(default: false)*
+
+If this configuration is enabled, a clear button will appear in the date inputs where a date is selected. Clicking on the clear button will remove the selected date from the input.
+
+#### Example - render the clear button
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            clearButton: true
+        });
     </script>
 
 ### culture `String`*(default: "en-US")*

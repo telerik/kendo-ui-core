@@ -123,7 +123,7 @@ it("navigate should select date equal to _value", function() {
 
     cal.navigateToPast();
 
-    assert.equal(div.find("td.k-selected").length, 0);
+    assert.equal(div.find("td.k-selected").length, 1);
 });
 
 it("navigateToPast should navigate to previous month when month view", function() {
