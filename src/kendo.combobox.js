@@ -226,6 +226,11 @@ var __meta__ = {
             Select.fn.destroy.call(that);
         },
 
+        _popup: function() {
+            Select.fn._popup.call(this);
+            this.popup.element.addClass("k-combobox-popup");
+        },
+
         _onActionSheetCreate: function() {
             var that = this;
 
@@ -1090,7 +1095,6 @@ var __meta__ = {
 
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
-                this.wrapper.addClass("k-combobox-clearable");
             }
         },
 

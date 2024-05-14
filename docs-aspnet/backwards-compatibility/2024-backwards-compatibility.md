@@ -10,25 +10,45 @@ position: 1
 
 This article lists the breaking or important changes in the 2024 releases of {{ site.product }}.
 
-## {{ site.product }} R1 2024
+## {{ site.product }} Q2 2024
+
+### Target Framework
+
+{% if site.core %}
+As of the Q2 2024 release, {{ site.product }} supports only [LTS and STS versions of .NET Core](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#lifecycle). You can update to a supported .NET Core version.
+{% else %}
+As of the Q2 2024 release, {{ site.product }} supports .NET Framework 4.6.2 and later versions. You can update to a [supported .NET Framework version](https://learn.microsoft.com/en-us/lifecycle/products/microsoft-net-framework).
+
+**Telerik.Web.Captcha**
+As of the Q2 2024 release, the `Telerik.Web.Captcha` package targets .NET Framework 4.6.2
+
+**Telerik.Web.Spreadsheet**
+As of the Q2 2024 release, the `Telerik.Web.Spreadsheet` package targets .NET Framework 4.6.2
+{% endif %}
+
+### Chart
+
+The default [`Theme`](/api/kendo.mvc.ui.fluent/chartbuilder#themesystemstring) configuration for the {{ site.product }} Charts is changed to `sass`. By default, the [Chart theme]({% slug htmlhelpers_charts_appearance_aspnetcore %}#sass-themes) will now match the loaded [Sass-based theme]({% slug sassbasedthemes_overview %}).
+
+## {{ site.product }} Q1 2024
 
 **Deprecated Controllers**
 
-As of the R1 2024 release, the following controllers will be deprecated.
+As of the Q1 2024 release, the following controllers will be deprecated.
 
 * FileManager&mdash;`ContentProviderController`
 * Editor&mdash;`EditorImageBrowserController`, `FileBrowserController`, `EditorFileBrowserController`
 
 **Deprecated Interfaces**
 
-As of the R1 2024 release, the following interfaces will be deprecated.
+As of the Q1 2024 release, the following interfaces will be deprecated.
 
 * FileManager&mdash;`IContentProviderController`
 * Editor&mdash;`IFileBrowserController`, `IImageBrowserController` 
 
 **Deprecated APIs**
 
-As of the R1 2024 release, the following APIs will be deprecated.
+As of the Q1 2024 release, the following APIs will be deprecated.
 
 
 {% if site.core %}

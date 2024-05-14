@@ -143,6 +143,24 @@ An array of toolbar items to display in the header Toolbar. They will be rendere
     });
     </script>
 
+### toolbarItems.type `String`
+The type of the toolbar item. Available options are `button` or `spacer`.
+
+### toolbarItems.icon `String`
+The icon name of the toolbar item.
+
+### toolbarItems.fillMode `String`
+The fill mode of the toolbar item. Available options are `solid`, `outline`, `flat` or `none`.
+
+### toolbarItems.rounded `String`
+The rounded mode of the toolbar item. Available options are `small`, `medium`, `large`, `full` or `none`.
+
+### toolbarItems.themeColor `String`
+The theme color of the toolbar item. Available options are `base`, `primary`, `secondary`, `tertiary`, `success`, `warning`, `error`, `info`, `light`, `inverse` or `dark`.
+
+### toolbarItems.click `Function`
+The click event handler of the toolbar item.
+
 ### showOutputRating `Boolean` *(default: true)*
 
 Specifies if the output rating should be displayed on the output card.
@@ -536,6 +554,21 @@ A function that is executed when the view is rendered. It is used to initialize 
     })
     </script>
 
+### views.promptCommands `Array`
+
+The commands to display in the prompt view.
+
+### views.promptCommands.id `String`
+
+The id of the command item.
+
+### views.promptCommands.text `String`
+
+The text of the command item.
+
+### views.promptCommands.icon `String`
+
+The icon name of the command item.
 
 ### messages `Object`
 

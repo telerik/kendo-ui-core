@@ -1252,14 +1252,6 @@
             assert.equal(noData.text(), combobox.dataSource.total());
         });
 
-        it("adds class to the wrapper if clearButton is enabled", function() {
-            var combobox = new ComboBox(input, {
-                clearButton: true
-            });
-
-            assert.isOk(combobox.wrapper.hasClass("k-combobox-clearable"));
-        });
-
         it("adds class hidden to the wrapper if clearButton is enabled and value is null", function() {
             var combobox = new ComboBox(input, {
                 clearButton: true
@@ -1268,14 +1260,6 @@
             combobox._hideBusy();
 
             assert.isOk(combobox._clear.hasClass("k-hidden"));
-        });
-
-        it("does not add k-combobox-clearable class if clearButton is turned off", function() {
-            var combobox = new ComboBox(input, {
-                clearButton: false
-            });
-
-            assert.isOk(!combobox.wrapper.hasClass("k-combobox-clearable"));
         });
 
         it("_syncValueAndText is true value when syncValueAndText is true", function() {

@@ -68,5 +68,5 @@ The PropertyGrid supports the following keyboard shortcuts:
 
 ## See Also
 
-* [Keyboard Navigation by the PropertyGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation)
+* [Keyboard Navigation by the PropertyGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/propertygrid/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

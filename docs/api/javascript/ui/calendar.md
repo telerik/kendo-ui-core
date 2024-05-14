@@ -531,6 +531,12 @@ Specifies an initial range selection. This option is available only when the [`s
         });
     </script>
 
+### range.start `Date`
+Specifies the start date of the range selection.
+
+### range.end `Date`
+Specifies the end date of the range selection.
+
 ### showOtherMonthDays `Boolean`*(default: true)*
 
 When this configuration is enabled, the calendar will render days from the previous and next months in the current view.
