@@ -401,6 +401,8 @@ navigation:
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         isNew: true
+     "html-helpers/conversational-ui/aiprompt":
+        title: "AIPrompt"
      "html-helpers/conversational-ui/chat":
         title: "Chat"
      "html-helpers/interactivity":
@@ -699,13 +701,13 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2024.1.319"
+cdnVersion: "2024.2.514"
 
 ## The themes CDN used
-themesCdnVersion: "8.0.0"
+themesCdnVersion: "8.0.1"
 
 ## The MVC Core version used
-mvcCoreVersion: "2024.1.319"
+mvcCoreVersion: "2024.2.514"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -762,6 +764,11 @@ defaults:
         path: "html-helpers/conversational-ui/chat"
     values:
         title_prefix: "ASP.NET Core Chat Component"
+-
+    scope:
+        path: "html-helpers/conversational-ui/aiprompt"
+    values:
+        title_prefix: "ASP.NET Core AIPrompt Component"
 -
     scope:
         path: "html-helpers/data-management/filemanager"
