@@ -27,14 +27,15 @@ To initialize the MultiColumnComboBox, use any of the following approaches:
 
 ## Functionality and Features
 
-* [Data binding]({% slug databinding_kendoui_multicolumncombobox %})
-* [Columns]({% slug columns_kendoui_multicolumncombobox %})
-* [Filtering]({% slug filtering_kendoui_multicolumncombobox %})
-* [Grouping]({% slug grouping_kendoui_multicolumncombobox_widget %})
-* [Virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %})
-* [Templates]({% slug templates_kendoui_multicolumncombobox %})
-* [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})
-* [Appearance]({% slug appearance_kendoui_multicolumncombobox_widget %})
+* [Data binding]({% slug databinding_kendoui_multicolumncombobox %})&mdash;The MultiColumnComboBox enables you to bind it to local data arrays and to remote data services.
+* [Columns]({% slug columns_kendoui_multicolumncombobox %})&mdash;You can configure multiple columns based on the data fields in the MultiColumnComboBox.
+* [Filtering]({% slug filtering_kendoui_multicolumncombobox %})&mdash;The MultiColumnComboBox allows you to filter its data.
+* [Grouping]({% slug grouping_kendoui_multicolumncombobox_widget %})&mdash;You can use the provided options for displaying data items categorized by a specific model field of the MultiColumnComboBox.
+* [Virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %})&mdash;The MultiColumnComboBox enables you to display large datasets by using a fixed amount of list items in its popup list.
+* [Templates]({% slug templates_kendoui_multicolumncombobox %})&mdash;You can also control the way a MultiColumnComboBox item or the popup header and footer are rendered by using the Kendo UI templates.
+* [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})&mdash;The cascading functionality of the MultiColumnComboBox enables you to implement a series of two or more components in which each MultiColumnComboBox is filtered according to the selected options in the previous one.
+* [Appearance]({% slug appearance_kendoui_multicolumncombobox_widget %})&mdash;You can use the available styling options for configuring the size, border radius, and fill mode of the MultiColumnComboBox.
+* [Prefix and suffix]({% slug prefix_suffix_multicolumncombobox %})&mdash;The MultiColumnComboBox component lets you add custom content as prefix and suffix adornments.
 
 ## Next Steps
 

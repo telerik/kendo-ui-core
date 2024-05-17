@@ -19,6 +19,7 @@ The widget enables you to define its value and mask value, and set custom mask r
 * [Validation]({% slug masks_kendoui_maskedtextbox_widget %})&mdash;Check how to use the pre-defined rules and how to customize them.
 * [Appearance]({% slug maskedtextbox_appearance %})&mdash;Explore the styling options of the MaskedTextBox component.
 * [Labels]({% slug labels_maskedtextbox %})&mdash;Check how you can use the label feature of the component.
+* [Prefix and suffix]({% slug prefix_suffix_maskedtextbox %})&mdash;The MaskedTextBox component provides options to add custom content as prefix and suffix adornments.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the MaskedTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/maskedtextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

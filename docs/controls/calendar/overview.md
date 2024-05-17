@@ -22,9 +22,9 @@ The component also supports custom templates for its Month view and configuratio
 * [Day template]({% slug daytemplate_kendoui_calendar %})&#8211;You can modify the appearance of one or more Calendar days.
 * [Week numbers]({% slug weeknum_kendoui_calendar %})&#8211;The Calendar also enables you to showcase the week number.
 * [Selection]({% slug selection_kendoui_calendar %})&#8211;You can also enable the user to select one or more Calendar dates.
-* [Century Cells Format]({% slug century_cells_format_calendar %})&mdash;The component exposes two formats for the century cells.
-* [Reverse Selection]({% slug reverse_selection_calendar %})&mdash;The component allows you to pick an end date which is before the start date.
-* [Show Other Month Days]({% slug other_month_days_calendar %})&mdash;The component allows you to pick an end date which is before the start date.
+* [Century cells format]({% slug century_cells_format_calendar %})&mdash;The component exposes two formats for the century cells.
+* [Reverse selection]({% slug reverse_selection_calendar %})&mdash;The component allows you to pick an end date which is before the start date.
+* [Show other month days]({% slug other_month_days_calendar %})&mdash;The component allows you to control if the days from the previous/next months will be displayed.
 * [Accessibility]({% slug accessibility_calendar %})&#8211;The Calendar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps

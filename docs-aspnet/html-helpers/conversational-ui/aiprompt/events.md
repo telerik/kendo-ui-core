@@ -8,7 +8,7 @@ position: 4
 
 # Events
 
-The Telerik UI AIPrompt for {{ site.framework }} [exposes multiple events](/api/kendo.mvc.ui.fluent/aiprompteventbuilder) that allow you to control the behavior of the UI component.
+The Telerik UI AIPrompt for {{ site.framework }} [exposes multiple events](/api/kendo.mvc.ui.fluent/aiprompteventbuilder) like `CommandExecute`, `PromptRequest`, and more, that allow you to control the behavior of the UI component.
 
 For a complete example on basic AIPrompt events, refer to the [demo on using the events of the AIPrompt](https://demos.telerik.com/{{ site.platform }}/aiprompt/events).
 

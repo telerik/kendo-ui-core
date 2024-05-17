@@ -14,9 +14,9 @@ The Telerik UI AIPrompt TagHelper and HtmlHelper for {{ site.framework }} are se
 The Telerik UI AIPrompt HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI AIPrompt widget.
 {% endif %}
 
-The AIPrompt is a standalone view component that helps the users write prompts, use prompt suggestions, and execute predefined commands to interact with a trained language model. 
+The AIPrompt is a standalone view component that helps end users write prompts, use prompt suggestions, and execute predefined commands to interact with a trained language model.
 
-When a prompt is submitted, the component triggers an event that contains information about the prompt and executed command. You can access this information and create an AI request. Then, when the request response is received from the AI service, the AIPrompt component will display the output as a card with options like copy-output, retry-output, and output rating (like and dislike reactions).
+When a prompt is submitted, the component triggers an event that contains information about the prompt and the executed command. You can access this information and use it to create a request to an AI service. When the request response from the AI service is received, the AIPrompt component displays the output as a card with options to copy, retry, or rate the output (with like or dislike reactions).
 
 * [Demo page for the AIPrompt HtmlHelper](https://demos.telerik.com/{{ site.platform }}/aiprompt)
 {% if site.core %}
@@ -48,7 +48,7 @@ The following example demonstrates how to define the AIPrompt.
 
 ## Basic Configuration
 
-The AIPrompt provides options for configuring the views, toolbar items, and appearance options. The following example demonstrates the basic configuration of the AIPrompt.
+The AIPrompt provides options for configuring its views, toolbar items, and appearance options. The following example demonstrates the basic configuration of the AIPrompt.
 
 ```HtmlHelper
     @(Html.Kendo().AIPrompt()

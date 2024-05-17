@@ -1,14 +1,14 @@
 ---
 title: Calendar Other Month Days
 page_title: jQuery Calendar Documentation - Calendar Other Month Days
-description: "Learn how you can show or hide the days from the previous and next months in the Kendo for jQuery Calendar."
+description: "Learn how you can show or hide the days from the previous and next months in the Kendo UI for jQuery Calendar."
 slug: other_month_days_calendar
 position: 11
 ---
 
 # Other Month Days
 
-As of R2 2024 version of the Kendo UI suite, the Calendar exposes the [`showOtherMonthDays`](/api/javascript/ui/calendar/configuration/showothermonthdays) option, which allows you to control whether the days from the previous/next months will be displayed.
+Starting with Kendo UI R2 2024, the Calendar exposes the [`showOtherMonthDays`](/api/javascript/ui/calendar/configuration/showothermonthdays) option, which allows you to control whether the days from the previous or next month will be displayed.
 
 ```dojo
     <div id="calendar"></div>
@@ -18,6 +18,8 @@ As of R2 2024 version of the Kendo UI suite, the Calendar exposes the [`showOthe
         });
     </script>
 ```
+
+> When range selection is configured, the [`showOtherMonthDays`](/api/javascript/ui/calendar/configuration/showothermonthdays) needs to be set to `false`.
 
 ## See Also
 

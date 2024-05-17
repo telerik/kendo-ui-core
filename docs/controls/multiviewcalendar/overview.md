@@ -22,9 +22,9 @@ It supports the selection and navigation between dates as well as data templates
 * [Day Template]({% slug day_template_multiviewcalendar %})&mdash;You can use a template to customize layout of the cells representing the days in the view.
 * [Disabled Dates]({% slug disabled_dates_multiviewcalendar %})&mdash;The MultiViewCalendar allows you to disable dates so that they cannot be selected by the user.
 * [Week Column]({% slug week_column_multiviewcalendar %})&mdash;The component allows you to display a column indicating the number of the week.
-* [Century Cells Format]({% slug century_cells_format_multiviewcalendar %})&mdash;The component exposes two formats for the century cells.
-* [Reverse Selection]({% slug reverse_selection_multiviewcalendar %})&mdash;The component allows you to pick an end date which is before the start date.
-* [Show Other Month Days]({% slug other_month_days_multiviewcalendar %})&mdash;The component allows you to pick an end date which is before the start date.
+* [Century cells format]({% slug century_cells_format_multiviewcalendar %})&mdash;The component exposes two formats for the century cells.
+* [Reverse selection]({% slug reverse_selection_multiviewcalendar %})&mdash;The component allows you to pick an end date which is before the start date.
+* [Show other month days]({% slug other_month_days_multiviewcalendar %})&mdash;The component allows you to control if the days from the previous/next months will be displayed.
 * [Accessibility]({% slug accessibility_muliviewcalendar %})&mdash;The MultiViewCalendar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps

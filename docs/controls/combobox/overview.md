@@ -14,13 +14,14 @@ The ComboBox displays a list of values, allowing for making a single selection f
 
 ## Functionality and Features
 
-* [Data binding]({% slug databinding_kendoui_combobox %})
-* [Grouping]({% slug grouping_kendoui_combobox_widget %})
-* [Server filtering]({% slug server_filtering_kendoui_combobox_widget %})
-* [Templates]({% slug templates_kendoui_combobox %})
-* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
-* [Appearance]({% slug appearance_kendoui_combobox %})
-* [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
+* [Data binding]({% slug databinding_kendoui_combobox %})&mdash;The ComboBox enables you to bind it to local data arrays and to remote data services.
+* [Grouping]({% slug grouping_kendoui_combobox_widget %})&mdash;You can use the provided options for displaying data items categorized by a specific model field of the ComboBox.
+* [Server filtering]({% slug server_filtering_kendoui_combobox_widget %})&mdash;The ComboBox allows you to perform server-side data filtering.
+* [Templates]({% slug templates_kendoui_combobox %})&mdash;You can also control the way a ComboBox item or the popup header and footer are rendered by using the Kendo UI templates.
+* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})&mdash;The ComboBox enables you to display large datasets by using a fixed amount of list items in its popup list.
+* [Appearance]({% slug sizedimensions_kendoui_autocomplete %})&mdash;You can use the available styling options for configuring the size, border radius, and fill mode of the ComboBox.
+* [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})&mdash;The cascading functionality of the ComboBox enables you to implement a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
+* [Prefix and suffix]({% slug prefix_suffix_autocomplete %})&mdash;The ComboBox component lets you add custom content as prefix and suffix adornments.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the ComboBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/combobox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

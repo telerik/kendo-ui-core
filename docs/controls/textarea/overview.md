@@ -18,6 +18,7 @@ The TextArea converts a `<textarea>` element into a styled textarea.
 
 * [Labels]({% slug labels_textarea %})&mdash;Check the Label feature of the TextArea.
 * [Appearance]({% slug textarea_appearance %})&mdash;Explore the styling options of the TextArea component.
+* [Prefix and suffix]({% slug prefix_suffix_textarea %})&mdash;The TextArea component lets you add custom content as prefix and suffix adornments.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the TextArea, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/textarea/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

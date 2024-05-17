@@ -50,9 +50,9 @@ The `Output` view is the place where the output of the AI request is displayed. 
 
 * Header&mdash;Shows the prompt text.
 * Body&mdash;Contains the generated prompt output.
-* Actions&mdash;Displays quick actions like copy-output button, retry-output button, and output rating (like and dislike reactions).
+* Actions&mdash;Displays quick actions like a copy-output button, a retry-output button, and an output rating (like and dislike reactions).
 
-The following example demonstrates how to specify the `Output` view as active when the AIPrompt loads and hide the built-in output rating that is visible by default.
+The following example demonstrates how to specify the `Output` view as active when the AIPrompt loads and how to hide the built-in output rating that is visible by default.
 
 ```HtmlHelper
     @(Html.Kendo().AIPrompt()
@@ -85,9 +85,9 @@ The `Commands` view is a predefined view where you can define commands that the 
 
 The commands are rendered in the view as a list of items and sub-items. To define the desired commands, use the `PromptCommands()` option.
 
-Clicking on a specified command will trigger the `CommandExecute` event that you can handle and execute the respective action by using client-side logic.
+Clicking a specified command triggers the `CommandExecute` event. You can handle the event and execute the respective action by using client-side logic.
 
-The example below shows how to configure the `Commands` view and specify a custom command that m the already generated output when clicked.
+The example below shows how to configure the `Commands` view and specify a custom command that modifies the already generated output when clicked.
 
 ```HtmlHelper
     @(Html.Kendo().AIPrompt()
@@ -142,8 +142,8 @@ The example below shows how to configure the `Commands` view and specify a custo
         }];
 
         function onCommandExecute(ev) {
-            if (this.promptOutputs.length > 0) { // Check if the Output view is not empty
-                let output = this.promptOutputs[0].prompt; // Get the first prompt in the Output view
+            if (this.promptOutputs.length > 0) { // Check if the Output view is not empty.
+                let output = this.promptOutputs[0].prompt; // Get the first prompt in the Output view.
                 const response = promptData.find((s) => s.suggestion === output); // Find the prompt item from the data collection.
                 if (response) {
                     let result = { // Construct the modified output.

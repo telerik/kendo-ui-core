@@ -1,7 +1,7 @@
 ---
 title: DateRangePicker Reverse Selection
 page_title: jQuery DateRangePicker Documentation - DateRangePicker Reverse Selection
-description: "Check the reverse selection feature in the Kendo for jQuery DateRangePicker."
+description: "Check the reverse selection feature in the Kendo UI for jQuery DateRangePicker."
 slug: reverse_selection_daterangepicker
 position: 7
 ---

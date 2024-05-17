@@ -16,6 +16,7 @@ The TextBox converts an `<input>` element into a styled textbox.
 
 * [Appearance]({% slug appearance_kendoui_textbox_widget %})&mdash;The TextBox provides a set of options that allow you to customize the appearance of the widget.
 * [Labels]({% slug labels_textbox %})&mdash;The Label enables you to associate the label HTML element with a TextBox.
+* [Prefix and suffix]({% slug prefix_suffix_textbox %})&mdash;The TextBox component lets you add custom content as prefix and suffix adornments.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the TextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/textbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

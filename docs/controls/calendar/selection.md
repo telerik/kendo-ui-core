@@ -41,7 +41,7 @@ The following image demonstrates a Calendar with selected multiple dates.
 
 ## Range Date Selection
 
-The Calendar enables the range date selection over the keyboard. As of R2 2024 release, the component supports `range` selection through the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option.
+The Calendar provides range date selection with the keyboard. Starting with Kendo UI suite R2 2024, the component supports `range` selection through the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option.
 
 The usage of the `Shift` key allows the user to select a range of dates in the same month or across different months when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to `multiple`:
 

@@ -39,11 +39,6 @@ The table below describes the minimum required version of Visual Studio based on
 | 8.0               | Visual Studio 2022 |
 | 7.0               | Visual Studio 2022 |
 | 6.0               | Visual Studio 2022 | 
-| 5.0               | Visual Studio 2022, or Visual Studio 2019 version 16.8 or higher. |
-| 3.1               | Visual Studio 2019 version 16.4 or higher. |
-| 3.0               | Visual Studio 2019 version 16.3 or higher. |
-| 2.2               | Visual Studio 2017 version 15.9 or higher. |
-| 2.1               | Visual Studio 2017 version 15.7 or higher. |
 
 >The R1 2024 release will be the last release that supports .NET versions older than 6.0. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).
 
@@ -56,14 +51,13 @@ For a full list of the `.NET Core` requirements, see [.NET Core dependencies and
 {% else %}
 {{ site.product }} supports Visual Studio 2013 and later. The supported development environments also include:
 
-* [.NET Framework v4.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
+* [.NET Framework v4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
 * [ASP.NET MVC 5](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started).
 * [IIS](https://www.iis.net/) 5 and later.
-* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) and [VB.NET](http://www.tutorialspoint.com/vb.net/).
-* [SharePoint 2013](https://docs.microsoft.com/en-us/sharepoint/) and later.
+* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx).
 
 >As of the R3 2022 release, MVC 3 and MVC 4 are no longer supported by {{ site.product }}.
->The R1 2024 release will be the last release that supports .NET Framework versions older than 4.6.2. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET Framework versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).  
+>The R1 2024 release will be the last release that supports .NET Framework versions older than 4.6.2 (4.5-4.6.1). One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET Framework versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).  
 
 {% endif %}
 

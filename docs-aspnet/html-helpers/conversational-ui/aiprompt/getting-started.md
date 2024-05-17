@@ -48,7 +48,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 Use the AIPrompt HtmlHelper {% if site.core %}or TagHelper{% endif %} to configure the component.
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the AIPrompt element.
-* The `Views()` configuration specifies the component views. For example, `Prompot`, `Output`, and `Commands` views.
+* The `Views()` configuration specifies the component views. For example, `Prompt`, `Output`, and `Commands` views.
 * The `PromptCommands()` option sets the desired custom commands of the `Commands` view.
 
 ```HtmlHelper
@@ -89,53 +89,59 @@ Use the AIPrompt HtmlHelper {% if site.core %}or TagHelper{% endif %} to configu
 
 The next step is to create a JavaScript array that contains the prompt suggestion, its output in English, and the translated output in Spanish. 
 
-```Scripts
-    <script>
-        var defaultResponse = 'For real prompt processing, please connect the component to a preferred AI service.';
-        var promptData = [
-        {
-            suggestion: "Out of office (contact colleague)",
-            output: `Subject: Out of Office: [Your Name]
+```HTML
+    <!DOCTYPE html>
+    <html
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <script>
+            var defaultResponse = 'For real prompt processing, please connect the component to a preferred AI service.';
+            var promptData = [
+            {
+                suggestion: "Out of office (contact colleague)",
+                output: `Subject: Out of Office: [Your Name]
+
+                    Dear [Recipient's Name],
+
+                    I am currently out of the office until [Return Date] and won't have access to email. For urgent matters, please contact [Colleague's Name] at [Colleague's Email]. I'll respond to your email upon my return.
+
+                    Thank you,
+                    [Your Name]`,
+                spanish: `Asunto: Fuera de la Oficina: [Tu Nombre]
+
+                    Estimado/a [Nombre del Destinatario],
+
+                    Actualmente estoy fuera de la oficina hasta el [Fecha de Regreso] y no tendré acceso al correo electrónico. Para asuntos urgentes, por favor contacta a [Nombre del Colega] en [Correo Electrónico del Colega]. Responderé a tu correo a mi regreso.
+
+                    Gracias,
+                    [Tu Nombre]`
+            },
+            {
+                suggestion: "Out of office (contact me)",
+                output: `Subject: Out of Office: [Your Name]
 
                 Dear [Recipient's Name],
 
-                I am currently out of the office until [Return Date] and won't have access to email. For urgent matters, please contact [Colleague's Name] at [Colleague's Email]. I'll respond to your email upon my return.
+                I am currently out of the office until [Return Date] and have limited email access. For urgent matters, please call me at [Your Phone Number]. Otherwise, I will respond to your email upon my return.
 
-                Thank you,
+                Thank you for your understanding.
+
+                Best,
                 [Your Name]`,
-            spanish: `Asunto: Fuera de la Oficina: [Tu Nombre]
+                spanish: `Asunto: Fuera de la Oficina: [Tu Nombre]
 
-            Estimado/a [Nombre del Destinatario],
+                    Estimado/a [Nombre del Destinatario],
 
-            Actualmente estoy fuera de la oficina hasta el [Fecha de Regreso] y no tendrÃ© acceso al correo electrÃ³nico. Para asuntos urgentes, por favor contacta a [Nombre del Colega] en [Correo ElectrÃ³nico del Colega]. ResponderÃ© a tu correo a mi regreso.
+                    Actualmente estoy fuera de la oficina hasta el [Fecha de Regreso] y tengo acceso limitado al correo electrónico. Para asuntos urgentes, por favor llámame al [Tu Número de Teléfono]. De lo contrario, responderé a tu correo electrónico a mi regreso.
 
-            Gracias,
-            [Tu Nombre]`
-        },
-        {
-            suggestion: "Out of office (contact me)",
-            output: `Subject: Out of Office: [Your Name]
+                    Gracias por tu comprensión.
 
-            Dear [Recipient's Name],
-
-            I am currently out of the office until [Return Date] and have limited email access. For urgent matters, please call me at [Your Phone Number]. Otherwise, I will respond to your email upon my return.
-
-            Thank you for your understanding.
-
-            Best,
-            [Your Name]`,
-            spanish: `Asunto: Fuera de la Oficina: [Tu Nombre]
-
-            Estimado/a [Nombre del Destinatario],
-
-            Actualmente estoy fuera de la oficina hasta el [Fecha de Regreso] y tengo acceso limitado al correo electrÃ³nico. Para asuntos urgentes, por favor llÃ¡mame al [Tu NÃºmero de TelÃ©fono]. De lo contrario, responderÃ© a tu correo electrÃ³nico a mi regreso.
-
-            Gracias por tu comprensiÃ³n.
-
-            Saludos,
-            [Tu Nombre]`
-        }];
-    </script>
+                    Saludos,
+                    [Tu Nombre]`
+            }];
+        </script>
+    </html>
 ```
 
 Now, configure the prompt suggestions that the user can select, and handle the `PromptRequest` event that triggers when the **Generate** button is clicked. 

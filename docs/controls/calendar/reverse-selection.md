@@ -1,14 +1,14 @@
 ---
 title: Calendar Reverse Selection
 page_title: jQuery Calendar Documentation - Calendar Reverse Selection
-description: "Check the reverse selection feature in the Kendo for jQuery Calendar."
+description: "Check the reverse selection feature in the Kendo UI for jQuery Calendar."
 slug: reverse_selection_calendar
 position: 10
 ---
 
 # Reverse Selection
 
-As of R2 2024 version of the Kendo UI suite, the Calendar provides an [`allowReverse`](/api/javascript/ui/calendar/configuration/allowreverse) selection. It allows you to pick an end date which is before the selected start date when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option is set to `range`.
+Starting with Kendo UI R2 2024, the Calendar provides an [`allowReverse`](/api/javascript/ui/calendar/configuration/allowreverse) selection. It allows you to pick an end date which is before the selected start date when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) option is set to `range`.
 
 ```dojo
     <div id="calendar"></div>

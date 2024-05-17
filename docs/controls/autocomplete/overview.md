@@ -20,6 +20,7 @@ The AutoComplete provides suggestions depending on the typed text and allows mul
 * [Templates]({% slug templates_kendoui_autocomplete %})&mdash;You can also control the way an AutoComplete item or the AutoComplete popup header and footer are rendered by using the Kendo UI templates.
 * [Virtualization]({% slug virtualization_kendoui_autocomplete_widget %})&mdash;The AutoComplete enables you to display large datasets by using a fixed amount of list items in its popup list.
 * [Appearance]({% slug sizedimensions_kendoui_autocomplete %})&mdash;You can use the available styling options for configuring the size, border radius, and fill mode of the AutoComplete.
+* [Prefix and suffix]({% slug prefix_suffix_autocomplete %})&mdash;The AutoComplete component lets you add custom content as prefix and suffix adornments.
 
 ## See Also
 
