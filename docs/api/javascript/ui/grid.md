@@ -9219,6 +9219,8 @@ By default, column resizing is disabled.
 > Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
+> For column resizing on mobile devices please refer to the [Grid Adaptive Rendering](https://demos.telerik.com/kendo-ui/grid/adaptive-rendering) official demo and the [Adaptive Rendering](https://docs.telerik.com/kendo-ui/controls/grid/appearance/adaptive) documentation article.
+
 ### resizable.rows `Boolean` *(default:false)*
 
 If set to `true`, users can resize Grid rows by dragging their bottom edge. Users can also auto-fit a row by double-clicking its bottom edge. In this case the row will assume the smallest possible height, which allows the cells content to be fully displayed.

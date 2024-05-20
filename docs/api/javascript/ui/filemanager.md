@@ -1338,32 +1338,55 @@ The command to execute.
 
 The command arguments.
 
-#### Example
+#### Example - execute `RenameCommand` and `TogglePaneCommand`
 
-    <div id="fileManager"></div>
+    <input type="button" value="Rename Folder" onclick="renameFolder()" />
+    <div id="filemanager"></div>
+
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
-
-        $("#fileManager").kendoFileManager({
-            views: {
-                list: {
-                    // kendoListView options
-                }
+      $("#filemanager").kendoFileManager({
+        dataSource: {
+          schema: kendo.data.schemas.filemanager,
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+              method: "POST"
             },
-            dataSource: {
-                transport: {
-                    read: {
-                        type: "post",
-                        url: baseUrl + "Read"
-                    }
-                }
+            create: {
+              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+              method: "POST"
+            },
+            update: {
+              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+              method: "POST"
+            },
+            destroy: {
+              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+              method: "POST"
             }
-        });
+          }
+        },
+        uploadUrl: "/kendo-ui/service/FileManager/Upload"  
+      });
 
-    	var fileManager = $("#fileManager").data("kendoFileManager");
+      function renameFolder() {
+        let filemanager = $("#filemanager").data("kendoFileManager");
+        let selectedFolder = $(".k-filemanager-treeview").find(".k-selected").parents(".k-item");
 
-   	fileManager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
-    	$("#details-toggle").getKendoSwitch().toggle();
+        if (selectedFolder.length > 0) {
+          filemanager.executeCommand({ command: "RenameCommand", options: { target: $(".k-filemanager-treeview").find(".k-selected").parents(".k-item"), item: filemanager.getSelected()[0] } })
+        }
+        else {
+          alert("Select a folder in the tree");
+        }
+      }
+
+      $(document).ready(function () {
+        var filemanager = $("#filemanager").getKendoFileManager();
+
+        filemanager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
+        filemanager.toolbar.fileManagerDetailsToggle.switchInstance.toggle();
+      })
     </script>
 
 ### getSelected

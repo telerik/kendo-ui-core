@@ -5324,12 +5324,17 @@ declare namespace kendo.ui {
         view(view?: string): void;
         navigate(path: string): void;
         refresh(): void;
-        executeCommand(command: string, args?: any): void;
+        executeCommand(args: FileManagerCommandArgs): void;
         getSelected(): any | any[];
         getSize(): any;
         setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
         destroy(): void;
         items(): any;
+    }
+
+    interface FileManagerCommandArgs {
+        command: string, 
+        args?: any
     }
 
     interface FileManagerBreadcrumb {
