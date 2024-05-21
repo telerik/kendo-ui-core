@@ -1334,9 +1334,10 @@ var __meta__ = {
         },
 
         _search: function(noDelay) {
-            var that = this;
+            let that = this;
 
-            if (noDelay) {
+            // noDelay may come as an even object, that is why an explicit === true check is needed.
+            if (noDelay === true) {
                 that._performSearch();
                 return;
             }

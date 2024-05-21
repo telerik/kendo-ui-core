@@ -311,6 +311,22 @@
             assert.isOk($(".k-notification").find(".k-notification-actions .k-icon").is(":visible"));
         });
 
+        it("right offset is set to 20 when button property is set to false", function() {
+            createNotification({
+                button: false
+            });
+
+            assert.equal(notification.options.position.right, 20);
+        });
+
+        it("right offset is set to 40 when button property is set to true", function() {
+            createNotification({
+                button: true
+            });
+
+            assert.equal(notification.options.position.right, 40);
+        });
+
         it("clicking on static notification hides it when button is pressed", function() {
             createNotification({
                 appendTo: Mocha.fixture,

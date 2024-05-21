@@ -1,14 +1,14 @@
 ---
 title: Sankey
 page_title: Configuration, methods and events of Kendo UI DataViz Sankey
-description: Learn the configuration options for Sankey widget, set its options, use methods properly.
+description: Learn the configuration options for Sankey component, set its options, use methods properly.
 res_type: api
 component: sankey
 ---
 
 # kendo.dataviz.ui.Sankey
 
-Represents the Kendo UI Sankey widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Sankey component. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 

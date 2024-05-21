@@ -54,9 +54,13 @@ var __meta__ = {
 
     var Notification = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            let that = this;
 
             Widget.fn.init.call(that, element, options);
+
+            if (options && options.button && !options.position && that.options.position) {
+                that.options.position.right = 40;
+            }
 
             options = that.options;
 

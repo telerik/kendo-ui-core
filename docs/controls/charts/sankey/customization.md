@@ -1,9 +1,9 @@
 ---
 title: Customization
-page_title: jQuery Sankey Charts Documentation - Customization
+page_title: jQuery Sankey Diagram Documentation - Customization
 description: "Get started with the jQuery Sankey Chaarts by Kendo UI and learn how to customize the component."
 slug: customization_kendoui_sankeychart
-position: 2
+position: 3
 ---
 
 # Customization
