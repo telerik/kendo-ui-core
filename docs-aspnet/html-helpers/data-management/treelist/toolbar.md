@@ -74,6 +74,9 @@ The {{site.product}} TreeList supports adding Custom Commands to its ToolBar. Th
         t.Search();
     })
 ```
+
+[REPL example of a Custom Command in TreeList ToolBar HtmlHelper for {{ site.framework }}](https://netcorerepl.telerik.com/QSuzwllP56E6xUe252)
+
 {% if site.core %}
 ```TagHelper
 	<toolbar>
@@ -86,6 +89,8 @@ The {{site.product}} TreeList supports adding Custom Commands to its ToolBar. Th
         <treelist-toolbar-button name="search" />
     </toolbar>
 ```
+
+[REPL example of a Custom Command in TreeList ToolBar TagHelper for {{ site.framework }}](https://netcorerepl.telerik.com/wyupwblF57auW35034)
 {% endif %} 
 
 ## ToolBar Template Handler
@@ -93,7 +98,7 @@ The {{site.product}} TreeList supports adding Custom Commands to its ToolBar. Th
 Telerik UI for {{ site.framework }} ToolBar introduces an overload that accept a `JavaScript` function name. It allows you to define the Template content through a client-side handler. This way, you can prevent the components from being dependent on the `unsafe-eval` and reuse the templates within multiple Components in different application pages.
 
 ```HtmlHelper
-    <script id="toolBar-template" type="text/x-kendo-template">
+    <script id="toolbar-template" type="text/x-kendo-template">
          <button id="refresh"></button>
          <span class="k-spacer"></span>
          <div class="toolBar">
@@ -103,36 +108,42 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accept a
         </div>
     </script>
 
-    function toolbarTemplate() {
+    <script>
+        function toolbarTemplate() {
             return $("#toolbar-template").html();
-    }
+        }
+    </script>
 
-@(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
-    .Name("treelist")
-    .ToolBarTemplateHandler("toolBarTemplate")
-    .Columns(columns =>
-    {
-        columns.Add().Field(f => f.FirstName).Width(250).Title("First Name");
-        columns.Add().Field(e => e.LastName).Title("Last Name");
-        columns.Add().Field(e => e.Position);
-        columns.Add().Field(e => e.Extension).Title("Ext").Format("{0:#}").Filterable(false);
-    })
-    .Height(540)
-    .DataSource(dataSource => dataSource
-        .ServerOperation(false)
-        .Read(read => read.Action("All", "EmployeeDirectory"))
-        .Model(m =>
+    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+        .Name("treelist")
+        .ToolbarTemplateHandler("toolbarTemplate")
+        .Columns(columns =>
         {
-            m.Id(f => f.EmployeeId);
-            m.ParentId(f => f.ReportsTo);
-            m.Field(f => f.FirstName);
-            m.Field(f => f.LastName);
-            m.Field(f => f.ReportsTo);
-            m.Expanded(true);
+            columns.Add().Field(f => f.FirstName).Width(250).Title("First Name");
+            columns.Add().Field(e => e.LastName).Title("Last Name");
+            columns.Add().Field(e => e.Position);
+            columns.Add().Field(e => e.Extension).Title("Ext").Format("{0:#}").Filterable(false);
         })
+        .Height(540)
+        .DataSource(dataSource => dataSource
+            .ServerOperation(false)
+            .Read(read => read.Action("All", "EmployeeDirectory"))
+            .Model(m =>
+            {
+                m.Id(f => f.EmployeeId);
+                m.ParentId(f => f.ReportsTo);
+                m.Field(f => f.FirstName);
+                m.Field(f => f.LastName);
+                m.Field(f => f.ReportsTo);
+                m.Expanded(true);
+            })
+        )
     )
-)
+
 ```
+
+[REPL example of a ToolBar Template Handler in TreeList HtmlHelper for {{ site.framework }}](https://netcorerepl.telerik.com/wSYfwFvQ49nhSiCY33)
+
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
@@ -180,6 +191,9 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accept a
     </treelist-datasource>
 </kendo-treelist>
 ```
+
+[REPL example of a ToolBar Template Handler in TreeList TagHelper for {{ site.framework }}](https://netcorerepl.telerik.com/mykJwvvm50n7B8QX41)
+
 {% endif %} 
 
 ## ToolBar Template Id
@@ -187,7 +201,7 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accept a
 Telerik UI for {{ site.framework }} ToolBar introduces an overload that accepts the Id of a script as an Id for the ToolBar Template for the TreeList.
 
 ```HtmlHelper
-	<script id="toolbar-template" type="text/x-kendo-template">
+	<script id="toolBarTemplate" type="text/x-kendo-template">
          <button id="refresh"></button>
          <span class="k-spacer"></span>
          <div class="toolbar">
@@ -199,7 +213,7 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accepts 
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
-        .ToolBarTemplateId("toolbar-template")
+        .ToolbarTemplateId("toolBarTemplate")
         .Columns(columns =>
         {
             columns.Add().Field(f => f.FirstName).Width(250).Title("First Name");
@@ -223,6 +237,8 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accepts 
         )
     )
 ```
+
+[REPL example of a ToolBar Template Id in TreeList HtmlHelper for {{ site.framework }}](https://netcorerepl.telerik.com/GouTQFbG5298UmMT40)
 
 {% if site.core %}
 ```TagHelper
@@ -284,12 +300,14 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accepts 
         </treelist-datasource>
     </kendo-treelist>
 ```
+
+[REPL example of a ToolBar Template Id in TreeList TagHelper for {{ site.framework }}](https://netcorerepl.telerik.com/ceafQvbQ55BuPN4K40)
 {% endif %} 
 
 ## Next Steps
 
-* [Handle the Events of the Telerik UI TreeList Component for {{ site.framework }}]({% slug treelist_Events %})
-* [Persist the State of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/persist-State)
+* [Handle the Events of the Telerik UI TreeList Component for {{ site.framework }}]({% slug treelist_events %})
+* [Persist the State of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/persist-state)
 * [Use Row Template in the Telerik UI TreeList Component for {{ site.framework }}]({% slug row_templates_aspnetcore_treelist %})
 {% if site.core %}
 * [TreeList in Razor Pages]({% slug htmlhelpers_treelist_razorpage_aspnetcore %})
@@ -301,5 +319,5 @@ Telerik UI for {{ site.framework }} ToolBar introduces an overload that accepts 
 * [ToolBar TagHelper (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
 {% endif %}
 * [Resizing of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/resizing)
-* [Events of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/Events)
+* [Events of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/events)
 * [ToolBar HtmlHelper integration with Editors (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/integration)

@@ -378,7 +378,7 @@ function alphaFromHex(a) {
 function parseColor(value, safe) {
     var m, ret;
 
-    if (value == null || value === "none") {
+    if (value == null || value === "none" || value == "") {
         return null;
     }
 

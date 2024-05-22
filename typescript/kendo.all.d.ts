@@ -2411,7 +2411,7 @@ declare namespace kendo.ui {
         highlightFirst?: boolean | undefined;
         ignoreCase?: boolean | undefined;
         minLength?: number | undefined;
-        noDataTemplate?: string|Function|boolean | undefined;
+        noDataTemplate?: string | Function | boolean | undefined;
         placeholder?: string | undefined;
         popup?: any;
         rounded?: string | undefined;
@@ -2856,6 +2856,7 @@ declare namespace kendo.ui {
         range?: CalendarRange | undefined
         name?: string | undefined;
         culture?: string | undefined;
+        componentType?: string | undefined;
         dates?: any;
         depth?: string | undefined;
         disableDates?: any|Function | undefined;
@@ -3625,7 +3626,7 @@ declare namespace kendo.ui {
     interface ComboBoxOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
-        animation?: ComboBoxAnimation | undefined;
+        animation?: boolean | ComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
         cascadeFrom?: string | undefined;
@@ -4219,6 +4220,7 @@ declare namespace kendo.ui {
         animation?: boolean | DateTimePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
+        componentType?: string | undefined;
         culture?: string | undefined;
         dateInput?: boolean | undefined;
         dates?: any;
@@ -5783,9 +5785,12 @@ declare namespace kendo.ui {
         name?: string | undefined;
         opacity?: boolean | undefined;
         buttons?: boolean | undefined;
+        clearButton?: boolean | undefined;
         contrastTool?: boolean | FlatColorPickerContrastTool | undefined;
         format?: string | undefined;
         formats?: any | undefined;
+        view?: string | undefined;
+        views?: any | undefined;
         value?: string|kendo.Color | undefined;
         preview?: boolean | undefined;
         autoupdate?: boolean | undefined;
@@ -7460,6 +7465,9 @@ declare namespace kendo.ui {
         name?: string | undefined;
         ariaLabel?: string | undefined;
         autoBind?: boolean | undefined;
+        bordered?: boolean | undefined;
+        borders?: string | "all" | "horizontal" | "vertical" | undefined;
+        layout?: string | "flex" | "grid" | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         editTemplate?: Function | undefined;
         height?: number|string | undefined;
@@ -7889,7 +7897,7 @@ declare namespace kendo.ui {
     interface MultiColumnComboBoxOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
-        animation?: MultiColumnComboBoxAnimation | undefined;
+        animation?: boolean | MultiColumnComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
         cascadeFrom?: string | undefined;
@@ -8188,8 +8196,8 @@ declare namespace kendo.ui {
         culture?: string | undefined;
         dates?: any;
         depth?: string | undefined;
-        disableDates?: any|Function | undefined;
-        footer?: string|Function | undefined;
+        disableDates?: any | Function | undefined;
+        footer?: string | Function | boolean | undefined;
         format?: string | undefined;
         max?: Date | undefined;
         messages?: MultiViewCalendarMessages | undefined;
@@ -9420,7 +9428,7 @@ declare namespace kendo.ui {
     interface PopoverOptions {
         name?: string | undefined;
         actions?: PopoverAction[] | undefined;
-        actionsPosition?: string | undefined;
+        actionsLayout?: string | undefined;
         animation?: boolean | PopoverAnimation | undefined;
         body?: string|Function | undefined;
         filter?: string | undefined;
@@ -10008,8 +10016,9 @@ declare namespace kendo.ui {
         name?: string | undefined;
         min?: number | undefined;
         max?: number | undefined;
-        selection: string | "continuous" | "single";
-        precision: string | "item" | "half";
+        value?: number | undefined;
+        selection?: string | "continuous" | "single" | undefined;
+        precision?: string | "item" | "half" | undefined;
         label?: boolean | RatingLabel | undefined;
         tooltip?: boolean | undefined;
         itemTemplate?: string|Function | undefined;
@@ -12319,6 +12328,7 @@ declare namespace kendo.ui {
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | TimePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
+        componentType?: string | undefined;
         culture?: string | undefined;
         dateInput?: boolean | undefined;
         dates?: any;
@@ -13917,7 +13927,7 @@ declare namespace kendo.ui {
     }
 
     interface WizardStep {
-        buttons?: WizardStepButton[] | undefined;
+        buttons?: string[] | WizardStepButton[] | undefined;
         content?: string | undefined;
         contentId?: string | undefined;
         contentUrl?: string | undefined;
@@ -20827,12 +20837,12 @@ declare namespace kendo.dataviz.ui {
         source: SankeyNodeDataItem;
         target: SankeyNodeDataItem;
     }
-    
+
     interface SankeyNodeDataItem extends SankeyNode {
         sourceLinks: SankeyLinkDataItem[];
         targetLinks: SankeyLinkDataItem[];
     }
-    
+
 
     interface SankeyExportVisualOptions {
         width?: number | undefined;
@@ -20845,7 +20855,7 @@ declare namespace kendo.dataviz.ui {
             links: SankeyLink[] | undefined;
             nodes: SankeyNode[] | undefined;
         };
-    
+
         labels?: SankeyLabel | undefined;
         links?: SankeyLink | undefined;
         nodes?: SankeyNode | undefined;
@@ -20853,7 +20863,7 @@ declare namespace kendo.dataviz.ui {
         title?: SankeyTitle | undefined;
         legend?: SankeyLegend | undefined;
         tooltips?: SankeyTooltips | undefined;
-        
+
     }
 
     interface SankeyTheme {

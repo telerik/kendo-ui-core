@@ -153,7 +153,7 @@ The initially selected view in the FlatColorPicker.
 
     <div id="flatcolorpicker"></div>
     <script>
-    $("#colorpicker").kendoFlatColorPicker({
+    $("#flatcolorpicker").kendoFlatColorPicker({
       view: "palette"
     });
     </script>
@@ -166,7 +166,7 @@ The available views in the FlatColorPicker. Valid values are "gradient" and "pal
 
     <div id="flatcolorpicker"></div>
     <script>
-    $("#colorpicker").kendoFlatColorPicker({
+    $("#flatcolorpicker").kendoFlatColorPicker({
       view: "palette",
       views: ["palette"]
     });

@@ -424,7 +424,7 @@ Note that when initializing the widget from an `<input>` element, the initial co
 
 ### view `String` *(default: "gradient")*
 
-The initially selected view in the FlatColorPicker.
+The initially selected view in the ColorPicker.
 
 #### Example
 
@@ -437,7 +437,7 @@ The initially selected view in the FlatColorPicker.
 
 ### views `Array` *(default: [ "gradient", "palette" ])*
 
-The available views in the FlatColorPicker. Valid values are "gradient" and "palette".
+The available views in the ColorPicker. Valid values are "gradient" and "palette".
 
 #### Example
 

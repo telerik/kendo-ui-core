@@ -3251,7 +3251,7 @@ var __meta__ = {
                     for (idx = 0, length = arguments.length; idx < length; idx++) {
                         if (arguments[idx]) {
                             that._accept(arguments[idx]);
-                            changedItems = arguments[idx].models;
+                            changedItems.push(...arguments[idx].models);
                         }
                     }
 
