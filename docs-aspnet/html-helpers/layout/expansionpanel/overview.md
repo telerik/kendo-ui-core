@@ -18,7 +18,7 @@ The ExpansionPanel is a layout component that allows the user to expand and coll
 
 * [Demo page for the ExpansionPanel HtmlHelper](https://demos.telerik.com/{{ site.platform }}/expansionpanel/index)
 {% if site.core %}
-* [Demo page for the ExpansionPanel TagHelper](https://demos.telerik.com/aspnet-core/expanionpanel/tag-helper)
+* [Demo page for the ExpansionPanel TagHelper](https://demos.telerik.com/aspnet-core/expansionpanel/tag-helper)
 {% endif %}
 
 ## Initializing the ExpansionPanel  
