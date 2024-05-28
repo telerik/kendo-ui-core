@@ -2314,7 +2314,7 @@ var __meta__ = {
                     var item = data.item;
                     var contentHtml = fieldAccessor("content")(item);
                     var contCssAttributes = data.contentCssAttributes(item.toJSON ? item.toJSON() : item);
-                    return `<div ${contCssAttributes} tabindex='-1'>${contentHtml || ''}</div>`;
+                    return `<div class='${data.groupWrapperCssClass(data.group)}' ${data.groupAttributes(data.group)}><div ${contCssAttributes} tabindex='-1'>${contentHtml || ''}</div></div>`;
                 }),
                 group: template((data) =>
                     `<div class='${data.groupWrapperCssClass(data.group)}' ${data.groupAttributes(data.group)}>` +
@@ -2344,20 +2344,20 @@ var __meta__ = {
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
                     var groupId = kendo.guid();
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items ? "aria-haspopup='true'" : ''}` +
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items || item.content ? "aria-haspopup='true'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
-                        (item.items && item.items.length > 0 ?
+                        ((item.items && item.items.length > 0) || item.content ?
                             (item.expanded ?
                                 " aria-expanded='true'"
                                 : " aria-expanded='false'")
                             : '') +
                         ">" +
-                        `${!item.separator && !item.content ? this.templates.itemWrapper(data) : ''}` +
+                        `${!item.separator ? this.templates.itemWrapper(data) : ''}` +
                         ((item.hasChildren || item.items) ?
                             `${subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded }, groupId: groupId })}`
                             : (item.content || item.contentUrl || contentHtml ?
-                            `${data.renderContent(data)}`
+                            `${data.renderContent($.extend({}, data, { group: { expanded: item.expanded } }))}`
                             : '')
                         ) +
                         "</li>";

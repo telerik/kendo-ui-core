@@ -398,10 +398,10 @@ it("Adding dynamic content element renders properly on root and inner levels", f
         }
     ]);
 
-    assert.isOk(m.element.children("li:first").children("div.k-content.k-menu-group.k-group")[0]);
-    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-content.k-menu-group.k-group")[0]);
-    assert.isOk(!m.element.children("li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
-    assert.isOk(!m.element.find("> li:last > div > ul > li:first").children("div.k-content.k-menu-group.k-group").is(":visible"));
+    assert.isOk(m.element.children("li:first").children("div.k-menu-popup").children(".k-content.k-menu-group")[0]);
+    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group.k-group")[0]);
+    assert.isOk(!m.element.children("li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group.k-group").is(":visible"));
+    assert.isOk(!m.element.find("> li:last > div > ul > li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group.k-group").is(":visible"));
 
     m.destroy();
 });
@@ -481,8 +481,8 @@ it("Adding dynamic contentUrl element renders contents on root and inner levels"
         }
     ]);
 
-    assert.isOk(m.element.children("li:first").children("div.k-content")[0]);
-    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-content")[0]);
+    assert.isOk(m.element.children("li:first").children("div.k-menu-popup").children("div.k-content")[0]);
+    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-menu-popup").children("div.k-content")[0]);
     m.destroy();
 });
 
