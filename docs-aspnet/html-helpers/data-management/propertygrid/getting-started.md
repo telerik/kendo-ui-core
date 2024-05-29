@@ -10,7 +10,7 @@ position: 1
 
 This tutorial explains how to set up the Telerik UI for {{ site.framework }} PropertyGrid and goes through the steps in the configuration of the component.
 
-You will declare a view model and bind it to an instance of the PropertyGrid component. Next, you will configure the PropertyGrid items and their editors. Then, you will use the template options to enhance the items appearance and learn how to handle the JavaScript events of the component.
+You will declare a view model and bind it to an instance of the PropertyGrid component. Next, you will configure the PropertyGrid items and their editors. Then, you will use the template options to enhance the items appearance and learn how to handle the JavaScript events of the component. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
 After completing this guide, you will achieve the following results:
 

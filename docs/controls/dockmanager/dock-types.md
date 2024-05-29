@@ -3,7 +3,7 @@ title: Dock Types
 page_title: jQuery Dialog Documentation - Dock Types
 description: "Get started with the jQuery DockManager by Kendo UI and learn the different dock types."
 slug: dock_types_kendoui_dockmanager
-position: 1
+position: 2
 ---
 
 # Docking Panes

@@ -10,7 +10,7 @@ position: 1
 
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} TextBox and highlights the major steps in the configuration of the component.
 
-You will initialize a TextBox component with a placeholder text and a label. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
+You will initialize a TextBox component with a placeholder text and a label. Next, you will learn how to handle the `Change` event of the component and update and access its value at runtime. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
  ![Sample Telerik UI for {{ site.framework }} TextBox](./images/textbox-getting-started.png)
 
@@ -105,7 +105,7 @@ The next step is to present a description in front of the TextBox component by u
 
 ## 4. Handle a TextBox Event
 
-The TextBox component provides convenient events for implementing your desired logic. In this tutorial, you will use the exposed `Change()` event to log a new entry in the browser's console.
+The TextBox component provides convenient events for implementing your desired logic. In this tutorial, you will use the exposed `Change()` event to log the current TextBox value in the browser's console.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -159,12 +159,13 @@ You can reference the TextBox instances that you have created and build on top o
     </script>
     ```
 
-1. Use the [TextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox#methods) to control the behavior of the widget. In this example, you will use the `value` method to select an item.
+1. Use the [TextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox#methods) to control the behavior of the widget. In this example, you will use the `value()` method to change its current content.
 
     ```script
     <script>
         var textboxReference = $("#textbox").data("kendoTextBox"); // textboxReference is a reference to the existing TextBox instance of the helper.
-        textboxReference.value("Sample text"); 
+        textboxReference.value("Sample text"); // Update the current TextBox value.
+        console.log(textboxReference.value()); // Log the new TextBox value in the browser's console.
     </script>
     ```
 

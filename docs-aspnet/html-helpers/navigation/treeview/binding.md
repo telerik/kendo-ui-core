@@ -11,6 +11,8 @@ position: 2
 
 The TreeView provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
 
+> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+
 ## Declaring TreeView Items
 
 The TreeView allows you to declare all its items within the helper declaration.

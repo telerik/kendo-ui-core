@@ -3,7 +3,7 @@ title: Sheet Resizing
 page_title: jQuery Spreadsheet Documentation - Sheet Resizing
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to change the size of the sheet."
 slug: resize_spreadsheet_widget
-position: 7
+position: 8
 ---
 
 # Sheet Resizing 

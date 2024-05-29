@@ -184,74 +184,119 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. In the view, configure the Grid to use the action methods that were created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
-```HtmlHelper
-    @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-                columns.Bound(product => product.ProductID).Width(100);
-            columns.Bound(product => product.ProductName);
-            columns.Bound(product => product.UnitsInStock).Width(250);
-            columns.Command(commands =>
+    ```HtmlHelper
+        @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+            .Name("grid")
+            .Columns(columns =>
             {
-                commands.Edit(); // The "edit" command will edit and update data items.
-                commands.Destroy(); // The "destroy" command removes data items.
-            }).Title("Commands").Width(200);
-        })
-        .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
-        .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use the inline edit mode.
-        .DataSource(dataSource =>
-            dataSource.Ajax()
-                .Model(model =>
+                columns.Bound(product => product.ProductID).Width(100);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock).Width(250);
+                columns.Command(commands =>
                 {
-                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
-                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
-                })
-                            .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
-                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Grid needs data.
-                .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
-                .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
+                    commands.Edit(); // The "edit" command will edit and update data items.
+                    commands.Destroy(); // The "destroy" command removes data items.
+                }).Title("Commands").Width(200);
+            })
+            .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
+            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use the inline edit mode.
+            .DataSource(dataSource =>
+                dataSource.Ajax()
+                    .Model(model =>
+                    {
+                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
+                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
+                    })
+                                .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Grid needs data.
+                    .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
+                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
+            )
+            .Pageable()
         )
-        .Pageable()
-    )
-```
-{% if site.core %}
-```TagHelper
-<kendo-grid name="grid" height="430">
-    <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
-        <schema data="Data" total="Total">
-            <model id="ProductID">
-                <fields>
-                    <field name="ProductID" editable="false"></field>
-                </fields>
-            </model>
-        </schema>
-        <transport>
-            <read url=@Url.Action("Products_Create", "Home") />
-            <update url=@Url.Action("Products_Update", "Home") />
-            <create url=@Url.Action("Products_Create", "Home") />
-            <destroy url=@Url.Action("Products_Destroy", "Home") />
-        </transport>
-    </datasource>
-    <columns>
-        <column field="ProductID"  width="100"/>
-        <column field="ProductName" />
-        <column field="UnitsInStock" width="250" />
-        <column width="200" title="Commands">
-            <commands>
-                <column-command text="Edit" name="edit"></column-command>
-                <column-command text="Delete" name="destroy"></column-command>
-            </commands>
-        </column>
-    </columns>
-    <toolbar>
-        <toolbar-button name="create"></toolbar-button>
-    </toolbar>
-    <editable mode="inline" />
-    <pageable enabled="true" />
-</kendo-grid>
-```
-{% endif %}  
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-grid name="grid" height="430">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <schema data="Data" total="Total">
+                <model id="ProductID">
+                    <fields>
+                        <field name="ProductID" editable="false"></field>
+                    </fields>
+                </model>
+            </schema>
+            <transport>
+                <read url=@Url.Action("Products_Create", "Home") />
+                <update url=@Url.Action("Products_Update", "Home") />
+                <create url=@Url.Action("Products_Create", "Home") />
+                <destroy url=@Url.Action("Products_Destroy", "Home") />
+            </transport>
+        </datasource>
+        <columns>
+            <column field="ProductID"  width="100"/>
+            <column field="ProductName" />
+            <column field="UnitsInStock" width="250" />
+            <column width="200" title="Commands">
+                <commands>
+                    <column-command text="Edit" name="edit"></column-command>
+                    <column-command text="Delete" name="destroy"></column-command>
+                </commands>
+            </column>
+        </columns>
+        <toolbar>
+            <toolbar-button name="create"></toolbar-button>
+        </toolbar>
+        <editable mode="inline" />
+        <pageable enabled="true" />
+    </kendo-grid>
+    ```
+    {% endif %}
+
+1. The Grid component serializes editors allocated within the `~/Views/Shared/EditorTemplates` folder. If no editors are available in that folder, the Grid will revert to using a default editor based on the primitive type.
+To define a custom editor for a specified column, add the view that contains the editor in the `~/Views/Shared/EditorTemplates` folder and specify the view name in the `EditorTemplateName()` option of the column.
+
+    ```HtmlHelper
+        @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                ...
+                columns.Bound(product => product.ProductName).EditorTemplateName("ProductNameEditor");
+                ...
+            })
+            // Other configuration.
+        )
+    ```
+    ```ProductNameEditor.cshtml
+        //~/Views/Shared/EditorTemplates/ProductNameEditor.cshtml
+
+        @model string
+
+        @(Html.Kendo().TextAreaFor(model => model)
+            .HtmlAttributes(new { data_bind = "value: ProductName"})
+            .Rows(3)
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-grid name="grid" height="430">
+        <columns>
+            ...
+            <column field="ProductName">
+                <column-editor-template>
+                    <kendo-textarea name="ProductName" rows="3">
+                    </kendo-textarea>
+                </column-editor-template>
+            </column>
+            ...
+        </columns>
+        <!--Other configuration-->
+    </kendo-grid>
+    ```
+    {% endif %}
+
+For more information on creating editors for the Grid columns, see the [Editor Templates]({% slug editortemplates_grid_aspnetcore %}) article.
 
 ## Handling ModelState Errors
 

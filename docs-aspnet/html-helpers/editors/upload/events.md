@@ -12,6 +12,8 @@ The Telerik UI Upload for {{ site.framework }} exposes multiple [events](/api/ke
 
 For a complete example on basic Upload events, refer to the [demo on using the events of the Upload](https://demos.telerik.com/{{ site.platform }}/upload/events).
 
+> The following events fire only when the Upload is in an asynchronous mode of operation: `Cancel`, `Complete`, `Error`, `Progress`, `Success`, and `Upload`.
+
 ## Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.

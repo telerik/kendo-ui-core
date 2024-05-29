@@ -55,7 +55,7 @@ The Telerik {{ site.product_short }} Scheduler allows you to customize entirely 
 
 The default order of the Scheduler tools is: `[ "pdf", [ "today", "previous", "next" ], "current", { type: "spacer" }, "search", "views" ]`. You can set the `Items` configuration to entirely replace all tools in the Scheduler ToolBar (including the default once) in order desired for them to appear in the component. Grouping tools to render a ButtonGroup in the ToolBar is also supported via the `Group()` configuration. Rendering custom components in the Toolbar is also supported via the `CustomTool()` configuration method.
 
-```
+```HtmlHelper
     .Toolbar(t => t.Custom(c =>
         c.Items(itm => {
             itm.CustomTool(Html.Kendo().Template().AddComponent(c => c
@@ -158,7 +158,7 @@ In addition to the `Desktop` configuration the {{ site.product_short }} Schedule
 
 Both the Main and Navigation toolbars can be configured to display any of the built-in tools as well as custom tools:
 
-```
+```HtmlHelper
 .Toolbar(t => t.Custom(c =>
     c.Desktop(d =>
     {

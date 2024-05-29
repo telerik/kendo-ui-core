@@ -12,30 +12,25 @@ The DateInput represents an input field that recognizes and formats scheduling v
 
 It provides separate sections for days, months, years, hours, and minutes, and also supports the customization of date and time formats.
 
-* [Demo page for the DateInput](https://demos.telerik.com/kendo-ui/dateinput/index)
-
-## Basic Configuration
-
-The following example demonstrates how to initialize the DateInput.
-
-```dojo
-    <input id="dateInput" />
-
-    <script>
-      $(document).ready(function(){
-        $("#dateInput").kendoDateInput();
-      });
-    </script>
-```
+![Kendo UI for jQuery DateInput](basic-dateinput.png)
 
 ## Functionality and Features
 
-* [Selected dates and formats]({% slug selecteddates_kendoui_dateinput %})
-* [Integration with other editors]({% slug integration_kendoui_dateinput %})
-* [Globalization]({% slug globalization_kendoui_dateinput_widget %})
+* [Selected Dates and Formats]({% slug selecteddates_kendoui_dateinput %})&mdash;The component enables you to create a non-editable DateInput with a selected date.
+* [Floating Label]({% slug floating_label_kendoui_dateinput_widget %})&mdash;You can render a placeholder text for form or input fields, which floats above that field and remains visible once the user starts interacting with that field.
+* [Date Editing]({% slug dateediting_kendoui_dateinput %})&mdash;You can configure different `steps` for incrementing and decrementing the segments.
+* [Appearance]({% slug appearance_kendoui_dateinput_widget %})&mdash;The built-in options enable you to modify the component's appearance.
+* [Integration with Other Editors]({% slug integration_kendoui_dateinput %})&mdash;The DateInput provides options for integration with other Kendo UI editor components such as the DatePicker, DateTimePicker, and TimePicker.
+* [Globalization]({% slug globalization_kendoui_dateinput_widget %})&mdash;The component supports the translation of component messages (localization) and adapting them to specific cultures.
+
+## Next Steps 
+
+* [Getting Started with the Kendo UI DateInput for jQuery]({% slug getting_started_kendoui_dateinput_component %})
+* [Overview of the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/index)
+* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
 
 ## See Also
 
-* [Basic Usage of the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/index)
-* [Using the API of the DateInput (Demo)](https://demos.telerik.com/kendo-ui/dateinput/api)
-* [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
+* [Product Page of the Kendo UI for jQuery DateInput](https://www.telerik.com/kendo-jquery-ui/dateinput)
+* [Demo Pages for the jQuery DateInput](https://demos.telerik.com/kendo-ui/dateinput/index)
+* [Knowledge Base Section](/knowledge-base)

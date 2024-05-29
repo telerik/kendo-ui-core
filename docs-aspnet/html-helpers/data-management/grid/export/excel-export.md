@@ -22,7 +22,7 @@ To enable the Excel export option of the Grid:
 1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
     
     ```HtmlHelper
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 
@@ -39,7 +39,7 @@ To enable the Excel export option of the Grid:
     ```
     {% if site.core %}
     ```TagHelper
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 

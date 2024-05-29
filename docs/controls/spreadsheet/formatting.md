@@ -4,7 +4,7 @@ page_title: jQuery Spreadsheet Documentation - Cell Formatting
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to format cells in the component."
 previous_url: /controls/spreadsheet/format
 slug: cell_formatting_spreadsheet_widget
-position: 4
+position: 5
 ---
 
 # Cell Formatting

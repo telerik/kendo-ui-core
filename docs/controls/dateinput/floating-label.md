@@ -3,7 +3,7 @@ title: Floating Label
 page_title: jQuery DateInput Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery DateInput component."
 slug: floating_label_kendoui_dateinput_widget
-position: 2
+position: 3
 ---
 
 # Floating Label

@@ -81,29 +81,34 @@ The example below demonstrates how to implement row spanning when the ShipCity f
 {% endif %}
 ```JavaScript
     function setRowSpan(dataItem) {
-        const dataView = dataItem.parent();
+        let grid = $("#grid").getKendoGrid();
+        const dataView = grid.dataItems();
         let currentIndex = dataView.indexOf(dataItem);
         const prevDataItem = currentIndex === 0 ? null : dataView.at(currentIndex - 1);
         let nextDataItem = dataView.at(++currentIndex);
         let rowSpan = 1;
 
-        if (prevDataItem && dataItem["ShipCity"] === prevDataItem["ShipCity"]) {
+        if (prevDataItem && dataItem.ShipCity === prevDataItem.ShipCity) {
+            // Add 'hidden' attribute to hide the cell if the previous item has the same value.
             return {
                 hidden: 'hidden'
             }
         }
 
+        // Calculate the rowspan for a cell.
         while (nextDataItem) {
-            if (prevDataItem && dataItem["ShipCity"] === prevDataItem["ShipCity"]) {
-                rowSpan++;
+            if (dataItem.ShipCity === nextDataItem.ShipCity) {
+            rowSpan++;
             } else {
-                break;
+            break;
             }
 
             nextDataItem = dataView.at(++currentIndex);
         }
 
-        return { rowSpan };
+        // The styling attributes to set on the <td> element of the cell.
+        let resultAttributes = { rowSpan, style: "text-align: center" };
+        return resultAttributes;
     }
 ```
 

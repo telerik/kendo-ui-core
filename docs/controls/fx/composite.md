@@ -3,7 +3,7 @@ title: Composite Effects
 page_title: jQuery FX Documentation - Composite Effects
 description: "Get started with the jQuery FX by Kendo UI and use their composite effects."
 slug: composite_kendoui_fxeffects
-position: 3
+position: 4
 ---
 
 # Composite Effects

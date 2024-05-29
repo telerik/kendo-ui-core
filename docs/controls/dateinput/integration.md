@@ -3,7 +3,7 @@ title: Integration
 page_title: jQuery DateInput Documentation - Integration
 description: "Get started with the jQuery DateInput by Kendo UI and integrate the widget with the other Kendo UI editors."
 slug: integration_kendoui_dateinput
-position: 6
+position: 7
 ---
 
 # Integration

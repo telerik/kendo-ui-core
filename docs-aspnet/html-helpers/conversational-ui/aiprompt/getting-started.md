@@ -10,7 +10,7 @@ position: 1
 
 This tutorial explains how to set up the Telerik UI for {{ site.framework }} AIPrompt and goes through the steps in the configuration of the component.
 
-You will initialize an AIPrompt component with `Prompot`, `Output`, and `Commands` views and configure prompt suggestions options. Next, you will create a custom command that translates the output in Spanish. Then, you will use the template options to enhance the prompt suggestion cards and learn how to handle the JavaScript events of the component.
+You will initialize an AIPrompt component with `Prompt`, `Output`, and `Commands` views and configure prompt suggestions options. Next, you will create a custom command that translates the output in Spanish. Then, you will use the template options to enhance the prompt suggestion cards and learn how to handle the JavaScript events of the component. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
 After completing this guide, you will achieve the following results:
 

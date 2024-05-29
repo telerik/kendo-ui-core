@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery DateInput Documentation - DateInput Appearance
 description: "Learn how to apply different styling options to the DateInput widget."
 slug: appearance_kendoui_dateinput_widget
-position: 3
+position: 4
 ---
 
 # DateInput Appearance

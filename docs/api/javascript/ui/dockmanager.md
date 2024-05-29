@@ -668,7 +668,7 @@ Toggles the visibility of a pane.
                         content: "Pane content"
                     },{
                         type: "content",
-                        id: "hiddenPaneId"
+                        id: "hiddenPaneId",
                         header: "Pane 2",
                         content: "Hidden Pane",
                         visible: false
@@ -685,9 +685,9 @@ Toggles the visibility of a pane.
                         }
                     }]
                 }
-            }).data("kendoDockManager);
+            }).data("kendoDockManager");
 
-            dockmanager.toggle("hiddenPaneId") //Toggles the visibility of a pane.
+            dockmanager.toggle("hiddenPaneId") //Toggles the visibility of the pane with id "hiddenPaneId".
     </script>
 
 #### Parameters
@@ -714,7 +714,7 @@ Renders all panes with the current `panes` configuration.
                         content: "Pane content"
                     },{
                         type: "content",
-                        id: "hiddenPaneId"
+                        id: "hiddenPaneId",
                         header: "Pane 2",
                         content: "Hidden Pane",
                         visible: false
@@ -731,14 +731,14 @@ Renders all panes with the current `panes` configuration.
                         }
                     }]
                 }
-            }).data("kendoDockManager);
+            }).data("kendoDockManager");
 
             dockmanager.refresh();
     </script>
 
 ### removePane
 
-Toggles the visibility of a pane
+Removes a pane.
 
 #### Parameters
 
@@ -760,7 +760,7 @@ The `id` assigned as a configuration option of the pane.
                         content: "Pane content"
                     },{
                         type: "content",
-                        id: "myPaneId"
+                        id: "myPaneId",
                         header: "Pane 2",
                         content: "More content"
                     }, {
@@ -776,9 +776,9 @@ The `id` assigned as a configuration option of the pane.
                         }
                     }]
                 }
-            }).data("kendoDockManager);
+            }).data("kendoDockManager");
 
-            dockmanager.remove("myPaneId");
+            dockmanager.remove("myPaneId"); // Remove the pane with id "myPaneId".
     </script>
 
 ## Events

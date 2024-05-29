@@ -16,6 +16,8 @@ To convert flat data into hierarchical structure, use either of the following ap
 * [Initial preprocessing of all data](#initial-all-data-pre-processing)
 * [Incremental data filtering](#incremental-data-filtering)
 
+> Do not use the names of the [`kendo.data.Node` fields and methods](/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+
 ## Initial All-Data Pre-Processing
 
 The pre-processing of all available data and its conversion into a hierarchy prior to binding the TreeView component requires more time and memory, and the resulting tree is fully rendered.

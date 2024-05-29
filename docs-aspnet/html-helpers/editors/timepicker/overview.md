@@ -59,6 +59,27 @@ The TimePicker TagHelper configuration options are passed as attributes.
 
 {% endif %}
 
+## Model Binding
+
+The TimePicker component respects DataAnnotation attributes when using the `TimePickerFor(m => m.Property)` declaration. Besides the `[Required]` attribute, the TimePicker also supports the `[DisplayFormat]` and `[Range]` attributes. The [`Format`](/api/kendo.mvc.ui.fluent/timepickerbuilder#formatsystemstring) configuration will be set based on the specified `DisplayFormat`. The [`Min`](/api/kendo.mvc.ui.fluent/timepickerbuilder#minsystemstring) and [`Max`](/api/kendo.mvc.ui.fluent/timepickerbuilder#maxsystemstring) options will be set based on the `[Range]` attribute.
+
+```HtmlHelper
+    @(Html.Kendo().TimePickerFor(m => m.MyDateTimeProperty))
+```
+{% if site.core %}
+```TagHelper
+
+    <kendo-timepicker for="MyDateTimeProperty">
+    </kendo-timepicker>
+```
+{% endif %}
+```C#
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:HH:mm:ss tt}", ApplyFormatInEditMode = true)]
+        [Range(typeof(DateTime), minimum: "01/01/2023 03:00:00 AM", maximum: "12/31/2023 10:00:00 AM")]
+        public DateTime MyDateTimeProperty{ get; set; }
+```
+    
 ## Functionality and Features
 
 * [Selected time]({% slug htmlhelpers_timepicker_aspnetcore_selectedtimes %})—The TimePicker allows you to render a pre-selected time and also define the minimum and maximum time it displays.

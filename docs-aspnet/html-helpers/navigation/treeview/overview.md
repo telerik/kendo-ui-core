@@ -82,6 +82,8 @@ public IActionResult Read_TreeViewData(int? id)
 }
 ```
 
+> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
+
 ## Basic Configuration
 
 The following example demonstrates the basic configuration of the TreeView HtmlHelper and how to get the TreeView instance.
