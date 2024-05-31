@@ -57,6 +57,8 @@ The following example demonstrates the basic configuration for the DateRangePick
 | [Week number column]({% slug weeknumcolumn_daterangepicker_aspnetcore %})|The DateRangePicker provides options for rendering a column which displays the number of the weeks within the current `Month` view.|
 | [Globalization]({% slug globalization_daterangepicker_aspnetcore %})|The DateRangePicker comes with globalization support that allows you to use the component in apps all over the world.|
 | [Accessibility]({% slug accessibility_daterangepicker_aspnetcore %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
+| [Reverse Selection]({% slug reverse_selection_daterangepicker_aspnetcore %})|The component allows you to pick an end date which is before the start date.|
+| [Buttons]({% slug buttons_daterangepicker_aspnetcore %})|Learn more about the buttons supported by the component.|
 
 ## Referencing Existing Instances
 

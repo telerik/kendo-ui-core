@@ -61,6 +61,9 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 * [Disable dates]({% slug disabled_dates_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
 * [Week column]({% slug week_column_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;You can choose to render a column which displays the number of the weeks within the current `month` view.
 * [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The keyboard navigation of the MultiViewCalendar is always available.
+* [Century cells format]({% slug htmlhelpers_century_cells_format_multiviewcalendar_aspnetcore %})&mdash;The component exposes two formats for the century cells.
+* [Reverse selection]({% slug reverse_selection_multiviewcalendar_htmlhelper_aspnetcore %})&mdash;The component allows you to pick an end date which is before the start date.
+* [Show other month days]({% slug htmlhelpers_show_other_month_days_multiviewcalendar_aspnetcore %})&mdash;The component allows you to control if the days from the previous/next months will be displayed.
 
 ## Next Steps
 
