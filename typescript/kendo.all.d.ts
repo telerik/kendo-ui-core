@@ -5335,7 +5335,7 @@ declare namespace kendo.ui {
     }
 
     interface FileManagerCommandArgs {
-        command: string, 
+        command: string,
         args?: any
     }
 
@@ -6910,7 +6910,7 @@ declare namespace kendo.ui {
         pageable?: boolean | GridPageable | undefined;
         pdf?: GridPdf | undefined;
         persistSelection?: boolean | undefined;
-        reorderable?: boolean | undefined;
+        reorderable?: boolean | GridReorderable | undefined;
         resizable?: boolean | GridResizable | undefined;
         rowTemplate?: string|Function | undefined;
         scrollable?: boolean | GridScrollable | undefined;
@@ -6954,6 +6954,7 @@ declare namespace kendo.ui {
         paste?(e: GridPasteEvent): void;
         pdfExport?(e: GridPdfExportEvent): void;
         remove?(e: GridRemoveEvent): void;
+        rowReorder?(e: GridRowReorderEvent): void
         save?(e: GridSaveEvent): void;
         saveChanges?(e: GridSaveChangesEvent): void;
         sort?(e: GridSortEvent): void;
@@ -7120,6 +7121,15 @@ declare namespace kendo.ui {
     interface GridRemoveEvent extends GridEvent {
         model?: kendo.data.Model | undefined;
         row?: JQuery | undefined;
+    }
+
+    interface GridRowReorderEvent extends GridEvent {
+        row?: JQuery | undefined;
+        rows?: JQuery | undefined;
+        newIndex: number | undefined;
+        oldIndex: number | undefined;
+        sender: Grid;
+        preventDefault: Function;
     }
 
     interface GridSaveEvent extends GridEvent {
@@ -24295,7 +24305,6 @@ declare namespace kendo {
         function destroy(element: Element): void;
         function guid(): string;
         function htmlEncode(value: string): string;
-        function observableHierarchy(array: any): void;
         function observableFileManagerData(array: any): void;
         function parseDate(value: string, formats?: string, culture?: string): Date | null;
         function parseDate(value: string, formats?: any, culture?: string): Date | null;

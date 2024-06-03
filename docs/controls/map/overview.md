@@ -3,7 +3,7 @@ title: Overview
 page_title: jQuery Map Documentation - Map Overview
 description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_mapwidget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} Map Overview
@@ -12,45 +12,23 @@ The Map displays geospatial information organized in layers and is supported for
 
 It also provides tile layers, shape (vector) layers, and marker layers.
 
-* [Demo page for the Map](https://demos.telerik.com/kendo-ui/map/index)
-
-## Basic Configuration
-
-To create a Map, add an empty `div` element to the HTML, provide it with an ID, and, optionally, set its desired width and height inline or by using CSS.
-
-    <div id="map" style="width: 400px; height: 600px"></div>
-
-To render the Map, select the `div` with a jQuery selector and call the `kendoMap()` function.
-
-    $("#map").kendoMap();
-
-The following example demonstrates how to add a basic tile layer to the Map that is bound to OpenStreetMap.
-
-    <div id="map" style="width: 600px; height: 400px;"></div>
-    <script>
-    $("#map").kendoMap({
-        layers: [{
-            type: "tile",
-            urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>."
-        }]
-    });
-    </script>
-
-![Kendo UI for jQuery Map with basic configuration](/controls/map/images/map-basic.png)
+![Kendo UI for jQuery Map Overview](./images/map-overview.PNG)
 
 ## Functionality and Features
 
-* [Layers]({% slug maplayers_mapwidget %})
-* [Creating maps]({% slug mapauthoring_mapwidget %})
-* [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)
+* [Layers]({% slug maplayers_mapwidget %})&mdash;Learn the possible options to render the layers.
+* [Creating maps]({% slug mapauthoring_mapwidget %})&mdash;You can create your own map using datasets.
+* [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)&mdash;You can configure the Map to work with Azure service.
 
-## Events
 
-For a complete example, refer to the [demo on using the events of the Map](https://demos.telerik.com/kendo-ui/map/events).
+## Next Steps 
+
+* [Getting Started with the Kendo UI Map for jQuery]({% slug getting_started_kendoui_map_component %})
+* [Overview of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration)
 
 ## See Also
 
-* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Overview of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration)
