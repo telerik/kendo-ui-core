@@ -31,6 +31,11 @@ Include the JSZip library:
 * To support client-side Excel export (all components)
 * To support Excel imports with the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/fromfile) method (Spreadsheet component)
 
+> Starting with v2024.1.130 the JSZip library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
+    <!-- Load the JSZip library to enable Excel export -->
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+
 To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

@@ -31,6 +31,17 @@ The password must contain only ASCII characters.
 
 As an alternative, you can [reset your Telerik NuGet Feed credentials from the Windows Credentials Manager](#solution-2-windows-credentials-manager)
 
+## Failed to Retrieve Information from Remote Source
+
+Trying to install Telerik.UI.for.AspNet.{{ site.framework_short }} results in an error:
+
+`Failed to retrieve information about 'Telerik.UI.for.AspNet.{{ site.framework_short }}' from remote source 'https://nuget.telerik.com/nuget/FindPackagesById()?id='Telerik.UI.for.AspNet.{{ site.framework_short }}'`
+
+### Solution 
+
+* The Telerik NuGet v2 feed is obsolete and will be deprecated after November 2024. You can use the [use the Telerik NuGet v3 feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}) instead.
+* Make sure that the NuGet feed URL is configured correctly.
+
 ## Issue: Unable to load the service index for source https://nuget.telerik.com/v3/index.json
 
 Make sure that the Telerik NuGet Feed is live at [https://status.telerik.com/](https://status.telerik.com/).
