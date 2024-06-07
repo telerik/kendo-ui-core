@@ -2535,6 +2535,8 @@ The fields which can be used in the template are:
 * dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
 * format - the default format of the label
 * culture - the default culture (if set) on the label
+* index - the 0-based index of the current label
+* count - the total number of labels on the axis
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 

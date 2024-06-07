@@ -21,13 +21,13 @@ To use the **Create New Project Wizard**, [install the {{ site.product }} Extens
 
 ## Using the Wizard
 
->The exact steps to start the wizard may vary between the different Visual Studio versions. The following instructions describe the steps for Visual Studio 2019.
+>The exact steps to start the wizard may vary between the different Visual Studio versions. The following instructions describe the steps for Visual Studio 2022.
 
 To create a new {{ site.product }} application, use the **Create New Project Wizard**. The wizard detects all installed versions of {{ site.product }} and lists them in the **Version** dropdown&mdash;this enables you to apply the desired version to your project.
 
 To start the wizard, use either of the following approaches:
 
-* Using the Visual Studio 2019 **Extensions** menu:
+* Using the Visual Studio 2022 **Extensions** menu:
 
     1. Go to **Extensions** > **Telerik** >  **{{ site.product }}**.
     1. Click **Create New Telerik Project**.
@@ -39,7 +39,7 @@ To start the wizard, use either of the following approaches:
 * Using the **Project** menu:
 
     1. Click **File** > **New** > **Project**.
-    1. Type **Telerik** in the **Search for templates** textbox. Click on the {% if site.core %}**Telerik ASP.NET Core MVC Telerik Application**{% else %}**Telerik ASP.NET MVC Application**{% endif %}.
+    1. Type **Telerik** in the **Search for templates** textbox. Click on the {% if site.core %}**Telerik C# ASP.NET Core MVC Application**{% else %}**Telerik ASP.NET MVC Application**{% endif %}.
 
 {% if site.core %}
     ![{{ site.product_short }} New project Template](../vs-integration/images/new-project-template-core.png)
@@ -73,7 +73,7 @@ In this article, we use the **Tag** option.
 
 ### {{ site.product_short}} version
 
-The Project wizard allows you to select the desired version of {{ site.product_short }}. If there is a newer version available that is not downloaded on the machine, you can obtain it without exiting the wizard.
+The Project wizard allows you to select the desired version of {{ site.product_short }}. If a newer version is available but it is not downloaded on the machine, you can get it without exiting the wizard.
 
 ![{{ site.product_short }} Product version options](../vs-integration/images/telerik-version.png)
 
@@ -95,18 +95,17 @@ The following project templates are available:
         </tr>
         <tr>
             <td><strong>Blank</strong></td>
-            <td>The Blank template has the package references and the client-side resources loaded in the view. It also features the expected JSON serialization configuration in the <code>Startup.cs</code> file. 
-The Kendo Editor templates are included in the <code>~Views\Shared\EditorTemplates folder</code>.</td>
+            <td><p>The Blank template has the package references and the client-side resources loaded in the <code>_Layout.cshtml</code> file. It also features the expected <a href="https://docs.telerik.com/{{ site.platform }}/installation/json-serialization">JSON serialization configuration</a> in the <code>Program.cs</code> file. The default editor templates are included in the <code>~Views\Shared\EditorTemplates</code> folder.</p></td>
         </tr>
         <tr>
             <td><strong>Standard</strong></td>
             <td><p>The Standard template features:</p>
                 <ul>
                     <li> Everything from the <strong>Blank Project<strong>.</li>
-                    <li> Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
-                    <li> PanelBar in <code>Index.cshtml</code>.</li>
-                    <li> TabStrip in <code>Contact.cshtml</code>.</li>
-                    <li> HTML styled with [Cards](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/cards) CSS in <code>About.cshtml</code>.</li>
+                    <li> A Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
+                    <li> A PanelBar in <code>Index.cshtml</code>.</li>
+                    <li> A TabStrip in <code>Contact.cshtml</code>.</li>
+                    <li> An HTML styled with <a href="https://docs.telerik.com/{{ site.platform }}/knowledge-base/cards">Cards</a> in <code>About.cshtml</code>.</li>
                 </ul>
             </td>
         </tr>
@@ -116,21 +115,20 @@ The Kendo Editor templates are included in the <code>~Views\Shared\EditorTemplat
                 <ul>
                     <li> Everything from the <strong>Blank Project</strong>.</li>
                     <li> Buttons and Grid in <code>Index.cshtml</code>.</li>
-                    <li> Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
+                    <li> A Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
                 </ul>
             </td>
         </tr>
         <tr>
             <td><strong>Grid Razor Pages</strong></td>
-            <td>The Grid Razor Pages template includes everything from the <strong>Blank Project</strong>.
-It features an editable grid in <code>Index.cshtml</code> that uses handlers to obtain and manipulate its data. It shows how to send the Anti-forgery Tokens as well.</td>
+            <td><p>The Grid Razor Pages template includes everything from the <strong>Blank Project</strong>. It features an editable grid in <code>Index.cshtml</code> that uses handlers for the CRUD data operations. The <code>AntiForgeryToken</code> is set up, as well.</p></td>
         </tr>
         <tr>
             <td><strong>Dashboard</strong></td>
             <td><p>The Dashboard template features:</p>
                 <ul>
-                    <li> Everything from the <strong>Blank Project</strong> except the editor templates.</li>
-                    <li> A TileLayout with Charts and Grids in <code>Index.cshtml</code> as well as a Shared DataSource and dynamicaly populated templates.</li>
+                    <li> Everything from the <strong>Blank Project</strong> except the editor templates folder.</li>
+                    <li> A TileLayout with Charts and Grids in the <code>Index.cshtml</code> as well as shared DataSource and dynamically populated templates.</li>
                 </ul>
             </td>
         </tr>
@@ -153,7 +151,7 @@ It features an editable grid in <code>Index.cshtml</code> that uses handlers to 
 
 ### Themes
 
-The **Select Theme** option allows you to preview all of the available LESS and SASS themes and select the desired one. After the selection is made, the project will include only the files that are required by the selected theme in the `_Layout.cshtml`.
+The **Select Theme** option allows you to preview the available Kendo UI themes and select the desired one. After selecting a theme, the project will include only the files that are required by the selected theme in the `_Layout.cshtml`.
 
 ![{{ site.product_short }} Project Wizard Select Theme](../vs-integration/images/select-theme-core.png)
 
@@ -166,7 +164,7 @@ After configuring the settings of the project, click **Finish** to start creatin
 As a result, the wizard:
 
 * Creates a new {{ site.framework }} application.
-* Adds CDN references for the Kendo UI styles and scripts to the `Layout` file of the project.
+* Adds CDN references for the Kendo UI styles and scripts to the `_Layout.cshtml` file of the project.
 * Copies all Kendo UI editor templates.
 {% if site.core %}
 * Adds a package reference to the `Telerik.UI.for.AspNet.Core` NuGet package.

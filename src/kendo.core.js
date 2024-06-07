@@ -2011,6 +2011,10 @@ function pad(number, digits, end) {
             destProp;
 
         for (property in source) {
+            if (property === '__proto__' || property === 'constructor') {
+                continue;
+            }
+
             propValue = source[property];
             propType = typeof propValue;
 

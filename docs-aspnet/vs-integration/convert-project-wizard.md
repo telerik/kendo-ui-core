@@ -9,9 +9,9 @@ position: 10
 
 # Adding {{ site.product }} to Existing Projects
 
-Enhance existing {{ site.framework }} applications with Telerik UI Components such as [Grid, Chart, DropDownList, and others.]{% if site.core %}(https://demos.telerik.com/aspnet-core){% else %}(https://demos.telerik.com/aspnet-mvc){% endif %} with just a few mouse clicks.
+Enhance existing {{ site.framework }} applications with Telerik UI Components such as [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [Chart]({% slug htmlhelpers_charts_aspnetcore %}), [DropDownList]({% slug htmlhelpers_dropdownlist_aspnetcore %}), and more with a few mouse clicks.
 
-The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{% else %}ASP.NET MVC 5{% endif %} app into a Telerik UI for ASP.NET MVC app&mdash;an application that is ready to use the Telerik UI components. The wizard handles the setup of NuGet packages and client-side resources for you. Once complete, you can directly reference a specific release version of the {{ site.product }} components in your app. This allows you to start using the Telerik UI components without additional manual configuration.
+The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{% else %}ASP.NET MVC 5{% endif %} app into a {{ site.product }} app&mdash;an application that is ready to use the Telerik UI components. The wizard handles the setup of NuGet packages and client-side resources for you. Once complete, you can directly reference a specific release version of the {{ site.product }} in your app. This allows you to start using the Telerik UI components without additional manual configuration.
 
 {% if site.core %}
 > The Convert Project Wizard does not support converting Razor Pages projects and projects with .Net version 5.
@@ -23,7 +23,7 @@ The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{
             <!-- omitted for brevity -->
         </Project>
     ```
-Alternatively, the `Microsoft.NET.Sdk.Web` can be included with the following dependendcies as well `Microsoft.AspNetCore`, `Microsoft.AspNetCore.App`, `Microsoft.AspNetCore.All`.
+Alternatively, the `Microsoft.NET.Sdk.Web` can be included with the following dependencies as well `Microsoft.AspNetCore`, `Microsoft.AspNetCore.App`, `Microsoft.AspNetCore.All`.
 {% endif %}
 
 ## Using the Convert Project Wizard
@@ -79,7 +79,7 @@ The **Project Settings** page enables you to modify the project settings by conf
 
 - **Render Right-To-Left**&mdash;Updates the master page with the Right-to-left support class and adds CSS reference for RTL styles.
 - **Copy Editor Templates**&mdash;Copies the predefined editor templates to `~/Views/Shared/EditorTemplates`. Existing editor templates will be overwritten.
-- **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
+- **Copy Global Resources**&mdash;Copies the localization files to {% if site.core %}`~/wwwroot/lib/kendo-ui/js/messages`{% else %}`~/Scripts/kendo/{version}/cultures`{% endif %}.
 - **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 {% if site.core %}
@@ -94,7 +94,7 @@ The wizard automates several steps that are crucial for the project configuratio
 {% if site.core %}
 - [Setting for JSON Serialization]({% slug jsonserialization_core %}) 
 {% endif %}
-- [Adding a reference to Kendo.MVC.UI]{% if site.core %}({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-reference-to-kendomvcui){% else %}({% slug manualsetup_aspnetmvc %}#downloading-and-referencing-the-kendomvcdll-assembly){% endif %}
+- [Adding a reference to Kendo.MVC.UI]{% if site.core %}({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-a-reference-to-kendomvcui){% else %}({% slug manualsetup_aspnetmvc %}#downloading-and-referencing-the-kendomvcdll-assembly){% endif %}
 - [Including the client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 
 {% if site.mvc %}

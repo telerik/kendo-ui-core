@@ -11,32 +11,34 @@ position: 3
 
 The {{site.product}} Visual Studio Code Scaffolder allows you to quickly generate Views with some of the most popular components.
 
-The Visual Studio Code Scaffolder is part of the  {{site.product}} Productivity Tools. It aims to simplify the process of adding {{site.product_short}} components to an application. Adding a new View you can choose from a set of components, including the Grid, Chart, and Form, and customize their options.
+The Visual Studio Code Scaffolder is part of the  {{site.product}} Productivity Tools. It aims to simplify the process of adding {{site.product_short}} components to an application. Adding a new View, you can choose from a set of components, like the Grid, Chart, Form, and more, and customize their options.
 
 ## Available Components
 
-Using the {{site.product}} Visual Studio Code Scaffolder you can quickly generate a Views with the following components:
+Using the {{site.product}} Visual Studio Code Scaffolder, you can quickly generate Views with the following components:
 
+* [TreeList]({% slug htmlhelpers_treelist_aspnetcore %})
 * [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [Chart]({% slug htmlhelpers_charts_aspnetcore %})
-* [Form]({% slug htmlhelpers_form_aspnetcore_overview %})
+* [Scheduler]({% slug htmlhelpers_scheduler_aspnetcore %})
 * [ListView]({% slug htmlhelpers_listview_aspnetcore %})
 * [Gantt]({% slug htmlhelpers_gantt_aspnetcore %})
-* [Scheduler]({% slug htmlhelpers_scheduler_aspnetcore %})
+* [Form]({% slug htmlhelpers_form_aspnetcore_overview %})
+* [Editor]({% slug htmlhelpers_editor_aspnetcore %})
+* [Chart]({% slug htmlhelpers_charts_aspnetcore %})
 
 ## Adding a Scaffolded View
 
-1. To use the Scaffolder right click on the `.csproj` file and select **New Telerik UI for ASP.NET Core Project Item**
+1. To start the Scaffolder, right click on the `.csproj` file and select **New Telerik UI for ASP.NET Core Project Item...**.
 
     ![{{ site.product_short }} Select New Project Item in the context menu](images/aspnetcore-scaffolder-context-menu.jpg)
 
-1. The **Telerik UI for ASP.NET Core Project Item Generator** will prompt you to select Project Item Type. It will allow you to configure multiple component-specific properties and provide the customizable options for the scaffolded page.
+1. The **Telerik UI for ASP.NET Core Project Item Generator** will prompt you to select the component you wish to add from the scaffolding wizard. It will allow you to configure multiple component-specific properties and provide customizable options for the scaffolded page.
 
     ![{{ site.product_short }} Scaffolder project item generator](images/aspnetcore-scaffolder.jpg)
 
-1. Confirming the options will generate a View containig the selected component, with the provided configuration options.
+1. Confirming the options will generate a View containing the selected component with the provided configuration options.
 
-For example, if you scaffold a new page with the {{site.product}} Grid component, you will be able to set the CRUD endpoints for the DataSource, set the configuration for sorting, filtering, grouping, column resizing and along with additional configuration settings.
+For example, if you scaffold a new page with the {{site.product}} Grid component, you can set the CRUD endpoints for the DataSource and enable editing, sorting, filtering, grouping, column resizing, and more Grid settings.
 
 ## Using the CLI
 

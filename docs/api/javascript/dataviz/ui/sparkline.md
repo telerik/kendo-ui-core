@@ -163,7 +163,11 @@ The [template](/api/framework/kendo#methods-template) which renders the labels.
 The fields which can be used in the template are:
 
 * value - the category value
-* dataItem - the data item, in case a field has been specified
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+* index - the 0-based index of the current label
+* count - the total number of labels on the axis
 
 ### categoryAxis.labels.visible `Boolean`*(default: true)*
 
@@ -2431,7 +2435,7 @@ The series base color. The supported values are:
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
 
 #### Example
-    
+
     $("#sparkline").kendoSparkline({
          series: [{
              type: "column",
