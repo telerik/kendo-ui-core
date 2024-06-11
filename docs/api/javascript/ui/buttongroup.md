@@ -181,7 +181,9 @@ Note: position configuration, other than `inline` requires the badge to be align
 
 ### items.badge.shape `String` *(default: 'rounded')*
 
-Specifies the shape of the badge. Valid options are: `rectangle`, `rounded`, `pill`, `circle`, `dot`.
+
+Specifies the shape of the badge. 
+Valid options are `rectangle`, `rounded`, `pill`, `circle`, `dot`.
 
 
 ### items.badge.size  `String` *(default: 'medium')*
