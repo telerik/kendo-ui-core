@@ -18,7 +18,7 @@ component: drawing-api
  </tr>
  <tr>
   <td>Created with Version</td>
-  <td>2016.3.1028</td>
+  <td>2024.2.514</td>
  </tr>
 </table>
 
@@ -59,3 +59,5 @@ How can I export some pages with landscape orientation and others with portrait 
       	});
     </script>
 ```
+
+>The PDF standard fonts cover only the basic ASCII character set. For more information refer to the [`Unicode and Embedded Fonts`](/framework/pdf/embedded-fonts) article.

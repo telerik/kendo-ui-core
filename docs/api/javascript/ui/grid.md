@@ -9120,6 +9120,8 @@ If set to `true` the user could reorder the rows by dragging them. By default re
 
 > Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
 
+More about the Grid Row Drag and Drop functionality you can read in [`this article`](/controls/grid/row-drag-drop#row-drag-and-drop).
+
 #### Example - enable column reordering
 
     <div id="grid"></div>
@@ -9799,28 +9801,31 @@ The [template](/api/javascript/kendo/methods/template) which renders the Status 
 
 #### Example
 
+<div id="grid"></div>
+  <script>
     $("#grid").kendoGrid({
-        columns: [
-            { field: "name" },
-            { field: "age" }
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
         ],
-        dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 30 },
-                { id: 2, name: "John Doe", age: 33 }
-            ],
-            schema: {
-                model: {
-                    id: "id"
-                }
-            }
-        },
-        selectable: {
-            mode: "cell",
-            cellAggregates: true
-        },
-        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+        schema: {
+          model: {
+            id: "id"
+          }
+        }
+      },
+      selectable: {
+        mode: "cell",
+        cellAggregates: true
+      },
+      statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
     });
+  </script>
 
 ### toolbar `String|Function|Array`
 

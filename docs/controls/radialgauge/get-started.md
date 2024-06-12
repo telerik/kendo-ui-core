@@ -93,7 +93,6 @@ The RadialGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/
 
 * Add two pointers.
 * Configure the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/pointer#pointervalue) and [`color`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/pointer#pointercolor) of the pointers.
-* Specify the [`colors`](/api/javascript/dataviz/ui/radialgauge/configuration/colors) of the value pointer. The color of the pointer will change based on the current value of the RadialGauge component.
 
 
 ```dojo

@@ -60,7 +60,7 @@ The following table shows the most common location you can include it according 
 
 |Type of Application|Common Locations
 |:---|:---
-|JS applications|<ul><li><code>./</code></li><li><code>./src</code></li><li><code>./scripts</code></li><li><code>./js</code></li></ul>
+|JS (JavaScript) applications|<ul><li><code>./</code></li><li><code>./src</code></li><li><code>./scripts</code></li><li><code>./js</code></li></ul>
 |ASP.NET MVC applications|<ul><li><code>./</code></li><li><code>./Scripts</code></li></ul>
 |ASP.NET Core applications|<ul><li><code>./wwwroot</code></li><li><code>./wwwroot/scripts</code></li><li><code>./wwwroot/js</code></li></ul>
 
@@ -104,7 +104,7 @@ The following example shows how to use the CDN reference by utilizing the predef
 
 Import the `kendo-ui-license.js` file right after the import of the Kendo UI modules.
 
-The following example shows how to use the ESM modules.
+The following example shows how to use the ESM (ECMAScript) modules.
 
 ```js
 import "@progress/kendo-ui";
@@ -113,7 +113,7 @@ import "./kendo-ui-license.js";
 $("#grid").kendoGrid();
 ```
 
-The following example shows how to use the CJS modules.
+The following example shows how to use the CJS (CommonJS) modules.
 
 ```js
 require("@progress/kendo-ui");
@@ -124,7 +124,7 @@ $("#grid").kendoGrid();
 
 Often, you will need two or more imports of the Kendo UI libraries and you will need to import the license file only in one location, which most likely will be the main script file of your application. In that case, import the `kendo.core.js` and register your license code as usual.
 
-The following example shows how to use the ESM modules to import the license file in a single location.
+The following example shows how to use the ESM (ECMAScript) modules to import the license file in a single location.
 
 ```js
 import '@progress/kendo-ui/js/kendo.core';
@@ -133,7 +133,7 @@ import './kendo-ui-license.js';
 // The rest of the code.
 ```
 
-The following example shows how to use the CJS modules to import the license files in a single location.
+The following example shows how to use the CJS (CommonJS) modules to import the license files in a single location.
 
 ```js
 require("@progress/kendo-ui/js/kendo.core");

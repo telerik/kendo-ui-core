@@ -32,7 +32,7 @@ The example below shows a basic configuration and how to set the size to "small"
 
 
 ```dojo
-    <input id="checkbox" />
+    <input id="checkbox" checked />
     <script>
         $("#checkbox").kendoCheckBox({
             size: "small"
@@ -53,8 +53,7 @@ The available [`rounded`](/api/javascript/ui/checkbox/configuration/rounded) val
 The following example demonstrates how the `rounded` option can be set to `full`:
 
 ```dojo
-    <input id="checkbox"/>
-
+    <input id="checkbox" checked/>
     <script>
         $(document).ready(function(){
             $("#checkbox").kendoCheckBox({

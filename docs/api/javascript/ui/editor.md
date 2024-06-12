@@ -2698,15 +2698,33 @@ The available editor commands are:
 *   Formatting marks
         - **formattingMarks**
 
-#### Example
+#### Example - add built-in and custom buttons to the tools collection
 
     <textarea id="editor"></textarea>
     <script>
-    $("#editor").kendoEditor({
-      tools: [
-        "bold", "italic", "underline"
-      ]
-    });
+      $("#editor").kendoEditor({
+        tools: [
+          {
+            name: "bold",
+          },
+          {
+            name: "italic"
+          },
+          {
+            name: "underline"
+          },
+          {
+            name: "custom",
+            template: '<button id="custom">Custom</button>'
+          }
+        ]
+      });
+
+      $("#custom").kendoButton({
+        click: function() {
+          console.log("custom hanler")
+        }
+      })
     </script>
 
 ### tools.name `String`
@@ -4836,13 +4854,14 @@ When set to false, the decoration applied by the Formatting tool dropdown will b
 
 The HTML element which represents the editor content area. In the [classic Editor mode](/controls/editor/overview#classic-mode), this is the `<body>` element inside the `iframe`. In the [inline Editor mode](/controls/editor/overview#inline-mode), this is the [element, from which the Editor is initialized](/intro/widget-basics/wrapper-element).
 
-#### Example
+#### Example - set background color and font color to the editor content area
 
     <textarea id="editor"></textarea>
     <script>
       $("#editor").kendoEditor();
       var editor = $("#editor").data("kendoEditor");
       editor.body.style.backgroundColor = "#f00";
+      editor.body.style.color = "#FFFFFF";
     </script>
 
 ### toolbar `Object`
