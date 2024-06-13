@@ -26208,6 +26208,10 @@ interface JQuery {
     kendoResponsivePanel(options: kendo.ui.ResponsivePanelOptions): JQuery;
     data(key: "kendoResponsivePanel"): kendo.ui.ResponsivePanel | undefined;
 
+    kendoSankey(): JQuery;
+    kendoSankey(options: kendo.dataviz.ui.SankeyOptions): JQuery;
+    data(key: "kendoSankey"): kendo.dataviz.ui.Sankey | undefined;
+
     kendoScheduler(): JQuery;
     kendoScheduler(options: kendo.ui.SchedulerOptions): JQuery;
     data(key: "kendoScheduler"): kendo.ui.Scheduler | undefined;
