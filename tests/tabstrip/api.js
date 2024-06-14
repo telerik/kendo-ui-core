@@ -655,7 +655,7 @@
         });
 
         function createTabStrip(options) {
-            if ($.isArray(options)) {
+            if (Array.isArray(options)) {
                 options = { dataSource: options };
             }
 

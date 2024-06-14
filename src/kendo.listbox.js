@@ -1292,7 +1292,7 @@ var __meta__ = {
             var items = that.getItems();
             var offset = options.offset;
             var indecesInDom = getSortedDomIndices(items);
-            var movedItems = $.makeArray(items.sort(that.itemComparer));
+            var movedItems = $.makeArray([].sort.call(items,that.itemComparer));
             var moveAction = options.moveAction;
             var movedItem;
 

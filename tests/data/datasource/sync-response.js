@@ -19,7 +19,7 @@
         var obj = {};
         data = data !== undefined ? data : [{ id: 1, foo: "bar" }];
         obj[method] = function(options) {
-            options.success($.isFunction(data) ? data() : data);
+            options.success(kendo.isFunction(data) ? data() : data);
         };
 
         stub(dataSource.transport, obj);

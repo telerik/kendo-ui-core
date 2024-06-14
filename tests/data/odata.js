@@ -93,7 +93,7 @@
 
             var schema = dataSource.options.schema;
             assert.equal(schema.total, "d.__count");
-            assert.isOk($.isFunction(schema.data));
+            assert.isOk(kendo.isFunction(schema.data));
         });
 
         it("parameterMap adds $format and $inlinecount to the request", function() {

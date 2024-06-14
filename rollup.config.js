@@ -21,6 +21,10 @@ const globals = {
     jquery: '$'
 };
 
+// Used only for the source code bundle.
+const babelArg = process.argv.includes("--configBabel");
+const babel = babelArg ? require('@rollup/plugin-babel') : null;
+
 export function transformCodePlugin() {
     return {
         name: 'transform-kendo-modules',
@@ -73,7 +77,8 @@ const resourcesConfig = (name, options = {}) => ({
     plugins: [
         transformCodePlugin(),
         addKendoVersion(),
-        polyfill(['../kendo.core.js'])
+        polyfill(['../kendo.core.js']),
+        babel ? babel({ babelHelpers: 'bundled' }) : null // Used only for the source code bundle.
     ]
 });
 
@@ -95,7 +100,8 @@ const configMap = (name) => ({
         transformCodePlugin(),
         addKendoVersion(),
         name === 'kendo.core.js' || isBundle(name) ? polyfill(['jquery']) : null,
-        nodeResolve()
+        nodeResolve(),
+        babel ? babel({ babelHelpers: 'bundled' }) : null // Used only for the source code bundle.
     ]
 });
 

@@ -39,7 +39,10 @@
 		mockedAjaxCalls = [],
 		unmockedAjaxCalls = [],
 		CALLBACK_REGEX = /=\?(&|$)/,
-		jsc = (new Date()).getTime();
+		jsc = (new Date()).getTime(),
+		isArray = Array.isArray,
+		isFunction = (value) => typeof value === 'function',
+		parseJSON = JSON.parse;
 
 
 	// Parse the given XML string.
@@ -80,7 +83,7 @@
 		// Test for situations where the data is a querystring (not an object)
 		if (typeof live === 'string') {
 			// Querystring may be a regex
-			if ($.isFunction( mock.test )) {
+			if (isFunction( mock.test )) {
 				return mock.test(live);
 			} else if (typeof mock === 'object') {
 				live = getQueryParams(live);
@@ -95,12 +98,12 @@
 				return identical;
 			} else {
 				if ( typeof live[k] === 'object' && live[k] !== null ) {
-					if ( identical && $.isArray( live[k] ) ) {
-						identical = $.isArray( mock[k] ) && live[k].length === mock[k].length;
+					if ( identical && isArray( live[k] ) ) {
+						identical = isArray( mock[k] ) && live[k].length === mock[k].length;
 					}
 					identical = identical && isMockDataEqual(mock[k], live[k]);
 				} else {
-					if ( mock[k] && $.isFunction( mock[k].test ) ) {
+					if ( mock[k] && isFunction( mock[k].test ) ) {
 						identical = identical && mock[k].test(live[k]);
 					} else {
 						identical = identical && ( mock[k] === live[k] );
@@ -153,13 +156,13 @@
 	function getMockForRequest( handler, requestSettings ) {
 		// If the mock was registered with a function, let the function decide if we
 		// want to mock this request
-		if ( $.isFunction(handler) ) {
+		if ( isFunction(handler) ) {
 			return handler( requestSettings );
 		}
 
 		// Inspect the URL of the request and check if the mock handler's url
 		// matches the url for this ajax request
-		if ( $.isFunction(handler.url.test) ) {
+		if ( isFunction(handler.url.test) ) {
 			// The user provided a regex for the url, test it
 			if ( !handler.url.test( requestSettings.url ) ) {
 				return null;
@@ -225,7 +228,7 @@
 	}
 
 	function parseResponseTimeOpt(responseTime) {
-		if ($.isArray(responseTime) && responseTime.length === 2) {
+		if (isArray(responseTime) && responseTime.length === 2) {
 			var min = responseTime[0];
 			var max = responseTime[1];
 			if (isPosNum(min) && isPosNum(max)) {
@@ -282,7 +285,7 @@
 						onReady = this.onload || this.onreadystatechange;
 
 						// jQuery < 1.4 doesn't have onreadystate change for xhr
-						if ( $.isFunction( onReady ) ) {
+						if ( isFunction( onReady ) ) {
 							if ( mockHandler.isTimeout) {
 								this.status = -1;
 							}
@@ -295,7 +298,7 @@
 
 					// We have an executable function, call it to give
 					// the mock handler a chance to update it's data
-					if ( $.isFunction(mockHandler.response) ) {
+					if ( isFunction(mockHandler.response) ) {
 						// Wait for it to finish
 						if ( mockHandler.response.length === 2 ) {
 							mockHandler.response(origSettings, function() {
@@ -466,7 +469,7 @@
 			newMock = ($.Deferred) ? (new $.Deferred()) : null;
 
 		// If the response handler on the moock is a function, call it
-		if ( mockHandler.response && $.isFunction(mockHandler.response) ) {
+		if ( mockHandler.response && isFunction(mockHandler.response) ) {
 
 			mockHandler.response(origSettings);
 
@@ -516,7 +519,7 @@
 
 		if ( newMock ) {
 			try {
-				json = $.parseJSON( mockHandler.responseText );
+				json = parseJSON( mockHandler.responseText );
 			} catch (err) { /* just checking... */ }
 
 			newMock.resolveWith( callbackContext, [json || mockHandler.responseText] );
@@ -608,7 +611,7 @@
 		overrideCallback = function(action, mockHandler) {
 			var origHandler = origSettings[action.toLowerCase()];
 			return function() {
-				if ( $.isFunction(origHandler) ) {
+				if ( isFunction(origHandler) ) {
 					origHandler.apply(this, [].slice.call(arguments));
 				}
 				mockHandler['onAfter' + action]();
@@ -666,13 +669,13 @@
 			}
 
 			// Set up onAfter[X] callback functions
-			if ( $.isFunction( mockHandler.onAfterSuccess ) ) {
+			if ( isFunction( mockHandler.onAfterSuccess ) ) {
 				origSettings.success = overrideCallback('Success', mockHandler);
 			}
-			if ( $.isFunction( mockHandler.onAfterError ) ) {
+			if ( isFunction( mockHandler.onAfterError ) ) {
 				origSettings.error = overrideCallback('Error', mockHandler);
 			}
-			if ( $.isFunction( mockHandler.onAfterComplete ) ) {
+			if ( isFunction( mockHandler.onAfterComplete ) ) {
 				origSettings.complete = overrideCallback('Complete', mockHandler);
 			}
 

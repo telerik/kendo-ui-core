@@ -788,7 +788,7 @@ var __meta__ = {
             });
 
             if (this.element.is("[tabindex]")) {
-                elements.push(this.element[0]);
+                [].push.call(elements, this.element[0]);
             }
 
             return elements;
@@ -797,7 +797,7 @@ var __meta__ = {
             var sortedElements;
 
             if (stableSort) {
-                sortedElements = elements.sort(function(prev, next) {
+                sortedElements = [].sort.call(elements, function(prev, next) {
                     return prev.tabIndex - next.tabIndex;
                 });
             } else {
@@ -806,7 +806,7 @@ var __meta__ = {
                     item.setAttribute(attrName, i);
                 });
 
-                sortedElements = elements.sort(function(prev, next) {
+                sortedElements = [].sort.call(elements, function(prev, next) {
                     return prev.tabIndex === next.tabIndex ?
                         parseInt(prev.getAttribute(attrName), 10) - parseInt(next.getAttribute(attrName), 10) :
                         prev.tabIndex - next.tabIndex;

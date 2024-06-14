@@ -63,7 +63,7 @@
             });
 
             dataSource.query({ sort: { field: "foo", dir: "asc" } });
-            assert.isOk($.isArray(dataSource.sort()));
+            assert.isOk(Array.isArray(dataSource.sort()));
             assert.equal(dataSource.sort()[0].field, "foo");
             assert.equal(dataSource.sort()[0].dir, "asc");
 
@@ -1391,7 +1391,7 @@
             });
 
             dataSource.query({ filter: { field: "age", operator: "==", value: 2 } });
-            assert.isOk($.isArray(dataSource.filter().filters));
+            assert.isOk(Array.isArray(dataSource.filter().filters));
             assert.equal(dataSource.filter().filters[0].field, "age");
             assert.equal(dataSource.filter().filters[0].operator, "eq");
             assert.equal(dataSource.filter().filters[0].value, 2);
@@ -2335,7 +2335,7 @@
                 serverSorting: true
             });
 
-            assert.isOk($.isFunction(dataSource.query().then));
+            assert.isOk(kendo.isFunction(dataSource.query().then));
         });
 
         it("query returns promise for local operations", function() {
@@ -2347,7 +2347,7 @@
 
             dataSource.read();
 
-            assert.isOk($.isFunction(dataSource.query().then));
+            assert.isOk(kendo.isFunction(dataSource.query().then));
         });
 
         it("query resolves promise after data has been processed", function() {

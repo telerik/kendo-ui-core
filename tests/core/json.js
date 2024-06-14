@@ -9,7 +9,7 @@
 
         it("stringified object should be deserializable ", function() {
             var obj = { foo: "bar", baz: 1 };
-            var result = $.parseJSON(kendo.stringify(obj));
+            var result = JSON.parse(kendo.stringify(obj));
             assert.equal(result.foo, "bar");
             assert.equal(result.baz, 1);
         });

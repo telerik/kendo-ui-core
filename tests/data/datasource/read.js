@@ -751,7 +751,7 @@
                 }
             });
 
-            assert.isOk($.isFunction(dataSource.read().then));
+            assert.isOk(kendo.isFunction(dataSource.read().then));
         });
 
         it("read resolves promise upon success", function() {

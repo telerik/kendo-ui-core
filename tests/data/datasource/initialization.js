@@ -354,7 +354,7 @@
                 sort: { field: "foo", dir: "asc" }
             });
 
-            assert.isOk($.isArray(dataSource._sort));
+            assert.isOk(Array.isArray(dataSource._sort));
             assert.equal(dataSource._sort[0].field, "foo");
             assert.equal(dataSource._sort[0].dir, "asc");
         });

@@ -1080,7 +1080,7 @@
 
             list.value(null);
 
-            assert.isOk($.isArray(list.value()));
+            assert.isOk(Array.isArray(list.value()));
         });
 
         it("value method supports empty string", function() {
@@ -1103,7 +1103,7 @@
             list.value("");
 
             var value = list.value();
-            assert.isOk($.isArray(value));
+            assert.isOk(Array.isArray(value));
             assert.equal(value.length, 0);
         });
 
@@ -1476,7 +1476,7 @@
 
             assert.equal(removed.position, 0);
             assert.equal(removed.dataItem, "item2");
-            assert.isOk(!$.isArray(removed.dataItem));
+            assert.isOk(!Array.isArray(removed.dataItem));
         });
 
         it("items returns item elements", function() {

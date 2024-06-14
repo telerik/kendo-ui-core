@@ -1115,7 +1115,7 @@
 
                     assert.equal(removed.position, 0);
                     assert.equal(removed.dataItem.value, 123);
-                    assert.isOk(!$.isArray(removed.dataItem));
+                    assert.isOk(!Array.isArray(removed.dataItem));
                     done();
                 }
             }));

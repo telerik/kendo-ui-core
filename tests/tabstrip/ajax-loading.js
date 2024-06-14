@@ -150,7 +150,7 @@
         });
 
         it("ajax content with error fires error handler and writes the error message to the console", function(done) {
-            if (jQuery.fn.jquery.substring(0, 1) === '3') {
+            if (jQuery.fn.jquery.substring(0, 1) === '3' || jQuery.fn.jquery.substring(0, 1) === '4') {
                 assert.isOk(true);
                 done();
                 return;

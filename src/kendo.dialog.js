@@ -751,7 +751,9 @@ import "./kendo.icons.js";
                         modal.options.appendTo === that.options.appendTo &&
                         !modal.containment &&
                         $(modal.element).is(VISIBLE);
-                }).sort(function(a, b) {
+                });
+
+                zStack = [].sort.call(zStack, function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
 

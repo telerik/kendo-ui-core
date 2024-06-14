@@ -26,7 +26,7 @@
 
             var fx = kendo.fx($("<div />"));
 
-            assert.isOk($.isFunction(fx.foo));
+            assert.isOk(kendo.isFunction(fx.foo));
         });
 
         it("Creating effects registers API constructor", function() {
@@ -36,8 +36,8 @@
 
             var fx = kendo.fx($("<div />"));
 
-            assert.isOk($.isFunction(fx.fooLeft));
-            assert.isOk($.isFunction(fx.fooRight));
+            assert.isOk(kendo.isFunction(fx.fooLeft));
+            assert.isOk(kendo.isFunction(fx.fooRight));
         });
     });
 

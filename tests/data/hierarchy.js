@@ -1205,7 +1205,7 @@
 
             dataSource.read();
 
-            assert.isOk($.isFunction(dataSource.get(1).load().then));
+            assert.isOk(kendo.isFunction(dataSource.get(1).load().then));
         });
 
         it("Node without children resolves load promise immediately", function() {

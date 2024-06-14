@@ -179,7 +179,7 @@
             var model = new MyModel();
 
             assert.isOk(model.fields.foo.validation.bar);
-            assert.isOk($.isFunction(model.fields.foo.validation.bar));
+            assert.isOk(kendo.isFunction(model.fields.foo.validation.bar));
         });
 
         it("field can be set as editable false", function() {
@@ -349,7 +349,7 @@
                 }
             });
 
-            assert.isOk($.isFunction(MyModel.fields.foo.parse));
+            assert.isOk(kendo.isFunction(MyModel.fields.foo.parse));
         });
 
         it("custom type converter is assign to the field definition", function() {

@@ -284,7 +284,7 @@
 
             var models = dataSource.transport.args("create")[0].data.models;
 
-            assert.isOk($.isArray(models));
+            assert.isOk(Array.isArray(models));
             assert.equal(models.length, 2);
             assert.equal(models[0].foo, "foo");
             assert.equal(models[1].foo, "bar");
@@ -329,7 +329,7 @@
             dataSource.sync();
 
             var models = dataSource.transport.args("update")[0].data.models;
-            assert.isOk($.isArray(models));
+            assert.isOk(Array.isArray(models));
             assert.equal(models.length, 2);
             assert.equal(models[0].foo, "foo");
             assert.equal(models[1].foo, "bar");
@@ -371,7 +371,7 @@
 
 
             var models = dataSource.transport.args("destroy")[0].data.models;
-            assert.isOk($.isArray(models));
+            assert.isOk(Array.isArray(models));
             assert.equal(models.length, 2);
             assert.equal(models[0].id, 1);
             assert.equal(models[1].id, 2);
@@ -864,7 +864,7 @@
 
             var promise = dataSource.sync();
 
-            assert.isOk($.isFunction(promise.then));
+            assert.isOk(kendo.isFunction(promise.then));
         });
 
         it("sync returns promise when offline", function() {
@@ -881,7 +881,7 @@
 
             var promise = dataSource.sync();
 
-            assert.isOk($.isFunction(promise.then));
+            assert.isOk(kendo.isFunction(promise.then));
 
             promise.then($.proxy(assert.isOk, this, true));
 

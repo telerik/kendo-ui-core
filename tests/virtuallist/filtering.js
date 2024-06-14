@@ -277,7 +277,7 @@
                 selectable: true,
                 valueMapper: function(options) {
                     var data = this.dataSource.data();
-                    var values = $.isArray(options.value) ? options.value : [options.value];
+                    var values = Array.isArray(options.value) ? options.value : [options.value];
                     var res = [], i, j, l = values.length, dl = data.length;
 
                     for (i = 0; i < l; i++) {
@@ -369,7 +369,7 @@
                 selectable: "multiple",
                 valueMapper: function(options) {
                     var data = this.dataSource.data();
-                    var values = $.isArray(options.value) ? options.value : [options.value];
+                    var values = Array.isArray(options.value) ? options.value : [options.value];
                     var res = [], i, j, l = values.length, dl = data.length;
 
                     for (i = 0; i < l; i++) {

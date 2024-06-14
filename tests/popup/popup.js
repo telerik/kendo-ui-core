@@ -552,7 +552,7 @@
         it("setting collision to false stops boundary detection", function() {
             popup = new Popup(div, { collision: false });
 
-            assert.isOk($.isArray(popup.collisions));
+            assert.isOk(Array.isArray(popup.collisions));
             assert.equal(popup.collisions.length, 0);
         });
 

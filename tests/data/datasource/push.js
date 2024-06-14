@@ -65,7 +65,7 @@
         it("pushCreate option is passed to the push method", function() {
             var transport = {
                 push: function(options) {
-                    assert.isOk($.isFunction(options.pushCreate));
+                    assert.isOk(kendo.isFunction(options.pushCreate));
                 }
             };
 
@@ -75,7 +75,7 @@
         it("pushUpdate option is passed to the push method", function() {
             var transport = {
                 push: function(options) {
-                    assert.isOk($.isFunction(options.pushUpdate));
+                    assert.isOk(kendo.isFunction(options.pushUpdate));
                 }
             };
 
@@ -85,7 +85,7 @@
         it("pushDestroy option is passed to the push method", function() {
             var transport = {
                 push: function(options) {
-                    assert.isOk($.isFunction(options.pushDestroy));
+                    assert.isOk(kendo.isFunction(options.pushDestroy));
                 }
             };
 

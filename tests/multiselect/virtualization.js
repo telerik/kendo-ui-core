@@ -121,7 +121,7 @@
             setTimeout(function() {
                 var options = multiselect.element.children(":selected");
 
-                options = options.sort(function(a, b) { return parseInt(a.value) - parseInt(b.value); });
+                options = [].sort.call(options, function(a, b) { return parseInt(a.value) - parseInt(b.value); });
 
                 assert.equal(options.length, 2);
 
