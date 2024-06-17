@@ -121,6 +121,23 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### autoAdjust `Boolean` *(default: true)*
+
+If this property is enabled and you have configured `min` and/or `max` values, and the user enters a value that falls out of that range, the value will automatically be set to either the minimum or maximum allowed value. This property has effect only when the `dateInput` of the component is enabled.
+
+#### Example - prevent automatic value adjustments
+
+    <h3>Try to change the year to an earlier one and then focus out the input.</h3>
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        min: new Date(),
+        value: new Date(),
+        dateInput: true,
+        autoAdjust: false
+    });
+    </script>
+
 ### autoCorrectParts `Boolean`*(default: true)*
 
 Sets a value that indicates whether to automatically correct the segment when out of range. In order to work, `dateInput` prop should be set to `true`.

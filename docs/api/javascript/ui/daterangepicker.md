@@ -58,6 +58,22 @@ Specifies the adaptive rendering of the component. The supported values are: `no
     });
     </script>
 
+### autoAdjust `Boolean` *(default: true)*
+
+If this property is enabled and you have configured `min` and/or `max` values, and the user enters a value that falls out of that range, the value will automatically be set to either the minimum or maximum allowed value.
+
+#### Example - prevent automatic value adjustments
+
+    <h3>Try to change the year to an earlier one by typing it and then focus out the input.</h3>
+    <input id="daterangepicker" />
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        min: new Date(),
+        value: new Date(),
+        autoAdjust: false
+    });
+    </script>
+
 ### calendarButton `Boolean` *(default: false)*
 
 If this configuration is enabled, a calendar button will appear inside the date inputs. This is similar to the calendar button in the DatePicker component. The calendar popup will be opened only when the button is clicked. Clicking inside the input itself will have no effect.

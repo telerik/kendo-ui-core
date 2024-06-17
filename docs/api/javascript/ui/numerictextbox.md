@@ -12,6 +12,22 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
 
 ## Configuration
 
+### autoAdjust `Boolean` *(default: true)*
+
+If this property is enabled and you have configured `min` and/or `max` values, and the user enters a value that falls out of that range, the value will automatically be set to either the minimum or maximum allowed value.
+
+#### Example - prevent automatic value adjustments
+
+    <h3>Input a value higher than 20 or lower than 10 and then focus out the input.</h3>
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        min: 10,
+        max: 20,
+        autoAdjust: false
+    });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.

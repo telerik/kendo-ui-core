@@ -270,6 +270,10 @@ If set to `true`, the Sankey will not automatically reorder the nodes to reduce 
         });
     </script>
 
+### disableKeyboardNavigation `Boolean` *(default: false)*
+
+If set to `true`, the Sankey keyboard navigation will be disabled.
+
 ### labels `Object`
 
 The default labels configuration of the Sankey. The labels configuration options will be overridden by the `data.nodes.label` configuration.
@@ -815,6 +819,26 @@ The color type of the links. The supported values are:
 * "static" - the color of the link is static.
 * "target" - the color of the link is determined by the target node.
 
+### links.focusHighlight `Object`
+
+The link focus highlight configuration options.
+
+### links.focusHighlight.border `Object`
+
+The border of the link focus highlight.
+
+### links.focusHighlight.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### links.focusHighlight.border.opacity `Number` *(default: 1)*
+
+The opacity of the border.
+
+### links.focusHighlight.border.width `Number` *(default: 2)*
+
+The width of the border.
+
 ### links.highlight `Object`
 
 The link highlight configuration options.
@@ -826,6 +850,14 @@ The opacity of the links when they are not active.
 ### links.highlight.opacity `Number` *(default: 1)*
 
 The opacity of the links.
+
+### links.labels `Object`
+
+The link labels configuration options.
+
+### links.labels.ariaTemplate `String` | `Function`
+
+The template that will be used for the aria-label attribute of the link.
 
 ### links.opacity `Number` *(default: 1)*
 
@@ -876,6 +908,34 @@ The alignment of the node. The supported values are:
 * "stretch" - The node is aligned to left or right in order to fill the entire width of the Sankey.
 * "left" - The node is aligned to the left.
 * "right" - The node is aligned to the right.
+
+### nodes.focusHighlight `Object`
+
+The node focus highlight configuration options.
+
+### nodes.focusHighlight.border `Object`
+
+The border of the node focus highlight.
+
+### nodes.focusHighlight.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### nodes.focusHighlight.border.opacity `Number` *(default: 1)*
+
+The opacity of the border.
+
+### nodes.focusHighlight.border.width `Number` *(default: 2)*
+
+The width of the border.
+
+### nodes.labels `Object`
+
+The node labels configuration options.
+
+### nodes.labels.ariaTemplate `String` | `Function`
+
+The template that will be used for the aria-label attribute of the node.
 
 ### nodes.offset `Object` *(default: { top: 0, left: 0 })*
 

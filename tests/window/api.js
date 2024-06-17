@@ -622,6 +622,22 @@
             assert.equal(dialog.wrapper[0].style['display'], "inline-flex");
         });
 
+        it("close() does not throw error when dialog is present", function() {
+            var dialog = createDialog({
+                animation: false
+            });
+            var windowWidget = createWindow({
+                animation: false
+            });
+
+            dialog.open();
+            windowWidget.open();
+
+            assert.doesNotThrow(function() {
+                windowWidget.close();
+            });
+        });
+
         it("close() sets options.visible", function() {
             var dialog = createWindow({
                 visible: true,

@@ -148,6 +148,7 @@ var __meta__ = {
         options: {
             name: "NumericTextBox",
             decimals: NULL,
+            autoAdjust: true,
             enable: true,
             restrictDecimals: false,
             min: NULL,
@@ -389,12 +390,13 @@ var __meta__ = {
         },
 
         _adjust: function(value) {
-            var that = this,
-            options = that.options,
-            min = options.min,
-            max = options.max;
+            let that = this,
+                options = that.options,
+                min = options.min,
+                max = options.max,
+                autoAdjust = options.autoAdjust;
 
-            if (value === NULL) {
+            if (value === NULL || !autoAdjust) {
                 return value;
             }
 

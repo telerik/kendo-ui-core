@@ -874,7 +874,7 @@ import "./kendo.html.button.js";
 
             _object: function(element) {
                 var content = element.children(KWINDOWCONTENT);
-                var widget = kendo.widgetInstance(content);
+                var widget = content.getKendoWindow();
 
                 if (widget) {
                     return widget;

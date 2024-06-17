@@ -3930,6 +3930,7 @@ declare namespace kendo.ui {
     }
 
     interface DateInputOptions {
+        autoAdjust?: boolean | undefined;
         autoCorrectParts?: boolean | undefined;
         autoSwitchKeys?: any | undefined;
         autoSwitchParts?: boolean | undefined;
@@ -4017,6 +4018,7 @@ declare namespace kendo.ui {
     }
 
     interface DatePickerOptions {
+        autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DatePickerAnimation | undefined;
@@ -4111,6 +4113,7 @@ declare namespace kendo.ui {
     }
 
     interface DateRangePickerOptions {
+        autoAdjust?: boolean | undefined;
         name?: string | undefined;
         allowReverse?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -4215,6 +4218,7 @@ declare namespace kendo.ui {
     }
 
     interface DateTimePickerOptions {
+        autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | DateTimePickerAnimation | undefined;
@@ -8354,6 +8358,7 @@ declare namespace kendo.ui {
     }
 
     interface NumericTextBoxOptions {
+        autoAdjust?: boolean | undefined;
         name?: string | undefined;
         culture?: string | undefined;
         decimals?: number | undefined;
@@ -12334,6 +12339,7 @@ declare namespace kendo.ui {
     }
 
     interface TimePickerOptions {
+        autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
         animation?: boolean | TimePickerAnimation | undefined;
@@ -20820,17 +20826,17 @@ declare namespace kendo.dataviz.ui {
 
         static extend(proto: Object): Sankey;
 
-        constructor(element: Element, options?: SankeyOptions, theme?: SankeyTheme);
+        constructor(element: Element, options: SankeyOptions);
 
         destroy(): void;
-        setOptions(options: any): void;
+        setOptions(options: SankeyOptions): void;
         exportVisual(options?: SankeyExportVisualOptions): kendo.drawing.Group;
-        linkClick(e?: SankeyEvent): void;
-        linkLeave(e?: SankeyEvent): void;
-        linkEnter(e?: SankeyEvent): void;
-        nodeClick(e?: SankeyEvent): void;
-        nodeEnter(e?: SankeyEvent): void;
-        nodeLeave(e?: SankeyEvent): void;
+        linkClick(event: SankeyEvent): void;
+        linkLeave(event: SankeyEvent): void;
+        linkEnter(event: SankeyEvent): void;
+        nodeClick(event: SankeyEvent): void;
+        nodeEnter(event: SankeyEvent): void;
+        nodeLeave(event: SankeyEvent): void;
     }
 
     interface SankeyEvent {
@@ -20843,9 +20849,10 @@ declare namespace kendo.dataviz.ui {
         isDefaultPrevented(): boolean;
     }
 
-    interface SankeyLinkDataItem extends SankeyLink {
+    interface SankeyLinkDataItem {
         source: SankeyNodeDataItem;
         target: SankeyNodeDataItem;
+        value: number;
     }
 
     interface SankeyNodeDataItem extends SankeyNode {
@@ -20861,26 +20868,23 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface SankeyOptions {
+        name?: string | undefined;
+        theme?: string | undefined;
+        messages?: any;
+
         data: {
-            links: SankeyLink[] | undefined;
-            nodes: SankeyNode[] | undefined;
+            links: SankeyLink[];
+            nodes: SankeyNode[];
         };
 
-        labels?: SankeyLabel | undefined;
-        links?: SankeyLink | undefined;
-        nodes?: SankeyNode | undefined;
+        labels?: SankeyLabelDefaults | undefined;
+        links?: SankeyLinkDefaults | undefined;
+        nodes?: SankeyNodeDefaults | undefined;
         disableAutoLayout?: boolean | undefined;
+        disableKeyboardNavigation?: boolean | undefined;
         title?: SankeyTitle | undefined;
         legend?: SankeyLegend | undefined;
-        tooltips?: SankeyTooltips | undefined;
-
-    }
-
-    interface SankeyTheme {
-        labels?: SankeyLabel | undefined;
-        links?: SankeyLink | undefined;
-        nodes?: SankeyNode | undefined;
-        nodesColors: string[] | undefined;
+        tooltip?: SankeyTooltip | undefined;
     }
 
     interface SankeyTitle {
@@ -20897,14 +20901,22 @@ declare namespace kendo.dataviz.ui {
         visible?: boolean | undefined;
     }
 
-    interface SankeyLink {
-        sourceId: string | number | undefined;
-        targetId: string | number | undefined;
-        value: number | undefined;
+    interface SankeyLinkBase {
         colorType?: 'static' | 'source' | 'target' | undefined;
         color?: string | undefined;
         opacity?: number | undefined;
         highlight?: SankeyLinkHighlight | undefined;
+    }
+
+    interface SankeyLinkDefaults extends SankeyLinkBase {
+        focusHighlight?: SankeyFocusHighlight;
+        labels?: SankeyLinkLabel;
+    }
+
+    interface SankeyLink extends SankeyLinkBase {
+        sourceId: string | number | undefined;
+        targetId: string | number | undefined;
+        value: number | undefined;
     }
 
     interface SankeyLinkHighlight {
@@ -20912,8 +20924,19 @@ declare namespace kendo.dataviz.ui {
         inactiveOpacity?: number | undefined;
     }
 
-    interface SankeyLabel {
-        text?: string | undefined;
+    interface SankeyFocusHighlight {
+        border?: {
+            width?: number;
+            color?: string;
+            opacity?: number;
+        };
+    }
+
+    interface SankeyLinkLabel {
+        ariaTemplate?: ((data: { link: SankeyLinkDataItem }) => string);
+    }
+
+    interface SankeyLabelDefaults {
         visible?: boolean | undefined;
         font?: string | undefined;
         color?: string | undefined;
@@ -20934,15 +20957,31 @@ declare namespace kendo.dataviz.ui {
         };
     }
 
-    interface SankeyNode {
-        id: string | number | undefined;
-        label: SankeyLabel | undefined;
+    interface SankeyLabel extends SankeyLabelDefaults {
+        text?: string | undefined;
+    }
+
+    interface SankeyNodeBase {
         color?: string | undefined;
         opacity?: number | undefined;
         offset?: SankeyOffset | undefined;
         padding?: number | undefined;
         width?: number | undefined;
         align?: 'stretch' | 'left' | 'right' | undefined;
+    }
+
+    interface SankeyNodeDefaults extends SankeyNodeBase {
+        focusHighlight?: SankeyFocusHighlight;
+        labels?: SankeyNodeLabel;
+    }
+
+    interface SankeyNode extends SankeyNodeBase {
+        id: string | number | undefined;
+        label: SankeyLabel | undefined;
+    }
+
+    interface SankeyNodeLabel {
+        ariaTemplate?: ((data: { node: SankeyNodeDataItem }) => string);
     }
 
     interface SankeyLegend {
@@ -20988,7 +21027,7 @@ declare namespace kendo.dataviz.ui {
         visible?: boolean | undefined;
     }
 
-    interface SankeyTooltips {
+    interface SankeyTooltip {
         followPointer?: boolean | undefined;
         delay?: number | undefined;
     }
