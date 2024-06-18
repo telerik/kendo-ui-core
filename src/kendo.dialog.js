@@ -113,6 +113,12 @@ import "./kendo.icons.js";
                 if (!options.modal && that._isDialog()) {
                     that.dialogWrapper.width(that.wrapper.width());
                     that.dialogWrapper.height(that.wrapper.height());
+                    if (that.wrapper[0].style.width.indexOf("%") > -1) {
+                        that.wrapper[0].style.width = "100%";
+                    }
+                    if (that.wrapper[0].style.height.indexOf("%") > -1) {
+                        that.wrapper[0].style.height = "100%";
+                    }
                 }
 
                 this._tabKeyTrap = new TabKeyTrap(wrapper);

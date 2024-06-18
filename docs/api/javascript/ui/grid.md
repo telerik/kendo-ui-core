@@ -4826,6 +4826,45 @@ If set to `true` the user can edit data items when editing is enabled.
     });
     </script>
 
+### editable.readonly `Boolean` *(default: false)*
+
+If set to `true` the Grid will be initialized in read only mode. Users won't be able to add, remove or update records. Clicking on the edit, delete or add buttons will have no effect. In `incell` mode, clicking on the cell will not open it for editing.
+
+API methods are not affected by this configuration. Calling `editRow` and `editCell` will still put the cell/row in edit mode. Calling `addRow` and `removeRow` will add/remove the row.
+
+This property is useful in combination with the `enableEditing` and `disableEditing` methods. You can initialize the Grid as read only and enable editing later on.
+
+#### Example - prevent the users from editing, removing and updating the data
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: "destroy" }
+      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
+      editable: {
+        mode: "incell",
+        readonly: true
+      }
+    });
+    </script>
+
 ### editable.window `Object`
 
 Configures the Kendo UI Window instance, which is used when the Grid edit mode is `"popup"`. The configuration is optional.
@@ -11040,6 +11079,40 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
     grid.destroy();
     </script>
 
+### disableEditing
+
+Toggle off the Grid's editing capabilities. Requires [editable](/api/javascript/ui/grid/configuration/editable) to be enabled.
+
+#### Example - Disable editing in the Grid
+
+    <button id="toggle-edit">Toggle Edit</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: "edit" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: "inline"
+    });
+
+    $("#toggle-edit").kendoButton({
+      click: (e) => {
+        $("#grid").data("kendoGrid").disableEditing();
+      }
+    });
+    </script>
+
 ### editCell
 
 Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
@@ -11111,6 +11184,44 @@ The jQuery object which represents the table row.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.editRow($("#grid tr:eq(1)"));
+    </script>
+
+### enableEditing
+
+Toggle on the Grid's editing capabilities. Requires [editable](/api/javascript/ui/grid/configuration/editable) to be enabled.
+
+#### Example - Enable editing in the Grid
+
+    <button id="toggle-edit">Toggle Edit</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: "edit" }
+      ],
+      dataBound: (e) => {
+        // Disable editing by default.
+        e.sender.disableEditing();
+      },
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: "inline"
+    });
+
+    $("#toggle-edit").kendoButton({
+      click: (e) => {
+        $("#grid").data("kendoGrid").enableEditing();
+      }
+    });
     </script>
 
 ### expandGroup

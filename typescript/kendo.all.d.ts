@@ -6440,8 +6440,10 @@ declare namespace kendo.ui {
         dataItem(row: JQuery): kendo.data.ObservableObject;
         dataItems(): kendo.data.ObservableArray;
         destroy(): void;
+        disableEditing(): void;
         editCell(cell: JQuery): void;
         editRow(row: JQuery): void;
+        enableEditing(): void;
         expandGroup(row: string): void;
         expandGroup(row: Element): void;
         expandGroup(row: JQuery): void;
@@ -6648,6 +6650,7 @@ declare namespace kendo.ui {
         mode?: string | undefined;
         template?: string|Function | undefined;
         update?: boolean | undefined;
+        readonly?: boolean | undefined;
         window?: any;
     }
 
