@@ -591,6 +591,8 @@ The following example demonstrates a custom error.
 
 <!--*-->
 
+For a complete example of Remote CRUD Operations please refer to this [Grid Inline Editing Demo](https://demos.telerik.com/kendo-ui/grid/editing-inline).
+
 ## Submitting All Items with a Single Request
 
 When you use custom transport, the create, update, and delete operations will be handled by the [`transport.submit`](/api/javascript/data/datasource/configuration/transport.submit) function in a single batch. You are also required to define `transport.read` as a function. The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.

@@ -26,6 +26,8 @@ res_type: kb
 
 How can I disable the adding and editing of records in a Grid in inline edit mode while the user is actually adding or creating a record?
 
+>note This solution is custom and might lead to unexpected side effects. You will need to adjust it according to your Grid configuration and use-case.
+
 ## Solution
 
 1. Handle the [`mousedown`](https://api.jquery.com/mousedown/) event of the Grid for all buttons that do not have the `.k-grid-cancel-command` and `.k-grid-save-command` classes.

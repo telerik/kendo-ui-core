@@ -2289,7 +2289,7 @@ A number representing the index of the item or function predicate which returns 
     });
     </script>
 
-#### Example - get selected index of the widget
+#### Example - get selected index of the component
 
     <input id="multicolumncombobox" />
     <script>
@@ -2308,8 +2308,10 @@ A number representing the index of the item or function predicate which returns 
     });
 
     var multicolumncombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
-
     var selectedIndex = multicolumncombobox.select();
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(selectedIndex)
     </script>
 
 ### setDataSource
