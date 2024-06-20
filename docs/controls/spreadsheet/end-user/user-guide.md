@@ -156,11 +156,13 @@ The Spreadsheet supports many of the Excel keyboard shortcuts as seen in the [Li
 ## Known Limitations
 
 - Because of specific requirements, browsers might not support the **Paste** command when it is initiated from the context menu or from the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the desired result.
+- The Spreadsheet uses a JavaScript `Number` object which has a certain precision limitation (restriction). In general, the `Number` object persists its precision up to 16 digits. Numbers longer than 16 digits get converted to exponential numbers and lose their precision. Because the widget relies on a `Number` object, it gets the same precision limitation. This limitation comes from JavaScript and cannot be worked around in a feasible way.
 - Formulas that are very deeply nested, such as `=sin(cos(sin(cos(...))))` or `=A1+A2+A3+...+A200`, might produce a stack overflow error. Even though the latter does not seem nested, it is internally treated as `=((((...(A1+A2)+A3)+A4)+...+)+A200)`).
 
 **Solution**
 
 Use `SUM` when your case is similar to the second example of the nested formulas above. If to use `SUM` is not possible, avoid nesting values more than 100 levels deep. Note that the maximum depth depends on the browser, but one hundred is considered to be a safe limit.
+
 
 ## See Also
 

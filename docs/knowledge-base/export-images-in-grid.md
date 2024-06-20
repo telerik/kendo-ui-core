@@ -32,6 +32,8 @@ To include the images in the exported document, configure the [`drawings`](/api/
 
 The following example demonstrates how to customize the Excel document so that it includes the images.
 
+Note that the path to the images points to another domain. Since retrieving the images from another domain will be blocked by CORS, the example should be run locally, and the images should be present in the application to avoid being blocked by CORS:
+
 ```dojo
 <base href="https://demos.telerik.com/kendo-ui/grid/basic-usage">
 <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>

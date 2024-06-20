@@ -506,17 +506,6 @@
       });
   }
 
-   /* TreeView messages */
-  
-  if (kendo.ui.TreeView) {
-    kendo.ui.TreeView.prototype.options.messages =
-      $.extend(true, kendo.ui.TreeView.prototype.options.messages, {
-        "loading": "Lade...",
-        "requestFailed": "Anfrage fehlgeschlagen.",
-        "retry": "Wiederholen"
-      });
-  }
-  
   /* Groupable messages */
 
   if (kendo.ui.Groupable) {

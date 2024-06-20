@@ -121,6 +121,11 @@ You can manually build the source code of the components by following these step
     ```javascript
       npm run scripts:all
     ```
+  - Some bundlers such as legacy versions of Webpack and MVC's ScriptBundler are unable to process newer syntax. This is a limitation of the bundlers themselves. If you need to bundle the Kendo scripts using such a bundler, you can download the source code from your [Telerik profile](https://www.telerik.com/account/downloads/product-download?product=KENDOUICOMPLETE) and compile it manually using the command below. After the command is ran, the `dist/js` folder will contain minified Kendo scripts that can be used with the MVC ScriptBundler and legacy Webpack versions. Note that the command is an alternative of the `npm run scripts`, thus only one of the commands should be used:
+
+    ```javascript
+      npm run scripts:babel
+    ```
 
 ## Next Steps
 

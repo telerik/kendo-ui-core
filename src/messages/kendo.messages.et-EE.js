@@ -1055,7 +1055,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
     },
     "placeholders": {
         "typeTitle": "Sisesta pealkiri",
-        "typeMessage": "Sisesta sõnum
+        "typeMessage": "Sisesta sõnum"
     }
   },
   "exportAsDialog": {
@@ -1169,7 +1169,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
         "justifyFull": "Sirgenda read",
         "alignTop": "Joonda üles",
         "alignMiddle": "Joonda keskele",
-        "alignBottom": "Joonda alla
+        "alignBottom": "Joonda alla"
   },
     "backgroundColor": "Taust",
     "bold": "Jämedas kirjas",
@@ -1300,7 +1300,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
       "createchild": "Lisa kanne lapse kohta",
       "destroy": "Kustuta",
       "excel": "Expordi Excelli",
-      "pdf": "Ekspordi PDF-i
+      "pdf": "Ekspordi PDF-i"
   }
 });
 }

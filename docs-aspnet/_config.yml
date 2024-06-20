@@ -441,6 +441,9 @@ navigation:
      "deployment":
         title: "Deployment"
         position: 11
+     "integration-with-other-telerik-products":
+        title: "Integration with Other Telerik Products"
+        position: 12
      "cloud-integration":
         title: "Cloud Integration"
         position: 13

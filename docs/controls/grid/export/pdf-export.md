@@ -75,7 +75,7 @@ With regard to its PDF export, the Grid enables you to:
 
 By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/javascript/ui/grid/configuration/pdf.allpages) option to `true`.
 
-> When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
+> When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make multiple `"read"` requests for all data. There will be a request for each page with data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
 ```dojo
     <div id="grid"></div>
