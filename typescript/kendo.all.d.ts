@@ -24802,6 +24802,11 @@ declare namespace kendo.ooxml {
         type?: string | undefined;
     }
 
+    interface WorkbookHyperlink {
+        ref: string | undefined;
+        target: string | undefined;
+    }
+
     interface WorkbookSheet {
         columns?: WorkbookSheetColumn[] | undefined;
         freezePane?: WorkbookSheetFreezePane | undefined;
@@ -24813,6 +24818,7 @@ declare namespace kendo.ooxml {
         rows?: WorkbookSheetRow[] | undefined;
         showGridLines?: boolean | undefined;
         title?: string | undefined;
+        hyperlinks: WorkbookHyperlink[] | undefined;
     }
 
     interface WorkbookOptions {

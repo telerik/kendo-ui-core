@@ -363,6 +363,90 @@ The index of the first filterable column.
 
 The index of the last filterable column.
 
+### sheets.hyperlinks `Array`
+
+Specify a collection of hyperlinks that will be applied to the corresponding cells. You can set only one link per cell.
+
+#### Example - Add hyperlinks to cells A1 and A2
+
+    <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [
+          {
+            hyperlinks: [{ref: "A1", target: "https://google.com"}, {ref: "A2", target: "https://youtube.com"}],
+            rows: [
+              { cells: [ { value: "Google" } ] },
+              { cells: [ { value: "Youtube" } ] }
+            ]
+          }
+        ]
+      });
+
+      workbook.toDataURLAsync().then(dataURI => {
+        kendo.saveAs({
+          dataURI,
+          fileName: "Test.xlsx"
+        });
+      });
+
+    </script>
+
+### sheets.hyperlinks.ref `String`
+
+The cell to which the link must be applied. Examples - "A1", "A2", "B3", "AA2", "BA2", "C5".
+
+#### Example - Set the cell reference
+
+    <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [
+          {
+            hyperlinks: [{ref: "A1", target: "https://google.com"}, {ref: "A2", target: "https://youtube.com"}],
+            rows: [
+              { cells: [ { value: "Google" } ] },
+              { cells: [ { value: "Youtube" } ] }
+            ]
+          }
+        ]
+      });
+
+      workbook.toDataURLAsync().then(dataURI => {
+        kendo.saveAs({
+          dataURI,
+          fileName: "Test.xlsx"
+        });
+      });
+
+    </script>
+
+### sheets.hyperlinks.target `String`
+
+The target link that will be opened when the cell is clicked.
+
+#### Example - Set the target url
+
+    <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [
+          {
+            hyperlinks: [{ref: "A1", target: "https://google.com"}, {ref: "A2", target: "https://youtube.com"}],
+            rows: [
+              { cells: [ { value: "Google" } ] },
+              { cells: [ { value: "Youtube" } ] }
+            ]
+          }
+        ]
+      });
+
+      workbook.toDataURLAsync().then(dataURI => {
+        kendo.saveAs({
+          dataURI,
+          fileName: "Test.xlsx"
+        });
+      });
+
+    </script>
+
 ### sheets.mergedCells `Array`
 
 A range of cells that will be merged into one. The value of the first cell in the range will be displayed in the new merged cell.
