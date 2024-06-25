@@ -209,10 +209,6 @@ import "./kendo.html.button.js";
 
                 wrapper = that.wrapper = element.closest(KWINDOW);
 
-                if (options.themeColor && options.themeColor !== "none") {
-                    wrapper.addClass(kendo.getValidCssClass("k-window-", "themeColor", options.themeColor));
-                }
-
                 if (!element.is(".k-window-content") || !wrapper[0]) {
                     element.addClass("k-window-content");
                     element.attr("tabindex", 0);
@@ -225,6 +221,10 @@ import "./kendo.html.button.js";
                     if (options._footerTemplate) {
                         that.wrapper.append(kendo.template(options._footerTemplate)(options._footerMessages));
                     }
+                }
+
+                if (options.themeColor && options.themeColor !== "none") {
+                    wrapper.addClass(kendo.getValidCssClass("k-window-", "themeColor", options.themeColor));
                 }
 
                 that.minTop = that.minLeft = -Infinity;
