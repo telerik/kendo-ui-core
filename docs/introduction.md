@@ -2,7 +2,7 @@
 title: Introduction
 page_title: Introduction to Kendo UI by Progress
 description: "Learn more about the Kendo UI for jQuery components by Progress, their distributions, frameworks, tools, and utilities, the available license and support options, and learning resources."
-previous_url: /index, /intro/supporting/list-of-widgets
+previous_url: /index, /intro/supporting/list-of-widgets, /third-party/electron
 slug: welcometo_kendoui
 position: 2
 ---
