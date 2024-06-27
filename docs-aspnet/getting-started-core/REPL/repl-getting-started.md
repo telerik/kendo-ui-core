@@ -18,6 +18,8 @@ By using the Telerik REPL for ASP.NET Core, you can write razor code that contai
 * [Using Razor local methods](#using-razor-local-methods)
 * [Using Razor `@functions` directive](#using-razor-funcitons-directive)
 
+To get a grasp of runnable examples that tackle different use-cases, see the [Starting Fast with Pre-Built Examples](https://www.telerik.com/aspnet-core-ui/repl/getting-started) article.
+
 ## Adding Static Assets
 
 In the Telerik REPL for ASP.NET Core, you can define your own script and style tags that reference static assets and add them to the `.cshtml` file that you are editing. 
