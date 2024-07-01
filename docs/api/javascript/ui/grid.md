@@ -6059,6 +6059,58 @@ The text of the "isnotempty" filter operator.
     });
     </script>
 
+### filterable.operators.string.isnullorempty `String` *(default: "Has no value")*
+
+The text of the "isnullorempty" filter operator.
+
+#### Example - set the string "isnullorempty" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            isnullorempty: "No text"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.string.isnotnullorempty `String` *(default: "Has value")*
+
+The text of the "isnotnullorempty" filter operator.
+
+#### Example - set the string "isnotnullorempty" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            isnotnullorempty: "Has text"
+          }
+        }
+      }
+    });
+    </script>
+
 ### filterable.operators.string.startswith `String` *(default: "Starts with")*
 
 The text of the "starts with" filter operator.
@@ -10164,7 +10216,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](toolbar.name)` option would be used as the button text instead.
+The text displayed by the command button. If not set the [name](toolbar.name) option would be used as the button text instead.
 
 #### Example - set the text of the toolbar button
 

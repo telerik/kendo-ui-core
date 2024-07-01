@@ -20,6 +20,7 @@ It provides separate sections for days, months, years, hours, and minutes, and a
 * [Floating Label]({% slug floating_label_kendoui_dateinput_widget %})&mdash;You can render a placeholder text for form or input fields, which floats above that field and remains visible once the user starts interacting with that field.
 * [Date Editing]({% slug dateediting_kendoui_dateinput %})&mdash;You can configure different `steps` for incrementing and decrementing the segments.
 * [Appearance]({% slug appearance_kendoui_dateinput_widget %})&mdash;The built-in options enable you to modify the component's appearance.
+* [Automatic Correction]({% slug autocorrect_kendoui_dateinput %})&mdash;The feature will autocorrect the user input based on the `min` and `max` options.
 * [Integration with Other Editors]({% slug integration_kendoui_dateinput %})&mdash;The DateInput provides options for integration with other Kendo UI editor components such as the DatePicker, DateTimePicker, and TimePicker.
 * [Globalization]({% slug globalization_kendoui_dateinput_widget %})&mdash;The component supports the translation of component messages (localization) and adapting them to specific cultures.
 

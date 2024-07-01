@@ -26,6 +26,7 @@ It provides options for using custom templates for its **Month** view, setting m
 | [Week number column]({% slug weeknumcolumn_datepicker %})|The DatePicker enables you to display a column with the number of weeks within the current **Month** view.
 | [DateInput integration]({% slug dateinputintegration_datepicker %})|You can smoothly integrate the DatePicker with the Kendo UI for jQuery DateInput control for its displayed input element.
 | [Templates]({% slug templates_datepicker %})|The DatePicker supports the implementation of templates which enable you to customize its elements such as cells, footer, and week column.   
+| [Automatic Correction]({% slug autocorrect_kendoui_datepicker %})|The feature will autocorrect the user input based on the `min` and `max` options.
 | [Globalization]({% slug globalization_datepicker %})|The DatePicker supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_datepicker %}) need to be supported. Additionally, the DatePicker supports [rendering in a right-to-left (RTL) direction]({% slug rtl_datepicker %}).
 | [Accessibility]({% slug accessibility_datepicker %})|The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_datepicker %}).
 

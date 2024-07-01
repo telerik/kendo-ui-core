@@ -22,6 +22,7 @@ The DateTimePicker supports configurable options for minimum and maximum value, 
 * [Validation]({% slug validation_kendoui_datetimepicker %})—The DateTimePicker is designed to keep its input value unchanged even when the typed date is invalid.
 * [Date and time formatting]({% slug datetimeformats_kendoui_datetimepicker_widget %})—The DateTimePicker allows you to define its date and time formatting.
 * [Calendar types]({% slug calendartypes_kendoui_datetimepicker %})—You can use a specific calendar type out of the supported DateTimePicker ones.
+* [Automatic Correction]({% slug autocorrect_kendoui_datetimepicker %})&mdash;The feature will autocorrect the user input based on the `min` and `max` options.
 
 ## Next Steps
 

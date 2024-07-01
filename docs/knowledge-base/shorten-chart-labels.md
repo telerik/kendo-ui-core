@@ -73,8 +73,6 @@ The following example demonstrates how to shorten long Chart labels and turn the
           value = value.substring(0, 10);
           return value + "...";
         }
-
-        return value;
       }
     </script>
 ```

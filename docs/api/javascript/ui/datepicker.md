@@ -849,7 +849,7 @@ The following settings are available for the **start** value:
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget. The options object holds all available [DatPicker configuration fields](/api/javascript/ui/datepicker#configuration).
+An object, which holds the options of the widget. The options object holds all available [DatePicker configuration fields](/api/javascript/ui/datepicker#configuration).
 
 #### Example - get options of the widget
 
@@ -1065,7 +1065,7 @@ Opens the calendar.
 
 ### setOptions
 
-Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatPicker configuration fields](/api/javascript/ui/datepicker#configuration).
+Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatePicker configuration fields](/api/javascript/ui/datepicker#configuration).
 
 #### Parameters
 
