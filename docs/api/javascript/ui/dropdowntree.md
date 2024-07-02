@@ -766,7 +766,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
         });
     </script>
 
-### loadOnDemand `Object|Boolean` *(default: false)*
+### loadOnDemand `Boolean|Object` *(default: false)*
 
 Indicates whether the child DataSources should be fetched lazily when parent groups get expanded.
 Setting this to true causes loading the child DataSources when expanding the parent node.
