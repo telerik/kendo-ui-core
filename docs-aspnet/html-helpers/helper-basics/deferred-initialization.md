@@ -462,6 +462,9 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
 ## See Also
 
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_aspnetmvc%})
+{% if site.core %}
+* [Declarative Initialization]({% slug declarative_initialization_overview %})
+{% endif %}
 * [Using Client Templates]({% slug client_templates_overview %})
 
 

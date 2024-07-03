@@ -4,7 +4,7 @@ page_title: Validation
 description: "Get started with {{ site.product }} and use client-side validation."
 slug: validation_aspnetmvc
 previous_url: /validation, /getting-started/validation, getting-started/helper-basics/validation
-position: 3
+position: 5
 ---
 
 # Validation

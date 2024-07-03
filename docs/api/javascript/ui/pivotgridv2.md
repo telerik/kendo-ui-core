@@ -128,6 +128,137 @@ If set to `true` the user could navigate the component using the keyboard naviga
 
 > Check [Keyboard navigation](https://demos.telerik.com/kendo-ui/pivotgridv2/keyboard-navigation) for a live demo.
 
+### excel `Object`
+
+Configures the Kendo UI PivotGridV2 Excel export settings.
+
+### excel.fileName `String` *(default: "Export.xslx")*
+
+Specifies the file name of the exported Excel file.
+
+#### Example - set the default Excel file name
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        excel: {
+            fileName: "InternetSalesAmount.xlsx"
+        },
+        height: 550,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
+            }
+        }
+    });
+    </script>
+
+### excel.filterable `Boolean` *(default: false)*
+
+Enables or disables column filtering in the Excel file. Not to be mistaken with the pivotgrid's configurator filtering feature.
+
+#### Example - enable filtering in the output Excel file
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        excel: {
+            filterable: true
+        },
+        height: 550,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
+            }
+        }
+    });
+    </script>
+
+### excel.forceProxy `Boolean` *(default: false)*
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgridv2#configuration-excel.proxyURL) even if the browser supports saving files locally.
+
+### excel.proxyURL `String` *(default: null)*
+
+The URL of the server side proxy which will stream the file to the end user.
+
+Such browsers are IE version 9 and lower and Safari.
+
+The developer is responsible for implementing the server-side proxy.
+
+The proxy will receive a POST request with the following parameters in the request body:
+
+* contentType: The MIME type of the file
+* base64: The base-64 encoded file content
+* fileName: The file name, as requested by the caller.
+
+The proxy should return the decoded file with the "Content-Disposition" header set to
+`attachment; filename="<fileName.xslx>"`.
+
+#### Example - set the server proxy URL
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        excel: {
+            proxyURL: "/save"
+        },
+        height: 550,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
+            }
+        }
+    });
+    </script>
+
 ### pdf `Object`
 
 Configures the Kendo UI PivotGridV2 PDF export settings.
@@ -710,6 +841,88 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
+### kpiStatusTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
+
+The fields which can be used in the template are:
+
+* columnTuple - the tuple of the corresponding column header cell
+* rowTuple - the tuple of the corresponding row header cell
+* measure - the value of the data cell measure
+* dataItem - the data item itself
+
+#### Example - specify a custom template for the KPI Status measure
+
+    <div id="pivotgrid"></div>
+
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        kpiStatusTemplate:({ dataItem }) => `${dataItem.value !== 0 ? "<em>Open/Denied</em>" : "<strong>Hold</strong>"}`,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true } ],
+            measures: ["[Measures].[Internet Revenue Status]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
+            }
+        }
+    });
+    </script>
+
+### kpiTrendTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
+
+The fields which can be used in the template are:
+
+* columnTuple - the tuple of the corresponding column header cell
+* rowTuple - the tuple of the corresponding row header cell
+* measure - the value of the data cell measure
+* dataItem - the data item itself
+
+#### Example - specify a custom template for the KPI Trend measure
+
+    <div id="pivotgrid"></div>
+
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        kpiTrendTemplate: ({ dataItem }) => `${dataItem.value !== 0 ? "<em>Increase/Decrease</em>" : "<strong>Equal</strong>"}`,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true } ],
+            measures: ["[Measures].[Internet Revenue Trend]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });

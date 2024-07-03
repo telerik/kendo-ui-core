@@ -22,36 +22,42 @@ res_type: kb
 
 
 ## Description
-How can I pass additional data with the DataSourceResult from the Controller back to the View?
+How can I pass additional data through the [`DataSourceResult`](api/kendo.mvc.ui/datasourceresult) from the Controller back to the View?
 
 ## Solution
 The desired result can be achieved by following the steps below:
 
-* Store the output of the ToDataSourceResult method call in a variable.
-* Return a custom Json result with the same field names and add the additional fields
-* Add a `RequestEnd` event handler to retrieve the additional data in the View
+* Store the output of the `ToDataSourceResult` method in a variable.
+* Return a custom JSON result with the same field names and add the additional fields.
+* Handle the `RequestEnd` event of the DataSource to retrieve the additional data when the response of the request is received.
 
 ```Controller
-var resultFinal = result.ToDataSourceResult(request);
-return Json(new
-   {
-       Data = resultFinal.Data,
-       Total = resultFinal.Total,
-       AggregateResults = resultFinal.AggregateResults,
-       Errors = resultFinal.Errors,
-       myAdditionalParam= "additional data", // Add the extra value
+    var resultFinal = result.ToDataSourceResult(request);
+    return Json(new
+    {
+        Data = resultFinal.Data,
+        Total = resultFinal.Total,
+        AggregateResults = resultFinal.AggregateResults,
+        Errors = resultFinal.Errors,
+        myAdditionalParam = "additional data" // Add the desired parameter.
     });
 ```
 ```View
- .DataSource(dataSource => dataSource
-                .Events(ev=>ev.RequestEnd("requestEnd"))
-                )
-<script>
-    function requestEnd(e){
-        //access the additional data sent from the Controller
-        console.log(e.response.myAdditionalParam);
-    }
-</script>
+    @(Html.Kendo().DataSource<OrderViewModel>()
+        .Name("myDataSource")
+        .Ajax(dataSource =>
+        {
+          dataSource.Events(ev => ev.RequestEnd("requestEnd"))
+          // Additional configuration.
+        })
+    )
+
+    <script>
+        function requestEnd(e){
+            // Access the additional data sent from the server.
+            console.log(e.response.myAdditionalParam);
+        }
+    </script>
 ```
 
 ## More {{ site.framework }} DataSource Resources

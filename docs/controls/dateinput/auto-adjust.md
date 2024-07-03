@@ -1,14 +1,16 @@
 ---
 title: Automatic Correction
 page_title: jQuery DateInput Documentation - Automatic Correction
-description: "Get familiar with the autocorrect feature of the jQuery DateInput by Kendo UI. Learn how to automatically correct the user input when it's outside of the pre-configured range."
+description: "Get familiar with the autocorrect feature of the jQuery DateInput by Kendo UI, and learn how to disable it."
 slug: autocorrect_kendoui_dateinput
 position: 6
 ---
 
 # Automatic Correction
 
-Starting with Kendo UI R3 2024, the DateInput component provides an [`autoAdjust`](/api/javascript/ui/dateinput/configuration/autoadjust) feature. When you have `min` and `max` dates configured, the component will autocorrect the user input if it is not within the specified range. The autocorrected value will be either the `min` or the `max` value you have set for the component depending on which the invalid date is closer to.
+Starting with Kendo UI R3 2024, the DateInput component exposes an [`autoAdjust`](/api/javascript/ui/dateinput/configuration/autoadjust) feature which provides control over the autocorrect functionality. By default, when you have `min` and `max` dates configured, the component will autocorrect the user input if it is not within the specified range. The autocorrected value will be either the `min` or the `max` value you have set for the component depending on which the invalid date is closer to.
+
+In order to disable the autocorrect, you can now set the `autoAdjust` option to `false`.
 
 ```dojo
     <input id="dateInput" />
@@ -18,7 +20,7 @@ Starting with Kendo UI R3 2024, the DateInput component provides an [`autoAdjust
         $("#dateInput").kendoDateInput({
           min: new Date("01/01/2024"),
           max: new Date("12/31/2024"),
-          autoAdjust: true
+          autoAdjust: false
         });
       });
     </script>

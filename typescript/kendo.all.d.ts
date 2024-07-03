@@ -9326,7 +9326,14 @@ declare namespace kendo.ui {
         refresh(): void;
         setDataSource(dataSource: kendo.data.PivotDataSourceV2): void;
         saveAsPDF(): JQueryPromise<any>;
+        saveAsExcel(): void;
+    }
 
+    interface PivotGridV2Excel {
+        fileName?: string | undefined;
+        filterable?: boolean | undefined;
+        forceProxy?: boolean | undefined;
+        proxyURL?: string | undefined;
     }
 
     interface PivotGridV2PdfMargin {
@@ -9335,7 +9342,6 @@ declare namespace kendo.ui {
         right?: number|string;
         top?: number|string;
     }
-
     interface PivotGridV2Pdf {
         author?: string;
         autoPrint?: boolean;
@@ -9361,17 +9367,21 @@ declare namespace kendo.ui {
         dataSource?: any|kendo.data.PivotDataSourceV2;
         autoBind?: boolean | undefined;
         navigatable?: boolean | undefined;
+        excel?: PivotGridV2Excel | undefined;
         pdf?: PivotGridV2Pdf | undefined;
         columnWidth?: number | undefined;
         height?: number|string | undefined;
         columnHeaderTemplate?: string|Function | undefined;
         dataCellTemplate?: string|Function | undefined;
+        kpiStatusTemplate?: string|Function | undefined;
+        kpiTrendTemplate?: string|Function | undefined;
         rowHeaderTemplate?: string|Function | undefined;
         dataBinding?(e: PivotGridV2DataBindingEvent): void;
         dataBound?(e: PivotGridV2DataBoundEvent): void;
         expandMember?(e: PivotGridV2ExpandMemberEvent): void;
         collapseMember?(e: PivotGridV2CollapseMemberEvent): void;
         pdfExport?(e: PivotGridV2PdfExportEvent): void;
+        excelExport?(e: PivotGridV2ExcelExportEvent): void;
     }
     interface PivotGridV2Event {
         sender: PivotGridV2;
@@ -9397,6 +9407,11 @@ declare namespace kendo.ui {
 
     interface PivotGridV2PdfExportEvent extends PivotGridV2Event {
         promise?: JQueryPromise<any>;
+    }
+
+    interface PivotGridV2ExcelExportEvent extends PivotGridV2Event {
+        data?: any;
+        workbook?: any;
     }
 
     class Popover extends kendo.ui.Widget {

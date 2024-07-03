@@ -12,23 +12,25 @@ The cascading functionality is represented by a series of two or more DropDownLi
 
 ## Basic Concepts and Requirements
 {% if site.core %}
-The child DropDownList cascades from the parent one if the [`CascadeFrom`](/api/kendo.mvc.ui.fluent/dropdownlistbuilder#cascadefromsystemstring) property is defined. the `CascadeFrom` property has to point to the [`Name`]({% slug fundamentals_core %}#basic-configuration) of the parent DropDownList widget.
+The child DropDownList cascades from the parent one if the [`CascadeFrom`](/api/kendo.mvc.ui.fluent/dropdownlistbuilder#cascadefromsystemstring) property is defined. The `CascadeFrom` property must point to the [`Name`]({% slug fundamentals_core %}#basic-configuration) of the parent DropDownList. If the `id` and `name` attributes of the parent DropDownList are different, set the value of the `id` attribute to the `CascadeFrom` option.
 {% else %}
-The child DropDownList cascades from the parent one if the [`CascadeFrom`](/api/kendo.mvc.ui.fluent/dropdownlistbuilder#cascadefromsystemstring) property is defined. the `CascadeFrom` property has to point to the [`Name`]({% slug fundamentals_aspnetmvc %}#basic-configuration) of the parent DropDownList widget.
+The child DropDownList cascades from the parent one if the [`CascadeFrom`](/api/kendo.mvc.ui.fluent/dropdownlistbuilder#cascadefromsystemstring) property is defined. The `CascadeFrom` property must point to the [`Name`]({% slug fundamentals_aspnetmvc %}#basic-configuration) of the parent DropDownList. If the `id` and `name` attributes of the parent DropDownList are different, set the value of the `id` attribute to the `CascadeFrom` option.
 {% endif %}
 
-The following actions occur during initialization of the child DropDownList. The child {{ site.product_short }} DropDownList:
-- checks if the `CascadeFrom` property is set. If not, cascading is disabled.
-- tries to find the parent DropDownList object. If the result is `null`, then the functionality is omitted.
-- listens to any changes of the parent value.
-- is disabled if the parent does not have a value. If the parent has a value, the child is enabled and filters its data accordingly. The following example demonstrates the parameters of the request.
+The following actions occur during the initialization of the child DropDownList. The component:
+
+* Checks if the `CascadeFrom` property is defined. If not, the cascading is disabled.
+* Searches for the parent DropDownList object. If the result is `null`, the cascading functionality is omitted.
+* Listens for changes of the parent value. If the parent does not have a value, the child DropDownList is disabled. If the parent DropDownList has a value, the child is enabled and the data is filtered. 
+
+The following example demonstrates the parameters of the request.
 
         filter[logic]: and
         filter[filters][0][field]: parentID
         filter[filters][0][operator]: eq
         filter[filters][0][value]:
 
-Additional data can be sent with the request by [using the Data method]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) and providing the name of a JavaScript function which will return a JavaScript object with the additional data.
+To send additional data through the request, use the [`Data()`]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) method and provide the name of a JavaScript function that returns an object with the additional data.
 
 > * The cascading functionality works only when you define the `CascadeFrom` property and initialize the parent DropDownList.
 > * The filter operator is always `"eq"`. To filter the data, the child DropDownList uses the `DataValueField` option of the parent DropDownList.

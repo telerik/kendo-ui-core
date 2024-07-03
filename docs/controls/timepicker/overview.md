@@ -21,7 +21,7 @@ The widget supports configurable options for setting its format, minimum and max
 * [Validation]({% slug validation_kendoui_timepicker %})&mdash;Check the available validation options in the component.
 * [Floating Label]({% slug floating_label_kendoui_timepicker_widget %})&mdash;Explore the Floating Label feature of the TimePicker.
 * [Appearance]({% slug appearance_kendoui_timepicker_widget %})&mdash;Explore the styling options of the TimePicker component.
-* [Automatic Correction]({% slug autocorrect_kendoui_timepicker %})&mdash;The feature will autocorrect the user input based on the `min` and `max` options.
+* [Automatic Correction]({% slug autocorrect_kendoui_timepicker %})&mdash;You can configure whether the component will autocorrect the user's input when the `min` and `max` dates are set.
 
 ## Next Steps
 

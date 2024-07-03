@@ -4,14 +4,12 @@ page_title: Content Security Policy Troubleshooting
 description: "Learn more about the Content Security Policy (CSP) mode and how to work with it in Telerik UI for {{ site.framework }} controls."
 slug: troubleshooting_content_security_policy_aspnetmvc
 previous_url: /troubleshoot/troubleshooting-content-security-policy
-position: 6
+position: 10
 ---
 
 # Content Security Policy
 
 [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is a supplementary security approach which helps you prevent specific security attacks such as Cross-Site Scripting (XSS) and data-injections.
-
-> As of R3 2023, the `unsafe-inline` keyword is no longer required in the "style-src" directive except for the [`Editor`]({% slug htmlhelpers_editor_aspnetcore %}), [`ReponsivePanel`]({% slug htmlhelpers_responsivepanel_aspnetcore %}), [`GridLayout`]({% slug htmlhelpers_aspnet_gridlayout_overview %}), and [`StackLayout`]({% slug htmlhelpers_aspnet_stacklayout_overview %}) components. The rendering of these components will be improved to achieve complete compatibility with strict Content Security Policy.
 
 The following code shows how to turn on the strict CSP mode:
 
@@ -44,9 +42,12 @@ When Kendo UI components are initialized from HTML helpers, inline scripts are g
 
 {% endif %}
 
-To resolve the issue and prevent the components from being dependent on the `unsafe-eval` directive, the R1 2023 SP1 release introduces the following features:
+To resolve the issue and prevent the components from being dependent on the `unsafe-eval` directive, use the following approaches:
 
  * [Deferring scripts to file](#deferring-scripts-to-file)
+ {% if site.core %}
+ * [Using declarative initialization](#using-declarative-initialization)
+ {% endif %}
  * [Creating Content Security Policy templates](#creating-content-security-policy-templates)
 
 ### Deferring Scripts to File
@@ -61,12 +62,14 @@ The `DeferredScriptFile` method simulates loading the initialization scripts as 
 
 {% endif %}
 
-Call the method after all components declarations to serialize the deferred initialization scripts as a `JS` file.
+{% if site.core %}
+### Using Declarative Initialization
 
-```
-    @Html.Kendo().DeferredScriptFile()
+The 2024 Q3 release introduces the declarative initialization functionality that serializes the helper declaration as an MVVM configuration and initializes the component from the DOM elements on the client. When this feature is enabled, the inline initialization script, which is blocked by the CSP, is not generated after the component's HTML markup.
 
-```
+At this stage, only some of the components support the declarative initialization feature. For more information, refer to the [declarative initialization documentation]({% slug declarative_initialization_overview %}).
+
+{% endif %}
 
 ### Creating Content Security Policy Templates
 
@@ -234,6 +237,10 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
 ## See Also
 
 * [Content Security Policy (CSP) Templates]({% slug client_templates_overview %}#content-security-policy-(csp)-templates)
+* [Deferred Initialization]({% slug deferred_initialization_overview %})
+{% if site.core %}
+* [Declarative Initialization]({% slug declarative_initialization_overview %})
+{% endif %}
 * [Content Security Policy in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
 * [Getting Started with Content Security Policy (CSP) Templates in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/templates/get-started-csp-templates)
 

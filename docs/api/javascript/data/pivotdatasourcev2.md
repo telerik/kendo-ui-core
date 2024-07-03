@@ -303,6 +303,7 @@ The schema configuration of the PivotDataSourceV2.
 The cube declaration. If configured, this option will enable the client cube processing that is useful for binding to flat data.
 
 > Only applicable if client cube processing is used.
+> Necessary when binding the Pivot to data of type "odata".
 
 #### schema.cube.dimensions `Object`
 

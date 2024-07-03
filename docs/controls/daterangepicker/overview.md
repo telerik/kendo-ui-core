@@ -23,7 +23,7 @@ It allows the user to select a date range from a calendar or through a direct in
 * [Calendar Types]({% slug calendartypes_kendoui_daterangepicker %})&mdash;You can use a specific calendar type out of the supported DateTimePicker ones.
 * [Reverse Selection]({% slug reverse_selection_daterangepicker %})&mdash;The component allows you to pick an end date which is before the start date.
 * [Buttons]({% slug buttons_daterangepicker %})&mdash;Learn more about the buttons supported by the component.
-* [Automatic Correction]({% slug autocorrect_kendoui_daterangepicker %})&mdash;The feature will autocorrect the user input based on the `min` and `max` options.
+* [Automatic Correction]({% slug autocorrect_kendoui_daterangepicker %})&mdash;You can configure whether the component will autocorrect the user's input when the `min` and `max` dates are set.
 
 
 ## Next Steps

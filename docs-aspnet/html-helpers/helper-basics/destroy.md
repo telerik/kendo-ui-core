@@ -4,7 +4,7 @@ page_title: Destroying Widgets
 description: "Get started with Telerik UI for {{ site.framework }} and learn how to destroy the helpers."
 slug: destroyhelpers_core
 previous_url: /getting-started/helper-basics/destroy 
-position: 4
+position: 6
 ---
 
 # Destroying Helpers

@@ -36,7 +36,7 @@ To add a client-side assets license file to your application:
 
 > This section contains auto-generated content based on the license information for your account.
 
-To get a license file, generate it:
+To get a license file, click the **kendo-ui-license.js** button below to download the file:
 
 <link rel="stylesheet" href="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.1.2/styles/license-key/styles.css" />
 <script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/2.1.2/scripts/license-key/index.js"></script>

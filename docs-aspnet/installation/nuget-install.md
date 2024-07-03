@@ -166,7 +166,7 @@ Refer to the [Telerik NuGet feed instructional video](https://youtu.be/c3m_BLMXN
 
 ## Installing the NuGet Packages
 
-After setting up the Telerik NuGet package source, install the packages either through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog) or the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console).
+After setting up the Telerik NuGet package source, install the [packages](#list-of-provided-packages) either through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog) or the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console).
 
 The NuGet packages allow you to use the Telerik UI {% if site.core %}Tag Helpers and HTML Helpers{% else %} HTML Helpers {% endif %} in your application. For the UI components to render correctly, you must also provide the required [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
@@ -174,7 +174,7 @@ The NuGet packages allow you to use the Telerik UI {% if site.core %}Tag Helpers
 
 ## List of Provided Packages
 
-The NuGet feed provides the following packages related to UI for ASP.NET Core and UI for ASP.NET MVC:
+The NuGet feed provides the following packages related to {{ site.product_short }}:
 
 {% if site.core %}
 - `Telerik.UI.for.AspNet.Core`&mdash;Telerik UI for ASP.NET Core Commercial.
@@ -186,6 +186,17 @@ The NuGet feed provides the following packages related to UI for ASP.NET Core an
 - `Telerik.UI.for.AspNet.Mvc5.Lite.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Lite Trial. Installs a trial version of the `Kendo.Mvc.dll` assembly and the ready-to-use editor templates based on Telerik UI for ASP.NET components.
 
 >As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
+{% endif %}
+
+To install a specified {{ site.product }} version:
+
+1. Select the package in the [NuGet package manager](https://docs.nuget.org/consume/package-manager-dialog).
+1. In the right pane, select a **Version** from the dropdown list.
+
+{% if site.core %}
+	 ![{{ site.product_short }} Installing a specified package version](./images/core-install-package-version.png)
+{% else %}
+	 ![{{ site.product_short }} Installing a specified package version](./images/mvc-install-package-version.png)
 {% endif %}
 
 For more information on the list of the provided Kendo UI packages, refer to the article on [installing Kendo UI for jQuery with NuGet](https://docs.telerik.com/kendo-ui/intro/installation/nuget-install).
