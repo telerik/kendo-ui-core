@@ -112,6 +112,8 @@ To achieve the desired scenarion, use the following suggested implemetation. Not
                 updateGroupFooters(this.view());
 
                 grid.footer.find(".k-footer-template").replaceWith(grid.footerTemplate(this.aggregates()));
+
+                grid.refresh();
               }
             }
           },

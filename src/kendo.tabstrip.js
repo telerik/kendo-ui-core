@@ -577,6 +577,10 @@ var __meta__ = {
                 if (isFunction(ajaxOptions.url)) {
                     ajaxOptions.url = ajaxOptions.url();
                 }
+
+                if (isFunction(ajaxOptions.data)) {
+                    ajaxOptions.data = ajaxOptions.data();
+                }
             }
 
             that.xhr = $.ajax(ajaxOptions);
