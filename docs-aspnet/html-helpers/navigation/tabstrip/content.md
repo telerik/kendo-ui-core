@@ -55,7 +55,7 @@ To define the tab content declaratively, use the `tab.Content()` configuration m
 
 {{ site.product }} TabStrip provides built-in support for asynchronously loading content from remote URLs. These URLs return HTML content that can be loaded in the item content area of the TabStrip.
 
-The following example demonstrates how to load the tab content asynchronously by using AJAX.
+The following example demonstrates how to load the tab content asynchronously by using AJAX. The {{ site.product }} 2024 Q3 Release adds the `Data`, `Type` and `Headers` overloads of the `TabStripItemBuilder` to provide support for configuring additional `jQuery.ajax` options of the request, fetching the Tab content from to the remote endpoint:
 
 ```HtmlHelper
 @(Html.Kendo().TabStrip()
@@ -63,7 +63,7 @@ The following example demonstrates how to load the tab content asynchronously by
     .Items(tabstrip =>
     {
         tabstrip.Add().Text("Paris")
-            .LoadContentFrom(Url.Action("Paris", "Home"));
+            .LoadContentFrom(Url.Action("Paris", "Home")).Data("additionalData").Type(HttpVerbs.Post);
 
         tabstrip.Add().Text("Sofia")
             .LoadContentFrom(Url.Action("Sofia", "Home"));
@@ -75,7 +75,9 @@ The following example demonstrates how to load the tab content asynchronously by
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Paris"
-                       content-url="@Url.Action("Paris", "Home")">
+                       content-url="@Url.Action("Paris", "Home")"
+                       data="additionalData"
+                       type="POST">
         </tabstrip-item>
         <tabstrip-item text="Sofia"
                        content-url="@Url.Action("Paris", "Home")">
@@ -85,6 +87,14 @@ The following example demonstrates how to load the tab content asynchronously by
 
 ```
 {% endif %}
+```JavaScript
+    function additionalData(){
+        return {
+            myParam: "myValue"
+        }
+    }
+```
+
 
 ## Scrollable Content
 
