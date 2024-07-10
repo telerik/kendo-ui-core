@@ -1027,7 +1027,7 @@ The [valueTemplate](/api/javascript/kendo/methods/template) used to render the s
       ],
       dataTextField: "name",
       dataValueField: "id",
-      valueTemplate: ({ name }) => '<strong>${encode(name)}</strong>'
+      valueTemplate: ({ name }) => `<strong>${encode(name)}</strong>`
     });
     </script>
 
