@@ -128,20 +128,23 @@ The following example demonstrates how to export a detail Grid to Excel includin
           [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
         }
 
-        // Save the workbook.
-        kendo.saveAs({
-          dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
-          fileName: "Export.xlsx"
+        // When using  jsZip version 3.x use the following as the synchronous methods were deprecated
+        new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
+          kendo.saveAs($.extend({
+            dataURI: data,
+            fileName: "Export.xlsx"
+          }));
+        }).always(() => {
+          e.sender._progress(false);
+          e.sender._isExport = false;
+          e.sender.refresh();
         });
 
-        // When using  jsZip version 3.x use the following as the synchronous methods were deprecated
-        //new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
-        //  kendo.saveAs($.extend({
-        //    dataURI: data,
-        //      fileName: "Export.xlsx"
-        //  }));
-        //});
-
+        // Save the workbook.
+        // kendo.saveAs({
+        //   dataURI: new kendo.ooxml.Workbook(workbook).toDataURLAsync(),
+        //   fileName: "Export.xlsx"
+        // })
       });
     },
     columns: [
@@ -314,13 +317,23 @@ The following example demonstrates how to export a detail Grid to Excel includin
           [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
         }
 
-        // Save the workbook.
+        // When using  jsZip version 3.x use the following as the synchronous methods were deprecated
         new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
-            kendo.saveAs($.extend({
-              dataURI: data,
-              fileName: "Export.xlsx"
-            }));
+          kendo.saveAs($.extend({
+            dataURI: data,
+            fileName: "Export.xlsx"
+          }));
+        }).always(() => {
+          e.sender._progress(false);
+          e.sender._isExport = false;
+          e.sender.refresh();
         });
+
+        // Save the workbook.
+        // kendo.saveAs({
+        //   dataURI: new kendo.ooxml.Workbook(workbook).toDataURLAsync(),
+        //   fileName: "Export.xlsx"
+        // })
       });
     },
     columns: [
