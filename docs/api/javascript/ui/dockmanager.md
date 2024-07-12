@@ -197,7 +197,7 @@ Specifies if the pane can be docked and allow inner docking of other panes. Acce
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         },{
                             type: "content",
                             title: "Pane 3",
@@ -234,7 +234,7 @@ Specifies if the pane allows inner docks. Available only for panes of type `cont
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         },{
                             type: "content",
                             title: "Pane 3",
@@ -318,11 +318,11 @@ Specifies the orientation of a split pane. Supported values are "horizontal" and
                     panes: [{
                             type: "content",
                             title: "Pane 1",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -444,11 +444,11 @@ Sets the title of the pane. Available only for panes of type `content`.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -687,7 +687,7 @@ Toggles the visibility of a pane.
                 }
             }).data("kendoDockManager");
 
-            dockmanager.toggle("hiddenPaneId") //Toggles the visibility of the pane with id "hiddenPaneId".
+            dockmanager.togglePane("hiddenPaneId") //Toggles the visibility of the pane with id "hiddenPaneId".
     </script>
 
 #### Parameters
@@ -778,7 +778,7 @@ The `id` assigned as a configuration option of the pane.
                 }
             }).data("kendoDockManager");
 
-            dockmanager.remove("myPaneId"); // Remove the pane with id "myPaneId".
+            dockmanager.removePane("myPaneId"); // Remove the pane with id "myPaneId".
     </script>
 
 ## Events
@@ -803,11 +803,11 @@ Triggered when the pane is closed.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -829,11 +829,11 @@ Triggered when the pane is closed.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -861,11 +861,11 @@ Triggered when a pane is docked.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -887,11 +887,11 @@ Triggered when a pane is docked.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -919,11 +919,11 @@ Triggered when a pane is dragged.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -945,11 +945,11 @@ Triggered when a pane is dragged.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -975,11 +975,11 @@ Triggered when a pane is dragged.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1001,11 +1001,11 @@ Triggered when a pane is dragged.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1033,11 +1033,11 @@ Triggered when item drag starts.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1059,11 +1059,11 @@ Triggered when item drag starts.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1091,11 +1091,11 @@ Triggered when a pane is docked in the current pane.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1117,11 +1117,11 @@ Triggered when a pane is docked in the current pane.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1149,11 +1149,11 @@ Triggered when a pane is pinned.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1175,11 +1175,11 @@ Triggered when a pane is pinned.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1207,11 +1207,11 @@ Triggered when a pane is resized.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1233,11 +1233,11 @@ Triggered when a pane is resized.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1265,11 +1265,11 @@ Triggered when a pane is unpinned.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });
@@ -1291,11 +1291,11 @@ Triggered when a pane is unpinned.
                     panes: [{
                             type: "content",
                             title: "Pane title",
-                            content: "Pane 1",
+                            content: "Pane 1"
                         },{
                             type: "content",
                             title: "Pane 2",
-                            content: "Pane 2",
+                            content: "Pane 2"
                         }]
                 }
             });

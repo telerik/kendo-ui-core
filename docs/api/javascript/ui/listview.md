@@ -221,7 +221,7 @@ Specify the layout of listview content. Valid options are:
 * `flex`: This is equivalent to `display: flex`. It defines a flex container and enables a flex context for all its direct children. Think of flex items as primarily laying out either in horizontal rows or vertical columns.
 * `grid`: This is equivalent to `display: grid`. It defines the element as a grid container and establishes a new grid formatting context for its contents.
 
-> Note: Flex and grid layout are supporteed only on modern browsers. Even so, not all browsers that support flex and grid layout, support all features.
+> Note: Flex and grid layout are supported only on modern browsers. Even so, not all browsers that support flex and grid layout, support all features.
 
 #### Example of ListView with flex layout
 

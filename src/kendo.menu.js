@@ -1207,23 +1207,24 @@ var __meta__ = {
         },
 
         _initPopupScrollButtons: function(popup, isHorizontal, skipMouseEvents) {
-            var that = this;
-            var scrollButtons = popup.wrapper.children(scrollButtonSelector);
-            var animation = that.options.animation;
-            var timeout = ((animation && animation.open && animation.open.duration) || 0) + DELAY;
+            let that = this,
+                scrollButtons = popup.wrapper.children(scrollButtonSelector),
+                animation = that.options.animation,
+                timeout = ((animation && animation.open && animation.open.duration) || 0) + DELAY,
+                element = that.options.name === "ContextMenu" ? that.element : popup.element;
             setTimeout(function() {
                 if (!scrollButtons.length) {
-                    var backwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "left" : "up" }));
-                    var forwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "right" : "down" }));
+                    let backwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "left" : "up" }));
+                    let forwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "right" : "down" }));
 
                     scrollButtons = backwardBtn.add(forwardBtn).appendTo(popup.wrapper);
 
-                    that._initScrolling(that.element, backwardBtn, forwardBtn, isHorizontal);
+                    that._initScrolling(element, backwardBtn, forwardBtn, isHorizontal);
                     if (!skipMouseEvents) {
                         scrollButtons.on(MOUSEENTER + NS, function() {
-                            var overflowWrapper = that._overflowWrapper();
+                            let overflowWrapper = that._overflowWrapper();
                             $(getChildPopups(popup.element, overflowWrapper)).each(function(i, p) {
-                                var popupOpener = overflowWrapper.find(popupOpenerSelector(p.data(POPUP_ID_ATTR)));
+                                let popupOpener = overflowWrapper.find(popupOpenerSelector(p.data(POPUP_ID_ATTR)));
                                 that.close(popupOpener);
                             });
                         })
@@ -1236,7 +1237,7 @@ var __meta__ = {
                         });
                     }
                 }
-                that._toggleScrollButtons(that.element, scrollButtons.first(), scrollButtons.last(), isHorizontal);
+                that._toggleScrollButtons(element, scrollButtons.first(), scrollButtons.last(), isHorizontal);
             }, timeout);
         },
 
@@ -1250,22 +1251,24 @@ var __meta__ = {
         },
 
         _setPopupHeight: function(popup, isFixed) {
-            var popupElement = popup.element;
-            var popups = popupElement.add(popupElement.parent(childAnimationContainerSelector));
+            let popupElement = popup.element,
+                popups = popupElement.add(popupElement.parent(childAnimationContainerSelector));
 
             popups.height((popupElement.hasClass(MENU) && this._initialHeight) || "");
 
-            var location = popup._location(isFixed);
-            var windowHeight = $(window).height();
-            var popupOuterHeight = location.height;
-            var popupOffsetTop = isFixed ? 0 : Math.max(location.top, 0);
-            var scrollTop = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollTop");
-            var bottomScrollbar = window.innerHeight - windowHeight;
-            var maxHeight = windowHeight - kendo.getShadows(popupElement).bottom + bottomScrollbar;
-            var canFit = maxHeight + scrollTop > popupOuterHeight + popupOffsetTop;
+            let location = popup._location(isFixed),
+                windowHeight = $(window).height(),
+                popupOuterHeight = location.height,
+                popupOffsetTop = isFixed ? 0 : Math.max(location.top, 0),
+                scrollTop = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollTop"),
+                bottomScrollbar = window.innerHeight - windowHeight,
+                maxHeight = windowHeight - kendo.getShadows(popupElement).bottom + bottomScrollbar,
+                canFit = maxHeight + scrollTop > popupOuterHeight + popupOffsetTop;
 
             if (!canFit) {
-                var height = Math.min(maxHeight, maxHeight - popupOffsetTop + scrollTop);
+                let popupViewportGap = windowHeight * 0.05, // 5% gap from the viewport.
+                    scrollButtonsHeight = $(scrollButtonSelector).outerHeight() * 2,
+                    height = Math.min(maxHeight, maxHeight - popupOffsetTop + scrollTop - popupViewportGap - scrollButtonsHeight);
                 popups.css({ overflow: "hidden", height: height + "px" });
             }
         },

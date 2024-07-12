@@ -45,6 +45,7 @@ The following example demonstrates the basic configuration for the DateInput.
 * [Floating Label](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/floating-label)&mdash;You can configure a floating label placeholder text for the DateInput. This label will float above that field and remain visible once the user starts interacting with that input.
 * [Globalization](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/globalization/localization)&mdash;You can employ globalization which adjusts the date formats (localization) and adapts the component to specific cultures (internationalization and right-to-left support).
 * [Accessibility](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/accessibility/overview)&mdash;The DateInput is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+* [Automatic Correction]({% slug htmlhelpers_dateinput_autocorrect_aspnetcore %})&mdash;You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set.
 
 ## Next Steps
 

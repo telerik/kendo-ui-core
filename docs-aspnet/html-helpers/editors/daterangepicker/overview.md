@@ -59,6 +59,7 @@ The following example demonstrates the basic configuration for the DateRangePick
 | [Accessibility]({% slug accessibility_daterangepicker_aspnetcore %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
 | [Reverse Selection]({% slug reverse_selection_daterangepicker_aspnetcore %})|The component allows you to pick an end date which is before the start date.|
 | [Buttons]({% slug buttons_daterangepicker_aspnetcore %})|Learn more about the buttons supported by the component.|
+| [Automatic Correction]({% slug htmlhelpers_daterangepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Referencing Existing Instances
 

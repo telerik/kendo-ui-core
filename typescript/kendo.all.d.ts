@@ -6066,6 +6066,7 @@ declare namespace kendo.ui {
     interface GanttColumn {
         attributes?: any;
         columns?: any;
+        draggable?: boolean | undefined;
         editable?: boolean | undefined;
         editor?: Function | undefined;
         expandable?: boolean | undefined;
@@ -6246,7 +6247,7 @@ declare namespace kendo.ui {
         autoBind?: boolean | undefined;
         columnResizeHandleWidth?: number | undefined;
         columnMenu?: boolean|any | undefined;
-        columns?: GanttColumn[] | undefined;
+        columns?: GanttColumn[] | string[] | undefined;
         currentTimeMarker?: boolean | GanttCurrentTimeMarker | undefined;
         dataSource?: any|any|kendo.data.GanttDataSource | undefined;
         date?: Date | undefined;
@@ -6607,6 +6608,7 @@ declare namespace kendo.ui {
         attributes?: any;
         columns?: any;
         command?: string | string[] | GridColumnCommandItem | GridColumnCommandItem[] | undefined;
+        draggable?: boolean | undefined;
         editable?: Function | undefined;
         encoded?: boolean | undefined;
         exportable?: boolean | GridColumnExportable | undefined;

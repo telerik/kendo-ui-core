@@ -77,6 +77,7 @@ The DatePicker component respects DataAnnotations when the `DatePickerFor(m=>m.P
 | [DateInput integration]({% slug htmlhelpers_datepicker_aspnetcore_dateinputintegration %}) | The fluent integration between the DatePicker and the DateInput allows you to take advantage of the natively available features of both components. |
 | [Templates]({% slug htmlhelpers_datepicker_aspnetcore_templates %}) | You can customize the content and look and feel of the DatePicker by utilizing templates. |
 | [Accessibility]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %}) | The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Automatic Correction]({% slug htmlhelpers_datepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps
 

@@ -88,6 +88,7 @@ The TimePicker component respects DataAnnotation attributes when using the `Time
 * [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %})—The TimePicker is designed to keep its input value unchanged even when the typed time is invalid.
 * [Globalization]({% slug globalization_timepicker_aspnetcore %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
 * [Accessibility]({% slug accessibility_timepicker_aspnetcore %})—The TimePicker is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+* [Automatic Correction]({% slug htmlhelpers_timepicker_autocorrect_aspnetcore %})&mdash;You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set.
 
 
 ## Next Steps
