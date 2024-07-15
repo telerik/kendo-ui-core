@@ -21,6 +21,7 @@ The issues listed below are common when upgrading to {{ site.product }} versions
 * The files for the Less themes are missing after upgrading to a new {{ site.product }} version&mdash;The {{ site.product }} components [no longer support Less themes]({% slug missing-less-files %}) and Telerik recommends migrating to Sass-based themes.
 * Font icons are missing and their classes are not applied—Starting with version `R3 2023`, the {{ site.product }} UI components use SVG icons by default. Nevertheless, you can [revert to font icons]({% slug missing-font-icons %}).
 * The previously included jQuery CDN from Kendo is now missing with new versions&mdash;Starting with version `R3 2023`, the {{ site.product }} library has [discontinued shipment of the jQuery library](https://docs.telerik.com/{{ site.platform }}/installation/system-requirements/jquery-support).
+* The previously included JSZip CDN file is not available after upgrading to a new {{ site.product }} version&mdash;Starting with version `Q1 2024`, the JSZip library is no longer shipped with the Kendo UI Distributions. To still use the JSZip library, [replace the CDN reference](https://docs.telerik.com/{{ site.platform }}/installation/system-requirements/export-support#jszip-library) with official distribution channels such as `unpkg` or `Cloudflare`.
 
 ## See Also
 
