@@ -4790,6 +4790,97 @@ declare namespace kendo.ui {
         node?: Element | undefined;
     }
 
+    class DockManager extends kendo.ui.Widget {
+
+        static fn: DockManager;
+
+        options: DockManagerOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): DockManager;
+
+        constructor(element: Element, options?: DockManagerOptions);
+
+        togglePane(id: string): void;
+        refresh(): void;
+        removePane(id: string): void;
+    }
+
+    interface DockManagerOptions{
+        name?: string | undefined;
+        rootPane?: DockManagerRootPane | undefined;
+    }
+
+    interface DockManagerRootPane{
+        id?: string| undefined;
+        orientation?: string| undefined;
+        panes?: DockManagerRootPanePanes[] | undefined;
+        type?: string| undefined;
+    }
+
+    interface DockManagerRootPanePanes{
+        closable?: boolean| undefined;
+        content?: string| Function | undefined;
+        dockable?: boolean | DockManagerRootPanePanesDockable | undefined;
+        header?: string| Function | undefined;
+        id?: string| undefined;
+        orientation?: string| undefined;
+        panes?: any;
+        selected?: number| undefined;
+        size?: string| undefined;
+        tabHeader?: string| Function | undefined;
+        title?: string| undefined;
+        type?: string| undefined;
+        unpinnable?: boolean| DockManagerRootPanePanesUnpinnable| undefined;
+        visible?: string| undefined;
+    }
+
+    interface DockManagerRootPanePanesDockable{
+        dock?: boolean| undefined;
+        innerDock?: boolean| undefined;
+    }
+
+    interface DockManagerRootPanePanesUnpinnable{
+       unpinned?: boolean| undefined;
+       unpinnedSize?: string| undefined;
+    }
+
+    interface DockManagerEvent {
+        sender: DockManager;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    interface DockManagerCloseEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerDockEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerDragEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerDragEndEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerDragStartEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerInnerDockEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerPinEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerResizeEvent extends DockManagerEvent {
+    }
+
+    interface DockManagerUnpinEvent extends DockManagerEvent {
+    }
+
 
     class Editor extends kendo.ui.Widget {
 
@@ -26065,6 +26156,10 @@ interface JQuery {
     kendoDialog(options: kendo.ui.DialogOptions): JQuery;
     data(key: "kendoDialog"): kendo.ui.Dialog | undefined;
 
+    kendoDockManager(): JQuery;
+    kendoDockManager(options: kendo.ui.DockManagerOptions): JQuery;
+    data(key: "kendoDockManager"): kendo.ui.DockManager | undefined;
+
     kendoDrawer(): JQuery;
     kendoDrawer(options: kendo.ui.DrawerOptions): JQuery;
     data(key: "kendoDrawer"): kendo.ui.Drawer | undefined;
@@ -26332,6 +26427,10 @@ interface JQuery {
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;
     data(key: "kendoTabStrip"): kendo.ui.TabStrip | undefined;
+
+    kendoTaskBoard(): JQuery;
+    kendoTaskBoard(options: kendo.ui.TaskBoardOptions): JQuery;
+    data(key: "kendoTaskBoard"): kendo.ui.TaskBoard | undefined;
 
     kendoTextArea(): JQuery;
     kendoTextArea(options: kendo.ui.TextAreaOptions): JQuery;
