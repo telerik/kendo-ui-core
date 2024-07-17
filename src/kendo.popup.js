@@ -685,7 +685,7 @@ var __meta__ = {
                 anchorOffset = getOffset(anchor),
                 appendTo = $(that.options.appendTo),
                 appendToOffset,
-                width = outerWidth(element),
+                width = outerWidth(element) || outerWidth(element.find(".k-child-animation-container").children().first()),
                 height = outerHeight(element) || outerHeight(element.find(".k-child-animation-container").children().first()),
                 anchorWidth = outerWidth(anchor),
                 anchorHeight = outerHeight(anchor),
