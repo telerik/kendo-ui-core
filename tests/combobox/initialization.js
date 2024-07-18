@@ -1,6 +1,7 @@
 (function() {
 
     var ComboBox = kendo.ui.ComboBox;
+    var TextBox = kendo.ui.TextBox;
     var input;
 
     describe("kendo.ui.ComboBox initialization", function() {
@@ -830,11 +831,16 @@
 
         it("form reset support - after selection", function(done) {
             input.attr("value", "123");
+            var input_text = $("<input />").appendTo(Mocha.fixture);
 
-            var form = $("<form/>").appendTo(Mocha.fixture).append(input);
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input).append(input_text);
 
             var combobox = new ComboBox(input, {
                 dataSource: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
+            });
+
+            var textbox = new TextBox(input_text, {
+                value: "123"
             });
 
             combobox.select(1);
@@ -844,12 +850,14 @@
             setTimeout(function() {
                 assert.equal(combobox.element.val(), "123");
                 assert.equal(combobox.input.val(), "123");
+                assert.equal(textbox.element.val(), "");
                 done();
             }, 150);
         });
 
         it("form reset support - value provided as option", function(done) {
-            var form = $("<form/>").appendTo(Mocha.fixture).append(input);
+            var input_text = $("<input />").appendTo(Mocha.fixture);
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input).append(input_text);
 
             var combobox = new ComboBox(input, {
                 placeholder: "Select product",
@@ -859,10 +867,15 @@
                 dataSource: [{ ProductID: 1, ProductName: 'test' }]
             });
 
+            var textbox = new TextBox(input_text, {
+                value: "123"
+            });
+
             form[0].reset();
 
             setTimeout(function() {
                 assert.equal(combobox.text(), "test");
+                assert.equal(textbox.element.val(), "");
                 done();
             }, 150);
         });

@@ -1899,17 +1899,18 @@ var __meta__ = {
                 form = formId ? $("#" + formId) : element.closest("form");
 
             if (form[0]) {
-                that._resetHandler = function(e) {
-                    if (that.options._shouldPreventDefaultReset) {
-                        e.preventDefault();
-                    }
-
+                that._resetHandler = function() {
                     setTimeout(function() {
                         if (that.options._removeDataItems) {
                             that.listView._dataItems = [];
                         }
 
                         that.value(that._initial);
+
+                    if (that.options._shouldRefresh) {
+                        that.text(that._initial);
+                        that.refresh();
+                    }
                     });
                 };
 

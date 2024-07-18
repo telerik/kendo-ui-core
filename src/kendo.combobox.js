@@ -180,7 +180,7 @@ var __meta__ = {
             label: null,
             clearOnEscape: true,
             _removeDataItems: true,
-            _shouldPreventDefaultReset: true
+            _shouldRefresh: true
         },
 
         events: [

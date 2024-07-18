@@ -2536,7 +2536,7 @@ var __meta__ = {
                 if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
                     if (that.popup.visible() && that.options.filter) {
                         that.popup.close(true);
-                        that.popup.element.kendoStop(true);
+                        that.popup.element.parent().kendoStop(true);
                     }
 
                     if (!that._triggerFocusOnActivate) {
