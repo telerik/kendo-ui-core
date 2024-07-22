@@ -142,6 +142,38 @@ Kendo template or a callback that allows custom serialization of an immutable el
     });
     </script>
 
+### inlineHeight `Number`
+
+This property enables you to configure height for the Editor when the component is in [`inline`](https://demos.telerik.com/kendo-ui/editor/inline-editing) mode.
+
+> This configuration is required when you want to use the `formattingMarks` tool in an inline editor.
+
+    <div id="editor">
+        <h2>
+            Comprehensive HTML5/JavaScript framework <br />
+            for modern web and mobile app development
+        </h2>
+        <p>
+            Kendo UI is everything professional developers need
+            to build HTML5 sites and mobile apps. Today, productivity
+            of an average HTML/jQuery developer is hampered by
+            assembling a Frankenstein framework of disparate
+            JavaScript libraries and plug-ins.
+        </p>
+        <p>
+            Kendo UI has it all: rich jQuery-based widgets,
+            a simple and consistent programming interface,
+            a rock-solid DataSource, validation, internationalization,
+            a MVVM framework, themes, templates and the list goes on.
+        </p>
+    </div>
+
+    <script>
+      $("#editor").kendoEditor({
+        inlineHeight: 200
+      });
+    </script>
+
 ### messages `Object`
 
 Defines the text of the labels that are shown within the editor. Used primarily for localization.

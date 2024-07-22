@@ -5310,6 +5310,7 @@ declare namespace kendo.ui {
         stylesheets?: any;
         tools?: EditorTool[]|string[] | undefined;
         imageBrowser?: EditorImageBrowser | undefined;
+        inlineHeight?: number | undefined;
         fileBrowser?: EditorFileBrowser | undefined;
         navigateOnTab?: boolean | undefined;
         nonSplittableTagsOnPaste?: string[] | EditorNonSplittableTagsOnPaste[] | undefined;
