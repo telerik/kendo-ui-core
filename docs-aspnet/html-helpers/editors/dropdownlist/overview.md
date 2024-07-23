@@ -74,6 +74,10 @@ The following example demonstrates how to define the DropDownList.
     }
 ```
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Basic Configuration
 
 The DropDownList configuration options are passed as attributes.

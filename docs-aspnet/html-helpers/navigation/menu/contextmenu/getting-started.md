@@ -426,8 +426,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## Next Steps
 
->tip Many of the configuration properties of the Menu and ContextMenu controls are identical. Refer to the [Menu Documentation]({% slug htmlhelpers_menu_aspnetcore %}) for additional information.
-
 * [Binding the ContextMenu to Data]({% slug htmlhelpers_contextmenu_databinding_aspnetcore %})
 * [Subscribing to the ContextMenu Events]({% slug events_context_menu %})
 * [Customizing the Appearance of the ContextMenu]({% slug appearance_menu %})

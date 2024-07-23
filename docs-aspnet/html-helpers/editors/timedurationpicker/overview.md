@@ -33,6 +33,10 @@ The following example demonstrates how to define the TimeDurationPicker.
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Basic Configuration
 
 To configure the TimeDurationPicker, pass the configuration options as attributes of the helper.

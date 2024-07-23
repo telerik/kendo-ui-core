@@ -40,6 +40,10 @@ The following example demonstrates how to define the DateTimePicker.
 {% endif %}
 
 {% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
+
 ## Basic Configuration
 
 The DateTimePicker configuration options are passed as attributes.
@@ -51,11 +55,13 @@ The DateTimePicker configuration options are passed as attributes.
         .Min(DateTime.Today)
     )
 ```
+{% if site.core %}
 ```TagHelper
     <kendo-datetimepicker name="end" value="DateTime.Today"
         min="DateTime.Today">
     </kendo-datetimepicker>
 ```
+{% endif %}
 
 The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property or by a property of the model.
 
@@ -65,7 +71,7 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
         .ParseFormats(new string[] { "MMMM yyyy", "MMMM" })
     )
 ```
-
+{% if site.core %}
 ```TagHelper
     @{
         ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };

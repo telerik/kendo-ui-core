@@ -2078,6 +2078,11 @@ import "./kendo.html.button.js";
 
                 wnd.initialWindowPosition = kendo.getOffset(wnd.wrapper, "position");
 
+                if (!wnd.initialPointerPosition) {
+                    wnd.options.position.left = constrain(wnd.initialWindowPosition.left, wnd.minLeft, wnd.maxLeft);
+                    wnd.options.position.top = constrain(wnd.initialWindowPosition.top, wnd.minTop, wnd.maxTop);
+                }
+
                 wnd.initialPointerPosition = {
                     left: wnd.options.position.left,
                     top: wnd.options.position.top

@@ -39,6 +39,10 @@ The following example demonstrates the basic configuration for the DateInput.
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Functionality and Features
 
 * [Appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/appearance)&mdash;You are able to customize the appearance of the DateInput by configuring its size, fill mode, and border radius.

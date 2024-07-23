@@ -160,6 +160,10 @@ public ActionResult Remove(string[] fileNames)
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Basic Configuration
 
 The following example demonstrates the basic configuration of the Upload component and how to get the Upload widget instance.

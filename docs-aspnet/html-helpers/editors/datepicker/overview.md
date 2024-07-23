@@ -44,6 +44,10 @@ The following example demonstrates the basic configuration for the DatePicker.
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Model Binding
 
 The DatePicker component respects DataAnnotations when the `DatePickerFor(m=>m.Property)` method is used. Besides the `[Required]` attribute, the `[DisplayFormat]` and `[Range]` attributes are also supported. The [`Format`](/api/kendo.mvc.ui.fluent/datepickerbuilder#formatsystemstring) configuration will be set to the provided DisplayFormat and the [`Min`](/api/kendo.mvc.ui.fluent/datepickerbuilder#minsystemstring) and [`Max`](/api/kendo.mvc.ui.fluent/datepickerbuilder#maxsystemstring) configurations will be set based on the range provided.

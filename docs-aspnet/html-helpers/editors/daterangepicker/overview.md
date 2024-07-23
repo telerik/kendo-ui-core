@@ -44,6 +44,10 @@ The following example demonstrates the basic configuration for the DateRangePick
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Functionality and Features
 
 | Feature | Description |

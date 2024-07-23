@@ -60,13 +60,18 @@ The following table provides a list of the Telerik UI for {{ site.framework }} c
 
 | Component | Documentation |
 |-----------|---------------|
+| AutoComplete | [AutoComplete Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/autocomplete/overview) |
 | ColorPicker | [ColorPicker Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/colorpicker/overview) |
+| ComboBox | [ComboBox Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/combobox/overview) |
 | DateInput | [DateInput Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/dateinput/overview) |
 | DatePicker | [DatePicker Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/datepicker/overview) |
 | DateRangePicker | [DateRangePicker Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/daterangepicker/overview) |
 | DateTimePicker | [DateTimePicker Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/datetimepicker/overview) |
+| DropDownList | [DropDownList Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/dropdownlist/overview) |
+| DropDownTree | [DropDownTree Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/dropdowntree/overview) |
 | FlatColorPicker | [FlatColorPicker Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/flatcolorpicker/overview) |
 | MaskedTextBox | [MaskedTextBox Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/maskedtextbox/overview) |
+| MultiSelect | [MultiSelect Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/multiselect/overview) |
 | NumericTextBox | [NumericTextBox Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/numerictextbox/overview) |
 | TextArea | [TextArea Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/textarea/overview) |
 | TextBox | [TextBox Overview](https://docs.telerik.com/{{site.platform}}/html-helpers/editors/textbox/overview) |

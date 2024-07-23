@@ -39,6 +39,10 @@ The following example demonstrates the basic configuration for the TextBox.
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Functionality and Features
 
 * [Appearance]({% slug textbox_appearance %})—The TextBox comes with built-in styling options that allow you to customize the appearance of the component.

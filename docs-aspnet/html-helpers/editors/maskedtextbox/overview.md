@@ -39,6 +39,10 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 ```
 {% endif %}
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Functionality and Features
 
 * [Mask rules]({% slug validation_maskedtextbox_aspnetcore %})—You can configure a variety of predefined masks as well as custom masks in the MaskedTextBox.

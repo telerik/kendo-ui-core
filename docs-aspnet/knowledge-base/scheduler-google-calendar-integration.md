@@ -1,5 +1,5 @@
 ---
-title: Integrate Google Calenar in Telerik UI Scheduler
+title: Integrate Google Calendar in Telerik UI Scheduler
 description: An example on how to populate Google Calendar events in the Telerik UI Scheduler
 type: how-to
 page_title: Use Scheduler With Google Calendar

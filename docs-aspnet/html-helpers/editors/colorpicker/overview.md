@@ -41,9 +41,13 @@ The following example demonstrates how to define the ColorPicker.
 {% endif %}
 
 {% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
+
 ## Basic Configuration
 
-The following example demonstrates how to configure the tile size, columns, `change` event, and palette colors.
+The following example demonstrates how to configure the tile size, columns, `Change` event, and palette colors.
 
 ```HtmlHelper
 
@@ -61,6 +65,7 @@ The following example demonstrates how to configure the tile size, columns, `cha
 			.Events(events => events.Change("preview"))
 		)
 ```
+{% if site.core %}
 ```TagHelper
 
 		@{

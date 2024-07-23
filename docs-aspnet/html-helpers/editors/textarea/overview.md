@@ -40,6 +40,11 @@ The following example demonstrates the basic configuration for the TextArea.
     </kendo-textarea>
 ```
 {% endif %}
+
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Functionality and Features
 
 * [Labels]({% slug htmlhelpers_textarea_labels %})&mdash;You can integrate a label HTML element within the boundaries of the TextArea.

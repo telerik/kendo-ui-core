@@ -45,6 +45,10 @@ The following example demonstrates the basic configuration for the NumericTextBo
 {% endif %}
 
 {% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
+
 ## Basic Configuration
 
 The NumericTextBox configuration options are passed as attributes.
@@ -60,6 +64,7 @@ The NumericTextBox configuration options are passed as attributes.
             .Value(30)
         )
 ```
+{% if site.core %}
 ```TagHelper
 
         <kendo-numerictextbox name="currency" format="c" min="0"

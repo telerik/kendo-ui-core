@@ -81,6 +81,10 @@ public IActionResult Read_DropDownTreeData(int? id)
 }
 ```
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Basic Configuration
 
 The following example demonstrates the basic configuration of the DropDownTree.

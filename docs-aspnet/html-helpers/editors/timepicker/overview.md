@@ -36,6 +36,11 @@ The following example demonstrates how to how to define the TimePicker.
 ```TagHelper
     <kendo-timepicker name="timepicker" value="DateTime.Now"></kendo-timepicker>
 ```
+{% endif %}
+
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
 
 ## Basic Configuration
 
@@ -50,13 +55,13 @@ The TimePicker TagHelper configuration options are passed as attributes.
                 .Max("7:30 AM")
         )
 ```
+{% if site.core %}
 ```TagHelper
 
         <kendo-timepicker name="end" value="new DateTime(1900, 1, 1, 8, 30, 0)"
             min="new DateTime(1900, 1, 1, 8, 0, 0)" max="new DateTime(1900, 1, 1, 7, 30, 0)">
         </kendo-timepicker>
 ```
-
 {% endif %}
 
 ## Model Binding

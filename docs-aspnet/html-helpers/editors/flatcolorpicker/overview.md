@@ -30,6 +30,10 @@ The following example demonstrates how to define the FlatColorPicker.
     )
 ```
 
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
+
 ## Events
 
 You can subscribe to all FlatColorPicker [events](/api/flatcolorpicker).
