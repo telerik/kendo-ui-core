@@ -717,9 +717,10 @@ var __meta__ = {
                 fractionRule = "{0," + precision + "}";
             }
 
-            if (that._separator !== separator) {
+            if (that._separator !== separator || that._oldPrecision !== precision) {
                 that._separator = separator;
                 that._floatRegExp = new RegExp("^(-)?(((\\d+(" + separator + "\\d" + fractionRule + ")?)|(" + separator + "\\d" + fractionRule + ")))?$");
+                that._oldPrecision = precision;
             }
 
             return that._floatRegExp;
