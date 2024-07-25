@@ -339,7 +339,7 @@ var __meta__ = {
         _inputFocusout: function(e) {
             var that = this;
             var value = that.value();
-            var isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length;
+            const isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length || (!$(e.relatedTarget).is(that._clear) && $(e.relatedTarget).hasClass('k-clear-value'));
 
             if (that.filterInput && e.relatedTarget === that.filterInput[0]) {
                 return;
