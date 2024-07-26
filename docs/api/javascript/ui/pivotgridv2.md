@@ -860,31 +860,33 @@ The fields which can be used in the template are:
 #### Example - specify a custom template for the KPI Status measure
 
     <div id="pivotgrid"></div>
-
+    
     <script>
-    $("#pivotgrid").kendoPivotGridV2({
-        kpiStatusTemplate:({ dataItem }) => `${dataItem.value !== 0 ? "<em>Open/Denied</em>" : "<strong>Hold</strong>"}`,
-        dataSource: {
-            type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true } ],
-            measures: ["[Measures].[Internet Revenue Status]"],
-            transport: {
-                connection: {
-                    catalog: "Adventure Works DW 2008R2",
-                    cube: "Adventure Works"
+        $("#pivotgrid").kendoPivotGridV2({
+            kpiStatusTemplate:({ dataItem }) => `${dataItem.value !== 0 ? "<em>Open/Denied</em>" : "<strong>Hold</strong>"}`,
+            dataSource: {
+                type: "xmla",
+                columns: [{ name: "[Date].[Calendar]", expand: true } ],
+                rows: [{ name: "[Geography].[City]" }], 
+                measures: [{ name: "[Measures].[Internet Revenue Status]", type: "status"}],
+                transport: {
+                    connection: {
+                        catalog: "Adventure Works DW 2008R2",
+                        cube: "Adventure Works"
+                    },
+                    read: {
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
+                        dataType: "text",
+                        contentType: "text/xml",
+                        type: "POST"
+                    }
                 },
-                read: {
-                    url: "https://demos.telerik.com/olap/msmdpump.dll",
-                    dataType: "text",
-                    contentType: "text/xml",
-                    type: "POST"
+                schema: {
+                    type: "xmla"
                 }
-            },
-            schema: {
-                type: "xmla"
             }
-        }
-    });
+        });
+
     </script>
 
 ### kpiTrendTemplate `String|Function`
@@ -901,31 +903,32 @@ The fields which can be used in the template are:
 #### Example - specify a custom template for the KPI Trend measure
 
     <div id="pivotgrid"></div>
-
+    
     <script>
-    $("#pivotgrid").kendoPivotGridV2({
-        kpiTrendTemplate: ({ dataItem }) => `${dataItem.value !== 0 ? "<em>Increase/Decrease</em>" : "<strong>Equal</strong>"}`,
-        dataSource: {
-            type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true } ],
-            measures: ["[Measures].[Internet Revenue Trend]"],
-            transport: {
-                connection: {
-                    catalog: "Adventure Works DW 2008R2",
-                    cube: "Adventure Works"
+        $("#pivotgrid").kendoPivotGridV2({
+            kpiTrendTemplate: ({ dataItem }) => `${dataItem.value !== 0 ? "<em>Increase/Decrease</em>" : "<strong>Equal</strong>"}`,
+            dataSource: {
+                type: "xmla",
+                columns: [{ name: "[Date].[Calendar]", expand: true } ],
+                rows: [{ name: "[Geography].[City]" }], 
+                measures: [{ name: "[Measures].[Internet Revenue Trend]", type: "trend"}],
+                transport: {
+                    connection: {
+                        catalog: "Adventure Works DW 2008R2",
+                        cube: "Adventure Works"
+                    },
+                    read: {
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
+                        dataType: "text",
+                        contentType: "text/xml",
+                        type: "POST"
+                    }
                 },
-                read: {
-                    url: "https://demos.telerik.com/olap/msmdpump.dll",
-                    dataType: "text",
-                    contentType: "text/xml",
-                    type: "POST"
+                schema: {
+                    type: "xmla"
                 }
-            },
-            schema: {
-                type: "xmla"
             }
-        }
-    });
+        });
     </script>
 
 ### rowHeaderTemplate `String|Function`

@@ -16301,6 +16301,16 @@ declare namespace kendo.dataviz.ui {
         width?: number | undefined;
     }
 
+    interface ChartSeriesItemHighlightMarkers {
+        color?: string | undefined;
+        border: Function | ChartSeriesItemHighlightMarkersBorder | undefined;
+    }
+
+    interface ChartSeriesItemHighlightMarkersBorder {
+        color?: string|Function | undefined;
+        width?: number|Function | undefined;
+    }
+
     interface ChartSeriesItemHighlightLine {
         dashType?: string | undefined;
         color?: string | undefined;
@@ -16310,6 +16320,7 @@ declare namespace kendo.dataviz.ui {
 
     interface ChartSeriesItemHighlight {
         border?: ChartSeriesItemHighlightBorder | undefined;
+        markers?: ChartSeriesItemHighlightMarkers | undefined;
         color?: string | undefined;
         inactiveOpacity?: number | undefined;
         line?: ChartSeriesItemHighlightLine | undefined;

@@ -393,6 +393,7 @@ The function that is used to aggregate the measure value.
 
 The built-in aggregates are:
 * `average`
+* `count`
 * `max`
 * `min`
 * `sum`
@@ -418,7 +419,8 @@ The built-in aggregates are:
             }
           }
         }
-      });
+      }
+    });
 
       dataSource.fetch(function() {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -642,7 +644,8 @@ The options of the discover request.
             catalogName: dataSource.catalog(),
             cubeName: dataSource.cube()
           }
-        });
+        }
+      });
     </script>
 
 ### measures

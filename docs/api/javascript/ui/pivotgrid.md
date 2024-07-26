@@ -1155,7 +1155,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true } ],
-            measures: ["[Measures].[Internet Revenue Status]"],
+            measures: [{ name: "[Measures].[Internet Revenue Status]", type: "status"}],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
@@ -1207,7 +1207,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true } ],
-            measures: ["[Measures].[Internet Revenue Trend]"],
+            measures: [{ name: "[Measures].[Internet Revenue Trend]", type: "trend"}],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",

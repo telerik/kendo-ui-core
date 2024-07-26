@@ -1137,7 +1137,7 @@ The field from the server response which contains server-side errors. Can be set
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://www.mocky.io/v2/5ad0597a3100004f004eac46",
+          url: "https://run.mocky.io/v3/ef00571f-cd9c-4bb3-a8fc-c98afa9e8de4",
         }
       },
       schema: {
@@ -1162,9 +1162,8 @@ The field from the server response which contains server-side errors. Can be set
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "aaaaa" }
+          url: "https://run.mocky.io/v3/c9fb4321-bb6f-4f8c-a379-7499329586ed",
+          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests     
         }
       },
       schema: {

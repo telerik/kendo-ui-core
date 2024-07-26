@@ -14868,6 +14868,110 @@ The width of the line.
     });
     </script>
 
+### series.highlight.markers.border
+
+The border of the highlighted markers.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            border: {
+               color: 'blue',
+               width: 10
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+### series.highlight.markers.border.color
+
+The border color of the highlighted markers.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            border: {
+               color: 'blue',
+               width: 10
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+### series.highlight.markers.border.width
+
+The border width of the highlighted markers.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            border: {
+               color: 'blue',
+               width: 10
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+### series.highlight.markers.color
+
+The color of the highlighted marker.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            markers:{
+              color: 'red'
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+
 ### series.highlight.opacity `Number`
 
 The opacity of the highlighted points.
