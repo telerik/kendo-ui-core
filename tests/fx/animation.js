@@ -1,42 +1,37 @@
 (function() {
     var animate = kendo.animate,
-        transforms = kendo.support.transforms,
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?/i,
         translateXRegExp = /translatex?$/i,
-        TRANSFORM = kendo.support.transforms.css + "transform",
+        TRANSFORM = "transform",
         span;
 
     function animationProperty(element, property) {
-        if (transforms) {
-            var transform = element.css(TRANSFORM);
-            if (transform == "none") {
-                return property == "scale" ? 1 : 0;
-            }
-
-            var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
-                computed = 0;
-
-            if (match) {
-                computed = parseInt(match[1], 10);
-            } else {
-                match = transform.match(matrix3dRegExp) || [0, 0, 0, 0, 0];
-                property = property.toLowerCase();
-
-                if (translateXRegExp.test(property)) {
-                    computed = parseFloat(match[3] / match[2]);
-                } else if (property == "translatey") {
-                    computed = parseFloat(match[4] / match[2]);
-                } else if (property == "scale") {
-                    computed = parseFloat(match[2]);
-                } else if (property == "rotate") {
-                    computed = parseFloat(Math.atan2(match[2], match[1]));
-                }
-            }
-
-            return computed;
-        } else {
-            return element.css(property);
+        var transform = element.css(TRANSFORM);
+        if (transform == "none") {
+            return property == "scale" ? 1 : 0;
         }
+
+        var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
+            computed = 0;
+
+        if (match) {
+            computed = parseInt(match[1], 10);
+        } else {
+            match = transform.match(matrix3dRegExp) || [0, 0, 0, 0, 0];
+            property = property.toLowerCase();
+
+            if (translateXRegExp.test(property)) {
+                computed = parseFloat(match[3] / match[2]);
+            } else if (property == "translatey") {
+                computed = parseFloat(match[4] / match[2]);
+            } else if (property == "scale") {
+                computed = parseFloat(match[2]);
+            } else if (property == "rotate") {
+                computed = parseFloat(Math.atan2(match[2], match[1]));
+            }
+        }
+
+        return computed;
     }
 
     describe("kendo.animate", function() {
@@ -295,19 +290,17 @@
                 span.css({ position: "absolute", display: "block", left: 10, width: 10 });
 
                 var position = 1;
-                if (transforms) {
-                    span.css(TRANSFORM, "translateX(10px)");
-                }
+                span.css(TRANSFORM, "translateX(10px)");
 
                 span.kendoAnimate({
                     effects: "slideIn:right",
                     duration: 20,
                     init: function() {
-                        position = (transforms ? animationProperty(span, "translateX") : span.offset().left);
+                        position = animationProperty(span, "translateX");
                     },
                     complete: function() {
                         assert.isOk(position == -span.width());
-                        assert.isOk((transforms ? animationProperty(span, "translateX") : span.offset().left) === 0);
+                        assert.isOk(animationProperty(span, "translateX") === 0);
                         done();
                     }
                 });
@@ -317,19 +310,17 @@
                 span.css({ position: "absolute", display: "block", top: 10 });
 
                 var position = 1;
-                if (transforms) {
-                    span.css(TRANSFORM, "translateY(10px)");
-                }
+                span.css(TRANSFORM, "translateY(10px)");
 
                 span.kendoAnimate({
                     effects: "slideIn:down",
                     duration: 20,
                     init: function() {
-                        position = (transforms ? animationProperty(span, "translateY") : span.offset().top);
+                        position = animationProperty(span, "translateY");
                     },
                     complete: function() {
                         assert.isOk(position == -span.height());
-                        assert.isOk((transforms ? animationProperty(span, "translateY") : span.offset().top) === 0);
+                        assert.isOk(animationProperty(span, "translateY") === 0);
                         done();
                     }
                 });

@@ -25,7 +25,7 @@ For more information on binding the PivotGridV2 to data over an OLAP cube, refer
 
 The local data binding allows the PivotGridV2 to read data from a JavaScript array.
 
-For more information on binding the PivotGridV2 to local data, refer to the [Local Binding]({$ slug localbinding_kendoui_pivotgridv2 %}) article.
+For more information on binding the PivotGridV2 to local data, refer to the [Local Binding](https://docs.telerik.com/kendo-ui/controls/pivotgridv2/binding/local-binding) article.
 
 ## See Also
 

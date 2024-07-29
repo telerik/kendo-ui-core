@@ -405,7 +405,7 @@ var __meta__ = {
         }
     });
 
-    var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
+    var TRANSFORM_STYLE = "transform",
         translate;
 
 

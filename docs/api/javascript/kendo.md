@@ -1209,29 +1209,6 @@ Returns `true` if the browser supports input placeholders.
 ##### zoomLevel `Number` *(default: 1)*
 Returns the current zoom level on a mobile browser (returns 1 on desktop).
 
-### support.transforms `Object`
-Returns a number of browser specific transformation properties
-
-#### support.transforms
-##### transforms.css `String`
-Returns the CSS prefix of the current browser proprietary transform properties. E.g. "-webkit-", "-moz-", "-o-", "-ms-"
-
-##### transforms.prefix `String`
-Returns the JavaScript prefix of the current browser proprietary transform properties. E.g. "webkit", "Moz", "O", "ms"
-
-### support.transitions `Object`
-Returns a number of browser specific transition properties
-
-#### support.transitions
-##### transitions.css `String`
-Returns the CSS prefix of the current browser proprietary transition properties. E.g. "-webkit-", "-moz-", "-o-", "-ms-"
-
-##### transitions.prefix `String`
-Returns the JavaScript prefix of the current browser proprietary transition properties. E.g. "webkit", "Moz", "O", "ms"
-
-##### transitions.event `String`
-Returns the transition end event name in the current browser. E.g. "webkitTransitionEnd", "transitionend", "oTransitionEnd"
-
 ### support.mobileOS `Object`
 Returns a number of properties that identify the current mobile browser. Parses navigator.userAgent to do it. False on desktop.
 

@@ -121,6 +121,7 @@ To set the icon color, use the `color` CSS property.
 To accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
 
 ```dojo
+<link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css"/>
 <span class="k-icon k-font-icon k-i-pencil"></span>
 <span class="k-icon k-font-icon k-i-pencil k-flip-h"></span>
 <span class="k-icon k-font-icon k-i-pencil k-flip-v"></span>

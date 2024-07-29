@@ -2143,15 +2143,11 @@ import "./kendo.html.button.js";
                     position.top = constrain(top, wnd.minTop, wnd.maxTop);
                 }
 
-                if (kendo.support.transforms) {
-                    $(wnd.wrapper).css(
-                        "transform", "translate(" +
-                        (position.left - wnd.initialPointerPosition.left) + "px, " +
-                        (position.top - wnd.initialPointerPosition.top) + "px)"
-                    );
-                } else {
-                    $(wnd.wrapper).css(position);
-                }
+                $(wnd.wrapper).css(
+                    "transform", "translate(" +
+                    (position.left - wnd.initialPointerPosition.left) + "px, " +
+                    (position.top - wnd.initialPointerPosition.top) + "px)"
+                );
 
             },
 
