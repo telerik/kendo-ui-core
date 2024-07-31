@@ -286,6 +286,24 @@ The `span` element can be added automatically by the widget, or an existing elem
         });
     </script>
 
+### showArrowButton `Boolean`*(default: false)*
+
+Configures DropDownButton to render a down arrow that opens and closes its popup.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Foo</button>
+    <script>
+    $("#dropdownbutton").kendoDropDownButton({
+        items:[
+            { text: "item 1" },
+            { text: "item 2" }
+        ],
+        showArrowButton: true,
+    });
+    </script>
+
+
 ### themeColor `String` *(default: 'base')*
 
 Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.

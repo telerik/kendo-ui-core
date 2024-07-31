@@ -4473,6 +4473,7 @@ declare namespace kendo.ui {
         rounded?: string | undefined;
         size?: string | undefined;
         spriteCssClass?: string | undefined;
+        showArrowButton?: boolean | undefined;
         themeColor?: string | undefined;
         messages?: DropDownButtonMessages | undefined;
         click?(e: DropDownButtonClickEvent): void;

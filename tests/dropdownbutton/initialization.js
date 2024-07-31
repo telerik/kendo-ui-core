@@ -16,11 +16,22 @@
             kendo.destroy(Mocha.fixture);
         });
 
+        it("DropdownButton can be initialized with empty items", function() {
+            var dropDownButton = new DropDownButton(button, { items: [] });
+
+            assert.isOk(dropDownButton);
+
+            dropDownButton.setOptions({ items: defaultItems });
+            assert.isOk(dropDownButton);
+        });
+
         it("DropDownButton renders button", function() {
-            var dropDownButton = new DropDownButton(button, { items: defaultItems });
+            const dropDownButton = new DropDownButton(button, { items: defaultItems, showArrowButton: true });
 
             assert.isOk(button.hasClass("k-menu-button"));
             assert.isOk(button.hasClass("k-button"));
+            assert.isOk(button.children().eq(1).hasClass("k-button-arrow"));
+            assert.isOk(button.children().eq(1).hasClass("k-menu-button-arrow"));
         });
 
         it("DropDownButton renders button with text", function() {

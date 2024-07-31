@@ -286,7 +286,7 @@ var __meta__ = {
             }
 
             if (ev.altKey && ev.keyCode === keys.DOWN) {
-                that._popup.open();
+                that.open();
                 ev.preventDefault();
                 return;
             }
@@ -299,7 +299,7 @@ var __meta__ = {
             ev.preventDefault();
 
             if (ev.keyCode === keys.ESC || ev.keyCode === keys.TAB || (ev.altKey && ev.keyCode === keys.UP)) {
-                that._popup.close();
+                that.close();
                 that.mainButton.trigger(FOCUS);
             } else if (ev.keyCode === keys.DOWN) {
                 findFocusableSibling(li, NEXT).trigger(FOCUS);
@@ -373,6 +373,19 @@ var __meta__ = {
             this._hide(false, items);
         },
 
+        open: function() {
+            if (this.items().length === 0) {
+                return;
+            }
+
+            var visibleItems = this.items().filter(`:not(.${HIDDEN})`);
+            if (visibleItems.length === 0) {
+                return;
+            }
+
+            this._popup.open();
+        },
+
         close: function() {
             this._popup.close();
         },
@@ -411,4 +424,3 @@ var __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

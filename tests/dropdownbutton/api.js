@@ -87,6 +87,29 @@
 
             assert.isNotOk(dropDownButton.menu.list.find("#item1").hasClass("k-hidden"));
         });
+
+        it("DropDownButton should not open menu with no items", function() {
+            var dropDownButton = new DropDownButton(button, {
+                items: [],
+                open: function() {
+                    throw new Error("Open event should not be triggered");
+                }
+            });
+
+            dropDownButton.open();
+        });
+
+        it("DropDownButton should not open menu with no visible items", function() {
+            var dropDownButton = new DropDownButton(button, {
+                items: defaultItems,
+                open: function() {
+                    throw new Error("Open event should not be triggered");
+                }
+            });
+
+            dropDownButton.hide(dropDownButton.items());
+            dropDownButton.open();
+        });
     });
 
     describe("DropDownButton api events", function() {
