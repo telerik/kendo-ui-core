@@ -2733,7 +2733,26 @@ function pad(number, digits, end) {
         quoteRegExp = /"/g,
         aposRegExp = /'/g,
         gtRegExp = />/g;
-    function htmlEncode(value) {
+
+    function htmlDecode(value) {
+        var entities = {
+            '&amp;': '&',
+            '&lt;': '<',
+            '&gt;': '>',
+            '&quot;': '"',
+            '&#39;': "'"
+        };
+
+        return value.replace(/&(?:amp|lt|gt|quot|#39);/g, function(match) {
+            return entities[match];
+        });
+    }
+
+    function htmlEncode(value, shouldDecode) {
+        if (shouldDecode === true) {
+            value = htmlDecode(value);
+        }
+
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
 
