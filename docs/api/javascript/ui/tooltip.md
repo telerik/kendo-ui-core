@@ -265,6 +265,8 @@ Specifies if the Tooltip callout will be displayed.
 
 Specifies a selector for the elements within the container which will display the Tooltip.
 
+> It is recommended to avoid using the element's `title` attribute in the selector string, as the tooltip component strongly relies on it.
+
 #### Example - showing a Tooltip only for strong elements in a text
 
     <div id="container">

@@ -53,6 +53,8 @@ Kendo UI provides options for you to create your own components by inheriting fr
 
     	        // The base call to initialize the component.
     	        Widget.fn.init.call(this, element, options);
+                // an example adding the CSS classes for MultiSelect
+                // $(element).parent().addClass("k-input-solid k-input-md k-rounded-md");
     	    },
 
     	    options: {

@@ -213,9 +213,9 @@ var __meta__ = {
         },
 
         _showOn: function(e) {
-            var that = this;
+            const that = this;
+            const currentTarget = $(e.currentTarget);
 
-            var currentTarget = $(e.currentTarget);
             if (that._isShownOnClick() && !that._isShownOnMouseEnter()) {
                 that._show(currentTarget);
             } else if (that._isShownOnFocus()) {
@@ -328,8 +328,9 @@ var __meta__ = {
             if (!this.popup) {
                 return;
             }
-
-            this.popup._hovered = true;
+            if (!this.popup.visible()) {
+                this.popup._hovered = true;
+            }
             this.popup._shouldCorrectWidth = false;
             this.popup.open();
         }
@@ -351,10 +352,6 @@ var __meta__ = {
 
             if (this._isShownOnMouseEnter() || this._isShownOnClick()) {
                 that.element.on("mouseenter" + NS, that.options.filter, that._mouseenter.bind(that));
-            }
-
-            if (this.options.autoHide && this._isShownOnMouseEnter() && this.options.position !== "center") {
-                that.element.on("mouseleave" + NS, that.options.filter, that._mouseleave.bind(that));
             }
 
             if (this.options.autoHide && this._isShownOnFocus()) {
@@ -513,9 +510,11 @@ var __meta__ = {
         _show: function(target) {
             var that = this,
                 current = that.target();
+            let shouldBindPopup = false;
 
             if (!that.popup) {
                 that._initPopup();
+                shouldBindPopup = true;
             }
 
             if (current && current[0] != target[0]) {
@@ -541,6 +540,20 @@ var __meta__ = {
             });
 
             that._openPopup();
+
+            if (this.options.autoHide && this._isShownOnMouseEnter()) {
+                target.on("mouseleave" + NS, that._mouseleave.bind(that));
+                that._target = target;
+            }
+
+            if (shouldBindPopup) {
+                if (that.options.autoHide && this._isShownOnMouseEnter()) {
+                    that.popup.wrapper.on("mouseleave" + NS, that._mouseleave.bind(that));
+                } else {
+                    that.popup.element.on("click" + NS, ".k-tooltip-button", that._closeButtonClick.bind(that));
+                }
+                shouldBindPopup = false;
+            }
         },
 
         _initPopup: function() {
@@ -584,12 +597,6 @@ var __meta__ = {
 
             that.content = wrapper.find(".k-tooltip-content");
             that.arrow = wrapper.find(".k-callout");
-
-            if (options.autoHide && this._isShownOnMouseEnter()) {
-                wrapper.on("mouseleave" + NS, that._mouseleave.bind(that));
-            } else {
-                wrapper.on("click" + NS, ".k-tooltip-button", that._closeButtonClick.bind(that));
-            }
         },
 
         _closeButtonClick: function(e) {
@@ -598,13 +605,25 @@ var __meta__ = {
         },
 
         _mouseleave: function(e) {
-            var that = this;
+            const that = this;
+            const fromTooltip = $(e.relatedTarget).closest('.k-animation-container').length > 0;
+            let closeOnRelatedTarget = !$(e.relatedTarget).is(that.element);
 
+            if (that.options.filter) {
+                if (closeOnRelatedTarget) {
+                    closeOnRelatedTarget = !that.element.find(e.relatedTarget).length > 0;
+                } else {
+                    closeOnRelatedTarget = !closeOnRelatedTarget;
+                }
+            }
+
+            const shouldClose = that.options.position === "center" ? (closeOnRelatedTarget && !fromTooltip) : true;
             clearTimeout(that.timeout);
-
-            that.timeout = setTimeout(function() {
-                that._closePopup(e.currentTarget);
-            }, that.options.hideAfter);
+            if (shouldClose) {
+                that.timeout = setTimeout(function() {
+                        that._closePopup(e.currentTarget);
+                }, that.options.hideAfter);
+            }
         },
 
         _blur: function(e) {
@@ -614,6 +633,7 @@ var __meta__ = {
         _closePopup: function(target) {
             if (this.popup && !this.popup._hovered) {
                 this.popup.close();
+                $(this._target).off("mouseleave" + NS);
             } else {
                 restoreTitle($(target));
             }

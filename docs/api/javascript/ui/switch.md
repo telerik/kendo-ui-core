@@ -58,6 +58,8 @@ If set to `true`, the Switch will render into its read-only state.
 
 Defines the text of the `checked` and `unchecked` labels that are displayed within the Switch. All labels support localization.
 
+> The `messages` property is applicable only for the `Default` and `Classic` themes. All other themes, by design, do not show `checked` and `unchecked` messages.
+
 #### Example
 
     <input id="switch" />
@@ -75,6 +77,8 @@ Defines the text of the `checked` and `unchecked` labels that are displayed with
 
 The label for the checked state of the Switch.
 
+> The `messages` property is applicable only for the `Default` and `Classic` themes. All other themes, by design, do not show `checked` and `unchecked` messages.
+
 #### Example
 
     <input id="switch" />
@@ -90,6 +94,8 @@ The label for the checked state of the Switch.
 ### messages.unchecked `String`*(default: "Off")*
 
 The label for the unchecked state of the Switch.
+
+> The `messages` property is applicable only for the `Default` and `Classic` themes. All other themes, by design, do not show `checked` and `unchecked` messages.
 
 #### Example
 

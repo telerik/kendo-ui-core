@@ -806,7 +806,7 @@ A string, DOM element or jQuery object which represents the node. A string is tr
     });
 
     var treeview = $("#treeview").data("kendoTreeView");
-    var dataItem = treeview.dataItem(".k-item:first");
+    var dataItem = treeview.dataItem(".k-treeview-item:first");
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.text); // displays "foo"
     </script>
