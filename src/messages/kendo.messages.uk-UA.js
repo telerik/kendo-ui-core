@@ -118,13 +118,29 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "columns": "Kолони",
   "sortAscending": "Сортування за зростанням",
   "sortDescending": "Сортування за спаданням",
-  "settings": "Параметри стовпців",
-  "done": "Зроблений",
-  "lock": "Замикати",
-  "unlock": "Відімкнути"
+  "filter": "Фільтр",
+  "clearAllFilters": "Очистити всі фільтри",
+  "column": "Колонка",
+  "columns": "Колонки",
+  "columnVisibility": "Видимість колонки",
+  "clear": "Очистити",
+  "cancel": "Скасувати",
+  "done": "Готово",
+  "settings": "Редагувати налаштування колонки",
+  "lock": "Заблокувати колонку",
+  "unlock": "Розблокувати колонку",
+  "stick": "Закріпити колонку",
+  "unstick": "Відкріпити колонку",
+  "setColumnPosition": "Задати позицію колонки",
+  "apply": "Застосувати",
+  "reset": "Скинути",
+  "buttonTitle": "Редагувати налаштування колонки {0}",
+  "movePrev": "Перемістити вліво",
+  "moveNext": "Перемістити вправо",
+  "groupColumn": "Групування по колонці",
+  "ungroupColumn": "Видалити групування по колонці"
 });
 }
 
