@@ -1,5 +1,46 @@
 (function($, undefined) {
 
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+kendo.ui.ColorGradient.prototype.options.messages =
+$.extend(true, kendo.ui.ColorGradient.prototype.options.messages,{
+    "contrastRatio": "Коефіцієнт контрастності:",
+    "fail": "Fail",
+    "pass": "Pass",
+    "hex": "HEX",
+    "toggleFormat": "Змінити формат",
+    "red": "Red",
+    "green": "Green",
+    "blue": "Blue",
+    "alpha": "Alpha"
+});
+}
+
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+kendo.ui.FlatColorPicker.prototype.options.messages =
+$.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
+  "apply": "Застосувати",
+  "cancel": "Cкасувати",
+  "noColor": "колір не вибрано",
+  "clearColor": "Очистити"
+});
+}
+  
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+kendo.ui.ColorPicker.prototype.options.messages =
+$.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
+  "apply": "Застосувати",
+  "cancel": "Cкасувати",
+  "noColor": "колір не вибрано",
+  "clearColor": "Очистити"
+});
+}
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
