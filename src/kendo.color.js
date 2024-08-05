@@ -430,6 +430,12 @@ function parseColor(value, safe) {
         ret = new RGB(parseFloat(m[1]) / 100,
             parseFloat(m[2]) / 100,
             parseFloat(m[3]) / 100, parseFloat(m[4]));
+    } else if ((m = /^color\(\s*srgb\s*([0-9]*\.?[0-9]+)\s+([0-9]*\.?[0-9]+)\s+([0-9]*\.?[0-9]+)\s*(\/\s+([0-9]*\.?[0-9]+))?\)/.exec(color))) {
+        ret = new RGB(
+            parseFloat(m[1]),
+            parseFloat(m[2]),
+            parseFloat(m[3]),
+            parseFloat(m[5] || '1'));
     }
 
     if (ret) {
