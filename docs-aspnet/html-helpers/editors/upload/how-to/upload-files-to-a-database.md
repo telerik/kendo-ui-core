@@ -8,7 +8,7 @@ slug: howto_uploadfilesdatabases_uploadaspnetmvc
 
 # Upload Files to Databases
 
-To see the example, refer to the project on how to [upload files to a database](https://www.telerik.com/support/code-library/uploading-files-to-a-database-a709c50f6296).
+To see the example, refer to the project on how to [upload files to a database](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/UploadFilesToDataBase).
 
 ## See Also
 

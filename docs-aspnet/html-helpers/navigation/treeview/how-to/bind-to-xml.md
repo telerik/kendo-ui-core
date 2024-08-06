@@ -9,7 +9,7 @@ position: 0
 
 # Bind TreeViews to XML
 
-To see the example, refer to the project on how to [bind the TreeView to XML](https://www.telerik.com/support/code-library/binding-to-xml) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [bind the TreeView to XML](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/TreeViewBindingToXml) in ASP.NET MVC applications.
 
 ## See Also
 
