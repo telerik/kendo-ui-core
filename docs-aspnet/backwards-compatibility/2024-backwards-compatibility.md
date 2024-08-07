@@ -24,6 +24,9 @@ As of the Q2 2024 release, the `Telerik.Web.Captcha` package targets .NET Framew
 
 **Telerik.Web.Spreadsheet**
 As of the Q2 2024 release, the `Telerik.Web.Spreadsheet` package targets .NET Framework 4.6.2
+
+**Kendo.Mvc.Export**
+As of the Q2 2024 release, the `Kendo.Mvc.Export.dll` assembly targets .NET Framework 4.6.2
 {% endif %}
 
 ### Chart
