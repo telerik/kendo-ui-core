@@ -14,7 +14,7 @@ The Dock Manager is a UI component that replicates the docks, along with their b
 
 ## Functionality and Features
 
-* [Docking Panes({% slug dock_types_kendoui_dockmanager %})&mdash;You can dock panes globally or within other inner panes.
+* [Docking Panes]({% slug dock_types_kendoui_dockmanager %})&mdash;You can dock panes globally or within other inner panes.
 * [Pane Types]({% slug pane_types_kendoui_dockmanager %})&mdash;Use different pane types depending on the hierarchical structure you want to achieve.
 
 ## Next Steps 
