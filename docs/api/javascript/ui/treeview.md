@@ -947,7 +947,7 @@ The nodes that are to be expanded.
     treeview.expand(treeview.findByText("foo"));
 
     // expand all loaded items
-    treeview.expand(".k-item");
+    treeview.expand(".k-treeview-item");
     </script>
 
 ### expandPath
