@@ -2,7 +2,7 @@
 title: Overview
 page_title: jQuery MultiColumnComboBox Documentation | MultiColumnComboBox Accessibility
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_multicombobox_widget
+slug: accessibility_kendoui_multicolumncombobox_widget
 position: 1
 ---
 
@@ -11,7 +11,7 @@ position: 1
 The MultiColumnComboBox is accessible by screen readers and provides [`WAI-ARIA`](https://www.w3.org/WAI/ARIA/apg/), [`Section 508`](https://www.section508.gov/), [`WCAG 2.2`](https://www.w3.org/TR/WCAG22/), and keyboard support.
 
 For more information, refer to:
-* [Keyboard navigation by the Kendo UI Menu]({% slug keynav_kendoui_multicolumncombobox_widget %})
+* [Keyboard navigation by the Kendo UI MultiColumnComboBox]({% slug keynav_kendoui_multicolumncombobox_widget %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
 
