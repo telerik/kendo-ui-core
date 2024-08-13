@@ -123,7 +123,7 @@ Note: position configuration, other than `inline`, requires the badge to be alig
     <button class="k-button">Edge badge <span id="badge-edge"></span></button>
     <button class="k-button">Outside badge <span id="badge-outside"></span></button>
     <script>
-        $('#badge-inside').kendoBadge({position: 'inline', themeColor: 'primary'});
+        $('#badge-inline').kendoBadge({position: 'inline', themeColor: 'primary'});
         $('#badge-inside').kendoBadge({align: 'top end', position: 'inside', themeColor: 'primary'});
         $('#badge-edge').kendoBadge({align: 'top end', position: 'edge', themeColor: 'primary'});
         $('#badge-outside').kendoBadge({align: 'top end', position: 'outside', themeColor: 'primary'});

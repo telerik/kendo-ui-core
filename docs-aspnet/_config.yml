@@ -121,7 +121,7 @@ navigation:
         title: "Creating Custom Script Bundles"
         position: 5
      "installation":
-        title: "Installation"
+        title: "Installation & Upgrade"
         position: 4
      "installation-mvc":
         title: "Installation"
