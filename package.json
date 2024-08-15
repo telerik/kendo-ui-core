@@ -24,7 +24,6 @@
     "@rollup/stream": "^2.0.0",
     "acorn": "^8.8.0",
     "axe-core": "^4.4.2",
-    "bootstrap": "^4.0.0",
     "chai": "^4.3.9",
     "colors": "1.4.0",
     "cz-conventional-changelog": "1.2.0",
