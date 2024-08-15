@@ -293,6 +293,8 @@ To define editors based on a condition, you can use a switch case as shown below
 ## Dynamic Grid In Razor Page
 
 ```Index.cshtml
+    @Html.AntiForgeryToken()
+
     <script>
         function sendTokens() {
             return kendo.antiForgeryTokens();
