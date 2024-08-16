@@ -7,7 +7,7 @@ slug: howto_usekendowithaspnetbundles_aspnetmvc
 
 # Use Kendo UI with ASP.NET Bundles
 
-To see the example, refer to the project on how to [use Kendo UI with ASP.NET bundles](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/general/KendoAspNetBundles/KendoAspNetBundles).
+To see the example, refer to the project on how to [use Kendo UI with ASP.NET bundles](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/Bundles).
 
 ## See Also
 
