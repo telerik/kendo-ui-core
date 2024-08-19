@@ -20,7 +20,12 @@ Even though you do not have to always create a `DataSource` object, most Kendo U
 
 The following example contains static local data and demonstrates how to try to update the data source. When you select an item in the Grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the Grid updates.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
          k-data-source="gridData"
@@ -66,7 +71,12 @@ However, if you click the **UPDATE FROM CODE** button, nothing appears to happen
 
 **Solution** Create and place in a scope the data source object yourself. Only the `controller` changes while the markup is the same. Use `kendo.data.ObservableArray` to update the data source.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
          k-data-source="gridData"

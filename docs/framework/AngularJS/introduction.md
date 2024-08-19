@@ -46,7 +46,12 @@ You can reference a widget by using any of the following approaches:
 
 * Getting instances in the `controller`&mdash;To call methods on a widget from your controller, you might sometimes need a reference to the widget. To get such, assign a name to the `kendo-widget-name` attribute.
 
-    ```dojo
+    ```
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+        
         <div ng-app="app" ng-controller="MyCtrl">
           <input kendo-datepicker="datePicker" k-on-change="onChange()">
         </div>
@@ -61,7 +66,12 @@ You can reference a widget by using any of the following approaches:
 
 * Using the `tag` directive&mdash;As of the Kendo UI Q1 2015 release, if you use the `tag` directive variant, you can set the `k-scope-field` to achieve the same.
 
-    ```dojo
+    ```
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
         <div ng-app="app" ng-controller="MyCtrl">
           <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()"></kendo-date-picker>
         </div>
@@ -76,7 +86,12 @@ You can reference a widget by using any of the following approaches:
 
 * Setting Options in a Link Function&mdash;As of the Kendo UI Q2 2015 release, the timeout initialization of the widgets is removed. To set the options of a widget as part of the link function of a custom directive, use `k-ng-delay` and `timeout`.
 
-    ```dojo
+    ``` 
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
         <div id="example" ng-app="KendoDemos">
             <div class="demo-section k-header" ng-controller="MyCtrl">
                 <my-custom-directive />

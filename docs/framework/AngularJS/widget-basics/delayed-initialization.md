@@ -39,7 +39,12 @@ The following example demonstrates that the Grid is created only when the `gridO
 
 You can load the widget data with a `$http` call and initialize the widget when the data is available.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
   <select kendo-drop-down-list k-options="customOptions" k-ng-delay="customOptions.dataSource"></select>
 </div>
