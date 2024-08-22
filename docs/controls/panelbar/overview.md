@@ -21,6 +21,7 @@ Depending on the requirements, you can define its structure by using HTML or by 
 * [Animations]({% slug animations_kendoui_panelbar %})–The PanelBar supports various open and close animations.
 * [Items]({% slug items_kendoui_panelbar %})–You can use the available approaches and add and remove PanelBar items.
 * [Content operations]({% slug content_kendoui_panelbar %})–The PanelBar provides options for nesting the content of its items and to load its content with AJAX.
+* [Accessibility]({% slug accessibility_kendoui_panelbar_widget %})&mdash;The PanelBar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps
 

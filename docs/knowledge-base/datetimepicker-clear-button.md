@@ -28,51 +28,44 @@ How can I add a **Clear** button to the DateTimePicker?
 
 ## Solution
 
-1. Add `span` with a clear icon to the `k-select` element.
+1. Add `span` with a clear icon to the component wrapper element.
 1. Handle the [`click`](https://api.jquery.com/click/) event of the `span`.
 1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/value) method to set `value` to `null`.
 
 ```dojo
-<style>
-    .k-datetimepicker {
+    <style>
+      .k-datetimepicker {
         width: 50%;
-    }
+      }
+      
+      #icon {
+        top: 0.4rem;
+      }
+    </style>
 
-    .k-datetimepicker .k-select {
-        width: 5em;
-    }
-
-    .k-datetimepicker .k-picker-wrap {
-        padding-right: 5em;
-    }
-
-    .k-link-clear {
-        margin-left: .428em;
-    }
-</style>
-
-<input id="dtp" />
-
-<script>
-    $(document).ready(function() {
+    <input id="dtp" />
+    <script>
+      $(document).ready(function() {
         var dtp = $("#dtp").kendoDateTimePicker({
-            dateInput: true
+          dateInput: true
         }).data("kendoDateTimePicker");
-        var clearButton = '<span class="k-link k-link-clear" aria-label="Clear the DateTimePicker"><span unselectable="on" class="k-icon k-i-close" aria-controls="dtp_timeview"></span></span>';
 
-        dtp.wrapper.find(".k-select").append(clearButton);
 
-        $(".k-link.k-link-clear").on("click", function(e) {
-            var dtp = $(e.target).closest(".k-datetimepicker").find("input[data-role='datetimepicker']").data("kendoDateTimePicker");
-            var di = $(e.target).closest(".k-datetimepicker").find("input[data-role='datetimepicker']").data("kendoDateInput");
+        var clearButton = `<span id="icon"></span>`;
+        dtp.wrapper.append(clearButton);
+        
+        kendo.ui.icon($("#icon"), { icon: 'x' });
 
-            dtp.value(null);
-            dtp.trigger("change");
+        $("#icon").on("click", function(e) {
+          var dtp = $(e.target).closest(".k-datetimepicker").find("input[data-role='datetimepicker']").data("kendoDateTimePicker");
+          var di = $(e.target).closest(".k-datetimepicker").find("input[data-role='datetimepicker']").data("kendoDateInput");
 
-            di.value(null);
-            di.trigger("change");
+          dtp.value(null);
+          dtp.trigger("change");
+
+          di.value(null);
+          di.trigger("change");
         });
-
-    });
-</script>
+      });
+    </script>
 ```

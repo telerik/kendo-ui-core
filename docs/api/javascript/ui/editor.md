@@ -2759,6 +2759,36 @@ The available editor commands are:
       })
     </script>
 
+#### Example - add grouped tools collection using multi array
+
+    <textarea id="editor"></textarea>
+    <script>
+      $("#editor").kendoEditor({
+        tools: [
+          [
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough"
+          ],
+          [
+            "justifyLeft",
+            "justifyCenter",
+            "justifyRight",
+            "justifyFull"
+          ],
+          [
+            "insertUnorderedList",
+            "insertOrderedList",
+            "indent",
+            "outdent"
+          ],
+        ]
+      });
+    </script>
+
+> Grouping of tools works as expected only for tools of type "button".
+
 ### tools.name `String`
 
 When specifying a tool as an object, a tool name is required. **Please note that "undo" and "redo" are reserved tool names.**

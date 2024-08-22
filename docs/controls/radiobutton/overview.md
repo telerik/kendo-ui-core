@@ -16,6 +16,7 @@ The RadioButton allows you to provide radiobutton functionality to `<input />` e
 
 * [Appearance]({% slug appearance_radiobutton_widget %})&mdash;The RadioButton provides styling options that allow you to change its appearance.
 * [Label]({% slug label_radiobutton_widget %})&mdash;You can set a label next to the RadioButton.
+* [Accessibility]({% slug accessibility_kendoui_radiobutton_widget %})&mdash;The RadioButton is accessible for screen readers and supports WAI-ARIA attributes.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the RadioButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/radiobutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

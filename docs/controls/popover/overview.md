@@ -16,6 +16,7 @@ The Kendo UI Popover widget for jQuery provides a simple way to display addition
 
 * [Templates]({% slug templates_kendoui_popover_widget %})&mdash;The Popover allows you to customize its content by using a template.
 * [Events]({% slug events_kendoui_popover_widget %})&mdash;The Popover component supports convenient events that allow you to extend its default functionality.
+* [Accessibility]({% slug accessibility_kendoui_popover_widget %})&mdash;The Popover is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## Next Steps 
 

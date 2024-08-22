@@ -23,6 +23,7 @@ However, if the Notification element is intended to contain static (non-popup) n
 * [Hiding]({% slug hidingw_kendoui_notification %})&mdash;The Notification enables you to configure the duration it will remain open after its initial load.  
 * [Templates]({% slug templates_kendoui_notification %})&mdash;You can also apply a template to the corresponding built-in or custom notification type and customize the behavior and styling of the component.
 * [Globalization]({% slug globalization_kendoui_notification %})&mdash;The Notification provides globalization options  to fit well in any application no matter what languages and locales are required, and also enables you to position it and render its content in a right-to-left (RTL) direction.
+* [Accessibility]({% slug accessibility_kendoui_notification_widget %})&mdash;The Notification is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## See Also
 

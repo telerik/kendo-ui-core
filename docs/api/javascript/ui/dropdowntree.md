@@ -817,6 +817,8 @@ The component calls the valueMapper function when the component receives a value
                     }
                 }
             },
+            dataTextField: "FullName",
+            dataValueField: "EmployeeId",
             value: '8'
         });
     </script>

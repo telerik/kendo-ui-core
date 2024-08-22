@@ -202,7 +202,7 @@ var __meta__ = {
         },
 
         _addButton: function(el, options) {
-            if (this.options.selection === NONE) {
+            if (this.options.selection === NONE || (options.command && !options.togglable)) {
                 delete options.selected;
 
                 return new Button(el, options);

@@ -2596,7 +2596,7 @@ If invoked, the Spreadsheet will not save the generated file.
 
 ### excelImport
 
-Fired when the user clicks the **Open** toolbar button.
+Fired when the user imports a file after selecting it from the window prompt. The event is fired before the file importing has finished.
 
 #### Event Data
 

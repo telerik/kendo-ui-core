@@ -1570,7 +1570,7 @@ var __meta__ = {
             } else if (options.buttons && options.buttons.length) {
                 options.buttons = this._processInner(options.buttons, uid);
 
-                if (options.buttons.every(b => b.togglable)) {
+                if (options.buttons.some(b => b.togglable)) {
                     groupName = options.buttons[0].group;
 
                     if (!!groupName && options.buttons.every(b => b.group === groupName)) {
