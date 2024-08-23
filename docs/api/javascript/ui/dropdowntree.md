@@ -797,30 +797,30 @@ The component calls the valueMapper function when the component receives a value
 
     <input id="dropdowntree">
     <script>
-        $("#dropdowntree").kendoDropDownTree({
-            loadOnDemand: {
-                    valueMapper: function (options) {
-                    options.success([[2, 8]]);
-                }
-            },
-            dataSource: {
-                transport: {
-                    read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                        dataType: "jsonp"
-                    }
-                },
-                schema: {
-                    model: {
-                        id: "EmployeeId",
-                        hasChildren: "HasEmployees"
-                    }
-                }
-            },
-            dataTextField: "FullName",
-            dataValueField: "EmployeeId",
-            value: '8'
-        });
+      $("#dropdowntree").kendoDropDownTree({
+        dataTextField: "FullName",
+        dataValueField: "EmployeeId",
+        loadOnDemand: {
+          valueMapper: function (options) {
+            options.success([[2, 8]]);
+          }
+        },
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/Employees",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeId",
+              hasChildren: "HasEmployees"
+            }
+          }
+        },
+        value: '8'
+      });
     </script>
 
 ### messages `Object`
