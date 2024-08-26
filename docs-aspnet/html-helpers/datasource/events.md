@@ -8,65 +8,83 @@ position: 5
 
 # Events
 
-You can subscribe to [all DataSource events](/api/kendo.mvc.ui.fluent/datasourceeventbuilder) and then use them to further customize the behavior of the DataSource.
+You can subscribe to the [available DataSource events](/api/kendo.mvc.ui.fluent/datasourceeventbuilder) and further customize the behavior of the DataSource.
 
-The example below demonstrates how to use the [`Error`](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#errorsystemstring), [`RequestStart`](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#requeststartsystemstring) and [`RequestEnd`](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#requestendsystemstring) events.
+## Handling by Handler Name
+
+The following example demonstrates how to subscribe to events by a handler name.
 
 ```HtmlHelper
-    @using Kendo.Mvc.UI
-
-   @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.ProductViewModel>()
+   @(Html.Kendo().DataSource<ProductViewModel>()
         .Name("dataSource1")
         .Ajax(dataSource => dataSource
-        .Read(read => read.Action("Products_Read", "DataSource"))
-        .ServerOperation(true)
-        .PageSize(12)
-        .Events(e=>e.Error("error_handler").RequestStart("onRequestStart").Request("onRequestEnd"))
+            .Events(ev => ev.RequestStart("onRequestStart"))
+            .Read(read => read.Action("Products_Read", "DataSource"))
+            ... // Additional configuration
         )
     )
+
+    <script>
+        function onRequestStart(e){
+            // Handle the RequestStart event that triggers the DataSource makes a request to the remote service.
+        }
+    </script>
 ```
+
 {% if site.core %}
 ```TagHelper
-    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" server-operation="true" page-size="12"
-        on-error="error_handler"
-        on-request-end="onRequestEnd"
-        on-request-start="onRequestStart">
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" on-request-start="onRequestStart">
         <transport>
             <read url="@Url.Action("Products_Read", "DataSource")" />
         </transport>
+        <!-- Additional configuration -->
+    </kendo-datasource>
+
+    <script>
+        function onRequestStart(e){
+            // Handle the RequestStart event that triggers when the DataSource makes a request to the remote service.
+        }
+    </script>
+```
+{% endif %}
+
+## Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+```HtmlHelper
+   @(Html.Kendo().DataSource<ProductViewModel>()
+        .Name("dataSource1")
+        .Ajax(dataSource => dataSource
+            .Read(read => read.Action("Products_Read", "DataSource"))
+            .Events(e => e.RequestStart(@<text>
+                function() {
+                    // Handle the RequestStart event inline.
+                }
+                </text>)
+            )
+            ... // Additional configuration
+        )
+    )
+```
+
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" on-request-start="function() {
+            // Handle the RequestStart event inline.
+        }">
+        <transport>
+            <read url="@Url.Action("Products_Read", "DataSource")" />
+        </transport>
+        <!-- Additional configuration -->
     </kendo-datasource>
 ```
 {% endif %}
-```JavaScript
-    function error_handler(e){
-        if (e.errors) {
-            var message = "Errors:\n";
-            $.each(e.errors, function (key, value) {
-                if ('errors' in value) {
-                    $.each(value.errors, function () {
-                        message += this + "\n";
-                    });
-                }
-            });
-            alert(message);
-        }
-    }
-    function onRequestStart(e){
-        if(e.type=="create"){
-            //apply logic
-        }
-    }
-    function onRequestEnd(e){
-        //access the raw remote service response
-        console.log(e.response);
-    }
-```
-
-## Next Steps
-
-* [API for Configuring the DataSource Events](/api/kendo.mvc.ui.fluent/datasourceeventbuilder)
-* [Using the DataSource Events (Demo)](https://demos.telerik.com/{{ site.platform }}/datasource/events)
 
 ## See Also
 
-* [Using the API of the DataSource for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datasource/api)
+* [DataSource Server-Side API for {{ site.framework}}](/api/datasource)
+{% if site.core %}
+* [DataSource Server-Side TagHelper API for ASP.NET Core](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/datasource)
+{% endif %}
+* [DataSource Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)

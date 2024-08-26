@@ -19,76 +19,71 @@ component: grid
  </tr>
  <tr>
   <td>Created with Product Version</td>
-  <td>2019.1.220</td>
+  <td>2024.2.514</td>
  </tr>
 </table>
 
 ## Description
 
-I want to display the validation summary instead of tooltips in the Grid's Popup edit template.
+How can I display the validation summary instead of tooltips in the Grid's Popup edit template?
 
 ## Solution
 
-The {{ site.product }} Grid with popup editing uses a Validator that is designed to show the errors as tooltips:
+The {{ site.product }} Grid configured for Popup editing uses a Validator that shows the error messages as tooltips:
 
 ![{{ site.product_short }} Grid popup validation](images/edit-popup-validation.png)
 
-You can create a validation summary with a few lines of JavaScript.
+You can show a validation summary with a few lines of JavaScript.
 
-1. Override the `errorTemplate` of the editable internal widget which holds the validator
-1. Add an `Edit()` event handler and bind to the validate event of the validator
-1. Generate the Validation summary and append it to a predefined HTML element in your popup template
+1. Handle the [`Edit`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#editsystemstring) event of the Grid.
+1. Get a reference to the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/validator/overview) and update its options by using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/validator/methods/setoptions) method.
 
-```Index.cshtml
-    .Events(e => e.Edit("addValidationSummary"))
+```HtmlHelper
+    @(Html.Kendo().Grid <OrderViewModel>()
+        .Name("grid")
+        .Events(e => e.Edit("addValidationSummary"))
+        ...
+    )
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-grid name="grid" on-edit="addValidationSummary">
+        <!-- Other configuration -->
+    </kendo-grid>
+```
+{% endif %}
+```Scripts
     <script>
-        kendo.ui.Editable.fn.options.errorTemplate = "<span style='color:red;'>*</span>";
-
         function addValidationSummary(e) {
             var validator = e.container.data("kendoValidator");
-            validator.bind("validate", function (e) {
-                var errors = this.errors();
-                if (errors.length) {
-                    var html = "<ul>";
-                    for (var i = 0; i < errors.length; i++) {
-                        html += "<li>" + errors[i] + "</li>";
-                    }
-                    html += "</ul>";
-                    $("#errors").html($(html));
-                }
+            validator.setOptions({
+                errorTemplate: "", // Remove the "errorTemplate". This way, the tooltip will not show.
+                validationSummary: true // Enable the validation summary option.
             });
         }
     </script>
 ```
-```MyCustomPopup.cshtml
-    @model ProjectName.Models.Order
-    @using Kendo.Mvc.UI
-    <div id="errors" style="color:red;"></div>
-        <fieldset>
-            <legend>Order</legend>
-            @Html.HiddenFor(model => model.Id)
-            <div class="editor-label">
-                @Html.LabelFor(model => model.OrderDate)
-            </div>
-            <div class="editor-field">
-                @Html.Kendo().DatePickerFor(model => model.OrderDate)
-                @Html.ValidationMessageFor(model => model.OrderDate)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CreatedBy)
-            </div>
-            <div class="editor-field">
-                @Html.Kendo().TextBoxFor(model => model.CreatedBy)
-                @Html.ValidationMessageFor(model => model.CreatedBy)
-            </div>
-        </fieldset>
-```
 
-This is the result:
+As a result, the error messages will be displayed as a list above the editors:
 
 ![{{ site.product_short }} Grid popup validation summary](images/edit-popup-validation-summary.png)
 
-For more information on validation, see the following articles:
+To keep the tooltips, as well, do not reset the "errorTemplate" option:
+
+```Scripts
+    <script>
+        function addValidationSummary(e) {
+            var validator = e.container.data("kendoValidator");
+            validator.setOptions({
+                validationSummary: true
+            });
+        }
+    </script>
+```
+
+For more information on validation, refer to the following articles:
 
 * [Show Server Validation Errors in a Grid Edit Popup]({% slug grid-popup-editing-show-server-validation-errors %})
 * [Validation in {{ site.product }}](https://docs.telerik.com/{{ site.platform }}/getting-started/helper-basics/validation)

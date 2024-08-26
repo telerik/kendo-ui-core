@@ -1,10 +1,11 @@
 (function() {
-    var TextArea = kendo.ui.TextArea,
-        textarea;
+    let TextArea = kendo.ui.TextArea,
+        textarea, textareaWithAttribute;
 
     describe("kendo.ui.TextArea initialization", function() {
         beforeEach(function() {
             textarea = $("<textarea />").appendTo(Mocha.fixture);
+            textareaWithAttribute = $("<textarea maxlength='5' />").appendTo(Mocha.fixture);
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
@@ -264,6 +265,26 @@
             var wrapper = widget.wrapper;
 
             assert.isTrue(wrapper[0].classList.contains("!k-flex-col"));
+        });
+
+        it("Should not set maxlength by default", function() {
+            let widget = new TextArea(textarea);
+
+            assert.notOk(widget.element.attr("maxlength"));
+        });
+
+        it("Should set maxlength from element attribute", function() {
+            let widget = new TextArea(textareaWithAttribute);
+
+            assert.equal(widget.element.attr("maxlength"), 5);
+        });
+
+        it("Should set maxLength from options", function() {
+            let widget = new TextArea(textareaWithAttribute, {
+                maxLength: 10
+            });
+
+            assert.equal(widget.element.attr("maxlength"), 10);
         });
     });
 }());

@@ -35,12 +35,14 @@ To configure the Grid for {{ site.framework }} to do local binding:
 
 1. Open the `HomeController.cs` and return an `IEnumerable` of the model type with the View. This is the `View()` which holds the Grid definition.
 
+    {% if site.core %}
+    ```HomeController.cs      
         public IActionResult Index()
         {
             // Returns a collection of OrderViewModels.
             var model = orderService.Read();
 
-             /* For a quick test, you can mock the data, and copy and paste this snippet.
+                /* For a quick test, you can mock the data, and copy and paste this snippet.
             var model = Enumerable.Range(1, 20).Select(i => new OrderViewModel
             {
                 OrderID = i,
@@ -50,6 +52,26 @@ To configure the Grid for {{ site.framework }} to do local binding:
 
             return View(model);
         }
+    ```
+    {% else %}
+    ```HomeController.cs  
+        public ActionResult Index()
+        {
+            // Returns a collection of OrderViewModels.
+            var model = orderService.Read();
+
+            /* For a quick test, you can mock the data, and copy and paste this snippet.
+            var model = Enumerable.Range(1, 20).Select(i => new OrderViewModel
+            {
+                OrderID = i,
+                ShipCountry = i % 2 == 0 ? "ShipCountry 1" : "ShipCountry 2"
+            });
+            */
+
+            return View(model);
+        }  
+    ```
+    {% endif %}
 
 1. In the `Index.cshtml` view, configure the Grid to accept the model in its constructor and set `ServerOperations(false)`.
 

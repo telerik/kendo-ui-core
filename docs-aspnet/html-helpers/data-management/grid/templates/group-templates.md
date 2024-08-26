@@ -62,6 +62,44 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 {% if site.mvc %}In a server-binding scenario, you can set the group templates without the `Client` prefix&mdash;`GroupHeaderTemplate`, `GroupHeaderColumnTemplate`, and `GroupFooterTemplate`. For more information, refer to the demo on [server aggregates of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serveraggregates).
 {% else %}
+
+## Using an external DataSource
+
+When the DataSource is part of the Grid definition, as in the example above, the Grid will infer the aggregates per column field from the DataSource definition. When using an external DataSource and passing it to the Grid via the `DataSourceId` method, the aggregates per column need to be defined manually via the column's `Aggregates` method, so the aggregates will be accessible in the group templates:
+
+```HtmlHelper
+    @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("dataSource1")
+        .Custom(x => x
+            .Type("odata")
+            .Transport(transport =>
+            {
+                transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders").DataType("json"));
+            })
+            .PageSize(20)
+            .Aggregates(aggregates =>
+            {
+                aggregates.Add(p => p.Freight).Sum();
+            })
+        )
+    )
+
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.OrderID).Filterable(false);
+            columns.Bound(e => e.Freight).Aggregates(new string[]{"sum"}).ClientGroupFooterTemplate("Sum: #=sum#");
+            columns.Bound(e => e.ShipCity).Width(150);
+        })
+        .DataSource("dataSource1")
+        .Groupable()
+        .Pageable()
+        .Sortable()
+        .Filterable()
+    )
+```
+
 ## Limitations
 
 The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates which makes the usage of `.ServerOperations(true)` in this case incompatible.

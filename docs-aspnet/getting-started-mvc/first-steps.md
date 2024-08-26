@@ -29,10 +29,7 @@ Other popular approaches for starting with Telerik UI for ASP.NET MVC include:
 
 * Telerik UI for ASP.NET MVC requires the <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
 
-* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later.
-
-   For Visual Studio 2017 or later, you must install the **ASP.NET & web development** workload. See Microsoft's <a href="/docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019#step-4---choose-workloads" target="_blank">Install Visual Studio workloads</a> documentation for guidance.
-   
+* [Visual Studio](https://www.visualstudio.com/downloads/) 2019, 2022, or later.
 * [Telerik account](https://www.telerik.com/account).
 
 ## Downloading and Installing
@@ -69,13 +66,19 @@ After the Visual Studio Extensions are installed, create a Telerik ASP.NET MVC a
 
 	![{{ site.product_short }} Create a new Telerik application](../getting-started-mvc/images/create-new-project-mvc.png)
 
-1. Select the **GRID AND MENU** template.
+1. Configure the project. Click **Create**.
+
+    ![{{ site.product_short }} Configure the project](../getting-started-mvc/images/configure-new-mvc-project.png)
+
+1. Select the **GRID AND MENU** template. Click **Next**.
 
    For more information on the additional predefined Telerik template options, refer to the [Creating New Projects]({% slug newprojectwizards_visualstudio_aspnetcore %}) article. 
 
 	![{{ site.product_short }} New Project Wizard templates](../getting-started-mvc/images/create-new-project-templates-mvc.png)
 
-1. Select the **Default-v2** visual theme for your Telerik ASP.NET MVC Application, and click **Finish** to complete the creation of the application.
+1. Choose a [Theme](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/overview#using-the-build-process-of-the-themes). Click **Finish**.
+
+![{{ site.product_short }} Choose a Theme](../getting-started-mvc/images/select-theme-project-template-mvc.png)
 
 The newly created application already has a reference to the required `Kendo.Mvc.dll` assembly. The wizard also references the client-side resources (the Kendo UI script and theme-related CSS files) in the `_Layout.cshtml`. 
 

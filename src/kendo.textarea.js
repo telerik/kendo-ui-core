@@ -39,6 +39,7 @@ var __meta__ = {
             that.options.readonly = options.readonly !== undefined ? options.readonly : Boolean(that.element.attr("readonly"));
             that.options.enable = options.enable !== undefined ? options.enable : !(Boolean(that.element.attr("disabled")));
             that.options.placeholder = options.placeholder || that.element.attr("placeholder");
+            that.options.maxLength = options.maxLength || that.element.attr("maxlength");
 
             if (!that.options.value.replace(/\s/g, '').length) {
                 that.options.value = '';

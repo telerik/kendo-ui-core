@@ -88,8 +88,8 @@ The example below relies on the following key steps:
     <script>
         // Use Promises to sync the exports.
         var promises = [
-        $.Deferred(),
-        $.Deferred()
+            $.Deferred(),
+            $.Deferred()
         ];
 
         function exportDataClick(e) { //"Export to Excel" button "click" event handler.
@@ -102,8 +102,8 @@ The example below relies on the following key steps:
             .then(function (productsWorkbook, ordersWorkbook) {
                 // Create a new workbook using the sheets of the "products" and "orders" workbooks.
                 var sheets = [
-                productsWorkbook.sheets[0],
-                ordersWorkbook.sheets[0]
+                    productsWorkbook.sheets[0],
+                    ordersWorkbook.sheets[0]
                 ];
                 sheets[0].title = "Products";
                 sheets[1].title = "Orders";
@@ -111,10 +111,17 @@ The example below relies on the following key steps:
                     sheets: sheets
                 });
                 // Save the new workbook.
-                kendo.saveAs({
-                    dataURI: workbook.toDataURL(),
-                    fileName: "ProductsAndOrders.xlsx"
-                })
+                workbook.toDataURLAsync().then(function(dataURL) {
+                    kendo.saveAs({
+                        dataURI: dataURL,
+                        fileName: "ProductsAndOrders.xlsx"
+                    });
+                });
+
+                promises = [
+                    $.Deferred(),
+                    $.Deferred()
+                ];
             });
         }
         function products_excelExport(e) { //"ExcelExport" event handler of "products" Grid.
