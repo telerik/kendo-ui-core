@@ -65,7 +65,7 @@
     "chokidar": "^3.0.0",
     "braces": "~3.0.3",
     "glob-stream": "^8.0.0",
-    "micromatch": "^4.0.0",
+    "micromatch": "^4.0.8",
     "word-wrap": ">=1.2.4",
     "semver": ">=7.5.2",
     "semver-regex": ">=3.1.4",

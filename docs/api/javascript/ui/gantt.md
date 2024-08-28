@@ -4208,7 +4208,7 @@ If set to `true`, the Gantt Timeline will render both the planned and the actual
         parentId: null,
         title: "Task1",
         plannedStart: new Date("2014/6/17 9:00"),
-        plannedEnd: new Date("2014/6/17 16:00")
+        plannedEnd: new Date("2014/6/17 16:00"),
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 18:00")
       }],

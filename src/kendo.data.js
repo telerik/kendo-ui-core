@@ -1465,6 +1465,15 @@ var __meta__ = {
         }
     }
 
+    function hasNotFetchedItems(items, start, end) {
+        for (let idx = start; idx < end; idx++) {
+            if (items[idx].notFetched) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function compareFilters(expr1, expr2) {
         expr1 = normalizeDescriptor(expr1);
         expr2 = normalizeDescriptor(expr2);
@@ -4505,15 +4514,15 @@ var __meta__ = {
         },
 
         _fetchGroupItems: function(group, options, parents, callback) {
-            var that = this;
-            var groupItemsSkip;
-            var firstItem;
-            var lastItem;
-            var groupItemCount = group.hasSubgroups ? group.subgroupCount : group.itemCount;
-            var take = options.take;
-            var skipped = options.skipped;
-            var pageSize = that.take();
-            var expandedSubGroupItemsCount;
+            let that = this;
+            let groupItemsSkip;
+            let firstItem;
+            let lastItem;
+            let groupItemCount = group.hasSubgroups ? group.subgroupCount : group.itemCount;
+            let take = options.take;
+            let skipped = options.skipped;
+            let pageSize = that.take();
+            let expandedSubGroupItemsCount;
 
             if (options.includeParents) {
                 if (skipped < options.skip) {
@@ -4534,8 +4543,9 @@ var __meta__ = {
                     return false;
                 }
 
+                let lastItemIndex = Math.min(groupItemsSkip + take, groupItemCount - 1);
                 firstItem = group.items[groupItemsSkip];
-                lastItem = group.items[Math.min(groupItemsSkip + take, groupItemCount - 1)];
+                lastItem = group.items[lastItemIndex];
 
                 if (firstItem.notFetched) {
                     that.getGroupItems(group, options, parents, callback, groupItemsSkip, math.round((groupItemsSkip + pageSize) / pageSize));
@@ -4544,6 +4554,11 @@ var __meta__ = {
 
                 if (lastItem.notFetched) {
                     that.getGroupItems(group, options, parents, callback, math.max(math.floor((groupItemsSkip + pageSize) / pageSize), 0) * pageSize, math.round((groupItemsSkip + pageSize) / pageSize));
+                    return true;
+                }
+
+                if (!firstItem.notFetched && !lastItem.notFetched && hasNotFetchedItems(group.items, groupItemsSkip, lastItemIndex)) {
+                    that.getGroupItems(group, options, parents, callback, groupItemsSkip, lastItemIndex);
                     return true;
                 }
             }
