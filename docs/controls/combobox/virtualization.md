@@ -34,6 +34,7 @@ The following example demonstrates how to set the minimum component and DataSour
                 template: '#= OrderID # | #= ShipName #',
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
+                filter: "contains",
                 virtual: {
                     itemHeight: 26,
                     valueMapper: function(options) {

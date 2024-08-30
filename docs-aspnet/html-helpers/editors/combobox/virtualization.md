@@ -97,14 +97,15 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 {% if site.core %}
 ```TagHelper
 <kendo-combobox for="ProductID"
-                datatextfield="ProductName"
-                datavaluefield="ProductID"
-                placeholder="Select product...">
+    datatextfield="ProductName"
+    datavaluefield="ProductID"
+    filter="FilterType.Contains"
+    placeholder="Select product...">
     <datasource type="DataSourceTagHelperType.Custom"
-                server-filtering="true"
-                server-paging="true"
-                custom-type="aspnetmvc-ajax"
-                page-size="80">
+        server-filtering="true"
+        server-paging="true"
+        custom-type="aspnetmvc-ajax"
+        page-size="80">
         <transport>
             <read url="@Url.Action("GetCascadeProducts", "ComboBox")" />
         </transport>
