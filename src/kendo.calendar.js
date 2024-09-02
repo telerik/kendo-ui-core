@@ -1235,7 +1235,7 @@ let __meta__ = {
                     position: "relative",
                     width: (viewWidth * 2) + (2 * margin),
                     display: "flex",
-                    "margin-left": future ? 0 : (-viewWidth - margin)
+                    [future ? "margin-right" : "margin-left"]: (-viewWidth - margin)
                 });
 
                 to[future ? "insertAfter" : "insertBefore"](from);
