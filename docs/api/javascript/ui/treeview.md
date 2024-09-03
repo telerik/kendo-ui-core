@@ -771,7 +771,8 @@ Collapses nodes.
     treeview.collapse(treeview.findByText("foo"));
 
     // collapse all items
-    treeview.collapse(".k-item");
+    treeview.collapse(".k-treeview-item");
+
     </script>
 
 #### Parameters

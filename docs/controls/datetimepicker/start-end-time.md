@@ -19,7 +19,7 @@ To define the desired earliest and latest available time in the built-in TimePic
     
     <script>
         $("#datetimepicker").kendoDateTimePicker({
-            startTime: new Date(2023,1,3,8,30,0)
+            startTime: new Date(2023,1,3,8,30,0),
             endTime: new Date(2023,1,3,17,00,0)
         });
     </script>
