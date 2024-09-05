@@ -288,7 +288,7 @@ The `span` element can be added automatically by the widget, or an existing elem
 
 ### showArrowButton `Boolean`*(default: false)*
 
-Configures DropDownButton to render a down arrow that opens and closes its popup.
+Configures the DropDownButton to render a down arrow that opens and closes its popup.
 
 #### Example
 
@@ -299,7 +299,7 @@ Configures DropDownButton to render a down arrow that opens and closes its popup
             { text: "item 1" },
             { text: "item 2" }
         ],
-        showArrowButton: true,
+        showArrowButton: true
     });
     </script>
 

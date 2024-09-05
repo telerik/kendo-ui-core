@@ -22,6 +22,7 @@ The DropDownButton provides the following methods for styling:
 - [`ThemeColor()`](#themecolor)—configures what color will be applied to the component.
 - [`FillMode()`](#fillmode)—defines how the color is applied to the component.
 - [`Rounded()`](#rounded)—determines the border radius of the component.
+- [`ShowArrowButton()`](#showarrowbutton)—shows an arrow indicator in the button.
 
 ### Size
 
@@ -44,12 +45,12 @@ The default `Size` value is `Medium`.
             items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
             items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
             items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
-        }
+        })
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" size="ComponentSize.Medium">
+    <kendo-dropdownbutton name="DropDownButton" icon="clipboard" size="ComponentSize.Medium">
         <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
@@ -80,12 +81,12 @@ The default `FillMode` value is `Solid`.
             items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
             items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
             items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
-        }
+        })
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" fill-mode="FillMode.Solid">
+    <kendo-dropdownbutton name="DropDownButton" icon="clipboard" fill-mode="FillMode.Solid">
         <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
@@ -123,12 +124,12 @@ The default `ThemeColor` value is `Base`.
             items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
             items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
             items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
-        }
+        })
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" theme-color="ThemeColor.Base">
+    <kendo-dropdownbutton name="DropDownButton" icon="clipboard" theme-color="ThemeColor.Base">
         <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
@@ -160,12 +161,41 @@ The default `Rounded` value is `Medium`.
             items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
             items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
             items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
-        }
+        })
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownbutton name="DropDownButton" text="Paste" icon="clipboard" rounded="Rounded.Medium">
+    <kendo-dropdownbutton name="DropDownButton" icon="clipboard" rounded="Rounded.Medium">
+        <dropdownbutton-items>
+            <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
+            <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
+            <item id="paste-markdown" text="Paste Markdown" icon="clipboard-markdown"></item>
+        </dropdownbutton-items>
+    </kendo-dropdownbutton>
+```
+{% endif %}
+
+### ShowArrowButton
+
+Enable the `ShowArrowButton()` option to render a down arrow in the DropDownButton that opens and closes its popup. By default, the arrow indicator is not displayed.
+
+```HtmlHelper
+    @(Html.Kendo().DropDownButton()
+        .Name("DropDownButton")
+        .Text("Paste")
+        .ShowArrowButton(true)
+        .Items(items =>
+        {
+            items.Add().Id("keep-text").Text("Keep Text Only").Icon("clipboard-text");
+            items.Add().Id("paste-html").Text("Paste as HTML").Icon("clipboard-code");
+            items.Add().Id("paste-markdown").Text("Paste Markdown").Icon("clipboard-markdown");
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdownbutton name="DropDownButton" text="Paste" show-arrow-button="true">
         <dropdownbutton-items>
             <item id="keep-text" text="Keep Text Only" icon="clipboard-text"></item>
             <item id="paste-html" text="Paste as HTML" icon="clipboard-code"></item>
