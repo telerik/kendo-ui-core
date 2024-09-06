@@ -288,6 +288,7 @@ The following example demonstrates the basic configuration of the Scheduler.
 * [Adaptive Rendering]({% slug htmlhelpers_scheduler_adaptiverendering_aspnetcore %})&mdash;The Scheduler supports adaptive enhancements, such as changes in styling and behavior in order to improve the user experience on different devices.
 * [Resources]({% slug htmlhelpers_scheduler_resources_aspnetcore %})&mdash;You can assign resources to the Scheduler events.
 * [Timezones]({% slug htmlhelpers_scheduler_timezones_aspnetcore %})&mdash;For global scheduling, you can set a timezone to the Scheduler. Then users from different time zones will see the correct event start and end times for their time zone. 
+* [Templates]({% slug scheduler_templates %})&mdash;You can use different templates to modify event rendering, date and time headers, and other visual elements of the Scheduler.
 
 ## Next Steps
 

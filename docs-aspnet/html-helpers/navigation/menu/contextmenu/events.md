@@ -73,6 +73,20 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+
+    <kendo-contextmenu name="contextmenu" target="body" 
+        on-open="function() {
+             // Handle the open event inline.
+        }"
+        on-close="function() {
+             // Handle the close event inline.
+        }">
+    </kendo-contextmenu>
+
+```
+{% endif %}
 
 ## Handling by HTML Attributes
 
@@ -89,6 +103,17 @@ The following example demonstrates how to subscribe to the `select` event of a s
     })
 )
 ```
+
+{% if site.core %}
+```TagHelper
+    <kendo-contextmenu name="menu" target="body">
+        <items>
+            <menu-item text="First Item"></menu-item>
+            <menu-item text="Second Item" onclick="alert('select');"></menu-item>
+        </items>
+    </kendo-contextmenu>
+```
+{% endif %}
 
 ## Next Steps
 

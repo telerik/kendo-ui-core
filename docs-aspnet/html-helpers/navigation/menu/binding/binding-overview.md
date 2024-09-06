@@ -17,6 +17,7 @@ The supported data-binding approaches are:
 {% if site.mvc %}* [Sitemap binding]({% slug sitemapbinding_menu_aspnetmvc %}){% endif %}
 * [Model Binding]({% slug htmlhelpers_menu_modelbinding_aspnetcore %})
 * [Binding to Remote Data]({% slug htmlhelpers_menu_bindingremotedata_aspnetcore %})
+* [Custom Attributes Binding]({% slug custom-attributes-binding %})
 {% if site.core %}
 * [Razor Pages Binding]({% slug htmlhelpers_menu_razorpage_aspnetcore %})
 {% endif %}
