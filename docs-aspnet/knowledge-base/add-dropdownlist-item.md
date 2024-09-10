@@ -65,6 +65,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
         .HtmlAttributes(new { style = "width: 100%" })
     )
 ```
+{% if site.core %}
 ```Controller.cs
     public class AddItemController : Controller
     {
@@ -93,6 +94,38 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
         }
     }
 ```
+{% else %}
+```Controller.cs
+    public class AddItemController : Controller
+    {
+        public ActionResult AddItem()
+        {
+            return View("~/Views/DropDownList/AddItem.cshtml");
+        }
+        public ActionResult GetLocations()
+        {
+            IEnumerable<Location> locations = LocationsData();
+
+            return Json(locations, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CreateLocation(Location location)
+        {
+            return Json(new[] { location });
+        }
+        private List<Location> LocationsData()
+        {
+            return new List<Location>()
+            {
+                new Location() { Id = 1, Name = "London" },
+                new Location() { Id = 2, Name = "Paris" },
+                new Location() { Id = 3, Name = "Sofia" }
+            };
+        }
+    }
+```
+{% endif %}
+
+
 ```Script.js
     <script id="noDataTemplate" type="text/x-kendo-tmpl">
         <button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base" onclick="addNew('#: instance.element[0].   id #', '#: instance.filterInput.val() #')">Add new item</button>

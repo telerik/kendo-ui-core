@@ -215,6 +215,7 @@ Use the Diagram HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
 
 In the `DiagramData` controller, declare the CRUD actions. Use the names of the actions you set in the DataSource configuration in the previous step.
 
+{% if site.core %}
 ```Controller
     public class DiagramDataController : Controller
     {
@@ -296,6 +297,89 @@ In the `DiagramData` controller, declare the CRUD actions. Use the names of the 
         }
     }
 ```
+{% else %}
+```Controller
+    public class DiagramDataController : Controller
+    {
+        public static List<OrgDiagramShape> diagramShapes = new List<OrgDiagramShape>
+        {
+            new OrgDiagramShape() { Id = 1, Color = "", JobTitle = "President" },
+            new OrgDiagramShape() { Id = 2, Color = "#3399cc", JobTitle = "VP Finance" },
+            new OrgDiagramShape() { Id = 3, Color = "#3399cc", JobTitle = "VP Customer Relations" },
+            new OrgDiagramShape() { Id = 4, Color = "#3399cc", JobTitle = "VP Human Resources" },
+            new OrgDiagramShape() { Id = 5, Color = "#ff9900", JobTitle = "Accountant" },
+            new OrgDiagramShape() { Id = 6, Color = "#ff9900", JobTitle = "Budget Analyst" },
+            new OrgDiagramShape() { Id = 7, Color = "#ff9900", JobTitle = "Relations Manager" },
+            new OrgDiagramShape() { Id = 8, Color = "#ff9900", JobTitle = "Technical Support Manager" },
+            new OrgDiagramShape() { Id = 9, Color = "#ff9900", JobTitle = "Compensation Manager" },
+            new OrgDiagramShape() { Id = 10, Color = "#ff9900", JobTitle = "Payroll Specialist" }
+        };
+
+        public static List<OrgDiagramConnection> diagramConnections = new List<OrgDiagramConnection>
+        {
+            new OrgDiagramConnection() { Id = 1, FromShapeId = 1, ToShapeId = 2 },
+            new OrgDiagramConnection() { Id = 2, FromShapeId = 1, ToShapeId = 3 },
+            new OrgDiagramConnection() { Id = 3, FromShapeId = 1, ToShapeId = 4 },
+            new OrgDiagramConnection() { Id = 4, FromShapeId = 2, ToShapeId = 5 },
+            new OrgDiagramConnection() { Id = 5, FromShapeId = 2, ToShapeId = 6 },
+            new OrgDiagramConnection() { Id = 6, FromShapeId = 3, ToShapeId = 7 },
+            new OrgDiagramConnection() { Id = 7, FromShapeId = 3, ToShapeId = 8 },
+            new OrgDiagramConnection() { Id = 8, FromShapeId = 4, ToShapeId = 9 },
+            new OrgDiagramConnection() { Id = 9, FromShapeId = 4, ToShapeId = 10 }
+        };
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult ReadShapes([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(diagramShapes.ToDataSourceResult(request));
+        }
+
+        public ActionResult CreateShape([DataSourceRequest] DataSourceRequest request, OrgDiagramShape shape)
+        {
+            // Update the id field.
+            return Json(new[] { shape }.ToDataSourceResult(request, ModelState));
+        }
+        public ActionResult UpdateShape([DataSourceRequest] DataSourceRequest request, OrgDiagramShape shape)
+        {
+            // Custom Update.
+            return Json(new[] { shape }.ToDataSourceResult(request, ModelState));
+        }
+        public ActionResult DestroyShape([DataSourceRequest] DataSourceRequest request, OrgDiagramShape shape)
+        {
+            diagramShapes.Remove(shape);
+            return Json(new[] { shape }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult ReadConnections([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(diagramConnections.ToDataSourceResult(request));
+        }
+
+        public ActionResult CreateConnection([DataSourceRequest] DataSourceRequest request, OrgDiagramConnection connection)
+        {
+            // Update the id field.
+            return Json(new[] { connection }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult UpdateConnection([DataSourceRequest] DataSourceRequest request, OrgDiagramConnection connection)
+        {
+            // Custom Update
+            return Json(new[] { connection }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult DestroyConnection([DataSourceRequest] DataSourceRequest request, OrgDiagramConnection connection)
+        {
+            // Custom Remove
+            diagramConnections.Remove(connection);
+            return Json(new[] { connection }.ToDataSourceResult(request, ModelState));
+        }
+    }
+```
+{% endif %}
 
 ## 5. Handle a Diagram Event
 

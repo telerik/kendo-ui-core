@@ -102,7 +102,7 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
 {% endif %}
 ```HomeController
 
-    public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+    public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
         // Orders can be IQueriable or IEnumerable.
         // The result is a filtered, paged, grouped, and sorted collection.
@@ -112,7 +112,7 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
         return Json(result);
     }
 
-    public IActionResult CreateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+    public ActionResult CreateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
     {
         if (order != null && ModelState.IsValid)
         {

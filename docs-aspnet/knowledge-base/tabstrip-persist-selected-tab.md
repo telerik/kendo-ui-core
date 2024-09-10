@@ -63,7 +63,7 @@ How can I persist the selected tab in the TabStrip when the user refreshes the p
 		{
 			public static string SelectedTabInfo;
 
-			public IActionResult Index()
+			public ActionResult Index()
 			{
 				if (SelectedTabInfo == null)
 				{
@@ -77,7 +77,7 @@ How can I persist the selected tab in the TabStrip when the user refreshes the p
 				return View();
 			}
 
-			public IActionResult SaveTabName(string name)
+			public ActionResult SaveTabName(string name)
 			{
 				ViewData["tabinfo"] = name;
 				SelectedTabInfo = name;

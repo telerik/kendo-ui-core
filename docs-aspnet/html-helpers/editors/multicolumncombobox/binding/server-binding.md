@@ -15,7 +15,7 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
 
 1. Pass the data to the view through `ViewData`.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             ViewData["products"] = GetProducts();
 

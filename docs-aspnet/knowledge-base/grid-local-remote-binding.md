@@ -61,7 +61,7 @@ It is important to note that using the .ServerOperation() property Remote bindin
 
 Example of Remote Data Binding:
 ```csharp
-public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
 {
     return Json(GetCustomers().ToDataSourceResult(request));
 }

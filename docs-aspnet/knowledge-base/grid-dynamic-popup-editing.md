@@ -85,7 +85,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
     public class DynamicPopupEditingController : Controller
     {
         public static DataTable db = new DataTable();
-        public IActionResult DynamicPopupEditing()
+        public ActionResult DynamicPopupEditing()
         {
             db = GetDataTable(50);
             List<System.Data.DataColumn> columnData = new List<System.Data.DataColumn>();
@@ -97,7 +97,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
             return View(db);
         }
 
-        public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(db.ToDataSourceResult(request));
         }

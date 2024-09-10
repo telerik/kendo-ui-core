@@ -13,6 +13,7 @@ The AutoComplete provides support for remote data binding by using a `DataSource
 
 1. Create an action that returns the data as a JSON result.
 
+            {% if site.core %}
             public IActionResult Index()
             {
                 return View(new ProductViewModel
@@ -32,6 +33,27 @@ The AutoComplete provides support for remote data binding by using a `DataSource
 
                 return Json(products);
             }
+            {% else %}
+            public ActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            public JsonResult GetProductsAjax()
+            {
+                var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return Json(products, JsonRequestBehavior.AllowGet);
+            }
+            {% endif %}
 
 1. Add the AutoComplete to the view and configure its DataSource to use remote data.
 

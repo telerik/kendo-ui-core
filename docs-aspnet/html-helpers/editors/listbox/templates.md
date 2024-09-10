@@ -87,6 +87,93 @@ The ListBox provides templates for its items that are passed as a function or st
             <draggable enabled="true" placeholder="customPlaceholder"/>
     </kendo-listbox>
 ```
+``` IndexController.cs
+    public class ListBoxController : Controller
+    {
+        private IProductService productService;
+
+        public ListBoxController(
+            IProductService service)
+        {
+            productService = service;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult GetCustomers()
+        {
+            var customers = Enumerable.Empty<CustomerViewModel>();
+
+            using (var northwind = GetContext())
+            {
+                customers = northwind.Customers.Select(customer => new CustomerViewModel
+                {
+                    CustomerID = customer.CustomerID,
+                    CompanyName = customer.CompanyName,
+                    ContactName = customer.ContactName,
+                    ContactTitle = customer.ContactTitle,
+                    Address = customer.Address,
+                    City = customer.City,
+                    Region = customer.Region,
+                    PostalCode = customer.PostalCode,
+                    Country = customer.Country,
+                    Phone = customer.Phone,
+                    Fax = customer.Fax,
+                    Bool = customer.Bool
+                }).ToList();
+            }
+
+            return Json(customers);
+        }
+    }
+```
+{% else %}
+``` IndexController.cs
+    public class ListBoxController : Controller
+    {
+        private IProductService productService;
+
+        public ListBoxController(
+            IProductService service)
+        {
+            productService = service;
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult GetCustomers()
+        {
+            var customers = Enumerable.Empty<CustomerViewModel>();
+
+            using (var northwind = GetContext())
+            {
+                customers = northwind.Customers.Select(customer => new CustomerViewModel
+                {
+                    CustomerID = customer.CustomerID,
+                    CompanyName = customer.CompanyName,
+                    ContactName = customer.ContactName,
+                    ContactTitle = customer.ContactTitle,
+                    Address = customer.Address,
+                    City = customer.City,
+                    Region = customer.Region,
+                    PostalCode = customer.PostalCode,
+                    Country = customer.Country,
+                    Phone = customer.Phone,
+                    Fax = customer.Fax,
+                    Bool = customer.Bool
+                }).ToList();
+            }
+
+            return Json(customers, JsonRequestBehavior.AllowGet);
+        }
+    }
+```
 {% endif %}
 ``` scripts
     <script id="customer-item-template" type="text/x-kendo-template">
@@ -103,59 +190,7 @@ The ListBox provides templates for its items that are passed as a function or st
         }
     </script>
 ```
-``` IndexController.cs
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Kendo.Mvc.Examples.Models;
-    using Microsoft.AspNetCore.Mvc;
 
-    namespace Kendo.Mvc.Examples.Controllers
-    {
-        public partial class ListBoxController : BaseController
-        {
-            private IProductService productService;
-
-            public ListBoxController(
-                IProductService service)
-            {
-                productService = service;
-            }
-
-            [Demo]
-            public IActionResult Index()
-            {
-                return View();
-            }
-
-            public IActionResult GetCustomers()
-            {
-                var customers = Enumerable.Empty<CustomerViewModel>();
-
-                using (var northwind = GetContext())
-                {
-                    customers = northwind.Customers.Select(customer => new CustomerViewModel
-                    {
-                        CustomerID = customer.CustomerID,
-                        CompanyName = customer.CompanyName,
-                        ContactName = customer.ContactName,
-                        ContactTitle = customer.ContactTitle,
-                        Address = customer.Address,
-                        City = customer.City,
-                        Region = customer.Region,
-                        PostalCode = customer.PostalCode,
-                        Country = customer.Country,
-                        Phone = customer.Phone,
-                        Fax = customer.Fax,
-                        Bool = customer.Bool
-                    }).ToList();
-                }
-
-                return Json(customers);
-            }
-        }
-    }
-```
 
 ## See Also
 

@@ -137,7 +137,6 @@ The following example demonstrates the basic configuration of two connected List
     </kendo-listbox>
 
 ```
-{% endif %}
 ```ListBoxController
 
     public IActionResult GetProducts()
@@ -155,6 +154,25 @@ The following example demonstrates the basic configuration of two connected List
         return Json(products);
     }
 ```
+{% else %}
+```ListBoxController
+
+    public ActionResult GetProducts()
+    {
+        var products = Enumerable.Empty<ProductViewModel>();
+
+        using (var northwind = GetContext())
+        {
+            products = northwind.Products.Select(product => new ProductViewModel
+            {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName
+            }).ToList();
+        }
+        return Json(products, JsonRequestBehavior.AllowGet);
+    }
+```
+{% endif %}
 
 ## Functionality and Features
 

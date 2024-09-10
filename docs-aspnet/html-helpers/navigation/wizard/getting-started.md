@@ -402,7 +402,7 @@ The Wizard exposes various [events](/api/kendo.mvc.ui.fluent/wizardeventbuilder)
 ```
 {% endif %}
 ```Controller
-    public IActionResult SubmitRegistration(UserViewModel user)
+    public ActionResult SubmitRegistration(UserViewModel user)
     {
         //Receive and save the data
         ...

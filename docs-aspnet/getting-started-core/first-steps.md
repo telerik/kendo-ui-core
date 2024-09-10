@@ -53,7 +53,7 @@ In this tutorial, you will:
 
 1. In the search box, enter **Model-View-Controller**, select the **ASP.NET Core Web App (Model-View-Controller)** C# template, and then select **Next**.
 
-    ![{{ site.product_short }} Create a new project](../getting-started-core/images/create-project-vs2019.png)
+    ![{{ site.product_short }} Create a new project](../getting-started-core/images/create-project-vs2022.png)
 
 1. Enter **MyTelerikProject** as a project name, and then select **Next**.
 
@@ -80,8 +80,6 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you are a tria
 
 1. Run the installer.
 
-1. Select the option **Set up Telerik NuGet package source** to automatically add the [Telerik NuGet feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %}).
-
     ![{{ site.product_short }} NuGet checkbox in Progress Trial Installer](../getting-started-core/images/check-nuget.png)
 
 >To activate your UI for ASP.NET Core trial license, you must complete the installation procedure. Otherwise, the `Telerik.UI.for.AspNet.Core` NuGet packages will not appear in the NuGet Package Manager.
@@ -96,11 +94,11 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 1. Run the Progress Control Panel `exe`.
 
-1. On the Login screen, check the **set up Telerik NuGet package source** option.
+1. Log in to your Telerik account.
 
     ![{{ site.product_short }} Set Up Nuget on Progress Control Panel Login](../getting-started-core/images/login-control-panel.png)
 
-1. If you miss to set up the NuGet feed on login, go to the Progress Control Panel options and scroll to **NUGET SETTINGS**. Enter your Telerik credentials and click the **Save and Close** button.
+1. Go to the Progress Control Panel options and scroll to **NUGET SETTINGS**. Enter your Telerik credentials and click the **Save and Close** button.
 
     ![{{ site.product_short }} Set Up Nuget on Progress Control Panel options](../getting-started-core/images/nuget-control-panel-options.png)
 

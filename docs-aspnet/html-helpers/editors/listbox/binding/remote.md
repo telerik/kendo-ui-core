@@ -12,7 +12,7 @@ The Telerik UI ListBox for {{ site.framework }} enables you to bind it to remote
 
 1. Create an action that returns the data as a `JSON` result.
 
-
+    {% if site.core %}
     ```Controller
 
         public class ListBoxController : Controller
@@ -33,6 +33,28 @@ The Telerik UI ListBox for {{ site.framework }} enables you to bind it to remote
             }
         }
     ```
+    {% else %}
+    ```Controller
+
+        public class ListBoxController : Controller
+        {
+            public ActionResult GetCustomers()
+            {
+                var customers = Enumerable.Empty<CustomerViewModel>();
+
+                using (var northwind = GetContext())
+                {
+                    customers = northwind.Customers.Select(customer => new CustomerViewModel
+                    {
+                        CustomerID = customer.CustomerID,
+                        ContactName = customer.ContactName,
+                    }).ToList();
+                }
+                return Json(customers, JsonRequestBehavior.AllowGet);
+            }
+        }
+    ```
+    {% endif %}
     ```Model
         public class CustomerViewModel
         {

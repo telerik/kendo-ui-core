@@ -13,7 +13,7 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
 
 1. Create an action method which renders the view.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

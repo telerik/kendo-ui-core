@@ -111,7 +111,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
     {
 
         public static DataTable db = new DataTable();
-        public IActionResult DynamicBatchEditing()
+        public ActionResult DynamicBatchEditing()
         {
             db = GetDataTable(50);
 
@@ -141,12 +141,12 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
 
             return dt;
         }
-        public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(db.ToDataSourceResult(request));
         }
 
-        public IActionResult Customers_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
+        public ActionResult Customers_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
         {
             DataTable editedItemsTable = GetDataTableColumns(); // Gather the table columns.
             for (int x = 0; x < models.Count; x++) // Traverse through each of the models.
@@ -173,7 +173,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
             return Json(editedItemsTable.ToDataSourceResult(request));
         }
 
-        public IActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
+        public ActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
         {
             DataTable editedItemsTable = GetDataTableColumns(); // Gather the table columns.
             for (int x = 0; x < models.Count; x++) // Traverse through each of the models.
@@ -199,7 +199,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
 
             return Json(editedItemsTable.ToDataSourceResult(request));
         }
-        public IActionResult Customers_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
+        public ActionResult Customers_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
         {
             for (int i = 0; i < models.Count; i++) // Traverse through each of the models.
             {

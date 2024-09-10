@@ -104,7 +104,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
     ```HomeController.cs
         using Newtonsoft.Json;
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             var formDataitems = PopulateFormItems();
             return View(formDataitems);

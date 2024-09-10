@@ -71,17 +71,27 @@ The following example demonstrates how to define the Map.
         </markers>
     </kendo-map>
 ```
-{% endif %}
 ```Controller
-    public partial class MapController : BaseController
+    public partial class MapController : Controller
     {
-        [Demo]
         public IActionResult Index()
         {
             return View();
         }
     }
 ```
+{% else %}
+```Controller
+    public partial class MapController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+```
+{% endif %}
+
 
 ## Basic Configuration
 

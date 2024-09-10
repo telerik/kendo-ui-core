@@ -15,7 +15,7 @@ For a runnable example, refer to the [demo on customizing the data source of the
 
 1. Create an action method which renders the view.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

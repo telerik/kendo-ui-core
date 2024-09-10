@@ -111,7 +111,7 @@ You can add a Splitter that resizes automatically along with the Kendo UI for jQ
 ```Controller
     public class SplitterController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

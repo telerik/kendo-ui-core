@@ -104,7 +104,7 @@ In the following example, the outer Splitter has no siblings and has a 100% heig
 ```Controller
     public class SplitterController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
@@ -184,7 +184,7 @@ If the dimensions of the Splitter do not depend directly on the browser viewport
 ```Controller
     public class SplitterController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

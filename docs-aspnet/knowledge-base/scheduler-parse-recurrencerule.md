@@ -29,7 +29,7 @@ You can use the [ical.net](https://github.com/rianjs/ical.net) library to parse 
 ```Controler
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

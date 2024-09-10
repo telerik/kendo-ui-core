@@ -50,7 +50,6 @@ The following example demonstrates how to define the TreeView.
         </hierarchical-datasource>
     </kendo-treeview>
 ```
-{% endif %}
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
@@ -81,6 +80,39 @@ public IActionResult Read_TreeViewData(int? id)
     return Json(result);
 }
 ```
+{% else %}
+```Controller
+public static IList<HierarchicalViewModel> GetHierarchicalData()
+{
+    var result = new List<HierarchicalViewModel>()
+    {
+        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+    };
+
+    return result;
+}
+
+public ActionResult Read_TreeViewData(int? id)
+{
+    var result = GetHierarchicalData()
+        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Select(item => new {
+            id = item.ID,
+            Name = item.Name,
+            expanded = item.Expanded,
+            imageUrl = item.ImageUrl,
+            hasChildren = item.HasChildren
+        });
+
+    return Json(result, JsonRequestBehavior.AllowGet);
+}
+```
+{% endif %}
+
 
 > Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
 

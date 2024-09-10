@@ -37,7 +37,7 @@ I've started using SpreadStreamProcessing and I'm now trying to get it to work w
 1. For the standard POST request, you need to serialize the Form request in the same way as the grid request does it. 
 
 ```
-    public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+    public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
         var req = JsonConvert.SerializeObject(HttpContext.Request.Form);
         

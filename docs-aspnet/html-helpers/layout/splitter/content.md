@@ -91,7 +91,7 @@ The following example demonstrates how to load the Splitter content asynchronous
 ```
 {% endif %}
 ```Controller
-public IActionResult PaneContent()
+public ActionResult PaneContent()
 {
     return PartialView();
 }

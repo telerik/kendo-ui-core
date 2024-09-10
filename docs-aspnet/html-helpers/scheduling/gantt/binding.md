@@ -102,7 +102,7 @@ The following example demonstrates how to bind the Gantt through the `Dependency
 The following example demonstrates how to bind the Gantt to items by using the `ViewData` configuration.
 
 ```Controller
-    public IActionResult ServerBinding()
+    public ActionResult ServerBinding()
     {
         var sampleEntities = new SampleEntities();
 

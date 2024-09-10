@@ -34,7 +34,6 @@ The following example demonstrates how to use the `Headers` option to set a requ
         myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
     </script>
 ```
-{% endif %}
 ```HomeController
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
@@ -45,6 +44,19 @@ The following example demonstrates how to use the `Headers` option to set a requ
         return Json(orders.ToDataSourceResult(request));
     }
 ```
+{% else %}
+```HomeController
+
+    public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+    {
+        // Get the request header "header1".
+        var Header1Value = Request.Headers["header1"];
+        // Orders can be IQueriable or IEnumerable.
+        return Json(orders.ToDataSourceResult(request));
+    }
+```
+{% endif %}
+
 
 ## See Also
 

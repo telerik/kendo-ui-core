@@ -51,7 +51,6 @@ The following example demonstrates how to define the DropDownList.
     </datasource>
 </kendo-dropdownlist>
 ```
-{% endif %}
 ```Controller
 
     public class DropDownListController : Controller
@@ -73,6 +72,30 @@ The following example demonstrates how to define the DropDownList.
         }
     }
 ```
+{% else %}
+```Controller
+
+    public class DropDownListController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Products_Read()
+        {
+            var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
+            {
+                ProductID = "" + i,
+                ProductName = "Product " + i
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+    }
+```
+{% endif %}
+
 
 {% if site.core %}
 @[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
@@ -151,7 +174,7 @@ The DropDownList configuration options are passed as attributes.
         {
             source.Read(read =>
             {
-                read.Action("Products_Read2", "DropDownList");
+                read.Action("Products_Read", "DropDownList");
             })
             .ServerFiltering(false);
         })
@@ -172,6 +195,30 @@ The DropDownList configuration options are passed as attributes.
             console.log(dropdownlist);
         });
     </script>
+```
+```Controller
+    public JsonResult Products_Read(string text)
+    {
+        using (var northwind = GetContext())
+        {
+            var products = northwind.Products.Select(product => new ProductViewModel
+            {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                UnitPrice = product.UnitPrice.Value,
+                UnitsInStock = product.UnitsInStock.Value,
+                UnitsOnOrder = product.UnitsOnOrder.Value,
+                Discontinued = product.Discontinued
+            });
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                products = products.Where(p => p.ProductName.Contains(text));
+            }
+
+            return Json(products.ToList(), JsonRequestBehavior.AllowGet);
+        }
+    }
 ```
 {% endif %}
 

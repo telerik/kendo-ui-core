@@ -52,12 +52,11 @@ The following example demonstrates how to tie a pager to a data source and enabl
     <kendo-pager name="pager1" refresh="true" datasource-id="dataSource1" page-sizes="true">
     </kendo-pager>
 ```
-{% endif %}
 ```Controller
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
-    public class PagerController : BaseController
+    public class PagerController : Controller
     {
         public IActionResult People_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -76,6 +75,31 @@ The following example demonstrates how to tie a pager to a data source and enabl
         }
     }
 ```
+{% else %}
+```Controller
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
+    public class PagerController : Controller
+    {
+        public ActionResult People_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            var people = new List<SampleData>() {
+                 new SampleData() { Name = "Jane Doe", Age = 25, IsOnLeave = false },
+                 new SampleData() { Name = "John Doe", Age = 33, IsOnLeave = true },
+                 new SampleData() { Name = "John Smith", Age = 37, IsOnLeave = true },
+                 new SampleData() { Name = "Nathan Doe", Age = 42, IsOnLeave = false }
+            };
+            return Json(people.ToDataSourceResult(request));
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+```
+{% endif %}
 ```Model
     public class SampleData
     {

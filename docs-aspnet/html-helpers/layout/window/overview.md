@@ -45,7 +45,7 @@ The following example demonstrates how to define the Window.
 ```Controller
     public class WindowController  : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

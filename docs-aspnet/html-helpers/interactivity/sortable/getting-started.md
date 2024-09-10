@@ -60,7 +60,7 @@ Optionally, you can structure the View content by adding the desired HTML elemen
 1. Create a List collection that holds instances of the `UserViewModel`.
 
     ```Controller_HomeController.cs
-        public IActionResult Index()
+        public ActionResult Index()
         {
             var users = new List<UserViewModel>
             {

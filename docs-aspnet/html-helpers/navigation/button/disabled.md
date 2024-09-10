@@ -42,7 +42,7 @@ To disable the Button, you can also use the [`ViewData`](https://docs.microsoft.
 ```
 {% endif %}
 ```Controller
-    public IActionResult Index()
+    public ActionResult Index()
     {
         ViewData["IsEnabled"] = false;
         return View();

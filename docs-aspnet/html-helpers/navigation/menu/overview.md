@@ -157,7 +157,7 @@ The following example demonstrates how to define the Menu.
 ```Controller
 public class MenuController : Controller
 {
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }

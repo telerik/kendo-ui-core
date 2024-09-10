@@ -164,7 +164,6 @@ The TreeView provides support for remote data binding by using a [`DataSource`](
         </hierarchical-datasource>
     </kendo-treeview>
 ```
-{% endif %}
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
@@ -195,6 +194,40 @@ public IActionResult Read_TreeViewData(int? id)
     return Json(result);
 }
 ```
+{% else %}
+```Controller
+public static IList<HierarchicalViewModel> GetHierarchicalData()
+{
+    var result = new List<HierarchicalViewModel>()
+    {
+        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+    };
+
+    return result;
+}
+
+public ActionResult Read_TreeViewData(int? id)
+{
+    var result = GetHierarchicalData()
+        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Select(item => new {
+            id = item.ID,
+            Name = item.Name,
+            expanded = item.Expanded,
+            imageUrl = item.ImageUrl,
+            hasChildren = item.HasChildren
+        });
+
+    return Json(result, JsonRequestBehavior.AllowGet);
+}
+```
+{% endif %}
+
+
 
 By default, the TreeView sends to the remote endpoint the `id` of the expanded node. To [send additional data]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) use the DataSource `Data` method and provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 
