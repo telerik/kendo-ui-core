@@ -59,6 +59,7 @@ The example implementation relies on the following key steps:
 )
 ```
 
+{% if site.core %}
 ```HomeController.cs
 public class HomeController : Controller
 {
@@ -108,6 +109,57 @@ public class HomeController : Controller
     }
 }
 ```
+{% else %}
+```HomeController.cs
+public class HomeController : Controller
+{
+    public ActionResult Index()
+    {
+        return View();
+    }
+
+    public ActionResult About()
+    {
+        return View();
+    }
+
+    public ActionResult About1()
+    {
+        return View();
+    }
+
+    public ActionResult About2()
+    {
+        return View();
+    }
+
+    public ActionResult Contact()
+    {
+        return View();
+    }
+
+    public ActionResult Contact1()
+    {
+        return View();
+    }
+
+    public ActionResult Contact2()
+    {
+        return View();
+    }
+
+    public ActionResult Contact3()
+    {
+        return View();
+    }
+
+    public ActionResult Error()
+    {
+        return View();
+    }
+}
+```
+{% endif %}
 
 
 ```JavaScript

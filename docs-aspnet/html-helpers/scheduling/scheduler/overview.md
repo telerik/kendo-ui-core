@@ -113,7 +113,7 @@ The following example demonstrates how to define the Scheduler.
             taskService = schedulerTaskService;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

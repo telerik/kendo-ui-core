@@ -60,7 +60,7 @@ The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/
 ```Controller
     public class ToolBarController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

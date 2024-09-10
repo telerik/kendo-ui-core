@@ -31,6 +31,7 @@ I have a `.xlsx` file on the server and need to load it by default in the Spread
 1. Save the file in the **wwwroot/files** directory of the project.
 2. Configure the Controller and an Action method that access the file and returns it in JSON format by using the **Telerik.Web.Spreadsheet** dependency. 
 
+    {% if site.core %}
     ```Controller
             using Telerik.Web.Spreadsheet; 
 
@@ -61,6 +62,23 @@ I have a `.xlsx` file on the server and need to load it by default in the Spread
                     }
             }
     ```
+    {% else %}
+    ```Controller
+            using Telerik.Web.Spreadsheet;
+            
+            public class SpreadsheetController : Controller
+            {
+                public ActionResult ReadFile()
+                {
+                    var path = Server.MapPath("~/App_Data/Docs/document.xlsx");
+                    var workbook = Telerik.Web.Spreadsheet.Workbook.Load(path);
+            
+                    //Uses Newtonsoft.Json internally to serialize fields correctly.
+                    return Content(workbook.ToJson(), Telerik.Web.Spreadsheet.MimeTypes.JSON);
+                }
+            }
+    ```
+    {% endif %}
 
 3. Set up an Ajax request to the <b>ReadFile</b> Action method and consume the JSON of the response with the use of the [`fromJSON()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/fromjson) method.
 

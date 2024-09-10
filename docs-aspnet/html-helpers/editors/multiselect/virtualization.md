@@ -17,6 +17,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
 1. Create the `Read` and `ValueMapper` actions.
 
+        {% if site.core %}
         public IActionResult Index()
         {
             return View(new ProductViewModel
@@ -63,6 +64,54 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
             return orders.ToList();
         }
+        {% else %}
+        public ActionResult Index()
+        {
+            return View(new ProductViewModel
+            {
+                SelectedOrders = new int[] { 1, 3 }
+            });
+        }
+
+        [HttpPost]
+        public ActionResult OrdersVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(GetOrders().ToDataSourceResult(request));
+        }
+
+        public ActionResult Orders_ValueMapper(int[] values)
+        {
+            var indices = new List<int>();
+
+            if (values != null && values.Any())
+            {
+                var index = 0;
+
+                foreach (var order in GetOrders())
+                {
+                    if (values.Contains(order.OrderID))
+                    {
+                        indices.Add(index);
+                    }
+
+                    index += 1;
+                }
+            }
+
+            return Json(indices, JsonRequestBehavior.AllowGet);
+        }
+
+        private static List<Order> GetOrders()
+        {
+            var orders = Enumerable.Range(0, 2000).Select(i => new Order
+            {
+                OrderID = i,
+                OrderName = "OrderName" + i
+            });
+
+            return orders.ToList();
+        }
+        {% endif %}
 
 1. Add a MultiSelect to the view and configure it to use virtualization.
 

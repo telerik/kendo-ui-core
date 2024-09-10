@@ -114,7 +114,7 @@ To set up the Captcha for a Razor Pages scenario, you need to configure the serv
                 Order = new OrderViewModel();
             }
         }
-        public IActionResult OnPost()
+        public ActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {

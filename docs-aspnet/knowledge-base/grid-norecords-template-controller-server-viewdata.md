@@ -73,7 +73,7 @@ How can I set the `NoRecords` template message to content from the controller?
 ```c#
 public class HomeController : Controller
 {
-    public IActionResult Index()
+    public ActionResult Index()
     {
         ViewData["NoRecords"] = "Custom No Data Message";
         return View();

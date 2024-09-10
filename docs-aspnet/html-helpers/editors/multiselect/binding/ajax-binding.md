@@ -15,7 +15,7 @@ You can configure the Telerik UI MultiSelect for Ajax binding to the Northwind *
 
 1. Create an action method which renders the view.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

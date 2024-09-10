@@ -17,7 +17,7 @@ Local data is the data that is available on the client when the ComboBox is init
 
 1. Pass the data to the view through `ViewData`.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             ViewData["products"] = GetProducts();
 
@@ -75,7 +75,7 @@ You can configure the ComboBox to get its data from a remote source by making an
 
 1. Create an action that returns the data as a JSON result.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View(new ProductViewModel
             {

@@ -101,7 +101,7 @@ The following example demonstrates how to define the TabStrip.
 ```Controller
 public class TabStripController : Controller
 {
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }

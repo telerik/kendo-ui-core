@@ -13,7 +13,7 @@ You can configure the Telerik UI MultiSelect for server binding to the Northwind
 
 1. Create a new action method and pass the **Products** table as the model.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             NorthwindDataContext northwind = new NorthwindDataContext();
 

@@ -18,7 +18,7 @@ You can bind the DropDownTree locally on the server by passing the appropriate c
 
 1. Pass the data to the view through `ViewData`.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             ViewBag.dropdowntreeData = GetData();
             return View();

@@ -79,25 +79,6 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
             </datasource>
         </kendo-stockchart>
     ```
-    {% endif %}
-    ```Model
-        public class StockDataPoint
-        {
-            public DateTime Date { get; set; }
-
-            public decimal Close { get; set; }
-
-            public long Volume { get; set; }
-
-            public decimal Open { get; set; }
-
-            public decimal High { get; set; }
-
-            public decimal Low { get; set; }
-
-            public string Symbol { get; set; }
-        }
-    ```
     ```HomeController
         public IActionResult Index()
         {
@@ -123,6 +104,54 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
                     }).ToList()
                 );
             }
+        }
+    ```
+    {% else %}
+    ```HomeController
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult _BoeingStockData()
+        {
+            using (var db = GetContext())
+            {
+                // Return the data as JSON.
+                return Json(
+                    (from s in db.Stocks
+                    where s.Symbol == "BA"
+                    select new StockDataPoint
+                    {
+                        Date = s.Date,
+                        Open = s.Open,
+                        High = s.High,
+                        Low = s.Low,
+                        Close = s.Close,
+                        Volume = s.Volume
+                    }).ToList(), 
+                    JsonRequestBehavior.AllowGet
+                );
+            }
+        }
+    ```
+    {% endif %}
+    ```Model
+        public class StockDataPoint
+        {
+            public DateTime Date { get; set; }
+
+            public decimal Close { get; set; }
+
+            public long Volume { get; set; }
+
+            public decimal Open { get; set; }
+
+            public decimal High { get; set; }
+
+            public decimal Low { get; set; }
+
+            public string Symbol { get; set; }
         }
     ```
 

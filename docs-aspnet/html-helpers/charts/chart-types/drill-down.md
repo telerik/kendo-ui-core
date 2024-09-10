@@ -106,7 +106,7 @@ To configure a chart series for drill-down:
 {% else %}
 
 ```Controller
-    public IActionResult Get_Companies()
+    public ActionResult Get_Companies()
     {
         return Json(ChartDataRepository.Companies(), JsonRequestBehavior.AllowGet);
     }
@@ -334,7 +334,7 @@ To populate the drill-down series on dynamically:
     </script>     
 ```   
 ```Controller
-        public IActionResult Dynamic_Data()
+        public ActionResult Dynamic_Data()
         {
             ViewData["VehiclesByModel"] = ChartDataRepository.VehicleModels();
             ViewData["VehiclesByQuarter"] = ChartDataRepository.VehicleQuarters();
@@ -342,7 +342,7 @@ To populate the drill-down series on dynamically:
             return View();
         }
 
-        public IActionResult Get_VehicleMakes()
+        public ActionResult Get_VehicleMakes()
         {
             return Json(ChartDataRepository.VehicleMakes(), JsonRequestBehavior.AllowGet);    
         }
@@ -590,14 +590,14 @@ To populate the drilldown series asynchronously:
     </script>     
 ```   
 ```Controller
-    public IActionResult Dynamic_Data()
+    public ActionResult Dynamic_Data()
     {
         ViewData["VehiclesByModel"] = ChartDataRepository.VehicleModels();
 
         return View();
     }
 
-    public IActionResult Get_VehicleMakes()
+    public ActionResult Get_VehicleMakes()
     {
         return Json(ChartDataRepository.VehicleMakes(), JsonRequestBehavior.AllowGet);    
     }
@@ -738,7 +738,7 @@ To customize the root item of the Chart's Breadcrumb and change its appearance, 
 {% else %}
 
 ```Controller
-    public IActionResult Get_Companies()
+    public ActionResult Get_Companies()
     {
         return Json(ChartDataRepository.Companies(), JsonRequestBehavior.AllowGet);
     }
@@ -921,7 +921,7 @@ To implement a custom drill-down navigation:
 {% else %}
 
 ```Controller
-    public IActionResult Get_Companies()
+    public ActionResult Get_Companies()
     {
         return Json(ChartDataRepository.Companies(), JsonRequestBehavior.AllowGet);
     }

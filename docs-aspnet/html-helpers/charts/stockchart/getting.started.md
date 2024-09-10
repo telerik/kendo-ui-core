@@ -176,6 +176,7 @@ To add an additional pane that is placed at the bottom of the chart and can be u
 
 In the `Home` controller, declare the `RemoteDataBindingData` action that you set to the DataSource `Read` configuration in step `3`.
 
+{% if site.core %}
 ```Controller
     public IActionResult _BoeingStockData()
     {
@@ -203,6 +204,35 @@ In the `Home` controller, declare the `RemoteDataBindingData` action that you se
         return Json(data);
     }
 ```
+{% else %}
+```Controller
+    public ActionResult _BoeingStockData()
+    {
+        var data = new List<StockDataPoint>()
+        {
+            new StockDataPoint {
+                Date= new DateTime(2016,1,1),
+                Open= 41.62M,
+                High= 41.69M,
+                Low= 39.81M,
+                Close= 40.12M,
+                Volume= 2632000
+            },
+            new StockDataPoint {
+                Date= new DateTime(2016,3,1),
+                Open= 40.62M,
+                High= 39.69M,
+                Low= 40.81M,
+                Close= 39.12M,
+                Volume= 2631986
+            }
+
+        };
+
+        return Json(data, JsonRequestBehavior.AllowGet);
+    }
+```
+{% endif %}
 
 ## 6. Handle the StockChart Events
 

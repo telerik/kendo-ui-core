@@ -42,7 +42,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
                 Freight = i * 10
             }).ToList();
 
-            public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+            public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
             {
                 return Json(orders.ToDataSourceResult(request));
             }
@@ -50,7 +50,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. Add a new action method to `GridController.cs`. It will be responsible for saving the new data items. Name the method `CreateOrders`.  The `Create` method has to return a collection of the created records with the assigned Id field.
 
-        public IActionResult CreateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+        public ActionResult CreateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. Add a new action method to `GridController.cs`. It will be responsible for saving the updated data items. Name the method `UpdateOrders`.
 
-        public IActionResult UpdateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+        public ActionResult UpdateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. Add a new action method to `GridController.cs`. It will be responsible for saving the deleted data items. Name the method `DestroyOrders`.
 
-        public IActionResult DestroyOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+        public ActionResult DestroyOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
         {
             // Delete the item in the data base or follow with the dummy data.
             orders.Remove(order);
@@ -177,7 +177,7 @@ When editing is performed, server validation is often needed. This section demon
 1. Perform all steps from the previous section.
 1. Add some validation code to the `UpdateOrders` method. For example, check the length of the `ShipCountry` property.
 
-         public IActionResult UpdateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
+         public ActionResult UpdateOrders([DataSourceRequest]DataSourceRequest request, OrderViewModel order)
         {
             if (order.ShipCountry.Length < 3)
             {

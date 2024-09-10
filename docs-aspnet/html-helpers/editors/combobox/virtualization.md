@@ -17,6 +17,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
 1. Create the `Read` and `ValueMapper` actions.
 
+            {% if site.core %}
             public IActionResult Index()
             {
                 return View(new ProductViewModel
@@ -64,6 +65,55 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
                 return products;
             }
+            {% else %}
+            public ActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            [HttpPost]
+            public ActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+            {
+                return Json(GetProducts().ToDataSourceResult(request));
+            }
+
+            public ActionResult Products_ValueMapper(int[] values)
+            {
+                var indices = new List<int>();
+
+                if (values != null && values.Any())
+                {
+                    var index = 0;
+
+                    foreach (var product in GetProducts())
+                    {
+                        if (values.Contains(product.ProductID))
+                        {
+                            indices.Add(index);
+                        }
+
+                        index += 1;
+                    }
+                }
+
+                return Json(indices, JsonRequestBehavior.AllowGet);
+            }
+
+            private static IEnumerable<ProductViewModel> GetProducts()
+            {
+                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return products;
+            }
+            {% endif %}
 
 1. Add a ComboBox to the view and configure it to use virtualization.
 

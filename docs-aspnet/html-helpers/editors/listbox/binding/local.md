@@ -59,30 +59,21 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
 ```
 {% endif %}
 ```IndexController.cs
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Kendo.Mvc.Examples.Models;
-    using Microsoft.AspNetCore.Mvc;
-
-    namespace Kendo.Mvc.Examples.Controllers
+    public class ListBoxController : Controller
     {
-        public partial class ListBoxController : BaseController
+        public ActionResult Index()
         {
-            public IActionResult Index()
+            ViewBag.Attendees = new List<SelectListItem>
             {
-                ViewBag.Attendees = new List<SelectListItem>
-                {
-                    new SelectListItem(){ Value = "1", Text = "Steven White" },
-                    new SelectListItem(){ Value = "2", Text = "Nancy King" },
-                    new SelectListItem(){ Value = "3", Text = "Nancy Davolio" },
-                    new SelectListItem(){ Value = "4", Text = "Michael Leverling" },
-                    new SelectListItem(){ Value = "5", Text = "Andrew Callahan" },
-                    new SelectListItem(){ Value = "6", Text = "Michael Suyama" }
-                };
+                new SelectListItem(){ Value = "1", Text = "Steven White" },
+                new SelectListItem(){ Value = "2", Text = "Nancy King" },
+                new SelectListItem(){ Value = "3", Text = "Nancy Davolio" },
+                new SelectListItem(){ Value = "4", Text = "Michael Leverling" },
+                new SelectListItem(){ Value = "5", Text = "Andrew Callahan" },
+                new SelectListItem(){ Value = "6", Text = "Michael Suyama" }
+            };
 
-                return View();
-            }
+            return View();
         }
     }
 ```

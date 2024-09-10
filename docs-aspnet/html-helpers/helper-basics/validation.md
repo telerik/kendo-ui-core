@@ -299,7 +299,7 @@ To implement a custom validation attribute, include a `ShippedDate` field to the
 3. To trigger the custom serve-side validation employed from the attribute, use the `ModelState.IsValid` property
 
             [HttpPost]
-            public IActionResult Submit(OrderViewModel model)
+            public ActionResult Submit(OrderViewModel model)
             {
                 if (!ModelState.IsValid)
                 {

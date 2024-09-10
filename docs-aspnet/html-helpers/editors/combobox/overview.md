@@ -51,7 +51,6 @@ The following example demonstrates how to define the ComboBox.
     </datasource>
 </kendo-combobox>
 ```
-{% endif %}
 ```Controller
 
     public class ComboBoxController : Controller
@@ -73,6 +72,30 @@ The following example demonstrates how to define the ComboBox.
         }
     }
 ```
+{% else %}
+```Controller
+
+    public class ComboBoxController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Products_Read()
+        {
+            var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
+            {
+                ProductID = "" + i,
+                ProductName = "Product " + i
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+    }
+```
+{% endif %}
+
 {% if site.core %}
 @[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
 {% endif %}

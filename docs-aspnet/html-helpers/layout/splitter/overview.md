@@ -114,7 +114,7 @@ The following example demonstrates how to define the Splitter.
 ```Controller
     public class SplitterController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

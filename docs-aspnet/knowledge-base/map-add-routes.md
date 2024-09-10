@@ -122,7 +122,7 @@ Follow the steps below to achieve the desired scenario:
 ```
 {% else %}
 ```Controller.cs
-    public IActionResult _LoadRoutes()
+    public ActionResult _LoadRoutes()
     {
         var data = new List<RouteModel>
         {

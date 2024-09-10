@@ -155,6 +155,31 @@ The following example demonstrates the basic configuration of the Editor.
         });
     </script>
 ```
+
+The example below illustrates how to bind the Editor to a Model property that is passed to the View.
+
+```HtmlHelper
+    @model ProductViewModel
+
+    @(Html.Kendo().EditorFor(m => m.ProductName)
+        .Tools(tools => tools
+            .Clear()
+            .Bold()
+            .Italic()
+            .Underline()
+            .FontName()
+        )
+    )
+```
+```Controller
+
+    public ActionResult Index()
+    {
+        ProductViewModel product = new ProductViewModel() { ProductName = "Name 1" };
+        return View(product);
+    }
+
+```
 {% endif %}
 
 ## Functionality and Features

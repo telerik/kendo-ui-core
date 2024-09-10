@@ -54,7 +54,6 @@ The following example demonstrates how to define the AutoComplete.
 ```TagHelper
     <kendo-autocomplete name="products" filter="FilterType.StartsWith"></kendo-autocomplete>
 ```
-{% endif %}
 ```Controller
 
     public class AutoCompleteController : Controller
@@ -88,6 +87,42 @@ The following example demonstrates how to define the AutoComplete.
         }
     }
 ```
+{% else %}
+```Controller
+
+    public class AutoCompleteController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Products_Read(string text)
+        {
+            var result = GetProducts();
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                result = result.Where(p => p.ProductName.Contains(text)).ToList();
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private static IEnumerable<ProductViewModel> GetProducts()
+        {
+            var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
+            {
+                ProductID = "" + i,
+                ProductName = "Product " + i
+            });
+
+            return result;
+        }
+    }
+```
+{% endif %}
+
 
 {% if site.core %}
 @[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
@@ -173,7 +208,7 @@ The following example demonstrates the basic configuration of the AutoComplete.
         {
             source.Read(read =>
             {
-                read.Action("Products_Read", "Home")
+                read.Action("GetProducts", "Home")
                     .Data("onAdditionalData");
             })
             .ServerFiltering(true);
@@ -187,6 +222,14 @@ The following example demonstrates the basic configuration of the AutoComplete.
             };
         }
     </script>
+```
+```Controller
+    public JsonResult GetProducts(string text)
+    {
+        // filter the data based on the text value
+        // return an IEnumerable collection to the view     
+        return Json(products.ToList(), JsonRequestBehavior.AllowGet);
+    }
 ```
 {% endif %}
 

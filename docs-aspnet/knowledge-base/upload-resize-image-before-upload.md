@@ -121,6 +121,7 @@ To achieve client-side resizing of images, use the `<canvas>` and `Image` elemen
 
 The following example demonstrates how to configure the controller. The controller is expected only to save the file but you may also add server resizing logic to ensure that the file matches the project requirements.
 
+{% if site.core %}
 ```C#
 public class ResizeFileController : Controller
 {
@@ -167,6 +168,38 @@ public class ResizeFileController : Controller
 	}
 }
 ```
+{% else %}
+```C#
+public class ResizeFileController : Controller
+{
+	public ActionResult Index()
+    {
+        return View();
+    }
+
+	public ActionResult SaveAsync(IEnumerable<HttpPostedFileBase> files)
+	{
+		// The Name of the Upload component is "files"
+		if (files != null)
+		{
+			foreach (var file in files)
+			{
+				// Some browsers send file names with full path.
+				// We are only interested in the file name.
+				var fileName = Path.GetFileName(file.FileName);
+				var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+				// Implement the server validation before saving. The current example is a rudimentary one.
+				file.SaveAs(physicalPath);
+			}
+		}
+
+		// Return an empty string to signify success
+		return Content("");
+	}
+}
+```
+{% endif %}
 
 ## Notes
 

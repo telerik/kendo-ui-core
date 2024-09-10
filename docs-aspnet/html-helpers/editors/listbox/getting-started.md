@@ -129,7 +129,6 @@ Use the ListBox HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
     </kendo-listbox>
 </div>
 ```
-{% endif %}
 ```Controller
 
     public IActionResult GetProducts()
@@ -147,6 +146,26 @@ Use the ListBox HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
         return Json(products);
     }
 ```
+{% else %}
+```Controller
+
+    public ActionResult GetProducts()
+    {
+        var products = Enumerable.Empty<ProductViewModel>();
+
+        using (var northwind = GetContext())
+        {
+            products = northwind.Products.Select(product => new ProductViewModel
+            {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName
+            }).ToList();
+        }
+        return Json(products, JsonRequestBehavior.AllowGet);
+    }
+```
+{% endif %}
+
 
 ## 3. Configure the Initially Selected and Disabled Items
 
@@ -289,7 +308,7 @@ Handle the `DataBound` event of the ListBox, which fires when the data is receiv
 ```
 ```Controller
     public class HomeController : Controller {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             ListBoxViewModel productItems = new ListBoxViewModel()
             {

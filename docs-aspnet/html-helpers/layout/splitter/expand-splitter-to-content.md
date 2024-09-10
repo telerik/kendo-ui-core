@@ -118,7 +118,7 @@ You can expand the height of the Splitter based on the content inside a pane.
 ```Controller
     public class SplitterController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

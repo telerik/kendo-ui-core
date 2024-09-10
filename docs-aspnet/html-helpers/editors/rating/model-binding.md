@@ -11,7 +11,7 @@ position: 8
 When using the {{ site.product }} Rating component, you can bind the value to an arbitrary model property by using the `RatingFor` Helper.
 
 ```Controller
-    public IActionResult Index()
+    public ActionResult Index()
     {
         var model = new RatingModel 
         {

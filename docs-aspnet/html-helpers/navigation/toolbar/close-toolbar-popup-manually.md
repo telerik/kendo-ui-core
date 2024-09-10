@@ -49,7 +49,7 @@ The ToolBar provides options for closing its popup from a button `click` event i
 ```Controller
     public class ToolBarController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

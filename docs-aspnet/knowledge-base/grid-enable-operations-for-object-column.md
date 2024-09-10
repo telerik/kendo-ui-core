@@ -97,7 +97,7 @@ public class GridController : Controller
                 }).ToList();
             }
         }
-        public IActionResult GridController()
+        public ActionResult GridController()
         {
             return View();
         }

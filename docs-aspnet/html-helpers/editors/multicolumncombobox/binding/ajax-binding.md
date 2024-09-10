@@ -13,7 +13,7 @@ The MultiColumnComboBox provides support for remote data binding by using a `Dat
 
 1. Create an action that returns the data as a JSON result.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

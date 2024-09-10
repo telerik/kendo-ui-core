@@ -15,7 +15,7 @@ You can bind the AutoComplete locally on the server by passing the appropriate c
 
 1. Pass the data to the view through `ViewData`.
 
-            public IActionResult Index()
+            public ActionResult Index()
             {
                 ViewData["products"] = GetProducts();
 

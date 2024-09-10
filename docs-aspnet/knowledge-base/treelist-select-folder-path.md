@@ -141,7 +141,7 @@ To achieve the desired scenario:
     </script>
 ```
 ```Controller
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }

@@ -86,7 +86,7 @@ You can achieve this by extending the Form's built-in Kendo Validator:
     </script>
 ```
 ```Controller
-    public IActionResult Index()
+    public ActionResult Index()
     {
         var viewModel = new User();
         return View(viewModel);

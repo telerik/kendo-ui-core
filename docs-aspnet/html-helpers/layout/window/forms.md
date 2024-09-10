@@ -86,7 +86,7 @@ To handle this behavior, render the content in an `iframe`.
 ```
 {% endif %}
 ```HomeController.cs
-    public IActionResult GetForm()
+    public ActionResult GetForm()
     {
         // Return the view with the form.
         return View("Form");
@@ -126,7 +126,7 @@ public class MyModel
 ```
 ```MyModelController.cs
 [HttpPost]
-public IActionResult MyModel_Create(MyModel model)
+public ActionResult MyModel_Create(MyModel model)
 {
     if (!ModelState.IsValid)
     {

@@ -58,6 +58,39 @@ The following example demonstrates how to define the MultiColumnComboBox.
         </datasource>
     </kendo-multicolumncombobox>
 ```
+```Controller
+
+    public class MultiColumnComboBoxController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Products_Read(string text)
+        {
+            var result = GetProducts();
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                result = result.Where(p => p.ProductName.Contains(text)).ToList();
+            }
+
+            return Json(result);
+        }
+
+        private static IEnumerable<ProductViewModel> GetProducts()
+        {
+            var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
+            {
+                ProductID = "" + i,
+                ProductName = "Product " + i
+            });
+
+            return result;
+        }
+    }
+```
 {% else %}
 ```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
@@ -85,7 +118,7 @@ The following example demonstrates how to define the MultiColumnComboBox.
 
     public class MultiColumnComboBoxController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
@@ -99,7 +132,7 @@ The following example demonstrates how to define the MultiColumnComboBox.
                 result = result.Where(p => p.ProductName.Contains(text)).ToList();
             }
 
-            return Json(result);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         private static IEnumerable<ProductViewModel> GetProducts()

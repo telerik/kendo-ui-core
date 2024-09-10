@@ -193,61 +193,49 @@ public ActionResult Remove(string[] fileNames)
 ```
 {% else %}
 ```Controller
-public IWebHostingEnvironment WebHostEnvironment { get; set; }
-
-public UploadController(IWebHostEnvironment webHostEnvironment)
-{
-    WebHostEnvironment = webHostEnvironment;
-}
-
-public async Task<ActionResult> SaveAsync(IEnumerable<HttpPostedFileBase> files)
-{
-    // The Name of the Upload component is "files".
-    if (files != null)
+    public ActionResult SaveAsync(IEnumerable<HttpPostedFileBase> files)
     {
-        foreach (var file in files)
+        // The Name of the Upload component is "files"
+        if (files != null)
         {
-            var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-
-            // Some browsers send file names with full path.
-            // We are only interested in the file name.
-            var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
-
-            using (var fileStream = new FileStream(physicalPath, FileMode.Create))
+            foreach (var file in files)
             {
-                await file.CopyToAsync(fileStream);
+                // Some browsers send file names with full path.
+                // We are only interested in the file name.
+                var fileName = Path.GetFileName(file.FileName);
+                var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                // Implement the server validation before saving. The current example is a rudimentary one.
+                file.SaveAs(physicalPath);
             }
         }
+
+        // Return an empty string to signify success
+        return Content("");
     }
 
-    // Return an empty string to signify success.
-    return Content("");
-}
-
-public ActionResult Remove(string[] fileNames)
-{
-    // The parameter of the Remove action must be called "fileNames".
-
-    if (fileNames != null)
+    public ActionResult Remove(string[] fileNames)
     {
-        foreach (var fullName in fileNames)
+        // The parameter of the Remove action must be called "fileNames"
+
+        if (fileNames != null)
         {
-            var fileName = Path.GetFileName(fullName);
-            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
-
-            // TODO: Verify user permissions.
-
-            if (System.IO.File.Exists(physicalPath))
+            foreach (var fullName in fileNames)
             {
-                System.IO.File.Delete(physicalPath);
+                var fileName = Path.GetFileName(fullName);
+                var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                // TODO: Verify user permissions
+                if (System.IO.File.Exists(physicalPath))
+                {
+                    System.IO.File.Delete(physicalPath);
+                }
             }
         }
-    }
 
-    // Return an empty string to signify success.
-    return Content("");
-}
+        // Return an empty string to signify success
+        return Content("");
+    }
 ```
 {% endif %}
 

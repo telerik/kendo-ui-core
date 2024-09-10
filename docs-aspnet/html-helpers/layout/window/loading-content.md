@@ -40,14 +40,14 @@ In some scenarios, it is required to configure the Window to load dynamic conten
 
 1. Create a new action method which renders the view.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
 
 1. Create an action method which renders the content.
 
-        public IActionResult AjaxContent()
+        public ActionResult AjaxContent()
         {
             return View();
         }
@@ -91,7 +91,7 @@ You can also use another [`.LoadContentFrom()`](/api/kendo.mvc.ui.fluent/windowb
  ```
 {% endif %}
 ```Controller
-public IActionResult UserDetails(int userId)
+public ActionResult UserDetails(int userId)
 {
     MyUserViewModel model = myService.GetUserDetails(userId)
     //fetch required details and pass them to the View 

@@ -71,7 +71,7 @@ The Splitter enables you to keep its pane size in percentage upon user resizes.
 ```Controller
     public class SplitterController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

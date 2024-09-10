@@ -104,7 +104,6 @@ The following example consists of two AutoComplete editors that bind to Model pr
             </div>
         </form> 
     ```
-    {% endif %}
     ```Controller
         public class HomeController : Controller
         {
@@ -137,6 +136,40 @@ The following example consists of two AutoComplete editors that bind to Model pr
             }
         }
     ```
+    {% else %}
+    ```Controller
+        public class HomeController : Controller
+        {
+            public ActionResult Index()
+            {
+                return View(new OrganizatioViewModel());
+            }
+
+            public JsonResult GetOrganizations(string text)
+            {
+                var organizations = _organizationsDataService.GetData();
+                if (!string.IsNullOrEmpty(text))
+                {
+                    var filteredData = organizations.Where(p => p.Name.ToLower().Contains(text.ToLower())).ToList();
+                    return Json(filteredData, JsonRequestBehavior.AllowGet);
+                }
+                return Json(organizations, JsonRequestBehavior.AllowGet);
+            }
+
+            public JsonResult GetOrganizationNumbers(string text)
+            {
+                var organizations = _organizationsDataService.GetData();
+                if (!string.IsNullOrEmpty(text))
+                {
+                    int organizationNumber = int.Parse(text);
+                    var filteredData = organizations.Where(p => p.Number == intOrganizationNumber).ToList();
+                    return Json(filteredData, JsonRequestBehavior.AllowGet);
+                }
+                return Json(organizations, JsonRequestBehavior.AllowGet);
+            }
+        }
+    ```
+    {% endif %}
     ```Model
         public class OrganizatioViewModel
         {
@@ -212,6 +245,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
 
 1. Filter the data server-side based on the selected AutoComplete option.
 
+    {% if site.core %}
     ```Controller
         public class HomeController : Controller
         {
@@ -251,6 +285,47 @@ The following example consists of two AutoComplete editors that bind to Model pr
             }
         }
     ```
+    {% else %}
+    ```Controller
+        public class HomeController : Controller
+        {
+
+            public JsonResult GetOrganizations(string text, string Number)
+            {
+                var organizations = _organizationsDataService.GetData();
+                if (!string.IsNullOrEmpty(Number))
+                {
+                    int organizationNumber = int.Parse(Number);
+                    var filteredData = organizations.Where(p => p.Number == organizationNumber).ToList();
+                    return Json(filteredData, JsonRequestBehavior.AllowGet);
+                }
+                if (!string.IsNullOrEmpty(text))
+                {
+                    var filteredData = organizations.Where(p => p.Name.ToLower().Contains(text.ToLower())).ToList();
+                    return Json(filteredData, JsonRequestBehavior.AllowGet);
+                }
+                return Json(organizations, JsonRequestBehavior.AllowGet);
+            }
+
+            public JsonResult GetOrganizationNumbers(string text, string Name)
+            {
+                var organizations = _organizationsDataService.GetData();
+                if (!string.IsNullOrEmpty(Name))
+                {
+                    var filteredData = organizations.Where(p => p.Name == Name).ToList();
+                    return Json(filteredData, JsonRequestBehavior.AllowGet);
+                }
+                if (!string.IsNullOrEmpty(text))
+                {
+                    int organizationNumber = int.Parse(text);
+                    var filteredData = organizations.Where(p => p.Number == intOrganizationNumber).ToList();
+                    return Json(filteredData, JsonRequestBehavior.AllowGet);
+                }
+                return Json(organizations, JsonRequestBehavior.AllowGet);
+            }
+        }
+    ```
+    {% endif %}
 
 1. Handle the `Select` event of each AutoComplete component and select the value in the other AutoComplete based on the selected option.
 

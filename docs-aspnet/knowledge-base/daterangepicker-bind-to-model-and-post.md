@@ -55,14 +55,14 @@ public class MyViewModel
 }
 ```
 ```Controller
-public IActionResult Index()
+public ActionResult Index()
 {
     MyViewModel mdl = new MyViewModel { TheStartTime = DateTime.Now.AddDays(-2), TheEndTime = DateTime.Now.AddDays(2) };
     return View(mdl);
 }
 
 [HttpPost]
-public IActionResult Index(MyViewModel theUserInput)
+public ActionResult Index(MyViewModel theUserInput)
 {
     return View(theUserInput);//just return to the current view with the new data
 }

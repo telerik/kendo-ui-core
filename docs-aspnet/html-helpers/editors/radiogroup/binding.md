@@ -46,7 +46,7 @@ You can configure the items in the RadioGroup widget by using the BindTo method.
 
 1. Pass the data to the view through the view model.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             var itemsList = new List<InputGroupItemModel>()
             {
@@ -149,7 +149,7 @@ You can implement model binding both with [local](#items-method) and [remote dat
 {% endif %}
 
 ```Controller
-    public IActionResult Index()
+    public ActionResult Index()
     {
         var model = new RadioGroupModel
         {
@@ -209,7 +209,7 @@ You can implement model binding both with [local](#items-method) and [remote dat
                 }
             };
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             var model = new RadioGroupModel
             {

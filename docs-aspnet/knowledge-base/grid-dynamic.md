@@ -61,7 +61,7 @@ I am trying to bind a DataTable to a {{ site.product }} Grid. The main reason fo
     )
 ```
 ```Controller
-    public IActionResult Index()
+    public ActionResult Index()
     {
     	DataTable products = GetDataTable(500);
     
@@ -80,7 +80,7 @@ I am trying to bind a DataTable to a {{ site.product }} Grid. The main reason fo
         return dataSource;
     }
 
-    public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+    public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
     {
     	return Json(GetDataTable(500).ToDataSourceResult(request));
     }
@@ -122,17 +122,17 @@ The first thing is to add the model Id - the primary key of the table and define
     })
 ```
 
-1. You can use `IFormCollection` to intecept the updated item.
+1. You can use `IFormCollection` to intercept the updated item.
 
     ```Inline_Popup
-        public IActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
+        public ActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
     ```
     ```InCell
         public JsonResult OnPostUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
     ```
     ```Controller_Inline_Popup
         public static DataTable db = new DataTable();
-        public IActionResult Index()
+        public ActionResult Index()
         {
             db = GetDataTable(50);
 
@@ -161,12 +161,12 @@ The first thing is to add the model Id - the primary key of the table and define
 
             return dt;
         }
-        public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(db.ToDataSourceResult(request));
         }
 
-        public IActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
+        public ActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
         {
             var dt = GetDataTableColumns();
             var updatedRow = dt.NewRow();

@@ -187,7 +187,7 @@ Use the Form HtmlHelper {% if site.core %}or TagHelper{% endif %} to configure t
 Optionally, you can bind the Form to an already existing instance of the view model. This enables you to save the progress while the user fills in the Form or edit data items that already exist.
 
 ```Controller
-public IActionResult Index(){
+public ActionResult Index(){
     return View(new UserViewModel()
     {
         FirstName = "John",
