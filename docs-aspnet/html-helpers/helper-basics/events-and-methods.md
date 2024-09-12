@@ -4,7 +4,7 @@ page_title: Methods and Events
 description: "Get started with Telerik UI for {{ site.framework }}, obtain a reference to initialized helper instances, and call their methods and events."
 slug: methodevents_core
 previous_url: /getting-started/helper-basics/events-and-methods 
-position: 4
+position: 5
 ---
 
 # Methods and Events
