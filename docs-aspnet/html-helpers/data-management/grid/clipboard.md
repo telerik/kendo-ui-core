@@ -17,7 +17,12 @@ By using the Grid clipboard functionality, you enable the user to perform the fo
 The paste operation supports two interaction modes:
 
 * [Replace](#replace-mode)&mdash;Replaces the Grid cell content with the copied content.
-* [Insert](#insert-mode)&mdash;Inserts the copied content as a new Grid row.
+* [Insert](#insert-mode)&mdash;Inserts the copied content as a new Grid row.  
+
+For runnable examples, refer to the following demos:
+* [Using the Grid clipboard functionality (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/paste-from-excel)
+* [Using the functionality to copy content from the Grid to Excel (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/copy-to-excel)
+* [Using the selection and export of the Grid to Excel (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection-export)
 
 ## Getting Started
 
@@ -98,7 +103,7 @@ To activate the Replace mode, select the **Paste (Replace)** option in the Toolb
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")
-        .ToolBar(toolBar => toolBar.Paste())
+        .ToolBar(toolBar => toolBar.Paste()) // Displays a toolbar with a dropdown to select the paste mode.
         ...
     )
 ```
@@ -128,7 +133,7 @@ To activate the Insert mode select the **Paste (Insert)** option in the Toolbar 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")
-        .ToolBar(toolBar => toolBar.Paste())
+        .ToolBar(toolBar => toolBar.Paste()) // Displays a toolbar with a dropdown to select the paste mode.
         ...
     )
 ```

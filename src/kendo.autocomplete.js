@@ -85,7 +85,6 @@ var __meta__ = {
             }
 
             that._wrapper();
-            that._loader();
             that._clearButton();
 
             that._dataSource();
@@ -143,8 +142,7 @@ var __meta__ = {
             that.listView.bind("click", function(e) { e.preventDefault(); });
 
             that._resetFocusItemHandler = that._resetFocusItem.bind(that);
-
-            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: that._loading });
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: options.clearButton ? that._clear : that.element });
 
             kendo.notify(that);
             that._toggleCloseVisibility();
@@ -247,8 +245,8 @@ var __meta__ = {
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._progressHandler = that._showBusy.bind(that);
-                that._errorHandler = that._hideBusy.bind(that);
+                that._progressHandler = that._showBusy;
+                that._errorHandler = that._hideBusy;
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
@@ -757,29 +755,6 @@ var __meta__ = {
             }
         },
 
-        _hideBusy: function() {
-            var that = this;
-            clearTimeout(that._busy);
-            that._loading.addClass(HIDDENCLASS);
-            that.element.attr("aria-busy", false);
-            that._busy = null;
-            that._toggleCloseVisibility();
-        },
-
-        _showBusy: function() {
-            var that = this;
-
-            if (that._busy) {
-                return;
-            }
-
-            that._busy = setTimeout(function() {
-                that.element.attr("aria-busy", true);
-                that._loading.removeClass(HIDDENCLASS);
-                that._hideClear();
-            }, 100);
-        },
-
         _placeholder: function(show) {
             if (placeholderSupported) {
                 return;
@@ -857,10 +832,6 @@ var __meta__ = {
             return that.listView.select(candidate).done(function() {
                 that._active = false;
             });
-        },
-
-        _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading k-input-loading-icon ' + HIDDENCLASS + '"></span>').insertAfter(this.element);
         },
 
         _clearButton: function() {
