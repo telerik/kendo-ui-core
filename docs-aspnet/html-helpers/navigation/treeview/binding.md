@@ -135,6 +135,25 @@ private IEnumerable<TreeViewItemModel> GetData()
     return inline;
 }
 ```
+```TreeViewItemModel
+public class TreeViewItemViewModel
+{
+	public string Id { get; set; }
+    public bool Expanded { get; set; }
+    public bool Encoded { get; set; }
+    public string Text { get; set; }
+    public string SpriteCssClass { get; set; }
+    public string Url { get; set; }
+    public string ImageUrl { get; set; }
+    public bool HasChildren { get; set; }
+    public bool Checked { get; set; }
+    public List<TreeViewItemModel> Items { get; set; }
+    public IDictionary<string, string> HtmlAttributes { get; set; }
+    public IDictionary<string, string> ImageHtmlAttributes { get; set; }
+    public IDictionary<string, string> LinkHtmlAttributes { get; set; }
+	public bool Selected { get; set; }
+}
+```
 
 ## Remote Data Binding
 
@@ -169,11 +188,11 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
     var result = new List<HierarchicalViewModel>()
     {
-        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+        new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item" }
     };
 
     return result;
@@ -182,7 +201,7 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 public IActionResult Read_TreeViewData(int? id)
 {
     var result = GetHierarchicalData()
-        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
         .Select(item => new {
             id = item.ID,
             Name = item.Name,
@@ -228,6 +247,17 @@ public ActionResult Read_TreeViewData(int? id)
 {% endif %}
 
 
+```HierarchicalViewModel
+public class HierarchicalViewModel
+{
+	public int ID { get; set; }
+	public int? ParentID { get; set; }
+    public bool HasChildren { get; set; }
+    public string Name { get; set; }
+    public bool Expanded { get; set; }
+    public string ImageUrl { get; set; }
+}
+```
 
 By default, the TreeView sends to the remote endpoint the `id` of the expanded node. To [send additional data]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) use the DataSource `Data` method and provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 

@@ -180,7 +180,7 @@ For a runnable example based on the code above, refer to the [REPL example on dy
 
 ## More {{ site.framework }} Form Resources
 
-* [{{ site.framework }} Form Documentation](({%slug htmlhelpers_form_aspnetcore_overview%})
+* [{{ site.framework }} Form Documentation]({%slug htmlhelpers_form_aspnetcore_overview%})
 
 * [{{ site.framework }} Form Demos](https://demos.telerik.com/{{ site.platform }}/form)
 

@@ -95,7 +95,7 @@ You can achieve this by extending the Form's built-in Kendo Validator:
 
 ## More {{ site.framework }} Form Resources
 
-* [{{ site.framework }} Form Documentation](({%slug htmlhelpers_form_aspnetcore_overview%})
+* [{{ site.framework }} Form Documentation]({%slug htmlhelpers_form_aspnetcore_overview%})
 
 * [{{ site.framework }} Form Demos](https://demos.telerik.com/{{ site.platform }}/form)
 

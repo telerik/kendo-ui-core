@@ -28,7 +28,7 @@ For the complete implementation on how to create a strongly typed form in a view
 
 ## More {{ site.framework }} Form Resources
 
-* [{{ site.framework }} Form Documentation](({%slug htmlhelpers_form_aspnetcore_overview%})
+* [{{ site.framework }} Form Documentation]({%slug htmlhelpers_form_aspnetcore_overview%})
 
 * [{{ site.framework }} Form Demos](https://demos.telerik.com/{{ site.platform }}/form)
 
