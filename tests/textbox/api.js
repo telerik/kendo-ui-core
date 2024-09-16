@@ -148,5 +148,15 @@
             textbox.setOptions({ label: false });
             assert.isOk(!textbox.element.closest(".k-floating-label-container").length);
         });
+        it("clearButton does not retain value", function() {
+            var textbox = new TextBox(input, {
+                value: "Test",
+                clearButton: true
+            });
+
+            $(textbox.wrapper).find(".k-clear-value").trigger("click");
+            var value = textbox.value();
+            assert.equal("", value);
+        });
     });
 }());

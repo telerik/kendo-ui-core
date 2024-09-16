@@ -905,9 +905,9 @@ var __meta__ = {
 
             if (that._isValueChanged(value)) {
                 trigger = true;
-            } else if (that._valueBeforeCascade !== undefined && that._valueBeforeCascade !== unifyType(that._old, typeof that._valueBeforeCascade) && that._userTriggered) {
+            } else if (that._valueBeforeCascade !== undefined && that._isValueChanged(that._valueBeforeCascade) && that._userTriggered) {
                 trigger = true;
-            } else if (index !== undefined && index !== that._oldIndex && !that.listView.isFiltered()) {
+            } else if (index !== undefined && index !== that._oldIndex && !that.listView.isFiltered() && !that.options.virtual) {
                 trigger = true;
             }
 

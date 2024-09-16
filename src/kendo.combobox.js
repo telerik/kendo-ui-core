@@ -850,8 +850,11 @@ var __meta__ = {
                         that._accessor(text);
                     }
 
-                    that._cascadeTriggered = true;
-                    that._triggerCascade();
+                    if (that._isValueChanged(text)) {
+                        that._cascadeTriggered = true;
+                        that._triggerCascade();
+                    }
+
                     that._refreshFloatingLabel();
                 }
 

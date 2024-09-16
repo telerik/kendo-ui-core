@@ -189,7 +189,7 @@ var __meta__ = {
         _clearValue: function(e) {
             this.element.val("");
             this.element.focus();
-            this.trigger(CHANGE, { value: "", originalEvent: e });
+            this.element.trigger(CHANGE, { value: "", originalEvent: e });
             this._hideClear();
         },
 
@@ -244,7 +244,7 @@ var __meta__ = {
 
                 element.on("focusin" + NS, that._focusin.bind(that));
                 element.on("focusout" + NS, that._focusout.bind(that));
-                element.on("change" + NS, that._change.bind(that));
+                element.on(CHANGE + NS, that._change.bind(that));
                 element.on(INPUT_EV + NS, that._input.bind(that));
             } else {
                 element.attr(DISABLED, disable)
