@@ -108,5 +108,15 @@ it("binding invisible to false shows the menu", function() {
 
     assert.isOk(menu.wrapper.css("display") != "none", "menu is not invisible");
 });
+
+it("the data-popup-collision configuration is parsed correctly", function() {
+    dom = $('<div data-role="menu" data-popup-collision="flip flip"></div>');
+
+    kendo.bind(dom);
+
+    var menu = dom.data("kendoMenu");
+
+    assert.isOk(menu.options.popupCollision === "flip flip");
+});
     });
 }());

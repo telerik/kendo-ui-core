@@ -108,9 +108,9 @@ var __meta__ = {
                 }
 
                 if (operator === "isnullorempty") {
-                    filter = kendo.format("{0} {1} null or {0} {1} ''", field, filter);
+                    filter = kendo.format("({0} {1} null or {0} {1} '')", field, filter);
                 } else if (operator === "isnotnullorempty") {
-                    filter = kendo.format("{0} {1} null and {0} {1} ''", field, filter);
+                    filter = kendo.format("({0} {1} null and {0} {1} '')", field, filter);
                 } else if (operator === "isnull" || operator === "isnotnull") {
                     filter = kendo.format("{0} {1} null", field, filter);
                 } else if (operator === "isempty" || operator === "isnotempty") {

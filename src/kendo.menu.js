@@ -540,7 +540,7 @@ var __meta__ = {
             closeOnClick: true,
             hoverDelay: 100,
             scrollable: false,
-            popupCollision: undefined
+            popupCollision: null
         },
 
         _initData: function() {
@@ -1097,7 +1097,16 @@ var __meta__ = {
                             parentHorizontal = root && horizontal,
                             directions = parseDirection(direction, root, isRtl),
                             effects = options.animation.open.effects,
-                            openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root);
+                            openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root),
+                            collision;
+
+                        if (options.popupCollision !== null) {
+                            collision = options.popupCollision;
+                        } else if (parentHorizontal) {
+                            collision = "fit";
+                        } else {
+                            collision = "fit flip";
+                        }
 
                         if (!popup) {
                             popup = div.kendoPopup({
@@ -1111,7 +1120,7 @@ var __meta__ = {
                                 },
                                 origin: directions.origin,
                                 position: directions.position,
-                                collision: options.popupCollision !== undefined ? options.popupCollision : (parentHorizontal ? "fit" : "fit flip"),
+                                collision: collision,
                                 anchor: li,
                                 appendTo: overflowWrapper || li,
                                 animation: {
