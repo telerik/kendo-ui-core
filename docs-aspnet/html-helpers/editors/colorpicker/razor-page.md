@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI ColorPicker component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_colorpicker_razorpage_aspnetcore
-position: 6
+position: 8
 ---
 
 # ColorPicker in Razor Pages

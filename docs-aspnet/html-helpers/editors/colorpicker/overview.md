@@ -85,10 +85,14 @@ The following example demonstrates how to configure the tile size, columns, `Cha
 
 ## Functionality and Features
 
-* [Views]({% slug htmlhelpers_views_colorpickerhelper_aspnetcore %})&mdash;The ColorPicker enables you to choose between `gradient` or `palette` view types.
-* [Appearance]({% slug appearance_colorpicker_aspnetcore%})&mdash;The ColorPicker provides you with the option to customize its appearance based on your requirements.
-* [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore %})&mdash;The ColorPicker enables you to configure the contrast tool.
-* [Formats]({% slug htmlhelpers_formats_colorpickerhelper_aspnetcore %})&mdash;The ColorPicker provides support for both HEX and RGB coloring formats.
+|Feature|Description|
+|-------|-----------|
+| [Appearance]({% slug appearance_colorpicker_aspnetcore %})| Customize the ColorPicker appearance by using the available options. |
+| [Views]({% slug htmlhelpers_views_colorpickerhelper_aspnetcore %})| The component allows you to choose between `gradient` or `palette` view types. |
+| [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore %})| The ColorPicker supports a contrast tool. |
+| [Formats]({% slug htmlhelpers_formats_colorpickerhelper_aspnetcore %})| Configure the ColorPicker input formats. |
+| [Palettes]({% slug palettes_colorpicker %})| Define a color palette that the user can pick from.  |
+| [Events]({% slug events_colorpicker %})| The ColorPicker allows you to handle its events and implement any custom logic. |
 
 ## Next Steps
 

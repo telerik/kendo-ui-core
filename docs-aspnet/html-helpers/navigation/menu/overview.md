@@ -275,11 +275,15 @@ The following example demonstrates the basic configuration of the Menu.
 
 ## Functionality and Features
 
-* [Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})&mdash;To bind the Menu to data, you can apply various approaches, for example, binding to a server end point, binding to a hierarchical model, or manually defining the properties of the Menu items.
-* [ContextMenu]({% slug htmlhelpers_contextmenu_aspnetcore %})&mdash;The ContextMenu displays hierarchical lists of items in a popup.
-* [Accessibility]({% slug accessibility_aspnetcore_menu %})&mdash;The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
-* [Security trimming]({% slug securitytrimming_menu_aspnetmvc %})&mdash;The built-in security trimming functionality of the Menu is enabled by default.
-* [Events]({% slug events_menu %})&mdash;The Menu emits various events that allow you to control what happens when the user interacts with it.
+|Feature|Description|
+|-------|-----------|
+| [Appearance]({% slug appearance_menu %})| Customize the Menu appearance with CSS. |
+| [Data Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})| To bind the Menu to data, you can apply various approaches, for example, binding to a server endpoint, binding to a hierarchical model, or manually defining the properties of the Menu items. |
+| [Animations]({% slug animations_menu %})| The Menu allows you to define animations for opening and closing its sub-items. |
+| [ContextMenu]({% slug htmlhelpers_contextmenu_aspnetcore %})| The Menu component supports the creation and implementation of context menus that open on right-click or based on custom events. |
+| [Security Trimming]({% slug securitytrimming_menu_aspnetmvc %})| The built-in security trimming functionality of the Menu is enabled by default. |
+| [Events]({% slug events_menu %})| Explore the various Menu events that allow you to control what happens when the user interacts with the component. |
+| [Accessibility]({% slug accessibility_aspnetcore_menu %})| The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

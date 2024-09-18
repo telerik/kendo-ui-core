@@ -6,7 +6,7 @@ slug: appearance_colorpicker_aspnetcore
 position: 2
 ---
 
-# ColorPicker Appearance
+# Appearance
 
 As of the R1 2022 release, the ColorPicker component uses a new rendering. To learn more about the reasons for this decision, see the [Components Appearance]({% slug components_rendering_overview %}) article.
 
