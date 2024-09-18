@@ -197,12 +197,18 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 
 | Feature | Description |
 |---------|-------------|
-| [Data binding]({% slug htmlhelpers_multicolumncombobox_databinding_aspnetcore %})|The MultiColumnComboBox provides a set of options for binding it to data.|
-| [Columns]({% slug columns_multicolumncombobox_aspnetcore %})|The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down list through the `dropDownWidth` option.|
-| [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})|Apart from the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered.|
-| [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})|You can configure a MultiColumnComboBox to use virtualization.|
+| [Data Binding]({% slug htmlhelpers_multicolumncombobox_databinding_aspnetcore %})|The MultiColumnComboBox provides a set of options for binding it to data.|
+| [Appearance]({% slug appearance_multicolumncombobox %})|Customize the component appearance based on your requirements.|
+| [Columns]({% slug columns_multicolumncombobox_aspnetcore %})|The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down list.|
+| [Adaptive Mode]({% slug htmlhelpers_multicolumncombobox_adaptive_mode_aspnetcore %})|Enable the mobile-friendly rendering of the MultiColumnComboBox popup. |
+| [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})|Configure the MultiColumnComboBox to use virtualization.|
+| [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})| Enable the filtering functionality of the component.|
+| [Grouping]({% slug grouping_multicolumncombobox_aspnetmvc %})| Bind the MultiColumnComboBox to a grouped DataSource. |
+| [Floating Label]({% slug htmlhelpers_multicolumncombobox_floatinglabel_aspnetcore %})| Modify the rendering of the component label.|
+| [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})| Use a series of two or more cascaded MultiColumnComboBoxes.|
+| [Prefix and Suffix]({% slug prefix_suffix_multicolumncombobox %})| Enhance the component look and feel by adding prefix and suffix adornments.|
+| [Events]({% slug events_multicolumncombobox_aspnetcore %})| Handle the component events and implement any custom functionality.|
 | [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
-| [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})|The cascading MultiColumnComboBox is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the DataValueField in the previous MultiColumnComboBox.|
 
 ## Next Steps
 

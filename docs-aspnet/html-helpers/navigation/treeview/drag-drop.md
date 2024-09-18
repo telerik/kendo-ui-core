@@ -3,7 +3,7 @@ title: Dragging and Dropping
 page_title: TreeView Drag and Drop
 description: "Learn about the drag-and-drop functionality of the Telerik UI TreeView component for {{ site.framework }}."
 slug: htmlhelpers_treeview_drag_drop_aspnetcore
-position: 5
+position: 6
 ---
 
 # Node Click-Move-Click
@@ -38,7 +38,7 @@ As of {{site.product}} UI R2 SP1 2023, users can reorder the TreeView's nodes by
 ```
 {% endif %}
 
-# TreeView Drag and Drop
+# Drag and Drop
 
 When the drag-and-drop feature is enabled, the nodes of the TreeView can be dragged and dropped across all levels.
 

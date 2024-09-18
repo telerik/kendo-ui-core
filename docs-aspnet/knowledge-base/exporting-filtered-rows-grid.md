@@ -1,5 +1,5 @@
 ---
-title: Export to Excel Only the Filtered Rows from Telerik UI for {{ site.framework }} Grid
+title: Export to Excel Only the Filtered Rows from Grid
 description: Learn how to export only the filtered rows from the Telerik UI for {{ site.framework }} Grid
 type: how-to
 page_title: Exporting Filtered Rows from Grid to Excel through Server Export 
@@ -53,7 +53,7 @@ To export only the filtered rows to Excel when the Grid exports the data on the 
         )
     ```
     {% if site.core %}
-    ```
+    ```TagHelper
         @addTagHelper *, Kendo.Mvc
 
         <form action="@Url.Action("ExportServer", "Grid")" method="POST">
@@ -79,7 +79,7 @@ To export only the filtered rows to Excel when the Grid exports the data on the 
 
 1. Add the custom function for serializing and encoding the existing fields:
 
-    ```
+    ```JS
     <script>
         var escapeQuoteRegExp = /'/ig;
 
@@ -129,7 +129,7 @@ To export only the filtered rows to Excel when the Grid exports the data on the 
     ```
 1. Handle the `click` event of the submit button of the form and populate the hidden inputs with the respective data. Transpose the custom serialization function of the data source and serialize the filter alongside other fields such as the model and current selection from the client side:
 
-    ```
+    ```JS
     <script>
         $(".download").on("click", function() {
             var grid = $("#grid").data("kendoGrid");
@@ -149,7 +149,7 @@ To export only the filtered rows to Excel when the Grid exports the data on the 
     * Parse the passed filters from the client into a `FilterDescriptor` (built-in class provided by Kendo UI).
     * Execute the filter expression over the data collection and take the data items only.
 
-    ```GridController.cs
+    ```C#
     using Kendo.Core.Export;
     using Newtonsoft.Json;
     using Telerik.Documents.SpreadsheetStreaming;

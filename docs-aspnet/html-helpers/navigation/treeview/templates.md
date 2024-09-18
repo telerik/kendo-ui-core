@@ -3,7 +3,7 @@ title: Templates
 page_title: Templates
 description: "Learn how to configure the template options when working with the Telerik UI TreeView for {{ site.framework }}."
 slug: htmlhelpers_treeview_templates_aspnetcore
-position: 6
+position: 8
 ---
 
 # Templates
