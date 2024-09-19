@@ -511,6 +511,9 @@ navigation:
         title: "Calendar"
      "html-helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
+     "html-helpers/scheduling/scheduler/grouping":
+        title: "Grouping"
+        position: 5
      "*badge":
         title: "Badge"
      "*checkbox":
