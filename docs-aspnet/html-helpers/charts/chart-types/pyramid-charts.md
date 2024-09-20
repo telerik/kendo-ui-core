@@ -92,5 +92,7 @@ The following example demonstrates how to configure a basic Pyramid chart.
 ## See Also
 
 * [Basic Usage of the Pyramid Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/index)
+{% if site.core %}
 * [Basic Usage of the Pyramid Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/tag-helper)
+{% endif %}
 * [Server-Side API](/api/chart)

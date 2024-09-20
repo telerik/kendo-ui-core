@@ -148,5 +148,7 @@ The following example demonstrates how to use all three options to customize the
 ## See Also
 
 * [Basic Usage of the Bullet Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bullet-charts/index)
+{% if site.core %}
 * [Basic Usage of the Bullet Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bullet-charts/tag-helper)
+{% endif %}
 * [Server-Side API](/api/chart)

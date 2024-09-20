@@ -75,5 +75,7 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
 ## See Also
 
 * [Basic Usage of the Bubble Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bubble-charts/index)
+{% if site.core %}
 * [Basic Usage of the Bubble Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bubble-charts/tag-helper)
+{% endif %}
 * [Server-Side API](/api/chart)
