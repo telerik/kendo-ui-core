@@ -96,5 +96,7 @@ The following example demonstrates how to base the widths of the bases for each 
 ## See Also
 
 * [Basic Usage of the Funnel Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
+{% if site.core %}
 * [Basic Usage of the Funnel Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/tag-helper)
+{% endif %}
 * [Server-Side API](/api/chart)

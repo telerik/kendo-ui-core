@@ -115,5 +115,7 @@ The following image displays a smooth-line Area Chart.
 ## See Also
 
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+{% if site.core %}
 * [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+{% endif %}
 * [Server-Side API](/api/chart)
