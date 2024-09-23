@@ -32,8 +32,9 @@ https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web
 ## Solution
 
 ```dojo
-  
-       <style>
+
+    <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css"/>
+    <style>
       .k-i-arrows-swap{
         margin-left: 8px;
       }
@@ -82,19 +83,21 @@ https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web
           var headerCells = e.sender.element.find('th[data-role="columnsorter"]');
           headerCells.each(function(i,e){
             var headerCell = $(this);
-            var link = headerCell.find("a.k-link");
-            var icon = link.find('span.k-i-arrows-swap');
-            if(document.activeElement==link[0])
-            {
-              icon.remove();
-            }
-
+            var link = headerCell.find("span.k-link");
             setTimeout(function(){
+              var icon = link.find('span.k-i-arrows-swap');
+              var activeElement = $(".k-sorted").children().find(".k-link");
+              if(activeElement[0]==link[0])
+              {
+                icon.remove();
+              }
+
               if(!headerCell.hasClass('k-sorted') && !icon.length)
               {
-                link.append('<span class="k-icon k-i-arrows-swap"></span>');
-              }
-            });
+                link.append('<span class="k-icon k-font-icon k-i-arrows-swap"></span>');
+              } 
+            })
+
           });
         }
       </script>
