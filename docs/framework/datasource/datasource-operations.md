@@ -284,6 +284,8 @@ The following example features local data but the data returned by a `transport`
     });
 ```
 
+A full implementation of Server Grouping with Virtualization you can see in [this official Grid demo](https://demos.telerik.com/kendo-ui/grid/server-grouppaging-virtualization).
+
 ## Mixed Data Operation Mode
 
 Note that all data operations have to occur either on the server or on the client. Therefore, while you can still use the mixed data operation mode of the DataSource, this approach is not recommended as it leads to undesired side effects. 
