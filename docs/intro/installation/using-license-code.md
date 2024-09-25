@@ -100,6 +100,15 @@ The following example shows how to use the CDN reference by utilizing the predef
 <!-- Rest of the HTML -->
 ```
 
+In case you are using ECMAScript modules to load the Kendo files you need to add `type='module'` on the license script reference.
+
+```html
+<script src="https://kendo.cdn.telerik.com/***/kendo.all.min.js" type="module"></script>
+<script src="./kendo-ui-license.js" type="module"></script>
+
+<!-- Rest of the HTML -->
+```
+
 ### Use JS or TS Modules
 
 Import the `kendo-ui-license.js` file right after the import of the Kendo UI modules.
