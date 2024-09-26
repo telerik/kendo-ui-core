@@ -1,20 +1,16 @@
 ---
 title: Appearance
-page_title: TimeDurationPicker Appearance
+page_title: Appearance
 description: "Learn how to apply different styling options to the Telerik UI TimeDurationPicker component for {{ site.framework }}."
 slug: htmlhelpers_timedurationpickerhelper_appearance
 position: 4
 ---
 
-# TimeDurationPicker Appearance
+# Appearance
 
-In this article, you will find information about the styling options of the Telerik UI TimeDurationPicker for {{ site.framework }}.
+In this article, you will find information about the styling options and rendering of the {{ site.product }} TimeDurationPicker.
 
-{% if site.core %}
-For a live example, visit the [Appearance Demo of the TimeDurationPicker](https://demos.telerik.com/aspnet-core/timedurationpicker/appearance).
-{% else %}
-For a live example, visit the [Appearance Demo of the TimeDurationPicker](https://demos.telerik.com/aspnet-mvc/timedurationpicker/appearance).
-{% endif %}
+For a live example, refer to the [Appearance Demo of the TimeDurationPicker](https://demos.telerik.com/{{ site.platform }}/timedurationpicker/appearance).
 
 ## Options
 
@@ -79,9 +75,11 @@ The default `fillMode` value is `solid` and it is applied to the wrapping `span`
 <span class="k-timedurationpicker k-input k-input-solid">
 ```
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
-* [Customizing the Appearance of the TimeDurationPicker]({% slug htmlhelpers_timedurationpickerhelper_appearance %})
-* [Using the TimeDurationPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker)
 * [Using the API of the TimeDurationPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker/api)
 * [Server-Side API](/api/timedurationpicker)

@@ -6,9 +6,11 @@ slug: appearance_kendoui_badge_widget
 position: 2
 ---
 
-# Badge Appearance
+# Appearance
 
 The Badge allows you to set different styles based on its content.
+
+For a live example, visit the [Appearance Demo of the Badge](https://demos.telerik.com/kendo-ui/badge/appearance).
 
 ## Rounded
 

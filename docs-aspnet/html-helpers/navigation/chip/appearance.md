@@ -1,18 +1,20 @@
 ---
 title: Appearance
-page_title: Styling the Appearance of the Chip Helper
+page_title: Appearance
 description: "Learn how to manage the appearance of the Telerik UI Chip component for {{ site.framework }} and apply its various styling options."
 slug: htmlhelpers_chip_aspnetcore_appearance
 position: 2
 ---
 
-# Chip Appearance
+# Appearance
 
 The Chip provides predefined appearance options such as different sizes, border radiuses, fill modes, and theme colors.
 
 For a live example, refer to the [Appearance Demo of the Chip](https://demos.telerik.com/{{ site.platform }}/chip/appearance).
 
-The Telerik UI Chip supports the following styling options:
+## Options
+
+The Chip supports the following styling options:
 
 - [`Size`](#size)—Configures the overall size of the component.
 - [`ThemeColor`](#theme-color)—Configures what color will be applied to the component.
@@ -163,9 +165,15 @@ The structure of the class is `k-rounded-{size}`. The default rounded value is `
 </div>
 ```
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
-* [Appearance Overview of the Telerik UI Helpers]({% slug components_rendering_overview %})
 * [Appearance of the Chip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chip/appearance)
-* [Server-Side API of the Chip HtmlHelper for {{ site.framework }}](/api/chip)
-* [JavaScript API Reference of the Chip HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chip)
+* [Server-Side API](/api/chip)
+{% if site.core %}
+* [Server-Side TagHelper API](/api/taghelpers/chip)
+{% endif %}
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chip)

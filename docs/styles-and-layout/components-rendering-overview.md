@@ -109,8 +109,8 @@ The following table showcases the old and updated versions of the Kendo state cl
 | Component              | Appearance Documentation                                                                                 |
 |:-----------------------|:---------------------------------------------------------------------------------------------------------|
 | `AutoComplete`         | [AutoComplete Appearance Documentation]({% slug sizedimensions_kendoui_autocomplete %})                  |
-| `Avatar`               | [Avatar Appearance Documentation]({% slug appearance_kendoui_avatar_widget %})                  |
 | `Button`               | [Button Appearance Documentation]({% slug button_styling_widget %})                                      |
+| `CheckBox`          | [CheckBox Appearance Documentation]({% slug appearance_checkbox_widget %})                 |
 | `ColorPicker`          | [ColorPicker Appearance Documentation]({% slug appearance_kendoui_colorpicker_widget %})                 |
 | `ComboBox`             | [ComboBox Appearance Documentation]({% slug appearance_kendoui_combobox %})                              |
 | `DateInput`            | [DateInput Appearance Documentation]({% slug appearance_kendoui_dateinput_widget %})                     |
@@ -125,6 +125,7 @@ The following table showcases the old and updated versions of the Kendo state cl
 | `MultiColumnComboBox`  | [MultiColumnComboBox Appearance Documentation]({% slug appearance_kendoui_multicolumncombobox_widget %}) |
 | `MultiSelect`          | [MultiSelect Appearance Documentation]({% slug appearance_kendoui_multiselect_widget %})                 |
 | `NumericTextBox`       | [NumericTextBox Appearance Documentation]({% slug appearance_kendoui_numerictextbox_widget %})           |
+| `RadioButton`       | [RadioButton Appearance Documentation]({% slug appearance_radiobutton_widget %})           |
 | `Slider`               | [Slider Appearance Documentation]({% slug appearance_kendoui_slider_widget %})                           |
 | `Switch`               | [Switch Appearance Documentation]({% slug appearance_kendoui_switch_widget %})                           |
 | `TextArea`             | [TextArea Appearance Documentation]({% slug textarea_appearance %})                                      |

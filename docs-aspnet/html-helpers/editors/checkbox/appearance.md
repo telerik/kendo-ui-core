@@ -1,18 +1,14 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} CheckBox Documentation - CheckBox Appearance"
+page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI CheckBox HtmlHelper for {{ site.framework }}."
 slug: checkbox_appearance
 position: 2
 ---
 
-# CheckBox Appearance
+# Appearance
 
-> As of the R1 2022 release, the CheckBox uses a brand new rendering.
-
-In this article, you will find information about the new appearance of the {{ site.product }} CheckBox.
-
-For additional information regarding the decision behind these changes, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
+In this article, you will find information about the styling options and rendering of the {{ site.product }} CheckBox.
 
 For a live example, refer to the [Appearance Demo of the CheckBox](https://demos.telerik.com/{{ site.platform }}/checkbox/appearance).
 
@@ -98,7 +94,10 @@ The default value is `Medium` and it is added as a class `k-roundend-md` to the 
 <input type="checkbox" class="k-checkbox k-roundend-md" id="checkBoxName"/>
 ```
 
+@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
+
 ## See Also
 
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance of the CheckBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkbox/appearance)
 * [Server-Side API](/api/checkbox)

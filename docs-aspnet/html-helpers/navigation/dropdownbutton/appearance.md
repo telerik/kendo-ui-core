@@ -10,9 +10,7 @@ position: 3
 
 In this article, you will find information about the rendering and styling options of the {{ site.product }} DropDownButton.
 
-For general information regarding the rendering, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
-
-For a complete example, refer to the [Appearance Demo of the DropDownButton](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/appearance).
+For a live example, refer to the [Appearance Demo of the DropDownButton](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/appearance).
 
 ## Options
 
@@ -205,8 +203,15 @@ Enable the `ShowArrowButton()` option to render a down arrow in the DropDownButt
 ```
 {% endif %}
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
 * [Appearance of the DropDownButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/appearance)
-* [Button Server-Side API](/api/button)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton)
+* [Server-Side API](/api/dropdownbutton)
+{% if site.core %}
+* [Server-Side TagHelper API](/api/taghelpers/dropdownbutton)
+{% endif %}
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton)

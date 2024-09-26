@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: Styling the Appearance of the ChipList Helper
+page_title: Appearance
 description: "Learn how to manage the appearance of the Telerik UI ChipList component for {{ site.framework }} and apply its various styling options."
 slug: htmlhelpers_chiplist_aspnetcore_appearance
 position: 3
@@ -8,11 +8,13 @@ position: 3
 
 # Appearance
 
-The ChipList provides predefined appearance options such as different sizes, item size, border radiuses, fill modes and item theme colors.
+The ChipList provides predefined appearance options such as different sizes, item size, border radiuses, fill modes, and item theme colors.
 
 For a live example, refer to the [Appearance Demo of the ChipList](https://demos.telerik.com/{{ site.platform }}/chiplist/appearance).
 
-The Kendo UI ChipList supports the following styling options:
+## Options
+
+The ChipList component supports the following styling options:
 
 - [`ItemSize`](#item-size)—Configures the size of the Chip items.
 - [`ThemeColor`](#theme-color)—Configures what color will be applied to the component.
@@ -209,9 +211,15 @@ The structure of the Html class is `k-rounded-{size}`. The default `rounded` val
 </div>
 ```
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
-* [Appearance Overview of the Telerik UI Helpers]({% slug components_rendering_overview %})
 * [Appearance of the ChipList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chiplist/appearance)
-* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chiplist#methods)
-* [Server-Side API of the ChipList HtmlHelper for {{ site.framework }}](/api/chiplist)
+* [Server-Side API](/api/chiplist)
+{% if site.core %}
+* [Server-Side TagHelper API](/api/taghelpers/chiplist)
+{% endif %}
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chiplist)

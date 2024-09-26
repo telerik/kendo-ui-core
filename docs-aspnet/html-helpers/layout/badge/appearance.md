@@ -6,7 +6,7 @@ slug: appearance_badge_aspnetcore
 position: 2
 ---
 
-# Badge Appearance
+# Appearance
 
 The Badge offers various options that allow you to control its look and feel.
 
@@ -21,7 +21,7 @@ The Badge provides the following methods for styling:
 - [`Size()`](#size)&mdash;Defines the overall size of the component.
 - [`FillMode()`](#fillmode)&mdash;Creates a solid or an outline Badge.
 
-## Rounded
+### Rounded
 
 The `Rounded` property can be configured through the `Rounded` enumeration. The available values are:
 
@@ -49,7 +49,7 @@ The following example demonstrates the `Rounded` option of the Badge:
 ```
 {% endif %}
 
-## ThemeColor
+### ThemeColor
 
 The `ThemeColor` option controls the color that will be applied to the rendered Badge.
 
@@ -84,7 +84,7 @@ The available `ThemeColor` values are:
 ```
 {% endif %}
 
-## Size
+### Size
 
 The `Size` option allows you to set a predefined size for the Badge. The `Size` property can be configured by using the `BadgeSize` enumeration. The available values are:
 
@@ -108,7 +108,7 @@ The `Size` option allows you to set a predefined size for the Badge. The `Size` 
 ```
 {% endif %}
 
-## FillMode
+### FillMode
 
 The `FillMode` specifies how the theme colors are applied to the component. The available options are:
 

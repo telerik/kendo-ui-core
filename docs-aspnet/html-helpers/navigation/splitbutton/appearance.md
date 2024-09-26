@@ -10,9 +10,7 @@ position: 3
 
 In this article, you will find information about the rendering and styling options of the {{ site.product }} SplitButton.
 
-For general information regarding the rendering, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
-
-For a complete example, refer to the [Appearance Demo of the SplitButton](https://demos.telerik.com/{{ site.platform }}/splitbutton/appearance).
+For a live example, refer to the [Appearance Demo of the SplitButton](https://demos.telerik.com/{{ site.platform }}/splitbutton/appearance).
 
 ## Options
 
@@ -175,8 +173,15 @@ The default `Rounded` value is `Medium`.
 ```
 {% endif %}
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
 * [Appearance of the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/appearance)
-* [Button Server-Side API](/api/button)
-* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitbutton)
+* [Server-Side API](/api/splitbutton)
+{% if site.core %}
+* [Server-Side TagHelper API](/api/taghelpers/splitbutton)
+{% endif %}
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitbutton)
