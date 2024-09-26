@@ -6,9 +6,9 @@ slug: appearance_timedurationpicker
 position: 2
 ---
 
-# TimeDurationPicker Appearance
+# Appearance
 
-In this article, you will find information about the styling options of the Kendo UI TimeDurationPicker.
+In this article, you will find information about the styling options and rendering of the Kendo UI TimeDurationPicker.
 
 For a live example, visit the [Appearance Demo of the TimeDurationPicker](https://demos.telerik.com/kendo-ui/timedurationpicker/appearance).
 
@@ -75,8 +75,11 @@ The default `fillMode` value is `solid` and it is applied to the wrapping `span`
 <span class="k-timedurationpicker k-input k-input-solid">
 ```
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the TimeDurationPicker](https://demos.telerik.com/kendo-ui/timedurationpicker/appearance)
 * [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)

@@ -1,16 +1,16 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} TextArea Documentation - TextArea Appearance"
+page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI TextArea HtmlHelper for {{ site.framework }}."
 slug: textarea_appearance
 position: 2
 ---
 
-# TextArea Appearance
+# Appearance
 
-As of the R1 2022 release, the TextArea component uses a new rendering. To learn more about why we decided to create a new rendering for our components, see the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
+In this article, you will find information about the styling options and rendering of the {{ site.product }} TextArea.
 
-For a live example of the styling options of the TextArea, visit the [Appearance Demo of the TextArea](https://demos.telerik.com/{{ site.platform }}/textarea/appearance).
+For a live example, visit the [Appearance Demo of the TextArea](https://demos.telerik.com/{{ site.platform }}/textarea/appearance).
 
 ## Options
 
@@ -186,74 +186,10 @@ The following values are available for the `Resize` option:
 - `Vertical`
 - `None`
 
-
-## Old vs New Rendering
-
-The old rendering of the component consisted of a wrapping `span` element with the `k-textarea` class and a child `textarea` element with the `k-textbox` class.
-
-```html
-<span class="k-textarea">
-    <textarea class='k-textbox'></textarea>
-</span>
-```
-
-The new rendering of the component also consists of a wrapping `span` element that has a child `textarea` element:
-
-- The `span` element controls the overall appearance of the component and has the following class structure:
-
-  ```html
-  <span class="k-textarea k-input k-input-md k-rounded-md k-input-solid">
-  </span>
-  ```
-
-- The `textarea` element controls the appearance of the `textarea` itself and has the following class structure:
-
-  ```html
-  <textarea class="k-input-inner k-overflow-hidden k-resize-both" placeholder="..."></textarea>
-  ```
-
-The full rendering of the component has the following HTML structure:
-
-```html
-<span class="k-textarea k-input k-input-md k-rounded-md k-input-solid">
-    <textarea class="k-input-inner k-overflow-hidden k-resize-both" placeholder="...">...</textarea>
-</span>
-```
-
-## Visual Backwards Compatibility
-
-To achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview#css-classes-migration) and [JQuery Selectors Migration](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview#jquery-selectors-migration) sections of the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article for additional information.
-
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
-
-Previously, a reference to the `textarea` element was obtainable through the `k-input` class.
-
-```javascript
-$(".k-input") // Returns a reference to the textarea element in the old rendering.
-```
-
-With the new rendering, the `textarea` element must be targeted by using the `k-input-inner` class.
-
-```javascript
-$(".k-input-inner") // Returns a reference to the textarea element in the new rendering.
-```
-
-The following example showcases how to apply a background color to the **TextArea** in both the new, and the old rendering:
-
-```
-    <style>
-      /* Works BEFORE R1 2022 */
-      .k-input {
-        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
-      }
-      /* Works AFTER R1 2022 */
-      .k-input-inner {
-        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
-      }
-    </style>
-```
+@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 
 ## See Also
 
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance of the TextArea HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/appearance)
 * [Server-Side API](/api/textarea)

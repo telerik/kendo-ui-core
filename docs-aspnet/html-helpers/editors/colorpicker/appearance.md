@@ -8,9 +8,9 @@ position: 2
 
 # Appearance
 
-As of the R1 2022 release, the ColorPicker component uses a new rendering. To learn more about the reasons for this decision, see the [Components Appearance]({% slug components_rendering_overview %}) article.
+In this article, you will find information about the styling options and rendering of the {{ site.product }} ColorPicker.
 
-For a live example of the ColorPicker styling options, visit the [ColorPicker Appearance Demo](https://demos.telerik.com/{{ site.platform }}/colorpicker/appearance).
+For a live example, visit the [Appearance Demo of the ColorPicker](https://demos.telerik.com/{{ site.platform }}/colorpicker/appearance).
 
 ## Options
 
@@ -144,161 +144,9 @@ The default `FillMode` value is `Solid` and it is applied to the wrapping span e
 </span>
 ```
 
-## Old vs New Rendering
-
-Below you will find the differences between the old and the new rendering.
-
-Old Rendering:
-
-<div role="textbox" aria-haspopup="true" class="k-colorpicker" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
-    <!-- no tool icon -->
-    <span class="k-picker-wrap">
-        <span class="k-selected-color k-no-color" style="background-color: rgb(255, 255, 255);"></span>
-		<!-- k-no-color is added when value is null -->
-        <span role="button" class="k-select" unselectable="on" aria-label="select">
-            <span class="k-icon k-i-arrow-s"></span>
-        </span>
-    </span>
-
-    <!-- with tool icon -->
-    <span class="k-picker-wrap">
-        <span class="k-icon k-tool-icon k-i-gear">
-            <span class="k-selected-color" style="background-color: rgb(255, 255, 255);"></span>
-        </span>
-        <span role="button" class="k-select" unselectable="on" aria-label="select">
-            <span class="k-icon k-i-arrow-s"></span>
-        </span>
-    </span>
-
-    <input id="colorpicker" data-role="colorpicker" style="display: none;">
-</div>
-
-<!-- Old Popup Rendering-->
-
-<div class="k-flatcolorpicker k-coloreditor">
-    ...
-    <div class="k-coloreditor-preview k-vstack">
-        <!-- k-no-color is added when value is null -->
-        <span class="k-coloreditor-preview-color k-color-preview k-no-color" style="background-color: rgba(0,0,0, 0.5)">
-        </span>
-        <span class="k-coloreditor-current-color k-color-preview k-no-color" style="background-color: rgba(0,0,0, 0.5)">
-        </span>
-     </div>
-    ...
-</div>
-New Rendering:
-
-<span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker k-picker-{fillMode} k-picker-{size} k-rounded-{rounded}" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
-    <span class="k-input-inner">
-
-        <!-- no tool icon -->
-        <span class="k-value-icon k-color-preview  k-no-color">
-            <!-- k-no-color is added when value is null -->
-            <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
-        </span>
-
-
-        <!-- with tool icon -->
-         <span class="k-value-icon k-color-preview k-icon-color-preview k-no-color">
-             <!-- k-no-color is added when value is null -->
-             <span class="k-color-preview-icon k-icon k-i-edit-tools {toolIcon}"></span>
-             <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
-         </span>
-    </span>
-    <button class="k-select k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
-        <span class="k-icon k-i-arrow-s k-button-icon"></span>
-    </button>
-    <input id="colorpicker" data-role="colorpicker" style="display: none;">
-</span>
-
-<!-- New Popup Rendering -->
-<!-- All Buttons and inputs get the size option from the ColorPicker options -->
-
-<div class="k-flatcolorpicker k-coloreditor">
-    ...
-    <div class="k-coloreditor-preview k-vstack">
-        <!-- k-no-color is added when value is null -->
-        <span class="k-coloreditor-preview-color k-color-preview k-no-color">
-            <span class="k-color-preview-mask" style="background-color: rgba(0,0,0, 0.5)"></span>
-        </span>
-        <span class="k-coloreditor-current-color k-color-preview k-no-color">
-            <span class="k-color-preview-mask" style="background-color: #FF6358;"></span>
-        </span>
-     </div>
- ...
-</div>
-
-The following example demonstrates how to configure the appearance of the component through configuration:
-
-        @(Html.Kendo().ColorPicker()
-            .Name("picker")
-            .Size(ComponentSize.Medium)
-            .Rounded(Rounded.Medium)
-            .FillMode(FillMode.Solid)
-            .Value("#ff0000")
-            .Format(ColorPickerFormat.Rgb)
-            .Formats(new string[] { "rgb", "hex" })
-        )
-
-## Visual Backwards Compatibility
-
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
-
-> The new styling and rendering support only the [default options](#options) when you use a LESS theme.
-
-If you use custom CSS, to override default ColorPicker styles, you will need to update the classes used in the selectors of your custom CSS rules. The following example shows how to achieve the same customization in the ColorPicker, depending on whether you are using an old product version or a new one. 
-
-The first set of CSS rules relies on the classes available in the old rendering.
-
-```
-<style>
-/*  Old rendering (versions prior to R1 2022)*/      
-
-/* Apply lightblue background color to the ColorPicker's dropdown button */
-.k-colorpicker .k-select{ 
-  background-color: lightblue;
-}
-
-/* Apply green background color to the ColorPicker's Apply button */
-.k-flatcolorpicker .apply {
-  background-color: green;
-  border-color: green;
-}
-
-/* Apply red background color and border to the ColorPicker's Cancel button */
-.k-flatcolorpicker .cancel {
-  background-color: red;
-  border-color: red;
-}
-</style>
-```
-
-The second set of CSS rules relies on the classes available in the new rendering.
-
-```
-<style>
-/*  New Rendering (versions after R1 2022) */
-
-/* Apply lightblue background color to the ColorPicker's dropdown button */
-.k-colorpicker .k-input-button { 
-  background-color: lightblue;
-}
-
-/* Apply green background color to the ColorPicker's Apply button */
-.k-flatcolorpicker .k-coloreditor-apply {
-  background-color: green;
-  border-color: green;
-}
-
-/* Apply red background color and border to the ColorPicker's Cancel button */
-.k-flatcolorpicker .k-coloreditor-cancel {
-  background-color: red;
-  border-color: red;
-}
-</style>
-```
+@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 
 ## See Also
 
-* [Appearance Overview Article]({% slug components_rendering_overview %})
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the ColorPicker](https://demos.telerik.com/aspnet-mvc/colorpicker/appearance)

@@ -6,9 +6,11 @@ slug: appearance_avatar_aspnetcore
 position: 2
 ---
 
-# Avatar Appearance
+# Appearance
 
 The Avatar allows you to set different styles based on its content.
+
+For a live example, refer to the [Appearance Demo of the Avatar](https://demos.telerik.com/{{ site.platform }}/avatar/appearance).
 
 ## Type
 

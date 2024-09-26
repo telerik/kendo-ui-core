@@ -6,13 +6,9 @@ slug: appearance_kendoui_dateinput_widget
 position: 4
 ---
 
-# DateInput Appearance
+# Appearance
 
-> As of Kendo UI R1 2022, the DateInput widget uses brand new rendering.
-
-In this article, you will find information about the new rendering of the Kendo UI DateInput.
-
-For additional information regarding the decision behind these changes, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
+In this article, you will find information about the styling options and rendering of the Kendo UI DateInput.
 
 For a live example, visit the [Appearance Demo of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/appearance).
 
@@ -81,83 +77,10 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 </span>
 ```
 
-## Old vs New Rendering
-
-The old rendering of the DateInput consisted of an input with a single class named `k-textbox` and wrapped in a span element with the `k-dateinput` class that held all the styling information related to the widget.
-
-```html
- <!-- OLD -->
-<span class="k-widget k-dateinput k-state-default" style="width: 100%;">
-    <input class="k-textbox" >
-    <span class="k-icon k-i-warning k-hidden"></span>
-</span>
-```
-
-The new rendering of the component consists of a wrapping `span` element that has a child `input` element. The `span` element controls the overall appearance of the widget depending on the applied classes and has the following class structure:
-
-```html
-<!-- NEW -->
-<span class="k-dateinput k-input k-input-md k-rounded-md k-input-solid">
-        <input type="text" class="k-input-inner" value="..." placeholder="..." />  
-</span>
-```
-
-The following example demonstrates how to configure the appearance of the widget through its configuration:
-
-```dojo
-<input id="dateinput" />
-<script>
-$("#dateinput").kendoDateInput({
-    size: "medium",
-    rounded: "medium",
-    fillMode: "solid",
-});
-</script>
-```
-
-## Visual Backwards Compatibility
-
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
-
-Previously, you had to obtain a reference to the dateinput element through the `k-textbox` class.
-
-```javascript
-$(".k-textbox") // Returns a reference to the DateInput element in the old rendering.
-```
-
-With the new rendering, you must target the dateinput element by using the `k-input-inner` class.
-
-```javascript
-$(".k-input-inner") // Returns a reference to the DateInput element in the new rendering.
-```
-
-The following example showcases how to apply a background color to the **DateInput** in both the new, and the old rendering:
-
-```dojo
-    <!-- Open the example in Dojo and select version prior to 2022 R1 to see the difference in the appearance -->
-    <div id="parent">
-      <input id="dateinput" />
-    </div>
-
-    <style>
-      /* Doesn't work AFTER R1 2022 */
-      #parent .k-textbox {
-        background-color: #0071bc !important; /* Blue color in versions BEFORE R1 2022 */
-      }
-
-      /* Doesn't work BEFORE R1 2022 */
-      #parent .k-input-inner {
-        background-color: #2e8540 !important; /* Green color in versions AFTER R1 2022 */
-      }
-    </style>
-
-    <script>
-      $("#dateinput").kendoDateInput();
-    </script>
-```
+@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/appearance)
 * [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)

@@ -219,6 +219,82 @@ The primary Y axis crosses the X axis at point 0 (leftmost). The second, `torque
 
 ![{{ site.product_short }} A Scatter Line Chart with customized axis crossing value](../images/chart-scatter-line-axis-crossing-value.png)
 
+## Smooth Scatter Line
+
+By default, the series in the Scatter Line Chart are connected with a straight line.
+To display a smooth line, use the [`Style(ChartScatterLineStyle.Smooth)`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartscatterlinestyle) setting of the `Series` configuration.
+
+```HtmlHelper
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .SeriesDefaults(seriesDefaults =>
+            seriesDefaults.ScatterLine().Style(ChartScatterLineStyle.Smooth)
+        )
+        .Series(series => {            
+            series.ScatterLine(new int[][] {
+                    new [] {10, 40}, new [] {17, 50}, new [] {22, 70},
+                    new [] {35, 60}, new [] {47, 95}, new [] {60, 100}
+                })
+                .Name("1.6C");
+        })
+    ) 
+```
+{% if site.core %}
+```TagHelper
+    @{ 
+        var data = new int[][] {
+            new [] {10, 40}, new [] {17, 50}, new [] {22, 70},
+            new [] {35, 60}, new [] {47, 95}, new [] {60, 100}
+        };
+    }
+    <kendo-chart name="chart">
+        <series>
+            <series-item style="ChartSeriesStyle.Smooth" type="ChartSeriesType.ScatterLine" name="1.6C" data="data">
+            </series-item>
+        </series>
+    </kendo-chart>
+```
+{% endif %}
+
+## Pan and Zoom
+
+The Pan and Zoom features enable easy navigation and zoom control within the Scatter Chart to observe the data in different segments and portions according to your preferences.
+To enable panning, use the [`Pannable`](/api/kendo.mvc.ui.fluent/chartbuilder#pannablesystemboolean) setting. To turn on the zooming functionality, configure the [`Zoomable`](/api/kendo.mvc.ui.fluent/chartbuilder#zoomablesystemboolean) option.
+
+```HtmlHelper
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Series(series => {            
+            series.ScatterLine(new int[][] {
+                    new [] {10, 40}, new [] {17, 50}, new [] {22, 70},
+                    new [] {35, 60}, new [] {47, 95}, new [] {60, 100}
+                })
+                .Name("1.6C");
+        })
+        .Pannable()
+        .Zoomable()
+    ) 
+```
+{% if site.core %}
+```TagHelper
+    @{ 
+        var data = new int[][] {
+            new [] {10, 40}, new [] {17, 50}, new [] {22, 70},
+            new [] {35, 60}, new [] {47, 95}, new [] {60, 100}
+        };
+    }
+    <kendo-chart name="chart">
+        <series>
+                <series-item type="ChartSeriesType.ScatterLine" name="1.6C" data="data">
+                </series-item>
+        </series>
+        <pannable enabled="true" />
+        <zoomable enabled="true">
+        </zoomable>
+    </kendo-chart>
+```
+{% endif %}
+
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)

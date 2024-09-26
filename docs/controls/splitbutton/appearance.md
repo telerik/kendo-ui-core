@@ -10,8 +10,6 @@ position: 4
 
 In this article, you will find information about the rendering and styling options of the Kendo UI SplitButton.
 
-For general information regarding the rendering, visit the [Styling Overview]({% slug components_rendering_overview %}) article.
-
 For a live example, visit the [Appearance Demo of the SplitButton](https://demos.telerik.com/kendo-ui/splitbutton/appearance).
 
 ## Options
@@ -156,8 +154,12 @@ The default rounded value is `medium` and it is applied to the button element th
 </div>
 ```
 
+## Rendering
+ 
+To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
+
 ## See Also
 
-* [Appearance Overview Article]({% slug components_rendering_overview %})
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance Demo of the SplitButton](https://demos.telerik.com/kendo-ui/splitbutton/appearance)
 * [JavaScript API Reference of the SplitButton](/api/javascript/ui/splitbutton)

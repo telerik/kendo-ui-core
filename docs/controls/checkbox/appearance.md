@@ -9,7 +9,9 @@ position: 4
 
 # CheckBox Appearance
 
-The CheckBox allows you to set different styles to the `input` element.
+In this article, you will find information about the styling options and rendering of the Kendo UI CheckBox.
+
+For a live example, visit the [Appearance Demo of the CheckBox](https://demos.telerik.com/kendo-ui/checkbox/appearance).
 
 ## Options
 
@@ -63,7 +65,10 @@ The following example demonstrates how the `rounded` option can be set to `full`
     </script>
 ```
 
+@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
+
 ## See Also
 
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Basic Usage of the CheckBox (Demo)](https://demos.telerik.com/kendo-ui/checkbox/index)
 * [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)

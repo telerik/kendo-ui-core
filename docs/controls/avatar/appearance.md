@@ -6,9 +6,11 @@ slug: appearance_kendoui_avatar_widget
 position: 3
 ---
 
-# Avatar Appearance
+# Appearance
 
 The Avatar allows you to set different styles based on its content.
+
+For a live example, visit the [Appearance Demo of the Avatar](https://demos.telerik.com/kendo-ui/avatar/appearance).
 
 ## Rounding and Type
 

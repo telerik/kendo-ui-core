@@ -1,18 +1,14 @@
 ---
 title: Appearance
-page_title: "{{ site.framework }} RadioButton Documentation - RadioButton Appearance"
+page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI RadioButton HtmlHelper for {{ site.framework }}."
 slug: radiobutton_appearance
 position: 2
 ---
 
-# RadioButton Appearance
+# Appearance
 
-> As of the R1 2022 release, the RadioButton uses a brand new rendering.
-
-In this article, you will learn more about the new appearance of the {{ site.product }} RadioButton.
-
-For additional information regarding the decision behind these changes, visit the [Components Rendering](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/components-rendering-overview) article.
+In this article, you will find information about the styling options and rendering of the {{ site.product }} RadioButton.
 
 For a live example, check out the [Appearance Demo of the RadioButton](https://demos.telerik.com/{{ site.platform }}/radiobutton/appearance).
 
@@ -49,7 +45,10 @@ The default size value is `Medium` and it is added as a class `k-radio-md` to th
 <input type="radio" class="k-radio k-radio-md" id="radioButtonName"/>
 ```
 
+@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
+
 ## See Also
 
+* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance of the RadioButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiobutton/appearance)
 * [RadioButton Server-Side API](/api/radiobutton)

@@ -6,7 +6,7 @@ slug: appearance_kendoui_togglebutton
 position: 2
 ---
 
-# ToggleButton Appearance
+# Appearance
 
 The ToggleButton provides predefined appearance options such as different sizes, border radiuses, fill modes, and theme colors.
 
