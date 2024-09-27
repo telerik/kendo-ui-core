@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: jQuery TileLayout Documentation - Keyboard Navigation
 description: "Get started with the jQuery TileLayout by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_kendoui_tilelayout_widget
-position: 5
+position: 2
 ---
 
 # Keyboard Navigation
@@ -25,5 +25,5 @@ The following example demonstrates how to enable the key navigation in the TileL
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/keyboard-navigation)
+* [Keyboard Navigation by the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
