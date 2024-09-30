@@ -1,16 +1,16 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to filter a Telerik UI PivotGrid component for {{ site.framework }}."
-slug: htmlhelpers_pivotgrid_aspnetcore_filtering
-position: 3
+description: "Get started with the Telerik UI PivotGridV2 component for {{ site.framework }} and learn how to filter a Telerik UI PivotGridV2 component for {{ site.framework }}."
+slug: htmlhelpers_pivotgridv2_aspnetcore_filtering
+position: 5
 ---
 
 # Filtering
 
-The PivotGrid supports filtering both in the OLAP and flat data-binding scenarios.
+The PivotGridV2 supports filtering both in the OLAP and flat data-binding scenarios.
 
-The PivotGrid uses [`kendo.data.PivotDataSource`](/api/pivotdatasource) to perform `label` filtration. However, it filters only by the caption value of the members.
+The PivotGridV2 uses [`kendo.data.PivotDataSource`](/api/pivotdatasource) to perform `label` filtration. However, it filters only by the caption value of the members.
 
 The filter descriptor is similar to [the filter option of the `kendo.data.DataSource`](/api/datasource) and contains the following options:
 - `field`&mdash;The full path to the tuple member. For example, `[Date].[Calendar].[Calendar Year].&[2005]`.
@@ -35,7 +35,7 @@ To set a predefined filter when using Xmla data use the above-described approach
         var filterValue = "[Date].[Calendar].[Calendar Year].&[2010],[Date].[Calendar].[Calendar Year].&[2013]";
     }
 
-    <kendo-pivotdatasource type=@(PivotDataSourceType.Xmla) name="pivotSource" on-error="onError">
+    <pivot-datasource type=@(PivotDataSourceType.Xmla) name="pivotSource" on-error="onError">
         <columns>
             <pivot-datasource-column name="[Date].[Calendar]" expand="true"></pivot-datasource-column>
             <pivot-datasource-column name="[Product].[Category]"></pivot-datasource-column>
@@ -52,7 +52,7 @@ To set a predefined filter when using Xmla data use the above-described approach
         <filters>
             <datasource-filter field="[Date].[Calendar]" operator="in" value=@filterValue ></datasource-filter>
         </filters>
-    </kendo-pivotdatasource>
+    </pivot-datasource>
 ```
 {% endif %}
 
@@ -74,19 +74,19 @@ Build the filter descriptor similar to [the filter option of the `kendo.data.Dat
         var discontinued = true;
     }
 
-    <kendo-pivotdatasource>
+    <pivot-datasource>
         <filters>
             <datasource-filter field="ProductName" operator="contains" value="@productName" ></datasource-filter>
             <datasource-filter field="Discontinued" operator="eq" value="@discontinued" ></datasource-filter>
         </filters>
-    </kendo-pivotdatasource>
+    </pivot-datasource>
 ```
 {% endif %}
 
 ## See Also
 
-* [Basic Usage of the PivotGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index)
+* [Basic Usage of the PivotGridV2 HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/PivotGridV2/index)
 {% if site.core %}
-* [Basic Usage of the PivotGrid TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/tag-helper)
+* [Basic Usage of the PivotGridV2 TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/PivotGridV2/tag-helper)
 {% endif %}
-* [Server-Side API](/api/pivotgrid)
+* [Server-Side API](/api/PivotGridV2)

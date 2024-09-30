@@ -17,8 +17,95 @@ The filter descriptor is similar to [the filter option of the `kendo.data.DataSo
 - `operator`&mdash;All operators that work with strings. Note that the component treats field values as strings.
 - `value`&mdash;The filter value.
 
+### Filtering when using Xmla DataSource
+
+To set a predefined filter when using Xmla data use the above-described approach and set the filter configuration of the dataSource, following the [guidelines for MDX queries](https://learn.microsoft.com/en-us/analysis-services/multidimensional-models/mdx/mdx-query-fundamentals-analysis-services?view=asallproducts-allversions) and [Members, Tuples, and Sets](https://learn.microsoft.com/en-us/analysis-services/multidimensional-models/mdx/working-with-members-tuples-and-sets-mdx?view=asallproducts-allversions).
+
+The example below demonstrates how to filter data only for cities starting with "Ab" for the years 2010 and 2014:
+
+```dojo
+    <div id="pivotgrid"></div>
+    <script>
+      $("#pivotgrid").kendoPivotGrid({
+        height: 550,
+        filterable: true,
+        dataSource: {
+          type: "xmla",
+          columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+          rows: [{ name: "[Product].[Product]" }],
+          measures: ["[Measures].[Internet Sales Amount]"],
+          transport: {
+            connection: {
+              catalog: "Adventure Works DW 2008R2",
+              cube: "Adventure Works"
+            },
+            read: {
+              url: "https://demos.telerik.com/olap/msmdpump.dll",
+              dataType: "text",
+              contentType: "text/xml",
+              type: "POST"
+            }
+          },
+          schema: {
+            type: "xmla"
+          },
+          filter: [
+            {
+              field:"[Geography].[City]",
+              operator:"startswith",
+              value:"Ab"
+            },{
+              field: "[Date].[Calendar]",
+              operator: "in",
+              value: "[Date].[Calendar].[Calendar Year].&[2010],[Date].[Calendar].[Calendar Year].&[2014]"}
+          ]
+        }
+      });
+    </script>
+```
+
+### Filtering when using Flat Data
+
+Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter), keeping in mind the field values are treated as strings.
+
+For example, to filter a [PivotGrid bound to local data](https://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding) for products starting with "C" that are discontinued you can provide a filter configuration as demonstrated below:
+
+```
+    dataSource: {
+        data: products,
+        schema: {
+            model: {
+            fields: {
+                ProductName: { type: "string" },
+                UnitPrice: { type: "number" },
+                UnitsInStock: { type: "number" },
+                Discontinued: { type: "boolean" },
+                CategoryName: { field: "Category.CategoryName" }
+            }
+            },
+            cube: {
+            dimensions: {
+                ProductName: { caption: "All Products" },
+                CategoryName: { caption: "All Categories" },
+                Discontinued: { caption: "Discontinued" }
+            },
+            measures: {
+                "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: "sum" },
+                "Average": { field: "UnitPrice", format: "{0:c}", aggregate: "average" }
+            }
+            }
+        },
+        columns: [{ name: "CategoryName", expand: true }, { name: "ProductName" } ],
+        rows: [{ name: "Discontinued", expand: true }],
+        measures: ["Sum"],
+        filter:[{field: "ProductName", operator: "startswith", value: "C"},
+            {field: "Discontinued", operator: "eq", value: true}]
+    }
+```
+
 ## See Also
 
 * [Filtering a Dimension in the PivotGrid]({% slug howto_filter_dimensions_pivotgrid %})
 * [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Binding the PivotGrid to flat local data (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
