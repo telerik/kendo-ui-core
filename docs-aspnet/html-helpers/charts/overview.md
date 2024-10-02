@@ -330,6 +330,7 @@ The Telerik UI for {{ site.framework }} Chart supports an extensive set of serie
 | [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %}) | Pie Charts display data as single-series sectors from a two-dimensional circle which is useful for rendering data as a part of the whole. |
 | [Polar Charts]({% slug polarcharts_aspnetcore_htmlhelper %}) | Polar Charts represent the relationships between data points in terms of radiuses and angles in a circular coordinate system. |
 | [Donut Charts]({% slug donutcharts_aspnetcore_htmlhelper %}) | Donut Charts are a Pie chart variation with the ability to display data as single-series sectors from a two-dimensional circle. |
+| [StockChart]({% slug overview_stockcharthelper_aspnetcore %}) | StockCharts visualize the price movement of any financial instrument over a certain period. |
 
 ## Referencing Existing Instances
 

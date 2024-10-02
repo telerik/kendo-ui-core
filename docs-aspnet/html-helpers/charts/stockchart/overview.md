@@ -35,192 +35,191 @@ All of the following series types that are supported by the StockChart are also 
 
 ## Basic Configuration
 
-The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data source and has to be configured for Ajax binding.
+When the StockChart is configured for [remote data binding]({% slug databinding_stockchart_aspnetcore %}), it makes AJAX requests to the specified `Read` endpoint.
 
-1. Add the new action method.
+The following example demonstrates a basic StockChart configuration with a DataSource, which requests the data from the server.
 
-  The following example demonstrates how to add a new action method which returns data to populate the StockChart.
-
-    ```HtmlHelper
-        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-            .Name("stockChart")
-            .Title("The Boeing Company (NYSE:BA)")
-            .DataSource(ds => ds.Read(read => read
-                .Action("_BoeingStockData", "Home")
-            ))
-            .DateField("Date")
-        )
-    ```
-    {% if site.core %}
-    ```TagHelper
-        <kendo-stockchart name="stockChart"
-                date-field="Date">
-            <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
-            <datasource custom-type="aspnetmvc-ajax"
-                    server-paging="true"
-                    server-filtering="true"
-                    server-grouping="true">
-                <transport>
-                    <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
-                </transport>
-                 <schema>
+```HtmlHelper
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+        .Name("stockChart")
+        .DataSource(ds => ds.Read(read => read
+            .Action("_StockData", "Home")
+        ))
+        .DateField("Date")
+        .Series(series =>
+        {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-stockchart name="stockChart" date-field="Date">
+        <datasource>
+            <transport>
+                <read  url="@Url.Action("_StockData", "Home")"/>
+            </transport>
+            <schema>
                 <model>
                     <fields>
                         <field name="Date" type="date"></field>
                         <field name="Close" type="number"></field>
-                        <field name="Volume" type="number"></field>
                         <field name="Open" type="number"></field>
                         <field name="High" type="number"></field>
                         <field name="Low" type="number"></field>
-                        <field name="Symbol" type="string"></field>
+                        <field name="Volume" type="number"></field>
                     </fields>
                 </model>
             </schema>
-            </datasource>
-        </kendo-stockchart>
-    ```
-    ```HomeController
-        public IActionResult Index()
-        {
-            return View();
-        }
+        </datasource>
+        <series>
+            <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+        </series>
+    </kendo-stockchart>
+```
+```HomeController
+    public IActionResult Index()
+    {
+        return View(); // The Action that returns the View with the StockChart.
+    }
 
-        public IActionResult _BoeingStockData()
+    public IActionResult _StockData()
+    {
+        using (var db = GetContext())
         {
-            using (var db = GetContext())
+            // Return the data as JSON.
+            return Json(
+                (from s in db.Stocks
+                where s.Symbol == "BA"
+                select new StockDataPoint
+                {
+                    Date = s.Date,
+                    Open = s.Open,
+                    High = s.High,
+                    Low = s.Low,
+                    Close = s.Close,
+                    Volume = s.Volume
+                }).ToList()
+            );
+        }
+    }
+```
+{% else %}
+```HomeController
+    public ActionResult Index()
+    {
+        return View(); // The Action that returns the View with the StockChart.
+    }
+
+    public ActionResult _StockData()
+    {
+        using (var db = GetContext())
+        {
+            // Return the data as JSON.
+            return Json(
+                (from s in db.Stocks
+                where s.Symbol == "BA"
+                select new StockDataPoint
+                {
+                    Date = s.Date,
+                    Open = s.Open,
+                    High = s.High,
+                    Low = s.Low,
+                    Close = s.Close,
+                    Volume = s.Volume
+                }).ToList(), 
+                JsonRequestBehavior.AllowGet
+            );
+        }
+    }
+```
+{% endif %}
+```Model
+    public class StockDataPoint
+    {
+        public DateTime Date { get; set; }
+
+        public decimal Close { get; set; }
+
+        public long Volume { get; set; }
+
+        public decimal Open { get; set; }
+
+        public decimal High { get; set; }
+
+        public decimal Low { get; set; }
+
+        public string Symbol { get; set; }
+    }
+```
+
+The Navigator of the StockChart represents a pane that renders at the bottom of the chart that changes the date interval in the main pane. You can drag or scroll the Navigator to select the desired date range.
+
+The following example shows how to enable and configure the Navigator of the chart.
+
+```HtmlHelper
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+        .Name("stockChart")
+        .DataSource(ds => ds.Read(read => read
+            .Action("_StockData", "Home")
+        ))
+        .DateField("Date")
+        .Series(series =>
+        {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Navigator(nav => nav
+            .Series(series =>
             {
-                // Return the data as JSON.
-                return Json(
-                    (from s in db.Stocks
-                    where s.Symbol == "BA"
-                    select new StockDataPoint
-                    {
-                        Date = s.Date,
-                        Open = s.Open,
-                        High = s.High,
-                        Low = s.Low,
-                        Close = s.Close,
-                        Volume = s.Volume
-                    }).ToList()
-                );
-            }
-        }
-    ```
-    {% else %}
-    ```HomeController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult _BoeingStockData()
-        {
-            using (var db = GetContext())
-            {
-                // Return the data as JSON.
-                return Json(
-                    (from s in db.Stocks
-                    where s.Symbol == "BA"
-                    select new StockDataPoint
-                    {
-                        Date = s.Date,
-                        Open = s.Open,
-                        High = s.High,
-                        Low = s.Low,
-                        Close = s.Close,
-                        Volume = s.Volume
-                    }).ToList(), 
-                    JsonRequestBehavior.AllowGet
-                );
-            }
-        }
-    ```
-    {% endif %}
-    ```Model
-        public class StockDataPoint
-        {
-            public DateTime Date { get; set; }
-
-            public decimal Close { get; set; }
-
-            public long Volume { get; set; }
-
-            public decimal Open { get; set; }
-
-            public decimal High { get; set; }
-
-            public decimal Low { get; set; }
-
-            public string Symbol { get; set; }
-        }
-    ```
-
-1. Create the data series.
-
-    The following example demonstrates how to create the main and the navigator data series.
-
-    ```HtmlHelper
-        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-            .Name("stockChart")
-            .Title("The Boeing Company (NYSE:BA)")
-            .DataSource(ds => ds.Read(read => read
-                .Action("_BoeingStockData", "Home")
-            ))
-            .DateField("Date")
-            .Series(series => {
-                series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+                series.Area(s => s.Close); // Specify the field that holds the series data for the Navigator.
             })
-            .Navigator(nav => nav
-                .Series(series => {
-                    series.Line(s => s.Volume);
-                })
+            .Select( // Specifies the initially selected date range.
+                DateTime.Parse("2009/02/05"),
+                DateTime.Parse("2011/10/07")
             )
         )
-    ```
-    {% if site.core %}
-    ```TagHelper
-        <kendo-stockchart name="stockChart"
-                date-field="Date">
-            <chart-title text=" The Boeing Company (NYSE:BA)"></chart-title>
-            <datasource custom-type="aspnetmvc-ajax"
-                    server-paging="true"
-                    server-filtering="true"
-                    server-grouping="true">
-                <transport>
-                    <read  url="@Url.Action("_BoeingStockData", "Financial")"/>
-                </transport>
-                 <schema>
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-stockchart name="stockChart" date-field="Date">
+        <datasource>
+            <transport>
+                <read  url="@Url.Action("_StockData", "Home")"/>
+            </transport>
+            <schema>
                 <model>
                     <fields>
                         <field name="Date" type="date"></field>
                         <field name="Close" type="number"></field>
-                        <field name="Volume" type="number"></field>
                         <field name="Open" type="number"></field>
                         <field name="High" type="number"></field>
                         <field name="Low" type="number"></field>
-                        <field name="Symbol" type="string"></field>
+                        <field name="Volume" type="number"></field>
                     </fields>
                 </model>
             </schema>
-            </datasource>
-            <series>
-                <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
-            </series>
-            <navigator>
-            <navigator-series>
-                    <series-item type="ChartSeriesType.Line" field="Volume"></series-item>
-                </navigator-series>
-                <select from="new DateTime(2009,02,05)" to="new DateTime(2011,10,07)"></select>
-            </navigator>
-        </kendo-stockchart>
-    ```
-    {% endif %}
+        </datasource>
+        <series>
+            <series-item type="ChartSeriesType.Candlestick" open-field="Open" high-field="High" low-field="Low" close-field="Close"></series-item>
+        </series>
+        <navigator>
+            <navigator-series> <!-- Specify the field that holds the series data for the Navigator.-->
+                <series-item type="ChartSeriesType.Area" field="Close"></series-item>
+            </navigator-series>
+            <!-- Specifies the initially selected date range.-->
+            <select from="new DateTime(2009,02,05)" to="new DateTime(2011,10,07)"></select>
+        </navigator>
+    </kendo-stockchart>
+```
+{% endif %}
 
 ## Functionality and Features
 
 * [Data Binding]({% slug databinding_stockchart_aspnetcore %})&mdash;You can bind the StockChart to local or remote data.
-* [Navigator]({% slug navigator_stockchart_aspnetcore%})&mdash; The StockChart allows you to represent a pane that is placed at the bottom of the chart that can change the date interval in the main panes.
-
+* [Multiple Panes]({% slug multiple_panes_stockchart_aspnetcore%})&mdash;Configure the StockChart with multiple panes.
+* [PDF Export]({% slug pdf_export_stockchart_aspnetcore%})&mdash;Export the StockChart to PDF.
+* [Events]({% slug stockchart_events%})&mdash;Subscribe to the available client events and implement any custom logic.
 
 ## Next Steps
 
@@ -230,5 +229,8 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
 ## See Also
 
-* [Server-Side API of the StockChart for {{ site.framework }}](/api/stockchart)
+* [Server-Side HtmlHelper API of the StockChart](/api/stockchart)
+{% if site.core %}
+* [Server-Side TagHelper API of the StockChart](/api/taghelpers/stockchart)
+{% endif %}
 * [Knowledge Base Section](/knowledge-base)

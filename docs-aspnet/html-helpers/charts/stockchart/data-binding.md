@@ -4,7 +4,7 @@ page_title: Data Binding
 description: "Learn how to bind the Telerik UI StockChart component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
 previous_url: /helpers/charts/stockchart/data-binding
 slug: databinding_stockchart_aspnetcore
-position: 4
+position: 2
 ---
 {% if site.core %}
     {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
