@@ -6,6 +6,8 @@ slug: stockchart_getting_started
 position: 1
 ---
 
+# Getting Started with the StockChart
+
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} StockChart and highlights the major steps in the configuration of the component.
 
 After completing this guide, you will achieve the following result:
@@ -329,7 +331,7 @@ To use the client-side API of the StockChart and build on top of its initial con
 ## Next Steps
 
 * [Binding the StockChart to Data]({% slug databinding_stockchart_aspnetcore %})
-* [Configuring the StockChart Navigator Feature]({% slug navigator_stockchart_aspnetcore %})
+* [Configuring the StockChart with Multiple Graph Panes]({% slug multiple_panes_stockchart_aspnetcore %})
 
 ## See Also
 

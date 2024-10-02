@@ -10,6 +10,8 @@ position: 5
 
 The StockChart exposes a variety of [events](api/kendo.mvc.ui.fluent/stockcharteventbuilder) that you can handle and further customize the behavior of the UI component.
 
+For a complete example on basic Chart events, refer to the [demo on using the events of the Chart](https://demos.telerik.com/{{ site.platform }}/chart-api/events).
+
 ## Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
@@ -63,11 +65,12 @@ The following example demonstrates how to subscribe to events by a template dele
 ## Next Steps
 
 * [Binding the StockChart to Data]({% slug databinding_stockchart_aspnetcore %})
-* [Configuring the StockChart Navigator Feature]({% slug navigator_stockchart_aspnetcore %})
-
+* [Creating a Stock History Dashboard (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/stock-history)
 
 ## See Also
 
-* [Basic Usage of the StockChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/)
 * [Client-Side API of the StockChart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart)
-* [Server-Side API of the StockChart](/api/stockchart)
+* [Server-Side HtmlHelper API of the StockChart](/api/stockchart)
+{% if site.core %}
+* [Server-Side TagHelper API of the StockChart](/api/taghelpers/stockchart)
+{% endif %}
