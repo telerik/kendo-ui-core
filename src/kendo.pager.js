@@ -26,6 +26,7 @@ var __meta__ = {
         LAST_CONST = "caret-alt-to-right",
         PREV_CONST = "caret-alt-left",
         NEXT_CONST = "caret-alt-right",
+        REFRESH = "arrow-rotate-cw",
         FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
         NS = ".kendoPager",
@@ -243,7 +244,7 @@ var __meta__ = {
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-button-flat-base k-icon-button" title="' + options.messages.refresh +
-                        '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon("arrow-rotate-cw") + '</button>');
+                        '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon($('<span class="k-button-icon"></span>'),REFRESH) + '</button>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", that._refreshClick.bind(that));
@@ -251,7 +252,7 @@ var __meta__ = {
 
             if (options.info) {
                 if (!that.element.find(".k-pager-info").length) {
-                    that.element.append('<span class="k-pager-info k-label" />');
+                    that.element.append('<span class="k-pager-info" />');
                 }
             }
 
