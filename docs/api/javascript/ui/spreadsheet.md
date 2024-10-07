@@ -1886,6 +1886,27 @@ The index of the sheet to locate.
 
 Inserts a sheet with the specified options.
 
+#### Example - inseart new sheets on button click
+
+    <div id="spreadsheet"></div>
+    <button>Add New Sheet</button>
+    <script>
+      var i = 2
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{ name: "Sheet1" }, { name: "Sheet2" }]
+      });
+      var sheets = $("#spreadsheet").data("kendoSpreadsheet").sheets();
+      $("button").click(function(){
+        $("#spreadsheet").data("kendoSpreadsheet").insertSheet({
+          name: "Custom Sheet Name" + ++i,
+          frozenRows: 1,
+          frozenColumns: 1,
+          rows: 15,
+          columns: 10,
+        });
+      })
+    </script>
+
 #### Parameters
 
 ##### options `Object`
