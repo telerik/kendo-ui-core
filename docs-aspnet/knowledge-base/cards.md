@@ -322,6 +322,87 @@ To render Cards that are detached from one another on a single row, use the `.k-
     </div>
 ```
 
+### Orientation
+
+The Card content can be arranged vertically or horizontally through the `.k-card-vertical` and `.k-card-horizontal` classes:
+
+```
+<div class="k-card k-card-vertical k-text-center">
+    <div class="k-card-header">
+        <h5 class="k-card-title">Sofia</h5>
+        <h6 class="k-card-subtitle">Sunny</h6>
+    </div>
+    <div class="k-card-body">
+        <div>2&ordm;C</div>
+    </div>
+    <div class="k-actions k-card-actions k-actions-stretched k-actions-horizontal">
+        <button class="k-button k-flat">Action 1</button>
+        <button class="k-button k-primary k-flat">Action 2</button>
+    </div>
+</div>
+```
+
+### Types
+
+The main advantage of the Card structure is the full customization of the desired layout. It allows you to define rich variety of columns, rows, images.
+
+The sample below contains two different container layout options.
+
+```
+    <style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .k-card {
+            margin: 5%;
+            width: 300px;
+        }
+    </style>
+      <div class="cards-container">
+        <div class="k-card k-card-horizontal">
+            <img alt="Telerik UI for ASP.NET Core Cards Sofia cathedral" src="https://demos.telerik.com/aspnet-core/shared/web/cards/sofia.jpg" class="k-card-media"/>
+            <div class="k-vbox k-column">
+                <div class="k-card-header">
+                    <h5 class="k-card-title">Card Title</h5>
+                    <h6 class="k-card-subtitle">Card Subtitle</h6>
+                </div>
+                <div class="k-card-body">
+                    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="k-actions k-card-actions k-actions-stretched k-actions-horizontal">
+                    <span class="k-card-action">
+                        <button class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md">Action 1</button>
+                    </span>
+                    <span class="k-card-action">
+                        <button class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="k-card k-card-horizontal">
+            <div class="k-vbox k-column">
+                <div class="k-card-header">
+                    <h5 class="k-card-title">Horizontal Card with Header</h5>
+                    <h6 class="k-card-subtitle">Actions Center</h6>
+                </div>
+                <div class="k-card-body">
+                    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="k-card-footer">
+                    <span>Card Footer</span>
+                </div>
+            </div>
+            <hr class="k-card-separator k-separator-vertical">
+            <div class="k-actions k-card-actions k-actions-center k-actions-vertical">
+                <button class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md">Action 1</button>
+                <button class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Action 2</button>
+            </div>
+        </div>
+```
+
 ## Styles
 
 Cards provide predefined state classes that you can use to change the Card appearance.
@@ -387,3 +468,41 @@ Cards provide predefined state classes that you can use to change the Card appea
     </div>
 </div>
 ```
+
+## Drag and Drop Capability
+
+Thanks to the Telerik Sortable integration, the Card is capable to provide the user with drag-n-drop functionality.
+
+To achieve this behavior, you can use the following structure:
+```
+    <div id="list">
+        <div class="cards-container">
+            <div class="k-card">
+                ... 
+            </div>
+
+            <div class="k-card">
+               ...
+            </div>
+          </div>
+      </div>
+```
+
+And then implement the kendoSortable logic:
+```JavaScript
+    <script>
+            $(document).ready( function () {
+                $("#list").kendoSortable({
+                    filter: ".k-card",
+                    cursor: "move",
+                    placeholder: function (element) {
+                        return element.clone().css("opacity",  0.1);
+                    },
+                    hint: function (element) {
+                        return element.clone().css("width", element.width()).removeClass("k-selected");
+                    }
+                });
+            });
+     </script>
+```
+

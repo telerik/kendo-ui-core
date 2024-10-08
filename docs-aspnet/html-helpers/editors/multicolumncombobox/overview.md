@@ -209,6 +209,8 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 | [Prefix and Suffix]({% slug prefix_suffix_multicolumncombobox %})| Enhance the component look and feel by adding prefix and suffix adornments.|
 | [Events]({% slug events_multicolumncombobox_aspnetcore %})| Handle the component events and implement any custom functionality.|
 | [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
+| [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})|The cascading MultiColumnComboBox is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the DataValueField in the previous MultiColumnComboBox.|
+| [Templates](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/multicolumncombobox/templates)|The  MultiColumnComboBox provides capability to fully customize the content presented to the user.|
 
 ## Next Steps
 

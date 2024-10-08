@@ -180,6 +180,8 @@ For more advanced configuration options you can check:
 * [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})&mdash;You can configure the ToolBar to close its popup from a button `click` event.
 * [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})&mdash;The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) through its `SpriteCssClass` configuration option.
 * [Supported toolbar command types]({% slug htmlhelpers_toolbar_button_aspnetcore %})&mdash;The ToolBar supports various button command types.
+* [Resizing](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/resizing)&mdash;The ToolBar provides adaptive resizing functionality.
+* [Integration](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/integration)&mdash;The component can be integrated with various form elements to provide an interactive layout to the user.
 
 ## Next Steps
 

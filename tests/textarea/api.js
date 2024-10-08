@@ -134,5 +134,17 @@
             assert.isOk(widget.element.hasClass("!k-overflow-clip"));
             assert.isOk(widget.wrapper.hasClass("k-input-lg"));
         });
+
+        it("setOptions destroys and recreates the component", function() {
+            var widget = new TextArea(textarea, {
+            });
+
+            widget.setOptions({
+                enable: false
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-disabled"));
+            assert.isOk(widget.wrapper.parent().is(":not(.k-input)")); // Ensure that recreating the component does not wrap the element twice.
+        });
     });
 }());
