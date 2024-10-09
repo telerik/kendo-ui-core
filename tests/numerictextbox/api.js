@@ -458,6 +458,17 @@
             }, 200);
         });
 
+        it("focus method should select the text when selectOnFocus is enabled", function(done) {
+            var textbox = new NumericTextBox(input, { selectOnFocus: true, value: 15 });
+
+            textbox.focus();
+
+            setTimeout(function() {
+                assert.equal(input[0].value.substring(input[0].selectionStart, input[0].selectionEnd), "15");
+                done();
+            }, 100);
+        });
+
         it("on blur should hide input text", function() {
             var textbox = new NumericTextBox(input);
 

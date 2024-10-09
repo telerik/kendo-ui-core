@@ -21,11 +21,11 @@ This KB also answers the following questions:
 
 The Dojo no longer supports registered accounts. You can keep on creating snippets and sharing them with others, however they will not be linked to a specific account.
 
-The main functionality that has been removed, is the snippets list that was previously accessible through the `/snippets` page. On this page, you were previously able to view a list of all of the snippets created by that account. This page will no longer be available. If you want to keep track of the created snippets, you have to either bookmark them or save them in a place of your choose.
+The main functionality that has been removed, is the snippets list that was previously accessible through the `/snippets` page. On this page, you were previously able to view a list of all of the snippets created by that account. This page will no longer be available. If you want to keep track of the created snippets, you have to either bookmark them or save them in a place of your choice.
 
 ## Solution
 
-> Please contact us before the 3rd of April 2025(04/03/2025) for a list of your snippets. After that, this information will be erased and we won't be able to retrieve account-specific lists.
+> Please contact us before the 3rd of April 2025(04/03/2025) for a list of snippets created using your account. After that, this information will be erased and we won't be able to retrieve account-specific lists.
 
 The existing snippets WILL NOT be removed. All of the snippets that have been created over the years will remain available, including the ones created with your account. The urls of these snippets will remain unchanged.
 
