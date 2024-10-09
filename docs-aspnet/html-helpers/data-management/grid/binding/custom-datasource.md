@@ -128,4 +128,3 @@ The following example demonstrates a CustomDataSourceBuilder definition.
 * [Custom DataSource for {{ site.framework }} (https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/custom-datasource)
 * [Server-Side API](/api/grid)
 * [Custom DataSource in Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)
-{% endif %}
