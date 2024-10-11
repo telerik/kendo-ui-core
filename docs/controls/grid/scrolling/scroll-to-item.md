@@ -33,7 +33,9 @@ The `callback` is an optional parameter, a function to be executed when virtual 
 
 ## Known Limitations
 
-Scrolling to an item does not combine with the Grid's [`Group Paging`]({% slug grouppaging_kendoui_grid_widget %}) functionality.
+* Scrolling to an item does not combine with the Grid's [`Group Paging`]({% slug grouppaging_kendoui_grid_widget %}) functionality.
+* Scrolling to an item does not work together with the Grid's [`Endless Scrolling`]({% slug endless_scrolling_kendoui_grid_widget %}) functionality.
+* When the sum of the specified item's height and the height of all items afterward is less than the Grid's height the item to be scrolled to the top will not appear at the top. In non-virtualized Grids, the Grid will be scrolled to its bottom but the specified item will not appear at the top. In Grids with virtual scrolling, the Grid will be scrolled to the bottom of the current data set but the scroller will not be positioned at the bottom and the item will not be positioned at the top.
 
 ## KB Articles on Scrolling
 
