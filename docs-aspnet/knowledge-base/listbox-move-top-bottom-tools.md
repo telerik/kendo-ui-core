@@ -1,8 +1,8 @@
 ---
-title: Implementing "moveTop" and "moveBottom" Custom Tools
+title: Implementing 'moveTop' and 'moveBottom' Custom Tools
 description: An example on how to create custom tools that move the selected item to the top or the bottom of the options when using the Telerik UI for {{ site.framework }} ListBox.
 type: how-to
-page_title: Implementing "moveTop" and "moveBottom" Custom Tools of the ListBox
+page_title: Implementing 'moveTop' and 'moveBottom' Custom Tools of the ListBox
 slug: listbox-move-top-bottom-tools
 tags: listbox, custom, tools, moveTop, moveBottom, toolbar, telerik, core, mvc
 res_type: kb
@@ -23,7 +23,7 @@ res_type: kb
 
 ## Description
 
-How can I create custom tools ("moveTop" and "moveBottom") that move the selected option at the top or the bottom of all ListBox options?
+How can I create custom tools (*moveTop* and *moveBottom*) that move the selected option at the top or the bottom of all ListBox options?
 
 ## Solution
 

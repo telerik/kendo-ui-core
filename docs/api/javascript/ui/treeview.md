@@ -1347,7 +1347,7 @@ If provided, the node that should be selected.
 
 `jQuery` The currently selected node.
 
-#### Example
+#### Example - select a node by passing an element
 
     <div id="treeview"></div>
     <script>
@@ -1368,6 +1368,46 @@ If provided, the node that should be selected.
     console.log(treeview.text(treeview.select())); // logs "bar"
 
     treeview.select($()); // clears selection
+    </script>
+
+#### Example - select a node by passing a jQuery selector
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+    treeview.select($(".k-treeview-item").last());
+
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(treeview.text(treeview.select())); // logs "bar"
+
+    </script>
+
+#### Example - select a node by passing a string
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+    treeview.select(".k-treeview-item:last");
+
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(treeview.text(treeview.select())); // logs "bar"
+
     </script>
 
 ### setDataSource

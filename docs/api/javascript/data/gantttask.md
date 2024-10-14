@@ -286,7 +286,7 @@ The `id` of the parent task.
         end: new Date("2014/6/17 11:00")
     });
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(task.parentId); // outputs "1"
+    console.log(child.parentId); // outputs "1"
     </script>
 
 ### percentComplete `String|Number|Object`
@@ -304,7 +304,7 @@ The completion percentage of the task.
         end: new Date("2014/6/17 11:00")
     });
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(task.percentComplete); // outputs "0.55"
+    console.log(parent.percentComplete); // outputs "0.55"
     </script>
 
 ### start `Date`

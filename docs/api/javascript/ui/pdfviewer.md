@@ -118,7 +118,31 @@ Specifies the url to be passed to the pdfjs processor.
 
 ### dplProcessing `Object`
 
-Specifies the DPL configuration options.
+Specifies the DPL configuration options. For a complete demo and a backend implementation, check the <a href="https://demos.telerik.com/aspnet-core/pdfviewer/dpl-processing" target="_blank">Telerik UI for ASP.NET Core DPL Processing demo</a>.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script>
+        $("#pdfviewer").kendoPDFViewer({
+            dplProcessing: {
+                read: {
+                    url: ""
+                },
+                download: {
+                    url: ""
+                },
+                upload: {
+                    url: ""
+                }
+            },
+            toolbar: {
+                items: [
+                    "pager", "spacer", "open", "download"
+                ]
+            }
+        });
+    </script>
 
 ### dplProcessing.read `Object`
 
