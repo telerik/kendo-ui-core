@@ -45,7 +45,7 @@ In addition, `startswith`, `endswith`, `contains`, `doesnotstartwith` and `doesn
             [ "C 1", "C 2", "C 3" ],
             [ "John", 5, 6 ],
             [ "Jane", 8, 9 ],
-            [ "Burke", 3, 9 ]
+            [ "Bruke", 3, 9 ]
         ];
 
         sheet.range("A1:C4").values(values);
@@ -53,8 +53,8 @@ In addition, `startswith`, `endswith`, `contains`, `doesnotstartwith` and `doesn
         var filter = new kendo.spreadsheet.CustomFilter({
             logic: "or",
             criteria: [
-                { operator: "starstwith", value: "Jo" },
-                { operator: "starstwith", value: "Ja" }
+                { operator: "startswith", value: "Jo" },
+                { operator: "startswith", value: "Ja" }
             ]
         });
 

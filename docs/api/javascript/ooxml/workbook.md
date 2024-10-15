@@ -31,9 +31,12 @@ The creator of the workbook.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -44,7 +47,7 @@ The date when the workbook is created. Defaults to `new Date()`.
 #### Example - setting the date
     <script>
     var workbook = new kendo.ooxml.Workbook({
-      date: new Date(2014, 5, 18)
+      date: new Date(2014, 5, 18),
       sheets: [
           {
               rows: [
@@ -53,9 +56,11 @@ The date when the workbook is created. Defaults to `new Date()`.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -132,9 +137,11 @@ An object containing any images used in the Spreadsheet.  The keys should be ima
           }]
         });
 
-        kendo.saveAs({
-          dataURI: workbook.toBlob(),
-          fileName: "Test.xlsx"
+        workbook.toDataURLAsync().then(function(dataURL) {
+          kendo.saveAs({
+            dataURI: dataURL,
+            fileName: "Test.xlsx"
+          });
         });
       }
     </script>
@@ -158,9 +165,11 @@ Sets the direction of the workbook. By default, the direction is left-to-right.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -190,10 +199,12 @@ If set to `true`, the column will stretch to fit the contents of all cells.
             }
         ]
       });
+    workbook.toDataURLAsync().then(function(dataURL) {
       kendo.saveAs({
-        dataURI: workbook.toDataURL(),
+        dataURI: dataURL,
         fileName: "Test.xlsx"
       });
+    });
       </script>
 
 ### sheets.columns.index `Number`
@@ -211,10 +222,12 @@ The zero-based index of the column in the sheet. Defaults to the index of the ob
             }]
         }]
       });
+    workbook.toDataURLAsync().then(function(dataURL) {
       kendo.saveAs({
-        dataURI: workbook.toDataURL(),
+        dataURI: dataURL,
         fileName: "Test.xlsx"
       });
+    });
       </script>
 
 ### sheets.columns.width `Number`
@@ -238,9 +251,11 @@ The width (in pixels) of the column.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -300,9 +315,11 @@ The number of the frozen columns in this sheet.
       }]
     });
 
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -323,9 +340,11 @@ The number of frozen rows in this sheet.
       }]
     });
 
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -349,9 +368,11 @@ The configuration of the Excel auto-filter. When set, the final document will be
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -388,7 +409,6 @@ Specify a collection of hyperlinks that will be applied to the corresponding cel
           fileName: "Test.xlsx"
         });
       });
-
     </script>
 
 ### sheets.hyperlinks.ref `String`
@@ -416,7 +436,6 @@ The cell to which the link must be applied. Examples - "A1", "A2", "B3", "AA2", 
           fileName: "Test.xlsx"
         });
       });
-
     </script>
 
 ### sheets.hyperlinks.target `String`
@@ -444,7 +463,6 @@ The target link that will be opened when the cell is clicked.
           fileName: "Test.xlsx"
         });
       });
-
     </script>
 
 ### sheets.mergedCells `Array`
@@ -462,10 +480,12 @@ A range of cells that will be merged into one. The value of the first cell in th
         }]
       });
 
+    workbook.toDataURLAsync().then(function(dataURL) {
       kendo.saveAs({
-        dataURI: workbook.toDataURL(),
+        dataURI: dataURL,
         fileName: "Test.xlsx"
       });
+    });
     </script>
 
 ### sheets.name `String`
@@ -487,9 +507,11 @@ Sets the name of the exported workbook sheet.
             }
         ]
     });
-    kendo.saveAs({
-        dataURI: workbook.toDataURL(),
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
         fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -510,9 +532,11 @@ The array of the sheet rows.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -532,9 +556,11 @@ The cells of each row. Each cell represents a cell from the final Excel document
     }]
   });
 
-  kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+  workbook.toDataURLAsync().then(function(dataURL) {
+    kendo.saveAs({
+      dataURI: dataURL,
+      fileName: "Test.xlsx"
+    });
   });
 </script>
 
@@ -554,9 +580,11 @@ Sets the background color of the cell. Supports hex CSS-like values that start w
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -589,9 +617,11 @@ The allowed values are:
      }
     ]
     });
-    kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -624,9 +654,11 @@ The allowed values are:
      }
     ]
     });
-    kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -659,9 +691,11 @@ The allowed values are:
      }
     ]
     });
-    kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -694,9 +728,11 @@ The allowed values are:
      }
     ]
     });
-    kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -716,9 +752,11 @@ Setting `sheets.rows.cells.bold` to `true` makes the cell content bold.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -738,9 +776,11 @@ The text color of the cell. Supports hex CSS-like values that start with `#`, fo
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -761,9 +801,11 @@ Sets the number of columns that a cell occupies.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -783,9 +825,11 @@ Sets the font for displaying the cell value.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -809,9 +853,11 @@ Sets the font size in pixels.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -835,9 +881,11 @@ For more information on the formats that Excel supports, refer to the page on [c
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -858,9 +906,11 @@ Sets the formula that Excel uses to compute and display the cell content.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -887,10 +937,12 @@ The zero-based index of the cell in the row. Records which miss an index will be
           }]
         }]
       });
+    workbook.toDataURLAsync().then(function(dataURL) {
       kendo.saveAs({
-        dataURI: workbook.toDataURL(),
+        dataURI: dataURL,
         fileName: "Test.xlsx"
       });
+    });
       </script>
 
 ### sheets.rows.cells.italic `Boolean` *(default: false)*
@@ -909,9 +961,11 @@ Setting `sheets.rows.cells.italic` to `true` renders the cell content in italics
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -932,9 +986,11 @@ Sets the number of rows that a cell occupies.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -963,9 +1019,11 @@ The supported values are:
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -985,9 +1043,11 @@ Setting `sheets.rows.cells.underline` to `true` underlines the cell content.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1007,9 +1067,11 @@ Setting `sheets.rows.cells.wrap` to `true` wraps the cell content.
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1045,9 +1107,11 @@ The supported values are:
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1068,9 +1132,11 @@ The value (content) of the cell. Numbers and dates are formatted as strings. Str
           }
       ]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1090,9 +1156,11 @@ The zero-based index of the row in the sheet. Defaults to the index of the objec
           }]
       }]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1114,9 +1182,11 @@ The row height (in pixels).
           }]
       }]
     });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1163,9 +1233,11 @@ Creates an Excel file that represents the current workbook and returns it as a d
       ]
     });
     var dataURL = workbook.toDataURL();
-    kendo.saveAs({
-      dataURI: dataURL,
-      fileName: "Test.xlsx"
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "Test.xlsx"
+      });
     });
     </script>
 
@@ -1196,5 +1268,4 @@ Creates an Excel file that represents the current workbook and returns a `Promis
           fileName: "Test.xlsx"
         });
     });
-
     </script>

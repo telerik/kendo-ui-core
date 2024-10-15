@@ -633,13 +633,9 @@ var __meta__ = {
             this._prevent = false;
         },
 
-        _focusoutHandler: function(e) {
+        _focusoutHandler: function() {
             var that = this;
             var isIFrame = window.self !== window.top;
-
-            if (that.wrapper.find(e.relatedTarget).length > 0) {
-                return;
-            }
 
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
@@ -1248,7 +1244,7 @@ var __meta__ = {
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                arrowBtn = html.renderButton('<button role="button" tabindex="-1" class="k-input-button" aria-label="select"></button>', {
+                arrowBtn = html.renderButton('<span role="button" class="k-input-button" aria-label="select"></span>', {
                     icon: "caret-alt-down",
                     size: options.size,
                     fillMode: options.fillMode,

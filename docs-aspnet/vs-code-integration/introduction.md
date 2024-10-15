@@ -79,6 +79,21 @@ The following project templates are available:
             </td>
         </tr>
         <tr>
+            <td><strong>The Content Security Policy (CSP)</strong></td>
+            <td><p>Content Security Policy (CSP) template features:</p>
+                <ul>
+                    <li> A Menu in <code>_Layout.cshtml</code>.</li>
+                    <li> A Detail Grid with a TabStrip in <code>Index.cshtml</code>.</li>
+                    <li> A Child Grid in <code>_Child_Grid.cshtml</code>.</li>
+                    <li> A <a href='https://docs.telerik.com/{{ site.platform }}/html-helpers/helper-basics/deferred-initialization#deferring-components-globally' target="_blank">DeferredToScriptFiles</a> setting in <code>Program.cs</code>.
+                    </li>
+                    <li>
+                       A <code>KendoDeferredScripts</code> Middleware in <code>Program.cs</code>.
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
             <td><strong>Grid and Menu</strong></td>
             <td><p>The Grid and Menu template features:</p>
                 <ul>
