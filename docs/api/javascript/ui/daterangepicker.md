@@ -614,7 +614,7 @@ Specifies the start field name for model binding.
 ### options `Object`
 An object, which holds the options of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <div id="daterangepicker"></div>
     <script>
@@ -623,7 +623,7 @@ An object, which holds the options of the widget.
     var daterangepicker = $("#daterangepicker").data("kendoDateRangePicker");
 
     var options = daterangepicker.options;
-    <script>
+    </script>
 
 ## Methods
 

@@ -1,9 +1,9 @@
 ---
 title: Overview
 page_title: jQuery RangeSlider Documentation - RangeSlider Overview
-description: "Get started with the jQuery RangeSlider by Kendo UI and learn how to create and initialize the widget."
+description: "Get started with the jQuery RangeSlider by Kendo UI and get familiar with its features."
 slug: overview_kendoui_rangeslider_widget
-position: 1
+position: 0
 ---
 
 # {{ site.product }} RangeSlider Overview
@@ -12,43 +12,19 @@ The Kendo UI RangeSlider displays a range of values and allows you to select ran
 
 Unlike the HTML5 range input, the RangeSlider enables the consistent experience across browsers and provides a rich API and event model. The RangeSlider provides configuration options for customizing its behavior, for example, setting its minimum and maximum values, orientation, step, and tooltip format and placement.
 
-* [Demo page for the RangeSlider](https://demos.telerik.com/kendo-ui/slider/events)
+![Kendo UI for jQuery RangeSlider Overview](rangeslider-overview.PNG)
 
-## Basic Configuration
+## Functionality and Features
 
-To create the RangeSlider, use two HTML `<input>` elements in a `<div>` one.
+* [Orientation]({% slug orientation_rangeslider_widget %})&mdash;The RangeSlider supports horizontal and vertical orientations.
+* [Steps]({% slug steps_rangeslider_widget %})&mdash;You can use the configuration options of the RangeSlider to define the step which the component uses to increase or decrease its value.
+* [Ticks]({% slug ticks_rangeslider_widget %})&mdash;The RangeSlider provides configuration options for setting the placement of its ticks, which indicate the values resulting from each incremented predefined step.
+* [Accessibility]({% slug accessibility_kendoui_rangeslider_widget %})&mdash;The RangeSlider is accessible for screen readers and supports WAI-ARIA attributes.
 
-    <div id="rangeSlider">
-        <input />
-        <input />
-    </div>
+## Next Steps
 
-To initialize the RangeSlider, use a jQuery selector.
-
-> * Verify that you create the RangeSlider within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
-> * The RangeSlider requires two `input` elements to capture both ends of the value range. This benefits scenarios where JavaScript is disabled. In such cases, users are presented with two inputs which still allow them to input a valid range.
-
-    $(document).ready(function() {
-        $("#rangeSlider").kendoRangeSlider();
-    });
-
-The following example demonstrates how to customize the RangeSlider.
-
-    $("#rangeSlider").kendoRangeSlider({
-        min: 10,
-        max: 50,
-        orientation: "vertical",
-        smallStep: 1,
-        largeStep: 10
-    });
-
-## Referencing Existing Instances
-
-To reference to an existing RangeSlider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the API to control its behavior.
-
-    var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
+* [Getting Started with the Kendo UI RangeSlider for jQuery]({% slug getting_started_kendoui_radiogroup %})
 
 ## See Also
 
-* [Basic Usage of the RangeSlider (Demo)](https://demos.telerik.com/kendo-ui/slider/events)
 * [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)

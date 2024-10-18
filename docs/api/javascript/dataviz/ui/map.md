@@ -5245,6 +5245,7 @@ Retrieves the size of the visible portion of the map.
 `Object` The size (width and height) of the visible portion of the map.
 
 #### Example - retrieve view size
+    <div id="map"></div>
     <script>
         $("#map").kendoMap({
             zoom: 1, // Layer size is 512px (2^1 * 256)

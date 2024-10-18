@@ -187,7 +187,7 @@ The `img` element can be added automatically by the widget, or an existing eleme
     <button id="button" type="button">Edit</button>
     <script>
         $("#button").kendoButton({
-            imageUrl: "/images/edit-icon.gif"
+            imageUrl: "https://demos.telerik.com/kendo-ui/content/web/treeview/edit.png"
         });
     </script>
 
@@ -198,7 +198,7 @@ The `img` element can be added automatically by the widget, or an existing eleme
     </button>
     <script>
         $("#button").kendoButton({
-            imageUrl: "/images/edit-icon.gif"
+            imageUrl: "https://demos.telerik.com/kendo-ui/content/web/treeview/edit.png"
         });
     </script>
 

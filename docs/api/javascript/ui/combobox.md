@@ -1200,7 +1200,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
+      template: '<span><img src="https://demos.telerik.com/kendo-ui/content/web/treeview/folder.png" alt="#: name #" style="vertical-align: middle;"/>#: name #</span>'
     });
     </script>
 

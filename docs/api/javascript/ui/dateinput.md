@@ -458,7 +458,7 @@ The maximum year value that is considered part of the current century.
 ### options `Object`
 An object, which holds the options of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <input id="dateinput" />
     <script>
@@ -467,7 +467,7 @@ An object, which holds the options of the widget.
     var dateinput = $("#dateinput").data("kendoDateInput");
 
     var options = dateinput.options;
-    <script>
+    </script>
 
 ## Methods
 

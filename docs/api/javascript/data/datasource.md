@@ -1048,7 +1048,7 @@ The aggregate results should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       schema: {
         aggregates: function(response) {
@@ -2514,7 +2514,7 @@ which should follow the `schema.data` configuration.
 
 #### Example
 
-    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
     <script>
     var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
     var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
@@ -2541,15 +2541,20 @@ which should follow the `schema.data` configuration.
       }
     },
     schema: {
-      model: {
-        id: "ID",
-        fields: {
-          "ID": { editable: false },
-          "CreatedAt": { type: "date" },
-          "UnitPrice": { type: "number" }
+        model: {
+          id: "ID",
+          fields: {
+            "ID": { editable: false },
+            "CreatedAt": { type: "date" },
+            "UnitPrice": { type: "number" }
+          }
         }
       }
-    }
+    });
+
+    dataSource.fetch(function() {
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(dataSource.data());
     });
     </script>
 
@@ -2805,7 +2810,7 @@ It is recommended to get familiar with the SignalR [JavaScript API](https://www.
 
 #### Example
 
-    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
     <script>
         var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
         var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
@@ -2842,6 +2847,11 @@ It is recommended to get familiar with the SignalR [JavaScript API](https://www.
                     }
                 }
             }
+        });
+
+        dataSource.fetch(function() {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(dataSource.data());
         });
     </script>
 

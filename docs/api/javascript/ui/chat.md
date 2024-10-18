@@ -635,7 +635,7 @@ The URL that is used to show the sender avatar.
         }, {
             id: kendo.guid(),
             name: "Sample User",
-            iconUrl: "https://demos.telerik.com/kendo-ui/content/web/chat/avatar.png"
+            iconUrl: "https://demos.telerik.com/kendo-ui/content/web/avatar.png"
         });
     </script>
 
