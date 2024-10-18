@@ -82,15 +82,15 @@ The margin of the gauge area.
 
     <div id="gauge"></div>
     <script>
-     $("#gauge").kendoRadialGauge({
-         pointer: [{
-            value: 20
-            gaugeArea:{
-                margin:50
-         }
-      }]
-     });
-</script>
+        $("#gauge").kendoRadialGauge({
+            pointer: [{
+                value: 20,
+                gaugeArea:{
+                    margin:50
+                }
+            }]
+        });
+    </script>
 
 ### gaugeArea.margin.top `Number`
 

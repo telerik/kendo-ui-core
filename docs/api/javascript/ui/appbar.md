@@ -67,7 +67,7 @@ Defines a set CSS classes for the item.
         items: [
             {
                 type: "contentItem",
-                className: "k-first k-one"
+                className: "k-first k-one",
                 template: "<span><input /><span>"
             },
             {

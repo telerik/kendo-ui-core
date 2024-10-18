@@ -1356,7 +1356,7 @@ The padding of the crosshair tooltip. A numeric value will set all paddings.
             visible: true
           },
           visible: true
-        }
+        },
         categories: ["2012", "2013"]
       }],
       series: [
@@ -6130,7 +6130,7 @@ If set to `true` the chart will display the category axis title. By default the 
     $("#chart").kendoChart({
       categoryAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         },
         categories: ["2012", "2013"]
@@ -7063,7 +7063,7 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       categoryAxis: {
-        notesdata {
+        notesdata: {
           data: [{
             value: 1,
             label: {
@@ -11552,7 +11552,7 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
     <script>
       $("#chart").kendoChart({
           pdf: {
-              proxyURL: "/save",
+              proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
               forceProxy: true
           },
           legend: {
@@ -11564,8 +11564,8 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
           ]
       });
 
-      var chart = $("#chart").getKendoChart();
-      chart.saveAsPDF();
+      //var chart = $("#chart").getKendoChart();
+      //chart.saveAsPDF(); Calling the method will result in an "403 Access Denied" error because the proxyURL cannot be accessed from the Dojo coderunner;
     </script>
 
 ### pdf.fileName `String` *(default: "Export.pdf")*
@@ -12248,7 +12248,7 @@ The supported values are:
                 categories: ["Foo", "Bar"]
             }
         });
-    <script>
+    </script>
 
 ### series `Array`
 
@@ -23479,7 +23479,7 @@ The accessible description of the Chart. The description is announced by screen 
     <script>
     $("#chart").kendoChart({
       title: {
-        text: "Fibonacci numbers"
+        text: "Fibonacci numbers",
         description: "A column chart displaying the first 10 Fibonacci numbers",
         position: "bottom"
       },
@@ -26515,7 +26515,7 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
     <script>
     $("#chart").kendoChart({
       valueAxis: {
-        minorTicks {
+        minorTicks: {
           color: "#aa00bb",
           visible: true
         }
@@ -26532,7 +26532,7 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
     <script>
     $("#chart").kendoChart({
       valueAxis: {
-        minorTicks {
+        minorTicks: {
           color: "rgb(128, 0, 255)",
           visible: true
         }
@@ -26549,7 +26549,7 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
     <script>
     $("#chart").kendoChart({
       valueAxis: {
-        minorTicks {
+        minorTicks: {
           color: "green",
           visible: true
         }
@@ -27572,7 +27572,7 @@ If set to `true` the chart will display the value axis title. By default the val
     $("#chart").kendoChart({
       valueAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         }
       }],
@@ -31252,7 +31252,7 @@ The color of the x axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       xAxis: {
-        minorTicks {
+        minorTicks: {
           color: "#aa00bb",
           visible: true
         }
@@ -31269,7 +31269,7 @@ The color of the x axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       xAxis: {
-        minorTicks {
+        minorTicks: {
           color: "rgb(128, 0, 255)",
           visible: true
         }
@@ -31286,7 +31286,7 @@ The color of the x axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       xAxis: {
-        minorTicks {
+        minorTicks: {
           color: "green",
           visible: true
         }
@@ -32568,7 +32568,7 @@ If set to `true` the chart will display the scatter chart x axis title. By defau
     $("#chart").kendoChart({
       xAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         }
       }],
@@ -36378,7 +36378,7 @@ The color of the y axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       yAxis: {
-        minorTicks {
+        minorTicks: {
           color: "#aa00bb",
           visible: true
         }
@@ -36395,7 +36395,7 @@ The color of the y axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       yAxis: {
-        minorTicks {
+        minorTicks: {
           color: "rgb(128, 0, 255)",
           visible: true
         }
@@ -36412,7 +36412,7 @@ The color of the y axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       yAxis: {
-        minorTicks {
+        minorTicks: {
           color: "green",
           visible: true
         }
@@ -37690,7 +37690,7 @@ If set to `true` the chart will display the scatter chart y axis title. By defau
     $("#chart").kendoChart({
       yAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         }
       }],

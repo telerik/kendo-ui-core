@@ -926,14 +926,13 @@ Sets a value controlling size of the component. Can also be set to the following
 ### options `Object`
 An object, which holds the [`configuration options`](/api/javascript/ui/datetimepicker#configuration) of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <input id="datetimepicker" />
     <script>
     $("#datetimepicker").kendoDateTimePicker();
 
-    var datetimepicker = $("#datetimepicker").data("datetimepicker");
-
+    var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
     var options = datetimepicker.options;
     </script>
 

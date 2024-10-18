@@ -108,7 +108,8 @@ In such cases, you have to manually update the scroll position and [`pageSize`](
 
 ## Known Limitations
 
-Either enable endless scrolling or paging, and do not use both features simultaneously.
+* Either enable endless scrolling or paging, and do not use both features simultaneously.
+* [Scrolling to an item functionality]({% slug scrolling_to_item_aspnetcore_grid %}) is not supported in an endless scrollable Gird.
 
 ## See Also
 

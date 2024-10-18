@@ -473,11 +473,11 @@ Sets the field of the data item that provides the text of the ContextMenu items.
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -501,11 +501,11 @@ Sets the field of the data item that provides the url of the ContextMenu items.
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -529,11 +529,11 @@ Sets the field of the data item that provides the sprite css class of the Contex
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -557,11 +557,11 @@ Sets the field of the data item that provides the image url of the ContextMenu i
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -585,11 +585,11 @@ Sets the field of the data item that provides the content of the ContextMenu ite
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -1230,7 +1230,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
         contextMenu.insertBefore(
             [{
                 text: "Item 1",
-                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
+                //url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1239,7 +1239,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
+                //imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },

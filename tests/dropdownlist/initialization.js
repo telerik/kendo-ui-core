@@ -103,18 +103,18 @@
             var spanArrow = input.data("kendoDropDownList").span.parent().next(),
                 arrow = spanArrow.children().eq(0);
 
-            assert.isOk(spanArrow.is("span"));
+            assert.isOk(spanArrow.is("button"));
             assert.isOk(spanArrow.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
             assert.isOk(arrow.is(".k-icon.k-i-caret-alt-down, .k-svg-icon.k-svg-i-caret-alt-down"));
         });
 
-        it("arrow button dows not have tabindex", function() {
+        it("arrow button have a tabindex of -1 to prevent focus stealing from the wrapper", function() {
             input.kendoDropDownList();
 
             var arrow = input.data("kendoDropDownList")._arrow;
 
-            assert.equal(arrow.attr("tabindex"), undefined);
+            assert.equal(arrow.attr("tabindex"), -1);
         });
 
         it("data source is when pass DataSource", function() {

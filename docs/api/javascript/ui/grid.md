@@ -11930,6 +11930,53 @@ Switches the table row which is in edit mode and saves any changes made by the u
     grid.saveRow();
     </script>
 
+### scrollToItem
+
+Scrolls the table to the proided item.
+
+#### Parameters
+
+`id` - the id of the data item
+`callback` - optional parameter, a function to be executed when virtual scrolling is enabled and the item to scroll is not loaded yet. Must return the index of the item.
+
+> In order for this method to work as expected, you must configure the `dataSource.Schema.model.id`
+
+#### Example - scrollToItem
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100 },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: 
+        {
+        data: [
+            { name: "Jane Doe", age: 30, id: 1 },
+            { name: "John Doe", age: 33, id: 2 },
+            { name: "Jane Doe", age: 30, id: 3 },
+            { name: "John Doe", age: 33, id: 4 },
+            { name: "Jane Doe", age: 30, id: 5 },
+            { name: "John Doe", age: 33, id: 6 },
+            { name: "Jane Doe", age: 30, id: 7 },
+            { name: "John Doe", age: 33, id: 8 },
+            { name: "Jane Doe", age: 30, id: 9 },
+            { name: "John Doe", age: 33, id: 10 },
+          ],
+        schema: {
+        model: {
+                  id: "id"
+          }
+        }
+      },
+      height: 200
+    });
+    var grid = $("#grid").data("kendoGrid");
+      grid.scrollToItem(8);
+    </script>
+
 ### select
 
 Gets or sets the table rows (or cells) which are selected.

@@ -92,7 +92,6 @@ var __meta__ = {
             that._tagList();
             that._input();
             that._textContainer();
-            that._loader();
             that._clearButton();
             that._arrowButton();
 
@@ -152,7 +151,7 @@ var __meta__ = {
             that._toggleCloseVisibility();
             that._applyCssClasses();
 
-            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: options.clearButton ? that._clear : that.element });
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: options.clearButton ? that._clear : that.element.find("k-input-values") });
             if (that.floatingLabel) {
                 that.floatingLabel.refresh();
             }
@@ -857,12 +856,16 @@ var __meta__ = {
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._progressHandler = that._showBusy.bind(that);
-                that._errorHandler = that._hideBusy.bind(that);
+                that._progressHandler = that._showBusy;
+                that._endRequestHandler = that._hideBusy;
+                that._errorHandler = function() {
+                    that._hideBusy();
+                };
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                    .bind(PROGRESS, that._progressHandler)
+                                   .bind("requestEnd", that._endRequestHandler)
                                    .bind("error", that._errorHandler);
         },
 
@@ -1168,35 +1171,6 @@ var __meta__ = {
             if (handled) {
                 e.stopPropagation();
             }
-        },
-
-        _hideBusy: function() {
-            var that = this;
-            clearTimeout(that._busy);
-            that.input.attr(ARIA_BUSY, false);
-            that._loading.addClass(HIDDENCLASS);
-            that._request = false;
-            that._busy = null;
-
-            that._toggleCloseVisibility();
-        },
-
-        _showBusyHandler: function() {
-            this.input.attr(ARIA_BUSY, true);
-            this._loading.removeClass(HIDDENCLASS);
-            this._hideClear();
-        },
-
-        _showBusy: function() {
-            var that = this;
-
-            that._request = true;
-
-            if (that._busy) {
-                return;
-            }
-
-            that._busy = setTimeout(that._showBusyHandler.bind(that), 100);
         },
 
         _placeholder: function(show, skipCaret) {
@@ -1670,10 +1644,6 @@ var __meta__ = {
                     })
                 );
             };
-        },
-
-        _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading k-input-loading-icon ' + HIDDENCLASS + '"></span>').insertAfter(this._inputValuesContainer);
         },
 
         _popup: function() {

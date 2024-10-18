@@ -1269,6 +1269,8 @@ declare namespace kendo.data {
         parent(): ObservableObject;
         pop(): ObservableObject;
         push(...items: any[]): number;
+        reduce(callback: (item: Object, index: number, source: ObservableArray) => any): any[];
+        reduceRight(callback: (item: Object, index: number, source: ObservableArray) => any): any[];
         remove(item: Object): void;
         shift(): any;
         slice(begin: number, end?: number): any[];
@@ -6562,6 +6564,7 @@ declare namespace kendo.ui {
         saveAsPDF(): JQueryPromise<any>;
         saveChanges(): void;
         saveRow(): any;
+        scrollToItem(id: any, callback?: () => number): void;
         select(): JQuery;
         select(rows: string): void;
         select(rows: Element): void;
@@ -6835,6 +6838,7 @@ declare namespace kendo.ui {
         empty?: string | undefined;
     }
 
+    
     interface GridGroupable {
         enabled?: boolean | undefined;
         showFooter?: boolean | undefined;
@@ -6936,6 +6940,7 @@ declare namespace kendo.ui {
         virtual?: boolean|string | undefined;
         endless?: boolean | undefined;
     }
+
 
     interface GridSearchField {
         name?: string | undefined;
@@ -13842,7 +13847,7 @@ declare namespace kendo.ui {
 
     interface ValidatorOptions {
         name?: string | undefined;
-        errorTemplate?: string | undefined;
+        errorTemplate?: string | Function | undefined;
         messages?: any;
         rules?: any;
         validateOnBlur?: boolean | undefined;

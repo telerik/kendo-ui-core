@@ -997,7 +997,7 @@ Triggered when a pane is dragged.
     $("#dockmanager").kendoDockManager({
                 rootPane: {
                     type: "split",
-                    orientation: "vertical"
+                    orientation: "vertical",
                     panes: [{
                             type: "content",
                             title: "Pane title",
@@ -1055,7 +1055,7 @@ Triggered when item drag starts.
     $("#dockmanager").kendoDockManager({
                 rootPane: {
                     type: "split",
-                    orientation: "vertical"
+                    orientation: "vertical",
                     panes: [{
                             type: "content",
                             title: "Pane title",
@@ -1113,7 +1113,7 @@ Triggered when a pane is docked in the current pane.
     $("#dockmanager").kendoDockManager({
                 rootPane: {
                     type: "split",
-                    orientation: "vertical"
+                    orientation: "vertical",
                     panes: [{
                             type: "content",
                             title: "Pane title",
@@ -1171,7 +1171,7 @@ Triggered when a pane is pinned.
     $("#dockmanager").kendoDockManager({
                 rootPane: {
                     type: "split",
-                    orientation: "vertical"
+                    orientation: "vertical",
                     panes: [{
                             type: "content",
                             title: "Pane title",
@@ -1229,7 +1229,7 @@ Triggered when a pane is resized.
     $("#dockmanager").kendoDockManager({
                 rootPane: {
                     type: "split",
-                    orientation: "vertical"
+                    orientation: "vertical",
                     panes: [{
                             type: "content",
                             title: "Pane title",

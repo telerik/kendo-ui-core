@@ -2250,7 +2250,8 @@ function pad(number, digits, end) {
                     mobilesafari: /version\/.*safari/i,
                     ie: /MSIE|Windows\sPhone/i,
                     chrome: /chrome|crios/i,
-                    webkit: /webkit/i
+                    webkit: /webkit/i,
+                    edge: /edge|edg|edgios|edga/i
                 };
 
             for (var agent in agentRxs) {

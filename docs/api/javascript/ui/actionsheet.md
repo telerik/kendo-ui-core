@@ -872,7 +872,7 @@ Specifies the icon's class of the item.
               {
                   text: 'Edit Item',
                   icon: 'pencil',
-                  iconClass: 'custom-edit-class'
+                  iconClass: 'custom-edit-class',
                   click: onClick
               },
               {
@@ -915,7 +915,7 @@ The icon color. Available options are `inherit`, `default`, `primary`, `secondar
               {
                   text: 'Edit Item',
                   icon: 'pencil',
-                  iconColor: "info"
+                  iconColor: "info",
                   click: onClick
               },
               {
@@ -1127,7 +1127,7 @@ Closes the popup element of the widget.
     <div id="actionsheet"></div>
     <script>
       var actionsheet = $('#actionsheet').kendoActionSheet({
-          title:'Select item',1
+          title:'Select item',
           items:[
               {
                   text: 'Edit Item',

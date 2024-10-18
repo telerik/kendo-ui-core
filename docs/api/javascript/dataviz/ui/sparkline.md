@@ -1568,21 +1568,21 @@ The background color of the label. Accepts a valid CSS color string, including h
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      categoryAxis: {
-        notesdata {
-          data: [{
-            value: 1,
-            label: {
-              background: "red"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3]
+        }],
+        categoryAxis: {
+          notesdata: {
+            data: [{
+              value: 1,
+              label: {
+                background: "red"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### categoryAxis.notes.data.label.border `Object`
@@ -2449,8 +2449,7 @@ The series base color. The supported values are:
 
     <span id="sparkline"></span>
     <script>
-    $("#sparkline").kendoSpar<span id="sparkline"></span>
-    <script>kline({
+    $("#sparkline").kendoSparkline({
          series: [{
              type: "column",
              data: [200, 450, 300, 125],
@@ -5068,7 +5067,7 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       valueAxis: {
-        notesdata {
+        notesdata: {
           data: [{
             value: 1,
             label: {

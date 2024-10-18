@@ -9,6 +9,13 @@ position: 1
 # 2024 Releases
 
 This article lists the breaking or important changes in the 2024 releases of {{ site.product }}.
+{% if site.core %}
+## {{ site.product }} Q4 2024
+
+### Checkbox
+
+The `Rounded` configuration for the HTML Helpers now expects [`Kendo.Mvc.UI.Rounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/rounded) enum instead of [`Kendo.Mvc.UI.BasicRounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/basicrounded), exposing an additional `Full` option.
+{% endif %}
 
 ## {{ site.product }} Q2 2024
 

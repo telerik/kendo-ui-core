@@ -47,8 +47,8 @@ The URL, AJAX settings or function that fetches the audio of the captcha. When u
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
-            handler: "url-to-reset", // Response should return captcha (image) and the id
-            audioHandler: "url-to-audio" // Response should return the audio source - base64 stream or url to the audio file
+            // handler: "url-to-reset", // Response should return captcha (image) and the id
+            // audioHandler: "url-to-audio" // Response should return the audio source - base64 stream or url to the audio file
         });
     </script>
 
@@ -61,7 +61,7 @@ The source of an image to be rendered as captcha initially. If not set the `hand
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
-            captcha: "captchaImage.png",
+            captcha: "https://demos.telerik.com/kendo-ui/content/captcha/9deb39f5-ac2f-4ff6-8061-31ff656d3df6.png",
             captchaId: "1234"
         });
     </script>
@@ -75,7 +75,7 @@ The ID of the captcha to be added to the hidden input initially. If not set the 
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
-            captcha: "captchaImage.png",
+            captcha: "https://demos.telerik.com/kendo-ui/content/captcha/9deb39f5-ac2f-4ff6-8061-31ff656d3df6.png",
             captchaId: "1234"
         });
     </script>
@@ -92,7 +92,7 @@ The field that returns the captcha's image source. Used in the `handler` functio
             dataCaptchaField: "captchaImage",
             handler: function (args) {
                 args.success({
-                    captchaImage: "captchaImage.png",
+                    captchaImage: "https://demos.telerik.com/kendo-ui/content/captcha/9deb39f5-ac2f-4ff6-8061-31ff656d3df6.png",
                     captchaId: "1234"
                 });
             }
@@ -121,7 +121,7 @@ The field that returns the captcha's id. Used in the `handler` function/response
             dataCaptchaIdField: "ID",
             handler: function (args) {
                 args.success({
-                    captcha: "captchaImage.png",
+                    captcha: "https://demos.telerik.com/kendo-ui/content/captcha/9deb39f5-ac2f-4ff6-8061-31ff656d3df6.png",
                     ID: "1234"
                 });
             }
@@ -149,7 +149,7 @@ The URL, AJAX settings or function that fetches the image and id of the captcha.
         $("#captcha").kendoCaptcha({
             handler: function (args) {
                 args.success({
-                    captcha: "captchaImage.png",
+                    captcha: "https://demos.telerik.com/kendo-ui/content/captcha/9deb39f5-ac2f-4ff6-8061-31ff656d3df6.png",
                     captchaId: "1234"
                 });
             }
@@ -308,8 +308,6 @@ The URL, AJAX settings or function that validates the text input. When used with
                 args.success(false);
             },
         });
-
-
     </script>
 
 #### Example - ajax

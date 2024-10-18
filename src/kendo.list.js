@@ -3,6 +3,7 @@ import "./kendo.popup.js";
 import "./kendo.label.js";
 import "./kendo.icons.js";
 import "./kendo.actionsheet.js";
+import { initLoader } from "./utils/dropdowns-loader.js";
 
 var __meta__ = {
     id: "list",
@@ -30,7 +31,6 @@ var __meta__ = {
         FOCUSED = "k-focus",
         HOVER = "k-hover",
         KSELECTED = "k-selected",
-        LOADING = "k-i-loading k-input-loading-icon",
         LIST = "k-list",
         TABLE = "k-table",
         DATA_TABLE = "k-data-table",
@@ -92,7 +92,6 @@ var __meta__ = {
         ARIA_LIVE = "aria-live",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
-        ARIA_BUSY = "aria-busy",
         ARIA_MULTISELECTABLE = "aria-multiselectable",
         ARIA_SELECTED = "aria-selected",
         GROUP_ROW_SEL = ".k-table-group-row",
@@ -121,6 +120,8 @@ var __meta__ = {
                 that.mediumMQL = kendo.mediaQuery("medium");
                 that.smallMQL = kendo.mediaQuery("small");
             }
+
+            that._bindLoader();
 
             that._listSize = kendo.cssProperties.getValidClass({
                 widget: "List",
@@ -204,6 +205,13 @@ var __meta__ = {
             } else if (options.label) {
                 this._label();
             }
+        },
+
+        _bindLoader: function() {
+            const that = this;
+
+            that._initLoader = initLoader.bind(that);
+            that._initLoader();
         },
 
         focus: function() {
@@ -1553,44 +1561,6 @@ var __meta__ = {
             custom[0].selected = true;
         },
 
-        _hideBusy: function() {
-            var that = this;
-            clearTimeout(that._busy);
-            that._arrowIcon.removeClass(LOADING);
-            that._arrowIcon.find("svg").show();
-            that._focused.attr(ARIA_BUSY, false);
-            that._busy = null;
-            that._showClear();
-        },
-
-        _showBusy: function(e) {
-            var that = this;
-
-            if (e.isDefaultPrevented()) {
-                return;
-            }
-
-            that._request = true;
-
-            if (that._busy) {
-                return;
-            }
-
-            that._busy = setTimeout(function() {
-                if (that._arrowIcon) { //destroyed after request start
-                    that._focused.attr(ARIA_BUSY, true);
-                    that._arrowIcon.addClass(LOADING);
-                    that._arrowIcon.find("svg").hide();
-                    that._hideClear();
-                }
-            }, 100);
-        },
-
-        _requestEnd: function() {
-            this._request = false;
-            this._hideBusy();
-        },
-
         _dataSource: function() {
             var that = this,
                 element = that.element,
@@ -1614,9 +1584,11 @@ var __meta__ = {
             if (that.dataSource) {
                 that._unbindDataSource();
             } else {
-                that._requestStartHandler = that._showBusy.bind(that);
-                that._requestEndHandler = that._requestEnd.bind(that);
-                that._errorHandler = that._hideBusy.bind(that);
+                that._requestStartHandler = that._showBusy;
+                that._requestEndHandler = that._hideBusy;
+                that._errorHandler = function() {
+                    that._hideBusy();
+                };
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
