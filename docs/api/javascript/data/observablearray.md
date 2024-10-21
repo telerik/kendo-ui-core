@@ -153,7 +153,7 @@ The function that will be executed for every item.
 
 #### Returns
 
-New array with items that pass the filter condition.
+`Array`&mdash;A new array with items that pass the filter condition.
 
 #### Example - working with filter method
 
@@ -178,7 +178,7 @@ The testing function.
 
 #### Returns
 
-The first item that passes the search condition.
+`Object`&mdash;The first item that passes the search condition.
 
 #### Example - working with find method
 
@@ -216,13 +216,13 @@ The function that will be executed for every item.
       console.log(array)
     </script>
 
-### indexoOf
+### indexOf
 
 Returns the index in the Array at which the item can be found. An equivalent of [`Array.prototype.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf).
 
 #### Parameters
 
-##### item 
+##### item `String|Number|Object`
 
 The searched item.
 
@@ -380,7 +380,7 @@ The function that will be executed for every item.
 
 #### Returns
 
-The accumulated result.
+`Number`&mdash;The accumulated result.
 
 #### Example - working with reduce method
 
@@ -405,7 +405,7 @@ The function that will be executed for every item.
 
 #### Returns
 
-The accumulated result.
+`Number`&mdash;The accumulated result.
 
 #### Example - working with reduceRight method
 
@@ -427,7 +427,6 @@ Removes the specified item from an array.
 ##### item `String|Number|Object`
 
 The item that will be removed.
-
 
 #### Example - working with remove method
 

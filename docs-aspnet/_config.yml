@@ -27,6 +27,7 @@ install-npm.sh,
 start-docs.sh,
 watch.sh,
 getting-started-mvc/*,
+html-helpers/helper-basics/build-team-efficiency-dashboard/*,
 how-to/*,
 tutorials/*,
 troubleshoot/troubleshooting.md,
@@ -144,6 +145,10 @@ navigation:
      "html-helpers/helper-basics":
         title: "Working with Helpers"
         position: 2
+     "html-helpers/helper-basics/build-team-efficiency-dashboard":
+        title: "Build Team Efficiency Dashboard"
+        position: 15
+        include_in_navigation: true
      "html-helpers/helper-basics-mvc":
         title: "Working with Helpers"
         position: 2

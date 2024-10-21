@@ -171,7 +171,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
     <div id="multiViewCalendar"></div>
     <script>
-        $("#multiViewCalendar").kendomultiViewCalendar({
+        $("#multiViewCalendar").kendoMultiViewCalendar({
             footer: "Today - #: kendo.toString(data, 'd') #"
         });
     </script>

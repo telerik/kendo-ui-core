@@ -542,7 +542,7 @@ An object, which holds the options of the widget.
     var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
 
     var options = numerictextbox.options;
-    <script>
+    </script>
 
 ## Methods
 
@@ -561,7 +561,7 @@ Prepares the **NumericTextBox** for safe removal from DOM. Detaches all event ha
 
     // detach events
     numerictextbox.destroy();
-    <script>
+    </script>
 
 ### enable
 

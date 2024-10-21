@@ -1302,7 +1302,7 @@ The configuration for the prefix adornment of the component.
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         prefixOptions: {
           template: () => `${kendo.ui.icon("search")}`
         }
@@ -1330,7 +1330,7 @@ Defines the name for an existing icon in a Kendo UI theme or SVG content
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         prefixOptions: {
           icon: "search"
         }
@@ -1358,7 +1358,7 @@ The [template](/api/javascript/kendo/methods/template) for the prefix adornment 
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         prefixOptions: {
           template: () => `${kendo.ui.icon("search")}`
         }
@@ -1386,7 +1386,7 @@ If set to `false`, the prefix adornment will not have a separator.
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         prefixOptions: {
           template: () => `${kendo.ui.icon("search")}`,
           separator: false
@@ -1472,7 +1472,7 @@ The configuration for the suffix adornment of the component.
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         suffixOptions: {
           template: () => `${kendo.ui.icon("search")}`
         }
@@ -1500,7 +1500,7 @@ Defines the name for an existing icon in a Kendo UI theme or SVG content
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         suffixOptions: {
           icon: "search"
         }
@@ -1528,7 +1528,7 @@ The [template](/api/javascript/kendo/methods/template) for the suffix adornment 
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         suffixOptions: {
           template: () => `${kendo.ui.icon("search")}`
         }
@@ -1556,7 +1556,7 @@ If set to `false`, the suffix adornment will not have a separator.
         columns: [
             { field: "text", title: "Text" },
             { field: "value", title: "Value" }
-        ]
+        ],
         suffixOptions: {
           template: () => `${kendo.ui.icon("search")}`,
           separator: false
