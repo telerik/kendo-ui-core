@@ -1,6 +1,6 @@
 import "./kendo.html.base.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "html.icon",
     name: "Html.Icon",
     category: "web",

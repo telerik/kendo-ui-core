@@ -121,6 +121,8 @@ For the complete implementation of the suggested approach, refer to the followin
 * [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
 
 {% if site.core %}
+* [{{ site.framework }} Grid Custom PopUp Editor Example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/CustomPopUpEditor.cshtml)
+
 * [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
@@ -128,6 +130,8 @@ For the complete implementation of the suggested approach, refer to the followin
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
 
 {% else %}
+* [{{ site.framework }} Grid Custom PopUp Editor Example](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingCustomPopupEditor)
+
 * [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})

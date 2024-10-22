@@ -10,9 +10,10 @@ position: 2
 
 To get the Sass-based Kendo UI themes for {{ site.framework }}, you can:
 
-* [Use the pre-built CSS files](#using-the-pre-built-css).
-* [Use the Kendo UI CDN](#using-the-kendo-ui-cdn).
-* [Use the NPM packages](#using-npm-packages).
+* [Use the pre-built CSS files](#using-the-pre-built-css)
+* [Use the Kendo UI CDN](#using-the-kendo-ui-cdn)
+* [Use the NPM packages](#using-npm-packages)
+* [Use the build process of the application](#using-the-build-process-of-the-application)
 
 ## Using Pre-Built CSS
 
@@ -50,11 +51,6 @@ To access the Progress NPM registry, you need an active Telerik account with an 
 ## Using the Build Process of the Application
 
 [This article](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/customization#using-the-build-process-of-the-application) is representing the approach of how to customize a Sass-based theme and consume the theme package.
-
-{% if site.core %}
-## [Adding Client-Side Resources through LibMan](https://docs.telerik.com/aspnet-core/installation/adding-client-side-resources/using-libman#adding-client-side-resources-through-libman)
-
-{% endif %}
 
 ## See Also
 

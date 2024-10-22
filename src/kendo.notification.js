@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.popup.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "notification",
     name: "Notification",
     category: "web",

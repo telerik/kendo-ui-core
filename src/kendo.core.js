@@ -1,6 +1,6 @@
 import { defaultBreakpoints, mediaQuery } from './utils/mediaquery.js';
 
-var __meta__ = {
+export const __meta__ = {
     id: "core",
     name: "Core",
     category: "framework",
@@ -216,6 +216,67 @@ var packageMetadata = {
 
     Class.prototype._initOptions = function(options) {
         this.options = deepExtend({}, this.options, options);
+    };
+
+    kendo.createProxyMember = function(proto, name) {
+        proto.fn[name] = function() {
+            var instance = this._instance;
+            if (instance) {
+                return instance[name].apply(instance, arguments);
+            }
+        };
+    };
+
+    kendo.getBaseClass = function(targetClass) {
+      if (targetClass instanceof Function) {
+        let baseClass = targetClass;
+
+        const newBaseClass = Object.getPrototypeOf(baseClass);
+
+        if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
+          return newBaseClass;
+        }
+      }
+      return null;
+    };
+
+    kendo.getAllMethods = function(targetClass) {
+      const allStatic = Object.getOwnPropertyNames(targetClass)
+        .filter(prop => typeof targetClass[prop] === "function");
+      const allNonStatic = Object.getOwnPropertyNames(Object.getPrototypeOf(new targetClass({})))
+        .filter(prop => prop !== "constructor");
+
+      return allStatic.concat(allNonStatic);
+    };
+
+    kendo.convertPromiseToDeferred = function(promise) {
+        let deferred = $.Deferred();
+
+        promise.finally(deferred.always).then(deferred.resolve).catch(deferred.reject);
+
+        return deferred.promise();
+    };
+
+    kendo.ConvertClass = function(proto) {
+        let all = kendo.getAllMethods(proto);
+        let baseClass = kendo.getBaseClass(proto);
+
+        while (baseClass) {
+          all = all.concat(kendo.getAllMethods(baseClass));
+          baseClass = kendo.getBaseClass(baseClass);
+        }
+
+        let extended = Class.extend({
+          init: function() {
+            this._instance = new proto(...arguments);
+          }
+        });
+
+        for (var idx = 0; idx < all.length; idx++) {
+          kendo.createProxyMember(extended, all[idx]);
+        }
+
+        return extended;
     };
 
     const isPresent = kendo.isPresent = (value) => value !== null && value !== undefined;

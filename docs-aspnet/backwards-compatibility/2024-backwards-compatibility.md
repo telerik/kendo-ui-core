@@ -9,9 +9,24 @@ position: 1
 # 2024 Releases
 
 This article lists the breaking or important changes in the 2024 releases of {{ site.product }}.
-{% if site.core %}
+
 ## {{ site.product }} Q4 2024
 
+### Kendo UI Themes
+
+For a while, the [CSS Utilities](https://www.telerik.com/design-system/docs/utils/get-started/introduction/) were bundled with the Kendo UI themes. Starting with version Q4 2024, the CSS Utilities are no longer included in the [Kendo UI themes]({% slug sassbasedthemes_overview %}).
+The Kendo UI theme stylesheet still contains all the necessary styles. However, in case you need to create an additional layout, dependent on the utility classes, you need to include the additional stylesheet `kendo-theme-utils.css`, which is available in the `styles` folder of the {{ site.product }} distribution and through the Kendo CDN service.
+
+```LocalFiles
+    <link rel="stylesheet" href="~/lib/kendo/styles/default-ocean-blue.css" />
+    <link rel="stylesheet" href="~/lib/kendo/styles/kendo-theme-utils.css" />
+```
+```CDN
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-ocean-blue.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/utils/all.css"/>
+```
+
+{% if site.core %}
 ### Checkbox
 
 The `Rounded` configuration for the HTML Helpers now expects [`Kendo.Mvc.UI.Rounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/rounded) enum instead of [`Kendo.Mvc.UI.BasicRounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/basicrounded), exposing an additional `Full` option.

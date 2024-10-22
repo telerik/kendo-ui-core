@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.userevents.js";
 
-let __meta__ = {
+export const __meta__ = {
     id: "selectable",
     name: "Selectable",
     category: "framework",

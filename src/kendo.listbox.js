@@ -4,7 +4,7 @@ import "./kendo.data.js";
 import "./kendo.selectable.js";
 import "./kendo.html.button.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "listbox",
     name: "ListBox",
     category: "web",

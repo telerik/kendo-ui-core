@@ -3,7 +3,7 @@ import "./kendo.popup.js";
 import "./kendo.fx.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "tooltip",
     name: "Tooltip",
     category: "web",

@@ -5,7 +5,7 @@ import "./kendo.icons.js";
 import "./kendo.actionsheet.js";
 import { initLoader } from "./utils/dropdowns-loader.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "list",
     name: "List",
     category: "framework",

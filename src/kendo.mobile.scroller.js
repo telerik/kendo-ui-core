@@ -1,7 +1,7 @@
 import "./kendo.fx.js";
 import "./kendo.draganddrop.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "mobile.scroller",
     name: "Scroller",
     category: "mobile",

@@ -110,6 +110,21 @@
                 "assertEvent": true,
                 "roughlyEqual": true
             }
+        },
+        {
+            "files": ["tests-next/**/*.js"],
+            "globals": {
+                "$": true,
+                "Mocha": true,
+                "describe": true,
+                "beforeEach": true,
+                "afterEach": true,
+                "it": true,
+                "assert": true,
+                "axeRunFixture": true,
+                "axeRun": true,
+                "vi": true
+            }
         }
     ]
 }

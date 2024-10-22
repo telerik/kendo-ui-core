@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "bottomnavigation",
     name: "BottomNavigation",
     category: "web",

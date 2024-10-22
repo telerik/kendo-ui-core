@@ -1,7 +1,7 @@
 import './kendo.core.js';
 import './kendo.floatinglabel.js';
 
-var __meta__ = {
+export const __meta__ = {
     id: 'label',
     name: 'Label',
     category: 'framework',

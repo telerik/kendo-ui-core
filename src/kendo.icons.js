@@ -1,7 +1,7 @@
 import './kendo.html.icon.js';
 import * as svgIcons from '@progress/kendo-svg-icons';
 
-var __meta__ = {
+export const __meta__ = {
     id: "icons",
     name: "Icons",
     category: "web",

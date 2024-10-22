@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "badge",
     name: "Badge",
     category: "web", // suite

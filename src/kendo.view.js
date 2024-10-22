@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.binder.js";
 import "./kendo.fx.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "view",
     name: "View",
     category: "framework",

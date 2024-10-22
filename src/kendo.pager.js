@@ -1,7 +1,8 @@
 import "./kendo.data.js";
+import "./kendo.dropdownlist.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "pager",
     name: "Pager",
     category: "framework",

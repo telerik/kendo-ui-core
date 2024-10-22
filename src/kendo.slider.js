@@ -1,7 +1,7 @@
 import "./kendo.draganddrop.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "slider",
     name: "Slider",
     category: "web",

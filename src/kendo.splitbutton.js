@@ -1,7 +1,7 @@
 import "./kendo.html.button.js";
 import "./kendo.button.menu.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "splitbutton",
     name: "SplitButton",
     category: "web",

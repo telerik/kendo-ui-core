@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.floatinglabel.js";
 import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "textarea",
     name: "TextArea",
     category: "web",

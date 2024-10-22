@@ -1,7 +1,7 @@
 import "./kendo.resizable.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "splitter",
     name: "Splitter",
     category: "web",

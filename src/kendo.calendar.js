@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.selectable.js";
 import "./kendo.icons.js";
 
-let __meta__ = {
+export const __meta__ = {
     id: "calendar",
     name: "Calendar",
     category: "web",

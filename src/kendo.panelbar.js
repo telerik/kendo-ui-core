@@ -1,7 +1,7 @@
 import "./kendo.data.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "panelbar",
     name: "PanelBar",
     category: "web",
@@ -1688,12 +1688,12 @@ var __meta__ = {
         },
 
         renderGroup: function(options) {
-            var that = this;
-            var templates = that.templates || options.panelBar.templates;
+            let that = this;
+            let templates = (that && that.templates) || options.panelBar.templates;
 
             return templates.group(extend({
                 renderItems: function(options) {
-                    var html = "",
+                    let html = "",
                         i = 0,
                         items = options.items,
                         len = items ? items.length : 0,

@@ -1,7 +1,7 @@
 import "./kendo.data.js";
 import { valueMapperOptions } from "./utils/valueMapper.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "virtuallist",
     name: "VirtualList",
     category: "framework",

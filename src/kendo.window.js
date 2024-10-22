@@ -3,7 +3,7 @@ import "./kendo.popup.js";
 import "./kendo.icons.js";
 import "./kendo.html.button.js";
 
-    var __meta__ = {
+    export const __meta__ = {
         id: "window",
         name: "Window",
         category: "web",

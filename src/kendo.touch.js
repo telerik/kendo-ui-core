@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.userevents.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "touch",
     name: "Touch",
     category: "mobile",

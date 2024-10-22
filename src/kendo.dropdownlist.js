@@ -4,7 +4,7 @@ import "./kendo.virtuallist.js";
 import "./kendo.html.button.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "dropdownlist",
     name: "DropDownList",
     category: "web",

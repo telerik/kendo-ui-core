@@ -1,7 +1,7 @@
 import "./kendo.toggleinputbase.js";
 import "./kendo.html.input.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "checkbox",
     name: "CheckBox",
     category: "web",

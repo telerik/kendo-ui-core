@@ -1,15 +1,10 @@
 import "../kendo.core.js";
 import "../kendo.popup.js";
+import "../kendo.slider.js";
+import "../kendo.binder.js";
 import "./contrastToolUtils.js";
 import "../kendo.icons.js";
 
-    var __meta__ = {
-        id: "colorgradient",
-        name: "ColorGradient",
-        category: "web", // suite
-        description: "ColorGradient allows selection of a color from an HSV canvas.",
-        depends: ["core", "popup", "textbox", "icons"] // dependencies
-    };
 (function($, undefined) {
     // WARNING: removing the following jshint declaration and turning
     // == into === to make JSHint happy will break functionality.

@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.data.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "binder",
     name: "MVVM",
     category: "framework",

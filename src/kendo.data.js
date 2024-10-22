@@ -3,7 +3,7 @@ import { filterExprNoEval } from "./data/filter-expression-no-eval.js";
 import "./kendo.data.odata.js";
 import "./kendo.data.xml.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "data",
     name: "Data source",
     category: "framework",

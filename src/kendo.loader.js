@@ -1,6 +1,6 @@
 import "./kendo.core.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "loader",
     name: "Loader",
     category: "web",

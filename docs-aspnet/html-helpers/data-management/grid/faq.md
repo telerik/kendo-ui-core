@@ -858,6 +858,37 @@ To validate a number by using the Kendo UI NumericTextBox:
             public decimal Price { get; set; }
         }
 
+## How can I distinguish between Add and Edit mode?
+
+To distinguish between the insert and update modes, you can use the `isNew` method in combination with the edit event handler of the grid:
+[Grid Edit Event](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit)
+
+Here is a basic sample for reference:
+
+```HtmlHelper
+    // Omitted for brevity.
+   .Events(events => events.Edit("onEdit"))
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid on-edit="onEdit">
+        // Omitted for brevity.
+    </kendo-grid>
+```
+{% endif %}
+```js
+function onEdit(args) {
+    if (args.model.isNew() == false) {
+            // textbox
+            $("#ShipName").attr("readonly", true);
+             
+            // dropdownlist
+            var kendoDdl = $("#ShipCountry").data("kendoDropDownList");
+            kendoDdl.readonly(true);
+    }
+}
+```
+
 ## See Also
 
 * [Basic Usage of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid)

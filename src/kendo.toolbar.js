@@ -5,7 +5,7 @@ import "./kendo.buttongroup.js";
 import "./kendo.menu.js";
 import "./kendo.icons.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "toolbar",
     name: "ToolBar",
     category: "web",

@@ -2,7 +2,7 @@ import "./kendo.data.js";
 import "./kendo.icons.js";
 import "./kendo.sortable.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "tabstrip",
     name: "TabStrip",
     category: "web",

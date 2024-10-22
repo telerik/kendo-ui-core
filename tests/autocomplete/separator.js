@@ -117,6 +117,22 @@ it("select replaces the word at the caret position", function() {
         autocomplete.search();
     });
 
+    it("multiple separators, suggest correct  word", function() {
+        var autocomplete = new AutoComplete(input, {
+            separator: [", ", ": ", "; "],
+              suggest: true,
+              dataSource: {
+                data: ["baz", "bar"]
+                }
+        });
+
+        input.focus();
+        input.type("b");
+        autocomplete.search();
+
+        assert.equal(input.val(), "baz, ");
+    });
+
     it("multiple separators, replace all with default separator", function() {
         var autocomplete = new AutoComplete(input, {
             dataSource: ["baz", "bar"],

@@ -1,6 +1,6 @@
 import "./kendo.core.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "router",
     name: "Router",
     category: "framework",

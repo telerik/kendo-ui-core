@@ -1,6 +1,6 @@
 import "./kendo.core.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "userevents",
     name: "User Events",
     category: "framework",

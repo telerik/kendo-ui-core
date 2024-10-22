@@ -6,7 +6,7 @@ import "./kendo.html.chiplist.js";
 import "./kendo.html.button.js";
 import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "multiselect",
     name: "MultiSelect",
     category: "web",

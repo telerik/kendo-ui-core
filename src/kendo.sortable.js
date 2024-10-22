@@ -1,7 +1,7 @@
 
 import "./kendo.draganddrop.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "sortable",
     name: "Sortable",
     category: "framework",

@@ -3,7 +3,7 @@ import "./kendo.mobile.scroller.js";
 import "./kendo.virtuallist.js";
 import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "autocomplete",
     name: "AutoComplete",
     category: "web",
@@ -399,6 +399,7 @@ var __meta__ = {
             var that = this,
                 key = that._last,
                 value = that._accessor(),
+                currentValue = that.value(),
                 element = that.element[0],
                 caretIdx = caret(element)[0],
                 separator = that._separator(),
@@ -427,8 +428,8 @@ var __meta__ = {
                 caretIdx = (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()).indexOf(accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) + 1;
             }
 
-            idx = value.substring(0, caretIdx).lastIndexOf(separator);
-            idx = idx > -1 ? caretIdx - (idx + separator.length) : caretIdx;
+            idx = value.substring(0, caretIdx).lastIndexOf(that._defaultSeparator());
+            idx = idx > -1 ? caretIdx - (idx + that._defaultSeparator().length) : caretIdx;
             value = words[wordIndex].substring(0, idx);
 
             if (word) {
@@ -450,7 +451,20 @@ var __meta__ = {
 
             words[wordIndex] = value;
 
-            that._accessor(words.join(separator || ""));
+            if (typeof that.options.separator == 'object' && that.options.separator != null) {
+                if (currentValue.length > 1) {
+                    let lastSeparator = [...currentValue.matchAll(separator.source)].pop();
+                    if (lastSeparator) {
+                        that._accessor(words.slice(0, -1).join(that._defaultSeparator() || "") + lastSeparator + words[words.length - 1]);
+                    } else {
+                        that._accessor(words.slice(0, -1).join(that._defaultSeparator() || ""));
+                    }
+                } else {
+                  that._accessor(words.join(this._defaultSeparator() || ""));
+                }
+            } else {
+                that._accessor(words.join(separator || ""));
+            }
 
             if (element === activeElement()) {
                 caret(element, caretIdx, selectionEnd);
@@ -750,7 +764,18 @@ var __meta__ = {
         _move: function(action) {
             this.listView[action]();
 
-            if (this.options.suggest) {
+            if (this.options.suggest && this.listView.focus() == null && action == "focusNext") {
+                this.listView.focus(0);
+                this.suggest(this.listView._view[0].item);
+            } else if (this.options.suggest && this.listView.focus() == null && action == "focusPrev") {
+                let index = this.listView._view.length - 1;
+                this.listView.focus(index);
+                this.suggest(this.listView._view[index].item);
+            } else if (this.options.suggest && action == "focusFirst") {
+                caret(this.element)[0];
+            } else if (this.options.suggest && action == "focusLast") {
+                caret(this.element)[this.element.val().length - 1];
+            } else if (this.options.suggest && this.listView.focus() != null) {
                 this.suggest(this.listView.focus());
             }
         },

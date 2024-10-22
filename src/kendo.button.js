@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.badge.js";
 import "./kendo.html.button.js";
 
-    var __meta__ = {
+    export const __meta__ = {
         id: "button",
         name: "Button",
         category: "web",

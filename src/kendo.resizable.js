@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.draganddrop.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "resizable",
     name: "Resizable",
     category: "framework",

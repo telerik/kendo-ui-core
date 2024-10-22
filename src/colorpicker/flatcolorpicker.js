@@ -1,3 +1,4 @@
+import "./colorselector.js";
 import "./colorgradient.js";
 import "./colorpalette.js";
 import "../kendo.html.button.js";

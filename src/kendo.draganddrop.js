@@ -1,7 +1,7 @@
 import "./kendo.core.js";
 import "./kendo.userevents.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "draganddrop",
     name: "Drag & drop",
     category: "framework",
@@ -460,7 +460,7 @@ var __meta__ = {
         },
 
         moveTo: function(coordinates) {
-            extend(this, coordinates);
+            extend(this, { x: coordinates.x, y: coordinates.y });
             this.refresh();
         },
 

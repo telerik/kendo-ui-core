@@ -3,7 +3,7 @@ import "./kendo.popup.js";
 import "./kendo.textbox.js";
 import "./kendo.icons.js";
 
-    var __meta__ = {
+    export const __meta__ = {
         id: "dialog",
         name: "Dialog",
         category: "web", // suite

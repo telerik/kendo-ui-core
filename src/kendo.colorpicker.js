@@ -11,12 +11,12 @@ import "./kendo.html.button.js";
 import "./colorpicker/colorselector.js";
 import "./colorpicker/flatcolorpicker.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "colorpicker",
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core", "color", "popup", "slider", "userevents", "button", "binder", "textbox", "numerictextbox", "html.button" ]
+    depends: [ "core", "color", "popup", "slider", "userevents", "button", "binder", "textbox", "numerictextbox", "html.button", "icons" ]
 };
 
 (function($, undefined) {

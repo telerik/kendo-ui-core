@@ -576,3 +576,12 @@ The following example demonstrates how to configure the Toolbar.
 <td>The vertical padding of the container.
 </td>
 </tr>
+
+## Using CSS Utilities
+
+The CSS Utilities allows you to create the desired layout using a collection of CSS classes. Each utility class changes the appearance of the target element by applying a specific CSS rule. For more information on the Telerik UI CSS Utilities and how to install the package, [refer to the CSS Utilities documentation](https://www.telerik.com/design-system/docs/utils/get-started/introduction/).
+
+## See Also
+
+* [SASS Themes Installation]({% slug sassbasedthemes_installation %})
+* [SASS Themes Browser Support]({% slug sass_browser_support %})

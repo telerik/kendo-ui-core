@@ -2,7 +2,7 @@ import "./kendo.core.js";
 import "./kendo.togglebutton.js";
 import "./kendo.button.js";
 
-var __meta__ = {
+export const __meta__ = {
     id: "buttongroup",
     name: "ButtonGroup",
     category: "web",

@@ -11932,7 +11932,7 @@ Switches the table row which is in edit mode and saves any changes made by the u
 
 ### scrollToItem
 
-Scrolls the table to the proided item.
+Scrolls the table to the provided item.
 
 #### Parameters
 
