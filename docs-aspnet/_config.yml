@@ -148,7 +148,6 @@ navigation:
      "html-helpers/helper-basics/build-team-efficiency-dashboard":
         title: "Build Team Efficiency Dashboard"
         position: 15
-        include_in_navigation: true
      "html-helpers/helper-basics-mvc":
         title: "Working with Helpers"
         position: 2

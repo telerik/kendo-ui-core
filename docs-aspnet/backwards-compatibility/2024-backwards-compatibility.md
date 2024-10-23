@@ -30,6 +30,14 @@ The Kendo UI theme stylesheet still contains all the necessary styles. However, 
 ### Checkbox
 
 The `Rounded` configuration for the HTML Helpers now expects [`Kendo.Mvc.UI.Rounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/rounded) enum instead of [`Kendo.Mvc.UI.BasicRounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/basicrounded), exposing an additional `Full` option.
+
+### PanelBar TagHelper
+
+The `PanelBarItemBase(ViewContext)` constructor of the `PanelBarItemBase.cs` class is now obsolete. Use the parameterless constructo instead.
+
+### Form TagHelper
+
+The `Size` attribute now expects [`Kendo.Mvc.UI.ComponentSize`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/componentsize) enum instead of a string.
 {% endif %}
 
 ## {{ site.product }} Q2 2024

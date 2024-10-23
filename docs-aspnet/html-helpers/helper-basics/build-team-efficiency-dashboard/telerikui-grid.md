@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 4: Telerik UI Grid
+title: Build the Team Efficiency Dashboard Project - Step 4 Telerik UI Grid
 page_title: Build the Team Efficiency Dashboard Project - Telerik UI Grid
 description: "Build the Team Efficiency Dashboard Project - Step 4: Telerik UI Grid."
 slug: telerikui_grid_timeefficiencyapp_aspnetmvc6

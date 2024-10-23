@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 9: Make the Application Responsive
+title: Build the Team Efficiency Dashboard Project - Step 9 Make the Application Responsive
 page_title: Build the Team Efficiency Dashboard Project - Make the Application Responsive
 description: "Build the Team Efficiency Dashboard Project - Step 9: Make the Application Responsive."
 slug: go_responsive_timeefficiencyapp_aspnetmvc6

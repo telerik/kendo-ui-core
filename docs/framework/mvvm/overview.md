@@ -39,6 +39,8 @@ The View-Model part of the MVVM handles the exposing of the data objects from th
         kendo.bind($("div"), viewModel);
         </script>
 
+* Initializing components' properties by passing `JSON` as string to the `DOM` results in unsafe HTML and is not recommended. The better practise is to pass the properties to the [`Observable Objects`]({% slug overview_observabeobject_kendoui %}).
+
 ## Functionality and Features
 
 * [ObservableObject]({% slug overview_observabeobject_kendoui %})&mdash;All View-Model objects inherit from `kendo.data.ObservableObject`.

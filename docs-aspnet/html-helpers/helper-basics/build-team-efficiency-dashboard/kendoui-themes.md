@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 10: Add and Configure the Kendo UI Themes
+title: Build the Team Efficiency Dashboard Project - Step 10 Add and Configure the Kendo UI Themes
 page_title: Build the Team Efficiency Dashboard Project - Add and Configure the Kendo UI Themes
 description: "Build the Team Efficiency Dashboard Project - Step 10: Add and Configure the Kendo UI Themes."
 slug: kendoui_themes_timeefficiencyapp_aspnetmvc6

@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 5: Telerik UI ListView
+title: Build the Team Efficiency Dashboard Project - Step 5 Telerik UI ListView
 page_title: Build the Team Efficiency Dashboard Project - Telerik UI ListView
 description: "Build the Team Efficiency Dashboard Project - Step 5: Telerik UI ListView."
 slug: telerikui_listview_timeefficiencyapp_aspnetmvc6

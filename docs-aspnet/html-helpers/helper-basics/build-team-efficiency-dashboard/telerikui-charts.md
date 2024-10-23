@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 8: Add and Configure the Telerik UI Charts
+title: Build the Team Efficiency Dashboard Project - Step 8 Add and Configure the Telerik UI Charts
 page_title: Build the Team Efficiency Dashboard Project - Add and Configure the Telerik UI Charts
 description: "Build the Team Efficiency Dashboard Project - Step 8: Add and Configure the Telerik UI Charts."
 slug: telerikui_charts_timeefficiencyapp_aspnetmvc6

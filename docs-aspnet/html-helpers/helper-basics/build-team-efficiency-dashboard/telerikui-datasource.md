@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 7: Handle the Telerik UI Datasource
+title: Build the Team Efficiency Dashboard Project - Step 7 Handle the Telerik UI Datasource
 page_title: Build the Team Efficiency Dashboard Project - Handle the Telerik UI Datasource
 description: "Build the Team Efficiency Dashboard Project - Step 7: Handle the Telerik UI Datasource."
 slug: telerikui_datasource_timeefficiencyapp_aspnetmvc6

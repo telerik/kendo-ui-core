@@ -1,5 +1,5 @@
 ---
-title: Build the Team Efficiency Dashboard Project - Step 2: Input Controls
+title: Build the Team Efficiency Dashboard Project - Step 2 Input Controls
 page_title: Build the Team Efficiency Dashboard Project - Input Controls
 description: "Build the Team Efficiency Dashboard Project - Step 2: Input Controls."
 slug: input_controls_timeefficiencyapp_aspnetmvc6
