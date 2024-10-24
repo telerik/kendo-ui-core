@@ -34,7 +34,7 @@ Specifies a template used to populate the value of the aria-label attribute of t
         dataSource.read();
 
         $("#pager").kendoPager({
-          ARIATemplate: "Current page is #=page#"
+          ARIATemplate: "Current page is #=page#",
           dataSource: dataSource
         });
     </script>

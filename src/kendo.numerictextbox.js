@@ -580,7 +580,7 @@ export const __meta__ = {
 
             if (text.length < 2) {
                 text = $('<input type="text"/>')
-                        .attr(kendo.attr("validate"), false)
+                        .attr(kendo.attr("validate"), "false")
                         .insertBefore(element);
             }
 

@@ -1,4 +1,5 @@
 import { defaultBreakpoints, mediaQuery } from './utils/mediaquery.js';
+import { fromESClass } from './utils/convert-class.js';
 
 export const __meta__ = {
     id: "core",
@@ -257,27 +258,7 @@ var packageMetadata = {
         return deferred.promise();
     };
 
-    kendo.ConvertClass = function(proto) {
-        let all = kendo.getAllMethods(proto);
-        let baseClass = kendo.getBaseClass(proto);
-
-        while (baseClass) {
-          all = all.concat(kendo.getAllMethods(baseClass));
-          baseClass = kendo.getBaseClass(baseClass);
-        }
-
-        let extended = Class.extend({
-          init: function() {
-            this._instance = new proto(...arguments);
-          }
-        });
-
-        for (var idx = 0; idx < all.length; idx++) {
-          kendo.createProxyMember(extended, all[idx]);
-        }
-
-        return extended;
-    };
+    kendo.ConvertClass = fromESClass;
 
     const isPresent = kendo.isPresent = (value) => value !== null && value !== undefined;
     const isBlank = kendo.isBlank = (value) => value === null || value === undefined;
@@ -5616,4 +5597,6 @@ function pad(number, digits, end) {
     }
 
 })(jQuery, window);
+
+export { fromESClass };
 export default kendo;

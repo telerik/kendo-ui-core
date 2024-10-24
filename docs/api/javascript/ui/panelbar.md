@@ -865,7 +865,7 @@ A string, DOM element or jQuery object which represents the item. A string is tr
         });
 
         var panelBar = $("#panelBar").data("kendoPanelBar");
-        var dataItem = panelBar.dataItem(".k-item:first");
+        var dataItem = panelBar.dataItem(".k-panelbar-item:first");
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataItem.text); // displays "foo"
     </script>

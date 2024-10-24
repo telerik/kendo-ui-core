@@ -186,6 +186,7 @@ The width of the PDFViewer.
 
 #### Example - customizing the width of the viewer
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -199,6 +200,7 @@ The height of the PDFViewer.
 
 #### Example - customizing the height of the viewer
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -212,6 +214,7 @@ Specifies the default page size if no PDF is displayed in the PDFViewer. The pag
 
 #### Example - customizing the default page sizes
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -236,6 +239,7 @@ Specifies the default scale of the pages.
 
 #### Example - customizing the scale
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -252,6 +256,7 @@ Specifies the minimum zoom that could be applied to the pages.
 
 #### Example - customizing the zoomMin
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -268,6 +273,7 @@ Specifies the maximum zoom that could be applied to the pages.
 
 #### Example - customizing the zoomMax
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -284,6 +290,7 @@ Specifies the zoom rate that could be applied to the pages. Used when zooming on
 
 #### Example - customizing the zoomRate
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -304,6 +311,7 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
 #### Example - customizing the type of pages' surfaces
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -335,6 +343,7 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
 #### Example - customizing the toolbar items
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -349,6 +358,7 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
 #### Example - customizing the pager default tool
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -362,6 +372,7 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
 #### Example - customizing the zoom default tool
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
         $("#pdf-viewer").kendoPDFViewer({
@@ -413,6 +424,7 @@ Specifies what element will be added in the ToolBar wrapper. Items with template
 
 #### Example
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
     <script>
       $("#pdf-viewer").kendoPDFViewer({
