@@ -1,16 +1,17 @@
 (function() {
-    var DropDownList = kendo.ui.DropDownList,
-        select,
-        input;
+    var DropDownList = kendo.ui.DropDownList;
+    var dropdownlist;
+    var select;
+    var input;
 
     describe("kendo.ui.DropDownList initialization", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
-            input = $("<input class='test'/>").appendTo(Mocha.fixture);
+            input = $("<input class='test' style='width: 200px' />").appendTo(Mocha.fixture);
             select = $("<select></select>").appendTo(Mocha.fixture);
         });
         afterEach(function() {
-            var element = $(document.body).find("[data-kendo-role=dropdownlist]")
+            var element = $(document.body).find("[data-kendo-role=dropdownlist]");
 
             if (element[0]) {
                 try {
@@ -18,7 +19,7 @@
                 } catch (e) {
                     //destroy failed because widget is not fully initialized
                 }
-                element.closest(".k-dropdown").remove();
+                element.closest(".k-dropdownlist").remove();
             }
 
             $(".test").remove();
@@ -38,7 +39,7 @@
             input.kendoDropDownList({ test: 1 });
 
             var options = input.data("kendoDropDownList").options;
-            assert.notEqual(options.test, undefined)
+            assert.notEqual(options.test, undefined);
             assert.equal(options.test, 1);
         });
 
@@ -49,16 +50,16 @@
             var wrapper = input.data("kendoDropDownList").wrapper;
 
             assert.isOk(wrapper.parent().is("span.test"));
-            assert.isOk(wrapper.is("span.k-widget"));
-            assert.isOk(wrapper.hasClass("k-widget k-dropdown"));
+            assert.isOk(wrapper.is("span.k-picker"));
+            assert.isOk(wrapper.hasClass("k-picker k-dropdownlist"));
             assert.isOk(!input.is(":visible"));
         });
 
-        it("DropDownList creates span when input has k-input class", function() {
-            input.addClass("k-input");
+        it("DropDownList creates span when input has k-input-inner class", function() {
+            input.addClass("k-input-inner");
             input.kendoDropDownList();
 
-            assert.equal(input.data("kendoDropDownList").wrapper.find(".k-input")[0].nodeName, "SPAN");
+            assert.equal(input.data("kendoDropDownList").wrapper.find(".k-input-inner")[0].nodeName, "SPAN");
         });
 
         it("set tabIndex to the wrapper", function() {
@@ -84,7 +85,7 @@
             var span = input.data("kendoDropDownList").span;
 
             assert.isOk(span.is("span"));
-            assert.isOk(span.hasClass("k-input"));
+            assert.isOk(span.hasClass("k-input-value-text"));
         });
 
         it("text span should wrapped with span", function() {
@@ -93,20 +94,27 @@
             var dropDownWrapper = input.data("kendoDropDownList").span.parent();
 
             assert.isOk(dropDownWrapper.is("span"));
-            assert.isOk(dropDownWrapper.hasClass("k-dropdown-wrap k-state-default"));
+            assert.isOk(dropDownWrapper.hasClass("k-input-inner"));
         });
 
         it("include arrow after span.k-input", function() {
             input.kendoDropDownList();
 
-            var spanArrow = input.data("kendoDropDownList").span.next(),
+            var spanArrow = input.data("kendoDropDownList").span.parent().next(),
                 arrow = spanArrow.children().eq(0);
 
-            assert.isOk(spanArrow.is("span"));
-            assert.isOk(spanArrow.hasClass("k-select"));
+            assert.isOk(spanArrow.is("button"));
+            assert.isOk(spanArrow.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
-            assert.isOk(arrow.hasClass("k-icon k-i-arrow-60-down"));
-            assert.equal(arrow.html(), "");
+            assert.isOk(arrow.is(".k-icon.k-i-caret-alt-down, .k-svg-icon.k-svg-i-caret-alt-down"));
+        });
+
+        it("arrow button have a tabindex of -1 to prevent focus stealing from the wrapper", function() {
+            input.kendoDropDownList();
+
+            var arrow = input.data("kendoDropDownList")._arrow;
+
+            assert.equal(arrow.attr("tabindex"), -1);
         });
 
         it("data source is when pass DataSource", function() {
@@ -221,7 +229,7 @@
             assert.isOk(dropdownlist.ul);
             assert.isOk(dropdownlist.ul.is("ul"));
             assert.isOk(dropdownlist.list.attr("id"), input.attr("id") + "-list");
-            assert.equal(dropdownlist.listView.content.css("overflow"), "auto");
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto");
         });
 
         it("dropdownlist initializes a popup for its items", function() {
@@ -230,7 +238,7 @@
             assert.isOk(dropdownlist.popup);
             assert.isOk(dropdownlist.popup instanceof kendo.ui.Popup);
             assert.equal(dropdownlist.popup.options.anchor[0], dropdownlist.wrapper[0]);
-            assert.equal(dropdownlist.popup.element[0], dropdownlist.list[0]);
+            assert.equal(dropdownlist.popup.element[0], dropdownlist.list.parent()[0]);
         });
 
         it("dropdownlist shrink ul if the height of the items is more then options.height", function() {
@@ -277,8 +285,9 @@
             });
 
             var template = dropdownlist.listView.options.template;
+            var result = template("abc");
 
-            assert.equal(template, "#:data#");
+            assert.equal(result, "abc");
         });
 
         it("dropdownlist sets default item template using dataTextField option", function() {
@@ -287,8 +296,9 @@
             });
 
             var template = dropdownlist.listView.options.template;
+            var result = template({ test: "abc" });
 
-            assert.equal(template, "#:data.test#");
+            assert.equal(result, "abc");
         });
 
         it("dropdownlist sets a default group template", function() {
@@ -296,18 +306,20 @@
             });
 
             var template = dropdownlist.listView.options.groupTemplate;
+            var result = template("abc");
 
-            assert.equal(template, "#:data#");
+            assert.equal(result, "abc");
         });
 
         it("dropdownlist supports setting a custom group template", function() {
             var dropdownlist = new DropDownList(input, {
-                groupTemplate: "#= data.toUpperCase() #"
+                groupTemplate: (data) => data.toUpperCase()
             });
 
             var template = dropdownlist.listView.options.groupTemplate;
+            var result = template("abc");
 
-            assert.equal(template, "#= data.toUpperCase() #");
+            assert.equal(result, "ABC");
         });
 
         it("dropdownlist sets a default fixed group template", function() {
@@ -315,42 +327,44 @@
             });
 
             var template = dropdownlist.listView.options.fixedGroupTemplate;
+            var result = template("abc");
 
-            assert.equal(template, "#:data#");
+            assert.equal(result, "abc");
         });
 
         it("dropdownlist supports setting a custom fixed group template", function() {
             var dropdownlist = new DropDownList(input, {
-                fixedGroupTemplate: "#= data.toUpperCase() #"
+                fixedGroupTemplate: (data) => data.toUpperCase()
             });
 
             var template = dropdownlist.listView.options.fixedGroupTemplate;
+            var result = template("abc");
 
-            assert.equal(template, "#= data.toUpperCase() #");
+            assert.equal(result, "ABC");
         });
 
         it("defining header template", function() {
             var dropdownlist = new DropDownList(input, {
-                template: "#= data.toUpperCase() #",
-                headerTemplate: "<div>Header</div>"
+                template: (data) => data.toUpperCase(),
+                headerTemplate: () => "<div id='t'>Header</div>"
             });
 
             var list = dropdownlist.list;
 
-            assert.equal(list.children()[0].outerHTML, "<div>Header</div>");
+            assert.equal(list.parent().find("#t")[0].outerHTML, '<div id="t">Header</div>');
         });
 
         it("defining option label template", function() {
             var dropdownlist = new DropDownList(input, {
                 optionLabel: "Select...",
-                optionLabelTemplate: "#= data.toUpperCase() #",
-                headerTemplate: "<div>Header</div>"
+                optionLabelTemplate: (data) => data.toUpperCase(),
+                headerTemplate: () => "<div>Header</div>"
             });
 
             var optionHeader = dropdownlist.list.children(":first")[0];
 
-            assert.isOk(optionHeader.id)
-            assert.equal(optionHeader.className, "k-list-optionlabel k-state-selected k-state-focused");
+            assert.isOk(optionHeader.id);
+            assert.equal(optionHeader.className, "k-list-optionlabel k-selected k-focus");
             assert.equal(optionHeader.innerHTML, "SELECT...");
         });
 
@@ -358,13 +372,13 @@
             var dropdownlist = new DropDownList(input, {
                 dataTextField: "name",
                 optionLabel: { name: "Select..." },
-                headerTemplate: "<div>Header</div>",
+                headerTemplate: () => "<div>Header</div>",
             });
 
             var optionHeader = dropdownlist.list.children(":first")[0];
 
-            assert.isOk(optionHeader.id)
-            assert.equal(optionHeader.className, "k-list-optionlabel k-state-selected k-state-focused");
+            assert.isOk(optionHeader.id);
+            assert.equal(optionHeader.className, "k-list-optionlabel k-selected k-focus");
             assert.equal(optionHeader.innerHTML, "Select...");
         });
 
@@ -380,8 +394,8 @@
                     }
                 },
                 optionLabel: "Select...",
-                optionLabelTemplate: "#= data.toUpperCase() #",
-                headerTemplate: "<div>Header</div>",
+                optionLabelTemplate: (data) => data.toUpperCase(),
+                headerTemplate: () => "<div>Header</div>",
                 dataTextField: "text",
                 dataValueField: "value",
                 dataBound: function() {
@@ -396,19 +410,19 @@
 
         it("render footer container", function() {
             var dropdownlist = new DropDownList(input, {
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
 
             var footer = dropdownlist.footer;
 
             assert.isOk(footer);
-            assert.isOk(footer.hasClass("k-footer"));
+            assert.isOk(footer.hasClass("k-list-footer"));
         });
 
         it("render footer template", function() {
             var dropdownlist = new DropDownList(input, {
                 autoBind: true,
-                footerTemplate: "footer"
+                footerTemplate: () => "footer"
             });
 
             var footer = dropdownlist.footer;
@@ -419,7 +433,7 @@
         it("compile footer template with the dropdownlist instance", function() {
             var dropdownlist = new DropDownList(input, {
                 autoBind: true,
-                footerTemplate: "#: instance.dataSource.total() #"
+                footerTemplate: ({ instance }) => instance.dataSource.total()
             });
 
             var footer = dropdownlist.footer;
@@ -430,7 +444,7 @@
         it("update footer template on dataBound", function() {
             var dropdownlist = new DropDownList(input, {
                 autoBind: true,
-                footerTemplate: "#: instance.dataSource.total() #"
+                footerTemplate: ({ instance }) => instance.dataSource.total()
             });
 
             var footer = dropdownlist.footer;
@@ -442,7 +456,7 @@
 
         it("defining input template", function() {
             var dropdownlist = new DropDownList(input, {
-                valueTemplate: "#= data #",
+                valueTemplate: (data) => data,
                 dataSource: ["<strong>Test</strong>"]
             });
 
@@ -477,12 +491,18 @@
             assert.equal(dropdownlist.value(), "1");
         });
 
-        it("disabled input rendered with wrapper.k-state-disabled", function() {
+        it("disabled input rendered with wrapper.k-disabled", function() {
             input.attr("disabled", "disabled").kendoDropDownList();
 
-            var wrapper = input.data("kendoDropDownList")._inputWrapper;
+            var wrapper = input.data("kendoDropDownList").wrapper;
 
-            assert.isOk(wrapper.hasClass("k-state-disabled"));
+            assert.isOk(wrapper.hasClass("k-disabled"));
+        });
+
+        it("filterable DropDownList persists disabled attribute after initialization", function() {
+            input.attr("disabled", "disabled").kendoDropDownList({ filter: "contains" });
+
+            assert.isOk(input.attr("disabled"));
         });
 
         it("DropDownList disables on init", function() {
@@ -490,9 +510,9 @@
                 enabled: false
             });
 
-            var wrapper = input.data("kendoDropDownList")._inputWrapper;
+            var wrapper = input.data("kendoDropDownList").wrapper;
 
-            assert.isOk(wrapper.hasClass("k-state-disabled"));
+            assert.isOk(wrapper.hasClass("k-disabled"));
         });
 
         if (!kendo.support.touch) {
@@ -502,10 +522,10 @@
                         dataSource: data
                     });
 
-                var wrap = dropdownlist.wrapper.children(".k-dropdown-wrap");
+                var wrap = dropdownlist.wrapper.children(".k-input-inner");
                 wrap.mouseenter();
 
-                assert.isOk(wrap.hasClass("k-state-hover"));
+                assert.isOk(dropdownlist.wrapper.hasClass("k-hover"));
             });
         }
 
@@ -515,20 +535,20 @@
                     dataSource: data
                 });
 
-            var wrap = dropdownlist.wrapper.children(".k-dropdown-wrap");
+            var wrap = dropdownlist.wrapper.children(".k-input-inner");
             wrap.mouseenter();
             wrap.mouseleave();
 
-            assert.isOk(!wrap.hasClass("k-state-hover"));
+            assert.isOk(!wrap.hasClass("k-hover"));
         });
 
-        it("add k-list class to the UL", function() {
+        it("add k-listul class to the UL", function() {
             var data = [{ text: 1, value: 1 }, { text: 2, value: 2 }],
                 dropdownlist = new DropDownList(input, {
                     dataSource: data
                 });
 
-            assert.isOk(dropdownlist.ul.hasClass("k-list"));
+            assert.isOk(dropdownlist.ul.hasClass("k-list-ul"));
         });
 
         it("set height if items height is bigger than options.height", function() {
@@ -538,7 +558,7 @@
             dropdownlist = new DropDownList(input, {
                 autoBind: false,
                 dataSource: dataSource,
-                template: "<div style='height:30px'><%= text %> </div>",
+                template: () => "<div style='height:30px'><%= text %> </div>",
                 height: 50
             });
 
@@ -832,7 +852,7 @@
             div.show();
             dropdown.open();
 
-            assert.equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
+            assert.equal(dropdown.popup.element.parent().outerWidth(), dropdown.wrapper.outerWidth());
         });
 
         it("dropdownlist put in hidden container can be re-bound", function() {
@@ -1008,7 +1028,7 @@
             var dropdownlist = new DropDownList(input, {
                 dataTextField: "text",
                 dataValueField: "value",
-                valueTemplate: "#=text# #=customField#"
+                valueTemplate: ({ text, customField }) => `${text} ${customField}`
             });
 
             assert.equal(dropdownlist.span.html(), "");
@@ -1016,11 +1036,12 @@
 
         it("widget throws an error when optionLabel does not match valueTemplate", function() {
             try {
+                // eslint-disable-next-line no-new
                 new DropDownList(input, {
                     optionLabel: "Select...",
                     dataTextField: "text",
                     dataValueField: "value",
-                    valueTemplate: "#=text# #=customField#"
+                    valueTemplate: ({ text, customField }) => `${text} ${customField}`
                 });
             } catch (e) {
                 assert.isOk(true);
@@ -1035,10 +1056,10 @@
                         text: "Select...",
                         value: ""
                     },
-                    optionLabelTemplate: "#=text#",
+                    optionLabelTemplate: ({ text }) => text,
                     dataTextField: "text",
                     dataValueField: "value",
-                    valueTemplate: "#=text# #=customField#"
+                    valueTemplate: ({ text, customField }) => `${text} ${customField}`
                 });
             } catch (e) {
                 assert.isOk(false);
@@ -1056,7 +1077,7 @@
                 filter: "startswith"
             });
 
-            var filterHeader = dropdownlist.list.find(".k-list-filter");
+            var filterHeader = dropdownlist.list.parent().find(".k-list-filter");
 
             assert.isOk(filterHeader.hasClass("k-list-filter"));
             assert.isOk(filterHeader.find("input")[0]);
@@ -1082,7 +1103,7 @@
                 animation: false,
                 autoBind: false,
                 dataSource: ["item1", "item2", "item3", "item4", "item5"],
-                footerTemplate: "<div>Footer</div>",
+                footerTemplate: () => "<div>Footer</div>",
                 height: 100
             });
 
@@ -1100,11 +1121,11 @@
                 filter: "startswith"
             });
 
-            var filterHeader = dropdownlist.list.find(".k-list-filter");
-            var icon = filterHeader.find("input").next();
+            var filterHeader = dropdownlist.list.parent().find(".k-list-filter");
+            var icon = filterHeader.find(".k-input-icon");
 
             assert.isOk(icon[0]);
-            assert.isOk(icon.hasClass("k-i-zoom"));
+            assert.isOk(icon.is(".k-i-search,.k-svg-i-search"));
         });
 
         it("widget does not retrieve data attributes if options are set", function() {
@@ -1161,7 +1182,7 @@
 
             dropdownlist.open();
 
-            var padding = dropdownlist.list.find(".k-group-header").css("padding-right");
+            var padding = dropdownlist.list.find(".k-list-group-sticky-header").css("padding-right");
 
             assert.isOk(parseFloat(padding) >= kendo.support.scrollbar());
         });
@@ -1185,7 +1206,7 @@
 
             dropdownlist.open();
 
-            var padding = dropdownlist.list.find(".k-group-header").css("padding-right");
+            var padding = dropdownlist.list.find(".k-list-group-sticky-header").css("padding-right");
 
             assert.isOk(parseFloat(padding) < 15);
         });
@@ -1201,7 +1222,7 @@
 
             optionLabel.mouseenter();
 
-            assert.isOk(optionLabel.hasClass("k-state-hover"));
+            assert.isOk(optionLabel.hasClass("k-hover"));
         });
 
         it("leave optionLabel should remove hover state", function() {
@@ -1216,7 +1237,41 @@
             optionLabel.mouseenter();
             optionLabel.mouseleave();
 
-            assert.isOk(!optionLabel.hasClass("k-state-hover"));
+            assert.isOk(!optionLabel.hasClass("k-hover"));
+        });
+
+        it("applies k-list-md by default to its popup list element", function() {
+            var dropdownlist = new DropDownList(input, {
+                optionLabel: "Select..."
+            });
+
+            dropdownlist.open();
+
+            assert.isOk(dropdownlist.list.hasClass("k-list"));
+            assert.isOk(dropdownlist.list.hasClass("k-list-md"));
+        });
+
+        it("applies custom size class when set", function() {
+            var dropdownlist = new DropDownList(input, {
+                optionLabel: "Select...",
+                size: "large"
+            });
+
+            dropdownlist.open();
+
+            assert.isOk(dropdownlist.list.hasClass("k-list"));
+            assert.isOk(dropdownlist.list.hasClass("k-list-lg"));
+        });
+
+        it("skips size class if set to null", function() {
+            var dropdownlist = new DropDownList(input, {
+                optionLabel: "Select...",
+                size: null
+            });
+
+            dropdownlist.open();
+
+            assert.equal(dropdownlist.list.attr("class"), "k-list");
         });
 
         it("copy input title attribute to the visible input", function() {
@@ -1483,7 +1538,7 @@
         //no data template
         it("DropDownList builds a noDataTemplate", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             assert.isOk(dropdownlist.noDataTemplate);
@@ -1491,22 +1546,21 @@
 
         it("render nodata container", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: "test"
+                noDataTemplate: () => "test"
             });
 
             assert.isOk(dropdownlist.noData);
-            assert.isOk(dropdownlist.noData.hasClass("k-nodata"));
-            assert.equal(dropdownlist.noData.children("div").length, 1);
-            assert.equal(dropdownlist.noData.text(), dropdownlist.options.noDataTemplate);
+            assert.isOk(dropdownlist.noData.hasClass("k-no-data"));
+            assert.equal(dropdownlist.noData.text(), dropdownlist.options.noDataTemplate());
         });
 
         it("render nodata before footerTemplate", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: "test",
-                footerTemplate: "footer"
+                noDataTemplate: () => "test",
+                footerTemplate: () => "footer"
             });
 
-            assert.isOk(dropdownlist.noData.next().hasClass("k-footer"));
+            assert.isOk(dropdownlist.noData.next().hasClass("k-list-footer"));
         });
 
         it("hides noData template if any data", function() {
@@ -1520,8 +1574,8 @@
                         { name: "item3", type: "b" }
                     ]
                 },
-                noDataTemplate: "no data",
-                template: '#:data.name#'
+                noDataTemplate: () => "no data",
+                template: ({ name }) => name
             });
 
             dropdownlist.open();
@@ -1536,8 +1590,8 @@
                 dataSource: {
                     data: []
                 },
-                noDataTemplate: "no data",
-                template: '#:data.name#'
+                noDataTemplate: () => "no data",
+                template: ({ name }) => name
             });
 
             dropdownlist.open();
@@ -1552,8 +1606,8 @@
                 dataSource: {
                     data: []
                 },
-                noDataTemplate: "no data",
-                template: '#:data.name#'
+                noDataTemplate: () => "no data",
+                template: ({ name }) => name
             });
 
             dropdownlist.open();
@@ -1572,7 +1626,7 @@
         it("update noData template on dataBound", function() {
             var dropdownlist = new DropDownList(input, {
                 autoBind: true,
-                noDataTemplate: "#: instance.dataSource.total() #"
+                noDataTemplate: ({ instance }) => instance.dataSource.total()
             });
 
             var noData = dropdownlist.noData;
@@ -1584,7 +1638,7 @@
 
         it("DropDownList opens the popup if noDataTemplate", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: "no data"
+                noDataTemplate: () => "no data"
             });
 
             dropdownlist.wrapper.click();
@@ -1594,7 +1648,7 @@
 
         it("DropDownList doesn't open the popup if no data", function() {
             var dropdownlist = new DropDownList(input, {
-                noDataTemplate: ""
+                noDataTemplate: null
             });
 
             dropdownlist.wrapper.click();
@@ -1627,6 +1681,91 @@
 
         it("unifyType parses booleans correctly", function() {
             assert.equal(kendo.ui.List.unifyType("false", "boolean"), false);
+            assert.equal(kendo.ui.List.unifyType("true", "boolean"), true);
+        });
+
+        it("unifyType parses numbers to booleans correctly", function() {
+            assert.equal(kendo.ui.List.unifyType(0, "boolean"), false);
+            assert.equal(kendo.ui.List.unifyType(1, "boolean"), false);
+        });
+
+        it("renders not-floating label from string", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: "Label"
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "Label");
+            assert.isNotOk(!!dropdownlist.label.floatingLabel);
+        });
+
+        it("renders label from object", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: {
+                    content: "some label"
+                }
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "some label");
+        });
+
+        it("renders floating label", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: {
+                    content: "some label",
+                    floating: true
+                }
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "some label");
+            assert.isOk(!!dropdownlist.label.floatingLabel);
+        });
+
+        it("renders label with funciton", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: () => `some label`
+            });
+
+            assert.equal(dropdownlist.label.element.text(), "some label");
         });
     });
 }());

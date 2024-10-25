@@ -15,14 +15,14 @@ For example, when you filter or edit data on mobile, the system slides in a new 
 
 ## Enabling the Responsive Web Design
 
-To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
+To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridbuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
 
 * If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
 * If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.
 
 > Important: With the mobile rendering, we recommend to set up `height` as well. Without setting an explicit height, every view of the grid might have a different height.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
         .Name("grid")
         .Mobile()
@@ -33,12 +33,26 @@ To enable the adaptive rendering feature, set the [`Mobile`](https://docs.teleri
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-grid name="grid"
+            mobile-enabled="true"
+            height="450">
+    <datasource type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("Products_Read", "Home")"/>
+        </transport>
+    </datasource>
+
+</kendo-grid>
+```
+{% endif %}
 
 ## Resizing Columns
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user can resize the column by dragging.
 
-![A Grid with resizable columns on a mobile device](../adaptive-resizing-icon.png)
+![{{ site.product_short }} Resizing icon in a Grid with resizable columns on a mobile device](../adaptive-resizing-icon.png)
 
 ## Destroying Adaptive Grids
 

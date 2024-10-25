@@ -1,7 +1,7 @@
 ---
 title: Implement Stable Sorting for Grouped Data in Chrome
-page_title: Stable Sorting for Grouped Data | Kendo UI Grid for jQuery
-description: "An example on how to implement stable sorting for grouped data in Google Chrome when using the Kendo UI jQuery Grid widget."
+page_title: Stable Sorting for Grouped Data - Kendo UI for jQuery Data Grid
+description: "Learn how to implement stable sorting for grouped data in Google Chrome when using the Kendo UI jQuery Grid component."
 previous_url: /controls/data-management/grid/how-to/sorting/stable-sort-chrome-grouping
 slug: howto_implement_stable_sortwithgroupingin_chrome_grid
 tags: implement, stable, sorting, for, grouped, data, grid, chrome
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -93,4 +93,4 @@ The following example demonstrates how to apply a stable sort function by using 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

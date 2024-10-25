@@ -1,13 +1,13 @@
 (function() {
 
 function getRootItem(index) {
-   return $('#menu').find('> .k-item > .k-link').eq(index)
+   return $('#menu').find('> .k-item > .k-link').eq(index);
 }
 
 var menu;
 
-describe("menu init", function () {
-    beforeEach(function () {
+describe("menu init", function() {
+    beforeEach(function() {
         Mocha.fixture.append(
             '<ul id="menu">' +
             '   <li>' +
@@ -51,6 +51,10 @@ it('.k-menu is placed on root element', function() {
     assert.isOk(menu.element.is(".k-menu"));
 });
 
+it('.k-header is placed on root element', function() {
+    assert.isOk(menu.element.is(".k-header"));
+});
+
 it('groups are both k-group and k-menu-group', function() {
     assert.isOk(menu.element.find("ul").is(".k-menu-group.k-group"));
 });
@@ -60,20 +64,20 @@ it('div inside menu is assigned .k-content class', function() {
 });
 
 it('UL elements inside content don\'t get k-menu-group class', function() {
-    assert.isOk(!menu.element.find("div ul").is(".k-group"));
-    assert.isOk(!menu.element.find("div ul").is(".k-menu-group"));
+    assert.isOk(!menu.element.find("div.k-content ul").is(".k-group"));
+    assert.isOk(!menu.element.find("div.k-content ul").is(".k-menu-group"));
 });
 
 it('menu is inside scroll wrapper', function() {
     menu.setOptions({ scrollable: true, orientation: "horizontal" });
-    assert.isOk(menu.element.parent().is("div.k-popups-wrapper.horizontal"));
+    assert.isOk(menu.element.parent().is("div.k-menu-scroll-wrapper.horizontal"));
 });
 
 
-it('menu does not strip "k-i-arrow-chevron-right" icons', function() {
-    var m = new kendo.ui.Menu("<ul><li><span class='k-icon k-i-arrow-chevron-right'></span>Next</li><li>Refresh</li></ul>");
+it('menu does not strip "k-i-chevron-right" icons', function() {
+    var m = new kendo.ui.Menu("<ul><li><span class='k-icon k-i-chevron-right'></span>Next</li><li>Refresh</li></ul>");
 
-    assert.isOk(m.element.find(".k-i-arrow-chevron-right")[0]);
+    assert.isOk(m.element.find(".k-i-chevron-right")[0]);
     m.destroy();
 });
 
@@ -88,7 +92,7 @@ it('menu renders aria-haspopup on items with submenu', function() {
     '   <li>' +
     '       Item 2' +
     '       <ul>' +
-    '           <li>Sub Item 1'+
+    '           <li>Sub Item 1' +
     '               <ul>' +
     '                   <li>Sub Item 1</li>' +
     '               </ul>' +
@@ -113,7 +117,49 @@ it('menu renders aria-haspopup on items with submenu', function() {
 
     var m = new kendo.ui.Menu(dom);
 
-    assert.equal(m.element.find("[aria-haspopup]").length, 4)
+    assert.equal(m.element.find("[aria-haspopup]").length, 4);
+    m.destroy();
+});
+
+it('menu does not wrap content of items with omit-wrap', function() {
+    var dom = '<ul id="menu">' +
+    '   <li ' + kendo.attr("omit-wrap") + '="true">' +
+    '       Item 1' +
+    '       <ul>' +
+    '           <li>Sub Item 1</li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 2' +
+    '       <ul>' +
+    '           <li>Sub Item 1' +
+    '               <ul>' +
+    '                   <li>Sub Item 1</li>' +
+    '               </ul>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 3' +
+    '       <ul>' +
+    '           <li>' +
+    '               <div>' +
+    '                   <ul>' +
+    '                       <li>Item 1</li>' +
+    '                       <li>Item 2</li>' +
+    '                   </ul>' +
+    '               </div>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '</ul>';
+
+
+    var m = new kendo.ui.Menu(dom);
+
+    assert.isNotOk(m.element.find("[" + kendo.attr("omit-wrap") + "]").hasClass('k-menu-item'));
+    assert.isNotOk(m.element.find("[" + kendo.attr("omit-wrap") + "] > span").length);
+
     m.destroy();
 });
 

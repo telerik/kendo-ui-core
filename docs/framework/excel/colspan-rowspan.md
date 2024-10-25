@@ -1,6 +1,6 @@
 ---
 title: Expanding Cells across Rows and Columns
-page_title: Expanding Cells across Rows and Columns | Kendo UI Excel Export
+page_title: Expanding Cells across Rows and Columns - Kendo UI Excel Export
 description: "Learn how to make a cell occupy more than one column or row when exporting a Kendo UI component to Excel."
 slug: colaspanandrowspan_excelexport_kendoui
 position: 5

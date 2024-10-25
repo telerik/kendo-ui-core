@@ -1,6 +1,6 @@
 ---
 title: Notes
-page_title: jQuery Chart Documentation | Notes | Kendo UI
+page_title: jQuery Chart Documentation - Notes
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its notes."
 previous_url: /controls/charts/notes
 slug: chartnotes_charts_widget
@@ -10,7 +10,7 @@ slug: chartnotes_charts_widget
 
 The Kendo UI Chart enables you to display the metadata of a point or a specific part of the axis.
 
-![Notes displayed in a chart](../chart-notes.png)
+![Kendo UI for jQuery Chart Notes](../chart-notes.png)
 
 ## Getting Started
 

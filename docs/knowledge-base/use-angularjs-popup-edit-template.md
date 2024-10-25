@@ -1,7 +1,7 @@
 ---
 title: Use AngularJS in Popup Editor Templates
 page_title: AngularJS in Popup Editor Templates | AngularJS Kendo UI Grid
-description: "An example on how to use the popup editor template of the Kendo UI Grid with AngularJS."
+description: "Learn how to use the popup editor template of the Kendo UI Grid with AngularJS."
 previous_url: /controls/data-management/grid/how-to/AngularJS/use-angularjs-popup-edit-template
 slug: howto_use_angularin_popup_editor_templates_grid
 tags: use, angularjs, popup, editor, templates, grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -31,6 +31,8 @@ res_type: kb
  </tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+
 ## Description
 
 How can I use the popup editor template of the Kendo UI Grid with AngularJS?
@@ -41,7 +43,12 @@ The following example demonstrates how to use AngularJS directives in a custom G
 
 The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-change` for Kendo UI widgets. Otherwise, the DataSource does not update the modified data items.
 
+> The example loads Kendo UI 2023.3.1010 version.
+
 ```dojo
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions"></kendo-grid>
@@ -139,4 +146,4 @@ The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-cha
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

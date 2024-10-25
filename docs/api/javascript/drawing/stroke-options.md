@@ -53,13 +53,13 @@ The stroke dash type.
 
 | Value            |                                              | Description
 | ---              | :---:                                        | ---
-| `dash`           | ![dash](images/stroke-dash.png)              | a line consisting of dashes
-| `dashDot`        | ![dash](images/stroke-dash-dot.png)          | a line consisting of a repeating pattern of dash-dot
-| `dot`            | ![dash](images/stroke-dot.png)               | a line consisting of dots
-| `longDash`       | ![dash](images/stroke-long-dash.png)         | a line consisting of a repeating pattern of long-dash
-| `longDashDot`    | ![dash](images/stroke-long-dash-dot.png)     | a line consisting of a repeating pattern of long-dash dot
-| `longDashDotDot` | ![dash](images/stroke-long-dash-dot-dot.png) | a line consisting of a repeating pattern of long-dash dot-dot
-| `solid`          | ![dash](images/stroke-solid.png)             | a solid line
+| `dash`           | ![Kendo UI for jQuery dash](images/stroke-dash.png)              | a line consisting of dashes
+| `dashDot`        | ![Kendo UI for jQuery dashDot](images/stroke-dash-dot.png)          | a line consisting of a repeating pattern of dash-dot
+| `dot`            | ![Kendo UI for jQuery dot](images/stroke-dot.png)               | a line consisting of dots
+| `longDash`       | ![Kendo UI for jQuery longDash](images/stroke-long-dash.png)         | a line consisting of a repeating pattern of long-dash
+| `longDashDot`    | ![Kendo UI for jQuery longDashDot](images/stroke-long-dash-dot.png)     | a line consisting of a repeating pattern of long-dash dot
+| `longDashDotDot` | ![Kendo UI for jQuery longDashDotDot](images/stroke-long-dash-dot-dot.png) | a line consisting of a repeating pattern of long-dash dot-dot
+| `solid`          | ![Kendo UI for jQuery solid](images/stroke-solid.png)             | a solid line
 
 #### Example - Creating a drawing surface
     <div id="surface"></div>
@@ -94,9 +94,9 @@ The stroke line cap style.
 
 | Value    |                                     | Description
 | ---      | :---:                               | ---
-| `butt`   | ![dash](images/line-cap-butt.png)   | a flat edge with no cap
-| `round`  | ![dash](images/line-cap-round.png)  | a rounded cap
-| `square` | ![dash](images/line-cap-square.png) | a square cap
+| `butt`   | ![Kendo UI for jQuery dash](images/line-cap-butt.png)   | a flat edge with no cap
+| `round`  | ![Kendo UI for jQuery dash](images/line-cap-round.png)  | a rounded cap
+| `square` | ![Kendo UI for jQuery dash](images/line-cap-square.png) | a square cap
 
 #### Example - Creating a drawing surface
     <div id="surface"></div>
@@ -132,9 +132,9 @@ The stroke line join style.
 
 | Value   |                                     | Description
 | ---     | :---:                               | ---
-| `bevel` | ![dash](images/line-join-bevel.png) | a beveled join
-| `miter` | ![dash](images/line-join-miter.png) | a square join
-| `round` | ![dash](images/line-join-round.png) | a rounded join
+| `bevel` | ![Kendo UI for jQuery dash](images/line-join-bevel.png) | a beveled join
+| `miter` | ![Kendo UI for jQuery dash](images/line-join-miter.png) | a square join
+| `round` | ![Kendo UI for jQuery dash](images/line-join-round.png) | a rounded join
 
 #### Example - Creating a drawing surface
     <div id="surface"></div>

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ProgressBar JSP Tag
+page_title: Overview - ProgressBar JSP Tag
 description: "Get started with the ProgressBar JSP tag in Kendo UI."
 slug: overview_progressbar_uiforjsp
 position: 1

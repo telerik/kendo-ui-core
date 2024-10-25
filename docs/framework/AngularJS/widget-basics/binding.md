@@ -9,6 +9,11 @@ position: 5
 
 # Scope Bindings
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+>For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
+
 Kendo UI supports the application of scope bindings in AngularJS applications.
 
 ## Using the ng-model Value
@@ -17,7 +22,12 @@ To bind the value of widgets that provide a `value()` method to the AngularJS sc
 
 The following example demonstrates how to bind the input field to the scope variable. When you select a date, the `birthday` variable is set to the value of the input field as a string.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
       <label>Birthday: <input kendo-date-picker ng-model="birthday" /></label>
       <p>
@@ -37,7 +47,12 @@ If your element is a form field that has a text value, such as `<input>` or `<te
 
 The following example demonstrates how to get the actual `widget.value()` by using `k-ng-model`. The directive will update the `birthday` variable with the selected `Date` object whenever the `change` event is fired.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
       <label>Birthday: <input kendo-date-picker k-ng-model="birthday" /></label>
       <p>
@@ -62,7 +77,12 @@ Setting the `k-value-primitive` to `false` forces the widget to accept or return
 
 The following example demonstrates how to display the `Chai` option in the MultiSelect as selected with the widget value set to `[{"ProductName":"Chai","ProductID":1}]`.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
         <h4>Select product</h4>
         <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" k-value-primitive="false"></select>
@@ -94,7 +114,12 @@ When `k-value-primitive` is set to `true`, you can pass an array of primitive va
 
 The following example demonstrates how to display `Chai` and `Mishi Kobe Niku` as selected with the widget value set to `[1,9]`.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
         <h4>Select product</h4>
         <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" k-value-primitive="true"></select>

@@ -30,7 +30,7 @@ The content of the text. Special characters are not supported.
 The position of the text upper left corner.
 
 ### options `Object`
-The configuration options.
+Represents an object containing the configuration options. All of the options are available in [Configuration](/api/javascript/drawing/text#configuration).
 
 ## Configuration
 
@@ -53,12 +53,42 @@ Examples of valid font values:
 * Size and family: "2em 'Open Sans', sans-serif"
 * Style, size and family: "italic 2em 'Open Sans', sans-serif"
 
+#### Example - setting the font for a text
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var position = new geom.Point(10, 10);
+      var text = new draw.Text("Foo", position, {
+        font: "italic 18px 'Open Sans', sans-serif"
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(text);
+    </script>
+
 ### opacity `Number`
 The element opacity.
 Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
 ### stroke `kendo.drawing.StrokeOptions`
-The stroke options of the text.
+The [stroke options](/api/javascript/drawing/stroke-options/) of the text.
+
+#### Example - set the stroke option of the Text
+
+    <div id="container"></div>
+    <script>
+        var svg = kendo.drawing.Surface.create($("#container"), { type: "svg" });
+        var text = new kendo.drawing.Text("Some Text", [100, 100], {
+            stroke: {
+                color: '#E4141B',
+                dashType: "dash"
+            }
+        })
+        svg.draw(text);
+    </script>
 
 ### tooltip `kendo.drawing.TooltipOptions`
 The tooltip options of the shape.

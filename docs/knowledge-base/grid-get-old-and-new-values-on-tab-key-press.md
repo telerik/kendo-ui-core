@@ -2,7 +2,7 @@
 title: Get Old and New Values On Tab Key Press
 description: An example which shows how to get old and new values upon tabbing to another cell.
 type: how-to
-page_title: Retrieve Past and Current Row Data On Tab Key Press | Kendo UI Grid
+page_title: Retrieve Past and Current Row Data On Tab Key Press - Kendo UI Grid
 slug: grid-get-old-and-new-values-on-tab-key-press
 position: 
 tags: grid, cell, tab, old, new, values, batch
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Grid for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Grid for jQuery</td>
 		</tr>
 	</tbody>
 </table>

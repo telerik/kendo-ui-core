@@ -12,7 +12,7 @@ Right-to-left (RTL) support reflects the ability of a widget to render its conte
 
 The following example demonstrates how to set the basic right-to-left configuration for the DateRangePicker.
 
-```
+```HtmlHelper
 @using Kendo.Mvc.UI
 
 <div class="demo-section">
@@ -33,6 +33,29 @@ The following example demonstrates how to set the basic right-to-left configurat
     </style>
 </div>
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="demo-section">
+    <div class="k-rtl">
+        <kendo-daterangepicker name="daterangepicker">
+        </kendo-daterangepicker>
+    </div>
+
+    <style>
+        .demo-section {
+            width: 400px;
+            text-align: center;
+            margin: 50px auto;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+    </style>
+</div>
+```
+{% endif %}
 
 ## See Also
 

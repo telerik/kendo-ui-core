@@ -279,6 +279,7 @@ Get a reference to the current view.
     new kendo.mobile.Application();
 
     function getView(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
      console.log($("#my-pane").data("kendoMobilePane").view());
     }
     </script>
@@ -304,6 +305,7 @@ Triggered when pane navigates to a view.
 
     <script>
     function onNavigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
     }
 
@@ -331,6 +333,7 @@ Triggered after the pane displays a view.
 
     <script>
     function viewShown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
     }
     new kendo.mobile.Application();

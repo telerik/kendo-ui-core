@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -51,7 +51,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value"
             };
         });
@@ -295,7 +295,7 @@
                 }
             }));
 
-            virtualList.value(123)
+            virtualList.value(123);
 
             var items = virtualList.selectedDataItems();
 
@@ -390,10 +390,10 @@
                 assert.equal(virtualList.items().first().text(), "Item 0");
 
                 virtualList.setOptions({
-                    template: "<span class='foo'>#:text#</span>"
+                    template: ({ text }) => `<span class='foo'>${kendo.htmlEncode(text)}</span>`
                 });
 
-                assert.equal(virtualList.items().first().html(), '<span class="foo">Item 0</span>');
+                assert.equal(virtualList.items().first().find(".k-list-item-text").html(), '<span class="foo">Item 0</span>');
                 done();
             });
         });
@@ -460,7 +460,7 @@
                 }
             }));
 
-            virtualList.value(123)
+            virtualList.value(123);
 
             var value = virtualList.value();
 
@@ -481,7 +481,7 @@
                 }
             }));
 
-            virtualList.value(123)
+            virtualList.value(123);
             asyncDataSource.read();
         });
 
@@ -641,7 +641,7 @@
                     assert.isOk(true, "done callback");
                     assert.equal(virtualList.value().length, 0);
                     done();
-                })
+                });
             });
         });
 
@@ -657,7 +657,7 @@
                     assert.isOk(true, "done callback");
                     assert.equal(virtualList.value().length, 0);
                     done();
-                })
+                });
             });
         });
 
@@ -748,7 +748,7 @@
                     assert.equal(this.value().length, 1);
                     assert.equal(this.value()[0], 2);
 
-                    assert.equal(this.element.find(".k-state-selected").length, 1);
+                    assert.equal(this.element.find(".k-selected").length, 1);
                     done();
                 });
                 virtualList.value([2]);
@@ -810,7 +810,7 @@
                 }
 
                 return items;
-            }
+            };
 
             var emptyStringDataSource = new kendo.data.DataSource({
                 transport: {
@@ -858,7 +858,7 @@
                 }
 
                 return items;
-            }
+            };
 
             var emptyStringDataSource = new kendo.data.DataSource({
                 transport: {
@@ -911,7 +911,7 @@
                 }
 
                 return items;
-            }
+            };
 
             emptyStringDataSource = new kendo.data.DataSource({
                 transport: {
@@ -1100,7 +1100,7 @@
 
             virtualList.value([123, 223]);
 
-            asyncDataSource.read()
+            asyncDataSource.read();
         });
 
         it("removeAt method returns deleted data item", function(done) {
@@ -1115,14 +1115,14 @@
 
                     assert.equal(removed.position, 0);
                     assert.equal(removed.dataItem.value, 123);
-                    assert.isOk(!$.isArray(removed.dataItem));
+                    assert.isOk(!Array.isArray(removed.dataItem));
                     done();
                 }
             }));
 
             virtualList.value([123, 223]);
 
-            asyncDataSource.read()
+            asyncDataSource.read();
         });
 
         it("setValue method updates values of the widget silently", function(done) {

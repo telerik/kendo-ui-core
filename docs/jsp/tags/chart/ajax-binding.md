@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Chart JSP Tag
+page_title: Ajax Binding - Chart JSP Tag
 description: "Get started with the Ajax binding of the Chart JSP tag in Kendo UI."
 slug: ajaxbinding_chart_uiforjsp
 position: 2

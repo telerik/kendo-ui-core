@@ -61,7 +61,7 @@
 
             var result = reader.parse("<foo><bar/><bar/></foo>");
 
-            assert.isOk($.isArray(result.foo.bar));
+            assert.isOk(Array.isArray(result.foo.bar));
         });
 
         it("parse CDATA as #text", function() {
@@ -183,7 +183,7 @@
 
             var result = reader.data({ foo: { bar: [1, 2] } });
 
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
             assert.equal(result[0], 1);
             assert.equal(result[1], 2);
             assert.equal(result.length, 2);
@@ -198,7 +198,7 @@
 
             var result = reader.data({ foo: { bar: [1, 2] } });
 
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
             assert.equal(result[0], 1);
             assert.equal(result[1], 2);
             assert.equal(result.length, 2);
@@ -217,7 +217,7 @@
                 }
             });
 
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
             assert.equal(result.length, 4);
         });
 
@@ -244,7 +244,7 @@
                     ]
                 }
             });
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
 
             assert.equal(result.length, 8);
         });
@@ -268,7 +268,7 @@
                 }
             });
 
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
             assert.equal(result.length, 4);
         });
 
@@ -292,7 +292,7 @@
                 }
             });
 
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
             assert.equal(result[0], 1);
             assert.equal(result[1], 2);
             assert.equal(result[2], 3);
@@ -319,7 +319,7 @@
                 }
             });
 
-            assert.isOk($.isArray(result));
+            assert.isOk(Array.isArray(result));
             assert.equal(result.length, 3);
         });
 
@@ -438,7 +438,7 @@
             var result = reader.parse("<foo><bar/></foo>");
             var data = reader.data(result);
 
-            assert.isOk($.isArray(data));
+            assert.isOk(Array.isArray(data));
             assert.equal(data.length, 1);
         });
 

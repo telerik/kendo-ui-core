@@ -1,8 +1,8 @@
 ---
 title: Display Editor Custom Tools as a Button Group
-description: An example on how to display several custom tools as a button group in the Kendo UI Editor.
+description: Learn how to display several custom tools as a button group in the Kendo UI Editor.
 type: how-to
-page_title: Display Editor Custom Tools as a Button Group | Kendo UI Editor for jQuery
+page_title: Display Editor Custom Tools as a Button Group - Kendo UI Editor for jQuery
 slug: editor-display-custom-tools-button-group
 tags: editor, display, appearance, CSS, custom, tools, button, group
 ticketid: 920475
@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

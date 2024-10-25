@@ -1,6 +1,6 @@
 ---
 title: Part 4 - Hello Kendo UI
-page_title: Part 4 - Hello Kendo UI | Kendo UI Third-Party Frameworks
+page_title: Part 4 - Hello Kendo UI - Kendo UI Third-Party Frameworks
 description: "Learn how to get working with the Kendo UI Grid widget, the Kendo UI DataSource component and use them together in your web application."
 previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-1, /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-1.html
 slug: part4_aspnetwebforms_tutorials
@@ -27,7 +27,7 @@ In the [Hello Services project]({% slug part2_halloservices_aspnetwebforms_tutor
 
 **Figure 1: Adding a new Web Form to the project**
 
-![add-new-webform](../../images/webforms/add-new-webform.png)
+![Kendo UI for jQuery add-new-webform](../../images/webforms/add-new-webform.png)
 
 When the document comes up, delete all of the unnecessary `DOCTYPE` declaration and HTML namespacing. As explained in the [Hello HTML5]({% slug part3_aspnetwebforms_tutorials %}), none of this is necessary and really clutters up the code.
 
@@ -64,7 +64,7 @@ Note that you now have a `Content` folder that contains a `kendo` subfolder. You
 
 **Figure 2: Solution Explorer**
 
-![solution-explorer-content](../../images/webforms/solution-explorer-content.jpg)
+![Kendo UI for jQuery solution-explorer-content](../../images/webforms/solution-explorer-content.jpg)
 
 ### Add to Default Page
 
@@ -132,7 +132,7 @@ Now the Kendo UI Grid is created.
 
 **Figure 3: A preview of the Grid**
 
-![kendo-grid-preview](../../images/webforms/kendo-grid-preview.png)
+![Kendo UI for jQuery kendo-grid-preview](../../images/webforms/kendo-grid-preview.png)
 
 Kendo UI automatically creates columns for each of the data items and assigns the field name as the column header. Change this to make it more user-friendly. Specifically, do not display the Id and format the **First Name** and **Last Name** columns so they display headers in spaced title case. Right now they are title cased, but there is no space.
 
@@ -159,7 +159,7 @@ Now the Grid displays the column headers correctly and does not display the unne
 
 **Figure 4: A Grid having its unnecessary columns removed**
 
-![grid-preview-with-columns-and-sorting](../../images/webforms/grid-preview-with-columns-and-sorting.png)
+![Kendo UI for jQuery grid-preview-with-columns-and-sorting](../../images/webforms/grid-preview-with-columns-and-sorting.png)
 
 You are also able to apply a drag-and-drop grouping by setting the `groupable: true` flag. Multi-column sorting, aggregating, and paging can also be enabled.
 
@@ -191,7 +191,7 @@ Configure the paging functionality in the grid by setting `pageable: true`. Set 
 
 **Figure 5: A Grid that is set up for paging**
 
-![grid-preview-client-paging](../../images/webforms/grid-preview-client-paging.png)
+![Kendo UI for jQuery grid-preview-client-paging](../../images/webforms/grid-preview-client-paging.png)
 
 Push this paging to the server. To tell Kendo UI to do this, toggle the `serverPaging: true` on the DataSource in the grid, as demonstrated in the example below.
 
@@ -216,7 +216,7 @@ Push this paging to the server. To tell Kendo UI to do this, toggle the `serverP
 
 **Figure 6: A Grid with its paging pushed to the server**
 
-![grid-preview-server-paging-only-1-page](../../images/webforms/grid-preview-server-paging-only-1-page.png)
+![Kendo UI for jQuery grid-preview-server-paging-only-1-page](../../images/webforms/grid-preview-server-paging-only-1-page.png)
 
 The grid now displays only 1 page. The reason for this is that it is expecting the server to send it some information that is not yet specified. Open up the Developer Tools by pressing `Ctrl`+`Shift`+`i` in Chrome or `F12` in IE. Test your application on whichever browser you are targeting for deployment and switch to it if necessary.
 
@@ -224,7 +224,7 @@ An inspection of the request in the Developer Tools reveals that Kendo UI is now
 
 **Figure 7: The take, skip, and pageSize parameters sent back to the Web API service**
 
-![grid-preview-server-paging-broken-dev-tools](../../images/webforms/grid-preview-server-paging-broken-dev-tools.png)
+![Kendo UI for jQuery grid-preview-server-paging-broken-dev-tools](../../images/webforms/grid-preview-server-paging-broken-dev-tools.png)
 
 ### Handle Request Parameters
 
@@ -261,7 +261,7 @@ The server is now handling the paging. Start the application and preview it in t
 
 **Figure 8: A preview of the application in the browser**
 
-![grid-preview-server-paging-only-1-page](../../images/webforms/grid-preview-server-paging-only-1-page.png)
+![Kendo UI for jQuery grid-preview-server-paging-only-1-page](../../images/webforms/grid-preview-server-paging-only-1-page.png)
 
 There is still only 1 page of data. This is because Kendo UI is missing an essential piece of information.
 
@@ -335,7 +335,7 @@ Now you can run the application and see that paging is working. If you open the 
 
 **Figure 9: A preview of your application**
 
-![grid-preview-paging-server-dev-tools](../../images/webforms/grid-preview-paging-server-dev-tools.png)
+![Kendo UI for jQuery grid-preview-paging-server-dev-tools](../../images/webforms/grid-preview-paging-server-dev-tools.png)
 
 ## Further Reading
 

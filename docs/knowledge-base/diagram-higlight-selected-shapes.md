@@ -1,8 +1,8 @@
 ---
 title: Highlight Selected Shapes in Diagram
-description: An example on how to change the color of selected shapes in order to highlight them.
+description: Learn how to change the color of selected shapes in order to highlight them.
 type: how-to
-page_title: Change the Color of Selected Shapes | Kendo UI Diagram for jQuery
+page_title: Change the Color of Selected Shapes - Kendo UI Diagram for jQuery
 slug: diagram-highlight-selected-shapes
 tags: diagram, selection, shapes
 ticketid: 1338877
@@ -15,7 +15,7 @@ component: diagram
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress® Kendo UI® Diagram for jQuery</td>
  </tr>
 </table>
 

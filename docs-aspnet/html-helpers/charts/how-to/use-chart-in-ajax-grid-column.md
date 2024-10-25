@@ -13,4 +13,4 @@ To see the example, refer to the project on how to [use a Chart in the `ClientTe
 ## See Also
 
 * [Overview of the Chart HtmlHelper]({% slug htmlhelpers_dropdownlist_aspnetcore %})
-* [ChartBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
+* [ChartBuilder Server-Side API](/api/kendo.mvc.ui.fluent/chartbuilder)

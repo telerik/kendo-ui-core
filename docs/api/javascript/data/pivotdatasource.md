@@ -99,10 +99,12 @@ The configuration of measures. A string array whose values are interpreted as th
 
 #### Example - set the measures
 
+    <div id="pivot"></div>
+
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
-      measures: ["[Measures].[Internet Order Lines Count]"],
+      measures: ["[Measures].[Reseller Freight Cost]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
@@ -114,7 +116,10 @@ The configuration of measures. A string array whose values are interpreted as th
         type: "xmla"
       }
     });
-    dataSource.fetch();
+
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### measures.values `Array`
@@ -123,11 +128,13 @@ A string array whose values are interpreted as the name of the measures that wil
 
 #### Example - set the measures
 
+    <div id="pivot"></div>
+
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
-          values: ["[Measures].[Internet Order Lines Count]"]
+          values: ["[Measures].[Reseller Freight Cost]"]
       },
       transport: {
         connection: {
@@ -140,7 +147,10 @@ A string array whose values are interpreted as the name of the measures that wil
         type: "xmla"
       }
     });
-    dataSource.fetch();
+
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### measures.axis `String` *(default: columns)*
@@ -149,11 +159,13 @@ The name of the axis on which the measures will be displayed. The supported valu
 
 #### Example - set the axis of the measures
 
+    <div id="pivot"></div>
+    
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
-          values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
+          values: ["[Measures].[Internet Revenue Trend]", "[Measures].[Internet Revenue Status]"],
           axis: "rows"
       },
       transport: {
@@ -167,7 +179,10 @@ The name of the axis on which the measures will be displayed. The supported valu
         type: "xmla"
       }
     });
-    dataSource.fetch();
+    
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### rows `Array`
@@ -274,6 +289,7 @@ The configuration which is used when the data source discovers the schema inform
       }
     });
     dataSource.schemaDimensions().done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dimensions.length);
     });
     </script>
@@ -379,7 +395,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         axes: "axes" // axes are returned in the "axes" field of the response
       }
@@ -392,7 +408,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         axes: function(response) {
           return response.axes; // axes are returned in the "axes" field of the response
@@ -421,7 +437,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         catalogs: "catalogs" // catalogs information is returned in the "catalogs" field of the response
       }
@@ -434,7 +450,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         catalogs: function(response) {
           return response.catalogs; // catalogs information are returned in the "catalogs" field of the response
@@ -459,7 +475,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         cubes: "cubes" // cubes information is returned in the "cubes" field of the response
       }
@@ -472,7 +488,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         cubes: function(response) {
           return response.cubes; // cubes information are returned in the "cubes" field of the response
@@ -511,6 +527,7 @@ A set of key/value pairs which specifies the field-dimension mapping that is ava
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -557,6 +574,7 @@ A set of key/value pairs which specifies the available measures. The key specifi
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -623,12 +641,14 @@ The context for the current aggregate call. Includes the current data item and i
               "Average": {
                 field: "UnitPrice",
                 aggregate: "average"
+              }
             }
           }
         }
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -652,13 +672,15 @@ The context for the current aggregate call. Includes the current data item and i
                 field: "UnitPrice",
                 aggregate: function(value, state, context) {
                     return (state.accumulator || 0) + value;
-                }
+                  }
+              }
             }
           }
         }
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -715,6 +737,7 @@ The last aggregated result of the function for already processed records.
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -745,7 +768,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         data: "data" // cells data are returned in the "data" field of the response
       }
@@ -758,7 +781,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         data: function(response) {
           return response.data; // cells data are returned in the "data" field of the response
@@ -800,7 +823,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         dimensions: "dimensions" // dimensions information is returned in the "dimensions" field of the response
       }
@@ -813,7 +836,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         dimensions: function(response) {
           return response.dimensions; // dimensions information are returned in the "dimensions" field of the response
@@ -858,7 +881,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         hierarchies: "hierarchies" // hierarchies schema information is returned in the "hierarchies" field of the response
       }
@@ -871,7 +894,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         hierarchies: function(response) {
           return response.hierarchies; // hierarchies information are returned in the "hierarchies" field of the response
@@ -917,7 +940,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         levels: "levels" // levels information is returned in the "levels" field of the response
       }
@@ -930,7 +953,7 @@ The result has the following format and attributes.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         levels: function(response) {
           return response.levels; // levels information are returned in the "levels" field of the response
@@ -973,7 +996,7 @@ The result has the following format.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         measures: "measures" // measures information is returned in the "measures" field of the response
       }
@@ -986,7 +1009,7 @@ The result has the following format.
     var dataSource = new kendo.data.PivotDataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       schema: {
         measures: function(response) {
           return response.measures; // measures information are returned in the "measures" field of the response
@@ -1078,6 +1101,7 @@ The name of the catalog.
     });
 
     var catalogName = dataSource.catalog();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(catalogName);// prints "Adventure Works DW 2008R2"
     </script>
 
@@ -1133,6 +1157,7 @@ The columns configuration. Accepts the same values as the [`columns`](/api/javas
     });
 
     var columns = dataSource.columns();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(columns);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
@@ -1191,6 +1216,7 @@ The name of the cube.
     });
 
     var cubeName = dataSource.cube();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(cubeName);// prints "Adventure Works"
     </script>
 
@@ -1211,29 +1237,41 @@ The options of the discover request.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.PivotDataSource({
-      type: "xmla",
-      transport: {
-        connection: {
-            catalog: "Adventure Works DW 2008R2"
-        },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
-      },
-      schema: {
-        type: "xmla"
-      }
-    });
-
-    dataSource.discover({
-        data: {
-          command: "schemaMeasures",
-          restrictions: {
-            catalogName: dataSource.catalog(),
-            cubeName: dataSource.cube()
+      var dataSource = new kendo.data.PivotDataSource({
+        columns: ["ProductName" ],
+        rows: ["Category"],
+        measures: ["Sum"],
+        data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+        schema: {
+          cube: {
+            dimensions: {
+              ProductName: { caption: "All Products" },
+              Category: { caption: "All Cateogries" }
+            },
+            measures: {
+              "Average": {
+                field: "UnitPrice",
+                aggregate: function(value, state, context) {
+                  if (!isNaN(value)) {
+                    state.count = (state.count || 0) + 1;
+                    return (state.accumulator || 0) + value;
+                  } else {
+                    return state.accumulator;
+                  }
+                },
+                result: function(state) {
+                  return state.accumulator / state.count;
+                }
+              }
+            }
           }
-        }).done(function(response) {
-            console.log(response);
-        });
+        }
+      });
+
+      dataSource.fetch(function() {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dataSource.data(), dataSource.axes());
+      });
     </script>
 
 ### expandColumn
@@ -1376,6 +1414,7 @@ The measures configuration. Accepts the same values as the [`measures`](/api/jav
     });
 
     var measures = dataSource.measures();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(measures);// [{ name: "[Measures].[Internet Order Lines Count]" }]
     </script>
 
@@ -1409,6 +1448,7 @@ Gets the name of the axis on which the measures are displayed.
     });
 
     var axis = dataSource.measuresAxis();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(axis); // "rows"
     </script>
 
@@ -1464,6 +1504,7 @@ The rows configuration. Accepts the same values as the [`row`](/api/javascript/d
     });
 
     var rows = dataSource.rows();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(rows);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
@@ -1490,6 +1531,7 @@ Requests the catalogs information.
 
     dataSource.schemaCatalogs()
         .done(function(catalogs) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(catalogs);
         });
     </script>
@@ -1520,6 +1562,7 @@ Requests the cubes schema information.
 
     dataSource.schemaCubes()
         .done(function(cubes) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(cubes);
         });
     </script>
@@ -1550,6 +1593,7 @@ Requests the dimensions schema information.
 
     dataSource.schemaDimensions()
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
@@ -1588,6 +1632,7 @@ The name of the dimensions which is the "owner" of the hierarchy.
 
     dataSource.schemaHierarchies(dimensionName)
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
@@ -1626,6 +1671,7 @@ The name of the hierarchy which is the "owner" of the level.
 
     dataSource.schemaLevels(hierarchyName)
         .done(function(levels) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(levels);
         });
     </script>
@@ -1656,6 +1702,7 @@ Requests the measures schema information.
 
     dataSource.schemaMeasures()
         .done(function(measures) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(measures);
         });
     </script>

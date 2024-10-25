@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 50,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -83,7 +83,7 @@
             virtualList = new VirtualList(container, {
                 autoBind: false,
                 dataSource: asyncDataSource,
-                template: "#=text# #=letter#",
+                template: ({ text, letter }) => `${text} ${letter}`,
                 dataValueField: "value",
                 height: CONTAINER_HEIGHT,
                 itemHeight: ITEM_HEIGHT,
@@ -217,9 +217,9 @@
 
             dataSource.read().done(function() {
                 virtualList.one("listBound", function() {
-                    virtualList.select(11).done(function () {
+                    virtualList.select(11).done(function() {
                         virtualList.one("listBound", function() {
-                            assert.equal(0, virtualList.items().find(".k-state-selected").length);
+                            assert.equal(0, virtualList.items().find(".k-selected").length);
                             assert.deepEqual([17], virtualList.select());
                             asyncDone();
                         });
@@ -270,14 +270,14 @@
 
             virtualList = new VirtualList(container, {
                 dataSource: localDataSource,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value",
                 height: CONTAINER_HEIGHT,
                 itemHeight: ITEM_HEIGHT,
                 selectable: true,
                 valueMapper: function(options) {
                     var data = this.dataSource.data();
-                    var values = $.isArray(options.value) ? options.value : [options.value];
+                    var values = Array.isArray(options.value) ? options.value : [options.value];
                     var res = [], i, j, l = values.length, dl = data.length;
 
                     for (i = 0; i < l; i++) {
@@ -335,7 +335,7 @@
             virtualList.one("listBound", function() {
                 virtualList.select(0).done(function() {
                     virtualList.one("listBound", function() {
-                        assert.isOk(virtualList.items().eq(0).hasClass("k-state-selected"));
+                        assert.isOk(virtualList.items().eq(0).hasClass("k-selected"));
                         done();
                     });
 
@@ -362,14 +362,14 @@
             var container = $("<div/>").appendTo(Mocha.fixture);
             var virtualList = new VirtualList(container, {
                 dataSource: localDataSource,
-                template: "#=text#",
+                template: ({ text }) => text,
                 dataValueField: "value",
                 height: CONTAINER_HEIGHT,
                 itemHeight: ITEM_HEIGHT,
                 selectable: "multiple",
                 valueMapper: function(options) {
                     var data = this.dataSource.data();
-                    var values = $.isArray(options.value) ? options.value : [options.value];
+                    var values = Array.isArray(options.value) ? options.value : [options.value];
                     var res = [], i, j, l = values.length, dl = data.length;
 
                     for (i = 0; i < l; i++) {

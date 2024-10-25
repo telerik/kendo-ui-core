@@ -1,7 +1,7 @@
 ---
-title: Copy Data from Excel
-page_title: Copy Data from Excel | Kendo UI Grid for jQuery
-description: "An example on how to copy data from Excel in the Kendo UI Grid for jQuery."
+title: Copy Grid Data from Excel
+page_title: Copy Data from Excel - Kendo UI for jQuery Data Grid
+description: "Learn how to copy data from Excel in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/copy-from-excel-to-grid.html, /controls/data-management/grid/how-to/copy-from-excel-to-grid, /web/grid/how-to/copy-from-excel-to-grid, /controls/data-management/grid/how-to/excel/copy-from-excel-to-grid
 slug: howto_copy_datafrom_excel_grid
 tags: grid, copy, excel, data
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -98,4 +98,4 @@ The following example demonstrates how to create a Grid that supports pasting fr
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

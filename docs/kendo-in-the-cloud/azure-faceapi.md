@@ -1,6 +1,6 @@
 ---
 title: Azure Face API
-page_title: Azure Face API | Kendo UI in the Cloud
+page_title: Azure Face API - Kendo UI in the Cloud
 description: "Learn how to upload images and consume the returned data from Azure Face API when working with Kendo UI."
 slug: azure_faceapi
 position: 2
@@ -33,11 +33,10 @@ The following example demonstrates how to send files directly to Azure Face API 
       <meta charset="utf-8">
       <title>Kendo UI and Azure Face API Integration</title>
 
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/styles/kendo.common.min.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/styles/kendo.default.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"/>
 
       <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/jszip.min.js"></script>
+      <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
       <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/kendo.all.min.js"></script>
 
     </head>
@@ -208,7 +207,7 @@ The following example demonstrates how to send files directly to Azure Face API 
 
 ## See Also
 
-* [Overview of the Upload Widget](https://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
+* [Overview of the Upload Widget](https://docs.telerik.com/kendo-ui/controls/upload/overview)
 * [API Reference of the Upload Widget](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Consuming Data from Azure Functions]({% slug azure_functions %})
 * [Binding to Azure Cosmos DB]({% slug azure_cosmos_db %})

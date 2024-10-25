@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Upload JSP Tag
+page_title: Overview - Upload JSP Tag
 description: "Get started with the Upload JSP tag in Kendo UI."
 slug: overview_upload_uiforjsp
 position: 1

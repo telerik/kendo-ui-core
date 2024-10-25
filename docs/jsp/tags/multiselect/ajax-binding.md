@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | MultiSelect JSP Tag
+page_title: Ajax Binding - MultiSelect JSP Tag
 description: "Get started with the Ajax binding of the MultiSelect JSP tag in Kendo UI."
 slug: ajaxbinding_multiselect_uiforjsp
 position: 2

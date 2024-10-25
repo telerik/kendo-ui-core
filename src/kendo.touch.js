@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.userevents.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "touch",
     name: "Touch",
     category: "mobile",
@@ -13,7 +12,6 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
-        proxy = $.proxy,
         abs = Math.abs,
         MAX_DOUBLE_TAP_DISTANCE = 20;
 
@@ -48,17 +46,17 @@ var __meta__ = { // jshint ignore:line
                 fastTap: options.fastTap,
                 press: eventProxy("touchstart"),
                 hold: eventProxy("hold"),
-                tap: proxy(that, "_tap"),
+                tap: that._tap.bind(that),
                 gesturestart: gestureEventProxy("gesturestart"),
                 gesturechange: gestureEventProxy("gesturechange"),
                 gestureend: gestureEventProxy("gestureend")
             });
 
             if (options.enableSwipe) {
-                that.events.bind("start", proxy(that, "_swipestart"));
-                that.events.bind("move", proxy(that, "_swipemove"));
+                that.events.bind("start", that._swipestart.bind(that));
+                that.events.bind("move", that._swipemove.bind(that));
             } else {
-                that.events.bind("start", proxy(that, "_dragstart"));
+                that.events.bind("start", that._dragstart.bind(that));
                 that.events.bind("move", eventProxy("drag"));
                 that.events.bind("end", eventProxy("dragend"));
             }
@@ -164,7 +162,5 @@ var __meta__ = { // jshint ignore:line
 
     kendo.ui.plugin(Touch);
 })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

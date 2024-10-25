@@ -1,10 +1,10 @@
 ---
 title: Custom Data Binding
 page_title: Custom Data Binding
-description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/binding/custom-binding
 slug: htmlhelpers_multiselect_todatasourceresultbinding_aspnetcore
-position: 4
+position: 5
 ---
 
 # Custom Data Binding
@@ -13,7 +13,7 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
 
 1. Create an action method which renders the view.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
@@ -29,6 +29,7 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
 
 1. Add an Ajax-bound MultiSelect.
 
+    ```HtmlHelper
         @(Html.Kendo().MultiSelect()
             .Name("productDropDownList") // The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the MultiSelect as a text.
@@ -49,6 +50,22 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
                         });
             })
         )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-multiselect name="productDropDownList"
+                           datatextfield="ProductName"
+                           datavaluefield="ProductID">
+           <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+                <transport>
+                     <read url="@Url.Action("GetProducts", "Home")" />
+                </transport>
+                <schema data="Data" total="Total">
+	 	        </schema>
+           </datasource>                 
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## See Also
 

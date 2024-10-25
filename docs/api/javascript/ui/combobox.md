@@ -12,6 +12,10 @@ Represents the Kendo UI ComboBox widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -165,6 +169,8 @@ Use it to set the Id of the parent ComboBox widget.
 Defines the field to be used to filter the data source. If not defined, it is set to a field with the same name as the [parent's dataValueField option](/api/javascript/ui/combobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
 
+ > Note: As the dataItems of the dataSource inherit from the kendo.ObservableObject class and this class has a method named [parent](/api/javascript/data/observableobject/methods/parent), setting the cascadeFromField to a field named "parent" is not supported.
+
 #### Example
 
     <input id="parent" />
@@ -222,6 +228,40 @@ Defines the parent field to be used to retain value from. This value will be use
             { name: "Child2", id: 2, parentId: 2 },
             { name: "Child3", id: 3, parentId: 1 },
             { name: "Child4", id: 4, parentId: 2 }
+        ]
+    });
+    </script>
+
+### cascadeOnCustomValue `Boolean` *(default: false)*
+
+Applicable to a parent ComboBox in a cascading scenario. If set to `true` cascading will be triggered upon custom input in the parent widget. When set to `false` (default) the child will not cascade and it will be disabled upon setting custom input in the parent ComboBox. Cascade on custom values works only when `cascadeFromParentField` is not set for the child combo, or it points to the `dataValueField` of the parent.
+
+#### Example
+
+    <p><em>Hint: type `p3` in the parent ComboBox input</em></p>
+    <input id="parent" />
+    <input id="child" />
+    <script>
+    $("#parent").kendoComboBox({
+        dataTextField: "name",
+        dataValueField: "id",
+        cascadeOnCustomValue: true,
+        dataSource: [
+            { name: "Parent1", id: "p1" },
+            { name: "Parent2", id: "p2" }
+        ]
+    });
+
+    $("#child").kendoComboBox({
+        cascadeFrom: "parent",
+        cascadeFromField: "parentId",
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Child1", id: 1, parentId: "p1" },
+            { name: "Child2", id: 2, parentId: "p2" },
+            { name: "Child3", id: 3, parentId: "p3" },
+            { name: "Child4", id: 4, parentId: "p3" }
         ]
     });
     </script>
@@ -382,6 +422,30 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/combobox#configuration-dataTextField) option).
@@ -441,6 +505,105 @@ The widget instance.
       dataTextField: "name",
       dataValueField: "id",
       footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
+    </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: function() {
+          return "Fruits";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: function() {
+            return "Fruits";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/combobox/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#combobox").data("kendoComboBox").label.floatingLabel.refresh();`
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: "Fruits",
+        floating: true
+      }
     });
     </script>
 
@@ -763,6 +926,194 @@ The available "x" positions are:
       }
     </style>
 
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      });
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content.
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        prefixOptions: {
+          icon: "search"
+        }
+      })
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <input id="prefix" />
+    <script>
+      $("#prefix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`,
+          separator: false
+        }
+      })
+    </script>
+
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        size: "large"
+      });
+    </script>
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content.
+
+#### Example - specify suffix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#suffix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        suffixOptions: {
+          icon: "search"
+        }
+      })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <input id="suffix" />
+    <script>
+      $("#suffix").kendoComboBox({
+        label: "Combobox",
+        dataSource: [1, 2],
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`,
+          separator: false
+        }
+      })
+    </script>
+
 ### suggest `Boolean`*(default: false)*
 
 If set to `true` the widget will automatically use the first suggestion as its value.
@@ -849,7 +1200,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
+      template: '<span><img src="https://demos.telerik.com/kendo-ui/content/web/treeview/folder.png" alt="#: name #" style="vertical-align: middle;"/>#: name #</span>'
     });
     </script>
 
@@ -1190,11 +1541,13 @@ The zero-based index of the data record.
 
     var combobox = $("#combobox").data("kendoComboBox");
 
-    // get the dataItem corresponding to the selectedIndex.
+    // get the dataItem corresponding to the selectedIndex. Result can be seen in the browser console.
     var dataItem = combobox.dataItem();
+    console.log(dataItem.name);
 
-    // get the dataItem corresponding to the passed index.
-    var dataItem = combobox.dataItem(0);
+    // get the dataItem corresponding to the passed index. Result can be seen in the browser console.
+    dataItem = combobox.dataItem(0);
+    console.log(dataItem.name);
     </script>
 
 ### destroy
@@ -1555,7 +1908,7 @@ Opens or closes the widget popup.
 
 #### Parameters
 
-##### toggle `Boolean`
+##### toggle `Boolean` *(optional)*
 
 Defines the whether to open/close the drop-down list.
 

@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | AutoComplete PHP Class
+page_title: Remote Binding - AutoComplete PHP Class
 description: "Bind Kendo UI AutoComplete PHP class to JSON."
 slug: remotebinding_autocomplete_uiforphp
 position: 3

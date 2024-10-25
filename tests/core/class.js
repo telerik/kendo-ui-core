@@ -100,7 +100,7 @@
 
             var AnotherBall = Ball.extend();
 
-            assert.isOk($.isArray(AnotherBall.fn.colors));
+            assert.isOk(Array.isArray(AnotherBall.fn.colors));
         });
 
     });

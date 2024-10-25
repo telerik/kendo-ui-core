@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | Scheduler PHP Class
+page_title: Remote Binding - Scheduler PHP Class
 description: "Bind Kendo UI Scheduler PHP class to JSON."
 slug: remotebinding_scheduler_uiforphp
 position: 3

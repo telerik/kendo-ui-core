@@ -1,7 +1,7 @@
 ---
 title: Drag and Drop Rows between Grids
-page_title: Drag and Drop Rows Between Grids | Kendo UI Grid for jQuery
-description: "An example on how to drag and drop rows between two Kendo UI Grids for jQuery."
+page_title: Drag and Drop Rows Between Grids - Kendo UI for jQuery Data Grid
+description: "Learn how to drag and drop rows between two Kendo UI Grids for jQuery."
 previous_url: /controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /aspne-mvc/controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /controls/data-management/grid/how-to/various/drag-and-drop-rows-between-two-grids
 slug: howto_dragand_drop_rows_between_twogrids_grid
 tags: grid, drag, drop, rows, between
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -78,7 +78,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 
 
         $(grid1.element).kendoDraggable({
-          filter: "tr",
+          filter: "tbody>tr",
           hint: function (e) {
             var item = $('<div class="k-grid k-widget" style="background-color: DarkOrange; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
             return item;
@@ -88,7 +88,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 
 
         $(grid2.element).kendoDraggable({
-          filter: "tr",
+          filter: "tbody>tr",
           hint: function (e) {
             var item = $('<div class="k-grid k-widget" style="background-color: MediumVioletRed; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
             return item;
@@ -119,4 +119,4 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

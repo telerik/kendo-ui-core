@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI AutoComplete component for {{ site.framework }}."
 previous_url: /helpers/editors/autocomplete/binding/overview
 slug: htmlhelpers_autocomplete_databinding_aspnetcore
 position: 1
@@ -17,6 +17,9 @@ The supported data-binding approaches are:
 * [Server binding]({% slug htmlhelpers_autocomplete_serverbinding_aspnetcore %})
 * [Custom binding]({% slug custombinding_autocomplete_aspnetmvc %})
 * [Model binding]({% slug modelbinding_autocomplete_aspnetmvc %})
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_autocomplete_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

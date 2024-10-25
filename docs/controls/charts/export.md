@@ -1,6 +1,6 @@
 ---
 title: Export
-page_title: jQuery Chart Documentation | Export | Kendo UI
+page_title: jQuery Chart Documentation - Export
 description: "Get started with the jQuery Chart by Kendo UI and set its export functionality to produce PDF, SVG, and Images."
 previous_url: /controls/charts/chart/export
 slug: exporting_kendoui_chart_widget
@@ -13,6 +13,8 @@ The Chart enables you to export their content to PDF, SVG, or Image files.
 
 ## PDF Export
 
+> Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
+
 To initiate the export to PDF, call the [`saveAsPdf`](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method. To enable compression, include the [Pako Deflate library](https://github.com/nodeca/pako) in the page.
 
 For more information, refer to the following resources:
@@ -24,7 +26,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -126,7 +128,7 @@ The following example demonstrates how to obtain an image from the Chart.
 Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -191,7 +193,7 @@ To send the generated file to a remote service, set the `proxyUrl` and `forcePro
 The following example demonstrates how to post files to the server.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -267,15 +269,15 @@ The following example demonstrates how to handle custom fonts by embedding a cus
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, e.g. kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="//kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 

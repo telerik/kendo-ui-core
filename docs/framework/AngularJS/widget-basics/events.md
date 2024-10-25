@@ -17,7 +17,12 @@ If you store the whole configuration in the `controller`, add an event handler i
 
 The following example includes a paragraph that uses the Angular `ng-show` directive and which is displayed only after a month is selected. To implement the approach, you need to call the `$scope.$digest()` event handler.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
       <input kendo-date-picker k-options="monthPickerConfig" />
       <p ng-show="selected">A month was picked</p>
@@ -45,7 +50,12 @@ You can also specify event handlers by using attributes. They require the `k-on-
 
 In the following example, the `kendoEvent` variable is defined in a scope and you have to pass it to the event handler. If you are using the `k-on-` attributes, you do not need to call `$digest()` on the scope because your bindings take care of it.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
       <input kendo-date-picker k-on-change="onDateSelected(kendoEvent)" />
       <p ng-show="selected">A month was picked</p>
@@ -76,7 +86,12 @@ The `kendoEvent` is also available.
 
 The following example demonstrates how to use some of these local variables.
 
-```dojo
+```
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions" k-on-change="onChange({ selected: selected },data,dataItem,angularDataItem)">

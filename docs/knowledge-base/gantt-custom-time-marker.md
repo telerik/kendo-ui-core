@@ -1,8 +1,8 @@
 ---
 title: Add a Custom Time Marker in Gantt
-description: An example on how to add a vertical line similar to the current time marker in the Kendo UI Gantt.
+description: Learn how to add a vertical line similar to the current time marker in the Kendo UI Gantt.
 type: how-to
-page_title: Add Custom Time Marker | Kendo UI Gantt for jQuery
+page_title: Add Custom Time Marker - Kendo UI Gantt for jQuery
 slug: gantt-custom-time-marker
 tags: kendo, kendoui, gantt, custom, time, marker, primavera, status
 ticketid: 1343465
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Gantt</td>
+  <td>Progress® Kendo UI® Gantt for jQuery</td>
  </tr>
 </table>
 

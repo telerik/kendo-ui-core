@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -379,7 +380,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 });
 }
 
-/* FileManager messages */ 
+/* FileManager messages */
 
 if (kendo.ui.FileManager) {
   kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
@@ -397,7 +398,7 @@ if (kendo.ui.FileManager) {
       "dateCreatedField": "Datum gecreeërd",
       "listView": "Lijstweergave",
       "gridView": "Rasterweergave",
-      "search" : "zoek",
+      "search": "zoek",
       "details": "Details bekijken",
       "detailsChecked": "Aan",
       "detailsUnchecked": "Uit",
@@ -427,7 +428,7 @@ if (kendo.ui.FileManager) {
       },
       "deleteConfirm": {
         "title": "Bevestigen",
-        "content": "<p style = 'text-align: center;'> Weet u zeker dat u de geselecteerde bestanden wilt verwijderen? </br> U kunt deze actie niet ongedaan maken. </p>",
+        "content": "<p style = 'text-align: center;'> Weet u zeker dat u de geselecteerde bestanden wilt verwijderen? <br/> U kunt deze actie niet ongedaan maken. </p>",
         "okText": "Verwijderen",
         "cancel": "Annuleren",
         "close": "Sluiten"

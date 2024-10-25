@@ -2,7 +2,7 @@
 title: Get Checked Nodes in a POST Query
 description: The TreeView checkboxes need unique name attributes when they are used in a POST query.
 type: troubleshooting
-page_title: Get Checked Nodes in POST Queries | Kendo UI TreeView for jQuery
+page_title: Get Checked Nodes in POST Queries - Kendo UI TreeView for jQuery
 slug: get-checked-treeview-nodes-in-post
 tags: treeview, node, checked, checkbox, name, post, query, unique
 ticketid: 1363907, 1363212, 1364154
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Treeview for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeView for jQuery</td>
 	</tr>
 </table>
 
@@ -40,11 +40,11 @@ The following example demonstrates a template that mimics the default TreeView t
 .Checkboxes(checkboxes => checkboxes
     .Name("checkedFiles")
     .CheckChildren(true)
-    .Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' #  aria-label='#=item.text#' /><span class='k-checkbox-label checkbox-span'></span></span>")
+    .Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' #  aria-label='#=item.text#' /></span>")
 )
 ```
 
-The following example demonstrates the jQuery and ASP.NET MVC initialization.
+The following example demonstrates the jQuery initialization.
 
 ```dojo
 <form>
@@ -56,7 +56,7 @@ The following example demonstrates the jQuery and ASP.NET MVC initialization.
 	$("#treeview").kendoTreeView({
 		checkboxes: {
 			checkChildren: true,
-			template: "<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' #  aria-label='#=item.text#' /><span class='k-checkbox-label checkbox-span'></span></span>"
+			template: "<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' #  aria-label='#=item.text#' /></span>"
 		},
 
 		dataSource: [{
@@ -87,6 +87,8 @@ The following example demonstrates the jQuery and ASP.NET MVC initialization.
 </script>
 ```
 
+The following example demonstrates the ASP.NET MVC syntax.
+
 ```MVC
 <form>
 	<input type="submit" value="submit form" />
@@ -95,7 +97,7 @@ The following example demonstrates the jQuery and ASP.NET MVC initialization.
 		.Checkboxes(checkboxes => checkboxes
 			.Name("checkedFiles")
 			.CheckChildren(true)
-			.Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' #  aria-label='#=item.text#' /><span class='k-checkbox-label checkbox-span'></span></span>")
+			.Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' #  aria-label='#=item.text#' /></span>")
 		)
 		.Items(treeview =>
 		{

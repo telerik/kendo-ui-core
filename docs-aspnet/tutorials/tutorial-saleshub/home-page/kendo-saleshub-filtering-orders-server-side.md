@@ -1,6 +1,6 @@
 ---
 title: Filter Orders on the Server
-page_title: Filter Orders on the Server | Kendo UI Sales Hub Tutorial
+page_title: Filter Orders on the Server - Kendo UI Sales Hub Tutorial
 description: "Learn how to do server-side filtering of customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/home-page/kendo-saleshub-filtering-orders-server-side
 slug: filterordersonserver_saleshubtutorial_aspnetmvc
@@ -9,7 +9,7 @@ position: 3
 
 # Filter Orders on the Server
 
-![kendo-saleshub-customer-TreeView-and-grid-screenshot](images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
+![{{ site.product_short }} kendo-saleshub-customer-TreeView-and-grid-screenshot](images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
 
 Since **SalesHub** contains a lot of orders for various customers, it would not be very efficient for **all**
 of the orders to be returned when the orders grid renders. To reduce wait times and cut back on the amount of bandwidth

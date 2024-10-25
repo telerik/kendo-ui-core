@@ -5,15 +5,15 @@ description: "Learn how to configure the error bars of Telerik UI Charts, bind t
 slug: htmlhelpers_charts_errorbars_aspnetcore
 ---
 {% if site.core %}
-    {% assign ErrorLowField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorlowfieldsystemstring" %}
-    {% assign ErrorHighField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorhighfieldsystemstring" %}
-    {% assign XErrorLowField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorlowfieldsystemstring" %}
-    {% assign XErrorHighField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorhighfieldsystemstring" %}
-    {% assign YErrorLowField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorlowfieldsystemstring" %}
-    {% assign YErrorHighField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorhighfieldsystemstring" %}
-    {% assign ErrorBarsValue = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#valuesystemstring" %}
-    {% assign ErrorBarsXValue = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#xvaluesystemstring" %}
-    {% assign ErrorBarsYValue = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#yvaluesystemstring" %}
+    {% assign ErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorlowfieldsystemstring" %}
+    {% assign ErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorhighfieldsystemstring" %}
+    {% assign XErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorlowfieldsystemstring" %}
+    {% assign XErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorhighfieldsystemstring" %}
+    {% assign YErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorlowfieldsystemstring" %}
+    {% assign YErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorhighfieldsystemstring" %}
+    {% assign ErrorBarsValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#valuesystemstring" %}
+    {% assign ErrorBarsXValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#xvaluesystemstring" %}
+    {% assign ErrorBarsYValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#yvaluesystemstring" %}
 {% else %}
     {% assign ErrorLowField = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#lowfieldsystemstring" %}
     {% assign ErrorHighField = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#highfieldsystemstring" %}
@@ -47,7 +47,7 @@ The following series types support error bars:
 
 To bind the low and high values of the error bars when using categorical series, set the [`ErrorLowField`]({{ ErrorLowField }}) and [`ErrorHighField`]({{ ErrorHighField }}) options to the fields in the data that hold the low and high value.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -73,6 +73,40 @@ To bind the low and high values of the error bars when using categorical series,
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743,
+                low = 4.5,
+                high = 5
+            },
+            new {
+                value = 7.295,
+                low = 7,
+                high = 8
+            },
+            new {
+                value = 6.376,
+                low = 5,
+                high = 6.5
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data" error-low-field="low" error-high-field="high">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Binding to Scatter Series
 
@@ -80,7 +114,7 @@ You can also display error bars for the series `x` or `y` value, or both. To set
 
 The following example demonstrates how to bind the error bars for the `x` value of the series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
             .Name("chart")
             .Series(s => s
@@ -107,10 +141,47 @@ The following example demonstrates how to bind the error bars for the `x` value 
             )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var scatter_data = new object[] {
+            new {
+                x= 6.4,
+                y= 13.4,
+                low= 5,
+                high= 7
+            },
+            new {
+                x= 1.7,
+                y= 11,
+                low= 1,
+                high= 3
+            }, 
+            new {
+                x= 5.4,
+                y= 8,
+                low= 3,
+                high= 6
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Scatter" data="scatter_data" x-error-low-field="low" x-error-high-field="high">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following example demonstrates how to bind the error bars for the `y` value of the series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
             .Name("chart")
             .Series(s => s
@@ -137,6 +208,43 @@ The following example demonstrates how to bind the error bars for the `y` value 
             )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var scatter_data = new object[] {
+            new {
+                x= 6.4,
+                y= 13.4,
+                low= 12,
+                high= 17
+            },
+            new {
+                x= 1.7,
+                y= 11,
+                low= 11,
+                high= 14
+            }, 
+            new {
+                x= 5.4,
+                y= 8,
+                low= 5,
+                high= 8
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Scatter" data="scatter_data" y-error-low-field="low" y-error-high-field="high">
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ## Setting the Error Bar Values
 
@@ -148,7 +256,7 @@ If the value of the error bar is set to a number (must not be negative), the low
 
 The following example demonstrates how to set a numeric value for the categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -167,10 +275,39 @@ The following example demonstrates how to set a numeric value for the categorica
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="1"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following example demonstrates how to set a numeric value for the scatter series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -192,12 +329,44 @@ The following example demonstrates how to set a numeric value for the scatter se
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var scatter_data = new object[] {
+            new {
+                x= 6.4,
+                y= 13.4
+            },
+            new {
+                x= 1.7,
+                y= 11
+            }, 
+            new {
+                x= 5.4,
+                y= 8
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Scatter" data="scatter_data">
+                <error-bars y-value="1"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Setting Percentage Values
 
 You can also set the difference of the point value as percentage by setting a string value in the `"percenatage(n)"` format where `n` indicates the percent value.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -212,9 +381,39 @@ You can also set the difference of the point value as percentage by setting a st
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.Value("percentage(20)"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="percentage(20)"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Setting Statistical Values
 
@@ -222,7 +421,7 @@ The error bars support statistical calculations based on the series data. The su
 
 The following example demonstrates how to use the standard error type.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -237,13 +436,43 @@ The following example demonstrates how to use the standard error type.
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.Value("stderr"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="stderr"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 The following example demonstrates how to use the standard deviation type.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -258,9 +487,39 @@ The following example demonstrates how to use the standard deviation type.
                     value = 6.376
                 }
             })
+        )
         .ErrorBars(err => err.Value("stddev(0.5)"))
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
+            new {
+                value = 4.743
+            },
+            new {
+                value = 7.295
+            },
+            new {
+                value = 6.376
+            }
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value="stddev(0.5)"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
 
 ### Calculating Low and High Values
 
@@ -276,11 +535,32 @@ The following fields are available as object parameters:
 
 The following example demonstrates how to use different percentages for the low and high values.
 
+```HtmlHelper
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Series(s => s
+            .Column(new object[] {
+                new {
+                    value = 4.743
+                },
+                new {
+                    value = 7.295
+                },
+                new {
+                    value = 6.376
+                }
+            })
+        )
+        .ErrorBars(err => err.ValueHandler("calculateError"))
+    )
 ```
-@(Html.Kendo().Chart()
-    .Name("chart")
-    .Series(s => s
-        .Column(new object[] {
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        var column_data = new object[] {
             new {
                 value = 4.743
             },
@@ -290,10 +570,19 @@ The following example demonstrates how to use different percentages for the low 
             new {
                 value = 6.376
             }
-        })
-    .ErrorBars(err => err.ValueHandler("calculateError"))
-)
+        };
+    }
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Column" data="column_data">
+                <error-bars value-handler="calculateError"/>
+            </series-item>
+        </series>
+    </kendo-chart>
+
 ```
+{% endif %}
 ```JavaScript
     function calculateError(data) {
         var value = data.value;
@@ -308,4 +597,5 @@ The following example demonstrates how to use different percentages for the low 
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Server-Side API](/api/chart)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+* [Server-Side API of the Chart for {{ site.framework }}](/api/chart)

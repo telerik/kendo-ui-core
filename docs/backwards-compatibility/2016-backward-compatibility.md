@@ -1,10 +1,10 @@
 ---
 title: 2016 Releases
-page_title: 2016 Releases | Kendo UI Backwards Compatibility
+page_title: 2016 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2016."
 previous_url: /changes-and-backward-compatibility, /install/changes-and-backward-compatibility, /backwards-compatibility/2016/2016-backward-compatibility
 slug: breakingchanges2016_kendoui
-position: 5
+position: 7
 ---
 
 # 2016 Releases
@@ -41,7 +41,7 @@ The widget will not bind on `open` if `autoBind` is set to `false` and `minLengt
 
 **Validator**
 
-The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/validator/overview#custom-rules-for-validation) with the `email` key.
 
 **Chart**
 
@@ -123,6 +123,7 @@ The  **Grid**, **Gantt**, **TreeList**, **Scheduler**, **Toolbar**, and **Spread
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})

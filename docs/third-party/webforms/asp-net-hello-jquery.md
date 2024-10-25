@@ -1,6 +1,6 @@
 ---
 title: Part 1 - Hello jQuery
-page_title: Part 1 - Hello jQuery | Kendo UI Third-Party Frameworks
+page_title: Part 1 - Hello jQuery - Kendo UI Third-Party Frameworks
 description: "Learn how to build an HTML application in ASP.NET by installing jQuery and then use it with Web Forms and the Internet Explorer F12 Developer Tools."
 previous_url: /third-party/tutorials/webforms/asp-net-hello-jquery
 slug: part1_aspnetwebforms_tutorials
@@ -33,7 +33,7 @@ Select **File/New Project** and select the **ASP.NET Web Application** project t
 
 **Figure 1: The creation of a new project**
 
-![File New Project](../../images/webforms/hello-jquery-file-new-project.png)
+![Kendo UI for jQuery File New Project](../../images/webforms/hello-jquery-file-new-project.png)
 
 Open the **Default.aspx** page. Switch to a **Design** view and delete all the content. Drag out two **TextBoxes**, a **Button**, and a **Label** control from the toolbox. Against **First Name:** type a name. After the first text box, put a space and type in the field against **Last Name:**. Put a space between the second text box and the Button. Put the label on the following line by pressing **Enter**.
 
@@ -41,7 +41,7 @@ Name the first text box `txtFirstName`, the second one `txtLastName`. Name the B
 
 **Figure 2: The default design view**
 
-![Default Design View](../../images/webforms/hello-jquery-default-design-view.png)
+![Kendo UI for jQuery Default Design View](../../images/webforms/hello-jquery-default-design-view.png)
 
 Double-click the **Say Hello** button to create a new button `click` event in the `Default.aspx.cs` file. Set the label text equal to the string `Hello` concatenated with the `Text` property of `txtFirstName` and the `Text` property of `txtLastName`.
 
@@ -61,7 +61,7 @@ Press `F5` or the **Run** icon and run the application. Do not enter your name i
 
 **Figure 3: The F12 developer tools**
 
-![F12 Developer Tools](../../images/webforms/hello-jquery-developer-tools.png)
+![Kendo UI for jQuery F12 Developer Tools](../../images/webforms/hello-jquery-developer-tools.png)
 
 Refresh the page. Notice that the **Network** tab now shows three items. The first one is the **Default.aspx** page that you are looking at. The second is the `CSS` file that is referenced in the head of the **Default.aspx** page. The last one is the **WebResource.axd** file which contains JavaScript and other resources for the page as determined by Web Forms related to the ASP.NET controls that you choose to use.
 
@@ -69,19 +69,19 @@ Note that the method for all three requests is a [GET](https://www.w3.org/Protoc
 
 **Figure 4: The network traffic for a GET**
 
-![Network Traffic For A Get](../../images/webforms/hello-jquery-network-traffic-get.png)
+![Kendo UI for jQuery Network Traffic For A Get](../../images/webforms/hello-jquery-network-traffic-get.png)
 
 Now fill out the form in the application with your first name and click the **Say Hello** button. The server responds as expected by setting the label text equal to the first name field plus the last name field. Have another look at the network traffic pane. It looks nearly identical, but the **Default.aspx** page was retrieved this time with a [POST](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). This is because this time the browser sent some data to the server specifically the values of the first name and last name text boxes. When browsers send information to the server and expect a response, this is typically done with a [POST](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) method.
 
 **Figure 5: The network traffic for a POST**
 
-![Network Traffic For A Post](../../images/webforms/hello-jquery-network-traffic-post.png)
+![Kendo UI for jQuery Network Traffic For A Post](../../images/webforms/hello-jquery-network-traffic-post.png)
 
 In ASP.NET Web Forms, the page posts back to itself, or to the same URL. To inspect the information that was sent to the server, double-click on the [POST](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) method and click on the **Request Body** tab.
 
 **Figure 6: The network request body**
 
-![Network Request Body](../../images/webforms/hello-jquery-network-request-body.png)
+![Kendo UI for jQuery Network Request Body](../../images/webforms/hello-jquery-network-request-body.png)
 
 Here you can see that the [_VIEWSTATE](https://msdn.microsoft.com/en-us/library/ms972976.aspx) object was sent back to the server. If you scroll down far enough, you are going to find the values of the first and last name text boxes in the `viewstate` object. What happened is that the browser did a POST to the server requesting the page, but also passing in the values of the text boxes. The server event was fired, the HTML in the **Default.aspx** page was altered and then sent to the browser.
 
@@ -98,7 +98,7 @@ To install [jQuery](https://jquery.com/) from [Nuget](https://www.nuget.org/), r
 
 **Figure 7: The NuGet jQuery search**
 
-![Nuget jQuery Search](../../images/webforms/hello-jquery-nuget-jquery-search.png)
+![Kendo UI for jQuery Nuget jQuery Search](../../images/webforms/hello-jquery-nuget-jquery-search.png)
 
 This is going to put the latest version of [jQuery](https://jquery.com/) in the `Scripts` folder. There are three files there:
 
@@ -110,7 +110,7 @@ Open up the **Site.Master** page. Drag the full [jQuery](https://jquery.com/) so
 
 **Figure 8: jQuery that is added to the master page**
 
-![jQuery Added To The Master Page](../../images/webforms/hello-jquery-jquery-added-to-master.png)
+![Kendo UI for jQuery jQuery Added To The Master Page](../../images/webforms/hello-jquery-jquery-added-to-master.png)
 
 ### Use jQuery Directly in Browser
 
@@ -118,7 +118,7 @@ Run the application again. When it comes up, open the developer tools by selecti
 
 **Figure 9: The Hello alert popup**
 
-![Alert Hello](../../images/webforms/hello-jquery-alert-hello.png)
+![Kendo UI for jQuery Alert Hello](../../images/webforms/hello-jquery-alert-hello.png)
 
 [jQuery](https://jquery.com/) code can be executed either by calling methods off of the `jQuery` object, or simply using the `$`. The `$` is commonly known and recognized as representing [jQuery](https://jquery.com/).
 
@@ -157,13 +157,13 @@ Notice that the command is echoed out into the console, but there is no value. T
 
 **Figure 10: The no-value txtFirstName**
 
-![txtFirstName Has No Value](../../images/webforms/hello-jquery-txtfirstname-no-value.png)
+![Kendo UI for jQuery txtFirstName Has No Value](../../images/webforms/hello-jquery-txtfirstname-no-value.png)
 
 To figure out why this did not work, click on the white arrow which is the element selector. Then go up into the page and click on the text box that you named `txtFirstName`. The HTML tab opens and the element in the page is highlighted. Notice that its ID is not `txtFirstName`, but rather `MainContent_txtFirstName`. This is because the controls were added to a content container in `Default.aspx`. In ASP.NET Web Forms, controls added to a parent server control are prefixed with the parent name. If parents are nested within parents, they may have multiple values appended onto the front. This is to make sure that IDs do in fact remain unique.
 
 **Figure 11: The prefixed txtFirstName**
 
-![Main Content Prefixed txtFirstName](../../images/webforms/hello-jquery-main-content-txt-firstname.png)
+![Kendo UI for jQuery Main Content Prefixed txtFirstName](../../images/webforms/hello-jquery-main-content-txt-firstname.png)
 
 Switch back to the **Console** tab and, keeping in mind the actual ID of `txtFirstName` at runtime, get the text of `txtFirstName` by entering the following command in the console.
 
@@ -176,7 +176,7 @@ Notice that the text value of the first name text box is returned.
 
 **Figure 12: The txtFirstName having a value**
 
-![txtFirstName Has A Value](../../images/webforms/hello-jquery-txtfirstname-has-value.png)
+![Kendo UI for jQuery txtFirstName Has A Value](../../images/webforms/hello-jquery-txtfirstname-has-value.png)
 
 ### Refactor Application to Use jQuery
 

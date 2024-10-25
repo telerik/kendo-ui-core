@@ -1,6 +1,6 @@
 ---
 title: Observable Objects
-page_title: Observable Objects | Kendo UI MVVM
+page_title: Observable Objects - Kendo UI MVVM
 description: "Learn how to initialize the ObservableObject in the Kendo UI MVVM framework, get a field value, set a field value to change tracking, and notify any subscribers when a change occurs."
 slug: overview_observabeobject_kendoui
 position: 2
@@ -156,6 +156,8 @@ The following example demonstrates how to set values of dependent properties.
         });
 
     This implementation of the `fullName` uses direct field access instead of the `get` method. As a result, the dependencies of `fullName` are not tracked. Changing the value of either `firstName` or `lastName` via the `set` method would not cause the change of `fullName`. This means that no binding referring to `fullName` is going to be updated. Avoid using direct field access when implementing dependent methods. Always use the `get` method to obtain the field values.
+
+* Dependent methods must use the get method to get field values. Kendo MVVM tracks the dependencies via the `get` method. The latter raises an internal event telling which fields are being used. All dependent fields are then listened for changes.
 
 ## See Also
 

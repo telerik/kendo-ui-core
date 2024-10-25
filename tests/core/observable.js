@@ -6,7 +6,7 @@
         it("bind returns this", function() {
             var observable = new Observable();
 
-            assert.isOk(observable.bind("foo", $.noop) === observable)
+            assert.isOk(observable.bind("foo", $.noop) === observable);
         });
 
         it("bind stores the handler to the events list", function() {

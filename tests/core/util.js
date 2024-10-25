@@ -2,6 +2,14 @@
 
     var isFunction = kendo.isFunction;
     describe("util", function() {
+        var container;
+
+        beforeEach(function() {
+            container = $("<div/>").appendTo(document.body);
+        });
+        afterEach(function() {
+            container.remove();
+        });
 
         it("true for functions", function() {
             assert.isOk(isFunction(function() { }));
@@ -35,52 +43,40 @@
             assert.isOk(kendo._outerHeight(undefined, undefined) === 0);
         });
 
+        it("outer width is calculated correctly for hidden elements", function() {
+            var visible, hidden;
+            container.append("<div class='visible'><span>abcd</span><button>abcd</button></div><div class='hidden'><span>abcd</span><button>abcd</button></div>");
+
+            visible = container.find(".visible");
+            hidden = container.find(".hidden");
+
+            hidden.css("display", "none");
+
+            assert.isOk(kendo._outerWidth(visible) === kendo._outerWidth(hidden, false, true));
+        });
+
+        it("outer height is calculated correctly for hidden elements", function() {
+            var visible, hidden;
+            container.append("<div class='visible'><span>abcd</span><button>abcd</button></div><div class='hidden'><span>abcd</span><button>abcd</button></div>");
+
+            visible = container.find(".visible");
+            hidden = container.find(".hidden");
+
+            hidden.css("display", "none");
+
+            assert.isOk(kendo._outerHeight(visible) === kendo._outerHeight(hidden, false, true));
+        });
+
         var toCamelCase = kendo.toCamelCase;
 
         it("replaces dashes with next letter in upper case", function() {
-            assert.equal(toCamelCase("foo-bar-baz"), "fooBarBaz")
+            assert.equal(toCamelCase("foo-bar-baz"), "fooBarBaz");
         });
 
         var toHyphens = kendo.toHyphens;
 
         it("replaces ...-a... with ...A...", function() {
-            assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz")
-        });
-
-        it("widgetInstance supports array of namespaces as an argument", function() {
-            var testbed = $("<div data-role='barcode'></div><div data-role='scroller'></div><div data-role='calendar'></div>");
-            kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
-
-            if (kendo.size(kendo.dataviz.ui.Barcode)) {
-                assert.isOk(kendo.widgetInstance(testbed.filter(".k-barcode"), [kendo.mobile.ui, kendo.dataviz.ui]));
-            }
-            assert.isOk(kendo.widgetInstance(testbed.filter(".km-scroll-wrapper"), [kendo.mobile.ui, kendo.dataviz.ui]));
-            assert.isOk(!kendo.widgetInstance(testbed.filter(".k-calendar"), [kendo.mobile.ui, kendo.dataviz.ui]));
-            kendo.destroy(testbed);
-        });
-
-        it("widgetInstance returns mobile view instances correctly", function() {
-            var testbed = $("<div data-role='view'>test</div>");
-            kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
-
-            assert.isOk(kendo.widgetInstance(testbed.filter(".km-view"), [kendo.mobile.ui]));
-            kendo.destroy(testbed);
-        });
-
-        var directiveSelector = kendo.directiveSelector;
-
-        it("puts hyphens before 'view', 'bar', 'strip', 'over' words in the widget names", function() {
-            assert.equal(directiveSelector("modalview"), "kendo-mobile-modal-view");
-            assert.equal(directiveSelector("tabstrip"), "kendo-mobile-tab-strip");
-            assert.equal(directiveSelector("popover"), "kendo-mobile-pop-over");
-        });
-
-        it("works with multiple selectors", function() {
-            assert.equal(directiveSelector("modalview drawer"), "kendo-mobile-modal-view, kendo-mobile-drawer");
-        });
-
-        it("works with 'view' selector", function() {
-            assert.equal(directiveSelector("view"), "kendo-mobile-view");
+            assert.equal(toHyphens("fooBarBaz"), "foo-bar-baz");
         });
 
         var getFileSizeMessage = kendo.getFileSizeMessage;

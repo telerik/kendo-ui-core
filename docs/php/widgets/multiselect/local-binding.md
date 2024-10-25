@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | MultiSelect PHP Class
+page_title: Local Binding - MultiSelect PHP Class
 description: "Bind Kendo UI MultiSelect PHP class to an array of data."
 slug: localbinding_multiselect_uiforphp
 position: 2

@@ -1,8 +1,8 @@
 ---
 title: Add Fonts to the Spreadsheet Fonts List
-description: An example on how to add a font to the fonts DropDownList that is located in the toolbar of the Kendo UI Spreadsheet.
+description: Learn how to add a font to the fonts DropDownList that is located in the toolbar of the Kendo UI Spreadsheet.
 type: how-to
-page_title: Add Fonts to the Fonts DropDownList | Kendo UI Spreadsheet for jQuery
+page_title: Add Fonts to the Fonts DropDownList - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-add-font
 tags: spreadsheet, font
 ticketid: 1140766
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

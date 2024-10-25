@@ -1,9 +1,9 @@
 ---
 title: 2019 Releases
-page_title: 2019 Releases | Kendo UI Backwards Compatibility
+page_title: 2019 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2019."
 slug: breakingchanges2019_kendoui
-position: 2
+position: 4
 ---
 
 # 2019 Releases
@@ -74,6 +74,7 @@ As of the Kendo UI 2019 R1 release, the [MobileSwitch widget]({% slug overview_h
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})

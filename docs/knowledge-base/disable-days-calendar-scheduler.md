@@ -1,8 +1,8 @@
 ---
 title: Disable Days in the Popup Calendar of the Scheduler
-description: An example on how to disable days in the popup calendar of the Kendo UI Scheduler.
+description: Learn how to disable days in the popup calendar of the Kendo UI Scheduler.
 type: how-to
-page_title: Disable Days in Popup Calendars | Kendo UI Scheduler for jQuery
+page_title: Disable Days in Popup Calendars - Kendo UI Scheduler for jQuery
 slug: disable-days-calendar-scheduler
 tags: kendo, kendoui, scheduler, disable, days, calendar, popup
 ticketid: 1134481
@@ -15,7 +15,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
@@ -50,7 +50,7 @@ How to disable particular days&mdash;for example, Sundays&mdash; in the popup ca
             }
         ]
     });
-    var schedDateLink = $('ul.k-scheduler-navigation').find('.k-nav-current');
+    var schedDateLink = $('.k-scheduler-toolbar').find('.k-nav-current');
     schedDateLink.on('click', function() {
         setTimeout(function() {
             var schedCalendar = $('.k-scheduler-calendar.k-widget.k-calendar').data('kendoCalendar');

@@ -8,8 +8,7 @@
     var args;
 
     var DOT = ".";
-    var DISABLED_STATE_CLASS = "k-state-disabled";
-    var SELECTED_STATE_CLASS = "k-state-selected";
+    var DISABLED_STATE_CLASS = "k-disabled";
     var REMOVE = "remove";
     var TRANSFER = "transfer";
     var ADD = "add";
@@ -50,7 +49,7 @@
         });
 
         it("tools should have title attribute", function() {
-            var toolsButtons = listbox.toolbar.element.find("a.k-button");
+            var toolsButtons = listbox.toolbar.element.find("button.k-button");
             var titleAttr = "title";
 
             assert.equal(toolsButtons.filter('[data-command="remove"]').attr(titleAttr), "Delete");
@@ -85,6 +84,7 @@
             var item = listbox.items().eq(0);
             var removeStub = stub(listbox, REMOVE);
             listbox.select(item);
+            listbox._onSelect();
 
             clickRemoveButton(listbox);
 
@@ -95,6 +95,7 @@
         it("remove action should clear the selection", function() {
             var item = listbox.items().eq(0);
             listbox.select(item);
+            listbox._onSelect();
 
             clickRemoveButton(listbox);
 
@@ -117,7 +118,7 @@
 
         it("moveup action should not move the html element of the first list item", function() {
             listbox.select(item);
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.items()[0], item1[0]);
@@ -125,7 +126,7 @@
 
         it("moveup action should not move the data item of the first list item in the dataSource", function() {
             listbox.select(item);
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -133,7 +134,7 @@
 
         it("moveup action should move the html element of a list item", function() {
             listbox.select(item2);
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             equalListItems(listbox.items().eq(0), item2);
@@ -142,7 +143,7 @@
 
         it("moveup action should not move the data item of a list item in the dataSource", function() {
             listbox.select(item2);
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -151,7 +152,7 @@
 
         it("moveup action should reorder the html elements of multiple list items", function() {
             listbox.select(item3.add(item2));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             equalListItems(listbox.items().eq(0), item2);
@@ -162,7 +163,7 @@
 
         it("moveup action should not reorder the data items of multiple list items in the dataSource", function() {
             listbox.select(item2.add(item3));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -173,7 +174,7 @@
 
         it("moveup action should reorder the html elements of non-adjacent list items", function() {
             listbox.select(item2.add(item4));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             equalListItems(listbox.items().eq(0), item2);
@@ -184,7 +185,7 @@
 
         it("moveup action should not reorder the data items of non-adjacent list items in the dataSource", function() {
             listbox.select(item4.add(item2));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -195,7 +196,7 @@
 
         it("moveup action should not reorder the html elements of multiple list items at the top", function() {
             listbox.select(item1.add(item2));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             equalListItems(listbox.items().eq(0), item1);
@@ -206,7 +207,7 @@
 
         it("moveup action should not reorder the data items of multiple list items at the top in the dataSource", function() {
             listbox.select(item1.add(item2));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -217,7 +218,7 @@
 
         it("moveup action should not partially reorder the html elements of multiple list items at the top", function() {
             listbox.select(item1.add(item3));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             equalListItems(listbox.items().eq(0), item1);
@@ -228,7 +229,7 @@
 
         it("moveup action should not partially reorder the data items of multiple list items at the top in the dataSource", function() {
             listbox.select(item3.add(item1));
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -256,7 +257,7 @@
 
         it("movedown action should not move the html element of the last list item", function() {
             listbox.select(item4);
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.items()[3], item4[0]);
@@ -264,7 +265,7 @@
 
         it("movedown action should not move the data item of the last list item in the dataSource", function() {
             listbox.select(item4);
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.dataSource.at(3).uid, getId(item4));
@@ -272,7 +273,7 @@
 
         it("movedown action should move the html element of a list item", function() {
             listbox.select(item1);
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             equalListItems(listbox.items().eq(0), item2);
@@ -281,7 +282,7 @@
 
         it("movedown action should not move the data item of a list item in the dataSource", function() {
             listbox.select(item1);
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -290,7 +291,7 @@
 
         it("movedown action should reorder the html elements of multiple list items", function() {
             listbox.select(item2.add(item3));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             equalListItems(listbox.items().eq(0), item1);
@@ -301,7 +302,7 @@
 
         it("movedown action should not reorder the data items of multiple list items in the dataSource", function() {
             listbox.select(item2.add(item3));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -312,7 +313,7 @@
 
         it("movedown action should reorder the html elements of non-adjacent list items", function() {
             listbox.select(item1.add(item3));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             equalListItems(listbox.items().eq(0), item2);
@@ -323,7 +324,7 @@
 
         it("movedown action should not reorder the data items of non-adjacent list items in the dataSource", function() {
             listbox.select(item1.add(item3));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -334,7 +335,7 @@
 
         it("movedown action should not reorder the html elements of multiple list items at the bottom", function() {
             listbox.select(item2.add(item4));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             equalListItems(listbox.items().eq(0), item1);
@@ -345,7 +346,7 @@
 
         it("movedown action should not reorder the data items of multiple list items at the bottom in the dataSource", function() {
             listbox.select(item3.add(item4));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -356,7 +357,7 @@
 
         it("movedown action should not partially reorder the html elements of multiple list items at the bottom", function() {
             listbox.select(item2.add(item4));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             equalListItems(listbox.items().eq(0), item1);
@@ -367,7 +368,7 @@
 
         it("movedown action should not partially reorder the data items of multiple list items at the bottom in the dataSource", function() {
             listbox.select(item2.add(item4));
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(listbox.dataSource.at(0).uid, getId(item1));
@@ -435,7 +436,7 @@
             var dataItem = listbox1.dataItem(item);
             var addStub = stub(listbox2, ADD);
             listbox1.select(item);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(addStub.args(ADD).length, 1);
@@ -446,7 +447,7 @@
             var item = listbox1.items().eq(0);
             var removeStub = stub(listbox1, REMOVE);
             listbox1.select(item);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(removeStub.args(REMOVE).length, 1);
@@ -455,7 +456,7 @@
 
         it("transferTo action should select the next item", function() {
             listbox1.select(item1);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 1);
@@ -465,7 +466,7 @@
         it("transferTo action should skip disabled items for selection", function() {
             listbox1.enable(item2, false);
             listbox1.select(item1);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 1);
@@ -476,7 +477,7 @@
             var lastItem = listbox1.items().last();
             var previousToLastItem = lastItem.prev();
             listbox1.select(lastItem);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 1);
@@ -488,7 +489,7 @@
             listbox1.enable(item4, false);
             listbox1.enable(item5, false);
             listbox1.select(item3);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 1);
@@ -501,7 +502,7 @@
             var previousToLastItem = lastItem.prev();
             listbox1.enable(previousToLastItem, false);
             listbox1.select(lastItem);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 1);
@@ -510,7 +511,7 @@
 
         it("transferTo action should clear the selection with multiple items", function() {
             listbox1.select(item1.add(item2));
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(listbox1.select().length, 0);
@@ -519,7 +520,7 @@
         it("transferTo action should scroll to the selected item", function() {
             var scrollSpy = spy(listbox1, "_scrollIntoView");
             listbox1.select(item1);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(scrollSpy.calls("_scrollIntoView"), 1);
@@ -585,7 +586,7 @@
             var dataItem = listbox2.dataItem(item);
             var addStub = stub(listbox1, ADD);
             listbox2.select(item);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(addStub.args(ADD).length, 1);
@@ -595,7 +596,7 @@
         it("transferFrom action should call remove() for source listbox", function() {
             var removeStub = stub(listbox2, REMOVE);
             listbox2.select(item1);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(removeStub.args(REMOVE).length, 1);
@@ -604,7 +605,7 @@
 
         it("transferFrom action should select the next enabled item", function() {
             listbox2.select(item1);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 1);
@@ -614,7 +615,7 @@
         it("transferFrom action should skip disabled items for selection", function() {
             listbox2.enable(item2, false);
             listbox2.select(item1);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 1);
@@ -625,7 +626,7 @@
             var lastItem = listbox2.items().last();
             var previousToLastItem = lastItem.prev();
             listbox2.select(lastItem);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 1);
@@ -637,7 +638,7 @@
             listbox2.enable(item4, false);
             listbox2.enable(item5, false);
             listbox2.select(item3);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 1);
@@ -649,7 +650,7 @@
             var previousToLastItem = lastItem.prev();
             listbox2.enable(previousToLastItem, false);
             listbox2.select(lastItem);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 1);
@@ -658,7 +659,7 @@
 
         it("transferFrom action should clear the selection with multiple items", function() {
             listbox2.select(item1.add(item2));
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(listbox2.select().length, 0);
@@ -667,7 +668,7 @@
         it("transferFrom action should scroll to the selected item", function() {
             var scrollSpy = spy(listbox2, "_scrollIntoView");
             listbox2.select(item1);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(scrollSpy.calls("_scrollIntoView"), 1);
@@ -732,7 +733,7 @@
 
             clickTransferAllToButton(listbox1);
 
-            assert.equal(listbox1.items().length, 1)
+            assert.equal(listbox1.items().length, 1);
             equalListItems(listbox1.items()[0], item2);
         });
     });
@@ -905,7 +906,7 @@
 
             clickTransferAllFromButton(listbox1);
 
-            assert.equal(listbox2.items().length, 1)
+            assert.equal(listbox2.items().length, 1);
             equalListItems(listbox2.items()[0], item2);
         });
     });
@@ -930,6 +931,7 @@
             var tool = getToolElement(listbox, REMOVE);
 
             listbox.clearSelection();
+            listbox._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
         });
@@ -938,6 +940,7 @@
             var tool = getToolElement(listbox, REMOVE);
 
             listbox.select(item1);
+            listbox._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
@@ -945,6 +948,7 @@
         it("remove tool should be disabled after executing remove", function() {
             var tool = getToolElement(listbox, REMOVE);
             listbox.select(item1);
+            listbox._onSelect();
 
             clickRemoveButton(listbox);
 
@@ -955,7 +959,7 @@
             var tool = getToolElement(listbox, MOVE_UP);
 
             listbox.select(item1);
-
+            listbox._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
         });
 
@@ -963,14 +967,14 @@
             var tool = getToolElement(listbox, MOVE_UP);
 
             listbox.select(item2);
-
+            listbox._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
 
         it("moveup tool should be disabled after executing moveup on the second item", function() {
             var tool = getToolElement(listbox, MOVE_UP);
             listbox.select(item2);
-
+            listbox._onSelect();
             clickMoveUpButton(listbox);
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
@@ -980,7 +984,7 @@
             var tool = getToolElement(listbox, MOVE_DOWN);
 
             listbox.select(lastItem);
-
+            listbox._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
         });
 
@@ -988,14 +992,14 @@
             var tool = getToolElement(listbox, MOVE_DOWN);
 
             listbox.select(item2);
-
+            listbox._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
 
         it("movedown tool should be disabled after executing movedown before the last item", function() {
             var tool = getToolElement(listbox, MOVE_DOWN);
             listbox.select(item3);
-
+            listbox._onSelect();
             clickMoveDownButton(listbox);
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
@@ -1034,6 +1038,7 @@
             var tool = getToolElement(listbox1, TRANSFER_TO);
 
             listbox1.clearSelection();
+            listbox1._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
         });
@@ -1042,14 +1047,14 @@
             var tool = getToolElement(listbox1, TRANSFER_TO);
 
             listbox1.select(item1);
-
+            listbox1._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
 
         it("transferTo tool should be enabled after executing transferTo", function() {
             var tool = getToolElement(listbox1, TRANSFER_TO);
             listbox1.select(item1);
-
+            listbox1._onSelect();
             clickTransferToButton(listbox1);
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
@@ -1088,6 +1093,7 @@
             var tool = getToolElement(listbox1, TRANSFER_FROM);
 
             listbox2.clearSelection();
+            listbox2._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
         });
@@ -1096,14 +1102,14 @@
             var tool = getToolElement(listbox1, TRANSFER_FROM);
 
             listbox2.select(item1);
-
+            listbox2._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
 
         it("transferFrom tool should be enabled after executing transferFrom", function() {
             var tool = getToolElement(listbox1, TRANSFER_FROM);
             listbox2.select(item1);
-
+            listbox2._onSelect();
             clickTransferFromButton(listbox1);
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
@@ -1112,7 +1118,7 @@
         it("transferFrom tool should be disabled after deleting all items", function() {
             var tool = getToolElement(listbox1, TRANSFER_FROM);
             listbox2.select(listbox2.items());
-
+            listbox2._onSelect();
             clickRemoveButton(listbox2);
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
@@ -1167,6 +1173,7 @@
             var tool = getToolElement(listbox3, TRANSFER_FROM);
 
             listbox1.clearSelection();
+            listbox1._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), true);
         });
@@ -1175,7 +1182,7 @@
             var tool = getToolElement(listbox3, TRANSFER_FROM);
 
             listbox1.select(item1);
-
+            listbox1._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
     });
@@ -1235,6 +1242,7 @@
 
         it("transferFrom tool should be disabled in multiple listboxes when no item is selected", function() {
             listbox1.clearSelection();
+            listbox1._onSelect();
 
             assert.equal(getToolElement(listbox2, TRANSFER_FROM).hasClass(DISABLED_STATE_CLASS), true);
             assert.equal(getToolElement(listbox3, TRANSFER_FROM).hasClass(DISABLED_STATE_CLASS), true);
@@ -1242,6 +1250,7 @@
 
         it("transferFrom tool should be enabled in multiple listboxes when item is selected", function() {
             listbox1.select(listbox1.items().eq(0));
+            listbox1._onSelect();
 
             assert.equal(getToolElement(listbox2, TRANSFER_FROM).hasClass(DISABLED_STATE_CLASS), false);
             assert.equal(getToolElement(listbox3, TRANSFER_FROM).hasClass(DISABLED_STATE_CLASS), false);
@@ -1280,6 +1289,7 @@
             var tool = getToolElement(listbox1, TRANSFER_ALL_TO);
 
             listbox1.clearSelection();
+            listbox1._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
@@ -1288,6 +1298,7 @@
             var tool = getToolElement(listbox1, TRANSFER_ALL_TO);
 
             listbox1.select(item1);
+            listbox1._onSelect();
 
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
@@ -1341,7 +1352,7 @@
             var tool = getToolElement(listbox1, TRANSFER_ALL_FROM);
 
             listbox2.clearSelection();
-
+            listbox2._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
 
@@ -1349,7 +1360,7 @@
             var tool = getToolElement(listbox1, TRANSFER_ALL_FROM);
 
             listbox2.select(item1);
-
+            listbox2._onSelect();
             assert.equal(tool.hasClass(DISABLED_STATE_CLASS), false);
         });
 
@@ -1425,14 +1436,14 @@
 
         it("transferAllFrom tool should be disabled in multiple listboxes when no item is selected", function() {
             listbox1.clearSelection();
-
+            listbox1._onSelect();
             assert.equal(getToolElement(listbox2, TRANSFER_ALL_FROM).hasClass(DISABLED_STATE_CLASS), false);
             assert.equal(getToolElement(listbox3, TRANSFER_ALL_FROM).hasClass(DISABLED_STATE_CLASS), false);
         });
 
         it("transferAllFrom tool should be enabled in multiple listboxes when item is selected", function() {
             listbox1.select(listbox1.items().eq(0));
-
+            listbox1._onSelect();
             assert.equal(getToolElement(listbox2, TRANSFER_ALL_FROM).hasClass(DISABLED_STATE_CLASS), false);
             assert.equal(getToolElement(listbox3, TRANSFER_ALL_FROM).hasClass(DISABLED_STATE_CLASS), false);
         });

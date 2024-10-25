@@ -1,8 +1,8 @@
 ---
 title: Set Different Colors Dynamically for Markers Based on Field in Map
-description: An example on how to dynamically change the colors of the markers based on the field value of the Kendo UI Map.
+description: Learn how to dynamically change the colors of the markers based on the field value of the Kendo UI Map.
 type: how-to
-page_title: Set Different Colors for Markers Based on Field Value | Kendo UI Map for jQuery
+page_title: Set Different Colors for Markers Based on Field Value - Kendo UI Map for jQuery
 slug: map-marker-color-from-field
 tags: map, markers, marker color
 ticketid: 1115002
@@ -15,7 +15,7 @@ component: map
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Map</td>
+  <td>Progress® Kendo UI® Map for jQuery</td>
  </tr>
  <tr>
   <td>Progress Kendo UI</td>  

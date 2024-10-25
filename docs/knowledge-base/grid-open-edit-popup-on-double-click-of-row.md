@@ -1,8 +1,8 @@
 ---
 title: Open the Popup Editor on Double Click of a Grid Row
-description: An example on how to open the popup editor of a Kendo UI Grid by double-clicking a row.
+description: Learn how to open the popup editor of a Kendo UI Grid by double-clicking a row.
 type: how-to
-page_title: Open the Popup Editor on Double Click of a Row | Kendo UI Grid for jQuery
+page_title: Open the Popup Editor on Double Click of a Row - Kendo UI for jQuery Data Grid
 slug: grid-open-edit-popup-on-double-click-of-row
 tags: grid, editor, popup, double, click, row, on, of, open,edit
 res_type: kb
@@ -14,11 +14,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with version 2017.3.1026</td>
+  <td>Product Version</td>
+  <td>Created with version 2020.3.1021</td>
  </tr>
 </table>
 
@@ -87,7 +87,7 @@ How can I open the popup editor when I double-click a Grid row?
               { field:"ProductName", title: "Product Name" },
               { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "120px" },
               { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-              { field: "Discontinued", width: "120px", editor: customBoolEditor },],
+              { field: "Discontinued", width: "120px" }],
             editable: "popup",
             dataBound: onDataBound
           });
@@ -96,15 +96,11 @@ How can I open the popup editor when I double-click a Grid row?
         function onDataBound() {
           var grid = this;
 
+          grid.element.off('dblclick');
+          
           grid.element.on('dblclick','tbody tr[data-uid]',function (e) {
             grid.editRow($(e.target).closest('tr'));
           })
-        }
-
-        function customBoolEditor(container, options) {
-          var guid = kendo.guid();
-          $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
         }
       </script>
     </div>

@@ -354,9 +354,18 @@
                 sort: { field: "foo", dir: "asc" }
             });
 
-            assert.isOk($.isArray(dataSource._sort));
+            assert.isOk(Array.isArray(dataSource._sort));
             assert.equal(dataSource._sort[0].field, "foo");
             assert.equal(dataSource._sort[0].dir, "asc");
+        });
+
+        it("sort settings are stored as descriptors", function() {
+            var dataSource = new DataSource({
+                data: [],
+                sort: { field: "foo", dir: "asc" }
+            });
+
+            assert.equal(dataSource._sortFields["foo"].dir, "asc");
         });
 
         it("Data is converted to ObservableArray", function() {

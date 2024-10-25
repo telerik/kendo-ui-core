@@ -61,7 +61,7 @@
                 actions: ["refresh"]
             });
 
-            dialog.wrapper.find(".k-i-reload").trigger("dblclick");
+            dialog.wrapper.find(".k-i-arrow-rotate-cw").trigger("dblclick");
 
             assert.isOk(!dialog.options.isMaximized);
         });
@@ -114,6 +114,21 @@
             assert.equal(initialWidth, dialog.wrapper.width());
             assert.equal(initialHeight, dialog.wrapper.height());
         });
+
+        it("closing an iframe Window removes focused state", function() {
+            var dialog = createWindow({
+                iframe: true,
+                modal: true,
+                visible: false
+            });
+            var dialogWrapper = dialog.wrapper;
+
+            dialog.open();
+            dialog.close();
+
+            assert.isOk(!dialogWrapper.hasClass("k-focus"));
+            assert.isOk(document.activeElement !== dialogWrapper);
+        });
     });
 
     describe("resizing", function() {
@@ -141,24 +156,24 @@
         it("resizing window updates widget options", function() {
             resize("se", 100, 100);
 
-            assert.equal(dialog.options.width, dialog.wrapper.width() + "px");
-            assert.equal(dialog.options.height, dialog.wrapper.height() + "px");
+            assert.equal(dialog.options.width, dialog.wrapper.outerWidth() + "px");
+            assert.equal(dialog.options.height, dialog.wrapper.outerHeight() + "px");
         });
 
         it("resizing window horizontally does not update vertical positioning", function() {
-            var initialWidth = dialog.wrapper.width();
+            var initialHeight = dialog.wrapper.outerHeight();
 
-            resize("w", 0, 100);
+            resize("w", 100, 0);
 
-            assert.equal(dialog.wrapper.width(), initialWidth);
+            assert.equal(dialog.wrapper.outerHeight(), initialHeight);
         });
 
         it("resizing window vertically does not update horizontal positioning", function() {
-            var initialHeight = dialog.wrapper.height();
+            var initialWidth = dialog.wrapper.outerWidth();
 
-            resize("n", 100, 0);
+            resize("n", 0, 100);
 
-            assert.equal(dialog.wrapper.height(), initialHeight);
+            assert.equal(dialog.wrapper.outerWidth(), initialWidth);
         });
     });
 
@@ -183,7 +198,7 @@
 
             dialog.wrapper.find(".k-window-titlebar").trigger("mousedown");
 
-            assert.isOk($("#ddl-list").is(":hidden"));
+            assert.isFalse(ddl.popup.visible());
         });
     });
 })();

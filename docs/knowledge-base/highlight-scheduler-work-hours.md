@@ -1,8 +1,8 @@
 ---
 title: Highlight Scheduler Work Hours
-description: An example on how to highlight work hours in the Kendo UI Scheduler.
+description: Learn how to highlight work hours in the Kendo UI Scheduler.
 type: how-to
-page_title: Highlight Work Hours | Kendo UI Scheduler for jQuery
+page_title: Highlight Work Hours - Kendo UI Scheduler for jQuery
 slug: scheduler-highlight-work-hours
 tags: highlight, work, hours, scheduler
 res_type: kb
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TabStrip PHP Class
+page_title: Overview - TabStrip PHP Class
 description: "Get started with the TabStrip PHP class in Kendo UI."
 slug: overview_tabstrip_uiforphp
 position: 1

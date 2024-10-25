@@ -16,7 +16,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-collapse-prev").trigger("click");
 
             assert.isOk(triggered);
             assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -30,7 +30,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-i-caret-alt-left").trigger("click");
 
             assert.isOk(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
         });
@@ -46,7 +46,7 @@
                 called = pane;
             };
 
-            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+            splitter.dom.find(".k-collapse-prev").trigger("click");
 
             assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
         });
@@ -99,7 +99,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.dom.find(".k-expand-prev").trigger("click");
 
             assert.isOk(triggered);
             assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -113,7 +113,7 @@
                 }
             });
 
-            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.dom.find(".k-expand-prev").trigger("click");
 
             assert.isOk(splitter.dom.find(".k-pane:first").data("pane").collapsed);
         });
@@ -128,7 +128,7 @@
                 called = pane;
             };
 
-            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.dom.find(".k-expand-prev").trigger("click");
 
             assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
         });
@@ -172,7 +172,7 @@
 
             splitter.object.collapse = function(pane) {
                 called = pane;
-            }
+            };
 
             splitter.dom.find(".k-splitbar").trigger("dblclick");
 
@@ -189,7 +189,7 @@
 
             splitter.object.expand(".k-pane:first");
 
-            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"))
+            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
         });
 
         it("expanding a non-resizable pane does not modify more splitbars than necessary", function() {
@@ -242,7 +242,7 @@
             splitter.object.collapse(".k-pane:first");
 
             assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-arrow-60-left").length);
+            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-caret-alt-left").length);
         });
 
         it("collapsing pane disables collapsing of previous pane", function() {
@@ -253,7 +253,7 @@
             splitter.object.collapse(".k-pane:last");
 
             assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-arrow-60-right").length);
+            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-caret-alt-right").length);
         });
 
         it("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
@@ -266,8 +266,8 @@
 
             splitter.object.collapse(".k-pane:last");
 
-            assert.equal(splitter.dom.find(".k-pane:first").width(), splitter.dom.width() - 7);
-            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 7);
+            assert.equal(splitter.dom.find(".k-pane:first").width(), splitter.dom.width() - 12);
+            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 12);
         });
 
         it("collapsing the last fluid pane in vertical splitter distributes remaining size to neighbour pane", function() {
@@ -281,8 +281,8 @@
 
             splitter.object.collapse(".k-pane:last");
 
-            assert.equal(splitter.dom.find(".k-pane:first").height(), splitter.dom.height() - 7);
-            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetTop, splitter.dom.height() - 7);
+            assert.equal(splitter.dom.find(".k-pane:first").height(), splitter.dom.height() - 12);
+            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetTop, splitter.dom.height() - 12);
         });
 
         it("collapsing a pane adds an overflow:hidden style to it", function() {
@@ -311,7 +311,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left")
+            splitter.dom.find(".k-i-caret-alt-left")
                 .trigger("mousedown")
                 .trigger("mouseup")
                 .trigger("click");
@@ -324,8 +324,8 @@
                 panes: [{ collapsible: true }, {}]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left")
-                .trigger("mousedown")
+            splitter.dom.find(".k-i-caret-alt-left")
+                .trigger("mousedown");
 
             splitter.dom.find(".k-overlay:first")
                 .trigger("mouseup")
@@ -342,11 +342,11 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-up").click();
+            splitter.dom.find(".k-i-caret-alt-up").click();
 
-            splitter.dom.find(".k-i-arrow-60-down").click();
+            splitter.dom.find(".k-i-caret-alt-down").click();
 
-            assert.equal(splitter.dom.find(".k-pane:first").width(), 100);
+            assert.equal(splitter.dom.find(".k-pane:first").width(), 96);
         });
 
         it("panes can be collapsed after resizing", function() {
@@ -366,7 +366,7 @@
                 keyCode: keys.ENTER
             });
 
-            splitbar.find(".k-i-arrow-60-left").click();
+            splitbar.find(".k-collapse-prev").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 0);
         });
@@ -379,7 +379,7 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").click();
+            splitter.dom.find(".k-collapse-prev").click();
 
             assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
         });
@@ -395,7 +395,7 @@
             assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
         });
 
-        it("collapsible pane adds k-state-collapsed class when collapsed", function() {
+        it("collapsible pane adds k-collapsed class when collapsed", function() {
             splitter = create({
                 panes: [
                     { collapsible: true },
@@ -403,9 +403,9 @@
                 ]
             });
 
-            splitter.dom.find(".k-i-arrow-60-left").click();
+            splitter.dom.find(".k-collapse-prev").click();
 
-            assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-state-collapsed"));
+            assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-collapsed"));
         });
 
     });

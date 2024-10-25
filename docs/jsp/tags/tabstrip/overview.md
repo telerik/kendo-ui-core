@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TabStrip JSP Tag
+page_title: Overview - TabStrip JSP Tag
 description: "Get started with the TabStrip JSP tag in Kendo UI."
 slug: overview_tabstrip_uiforjsp
 position: 1

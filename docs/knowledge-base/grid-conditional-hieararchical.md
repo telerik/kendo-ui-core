@@ -1,8 +1,8 @@
 ---
 title: Conditionally Hide Hierarchical Grids
-description: An example on how to conditionally show a hierarchical Kendo UI Grid.
+description: Learn how to conditionally show a hierarchical Kendo UI Grid.
 type: how-to
-page_title: Conditionally Hide Hierarchical Grids | Kendo UI Grid for jQuery
+page_title: Conditionally Hide Hierarchical Grids - Kendo UI for jQuery Data Grid
 slug: grid-conditional-hieararchical
 tags: grid, hierarchy, hiararchical, conditonal, hide, show
 ticketid: 1153473
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

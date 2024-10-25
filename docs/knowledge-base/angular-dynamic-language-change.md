@@ -1,7 +1,7 @@
 ---
 title: Dynamically Change Languages in the Grid in AngularJS
-page_title: Change Languages Dynamically in the Grid in AngularJS | Kendo UI Grid for jQuery
-description: "An example on how to dynamically change the language of the Kendo UI Grid in an AngularJS application."
+page_title: Change Languages Dynamically When Using AngularJS - jQuery Data Grid
+description: "Learn how to dynamically change the language of the Kendo UI for jQuery Data Grid in an AngularJS application."
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-dynamic-language-change
 slug: howto_dynamic_language_change
 tags: grid, change, languages, dynamically, angularjs
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress AngularJS Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>
@@ -27,6 +27,8 @@ res_type: kb
  </tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+
 ## Description
 
 How can I dynamically change the language of the Kendo UI Grid in AngularJS applications?
@@ -35,13 +37,18 @@ How can I dynamically change the language of the Kendo UI Grid in AngularJS appl
 
 The following example represents the AngularJS version of [this demo](https://demos.telerik.com/kendo-ui/grid/localization).
 
+> The example loads Kendo UI 2023.3.1010 version.
+
 ```dojo
-<div id="example" ng-app="KendoDemos">
+  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+  
+  <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
         <kendo-grid k-scope-field="grid" options="mainGridOptions" k-rebind="language"></kendo-grid>
         <kendo-dropdownlist k-scope-field="dropdownlist" k-options="dropDownListOptions"></kendo-dropdownlist>
     </div>
-</div>
+  </div>
 
 <script>
     angular.module("KendoDemos", [ "kendo.directives" ])
@@ -112,4 +119,7 @@ The following example represents the AngularJS version of [this demo](https://de
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

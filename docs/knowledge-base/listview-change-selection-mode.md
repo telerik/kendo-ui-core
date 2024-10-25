@@ -1,8 +1,8 @@
 ---
 title: Change Selection Mode in ListView
-description: An example on how to change the selection mode of the Kendo UI ListView.
+description: Learn how to change the selection mode of the Kendo UI ListView.
 type: how-to
-page_title: Switch between Single and Multiple Selection | Kendo UI ListView for jQuery
+page_title: Switch between Single and Multiple Selection - Kendo UI ListView for jQuery
 slug: listview-change-selection-mode
 tags: listview, select, mode, single, multiple, selection, change, switch, dynamic,
 res_type: kb
@@ -14,10 +14,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView</td>
+  <td>Progress® Kendo UI® ListView for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created version 2018.1.117</td>
  </tr>
 </table>
@@ -138,7 +138,7 @@ How can I allow the user to change the selection mode in the ListView based on a
         cursor: pointer;
     }
 
-    .k-listview>.k-state-selected {
+    .k-listview>.k-selected {
         background-color: #78c8a0;
     }
 </style>

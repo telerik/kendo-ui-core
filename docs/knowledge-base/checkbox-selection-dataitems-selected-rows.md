@@ -1,8 +1,8 @@
 ---
 title: Get the Selected Grid Rows Data
-description: An example on how to get the dataItem for every selected row by using the change event of the Kendo UI Grid.
+description: Learn how to get the dataItem for every selected row by using the change event of the Kendo UI Grid.
 type: how-to
-page_title: Get the DataItems of the Selected Rows | Kendo UI Grid for jQuery
+page_title: Get the DataItems of the Selected Rows - Kendo UI for jQuery Data Grid
 slug: checkbox-selection-dataitems-selected-rows
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716
@@ -15,17 +15,19 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
 
 ## Description
 
-How can I get all the data items of the selected rows when using the selectable column in the Kendo UI Grid?
+How can I create a shopping list by using the selected Grid rows and a Kendo UI for jQuery ListBox?
+
+> The following example obtains the selected rows of the current page only.
 
 ## Solution
 
@@ -34,73 +36,177 @@ To get the `dataItem` for each selected row:
 1. In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event handler, get and save the rows in a variable by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method.
 1. Loop through the rows by using the [`each`](https://api.jquery.com/each/) jQuery method.
 1. Get every row data by using the [`dataItem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
+1. Push the `dataItem` to an array.
+1. Add the selected items to the ListBox component by using the [`data`](/api/javascript/data/datasource/methods/data) method.
 
 ```dojo
-<div id="example">
-    <div id="grid"></div>
+    <div id="example">
+      <div id="grid"></div>
+      <select id="listBox" style="width:856px;"></select>
 
-    <script>
+      <script>
         function onChange(e) {
-            var rows = e.sender.select();
-            rows.each(function(e) {
-                var grid = $("#grid").data("kendoGrid");
-                var dataItem = grid.dataItem(this);
+          var rows = e.sender.select(),
+              items = [];
 
-                console.log(dataItem);
-            })
+          rows.each(function(e) {
+            var grid = $("#grid").data("kendoGrid");
+            var dataItem = grid.dataItem(this);
+            items.push(dataItem);
+          });
+
+          var listBox = $("#listBox").data("kendoListBox");
+          listBox.dataSource.data(items);
         };
 
         $(document).ready(function() {
-            $("#grid").kendoGrid({
-                dataSource: {
-                    pageSize: 10,
-                    transport: {
-                        read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/Products",
-                            dataType: "jsonp"
-                        }
-                    },
-                    schema: {
-                        model: {
-                            id: "ProductID"
-                        }
-                    }
-                },
-                pageable: true,
-                scrollable: false,
-                persistSelection: true,
-                sortable: true,
-                change: onChange,
-                columns: [{
-                        selectable: true,
-                        width: "50px"
-                    },
-                    {
+          $("#grid").kendoGrid({
+            dataSource: {
+              pageSize: 10,
+              transport: {
+                read: {
+                  url: "https://demos.telerik.com/kendo-ui/service/Products",
+                  dataType: "jsonp"
+                }
+              },
+              schema: {
+                model: {
+                  id: "ProductID"
+                }
+              }
+            },
+            pageable: true,
+            scrollable: false,
+            persistSelection: true,
+            sortable: true,
+            change: onChange,
+            columns: [{
+              selectable: true,
+              width: "50px"
+            },
+                      {
                         field: "ProductName",
                         title: "Product Name"
-                    },
-                    {
+                      },
+                      {
                         field: "UnitPrice",
                         title: "Unit Price",
                         format: "{0:c}"
-                    },
-                    {
+                      },
+                      {
                         field: "UnitsInStock",
                         title: "Units In Stock"
-                    },
-                    {
+                      },
+                      {
                         field: "Discontinued"
-                    }
-                ]
-            });
+                      }
+                     ]
+          });
+
+          $("#listBox").kendoListBox({
+            dataSource: {
+              data: []
+            },
+            template: "<div>#:ProductName# - $#:UnitPrice#</div>"
+          });
         });
-    </script>
-</div>
+      </script>
+    </div>
 ```
 
-## Notes
+### Notes
 
 The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 release.
+
+## Get the Selected Rows Data Across All Grid Pages
+
+1. Get the `id` field values of the selected rows through the [`selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method.
+2. Traverse the Grid data to match the data items holding these `id` values.
+3. Push the `dataItems` of the selected rows to an array.
+4. Add the selected items to the ListBox component by using the [`data`](/api/javascript/data/datasource/methods/data) method.
+
+```dojo
+    <div id="example">
+      <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" onclick="getSelectedRowsData()"><span class="k-button-text">Update List</span></button>
+      <div id="grid"></div>
+      <h4>Shopping List</h4>
+      <select id="listBox" style="width:856px;"></select>
+
+      <script>
+        $(document).ready(function() {
+          $("#grid").kendoGrid({
+            dataSource: {
+              pageSize: 10,
+              transport: {
+                read: {
+                  url: "https://demos.telerik.com/kendo-ui/service/Products",
+                  dataType: "jsonp"
+                }
+              },
+              schema: {
+                model: {
+                  id: "ProductID"
+                }
+              }
+            },
+            pageable: true,
+            scrollable: false,
+            persistSelection: true,
+            sortable: true,
+            columns: [
+              {
+                selectable: true,
+                width: "50px"
+              },
+              {
+                field: "ProductName",
+                title: "Product Name"
+              },
+              {
+                field: "UnitPrice",
+                title: "Unit Price",
+                format: "{0:c}"
+              },
+              {
+                field: "UnitsInStock",
+                title: "Units In Stock"
+              },
+              {
+                field: "Discontinued"
+              }
+            ]
+          });
+
+          $("#listBox").kendoListBox({
+            dataSource: {
+              data: []
+            },
+            template: "<div>#:ProductName# - $#:UnitPrice#</div>"
+          });
+        });
+
+        function getSelectedRowsData() {
+          //Get the id field values of the selected rows
+          var keyNames = $("#grid").data("kendoGrid").selectedKeyNames();
+          // convert string values to number
+          var ids = keyNames.map(function (x) {
+            return parseInt(x, 10);
+          });
+          var gridData = $("#grid").data("kendoGrid").dataSource.data();
+          var selected =[];
+          ids.forEach(function(number) {
+            gridData.forEach(function(dataItem) {
+              if(number === dataItem.id) {
+                selected.push(dataItem)
+              }
+            })
+          });
+          var listBox = $("#listBox").data("kendoListBox");
+          listBox.dataSource.data(selected);
+        }
+      </script>
+    </div>
+```
 
 ## See Also
 

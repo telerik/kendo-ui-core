@@ -1,12 +1,12 @@
 ---
 title: Overview
-page_title: Internationaization Overview | Kendo UI Globalization
+page_title: Internationaization Overview - Kendo UI Globalization
 description: "Learn how to adapt the Kendo UI for jQuery widgets to different cultures locales, and format and parse number or date objects."
 slug: overview_kendoui_intl
 position: 1
 ---
 
-# Internationalization Overview
+# {{ site.product }} Internationalization Overview
 
 The internationalization approaches in Kendo UI for jQuery apply the desired cultures by providing services for defining the desired cultures and parsing and formatting of dates and numbers.
 
@@ -40,12 +40,12 @@ To define the current culture:
 1. Add the required culture script to the page, as demonstrated in the example below.
 
     ```
-        <script src="jquery.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="kendo.all.min.js"></script>
         <script src="kendo.culture.en-GB.js"></script>
 
         <!-- or when using the Kendo UI CDN -->
-        <script src="https://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
     ```

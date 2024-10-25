@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PDFViewer PHP Class
+page_title: Overview - PDFViewer PHP Class
 description: "Get started with the PDFViewer PHP class in Kendo UI."
 slug: overview_pdfviewer_uiforphp
 position: 1

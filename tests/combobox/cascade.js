@@ -1467,5 +1467,140 @@
 
             assert.equal(child.data("kendoComboBox").text(), "X5");
         });
+
+        it("change event is triggered for all the comboboxes once the valie is manually changed", function(done) {
+            var comboChangeCounter = 0;
+            var combo = new ComboBox(parent, {
+                optionLabel: "Select",
+                dataValueField: "id",
+                dataTextField: "text2",
+                index: 0,
+                change: function() {
+                    comboChangeCounter++;
+                },
+                dataSource: {
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.success([
+                                    { text: "item1", id: "1", text2: "i" },
+                                    { text: "item3", id: "2", text2: "i" }
+                                ]);
+                            });
+                        }
+                    }
+                },
+                autoBind: false
+            });
+            var combo2ChangeCounter = 0;
+            var combo2 = new ComboBox(child.attr("id", "child"), {
+                optionLabel: "Select",
+                dataValueField: "text",
+                dataTextField: "text",
+                index: 0,
+                change: function() {
+                    combo2ChangeCounter ++;
+                },
+                dataSource: {
+                    serverFiltering: true,
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.success([
+                                    { text: "item1", id: "1" },
+                                    { text: "item2", id: "1" },
+                                    { text: "item3", id: "2" },
+                                    { text: "item4", id: "2" }
+                                ]);
+                            });
+                        }
+                    }
+                },
+                cascadeFrom: "parent",
+                autoBind: false
+            });
+
+            var combo3ChangeCounter = 0;
+            var combo3 = new ComboBox(third, {
+                optionLabel: "Select",
+                dataValueField: "text",
+                dataTextField: "text",
+                index: 0,
+                change: function() {
+                    combo3ChangeCounter++;
+                },
+                dataSource: {
+                    serverFiltering: true,
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.success([
+                                    { text: "item1", id: "1" },
+                                    { text: "item2", id: "1" },
+                                    { text: "item3", id: "2" },
+                                    { text: "item4", id: "2" }
+                                ]);
+                            });
+                        }
+                    }
+                },
+                cascadeFrom: "child",
+                autoBind: false
+            });
+
+
+            setTimeout(function() {
+                combo.open();
+                setTimeout(function() {
+                    comboChangeCounter = 0;
+                    combo2ChangeCounter = 0;
+                    combo3ChangeCounter = 0;
+                    combo.ul.children().eq(1).trigger('click');
+                    setTimeout(function() {
+                        assert.equal(comboChangeCounter, 1);
+                        assert.equal(combo2ChangeCounter, 1);
+                        assert.equal(combo3ChangeCounter, 1);
+                          done();
+
+                    }, 100);
+                }, 100);
+            }, 100);
+        });
+
+        it("Parent with custom value activates child", function() {
+            parent.kendoComboBox({
+                dataTextField: "parentID",
+                dataValueField: "parentID",
+                cascadeOnCustomValue: true,
+                dataSource: [
+                    { parentID: 1 },
+                    { parentID: 2 }
+                ]
+            });
+
+            child.kendoComboBox({
+                cascadeFrom: "parent", //id of the parent
+                dataTextField: "childID",
+                dataValueField: "childID",
+                dataSource: [
+                    { parentID: 1, childID: "1" },
+                    { parentID: 2, childID: "2" },
+                    { parentID: 1, childID: "3" },
+                    { parentID: 2, childID: "4" }
+                ]
+            });
+
+            var parentCB = parent.data("kendoComboBox"),
+                childCB = child.data("kendoComboBox"),
+                ds = childCB.dataSource;
+
+            parentCB.select(0);
+            childCB.select(0);
+
+            parentCB.value("custom");
+
+            assert.equal(childCB.selectedIndex, -1);
+            assert.equal(childCB.element.attr("disabled"), undefined);
+        });
     });
 }());

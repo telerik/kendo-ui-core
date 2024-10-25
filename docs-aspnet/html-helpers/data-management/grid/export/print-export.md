@@ -1,7 +1,7 @@
 ---
 title: Printing
 page_title: Printing
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} allowing you to select only the Grid content on a page for printing."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} allowing you to select only the Grid content on a page for printing."
 slug: printing_gridhelper_aspnetcore
 position: 4
 ---
@@ -26,6 +26,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 * If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug htmlhelpers_grid_aspnetcore_scrolling %}). Because the browser does not relate the two Grid tables, it will not repeat the header row on top of every printed page. The following example demonstrates how to address this issue by cloning the header table row into the data table.
 * When you print a Grid with locked (frozen) columns, it is possible that the resulting columns or rows get misaligned or that the overall layout gets broken. In such cases, use a separate print-friendly Grid instance with no frozen columns.
 
+    ```HtmlHelper
         <button type="button" class="k-button" id="printGrid">Print Grid</button>
         @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
             .Name("grid")
@@ -53,7 +54,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
                     '<head>' +
                     '<meta charset="utf-8" />' +
                     '<title>Kendo UI Grid</title>' +
-                    '<link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
+                    '<link href="https://kendo.cdn.telerik.com/themes/' + {{ site.themesCdnVersion }} + '/default/default-main.css" rel="stylesheet" /> ' +
                     '<style>' +
                     'html { font: 11pt sans-serif; }' +
                     '.k-grid { border-top-width: 0; }' +
@@ -99,10 +100,85 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
                    printGrid();
                });
         </script>
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <button type="button" class="k-button" id="printGrid">Print Grid</button>
+    <kendo-grid name="grid">
+        <columns>
+            <column field="OrderID"></column>
+            <column field="ShipCountry"></column>
+        </columns>
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Read_Orders","Home")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+    <script>
+        function printGrid() {
+            var gridElement = $('#grid'),
+                printableContent = '',
+                win = window.open('', '', 'width=800, height=500, resizable=1, scrollbars=1'),
+                doc = win.document.open();
+
+            var htmlStart =
+                '<!DOCTYPE html>' +
+                '<html>' +
+                '<head>' +
+                '<meta charset="utf-8" />' +
+                '<title>Kendo UI Grid</title>' +
+                '<style>' +
+                'html { font: 11pt sans-serif; }' +
+                '.k-grid { border-top-width: 0; }' +
+                '.k-grid, .k-grid-content { height: auto !important; }' +
+                '.k-grid-content { overflow: visible !important; }' +
+                'div.k-grid table { table-layout: auto; width: 100% !important; }' +
+                '.k-grid .k-grid-header th { border-top: 1px solid; }' +
+                '.k-grouping-header, .k-grid-toolbar, .k-grid-pager > .k-link { display: none; }' +
+                // '.k-grid-pager { display: none; }' + // optional: hide the whole pager
+                '</style>' +
+                '</head>' +
+                '<body>';
+
+            var htmlEnd =
+                '</body>' +
+                '</html>';
+
+            var gridHeader = gridElement.children('.k-grid-header');
+            if (gridHeader[0]) {
+                var thead = gridHeader.find('thead').clone().addClass('k-grid-header');
+                printableContent = gridElement
+                    .clone()
+                    .children('.k-grid-header').remove()
+                    .end()
+                    .children('.k-grid-content')
+                    .find('table')
+                    .first()
+                    .children('tbody').before(thead)
+                    .end()
+                    .end()
+                    .end()
+                    .end()[0].outerHTML;
+            } else {
+                printableContent = gridElement.clone()[0].outerHTML;
+            }
+
+            doc.write(htmlStart + printableContent + htmlEnd);
+            doc.close();
+            win.print();
+
+        }
+           $('#printGrid').click(function () {
+               printGrid();
+           });
+    </script>
+    ```
+    {% endif %}
 
 ## See Also
 
 * [Excel Export by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/excel-export)
 * [Copying to Excel by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/copy-to-excel)
-* [PDF Export of the Grid HtmlHelper for {{ site.framework }}]({% slug pdfexport_gridhelper_aspnetcore %})
+* [PDF Export of the Grid component for {{ site.framework }}]({% slug pdfexport_gridhelper_aspnetcore %})
 * [Server-Side API](/api/grid)

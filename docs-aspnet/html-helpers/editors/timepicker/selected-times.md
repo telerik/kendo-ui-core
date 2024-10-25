@@ -3,7 +3,7 @@ title: Selected Times
 page_title: Selected Times
 description: "Get started with the {{ site.product }} TimePicker and learn how to set selected times and time ranges in the TimePicker."
 slug: htmlhelpers_timepicker_aspnetcore_selectedtimes
-position: 2
+position: 3
 ---
 
 # Selected Times
@@ -14,7 +14,7 @@ For a complete example on how to select ranges using TimePicker, refer to the [d
 
 The following example demonstrates how to render a TimePicker with an initially selected time and defined min and max times. The TimePicker sets the value only if the entered time is within the defined range and is valid.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().TimePicker()
         .Name("timepicker")
         .Value("8:00 AM")
@@ -22,6 +22,14 @@ The following example demonstrates how to render a TimePicker with an initially 
         .Max("5:00 PM")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timePicker"
+                  value="new DateTime(1900, 1, 1, 8, 00, 0)"
+                  min="new DateTime(1900, 1, 1, 8, 00, 0)"
+                  max="new DateTime(1900, 1, 1, 17, 00, 0)" />
+```
+{% endif %}
 
 ## See Also
 

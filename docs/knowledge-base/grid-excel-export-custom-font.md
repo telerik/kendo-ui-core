@@ -1,8 +1,8 @@
 ---
 title: Customize Font Family and Font Size in Grid When Exporting to Excel
-description: An example on how to set a custom font for the Excel export of the Kendo UI Grid.
+description: Learn how to set a custom font for the Excel export of the Kendo UI Grid.
 type: how-to
-page_title: Set Custom Font Family and Font Size When Exporting to Excel | Kendo UI Grid for jQuery
+page_title: Set Custom Font Family and Font Size When Exporting to Excel - Kendo UI for jQuery Data Grid
 slug: grid-excel-export-custom-font
 tags: excel, export, grid, font, font-family, row, font-size
 ticketid: 1137653
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 
@@ -28,7 +28,7 @@ How can I change the font size and font family of the Excel export in the Grid?
 
 1. Loop over the Grid cells and set each of them.
 1. Add a handler to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event of the Grid to loop over the workbook.
-1. If the font size becomes too large for the row, increase the row [`height`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.height).
+1. If the font size becomes too large for the row, increase the row [`height`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.height). Note that [`fontSize`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.fontsize) is measured in pixels.
 1. To change the font name, utilize the [`fontName`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.fontname) property of the sheet row cells.
 
 ```
@@ -44,7 +44,7 @@ excelExport: function(e) {
 ```
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 
     <div id="grid" ></div>

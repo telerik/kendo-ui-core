@@ -7,7 +7,7 @@
 
             window.maskedtextboxChange = function() {
                 assert.isOk(true);
-            }
+            };
         });
         afterEach(function() {
 
@@ -96,7 +96,7 @@
                 mask: "(00)"
             });
 
-            observable.set("value", "(42)")
+            observable.set("value", "(42)");
             assert.equal(dom.data("kendoMaskedTextBox").value(), "(42)");
         });
 
@@ -301,7 +301,15 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.val(), "123")
+            assert.equal(dom.val(), "123");
+        });
+
+        it("creates label", function() {
+            dom = $('<input data-role="maskedtextbox" data-label="test"/>');
+
+            kendo.bind(dom);
+
+            assert.equal(dom.data("kendoMaskedTextBox")._inputLabel[0].innerHTML, "test");
         });
     });
 }());

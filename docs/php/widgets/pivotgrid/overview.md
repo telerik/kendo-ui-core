@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PivotGrid PHP Class
+page_title: Overview - PivotGrid PHP Class
 description: "Get started with the PivotGrid PHP class in Kendo UI."
 slug: overview_pivotgrid_uiforphp
 position: 1
@@ -9,6 +9,8 @@ position: 1
 # PivotGrid PHP Class Overview
 
 The Kendo UI PivotGrid for PHP is a server-side wrapper for the [Kendo UI PivotGrid](/api/javascript/ui/pivotgrid) widget.
+
+The Kendo UI PivotGrid for PHP supports Ajax data-binding to HTTP accessible OLAP cube as well as local flat data binding.
 
 For more information on the OLAP concept supported by the Kendo UI PivotGrid for PHP, refer to the articles about [OLAP fundamentals]({% slug fundamentals_pivotgrid_widget %}), [setup an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}), or use the Kendo UI OLAP service at `https://demos.telerik.com/olap/msmdpump.dll`. Note that the service URL does not open directly in the browser.
 

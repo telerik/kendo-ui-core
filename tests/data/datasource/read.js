@@ -751,7 +751,7 @@
                 }
             });
 
-            assert.isOk($.isFunction(dataSource.read().then));
+            assert.isOk(kendo.isFunction(dataSource.read().then));
         });
 
         it("read resolves promise upon success", function() {
@@ -881,7 +881,7 @@
                 }
             });
 
-            dataSource.read()
+            dataSource.read();
 
             assert.equal(dataSource._pageSize, 4);
         });

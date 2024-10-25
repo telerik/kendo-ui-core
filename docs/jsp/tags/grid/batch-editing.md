@@ -1,6 +1,6 @@
 ---
 title: Batch Editing
-page_title: Batch Editing | Grid JSP Tag
+page_title: Batch Editing - Grid JSP Tag
 description: "Apply cell editing and batch updates to the Grid JSP tag in Kendo UI."
 slug: batchediting_grid_uiforjsp
 position: 2

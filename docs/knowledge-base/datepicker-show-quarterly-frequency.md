@@ -1,8 +1,8 @@
 ---
 title: Show Quarterly Frequency
-description: An example on how to show a quarterly frequency in the Kendo UI DatePicker.
+description: Learn how to show a quarterly frequency in the Kendo UI DatePicker.
 type: how-to
-page_title: Display Quarterly Frequency | Kendo UI DatePicker for jQuery
+page_title: Display Quarterly Frequency - Kendo UI DatePicker for jQuery
 slug: datepicker-show-quarterly-frequency
 tags: datepicker, quarterly, frequency
 ticketid: 1153900
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>DatePicker for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® DatePicker for jQuery</td>
 	</tr>
 </table>
 
@@ -120,7 +120,7 @@ How can I show a quarterly frequency (March, June, September, and December) in t
 
 	function disableDates(calendar) {
 		calendar.element.find("td").not(":eq(2)").not(":eq(4)").not(":eq(6)").not(":eq(8)")
-			.addClass("k-state-disabled")
+			.addClass("k-disabled")
 			.click(function(e) {
 				e.stopImmediatePropagation();
 			});

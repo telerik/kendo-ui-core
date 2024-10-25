@@ -2,7 +2,7 @@
 title: Show Series Label in the Top Left Corner of the Kendo UI Column Chart
 description: Learn how to set custom position of the Series Labels in the Kendo UI Column Chart.
 type: how-to
-page_title: Show Series Label in Custom Position | Kendo UI Chart
+page_title: Show Series Label in Custom Position - Kendo UI Chart
 slug: chart-series-label-custom-position
 position: 
 tags: column, custom, position, label, chart, top left, corner, series.labels, series
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Chart for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Chart for jQuery</td>
 		</tr>
 	</tbody>
 </table>

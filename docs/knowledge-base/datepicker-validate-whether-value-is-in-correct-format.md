@@ -1,8 +1,8 @@
 ---
 title: Validate If Value Is in the Correct Format
-description: An example on how to validate whether value is in the correct format in the Kendo UI DatePicker and DateTimePicker widgets.
+description: Learn how to validate whether value is in the correct format in the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: Validate Whether Value Is in the Correct Format | Kendo UI DatePicker for jQuery
+page_title: Validate Whether Value Is in the Correct Format - Kendo UI DatePicker for jQuery
 slug: datepicker-validate-whether-value-is-in-correct-format
 tags: kendo, ui, datepicker, datetimepicker, validate, format,correct, value,input
 res_type: kb
@@ -14,11 +14,11 @@ component: date-time-pickers
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DatePicker</td>
-  <td>Progress Kendo UI DateTimePicker</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DateTimePicker for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.3.1026</td>
  </tr>
 </table>
@@ -30,7 +30,7 @@ How can I validate whether the input of the user in the DatePicker is in the cor
 
 ## Solution
 
-Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview) and create a custom validation rule which validates the format of the date.
+Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/validator/overview) and create a custom validation rule which validates the format of the date.
 
 ```dojo
     <h2>Use client-side validation:</h2>

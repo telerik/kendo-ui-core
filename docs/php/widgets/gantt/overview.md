@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Gantt PHP Class
+page_title: Overview - Gantt PHP Class
 description: "Get started with the Gantt PHP class in Kendo UI."
 slug: overview_gantt_uiforphp
 position: 1

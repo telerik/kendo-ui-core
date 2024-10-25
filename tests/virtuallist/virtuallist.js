@@ -50,9 +50,9 @@
         }
     });
 
-    describe("VirtualList: ", function () {
+    describe("VirtualList: ", function() {
         beforeEach(function() {
-            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
+            container = $("<ul id='container'></ul>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -75,8 +75,11 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#"
+                template: ({ text }) => kendo.htmlEncode(text)
             };
+
+            // TO DO: remove below after implementing new SASS styles in LESS
+            Mocha.fixture.append($('<style>.k-virtual-content .k-list-item { position: absolute; } .k-list-ul { margin: 0; }</style>'));
         });
 
         afterEach(function() {
@@ -109,7 +112,8 @@
 
     it("creates list's content wrapper", function() {
         var virtualList = new VirtualList(container, virtualSettings);
-        assert.equal(virtualList.wrapper.find(".k-virtual-content").length, 1);
+
+        assert.isOk(virtualList.wrapper.hasClass("k-virtual-content"));
     });
 
     it("creates height container", function(done) {
@@ -173,17 +177,17 @@
 
         asyncDataSource.read().then(function() {
             var items = virtualList.items();
-            assert.equal(items.length, (CONTAINER_HEIGHT/20)*6);
+            assert.equal(items.length, (CONTAINER_HEIGHT / 20) * 6);
             done();
         });
     });
 
-    it("adds .k-virtual-item class to the item placeholders", function(done) {
+    it("adds .k-list-item class to the item placeholders", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var items = virtualList.items();
-            assert.isOk(items.hasClass("k-virtual-item"));
+            assert.isOk(items.hasClass("k-list-item"));
             done();
         });
     });
@@ -222,37 +226,37 @@
         });
     });
 
-    it("adds k-state-hover class on mouseenter", function(done) {
+    it("adds k-hover class on mouseenter", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var element = virtualList.items().first();
             element.trigger("mouseover");
-            assert.isOk(element.hasClass("k-state-hover"));
+            assert.isOk(element.hasClass("k-hover"));
             done();
         });
     });
 
-    it("removes k-state-hover class on mouseleave", function(done) {
+    it("removes k-hover class on mouseleave", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var element = virtualList.items().first();
             element.trigger("mouseover");
-            assert.isOk(element.hasClass("k-state-hover"));
+            assert.isOk(element.hasClass("k-hover"));
             element.trigger("mouseleave");
-            assert.isOk(!element.hasClass("k-state-hover"));
+            assert.isOk(!element.hasClass("k-hover"));
             done();
         });
     });
 
-    it("adds k-state-hover class on mouseenter", function(done) {
+    it("adds k-hover class on mouseenter", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var element = virtualList.items().first();
             element.trigger("mouseover");
-            assert.isOk(element.hasClass("k-state-hover"));
+            assert.isOk(element.hasClass("k-hover"));
             done();
         });
     });
@@ -321,7 +325,7 @@
                                 }).first();
 
             li.trigger("mouseover");
-            assert.isOk(!li.hasClass("k-state-hover"));
+            assert.isOk(!li.hasClass("k-hover"));
             done();
         });
     });
@@ -367,7 +371,7 @@
         asyncDataSource.read().then(function() {
             assert.isOk(virtualList.templates);
 
-            for (key in virtualList.templates) {
+            for (var key in virtualList.templates) {
                 assert.equal(typeof virtualList.templates[key], "function");
             }
             done();
@@ -376,7 +380,7 @@
 
     it("uses the item template to render items", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            template: "<span class='foo'>#:text#</span>"
+            template: ({ text }) => `<span class='foo'>${kendo.htmlEncode(text)}</span>`
         }));
 
         asyncDataSource.read().then(function() {
@@ -390,18 +394,20 @@
         });
     });
 
-    it("wraps the item template in li.k-virtual-item > div.k-item", function(done) {
+    it("wraps the item template in li.k-list-item > div.k-list-item-text", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            template: "<span class='foo'>#:text#</span>"
+            template: ({ text }) => `<span class='foo'>${kendo.htmlEncode(text)}</span>`
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             var items = virtualList.element.find(".foo");
             items.each(function(idx, element) {
-                assert.isOk(items.eq(idx).parent().is(".k-item") && items.eq(idx).parents(".k-virtual-item").length === 1);
+                assert.isOk(items.eq(idx).parent().is(".k-list-item-text") && items.eq(idx).parents(".k-list-item").length === 1);
             });
             done();
         });
+
+        asyncDataSource.read();
     });
 
     it("accepts function as item template", function(done) {
@@ -426,13 +432,13 @@
 
     it("displays placeholder template when list is scrolled to a not available range", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "<span class='foo'>foo...</span>",
+            placeholderTemplate: () => "<span class='foo'>foo...</span>",
             itemHeight: 20
         }));
 
         asyncDataSource.read().then(function() {
             scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
-            assert.equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
+            assert.equal(virtualList.items().last().find(".k-list-item-text").html(), '<span class="foo">foo...</span>');
             done();
         });
     });
@@ -447,7 +453,7 @@
 
         asyncDataSource.read().then(function() {
             scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
-            assert.equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
+            assert.equal(virtualList.items().last().find(".k-list-item-text").html(), '<span class="foo">foo...</span>');
             done();
         });
     });
@@ -456,7 +462,7 @@
 
     it("loads new items when list is scrolled", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -474,7 +480,7 @@
 
     it("shifts the position of item placeholders", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -494,7 +500,7 @@
 
     it("starts dataSource request to fetch the next range when threshold is passed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -512,7 +518,7 @@
 
     it("does not shift the position of item placeholders until threshold is passed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -532,7 +538,7 @@
 
     it("user is able to jump to the bottom of the list", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            placeholderTemplate: "loading data...",
+            placeholderTemplate: () => "loading data...",
             listScreens: 4,
             itemHeight: 20
         }));
@@ -600,9 +606,10 @@
 
             async.allDone(function() {
                 setTimeout(function() {
-
                     var li = virtualList.element.children()
-                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .filter(function() {
+                                            return $(this).offset().top >= 0;
+                                        })
                                         .first();
 
                     assert.equal(li.text().trim(), "Item 100");
@@ -960,7 +967,7 @@
 
     it("does not create elements with height larger than 250000px", function() {
         //testing with 100011 items
-        dataSource = new kendo.data.DataSource({
+        var dataSource = new kendo.data.DataSource({
             transport: {
                 read: function(options) {
                     options.success({ data: generateData(options.data), total: 100011 });
@@ -983,7 +990,7 @@
         //height is dataSource.total() * itemHeight
         assert.equal(virtualList.content.find(".k-height-container").height(), 100011 * 40);
 
-        heightPadChildren = virtualList.content.find(".k-height-container").children();
+        var heightPadChildren = virtualList.content.find(".k-height-container").children();
 
         //heightPad container is expanded by elements with max height of 250000
         //dataSource.total() * itemHeight / MaxHeightElement + 1 ("1" is added because the total height is not devided by 250000)
@@ -1044,7 +1051,7 @@
             dataSource: asyncDataSource,
             itemHeight: ITEM_HEIGHT,
             height: CONTAINER_HEIGHT,
-            template: "#:text#"
+            template: ({ text }) => kendo.htmlEncode(text)
         });
 
         virtualList.dataSource.one("change", function() {

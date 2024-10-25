@@ -1,6 +1,6 @@
 ---
 title: Create the Sales Page
-page_title: Create the Sales Page | Music Store Dashboard Tutorial
+page_title: Create the Sales Page - Music Store Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store Dashboard Store Sales page by using Telerik UI for ASP.NET MVC."
 slug: buildthestoressales_muscistoredashboard_aspnetmvc
 position: 4
@@ -8,7 +8,7 @@ position: 4
 
 # Create the Sales Page
 
-![A snapshot of the Kendo UI Music Store Sales Overview page](images/sales-overview.png)
+![{{ site.product_short }} A snapshot of the Kendo UI Music Store Sales Overview page](images/sales-overview.png)
 
 This page is constructed to show a collection of data visualization graphs, exposing several different views of store data. The page is dominated by a general sales graph, which can be filtered by five different dimensions, selectable by the buttons to the left of graph.
 
@@ -24,11 +24,11 @@ The **Sales By Genre** chart allows for the chart type to be changed dynamically
 
 For example, the chart type can be changed from a bar graph to a line graph by using the buttons on the bottom-right side.
 
-![A bar graph representation of the Sales Overview page](images/sales-by-genre-bar.png)
+![{{ site.product_short }} A bar graph representation of the Sales Overview page](images/sales-by-genre-bar.png)
 
-![A line graph representation of the Sales Overview page](images/sales-by-genre-line.png)
+![{{ site.product_short }} A line graph representation of the Sales Overview page](images/sales-by-genre-line.png)
 
-![The side buttons through which the graphic representation of the data can be changed](images/sales-by-genre-bar-button-highlight.png)
+![{{ site.product_short }} The side buttons through which the graphic representation of the data can be changed](images/sales-by-genre-bar-button-highlight.png)
 
 The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `<div>`, with an accompanying `<span>` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
 
@@ -87,9 +87,9 @@ This function clears the selection state of the buttons for the chart in questio
 
 The **Sales By Genre** and **Searches By Genre** charts also provide a method to dynamically change the temporal data in use. For example, the **Sales By Genre** chart can be changed from showing **Weekly** data to showing **Monthly** data by using the buttons on top.
 
-![A chart graph displaying Weekly data](images/sales-by-genre-bar.png)
+![{{ site.product_short }} A chart graph displaying Weekly data](images/sales-by-genre-bar.png)
 
-![A chart graph displaying Monthly data](images/sales-by-genre-bar-monthly.png)
+![{{ site.product_short }} A chart graph displaying Monthly data](images/sales-by-genre-bar-monthly.png)
 
 As before, the two charts are constructed similarly, with declarative markup, JavaScript, and jQuery.
 

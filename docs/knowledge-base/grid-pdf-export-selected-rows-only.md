@@ -1,8 +1,8 @@
 ---
 title: Export Only the Selected Grid Rows to PDF
-description: An example on how to export to PDF only the selected rows of a Kendo UI Grid.
+description: Learn how to export to PDF only the selected rows of a Kendo UI Grid.
 type: how-to
-page_title: Export the Selected Rows to PDF | Kendo UI Grid for jQuery
+page_title: Export the Selected Rows to PDF - Kendo UI for jQuery Data Grid
 slug: grid-pdf-export-selected-rows-only
 tags: pdf, export, grid, selected rows
 ticketid: 1135051
@@ -15,11 +15,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.913 version</td>
+  <td>Product Version</td>
+  <td>Created with the {{ site.cdnVersion }} version</td>
  </tr>
 </table>
 
@@ -65,22 +65,22 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 
     <script>
         /*
-                    This demo renders the grid in "DejaVu Sans" font family, which is
-                    declared in kendo.common.css. It also declares the paths to the
-                    fonts below using <tt>kendo.pdf.defineFont</tt>, because the
-                    stylesheet is hosted on a different domain.
-                */
+            This demo renders the grid in "DejaVu Sans" font family, which is
+            declared in kendo.common.css. It also declares the paths to the
+            fonts below using <tt>kendo.pdf.defineFont</tt>, because the
+            stylesheet is hosted on a different domain.
+        */
         kendo.pdf.defineFont({
-            "DejaVu Sans": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "WebComponentsIcons": "https://kendo.cdn.telerik.com/2017.1.223/styles/fonts/glyphs/WebComponentsIcons.ttf"
+            "DejaVu Sans": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "WebComponentsIcons": "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/glyphs/WebComponentsIcons.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2017.3.913/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <script type="x/kendo-template" id="page-template">
         <div class="page-template">
@@ -119,7 +119,7 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 
                     for (var i = 0; i < rows.length; i++) {
                         var row = rows[i];
-                        if (!$(row).hasClass("k-state-selected")) {
+                        if (!$(row).hasClass("k-selected")) {
                             $(row).addClass("hiddenRow")
                         };
                     };

@@ -1,8 +1,8 @@
 ---
 title: Use a Third-Party Angular Editor Template in the Grid for AngularJS
-description: An example on how to use third-party AngularJS editors in the Kendo UI Grid.
+description: Learn how to use third-party AngularJS editors in the Kendo UI Grid.
 type: how-to
-page_title: Bind the dataItems in Third-Party AngularJS Templates | Kendo UI Grid for jQuery
+page_title: Bind the dataItems in Third-Party AngularJS Templates - Kendo UI for jQuery Data Grid
 slug: grid-third-party-angularjs-template
 tags: grid, angularjs, column template, third party, editor, compile
 ticketid: 1086179
@@ -18,10 +18,11 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
 
 ## Description
 
@@ -50,8 +51,13 @@ columns: [
 
 The following example demonstrates the implementation of the suggested approach.
 
+> The example loads Kendo UI 2023.3.1010 version.
+
 ```dojo
-<link rel="stylesheet" href="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.css"/>
+	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+
+  <link rel="stylesheet" href="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.css"/>
     <script src="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.js">   </script>
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">

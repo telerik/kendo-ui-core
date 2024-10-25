@@ -39,14 +39,14 @@
             $.mockjax({
                 url: "ajax-view-one.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
             $.mockjax({
                 url: "ajax-view-two.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
@@ -71,14 +71,14 @@
             var children = ul.find("li:last").children();
 
             assert.equal(children.filter("a").length, 1);
-            assert.equal(children.filter("span").length, 0)
+            assert.equal(children.filter("span").length, 0);
         });
 
         it("clicking collapsed content items should expand them", function(done) {
             var item = getRootItem(0);
 
             panelbar.bind("contentLoad", function() {
-                assert.equal($(arguments[0].contentElement).css("display"), "block");
+                assert.equal($(arguments[0].contentElement).css("display"), "flow-root");
                 panelbar.unbind("contentLoad");
                 done();
             });
@@ -91,14 +91,14 @@
 
             item.trigger("click");
 
-            assert.equal(item.parent().find(".k-content").css("display"), "none");
+            assert.equal(item.parent().find(".k-panelbar-content").css("display"), "none");
         });
 
         it("clicking collapsed content items should toggle arrow", function(done) {
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                assert.isOk($(arguments[0].item).find(".k-icon").hasClass("k-i-arrow-60-up"));
+                assert.isOk($(arguments[0].item).find(".k-icon,.k-svg-icon").is(".k-i-chevron-up,.k-svg-i-chevron-up"));
                 panelbar.unbind("contentLoad");
                 done();
             });
@@ -111,14 +111,14 @@
 
             item.trigger("click");
 
-            assert.isOk(item.find(".k-icon").hasClass("k-i-arrow-60-down"));
+            assert.isOk(item.find(".k-icon,.k-svg-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
         });
 
         it("clicking should make item active", function(done) {
             var item = getRootItem(2);
 
             panelbar.bind("contentLoad", function() {
-                assert.isOk(item.parent().hasClass("k-state-active"));
+                assert.isOk(item.parent().hasClass("k-expanded"));
                 panelbar.unbind("contentLoad");
                 done();
             });
@@ -135,7 +135,7 @@
                     '    <li><a>Pure ASP.NET MVC components</a>' +
                     '       <div></div>' +
                     '   </li>' +
-                    '   <li class="k-state-active"><a>Completely Open Source</a>' +
+                    '   <li class="k-expanded"><a>Completely Open Source</a>' +
                     '       <div></div>' +
                     '   </li>' +
                     '</ul>'
@@ -153,14 +153,14 @@
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                assert.equal(item.parent().find(".k-content").css("display"), "block");
+                assert.equal(item.parent().find(".k-panelbar-content").css("display"), "flow-root");
                 panelbar.unbind("contentLoad");
                 done();
             });
         });
 
         it("ajax content with error fires error handler and writes the error message to the console", function(done) {
-            if (jQuery.fn.jquery.substring(0, 1) === '3') {
+            if (jQuery.fn.jquery.substring(0, 1) === '3' || jQuery.fn.jquery.substring(0, 1) === '4') {
                 assert.isOk(true);
                 done();
                 return;

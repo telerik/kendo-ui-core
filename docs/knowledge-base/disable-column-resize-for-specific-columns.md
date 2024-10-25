@@ -1,7 +1,7 @@
 ---
-title: Disable Resizing for Specific Columns
-page_title: Disable Resize of Specific Columns | Kendo UI Grid for jQuery
-description: "An example on how to disable column resizing for specific columns in the Kendo UI Grid for jQuery."
+title: Disable Resizing for Specific Columns in the Grid
+page_title: Disable the Resizing of Specific Columns - jQuery Data Grid
+description: "Learn how to disable resizing for specific columns in the Kendo UI Data Grid component for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/disable-column-resize-for-specific-columns
 slug: howto_disable_column_resizing_grid
 tags: grid, disable, resizing, specific, columns
@@ -15,15 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -35,14 +27,13 @@ How can I disable column resizing for specific columns in the Kendo UI Grid for 
 
 Column resizing is enabled or disabled for all Grid columns.
 
-The following example demonstrates how to prevent resizing for specific columns.
+The following example demonstrates how to prevent resizing for the "bar" column.
 
 ```dojo
     <p>The <strong>bar</strong> column cannot be resized:</p>
     <div id="grid"></div>
     <script>
         $(function(){
-
             $("#grid").kendoGrid({
                dataSource: {
                    data: [
@@ -50,7 +41,8 @@ The following example demonstrates how to prevent resizing for specific columns.
                     {foo: "foo 2", bar: "bar 2", baz: "baz 2"}
                    ]
                },
-               resizable: true
+               resizable: true,
+               sortable: true
             });
 
             var grid = $("#grid").data("kendoGrid");
@@ -60,15 +52,17 @@ The following example demonstrates how to prevent resizing for specific columns.
                   e.preventDefault();
                   setTimeout(function(){
                     grid.wrapper.removeClass("k-grid-column-resizing");
-                    $(document.body).add(".k-grid th").css("cursor", "");
+                    $(document.body)
+                      .add(".k-grid th")
+                      .add(".k-grid th .k-link")
+                      .css("cursor", "");
                   });
                 }
             });
-
         });
     </script>
 ```
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

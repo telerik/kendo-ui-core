@@ -1,9 +1,9 @@
 ---
 title: Widths
 page_title: Column Widths
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to modify its column widths."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to modify its column widths."
 slug: column_widths_grid_aspnetcore
-position: 1
+position: 2
 ---
 
 # Column Widths
@@ -40,7 +40,11 @@ Change the `table-layout` to `fixed`.
 
 To remove the misalignment of the columns and headers when the Grid is resized, provide at least one column without a specified width so that it can freely adjust.
 
+## KB Articles on Grid Column Widths
+
+* [Auto Fit Column Width of the Grid for {{ site.framework}}]({% slug grid-autofit-all-columns-width %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
-* [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)

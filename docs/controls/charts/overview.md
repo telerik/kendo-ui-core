@@ -1,96 +1,46 @@
 ---
 title: Overview
-page_title: jQuery Chart Documentation | Chart Overview | Kendo UI
-description: "Get started with the jQuery Chart by Kendo UI and learn how to create, initialize, and enable the widget."
+page_title: jQuery Chart Documentation - Chart Overview
+description: "Try now the Kendo UI for jQuery Chart component that allows you to represent remote or local data in beautiful, professionally designed charts of any type."
 previous_url: /howto/add-charts-and-graphs-to-an-application, /controls/charts/chart/overview
 slug: overview_kendoui_charts_widget
-position: 1
+position: 0
 ---
 
-# Chart Overview
+# {{ site.product }} Chart Overview
 
-The Kendo UI Chart uses modern browser technologies to render high-quality data visualizations.
+[The Kendo UI Chart](https://www.telerik.com/kendo-jquery-ui/charts) uses modern browser technologies to render high-quality data visualizations.
 
 All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_widget %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
 
-The Chart contains the following [building block elements]({% slug seriestypeofcharts_widget %}):
-
-* Title
-* Legend
-* Chart Area
-* Plot Area
-* Axes
-* Series
-
-The following image displays the structure of the Chart.
-
-![Chart Structure](chart-structure.png)
-
-* [Demo page for the Charts](https://demos.telerik.com/kendo-ui/)
-
-## Basic Configuration
-
-To create a Chart, add an empty `div` to the HTML, provide it with an ID, and , optionally, set the width and height of the desired Chart inline or with CSS.
-
-    <div id="chart" style="width: 400px; height: 600px"></div>
-
-To render the Chart, select the `div` with a jQuery selector and call the `kendoChart()` function.
-
-    $("#chart").kendoChart();
-
-The previous example results in the following output.
-
-![An empty Chart](chart-empty.png)
-
-You can add a title to the Chart by specifying the `text` property of the `title` object.
-
-    $("#chart").kendoChart({
-        title: {
-             text: "Kendo Chart Example"
-        }
-    });
-
-The Chart can also visualize series that are bound to both local and remote data. The following example demonstrates how to bind the Chart to local data.  
-
-    $("#chart").kendoChart({
-        title: {
-             text: "Kendo Chart Example"
-        },
-        series: [
-             { name: "Example Series", data: [200, 450, 300, 125] }
-        ]
-    });
-
-The previous example results in the following output.
-
-![A chart without categories](chart-column-no-categories.png)
-
-To add labels across the category axis of the Chart columns, specify the labeling for the series in the [`categoryAxis`](/api/dataviz/chart#categoryAxis) property.
-
-    $("#chart").kendoChart({
-        title: {
-             text: "Kendo Chart Example"
-        },
-        series: [
-             { name: "Example Series", data: [200, 450, 300, 125] }
-        ],
-        categoryAxis:{
-             categories: [ 2000, 2001, 2002, 2003 ]
-        }
-    });
-
-
-The previous example results in the following output.
-
-![A chart with categories](chart-column-categories.png)
+![Kendo UI for jQuery Chart Overview](chart-structure-overview.png)
 
 ## Functionality and Features
 
-* [Data binding]({% slug databinding_charts_widget %})
-* [Export]({% slug exporting_kendoui_chart_widget %})
-* [Appearance]({% slug appearance_charts_widget %})
+|Feature|Definition
+|:---   |:---
+|[Data binding]({% slug databinding_charts_widget %}) | You can populate the Kendo UI Chart with data.
+|[Export]({% slug exporting_kendoui_chart_widget %}) | The Chart enables you to export their content to PDF, SVG, or Image files.
+|[Appearance]({% slug appearance_charts_widget %}) | You can control the appearance of the Chart elements by using JavaScript style options.
+|[Axes]({% slug elements_kendoui_charts_widget %}) | The Chart enables you to configure its [`axes`](/api/javascript/dataviz/ui/chart/configuration/axisdefaults).
+|[Data series]({% slug seriestypeofcharts_widget %}) | The Chart enables you to plot one or more data series of a specified type.
+|[Date series]({% slug dateseries_charts_widget %}) | You can control the display of dates in the Kendo UI Chart.
+|[Error bars]({% slug errorbars_charts_widget %}) | The Chart enables you to implement error bars which show the variability of data.
+|[Legend]({% slug legend_features_charts %}) | The Chart legend displays the name of the configured data series.
+|[Notes]({% slug chartnotes_charts_widget %}) | The Chart enables you to display the metadata of a point or a specific part of the axis.
+|[Panes]({% slug panes_charts_widget %}) | The Chart panes enable you to create vertical sub-divisions in a single categorical Chart.
+|[Title]({% slug title_features_charts %}) | The Chart enables you to configure its title.
+|[Tooltip]({% slug tooltip_charts_widget %}) | The Chart enables you to display details about the data point over which the mouse is currently hovering.
+
+## Next Steps 
+
+* [Getting Started with the Kendo UI Chart for jQuery]({% slug getting_started_kendoui_chart_widget %})
+* [Basic Usage of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 
 ## See Also
 
-* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+* [Basic Usage of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart/index)
+* [Using the Basic Events of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/events)
+* [Applying the Chart API (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

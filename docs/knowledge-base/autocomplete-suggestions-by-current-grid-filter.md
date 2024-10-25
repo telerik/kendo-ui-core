@@ -1,7 +1,7 @@
 ---
 title: Show AutoComplete Suggestions for Current Grid Filter
-page_title: Show AutoComplete Suggestions for Current Grid Filter | Kendo UI Grid for jQuery
-description: "An example on how to filter the Kendo UI Grid by using the Kendo UI AutoComplete and by showing results from the current Grid filter."
+page_title: Show Suggestions for Automatic Completion for the Current Filter - jQuery Data Grid and AutoComplete
+description: "Learn how to filter the Kendo UI for jQuery Grid by using the Kendo UI for jQuery AutoComplete and by showing results from the current Grid filter."
 previous_url: /controls/data-management/grid/how-to/autocomplete-suggestions-by-current-grid-filter.html, /controls/data-management/grid/how-to/filtering/autocomplete-suggestions-by-current-grid-filter
 slug: howto_autocomplete_suggestions_by_current_grid_filter
 tags: grid, autocomplete, suggestions, filter
@@ -15,7 +15,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI AutoComplete</td>
+  <td>Progress® Kendo UI® AutoComplete for jQuery</td>
+  <td>Progress® Kendo UI® Data Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -33,7 +34,7 @@ How can I show AutoComplete suggestions for the current Grid filter in Kendo UI?
 
 ## Solution
 
-The AutoComplete filter of the Grid is bound to the whole data source of the Grid widget. However, it is possible to show the AutoComplete results only for the current filter of the Grid.
+The AutoComplete filter of the Grid is bound to the whole data source of the Grid control. However, it is possible to show the AutoComplete results only for the current filter of the Grid.
 
 1. Handle the [`dataBound` event of the Grid](/api/javascript/ui/grid/events/databound).
 1. Get the [data source filter of the Grid](/api/javascript/data/datasource/methods/filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
@@ -125,5 +126,7 @@ The following example demonstrates how to use the AutoComplete for filtering and
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
 * [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)
+* [Product Page of the jQuery AutoComplete](https://www.telerik.com/kendo-jquery-ui/autocomplete)
+* [jQuery AutoComplete Overview (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)

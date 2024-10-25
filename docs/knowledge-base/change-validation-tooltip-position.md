@@ -1,7 +1,7 @@
 ---
 title: Change Validation Message Position
-page_title: Change Validation Message Position | Kendo UI Grid for jQuery
-description: "An example on how to change the validation message position in a popup edit form when working with the Kendo UI Grid."
+page_title: Change Validation Message Position - Kendo UI for jQuery Data Grid
+description: "Learn how to change the validation message position in a popup edit form when working with the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/change-validation-tooltip-position
 slug: howto_change_validation_message_position_grid
 tags: grid, validation, message, position
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -72,12 +72,15 @@ The approach relies on the following milestones:
     display: none;
   }
 
+  .k-popup-edit-form .k-input{
+    width: 50%
+  }
 </style>
 
 <script id="edit-template" type="text/x-kendo-template">
     <dl>
       <dt><label for="ProductName">Product Name</label></dt>
-      <dd><input class="k-textbox" data-bind="value:ProductName" name="ProductName" required="required" />
+      <dd><input class="k-input k-textbox k-input-solid k-input-md k-rounded-md" data-bind="value:ProductName" name="ProductName" required="required" />
       <div class="validator-msg"><span data-for="ProductName" class="k-invalid-msg"></span></div></dd>
 
       <dt><label for="UnitPrice">Unit Price</label></dt>
@@ -149,4 +152,4 @@ $(function () {
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

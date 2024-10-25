@@ -1,8 +1,8 @@
 ---
 title: Select Rows on Conditions
-description: An example on how to conditionally select rows in the Kendo UI Grid.
+description: Learn how to conditionally select rows in the Kendo UI Grid.
 type: how-to
-page_title: Disable Selection of Specific Rows | Kendo UI Grid for jQuery
+page_title: Disable Selection of Specific Rows - Kendo UI for jQuery Data Grid
 slug: grid-disable-row-selection-conditionally
 tags: grid, selection, row
 ticketid: 1147832
@@ -19,7 +19,7 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 
@@ -31,7 +31,7 @@ How can I disable the selection of specific rows in the Grid?
 ## Solution
 
 1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
-1. In the event handler, based on a condition, remove the `k-state-selected` class from the desired rows.
+1. In the event handler, based on a condition, remove the `k-selected` class from the desired rows.
 
 ```dojo
 <div id="grid"></div>
@@ -77,7 +77,7 @@ How can I disable the selection of specific rows in the Grid?
             items.each(function(i, e) {
                 var dataItem = grid.dataItem(e);
                 if (dataItem.canSelect === false) {
-                    $(e).removeClass("k-state-selected");
+                    $(e).removeClass("k-selected");
                 }
             });
         }

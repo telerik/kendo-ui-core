@@ -9,6 +9,11 @@ position: 3
 
 # Global Events
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+>For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
+
 Kendo UI for jQuery provides the `kendoWidgetCreated` and ``kendoRendered`` global events.
 
 `kendoWidgetCreated` is emitted after a single widget is created while `kendoRendered` is emitted after all widgets that are defined on the page are created.
@@ -19,7 +24,12 @@ For example, your project requires you to create a TreeView widget that automati
 
 The following example demonstrates how to listen to the `kendoWidgetCreated` event.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-tree-view="treeWidget" k-options="treeOptions"></div>
 </div>
@@ -96,7 +106,12 @@ Browsers render data asynchronously and, therefore, the `kendoRendered` event is
 
 The following example demonstrates how to listen to the `kendoRendered` event.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
   <input kendo-datepicker="datePicker">
 </div>
@@ -114,9 +129,9 @@ angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($sco
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
-* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
-* [How to Load View in Window]({% slug window_service_angularjs_directives %})
-* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
+
+
+
+
 * [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

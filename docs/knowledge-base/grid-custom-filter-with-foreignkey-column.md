@@ -1,8 +1,8 @@
 ---
 title: Use Custom Filter for ForeignKey Column in Grid
-description: An example on how to customize the filter of a foreign key column in a Kendo UI Grid.
+description: Learn how to customize the filter of a foreign key column in a Kendo UI Grid.
 type: how-to
-page_title: Configure Custom Filter for ForeignKey Column | Kendo UI Grid for jQuery
+page_title: Configure Custom Filter for ForeignKey Column - Kendo UI for jQuery Data Grid
 slug: grid-custom-filter-with-foreignkey-column
 tags: kendoui, kendo, grid, filtering, foreign key, custom filtering
 res_type: kb
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

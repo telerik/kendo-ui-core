@@ -1,6 +1,6 @@
 ---
 title: Enabled
-page_title: Enabled Binding | Kendo UI MVVM
+page_title: Enabled Binding - Kendo UI MVVM
 description: "Learn how to enable the target DOM element by having the View-Model value return true values in Kendo UI MVVM."
 slug: enabledbinding_mvvm_kendoui
 ---
@@ -13,7 +13,7 @@ If the View-Model value is `false` the target DOM element or widget is disabled.
 
 The `enabled` binding supports only input HTML elements&mdash;`input`, `select`, `button` and `textarea`. When an input element is disabled the end user cannot change its value (type in text or choose a different option).
 
-Non-Boolean values, such as `0`, `null`, `undefined`, and `""`, are treated as `false` by the `enabled` binding. All other values are treated as `true`.
+Non-Boolean values, such as `0`, `null`, and `""`, are treated as `false` by the `enabled` binding. All other values are treated as `true`.
 
 The following example demonstrates how to use the `enabled` binding. The `input` element is initially disabled because the value of the `isNameEnabled` field is `false`. When the user presses the button, the `input` is enabled because the value of the `isNameEnabled` field is set to `true`.
 

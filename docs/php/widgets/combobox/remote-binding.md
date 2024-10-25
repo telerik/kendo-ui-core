@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | ComboBox PHP Class
+page_title: Remote Binding - ComboBox PHP Class
 description: "Bind Kendo UI ComboBox PHP class to JSON."
 slug: remotebinding_combobox_uiforphp
 position: 3

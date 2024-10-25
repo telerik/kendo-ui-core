@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | ListView JSP Tag
+page_title: Editing - ListView JSP Tag
 description: "Get started with the editing functionality of the ListView JSP tag in Kendo UI."
 slug: editing_listview_uiforjsp
 position: 2

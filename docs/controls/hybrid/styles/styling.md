@@ -9,6 +9,10 @@ position: 2
 
 # Styling
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 The Kendo UI Hybrid framework is shipped with several separate CSS files:
 
 * `kendo.mobile.all.min.css`&mdash;This is the default one and includes all supported themes, common and icon CSS.
@@ -17,7 +21,7 @@ The Kendo UI Hybrid framework is shipped with several separate CSS files:
 
 > **Important**
 >
-> All themes and skins require the `images` sub-folder, which contains a mask for the iOS back button, icon fonts and the Windows Phone 8 PhoneGap icon workaround images.
+> All themes and skins require the `images` sub-folder, shipped with the Kendo UI bundle, which contains a mask for the iOS back button, icon fonts and the Windows Phone 8 PhoneGap icon workaround images.
 
 Depending on the project requirements, the mobile application may be styled in several different ways. Each approach requires a different set of stylesheets and `mobile.Application` configuration options.
 

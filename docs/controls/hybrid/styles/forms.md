@@ -9,6 +9,10 @@ position: 1
 
 # Forms
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 The Kendo UI Hybrid framework provides automatic platform-dependent styling of `form` elements when they are added to a mobile View. Currently, the following `form` elements are supported and styled:
 
 * Inputs of types `text`, `password`, `search`, `url`, `email`, `number`, `tel`, `file` (not in iOS), `date`, `time`, `month` and `datetime`.
@@ -126,7 +130,7 @@ To activate this feature, set the `km-required` class to the `label`. This class
 
 **Figure 1: Inline fields in the Nova theme**
 
-![Inline fields](inline.png)
+![Kendo UI for jQuery Hybrid Inline fields](hybrid-inline-fields.png)
 
 There could be more than one input in a row. This outcome requires explicit width and the `km-inline-field` class set to the label.
 
@@ -148,7 +152,7 @@ There could be more than one input in a row. This outcome requires explicit widt
 
 **Figure 2: Nova theme showing a button as a legend**
 
-![Button as Legend](button-as-legend.png)
+![Kendo UI for jQuery Button as Legend](button-as-legend.png)
 
 Legend tags can have buttons inside. To achieve this outcome set the `km-legend-button` class.
 
@@ -163,7 +167,7 @@ Legend tags can have buttons inside. To achieve this outcome set the `km-legend-
 
 **Figure 3: Nova theme showing a fieldset with a legend**
 
-![Fieldset + Legend](fieldset-legend.png)
+![Kendo UI for jQuery Hybrid Fieldset + Legend](fieldset-legend.png)
 
 Legend can also be used as a first level Label.
 
@@ -178,7 +182,7 @@ Legend can also be used as a first level Label.
 
 **Figure 4: Nova theme showing label icons**
 
-![Label icons](label-icons.png)
+![Kendo UI for jQuery Hybrid Label icons](label-icons.png)
 
 Labels can only be icons. To get this outcome set the `km-icon-label` and `.km- + data-icon name` classes to the label.
 
@@ -192,7 +196,7 @@ Labels can only be icons. To get this outcome set the `km-icon-label` and `.km- 
 
 **Figure 5: Nova theme showing labels above fields**
 
-![Labels above fields](labels-above.png)
+![Kendo UI for jQuery Labels above fields](labels-above.png)
 
 Labels can be positioned above the fields. To achieve this outcome set the `km-label-above` class to the label.
 
@@ -206,7 +210,7 @@ Labels can be positioned above the fields. To achieve this outcome set the `km-l
 
 **Figure 6: Nova theme showing standalone checkboxes and radio buttons**
 
-![Standalone Checkboxes and RadioButtons](standalone-checksandradios.png)
+![Kendo UI for jQuery Hybrid Standalone Checkboxes and RadioButtons](standalone-checksandradios.png)
 
 The Nova theme provides customized presentation for standalone checkboxes and radio buttons via the `km-checkbox` and `km-radio` classes. Currently, these two types of input cannot be styled with CSS only. Therefore, the appearance of the standalone checkboxes and radio buttons relies on whether the `<input>` element is immediately followed by a `<label>` element with the respective `km-checkbox-label` and `km-radio-label` classes.
 

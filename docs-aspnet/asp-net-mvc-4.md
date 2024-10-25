@@ -11,7 +11,7 @@ position: 13
 
 This article demonstrates how to use Progress Telerik UI for ASP.NET MVC in ASP.NET MVC 4 applications. It uses Visual Studio 2012 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 4. The examples create a new ASP.NET MVC 4 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 4 applications are the same.
 
-> The [Progress Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
+> The [Progress Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) automate the whole procedure which this document describes.
 
 ## Create New ASP.NET MVC 4 Applications
 
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 4 a
 
 **Step 6** Press `CTRL+F5` to build and run the application.
 
-![The new ASP.NET MVC 4 application](images/mvc4-new-app.png)
+![{{ site.product_short }} The new ASP.NET MVC 4 application](images/mvc4-new-app.png)
 
 ## Add Progress Telerik UI for ASP.NET MVC
 
@@ -57,7 +57,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in the Solution Explorer](images/mvc4-solution.png)
+![{{ site.product_short }} Kendo directories in the Solution Explorer](images/mvc4-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -179,12 +179,12 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 
-![The final result](images/mvc4-final.png)
+![{{ site.product_short }} The final result](images/mvc4-final.png)
 
 ## Next Steps
 
 * [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Use the Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Use the Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %})
 * [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
@@ -193,5 +193,5 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 * [Progress Telerik UI for ASP.NET MVC HtmlHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Progress Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetcore %})
 * [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

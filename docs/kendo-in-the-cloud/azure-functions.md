@@ -1,6 +1,6 @@
 ---
 title: Azure Functions
-page_title: Azure Functions | Kendo UI in the Cloud
+page_title: Azure Functions - Kendo UI in the Cloud
 description: "Learn how to implement Azure Functions to execute remote CRUD operations for the Kendo UI Grid."
 slug: azure_functions
 position: 1
@@ -30,19 +30,19 @@ You have to apply the following steps individually to set each function (read, c
 
 	**Figure 1: Overview of the application functions**
 
-	![Functions application overview](images/create-new-function.png)
+	![Kendo UI for jQuery Functions application overview](images/create-new-function.png)
 
 1. If the **Get started quickly with a premade function** screen appears, click the **Custom function** link at the bottom.
 
 	**Figure 2: The Get started quickly with a premade function window**
 
-	![Get started quickly with a premade function](images/new-function-quick-start.png)
+	![Kendo UI for jQuery Get started quickly with a premade function](images/new-function-quick-start.png)
 
 1. Click the **HTTP trigger** option. On the panel that appears to the right, select the language and fill in a meaningful name for each function. Later on, the tutorial will demonstrate how to implement the Azure Functions in C#&mdash;therefore, select that language&mdash;and will use `Read`, `Create`, `Update`, and `Destroy` as names for the four functions.
 
 	**Figure 3: Configuring a new HTTP trigger function**
 
-	![New HTTP trigger function configuration](images/new-function-configuration.png)
+	![Kendo UI for jQuery New HTTP trigger function configuration](images/new-function-configuration.png)
 
 ## Integrating Input for the Read Function
 
@@ -52,7 +52,7 @@ You have to apply the following steps individually to set each function (read, c
 
 	**Figure 4: Integrating the new input for the function**
 
-	![Integrate new input for the function](images/new-input-click.png)
+	![Kendo UI for jQuery Integrate new input for the function](images/new-input-click.png)
 
 1. Type **Product** for the partition key of the table.
 1. Chose the maximum number of records to read. In this case, the default value of 50 will be preserved.
@@ -63,7 +63,7 @@ You have to apply the following steps individually to set each function (read, c
 
 	**Figure 5: Configuring the new input**
 
-	![New input configuration](images/new-input-configuration.png)
+	![Kendo UI for jQuery New input configuration](images/new-input-configuration.png)
 
 ## Integrating Output for the Create, Destroy, and Update Functions
 
@@ -74,7 +74,7 @@ Configure an output integration for each of the other three functions (create, d
 
 	**Figure 6: Integrating the new output for the function**
 
-	![Integrate new output for the function](images/new-output-click.png)
+	![Kendo UI for jQuery Integrate new output for the function](images/new-output-click.png)
 
 1. Select **kendogridfunctions_STORAGE** for the storage account connection.
 1. Change **Table name** to **Products**.
@@ -82,7 +82,7 @@ Configure an output integration for each of the other three functions (create, d
 
 	**Figure 7: Configuring the new output**
 
-	![New output configuration](images/new-output-configuration.png)
+	![Kendo UI for jQuery New output configuration](images/new-output-configuration.png)
 
 ## Implementing the Model
 
@@ -93,13 +93,13 @@ The actual implementation requires you to first create a definition for the `Pro
 
 	**Figure 8: Opening the function files**
 
-	![Open the function files](images/open-function-files.png)
+	![Kendo UI for jQuery Open the function files](images/open-function-files.png)
 
 1. Click the **Add** button and provide the `product.csx` name to the new file.
 
 	**Figure 9: Creating a new function file**
 
-	![Create new function file](images/add-product-file.png)
+	![Kendo UI for jQuery Create new function file](images/add-product-file.png)
 
 1. Place the following class definition in the file:
 
@@ -241,13 +241,13 @@ As the implementation is already in place, now you need to add specific configur
 
 	**Figure 10: The platform features of the application**
 
-	![Application platform features](images/platform-features.png)
+	![Kendo UI for jQuery Application platform features](images/platform-features.png)
 
 1. Add the domain origin of the client-side application that will consume the functions data and click **Save**. In this case, the client-side application will be located in the kendo UI Dojo. Therefore, the `https://runner.telerik.io` origin is available.
 
 	**Figure 11: Configuration of the CORS options**
 
-	![CORS configuration](images/cors-save.png)
+	![Kendo UI for jQuery CORS configuration](images/cors-save.png)
 
 1. Go to the `Read` function and open the `function.json` file.
 1. In the **bindings / methods** section, remove **post** as an option.
@@ -261,19 +261,13 @@ Get the unique URL for each of the functions by clicking the **Get Function URL*
 <div id="grid"></div>
 <script>
   $(document).ready(function () {
-    function customBoolEditor(container, options) {
-      var guid = kendo.guid();
-      $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-      $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
-    }
-
     $("#grid").kendoGrid({
       toolbar: ["create"],
       columns: [
         { field:"ProductName", title: "Product Name", width: "150px" },
         { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "110px" },
         { field: "UnitsInStock", title:"Units In Stock", width: "110px" },
-        { field: "Discontinued", width: "110px", editor: customBoolEditor },
+        { field: "Discontinued", width: "110px" },
         { command: ["edit", "destroy"], title: "&nbsp;", width: "190px" }],
       editable: "popup",
       dataSource: {

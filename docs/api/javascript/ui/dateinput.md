@@ -12,6 +12,92 @@ Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/javascript
 
 ## Configuration
 
+### autoAdjust `Boolean` *(default: true)*
+
+If this property is enabled and you have configured `min` and/or `max` values, and the user enters a value that falls out of that range, the value will automatically be set to either the minimum or maximum allowed value.
+
+#### Example - prevent automatic value adjustments
+
+    <h3>Try to change the year to an earlier one and then focus out the input.</h3>
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        min: new Date(),
+        value: new Date(),
+        autoAdjust: false
+    });
+    </script>
+
+### autoCorrectParts `Boolean`*(default: true)*
+
+Sets a value that indicates whether to automatically correct the segment when out of range
+
+#### Example - sets the autoCorrectParts
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        autoCorrectParts: false
+    });
+    </script>
+
+### autoSwitchKeys  `Array`
+
+A string array representing keys that when pressed will force a move to the next segment. By default the culture specific symbols that match `/` and `:` are used.
+
+#### Example - sets the autoSwitchKeys
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        autoSwitchKeys: ["-", "/", ":"]
+    });
+    </script>
+
+### autoSwitchParts `Boolean`*(default: false)*
+
+A value indicating whether to automatically move to the next segment after a valid value is provided for the current
+
+#### Example - sets the autoSwitchParts
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        autoSwitchParts: true
+    });
+    </script>
+
+### enableMouseWheel `Boolean`*(default: true)*
+
+A value indicating whether the mouse scroll can be used to increase/decrease the segments values
+
+#### Example - sets the autoSwitchParts
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        enableMouseWheel: false
+    });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to format the value of the DateInput displayed in the input. The format also will be used to parse the input.
@@ -23,6 +109,84 @@ Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/javascript
     $("#dateinput").kendoDateInput({
         format: "yyyy/MM/dd"
     });
+    </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the dateinput. If the dateinput has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+            label: "Description"
+        })
+    </script>
+
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: function() {
+                    return "First name";
+                }
+        })
+    </script>
+
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: {
+                    content: "Date"
+                }
+        })
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: {
+                    content: function() {
+                        return "Date";
+                    }
+                }
+        })
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/dateinput/methods/value) method **does not trigger** the `focusout` event of the dateinput.
+This can affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#dateinput").data("kendoDateInput").label.floatingLabel.refresh();`
+
+#### Example - create a floating label
+
+    <input id="dateinput" />
+    <script>
+        $("#dateinput").kendoDateInput({
+                label: {
+                    content: "Date",
+                    floating: true
+                }
+        })
     </script>
 
 ### max `Date`*(default: Date(2099, 11, 31))*
@@ -118,12 +282,183 @@ The placeholder for the seconds part.
 
 The placeholder for the AM/PM part.
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        size: "large"
+    });
+    </script>
+
+### steps `Object`
+
+An object with the different steps for incrementing/decrementing the various segments
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            hour: 2,
+            minute: 10
+        }
+    });
+    </script>
+
+### steps.day `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the year segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            day: 2
+        }
+    });
+    </script>
+
+### steps.hour `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the hour segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+       steps: {
+         hour: 2
+       }
+    });
+    </script>
+
+### steps.millisecond `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the millisecond segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            millisecond: 10
+        }
+    });
+    </script>
+
+### steps.minute `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the minute segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            minute: 10
+        }
+    });
+    </script>
+
+### steps.month `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the month segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            month: 2
+        }
+    });
+    </script>
+
+### steps.second `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the second segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            second: 10
+        }
+    });
+    </script>
+
+### steps.year `Number`*(default: 1)*
+
+A value used for incrementing/decrementing the year segment
+
+#### Example - sets the steps
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        steps: {
+            year: 2
+        }
+    });
+    </script>
+
+### twoDigitYearMax `Number`
+
+The maximum year value that is considered part of the current century.
+
+#### Example - sets the twoDigitYearMax
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        twoDigitYearMax: 89
+    });
+    </script>
+
 ## Fields
 
 ### options `Object`
 An object, which holds the options of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <input id="dateinput" />
     <script>
@@ -132,7 +467,7 @@ An object, which holds the options of the widget.
     var dateinput = $("#dateinput").data("kendoDateInput");
 
     var options = dateinput.options;
-    <script>
+    </script>
 
 ## Methods
 
@@ -243,6 +578,7 @@ The max date to set.
 
     var max = dateinput.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -281,6 +617,7 @@ The min date to set.
 
     var min = dateinput.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -336,7 +673,7 @@ The value to set.
 `Date` The value of the DateInput.
 
 > * This method **does not trigger** [change](/api/javascript/ui/dateinput/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dateinput" />
@@ -359,6 +696,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var dateinput = $("#dateinput").data("kendoDateInput");
 
     var value = dateinput.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -394,6 +732,7 @@ The widget instance which fired the event.
     $("#dateinput").kendoDateInput({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the dateinput
         }
     });
@@ -409,6 +748,7 @@ The widget instance which fired the event.
 
     dateinput.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the dateinput
     });
     </script>

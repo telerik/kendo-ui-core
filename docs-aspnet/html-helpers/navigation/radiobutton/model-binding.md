@@ -4,7 +4,7 @@ page_title: Model Binding
 description: "Implement model binding in the Telerik UI RadioButton for {{ site.framework }}."
 previous_url: /helpers/navigation/radiobutton/model-binding
 slug: modelbinding_radiobutton_aspnetcore
-position: 4
+position: 5
 ---
 
 # Model Binding
@@ -35,10 +35,18 @@ You can bind a Telerik UI RadioButton to a model.
 
     The following example demonstrates how the radio button with the **I Disagree** label will be checked because its false value matches the model value.
 
-        @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true))
+    ```HtmlHelper
+        @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Agree").Value(true))
         @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false))
-
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-radiobutton name="IAgreeProp" label="I Agree" value="true"></kendo-radiobutton>
+        <kendo-radiobutton name="IAgreeProp" label="I Disagree" value="false"></kendo-radiobutton>
+    ```
+    {% endif %}
+    
 ## See Also
 
 * [RadioButton Server-Side API](/api/radiobutton)
-* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/radiobuttonbuilder)

@@ -11,9 +11,43 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
 
 ## Configuration
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
+### allowReverse `Boolean` *(default: false)*
 
- Specifies a template used to populate value of the aria-label attribute.
+Enables the user to select an end date that is before the start date.
+
+#### Example - enable reverse selection
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            allowReverse: true
+        });
+    </script>
+
+### autoClose `Boolean` *(default: true)*
+
+Specifies whether the calendar popup should close automatically when a range is selected.
+
+#### Example - prevent the popup closure
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            autoClose: false
+        });
+    </script>
+
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
+
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar..The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -22,6 +56,48 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
     $("#daterangepicker").kendoDateRangePicker({
         ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
     });
+    </script>
+
+### autoAdjust `Boolean` *(default: true)*
+
+If this property is enabled and you have configured `min` and/or `max` values, and the user enters a value that falls out of that range, the value will automatically be set to either the minimum or maximum allowed value.
+
+#### Example - prevent automatic value adjustments
+
+    <h3>Try to change the year to an earlier one by typing it and then focus out the input.</h3>
+    <input id="daterangepicker" />
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        min: new Date(),
+        value: new Date(),
+        autoAdjust: false
+    });
+    </script>
+
+### calendarButton `Boolean` *(default: false)*
+
+If this configuration is enabled, a calendar button will appear inside the date inputs. This is similar to the calendar button in the DatePicker component. The calendar popup will be opened only when the button is clicked. Clicking inside the input itself will have no effect.
+
+#### Example - render the calendar buttons
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            calendarButton: true
+        });
+    </script>
+
+### clearButton `Boolean` *(default: false)*
+
+If this configuration is enabled, a clear button will appear in the date inputs where a date is selected. Clicking on the clear button will remove the selected date from the input.
+
+#### Example - render the clear button
+
+    <div id="daterangepicker"></div>
+    <script>
+        $("#daterangepicker").kendoDateRangePicker({
+            clearButton: true
+        });
     </script>
 
 ### culture `String`*(default: "en-US")*
@@ -174,7 +250,25 @@ Specifies the end field name for model binding.
 			});
 		</script>
 	</div>
-	
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### footer `String|Function`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -437,6 +531,43 @@ This sets the end date of the range selection.
         });
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius of the inputs. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        size: "large"
+    });
+    </script>
+
 ### start `String`*(default: "month")*
 
 Specifies the start view.
@@ -455,7 +586,7 @@ The following settings are available for the **start** value:
             start: "year"
         });
     </script>
-	
+
 ### startField `String`*(default: "")*
 
 Specifies the start field name for model binding.
@@ -483,7 +614,7 @@ Specifies the start field name for model binding.
 ### options `Object`
 An object, which holds the options of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <div id="daterangepicker"></div>
     <script>
@@ -492,7 +623,7 @@ An object, which holds the options of the widget.
     var daterangepicker = $("#daterangepicker").data("kendoDateRangePicker");
 
     var options = daterangepicker.options;
-    <script>
+    </script>
 
 ## Methods
 
@@ -621,6 +752,7 @@ The max date to set.
 
     var max = daterangepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -659,6 +791,7 @@ The min date to set.
 
     var min = daterangepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -779,6 +912,7 @@ The widget instance which fired the event.
     $("#daterangepicker").kendoDateRangePicker({
         change: function() {
             var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(range);
         }
     });
@@ -794,6 +928,7 @@ The widget instance which fired the event.
 
     daterangepicker.bind("change", function() {
         var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(range);
     });
     </script>

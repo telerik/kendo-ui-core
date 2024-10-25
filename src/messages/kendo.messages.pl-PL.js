@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -30,7 +31,13 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "są inne niż",
     "startswith": "zaczynają się od",
     "contains": "zawierają",
-    "doesnotcontain": "nie zawierają"
+    "doesnotcontain": "nie zawierają",
+    "isnull": "jest null",
+    "isnotnull": "nie jest null",
+    "isempty": "jest puste",
+    "isnotempty": "nie jest puste",
+    "isnullorempty": "nie ma wartości",
+    "isnotnullorempty": "ma wartośc"
   },
   "enums": {
     "eq": "są równe",
@@ -91,58 +98,89 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 });
 }
 
+if (kendo.ui.PivotGrid) {
+kendo.ui.PivotGrid.prototype.options.messages =
+$.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
+  "measureFields": "Wstaw pola danych tutaj",
+  "columnFields": "Wstaw pola kolumn tutaj",
+  "rowFields": "Wstaw pola wierszy tutaj"
+});
+}
+
+if (kendo.ui.PivotFieldMenu) {
+kendo.ui.PivotFieldMenu.prototype.options.messages =
+$.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
+  "info": "Pokaż element z wartością która:",
+  "filterFields": "Filtry pól",
+  "filter": "Filtr",
+  "include": "Dodaj pola...",
+  "title": "Pola do dodania",
+  "clear": "Wyczyść",
+  "ok": "Ok",
+  "cancel": "Anuluj",
+  "operators": {
+    "contains": "Contains",
+    "doesnotcontain": "Does not contain",
+    "startswith": "Starts with",
+    "endswith": "Ends with",
+    "eq": "Is equal to",
+    "neq": "Is not equal to"
+  }
+});
+}
+
 /* RecurrenceEditor messages */
 
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "daily": {
-    "interval": "days(s)",
-    "repeatEvery": "Repeat every:"
+    "interval": "dni",
+    "repeatEvery": "Powtarzaj co:"
   },
   "end": {
-    "after": "After",
-    "occurrence": "occurrence(s)",
-    "label": "End:",
-    "never": "Never",
+    "after": "Po",
+    "occurrence": "występowanie",
+    "label": "Koniec:",
+    "never": "Nigdy",
     "on": "On",
-    "mobileLabel": "Ends"
+    "mobileLabel": "Koniec"
   },
   "frequencies": {
-    "daily": "Daily",
-    "monthly": "Monthly",
-    "never": "Never",
-    "weekly": "Weekly",
-    "yearly": "Yearly"
+    "daily": "Codziennie",
+    "monthly": "Miesięcznie",
+    "never": "Nigdy",
+    "weekly": "Tygodniowo",
+    "yearly": "Rocznie"
   },
   "monthly": {
-    "day": "Day",
-    "interval": "month(s)",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:"
+    "day": "Dzień",
+    "interval": "miesiąc(e)",
+    "repeatEvery": "Cyklicznie co:",
+    "repeatOn": "Powtórz:"
   },
   "offsetPositions": {
-    "first": "first",
-    "fourth": "fourth",
-    "last": "last",
-    "second": "second",
-    "third": "third"
+    "first": "pierwszy",
+    "fourth": "czwarty",
+    "last": "ostatni",
+    "second": "drugi",
+    "third": "trzeci"
   },
   "weekly": {
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
-    "interval": "week(s)"
+    "repeatEvery": "Powtarzaj co:",
+    "repeatOn": "Powtórz:",
+    "interval": "tydzień"
   },
   "yearly": {
     "of": "of",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
-    "interval": "year(s)"
+    "repeatEvery": "Powtarzaj co:",
+    "repeatOn": "Powtórz:",
+    "interval": "rok/lata"
   },
   "weekdays": {
-    "day": "day",
-    "weekday": "weekday",
-    "weekend": "weekend day"
+    "day": "dzień",
+    "weekday": "dzień powszedni",
+    "weekend": "dzień weekendu"
   }
 });
 }
@@ -158,8 +196,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Anuluj",
     "update": "Aktualizuj",
     "edit": "Edycja",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Eksport do Excel",
+    "pdf": "Eksport do PDF",
     "select": "Zaznacz",
     "cancel": "Anuluj zmiany",
     "save": "Zapisz zmiany"
@@ -193,8 +231,8 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
         "pdf": "Eksportuj to PDF"
     }
 });
-}  
-  
+}
+
 /* Pager messages */
 
 if (kendo.ui.Pager) {
@@ -276,7 +314,9 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "search": "Szukaj",
   "filter": "Filtr",
   "clear": "Wyczyść filtr",
-  "selectedItemsFormat":"Wybrano {0} elementy"
+  "checkAll": "Zaznacz wszystko",
+  "clearAll": "Odznacz wszystko",
+  "selectedItemsFormat": "Wybrano {0} elementy"
 });
 }
 
@@ -313,7 +353,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "Wyrównaj tekst do prawej",
   "outdent": "Zmniejsz wcięcie",
   "strikethrough": "Przekreślenie",
-  "styles": "Styl",
+  "style": "Styl",
   "subscript": "Subscript",
   "superscript": "Superscript",
   "underline": "Podkreślenie",
@@ -391,12 +431,13 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "formatting": "Formatowanie",
   "viewHtml": "Widok HTML",
   "dialogUpdate": "Aktualizuj",
-  "insertFile": "Wstaw plik"
+  "insertFile": "Wstaw plik",
+  "print": "Drukuj"
 });
 }
- 
+
 /* FormattingTool messages */
-  
+
 if (kendo.ui.editor) {
 kendo.ui.editor.FormattingTool.prototype.options.items = [
     {
@@ -437,17 +478,17 @@ kendo.ui.editor.FormattingTool.prototype.options.items = [
 /* FileBrowser and ImageBrowser messages */
 
 var browserMessages = {
-  "uploadFile" : "Wyślij",
-  "orderBy" : "Sortuj wg",
-  "orderByName" : "Nazwy",
-  "orderBySize" : "Rozmiaru",
-  "directoryNotFound" : "Folder o podanej nazwie nie został odnaleziony.",
-  "emptyFolder" : "Pusty folder",
-  "invalidFileType" : "Wybrany plik \"{0}\" jest nieprawidłowy. Obsługiwane pliki {1}.",
-  "deleteFile" : 'Czy napewno chcesz usunąć plik "{0}"?',
-  "overwriteFile" : 'Plik o nazwie "{0}" już istnieje w bieżącym folderze. Czy zastąpić?',
-  "dropFilesHere" : "umieść pliki tutaj, aby je wysłać",
-  "search" : "Szukaj"
+  "uploadFile": "Wyślij",
+  "orderBy": "Sortuj wg",
+  "orderByName": "Nazwy",
+  "orderBySize": "Rozmiaru",
+  "directoryNotFound": "Folder o podanej nazwie nie został odnaleziony.",
+  "emptyFolder": "Pusty folder",
+  "invalidFileType": "Wybrany plik \"{0}\" jest nieprawidłowy. Obsługiwane pliki {1}.",
+  "deleteFile": 'Czy napewno chcesz usunąć plik "{0}"?',
+  "overwriteFile": 'Plik o nazwie "{0}" już istnieje w bieżącym folderze. Czy zastąpić?',
+  "dropFilesHere": "umieść pliki tutaj, aby je wysłać",
+  "search": "Szukaj"
 };
 
 if (kendo.ui.FileBrowser) {
@@ -460,8 +501,8 @@ kendo.ui.ImageBrowser.prototype.options.messages =
 $.extend(true, kendo.ui.ImageBrowser.prototype.options.messages, browserMessages);
 }
 
-/* FileManager messages */ 
-  
+/* FileManager messages */
+
 if (kendo.ui.FileManager) {
     kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
         toolbar: {
@@ -501,21 +542,21 @@ if (kendo.ui.FileManager) {
             },
             moveConfirm: {
                 title: ' ',
-                content: '<p style=\'text-align: center;\'>Czy chcesz przenieść zaznaczone pliki, czy skopiować?</p>',
+                content: '<p class=\'k-text-center\'>Czy chcesz przenieść zaznaczone pliki, czy skopiować?</p>',
                 okText: 'Kopiuj',
                 cancel: 'Przenieś',
                 close: 'Zamknij'
             },
             deleteConfirm: {
                 title: 'Potwierdź usunięcie',
-                content: '<p style=\'text-align: center;\'>Czy na pewno chcesz usunąć zaznaczone pliki?</br>Nie ma możliwości cofnięcia tej operacji.</p>',
+                content: '<p class=\'k-text-center\'>Czy na pewno chcesz usunąć zaznaczone pliki?<br/>Nie ma możliwości cofnięcia tej operacji.</p>',
                 okText: 'Usuń',
                 cancel: 'Anuluj',
                 close: 'Zamknij'
             },
             renamePrompt: {
                 title: 'Zmień nazwę',
-                content: '<p style=\'text-align: center;\'>Wprowadź nową nazwę pliku</p>',
+                content: '<p class=\'k-text-center\'>Wprowadź nową nazwę pliku</p>',
                 okText: 'Zastosuj',
                 cancel: 'Anuluj',
                 close: 'Zamknij'
@@ -533,7 +574,7 @@ if (kendo.ui.FileManager) {
         }
     });
 }
-  
+
 /* Upload messages */
 
 if (kendo.ui.Upload) {
@@ -660,7 +701,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Wyrównanie",
     "buttons": {
-      "justtifyLeft": "Wyrównaj w lewo",
+      "justifyLeft": "Wyrównaj w lewo",
       "justifyCenter": "Centruj",
       "justifyRight": "Wyrównaj w prawo",
       "justifyFull": "Dostosuj",
@@ -686,7 +727,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
     "freezeColumns": "Zablokuj kolumny",
     "unfreeze": "Odblokuj okienka"
     }
-  }, 
+  },
   "confirmationDialog": {
     "text": "Czy na pewno chcesz usunąć ten arkusz?",
     "title": "Usuń arkusz"
@@ -814,10 +855,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Tekst kończy się na"
     },
     "date": {
-      "eq":  "Data jest równa",
+      "eq": "Data jest równa",
       "neq": "Data nie jest równa",
-      "lt":  "Data jest przed",
-      "gt":  "Data jest po"
+      "lt": "Data jest przed",
+      "gt": "Data jest po"
     },
     "number": {
       "eq": "Jest równa",
@@ -850,7 +891,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Dodaj wiersz poniżej",
   "alignment": "Wyrównanie",
   "alignmentButtons": {
-    "justtifyLeft": "Wyrównaj w lewo",
+    "justifyLeft": "Wyrównaj w lewo",
     "justifyCenter": "Centruj",
     "justifyRight": "Wyrównaj w prawo",
     "justifyFull": "Dostosuj",
@@ -1017,5 +1058,21 @@ if (kendo.ui.MultiColumnComboBox) {
     kendo.ui.MultiColumnComboBox.prototype.options.messages =
     $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
 }
-  
+
+/* Validator */
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages, {
+	required: 'Wartość {0} jest wymagana',
+	pattern: 'Wartość {0} jest nieprawidłowa',
+	min: '{0} musi być nie mniejsze niż {1}',
+	max: '{0} musi być nie większe niż {1}',
+	step: 'Wartość {0} jest nieprawidłowa',
+	email: 'Nieprawidłowy email: {0}',
+	url: 'Nieprawidłowy URL: {0}',
+	date: 'Nieprawidłowa data: {0}',
+	dateCompare: 'Data początkowa nie może być późniejsza niż końcowa.'
+});
+}
+
 })(window.kendo.jQuery);

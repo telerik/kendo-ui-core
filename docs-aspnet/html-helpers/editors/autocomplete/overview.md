@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn more about the Telerik UI AutoComplete component for {{ site.framework }} and its various features like virtualization, data binding options, and accessibility support."
 previous_url: /helpers/html-helpers/autocomplete, /helpers/editors/autocomplete/overview
 slug: htmlhelpers_autocomplete_aspnetcore
-position: 1
+position: 0
 ---
 
-# AutoComplete HtmlHelper Overview
+# {{ site.framework }} AutoComplete Overview
 
+{% if site.core %}
+The Telerik UI AutoComplete TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI AutoComplete widget.
+{% else %}
 The Telerik UI AutoComplete HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI AutoComplete widget.
+{% endif %}
 
 The AutoComplete provides suggestions depending on the typed text and allows multiple value entries.
 
-* [Demo page for the AutoComplete](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
+* [Demo page for the AutoComplete HtmlHelper](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
+{% if site.core %}
+* [Demo page for the AutoComplete TagHelper](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
+{% endif %}
 
 ## Initializing the AutoComplete
 
-The following example demonstrates how to define the AutoComplete by using the AutoComplete HtmlHelper.
+The following example demonstrates how to define the AutoComplete.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
         .Name("autocomplete")
         .DataTextField("ProductName")
@@ -42,7 +49,10 @@ The following example demonstrates how to define the AutoComplete by using the A
             };
         }
     </script>
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-autocomplete name="products" filter="FilterType.StartsWith"></kendo-autocomplete>
 ```
 ```Controller
 
@@ -77,12 +87,110 @@ The following example demonstrates how to define the AutoComplete by using the A
         }
     }
 ```
+{% else %}
+```Controller
+
+    public class AutoCompleteController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Products_Read(string text)
+        {
+            var result = GetProducts();
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                result = result.Where(p => p.ProductName.Contains(text)).ToList();
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private static IEnumerable<ProductViewModel> GetProducts()
+        {
+            var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
+            {
+                ProductID = "" + i,
+                ProductName = "Product " + i
+            });
+
+            return result;
+        }
+    }
+```
+{% endif %}
+
+
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the AutoComplete HtmlHelper.
+The following example demonstrates the basic configuration of the AutoComplete.
 
+{% if site.core %}
+```HtmlHelper
+
+    @(Html.Kendo().AutoComplete()
+          .Name("products2")
+          .DataTextField("ProductName")
+          .Filter("contains")
+          .MinLength(3)
+          .HtmlAttributes(new { style = "width:100%" })
+          .DataSource(source =>
+          {
+              source
+                  .Read(read =>
+                  {
+                      read.Action("GetProducts", "Home")
+                      .Data("onAdditionalData");
+                  })
+                  .ServerFiltering(true);
+          })
+    )
+
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#products").val() // sends the typed value from the AutoComplete to the server
+            };
+        }
+    </script>
 ```
+```TagHelper
+
+    <kendo-autocomplete name="products" filter="FilterType.Contains"
+                        datatextfield="ProductName"
+                        min-length="3" style="width: 100%;">
+        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+            <transport>
+                <read url="@Url.Action("GetProducts", "Home")" data="onAdditionalData" />
+            </transport>
+        </datasource>
+    </kendo-autocomplete>
+
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#products").val() // sends the typed value from the AutoComplete to the server
+            };
+        }
+    </script>
+```
+```Controller
+    public JsonResult GetProducts(string text)
+    {
+        // filter the data based on the text value
+        // return an IEnumerable collection to the view     
+        return Json(products.ToList());
+    }
+```
+{% else %}
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
         .Name("autocomplete")
         .DataTextField("ProductName")
@@ -100,7 +208,7 @@ The following example demonstrates the basic configuration of the AutoComplete H
         {
             source.Read(read =>
             {
-                read.Action("Products_Read", "Home")
+                read.Action("GetProducts", "Home")
                     .Data("onAdditionalData");
             })
             .ServerFiltering(true);
@@ -115,35 +223,34 @@ The following example demonstrates the basic configuration of the AutoComplete H
         }
     </script>
 ```
+```Controller
+    public JsonResult GetProducts(string text)
+    {
+        // filter the data based on the text value
+        // return an IEnumerable collection to the view     
+        return Json(products.ToList(), JsonRequestBehavior.AllowGet);
+    }
+```
+{% endif %}
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_autocomplete_databinding_aspnetcore %})
-* [Grouping]({% slug htmlhelpers_autocomplete_grouping_aspnetcore %})
-* [Templates]({% slug htmlhelpers_autocomplete_templates_aspnetcore %})
-* [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})
+* [Data binding]({% slug htmlhelpers_autocomplete_databinding_aspnetcore %})—The AutoComplete supports multiple data binding approaches: server, model, custom, and ajax binding. 
+* [Grouping]({% slug htmlhelpers_autocomplete_grouping_aspnetcore %})—You can group the data that is displayed in the AutoComplete.
+* [Templates]({% slug htmlhelpers_autocomplete_templates_aspnetcore %})—To take full control over the rendering of the AutoComplete items, popup header, and popup footer, you can use the available templates.
+* [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})—The built-in virtualization allows you to display large datasets.
+* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})—The AutoComplete is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
-## Events
+## Next Steps
 
-For a complete example on basic AutoComplete events, refer to the [demo on using the events of the AutoComplete](https://demos.telerik.com/{{ site.platform }}/autocomplete/events).
-
-## Referencing Existing Instances
-
-To reference an existing AutoComplete instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI AutoComplete for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the AutoComplete is used to get its client-side instance.
-            var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-        });
-    </script>
-```
+* [Getting Started with the AutoComplete]({% slug aspnetcore_autocomplete_getting_started %})
+* [Basic Usage of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
+{% if site.core %}
+* [Basic Usage of the AutoComplete TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
+* [AutoComplete in Razor Pages]({% slug   htmlhelpers_autocomplete_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/index)
-* [Using the API of the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
-* [Server-Side API](/api/autocomplete)
+* [Using the API of the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/api)
+* [Knowledge Base Section](/knowledge-base)

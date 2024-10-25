@@ -7,6 +7,8 @@ res_type: api
 
 # kendo.ui.DropTargetArea
 
+Represents the Kendo UI DropTargetArea widget. Inherits from [DropTarget](/api/javascript/ui/droptarget).
+
 ## Configuration
 
 ### group `String`*(default: "default")*

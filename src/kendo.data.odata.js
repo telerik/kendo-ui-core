@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "data.odata",
     name: "OData",
     category: "framework",
@@ -23,7 +21,7 @@ var __meta__ = { // jshint ignore:line
             gte: "ge",
             lt: "lt",
             lte: "le",
-            contains : "substringof",
+            contains: "substringof",
             doesnotcontain: "substringof",
             endswith: "endswith",
             startswith: "startswith",
@@ -110,15 +108,15 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (operator === "isnullorempty") {
-                    filter = kendo.format("{0} {1} null or {0} {1} ''", field, filter);
-                } else if(operator === "isnotnullorempty") {
-                    filter = kendo.format("{0} {1} null and {0} {1} ''", field, filter);
+                    filter = kendo.format("({0} {1} null or {0} {1} '')", field, filter);
+                } else if (operator === "isnotnullorempty") {
+                    filter = kendo.format("({0} {1} null and {0} {1} '')", field, filter);
                 } else if (operator === "isnull" || operator === "isnotnull") {
                     filter = kendo.format("{0} {1} null", field, filter);
                 } else if (operator === "isempty" || operator === "isnotempty") {
                     filter = kendo.format("{0} {1} ''", field, filter);
                 } else if (filter && value !== undefined) {
-                    type = $.type(value);
+                    type = kendo.type(value);
                     if (type === "string") {
                         format = "'{1}'";
                         value = value.replace(/'/g, "''");
@@ -174,7 +172,7 @@ var __meta__ = { // jshint ignore:line
 
     function stripMetadata(obj) {
         for (var name in obj) {
-            if(name.indexOf("@odata") === 0) {
+            if (name.indexOf("@odata") === 0) {
                 delete obj[name];
             }
         }
@@ -267,7 +265,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function createBatchRequest(transport, colections) {
-        var options = {};
+		var options = extend({}, transport.options.batch);
         var boundary = createBoundary("sf_batch_");
         var requestBody = "";
         var changeId = 0;
@@ -276,9 +274,9 @@ var __meta__ = { // jshint ignore:line
 
         options.type = transport.options.batch.type;
         options.url = isFunction(batchURL) ? batchURL() : batchURL;
-        options.headers = {
-            "Content-Type": "multipart/mixed; boundary=" + boundary
-        };
+		options.headers = extend(options.headers || {}, {
+			"Content-Type": "multipart/mixed; boundary=" + boundary
+		});
 
         if (colections.updated.length) {
             requestBody += processCollection(colections.updated, boundary, changeset, changeId, transport, "update", false);
@@ -437,7 +435,7 @@ var __meta__ = { // jshint ignore:line
             "odata-v4": {
                 type: "json",
                 data: function(data) {
-                    if ($.isArray(data)) {
+                    if (Array.isArray(data)) {
                         for (var i = 0; i < data.length; i++) {
                             stripMetadata(data[i]);
                         }
@@ -490,6 +488,13 @@ var __meta__ = { // jshint ignore:line
                         delete result.$inlinecount;
                     }
 
+					if (result && result.$filter) {
+						// Remove the single quotation marks around the GUID (OData v4).
+						result.$filter = result.$filter.replace(/('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')/ig, function(x) {
+							return x.substring(1, x.length - 1);
+						});
+					}
+
                     return result;
                 },
                 submit: function(e) {
@@ -502,7 +507,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     $.ajax(extend(true, {}, {
-                        success: function (response) {
+                        success: function(response) {
                             var responses = parseBatchResponse(response);
                             var index = 0;
                             var current;
@@ -531,7 +536,7 @@ var __meta__ = { // jshint ignore:line
                                 }
                             }
                         },
-                        error: function (response, status, error) {
+                        error: function(response, status, error) {
                             e.error(response, status, error);
                         }
                     }, options));
@@ -541,7 +546,5 @@ var __meta__ = { // jshint ignore:line
     });
 
 })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

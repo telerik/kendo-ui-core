@@ -71,6 +71,25 @@ The crosshair configuration options.
 
 > The crosshair is displayed when the [axisDefaults.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.crosshair.visible) option is set to `true`.
 
+#### Example - set the default crosshair configuration options
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      axisDefaults: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          zIndex:1,
+          visible: true
+        }
+      },
+      series: [
+        { type: "column", data: [[1, 2], [3, 4], [4, 5]] }
+      ]
+    });
+</script>
+
 ### axisDefaults.crosshair.color `String`
 
 The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
@@ -269,6 +288,40 @@ The fields which can be used in the template are:
 * culture - the default culture (if set) on the label
 
 > The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the axisDefaults label template as a string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      axisDefaults: {
+        categories: ["2011", "2012", "2013"],
+        labels: {
+          template: "Value: #: value #"
+        },
+      },
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+#### Example - set the axisDefaults label template as a function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      axisDefaults: {
+        categories: ["2011", "2012", "2013"],
+        labels: {
+          template: kendo.template("Value: #: value #")
+        },
+      },
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
 
 ### axisDefaults.labels.visible `Boolean` *(default: true)*
 
@@ -804,6 +857,20 @@ that the total number of categories does not exceed [categoryAxis.maxDateGroups]
 
 This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        categoryAxis: {
+            categories: [
+                new Date("2012/02/01 00:00:00"),
+                new Date("2012/02/02 00:00:00"),
+                new Date("2012/02/20 00:00:00")
+            ],
+            baseUnitStep: "3" // Displays a category for every 3 days.
+        }
+    });
+    </script>
+
 ### categoryAxis.categories `Array`
 
 The category names. The chart will create a category for every item of the array.
@@ -1289,7 +1356,7 @@ The padding of the crosshair tooltip. A numeric value will set all paddings.
             visible: true
           },
           visible: true
-        }
+        },
         categories: ["2012", "2013"]
       }],
       series: [
@@ -1403,6 +1470,35 @@ The top padding of the crosshair tooltip.
       series: [
         { data: [1, 2, 3] }
       ]
+    });
+    </script>
+
+### categoryAxis.crosshair.tooltip.position `String`
+
+The position of the crosshair tooltip.
+
+#### Example - set the category axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        crosshair: {
+          tooltip: {
+            visible: true,
+            // Position can be top or bottom.
+            position: "bottom"
+          },
+          color: "green",
+          width: 2,
+          visible: true
+        }
+      },
+      series: [{
+        type: "line",
+        data: [1, 2, 3]
+      }]
     });
     </script>
 
@@ -2439,6 +2535,8 @@ The fields which can be used in the template are:
 * dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
 * format - the default format of the label
 * culture - the default culture (if set) on the label
+* index - the 0-based index of the current label
+* count - the total number of labels on the axis
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -3173,7 +3271,8 @@ The color of the minor grid lines. Accepts a valid CSS color string, including h
       categoryAxis: {
         categories: [ "2012", "2013"],
         minorGridLines: {
-          color: "#aa00bb"
+          color: "#aa00bb",
+          visible: true
         }
       },
       series: [
@@ -3190,7 +3289,8 @@ The color of the minor grid lines. Accepts a valid CSS color string, including h
       categoryAxis: {
         categories: [ "2012", "2013"],
         minorGridLines: {
-          color: "rgb(128, 0, 255)"
+          color: "rgb(128, 0, 255)",
+          visible: true
         }
       },
       series: [
@@ -3207,7 +3307,8 @@ The color of the minor grid lines. Accepts a valid CSS color string, including h
       categoryAxis: {
         categories: [ "2012", "2013"],
         minorGridLines: {
-          color: "green"
+          color: "green",
+          visible: true
         }
       },
       series: [
@@ -3237,7 +3338,8 @@ The following dash types are supported:
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          dashType: "dashDot"
+          dashType: "dashDot",
+          visible: true
         },
         categories: ["2012", "2013"]
       }],
@@ -3249,7 +3351,7 @@ The following dash types are supported:
 
 ### categoryAxis.minorGridLines.visible `Boolean` *(default: false)*
 
-If set to `true` the chart will display the minor grid lines. By default the minor grid lines are visible.
+If set to `true` the chart will display the minor grid lines. By default the minor grid lines are not visible.
 
 #### Example - hide the category axis minor grid lines
 
@@ -3258,7 +3360,7 @@ If set to `true` the chart will display the minor grid lines. By default the min
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          visible: false
+          visible: true
         },
         categories: ["2012", "2013"]
       }],
@@ -3279,7 +3381,8 @@ The width of the category axis minor grid lines in pixels.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          width: 3
+          width: 3,
+          visible: true
         },
         categories: ["2012", "2013"]
       }],
@@ -3300,7 +3403,8 @@ The step of the category axis minor grid lines.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          step: 2
+          step: 2,
+          visible: true
         },
         categories: ["2011", "2012", "2013"]
       }],
@@ -3321,7 +3425,8 @@ The skip of the category axis minor grid lines.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          skip: 2
+          skip: 2,
+          visible: true
         },
         categories: ["2011", "2012", "2013"]
       }],
@@ -3342,6 +3447,7 @@ The configuration of the category axis minor ticks.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorTicks: {
+          visible: true,
           size: 6,
           color: "green",
           width: 5
@@ -3363,8 +3469,9 @@ The color of the category axis minor ticks lines. Accepts a valid CSS color stri
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      categoryAxis: {
-        minorTicks {
+      categoryAxis: [{
+        minorTicks: {
+          visible: true,
           color: "#aa00bb"
         },
         categories: ["2011", "2012", "2013"]
@@ -3380,8 +3487,9 @@ The color of the category axis minor ticks lines. Accepts a valid CSS color stri
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      categoryAxis: {
-        minorTicks {
+      categoryAxis: [{
+        minorTicks: {
+          visible: true,
           color: "rgb(128, 0, 255)"
         },
         categories: ["2011", "2012", "2013"]
@@ -3397,8 +3505,9 @@ The color of the category axis minor ticks lines. Accepts a valid CSS color stri
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      categoryAxis: {
-        minorTicks {
+      categoryAxis: [{
+        minorTicks: {
+          visible: true,
           color: "green"
         },
         categories: ["2011", "2012", "2013"]
@@ -3420,6 +3529,7 @@ The length of the tick line in pixels.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorTicks: {
+          visible: true,
           size: 6
         },
         categories: ["2011", "2012", "2013"]
@@ -3462,6 +3572,7 @@ The width of the minor ticks in pixels.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorTicks: {
+          visible: true,
           width: 3
         },
         categories: ["2011", "2012", "2013"]
@@ -3483,6 +3594,7 @@ The step of the category axis minor ticks.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorTicks: {
+          visible: true,
           step: 2
         },
         categories: ["2011", "2012", "2013"]
@@ -3629,6 +3741,134 @@ The start position of the plot band in axis units.
     });
     </script>
 
+### categoryAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [categoryAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.plotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### categoryAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### categoryAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### categoryAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### categoryAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### categoryAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### categoryAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### categoryAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### categoryAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### categoryAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### categoryAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### categoryAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### categoryAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### categoryAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### categoryAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### categoryAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### categoryAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### categoryAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### categoryAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### categoryAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### categoryAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
 ### categoryAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
@@ -3666,6 +3906,1422 @@ The end position of the plot band in axis units.
       series: [
         { data: [1, 2, 3] }
       ]
+    });
+    </script>
+
+### categoryAxis.rangeLabels `Object`
+
+The configuration of the date axis date range labels.
+
+#### Example - configure the category axis date range labels
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.background `String`
+
+The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the category axis date range label background as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          background: "#aa00bb",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border `Object`
+
+The border of the labels.
+
+#### Example - set the category axis date range label border
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            dashType: "dashDot",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the category axis date range label border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the category axis date range label border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            dashType: "dashDot",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example - set the category axis date range label border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            dashType: "dashDot",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.color `String`
+
+The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the category axis date range label color as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          color: "#aa00bb",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.culture `String`
+
+The culture to use when formatting date values. See the [globalization overview](/framework/globalization/overview) for more information.
+
+### categoryAxis.rangeLabels.dateFormats `Object`
+
+The format used to display date range labels for [date category axis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.type).
+The `{0}` placeholder represents the category value.
+
+The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
+Setting the [categoryAxis.rangeLabels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) option will override the date formats.
+
+See also: [kendo.format](/api/javascript/kendo/methods/format).
+
+> Not supported for radar charts. Use [categoryAxis.rangeLabels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) instead.
+
+#### Example - set category axis date formats
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            days: "d"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.days `String` *(default: "M/d")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
+
+#### Example - set the days format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            days: "d"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.hours `String` *(default: "HH:mm")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
+
+#### Example - set the hours format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            hours: "HH:mm:ss"
+          },
+          visible: true
+        },
+        labels: {
+            format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.months `String` *(default: "MMM 'yy")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
+
+#### Example - set the months format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            months: "MMM-yy"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.weeks `String` *(default: "M/d")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+
+#### Example - set the weeks format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            weeks: "M-d"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.years `String` *(default: "yyyy")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
+
+#### Example - set the years format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            years: "yy"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+
+#### Example - set the category axis date range label font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          font: "20px sans-serif",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.format `String`
+
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+
+#### Example - set the category axis date range label format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "MM/dd",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin `Number|Object` *(default: 0)*
+
+The margin of the labels. A numeric value will set all margins.
+
+#### Example - set the category axis date range label margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: 20,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the labels.
+
+#### Example - set the category axis date range label bottom margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            bottom: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.left `Number` *(default: 0)*
+
+The left margin of the labels.
+
+#### Example - set the category axis date range label left margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            left: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.right `Number` *(default: 0)*
+
+The right margin of the labels.
+
+#### Example - set the category axis date range label right margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            right: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.top `Number` *(default: 0)*
+
+The top margin of the labels.
+
+#### Example - set the category axis date range label top margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            top: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.mirror `Boolean` *(default: false)*
+
+If set to `true` the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.
+
+#### Example - mirror the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          mirror: true,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      valueAxis: {
+        visible: false
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding `Object|Number` *(default: 0)*
+
+The padding of the labels. A numeric value will set all paddings.
+
+#### Example - set the category axis date range label padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: 20,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the labels.
+
+#### Example - set the category axis date range label bottom padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: [{
+        labels: {
+          padding: {
+            bottom: 20
+          }
+        },
+        categories: ["2011", "2012", "2013"]
+      }],
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.left `Number` *(default: 0)*
+
+The left padding of the labels.
+
+#### Example - set the category axis date range label left padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: {
+            left: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.right `Number` *(default: 0)*
+
+The right padding of the labels.
+
+#### Example - set the category axis date range label right padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: {
+            right: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.top `Number` *(default: 0)*
+
+The top padding of the labels.
+
+#### Example - set the category axis date range label top padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: {
+            top: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.rotation `Number|String|Object` *(default: 0)*
+
+The rotation angle of the date range labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - rotate the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: 90,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+#### Example - enable auto rotation for the category axis date range labels
+
+    <div id="chart" style="width:200px;"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: "auto",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+#### Example - align the rotated category axis date range labels center
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: {
+            angle: 45,
+            align: "center"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - rotate the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: {
+            angle: 90
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
+
+The fields which can be used in the template are:
+
+* value - the category value
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+* text - The default label text.
+* index - The index of the label.
+* count - The total number of rendered labels.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the category axis template as a string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          template: "Year: #: value.getFullYear() #",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+#### Example - set the category axis template as a function
+
+    <div id="chart"></div>
+    <script>
+    function rangeLabelTemplate(e) {
+      return "Year: " + e.value.getFullYear();
+    }
+
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          template: rangeLabelTemplate,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.visible `Boolean` *(default: false)*
+
+If set to `true`, the Chart displays the category axis date range labels.
+By default, the category axis date range labels are not visible.
+
+#### Example - hide the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.visual `Function`
+
+A function that can be used to create a custom visual for the date range labels. The available argument fields are:
+
+* createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* dataItem - the data item, in case a field has been specified
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* text - the label text.
+* value - the category value
+
+#### Example - using custom visual for the labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+            format: 'dd-MMM',
+            visible: true,
+            visual: function(e) {
+                var rect = new kendo.geometry.Rect(e.rect.origin, [e.rect.size.width, 100]);
+                var layout = new kendo.drawing.Layout(rect, {
+                    orientation: "vertical",
+                    alignContent: "center"
+                });
+                var words = e.text.split("-");
+                for (var i = 0; i < words.length; i++) {
+                    layout.append(new kendo.drawing.Text(words[i]));
+                }
+                layout.reflow();
+                return layout;
+            }
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
     });
     </script>
 
@@ -4474,7 +6130,7 @@ If set to `true` the chart will display the category axis title. By default the 
     $("#chart").kendoChart({
       categoryAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         },
         categories: ["2012", "2013"]
@@ -4535,7 +6191,7 @@ The supported values are:
 
 * "date" - specialized axis for displaying chronological data.
 
-#### Example - set the category axis type
+#### Example - set the category axis type to date
 
     <div id="chart"></div>
     <script>
@@ -4546,6 +6202,25 @@ The supported values are:
           new Date("2011/12/21")
         ],
         type: "date"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+#### Example - set the category axis type to category
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: [
+          "Seats",
+          "Cars",
+          "People"
+        ],
+        type: "category"
       },
       series: [
         { data: [1, 2, 3] }
@@ -5388,7 +7063,7 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       categoryAxis: {
-        notesdata {
+        notesdata: {
           data: [{
             value: 1,
             label: {
@@ -6590,19 +8265,385 @@ The fields which can be used in the template are:
 
 ### legend.item `Object`
 
-The chart legend item configuration.
+The configuration of the Chart legend item.
+
+To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/chart#configuration-series.legendItem) settings of the series.
+
+#### Example - disable highlight of legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        data: [4, 5, 6]
+      }],
+      legend: {
+        item: {
+          highlight: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+#### Example - display legacy style markers in the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+          /* Use these settings to emulate the legacy legend item rendering */
+          legendItem: {
+              type: 'line',
+              line: {
+                  dashType: 'solid',
+              },
+              markers: {
+                  visible: false
+              },
+              highlight: {
+                  visible: false
+              }
+          },
+      }
+    });
+    </script>
+
+### legend.item.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "area",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "area",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      legend: {
+        item: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### legend.item.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
 
 ### legend.item.cursor `String`
 The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### legend.item.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### legend.item.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### legend.item.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### legend.item.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### legend.item.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### legend.item.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### legend.item.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### legend.item.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### legend.item.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### legend.item.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### legend.item.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      legend: {
+        item: {
+          line: {
+            color: "#777",
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### legend.item.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### legend.item.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: "green"
+        },
+        data: [1, 2, 3]
+      }],
+      legend: {
+        item: {
+          markers: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### legend.item.markers.border `Object|Function`
+
+The border of the markers.
+
+### legend.item.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### legend.item.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### legend.item.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### legend.item.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### legend.item.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          name: "Series A",
+          data: [1, 2, 3]
+        }],
+        legend: {
+          position: "bottom",
+          item: {
+            markers: {
+              visual: function (e) {
+                var origin = e.rect.origin;
+                var center = e.rect.center();
+                var bottomRight = e.rect.bottomRight();
+
+                var path = new kendo.drawing.Path({
+                  fill: {
+                    color: e.options.border.color
+                  }
+                })
+                .moveTo(origin.x, bottomRight.y)
+                .lineTo(bottomRight.x, bottomRight.y)
+                .lineTo(center.x, origin.y)
+                .close();
+
+                return path;
+              }
+            }
+          }
+        }
+      });
+    </script>
+
+### legend.item.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
 
 ### legend.item.visual `Function`
 
 A function that can be used to create a custom visual for the legend items. The available argument fields are:
 
-* options - the item options.
-* createVisual - a function that can be used to get the default visual.
-* series - the item series.
-* pointIndex - the index of the point in the series. Available for pie, donut and funnel series.
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
 
 #### Example - using custom visual for the legend items
 
@@ -7350,6 +9391,113 @@ The spacing between the labels in pixels when the [legend.orientation](/api/java
     });
     </script>
 
+### legend.title `Object`
+
+The legend title configuration options or text.
+
+### legend.title.align `String` *(default: "center")*
+
+The alignment of the title.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+### legend.title.background `String` *(default: "white")*
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border `Object`
+
+The border of the title.
+
+### legend.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the legend title border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### legend.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+### legend.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### legend.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### legend.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### legend.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### legend.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### legend.title.padding `Number|Object` *(default: 5)*
+
+The padding of the title. A numeric value will set all margins.
+
+### legend.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### legend.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### legend.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### legend.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### legend.title.position `String` *(default: "top")*
+
+The position of the title.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+### legend.title.text `String`
+
+The text of the legend title. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### legend.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the title. By default the title will be displayed.
+
 ### legend.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the legend. By default the chart legend is visible.
@@ -7407,6 +9555,516 @@ The legend width when the [legend.orientation](/api/javascript/dataviz/ui/chart#
       ]
     });
     </script>
+
+
+### paneDefaults `Object`
+
+The default options for all panes.
+
+### paneDefaults.background `String`
+
+The background color of all chart panes. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the default panes background
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        background: "#00ff00"
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.border `Object`
+
+The border of all chart panes.
+
+#### Example - set the default pane border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          border: {
+            color: "red",
+            width: 2
+          }
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### paneDefaults.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### paneDefaults.clip `Boolean`
+
+Specifies whether the charts in the panes should be clipped. By default all charts except radar, polar and 100% stacked charts are clipped.
+
+#### Example - set the chart pane clip option
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        type: "line"
+      },
+      series: [
+        { data: [1, 100, 1] },
+        { data: [1, 100, 1], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane", max: 70 },
+        { pane: "bottom-pane", name: "bottom", max: 70 }
+      ],
+      paneDefaults: {
+        clip: false
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.height `Number`
+
+The default pane height in pixels.
+
+#### Example - set the default pane height
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        height: 200
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane"  }
+      ]
+    });
+    </script>
+
+### paneDefaults.margin `Number|Object` *(default: 0)*
+
+The margin of the panes. A numeric value will set all margins.
+
+#### Example - set the default pane margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        margin: 10
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the chart panes.
+
+### paneDefaults.margin.left `Number` *(default: 0)*
+
+The left margin of the chart panes.
+
+### paneDefaults.margin.right `Number` *(default: 0)*
+
+The right margin of the chart panes.
+
+### paneDefaults.margin.top `Number` *(default: 0)*
+
+The top margin of the chart panes.
+
+### paneDefaults.padding `Number|Object` *(default: 0)*
+
+The padding of the panes. A numeric value will set all paddings.
+
+#### Example - set the default pane padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        padding: 10
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the chart panes.
+
+### paneDefaults.padding.left `Number` *(default: 0)*
+
+The left padding of the chart panes.
+
+### paneDefaults.padding.right `Number` *(default: 0)*
+
+The right padding of the chart panes.
+
+### paneDefaults.padding.top `Number` *(default: 0)*
+
+The top padding of the chart panes.
+
+### paneDefaults.title `String|Object`
+
+The title configuration of the all panes.
+
+#### Example - set the font for all pane titles
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            font: "700 14px sans-serif"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.background `String`
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.title.border `Object`
+
+The border of the title.
+
+#### Example - set the default pane title border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            border: {
+              color: "red",
+              width: 2
+            }
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### paneDefaults.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### paneDefaults.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the default pane title color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            color: "#aa00bb"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the title.
+
+#### Example - set the default pane title font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            font: "20px sans-serif"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+#### Example - set the default pane title margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            margin: 10
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### paneDefaults.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### paneDefaults.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### paneDefaults.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### paneDefaults.title.position `String` *(default: "center")*
+
+The position of the title.
+
+The supported values are:
+
+* "left" - the axis title is positioned on the left (applicable to horizontal axis)
+* "right" - the axis title is positioned on the right (applicable to horizontal axis)
+* "center" - the axis title is positioned in the center
+
+#### Example - set the default pane title position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            position: "left"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.visual `Function`
+
+A function that can be used to create a custom visual for the title. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### panes `Array`
 
@@ -8371,7 +11029,7 @@ The text color of the title. Accepts a valid CSS color string, including hex and
     });
     </script>
 
-### panes.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+### panes.title.font `String` *(default: "700 18px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
 
@@ -8835,6 +11493,11 @@ The author of the PDF document.
       chart.saveAsPDF();
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 The creator of the PDF document.
 
@@ -8889,7 +11552,7 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
     <script>
       $("#chart").kendoChart({
           pdf: {
-              proxyURL: "/save",
+              proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
               forceProxy: true
           },
           legend: {
@@ -8901,8 +11564,8 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
           ]
       });
 
-      var chart = $("#chart").getKendoChart();
-      chart.saveAsPDF();
+      //var chart = $("#chart").getKendoChart();
+      //chart.saveAsPDF(); Calling the method will result in an "403 Access Denied" error because the proxyURL cannot be accessed from the Dojo coderunner;
     </script>
 
 ### pdf.fileName `String` *(default: "Export.pdf")*
@@ -8927,6 +11590,14 @@ Specifies the file name of the exported PDF file.
       var chart = $("#chart").getKendoChart();
       chart.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 Specifies the keywords of the exported PDF file.
@@ -9577,7 +12248,7 @@ The supported values are:
                 categories: ["Foo", "Bar"]
             }
         });
-    <script>
+    </script>
 
 ### series `Array`
 
@@ -9636,6 +12307,75 @@ The supported values are:
           data: [1, 2, 3],
           aggregate: "avg"
       }]
+    });
+    </script>
+
+##### Example - set the chart series aggregate using a function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: [
+          new Date("2012/01/01"),
+          new Date("2012/01/02"),
+          new Date("2012/01/02")
+        ],
+        type: "date"
+      },
+      series: [{
+          data: [1, 2, 3],
+          aggregate: function(values, series, dataItems, category) {
+            // Two values with the same date(2 and 3), add them together and then divide them by the total number of values with the same category.
+            let average = values.reduce((a, b) => a + b) / values.length;
+
+            return average;
+          }
+      }]
+    });
+    </script>
+
+### series.autoFit `Boolean` *(default: false)*
+
+If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series.
+
+> The `autoFit` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "pie" or "donut".
+
+##### Example - set the chart series autoFit
+
+    <div id="chart" style="width: 200px;"></div>
+    <script>
+    var data = [{
+      kind: 'Solar', share: 0.052
+    }, {
+      kind: 'Wind', share: 0.225
+    }, {
+      kind: 'Other', share: 0.192
+    }, {
+      kind: 'Hydroelectric', share: 0.175
+    }, {
+      kind: 'Nuclear', share: 0.238
+    }, {
+      kind: 'Coal', share: 0.118
+    }];
+
+    $("#chart").kendoChart({
+      dataSource: { data: data },
+      series: [{
+          type: "pie",
+          field: "share",
+          categoryField: "kind",
+          autoFit: true,
+          labels: {
+            color: "#000",
+            position: "outsideEnd",
+            template: "#: category #",
+            visible: true
+          }
+      }],
+      legend: {
+        visible: false
+      }
     });
     </script>
 
@@ -10180,11 +12920,135 @@ The data field containing the color applied when the open value is greater than 
     });
     </script>
 
+### series.drilldownField `String`
+
+The data field which contains the value to use to drill down into detailed data for the point.
+
+#### Example - use the chart series drilldown field to implement drilldown
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }, {
+              company: 'Company B',
+              sales: 200,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 40
+                  }, {
+                    product: 'Product 2',
+                    sales: 160
+                  }]
+              }
+          }]
+        }]
+      });
+
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: "#chart"
+      });
+    </script>
+
+### series.drilldownSeriesFactory `Function`
+
+A function that creates the drilldown series for a given point.
+
+The function should accept a single parameter, the point `drilldownField` value.
+The function should return a series configuration object or a `Promise` that resolves to one.
+
+#### Example - use the chart series drilldownSeriesFactory function to implement dynamic drilldown
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      var vehiclesByModel = {
+        'Tesla': [{
+          model: 'Model 3',
+          count: 225350
+        }, {
+          model: 'Model Y',
+          count: 40159
+        }],
+        'VW': [{
+          model: 'ID.3',
+          count: 60274
+        }, {
+          model: 'ID.4',
+          count: 20302
+        }]
+      };
+
+      var vehiclesByMake = [{
+        company: 'Tesla',
+        count: 314159
+      }, {
+        company: 'VW',
+        count: 112645
+      }];
+
+      function drilldownByModel(make) {
+        const data = vehiclesByModel[make];
+        if (data) {
+          return {
+            type: 'column',
+            name: make + ' Sales by Model',
+            data,
+            field: 'count',
+            categoryField: 'model'
+          };
+        }
+      };
+
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Battery EVs registered in 2022',
+          data: vehiclesByMake,
+          field: 'count',
+          categoryField: 'company',
+          drilldownField: 'company',
+          drilldownSeriesFactory: drilldownByModel
+        }]
+      });
+
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: "#chart"
+      });
+    </script>
+
 ### series.segmentSpacing `Number` *(default: 0)*
 
-The space in pixels between the different segments of the funnel chart.
+The space in pixels between the different segments of the funnel and pyramid charts.
 
-> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 #### Example - set the chart series segmentSpacing field
 
@@ -10291,7 +13155,7 @@ The last element is always created like a rectangle since there is no following 
 
 ### series.dynamicHeight `Boolean` *(default: true)*
 
-> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
 
 When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
 
@@ -10738,6 +13602,51 @@ The data item field which contains the series value. **The field name should be 
     });
     </script>
 
+### series.for `String`
+
+The name of the parent series of the trendline.
+
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to
+> "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
+
+#### Example - set the trendline parent series for field
+
+	  <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          },
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend (LINEAR)",
+        type: "linearTrendline",
+        for: "Sales By Quarter"
+      }]
+    });
+    </script>
+
 ### series.fromField `String` *(default: "min")*
 
 The data item field which contains the series from value.
@@ -10782,6 +13691,217 @@ The data item field which contains the series to value.
     });
     </script>
 
+### series.trendline `Object`
+
+The trendline configuration options.
+
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to
+> "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
+
+#### Example - set the trendline options
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Average",
+        type: "movingAverageTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          period: 3
+        }
+      }]
+    });
+    </script>
+
+### series.trendline.forecast `Object`
+
+The trendline forecast settings. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
+
+#### Example - set the trendline forecast
+
+	  <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              date: new Date(2021, 0, 1),
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              date: new Date(2021, 3, 1),
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              date: new Date(2021, 6, 1),
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              date: new Date(2021, 9, 1),
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "date"
+      }, {
+        name: "Sales Trend",
+        type: "linearTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          forecast: {
+            before: 3,
+            after: 5
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.trendline.forecast.before `Number` *(default: 0)*
+
+The number of intervals to extend the trendline before the first data point.
+
+### series.trendline.forecast.after `Number` *(default: 0)*
+
+The number of intervals to extend the trendline after the last data point.
+
+### series.trendline.order `Number` *(default: 2)*
+
+The order (degree) of the Polynomial trendline. The default value is 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "polynomialTrendline".
+
+Accepted values are from 2 to 6:
+* 2: a Quadratic polynomial trendline with a single extreme point (minimum or maximum) point.
+* 3: a Cubic polynomial trendline with up to 2 extreme points.
+* 4: a polynomial trendline of 4th degree with up to 3 extreme points.
+* 5: a polynomial trendline of 5th degree with up to 4 extreme points.
+* 6: a polynomial trendline of 6th degree with up to 5 extreme points.
+
+#### Example - set the polynomial trendline order (degree)
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        dataSource: {
+            data: [
+            {
+                period: "2021 Q1",
+                count: 369590.0
+            },
+            {
+                period: "2021 Q2",
+                count: 793564.0
+            },
+            {
+                period: "2021 Q3",
+                count: 1441133.0
+            },
+            {
+                period: "2021 Q4",
+                count: 1233020.0
+            }
+            ]
+        },
+        series: [{
+            name: "Sales By Quarter",
+            type: "line",
+            field: "count",
+            categoryField: "period"
+        }, {
+            name: "Sales Trend",
+            type: "polynomialTrendline",
+            for: "Sales By Quarter",
+            trendline: {
+                order: 3
+            }
+        }]
+    });
+    </script>
+
+### series.trendline.period `Number` *(default: 2)*
+
+The number of intervals to take when calculating averages. The value should be an integer greater than 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "movingAverageTrendline".
+
+#### Example - set the moving average trendline period
+
+	<div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [
+          {
+              period: "2021 Q1",
+              count: 669590.0
+          },
+          {
+              period: "2021 Q2",
+              count: 793564.0
+          },
+          {
+              period: "2021 Q3",
+              count: 941133.0
+          },
+          {
+              period: "2021 Q4",
+              count: 1133020.0
+          }
+        ]
+      },
+      series: [{
+        name: "Sales By Quarter",
+        type: "line",
+        field: "count",
+        categoryField: "period"
+      }, {
+        name: "Sales Trend",
+        type: "movingAverageTrendline",
+        for: "Sales By Quarter",
+        trendline: {
+          period: 3
+        }
+      }]
+    });
+    </script>
+
 ### series.noteTextField `String` *(default: "noteText")*
 
 The data item field which contains the series note text.
@@ -10811,6 +13931,8 @@ The data item field which contains the series lower value.
 
 #### Example - set the chart series lower field
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
       dataSource: {
         data: [{
@@ -10834,6 +13956,7 @@ The data item field which contains the series lower value.
          outliersField: "outliers"
       }]
     });
+    </script>
 
 ### series.q1Field `String` *(default: "q1")*
 
@@ -10864,6 +13987,210 @@ The data item field which contains the series q1 value.
          outliersField: "outliers"
       }]
     });
+
+### series.median `Object`
+
+The configuration of the Box Plot median value indicator (line).
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.color `String`
+
+The color of the median visual. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+          }
+        }]
+      });
+    </script>
+
+### series.median.dashType `String` *(default: "solid")*
+
+The dash type of the median visual.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.opacity `Number` *(default: 1)*
+
+The opacity of the median visual. By default the border is opaque.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.width `Number` *(default: 2)*
+
+The width of the median visual in pixels.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20
+          }
+        }]
+      });
+    </script>
 
 ### series.medianField `String` *(default: "median")*
 
@@ -10954,6 +14281,210 @@ The data item field which contains the series upper value.
          outliersField: "outliers"
       }]
     });
+
+### series.mean `Object`
+
+The configuration of the Box Plot mean value indicator (line).
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.color `String`
+
+The color of the mean visual. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+          }
+        }]
+      });
+    </script>
+
+### series.mean.dashType `String` *(default: "dash")*
+
+The dash type of the mean visual.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.opacity `Number` *(default: 1)*
+
+The opacity of the mean visual. By default the border is opaque.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.width `Number` *(default: 2)*
+
+The width of the mean visual in pixels.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20
+          }
+        }]
+      });
+    </script>
 
 ### series.meanField `String` *(default: "mean")*
 
@@ -11203,6 +14734,26 @@ The highlight color. Accepts a valid CSS color string, including hex and rgb.
     });
     </script>
 
+### series.highlight.inactiveOpacity `Number`
+
+The opacity of the series when another series is highlighted.
+
+#### Example - set the chart highlight inactive opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+          type: "donut",
+          data: [1, 2],
+          highlight: {
+            inactiveOpacity: 0.2
+          }
+      }]
+    });
+    </script>
+
+
 ### series.highlight.line `Object`
 
 The line of the highlighted chart series. The color is computed automatically from the base point color.
@@ -11316,6 +14867,110 @@ The width of the line.
       }]
     });
     </script>
+
+### series.highlight.markers.border
+
+The border of the highlighted markers.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            border: {
+               color: 'blue',
+               width: 10
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+### series.highlight.markers.border.color
+
+The border color of the highlighted markers.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            border: {
+               color: 'blue',
+               width: 10
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+### series.highlight.markers.border.width
+
+The border width of the highlighted markers.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            border: {
+               color: 'blue',
+               width: 10
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
+### series.highlight.markers.color
+
+The color of the highlighted marker.
+
+```dojo
+	<div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          markers: {
+            visible: true,
+            type: "roundedRect",
+          },
+          highlight: {            
+            markers:{
+              color: 'red'
+            }
+          },
+          data: [1, 2, 3]
+        }]
+      });
+    </script>  
+```
+
 
 ### series.highlight.opacity `Number`
 
@@ -11438,7 +15093,7 @@ The available argument fields are:
 
 ### series.holeSize `Number`
 
-The diameter of the donut hole in pixels.
+The radius of the donut hole in pixels.
 
 > The `holeSize` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut".
 
@@ -11483,18 +15138,18 @@ The chart series label configuration.
 
 ### series.labels.align `String`
 
-The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel" or "pie".
+The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel", "pyramid" or "pie".
 
 The supported values  for "donut" and "pie" are:
 
 * "circle" - the labels are positioned in circle around the chart.
 * "column" - the labels are positioned in columns to the left and right of the chart.
 
-The supported values for "funnel" are:
+The supported values for "funnel" and "pyramid" are:
 
-* "center" - the labels are positioned in the center over the funnel segment.
-* "right" - the labels are positioned on the right side of the chart and do not (if there is enough space) overlap the funnel segment(s).
-* "left" - the labels are positioned on the left side of the chart and do not (if there is enough space) overlap the funnel segment(s).
+* "center" - the labels are positioned in the center over the segment.
+* "right" - the labels are positioned on the right side of the chart and do not (if there is enough space) overlap the segment(s).
+* "left" - the labels are positioned on the left side of the chart and do not (if there is enough space) overlap the segment(s).
 
 
 #### Example - set the chart series label alignment
@@ -11511,6 +15166,43 @@ The supported values for "funnel" are:
       }]
     });
     </script>
+
+### series.labels.ariaTemplate `String | Function`
+
+The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+
+The fields which can be used in the template are:
+
+*   category - the category name. Available for area, bar, column, bubble, donut, line and pie series.
+*   dataItem - the original data item used to construct the point. Will be null if binding to array.
+*   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
+*   series - the data series
+*   value - the point value. Can be a number or object containing each bound field.
+
+#### Example
+
+```pseudo
+    $("#chart").kendoChart({
+         title: {
+             text: "My Chart Title"
+         },
+         series: [
+             {
+                 type: "area",
+                 name: "Series 1",
+                 data: [200, 450, 300, 125],
+                 labels: {
+                     template: "#= value #%",
+                     ariaTemplate: "The value for #= series.name # in #= category # is #= value #",
+                     visible: true
+                 }
+             }
+         ],
+         categoryAxis: {
+             categories: [2000, 2001, 2002, 2003]
+         }
+    });
+```
 
 ### series.labels.background `String|Function`
 
@@ -11712,7 +15404,7 @@ The distance of the labels when [series.type](/api/javascript/dataviz/ui/chart#c
 
 ### series.labels.font `String|Function` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+The font style of the labels. Accepts a valid CSS font string, for example "20px Courier New'".
 
 #### Example - set the chart series label font
     <div id="chart"></div>
@@ -11731,6 +15423,34 @@ The font style of the labels. Accepts a valid CSS color string, for example "20p
 ### series.labels.format `String|Function` *(default: "{0}")*
 
 The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+
+Format placeholders:
+
+* Area, bar, column, line, pie, radarArea, radarColumn and radarLine
+    *   {0} - value
+* Bubble
+    *   {0} - x value
+    *   {1} - y value
+    *   {2} - size value
+    *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
+* Scatter, scatterLine
+    *   {0} - x value
+    *   {1} - y value
+* PolarArea, polarLine and polarScatter
+    *   {0} - x value (degrees)
+    *   {1} - y value
+* Candlestick and OHLC
+    *   {0} - open value
+    *   {1} - high value
+    *   {2} - low value
+    *   {3} - close value
+    *   {4} - category name
+* RangeArea, rangeBar, rangeColumn
+    *   {0} - from value
+    *   {1} - to value
 
 #### Example - set the chart series label format
 
@@ -11955,14 +15675,14 @@ The position of the labels.
 
 * "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
 * "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
-* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, pyramid, radarColumn and waterfall series.**
 * "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
 * "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
 * "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
 * "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
 * "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
-* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel and pyramid series.**
 * "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
@@ -12329,6 +16049,383 @@ The fields which can be used in the template are:
 
 If set to `true` the chart will display the series **to** labels. By default chart series **to** labels are not displayed.
 
+### series.legendItem `Object`
+
+The configuration of the Chart legend item for this series.
+
+#### Example - override the legend item type for the series
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          type: "area"
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series A",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        legendItem: {
+          type: "area"
+        },
+        data: [4, 5, 6]
+      }]
+    });
+    </script>
+
+### series.legendItem.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "area",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "area",
+        name: "Series B",
+        data: [4, 5, 6],
+        legendItem: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.legendItem.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### series.legendItem.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
+
+### series.legendItem.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### series.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### series.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### series.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### series.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### series.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### series.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### series.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### series.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### series.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### series.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### series.legendItem.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series B",
+        data: [4, 5, 6],
+        legendItem: {
+          line: {
+            color: "#777",
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.legendItem.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### series.legendItem.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### series.legendItem.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: "green"
+        },
+        data: [1, 2, 3],
+        legendItem: {
+          markers: {
+            visible: false
+          }
+        }
+      }]
+    });
+    </script>
+
+### series.legendItem.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### series.legendItem.markers.border `Object|Function`
+
+The border of the markers.
+
+### series.legendItem.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### series.legendItem.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### series.legendItem.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### series.legendItem.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### series.legendItem.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          name: "Series A",
+          data: [1, 2, 3],
+          legendItem: {
+            markers: {
+              visual: function (e) {
+                var origin = e.rect.origin;
+                var center = e.rect.center();
+                var bottomRight = e.rect.bottomRight();
+
+                var path = new kendo.drawing.Path({
+                  fill: {
+                    color: e.options.border.color
+                  }
+                })
+                .moveTo(origin.x, bottomRight.y)
+                .lineTo(bottomRight.x, bottomRight.y)
+                .lineTo(center.x, origin.y)
+                .close();
+
+                return path;
+              }
+            }
+          }
+        }]
+      });
+    </script>
+
+### series.legendItem.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
+
+### series.legendItem.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            name: "Series 1",
+            data: [1, 2, 3],
+            legendItem: {
+              visual: function (e) {
+                var color = e.options.markers.background;
+                var labelColor = e.options.labels.color;
+                var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+                var layout = new kendo.drawing.Layout(rect, {
+                  spacing: 5,
+                  alignItems: "center"
+                });
+
+                var marker = new kendo.drawing.Path({
+                  fill: {
+                    color: color
+                  }
+                }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+                var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                  fill: {
+                    color: labelColor
+                  }
+                });
+
+                layout.append(marker, label);
+                layout.reflow()
+
+                return layout;
+              }
+            }
+          }
+        ]
+      });
+    </script>
+
 ### series.line `String|Object`
 
 The chart line configuration options.
@@ -12459,7 +16556,10 @@ The data field containing the low value.
       series: [
         {
           type: "candlestick",
-          lowField: "lowPrice",
+          openField: "open",
+          closeField: "lowPrice",
+          lowField: "low",
+          highField: "high",
           data: [
             { open: 1, high: 2, low: 0.5, lowPrice: 1.5},
             { open: 2, high: 3, low: 1, lowPrice: 1.5}
@@ -12597,9 +16697,9 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
     });
     </script>
 
-### series.markers.border.width `Number|Function` *(default: 0)*
+### series.markers.border.width `Number|Function` *(default: 2)*
 
-The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+The width of the border in pixels.
 
 #### Example - set the chart series markers border width
 
@@ -12613,6 +16713,27 @@ The width of the border in pixels. By default the border width is set to zero wh
           border: {
             width: 2
           }
+        },
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+### series.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`. Defaults to 1/5 of the marker size.
+
+#### Example - set the chart series markers border radius
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          type: "roundedRect",
+          borderRadius: 2
         },
         data: [1, 2, 3]
       }]
@@ -12796,6 +16917,8 @@ The supported values are:
 * "square" - the marker shape is square.
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
 
 #### Example - set the chart series marker shape
 
@@ -12921,6 +17044,27 @@ The rotation angle of the markers.
          }
       }]
     });
+
+### series.markers.zIndex `Number|Function`
+
+An optional Z-index that can be used to change the default stacking order of the markers.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        data: [200, 450, 300, 125],
+        markers: {
+          type: "square",
+          rotation: 45,
+          zIndex: 5
+        }
+      }]
+    });
+    </script>
 
 ### series.outliers `Object`
 
@@ -14187,6 +18331,9 @@ Format placeholders:
     *   {1} - y value
     *   {2} - size value
     *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
 * Scatter, scatterLine
     *   {0} - x value
     *   {1} - y value
@@ -14391,35 +18538,43 @@ The type of the series.
 
 The supported values are:
 
-* area
-* bar
-* bubble
-* bullet
-* candlestick
-* column
-* donut
-* funnel
-* horizontalWaterfall
-* line
-* ohlc
-* pie
-* polarArea
-* polarLine
-* polarScatter
-* radarArea
-* radarColumn
-* radarLine
-* rangeArea
-* rangeBar
-* rangeColumn
-* scatter
-* scatterLine
-* verticalArea
-* verticalBoxPlot
-* verticalBullet
-* verticalLine
-* verticalRangeArea
-* waterfall
+* [`area`](/controls/charts/chart-types/area-charts)
+* [`bar`](/controls/charts/chart-types/bar-charts)
+* [`bubble`](/controls/charts/chart-types/bubble-charts)
+* [`bullet`](/controls/charts/chart-types/bullet-charts)
+* [`candlestick`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
+* [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`funnel`](/controls/charts/chart-types/funnel-charts)
+* [`pyramid`](/controls/charts/chart-types/pyramid-charts)
+* [`heatmap`](/controls/charts/chart-types/heatmap)
+* [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
+* [`line`](/controls/charts/chart-types/line-charts)
+* [`linearTrendline`](/controls/charts/elements/trendlines)
+* [`exponentialTrendline`](/controls/charts/elements/trendlines)
+* [`logarithmicTrendline`](/controls/charts/elements/trendlines)
+* [`powerTrendline`](/controls/charts/elements/trendlines)
+* [`polynomialTrendline`](/controls/charts/elements/trendlines)
+* [`movingAverageTrendline`](/controls/charts/elements/trendlines)
+* [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`pie`](/controls/charts/chart-types/pie-charts)
+* [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
+* [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
+* [`polarScatter`](https://demos.telerik.com/kendo-ui/polar-charts/polar-scatter)
+* [`radarArea`](https://demos.telerik.com/kendo-ui/radar-charts/radar-area)
+* [`radarColumn`](https://demos.telerik.com/kendo-ui/radar-charts/radar-column)
+* [`radarLine`](https://demos.telerik.com/kendo-ui/radar-charts/index)
+* [`rangeArea`](https://demos.telerik.com/kendo-ui/range-area-charts/index)
+* [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
+* [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
+* [`scatter`](/controls/charts/chart-types/scatter-charts)
+* [`scatterLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
+* [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
+* [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
+* [`verticalLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
+* [`verticalRangeArea`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 #### Example - set the chart series type
 
@@ -14451,14 +18606,15 @@ Sets the visible property of a chart series
         $("#chart").kendoChart({
             dataSource: dataSource,
             series: [
-                { field: "Volume", visible:false }
+                { field: "High", visible: false },
+          	    { field: "Low", visible: true }
             ]
         });
     </script>
 
 ### series.visibleInLegend `Boolean` *(default: true)*
 
-A value indicating whether to show the point category name (for funnel, donut and pie series)
+A value indicating whether to show the point category name (for funnel, pyramid, donut and pie series)
 or series name (for other available series types) in the legend.
 
 #### Example - hide a chart series from the legend
@@ -14480,7 +18636,7 @@ or series name (for other available series types) in the legend.
 
 The data item field which indicates whether to show the point category name in the legend.
 
-> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "donut" or "pie".
+> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "pyramid", "donut" or "pie".
 
 #### Example - set the chart series visible in legend field
 
@@ -14503,7 +18659,7 @@ The data item field which indicates whether to show the point category name in t
 
 ### series.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, pyramid, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -14522,7 +18678,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel, line and scatterLine series.
+* points - the segment points. Available for funnel, pyramid, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -14550,6 +18706,166 @@ A function that can be used to create a custom visual for the points. Applicable
           }
         }]
       });
+    </script>
+
+### series.whiskers `Object`
+
+The chart series whiskers configuration.
+
+> The appearance settings for the BoxPlot whiskers.
+
+### series.whiskers.color `String`
+
+The color of the whiskers.
+
+#### Example - set the series whiskers color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           color: "#0000FF"
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
+    </script>
+
+### series.whiskers.dashType `String` (default: "solid")
+
+The dash type of the whiskers.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the series whiskers dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           dashType: "dot"
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
+    </script>
+
+### series.whiskers.opacity `Number` (default: 1)
+
+The opacity of the whiskers.
+
+#### Example - set the series whiskers opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           opacity: 0.3
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
+    </script>
+
+### series.whiskers.width `Number`
+
+The width of the whiskers.
+
+#### Example - set the series whiskers width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           width: 3
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
     </script>
 
 ### series.width `Number`
@@ -15642,6 +19958,45 @@ The chart series label configuration.
     });
     </script>
 
+### seriesDefaults.labels.ariaTemplate `String | Function`
+
+The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+
+The fields which can be used in the template are:
+
+*   category - the category name. Available for area, bar, column, bubble, donut, line and pie series.
+*   dataItem - the original data item used to construct the point. Will be null if binding to array.
+*   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
+*   series - the data series
+*   value - the point value. Can be a number or object containing each bound field.
+
+#### Example
+
+```pseudo
+    $("#chart").kendoChart({
+         title: {
+             text: "My Chart Title"
+         },
+         seriesDefaults: {
+              type: "area",
+              labels: {
+                  template: "#= value #%",
+                  ariaTemplate: "The value for #= series.name # in #= category # is #= value #",
+                  visible: true
+              }
+          },
+         series: [
+             {
+                 name: "Series 1",
+                 data: [200, 450, 300, 125]
+             }
+         ],
+         categoryAxis: {
+             categories: [2000, 2001, 2002, 2003]
+         }
+    });
+```
+
 ### seriesDefaults.labels.background `String`
 
 The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
@@ -16084,14 +20439,14 @@ The position of the labels.
 
 * "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
 * "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
-* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, pyramid, radarColumn and waterfall series.**
 * "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
 * "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
 * "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
 * "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
-* "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
-* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "top" - the label is positioned at the top of the segment. **Applicable for funnel and pyramid series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel and pyramid series.**
 * "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
@@ -16138,9 +20493,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -16321,9 +20676,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -16429,9 +20784,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, funnel, line and pie series.
+* category - the category name. Available for area, bar, column, bubble, donut, funnel, pyramid, line and pie series.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
+* percentage - the point value represented as a percentage value. Available for donut, funnel, pyramid and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
@@ -16462,6 +20817,392 @@ The line chart series options. Accepts all values supported by the [series](/api
         data: [1, 2]
       }]
     });
+    </script>
+
+### seriesDefaults.legendItem `Object`
+
+The configuration of the Chart legend item for this series.
+
+#### Example - override the legend item type for the series
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        markers: {
+          visible: true
+        },
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series A",
+        markers: {
+          type: 'roundedRect',
+          visible: true
+        },
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          type: "area"
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "area",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "area",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          area: {
+            opacity: 0.1
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### seriesDefaults.legendItem.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
+
+### seriesDefaults.legendItem.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### seriesDefaults.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### seriesDefaults.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### seriesDefaults.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### seriesDefaults.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### seriesDefaults.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### seriesDefaults.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### seriesDefaults.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### seriesDefaults.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### seriesDefaults.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### seriesDefaults.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### seriesDefaults.legendItem.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }, {
+        type: "line",
+        name: "Series B",
+        data: [4, 5, 6]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          line: {
+            color: "#777"
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### seriesDefaults.legendItem.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### seriesDefaults.legendItem.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: "green"
+        },
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          markers: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### seriesDefaults.legendItem.markers.border `Object|Function`
+
+The border of the markers.
+
+### seriesDefaults.legendItem.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### seriesDefaults.legendItem.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### seriesDefaults.legendItem.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### seriesDefaults.legendItem.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### seriesDefaults.legendItem.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          name: "Series A",
+          data: [1, 2, 3]
+        }],
+        seriesDefaults: {
+          legendItem: {
+            markers: {
+              visual: function (e) {
+                var origin = e.rect.origin;
+                var center = e.rect.center();
+                var bottomRight = e.rect.bottomRight();
+
+                var path = new kendo.drawing.Path({
+                  fill: {
+                    color: e.options.border.color
+                  }
+                })
+                .moveTo(origin.x, bottomRight.y)
+                .lineTo(bottomRight.x, bottomRight.y)
+                .lineTo(center.x, origin.y)
+                .close();
+
+                return path;
+              }
+            }
+          }
+        }
+      });
+    </script>
+
+### seriesDefaults.legendItem.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
+
+### seriesDefaults.legendItem.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            name: "Series 1",
+            data: [1, 2, 3]
+          }
+        ],
+        seriesDefaults: {
+          legendItem: {
+            visual: function (e) {
+              var color = e.options.markers.background;
+              var labelColor = e.options.labels.color;
+              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+              var layout = new kendo.drawing.Layout(rect, {
+                spacing: 5,
+                alignItems: "center"
+              });
+
+              var marker = new kendo.drawing.Path({
+                fill: {
+                  color: color
+                }
+              }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+              var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                fill: {
+                  color: labelColor
+                }
+              });
+
+              layout.append(marker, label);
+              layout.reflow()
+
+              return layout;
+            }
+          }
+        }
+      });
     </script>
 
 ### seriesDefaults.ohlc `Object`
@@ -16679,6 +21420,26 @@ The type of stack to plot. The following types are supported:
     });
     </script>
 
+### seriesDefaults.startAngle `Number` *(default: 90)*
+
+The start angle (degrees) of the first donut or pie segment.
+
+Angles increase clockwise and zero is to the left. Negative values are acceptable.
+
+#### Example - set the donut chart seriesDefaults start angle
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        startAngle: 180
+      },
+      series: [
+        { type: "donut",  data: [1,2,3] }
+      ]
+    });
+    </script>
+
 ### seriesDefaults.type `String`
 
 The default type of the series.
@@ -16693,6 +21454,7 @@ The supported values are:
 * column
 * donut
 * funnel
+* pyramid
 * line
 * ohlc
 * pie
@@ -16873,13 +21635,16 @@ The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/form
 
 Format placeholders:
 
-* Area, bar, column, funnel, line and pie
+* Area, bar, column, funnel, pyramid, line and pie
     *   {0} - value
 * Bubble
     *   {0} - x value
     *   {1} - y value
     *   {2} - size value
     *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
 * Scatter and scatterLine
     *   {0} - x value
     *   {1} - y value
@@ -17143,7 +21908,7 @@ The verticalRangeArea chart series options. Accepts all values supported by the 
 
 ### seriesDefaults.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, pyramid, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -17162,7 +21927,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel, line and scatterLine series.
+* points - the segment points. Available for funnel, pyramid, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -17380,7 +22145,7 @@ The supported values are:
       seriesDefaults: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           }
         }
       },
@@ -17934,24 +22699,590 @@ A function that can be used to create a custom visual for the notes. The availab
       });
     </script>
 
-### theme `String`
+### subtitle `Object|String`
 
-The chart theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}). More information on the built-in themes could be found in the [Less-based themes]({% slug themesandappearnce_kendoui_desktopwidgets%}) article.
+The chart subtitle configuration options or text.
+
+#### Example - set the chart title and subtitle as a string
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: "Title",
+      subtitle: "Subtitle",
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
+
+#### Example - configure the chart title and subtitle
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      },
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
+
+### subtitle.align `String`
+
+The alignment of the subtitle.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+By default, the subtitle has the same alignment as the title.
+
+#### Example - configure the chart title and subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      },
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
+
+### subtitle.background `String` *(default: "white")*
+
+The background color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - configure the chart subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        background: "green"
+      },
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
+
+### subtitle.border `Object`
+
+The border of the subtitle.
+
+#### Example - set the chart subtitle border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the chart subtitle border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.border.dashType `String` *(default: "solid")*
+
+The dash type of the chart subtitle border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the chart subtitle border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          dashType: "dashDot",
+          width: 2
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example - set the chart subtitle border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          width: 2
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.color `String`
+
+The text color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the subtitle color as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Chart Title"
+      },
+      subtitle: {
+        text: "Chart Subtitle",
+        color: "#aa00bb"
+      },
+      series: [{
+         data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+### subtitle.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+#### Example - set the chart title and subtitle font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        font: "20px sans-serif"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.margin `Number|Object` *(default: 5)*
+
+The margin of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: 10
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the subtitle.
+
+#### Example - set the chart subtitle bottom margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          bottom: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.margin.left `Number` *(default: 0)*
+
+The left margin of the subtitle.
+
+#### Example - set the chart subtitle left margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title",
+        margin: {
+          left: 10
+        }
+      },
+      subtitle: {
+        text: "Subtitle"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.margin.right `Number` *(default: 0)*
+
+The right margin of the subtitle.
+
+#### Example - set the chart series subtitle right margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        margin: {
+          right: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.margin.top `Number` *(default: 0)*
+
+The top margin of the subtitle.
+
+#### Example - set the chart subtitle top margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          top: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.padding `Number|Object` *(default: 5)*
+
+The padding of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: 10
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the subtitle.
+
+#### Example - set the chart subtitle bottom padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          bottom: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.padding.left `Number` *(default: 0)*
+
+The left padding of the subtitle.
+
+#### Example - set the chart subtitle left padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          left: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.padding.right `Number` *(default: 0)*
+
+The right padding of the subtitle.
+
+#### Example - set the chart subtitle right padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          right: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.padding.top `Number` *(default: 0)*
+
+The top padding of the subtitle.
+
+#### Example - set the chart subtitle top padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          top: 10
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.position `String` *(default: "top")*
+
+The position of the subtitle.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+By default, the subtitle is placed in the same position as the title.
+
+#### Example - set the chart subtitle position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title",
+        position: "bottom"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.text `String`
+
+The text of the chart subtitle. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the chart subtitle text
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### subtitle.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the subtitle. By default the subtitle will be displayed.
+
+#### Example - hide the subtitle
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Title",
+        visible: false
+      },
+      subtitle: {
+        text: "Subtitle",
+        visible: false
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### theme `String` *(default: "sass")*
+
+The chart theme. With versions prior to R1 2023 this can be either the respective LESS theme from the list below or "sass".
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
 The supported values are:
 
-* "sass" - special value, see notes
+* "sass"
 * "black"
 * "blueopal"
 * "bootstrap"
 * "default"
+* "fiori"
+* "flat"
 * "highcontrast"
+* "material"
+* "materialblack"
 * "metro"
 * "metroblack"
 * "moonlight"
+* "nova"
+* "office365"
 * "silver"
 * "uniform"
+
+#### Example
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      theme: "black",
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    </script>
 
 ### title `Object|String`
 
@@ -17990,7 +23321,7 @@ The alignment of the title.
 * "left" - the text is aligned to the left.
 * "right" - the text is aligned to the right.
 
-#### Example - configure the chart alignment
+#### Example - configure the chart title alignment
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -18008,7 +23339,7 @@ The alignment of the title.
 
 The background color of the title. Accepts a valid CSS color string, including hex and rgb.
 
-#### Example - configure the chart alignment
+#### Example - configure the chart title alignment
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -18138,11 +23469,34 @@ The text color of the title. Accepts a valid CSS color string, including hex and
     });
     </script>
 
+### title.description `String`
+
+The accessible description of the Chart. The description is announced by screen readers when the Chart is focused.
+
+#### Example - set the chart description
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      title: {
+        text: "Fibonacci numbers",
+        description: "A column chart displaying the first 10 Fibonacci numbers",
+        position: "bottom"
+      },
+      series: [
+        {
+          type: 'column',
+          data: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+        }
+      ]
+    });
+    </script>
+
 ### title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
 
 The font of the title.
 
-#### Example - set the chart title border font
+#### Example - set the chart title font
 
     <div id="chart"></div>
     <script>
@@ -18161,7 +23515,7 @@ The font of the title.
 
 The margin of the title. A numeric value will set all margins.
 
-#### Example - set the chart series label margin as a number
+#### Example - set the chart title margin as a number
 
     <div id="chart"></div>
     <script>
@@ -18180,7 +23534,7 @@ The margin of the title. A numeric value will set all margins.
 
 The bottom margin of the title.
 
-#### Example - set the chart series label bottom margin
+#### Example - set the chart title bottom margin
 
     <div id="chart"></div>
     <script>
@@ -18201,7 +23555,7 @@ The bottom margin of the title.
 
 The left margin of the title.
 
-#### Example - set the chart series label left margin
+#### Example - set the chart title left margin
 
     <div id="chart"></div>
     <script>
@@ -18222,7 +23576,7 @@ The left margin of the title.
 
 The right margin of the title.
 
-#### Example - set the chart series label right margin
+#### Example - set the chart title right margin
 
     <div id="chart"></div>
     <script>
@@ -18243,7 +23597,7 @@ The right margin of the title.
 
 The top margin of the title.
 
-#### Example - set the chart series label top margin
+#### Example - set the chart title top margin
 
     <div id="chart"></div>
     <script>
@@ -18264,7 +23618,7 @@ The top margin of the title.
 
 The padding of the title. A numeric value will set all margins.
 
-#### Example - set the chart series label padding as a number
+#### Example - set the chart title padding as a number
 
     <div id="chart"></div>
     <script>
@@ -18283,7 +23637,7 @@ The padding of the title. A numeric value will set all margins.
 
 The bottom padding of the title.
 
-#### Example - set the chart series label bottom padding
+#### Example - set the chart title bottom padding
 
     <div id="chart"></div>
     <script>
@@ -18304,7 +23658,7 @@ The bottom padding of the title.
 
 The left padding of the title.
 
-#### Example - set the chart series label left padding
+#### Example - set the chart title left padding
 
     <div id="chart"></div>
     <script>
@@ -18325,7 +23679,7 @@ The left padding of the title.
 
 The right padding of the title.
 
-#### Example - set the chart series label right padding
+#### Example - set the chart title right padding
 
     <div id="chart"></div>
     <script>
@@ -18346,7 +23700,7 @@ The right padding of the title.
 
 The top padding of the title.
 
-#### Example - set the chart series label top padding
+#### Example - set the chart title top padding
 
     <div id="chart"></div>
     <script>
@@ -18439,6 +23793,25 @@ The chart series tooltip configuration options.
       tooltip: {
         visible: true,
         background: "green"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### tooltip.autoHide `Boolean`*(default: true)*
+
+Specifies if the tooltip will be hidden when the mouse leaves the target element. If set to `false`, a **Close** button will be shown within tooltip.
+
+#### Example - preventing the tooltip from closing automatically
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      tooltip: {
+        visible: true,
+        autoHide: false
       },
       series: [
         { data: [1, 2, 3] }
@@ -18571,13 +23944,16 @@ The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/form
 
 Format placeholders:
 
-* Area, bar, column, funnel, line and pie
+* Area, bar, column, funnel, pyramid, line and pie
     *   {0} - value
 * Bubble
     *   {0} - x value
     *   {1} - y value
     *   {2} - size value
     *   {3} - category name
+* Bullet
+    *   {0} - value
+    *   {1} - target value
 * Scatter and scatterLine
     *   {0} - x value
     *   {1} - y value
@@ -19446,6 +24822,34 @@ The top padding of the crosshair tooltip.
       series: [
         { data: [1, 2, 3] }
       ]
+    });
+    </script>
+
+### valueAxis.crosshair.tooltip.position `String`
+
+The position of the crosshair tooltip.
+
+#### Example - set the value axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      valueAxis: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          visible: true,
+          tooltip: {
+            visible: true,
+            // Position can be left or right.
+            position: "right"
+          }
+        }
+      },
+      series: [{
+        type: "line",
+        data: [1, 2, 3]
+      }]
     });
     </script>
 
@@ -21111,7 +26515,7 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
     <script>
     $("#chart").kendoChart({
       valueAxis: {
-        minorTicks {
+        minorTicks: {
           color: "#aa00bb",
           visible: true
         }
@@ -21128,7 +26532,7 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
     <script>
     $("#chart").kendoChart({
       valueAxis: {
-        minorTicks {
+        minorTicks: {
           color: "rgb(128, 0, 255)",
           visible: true
         }
@@ -21145,7 +26549,7 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
     <script>
     $("#chart").kendoChart({
       valueAxis: {
-        minorTicks {
+        minorTicks: {
           color: "green",
           visible: true
         }
@@ -21440,6 +26844,134 @@ The start position of the plot band in axis units.
       ]
     });
     </script>
+
+### valueAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [valueAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/valueAxis.plotbands#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### valueAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### valueAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### valueAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### valueAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### valueAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### valueAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### valueAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### valueAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### valueAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### valueAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### valueAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### valueAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### valueAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### valueAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### valueAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### valueAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### valueAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### valueAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### valueAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### valueAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### valueAxis.plotBands.opacity `Number`
 
@@ -22040,7 +27572,7 @@ If set to `true` the chart will display the value axis title. By default the val
     $("#chart").kendoChart({
       valueAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         }
       }],
@@ -23506,6 +29038,30 @@ The base time interval for the axis labels. The default baseUnit is determined a
     });
     </script>
 
+### xAxis.categories `Array`
+
+The category names. Applicable for charts with X and Y category axes (heatmap).
+
+#### Example - bind heatmap categories
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: 'heatmap',
+        data: [
+          [ 'a', 'v2', 1 ],
+          [ 'a', 'v1', 0 ]
+        ]
+      }],
+      xAxis: {
+        categories: ['a', 'b', 'c']
+      },
+      yAxis: {
+        categories: ['v1', 'v2']
+      }
+    });
+    </script>
+
 ### xAxis.color `String`
 
 The color of the axis. Accepts a valid CSS color string, including hex and rgb.
@@ -24027,6 +29583,33 @@ The top padding of the crosshair tooltip.
       }],
       series: [
         { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### xAxis.crosshair.tooltip.position `String`
+
+Top position of the crosshair tooltip.
+
+#### Example - set the scatter chart x axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      xAxis: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          visible: true,
+          tooltip: {
+            visible: true,
+            // Position can be top or bottom.
+            position: "bottom"
+          }
+        }
+      },
+      series: [
+        { type: "scatter", data: [[1, 2]] }
       ]
     });
     </script>
@@ -25669,7 +31252,7 @@ The color of the x axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       xAxis: {
-        minorTicks {
+        minorTicks: {
           color: "#aa00bb",
           visible: true
         }
@@ -25686,7 +31269,7 @@ The color of the x axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       xAxis: {
-        minorTicks {
+        minorTicks: {
           color: "rgb(128, 0, 255)",
           visible: true
         }
@@ -25703,7 +31286,7 @@ The color of the x axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       xAxis: {
-        minorTicks {
+        minorTicks: {
           color: "green",
           visible: true
         }
@@ -26257,6 +31840,134 @@ The start position of the plot band in axis units.
       }
     });
     </script>
+
+### xAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [xAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/xAxis.plotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### xAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### xAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### xAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### xAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### xAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### xAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### xAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### xAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### xAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### xAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### xAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### xAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### xAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### xAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### xAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### xAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### xAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### xAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### xAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### xAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### xAxis.plotBands.opacity `Number`
 
@@ -26857,7 +32568,7 @@ If set to `true` the chart will display the scatter chart x axis title. By defau
     $("#chart").kendoChart({
       xAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         }
       }],
@@ -28498,6 +34209,30 @@ The base time interval for the axis labels. The default baseUnit is determined a
     });
     </script>
 
+### yAxis.categories `Array`
+
+The category names. Applicable for charts with X and Y category axes (heatmap).
+
+#### Example - bind heatmap categories
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: 'heatmap',
+        data: [
+          [ 'a', 'v2', 1 ],
+          [ 'a', 'v1', 0 ]
+        ]
+      }],
+      xAxis: {
+        categories: ['a', 'b', 'c']
+      },
+      yAxis: {
+        categories: ['v1', 'v2']
+      }
+    });
+    </script>
+
 ### yAxis.color `String`
 
 The color of the axis. Accepts a valid CSS color string, including hex and rgb.
@@ -29019,6 +34754,33 @@ The top padding of the crosshair tooltip.
       }],
       series: [
         { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### yAxis.crosshair.tooltip.position `String`
+
+The position of the crosshair tooltip.
+
+#### Example - set the scatter chart y axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      yAxis: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          visible: true,
+          tooltip: {
+            visible: true,
+            // Position can be left or right.
+            position: "right"
+          }
+        }
+      },
+      series: [
+        { type: "scatter", data: [[1, 2]] }
       ]
     });
     </script>
@@ -30616,7 +36378,7 @@ The color of the y axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       yAxis: {
-        minorTicks {
+        minorTicks: {
           color: "#aa00bb",
           visible: true
         }
@@ -30633,7 +36395,7 @@ The color of the y axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       yAxis: {
-        minorTicks {
+        minorTicks: {
           color: "rgb(128, 0, 255)",
           visible: true
         }
@@ -30650,7 +36412,7 @@ The color of the y axis minor ticks lines. Accepts a valid CSS color string, inc
     <script>
     $("#chart").kendoChart({
       yAxis: {
-        minorTicks {
+        minorTicks: {
           color: "green",
           visible: true
         }
@@ -30914,15 +36676,16 @@ The step of the y axis major ticks.
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      yAxis: [{
-        majorTicks: {
-          step: 2
-        },
-        categories: ["2011", "2012", "2013"]
-      }],
       series: [{
-        data: [1, 2, 3]
-      }]
+        type: "scatter",
+        data: [[1, 1],[2, 2]]
+      }],
+      yAxis: {
+        majorTicks: {
+          step: 2,
+          size: 15
+        }
+      }
     });
     </script>
 
@@ -30935,15 +36698,16 @@ The skip of the y axis major ticks.
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      xAxis: [{
-        majorTicks: {
-          skip: 2
-        },
-        categories: ["2011", "2012", "2013"]
-      }],
       series: [{
-        data: [1, 2, 3]
-      }]
+        type: "scatter",
+        data: [[1, 1],[2, 2]]
+      }],
+      yAxis: {
+        majorTicks: {
+          skip: 2,
+          size: 15
+        }
+      }
     });
     </script>
 
@@ -31204,6 +36968,134 @@ The start position of the plot band in axis units.
       }
     });
     </script>
+
+### yAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [yAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/yAxis.plotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### yAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### yAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### yAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### yAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### yAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### yAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### yAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### yAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### yAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### yAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### yAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### yAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### yAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### yAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### yAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### yAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### yAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### yAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### yAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### yAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### yAxis.plotBands.opacity `Number`
 
@@ -31798,7 +37690,7 @@ If set to `true` the chart will display the scatter chart y axis title. By defau
     $("#chart").kendoChart({
       yAxis: [{
         title: {
-          text: "Years"
+          text: "Years",
           visible: false
         }
       }],
@@ -33382,6 +39274,28 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
       });
     </script>
 
+### zoomable.mousewheel.rate `Number` *(default: 0.3)*
+
+Specifies the zoom rate as percentage of the axis range. The default value is 0.3 or 30% of the axis range.
+
+##### Example - set the mousewheel zoom rate to 10% of the axis range
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          mousewheel: {
+            rate: 0.1
+          }
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
 ### zoomable.selection `Boolean|Object` *(default: true)*
 
 Specifies if the chart can be zoomed using selection.
@@ -33549,6 +39463,7 @@ The drawing surface of the Chart. See [Drawing API](https://docs.telerik.com/ken
 
         function onShapeMouseEnter(e) {
             // https://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         }
     </script>
@@ -33644,6 +39559,8 @@ The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/savea
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
+
+The available configuration options can be found in the [PDFOptions](/api/javascript/drawing/pdfoptions) api.
 
 #### Parameters
 
@@ -33991,6 +39908,69 @@ Reloads the data and renders the chart.
     chart.refresh();
     </script>
 
+### resetDrilldownLevel
+
+Sets the current drill-down level for Drilldown Charts.
+
+* To return to a previous level, set the value to a number less than the current level.
+* To return to the root chart, set the value to 0.
+
+Setting the value to a number greater than the current level will have no effect.
+
+#### Example - use resetDrilldownLevel to get back to the root Chart
+
+    <button id="reset">Reset Drilldown</button>
+    <div id="chart"></div>
+    <script>
+      $("#reset").click(function() {
+        var chart = $("#chart").getKendoChart();
+        chart.resetDrilldownLevel(0);
+      });
+
+      $("#chart").kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }, {
+              company: 'Company B',
+              sales: 200,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 40
+                  }, {
+                    product: 'Product 2',
+                    sales: 160
+                  }]
+              }
+          }]
+        }]
+      });
+    </script>
+
 ### resize
 
 Adjusts the chart layout to match the size of the container.
@@ -34022,7 +40002,7 @@ Saves the Chart as a PDF file using the options specified in [options.pdf](/api/
 
 #### Example - export the Chart to PDF
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     <button id="exportBtn">Export to PDF</button>
     <div id="chart" style="width: 600px; height: 400px;"></div>
     <script>
@@ -34175,6 +40155,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var chart = $("#chart").data("kendoChart");
     var svg = chart.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -34227,7 +40208,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
 
 ### toggleHighlight
 
-Toggles the highlight of the series points or a segment for pie, donut and funnel charts.
+Toggles the highlight of the series points or a segment for pie, donut and funnel, pyramid charts.
 
 #### Parameters
 
@@ -34378,6 +40359,7 @@ The label value or category name.
         { data: [1, 2] }
       ],
       axisLabelClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.axis.type, e.value);
       }
     });
@@ -34387,6 +40369,7 @@ The label value or category name.
     <div id="chart"></div>
     <script>
     function chart_axisLabelClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.axis.type, e.value);
     }
     $("#chart").kendoChart({
@@ -34424,6 +40407,7 @@ The widget instance which fired the event.
         { field: "value" }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -34433,6 +40417,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBound");
     }
     $("#chart").kendoChart({
@@ -34477,6 +40462,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("drag");
       }
     });
@@ -34486,6 +40472,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_drag(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("drag");
     }
     $("#chart").kendoChart({
@@ -34525,6 +40512,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       dragEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragEnd");
       }
     });
@@ -34534,6 +40522,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_dragEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dragEnd");
     }
     $("#chart").kendoChart({
@@ -34577,6 +40566,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       dragStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragStart");
       }
     });
@@ -34586,6 +40576,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_dragStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dragStart");
     }
     $("#chart").kendoChart({
@@ -34595,6 +40586,111 @@ The widget instance which fired the event.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("dragStart", chart_dragStart);
+    </script>
+
+### drilldown
+
+Fires when the user when the user wants to drill down on a specific point.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.drilldownSeries `Object`
+
+The configuration object for the newly created drilldown series.
+
+##### e.point `Object`
+
+The point to drill down into.
+
+##### e.preventDefault `Function`
+
+If invoked the drill down operation will be cancelled and the Chart will remain in the same state.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The configuration object for the series to drill down into.
+
+#### Example - subscribe to the "drilldown" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      drilldown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldown");
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "drilldown" event after initialization
+    <div id="chart"></div>
+    <script>
+    function onDrilldown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("drilldown");
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("drilldown", onDrilldown);
+    </script>
+
+### drilldownLevelChange
+
+Fires when the drill-down level has changed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.level `Number`
+
+The current drill-down level.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+
+#### Example - subscribe to the "drilldownLevelChange" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      drilldownLevelChange: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldownLevelChange: " + e.level);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "drilldown" event after initialization
+    <div id="chart"></div>
+    <script>
+    function onDrilldownLevelChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("drilldownLevelChange: " + e.level);
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("drilldownLevelChange", onDrilldownLevelChange);
     </script>
 
 ### legendItemClick
@@ -34641,6 +40737,7 @@ The DOM element of the plot area.
           { data: [1, 5, 2], name: "Task 2" }
         ],
         legendItemClick: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log("Clicked an item with text: " + e.text);
 
           //prevent toggling the series visibility on legend item click
@@ -34653,6 +40750,7 @@ The DOM element of the plot area.
     <div id="chart"></div>
     <script>
       function chart_legendClick(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Clicked an item with text: " + e.text);
 
         //prevent toggling the series visibility on legend item click
@@ -34709,6 +40807,7 @@ The name of the series.
           { data: [1, 5, 2], name: "Task 2" }
         ],
         legendItemHover: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log("Hovered an item with text: " + e.text);
         }
       });
@@ -34719,6 +40818,7 @@ The name of the series.
     <div id="chart"></div>
     <script>
       function chart_legendHover(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Hovered an item with text: " + e.text);
       }
       $("#chart").kendoChart({
@@ -34771,6 +40871,7 @@ The name of the series.
           { data: [1, 5, 2], name: "Task 2" }
         ],
         legendItemLeave: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Left an item with text: " + e.text);
         }
       });
@@ -34788,6 +40889,7 @@ The name of the series.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("legendItemLeave", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Left an item with text: " + e.text);
       });
     </script>
@@ -34836,6 +40938,7 @@ The note visual element.
         data: [{ value: 1, noteText: "a" }]
       }],
       noteClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.text);
       }
     });
@@ -34845,6 +40948,7 @@ The note visual element.
     <div id="chart"></div>
     <script>
     function chart_noteClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.text);
     }
     $("#chart").kendoChart({
@@ -34900,6 +41004,7 @@ The note visual element.
         data: [{ value: 1, noteText: "a" }]
       }],
       noteHover: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.text);
       }
     });
@@ -34909,6 +41014,7 @@ The note visual element.
     <div id="chart"></div>
     <script>
     function chart_noteHover(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.text);
     }
     $("#chart").kendoChart({
@@ -34964,6 +41070,7 @@ The note visual element.
         data: [{ value: 1, noteText: "a" }]
       }],
       noteLeave: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.text);
       }
     });
@@ -34973,6 +41080,7 @@ The note visual element.
     <div id="chart"></div>
     <script>
     function chart_noteLeave(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.text);
     }
     $("#chart").kendoChart({
@@ -35091,6 +41199,7 @@ The Y axis value or array of values for multi-axis charts.
         { data: [1, 2] }
       ],
       plotAreaClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -35100,6 +41209,7 @@ The Y axis value or array of values for multi-axis charts.
     <div id="chart"></div>
     <script>
     function chart_plotAreaClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
     $("#chart").kendoChart({
@@ -35153,6 +41263,7 @@ The Y axis value or array of values for multi-axis charts.
         { data: [1, 2] }
       ],
       plotAreaHover: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -35162,6 +41273,7 @@ The Y axis value or array of values for multi-axis charts.
     <div id="chart"></div>
     <script>
     function chart_plotAreaHover(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
     $("#chart").kendoChart({
@@ -35224,6 +41336,7 @@ The widget instance which fired the event.
         { field: "value" }
       ],
       render: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("render");
       }
     });
@@ -35233,6 +41346,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_render(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("re");
     }
     $("#chart").kendoChart({
@@ -35293,6 +41407,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
         }
       },
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.from, e.to);
       }
     });
@@ -35303,6 +41418,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
     <div id="chart"></div>
     <script>
     function chart_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.from, e.to);
     }
     $("#chart").kendoChart({
@@ -35367,6 +41483,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
         }
       },
       selectEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.from, e.to);
       }
     });
@@ -35377,6 +41494,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
     <div id="chart"></div>
     <script>
     function chart_selectEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.from, e.to);
     }
     $("#chart").kendoChart({
@@ -35441,6 +41559,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
         }
       },
       selectStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.from, e.to);
       }
     });
@@ -35450,6 +41569,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
     <div id="chart"></div>
     <script>
     function chart_selectStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.from, e.to);
     }
     $("#chart").kendoChart({
@@ -35548,6 +41668,7 @@ The data point value.
         { data: [1, 2] }
       ],
       seriesClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -35562,7 +41683,8 @@ The data point value.
       ]
     });
 
-    functino chart_seriesClick(e) {
+    function chart_seriesClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
 
@@ -35641,6 +41763,7 @@ The data point value.
         { data: [1, 2] }
       ],
       seriesHover: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -35648,15 +41771,18 @@ The data point value.
 
 #### Example - subscribe to the "seriesHover" event after initialization
     <div id="chart"></div>
-    functino chart_seriesHover(e) {
-      console.log(e.value);
-    }
     <script>
     $("#chart").kendoChart({
       series: [
         { data: [1, 2] }
       ]
     });
+
+    function chart_seriesHover(e) {
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(e.value);
+    }
+
     var chart = $("#chart").data("kendoChart");
     chart.bind("seriesHover", chart_seriesHover);
     </script>
@@ -35723,6 +41849,7 @@ The data point value.
           { data: [1, 2] }
         ],
         seriesOver: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.value);
         }
       });
@@ -35738,6 +41865,7 @@ The data point value.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("seriesOver", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       });
     </script>
@@ -35804,6 +41932,7 @@ The data point value.
           { data: [1, 2] }
         ],
         seriesLeave: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.value);
         }
       });
@@ -35819,6 +41948,7 @@ The data point value.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("seriesLeave", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       });
     </script>
@@ -35855,6 +41985,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       zoom: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("zoom");
       }
     });
@@ -35864,6 +41995,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_zoom(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("zoom");
     }
     $("#chart").kendoChart({
@@ -35903,6 +42035,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       zoomEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("zoomEnd");
       }
     });
@@ -35912,6 +42045,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_zoomEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("zoomEnd");
     }
     $("#chart").kendoChart({
@@ -35955,6 +42089,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       zoomStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("zoomStart");
       }
     });
@@ -35964,6 +42099,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_zoomStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("zoomStart");
     }
     $("#chart").kendoChart({

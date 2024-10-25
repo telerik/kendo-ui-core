@@ -2,7 +2,7 @@
 title: Enable Only Horizontal Pager
 description: Set the pager of the Kendo UI Grid to allow only the horizontal appearance and prevent the vertical dropdownlist.
 type: how-to
-page_title: Prevent Pager from Displaying Vertically | Kendo UI Grid
+page_title: Prevent Pager from Displaying Vertically - Kendo UI Grid
 slug: grid-enable-only-horizontal-pager
 position: 
 tags: grid, pager, responsive, horizontal
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Grid for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Grid for jQuery</td>
 		</tr>
 	</tbody>
 </table>

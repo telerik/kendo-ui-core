@@ -18,7 +18,7 @@
         it("members of the schema override the prototype members", function() {
             var reader = new DataReader({
                 data: function(result) {
-                    return result + "bar"
+                    return result + "bar";
                 }
             });
 

@@ -3,102 +3,25 @@
     describe("mvvm observing", function() {
         beforeEach(function() {
             this.sourceBinder = kendo.data.binders.source;
-            Mocha.fixture.append(
-                '<script id="src-bind-template" type="text/x-kendo-template">' +
-                '  <div>' +
-                '    <input data-bind="value: value" />' +
-                '    <span class="val" data-bind="text: value"></span>' +
-                '  </div>' +
-                '</script>' +
-                '<script id="src-bind-template-w-select" type="text/x-kendo-template">' +
-                '  <div>' +
-                '    <input data-bind="value: value" />' +
-                '    <span class="val" data-bind="text: value"></span>' +
-                '    <select data-bind="source: options" data-text-field="name" data-value-field="uid"></select>' +
-                '  </div>' +
-                '</script>' +
-                '<script id="array-template" type="text/x-kendo-template">' +
-                '<li data-bind="text:name"></li>' +
-                '</script>' +
-                '<script id="ul-template" type="text/x-kendo-template">' +
-                '<li data-bind="text:root"></li>' +
-                '</script>' +
-                '<script id="ul-template-alias" type="text/x-kendo-template">' +
-                '<li data-bind="text:rootAlias"></li>' +
-                '</script>' +
-                '<script id="ul-input-template" type="text/x-kendo-template">' +
-                '<li><input data-bind="value:root" /></li>' +
-                '</script>' +
-                '<script id="ul-input-child-template" type="text/x-kendo-template">' +
-                '<li><input data-bind="value:root.child"/></li>' +
-                '</script>' +
-                '<script id="simple-field-template" type="text/x-kendo-template">' +
-                '#= get("foo") #' +
-                '</script>' +
-                '<script id="nested-field-template" type="text/x-kendo-template">' +
-                '#= get("foo.bar") #' +
-                '</script>' +
-                '<script id="nested-field-template-multiple-gets" type="text/x-kendo-template">' +
-                '#= get("foo").get("bar") #' +
-                '</script>' +
-                '<script>' +
-                'var templateEvaluationCounter = 0;' +
-                '</script>' +
-                '<script id="counting-template" type="text/x-kendo-template">' +
-                '# templateEvaluationCounter ++; #' +
-                '#= get("foo") #' +
-                '</script>' +
-                '<script id="custom-binder-template" type="text/x-kendo-template">' +
-                '<span data-bind="custom: this"></span>' +
-                '</script>' +
-                '<script id="if-else-template" type="text/x-kendo-template">' +
-                '# if (get("foo") == "foo") { #' +
-                '    #: get("foo") #' +
-                '# } else { #' +
-                '    #: get("bar") #' +
-                '# } #' +
-                '</script>'
-            );
+            this.selectSourceBinder = kendo.data.binders.select.source;
         });
         afterEach(function() {
             kendo.data.binders.source = this.sourceBinder;
+            kendo.data.binders.select.source = this.selectSourceBinder;
         });
 
-        it("changing a view model observable array updates the select options within a template", function() {
+
+        it("changing a badge value reflects UI", function() {
             var viewModel = kendo.observable({
-                data: [
-                    { "value": 1, options: [{ name: 1 }, { name: 2 }] },
-                    { "value": 2, options: [{ name: 1 }, { name: 2 }] }
-                ]
+                foo: 55
             });
 
-            var dom = $('<div data-bind="source: data" data-template="src-bind-template-w-select"></div>');
+            var dom = $('<span data-role="badge" data-bind="text:foo"></span>');
             kendo.bind(dom, viewModel);
-            viewModel.data[1].value = 1000;
-            viewModel.set("data[0].options[0].name", "TEST1");
-            viewModel.set("data[0].options[1].name", "TEST2");
-
-            assert.equal(dom.find("option:eq(0)").text(), "TEST1");
-            assert.equal(dom.find("option:eq(1)").text(), "TEST2");
-            assert.equal(dom.find(".val:eq(1)").text(), "2");
+            viewModel.set("foo", 90);
+            assert.equal(dom.text(), "90");
+            kendo.destroy(dom);
         });
-
-        it("changing a view model observable array updates only the value bound elements instead of the whole template", function() {
-            var viewModel = kendo.observable({
-                data: [
-                    { "value": 1 },
-                    { "value": 2 }
-                ]
-            });
-
-            var dom = $('<div data-bind="source: data" data-template="src-bind-template"></div>');
-            kendo.bind(dom, viewModel);
-            viewModel.data[1].value = 1000;
-            viewModel.set("data[0].value", 5);
-
-            assert.equal(dom.find(".val:eq(1)").text(), "2");
-        });
-
 
         it("changing a view model field updates the CSS classes in the UI", function() {
             var viewModel = kendo.observable({
@@ -155,7 +78,7 @@
                 }
             });
 
-            var dom = $('<div><span data-bind="text:foo"/><button data-bind="click:bar"></button></div>');
+            var dom = $('<div><span data-bind="text:foo"></span><button data-bind="click:bar"></button></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -190,7 +113,7 @@
             });
 
 
-            var dom = $('<div><select data-bind="source:current.items"/></div>');
+            var dom = $('<div><select data-bind="source:current.items"></select></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -226,7 +149,7 @@
                 bar: "bar"
             });
 
-            var dom = $('<div><select data-bind="source:foo,value:bar"/><span data-bind="text:bar"/></div>');
+            var dom = $('<div><select data-bind="source:foo,value:bar"></select><span data-bind="text:bar"></span></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -256,7 +179,7 @@
                 bar: "bar"
             });
 
-            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"/></div>');
+            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"></span></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -270,7 +193,7 @@
                 bar: "bar"
             });
 
-            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"/></div>');
+            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"></span></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -672,30 +595,6 @@
             assert.equal(viewModel.bar, "foo");
         });
 
-        it("changing the input value updates dependent observable from the parent object", function() {
-            var dom = $('<ul data-bind="source: items" data-template="ul-input-template">');
-
-            var viewModel = kendo.observable({
-                items: [
-                    { bar: "bar" }
-                ],
-                root: function(item, value) {
-                    if (value !== undefined) {
-                        item.set("bar", value);
-                    } else {
-                        return item.get("bar");
-                    }
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            dom.find("input").val("foo").trigger("change");
-
-            assert.equal(viewModel.items[0].bar, "foo");
-        });
-
-
         it("changing the value of pre populated select updates the view model", function() {
             var dom = $('<select data-bind="value:foo"><option value="foo">foo</option><option value="bar">bar</option>');
 
@@ -975,34 +874,6 @@
             assert.equal(dom[0].selectedIndex, -1);
         });
 
-        it("tracking changes of observable items in array", function() {
-            var viewModel = kendo.observable({
-                foo: [{ name: "foo" }]
-            });
-
-            var dom = $('<ul data-template="array-template" data-bind="source:foo"/>');
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.foo[0].set("name", "bar");
-
-            assert.equal(dom.find("li").text(), "bar");
-        });
-
-        it("replacing the source array rebinds the element", function() {
-            var viewModel = kendo.observable({
-                foo: [{ name: "foo" }]
-            });
-
-            var dom = $('<ul data-template="array-template" data-bind="source:foo"/>');
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo", [{ name: "bar" }]);
-
-            assert.equal(dom.find("li").text(), "bar");
-        });
-
         it("tracking changes of fields bound to style", function() {
             var viewModel = kendo.observable({
                 foo: "1px",
@@ -1017,7 +888,7 @@
             viewModel.set("bar", "20px");
 
             assert.equal(dom.css("left"), "2px");
-            assert.equal(dom.css("top"), "20px")
+            assert.equal(dom.css("top"), "20px");
         });
 
         it("tracking changes of complex fields", function() {
@@ -1037,98 +908,6 @@
             assert.equal(dom.text(), "baz");
             //check that parent field is not changed
             assert.equal(dom.attr("title"), "boo");
-        });
-
-        it("tracking changes in templates", function() {
-            var dom = $('<div data-template="simple-field-template" data-bind="source: this" />');
-
-            var viewModel = kendo.observable({ foo: "foo" });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo", "bar");
-
-            assert.equal($.trim(dom.text()), "bar");
-        });
-
-        it("change event is fired once", function() {
-            var dom = $('<div data-template="simple-field-template" data-bind="source: this" />');
-
-            var viewModel = kendo.observable({ foo: "foo" });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.bind("change", function() {
-                assert.isOk(true);
-            });
-
-            viewModel.set("foo", "bar");
-        });
-
-        it("dependencies are reavaluated", function() {
-            var dom = $('<div data-template="if-else-template" data-bind="source: this" />');
-
-            var viewModel = kendo.observable({ foo: "foo", bar: "bar" });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo", "baz");
-
-            viewModel.set("bar", "boo");
-
-            assert.equal($.trim(dom.text()), "boo");
-        });
-
-        it("does not attach more than one change handler when monitoring for dependency changes", function() {
-            var dom = $('<div data-template="counting-template" data-bind="source:this" />');
-
-            var viewModel = kendo.observable({ foo: "foo" });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo", "baz");
-
-            templateEvaluationCounter = 0;
-
-            viewModel.set("foo", "boo");
-
-            assert.equal(templateEvaluationCounter, 1);
-        });
-
-        it("refreshing the source destroys the binder objects", function() {
-            var dom = $('<div data-template="custom-binder-template" data-bind="source:this" />');
-
-            var viewModel = kendo.observable({ foo: "foo" });
-
-            kendo.data.binders.custom = kendo.data.Binder.extend({
-                refresh: function() {
-                },
-                destroy: function() {
-                    assert.isOk(true);
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo", "baz");
-        });
-
-        it("removing an item from the source destroys the binder objects", function() {
-            var dom = $('<div data-template="custom-binder-template" data-bind="source:foo" />');
-
-            var viewModel = kendo.observable({ foo: [{}] });
-
-            kendo.data.binders.custom = kendo.data.Binder.extend({
-                refresh: function() {
-                },
-                destroy: function() {
-                    assert.isOk(true);
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.foo.splice(0, 1);
         });
 
         it("the click binding is destroyed", function() {
@@ -1167,70 +946,6 @@
             assert.equal(child._events["change"].length, 1);
         });
 
-        it("tracking changes when direct access and set are used", function() {
-            var dom = $('<div data-template="nested-field-template" data-bind="source:this"/>');
-
-            var viewModel = kendo.observable({
-                foo: {
-                    bar: "bar"
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.foo.set("bar", "baz");
-
-            assert.equal($.trim(dom.text()), "baz");
-        });
-
-        it("tracking changes when single set is used", function() {
-            var dom = $('<div data-template="nested-field-template" data-bind="source:this" />');
-
-            var viewModel = kendo.observable({
-                foo: {
-                    bar: "bar"
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo.bar", "boo");
-
-            assert.equal($.trim(dom.text()), "boo");
-        });
-
-        it("tracking changes when direct access and set are used (multiple get template)", function() {
-            var dom = $('<div data-template="nested-field-template-multiple-gets" data-bind="source:this" />');
-
-            var viewModel = kendo.observable({
-                foo: {
-                    bar: "bar"
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.foo.set("bar", "baz");
-
-            assert.equal($.trim(dom.text()), "baz");
-        });
-
-        it("tracking changes when single set is used (multiple get template)", function() {
-            var dom = $('<div data-bind="source:this" data-template="nested-field-template-multiple-gets" />');
-
-            var viewModel = kendo.observable({
-                foo: {
-                    bar: "bar"
-                }
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("foo.bar", "boo");
-
-            assert.equal($.trim(dom.text()), "boo");
-        });
-
         it("tracking changes in dependent fields", function() {
             var dom = $('<div data-bind="text:computed" />');
 
@@ -1246,7 +961,7 @@
 
             viewModel.set("foo", "boo");
 
-            assert.equal($.trim(dom.text()), "boobar");
+            assert.equal(dom.text().trim(), "boobar");
         });
 
 
@@ -1312,103 +1027,6 @@
             assert.equal(viewModel.foo, "foo");
         });
 
-        it("tracks changes of template bound to parent field", function() {
-            var dom = $('<ul data-bind="source: items" data-template="ul-template"></ul>');
-
-            var viewModel = kendo.observable({
-                root: "foo",
-                items: [{}]
-            });
-
-            kendo.bind(dom, viewModel);
-            viewModel.set("root", "bar");
-            assert.equal(dom.find("li").text(), viewModel.root);
-        });
-
-        it("parent properties are invoked with the current item", function() {
-            var dom = $('<ul data-bind="source: items" data-template="ul-template-alias"></ul>');
-
-            var viewModel = kendo.observable({
-                root: function(item) {
-                },
-                rootAlias: function(item) {
-                    assert.equal(item, viewModel.items[0]);
-                    return this.get("root");
-                },
-                items: [{}]
-            });
-
-            kendo.bind(dom, viewModel);
-            viewModel.set("root", "bar");
-        });
-
-        it("tracks changes of parent field bound to dependent parent field", function() {
-            var dom = $('<ul data-bind="source: items" data-template="ul-template-alias"></ul>');
-
-            var viewModel = kendo.observable({
-                root: "foo",
-                rootAlias: function() {
-                    return this.get("root");
-                },
-                items: [{}]
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.set("root", "bar");
-
-            assert.equal(dom.find("li").text(), "bar");
-        });
-
-        it("tracks changes of parent field bound to dependent parent field", function() {
-            var dom = $('<ul data-bind="source: items" data-template="ul-template-alias"></ul>');
-
-            var viewModel = kendo.observable({
-                root: "foo",
-                rootAlias: function(item) {
-                    return item.get("foo");
-                },
-                items: [{ foo: "foo" }]
-            });
-
-            kendo.bind(dom, viewModel);
-
-            viewModel.items[0].set("foo", "bar");
-
-            assert.equal(dom.find("li").text(), "bar");
-        });
-
-        it("tracks changes of element bound to parent field within a child template", function() {
-            var dom = $('<div><span data-bind="text:root"/><ul data-bind="source: items" data-template="ul-input-template"></ul></div>');
-
-            var viewModel = kendo.observable({
-                root: "foo",
-                items: [{ bar: "baz" }]
-            });
-
-            kendo.bind(dom, viewModel);
-
-            dom.find("input").val("moo").change();
-
-            assert.equal(dom.find("span").text(), "moo");
-        });
-
-        it("tracks changes of element bound to parent nested field within a child template", function() {
-            var dom = $('<div><span data-bind="text:root.child"/><ul data-bind="source: items" data-template="ul-input-child-template"></ul></div>');
-
-            var viewModel = kendo.observable({
-                root: { child: "foo" },
-                items: [{ bar: "baz" }]
-            });
-
-            kendo.bind(dom, viewModel);
-
-            dom.find("input").val("moo").change();
-
-            assert.equal(dom.find("span").text(), "moo");
-        });
-
-
         it("event handlers are detached when the binding is changed", function() {
             var observable = kendo.observable({
                 handler: {
@@ -1432,25 +1050,6 @@
             dom.trigger("click");
 
             assert.equal(handler.calls("method"), 0);
-        });
-
-        it("tracking changes of bindings containing function calls", function() {
-            var observable = kendo.observable({
-                foo: {
-                    bar: "foo"
-                },
-                baz: function() {
-                    return this.get("foo");
-                }
-            });
-
-            var dom = $('<span data-bind="text: baz().bar">');
-
-            kendo.bind(dom, observable);
-
-            observable.set("baz().bar", "bar");
-
-            assert.equal(dom.text(), "bar");
         });
 
         var date = $('<input type="date">');

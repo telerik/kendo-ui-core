@@ -2,14 +2,14 @@
     var ComboBox = kendo.ui.ComboBox,
         input;
 
-    describe("kendo.ui.ComboBox messages", function () {
+    describe("kendo.ui.ComboBox messages", function() {
         beforeEach(function() {
             input = $("<input />").appendTo(Mocha.fixture);
         });
         afterEach(function() {
             if (input.data('kendoComboBox')) {
                 input.data('kendoComboBox').destroy();
-                input.add($("ul")).parent(".k-widget").remove();
+                input.add($("ul")).parent(".k-input").remove();
             }
         });
 
@@ -19,7 +19,7 @@
                     noData: "custom"
                 }
             });
-            var noDataTemplateText = comboBox.list.find(".k-nodata").text();
+            var noDataTemplateText = comboBox.list.find(".k-no-data").text();
             assert.equal(noDataTemplateText, "custom");
         });
 
@@ -37,7 +37,7 @@
                 }
             });
 
-            var clearTitle = comboBox.wrapper.find('.k-icon.k-clear-value.k-i-close').attr("title");
+            var clearTitle = comboBox.wrapper.find('.k-clear-value').attr("title");
             assert.equal(clearTitle, "custom");
         });
     });

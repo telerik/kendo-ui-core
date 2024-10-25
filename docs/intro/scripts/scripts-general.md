@@ -1,46 +1,20 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
-title: Data Management Widgets
-page_title: Individual Scripts for Data Management Widgets | Scripts | Kendo UI for jQuery
-description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Data Management Widgets"
+title: Data Management Components
+page_title: Individual Scripts for Data Management Components - Scripts - Kendo UI for jQuery
+description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Data Management Components"
 slug: script_filesfor_datamanagement_widgets
 ---
 
-# Individual Scripts for Data Management Widgets
+# Individual Scripts for Data Management Components
 
-The following table lists the individual script files for the Kendo UI widgets that are used for data management&mdash;desktop widgets for mobile-ready websites and applications.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI components that are used for data management&mdash;desktop components for mobile-ready websites and applications.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [FileManager](https://demos.telerik.com/kendo-ui/filemanager/index) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.data.js | |
-| | kendo.columnsorter.js | GridView feature (optional) | 
-| | kendo.userevents.js | |
-| | kendo.draganddrop.js | |
-| | kendo.sortable.js | GridView feature (optional) |
-| | kendo.grid.js | GridView feature (optional) |
-| | kendo.listview.js | |
-| | kendo.toolbar.js | |
-| | kendo.breadcrumb.js | |
-| | kendo.popup.js | |
-| | kendo.data.odata.js | |
-| | kendo.menu.js | |
-| | kendo.treeview.js | |
-| | kendo.upload.js | |
-| | kendo.dialog.js | |
-| | kendo.switch.js | |
-| | kendo.resizable.js | |
-| | kendo.selectable.js | | 
-| | kendo.calendar.js | |
-| | kendo.datepicker.js | |
-| | kendo.numerictextbox.js | |
-| | kendo.validator.js | |
-| | kendo.binder.js | |
-| | kendo.editable.js | |
-| | kendo.filemanager.js | |
 | [Filter](https://demos.telerik.com/kendo-ui/filter/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.badge.js | |
 | | kendo.buttongroup.js | |
 | | kendo.filter.js | |
 | [Grid](https://demos.telerik.com/kendo-ui/grid/index) | jquery.js | |
@@ -50,19 +24,30 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.sortable.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
+| | kendo.toggleinputbase.js | Editing feature (optional) |
+| | kendo.html.input.js | Editing feature (optional) |
+| | kendo.checkbox.js | Editing feature (optional) |
+| | kendo.popup.js | Editing feature (optional) |
+| | kendo.list.js | Editing feature (optional) |
+| | kendo.dropdownlist.js | Editing feature (optional) |
 | | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
-| | kendo.popup.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
+| | kendo.floatinglabel.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
 | | kendo.window.js | Editing feature (optional) |
+| | kendo.textbox.js | Editing feature (optional) |
+| | kendo.form.js | Editing feature (optional) |
 | | kendo.selectable.js | Filtering feature (optional) |
 | | kendo.calendar.js | Filtering feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
 | | kendo.datepicker.js | Filtering feature (optional) |
+| | kendo.floatinglabel.js | Filtering feature (optional) |
 | | kendo.numerictextbox.js | Filtering feature (optional) |
 | | kendo.list.js | Filtering feature (optional) |
 | | kendo.dropdownlist.js | Filtering feature (optional) |
@@ -72,6 +57,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.selectable.js | Column menu feature (optional) |
 | | kendo.calendar.js | Column menu feature (optional) |
 | | kendo.datepicker.js | Column menu feature (optional) |
+| | kendo.floatinglabel.js | Column menu feature (optional) |
 | | kendo.numerictextbox.js | Column menu feature (optional) |
 | | kendo.list.js | Column menu feature (optional) |
 | | kendo.dropdownlist.js | Column menu feature (optional) |
@@ -79,6 +65,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.filtermenu.js | Column menu feature (optional) |
 | | kendo.data.odata.js | Column menu feature (optional) |
 | | kendo.menu.js | Column menu feature (optional) |
+| | kendo.expansionpanel.js | Column menu feature (optional) |
 | | kendo.columnmenu.js | Column menu feature (optional) |
 | | kendo.groupable.js | Grouping feature (optional) |
 | | kendo.popup.js | Row filter feature (optional) |
@@ -90,6 +77,8 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.reorderable.js | Column reordering feature (optional) |
 | | kendo.resizable.js | Column resizing feature (optional) |
 | | kendo.popup.js | Grid adaptive rendering feature (optional) |
+| | kendo.floatinglabel.js | Grid adaptive rendering feature (optional) |
+| | kendo.textbox.js | Grid adaptive rendering feature (optional) |
 | | kendo.dialog.js | Grid adaptive rendering feature (optional) |
 | | kendo.binder.js | Grid adaptive rendering feature (optional) |
 | | kendo.fx.js | Grid adaptive rendering feature (optional) |
@@ -107,17 +96,26 @@ The following table lists the individual script files for the Kendo UI widgets t
 | [ListView](https://demos.telerik.com/kendo-ui/listview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
+| | kendo.toggleinputbase.js | Editing feature (optional) |
+| | kendo.html.base.js | Editing feature (optional) |
+| | kendo.html.input.js | Editing feature (optional) |
+| | kendo.checkbox.js | Editing feature (optional) |
+| | kendo.popup.js | Editing feature (optional) |
+| | kendo.list.js | Editing feature (optional) |
+| | kendo.html.button.js | Editing feature (optional) |
+| | kendo.dropdownlist.js | Editing feature (optional) |
 | | kendo.userevents.js | Editing feature (optional) |
 | | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
-| | kendo.popup.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
+| | kendo.floatinglabel.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
 | | kendo.userevents.js | Selection feature (optional) |
 | | kendo.selectable.js | Selection feature (optional) |
+| | kendo.pager.js | Paging feature (optional) |
 | | kendo.listview.js | |
 | [PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index) | jquery.js | |
 | | kendo.core.js | |
@@ -127,21 +125,32 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.sortable.js | |
+| | kendo.pivot.common.js | |
 | | kendo.popup.js | Configurator feature (optional) |
 | | kendo.list.js | Configurator feature (optional) |
+| | kendo.html.base.js | Configurator feature (optional) |
+| | kendo.html.button.js | Configurator feature (optional) |
 | | kendo.dropdownlist.js | Configurator feature (optional) |
+| | kendo.html.input.js | Configurator feature (optional) |
 | | kendo.treeview.js | Configurator feature (optional) |
+| | kendo.treeview.draganddrop.js | Configurator feature (optional) |
 | | kendo.data.odata.js | Configurator feature (optional) |
 | | kendo.menu.js | Configurator feature (optional) |
 | | kendo.window.js | Configurator feature (optional) |
 | | kendo.pivot.fieldmenu.js | Configurator feature (optional) |
+| | kendo.html.chip.js | Configurator feature (optional) |
+| | kendo.html.chiplist.js | Configurator feature (optional) |
 | | kendo.pivot.configurator.js | Configurator feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
 | | kendo.data.odata.js | Filtering feature (optional) |
 | | kendo.menu.js | Filtering feature (optional) |
 | | kendo.window.js | Filtering feature (optional) |
+| | kendo.html.base.js | Filtering feature (optional) |
+| | kendo.html.input.js | Filtering feature (optional) |
 | | kendo.treeview.js | Filtering feature (optional) |
+| | kendo.treeview.draganddrop.js | Filtering feature (optional) |
 | | kendo.list.js | Filtering feature (optional) |
+| | kendo.html.button.js | Filtering feature (optional) |
 | | kendo.dropdownlist.js | Filtering feature (optional) |
 | | kendo.pivot.fieldmenu.js | Filtering feature (optional) |
 | | kendo.ooxml.js | Excel export feature (optional) |
@@ -161,7 +170,13 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| | kendo.badge.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
 | | kendo.button.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.textbox.js | |
+| | kendo.numerictextbox.js | |
 | | kendo.colorpicker.js | |
 | | kendo.list.js | |
 | | kendo.combobox.js | |
@@ -172,7 +187,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.ooxml.js | |
 | | kendo.sortable.js | |
 | | kendo.tabstrip.js | |
+| | kendo.button.menu.js | |
+| | kendo.splitbutton.js | |
+| | kendo.dropdownbutton.js | |
 | | kendo.toolbar.js | |
+| | kendo.html.input.js | |
 | | kendo.treeview.js | |
 | | kendo.window.js | |
 | | kendo.validator.js | |
@@ -190,23 +209,53 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.selectable.js | Filtering feature (optional) |
 | | kendo.calendar.js | Filtering feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
+| | kendo.html.base.js | Filtering feature (optional) |
+| | kendo.html.button.js | Filtering feature (optional) |
 | | kendo.datepicker.js | Filtering feature (optional) |
+| | kendo.floatinglabel.js | Filtering feature (optional) |
 | | kendo.numerictextbox.js | Filtering feature (optional) |
 | | kendo.list.js | Filtering feature (optional) |
 | | kendo.dropdownlist.js | Filtering feature (optional) |
 | | kendo.binder.js | Filtering feature (optional) |
 | | kendo.filtermenu.js | Filtering feature (optional) |
+| | kendo.popup.js | Column menu feature (optional) |
+| | kendo.userevents.js | Column menu feature (optional) |
+| | kendo.selectable.js | Column menu feature (optional) |
+| | kendo.calendar.js | Column menu feature (optional) |
+| | kendo.html.base.js | Column menu feature (optional) |
+| | kendo.html.button.js | Column menu feature (optional) |
+| | kendo.datepicker.js | Column menu feature (optional) |
+| | kendo.floatinglabel.js | Column menu feature (optional) |
+| | kendo.numerictextbox.js | Column menu feature (optional) |
+| | kendo.list.js | Column menu feature (optional) |
+| | kendo.dropdownlist.js | Column menu feature (optional) |
+| | kendo.binder.js | Column menu feature (optional) |
+| | kendo.filtermenu.js | Column menu feature (optional) |
+| | kendo.data.odata.js | Column menu feature (optional) |
+| | kendo.menu.js | Column menu feature (optional) |
+| | kendo.expansionpanel.js | Column menu feature (optional) |
+| | kendo.columnmenu.js | Column menu feature (optional) |
+| | kendo.toggleinputbase.js | Editing feature (optional) |
+| | kendo.html.base.js | Editing feature (optional) |
+| | kendo.html.input.js | Editing feature (optional) |
+| | kendo.checkbox.js | Editing feature (optional) |
+| | kendo.popup.js | Editing feature (optional) |
+| | kendo.list.js | Editing feature (optional) |
+| | kendo.html.button.js | Editing feature (optional) |
+| | kendo.dropdownlist.js | Editing feature (optional) |
 | | kendo.userevents.js | Editing feature (optional) |
 | | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
-| | kendo.popup.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
+| | kendo.floatinglabel.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
 | | kendo.draganddrop.js | Editing feature (optional) |
 | | kendo.window.js | Editing feature (optional) |
+| | kendo.textbox.js | Editing feature (optional) |
+| | kendo.form.js | Editing feature (optional) |
 | | kendo.userevents.js | Selection feature (optional) |
 | | kendo.selectable.js | Selection feature (optional) |
 | | kendo.userevents.js | Column resizing feature (optional) |

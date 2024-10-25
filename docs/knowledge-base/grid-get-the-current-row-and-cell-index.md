@@ -2,7 +2,7 @@
 title: Grid Does Not Recognize Mouse Clicks on Touch-Screen Devices
 description: When using the Kendo UI Grid in Chrome or Firefox on a hybrid device (touch screen), the Grid fails to recognize the mouse clicks.
 type: troubleshooting
-page_title: Cannot Get Row and Cell Index on Hybrid Devices | Kendo UI Grid for jQuery
+page_title: Cannot Get Row and Cell Index on Hybrid Devices - Kendo UI for jQuery Data Grid
 slug: grid-get-the-current-row-and-cell-index
 tags: grid, cell, index, row, current, position, tap, touch, click
 ticketid: 1148726
@@ -14,11 +14,11 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product Version</td>
-		<td>2017.3 1026</td>
+		<td>2020.3 1021</td>
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 
@@ -103,7 +103,7 @@ The following example demonstrates how to fully implement the suggested workarou
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
               { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: "destroy", title: "&nbsp;", width: 150 }],
             editable: true,
 
@@ -111,11 +111,6 @@ The following example demonstrates how to fully implement the suggested workarou
             $("body").append("<div>" + $(e.target).html() + "</div>");
         	});
         })
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ```

@@ -1,6 +1,6 @@
 ---
 title: SharePoint Add-Ins
-page_title: SharePoint Add-Ins | Kendo UI Third-Party Frameworks
+page_title: SharePoint Add-Ins - Kendo UI Third-Party Frameworks
 description: "Learn in theory and in practice how to build SharePoint add-ins with Kendo UI."
 slug: sharepoint_tutorials
 ---
@@ -31,7 +31,7 @@ Kendo UI is a well-suited solution when building SharePoint add-ins because of t
 * Easy integration with the SharePoint REST API.
 * Built-in themes, including one that matches the Office 365 look and feel.
 * Built-in export functionalities to most common office formats, such as Excel, PDF, and image files.
-* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.0, and Section 508.
+* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.2, and Section 508.
 
 ## Configuring DataSource
 
@@ -64,4 +64,5 @@ For more information on the Kendo UI Data Source abstraction, refer to [its intr
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Aurelia]({% slug aurelia_integration_kendoui %})

@@ -56,9 +56,11 @@ The Supported values are:
 * horizontal
 * vertical
 
-### theme `String` *(default: "default")*
+### theme `String` *(default: "sass")*
 
 The theme of the TreeMap.
+
+Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
 ### valueField `String` *(default: "value")*
 
@@ -192,6 +194,7 @@ The source widget instance.
         textField: "category",
         colorField: "color",
         dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("DataBound");
         }
       });
@@ -201,6 +204,7 @@ The source widget instance.
     <div id="treemap"></div>
     <script>
       function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("DataBound");
       }
 
@@ -270,6 +274,7 @@ The text that is being searched for.
     var treemap = $("#treemap").getKendoTreeMap();
     var fooDataItem = treemap.dataSource.get(1);
     var fooElement = treemap.findByUid(fooDataItem.uid);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(fooElement);
     </script>
 
@@ -307,6 +312,7 @@ A string, DOM element or jQuery object which represents the tile. A string is tr
 
     var treemap = $("#treemap").getKendoTreeMap();
     var dataItem = treemap.dataItem(".k-treemap-tile:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>
 

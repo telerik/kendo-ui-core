@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "fx",
     name: "Effects",
     category: "framework",
@@ -11,28 +9,17 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function($, undefined) {
-    var kendo = window.kendo,
+    let kendo = window.kendo,
         fx = kendo.effects,
         each = $.each,
         extend = $.extend,
-        proxy = $.proxy,
         support = kendo.support,
-        browser = support.browser,
-        transforms = support.transforms,
-        transitions = support.transitions,
-        scaleProperties = { scale: 0, scalex: 0, scaley: 0, scale3d: 0 },
-        translateProperties = { translate: 0, translatex: 0, translatey: 0, translate3d: 0 },
-        hasZoom = (typeof document.documentElement.style.zoom !== "undefined") && !transforms,
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?/i,
-        cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
         translateXRegExp = /translatex?$/i,
         oldEffectsRegExp = /(zoom|fade|expand)(\w+)/,
         singleEffectRegExp = /(zoom|fade|expand)/,
-        unitRegExp = /[xy]$/i,
         transformProps = ["perspective", "rotate", "rotatex", "rotatey", "rotatez", "rotate3d", "scale", "scalex", "scaley", "scalez", "scale3d", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "translatez", "translate3d", "matrix", "matrix3d"],
         transform2d = ["rotate", "scale", "scalex", "scaley", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "matrix"],
-        transform2units = { "rotate": "deg", scale: "", skew: "px", translate: "px" },
-        cssPrefix = transforms.css,
         round = Math.round,
         BLANK = "",
         PX = "px",
@@ -44,13 +31,13 @@ var __meta__ = { // jshint ignore:line
         ORIGIN = "origin",
         ABORT_ID = "abortId",
         OVERFLOW = "overflow",
-        TRANSLATE = "translate",
         POSITION = "position",
         COMPLETE_CALLBACK = "completeCallback",
-        TRANSITION = cssPrefix + "transition",
-        TRANSFORM = cssPrefix + "transform",
-        BACKFACE = cssPrefix + "backface-visibility",
-        PERSPECTIVE = cssPrefix + "perspective",
+        TRANSITIONEND = "transitionend",
+        TRANSITION = "transition",
+        TRANSFORM = "transform",
+        BACKFACE = "backface-visibility",
+        PERSPECTIVE = "perspective",
         DEFAULT_PERSPECTIVE = "1500px",
         TRANSFORM_PERSPECTIVE = "perspective(" + DEFAULT_PERSPECTIVE + ")",
         directions = {
@@ -110,65 +97,24 @@ var __meta__ = { // jshint ignore:line
 
     extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {
-            if (transitions) {
-                return fx.stopQueue(this, clearQueue || false, gotoEnd || false);
-            } else {
-                return this.stop(clearQueue, gotoEnd);
-            }
+            return fx.stopQueue(this, clearQueue || false, gotoEnd || false);
         }
     });
-
-    /* jQuery support for all transform animations (FF 3.5/3.6, Opera 10.x, IE9 */
-
-    if (transforms && !transitions) {
-        each(transform2d, function(idx, value) {
-            $.fn[value] = function(val) {
-                if (typeof val == "undefined") {
-                    return animationProperty(this, value);
-                } else {
-                    var that = $(this)[0],
-                        transformValue = value + "(" + val + transform2units[value.replace(unitRegExp, "")] + ")";
-
-                    if (that.style.cssText.indexOf(TRANSFORM) == -1) {
-                        $(this).css(TRANSFORM, transformValue);
-                    } else {
-                        that.style.cssText = that.style.cssText.replace(new RegExp(value + "\\(.*?\\)", "i"), transformValue);
-                    }
-                }
-                return this;
-            };
-
-            $.fx.step[value] = function (fx) {
-                $(fx.elem)[value](fx.now);
-            };
-        });
-
-        var curProxy = $.fx.prototype.cur;
-        $.fx.prototype.cur = function () {
-            if (transform2d.indexOf(this.prop) != -1) {
-                return parseFloat($(this.elem)[this.prop]());
-            }
-
-            return curProxy.apply(this, arguments);
-        };
-    }
 
     kendo.toggleClass = function(element, classes, options, add) {
         if (classes) {
             classes = classes.split(" ");
 
-            if (transitions) {
-                options = extend({
-                    exclusive: "all",
-                    duration: 400,
-                    ease: "ease-out"
-                }, options);
+            options = extend({
+                exclusive: "all",
+                duration: 400,
+                ease: "ease-out"
+            }, options);
 
-                element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease);
-                setTimeout(function() {
-                    element.css(TRANSITION, "").css(HEIGHT);
-                }, options.duration); // TODO: this should fire a kendoAnimate session instead.
-            }
+            element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease);
+            setTimeout(function() {
+                element.css(TRANSITION, "").css(HEIGHT);
+            }, options.duration); // TODO: this should fire a kendoAnimate session instead.
 
             each(classes, function(idx, value) {
                 element.toggleClass(value, add);
@@ -243,7 +189,7 @@ var __meta__ = { // jshint ignore:line
 
         for (key in properties) {
             lowerKey = key.toLowerCase();
-            isTransformed = transforms && transformProps.indexOf(lowerKey) != -1;
+            isTransformed = transformProps.indexOf(lowerKey) != -1;
 
             if (!support.hasHW3D && isTransformed && transform2d.indexOf(lowerKey) == -1) {
                 delete properties[key];
@@ -265,137 +211,129 @@ var __meta__ = { // jshint ignore:line
         return cssValues;
     }
 
-    if (transitions) {
-        extend(fx, {
-            transition: function(element, properties, options) {
-                var css,
-                    delay = 0,
-                    oldKeys = element.data("keys") || [],
-                    timeoutID;
+    extend(fx, {
+        transition: function(element, properties, options) {
+            let css,
+                delay = 0,
+                oldKeys = element.data("keys") || [],
+                timeoutID;
 
-                options = extend({
-                        duration: 200,
-                        ease: "ease-out",
-                        complete: null,
-                        exclusive: "all"
-                    },
-                    options
-                );
+            options = extend({
+                duration: 200,
+                ease: "ease-out",
+                complete: null,
+                exclusive: "all"
+            },
+                options
+            );
 
-                var stopTransitionCalled = false;
+            let stopTransitionCalled = false;
 
-                var stopTransition = function() {
-                    if (!stopTransitionCalled) {
-                        stopTransitionCalled = true;
+            let stopTransition = function() {
+                if (!stopTransitionCalled) {
+                    stopTransitionCalled = true;
 
-                        if (timeoutID) {
-                            clearTimeout(timeoutID);
-                            timeoutID = null;
-                        }
+                    if (timeoutID) {
+                        clearTimeout(timeoutID);
+                        timeoutID = null;
+                    }
 
-                        element
+                    element
                         .removeData(ABORT_ID)
                         .dequeue()
                         .css(TRANSITION, "")
                         .css(TRANSITION);
 
-                        options.complete.call(element);
-                    }
-                };
-
-                options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
-
-                css = normalizeCSS(element, properties);
-
-                $.merge(oldKeys, keys(css));
-
-                if ($.hasOwnProperty("uniqueSort")) {
-                    element
-                        .data("keys", $.uniqueSort(oldKeys))
-                        .height();
-                } else {
-                    element
-                        .data("keys", $.unique(oldKeys))
-                        .height();
+                    options.complete.call(element);
                 }
+            };
 
-                element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
-                element.css(css).css(TRANSFORM);
+            options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-                /**
-                 * Use transitionEnd event for browsers who support it - but duplicate it with setTimeout, as the transitionEnd event will not be triggered if no CSS properties change.
-                 * This should be cleaned up at some point (widget by widget), and refactored to widgets not relying on the complete callback if no transition occurs.
-                 *
-                 * For IE9 and below, resort to setTimeout.
-                 */
-                if (transitions.event) {
-                    element.one(transitions.event, stopTransition);
-                    if (options.duration !== 0) {
-                        delay = 500;
-                    }
-                }
+            css = normalizeCSS(element, properties);
 
-                timeoutID = setTimeout(stopTransition, options.duration + delay);
-                element.data(ABORT_ID, timeoutID);
-                element.data(COMPLETE_CALLBACK, stopTransition);
-            },
+            $.merge(oldKeys, keys(css));
 
-            stopQueue: function(element, clearQueue, gotoEnd) {
-                var cssValues,
-                    taskKeys = element.data("keys"),
-                    retainPosition = (!gotoEnd && taskKeys),
-                    completeCallback = element.data(COMPLETE_CALLBACK);
-
-                if (retainPosition) {
-                    cssValues = kendo.getComputedStyles(element[0], taskKeys);
-                }
-
-                if (completeCallback) {
-                    completeCallback();
-                }
-
-                if (retainPosition) {
-                    element.css(cssValues);
-                }
-
-                return element
-                        .removeData("keys")
-                        .stop(clearQueue);
+            if ($.hasOwnProperty("uniqueSort")) {
+                element
+                    .data("keys", $.uniqueSort(oldKeys))
+                    .height();
+            } else {
+                element
+                    .data("keys", $.unique(oldKeys))
+                    .height();
             }
-        });
-    }
+
+            element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
+            element.css(css).css(TRANSFORM);
+
+            /**
+             * Use transitionEnd event for browsers who support it - but duplicate it with setTimeout, as the transitionEnd event will not be triggered if no CSS properties change.
+             * This should be cleaned up at some point (widget by widget), and refactored to widgets not relying on the complete callback if no transition occurs.
+             *
+             * For IE9 and below, resort to setTimeout.
+             */
+            element.one(TRANSITIONEND, stopTransition);
+            if (options.duration !== 0) {
+                delay = 500;
+            }
+
+            timeoutID = setTimeout(stopTransition, options.duration + delay);
+            element.data(ABORT_ID, timeoutID);
+            element.data(COMPLETE_CALLBACK, stopTransition);
+        },
+
+        stopQueue: function(element, clearQueue, gotoEnd) {
+            var cssValues,
+                taskKeys = element.data("keys"),
+                retainPosition = (!gotoEnd && taskKeys),
+                completeCallback = element.data(COMPLETE_CALLBACK);
+
+            if (retainPosition) {
+                cssValues = kendo.getComputedStyles(element[0], taskKeys);
+            }
+
+            if (completeCallback) {
+                completeCallback();
+            }
+
+            if (retainPosition) {
+                element.css(cssValues);
+            }
+
+            return element
+                .removeData("keys")
+                .stop(clearQueue);
+        }
+    });
 
     function animationProperty(element, property) {
-        if (transforms) {
-            var transform = element.css(TRANSFORM);
-            if (transform == NONE) {
-                return property == "scale" ? 1 : 0;
-            }
-
-            var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
-                computed = 0;
-
-            if (match) {
-                computed = parseInteger(match[1]);
-            } else {
-                match = transform.match(matrix3dRegExp) || [0, 0, 0, 0, 0];
-                property = property.toLowerCase();
-
-                if (translateXRegExp.test(property)) {
-                    computed = parseFloat(match[3] / match[2]);
-                } else if (property == "translatey") {
-                    computed = parseFloat(match[4] / match[2]);
-                } else if (property == "scale") {
-                    computed = parseFloat(match[2]);
-                } else if (property == "rotate") {
-                    computed = parseFloat(Math.atan2(match[2], match[1]));
-                }
-            }
-
-            return computed;
-        } else {
-            return parseFloat(element.css(property));
+        let transform = element.css(TRANSFORM);
+        if (transform == NONE) {
+            return property == "scale" ? 1 : 0;
         }
+
+        let match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
+            computed = 0;
+
+        if (match) {
+            computed = parseInteger(match[1]);
+        } else {
+            match = transform.match(matrix3dRegExp) || [0, 0, 0, 0, 0];
+            property = property.toLowerCase();
+
+            if (translateXRegExp.test(property)) {
+                computed = parseFloat(match[3] / match[2]);
+            } else if (property == "translatey") {
+                computed = parseFloat(match[4] / match[2]);
+            } else if (property == "scale") {
+                computed = parseFloat(match[2]);
+            } else if (property == "rotate") {
+                computed = parseFloat(Math.atan2(match[2], match[1]));
+            }
+        }
+
+        return computed;
     }
 
     var EffectSet = kendo.Class.extend({
@@ -409,7 +347,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         run: function(effects) {
-            var that = this,
+            let that = this,
                 effect,
                 idx, jdx,
                 length = effects.length,
@@ -424,7 +362,7 @@ var __meta__ = { // jshint ignore:line
 
             that.effects = effects;
 
-            deferred.done($.proxy(that, "complete"));
+            deferred.done(that.complete.bind(that));
 
             element.data("animating", true);
 
@@ -455,7 +393,7 @@ var __meta__ = { // jshint ignore:line
                 extend(start, { display: element.data("olddisplay") || "block" });
             }
 
-            if (transforms && !options.reset) {
+            if (!options.reset) {
                 target = element.data("targetTransform");
 
                 if (target) {
@@ -464,10 +402,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             start = normalizeCSS(element, start);
-
-            if (transforms && !transitions) {
-                start = strip3DTransforms(start);
-            }
 
             element.css(start)
                    .css(TRANSFORM); // Nudge
@@ -517,7 +451,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         complete: function() {
-            var that = this,
+            let that = this,
                 idx = 0,
                 element = that.element,
                 options = that.options,
@@ -533,10 +467,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             this.restoreCallback();
-
-            if (hasZoom && !transforms) {
-                setTimeout($.proxy(this, "restoreCallback"), 0); // Again jQuery callback in IE8-
-            }
 
             for (; idx < length; idx ++) {
                 effects[idx].teardown();
@@ -584,97 +514,13 @@ var __meta__ = { // jshint ignore:line
 
     extend(fx, {
         animate: function(elements, properties, options) {
-            var useTransition = options.transition !== false;
+            let useTransition = options.transition !== false;
             delete options.transition;
 
-            if (transitions && "transition" in fx && useTransition) {
+            if ("transition" in fx && useTransition) {
                 fx.transition(elements, properties, options);
             } else {
-                if (transforms) {
-                    elements.animate(strip3DTransforms(properties), { queue: false, show: false, hide: false, duration: options.duration, complete: options.complete }); // Stop animate from showing/hiding the element to be able to hide it later on.
-                } else {
-                    elements.each(function() {
-                        var element = $(this),
-                            multiple = {};
-
-                        each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
-                            var params,
-                                currentValue = properties ? properties[value]+ " " : null; // We need to match
-
-                            if (currentValue) {
-                                var single = properties;
-
-                                if (value in scaleProperties && properties[value] !== undefined) {
-                                    params = currentValue.match(cssParamsRegExp);
-                                    if (transforms) {
-                                        extend(single, { scale: +params[0] });
-                                    }
-                                } else {
-                                    if (value in translateProperties && properties[value] !== undefined) {
-                                        var position = element.css(POSITION),
-                                            isFixed = (position == "absolute" || position == "fixed");
-
-                                        if (!element.data(TRANSLATE)) {
-                                            if (isFixed) {
-                                                element.data(TRANSLATE, {
-                                                    top: parseCSS(element, "top") || 0,
-                                                    left: parseCSS(element, "left") || 0,
-                                                    bottom: parseCSS(element, "bottom"),
-                                                    right: parseCSS(element, "right")
-                                                });
-                                            } else {
-                                                element.data(TRANSLATE, {
-                                                    top: parseCSS(element, "marginTop") || 0,
-                                                    left: parseCSS(element, "marginLeft") || 0
-                                                });
-                                            }
-                                        }
-
-                                        var originalPosition = element.data(TRANSLATE);
-
-                                        params = currentValue.match(cssParamsRegExp);
-                                        if (params) {
-
-                                            var dX = value == TRANSLATE + "y" ? +null : +params[1],
-                                                dY = value == TRANSLATE + "y" ? +params[1] : +params[2];
-
-                                            if (isFixed) {
-                                                if (!isNaN(originalPosition.right)) {
-                                                    if (!isNaN(dX)) { extend(single, { right: originalPosition.right - dX }); }
-                                                } else {
-                                                    if (!isNaN(dX)) { extend(single, { left: originalPosition.left + dX }); }
-                                                }
-
-                                                if (!isNaN(originalPosition.bottom)) {
-                                                    if (!isNaN(dY)) { extend(single, { bottom: originalPosition.bottom - dY }); }
-                                                } else {
-                                                    if (!isNaN(dY)) { extend(single, { top: originalPosition.top + dY }); }
-                                                }
-                                            } else {
-                                                if (!isNaN(dX)) { extend(single, { marginLeft: originalPosition.left + dX }); }
-                                                if (!isNaN(dY)) { extend(single, { marginTop: originalPosition.top + dY }); }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if (!transforms && value != "scale" && value in single) {
-                                    delete single[value];
-                                }
-
-                                if (single) {
-                                    extend(multiple, single);
-                                }
-                            }
-                        });
-
-                        if (browser.msie) {
-                            delete multiple.scale;
-                        }
-
-                        element.animate(multiple, { queue: false, show: false, hide: false, duration: options.duration, complete: options.complete }); // Stop animate from showing/hiding the element to be able to hide it later on.
-                    });
-                }
+                elements.animate(strip3DTransforms(properties), { queue: false, show: false, hide: false, duration: options.duration, complete: options.complete }); // Stop animate from showing/hiding the element to be able to hide it later on.
             }
         }
     });
@@ -733,7 +579,7 @@ var __meta__ = { // jshint ignore:line
                 return this.compositeRun();
             }
 
-            var that = this,
+            let that = this,
                 element = that.element,
                 idx = 0,
                 restore = that.restore,
@@ -746,7 +592,7 @@ var __meta__ = { // jshint ignore:line
                 children = that.children(),
                 childrenLength = children.length;
 
-            deferred.done($.proxy(that, "_complete"));
+            deferred.done(that._complete.bind(that));
 
             element.data("animating", true);
 
@@ -768,19 +614,13 @@ var __meta__ = { // jshint ignore:line
                 extend(start, { display: element.data("olddisplay") || "block" });
             }
 
-            if (transforms) {
-                target = element.data("targetTransform");
+            target = element.data("targetTransform");
 
-                if (target) {
-                    start = extend(target, start);
-                }
+            if (target) {
+                start = extend(target, start);
             }
 
             start = normalizeCSS(element, start);
-
-            if (transforms && !transitions) {
-                start = strip3DTransforms(start);
-            }
 
             element.css(start).css(TRANSFORM); // Trick webkit into re-rendering
 
@@ -815,7 +655,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _complete: function() {
-            var that = this,
+            let that = this,
                 element = that.element;
 
             element
@@ -826,10 +666,6 @@ var __meta__ = { // jshint ignore:line
 
             if (that.shouldHide()) {
                 element.data("olddisplay", element.css("display")).hide();
-            }
-
-            if (hasZoom && !transforms) {
-                setTimeout($.proxy(that, "restoreCallback"), 0); // Again jQuery callback in IE8-
             }
 
             that.teardown();
@@ -890,7 +726,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         prepare: function(start, end) {
-            var that = this,
+            let that = this,
                 tmp,
                 element = that.element,
                 outerWidth = kendo._outerWidth,
@@ -906,13 +742,8 @@ var __meta__ = { // jshint ignore:line
                 end = tmp;
             }
 
-            if (transforms) {
-                start[direction.transition] = startValue;
-                end[direction.transition] = endValue;
-            } else {
-                start[direction.property] = startValue;
-                end[direction.property] = endValue;
-            }
+            start[direction.transition] = startValue;
+            end[direction.transition] = endValue;
         }
     });
 
@@ -1023,19 +854,15 @@ var __meta__ = { // jshint ignore:line
 
     createEffect("slideTo", {
         prepare: function(start, end) {
-            var that = this,
+            let that = this,
                 element = that.element,
                 options = that.options,
                 offset = options.offset.split(","),
                 reverse = that._reverse;
 
-            if (transforms) {
-                end.translatex = !reverse ? offset[0] : 0;
-                end.translatey = !reverse ? offset[1] : 0;
-            } else {
-                end.left = !reverse ? offset[0] : 0;
-                end.top = !reverse ? offset[1] : 0;
-            }
+            end.translatex = !reverse ? offset[0] : 0;
+            end.translatey = !reverse ? offset[1] : 0;
+
             element.css("left");
         }
     });
@@ -1138,10 +965,10 @@ var __meta__ = { // jshint ignore:line
     };
 
     var ROTATIONS = {
-        top:    { start: "rotatex(0deg)", end: "rotatex(180deg)" },
+        top: { start: "rotatex(0deg)", end: "rotatex(180deg)" },
         bottom: { start: "rotatex(-180deg)", end: "rotatex(0deg)" },
-        left:   { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
-        right:  { start: "rotatey(180deg)", end: "rotatey(0deg)" }
+        left: { start: "rotatey(0deg)", end: "rotatey(-180deg)" },
+        right: { start: "rotatey(180deg)", end: "rotatey(0deg)" }
     };
 
     function clipInHalf(container, direction) {
@@ -1378,7 +1205,7 @@ var __meta__ = { // jshint ignore:line
             container
                 .removeClass("k-fx-end")
                 .removeClass(this._containerClass())
-                .off(transitions.event, this.completeProxy);
+                .off(TRANSITIONEND, this.completeProxy);
 
             this._previous.hide().removeClass("k-fx-current");
             this.element.removeClass("k-fx-next");
@@ -1400,7 +1227,7 @@ var __meta__ = { // jshint ignore:line
                 return this.compositeRun();
             }
 
-            var that = this,
+            let that = this,
                 element = that.element,
                 previous = that._previous,
                 container = element.parents().filter(previous.parents()).first(),
@@ -1416,7 +1243,7 @@ var __meta__ = { // jshint ignore:line
 
             this.container = container;
             this.deferred = deferred;
-            this.isAbsolute = originalPosition  == "absolute";
+            this.isAbsolute = originalPosition == "absolute";
 
             if (!this.isAbsolute) {
                 both.css(POSITION, "absolute");
@@ -1427,26 +1254,22 @@ var __meta__ = { // jshint ignore:line
                 container.css(OVERFLOW, "hidden");
             }
 
-            if (!transitions) {
-                this.complete();
-            } else {
-                element.addClass("k-fx-hidden");
+            element.addClass("k-fx-hidden");
 
-                container.addClass(this._containerClass());
+            container.addClass(this._containerClass());
 
-                this.completeProxy = $.proxy(this, "complete");
-                container.on(transitions.event, this.completeProxy);
+            this.completeProxy = this.complete.bind(this);
+            container.on(TRANSITIONEND, this.completeProxy);
 
+            kendo.animationFrame(function() {
+                element.removeClass("k-fx-hidden").addClass("k-fx-next");
+                previous.css("display", "").addClass("k-fx-current");
+                that._before(previous, element);
                 kendo.animationFrame(function() {
-                    element.removeClass("k-fx-hidden").addClass("k-fx-next");
-                    previous.css("display", "").addClass("k-fx-current");
-                    that._before(previous, element);
-                    kendo.animationFrame(function() {
-                        container.removeClass("k-fx-start").addClass("k-fx-end");
-                        that._after(previous, element);
-                    });
+                    container.removeClass("k-fx-start").addClass("k-fx-end");
+                    that._after(previous, element);
                 });
-            }
+            });
 
             return deferred.promise();
         },
@@ -1459,7 +1282,7 @@ var __meta__ = { // jshint ignore:line
     var Animation = kendo.Class.extend({
         init: function() {
             var that = this;
-            that._tickProxy = proxy(that._tick, that);
+            that._tickProxy = that._tick.bind(that);
             that._started = false;
         },
 
@@ -1545,13 +1368,13 @@ var __meta__ = { // jshint ignore:line
     });
 
     extend(Transition, {
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        easeOutExpo: function(t, b, c, d) {
+            return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
         },
 
-        easeOutBack: function (t, b, c, d, s) {
+        easeOutBack: function(t, b, c, d, s) {
             s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+            return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
         }
     });
 
@@ -1585,7 +1408,5 @@ var __meta__ = { // jshint ignore:line
         return Math.max(inner.width / outer.width, inner.height / outer.height);
     };
 })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

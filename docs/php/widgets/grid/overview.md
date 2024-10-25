@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Grid PHP Class
+page_title: Overview - Grid PHP Class
 description: "Get started with the Grid PHP class in Kendo UI."
 slug: overview_grid_uiforphp
 position: 1

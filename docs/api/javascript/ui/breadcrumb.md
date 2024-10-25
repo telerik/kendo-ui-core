@@ -7,6 +7,8 @@ component: breadcrumb
 
 # kendo.ui.Breadcrumb
 
+Represents the Kendo UI Breadcrumb widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### bindToLocation `Boolean` *(default: false)*
@@ -23,7 +25,7 @@ Indicates whether the **Breadcrumb** will enable/disable the binding to the loca
         });
 	</script>
 
-### delimiterIcon `String` *(default: "arrow-chevron-right")*
+### delimiterIcon `String` *(default: "chevron-right")*
 
 Defines a name of an existing icon in [the Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web). The icon will be applied as separator between the segments of the **Breadcrumb** path.
 
@@ -33,7 +35,7 @@ Defines a name of an existing icon in [the Kendo UI Web Font Icons](https://docs
 
 	<script>
         $("#breadcrumb").kendoBreadcrumb({
-            delimiterIcon: "line",
+            delimiterIcon: "shape-line",
 			value: 'Telerik UI/Navigation/Breadcrumb'
         });
 	</script>
@@ -72,39 +74,43 @@ Array of items to be rendered in **Breadcrumb**.
 		});
 	</script>
 
-### items.type `String` 
+### items.encoded `Boolean` _(default: true)_
+
+Defines whether to encode the item's text. To render entities or HTML, set it to `false`.
+
+### items.type `String`
 
 Defines the type of the item "rootitem" or "item".
 
-### items.href `String`  
+### items.href `String`
 
-Defines the navigation link's url of the item (rendered if `navigation` is `true`).
+Defines the navigation link's url of the item (rendered if `navigational` is `true`).
 
-### items.text `String`  
+### items.text `String`
 
 Defines the text of the item.
 
-### items.icon `String`  
+### items.icon `String`
 
 Defines the icon to be rendered.
 
-### items.itemClass `String`  
+### items.itemClass `String`
 
 Defines the item classes (the `li` element).
 
-### items.linkClass `String` 
+### items.linkClass `String`
 
 Defines the link classes (the `a` element).
 
-### items.iconClass `String`  
+### items.iconClass `String`
 
 Defines the icon classes (the `span` element).
 
-### items.showIcon `Boolean`  
+### items.showIcon `Boolean`
 
 Defines whether to show the icon. Default value is *true* for `rootItem` and *false* for `item`.
 
-### items.showText `Boolean`  
+### items.showText `Boolean`
 
 Defines whether to show the text. Default value is *false* for `rootItem` and *true* for `item`.
 
@@ -197,9 +203,30 @@ The root icon is clickable and resets the value of the component.
         });
 	</script>
 
+### size `String` *(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			size: "large",
+            rootIcon: "cloud",
+			value: 'Telerik UI/Navigation/Breadcrumb'
+        });
+	</script>
+
 ### value `String` *(default: "")*
 
-Defines the value/path of the component. Each segments is separated by a slash. 
+Defines the value/path of the component. Each segments is separated by a slash.
 
 #### Example
 
@@ -252,7 +279,7 @@ The path segments separated by slash.
 
 	<script>
         var breadcrumb = $("#breadcrumb").kendoBreadcrumb({
-            
+
         }).getKendoBreadcrumb();
 
 		breadcrumb.items([
@@ -296,6 +323,7 @@ If invoked prevents the click action.
         $("#breadcrumb").kendoBreadcrumb({
             value: 'Telerik UI/Navigation/Breadcrumb',
 			click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 				console.log(e.sender);
 			}
         });
@@ -312,6 +340,7 @@ If invoked prevents the click action.
         }).getKendoBreadcrumb();
 
 		breadcrumb.bind('click', function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 			console.log(e.sender);
 		});
 	</script>
@@ -338,6 +367,7 @@ The new value(path) of the Breadcrumb.
         $("#breadcrumb").kendoBreadcrumb({
             value: 'Telerik UI/Navigation/Breadcrumb',
 			change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 				console.log(e.value);
 			}
         });

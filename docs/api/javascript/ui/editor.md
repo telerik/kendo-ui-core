@@ -63,6 +63,7 @@ Indicates whether the Editor should submit encoded HTML tags. By default, the su
       value: "<p>foo</p>",
       encoded: false
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").val()); // logs "<p>foo</p>"
     </script>
 
@@ -141,6 +142,38 @@ Kendo template or a callback that allows custom serialization of an immutable el
     });
     </script>
 
+### inlineHeight `Number`
+
+This property enables you to configure height for the Editor when the component is in [`inline`](https://demos.telerik.com/kendo-ui/editor/inline-editing) mode.
+
+> This configuration is required when you want to use the `formattingMarks` tool in an inline editor.
+
+    <div id="editor">
+        <h2>
+            Comprehensive HTML5/JavaScript framework <br />
+            for modern web and mobile app development
+        </h2>
+        <p>
+            Kendo UI is everything professional developers need
+            to build HTML5 sites and mobile apps. Today, productivity
+            of an average HTML/jQuery developer is hampered by
+            assembling a Frankenstein framework of disparate
+            JavaScript libraries and plug-ins.
+        </p>
+        <p>
+            Kendo UI has it all: rich jQuery-based widgets,
+            a simple and consistent programming interface,
+            a rock-solid DataSource, validation, internationalization,
+            a MVVM framework, themes, templates and the list goes on.
+        </p>
+    </div>
+
+    <script>
+      $("#editor").kendoEditor({
+        inlineHeight: 200
+      });
+    </script>
+
 ### messages `Object`
 
 Defines the text of the labels that are shown within the editor. Used primarily for localization.
@@ -203,9 +236,9 @@ Defines the text of the labels that are shown within the editor. Used primarily 
     </script>
 
 
-### messages.accessibilityTab `String` *(default: 'Accessibility')*
+### messages.accessibilityTab `String` *(default: 'Advanced')*
 
-The title of the Accessibility in the Table Wizard dialog.
+The title of the tab containing advanced and accessibility configurations in the Table Wizard dialog.
 
 #### Example
 
@@ -213,7 +246,7 @@ The title of the Accessibility in the Table Wizard dialog.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        accessibilityTab: "Accessibility"
+        accessibilityTab: "Advanced"
       }
     });
     </script>
@@ -474,6 +507,66 @@ The title of the tool that aligns the cell text.
     });
     </script>
 
+### messages.auto `String` *(default: 'Auto')*
+
+The placeholder for the numeric inputs in the Table Wizard dialogs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        auto: "Auto"
+      }
+    });
+    </script>
+
+### messages.tableAlignLeft `String` *(default: 'Table Align Left')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignLeft: "Table Align Left"
+      }
+    });
+    </script>
+
+### messages.tableAlignCenter `String` *(default: 'Table Align Center')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignCenter: "Table Align Center"
+      }
+    });
+    </script>
+
+### messages.tableAlignRight `String` *(default: 'Table Align Right')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignRight: "Table Align Right"
+      }
+    });
+    </script>
+
 ### messages.alignment `String` *(default: 'Alignment')*
 
 The title of the tool that aligns the cell text.
@@ -500,6 +593,36 @@ The title of the format painter tool button that applies the copied format.
     $("#editor").kendoEditor({
       messages: {
         applyFormat: "Apply the format that has been copied"
+      }
+    });
+    </script>
+
+### messages.applyToColumn `String` *(default: 'apply to column')*
+
+The hint for the Width input in the Cell properties Table Wizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyToColumn: "apply to column"
+      }
+    });
+    </script>
+
+### messages.applyToRow `String` *(default: 'apply to row')*
+
+The hint for the Height input in the Cell properties Table Wizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyToRow: "apply to row"
       }
     });
     </script>
@@ -579,6 +702,36 @@ The title of the tool that changes the border of tables.
     });
     </script>
 
+### messages.borderColor `String` *(default: 'Border color')*
+
+The title of the tool that changes the border color of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        borderColor: "Border color"
+      }
+    });
+    </script>
+
+### messages.borderWidth `String` *(default: 'Border width')*
+
+The title of the tool that changes the border width of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        borderWidth: "Border width"
+      }
+    });
+    </script>
+
 ### messages.style `String` *(default: 'Styles')*
 
 The title of the tool that applies styling to elements. Deprecated.
@@ -605,6 +758,21 @@ The title of the tool that adds caption to tables.
     $("#editor").kendoEditor({
       messages: {
         caption: "Caption"
+      }
+    });
+    </script>
+
+### messages.captionAlignment `String` *(default: 'Caption alignment')*
+
+The title of the tool that sets the caption alignment of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        captionAlignment: "Caption alignment"
       }
     });
     </script>
@@ -849,7 +1017,7 @@ The label of the insert button in all editor dialogs.
     });
     </script>
 
-### messages.dialogOk `String` *(default: 'Ok')*
+### messages.dialogOk `String` *(default: 'Confirm')*
 
 The title of the OK buttons in editor's dialogs.
 
@@ -859,7 +1027,7 @@ The title of the OK buttons in editor's dialogs.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        dialogOk: "Ok"
+        dialogOk: "Confirm"
       }
     });
     </script>
@@ -924,6 +1092,21 @@ The caption for the file URL in the insertFile dialog.
     });
     </script>
 
+### messages.fitToCell `String` *(default: 'Fit to cell')*
+
+The text of the fit to cell option in the WrapText dropdown in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fitToCell: "Fit to cell"
+      }
+    });
+    </script>
+
 ### messages.fontName `String` *(default: "Select font family")*
 
 The title of the tool that changes the text font.
@@ -963,6 +1146,7 @@ The title of the tool that changes the text size.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+      tools: ["fontSize"],
       messages: {
         fontSize: "Select font size"
       }
@@ -1209,6 +1393,36 @@ The title of the tool that inserts an unordered list.
     });
     </script>
 
+### messages.insertUpperRomanList `String` *(default: "Insert upper roman list")*
+
+The title of the tool that inserts an upper roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertUpperRomanList: "Insert upper roman list"
+      }
+    });
+    </script>
+
+### messages.insertLowerRomanList `String` *(default: "Insert lower roman list")*
+
+The title of the tool that inserts an lower roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertLowerRomanList: "Insert lower roman list"
+      }
+    });
+    </script>
+
 ### messages.italic `String` *(default: "Italic")*
 
 The title of the tool that makes text italicized.
@@ -1389,6 +1603,21 @@ The title of the Print tool.
     });
     </script>
 
+### messages.redo `String` *(default: "Redo")*
+
+The title of the redo tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        redo: "Redo task"
+      }
+    });
+    </script>
+
 ### messages.rows `String` *(default: 'Rows')*
 
 The title of the Rows field in Table Wizard.
@@ -1404,9 +1633,9 @@ The title of the Rows field in Table Wizard.
     });
     </script>
 
-### messages.selectAllCells `String` *(default: 'Select All Cells')*
+### messages.selectAllCells `String` *(default: 'Apply to all cells')*
 
-The title of the Select All Cells tool.
+The title of the Apply to all cells tool.
 
 #### Example
 
@@ -1414,7 +1643,7 @@ The title of the Select All Cells tool.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        selectAllCells: "Select All Cells"
+        selectAllCells: "Apply to all cells"
       }
     });
     </script>
@@ -1479,9 +1708,9 @@ The title of the tool that makes text superscript.
     });
     </script>
 
-### messages.tableTab `String` *(default: 'Table')*
+### messages.tableBackground `String` *(default: 'Table background')*
 
-The title of the Table tab in Table Wizard.
+The title of the Table background Wizard tool.
 
 #### Example
 
@@ -1489,7 +1718,52 @@ The title of the Table tab in Table Wizard.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        tableTab: "Table"
+        tableBackground: "Table background"
+      }
+    });
+    </script>
+
+### messages.tableCellProperties `String` *(default: 'Cell Properties')*
+
+The title of the Table Cell properties Wizard tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableCellProperties: "Cell Properties"
+      }
+    });
+    </script>
+
+### messages.tableProperties `String` *(default: 'Table Properties')*
+
+The title of the Table properties Wizard tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableProperties: "Table Properties"
+      }
+    });
+    </script>
+
+### messages.tableTab `String` *(default: 'General')*
+
+The title of the main Table tab in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableTab: "General"
       }
     });
     </script>
@@ -1520,6 +1794,21 @@ The title of the tool that underlines text.
     $("#editor").kendoEditor({
       messages: {
         underline: "Underline"
+      }
+    });
+    </script>
+
+### messages.undo `String` *(default: "Undo")*
+
+The title of the undo tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        undo: "Undo task"
       }
     });
     </script>
@@ -1597,6 +1886,112 @@ The title of the Wrap Text option in Table Wizard.
         wrapText: "Wrap text"
       }
     });
+    </script>
+
+### nonce `String`
+
+When strict CSP is enabled a `nonce` can be provided for the inline styles. The passed value would be used as the nonce attribute for the inline styles in the content area iframe, the placeholder inline style and the link tags loading external stylesheets in the content area.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                nonce: "kendoNonce"
+            });
+        });
+    </script>
+
+### navigateOnTab `Boolean` *(default: false)*
+
+If set to `true` this configuration option would enable Tab-based navigation among Editor ToolBar items. By default navigation is arrow-based.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+      $("#editor").kendoEditor({
+          navigateOnTab: true
+      });
+    </script>
+
+### nonSplittableTagsOnPaste `Array` *(default: [])*
+
+When pasting a block element inside an element such as a list `ul`, the list gets split in half and the block element is inserted between the two `ul` elements.
+
+This configuration enables you to specify elements for which the above behavior will be ignored.
+
+#### Example
+
+    <h4>Create a list using the editor toolbar command and then click the paste button.</h4>
+    <button id="paste">Paste</button>
+    <textarea id="editor"></textarea>
+    <script>
+      var editor = $("#editor").kendoEditor({
+        nonSplittableTagsOnPaste: ["ul"],
+        tools: [
+          "insertUnorderedList"
+        ]
+      }).data("kendoEditor");
+
+      $("#paste").on("click", () => {
+        var editor = $("#editor").data("kendoEditor");
+        editor.paste("<p>New content</p>");
+      });
+    </script>
+
+### nonSplittableTagsOnPaste.tag `String`
+
+An extension of the `nonSplittableTagsOnPaste` configuration. You can specify an array of objects instead of array of strings if you want to configure additional settings.
+
+#### Example
+
+    <h4>Create a list using the editor toolbar command and then click the paste button.</h4>
+    <button id="paste">Paste</button>
+    <textarea id="editor"></textarea>
+    <script>
+      var editor = $("#editor").kendoEditor({
+        nonSplittableTagsOnPaste: [{
+          tag: "ul",
+          unwrap: false
+        }],
+        tools: [
+          "insertUnorderedList"
+        ]
+      }).data("kendoEditor");
+
+      $("#paste").on("click", () => {
+        var editor = $("#editor").data("kendoEditor");
+        editor.paste("<p>New content</p>");
+      });
+    </script>
+
+### nonSplittableTagsOnPaste.unwrap `Boolean` *(default: true)*
+
+By default the pasted content will be unwrapped from its parent elements when the `nonSplittableTagsOnPaste` configuration is enabled. This property enables you to stop that behavior.
+
+#### Example
+
+    <h4>Create a list using the editor toolbar command and then click the paste button.</h4>
+    <button id="paste">Paste</button>
+    <textarea id="editor"></textarea>
+    <script>
+      var editor = $("#editor").kendoEditor({
+        nonSplittableTagsOnPaste: [{
+          tag: "ul",
+          unwrap: false
+        }],
+        tools: [
+          "insertUnorderedList"
+        ]
+      }).data("kendoEditor");
+
+      $("#paste").on("click", () => {
+        var editor = $("#editor").data("kendoEditor");
+        editor.paste("<p>New content</p>");
+      });
     </script>
 
 ### pasteCleanup `Object`
@@ -1779,6 +2174,12 @@ The author of the PDF document.
         });
     </script>
 
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -1836,6 +2237,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2017,7 +2426,7 @@ The hint displayed by the widget when it is empty. Not set by default.
 
 > **Important**
 >
-> The options is only available in [Classic Mode](/controls/editors/editor/overview#classic-mode).
+> The options is only available in [Classic Mode](/controls/editor/overview#classic-mode).
 
 #### Example - specify the placeholder option
     <textarea id="editor"></textarea>
@@ -2055,9 +2464,9 @@ If enabled, the editor renders a resize handle to allow users to resize it.
     });
     </script>
 
-### resizable.min `Number`
+### resizable.min `Number|Object`
 
-The minimum height that the editor can be resized to.
+The minimum height that the editor can be resized to. If set to an object the user can restrict both min width and height values.
 
 #### Example
 
@@ -2070,9 +2479,43 @@ The minimum height that the editor can be resized to.
     });
     </script>
 
-### resizable.max `Number`
+### resizable.min.minWidth `Number`
 
-The maximum height that the editor can be resized to.
+The minimum width that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        min: {
+          minWidth: 500
+        }
+      }
+    });
+    </script>
+
+### resizable.min.minHeight `Number`
+
+The minimum height that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        min: {
+          minHeight: 500
+        }
+      }
+    });
+    </script>
+
+### resizable.max `Number|Object`
+
+The maximum height that the editor can be resized to. If set to an object the user can restrict both max width and height values.
 
 #### Example
 
@@ -2085,11 +2528,45 @@ The maximum height that the editor can be resized to.
     });
     </script>
 
+### resizable.max.maxWidth `Number`
+
+The maximum width that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        max: {
+          maxWidth: 500
+        }
+      }
+    });
+    </script>
+
+### resizable.max.maxHeight `Number`
+
+The maximum height that the editor can be resized to.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        max: {
+          maxHeight: 500
+        }
+      }
+    });
+    </script>
+
 ### resizable.toolbar `Boolean`
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
 
-> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor` and `formatting` will be hidden but **not** moved to the tool overflow popup.
+> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor`, `formatting` and `createTable` will **not** be moved to the tool overflow popup and will be always visible.
 
 #### Example
 
@@ -2137,6 +2614,25 @@ Indicates whether the characters outside the ASCII range will be encoded as HTML
         entities: true
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
+    </script>
+
+### serialization.optimizeTags `Boolean` *(default: false)*
+
+Indicates whether optizable tags should be removed from the DOM. Currently, optimizable tags are `span` and `font` elements with no attributes and no decoration or formatting applied (via inline styles/attributes).
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      value: "<p><span>non-decorated text</span></p><p><span style=\"text-decoration: underline;\">underline text</span></p>",
+      serialization: {
+        optimizeTags: true
+      }
+    });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
     </script>
 
@@ -2157,6 +2653,7 @@ Indicates whether inline scripts will be serialized and posted to the server.
         scripts: true
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // log will contain the script tag
     </script>
 
@@ -2175,6 +2672,7 @@ or as presentational (b / i / u / font) tags. Used for outputting content for le
         semantic: false
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // logs "Check out <i>this</i> <b>kata</b>.",
     </script>
 
@@ -2209,6 +2707,8 @@ The available editor commands are:
         - **fontName**, **fontSize**, **foreColor**, **backColor**
 *   Alignment
         - **justifyLeft**, **justifyCenter**, **justifyRight**, **justifyFull**
+*   Spacing
+        - **lineHeight**
 *   Lists
         - **insertUnorderedList**, **insertOrderedList**, **indent**, **outdent**
 *   Links, images and files
@@ -2227,17 +2727,67 @@ The available editor commands are:
         - **pdf**
 *   Format painter
         - **copyFormat**, **applyFormat**
+*   Formatting marks
+        - **formattingMarks**
 
-#### Example
+#### Example - add built-in and custom buttons to the tools collection
 
     <textarea id="editor"></textarea>
     <script>
-    $("#editor").kendoEditor({
-      tools: [
-        "bold", "italic", "underline"
-      ]
-    });
+      $("#editor").kendoEditor({
+        tools: [
+          {
+            name: "bold",
+          },
+          {
+            name: "italic"
+          },
+          {
+            name: "underline"
+          },
+          {
+            name: "custom",
+            template: '<button id="custom">Custom</button>'
+          }
+        ]
+      });
+
+      $("#custom").kendoButton({
+        click: function() {
+          console.log("custom hanler")
+        }
+      })
     </script>
+
+#### Example - add grouped tools collection using multi array
+
+    <textarea id="editor"></textarea>
+    <script>
+      $("#editor").kendoEditor({
+        tools: [
+          [
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough"
+          ],
+          [
+            "justifyLeft",
+            "justifyCenter",
+            "justifyRight",
+            "justifyFull"
+          ],
+          [
+            "insertUnorderedList",
+            "insertOrderedList",
+            "indent",
+            "outdent"
+          ],
+        ]
+      });
+    </script>
+
+> Grouping of tools works as expected only for tools of type "button".
 
 ### tools.name `String`
 
@@ -2282,7 +2832,7 @@ The JavaScript function which will be executed when the end-user clicks the tool
         {
           name: "custom",
           exec: function(e) {
-            var editor = $(this).data("kendoEditor");
+            var editor = this;
             // ...
           }
         }
@@ -2375,9 +2925,9 @@ Only applicable for the formatting tool. Specifies the context in which the opti
     });
     </script>
 
-### tools.palette `String|Array` *(default: null)*
+### tools.palette `String|Array` *(default: "websafe")*
 
-Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools.
+Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools. If you need to use the [color gradient](api/javascript/ui/colorgradient) view in the picker instead of the palette, set this value to null.
 
 #### Example - "websafe" palette
 
@@ -2385,8 +2935,7 @@ Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palet
     <script>
     $("#editor").kendoEditor({
         tools: [{
-            name: "foreColor",
-            palette: "websafe"
+            name: "foreColor"
         }]
     });
     </script>
@@ -2399,6 +2948,18 @@ Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palet
         tools: [{
             name: "backColor",
             palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"]
+        }]
+    });
+    </script>
+
+#### Example - use gradient
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "backColor",
+            palette: null
         }]
     });
     </script>
@@ -2420,7 +2981,7 @@ Specifies the [colors columns](/api/javascript/ui/colorpicker/configuration/colu
     });
     </script>
 
-### tools.template `String`
+### tools.template `String|Function`
 
 The kendo template that will be used for rendering the given tool.
 
@@ -2438,13 +2999,9 @@ The kendo template that will be used for rendering the given tool.
     });
     </script>
 
-The code below shows how to use a template and pass variables to it. This allows template reusage or making tweaks on the fly.
+The code below shows how to use a function template.
 
-#### Example using a Kendo UI template with variables
-
-    <script id="toolTemplate" type="text/x-kendo-template">
-        <button class='k-button'>#= myText #</button>
-    </script>
+#### Example using a function template
 
     <textarea id="editor"></textarea>
     <script>
@@ -2452,12 +3009,60 @@ The code below shows how to use a template and pass variables to it. This allows
       tools: [
         {
           name: "custom",
-          myText: "Button Text",
-          template: $("#toolTemplate").html()
+          template: function() {
+            return "<button class='k-button'>Save draft</button>"
+          }
         }
       ]
     });
     </script>
+
+### tools.ui `Object`
+
+Apart from the built-in tools, the Editor fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+
+All tools must have their `name` specified. All custom tools with no name will have "custom" automatically assigned as their name. As a result only one of them will be placed in the Editor ToolBar.
+
+#### Example - Custom tools via the ToolBar API
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        {
+            name: "text-btn",
+            ui: {
+                type: "button",
+                text: "Button",
+                showText: "always",
+                icon: null
+            }
+        },
+        {
+            name: "toggle-btn",
+            ui: {
+                type: "button",
+                text: "Toggle",
+                togglable: true,
+                icon: "cancel",
+                showText: "always"
+            }
+        },
+        {
+            name: "split-btn",
+            ui: {
+                type: "splitButton",
+                text: "SplitButton",
+                showText: "always",
+                icon: null,
+                menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+            }
+        }
+      ]
+    });
+    </script>
+
+Note that all tools have their `showText` option set to `overflow` and their `icon` set to `gear`. If the default state does not cover your scenario requirements, you will need to override those options.
 
 ### imageBrowser `Object`
 
@@ -3336,13 +3941,12 @@ Configuration for file browser dialog.
 	  ],
       fileBrowser: {
         transport: {
-          read: "filebrowser/read",
-          destroy: "filebrowser/destroy",
-          create: "filebrowser/createDirectory",
-          uploadUrl: "filebrowser/upload",
-          fileUrl: "/content/files/{0}",
-        },
-        path: "/myInitialPath/"
+          read: "https://demos.telerik.com/kendo-ui/service/filebrowser/read",
+          destroy: "https://demos.telerik.com/kendo-ui/service/filebrowser/destroy",
+          create: "https://demos.telerik.com/kendo-ui/service/filebrowser/createDirectory",
+          uploadUrl: "https://demos.telerik.com/kendo-ui/service/filebrowser/upload",
+          fileUrl: "https://demos.telerik.com/kendo-ui/service//content/File?fileName={0}",
+        }
       }
     });
     </script>
@@ -4271,19 +4875,55 @@ Defines text for search box placeholder.
     });
     </script>
 
+### formattingMarksRefreshDelay `Number|Boolean` *(default: 250)*
+
+The delay in milliseconds before the formatting marks are refreshed. This feature is useful for performance optimization as the formatting marks are re-rendered any time the user presses a key. If the user is typing very fast or holding down a key, the delay will prevent the re-rendering from being executed multiple times.
+
+The visual effect from this configuration is that the marks will briefly disappear while the user is typing. You can set the value to `false` to fully turn off this behavior.
+
+#### Example
+
+    <textarea id="editor"><p>Some text with several spaces that demonstrates<br /> the re-rendering of the marks.</p></textarea>
+
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                tools: ["formattingMarks"],
+                formattingMarksRefreshDelay: false
+            });
+        });
+    </script>
+
+### unsafeInline `Boolean` *(default: true)*
+
+When set to false, the decoration applied by the Formatting tool dropdown will be skipped and the values will appear as plain text options.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                unsafeInline: false
+            });
+        });
+    </script>
+
 ## Fields
 
 ### body `Element`
 
-The HTML element which represents the editor content area. In the [classic Editor mode](/controls/editors/editor/overview#classic-mode), this is the `<body>` element inside the `iframe`. In the [inline Editor mode](/controls/editors/editor/overview#inline-mode), this is the [element, from which the Editor is initialized](/intro/widget-basics/wrapper-element).
+The HTML element which represents the editor content area. In the [classic Editor mode](/controls/editor/overview#classic-mode), this is the `<body>` element inside the `iframe`. In the [inline Editor mode](/controls/editor/overview#inline-mode), this is the [element, from which the Editor is initialized](/intro/widget-basics/wrapper-element).
 
-#### Example
+#### Example - set background color and font color to the editor content area
 
     <textarea id="editor"></textarea>
     <script>
       $("#editor").kendoEditor();
       var editor = $("#editor").data("kendoEditor");
       editor.body.style.backgroundColor = "#f00";
+      editor.body.style.color = "#FFFFFF";
     </script>
 
 ### toolbar `Object`
@@ -4292,11 +4932,14 @@ The toolbar instance of the Kendo Editor.
 
 #### Example
 
+    <button  id="open">Open</button>
     <div id="editor"></div>
     <script>
-      $("#editor").kendoEditor();
-      var editor = $("#editor").data("kendoEditor");
-      editor.toolbar.window.open();
+      $("#open").kendoButton();
+      var editor = $("#editor").kendoEditor().data("kendoEditor");
+      $("#open").click(function(){
+        editor.windowInstance.open();
+      })
     </script>
 
 ## Methods
@@ -4352,6 +4995,7 @@ Gets the HTML encoded value of the editor.
     <script>
     $("#editor").kendoEditor({ value: "<p>foo</p>" });
     var editor = $("#editor").data("kendoEditor");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.encodedValue()); // logs "&lt;p&gt;foo&lt;/p&gt;"
     </script>
 
@@ -4410,6 +5054,7 @@ Gets a **Range** object form the editable area.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     var range = editor.getRange();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(range);
     </script>
 
@@ -4428,6 +5073,7 @@ Gets a W3C-compatible **Selection** object form the editable area.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     var selection = editor.getSelection();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(selection);
     </script>
 
@@ -4570,8 +5216,10 @@ This method should be called after modifying the editor content through the DOM.
     textarea.kendoEditor({ value: "Hello, " });
     var editor = textarea.data("kendoEditor");
     editor.body.appendChild(editor.document.createTextNode("World"));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(textarea.val()); // logs "Hello, "
     editor.update();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(textarea.val()); // logs "Hello, World"
     </script>
 
@@ -4599,7 +5247,9 @@ The name of the tool that will be tested if formatted.
     var range = editor.createRange();
     range.selectNodeContents(editor.body.firstChild);
     editor.selectRange(range);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.state("italic")); // logs true
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.state("bold")); // logs false
     </script>
 
@@ -4624,6 +5274,7 @@ The value to set.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     editor.value("<p>New content</p>");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.value()); // logs "<p>New content</p>"
     </script>
 
@@ -4639,6 +5290,7 @@ Fires when Editor is blurred and its content has changed.
     <script>
     $("#editor").kendoEditor({
       change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(this.value());
       }
     });
@@ -4649,6 +5301,7 @@ Fires when Editor is blurred and its content has changed.
     <textarea id="editor"></textarea>
     <script>
     function editor_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(this.value());
     }
     $("#editor").kendoEditor();
@@ -4676,6 +5329,7 @@ The command instance
     <script>
     $("#editor").kendoEditor({
       execute: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("executing command", e.name, e.command);
       }
     });
@@ -4686,6 +5340,7 @@ The command instance
     <textarea id="editor"></textarea>
     <script>
     function editor_execute(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("executing command", e.name, e.command);
     }
     $("#editor").kendoEditor();
@@ -4703,6 +5358,7 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
     <script>
     $("#editor").kendoEditor({
       keydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("keydown : keyCode=",e.keyCode);
       }
     });
@@ -4713,6 +5369,7 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
     <textarea id="editor"></textarea>
     <script>
     function editor_keydown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("keydown : keyCode=", e.keyCode);
     }
     $("#editor").kendoEditor();
@@ -4730,6 +5387,7 @@ Fires when the user releases a keyboard key.
     <script>
     $("#editor").kendoEditor({
       keyup: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("keyup : keyCode=",e.keyCode);
       }
     });
@@ -4740,6 +5398,7 @@ Fires when the user releases a keyboard key.
     <textarea id="editor"></textarea>
     <script>
     function editor_keyup(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("keyup : keyCode=",e.keyCode);
     }
     $("#editor").kendoEditor();
@@ -4781,6 +5440,7 @@ The pasted content
     <script>
     $("#editor").kendoEditor({
       paste: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.html);
       }
     });
@@ -4791,6 +5451,7 @@ The pasted content
     <textarea id="editor"></textarea>
     <script>
     function editor_paste(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.html);
     }
     $("#editor").kendoEditor();
@@ -4834,6 +5495,7 @@ A promise that will be resolved when the export completes.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	    tools: ["pdf"],
       pdfExport: function(e) {
       }
     });
@@ -4845,7 +5507,9 @@ A promise that will be resolved when the export completes.
     <script>
     function onEditorExport(e) {
     }
-    $("#editor").kendoEditor();
+    $("#editor").kendoEditor({
+		   tools: ["pdf"]
+	  });
     var editor = $("#editor").data("kendoEditor");
     editor.bind("pdfExport", onEditorExport);
     </script>

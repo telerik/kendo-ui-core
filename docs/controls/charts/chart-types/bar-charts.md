@@ -1,6 +1,6 @@
 ---
 title: Bar Charts
-page_title: jQuery Chart Documentation | Bar Charts | Kendo UI
+page_title: jQuery Chart Documentation - Bar Charts
 description: "Learn how to set the properties of Kendo UI Bar Charts."
 slug: bartypeofcharts_widget
 ---
@@ -39,7 +39,7 @@ The [Kendo UI Column Chart](https://demos.telerik.com/kendo-ui/bar-charts/column
         }
     });
 
-![A sample Column Chart with categories](../chart-column-categories.png)
+![Kendo UI for jQuery Column Chart with categories example](../chart-column-categories.png)
 
 ## Defining the Bar Chart
 
@@ -59,7 +59,7 @@ Setting the `type` property on the `series` object to `"bar"` renders horizontal
         }
     });
 
-![A sample Bar Chart](chart-bar.png)
+![Kendo UI for jQuery Bar Chart Overview](chart-bar-overview.png)
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Bind the Grid to XML Data
-page_title: Bind to XML Data | Kendo UI Grid for ASP.NET MVC
-description: "An example on how to bind the Kendo UI Grid for jQuery to XML data."
+page_title: Bind to XML Data - Kendo UI Grid for ASP.NET MVC
+description: "Learn how to bind the Kendo UI Grid for jQuery to XML data."
 previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data, /controls/data-management/grid/how-to/binding/bind-grid-to-xml-data
 slug: howto_bindgridtoxmldata_grid
 tags: grid, bind, xml
@@ -15,18 +15,18 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
+  <td>Progress® Telerik UI® Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
   <td>Windows 10 64bit</td>
  </tr>
  <tr>
-  <td>.Net framework</td>
+  <td>.NET Framework</td>
   <td>Version 4.6</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -53,4 +53,4 @@ For the full example, refer to [this project](https://github.com/telerik/ui-for-
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

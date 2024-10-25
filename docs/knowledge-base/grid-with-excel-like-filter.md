@@ -1,6 +1,6 @@
 ---
 title: Implement Excel-Like Filter Menus
-page_title: AutoComplete for Current Filter | Kendo UI Grid for jQuery
+page_title: AutoComplete for Current Filter - Kendo UI for jQuery Data Grid
 description: "Learn how to filter the jQuery Grid by Kendo UI by using AutoComplete and by showing results from the current Grid filter."
 previous_url: /controls/data-management/grid/how-to/filtering/grid-with-excel-like-filter
 slug: howto_gridfiltering_excellike_grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -135,4 +135,4 @@ To observe this behavior:
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

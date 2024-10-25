@@ -2550,7 +2550,7 @@ tableRow
 incell
 touchend
 ObservableArray
-тooltip
+tooltip
 iCal
 ungrouped
 AllDay
@@ -6116,7 +6116,7 @@ Tootlip
 arccosine
 arccotangent
 cosecant
- - ./accessibility/five-tips-for-accessible-charts-with-dataviz.md
+ - ./controls/charts/five-tips-for-accessible-charts-with-dataviz.md
 jsbin.com
 odowud
 000px
@@ -6136,7 +6136,7 @@ v3
 v2.0
  - ./README.md
 md
- - accessibility/five-tips-for-accessible-charts-with-dataviz.md
+ - controls/charts/five-tips-for-accessible-charts-with-dataviz.md
 jsbin.com
 odowud
 000px
@@ -6153,7 +6153,7 @@ v3
  - troubleshoot/troubleshooting-common-issues.md
 300ms
  - AngularJS/Troubleshooting/leak.md
-а
+a
  - api/javascript/data/datasource.md
 _
 v.2
@@ -6312,7 +6312,7 @@ vCard
 Batch.js
  - controls/data-management/listview/how-to/filtering-using-slider.md
 displ
-аys
+ays
  - controls/data-management/spreadsheet/end-user/list-of-formulas.md
 BETA.DIST
 BETA.INV
@@ -6321,7 +6321,7 @@ BINOM.DIST
 base-10
 0-length
  - controls/data-management/spreadsheet/end-user/user-guide.md
-Оr
+Or
 MyRange
  - controls/data-management/spreadsheet/format.md
 12.35M
@@ -6341,7 +6341,7 @@ alpha-2
  - controls/editors/editor/pasting.md
 pasteCleanupmsmsTagsmsAllFormattingmsAllFormattingmsConvertLists
  - controls/editors/editor/troubleshoot/troubleshooting.md
-е
+e
  - controls/hybrid/faq/faq-android.md
 2.x.
 4.x
@@ -6383,7 +6383,7 @@ jquery.js
 v2.0
  - php/widgets/grid/editing.md
 Configur
-аtion
+ation
  - README.md
 md
  - third-party/tutorials/webforms/asp-net-hello-html5.md

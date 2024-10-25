@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | MultiColumnComboBox PHP Class
+page_title: Overview - MultiColumnComboBox PHP Class
 description: "Get started with the MultiColumnComboBox PHP class in Kendo UI."
 slug: overview_multicolumncombobox_uiforphp
 position: 1

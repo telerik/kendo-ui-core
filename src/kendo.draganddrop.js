@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.userevents.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "draganddrop",
     name: "Drag & drop",
     category: "framework",
@@ -10,7 +9,7 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core", "userevents" ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
         document = window.document,
@@ -19,7 +18,7 @@ var __meta__ = { // jshint ignore:line
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
         UserEvents = kendo.UserEvents,
-        proxy = $.proxy,
+        ClickMoveClick = kendo.ClickMoveClick,
         extend = $.extend,
         getOffset = kendo.getOffset,
         draggables = {},
@@ -109,17 +108,17 @@ var __meta__ = { // jshint ignore:line
 
             if (domElement.addEventListener) {
                 $.each(kendo.eventMap.down.split(" "), function() {
-                    domElement.addEventListener(this, proxy(that._press, that), true);
+                    domElement.addEventListener(this, that._press.bind(that), true);
                 });
                 $.each(kendo.eventMap.up.split(" "), function() {
-                    domElement.addEventListener(this, proxy(that._release, that), true);
+                    domElement.addEventListener(this, that._release.bind(that), true);
                 });
             } else {
                 $.each(kendo.eventMap.down.split(" "), function() {
-                    domElement.attachEvent(this, proxy(that._press, that));
+                    domElement.attachEvent(this, that._press.bind(that));
                 });
                 $.each(kendo.eventMap.up.split(" "), function() {
-                    domElement.attachEvent(this, proxy(that._release, that));
+                    domElement.attachEvent(this, that._release.bind(that));
                 });
             }
 
@@ -245,8 +244,8 @@ var __meta__ = { // jshint ignore:line
 
             Observable.fn.init.call(that);
 
-            that.x = new PaneDimension(extend({horizontal: true}, options));
-            that.y = new PaneDimension(extend({horizontal: false}, options));
+            that.x = new PaneDimension(extend({ horizontal: true }, options));
+            that.y = new PaneDimension(extend({ horizontal: false }, options));
             that.container = options.container;
             that.forcedMinScale = options.minScale;
             that.maxScale = options.maxScale || 100;
@@ -315,7 +314,7 @@ var __meta__ = { // jshint ignore:line
                 resistance,
                 movable;
 
-            extend(that, {elastic: true}, options);
+            extend(that, { elastic: true }, options);
 
             resistance = that.elastic ? 0.5 : 0;
             movable = that.movable;
@@ -406,17 +405,17 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
+    var TRANSFORM_STYLE = "transform",
         translate;
 
 
     if (support.hasHW3D) {
         translate = function(x, y, scale) {
-            return "translate3d(" + x + "px," + y +"px,0) scale(" + scale + ")";
+            return "translate3d(" + x + "px," + y + "px,0) scale(" + scale + ")";
         };
     } else {
         translate = function(x, y, scale) {
-            return "translate(" + x + "px," + y +"px) scale(" + scale + ")";
+            return "translate(" + x + "px," + y + "px) scale(" + scale + ")";
         };
     }
 
@@ -461,7 +460,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         moveTo: function(coordinates) {
-            extend(this, coordinates);
+            extend(this, { x: coordinates.x, y: coordinates.y });
             this.refresh();
         },
 
@@ -621,32 +620,44 @@ var __meta__ = { // jshint ignore:line
     });
 
     var Draggable = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
 
             that._activated = false;
 
+            if (this.options.clickMoveClick) {
+                that.clickMoveClick = new ClickMoveClick(that.element, {
+                    global: true,
+                    filter: that.options.filter,
+                    start: that._startClickMoveClick.bind(that),
+                    move: that._drag.bind(that),
+                    end: that._end.bind(that),
+                    cancel: that._onCancel.bind(that)
+                });
+            }
+
             that.userEvents = new UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
                 filter: that.options.filter,
                 threshold: that.options.distance,
-                start: proxy(that._start, that),
-                hold: proxy(that._hold, that),
-                move: proxy(that._drag, that),
-                end: proxy(that._end, that),
-                cancel: proxy(that._cancel, that),
-                select: proxy(that._select, that)
+                start: that._start.bind(that),
+                hold: that._hold.bind(that),
+                move: that._drag.bind(that),
+                end: that._end.bind(that),
+                cancel: that._onCancel.bind(that),
+                select: that._select.bind(that),
+                press: that._press.bind(that),
             });
 
             if (kendo.support.touch) {
                 that.element.find(that.options.filter).css('touch-action', 'none');
             }
 
-            that._afterEndHandler = proxy(that._afterEnd, that);
-            that._captureEscape = proxy(that._captureEscape, that);
+            that._afterEndHandler = that._afterEnd.bind(that);
+            that._captureEscape = that._captureEscape.bind(that);
         },
 
         events: [
@@ -668,8 +679,11 @@ var __meta__ = { // jshint ignore:line
             filter: null,
             ignore: null,
             holdToDrag: false,
+            showHintOnHold: false,
             autoScroll: false,
-            dropped: false
+            dropped: false,
+            clickMoveClick: false,
+            preventOsHoldFeatures: false
         },
 
         cancelHold: function() {
@@ -680,8 +694,13 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (e.keyCode === kendo.keys.ESC) {
-                that._trigger(DRAGCANCEL, { event: e });
                 that.userEvents.cancel();
+
+                if (that.clickMoveClick) {
+                    that.clickMoveClick.cancel();
+                }
+
+                this._trigger(DRAGCANCEL, { event: e });
             }
         },
 
@@ -691,14 +710,21 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 boundaries = that.boundaries,
                 axis = options.axis,
-                cursorOffset = that.options.cursorOffset;
+                cursorOffset = that.options.cursorOffset,
+                updateHint = options.updateHint;
 
             if (cursorOffset) {
                coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
             } else {
-                that.hintOffset.left += e.x.delta;
-                that.hintOffset.top += e.y.delta;
-                coordinates = $.extend({}, that.hintOffset);
+                if (e.x.delta !== 0 || e.y.delta !== 0) {
+                    that.hintOffset.left += e.x.delta;
+                    that.hintOffset.top += e.y.delta;
+                    coordinates = $.extend({}, that.hintOffset);
+                } else {
+                    that.hintOffset.left = e.x.startLocation + e.x.initialDelta;
+                    that.hintOffset.top = e.y.startLocation + e.y.initialDelta;
+                    coordinates = $.extend({}, that.hintOffset);
+                }
             }
 
             if (boundaries) {
@@ -710,6 +736,10 @@ var __meta__ = { // jshint ignore:line
                 delete coordinates.top;
             } else if (axis === "y") {
                 delete coordinates.left;
+            }
+
+            if (updateHint && kendo.isFunction(updateHint)) {
+               return $(updateHint.call(that, that.hint, e));
             }
 
             that.hint.css(coordinates);
@@ -726,19 +756,15 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _start: function(e) {
+        _startClickMoveClick: function(e) {
+            this._activated = true;
+
+            this._start(e);
+        },
+
+        _hint: function() {
             var that = this,
-                options = that.options,
-                container = options.container ? $(options.container): null,
-                hint = options.hint;
-
-            if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
-                that.userEvents.cancel();
-                return;
-            }
-
-            that.currentTarget = e.target;
-            that.currentTargetOffset = getOffset(that.currentTarget);
+                hint = that.options.hint;
 
             if (hint) {
                 if (that.hint) {
@@ -750,27 +776,32 @@ var __meta__ = { // jshint ignore:line
                 var offset = getOffset(that.currentTarget);
                 that.hintOffset = offset;
 
-                that.hint.css( {
+                that.hint.css({
                     position: "absolute",
                     zIndex: 20000, // the Window's z-index is 10000 and can be raised because of z-stacking
                     left: offset.left,
-                    top: offset.top
+                    top: offset.top,
                 })
                 .appendTo(document.body);
+            }
+        },
 
-                that.angular("compile", function(){
-                    that.hint.removeAttr("ng-repeat");
-                    var scopeTarget = $(e.target);
+        _start: function(e) {
+            var that = this,
+                options = that.options,
+                container = options.container ? $(options.container) : null,
+                hint = options.hint;
 
-                    while (!scopeTarget.data("$$kendoScope") && scopeTarget.length) {
-                        scopeTarget = scopeTarget.parent();
-                    }
+            if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
+                that.userEvents.cancel();
+                return;
+            }
 
-                    return {
-                        elements: that.hint.get(),
-                        scopeFrom: scopeTarget.data("$$kendoScope")
-                    };
-                });
+            that.currentTarget = e.target;
+            that.currentTargetOffset = getOffset(that.currentTarget);
+
+            if (hint) {
+                that._hint();
             }
 
             draggables[options.group] = that;
@@ -785,6 +816,11 @@ var __meta__ = { // jshint ignore:line
 
             if (that._trigger(DRAGSTART, e)) {
                 that.userEvents.cancel();
+
+                if (that.clickMoveClick) {
+                    that.clickMoveClick.cancel();
+                }
+
                 that._afterEnd();
             }
 
@@ -798,6 +834,9 @@ var __meta__ = { // jshint ignore:line
                 this.userEvents.cancel();
             } else {
                 this._activated = true;
+                if (this.options.showHintOnHold) {
+                    this._hint();
+                }
             }
         },
 
@@ -826,8 +865,8 @@ var __meta__ = { // jshint ignore:line
                     if (velocity.y === 0 && velocity.x === 0) {
                         clearInterval(this._scrollInterval);
                         this._scrollInterval = null;
-                    } else if(!this._scrollInterval) {
-                        this._scrollInterval = setInterval($.proxy(this, "_autoScroll"), 50);
+                    } else if (!this._scrollInterval) {
+                        this._scrollInterval = setInterval(this._autoScroll.bind(this), 50);
                     }
                 }
             }
@@ -894,10 +933,14 @@ var __meta__ = { // jshint ignore:line
 
             if (yInBounds) {
                 parent.scrollTop += velocity.y;
+            } else if (yIsScrollable && yDelta < 0) {
+                parent.scrollTop = 0;
             }
 
             if (xInBounds) {
                 parent.scrollLeft += velocity.x;
+            } else if (xIsScrollable && xDelta < 0) {
+                parent.scrollLeft = 0;
             }
 
             if (this.hint && isRootNode && (xInBounds || yInBounds)) {
@@ -913,6 +956,16 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _press: function(ev) {
+            if (this.options.preventOsHoldFeatures) {
+                ev.target.css('-webkit-user-select', 'none');
+                ev.target.attr('unselectable', 'on');
+                ev.target.one('contextmenu', (ev) => {
+                    ev.preventDefault();
+                });
+            }
+        },
+
         _end: function(e) {
             this._withDropTarget(this._elementUnderCursor(e), function(target, targetElement) {
                 if (target) {
@@ -921,7 +974,14 @@ var __meta__ = { // jshint ignore:line
                 }
             });
 
+            clearInterval(this._scrollInterval);
+            this._scrollInterval = null;
             this._cancel(this._trigger(DRAGEND, e));
+        },
+
+        _onCancel: function(e) {
+            this._cancel();
+            this._trigger(DRAGCANCEL, { event: e });
         },
 
         _cancel: function(isDefaultPrevented) {
@@ -942,7 +1002,6 @@ var __meta__ = { // jshint ignore:line
                         that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
                     }
                 }, 0);
-
             } else {
                 that._afterEnd();
             }
@@ -961,7 +1020,8 @@ var __meta__ = { // jshint ignore:line
                     currentTarget: that.currentTarget,
                     initialTarget: e.touch ? e.touch.initialTouch : null,
                     dropTarget: e.dropTarget,
-                    elementUnderCursor: e.elementUnderCursor
+                    elementUnderCursor: e.elementUnderCursor,
+                    clickMoveClick: e.clickMoveClick
                 }
             ));
         },
@@ -1008,6 +1068,10 @@ var __meta__ = { // jshint ignore:line
             that._afterEnd();
 
             that.userEvents.destroy();
+
+            if (that.clickMoveClick) {
+                that.clickMoveClick.destroy();
+            }
 
             this._scrollableParent = null;
             this._cursorElement = null;
@@ -1062,7 +1126,7 @@ var __meta__ = { // jshint ignore:line
         } else {
             offset = element.offset();
             offset.bottom = offset.top + element.height();
-            offset.right =  offset.left + element.width();
+            offset.right = offset.left + element.width();
             return offset;
         }
     }
@@ -1119,7 +1183,5 @@ var __meta__ = { // jshint ignore:line
     };
 
  })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

@@ -1,5 +1,5 @@
 (function() {
-    var KICONCLOSE = ".k-dialog-close";
+    var KICONCLOSE = "[data-role='close']";
 
     function createDialog(options, element) {
         element = element || $("<div class='dialog'>dialog content</div>").appendTo(Mocha.fixture);
@@ -25,8 +25,8 @@
         });
 
         it("dialog actions have kendoNS", function() {
-            var dialog = createDialog({ actions: [{}, {}] })
-            var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
+            var dialog = createDialog({ actions: [{}, {}] });
+            var actionBtns = dialog.wrapper.find(".k-dialog-actions > .k-button");
             actionBtns.each(function() {
                 assert.isOk($(this).data("kendoNS"));
             });
@@ -57,7 +57,7 @@
         it("action click calls close event", function() {
             var dialog = createDialog({
                 actions: [
-                    { text: "just close" }
+                    { text: () => "just close" }
                 ],
                 close: function(ev) {
                     assert.isOk(ev.userTriggered);
@@ -203,7 +203,7 @@
         function keyboardCloseButton_closesDialog(keyCode) {
             var dialog = createDialog({
                 closable: true,
-                close: function (ev) {
+                close: function(ev) {
                     assert.isOk(ev.userTriggered);
                 }
             });
@@ -220,13 +220,13 @@
         function actionButtonKeyTrigger(keyCode) {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok", action: function() {
+                    text: () => "ok", action: function() {
                         assert.isOk(true);
                     }
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keyCode);
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keyCode);
         }
 
         it("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.ENTER));
@@ -235,43 +235,43 @@
         it("esc key on action button just closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(false);
                     }
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.ESC);
             assert.isOk(!dialog.options.visible);
         });
 
         it("enter key on action button runs action only once", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(true);
                     }
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ENTER);
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.ENTER);
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
         });
 
         it("SPACEBAR key on action button runs action only once", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "ok",
+                    text: () => "ok",
                     action: function() {
                         assert.isOk(true);
                     }
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.SPACEBAR);
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.SPACEBAR);
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
         });
     });
 }());

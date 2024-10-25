@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | DateInput PHP Class
+page_title: Overview - DateInput PHP Class
 description: "Get started with the DateInput PHP class in Kendo UI."
 slug: overview_dateinput_uiforphp
 position: 1

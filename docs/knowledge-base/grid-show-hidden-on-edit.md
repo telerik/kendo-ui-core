@@ -1,8 +1,8 @@
 ---
 title: Show Hidden Columns When Editing the Grid
-description: An example on how to show the hidden columns when editing a Kendo UI Grid.
+description: Learn how to show the hidden columns when editing a Kendo UI Grid.
 type: how-to
-page_title: Show Hidden Columns When Editing the Grid | Kendo UI Grid for jQuery
+page_title: Show Hidden Columns When Editing the Grid - Kendo UI for jQuery Data Grid
 slug: grid-show-hidden-on-edit
 tags: grid, edit, show, hidden, on, editor
 res_type: kb
@@ -14,11 +14,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with version 2017.3.1026</td>
+  <td>Product Version</td>
+  <td>Created with version 2020.3.1021</td>
  </tr>
 </table>
 
@@ -99,17 +99,11 @@ Toggle the visibility of the column by using the built-in methods of the Grid.
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
               { field: "UnitsInStock", title:"Units In Stock", width: "120px", hidden:true },
-              { field: "Discontinued", width: "120px", editor: customBoolEditor },
+              { field: "Discontinued", width: "120px" },
               { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "inline"
           });
         });
-
-        function customBoolEditor(container, options) {
-          var guid = kendo.guid();
-          $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ```

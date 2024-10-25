@@ -1,6 +1,6 @@
 ---
 title: Disable Months in the Kendo UI Calendar Year View
-page_title: Disable Months in Calendar Year View | Kendo UI Calendar for jQuery
+page_title: Disable Months in Calendar Year View - Kendo UI Calendar for jQuery
 description: An example how to disable months in the year view of the Kendo UI Calendar.
 type: how-to
 slug: calender-disable-months
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Calendar for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Calendar for jQuery</td>
 	</tr>
 </table>
 
@@ -32,7 +32,7 @@ How can I disable the months in the calendar for the year? My min and max dates 
 The Kendo UI Calendar does not have a year template. As a result, to disable the dates:
 
 1. Select the cells from the generated table.
-1. Add the `k-state-disabled` class to them to prevent the selection.
+1. Add the `k-disabled` class to them to prevent the selection.
 
 You can stop the click from propagating and triggering a change with the [`e.stopImmediatePropagation()`](https://api.jquery.com/event.stopimmediatepropagation/) method.
 
@@ -43,7 +43,7 @@ The Calendar exposes a [`navigate`](https://docs.telerik.com/kendo-ui/api/javasc
 <script>
    function disableDates(calendar){
      calendar.element.find("tr:last-child td")
-       .addClass("k-state-disabled")
+       .addClass("k-disabled")
        .click(function(e){
        e.stopImmediatePropagation();
      });

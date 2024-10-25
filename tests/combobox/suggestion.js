@@ -1,7 +1,7 @@
 (function() {
 
 var ComboBox = kendo.ui.ComboBox,
-    data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+    data = [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }, { text: "Baz", value: 3 }],
     combobox,
     input;
 
@@ -38,14 +38,14 @@ function caret(element, position) {
     return position;
 }
 
-describe("kendo.ui.ComboBox suggestion", function () {
+describe("kendo.ui.ComboBox suggestion", function() {
     beforeEach(function() {
 
         input = $("<input />").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
-        }
+        };
 
         $.fn.selectedText = function() {
             var that = this[0];
@@ -61,7 +61,7 @@ describe("kendo.ui.ComboBox suggestion", function () {
             return this.val(value).each(function() {
                 caret(this, this.value.length);
             });
-        }
+        };
     });
     afterEach(function() {
 
@@ -149,13 +149,13 @@ it("suggest(text) does not suggest on delete", function() {
 });
 
 it("suggest(text) should use dataItem.text instead of li.text()", function() {
-    var data = [{text: "Item1", value: "1"}, {text: "Item2", value: "2"}];
+    var data = [{ text: "Item1", value: "1" }, { text: "Item2", value: "2" }];
 
     combobox = input.val("i").kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
         dataSource: data,
-        template: "<span>List:</span>#=data.text#"
+        template: ({ text }) => `<span>List:</span>${text}`
     }).data("kendoComboBox");
 
     combobox.suggest(combobox.ul.children(":first"));
@@ -166,7 +166,7 @@ it("suggest() should suggest correctly", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
+        dataSource: [{ text: "Cotton" }, { text: "Cotton/Polyester" }],
         suggest: true
     }).data("kendoComboBox");
 
@@ -181,11 +181,11 @@ it("suggest() suggest correctly after typing multiple times", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: [{text:"cotton"}, {text: "Cotton"}, {text: "Cotton/Polyester"}],
+        dataSource: [{ text: "cotton" }, { text: "Cotton" }, { text: "Cotton/Polyester" }],
         suggest: true
     }).data("kendoComboBox");
 
-    for (var i = 0;i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
         combobox.input.type("co");
         combobox.suggest("cotton");
     }
@@ -197,7 +197,7 @@ it("suggest method appends text only", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
+        dataSource: [{ text: "Cotton" }, { text: "Cotton/Polyester" }],
         highlightFirst: false,
         suggest: true
     }).data("kendoComboBox");
@@ -214,7 +214,7 @@ it("suggest method modifes text and appends suggestion", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
+        dataSource: [{ text: "Cotton" }, { text: "Cotton/Polyester" }],
         highlightFirst: true,
         suggest: true
     }).data("kendoComboBox");
@@ -237,7 +237,7 @@ it("suggest(text) should only append the rest of the text (filter:contains)", fu
     }).data("kendoComboBox");
 
     var origin = window.setTimeout;
-    window.setTimeout = function(func) { func() };
+    window.setTimeout = function(func) { func(); };
 
     combobox.input.focus().val("o").keydown();
 
@@ -258,7 +258,7 @@ it("refresh method suggests if no item is highlighted", function() {
     }).data("kendoComboBox");
 
     var origin = window.setTimeout;
-    window.setTimeout = function(func) { func() };
+    window.setTimeout = function(func) { func(); };
 
     combobox.input.focus();
     combobox.input.val("f");
@@ -292,7 +292,7 @@ it("suggest int values on search", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: [{text: 1, value: "1"}],
+        dataSource: [{ text: 1, value: "1" }],
         suggest: true
     });
 

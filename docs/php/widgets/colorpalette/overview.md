@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ColorPalette PHP Class
+page_title: Overview - ColorPalette PHP Class
 description: "Get started with the ColorPalette PHP class in Kendo UI."
 slug: overview_colorpalette_uiforphp
 position: 1

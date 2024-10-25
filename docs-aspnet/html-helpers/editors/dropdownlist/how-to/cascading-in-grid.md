@@ -12,6 +12,6 @@ To see the example, refer to the project on how to [configure the Telerik UI Gri
 
 ## See Also
 
-* [DropDownListBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [DropDownListBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/dropdownlistbuilder)
 * [DropDownList Server-Side API](/api/dropdownlist)
-* [GridBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/autocompletebuilder)

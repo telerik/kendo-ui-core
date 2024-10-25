@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | Scheduler PHP Class
+page_title: Local Binding - Scheduler PHP Class
 description: "Bind Kendo UI Scheduler PHP class to an array of data."
 slug: localbinding_scheduler_uiforphp
 position: 2

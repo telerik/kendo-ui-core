@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Sparkline PHP Class
+page_title: Overview - Sparkline PHP Class
 description: "Get started with the Sparkline PHP class in Kendo UI."
 slug: overview_sparkline_uiforphp
 position: 1

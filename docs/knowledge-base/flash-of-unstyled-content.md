@@ -1,8 +1,8 @@
 ---
 title: Flash of Unstyled Content with Kendo UI Widgets
-description: An example on how to work around the cases when FUOC is observed when DOM manipulations are used to style a page in Kendo UI.
+description: Learn how to work around the cases when FUOC is observed when DOM manipulations are used to style a page in Kendo UI.
 type: troubleshooting
-page_title: Flash of Unstyled Content | Kendo UI for jQuery
+page_title: Flash of Unstyled Content
 slug: flash-of-unstyled-content
 tags: flash,unstyled,content,fuoc
 ticketid: 1383118, 1364951, 1365360
@@ -14,7 +14,9 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery, UI for ASP.NET MVC, UI for ASP.NET Core</td>
+  <td>Progress® Kendo UI® for jQuery</td>
+  <td>Progress® Telerik® UI for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
   <tr>
   <td>Version</td>
@@ -29,7 +31,7 @@ Flash of unstyled content (FUOC) is the effect where the user can see parts of t
 
 **Figure 1: A simulation of Flash of Unstyled Content (FUOC)**
 
-![FUOC effect](images/fuoc-effect.gif)
+![Kendo UI for jQuery FUOC effect](images/fuoc-effect.gif)
 
 A [code snippet that simulates the FUOC effect](#fuoc-simulation) is available at the end of the article.
 
@@ -41,7 +43,7 @@ The following list provides the most common reasons for FUOC to occur:
 
 With Kendo UI, you are more likely to experience such issues with widgets such as a DropDownList or ComboBox which hide the user input altogether. This behavior also applies to the ASP.NET MVC and ASP.NET Core suites because they also [create jQuery widgets](https://docs.telerik.com/aspnet-mvc/getting-started/kendo-ui-vs-mvc-wrappers) behind the scenes.
 
-Kendo UI widgets are [instantiated only after the document has been loaded and parsed](https://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview#initialization). At that point, the necessary classes are added and the browser can style them according to the stylesheets that are present&mdash;in this case, the Kendo UI stylesheets are most relevant as they are the targeted appearance.
+Kendo UI widgets are [instantiated only after the document has been loaded and parsed](https://docs.telerik.com/kendo-ui/controls/panelbar/overview#initialization). At that point, the necessary classes are added and the browser can style them according to the stylesheets that are present&mdash;in this case, the Kendo UI stylesheets are most relevant as they are the targeted appearance.
 
 The following examples are of symptoms which pertain to Kendo UI widgets:
 * I have a ComboBox that shows as a normal text box and displays the model data until the DataSource is loaded.
@@ -60,7 +62,7 @@ For inputs, make the text transparent and unselectable, for example, so that use
 
 **Figure 2: A workaround for the FUOC issue**
 
-![FUOC workaround](images/fuoc-workaround.gif)
+![Kendo UI for jQuery FUOC workaround](images/fuoc-workaround.gif)
 
 For example, use the following settings:
 

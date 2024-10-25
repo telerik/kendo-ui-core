@@ -3,10 +3,10 @@ title: Licensing
 page_title: Licensing
 description: "Learn more about how to start your trial period and use your developer license for {{ site.product }}."
 slug: licensing_aspnetcore
-position: 20
+position: 21
 ---
 
-# Licensing
+# {{ site.product }} Licensing
 
 Progress<sup>®</sup> {{ site.product }} is available under a developer (commercial) or a trial license.
 

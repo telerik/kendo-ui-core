@@ -4,7 +4,7 @@
     var container;
     var listbox;
 
-    describe("Selectable API", function () {
+    describe("Selectable API", function() {
         beforeEach(function() {
             container = $("<select />").appendTo(Mocha.fixture);
         });
@@ -103,7 +103,7 @@
         assert.equal(listbox.select().length, 0);
     });
 
-    it("select triggers change event", function() {
+    it("select does not trigger change event", function() {
         var changeStub = stub({}, "change");
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3],
@@ -112,7 +112,7 @@
 
         listbox.select(listbox.items()[0]);
 
-        assert.equal(changeStub.calls("change"), 1);
+        assert.equal(changeStub.calls("change"), 0);
     });
 
     it("clearSelection removes selection", function() {
@@ -127,7 +127,7 @@
     });
 });
 
-    describe("Selectable API", function () {
+    describe("Selectable API", function() {
         beforeEach(function() {
             container = $("<select />").appendTo(Mocha.fixture);
             listbox = new ListBox(container, {
@@ -140,7 +140,7 @@
         });
 
     it("should not select disabled items", function() {
-        listbox.items().addClass("k-state-disabled");
+        listbox.items().addClass("k-disabled");
 
         listbox.select(listbox.items());
 

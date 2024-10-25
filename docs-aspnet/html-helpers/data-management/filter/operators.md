@@ -1,7 +1,7 @@
 ---
 title: Setting the Operators
 page_title: Setting the Operators
-description: "Get started with the Telerik UI Filter HtmlHelper for {{ site.framework }} and learn how to select its available filter operators."
+description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn how to select its available filter operators."
 previous_url: /helpers/data-management/filter/operators
 slug: htmlhelpers_filter_aspnetcore_choose_operators
 position: 2
@@ -13,7 +13,7 @@ The Filter provides options for defining which filter operators will be displaye
 
 The following example demonstrates how to set the `equals` and `contains` filter operators to the string fields and the `greater than` and `less than` filter operators to the numerical fields.
 
-```View
+```HtmlHelper
 <script type="text/x-kendo-template" id="itemTemplate">
     <li>
         <strong>#= Name #</strong>, aged #= Age #, is on vacation: #= IsOnLeave #
@@ -73,11 +73,12 @@ The following example demonstrates how to set the `equals` and `contains` filter
     });
 </script>
 ```
+{% if site.core %}
 ```Controller
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 
-public class FilterController : BaseController
+public class FilterController : Controller
 {
     public IActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
     {
@@ -96,6 +97,31 @@ public class FilterController : BaseController
     }
 }
 ```
+{% else %}
+```Controller
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+
+public class FilterController : Controller
+{
+    public ActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
+    {
+        var people = new List<SampleData>() {
+             new SampleData()  { Name = "Jane Doe", Age = 25, IsOnLeave = false },
+             new SampleData() { Name = "John Doe", Age = 33, IsOnLeave = true },
+             new SampleData() { Name = "John Smith", Age = 37, IsOnLeave = true },
+             new SampleData() { Name = "Nathan Doe", Age = 42, IsOnLeave = false }
+        };
+        return Json(people.ToDataSourceResult(request));
+    }
+
+    public ActionResult Index()
+    {
+        return View();
+    }
+}
+```
+{% endif %}
 ```Model
 public class SampleData
 {

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | MultiSelect JSP Tag
+page_title: Overview - MultiSelect JSP Tag
 description: "Get started with the MultiSelect JSP tag in Kendo UI."
 slug: overview_multiselect_uiforjsp
 position: 1

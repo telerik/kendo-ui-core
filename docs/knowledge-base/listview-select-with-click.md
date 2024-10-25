@@ -1,8 +1,8 @@
 ---
 title: Select Items Only with Mouse
-description: An example on how to select multiple items in the Kendo UI ListView only with the mouse.
+description: Learn how to select multiple items in the Kendo UI ListView only with the mouse.
 type: how-to
-page_title: Select Multiple Items Only with Click | Kendo UI ListView for jQuery
+page_title: Select Multiple Items Only with Click - Kendo UI ListView for jQuery
 slug: listview-select-with-click
 tags: listview, select, item, items, click, mouse, only, deselect, single
 res_type: kb
@@ -14,10 +14,10 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView</td>
+  <td>Progress® Kendo UI® ListView for jQuery</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created version 2018.1.117</td>
  </tr>
 </table>
@@ -37,7 +37,7 @@ How can I allow the users to select or deselect ListView items only with the mou
 ```dojo
 <div class="demo-section k-content wide">
     <div id="listView"></div>
-    <div id="pager" class="k-pager-wrap"> </div>
+    <div id="pager" class="k-pager"> </div>
 </div>
 
 <script type="text/x-kendo-tmpl" id="template">
@@ -99,7 +99,7 @@ How can I allow the users to select or deselect ListView items only with the mou
 
                 var selectedItems = listView.select();
 
-                if (clickedItem.hasClass("k-state-selected")) {
+                if (clickedItem.hasClass("k-selected")) {
                     // if item is already selected - remove it from collection
                     selectedItems.splice($.inArray(clickedItem[0], selectedItems), 1);
                 } else {
@@ -144,7 +144,7 @@ How can I allow the users to select or deselect ListView items only with the mou
         text-transform: uppercase;
     }
 
-    .k-pager-wrap {
+    .k-pager {
         border-top: 0;
     }
 

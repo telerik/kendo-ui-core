@@ -63,8 +63,9 @@
 
             panelbarObject.dataSource.add({ text: "bar" });
 
-            assert.equal(panelbar.find(".k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
         });
+
 
         it("Adding items to the datasource adds them to the proper level", function() {
             createPanelBar([
@@ -76,8 +77,8 @@
 
             foo.append({ id: 3, text: "baz" });
 
-            assert.equal(panelbar.find(".k-item").length, 3);
-            assert.equal(panelbar.find(".k-item:first .k-item").length, 1);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 3);
+            assert.equal(panelbar.find(".k-panelbar-item:first .k-panelbar-item").length, 1);
         });
 
         it("Removing items from the datasource removes them from the panelbar", function() {
@@ -85,11 +86,11 @@
                 { text: "foo" }
             ]);
 
-            var dataItem = panelbarObject.dataItem(panelbar.find(".k-item"));
+            var dataItem = panelbarObject.dataItem(panelbar.find(".k-panelbar-item"));
 
             panelbarObject.dataSource.remove(dataItem);
 
-            assert.equal(panelbar.find(".k-item").length, 0);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 0);
         });
 
         it("Removing subgroup items from the datasource removes them from the panelbar", function() {
@@ -104,11 +105,11 @@
                 ]
             });
 
-            var dataItem = panelbarObject.dataItem(panelbar.find(".k-group").find(".k-item:last"));
+            var dataItem = panelbarObject.dataItem(panelbar.find(".k-panelbar-group").find(".k-panelbar-item:last"));
 
             panelbarObject.dataSource.remove(dataItem);
 
-            assert.equal(panelbar.find(".k-item").length, 1);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 1);
         });
 
         it("DataSource as an object", function() {
@@ -120,7 +121,7 @@
                 }
             });
 
-            var item = panelbar.find(".k-item");
+            var item = panelbar.find(".k-panelbar-item");
 
             assert.equal(item.length, 1);
 
@@ -138,7 +139,7 @@
                 dataSource: dataSource
             });
 
-            var item = panelbar.find(".k-item");
+            var item = panelbar.find(".k-panelbar-item");
 
             assert.equal(item.length, 1);
             assert.equal(panelbarObject.element.children("li").first().text(), "foo");
@@ -156,11 +157,11 @@
                 ]
             });
 
-            var dataItem = panelbarObject.dataItem(panelbar.find(".k-item:last"));
+            var dataItem = panelbarObject.dataItem(panelbar.find(".k-panelbar-item:last"));
 
             panelbarObject.dataSource.remove(dataItem);
 
-            assert.equal(panelbar.find(".k-item").length, 1);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 1);
 
         });
 
@@ -175,7 +176,7 @@
                 }
             });
 
-            var item = panelbar.find(".k-item");
+            var item = panelbar.find(".k-panelbar-item");
 
             assert.equal(item.length, 1);
             assert.equal(panelbarObject.element.children("li").first().text(), "foo");
@@ -229,9 +230,9 @@
                 animation: false
             });
 
-            panelbarObject.expand(panelbar.find(".k-item"));
+            panelbarObject.expand(panelbar.find(".k-panelbar-item"));
 
-            assert.equal(panelbar.find(".k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
             assert.equal(panelbar.find(".k-panelbar-collapse").length, 1);
         });
 
@@ -243,7 +244,7 @@
 
             panelbarObject.dataSource.sort({ field: "text", dir: "asc" });
 
-            var items = panelbar.find(".k-item");
+            var items = panelbar.find(".k-panelbar-item");
 
             assert.equal(items.length, 2);
             assert.equal(items.eq(0).text(), "alpha");
@@ -264,12 +265,12 @@
 
             panelbarObject.dataSource.sort({ field: "text", dir: "asc" });
 
-            var items = panelbar.find(".k-item");
+            var items = panelbar.find(".k-panelbar-item");
 
             assert.equal(items.length, 3);
             assert.equal(items.eq(0).children(".k-link").text(), "alpha");
 
-            var subitems = items.eq(0).find(".k-item");
+            var subitems = items.eq(0).find(".k-panelbar-item");
             assert.equal(subitems.length, 2);
             assert.equal(subitems.eq(0).text(), "charlie");
             assert.equal(subitems.eq(1).text(), "bravo");
@@ -285,16 +286,16 @@
                 }
             ]);
 
-            panelbarObject.expand(".k-item:first");
+            panelbarObject.expand(".k-panelbar-item:first");
 
             panelbarObject.dataSource.sort({ field: "text", dir: "asc" });
 
-            var items = panelbar.find(".k-item");
+            var items = panelbar.find(".k-panelbar-item");
 
             assert.equal(items.length, 3);
             assert.equal(items.eq(0).children(".k-link").text(), "alpha");
 
-            var subitems = items.eq(0).find(".k-item");
+            var subitems = items.eq(0).find(".k-panelbar-item");
             assert.equal(subitems.length, 2);
             assert.equal(subitems.parent().css("display"), "block");
             assert.equal(subitems.eq(0).text(), "charlie");
@@ -311,7 +312,7 @@
 
             panelbarObject.dataSource.read();
 
-            assert.equal(panelbar.find(".k-item").length, 1);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 1);
         });
 
         it("setting autoBind to false does not fetch the dataSource", function() {
@@ -346,9 +347,9 @@
                 ]
             });
 
-            panelbarObject.dataItem(".k-item:first").children.sort({ field: "text", dir: "asc" });
+            panelbarObject.dataItem(".k-panelbar-item:first").children.sort({ field: "text", dir: "asc" });
 
-            assert.equal(panelbar.find(".k-item:first .k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item:first .k-panelbar-item").length, 2);
         });
 
         it("updating dataItem text updates the panelbar", function() {
@@ -411,7 +412,7 @@
                 })
             });
 
-            assert.equal(panelbar.find(".k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
         });
 
         it("setDataSource sets new datasource", function() {
@@ -425,7 +426,7 @@
                 ]
             }));
 
-            assert.equal(panelbar.find(".k-item").text(), "bar");
+            assert.equal(panelbar.find(".k-panelbar-item").text(), "bar");
         });
 
         it("setDataSource does not fetch data when autoBind is false", function() {
@@ -457,7 +458,7 @@
                 }
             });
 
-            assert.equal(panelbar.find(".k-item").text(), "foo");
+            assert.equal(panelbar.find(".k-panelbar-item").text(), "foo");
         });
 
         it("binding to hierarchy of derived nodes", function() {
@@ -479,7 +480,7 @@
                 loadOnDemand: false
             });
 
-            assert.equal(panelbar.find(".k-item:last").text(), "bar");
+            assert.equal(panelbar.find(".k-panelbar-item:last").text(), "bar");
         });
 
         it("appending through node api does not expand item and group", function() {
@@ -500,7 +501,7 @@
 
             foo.append(new ExtendedNode({ text: "bar" }));
 
-            assert.isOk(!panelbar.find(".k-item .k-group").is(":visible"));
+            assert.isOk(!panelbar.find(".k-panelbar-item .k-panelbar-group").is(":visible"));
         });
 
         it("populating hierarchical datasource before initialization", function() {
@@ -518,7 +519,7 @@
                 loadOnDemand: false
             });
 
-            assert.equal(panelbar.find(".k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
         });
 
         it("items without children do not initialize empty datasource", function() {
@@ -561,7 +562,7 @@
                 dataSource: viewModel.panelbarData
             });
 
-            assert.equal(panelbar.find(".k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
         });
 
         it("re-fetching a node removes subgroup", function() {
@@ -587,15 +588,15 @@
                 }
             });
 
-            panelbarObject.expand(".k-item");
+            panelbarObject.expand(".k-panelbar-item");
 
-            panelbarObject.collapse(".k-item:first");
+            panelbarObject.collapse(".k-panelbar-item:first");
 
-            panelbar.find(".k-item .k-group").attr("marked", "marked");
+            panelbar.find(".k-panelbar-item .k-panelbar-group").attr("marked", "marked");
 
-            panelbarObject.expand(".k-item:first");
+            panelbarObject.expand(".k-panelbar-item:first");
 
-            assert.isOk(!panelbar.find(".k-item:first .k-group").attr("marked"));
+            assert.isOk(!panelbar.find(".k-panelbar-item:first .k-panelbar-group").attr("marked"));
         });
 
         it("collapse method does not fetch data from server", function() {
@@ -617,8 +618,8 @@
                 }
             });
 
-            panelbarObject.expand(".k-item");
-            panelbarObject.collapse(".k-item");
+            panelbarObject.expand(".k-panelbar-item");
+            panelbarObject.collapse(".k-panelbar-item");
 
             assert.equal(calls, 2);
         });
@@ -639,7 +640,7 @@
                 }
             });
 
-            panelbarObject.expand(".k-item");
+            panelbarObject.expand(".k-panelbar-item");
 
             assert.equal(panelbar.find(".k-icon").length, 0);
         });
@@ -649,7 +650,7 @@
                 { text: "foo", hasChildren: false }
             ]);
 
-            var foo = $(".k-item");
+            var foo = $(".k-panelbar-item");
 
             panelbarObject.append({ text: "bar" }, foo);
 
@@ -670,11 +671,11 @@
                 })
             });
 
-            var foo = $(".k-item:first");
+            var foo = $(".k-panelbar-item:first");
 
             panelbarObject.append({ text: "baz" }, foo);
 
-            var items = foo.find(".k-item");
+            var items = foo.find(".k-panelbar-item");
 
             assert.equal(items.length, 2);
             assert.equal(foo.find("li").first().text(), "bar");
@@ -693,14 +694,14 @@
 
             panelbarObject.dataSource.pushUpdate({ id: 2, text: "baz" });
 
-            assert.equal(panelbar.find(".k-item").length, 2);
-            assert.equal(panelbar.find(".k-item:last").text(), "baz");
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item:last").text(), "baz");
         });
 
         it("pushUpdate updates custom field in template", function() {
             createPanelBar({
                 dataTextField: "foo",
-                template: "#: item.bar #",
+                template: ({ item }) => kendo.htmlEncode(item.bar),
                 dataSource: {
                     data: [
                         { id: 1, bar: "foo" },
@@ -727,7 +728,7 @@
 
             panelbarObject.dataSource.pushUpdate({ id: 2, text: "baz" });
 
-            assert.equal(panelbar.find(".k-item").length, 2);
+            assert.equal(panelbar.find(".k-panelbar-item").length, 2);
             assert.equal(panelbarObject.element.children("li").last().text(), "baz");
         });
 
@@ -746,6 +747,22 @@
             read.resolve([{ id: 1, expanded: true, hasChildren: true }]);
             jasmine.clock().tick();
             jasmine.clock().uninstall();
+        });
+
+        it("Adds k-level-n class based on item's level in hierarchy", function() {
+            createPanelBar({
+                loadOnDemand: false,
+                dataSource: [
+                    {
+                        id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ]
+                    }
+                ]
+            });
+
+            assert.isOk(panelbarObject.element.find(".k-panelbar-item").eq(0).is(".k-level-0"));
+            assert.isOk(panelbarObject.element.find(".k-panelbar-item").eq(1).is(".k-level-1"));
         });
 
     });

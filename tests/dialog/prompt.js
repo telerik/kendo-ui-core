@@ -20,18 +20,19 @@
             var wrapper = promptDialog.wrapper;
             var wrapperChildren = wrapper.children();
 
-            assert.isOk(wrapper.is(".k-prompt.k-widget.k-dialog.k-window"));
+            assert.isOk(wrapper.is(".k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar"));
-            assert.isOk(wrapperChildren.eq(1).is(".k-content"));
+            assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.isOk(wrapperChildren.eq(2).children(":first").is(".k-textbox"));
-            assert.isOk(wrapperChildren.eq(3).is(".k-dialog-buttongroup"));
+            assert.isOk(wrapperChildren.eq(2).children(":first").children(":first").is(".k-input-inner"));
+            assert.isOk(wrapperChildren.eq(3).is(".k-dialog-actions"));
             assert.isOk(wrapperChildren.eq(3).children().eq(0).is(".k-button"));
             assert.isOk(wrapperChildren.eq(3).children().eq(1).is(".k-button"));
         });
 
         it("focuses the textbox on first show", function() {
             mockFunc(kendo.ui.Prompt.fn, "_focus", function(node) {
-                assert.isOk($(node).hasClass("k-textbox"));
+                assert.isOk($(node).hasClass("k-input-inner"));
             });
             createPrompt({ visible: true });
         });
@@ -39,7 +40,7 @@
         it("open focuses the OK button", function() {
             var dialog = createPrompt({ visible: false });
             mockFunc(dialog, "_focus", function(node) {
-                assert.isOk($(node).hasClass("k-textbox"));
+                assert.isOk($(node).hasClass("k-input-inner"));
             });
             dialog.open();
         });
@@ -59,7 +60,7 @@
 
         it("proptValue sets the prompt input value", function() {
             var promptDialog = createPrompt({ value: "test" });
-            assert.equal(promptDialog.wrapper.find(".k-textbox").val(), "test");
+            assert.equal(promptDialog.wrapper.find(".k-input-inner").val(), "test");
         });
 
         it("first action is primary", function() {
@@ -104,7 +105,7 @@
 
     describe("kendo.prompt method", function() {
         afterEach(function() {
-            Mocha.fixture.closest("body").find(".k-prompt .k-content").each(function(idx, element) {
+            Mocha.fixture.closest("body").find(".k-window-content").each(function(idx, element) {
                 $(element).data("kendoPrompt").destroy();
             });
             Mocha.fixture.closest("body").find(".k-overlay").remove();
@@ -112,27 +113,27 @@
 
         it("opens Prompt dialog", function() {
             kendo.prompt();
-            assert.equal($(".k-prompt").length, 1);
+            assert.equal($(".k-dialog").length, 1);
         });
 
         it("text argument sets Prompt dialog content", function() {
             kendo.prompt("message");
-            assert.equal($(".k-prompt .k-content").html(), "message");
+            assert.equal($(".k-window-content").html(), "message");
         });
 
         it("value sets default prompt value", function() {
             kendo.prompt("message", "test value");
-            assert.equal($(".k-textbox").val(), "test value");
+            assert.equal($(".k-input-inner").val(), "test value");
         });
 
         it("ok calls chained done handler with prompt value argument", function() {
             kendo.prompt("message", "test value").done(function(arg) { assert.equal(arg, "test value"); });
-            $(".k-prompt .k-content").data("kendoPrompt").wrapper.find(".k-button:first").click();
+            $(".k-window-content").data("kendoPrompt").wrapper.find(".k-button:first").click();
         });
 
         it("cancel calls chained fail handler with prompt value argument", function() {
             kendo.prompt("message", "test value").fail(function(arg) { assert.equal(arg, "test value"); });
-            $(".k-prompt .k-content").data("kendoPrompt").wrapper.find(".k-button:eq(1)").click();
+            $(".k-window-content").data("kendoPrompt").wrapper.find(".k-button:eq(1)").click();
         });
     });
 }());

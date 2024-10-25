@@ -1,6 +1,6 @@
 ---
 title: Area Charts
-page_title: jQuery Chart Documentation | Area Charts | Kendo UI
+page_title: jQuery Chart Documentation - Area Charts
 description: "Learn how to define Kendo UI Area Charts."
 slug: areacharts_widget
 ---
@@ -54,7 +54,7 @@ To configure the axes, use the `categoryAxis` and `valueAxis`. Multiple value ax
 
 The configuration from the previous example results in the following Area Chart.
 
-![A sample Area Chart](chart-area.png)
+![Kendo UI for jQuery Area Chart Overview](chart-area-overview.png)
 
 ## Configuring the Line Styles
 
@@ -66,11 +66,11 @@ The Area Chart supports the following styles:
 * Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Area Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
 
-![A step-line Area Chart](chart-step-area.png)
+![Kendo UI for jQuery Step-line Area Chart example](chart-step-area.png)
 
 The following image displays a smooth-line Area Chart.
 
-![A smooth-line Area Chart](chart-smooth-area.png)
+![Kendo UI for jQuery Smooth-line Area Chart example](chart-smooth-area.png)
 
 ## See Also
 

@@ -21,7 +21,7 @@
                 panes: [{}, { collapsible: true }]
             });
 
-            pane = splitter.dom.find(".k-pane:last")
+            pane = splitter.dom.find(".k-pane:last");
 
             splitter.object.toggle(pane, false);
 
@@ -93,7 +93,7 @@
                 panes: [{}, { collapsible: true, collapsed: true }]
             });
 
-            pane = splitter.dom.find(".k-pane:last")
+            pane = splitter.dom.find(".k-pane:last");
 
             splitter.object.toggle(pane, true);
 
@@ -350,7 +350,7 @@
 
             splitter.object.resize = function() {
                 args = arguments;
-            }
+            };
 
             splitter.object.append({});
 
@@ -406,7 +406,7 @@
 
             splitter.object.resize = function() {
                 args = arguments;
-            }
+            };
 
             splitter.object.insertBefore({}, referencePane);
 
@@ -462,7 +462,7 @@
 
             splitter.object.resize = function() {
                 args = arguments;
-            }
+            };
 
             splitter.object.insertAfter({}, referencePane);
 
@@ -519,7 +519,7 @@
 
             splitter.object.resize = function() {
                 args = arguments;
-            }
+            };
 
             splitter.object.remove(referencePane);
 

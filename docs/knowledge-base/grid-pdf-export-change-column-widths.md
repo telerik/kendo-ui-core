@@ -1,8 +1,8 @@
 ---
 title: Change Column Widths during PDF Export
-description: An example on how to override the column widths of the Kendo UI Grid for PDF Export.
+description: Learn how to override the column widths of the Kendo UI Grid for PDF Export.
 type: how-to
-page_title: Change Grid Columns Width | Kendo UI Grid for jQuery
+page_title: Change Grid Columns Width - Kendo UI for jQuery Data Grid
 slug: grid-pdf-export-change-column-widths
 tags: grid, column, width, pdf, export
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.1026 version</td>
  </tr>
 </table>
@@ -90,7 +90,7 @@ You can also target specific columns by using the `:nth-child()` selector.
       .k-pdf-export td {
         white-space: nowrap;
       }
-      .k-pdf-export .k-header-column-menu{
+      .k-pdf-export .k-grid-column-menu{
         display: none;
       }
     </style>
@@ -98,7 +98,7 @@ You can also target specific columns by using the `:nth-child()` selector.
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">
@@ -117,7 +117,7 @@ You can also target specific columns by using the `:nth-child()` selector.
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          paperSize: "A4",
+          paperSize: "A2",
           allPages: true,
           avoidLinks: true,
           margin: { top: "1.5cm", right: "0.5cm", bottom: "1cm", left: "0.5cm" },
@@ -152,3 +152,9 @@ You can also target specific columns by using the `:nth-child()` selector.
       });
     </script>
 ```
+
+## See Also
+
+* [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})
+* [Exclude Certain Columns from the Exported PDF File]({% slug grid-exclude-columns-from-exported-pdf %})
+* [Exclude Toolbar and Pager from Grid PDF Export]({% slug grid-export-pdf-without-toolbar-pager %})

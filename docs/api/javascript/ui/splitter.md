@@ -12,6 +12,22 @@ Represents the Kendo UI Splitter widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### clickMoveClick `Boolean` *(default: true)*
+
+Determines whether the click move click interaction would be enabled as an alternative of the drag and drop resizing of the Splitter. By default the alternative is enabled.
+
+#### Example
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div>Pane B</div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      clickMoveClick: false
+    });
+    </script>
+
 ### orientation `String` *(default: "horizontal")*
 
 Specifies the orientation of the widget. Supported values are *"horizontal"* and *"vertical"*.
@@ -50,7 +66,7 @@ Specifies whether a pane is initially collapsed (**true**) or expanded (**false*
 
 ### panes.collapsedSize `String`
 
-Specifies the size of a collapsible pane when collapsed, defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). 
+Specifies the size of a collapsible pane when collapsed, defined as pixels (i.e. "200px") or as a percentage (i.e. "50%").
 When the pane is collapsed a **.k-state-collapsed** class is added to it to ease its styling.
 Note: This value must not exceed **panes.max** or be less then **panes.min**.
 
@@ -95,6 +111,53 @@ Specifies the URL from which to load the content of a pane.
     <script>
     $("#splitter").kendoSplitter({
       panes: [ {}, { contentUrl: "https://www.telerik.com/" } ]
+    });
+    </script>
+
+### panes.label `String`
+
+The label of the current pane. Will be used as a `aria-label` for the Splitter `separator` that has the pane as its primary one (the separator that is immediately after the pane).
+
+#### Example
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div></div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      panes: [ {
+        label: "Label A"
+      }, {
+        contentUrl: "https://www.telerik.com/",
+        label: "Label from URL"
+      } ]
+    });
+    </script>
+
+### panes.labelId `String`
+
+The ID of the element that should be used as a label of the current pane. Will be used as a value of the `aria-labelledby` attribute for the Splitter `separator` that has the pane as its primary one (the separator that is immediately after the pane).
+
+#### Example
+
+    <div id="splitter">
+      <div>
+        <h5 id="ha">Title A</h5>
+        Pane A
+      </div>
+      <div>
+        <h5 id="hb">Title B</h5>
+        Pane B
+      </div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      panes: [ {
+        labelId: "ha"
+      }, {
+        labelId: "hb"
+      } ]
     });
     </script>
 
@@ -473,6 +536,8 @@ The pane(s) to be removed.
 
 Get or set the size of the pane. Setting this value will cause the widget to redraw and it will trigger the `resize` event.
 
+> Note: The correct usage of the method requires that the size of the panes should be set either through the [panes.size](/api/javascript/ui/splitter/configuration/panes#panes.size) property or the `size` method. Otherwise, the method will return *undefined*.
+
 #### Parameters
 
 ##### pane `String|Element|jQuery`
@@ -574,6 +639,7 @@ The collapsing pane of the Splitter.
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true }, {} ],
       collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log($(e.pane).html() + " has been collapsed");
       }
     });
@@ -587,6 +653,7 @@ The collapsing pane of the Splitter.
     </div>
     <script>
     function splitter_collapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($(e.pane).html() + " has been collapsed");
     }
     $("#splitter").kendoSplitter({
@@ -598,7 +665,7 @@ The collapsing pane of the Splitter.
 
 ### contentLoad
 
-Triggered when the content for a pane has finished loading.
+Triggered when the content for a pane has finished loading from a remote endpoint.
 
 #### Event Data
 
@@ -608,34 +675,53 @@ The pane whose content has been loaded.
 
 #### Example - subscribe to the "contentLoad" event during initialization
 
+    <base href="https://demos.telerik.com/kendo-ui/splitter/ajax"> 
     <div id="splitter">
-      <div>Pane A</div>
-      <div>Pane B</div>
+      <div></div>
+      <div></div>
     </div>
+
     <script>
-    $("#splitter").kendoSplitter({
-      panes: [ { content: "/foo" }, {} ],
-      contentLoad: function(e) {
-        console.log($(e.pane).html() + " has been loaded");
+      $(document).ready(function() {
+        $("#splitter").kendoSplitter({
+          panes: [
+            { contentUrl: '../content/web/splitter/ajax/ajaxContent1.html' },
+            { contentUrl: '../content/web/splitter/ajax/ajaxContent2.html' }
+          ],
+          contentLoad: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log($(e.pane).html() + " has been loaded");
+          }
+        });
+      });
+    </script> 
+
+    <style>
+      #splitter {
+        height: 480px;
       }
-    });
-    </script>
+    </style>
 
 #### Example - subscribe to the "contentLoad" event after initialization
 
+    <base href="https://demos.telerik.com/kendo-ui/splitter/ajax"> 
     <div id="splitter">
-      <div>Pane A</div>
-      <div>Pane B</div>
+      <div></div>
+      <div></div>
     </div>
     <script>
-    function splitter_contentLoad(e) {
-      console.log($(e.pane).html() + " has been loaded");
-    }
-    $("#splitter").kendoSplitter({
-      panes: [ { content: "/foo" }, {} ]
-    });
-    var splitter = $("#splitter").data("kendoSplitter");
-    splitter.bind("contentLoad", splitter_contentLoad);
+      function splitter_contentLoad(e) {
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log($(e.pane).html() + " has been loaded");
+      }
+      $("#splitter").kendoSplitter({
+        panes: [
+          { contentUrl: '../content/web/splitter/ajax/ajaxContent1.html' },
+          { contentUrl: '../content/web/splitter/ajax/ajaxContent2.html' }
+        ]
+      });
+      var splitter = $("#splitter").data("kendoSplitter");
+      splitter.bind("contentLoad", splitter_contentLoad);
     </script>
 
 ### error
@@ -661,6 +747,7 @@ The status of the request, as returned from [jQuery.ajax](https://api.jquery.com
     <script>
     $("#splitter").kendoSplitter({
       error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(
             "Pane #" + $(e.pane).index() + " could not be loaded from server" +
             " (status " + e.xhr.status + ")"
@@ -677,6 +764,7 @@ The status of the request, as returned from [jQuery.ajax](https://api.jquery.com
     </div>
     <script>
     function splitter_error(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(
             "Pane #" + $(e.pane).index() + " could not be loaded from server" +
             " (status " + e.xhr.status + ")"
@@ -707,6 +795,7 @@ The expanding pane of the Splitter.
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true, collapsed: true}, {} ],
       expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log($(e.pane).html() + " has been expanded");
       }
     });
@@ -720,6 +809,7 @@ The expanding pane of the Splitter.
     </div>
     <script>
     function splitter_expand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($(e.pane).html() + " has been expanded");
     }
     $("#splitter").kendoSplitter({
@@ -745,6 +835,7 @@ Fires when the splitter layout has changed
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true }, {} ],
       layoutChange: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Splitter layout has changed");
       }
     });
@@ -758,6 +849,7 @@ Fires when the splitter layout has changed
     </div>
     <script>
     function splitter_layoutChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Splitter layout has changed");
     }
     $("#splitter").kendoSplitter({
@@ -781,6 +873,7 @@ Triggered when a pane is resized.
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true }, {} ],
       resize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Splitter pane has been resized");
       }
     });
@@ -794,6 +887,7 @@ Triggered when a pane is resized.
     </div>
     <script>
     function splitter_resize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Splitter pane has been resized");
     }
     $("#splitter").kendoSplitter({

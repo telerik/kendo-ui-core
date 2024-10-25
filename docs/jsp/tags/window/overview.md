@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Window JSP Tag
+page_title: Overview - Window JSP Tag
 description: "Get started with the Window JSP tag in Kendo UI."
 slug: overview_window_uiforjsp
 position: 1

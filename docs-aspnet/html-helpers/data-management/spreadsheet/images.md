@@ -1,7 +1,7 @@
 ---
 title: Images
 page_title: Spreadsheet
-description: "Place an image in a Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Place an image in a Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_images_aspnetcore
 position: 5
 ---
@@ -20,11 +20,11 @@ To load an image to a sheet, use any of the following approaches:
 
 You can upload and insert a custom image in the Spreadsheet with the `Insert Image` tool.
 
-![Spreadsheet Insert Image tool](images/spreadsheet-insert-image-tool.png)
+![{{ site.product_short }} Spreadsheet Insert Image tool](images/spreadsheet-insert-image-tool.png)
 
 Then, in the popup window, you can select or drag in a file from the file system.
 
-![Spreadsheet Insert Image pop-up](images/spreadsheet-insert-image-pop-up.png)
+![{{ site.product_short }} Spreadsheet Insert Image pop-up](images/spreadsheet-insert-image-pop-up.png)
 
 ## Configuring the Spreadsheet to Initially Display an Image
 
@@ -40,7 +40,7 @@ Then, in the popup window, you can select or drag in a file from the file system
 
 The following example demonstrates how to configure the Spreadsheet to display an image with top-left corner placed in the `J6` cell.
 
-```
+```HtmlHelper
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
         .Images(new { testImage = "/images/image1.png" })
@@ -87,7 +87,7 @@ The Spreadsheet Sheet API exposes a method that allows you to programmatically a
     > * Images are supported only for client-side import and export. When you engage server-side import or export, no images will be loaded or exported.
     > * To properly export any image to PDF by using the default Spreadsheet functionality, at least one cell with data has to be present on the sheet which contains that image.
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().Spreadsheet()
            .Name("spreadsheet")
            .Sheets(sheets =>

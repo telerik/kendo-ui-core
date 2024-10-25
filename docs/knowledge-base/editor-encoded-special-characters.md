@@ -1,8 +1,8 @@
 ---
 title: Set Encoded Special Characters as Editor Values
-description: An example on how to display decoded special characters in the Kendo UI Editor.
+description: Learn how to display decoded special characters in the Kendo UI Editor.
 type: how-to
-page_title: Programmatically set encoded special characters as value | Kendo UI Editor for jQuery
+page_title: Programmatically set encoded special characters as value - Kendo UI Editor for jQuery
 slug: editor-encoded-special-characters
 tags: editor, encoded, special, characters, value, decoded
 ticketid: 1141113
@@ -15,7 +15,7 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

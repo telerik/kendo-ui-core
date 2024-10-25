@@ -40,7 +40,7 @@
         });
     }
 
-    describe("kendo.ui.DropDownList Virtualization", function () {
+    describe("kendo.ui.DropDownList Virtualization", function() {
         beforeEach(function() {
             kendo.ns = "";
             select = $("<select multiple />").appendTo(Mocha.fixture);
@@ -111,7 +111,7 @@
             animation: false,
             dataTextField: "text",
             dataValueField: "value",
-            dataSource : new kendo.data.DataSource({
+            dataSource: new kendo.data.DataSource({
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
@@ -137,7 +137,7 @@
         dropdownlist.one("dataBound", function() {
             dropdownlist.one("dataBound", function() {
                 var item49 = dropdownlist.listView.content.find("li")
-                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
+                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49; });
 
                 var dataItem = dropdownlist.dataItem(item49);
 
@@ -251,7 +251,7 @@
             dataTextField: "text",
             dataValueField: "value",
             dataSource: createAsyncDataSource(),
-            change: function (e) {
+            change: function(e) {
                 assert.equal(e.sender.value(), "5");
                 done();
             },
@@ -265,7 +265,7 @@
             dropdownlist.filterInput.focus().val("Item 5");
             dropdownlist.filterInput.trigger({ type: "keydown" });
 
-            dropdownlist.one("dataBound", function (){
+            dropdownlist.one("dataBound", function() {
                 dropdownlist.filterInput.trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
             });
         });
@@ -280,7 +280,7 @@
             dataTextField: "text",
             dataValueField: "value",
             dataSource: createAsyncDataSource(),
-            select: function (e) {
+            select: function(e) {
                 assert.equal(e.dataItem.value, "1");
                 done();
             },
@@ -318,7 +318,7 @@
                     total: "total"
                 }
             }),
-            select: function (e) {
+            select: function(e) {
                 assert.isOk(e.dataItem.value, "4");
                 done();
             },
@@ -357,7 +357,7 @@
                     total: "total"
                 }
             }),
-            select: function (e) {
+            select: function(e) {
                 assert.isOk(e.item.hasClass("k-list-optionlabel"));
                 assert.equal(e.item.text(), "Please Select");
                 done();

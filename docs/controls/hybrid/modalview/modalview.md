@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI ModalView
+page_title: Overview - Hybrid UI ModalView
 description: "Initialize and use the Hybrid UI ModalView widget in the Kendo UI framework."
 slug: overview_hybridmodalview
 position: 1
@@ -8,6 +8,10 @@ component: modal-view
 ---
 
 # ModalView Overview
+
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
 
 The [Hybrid UI ModalView widget](https://demos.telerik.com/kendo-ui/m/index#modalview/index) is used to present a self-contained functionality in the context of the current task.
 

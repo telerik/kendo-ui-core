@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -197,8 +198,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "operator": "Operador",
   "value": "Valor",
   "cancel": "Cancelar",
-  "logic": "Lógica de filtros", 
-  "additionalOperator": "Operador adicional", 
+  "logic": "Lógica de filtros",
+  "additionalOperator": "Operador adicional",
   "additionalValue": "Valor adicional"
 });
 }
@@ -596,6 +597,19 @@ kendo.ui.Prompt.prototype.options.messages =
 $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "okText": "OK",
   "cancel": "Cancelar"
+});
+}
+
+/* Wizard messages */
+if (kendo.ui.Wizard) {
+kendo.ui.Wizard.prototype.options.messages =
+$.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+  "reset": "Reiniciar",
+  "previous": "Anterior",
+  "next": "Siguiente",
+  "done": "Hecho",
+  "step": "Paso",
+  "of": "de"
 });
 }
 

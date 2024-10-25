@@ -29,10 +29,10 @@ Replaces given element with another one, using CSS class defined transition.
 
         /* the initial state of the next element */
         .k-fx-swap.k-fx-start .k-fx-next {
-            -webkit-transform: translatex(100%);
-            -moz-transform: translatex(100%);
-            -ms-transform: translatex(100%);
-            transform: translatex(100%);
+            -webkit-transform: translateX(100%);
+            -moz-transform: translateX(100%);
+            -ms-transform: translateX(100%);
+            transform: translateX(100%);
         }
 
         /* the final state of the current element */

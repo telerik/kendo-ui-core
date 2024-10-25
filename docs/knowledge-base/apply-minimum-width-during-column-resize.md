@@ -1,7 +1,7 @@
 ---
-title: Apply Minimum Width during Column Resize
-page_title:  Apply Minimum Width during Column Resize | Kendo UI Grid for jQuery
-description: "An example on how to enforce a minimum column width during column resizing in the Kendo UI Grid for jQuery."
+title: Apply Minimum Width When Resizing Grid Columns
+page_title: Apply a Minimum Width during Column Resize - jQuery Data Grid
+description: "Learn how to enforce a minimum column width during column resizing in the Kendo UI Data Grid for jQuery control."
 previous_url: /controls/data-management/grid/how-to/Layout/apply-minimum-width-during-column-resize
 slug: howto_apply_min_width_during_column_resize_grid
 tags: grid, min, width, column, resize
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>
@@ -76,6 +76,98 @@ The following example demonstrates how to use the API for internal Grid column r
     </script>
 ```
 
+The following example shows how to apply a minimum width when resizing a single Data Grid column.
+
+```dojo
+<div id="grid"></div>
+    <script>
+      $(function(){
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: [{foo: "item", bar: "number", baz: "one"}]
+          },
+          columns: [
+            {field: "foo"},
+            {field: "bar"},
+            {field: "baz"}
+          ],
+          resizable: true
+        });
+
+        var minTableWidth;
+        var minColumnWidth = 100;
+        var fooTh;
+        var idxOfRestrictedColumn;
+        var grid;
+
+        $("#grid").data("kendoGrid").resizable.bind("start", function(e) {
+          fooTh = $("th[data-field='foo']");
+          idxOfRestrictedColumn = fooTh.index();
+          grid = fooTh.closest(".k-grid").data("kendoGrid");
+        });
+
+        $("#grid").data("kendoGrid").resizable.bind("resize", function(e) {
+          var fooTh = $("th[data-field='foo']");
+          if (idxOfRestrictedColumn === 0) {
+            if (fooTh.width() >= minColumnWidth) {
+              minTableWidth = grid.tbody.closest("table").width();
+            }
+
+            if (fooTh.width() < minColumnWidth) {
+              // The next line is ONLY needed if the scrolling of the Grid is enabled.
+              grid.thead.closest("table").width(minTableWidth).children("colgroup").find("col").eq(idxOfRestrictedColumn).width(minColumnWidth);
+              grid.tbody.closest("table").width(minTableWidth).children("colgroup").find("col").eq(idxOfRestrictedColumn).width(minColumnWidth);
+            }
+          }
+
+        });
+      });
+    </script>
+```
+
+The following example shows how to apply the width to a certain column if the window is smaller than the specified number by utilizing the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+
+```dojo
+    <div id="grid"></div>
+    <script>
+      $(function(){
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: [{foo: "item", bar: "number", baz: "one"}]
+          },
+          columns: [
+            {field: "foo"},
+            {field: "bar"},
+            {field: "baz"}
+          ],
+          resizable: true
+        });
+      });
+
+      $(window).on("resize", function () {
+        var minColumnWidth = 100;
+        var grid = $("#grid").data("kendoGrid");
+        var columns = grid.getOptions().columns;
+
+        if ($(window).width() <= 716) {
+          columns[0].width = minColumnWidth;
+          grid.setOptions({
+            columns: columns
+          });
+        }
+        else {
+          columns[0].width = "";
+          grid.setOptions({
+            columns: columns
+          })
+        };
+      });
+    </script>
+```
+
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

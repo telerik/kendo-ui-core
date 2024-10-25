@@ -4,7 +4,7 @@ page_title: Security Trimming
 description: "Use the built-in security trimming functionality of the Telerik UI TreeView HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/navigation/treeview/security-trimming
 slug: securitytrimmings_treeviewhelper_aspnetmvc
-position: 6
+position: 9
 ---
 
 # Security Trimming
@@ -23,5 +23,5 @@ For more information on using a custom `AuthorizeAttribute`, refer to [this arti
 ## See Also
 
 * [Basic Usage of the TreeView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treeview/index)
-* [TreeViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/treeviewbuilder)
 * [TreeView Server-Side API](/api/treeview)

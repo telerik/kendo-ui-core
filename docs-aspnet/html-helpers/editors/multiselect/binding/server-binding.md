@@ -1,10 +1,10 @@
 ---
 title:  Server Binding
 page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement server binding in the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/binding/server-binding
 slug: htmlhelpers_multiselect_serverbinding_aspnetcore
-position: 3
+position: 4
 ---
 
 # Server Binding
@@ -13,7 +13,7 @@ You can configure the Telerik UI MultiSelect for server binding to the Northwind
 
 1. Create a new action method and pass the **Products** table as the model.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             NorthwindDataContext northwind = new NorthwindDataContext();
 
@@ -27,12 +27,27 @@ You can configure the Telerik UI MultiSelect for server binding to the Northwind
 
 1. Add a server bound MultiSelect.
 
+   ```HtmlHelper
+        @model IEnumerable<ProjectName.Models.ProductViewModel>
+
         @(Html.Kendo().MultiSelect()
             .Name("productDropDownList") // The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the MultiSelect as a text.
             .DataValueField("ProductID") // Specify which property of the Product to be used by the MultiSelect as a value.
             .BindTo(Model)   // Pass the list of Products to the MultiSelect.
         )
+   ```
+   {% if site.core %}
+    ```TagHelper
+        @model IEnumerable<ProjectName.Models.ProductViewModel>
+        
+        <kendo-multiselect name="productDropDownList"
+                           datatextfield="ProductName"
+                           datavaluefield="ProductID"
+                           bind-to="Model">
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## See Also
 

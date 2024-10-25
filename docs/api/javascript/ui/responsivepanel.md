@@ -58,6 +58,33 @@ Specifies the page width at which the widget will be hidden and its toggle butto
         });
     </script>
 
+### nonce `String` *(default: "")*
+
+Specifies the nonce attribute that will be set to the inline style injected in the `<head>` tag containing the dynamic media query styles.
+
+#### Example
+
+    <header>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
+        Logo
+    </header>
+
+    <nav id="navigation">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+    </nav>
+
+    <article>
+        Content
+    </article>
+
+    <script>
+        $("#navigation").kendoResponsivePanel({
+            orientation: "top",
+            nonce: "test1234"
+        });
+    </script>
+
 ### orientation `String` *(default: "left")*
 
 Specifies the direction from which the hidden element will open up, once the toggle button has been activated. Valid values are "left", "right", and "top".
@@ -201,6 +228,8 @@ Opens the responsive panel.
             var panel = $("#navigation").data("kendoResponsivePanel");
             panel.open();
         });
+
+        kendo.ui.icon($(".k-i-menu"), {icon: "menu"});
     </script>
 
 ## Events
@@ -226,6 +255,7 @@ Triggered before the responsive panel is closed. Cancellable.
         // event handler for close event
         var onClose = function() {
             // the responsive panel is closing
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("closing");
         };
 
@@ -254,6 +284,7 @@ Triggered before the responsive panel is closed. Cancellable.
         // event handler for close event
         var onClose = function() {
             // the responsive panel is closing
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("closing");
         };
 
@@ -282,6 +313,7 @@ Triggered before the responsive panel is opened. Cancellable.
         // event handler for open event
         var onOpen = function() {
             // the responsive panel is opening
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("opening");
         };
 
@@ -310,6 +342,7 @@ Triggered before the responsive panel is opened. Cancellable.
         // event handler for open event
         var onOpen = function() {
             // the responsive panel is opening
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("opening");
         };
 

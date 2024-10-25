@@ -1,7 +1,7 @@
 ---
 title: Make Selection with Checkbox Column
-page_title:  Make Selection with Checkbox Column | Kendo UI Grid for jQuery
-description: "An example on how to select a row of the Kendo UI jQuery Grid with a checkbox column, preserve the selection and get the IDs of all selected items in the Kendo UI Grid for jQuery."
+page_title:  Make Selection with Checkbox Column - Kendo UI for jQuery Data Grid
+description: "Learn how to select a row of the Kendo UI jQuery Grid with a checkbox column, preserve the selection and get the IDs of all selected items in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Selection/grid-selection-checkbox
 slug: howto_make_selection_checkbox_column_grid
 tags: grid, make, preserve, selection, checkbox, column, get, ids, selected, items
@@ -9,6 +9,21 @@ component: grid
 type: how-to
 res_type: kb
 ---
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
+## Description
+
+How can I select a row of the Data Grid with a checkbox column, preserve the selection and get the IDs of all selected items in the Grid?
+
+## Solution
 
 As of the Kendo UI R2 2017 SP1 release, the [selection of columns with checkboxes](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable) is a built-in feature for
 the Grid.
@@ -95,7 +110,11 @@ For earlier versions, refer to the following example. It demonstrates how to sel
             toolbar: ["create"],
             columns: [
             //define template column with checkbox and attach click event handler
-            { template: "<input type='checkbox' class='checkbox' />" },
+            {
+                template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md checkbox' />",
+                width: 40,
+                attributes: {class: "k-text-center"}
+            },
             "ProductName", {
                 field: "UnitPrice",
                 title: "Unit Price",
@@ -111,7 +130,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
                 }, {
                 command: ["edit", "destroy"],
                 title: "&nbsp;",
-                width: "172px"
+                width: "250px"
             }
             ],
             editable: "inline"
@@ -144,10 +163,10 @@ For earlier versions, refer to the following example. It demonstrates how to sel
         checkedIds[dataItem.id] = checked;
         if (checked) {
             //-select the row
-            row.addClass("k-state-selected");
+            row.addClass("k-selected");
             } else {
             //-remove selection
-            row.removeClass("k-state-selected");
+            row.removeClass("k-selected");
         }
     }
 
@@ -157,7 +176,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
         for(var i = 0; i < view.length;i++){
             if(checkedIds[view[i].id]){
                 this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-                .addClass("k-state-selected")
+                .addClass("k-selected")
                 .find(".checkbox")
                 .attr("checked","checked");
             }
@@ -168,4 +187,4 @@ For earlier versions, refer to the following example. It demonstrates how to sel
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

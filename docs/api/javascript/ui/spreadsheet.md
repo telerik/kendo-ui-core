@@ -20,6 +20,15 @@ The name of the currently active sheet. Must exactly match one of the (sheet nam
 
 The default column width in pixels.
 
+#### Example - setting the default columns' width
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        columnWidth: 150,
+      });
+    </script>
+
 ### columns `Number` *(default: 50)*
 
 The number of columns in the document.
@@ -72,7 +81,7 @@ The width of the header column in pixels.
 
 Configures the Excel export settings of the Spreadsheet.
 
-### excel.fileName `String` *(default: "Spreadsheet.xslx")*
+### excel.fileName `String` *(default: "Spreadsheet.xlsx")*
 
 Specifies the file name of the exported Excel file.
 
@@ -108,7 +117,7 @@ If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/
 
 ### excel.proxyURL `String` *(default: null)*
 
-The URL of the server side proxy which will stream the file to the end user. A proxy will be used when the browser is not capable of saving files locally. Such browsers are IE version 9 and lower and Safari. The developer is responsible for implementing the server-side proxy. The proxy will return the decoded file with the `Content-Disposition` header set to `attachment; filename="<fileName.xslx>"`.
+The URL of the server side proxy which will stream the file to the end user. A proxy will be used when the browser is not capable of saving files locally. Such browsers are IE version 9 and lower and Safari. The developer is responsible for implementing the server-side proxy. The proxy will return the decoded file with the `Content-Disposition` header set to `attachment; filename="<fileName.xlsx>"`.
 
 The proxy will receive a POST request with the following parameters in the request body:
 * `contentType` - The MIME type of the file.
@@ -258,6 +267,11 @@ The author of the PDF document.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -426,6 +440,14 @@ Indicates whether to center the content horizontally. For more information, refe
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -721,6 +743,15 @@ The default row height in pixels.
 
 The number of rows in the document.
 
+#### Example - configure the rows count
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            rows: 300
+        });
+    </script>
+
 ### sheets `Array`
 
 An array which defins the document sheets and their content.
@@ -728,6 +759,19 @@ An array which defins the document sheets and their content.
 ### sheets.activeCell `String`
 
 The active cell in the sheet, for example, `A1`.
+
+#### Example - configure the initially active cell
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            activeCell: "C3"
+          }
+        ]
+      });
+    </script>
 
 ### sheets.name `String`
 
@@ -795,23 +839,23 @@ The operator type of the criterion.
 
 The supported types vary based on the inferred column data type (inferred):
 
-* `Text`
-    * `contains` - The text contains the value.
-    * `doesnotcontain` - The text does not contain the value.
-    * `startswith` - The text starts with the value.
-    * `endswith` - The text ends with the value.
-* `Date`
-    * `eq` - The date is the same as the value.
-    * `neq` - The date is not the same as the value.
-    * `lt` -  The date is before the value.
-    * `gt` -  The date is after the value.
-* `Number`
-    * `eq` - Is equal to the value.
-    * `neq` - Is not equal to the value.
-    * `gte` - Is greater than or equal to the value.
-    * `gt` - Is greater than the value.
-    * `lte` - Is less than or equal to the value.
-    * `lt` - Is less than the value.
+*   `Text`
+        - `contains` - The text contains the value.
+        - `doesnotcontain` - The text does not contain the value.
+        - `startswith` - The text starts with the value.
+        - `endswith` - The text ends with the value.
+*   `Date`
+        - `eq` - The date is the same as the value.
+        - `neq` - The date is not the same as the value.
+        - `lt` -  The date is before the value.
+        - `gt` -  The date is after the value.
+*   `Number`
+        - `eq` - Is equal to the value.
+        - `neq` - Is not equal to the value.
+        - `gte` - Is greater than or equal to the value.
+        - `gt` - Is greater than the value.
+        - `lte` - Is less than or equal to the value.
+        - `lt` - Is less than the value.
 
 ### sheets.filter.columns.criteria.value `String`
 
@@ -988,9 +1032,30 @@ If set to `false`, disables the cell.
 
 The format of the cell text. For more information, refer to the article on [creating or deleting a custom number format on MS Office](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
+#### Example - setting the format of a cell
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Order",               
+                rows: [{
+                    cells: [{
+                        value: 12.39, format: "$#,##0.00"
+                    }]
+                }],
+            }]
+        });
+    </script>
+
 ### sheets.rows.cells.formula `String`
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
+
+### sheets.rows.cells.html `Boolean`
+
+If set to `true`, renders the cell value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
 
@@ -1017,6 +1082,26 @@ If set to `true`, sets the cell font to underline.
 ### sheets.rows.cells.value `Number|String|Boolean|Date`
 
 The cell value.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            rows: [
+              {
+                cells: [{ value: "Name" },{ value: "age" }]
+              },
+              {
+                cells: [{ value: "Peter" },{ value: 34 }]
+              }
+            ]
+          }
+        ]
+      });
+    </script>
 
 ### sheets.rows.cells.validation `Object`
 
@@ -1282,6 +1367,31 @@ A Boolean value which indicates if the sheets-bar will be displayed.
 
 A Boolean value which indicates if the toolbar will be displayed.
 
+Apart from the built-in tools, the Spreadsheet Home, Insert and Data ToolBars fully expose the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [ {
+                    type: "button",
+                    text: "Button"
+                }, {
+                    type: "button",
+                    text: "Toggle",
+                    togglable: true,
+                    icon: "cancel"
+                }, {
+                    type: "splitButton",
+                    text: "SplitButton",
+                    menuButtons: [{text: "Option 1"}, {text: "Option 2"}]
+                } ]
+            }
+        });
+    </script>
+
 ### toolbar.home `Boolean|Array` *(default: true)*
 
 A Boolean value which indicates if the **Home** tab or a collection of tools that will be shown in the **Home** tab will be displayed.
@@ -1427,6 +1537,7 @@ This flag only affects the presentation - the way formulas are entered by the en
     sheet.range('B1').input('=SUM(A1, A2, 3.14)');
 
     // prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 To make the API functions obey `useCultureDecimals`, wrap your code in a call to `sheet.withCultureDecimals`. Assuming a culture where the comma is used for decimals, compare the previous example with the following one.
@@ -1437,10 +1548,12 @@ To make the API functions obey `useCultureDecimals`, wrap your code in a call to
         sheet.range('B1').input('=SUM(A1; A2; 3,14)');
 
         // prints: SUM(A1; A2; 3,14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(sheet.range('B1').formula());
     });
 
     // back to canonical form; this prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 ## Methods
@@ -1624,7 +1737,7 @@ Returns an array with the sheets in the workbook.
 
 Clears the spreadsheet and populates it with data from the specified Excel (`.xlsx`) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/supporting/export-support#jszip-library) for the import from file functionality.
 
 #### Parameters
 
@@ -1681,7 +1794,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 
 ### saveAsPDF
 
@@ -1725,7 +1838,7 @@ An `options` object with the same structure as the [`pdf`](/api/javascript/ui/sp
     </script>
 
     <!-- Load Pako library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
 ### sheetByName
 
@@ -1772,6 +1885,27 @@ The index of the sheet to locate.
 ### insertSheet
 
 Inserts a sheet with the specified options.
+
+#### Example - inseart new sheets on button click
+
+    <div id="spreadsheet"></div>
+    <button>Add New Sheet</button>
+    <script>
+      var i = 2
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{ name: "Sheet1" }, { name: "Sheet2" }]
+      });
+      var sheets = $("#spreadsheet").data("kendoSpreadsheet").sheets();
+      $("button").click(function(){
+        $("#spreadsheet").data("kendoSpreadsheet").insertSheet({
+          name: "Custom Sheet Name" + ++i,
+          frozenRows: 1,
+          frozenColumns: 1,
+          rows: 15,
+          columns: 10,
+        });
+      })
+    </script>
 
 #### Parameters
 
@@ -1893,7 +2027,7 @@ data.
 
 ### toJSON
 
-Serializes the workbook in the format that is defined in the [configuration](#configuration).
+Serializes the workbook in the format that is defined in the configuration.
 
 Note that this method is unable to serialize embedded images.  To
 properly save images you need to use [`saveJSON`](#methods-saveJSON),
@@ -1933,7 +2067,7 @@ which is asynchronous (returns a `Promise`).
 
 ### fromJSON
 
-Loads the workbook data from an object with the format that si defined in the [configuration](#configuration).
+Loads the workbook data from an object with the format that is defined in the [configuration](#configuration).
 
 > All existing sheets and their data will be lost.
 
@@ -1968,7 +2102,9 @@ The object from where data will be loaded. This has to be the deserialized objec
 
 ### defineName
 
-Defines a custom name that will be  available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+Defines a custom name that will be available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+
+> If the name of the sheet consists of multiple words, separated by space, the sheet name should be wrapped in quotes `'Sheet Name With Space'!$A$1`.
 
 #### Parameters
 
@@ -2337,6 +2473,49 @@ The new value(s) that is(are) about to be applied to the range. Depending on the
 
 If invoked the changing will not be performed and no changes will be applied to the sheet.
 
+#### Example - subscribe to the "changing" event during initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }],
+        changing: function(e){
+        		console.log("The netered value is: " + e.data)
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "changing" event after initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      function spread_changing(e){
+        console.log("The netered value is: " + e.data)
+      }
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }]        
+      });
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      spreadsheet.bind("changing", spread_changing);
+    </script>
+
 ### change
 
 Triggered when a value in the Spreadsheet has been changed. Introduced in the 2016.Q1.SP1 release.
@@ -2438,7 +2617,7 @@ If invoked, the Spreadsheet will not save the generated file.
 
 ### excelImport
 
-Fired when the user clicks the **Open** toolbar button.
+Fired when the user imports a file after selecting it from the window prompt. The event is fired before the file importing has finished.
 
 #### Event Data
 
@@ -2470,6 +2649,7 @@ The [progress handler](https://api.jquery.com/deferred.progress/) of the promise
             excelImport: function(e) {
                 e.promise
                 .progress(function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(kendo.format("{0:P} complete", e.progress));
                 })
                 .done(function() {

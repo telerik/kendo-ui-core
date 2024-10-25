@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | NumericTextBox JSP Tag
+page_title: Overview - NumericTextBox JSP Tag
 description: "Get started with the NumericTextBox JSP tag in Kendo UI."
 slug: overview_numerictextbox_uiforjsp
 position: 1

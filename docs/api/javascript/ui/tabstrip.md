@@ -435,7 +435,7 @@ The feature requires `"top"` or `"bottom"` [`tabPosition`](/api/javascript/ui/ta
 
 Unless disabled, `scrollable` must be set to a JavaScript object, which represents the scrolling configuration.
 
-See [Scrollable Tabs](/controls/navigation/tabstrip/overview#configuration-Scrollable) for more information.
+See [Scrollable Tabs](/controls/tabstrip/overview#configuration-Scrollable) for more information.
 
 #### Example - disable scrolling
 
@@ -488,6 +488,34 @@ Sets the scroll amount (in pixels) applied when the user clicks on a scroll butt
 			scrollable: {
 				distance: 30
 			}
+		});
+	</script>
+
+### sortable `Boolean` *(default: false)*
+
+If enabled, users will be able to sort the tabs by dragging them to the desired position.
+
+#### Example
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			sortable: true
 		});
 	</script>
 
@@ -587,7 +615,7 @@ Appends a tab to the collection of tabs in a **TabStrip**.
             dataTextField: "text",
             dataImageUrlField: "imageUrl",
             dataContentField: "content",
-            dataContentUrlField: "contentUrl"
+            dataContentUrlField: "contentUrl",
             dataSource: [
                             {
                                 text: "Tab 1",
@@ -654,6 +682,7 @@ Obtains the DOM element that encloses tab content by its tab index in the **TabS
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(tabStrip.contentElement(0));
     </script>
 
@@ -687,6 +716,7 @@ The difference between `contentElement` and `contentHolder` is that `contentHold
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(tabStrip.contentHolder(0));
     </script>
 
@@ -708,7 +738,7 @@ Deactivates a tab specified as a selector. Note: Invoking this method will not t
 
     <div id="tabstrip">
         <ul>
-            <li id="tab1">Tab 1</li>
+            <li id="tab1" class="k-active">Tab 1</li>
             <li>Tab 2</li>
         </ul>
         <div>Content 1</div>
@@ -716,8 +746,9 @@ Deactivates a tab specified as a selector. Note: Invoking this method will not t
     </div>
 
     <script>
-        var tabToDeactivate = $("#tab1");
-        $("#tabstrip").kendoTabStrip().data("kendoTabStrip").deactivateTab(tabToDeactivate);
+      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+      var tabToDeactivate = $("#tab1");
+      tabstrip.deactivateTab(tabToDeactivate);
     </script>
 
 #### Parameters
@@ -941,6 +972,7 @@ Gets the list of DOM elements that represent the tabs.
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(tabStrip.items());
     </script>
 
@@ -952,19 +984,24 @@ Gets the list of DOM elements that represent the tabs.
 
 Reloads TabStrip tab(s) via AJAX.
 
+    <button id="btn">Reload</button>
     <div id="tabstrip"></div>
 
     <script>
-        var tabStrip = $("#tabstrip").kendoTabStrip({
-            dataTextField: "Name",
-            dataContentUrlField: "ContentUrl",
-            dataSource: [
-              { Name: "Tab1", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
-              { Name: "Tab2", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
-            ]
-        }).data("kendoTabStrip");
+      var tabStrip = $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataContentUrlField: "ContentUrl",
+        dataSource: [
+          { Name: "Tab1", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
+          { Name: "Tab2", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
+        ]
+      }).data("kendoTabStrip");
 
+      $('#btn').click(function(){
+        //The result can be observed in Network tab in the browser`s Developer Tools. 
+        //When the button is clicked a request for loading the content will be performed.
         tabStrip.reload("li:first");
+      })
     </script>
 
 #### Parameters

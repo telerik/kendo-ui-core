@@ -2,7 +2,7 @@
 title: Error with CreateAt Bottom and Scroll Virtual Occurs
 description: When I update to the 2017.3.917 Kendo UI version and try to add a new record, the Kendo UI Grid fails with no error.
 type: troubleshooting
-page_title: Error With CreateAt Bottom and Scroll Virtual | Kendo UI Grid for jQuery
+page_title: Error With CreateAt Bottom and Scroll Virtual - Kendo UI for jQuery Data Grid
 slug: grid-error-with-createat-bottom-plus-scroll-virtual
 tags: grid, editing, virtual, scroll, create
 previous_url: /knowledge-base/grid-error-with-createat-bottom-plues-scoll-virtual.md
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr> <tr>
   <td>Version</td>
   <td>2017.3.917</td>
@@ -41,4 +41,4 @@ To enable the scroll, the virtual scrolling requires that the initial records ta
 
 ## Solution
 
-Make sure that you meet all [requirements and the specifics](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#virtual-scrolling) of the virtual scrolling functionality.
+Make sure that you meet all [requirements and the specifics](https://docs.telerik.com/kendo-ui/controls/grid/appearance#virtual-scrolling) of the virtual scrolling functionality.

@@ -1,8 +1,8 @@
 ---
 title: Set DateInput Messages of DateTimePicker
-description: An example on how to configure the messages for the date input in the  Kendo UI DateTimePicker.
+description: Learn how to configure the messages for the date input in the  Kendo UI DateTimePicker.
 type: how-to
-page_title: Change Text of DateTimePicker DateInput Messages | Kendo UI DateTimePicker for jQuery
+page_title: Change Text of DateTimePicker DateInput Messages - Kendo UI DateTimePicker for jQuery
 slug: datetimepicker-messages-dateinput-change-text
 tags: datetimepicker, messages, dateinput, change, text, year, month, day, hour, minute, second, dayperiod, datepicker
 ticketid: 1350298
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>DateTimePicker for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® DateTimePicker for jQuery</td>
  </tr>
 
   <td>Product Version</td>

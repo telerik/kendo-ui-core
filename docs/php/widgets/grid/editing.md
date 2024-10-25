@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Grid PHP Class
+page_title: Editing - Grid PHP Class
 description: "Edit the Kendo UI Grid PHP class."
 slug: editing_grid_uiforphp
 position: 4
@@ -18,7 +18,7 @@ This help topic shows how to persist the changes from create, update and destroy
 
 This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to perform the create, update, and destroy data operations.
 
-### Configurаtion
+### Configuration
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 

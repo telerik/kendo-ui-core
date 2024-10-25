@@ -209,4 +209,22 @@
         });
 
     });
+
+    describe("LazyObservableArray", function() {
+
+        it("_loadPromises array is initialized", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.LazyObservableArray(source);
+
+            assert.isOk(array._loadPromises);
+        });
+
+        it("_loadedNodes array is initialized", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.LazyObservableArray(source);
+
+            assert.isOk(array._loadedNodes);
+        });
+
+    });
 }());

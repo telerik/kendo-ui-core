@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ColorPicker JSP Tag
+page_title: Overview - ColorPicker JSP Tag
 description: "Get started with the ColorPicker JSP tag in Kendo UI."
 slug: overview_colorpicker_uiforjsp
 position: 1

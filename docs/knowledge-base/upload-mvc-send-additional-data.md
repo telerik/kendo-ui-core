@@ -1,8 +1,8 @@
 ---
 title: Upload Files and Additional Data in a Single Request
-description: An example on how to send a file and additional data with a single request to the Kendo Upload controller action?
+description: Learn how to send a file and additional data with a single request to the Kendo Upload controller action?
 type: how-to
-page_title: Send File and Additional Data with a Single Request to the Server | Kendo UI Upload for ASP.NET MVC
+page_title: Send File and Additional Data with a Single Request to the Server - Kendo UI Upload for ASP.NET MVC
 slug: upload-mvc-send-additional-data
 tags: kendo, kendoui, mvc, upload, additional-parameters, send-fields
 ticketid: 1138520
@@ -15,7 +15,7 @@ component: upload
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Upload for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI Upload for ASP.NET MVC</td>
  </tr>
 </table>
 

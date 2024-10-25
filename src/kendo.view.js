@@ -1,12 +1,8 @@
-(function(f, define){
-    define([
-        "./kendo.core",
-        "./kendo.binder",
-        "./kendo.fx"
-    ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.binder.js";
+import "./kendo.fx.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "view",
     name: "View",
     category: "framework",
@@ -17,7 +13,7 @@ var __meta__ = { // jshint ignore:line
 
 (function($, undefined) {
     var kendo = window.kendo,
-        attr =  kendo.attr,
+        attr = kendo.attr,
         ui = kendo.ui,
         attrValue = kendo.attrValue,
         directiveSelector = kendo.directiveSelector,
@@ -35,7 +31,6 @@ var __meta__ = { // jshint ignore:line
         DETACH = "detach",
         sizzleErrorRegExp = /unrecognized expression/;
 
-    var bodyRegExp = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i;
     var LOAD_START = "loadStart";
     var LOAD_COMPLETE = "loadComplete";
     var SHOW_START = "showStart";
@@ -75,6 +70,7 @@ var __meta__ = { // jshint ignore:line
             that.model = options.model;
             that._wrap = options.wrap !== false;
             this._evalTemplate = options.evalTemplate || false;
+            this._useWithBlock = options.useWithBlock;
             that._fragments = {};
 
             that.bind([ INIT, SHOW, HIDE, TRANSITION_START, TRANSITION_END ], options);
@@ -145,11 +141,11 @@ var __meta__ = { // jshint ignore:line
             this.hide();
         },
 
-        beforeTransition: function(type){
+        beforeTransition: function(type) {
             this.trigger(TRANSITION_START, { type: type });
         },
 
-        afterTransition: function(type){
+        afterTransition: function(type) {
             this.trigger(TRANSITION_END, { type: type });
         },
 
@@ -198,7 +194,7 @@ var __meta__ = { // jshint ignore:line
 
         _createElement: function() {
             var that = this,
-                wrapper = "<" + that.tagName + " />",
+                wrapper = "<" + that.tagName + ">",
                 element,
                 content;
 
@@ -208,7 +204,7 @@ var __meta__ = { // jshint ignore:line
                 if (content[0].tagName === SCRIPT) {
                     content = content.html();
                 }
-            } catch(e) {
+            } catch (e) {
                 if (sizzleErrorRegExp.test(e.message)) {
                     content = that.content;
                 }
@@ -217,7 +213,7 @@ var __meta__ = { // jshint ignore:line
             if (typeof content === "string") {
                 content = content.replace(/^\s+|\s+$/g, '');
                 if (that._evalTemplate) {
-                    content = kendo.template(content)(that.model || {});
+                    content = kendo.template(content, { useWithBlock: that._useWithBlock })(that.model || {});
                 }
 
                 element = $(wrapper).append(content);
@@ -232,7 +228,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 element = content;
                 if (that._evalTemplate) {
-                    var result = $(kendo.template($("<div />").append(element.clone(true)).html())(that.model || {}));
+                    var result = $(kendo.template($("<div />").append(element.clone(true)).html(), { useWithBlock: that._useWithBlock })(that.model || {}));
 
                     // template uses DOM
                     if ($.contains(document, element[0])) {
@@ -396,7 +392,7 @@ var __meta__ = { // jshint ignore:line
     var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
 
     function parseTransition(transition) {
-        if (!transition){
+        if (!transition) {
             return {};
         }
 
@@ -420,7 +416,7 @@ var __meta__ = { // jshint ignore:line
 
         after: function() {
             this.running = false;
-            this.trigger("complete", {view: this.view});
+            this.trigger("complete", { view: this.view });
             this.trigger("after");
         },
 
@@ -624,8 +620,8 @@ var __meta__ = { // jshint ignore:line
                 views,
                 view;
 
-            if (bodyRegExp.test(html)) {
-                html = RegExp.$1;
+            if (html.indexOf("<body") > -1) {
+                html = $("<div>").append(html).html();
             }
 
             sandbox[0].innerHTML = html;
@@ -646,11 +642,12 @@ var __meta__ = { // jshint ignore:line
 
             container.append(views);
 
+            html = null; // Garbage collection.
             return this._createView(view);
         },
 
         _locate: function(selectors) {
-            return this.$angular ? directiveSelector(selectors) : roleSelector(selectors);
+            return roleSelector(selectors);
         },
 
         _findViewElement: function(url) {
@@ -721,7 +718,5 @@ var __meta__ = { // jshint ignore:line
     kendo.ViewClone = ViewClone;
 
 })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

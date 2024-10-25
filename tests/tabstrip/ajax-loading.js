@@ -8,15 +8,16 @@
         if (argsCheck) {
             isRaised = !!e.contentElement;
             argsCheck = false;
-        } else
+        } else {
             isRaised = true;
+        }
     }
 
     var tabstrip;
     var template = '<div id="tabstrip">' +
         '    <ul>' +
-        '        <li class="k-state-active">ASP.NET MVC</li>' +
-        '        <li class="k-state-disabled">Silverlight</li>' +
+        '        <li class="k-active">ASP.NET MVC</li>' +
+        '        <li class="k-disabled">Silverlight</li>' +
         '        <li>ASP.NET AJAX</li>' +
         '        <li>OpenAccess ORM</li>' +
         '        <li>Reporting</li>' +
@@ -92,14 +93,14 @@
             $.mockjax({
                 url: "ajax-view-one.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
             $.mockjax({
                 url: "ajax-view-two.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
@@ -115,7 +116,7 @@
             var item = getRootItem(2);
 
             item.find('> .k-link').trigger('click');
-            assert.isOk(item.hasClass('k-state-active'));
+            assert.isOk(item.hasClass('k-active'));
         });
 
         it('ajax content url should be attached to item', function() {
@@ -130,7 +131,7 @@
             item.find('> .k-link').trigger('click');
 
             setTimeout(function() {
-                assert.equal(item.parent().find('.k-state-active').length, 1);
+                assert.equal(item.parent().find('.k-active').length, 1);
                 done();
             });
         });
@@ -149,7 +150,7 @@
         });
 
         it("ajax content with error fires error handler and writes the error message to the console", function(done) {
-            if (jQuery.fn.jquery.substring(0, 1) === '3') {
+            if (jQuery.fn.jquery.substring(0, 1) === '3' || jQuery.fn.jquery.substring(0, 1) === '4') {
                 assert.isOk(true);
                 done();
                 return;

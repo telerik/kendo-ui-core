@@ -1,7 +1,7 @@
 ---
-title: Combine Regular and Custom Filters in Grid for ASP.NET MVC
-page_title: Add Custom Filters to Grid | Kendo UI Grid for ASP.NET MVC
-description: An example on how to combine custom with build-in filters in a Kendo UI Grid for ASP.NET MVC.
+title: Combine Regular and Custom Filters in ASP.NET MVC Grid
+page_title: Add Custom Filters - ASP.NET MVC Data Grid
+description: Learn how to combine custom with built-in filters in a Telerik UI Data Grid for ASP.NET MVC.
 type: how-to
 previous_url: /knowledge-base/how-to-add-custom-filters
 slug: add-custom-filters
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
+  <td>Progress® Telerik UI® Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -31,11 +31,11 @@ component: grid
   <td>57</td>
  </tr>
  <tr>
-  <td>.Net framework</td>
+  <td>.NET Framework</td>
   <td>Version 4.6</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2015</td>
  </tr>
  <tr>
@@ -55,10 +55,16 @@ component: grid
 
 ## Description
 
-I have a Kendo UI Grid for ASP.NET MVC with regular filters and local filtering. How can I add custom filters and combine the regular filters with the custom ones?
+I have a Telerik UI Data Grid for ASP.NET MVC with regular filters and local filtering. How can I add custom filters and combine the regular filters with the custom ones?
 
 ## Solution
 
 To allow the application of both filter types, wrap the custom filter in an additional filter with the `"OR"` criteria.
 
 For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/AgIgO/17), which applies the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method of the DataSource.
+
+## See Also
+
+* [Kendo UI for jQuery Data Grid (Product Page)](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

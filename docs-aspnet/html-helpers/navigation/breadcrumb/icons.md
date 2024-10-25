@@ -20,13 +20,13 @@ The icons rendered for each element after the root icon. It is also clickable an
 
 ## Delimiter Icon
 
-The icons that separate the items of the Breadcrumb. 
+The icons that separate the items of the Breadcrumb.
 
 ### Example
 
 The following example demonstrates how to configure different icons.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Breadcrumb()
         .Name("breadcrumb")
         .Items(items =>
@@ -53,9 +53,21 @@ The following example demonstrates how to configure different icons.
                 .IconClass("item")
                 .LinkClass("item");
         })
-        .DelimiterIcon("line")
+        .DelimiterIcon("shape-line")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-breadcrumb name="breadcrumb"
+                        delimiter-icon="shape-line">
+        <kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.RootItem" text="All Components" href="https://demos.telerik.com/kendo-ui/" show-text="true" icon="globe" show-icon="true"></kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="Breadcrumb" href="/breadcrumb" icon="gear" show-icon="true"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="Tag Helper" href="/tag-helper" icon="cloud" show-icon="true"></kendo-breadcrumb-item>
+        </kendo-breadcrumb-items>
+    </kendo-breadcrumb>
+```
+{% endif %}
 
 ## See Also
 

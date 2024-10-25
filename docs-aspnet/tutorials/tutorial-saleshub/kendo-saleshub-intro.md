@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Sales Hub Tutorial
+page_title: Overview - Kendo UI Sales Hub Tutorial
 description: "Learn how to build the Kendo UI Sales Hub sample project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/kendo-saleshub-intro
 slug: overview_saleshubtutorial_aspnetmvc
@@ -11,7 +11,7 @@ position: 1
 
 This article is an overview of the Kendo UI Sales Hub sample project. The Kendo UI Sales Store includes two sub-projects: the Home and the Order Sales Hub page.
 
-![A screenshot of the Kendo UI Sales Hub Home page](images/kendo-saleshub-intro-home-screenshot.png)
+![{{ site.product_short }} A screenshot of the Kendo UI Sales Hub Home page](images/kendo-saleshub-intro-home-screenshot.png)
 
 ## Basic Concepts
 
@@ -52,7 +52,7 @@ The first time the application launches, it creates and seeds its database. Seed
 
 ### View the Solution Structure
 
-![The Solution Explorer structure](images/kendo-saleshub-intro-project-structure-screenshot.png)
+![{{ site.product_short }} The Solution Explorer structure](images/kendo-saleshub-intro-project-structure-screenshot.png)
 
 There are three main projects in the Kendo UI Sales Hub sample application, as listed below.
 

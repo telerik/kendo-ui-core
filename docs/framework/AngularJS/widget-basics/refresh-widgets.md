@@ -13,7 +13,12 @@ To create a widget that automatically updates when some of the scope variables c
 
 This option destroys the original widget and recreates it using the changed option. To use `k-options` and pass the same variable to `k-rebind` when watching multiple options for changes, use the `<ul kendo-menu k-options="menuOptions" k-rebind="menuOptions"> ... </ul>` configuration. This approach is not suitable for data-bound widgets because they are recreated each time their data is changed&mdash;for example, after paging the Grid.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
       <ul kendo-menu k-orientation="orientation" k-rebind="orientation">
         <li>Item 1</li>

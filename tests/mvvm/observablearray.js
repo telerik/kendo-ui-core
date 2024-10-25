@@ -68,7 +68,7 @@
             var viewModel = kendo.observable({ foo: [{}] });
 
             viewModel.foo.bind("change", function(e) {
-                assert.equal(e.index, 1)
+                assert.equal(e.index, 1);
             });
 
             viewModel.foo.push({});
@@ -80,7 +80,7 @@
             var viewModel = kendo.observable({ foo: [{}] });
 
             viewModel.foo.bind("change", function(e) {
-                assert.equal(e.items.length, 1)
+                assert.equal(e.items.length, 1);
             });
 
             viewModel.foo.push({});

@@ -2,7 +2,7 @@
 title: Show Checkbox in Root Nodes of the TreeList
 description: Display the checkbox only in the root nodes of the Kendo UI TreeList
 type: how-to
-page_title: Checkbox in Parent Nodes | Kendo UI TreeList
+page_title: Checkbox in Parent Nodes - Kendo UI TreeList
 slug: treelist-show-checkbox-parent-nodes
 position: 
 tags: checkbox, treelist, rootnode, root, parent, parentnode
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>TreeList for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® TreeList for jQuery</td>
 		</tr>
 	</tbody>
 </table>
@@ -116,7 +116,7 @@ How can I show the checkbox in the checkbox column of the Kendo UI TreeList for 
 ```
 
 ## See Also
-- [Show Checkbox Column](https://docs.telerik.com/kendo-ui/controls/data-management/treelist/how-to/show-a-checkbox-column)
+- [Show Checkbox Column](https://docs.telerik.com/kendo-ui/controls/treelist/how-to/show-a-checkbox-column)
 - [CSS visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp)
 - [columns.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/columns.template)
 - [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/events/databound)

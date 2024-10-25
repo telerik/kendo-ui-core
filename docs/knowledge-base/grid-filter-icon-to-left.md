@@ -1,8 +1,8 @@
 ---
 title: Move Filter Icons in the Grid to the Left
-description: An example on how to display the filter icon in the leftmost position of the Kendo UI Grid header.
+description: Learn how to display the filter icon in the leftmost position of the Kendo UI Grid header.
 type: how-to
-page_title: Display Filter Icon before the Title in the Header | Kendo UI Grid for jQuery
+page_title: Display Filter Icon before the Title in the Header - Kendo UI for jQuery Data Grid
 slug: grid-filter-icon-to-left
 previous_url: /knowledge-base/grid_filter_icon_to_left
 tags: Grid, Filter icon, Left position
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 
@@ -33,17 +33,12 @@ How can I display the Grid filter icon before the title?
 
 Due to the way the filter icon is positioned in the header, the filter icon receives the focus before the title because it is rendered in the DOM before the title. To change the position of the filter icon, use CSS.
 
-```dojo
+```
 	<style>
-	  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-		margin-left: -5px!important;
-		margin-right: 0!important;
-
-	  }
-
-	  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-		float: left!important;
-	  }
+	    .k-cell-inner{
+          display: flex !important;
+          flex-direction: row-reverse !important;
+        }
 	</style>
 ```
 
@@ -51,16 +46,11 @@ The following example demonstrates the full implementation of the suggested appr
 
 ```dojo
 <base href="https://demos.telerik.com/kendo-ui/grid/local-data-binding">
-  <style>
-      .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-        margin-left: -5px!important;
-        margin-right: 0!important;
-
-      }
-
-      .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-        float: left!important;
-      }
+    <style>
+        .k-cell-inner{
+          display: flex !important;
+          flex-direction: row-reverse !important;
+        }
     </style>
 
         <script src="../content/shared/js/people.js"></script>

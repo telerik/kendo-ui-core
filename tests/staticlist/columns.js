@@ -49,7 +49,7 @@
         it("each custom template is applied", function() {
             var list = new StaticList(element, {
                 columns: [
-                    { field: "name", template: "new #: name #" },
+                    { field: "name", template: ({ name }) => `new ${kendo.htmlEncode(name)}` },
                     { field: "id" }
                 ],
                 dataTextField: "name",

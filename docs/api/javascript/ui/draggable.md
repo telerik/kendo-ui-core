@@ -9,6 +9,8 @@ component: drag-and-drop
 
 # kendo.ui.Draggable
 
+Represents the Kendo UI Draggable widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### axis `String`*(default: null)*
@@ -52,6 +54,28 @@ If set to `true` the widget will auto-scroll the container when the mouse/finger
       $("#draggable").kendoDraggable({ hint: function(element) { return element.clone(); }, autoScroll: true });
     </script>
 
+    <style>
+      #draggable {
+        width: 50px;
+        height: 50px;
+        background-color: orange;
+        border: 2px solid green;
+      }
+    </style>
+
+### clickMoveClick `Boolean` *(default: false)*
+
+Determines whether the click move click interaction would be enabled as an alternative of the drag and drop move. By default the alternative is disabled.
+
+#### Example
+
+    <div id="draggable"></div>
+
+    <script>
+      $("#draggable").kendoDraggable({
+        clickMoveClick: true
+      });
+    </script>
     <style>
       #draggable {
         width: 50px;
@@ -399,6 +423,7 @@ Fired while dragging. The `drag` event represents a jQuery `mousemove` event and
           return element.clone();
         },
         drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("x: ", e.screenX, "y: ", e.screenY);
         }
       });
@@ -424,6 +449,7 @@ Fired while dragging. The `drag` event represents a jQuery `mousemove` event and
       });
 
       $("#draggable").data("kendoDraggable").bind("drag", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("x: ", e.screenX, "y: ", e.screenY);
       });
     </script>
@@ -461,6 +487,7 @@ The `dragcancel` event represents a jQuery `keyup` event and contains all the ev
           return element.clone();
         },
         dragcancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("'Esc' key pressed! Dragging is cancelled.");
         }
       });

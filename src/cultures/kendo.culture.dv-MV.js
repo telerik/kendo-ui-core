@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Rufiyaa",
+                name: "Maldivian Rufiyaa",
                 abbr: "MVR",
                 pattern: ["n $-","n $"],
                 decimals: 2,
@@ -59,5 +59,5 @@
                 firstDay: 0
             }
         }
-    }
-})(this);
+    };
+})();

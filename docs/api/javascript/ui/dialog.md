@@ -22,7 +22,7 @@ A collection of objects containing text, action and primary attributes used to s
         $("#dialog").kendoDialog({
           title: "Kendo Dialog Component",
           content: "This is your Kendo Dialog.",
-          actions: [{                         
+          actions: [{
               text: "OK",
               action: function(e){
                   // e.sender is a reference to the dialog widget object
@@ -48,7 +48,7 @@ The text to be shown in the action's button.
         $("#dialog").kendoDialog({
           title: "Kendo Dialog Component",
           content: "This is your Kendo Dialog.",
-          actions: [{             
+          actions: [{
               text: "OK",
           }]
         });
@@ -94,6 +94,31 @@ A boolean property indicating whether the action button will be decorated as pri
           }]
         });
     </script>
+
+### actions.cssClass `String`
+
+Adds a custom class to the action button.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [{
+              text: "OK",
+              primary: true,
+              cssClass: "myClass"
+          }]
+        });
+    </script>
+	
+	  <style>
+		  .myClass{
+			  background-color: green !important;
+		  }
+	  </style>
 
 ### animation `Boolean|Object`
 
@@ -232,6 +257,8 @@ Defines the open animation duration.
 
 Specifies the possible layout of the action buttons in the **Dialog**.
 
+Note: Stretched layout has no effect in browsers, like IE9, that do not support flexbox.
+
 Possible values are:
 
 * normal
@@ -282,6 +309,38 @@ Specifies the content of a **Dialog**.
       content: "<em>Dialog content</em>"
     });
     </script>
+
+#### Example - use a template to define the Dialog's content
+
+  <script id="template-dialog" type="text/x-kendo-template">
+    <div class="form-group">
+    <label>Label (Question)</label>
+    <textarea id="editor" rows="10" cols="30"></textarea>
+    </div>
+  </script>
+
+  <div id="dialog"></div>
+  <script>
+    $("#dialog").kendoDialog({
+      width: '450px',
+      title: 'Multiple Choice',
+      closable: false,
+      modal: false,
+      content: kendo.template($('#template-dialog').html()),
+      actions: [
+        { text: 'Cancel' },
+        {
+          text: 'Save',
+          primary: true,
+
+        }
+      ],
+      initOpen: function() {
+        $('#editor').kendoEditor();
+        $('#upImport').kendoUpload();
+      }
+    });
+  </script>
 
 ### height `Number | String`
 
@@ -452,6 +511,27 @@ Specifies whether the document should stop scrolling when modal dialog is opened
     });
     </script>
 
+### themeColor `String` *default: ""*
+
+The `themeColor` option controls the color that will be applied.
+
+The following values are available for the themeColor:
+
+- `primary`
+- `dark`
+- `light`
+- `none`
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      actions: ["Maximize"],
+      title: "Customer details"
+    });
+    </script>
+
 ### title `String|Boolean` *default: ""*
 
 The text in the dialog title bar. If `false`, the dialog will be displayed without a title bar.
@@ -539,12 +619,18 @@ Possible values are:
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
       content: "This is your Kendo Dialog.",
-      size: "wide"
+      size: "medium"
     });
     </script>
 
 ## Methods
 
+### center
+
+Centers the Dialog within the viewport.
+#### Returns
+
+`kendo.ui.Dialog` - Returns the Dialog object to support chaining. 
 ### close
 
 Closes a Dialog.
@@ -589,6 +675,7 @@ The content of the Dialog. Can be an HTML string or jQuery object.
       title: "Kendo Dialog Component",
     });
     var dialog = $("#dialog").data("kendoDialog");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dialog.content()); // logs "foo"
     </script>
 
@@ -613,10 +700,12 @@ Destroys the dialog and its modal overlay, if necessary. Removes the widget HTML
     <script>
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
-      content: "This is your Kendo Dialog.",
+      content: "The Dialog will be destroyed in a few seconds...",
     });
-    var dialog = $("#dialog").data("kendoDialog");
-    dialog.destroy();
+    setTimeout(function(){
+        var dialog = $("#dialog").data("kendoDialog");
+        dialog.destroy();
+    }, 1500)
     </script>
 
 ### open
@@ -638,6 +727,26 @@ Opens a Dialog and brings it on top of any other open Dialog or Window instances
     });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.open();
+    </script>
+
+### close
+
+Closes the Dialog.
+#### Example
+
+    <div id="dialog"></div>
+      <script>
+      $("#dialog").kendoDialog({
+        title: "Kendo Dialog Component",
+        content: "This is your Kendo Dialog.",
+        visible: true
+      });
+      var dialog = $("#dialog").data("kendoDialog");
+      
+      setTimeout(function(){
+        dialog.close();
+      },3000)
+      
     </script>
 
 ### title `String` *(optional)*

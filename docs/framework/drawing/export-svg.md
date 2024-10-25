@@ -1,6 +1,6 @@
 ---
 title: Exporting Drawings to SVG
-page_title: Exporting Drawings to SVG | Kendo UI Drawing Library
+page_title: Exporting Drawings to SVG - Kendo UI Drawing Library
 description: "Export drawings to SVG by using the Kendo UI Drawing library."
 slug: exportingtosvg_drawing
 position: 6
@@ -34,7 +34,7 @@ The SVG format is a text-based, resolution-independent image format. It is well-
 
 ## See Also
 
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 * [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
 * [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
 * [Exporting Drawings to Images]({% slug exportpng_kendoui_drawingapi %})

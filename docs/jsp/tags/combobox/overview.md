@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ComboBox JSP Tag
+page_title: Overview - ComboBox JSP Tag
 description: "Get started with the ComboBox JSP tag in Kendo UI."
 slug: overview_combobox_uiforjsp
 position: 1

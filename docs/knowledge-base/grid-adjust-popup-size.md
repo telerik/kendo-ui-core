@@ -1,8 +1,8 @@
 ---
 title: Change Size of Popup Editor
-description: An example on how to specify dimensions for the Kendo UI Grid popup editor.
+description: Learn how to specify dimensions for the Kendo UI Grid popup editor.
 type: how-to
-page_title: Change Popup Editor Dimensions | Kendo UI Grid for jQuery
+page_title: Change Popup Editor Dimensions - Kendo UI for jQuery Data Grid
 slug: grid-adjust-popup-size
 tags: grid, popup, edit, editor, window, size, width, height, dimensions
 ticketid: 1144949
@@ -15,11 +15,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.1026 version</td>
+  <td>Product Version</td>
+  <td>Created with the 2020.3.1021 version</td>
  </tr>
 </table>
 
@@ -101,16 +101,10 @@ How can I change the width and height of the popup editor window in the Grid?
                 { field: "ProductName", title: "Product Name" },
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
                 { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "popup"
         });
     });
-
-    function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 </script>
 ```

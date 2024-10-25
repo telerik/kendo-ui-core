@@ -1,8 +1,8 @@
 ---
 title: Swap Alternate and Background Colors on Every Second Child Grid
-description: An example on how to change the background and the alternate color for child grids in the Kendo UI Grid.
+description: Learn how to change the background and the alternate color for child grids in the Kendo UI Grid.
 type: how-to
-page_title: Change the Alt and Background Colors in Hierarchy Grids | Kendo UI Grid for jQuery
+page_title: Change the Alt and Background Colors in Hierarchy Grids - Kendo UI for jQuery Data Grid
 slug: swap-alt-background-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, alt color
 ticketid: 1114254
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-   <td>Progress Kendo UI version</td>
+   <td>Product Version</td>
    <td>Tested up to version 2017.2 504</td>
   </tr>
 </table>

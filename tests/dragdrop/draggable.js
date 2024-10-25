@@ -65,14 +65,16 @@
                 dragstart: function(e) {
                     e.preventDefault();
                     assert.isOk(true);
-                },
-                dragcancel: function() {
-                    assert.isOk(false);
                 }
             });
 
             trigger("mousedown", { pageX: 1, pageY: 1 });
             trigger("mousemove", { pageX: 10, pageY: 1 });
+
+            draggable.bind("dragcancel", () => {
+                assert.isOk(false);
+            });
+
             trigger("keyup", { keyCode: 27 });
         });
 
@@ -102,7 +104,7 @@
         });
 
         it("dragend event is raised when pressing escape", function() {
-            setup({ dragcancel: function() { assert.isOk(true) } });
+            setup({ dragcancel: function() { assert.isOk(true); } });
 
             trigger("mousedown", { pageX: 1, pageY: 1 });
             trigger("mousemove", { pageX: 10, pageY: 1 });

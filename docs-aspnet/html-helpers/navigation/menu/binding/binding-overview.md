@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI Menu HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI Menu component for {{ site.framework }}."
 previous_url: /helpers/navigation/menu/binding/overview
 slug: htmlhelpers_menu_databinding_aspnetcore
 position: 1
@@ -17,6 +17,10 @@ The supported data-binding approaches are:
 {% if site.mvc %}* [Sitemap binding]({% slug sitemapbinding_menu_aspnetmvc %}){% endif %}
 * [Model Binding]({% slug htmlhelpers_menu_modelbinding_aspnetcore %})
 * [Binding to Remote Data]({% slug htmlhelpers_menu_bindingremotedata_aspnetcore %})
+* [Custom Attributes Binding]({% slug custom-attributes-binding %})
+{% if site.core %}
+* [Razor Pages Binding]({% slug htmlhelpers_menu_razorpage_aspnetcore %})
+{% endif %}
 
 ## See Also
 

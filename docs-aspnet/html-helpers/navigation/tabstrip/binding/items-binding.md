@@ -21,20 +21,20 @@ The TabStrip enables you to manually define the properties of each item.
 
 1. Add a TabStrip.
 
-    ```Razor
-        @(Html.Kendo().TabStrip()
-            .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip.
-            .Items(items =>
-            {
-                items.Add().Text("Item 1"); // Add item with text "Item1".
-                items.Add().Text("Item 2"); // Add item with text "Item2".
-            })
-        )
-    ```
+```HtmlHelper
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip.
+        .Items(items =>
+        {
+             items.Add().Text("Item 1"); // Add item with text "Item1".
+            items.Add().Text("Item 2"); // Add item with text "Item2".
+        })
+    )
+```
 
 ## See Also
 
 * [Basic Usage of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip)
 * [Using the API of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip/api)
-* [TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TabStripBuilder)
+* [TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/tabstripbuilder)
 * [TabStrip Server-Side API](/api/tabstrip)

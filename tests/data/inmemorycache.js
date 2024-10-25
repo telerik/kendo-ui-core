@@ -9,11 +9,11 @@
             count++;
         }
         return count;
-    }
+    };
 
     describe("InMemoryCache", function() {
         beforeEach(function() {
-            cache = new Cache()
+            cache = new Cache();
         });
 
         it("find item with given key", function() {

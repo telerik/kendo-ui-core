@@ -2,7 +2,7 @@
 title: Change Resource for and Even Using ContextMenu
 description: An example of how to implement a Kendo UI ContextMenu, which allows the user to change an event resource in Kendo UI Scheduler Agenda view.
 type: how-to
-page_title: Change Resource for an Event with a ContextMenu | Kendo UI Scheduler for jQuery
+page_title: Change Resource for an Event with a ContextMenu - Kendo UI Scheduler for jQuery
 slug: scheduler-change-resource-for-event-using-contextmenu
 tags: kendo, scheduler, agenda-view, contextmenu, resources
 res_type: kb
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
@@ -35,8 +35,8 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
   <script>
     $(function() {
       var scheduler = $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/23"),
-        startTime: new Date("2013/6/23 07:00 AM"),
+        date: new Date("2022/6/23"),
+        startTime: new Date("2022/6/23 07:00 AM"),
         height: 600,
         views: [{ type: "agenda" }],
         timezone: "Etc/UTC",

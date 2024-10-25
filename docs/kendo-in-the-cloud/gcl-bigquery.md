@@ -1,6 +1,6 @@
 ---
 title: Google Cloud Big Query
-page_title: Google Cloud Big Query | Kendo UI in the Cloud
+page_title: Google Cloud Big Query - Kendo UI in the Cloud
 description: "Learn how to bind the Kendo UI Grid to data that is served through Google Cloud Big Query."
 slug: gcl-bigquery
 position: 4
@@ -25,19 +25,19 @@ To create AOth 2.0 credentials and add authorized JavaScript origin:
 
     **Figure 1: Navigating to the Credentials section**
 
-    ![Add new user](images/gcl-credentials.png)
+    ![Kendo UI for jQuery Add new user](images/gcl-credentials.png)
 
 1. Click the **Create Credentials** button and select **OAuth client ID**.
 
     **Figure 2: Creating OAuth client ID**
 
-    ![create OAuth client ID](images/gcl-auth.png)
+    ![Kendo UI for jQuery create OAuth client ID](images/gcl-auth.png)
 
 1. Select **Web Application** and add **Authorized JavaScript origins**. For the purposes of this sample project, add `runner.telerik.io` as authorized origin. `runner.telerik.io` is the domain of https://dojo.telerik.com/.
 
     **Figure 3: Adding runner.telerik.io as authorized origin**
 
-    ![create OAuth client ID](images/gcl-add-telerik.png)
+    ![Kendo UI for jQuery create OAuth client ID](images/gcl-add-telerik.png)
 
 ## Creating New DataSet and Table in BigQuery
 
@@ -45,11 +45,11 @@ For more information on how to create new DataSets and tables, refer to the arti
 
 **Figure 4: Schema of the Products Table in the KendoDS DataSet**
 
-    ![products table](images/gcl-table-schema.png)
+    ![Kendo UI for jQuery products table](images/gcl-table-schema.png)
 
 **Figure 5: Data of the Products Table in the KendoDS DataSet**
 
-    ![products table](images/gcl-table-data.png)
+    ![Kendo UI for jQuery products table](images/gcl-table-data.png)
 
 ## Configuring the Grid to Consume and Manipulate Available BigQuery Data
 
@@ -68,8 +68,7 @@ For more information on how to create the `client_id`, refer to the section on [
 <head>
     <meta charset="utf-8">
     <title>Kendo Grid BigQuery Integration</title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>

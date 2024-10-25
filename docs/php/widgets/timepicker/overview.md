@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TimePicker PHP Class
+page_title: Overview - TimePicker PHP Class
 description: "Get started with the TimePicker PHP class in Kendo UI."
 slug: overview_timepicker_uiforphp
 position: 1

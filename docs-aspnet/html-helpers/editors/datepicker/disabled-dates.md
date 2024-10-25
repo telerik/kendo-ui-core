@@ -20,23 +20,44 @@ For a complete example, refer to the [demo on disabling dates in the DatePicker]
 
 To disable dates by setting the days of the week, list the names of days that will be disabled.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("weekend-date-picker")
         .DisableDates(DayOfWeek.Saturday, DayOfWeek.Sunday)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker value="DateTime.Today" name="weekend-date-picker" disable-dates-handler="disableWeekend">
+    </kendo-datepicker>
+    <script>
+        function disableWeekend(date) {
+            if (date) {
+                var dayOfWeek = date.getDay();
+                var isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0); // 6 = Saturday, 0 = Sunday
+                return isWeekend;
+            }
+        }
+    </script>
+```
+{% endif %}
 
 ## Adding a Function
 
 To disable dates through using a function, set the return value for the date that will be disabled to `true`.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("national-date-picker")
         .DisableDates("disableDates")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datepicker value="new DateTime(2019,1,2)" name="national-date-picker" disable-dates-handler="disableDates">
+    </kendo-datepicker>
+```
+{% endif %}
 ```JavaScript
     <script>
         function disableDates(date) {

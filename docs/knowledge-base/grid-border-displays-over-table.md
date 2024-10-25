@@ -2,7 +2,7 @@
 title: Grid Border Displays over the Table
 description: The table of the Grid overflows the container and its border displays over the table.
 type: troubleshooting
-page_title: Grid Overflows and Its Border Is Displayed over the Table | Kendo UI Grid for jQuery
+page_title: Grid Overflows and Its Border Is Displayed over the Table - Kendo UI for jQuery Data Grid
 slug: grid-border-displays-over-table
 tags: grid, table, border, styling
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>all</td>
  </tr>
 </table>

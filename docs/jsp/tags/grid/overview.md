@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Grid JSP Tag
+page_title: Overview - Grid JSP Tag
 description: "Get started with the Grid JSP tag in Kendo UI."
 slug: overview_grid_uiforjsp
 position: 1

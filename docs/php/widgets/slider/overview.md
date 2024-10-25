@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Slider PHP Class
+page_title: Overview - Slider PHP Class
 description: "Get started with the Slider PHP class in Kendo UI."
 slug: overview_slider_uiforphp
 position: 1

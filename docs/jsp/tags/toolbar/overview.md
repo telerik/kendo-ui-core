@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ToolBar JSP Tag
+page_title: Overview - ToolBar JSP Tag
 description: "Get started with the ToolBar JSP tag in Kendo UI."
 slug: overview_toolbar_uiforjsp
 position: 1

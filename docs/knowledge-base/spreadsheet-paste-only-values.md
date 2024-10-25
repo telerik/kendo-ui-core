@@ -1,8 +1,8 @@
 ---
 title: Paste Only Values in a Spreadsheet
-description: An example on how to paste only values in the Kendo UI Spreadsheet.
+description: Learn how to paste only values in the Kendo UI Spreadsheet.
 type: how-to
-page_title: Paste Only Values | Kendo UI Spreadsheet for jQuery
+page_title: Paste Only Values - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-paste-only-values
 tags: spreadsheet, kendo, values-only, paste
 res_type: kb
@@ -14,7 +14,7 @@ component: spreadsheet
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
 </table>
 

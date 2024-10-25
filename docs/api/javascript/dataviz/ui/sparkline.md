@@ -163,7 +163,11 @@ The [template](/api/framework/kendo#methods-template) which renders the labels.
 The fields which can be used in the template are:
 
 * value - the category value
-* dataItem - the data item, in case a field has been specified
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+* index - the 0-based index of the current label
+* count - the total number of labels on the axis
 
 ### categoryAxis.labels.visible `Boolean`*(default: true)*
 
@@ -1564,21 +1568,21 @@ The background color of the label. Accepts a valid CSS color string, including h
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      categoryAxis: {
-        notesdata {
-          data: [{
-            value: 1,
-            label: {
-              background: "red"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3]
+        }],
+        categoryAxis: {
+          notesdata: {
+            data: [{
+              value: 1,
+              label: {
+                background: "red"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### categoryAxis.notes.data.label.border `Object`
@@ -2439,9 +2443,12 @@ The series base color. The supported values are:
              color: "#ff0000"
          }]
     });
+    </script>
 
 #### Example
 
+    <span id="sparkline"></span>
+    <script>
     $("#sparkline").kendoSparkline({
          series: [{
              type: "column",
@@ -2456,6 +2463,7 @@ The series base color. The supported values are:
              }
          }]
     });
+    </script>
 
 ### series.colorField `String`
 
@@ -3621,30 +3629,33 @@ Template variables:
 
 #### Example
 
-    $("#chart").kendoChart({
-         title: {
-             text: "Internet Users"
-         },
-         series: [{
-             name: "United States",
-             data: [67.96, 68.93, 75, 74, 78]
-         }, {
-             name: "World",
-             data: [15.7, 16.7, 20, 23.5, 26.6]
-         }],
-         categoryAxis: {
-             categories: [2005, 2006, 2007, 2008, 2009]
-         },
-         tooltip: {
-             visible: true,
-             shared: true,
-             sharedTemplate:
-                "#= category # </br>" +
-                "# for (var i = 0; i < points.length; i++) { #" +
-                    "#= points[i].series.name #: #= points[i].value # </br>" +
-                "# } #"
-         }
+    <div id="sparkline"></div>
+
+    <script>
+    $("#sparkline").kendoSparkline({
+      	chartArea: {
+          width: 300,
+          height: 200
+        },
+        type: "bar",
+      	categoryAxis: {
+          categories: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014]
+        },
+      	seriesDefaults: {
+          data: [
+            16, 17, 18, 19, 20, 21, 21, 22, 23, 22
+        	],
+          name: "value"
+        },
+        tooltip: {
+            shared: true,
+    			  sharedTemplate: "#= category # </br>" +
+    				"# for (var i = 0; i < points.length; i++) { #" +
+    				    "#= points[i].series.name #: #= points[i].value # </br>" +
+    				"# } #"
+        }
     });
+    </script>
 
 ### transitions `Boolean`*(default: false)*
 
@@ -5056,7 +5067,7 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       valueAxis: {
-        notesdata {
+        notesdata: {
           data: [{
             value: 1,
             label: {
@@ -5572,6 +5583,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var sparkline = $("#sparkline").data("kendoSparkline");
     var svg = sparkline.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -5875,13 +5887,35 @@ The point value represented as a percentage value. Available only for donut, pie
 
 ### seriesHover
 
-Fires when chart series are hovered.
+Fires when chart series are hovered. The data that is available when the event is fired is listed below.
 
 #### Example
 
-    function onSeriesHover(e) {
-        alert("Hovered value: " + e.value);
-    }
+    <h4>Climate control history</h4>
+    <span id="hum-log"></span>
+    <script>
+      function createSparklines() {
+        $("#hum-log").kendoSparkline({
+          type: "area",
+          data: [
+            71, 70, 69, 68, 65, 60, 55, 55, 50, 52,
+            73, 72, 72, 71, 68, 63, 57, 58, 53, 55,
+            63, 59, 61, 64, 58, 53, 48, 48, 45, 45,
+            63, 64, 63, 67, 58, 56, 53, 59, 51, 54
+          ],
+          tooltip: {
+            format: "{0} %"
+          },
+          seriesHover: onSeriesHover
+        });
+      }
+
+      function onSeriesHover(e) {
+        console.log("Hovered value: " + e.value);
+      }
+
+      $(document).ready(createSparklines);
+    </script>
 
 #### Event Data
 

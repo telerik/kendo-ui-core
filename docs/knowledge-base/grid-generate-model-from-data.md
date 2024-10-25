@@ -1,8 +1,8 @@
 ---
 title: Generate DataSource Model from Retrieved Data
-description: An example on how to generate the Model from the data that is returned by the server in a Kendo UI Grid.
+description: Learn how to generate the Model from the data that is returned by the server in a Kendo UI Grid.
 type: how-to
-page_title: Generate Model Dynamically | Kendo UI Grid for jQuery
+page_title: Generate Model Dynamically - Kendo UI for jQuery Data Grid
 slug: grid-generate-model-from-data
 tags: grid, data, model, dynamic, columns, generate
 res_type: kb
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

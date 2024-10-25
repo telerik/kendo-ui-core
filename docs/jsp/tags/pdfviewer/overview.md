@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PDFViewer JSP Tag
+page_title: Overview - PDFViewer JSP Tag
 description: "Get started with the PDFViewer JSP tag in Kendo UI."
 slug: overview_pdfviewer_uiforjsp
 position: 1

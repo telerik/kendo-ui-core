@@ -1,6 +1,6 @@
 ---
 title: Axes
-page_title: jQuery Chart Documentation | Axes | Kendo UI
+page_title: jQuery Chart Documentation - Axes
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its axes."
 slug: elements_kendoui_charts_widget
 ---
@@ -46,7 +46,7 @@ To clearly indicate the role of the axis, add an axis title.
         }]
     });
 
-![A chart with axis titles](../chart-axis-titles.png)
+![Kendo UI for jQuery Chart with axis titles](../chart-axis-titles.png)
 
 ## Setting the Plot Bands
 
@@ -69,7 +69,7 @@ You can configure each axis so that it displays bands with different colors for 
         }
     }]
 
-![A Chart with axis plot bands](../chart-plot-bands.png)
+![Kendo UI for jQuery Chart with axis plot bands](../chart-plot-bands.png)
 
 ## Applying Global Settings
 

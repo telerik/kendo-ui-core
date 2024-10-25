@@ -1,8 +1,8 @@
 ---
 title: Use Grid Edit Buttons with Icons Only and No Text
-description: An example on how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
+description: Learn how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
 type: how-to
-page_title: Use the Grid Edit Buttons only with Icons and without Text | Kendo UI Grid for jQuery
+page_title: Use the Grid Edit Buttons only with Icons and without Text - Kendo UI for jQuery Data Grid
 slug: grid-icon-only-buttons
 tags: grid, editing, buttons, kendo ui, icons
 ticketid: 663290
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.2.504</td>
  </tr>
 </table>
@@ -54,18 +54,18 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
 
     ```
       .k-grid .k-grid-toolbar .k-grid-add,
-      .k-grid tbody .k-grid-edit,
-      .k-grid tbody .k-grid-update,
-      .k-grid tbody .k-grid-cancel,
-      .k-grid tbody .k-grid-delete {
+      .k-grid tbody .k-grid-edit-command,
+      .k-grid tbody .k-grid-save-command,
+      .k-grid tbody .k-grid-cancel-command,
+      .k-grid tbody .k-grid-remove-command {
         min-width: 0;
       }
 
       .k-grid .k-grid-toolbar .k-grid-add .k-icon,
-      .k-grid tbody .k-grid-edit .k-icon,
+      .k-grid tbody .k-grid-edit-command .k-icon,
       .k-grid tbody .k-grid-update .k-icon,
       .k-grid tbody .k-grid-cancel .k-icon,
-      .k-grid tbody .k-grid-delete .k-icon {
+      .k-grid tbody .k-grid-remove-command .k-icon {
         margin: 0;
       }
     ```
@@ -75,18 +75,18 @@ The following example demonstrates the full implementation of the suggested appr
 ```dojo
     <style>
       .k-grid .k-grid-toolbar .k-grid-add,
-      .k-grid tbody .k-grid-edit,
+      .k-grid tbody .k-grid-edit-command,
       .k-grid tbody .k-grid-update,
       .k-grid tbody .k-grid-cancel,
-      .k-grid tbody .k-grid-delete {
+      .k-grid tbody .k-grid-remove-command {
         min-width: 0;
       }
 
       .k-grid .k-grid-toolbar .k-grid-add .k-icon,
-      .k-grid tbody .k-grid-edit .k-icon,
+      .k-grid tbody .k-grid-edit-command .k-icon,
       .k-grid tbody .k-grid-update .k-icon,
       .k-grid tbody .k-grid-cancel .k-icon,
-      .k-grid tbody .k-grid-delete .k-icon {
+      .k-grid tbody .k-grid-remove-command .k-icon {
         margin: 0;
       }
 

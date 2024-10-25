@@ -1,7 +1,8 @@
 /* JS for All Kendo UI Components Traditional Chinese (zh-TW) Language Pack | Written by IKKI | 2018-02-22 */
-(function ($, undefined) {
+(function($, undefined) {
 
     /* FlatColorPicker messages */
+
     if (kendo.ui.FlatColorPicker) {
         kendo.ui.FlatColorPicker.prototype.options.messages =
             $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
@@ -167,10 +168,6 @@
                 "import": "導入",
                 "print": "列印"
             });
-        kendo.ui.Editor.defaultTools.pdf.options.template.options =
-            $.extend(true, kendo.ui.Editor.defaultTools.pdf.options.template.options, {
-                "title": "匯出 PDF"
-            });
     }
 
     /* ImageBrowser messages */
@@ -208,7 +205,7 @@
                 "search": "搜索"
             });
     }
-    
+
     /* Filter messages */
     if (kendo.ui.Filter) {
         kendo.ui.Filter.prototype.options.messages =
@@ -473,14 +470,14 @@
                     "pdf": "匯出 PDF",
                     "save": "保存",
                     "select": "選擇",
-                    "update": "更新"
+                    "update": "更新",
+                    "search": "搜索..."
                 },
                 "editable": {
                     "cancelDelete": "取消刪除",
                     "confirmation": "你確定要刪除這條資料嗎？",
                     "confirmDelete": "確定刪除"
                 },
-                "search": "搜索...",
                 "noRecords": "無相關資料",
                 "expandCollapseColumnHeader": "...",
                 "groupHeader": "按 Ctrl + 空格 進行分組",
@@ -758,7 +755,7 @@
                 }
             });
     }
-    
+
     /* TimezoneEditor options */
     if (kendo.ui.TimezoneEditor) {
         kendo.ui.TimezoneEditor.prototype.options =
@@ -842,7 +839,7 @@
                 }
             });
     }
-    
+
     if (kendo.ui.DayView) {
         kendo.ui.DayView.prototype.options.messages =
             $.extend(true, kendo.ui.DayView.prototype.options.messages, {
@@ -972,7 +969,7 @@
                 "alignmentDialog": {
                     "title": "對齊",
                     "buttons": {
-                        "justtifyLeft": "左對齊",
+                        "justifyLeft": "左對齊",
                         "justifyCenter": "水準居中",
                         "justifyRight": "右對齊",
                         "justifyFull": "兩端對齊",
@@ -1190,10 +1187,10 @@
                         "doesnotmatch": "文本不等於"
                     },
                     "date": {
-                        "eq":  "日期等於",
+                        "eq": "日期等於",
                         "neq": "日期不等於",
-                        "lt":  "日期早於",
-                        "gt":  "日期晚於"
+                        "lt": "日期早於",
+                        "gt": "日期晚於"
                     },
                     "number": {
                         "eq": "數字等於",
@@ -1226,7 +1223,7 @@
                 "addRowBelow": "在下麵插入行",
                 "alignment": "對齊",
                 "alignmentButtons": {
-                    "justtifyLeft": "左對齊",
+                    "justifyLeft": "左對齊",
                     "justifyCenter": "水準居中",
                     "justifyRight": "右對齊",
                     "justifyFull": "兩端對齊",
@@ -1332,7 +1329,7 @@
                 }
             });
     }
-    
+
     if (kendo.spreadsheet && kendo.spreadsheet.messages.workbook) {
         kendo.spreadsheet.messages.workbook =
             $.extend(true, kendo.spreadsheet.messages.workbook, {
@@ -1365,7 +1362,7 @@
                 "dragHandleTitle": "拖動"
             });
     }
-    
+
     /* RangeSlider options */
     if (kendo.ui.RangeSlider) {
         kendo.ui.RangeSlider.prototype.options =
@@ -1484,7 +1481,7 @@
                 "loading": "載入中..."
             });
     }
-    
+
     /* VirtualList options */
     if (kendo.ui.VirtualList) {
         kendo.ui.VirtualList.prototype.options =
@@ -1508,7 +1505,7 @@
                 "weekColumnHeader": "週"
             });
     }
-    
+
     /* MultiViewCalendar messages */
     if (kendo.ui.MultiViewCalendar) {
         kendo.ui.MultiViewCalendar.prototype.options.messages =
@@ -1585,7 +1582,7 @@
                 "placeholder": "請輸入..."
             });
     }
-    
+
     if (kendo.chat.ChatView) {
         kendo.chat.ChatView.prototype.options.messages =
             $.extend(true, kendo.chat.ChatView.prototype.options.messages, {
@@ -1603,7 +1600,7 @@
                 "unchecked": "關"
             });
     }
-    
+
     /* List messages */
     if (kendo.ui.List) {
         kendo.ui.List.prototype.options.messages =
@@ -1758,54 +1755,6 @@
                         "of": " / "
                     }
                 }
-            });
-    }
-
-    /* Mobile Messages ------------------------------ */
-
-    /* Mobile Scroller messages */
-    if (kendo.mobile.ui.Scroller) {
-        kendo.mobile.ui.Scroller.prototype.options.messages =
-            $.extend(true, kendo.mobile.ui.Scroller.prototype.options.messages, {
-                "pullTemplate": "下拉刷新",
-                "releaseTemplate": "釋放刷新",
-                "refreshTemplate": "刷新中..."
-            });
-    }
-
-    /* Mobile ListView messages */
-    if (kendo.mobile.ui.ListView) {
-        kendo.mobile.ui.ListView.prototype.options.messages =
-            $.extend(true, kendo.mobile.ui.ListView.prototype.options.messages, {
-                "loadMoreText": "點擊載入更多",
-                "pullTemplate": "下拉刷新",
-                "releaseTemplate": "釋放刷新",
-                "refreshTemplate": "刷新中..."
-            });
-    }
-    
-    /* Mobile Loader options */
-    if (kendo.mobile.ui.Loader) {
-        kendo.mobile.ui.Loader.prototype.options =
-            $.extend(true, kendo.mobile.ui.Loader.prototype.options, {
-                "loading": "<h1>載入中...</h1>"
-            });
-    }
-
-    /* Mobile Pane options */
-    if (kendo.mobile.ui.Pane) {
-        kendo.mobile.ui.Pane.prototype.options =
-            $.extend(true, kendo.mobile.ui.Pane.prototype.options, {
-                "loading": "<h1>載入中...</h1>"
-            });
-    }
-
-    /* Mobile Switch options */
-    if (kendo.mobile.ui.Switch) {
-        kendo.mobile.ui.Switch.prototype.options =
-            $.extend(true, kendo.mobile.ui.Switch.prototype.options, {
-                "onLabel": "開",
-                "offLabel": "關"
             });
     }
 

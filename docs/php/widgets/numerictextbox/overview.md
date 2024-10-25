@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | NumericTextBox PHP Class
+page_title: Overview - NumericTextBox PHP Class
 description: "Get started with the NumericTextBox PHP class in Kendo UI."
 slug: overview_numerictextbox_uiforphp
 position: 1

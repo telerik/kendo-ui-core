@@ -9,13 +9,23 @@ position: 4
 
 # Data Source Integration
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+>For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
+
 Even though you do not have to always create a `DataSource` object, most Kendo UI widgets require it.
 
 ## Updating the Data Source
 
 The following example contains static local data and demonstrates how to try to update the data source. When you select an item in the Grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the Grid updates.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
          k-data-source="gridData"
@@ -61,7 +71,12 @@ However, if you click the **UPDATE FROM CODE** button, nothing appears to happen
 
 **Solution** Create and place in a scope the data source object yourself. Only the `controller` changes while the markup is the same. Use `kendo.data.ObservableArray` to update the data source.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
          k-data-source="gridData"
@@ -107,8 +122,6 @@ The recommended way to update the object is to use the `set` method of the [`Obs
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
-* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
-* [How to Load View in Window]({% slug window_service_angularjs_directives %})
-* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
+
+

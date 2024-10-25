@@ -1,6 +1,6 @@
 ---
 title: Create the Social Stats Page
-page_title: Create the Social Stats Page | Music Store Dashboard Tutorial
+page_title: Create the Social Stats Page - Music Store Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store Dashboard Social Stats page by using Telerik UI for ASP.NET MVC."
 slug: buildsocialstats_muscistoredashboard_aspnetmvc
 position: 5
@@ -8,7 +8,7 @@ position: 5
 
 # Create the Social Stats Page
 
-![A snapshot of the Kendo UI Music Store Social Networking page](images/social-overview.png)
+![{{ site.product_short }} A snapshot of the Kendo UI Music Store Social Networking page](images/social-overview.png)
 
 The **Social Stats** page contains various views of social networking data taken from the Kendo UI Music Store. This includes Facebook Likes, Twitter tweets, Google Plus pluses, and Pintrest pins. The different social networks can be selected to show their data in the main graph view, potentially combining the views and adding axes to the graph.
 
@@ -35,7 +35,7 @@ The chart itself is defined as a Kendo UI Chart in the JavaScript with some spec
 
 Note the `buildSocialStatsSeries` and `buildSocialStatsValueAxis` functions. These define which data views appear in the chart and their styles. It is these functions that perform the addition and removal of the dynamic content, and so are called when the chart is created and also whenever the user selects or deselects one of the social networks through the interactive elements located below the chart.
 
-![A snapshot of the social tiles](images/social-tiles.png)
+![{{ site.product_short }} A snapshot of the social tiles](images/social-tiles.png)
 
 These tiles are constructed by using standard declarative markup in HTML and JavaScript events. The following example demonstrates the HTML.
 

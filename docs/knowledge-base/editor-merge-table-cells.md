@@ -1,8 +1,8 @@
 ---
 title: Merge Table Cells in the Editor
-description: An example on how to merge table cells in the Kendo UI Editor.
+description: Learn how to merge table cells in the Kendo UI Editor.
 type: how-to
-page_title: Merge Table Cells | Kendo UI Editor for jQuery
+page_title: Merge Table Cells - Kendo UI Editor for jQuery
 slug: editor-merge-table-cells
 tags: editor, table, merge, cells
 res_type: kb
@@ -14,11 +14,11 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
-  <td>Created with the 2019.1.220 version</td>
+  <td>Product Version</td>
+  <td>2023.1.315</td>
  </tr>
 </table>
 
@@ -39,7 +39,7 @@ Register two new custom tools that merge cells horizontally and vertically.
                 exec: function () {
                     var range = this.lockRange(true),
                         currentTd = kendo.ui.editor.Dom.closest(range.endContainer, "td"),
-                        columnIndex = kendo.ui.editor.Dom.findNodeIndex(currentTd);
+                        columnIndex = kendo.ui.editor.Dom.findNodeIndex(currentTd),
                         nextTd = $(currentTd).parent().next().children()[columnIndex];
 
                     if(currentTd && nextTd) {
@@ -80,7 +80,8 @@ Register two new custom tools that merge cells horizontally and vertically.
                     } else {
                         return new MergeRowCellsCommand($.extend(commandArguments, { }));
                     }
-                }
+                },
+                update: $.noop
             });
 
             kendo.ui.editor.EditorUtils.registerTool(
@@ -88,10 +89,11 @@ Register two new custom tools that merge cells horizontally and vertically.
                 new mergeTool({
                     type: "column",
                     action: "merge",
-                    template: new kendo.ui.editor.ToolTemplate({
-                        template: kendo.ui.editor.EditorUtils.buttonTemplate,
-                        title: "Merge Next Column"
-                    })
+                    ui: {
+                        attributes: {
+                            title: "Merge Next Column"
+                        }
+                    }
                 })
             );
 
@@ -100,15 +102,13 @@ Register two new custom tools that merge cells horizontally and vertically.
                 new mergeTool({
                     type: "row",
                     action: "merge",
-                    template: new kendo.ui.editor.ToolTemplate({
-                        template: kendo.ui.editor.EditorUtils.buttonTemplate,
-                        title: "Merge Next Row"
-                    })
+                    ui: {
+                        attributes: {
+                            title: "Merge Next Row"
+                        }
+                    }
                 })
             );
-        </script>
-
-        <script>
             $("#editor").kendoEditor({
                 tools: [
                     "tableWizard",

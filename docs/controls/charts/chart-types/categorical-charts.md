@@ -1,6 +1,6 @@
 ---
 title: Categorical Charts
-page_title: jQuery Chart Documentation | Categorical Charts | Kendo UI
+page_title: jQuery Chart Documentation - Categorical Charts
 description: "Learn the basics when working with the categorical charts in the Telerik UI for ASP.NET Core suite."
 slug: htmlhelpers_categoricalcharts_aspnetcore
 position: 2
@@ -136,7 +136,7 @@ The following example demonstrates how to define the `temperature` and `humidity
 
 The previous example results in the following output.
 
-![A chart with multiple axes](../chart-multiple-axes.png)
+![Kendo UI for jQuery Chart with multiple axes](../chart-multiple-axes.png)
 
 ## Arranging the Value Axes
 
@@ -150,7 +150,7 @@ You can also control the arrangement of the value axes by specifying the values 
 
 The previous example results in the following output.
 
-![A chart with customized axis-crossing values](../chart-axis-crossing-values.png)
+![Kendo UI for jQuery Chart with customized axis-crossing values](../chart-axis-crossing-values.png)
 
 ## See Also
 

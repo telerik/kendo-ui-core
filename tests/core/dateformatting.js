@@ -77,7 +77,7 @@
         it('supports day names', function() {
             var d = date(2000, 1, 1);
 
-            assert.equal(toString(d, "MM/dddd/yyyy"), '01/Saturday/2000')
+            assert.equal(toString(d, "MM/dddd/yyyy"), '01/Saturday/2000');
         });
 
         it('supports abbr month names', function() {
@@ -102,7 +102,7 @@
 
         it('supports h after 12', function() {
             var d = date(2000, 1, 1, 13);
-            assert.equal(toString(d, "h"), '1')
+            assert.equal(toString(d, "h"), '1');
         });
 
         it('supports hh before 12', function() {
@@ -177,11 +177,11 @@
 
         it('supports H', function() {
             var d = date(2000, 1, 1, 1);
-            assert.equal(toString(d, "H"), '1')
+            assert.equal(toString(d, "H"), '1');
         });
 
         it('supports HH less than 10', function() {
-            var d = date(2000, 1, 1, 9)
+            var d = date(2000, 1, 1, 9);
             assert.equal(toString(d, "HH"), '09');
         });
 
@@ -191,7 +191,7 @@
         });
 
         it('supports quote literals', function() {
-            var d = date(2000, 1, 1, 9)
+            var d = date(2000, 1, 1, 9);
             assert.equal(toString(d, "\"literal\""), 'literal');
         });
 
@@ -207,36 +207,36 @@
 
         it('supports m toString', function() {
             var d = date(2000, 12, 30, 9, 1);
-            assert.equal(toString(d, "m"), 'December 30')
+            assert.equal(toString(d, "m"), 'December 30');
         });
 
         it('supports M toString', function() {
-            var d = date(2000, 12, 30, 9, 1)
+            var d = date(2000, 12, 30, 9, 1);
             assert.equal(toString(d, "M"), 'December 30');
         });
 
         it('supports s toString', function() {
-            var d = date(2000, 12, 30, 9, 1)
+            var d = date(2000, 12, 30, 9, 1);
             assert.equal(toString(d, "s"), '2000-12-30T09:01:00');
         });
 
         it('supports u toString', function() {
             var d = date(2000, 12, 30, 9, 1);
-            assert.equal(toString(d, "u"), '2000-12-30 09:01:00Z')
+            assert.equal(toString(d, "u"), '2000-12-30 09:01:00Z');
         });
 
         it('supports y toString', function() {
-            var d = date(2000, 12, 30, 9, 1)
-            assert.equal(toString(d, "y"), 'December, 2000')
+            var d = date(2000, 12, 30, 9, 1);
+            assert.equal(toString(d, "y"), 'December, 2000');
         });
 
         it('supports Y toString', function() {
-            var d = date(2000, 12, 30, 9, 1)
+            var d = date(2000, 12, 30, 9, 1);
             assert.equal(toString(d, "Y"), 'December, 2000');
         });
 
         it('honors specific culture', function() {
-            var d = date(2000, 5, 30, 9, 1)
+            var d = date(2000, 5, 30, 9, 1);
             assert.equal(toString(d, "Y", "de-DE"), 'Mai 2000');
         });
 

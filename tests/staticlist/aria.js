@@ -1,5 +1,6 @@
 (function() {
     var StaticList = kendo.ui.StaticList,
+        encode = kendo.htmlEncode,
         input;
 
     describe("kendo.ui.StaticList Aria", function() {
@@ -18,7 +19,7 @@
         it("StaticList renders aria-selected", function() {
             var staticlist = new StaticList(element, {
                 dataSource: ["Item", "Item2"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["Item"]
             });
 
@@ -30,7 +31,7 @@
         it("StaticList renders aria-selected false", function() {
             var staticlist = new StaticList(element, {
                 dataSource: ["Item", "Item2"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             staticlist.dataSource.read();

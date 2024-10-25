@@ -82,15 +82,15 @@ The margin of the gauge area.
 
     <div id="gauge"></div>
     <script>
-     $("#gauge").kendoRadialGauge({
-         pointer: [{
-            value: 20
-            gaugeArea:{
-                margin:50
-         }
-      }]
-     });
-</script>
+        $("#gauge").kendoRadialGauge({
+            pointer: [{
+                value: 20,
+                gaugeArea:{
+                    margin:50
+                }
+            }]
+        });
+    </script>
 
 ### gaugeArea.margin.top `Number`
 
@@ -293,7 +293,7 @@ The font style of the labels.
 
 ### scale.labels.format `String`
 
-The format of the labels.
+The [`format`](/globalization/intl/numberformatting) of the labels.
 
 #### Example
 
@@ -510,9 +510,47 @@ The default color for the ranges.
 
 The width of the range indicators.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+      $("#gauge").kendoRadialGauge({
+        pointer: {
+          value: 50
+        },
+        scale: {
+          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+          }],   
+          rangeSize: 20
+        }
+      });
+    </script>
+
 ### scale.rangeDistance `Number`
 
 The distance from the range indicators to the ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+      $("#gauge").kendoRadialGauge({
+        pointer: {
+          value: 50
+        },
+        scale: {
+          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+          }],
+          rangeDistance: 10
+        }
+      });
+    </script>
 
 ### scale.reverse `Boolean`*(default: false)*
 
@@ -523,14 +561,16 @@ Reverses the scale direction - values are increase anticlockwise.
  The start angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
-### theme `String`
+### theme `String` *(default: "sass")*
 
-The gauge theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+The gauge theme. With versions prior to R1 2023 this can be either the respective LESS theme from the list below or "sass".
+When set to "sass" the gauge will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
 The supported values are:
 
-* "sass" - special value, see notes
+* "sass"
 * "black"
 * "blueopal"
 * "bootstrap"
@@ -837,6 +877,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var gauge = $("#gauge").data("kendoRadialGauge");
     var svg = gauge.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 

@@ -1,8 +1,9 @@
-(function(f, define){
-    define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist" ], f);
-})(function(){
+import "./kendo.list.js";
+import "./kendo.mobile.scroller.js";
+import "./kendo.virtuallist.js";
+import { addInputPrefixSuffixContainers } from "./utils/prefix-suffix-containers.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "autocomplete",
     name: "AutoComplete",
     category: "web",
@@ -21,8 +22,9 @@ var __meta__ = { // jshint ignore:line
     } ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
+        encode = kendo.htmlEncode,
         support = kendo.support,
         caret = kendo.caret,
         activeElement = kendo._activeElement,
@@ -34,17 +36,16 @@ var __meta__ = { // jshint ignore:line
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         CHANGE = "change",
-        DEFAULT = "k-state-default",
         DISABLED = "disabled",
         READONLY = "readonly",
-        FOCUSED = "k-state-focused",
-        SELECTED = "k-state-selected",
-        STATEDISABLED = "k-state-disabled",
+        FOCUSED = "k-focus",
+        SELECTED = "k-selected",
+        HIDDENCLASS = "k-hidden",
+        STATEDISABLED = "k-disabled",
         AUTOCOMPLETEVALUE = "off",
-        HOVER = "k-state-hover",
+        HOVER = "k-hover",
         ns = ".kendoAutoComplete",
-        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-        proxy = $.proxy;
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns;
 
     function indexOfWordAtCaret(caretIdx, text, separator) {
         return separator ? text.substring(0, caretIdx).split(separator).length - 1 : 0;
@@ -67,11 +68,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     var AutoComplete = List.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this, wrapper, disabled;
 
             that.ns = ns;
-            options = $.isArray(options) ? { dataSource: options} : options;
+            options = Array.isArray(options) ? { dataSource: options } : options;
 
             List.fn.init.call(that, element, options);
 
@@ -84,7 +85,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._wrapper();
-            that._loader();
             that._clearButton();
 
             that._dataSource();
@@ -96,18 +96,22 @@ var __meta__ = { // jshint ignore:line
             that._popup();
 
             element
-                .addClass("k-input")
-                .on("keydown" + ns, proxy(that._keydown, that))
-                .on("keypress" + ns, proxy(that._keypress, that))
-                .on("input" + ns, proxy(that._search, that))
-                .on("paste" + ns, proxy(that._search, that))
-                .on("focus" + ns, function () {
+                .addClass("k-input-inner")
+                .on("keydown" + ns, that._keydown.bind(that))
+                .on("keypress" + ns, that._keypress.bind(that))
+                .on("input" + ns, that._search.bind(that))
+                .on("paste" + ns, that._search.bind(that))
+                .on("focus" + ns, function() {
                     that._prev = that._accessor();
                     that._oldText = that._prev;
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
-                .on("focusout" + ns, function () {
+                .on("focusout" + ns, function(ev) {
+                    if (that.filterInput && ev.relatedTarget === that.filterInput[0]) {
+                        return;
+                    }
+
                     that._change();
                     that._placeholder();
                     that.close();
@@ -115,20 +119,15 @@ var __meta__ = { // jshint ignore:line
                 })
                 .attr({
                     autocomplete: AUTOCOMPLETEVALUE,
-                    role: "textbox",
-                    "aria-haspopup": true
+                    role: "combobox",
+                    "aria-expanded": false
                 });
 
-            that._clear.on("click" + ns + " touchend" + ns, proxy(that._clearValue, that));
+            that._clear.on("click" + ns + " touchend" + ns, that._clearValue.bind(that));
+            that._clear.on("mousedown" + ns, that._clearValueMouseDownHandler.bind(that));
             that._enable();
 
             that._old = that._accessor();
-
-            if (element[0].id) {
-                element.attr("aria-owns", that.ul[0].id);
-            }
-
-            that._aria();
 
             that._placeholder();
 
@@ -142,10 +141,18 @@ var __meta__ = { // jshint ignore:line
 
             that.listView.bind("click", function(e) { e.preventDefault(); });
 
-            that._resetFocusItemHandler = $.proxy(that._resetFocusItem, that);
+            that._resetFocusItemHandler = that._resetFocusItem.bind(that);
+            addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options, prefixInsertBefore: that._inputValuesContainer, suffixInsertAfter: options.clearButton ? that._clear : that.element });
 
             kendo.notify(that);
             that._toggleCloseVisibility();
+            that._applyCssClasses();
+
+            if (options.label) {
+                that._label();
+            }
+
+            that._aria();
         },
 
         options: {
@@ -153,8 +160,14 @@ var __meta__ = { // jshint ignore:line
             enabled: true,
             suggest: false,
             template: "",
-            groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#",
+            groupTemplate: (data) => encode(data),
+            fixedGroupTemplate: (data) => encode(data),
+            prefixOptions: {
+                separator: true
+            },
+            suffixOptions: {
+                separator: true
+            },
             dataTextField: "",
             minLength: 1,
             enforceMinLength: false,
@@ -170,7 +183,60 @@ var __meta__ = { // jshint ignore:line
             value: null,
             clearButton: true,
             autoWidth: false,
-            popup: null
+            popup: null,
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium",
+            label: null,
+        },
+
+        _clearValueMouseDownHandler: function(ev) {
+            var that = this;
+
+            if (ev && ev.currentTarget && ev.currentTarget.classList.contains('k-clear-value')) {
+                that._clearValueTrigger = true;
+            } else {
+                that._clearValueTrigger = false;
+            }
+        },
+
+        _onActionSheetCreate: function() {
+            var that = this;
+
+            if (that.filterInput) {
+                that.filterInput
+                    .on("keydown" + ns, that._keydown.bind(that))
+                    .on("keypress" + ns, that._keypress.bind(that))
+                    .on("input" + ns, that._search.bind(that))
+                    .on("paste" + ns, that._search.bind(that))
+                    .attr({
+                        autocomplete: AUTOCOMPLETEVALUE,
+                        role: "combobox",
+                        "aria-expanded": false
+                    });
+
+                that.popup.bind("activate", () => {
+                    that.filterInput.val(that.element.val());
+                    that.filterInput.trigger("focus");
+                });
+
+                that.popup.bind("deactivate", () => {
+                    that.element.trigger("focus");
+                });
+            }
+        },
+
+        _onCloseButtonPressed: function() {
+            var that = this;
+
+            if (that.filterInput && activeElement() === that.filterInput[0]) {
+                that.element.val(that.filterInput.val());
+            }
+        },
+
+        _popup: function() {
+            List.fn._popup.call(this);
+            this.popup.element.addClass("k-autocomplete-popup");
         },
 
         _dataSource: function() {
@@ -179,8 +245,8 @@ var __meta__ = { // jshint ignore:line
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._progressHandler = proxy(that._showBusy, that);
-                that._errorHandler = proxy(that._hideBusy, that);
+                that._progressHandler = that._showBusy;
+                that._errorHandler = that._hideBusy;
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
@@ -236,27 +302,28 @@ var __meta__ = { // jshint ignore:line
 
             if (!readonly && !disable) {
                 wrapper
-                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
+                element.prop(DISABLED, false)
+                       .prop(READONLY, false)
                        .attr(ARIA_DISABLED, false)
                        .attr(ARIA_READONLY, false);
             } else {
                 wrapper
-                    .addClass(disable ? STATEDISABLED : DEFAULT)
-                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+                    .addClass(disable ? STATEDISABLED : "")
+                    .removeClass(disable ? "" : STATEDISABLED);
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
                        .attr(ARIA_DISABLED, disable)
                        .attr(ARIA_READONLY, readonly);
             }
+
+            that._toggleCloseVisibility();
         },
 
-        close: function () {
+        close: function() {
             var that = this;
             var current = that.listView.focus();
 
@@ -265,6 +332,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.popup.close();
+            that._deactivateItem();
         },
 
         destroy: function() {
@@ -274,6 +342,10 @@ var __meta__ = { // jshint ignore:line
             that._clear.off(ns);
             that.wrapper.off(ns);
 
+            if (that.filterInput) {
+                that.filterInput.off(ns);
+            }
+
             List.fn.destroy.call(that);
         },
 
@@ -281,24 +353,25 @@ var __meta__ = { // jshint ignore:line
             this.listView.refresh();
         },
 
-        select: function (li) {
+        select: function(li) {
             this._select(li);
         },
 
-        search: function (word) {
+        search: function(word) {
             var that = this,
             options = that.options,
             ignoreCase = options.ignoreCase,
             separator = that._separator(),
             length,
-            accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
+            accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering,
+            element = that.filterInput && activeElement() === that.filterInput[0] ? that.filterInput : that.element;
 
             word = word || that._accessor();
 
             clearTimeout(that._typingTimeout);
 
             if (separator) {
-                word = wordAtCaret(caret(that.element)[0], word, separator);
+                word = wordAtCaret(caret(element)[0], word, separator);
             }
 
             length = word.length;
@@ -317,15 +390,16 @@ var __meta__ = { // jshint ignore:line
                     ignoreCase: ignoreCase
                 });
 
-                that.one("close", $.proxy(that._unifySeparators, that));
+                that.one("close", that._unifySeparators.bind(that));
             }
             that._toggleCloseVisibility();
         },
 
-        suggest: function (word) {
+        suggest: function(word) {
             var that = this,
                 key = that._last,
                 value = that._accessor(),
+                currentValue = that.value(),
                 element = that.element[0],
                 caretIdx = caret(element)[0],
                 separator = that._separator(),
@@ -354,8 +428,8 @@ var __meta__ = { // jshint ignore:line
                 caretIdx = (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()).indexOf(accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) + 1;
             }
 
-            idx = value.substring(0, caretIdx).lastIndexOf(separator);
-            idx = idx > -1 ? caretIdx - (idx + separator.length) : caretIdx;
+            idx = value.substring(0, caretIdx).lastIndexOf(that._defaultSeparator());
+            idx = idx > -1 ? caretIdx - (idx + that._defaultSeparator().length) : caretIdx;
             value = words[wordIndex].substring(0, idx);
 
             if (word) {
@@ -377,14 +451,27 @@ var __meta__ = { // jshint ignore:line
 
             words[wordIndex] = value;
 
-            that._accessor(words.join(separator || ""));
+            if (typeof that.options.separator == 'object' && that.options.separator != null) {
+                if (currentValue.length > 1) {
+                    let lastSeparator = [...currentValue.matchAll(separator.source)].pop();
+                    if (lastSeparator) {
+                        that._accessor(words.slice(0, -1).join(that._defaultSeparator() || "") + lastSeparator + words[words.length - 1]);
+                    } else {
+                        that._accessor(words.slice(0, -1).join(that._defaultSeparator() || ""));
+                    }
+                } else {
+                  that._accessor(words.join(this._defaultSeparator() || ""));
+                }
+            } else {
+                that._accessor(words.join(separator || ""));
+            }
 
             if (element === activeElement()) {
                 caret(element, caretIdx, selectionEnd);
             }
         },
 
-        value: function (value) {
+        value: function(value) {
             if (value !== undefined) {
                 this.listView.value(value);
 
@@ -395,6 +482,7 @@ var __meta__ = { // jshint ignore:line
                 return this._accessor();
             }
             this._toggleCloseVisibility();
+            this._refreshFloatingLabel();
         },
 
         _click: function(e) {
@@ -421,14 +509,18 @@ var __meta__ = { // jshint ignore:line
 
         _clearText: $.noop,
 
-        _resetFocusItem: function() {
+        _highlightFirst: function() {
             var index = this.options.highlightFirst ? 0 : -1;
 
+            this.listView.focus(index);
+        },
+
+        _resetFocusItem: function() {
             if (this.options.virtual) {
                 this.listView.scrollTo(0);
             }
 
-            this.listView.focus(index);
+            this._highlightFirst();
         },
 
         _listBound: function() {
@@ -437,8 +529,8 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var data = that.dataSource.flatView();
             var length = data.length;
-            var groupsLength = that.dataSource._group.length;
-            var isActive = that.element[0] === activeElement();
+            var groupsLength = that.dataSource._group ? that.dataSource._group.length : 0;
+            var isActive = that.element[0] === activeElement() || that.filterInput && that.filterInput[0] === activeElement();
             var action;
 
             that._renderFooter();
@@ -454,6 +546,8 @@ var __meta__ = { // jshint ignore:line
                 if (options.suggest && isActive && that._inputValue()) {
                     that.suggest(data[0]);
                 }
+
+                that._highlightFirst();
             }
 
             if (that._open) {
@@ -483,7 +577,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._hideBusy();
-            that._makeUnselectable();
 
             that.trigger("dataBound");
         },
@@ -532,7 +625,7 @@ var __meta__ = { // jshint ignore:line
             this._inputValue(text);
             this._accessor(value);
 
-            this._old = this.oldText =  this._accessor();
+            this._old = this.oldText = this._accessor();
 
             this.listView.setValue(value);
             this._placeholder();
@@ -545,16 +638,21 @@ var __meta__ = { // jshint ignore:line
 
             var valueUpdated = trigger && !that._typing;
             var itemSelected = that._oldText !== value;
+            var clearValueTrigger = that._clearValueTrigger;
 
             that._old = value;
             that._oldText = value;
 
-            if (valueUpdated || itemSelected) {
+            if (that.filterInput && activeElement() === that.filterInput[0]) {
+                that.element.val(that.filterInput.val());
+            }
+
+            if ((valueUpdated || itemSelected) && !clearValueTrigger) {
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
 
-            if (trigger) {
+            if (trigger && !clearValueTrigger) {
                 that.trigger(CHANGE);
             }
 
@@ -562,9 +660,9 @@ var __meta__ = { // jshint ignore:line
             that._toggleCloseVisibility();
         },
 
-        _accessor: function (value) {
+        _accessor: function(value) {
             var that = this,
-                element = that.element[0];
+                element = that.filterInput && activeElement() === that.filterInput[0] ? that.filterInput[0] : that.element[0];
 
             if (value !== undefined) {
                 element.value = value === null ? "" : value;
@@ -584,7 +682,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _keydown: function (e) {
+        _keydown: function(e) {
             var that = this;
             var key = e.keyCode;
             var listView = that.listView;
@@ -602,7 +700,7 @@ var __meta__ = { // jshint ignore:line
                         operator: that.options.filter,
                         field: that.options.dataTextField,
                         ignoreCase: that.ignoreCase
-                    }).done(function () {
+                    }).done(function() {
                         if (that._allowOpening()) {
                             that._resetFocusItem();
                             that.popup.open();
@@ -610,6 +708,16 @@ var __meta__ = { // jshint ignore:line
                     });
                 }
                 e.preventDefault();
+            } else if (key === keys.ESC ) {
+                if (visible) {
+                    e.preventDefault();
+                    that.close();
+                } else {
+                    that._clearValue();
+                }
+            } else if (e.altKey && key === keys.UP && visible) {
+                e.preventDefault();
+                that.close();
             } else if (key === keys.UP) {
                 if (visible) {
                     this._move(current ? "focusPrev" : "focusLast");
@@ -635,13 +743,6 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 this._blur();
-            } else if (key === keys.ESC) {
-                if (visible) {
-                    e.preventDefault();
-                } else {
-                    that._clearValue();
-                }
-                that.close();
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
                 e.preventDefault();
 
@@ -660,35 +761,23 @@ var __meta__ = { // jshint ignore:line
             this._typing = true;
         },
 
-        _move: function (action) {
+        _move: function(action) {
             this.listView[action]();
 
-            if (this.options.suggest) {
+            if (this.options.suggest && this.listView.focus() == null && action == "focusNext") {
+                this.listView.focus(0);
+                this.suggest(this.listView._view[0].item);
+            } else if (this.options.suggest && this.listView.focus() == null && action == "focusPrev") {
+                let index = this.listView._view.length - 1;
+                this.listView.focus(index);
+                this.suggest(this.listView._view[index].item);
+            } else if (this.options.suggest && action == "focusFirst") {
+                caret(this.element)[0];
+            } else if (this.options.suggest && action == "focusLast") {
+                caret(this.element)[this.element.val().length - 1];
+            } else if (this.options.suggest && this.listView.focus() != null) {
                 this.suggest(this.listView.focus());
             }
-        },
-
-        _hideBusy: function () {
-            var that = this;
-            clearTimeout(that._busy);
-            that._loading.hide();
-            that.element.attr("aria-busy", false);
-            that._busy = null;
-            that._showClear();
-        },
-
-        _showBusy: function () {
-            var that = this;
-
-            if (that._busy) {
-                return;
-            }
-
-            that._busy = setTimeout(function () {
-                that.element.attr("aria-busy", true);
-                that._loading.show();
-                that._hideClear();
-            }, 100);
         },
 
         _placeholder: function(show) {
@@ -749,11 +838,11 @@ var __meta__ = { // jshint ignore:line
             return this.element.val();
         },
 
-        _search: function () {
+        _search: function() {
             var that = this;
             clearTimeout(that._typingTimeout);
 
-            that._typingTimeout = setTimeout(function () {
+            that._typingTimeout = setTimeout(function() {
                 if (that._prev !== that._accessor()) {
                     that._prev = that._accessor();
                     that.search();
@@ -770,16 +859,11 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
-        },
-
         _clearButton: function() {
             List.fn._clearButton.call(this);
 
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.element);
-                this.wrapper.addClass("k-autocomplete-clearable");
             }
         },
 
@@ -788,14 +872,16 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleCloseVisibility: function() {
-            if (this.value()) {
+            var preventShow = this.element.is(":disabled") || this.element.is("[readonly]");
+
+            if (this.value() && !preventShow) {
                 this._showClear();
             } else {
                 this._hideClear();
             }
         },
 
-        _wrapper: function () {
+        _wrapper: function() {
             var that = this,
                 element = that.element,
                 DOMelement = element[0],
@@ -803,12 +889,11 @@ var __meta__ = { // jshint ignore:line
 
             wrapper = element.parent();
 
-            if (!wrapper.is("span.k-widget")) {
+            if (!wrapper.is("span.k-autocomplete")) {
                 wrapper = element.wrap("<span />").parent();
             }
 
             wrapper.attr("tabindex", -1);
-            wrapper.attr("role", "presentation");
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({
@@ -818,22 +903,26 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.element;
             that.wrapper = wrapper
-                .addClass("k-widget k-autocomplete")
+                .addClass("k-autocomplete k-input")
                 .addClass(DOMelement.className)
                 .removeClass('input-validation-error');
-
-            that._inputWrapper = $(wrapper[0]);
         },
 
         _clearValue: function() {
+            this._clearValueTrigger = false;
             List.fn._clearValue.call(this);
             this.element.focus();
         }
     });
 
     ui.plugin(AutoComplete);
+
+    kendo.cssProperties.registerPrefix("AutoComplete", "k-input-");
+
+    kendo.cssProperties.registerValues("AutoComplete", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

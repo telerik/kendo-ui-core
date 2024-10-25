@@ -1,7 +1,7 @@
 ---
 title: Create Grids with Dynamic Columns and Data Types
-page_title: Dynamic Columns and Data Types | Kendo UI Grid for jQuery
-description: "An example on how to create a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime."
+page_title: Dynamic Columns and Data Types - Kendo UI for jQuery Data Grid
+description: "Learn how to create a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime."
 previous_url: /controls/data-management/grid/how-to/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/various/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/binding/create-with-dynamic-columns-and-data-types
 slug: howto_createdynamiccolumnsdatatypes_grid
 tags: grid, create, dynamic, columns, data, types
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,11 +29,16 @@ res_type: kb
 
 ## Description
 
-How can I create a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime?
+In some cases, the server returns a response with different fields and values depending on user input or another external variable. Thus, the developer doesn't know what columns and fields will be available in the Grid, nor what the type of these fields will be.
+
+This article showcases how to dynamically generate the Kendo UI Grid by using the response data and without knowing the names and types of the columns and fields.
 
 ## Solution
 
-The following example demonstrates how to create a Grid with column and data-field information that is retrieved during runtime.
+1. Prefetch the dynamic Grid data by making an `ajax` request to the server.
+1. Create the [`dataSource.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) by using the first record in the response as a sample.
+1. Create the Grid [`columns`](/api/javascript/ui/grid/configuration/columns) by using the names of the fields returned in the server response.
+1. Generate the Grid by using the model and columns that were created in the previous two steps.
 
 ```dojo
 
@@ -42,7 +47,7 @@ The following example demonstrates how to create a Grid with column and data-fie
     <script>
       var isDateField =[];
       $.ajax({
-        url: "https://www.mocky.io/v2/5835e736110000020e0c003c",
+        url: "https://run.mocky.io/v3/fe25d379-099c-4e04-b26b-5f0453e43ef4",
         dataType: "jsonp",
         success: function(result) {
           generateGrid(result);
@@ -140,4 +145,5 @@ The following example demonstrates how to create a Grid with column and data-fie
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [Dynamic Aggregates in a Dynamic Grid]({% slug grid-dynamic-aggregates %})
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

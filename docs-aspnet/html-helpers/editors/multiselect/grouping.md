@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: Grouping
-description: "Learn how to group data in the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to group data in the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/grouping
 slug: htmlhelpers_multiselect_grouping_aspnetcore
 position: 6
@@ -17,8 +17,11 @@ To group the data, define a group `datasource` expression which uses a custom Da
 
 The following example demonstrates how to group the data in the MultiSelect by country.
 
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("customers")
+        .DataTextField("ContactName")
+        .DataValueField("CustomerID")
         .Placeholder("Select customers...")
         .DataSource(source =>  source
             .Custom()
@@ -30,8 +33,6 @@ The following example demonstrates how to group the data in the MultiSelect by c
                         .Data("onAdditionalData");
                 }))
                 .ServerFiltering(true))
-        .DataTextField("ContactName")
-        .DataValueField("CustomerID")
     )
     <script>
         function onAdditionalData() {
@@ -40,6 +41,31 @@ The following example demonstrates how to group the data in the MultiSelect by c
             };
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       placeholder="Select customers...">
+        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+            <groups>
+                <group field="Country" typeof="string"></group>
+            </groups>
+            <transport>
+                 <read url="@Url.Action("Customers_Read", "MultiSelect")" data="onAdditionalData"/>
+            </transport>
+        </datasource>
+    </kendo-multiselect>
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#customers").val()
+            };
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

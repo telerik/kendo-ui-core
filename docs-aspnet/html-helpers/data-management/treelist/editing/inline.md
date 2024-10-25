@@ -1,7 +1,7 @@
 ---
 title: Inline
 page_title: Inline Editing
-description: "Define commands and set the edit mode to configure the Telerik UI TreeList HtmlHelper for {{ site.framework }} for inline editing."
+description: "Define commands and set the edit mode to configure the Telerik UI TreeList component for {{ site.framework }} for inline editing."
 slug: htmlhelpers_treelist_aspnetcore_inline_editing
 position: 3
 ---
@@ -75,6 +75,7 @@ To set the inline edit mode of the TreeList:
 
 1. In the view, configure the TreeList to use the action methods that were created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
+    ```HtmlHelper
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
             .Name("treelist")
             .Toolbar(toolbar => toolbar.Create())
@@ -110,6 +111,55 @@ To set the inline edit mode of the TreeList:
                 })
             )
         )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-treelist name="treelist">
+            <toolbar>
+                <treelist-toolbar-button name="create"/>
+            </toolbar>
+            <columns>
+                <treelist-column field="FirstName" title="First Name" width="220px"></treelist-column>
+                <treelist-column field="LastName" title="Last Name" width="100px"></treelist-column>
+                <treelist-column field="Position"></treelist-column>
+                <treelist-column field="HireDate" format="{0:MMMM d, yyyy}"></treelist-column>
+                <treelist-column field="Phone"></treelist-column>
+                <treelist-column field="Extension" title="Ext" format="{0:#}"></treelist-column>
+                <treelist-column width="300px">
+                    <commands>
+                        <treelist-column-command name="createChild" text="Add child" />
+                        <treelist-column-command name="edit" />
+                        <treelist-column-command name="destroy" />
+                    </commands>
+                </treelist-column>
+            </columns>
+            <editable enabled="true"/>
+            <treelist-datasource>
+                <transport>
+                    <read url="@Url.Action("All","EmployeeDirectory")"/>
+                    <create url="@Url.Action("Create","EmployeeDirectory")"/>
+                    <update url="@Url.Action("Update","EmployeeDirectory")"/>
+                    <destroy url="@Url.Action("Destroy","EmployeeDirectory")"/>
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
+                    <treelist-model id="EmployeeId" parent-id="ReportsTo">
+                        <fields>
+                            <field name="EmployeeId" type="number"></field>
+                            <field name="ReportsTo" nullable="true" type="number"></field>
+                            <field name="FirstName" type="string"></field>
+                            <field name="LastName" type="string"></field>
+                            <field name="Position" type="string"></field>
+                            <field name="HireDate" type="date"></field>
+                            <field name="Phone" type="string"></field>
+                            <field name="Extension" type="number"></field>
+                        </fields>
+                    </treelist-model>
+                </schema>
+            </treelist-datasource>
+        </kendo-treelist>
+    ```
+    {% endif %}
+
 
 ## See Also
 

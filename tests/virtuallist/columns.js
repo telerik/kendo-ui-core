@@ -50,7 +50,7 @@
         }
     });
 
-    describe("VirtualList: ", function () {
+    describe("VirtualList: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
@@ -75,7 +75,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#"
+                template: ({ text }) => kendo.htmlEncode(text)
             };
         });
 
@@ -122,8 +122,8 @@
      it("each column sets a new template", function() {
         var list = new VirtualList(container, {
             columns: [
-                {field: "name"},
-                {field: "id"}
+                { field: "name" },
+                { field: "id" }
             ],
             dataTextField: "name",
             dataSource: [ { id: 1, name: "item1" },
@@ -138,8 +138,8 @@
     it("each custom template is applied", function() {
         var list = new VirtualList(container, {
             columns: [
-                {field: "name", template: "new #: name #"},
-                {field: "id"}
+                { field: "name", template: ({ name }) => `new ${kendo.htmlEncode(name)}` },
+                { field: "id" }
             ],
             dataTextField: "name",
             dataSource: [ { id: 1, name: "item1" },

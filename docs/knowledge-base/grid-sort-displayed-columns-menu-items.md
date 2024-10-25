@@ -1,8 +1,8 @@
 ---
 title: Sort Displayed Columns Menu Items
-description: An example on how to sort displayed columns menu items in the Kendo UI Grid header.
+description: Learn how to sort displayed columns menu items in the Kendo UI Grid header.
 type: how-to
-page_title: Implement Sort Displayed Columns Menu Items | Kendo UI Grid for jQuery
+page_title: Implement Sort Displayed Columns Menu Items - Kendo UI for jQuery Data Grid
 slug: grid-sort-displayed-columns-menu-items
 tags: grid, columnmenu, menu, column, list, header, checkbox, sort
 ticketid: 1146769, 1384397
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Created with version</td>
@@ -29,6 +29,8 @@ component: grid
 My Grid has a column menu, which contains displayed columns submenu.
 
 How can I sort the items of the displayed columns submenu?
+
+>* As of Kendo UI R3 2020 SP1(v2020.3.1021) the columns submenu can be sorted via the [columnMenu.columns.sort](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columnmenu.columns.sort) configuration.
 
 ## Solution
 

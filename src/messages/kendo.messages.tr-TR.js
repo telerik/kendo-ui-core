@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -221,7 +222,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "overwriteFile": "Dizinde \"{0}\" isimli bir dosya zaten mevcut. Üzerine yazmak istiyor musunuz?",
   "search": "Arama",
   "strikethrough": "Üstü çizili",
-  "styles": "Stiller",
+  "style": "Stiller",
   "subscript": "İndis",
   "superscript": "Üstyazı",
   "underline": "Altını çiz",
@@ -229,6 +230,28 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "uploadFile": "Yükle",
   "viewHtml": "HTML Görünümü ",
   "insertFile": "Dosya Ekle"
+});
+}
+
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "No records to display",
+  "loading": "Loading...",
+  "requestFailed": "Request failed.",
+  "retry": "Tekrar Dene",
+  "commands": {
+      "edit": "Düzenle",
+      "update": "Güncelle",
+      "canceledit": "Cancel",
+      "create": "Yeni Kayıt Ekle",
+      "createchild": "Add child record",
+      "destroy": "Sil",
+      "excel": "Excel'e aktar",
+      "pdf": "PDF'e aktar"
+  }
 });
 }
 
@@ -362,6 +385,7 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "Tüm gün",
   "cancel": "İptal Et",
+  "search": "Arama...",
   "editable": {
     "confirmation": "Bu etkinliği silmek istediğinizden emin misiniz?"
   },
@@ -406,6 +430,341 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "month": "Ay",
     "week": "Hafta",
     "workWeek": "Çalışma Haftası"
+  }
+});
+}
+
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Tüm sınırlar",
+  "insideBorders": "İç sınırlar",
+  "insideHorizontalBorders": "Yatay sınırların içinde",
+  "insideVerticalBorders": "Dikey sınırların içinde",
+  "outsideBorders": "Dış sınırlar",
+  "leftBorder": "sol kenarlık",
+  "topBorder": "Üst kenarlık",
+  "rightBorder": "Sağ kenarlık",
+  "bottomBorder": "Alt sınır",
+  "noBorders": "Sınır yok",
+  "reset": "Rengi sıfırla",
+  "customColor": "Özel renk...",
+  "apply": "Uygulamak",
+  "cancel": "İptal etmek"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Uygulamak",
+  "save": "Kayıt etmek",
+  "cancel": "İptal etmek",
+  "remove": "Kaldırmak",
+  "retry": "yeniden dene",
+  "revert": "geri al",
+  "okText": "tamam",
+  "formatCellsDialog": {
+    "title": "Biçim",
+    "categories": {
+      "number": "Numara",
+      "currency": "Para birimi",
+      "date": "Tarih"
+    }
+  },
+  "fontFamilyDialog": {
+    "title": "Yazı tipi"
+  },
+  "fontSizeDialog": {
+    "title": "Yazı Boyutu"
+  },
+  "bordersDialog": {
+    "title": "Sınırlar"
+  },
+  "alignmentDialog": {
+    "title": "hizalama",
+    "buttons": {
+      "justifyLeft": "Sola hizalamak",
+      "justifyCenter": "merkez",
+      "justifyRight": "Sağa hizala",
+      "justifyFull": "Savunmak",
+      "alignTop": "Üste hizala",
+      "alignMiddle": "Ortaya hizala",
+      "alignBottom": "Aşağıya hizala"
+    }
+  },
+  "mergeDialog": {
+    "title": "Hücreleri birleştir",
+    "buttons": {
+      "mergeCells": "Tümünü birleştir",
+      "mergeHorizontally": "Yatay olarak birleştir",
+      "mergeVertically": "Dikey olarak birleştir",
+      "unmerge": "Ayır"
+    }
+  },
+  "freezeDialog": {
+    "title": "Donma bölmeleri",
+    "buttons": {
+      "freezePanes": "Donma bölmeleri",
+      "freezeRows": "Satırları dondur",
+      "freezeColumns": "Sütunları dondur",
+      "unfreeze": "Bölmeleri çöz"
+    }
+  },
+  "confirmationDialog": {
+    "text": "Bu sayfayı kaldırmak istediğinizden emin misiniz?",
+    "title": "Sayfayı kaldır"
+  },
+  "validationDialog": {
+    "title": "Veri doğrulama",
+    "hintMessage": "Lütfen geçerli bir {0} değeri {1} girin.",
+    "hintTitle": "doğrulama {0}",
+    "criteria": {
+      "any": "Herhangi bir değer",
+      "number": "Numara",
+      "text": "Metin",
+      "date": "Tarih",
+      "custom": "Özel Formül",
+      "list": "Liste"
+    },
+    "comparers": {
+      "greaterThan": "daha büyük",
+      "lessThan": "daha az",
+      "between": "arasında",
+      "notBetween": "arasında değil",
+      "equalTo": "eşittir",
+      "notEqualTo": "eşit değil",
+      "greaterThanOrEqualTo": "büyük veya eşit",
+      "lessThanOrEqualTo": "küçük veya eşittir"
+    },
+    "comparerMessages": {
+      "greaterThan": "{0} değerinden büyük",
+      "lessThan": "{0} değerinden az",
+      "between": "{0} ile {1} arasında",
+      "notBetween": "{0} ile {1} arasında değil",
+      "equalTo": "{0}'e eşit",
+      "notEqualTo": "{0}'e eşit değil",
+      "greaterThanOrEqualTo": "{0} değerinden büyük veya ona eşit",
+      "lessThanOrEqualTo": "{0} değerinden küçük veya ona eşit",
+      "custom": "şu formülü karşılayan: {0}"
+    },
+    "labels": {
+      "criteria": "kriterler",
+      "comparer": "Karşılaştırıcı",
+      "min": "Min.",
+      "max": "Maks.",
+      "value": "Değer",
+      "start": "Başlangıç",
+      "end": "Son",
+      "onInvalidData": "geçersiz verilerde",
+      "rejectInput": "Girişi reddet",
+      "showWarning": "Uyarı göster",
+      "showHint": "İpucu göster",
+      "hintTitle": "İpucu başlığı",
+      "hintMessage": "İpucu mesajı",
+      "ignoreBlank": "Boşluğu yoksay"
+    },
+    "placeholders": {
+      "typeTitle": "Başlık yazın",
+      "typeMessage": "Mesaj yazın"
+    }
+  },
+  "exportAsDialog": {
+    "title": "İhracat...",
+    "labels": {
+      "fileName": "Dosya adı",
+      "saveAsType": "Tür olarak kaydet",
+      "exportArea": "İhracat",
+      "paperSize": "Kağıt boyutu",
+      "margins": "kenar boşlukları",
+      "orientation": "Oryantasyon",
+      "print": "Yazdır",
+      "guidelines": "yönergeler",
+      "center": "merkez",
+      "horizontally": "yatay",
+      "vertically": "dikey"
+    }
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Birleştirilmiş hücrenin bir kısmı değiştirilemez."
+  },
+  "useKeyboardDialog": {
+    "title": "Kopyalama ve yapıştırma",
+    "errorMessage": "Bu eylemler menü aracılığıyla çağrılamaz. Lütfen bunun yerine klavye kısayollarını kullanın:",
+    "labels": {
+      "forCopy": "kopya için",
+      "forCut": "kesim için",
+      "forPaste": "yapıştırmak için"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "Bu işlem çoklu seçimde gerçekleştirilemez."
+  },
+  "insertCommentDialog": {
+    "title": "Yorum ekle",
+    "labels": {
+      "comment": "Yorum Yap",
+      "removeComment": "Yorumu kaldır"
+    }
+  },
+  "insertImageDialog": {
+    "title": "Resim ekle",
+    "info": "Bir resmi buraya sürükleyin veya seçmek için tıklayın",
+    "typeError": "Lütfen bir JPEG, PNG veya GIF resmi seçin"
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "A'dan Z'ye sıralama aralığı",
+  "sortDescending": "Z'den A'ya kadar sıralama aralığı",
+  "filterByValue": "Değere göre filtrele",
+  "filterByCondition": "Koşullara göre filtrele",
+  "apply": "Uygulamak",
+  "search": "Aramak",
+  "addToCurrent": "Geçerli seçime ekle",
+  "clear": "Temizlemek",
+  "blanks": "(Boşluklar)",
+  "operatorNone": "Hiçbiri",
+  "and": "VE",
+  "or": "VEYA",
+  "operators": {
+    "string": {
+      "contains": "Metin şunları içerir:",
+      "doesnotcontain": "Metin içermiyor",
+      "startswith": "Metin şununla başlar:",
+      "endswith": "Metin şununla biter:"
+    },
+    "date": {
+      "eq": "Tarih:",
+      "neq": "Tarih değil",
+      "lt": "Tarih önce",
+      "gt": "Tarih sonra"
+    },
+    "number": {
+      "eq": "Eşittir",
+      "neq": "Eşit değildir",
+      "gte": "Daha büyük veya eşittir",
+      "gt": "Daha büyüktür",
+      "lte": "Küçük veya eşittir",
+      "lt": "Daha az"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
+kendo.spreadsheet.messages.colorPicker =
+$.extend(true, kendo.spreadsheet.messages.colorPicker,{
+  "reset": "Rengi sıfırla",
+  "customColor": "Özel renk...",
+  "apply": "Uygulamak",
+  "cancel": "İptal etmek"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Sola sütun ekle",
+  "addColumnRight": "Sağa sütun ekle",
+  "addRowAbove": "Yukarıya satır ekle",
+  "addRowBelow": "Aşağıya satır ekle",
+  "alignment": "hizalama",
+  "alignmentButtons": {
+    "justifyLeft": "Sola hizalamak",
+    "justifyCenter": "merkez",
+    "justifyRight": "Sağa hizala",
+    "justifyFull": "Savunmak",
+    "alignTop": "Üste hizala",
+    "alignMiddle": "Ortaya hizala",
+    "alignBottom": "Aşağıya hizala"
+  },
+  "backgroundColor": "Arka plan",
+  "bold": "Gözü pek",
+  "borders": "Sınırlar",
+  "colorPicker": {
+    "reset": "Rengi sıfırla",
+    "customColor": "Özel renk..."
+  },
+  "copy": "kopyala",
+  "cut": "Kesmek",
+  "deleteColumn": "Sütunu sil",
+  "deleteRow": "Sırayı sil",
+  "excelImport": "Excel'den içe aktar...",
+  "filter": "filtre",
+  "fontFamily": "Yazı tipi",
+  "fontSize": "Yazı Boyutu",
+  "format": "Özel biçim...",
+  "formatTypes": {
+    "automatic": "Otomatik",
+    "number": "Numara",
+    "percent": "Yüzde",
+    "financial": "Parasal",
+    "currency": "Para birimi",
+    "date": "Tarih",
+    "time": "Zaman",
+    "dateTime": "tarih saat",
+    "duration": "Süre",
+    "moreFormats": "Daha fazla format..."
+  },
+  "formatDecreaseDecimal": "Ondalık sayıyı azalt",
+  "formatIncreaseDecimal": "Ondalık sayıyı artır",
+  "freeze": "Donma bölmeleri",
+  "freezeButtons": {
+    "freezePanes": "Donma bölmeleri",
+    "freezeRows": "Satırları dondur",
+    "freezeColumns": "Sütunları dondur",
+    "unfreeze": "Bölmeleri çöz"
+  },
+  "insertComment": "Yorum ekle",
+  "insertImage": "Resim ekle",
+  "italic": "İtalik",
+  "merge": "Hücreleri birleştir",
+  "mergeButtons": {
+    "mergeCells": "Tümünü birleştir",
+    "mergeHorizontally": "Yatay olarak birleştir",
+    "mergeVertically": "Dikey olarak birleştir",
+    "unmerge": "Ayır"
+  },
+  "open": "Açık...",
+  "paste": "Yapıştırmak",
+  "quickAccess": {
+    "redo": "yinele",
+    "undo": "Geri alma"
+  },
+  "saveAs": "Farklı kaydet...",
+  "sortAsc": "Artan sıralama",
+  "sortDesc": "Azalan şekilde sırala",
+  "sortButtons": {
+    "sortSheetAsc": "Sayfayı A'dan Z'ye sırala",
+    "sortSheetDesc": "Sayfayı Z'den A'ya sırala",
+    "sortRangeAsc": "A'dan Z'ye sıralama aralığı",
+    "sortRangeDesc": "Z'den A'ya kadar sıralama aralığı"
+  },
+  "textColor": "Metin Rengi",
+  "textWrap": "Metni kaydır",
+  "underline": "Altını çizmek",
+  "validation": "Veri doğrulama..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Veri kaybı olasılığı nedeniyle hücreler eklenemiyor. Başka bir ekleme konumu seçin veya çalışma sayfanızın sonundaki verileri silin.",
+    "filterRangeContainingMerges": "Birleştirme içeren bir aralıkta filtre oluşturulamıyor",
+    "validationError": "Girdiğiniz değer, hücrede ayarlanan doğrulama kurallarını ihlal ediyor."
+  },
+  "tabs": {
+    "home": "Ev",
+    "insert": "Sokmak",
+    "data": "Veri"
   }
 });
 }
@@ -479,6 +838,6 @@ if (kendo.ui.DateInput) {
       "second": "saniye",
       "dayperiod": "AM/PM"
     });
-}  
-  
+}
+
 })(window.kendo.jQuery);

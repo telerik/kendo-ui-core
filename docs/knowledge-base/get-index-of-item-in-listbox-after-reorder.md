@@ -1,8 +1,8 @@
 ---
 title: Get Data Index in the ListBox after Reordering
-description: An example on how to get the index of a ListBox item after reordering.
+description: Learn how to get the index of a ListBox item after reordering.
 type: how-to
-page_title: Get the Index of an Item after Reordering | Kendo UI ListBox for jQuery
+page_title: Get the Index of an Item after Reordering - Kendo UI ListBox for jQuery
 slug: get-index-of-item-in-listbox-after-reorder
 tags: listbox, datasource
 ticketid: 1112980
@@ -15,7 +15,7 @@ component: listbox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListBox</td>
+  <td>Progress® Kendo UI® ListBox for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -45,3 +45,6 @@ The Kendo UI dataSource features the `indexOf` method but the data items are not
 For more information on the API settings, refer to the documentation on the [`insert`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert) and [`indexOf`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/indexof) methods.  
 
 For a working demo, refer to [this example](https://dojo.telerik.com/Edeco/4). Although the demo uses the jQuery version, the logic applies client-side methods and the implementation for the AngularJS version is similar.
+
+## See also
+[Get Data Index in the ListBox on Add]({% slug listbox-get-index-of-item-on-add %})

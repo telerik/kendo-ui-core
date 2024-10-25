@@ -7,6 +7,8 @@ component: listbox
 
 # kendo.ui.ListBox
 
+Represents the Kendo UI ListBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### autoBind `Boolean` *(default: true)*
@@ -698,6 +700,62 @@ The built-in tools are:
 
 ## Methods
 
+### add
+
+Adds an item to the widget.
+
+#### Example
+
+    <select id="listBox"></select>
+    <script>
+    $("#listBox").kendoListBox({
+         dataSource: {
+            data: [
+                { name: "Jane Doe" },
+                { name: "Sam Doe" }
+            ]
+        },
+        template: "<div>#:name#</div>"
+    });
+    var listBox = $("#listBox").data("kendoListBox");
+    var person = {name: "Bob Doe"};
+    listBox.add(person);
+    </script>
+
+#### Example
+
+    <select id="listBox"></select>
+    <script>
+        var Product = kendo.data.Model.define({
+            id: "ProductID",
+            fields: {
+                ProductName: {
+                    type:"string"
+                }
+            }
+        });
+
+        var dataSource = new kendo.data.DataSource({
+            data:[
+                {ProductID:1, ProductName:"Apples"},
+                {ProductID:2, ProductName:"Oranges"},
+            ],
+            schema: {
+                model: Product
+            }
+        });
+
+        $("#listBox").kendoListBox({
+            dataSource: dataSource,
+            dataTextField:"ProductName",
+            dataValueField:"ProductID"
+        });
+
+        var listBox = $("#listBox").data("kendoListBox");
+        var item = new Product({ProductName:"Bananas"});
+        listBox.add(item);
+    </script>
+
 ### clearSelection
 
 Clears the selected items of the ListBox and triggers the `change` event.
@@ -750,7 +808,8 @@ A string, DOM element, or jQuery object which represents the item. A string is t
     });
 
     var listbox = $("#listBox").data("kendoListBox");
-    var dataItem = listbox.dataItem(".k-item:first");
+    var dataItem = listbox.dataItem(".k-list-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>
 
@@ -771,6 +830,7 @@ A string, DOM element, or jQuery object which represents the item. A string is t
             dataSource: dataSource,
             template: "<div>#:name#</div>"
         }).data("kendoListBox");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(listBox.dataItems()) //will output the bound array
     </script>
 
@@ -828,7 +888,7 @@ Indicates whether the items should be enabled or disabled.
     });
     // get a reference to the list view widget
     var listBox = $("#listBox").data("kendoListBox");
-    listBox.enable(".k-item:first", false);
+    listBox.enable(".k-list-item:first", false);
     </script>
 
 ### items
@@ -851,6 +911,7 @@ Obtains an array of the DOM elements which correspond to the data items from the
     // get a reference to the first list box widget
     var listBox = $("#listBox").data("kendoListBox");
     var items = listBox.items();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(items); // logs the items
     </script>
 
@@ -900,7 +961,7 @@ The new position of the item in the list.
     $("#listBox").kendoListBox();
     var listBox = $("#listBox").data("kendoListBox");
     // moves first item to position with index 2
-    listBox.reorder(".k-item:first", 2);
+    listBox.reorder(".k-list-item:first", 2);
     </script>
 
 ### remove
@@ -944,7 +1005,7 @@ The items that are to be selected.
 
 `jQuery` - The selected items if called without arguments.
 
-#### Example
+#### Example - select the first element in the listbox
 
     <select id="listBox"></select>
     <script>
@@ -961,6 +1022,29 @@ The items that are to be selected.
     var listBox = $("#listBox").data("kendoListBox");
     // selects first list box item
     listBox.select(listBox.items().first());
+    </script>
+
+#### Example - select an element by its name property
+
+    <select id="listBox"></select>
+    <script>
+    $("#listBox").kendoListBox({
+        dataSource: {
+            data: [
+                { id: 1, name: "Jane Doe", age: 47 },
+                { id: 2, name: "John Doe", age: 50 }
+            ]
+        },
+        template: "<div>#:name#</div>"
+    });
+    // get a reference to the list box widget
+    var listBox = $("#listBox").data("kendoListBox");
+    // Find the uid of the element by name.
+    let uid = listBox.dataItems().filter(f => f.name == "Jane Doe")[0].uid;
+    // Find the element using the uid.
+    let item = listBox.wrapper.find("[data-uid='"+uid+"']");
+    // Select the element.
+    listBox.select(item);
     </script>
 
 ### setDataSource
@@ -1059,6 +1143,12 @@ Fires when the ListBox selection has changed.
 
 The function context of the event handler (available through the `this` keyword) that will be set to the widget instance.
 
+#### Event Data
+
+##### e.sender `kendo.ui.ListBox`
+
+The widget instance which fired the event.
+
 #### Example
 
     <select id="listBox"></select>
@@ -1103,6 +1193,7 @@ The function context of the event handler (available through the `this` keyword)
        ],
        dataBound: function() {
            //handle event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
            console.log("data bound");
        }
     });
@@ -1179,6 +1270,7 @@ If invoked, prevents the `dragstart` action. The element will remain at its orig
     $("#listBox").kendoListBox({
          draggable: true,
          drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log("drag event");
          }
     });
@@ -1214,6 +1306,7 @@ If invoked, prevents the `drop` action. The element will remain at its original 
     $("#listBox").kendoListBox({
          draggable: true,
          drop: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log("drop event");
          }
     });
@@ -1249,7 +1342,9 @@ The original `drag` event data of `draggable`.
     $("#listBox").kendoListBox({
         draggable: true,
         dragend: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.items);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.dataItems);
         }
     });
@@ -1277,6 +1372,9 @@ The data items that are to be removed.
     <script>
     $("#listBox").kendoListBox({
         template: "<div>#: name#</div>",
+        toolbar: {
+            tools: ["remove"]
+        },
         dataSource: {
             data: [
                 { id: 1, name: "Jane Doe" },
@@ -1294,11 +1392,9 @@ The data items that are to be removed.
         },
         remove: function(e) {
             //handle event
+            alert(e.dataItems[0].name + " was removed from the list");
         }
     });
-    // get a reference to the list box
-    var listBox = $("#listBox").data("kendoListBox");
-    listBox.remove(listBox.items().first());
     </script>
 
 #### To set after initialization
@@ -1307,6 +1403,9 @@ The data items that are to be removed.
     <script>
     $("#listBox").kendoListBox({
         template: "<div>#: name#</div>",
+        toolbar: {
+            tools: ["remove"]
+        },
         dataSource: {
             data: [
                 { id: 1, name: "Jane Doe" },
@@ -1327,11 +1426,9 @@ The data items that are to be removed.
     var listBox = $("#listBox").data("kendoListBox");
     // bind to the remove event
     listBox.bind("remove", function(e) {
-        // handle event
-        console.log("remove");
-        e.preventDefault();
+    // handle event
+        alert(e.dataItems[0].name + " was removed from the list");
     });
-    listBox.remove(listBox.items().first());
     </script>
 
 ### reorder

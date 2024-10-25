@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | PivotGrid JSP Tag
+page_title: Overview - PivotGrid JSP Tag
 description: "Get started with the PivotGrid JSP tag in Kendo UI."
 slug: overview_pivotgrid_uiforjsp
 position: 1
@@ -10,10 +10,7 @@ position: 1
 
 The PivotGrid JSP tag is a server-side wrapper for the [Kendo UI PivotGrid](/api/javascript/ui/pivotgrid) widget.
 
-
-> **Important**
->
-> The Kendo UI PivotGrid for JSP supports only Ajax data-binding to HTTP accessible OLAP cube. For more information on the OLAP concepts, refer to the article about the [fundamentals of the OLAP Cube]({%slug fundamentals_pivotgrid_widget %}), the [setup of an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}) or use Telerik OLAP service at `https://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
+The Kendo UI PivotGrid for JSP supports Ajax data-binding to HTTP accessible OLAP cube as well as local flat data binding. For more information on the OLAP concepts, refer to the article about the [fundamentals of the OLAP Cube]({%slug fundamentals_pivotgrid_widget %}), the [setup of an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}) or use Telerik OLAP service at `https://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
 
 ## Getting Started
 

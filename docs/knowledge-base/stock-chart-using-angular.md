@@ -1,0 +1,177 @@
+---
+title: Create StockCharts in AngularJS
+page_title: Create StockCharts in AngularJS
+description: "Learn how to create a Kendo UI Stock Chart by using AngularJS."
+previous_url: /controls/charts/stockchart/how-to/stock-chart-using-angular, /controls/charts/how-to/various/stock-chart-using-angular
+slug: howto_createstockcharts_angularjs
+tags: chart, customize, themes
+component: chart
+type: how-to
+res_type: kb
+---
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio Version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+
+## Description
+
+How can I create a Kendo UI Stock Chart by using AngularJS?
+
+## Solution
+
+The following example demonstrates how to create Kendo UI Stock Charts by using AngularJS.
+
+> To run the example separately and resolve any CORS-related issues, use the **Open in Dojo** link.
+
+> The example loads Kendo UI 2023.3.1010 version.
+
+```dojo
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+
+<div id="example" ng-app="MyApp" ng-controller="MyCtrl">
+  <div class="demo-section k-content">
+    <div kendo-stock-chart k-data-source="dataSource"       
+         k-date-field="dataField"
+         k-series="series"
+         k-category-axis="categoryAxis"
+         k-navigator="navigator"
+         k-title="title">
+    </div>
+  </div>
+</div>
+<script>
+  angular.module("MyApp", [ "kendo.directives" ])
+    .controller("MyCtrl", function($scope){
+
+    $scope.dataSource = {
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
+          dataType: "json"
+        }
+      }
+    };
+
+    $scope.title = {
+      text: "The Boeing Company \n (NYSE:BA)"
+    };
+
+    $scope.dataField = "Date";
+
+    $scope.series = [{
+      type: "candlestick",
+      openField: "Open",
+      highField: "High",
+      lowField: "Low",
+      closeField: "Close"
+    }];
+
+    $scope.navigator = {
+      series: {
+        type: "area",
+        field: "Close"
+      },
+      select: {
+        from: "2009/02/05",
+        to: "2011/10/07"
+      }
+    };
+
+    $scope.categoryAxis = {
+      notes: {
+        data: [{
+          value: "2001/01/01",
+          label: {
+            text: "01"
+          }
+        }, {
+          value: "2002/01/01",
+          label: {
+            text: "02"
+          }
+        }, {
+          value: "2003/01/01",
+          label: {
+            text: "03"
+          }
+        }, {
+          value: "2004/01/01",
+          label: {
+            text: "04"
+          }
+        }, {
+          value: "2005/01/01",
+          label: {
+            text: "05"
+          }
+        }, {
+          value: "2006/01/01",
+          label: {
+            text: "06"
+          }
+        }, {
+          value: "2007/01/01",
+          label: {
+            text: "07"
+          }
+        }, {
+          value: "2008/01/01",
+          label: {
+            text: "08"
+          }
+        }, {
+          value: "2009/01/01",
+          label: {
+            text: "09"
+          }
+        }, {
+          value: "2010/01/01",
+          label: {
+            text: "10"
+          }
+        }, {
+          value: "2011/01/01",
+          label: {
+            text: "11"
+          }
+        }, {
+          value: "2012/01/01",
+          label: {
+            text: "12"
+          }
+        }]
+      }
+    };
+
+  });
+</script>
+```
+
+## See Also
+
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
+* [Create Dynamic Plot Bands]({% slug howto_createdynamicplotbands_charts %})
+* [Create Timeline Using Range Bars]({% slug howto_createtimeline_usingrangebars_charts %})
+* [Customize Chart Themes]({% slug howto_customizechartthemes_charts %})

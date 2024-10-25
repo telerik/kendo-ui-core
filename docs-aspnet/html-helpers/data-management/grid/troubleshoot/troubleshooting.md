@@ -8,13 +8,13 @@ position: 1
 
 # Common Issues
 
-This article provides solutions for common issues you might encounter while working with the Telerik UI for ASP.NET MVC Grid HtmlHelper.
+This article provides solutions for common issues you might encounter while working with the Telerik UI Grid component for {{ site.framework }}.
 
 ## Grid Performs HTTP GET Requests instead of POST
 
 By default, the Kendo UI Grid for ASP.NET MVC makes POST requests when configured for `Ajax binding`. This is implemented by a custom DataSource transport and schema. Those are defined in the `kendo.aspnetmvc.min.js`.
 
-**Solution** Make sure this file is included after the other Kendo UI JavaScript files. For more information, refer to the [ASP.NET MVC introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}).
+**Solution** Make sure this file is included after the other Kendo UI JavaScript files. For more information, refer to the [{{ site.framework }} introductory article](https://docs.telerik.com/{{ site.platform }}/introduction).
 
 The following example demonstrates the correct order of JavaScript files.
 
@@ -39,13 +39,23 @@ The causes of this issue are various.
 
 ## Client-Side Events Are Not Raised in Server-Bound Mode
 
-When configured for server binding, the Kendo UI Grid for ASP.NET MVC does not fire all client-side events.
+{% if site.core %}
+    Client-side events, which are related to data-binding (sorting, filtering, paging, grouping, etc.) and CRUD data operations, will not be raised when the Grid is configured for server binding.
+    
+    For an Ajax() bound Grid, make sure that the `.ServerOperation(false)` property is disabled.
+{% else %}
+    When configured for server binding, the Kendo UI Grid for ASP.NET MVC does not fire all client-side events.
 
-**Solution** For more information on how to resolve this issue, refer to the [article on server binding of the Grid]({% slug htmlhelpers_grid_aspnetcore_localbinding %}#supported-client-side-events).
+**Solution** For more information on how to resolve this issue, refer to the [article on server binding of the Grid]({% slug serverbinding_grid_aspnetmvc %}#supported-client-side-events).
 
-## Grid Fails to Update Dates and Numbers When Current Culture Is Not en-US
+For an Ajax() bound Grid, make sure that the `.ServerOperation(false)` property is disabled.
+{% endif %}
+
+{% if site.mvc %}
+   ## Grid Fails to Update Dates and Numbers When Current Culture Is Not en-US
 
 **Solution** Make sure the JavaScript file for that culture is included. For additional information on this issue, refer to [this section](#include-javascript-for-the-current-culture-razor).
+{% endif %}
 
 ## Column Templates Are Not Displayed
 
@@ -61,7 +71,7 @@ When configured for server binding, the Kendo UI Grid for ASP.NET MVC does not f
 
 Not all settings of the DataSource are exposed through the `DataSource` fluent API.
 
-**Solution** To gain full control over the DataSource, consider using the [`CustomDataSource`]({% slug customdatasource_aspnetmvc %}) fluent API or the client-side version of the Kendo UI Grid.
+**Solution** To gain full control over the DataSource, consider using the [`CustomDataSource`](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource) fluent API or the client-side version of the Kendo UI Grid.
 
 ## Grid Fires Create Actions instead of Update Actions
 
@@ -97,7 +107,7 @@ The following example demonstrates how to include JavaScript for the current cul
         kendo.culture("<%= culture %>");
     </script>
 ```
-```Razor
+```HtmlHelper
     @{
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
     }
@@ -107,10 +117,10 @@ The following example demonstrates how to include JavaScript for the current cul
     </script>
 ```
 
-For additional information on this issue, refer to the [article on globalization]({% slug overview_globalization_core %}).
+For additional information on this issue, refer to the [article on globalization](https://docs.telerik.com/{{ site.platform }}/globalization/overview).
 
 ## See Also
 
-* [Basic Usage of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid)
-* [Using the API of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/api)
+* [Basic Usage of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid)
+* [Using the API of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 * [Server-Side API](/api/grid)

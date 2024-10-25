@@ -1,7 +1,7 @@
 ---
 title: Scrolling
 page_title: Scrolling
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn how to configure its scrolling functionality."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to configure its scrolling functionality."
 slug: htmlhelpers_treelist_aspnetcore_scrolling
 position: 8
 ---

@@ -1,7 +1,7 @@
 ---
 title: Show Edit Buttons for Editable Records Only
-page_title: Buttons for Editable Records | Kendo UI Grid for jQuery
-description: "An example on how to show edit buttons only for the editable records of the Kendo UI Grid for jQuery."
+page_title: Buttons for Editable Records - Kendo UI for jQuery Data Grid
+description: "Learn how to show edit buttons only for the editable records of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/show-edit-button-for-editable-records-only
 slug: howto_show_editfor_editable_records_only_grid
 tags: show, edit, buttons, editable, records, only
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -96,7 +96,7 @@ The following example demonstrates how to show the **Edit** buttons in the Grid 
                var trs = this.tbody.find('tr').each(function(){
                  var item = grid.dataItem($(this));
                  if( item.UnitPrice % 5 == 0) {
-                   $(this).find('.k-grid-edit,.k-grid-delete').hide();
+                   $(this).find('.k-grid-edit-command,.k-grid-remove-command').hide();
                  }
 
                });               
@@ -118,4 +118,4 @@ The following example demonstrates how to show the **Edit** buttons in the Grid 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

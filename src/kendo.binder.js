@@ -1,8 +1,7 @@
-(function(f, define){
-    define([ "./kendo.core", "./kendo.data" ], f);
-})(function(){
+import "./kendo.core.js";
+import "./kendo.data.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "binder",
     name: "MVVM",
     category: "framework",
@@ -10,16 +9,16 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core", "data" ]
 };
 
-/*jshint eqnull: true */
-(function ($, undefined) {
+
+(function($, undefined) {
     var kendo = window.kendo,
+        encode = kendo.htmlEncode,
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
         ObservableArray = kendo.data.ObservableArray,
         toString = {}.toString,
         binders = {},
         Class = kendo.Class,
-        proxy = $.proxy,
         VALUE = "value",
         SOURCE = "source",
         EVENTS = "events",
@@ -34,7 +33,7 @@ var __meta__ = { // jshint ignore:line
 
         try {
             delete a.test;
-        } catch(e) {
+        } catch (e) {
             deleteExpando = false;
         }
     })();
@@ -204,7 +203,7 @@ var __meta__ = { // jshint ignore:line
         destroy: function() {
             if (this.observable) {
                 this.source.unbind(CHANGE, this._change);
-                if(this.currentSource) {
+                if (this.currentSource) {
                     this.currentSource.unbind(CHANGE, this._change);
                 }
             }
@@ -230,7 +229,11 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return proxy(handler, source);
+            if (!handler) {
+                return;
+            }
+
+            return handler.bind(source);
         }
     });
 
@@ -281,7 +284,7 @@ var __meta__ = { // jshint ignore:line
 
     var TypedBinder = Binder.extend({
         dataType: function() {
-            var dataType = this.element.getAttribute("data-type") || this.element.type || "text";
+            var dataType = this.element.getAttribute("data-" + kendo.ns + "type") || this.element.type || "text";
             return dataType.toLowerCase();
         },
 
@@ -289,18 +292,18 @@ var __meta__ = { // jshint ignore:line
             return this._parseValue(this.element.value, this.dataType());
         },
 
-        _parseValue: function (value, dataType){
+        _parseValue: function(value, dataType) {
             if (dataType == "date") {
                 value = kendo.parseDate(value, "yyyy-MM-dd");
             } else if (dataType == "datetime-local") {
                 value = kendo.parseDate(value, ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"] );
             } else if (dataType == "number") {
                 value = kendo.parseFloat(value);
-            } else if (dataType == "boolean"){
+            } else if (dataType == "boolean") {
                 value = value.toLowerCase();
-                if(kendo.parseFloat(value) !== null){
+                if (kendo.parseFloat(value) !== null) {
                     value = Boolean(kendo.parseFloat(value));
-                }else{
+                } else {
                     value = (value.toLowerCase() === "true");
                 }
             }
@@ -323,9 +326,9 @@ var __meta__ = { // jshint ignore:line
             var element = $(this.element),
                 binding = this.bindings.css[className],
                 hasClass = this.classes[className] = binding.get();
-            if(hasClass){
+            if (hasClass) {
                 element.addClass(className);
-            }else{
+            } else {
                 element.removeClass(className);
             }
         }
@@ -400,7 +403,7 @@ var __meta__ = { // jshint ignore:line
     binders.text = Binder.extend({
         refresh: function() {
             var text = this.bindings.text.get();
-            var dataFormat = this.element.getAttribute("data-format") || "";
+            var dataFormat = this.element.getAttribute("data-" + kendo.ns + "format") || "";
             if (text == null) {
                 text = "";
             }
@@ -439,7 +442,7 @@ var __meta__ = { // jshint ignore:line
         init: function(element, bindings, options) {
             TypedBinder.fn.init.call(this, element, bindings, options);
 
-            this._change = proxy(this.change, this);
+            this._change = this.change.bind(this);
             this.eventName = options.valueUpdate || CHANGE;
 
             $(this.element).on(this.eventName, this._change);
@@ -533,17 +536,20 @@ var __meta__ = { // jshint ignore:line
             if (!template) {
                 if (nodeName == "select") {
                     if (options.valueField || options.textField) {
-                        template = kendo.format('<option value="#:{0}#">#:{1}#</option>',
-                            options.valueField || options.textField, options.textField || options.valueField);
+                        template = (data) => {
+                            const valueAttr = kendo.getter(options.valueField || options.textField)(data);
+                            const innerText = kendo.getter(options.textField || options.valueField)(data);
+                            return `<option value="${encode(valueAttr)}">${encode(innerText)}</option>`;
+                        };
                     } else {
-                        template = "<option>#:data#</option>";
+                        template = (data) => `<option>${encode(data)}</option>`;
                     }
                 } else if (nodeName == "tbody") {
-                    template = "<tr><td>#:data#</td></tr>";
+                    template = (data) => `<tr><td>${encode(data)}</td></tr>`;
                 } else if (nodeName == "ul" || nodeName == "ol") {
-                    template = "<li>#:data#</li>";
+                    template = (data) => `<li>${encode(data)}</li>`;
                 } else {
-                    template = "#:data#";
+                    template = (data) => `${encode(data)}`;
                 }
                 template = kendo.template(template);
             }
@@ -627,7 +633,7 @@ var __meta__ = { // jshint ignore:line
         checked: TypedBinder.extend({
             init: function(element, bindings, options) {
                 TypedBinder.fn.init.call(this, element, bindings, options);
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
 
                 $(this.element).change(this._change);
             },
@@ -646,13 +652,13 @@ var __meta__ = { // jshint ignore:line
                     if (source instanceof ObservableArray) {
                         value = this.parsedValue();
                         if (value instanceof Date) {
-                            for(var i = 0; i < source.length; i++){
-                                if(source[i] instanceof Date && +source[i] === +value){
+                            for (var i = 0; i < source.length; i++) {
+                                if (source[i] instanceof Date && +source[i] === +value) {
                                     index = i;
                                     break;
                                 }
                             }
-                        }else{
+                        } else {
                             index = source.indexOf(value);
                         }
                         if (index > -1) {
@@ -676,18 +682,18 @@ var __meta__ = { // jshint ignore:line
                     if (source instanceof ObservableArray) {
                         var index = -1;
                         value = this.parsedValue();
-                        if(value instanceof Date){
-                            for(var i = 0; i < source.length; i++){
-                                if(source[i] instanceof Date && +source[i] === +value){
+                        if (value instanceof Date) {
+                            for (var i = 0; i < source.length; i++) {
+                                if (source[i] instanceof Date && +source[i] === +value) {
                                     index = i;
                                     break;
                                 }
                             }
-                        }else{
+                        } else {
                             index = source.indexOf(value);
                         }
                         element.checked = (index >= 0);
-                    }else{
+                    } else {
                         element.checked = source;
                     }
                 } else if (element.type == "radio") {
@@ -735,10 +741,10 @@ var __meta__ = { // jshint ignore:line
                         that.remove(e.index, e.items);
                     } else if (e.action == "itemchange" || e.action === undefined) {
                         that.render();
-                        if(that.bindings.value){
+                        if (that.bindings.value) {
                             if (that.bindings.value) {
                                 var val = retrievePrimitiveValues(that.bindings.value.get(), $(that.element).data("valueField"));
-                                if(val === null) {
+                                if (val === null) {
                                     that.element.selectedIndex = -1;
                                 } else {
                                     that.element.value = val;
@@ -755,11 +761,11 @@ var __meta__ = { // jshint ignore:line
             init: function(target, bindings, options) {
                 TypedBinder.fn.init.call(this, target, bindings, options);
 
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 $(this.element).change(this._change);
             },
 
-            parsedValue : function() {
+            parsedValue: function() {
                 var dataType = this.dataType();
                 var values = [];
                 var value, option, idx, length;
@@ -900,9 +906,9 @@ var __meta__ = { // jshint ignore:line
                 Binder.fn.init.call(that, widget.element[0], bindings, options);
 
                 that.widget = widget;
-                that._dataBinding = proxy(that.dataBinding, that);
-                that._dataBound = proxy(that.dataBound, that);
-                that._itemChange = proxy(that.itemChange, that);
+                that._dataBinding = that.dataBinding.bind(that);
+                that._dataBound = that.dataBound.bind(that);
+                that._itemChange = that.itemChange.bind(that);
             },
 
             itemChange: function(e) {
@@ -984,9 +990,9 @@ var __meta__ = { // jshint ignore:line
                             multiselect = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
                             dropdowntree = kendo.ui.DropDownTree && widget instanceof kendo.ui.DropDownTree;
 
-                            if(!dropdowntree){
+                            if (!dropdowntree) {
                                 widget[fieldName].data(source);
-                            }else{
+                            } else {
                                 widget.treeview[fieldName].data(source);
                             }
 
@@ -1009,7 +1015,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     binders.widget = {
-        events : Binder.extend({
+        events: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
                 this.widget = widget;
@@ -1053,7 +1059,7 @@ var __meta__ = { // jshint ignore:line
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                 this.widget = widget;
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget.bind(CHANGE, this._change);
             },
             change: function() {
@@ -1061,7 +1067,17 @@ var __meta__ = { // jshint ignore:line
             },
 
             refresh: function() {
-                this.widget.check(this.bindings[CHECKED].get() === true);
+                var val = this.bindings[CHECKED].get();
+
+                if (this.element.type === "radio") {
+                    if (val !== undefined) {
+                        this.widget.check(val.toString() === this.value());
+                    } else {
+                        this.widget.check(false);
+                    }
+                } else {
+                    this.widget.check(val === true);
+                }
             },
 
             value: function() {
@@ -1083,7 +1099,7 @@ var __meta__ = { // jshint ignore:line
         start: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget = widget;
                 this.widget.bind(CHANGE, this._change);
             },
@@ -1095,8 +1111,8 @@ var __meta__ = { // jshint ignore:line
             refresh: function() {
                 var that = this;
                 var start = this.bindings.start.get();
-                var end = that.widget._range ? that.widget._range.end: null;
-                this.widget.range({start: start, end: end});
+                var end = that.widget._range ? that.widget._range.end : null;
+                this.widget.range({ start: start, end: end });
             },
 
             destroy: function() {
@@ -1107,7 +1123,7 @@ var __meta__ = { // jshint ignore:line
         end: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget = widget;
                 this.widget.bind(CHANGE, this._change);
             },
@@ -1119,8 +1135,8 @@ var __meta__ = { // jshint ignore:line
             refresh: function() {
                 var that = this;
                 var end = this.bindings.end.get();
-                var start = that.widget._range ? that.widget._range.start: null;
-                this.widget.range({start: start, end: end});
+                var start = that.widget._range ? that.widget._range.start : null;
+                this.widget.range({ start: start, end: end });
             },
 
             destroy: function() {
@@ -1154,16 +1170,32 @@ var __meta__ = { // jshint ignore:line
             }
         }),
 
+        floatingLabel: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                if (!widget.floatingLabel) {
+                    return;
+                }
+
+                widget.floatingLabel.refresh();
+            }
+        }),
+
         enabled: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                 this.widget = widget;
+                this.readonly = this.element.readOnly;
             },
 
             refresh: function() {
                 if (this.widget.enable) {
                     this.widget.enable(this.bindings.enabled.get());
+                }
+                if (this.readonly && this.widget.readonly) {
+                    this.widget.readonly(this.readonly);
                 }
             }
         }),
@@ -1189,7 +1221,7 @@ var __meta__ = { // jshint ignore:line
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                 this.widget = widget;
-                this._change = $.proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget.first(CHANGE, this._change);
 
                 var value = this.bindings.value.get();
@@ -1331,7 +1363,7 @@ var __meta__ = { // jshint ignore:line
                     Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                     this.widget = widget;
-                    this._change = $.proxy(this.change, this);
+                    this._change = this.change.bind(this);
                     this.widget.first(CHANGE, this._change);
                     this._initChange = false;
                 },
@@ -1341,12 +1373,12 @@ var __meta__ = { // jshint ignore:line
                         oldValues = that.bindings[VALUE].get(),
                         valuePrimitive = that.options.valuePrimitive,
                         selectedNode = that.widget.treeview.select(),
-                        nonPrimitiveValues = that.widget._isMultipleSelection() ? that.widget._getAllChecked(): (that.widget.treeview.dataItem(selectedNode) || that.widget.value()),
+                        nonPrimitiveValues = that.widget._isMultipleSelection() ? that.widget._getAllChecked() : (that.widget.treeview.dataItem(selectedNode) || that.widget.value()),
                         newValues = (valuePrimitive || that.widget.options.autoBind === false) ? that.widget.value() : nonPrimitiveValues;
 
                     var field = this.options.dataValueField || this.options.dataTextField;
 
-                    newValues = newValues.slice ? newValues.slice(0): newValues;
+                    newValues = newValues.slice ? newValues.slice(0) : newValues;
 
                     that._initChange = true;
 
@@ -1460,7 +1492,7 @@ var __meta__ = { // jshint ignore:line
                     Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                     this.widget = widget;
-                    this._change = $.proxy(this.change, this);
+                    this._change = this.change.bind(this);
                     this.widget.first(CHANGE, this._change);
                     this._initChange = false;
                 },
@@ -1626,6 +1658,24 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             })
+        },
+
+        badge: {
+            text: Binder.extend({
+                init: function(widget, bindings, options) {
+                    Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                    this.widget = widget;
+                },
+                refresh: function() {
+                    var text = this.bindings.text.get();
+
+                    if (text == null) {
+                        text = "";
+                    }
+                    this.widget.text(text);
+                }
+            })
         }
     };
 
@@ -1729,6 +1779,10 @@ var __meta__ = { // jshint ignore:line
 
             if (hasCss && !widgetBinding) {
                 this.applyBinding(CSS, bindings, specificBinders);
+            }
+
+            if (widgetBinding && this.target && this.target.floatingLabel) {
+                this.applyBinding("floatingLabel", bindings, specificBinders);
             }
         },
 
@@ -1857,7 +1911,7 @@ var __meta__ = { // jshint ignore:line
 
     function bindElement(element, source, roles, parents) {
 
-        if(!element || element.getAttribute("data-" + kendo.ns + "stop")){
+        if (!element || element.getAttribute("data-" + kendo.ns + "stop")) {
             return;
         }
 
@@ -1884,7 +1938,7 @@ var __meta__ = { // jshint ignore:line
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true}, source);
+                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true }, source);
                 options.roles = roles;
                 target = new BindingTarget(element, options);
             }
@@ -1932,7 +1986,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         var children = element.children;
-        if (deep && children) {
+        if (deep && children && !element.getAttribute("data-" + kendo.ns + "stop")) {
             // https://github.com/telerik/kendo/issues/1240 for the weirdness.
             for (idx = 0; idx < children.length; idx++) {
                 childrenCopy[idx] = children[idx];
@@ -1976,7 +2030,7 @@ var __meta__ = { // jshint ignore:line
             }
         }
 
-        if(destroyWidget) {
+        if (destroyWidget) {
             var widget = kendo.widgetInstance($(element));
             if (widget && typeof widget.destroy === FUNCTION) {
                 widget.destroy();
@@ -1985,6 +2039,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     function unbindElementTree(element, destroyWidgets) {
+
+        if (!element) {
+            return;
+        }
+
         unbindElement(element, destroyWidgets);
 
         unbindElementChildren(element, destroyWidgets);
@@ -2085,8 +2144,5 @@ var __meta__ = { // jshint ignore:line
     };
 
 })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

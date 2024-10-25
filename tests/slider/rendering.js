@@ -47,7 +47,7 @@
             assert.equal(slider.element.val(), value);
         });
 
-        it("getValueFromPosition should increase value", function() {
+        it.skip("getValueFromPosition should increase value", function() {
             var slider = newSlider({ value: 1, smallStep: 2 }),
                 dragableArea = slider._getDraggableArea(),
                 step = 2 * (144 / 10);

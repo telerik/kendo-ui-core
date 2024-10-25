@@ -1,6 +1,6 @@
 ---
 title: TypeScript
-page_title: TypeScript | Kendo UI Third-Party Tools
+page_title: TypeScript - Kendo UI Third-Party Tools
 description: "Learn how to enable strongly-typed access to the Kendo UI widgets and their configuration."
 previous_url: /howto/typescript/overview, /typescript
 slug: typescript_integration_kendoui
@@ -33,15 +33,15 @@ Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped]
 
 * Getting instances of existing widgets
 
-    ![Getting an instance of an existing Kendo UI widget](../images/get-instance.png)
+    ![Kendo UI for jQuery Getting an instance of an existing Kendo UI widget](../images/get-instance.png)
 
 * Initializing and configuring widgets
 
-    ![All Kendo UI widgets](../images/init.png)
+    ![Kendo UI for jQuery All Kendo UI widgets](../images/all-widgets.png)
 
 * Initializing the Kendo UI DataSource
 
-    ![Initializing a Kendo UI DataSource](../images/datasource.png)
+    ![Kendo UI for jQuery Initializing a Kendo UI DataSource](../images/datasource.png)
 
 * Creating widgets through TypeScript inheritance&mdash;The following example demonstrates how to inherit from an existing Kendo UI widget.
 
@@ -137,4 +137,5 @@ $(function () {
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Aurelia]({% slug aurelia_integration_kendoui %})

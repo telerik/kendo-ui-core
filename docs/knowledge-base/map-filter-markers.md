@@ -1,8 +1,8 @@
 ---
 title: Filter Map Markers Dynamically
-description: An example on how to dynamically filter the markers of the Kendo UI Map.
+description: Learn how to dynamically filter the markers of the Kendo UI Map.
 type: how-to
-page_title: Filter Marker Layer | Kendo UI Map for jQuery
+page_title: Filter Marker Layer - Kendo UI Map for jQuery
 slug: map-filter-markers
 previous_url: /knowledge-base/map_filter_markers
 tags: map, filter, markers
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Map</td>
+		<td>Progress® Kendo UI® Map for jQuery</td>
 	</tr>
 </table>
 

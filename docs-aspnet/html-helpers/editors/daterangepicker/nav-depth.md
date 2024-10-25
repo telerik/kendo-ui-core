@@ -1,7 +1,7 @@
 ---
 title: Start View and Selection Depth
 page_title: Start View and Selection Depth
-description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to define the start view and control the navigation depth of the HTML Helper."
+description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to define the start view and control the navigation depth."
 slug: navdepth_daterangepicker_aspnetcore
 position: 4
 ---
@@ -27,13 +27,21 @@ The **Calendar** view supports the following predefined views:
 
 The following example demonstrates how to create a DateRangePicker that sets the start of a year and the navigation depth of a month.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateRangePicker()
         .Name("daterangepicker")
         .Start(CalendarView.Year)
         .Depth(CalendarView.Month)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-daterangepicker name="daterangepicker"
+                           start="CalendarView.Year"
+                           depth="CalendarView.Month">
+    </kendo-daterangepicker>
+```
+{% endif %}
 
 ## See Also
 

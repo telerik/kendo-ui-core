@@ -1,8 +1,8 @@
 ---
 title: Show Column List in Multiple Columns
-description: An example on how to show a column list in multiple columns of the Kendo UI Grid.
+description: Learn how to show a column list in multiple columns of the Kendo UI Grid.
 type: how-to
-page_title: Show Column List in Multiple Columns | Kendo UI Grid for jQuery
+page_title: Show Column List in Multiple Columns - Kendo UI for jQuery Data Grid
 slug: grid-column-list-multiple-columns
 tags: grid, column, list, multiple, columns
 res_type: kb
@@ -13,10 +13,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2018.2.221</td>
  </tr>
 </table>

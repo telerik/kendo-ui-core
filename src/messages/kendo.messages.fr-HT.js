@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -45,6 +46,79 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
 });
 }
 
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+  kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+      toolbar: {
+          createFolder: 'Nouveau dossier',
+          upload: 'Téléverser',
+          sortDirection: 'Ordre de tri',
+          sortDirectionAsc: 'Croissant',
+          sortDirectionDesc: 'Décroissant',
+          sortField: 'Champ de tri',
+          nameField: 'Nom',
+          sizeField: 'Taille',
+          typeField: 'Type',
+          dateModifiedField: 'Date de modification',
+          dateCreatedField: 'Date de création',
+          listView: 'Liste',
+          gridView: 'Grille',
+          search: 'Rechercher',
+          details: 'Détails',
+          detailsChecked: 'Oui',
+          detailsUnchecked: 'Non',
+          'Delete': 'Effacer',
+          Rename: 'Renommer'
+      },
+      views: {
+          nameField: 'Nom',
+          sizeField: 'Taille',
+          typeField: 'Type',
+          dateModifiedField: 'Date de modification',
+          dateCreatedField: 'Date de création',
+          items: 'éléments'
+      },
+      dialogs: {
+          upload: {
+              title: 'Transférer des fichiers',
+              clear: 'Vider',
+              done: 'Terminé'
+          },
+          moveConfirm: {
+              title: ' ',
+              content: '<p class=\'k-text-center\'>Voulez-vous déplacer les fichiers sélectionnés ou les copier?</p>',
+              okText: 'Copier',
+              cancel: 'Déplacer',
+              close: 'Fermer'
+          },
+          deleteConfirm: {
+              title: 'Confirmation de l\'effacement',
+              content: '<p class=\'k-text-center\'>Voulez-vous vraiment supprimer les fichiers sélectionnés?<br/>Il n\'est pas possible d\'annuler cette opération.</p>',
+              okText: 'Supprimer',
+              cancel: 'Annuler',
+              close: 'Fermer'
+          },
+          renamePrompt: {
+              title: 'Renommer',
+              content: '<p class=\'k-text-center\'>Entrez un nouveau nom de fichier</p>',
+              okText: 'Renommer',
+              cancel: 'Annuler',
+              close: 'Fermer'
+          }
+      },
+      previewPane: {
+          noFileSelected: 'Aucun fichier sélectionné',
+          extension: 'Type',
+          size: 'Taille',
+          created: 'Date de création',
+          createdUtc: 'Date de création (UTC)',
+          modified: 'Date de modification',
+          modifiedUtc: 'Date de modification (UTC)',
+          items: 'éléments'
+      }
+  });
+}
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -177,7 +251,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export to PDF",
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
-    "save": "Enregistrer les modifications"
+    "save": "Enregistrer les modifications",
+    "search": "Rechercher..."
   },
   "editable": {
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
@@ -269,7 +344,7 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Choisir toutes",
   "clear": "Effacer filtre",
   "filter": "Filtrer",
-  "search" : "Recherche"
+  "search": "Recherche"
 });
 }
 
@@ -389,17 +464,17 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 /* FileBrowser and ImageBrowser messages */
 
 var browserMessages = {
-  "uploadFile" : "Charger",
-  "orderBy" : "Trier par",
-  "orderByName" : "Nom",
-  "orderBySize" : "Taille",
-  "directoryNotFound" : "Aucun répértoire de ce nom.",
-  "emptyFolder" : "Répertoire vide",
-  "deleteFile" : 'Etes-vous sûr de vouloir supprimer "{0}"?',
-  "invalidFileType" : "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
-  "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
-  "dropFilesHere" : "glissez les fichiers ici pour les charger",
-  "search" : "Recherche"
+  "uploadFile": "Charger",
+  "orderBy": "Trier par",
+  "orderByName": "Nom",
+  "orderBySize": "Taille",
+  "directoryNotFound": "Aucun répértoire de ce nom.",
+  "emptyFolder": "Répertoire vide",
+  "deleteFile": 'Etes-vous sûr de vouloir supprimer "{0}"?',
+  "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
+  "overwriteFile": "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
+  "dropFilesHere": "glissez les fichiers ici pour les charger",
+  "search": "Recherche"
 };
 
 if (kendo.ui.FileBrowser) {

@@ -1,33 +1,48 @@
 ---
 title: CRUD Data Operations
-page_title: CRUD Data Operations | Kendo UI Data Source
-description: "Learn how to use the Kendo UI DataSource component for CRUD data operations."
+page_title: CRUD Data Operations - Kendo UI for jQuery DataSource
+description: "Learn how to use the Kendo UI for jQuery DataSource component for the create, read, update, and destroy (CRUD) data operations of your JavaScript components."
 slug: cruddataoperations_kendoui_datasourcecomponent
 position: 5
 ---
 
 # CRUD Data Operations
 
-The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) fully supports CRUD (Create, Read, Update, Destroy) data operations.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) supports all CRUD (Create, Read, Update, Destroy) data operations.
 
-However, it must be combined with some user interface or another Kendo UI widget such as the Grid, ListView, etc. Though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
+However, it must be combined with a user interface or another Kendo UI component such as the Grid, ListView, or other. Even though the examples in this article use the Grid as a sample, you can apply the configurations to any other component or scenario.
+
+## Sample Projects and Examples
+
+* For the example on using remote CRUD operations with a Kendo UI Grid, refer to the [online Grid Editing demos](https://demos.telerik.com/kendo-ui/grid/editing-inline).
+* For the example on using remote CRUD operations in ASP.NET MVC, refer to [this GitHub page](https://github.com/telerik/kendo-examples-asp-net).
+* For a sample mobile application on OpenEdge integration that uses JSDO and a Kendo UI DataSource component to list and update records from an employee table, refer to [this GitHub page](https://github.com/CloudDataObject/sample-crud-app).
 
 ## Setting the Transport
 
-The DataSource component can work with local data or remote data. In both cases, the CRUD operations are managed by the `transport` configuration of the DataSource. `transport` is a JavaScript object that can be configured to execute predefined functions or make requests to predefined URLs on certain events. For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/transport).
+The DataSource component can work with local data or remote data. In both cases, the CRUD operations are managed by the `transport` configuration of the DataSource. 
 
-> You have to define all transport actions (read, update, create, destroy) in the same way&mdash;for example, as functions (when using local or custom transport), or as objects (when using remote transport). It is not possible to mix the two configuration alternatives.
+`transport` is a JavaScript object that can be configured to execute predefined functions or make requests to predefined URLs on some events. For more information, refer to the [`transport` API documentation](/api/javascript/data/datasource/configuration/transport).
+
+> You have to define all transport actions (read, update, create, destroy) in the same way&mdash;for example, as functions (when using local or custom transport), or as objects (when using remote transport). Don't mix the two configuration alternatives.
 
 ## Setting the Schema
 
-The `schema` of the DataSource is responsible for the a number of data-connectivity actions. For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/schema).
+The `schema` of the DataSource handles some data-connectivity actions. For more information, refer to the [`schema` API documentation](/api/javascript/data/datasource/configuration/schema).
 
 The `schema` configuration defines the following fields and field types:
 
-* The `data` field types in `schema.model.fields`. This ensures the correct sorting and filtering, and corrects the usage of default field editors, such as a numeric textbox for numeric data. You have to configure `data` for both local and remote data scenarios. You can only skip the definition of `data` when all data fields are of the string type and editing is disabled.
-* The `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items. This field must be present in the data. You have to configure `id` for both local and remote data scenarios. You can only skip the definition of `id` when all data fields are of the string type and editing is disabled.
+* The `data` field types in `schema.model.fields`&mdash;Ensures the correct sorting and filtering, and corrects the usage of default field editors such as a NumericTextBox for numeric data. 
 
-    The field that is used as a model ID has default values that are used by the DataSource component to identify new items. If the value of an item in the data set matches the default value, it will be considered a new item. The default values per field type are:
+  You have to configure `data` for both local and remote data scenarios. You can only skip the `data` definition when all data fields are of the string type and editing is disabled.
+  
+* The `id` field of the data items in `schema.model.id`&mdash;Ensures the correct adding, editing, and deleting of items. This field must be present in the data. 
+
+  You have to configure `id` for both local and remote data scenarios. You can only skip the `id` definition when all data fields are of the string type and editing is disabled.
+
+  The field that is used as a model ID has default values that are used by the DataSource component to locate new items. If the value of an item in the data set matches the default value, it will be used as a new item. 
+  
+  The default values per field type are:
 
     ```
     "string": "",
@@ -37,23 +52,23 @@ The `schema` configuration defines the following fields and field types:
     "default": ""
     ```
 
-    The value of the denoted field in `schema.model.id` will also be set to the field with an `id` name in the actual data object. The field with the `id` name is a reserved field for the DataSource and will always be populated with the default value for its type or with the data from the actual data that is supplied by the developer.
+  The value of the denoted field in `schema.model.id` will also set the field with an `id` name in the same data object. The field with the `id` name is a reserved field for the DataSource and will always be populated with the default value for its type or with the data from the supplied by the developer data.
 
-* The `key`, which points to the data items array in `schema.data`. This is required when the data does not represent a plain array of objects or JSON.
+* The `key`, which points to the data items array in `schema.data`&mdash;Required when the data does not represent a plain array of objects or JSON.
 
 ## Setting the Local CRUD Operations
 
-The following information is applicable to scenarios in which the data is already available on the client, or when you will have to take care of its retrieval and submission and the Kendo UI DataSource will not make any HTTP requests on its own.
+The following information applies to scenarios in which the data is already available on the client, or when you will have to take care of its retrieval and submission and the DataSource will not make any HTTP requests on its own.
 
 ### Local Read Operations
 
-When you have to bind a Kendo UI DataSource instance to local data without the need to support editing, use the `data` option.
+When you have to bind a DataSource instance to local data without the need to support editing, use the `data` option.
 
     var dataSource = new kendo.data.DataSource({
         data: sampleData
     }
 
-When you will use editing, you are required to provide a `transport` configuration. The `data` option is no longer needed. The `read` method of the `transport` has to pass a local variable and it can make a custom AJAX request and then pass the response.
+When you use editing, you have to provide a `transport` configuration. The `data` option is no longer needed. The `read` method of the `transport` has to pass a local variable and it can make a custom AJAX request and then pass the response.
 
     var dataSource = new kendo.data.DataSource({
         transport: {
@@ -73,7 +88,7 @@ Executing the `success` method of the `read` function argument populates the Dat
 The `update` configuration setting of the DataSource defines a function that handles the updated data items which are received as a function argument. When `batch` is disabled, as it is by default, and only one data item can be updated at a time, the updated data item is received as an object in `e.data`. If `batch` is enabled and multiple data items can be updated, they are received as an array of objects in `e.data.models`. You have to execute the `success` or `error` method of the function argument at the end.
 
 > * The Kendo UI DataSource uses the `ID` value to determine whether a data item is new or existing.
-> * If the `ID` value is `zero`, it is assumed that the data item is new so the `create` function is executed.
+> * If the `ID` value is `zero`, the data item will be used as new so the `create` function is executed.
 > * If you need to use zero `ID` values, then change the [`defaultValue`](/api/javascript/data/model/methods/define) of the ID field to `-1` (minus one) in
 [`schema.model.fields`](/api/javascript/data/datasource/configuration/schema.model).
 
@@ -104,8 +119,8 @@ The `update` configuration setting of the DataSource defines a function that han
 The `create` function performs a similar routine as `update` with the following differences:
 
 * The newly created data items have no `ID` so they must be added by the function script or returned by the remote service.
-* The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance will operate with incorrect data and subsequent data operations can fail.
-* If the [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) configuration is set, the `success` method receives the created data item in an object with the same structure as the object that is passed to the `success` method of the `read` function. For more information, refer to the following example and to the previous section on [local update operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#update-local).
+* The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance will run with incorrect data and later data operations can fail.
+* If the [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) configuration is set, the `success` method receives the created data item in an object with the same structure as the object that is passed to the `success` method of the `read` function. For more information, refer to the following example and to the previous section on [local update operations](#local-update-operations).
 
 <!-- exit list -->
 
@@ -134,7 +149,7 @@ The `create` function performs a similar routine as `update` with the following 
 
 ### Local Destroy Operations
 
-Similar to `create` and `update`, the `destroy` function receives the items that will be deleted in `e.data`. The function removes the provided items from the original DataSource and returns `success` or `error`.
+Like `create` and `update`, the `destroy` function receives the items that will be deleted in `e.data`. The function removes the provided items from the original DataSource and returns `success` or `error`.
 
     var dataSource = new kendo.data.DataSource({
         transport: {
@@ -170,9 +185,9 @@ If any of the `transport` actions (read, update, create, destroy) fails, then yo
         }
     });
 
-### Examples
+### Local CRUD Operations Example
 
-The following example is the complete implementation based on the previous information and demonstrates CRUD operations with simple **Products** data. `original datasource` signifies the `sampleData` variable which is used to populate the Grid initially. All data operations are persisted in this variable so that it can be used or submitted somewhere else. Avoid using an [`ObservableArray`](/api/javascript/data/observablearray) instead of a plain JavaScript array in the example. The Kendo UI DataSource will wrap the provided plain array and transform it to a collection of [`ObservableObjects`](/api/javascript/data/observableobject) automatically.
+The following example is the complete implementation based on the previous information and demonstrates CRUD operations with simple **Products** data. `original datasource` signifies the `sampleData` variable which is used to populate the Grid initially. All data operations are persisted in this variable so that it can be reused or submitted later. Avoid using an [`ObservableArray`](/api/javascript/data/observablearray) instead of a plain JavaScript array in the example. The Kendo UI DataSource will wrap the provided plain array and transform it to a collection of [`ObservableObjects`](/api/javascript/data/observableobject) automatically.
 
 ```dojo
     <style>html { font: 12px sans-serif; }</style>
@@ -279,21 +294,21 @@ The following example is the complete implementation based on the previous infor
 
 ## Setting the Remote CRUD Operations
 
-The following information is applicable to scenarios in which you have to retrieve the data from and submit it to a remote data service through HTTP requests that are made by the Kendo UI DataSource.
+The following information applies to scenarios in which you have to retrieve the data from and submit it to a remote data service through HTTP requests made by the Kendo UI DataSource.
 
-CRUD operations with remote data rely on server code to perform the read, update, create, and destroy actions. Instead of configuring client functions, the `transport` of the DataSource defines remote service URLs and the expected format in which the data has to be sent and received. Theoretically, similar to the previous examples that use local data, you can use remote CRUD operations with `transport` functions but this is rarely required.
+CRUD operations with remote data rely on server code to perform the read, update, create, and destroy actions. Instead of configuring client functions, the `transport` of the DataSource defines remote service URLs and the expected format for sending and receiving the data. Theoretically, like the previous examples that use local data, you can use remote CRUD operations with `transport` functions but this is not a common scenario.
 
-Each of the CRUD operation settings&mdash;read, update, create, destroy&mdash;provides the following common `transport` settings that you have to set accordingly. For more information, refer to the [API of the Kendo UI DataSource](/api/javascript/data/datasource).
+Each of the CRUD operation settings&mdash;read, update, create, destroy&mdash;provides the following common `transport` settings that you must set. For more information, refer to the [API of the Kendo UI DataSource](/api/javascript/data/datasource).
 
 * The client request `type` can be `"get"` or `"post"`.
-* Additional optional `data` parameters can be sent to the server if needed.
+* You can send additional optional `data` parameters to the server if needed.
 * The client request and expected server response `dataType` can be `"json"`, `"jsonp"`, `"odata"`, etc.
 
 ### Remote Read Operations
 
 The `read` service defined by the DataSource `transport` returns data in the expected JSON, JSONP, XML, or oData format. By default, the expected format is JSON. If the response is not a plain array of objects, you have to define a [`schema`](/api/javascript/data/datasource/configuration/schema) which will describe the structure of the response and [where the data is](/api/javascript/data/datasource/configuration/schema.data).
 
-The following example uses a `read` transport configuration. The assumed server response is a plain JSON array of objects.
+The following example uses a `read` transport configuration. The required server response is a plain JSON array of objects.
 
     /* Server response:
 
@@ -355,11 +370,11 @@ The following example is a modified version of the previous one which, due to th
 If an error in the server code occurs, the server response can notify the client-side DataSource instance.
 
 * For more information on handling errors in such scenarios, refer to the section about [error handling with remote transport]({% slug cruddataoperations_kendoui_datasourcecomponent %}#error-handling-with-remote-transport).
-* For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+* For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_combobox_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
 
 ### Remote Update Operation
 
-The `update` service expects the edited data items and returns the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response. If [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) is set and the server response is not empty, then the server response must have the same structure as the response of the `read` request. For more information, refer to the previous section on [local update operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#update-local).
+The `update` service expects the edited data items and returns the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response. If [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) is set and the server response is not empty, then the server response must have the same structure as the response of the `read` request. For more information, refer to the previous section on [local update operations](#local-update-operations).
 
 The following example demonstrates a case with no `schema.data`.
 
@@ -520,7 +535,7 @@ If any of the `transport` actions (read, update, create, destroy) fails and erro
 
 > The two approaches cannot be combined, that is, custom errors can be provided only with a `200` HTTP status code.
 
-When an `error` event is fired, the DataSource does not process any data items which may also be part of the server response. For example, if an update action fails due to conflicting edits and the data needs to be refreshed from the server, call the [`read`](/api/javascript/data/datasource/methods/read) method of the DataSource in the error handler. Sending the new data together with the error response will not populate the DataSource with the new values.
+When an `error` event is fired, the DataSource does not process any data items that are part of the server response. For example, if an update action fails due to conflicting edits and the data needs to be refreshed from the server, call the [`read`](/api/javascript/data/datasource/methods/read) method of the DataSource in the error handler. Sending the new data together with the error response will not populate the DataSource with the new values.
 
 The following example demonstrates a standard error.
 
@@ -576,11 +591,13 @@ The following example demonstrates a custom error.
 
 <!--*-->
 
+For a complete example of Remote CRUD Operations please refer to this [Grid Inline Editing Demo](https://demos.telerik.com/kendo-ui/grid/editing-inline).
+
 ## Submitting All Items with a Single Request
 
 When you use custom transport, the create, update, and delete operations will be handled by the [`transport.submit`](/api/javascript/data/datasource/configuration/transport.submit) function in a single batch. You are also required to define `transport.read` as a function. The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
 
-> In order for the defined function to invoke a single request for all read, create, update, and delete operation, set the DataSource in its [batch mode](/api/javascript/data/datasource#configuration-batch).
+> For the defined function to invoke a single request for all read, create, update, and delete operation, set the DataSource in its [batch mode](/api/javascript/data/datasource#configuration-batch).
 
 ```dojo
 <script>
@@ -637,16 +654,10 @@ dataSource.read().then(function(){
 </script>
 ```
 
-## Sample Projects and Examples
-
-* For the example on using remote CRUD operations with a Kendo UI Grid, refer to the [online Grid Editing demos](https://demos.telerik.com/kendo-ui/grid/editing-inline).
-* For the example on using remote CRUD operations in ASP.NET MVC, refer to [this GitHub page](https://github.com/telerik/kendo-examples-asp-net).
-* For a sample mobile application on OpenEdge integration that uses JSDO and a Kendo UI DataSource component to list and update records from an employee table, refer to [this GitHub page](https://github.com/CloudDataObject/sample-crud-app).
 
 ## See Also
 
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
-* [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})
 * [CORS Data Fetching from Another Domain]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})
 * [DataSource JavaScript API Reference](/api/javascript/data/datasource)

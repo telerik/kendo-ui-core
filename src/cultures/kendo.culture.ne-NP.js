@@ -6,13 +6,13 @@
             decimals: 2,
             ",": ",",
             ".": ".",
-            groupSize: [3,2],
+            groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
-                groupSize: [3,2],
+                groupSize: [3],
                 symbol: "%"
             },
             currency: {
@@ -59,5 +59,5 @@
                 firstDay: 0
             }
         }
-    }
-})(this);
+    };
+})();

@@ -10,7 +10,7 @@
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key });
-            }
+            };
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
@@ -23,7 +23,7 @@
 
             autocomplete._change = function() {
                 changeWasCalled = true;
-            }
+            };
 
             autocomplete._blur();
 

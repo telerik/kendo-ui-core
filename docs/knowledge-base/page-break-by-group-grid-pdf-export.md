@@ -1,8 +1,8 @@
 ---
 title: Add Page Breaks by Group When Exporting the Grid to PDF
-description: An example on how to add a new page for each group when exporting the Kendo UI Grid to PDF.
+description: Learn how to add a new page for each group when exporting the Kendo UI Grid to PDF.
 type: how-to
-page_title: Add New Page for Each Group When Exporting the Grid to PDF | Kendo UI Grid for jQuery
+page_title: Add New Page for Each Group When Exporting the Grid to PDF - Kendo UI for jQuery Data Grid
 previous_url: /knowledge-base/how-to-page-break-by-group-grid-pdf-export
 slug: page-break-by-group-grid-pdf-export
 tags: kendo, grid, pdf, export, group, page, break
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 
@@ -55,16 +55,16 @@ pdf: { 
             stylesheet is hosted on a different domain.
         */
         kendo.pdf.defineFont({
-          "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
-          "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-          "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-          "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-          "WebComponentsIcons"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/glyphs/WebComponentsIcons.ttf"
+          "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+          "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+          "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+          "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+          "WebComponentsIcons"      : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/glyphs/WebComponentsIcons.ttf"
         });
       </script>
 
       <!-- Load Pako ZLIB library to enable PDF compression -->
-      <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+      <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
       <script type="x/kendo-template" id="page-template">
       <div class="page-template">
@@ -196,4 +196,4 @@ pdf: { 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

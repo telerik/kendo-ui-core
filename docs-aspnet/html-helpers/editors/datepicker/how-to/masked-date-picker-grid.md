@@ -10,7 +10,7 @@ slug: howto_create_masked_datepickers_datepickaspnetmvc
 
 The following example demonstrates how to add a mask to the Telerik UI DatePicker by using a custom Kendo UI widget.
 
-> The DatePicker does not officially support the suggested approach and its implementation might lead to undesired side-effects. As of the R2 2017 release, the DatePicker supports the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) property which provides a built-in mask.
+> The DatePicker does not officially support the suggested approach and its implementation might lead to undesired side-effects. As of the R2 2017 release, the DatePicker supports the [`dateInput`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/dateinput) property which provides a built-in mask.
 
 ```html
     <script>
@@ -84,4 +84,4 @@ The following example demonstrates how to add a mask to the Telerik UI DatePicke
 
 ## See Also
 
-* [DatePickerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder)
+* [DatePickerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/datepickerbuilder)

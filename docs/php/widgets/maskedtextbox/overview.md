@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | MaskedTextBox PHP Class
+page_title: Overview - MaskedTextBox PHP Class
 description: "Get started with the MaskedTextBox PHP class in Kendo UI."
 slug: overview_maskedtextbox_uiforphp
 position: 1

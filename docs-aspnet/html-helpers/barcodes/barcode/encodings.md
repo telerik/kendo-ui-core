@@ -1,7 +1,7 @@
 ---
 title: Encoding
 page_title: Encoding
-description: "Get started with the Telerik UI Barcode HtmlHelper for {{ site.framework }} and learn more about the character set and length and check the digits of the symbologies."
+description: "Get started with the Telerik UI Barcode component for {{ site.framework }} and learn more about the character set and length and check the digits of the symbologies."
 slug: encodings_aspnetcore_barcode_widget
 position: 2
 ---
@@ -63,7 +63,7 @@ The following table lists the available symbologies and their specifications sup
            <td>optional (Mod. 43)</td>
         </tr>
         <tr>
-           <td><a href="https://www.barcodeisland.com/code93.phtml">Code 93</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_93">Code 93</a></td>
            <td>[0-9];[A-Z];[SPACE . + - / % $]</td>
            <td>variable</td>
            <td>2 check digits</td>
@@ -105,7 +105,7 @@ The following table lists the available symbologies and their specifications sup
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="https://www.barcodeisland.com/code11.phtml">Code 11</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_11">Code 11</a></td>
            <td>[0-9]; [-]</td>
            <td>variable</td>
            <td>1 or 2 based on length</td>
@@ -169,5 +169,5 @@ The following table lists the available symbologies and their specifications sup
 
 ## See Also
 
-* [Basic Usage of the Barcode HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/barcode/index)
+* [Basic Usage of the Barcode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/barcode/index)
 * [Server-Side API](/api/barcode)

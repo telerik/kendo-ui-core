@@ -9,6 +9,11 @@ position: 4
 
 # Grid Integration
 
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+>For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
+
 The [Grid](https://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets.
 
 This article outlines some of the specifics for setting and using the Grid with AngularJS.
@@ -17,7 +22,12 @@ This article outlines some of the specifics for setting and using the Grid with 
 
 AngularJS evaluates a template expression which is placed as [`column.title`](/api/javascript/ui/grid/configuration/columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid/configuration/columns.headerattributes) so that AngularJS skips the expression evaluation.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions">
@@ -68,7 +78,12 @@ If you assign a `k-on-change` event handler, it is evaluated in a scope, which c
 
 When the Grid is not in a multiple selection mode, the `data` will be a single data item and not an array and that item will also be accessible as a `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array which contains the indexes of the columns with selected cells. To see what variables are available, choose the selection mode of the Grid and select items from it.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
   <label>Select mode: <select kendo-dropdownlist ng-model="gridOptions.selectable">
     <option value="row">Row</option>
@@ -117,7 +132,12 @@ If your project requires you to load a column definition from the server, you ne
 
 The following example demonstrates how to dynamically set the Grid columns in AngularJS.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
 </div>
@@ -147,7 +167,12 @@ The Grid supports templates that can be customized by the user. To completely cu
 
 The following example demonstrates how to set the Grid row template (`rowTemplate`) by using markup. You can also define it in the Grid `options` object in the same way as when you do not use AngularJS.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions">
     <table>
@@ -190,7 +215,13 @@ When you use aggregates, the `column` and `aggregate` information becomes availa
 
 The following example demonstrates how to use the `sum` aggregate in a `footerTemplate` and a `groupFooterTemplate`, and apply an Angular currency pipe to it.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
+
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   <div id="example" ng-app="KendoDemos">
@@ -244,7 +275,12 @@ To take full control on the logic that performs the request to the server, defin
 
 The following example demonstrates how to use `$http` to bind the Grid.
 
-```dojo
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid k-options="gridOptions"></div>
  </div>
@@ -277,9 +313,9 @@ The following example demonstrates how to use `$http` to bind the Grid.
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
-* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
-* [How to Load View in Window]({% slug window_service_angularjs_directives %})
-* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
+
+
+
+
 * [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

@@ -1,6 +1,6 @@
 ---
 title: Kinvey
-page_title: Kinvey | Kendo UI Third-Party Tools
+page_title: Kinvey - Kendo UI Third-Party Tools
 description: "Learn how to use the Kendo UI widgets with Kinvey services."
 slug: kinveysupport_integration_kendoui
 ---
@@ -123,4 +123,5 @@ The following example demonstrates how to configure the `destroy` transport oper
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Aurelia]({% slug aurelia_integration_kendoui %})

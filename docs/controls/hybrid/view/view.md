@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI View
-description: "Use the hybrid mobile Kendo UI View widget, mark header and footer elements, and view parameters of navigational widgets and DOM elements."
+page_title: Overview - Hybrid UI View
+description: "Use the hybrid mobile Kendo UI View component, mark header and footer elements, and view parameters of navigational components and DOM elements."
 slug: overview_hybridview
 position: 1
 component: view
@@ -9,7 +9,11 @@ component: view
 
 # View Overview
 
-The [Hybrid UI View widget](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
+The [Hybrid UI View component](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
 
 ## Getting Started
 
@@ -39,11 +43,11 @@ The example below demonstrates a mobile View with a header and a footer.
 
 > **Important**
 >
-> Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a mobile TabStrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
+> Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a mobile TabStrip component, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
 
 ### Parameters
 
-Navigational widgets can pass additional URL parameters when navigating to Views. The parameters are accessible in the  view `show` event handlers.
+Navigational components can pass additional URL parameters when navigating to Views. The parameters are accessible in the  view `show` event handlers.
 
 The example below demonstrates a button with additional URL parameters.
 

@@ -1,8 +1,8 @@
 ---
 title: Filer the Scheduler with a ComBox in AngularJS
-description: An example on how to filter the grouped resources in the Kendo UI Scheduler by using a Kendo UI ComboBox in an AngularJS scenario.
+description: Learn how to filter the grouped resources in the Kendo UI Scheduler by using a Kendo UI ComboBox in an AngularJS scenario.
 type: how-to
-page_title: Filter Grouped Resources in AngularJS with ComboBox | Kendo UI Scheduler for jQuery
+page_title: Filter Grouped Resources in AngularJS with ComboBox - Kendo UI Scheduler for jQuery
 slug: scheduler-angularjs-filter-resources-combobox
 tags: kendo, kendo-ui, scheduler, resources, combobox, angularjs
 ticketid: 1158749
@@ -14,9 +14,11 @@ res_type: kb
 <table>
     <tr>
         <td>Product</td>
-        <td>Scheduler for Progress® Kendo UI®</td>
+        <td>Progress® Kendo UI® Scheduler for jQuery</td>
     </tr>
 </table>
+
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
 
 ## Description
 
@@ -49,7 +51,12 @@ How can I add a filter to the Kendo UI Scheduler in AngularJS?
 
 The following example demonstrates the full implementation of the suggested approach.
 
+> The example loads Kendo UI 2023.3.1010 version.
+
 ```dojo
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+
 <div id="example" ng-app="KendoDemos">
   <div ng-controller="MyCtrl as $ctrl">
     <input type="text" kendo-combo-box="$ctrl.comboBox" name="comboBox"  k-options="$ctrl.comboboxOptions"/>
@@ -64,8 +71,8 @@ The following example demonstrates the full implementation of the suggested appr
     var $ctrl = this;
 
     this.schedulerOptions = {
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       eventHeight: 50,
       majorTick: 60,
       views: [ "timeline", "timelineWeek", "timelineWorkWeek", {

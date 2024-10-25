@@ -1,6 +1,6 @@
 ---
 title: Text
-page_title: Text Binding | Kendo UI MVVM
+page_title: Text Binding - Kendo UI MVVM
 description: "Learn how to update the text of the DOM element to a View-Model value by using the text binding in Kendo UI MVVM."
 slug: textbinding_mvvm_kendoui
 ---

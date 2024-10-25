@@ -5,7 +5,7 @@
             $.mockjaxSettings.responseTime = 0;
         });
         afterEach(function() {
-            $.mockjax.clear()
+            $.mockjax.clear();
         });
 
         var data = [];
@@ -63,7 +63,7 @@
             });
 
             dataSource.query({ sort: { field: "foo", dir: "asc" } });
-            assert.isOk($.isArray(dataSource.sort()));
+            assert.isOk(Array.isArray(dataSource.sort()));
             assert.equal(dataSource.sort()[0].field, "foo");
             assert.equal(dataSource.sort()[0].dir, "asc");
 
@@ -772,7 +772,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -910,7 +910,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -941,7 +941,7 @@
             var transport = new RemoteTransport({
                 read: "foo",
                 parameterMap: function(options) {
-                    assert.isOk(false)
+                    assert.isOk(false);
                     return options;
                 }
             });
@@ -1284,6 +1284,58 @@
             assert.equal(dataSource.view().length, 2);
         });
 
+        it("cancelChanges of a newly inserted item removes the empty groups if serverpaging is enabled and nested grouping is applied", function() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ group: [{ items: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }] }, { items: [{ id: 3, bar: "foo" }] }], total: 10 });
+                    }
+                },
+                schema: {
+                    groups: "group",
+                    model: {
+                        id: "id"
+                    }
+                },
+                group: [{ field: "id" }, { field: "bar" }],
+                serverPaging: true,
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            dataSource.add({ bar: "test" });
+            var model = dataSource.get("");
+            dataSource.cancelChanges(model);
+            assert.equal(dataSource.view().length, 2);
+        });
+
+        it("cancelChanges of a newly inserted item updates the total if serverGrouping is enabled", function() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ group: [{ items: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }] }, { items: [{ id: 3, bar: "foo" }] }], total: 10 });
+                    }
+                },
+                schema: {
+                    groups: "group",
+                    total: "total",
+                    model: {
+                        id: "id"
+                    }
+                },
+                group: [{ field: "id" }, { field: "bar" }],
+                serverPaging: true,
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            dataSource.add({ bar: "test" });
+            var model = dataSource.get("");
+            dataSource.cancelChanges(model);
+
+            assert.equal(dataSource.total(), 10);
+        });
+
         it("delete the last item in group removes the empty group if serverpaging is enabled and grouping is applied", function() {
             var dataSource = new kendo.data.DataSource({
                 transport: {
@@ -1339,7 +1391,7 @@
             });
 
             dataSource.query({ filter: { field: "age", operator: "==", value: 2 } });
-            assert.isOk($.isArray(dataSource.filter().filters));
+            assert.isOk(Array.isArray(dataSource.filter().filters));
             assert.equal(dataSource.filter().filters[0].field, "age");
             assert.equal(dataSource.filter().filters[0].operator, "eq");
             assert.equal(dataSource.filter().filters[0].value, 2);
@@ -1973,7 +2025,7 @@
                 serverPaging: true,
                 schema: {
                     total: function() {
-                        return "2"
+                        return "2";
                     }
                 }
             });
@@ -2283,7 +2335,7 @@
                 serverSorting: true
             });
 
-            assert.isOk($.isFunction(dataSource.query().then));
+            assert.isOk(kendo.isFunction(dataSource.query().then));
         });
 
         it("query returns promise for local operations", function() {
@@ -2295,7 +2347,7 @@
 
             dataSource.read();
 
-            assert.isOk($.isFunction(dataSource.query().then));
+            assert.isOk(kendo.isFunction(dataSource.query().then));
         });
 
         it("query resolves promise after data has been processed", function() {

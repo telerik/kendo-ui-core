@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | DateInput JSP Tag
+page_title: Overview - DateInput JSP Tag
 description: "Get started with the DateInput JSP tag in Kendo UI."
 slug: overview_dateinput_uiforjsp
 position: 1

@@ -2,7 +2,7 @@
 title: Cannot Send AntiForgery Token
 description: Cannot send my anti-forgery token as it is not available on the server.
 type: troubleshooting
-page_title: AntiForgery Token Is Not Available on the Server | Kendo UI DataSource for jQuery
+page_title: AntiForgery Token Is Not Available on the Server - Kendo UI DataSource for jQuery
 slug: datasource-send-antiforgery-token
 tags: security, authentication, dataSource
 ticketid: 1116629
@@ -15,7 +15,7 @@ component: data-source
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DataSource</td>
+  <td>Progress® Kendo UI® DataSource for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

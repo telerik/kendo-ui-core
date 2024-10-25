@@ -1,8 +1,8 @@
 ---
 title: Set MultiSelects to Behave as TagBoxes
-description: An example on how to configure and customize the Kendo UI MultiSelect to accept custom user input and not display its pop-up drop-down.
+description: Learn how to configure and customize the Kendo UI MultiSelect to accept custom user input and not display its pop-up drop-down.
 type: how-to
-page_title: Accept Custom Input with No Drop-Down Shown | Kendo UI MultiSelect for jQuery
+page_title: Accept Custom Input with No Drop-Down Shown - Kendo UI MultiSelect for jQuery
 slug: multiselect-as-tagbox
 tags: kendo, multiselect, tagbox, no-dropdown
 ticketid: 1131556
@@ -15,7 +15,7 @@ component: multiselect
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI MultiSelect</td>
+  <td>Progress® Kendo UI® MultiSelect for jQuery</td>
  </tr>
 </table>
 
@@ -47,14 +47,14 @@ How can I configure and customize the MultiSelect to behave as a TagBox?
 		var currentId = 1;
 
 		function onDataBound(e) {
-			$('.k-multiselect .k-input').unbind('keyup');
-			$('.k-multiselect .k-input').on('keyup', onClickEnter);
+			$('.k-multiselect .k-input-inner').unbind('keyup');
+			$('.k-multiselect .k-input-inner').on('keyup', onClickEnter);
 		}
 		function onClickEnter(e) {
 			if (e.keyCode === 13) {
 				var widget = $('#products').getKendoMultiSelect();
 				var dataSource = widget.dataSource;
-				var input = $('.k-multiselect .k-input');
+				var input = $('.k-multiselect .k-input-inner');
 				var value = input.val().trim();
 				if (!value || value.length === 0) {
 					return;

@@ -2,7 +2,7 @@
 title: AutoSync Does Not Work in Grid When Using Server Grouping
 description: When the Kendo UI Grid is grouped by using the server-side grouping, the AutoSync does not work during editing.
 type: troubleshooting
-page_title: Grid Cannot AutoSync Changes If It Is Grouped by Using Server-Side Grouping | Kendo UI Grid for jQuery
+page_title: Grid Cannot AutoSync Changes If It Is Grouped by Using Server-Side Grouping - Kendo UI for jQuery Data Grid
 slug: grid-no-autosync-when-server-grouping
 tags: grid, editing, grouping
 ticketid: 1145291, 1144037
@@ -14,7 +14,7 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | ListView PHP Class
+page_title: Remote Binding - ListView PHP Class
 description: "Bind Kendo UI ListView PHP class to JSON."
 slug: remotebinding_listview_uiforphp
 position: 3

@@ -27,21 +27,31 @@ install-npm.sh,
 start-docs.sh,
 watch.sh,
 getting-started-mvc/*,
+html-helpers/helper-basics/build-team-efficiency-dashboard/*,
 how-to/*,
 tutorials/*,
-troubleshoot/*,
+troubleshoot/troubleshooting.md,
+troubleshoot/troubleshooting-validation.md,
+troubleshoot/troubleshooting-scaffolding.md,
+vs-integration/create-kendo-professional-project.md,
+vs-integration/upgrade-api-analyzer.md,
+vs-integration/upgrade-wizard.md,
+installation/nuget-keys.md,
 asp-net-mvc-3.md,
 asp-net-mvc-4.md,
+html-helpers/helper-basics/fundamentals-mvc.md,
+html-helpers/helper-basics/vb.md,
 html-helpers/hybrid/*,
 html-helpers/charts/scaffolding.md,
 html-helpers/data-management/grid/scaffolding.md,
+html-helpers/datasource/custom-datasource.md,
 html-helpers/navigation/treeview/scaffolding.md,
 html-helpers/scheduling/scheduler/scaffolding.md,
 html-helpers/data-management/spreadsheet/spreadsheet-processing.md,
+html-helpers/data-management/grid/binding/server-binding.md,
+html-helpers/data-management/grid/editing/server-editing.md,
 html-helpers/data-management/grid/templates/server-detail-template.md,
-html-helpers/data-management/grid/troubleshoot/*,
 html-helpers/navigation/menu/binding/sitemap-binding.md,
-html-helpers/navigation/menu/security-trimming.md,
 html-helpers/navigation/panelbar/binding/sitemap-binding.md,
 html-helpers/navigation/panelbar/security-trimming.md,
 html-helpers/navigation/tabstrip/binding/*,
@@ -67,12 +77,14 @@ html-helpers/navigation/menu/how-to/*,
 html-helpers/navigation/panelbar/how-to/*,
 html-helpers/navigation/treeview/how-to/*,
 html-helpers/scheduling/scheduler/how-to/*,
+tag-helpers/*,
 knowledge-base/switch-change-messages-inside-grid.md]
 
 exclude_navigation: ["knowledge-base/*",
-api/Kendo.Mvc/*,
-api/Kendo.Mvc.UI/*,
-api/Kendo.Mvc.UI.Fluent/*,
+api/kendo.mvc/*,
+api/kendo.mvc.ui/*,
+api/kendo.mvc.ui.fluent/*,
+api/kendo.mvc.taghelpers/*,
 getting-started-core/*]
 
 navigation:
@@ -82,6 +94,12 @@ navigation:
      "api":
         title: "API Reference"
         position: 0
+     "api/kendo.mvc.extensions":
+        title: "Kendo.Mvc.Extensions"
+        position: 1
+     "api/taghelpers":
+        title: "TagHelpers API Reference"
+        position: 2
      "getting-started":
         title: "Getting Started"
         position: 2
@@ -91,9 +109,57 @@ navigation:
      "getting-started/installation":
         title: "Download and Installation"
         position: 5
-     "getting-started/helper-basics":
-        title: "Working with Helpers"
+     "vs-integration":
+        title: "Visual Studio Integration"
+        position: 5
+     "vs-integration-mvc":
+        title: "Visual Studio Integration"
+        position: 5
+     "vs-code-integration":
+        title: "VS Code Integration"
         position: 6
+     "installation/adding-client-side-resources/scripts":
+        title: "Creating Custom Script Bundles"
+        position: 5
+     "installation":
+        title: "Installation & Upgrade"
+        position: 4
+     "installation-mvc":
+        title: "Installation"
+        position: 4
+     "installation/system-requirements":
+        title: "System Requirements"
+        position: 1
+     "installation-mvc/system-requirements":
+        title: "System Requirements"
+        position: 1
+     "installation/adding-client-side-resources":
+         title: "Providing Client-Side Resources"
+         position: 6
+     "installation-mvc/adding-client-side-resources":
+         title: "Providing Client-Side Resources"
+         position: 6
+     "installation-mvc/adding-client-side-resources/scripts":
+        title: "Creating Custom Script Bundles"
+        position: 5
+     "html-helpers/helper-basics":
+        title: "Working with Helpers"
+        position: 2
+     "html-helpers/helper-basics/build-team-efficiency-dashboard":
+        title: "Build Team Efficiency Dashboard"
+        position: 15
+     "html-helpers/helper-basics-mvc":
+        title: "Working with Helpers"
+        position: 2
+     "installation/upgrading":
+        title: "Upgrading"
+        position: 20
+     "installation-mvc/upgrading":
+        title: "Upgrading"
+        position: 20
+     "getting-started/repl":
+        title: "Telerik REPL"
+        position: 9
      "getting-started/vs-integration":
         title: "Integrating with VS"
         position: 7
@@ -111,6 +177,10 @@ navigation:
      "getting-started-core/installation":
         title: "Download and Installation"
         position: 5
+        include_in_navigation: false
+     "getting-started-core/repl":
+        title: "REPL"
+        position: 9
         include_in_navigation: false
      "getting-started-core/helper-basics":
         title: "Working with Helpers"
@@ -139,6 +209,10 @@ navigation:
      "getting-started-mvc/helper-basics":
         title: "Working with Helpers"
         position: 6
+        include_in_navigation: false
+     "getting-started-mvc/repl":
+        title: "repl"
+        position: 9
         include_in_navigation: false
      "getting-started-mvc/vs-integration":
         title: "Integrating with VS"
@@ -179,55 +253,8 @@ navigation:
         title: "Troubleshooting"
         position: 60
      "html-helpers":
-        title: "Html Helpers"
-        position: 3
-     "tag-helpers":
-        title: "Tag Helpers"
-        position: 4
-     "tag-helpers/datasource":
-        title: "Data Source"
-     "tag-helpers/data-management":
-        title: "Data Management"
-     "tag-helpers/data-management/filter":
-        title: "Filter"
-     "html-helpers/data-management/filemanager":
-        title: "FileManager"
-     "tag-helpers/data-management/grid":
-        title: "Grid"
-     "tag-helpers/data-management/pivotgrid":
-        title: "PivotGrid"
-     "tag-helpers/editors":
-        title: "Editors"
-     "tag-helpers/charts":
-        title: "Charts"
-     "tag-helpers/charts/treemap":
-        title: "TreeMap"
-        position: 2
-     "tag-helpers/gauges":
-        title: "Gauges"
-     "tag-helpers/barcodes":
-        title: "Barcodes"
-     "tag-helpers/diagrams-and-maps":
-        title: "Diagrams and Maps"
-     "tag-helpers/scheduling":
-        title: "Scheduling"
-     "tag-helpers/layout":
-        title: "Layout"
-     "tag-helpers/navigation":
-        title: "Navigation"
-     "tag-helpers/conversational-ui":
-        title: "Conversational UI"
-        isNew: true
-     "tag-helpers/conversational-ui/chat":
-        title: "Chat"
-     "tag-helpers/interactivity":
-        title: "Interactivity and UX"
-     "tag-helpers/media":
-        title: "Media"
-     "tag-helpers/pdf":
-        title: "PDF"
-     "tag-helpers/pdf/pdfviewer":
-        title: "PDFViewer"
+        title: "Components"
+        position: 7
      "html-helpers/datasource":
         title: "Data Source"
      "html-helpers/data-management":
@@ -263,6 +290,8 @@ navigation:
      "html-helpers/data-management/grid/performance":
         title: "Performance Tips"
         position: 17
+     "html-helpers/data-management/taskboard":
+        title: "TaskBoard"
      "html-helpers/data-management/treelist/editing":
         title: "Editing"
         position: 3
@@ -280,6 +309,14 @@ navigation:
      "html-helpers/data-management/pivotgrid/export":
         title: "Export"
         position: 6
+     "html-helpers/data-management/pivotgridv2":
+        title: "PivotGridV2"
+     "html-helpers/data-management/pivotgridv2/data-binding":
+        title: "Data Binding"
+        position: 2
+     "html-helpers/data-management/pivotgridv2/export":
+        title: "Export"
+        position: 6
      "html-helpers/data-management/spreadsheet/import-and-export-data":
         title: "Data Import and Export"
         position: 6
@@ -293,6 +330,10 @@ navigation:
         position: 2
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
+     "html-helpers/editors/imageeditor":
+        title: "Image Editor"
+     "html-helpers/editors/timedurationpicker":
+         title: "TimeDurationPicker"
      "html-helpers/charts":
         title: "Charts"
      "html-helpers/charts/chart":
@@ -300,19 +341,25 @@ navigation:
         position: 1
      "html-helpers/charts/chart-types":
         title: "Chart Types"
-        position: 4
+        position: 5
      "html-helpers/charts/elements":
         title: "Elements"
-        position: 5
+        position: 6
+     "html-helpers/charts/bar-chart":
+        title: "Bar Chart"
+        position: 7
      "html-helpers/charts/sparkline":
         title: "Sparkline"
-        position: 6
+        position: 8
      "html-helpers/charts/stockchart":
         title: "StockChart"
-        position: 7
+        position: 9
      "html-helpers/charts/treemap":
         title: "TreeMap"
-        position: 8
+        position: 10
+     "html-helpers/charts/heatmap":
+        title: "HeatMap"
+        position: 11
      "html-helpers/gauges":
         title: "Gauges"
      "html-helpers/hybrid":
@@ -327,23 +374,53 @@ navigation:
         title: "Layout"
      "html-helpers/navigation":
         title: "Navigation"
+     "html-helpers/navigation/appbar":
+        title: "Appbar"
+     "html-helpers/navigation/bottomnavigation":
+        title: "BottomNavigation"
+        isNew: true
      "html-helpers/navigation/breadcrumb":
         title: "Breadcrumb"
+     "html-helpers/navigation/floatingactionbutton":
+        title: "FloatingActionButton"
+        isNew: true
+     "html-helpers/navigation/chiplist":
+         title: "ChipList"
+         isNew: true
+     "html-helpers/navigation/chip":
+         title: "Chip"
+         isNew: true
+     "html-helpers/navigation/stepper":
+        title: "Stepper"
+     "html-helpers/navigation/wizard":
+        title: "Wizard"
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
+     "html-helpers/navigation/menu/binding":
+        title: "Data Binding"
+        position: 3
      "html-helpers/navigation/menu/contextmenu":
         title: "ContextMenu"
-        position: 3
+        position: 4
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         isNew: true
+     "html-helpers/conversational-ui/aiprompt":
+        title: "AIPrompt"
      "html-helpers/conversational-ui/chat":
         title: "Chat"
      "html-helpers/interactivity":
         title: "Interactivity and UX"
+     "html-helpers/interactivity/loader":
+        title: "Loader"
+     "html-helpers/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
      "html-helpers/interactivity/sortable/integration":
         title: "Integration"
         position: 6
+     "html-helpers/navigation/toolbar/command-types":
+        title: "Command Types"
+        position: 2
      "html-helpers/media":
         title: "Media"
      "html-helpers/pdf":
@@ -352,16 +429,40 @@ navigation:
         title: "PDFViewer"
      "styles-and-layout":
         title: "Styles and Appearance"
-        position: 5
+        position: 8
+     "styles-and-layout/sass-themes":
+        title: "SASS Themes"
+        position: 2
+     "styles-and-layout/less-themes":
+        title: "LESS Themes"
+        position: 3
      "globalization":
         title: "Globalization"
-        position: 6
+        position: 9
      "accessibility":
         title: "Accessibility"
-        position: 7
+        position: 10
+     "deployment":
+        title: "Deployment"
+        position: 11
+     "integration-with-other-telerik-products":
+        title: "Integration with Other Telerik Products"
+        position: 12
+     "cloud-integration":
+        title: "Cloud Integration"
+        position: 13
+     "cloud-integration/amazon-web-services":
+        title: "Amazon Web Services"
+        position: 2
+     "cloud-integration/azure":
+        title: "Azure"
+        position: 3
+     "cloud-integration/google-cloud":
+        title: "Google Cloud"
+        position: 4
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 8
+        position: 14
      "*appearance":
         title: "Appearance"
      "*/binding":
@@ -383,6 +484,8 @@ navigation:
         title: "State Management"
      "*how-to":
         title: "How To"
+     "*propertygrid":
+        title: "PropertyGrid"
      "*grid":
         title: "Grid"
      "*drawer":
@@ -396,11 +499,15 @@ navigation:
         title: "Spreadsheet"
      "*arcgauge":
         title: "ArcGauge"
+     "*avatar":
+        title: "Avatar"
+     "*circulargauge":
+        title: "CircularGauge"
      "*autocomplete":
         title: "AutoComplete"
      "*barcode":
         title: "BarCode"
-     "*button":
+     "*/button":
         title: "Button"
      "*buttongroup":
         title: "ButtonGroup"
@@ -408,10 +515,18 @@ navigation:
         title: "Calendar"
      "html-helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
-     "tag-helpers/scheduling/multiviewcalendar":
-        title: "MultiViewCalendar"
+     "html-helpers/scheduling/scheduler/grouping":
+        title: "Grouping"
+        position: 5
      "*badge":
         title: "Badge"
+     "*checkbox":
+        title: "CheckBox"
+     "*checkboxgroup":
+        title: "CheckBoxGroup"
+        isNew: true
+     "*colorgradient":
+        title: "ColorGradient"
      "*colorpalette":
         title: "ColorPalette"
      "*colorpicker":
@@ -423,6 +538,8 @@ navigation:
         title: "MultiColumnComboBox"
      "*combobox":
         title: "ComboBox"
+     "*captcha":
+        title: "Captcha"
      "*dateinput":
         title: "DateInput"
      "*datepicker":
@@ -444,12 +561,23 @@ navigation:
         title: "DropDownTree"
      "*editor":
         title: "Editor"
+     "*expansionpanel":
+        title: "ExpansionPanel"
+        isNew: true
      "*flatcolorpicker":
         title: "FlatColorPicker"
      "*filemanager":
         title: "FileManager"
+     "*form":
+        title: "Form"
      "*gantt":
         title: "Gantt"
+     "*imageeditor":
+        title: "Image Editor"
+     "*loader":
+        title: "Loader"
+     "*SkeletonContainer":
+        title: "SkeletonContainer"
      "*lineargauge":
         title: "LinearGauge"
      "*listbox":
@@ -462,18 +590,32 @@ navigation:
         title: "MediaPlayer"
      "*menu":
         title: "Menu"
+        isNew: true
+     "*actionsheet":
+        title: "ActionSheet"
      "*multiselect":
         title: "MultiSelect"
      "*notification":
         title: "Notification"
+     "*popover":
+        title: "PopOver"
+        isNew: true
      "*popup":
         title: "Popup"
      "*numerictextbox":
         title: "NumericTextBox"
      "*rating":
         title: "Rating"
-     "*progressbar":
+     "*radiogroup":
+        title: "RadioGroup"
+        isNew: true
+     "*/orgchart":
+        isNew: true
+        title: "OrgChart"
+     "html-helpers/interactivity/progressbar":
         title: "ProgressBar"
+     "html-helpers/interactivity/circularprogressbar":
+        title: "CircularProgressBar"
      "*qrcode":
         title: "QRCode"
      "*/radiobutton":
@@ -484,30 +626,57 @@ navigation:
         title: "RangeSlider"
      "*responsivepanel":
         title: "ResponsivePanel"
+     "*pager":
+        title: "Pager"
      "*panelbar":
         title: "PanelBar"
      "*pivotgrid":
         title: "PivotGrid"
+     "*pivotgridv2":
+        title: "PivotGridV2"
      "*scheduler":
         title: "Scheduler"
      "*scrollview":
         title: "ScrollView"
+     "*signature":
+        title: "Signature"
      "*slider":
         title: "Slider"
      "*sortable":
         title: "Sortable"
      "*splitter":
         title: "Splitter"
+     "*dockmanager":
+        title: "DockManager"
+     "*stacklayout":
+        title: "StackLayout"
+     "*gridlayout":
+        title: "GridLayout"
      "*stockchart":
         title: "StockChart"
      "*tabstrip":
         title: "TabStrip"
+     "*taskboard":
+        title: "TaskBoard"
+     "*textarea":
+        title: "TextArea"
+        isNew: true
+     "*textbox":
+        title: "TextBox"
+     "*tilelayout":
+        title: "TileLayout"
      "*timeline":
         title: "TimeLine"
      "*timepicker":
         title: "TimePicker"
+     "*timedurationpicker":
+        title: "TimeDurationPicker"
+        isNew: true
      "*tooltip":
         title: "Tooltip"
+     "*togglebutton":
+        title: "ToggleButton"
+        isNew: true
      "*toolbar":
         title: "ToolBar"
      "*treelist":
@@ -522,10 +691,15 @@ navigation:
         title: "Validator"
      "*window":
         title: "Window"
-     "*templates":
-        title: "Templates"
+     "*template":
+        title: "Template"
+        isNew: true
      "*switch":
         title: "Switch"
+     "*splitbutton":
+        title: "SplitButton"
+     "*/dropdownbutton":
+        title: "DropDownButton"
      "*/globalization":
         title: "Globalization"
         position: 50
@@ -537,10 +711,13 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2020.1.219"
+cdnVersion: "2024.3.1015"
+
+## The themes CDN used
+themesCdnVersion: "9.0.0"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.1.219"
+mvcCoreVersion: "2024.3.1015"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -548,6 +725,7 @@ ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 product_long: "Progress Telerik UI for ASP.NET Core"
 product: "Telerik UI for ASP.NET Core"
 product_short: "UI for ASP.NET Core"
+product_url: https://www.telerik.com/aspnet-core-ui
 framework: "ASP.NET Core"
 framework_short: "Core"
 platform: aspnet-core
@@ -562,7 +740,8 @@ defaults:
         category: "default"
         product: "aspnet-core"
         editable: true
-        title_prefix: "Core"
+        title_prefix: "ASP.NET Core"
+        title_prefix_separator: " "
 -
     scope:
         path: "aspnet-core"
@@ -579,127 +758,167 @@ defaults:
     scope:
         path: "html-helpers/barcodes/barcode"
     values:
-        title_prefix: "Core BarCode Component"
+        title_prefix: "ASP.NET Core BarCode Component"
 -
     scope:
         path: "html-helpers/barcodes/qrcode"
     values:
-        title_prefix: "Core QRCode Component"
+        title_prefix: "ASP.NET Core QRCode Component"
 -
     scope:
         path: "html-helpers/charts"
     values:
-        title_prefix: "Core Chart Component"
+        title_prefix: "ASP.NET Core Chart Component"
 -
     scope:
         path: "html-helpers/conversational-ui/chat"
     values:
-        title_prefix: "Core Chat Component"
+        title_prefix: "ASP.NET Core Chat Component"
+-
+    scope:
+        path: "html-helpers/conversational-ui/aiprompt"
+    values:
+        title_prefix: "ASP.NET Core AIPrompt Component"
 -
     scope:
         path: "html-helpers/data-management/filemanager"
     values:
-        title_prefix: "Core FileManager Component"
+        title_prefix: "ASP.NET Core FileManager Component"
 -
     scope:
         path: "html-helpers/data-management/filter"
     values:
-        title_prefix: "Core Filter Component"
+        title_prefix: "ASP.NET Core Filter Component"
 -
     scope:
         path: "html-helpers/data-management/grid"
     values:
-        title_prefix: "Core Data Grid Component"
+        title_prefix: "ASP.NET Core Data Grid Component"
 -
     scope:
         path: "html-helpers/data-management/listview"
     values:
-        title_prefix: "Core ListView Component"
+        title_prefix: "ASP.NET Core ListView Component"
 -
     scope:
         path: "html-helpers/data-management/pivotgrid"
     values:
-        title_prefix: "Core PivotGrid Component"
+        title_prefix: "ASP.NET Core PivotGrid Component"
+-
+    scope:
+        path: "html-helpers/data-management/pivotgridv2"
+    values:
+        title_prefix: "ASP.NET Core PivotGridV2 Component"
 -
     scope:
         path: "html-helpers/data-management/spreadsheet"
     values:
-        title_prefix: "Core Spreadsheet Component"
+        title_prefix: "ASP.NET Core Spreadsheet Component"
 -
     scope:
         path: "html-helpers/data-management/treelist"
     values:
-        title_prefix: "Core TreeList Component"
+        title_prefix: "ASP.NET Core TreeList Component"
+-
+    scope:
+        path: "html-helpers/data-management/propertygrid"
+    values:
+        title_prefix: "ASP.NET Core PropertyGrid Component"
 -
     scope:
         path: "html-helpers/datasource"
     values:
-        title_prefix: "Core Data Source Component"
+        title_prefix: "ASP.NET Core Data Source Component"
 -
     scope:
         path: "html-helpers/diagrams-and-maps/diagram"
     values:
-        title_prefix: "Core Diagram Component"
+        title_prefix: "ASP.NET Core Diagram Component"
 -
     scope:
         path: "html-helpers/diagrams-and-maps/map"
     values:
-        title_prefix: "Core Map Component"
+        title_prefix: "ASP.NET Core Map Component"
+-
+    scope:
+        path: "html-helpers/diagrams-and-maps/orgchart"
+    values:
+        title_prefix: "ASP.NET Core OrgChart Component"
 -
     scope:
         path: "html-helpers/editors/autocomplete"
     values:
-        title_prefix: "Core AutoComplete Component"
+        title_prefix: "ASP.NET Core AutoComplete Component"
+-
+    scope:
+        path: "html-helpers/editors/checkbox"
+    values:
+        title_prefix: "ASP.NET Core CheckBox Component"
+-
+    scope:
+        path: "html-helpers/editors/checkboxgroup"
+    values:
+        title_prefix: "ASP.NET Core CheckBoxGroup Component"
+-
+    scope:
+        path: "html-helpers/editors/colorgradient"
+    values:
+        title_prefix: "ASP.NET Core ColorGradient Component"
 -
     scope:
         path: "html-helpers/editors/colorpalette"
     values:
-        title_prefix: "Core ColorPalette Component"
+        title_prefix: "ASP.NET Core ColorPalette Component"
 -
     scope:
         path: "html-helpers/editors/colorpicker"
     values:
-        title_prefix: "Core ColorPicker Component"
+        title_prefix: "ASP.NET Core ColorPicker Component"
 -
     scope:
         path: "html-helpers/editors/combobox"
     values:
-        title_prefix: "Core ComboBox Component"
+        title_prefix: "ASP.NET Core ComboBox Component"
+-
+    scope:
+        path: "html-helpers/editors/captcha"
+    values:
+        title_prefix: "ASP.NET Core Captcha Component"
 -
     scope:
         path: "html-helpers/editors/dateinput"
     values:
-        title_prefix: "Core DateInput Component"
+        title_prefix: "ASP.NET Core DateInput Component"
 -
     scope:
         path: "html-helpers/editors/datepicker"
     values:
-        title_prefix: "Core DatePicker Component"
+        title_prefix: "ASP.NET Core DatePicker Component"
 -
     scope:
         path: "html-helpers/editors/daterangepicker"
     values:
-        title_prefix: "Core DateRangePicker Component"
+        title_prefix: "ASP.NET Core DateRangePicker Component"
 -
     scope:
         path: "html-helpers/editors/datetimepicker"
     values:
-        title_prefix: "Core DateTimePicker Component"
+        title_prefix: "ASP.NET Core DateTimePicker Component"
 -
     scope:
         path: "html-helpers/editors/dropdownlist"
     values:
-        title_prefix: "Core DropDownList Component"
+        title_prefix: "ASP.NET Core DropDownList Component"
 -
     scope:
         path: "html-helpers/editors/dropdowntree"
     values:
-        title_prefix: "Core DropDownTree Component"
+        title_prefix: "ASP.NET Core DropDownTree Component"
 -
     scope:
         path: "html-helpers/editors/editor"
     values:
-        title_prefix: "Core Editor Component"
+        title_prefix: "ASP.NET Core Editor Component"
 -
     scope:
         path: "html-helpers/editors/flatcolorpicker"
@@ -707,564 +926,354 @@ defaults:
         title_prefix: "Core FlatColorPicker Component"
 -
     scope:
+        path: "html-helpers/editors/imageeditor"
+    values:
+        title_prefix: "ASP.NET Core Image Editor Component"
+-
+    scope:
         path: "html-helpers/editors/listbox"
     values:
-        title_prefix: "Core ListBox Component"
+        title_prefix: "ASP.NET Core ListBox Component"
 -
     scope:
         path: "html-helpers/editors/maskedtextbox"
     values:
-        title_prefix: "Core MaskedTextBox Component"
+        title_prefix: "ASP.NET Core MaskedTextBox Component"
 -
     scope:
         path: "html-helpers/editors/multicolumncombobox"
     values:
-        title_prefix: "Core MultiColumnComboBox Component"
+        title_prefix: "ASP.NET Core MultiColumnComboBox Component"
 -
     scope:
         path: "html-helpers/editors/multiselect"
     values:
-        title_prefix: "Core MultiSelect Component"
+        title_prefix: "ASP.NET Core MultiSelect Component"
 -
     scope:
         path: "html-helpers/editors/numerictextbox"
     values:
-        title_prefix: "Core NumericTextBox Component"
+        title_prefix: "ASP.NET Core NumericTextBox Component"
 -
     scope:
         path: "html-helpers/editors/rating"
     values:
-        title_prefix: "Core Rating Component"
+        title_prefix: "ASP.NET Core Rating Component"
+-
+    scope:
+        path: "html-helpers/editors/radiogroup"
+    values:
+        title_prefix: "ASP.NET Core RadioGroup Component"
+-
+    scope:
+        path: "html-helpers/editors/signature"
+    values:
+        title_prefix: "ASP.NET Core Signature Component"
 -
     scope:
         path: "html-helpers/editors/slider"
     values:
-        title_prefix: "Core Slider Component"
+        title_prefix: "ASP.NET Core Slider Component"
 -
     scope:
         path: "html-helpers/editors/switch"
     values:
-        title_prefix: "Core Switch Component"
+        title_prefix: "ASP.NET Core Switch Component"
+-
+    scope:
+        path: "html-helpers/data-management/taskboard"
+    values:
+        title_prefix: "ASP.NET Core TaskBoard Component"
+-
+    scope:
+        path: "html-helpers/editors/textarea"
+    values:
+        title_prefix: "ASP.NET Core TextArea Component"
+-
+    scope:
+        path: "html-helpers/editors/textbox"
+    values:
+        title_prefix: "ASP.NET Core TextBox Component"
 -
     scope:
         path: "html-helpers/editors/timepicker"
     values:
-        title_prefix: "Core TimePicker Component"
+        title_prefix: "ASP.NET Core TimePicker Component"
 -
     scope:
         path: "html-helpers/editors/upload"
     values:
-        title_prefix: "Core Upload Component"
+        title_prefix: "ASP.NET Core Upload Component"
 -
     scope:
         path: "html-helpers/editors/validator"
     values:
-        title_prefix: "Core Validator Component"
+        title_prefix: "ASP.NET Core Validator Component"
 -
     scope:
         path: "html-helpers/gauges/arcgauge"
     values:
-        title_prefix: "Core ArcGauge Component"
+        title_prefix: "ASP.NET Core ArcGauge Component"
+-
+    scope:
+        path: "html-helpers/gauges/circulargauge"
+    values:
+        title_prefix: "ASP.NET Core CircularGauge Component"
 -
     scope:
         path: "html-helpers/gauges/lineargauge"
     values:
-        title_prefix: "Core LinearGauge Component"
+        title_prefix: "ASP.NET Core LinearGauge Component"
 -
     scope:
         path: "html-helpers/gauges/radialgauge"
     values:
-        title_prefix: "Core RadialGauge Component"
+        title_prefix: "ASP.NET Core RadialGauge Component"
 -
     scope:
         path: "html-helpers/interactivity/draganddrop"
     values:
-        title_prefix: "Core DragAndDrop Component"
+        title_prefix: "ASP.NET Core DragAndDrop Component"
+-
+    scope:
+        path: "html-helpers/interactivity/loader"
+    values:
+        title_prefix: "ASP.NET Core Loader Component"
+
+    scope:
+        path: "html-helpers/interactivity/skeletoncontainer"
+    values:
+        title_prefix: "ASP.NET Core SkeletonContainer Component"
 -
     scope:
         path: "html-helpers/interactivity/progressbar"
     values:
-        title_prefix: "Core ProgressBar Component"
+        title_prefix: "ASP.NET Core ProgressBar Component"
+-
+    scope:
+        path: "html-helpers/interactivity/circularprogressbar"
+    values:
+        title_prefix: "ASP.NET Core Circular ProgressBar Component"
 -
     scope:
         path: "html-helpers/interactivity/sortable"
     values:
-        title_prefix: "Core Sortable Component"
+        title_prefix: "ASP.NET Core Sortable Component"
+-
+    scope:
+        path: "html-helpers/layout/avatar"
+    values:
+        title_prefix: "ASP.NET Core Avatar Component"
 -
     scope:
         path: "html-helpers/layout/badge"
     values:
-        title_prefix: "Core Badge Component"
+        title_prefix: "ASP.NET Core Badge Component"
+-
+    scope:
+        path: "html-helpers/layout/form"
+    values:
+        title_prefix: "ASP.NET Core Form Component"
 -
     scope:
         path: "html-helpers/layout/dialog"
     values:
-        title_prefix: "Core Dialog Component"
+        title_prefix: "ASP.NET Core Dialog Component"
+-
+    scope:
+        path: "html-helpers/layout/expansionpanel"
+    values:
+        title_prefix: "ASP.NET Core ExpansionPanel Component"
 -
     scope:
         path: "html-helpers/layout/notification"
     values:
-        title_prefix: "Core Notification Component"
+        title_prefix: "ASP.NET Core Notification Component"
+-
+    scope:
+        path: "html-helpers/layout/popover"
+    values:
+        title_prefix: "ASP.NET Core PopOver Component"
 -
     scope:
         path: "html-helpers/layout/popup"
     values:
-        title_prefix: "Core Popup Component"
+        title_prefix: "ASP.NET Core Popup Component"
 -
     scope:
         path: "html-helpers/layout/responsivepanel"
     values:
-        title_prefix: "Core ResponsivePanel Component"
+        title_prefix: "ASP.NET Core ResponsivePanel Component"
 -
     scope:
         path: "html-helpers/layout/splitter"
     values:
-        title_prefix: "Core Splitter Component"
+        title_prefix: "ASP.NET Core Splitter Component"
+-
+    scope:
+        path: "html-helpers/layout/gridlayout"
+    values:
+        title_prefix: "ASP.NET Core GridLayout Component"
+-
+    scope:
+        path: "html-helpers/layout/stacklayout"
+    values:
+        title_prefix: "ASP.NET Core StackLayout Component"
+-
+    scope:
+        path: "html-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET Core TileLayout Component"
 -
     scope:
         path: "html-helpers/layout/tooltip"
     values:
-        title_prefix: "Core Tooltip Component"
+        title_prefix: "ASP.NET Core Tooltip Component"
 -
     scope:
         path: "html-helpers/layout/window"
     values:
-        title_prefix: "Core Window Component"
+        title_prefix: "ASP.NET Core Window Component"
 -
     scope:
         path: "html-helpers/media/mediaplayer"
     values:
-        title_prefix: "Core MediaPlayer Component"
+        title_prefix: "ASP.NET Core MediaPlayer Component"
 -
     scope:
         path: "html-helpers/media/scrollview"
     values:
-        title_prefix: "Core ScrollView Component"
+        title_prefix: "ASP.NET Core ScrollView Component"
+-
+    scope:
+        path: "html-helpers/navigation/appbar"
+    values:
+        title_prefix: "ASP.NET Core AppBar Component"
+-
+    scope:
+        path: "html-helpers/navigation/bottomnavigation"
+    values:
+        title_prefix: "ASP.NET Core BottomNavigation Component"
 -
     scope:
         path: "html-helpers/navigation/breadcrumb"
     values:
-        title_prefix: "Core Breadcrumb Component"
+        title_prefix: "ASP.NET Core Breadcrumb Component"
+-
+    scope:
+        path: "html-helpers/navigation/chip"
+    values:
+        title_prefix: "ASP.NET Core Chip Component"
+-
+    scope:
+        path: "html-helpers/navigation/chiplist"
+    values:
+        title_prefix: "ASP.NET Core ChipList Component"
+-
+    scope:
+        path: "html-helpers/navigation/floatingactionbutton"
+    values:
+        title_prefix: "ASP.NET Core FloatingActionButton Component"
+-
+    scope:
+        path: "html-helpers/navigation/splitbutton"
+    values:
+        title_prefix: "ASP.NET Core SplitButton Component"
+-
+    scope:
+        path: "html-helpers/navigation/stepper"
+    values:
+        title_prefix: "ASP.NET Core Stepper Component"
+-
+    scope:
+        path: "html-helpers/navigation/wizard"
+    values:
+        title_prefix: "ASP.NET Core Wizard Component"
 -
     scope:
         path: "html-helpers/navigation/button"
     values:
-        title_prefix: "Core Button Component"
+        title_prefix: "ASP.NET Core Button Component"
 -
     scope:
         path: "html-helpers/navigation/buttongroup"
     values:
-        title_prefix: "Core ButtonGroup Component"
+        title_prefix: "ASP.NET Core ButtonGroup Component"
 -
     scope:
         path: "html-helpers/navigation/drawer"
     values:
-        title_prefix: "Core Drawer Component"
+        title_prefix: "ASP.NET Core Drawer Component"
 -
     scope:
         path: "html-helpers/navigation/menu"
     values:
-        title_prefix: "Core Menu Component"
+        title_prefix: "ASP.NET Core Menu Component"
+-
+    scope:
+        path: "html-helpers/navigation/actionsheet"
+    values:
+        title_prefix: "ASP.NET Core ActionSheet Component"
 -
     scope:
         path: "html-helpers/navigation/panelbar"
     values:
-        title_prefix: "Core PanelBar Component"
+        title_prefix: "ASP.NET Core PanelBar Component"
 -
     scope:
         path: "html-helpers/navigation/radiobutton"
     values:
-        title_prefix: "Core RadioButton Component"
+        title_prefix: "ASP.NET Core RadioButton Component"
 -
     scope:
         path: "html-helpers/navigation/tabstrip"
     values:
-        title_prefix: "Core TabStrip Component"
+        title_prefix: "ASP.NET Core TabStrip Component"
 -
     scope:
         path: "html-helpers/navigation/timeline"
     values:
-        title_prefix: "Core TimeLine Component"
+        title_prefix: "ASP.NET Core TimeLine Component"
 -
     scope:
         path: "html-helpers/navigation/toolbar"
     values:
-        title_prefix: "Core ToolBar Component"
+        title_prefix: "ASP.NET Core ToolBar Component"
 -
     scope:
         path: "html-helpers/navigation/treeview"
     values:
-        title_prefix: "Core TreeView Component"
+        title_prefix: "ASP.NET Core TreeView Component"
 -
     scope:
         path: "html-helpers/pdf/pdfviewer"
     values:
-        title_prefix: "Core PDFViewer Component"
+        title_prefix: "ASP.NET Core PDFViewer Component"
 -
     scope:
         path: "html-helpers/scheduling/calendar"
     values:
-        title_prefix: "Core Calendar Component"
+        title_prefix: "ASP.NET Core Calendar Component"
 -
     scope:
         path: "html-helpers/scheduling/gantt"
     values:
-        title_prefix: "Core Gantt Component"
+        title_prefix: "ASP.NET Core Gantt Component"
 -
     scope:
         path: "html-helpers/scheduling/multiviewcalendar"
     values:
-        title_prefix: "Core MultiViewCalendar Component"
+        title_prefix: "ASP.NET Core MultiViewCalendar Component"
 -
     scope:
         path: "html-helpers/scheduling/scheduler"
     values:
-        title_prefix: "Core Scheduler Component"
+        title_prefix: "ASP.NET Core Scheduler Component"
 -
     scope:
-        path: "tag-helpers/barcodes/barcode"
+        path: "html-helpers/template"
     values:
-        title_prefix: "Core BarCode Component"
--
-    scope:
-        path: "tag-helpers/barcodes/qrcode"
-    values:
-        title_prefix: "Core QRCode Component"
--
-    scope:
-        path: "tag-helpers/charts"
-    values:
-        title_prefix: "Core Chart Component"
--
-    scope:
-        path: "tag-helpers/conversational-ui/chat"
-    values:
-        title_prefix: "Core Chat Component"
--
-    scope:
-        path: "tag-helpers/data-management/filemanager"
-    values:
-        title_prefix: "Core FileManager Component"
--
-    scope:
-        path: "tag-helpers/data-management/filter"
-    values:
-        title_prefix: "Core Filter Component"
--
-    scope:
-        path: "tag-helpers/data-management/grid"
-    values:
-        title_prefix: "Core Data Grid Component"
--
-    scope:
-        path: "tag-helpers/data-management/listview"
-    values:
-        title_prefix: "Core ListView Component"
--
-    scope:
-        path: "tag-helpers/data-management/pivotgrid"
-    values:
-        title_prefix: "Core PivotGrid Component"
--
-    scope:
-        path: "tag-helpers/data-management/spreadsheet"
-    values:
-        title_prefix: "Core Spreadsheet Component"
--
-    scope:
-        path: "tag-helpers/data-management/treelist"
-    values:
-        title_prefix: "Core TreeList Component"
--
-    scope:
-        path: "tag-helpers/datasource"
-    values:
-        title_prefix: "Core Data Source Component"
--
-    scope:
-        path: "tag-helpers/diagrams-and-maps/diagram"
-    values:
-        title_prefix: "Core Diagram Component"
--
-    scope:
-        path: "tag-helpers/diagrams-and-maps/map"
-    values:
-        title_prefix: "Core Map Component"
--
-    scope:
-        path: "tag-helpers/editors/autocomplete"
-    values:
-        title_prefix: "Core AutoComplete Component"
--
-    scope:
-        path: "tag-helpers/editors/colorpalette"
-    values:
-        title_prefix: "Core ColorPalette Component"
--
-    scope:
-        path: "tag-helpers/editors/colorpicker"
-    values:
-        title_prefix: "Core ColorPicker Component"
--
-    scope:
-        path: "tag-helpers/editors/combobox"
-    values:
-        title_prefix: "Core ComboBox Component"
--
-    scope:
-        path: "tag-helpers/editors/dateinput"
-    values:
-        title_prefix: "Core DateInput Component"
--
-    scope:
-        path: "tag-helpers/editors/datepicker"
-    values:
-        title_prefix: "Core DatePicker Component"
--
-    scope:
-        path: "tag-helpers/editors/daterangepicker"
-    values:
-        title_prefix: "Core DateRangePicker Component"
--
-    scope:
-        path: "tag-helpers/editors/datetimepicker"
-    values:
-        title_prefix: "Core DateTimePicker Component"
--
-    scope:
-        path: "tag-helpers/editors/dropdownlist"
-    values:
-        title_prefix: "Core DropDownList Component"
--
-    scope:
-        path: "tag-helpers/editors/dropdowntree"
-    values:
-        title_prefix: "Core DropDownTree Component"
--
-    scope:
-        path: "tag-helpers/editors/editor"
-    values:
-        title_prefix: "Core Editor Component"
--
-    scope:
-        path: "tag-helpers/editors/flatcolorpicker"
-    values:
-        title_prefix: "Core FlatColorPicker Component"
--
-    scope:
-        path: "tag-helpers/editors/listbox"
-    values:
-        title_prefix: "Core ListBox Component"
--
-    scope:
-        path: "tag-helpers/editors/maskedtextbox"
-    values:
-        title_prefix: "Core MaskedTextBox Component"
--
-    scope:
-        path: "tag-helpers/editors/multicolumncombobox"
-    values:
-        title_prefix: "Core MultiColumnComboBox Component"
--
-    scope:
-        path: "tag-helpers/editors/multiselect"
-    values:
-        title_prefix: "Core MultiSelect Component"
--
-    scope:
-        path: "tag-helpers/editors/numerictextbox"
-    values:
-        title_prefix: "Core NumericTextBox Component"
--
-    scope:
-        path: "tag-helpers/editors/rating"
-    values:
-        title_prefix: "Core Rating Component"
--
-    scope:
-        path: "tag-helpers/editors/slider"
-    values:
-        title_prefix: "Core Slider Component"
--
-    scope:
-        path: "tag-helpers/editors/switch"
-    values:
-        title_prefix: "Core Switch Component"
--
-    scope:
-        path: "tag-helpers/editors/timepicker"
-    values:
-        title_prefix: "Core TimePicker Component"
--
-    scope:
-        path: "tag-helpers/editors/upload"
-    values:
-        title_prefix: "Core Upload Component"
--
-    scope:
-        path: "tag-helpers/editors/validator"
-    values:
-        title_prefix: "Core Validator Component"
--
-    scope:
-        path: "tag-helpers/gauges/arcgauge"
-    values:
-        title_prefix: "Core ArcGauge Component"
--
-    scope:
-        path: "tag-helpers/gauges/lineargauge"
-    values:
-        title_prefix: "Core LinearGauge Component"
--
-    scope:
-        path: "tag-helpers/gauges/radialgauge"
-    values:
-        title_prefix: "Core RadialGauge Component"
--
-    scope:
-        path: "tag-helpers/interactivity/draganddrop"
-    values:
-        title_prefix: "Core DragAndDrop Component"
--
-    scope:
-        path: "tag-helpers/interactivity/progressbar"
-    values:
-        title_prefix: "Core ProgressBar Component"
--
-    scope:
-        path: "tag-helpers/interactivity/sortable"
-    values:
-        title_prefix: "Core Sortable Component"
--
-    scope:
-        path: "tag-helpers/layout/badge"
-    values:
-        title_prefix: "Core Badge Component"
--
-    scope:
-        path: "tag-helpers/layout/dialog"
-    values:
-        title_prefix: "Core Dialog Component"
--
-    scope:
-        path: "tag-helpers/layout/notification"
-    values:
-        title_prefix: "Core Notification Component"
--
-    scope:
-        path: "tag-helpers/layout/popup"
-    values:
-        title_prefix: "Core Popup Component"
--
-    scope:
-        path: "tag-helpers/layout/responsivepanel"
-    values:
-        title_prefix: "Core ResponsivePanel Component"
--
-    scope:
-        path: "tag-helpers/layout/splitter"
-    values:
-        title_prefix: "Core Splitter Component"
--
-    scope:
-        path: "tag-helpers/layout/tooltip"
-    values:
-        title_prefix: "Core Tooltip Component"
--
-    scope:
-        path: "tag-helpers/layout/window"
-    values:
-        title_prefix: "Core Window Component"
--
-    scope:
-        path: "tag-helpers/media/mediaplayer"
-    values:
-        title_prefix: "Core MediaPlayer Component"
--
-    scope:
-        path: "tag-helpers/media/scrollview"
-    values:
-        title_prefix: "Core ScrollView Component"
--
-    scope:
-        path: "tag-helpers/navigation/breadcrumb"
-    values:
-        title_prefix: "Core Breadcrumb Component"
--
-    scope:
-        path: "tag-helpers/navigation/button"
-    values:
-        title_prefix: "Core Button Component"
--
-    scope:
-        path: "tag-helpers/navigation/buttongroup"
-    values:
-        title_prefix: "Core ButtonGroup Component"
--
-    scope:
-        path: "tag-helpers/navigation/drawer"
-    values:
-        title_prefix: "Core Drawer Component"
--
-    scope:
-        path: "tag-helpers/navigation/menu"
-    values:
-        title_prefix: "Core Menu Component"
--
-    scope:
-        path: "tag-helpers/navigation/panelbar"
-    values:
-        title_prefix: "Core PanelBar Component"
--
-    scope:
-        path: "tag-helpers/navigation/radiobutton"
-    values:
-        title_prefix: "Core RadioButton Component"
--
-    scope:
-        path: "tag-helpers/navigation/tabstrip"
-    values:
-        title_prefix: "Core TabStrip Component"
--
-    scope:
-        path: "tag-helpers/navigation/timeline"
-    values:
-        title_prefix: "Core TimeLine Component"
--
-    scope:
-        path: "tag-helpers/navigation/toolbar"
-    values:
-        title_prefix: "Core ToolBar Component"
--
-    scope:
-        path: "tag-helpers/navigation/treeview"
-    values:
-        title_prefix: "Core TreeView Component"
--
-    scope:
-        path: "tag-helpers/pdf/pdfviewer"
-    values:
-        title_prefix: "Core PDFViewer Component"
--
-    scope:
-        path: "tag-helpers/scheduling/calendar"
-    values:
-        title_prefix: "Core Calendar Component"
--
-    scope:
-        path: "tag-helpers/scheduling/gantt"
-    values:
-        title_prefix: "Core Gantt Component"
--
-    scope:
-        path: "tag-helpers/scheduling/multiviewcalendar"
-    values:
-        title_prefix: "Core MultiViewCalendar Component"
--
-    scope:
-        path: "tag-helpers/scheduling/scheduler"
-    values:
-        title_prefix: "Core Scheduler Component"
+        title_prefix: "ASP.NET Core Template Component"
 
 type_links:
     "kendo.Class": "/api/javascript/class"
@@ -1294,6 +1303,7 @@ has_web_api_index: true
 skip_tabbed_code: true
 code_lang: true
 has_kb_portal: true
+has_cta_panels: true
 api_columns_count: 2
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet
 download: https://www.telerik.com/download-trial-file/v2/aspnet-core-ui

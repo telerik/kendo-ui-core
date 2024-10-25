@@ -1,7 +1,7 @@
 ---
 title: Use FontAwesome Icons in Kendo UI Grid
-page_title:  FontAwesome Icons in Buttons | Kendo UI Grid for jQuery
-description: "An example on how to use FontAwesome icons with the built-in buttons of the Kendo UI Grid widget for jQuery."
+page_title:  FontAwesome Icons in Buttons - Kendo UI for jQuery Data Grid
+description: "Learn how to use FontAwesome icons with the built-in buttons of the Kendo UI Grid widget for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/font-awesome-icons-in-custom-grid-command-buttons
 slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 ---
@@ -11,7 +11,7 @@ slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -57,11 +57,17 @@ The following example demonstrates how to use FontAwesome icons with the built-i
               { field: "FirstName", title: "First Name", width: "140px" },
               { field: "LastName", title: "Last Name", width: "140px" },
               { field: "Title" },
-              { command: {
+              { command: 
+              [{
                 text: " View Details",
                 click: showDetails,
                 iconClass: "fa fa-map-marker"
               },
+              {
+                name: "edit",
+                text: "Edit Text",
+                iconClass: "fa fa-edit"
+              }],
                title: " ",
                width: "140px"
               }]
@@ -98,21 +104,18 @@ The following example demonstrates how to use FontAwesome icons with the built-i
             </div>
       </script>
       <style>
-      .k-header-column-menu .k-icon,
+      .k-grid-column-menu .k-icon,
       .k-column-menu .k-icon,
-      .k-column-menu .k-sprite,
-      .k-grid-pager .k-icon,
-      .k-grid .k-pager-numbers .k-current-page .k-pager-nav:after {
+      .k-column-menu .k-sprite {
         background-image: none;
         font-size: 1em;
         font-family: FontAwesome;
       }
 
-      .k-header-column-menu .k-icon:before,
-      .k-header-column-menu .k-sprite:before,
+      .k-grid-column-menu .k-icon:before,
+      .k-grid-column-menu .k-sprite:before,
       .k-column-menu .k-icon:before,
-      .k-column-menu .k-sprite:before,
-      .k-grid-pager .k-icon:before {
+      .k-column-menu .k-sprite:before {
         display: inline-block;
         padding-top: 0.5em;
         color: #2e2e2e;
@@ -120,10 +123,10 @@ The following example demonstrates how to use FontAwesome icons with the built-i
         height: 20px;
       }
 
-      .k-column-menu .k-i-arrow-60-right:before {
+      .k-column-menu .k-i-arrow-e:before {
         content: "\f061";
       }
-       .k-header-column-menu .k-i-more-vertical:before{
+       .k-grid-column-menu .k-i-more-vertical:before{
         content: "\f063";
       }
 
@@ -146,29 +149,9 @@ The following example demonstrates how to use FontAwesome icons with the built-i
       .k-column-menu .k-i-sort-desc-sm:before {
         content: "\f0de";
       }
-
-      .k-grid-pager .k-i-arrow-e:before {
-        content: "\f061";
-      }
-
-      .k-grid-pager .k-i-seek-e:before {
-        content: "\f0da";
-      }
-
-      .k-grid-pager .k-i-seek-w:before {
-        content: "\f0d9";
-      }
-
-      .k-grid-pager .k-i-arrow-w:before {
-        content: "\f060";
-      }
-
-      .k-grid-pager .k-pager-numbers .k-current-page .k-pager-nav:after {
-        content: "\f047";
-      }
     </style>
 ```
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

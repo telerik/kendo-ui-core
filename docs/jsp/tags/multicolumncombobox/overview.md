@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | MultiColumnComboBox JSP Tag
+page_title: Overview - MultiColumnComboBox JSP Tag
 description: "Get started with the MultiColumnComboBox JSP tag in Kendo UI."
 slug: overview_multicolumncombobox_uiforjsp
 position: 1

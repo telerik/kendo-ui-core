@@ -1,6 +1,6 @@
 ---
 title: Pie Charts
-page_title: jQuery Chart Documentation | Pie Charts | Kendo UI
+page_title: jQuery Chart Documentation - Pie Charts
 description: "Learn how to create a Kendo UI Pie Chart and specify its point value, category label, and other properties."
 slug: pietypecharts_widget
 ---
@@ -56,7 +56,49 @@ The following example demonstrates how to define a single series of type `"pie"`
     });
 
 
-![A sample Pie Chart](chart-pie.png)
+![Kendo UI for jQuery Pie Chart Overview](chart-pie-overview.png)
+
+## Auto-Fit Labels
+
+Use the Series [autoFit option](/api/javascript/dataviz/ui/chart/configuration/series.autofit) to avoid clipping of the labels' content.
+
+```dojo
+    <div id="chart" style="width: 200px;"></div>
+    <script>
+    var data = [{
+      kind: 'Solar', share: 0.052
+    }, {
+      kind: 'Wind', share: 0.225
+    }, {
+      kind: 'Other', share: 0.192
+    }, {
+      kind: 'Hydroelectric', share: 0.175
+    }, {
+      kind: 'Nuclear', share: 0.238
+    }, {
+      kind: 'Coal', share: 0.118
+    }];
+
+    $("#chart").kendoChart({
+      dataSource: { data: data },
+      series: [{
+          type: "pie",
+          field: "share",
+          categoryField: "kind",
+          autoFit: true,
+          labels: {
+            color: "#000",
+            position: "outsideEnd",
+            template: "#: category #",
+            visible: true
+          }
+      }],
+      legend: {
+        visible: false
+      }
+    });
+    </script>
+```
 
 ## Configuring the Effects Overlay
 
@@ -75,15 +117,15 @@ The Pie Chart supports the following gradient options:
 
 * (Default) `roundedBevel`
 
-    ![A Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
+    ![Kendo UI for jQuery Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
 
 * `sharpBevel`
 
-    ![A Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
+    ![Kendo UI for jQuery Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
 
 * `none`
 
-    ![A Pie Chart with no overlay](chart-pie-overlay-none.png)
+    ![Kendo UI for jQuery Pie Chart with no overlay](chart-pie-overlay-none.png)
 
 ## See Also
 

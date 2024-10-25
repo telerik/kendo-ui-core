@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Czech Republic Koruna",
+                name: "Czech Koruna",
                 abbr: "CZK",
                 pattern: ["-n $","n $"],
                 decimals: 2,
@@ -59,5 +59,5 @@
                 firstDay: 1
             }
         }
-    }
-})(this);
+    };
+})();

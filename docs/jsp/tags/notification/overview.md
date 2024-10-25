@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Notification JSP Tag
+page_title: Overview - Notification JSP Tag
 description: "Get started with the Notification JSP tag in Kendo UI."
 slug: overview_notification_uiforjsp
 position: 1

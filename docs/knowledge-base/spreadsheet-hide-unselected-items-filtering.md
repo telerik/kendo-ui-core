@@ -1,8 +1,8 @@
 ---
 title: Hide Unselected Items in Spreadsheet Filter Popup
-description: An example on how to hide the unselected items in the filter popup of the Kendo UI Spreadsheet.
+description: Learn how to hide the unselected items in the filter popup of the Kendo UI Spreadsheet.
 type: how-to
-page_title: Hide Unselected Items in Filter | Kendo UI Spreadsheet for jQuery
+page_title: Hide Unselected Items in Filter - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-hide-unselected-items-filtering
 tags: spreadsheet
 ticketid: 1172549  
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>

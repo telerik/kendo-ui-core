@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI NavBar
+page_title: Overview - Hybrid UI NavBar
 description: "Initialize and use the Hybrid UI NavBar widget in the Kendo UI framework."
 slug: overview_hybridnavbar
 position: 1
@@ -8,6 +8,10 @@ component: navbar
 ---
 
 # NavBar Overview
+
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
 
 The [Hybrid UI NavBar widget](https://demos.telerik.com/kendo-ui/m/index#navbar/index) is used inside a mobile View or Layout `header` element to display an application navigation bar. The mobile NavBar may display the current view title in the center, and optionally some additional left- and right-aligned widgets&mdash;a back button, settings button, etc.
 
@@ -128,7 +132,7 @@ The example below demonstrates how to use the `view-title` data attribute to aut
 
 **Figure 1: Different color schemes of the NavBar**
 
-![NavBar different color schemes](NavBar.png)
+![Kendo UI for jQuery NavBar different color schemes](navbar-different-schemes.png)
 
 There are three predefined color schemes&mdash;light, dark (default), and accent. To apply color schemes different than the default one, set the `km-light` or the `km-accent` class.
 

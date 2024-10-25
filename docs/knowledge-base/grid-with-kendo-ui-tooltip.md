@@ -1,7 +1,7 @@
 ---
 title: Show Tooltip for Column Records
-page_title: Show Tooltip for Column Records | Kendo UI Grid for jQuery
-description: "An example on how to show Kendo UI Tooltip for the Kendo UI Grid for jQuery columns."
+page_title: Show Tooltip for Column Records - Kendo UI for jQuery Data Grid
+description: "Learn how to show Kendo UI Tooltip for the Kendo UI Grid for jQuery columns."
 previous_url: /controls/data-management/grid/how-to/add-tooltip-for-cell, /controls/data-management/grid/how-to/grid-with-kendo-ui-tooltip, /controls/data-management/grid/how-to/Layout/grid-with-kendo-ui-tooltip
 slug: howto_show_tooltipfor_column_records_grid
 tags: grid, show, display, tooltip, column, records
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -80,9 +80,15 @@ The following example demonstrates how to show Kendo UI Tooltip for Kendo UI Gri
         }).data("kendoGrid");
 
         $("#grid").kendoTooltip({
-          filter: "td:nth-child(2)", //this filter selects the second column's cells
+          filter: "td:nth-child(2), th:nth-child(2)", //this filter selects the second column's cells and the second column header
           position: "right",
+          width: 250,
           content: function(e){
+            // If the element is the header, return the text of the cell.
+            if(e.target.is("th")) {
+              return e.target.text();
+            }
+            
             var dataItem = $("#grid").data("kendoGrid").dataItem(e.target.closest("tr"));
             var content = dataItem.Text;
             return content;
@@ -94,4 +100,4 @@ The following example demonstrates how to show Kendo UI Tooltip for Kendo UI Gri
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

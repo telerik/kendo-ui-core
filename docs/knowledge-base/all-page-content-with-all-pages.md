@@ -1,7 +1,7 @@
 ---
-title: Export All Pages and Full Page Content
-page_title: Export All Pages with Full Content | Kendo UI Grid for jQuery
-description: "An example on how to export the whole content of the Kendo UI Grid for jQuery in a PDF file."
+title: Export All Pages and the Full Page Content of the Data Grid to PDF
+page_title: Export All Pages and Full Content to PDF - jQuery Data Grid
+description: "Learn how to export the whole content of the Kendo UI Grid for jQuery in a PDF file."
 previous_url: /controls/data-management/grid/how-to/pdf-export/all-page-content-with-all-pages
 slug: howto_export_allpagesand_full_page_content_pdf_grid
 tags: grid, export, pages, full, content
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Preferred Language</td>
@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How can I export all Kendo UI Grid pages and their full page content in a PDF file?
+How can I export all Kendo UI Data Grid pages and their full page content in a PDF file?
 
 ## Solution
 
@@ -162,4 +162,7 @@ The following example demonstrates how to export all Grid pages and their full p
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

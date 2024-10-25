@@ -1,7 +1,7 @@
 ---
 title: Update Aggregates on Change
-page_title: Update Aggregates on Change | Kendo UI Grid for jQuery
-description: "An example on how to update the aggregates shown by the Kendo UI jQuery Grid when a value is changed."
+page_title: Update Aggregates on Change - Kendo UI for jQuery Data Grid
+description: "Learn how to update the aggregates shown by the Kendo UI jQuery Grid when a value is changed."
 previous_url: /controls/data-management/grid/how-to/update-aggregates-on-change, /controls/data-management/grid/how-to/various/update-aggregates-on-change
 slug: howto_update_aggregatesonchange_grid
 tags: update, aggregates, when, value, changes, grid
@@ -10,9 +10,22 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to re-draw only the Grid footer and the group footers to show the new aggregates without rebinding the entire Grid.
+## Environment
 
-Upon changing the group fields, the Grid requires a full refresh.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
+## Description
+
+How can I re-draw only the Grid footer while the group footers show the new aggregates without rebinding the entire Grid?
+
+## Solution
+
+To achieve the desired scenarion, use the following suggested implemetation. Note that upon changing the group fields, the Grid requires a full refresh.
 
 ```dojo
 
@@ -99,6 +112,8 @@ Upon changing the group fields, the Grid requires a full refresh.
                 updateGroupFooters(this.view());
 
                 grid.footer.find(".k-footer-template").replaceWith(grid.footerTemplate(this.aggregates()));
+
+                grid.refresh();
               }
             }
           },
@@ -121,4 +136,4 @@ Upon changing the group fields, the Grid requires a full refresh.
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -4,7 +4,7 @@ var Calendar = kendo.ui.Calendar,
     instance,
     div;
 
-describe("kendo.ui.Calendar events", function () {
+describe("kendo.ui.Calendar events", function() {
     beforeEach(function() {
 
         div = $("<div />").appendTo(Mocha.fixture);
@@ -63,7 +63,7 @@ it("click on cell put in range", function() {
 
     instance._current = new Date(2000, 10, 1, 16, 0, 0);
 
-    stub(instance, { navigateDown: instance.navigateDown});
+    stub(instance, { navigateDown: instance.navigateDown });
 
     div.find("tbody").find("td:has(.k-link)").last().click();
 
@@ -81,7 +81,7 @@ it("navigate event should raise navigate event when change view", function() {
 });
 
 it("click on cell should persist _viewedValue", function() {
-    var date = new Date(2000, 10, 22, 22, 22, 22),
+    var date = new Date(2001, 10, 22, 22, 22, 22),
         instance = new Calendar(div, {
             value: date
         });
@@ -89,7 +89,7 @@ it("click on cell should persist _viewedValue", function() {
     instance.navigateUp(); //year view
     instance.navigateUp(); //decade view
 
-    div.find("tbody").find("td:not(.k-other-month):first").click(); //click "2000" cell
+    div.find("tbody").find("td:eq(1)").click(); //click "2000" cell
     div.find("tbody").find("td:last").prev().click(); //click "Nov" cell
 
     assert.deepEqual(instance.current(), date);

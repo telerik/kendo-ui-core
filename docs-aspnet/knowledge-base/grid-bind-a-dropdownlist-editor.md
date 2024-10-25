@@ -15,11 +15,11 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
+  <td>Progress® Telerik® UI Grid for {{ site.product_short }}</td>
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>217.2.621</td>
+  <td>2017.2.621</td>
  </tr>
 </table>
 
@@ -33,7 +33,7 @@ This is a logged issue. The Core helpers duplicate the property name when the `D
 
 ## Suggested Workarounds
 
-Telerik UI for ASP.NET Core does not provide a built-in solution for achieving this behavior. However, you can still work around the issue by using a `.DropDownListFor(m => m)` definition.
+Telerik UI for ASP.NET Core does not provide a built-in solution for achieving this behavior. However, you can still workaround the issue by using a `.DropDownListFor(m => m)` definition when defining an Editor Template.
 
 ```
 @model Project.Models.StateProvinceRegionViewModel
@@ -47,6 +47,32 @@ Telerik UI for ASP.NET Core does not provide a built-in solution for achieving t
 )
 ```
 
+For further details on configuring Custom Editors for the Grid refer to the [Custom Editing](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/editing/custom#custom-editing) section of the documentation and the [runnable example demonstrating the use of a DropDownList as a Custom Editor](https://demos.telerik.com/aspnet-core/grid/editing-custom)
+
+## More {{ site.framework }} Grid Resources
+
+* [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
+
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+
+{% if site.core %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-mvc/grid)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

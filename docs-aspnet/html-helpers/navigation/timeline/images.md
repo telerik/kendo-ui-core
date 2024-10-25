@@ -1,7 +1,7 @@
 ---
 title: Images
 page_title: Timeline Images
-description: "Adding images in the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "Adding images in the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/images
 slug: images_htmlhelpers_timeline_aspnetcore
 position: 4
@@ -16,18 +16,46 @@ The example below shows how you can add an image for the events.
 >tip If you want to show more than one image, you need to customize the [template of the Timeline](templates).
 
 
-```Razor
-@(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
-           .Name("Timeline")
-           .DataDateField("EventDate")
-           .DataDescriptionField("Description")
-           .DataSubTitleField("Subtitle")
-           .DataTitleField("Title")
-           .DataImagesField("Images")
-           .Orientation("vertical")
-           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
-)
+```HtmlHelper
+    @(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
+               .Name("Timeline")
+               .DataDateField("EventDate")
+               .DataDescriptionField("Description")
+               .DataSubTitleField("Subtitle")
+               .DataTitleField("Title")
+               .DataImagesField("Images")
+               .Orientation("vertical")
+               .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline" 
+                    orientation="vertical"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle" 
+                    datadescriptionfield="Description" 
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData","Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+```
+{% endif %}
 ```Controller
 public partial class Timeline : BaseController
 {
@@ -56,7 +84,9 @@ public partial class Timeline : BaseController
             }
         });
 
-        return Json(events);
+        {% if site.core %}
+        return Json(events);{% else %}
+        return Json(events, JsonRequestBehavior.AllowGet);{% endif %}
     }
 }
 ```

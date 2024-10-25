@@ -1,7 +1,7 @@
 ---
 title: Hidden Containers
 page_title: Hidden Containers
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to handle the most common scenarios when initializing it in a hidden container."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when initializing it in a hidden container."
 slug: hidden_containers_aspnetcore_grid
 position: 4
 ---
@@ -43,6 +43,7 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
 ## See Also
 
+* [Initializing the Grid HtmlHelper for {{ site.framework }} in a TabStrip component]({% slug grid-initialize-in-tabstrip%})
 * [Scrolling by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
 * [Server-Side API](/api/grid)

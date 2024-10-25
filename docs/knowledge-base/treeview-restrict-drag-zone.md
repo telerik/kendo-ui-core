@@ -1,8 +1,8 @@
 ---
 title: Restrict a Drag Zone in the TreeView
-description: An example on how to restrict a drag zone in the Kendo UI TreeView widget.
+description: Learn how to restrict a drag zone in the Kendo UI TreeView widget.
 type: how-to
-page_title: Restrict Drag Zones | Kendo UI TreeView for jQuery
+page_title: Restrict Drag Zones - Kendo UI TreeView for jQuery
 slug: treeview-restrict-drag-zone
 tags: treeview, restrict, drag, zone
 res_type: kb
@@ -14,10 +14,10 @@ component: treeview
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI TreeView</td>
+  <td>Progress® Kendo UI® TreeView for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2019.1.115 version</td>
  </tr>
 </table>
@@ -44,7 +44,7 @@ Add a `dragFilter` option to the TreeView by overriding the implementation of th
         var dragging = this.dragging;
         if (enabled && !dragging) {
           var widget = this;
-          var dragFilter = 'div:not(.k-state-disabled) .k-in';
+          var dragFilter = 'div:not(.k-disabled) .k-in';
 
           if (this.options.dragFilter && typeof this.options.dragFilter == 'string')
           {

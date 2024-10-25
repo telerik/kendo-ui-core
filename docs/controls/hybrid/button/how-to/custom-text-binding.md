@@ -1,6 +1,6 @@
 ---
 title: Configure Text Binding
-page_title: Configure Text Binding | Hybrid UI Button
+page_title: Configure Text Binding - Hybrid UI Button
 description: "Learn how to implement a custom Kendo UI MVVM binding that sets the Hybrid UI Button's text in Kendo UI."
 slug: howto_configuretextbinding_hybridactionsheet
 ---

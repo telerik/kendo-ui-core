@@ -1,7 +1,7 @@
 ---
 title:  Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI DropDownList component for {{ site.framework }}."
 previous_url: /helpers/editors/dropdownlist/binding/ajax-binding
 slug: htmlhelpers_dropdownlist_ajaxbinding_aspnetcore
 position: 2
@@ -21,31 +21,54 @@ You can configure the Telerik UI DropDownList for Ajax binding to the Northwind 
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
+        {% if site.mvc %}
         public JsonResult GetProducts()
         {
             NorthwindDataContext northwind = new NorthwindDataContext();
 
             return Json(northwind.Products, JsonRequestBehavior.AllowGet);
         }
+        {% else %}
+        public JsonResult GetProducts()
+        {
+            NorthwindDataContext northwind = new NorthwindDataContext();
+
+            return Json(northwind.Products);
+        }
+        {% endif %}
 
 1. Add an Ajax-bound DropDownList.
 
-        @(Html.Kendo().DropDownList()
-            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
-            .DataSource(source =>
-            {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProducts", "Home"); // Set the Action and Controller names.
-                    })
-                    .ServerFiltering(true); // If true, the DataSource will not filter the data on the client.
-            })
-            .SelectedIndex(0) // Select the first item.
-        )
-
+```HtmlHelper
+    @(Html.Kendo().DropDownList()
+        .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
+        .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
+        .DataSource(source =>
+        {
+                source.Read(read =>
+                {
+                    read.Action("GetProducts", "Home"); // Set the Action and Controller names.
+                })
+                .ServerFiltering(true); // If true, the DataSource will not filter the data on the client.
+        })
+        .SelectedIndex(0) // Select the first item.
+     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdownlist name="productDropDownList"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    index="0">
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("GetProducts", "Home")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 ## See Also
 
 * [Server-Side API](/api/dropdownlist)

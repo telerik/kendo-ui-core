@@ -16,7 +16,7 @@ The SplitView represents a tablet-specific view that consists of two or more mob
 
 ## Basic Configuration
 
-1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Open `HomeController.cs` and modify the `Index` action method.
 
         public ActionResult Index()
@@ -26,40 +26,6 @@ The SplitView represents a tablet-specific view that consists of two or more mob
 
 1. Add a hybrid Telerik UI SplitView to the `Index` view.
 
-    ```ASPX
-        <% Html.Kendo().MobileSplitView()
-            .Name("MobileSplitView") //SplitView `id`
-            .Panes(panes =>
-            {
-                // Add the side pane.
-                panes.Add().Content(() =>
-                    {
-                        %>
-                        <% Html.Kendo().MobileView()
-                                .Title("Side View")
-                                .Content("Side View Content")
-                                .Render();
-                        %>
-                        <%
-                    }
-                );
-                // Add the main pane.
-                panes.Add().Content(() =>
-                    {
-                        %>
-                        <% Html.Kendo().MobileView()
-                                .Title("Main View")
-                                .Content("Main View Content")
-                                .Render();
-                        %>
-                        <%
-                    }
-                );
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileSplitView()
             .Name("MobileSplitView") //SplitView `id`
             .Panes(panes =>
@@ -84,20 +50,12 @@ The SplitView represents a tablet-specific view that consists of two or more mob
                 );
             })
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -107,36 +65,6 @@ You can subscribe to all hybrid SplitView [events](https://docs.telerik.com/kend
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <% Html.Kendo().MobileSplitView()
-            .Name("MobileSplitView")
-            .Panes(panes =>
-            {
-                panes.Add().Content(() =>
-                    {
-                        %>
-                        <% Html.Kendo().MobileView()
-                                .Title("Side View")
-                                .Content("Side View Content")
-                                .Render();
-                        %>
-                        <%
-                    }
-                );
-            })
-            .Events(events => events
-                .Init("onInit")
-            )
-            .Render();
-    %>
-
-    <script>
-        function onInit() {
-            // Handle the init event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileSplitView()
             .Name("MobileSplitView")
             .Panes(panes =>
@@ -160,7 +88,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the init event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 
@@ -189,4 +116,4 @@ You can reference a hybrid SplitView instance by using the [`jQuery.data()`](htt
 
 ## See Also
 
-* [Hybrid SplitViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
+* [Hybrid SplitViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilesplitviewbuilder)

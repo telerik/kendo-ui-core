@@ -450,6 +450,25 @@ Sets the hint of the drop-zone.
         });
     </script>
 
+### localization.headerStatusPaused `String`
+
+Sets the paused status message of the header.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                headerStatusPaused: "customHeaderStatusPaused"
+            }
+        });
+    </script>
+
 ### localization.headerStatusUploaded `String`
 
 Sets the status message of the header for the uploaded files.
@@ -484,6 +503,44 @@ Sets the status message of the header for the files that are in the process of u
             },
             localization: {
                 headerStatusUploading: "customHeaderStatusUploading"
+            }
+        });
+    </script>
+
+### localization.uploadSuccess `String`
+
+Sets the text of the validation message when a file is succesfully uploaded.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                uploadSuccess: "customUploadSuccess"
+            }
+        });
+    </script>
+
+### localization.uploadFail `String`
+
+Sets the text of the validation message when a file fails to upload.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                uploadFail: "customUploadFail"
             }
         });
     </script>
@@ -747,33 +804,13 @@ The `template` data `Array` consists of:
 > * To render an action button for each file, add the following markup to the template: `<button type='button' class='k-upload-action'></button><button type='button' class='k-upload-action'></button>`.
 > * To use the default progress-bar, add the following markup at the beginning of the template: `<span class='k-progress'></span>`. Then, render the rest of the template that relates to it. For a live demo, refer to the example on the [Upload templates](https://demos.telerik.com/kendo-ui/web/upload/templates.html).
 
-#### Example - specifying the template as a function
-
-    <input type="file" name="files" id="upload" />
-    <script id="fileTemplate" type="text/x-kendo-template">
-        <div>
-            <p>Name: #=name#</p>
-            <p>Size: #=size# bytes</p>
-            <p>Extension: #=files[0].extension#</p>
-            <strong class='k-upload-status'>
-                <button type='button' class='k-upload-action'></button>
-                <button type='button' class='k-upload-action'></button>
-            </strong>
-        </div>
-    </script>
-    <script>
-        $("#upload").kendoUpload({
-            template: kendo.template($('#fileTemplate').html())
-        });
-    </script>
-
-#### Example - specifying the template as a string
+#### Example - specifying the template as a string literal
 
     <input type="file" name="files" id="upload" />
     <script>
         $("#upload").kendoUpload({
-        template: "<div><p>Name: #=name#</p>" +
-                  "<p>Size: #=size# bytes</p><p>Extension: #=files[0].extension#</p>" +
+        template: ({ name, size, files }) => `<div><p>Name: ${name}</p>` +
+                  `<p>Size: ${size} bytes</p><p>Extension: ${files[0].extension}</p>` +
                   "<strong class='k-upload-status'>" +
                   "<button type='button' class='k-upload-action'></button>" +
                   "<button type='button' class='k-upload-action'></button>" +
@@ -940,16 +977,12 @@ Visually removes a file by its ID from the UI without issuing requests to the `r
     <input name="files" id="files" type="file" />
     <button id="clearSelected" class="k-button">Clear all checked</button>
 
-    <script id="fileTemplate" type="text/x-kendo-template">
-       <span class='k-progress'></span>
-       <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
-       <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
-    </script>
-
     <script>
       $(document).ready(function() {
         $("#files").kendoUpload({
-          template: $("#fileTemplate").html()
+          template: ({ files, name }) => "<span class='k-progress'></span>" +
+          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox k-checkbox-md' />` +
+          `<label for='${files[0].uid}' class='k-checkbox-label'>Filename: ${name}</label>`
         });
 
         $("#clearSelected").on('click', function(e){
@@ -1066,6 +1099,7 @@ Retrieves the files that are currently selected.
               files = upload.getFiles();
 
           alert("You have selected " + files.length  + " files");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(files);
         })
       });
@@ -1182,6 +1216,8 @@ Removes all files for which the callback function returns `true` by sending a st
 
 > The invoking of the `removeFile` method does not trigger the `remove` event.
 
+> In a chunk upload scenario the method will not work for files that are not fully uploaded and saved. To remove a file that has been canceled call the `remove` handler manually.
+
 #### Example
 
     <input name="files" id="files" type="file" />
@@ -1229,16 +1265,12 @@ Removes a file by its ID by sending a standard `remove` request to the handler.
     <input name="files" id="files" type="file" />
     <button id="removeSelected" class="k-button">Remove all checked</button>
 
-    <script id="fileTemplate" type="text/x-kendo-template">
-       <span class='k-progress'></span>
-       <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
-       <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
-    </script>
-
     <script>
       $(document).ready(function() {
         $("#files").kendoUpload({
-          template: $("#fileTemplate").html(),
+          template: ({ files, name }) => "<span class='k-progress'></span>" +
+          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox k-checkbox-md' />` +
+          `<label for='${files[0].uid}' class='k-checkbox-label'>Filename: ${name}</label>`,
           async: {
             autoUpload: false,
             saveUrl: "http://my-app.localhost/save",
@@ -1331,6 +1363,8 @@ Manually triggers the upload process.
 Fires when the upload was cancelled while in progress.
 
 > The `cancel` event fires only when the Upload is in [async mode](/web/upload/modes#asynchronous-mode).
+
+> To remove the data of a file that has been canceled, manually call the `remove` handler. For more information refer to the limitation of the [`removeFile` method](/api/javascript/ui/upload/methods/removefile)
 
 #### Example
 
@@ -1526,6 +1560,7 @@ Fires when the data about the progress of the upload is available.
             // An array with information about the uploaded files
             var files = e.files;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.percentComplete);
         }
     </script>
@@ -1636,8 +1671,11 @@ Fires when a file is selected.
 
         function onSelect(e) {
             $.each(e.files, function (index, value) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Name: " + value.name);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Size: " + value.size + " bytes");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Extension: " + value.extension);
             });
         };

@@ -1,7 +1,7 @@
 ---
 title: Use CRUD Operations When Grid Is Bound to ASP.NET MVC Action Methods
-page_title: Use CRUD over ASP.NET MVC Methods | Kendo UI Grid for jQuery
-description: "An example on how to use CRUD operations when the Kendo UI Grid for jQuery is bound to ASP.NET MVC action methods."
+page_title: Use CRUD over ASP.NET MVC Methods - Kendo UI for jQuery Data Grid
+description: "Learn how to use CRUD operations when the Kendo UI Grid for jQuery is bound to ASP.NET MVC action methods."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-bound-to-asp-net-mvc-action-methods---crud-operations
 slug: howto_use_crud_operationswith_apsnet_action_methods_bound_grid
 tags: grid, crud, operations, aspnet, mvc, action, methods, bind
@@ -18,4 +18,4 @@ To see the example on how to achieve this behavior, refer to [this project](http
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

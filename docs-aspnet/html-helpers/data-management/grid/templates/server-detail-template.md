@@ -20,18 +20,18 @@ To configure the server detail template:
 
 ## Defining the Server Details
 
-1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [First Steps article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [First Steps article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    ![A new entity data model](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} A new entity data model](../images/grid-entity-data-model.png)
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
-    ![Choosing the connection](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![Choosing the Products table](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
 
 1. Open `HomeController.cs` and edit the `Index` action method.
 
@@ -112,20 +112,20 @@ To configure the server detail template:
 
 1. Build and run the project.
 
-    ![The final result](../images/grid-detail-template.png)
+    ![{{ site.product_short }} The final result is a Grid with a detail template](../images/grid-detail-template.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-detail-template).
 
 ## Setting the Server Hierarchy
 
-1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [First Steps article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [First Steps article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    ![A new entity data model](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} A new entity data model](../images/grid-entity-data-model.png)
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
-    ![Choosing the connection](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** and **Categories** tables from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 1. Open `HomeController.cs` and edit the `Index` action method.
@@ -213,7 +213,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 1. Build and run the project.
 
-    ![The final result](../images/grid-hierarchy.png)
+    ![{{ site.product_short }} The final result is a hierarchical Grid](../images/grid-hierarchy.png)
 
 ## See Also
 

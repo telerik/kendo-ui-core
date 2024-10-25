@@ -1,7 +1,7 @@
 ---
-title: Add Background Color to Sorted Columns by Using LESS Themes
-page_title: Add Background Color with LESS Themes | Kendo UI Grid for jQuery
-description: "An example on how to add a background color to the sorted columns of the Kendo UI Grid for jQuery by using the LESS themes."
+title: Add Background Color to Sorted Grid Columns by Using LESS Themes
+page_title: Add Background Color by Using LESS Themes - jQuery Data Grid
+description: "Learn how to add a background color to the sorted columns of the Kendo UI Grid for jQuery by using the LESS themes."
 previous_url: /controls/data-management/grid/how-to/Layout/add-background-sorted-columns-LESS-themes
 slug: howto_add_background_sorted_columns_LESS_themes_grid
 tags: backaground, color, less, themes, columns, grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery</td>
+  <td>Progress® Kendo UI® for jQuery</td>
  </tr>
 </table>
 
@@ -24,6 +24,8 @@ res_type: kb
 How can I add a background color to the sorted columns of the Grid by using the [LESS themes]({% slug themesandappearnce_kendoui_desktopwidgets %})?
 
 ## Solution
+
+To achieve the desired scenario:
 
 1. Change the default background of the alternate row to an RGBA color format with a low opaque level.
 1. Add the background color to the `.k-sorted` class by using the RGBA color format.
@@ -84,4 +86,7 @@ The following example demonstrates how to apply the suggested background colors 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)
+* [Kendo UI for jQuery Data Grid (Product Page)](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})

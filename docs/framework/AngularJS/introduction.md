@@ -9,9 +9,14 @@ position: 1
 
 # AngularJS Directives Overview
 
-This article demonstrates the basics of the integration between Kendo UI and AngularJS.
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+>For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
 
-For more information, refer to the page on [developing with AngularJS](https://www.telerik.com/kendo-ui/angularjs-and-kendo-ui-framework-integration "Developing with AngularJS?").
+This article describes the basics of integrating Kendo UI for jQuery and AngularJS 1.x. 
+
+If you are developing with newer versions of Angular (2.0+), [Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui) provides 100+ native Angular components.
 
 ## Getting Started
 
@@ -41,7 +46,12 @@ You can reference a widget by using any of the following approaches:
 
 * Getting instances in the `controller`&mdash;To call methods on a widget from your controller, you might sometimes need a reference to the widget. To get such, assign a name to the `kendo-widget-name` attribute.
 
-    ```dojo
+    ```
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+        
         <div ng-app="app" ng-controller="MyCtrl">
           <input kendo-datepicker="datePicker" k-on-change="onChange()">
         </div>
@@ -56,7 +66,12 @@ You can reference a widget by using any of the following approaches:
 
 * Using the `tag` directive&mdash;As of the Kendo UI Q1 2015 release, if you use the `tag` directive variant, you can set the `k-scope-field` to achieve the same.
 
-    ```dojo
+    ```
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
         <div ng-app="app" ng-controller="MyCtrl">
           <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()"></kendo-date-picker>
         </div>
@@ -71,7 +86,12 @@ You can reference a widget by using any of the following approaches:
 
 * Setting Options in a Link Function&mdash;As of the Kendo UI Q2 2015 release, the timeout initialization of the widgets is removed. To set the options of a widget as part of the link function of a custom directive, use `k-ng-delay` and `timeout`.
 
-    ```dojo
+    ``` 
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
         <div id="example" ng-app="KendoDemos">
             <div class="demo-section k-header" ng-controller="MyCtrl">
                 <my-custom-directive />
@@ -103,5 +123,5 @@ As of the Kendo UI 2015 Q2 release, if the `k-options` of the widget is bound to
 * [Widget Events]({% slug angularjs_widget_events %})
 * [Model and Value Bindings]({% slug angularjs_value_model_binding %})
 * [Delayed Initialization]({% slug angularjs_delayed_initialization %})
-* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+
 * [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)

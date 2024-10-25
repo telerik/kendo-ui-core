@@ -1,9 +1,9 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Learn about the filtering functionality of the Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
+description: "Learn about the filtering functionality of the Telerik UI DropDownTree component for {{ site.framework }}."
 slug: htmlhelpers_dropdowntree_filtering_aspnetcore
-position: 3
+position: 4
 ---
 
 # Filtering
@@ -20,7 +20,7 @@ The DropDownTree supports the following filter values:
 
 The following example demonstrates how to set the filter of the DropDownTree.
 
-```
+```HtmlHelper
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
         .DataTextField("Name")
@@ -32,6 +32,20 @@ The following example demonstrates how to set the filter of the DropDownTree.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" filter="FilterType.Contains" name="dropdowntree"  style="width: 100%">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-dropdowntree>
+```
+{% endif %}
 
 ## See Also
 

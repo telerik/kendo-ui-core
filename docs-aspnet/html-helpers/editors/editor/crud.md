@@ -1,7 +1,7 @@
 ---
 title: CRUD Operations
 page_title: CRUD Operations
-description: "Learn how to use the create, read, update, and delete CRUD operations with the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the create, read, update, and delete CRUD operations with the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_crud_editor_aspnetcore
 position: 8
 ---
@@ -10,11 +10,10 @@ position: 8
 
 The following example demonstrates how to save, read, update and delete a text data content in a local database using the Editor component.
 
-{% if site.core %}
-For a runnable project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples). The previously linked example assumes you have a {{ site.product }} and Entity framework installed and a local database set up.
-{% endif %}
+For a runnable project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples). The previously linked example assumes you have Telerik UI for ASP.NET Core and Entity framework installed and a local database set up.
 
-> This code has no applied XSS attack prevention and it is the responsibility of the developer to manage these security risks. For more information, refer to the article on [preventing cross-site scripting](https://docs.telerik.com/kendo-ui/controls/editors/editor/preventing-xss).
+
+> This code has no applied XSS attack prevention and it is the responsibility of the developer to manage these security risks. For more information, refer to the article on [preventing cross-site scripting](https://docs.telerik.com/kendo-ui/controls/editor/preventing-xss).
 
 The following example demonstrates how to define the database model.
 
@@ -40,7 +39,7 @@ public class EditorData
 
 The following example demonstrates how to define the **Index** page of your application.
 
-```Razor
+```HtmlHelper
 <h1>Index</h1>
 
 <p>
@@ -80,7 +79,7 @@ public async Task<IActionResult> Index()
 
 The following example demonstrates how to add the content of the Editor to the database.
 
-```HTML-helper
+```HtmlHelper
 <h1>Create</h1>
 
 <h4>EditorData</h4>
@@ -108,7 +107,7 @@ The following example demonstrates how to add the content of the Editor to the d
 </div>
 
 ```
-```Tag-helper
+```TagHelper
 <h1>Create</h1>
 
 <h4>EditorData</h4>
@@ -158,7 +157,7 @@ public async Task<IActionResult> Create([Bind("ContentId,EditorContent")] Editor
 
 The following example demonstrates how to read the stored data in the database.
 
-```Razor
+```HtmlHelper
 <h1>Details</h1>
 
 <div>
@@ -199,7 +198,7 @@ public async Task<IActionResult> Details(int? id)
 
 The following example demonstrates how to edit the stored data.
 
-```HTML-helper
+```HtmlHelper
 <h1>Edit</h1>
 
 <h4>EditorData</h4>
@@ -227,7 +226,7 @@ The following example demonstrates how to edit the stored data.
     <a asp-action="Index" class="k-button">Back to List</a>
 </div>
 ```
-```Tag-helper
+```TagHelper
 <h1>Edit</h1>
 
 <h4>EditorData</h4>

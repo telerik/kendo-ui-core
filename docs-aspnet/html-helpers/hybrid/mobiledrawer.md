@@ -16,7 +16,7 @@ The Drawer provides a slide to reveal the global mobile application toolbox or n
 
 ## Basic Configuration
 
-1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Open `HomeController.cs` and modify the `Index` action method.
 
         public ActionResult Index()
@@ -26,21 +26,6 @@ The Drawer provides a slide to reveal the global mobile application toolbox or n
 
 1. Add the default application view. By default, the Drawer is revealed at the left side when swiping from left to right.
 
-    ```ASPX
-        <%: Html.Kendo().MobileView()
-            .Name("drawer-view")
-            .Title("Deleted Items")
-            .Content(obj =>
-                Html.Kendo().MobileListView()
-                    .Items(items =>
-                    {
-                        items.Add().Icon("trash").Text("Untitled message 4");
-                        items.Add().Icon("trash").Text("Untitled message 5");
-                    })
-            )
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("drawer-view")
             .Title("Deleted Items")
@@ -53,37 +38,9 @@ The Drawer provides a slide to reveal the global mobile application toolbox or n
                     })
             )
         )
-    ```
 
 1. Add a hybrid Drawer to the `Index` view.
 
-    ```ASPX
-        <%: Html.Kendo().MobileDrawer()
-            .Name("my-drawer")
-            .HtmlAttributes(new { style = "width: 270px" })
-            .Views("drawer-view") // A list of the view ids on which the Drawer will appear.
-            .Content(obj =>
-                Html.Kendo().MobileListView().Type("group")
-                    .Items(root => {
-                        root.Add().Text("Tasks").Items(items =>
-                        {
-                            items.Add().Text("To Do");
-                            items.Add().Text("In Progress");
-                            items.Add().Text("Done");
-                            items.Add().Text("High Priority");
-                            items.Add().Text("Low Priority");
-                        });
-
-                        root.Add().Text("Account").Items(items =>
-                        {
-                            items.Add().Icon("settings").Text("Settings");
-                            items.Add().Icon("off").Text("Log Out");
-                        });
-                    })
-            )
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileDrawer()
             .Name("my-drawer")
             .HtmlAttributes(new { style = "width: 270px" })
@@ -102,26 +59,18 @@ The Drawer provides a slide to reveal the global mobile application toolbox or n
 
                         root.Add().Text("Account").Items(items =>
                         {
-                            items.Add().Icon("settings").Text("Settings");
+                            items.Add().Icon("wrench").Text("Settings");
                             items.Add().Icon("off").Text("Log Out");
                         });
                     })
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -131,21 +80,6 @@ You can subscribe to all hybrid Drawer [events](https://docs.telerik.com/kendo-u
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileDrawer()
-            .Name("MobileDrawer")
-            .Events(events => events
-                .BeforeShow("onBeforeShow")
-            )
-    %>
-
-    <script>
-        function onBeforeShow() {
-            // Handle the show event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileDrawer()
             .Name("MobileDrawer")
             .Events(events => events
@@ -158,7 +92,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the show event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 
@@ -176,4 +109,4 @@ You can reference a hybrid Drawer instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid DrawerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileDrawerBuilder)
+* [Hybrid DrawerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobiledrawerbuilder)

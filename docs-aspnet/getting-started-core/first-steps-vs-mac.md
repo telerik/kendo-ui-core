@@ -1,5 +1,5 @@
 ---
-title: First Steps on VS for Mac
+title: First Steps on Mac
 page_title: Getting Started on Visual Studio for Mac
 description: "Create a sample project on Visual Studio for Mac with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 slug: gettingstarted_firststeps_vsmac
@@ -7,19 +7,21 @@ position: 2
 permalink: /getting-started/first-steps-vs-mac
 ---
 
-# First Steps on VS for Mac
+# Telerik UI for ASP.NET Core First Steps with VS for Mac
 
 <iframe width="700" height="400" src="https://www.youtube.com/embed/901yBM2WYb4?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Welcome to the First Steps on Mac guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core with Visual Studio for Mac!
 
-The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2019.
+The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2022.
 
 To get up and running with the project:
 
+1. [Download the controls](https://www.telerik.com/download-trial-file/v2/aspnet-core-ui)
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)
+1. [Add a license file to your app](#adding-your-license-file)
 
 ## Meeting the Requirements
 
@@ -28,7 +30,7 @@ To get up and running with the project:
 
 ## Creating the Application
 
-1. Open Visual Studio for Mac 2019 and select **New**.
+1. Open Visual Studio for Mac 2022 and select **New**.
 1. Select **Web Application(Model-View-Controller) .NET Core** > **App** and click **Next**.
 1. Select the target framework of the project and click **Next**.
 1. Set a name and location for the project and click **Create**.    
@@ -37,21 +39,21 @@ To get up and running with the project:
 
 1. Open the NuGet Package Manager.
 
-	![Locating and opening the NuGet package manager menu](../getting-started-core/images/mac-manage-nuget.png)
+	![{{ site.product_short }} Locating and opening the NuGet package manager menu](../getting-started-core/images/mac-manage-nuget.png)
 
 2. Add a new [package source](https://docs.microsoft.com/en-us/visualstudio/mac/nuget-walkthrough?toc=%2Fnuget%2Ftoc.json&view=vsmac-2019#adding-package-sources).
 
-	![Adding the new NuGet source dialog](../getting-started-core/images/mac-add-nuget-source.png)
+	![{{ site.product_short }} Adding the new NuGet source dialog](../getting-started-core/images/mac-add-nuget-source.png)
 
-3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/nuget` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
+3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/v3/index.json` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
 
-	![Adding the credentials and authenticating for NuGet](../getting-started-core/images/mac-nuget-authenticate.png)
+	![{{ site.product_short }} Adding the credentials and authenticating for NuGet](../getting-started-core/images/mac-nuget-authenticate.png)
 
 4. From the drop-down list with sources, select the **Telerik Source**. Search for and select `Telerik.UI.for.AspNet.Core`. Click **Add Package** to install it. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
 
 	> If the package for Telerik UI for ASP.NET Core is not visible in your NuGet feed, then either you do not have an active trial or commercial license for the product, or your current trial or commercial license has expired. Download it from the [Telerik UI for ASP.NET Core product page](https://www.telerik.com/aspnet-core-ui).
 
-	![Selecting and installing the NuGet package](../getting-started-core/images/mac-nuget-install.png)
+	![{{ site.product_short }} Selecting and installing the NuGet package](../getting-started-core/images/mac-nuget-install.png)
 
 5. Open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
 
@@ -74,16 +76,21 @@ To get up and running with the project:
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
+	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
-  7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap v4 theme to match it.
+  7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 
 	7.2 The Microsoft template comes with a jQuery script reference in the body. Find it and move it to the head.
 
 	7.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match the installed `Kendo.Mvc.dll`.
 
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" />
+		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>   			
+
+If you prefer to include the client-side resources from a local source instead of CDNs, consider the following article:
+
+[Local Client-side Resources](https://docs.telerik.com/aspnet-core/installation/getting-started-copy-client-resources#including-client-side-resources)
 
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
@@ -104,18 +111,26 @@ To get up and running with the project:
 
 	As a result, the following sample page is created.
 
-    ![The created sample page](../getting-started-core/images/mac-sample-page.png)
+    ![{{ site.product_short }} The created sample page](../getting-started-core/images/mac-sample-page.png)
+
+@[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 
-* [Use data-bound widgets]({% slug environmentsupport_core %}#json-serialization)
+* [Use data-bound widgets]({% slug jsonserialization_core %})
 * [Ways to download and install UI for ASP.NET Core (overview)]({% slug downloadinstall_aspnetcore %})
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [How to update UI for ASP.NET Core to a new version]({% slug upgrade_aspnetcore %}#upgrading-to-new-versions)
+* [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
 
 ## See Also
 
-* [Installing UI for ASP.NET Core with Bower]({% slug bowerpackage_core %})
 * [Installing UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
-* [Installing UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
 * [Installing UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})

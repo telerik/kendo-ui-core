@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Upload PHP Class
+page_title: Overview - Upload PHP Class
 description: "Get started with the Upload PHP class in Kendo UI."
 slug: overview_upload_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Create the Orders Grid
-page_title: Create the Orders Grid | Kendo UI Sales Hub Tutorial
+page_title: Create the Orders Grid - Kendo UI Sales Hub Tutorial
 description: "Learn how to create the Orders grid in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/home-page/kend-saleshub-orders-grid, /tutorials/tutorial-saleshub/home-page/kend-saleshub-orders-grid
 slug: createordersgrid_saleshubtutorial_aspnetmvc
@@ -11,7 +11,7 @@ position: 2
 
 After you have created the customer TreeView, you need to set up the Grid of orders by using the Kendo UI MVC extensions in the Kendo UI Sales Hub.
 
-![The Orders list in the Kendo UI Sales Hub](images/kendo-saleshub-orders-grid-screenshot.png)
+![{{ site.product_short }} The Orders list in the Kendo UI Sales Hub](images/kendo-saleshub-orders-grid-screenshot.png)
 
 ## Configuration
 

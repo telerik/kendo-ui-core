@@ -21,7 +21,7 @@
 
     describe("kendo.ui.Resizable", function() {
         beforeEach(function() {
-            div = $("<div id='resizable'/></div>").appendTo(Mocha.fixture)[0];
+            div = $("<div id='resizable'></div>").appendTo(Mocha.fixture)[0];
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
@@ -35,7 +35,7 @@
         });
 
         it("draggable element should be the same as options.draggableElement", function() {
-            var draggableElement = $("<div id='element'/></div>").appendTo(Mocha.fixture)[0];
+            var draggableElement = $("<div id='element'></div>").appendTo(Mocha.fixture)[0];
             var resizable = setup({
                 draggableElement: draggableElement
             });
@@ -46,7 +46,7 @@
 
     describe("kendo.ui.Resizable", function() {
         beforeEach(function() {
-            div = $("<div style='position:absolute;top:0;left:0'><b></b><span style='position:absolute'/></div>").appendTo(Mocha.fixture);
+            div = $("<div style='position:absolute;top:0;left:0'><b></b><span style='position:absolute'></div>").appendTo(Mocha.fixture);
             handle = div.find("span");
         });
         afterEach(function() {

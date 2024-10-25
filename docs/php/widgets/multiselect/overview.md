@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | MultiSelect PHP Class
+page_title: Overview - MultiSelect PHP Class
 description: "Get started with the MultiSelect PHP class in Kendo UI."
 slug: overview_multiselect_uiforphp
 position: 1

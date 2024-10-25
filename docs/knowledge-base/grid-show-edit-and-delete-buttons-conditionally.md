@@ -2,7 +2,7 @@
 title: Conditionally Display Columns
 description: Conditionally show Edit and Delete buttons in the Kendo UI Grid.
 type: how-to
-page_title: Show Command Column Based on Conditions | Kendo UI Grid for ASP.NET MVC
+page_title: Show Command Column Based on Conditions - Kendo UI Grid for ASP.NET MVC
 slug: grid-show-edit-and-delete-buttons-conditionally
 tags: grid, condition, hide, buttons, update, delete, destroy, column
 ticketid: 1143185
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
   <td>UI for ASP.NET MVC</td>
  </tr>
  </tr>

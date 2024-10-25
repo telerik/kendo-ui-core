@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Music Store Tutorial
+page_title: Overview - Music Store Web App and Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store sample project by using Telerik UI for ASP.NET MVC."
 slug: overview_muscistoretutorial_aspnetmvc
 position: 1
@@ -12,7 +12,7 @@ This article is an overview of the Kendo UI Music Store sample project. The Kend
 
 ## The Web Application
 
-![The final look of the Kendo UI Music Store web application](images/kendo-music-store-intro-web-screenshot.png)
+![{{ site.product_short }} The final look of the Kendo UI Music Store web application](images/kendo-music-store-intro-web-screenshot.png)
 
 This sample project is based on the [MVC Music Store from Microsoft](https://archive.codeplex.com/?p=mvcmusicstore), so much of the server-side processing and the data structure are reused in this project.
 
@@ -32,7 +32,7 @@ Use the navigation tree to your left to navigate through the chapters of this tu
 
 ## The Dashboard
 
-![The final look of the Kendo UI Music Store Dashboard](images/kendo-music-store-intro-dashboard-screenshot.png)
+![{{ site.product_short }} The final look of the Kendo UI Music Store Dashboard](images/kendo-music-store-intro-dashboard-screenshot.png)
 
 The Dashboard builds upon the music store theme, adding a conceptual management dashboard to track the album performance. It focuses on [Kendo UI widgets rendering data visualization](https://www.telerik.com/kendo-ui) and the way Kendo UI and Sammy.js are used to create a visually rich single-page application.
 

@@ -7,32 +7,63 @@ slug: overview_globalization_core
 position: 1
 ---
 
-# Globalization Overview
+# {{ site.product }} Globalization Overview
 
 Globalization is the process of designing and developing an application that works in multiple cultures and languages.
 
 It combines localization (the translation of component messages) with internationalization (their adaptation to a specific culture). Cultures require and define particular information for their number formats, week and month names, date and time formats, and so on.
 
+All Kendo UI widgets and their {{ site.framework }} server-side wrappers which support date or number formatting depend also on the [current culture](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture). Usually, such components are more complex (for example, the [Grid]({% slug globalization_grid_aspnetcore %}), [ListView]({% slug globalization_htmlhelpers_listview %}), [Charts]({% slug htmlhelpers_charts_aspnetcore %}), and so on).
+
+The following {{ site.product }} helpers depend on the [current culture](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture):
+
+* [Calendar]({% slug globalization_calendar_aspnetcore %})
+* [DateInput]({% slug globalization_dateinput_aspnetcore %})
+* [DatePicker]({% slug globalization_datepicker_aspnetcore %})
+* [TimePicker]({% slug globalization_timepicker_aspnetcore %})
+* [DateTimePicker]({% slug globalization_datetimepicker_aspnetcore %})
+* [NumericTextBox]({% slug globalization_numerictextbox_aspnetcore %})
+* [MaskedTextBox (globalized mask literals)]({% slug globalization_maskedtextbox_aspnetcore %})
+* [Scheduler]({% slug htmlhelpers_scheduler_aspnetcore %})
+* [Gantt]({% slug htmlhelpers_gantt_aspnetcore %})
+* [Grid]({% slug globalization_grid_aspnetcore %})
+* [Chart]({% slug htmlhelpers_charts_aspnetcore %})
+* [ListView]({% slug globalization_htmlhelpers_listview %})
+
 ## Applying Cultures
 
 To use a culture that is different from the default `en-US` one in {{ site.product }}:
 
-1. Copy the required culture JavaScript file from the `\js\culture\` folder of your {{ site.product }} installation to the {% if site.core %}`wwwroot/lib/kendo-ui/js/cultures/`{% else %}`~/Scripts/cultures/`{% endif %} folder of your application. This example uses the Spanish `es-ES` culture.
-1. Include the corresponding culture JavaScript file after the other JavaScript product files.
+1. Copy the required culture JavaScript file from the `\js\culture\` folder of your [{{ site.product }} installation]({% slug downloadinstall_aspnetcore %}) to the {% if site.core %}`wwwroot/lib/kendo-ui/js/cultures/`{% else %}`~/Scripts/cultures/`{% endif %} folder of your application. Alternatively, provide the culture files by using the [Kendo CDN service]({% slug cdnservices_core %}).
+
+1. Include the corresponding culture JavaScript file after the other JavaScript product files. This example uses the Spanish `es-ES` culture.
+
 
 {% if site.core %}
-    ```Razor
+    ```LocalFiles
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
         <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
         <script src="~/lib/kendo-ui/js/cultures/kendo.culture.es-ES.min.js"></script>
     ```
+    ```CDN
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.es-ES.min.js"></script>
+    ```
 {% else %}
-    ```Razor
+    ```LocalFiles
         <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
         <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
+    ```
+    ```CDN
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.es-ES.min.js"></script>
     ```
 {% endif %}
 
@@ -41,6 +72,8 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
         <script>
             kendo.culture("es-ES");
         </script>
+
+>tip You can find the complete list of available cultures in the [Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/tree/master/src/cultures).
 
 ## Matching Cultures
 

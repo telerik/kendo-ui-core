@@ -1,6 +1,6 @@
 ---
 title: Saving Files
-page_title: Saving Files | Kendo UI Saving Files
+page_title: Saving Files - Kendo UI Saving Files
 description: "Learn how to save files on the client machine when working with Kendo UI."
 previous_url: /framework/save-files/introduction
 slug: overview_savingfiles_kendoui
@@ -11,7 +11,7 @@ position: 7
 
 As of the 2014 Q3 release, you can save files on the client machine by using the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method.
 
-## Configuration
+## Getting Started
 
 To save a file on the client machine:
 

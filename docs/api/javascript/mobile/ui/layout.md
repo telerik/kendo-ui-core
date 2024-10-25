@@ -108,6 +108,7 @@ The mobile view instance
     var app = new kendo.mobile.Application();
 
     function onHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.view.id + " view hidden");
     }
     </script>
@@ -140,6 +141,7 @@ The mobile layout instance
     var app = new kendo.mobile.Application();
 
     function onInit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("init");
     }
     </script>
@@ -181,6 +183,7 @@ The mobile view instance
     var app = new kendo.mobile.Application();
 
     function onShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("show");
     }
     </script>

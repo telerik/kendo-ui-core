@@ -18,22 +18,22 @@ To enable PDF export in the Diagram:
 
 1. Introduce a button and handle its `click` event. Export the Diagram within the handler.
 
-    ```HTML
-        <button class='export-pdf k-button'>Save as PDF</button>
-    ```
-    ```JavaScrtipt
-        <script>
-            $(".export-pdf").click(function () {
-                $("#diagram").getKendoDiagram().saveAsPDF();
-            });
-        </script>
-    ```
+```HTML
+    <button class='export-pdf k-button'>Save as PDF</button>
+```
+```JavaScrtipt
+    <script>
+        $(".export-pdf").click(function () {
+            $("#diagram").getKendoDiagram().saveAsPDF();
+        });
+    </script>
+```
 
 1. Include the Pako Deflate library in the page to enable compression.
 
 To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
 
-```Razor
+```HtmlHelper
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -64,6 +64,27 @@ To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https:/
     )
 
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-diagram name="diagram" on-data-bound="onDataBound">
+        <pdf file-name="Kendo UI Diagram Export.pdf" proxy-url="@Url.Action("Pdf_Export_Save", "Diagram" )" />
+        <hierarchical-datasource server-operation="false">
+            <transport>
+                <read url="@Url.Action("Pdf_Export_Read", "Diagram")" />
+            </transport>
+            <schema>
+                <hierarchical-model children="Items"></hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+        <editable enabled="false" />
+        <layout type="DiagramLayoutType.Layered"></layout>
+        <shape-defaults visual="visualTemplate"></shape-defaults>
+        <connection-defaults>
+            <stroke color="#979797" width="2" />
+        </connection-defaults>
+    </kendo-diagram>
+```
+{% endif %}
 ```JavaScript
     <script>
         $(".export-pdf").click(function () {

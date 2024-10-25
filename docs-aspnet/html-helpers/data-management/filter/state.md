@@ -1,7 +1,7 @@
 ---
 title: Persisting the State
 page_title: Persisting the State
-description: "Get started with the Telerik UI Filter HtmlHelper for {{ site.framework }} and learn how to save and restore its state, options, and filter expression."
+description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn how to save and restore its state, options, and filter expression."
 previous_url: /helpers/data-management/filter/state
 slug: htmlhelpers_filter_aspnetcore_store_settings
 position: 3
@@ -17,7 +17,7 @@ You can store only the filter expression and enable the Filter to apply it the n
 
 The following example demonstrates how to use the `change` event to automatically apply filtering and to maintain an up-to-date state of the Filter. Upon a page reload, the stored settings will be provided to the Filter configuration and will be applied.
 
-```View
+```HtmlHelper
 <ol>
     <li>Change the filter.</li>
     <li>Reload the page: <button type="button" onclick="reloadPage();">Reload</button></li>
@@ -97,7 +97,7 @@ using Kendo.Mvc.UI;
 
 public class FilterController : BaseController
 {
-    public IActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
+    public ActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
     {
         var people = new List<SampleData>() {
              new SampleData()  { Name = "Jane Doe", Age = 25, IsOnLeave = false },
@@ -108,7 +108,7 @@ public class FilterController : BaseController
         return Json(people.ToDataSourceResult(request));
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }
@@ -204,7 +204,7 @@ using Kendo.Mvc.UI;
 
 public class FilterController : BaseController
 {
-    public IActionResult GetData([DataSourceRequest]DataSourceRequest request)
+    public ActionResult GetData([DataSourceRequest]DataSourceRequest request)
     {
         var data = new List<SampleChartData>() {
              new SampleChartData() { Price = 25, Year = 2017 },
@@ -214,7 +214,7 @@ public class FilterController : BaseController
         return Json(data.ToDataSourceResult(request));
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }
@@ -231,5 +231,8 @@ public class SampleChartData
 ## See Also
 
 * [Basic Usage of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/index)
+{% if site.core %}
+* [Basic Usage of the Filter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/filter/tag-helper)
+{% endif %}
 * [Persisting the State of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/persist-state)
 * [Server-Side API](/api/filter)

@@ -2,7 +2,7 @@
     var Color = kendo.Color;
 
     // ------------------------------------------------------------
-    describe("Color", function () {
+    describe("Color", function() {
 
     it("fromHSL", function() {
         var color = Color.fromHSL(200, 0.5, 1, 0);

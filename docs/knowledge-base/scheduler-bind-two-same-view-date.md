@@ -1,8 +1,8 @@
 ---
 title: Bind Two Schedulers Together to Display the Same View and Date
-description: An example on how to bind two Schedulers together so that they always display the same view and date.
+description: Learn how to bind two Schedulers together so that they always display the same view and date.
 type: how-to
-page_title: Bind Two Schedulers Together to Display Same View and Date | Kendo UI Scheduler for jQuery
+page_title: Bind Two Schedulers Together to Display Same View and Date - Kendo UI Scheduler for jQuery
 slug: scheduler-bind-two-same-view-date
 tags: scheduler, bind, two, same, view, date
 ticketid: 1156354
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -54,8 +54,8 @@ My application displays two Kendo UI Schedulers on the same page. How can I bind
 <script>
   $(function() {
     $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       height: 600,
       views: [
         "day",
@@ -198,8 +198,8 @@ My application displays two Kendo UI Schedulers on the same page. How can I bind
     });
 
     $("#schedulerTwo").kendoScheduler({
-      date: new Date("2013/6/13"),
-      startTime: new Date("2013/6/13 07:00 AM"),
+      date: new Date("2022/6/13"),
+      startTime: new Date("2022/6/13 07:00 AM"),
       height: 600,
       views: [
         "day",

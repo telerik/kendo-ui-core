@@ -49,7 +49,7 @@
         it("push is invoked when the data source is initialized", function() {
             var transport = stub({}, "push");
 
-            new DataSource({ transport: transport })
+            new DataSource({ transport: transport });
 
             assert.equal(transport.calls("push"), 1);
         });
@@ -57,7 +57,7 @@
         it("push of custom transport is invoked", function() {
             var transport = stub({ read: function() { } }, "push");
 
-            new DataSource({ transport: transport })
+            new DataSource({ transport: transport });
 
             assert.equal(transport.calls("push"), 1);
         });
@@ -65,7 +65,7 @@
         it("pushCreate option is passed to the push method", function() {
             var transport = {
                 push: function(options) {
-                    assert.isOk($.isFunction(options.pushCreate));
+                    assert.isOk(kendo.isFunction(options.pushCreate));
                 }
             };
 
@@ -75,7 +75,7 @@
         it("pushUpdate option is passed to the push method", function() {
             var transport = {
                 push: function(options) {
-                    assert.isOk($.isFunction(options.pushUpdate));
+                    assert.isOk(kendo.isFunction(options.pushUpdate));
                 }
             };
 
@@ -85,7 +85,7 @@
         it("pushDestroy option is passed to the push method", function() {
             var transport = {
                 push: function(options) {
-                    assert.isOk($.isFunction(options.pushDestroy));
+                    assert.isOk(kendo.isFunction(options.pushDestroy));
                 }
             };
 

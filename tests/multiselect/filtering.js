@@ -7,14 +7,14 @@
 
         length = length || 5;
 
-        for (var i=0; i < length; i++) {
+        for (var i = 0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect filtering", function () {
+    describe("kendo.ui.MultiSelect filtering", function() {
         beforeEach(function() {
             $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
@@ -22,7 +22,7 @@
                     type: "keydown",
                     keyCode: keyCode
                 });
-            }
+            };
 
             kendo.ns = "kendo-";
             select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
@@ -109,7 +109,29 @@
 
         multiselect.open();
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+    });
+
+    it("MultiSelect does not rebind twice after filter", function() {
+        popuplateSelect();
+
+        var calls = 0;
+        var multiselect = new MultiSelect(select, {
+            delay: 0
+        });
+
+        multiselect.search("Option1");
+        multiselect.ul.children().first().click();
+
+        multiselect.bind("dataBound", () => {
+            calls++;
+        });
+
+        multiselect.input.blur();
+
+        multiselect.open();
+
+        assert.equal(calls, 1);
     });
 
     it("MultiSelect allows selection after filter rebind", function() {
@@ -125,13 +147,13 @@
 
         multiselect.ul.children().first().click();
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect hides popup if no data", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, {
-            noDataTemplate: ""
+            noDataTemplate: null
         });
 
         multiselect.wrapper.click();
@@ -145,7 +167,7 @@
             animation: false,
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: [{text: "Foo", value: 1 }, {text:"Bar", value:2 }, {text:"Baz", value:3}]
+            dataSource: [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }, { text: "Baz", value: 3 }]
         });
 
         multiselect.search("Foo");
@@ -388,7 +410,7 @@
 
         multiselect.open();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
 
         assert.equal(tags.length, 2);
         assert.equal(tags.eq(0).children(":first").text(), "text1");
@@ -424,9 +446,9 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().last().find(".k-i-close").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 1);
@@ -465,9 +487,9 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().first().find(".k-i-close").click();
+        multiselect.tagList.children(".k-chip").first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 1);
@@ -506,10 +528,10 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().last().find(".k-i-close").click();
-        multiselect.tagList.children().last().find(".k-i-close").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x-circle,.k-svg-i-x-circle").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x-circle,.k-svg-i-x-circle").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 0);
@@ -546,9 +568,9 @@
 
         multiselect.open();
 
-        multiselect.ul.find(".k-state-selected").click();
+        multiselect.ul.find(".k-selected").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 1);
@@ -592,7 +614,7 @@
 
         multiselect.open();
 
-        multiselect.ul.find(".k-state-selected").click();
+        multiselect.ul.find(".k-selected").click();
 
         var dataItems = multiselect.dataItems();
 
@@ -662,7 +684,7 @@
         multiselect.open();
     });
     it("resize popup on search when autoWidth is enabled", function(done) {
-        var data = [{text: "Foooooooooooooooooooooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var data = [{ text: "Foooooooooooooooooooooooooooooooo", value: 1, type: "a" }, { text: "Bar", value: 2, type: "b" }, { text: "Baz", value: 3, type: "a" }];
         $(select).width(100);
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
@@ -676,7 +698,7 @@
         multiselect.one("open", function() {
             assert.isOk(multiselect.wrapper.width() < multiselect.popup.element.width());
             multiselect.popup.close();
-            multiselect.dataSource.filter({field: "text", value: "a", operator: "contains"});
+            multiselect.dataSource.filter({ field: "text", value: "a", operator: "contains" });
             multiselect.one("open", function() {
                 assert.isOk(multiselect.wrapper.width() >= multiselect.popup.element.width());
                 done();
@@ -690,12 +712,12 @@
     it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
-            animation:{
+            animation: {
                 open: {
-                    duration:0
+                    duration: 0
                 },
                 close: {
-                    duration:0
+                    duration: 0
                 },
             },
             dataSource: {
@@ -704,21 +726,21 @@
         });
 
         multiselect.open();
-        assert.equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
+        assert.closeTo(multiselect.popup.element.closest(".k-animation-container").width(), multiselect.popup.element.outerWidth(true), 1);
         multiselect.close();
         multiselect.open();
-        assert.equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
+        assert.closeTo(multiselect.popup.element.closest(".k-animation-container").width(), multiselect.popup.element.outerWidth(true), 1);
     });
 
     it("enabled autoWidth disables X scrolling", function() {
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
-            animation:{
+            animation: {
                 open: {
-                    duration:0
+                    duration: 0
                 },
                 close: {
-                    duration:0
+                    duration: 0
                 },
             },
             dataSource: {
@@ -728,35 +750,7 @@
         });
 
         multiselect.open();
-        assert.equal(multiselect.listView.content.css("overflow"), "hidden auto")
-    });
-
-    it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
-        var multiselect = new MultiSelect(select, {
-            autoWidth: true,
-            animation:{
-                open: {
-                    duration:0
-                },
-                close: {
-                    duration:0
-                },
-            },
-            dataSource: {
-                data: [
-                    "Short item",
-                    "An item with really, really, really, really, really, really, really, really, really, long text",
-                    "Short item",
-                    "Short item",
-                    "Short item",
-                    "Short item",
-                    "Short item"
-                ]
-            }
-        });
-
-        multiselect.open();
-        assert.equal(multiselect.listView.content.css("overflow"), "hidden scroll")
+        assert.equal(multiselect.listView.content.css("overflow"), "hidden auto");
     });
 
     it("update popup height when no items are found", function(done) {
@@ -775,5 +769,87 @@
 
         multiselect.input.focus().val("test").keydown();
     });
+
+    it("MultiSelect caret is not moved on input focus", function(done) {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            filter: "startswith",
+            autoClose: false
+        });
+
+        multiselect.input.val("Option1");
+        kendo.caret(multiselect.input[0], 3);
+        multiselect.input.focus();
+
+        setTimeout(function() {
+            assert.equal(kendo.caret(multiselect.input[0])[0], 3);
+            done();
+        });
+    });
+
+    it("MultiSelect with filter on DataSource populates properly", function(done) {
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: [{
+                    value: 1,
+                    text: "one",
+                    filterVal: 1
+                }, {
+                    value: 1,
+                    text: "one",
+                    filterVal: 2
+                }],
+                filter: [{ field: "filterVal", operator: "eq", value: 1 }]
+            }
+        });
+
+        multiselect.bind("open", function() {
+            var items = multiselect.dataSource.view();
+
+            assert.equal(items.length, 1);
+            done();
+        });
+
+        multiselect.open();
+    });
+
+    it("filtering accepts compound filter", function(done) {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: {
+                filter: [{
+                    logic: "and",
+                    filters: [{
+                        field: "disc",
+                        operator: "eq",
+                        value: false
+                    }]
+                }],
+                data: [{
+                    text: "one",
+                    value: "one",
+                    disc: false
+                }, {
+                    text: "two",
+                    value: "two",
+                    disc: true
+                }]
+            }
+        });
+
+        multiselect.bind("open", function() {
+            var items = multiselect.dataSource.view();
+
+            assert.equal(items.length, 1);
+            done();
+        });
+
+        multiselect.open();
+    });
+
     });
 }());

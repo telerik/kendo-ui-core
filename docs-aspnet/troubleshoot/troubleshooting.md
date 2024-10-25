@@ -88,12 +88,10 @@ If an older version of `Kendo.Mvc.dll` is referenced and it uses a version of `S
 1. [Upgrade ASP.NET MVC 5](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/) which is used in the application to the newest version ASP.NET MVC 5 Nuget.
 1. Update the binding redirect for `System.Web.Mvc` in the `web.config` file.
 
-
-
-    <dependentAssembly>
-        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
-        <bindingRedirect oldVersion="0.0.0.0-<latest ASP.NET MVC 5 version>" newVersion="<latest ASP.NET MVC 5 version>" />
-    </dependentAssembly>
+        <dependentAssembly>
+            <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+            <bindingRedirect oldVersion="0.0.0.0-<latest ASP.NET MVC 5 version>" newVersion="<latest ASP.NET MVC 5 version>" />
+        </dependentAssembly>
 
 ### Live Method Is Unavailable, Undefined or Unsupported
 
@@ -452,7 +450,7 @@ If a widget does not show the updated data on a page visit, the most common reas
 
 Choose either of the options to overcome this behavior:
 
-* Force the `check for newer versions of stored pages` [(link)](https://support.microsoft.com/en-us/kb/263070).
+* Force the `check for newer versions of stored pages` [(link)](https://docs.telerik.com/aspnet-mvc/getting-started/helper-basics/fundamentals#using-css-bundling).
 * Disable caching using HTTP headers.
 
         [OutputCache(Duration=0,NoStore=true,VaryByParam="None")]
@@ -486,7 +484,7 @@ As extending open source libraries is outside the Kendo UI scope, you need to re
 
 After the server-side validation, the Editor displays the posted `encoded` value from the `ModelState`. The Razor view engine encodes it once again and, as a result,
 HTML tags appear inside the widget content area. More information about this behavior related to ASP.NET MVC is available at
-the blog post on [wrong value rendering by ASP.NET MVC's HtmlHelpers](http://blogs.msdn.com/b/simonince/archive/2010/05/05/asp-net-mvc-s-html-helpers-render-the-wrong-value.aspx).
+the blog post on [wrong value rendering by ASP.NET MVC's HtmlHelpers](https://docs.microsoft.com/bg-bg/archive/blogs/simonince/asp-net-mvcs-html-helpers-render-the-wrong-value).
 
 **Solution**
 
@@ -495,7 +493,7 @@ You have two alternative options to tackle this scenario:
 * Clear the `ModelState` in the controller's action method after the `POST`.
 * Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
 
-For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting).
+For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](https://docs.telerik.com/kendo-ui/controls/editor/troubleshooting).
 
 ## See Also
 
@@ -512,11 +510,11 @@ For additional tips on the Editor widget, refer to the [troubleshooting article 
 * [Common Issues in Kendo UI Excel Export](https://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
 * [Common Issues in Kendo UI Charts](https://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
 * [Performance Issues in Kendo UI Widgets for Data Visualization](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/upload/troubleshoot/troubleshooting)
 * [Common Issues Related to Styling, Appearance, and Rendering](https://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

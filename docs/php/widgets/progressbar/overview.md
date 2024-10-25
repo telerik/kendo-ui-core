@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ProgressBar PHP Class
+page_title: Overview - ProgressBar PHP Class
 description: "Get started with the ProgressBar PHP class in Kendo UI."
 slug: overview_progressbar_uiforphp
 position: 1

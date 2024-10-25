@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "router",
     name: "Router",
     category: "framework",
@@ -239,10 +237,10 @@ var __meta__ = { // jshint ignore:line
                 locations: [current]
             });
 
-            adapter.change($.proxy(this, "_checkUrl"));
+            adapter.change(this._checkUrl.bind(this));
         },
 
-        createAdapter:function(options) {
+        createAdapter: function(options) {
            return support.pushState && options.pushState ? new PushStateAdapter(options.root) : new HashAdapter(options.hashBang);
         },
 
@@ -353,6 +351,7 @@ var __meta__ = { // jshint ignore:line
     kendo.absoluteURL = absoluteURL;
     kendo.history = new History();
 })(window.kendo.jQuery);
+export default kendo;
 
 (function() {
     var kendo = window.kendo,
@@ -467,6 +466,7 @@ var __meta__ = { // jshint ignore:line
                 root: that.root
             });
 
+            // eslint-disable-next-line no-undef
             var initEventObject = { url: history.current || "/", preventDefault: $.noop };
 
             if (!that.trigger(INIT, initEventObject)) {
@@ -535,6 +535,3 @@ var __meta__ = { // jshint ignore:line
     kendo.Router = Router;
 })();
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

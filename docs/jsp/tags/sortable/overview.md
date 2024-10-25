@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Sortable JSP Tag
+page_title: Overview - Sortable JSP Tag
 description: "Get started with the Sortable JSP tag in Kendo UI."
 slug: overview_sortable_uiforjsp
 position: 1

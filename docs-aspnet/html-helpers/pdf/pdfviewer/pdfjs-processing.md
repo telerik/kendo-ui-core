@@ -1,7 +1,7 @@
 ---
 title: PDFjs Processing
 page_title: PDFjs Processing
-description: "Learn how to use PDF.js processing in the Telerik UI PDFViewer HtmlHelper for {{ site.framework }}."
+description: "Learn how to use PDF.js processing in the Telerik UI PDFViewer component for {{ site.framework }}."
 previous_url: /helpers/pdf/pdfviewer/pdfjs-processing
 slug: htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore
 position: 2
@@ -21,12 +21,7 @@ Add the PDF.js library scripts to the page.
 
 The following example demonstrates how to configure the PDFViewer to use PDF.js processing.
 
-```
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-
+```HtmlHelper
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer")
         .PdfjsProcessing(pdf => pdf
@@ -35,6 +30,24 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
         .Height(1200)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer name="pdfviewer"
+                     height="1200">
+        <pdfjs-processing file="@Url.Content("~/shared/web/pdfViewer/sample.pdf")" />
+    </kendo-pdfviewer>
+```
+{% endif %}
+```scripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+```
+
+For a complete example, refer to the following demo:
+
+* [PDFViewer PDFjs Processing Demo](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
 
 ## Browser Support
 

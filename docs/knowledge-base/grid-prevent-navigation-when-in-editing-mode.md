@@ -1,7 +1,7 @@
 ---
 title: Prevent Page Navigation in Edit Mode
-page_title: Prevent Navigation in Edit Mode | Kendo UI Grid for jQuery
-description: "An example on how to prevent page navigation while in edit mode of the Kendo UI Grid for jQuery."
+page_title: Prevent Navigation in Edit Mode - Kendo UI for jQuery Data Grid
+description: "Learn how to prevent page navigation while in edit mode of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-prevent-navigation-when-in-editing-mode
 slug: howto_prevent_page_navigation_inedit_mode_grid
 tags: grid, prevent, page, navigation, edit, mode
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -216,4 +216,4 @@ If the Grid is in edit mode, paging and sorting are prevented.
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

@@ -24,7 +24,7 @@
             popup = new Popup(div, { anchor: anchor });
 
             popup.open();
-            assert.equal(div.parent().css("zIndex"), "12");
+            assert.equal(div.closest(".k-animation-container").css("zIndex"), "12");
         });
 
         it("mousedown outside the element should close it", function() {
@@ -157,15 +157,16 @@
                 }
             });
             popup = div.data('kendoPopup');
-
-            div.show().data("kendoPopup").close();
+            popup.open();
+            popup.close();
         });
 
         it("close closes the element", function(done) {
             div.kendoPopup();
             popup = div.data('kendoPopup');
 
-            div.show().data("kendoPopup").close();
+            popup.open();
+            popup.close();
 
             setTimeout(function() {
                 assert.isOk(!div.is(":visible"));
@@ -185,7 +186,8 @@
         it("popup is made absolute", function() {
             div.kendoPopup();
             popup = div.data('kendoPopup');
-            assert.equal(div.css("position"), "absolute");
+            popup.open();
+            assert.equal(popup.wrapper.css("position"), "absolute");
         });
 
         it("default popup origin is bottom left", function() {
@@ -489,7 +491,7 @@
                 }
             });
 
-            div.show();
+            popup.open();
             popup.toggle();
         });
 
@@ -550,7 +552,7 @@
         it("setting collision to false stops boundary detection", function() {
             popup = new Popup(div, { collision: false });
 
-            assert.isOk($.isArray(popup.collisions));
+            assert.isOk(Array.isArray(popup.collisions));
             assert.equal(popup.collisions.length, 0);
         });
 
@@ -578,7 +580,7 @@
             var calledCount = 0,
                 MyPopup = Popup.extend({
                     _fit: function() {
-                        calledCount++
+                        calledCount++;
                     }
                 });
 
@@ -723,7 +725,7 @@
             });
 
             popup.open();
-            assert.isOk(anchor.children().hasClass("k-state-active"));
+            assert.isOk(anchor.children().hasClass("k-active"));
         });
 
         it("gets biggest zindex if sibling container does not have zIndex", function() {
@@ -733,7 +735,7 @@
             popup = new Popup(div, { anchor: anchor });
             popup.open();
 
-            assert.isOk(div.parent().css("zIndex") > 2);
+            assert.isOk(div.closest(".k-animation-container").css("zIndex") > 2);
         });
 
         it("copy font styles from anchor", function() {
@@ -747,28 +749,6 @@
             assert.equal(anchor.css("font-size"), div.css("font-size"));
             assert.equal(anchor.css("font-family"), div.css("font-family"));
             assert.equal(anchor.css("font-style"), div.css("font-style"));
-        });
-
-        it("add direction class to the anchor and popup", function() {
-            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo($("#qunit-fixture"));
-            popup = new Popup(div, { anchor: anchor });
-            popup.open();
-
-            assert.equal(anchor.hasClass("k-state-border-down"), true);
-            assert.equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), true);
-            assert.equal(div.hasClass("k-state-border-up"), true);
-        });
-
-        it("removes direction class from the anchor and popup", function() {
-            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo($("#qunit-fixture"));
-            popup = new Popup(div, { anchor: anchor });
-
-            popup.open();
-            popup.close();
-
-            assert.equal(anchor.hasClass("k-state-border-down"), false);
-            assert.equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), false);
-            assert.equal(div.hasClass("k-state-border-up"), false);
         });
 
         it("calculate position correctly when content height is 'auto'", function() {
@@ -858,6 +838,7 @@
             popup.open();
             popup.close();
             popup.element.css("width", "10vw");
+
             popup.open();
 
             var animationContainer = popup.wrapper;

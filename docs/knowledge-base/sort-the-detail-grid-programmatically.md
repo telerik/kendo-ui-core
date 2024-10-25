@@ -1,8 +1,8 @@
 ---
 title: Access the Detail Grid Programmatically
-description: An example on how to access and sort the detail Kendo UI Grid programmatically.
+description: Learn how to access and sort the detail Kendo UI Grid programmatically.
 type: how-to
-page_title: Access and Sort the Detail Grid Programmatically | Kendo UI Grid for jQuery
+page_title: Access and Sort the Detail Grid Programmatically - Kendo UI for jQuery Data Grid
 previous_url: /knowledge-base/how-to-sort-the-detail-grid-programmatically
 slug: sort-the-detail-grid-programmatically
 ticketid: 1116825
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

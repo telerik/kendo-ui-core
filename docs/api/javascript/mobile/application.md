@@ -92,6 +92,7 @@ The view model scope. By default, the views will try to resolve their models fro
         modelScope: {
             foo: {
                 onInit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e);
                 }
             }
@@ -110,6 +111,7 @@ The view model scope. By default, the views will try to resolve their models fro
         modelScope: {
             foo: {
                 onInit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e);
                 }
             }
@@ -484,6 +486,7 @@ Get a reference to the current view.
     <script>
         var app = new kendo.mobile.Application();
         function logCurrentView() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(app.view()); // the foo mobile view instance
         }
     </script>
@@ -507,6 +510,7 @@ Fires after the mobile application is instantiated.
     <script>
         var app = new kendo.mobile.Application(document.body, {
             init: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Kendo UI Mobile application is ready");
             }
         });
@@ -527,6 +531,7 @@ The mobile application binds to the `routeMissing` router event handler, so regi
     <script>
         $(function() {
             var app = new kendo.mobile.Application();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(app.router);
         });
     </script>

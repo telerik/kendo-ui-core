@@ -1,7 +1,7 @@
 ---
 title: OLAP Fundamentals
 page_title: OLAP Fundamentals
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and review all fundamental OLAP concepts when binding the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} to data by using OLAP services."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and review all fundamental OLAP concepts when binding the Telerik UI PivotGrid component for {{ site.framework }} to data by using OLAP services."
 slug: htmlhelpers_pivotgrid_aspnetcore_fundamentals
 position: 2
 ---

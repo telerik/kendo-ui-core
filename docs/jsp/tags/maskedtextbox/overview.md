@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | MaskedTextBox JSP Tag
+page_title: Overview - MaskedTextBox JSP Tag
 description: "Get started with the MaskedTextBox JSP tag in Kendo UI."
 slug: overview_maskedtextbox_uiforjsp
 position: 1

@@ -1,16 +1,16 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use templates and customize the rendering of the tasks of the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
+description: "Use templates and customize the rendering of the tasks of the Telerik UI Gantt component for {{ site.framework }}."
 slug: htmlhelpers_gantt_templates_aspnetcore
-position: 5
+position: 6
 ---
 
 # Templates
 
 To customize the way the tasks of the Gantt are rendered, use the `TaskTemplateId` configuration option.
 
-```
+```HtmlHelper
     @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
         .Name("gantt")
         .Columns(columns =>

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | DropDownList JSP Tag
+page_title: Overview - DropDownList JSP Tag
 description: "Get started with the DropDownList JSP tag in Kendo UI."
 slug: overview_dropdownlist_uiforjsp
 position: 1

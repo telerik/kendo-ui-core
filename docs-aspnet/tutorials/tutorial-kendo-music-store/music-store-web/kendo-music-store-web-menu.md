@@ -1,6 +1,6 @@
 ---
 title: Create the Main Menu
-page_title: Create the Main Menu | Music Store Web App Tutorial
+page_title: Create the Main Menu - Music Store Web App Tutorial
 description: "Learn how to create the main menu page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createthemainmenu_muscistorewebapp_aspnetmvc
 position: 2
@@ -8,7 +8,7 @@ position: 2
 
 # Create the Main Menu
 
-![An overview of the main menu](images/kendo-menu-overview.png)
+![{{ site.product_short }} An overview of the main menu](images/kendo-menu-overview.png)
 
 The main menu of the Music Store application features some of the [Kendo UI Menu widget functionalities](https://demos.telerik.com/kendo-ui/web/menu/index.html) and consists of the items listed below:
 
@@ -49,7 +49,7 @@ The next step is to convert the **Genres** list to a pull-down menu. Any `<li>` 
 
 The code from the example above creates the pull-down item.
 
-![An overview of the pull-down Genres menu item](images/kendo-menu-pulldown-placeholder.png)
+![{{ site.product_short }} An overview of the pull-down Genres menu item](images/kendo-menu-pulldown-placeholder.png)
 
 You can replace your placeholder `<li>` elements with an MVC partial that loads the list of **Genres**.
 
@@ -94,7 +94,7 @@ The following example demonstrates how to add this content for the **About** men
 <!--_-->
 This creates the `<div>` content displayed in a drop-down menu item, as shown in the figure below.
 
-![The Kendo UI pull-down content in a drop-down menu item](images/kendo-menu-pulldown-content.png)
+![{{ site.product_short }} The Kendo UI pull-down content in a drop-down menu item](images/kendo-menu-pulldown-content.png)
 
 ## See Also
 

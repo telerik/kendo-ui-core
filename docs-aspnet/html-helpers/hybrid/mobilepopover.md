@@ -16,7 +16,7 @@ The PopOver represents a transient view which is displayed when the user taps on
 
 ## Basic Configuration
 
-1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 5 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Open `HomeController.cs` and modify the `Index` action method.
 
         public ActionResult Index()
@@ -28,42 +28,6 @@ The PopOver represents a transient view which is displayed when the user taps on
 
 1. Add a hybrid Telerik UI PopOver to the `Index` view. Like most hybrid controls, the PopOver must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("popover-view")
-            .Title("Inbox")
-            .Header(() =>
-            {
-                %>
-                <%: Html.Kendo().MobileButton()
-                    .Align(MobileButtonAlign.Right)
-                    .Url("#popover") // The id of the PopOver.
-                    .Text("Select location")
-                    .Rel(MobileButtonRel.PopOver) // Rel must be set to open the PopOver.
-                %>
-                <%
-            })
-            .Content(() =>
-            {
-                %>
-
-                <% Html.Kendo().MobilePopOver()
-                    .Name("popover")
-                        .Popup(popup => popup.Width("20em").Height("10.6em"))
-                        .Content(() =>
-                        {
-                            %>
-                            PopOver content
-                            <%
-                        })
-                        .Render();
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("popover-view")
             .Title("Inbox")
@@ -84,20 +48,12 @@ The PopOver represents a transient view which is displayed when the user taps on
                         </text>)
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -107,28 +63,6 @@ You can subscribe to all hybrid PopOver [events](https://docs.telerik.com/kendo-
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <% Html.Kendo().MobilePopOver()
-            .Name("popOver")
-            .Content(() =>
-            {
-                %>
-                PopOver content
-                <%
-            })
-            .Events(events => events
-                .Close("onClose")
-            )
-            .Render();
-    %>
-
-    <script>
-        function onClose() {
-            // Handle the close event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobilePopOver()
         .Name("popOver")
         .Content(
@@ -145,7 +79,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the close event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 
@@ -167,4 +100,4 @@ You can reference a hybrid PopOver instance by using the code from the following
 
 ## See Also
 
-* [Hybrid PopOverBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
+* [Hybrid PopOverBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/mobilepopoverbuilder)

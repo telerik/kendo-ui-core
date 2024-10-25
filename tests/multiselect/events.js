@@ -5,14 +5,14 @@
     function populateSelect(length) {
         var options = [];
         length = length || 5;
-        for (var i=0; i < length; i++) {
+        for (var i = 0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect Events", function () {
+    describe("kendo.ui.MultiSelect Events", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
             select = $("<select multiple/>").appendTo(Mocha.fixture);
@@ -115,7 +115,7 @@
             value: ["1", "2"]
         });
 
-        multiselect.tagList.find(".k-i-close").first().click();
+        multiselect.tagList.find(".k-i-x-circle,.k-svg-i-x-circle").first().click();
     });
 
     it("MultiSelect raises select event", function() {
@@ -171,7 +171,7 @@
             value: ["0", "1"]
         });
 
-        multiselect.tagList.find(".k-i-close").first().click();
+        multiselect.tagList.find(".k-i-x").first().click();
     });
 
     it("MultiSelect triggers deselect on item deselect", function() {
@@ -195,7 +195,7 @@
             value: ["0", "1"]
         });
 
-        multiselect.tagList.find(".k-i-close").first().click();
+        multiselect.tagList.find(".k-i-x").first().click();
 
         assert.equal(multiselect.value().length, 2);
     });

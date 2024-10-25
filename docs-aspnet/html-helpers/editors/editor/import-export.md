@@ -12,7 +12,7 @@ As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to 
 
 Along with the server-side integration of the [Telerik Document Processing](https://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
 
-![Importing and exporting an animation](import-export-animation.gif)
+![{{ site.product_short }} Editor importing and exporting animation](import-export-animation.gif)
 
 ## Requirements
 
@@ -27,7 +27,7 @@ To start using the import and export functionality:
 
 1. Add the `ExportAs` tool.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -38,7 +38,7 @@ To start using the import and export functionality:
 
     Alternatively, you can refine the options by configuring the `ExportAs` tool.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -55,7 +55,7 @@ To start using the import and export functionality:
 
 1. To enable the tool to contact the server and export a file, configure the `Proxy` method and, optionally, set up the name of the exported file through the `FileName` method.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -85,7 +85,7 @@ To start using the import and export functionality:
 
 1. Add the `Import` tool.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -98,14 +98,14 @@ To start using the import and export functionality:
 
     > To send a file to the server, the `Import` tool integrates the [Telerik UI Upload HtmlHelper]({%slug htmlhelpers_upload_aspnetcore %}). You can configure it through the following exposed helper methods:
     >
-    > * [`AllowedExtensions()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#allowedextensionssystemstring)
-    > * [`MaxFileSize()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#maxfilesizesystemnullablesystemdouble)
-    > * [`Complete()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#completesystemstring)
-    > * [`Progress()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#progresssystemstring)
-    > * [`Select()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#selectsystemstring)
-    > * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#successsystemstring)
+    > * [`AllowedExtensions()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#allowedextensionssystemstring)
+    > * [`MaxFileSize()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#maxfilesizesystemnullablesystemdouble)
+    > * [`Complete()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#completesystemstring)
+    > * [`Progress()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#progresssystemstring)
+    > * [`Select()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring)
+    > * [`Success()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#successsystemstring)
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -157,12 +157,12 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
     public ActionResult Export(EditorExportData data)
     {
         var settings = new EditorDocumentsSettings();
-        settings.HtmlImportSettings.LoadFromUri += HtmlImportSettings_LoadFromUri;
+        settings.HtmlImportSettings.LoadImageFromUri += HtmlImportSettings_LoadImageFromUri;
 
-        return EditorExport.Export(data);
+        return EditorExport.Export(data, settings);
     }
 
-    private void HtmlImportSettings_LoadFromUri(object sender, LoadFromUriEventArgs e)
+    private void HtmlImportSettings_LoadImageFromUri(object sender, LoadImageFromUriEventArgs e)
     {
         var uri = e.Uri;
         var absoluteUrl = uri.StartsWith("http://") || uri.StartsWith("www.");
@@ -174,7 +174,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
                 using (var memoryStream = new MemoryStream())
                 {
                     fileStream.CopyTo(memoryStream);
-                    e.SetData(memoryStream.ToArray());
+                    e.SetImageInfo(memoryStream.ToArray(), "png");
                 }
             }
         }
@@ -202,5 +202,5 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ## See Also
 
 * [Document Import and Export by the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/import-export)
-* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/editorbuilder)
 * [Editor Server-Side API](/api/editor)

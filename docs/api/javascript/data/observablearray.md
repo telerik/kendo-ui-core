@@ -20,7 +20,9 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
         { name: "John Doe" },
         { name: "Jane Doe" }
     ]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array[0].name); // outputs "John Doe"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array.length); // outputs "2"
     </script>
 
@@ -33,6 +35,7 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
             { name: "Jane Doe" }
         ]
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(observable.people instanceof kendo.data.ObservableArray); // outputs "true"
     </script>
 
@@ -45,10 +48,12 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
         { name: "John Doe" },
         { name: "Jane Doe" }
     ]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(complex[0] instanceof kendo.data.ObservableObject); // outputs "true"
     var primitive = new kendo.data.ObservableArray([
         "John Doe", "Jane Doe"
     ]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(typeof (primitive[0]) ); // outputs "string"
     </script>
 
@@ -63,6 +68,7 @@ An unsigned, 32-bit integer that specifies the number of items in an `Observable
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     for (var i = 0; i < array.length; i++) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(array[i]); // outputs the current item
     }
     </script>
@@ -78,6 +84,7 @@ Attaches an event handler for the specified event.
     <script>
     var array = new kendo.data.ObservableArray([1, 2]);
     array.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("changed");
     });
     array.push(3); // triggers the "change" event and the handler outputs "changed"
@@ -93,6 +100,145 @@ The name of the event.
 
 The function which will be invoked when the event is fired.
 
+### empty
+
+Empties the array.
+
+#### Example - working with empty method
+
+    <script>
+      var arr = new kendo.data.ObservableArray([10, 15, 20, 25, 30]);
+
+      arr.empty()
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+    </script>
+
+### every
+
+Executes a callback function for every single item in the array and returns `true` or `false` depending if all the items in the array pass the condition. An equivalent of [`Array.prototype.every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every).
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Returns
+
+`Boolean`&mdash;Returns `true` if all items pass the test function condition. Otherwise, returns `false`.
+
+#### Example - working with every method
+
+    <script>
+      var arr = new kendo.data.ObservableArray([10, 15, 20, 25, 30]);
+
+      var result = arr.every((item) => {return item > 20})
+      var result2 = arr.every((item) => {return item < 40})
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(result)
+      console.log(result2)
+    </script>
+
+### filter
+
+Executes a callback function for every single item in the array and returns only those items that pass the filter condition. An equivalent of [`Array.prototype.filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Returns
+
+`Array`&mdash;A new array with items that pass the filter condition.
+
+#### Example - working with filter method
+
+    <script>
+      var arr = new kendo.data.ObservableArray([100, 10, 20, 30]);
+    
+      var result = arr.filter((item) => {return item > 20})
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(result)
+    </script>
+
+### find
+
+Find the first elements in an array that passes the callback testing function. An equivalent of [`Array.prototype.find`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find).
+
+#### Parameters 
+
+##### callback `Function`
+
+The testing function.
+
+#### Returns
+
+`Object`&mdash;The first item that passes the search condition.
+
+#### Example - working with find method
+
+    <script>
+      var arr = new kendo.data.ObservableArray([10, 15, 20, 25, 30]);
+    
+      var result = arr.find((item) => {return item > 20})
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(result)
+    </script>
+
+### forEach
+
+The method executes the callback function for every single item in the array. An equivalent of [`Array.prototype.forEach`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Example - working with forEach method
+
+    <script>
+      var array = new kendo.data.ObservableArray([
+        { id: 10, name: 'Apple', count: 5},
+        { id: 20, name: 'Orange', count: 10},
+        { id: 30, name: 'Milk', count: 12},
+        { id: 40, name: 'Juice', count: 7},
+        { id: 50, name: 'Melon', count: 20}
+      ]);     
+      array.forEach((item) => { item.count = item.count*3})
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(array)
+    </script>
+
+### indexOf
+
+Returns the index in the Array at which the item can be found. An equivalent of [`Array.prototype.indexOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf).
+
+#### Parameters
+
+##### item `String|Number|Object`
+
+The searched item.
+
+#### Returns
+
+`Number`&mdash;The index of the specified data item. Returns `-1` if the data item is not found.
+
+#### Example - working with indexOf method
+
+    <script>
+      var array = new kendo.data.ObservableArray(["Apple", "Orange", "Berries", "Melon", "Grape", "Pear"])
+      var result = array.indexOf("Grape");
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(result); // outputs "4"
+    </script>
+
 ### join
 
 Joins all items of an `ObservableArray` into a string. An equivalent of [`Array.prototype.join`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join).
@@ -107,7 +253,38 @@ Specifies the string to separate each item of the array. If omitted, the array i
 
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array.join("-")); // outputs "1-2-3"
+    </script>
+
+### map
+
+The method executes the callback function for every single item in the array and returns a new array as a result. An equivalent of [`Array.prototype.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Returns
+
+`Array`&mdash;A new array with the results from the executed callback.
+
+#### Example - working with map method
+
+     <script>
+      var arr = new kendo.data.ObservableArray([
+        { id: 10, name: 'Apple', count: 5},
+        { id: 20, name: 'Orange', count: 10},
+        { id: 30, name: 'Milk', count: 12},
+        { id: 40, name: 'Juice', count: 7},
+        { id: 50, name: 'Melon', count: 20}
+      ]);     
+      var newArr = arr.map(item => { return item.count*3})
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(newArr)
     </script>
 
 ### parent
@@ -122,9 +299,11 @@ Gets the parent of the array if such a parent exists.
 
     <script>
     var array = new kendo.data.ObservableArray([1, 2]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array.parent()); // outputs "undefined"
     var observable = kendo.observable({ numbers: [1, 2] });
     var numbers = observable.get("numbers");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(numbers.parent() === observable); // outputs "true"
     </script>
 
@@ -143,7 +322,9 @@ Removes the last item from an array and returns that item. An equivalent of [`Ar
     <script>
     var array = new kendo.data.ObservableArray([{ name: "John Doe" }]);
     var result = array.pop();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array.length); // outputs "0"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(result.get("name")); // outputs "John Doe"
     </script>
 
@@ -168,8 +349,11 @@ The item or items that will be appended to the array.
     <script>
     var array = new kendo.data.ObservableArray([{ name: "John Doe" }]);
     var length = array.push({ name: "Jane Doe" });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(length); // outputs "2"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array[1] instanceof kendo.data.ObservableObject); // outputs "true"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array[1].get("name")); // outputs "Jane Doe"
     </script>
 
@@ -178,8 +362,81 @@ The item or items that will be appended to the array.
     <script>
     var array = new kendo.data.ObservableArray([ 1 ]);
     var length = array.push(2, 3);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(length); // outputs "3"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array[1]); // outputs "2"
+    </script>
+
+### reduce
+
+Executes a callback function for every single item in the array and returns the accumulated result. Iterates the items left to right.
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Returns
+
+`Number`&mdash;The accumulated result.
+
+#### Example - working with reduce method
+
+     <script>
+      var arr = new kendo.data.ObservableArray([100, 10, 20, 30]); 
+      
+      var result = arr.reduce((totalCount, item) => totalCount - item)
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(result)
+    </script>
+
+### reduceRight
+
+Executes a callback function for every single item in the array and returns the accumulated result. Iterates the items right to left.
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Returns
+
+`Number`&mdash;The accumulated result.
+
+#### Example - working with reduceRight method
+
+     <script>
+      var arr = new kendo.data.ObservableArray([100, 10, 20, 30]); 
+      
+      var result = arr.reduceRight((totalCount, item) => totalCount - item)
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(result)
+    </script>
+
+### remove
+
+Removes the specified item from an array.
+
+#### Parameters 
+
+##### item `String|Number|Object`
+
+The item that will be removed.
+
+#### Example - working with remove method
+
+    <script>
+      var array = new kendo.data.ObservableArray(["Apple", "Orange", "Berries", "Melon", "Grape", "Pear"])
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(array.length);
+      array.remove("Grape");
+      console.log(array); 
+      console.log(array.length);
     </script>
 
 ### slice
@@ -203,7 +460,33 @@ A zero-based index at which the extraction will end. If `end` is omitted, `slice
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     var firstAndSecond = array.slice(0, 2);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(firstAndSecond); // outputs [1, 2]
+    </script>
+
+### some
+
+Executes a callback function for every single item in the array and returns `true` or `false` depending if any of the items in the array passes the condition. An equivalent of [`Array.prototype.some`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some).
+
+#### Parameters 
+
+##### callback `Function`
+
+The function that will be executed for every item.
+
+#### Returns
+
+`Boolean`&mdash;Returns `true` if any of the items passes the test function condition. Otherwise, returns `false`.
+
+#### Example - working with some method
+
+    <script>
+      var arr = new kendo.data.ObservableArray([10, 15, 20, 25, 30]);
+
+      var result = arr.every((item) => {return item > 20})
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(arr)
+      console.log(result)
     </script>
 
 ### splice
@@ -235,7 +518,9 @@ The items that will be added to the array. If you do not specify any items, `spl
     <script>
     var sports = new kendo.data.ObservableArray(["football", "basketball", "volleyball"]);
     var removed = sports.splice(1, 1, "tennis", "hockey");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(removed); // outputs ["basketball"]
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sports); // outputs ["football", "tennis", "hockey", "volleyball"]
     </script>
 
@@ -254,7 +539,9 @@ Removes the first item from an `ObvservableArray` and returns that item. An equi
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     var removed = array.shift();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(removed); // outputs "1"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array.length); // outputs "2"
     </script>
 
@@ -270,6 +557,7 @@ Returns a JavaScript `Array` object which represents the contents of the `Observ
         { name: "Jane Doe" }
     ]);
     var json = people.toJSON();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(JSON.stringify(json)); // outputs [{"name":"John Doe"},{"name":"Jane Doe"}]
     </script>
 
@@ -294,7 +582,9 @@ The items that will be added to the beginning of the `ObservableArray`.
     <script>
     var array = new kendo.data.ObservableArray([2, 3]);
     var result = array.unshift(0, 1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(result); // outputs "4"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(array); // outputs [0, 1, 2, 3]
     </script>
 
@@ -333,12 +623,14 @@ The field name of an item that changed. Available only when `e.action` is `"item
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     array.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.action, e.index, e.items);
     });
     array.push(4, 5); // outputs "add", 3, [4, 5]
     array.pop(); // outputs "remove", 4, [5]
     var people = new kendo.data.ObservableArray([{ name: "John Doe" }]);
     people.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.action, e.field, e.items[0].get("name"));
     });
     people[0].set("name", "Jane Doe"); // outputs "itemchange", "name", "Jane Doe"

@@ -472,9 +472,9 @@ Sets the field of the data item that provides the link URL of the nodes.
     });
     </script>
 
-### dragAndDrop `Boolean` *(default: false)*
+### dragAndDrop `Boolean|Object` *(default: false)*
 
-Disables (**false**) or enables (**true**) drag-and-drop of the nodes.
+Disables (**false**) or enables (**true**) drag-and-drop of the nodes. If configured as an object allows disabling click move click interaction as an alternative of dragging.
 
 #### Example
 
@@ -482,6 +482,27 @@ Disables (**false**) or enables (**true**) drag-and-drop of the nodes.
     <script>
     $("#treeview").kendoTreeView({
       dragAndDrop: true,
+      dataSource: [
+        { text: "foo" },
+        { text: "bar" }
+      ]
+    });
+    </script>
+
+### dragAndDrop.clickMoveClick `Boolean` *(default: false)*
+
+Disables (**false**) or enables (**true**) the click move click interaction as an alternative of dragging. The alternative is disabled by default.
+
+> Please note that this functionality would not play well when checkboxes are present in the TreeView. On each checkbox click the respective item will be grabbed to be moved. The same also applies for selection, as every selected item will also be grabbed.
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dragAndDrop: {
+        clickMoveClick: true
+      },
       dataSource: [
         { text: "foo" },
         { text: "bar" }
@@ -500,14 +521,27 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
     <div id="treeview"></div>
     <script>
-    $("#treeview").kendoTreeView({
-      loadOnDemand: true,
-      dataSource: [
-        { text: "foo", items: [
-          { text: "bar" }
-        ] }
-      ]
-    });
+      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      homogeneous = new kendo.data.HierarchicalDataSource({
+        transport: {
+          read: {
+            url: serviceRoot + "/Employees",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "EmployeeId",
+            hasChildren: "HasEmployees"
+          }
+        }
+      });
+
+      $("#treeview").kendoTreeView({
+        dataSource: homogeneous,
+        loadOnDemand: false,
+        dataTextField: "FullName"
+      });
     </script>
 
 ### messages `Object`
@@ -631,6 +665,30 @@ Template for rendering each node.
     });
     </script>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      size: "small",
+      dataSource: [
+        { text: "foo", inStock: 7, items: [
+          { text: "bar", inStock: 2 },
+          { text: "baz", inStock: 5 }
+        ] }
+      ]
+    });
+    </script>
+
 ## Methods
 
 ### append
@@ -713,7 +771,8 @@ Collapses nodes.
     treeview.collapse(treeview.findByText("foo"));
 
     // collapse all items
-    treeview.collapse(".k-item");
+    treeview.collapse(".k-treeview-item");
+
     </script>
 
 #### Parameters
@@ -748,7 +807,8 @@ A string, DOM element or jQuery object which represents the node. A string is tr
     });
 
     var treeview = $("#treeview").data("kendoTreeView");
-    var dataItem = treeview.dataItem(".k-item:first");
+    var dataItem = treeview.dataItem(".k-treeview-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.text); // displays "foo"
     </script>
 
@@ -804,6 +864,7 @@ The node that is to be detached.
     var item = treeview.findByText("foo");
     item.data("id", "abc");
     treeview.detach(item);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(item.data("id")); // logs "abc"
     </script>
 
@@ -887,7 +948,7 @@ The nodes that are to be expanded.
     treeview.expand(treeview.findByText("foo"));
 
     // expand all loaded items
-    treeview.expand(".k-item");
+    treeview.expand(".k-treeview-item");
     </script>
 
 ### expandPath
@@ -1027,6 +1088,7 @@ The text that is being searched for.
     var treeview = $("#treeview").data("kendoTreeView");
     // find the node with text "foo"
     var foo = treeview.findByText("foo");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(foo);
     </script>
 
@@ -1060,6 +1122,7 @@ The uid that is being searched for.
     var treeview = $("#treeview").data("kendoTreeView");
     var barDataItem = treeview.dataSource.get(2);
     var barElement = treeview.findByUid(barDataItem.uid);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(barElement);
     </script>
 
@@ -1196,9 +1259,11 @@ The child node whose parent will be returned.
     var treeview = $("#treeview").data("kendoTreeView");
 
     var parent = treeview.parent(treeview.findByText("bar"));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(treeview.text(parent)); // logs "foo"
 
     parent = treeview.parent(parent);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(parent.length); // logs 0
     </script>
 
@@ -1230,7 +1295,42 @@ The node that is to be removed.
 
     treeview.remove(bar);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#treeview").find(".k-item").length); // logs 1
+    </script>
+
+### scrollTo
+
+Scrolls to a visible node in the TreeView. Behaves in a similar way to calling `scrollIntoView({ block: 'nearest' })` method of the item element. The `scrollTo` method will not expand collapsed parents, hence will not scroll if the node is not visible.
+
+#### Parameters
+
+##### node `jQuery`
+
+The node to which the TreeView should scroll and make it visible.
+
+#### Example
+
+    <div id="treeview" style="max-height: 90px"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        {
+          text: "foo",
+          expanded: true,
+          items: [
+            { text: "bar" },
+            { text: "biz" },
+            { text: "baz" }
+          ]
+        }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+
+    var baz = treeview.findByText("baz");
+    treeview.scrollTo(baz);
     </script>
 
 ### select
@@ -1247,7 +1347,7 @@ If provided, the node that should be selected.
 
 `jQuery` The currently selected node.
 
-#### Example
+#### Example - select a node by passing an element
 
     <div id="treeview"></div>
     <script>
@@ -1264,9 +1364,50 @@ If provided, the node that should be selected.
     var bar = treeview.findByText("bar");
     treeview.select(bar);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(treeview.text(treeview.select())); // logs "bar"
 
     treeview.select($()); // clears selection
+    </script>
+
+#### Example - select a node by passing a jQuery selector
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+    treeview.select($(".k-treeview-item").last());
+
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(treeview.text(treeview.select())); // logs "bar"
+
+    </script>
+
+#### Example - select a node by passing a string
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+    treeview.select(".k-treeview-item:last");
+
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(treeview.text(treeview.select())); // logs "bar"
+
     </script>
 
 ### setDataSource
@@ -1337,6 +1478,7 @@ Optional. When passed, sets the node text to the specified string
     var treeview = $("#treeview").data("kendoTreeView");
 
     var firstItem = treeview.element.find(".k-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(treeview.text(firstItem)); // logs "foo"
 
     treeview.text(".k-item:last", "qux"); // sets text to "qux"
@@ -1430,6 +1572,7 @@ Triggered when the selection has changed (either by the user or through the `sel
         ] }
       ],
       change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Change", this.select());
       }
     });
@@ -1440,6 +1583,7 @@ Triggered when the selection has changed (either by the user or through the `sel
     <div id="treeview"></div>
     <script>
     function tree_change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Change", this.select());
     }
     $("#treeview").kendoTreeView({
@@ -1477,7 +1621,9 @@ The node whose the checkbox has been checked.
         ] }
       ],
       check: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Checking", e.node);
+		console.log("Is node checked -> " + $(e.node).attr("aria-checked"))
       }
     });
     </script>
@@ -1487,6 +1633,7 @@ The node whose the checkbox has been checked.
     <div id="treeview"></div>
     <script>
     function tree_check(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Checking", e.node);
     }
     $("#treeview").kendoTreeView({
@@ -1522,6 +1669,7 @@ The collapsed node
         ] }
       ],
       collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Collapsing", e.node);
       }
     });
@@ -1532,6 +1680,7 @@ The collapsed node
     <div id="treeview"></div>
     <script>
     function tree_collapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Collapsing", e.node);
     }
     $("#treeview").kendoTreeView({
@@ -1566,6 +1715,7 @@ The node whose children have been changed. If the changes have occurred on the r
         ] }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("DataBound", e.node);
       }
     });
@@ -1576,6 +1726,7 @@ The node whose children have been changed. If the changes have occurred on the r
     <div id="treeview"></div>
     <script>
     function tree_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("DataBound", e.node);
     }
     $("#treeview").kendoTreeView({
@@ -1658,7 +1809,7 @@ Pre-defined status classes are:
           make the drop operation invalid, so there will be no need to call
           `setValid(false)` in the `drop` event.
 
-> Please note that from version 2016.3.914 the naming convention for pre-defined status classes is k-i-className. Since version 2017.1.118 the following status classes are used: `k-i-insert-up`, `k-i-insert-down`, `k-i-insert-middle`, `k-i-plus`, `k-i-cancel`.
+> Please note that from version 2016.3.914 the naming convention for pre-defined status classes is k-i-className. Since version 2023.1.314 the following status classes are used: `k-i-insert-top`, `k-i-insert-bottom`, `k-i-insert-middle`, `k-i-plus`, `k-i-cancel`.
 
 > Note that status classes are returned without the `k-` prefix by `e.statusClass`, but this prefix is required when setting a predefined status class via `e.setStatusClass`. A prefix is not required if setting a custom status CSS class.
 
@@ -1674,6 +1825,7 @@ Pre-defined status classes are:
         ] }
       ],
       drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Drag", e.sourceNode, "over", e.dropTarget);
       }
     });
@@ -1684,6 +1836,7 @@ Pre-defined status classes are:
     <div id="treeview"></div>
     <script>
     function tree_drag(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Drag", e.sourceNode, "over", e.dropTarget);
     }
     $("#treeview").kendoTreeView({
@@ -1753,6 +1906,7 @@ Shows where the source has been dropped. One of the values **over**, **before**,
         ] }
       ],
       dragend: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Drag end", e.sourceNode, e.dropPosition, e.destinationNode);
       }
     });
@@ -1763,6 +1917,7 @@ Shows where the source has been dropped. One of the values **over**, **before**,
     <div id="treeview"></div>
     <script>
     function tree_dragend(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Drag end", e.sourceNode, e.dropPosition, e.destinationNode);
     }
     $("#treeview").kendoTreeView({
@@ -1799,6 +1954,7 @@ The node that will be dragged.
         ] }
       ],
       dragstart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Drag start", e.sourceNode);
       }
     });
@@ -1809,6 +1965,7 @@ The node that will be dragged.
     <div id="treeview"></div>
     <script>
     function tree_dragstart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Drag start", e.sourceNode);
     }
     $("#treeview").kendoTreeView({
@@ -1891,6 +2048,7 @@ As a general rule, use `preventDefault` to manually handle the drag&drop operati
         ] }
       ],
       drop: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Dropped", e.sourceNode);
       }
     });
@@ -1901,6 +2059,7 @@ As a general rule, use `preventDefault` to manually handle the drag&drop operati
     <div id="treeview"></div>
     <script>
     function tree_drop(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Dropped", e.sourceNode);
     }
     $("#treeview").kendoTreeView({
@@ -1936,6 +2095,7 @@ The expanded node
         ] }
       ],
       expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Expand", e.node);
       }
     });
@@ -1946,6 +2106,7 @@ The expanded node
     <div id="treeview"></div>
     <script>
     function tree_expand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Expand", e.node);
     }
     $("#treeview").kendoTreeView({
@@ -1957,6 +2118,98 @@ The expanded node
     });
     var treeview = $("#treeview").data("kendoTreeView");
     treeview.bind("expand", tree_expand);
+    </script>
+
+### loadCompleted
+
+This event triggers only when `loadOnDemand` is set to `false` - it indicates that all nodes that need to be loaded are ready and present as data items in the DataSource of the TreeView.
+
+#### Event Data
+
+##### e.nodes `Array`
+
+Applicable for remote binding scenario only. All the nodes that have children and are loaded. If empty array is passed then no nodes have children to be loaded. For a local binding scenario the argument will always be an empty array.
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/kendo-ui/service/Employees",
+          dataType: "jsonp"
+        }
+      },
+      schema: {
+        model: {
+          id: "EmployeeId",
+          hasChildren: "HasEmployees"
+        }
+      }
+    });
+
+    $("#treeview").kendoTreeView({
+      loadOnDemand: false,
+      dataSource: dataSource,
+      dataTextField: "FullName",
+      loadCompleted: function (ev) {
+        console.log("Load Completed: ", ev.nodes);
+      }
+    });
+    </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the TreeView is focused.
+
+#### Event Data
+
+##### e.sender `kendo.ui.TreeView`
+
+The **TreeView** instance that triggered the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the TreeView keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div id="treeview"></div>
+
+    <script>
+      $("#treeview").kendoTreeView({
+        dataSource: [{
+          text: "foo",
+          items: [{ text: "bar" }]
+        }],
+        kendoKeydown: function(e) {
+          e.preventKendoKeydown = true;
+        }
+      });
+    </script>
+
+#### Example - prevent only the TreeView Enter keydown logic
+
+    <div id="treeview"></div>
+
+    <script>
+      $("#treeview").kendoTreeView({
+        dataSource: [{
+          text: "foo",
+          items: [{ text: "bar" }]
+        }],
+        kendoKeydown: function(e) {
+          if(e.keyCode === kendo.keys.ENTER){
+            e.preventKendoKeydown = true;
+            // add custom code here to handle the event
+          }
+        }
+      });
     </script>
 
 ### navigate
@@ -1980,6 +2233,7 @@ The focused node
         ] }
       ],
       navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Navigated to", e.node);
       }
     });
@@ -1990,6 +2244,7 @@ The focused node
     <div id="treeview"></div>
     <script>
     function tree_navigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Navigating to", e.node);
     }
     $("#treeview").kendoTreeView({
@@ -2024,6 +2279,7 @@ The selected node
         ] }
       ],
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Selecting", e.node);
       }
     });
@@ -2034,6 +2290,7 @@ The selected node
     <div id="treeview"></div>
     <script>
     function tree_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("select", e.node);
     }
     $("#treeview").kendoTreeView({

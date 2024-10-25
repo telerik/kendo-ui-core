@@ -93,7 +93,7 @@
 
             var schema = dataSource.options.schema;
             assert.equal(schema.total, "d.__count");
-            assert.isOk($.isFunction(schema.data));
+            assert.isOk(kendo.isFunction(schema.data));
         });
 
         it("parameterMap adds $format and $inlinecount to the request", function() {
@@ -236,7 +236,7 @@
 
         it("$filter and isnullorempty operator uses eq", function() {
             var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnullorempty" }] } });
-            assert.equal(result.$filter, "Name eq null or Name eq ''");
+            assert.equal(result.$filter, "(Name eq null or Name eq '')");
         });
 
 
@@ -247,7 +247,7 @@
 
         it("$filter and isnotnullorempty operator uses ne", function() {
             var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnotnullorempty" }] } });
-            assert.equal(result.$filter, "Name ne null and Name ne ''");
+            assert.equal(result.$filter, "(Name ne null and Name ne '')");
         });
 
         it("$filter with nested field", function() {

@@ -1,21 +1,21 @@
 ---
 title:  Server Binding
 page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement server binding in the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/server-binding
 slug: htmlhelpers_multicolumncombobox_serverbinding_aspnetcore
-position: 3
+position: 4
 ---
 
 # Server Binding
 
 Local data is the data that is available on the client when the MultiColumnComboBox is initialized.
 
-You can bind the MultiColumnComboBox locally on the server by passing the appropriate collection to the HTML helper `BindTo()` method.
+You can bind the MultiColumnComboBox locally on the server by passing the appropriate collection to the component's `BindTo()` method.
 
 1. Pass the data to the view through `ViewData`.
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             ViewData["products"] = GetProducts();
 
@@ -39,6 +39,7 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
 
 1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
@@ -51,6 +52,27 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
             })
             .BindTo((System.Collections.IEnumerable)ViewData["products"])
         )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.ProductViewModel
+
+        @{
+           var data = (System.Collections.IEnumerable)ViewData["products"];
+        }
+        <kendo-multicolumncombobox for="@Model.ProductID" 
+            bind-to="(dynamic)data"
+            datatextfield="ProductName"
+            datavaluefield="ProductID">
+            <multicolumncombobox-columns>
+                <column field="ProductName" title="Name" width="200px">
+                </column>
+                <column field="ProductID" title="ID" width="200px">
+                </column>
+            </multicolumncombobox-columns>
+        </kendo-multicolumncombobox>
+    ```
+    {% endif %}
 
 ## See Also
 

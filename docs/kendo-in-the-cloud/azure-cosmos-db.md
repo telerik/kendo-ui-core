@@ -1,6 +1,6 @@
 ---
 title: Azure Cosmos DB
-page_title: Azure Cosmos DB | Kendo UI in the Cloud
+page_title: Azure Cosmos DB - Kendo UI in the Cloud
 description: "Learn how to bind the Kendo UI Grid to Azure Cosmos DB and perform CRUD operations."
 slug: azure_cosmos_db
 position: 0
@@ -36,11 +36,10 @@ To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript refe
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
 
     @Scripts.Render("~/bundles/jquery")
-    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 </head>
 ```
 

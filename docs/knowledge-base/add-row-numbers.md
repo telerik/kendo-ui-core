@@ -1,10 +1,10 @@
 ---
-title: Add Row Numbers
-page_title: Add Row Numbers | Kendo UI Grid for jQuery
-description: "An example on how to implement row numbers in the Kendo UI Grid for jQuery."
+title: Add Numbers to the Grid Rows
+page_title: Render Numbers for the Rows - jQuery Data Grid
+description: "Learn how to implement row numbers in the Kendo UI Grid for jQuery component."
 previous_url: /controls/data-management/grid/how-to/Templates/add-row-numbers
 slug: howto_addrownumbers_grid
-tags: grid, row, numbers
+tags: grid, row, numbers, kendoui, jquery
 component: grid
 type: how-to
 res_type: kb
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -25,7 +25,7 @@ How can I implement row numbers in a Kendo UI Grid?
 
 ## Solution
 
-Use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
+To achieve the desired scenario, use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
 ```dojo
   <div id="grid"></div>
@@ -46,7 +46,7 @@ Use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize(
           {
             title: "#",
             template: "#= ++record #",
-            width: 35
+            width: 50
           }, {
             field: "ContactName", title: "Contact Name"
           }, {
@@ -67,4 +67,7 @@ Use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize(
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the jQuery Data Grid](/api/javascript/ui/grid)
+* [jQuery Data Grid Overview (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
+* [Data Grid Overview (Documentation)]({% slug overview_kendoui_grid_widget %})
+* [Product Page of the jQuery Data Grid](https://www.telerik.com/kendo-jquery-ui/data-grid-(table))

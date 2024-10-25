@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | ListView PHP Class
+page_title: Local Binding - ListView PHP Class
 description: "Bind Kendo UI ListView PHP class to an array of data."
 slug: localbinding_listview_uiforphp
 position: 2

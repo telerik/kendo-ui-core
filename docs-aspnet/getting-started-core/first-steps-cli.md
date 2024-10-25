@@ -8,7 +8,7 @@ position: 3
 permalink: /getting-started/first-steps-cli
 ---
 
-# First Steps with CLI
+# Telerik UI for ASP.NET Core First Steps with CLI
 
 Welcome to the First Steps with CLI guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core by using the [command-line interface (CLI)](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)!
 
@@ -18,9 +18,11 @@ The suggested approach is platform-agnostic&mdash;you can apply it for macOS, Li
 
 To get up and running with the project:
 
+1. [Download the controls](https://www.telerik.com/download-trial-file/v2/aspnet-core-ui)
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Integrate UI for ASP.NET Core in the project](#integrating-ui-for-aspnet-core)
+1. [Add a license file to your app](#adding-your-license-file)
 
 ## Meeting the Requirements
 
@@ -74,7 +76,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
       <configuration>
           <packageSources>
           ...
-          <add key="telerik.com" value="https://nuget.telerik.com/nuget" />
+          <add key="telerik.com" value="https://nuget.telerik.com/v3/index.json" />
           </packageSources>
           <packageSourceCredentials>
           <telerik.com>
@@ -108,16 +110,21 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
+	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
-	5.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap v4 theme to match it.
+	5.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
 
   5.2 The Microsoft template comes with a jQuery script reference in the body. Find it and move it to the head.
 
   5.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match `Kendo.Mvc.dll`.
 
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" />
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
       <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
       <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+
+      If you prefer to include the client-side resources from a local source instead of CDNs, consider the following article:
+
+      [Local Client-side Resources](https://docs.telerik.com/aspnet-core/installation/getting-started-copy-client-resources#including-client-side-resources)
 
 6. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
@@ -138,18 +145,28 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 7. Navigate to the project folder by using the Terminal (cmd) and run it by using the `dotnet run` command. The **Index** page will display a [Kendo UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}). As a result, the following sample page is created.
 
-    ![The created sample page](../getting-started-core/images/sample-page.png)
+    ![{{ site.product_short }} The created sample page](../getting-started-core/images/sample-page.png)
+
+@[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
+
+## Adding Your License File
+
+Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message](https://docs.telerik.com/kendo-ui/knowledge-base/invalid-license) in the browser's console.
+
+To generate your license file and add it to your application, follow the instructions in the [Adding a License File]({% slug using_license_code %}) article.
 
 ## Next Steps
 
-* [Use data-bound widgets]({% slug environmentsupport_core %}#json-serialization)
+* [Use data-bound widgets]({% slug jsonserialization_core %})
 * [Ways to download and install UI for ASP.NET Core (overview)]({% slug downloadinstall_aspnetcore %})
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [How to update UI for ASP.NET Core to a new version]({% slug upgrade_aspnetcore %}#upgrading-to-new-versions)
+* [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
 
 ## See Also
 
-* [Installing UI for ASP.NET Core with Bower]({% slug bowerpackage_core %})
 * [Installing UI for ASP.NET Core by Using the CDN Services]({% slug cdnservices_core %})
-* [Installing UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
 * [Installing UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
+* [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)

@@ -1,7 +1,7 @@
 ---
 title: Icon ButtonGroup
 page_title: Icon ButtonGroup
-description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }}."
+description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ButtonGroup component for {{ site.framework }}."
 previous_url: /helpers/navigation/buttongroup/icons
 slug: icons_buttongroup_aspnetcore
 position: 3
@@ -13,16 +13,27 @@ The ButtonGroup can accommodate an icon and in this way to enhance the meaning o
 
 You can configure the icons by using the `.Icon()` method of the ButtonGroup.
 
+```HtmlHelper
+    @(Html.Kendo().ButtonGroup()
+    .Name("player")
+    .Items(t =>
+    {
+            t.Add().Icon("play");
+            t.Add().Icon("pause");
+            t.Add().Icon("stop");
+    }))
 ```
-         @(Html.Kendo().ButtonGroup()
-            .Name("player")
-            .Items(t =>
-            {
-                    t.Add().Icon("play");
-                    t.Add().Icon("pause");
-                    t.Add().Icon("stop");
-            }))
+{% if site.core %}
+```TagHelper
+    <kendo-buttongroup name="player">
+        <buttongroup-items>
+            <item icon="play" text="Play"></item>
+            <item icon="pause" text="Pause"></item>
+            <item icon="stop" text="Stop"></item>
+        </buttongroup-items>
+    </kendo-buttongroup>
 ```
+{% endif %}
 
 This ButtonGroup configuration is expected to produce the following HTML output:
 
@@ -41,4 +52,4 @@ This ButtonGroup configuration is expected to produce the following HTML output:
 ## See Also
 
 * [Adding Images to the ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/icons)
-* [Server-Side API](/api/buttongroup)
+* [Server-Side API of the ButtonGroup for {{ site.framework }}](/api/buttongroup)

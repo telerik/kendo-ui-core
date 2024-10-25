@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -40,8 +41,11 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.Editor) {
 kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
+  "auto": "Auto",
   "bold": "Negrito",
   "italic": "Itálico",
+  "search": "Pesquisa",
+  "dropFilesHere": "Solte arquivos aqui.",
   "underline": "Sublinhado",
   "strikethrough": "Tachado",
   "superscript": "Sobrescrito",
@@ -71,6 +75,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "style": "Estilo",
   "emptyFolder": "Pasta vazia",
   "uploadFile": "Enviar arquivo",
+  "overflowAnchor": "Mais opções",
   "orderBy": "Ordenar por:",
   "orderBySize": "Tamanho",
   "orderByName": "Nome",
@@ -92,6 +97,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogInsert": "Inserir",
   "dialogButtonSeparator": "ou",
   "dialogCancel": "Cancelar",
+  "cleanFormatting": "Limpar formatação",
   "createTable": "Criar a tabela",
   "addColumnLeft": "Nova coluna à esquerda",
   "addColumnRight": "Nova coluna à direita",
@@ -100,14 +106,19 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "deleteRow": "Excluir linha",
   "deleteColumn": "Excluir coluna",
   "dialogOk": "Ok",
+  "tableBackground": "Cor de Fundo da Tabela",
+  "tableCellProperties": "Propriedades da célula",
+  "tableProperties": "Propriedades da tabela",
   "tableWizard": "Assistente de tabela",
   "tableTab": "Tabela",
   "cellTab": "Célula",
   "accessibilityTab": "Acessibilidade",
-  "caption": "Rubica",
+  "caption": "Legenda",
+  "captionAlignment": "Alinhamento da legenda",
   "summary": "Resumo",
   "width": "Largura",
   "height": "Altura",
+  "units": "Unidades",
   "cellSpacing": "Espaçamento da célula",
   "cellPadding": "Preenchimento da célula",
   "cellMargin": "Margem da célula",
@@ -116,9 +127,12 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "cssClass": "Classe do CSS",
   "id": "ID",
   "border": "Borda",
+  "borderColor": "Cor da borda",
+  "borderWidth": "Largura da borda",
   "borderStyle": "Estilo da borda",
   "collapseBorders": "Colapsar bordas",
-  "wrapText": "Quebrar textp",
+  "wrapText": "Quebrar texto",
+  "fitToCell": "Ajustar a célula",
   "associateCellsWithHeaders": "Células associadas com cabeçalho",
   "alignLeft": "Alinhar à esquerda",
   "alignCenter": "Alinhar ao centro",
@@ -135,7 +149,21 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignRemove": "Remover alinhamento",
   "columns": "Colunas",
   "rows": "Linhas",
-  "selectAllCells": "Selecionar todas as células"
+  "selectAllCells": "Selecionar todas as células",
+  "applyToColumn": "aplicar na coluna",
+  "applyToRow": "aplicar na linha",
+  "print": "Imprimir",
+  "headerRows": "Linhas do Cabeçalho",
+  "headerColumns": "Colunas do Cabeçalho",
+  "tableSummaryPlaceholder": "Atributo Summary não é compatível com HTML5.",
+  "associateNone": "Nenhum",
+  "associateScope": "Associate using 'scope' attribute",
+  "associateIds": "Associate using Ids",
+  "copyFormat": "Copiar formatação",
+  "applyFormat": "Aplicar formatação",
+  "borderNone": "Nenhum",
+  "undo": "Desfazer",
+  "redo": "Refazer"
 });
 }
 
@@ -640,7 +668,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Alinhamento",
     "buttons": {
-     "justtifyLeft": "Alinhar à esquerda",
+     "justifyLeft": "Alinhar à esquerda",
      "justifyCenter": "Centralizar",
      "justifyRight": "Alinhar à direita",
      "justifyFull": "Justificar",
@@ -778,10 +806,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Texto termina com"
     },
     "date": {
-      "eq":  "É igual a",
+      "eq": "É igual a",
       "neq": "Não é igual a",
-      "lt":  "É anterior a",
-      "gt":  "É posterior a"
+      "lt": "É anterior a",
+      "gt": "É posterior a"
     },
     "number": {
       "eq": "É igual à",
@@ -804,7 +832,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Adicionar linha abaixo",
   "alignment": "Alinhamento",
   "alignmentButtons": {
-    "justtifyLeft": "Alinhar à esquerda",
+    "justifyLeft": "Alinhar à esquerda",
     "justifyCenter": "Centralizar",
     "justifyRight": "Alinha à direita",
     "justifyFull": "Justificar",
@@ -941,7 +969,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Selecionar...",
   "cancel": "Cancelar",

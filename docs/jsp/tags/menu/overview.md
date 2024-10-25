@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Menu JSP Tag
+page_title: Overview - Menu JSP Tag
 description: "Get started with the Menu JSP tag in Kendo UI."
 slug: overview_menu_uiforjsp
 position: 1
@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 
 
-        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add the `menu` tag.
 

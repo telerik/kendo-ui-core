@@ -1,6 +1,6 @@
 ---
 title: Bullet Charts
-page_title: jQuery Chart Documentation | Bullet Charts | Kendo UI
+page_title: jQuery Chart Documentation - Bullet Charts
 description: "Learn how to create a Kendo UI Bullet Chart and configure its options."
 slug: chart-types-bullet
 ---
@@ -85,6 +85,45 @@ You can change the orientation of the Bullet Chart by setting the series type to
               type: "verticalBullet",
               currentField: "current",
               targetField: "target"
+            }],
+            categoryAxis: {
+              field: "category"
+            }
+          });
+        }
+
+        $(document).ready(createChart);
+      </script>
+```
+
+## Displaying labels
+
+To display labels for the bullet chart value, set the [`labels.visible`](/api/javascript/dataviz/ui/chart/configuration/series.labels.visible) option to `true`.
+
+The label content can be customized using the [`format`](/api/javascript/dataviz/ui/chart/configuration/series.labels.format) or
+[`template`](/api/javascript/dataviz/ui/chart/configuration/series.labels.template) options.
+
+```dojo
+      <div id="chart-sales"></div>
+      <script>
+        function createChart() {
+          var salesData = [
+            { current: 750, target: 762.5, category: 1 }, { current: 764, target: 768.5, category: 2 },
+            { current: 772, target: 770, category: 3 }, { current: 764, target: 773, category: 4 },
+            { current: 763, target: 760, category: 5 }, { current: 758, target: 765, category: 6 }];
+
+          $("#chart-sales").kendoChart({
+            dataSource: {
+              data: salesData
+            },
+            series: [{
+              type: "bullet",
+              currentField: "current",
+              targetField: "target",
+              labels: {
+                visible: true,
+                format: "{0:C}"
+              }
             }],
             categoryAxis: {
               field: "category"

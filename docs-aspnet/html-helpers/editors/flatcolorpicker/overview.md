@@ -1,30 +1,38 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI FlatColorPicker HtmlHelper for {{ site.framework }}."
+description: "The Telerik UI FlatColorPicker component for {{ site.framework }} provides a styled UI color selector."
 previous_url: /helpers/editors/flatcolorpicker/overview
 slug: overview_flatcolorpickerhelper_aspnetcore
-position: 1
+position: 0
 ---
 
-# FlatColorPicker HtmlHelper Overview
+# {{ site.framework }} FlatColorPicker Overview
 
+{% if site.core %}
+The Telerik UI FlatColorPicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI FlatColorPicker widget.
+{% else %}
 The Telerik UI FlatColorPicker HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI FlatColorPicker widget.
+{% endif %}
 
-The FlatColorPicker is the HSV color selector which is used by default in the `kendo.ui.ColorPicker` popup when no palette is set.
+The FlatColorPicker is the HSV color selector which is used by default in the `kendo.ui.FlatColorPicker` popup when no palette is set.
 
-* [Demo page for the FlatColorPicker](https://demos.telerik.com/{{ site.platform }}/colorpicker/flatcolorpicker)
+* [Demo page for the FlatColorPicker](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/flatcolorpicker)
 
 ## Initializing the FlatColorPicker
 
-The following example demonstrates how to define the FlatColorPicker by using the FlatColorPicker HtmlHelper.
+The following example demonstrates how to define the FlatColorPicker.
 
-```
+```HtmlHelper
     @(Html.Kendo().FlatColorPicker()
           .Name("flatcolorpicker") // The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
           .Value("#ff0000") // Set the value of the FlatColorPicker.
     )
 ```
+
+{% if site.core %}
+@[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
+{% endif %}
 
 ## Events
 
@@ -34,7 +42,7 @@ You can subscribe to all FlatColorPicker [events](/api/flatcolorpicker).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
       @(Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
             .Events(e => e
@@ -47,12 +55,27 @@ The following example demonstrates how to subscribe to events by a handler name.
           }
       </script>
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<script>
+        function change(e) {
+             console.log("Change in picker #" + this.element.attr("id") + " :: " + e.value);
+        }
+</script>
+
+<kendo-flatcolorpicker name="flatColorPicker" value="#00f" on-change="change">
+</kendo-flatcolorpicker>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```
+```HtmlHelper
       @(Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
             .Events(e => e
@@ -77,7 +100,21 @@ To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.d
       });
       </script>
 
+## Functionality and Features
+
+* [Views]({% slug htmlhelpers_views_flatcolorpickerhelper_aspnetcore %})&mdash;The FlatColorPicker enables you to choose between `gradient` or `palette` view types.
+* [Contrast Tool]({% slug contrast_tool_flatcolorpickerhelper_aspnetcore %})&mdash;The FlatColorPicker enables you to configure the contrast tool.
+* [Formats]({% slug rgb_hex_flatcolorpickerhelper_aspnetcore %})&mdash;The FlatColorPicker provides support for both HEX and RGB coloring formats.
+
+## Next Steps
+
+* [Getting Started with the FlatColorPicker ]({% slug aspnetcore_flatcolorpicker_getting_started %})
+* [Basic Usage of the FlatColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/index)
+{% if site.core %}
+* [Basic Usage of the FlatColorPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/flatcolorpicker/tag-helper)
+{% endif %}
+
 ## See Also
 
-* [Basic Usage of the FlatColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/flatcolorpicker)
-* [Server-Side API](/api/flatcolorpicker)
+* [Using the API of the FlatColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/api)
+* [Knowledge Base Section](/knowledge-base)

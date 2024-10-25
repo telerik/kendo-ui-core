@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | DatePicker PHP Class
+page_title: Overview - DatePicker PHP Class
 description: "Get started with the DatePicker PHP class in Kendo UI."
 slug: overview_datepicker_uiforphp
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Grid Troubleshooting on Editing
-page_title: Grid Troubleshooting on Editing | Kendo UI for jQuery
+page_title: Grid Troubleshooting on Editing
 description: "Troubleshoot any issues that might occur while editing the data of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget
@@ -9,6 +9,17 @@ component: grid
 type: troubleshooting
 res_type: kb
 ---
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
+## Description
 
 This article provides solutions for issues you might encounter while working with the editing functionality of the Grid.
 
@@ -33,18 +44,7 @@ When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value
 
 To work around this issue, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid is properly triggered each time a new selection is added to the value of the MultiSelect. For a runnable example, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
 
-## Editing Boolean columns renders styles improperly  
-
-When editing is applied to a Boolean column, the Grid renders a standard, CheckBox element input type by default. The custom CheckBox editor enables you to unify the look of the Grid editors by applying additional styles to the CheckBox that are based on the used CSS theme.
-
-The following example demonstrates how to use Kendo UI-styled CheckBox editor for Boolean columns. For a runnable example, refer to [this demo on editing](https://demos.telerik.com/kendo-ui/grid/editing).
-
-    function customBoolEditor(container, options) {
-        $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
-    }
-
 ## See Also
 
 * [Implementing Foreign-Key Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

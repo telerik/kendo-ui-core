@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Chart PHP Class
+page_title: Overview - Chart PHP Class
 description: "Get started with the Chart PHP class in Kendo UI."
 slug: overview_chart_uiforphp
 position: 1

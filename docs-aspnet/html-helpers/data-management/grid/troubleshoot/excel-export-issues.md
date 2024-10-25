@@ -8,7 +8,7 @@ position: 2
 
 # Excel Export
 
-This article provides solutions for issues you might encounter while exporting the content of the Telerik UI for ASP.NET MVC Grid HtmlHelper.
+This article provides solutions for issues you might encounter while exporting the content of the Telerik UI Grid component for {{ site.framework }}.
 
 ## JSZip Is Not Found
 
@@ -50,7 +50,7 @@ The following example demonstrates the user server proxy.
         )
     %>
 ```
-```Razor
+```HtmlHelper
 
     @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
@@ -65,6 +65,37 @@ The following example demonstrates the user server proxy.
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="excel" ></toolbar-button>
+        </toolbar>
+        <excel all-pages="true" proxy-url="@Url.Action("Save", "Proxy")" />
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+            <schema data="Data" total="Total">
+                <model id="ProductID">
+                    <fields>
+                        <field name="ProductID" type="number" editable="false"></field>
+                        <field name="ProductName" type="string"></field>
+                        <field name="UnitPrice" type="number"></field>
+                        <field name="UnitsInStock" type="number"></field>
+                        <field name="UnitsOnOrder" type="number"></field>
+                        <field name="Discontinued" type="boolean"></field>
+                    </fields>
+                </model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Products_Read" "Grid")" />
+                <update url="@Url.Action("Products_Update" "Grid")" />
+                <create url="@Url.Action("Products_Create" "Grid")" />
+                <destroy url="@Url.Action("Products_Destroy" "Grid")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
 
 ## See Also
 

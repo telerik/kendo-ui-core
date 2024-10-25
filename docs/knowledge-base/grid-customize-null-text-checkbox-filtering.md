@@ -2,7 +2,7 @@
 title: Customize Null Text for Checkbox Filter mode
 description: How to Customize Null Text for Checkbox Filter mode in Grid
 type: how-to
-page_title: Customize Null Text for Checkbox Filter mode in Grid | Kendo UI Grid for jQuery
+page_title: Customize Null Text for Checkbox Filter mode in Grid - Kendo UI for jQuery Data Grid
 slug: grid-customize-null-text-checkbox-filtering
 position:
 tags: grid, filter
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 
@@ -48,9 +48,9 @@ You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/config
       $(function() {
 
         var commonCheckboxTemplate = function(e) {
-          return "#if(data.all || data.value){#" +
-            "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || data.value # </span></label></div>" +
-            "#}#"
+          return "#if(data.all || data." + e.field + "){#" +
+            "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || data." + e.field + " # </span></label></div>" +
+            "#}#";
         };
 
 
@@ -109,7 +109,7 @@ You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/config
       $(function() {
 
         var commonCheckboxTemplate = function(e) {
-          return "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || (data.value?data.value: 'No Value') # </span></label></div>" 
+          return "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || (data." + e.field + "?data." + e.field + ": 'No Value') # </span></label></div>"; 
         };
 
 

@@ -1,8 +1,8 @@
 ---
 title: Adjust Grid Row and Header Height to Make Them Smaller
-description: An example on how to make the height of the Kendo UI Grid rows and header smaller.
+description: Learn how to make the height of the Kendo UI Grid rows and header smaller.
 type: how-to
-page_title: Adjust Row and Header Height to Make Them Smaller | Kendo UI Grid for jQuery
+page_title: Adjust Row and Header Height to Make Them Smaller - Kendo UI for jQuery Data Grid
 slug: grid-adjust-rows-and-header-height
 tags: grid, row, rows, header, smaller, size, adjust, css
 ticketid: 1151240
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -117,4 +117,4 @@ To adjust the size of the rows in both the body and the header, use CSS and spec
 
 ## See Also
 
-* [Setting the Height of the Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#height)
+* [Setting the Height of the Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/grid/appearance#height)

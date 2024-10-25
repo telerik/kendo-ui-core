@@ -16,7 +16,7 @@
             if (draggable) {
                 draggable.destroy();
             }
-            if (!$.isFunction(hint)) {
+            if (!kendo.isFunction(hint)) {
                 hint.remove();
             }
         });

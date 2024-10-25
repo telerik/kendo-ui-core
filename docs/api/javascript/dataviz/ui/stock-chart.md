@@ -380,6 +380,11 @@ The [template](/api/framework/kendo#methods-template) which renders the labels.
 The fields which can be used in the template are:
 
 * value - the category value
+* dataItem - the data item for the category
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+* index - the 0-based index of the current label
+* count - the total number of labels on the axis
 
 ### navigator.categoryAxis.labels.visible `Boolean` *(default: true)*
 
@@ -495,6 +500,10 @@ set up a fixed date range.
 The maximum number of groups (categories) to display when
 [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
 [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
+
+### navigator.categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display.
 
 ### navigator.categoryAxis.min `Object`
 
@@ -1234,6 +1243,15 @@ The text of the title.
 
 If set to `true` the chart will display the pane title. By default the pane title is visible.
 
+### navigator.position `String` *(default: "bottom")*
+
+The position of the navigator.
+
+The supported values are:
+
+* "top" - the navigator is positioned on the top
+* "bottom" - the navigator is positioned on the bottom (default)
+
 ### navigator.series `Array`
 
 Array of series definitions.
@@ -1640,6 +1658,51 @@ The distance between category clusters.
 ### navigator.series.labels `Object`
 
 Configures the series data labels.
+
+### navigator.series.labels.ariaTemplate `String | Function`
+
+The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+
+The fields which can be used in the template are:
+
+*   category - the category name. Available for area, bar, column, bubble, donut, line and pie series.
+*   dataItem - the original data item used to construct the point. Will be null if binding to array.
+*   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
+*   series - the data series
+*   value - the point value. Can be a number or object containing each bound field.
+
+#### Example
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+      dataSource: {
+        data: [
+          { value: 1, category: "One", date: new Date(2012, 1, 1)},
+          { value: 2, category: "Two", date: new Date(2012, 1, 2)}
+        ],
+        group: { field: "category" }
+      },
+      dateField: "date",
+      navigator: {
+        series: [
+          {
+            field: "value",
+            name: "Value: #: group.value #",
+            visibleInLegend: true,
+            labels: {
+              ariaTemplate: "The value for #= e.series.name # in #= e.category # is #= e.value #",
+              visible: true
+            }
+          }
+        ]
+      },
+      legend: {
+        visible: true,
+        position: "bottom"
+      }
+    });
+    </script>
 
 ### navigator.series.labels.background `String`
 
@@ -2482,7 +2545,11 @@ The [template](/api/framework/kendo#methods-template) which renders the labels.
 The fields which can be used in the template are:
 
 * value - the category value
-* dataItem - the data item, in case a field has been specified
+* dataItem - the data item for the category
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+* index - the 0-based index of the current label
+* count - the total number of labels on the axis
 
 #### Example
 
@@ -4653,20 +4720,495 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
-#### Example
-
-
-
 ### legend.border.width `Number`*(default: 0)*
 
  The width of the border.
 
 ### legend.item `Object`
 
-The chart legend item configuration.
+The configuration of the Chart legend item.
+
+To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/stock-chart#configuration-series.legendItem) settings of the series.
+
+#### Example - disable highlight of legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+          name: "Series 1",
+          type: "line",
+          markers: {
+            visible: true
+          },
+          field: "Close"
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom',
+        item: {
+          highlight: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+#### Example - display legacy style markers in the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close"
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      },
+      seriesDefaults: {
+          /* Use these settings to emulate the legacy legend item rendering */
+          legendItem: {
+              type: 'line',
+              line: {
+                  dashType: 'solid',
+              },
+              markers: {
+                  visible: false
+              },
+              highlight: {
+                  visible: false
+              }
+          }
+      }
+    });
+    </script>
+
+### legend.item.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close"
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom',
+        item: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### legend.item.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
 
 ### legend.item.cursor `String`
+
 The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### legend.item.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### legend.item.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### legend.item.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### legend.item.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### legend.item.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### legend.item.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### legend.item.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### legend.item.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### legend.item.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### legend.item.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### legend.item.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close"
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom',
+        item: {
+          line: {
+            color: "#777",
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### legend.item.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### legend.item.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        markers: {
+            visible: true
+        },
+        field: "Close"
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom',
+        item: {
+          markers: {
+            visible: false
+          }
+        }
+      }
+    });
+    </script>
+
+### legend.item.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### legend.item.markers.border `Object|Function`
+
+The border of the markers.
+
+### legend.item.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### legend.item.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.item.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### legend.item.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### legend.item.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### legend.item.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "ohlc",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close"
+      }],
+      legend: {
+        visible: true,
+        position: "bottom",
+        item: {
+          type: 'line',
+          markers: {
+            visible: true,
+            visual: function (e) {
+              var origin = e.rect.origin;
+              var center = e.rect.center();
+              var bottomRight = e.rect.bottomRight();
+
+              var path = new kendo.drawing.Path({
+                fill: {
+                  color: e.options.border.color
+                }
+              })
+              .moveTo(origin.x, bottomRight.y)
+              .lineTo(bottomRight.x, bottomRight.y)
+              .lineTo(center.x, origin.y)
+              .close();
+
+              return path;
+            }
+          }
+        }
+      }
+      });
+    </script>
+
+### legend.item.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
 
 ### legend.item.visual `Function`
 
@@ -4679,42 +5221,67 @@ A function that can be used to create a custom visual for the legend items. The 
 
     <div id="chart"></div>
     <script>
-      $("#chart").kendoStockChart({
-        legend: {
-          item: {
-            visual: function (e) {
-              var color = e.options.markers.background;
-              var labelColor = e.options.labels.color;
-              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
-              var layout = new kendo.drawing.Layout(rect, {
-                spacing: 5,
-                alignItems: "center"
-              });
+        $("#chart").kendoStockChart({
+            legend: {
+                visible: true,
+                position: "bottom",
+                item: {
+                    visual: function (e) {
+                        var color = e.options.markers.background;
+                        var labelColor = e.options.labels.color;
+                        var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+                        var layout = new kendo.drawing.Layout(rect, {
+                            spacing: 5,
+                            alignItems: "center"
+                        });
 
-              var marker = new kendo.drawing.Path({
-                fill: {
-                  color: color
+                        var marker = new kendo.drawing.Path({
+                            fill: {
+                                color: color
+                            }
+                        }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+                        var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                            fill: {
+                                color: labelColor
+                            }
+                        });
+
+                        layout.append(marker, label);
+                        layout.reflow()
+
+                        return layout;
+                    }
                 }
-              }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
-
-              var label = new kendo.drawing.Text(e.series.name, [0, 0], {
-                fill: {
-                  color: labelColor
+            },
+            dataSource: {
+                data: [{
+                    "Date": "2016/01/01",
+                    "Open": 41.62,
+                    "High": 41.69,
+                    "Low": 39.81,
+                    "Close": 40.12,
+                    "Volume": 2632000
+                }, {
+                    "Date": "2016/03/01",
+                    "Open": 40.62,
+                    "High": 39.69,
+                    "Low": 40.81,
+                    "Close": 39.12,
+                    "Volume": 2631986
                 }
-              });
-
-              layout.append(marker, label);
-              layout.reflow()
-
-              return layout;
-            }
-          }
-        },
-        series: [
-          { name: "Series 1", data: [1, 2, 3] },
-          { name: "Series 2", data: [3, 4, 5] }
-        ]
-      });
+                ]
+            },
+            dateField: "Date",
+            series: [{
+                name: "Series 1",
+                type: "candlestick",
+                openField: "Open",
+                highField: "High",
+                lowField: "Low",
+                closeField: "Close"
+            }]
+        });
     </script>
 
 ### legend.labels `Object`
@@ -4915,6 +5482,113 @@ Configures the legend markers.
 The color of the markers.
 Any valid CSS color string will work here, including hex and rgb.
 
+### legend.title `Object`
+
+The legend title configuration options or text.
+
+### legend.title.align `String` *(default: "center")*
+
+The alignment of the title.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+### legend.title.background `String` *(default: "white")*
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border `Object`
+
+The border of the title.
+
+### legend.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the legend title border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### legend.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+### legend.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### legend.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### legend.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### legend.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### legend.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### legend.title.padding `Number|Object` *(default: 5)*
+
+The padding of the title. A numeric value will set all margins.
+
+### legend.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### legend.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### legend.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### legend.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### legend.title.position `String` *(default: "top")*
+
+The position of the title.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+### legend.title.text `String`
+
+The text of the legend title. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### legend.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the title. By default the title will be displayed.
+
 ### panes `Array`
 
 The chart panes configuration.
@@ -5105,7 +5779,7 @@ The text of the title.
 The visibility of the title.
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
+Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/stock-chart/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.
@@ -5613,11 +6287,17 @@ Each series type has a different set of options.
 
 The type of the series. Available types:
 
-* area
-* column
-* line
-* candlestick, ohlc
-* bullet
+* `area`
+* `candlestick`
+* `column`
+* `exponentialTrendline`
+* `line`
+* `linearTrendline`
+* `logarithmicTrendline`
+* `movingAverageTrendline`
+* `ohlc`
+* `polynomialTrendline`
+* `powerTrendline`
 
 ### series.dashType `String`*(default: "solid")*
 
@@ -5708,6 +6388,322 @@ The data field containing the current value.
 The data field containing the target value.
 
 ** Available for bullet and verticalBullet series. **
+
+### series.for `String`
+
+The name of the parent series of the trendline.
+
+> The `for` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to
+> "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
+
+#### Example - set the trendline parent series for field
+
+	  <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-07-01"),
+                price: 105
+            }, {
+                date: new Date("2021-10-01"),
+                price: 105
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Trend (LINEAR)",
+            type: "linearTrendline",
+            for: "Price"
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline `Object`
+
+The trendline configuration options.
+
+> The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
+
+#### Example - set the trendline options
+
+	  <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-07-01"),
+                price: 105
+            }, {
+                date: new Date("2021-10-01"),
+                price: 105
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Average",
+            type: "movingAverageTrendline",
+            for: "Price",
+            trendline: {
+              period: 3
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline.forecast `Object`
+
+The trendline forecast settings. By default, the trendline does not display a forecast.
+
+> The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
+
+#### Example - set the trendline forecast
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-02-01"),
+                price: 141
+            }, {
+                date: new Date("2021-03-01"),
+                price: 151
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-05-01"),
+                price: 111
+            }, {
+                date: new Date("2021-06-01"),
+                price: 111
+            }, {
+                date: new Date("2021-07-01"),
+                price: 145
+            }, {
+                date: new Date("2021-08-01"),
+                price: 125
+            }, {
+                date: new Date("2021-09-01"),
+                price: 145
+            }, {
+                date: new Date("2021-10-01"),
+                price: 135
+            }, {
+                date: new Date("2021-11-01"),
+                price: 155
+            }, {
+                date: new Date("2021-12-01"),
+                price: 185
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Forecast",
+            type: "linearTrendline",
+            for: "Price",
+            trendline: {
+                forecast: {
+                    before: 3,
+                    after: 20
+                }
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline.forecast.before `Number` *(default: 0)*
+
+The number of intervals to extend the trendline before the first data point.
+
+### series.trendline.forecast.after `Number` *(default: 0)*
+
+The number of intervals to extend the trendline after the last data point.
+
+### series.trendline.order `Number` *(default: 2)*
+
+The order (degree) of the Polynomial trendline. The default value is 2.
+
+Accepted values are from 2 to 6:
+* 2: a Quadratic polynomial trendline with a single extreme point (minimum or maximum) point.
+* 3: a Cubic polynomial trendline with up to 2 extreme points.
+* 4: a polynomial trendline of 4th degree with up to 3 extreme points.
+* 5: a polynomial trendline of 5th degree with up to 4 extreme points.
+* 6: a polynomial trendline of 6th degree with up to 5 extreme points.
+
+#### Example - set the polynomial trendline order (degree)
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-02-01"),
+                price: 141
+            }, {
+                date: new Date("2021-03-01"),
+                price: 151
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-05-01"),
+                price: 111
+            }, {
+                date: new Date("2021-06-01"),
+                price: 111
+            }, {
+                date: new Date("2021-07-01"),
+                price: 145
+            }, {
+                date: new Date("2021-08-01"),
+                price: 125
+            }, {
+                date: new Date("2021-09-01"),
+                price: 145
+            }, {
+                date: new Date("2021-10-01"),
+                price: 135
+            }, {
+                date: new Date("2021-11-01"),
+                price: 155
+            }, {
+                date: new Date("2021-12-01"),
+                price: 185
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Trend",
+            type: "polynomialTrendline",
+            for: "Price",
+            trendline: {
+                order: 3
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
+
+### series.trendline.period `Number` *(default: 2)*
+
+The number of intervals to take when calculating averages. The value should be an integer greater than 2.
+
+> The period setting is supported only when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "movingAverageTrendline".
+
+#### Example - set the moving average trendline period
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            data: [{
+                date: new Date("2021-01-01"),
+                price: 111
+            }, {
+                date: new Date("2021-02-01"),
+                price: 141
+            }, {
+                date: new Date("2021-03-01"),
+                price: 151
+            }, {
+                date: new Date("2021-04-01"),
+                price: 121
+            }, {
+                date: new Date("2021-05-01"),
+                price: 111
+            }, {
+                date: new Date("2021-06-01"),
+                price: 111
+            }, {
+                date: new Date("2021-07-01"),
+                price: 145
+            }, {
+                date: new Date("2021-08-01"),
+                price: 125
+            }, {
+                date: new Date("2021-09-01"),
+                price: 145
+            }, {
+                date: new Date("2021-10-01"),
+                price: 135
+            }, {
+                date: new Date("2021-11-01"),
+                price: 155
+            }, {
+                date: new Date("2021-12-01"),
+                price: 185
+            }]
+        },
+        dateField: "date",
+        series: [{
+            name: "Price",
+            type: "line",
+            field: "price"
+        }, {
+            name: "Average",
+            type: "movingAverageTrendline",
+            for: "Price",
+            trendline: {
+                period: 3
+            }
+        }],
+        legend: {
+            visible: true,
+            position: 'bottom'
+        }
+    });
+    </script>
 
 ### series.name `String`
 
@@ -6213,6 +7209,504 @@ The fields which can be used in the template are:
 ### series.labels.visible `Boolean|Function`*(default: false)*
 
  The visibility of the labels.
+
+### series.legendItem `Object`
+
+The configuration of the Chart legend item for this series.
+
+#### Example - override the legend item type for the series
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close",
+        legendItem: {
+          type: "line"
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### series.legendItem.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close",
+        legendItem: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### series.legendItem.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### series.legendItem.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
+
+### series.legendItem.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### series.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### series.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### series.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### series.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### series.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### series.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### series.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### series.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### series.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### series.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### series.legendItem.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        legendItem: {
+          line: {
+            color: "#777",
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### series.legendItem.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### series.legendItem.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### series.legendItem.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          markers: {
+            visible: false
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### series.legendItem.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### series.legendItem.markers.border `Object|Function`
+
+The border of the markers.
+
+### series.legendItem.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### series.legendItem.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### series.legendItem.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### series.legendItem.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### series.legendItem.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### series.legendItem.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          markers: {
+            visual: function (e) {
+              var origin = e.rect.origin;
+              var center = e.rect.center();
+              var bottomRight = e.rect.bottomRight();
+
+              var path = new kendo.drawing.Path({
+                fill: {
+                  color: e.options.border.color
+                }
+              })
+              .moveTo(origin.x, bottomRight.y)
+              .lineTo(bottomRight.x, bottomRight.y)
+              .lineTo(center.x, origin.y)
+              .close();
+
+              return path;
+            }
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### series.legendItem.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
+
+### series.legendItem.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          visual: function (e) {
+            var color = e.options.markers.background;
+            var labelColor = e.options.labels.color;
+            var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+            var layout = new kendo.drawing.Layout(rect, {
+              spacing: 5,
+              alignItems: "center"
+            });
+
+            var marker = new kendo.drawing.Path({
+              fill: {
+                color: color
+              }
+            }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+            var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+              fill: {
+                color: labelColor
+              }
+            });
+
+            layout.append(marker, label);
+            layout.reflow()
+
+            return layout;
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
 
 ### series.line `String | Object`
 
@@ -6795,6 +8289,46 @@ Configures the series data labels.
     });
 ```
 
+### seriesDefaults.labels.ariaTemplate `String | Function`
+
+The [template](/api/framework/kendo#methods-template) which renders the ARIA label for the series labels.
+
+The fields which can be used in the template are:
+
+*   category - the category name. Available for area, bar, column, bubble, donut, line and pie series.
+*   dataItem - the original data item used to construct the point. Will be null if binding to array.
+*   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
+*   series - the data series
+*   value - the point value. Can be a number or object containing each bound field.
+
+#### Example
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+      dataSource: {
+        data: [
+          { value: 1, date: new Date(2012, 1, 1)},
+          { value: 2, date: new Date(2012, 1, 2)}
+        ]
+      },
+      dateField: "date",
+      seriesDefaults: {
+        labels: {
+          template: "#= value #%",
+          ariaTemplate: "The value for #= e.series.name # on #= e.category # is #= e.value #",
+          visible: true
+        }
+      },
+      series: [
+        {
+          field: "value",
+          name: "Series 1"
+        }
+      ]
+    });
+    </script>
+
 ### seriesDefaults.labels.background `String`
 
 The background color of the labels. Any valid CSS color string will work here,
@@ -6982,6 +8516,504 @@ Template variables:
 The line configuration options.
 The default options for all line series. For more details see the series options.
 
+### seriesDefaults.legendItem `Object`
+
+The configuration of the Chart legend item for all series.
+
+#### Example - override the legend item type for the series
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close",
+        legendItem: {
+          type: "line"
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.area `Object`
+
+Sets the configuration of the legend items of type `area`.
+By default, all series except line and scatter use this legend type.
+
+#### Example - sets the opacity of `area` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "candlestick",
+        openField: "Open",
+        highField: "High",
+        lowField: "Low",
+        closeField: "Close",
+        legendItem: {
+          area: {
+            opacity: 0.1,
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.area.background `String`
+
+The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### seriesDefaults.legendItem.area.opacity `Number`
+
+The opacity of the legend item.
+Defaults to the series opacity.
+
+### seriesDefaults.legendItem.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### seriesDefaults.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+### seriesDefaults.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+### seriesDefaults.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+### seriesDefaults.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+### seriesDefaults.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+### seriesDefaults.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### seriesDefaults.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### seriesDefaults.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### seriesDefaults.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### seriesDefaults.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+### seriesDefaults.legendItem.line `Object`
+
+Sets the configuration of the legend items of type `line`.
+This is the default legend item type for all line and scatter series.
+
+#### Example - override the color of `line` legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        legendItem: {
+          line: {
+            color: "#777",
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.line.color `String`
+
+The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
+Defaults to the series color.
+
+### seriesDefaults.legendItem.line.dashType `String`
+
+The dash type of the legend item of type `line`.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.line.opacity `Number`
+
+The opacity of the legend item of type `line`.
+Defaults to the series opacity.
+
+### seriesDefaults.legendItem.markers `Object`
+
+The configuration of the Chart legend item markers.
+
+By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+
+#### Example - override marker settings for the legend
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          markers: {
+            visible: false
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.markers.background `String|Function`
+
+The background color of the legend item markers.
+
+### seriesDefaults.legendItem.markers.border `Object|Function`
+
+The border of the markers.
+
+### seriesDefaults.legendItem.markers.border.color `String|Function`
+
+The configuration of the Chart legend item markers border.
+
+### seriesDefaults.legendItem.markers.border.dashType `String`
+
+The dash type of the legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### seriesDefaults.legendItem.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+### seriesDefaults.legendItem.markers.type `String|Function`
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+### seriesDefaults.legendItem.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+### seriesDefaults.legendItem.markers.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the markers
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          markers: {
+            visual: function (e) {
+              var origin = e.rect.origin;
+              var center = e.rect.center();
+              var bottomRight = e.rect.bottomRight();
+
+              var path = new kendo.drawing.Path({
+                fill: {
+                  color: e.options.border.color
+                }
+              })
+              .moveTo(origin.x, bottomRight.y)
+              .lineTo(bottomRight.x, bottomRight.y)
+              .lineTo(center.x, origin.y)
+              .close();
+
+              return path;
+            }
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.type `String`
+
+Sets the type of the legend items.
+The default value is based on the series type.
+
+The supported values are:
+
+- `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
+* `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
+
+### seriesDefaults.legendItem.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+- `options`&mdash;The item options.
+- `createVisual`&mdash;A function for getting the default visual.
+- `series`&mdash;The item series.
+- `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      dataSource: {
+        data: [{
+          "Date": "2016/01/01",
+          "Open": 41.62,
+          "High": 41.69,
+          "Low": 39.81,
+          "Close": 40.12,
+          "Volume": 2632000
+        }, {
+          "Date": "2016/03/01",
+          "Open": 40.62,
+          "High": 39.69,
+          "Low": 40.81,
+          "Close": 39.12,
+          "Volume": 2631986
+        }]
+      },
+      dateField: "Date",
+      series: [{
+        name: "Series 1",
+        type: "line",
+        field: "Close",
+        markers: {
+          visible: true
+        },
+        legendItem: {
+          visual: function (e) {
+            var color = e.options.markers.background;
+            var labelColor = e.options.labels.color;
+            var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+            var layout = new kendo.drawing.Layout(rect, {
+              spacing: 5,
+              alignItems: "center"
+            });
+
+            var marker = new kendo.drawing.Path({
+              fill: {
+                color: color
+              }
+            }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+            var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+              fill: {
+                color: labelColor
+              }
+            });
+
+            layout.append(marker, label);
+            layout.reflow()
+
+            return layout;
+          }
+        }
+      }],
+      legend: {
+        visible: true,
+        position: 'bottom'
+      }
+    });
+    </script>
+
 ### seriesDefaults.overlay `Object`
 
 The effects overlay.
@@ -7114,6 +9146,484 @@ Template variables:
 
  A value indicating if the tooltip should be displayed.
 
+### subtitle `Object|String`
+
+The chart subtitle configuration options or text.
+
+#### Example - set the chart title and subtitle as a string
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: "Title",
+      subtitle: "Subtitle"
+    });
+    </script>
+
+#### Example - configure the chart title and subtitle
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      }
+    });
+    </script>
+
+### subtitle.align `String`
+
+The alignment of the subtitle.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+By default, the subtitle has the same alignment as the title.
+
+#### Example - configure the chart title and subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        align: "left"
+      },
+      subtitle: {
+        text: "Subtitle",
+        align: "left"
+      }
+    });
+    </script>
+
+### subtitle.background `String` *(default: "white")*
+
+The background color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - configure the chart subtitle alignment
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        background: "green"
+      }
+    });
+    </script>
+
+### subtitle.border `Object`
+
+The border of the subtitle.
+
+#### Example - set the chart subtitle border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the chart subtitle border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          color: "green",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.dashType `String` *(default: "solid")*
+
+The dash type of the chart subtitle border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the chart subtitle border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          dashType: "dashDot",
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example - set the chart subtitle border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        border: {
+          width: 2
+        }
+      }
+    });
+    </script>
+
+### subtitle.color `String`
+
+The text color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the subtitle color as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Chart Title"
+      },
+      subtitle: {
+        text: "Chart Subtitle",
+        color: "#aa00bb"
+      }
+    });
+    </script>
+
+### subtitle.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+#### Example - set the chart title and subtitle font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        font: "20px sans-serif"
+      }
+    });
+    </script>
+
+### subtitle.margin `Number|Object` *(default: 5)*
+
+The margin of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: 10
+      }
+    });
+    </script>
+
+### subtitle.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the subtitle.
+
+#### Example - set the chart subtitle bottom margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          bottom: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.margin.left `Number` *(default: 0)*
+
+The left margin of the subtitle.
+
+#### Example - set the chart subtitle left margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        margin: {
+          left: 10
+        }
+      },
+      subtitle: {
+        text: "Subtitle"
+      }
+    });
+    </script>
+
+### subtitle.margin.right `Number` *(default: 0)*
+
+The right margin of the subtitle.
+
+#### Example - set the chart series subtitle right margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        margin: {
+          right: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.margin.top `Number` *(default: 0)*
+
+The top margin of the subtitle.
+
+#### Example - set the chart subtitle top margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        margin: {
+          top: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding `Number|Object` *(default: 5)*
+
+The padding of the subtitle. A numeric value will set all margins.
+
+#### Example - set the chart subtitle padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: 10
+      }
+    });
+    </script>
+
+### subtitle.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the subtitle.
+
+#### Example - set the chart subtitle bottom padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          bottom: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.left `Number` *(default: 0)*
+
+The left padding of the subtitle.
+
+#### Example - set the chart subtitle left padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          left: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.right `Number` *(default: 0)*
+
+The right padding of the subtitle.
+
+#### Example - set the chart subtitle right padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Title",
+        padding: {
+          right: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.padding.top `Number` *(default: 0)*
+
+The top padding of the subtitle.
+
+#### Example - set the chart subtitle top padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        padding: {
+          top: 10
+        }
+      }
+    });
+    </script>
+
+### subtitle.position `String` *(default: "top")*
+
+The position of the subtitle.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+By default, the subtitle is placed in the same position as the title.
+
+#### Example - set the chart subtitle position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        position: "bottom"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      }
+    });
+    </script>
+
+### subtitle.text `String`
+
+The text of the chart subtitle. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the chart subtitle text
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title"
+      },
+      subtitle: {
+        text: "Subtitle",
+        position: "bottom"
+      }
+    });
+    </script>
+
+### subtitle.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the subtitle. By default the subtitle will be displayed.
+
+#### Example - hide the subtitle
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoStockChart({
+      title: {
+        text: "Title",
+        visible: false
+      },
+      subtitle: {
+        text: "Subtitle",
+        visible: false
+      }
+    });
+    </script>
+
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".
@@ -7228,6 +9738,35 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 ### title.color `String`
 
 The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### title.description `String`
+
+The accessible description of the Chart. The description is announced by screen readers when the Chart is focused.
+
+#### Example - set the chart description
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+      title: {
+        text: "Stock Chart"
+        description: "A sample stock chart with mock data"
+      },
+      dataSource: {
+        data: [
+          { value: 1, date: new Date(2012, 1, 1)},
+          { value: 2, date: new Date(2012, 1, 2)}
+        ]
+      },
+      dateField: "date",
+      series: [
+        {
+          field: "value",
+          name: "Value"
+        }
+      ]
+    });
+    </script>
 
 ### title.margin `Number | Object`*(default: 5)*
 
@@ -9356,7 +11895,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart#methods-exportImage)
+Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/stock-chart#methods-exportImage)
 
 #### Parameters
 
@@ -9376,7 +11915,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart#methods-exportPDF)
+Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/stock-chart#methods-exportPDF)
 
 #### Parameters
 
@@ -9390,7 +11929,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart#methods-exportSVG)
+Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/stock-chart#methods-exportSVG)
 
 #### Parameters
 
@@ -9472,6 +12011,7 @@ Both programs provide command-line interface suitable for server-side processing
 
     var chart = $("#stock-chart").data("kendoStockChart");
     var svg = chart.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 

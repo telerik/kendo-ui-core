@@ -1,6 +1,16 @@
 (function() {
     var ResponsivePanel = kendo.ui.ResponsivePanel;
-    var dom;
+    var dom,
+    isCsp = (function noUnsafeEval() {
+        try {
+            /* jshint -W031, -W054 */
+            new Function('');
+            /* jshint +W031, +W054 */
+            return false;
+        } catch (e) {
+            return true;
+        }
+    })();
 
     describe("responsive panel", function() {
         beforeEach(function() {
@@ -23,6 +33,14 @@
             assert.isOk(dom.hasClass("k-rpanel-right"));
             assert.isOk(!dom.hasClass("k-rpanel-left"));
         });
+
+        if (!isCsp) {
+            it("applies nonce attribute to registerBreakpoint inline style", function() {
+                new ResponsivePanel(dom, { nonce: "test1234" });
+
+                assert.equal($("head style[nonce='test1234']").length, 1);
+            });
+        }
 
         it("toggles expanded class when toggle element is clicked", function() {
             new ResponsivePanel(dom);
@@ -143,7 +161,7 @@
             panel.open();
             panel._close({
                 target: document.body,
-                isDefaultPrevented: function() { return true }
+                isDefaultPrevented: function() { return true; }
             });
 
             assert.isOk(dom.hasClass("k-rpanel-expanded"));
@@ -156,6 +174,15 @@
             button.trigger('touchend');
 
             assert.isOk(!dom.hasClass("k-rpanel-expanded"));
+        });
+
+        it("set content html from options", function() {
+
+            var panel = new ResponsivePanel(dom, {
+                content: "content text"
+            });
+
+            assert.equal(panel.element.html(), "content text");
         });
     });
 }());

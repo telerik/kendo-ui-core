@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TreeList PHP Class
+page_title: Overview - TreeList PHP Class
 description: "Get started with the TreeList PHP class in Kendo UI."
 slug: overview_treelist_uiforphp
 position: 1

@@ -2,7 +2,7 @@
 title: Grid Foreign Key DropDownList with Filter
 description: How to Add a filter to the DropDownList of a Foreign Key Column in the Grid
 type: how-to
-page_title: Add Filter to the Foreign Key Column Editor | Kendo UI Grid for jQuery
+page_title: Add Filter to the Foreign Key Column Editor - Kendo UI for jQuery Data Grid
 slug: grid-add-filter-to-foreign-key-editor
 position:
 tags: grid, foreign key , dropdown, filter, column
@@ -19,7 +19,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 

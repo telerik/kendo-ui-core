@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Learn the basics when working with the Telerik UI Notification HtmlHelper for ASP.NET MVC."
+description: "Learn the basics when working with the Telerik UI Notification component for ASP.NET MVC."
 previous_url: /helpers/layout/notification/templates
 slug: templates_notificatiomhelper_aspnetmvc
 position: 5
@@ -15,6 +15,7 @@ Each template is used together with its corresponding built-in or custom [notifi
 
 The following example demonstrates how to use Notification templates.
 
+```HtmlHelper
     <script id="myAlertTemplate" type="text/x-kendo-template">
         <div class="myAlert">System alert generated at #= time # : #= myMessage #</div>
     </script>
@@ -48,9 +49,27 @@ The following example demonstrates how to use Notification templates.
             }, "timeAlert");
         });
     </script>
+```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification">
+    <templates>
+        <notification-template type="warning"
+                               template="<div class='myWarning'>Warning: #= myMessage #</div>">
+        </notification-template>
+        <notification-template type="timeAlert"
+                               template="<div class='myAlert'>System alert generated at #= time # : #= myMessage #</div>">
+        </notification-template>
+        <notification-template type="timeAlert"
+                               template-id="myAlertTemplate">
+        </notification-template>
+    </templates>
+</kendo-notification>
+```
+{% endif %}
 
 ## See Also
 
 * [Using Templates in the Notification HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification/templates)
-* [NotificationBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
+* [NotificationBuilder Server-Side API](/api/kendo.mvc.ui.fluent/notificationbuilder)
 * [Notification Server-Side API](/api/notification)

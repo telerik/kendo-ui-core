@@ -26,7 +26,7 @@
 
             dimensions.refresh();
             assert.equal(dimensions.minScale, 0.25);
-        })
+        });
 
         it("allows overriding min scale", function() {
             fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 600px;">Element</div></div>');
@@ -42,7 +42,7 @@
 
             dimensions.refresh();
             assert.equal(dimensions.minScale, 1);
-        })
+        });
     });
 
     describe("pane", function() {
@@ -82,7 +82,7 @@
             press(element, 13, 14, 2);
             move(element, 15, 22, 2);
             assert.equal(movable.scale, 2.6);
-        })
+        });
 
         it("zooms content to maxScale", function() {
             dimensions.maxScale = 2;
@@ -90,7 +90,7 @@
             press(element, 13, 14, 2);
             move(element, 15, 22, 2);
             assert.equal(movable.scale, 2);
-        })
+        });
         it("zooms to a given point", function() {
             press(element, 10, 10);
             press(element, 13, 14, 2);
@@ -99,7 +99,7 @@
 
             assert.closeTo(movable.x, -18.4, 0.1);
             assert.closeTo(movable.y, -19.2, 0.1);
-        })
+        });
 
         it("offsets zoom point", function() {
             press(element, 10, 10);
@@ -110,7 +110,7 @@
             assert.equal(movable.scale, 1);
             assert.closeTo(movable.x, -5, 0.1);
             assert.closeTo(movable.y, -5, 0.1);
-        })
+        });
 
         it("zooms to a given point after being offset", function() {
             press(element, 30, 10);
@@ -126,7 +126,7 @@
 
             assert.closeTo(movable.x, -70.4, 0.1);
             assert.closeTo(movable.y, -19.2, 0.1);
-        })
+        });
 
         it("zooming out causes friction", function() {
             press(element, 9, 6);

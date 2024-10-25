@@ -1,12 +1,16 @@
 ---
 title: Data Binding
-page_title: Hybrid ScrollView Documentation | Data Binding | Kendo UI
+page_title: Hybrid ScrollView Documentation | Data Binding
 description: "Get started with the Hybrid ScrollView by Kendo UI and bind the widget to data."
 slug: databinding_hybridscrollview
 position: 2
 ---
 
 # Data Binding
+
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
 
 The Hybrid ScrollView provides options for binding it to local JavaScript arrays and remote data over the Kendo UI DataSource component.
 

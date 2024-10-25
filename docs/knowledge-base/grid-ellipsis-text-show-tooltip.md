@@ -1,8 +1,8 @@
 ---
 title: Show Ellipsis for Long Content and Display Tooltip on Hover
-description: An example on how to show ellipsis in the Kendo UI Grid cells which render long content.
+description: Learn how to show ellipsis in the Kendo UI Grid cells which render long content.
 type: how-to
-page_title: Show Ellipsis for Long Content and Display Tooltip on Hover | Kendo UI Grid for jQuery
+page_title: Show Ellipsis for Long Content and Display Tooltip on Hover - Kendo UI for jQuery Data Grid
 slug: grid-ellipsis-text-show-tooltip
 tags: grid, ellipsis, tooltip, long, text, content
 res_type: kb
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 

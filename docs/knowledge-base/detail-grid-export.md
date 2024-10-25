@@ -1,6 +1,6 @@
 ---
 title: Export Detail Grids
-page_title:  Export Detail Grids | Kendo UI Grid for jQuery
+page_title:  Export Detail Grids - Kendo UI for jQuery Data Grid
 description: "Get started with Kendo UI for jQuery enabling you to export to Excel master and detail Grids."
 previous_url: /controls/data-management/grid/how-to/excel/detail-grid-export
 slug: howto_exportto_excel_masterand_detail_grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -36,6 +36,8 @@ How can I export master and detail Kendo UI Grids to Excel?
 The following examples demonstrate how to export detail Grids to Excel and merge their workbooks with the master Grid workbook.
 
 To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+
+>With JsZip version 3.x the synchronous methods were deprecated, so you must use the async methods to get the dataURL
 
 The following example demonstrates how to export a detail Grid to Excel including its all pages and details.
 
@@ -126,13 +128,23 @@ The following example demonstrates how to export a detail Grid to Excel includin
           [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
         }
 
-        // Save the workbook.
-        kendo.saveAs({
-          dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
-          fileName: "Export.xlsx"
+        // When using  jsZip version 3.x use the following as the synchronous methods were deprecated
+        new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
+          kendo.saveAs($.extend({
+            dataURI: data,
+            fileName: "Export.xlsx"
+          }));
+        }).always(() => {
+          e.sender._progress(false);
+          e.sender._isExport = false;
+          e.sender.refresh();
         });
 
-
+        // Save the workbook.
+        // kendo.saveAs({
+        //   dataURI: new kendo.ooxml.Workbook(workbook).toDataURLAsync(),
+        //   fileName: "Export.xlsx"
+        // })
       });
     },
     columns: [
@@ -305,11 +317,23 @@ The following example demonstrates how to export a detail Grid to Excel includin
           [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
         }
 
+        // When using  jsZip version 3.x use the following as the synchronous methods were deprecated
+        new kendo.ooxml.Workbook(workbook).toDataURLAsync().then(function(data) {
+          kendo.saveAs($.extend({
+            dataURI: data,
+            fileName: "Export.xlsx"
+          }));
+        }).always(() => {
+          e.sender._progress(false);
+          e.sender._isExport = false;
+          e.sender.refresh();
+        });
+
         // Save the workbook.
-        kendo.saveAs({
-          dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
-          fileName: "Export.xlsx"
-        })
+        // kendo.saveAs({
+        //   dataURI: new kendo.ooxml.Workbook(workbook).toDataURLAsync(),
+        //   fileName: "Export.xlsx"
+        // })
       });
     },
     columns: [
@@ -368,4 +392,4 @@ The following example demonstrates how to export a detail Grid to Excel includin
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

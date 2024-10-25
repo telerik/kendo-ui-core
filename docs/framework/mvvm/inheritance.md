@@ -1,6 +1,6 @@
 ---
 title: Object-Model Architecture
-page_title: Object-Model Architecture | Kendo UI Class
+page_title: Object-Model Architecture - Kendo UI Class
 description: "Learn how to use the Kendo UI class category and get the basics of doing JavaScript inheritance with Kendo UI."
 previous_url: /tutorials/inheritance-with-kendoui, /framework/class/inheritance, /framework/inheritance
 slug: inheritance_kendoui_gettingstarted
@@ -39,7 +39,7 @@ To create a new object with Kendo UI, define it by calling `kendo.Class.extend`&
 
 **Figure 1: Creating a new object**
 
-![Capture](../../images/inheritance/8c23-capture.png)
+![Kendo UI for jQuery Class - Empty Object](../../images/inheritance/empty-object.png)
 
 ### Adding Constructors
 
@@ -64,7 +64,7 @@ You can also add a constructor for this object by including an `init` method. To
 
 **Figure 2: Setting the name of the new person**
 
-![nh5](../../images/inheritance/8c23-nh5.png)
+![Kendo UI for jQuery Class - Setting the Name Field](../../images/inheritance/setting-name-field.png)
 
 ### Instantiating New Parent Objects
 
@@ -80,13 +80,13 @@ You can instantiate a new `person` object of type parent that inherits the prope
     myDad.sayHello();
     alert(myDad.isAPrettyCoolPerson);
 
-**Figure 3: Instantiating a parent**
+**Figure 3: Instantiating a Parent**
 
-![nh1](../../images/inheritance/8c23-nh1_1.png)
+![Kendo UI for jQuery Class - Create a Parent Object](../../images/inheritance/create-parent-object.png)
 
 **Figure 4: Toggling a quality**
 
-![nh2](../../images/inheritance/8c23-nh2.png)
+![Kendo UI for jQuery Class - Toggle Boolean](../../images/inheritance/toggle-boolean.png)
 
 ### Inheriting Parent Properties
 
@@ -98,13 +98,9 @@ A child inherits some, but not all, properties from their parents. If you inheri
     me.sayHello();
     alert(me.isPrettyCoolPerson);
 
-**Figure 5: Inheriting some parent properties**
+**Figure 5: Inheriting Some Parent Properties**
 
-![nh3](../../images/inheritance/8c23-nh3.png)
-
-**Figure 6: Trying to inherit more parent properties**
-
-![nh4](../../images/inheritance/8c23-nh4.png)
+![Kendo UI for jQuery Class - Inheriting Parent Properties](../../images/inheritance/inherit-parent-properties.png)
 
 ### Understanding Parent Objects
 

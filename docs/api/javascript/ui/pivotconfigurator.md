@@ -1406,32 +1406,31 @@ The data source to which the widget should be bound.
 
     <div id="configurator"></div>
     <script>
-    $("#configurator").kendoPivotConfigurator({
-        dataSource: {
-            type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Product]" }],
-            measures: ["[Measures].[Internet Sales Amount]"],
-            transport: {
-                connection: {
-                    catalog: "Adventure Works DW 2008R2",
-                    cube: "Adventure Works"
+        $("#configurator").kendoPivotConfigurator({
+            dataSource: {
+                type: "xmla",
+                columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                rows: [{ name: "[Product].[Product]" }],
+                measures: ["[Measures].[Internet Sales Amount]"],
+                transport: {
+                    connection: {
+                        catalog: "Adventure Works DW 2008R2",
+                        cube: "Adventure Works"
+                    },
+                    discover: {
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
+                        dataType: "text",
+                        contentType: "text/xml",
+                        type: "POST"
+                    }
                 },
-                discover: {
-                    url: "https://demos.telerik.com/olap/msmdpump.dll",
-                    dataType: "text",
-                    contentType: "text/xml",
-                    type: "POST"
+                schema: {
+                    type: "xmla"
                 }
-            },
-            schema: {
-                type: "xmla"
             }
-        }
-    });
+        });
 
-    var dataSource = kendo.data.PivotDataSource({
-        dataSource: {
+        var dataSource = new kendo.data.PivotDataSource({
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }],
             rows: [{ name: "[Product].[Product]" }],
@@ -1451,10 +1450,11 @@ The data source to which the widget should be bound.
             schema: {
                 type: "xmla"
             }
-        }
-    });
+        });
 
-    var configurator = $("#configurator").data("kendoPivotConfigurator");
-    configurator.setDataSource(dataSource);
+        setTimeout(function(){
+            var configurator = $("#configurator").data("kendoPivotConfigurator");
+            configurator.setDataSource(dataSource);
+        }, 2000);
     </script>
 

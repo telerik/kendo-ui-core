@@ -1,6 +1,6 @@
 ---
 title: Pull-to-Refresh Pattern
-page_title: Pull-to-Refresh Pattern | Hybrid UI ListView
+page_title: Pull-to-Refresh Pattern - Hybrid UI ListView
 description: "Learn how to use the pull-to-refresh pattern of the Hybrid UI ListView in the Kendo UI framework."
 previous_url: /howto/howto-use-the-mobile-listview-with-pull-to-refresh
 slug: pulltorefreshfeature_hybridlistview
@@ -8,6 +8,10 @@ position: 3
 ---
 
 # Pull-to-Refresh Pattern
+
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
 
 The [Hybrid UI ListView widget](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
 

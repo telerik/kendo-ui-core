@@ -289,13 +289,13 @@
         it("DataSource is not wrapped if set as ViewModel property", function() {
             var observable = kendo.observable({ dataSource: new kendo.data.DataSource() });
 
-            assert.isOk(!(observable.dataSource instanceof kendo.data.ObservableObject))
+            assert.isOk(!(observable.dataSource instanceof kendo.data.ObservableObject));
         });
 
         it("ObservableArray is not wrapped if set as ViewModel property", function() {
             var observable = kendo.observable({ items: new kendo.data.ObservableArray([1, 2, 3, 4, 5]) });
 
-            assert.isOk(observable.items instanceof kendo.data.ObservableArray)
+            assert.isOk(observable.items instanceof kendo.data.ObservableArray);
         });
 
         it("listen for changes of ObservableArray set as ViewModel property", function() {

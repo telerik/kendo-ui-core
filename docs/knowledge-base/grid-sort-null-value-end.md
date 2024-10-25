@@ -2,7 +2,7 @@
 title: Position the Null Values Last When Sorting 
 description: Show the null value at the end of the Grid when sorting in any order
 type: how-to
-page_title: Sorting Null Elements to the Bottom | Kendo UI Grid
+page_title: Sorting Null Elements to the Bottom - Kendo UI Grid
 slug: grid-sort-null-value-end
 position: 
 tags: grid, sort, sorting, null, bottom, show, end, ascending, descending, order, values, element, last
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Grid for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Grid for jQuery</td>
 		</tr>
 	</tbody>
 </table>

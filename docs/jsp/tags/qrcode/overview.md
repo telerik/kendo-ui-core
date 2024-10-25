@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | QRCode JSP Tag
+page_title: Overview - QRCode JSP Tag
 description: "Get started with the QRCode JSP tag in Kendo UI."
 slug: overview_qrcode_uiforjsp
 position: 1

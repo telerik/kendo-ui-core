@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
   /* FlatColorPicker messages */
 
   if (kendo.ui.FlatColorPicker) {
@@ -47,6 +48,7 @@
         "bold": "Έντονα",
         "italic": "Πλάγια",
         "underline": "Υπογράμμιση",
+        "print": "Εκτύπωση",
         "strikethrough": "Διακριτή Διαγραφή",
         "superscript": "Εκθέτης",
         "subscript": "Δείκτης",
@@ -90,7 +92,7 @@
         "fileTitle": "Τίτλος",
         "linkWebAddress": "Ηλεκτρονική Διεύθυνση",
         "linkText": "Κείμενο",
-        "linkToolTip": "ToolTip",
+        "linkToolTip": "αναγγελία",
         "linkOpenInNewWindow": "Άνοιγμα συνδέσμου σε νέα καρτέλα.",
         "dialogUpdate": "Ανανέωση",
         "dialogInsert": "Εισαγωγή",
@@ -296,6 +298,7 @@
         "checkAll": "Επιλογή όλων",
         "clear": "Εκκαθάριση",
         "filter": "Φίλτρο",
+        "selectedItemsFormat": "{0} επιλεγμένα στοιχεία",
         "search": "Αναζήτηση"
       });
   }
@@ -362,7 +365,9 @@
           "confirmation": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την εγγραφή;",
           "confirmDelete": "Διαγραφή"
         },
-        "noRecords": "Δεν υπάρχουν εγγραφές."
+        "noRecords": "Δεν υπάρχουν εγγραφές.",
+        "groupHeader": "Πατήστε ctrl + space για να ομαδοποιήσετε",
+        "ungroupHeader": "Πατήστε ctrl + space για να την αποκλείσετε"
       });
   }
 
@@ -566,6 +571,9 @@
         "date": "Ημερομηνία",
         "event": "Γεγονός",
         "time": "Ώρα",
+        "next": "Επόμενο",
+        "previous": "προηγούμενος",
+        "resetSeries": "Επαναφορά σειράς",
         "showFullDay": "Δείξε ολόκληρη ημέρα",
         "showWorkDay": "Δείξε εργάσιμες ώρες",
         "today": "Σήμερα",
@@ -588,6 +596,7 @@
         "recurrenceMessages": {
           "deleteWindowTitle": "Διαγραφή επαναλαμβανόμενων αντικειμένων",
           "deleteWindowOccurrence": "Διαγραφή τρέχουσας εμφάνισης",
+          "resetSeriesWindowTitle": "Επαναφορά σειράς",
           "deleteWindowSeries": "Διαγραφή της σειράς",
           "editWindowTitle": "Επεξεργασία επαναλαμβανόμενου αντικειμένου",
           "editWindowOccurrence": "Επεξεργασία τρέχουσας εμφάνισης",
@@ -667,7 +676,7 @@
         "alignmentDialog": {
           "title": "Στοίχιση",
           "buttons": {
-            "justtifyLeft": "Στοίχιση Αριστερά",
+            "justifyLeft": "Στοίχιση Αριστερά",
             "justifyCenter": "Κέντρο",
             "justifyRight": "Στοίχιση Δεξιά",
             "justifyFull": "Justify",
@@ -835,7 +844,7 @@
         "addRowBelow": "Προσθήκη γραμμής κάτω",
         "alignment": "Ευθυγράμμιση",
         "alignmentButtons": {
-          "justtifyLeft": "Ευθυγράμμιση Αριστερά",
+          "justifyLeft": "Ευθυγράμμιση Αριστερά",
           "justifyCenter": "Κέντρο",
           "justifyRight": "Ευθυγράμμιση Δεξιά",
           "justifyFull": "Ισάζω",

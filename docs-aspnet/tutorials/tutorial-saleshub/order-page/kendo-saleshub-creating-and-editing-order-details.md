@@ -1,6 +1,6 @@
 ---
 title: Handle Order Details
-page_title: Handle Order Details | Kendo UI Sales Hub Tutorial
+page_title: Handle Order Details - Kendo UI Sales Hub Tutorial
 description: "Learn how to create and edit the details of customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/order-page/kendo-saleshub-creating-and-editing-order-details
 slug: handleorderdetails_saleshubtutorial_aspnetmvc
@@ -9,7 +9,7 @@ position: 2
 
 # Handle Order Details
 
-![kendo-saleshub-order-details-edit-dialog-screenshot](images/kendo-saleshub-order-details-edit-dialog-screenshot.png)
+![{{ site.product_short }} kendo-saleshub-order-details-edit-dialog-screenshot](images/kendo-saleshub-order-details-edit-dialog-screenshot.png)
 
 ## How to Setup the Custom Order Detail Editor
 
@@ -164,7 +164,7 @@ requires you to at least pass in a `DataSourceRequest`. One of the overloads for
 to pass in the `ModelState` of your controller and it will use this to generate errors that it sends
 back to client (if there are any errors in the `ModelState`).
 
-![kendo-saleshub-order-details-errors](images/kendo-saleshub-order-details-errors.png)
+![{{ site.product_short }} Kendo Saleshub OrderDetails Errors](images/kendo-saleshub-order-details-errors.png)
 
 Using your browser's developer tools, you can see how `ToDataSourceResult` formats the errors in the
 `ModelState` when it generates the response. The `Errors` property of the response contains the

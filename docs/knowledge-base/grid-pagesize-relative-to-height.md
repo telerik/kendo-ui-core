@@ -1,8 +1,8 @@
 ---
 title: Dynamically Change the Page Size of the Grid to Adjust Its Height
-description: An example on how to change the page size of a Kendo UI Grid so that it displays as many rows as possible within the available height.
+description: Learn how to change the page size of a Kendo UI Grid so that it displays as many rows as possible within the available height.
 type: how-to
-page_title: Change the Page Size Dynamically and Adjust the Height | Kendo UI Grid for jQuery
+page_title: Change the Page Size Dynamically and Adjust the Height - Kendo UI for jQuery Data Grid
 slug: grid-pagesize-relative-to-height
 tags: grid, page, size, pagesize, height, adjust
 ticketid: 1156556
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -38,6 +38,8 @@ How can I change the `pageSize` property of the Grid when the `height` changes s
 
 1. Calculate the number of rows that will fit in the available space by subscribing to the `resize` event of the `window` element.
 1. Change the `pageSize` by using the `pageSize` method of the dataSource.
+
+This solution adjusts the pageSize of the Grid dataSource only when the window is being resized. Initially the Grid will display as many records as it is specified in the pageSize declaration.
 
 ```dojo
 <style>

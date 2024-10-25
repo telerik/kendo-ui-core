@@ -68,6 +68,7 @@ The following example demonstrates how to define the item template for the Teler
 
 > `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Telerik UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Telerik UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
 
+```HtmlHelper
     <!-- Button for the Create operation. Use it to call the client ListView method add()  -->
     <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
 
@@ -112,7 +113,54 @@ The following example demonstrates how to define the item template for the Teler
             </div>
         </div>
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <!-- Button for the Create operation. Use it to call the client ListView method add()  -->
+    <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
 
+    <kendo-listview name="listview"> 
+    </kendo-listview>
+
+    <script>
+    $(function () {
+        var listView = $("#listView").data("kendoListView");
+
+        $(".k-add-button").click(function (e) {
+            listView.add();
+            e.preventDefault();
+        });
+    });
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="order">
+            <h3>#= OrderID #</h3>
+            <dl>
+                <dt>Ship Name:</dt>
+                <dd>#= ShipName #</dd>
+            </dl>
+            <dl>
+                <dt>Ship City:</dt>
+                <dd>#= ShipCity #</dd>
+            </dl>
+            <dl>
+                <dt>Freight:</dt>
+                <dd>#= kendo.toString(Freight, "n2")#</dd>
+            </dl>
+            <dl>
+                <dt>Order Date:</dt>
+                <dd>#= kendo.toString(OrderDate, "D")#</dd>
+            </dl>
+            <!-- The following markup contains the `Edit` and `Delete` buttons -->
+            <div class="edit-buttons">
+                <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+                <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+            </div>
+        </div>
+    </script>
+```
+{% endif %}
 ## Defining the Editor Template
 
 The following example demonstrates how to define the `EditorTemplate` for the model:
@@ -122,6 +170,7 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
 
 > `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Telerik UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
 
+```HtmlHelper
     @model ListViewExample.Models.OrderViewModel
     <div class="order">
         <h3 data-bind="text:OrderID"></h3>
@@ -156,17 +205,88 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
             margin:6px;
         }
     </style>
+```
+{% if site.core %}
+```TagHelper
+    @model ListViewExample.Models.OrderViewModel
+    <div class="order">
+        <h3 data-bind="text:OrderID"></h3>
+        <dl>
+            <dt>Ship Name:</dt>
+            <dd>
+                <input asp-for="@Model.ShipName" type="text" class="k-textbox"/>
+            </dd>
+            <dt>Ship City:</dt>
+            <dd>
+                <input asp-for="@Model.ShipCity" type="text" class="k-textbox"/>
+            </dd>
+            <dt>Freight</dt>
+            <dd>
+                <kendo-numerictextbox for="@Model.Freight">
+                </kendo-numerictextbox>
+            </dd>
+            <dt>Order Date:</dt>
+            <dd>
+                <kendo-datapicker for="@Model.OrderDate">
+                </kendo-datapicker>
+                <span data-for="OrderDate" class="k-invalid-msg"></span>
+            </dd>
 
+        </dl>
+        <div class="edit-buttons">
+            <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+            <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+        </div>
+    </div>
+    <style>
+        span.k-tooltip {
+            position:absolute;
+            margin:6px;
+        }
+    </style>
+```
+{% endif %}
 ## Enabling the Editing Functionality
 
 The following example demonstrates how to enable the ListView editing.
 
+> In the ListView TagHelper the editing is enabled by the `edit-template` configuration.
+
+```HtmlHelper
     @(Html.Kendo().ListView<ListViewExample.Models.OrderViewModel>()
         .Name("listView")
         .TagName("div")
         .ClientTemplateId("list-view-template")
         .Editable() //<-- Enable editing.
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="listView"
+        tag-name="div"
+        template-id="template"
+        edit-template-id="editTemplate">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="4">
+            <transport>
+                <create url="@Url.Action("Orders_Create", "ListView")"  />
+                <read url="@Url.Action("Orders_Read", "ListView")"  />
+                <update url="@Url.Action("Orders_Update", "ListView")"  />
+                <destroy url="@Url.Action("Orders_Destroy", "ListView" )" />
+            </transport>
+            <schema>
+                <model id="ProductID">
+                    <fields>
+                        <field name="ProductName"></field>
+                        <field name="UnitPrice"></field>
+                        <field name="UnitsInStock"></field>
+                        <field name="Discontinued"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-listview>
+```
+{% endif %}
 
 ## Specifying the Action Methods
 
@@ -174,6 +294,7 @@ The following example demonstrates how to enable the ListView editing.
 
 The following example demonstrates how to specify the action methods which will handle the `Create`, `Update`, and `Destroy` operations.
 
+```HtmlHelper
     @(Html.Kendo().ListView<ListViewExample.Models.OrderViewModel>()
         .Name("listView")
         .TagName("div")
@@ -190,7 +311,30 @@ The following example demonstrates how to specify the action methods which will 
         )
         .Pageable()
     )
-
+```
+{% if site.core %}
+```TagHelper
+    <kendo-listview name="listView"
+        tag-name="div"
+        template-id="template"
+        edit-template-id="editTemplate">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="4">
+            <transport>
+                <create url="@Url.Action("Orders_Create", "ListView")"  />
+                <read url="@Url.Action("Orders_Read", "ListView")"  />
+                <update url="@Url.Action("Orders_Update", "ListView")"  />
+                <destroy url="@Url.Action("Orders_Destroy", "ListView" )" />
+            </transport>
+            <schema>
+                <model id="ProductID"></model>
+            </schema>
+        </datasource>
+        <pageable enabled="true"/>
+    </kendo-listview>
+```
+{% endif %}
+ 
+ 
 For a quick test add a static list and copy and paste it in the controller, or use own service or data base which returns an `IEnumerable` or `IQueriable`.
 
     public class ListViewController : Controller

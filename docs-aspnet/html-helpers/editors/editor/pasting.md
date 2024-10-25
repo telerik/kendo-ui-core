@@ -1,7 +1,7 @@
 ---
 title: Pasting
 page_title: Pasting Content
-description: "Learn how to control the pasting behavior of the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn how to control the pasting behavior of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_pasting_aspnetcore
 position: 4
 ---
@@ -12,44 +12,63 @@ Pasting content from HTML and Microsoft (MS) Word documents to the Editor is ess
 
 ## Basic Concepts
 
-The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#pastecleanupsystemactionkendomvcuifluenteditorpastecleanupsettingsbuilder) options which help control the content that will be pasted.
+The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/kendo.mvc.ui.fluent/editorbuilder#pastecleanupsystemactionkendomvcuifluenteditorpastecleanupsettingsbuilder) options which help control the content that will be pasted.
 
 ## Cleaning HTML on Paste
 
-The following list represents the built-in [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder) options:
+The following list represents the built-in [`PasteCleanup()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder) options:
 
-* [`None()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#nonesystemboolean)&mdash;Disables all options which means that none of the `pasteCleanup` options will be executed. Disabled by default.
-* [`All()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#allsystemboolean)&mdash;Strips all HTML tags and leaves only plain text. Disabled by default.
-* [`KeepNewLines()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#keepnewlines)&mdash;Removes all HTML elements, such as the `all` option, but preserves new lines. Disabled by default.
-* [`Span()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#spansystemboolean)&mdash;Removes the `span` elements from the copied content. Disabled by default.
-* [`Css()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#csssystemboolean)&mdash;Removes the `style` and `class` attributes out of all HTML elements from the copied content. Disabled by default.
-* [`MsTags()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#mstagssystemboolean)&mdash;Strips the MS Word specific tags when pasting content and cleans up extra metadata. Enabled by default.
-* [`MsAllFormatting()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#msallformatting)&mdash;Strips the MS Word specific tags and removes the font-name and font-size decoration derived from MS Word. Disabled by default.
-* [`MsConvertLists()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#msconvertlistssystemboolean)&mdash;Converts MS Word lists to HTML lists. Enabled by default.
-* [`Custom()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#customsystemstring)&mdash;Uses a callback function to create [a custom `pasteCleanup` option](#creating-custom-pastecleanup-functions).
+* [`None()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#nonesystemboolean)&mdash;Disables all options which means that none of the `pasteCleanup` options will be executed. Disabled by default.
+* [`All()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#allsystemboolean)&mdash;Strips all HTML tags and leaves only plain text. Disabled by default.
+* [`KeepNewLines()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#keepnewlines)&mdash;Removes all HTML elements, such as the `all` option, but preserves new lines. Disabled by default.
+* [`Span()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#spansystemboolean)&mdash;Removes the `span` elements from the copied content. Disabled by default.
+* [`Css()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#csssystemboolean)&mdash;Removes the `style` and `class` attributes out of all HTML elements from the copied content. Disabled by default.
+* [`MsTags()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#mstagssystemboolean)&mdash;Strips the MS Word specific tags when pasting content and cleans up extra metadata. Enabled by default.
+* [`MsAllFormatting()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#msallformatting)&mdash;Strips the MS Word specific tags and removes the font-name and font-size decoration derived from MS Word. Disabled by default.
+* [`MsConvertLists()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#msconvertlistssystemboolean)&mdash;Converts MS Word lists to HTML lists. Enabled by default.
+* [`Custom()`](/api/kendo.mvc.ui.fluent/editorpastecleanupsettingsbuilder#customsystemstring)&mdash;uses a callback function to create [a custom `pastecleanup` option](#creating-custom-pastecleanup-functions).
 
 The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `Span()` option, the `span` tags are removed.
 
-```
-<p>
-    Copy this is a paragraph that has some
-    <span style="font-family:Impact, Charcoal, sans-serif;">
-        inline
-    </span>
-    <span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">
-        styles
-    </span>
-    and paste it in the Editor.
-</p>
-<hr />
+```HtmlHelper
+    <p>
+        Copy this is a paragraph that has some
+        <span style="font-family:Impact, Charcoal, sans-serif;">
+            inline
+        </span>
+        <span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">
+            styles
+        </span>
+        and paste it in the Editor.
+    </p>
+    <hr />
 
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .PasteCleanup(p => p
-        .Span()
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .PasteCleanup(p => p
+            .Span()
+        )
     )
-)
 ```
+{% if site.core %}
+```TagHelper
+    <p>
+        Copy this is a paragraph that has some
+        <span style="font-family:Impact, Charcoal, sans-serif;">
+            inline
+        </span>
+        <span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">
+            styles
+        </span>
+        and paste it in the Editor.
+    </p>
+    <hr />
+
+    <kendo-editor name="editor">
+    	<paste-cleanup span="true" />
+    </kendo-editor>
+```
+{% endif %}
 
 ## Pasting from MS Word
 
@@ -61,16 +80,23 @@ The `MsConvertLists()` is an option that enables the end user to successfully pa
 
 The following example demonstrates how to adjust the MS Word specific options. To see the result, paste some content from MS Word.
 
-```
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .PasteCleanup(p => p
-        .MsTags(true)
-        .MsAllFormatting(false)
-        .MsConvertLists(true)
+```HtmlHelper
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .PasteCleanup(p => p
+            .MsTags(true)
+            .MsAllFormatting(false)
+            .MsConvertLists(true)
+        )
     )
-)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+    	<paste-cleanup ms-tags="true" ms-all-formatting="false" ms-convert-lists="true"/>
+    </kendo-editor>
+```
+{% endif %}
 
 ## Creating Custom pasteCleanup Functions
 
@@ -78,23 +104,36 @@ The `Custom()` method is a powerful way to define your own logic to clean the pa
 
 The following example demonstrates a simple logic to strip the `<strong>` tags from the pasted HTML content.
 
-```
-<p>some text with <strong>bold text</strong> inside.</p>
-<hr />
+```HtmlHelper
+    <p>some text with <strong>bold text</strong> inside.</p>
+    <hr />
 
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .PasteCleanup(p => p
-        .Custom("customPasteCleanUp")
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .PasteCleanup(p => p
+            .Custom("customPasteCleanUp")
+        )
     )
-)
 
-<script>
-    function customPasteCleanUp(html) {
-        return html.replace(/<\/?strong[^>]*>/, "");
-    }
-</script>
+    <script>
+        function customPasteCleanUp(html) {
+            return html.replace(/<\/?strong[^>]*>/, "");
+        }
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+    	<paste-cleanup custom="customPasteCleanUp"/>
+    </kendo-editor>
+
+    <script>
+        function customPasteCleanUp(html) {
+            return html.replace(/<\/?strong[^>]*>/, "");
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

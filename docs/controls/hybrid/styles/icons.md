@@ -9,6 +9,10 @@ position: 5
 
 # Hybrid Font Icons
 
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
 > **Important**
 >
 > The current Windows Phone 8 versions do not support web fonts loaded from a local CSS file when used in PhoneGap or HTML5 applications. Unfortunately, there are no known workarounds yet. Use the [images for icons](#custom-icons-on-windows-phone-8) when targeting WP8 applications.
@@ -75,7 +79,7 @@ Using [Fontello](http://fontello.com/) is pretty straightforward&mdash;pick the 
 
 #### Create Icons Manually
 
-The manual approach is considerably more difficult. First, create the desired icons using a vector editing software such as Inkscape or Adobe Illustrator. Export them to the `SVG` format. Consult [these](http://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/) [articles](http://cleversomeday.wordpress.com/2010/02/09/inkscape-dings/) about `SVG` font creation using [Inkscape](https://inkscape.org/en). Import the `SVG` icons in Inkscape and create the `SVG` font icon by icon, assigning them to separate characters. After creating the `SVG` font, convert it to `TTF`/`WOFF` formats, using the [Online Font Converter](https://onlinefontconverter.com/) or other similar service.
+The manual approach is considerably more difficult. First, create the desired icons using a vector editing software such as Inkscape or Adobe Illustrator. Export them to the `SVG` format. Consult [these](https://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/) [articles](https://cleversomeday.com/inkscape-dings/) about `SVG` font creation using [Inkscape](https://inkscape.org/en). Import the `SVG` icons in Inkscape and create the `SVG` font icon by icon, assigning them to separate characters. After creating the `SVG` font, convert it to `TTF`/`WOFF` formats, using the [Online Font Converter](https://onlinefontconverter.com/) or other similar service.
 
 The example below demonstrates how to load the two fonts (`TTF`/`WOFF`) with `@font-face`.
 
@@ -368,7 +372,7 @@ Again, if only several icons should be overridden, specify them with their class
 
 Windows Phone 8.0 has some severe issues that may affect your icons usage. First of all, masks are not supported in any way&mdash;Firefox allows `SVG` mask usage, WebKit/Blink have image masks, although broken in Android. If you plan to have only a web application that runs in the browser, you can go for font icons as they look better across different resolutions and can be colorized. The default Kendo UI hybrid icons work as any icon font such as Font Awesome. Learn more about using font icons and Font Awesome from [this blog post](https://www.telerik.com/blogs/easy-custom-kendo-ui-mobile-icons-with-font-awesome).
 
-However, if you plan to create a hybrid application with PhoneGap or HTML5 template in WP8 SDK, font icons do not work there&mdash;the WebView [does not load them at all](http://stackoverflow.com/questions/14575208/using-css-font-face-in-a-phonegap-windows-phone-8-app). Kendo UI provides image replacements for its default icons, but if you want custom ones, you are left out with only normal images/backgrounds and you need to provide one for normal and another one for the selected state, if they differ. You should also think about the dark and light background themes in WP8, as the Kendo UI hybrid framework automatically supports them in Cordova.
+However, if you plan to create a hybrid application with PhoneGap or HTML5 template in WP8 SDK, font icons do not work there&mdash;the WebView [does not load them at all](https://stackoverflow.com/questions/14575208/using-css-font-face-in-a-phonegap-windows-phone-8-app). Kendo UI provides image replacements for its default icons, but if you want custom ones, you are left out with only normal images/backgrounds and you need to provide one for normal and another one for the selected state, if they differ. You should also think about the dark and light background themes in WP8, as the Kendo UI hybrid framework automatically supports them in Cordova.
 
 The example below demonstrates how the WP8 application icon backgrounds are defined in the Kendo UI hybrid framework.
 

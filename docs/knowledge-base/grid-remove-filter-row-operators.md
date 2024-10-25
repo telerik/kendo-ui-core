@@ -1,8 +1,8 @@
 ---
 title: Remove Operators from the Grid Filter Row
-description: An example on how to remove the drop-down filter operator from the filter row in the Kendo UI Grid.
+description: Learn how to remove the drop-down filter operator from the filter row in the Kendo UI Grid.
 type: how-to
-page_title: Remove Drop-Down Filter Operators When Using Filter Row | Kendo UI Grid for jQuery
+page_title: Remove Drop-Down Filter Operators When Using Filter Row - Kendo UI for jQuery Data Grid
 slug: grid-remove-filter-row-operators
 tags: grid, remove, filter, filter row, row, operator
 ticketid: 1171789
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -28,15 +28,13 @@ How can I remove or hide the drop-down with the filter operators when the row fi
 
 ## Solution
 
-The Grid provides no built-in functionality for disabling the button with the filter operators for all cells in row filtering mode. However, you can use a workaround to hide the button by applying the following CSS rules:
+The Grid provides no built-in functionality for disabling the button with the filter operators for all cells in row filtering mode. However, you can use a workaround to hide the button by applying the following jQuery logic:
 
-```css
-th [role="listbox"]{
-   visibility: hidden;
-}
+```
+  $('td span.k-dropdown-operator').remove();  
 ```
 
-The following example demonstrates the complete implementation of the suggested approach.
+The following example demonstrates the complete implementation of the above approach.
 
 ```dojo
 <div id="grid"></div>
@@ -103,12 +101,8 @@ The following example demonstrates the complete implementation of the suggested 
          format: "{0:MM/dd/yyyy}"
        }]
     });
+
+    $('td span.k-dropdown-operator').remove();
   });
 </script>
-
-<style>
-  th [role="listbox"]{
-    visibility: hidden;
-  }
-</style>
 ```

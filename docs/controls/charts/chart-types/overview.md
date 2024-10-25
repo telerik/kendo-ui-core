@@ -1,11 +1,15 @@
 ---
 title: Overview
-page_title: jQuery Chart Documentation | Chart Types Overview | Kendo UI
+page_title: jQuery Chart Documentation - Chart Types Overview
 description: "Learn the basics when working with the chart types in the Kendo UI for jQuery suite."
 previous_url: /controls/charts/chart-types/chart-types-compatibility
 slug: overview_charttypes_charts
 position: 1
 ---
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
 
 # Chart Types Overview
 
@@ -56,6 +60,7 @@ The following table lists the series types supported by the Chart together with 
 | [Column](https://demos.telerik.com/kendo-ui/bar-charts/column) | 1 |  [field](/api/javascript/dataviz/ui/chart/configuration/series.field), [categoryField](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield), [colorField](/api/javascript/dataviz/ui/chart/configuration/series.colorfield), [errorLowField](/api/javascript/dataviz/ui/chart/configuration/series.errorlowfield), [errorHighField](/api/javascript/dataviz/ui/chart/configuration/series.errorhighfield), [noteTextField](/api/javascript/dataviz/ui/chart/configuration/series.notetextfield) | 1 or more | no | Area, Column, Line, Range Area  |
 | [Donut](https://demos.telerik.com/kendo-ui/donut-charts/index) | 1 | [field](/api/javascript/dataviz/ui/chart/configuration/series.field), [categoryField](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield), [explodeField](/api/javascript/dataviz/ui/chart/configuration/series.explodefield), [colorField](/api/javascript/dataviz/ui/chart/configuration/series.colorfield) | 1 or more | no | Donut |
 | [Funnel](https://demos.telerik.com/kendo-ui/funnel-charts/index) | 1 | [field](/api/javascript/dataviz/ui/chart/configuration/series.field), [categoryField](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield), [colorField](/api/javascript/dataviz/ui/chart/configuration/series.colorfield) | 1 | no | none |
+| [Heatmap](https://demos.telerik.com/kendo-ui/heatmap/index) | 1 | [field](/api/javascript/dataviz/ui/chart/configuration/series.field), [xField](/api/javascript/dataviz/ui/chart/configuration/series.xfield), [yField](/api/javascript/dataviz/ui/chart/configuration/series.yfield) | 1 or more | yes | none |
 | [Horizontal Waterfall](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal) | 1 | [field](/api/javascript/dataviz/ui/chart/configuration/series.field), [summaryField](/api/javascript/dataviz/ui/chart/configuration/series.summaryfield), [categoryField](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield), [colorField](/api/javascript/dataviz/ui/chart/configuration/series.colorfield), [noteTextField](/api/javascript/dataviz/ui/chart/configuration/series.notetextfield) | 1 | no | Vertical Area, Vertical Line, Vertical Range Area |
 | [Line](https://demos.telerik.com/kendo-ui/line-charts/index) | 1 | [field](/api/javascript/dataviz/ui/chart/configuration/series.field), [categoryField](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield), [errorLowField](/api/javascript/dataviz/ui/chart/configuration/series.errorlowfield), [errorHighField](/api/javascript/dataviz/ui/chart/configuration/series.errorhighfield), [noteTextField](/api/javascript/dataviz/ui/chart/configuration/series.notetextfield), [colorField](/api/javascript/dataviz/ui/chart/configuration/series.colorfield) (colors only the markers ) | 1 or more | yes | Area, Column, Bullet, Candlestick, Box Plot, Range Column, Range Area, Waterfall |
 | [Ohlc](https://demos.telerik.com/kendo-ui/financial/index) | 4 | [openField](/api/javascript/dataviz/ui/chart/configuration/series.openfield), [closeField](/api/javascript/dataviz/ui/chart/configuration/series.closefield), [highField](/api/javascript/dataviz/ui/chart/configuration/series.highfield), [lowField](/api/javascript/dataviz/ui/chart/configuration/series.lowfield), [colorField](/api/javascript/dataviz/ui/chart/configuration/series.colorfield), [downColorField](/api/javascript/dataviz/ui/chart/configuration/series.downcolorfield) | 1 or more | no | Area, Line, Ohlc, Range Area |

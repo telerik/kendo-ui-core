@@ -1,6 +1,6 @@
 ---
 title: Create the Customer TreeView
-page_title: Create the Customer TreeView | Kendo UI Sales Hub Tutorial
+page_title: Create the Customer TreeView - Kendo UI Sales Hub Tutorial
 description: "Learn how to create the customer TreeView in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/tutorials/asp.net/saleshub/home-page/kendo-saleshub-customer-treeview
 slug: createcustomtreeview_saleshubtutorial_aspnetmvc
@@ -9,7 +9,7 @@ position: 1
 
 # Create the Customer TreeView
 
-![The customer TreeView in the Kendo UI Sales Hub](images/kendo-saleshub-customer-treeview-screenshot.png)
+![{{ site.product_short }} The customer TreeView in the Kendo UI Sales Hub](images/kendo-saleshub-customer-treeview-screenshot.png)
 
 This article demonstrates how to create a [Kendo TreeView](https://demos.telerik.com/kendo-ui/web/treeview/index.html) on the server side.
 

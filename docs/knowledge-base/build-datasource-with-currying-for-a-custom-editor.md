@@ -1,7 +1,7 @@
 ---
 title: Build Custom dataSource for a Custom Grid Editor
-page_title: Build dataSource for Custom Editor | Kendo UI Grid for jQuery
-description: "An example on how to build custom dataSource of the Kendo UI Grid for jQuery with currying for a custom editor in the widget."
+page_title: Build dataSource for Custom Editor - Kendo UI for jQuery Data Grid
+description: "Learn how to build custom dataSource of the Kendo UI Grid for jQuery with currying for a custom editor in the component."
 previous_url: /controls/data-management/grid/how-to/Editing/build-datasource-with-currying-for-a-custom-editor
 slug: howto_build_custom_datasourcefor_custom_editor_grid
 tags: grid, custom, datasource, editor
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -94,4 +94,4 @@ The following sample demonstrates how to create a custom data source based on th
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

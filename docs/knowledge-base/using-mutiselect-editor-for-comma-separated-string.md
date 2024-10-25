@@ -1,8 +1,8 @@
 ---
 title: Use MultiSelect as CSV Editor
-page_title: Use MultiSelect as CSV Editor | Kendo UI Grid and MultiSelect for jQuery
-description: "Learn how to use the Kendo UI MultiSelect as an editor for comma-separated string fields in the Kendo UI Grid widget."
-previous_url: /controls/data-management/grid/how-to/Editing/using-mutiselect-editor-for-comma-separated-string
+page_title: Use MultiSelect as CSV Editor - Kendo UI Grid and MultiSelect for jQuery
+description: "Learn how to use the Kendo UI MultiSelect as an editor for comma-separated string fields in the Kendo UI Grid component."
+previous_url: /controls/data-management/grid/how-to/Editing/using-mutiselect-editor-for-comma-separated-string, /controls/editors/multiselect/how-to/using-mutiselect-editor-for-csv-grid, /controls/editors/multiselect/how-to/integration/using-mutiselect-editor-for-csv-grid
 slug: howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid
 tags: use, multiselec, csv, editor, grid
 component: grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -97,4 +97,4 @@ The following example demonstrates how to implement custom binding and use it fo
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

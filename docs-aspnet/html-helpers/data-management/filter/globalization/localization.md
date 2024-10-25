@@ -1,7 +1,7 @@
 ---
 title: Localization
 page_title: Localization
-description: "Get started with the Telerik UI Filter HtmlHelper for {{ site.framework }} and learn how to localize its operator texts."
+description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn how to localize its operator texts."
 previous_url: /helpers/data-management/filter/globalization/localization
 slug: htmlhelpers_filter_aspnetcore_localization
 position: 2
@@ -13,7 +13,7 @@ The Filter provides options for defining the text of its filter operators (for e
 
 To localize the messages, set the desired strings in the `.Operators()` and `.Messages()` options. You can also use this feature to [select the available filter operators]({% slug htmlhelpers_filter_aspnetcore_choose_operators %}).
 
-```View
+```HtmlHelper
 <script type="text/x-kendo-template" id="itemTemplate">
     <li>
         <strong>#= Name #</strong>, aged #= Age #, is on vacation: #= IsOnLeave #
@@ -86,7 +86,7 @@ using Kendo.Mvc.UI;
 
 public class FilterController : BaseController
 {
-    public IActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
+    public ActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
     {
         var people = new List<SampleData>() {
              new SampleData()  { Name = "Jane Doe", Age = 25, IsOnLeave = false },
@@ -97,7 +97,7 @@ public class FilterController : BaseController
         return Json(people.ToDataSourceResult(request));
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }
@@ -115,4 +115,7 @@ public class SampleData
 ## See Also
 
 * [Basic Usage of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/index)
+{% if site.core %}
+* [Basic Usage of the Filter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/filter/tag-helper)
+{% endif %}
 * [Server-Side API](/api/filter)

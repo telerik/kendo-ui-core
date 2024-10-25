@@ -2,7 +2,7 @@
 title: Style Hovered Menu Item with CSS
 description: An example demonstrating how to set the background color of a hovered Kendo UI Menu item
 type: how-to
-page_title: Set Background Color of Hovered Menu Item | Kendo UI Menu for jQuery
+page_title: Set Background Color of Hovered Menu Item - Kendo UI Menu for jQuery
 slug: menu-color-background-hover-css
 tags: menu, color, background, hover, css
 ticketid: 1173746
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Menu for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Menu for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -30,12 +30,12 @@ How can I change the background color of a Kendo UI Menu item when a user hovers
 Setting a different [background color](https://www.w3schools.com/css/css_background.asp) for a Kendo UI Menu item can be achieved using CSS:  
 ```CSS
   /*specific menu*/
-  #specificMenu.k-menu .k-state-hover>.k-link{
+  #specificMenu.k-menu .k-hover>.k-link{
     background-color: lightgray;
   }
 
   /*all menus*/
-  .k-menu .k-state-hover>.k-link{
+  .k-menu .k-hover>.k-link{
     color: forestgreen;
     background-color: khaki;
   }
@@ -46,12 +46,12 @@ The following demonstrates two Kendo UI Menus with different styles for hovered 
 ```dojo
     <style>
       /*specific menu*/
-      #computerMenu.k-menu .k-state-hover>.k-link{
+      #computerMenu.k-menu .k-hover>.k-link{
         background-color: pink;
       }
 
       /*all menus*/
-      .k-menu .k-state-hover>.k-link{
+      .k-menu .k-hover>.k-link{
         color: forestgreen;
         background-color: khaki;
       }

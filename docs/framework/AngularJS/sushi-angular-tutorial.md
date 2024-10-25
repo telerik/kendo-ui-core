@@ -1,6 +1,6 @@
 ---
 title: Building the Hybrid Sushi Application
-page_title: Building the Hybrid Sushi Application | Kendo UI Hybrid Components
+page_title: Building the Hybrid Sushi Application - Kendo UI Hybrid Components
 description: "Build the Sushi single-page application by using the Kendo UI hybrid components in AngularJS."
 previous_url: /controls/hybrid/angular/sushi-angular-tutorial, /controls/hybrid/support/angular/tutorials/sushi-angular-tutorial, /AngularJS/tutorials/sushi-angular-tutorial
 slug: buildappswithangular_tutorial_hybridkendoui
@@ -8,6 +8,11 @@ position: 9
 ---
 
 # Building the Hybrid Sushi Application
+
+> Starting with R2 2022, the Kendo UI team officially drops the support for AngularJS 1.x through Kendo UI for jQuery. The AngularJS related files and functionality are removed from the bundles and distribution in R3 SP1 2023. The last version that contains the files is R3 2023.
+> This does not impact [Kendo UI for Angular (2+)](https://www.telerik.com/kendo-angular-ui) suite.
+> If you still need to use AngularJS in your project, check [this article]({% slug angularjs_legacy_files_kendoui %}) that explains how to get the legacy files.
+>For information regarding extended support for AngularJS, please visit [Extended Long Term Support]({% slug supportedversions_kendoui %}#extended-long-term-support)
 
 As of the Kendo UI Q3 2014 release, the suite includes AngularJS directives for some of its Hybrid UI components such as the hybrid mobile Application and View, the SplitView, and the ModalView.
 
@@ -38,13 +43,13 @@ Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In thi
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.412/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.1.412/js/kendo.all.min.js"></script>
     </head>
     <body>
 
@@ -65,13 +70,13 @@ To initialize the hybrid mobile application, add a `kendo-mobile-application` at
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.412/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2022.1.412/js/kendo.all.min.js"></script>
     </head>
     <body kendo-mobile-application ng-app="sushiMobileApp">
 
@@ -186,7 +191,7 @@ Now define a basic template to verify that the data is loaded and displayed corr
 
 **Figure 1: Application displaying a products view**
 
-![products view](image-02.png)
+![Kendo UI for jQuery Products View](angularjs-products-view.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/3).
 
@@ -226,7 +231,7 @@ Reload the application and see the new look. Have in mind that at present the **
 
 **Figure 2: Index view with a layout**
 
-![index view with layout](image-03.png)
+![Kendo UI for jQuery Index View with Layout](angularjs-index-view-layout.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/4).
 
@@ -349,7 +354,7 @@ Last, tell the ListViews to use the new template. Add the `k-template="sushiCart
 
 **Figure 3: A grouped ListView**
 
-![grouped listview](image-04.png)
+![Kendo UI for jQuery Grouped ListView](angularjs-grouped-listview.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/6).
 
@@ -418,7 +423,7 @@ Now if the user clicks on an item, the application navigates to a new View and d
 
 **Figure 4: Product details view**
 
-![product details](image-05.png)
+![Kendo UI for jQuery Product Details](angularjs-product-details.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/7).
 
@@ -464,7 +469,7 @@ Add `cartController` with a dependency to the `sushiCart` and `templates` servic
 
 **Figure 5: An empty cart**
 
-![empty cart](image-06.png)
+![Kendo UI for jQuery Empty Cart](angularjs-empty-cart.png)
 
 For a live preview, click [here](https://dojo.telerik.com/@valchev/exeS/8).
 

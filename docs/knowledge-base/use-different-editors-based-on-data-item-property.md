@@ -1,7 +1,7 @@
 ---
 title: Use Editors Based on dataItem Property
-page_title: Use dataItem Property Editors | Kendo UI Grid for jQuery
-description: "An example on how to use different editors based on the dataItem property of the Kendo UI Grid for jQuery."
+page_title: Use dataItem Property Editors - Kendo UI for jQuery Data Grid
+description: "Learn how to use different editors based on the dataItem property of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-editors-based-on-data-item-property
 slug: howto_use_editors_basedon_dataitem_property_grid
 tags: use, editors, basedon, dataitem, property, grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -94,7 +94,7 @@ The following example demonstrates how to use different editors based on a prope
                var trs = this.tbody.find('tr').each(function(){
                  var item = grid.dataItem($(this));
                  if( item.UnitPrice % 5 == 0) {
-                   $(this).find('.k-grid-edit,.k-grid-delete').hide();
+                   $(this).find('.k-grid-edit-command,.k-grid-remove-command').hide();
                  }
 
                });               
@@ -116,4 +116,4 @@ The following example demonstrates how to use different editors based on a prope
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

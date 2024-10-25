@@ -69,6 +69,7 @@ The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/fr
     });
     dataSource.fetch(function() {
         var event = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.title); // outputs "Bowling tournament"
     });
     </script>
@@ -80,9 +81,17 @@ If the data source is initialized by the scheduler, its [timezone](/api/javascri
 
 The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
-#### Example - configure the data source model model
+#### Example - configure the data source model
 
     <script>
+    // include kendo.timezones.js
+    var version = kendo.version;
+
+    $('<script/>', { 
+        type:'text/javascript', 
+        src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
+    }).appendTo('head');
+    
     var dataSource = new kendo.data.SchedulerDataSource({
         transport: {
             read: {
@@ -125,6 +134,7 @@ The complete list of the supported timezones is available in the [List of IANA t
     });
     dataSource.fetch(function() {
         var event = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(event.start); // outputs converted date based on defined timezone
     });
     </script>

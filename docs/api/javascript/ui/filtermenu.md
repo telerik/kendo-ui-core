@@ -30,11 +30,11 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter-menu").kendoFilterMenu({
       	dataSource: dataSource,
         field: "age",
@@ -45,7 +45,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
             clear: "Clear filter"
         }
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -69,17 +69,17 @@ If set to `true` the filter menu allows the user to input a second criterion.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter-menu").kendoFilterMenu({
       	dataSource: dataSource,
         field: "age",
         extra: false
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -93,7 +93,7 @@ If set to `true` the filter menu allows the user to input a second criterion.
 
 Specifies the field to filter on
 
-#### Example - set the field the filter will be applied on 
+#### Example - set the field the filter will be applied on
 
     <div id="filter-menu">(age filter)</div>
     <br /><br />
@@ -103,16 +103,16 @@ Specifies the field to filter on
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter-menu").kendoFilterMenu({
       	dataSource: dataSource,
         field: "age"
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -136,11 +136,11 @@ The text messages displayed in the filter menu. Use it to customize or localize 
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter-menu").kendoFilterMenu({
       	dataSource: dataSource,
         field: "age",
@@ -151,7 +151,7 @@ The text messages displayed in the filter menu. Use it to customize or localize 
             clear: "Clear filter"
           }
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -161,9 +161,59 @@ The text messages displayed in the filter menu. Use it to customize or localize 
       });
     </script>
 
+### messages.additionalValue `String` *(default: "Additional value")*
+
+The text of the additional filter value editor.
+
+### messages.additionalOperator `String` *(default: "Additional operator")*
+
+The text of the additional filter operator editor.
+
 ### messages.and `String` *(default: "And")*
 
 The text of the option which represents the "and" logical operation.
+
+### messages.buttonTitle `String` *(default: "{0} filter column settings")*
+
+The title of the button that displays the FilterMenu.
+
+> The {0} argument represents the field name
+
+#### Example - set the "buttonTitle" message
+
+    <div id="filter-menu"></div>
+    <br /><br />
+    <div id="grid"></div>
+    <script>
+      var data = [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ];
+
+      var dataSource = new kendo.data.DataSource({
+        data: data
+      });
+
+      $("#filter-menu").kendoFilterMenu({
+        values: [
+            { text: "Beverages", value: 1 },
+            { text: "Food", value: 2 },
+          ],
+        dataSource: dataSource,
+        field: "category",
+        messages: {
+          buttonTitle: "{} Filter Menu"
+        }
+      });
+
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "productName" },
+          { field: "category"}
+        ],
+        dataSource: dataSource
+      });
+    </script>
 
 ### messages.clear `String` *(default: "Clear")*
 
@@ -187,11 +237,11 @@ The text of the information message on the top of the filter menu.
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
         ];
-      
+
       var dataSource = new kendo.data.DataSource({
       	data: data
       });
-      
+
       $("#filter-menu").kendoFilterMenu({
       	dataSource: dataSource,
         field: "age",
@@ -199,7 +249,7 @@ The text of the information message on the top of the filter menu.
           	info: "<h4>Filter by age</h4>"
           }
       });
-      
+
       $("#grid").kendoGrid({
         columns: [
           { field: "name" },
@@ -208,22 +258,6 @@ The text of the information message on the top of the filter menu.
         dataSource: dataSource
       });
 
-### messages.title `String` *(default: "Show items with value that: ")*
-
-The text rendered for the title attribute of the filter menu form.
-
-### messages.additionalValue `String` *(default: "Additional value")*
-
-The text of the additional filter value editor.
-
-### messages.additionalOperator `String` *(default: "Additional operator")*
-
-The text of the additional filter operator editor.
-
-### messages.logic `String` *(default: "Filters logic")*
-
-The text of the filter logic editor.
-
 ### messages.isFalse `String` *(default: "is false")*
 
 The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.
@@ -231,6 +265,10 @@ The text of the radio button for `false` values. Displayed when filtering `Boole
 ### messages.isTrue `String` *(default: "is true")*
 
 The text of the radio button for `true` values. Displayed when filtering `Boolean` fields.
+
+### messages.logic `String` *(default: "Filters logic")*
+
+The text of the filter logic editor.
 
 ### messages.or `String` *(default: "Or")*
 
@@ -270,11 +308,15 @@ The text of the DropDownList displayed in the filter menu for columns whose [val
       $("#grid").kendoGrid({
         columns: [
           { field: "productName" },
-          { field: "category"}        
+          { field: "category"}
         ],
         dataSource: dataSource
       });
     </script>
+
+### messages.title `String` *(default: "Show items with value that: ")*
+
+The text rendered for the title attribute of the filter menu form.
 
 ### operators `Object`
 
@@ -487,7 +529,7 @@ Configured via the [dataSource](/api/javascript/ui/filtermenu#configuration-data
 
 ### field `String`
 
-The field from the model that filtering will be applied on 
+The field from the model that filtering will be applied on
 
 ## Methods
 
@@ -519,6 +561,7 @@ Resets the filter configurations and the dataSource to their initial state.
           }
         },
         change: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log(5)
         }
       });
@@ -533,7 +576,7 @@ Resets the filter configurations and the dataSource to their initial state.
           }
         }
       });
-      
+
       $("button").click(function(){
       	$("#filter-menu").data('kendoFilterMenu').clear();
       });

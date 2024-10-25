@@ -1,8 +1,8 @@
 ---
 title: Access Child Properties in ClientTemplate inside DetailTemplate of Grid
-description: An example on how to access properties from a child Kendo UI Grid in the template of a child Grid.
+description: Learn how to access properties from a child Kendo UI Grid in the template of a child Grid.
 type: how-to
-page_title: Access Child Properties in Nested ClientTemplate | Kendo UI Grid for ASP.NET MVC
+page_title: Access Child Properties in Nested ClientTemplate - Kendo UI Grid for ASP.NET MVC
 slug: grid-child-properties-in-child-template
 tags: grid, child, nested, properties, template, detail, detailtemplate, clienttemplate
 ticketid: 1139311
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
+  <td>Progress® Telerik® UI Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>

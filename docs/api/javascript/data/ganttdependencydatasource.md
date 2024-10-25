@@ -53,6 +53,7 @@ The model configuration of the `GanttDependencyDataSource`. See [`GanttDependenc
     });
     dataSource.fetch(function() {
       var dependency = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dependency.type);
     });
     </script>

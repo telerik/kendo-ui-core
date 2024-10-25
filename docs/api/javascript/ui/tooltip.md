@@ -265,6 +265,8 @@ Specifies if the Tooltip callout will be displayed.
 
 Specifies a selector for the elements within the container which will display the Tooltip.
 
+> It is recommended to avoid using the element's `title` attribute in the selector string, as the tooltip component strongly relies on it.
+
 #### Example - showing a Tooltip only for strong elements in a text
 
     <div id="container">
@@ -550,6 +552,7 @@ Gets the current target of the Tooltip.
         $("#targetButton").click(function() {
           var target = tooltip.target();
           if (target) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(target.attr("id"));
           }
         });
@@ -581,6 +584,7 @@ Fires when an AJAX request for the content completes.
           width: 220,
           height: 280,
           contentLoad: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("content is loaded");
           }
         });
@@ -604,6 +608,7 @@ Fires when an AJAX request for the content completes.
         }).data("kendoTooltip");
 
         tooltip.bind("contentLoad", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("content is loaded");
         });
       });
@@ -623,6 +628,7 @@ Fires when a Tooltip is shown.
       $(document).ready(function() {
         $("#target").kendoTooltip({
           show: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is shown");
           }
         });
@@ -642,6 +648,7 @@ Fires when a Tooltip is shown.
         }).data("kendoTooltip");
 
         tooltip.bind("show", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("tooltip is shown");
         });
       });
@@ -682,6 +689,7 @@ Fires when a Tooltip is hidden.
       $(document).ready(function() {
         $("#target").kendoTooltip({
           hide: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is hidden!");
           }
         });
@@ -700,6 +708,7 @@ Fires when a Tooltip is hidden.
         var tooltip = $("#target").kendoTooltip().data("kendoTooltip");
 
         tooltip.bind("hide", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is hidden!");
         });
       });
@@ -725,6 +734,7 @@ Fires before an AJAX request starts. Note that this event is triggered only when
           width: 220,
           height: 280,
           requestStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("request is started");
           }
         });
@@ -749,6 +759,7 @@ Fires before an AJAX request starts. Note that this event is triggered only when
         }).data("kendoTooltip");
 
         tooltip.bind("requestStart", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("request is started");
         });
       });
@@ -784,6 +795,7 @@ Fires when an AJAX request for content fails.
           width: 220,
           height: 280,
           error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("error");
           }
         });
@@ -808,6 +820,7 @@ Fires when an AJAX request for content fails.
         }).data("kendoTooltip");
 
         tooltip.bind("error", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("error");
         });
       });

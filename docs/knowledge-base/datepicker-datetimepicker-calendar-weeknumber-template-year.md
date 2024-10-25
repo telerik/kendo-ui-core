@@ -1,8 +1,8 @@
 ---
 title: Add Week Numbers and Years to the Calendar Month View
-description: An example on how to add a week number template to the month view of the Kendo UI Calendar.
+description: Learn how to add a week number template to the month view of the Kendo UI Calendar.
 type: how-to
-page_title: Add a Year-to-Week-Number Template | Kendo UI DateTimePicker
+page_title: Add a Year-to-Week-Number Template - Kendo UI DateTimePicker
 slug: datepicker-datetimepicker-calendar-weeknumber-template-year
 tags: datepicker, datetimepicker, weeknumber, template, year, week, number, calendar
 ticketid: 1409114
@@ -14,7 +14,9 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>DatePicker for Progress® Kendo UI®, DateTimePicker for Progress® Kendo UI®, Calendar for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® DatePicker for jQuery</td>
+  <td>Progress® Kendo UI® DateTimePicker for jQuery</td>
+  <td>Progress® Kendo UI® Calendar for jQuery</td>
  </tr>
 
   <td>Product Version</td>

@@ -1,8 +1,8 @@
 ---
 title: Add Cascading DropDownList Editors
-page_title: Cascading DropDownList Editors | Kendo UI Grid for jQuery
-description: "An example on how to add cascading DropDownList editors to the Kendo UI Grid for jQuery."
-previous_url: /controls/data-management/grid/how-to/grid-cascading-dropdown-editors, /controls/data-management/grid/how-to/Editing/cascading-dropdown-editors
+page_title: Implement a Cascading Feature for DropDownList Editors - Kendo UI for jQuery Data Grid
+description: "Learn how to add cascading DropDownList editors to the Kendo UI Grid for jQuery."
+previous_url: /controls/data-management/grid/how-to/grid-cascading-dropdown-editors, /controls/data-management/grid/how-to/Editing/cascading-dropdown-editors, /controls/editors/dropdownlist/how-to/cascading-dropdown-editors-grid, /controls/editors/dropdownlist/how-to/cascade/cascading-dropdown-editors-grid
 slug: howto_add_cascading_dropdown_list_editors_grid
 tags: grid, cascading, dropdownlists, editors
 component: grid
@@ -384,4 +384,4 @@ $(function () {
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

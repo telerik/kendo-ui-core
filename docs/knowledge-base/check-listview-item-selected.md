@@ -1,8 +1,8 @@
 ---
 title: Check If Particular ListView Item Is Selected
-description: An example on how to check if a particular item corresponds to a property of the selected items in the Kendo UI ListView.
+description: Learn how to check if a particular item corresponds to a property of the selected items in the Kendo UI ListView.
 type: how-to
-page_title: Check If Particular Item Is Selected | Kendo UI ListView for jQuery
+page_title: Check If a Specific Item Is Selected - Kendo UI ListView for jQuery
 slug: check-listview-item-selected
 tags: listview, item, selected, check
 ticketid: 1134915
@@ -15,7 +15,7 @@ component: listview
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListView</td>
+  <td>Progress® Kendo UI® ListView for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -46,7 +46,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
       <div class="demo-section k-content wide">
         <button onclick="checked()">Is <b>Queso Cabrales</b> selected?</button>
         <div id="listView"></div>
-        <div id="pager" class="k-pager-wrap"> </div>
+        <div id="pager" class="k-pager"> </div>
       </div>
 
       <div class="box wide">
@@ -143,7 +143,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
           max-width: 100px;
           text-transform: uppercase;
         }
-        .k-pager-wrap
+        .k-pager
         {
           border-top: 0;
         }

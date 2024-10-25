@@ -11,6 +11,12 @@ Represents the Kendo UI DateTimePicker widget. Inherits from [Widget](/api/javas
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
+The adaptive rendering of the DateTimePicker provides consistency to the customer experience on any device by supporting adaptive enhancements such as changes in styling and behavior.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popups. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.
@@ -100,9 +106,13 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'G')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -111,6 +121,53 @@ The duration of the open animation in milliseconds.
     $("#datetimepicker").kendoDateTimePicker({
         ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
     });
+    </script>
+
+### autoAdjust `Boolean` *(default: true)*
+
+If this property is enabled and you have configured `min` and/or `max` values, and the user enters a value that falls out of that range, the value will automatically be set to either the minimum or maximum allowed value. This property has effect only when the `dateInput` of the component is enabled.
+
+#### Example - prevent automatic value adjustments
+
+    <h3>Try to change the year to an earlier one and then focus out the input.</h3>
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        min: new Date(),
+        value: new Date(),
+        dateInput: true,
+        autoAdjust: false
+    });
+    </script>
+
+### autoCorrectParts `Boolean`*(default: true)*
+
+Sets a value that indicates whether to automatically correct the segment when out of range. In order to work, `dateInput` prop should be set to `true`.
+
+#### Example - sets the autoCorrectParts
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        dateInput: true,
+        autoCorrectParts: true
+    });
+    </script>
+
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            componentType: "modern"
+        });
     </script>
 
 ### culture `String`*(default: "en-US")*
@@ -261,6 +318,37 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 > This functionality was added with the Q1 release of 2016.
 
+### endTime `Date`
+
+ If set, specifies the latest time the TimeView can show.
+
+#### Example - specify the start time for the TimeView
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            endTime: new Date(2023,1,3,18,30,0)
+        });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### footer `String`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -301,16 +389,111 @@ For more information on date and time formats please refer to [Date Formatting](
     });
     </script>
 
-### interval `Number`*(default: 30)*
+### label `String|Function|Object` *(default: null)*
 
- Specifies the interval, between values in the popup list, in minutes.
+Adds a label before the datetimepicker. If the datetimepicker has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
 
-#### Example - specify a time interval
+#### Example - create a label from a string
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            label: "Date"
+        })
+    </script>
+
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: function() {
+                    return "Date";
+                }
+        })
+    </script>
+
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: {
+                    content: "Date"
+                }
+        })
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: {
+                    content: function() {
+                        return "Date";
+                    }
+                }
+        })
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/datetimepicker/methods/value) method **does not trigger** the `focusout` event of the datetimepicker.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#datetimepicker").data("kendoDateTimePicker").label.floatingLabel.refresh();`
+
+#### Example - create a floating label
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+                label: {
+                    content: "Date",
+                    floating: true
+                }
+        })
+    </script>
+
+### interval `Number|Object`*(default: "30" or "0" in modern picker)*
+
+Specifies the interval between values in the popup list.
+
+* When the [componentType](api/javascript/ui/datetimepicker/configuration/componenttype) is set to `classic`, the interval is specified in minutes (numeric values).
+* When the [componentType](api/javascript/ui/datetimepicker/configuration/componenttype) is set to `modern`, the interval is specified as an object of hours, minutes and seconds.
+
+#### Example - specify a time interval for the classic component type
 
     <input id="dateTimePicker" />
     <script>
     $("#dateTimePicker").kendoDateTimePicker({
         interval: 15
+    });
+    </script>
+
+#### Example - specify a time interval for the modern component type
+
+    <input id="dateTimePicker" />
+    <script>
+    $("#dateTimePicker").kendoDateTimePicker({
+        componentType: "modern",
+        interval: {
+            hour: 2,
+            minute: 10,
+            second: 15
+        }
     });
     </script>
 
@@ -326,6 +509,94 @@ For more information on date and time formats please refer to [Date Formatting](
         max: new Date(2013, 0, 1, 22, 0, 0)
     });
     </script>
+
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.weekColumnHeader `String` *(default: "")*
+
+Allows customization of the week column header text in the Calendar. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.dateInput `Object`
+
+The messages that DateInput uses.  Use it to customize or localize the placeholders of each date/time part.
+
+#### Example - customize column menu messages
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages:{
+            dateInput:{
+                "year": "year",
+                "month": "month",
+                "day": "day",
+                "weekday": "day of the week",
+                "hour": "hours",
+                "minute": "minutes",
+                "second": "seconds",
+                "dayperiod": "AM/PM"
+            }
+        }
+    });
+    </script>
+
+### messages.dateInput.year `String` *(default: "year")*
+
+The placeholder for the years part.
+
+### messages.dateInput.month `String` *(default: "month")*
+
+The placeholder for the months part.
+
+### messages.dateInput.day `String` *(default: "day")*
+
+The placeholder for the day of the month part.
+
+### messages.dateInput.weekday `String` *(default: "day of the week")*
+
+The placeholder for the day of the week part.
+
+### messages.dateInput.hour `String` *(default: "hours")*
+
+The placeholder for the hours part.
+
+### messages.dateInput.minute `String` *(default: "minutes")*
+
+The placeholder for the minutes part.
+
+### messages.dateInput.second `String` *(default: "seconds")*
+
+The placeholder for the seconds part.
+
+### messages.dateInput.dayperiod `String` *(default: "AM/PM")*
+
+The placeholder for the AM/PM part.
 
 ### min `Date`*(default: Date(1900, 0, 1))*
 
@@ -551,7 +822,44 @@ If set to `true` a week of the year will be shown on the left side of the calend
     <script>
     $("#datetimepicker").kendoDateTimePicker({
         format: "yyyy/MM/dd hh:mm tt",
-        parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
+        parseFormats: ["MMMM yyyy", "HH:mm tt"] //format also will be added to parseFormats
+    });
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets the rounded value
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        size: "large"
     });
     </script>
 
@@ -571,6 +879,19 @@ If set to `true` a week of the year will be shown on the left side of the calend
     <script>
         $("#datetimepicker").kendoDateTimePicker({
             start: "year"
+        });
+    </script>
+
+### startTime `Date`
+
+ If set, specifies the earliest time the TimeView can show.
+
+#### Example - specify the start time for the TimeView
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            startTime: new Date(2023,1,3,8,30,0)
         });
     </script>
 
@@ -603,18 +924,17 @@ If set to `true` a week of the year will be shown on the left side of the calend
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the [`configuration options`](/api/javascript/ui/datetimepicker#configuration) of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <input id="datetimepicker" />
     <script>
     $("#datetimepicker").kendoDateTimePicker();
 
-    var datetimepicker = $("#datetimepicker").data("datetimepicker");
-
+    var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
     var options = datetimepicker.options;
-    <script>
+    </script>
 
 ## Methods
 
@@ -764,6 +1084,7 @@ The maximum time value to set for a DateTimePicker, expressed as a Date object o
 
     var max = datetimepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -802,6 +1123,7 @@ The minimum time value to set for a DateTimePicker, expressed as a Date object o
 
     var min = datetimepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -857,6 +1179,10 @@ Available views are "time" and "date".
 
 ### setOptions
 
+Sets the options of the DateTimePicker. Use this method if you want to enable/disable a particular feature/option.
+
+When setOptions is called, the DateTimePicker widget will be destroyed and recreated.
+
 #### Parameters
 
 Changes the initial DateTimePicker configuration.
@@ -865,7 +1191,7 @@ Changes the initial DateTimePicker configuration.
 
 The new configuration options.
 
-#### Example
+#### Example - update the minimum date that the calendar can show
 
     <input id="datetimepicker" />
     <script>
@@ -935,7 +1261,7 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 `Date` The time value of a DateTimePicker.
 
 > * This method **does not trigger** [change](/api/javascript/ui/datetimepicker/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="datetimepicker" />
@@ -958,6 +1284,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
 
     var value = datetimepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -993,6 +1320,7 @@ The widget instance which fired the event.
     $("#datetimepicker").kendoDateTimePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datetimepicker
         }
     });
@@ -1008,6 +1336,7 @@ The widget instance which fired the event.
 
     datetimepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datetimepicker
     });
     </script>

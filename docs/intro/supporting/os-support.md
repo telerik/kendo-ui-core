@@ -1,6 +1,6 @@
 ---
 title: Operating System Support
-page_title: Operating System Support | Support and Distribution | Kendo UI for jQuery
+page_title: Operating System Support - Support and Distribution 
 description: "Get started with Kendo UI for jQuery and learn which are the operating systems that are supported by the framework components."
 slug: ossupport_kendo
 position: 2
@@ -8,7 +8,7 @@ position: 2
 
 # Operating System Support
 
-The [Kendo UI widgets and framework components](https://demos.telerik.com/kendo-ui/) are designed to support all major operating systems.
+The [Kendo UI components and framework utilities](https://demos.telerik.com/kendo-ui/) are designed to support all major operating systems.
 
 > * Kendo UI supports hybrid mouse and touch-screen devices, for example, Internet Explorer 10, Chrome, and Firefox on Windows 8.
 > * To allow the browsers to run scripts, enable JavaScript on all of them.
@@ -17,12 +17,10 @@ The following table lists the operating systems and their versions that are comp
 
 | PLATFORM          | VERSION               |
 | :---------------- | :-------------------- |
-| Windows           | XP or later           |
-| Windows Server    | Server 2003 or later  |
-| OS X              | 10.5 or later         |
-| Android           | 2.3 or later          |
-| iOS               | 6.0 or later          |
-| Windows Phone     | 8.0 or later          |
+| Windows           | The two latest versions at the time of the release. |
+| Mac OS            | The two latest versions at the time of the release. |
+| Android           | The two latest versions at the time of the release. |
+| iOS               | The two latest versions at the time of the release. |
 
 ## See Also
 

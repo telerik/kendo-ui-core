@@ -101,12 +101,34 @@
             assert.isOk(!window.options.isMaximized);
         });
 
+        it("close updates scroll position when window is maximized", function() {
+            var container = $("<div style='height:2000px' />").appendTo(Mocha.fixture.height(2010)),
+                document = $(Mocha.fixture[0].ownerDocument),
+                window = createWindow({ visible: false }),
+                scrollPosition = 200;
+
+            document.scrollTop(0);
+            window.setOptions({});
+            window.open().maximize();
+            window.close();
+
+            document.scrollTop(scrollPosition);
+            window.setOptions({});
+            window.open().maximize();
+            window.close();
+
+            assert.equal(
+                document.scrollTop(),
+                scrollPosition
+            );
+        });
+
         it("document vertical scroll position is preserved on maximize and restore", function() {
             var window = createWindow();
 
             var div = $("<div style='height:2000px' />").appendTo(
-                    Mocha.fixture.height(2010)
-                ),
+                Mocha.fixture.height(2010)
+            ),
                 scrollPosition = 300;
 
             $(Mocha.fixture[0].ownerDocument).scrollTop(scrollPosition);
@@ -125,8 +147,8 @@
             var window = createWindow();
 
             var div = $("<div style='width:5000px' />").appendTo(
-                    Mocha.fixture.width(5020)
-                ),
+                Mocha.fixture.width(5020)
+            ),
                 scrollPosition = 1300;
 
             // Mocha.fixture's document is initially with overflow:hidden
@@ -154,8 +176,8 @@
 
         it("destroying a modal window moves overlay before previous window", function() {
             var dialog = createWindow({
-                    modal: true
-                }),
+                modal: true
+            }),
                 overlappingDialog = createWindow({
                     modal: true
                 });
@@ -175,8 +197,8 @@
 
         it("closing a modal window moves overlay before previous window", function() {
             var dialog = createWindow({
-                    modal: true
-                }),
+                modal: true
+            }),
                 overlappingDialog = createWindow({
                     modal: true
                 });
@@ -185,23 +207,31 @@
             assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
         });
 
-        it("closing a modal window moves overlay before previous Kendo Dialog too", function() {
-            var dialog = createDialog({
-                    modal: true
-                }),
+        it("closing a modal window removes overlay if previous modal has containment enabled", function() {
+            $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(Mocha.fixture);
+            var dialog = createWindow({
+                modal: true,
+                draggable: {
+                    containment: "#container"
+                },
+                animation: false
+            }),
                 overlappingDialog = createWindow({
-                    modal: true
+                    modal: true,
+                    animation: false
                 });
 
             overlappingDialog.close();
-            assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
+            dialog.close();
+
+            assert.equal($(".k-overlay").length, 0);
         });
 
         it("destroying a modal window removes overlay if other open window has different appendTo", function() {
             var dialog = createWindow({
-                    modal: true,
-                    appendTo: Mocha.fixture
-                }),
+                modal: true,
+                appendTo: Mocha.fixture
+            }),
                 overlappingDialog = createWindow({
                     modal: true,
                     appendTo: document.body
@@ -226,7 +256,7 @@
                 }
             });
 
-            dialog.wrapper.find(".k-i-close").click();
+            dialog.wrapper.find(".k-i-x,.k-svg-i-x").click();
         });
 
         it("closing a modal window moves overlay below previous window", function(done) {
@@ -345,6 +375,17 @@
             });
         });
 
+        it("refresh() sets `content` option", function() {
+            var dialog = createWindow({
+                content: "http://example.com/"
+            });
+
+            dialog.refresh({ url: "test" });
+            dialog.refresh();
+
+            assert.equal(dialog.options.content.url, "test");
+        });
+
         it("refresh() uses `content` object combined with URL", function(done) {
             $.mockjax(function(settings) {
                 return {};
@@ -384,8 +425,8 @@
             });
 
             var dialog = createWindow({
-                    content: "foo"
-                }),
+                content: "foo"
+            }),
                 url = "http://example.com/";
 
             dialog.refresh(url);
@@ -500,10 +541,22 @@
             assert.isOk(secondWindow.element.find("> .k-overlay").length);
         });
 
+        it("toFront() appends only one overlay element to dom", function() {
+            var firstWindow = createWindow(),
+                secondWindow = createWindow({
+                    content: "http://google.com/"
+                });
+
+            firstWindow.toFront();
+            firstWindow.toFront();
+
+            assert.equal(secondWindow.element.find("> .k-overlay").length, 1);
+        });
+
         it("toFront() removes overlay on foremost window", function() {
             var firstWindow = createWindow({
-                    content: "http://www.telerik.com/"
-                }),
+                content: "http://www.telerik.com/"
+            }),
                 secondWindow = createWindow({
                     content: "http://google.com/"
                 });
@@ -521,7 +574,7 @@
 
             assert.isOk(
                 parseInt(firstWindow1.wrapper.css("zIndex")) <
-                    parseInt($(".k-overlay").css("zIndex"))
+                parseInt($(".k-overlay").css("zIndex"))
             );
         });
 
@@ -556,6 +609,33 @@
             dialog.open();
 
             assert.isOk(dialog.options.visible);
+        });
+
+        it("open() adds inline-flex display to wrapper", function() {
+            var dialog = createWindow({
+                visible: false,
+                animation: false
+            });
+
+            dialog.open();
+
+            assert.equal(dialog.wrapper[0].style['display'], "inline-flex");
+        });
+
+        it("close() does not throw error when dialog is present", function() {
+            var dialog = createDialog({
+                animation: false
+            });
+            var windowWidget = createWindow({
+                animation: false
+            });
+
+            dialog.open();
+            windowWidget.open();
+
+            assert.doesNotThrow(function() {
+                windowWidget.close();
+            });
         });
 
         it("close() sets options.visible", function() {
@@ -599,13 +679,13 @@
                 actions: ["Pin"]
             });
 
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 0);
 
             dialog.pin();
 
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 0);
         });
 
         it("pin() substracts the browser scroll position from the wrapper's top and left styles", function() {
@@ -630,8 +710,8 @@
 
             dialog.pin();
 
-            finalTop = parseInt(dialog.wrapper.css("top"), 10);
-            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+            var finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            var finalLeft = parseInt(dialog.wrapper.css("left"), 10);
 
             assert.equal(finalTop, initialTop - $(window).scrollTop());
             assert.equal(finalLeft, initialLeft - $(window).scrollLeft());
@@ -639,7 +719,7 @@
             spacerDiv.remove();
         });
 
-        it("pin() itself should not subtract scroll without center or unpin where called", function(){
+        it("pin() itself should not subtract scroll without center or unpin where called", function() {
             var spacerDiv = $(
                 "<div style='width:6000px;height:3000px'>&nbsp;</div>"
             ).appendTo(Mocha.fixture);
@@ -659,8 +739,8 @@
 
             dialog.pin();
 
-            finalTop = parseInt(dialog.wrapper.css("top"), 10);
-            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+            var finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            var finalLeft = parseInt(dialog.wrapper.css("left"), 10);
 
             assert.equal(finalTop, initialTop);
             assert.equal(finalLeft, initialLeft);
@@ -713,13 +793,13 @@
                 pinned: true
             });
 
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 0);
 
             dialog.unpin();
 
-            assert.equal(dialog.wrapper.find(".k-i-pin").length, 1);
-            assert.equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-pin,.k-svg-i-pin").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-unpin,.k-svg-i-unpin").length, 0);
         });
 
         it("unpin() adds the browser scroll position to the wrapper's top and left styles", function() {
@@ -745,8 +825,8 @@
 
             dialog.unpin();
 
-            finalTop = parseInt(dialog.wrapper.css("top"), 10);
-            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+            var finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            var finalLeft = parseInt(dialog.wrapper.css("left"), 10);
 
             assert.equal(finalTop, initialTop + $(window).scrollTop());
             assert.equal(finalLeft, initialLeft + $(window).scrollLeft());
@@ -857,7 +937,7 @@
 
             dialog.maximize();
 
-            assert.equal(dialog.wrapper.find(".k-i-pin:visible").length, 0);
+            assert.equal(dialog.wrapper.find(".k-i-pin:visible,.k-svg-i-pin:visible").length, 0);
         });
 
         it("maximize() hides the maximize icon", function() {
@@ -870,7 +950,7 @@
             dialog.maximize();
 
             assert.equal(
-                dialog.wrapper.find(".k-i-window-maximize:visible").length,
+                dialog.wrapper.find(".k-i-window:visible,.k-svg-i-window:visible").length,
                 0
             );
         });
@@ -885,7 +965,7 @@
             dialog.maximize();
 
             assert.equal(
-                dialog.wrapper.find(".k-i-window-restore:visible").length,
+                dialog.wrapper.find(".k-i-window-restore:visible,.k-svg-i-window-restore:visible").length,
                 1
             );
         });
@@ -912,7 +992,7 @@
             dialog.maximize();
             dialog.restore();
 
-            assert.equal(dialog.wrapper.find(".k-i-pin:visible").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-pin:visible,.k-svg-i-pin:visible").length, 1);
         });
 
         it("restore() removes the k-window-maximized class", function() {
@@ -1268,7 +1348,7 @@
                 actions: ["Minimize", "Close"]
             });
 
-            assert.equal(dialog.wrapper.find(".k-i-window-minimize").length, 1);
+            assert.equal(dialog.wrapper.find(".k-i-window-minimize,.k-svg-i-window-minimize").length, 1);
         });
 
         it("toFront does not scroll page when windows are pinned", function() {
@@ -1474,6 +1554,45 @@
 
             assert.equal($("body").css("overflow"), "scroll");
             assert.equal($("html").css("overflow"), "scroll");
+        });
+
+        it("get properly modals", function() {
+            var dialog1 = createWindow({
+                modal: true,
+                title: 'First Window'
+            });
+
+            var dialog2 = createWindow({
+                modal: true,
+                title: 'Second Window'
+            });
+
+            assert.equal(dialog1._modals().length, 2);
+            assert.equal(dialog2._modals().length, 2);
+        });
+
+        it("get properly modals in containment scenario", function() {
+            var div = $('<div id="containement" style="height:500px;width:500px">');
+            div.appendTo(Mocha.fixture);
+
+            var dialog1 = createWindow({
+                modal: true,
+                title: 'First Window',
+                draggable: {
+                    containment: '#containement'
+                }
+            });
+
+            var dialog2 = createWindow({
+                modal: true,
+                title: 'Second Window',
+                draggable: {
+                    containment: '#containement'
+                }
+            });
+
+            assert.equal(dialog1._modals().length, 2);
+            assert.equal(dialog2._modals().length, 2);
         });
     });
 })();

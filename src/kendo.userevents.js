@@ -1,8 +1,6 @@
-(function(f, define){
-    define([ "./kendo.core" ], f);
-})(function(){
+import "./kendo.core.js";
 
-var __meta__ = { // jshint ignore:line
+export const __meta__ = {
     id: "userevents",
     name: "User Events",
     category: "framework",
@@ -10,12 +8,12 @@ var __meta__ = { // jshint ignore:line
     hidden: true
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
         Class = kendo.Class,
         Observable = kendo.Observable,
-        now = $.now,
+        now = Date.now,
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
@@ -62,7 +60,7 @@ var __meta__ = { // jshint ignore:line
                y: (y1 + y2) / 2
             },
 
-            distance: Math.sqrt(dx*dx + dy*dy)
+            distance: Math.sqrt(dx * dx + dy * dy)
         };
     }
 
@@ -76,7 +74,7 @@ var __meta__ = { // jshint ignore:line
 
         if (e.api) {
             touches.push({
-                id: 2,  // hardcoded ID for API call;
+                id: 2, // hardcoded ID for API call;
                 event: e,
                 target: e.target,
                 currentTarget: e.target,
@@ -184,7 +182,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         press: function() {
-            this._holdTimeout = setTimeout($.proxy(this, "_hold"), this.userEvents.minHold);
+            this._holdTimeout = setTimeout(this._hold.bind(this), this.userEvents.minHold);
             this._trigger(PRESS, this.pressEvent);
         },
 
@@ -305,7 +303,7 @@ var __meta__ = { // jshint ignore:line
                     event: jQueryEvent
                 };
 
-            if(that.userEvents.notify(name, data)) {
+            if (that.userEvents.notify(name, data)) {
                 jQueryEvent.preventDefault();
             }
         },
@@ -323,7 +321,7 @@ var __meta__ = { // jshint ignore:line
             idx = 0,
             length = downEvents.length;
 
-        for(; idx < length; idx ++) {
+        for (; idx < length; idx ++) {
             callback(downEvents[idx]);
         }
     }
@@ -355,6 +353,7 @@ var __meta__ = { // jshint ignore:line
                 // the touch events lock to the element anyway, so no need for the global setting
                 surface: options.global && ENABLE_GLOBAL_SURFACE ? $(element[0].ownerDocument.documentElement) : $(options.surface || element),
                 stopPropagation: options.stopPropagation,
+                preventDefault: options.preventDefault,
                 pressed: false
             });
 
@@ -386,7 +385,7 @@ var __meta__ = { // jshint ignore:line
 
             if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0],
-                    preventIfMovingProxy = $.proxy(that.preventIfMoving, that);
+                    preventIfMovingProxy = that.preventIfMoving.bind(that);
 
                 withEachUpEvent(function(eventName) {
                     surfaceElement.addEventListener(eventName, preventIfMovingProxy, true);
@@ -459,7 +458,7 @@ var __meta__ = { // jshint ignore:line
                 touches = that.touches;
 
             if (this._isMultiTouch()) {
-                switch(eventName) {
+                switch (eventName) {
                     case MOVE:
                         eventName = GESTURECHANGE;
                         break;
@@ -471,10 +470,10 @@ var __meta__ = { // jshint ignore:line
                         break;
                 }
 
-                extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
+                extend(data, { touches: touches }, touchDelta(touches[0], touches[1]));
             }
 
-            return this.trigger(eventName, extend(data, {type: eventName}));
+            return this.trigger(eventName, extend(data, { type: eventName }));
         },
 
         // API
@@ -527,13 +526,17 @@ var __meta__ = { // jshint ignore:line
                 touch,
                 which = e.which;
 
-            if ((which && which > 1) || (that._maxTouchesReached())){
+            if ((which && which > 1) || (that._maxTouchesReached())) {
                 return;
             }
 
             UserEvents.current = null;
 
             that.currentTarget = e.currentTarget;
+
+            if (that.preventDefault) {
+                e.preventDefault();
+            }
 
             if (that.stopPropagation) {
                 e.stopPropagation();
@@ -640,6 +643,213 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
+    var ClickMoveClick = Observable.extend({
+        init: function(element, options) {
+            var that = this,
+                filter,
+                ns = kendo.guid();
+
+            options = options || {};
+            filter = that.filter = options.filter;
+            that.touches = [];
+            that._maxTouches = 1;
+            that.eventNS = ns;
+            that._downStarted = 0;
+
+            element = $(element).handler(that);
+            Observable.fn.init.call(that);
+
+            extend(that, {
+                element: element,
+                // the touch events lock to the element anyway, so no need for the global setting
+                surface: options.global && ENABLE_GLOBAL_SURFACE ? $(element[0].ownerDocument.documentElement) : $(options.surface || element),
+                stopPropagation: options.stopPropagation,
+                pressed: false
+            });
+
+            that.surface.handler(that)
+                .on(kendo.applyEventMap("move", ns), "_move")
+                .on(kendo.applyEventMap("cancel up", ns), "cancel");
+
+            element.on(kendo.applyEventMap("down", ns), filter, "_down")
+                .on(kendo.applyEventMap("up", ns), filter, "_up");
+
+            that.bind([
+                START,
+                MOVE,
+                END,
+                HOLD,
+                CANCEL,
+                SELECT
+            ], options);
+        },
+
+        _down: function(e) {
+            if (e.which && e.which > 1) {
+                this.cancel();
+            } else {
+                this._downStarted = new Date().getTime();
+                this._downTarget = e.target;
+            }
+        },
+
+        _up: function(e) {
+            var currentMilestone = new Date().getTime(),
+                currentTarget = e.target;
+
+            if ((!e.which || e.which === 1) &&
+                currentMilestone < this._downStarted + CLICK_DELAY &&
+                currentTarget === this._downTarget) {
+                    if (this.touches && this.touches.length > 0) {
+                        this._end(e);
+                    } else {
+                        this._start(e);
+                    }
+
+                    this._preventCancel = true;
+            } else {
+                this.cancel();
+            }
+
+            this._downStarted = 0;
+            this._downTarget = null;
+        },
+
+        destroy: function() {
+            var that = this;
+
+            if (that._destroyed) {
+                return;
+            }
+
+            that._destroyed = true;
+
+            that.element.kendoDestroy(that.eventNS);
+            that.surface.kendoDestroy(that.eventNS);
+            that.element.removeData("handler");
+            that.surface.removeData("handler");
+            that._disposeAll();
+
+            that.unbind();
+            delete that.surface;
+            delete that.element;
+            delete that.currentTarget;
+        },
+
+        capture: function() {
+            ClickMoveClick.current = this;
+        },
+
+        cancel: function() {
+            if (this._preventCancel) {
+                this._preventCancel = false;
+                return;
+            } else if (this.touches && this.touches.length > 0) {
+                this._disposeAll();
+                this.trigger(CANCEL);
+            }
+        },
+
+        notify: function(eventName, data) {
+            data.clickMoveClick = true;
+            return this.trigger(eventName, extend(data, { type: eventName }));
+        },
+
+        _maxTouchesReached: function() {
+            return this.touches.length >= this._maxTouches;
+        },
+
+        _disposeAll: function() {
+            var touches = this.touches;
+
+            while (touches.length > 0) {
+                touches.pop().dispose();
+            }
+        },
+
+        _start: function(e) {
+            var that = this,
+                idx = 0,
+                filter = that.filter,
+                target,
+                touches = getTouches(e),
+                length = touches.length,
+                touch,
+                which = e.which;
+
+            if ((which && which > 1) || (that._maxTouchesReached())) {
+                return;
+            }
+
+            ClickMoveClick.current = null;
+
+            that.currentTarget = e.currentTarget;
+
+            if (that.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            for (; idx < length; idx ++) {
+                if (that._maxTouchesReached()) {
+                    break;
+                }
+
+                touch = touches[idx];
+
+                if (filter) {
+                    target = $(touch.currentTarget);
+                } else {
+                    target = that.element;
+                }
+
+                if (!target.length) {
+                    continue;
+                }
+
+                touch = new Touch(that, target, touch);
+                that.touches.push(touch);
+                touch.press();
+                touch._start(touch);
+            }
+        },
+
+        _move: function(e) {
+            this._eachTouch("move", e);
+        },
+
+        _end: function(e) {
+            this._eachTouch("move", e);
+            this._eachTouch("end", e);
+        },
+
+        _eachTouch: function(methodName, e) {
+            var that = this,
+                dict = {},
+                touches = getTouches(e),
+                activeTouches = that.touches,
+                idx,
+                touch,
+                touchInfo,
+                matchingTouch;
+
+            for (idx = 0; idx < activeTouches.length; idx ++) {
+                touch = activeTouches[idx];
+                dict[touch.id] = touch;
+            }
+
+            for (idx = 0; idx < touches.length; idx ++) {
+                touchInfo = touches[idx];
+                matchingTouch = dict[touchInfo.id];
+
+                if (matchingTouch) {
+                    matchingTouch.x.move(touchInfo.location);
+                    matchingTouch.y.move(touchInfo.location);
+                    matchingTouch[methodName](touchInfo);
+                }
+            }
+        }
+    });
+
     UserEvents.defaultThreshold = function(value) {
         DEFAULT_THRESHOLD = value;
     };
@@ -651,8 +861,7 @@ var __meta__ = { // jshint ignore:line
     kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
     kendo.UserEvents = UserEvents;
+    kendo.ClickMoveClick = ClickMoveClick;
  })(window.kendo.jQuery);
+export default kendo;
 
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

@@ -8,9 +8,9 @@ slug: howto_usegroupheadertemplate_foreignkeycolumn_gridaspnetmv
 
 # Use GroupHeaderTemplate with ForeignKeyColumn
 
-To see the example, refer to the project on how to [use the `GropuHeaderTemplate` with the `ForeignKeyColumn` configuration](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-foreingkeycolumn-groupheadertemplate) in a Kendo UI Grid in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use the `GroupHeaderTemplate` with the `ForeignKeyColumn` configuration](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-foreingkeycolumn-groupheadertemplate) in a Kendo UI Grid in ASP.NET MVC applications.
 
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/gridbuilder)

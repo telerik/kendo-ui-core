@@ -1,14 +1,18 @@
 ---
 title: Overview
-page_title: Drawing Overview | Kendo UI Drawing Library
+page_title: Drawing Overview - Kendo UI Drawing Library
 description: "Learn about the Kendo UI Drawing API, the cross-browser vector graphics library of the framework."
 slug: overview_kendoui_drawingapi
-position: 1
+position: 0
 ---
 
-# Drawing Overview
+# {{ site.product }} Drawing Overview
 
 The [Kendo UI Drawing library (Drawing API)](https://demos.telerik.com/kendo-ui/drawing/index) is a cross-browser vector graphics library and provides a simple object model for building and manipulating visual scenes.
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-overview.html %}
+{% endif %}
 
 The Kendo UI Drawing library:
 - Serves as a foundation of and as an extension point for the Kendo UI widgets which render data visualization such as Charts and Diagrams.
@@ -19,14 +23,25 @@ To build a scene, you can create drawing elements such as curves, images, and te
 
 **Figure 1: Drawing library components**
 
-![Drawing API Components](images/components.png)
+![Kendo UI for jQuery Drawing API Components](images/components.png)
+
+## Functionality and Features
+
+* [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})&mdash;The Drawing library enables you turn HTML elements into a drawing.
+* [Exporting Drawings to Images]({% slug exportpng_kendoui_drawingapi %})&mdash;The Drawing library supports the export of drawings to bitmap images in a PNG file format.
+* [Exporting Drawings to SVG]({% slug exportingtosvg_drawing %})&mdash;The Drawing library supports the export of drawings to a Scalable Vector Graphics (SVG) document.
+* [PDF Output]({% slug pdfderawingexport_drawingapi %})&mdash;The Drawing library provides configuration options for handling and exporting content in PDF.
+* [Limitations and Browser Support]({% slug supportedbrowsers_drawingapi %})&mdash;Learn about the limitations of the Drawing library.
+
+## Next Steps
+
+* [Getting Started with the Drawing Library]({% slug getting_started_kendoui_drawing %})
 
 ## See Also
 
-* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
-* [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})
-* [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
-* [Exporting Drawings to Images]({% slug exportpng_kendoui_drawingapi %})
-* [Exporting Drawings to SVG]({% slug exportingtosvg_drawing %})
-* [PDF Output]({% slug pdfderawingexport_drawingapi %})
-* [Limitations and Browser Support for Kendo UI Drawing API]({% slug supportedbrowsers_drawingapi %})
+* [jQuery Forums](https://www.telerik.com/forums/kendo-ui)
+* [jQuery Blog](https://www.telerik.com/blogs/tag/jquery)
+* [jQuery Videos](https://www.telerik.com/videos/kendo-jquery-ui)
+* [jQuery Roadmap](https://www.telerik.com/support/whats-new/kendo-ui/roadmap)
+* [jQuery Pricing](https://www.telerik.com/purchase/kendo-ui)
+* [jQuery Training](https://learn.telerik.com/learn/course/external/view/elearning/30/kendo-ui-for-jquery-with-javascript)

@@ -2,7 +2,7 @@
 title: Checkbox Selection Is Not Working for Custom Grids
 description: I cannot enable the checkbox selection in the Kendo UI Grid and use it in combination with the kendo.ui.Grid class.
 type: troubleshooting
-page_title: Checkbox Selection Is Not Working | Kendo UI Grid for jQuery
+page_title: Checkbox Selection Is Not Working - Kendo UI for jQuery Data Grid
 slug: fix-the-checkbox-selection-with-custom-grid
 previous_url: /knowledge-base/fix_the_checkbox_selection_with_custom_grid
 tags: grid, selectiong, checkbox
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>

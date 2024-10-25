@@ -14,6 +14,10 @@ Represents the Kendo UI AutoComplete widget. Inherits from [Widget](/api/javascr
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -250,6 +254,25 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="autocomplete" />
+
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String` *(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
@@ -313,6 +336,105 @@ The widget instance.
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: "Fruits"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: function() {
+          return "Fruits";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: { content: "Fruits" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: function() {
+            return "Fruits";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/autocomplete/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#autocomplete").data("kendoAutoComplete").label.floatingLabel.refresh();`
+
+#### Example - create a label from a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      label: {
+        content: "Fruits",
+        floating: true
+      }
+    });
+    </script>
+
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
@@ -351,7 +473,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     });
     </script>
 
-### highlightFirst `Boolean` *(default: true)*
+### highlightFirst `Boolean` *(default: false)*
 
 If set to `true` the first suggestion will be automatically highlighted.
 
@@ -517,6 +639,138 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     });
     </script>
 
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      });
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content.
+
+#### Example - specify prefix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        prefixOptions: {
+          icon: "search"
+        }
+      })
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        prefixOptions: {
+          template: () => `${kendo.ui.icon("search")}`,
+          separator: false
+        }
+      })
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        size: "large"
+      });
+    </script>
+
 ### separator `String|Array` *(default: "")*
 
 The character used to separate multiple values. Empty by default.
@@ -547,6 +801,87 @@ The character used to separate multiple values. Empty by default.
         data: ["One", "Two"]
       }
     });
+    </script>
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content.
+
+#### Example - specify suffix adornment icon
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        suffixOptions: {
+          icon: "search"
+        }
+      })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`
+        }
+      })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <input id="autocomplete" />
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+        dataTextField: "name",
+        suffixOptions: {
+          template: () => `${kendo.ui.icon("search")}`,
+          separator: false
+        }
+      })
     </script>
 
 ### suggest `Boolean` *(default: false)*
@@ -919,6 +1254,7 @@ An object, which holds the options of the widget.
     var element = autocomplete.element;
     var options = autocomplete.options;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(options);
     </script>
 
@@ -934,6 +1270,7 @@ A jQuery object of the drop-down list element.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     var list = autocomplete.list;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(list);
     </script>
 
@@ -949,6 +1286,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     var ul = autocomplete.ul;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ul);
     </script>
 
@@ -996,6 +1334,7 @@ The zero-based index of of the data item.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     // Search for items starting with "A" - will open the suggestion popup and show "Apples"
     autocomplete.search("A");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(autocomplete.dataItem(0)); // Displays "Apples" in the browser console
     </script>
 
@@ -1128,7 +1467,7 @@ Selects the item provided as an argument and updates the value of the widget.
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
 > **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="autocomplete" />
@@ -1211,7 +1550,7 @@ The value to set.
 Gets or sets the value of the widget.
 
 > **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+This can affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="autocomplete" />
@@ -1242,6 +1581,7 @@ The value to set.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.value("Apples");
     var value = autocomplete.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value); // Displays "Apples"
     </script>
 
@@ -1251,7 +1591,7 @@ The value to set.
 
 Fired when the value of the widget is changed by the user.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 > **Important:** The event is not fired when the value of the widget is changed from code.
 
@@ -1268,6 +1608,7 @@ The widget instance which fired the event.
     $("#autocomplete").kendoAutoComplete({
       change: function(e) {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value);
         // Use the value of the widget
       }
@@ -1291,7 +1632,7 @@ The widget instance which fired the event.
 
 Fired when the suggestion popup of the widget is closed by the user.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1329,7 +1670,7 @@ The widget instance which fired the event.
 
 Fired when the widget is bound to data from its data source.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1367,7 +1708,7 @@ The widget instance which fired the event.
 
 Fired when the widget is about to filter the data source.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1390,6 +1731,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           //get filter descriptor
           var filter = e.filter;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(filter);
 
           // handle the event
@@ -1404,6 +1746,7 @@ The filter descriptor that will be used to filter the data source.
     function autocomplete_filtering(e) {
       //get filter descriptor
       var filter = e.filter;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(filter);
 
       // handle the event
@@ -1436,7 +1779,7 @@ The filter descriptor that will be used to filter the data source.
 
 Fired when the suggestion popup of the widget is opened by the user.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available through the keyword `this`) will be set to the widget instance.
 
 #### Event Data
 
@@ -1499,6 +1842,7 @@ The widget instance which fired the event.
       select: function(e) {
         var item = e.item;
         var text = item.text();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(text);
         // Use the selected item or its text
       }

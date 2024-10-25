@@ -1,10 +1,10 @@
 ---
 title: Columns
 page_title: Columns
-description: "Set the column width and other settings in the  MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Set the column width and other settings in the  MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/columns
 slug: columns_multicolumncombobox_aspnetcore
-position: 3
+position: 4
 ---
 
 # Columns
@@ -18,6 +18,7 @@ The columns also allow you to [set their `columns.width`](https://docs.telerik.c
 
 You can also define which `dataItem` field will be populated and also set a title, a template, and a `headerTemplate`.
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Columns(columns =>
@@ -32,6 +33,28 @@ You can also define which `dataItem` field will be populated and also set a titl
             .ServerFiltering(true)
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-multicolumncombobox  name="multicolumncombobox">
+        <multicolumncombobox-columns>
+            <column field="ContactName" title="Contact Name" width="200px">
+            </column>
+            <column field="ContactTitle" title="Contact Title" width="200px">
+            </column>
+            <column field="CompanyName" title="Company Name" width="200px">
+            </column>
+            <column field="Country" title="Country" width="200px">
+            </column>
+        </multicolumncombobox-columns>
+        <datasource server-filtering="true">
+            <transport>
+                <read url="@Url.Action("Products_Read", "MultiColumnComboBox")" />
+            </transport>
+        </datasource>
+    </kendo-multicolumncombobox>
+```
+{% endif %}
 
 ## See Also
 

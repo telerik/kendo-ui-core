@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -187,6 +188,28 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "No records to display",
+  "loading": "Loading...",
+  "requestFailed": "Request failed.",
+  "retry": "Retry",
+  "commands": {
+      "edit": "Редагувати",
+      "update": "Оновити",
+      "canceledit": "Cancel",
+      "create": "Додати",
+      "createchild": "Add child record",
+      "destroy": "Видалити",
+      "excel": "Export to Excel",
+      "pdf": "Export to PDF"
+  }
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {
@@ -273,7 +296,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "По правому краю",
   "outdent": "Зменшити відступ",
   "strikethrough": "Закреслений",
-  "styles": "Стиль",
+  "style": "Стиль",
   "subscript": "Subscript",
   "superscript": "Superscript",
   "underline": "Підкреслений",
@@ -378,17 +401,21 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 if (kendo.ui.Upload) {
 kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
-  "cancel": "Cancel",
-  "dropFilesHere": "drop files here to upload",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading...",
-  "remove": "Remove",
-  "retry": "Retry",
-  "select": "Select...",
-  "statusFailed": "failed",
-  "statusUploaded": "uploaded",
-  "statusUploading": "uploading",
-  "uploadSelectedFiles": "Upload files"
+  "select": "Вибрати файли...",
+  "cancel": "Скасувати",
+  "retry": "Повторити",
+  "remove": "Видалити",
+  "clearSelectedFiles": "Очистити",
+  "uploadSelectedFiles": "Завантажити файли",
+  "dropFilesHere": "Перегніть сюди файли для завантаження",
+  "headerStatusPaused": "Призупинено",
+  "headerStatusUploading": "Завантаження...",
+  "headerStatusUploaded": "Завантажено",
+  "uploadSuccess": "Файл(и) успішно завантажено.",
+  "uploadFail": "Помилка при завантаженні.",
+  "invalidMaxFileSize": "Розмір файлу занадто великий.",
+  "invalidMinFileSize": "Розмір файлу занадто малий.",
+  "invalidFileExtension": "Недозволений тип файлу."
 });
 }
 

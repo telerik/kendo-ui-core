@@ -31,5 +31,5 @@ The reason for this behavior is that the inline mode renders a DOM element which
 
 * [Basic Usage of the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor)
 * [Using the API of the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/api)
-* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/editorbuilder)
 * [Editor Server-Side API](/api/editor)

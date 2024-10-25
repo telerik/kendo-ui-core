@@ -24,7 +24,12 @@ You can specify any options that are supported by Kendo UI widgets in `element` 
 
 The following example demonstrates an important detail&mdash;the `'Increment'` and `'Decrement'` strings are quoted inside the attribute values. Without the single quote inside they are interpreted as variable names and AngularJS-Kendo UI will look for the `$scope.Increment` and `$scope.Decrement` variables. The omission of the quotes is a common error&mdash;that is why AngularJS-Kendo UI emit a warning in the JS console whenever such variables are not found.
 
-```dojo
+``` 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'">
     </div>
@@ -38,7 +43,12 @@ The following example demonstrates an important detail&mdash;the `'Increment'` a
 
 The following example demonstrates how to specify options from the `controller` in AngularJS projects.
 
-```dojo
+``` 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="textUp" k-down-arrow-text="textDown">
     </div>
@@ -54,7 +64,12 @@ The following example demonstrates how to specify options from the `controller` 
 
 The following example demonstrates how to use declarative attributes for the `array` and `object` configuration options.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
         <textarea kendo-editor
                   k-tools="[
@@ -79,7 +94,12 @@ The following example demonstrates how to store the whole widget configuration i
 
 > If any of the defined attribute options are `undefined`, the widget will not initialize. For example, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined`, it will not initialize.
 
-```dojo
+```
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.1/default/default-ocean-blue.css">
+
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-date-picker k-options="monthPickerConfig">
     </div>

@@ -1,7 +1,7 @@
 ---
 title: Use Checkbox Column Templates and Edit
-page_title:  Checkbox Column Templates | Kendo UI Grid for jQuery
-description: "An example on how to use checkbox column templates and perform editing."
+page_title:  Checkbox Column Templates - Kendo UI for jQuery Data Grid
+description: "Learn how to use checkbox column templates and perform editing."
 previous_url: /kendo-uimvc/web/grid/how-to/Templates/grid-with-checkbox-column, /controls/data-management/grid/how-to/Templates/grid-with-checkbox-column
 slug: howto_use_checkbox_column_templateand_edit_grid
 tags: grid, use, checkbox, column, templates, perform, edit
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -42,6 +42,11 @@ The following example demonstrates how to use checkboxes in the Grid column temp
 For more information on how to apply batch editing with a bound Boolean column, check the article about [adding model-bound and batch-editable checkbox columns to the Grid](/knowledge-base/grid-bound-checkbox-editable-column).
 
 ```dojo
+  <style>
+    .k-grid-content td {
+      position:relative;
+    }
+  </style>
    <div id="grid"></div>
     <script>
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
@@ -94,7 +99,7 @@ For more information on how to apply batch editing with a bound Boolean column, 
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
           { field: "UnitsInStock", title: "Units In Stock", width: 110 },
-          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110 },
+          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox k-checkbox-md k-rounded-md" />', title: "Discontinued", width: 110, attributes: {class: "k-text-center"} },
           { command: "destroy", title: "&nbsp;", width: 100 }],
         editable: true
       });
@@ -120,4 +125,4 @@ For more information on how to apply batch editing with a bound Boolean column, 
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

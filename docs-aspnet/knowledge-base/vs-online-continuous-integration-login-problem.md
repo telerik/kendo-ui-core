@@ -51,3 +51,29 @@ To avoid the issue, [create your own NuGet package](https://docs.microsoft.com/e
 ### Workaround #3
 
 The reason for this problem might be in the NuGet Server. If so, it will resolve on its own.
+
+## More {{ site.framework }} Resources
+
+* [{{ site.product }} Documentation]({%slug overview_aspnetmvc6_aspnetmvc%})
+
+* [{{ site.product }} Demos](https://demos.telerik.com/{{ site.platform }})
+
+{% if site.core %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-core-ui/dropdownlist)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+{% else %}
+* [{{ site.product }} Product Page](https://www.telerik.com/aspnet-mvc)
+
+* [{{ site.product }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-mvc)
+{% endif %}
+
+## See Also
+
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

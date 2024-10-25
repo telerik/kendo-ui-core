@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ListView JSP Tag
+page_title: Overview - ListView JSP Tag
 description: "Get started with the ListView JSP tag in Kendo UI."
 slug: overview_listview_uiforjsp
 position: 1

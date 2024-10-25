@@ -51,7 +51,7 @@
         }
     });
 
-    describe("VirtualList without valueMapper: ", function () {
+    describe("VirtualList without valueMapper: ", function() {
         beforeEach(function() {
             container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
@@ -76,7 +76,7 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#",
+                template: ({ text }) => kendo.htmlEncode(text),
                 dataValueField: "value",
                 selectable: true,
                 mapValueTo: "dataItem",
@@ -84,7 +84,7 @@
                     var result = [];
 
                     if (o.value.length) {
-                        o.value.forEach(function(value){
+                        o.value.forEach(function(value) {
                             result.push({
                                 value: value,
                                 text: "Item " + value
@@ -218,7 +218,7 @@
     //             virtualList.bind("change", function() {
     //                 assert.equal(this.selectedDataItems().length, 1);
     //                 assert.equal(this.select().length, 1);
-    //                 assert.equal(this.items().filter(".k-state-selected").length, 1, "Only one item is visibly selected");
+    //                 assert.equal(this.items().filter(".k-selected").length, 1, "Only one item is visibly selected");
     //                 asyncDone();
     //             });
 
@@ -240,7 +240,7 @@
             virtualList.bind("change", function() {
                 assert.equal(this.selectedDataItems().length, 1);
                 assert.equal(this.select().length, 1);
-                assert.equal(this.items().filter(".k-state-selected").length, 1, "Only one item is visibly selected");
+                assert.equal(this.items().filter(".k-selected").length, 1, "Only one item is visibly selected");
                 done();
             });
 

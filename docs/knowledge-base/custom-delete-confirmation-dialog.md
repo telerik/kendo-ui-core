@@ -1,7 +1,7 @@
 ---
 title: Customize Confirmation Window
-page_title: Customize Confirmation Window | Kendo UI Grid for jQuery
-description: "An example on how to customize a confirmation dialog in the Kendo UI Grid for jQuery."
+page_title: Customize Confirmation Window - Kendo UI for jQuery Data Grid
+description: "Learn how to customize a confirmation dialog in the Kendo UI Grid for jQuery."
 previous_url: /web/grid/how-to/Editing/grid-custom-delete-confirmation-window, /controls/data-management/grid/how-to/Editing/custom-delete-confirmation-dialog
 slug: howto_customize_delete_confirmation_dialog_grid
 tags: grid, customize, confirmation, window
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -44,8 +44,8 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 <script type="text/x-kendo-template" id="windowTemplate">
     <p> Delete <strong>#= ProductName #</strong> ? </p>
     <p> We have #= UnitsInStock # units in stock. </p>
-    <button class="k-button" id="yesButton">Yes</button>
-    <button class="k-button" id="noButton"> No</button>
+    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="yesButton"><span class="k-button-text">Yes</span></button>
+    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">No</span></button>
 </script>
 
 <script>
@@ -112,7 +112,7 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
             { field: "Discontinued"},
             { command: [
                 {name: "edit"},
-                {name: "Delete",  
+                {name: "Delete",
                     click: function(e){  //add a click event listener on the delete button
                         e.preventDefault(); //prevent page scroll reset
                         var tr = $(e.target).closest("tr"); //get the row for deletion
@@ -128,7 +128,7 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
                         $("#noButton").click(function(){
                             window.close();
                         })
-                    }                              
+                    }
                 }
                 ]}],
             editable: {
@@ -141,4 +141,4 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

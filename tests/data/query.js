@@ -472,7 +472,7 @@
         });
 
         it("sorting nested objects", function() {
-            var data = [{ foo: { age: 1 } }, { foo: { age: 2 } }]
+            var data = [{ foo: { age: 1 } }, { foo: { age: 2 } }];
 
             var result = new Query(data).sort({ field: "foo.age", dir: "desc" }).toArray();
 
@@ -693,41 +693,41 @@
 
         it("filter with language special characters and accentFoldingFiltering enabled", function() {
             var data = [{ name: "KIZILTOPRAK" }];
-            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "k\u0131z" }], accentFoldingFiltering: "tr-TR", logic: "and"}).toArray();
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "k\u0131z" }], accentFoldingFiltering: "tr-TR", logic: "and" }).toArray();
             assert.equal(result.length, 1);
         });
 
         it("filter with standart characters and accentFoldingFiltering enabled should not match language special characters", function() {
             var data = [{ name: "KIZILTOPRAK" }];
-            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "kiz" }], accentFoldingFiltering: "tr-TR", logic: "and"}).toArray();
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "kiz" }], accentFoldingFiltering: "tr-TR", logic: "and" }).toArray();
             assert.equal(result.length, 0);
         });
 
         it("filter with language special characters and accentFoldingFiltering disabled", function() {
             var data = [{ name: "KIZILTOPRAK" }];
-            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "k\u0131z" }], logic: "and"}).toArray();
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "k\u0131z" }], logic: "and" }).toArray();
             assert.equal(result.length, 0);
         });
 
         it("filter with language special characters, with equal operator", function() {
-            var  data = [
-                {  name: "KIZILTOPRAK" },
-                {  name: "KARŞIYAKA" },
-                {  name: "İSTANBUL" }
+            var data = [
+                { name: "KIZILTOPRAK" },
+                { name: "KARŞIYAKA" },
+                { name: "İSTANBUL" }
             ];
 
-            var result = new Query(data).filter({ filters: [{ field: "name", operator: "eq", value: "k\u0131z\u0131ltoprak" }], logic: "and", accentFoldingFiltering: "tr-TR"}).toArray();
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "eq", value: "k\u0131z\u0131ltoprak" }], logic: "and", accentFoldingFiltering: "tr-TR" }).toArray();
             assert.equal(result.length, 1);
         });
 
         it("filter with language special characters, with not equal operator", function() {
-            var  data = [
-                {  name: "KIZILTOPRAK" },
-                {  name: "KARŞIYAKA" },
-                {  name: "İSTANBUL" }
+            var data = [
+                { name: "KIZILTOPRAK" },
+                { name: "KARŞIYAKA" },
+                { name: "İSTANBUL" }
             ];
 
-            var result = new Query(data).filter({ filters: [{ field: "name", operator: "neq", value: "k\u0131z\u0131ltoprak" }], logic: "and", accentFoldingFiltering: "tr-TR"}).toArray();
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "neq", value: "k\u0131z\u0131ltoprak" }], logic: "and", accentFoldingFiltering: "tr-TR" }).toArray();
             assert.equal(result.length, 2);
         });
 
@@ -1445,7 +1445,7 @@
             assert.equal(result[0].items[2].id, 4);
 
             assert.equal(result[1].items.length, 1);
-            assert.equal(result[1].items[0].id, 2)
+            assert.equal(result[1].items[0].id, 2);
         });
 
         it("sort.dir is taken into account when custom sort.compare is used with multiple groups", function() {
@@ -1526,26 +1526,26 @@
             assert.equal(result[0].items[2].id, 4);
 
             assert.equal(result[1].items.length, 1);
-            assert.equal(result[1].items[0].id, 2)
+            assert.equal(result[1].items[0].id, 2);
         });
 
         it("grouping with custom compare function does not sort the items on the first page", function() {
             var data = [
-                 { id: 1,  text: "item1",  group: "group1" },
+                 { id: 1, text: "item1", group: "group1" },
 
-                 { id: 2,  text: "item2",  group: "group2" },
+                 { id: 2, text: "item2", group: "group2" },
                  { id: 23, text: "item23", group: "group2" },
                  { id: 21, text: "item21", group: "group2" },
                  { id: 22, text: "item22", group: "group2" },
 
-                 { id: 30, text: "item3",  group: "group1" },
-                 { id: 4,  text: "item4",  group: "group1" },
+                 { id: 30, text: "item3", group: "group1" },
+                 { id: 4, text: "item4", group: "group1" },
 
-                 { id: 60, text: "item6",  group: "group3" },
-                 { id: 5,  text: "item5",  group: "group3" },
-                 { id: 90, text: "item9",  group: "group3" },
-                 { id: 7,  text: "item7",  group: "group3" },
-                 { id: 8,  text: "item8",  group: "group3" }
+                 { id: 60, text: "item6", group: "group3" },
+                 { id: 5, text: "item5", group: "group3" },
+                 { id: 90, text: "item9", group: "group3" },
+                 { id: 7, text: "item7", group: "group3" },
+                 { id: 8, text: "item8", group: "group3" }
             ];
 
             var result = Query.process(data, {
@@ -1563,10 +1563,10 @@
                 "value": "group3",
                 "items": [
                     { "id": 60, "text": "item6", "group": "group3" },
-                    { "id": 5,  "text": "item5", "group": "group3" },
+                    { "id": 5, "text": "item5", "group": "group3" },
                     { "id": 90, "text": "item9", "group": "group3" },
-                    { "id": 7,  "text": "item7", "group": "group3" },
-                    { "id": 8,  "text": "item8", "group": "group3" },
+                    { "id": 7, "text": "item7", "group": "group3" },
+                    { "id": 8, "text": "item8", "group": "group3" },
                 ],
                 "hasSubgroups": false,
                 "aggregates": {}
@@ -1583,21 +1583,21 @@
 
         it("grouping with a custom compare function does not sort the items on the second page", function() {
             var data = [
-                 { id: 1,  text: "item1",  group: "group1" },
+                 { id: 1, text: "item1", group: "group1" },
 
-                 { id: 2,  text: "item2",  group: "group2" },
+                 { id: 2, text: "item2", group: "group2" },
                  { id: 23, text: "item23", group: "group2" },
                  { id: 21, text: "item21", group: "group2" },
                  { id: 22, text: "item22", group: "group2" },
 
-                 { id: 30, text: "item3",  group: "group1" },
-                 { id: 4,  text: "item4",  group: "group1" },
+                 { id: 30, text: "item3", group: "group1" },
+                 { id: 4, text: "item4", group: "group1" },
 
-                 { id: 60, text: "item6",  group: "group3" },
-                 { id: 5,  text: "item5",  group: "group3" },
-                 { id: 90, text: "item9",  group: "group3" },
-                 { id: 7,  text: "item7",  group: "group3" },
-                 { id: 8,  text: "item8",  group: "group3" }
+                 { id: 60, text: "item6", group: "group3" },
+                 { id: 5, text: "item5", group: "group3" },
+                 { id: 90, text: "item9", group: "group3" },
+                 { id: 7, text: "item7", group: "group3" },
+                 { id: 8, text: "item8", group: "group3" }
             ];
 
             var result = Query.process(data, {
@@ -1624,9 +1624,9 @@
                 "field": "group",
                 "value": "group1",
                 "items": [
-                    { "id": 1,  "text": "item1", "group": "group1" },
+                    { "id": 1, "text": "item1", "group": "group1" },
                     { "id": 30, "text": "item3", "group": "group1" },
-                    { "id": 4,  "text": "item4", "group": "group1" }
+                    { "id": 4, "text": "item4", "group": "group1" }
                 ],
                 "hasSubgroups": false,
                 "aggregates": {}
@@ -1635,21 +1635,21 @@
 
         it("grouping with a custom compare function applies sorting when sort descriptor is defined on the first page", function() {
             var data = [
-                 { id: 1,  text: "item1",  group: "group1" },
+                 { id: 1, text: "item1", group: "group1" },
 
                  { id: 23, text: "item23", group: "group2" },
-                 { id: 2,  text: "item2",  group: "group2" },
+                 { id: 2, text: "item2", group: "group2" },
                  { id: 21, text: "item21", group: "group2" },
                  { id: 22, text: "item22", group: "group2" },
 
-                 { id: 30, text: "item3",  group: "group1" },
-                 { id: 4,  text: "item4",  group: "group1" },
+                 { id: 30, text: "item3", group: "group1" },
+                 { id: 4, text: "item4", group: "group1" },
 
-                 { id: 60, text: "item6",  group: "group3" },
-                 { id: 5,  text: "item5",  group: "group3" },
-                 { id: 90, text: "item9",  group: "group3" },
-                 { id: 7,  text: "item7",  group: "group3" },
-                 { id: 8,  text: "item8",  group: "group3" }
+                 { id: 60, text: "item6", group: "group3" },
+                 { id: 5, text: "item5", group: "group3" },
+                 { id: 90, text: "item9", group: "group3" },
+                 { id: 7, text: "item7", group: "group3" },
+                 { id: 8, text: "item8", group: "group3" }
             ];
 
             var result = Query.process(data, {
@@ -1670,9 +1670,9 @@
                 "field": "group",
                 "value": "group3",
                 "items": [
-                    { "id": 5,  "text": "item5", "group": "group3" },
-                    { "id": 7,  "text": "item7", "group": "group3" },
-                    { "id": 8,  "text": "item8", "group": "group3" },
+                    { "id": 5, "text": "item5", "group": "group3" },
+                    { "id": 7, "text": "item7", "group": "group3" },
+                    { "id": 8, "text": "item8", "group": "group3" },
                     { "id": 60, "text": "item6", "group": "group3" },
                     { "id": 90, "text": "item9", "group": "group3" },
                 ],
@@ -1682,7 +1682,7 @@
                 "field": "group",
                 "value": "group2",
                 "items": [
-                    { "id": 2,  "text": "item2",  "group": "group2" },
+                    { "id": 2, "text": "item2", "group": "group2" },
                     { "id": 21, "text": "item21", "group": "group2" }
                 ],
                 "hasSubgroups": false,
@@ -1692,21 +1692,21 @@
 
         it("grouping with a custom compare function applies sorting when sort descriptor is defined on the second page", function() {
             var data = [
-                 { id: 1,  text: "item1",  group: "group1" },
+                 { id: 1, text: "item1", group: "group1" },
 
-                 { id: 2,  text: "item2",  group: "group2" },
+                 { id: 2, text: "item2", group: "group2" },
                  { id: 23, text: "item23", group: "group2" },
                  { id: 21, text: "item21", group: "group2" },
                  { id: 22, text: "item22", group: "group2" },
 
-                 { id: 30, text: "item3",  group: "group1" },
-                 { id: 4,  text: "item4",  group: "group1" },
+                 { id: 30, text: "item3", group: "group1" },
+                 { id: 4, text: "item4", group: "group1" },
 
-                 { id: 60, text: "item6",  group: "group3" },
-                 { id: 5,  text: "item5",  group: "group3" },
-                 { id: 90, text: "item9",  group: "group3" },
-                 { id: 7,  text: "item7",  group: "group3" },
-                 { id: 8,  text: "item8",  group: "group3" }
+                 { id: 60, text: "item6", group: "group3" },
+                 { id: 5, text: "item5", group: "group3" },
+                 { id: 90, text: "item9", group: "group3" },
+                 { id: 7, text: "item7", group: "group3" },
+                 { id: 8, text: "item8", group: "group3" }
             ];
 
             var result = Query.process(data, {
@@ -1737,8 +1737,8 @@
                 "field": "group",
                 "value": "group1",
                 "items": [
-                    { "id": 1,  "text": "item1", "group": "group1" },
-                    { "id": 4,  "text": "item4", "group": "group1" },
+                    { "id": 1, "text": "item1", "group": "group1" },
+                    { "id": 4, "text": "item4", "group": "group1" },
                     { "id": 30, "text": "item3", "group": "group1" }
                 ],
                 "hasSubgroups": false,
@@ -1748,10 +1748,10 @@
 
         it("group aggregates are calculated with custom compare function without paging", function() {
             var data = [
-                 { id: 2,  text: "item2", group: "group2" },
+                 { id: 2, text: "item2", group: "group2" },
                  { id: 21, text: "item21", group: "group2" },
 
-                 { id: 1,  text: "item1", group: "group1" },
+                 { id: 1, text: "item1", group: "group1" },
                  { id: 11, text: "item11", group: "group1" },
                  { id: 12, text: "item12", group: "group1" },
             ];
@@ -1771,7 +1771,7 @@
                 "field": "group",
                 "value": "group2",
                 "items": [
-                    { "id": 2,  "text": "item2",  "group": "group2" },
+                    { "id": 2, "text": "item2", "group": "group2" },
                     { "id": 21, "text": "item21", "group": "group2" },
                 ],
                 "hasSubgroups": false,
@@ -1784,7 +1784,7 @@
                 "field": "group",
                 "value": "group1",
                 "items": [
-                    { "id": 1,  "text": "item1",  "group": "group1" },
+                    { "id": 1, "text": "item1", "group": "group1" },
                     { "id": 11, "text": "item11", "group": "group1" },
                     { "id": 12, "text": "item12", "group": "group1" }
                 ],
@@ -1794,7 +1794,7 @@
                         "count": 3
                     }
                 }
-            }])
+            }]);
         });
 
         it("group aggregates are calculated with custom compare function with paging", function() {
@@ -1845,7 +1845,7 @@
                         "count": 3
                     }
                 }
-            }])
+            }]);
         });
 
         it("groupby returns ungroup collection if no descriptors are provided", function() {

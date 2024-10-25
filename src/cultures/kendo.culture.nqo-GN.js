@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Guinea Francs",
+                name: "Guinean Franc",
                 abbr: "GNF",
                 pattern: ["n- $","$ n"],
                 decimals: 2,
@@ -59,5 +59,5 @@
                 firstDay: 6
             }
         }
-    }
-})(this);
+    };
+})();

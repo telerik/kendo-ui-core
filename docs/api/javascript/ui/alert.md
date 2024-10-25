@@ -21,7 +21,7 @@ Defines the text of the labels that are shown within the alert dialog. Used prim
     <script>
     $("#alert").kendoAlert({
       messages:{
-        okText: "OK"
+        okText: "Custom OK text"
       }
     }).data("kendoAlert").open();
     </script>
@@ -36,7 +36,7 @@ The title of the OK button.
     <script>
     $("#alert").kendoAlert({
       messages:{
-        okText: "OK"
+        okText: "Custom OK text"
       }
-    }).data("kendoAlert").open();;
+    }).data("kendoAlert").open();
     </script>

@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery Charts Documentation | StockChart Data Binding | Kendo UI
+page_title: jQuery Charts Documentation - StockChart Data Binding
 description: "Get started with the jQuery StockChart by Kendo UI and learn how to bind it to data."
 slug: databinding_kendoui_stockcharts
 position: 2
@@ -181,8 +181,8 @@ The following example demonstrates a StockChart in the master and navigator data
                 field: "High"
             },
             select: {
-                from: "2009/02/05",
-                to: "2011/10/07"
+                from: "2017/02/05",
+                to: "2019/10/07"
             }
         }
     });

@@ -102,14 +102,6 @@
             assert.equal(dialog.wrapper.children(KDIALOGTITLEBAR).length, 0);
         });
 
-        it("set title to false adds k-dialog-titleles class to wrapper", function() {
-            var dialog = createDialog({ title: "Title" });
-
-            dialog.title(false);
-
-            assert.isOk(dialog.wrapper.hasClass(KTITLELESS));
-        });
-
         it("content gets content", function() {
             assert.equal(createDialog().content(), "dialog content");
         });
@@ -117,7 +109,7 @@
         it("content sets content", function() {
             var dialog = createDialog(),
                 oldContent = dialog.content(),
-                contentElement = $(".k-content", dialog.wrapper);
+                contentElement = $(".k-window-content", dialog.wrapper);
 
             dialog.content("Content is the new content!");
 
@@ -145,12 +137,12 @@
             assert.equal(dialog.options.visible, false);
         });
 
-        it("close removes the modal wrapper", function() {
+        it("hides to overlay and wrapper", function() {
             var dialog = createDialog({});
 
             dialog.close();
 
-            assert.equal($(".k-overlay").length, 0);
+            assert.isNotOk($(".k-overlay").closest(".k-dialog-wrapper").is(":visible"));
         });
 
         it("close does not destroy other dialog overlay", function() {
@@ -159,29 +151,20 @@
 
             dialog2.close();
 
-            assert.equal($(".k-overlay").length, 1);
+            assert.equal($(".k-overlay").length, 2);
             assert.isOk($(".k-overlay").is(":visible"));
         });
 
-        it("closing dialog moves overlay before previous modal dialog", function() {
+        it("destroy removes overlay element", function() {
             var dialog1 = createDialog();
             var dialog2 = createDialog();
 
-            dialog2.close();
+            dialog2.destroy();
+            dialog1.destroy();
 
-            assert.equal($(".k-overlay").length, 1);
-            assert.isOk(dialog1.wrapper.prev("div").is(".k-overlay"));
+            assert.equal($(".k-overlay").length, 0);
         });
 
-        it("closing dialog moves overlay before previous modal dialog", function() {
-            var dialog1 = createWindow({ modal: true });
-            var dialog2 = createDialog();
-
-            dialog2.close();
-
-            assert.equal($(".k-overlay").length, 1);
-            assert.isOk(dialog1.wrapper.prev("div").is(".k-overlay"));
-        });
 
         it("closing dialog from close handler", function() {
             var dialog = createDialog({
@@ -222,14 +205,14 @@
             assert.isOk(dialog.wrapper.is(":visible"));
         });
 
-        it("open adds only one modal overlay", function() {
+        it("open adds only one modal overlay in each dialog", function() {
             var dialog = createDialog({ modal: true, visible: false });
             var dialog1 = createDialog({ modal: true, visible: false });
 
             dialog.open();
             dialog1.open();
 
-            assert.isOk($(".k-overlay").length === 1);
+            assert.isOk($(".k-overlay").length === 2);
         });
 
         it("open adds only is added after the last opened dialog", function() {
@@ -250,8 +233,8 @@
             dialog1.open();
             dialog.open();
 
-            assert.isOk(dialog1.wrapper.css(ZINDEX) > 0);
-            assert.isOk(dialog.wrapper.css(ZINDEX) > dialog1.wrapper.css(ZINDEX));
+            assert.isOk(dialog1.dialogWrapper.css(ZINDEX) > 0);
+            assert.isOk(dialog.dialogWrapper.css(ZINDEX) > dialog1.dialogWrapper.css(ZINDEX));
         });
 
         it("open dialog focuses the content", function() {
@@ -265,7 +248,7 @@
         it("clicking on a button triggers action method", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK",
+                    text: () => "OK",
                     action: function() { assert.isOk(true); }
                 }]
             });
@@ -276,7 +259,7 @@
         it("clicking on an element in the button triggers action method", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "<span class='button-span'>OK</span>",
+                    text: () => "<span class='button-span'>OK</span>",
                     action: function() { assert.isOk(true); }
                 }]
             });
@@ -287,11 +270,11 @@
         it("executing action closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
             assert.isOk(!dialog.options.visible);
             assert.isOk(!dialog.wrapper.is(":visible"));
         });
@@ -299,14 +282,14 @@
         it("executing action returning false does't closes the dialog", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK",
+                    text: () => "OK",
                     action: function() {
                         return false;
                     }
                 }]
             });
 
-            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            dialog.wrapper.find(".k-dialog-actions .k-button").click();
             assert.isOk(dialog.options.visible);
             assert.isOk(dialog.wrapper.is(":visible"));
         });
@@ -314,24 +297,24 @@
         it("setOptions modifies actions", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }]
             });
 
             dialog.setOptions({
                 actions: [
-                    { text: "OK" },
-                    { text: "Cancel" }
+                    { text: () => "OK" },
+                    { text: () => "Cancel" }
                 ]
             });
 
-            assert.equal(dialog.wrapper.find(".k-dialog-buttongroup .k-button").length, 2);
+            assert.equal(dialog.wrapper.find(".k-dialog-actions .k-button").length, 2);
         });
 
         it("setOptions modifies title", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }]
             });
 
@@ -345,7 +328,7 @@
         it("setOptions modifies modality", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }],
                 modal: true
             });
@@ -360,7 +343,7 @@
         it("setOptions modifies modality", function() {
             var dialog = createDialog({
                 actions: [{
-                    text: "OK"
+                    text: () => "OK"
                 }],
                 modal: true
             });

@@ -2,7 +2,7 @@
     var AutoComplete = kendo.ui.AutoComplete,
         input;
 
-    describe("kendo.ui.AutoComplete messages", function () {
+    describe("kendo.ui.AutoComplete messages", function() {
         beforeEach(function() {
             input = $("<input />").appendTo(Mocha.fixture);
         });
@@ -20,7 +20,7 @@
                 }
             });
             autoComplete.search("aaa");
-            var noDataTemplateText = autoComplete.list.find(".k-nodata").text();
+            var noDataTemplateText = autoComplete.list.find(".k-no-data").text();
             assert.equal(noDataTemplateText, "custom");
         });
 
@@ -38,7 +38,7 @@
                 }
             });
 
-            var clearTitle = autoComplete.wrapper.find('.k-icon.k-clear-value.k-i-close').attr("title");
+            var clearTitle = autoComplete.wrapper.find('.k-clear-value').attr("title");
             assert.equal(clearTitle, "custom");
         });
     });

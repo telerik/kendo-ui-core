@@ -1,30 +1,32 @@
 ---
 title: Performance
-page_title: Performance | Kendo UI Templates
+page_title: Templates Performance - Kendo UI Templates
 description: "Learn about the techniques Kendo UI Templates use to achieve high performance and to be up to 60 times faster than jQuery templates."
 slug: performance_kendoui_templatescomponent
-position: 2
+position: 6
 ---
 
 # Performance
 
-The [Kendo UI Templates](https://demos.telerik.com/kendo-ui/templates/index) enable you to improve immensely the performance of your project.  
+The [Kendo UI Templates](https://demos.telerik.com/kendo-ui/templates/index) enable you to immensely improve the performance of your project.  
 
-With JavaScript applications running on a myriad of low-power devices, such as phones and tablets, it is essential that applications squeeze every last bit of performance out of their code. Code that may look fine on a desktop browser like Chrome can crawl on a tablet if not carefully engineered. While the Kendo UI Templates do not offer as many features as other JavaScript templating libraries, they do so intentionally to deliver better performance. Depending on the browser and computer (templates run on the client machine, so naturally there are variances), Kendo UI Templates are up to 60 times (6000%) faster than jQuery templates. To compare performance results directly, [refer to the live JSPerf test](http://jsperf.com/dom-vs-innerhtml-based-templating/509).
+With JavaScript applications running on a myriad of low-power devices, such as phones and tablets, it is essential that applications squeeze every last bit of performance out of their code. Code that may look fine on a desktop browser like Chrome can crawl on a tablet if not carefully engineered. 
+
+While the Kendo UI Templates do not offer as many features as other JavaScript templating libraries, they do so intentionally to deliver better performance. Depending on the browser and computer (templates run on the client machine, so naturally there are variances), Kendo UI Templates are up to 60 times (6000%) faster than jQuery templates. To compare performance results directly, [refer to the live JSPerf test](http://jsperf.com/dom-vs-innerhtml-based-templating/509).
 
 ## Basic Techniques
 
 Kendo UI achieves high performance templates through the use of several techniques, as listed below, in addition to limiting features:
 
-1. John Resig, creator of jQuery, has one of the best core micro-templating philosophies in his aptly titled [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) article. This is the starting point and baseline for Kendo UI Templates. If Kendo UI can meet or exceed John's speed, it meets the goal for fast templating.
-2. While John uses `array` Push and Join functions to build his templates, Kendo UI discovered that simple string concatenation (`+=`) performs even faster in many browsers, especially Chrome.
-3. The biggest speed booster is that eliminating the [JavaScript `with` block](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) inside the template builder delivers a huge performance improvement. Some templates prefer the scope-helping `with` block, so Kendo UI templates use `with` blocking by default, but it can be easily disabled. When you do not need it, you can realize the full speed gains in your template rendering.
+* John Resig, creator of jQuery, has one of the best core micro-templating philosophies in his aptly titled [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) article. This is the starting point and baseline for the Kendo UI Templates. If Kendo UI can meet or exceed John's speed, it meets the goal for fast templating.
+* While John uses `array` `Push` and `Join` functions to build his templates, Kendo UI discovered that simple string concatenation (`+=`) performs even faster in many browsers, especially Chrome.
+* The biggest speed booster is that eliminating the [JavaScript `with` block](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) inside the template builder delivers a huge performance improvement. Some templates prefer the scope-helping `with` block, so Kendo UI templates use `with` blocking by default, but it can be easily disabled. When you do not need it, you can realize the full speed gains in your template rendering.
 
 ## Comparing Performance
 
 Performance claims are never set in stone as libraries are evolving all the time. You can see where Kendo UI Templates stands in comparison to some of the common options like Handlebars, Mustache, jQuery Templates (now deprecated), Underscore JS, and John's original micro-templating implementation by using the [JavaScript templating engine shootout](http://jsperf.com/dom-vs-innerhtml-based-templating/509) JSPerf test.
 
-> JSPerf is a great tool to use for quick, relative performance tests between JavaScript libraries and snippets. Anyone can create or modify a JSPerf test to test and compare the performance of JavaScript code across many different browsers and machines.
+>tip JSPerf is a great tool to use for quick, relative performance tests between JavaScript libraries and snippets. Anyone can create or modify a JSPerf test to test and compare the performance of JavaScript code across many different browsers and machines.
 
 ## Disabling with Blocking
 
@@ -54,7 +56,7 @@ $("#results").html(window.kendouiTemplate(sharedVariables));
 
 ```
 
-`with` JavaScript keyword is used to extend the scope chain for a statement. Anything inside a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided. For more information on `with` and its pros and cons, refer to the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with). For Kendo UI Templates, disabling `with` can impact the way you reference the data used in your template.
+The `with` JavaScript keyword is used to extend the scope chain for a statement. Anything inside a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided. For more information on `with` and its pros and cons, refer to the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with). For Kendo UI Templates, disabling `with` can impact the way you reference the data used in your template.
 
 The following example assumes that the data displayed in it is the data you want to use with a template.
 
@@ -64,7 +66,7 @@ The following example assumes that the data displayed in it is the data you want
 		   list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 		};
 
-By default, you might create a Kendo UI template, as demonstrated below.
+By default, you can create a Kendo UI template, as demonstrated below.
 
 		<script type="text/x-kendo-template" id="temp">
 		    <div>
@@ -78,7 +80,7 @@ By default, you might create a Kendo UI template, as demonstrated below.
 		    </div>
 		</script>
 
-Notice the way you can directly use the names of the `data` object properties&mdash;`header`, `header2`, `list`&mdash;demonstrated below.
+Notice the way you can directly use the names of the `data` object properties&mdash;`header`, `header2`, `list`, as demonstrated in the following example.
 
 ```dojo
 <div id="results">
@@ -132,6 +134,8 @@ Even though the implementation of Kendo UI Templates is fast, you may prefer you
 
 ## See Also
 
-* [Templates Overview]({% slug overview_kendoui_templatescomponent %})
-* [Load Templates from External Files]({% slug externalteplateloading_templatescomponent %})
-* [JavaScript API Reference: template](/api/javascript/kendo/methods/template)
+* [Templates Essentials]({% slug essentials_templates %})
+* [Loading Templates from External Files]({% slug externalteplateloading_templatescomponent %})
+* [Templates JavaScript API Reference](/api/javascript/kendo/methods/template)
+* [Templates Demos](https://demos.telerik.com/kendo-ui/templates/index)
+* [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base)

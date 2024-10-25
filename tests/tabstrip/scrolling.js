@@ -1,7 +1,7 @@
 (function() {
 
     var tabstrip;
-    var mobileOs = false;
+    var touch = false;
 
     function createTabStrip(options) {
         tabstrip = new kendo.ui.TabStrip("#tabstrip", $.extend({
@@ -21,7 +21,7 @@
         Mocha.fixture.append(
             '<div id="tabstrip" style="width:200px;">' +
             '    <ul>' +
-            '        <li class="k-state-active">some item text 1</li>' +
+            '        <li class="k-active">some item text 1</li>' +
             '        <li>some item text 2</li>' +
             '        <li>some item text 3</li>' +
             '        <li>some item text 4</li>' +
@@ -48,7 +48,7 @@
         Mocha.fixture.append(
             '<div id="tabstrip-nonscrollable" style="width:400px;">' +
             '    <ul>' +
-            '        <li class="k-state-active">1</li>' +
+            '        <li class="k-active">1</li>' +
             '        <li>2</li>' +
             '    </ul>' +
             '    <div>content 1</div>' +
@@ -121,7 +121,7 @@
         it('scrolling buttons are rendered if tabs do not fit', function() {
             createTabStrip();
 
-            var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
+            var buttons = tabstrip.tabWrapper.children(".k-button");
 
             assert.equal(buttons.length, 2);
             assert.isOk(buttons.eq(0).is(".k-tabstrip-prev"));
@@ -131,7 +131,7 @@
         it('scrolling buttons are not rendered if tabs fit', function() {
             createNonScrollableTabStrip();
 
-            var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
+            var buttons = tabstrip.tabWrapper.children(".k-button");
 
             assert.equal(buttons.length, 0);
         });
@@ -139,74 +139,80 @@
         it('right scrolling button scrolls to the right by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(0);
-            tabstrip.wrapper.children(".k-tabstrip-next").trigger("mousedown").trigger("mouseup");
+            kendo.scrollLeft(tabstrip.tabGroup, 0);
+            tabstrip.tabWrapper.children(".k-tabstrip-next").trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), tabstrip.options.scrollable.distance);
         });
 
         it('left scrolling button scrolls to the left by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(999);
-            var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
-            tabstrip.wrapper.children(".k-tabstrip-prev").trigger("mousedown").trigger("mouseup");
+            kendo.scrollLeft(tabstrip.tabGroup, 999);
+            var initialScrollPosition = kendo.scrollLeft(tabstrip.tabGroup);
+            tabstrip.tabWrapper.children(".k-tabstrip-prev").trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), initialScrollPosition - tabstrip.options.scrollable.distance);
         });
 
-        it('left scrolling button disappears and appears when (not) needed', function() {
+        it('left scrolling button disabled and enabled when (not) needed', function() {
             createTabStrip();
 
-            var buttonPrev = tabstrip.wrapper.children(".k-tabstrip-prev");
-            var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
+            var buttonPrev = tabstrip.tabWrapper.children(".k-tabstrip-prev");
+            var buttonNext = tabstrip.tabWrapper.children(".k-tabstrip-next");
 
-            tabstrip.tabGroup.scrollLeft(0);
+            kendo.scrollLeft(tabstrip.tabGroup, 0);
             buttonPrev.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.isOk(!buttonPrev.is(":visible"));
+            assert.isOk(buttonPrev.is(".k-disabled"));
 
             buttonNext.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.isOk(buttonPrev.is(":visible"));
+            assert.isOk(!buttonPrev.is(".k-disabled"));
         });
 
-        it('right scrolling button disappears and appears when (not) needed', function() {
+        it('right scrolling button is disabled and enabled when (not) needed', function() {
             createTabStrip();
 
-            var buttonPrev = tabstrip.wrapper.children(".k-tabstrip-prev");
-            var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
+            var buttonPrev = tabstrip.tabWrapper.children(".k-tabstrip-prev");
+            var buttonNext = tabstrip.tabWrapper.children(".k-tabstrip-next");
 
-            tabstrip.tabGroup.scrollLeft(tabstrip.tabGroup[0].scrollWidth + 100);
+            assert.isOk(!buttonNext.is(".k-disabled"));
+
+            kendo.scrollLeft(tabstrip.tabGroup, tabstrip.tabGroup[0].scrollWidth + 100);
             buttonNext.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.isOk(!buttonNext.is(":visible"));
+            assert.isOk(buttonNext.is(".k-disabled"));
 
             buttonPrev.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.isOk(buttonNext.is(":visible"));
+            assert.isOk(!buttonNext.is(".k-disabled"));
         });
 
         it('right scrolling button appears if browser window width is reduced', function() {
             createTabStrip();
 
-            var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
+            var buttonNext;
 
-            tabstrip.tabGroup.scrollLeft(tabstrip.tabGroup[0].scrollWidth + 100);
-            buttonNext.trigger("mousedown").trigger("mouseup");
-            tabstrip.tabGroup.finish();
-
-            assert.isOk(!buttonNext.is(":visible"));
-
-            tabstrip.wrapper.width(tabstrip.wrapper.width() - 50);
-
+            tabstrip.wrapper.width(2000);
             tabstrip.resize();
+
+            buttonNext = tabstrip.tabWrapper.children(".k-tabstrip-next");
+
+            assert.equal(buttonNext.length, 0);
+
+            tabstrip.wrapper.width(300);
+            tabstrip.resize();
+
+            buttonNext = tabstrip.tabWrapper.children(".k-tabstrip-next");
+
+            assert.equal(buttonNext.length, 1);
 
             assert.isOk(buttonNext.is(":visible"));
         });
@@ -215,47 +221,47 @@
     describe('tabstrip mobile scrolling', function() {
         beforeEach(function() {
             setupDom();
-            mobileOs = kendo.support.mobileOS;
-            kendo.support.mobileOS = true;
+            touch = kendo.support.touch;
+            kendo.support.touch = true;
         });
 
         afterEach(function() {
 
             tabstrip.destroy();
-            kendo.support.mobileOS = mobileOs;
+            kendo.support.touch = touch;
         });
 
         it('right scrolling button scrolls to the right by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(0);
-            tabstrip.wrapper.children(".k-tabstrip-next").trigger("touchstart").trigger("touchend");
+            kendo.scrollLeft(tabstrip.tabGroup, 0);
+            tabstrip.tabWrapper.children(".k-tabstrip-next").trigger("touchstart").trigger("touchend");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), tabstrip.options.scrollable.distance);
         });
 
         it('left scrolling button scrolls to the left by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(999);
-            var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
-            tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+            kendo.scrollLeft(tabstrip.tabGroup, 999);
+            var initialScrollPosition = kendo.scrollLeft(tabstrip.tabGroup);
+            tabstrip.tabWrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), initialScrollPosition - tabstrip.options.scrollable.distance);
         });
 
         it('scrolling succeeds when jQuert.fx is off', function() {
             createTabStrip();
             jQuery.fx.off = true;
 
-            tabstrip.tabGroup.scrollLeft(999);
-            var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
-            tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+            kendo.scrollLeft(tabstrip.tabGroup, 999);
+            var initialScrollPosition = kendo.scrollLeft(tabstrip.tabGroup);
+            tabstrip.tabWrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), initialScrollPosition - tabstrip.options.scrollable.distance);
 
             jQuery.fx.off = false;
         });

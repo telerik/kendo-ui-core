@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: Localization | Kendo UI Globalization
+page_title: Localization - Kendo UI Globalization
 description: "Learn how to use the Kendo UI localization files in order to change the default messages of widgets."
 previous_url: /framework/localization/overview, /localization
 slug: overview_localization_kendoui
@@ -21,17 +21,19 @@ By default, all Kendo UI widgets display their messages in US English. To replac
 
 The following example demonstrates how to add the localization script to a document.
 
-    <script src="jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="kendo.all.min.js"></script>
     <script src="kendo.messages.bg-BG.js"></script>
 
 The following example demonstrates how to add the localization script to a document from the CDN.    
 
-    <script src="https://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
 
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on where to find the full list of available translations, refer to the [section on contributing]({% slug overview_localization_kendoui%}#contribution).
+
+> Using HTML in the localization messages of the components is not supported. Localization messages are designed to use strings and no HTML can be passed to them.
 
 ## Creating New Localization Files
 

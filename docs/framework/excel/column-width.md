@@ -1,6 +1,6 @@
 ---
 title: Column Width
-page_title: Column Width | Kendo UI Excel Export
+page_title: Column Width - Kendo UI Excel Export
 description: "Learn how to set the width of the columns and enable automatic width while exporting Kendo UI components to Excel."
 slug: columnwidth_excelexport_kendoui
 position: 4

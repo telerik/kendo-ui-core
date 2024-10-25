@@ -6,11 +6,11 @@
         var isValid = true;
 
         if (year != date.getFullYear())
-            isValid = false;
+            {isValid = false;}
         else if (month != date.getMonth() + 1)
-            isValid = false;
+            {isValid = false;}
         else if (day != date.getDate())
-            isValid = false;
+            {isValid = false;}
 
         return isValid;
     }
@@ -19,19 +19,19 @@
         var isValid = true;
 
         if (year != date.getFullYear())
-            isValid = false;
+            {isValid = false;}
         else if (month != date.getMonth() + 1)
-            isValid = false;
+            {isValid = false;}
         else if (day != date.getDate())
-            isValid = false;
+            {isValid = false;}
         else if (hours && hours != date.getHours())
-            isValid = false;
+            {isValid = false;}
         else if (minutes && minutes != date.getMinutes())
-            isValid = false;
+            {isValid = false;}
         else if (seconds && seconds != date.getSeconds())
-            isValid = false;
+            {isValid = false;}
         else if (milliseconds && milliseconds != date.getMilliseconds())
-            isValid = false;
+            {isValid = false;}
 
         return isValid;
     }
@@ -960,9 +960,44 @@
             assert.deepEqual(result, new Date(2012, 2, 25, 4, 30, 10, 123));
         });
 
+        it("parseDate works correctly with leading zero in month", function() {
+            var result = parse("2023/007", "yyyy/MM", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6));
+        });
+
+        it("parseDate works correctly with leading zero in day", function() {
+            var result = parse("2023/07/021", "yyyy/MM/dd", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21));
+        });
+
+        it("parseDate works correctly with leading zero in hours", function() {
+            var result = parse("2023/07/21 011", "yyyy/MM/dd HH", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 11));
+        });
+
+        it("parseDate works correctly with leading zero in minutes", function() {
+            var result = parse("2023/07/21 11:039", "yyyy/MM/dd HH:mm", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 11, 39));
+        });
+
+        it("parseDate works correctly with leading zero in seconds", function() {
+            var result = parse("2023/07/21 11:39:048", "yyyy/MM/dd HH:mm:ss", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 11, 39, 48));
+        });
+
+        it("parseDate does not trim out zeroes when there are only two characters", function() {
+            var result = parse("2023/07/21 3:01 AM", "yyyy/MM/dd h:mm tt", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21, 3, 1, 0));
+        });
+
+        it("parseDate works correctly with cultures that include dots", function() {
+            var result = parse("21.07.2023", "dd.MM.yyyy", "en-us", true);
+            assert.deepEqual(result, new Date(2023, 6, 21));
+        });
+
         it("parseExact method parses date string with UTC 'Z' zone designator", function() {
             var utcDate = new Date(Date.UTC(2014, 4, 21, 0, 0, 0));
-            var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz")
+            var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz");
 
             assert.deepEqual(result, utcDate);
         });
@@ -984,12 +1019,12 @@
             assert.deepEqual(parse('2017-02-23T10:00:00+00:30'), new Date(2017, 1, 23, 10 + date.getTimezoneOffset() * (-1) / 60, -30, 0));
         });
 
-        it('setHours should work correctly when daylight saving time change occurs', function () {
+        it('setHours should work correctly when daylight saving time change occurs', function() {
             var initialDate = new Date(2019, 2, 30, 23, 59, 0);
             var newDate = new Date(2019, 2, 31, 0, 0, 0);
-            var expectedDate = new Date(2019, 2, 31, 23, 59, 0)
+            var expectedDate = new Date(2019, 2, 31, 23, 59, 0);
 
-            assert.deepEqual(kendo.date.setHours(newDate, initialDate), expectedDate)
+            assert.deepEqual(kendo.date.setHours(newDate, initialDate), expectedDate);
         });
 
     });

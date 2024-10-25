@@ -339,7 +339,7 @@ Gets or sets the editor of the cells in the range.
 
 ##### value `String` *optional*
 
-The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/spreadsheet/custom-editors)
 
 #### Returns
 
@@ -454,6 +454,35 @@ True to make the cell enabled; false to disable it.
 </script>
 ```
 
+### html
+
+Gets or sets the html rendering of the cells in the range.
+
+##### value `Boolean` *optional*
+
+True to make the cell render the value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
+
+> When the value is 'true ' the value of the cell should be always sanitized on the server for passing safe html.
+
+#### Returns
+
+`Boolean` the current html state of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("<b>bold</b>");
+    sheet.range("A1").html(true);
+</script>
+```
+
+
 ### fillFrom
 
 Fills a range with values inferred from a source range.  This method employs some heuristics similar to what Excel's auto-filling algorithm does when you select a range of cells and drag the bottom-right handle.  The range to be filled is the current object, and you must pass a source range containing data as first argument.
@@ -508,6 +537,7 @@ Possible values for direction:
         } catch(ex) {
             if (ex instanceof kendo.spreadsheet.Range.FillError) {
                 // can be "incompatibleRanges" or "noFillDirection"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ex.code);
             } else {
                 throw ex;
@@ -736,6 +766,7 @@ The function that will be executed against every cell. The function receives the
     var range = sheet.range("A1:B2");
 
     range.forEachCell(function (row, column, cellProperties) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(row, column, cellProperties);
     });
 </script>
@@ -802,6 +833,7 @@ The new formula of the cell. The string may optionally start with `=`.
 
     sheet.range("A1").input("1000");
     sheet.range("A2").formula("A1*2");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range("A2").formula()); // "A1*2"
 </script>
 ```
@@ -844,6 +876,7 @@ Returns `true` if the sheet of the range has filter enabled.
         { column: 1, filter: filter2 }
     ]);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range("A1:C4").hasFilter());
 </script>
 ```

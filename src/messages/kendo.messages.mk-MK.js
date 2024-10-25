@@ -7,23 +7,10 @@
  * If you do not own a commercial license, this file shall be governed by the trial license terms.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 */
 
-(function ($, undefined) {
+(function($, undefined) {
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -695,7 +682,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Порамнување",
     "buttons": {
-     "justtifyLeft": "Лево порамнување",
+     "justifyLeft": "Лево порамнување",
      "justifyCenter": "Центар",
      "justifyRight": "Десно порамнување",
      "justifyFull": "Порамни",
@@ -837,10 +824,10 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "endswith": "Текстот завршува на"
     },
     "date": {
-      "eq":  "Датумот е",
+      "eq": "Датумот е",
       "neq": "Датумот не е",
-      "lt":  "Датумот е пред",
-      "gt":  "Датумот е после"
+      "lt": "Датумот е пред",
+      "gt": "Датумот е после"
     },
     "number": {
       "eq": "Е еднакво на",
@@ -873,7 +860,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "addRowBelow": "Додади ред долу",
   "alignment": "Порамнување",
   "alignmentButtons": {
-    "justtifyLeft": "Порамни лево",
+    "justifyLeft": "Порамни лево",
     "justifyCenter": "Центар",
     "justifyRight": "Порамни десно",
     "justifyFull": "Порамни",
@@ -1027,7 +1014,7 @@ $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
 /* Upload messages */
 
 if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization=
+kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Избери датотеки...",
   "cancel": "Откажи",

@@ -1,8 +1,8 @@
 ---
-title: Get Selected Checkboxes on the Server
-description: An example on how to get selected checkbox list items on the server in Telerik UI for ASP.NET Core.
+title: Getting the Selected CheckBoxes on the Server
+description: An example on how to get selected CheckBox list items on the server in Telerik UI for ASP.NET Core.
 type: troubleshooting
-page_title: Get Selected Checkboxes on the Server
+page_title: Getting the Selected CheckBoxes on the Server
 slug: checkbox-list-post
 tags: get, selected, checkboxes, server
 ticketid: 1413275
@@ -14,18 +14,18 @@ res_type: kb
 <table>
   <tr>
   	<td>Product</td>
-  	<td>Checkbox for Progress® Telerik® UI for ASP.NET Core, Checkbox for Progress® Telerik® UI for ASP.NET MVC</td>
+  	<td>Checkbox for Progress® Telerik® UI for ASP.NET Core</td>
   </tr>
 </table>
 
 
 ## Problem
 
-I have a group of `@Html.Kendo().CheckBox()`. How can I get in my action method which Kendo UI checkboxes are checked?
+I have a group of ASP.NET Core `@Html.Kendo().CheckBox()` components. How can I get in my action method which Kendo UI checkboxes are checked?
 
 ## Description
 
-In a common case for multiple items of the same collection, you can use the [`value` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value) of the checkbox to carry its identifier to the server, assuming that all checkboxes in the list have the same `name` attribute set. However, in a Kendo CheckBox helper, you do not have control over the `value` attribute because it is designed for being used with a Boolean field to show or edit a single value.
+In a common case for multiple items of the same collection, you can use the [`value` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value) of the CheckBox to carry its identifier to the server, assuming that all CheckBoxes in the list have the same `name` attribute set. However, in a Telerik UI CheckBox helper, you do not have control over the `value` attribute because it is designed for being used with a Boolean field to show or edit a single value.
 
 ## Solution
 
@@ -131,3 +131,22 @@ public class CheckboxListModel
     public string Description { get; set; }
 }
 ```
+
+## More {{ site.framework }} CheckBox Resources
+
+* [{{ site.framework }} CheckBox Documentation]({%slug htmlhelpers_checkbox_aspnetcore_overview%})
+
+* [{{ site.framework }} CheckBox Demos](https://demos.telerik.com/{{ site.platform }}/checkbox/index)
+
+* [{{ site.framework }} CheckBoxGroup Product Page](https://www.telerik.com/aspnet-core-ui/checkboxgroup)
+
+* [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
+
+* [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
+
+## See Also
+
+* [Client-Side API Reference of the CheckBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkbox)
+* [Server-Side API Reference of the CheckBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/checkbox)
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+* [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

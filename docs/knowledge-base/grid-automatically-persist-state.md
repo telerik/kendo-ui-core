@@ -1,8 +1,8 @@
 ---
 title: Persist the State of the Grid Automatically
-description: An example on how to persist the state of the Kendo UI Grid on page close.
+description: Learn how to persist the state of the Kendo UI Grid on page close.
 type: how-to
-page_title: Persist State Automatically | Kendo UI Grid for jQuery
+page_title: Persist State Automatically - Kendo UI for jQuery Data Grid
 slug: grid-automatically-persist-state
 tags: grid, state, persisting, persist, automatic, leave, page, save, restore, changes, options, keep, recreate, retain, load
 ticketid: 1138864
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 

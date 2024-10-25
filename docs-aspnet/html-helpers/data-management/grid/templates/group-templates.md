@@ -21,17 +21,17 @@ A group row contains an expanding and collapsing group icon that enables end-use
 
 If no template is defined, the name of the field and the current group are displayed in the following way.
 
-![A Grid with no group templates](../images/grid-no-group-header-template.png)
+![{{ site.product_short }} A Grid with no group templates](../images/grid-no-group-header-template.png)
 
 The only difference in the use of `ClientGroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value.
 
 Both `ClientGroupHeaderColumnTemplate` and `ClientGroupFooterTemplate` work in a similar way. `ClientGroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `ClientGroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
 
-![A Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../images/grid-group-header-column-template.png)
+![{{ site.product_short }} A Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../images/grid-group-header-column-template.png)
 
 Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `ClientGroupHeaderColumnTemplate` of the first visible column. If you want to show the `ClientGroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `ClientGroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `ClientGroupHeaderTemplate` for the **Units In Stock** column shows the `ClientGroupHeaderColumnTemplate` for the **Product Name** column.
 
-```
+```HtmlHelper
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("Grid")
     .Columns(columns =>
@@ -58,7 +58,52 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 )
 ```
 
-![A Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../images/grid-group-header-column-template-first-column.png)
+![{{ site.product_short }} A Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../images/grid-group-header-column-template-first-column.png)
+
+{% if site.mvc %}In a server-binding scenario, you can set the group templates without the `Client` prefix&mdash;`GroupHeaderTemplate`, `GroupHeaderColumnTemplate`, and `GroupFooterTemplate`. For more information, refer to the demo on [server aggregates of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serveraggregates).
+{% else %}
+
+## Using an external DataSource
+
+When the DataSource is part of the Grid definition, as in the example above, the Grid will infer the aggregates per column field from the DataSource definition. When using an external DataSource and passing it to the Grid via the `DataSourceId` method, the aggregates per column need to be defined manually via the column's `Aggregates` method, so the aggregates will be accessible in the group templates:
+
+```HtmlHelper
+    @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("dataSource1")
+        .Custom(x => x
+            .Type("odata")
+            .Transport(transport =>
+            {
+                transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders").DataType("json"));
+            })
+            .PageSize(20)
+            .Aggregates(aggregates =>
+            {
+                aggregates.Add(p => p.Freight).Sum();
+            })
+        )
+    )
+
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.OrderID).Filterable(false);
+            columns.Bound(e => e.Freight).Aggregates(new string[]{"sum"}).ClientGroupFooterTemplate("Sum: #=sum#");
+            columns.Bound(e => e.ShipCity).Width(150);
+        })
+        .DataSource("dataSource1")
+        .Groupable()
+        .Pageable()
+        .Sortable()
+        .Filterable()
+    )
+```
+
+## Limitations
+
+The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates which makes the usage of `.ServerOperations(true)` in this case incompatible.
+{% endif %}
 
 ## See Also
 

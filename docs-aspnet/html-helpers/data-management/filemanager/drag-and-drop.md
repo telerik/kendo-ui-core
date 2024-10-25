@@ -13,11 +13,47 @@ The {{ site.product }} FileManager provides inbuilt Drag and Drop functionality,
 
 The following example demonstrates how to disable the Drag and Drop functionality of the FileManager:
 
-        @(Html.Kendo().FileManager()
-            .Name("filemanager")              
-            .Draggable(false)
-            ...
-        )
+```HtmlHelper
+    @(Html.Kendo().FileManager()
+        .Name("filemanager")
+        .UploadUrl("Upload", "FileManagerData")
+        .Draggable(false)
+        .DataSource(ds =>
+        {
+            ds.Read(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Read", "FileManagerData")
+            );
+            ds.Destroy(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Destroy", "FileManagerData")
+            );
+            ds.Create(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Create", "FileManagerData")
+            );
+            ds.Update(operation => operation
+                .Type(HttpVerbs.Post)
+                .Action("Update", "FileManagerData")
+            );
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-filemanager name="filemanager" upload-url="@Url.Action("Upload", "FileManagerData")" draggable="false">
+        <filemanager-datasource>
+            <transport>
+                <read url="@Url.Action("Read", "FileManagerData")" />
+                <create url="@Url.Action("Destroy", "FileManagerData")" />
+                <destroy url="@Url.Action("Create", "FileManagerData")" />
+                <update url="@Url.Action("Update", "FileManagerData")" />
+            </transport>
+        </filemanager-datasource>
+    </kendo-filemanager>
+```
+{% endif %}
+
 
 ## See Also
 

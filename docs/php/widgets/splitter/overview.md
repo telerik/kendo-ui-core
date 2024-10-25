@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Splitter PHP Class
+page_title: Overview - Splitter PHP Class
 description: "Get started with the Splitter PHP class in Kendo UI."
 slug: overview_splitter_uiforphp
 position: 1

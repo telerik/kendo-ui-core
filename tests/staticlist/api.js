@@ -1,5 +1,6 @@
 (function() {
     var StaticList = kendo.ui.StaticList,
+        encode = kendo.htmlEncode,
         element;
 
     describe("kendo.ui.StaticList API", function() {
@@ -19,7 +20,7 @@
         it("setDataSource method overrides current data source", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.setDataSource(["1", "2"]);
@@ -32,7 +33,7 @@
         it("setDataSource method clears value before setting the new source", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: "item"
             });
 
@@ -48,7 +49,7 @@
         it("setDataSource method sets value silently after source is changed", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: "item"
             });
 
@@ -66,8 +67,8 @@
 
         it("setDataSource method shows fixed header", function() {
             var list = new StaticList(element, {
-                fixedGroupTemplate: "#:data#",
-                template: "#:data#",
+                fixedGroupTemplate: (data) => encode(data),
+                template: (data) => encode(data),
                 value: "item"
             });
 
@@ -82,26 +83,26 @@
         it("setOptions re-create templates", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             list.setOptions({
-                template: "new #:data#"
+                template: (data) => `new ${encode(data)}`
             });
 
-            assert.equal(element.children(":first").html(), "new item");
+            assert.equal(element.children(":first").find(".k-list-item-text").html(), "new item");
         });
 
         it("setOptions does not update bound state", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.setOptions({
-                template: "new #:data#"
+                template: (data) => `new ${encode(data)}`
             });
 
             assert.isOk(!list.bound());
@@ -110,7 +111,7 @@
         it("setValue method updates values of the widget silently", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.setValue("item");
@@ -135,8 +136,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple",
                 value: ["item1", "item3"]
             });
@@ -159,8 +160,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -189,8 +190,8 @@
                     data: data,
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -214,8 +215,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -229,7 +230,7 @@
         it("focus method focuses li element", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -238,15 +239,15 @@
 
             list.focus(children.eq(1));
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("focus method focuses by index", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -255,15 +256,15 @@
 
             list.focus(1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("focus method clears focus if index is -1", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -273,15 +274,15 @@
             list.focus(1);
             list.focus(-1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("focusIndex returns the index of the focused item", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -295,7 +296,7 @@
         it("focusIndex returns undefined if no item is focused", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -311,7 +312,7 @@
         it("select an item by element", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -321,15 +322,15 @@
             list.select(children.eq(1));
 
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method does not unselect already selected item (single selection)", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -346,7 +347,7 @@
         it("select method selects same index if filtered", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -365,7 +366,7 @@
         it("select an item by index", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -375,16 +376,16 @@
             list.select(1);
 
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("selects a single item if selectable is single", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: true,
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -393,16 +394,16 @@
 
             list.select([1, 2]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus k-selected");
         });
 
         it("select items by indices", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: "multiple",
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -411,16 +412,16 @@
 
             list.select([1, 2]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus k-selected");
         });
 
         it("select method handles unexisting indices", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: "multiple",
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item1", "item3"]
             });
 
@@ -437,7 +438,7 @@
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: "multiple",
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item1", "item3"]
             });
 
@@ -447,15 +448,15 @@
 
             list.select([0, 2]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus");
         });
 
         it("select method deselects previous item", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -465,15 +466,15 @@
             list.select(1);
             list.select(0);
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method deselects selected items is index is -1", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -483,16 +484,16 @@
             list.select(1);
             list.select(-1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method selects multiple items", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: "multiple",
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -502,16 +503,16 @@
             list.select(1);
             list.select(0);
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method deselects item in 'multiple' mode", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: "multiple",
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -521,16 +522,16 @@
             list.select(1);
             list.select(1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method unselects items if empty array is passed", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
                 selectable: "multiple",
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -540,9 +541,9 @@
             list.select(1);
             list.select([]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("select method works with grouped data source", function() {
@@ -556,8 +557,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -566,9 +567,9 @@
 
             list.select(1);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-            assert.equal(children.eq(2).attr("class"), "k-item k-first");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-first");
         });
 
         it("select method sets selected data items", function() {
@@ -582,8 +583,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -607,8 +608,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -635,8 +636,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -664,8 +665,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -690,8 +691,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -714,7 +715,7 @@
                         { name: "item3", type: "a" }
                     ]
                 },
-                template: '#:data.name#',
+                template: (data) => encode(data.name),
                 value: ["item2"]
             });
 
@@ -738,8 +739,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -766,8 +767,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -795,8 +796,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -821,8 +822,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -847,8 +848,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 value: ["item2", "item3"]
             });
 
@@ -870,7 +871,7 @@
                 assert.equal(removed[0].position, 0);
                 assert.equal(removed[0].dataItem.name, "item2");
 
-                assert.equal(list.element.find(".k-state-selected").length, 0);
+                assert.equal(list.element.find(".k-selected").length, 0);
             });
 
             list.select(0);
@@ -887,8 +888,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -912,8 +913,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -939,8 +940,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -966,8 +967,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple",
                 value: ["item2", "item3"]
             });
@@ -992,8 +993,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple"
             });
 
@@ -1019,8 +1020,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 value: "item1"
             });
 
@@ -1044,8 +1045,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#',
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 selectable: "multiple",
                 value: ["item1", "item2", "item3"]
             });
@@ -1071,15 +1072,15 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
 
             list.value(null);
 
-            assert.isOk($.isArray(list.value()));
+            assert.isOk(Array.isArray(list.value()));
         });
 
         it("value method supports empty string", function() {
@@ -1093,8 +1094,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -1102,7 +1103,7 @@
             list.value("");
 
             var value = list.value();
-            assert.isOk($.isArray(value));
+            assert.isOk(Array.isArray(value));
             assert.equal(value.length, 0);
         });
 
@@ -1117,8 +1118,8 @@
                     ],
                     group: "type"
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -1138,8 +1139,8 @@
                         { name: "item3", type: "a" }
                     ]
                 },
-                template: '#:data.name#',
-                groupTemplate: '#:data#'
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
             });
 
             list.dataSource.read();
@@ -1152,7 +1153,7 @@
         it("value method deselects deselects all items if value is []", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1162,15 +1163,15 @@
             list.select(1);
             list.value([]);
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("value method returns promise", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1183,7 +1184,7 @@
         it("value method returns promise that is resolved on bind", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.value("item").done(function() {
@@ -1196,7 +1197,7 @@
         it("value method clears previous selected items (single selection)", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1204,26 +1205,26 @@
             list.value("item1");
             list.value("item2");
 
-            assert.equal(list.element.children(".k-state-selected").length, 1);
+            assert.equal(list.element.children(".k-selected").length, 1);
         });
 
         it("value method selects item with unescaped characters", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1\"", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             list.value("item1\"");
 
-            assert.equal(list.element.children(".k-state-selected").length, 1);
+            assert.equal(list.element.children(".k-selected").length, 1);
         });
 
         it("next method focuses first item if no items are focused", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1231,15 +1232,15 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("next method focuses next item", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1248,15 +1249,15 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("prev method focuses last item if no items are focused", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1264,15 +1265,15 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus");
         });
 
         it("prev method focuses prev item", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1281,15 +1282,15 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("first method focuses first item", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1297,15 +1298,15 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item k-state-focused");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item");
+            assert.equal(children.eq(0).attr("class"), "k-list-item k-focus");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item");
         });
 
         it("last method focuses last item", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1313,15 +1314,15 @@
 
             var children = element.children();
 
-            assert.equal(children.eq(0).attr("class"), "k-item");
-            assert.equal(children.eq(1).attr("class"), "k-item");
-            assert.equal(children.eq(2).attr("class"), "k-item k-state-focused");
+            assert.equal(children.eq(0).attr("class"), "k-list-item");
+            assert.equal(children.eq(1).attr("class"), "k-list-item");
+            assert.equal(children.eq(2).attr("class"), "k-list-item k-focus");
         });
 
         it("scrollToIndex passes the correct item to scroll method", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             stub(list, {
@@ -1349,12 +1350,12 @@
         it("screenHeight gets the clientHeight of the content", function() {
             var list = new StaticList(element, {
                 dataSource: getData(100),
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
-            var content = list.content.height(200);
+            var content = list.content.outerHeight(200);
 
             assert.equal(list.screenHeight(), 200);
         });
@@ -1362,7 +1363,7 @@
         it("scrollWith moves scroll position down", function() {
             var list = new StaticList(element, {
                 dataSource: getData(100),
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1379,7 +1380,7 @@
         it("scrollWith moves scroll position up", function() {
             var list = new StaticList(element, {
                 dataSource: getData(100),
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1396,7 +1397,7 @@
         it("bound returns bound state of the list", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             assert.equal(list.bound(), false);
@@ -1409,7 +1410,7 @@
         it("bound sets bound state of the widget", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1423,7 +1424,7 @@
             var list = new StaticList(element, {
                 value: "item2",
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1440,7 +1441,7 @@
             var list = new StaticList(element, {
                 selectable: "multiple",
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item2", "item1"]
             });
 
@@ -1465,7 +1466,7 @@
             var list = new StaticList(element, {
                 selectable: "multiple",
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#",
+                template: (data) => encode(data),
                 value: ["item2", "item1"]
             });
 
@@ -1475,27 +1476,27 @@
 
             assert.equal(removed.position, 0);
             assert.equal(removed.dataItem, "item2");
-            assert.isOk(!$.isArray(removed.dataItem));
+            assert.isOk(!Array.isArray(removed.dataItem));
         });
 
         it("items returns item elements", function() {
             var list = new StaticList(element, {
                 selectable: "multiple",
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
 
             var items = list.items();
             assert.equal(items.length, 3);
-            assert.isOk(items.eq(0).hasClass("k-item"));
+            assert.isOk(items.eq(0).hasClass("k-list-item"));
         });
 
         it("isFiltered method returns true if source is filtered", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1508,7 +1509,7 @@
         it("isFiltered method returns false if applied filter is removed", function() {
             var list = new StaticList(element, {
                 dataSource: ["item1", "item2", "item3"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -1525,7 +1526,7 @@
                     data: ["item1", "item2", "item3"],
                     filter: { field: "", operator: "eq", value: "item2" }
                 },
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             //first bind is done with filtering
@@ -1539,7 +1540,7 @@
                 dataSource: {
                     data: ["item1", "item2", "item3"]
                 },
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             //first bind is done with filtering
@@ -1558,7 +1559,7 @@
                         { name: "item3", type: "a" }
                     ]
                 },
-                template: '#:data.name#'
+                template: (data) => encode(data.name)
             });
 
             list.dataSource.read();

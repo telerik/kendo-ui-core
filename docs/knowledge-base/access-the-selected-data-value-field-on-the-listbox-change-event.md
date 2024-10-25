@@ -1,7 +1,7 @@
 ---
-title: Access Selected DataValueField
-page_title: Access the Selected DataValueField on the ListBox change Event | Kendo UI ListBox for ASP.NET MVC
-description: An example on how to access the selected DataValueField on the Kendo UI ListBox change event.
+title: Access Selected DataValueField in the ListBox
+page_title: Access the Selected DataValueField on the ListBox change Event - Kendo UI ListBox for ASP.NET MVC
+description: Learn how to access the selected DataValueField on the change event of the Kendo UI for jQuery ListBox component.
 slug: access-the-selected-data-value-field-on-the-listbox-change-event
 ticketid: 1118759
 type: how-to
@@ -14,7 +14,7 @@ component: listbox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI ListBox for ASP.NET MVC</td>
+  <td>Progress® Telerik UI® ListBox for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,11 +29,11 @@ component: listbox
   <td>11</td>
  </tr>
  <tr>
-  <td>.Net framework</td>
+  <td>.NET Framework</td>
   <td>Version 4.6</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio 2017</td>
  </tr>
  <tr>
@@ -57,6 +57,8 @@ How can I get the `DataValueField` from the selected item on the `change` event 
 
 ## Solution
 
+To achieve the desired scenario:
+
 1. Retrieve the selected element.
 1. Based on the selected element, retrieve the information for the `dataItem` that is associated with the following line:
 
@@ -71,3 +73,9 @@ How can I get the `DataValueField` from the selected item on the `change` event 
 For more information, refer to the articles on:
 * The [`change`](/api/javascript/ui/listbox/events/change) event of the ListBox.
 * The [`dataItem`](/api/javascript/ui/listbox/methods/dataitem) method of the ListBox.
+
+## See Also
+
+* [Kendo UI for jQuery ListBox Overview (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
+* [jQuery ListBox Overview (Documentation)]({% slug overview_kendoui_listbox_widget %})
+* [JavaScript API of the ListBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)

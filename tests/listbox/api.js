@@ -20,10 +20,36 @@
         text: "item4"
     }];
 
-    var FIRST_ITEM_SELECTOR = ".k-item:first";
-    var DISABLED_STATE_CLASS = "k-state-disabled";
-    var SELECTED_STATE_CLASS = "k-state-selected";
+    var FIRST_ITEM_SELECTOR = ".k-list-item:first";
+    var DISABLED_STATE_CLASS = "k-disabled";
+    var SELECTED_STATE_CLASS = "k-selected";
     var DOT = ".";
+
+    function createListBoxCRUD(options, html) {
+        var listbox = createListBoxFromHtml(html, $.extend({
+            dataSource: {
+                transport: {
+                    read: function(e) {
+                        e.success(dataItems);
+                    },
+                    destroy: $.noop,
+                    create: $.noop,
+                    update: $.noop
+                }
+            },
+            dataTextField: "text"
+        }, options || {}));
+
+        return listbox;
+    }
+
+    function createListBoxWithStrings(options, html) {
+        var listbox = createListBoxFromHtml(html, $.extend({
+            dataSource: ["Argentina", "Australia", "Brazil", "Canada", "Chile", "China", "Egypt", "England", "France", "Germany", "India", "Indonesia", "Kenya", "Mexico", "New Zealand", "South Africa", "USA"],
+        }, options || {}));
+
+        return listbox;
+    }
 
     function createListBox(options, html) {
         var listbox = createListBoxFromHtml(html, $.extend({
@@ -74,7 +100,7 @@
             listbox.add(dataItem1);
 
             assert.equal(listbox.items().length, itemsLength + 1);
-            assert.equal(listbox.items().last().html(), dataItem1.text);
+            assert.equal(listbox.items().last().find("span").html(), dataItem1.text);
         });
 
         it("add() should add multiple data item", function() {
@@ -91,8 +117,8 @@
             listbox.add([dataItem1, dataItem2]);
 
             assert.equal(listbox.items().length, itemsLength + 2);
-            assert.equal(listbox.items().last().prev().html(), dataItem1.text);
-            assert.equal(listbox.items().last().html(), dataItem2.text);
+            assert.equal(listbox.items().last().prev().find("span").html(), dataItem1.text);
+            assert.equal(listbox.items().last().find("span").html(), dataItem2.text);
         });
     });
 
@@ -117,8 +143,8 @@
             listbox.remove(item1);
 
             assert.equal(listbox.items().length, 3);
-            assert.equal(listbox.items().eq(0).html(), dataItems[1].text);
-            assert.equal(listbox.items().eq(1).html(), dataItems[2].text);
+            assert.equal(listbox.items().eq(0).find("span").html(), dataItems[1].text);
+            assert.equal(listbox.items().eq(1).find("span").html(), dataItems[2].text);
         });
 
         it("remove() should not remove an item that shouldn't exist", function() {
@@ -181,7 +207,23 @@
             var items = listbox.items();
 
             assert.equal(items.length, 1);
-            assert.equal(items.first().text(), "newText1");
+            assert.equal(items.first().find("span").text(), "newText1");
+        });
+    });
+
+    describe("ListBox api", function() {
+        beforeEach(function() {
+            listbox = createListBoxCRUD();
+        });
+        afterEach(function() {
+            destroyListBox(listbox);
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("removing item pushes it in the destroyed collection", function() {
+            listbox.remove(FIRST_ITEM_SELECTOR);
+
+            assert.equal(listbox.dataSource._destroyed.length, 1);
         });
     });
 
@@ -298,7 +340,7 @@
         });
 
         it("refresh() should render list items", function() {
-            listbox.element.find(".k-item").remove();
+            listbox.element.find(".k-list-item").remove();
 
             listbox.refresh();
 
@@ -370,5 +412,22 @@
 
             assert.equal(listbox.items().eq(0).hasClass(DISABLED_STATE_CLASS), true);
         });
+    });
+
+    describe("ListBox api", function() {
+        beforeEach(function() {
+            listbox = createListBoxWithStrings();
+        });
+        afterEach(function() {
+            destroyListBox(listbox);
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("dataItem method works correctly when bound to string arrays", function() {
+            var dataItem = listbox.dataItem(listbox.items().eq(0));
+
+            assert.equal(dataItem, "Argentina");
+        });
+
     });
 }());

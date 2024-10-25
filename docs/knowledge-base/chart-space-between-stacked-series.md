@@ -2,7 +2,7 @@
 title: Add Space Between the Stacked Series in the Kendo UI Column Chart
 description: Learn how to separate the stacked series in the Kendo UI Column Chart by adding some space.
 type: how-to
-page_title: Insert Space After Every Series | Kendo UI Chart
+page_title: Insert Space After Every Series - Kendo UI Chart
 slug: chart-space-between-stacked-series
 position: 
 tags: column, space, stack, white space, separate, chart, 100%, stacked, progressbar
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Chart for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Chart for jQuery</td>
 		</tr>
 	</tbody>
 </table>

@@ -1,6 +1,6 @@
 ---
 title: Line Charts
-page_title: jQuery Chart Documentation | Line Charts | Kendo UI
+page_title: jQuery Chart Documentation - Line Charts
 description: "Learn how to create a Kendo UI Line Chart and configure its options."
 slug: linetypeoscharts_widget
 ---
@@ -53,7 +53,7 @@ You can change the orientation of the Line Chart by setting the series type to `
     });
 
 
-![A sample Line Chart](chart-line.png)
+![Kendo UI for jQuery Line Chart Overview](chart-line-overview.png)
 
 ## Configuring the Line Styles
 
@@ -65,11 +65,11 @@ The supported line styles are:
 * Step&mdash;This style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Line Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
 
-![A step-line Line Chart](chart-step-line.png)
+![Kendo UI for jQuery Step-line Line Chart example](chart-step-line.png)
 
 The following image displays a smooth-line Line Chart.
 
-![A smooth-line Line Chart](chart-smooth-line.png)
+![Kendo UI for jQuery Smooth-line Line Chart example](chart-smooth-line.png)
 
 ## Setting the Line Type
 
@@ -81,7 +81,7 @@ The default line type of a Line Chart is solid. You can implement the dash line 
       dashType: "dot"
   }]
 
-![A Line Chart with a dash type of line](chart-dash-types.png)
+![Kendo UI for jQuery Line Chart with a dash type of line](chart-dash-types.png)
 
 ## See Also
 

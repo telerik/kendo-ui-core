@@ -1,6 +1,6 @@
 ---
 title: Create the Management Charts
-page_title: Create the Management Charts | Music Store Web App Tutorial
+page_title: Create the Management Charts - Music Store Web App Tutorial
 description: "Learn how to create the Store Management charts in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createstoremanagcharts_muscistorewebapp_aspnetmvc
 position: 11
@@ -10,7 +10,7 @@ position: 11
 
 **Figure 1. A screenshot of the Kendo UI Music Store management charts**
 
-![kendo-manage-charts-screenshot](images/kendo-manage-charts-screenshot.png)
+![{{ site.product_short }} kendo-manage-charts-screenshot](images/kendo-manage-charts-screenshot.png)
 
 When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management graphs which can be used to monitor the sales status of the store. This page uses [Kendo UI widgets rendering data visualization](https://demos.telerik.com/kendo-ui/dataviz/overview/index.html) to display the graphs.
 

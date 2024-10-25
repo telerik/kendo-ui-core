@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Diagram PHP Class
+page_title: Overview - Diagram PHP Class
 description: "Get started with the Diagram PHP class in Kendo UI."
 slug: overview_diagram_uiforphp
 position: 1

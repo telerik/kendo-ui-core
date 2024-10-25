@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
   /* FlatColorPicker messages */
 
   if (kendo.ui.FlatColorPicker) {
@@ -614,7 +615,7 @@
         "alignmentDialog": {
           "title": "Alineación",
           "buttons": {
-            "justtifyLeft": "Alinear a la izquierda",
+            "justifyLeft": "Alinear a la izquierda",
             "justifyCenter": "Alinear al centro",
             "justifyRight": "Alinear a la derecha	",
             "justifyFull": "Justificar",
@@ -778,7 +779,7 @@
         "addRowBelow": "Agregar fila debajo",
         "alignment": "Alineación",
         "alignmentButtons": {
-          "justtifyLeft": "Alinear a la izquierda",
+          "justifyLeft": "Alinear a la izquierda",
           "justifyCenter": "Alinear al cenro",
           "justifyRight": "Alinear a la derecha",
           "justifyFull": "Justificar",
@@ -973,6 +974,19 @@
       $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
         "okText": "OK",
         "cancel": "Cancelar"
+      });
+  }
+
+  /* Wizard messages */
+  if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+      $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+        "reset": "Reiniciar",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "done": "Hecho",
+        "step": "Paso",
+        "of": "de"
       });
   }
 

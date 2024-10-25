@@ -2,7 +2,7 @@
 title: Minus Sign Shows to the Right of Negative Numbers When Using Right-to-Left (RTL) Languages
 description: Cannot override the default behavior and display the minus sign of negative numbers to the left, instead of to the right, when using Right-to-Left (RTL) languages.
 type: troubleshooting
-page_title: Minus Sign Appears to the Right of Negative Numbers When Using Right-to-Left (RTL) Languages | Kendo UI for jQuery
+page_title: Minus Sign Appears to the Right of Negative Numbers When Using Right-to-Left (RTL) Languages 
 slug: negative-number-minus-sign-position-rtl
 tags: RTL, right-to-left, languages, negative, number, position
 teampulseid:ticketid: 996114
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI for jQuery</td>
+  <td>Progress® Kendo UI® for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -49,4 +49,4 @@ For the full implementation of the approach, refer to [this Dojo example](https:
 
 * [Globalization in Kendo UI](https://docs.telerik.com/kendo-ui/framework/globalization/overview).
 * [Culture Definition in Kendo UI](https://docs.telerik.com/kendo-ui/framework/globalization/definecultureinfo).
-* [Right-to-Left (RTL) Support in Kendo UI](https://docs.telerik.com/kendo-ui/accessibility/supporting-rtl-languages)
+* [Right-to-Left (RTL) Support in Kendo UI](https://docs.telerik.com/kendo-ui/globalization/supporting-rtl-languages)

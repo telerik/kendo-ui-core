@@ -1,8 +1,8 @@
 ---
 title: Use Radio Buttons as Custom Grid Editor
-description: An example on how to use radio buttons as a custom editor in the Kendo UI Grid.
+description: Learn how to use radio buttons as a custom editor in the Kendo UI Grid.
 type: how-to
-page_title: Use Radio Buttons as Custom Editor | Kendo UI Grid for jQuery
+page_title: Use Radio Buttons as Custom Editor - Kendo UI for jQuery Data Grid
 slug: radio-buttons-custom-editor
 tags: radio buttons, grid, editor
 ticketid: 1117548
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
@@ -151,10 +151,10 @@ To create an editor with radio buttons:
                 var item = "";
 
                 item += "<label>"
-                if (category === i) {
-                    item += "<input type='radio' name='" + dataItem.uid + "' onclick='setDataItem(this);' checked=checked />";
+                 if (category === i) {
+                    item += "<input type='radio' class='k-radio k-radio-md' name='" + dataItem.uid + "' onclick='setDataItem(this);' checked=checked />";
                 } else {
-                    item += "<input type='radio' name='" + dataItem.uid + "' onclick='setDataItem(this);'/>";
+                    item += "<input type='radio' class='k-radio k-radio-md' name='" + dataItem.uid + "' onclick='setDataItem(this);'/>";
                 }
                 item += categories[i].text;
                 item += "</label>"

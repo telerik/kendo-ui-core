@@ -2,7 +2,7 @@
 title: Filtering Is Not Properly Persisted after Saving and Loading the State of the Grid
 description: "The date filters of the Grid are not correctly persisted after kendo.stringify is applied."
 type: troubleshooting
-page_title: Filters Are Not Correctly Persisted After Saving and Loading the Grid State | Kendo UI Grid for jQuery
+page_title: Filters Are Not Correctly Persisted After Saving and Loading the Grid State - Kendo UI for jQuery Data Grid
 slug: grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-stateposition
 previous_url: /knowledge-base/the-grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-state
 tags: grid, filter, persist
@@ -16,7 +16,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -45,7 +45,6 @@ The `JSON.stringify()` method that is internally used by the `kendo.stringify()`
 Programmatically apply the time offset before the filter is set again.
 
 ```dojo
- <body>
 
     <div id="example">
       <div class="box wide">
@@ -56,7 +55,6 @@ Programmatically apply the time offset before the filter is set again.
 
       <script>
         $(document).ready(function () {
-          var saved;
           $("#grid").kendoGrid({
             dataSource: {
               type: "odata",
@@ -103,7 +101,6 @@ Programmatically apply the time offset before the filter is set again.
           var grid = $("#grid").data("kendoGrid");
 
           $("#save").click(function (e) {
-            saved = true;
             e.preventDefault();
             localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
           });
@@ -113,23 +110,20 @@ Programmatically apply the time offset before the filter is set again.
             var options = localStorage["kendo-grid-options"];
             if (options) {
               var parsedOptions = JSON.parse(options)
-              if(saved && parsedOptions.dataSource.filter != undefined){
+              if(parsedOptions.dataSource.filter != undefined && parsedOptions.dataSource.filter.filters != undefined){
                 for (let i = 0; i<parsedOptions.dataSource.filter.filters.length; i++ ){
                   if(parsedOptions.dataSource.filter.filters[i].field = "Start"){
-                    // Take the current offset
-                    var currentoffset = (new Date()).getTimezoneOffset()
-                    var newTime = new Date(parsedOptions.dataSource.filter.filters[i].value)
-                    // Set the offset to the date
-                    newTime.setHours(newTime.getHours() + currentoffset/60);
+                    // Parse the date string.
+                    var newTime = new Date(parsedOptions.dataSource.filter.filters[i].value);
+                    // Set the offset to the date.
+                    kendo.timezone.apply(newTime, 0);
                     parsedOptions.dataSource.filter.filters[i].value = newTime
                   }
                 }
-                saved = false;
               }
 
               grid.setOptions(parsedOptions);
             }
-
           });
         });
       </script>

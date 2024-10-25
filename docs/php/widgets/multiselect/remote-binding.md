@@ -1,6 +1,6 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | MultiSelect PHP Class
+page_title: Remote Binding - MultiSelect PHP Class
 description: "Bind Kendo UI MultiSelect PHP class to JSON."
 slug: remotebinding_multiselect_uiforphp
 position: 3

@@ -1,10 +1,10 @@
 ---
 title: Grouping
 page_title: Grouping
-description: "Group the data in the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}"
+description: "Group the data in the Telerik UI MultiColumnComboBox component for {{ site.framework }}"
 previous_url: /helpers/editors/multicolumncombobox/grouping
 slug: grouping_multicolumncombobox_aspnetmvc
-position: 4
+position: 6
 ---
 
 # Grouping
@@ -18,5 +18,5 @@ To group the data by using the [custom DataSource configuration]({% slug htmlhel
 ## See Also
 
 * [Grouping by the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/grouping)
-* [MultiColumnComboBoxBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/MultiColumnComboBoxBuilder)
+* [MultiColumnComboBoxBuilder Server-Side API](/api/kendo.mvc.ui.fluent/multicolumncomboboxbuilder)
 * [MultiColumnComboBox Server-Side API](/api/multicolumncombobox)

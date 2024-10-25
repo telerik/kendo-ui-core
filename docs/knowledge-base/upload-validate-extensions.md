@@ -1,8 +1,8 @@
 ---
 title: Validate Files and File Extensions on Upload
-description: An example on how to validate the selection and file extension in the Kendo UI Upload.
+description: Learn how to validate the selection and file extension in the Kendo UI Upload.
 type: how-to
-page_title: Implement File and Extension Validation on Submit | Kendo UI Upload for jQuery
+page_title: Implement File and Extension Validation on Submit - Kendo UI Upload for jQuery
 slug: upload-validate-extensions
 tags: kendo, kendoui, upload, validate, submit, extension, file
 ticketid: 1138527
@@ -14,19 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Upload</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 7 64bit</td>
- </tr>
- <tr>
-  <td>Browser</td>
-  <td>Firefox</td>
- </tr>
- <tr>
-  <td>Browser Version</td>
-  <td>55.0.3</td>
+  <td>Progress® Kendo UI® Upload for jQuery</td>
  </tr>
 </table>
 
@@ -40,20 +28,6 @@ How can I validate the Kendo UI Upload widget on `form` submit by using the Kend
 To validate whether a file is selected and that the selected file has the correct extension, create a custom rule for the Kendo UI Validator.
 
 ```dojo
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <title>Untitled</title>
-    <base href="https://demos.telerik.com/kendo-ui/upload/index">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.default.min.css">
-    <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
-</head>
-<body>
     <form method="POST" name="procedureForm" id="myForm">
         <p> allowed files extensinos: 'CSV', 'XML', 'XLS', 'XLSX'</p>
         <span class="k-invalid-msg" data-for="files"></span>
@@ -86,7 +60,5 @@ To validate whether a file is selected and that the selected file has the correc
                 }
             });
         });
-    </script>  
-</body>
-</html>
+    </script>
 ```

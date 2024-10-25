@@ -1,8 +1,8 @@
 ---
 title: Scroll to Specific Scheduler Time Slot in AngularJS
-description: An example on how to scroll to a specific time slot within the Kendo UI Scheduler in AngularJS applications.
+description: Learn how to scroll to a specific time slot within the Kendo UI Scheduler in AngularJS applications.
 type: how-to
-page_title: Scroll to Specific Time Slots in AngularJS | Kendo UI Scheduler for jQuery
+page_title: Scroll to Specific Time Slots in AngularJS - Kendo UI Scheduler for jQuery
 slug: scheduler-scroll-to-specific-time-slot
 tags: scroll, time, slot, specific, scheduler, angular, angularjs
 res_type: kb
@@ -14,7 +14,7 @@ component: scheduler
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
 </table>
 
@@ -63,8 +63,8 @@ Create a `scrollToHour` method that:
         },
         $scope.schedulerOptions = {
             id: "scheduler",
-            date: new Date("2013/6/13"),
-            startTime: new Date("2013/6/13 07:00 AM"),
+            date: new Date("2022/6/13"),
+            startTime: new Date("2022/6/13 07:00 AM"),
             height: 600,
             views: [
                 "day",

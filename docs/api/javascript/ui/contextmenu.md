@@ -473,11 +473,11 @@ Sets the field of the data item that provides the text of the ContextMenu items.
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -501,11 +501,11 @@ Sets the field of the data item that provides the url of the ContextMenu items.
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -529,11 +529,11 @@ Sets the field of the data item that provides the sprite css class of the Contex
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -557,11 +557,11 @@ Sets the field of the data item that provides the image url of the ContextMenu i
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -585,11 +585,11 @@ Sets the field of the data item that provides the content of the ContextMenu ite
         $("#context-menu").kendoMenu({
             target: "#target",
             dataSource: {
-            data: [{
+                data: [{
                     Name: "Item 1",
-                    UrlPath: "urlPath",
+                    //UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    //imgUrl: "imgUrl",
                     description: "some description"
                 }]
             },
@@ -608,7 +608,7 @@ The example below will initialize the sub menus to open to the left.
 
 #### Example
 
-    <div id="target">Target</div>
+    <div style='margin-left:100px' id="target">Target</div>
     <ul id="context-menu">
         <li>Item 1
             <ul>
@@ -975,7 +975,7 @@ Closes the **ContextMenu**. This method can be prevented to stop the closure.
         // get a reference to the ContextMenu widget
         var contextMenu = $("#context-menu").data("kendoContextMenu");
         // close the ContextMenu
-        contextMenu.close(100, 100);
+        contextMenu.close();
     </script>
 
 #### Parameters
@@ -1230,7 +1230,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
         contextMenu.insertBefore(
             [{
                 text: "Item 1",
-                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
+                //url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1239,7 +1239,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
+                //imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -1483,6 +1483,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
             dataTextField: "FullName",
             dataSource: dataSource,
             dataBound: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("dataBound");
             }
         })
@@ -1515,6 +1516,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         }).data("kendoContextMenu");
 
         contextMenu.bind("dataBound", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         });
     </script>
@@ -1645,11 +1647,13 @@ The current target of the ContextMenu - either the init target or the current el
         $("#context-menu").kendoContextMenu({
             target: "#target",
             activate: function(e){
-                $('li.k-item.k-state-hover').css('font-weight','bold');
+                $('li.k-item.k-hover').css('font-weight','bold');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item);
             },
             deactivate: function(e) {
                 $('li.k-item').css('font-weight','');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item);
             }
         });
@@ -1728,11 +1732,13 @@ The current target of the ContextMenu - either the init target or the current el
         $("#context-menu").kendoContextMenu({
             target: "#target",
             activate: function(e){
-                $('li.k-item.k-state-hover').css('font-weight','bold');
+                $('li.k-item.k-hover').css('font-weight','bold');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.item);
             },
             deactivate: function(e) {
                 $('li.k-item').css('font-weight','');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item);
             }
         });

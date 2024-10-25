@@ -1,8 +1,8 @@
 ---
 title: Automatically Fit Width of Grid Columns to Show All Data
-description: An example on how to automatically fit the width of all Kendo UI Grid columns to show all data.
+description: Learn how to automatically fit the width of all Kendo UI Grid columns to show all data.
 type: how-to
-page_title: Automatically Fit Column Width to Show All Data | Kendo UI Grid for jQuery
+page_title: Automatically Fit Column Width to Show All Data - Kendo UI for jQuery Data Grid
 slug: grid-autofit-all-columns-width
 tags: grid, autofit, auto, fit, automatically, columns, width, show, all, data
 ticketid: 1148885
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,7 +32,7 @@ res_type: kb
 
 ## Description
 
-How can I have the columns of a Kendo UI Grid automatically fit their width to accommodate their contents?
+How can I have the columns of a Kendo UI for jQuery Grid automatically fit their width to accommodate their contents?
 
 ## Solution
 
@@ -155,5 +155,5 @@ If you have to only set the `checked` property of the columns to `true`, use the
 ## See Also
 
 * [API Reference of the autoFitColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/autofitcolumn)
-* [Appearance of the Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#width)
+* [Appearance of the Grid](https://docs.telerik.com/kendo-ui/controls/grid/appearance#width)
 * [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)

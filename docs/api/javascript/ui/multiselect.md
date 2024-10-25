@@ -11,6 +11,10 @@ Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/javascri
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+
+Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -121,9 +125,25 @@ Controls whether to bind the widget to the data source on initialization.
         <option>Item2</option>
     </select>
     <script>
-    $("#multiselect").kendoMultiSelect({
-        autoBind: false
-    });
+        $("#multiselect").kendoMultiSelect({
+          placeholder: "Select products...",
+          dataTextField: "ProductName",
+          dataValueField: "ProductID",
+          dataBound: function(){
+            //Alert will be displayed when the data is bound to the component
+            alert('Data is bound')
+          },
+          autoBind: false,
+          dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+              read: {
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+              }
+            }
+          }
+        });
     </script>
 
 ### autoClose `Boolean`*(default: true)*
@@ -273,7 +293,7 @@ The field of the data item that provides the value of the widget.
 
 ### delay `Number`*(default: 200)*
 
- Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
+Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
 
 #### Example - set the delay
 
@@ -284,6 +304,22 @@ The field of the data item that provides the value of the widget.
     <script>
     $("#multiselect").kendoMultiSelect({
         delay: 1000 // wait 1 second before filtering
+    });
+    </script>
+
+### downArrow `Boolean`*(default: false)*
+
+Configures MultiSelect to render a down arrow that opens and closes its popup.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        downArrow: true
     });
     </script>
 
@@ -331,6 +367,28 @@ If set to `true` the widget will not show all items when the text of the search 
             { ProductName: "Chang", ProductID: 2 },
             { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
         ]
+    });
+    </script>
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "none"
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      filter: "contains",
+      fillMode: "flat"
     });
     </script>
 
@@ -399,6 +457,126 @@ The widget instance.
       footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
     });
     </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+      label: "Customers"
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+      label: function() {
+          return "Customers";
+      }
+    });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+        label: { content: "Customers" }
+    });
+    </script>
+
+The function context (available through the keyword `this`) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+      label: {
+        content: function() {
+            return "Customers";
+        }
+      }
+    });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/multiselect/methods/value) method **does not trigger** the `focusout` event of the input.
+This can affect the floating label functionality.
+To overcome this behavior, manually invoke the `refresh` method of the Floating Label: `$("#multiselect").data("kendoMultiColumnComboBox").label.floatingLabel.refresh();`
+
+#### Example
+
+    <select id="customers"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            group: { field: "Country" }
+        },
+        label: {
+            content: "Customers",
+            floating: true
+        }
+    });
+    </script>
+
 
 ### groupTemplate `String|Function`
 
@@ -526,6 +704,27 @@ The text message shown when hovering delete icon in a selected tag.
             dataValueField: "id",
             messages: {
                 deleteTag: "delete!"
+            }
+        });
+    </script>
+
+### messages.downArrow `String` *(default: "select")*
+
+Specifies the text that will be used for the MultiSelect `downArrow` title attribute.
+
+#### Example
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                downArrow: "custom!"
             }
         });
     </script>
@@ -842,6 +1041,200 @@ The [template](/api/javascript/kendo/methods/template) used to render the items 
     });
     </script>
 
+### prefixOptions `Object`
+
+The configuration for the prefix adornment of the component.
+
+#### Example - specify prefix adornment configuration
+
+    <input id="prefix" />
+    <script>
+        $("#prefix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        });
+    </script>
+
+### prefixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify prefix adornment icon
+
+    <input id="prefix" />
+    <script>
+        $("#prefix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            prefixOptions: {
+                icon: "search"
+            }
+        })
+    </script>
+
+### prefixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the prefix adornment of the component.
+
+#### Example - specify prefix adornment template
+
+    <input id="prefix" />
+    <script>
+        $("#prefix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        })
+    </script>
+
+### prefixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the prefix adornment will not have a separator.
+
+#### Example - specify prefix adornment separator
+
+    <input id="prefix" />
+    <script>
+        $("#prefix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            prefixOptions: {
+                template: () => `${kendo.ui.icon("search")}`,
+                separator: false
+            }
+        })
+    </script>
+
+### suffixOptions `Object`
+
+The configuration for the suffix adornment of the component.
+
+#### Example - specify suffix adornment configuration
+
+    <input id="suffix" />
+    <script>
+        $("#suffix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        });
+    </script>
+
+### suffixOptions.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content
+
+#### Example - specify suffix adornment icon
+
+    <input id="suffix" />
+    <script>
+        $("#suffix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            suffixOptions: {
+                icon: "search"
+            }
+        })
+    </script>
+
+### suffixOptions.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) for the suffix adornment of the component.
+
+#### Example - specify suffix adornment template
+
+    <input id="suffix" />
+    <script>
+        $("#suffix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`
+            }
+        })
+    </script>
+
+### suffixOptions.separator `Boolean` *(default: true)*
+
+If set to `false`, the suffix adornment will not have a separator.
+
+#### Example - specify suffix adornment separator
+
+    <input id="suffix" />
+    <script>
+        $("#suffix").kendoMultiSelect({
+            label: "MultiSelect",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                    data:  [
+                            { text: "Apples", value: "1" },
+                            { text: "Oranges", value: "2" }
+                    ]
+            },
+            suffixOptions: {
+                template: () => `${kendo.ui.icon("search")}`,
+                separator: false
+            }
+        })
+    </script>
+
 ### tagTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the tags.
@@ -942,6 +1335,22 @@ The mode used to render the selected tags. The available modes are:
 
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
 set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
+
+#### Example - set the tagMode
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" },
+                { id: 3, name: "Bananas" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            tagMode: "single"
+        });
+    </script>
 
 ### value `Array`*(default: [])*
 
@@ -1276,6 +1685,49 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
             return data;
         }
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "none"
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      size: "large"
+    });
     </script>
 
 ## Fields

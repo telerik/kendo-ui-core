@@ -1,7 +1,7 @@
 ---
 title: Export Multiple Pages with Variable Row Height
-page_title: Export Pages with Varying Row Height | Kendo UI Grid for jQuery
-description: "An example on how to export multiple pages from the Kendo UI Grid for jQuery in PDF with a varying row height."
+page_title: Export Pages with Varying Row Height - Kendo UI for jQuery Data Grid
+description: "Learn how to export multiple pages from the Kendo UI Grid for jQuery in PDF with a varying row height."
 previous_url: /controls/data-management/grid/how-to/pdf-export/multi-page-variable-height
 slug: howto_export_multiple_pageswith_variable_rowheight_pdf_grid
 tags: grid, export, pdf, multiple, pages, variable, row, height
@@ -14,4 +14,4 @@ res_type: kb
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

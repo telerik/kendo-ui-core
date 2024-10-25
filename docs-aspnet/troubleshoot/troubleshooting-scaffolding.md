@@ -1,14 +1,14 @@
 ---
 title: Scaffolding
 page_title: Scaffolding Troubleshooting
-description: "Learn about the solutions of issues that may occur while using the Kendo UI Scaffolder Visual Studio Extension."
+description: "Learn about the solutions of issues that may occur while using the Telerik UI Scaffolder Visual Studio Extension."
 slug: troubleshooting_scaffolding_aspnetmvc
 position: 2
 ---
 
 # Scaffolding
 
-This page provides solutions to common issues you may encounter while working with the Kendo UI Scaffolder Visual Studio extension.
+This page provides solutions to common issues you may encounter while working with the [Telerik UI Scaffolder]({% slug scaffolding_aspnetcore %}) Visual Studio extension.
 
 ## Common Scaffolding Issues
 
@@ -17,7 +17,7 @@ This page provides solutions to common issues you may encounter while working wi
 **Solution**
 
 * Make sure that you use a compatible Visual Studio version and that all listed requirements are fulfilled.
-* Check if the Kendo UI Scaffolder extension is listed in the **Tools** > **Extensions and Updates** list.
+* Check if the Telerik UI Scaffolder extension is listed in the **Tools** > **Extensions and Updates** list.
 
 ### Data Context Class DropDownList Is Empty
 
@@ -48,11 +48,11 @@ Make sure that a valid entity is selected.
 * [Common Issues in Kendo UI Excel Export](https://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
 * [Common Issues in Kendo UI Charts](https://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
 * [Performance Issues in Kendo UI Widgets for Data Visualization](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/upload/troubleshoot/troubleshooting)
 * [Common Issues Related to Styling, Appearance, and Rendering](https://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

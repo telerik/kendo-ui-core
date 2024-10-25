@@ -1,8 +1,8 @@
 ---
 title: Format Server Response with ServerGrouping in Grid
-description: An example on how to format a server response with serverGrouping in the Kendo UI Grid.
+description: Learn how to format a server response with serverGrouping in the Kendo UI Grid.
 type: how-to
-page_title: Format the Response with ServerGrouping | Kendo UI Grid for jQuery
+page_title: Format the Response with ServerGrouping - Kendo UI for jQuery Data Grid
 slug: grid-format-of-the-response-with-server-grouping
 tags: grid, server, grouping
 ticketid: 1138311
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -28,7 +28,7 @@ res_type: kb
   <td>Browser Version</td>
   <td>62.0.3202.75</td>
  </tr> <tr>
-  <td>Made with Version</td>
+  <td>Product Version</td>
   <td>2017.3.1026</td>
  </tr>
 </table>

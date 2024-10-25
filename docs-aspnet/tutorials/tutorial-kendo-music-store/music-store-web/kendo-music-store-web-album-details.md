@@ -1,6 +1,6 @@
 ---
 title: Display Album Details
-page_title: Display Album Details | Music Store Web App Tutorial
+page_title: Display Album Details - Music Store Web App Tutorial
 description: "Learn how to display the album details in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: displayalbumdetails_muscistorewebapp_aspnetmvc
 position: 5
@@ -10,7 +10,7 @@ position: 5
 
 When an album is clicked from any page, the album details are shown in a popup window. It enables users to change the quantity, to order and add the album to the shopping cart. More than one album details window can be opened at once, and they can be dragged around the screen.
 
-![A snapshot of the Kendo UI Music Store Album Details window](images/kendo-album-details-window.png)
+![{{ site.product_short }} A snapshot of the Kendo UI Music Store Album Details window](images/kendo-album-details-window.png)
 
 ## Configuration
 

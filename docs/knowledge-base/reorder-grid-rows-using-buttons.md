@@ -1,8 +1,8 @@
 ---
 title: Enable Reordering in Grid by Adding Buttons to Each Row
-description: An example on how to reorder Kendo UI Grid rows by adding buttons to each row to move items up and down.
+description: Learn how to reorder Kendo UI Grid rows by adding buttons to each row to move items up and down.
 type: how-to
-page_title: Reorder Rows by Adding Row Buttons | Kendo UI Grid for jQuery
+page_title: Reorder Rows by Adding Row Buttons - Kendo UI for jQuery Data Grid
 slug: reorder-grid-rows-using-buttons
 tags: grid, reordering, items
 ticketid: 1112024
@@ -15,11 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
- </tr>
- <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Tested up to version 2017.2 504</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
 </table>
 
@@ -33,25 +29,7 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 1. In the click handlers of the buttons, find a reference to the corresponding row and attach the click handlers to the `dataBound` event of the Grid.
 
 ```dojo
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Kendo UI Snippet</title>
-
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.rtl.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.silver.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.mobile.all.min.css"/>
-
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
-
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-
-  </head>
-  <body>
-
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
 
     <script>
@@ -122,13 +100,8 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 
               //content.scrollTop(offset);
             }
-
-
           });
         }
       }).data("kendoGrid");
-
     </script>
-  </body>
-</html>
 ```

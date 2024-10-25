@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TimePicker JSP Tag
+page_title: Overview - TimePicker JSP Tag
 description: "Get started with the TimePicker JSP tag in Kendo UI."
 slug: overview_timepicker_uiforjsp
 position: 1

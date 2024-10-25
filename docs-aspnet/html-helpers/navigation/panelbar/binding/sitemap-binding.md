@@ -1,7 +1,7 @@
 ---
 title: Sitemap Binding
 page_title: Sitemap Binding
-description: "Set a sitemap to create the items of the Telerik UI PanelBar HtmlHelper for {{ site.framework }}."
+description: "Set a sitemap to create the items of the Telerik UI PanelBar component for {{ site.framework }}."
 slug: sitemapbinding_panelbarhelper_aspnetmvc
 position: 3
 ---
@@ -40,7 +40,7 @@ The PanelBar enables you to create its items by setting a sitemap.
 
 1. Add a PanelBar.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().PanelBar()
             .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .BindTo("sample") //bind to sitemap with name "sample"
@@ -50,5 +50,5 @@ The PanelBar enables you to create its items by setting a sitemap.
 ## See Also
 
 * [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)
-* [PanelBarBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder Server-Side API](/api/kendo.mvc.ui.fluent/panelbarbuilder)
 * [PanelBar Server-Side API](/api/panelbar)

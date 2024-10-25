@@ -8,7 +8,7 @@
 
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt });
-            }
+            };
 
             container = $("<div style='margin:50px'/>").appendTo(Mocha.fixture);
         });
@@ -23,16 +23,10 @@
             $.mockjax.clear();
         });
 
-        function triggerEvent(element, type, info) {
-            element.trigger($.Event(type, info));
-
-            return element;
-        };
-
         it("ajax request is made when popup is shown", function(done) {
             $.mockjax({
                 url: "foo/baz",
-                response: function(request) {
+                response: function() {
                     assert.isOk(true);
                     done();
                 }
@@ -43,7 +37,25 @@
                     url: "foo/baz"
                 }
             });
-            
+
+            tooltip.show(container);
+        });
+
+        it("popup element is opened before the ajax request content is appended to it", function(done) {
+            $.mockjax({
+                url: "foo/baz",
+                response: function() {
+                    assert.isOk(tooltip.popup.visible());
+                    done();
+                }
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                }
+            });
+
             tooltip.show(container);
         });
 
@@ -160,7 +172,7 @@
                 requestStart: function(e) {
                     e.options.data = {
                         bar: "foo"
-                    }
+                    };
                 }
             });
 
@@ -184,7 +196,7 @@
                     }
                 },
                 requestStart: function(e) {
-                    e.options.data.bar = "foo"
+                    e.options.data.bar = "foo";
                 }
             });
 

@@ -1,14 +1,14 @@
 ---
 title: Timeline
 page_title: Configuration, methods and events of Kendo UI Timeline
-description: You will learn how to configure Timeline widget, which shows events over time. 
+description: You will learn how to configure Timeline widget, which shows events over time.
 res_type: api
 component: timeline
 ---
 
 # kendo.ui.Timeline
 
-Represents the Kendo UI Timeline widget. Inherits from [kendo.ui.Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Timeline widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 
@@ -47,7 +47,7 @@ dataSource instance is fired. By default, `autoBind` is set to `true` and the wi
 
 ### alternatingMode `Boolean`*(default: false)*
 
-Indicates whether events should be positioned on both sides of the timeline axis. By default all events are displayed on the right side of the timeline axis. 
+Indicates whether events should be positioned on both sides of the timeline axis. By default all events are displayed on the right side of the timeline axis.
 
 #### Example
 
@@ -109,7 +109,7 @@ Sets the orienation of the timeline axis. The widget expects "horizontal" or "ve
 
 ### collapsibleEvents `Boolean`*(default: false)*
 
-Enables the events in the Kendo UI Timeline to be expandable or collapsible. When enabled initially all events are collapsed. 
+Enables the events in the Kendo UI Timeline to be expandable or collapsible. When enabled initially all events are collapsed.
 
 #### Example
 
@@ -142,9 +142,103 @@ Enables the events in the Kendo UI Timeline to be expandable or collapsible. Whe
 
 Sets the field of the data item that provides the actions information for the event.
 
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataActionsField: "actions1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions1": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
+
 ### dataDescriptionField `String`*(default: "description")*
 
 Sets the field of the data item that provides the description information for the event.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataDescriptionField: "description1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description1": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
 
 ### dataDateField `String`*(default: "date")*
 
@@ -152,17 +246,247 @@ Sets the field of the data item that provides information when the given event h
 
 > The value for this field should be either JavaScript Date object or serialized date.
 
+#### Example
+
+    <div id="timeline"></div>
+
+    <script>
+      $(document).ready(function () {
+        var dataArray = [
+          { "id": 1, "title": "Bowling tournament",
+           "subtitle": "Location: Sterling Lanes",
+           "description": "Summer Bowling tournament in Michigan",
+           "date1": "2025-06-30T21:00:00.000Z",
+           "actions": [{ "text": "Visit the Bowling tournament page" }] },
+          { "id": 2,
+           "title": "Charlie's first football game",
+           "subtitle": "Location: City Football Stadium",
+           "description": "Call coach Williams",
+           "date1": "2022-10-22T21:00:00.000Z" }
+        ];
+
+        $("#timeline").kendoTimeline({
+          dataSource: {
+            data: dataArray,
+            schema: {
+              model: {
+                fields: {
+                  date1: {
+                    type: "date"
+                  }
+                }
+              }
+            }
+          },
+          dataDateField:"date1",
+          orientation: "vertical"
+        });
+      });
+    </script>
+
+### dataImagesAltField `String`*(default: "altField")*
+
+Sets the field of the data item that provides the value for the alt attribute of the images.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataImagesAltField: "altField1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField1": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
+
 ### dataImagesField `String`*(default: "images")*
 
 Sets the field of the data item that provides the images information for the event.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataImagesField: "images1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images1": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
 
 ### dataSubtitleField `String`*(default: "subtitle")*
 
 Sets the field of the data item that provides the subtitle information for the event.
 
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataSubtitleField: "subtitle1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle1": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
+
 ### dataTitleField `String`*(default: "title")*
 
 Sets the field of the data item that provides the title information for the event.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataTitleField: "title1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title1": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
 
 ### dataSource `kendo.data.DataSource | Object`
 
@@ -208,10 +532,10 @@ Specifies the template used to render the event details.
       <div class="k-card-body">
           <div class="k-card-description">
           <p>#=data.description#</p>
-          # var images = data.images; 
+          # var images = data.images;
           if(images && images.length > 0) { #
-            <img src="#=images[0].src#" class="k-card-image">
-            <img src="#=images[1].src#" class="k-card-image">
+            <img src="#=images[0].src#" class="k-card-media">
+            <img src="#=images[1].src#" class="k-card-media">
           # } #
           </div>
       </div>
@@ -281,9 +605,40 @@ Sets specific height for the event in horizontal mode.
 
 ### eventWidth `Number`*(default: 400)*
 
-Sets specific width for the event in vertical mode. 
+Sets specific width for the event in vertical mode.
 
 > This method is supported only in vertical mode.
+
+### navigatable `Boolean`*(default: false)*
+
+If set to `true`, will enable the keyboard navigation for the component.
+
+#### Example
+
+    <div id="timeline"></div>
+
+    <script>
+
+    $("#timeline").kendoTimeline({
+        dataSource: {
+            data:[ {"id":1,"title":"Bowling tournament","subtitle":"Location: Sterling Lanes","description":"Summer Bowling tournament in Michigan","date":"2025-06-30T21:00:00.000Z","actions":[{"text":"Visit the Bowling tournament page"}] },
+                    {"id":2,"title":"Charlie's first football game","subtitle":"Location: City Football Stadium","description":"Call coach Williams","date":"2022-10-22T21:00:00.000Z"},
+                    {"id":3,"title":"Alex's Birthday","subtitle":"Location: Alex's House","description":"Buy birthday cake and some fruits","date":"2010-01-09T22:00:00.000Z","images":[{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/4.jpg"},{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/16.jpg"}]},
+                    {"id":4,"title":"Vacation in Mexico","subtitle": "Location: Cabo San Lucas","description":"Check-in for the flight","date":"2017-12-24T22:00:00.000Z"}],
+            schema: {
+                model: {
+                fields: {
+                    date: {
+                    type: "date"
+                    }
+                }
+                }
+            }
+        },
+        orientation: "horizontal",
+        navigatable: true
+    });
+    </script>
 
 ### showDateLabels `Boolean`*(default: true)*
 
@@ -318,9 +673,9 @@ If set to `false`, the event's date label will be hidden.
 
 ## Methods
 
-### expand 
+### expand
 
-Expands an event. 
+Expands an event.
 
 > This method is supported only in vertical mode.
 
@@ -361,9 +716,9 @@ A string, a DOM element, or a jQuery object which represents the event. A string
     timeline.expand(firstEvent);
     </script>
 
-### collapse 
+### collapse
 
-Collapse an event. 
+Collapse an event.
 
 > This method is supported only in vertical mode.
 
@@ -407,9 +762,9 @@ A string, a DOM element, or a jQuery object which represents the event. A string
     });
     </script>
 
-### open 
+### open
 
-Open event details. 
+Open event details.
 
 > This method is supported only in horizontal mode.
 
@@ -555,7 +910,7 @@ Switches to the previous portion of events with animation.
     timeline.previous();
     </script>
 
-### redraw 
+### redraw
 
 Redraws the Timeline widget.
 
@@ -683,6 +1038,7 @@ If invoked, prevents the change action.
         },
         orientation: "horizontal",
         change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("eventContainer ", e.eventContainer, "data: ", e.dataItem);
         //handle event
         }
@@ -715,6 +1071,10 @@ The widget instance which fired the event.
 
 The data item asociated with the event that is going to be expanded.
 
+##### e.preventDefault `Function`
+
+If invoked, prevents the expand action.
+
 #### Example - hooking up to the expand event
 
     <div id="timeline"></div>
@@ -740,6 +1100,7 @@ The data item asociated with the event that is going to be expanded.
         collapsibleEvents: true,
         orientation: "vertical",
         expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data: ", e.dataItem);
             //handle event
         }
@@ -761,6 +1122,10 @@ The widget instance which fired the event.
 ##### e.dataItem `kendo.data.Model`
 
 The data item asociated with the event that is going to be expanded.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the collapse action.
 
 #### Example - hooking up to the collapse event
 
@@ -787,6 +1152,7 @@ The data item asociated with the event that is going to be expanded.
         collapsibleEvents: true,
         orientation: "vertical",
         collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data: ", e.dataItem);
             //handle event
         }
@@ -840,6 +1206,7 @@ The action DOM element that is clicked.
         collapsibleEvents: true,
         orientation: "vertical",
         actionClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data: ", e.dataItem);
             //handle event
         }
@@ -859,6 +1226,10 @@ The widget instance which fired the event.
 ##### e.action `String`
 
 next or previous values depending whether user is trying to load next or previous portion of events.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the navigate action.
 
 #### Example - hooking up to the navigate event
 
@@ -885,6 +1256,7 @@ next or previous values depending whether user is trying to load next or previou
         collapsibleEvents: true,
         orientation: "horizontal",
         navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("action: ", e.action);
             //handle event
         }

@@ -1,16 +1,18 @@
 ---
 title: Overview
-page_title: jQuery Charts Documentation | Sparkline Overview | Kendo UI
-description: "Get started with the jQuery Sparkline by Kendo UI and learn how to create, initialize, and enable the widget."
+page_title: jQuery Charts Documentation - Sparkline Overview
+description: "Get started with the jQuery Sparkline by Kendo UI and learn how to create, initialize, and enable the component."
 slug: overview_kendoui_sparklinescharts
 position: 1
 ---
 
-# Sparkline Overview
+# {{ site.product }} Sparkline Overview
 
 The Kendo UI Sparkline is a very small chart that is drawn without axes, coordinates, legends, titles, or other chart-specific elements.
 
 Sparklines behave like inline elements as they are rendered inside a `span` element so that they can be easily embedded in text as opposed to the standard Telerik UI Charts which behave like block elements as they are rendered inside `div` elements.
+
+> * The Sparkline inherits configurations, methods, fields and events from the [Categorical Charts]({% slug htmlhelpers_categoricalcharts_aspnetcore %}).
 
 While Sparklines are typically line charts, other types are supported as well:
 

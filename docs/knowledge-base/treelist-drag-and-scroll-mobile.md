@@ -1,8 +1,8 @@
 ---
 title: Scroll and Drag and Drop on Mobile Devices
-description: An example on how to provide scrolling and the drag-and-drop functionality at the same time in the Kendo UI TreeList on mobile devices.
+description: Learn how to provide scrolling and the drag-and-drop functionality at the same time in the Kendo UI TreeList on mobile devices.
 type: how-to
-page_title: Drag and Drop on Mobile Devices | Kendo UI TreeList for jQuery
+page_title: Drag and Drop on Mobile Devices - Kendo UI TreeList for jQuery
 slug: treelist-drag-and-scroll-mobile
 tags: treelist, android, ios, mobile, drag, drop, scroll
 ticketid: 1179396
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>TreeList for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeList for jQuery</td>
 	</tr>
 </table>
 

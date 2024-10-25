@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Grid JSP Tag
+page_title: Ajax Binding - Grid JSP Tag
 description: "Get started with the Ajax binding of the Grid JSP tag in Kendo UI."
 slug: ajaxbinding_grid_uiforjsp
 position: 3

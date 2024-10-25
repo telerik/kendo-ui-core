@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Learn the binding options for the Telerik UI TreeView HtmlHelper for {{ site.framework }}."
+description: "Learn the binding options for the Telerik UI TreeView component for {{ site.framework }}."
 previous_url: /helpers/navigation/treeview/ajax-binding
 slug: htmlhelpers_treeview_binding_aspnetcore
 position: 2
@@ -9,14 +9,17 @@ position: 2
 
 # TreeView Binding
 
-The TreeView HTML helper provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
+The TreeView provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
+
+> Do not use the names of the [`kendo.data.Node` fields and methods](https://docs.telerik.com/kendo-ui/api/javascript/data/node) (for example, `children`) as fields in the TreeView data.
 
 ## Declaring TreeView Items
 
-The TreeView allows you to declare all its items within the HTML helper declaration.
+The TreeView allows you to declare all its items within the helper declaration.
 
 The following example demonstrates how to configure a TreeView with three levels of hierarchy.
 
+```HtmlHelper
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Items(treeview =>
@@ -35,17 +38,48 @@ The following example demonstrates how to configure a TreeView with three levels
                 });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" load-on-demand="true" name="treeview">
+        <items>
+            <treeview-item expanded="true" text="My Web Site">
+                <items>
+                    <treeview-item expanded="true"  text="images">
+                        <items>
+                            <treeview-item text="logo.png">
+                            </treeview-item>
+                            <treeview-item text="body-back.png">
+                            </treeview-item>
+                        </items>
+                    </treeview-item>
+                    <treeview-item text="about.html" >
+                    </treeview-item>
+                    <treeview-item text="contacts.html" >
+                    </treeview-item>
+                </items>
+            </treeview-item>
+        </items>
+    </kendo-treeview>
+```
+{% endif %}
 
 ## Local Data Binding
 
 You can bind the TreeView locally on the server by passing the appropriate collection to the HTML helper `BindTo()` method.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().TreeView()
     .Name("treeview-left")
     .BindTo((IEnumerable<TreeViewItemModel>)ViewBag.treeData)
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview name="treeview-left" bind-to="(IEnumerable<TreeViewItemBase>)ViewBag.inlineDefault">
+    </kendo-treeview>
+```
+{% endif %}
 ```Controller
 public ActionResult Local_Data_Binding()
 {
@@ -101,12 +135,31 @@ private IEnumerable<TreeViewItemModel> GetData()
     return inline;
 }
 ```
+```TreeViewItemModel
+public class TreeViewItemViewModel
+{
+	public string Id { get; set; }
+    public bool Expanded { get; set; }
+    public bool Encoded { get; set; }
+    public string Text { get; set; }
+    public string SpriteCssClass { get; set; }
+    public string Url { get; set; }
+    public string ImageUrl { get; set; }
+    public bool HasChildren { get; set; }
+    public bool Checked { get; set; }
+    public List<TreeViewItemModel> Items { get; set; }
+    public IDictionary<string, string> HtmlAttributes { get; set; }
+    public IDictionary<string, string> ImageHtmlAttributes { get; set; }
+    public IDictionary<string, string> LinkHtmlAttributes { get; set; }
+	public bool Selected { get; set; }
+}
+```
 
 ## Remote Data Binding
 
-The TreeView provides support for remote data binding by using a `DataSource` configuration object.
+The TreeView provides support for remote data binding by using a [`DataSource`]({% slug htmlhelpers_datasource_aspnetcore %}) configuration object.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().TreeView()
     .Name("treeview")
     .DataTextField("Name")
@@ -117,16 +170,29 @@ The TreeView provides support for remote data binding by using a `DataSource` co
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Read_TreeViewData", "TreeView")"/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-treeview>
+```
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
     var result = new List<HierarchicalViewModel>()
     {
-        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+        new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item" }
     };
 
     return result;
@@ -135,7 +201,7 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 public IActionResult Read_TreeViewData(int? id)
 {
     var result = GetHierarchicalData()
-        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
         .Select(item => new {
             id = item.ID,
             Name = item.Name,
@@ -147,6 +213,94 @@ public IActionResult Read_TreeViewData(int? id)
     return Json(result);
 }
 ```
+{% else %}
+```Controller
+public static IList<HierarchicalViewModel> GetHierarchicalData()
+{
+    var result = new List<HierarchicalViewModel>()
+    {
+        new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item" }
+    };
+
+    return result;
+}
+
+public ActionResult Read_TreeViewData(int? id)
+{
+    var result = GetHierarchicalData()
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
+        .Select(item => new {
+            id = item.ID,
+            Name = item.Name,
+            expanded = item.Expanded,
+            imageUrl = item.ImageUrl,
+            hasChildren = item.HasChildren
+        });
+
+    return Json(result, JsonRequestBehavior.AllowGet);
+}
+```
+{% endif %}
+
+
+```HierarchicalViewModel
+public class HierarchicalViewModel
+{
+	public int ID { get; set; }
+	public int? ParentID { get; set; }
+    public bool HasChildren { get; set; }
+    public string Name { get; set; }
+    public bool Expanded { get; set; }
+    public string ImageUrl { get; set; }
+}
+```
+
+By default, the TreeView sends to the remote endpoint the `id` of the expanded node. To [send additional data]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) use the DataSource `Data` method and provide the name of a JavaScript function which will return a JavaScript object with the additional data.
+
+{% if site.core %}
+## Razor Pages
+
+In order to set up the TreeView component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+
+```tab-HtmlHelper(csthml)
+@(Html.Kendo().TreeView()
+    .Name("treeview")
+    .DataTextField("Name")
+    .DataSource(dataSource => dataSource
+        .Read(r => r.Url(Url.Page("TreeViewIndex", "TreeViewRead")))
+    )
+)
+```
+```tab-TagHelper(cshtml)
+    <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Page("TreeViewIndex", "TreeViewRead")"/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-treeview>
+```
+```tab-PageModel(cshtml.cs)
+    public JsonResult OnGetTreeViewRead(int? id)
+    {
+        var data = result.Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
+            .Select(item => new {
+                id = item.ID,
+                Name = item.Name,
+                hasChildren = item.HasChildren
+            });
+
+        return new JsonResult(data);
+    }
+```
+{% endif %}
 
 ## See Also
 

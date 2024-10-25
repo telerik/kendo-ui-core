@@ -1,8 +1,8 @@
 ---
 title: Prevent Editing while Grid Is in Edit Mode
-description: An example on how to prevent editing while the Kendo UI Grid is in edit mode.
+description: Learn how to prevent editing while the Kendo UI Grid is in edit mode.
 type: how-to
-page_title: Prevent Adding New Records and Editing while in Edit Mode | Kendo UI Grid for jQuery
+page_title: Prevent Adding New Records and Editing while in Edit Mode - Kendo UI for jQuery Data Grid
 slug: grid-prevent-editing-when-editing
 tags: grid, editing, prevent
 ticketid: 1168745
@@ -18,7 +18,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td>
 	</tr>
 </table>
 
@@ -26,9 +26,11 @@ res_type: kb
 
 How can I disable the adding and editing of records in a Grid in inline edit mode while the user is actually adding or creating a record?
 
+>note This solution is custom and might lead to unexpected side effects. You will need to adjust it according to your Grid configuration and use-case.
+
 ## Solution
 
-1. Handle the [`mousedown`](https://api.jquery.com/mousedown/) event of the Grid for all buttons that do not have the `.k-grid-cancel` and `.k-grid-update` classes.
+1. Handle the [`mousedown`](https://api.jquery.com/mousedown/) event of the Grid for all buttons that do not have the `.k-grid-cancel-command` and `.k-grid-save-command` classes.
 1. In the `mousedown` event handler, check if a `.k-grid-edit-row` class exists in the Grid. Based on the result, prevent the default behavior.
 
 ```dojo
@@ -129,7 +131,7 @@ How can I disable the adding and editing of records in a Grid in inline edit mod
             editable: "inline"
         });
 
-        $(".k-grid").on("mousedown", ".k-button:not('.k-grid-cancel,.k-grid-update')", function(e) {
+        $(".k-grid").on("mousedown", ".k-button:not('.k-grid-cancel-command,.k-grid-save-command')", function(e) {
             var grid = $(this).closest(".k-grid");
             var editRow = grid.find(".k-grid-edit-row");
 

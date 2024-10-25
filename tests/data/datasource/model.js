@@ -398,6 +398,27 @@
             assert.equal(model.dirty, true);
         });
 
+        it("nullable field with default value is not initialized as null", function() {
+            var model = kendo.data.Model.define({
+                id: "personId",
+                fields: {
+                    name: {
+                        type: "string"
+                    },
+                    color: {
+                        type: 'string',
+                        nullable: true,
+                        defaultValue: '#000000'
+                    }
+                }
+            });
+
+            var person = new model({
+            });
+
+            assert.equal(person.color, "#000000");
+        });
+
         it("adding items to array field updates dirtyFields", function() {
             var model = new kendo.data.Model({
                 foo: []

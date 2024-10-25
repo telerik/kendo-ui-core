@@ -1,8 +1,8 @@
 ---
 title: Dynamically Filter Resource Groups by Using MultiSelect in Scheduler
-description: An example on how to filter the groups of the resources in the Kendo UI Scheduler.
+description: Learn how to filter the groups of the resources in the Kendo UI Scheduler.
 type: how-to
-page_title: Implement Resource Group Filtering by Using MultiSelect | Kendo UI Scheduler for jQuery
+page_title: Implement Resource Group Filtering by Using MultiSelect - Kendo UI Scheduler for jQuery
 slug: scheduler-filter-groups-resources-multiselect
 tags: kendo, kendoui, scheduler, resources, groping, show, hide, filter, multiselect
 ticketid: 1138727
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Scheduler</td>
+  <td>Progress® Kendo UI® Scheduler for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -53,8 +53,8 @@ How can I show only the selected resource groups in the Scheduler and use the Ke
     <script>
         $(function() {
             $("#scheduler").kendoScheduler({
-                date: new Date("2013/6/13"),
-                startTime: new Date("2013/6/13 07:00 AM"),
+                date: new Date("2022/6/13"),
+                startTime: new Date("2022/6/13 07:00 AM"),
                 height: 600,
                 views: [
                     "day",

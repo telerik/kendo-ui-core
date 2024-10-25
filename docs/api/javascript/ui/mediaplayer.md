@@ -235,6 +235,7 @@ Gets or sets the information about the media that is loaded in the widget.
       // get a reference to the media player widget
       var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
       // check the currently loaded media
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(mediaPlayer.media());
       // change the media loaded in the widget
       mediaPlayer.media({

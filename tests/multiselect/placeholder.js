@@ -4,14 +4,14 @@
 
     function populateSelect() {
         var options = [];
-        for (var i=0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
         select.html(options);
     }
 
-    describe("kendo.ui.MultiSelect Placeholder", function () {
+    describe("kendo.ui.MultiSelect Placeholder", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
             select = $("<select multiple />").appendTo(Mocha.fixture);

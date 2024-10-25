@@ -1,8 +1,8 @@
 ---
 title: Use Custom Validation in Filter Menus
-page_title: Custom Validation in Filter Menus | Kendo UI Grid for jQuery
-description: "An example on how to use custom validation in the filter menu of the jQuery Grid by Kendo when the filtering functionality is applied."
-previous_url: /controls/data-management/grid/how-to/filtering/use-custom-validation-in-filter-menus
+page_title: Custom Validation in Filter Menus - Kendo UI for jQuery Data Grid
+description: "Learn how to use custom validation in the filter menu of the jQuery Grid by Kendo when the filtering functionality is applied."
+previous_url: /controls/data-management/grid/how-to/filtering/use-custom-validation-in-filter-menus, /controls/editors/validator/how-to/use-custom-validation-in-grid-filter-menus
 slug: howto_gridfiltering_custom_validation_filter_menu_grid
 tags: use, custom, validation, filter, grid, menus
 component: grid
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -131,4 +131,4 @@ The following example demonstrates how to use custom validation in the **Filter*
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

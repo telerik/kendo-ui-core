@@ -1,6 +1,6 @@
 ---
 title: Create the Single-Page App
-page_title: Create the Single-Page App | Music Store Dashboard Tutorial
+page_title: Create the Single-Page App - Music Store Dashboard Tutorial
 description: "Learn how to create the single-page application in the Kendo UI Music Store Dashboard sample project by using Telerik UI for ASP.NET MVC."
 slug: createthespa_muscistoredashboard_aspnetmvc
 position: 2
@@ -8,7 +8,7 @@ position: 2
 
 # Create the Single-Page App
 
-![An overview of the Kendo UI Music Store Sales page](images/dashboard-overview.png)
+![{{ site.product_short }} An overview of the Kendo UI Music Store Sales page](images/dashboard-overview.png)
 
 The Music Store Dashboard is constructed as a single-page app (SPA) that is built to deliver smooth transitions and high performance. Using the `Sammy.js` framework, the various pages of the application are routed through it and in ASP.NET MVC.
 
@@ -171,7 +171,7 @@ When a view is requested, its create method is called. For the Music Store Dashb
 
 ### Handle Page Navigation
 
-![The navigation strip of the Music Store Dashboard](images/navigation-strip.png)
+![{{ site.product_short }} The navigation strip of the Music Store Dashboard](images/navigation-strip.png)
 
 The various pages of the Music Dashboard are accessed through the navigation strip at the top.
 

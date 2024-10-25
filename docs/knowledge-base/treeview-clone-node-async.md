@@ -1,8 +1,8 @@
 ---
 title: Asynchronously Clone TreeView Nodes and All Their Children
-description: An example on how to asynchronously clone a Kendo UI TreeView node together with all its children.
+description: Learn how to asynchronously clone a Kendo UI TreeView node together with all its children.
 type: how-to
-page_title: Clone TreeView Nodes and All Their Children | Kendo UI TreeView for jQuery
+page_title: Clone TreeView Nodes and All Their Children - Kendo UI TreeView for jQuery
 slug: treeview-clone-node-async
 tags: kendo, kendo-ui, treeview, clone, node, all, children
 res_type: kb
@@ -17,7 +17,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>TreeView for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeView for jQuery</td>
 	</tr>
 </table>
 

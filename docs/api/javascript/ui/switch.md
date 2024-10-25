@@ -58,6 +58,8 @@ If set to `true`, the Switch will render into its read-only state.
 
 Defines the text of the `checked` and `unchecked` labels that are displayed within the Switch. All labels support localization.
 
+> The `messages` property is applicable only for the `Default` and `Classic` themes. All other themes, by design, do not show `checked` and `unchecked` messages.
+
 #### Example
 
     <input id="switch" />
@@ -75,6 +77,8 @@ Defines the text of the `checked` and `unchecked` labels that are displayed with
 
 The label for the checked state of the Switch.
 
+> The `messages` property is applicable only for the `Default` and `Classic` themes. All other themes, by design, do not show `checked` and `unchecked` messages.
+
 #### Example
 
     <input id="switch" />
@@ -91,6 +95,8 @@ The label for the checked state of the Switch.
 
 The label for the unchecked state of the Switch.
 
+> The `messages` property is applicable only for the `Default` and `Classic` themes. All other themes, by design, do not show `checked` and `unchecked` messages.
+
 #### Example
 
     <input id="switch" />
@@ -101,6 +107,62 @@ The label for the unchecked state of the Switch.
                 unchecked: "NO"
             }
         });
+    </script>
+
+### size `String` *(default: 'medium')*
+
+Sets a value controlling the size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+    <input id="switch" />
+    <script>
+    $("#switch").kendoSwitch({
+        size: "large"
+    });
+    </script>
+
+### trackRounded `String` *(default: 'full')*
+
+Sets a value controlling the track's border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- "none"
+
+#### Example
+
+    <input id="switch" />
+    <script>
+    $("#switch").kendoSwitch({
+        trackRounded: "small"
+    });
+    </script>
+
+### thumbRounded `String` *(default: 'full')*
+
+Sets a value controlling the thumb's border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- "none"
+
+#### Example
+
+    <input id="switch" />
+    <script>
+    $("#switch").kendoSwitch({
+        thumbRounded: "full"
+    });
     </script>
 
 ### width `Number|String`*(default: "6em")*
@@ -115,6 +177,23 @@ The width of the Switch.
         $("#switch").kendoSwitch({
             width: 140
         });
+    </script>
+
+The Switch options can be changed dynamically with the `setOptions()` method.
+
+#### Example
+
+    <input id="switch" />
+
+    <script>
+      $("#switch").kendoSwitch({
+        width: 50
+      });
+
+      var switch = $("#switch").data("kendoSwitch")
+          switch.setOptions( {
+              width: 200
+          })
     </script>
 
 ## Methods
@@ -233,6 +312,7 @@ The checked state of the Switch.
     <script>
         $("#switch").kendoSwitch({
             change: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.checked);
             }
         });

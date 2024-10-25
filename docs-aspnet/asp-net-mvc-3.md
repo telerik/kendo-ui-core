@@ -13,7 +13,7 @@ This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 3
 
 It uses Visual Studio 2010 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 3. The examples create a new ASP.NET MVC 3 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 3 applications are the same.
 
-> The [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
+> The [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) automate the whole procedure which this document describes.
 
 ## Create New ASP.NET MVC 3 Applications
 
@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 3 a
 
 **Figure 1. The new ASP.NET MVC 3 application**
 
-![New ASP.NET MVC 3 Application](images/mvc3-new-app.png)
+![{{ site.product_short }} New ASP.NET MVC 3 Application](images/mvc3-new-app.png)
 
 ## Add Telerik UI for ASP.NET MVC
 
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in the Solution Explorer](images/mvc3-solution.png)
+![{{ site.product_short }} Kendo directories in the Solution Explorer](images/mvc3-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -134,7 +134,7 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 **Step 4** Include the jQuery JavaScript file from the CDN or a compatible version from other location. Add a `script` tag in within the `head` tag.
 
-        <script src="https://kendo.cdn.telerik.com/<kendo ui version>/js/jquery.min.js”></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 **Step 5** Include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after jQuery.
 
@@ -194,12 +194,12 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 
-![The final result](images/mvc3-final.png)
+![{{ site.product_short }} The final result](images/mvc3-final.png)
 
 ## Next Steps
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Use the Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Use the Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
@@ -207,5 +207,5 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetcore %})

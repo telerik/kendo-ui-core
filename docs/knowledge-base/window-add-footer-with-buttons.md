@@ -1,8 +1,8 @@
 ---
 title: Add Footer with Buttons to the Window
-description: An example on how to add a footer with buttons to a resizable Kendo UI Window.
+description: Learn how to add a footer with buttons to a resizable Kendo UI Window.
 type: how-to
-page_title: Add Footer with Buttons | Kendo UI Window for jQuery
+page_title: Add Footer with Buttons - Kendo UI Window for jQuery
 slug: window-add-footer-with-buttons
 tags: window, footer, buttons, resizable, scrollable
 ticketid: 1142513
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Window</td>
+  <td>Progress® Kendo UI® Window for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -90,4 +90,4 @@ Position the footer with the custom buttons at the bottom of the Window by using
 
 ## See Also
 
-* [Kendo UI Window Overview](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [Kendo UI Window Overview](https://docs.telerik.com/kendo-ui/controls/window/overview)

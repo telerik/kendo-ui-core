@@ -1,8 +1,8 @@
 ---
 title: Exclude Certain Columns from the Exported PDF File
-description: An example on how to exclude certain columns from the exported PDF file when working with the Kendo UI Grid.
+description: Learn how to exclude certain columns from the exported PDF file when working with the Kendo UI Grid.
 type: how-to
-page_title: Exclude Certain Columns from the Exported PDF File | Kendo UI Grid for jQuery
+page_title: Exclude Certain Columns from the Exported PDF File - Kendo UI for jQuery Data Grid
 slug: grid-exclude-columns-from-exported-pdf
 tags: grid, export, pdf, exclude, remove, column, columns, exported, file,
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with version 2018.1.221</td>
  </tr>
 </table>
@@ -27,6 +27,8 @@ component: grid
 How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 
 ## Solution
+
+> As of Kendo UI R1 2021, there is an [exportable](/api/javascript/ui/grid/configuration/columns.exportable) property which allows the developer to exclude columns from being exported.
 
 Use either of the following approaches:
 
@@ -82,7 +84,7 @@ The following example demonstrates how to hide the last column during PDF Export
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/pako_deflate.min.js"></script>
+    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">
@@ -277,3 +279,9 @@ The following example demonstrates how to hide the last column during PDF Export
       </style>
     </div>
 ```
+
+## See Also
+
+* [Change Column Widths during PDF Export]({% slug grid-pdf-export-change-column-widths %})
+* [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})
+* [Exclude Toolbar and Pager from Grid PDF Export]({% slug grid-export-pdf-without-toolbar-pager %})

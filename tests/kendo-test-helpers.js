@@ -1,3 +1,5 @@
+kendo.setDefaults('iconType', 'svg');
+
 function callbackHash(object) {
     if (typeof object === "string") {
         var obj = {};
@@ -76,7 +78,7 @@ function arrayClose(a, b, tolerance) {
 function tzTest(tzAlias, testName, expected, callback) {
     var TZ_NAMES = {
         "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time"],
-        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time", "FLE"],
+        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time", "Eastern European Standard Time", "FLE"],
         "Moscow": ["MSK", "RTZ2", "Russia TZ 2 Standard Time"],
         "Pacific": ["PDT", "PST"]
     };
@@ -160,6 +162,73 @@ function mousewheel(element, delta) {
     $(element).trigger($.Event("mousewheel", { originalEvent: { detail: delta * 3 }, preventDefault: $.noop, stopPropagation: $.noop }));
 }
 
+function axeRun(container, done, exclude) {
+    var excludedRules = {
+        // Skip color contrast violations as those are subject to styling
+        "color-contrast": { enabled: false }
+    };
+
+    if (exclude && exclude.length) {
+        exclude.forEach(function(ex) {
+            excludedRules[ex] = { enabled: false };
+        });
+    }
+
+    axe.run(container, {
+        rules: excludedRules
+    }, function(err, result) {
+        var violations;
+
+        if (!!err) {
+            done(err);
+        }
+
+        try {
+            assert.equal(result.violations.length, 0);
+            done();
+        } catch (assertionErr) {
+            violations = axeViolations(result.violations, result.passes.length);
+
+            if (violations.length) {
+                assertionErr.stack = violations;
+                done(assertionErr);
+            } else {
+                done();
+            }
+        }
+    });
+}
+
+function axeRunFixture(done, exclude) {
+    axeRun(Mocha.fixture, done, exclude);
+}
+
+function axeViolations(violations, numberOfPasses) {
+    var messages = [];
+    var numberOfViolations = violations.length;
+    var result;
+
+    violations.forEach(function(violation) {
+        var nodes = violation.nodes;
+        var message = [("Accessibility error: " + violation.impact).toUpperCase()];
+
+        message.push("Description: " + violation.description);
+        message.push("Help: " + violation.help);
+        message.push("Info: " + violation.helpUrl);
+
+        nodes.forEach(function(node) {
+            message.push("Element: " + node.html);
+            message.push("\t" + node.failureSummary);
+        });
+
+        messages.push(message.join("\r\n"));
+    });
+
+    result = messages.join("\r\n===================================================\r\n");
+
+    return result += "\r\nCompliance level: " + Math.floor(numberOfPasses * 100 / (numberOfViolations + numberOfPasses)) + "%";
+}
+
 $.mockjaxSettings.logging = false;
 
 QUnit = {};
@@ -202,7 +271,7 @@ function getDomContentsLength() {
         window.requestAnimationFrame = callback => {
             setTimeout(callback, 0);
         };
-    })
+    });
 
     afterEach(function() {
         Mocha.fixture.empty().remove();
@@ -211,8 +280,8 @@ function getDomContentsLength() {
 
         var length = getDomContentsLength();
 
-        if (!this.currentTest) console.dir(this.currentTest);
-        if (!this.currentTest.parent) console.dir(this.currentTest.parent);
+        if (!this.currentTest) {console.dir(this.currentTest);}
+        if (!this.currentTest.parent) {console.dir(this.currentTest.parent);}
         if (length > domContentsLength) {
             console.warn(this.currentTest.parent.title, this.currentTest.title, 'test did not clean DOM contents properly');
         }
@@ -235,50 +304,4 @@ function getDomContentsLength() {
 
         window.requestAnimationFrame = originRequestAnimationFrame;
     });
-})();
-
-var ngTestModule = $.noop, ngTest = $.noop, ngScope;
-
-(function() {
-    if (!('angular' in window)) {
-        return;
-    }
-
-    var $injector, $scope, $compile;
-
-    ngScope = function() {
-        return angular.element(Mocha.fixture.children()[0]).scope();
-    }
-
-    var app = angular.module('kendo.tests', ['kendo.directives']);
-
-    ngTest = function(name, setup, check, async) {
-        it(name, function(done) {
-            setup();
-            angular.bootstrap(Mocha.fixture.children()[0], ['kendo.tests']);
-            setTimeout(function() {
-                check(done);
-                
-                if (!async) {
-                    done();
-                }
-            }, 100);
-        });
-    }
-
-    ngTest2 = function(name, theTest) {
-        it(name, function() {
-            var root = $('<div ng-controller=main></div>').appendTo(Mocha.fixture);
-
-            var scopeSetup = $.noop;
-
-            angular.module('kendo.tests').controller('main', function($scope) {
-                scopeSetup($scope);
-            });
-
-            theTest(root, function(setup) { scopeSetup = setup }, function() { angular.bootstrap(root, ['kendo.tests']); });
-            kendo.destroy(root);
-            root.remove();
-        });
-    }
 })();

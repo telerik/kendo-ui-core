@@ -1,8 +1,8 @@
 ---
 title: Create a Table with Borders in the Editor
-description: An example on how to create a table with borders in the Kendo UI Editor.
+description: Learn how to create a table with borders in the Kendo UI Editor.
 type: how-to
-page_title: Create a Table with Borders | Kendo UI Editor for jQuery
+page_title: Create a Table with Borders - Kendo UI Editor for jQuery
 slug: editor-create-table-borders
 tags: editor, table, create, borders
 res_type: kb
@@ -14,10 +14,10 @@ component: editor
 <table>
  <tr>
   <td>Product</td>
-  <td>Kendo UI Editor</td>
+  <td>Progress® Kendo UI® Editor for jQuery</td>
  </tr>
  <tr>
-  <td>Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2019.1.220 version</td>
  </tr>
 </table>

@@ -1,6 +1,6 @@
 /* exported createListBoxFromHtml */
 function createListBoxFromHtml(html, options, container) {
-    return $(html || "<select />").appendTo(container || Mocha.fixture[0]).kendoListBox(options).data("kendoListBox");
+    return $(html || "<select aria-label='listbox label' />").appendTo(container || Mocha.fixture[0]).kendoListBox(options).data("kendoListBox");
 }
 
 /* exported createListBoxFromOptions */
@@ -100,21 +100,21 @@ function getDataItem(listbox, item) {
 
 function getToolElementClassName(command) {
     var clssClassNames = {
-        "remove": "k-i-x",
-        "moveUp": "k-i-arrow-60-up",
-        "moveDown": "k-i-arrow-60-down",
-        "transferTo": "k-i-arrow-60-right",
-        "transferFrom": "k-i-arrow-60-left",
-        "transferAllTo": "k-i-arrow-double-60-right",
-        "transferAllFrom": "k-i-arrow-double-60-left"
+        "remove": "x",
+        "moveUp": "caret-alt-up",
+        "moveDown": "caret-alt-down",
+        "transferTo": "caret-alt-right",
+        "transferFrom": "caret-alt-left",
+        "transferAllTo": "caret-double-alt-right",
+        "transferAllFrom": "caret-double-alt-left"
     };
 
-    return clssClassNames[command];
+    return "k-svg-i-" + clssClassNames[command];
 }
 
 function clickButton(listbox, command, event) {
     listbox.toolbar.element
-        .find("a.k-button>." + getToolElementClassName(command))
+        .find("button.k-button>." + getToolElementClassName(command))
         .trigger(event || $.Event({ type: "click", preventDefault: $.noop }));
 }
 

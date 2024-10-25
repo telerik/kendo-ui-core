@@ -10,7 +10,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -23,16 +23,16 @@
                 ]
             }).data("kendoToolBar");
 
-            container.find(".k-overflow-anchor").width(28);
-            container.find(".k-button:not(.k-overflow-anchor)").width(68);
+            container.find(".k-toolbar-overflow-button").width(28);
+            container.find(".k-button:not(.k-toolbar-overflow-button)").width(68);
 
             var toolbarButtons = container.find("#foo, #bar");
             assert.isOk(toolbarButtons.eq(0).is(":visible"), "First button is visible");
             assert.isOk(toolbarButtons.eq(1).is(":hidden"), "Second button is hidden");
 
-            var overflowButtons = toolbar.popup.element.find(">li");
-            assert.isOk(overflowButtons.eq(0).hasClass("k-overflow-hidden"), "First item is hidden");
-            assert.isOk(!overflowButtons.eq(1).hasClass("k-overflow-hidden"), "Second item is visible");
+            var overflowButtons = toolbar.overflowMenu.element.find(">li");
+            assert.isOk(overflowButtons.eq(0).hasClass("k-hidden"), "First item is hidden");
+            assert.isOk(!overflowButtons.eq(1).hasClass("k-hidden"), "Second item is visible");
         });
 
         it("buttons after hidden groups should be hidden as well no matter that there is sufficient space to show them", function() {
@@ -52,8 +52,8 @@
                 ]
             }).data("kendoToolBar");
 
-            container.find(".k-overflow-anchor").width(28);
-            container.find(".k-button:not(.k-overflow-anchor)").width(50);
+            container.find(".k-toolbar-overflow-button").width(28);
+            container.find(".k-button:not(.k-toolbar-overflow-button)").width(50);
 
             var toolbarButtons = container.find("#foo, #bar");
             assert.isOk(toolbarButtons.eq(0).is(":visible"), "First button is visible");
@@ -72,9 +72,9 @@
             assert.equal(toolbarButton.length, 1);
             assert.isOk(toolbarButton.is(":visible"), "Foo button is visible");
 
-            var overflowButtons = toolbar.popup.element.find(">li");
+            var overflowButtons = toolbar.overflowMenu.element.find(">li");
             assert.equal(overflowButtons.length, 2);
-            assert.isOk(!overflowButtons.eq(1).hasClass("k-overflow-hidden"), "Bar item is visible");
+            assert.isOk(!overflowButtons.eq(1).hasClass("k-hidden"), "Bar item is visible");
         });
 
         it("Toolbar's popup is automatically closed on resize", function() {
@@ -85,11 +85,11 @@
                 ]
             }).data("kendoToolBar");
 
-            var popup = toolbar.popup;
+            var popup = toolbar.overflowMenu;
             popup.open();
 
             kendo.resize($("#toolbar"));
-            assert.isOk(!popup.visible());
+            assert.isOk(!popup.popup.visible());
         });
 
         it("Toolbar items are automatically hidden on resize if there is not enough available space", function() {
@@ -102,16 +102,16 @@
                 ]
             }).data("kendoToolBar");
 
-            container.width(200);
+            container.width(150);
             toolbar.resize();
 
-            var button = toolbar.element.find(".k-button").last();
+            var button = toolbar.element.find(".k-button").not(".k-toolbar-overflow-button").last();
 
             assert.isOk(button.is(":hidden"));
 
-            var listItem = toolbar.popup.element.find(">li").last();
+            var listItem = toolbar.overflowMenu.element.find(">li").last();
 
-            assert.isOk(!listItem.hasClass("k-overflow-hidden"));
+            assert.isOk(!listItem.hasClass("k-hidden"));
         });
 
         it("Toolbar items are automatically shown on resize if there is enough available space", function() {
@@ -127,13 +127,13 @@
             container.width(400);
             toolbar.resize();
 
-            var button = toolbar.element.find(".k-button").last();
+            var button = toolbar.element.find(".k-toolbar-button").last();
 
             assert.isOk(button.is(":visible"));
 
-            var listItem = toolbar.popup.element.find(">li").last();
+            var listItem = toolbar.overflowMenu.element.find(">li").last();
 
-            assert.isOk(listItem.hasClass("k-overflow-hidden"));
+            assert.isOk(listItem.hasClass("k-hidden"));
         });
 
         it("Multiple toolbar items are hidden with a single resize", function() {
@@ -146,16 +146,16 @@
                 ]
             }).data("kendoToolBar");
 
-            container.width(100);
+            container.width(80);
             toolbar.resize();
 
             var buttons = toolbar.element.find("#foo, #bar, #baz");
 
             assert.isOk(buttons.eq(1).is(":hidden") && buttons.eq(2).is(":hidden"));
 
-            var listItems = toolbar.popup.element.find(">li");
+            var listItems = toolbar.overflowMenu.element.find(">li");
 
-            assert.isOk(!listItems.eq(1).hasClass("k-overflow-hidden") && !listItems.eq(2).hasClass("k-overflow-hidden"));
+            assert.isOk(!listItems.eq(1).hasClass("k-hidden") && !listItems.eq(2).hasClass("k-hidden"));
         });
 
         it("Multple toolbar items are shown with a singe resize", function() {
@@ -175,9 +175,9 @@
 
             assert.isOk(buttons.eq(1).is(":visible") && buttons.eq(2).is(":visible"));
 
-            var listItems = toolbar.popup.element.find(">li");
+            var listItems = toolbar.overflowMenu.element.find(">li");
 
-            assert.isOk(listItems.eq(1).hasClass("k-overflow-hidden") && listItems.eq(2).hasClass("k-overflow-hidden"));
+            assert.isOk(listItems.eq(1).hasClass("k-hidden") && listItems.eq(2).hasClass("k-hidden"));
         });
 
         it("Commands with overflow: never is not necessary to be defined first", function() {
@@ -191,7 +191,7 @@
                 ]
             }).data("kendoToolBar");
 
-            container.width(100);
+            container.width(80);
             toolbar.resize();
 
             var buttons = toolbar.element.find("#foo, #bar, #baz");
@@ -199,63 +199,7 @@
             assert.isOk(buttons.eq(0).is(":hidden") && buttons.eq(1).is(":hidden"), "Buttons with overflow: auto are hidden");
             assert.isOk(buttons.eq(2).is(":visible"), "3rd button (that have overflow: never) is visible");
 
-            assert.isOk(!toolbar.popup.element.children("li").hasClass("k-overflow-hidden"), "Commands in the popup are visible");
-        });
-
-        it("First and last visible items in the ToolBar receive classes", function() {
-            container.width(400);
-
-            var toolbar = container.kendoToolBar({
-                items: [
-                    { type: "button", id: "foo", text: "foo" },
-                    { type: "button", id: "bar", text: "bar" },
-                    { type: "button", id: "baz", text: "baz" },
-                    { type: "button", id: "qux", text: "qux" }
-                ]
-            }).data("kendoToolBar");
-
-            container.find(".k-overflow-anchor").width(28);
-            container.find(".k-button:not(.k-overflow-anchor)").width(68);
-
-            container.width(150);
-            toolbar.resize();
-
-            assert.isOk($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
-            assert.isOk($("#foo").hasClass("k-toolbar-last-visible"), "#foo is the last visible button in the toolbar");
-
-            container.width(260);
-            toolbar.resize();
-
-            assert.isOk($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
-            assert.isOk($("#bar").hasClass("k-toolbar-last-visible"), "#bar is the last visible button in the toolbar");
-        });
-
-        it("First and last visible items in the command overflow popup receive classes", function() {
-            container.width(400);
-
-            var toolbar = container.kendoToolBar({
-                items: [
-                    { type: "button", id: "foo", text: "foo" },
-                    { type: "button", id: "bar", text: "bar" },
-                    { type: "button", id: "baz", text: "baz" },
-                    { type: "button", id: "qux", text: "qux" }
-                ]
-            }).data("kendoToolBar");
-
-            container.find(".k-overflow-anchor").width(28);
-            container.find(".k-button:not(.k-overflow-anchor)").width(68);
-
-            container.width(150);
-            toolbar.resize();
-
-            assert.isOk($("#bar_overflow").hasClass("k-toolbar-first-visible"), "#bar is the first visible button in the command overflow popup");
-            assert.isOk($("#qux_overflow").hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
-
-            container.width(260);
-            toolbar.resize();
-
-            assert.isOk($("#baz_overflow").hasClass("k-toolbar-first-visible"), "#baz is the first visible button in the command overflow popup");
-            assert.isOk($("#qux_overflow").hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
+            assert.isOk(!toolbar.overflowMenu.element.children("li").hasClass("k-hidden"), "Commands in the popup are visible");
         });
 
         it("Overflow anchor is not shown when the overflow container is empty", function() {
@@ -270,7 +214,7 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is not visible when there are no items in the overflow popup container");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"), "Overflow anchor is not visible when there are no items in the overflow popup container");
         });
 
         it("Overflow anchor is shown after resize if the overflow popup container is NOT empty", function() {
@@ -285,30 +229,13 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is hidden before the resize");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"), "Overflow anchor is hidden before the resize");
 
-            container.width(150);
+            container.width(100);
+
             toolbar.resize();
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");
-        });
-
-        it("Overflow anchor is NOT shown if a widget with popup is initialized in the overflow container", function() {
-            var toolbar = container.kendoToolBar({
-                items: [
-                    { type: "button", id: "foo", text: "foo" },
-                    { type: "button", id: "bar", text: "bar" },
-                    { template: '<div>foo</div>', overflowTemplate: '<div><select id="dropdown"></select></div>' }
-                ]
-            }).data("kendoToolBar");
-
-            $('#dropdown').kendoDropDownList({
-                dataSource: ['a', 'b', 'c']
-            });
-
-            toolbar.resize(); //force resizing
-
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+            assert.isNotOk(toolbar.overflowAnchor.hasClass("k-hidden"), "Overflow anchor is visible after the resize");
         });
     });
 
@@ -320,7 +247,7 @@
 
         afterEach(function() {
             if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
+                container.getKendoToolBar().destroy();
             }
         });
 
@@ -333,7 +260,7 @@
                 ]
             }).data("kendoToolBar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"));
         });
 
         it("hide method hides overflow buttons", function() {
@@ -348,9 +275,9 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide("#qux")
+            toolbar.hide("#qux");
 
-            assert.isOk($("#qux_overflow").hasClass("k-overflow-hidden"), "#qux_overflow is hidden");
+            assert.isOk($("#qux_overflow").hasClass("k-hidden"), "#qux_overflow is hidden");
         });
 
         it("Overflow anchor is NOT shown when buttons are hidden via hide method", function() {
@@ -364,10 +291,10 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.hide("#foo")
-            toolbar.hide("#bar")
+            toolbar.hide("#foo");
+            toolbar.hide("#bar");
 
-            assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+            assert.isOk(toolbar.overflowAnchor.hasClass("k-hidden"));
         });
 
     });

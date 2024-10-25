@@ -1,7 +1,7 @@
 ---
 title: Width
 page_title: Width
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to apply different widths to the Grid."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to apply different widths to the Grid."
 slug: width_grid_aspnetcore
 position: 2
 ---

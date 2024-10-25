@@ -17,7 +17,7 @@ The DateTimePicker provides options for localizing its user interface by utilizi
 
 To enable the desired culture, add a reference to the script file before the DateTimePicker is initialized and include the desired culture in the settings of the helper.
 
-```
+```HtmlHelper
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/cultures/kendo.culture.de-DE.min.js"></script>
 
     @(Html.Kendo().DateTimePicker()
@@ -25,6 +25,12 @@ To enable the desired culture, add a reference to the script file before the Dat
         .Culture("de-DE")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker" 
+                      culture="de-DE"/>
+```
+{% endif %}
 
 ## See Also
 

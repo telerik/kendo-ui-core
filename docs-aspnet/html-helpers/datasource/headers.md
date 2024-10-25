@@ -1,7 +1,7 @@
 ---
 title: Headers
 page_title: Headers
-description: "Learn how to set request headers in the DataSource HtmlHelper for {{ site.framework }}."
+description: "Learn how to set request headers in the DataSource component for {{ site.framework }}."
 slug: htmlhelper_datasourceheaders_aspnetcore
 position: 3
 ---
@@ -22,14 +22,41 @@ The following example demonstrates how to use the `Headers` option to set a requ
         myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
     </script>  
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("ReadOrders", "Home")" headers='new Dictionary<string,string> { ["header1"] = "test" }'/>
+        </transport>
+    </kendo-datasource>
+
+    <script>
+        myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
+    </script>
+```
 ```HomeController
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
+        // Get the request header "header1".
+        var Header1Value = Request.Headers["header1"];
         // Orders can be IQueriable or IEnumerable.
         return Json(orders.ToDataSourceResult(request));
     }
 ```
+{% else %}
+```HomeController
+
+    public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+    {
+        // Get the request header "header1".
+        var Header1Value = Request.Headers["header1"];
+        // Orders can be IQueriable or IEnumerable.
+        return Json(orders.ToDataSourceResult(request));
+    }
+```
+{% endif %}
+
 
 ## See Also
 

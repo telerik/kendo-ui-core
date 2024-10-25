@@ -1,6 +1,6 @@
 ---
 title: Use DataSource to Render Content
-page_title: Use DataSource to Render Content | Hybrid UI Collapsible
+page_title: Use DataSource to Render Content - Hybrid UI Collapsible
 description: "Learn how to display content loaded via the DataSource in the hybrid mobile Kendo UI Collapsible widget ."
 slug: howto_usedatasourcetorebdercontent_hybridcollapsible
 ---

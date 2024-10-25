@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI ButtonGroup
-description: "Visualize a linear set of grouped buttons in your app by using the hybrid mobile Kendo UI ButtonGroup widget and customize its appearance."
+page_title: Overview - Hybrid UI ButtonGroup
+description: "Visualize a linear set of grouped buttons in your app by using the hybrid mobile Kendo UI ButtonGroup component and customize its appearance."
 slug: overview_hybridbuttongroup
 position: 1
 component: button-group
@@ -9,7 +9,11 @@ component: button-group
 
 # ButtonGroup Overview
 
-The [Hybrid UI ButtonGroup widget](https://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
+
+The [Hybrid UI ButtonGroup component](https://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
 
 ## Getting Started
 

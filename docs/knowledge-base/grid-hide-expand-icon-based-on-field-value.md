@@ -1,8 +1,8 @@
 ---
 title: Conditionally Hide Expand Icons for the Detail Template in Grid
-description: An example on how to hide the expand icon for the detail template in a Kendo UI Grid based on a model value.
+description: Learn how to hide the expand icon for the detail template in a Kendo UI Grid based on a model value.
 type: how-to
-page_title: Hide the Expand Icon for the Detail Template Based on a Model Value | Kendo UI Grid for jQuery
+page_title: Hide the Expand Icon for the Detail Template Based on a Model Value - Kendo UI for jQuery Data Grid
 slug: grid-hide-expand-icon-based-on-field-value
 tags: grid, expand, collapse, hierarchy, detailTemplate
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.913</td>
  </tr>
 </table>

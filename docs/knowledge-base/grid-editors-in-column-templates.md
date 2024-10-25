@@ -1,7 +1,7 @@
 ---
 title: Render Grid Editor in Column Template
-page_title: Editor in Column Template | Kendo UI Grid for jQuery
-description: "An example on how to edit the Kendo UI Grid for jQuery by using a column template."
+page_title: Editor in Column Template - Kendo UI for jQuery Data Grid
+description: "Learn how to edit the Kendo UI Grid for jQuery by using a column template."
 previous_url: /controls/data-management/grid/how-to/Editing/grid-editors-in-column-templates
 slug: howto_render_editor_column_template_grid
 tags: grid, editor, render, column, template
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
   <td>Operating System</td>
@@ -104,8 +104,8 @@ The following example demonstrates how to render an input editor in a column tem
           height: 430,
           toolbar: ["create", "save", "cancel"],
           columns: [
-            { template: "<input data-bind='value:ProductName' class='k-textbox' />", title: "Product Name", width: 110 },
-            { template: "<input data-bind='value:UnitsInStock' class='k-textbox'/>", title: "Units In Stock", width: 110 },
+            { template: "<span class='k-input k-textbox k-input-solid k-input-md k-rounded-md'><input data-bind='value:ProductName' class='k-input-inner' /></span>", title: "Product Name", width: 110 },
+            { template: "<span class='k-input k-textbox k-input-solid k-input-md k-rounded-md'><input data-bind='value:UnitsInStock' class='k-input-inner' /></span>", title: "Units In Stock", width: 110 },
             { field: "Discontinued", width: 110 },
             { command: "destroy", title: "&nbsp;", width: 90 }],
           editable: true,

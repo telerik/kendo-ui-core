@@ -1,8 +1,8 @@
 ---
 title: Prevent Grid Filter Menu from Closing on Browser Scroll
-description: An example on how to prevent the Kendo UI Grid filter menu from closing when the browser scrolls.
+description: Learn how to prevent the Kendo UI Grid filter menu from closing when the browser scrolls.
 type: how-to
-page_title: Prevent Closing the Filter Popup on Browser Scroll | Kendo UI Grid for jQuery
+page_title: Prevent Closing the Filter Popup on Browser Scroll - Kendo UI for jQuery Data Grid
 slug: grid-filter-menu-prevent-close-browser-scroll
 tags: grid, filtering, menu, popup, prevent, close, scroll
 ticketid: 1147708
@@ -19,7 +19,7 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress Kendo UI Grid</td>
+		<td>Progress® Kendo UI® Grid for jQuery</td> 
 	</tr>
 </table>
 

@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: Accessibility
-description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_numerictextbox_aspnetcore
 position: 1
 ---
 
 # NumericTextBox Accessibility
 
-The NumericTextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+The NumericTextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 For more information, refer to:
 * [Keyboard navigation by the Telerik UI NumericTextBox]({% slug keynav_numerictextbox_aspnetcore %})
@@ -22,48 +22,15 @@ The component follows the WAI-ARIA Authoring Practices for implementing the keyb
 
 The NumericTextBox is compliant with the Section 508 requirements.
 
-## WCAG 2.1
+## WCAG 2.2
 
 The NumericTextBox supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/).
 
-## label Element Support
+## Label Element Support
 
-Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need to manually handle the click event of the label and focus the NumericTextBox.
+Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need to manually handle the `click` event of the label and `focus` the NumericTextBox.
 
-```
-    @Html.Label("numeric", "Value")
-    @Html.Kendo().NumericTextBox().Name("numeric")
-
-    <script>
-        var roles = {
-        numerictextbox: "kendoNumericTextBox",
-        combobox: "kendoComboBox",
-        multiselect: "kendoMultiSelect"
-        }
-
-        function getWidget(element) {
-        var role = element.data("role");
-        role = roles[role];
-
-        if (role) {
-            return element.data(role);
-        }    
-        }
-
-        $("label").click(function() {
-        var label = $(this),
-            id = label.attr("for"),
-            widget;
-
-        if (id) {
-            widget = getWidget($("#" + id));
-            if (widget) {
-            widget.focus();
-            }
-        }
-        });
-    </script>
-```
+Another possible solution is to use the NumericTextBox [`Label` property]({% slug htmlhelpers_labels_numerictextbox %}), which automatically focuses on the input.
 
 ## See Also
 

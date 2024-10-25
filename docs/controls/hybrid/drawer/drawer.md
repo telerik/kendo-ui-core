@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Hybrid UI Drawer
+page_title: Overview - Hybrid UI Drawer
 description: "Initialize and use a Hybrid UI Drawer component in Kendo UI framework."
 slug: overview_hybriddrawer
 position: 1
@@ -8,6 +8,10 @@ component: drawer
 ---
 
 # Drawer Overview
+
+>Starting with the R2 2023 release, Kendo UI will no longer ship Hybrid UI components. This means that the R2 2023 will be the last release to include Kendo Hybrid in the Kendo UI package. See full announcement in [Kendo jQuery blog post](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#end-of-support-announcements). The last stable version that we recommend to use for Kendo Hybrid components is [R3 2022 SP1](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-sp1-(version-2022-3-1109)).
+>
+>[What's New in Kendo UI R2 2023](https://www.telerik.com/blogs/r2-2023-kendo-ui-release#kendo-ui-for-jquery)
 
 The [Hybrid UI Drawer widget](https://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
 
@@ -129,7 +133,7 @@ The example below demonstrates a button revealing a Drawer.
 
 **Figure 1: Nested ListView with different color schemes**
 
-![Nested ListView with different color scheme](ListView-in-Drawer.png)
+![Kendo UI for jQuery Drawer with Nested ListView](ListView-in-Drawer.png)
 
 The ListView has different styling when placed in a Drawer.
 
@@ -137,7 +141,7 @@ The ListView has different styling when placed in a Drawer.
 
 **Figure 2: Nested vertical TabStrip**
 
-![Nested Vertical TabStrip](TabStrip-in-Drawer.png)
+![Kendo UI for jQuery Drawer with Nested Vertical TabStrip](TabStrip-in-Drawer.png)
 
 To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip placed in a Drawer, as demonstrated in the example below.
 

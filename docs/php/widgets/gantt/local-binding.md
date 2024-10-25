@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | Gantt PHP Class
+page_title: Local Binding - Gantt PHP Class
 description: "Bind Kendo UI Gantt PHP class to an array of data."
 slug: localbinding_gantt_uiforphp
 position: 2

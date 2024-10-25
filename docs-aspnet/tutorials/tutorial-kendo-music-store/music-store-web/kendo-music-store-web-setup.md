@@ -1,6 +1,6 @@
 ---
 title: Set Up the Project
-page_title: Set Up the Project | Music Store Web App Tutorial
+page_title: Set Up the Project - Music Store Web App Tutorial
 description: "Learn how to set up the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: projectsetup_muscistorewebapp_aspnetmvc
 position: 1
@@ -24,7 +24,7 @@ Start by adding Kendo UI to the project. The Kendo UI distribution can be downlo
 
 The preferred method of getting Kendo UI is to browse to [telerik.com](https://www.telerik.com/download/kendo-ui) and download Kendo UI as a `.zip` file. Depending on whether you are using the Trial version or have purchased the full Commercial distribution, you have a `.zip` file that follows one of these directory structures:
 
-![The Kendo UI directory structure](images/kendo-commecrial-zip-layout.png)
+![{{ site.product_short }} The directory structure](images/kendo-commercial-zip-layout.png)
 
 The `\js` and `\styles` folders in the root of the `.zip` file contain the minified versions of the Kendo UI `.js` and `.css` files. If you have the commercial version of Kendo UI, you may also notice the `\source` folder. This folder also contains `\js` and `\styles` folders, but these are the full, non-minified versions of the `.js` and `.css`. These are typically used for local development and debugging, but the minified versions are the ones that should be deployed in a real application. For that reason, the examples use the minified files in this project.
 
@@ -36,7 +36,7 @@ Kendo UI enables you to fetch it from a CDN instead of downloading its files. Fo
 
 Kendo UI is also available using the NuGet package manager in Visual Studio. Search for `kendo`.
 
-![The search result for Kendo UI using the NuGet package manager](images/kendo-nuget.png)
+![{{ site.product_short }} The search result for Kendo UI using the NuGet package manager](images/kendo-nuget.png)
 
 ### Additional Information
 

@@ -1,7 +1,7 @@
 ---
 title: Start View and Navigation Depth
 page_title: Start View and Selection Depth
-description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to define the start view and control the navigation depth of the HTML Helper."
+description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to define the start view and control the navigation depth."
 slug: navdepth_datetimepicker_aspnetcore
 position: 4
 ---
@@ -10,7 +10,7 @@ position: 4
 
 The DateTimePicker enables you to set the initial view it renders and define the navigation depth of the views.
 
-To define the initially rendered view, use the [`Start`](/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#startkendomvcuicalendarview) option. To control the navigation depth, use the [`Depth`](/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#depthkendomvcuicalendarview) option.
+To define the initially rendered view, use the [`Start`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#startkendomvcuicalendarview) option. to control the navigation depth, use the [`Depth`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#depthkendomvcuicalendarview) option.
 
 The **Calendar** view supports the following predefined views:
 * `Month`&mdash;Shows the days of the month.
@@ -20,7 +20,7 @@ The **Calendar** view supports the following predefined views:
 
 The following example demonstrates how to create a DateTimePicker that allows the user to select a month.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .Value(DateTime.Now)
@@ -28,6 +28,15 @@ The following example demonstrates how to create a DateTimePicker that allows th
         .Depth(CalendarView.Year)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker"
+                      value="DateTime.Now"
+                      start="CalendarView.Year"
+                      depth="CalendarView.Year"/>
+```
+{% endif %}
+
 
 ## See Also
 

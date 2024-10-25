@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | LinearGauge JSP Tag
+page_title: Overview - LinearGauge JSP Tag
 description: "Get started with the LinearGauge JSP tag in Kendo UI."
 slug: overview_lineargauge_uiforjsp
 position: 1

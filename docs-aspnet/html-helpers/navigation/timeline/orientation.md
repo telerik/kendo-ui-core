@@ -1,7 +1,7 @@
 ---
 title: Orientation
 page_title: Timeline Orientation
-description: "See how to control the orientation of the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "See how to control the orientation of the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/orientation
 slug: orientation_htmlhelpers_timeline_aspnetcore
 position: 5
@@ -19,21 +19,51 @@ You can have the events render alternatingly on both sides of the axis by adding
 
 If you add the `.CollapsibleEvents()` option, all events will start out collapsed (by default, all events are expanded). The user can then expand a particular event to see more than its title and subtitle.
 
-```Razor
-@(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-           .Name("Timeline")
-           .Orientation("vertical") // defines the layout of the widget
-           .AlternatingMode() // renders the events on both sides of the axis in vertical mode
-           .CollapsibleEvents() // starts all events collapsed in vertical mode
-           .DataDateField("EventDate")
-           .DataDescriptionField("Description")
-           .DataSubTitleField("Subtitle")
-           .DataTitleField("Title")
-           .DataImagesField("Images")
-           .DataActionsField("Actions")
-           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
-)
+```HtmlHelper
+    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
+               .Name("Timeline")
+               .Orientation("vertical") // defines the layout of the widget
+               .AlternatingMode() // renders the events on both sides of the axis in vertical mode
+               .CollapsibleEvents() // starts all events collapsed in vertical mode
+               .DataDateField("EventDate")
+               .DataDescriptionField("Description")
+               .DataSubTitleField("Subtitle")
+               .DataTitleField("Title")
+               .DataImagesField("Images")
+               .DataActionsField("Actions")
+               .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline"
+                    orientation="vertical"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images"
+                    alternating-mode="true"
+                    collapsible-events="true">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData","Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+```
+{% endif %}
 ```Controller
 public partial class Timeline : BaseController
 {
@@ -70,7 +100,7 @@ public partial class Timeline : BaseController
 
         events.Add(new TimelineEventModel()
         {
-            Title = "Malta, a Country of Кnights",
+            Title = "Malta, a Country of Knights",
             Subtitle = "My second trip this year",
             Description = "Third event description.",
             EventDate = new System.DateTime(2015, 5, 25),
@@ -82,7 +112,9 @@ public partial class Timeline : BaseController
             }
         });
 
-        return Json(events);
+        {% if site.core %}
+        eturn Json(events);{% else %}
+        return Json(events, JsonRequestBehavior.AllowGet);{% endif %}
     }
 }
 ```
@@ -120,19 +152,47 @@ The horizontal mode renders the event details on demand (only when they are sele
 
 Alternating rendering and collapsing is not available for the events in this mode.
 
-```Razor
-@(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-           .Name("Timeline")
-           .Orientation("horizontal") // defines the layout of the widget
-           .DataDateField("EventDate")
-           .DataDescriptionField("Description")
-           .DataSubTitleField("Subtitle")
-           .DataTitleField("Title")
-           .DataImagesField("Images")
-           .DataActionsField("Actions")
-           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
-)
+```HtmlHelper
+    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
+               .Name("Timeline")
+               .Orientation("horizontal") // defines the layout of the widget
+               .DataDateField("EventDate")
+               .DataDescriptionField("Description")
+               .DataSubTitleField("Subtitle")
+               .DataTitleField("Title")
+               .DataImagesField("Images")
+               .DataActionsField("Actions")
+               .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-timeline name="Timeline"
+                    orientation="horizontal"
+                    datadatefield="EventDate"
+                    datatitlefield="Title"
+                    datasubtitlefield="Subtitle"
+                    datadescriptionfield="Description"
+                    dataactionsfield="Actions"
+                    dataimagesfield="Images">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("GetTimelineData","Timeline")" />
+            </transport>
+            <schema>
+                <model>
+                    <fields>
+                        <field name="EventDate" type="date"></field>
+                        <field name="Title" type="string"></field>
+                        <field name="Subtitle" type="string"></field>
+                        <field name="Description" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+    </kendo-timeline>
+```
+{% endif %}
 ```Controller
 public partial class Timeline : BaseController
 {
@@ -169,7 +229,7 @@ public partial class Timeline : BaseController
 
         events.Add(new TimelineEventModel()
         {
-            Title = "Malta, a Country of Кnights",
+            Title = "Malta, a Country of Knights",
             Subtitle = "My second trip this year",
             Description = "Third event description.",
             EventDate = new System.DateTime(2015, 5, 25),
@@ -181,7 +241,9 @@ public partial class Timeline : BaseController
             }
         });
 
-        return Json(events);
+        {% if site.core %}
+        return Json(events);{% else %}
+        return Json(events, JsonRequestBehavior.AllowGet);{% endif %}
     }
 }
 ```

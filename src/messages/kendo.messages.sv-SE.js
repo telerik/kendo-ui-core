@@ -1,4 +1,5 @@
-(function ($, undefined) {
+(function($, undefined) {
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -105,52 +106,87 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "daily": {
-    "interval": "days(s)",
-    "repeatEvery": "Repeat every:"
+    "interval": "dag(ar)",
+    "repeatEvery": "Återkommer varje:"
   },
   "end": {
-    "after": "After",
-    "occurrence": "occurrence(s)",
-    "label": "End:",
-    "never": "Never",
-    "on": "On",
-    "mobileLabel": "Ends"
+    "after": "Efter",
+    "occurrence": "förekomst(er)",
+    "label": "Slut:",
+    "never": "Aldrig",
+    "on": "På",
+    "mobileLabel": "Slutar"
   },
   "frequencies": {
-    "daily": "Daily",
-    "monthly": "Monthly",
-    "never": "Never",
-    "weekly": "Weekly",
-    "yearly": "Yearly"
+    "daily": "Daglig",
+    "monthly": "Månatlig",
+    "never": "Aldrig",
+    "weekly": "Veckovis",
+    "yearly": "Årlig"
   },
   "monthly": {
-    "day": "Day",
-    "interval": "month(s)",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:"
+    "day": "Dag",
+    "interval": "månad(er)",
+    "repeatEvery": "Återkommer varje:",
+    "repeatOn": "Återkommer på:"
   },
   "offsetPositions": {
-    "first": "first",
-    "fourth": "fourth",
-    "last": "last",
-    "second": "second",
-    "third": "third"
+    "first": "första",
+    "fourth": "fjärde",
+    "last": "sista",
+    "second": "andra",
+    "third": "tredje"
   },
   "weekly": {
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
-    "interval": "week(s)"
+    "repeatEvery": "Återkommer varje:",
+    "repeatOn": "Återkommer på:",
+    "interval": "vecka(or)"
   },
   "yearly": {
-    "of": "of",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
-    "interval": "year(s)"
+    "of": "av",
+    "repeatEvery": "Återkommer varje:",
+    "repeatOn": "Återkommer på:",
+    "interval": "år"
   },
   "weekdays": {
-    "day": "day",
-    "weekday": "weekday",
-    "weekend": "weekend day"
+    "day": "dag",
+    "weekday": "veckodag",
+    "weekend": "helgdag"
+  }
+});
+}
+
+/* PivotGrid messages */
+
+if (kendo.ui.PivotGrid) {
+kendo.ui.PivotGrid.prototype.options.messages =
+$.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
+  "measureFields": "Släpp data fält här",
+  "columnFields": "Släpp kolumnfält här",
+  "rowFields": "Släpp radfält här"
+});
+}
+
+  /* PivotFieldMenu messages */
+
+if (kendo.ui.PivotFieldMenu) {
+kendo.ui.PivotFieldMenu.prototype.options.messages =
+$.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
+  "info": "Visa objekt med värden som:",
+  "filterFields": "Filtrera fält",
+  "filter": "Filtrera",
+  "include": "Inkludera fält...",
+  "title": "Fält att inkludera",
+  "clear": "Rensa",
+  "ok": "Ok",
+  "cancel": "Avbryt",
+  "operators": {
+    "contains": "Contains",
+    "doesnotcontain": "Does not contain",
+    "startswith": "Starts with",
+    "endswith": "Ends with",
+    "eq": "Is equal to",
+    "neq": "Is not equal to"
   }
 });
 }
@@ -227,7 +263,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "Alla",
+  "allPages": "Allt",
   "display": "{0} - {1} av {2} poster",
   "empty": "Det finns inga poster",
   "first": "Gå till första sidan",
@@ -287,6 +323,7 @@ if (kendo.ui.Editor) {
 kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "bold": "Fet",
+  "search": "Sök",
   "createLink": "Lägg till länk",
   "fontName": "Välj typsnitt",
   "fontNameInherit": "(ärvt typsnitt)",
@@ -305,7 +342,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "justifyRight": "Högerjusterad text",
   "outdent": "Minska indrag",
   "strikethrough": "Genomstruken",
-  "styles": "Stil",
+  "style": "Stil",
   "subscript": "Nedsänkt",
   "superscript": "Upphöjd",
   "underline": "Understruken",
@@ -331,7 +368,6 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkText": "Text",
   "linkToolTip": "Skärmtips",
   "linkWebAddress": "Webbadress",
-  "search": "Sök",
   "createTable": "Skapa tabell",
   "addColumnLeft": "Lägg till vänsterkolumn",
   "addColumnRight": "Lägg till högerkolumn",
@@ -353,6 +389,7 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "Hela dagen",
   "cancel": "Avbryt",
+  "search": "Sök...",
   "editable": {
     "confirmation": "Är du säker på att du vill ta bort tillfället?"
   },
@@ -365,10 +402,10 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Slut",
     "endTimezone": "Sluttidszon",
     "repeat": "Upprepa",
-    "separateTimezones":  "Använd separata start och sluttidszoner",
+    "separateTimezones": "Använd separata start och sluttidszoner",
     "start": "Start",
     "startTimezone": "Starttidszon",
-    "timezone": " ",
+    "timezone": "Tidszon",
     "timezoneEditorButton": "Tidszon",
     "timezoneEditorTitle": "Tidszoner",
     "title": "Titel",

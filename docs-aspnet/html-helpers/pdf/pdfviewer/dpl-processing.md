@@ -1,7 +1,7 @@
 ---
 title: DPL Processing
 page_title: DPL Processing
-description: "Learn how to use the Telerik Document Processing library in the Telerik UI PDFViewer HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the Telerik Document Processing library in the Telerik UI PDFViewer component for {{ site.framework }}."
 previous_url: /helpers/pdf/pdfviewer/dpl-processing
 slug: htmlhelpers_pdfviewer_dpl_processing_aspnetcore
 position: 3
@@ -25,7 +25,7 @@ You can configure the PDFViewer to use the [Telerik Document Processing library]
 
 The following example demonstrates how to configure the PDFViewer to use DPL Processing.
 
-```
+```HtmlHelper
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer")
         .DplProcessing(dpl => {
@@ -44,6 +44,33 @@ The following example demonstrates how to configure the PDFViewer to use DPL Pro
         .Height(1200)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer height="1200"
+                     name="pdfviewer">
+        <dpl-processing load-on-demand="true">
+            <read url="/PdfViewer/GetInitialPdf" />
+            <upload url="/PdfViewer/GetPdf" save-field="file" />
+        </dpl-processing>
+        <toolbar enabled="true">
+            <pdfviewer-toolbar-items>
+                <pdfviewer-toolbar-item command="PageChangeCommand"
+                                        type="pager"
+                                        name="pager">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item name="spacer"
+                                        type="spacer">
+                </pdfviewer-toolbar-item>
+                <pdfviewer-toolbar-item command="OpenCommand"
+                                        type="button"
+                                        name="open"
+                                        icon="folder-open">
+                </pdfviewer-toolbar-item>
+            </pdfviewer-toolbar-items>
+        </toolbar>
+    </kendo-pdfviewer>
+```
+{% endif %}
 
 ## See Also
 

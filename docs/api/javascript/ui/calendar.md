@@ -12,6 +12,54 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### allowReverse `Boolean` *(default: false)*
+
+Enables the user to select an end date that is before the start date. This option is available only when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to **range**.
+
+#### Example - enable reverse selection
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range",
+            allowReverse: true,
+            showOtherMonthDays: false
+        });
+    </script>
+
+### centuryCellsFormat `String`*(default: "long")*
+
+ Specifies the format of the century cells.
+
+* `"long"` - The cells will display a decade range **2000-2009**, **2010-2019**.
+* `"short"` - The cells will display just the starting year of the decade **2000**, **2010**.
+
+#### Example - render the short version of the century cells
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            centuryCellsFormat: "short",
+            start: "century"
+        });
+    </script>
+
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            componentType: "modern"
+        });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.
@@ -203,6 +251,96 @@ Allows customization of the week column header text. Set the value to make the w
      })
     </script>
 
+### messages.navigateTo `String` *(default: "Navigate to ")*
+
+Allows customization of the "Navigate to " text that would be used for `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "navigateTo": "Go to "
+        }
+     })
+    </script>
+
+### messages.parentViews `Object`
+
+Allows customization of names of the views used in the `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
+
+### messages.parentViews.month `String` *(default: "year view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Month view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                month: "parent year"
+            }
+        }
+     })
+    </script>
+
+### messages.parentViews.year `String` *(default: "decade view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Year view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                year: "parent decade"
+            }
+        }
+     })
+    </script>
+
+### messages.parentViews.decade `String` *(default: "century view")*
+
+Allows customization of parent view name used in the `title` attribute of the Calendar title when in Decade view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                decade: "parent century"
+            }
+        }
+     })
+    </script>
+
+### messages.today `String` *(default: "Today")*
+
+Allows customization of the text of the Today button present in the widget in its `modern` rendering.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        componentType: "modern",
+        messages: {
+            today: "Click me"
+        }
+     })
+    </script>
+
 ### min `Date`*(default: Date(1900, 0, 1))*
 
  Specifies the minimum date, which the calendar can show.
@@ -304,7 +442,7 @@ Allows customization of the week column header text. Set the value to make the w
 
 ### selectable `String`  *(default: "single")*
 
-By default user is able to select a single date. The property can also be set to "multiple" in order the multiple  date selection to be enabled. More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.
+By default user is able to select a single date. The property can also be set to **multiple** or **range**. More information about the different selection modes can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.
 
 #### Example - enable the multiple selection
 
@@ -376,6 +514,41 @@ The following settings are available for the **start** value:
     <script>
         $("#calendar").kendoCalendar({
             value: new Date(2012, 0, 1)
+        });
+    </script>
+
+### range `Object`*(default: { start: null, end: null })*
+
+Specifies an initial range selection. This option is available only when the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration is set to `range`. 
+
+#### Example - specify the selected range of the component
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range",
+            range: { start: new Date(2024, 3, 3), end: new Date(2024, 3, 13) }
+        });
+    </script>
+
+### range.start `Date`
+Specifies the start date of the range selection.
+
+### range.end `Date`
+Specifies the end date of the range selection.
+
+### showOtherMonthDays `Boolean`*(default: true)*
+
+When this configuration is enabled, the calendar will render days from the previous and next months in the current view.
+
+> The `showOtherMonthDays` configuration is not compatible with the [`range`](/api/javascript/ui/calendar/configuration/selectable) selection. It is advised that this property is set to **false** when `selectable` is set to **range**.
+
+#### Example - Hide dates from the other months
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            showOtherMonthDays: false
         });
     </script>
 
@@ -683,6 +856,7 @@ Fires when the selected date is changed.
         $("#calendar").kendoCalendar({
             change: function() {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value); //value is the selected date in the calendar
             }
         });
@@ -698,6 +872,7 @@ Fires when the selected date is changed.
 
         calendar.bind("change", function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the calendar
         });
     </script>
@@ -713,9 +888,11 @@ Fires when calendar navigates.
         $("#calendar").kendoCalendar({
             navigate: function() {
                 var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(view.name); //name of the current view
 
                 var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(current); //currently focused date
             }
         });
@@ -731,9 +908,11 @@ Fires when calendar navigates.
 
         calendar.bind("navigate", function() {
             var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view.name); //name of the current view
 
             var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(current); //currently focused date
         });
     </script>

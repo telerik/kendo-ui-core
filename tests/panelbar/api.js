@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 (function() {
     var isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
     var PanelBar = kendo.ui.PanelBar;
@@ -31,76 +32,76 @@
         beforeEach(function() {
 
             ul = $('<ul id="panelbar">' +
-                '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul style="display: none;" class="k-group">' +
-                '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
+                '    <li class="k-panelbar-item"><span class="k-link k-header">Mail<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
+                '        <ul style="display: none;" class="k-panelbar-group">' +
+                '            <li class="k-panelbar-item"><span class="k-link">Personal Folders</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Deleted Items</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Deleted Items</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
+                '            <li class="k-panelbar-item k-disabled"><span class="k-link">Inbox</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Mail</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Mail</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Sent Items</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Sent Items</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Outbox</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Outbox</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Search Folders</span>' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Address Cards</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Phone List</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Shared Contacts</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Search Folders</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
+                '    <li class="k-panelbar-item k-disabled"><span class="k-link k-header">Contacts<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Contacts</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Shared Tasks</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Address Cards</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Active Tasks</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Phone List</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Completed Tasks</span>' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
-                '            class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
-                '        <ul class="k-group" style="display: block;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Notes List</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Shared Notes</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Archive <input /></span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Shared Contacts</span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
-                '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
+                '    <li class="k-panelbar-item"><span class="k-link k-header">Tasks<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Profile</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Shared Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Support Tickets</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Active Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Completed Tasks</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
+                '        </ul>' +
+                '    </li>' +
+                '    <li class="k-panelbar-item k-expanded"><span class="k-link k-header k-selected">Notes<span' +
+                '            class="k-icon k-i-arrow-chevron-up k-panelbar-collapse"></span></span>' +
+                '        <ul class="k-panelbar-group" style="display: block;">' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Notes</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Notes List</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Shared Notes</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">Archive <input /></span>' +
+                '            </li>' +
+                '        </ul>' +
+                '    </li>' +
+                '    <li class="k-panelbar-item"><span class="k-link k-header">Folders List<span' +
+                '            class="k-icon k-i-chevron-down k-panelbar-expand"></span></span>' +
+                '        <ul class="k-panelbar-group" style="display: none;">' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Client.Net</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Profile</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Support Tickets</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Licenses</span>' +
+                '            </li>' +
+                '            <li class="k-panelbar-item"><span class="k-link">My Licenses</span>' +
                 '               <input />' +
                 '            </li>' +
                 '        </ul>' +
@@ -192,7 +193,7 @@
 
             panelbar.disable(item);
 
-            assert.isOk(item.hasClass('k-state-disabled'));
+            assert.isOk(item.hasClass('k-disabled'));
         });
 
         it('enable method should enable disabled item', function() {
@@ -200,7 +201,7 @@
 
             panelbar.enable(item);
 
-            assert.isOk(item.hasClass('k-state-default'));
+            assert.isOk(!item.hasClass('k-disabled'));
         });
 
         it('collapse method should collapse last item', function() {
@@ -208,7 +209,7 @@
 
             panelbar.collapse(item);
 
-            assert.equal(item.find('> .k-group').css("display"), "none");
+            assert.equal(item.find('> .k-panelbar-group').css("display"), "none");
         });
 
         it('expand method should toggle only one icon', function() {
@@ -221,23 +222,23 @@
         it('dataSource should create items with the text specified', function() {
             new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1" }] });
 
-            assert.equal(empty_panelbar.find(".k-item > .k-link:contains(Item 1)").length, 1);
+            assert.equal(empty_panelbar.find(".k-panelbar-item > .k-link:contains(Item 1)").length, 1);
         });
 
         it('dataSource should spawn arrows for items with group, content or contentUrl', function() {
             new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", content: "Test" }, { text: "Item 2", items: [{ text: "SubChild" }] }, { text: "Item 3", contentUrl: "http://www.google.com" }] });
 
-            var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
+            var icons = empty_panelbar.find(".k-panelbar-item > .k-link > .k-icon,.k-panelbar-item > .k-link > .k-svg-icon");
 
-            assert.isOk(icons.eq(0).is(".k-panelbar-expand.k-i-arrow-60-down"));
-            assert.isOk(icons.eq(1).is(".k-panelbar-expand.k-i-arrow-60-down"));
-            assert.isOk(icons.eq(2).is(".k-panelbar-expand.k-i-arrow-60-down"));
+            assert.isOk(icons.eq(0).is(".k-panelbar-expand.k-i-chevron-down,.k-panelbar-expand.k-svg-i-chevron-down"));
+            assert.isOk(icons.eq(1).is(".k-panelbar-expand.k-i-chevron-down,.k-panelbar-expand.k-svg-i-chevron-down"));
+            assert.isOk(icons.eq(2).is(".k-panelbar-expand.k-i-chevron-down,.k-panelbar-expand.k-svg-i-chevron-down"));
         });
 
         it('dataSource should show collapse arrows for expanded items', function() {
             new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", content: "Test", expanded: true }] });
 
-            assert.isOk(empty_panelbar.find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-60-up"));
+            assert.isOk(empty_panelbar.find(".k-panelbar-item > .k-link > .k-icon,.k-panelbar-item > .k-link > .k-svg-icon").is(".k-panelbar-collapse.k-i-chevron-up,.k-panelbar-collapse.k-svg-i-chevron-up"));
         });
 
         it('setOptions resets the animation', function() {
@@ -298,8 +299,8 @@
                 }
             ]);
 
-            assert.isOk(empty_panelbar.children("li:first").children("div.k-content")[0]);
-            assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
+            assert.isOk(empty_panelbar.children("li:first").children("div.k-panelbar-content")[0]);
+            assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-panelbar-content")[0]);
         });
 
         it("Adding dynamic contentUrl element renders contents on root and inner levels", function() {
@@ -321,8 +322,8 @@
                 }
             ]);
 
-            assert.isOk(empty_panelbar.children("li:first").children("div.k-content")[0]);
-            assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
+            assert.isOk(empty_panelbar.children("li:first").children("div.k-panelbar-content")[0]);
+            assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-panelbar-content")[0]);
         });
 
         it('insertAfter method moves an item if called with existing item', function() {

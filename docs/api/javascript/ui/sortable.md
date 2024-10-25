@@ -321,8 +321,6 @@ The item will also be activated by pressing, holding and lifting the finger with
 
 Selector that determines which elements inside the sorted item's container will be ignored. *Useful if the sortable item contains input elements.*
 
-> **Important** The `ignore` option is available in the latest internal build! This feature is **not** included in Q1 2014 (v2014.1.318).
-
 #### Example - Sortable widget with input elements
 
     <ul id="sortable">
@@ -398,8 +396,10 @@ jQuery object which represents the sortable element.
                 //collection as it does not match the filter
 
                 //shows the original position of the item
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("index of item", this.indexOf(e.item));
                 //shows the position where item will be moved to
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("index of placeholder", this.indexOf(this.placeholder));
             }
         });
@@ -429,6 +429,7 @@ Returns the sortable elements. **Filtered items and the placeholder are excluded
             filter: ">div"
         }).data("kendoSortable");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(sortable.items());
     </script>
 
@@ -503,6 +504,7 @@ The original draggable's drag event data.
     <script>
         $("#sortable").kendoSortable({
             move: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("move to index: " + this.indexOf(this.placeholder));
             }
         });
@@ -549,6 +551,7 @@ The original draggable's drag event data.
     <script>
         $("#sortable").kendoSortable({
             end: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("from " + e.oldIndex + " to " + e.newIndex);
 
                 //prevent first item to be placed at the end of the list
@@ -598,6 +601,7 @@ The original draggable's drag event data.
     <script>
         $("#sortable").kendoSortable({
             change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("from " + e.oldIndex + " to " + e.newIndex);
             }
         });
@@ -624,6 +628,7 @@ The element that is dragged.
     <script>
         $("#sortable").kendoSortable({
             cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item.text() + " sorting called!");
             }
         });

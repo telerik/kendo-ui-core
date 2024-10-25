@@ -1,8 +1,8 @@
 ---
 title: Set the ArcGauge Size
-description: An example on how to set or change the size of a Kendo UI ArcGauge for jQuery.
+page_title: Resize the ArcGauge - jQuery Gauges
+description: Learn how to set or change the size of a Kendo UI for jQuery ArcGauge component.
 type: how-to
-page_title: Resize the ArcGauge | Kendo UI for jQuery
 slug: arc-gauge-set-size
 tags: archgauge, set, size
 ticketid: 1418725
@@ -16,6 +16,8 @@ res_type: kb
 	    <tr>
 	    	<td>Product</td>
 	    	<td>Progress® Kendo UI® Gauge for jQuery, ASP.NET MVC, ASP.NET Core</td>
+	    	<td>Progress® Telerik UI® Gauge for ASP.NET MVC, ASP.NET Core</td>
+	    	<td>Progress® Telerik UI® Gauge for ASP.NET Core</td>
 	    </tr>
     </tbody>
 </table>
@@ -101,3 +103,9 @@ If static dimensions are sufficient for your case and you prefer to set them in 
 	)
 </div>
 ```
+
+## See Also
+
+* [Overview of the jQuery ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)
+* [JavaScript API Reference of the jQuery ArcGauge](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge)
+* [Product Page of the ArcGauge](https://www.telerik.com/kendo-jquery-ui/arcgauge)

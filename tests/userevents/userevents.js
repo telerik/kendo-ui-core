@@ -67,7 +67,7 @@
                 done();
             });
 
-            press(element, 10, 20)
+            press(element, 10, 20);
 
             setTimeout(function() {
                 move(element, 1, 30);
@@ -81,7 +81,6 @@
                 release(element, 10, 20);
             }, 1);
         });
-
 
 
         it("passes delta on mousemove", function() {
@@ -123,7 +122,7 @@
 
     describe("filter option", function() {
         beforeEach(function() {
-            element = $('<div><div id="foo" /><div id="bar" /></div>');
+            element = $('<div><div id="foo"></div><div id="bar"></div></div>');
             userEvents = new UserEvents(element, {
                 filter: "#foo"
             });
@@ -209,29 +208,29 @@
             userEvents.bind("hold", function(e) {
                 assert.isOk(false, "hold was triggered by release");
             });
-    
+
             press(element, 10, 20);
-    
+
             setTimeout(function() {
                 release(element, 10, 20);
             }, 10);
-    
+
             setTimeout(function() {
                 done();
             }, 101);
         });
-    
+
         it("does not trigger hold if moved before that", function(done){
             userEvents.bind("hold", function(e) {
                 assert.isOk(false, "hold was triggered by move");
             });
-    
+
             press(element, 10, 20);
-    
+
             setTimeout(function() {
                 move(element, 15, 25);
             }, 50);
-    
+
             setTimeout(function() {
                 done();
                 release(element, 15, 25);
@@ -242,7 +241,7 @@
 
     describe("nested elements", function() {
         beforeEach(function() {
-            element = $('<div id="parent"><div class="foo" /><div id="child"><div class="foo" /></div></div>');
+            element = $('<div id="parent"><div class="foo"></div><div id="child"><div class="foo"></div></div></div>');
             parentEvents = new UserEvents(element, {
                 filter: ">.foo"
             });
@@ -486,7 +485,7 @@
             var countDoubleTap = 0;
 
             userEvents.bind("tap", function(e) {
-                countTap++
+                countTap++;
             });
 
             userEvents.bind("doubleTap", function(e) {
@@ -504,7 +503,7 @@
                     assert.equal(countTap, 2);
                     assert.equal(countDoubleTap, 0);
                     done();
-                }, 300)
+                }, 300);
 
             }, 450);
         });

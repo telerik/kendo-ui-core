@@ -1,25 +1,104 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI PanelBar HtmlHelper for {{ site.framework }}."
+description: "Discover the Telerik UI PanelBar component for {{ site.framework }} and its built-in features like data binding, accssibility, and support for various expand modes."
 previous_url: /helpers/html-helpers/panelbar, /helpers/navigation/panelbar/overview
 slug: htmlhelpers_panelbar_aspnetcore
-position: 1
+position: 0
 ---
 
-# PanelBar HtmlHelper Overview
+# {{ site.framework }} PanelBar Overview
 
+{% if site.core %}
+The Telerik UI PanelBar TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI PanelBar widget.
+{% else %}
 The Telerik UI PanelBar HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI PanelBar widget.
+{% endif %}
 
 The PanelBar displays hierarchical data as a multi-level, expandable widget.
 
-* [Demo page for the PanelBar](https://demos.telerik.com/{{ site.platform }}/panelbar)
+* [Demo page for the PanelBar TagHelper](https://demos.telerik.com/{{ site.platform }}/panelbar)
+{% if site.core %}
+* [Demo page for the PanelBar HtmlHelper](https://demos.telerik.com/aspnet-core/panelbar/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the PanelBar HtmlHelper.
+The following example demonstrates the basic configuration of the PanelBar.
 
-```Razor
+{% if site.core %}
+```HtmlHelper
+    @(Html.Kendo().PanelBar()
+      .Name("panelbar")
+      .ExpandMode(PanelBarExpandMode.Single)
+      .Items(panelbar =>
+      {
+          panelbar.Add().Text("Projects")
+              .Items(projects =>
+              {
+                  projects.Add().Text("New Business Plan");
+
+                  projects.Add().Text("Sales Forecasts")
+                      .Items(forecasts =>
+                      {
+                          forecasts.Add().Text("Q1 Forecast");
+                          forecasts.Add().Text("Q2 Forecast");
+                          forecasts.Add().Text("Q3 Forecast");
+                          forecasts.Add().Text("Q4 Forecast");
+                      });
+
+                  projects.Add().Text("Sales Reports");
+              });
+
+          panelbar.Add().Text("Programs")
+              .Items(programs =>
+              {
+                  programs.Add().Text("Monday");
+                  programs.Add().Text("Tuesday");
+                  programs.Add().Text("Wednesday");
+                  programs.Add().Text("Thursday");
+                  programs.Add().Text("Friday");
+              });
+
+          panelbar.Add().Text("Communication").Enabled(false);
+      })
+    )
+```
+```TagHelper
+    <kendo-panelbar name="employees" datatextfield="FullName">
+        <hierarchical-datasource>
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Employees" datatype="jsonp" />
+            </transport>
+            <schema type="json">
+                <hierarchical-model id="EmployeeId" has-children="HasEmployees">
+                </hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+    </kendo-panelbar>
+```
+```TagHelper-items
+    <kendo-panelbar name="project">
+        <items>
+            <panelbar-item text="Storage" expanded="true">
+                <items>
+                    <panelbar-item text="Wall Shelving"></panelbar-item>
+                    <panelbar-item text="Floor Shelving"></panelbar-item>
+                    <panelbar-item text="Kids Storage"></panelbar-item>
+                </items>
+            </panelbar-item>
+            <panelbar-item text="Lights">
+                <items>
+                    <panelbar-item text="Ceiling"></panelbar-item>
+                    <panelbar-item text="Table"></panelbar-item>
+                    <panelbar-item text="Floor"></panelbar-item>
+                </items>
+            </panelbar-item>
+        </items>
+    </kendo-panelbar>
+```
+{% else %}
+```HtmlHelper
     @(Html.Kendo().PanelBar()
         .Name("panelbar")
         .ExpandMode(PanelBarExpandMode.Single)
@@ -40,76 +119,30 @@ The following example demonstrates the basic configuration of the PanelBar HtmlH
         })
     )
 ```
+{% endif %}
 
 ## Functionality and Features
 
-* [Data Binding]({% slug htmlhelpers_panelbar_databinding_aspnetcore %})
-* [Expand modes]({% slug htmlhelpers_panelbar_expandmodes_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_panelbar %})
+* [Data Binding]({% slug htmlhelpers_panelbar_databinding_aspnetcore %})—The PanelBar supports binding to data. 
+* [Expand modes]({% slug htmlhelpers_panelbar_expandmodes_aspnetcore %})—The component offers `Single` and `Multiple` expand modes. 
+* [Events]({% slug events_panelbar_aspnetcore %})—To control the behavior of the component upon user interaction, you can use the events that the component emits.
+* [Accessibility]({% slug accessibility_aspnetcore_panelbar %})—The PanelBar is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
-## Events
 
-You can subscribe to all PanelBar [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#events). For a complete example on basic PanelBar events, refer to the [demo on using the events of the PanelBar](https://demos.telerik.com/{{ site.platform }}/panelbar/events).
+## Next Steps
 
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```Razor
-    @(Html.Kendo().PanelBar()
-            .Name("panelbar")
-            .Events(e => e
-                .Expand("panelbar_expand")
-                .Collapse("panelbar_collapse")
-            )
-    )
-    <script>
-        function panelbar_collapse() {
-            // Handle the collapse event.
-        }
-
-        function panelbar_expand() {
-            // Handle the expand event.
-        }
-    </script>
-```
-
-### Handling by Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-    @(Html.Kendo().PanelBar()
-        .Name("panelbar")
-        .Events(e => e
-            .Expand(@<text>
-                function() {
-                    // Handle the expand event inline.
-                }
-            </text>)
-            .Collapse(@<text>
-                function() {
-                    // Handle the collapse event inline.
-                }
-            </text>)
-        )
-    )
-
-## Referencing Existing Instances
-
-To reference an existing PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side PanelBar API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
-
-    // Place this after the PanelBar for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the panelbar is used to get its client-side instance.
-            var panelbar = $("#panelbar").data("kendoPanelBar");
-        });
-    </script>
+* [Getting Started with the PanelBar]({% slug  aspnetcore_panelbar_getting_started %})
+* [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)
+{% if site.core %}
+* [Basic Usage of the PanelBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/tag-helper)
+* [PanelBar in Razor Pages]({% slug htmlhelpers_panelbar_razorpage_aspnetcore%})
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)
 * [Using the API of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/api)
 * [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
-* [PanelBarBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/panelbarbuilder)
 * [PanelBar Server-Side API](/api/panelbar)
+* [Knowledge Base Section](/knowledge-base)
+

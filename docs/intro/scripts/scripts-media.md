@@ -1,25 +1,30 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Media
-page_title: Individual Scripts for Media | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Media - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Media"
 slug: script_filesfor_media_widgets
 ---
 
 # Individual Scripts for Media
 
-The following table lists the individual script files for the Kendo UI Media widgets.&nbsp;&nbsp;
+The following table lists the individual script files for the Kendo UI Media components.&nbsp;&nbsp;
 
-| Widget | Individual Scripts | Comments |
+| Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| | kendo.html.base.js | |
+| | kendo.html.button.js | |
+| | kendo.popup.js | |
+| | kendo.button.menu.js | |
+| | kendo.splitbutton.js | |
+| | kendo.dropdownbutton.js | |
 | | kendo.toolbar.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.tooltip.js | |
@@ -34,7 +39,7 @@ The following table lists the individual script files for the Kendo UI Media wid
 
 ## See Also
 
-+ [Scripts for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Scripts for Data Management Components]({% slug script_filesfor_datamanagement_widgets %})
 + [Scripts for Editors]({% slug script_filesfor_editors_widgets %})
 + [Scripts for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Scripts for Charts]({% slug script_filesfor_charts_widgets %})

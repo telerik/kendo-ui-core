@@ -36,6 +36,18 @@
             assert.equal(dom.data("kendoColorPicker").value(), "#223344");
         });
 
+        it("Does not throw an error when a ColorPicker is initialized with an empty value", function() {
+            dom = $("<input data-bind='value:value' />");
+            var observable = kendo.observable({ value: "" });
+
+            kendo.bind(dom, observable);
+
+            assert.doesNotThrow(() => {
+                dom.kendoColorPicker();
+            });
+
+        });
+
         // XXX: does this test make any sense?
         it("Binding color picker initialized after binding", function() {
             dom = $("<input data-bind='value:value' />");

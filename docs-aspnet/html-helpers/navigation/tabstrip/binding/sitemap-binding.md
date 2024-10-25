@@ -35,16 +35,17 @@ The TabStrip enables you to create its items by setting a sitemap.
 
 1. Add a TabStrip.
 
-    ```Razor
-        @(Html.Kendo().TabStrip()
-            .Name("tabstrip") // The name of the tabstrip is mandatory. It specifies the "id" attribute of the TabStrip.
-            .BindTo("sample") // Bind to the sitemap with the name "sample".
-        )
-    ```
+```HtmlHelper
+    @(Html.Kendo().TabStrip()
+           .Name("tabstrip") // The name of the tabstrip is mandatory. It specifies the "id" attribute of the TabStrip.
+        .BindTo("sample") // Bind to the sitemap with the name "sample".
+     )
+```
+
 
 ## See Also
 
 * [Basic Usage of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip)
 * [Using the API of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip/api)
-* [TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TabStripBuilder)
+* [TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/tabstripbuilder)
 * [TabStrip Server-Side API](/api/tabstrip)

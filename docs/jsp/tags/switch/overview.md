@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Switch JSP Tag
+page_title: Overview - Switch JSP Tag
 description: "Get started with the Switch JSP tag in Kendo UI."
 slug: overview_switch_uiforjsp
 position: 1

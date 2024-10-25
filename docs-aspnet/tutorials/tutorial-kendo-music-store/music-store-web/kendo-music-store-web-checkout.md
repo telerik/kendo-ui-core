@@ -1,6 +1,6 @@
 ---
 title: Create the Checkout Page
-page_title: Create the Checkout Page | Music Store Web App Tutorial
+page_title: Create the Checkout Page - Music Store Web App Tutorial
 description: "Learn how to create the Checkout page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
 slug: createcheckoutpage_muscistorewebapp_aspnetmvc
 position: 9
@@ -8,7 +8,7 @@ position: 9
 
 # Create the Checkout Page
 
-![A screenshot of the Kendo UI Music Store Checkout page](images/kendo-checkout-screenshot.png)
+![{{ site.product_short }} A screenshot of the Kendo UI Music Store Checkout page](images/kendo-checkout-screenshot.png)
 
 Users navigate to the Checkout page when they hover over the Shopping Cart Menu and click the **Checkout** button. This provides them with a chance to review the items in their cart. Users can change quantities or remove items from the cart and review the subtotal.
 

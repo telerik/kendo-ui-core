@@ -4,7 +4,7 @@ description: Configure the Kendo UI DatePicker's footer template with a button t
 type: how-to
 page_title: Add a Clear Button to Footer Template
 slug: datepicker-include-clear-button-in-footer-template
-position: 
+position:
 tags: datepicker, clear, footer
 ticketid: 1456583
 res_type: kb
@@ -19,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Date/Time Pickers for Progress® Kendo UI®</td>
+			<td>Progress® Kendo UI® Date and Time Pickers for jQuery</td>
 		</tr>
 	</tbody>
 </table>

@@ -1,8 +1,8 @@
 ---
 title: Persist expanded rows in Kendo Grid
-description: An example on how to persist the Kendo UI Grid expanded rows.
+description: Learn how to persist the Kendo UI Grid expanded rows.
 type: how-to
-page_title:  Persist expanded rows in Kendo Grid | Kendo UI Grid for jQuery
+page_title:  Persist expanded rows in Kendo Grid - Kendo UI for jQuery Data Grid
 slug: grid-persist-expanded-rows
 tags: grid, persist, detail, expand, expanded, refresh
 res_type: kb
@@ -14,10 +14,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.3.1026</td>
  </tr>
 </table>
@@ -41,7 +41,7 @@ A possible solution is to:
       <script type="text/x-kendo-template" id="template">
         <div class="tabstrip">
            <ul>
-              <li class="k-state-active">
+              <li class="k-active">
                  Orders
               </li>
               <li>

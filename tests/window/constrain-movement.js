@@ -159,6 +159,34 @@
             assert.equal(position.left, containerPosition.left + 30);
         });
 
+        it("position setting inside containment with percentage", function() {
+            var position;
+            var containerPosition;
+            var expectedOffset;
+            containment = $(
+                "<div id='container' style='height: 500px; width: 500px;position: relative; border: 1px solid grey;' />"
+            ).appendTo(Mocha.fixture);
+
+            var wnd = setupWnd({
+                visible: true,
+                width: 50,
+                height: 50,
+                position: {
+                    top: "50%",
+                    left: "50%"
+                },
+                draggable: {
+                    containment: containment
+                }
+            });
+
+            position = kendo.getOffset(wnd.wrapper);
+            containerPosition = kendo.getOffset(containment);
+
+            assert.equal(position.top, containerPosition.top + containment.outerHeight() / 2);
+            assert.equal(position.left, containerPosition.left + containment.outerWidth() / 2);
+        });
+
         it("center inside containment with top and left", function() {
             var containerPosition;
             var expectedPosition;

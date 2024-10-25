@@ -15,7 +15,7 @@ component: charts
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Chart</td>
+  <td>Progress® Kendo UI® Chart for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -80,7 +80,3 @@ Kendo UI does not provide a built-in solution for avoiding this behavior. Howeve
       $(document).ready(createChart);
     </script>
 ```
-
-## See Also
-
-* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})

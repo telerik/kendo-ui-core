@@ -2,7 +2,7 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input,
-        STATE_DISABLED = "k-state-disabled";
+        STATE_DISABLED = "k-disabled";
 
     describe("kendo.ui.MaskedTextBox api", function() {
         beforeEach(function() {
@@ -116,6 +116,20 @@
             maskedtextbox.value(null);
 
             assert.equal(input.val(), "");
+        });
+
+        it("value method refreshes the floating label", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                mask: "(999) 000-0000",
+                label: {
+                    content: "Set phone number",
+                    floating: true
+                }
+            });
+
+            maskedtextbox.value(5551234567);
+
+            assert.isOk(!maskedtextbox.floatingLabel.element.hasClass("k-empty"));
         });
 
         it("raw method returns unmasked widget value", function() {

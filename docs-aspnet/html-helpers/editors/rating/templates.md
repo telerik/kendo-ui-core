@@ -9,15 +9,15 @@ position: 6
 
 # Templates
 
-By default, each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
+By default, each Rating item is rendered with a star icon from [the Kendo Web SVG Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/svg-icons).
 
-To modify the default icon, use the [`ItemTemplate`](https://docs.telerik.com/{{ site.platform }}/api//Kendo.Mvc.UI.Fluent/RatingBuilder#itemtemplatesystemstring), [`SelectedTemplate`](https://docs.telerik.com/{{ site.platform }}/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectedtemplatesystemstring), and [`HoveredTemplate`](https://docs.telerik.com/{{ site.platform }}/api//Kendo.Mvc.UI.Fluent/RatingBuilder#hoveredtemplatesystemstring) properties.
+To modify the default icon, use the [`ItemTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#itemtemplatesystemstring), [`SelectedTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#selectedtemplatesystemstring), and [`HoveredTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/ratingbuilder#hoveredtemplatesystemstring) properties.
 
 ## Item Template
 
 The item template specifies the template which is used for rendering the items of the Rating. If the `SelectedTemplate` is not specified, the helper will use the default start icon for selected items. Therefore, it is recommended that you specify the `SelectedTemplate` when the `ItemTemplate` option is used.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -27,6 +27,25 @@ The item template specifies the template which is used for rendering the items o
         .SelectedTemplate("<i class='k-icon k-i-heart'></i>")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating"
+                  min="1"
+                  max="6"
+                  value="3"
+                  item-template-id="rating-item-template"
+                  selected-template-id="rating-selected-template">
+    </kendo-rating>
+
+    <script id="rating-item-template" type="text/x-kendo-template">
+        <i class='k-icon k-i-heart-outline'></i>
+    </script>
+
+    <script id="rating-selected-template" type="text/x-kendo-template">
+        <i class='k-icon k-i-heart'></i>
+    </script>
+```
+{% endif %}
 
 ## Selected Template
 
@@ -34,7 +53,7 @@ The selected template specifies the template for rendering the selected state of
 
 > When the Rating is in half precision mode, use the same template for both the `SelectedTemplate` and `HoveredTemplate` options.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -44,6 +63,25 @@ The selected template specifies the template for rendering the selected state of
         .SelectedTemplate("<i class='k-icon k-i-heart'></i>")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating"
+                  min="1"
+                  max="6"
+                  value="3"
+                  item-template-id="rating-item-template"
+                  selected-template-id="rating-selected-template">
+    </kendo-rating>
+
+    <script id="rating-item-template" type="text/x-kendo-template">
+        <i class='k-icon k-i-heart-outline'></i>
+    </script>
+
+    <script id="rating-selected-template" type="text/x-kendo-template">
+        <i class='k-icon k-i-heart'></i>
+    </script>
+```
+{% endif %}
 
 ## Hovered Template
 
@@ -51,7 +89,7 @@ The hovered template specifies the template which is used for rendering the hove
 
 > When the Rating is in half precision mode, use the same template for both the `SelectedTemplate` and `HoveredTemplate` options.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -60,6 +98,20 @@ The hovered template specifies the template which is used for rendering the hove
         .HoveredTemplate("<i class='k-icon k-i-heart'></i>")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating"
+                  min="1"
+                  max="6"
+                  value="3"
+                  hovered-template-id="rating-selected-template">
+    </kendo-rating>
+
+    <script id="rating-hovered-template" type="text/x-kendo-template">
+        <i class='k-icon k-i-heart'></i>
+    </script>
+```
+{% endif %}
 
 ## See Also
 

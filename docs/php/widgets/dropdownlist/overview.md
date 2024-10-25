@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | DropDownList PHP Class
+page_title: Overview - DropDownList PHP Class
 description: "Get started with the DropDownList PHP class in Kendo UI."
 slug: overview_dropdownlist_uiforphp
 position: 1

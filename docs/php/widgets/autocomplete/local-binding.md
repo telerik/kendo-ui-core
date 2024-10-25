@@ -1,6 +1,6 @@
 ---
 title: Local Binding
-page_title: Local Binding | AutoComplete PHP Class
+page_title: Local Binding - AutoComplete PHP Class
 description: "Bind Kendo UI AutoComplete PHP class to an array of data."
 slug: localbinding_autocomplete_uiforphp
 position: 2

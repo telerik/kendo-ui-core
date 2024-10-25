@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | TreeList JSP Tag
+page_title: Overview - TreeList JSP Tag
 description: "Get started with the TreeList JSP tag in Kendo UI."
 slug: overview_treelist_uiforjsp
 position: 1
@@ -13,6 +13,8 @@ The TreeList JSP tag is a server-side wrapper for the [Kendo UI TreeList](/api/j
 ## Getting Started
 
 ### Configuration
+
+> The names of the properties are case-sensitive, `productName` is different from `ProductName`.
 
 Below are listed the steps for you to follow when configuring the Kendo UI TreeList.
 

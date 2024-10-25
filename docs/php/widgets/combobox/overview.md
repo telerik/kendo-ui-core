@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | ComboBox PHP Class
+page_title: Overview - ComboBox PHP Class
 description: "Get started with the ComboBox PHP class in Kendo UI."
 slug: overview_combobox_uiforphp
 position: 1

@@ -1,7 +1,7 @@
 ---
 title: Customize Data Source
-page_title: Customize Data Source | Kendo UI Grid for jQuery
-description: "An example on how to customize the data source options for PDF export of the Kendo UI Grid for jQuery."
+page_title: Customize Data Source - Kendo UI for jQuery Data Grid
+description: "Learn how to customize the data source options for PDF export of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/pdf-export/custom-data-source
 slug: howto_customize_data_source_pdf_grid
 tags: grid, customize, datasource
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for jQuery</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -60,15 +60,15 @@ The following example demonstrates how to switch to client paging during PDF exp
         stylesheet is hosted on a different domain.
     */
     kendo.pdf.defineFont({
-      "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
-      "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-      "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-      "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+      "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+      "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+      "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+      "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
     });
   </script>
 
   <!-- Load Pako ZLIB library to enable PDF compression -->
-  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+  <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 
   <script type="x/kendo-template" id="page-template">
   <div class="page-template">
@@ -184,4 +184,4 @@ The following example demonstrates how to switch to client paging during PDF exp
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

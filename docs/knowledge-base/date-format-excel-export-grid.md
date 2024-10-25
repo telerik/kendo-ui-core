@@ -1,8 +1,8 @@
 ---
 title: Set Date Cell Format during Excel Export in Reorderable Grid
-description: An example on how to change the format for date columns in a reorderable, dynamic Kendo UI Grid.
+description: Learn how to change the format for date columns in a reorderable, dynamic Kendo UI Grid.
 type: how-to
-page_title: Format Date Columns Values before Exporting to Excel | Kendo UI Grid for jQuery
+page_title: Format Date Columns Values before Exporting to Excel - Kendo UI for jQuery Data Grid
 slug: date-format-excel-export-grid
 tags: grid, excel, export, format, date, cells
 ticketid: 1133130
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td> 
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>Created with the 2017.3.913 version</td>
  </tr>
 </table>
@@ -48,6 +48,10 @@ How can I change the format of a date column during the Excel export in the Kend
             var dateCells = [];
 
             for (var i = 0; i < fields.length; i++) {
+                if (fields[i].hidden) { // required if grid contains hidden column/s or user hides column/s
+                    fields.splice(i, 1);
+                };
+
                 var currentField = fields[i].field;
                 var currentModel = fieldsModels[currentField];
 
@@ -66,7 +70,7 @@ How can I change the format of a date column during the Excel export in the Kend
                 for (var q = 0; q < dateCells.length; q++) {
                     var cellIndex = dateCells[q];
                     var value = row.cells[cellIndex].value;
-                    var newValue = new Date(value.getFullYear(), value.getMonth(), value.getDay());
+                    var newValue = new Date(value.getFullYear(), value.getMonth(), value.getDate());
 
                     row.cells[cellIndex].value = newValue;
                     row.cells[cellIndex].format = "yyyy-MM-dd";
@@ -130,4 +134,4 @@ How can I change the format of a date column during the Excel export in the Kend
 
 ## See Also
 
-* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/cell-format)
+* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/controls/grid/how-to/excel/cell-format)

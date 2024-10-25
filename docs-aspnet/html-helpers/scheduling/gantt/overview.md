@@ -1,25 +1,34 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Gantt component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/gantt, /helpers/scheduling/gantt/overview
 slug: htmlhelpers_gantt_aspnetcore
-position: 1
+position: 0
 ---
 
-# Gantt HtmlHelper Overview
+# {{ site.framework }} Gantt Overview
 
+{% if site.core %}
+The Telerik UI Gantt TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Gantt widget.
+{% else %}
 The Telerik UI Gantt HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Gantt widget.
+{% endif %}
 
 The Gantt displays a set of tasks and dependencies which are used to visualize project-planning data. It provides a TreeList section where the user can edit the tasks, and sort and reorder them in a grid-like fashion, and a Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in the day, week, and month views.
 
-* [Demo page for the Gantt](https://demos.telerik.com/{{ site.platform }}/gantt/index)
+* [Demo page for the Gantt HtmlHelper](https://demos.telerik.com/{{ site.platform }}/gantt/index)
+{% if site.core %}
+* [Demo page for the Gantt TagHelper](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+{% endif %}
+
+> As of the 2022 R3 release, the `Selectable` mechanism is altered. The [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gantteventbuilder#changesystemstring) event will now be fired only when Selection/Deselection is performed.
 
 ## Initializing the Gantt
 
-The following example demonstrates how to define the Gantt by using the Gantt HtmlHelper.
+The following example demonstrates how to define the Gantt.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>
@@ -64,6 +73,41 @@ The following example demonstrates how to define the Gantt by using the Gantt Ht
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
+        <columns>
+            <gantt-column field="title" title="Title" editable="true" sortable="true"></gantt-column>
+            <gantt-column field="resources" title="Assigned Resources" editable="true" sortable="true"></gantt-column>
+        </columns>
+        <views>
+            <gantt-view type="GanttViewType.Day"></gantt-view>
+            <gantt-view type="GanttViewType.Week"></gantt-view>
+            <gantt-view type="GanttViewType.Month" selected="true"></gantt-view>
+        </views>
+        <gantt-datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("ReadTasks","Gantt")" />
+            </transport>
+            <schema>
+                <model id="TaskID">
+                    <fields>
+                        <field name="TaskID" type="number"></field>
+                        <field name="parentId" from="ParentID" type="number"></field>
+                        <field name="title" from="Title" type="string"></field>
+                        <field name="start" from="Start" type="date"></field>
+                        <field name="end" from="End" type="date"></field>
+                        <field name="summary" from="Summary" type="boolean"></field>
+                        <field name="expanded" from="Expanded" type="boolean" default-value="true"></field>
+                        <field name="percentComplete" from="PercentComplete" type="number"></field>
+                        <field name="orderId" from="OrderId" type="number"></field>
+                    </fields>
+                </model>
+            </schema>
+        </gantt-datasource>
+    </kendo-gantt>
+```
+{% endif %}
 ```Controller
     public partial class GanttController : Controller
     {
@@ -148,9 +192,9 @@ The following example demonstrates how to define the Gantt by using the Gantt Ht
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Gantt HtmlHelper.
+The following example demonstrates the basic configuration of the Gantt.
 
-```
+```HtmlHelper
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>
@@ -232,34 +276,50 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
+        <tooltip visible="false" />
+        <current-time-marker enabled="false" />
+        <messages>
+            <views day="MyDay" week="MyWeek" month="MyMonth" />
+        </messages>
+        <columns>
+            <gantt-column field="title" title="Title" editable="true" sortable="true"></gantt-column>
+            <gantt-column field="resources" title="Assigned Resources" editable="true" sortable="true"></gantt-column>
+        </columns>
+        <views>
+            <gantt-view type="GanttViewType.Day"></gantt-view>
+            <gantt-view type="GanttViewType.Week"></gantt-view>
+            <gantt-view type="GanttViewType.Month" selected="true"></gantt-view>
+        </views>
+    </kendo-gantt>
+```
+{% endif %}
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_gantt_binding_aspnetcore %})
-* [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %})
-* [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %})
-* [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %})
-* [Accessibility]({% slug accessibility_aspnetcore_gantt %})
+| Feature | Description |
+|:---         |:---
+| [Layout]({% slug htmlhelpers_gantt_layout_aspnetcore %}) | The layout of the Gantt consists of the GanttList and Timeline sections separated by a splitbar. |
+| [Data binding]({% slug htmlhelpers_gantt_binding_aspnetcore %}) | The Gantt provides various options for data binding. |
+| [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %}) | The Gantt columns offer configuration options for customizing the columns in the list section of the Gantt  |
+| [Planned vs Actual]({% slug htmlhelpers_gantt_planned_vs_actual_aspnetcore %}) | You can compare the actual `start` and `end` dates with the originaly planned dates. |
+| [PDF export]({% slug htmlhelpers_gantt_pdf_export_aspnetcore %}) | The Gantt has built-in PDF export capabilities. |
+| [Select date range]({% slug htmlhelpers_gantt_select_date_range_aspnetcore %}) | You can configure the component to display tasks in a specified date range only. |
+| [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %}) | The Gantt allows you to assign optional resources to the Gantt tasks. |
+| [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %}) | You can customizing the rendering of the Gantt tasks through templates. |
+| [Accessibility]({% slug accessibility_aspnetcore_gantt %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
-## Events
+## Next Steps
 
-For a complete example on basic Gantt events, refer to the [demo on using the events of the Gantt](https://demos.telerik.com/{{ site.platform }}/gantt/events).
-
-## Referencing Existing Instances
-
-To reference an existing Gantt instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side Gantt API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#methods) to control its behavior.
-
-    // Place this after the Gantt for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The Name() of the Gantt is used to get its client-side instance.
-            var gantt = $("#gantt").data("kendoGantt");
-        });
-    </script>
+* [Getting Started with the Gantt]({% slug gantt_aspnetcore_get_started %})
+* [Basic Usage of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/index)
+{% if site.core %}
+* [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+{% endif %}
 
 ## See Also
 
-* [Basic Usage of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt)
-* [Using the API of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
-* [Server-Side API](/api/gantt)
+* [Knowledge Base Section](/knowledge-base)
+* [Using the API of the Gantt for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)

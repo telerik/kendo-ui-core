@@ -1,8 +1,8 @@
 ---
 title: Edit TreeView Node Text through Context Menu
-description: An example on how to edit the text of a Kendo UI TreeView node by using a context menu.
+description: Learn how to edit the text of a Kendo UI TreeView node by using a context menu.
 type: how-to
-page_title: Edit Node Text through Context Menu | Kendo UI TreeView for jQuery
+page_title: Edit Node Text through Context Menu - Kendo UI TreeView for jQuery
 slug: treeview-contextmenu-edit-node-text
 tags: kendo, kendo-ui, treeview, contextmenu, edit, node, text
 res_type: kb
@@ -17,7 +17,7 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>TreeView for Progress® Kendo UI®</td>
+		<td>Progress® Kendo UI® TreeView for jQuery</td>
 	</tr>
 </table>
 
@@ -59,9 +59,9 @@ How can I edit the text of a TreeView node by using a context menu?
 
     $("#menu").kendoContextMenu({
         target: "#treeview",
-        filter: ".k-in",
+        filter: ".k-treeview-leaf",
         select: function (e) {
-            var node = $("#treeview").getKendoTreeView().dataItem($(e.target).closest(".k-item"));
+            var node = $("#treeview").getKendoTreeView().dataItem($(e.target).closest(".k-treeview-item"));
             // create and open Window
             $("<div />")
                 .html(editTemplate({ node: node }))
@@ -79,7 +79,6 @@ How can I edit the text of a TreeView node by using a context menu?
 
                     var dialog = $(e.currentTarget).closest("[data-role=window]").getKendoWindow();
                     var textbox = dialog.element.find(".k-textbox");
-                    debugger;
                     node.set("text", textbox.val());
 
                     dialog.close();

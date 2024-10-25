@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: Modes of Operation | Upload JSP Tag
+page_title: Modes of Operation - Upload JSP Tag
 description: "Use the synchronous and asynchronous operational modes of the Upload JSP tag in Kendo UI."
 slug: modesofoperation_upload_uiforjsp
 position: 2

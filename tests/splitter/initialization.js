@@ -9,7 +9,6 @@
         it("constructor adds classes to container", function() {
             splitter = create({}, 1);
 
-            assert.isOk(splitter.dom.hasClass("k-widget"));
             assert.isOk(splitter.dom.hasClass("k-splitter"));
 
             splitter = create({ orientation: "vertical" }, 1);
@@ -55,8 +54,8 @@
 
             var splitbars = splitter.dom.find(".k-splitbar");
 
-            assert.equal(splitbars.eq(0).find(".k-icon.k-i-arrow-60-left").length, 1);
-            assert.equal(splitbars.eq(1).find(".k-icon.k-i-arrow-60-right").length, 1);
+            assert.equal(splitbars.eq(0).find(".k-svg-icon.k-svg-i-caret-alt-left").length, 1);
+            assert.equal(splitbars.eq(1).find(".k-svg-icon.k-svg-i-caret-alt-right").length, 1);
         });
 
         it("splitbars have resize handle between resizable panes", function() {
@@ -68,8 +67,8 @@
 
             var splitbars = splitter.dom.find(".k-splitbar");
 
-            assert.equal(splitbars.eq(0).find(".k-icon.k-resize-handle").length, 0);
-            assert.equal(splitbars.eq(1).find(".k-icon.k-resize-handle").length, 1);
+            assert.equal(splitbars.eq(0).find("span.k-resize-handle").length, 0);
+            assert.equal(splitbars.eq(1).find("span.k-resize-handle").length, 1);
         });
 
         it("collapsed panes render expand arrow beside them", function() {
@@ -79,7 +78,7 @@
                 ]
             });
 
-            assert.equal(splitter.dom.find(".k-i-arrow-60-right").length, 1);
+            assert.equal(splitter.dom.find(".k-expand-prev").length, 1);
         });
 
         it("splibars next to initially collapsed panes are not draggable", function() {
@@ -106,9 +105,9 @@
         });
 
         it("inner splitters get resized after initialization of outer splitters", function() {
-            var outerSplitter = $("<div id='outerSplitter' class='k-splitter' style='height:107px'><div /><div /></div>")
+            var outerSplitter = $("<div id='outerSplitter' class='k-splitter' style='height:107px'><div></div><div></div></div>")
                 .appendTo(Mocha.fixture),
-                innerSplitter = $("<div id='innerSplitter' style='height:100%'><div /><div /></div>")
+                innerSplitter = $("<div id='innerSplitter' style='height:100%'><div></div><div></div></div>")
                     .appendTo(outerSplitter.find("div:first"));
 
             innerSplitter.kendoSplitter({
@@ -119,7 +118,7 @@
                 orientation: "horizontal"
             });
 
-            assert.equal(innerSplitter.find(">div:first").height(), 50)
+            assert.equal(innerSplitter.find(">div:first").height(), 46);
         });
 
         it("splibars between non-resizable and non-collapsible panes do not have a tabindex", function() {
@@ -134,7 +133,7 @@
         });
 
         //    it("initialization filters out script blocks", function() {
-        //        var dom = $("<div><div /><div /><script><\/script></div>");
+        //        var dom = $("<div><div></div><div></div><script><\/script></div>");
 
         //        dom.kendoSplitter();
 

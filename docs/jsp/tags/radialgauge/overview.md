@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Radial Gauge JSP Tag
+page_title: Overview - Radial Gauge JSP Tag
 description: "Get started with the Radial Gauge JSP tag in Kendo UI."
 slug: overview_radialgauge_uiforjsp
 position: 1

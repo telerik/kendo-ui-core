@@ -1,5 +1,6 @@
 (function() {
     var StaticList = kendo.ui.StaticList,
+        encode = kendo.htmlEncode,
         element;
 
     describe("kendo.ui.StaticList initialization", function() {
@@ -22,22 +23,23 @@
         });
 
         it("StaticList extends passed options", function() {
-            var list = new StaticList(element, { template: "test" });
+            var templ = () => "test";
+            var list = new StaticList(element, { template: templ });
 
             var options = list.options;
 
-            assert.equal(options.template, "test");
+            assert.equal(options.template, templ);
         });
 
         it("StaticList adds listbox role to the element", function() {
-            var list = new StaticList(element);
+            var list = new StaticList(element, {});
 
             assert.equal(element.attr("role"), "listbox");
         });
 
         it("StaticList builds a template", function() {
             var list = new StaticList(element, {
-                template: "test"
+                template: () => "test"
             });
 
             assert.isOk(list.templates.template);
@@ -45,7 +47,7 @@
 
         it("StaticList builds a groupTemplate", function() {
             var list = new StaticList(element, {
-                groupTemplate: "test"
+                groupTemplate: () => "test"
             });
 
             assert.isOk(list.templates.groupTemplate);
@@ -53,7 +55,7 @@
 
         it("StaticList builds a fixedGroupTemplate", function() {
             var list = new StaticList(element, {
-                fixedGroupTemplate: "test"
+                fixedGroupTemplate: () => "test"
             });
 
             assert.isOk(list.templates.fixedGroupTemplate);
@@ -61,12 +63,12 @@
 
         it("StaticList appends fixed header element before content element", function() {
             var list = new StaticList(element, {
-                fixedGroupTemplate: "test"
+                fixedGroupTemplate: () => "test"
             });
 
             var header = list.content.prev();
 
-            assert.isOk(header.hasClass("k-group-header"));
+            assert.isOk(header.hasClass("k-list-group-sticky-header"));
         });
 
         it("StaticList creates a dataSource", function() {
@@ -80,7 +82,7 @@
         it("pointer over li should add hover state", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -88,13 +90,13 @@
             var li = list.element.children().eq(0);
             li.mouseenter();
 
-            assert.isOk(li.hasClass("k-state-hover"));
+            assert.isOk(li.hasClass("k-hover"));
         });
 
         it("leave li should remove hover state", function() {
             var list = new StaticList(element, {
                 dataSource: ["item"],
-                template: "#:data#"
+                template: (data) => encode(data)
             });
 
             list.dataSource.read();
@@ -103,7 +105,7 @@
             li.mouseenter();
             li.mouseleave();
 
-            assert.isOk(!li.hasClass("k-state-hover"));
+            assert.isOk(!li.hasClass("k-hover"));
         });
 
         it("re-set value when add new item to the source", function() {
@@ -116,8 +118,8 @@
                     group: { field: "group" }
                 },
                 dataValueField: "value",
-                groupTemplate: "#:data#",
-                template: "#:data.name#",
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 value: 1
             });
 
@@ -143,7 +145,7 @@
                     }
                 },
                 dataValueField: "value",
-                template: "#:data.name#",
+                template: (data) => encode(data.name),
                 value: 1
             });
 
@@ -168,8 +170,8 @@
                     group: { field: "group" }
                 },
                 dataValueField: "value",
-                groupTemplate: "#:data#",
-                template: "#:data.name#",
+                template: (data) => encode(data.name),
+                groupTemplate: (data) => encode(data),
                 value: 1
             });
 

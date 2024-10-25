@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Button PHP Class
+page_title: Overview - Button PHP Class
 description: "Get started with the Button PHP class in Kendo UI."
 slug: overview_button_uiforphp
 position: 1
