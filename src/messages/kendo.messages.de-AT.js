@@ -142,6 +142,8 @@
   if (kendo.ui.ColumnMenu) {
     kendo.ui.ColumnMenu.prototype.options.messages =
       $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages, {
+        "apply": "Übernehmen",
+        "reset": "Zurücksetzen",
         "columns": "Spalten",
         "sortAscending": "Aufsteigend sortieren",
         "sortDescending": "Absteigend sortieren",
