@@ -27,6 +27,10 @@ The Kendo UI theme stylesheet still contains all the necessary styles. However, 
 ```
 
 {% if site.core %}
+### Target Framework
+
+With the Q4 2024 release, {{ site.product }} support for .NET 7 has been dropped as it has reached EOL on May 14, 2024. You can update to a supported [LTS and STS versions of .NET Core](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#lifecycle).
+
 ### Checkbox
 
 The `Rounded` configuration for the HTML Helpers now expects [`Kendo.Mvc.UI.Rounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/rounded) enum instead of [`Kendo.Mvc.UI.BasicRounded`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/basicrounded), exposing an additional `Full` option.
@@ -39,6 +43,60 @@ The `PanelBarItemBase(ViewContext)` constructor of the `PanelBarItemBase.cs` cla
 
 The `Size` attribute now expects [`Kendo.Mvc.UI.ComponentSize`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui/componentsize) enum instead of a string.
 {% endif %}
+
+### Deprecated APIs
+
+The `<WidgetName>.AsChildComponent()` method has been deprecated.
+
+#### Content browsing APIs
+
+The following interfaces, classes and their methods have been depreceted and removed from the `Kendo.Mvc` dll:
+
+{% if site.mvc %}
+| Component        | Class                      |
+| -----------      | -----------                |
+| Editor           | `DirectoryBrowser.cs`      |
+| Editor           | `DirectoryPermission.cs`   |
+| Editor           | `IDirectoryBrowser.cs`     |
+| Editor           | `IDirectoryPermission.cs`  |
+| Editor           | `FitImageResizer.cs`       |
+| Editor           | `IImageResizer.cs`         |
+| Editor           | `ImageResizer.cs`          |
+| Editor           | `ImageSize.cs`             |
+| Editor           | `IThumbnailCreator.cs`     |
+| Editor           | `ThumbnailCreator.cs`      |
+| FileManager      | `ContentBrowser.cs`        |
+| FileManager      | `ContentPermission.cs`     |
+| FileManager      | `IContentBrowser.cs`       |
+| FileManager      | `IContentPermission.cs`    |
+{% else %}
+| Component        | Class                      |
+| -----------      | -----------                |
+| Editor           | `DirectoryBrowser.cs`      |
+| Editor           | `DirectoryPermission.cs`   |
+| Editor           | `IDirectoryBrowser.cs`     |
+| Editor           | `IDirectoryPermission.cs`  |
+| FileManager      | `ContentBrowser.cs`        |
+| FileManager      | `ContentPermission.cs`     |
+| FileManager      | `IContentBrowser.cs`       |
+| FileManager      | `IContentPermission.cs`    |
+{% endif %}
+
+The code is moved to the demo application, where it is used for demo purposes only, demonstrating a possible implementation of the directory and file access functionality{% if site.mvc %}, and thumbnail creation{% endif %}. It is advisable to follow the best practices of your company/organisation when implementing the read/write access for the backend required for the above-listed components.
+
+#### Editor APIs
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `Editor.Messages.Styles()`     | [`Editor.Messages.Formatting()`](/api/kendo.mvc.ui.fluent/editormessagessettingsbuilder#formattingsystemstring)   |
+| `Editor.Messages.FormatBlock()`| [`Editor.Messages.Formatting()`](/api/kendo.mvc.ui.fluent/editormessagessettingsbuilder#formattingsystemstring)   |
+| `EditorToolFactory.FontColor()`| [`EditorToolFactory.ForeColor()`](/api/kendo.mvc.ui.fluent/editortoolfactory#forecolor)  |
+
+#### TextArea APIs
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `Resizable(String)`            | [`Resize(TextAreaResize)`](/api/kendo.mvc.ui.fluent/textareabuilder#resizekendomvcuitextarearesize)         |
 
 ## {{ site.product }} Q2 2024
 
@@ -77,7 +135,7 @@ As of the Q1 2024 release, the following controllers will be deprecated.
 As of the Q1 2024 release, the following interfaces will be deprecated.
 
 * FileManager&mdash;`IContentProviderController`
-* Editor&mdash;`IFileBrowserController`, `IImageBrowserController` 
+* Editor&mdash;`IFileBrowserController`, `IImageBrowserController`
 
 **Deprecated APIs**
 
