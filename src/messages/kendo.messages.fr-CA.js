@@ -120,7 +120,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "backColor": "Couleur de fond",
   "styles": "Styles",
   "emptyFolder": "Vider le dossier",
-  "uploadFile": "Télécharger",
+  "uploadFile": "Téléverser",
   "overflowAnchor": "Plus d'outils",
   "orderBy": "Organiser par:",
   "orderBySize": "Taille",
