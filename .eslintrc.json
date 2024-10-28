@@ -112,7 +112,7 @@
             }
         },
         {
-            "files": ["tests-next/**/*.js"],
+            "files": ["tests/**/*.js"],
             "globals": {
                 "$": true,
                 "Mocha": true,
