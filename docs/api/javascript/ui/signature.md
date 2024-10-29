@@ -282,7 +282,7 @@ If set to `true`, the widget will be enabled. If set to `false`, the widget will
 
     <div id="signature"></div>
     <script>
-        $("#signature").kendoSignature({}
+        $("#signature").kendoSignature({
             enable: false
         });
         var signature = $("#signature").data("kendoSignature");

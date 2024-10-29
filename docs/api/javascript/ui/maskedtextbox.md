@@ -32,16 +32,8 @@ Specifies the culture info used by the widget.
 
 #### Example - specify German culture internationalization
 
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
-    -->
-
+   
+    <script src="https://kendo.cdn.telerik.com/2024.3.1015/js/cultures/kendo.culture.de-DE.min.js"></script>
     <input id="maskedtextbox" />
     <script>
     $("#maskedtextbox").kendoMaskedTextBox({
@@ -442,7 +434,7 @@ Specifies the value of the MaskedTextBox widget.
 
 An object, which holds the options of the widget.
 
-#### Example - get options of the widget
+#### Example - get options of the component
 
     <input id="maskedtextbox" />
     <script>
@@ -451,7 +443,8 @@ An object, which holds the options of the widget.
     var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
 
     var options = maskedtextbox.options;
-    <script>
+    console.log(options)
+    </script>
 
 ## Methods
 

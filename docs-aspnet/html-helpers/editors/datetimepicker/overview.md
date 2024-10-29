@@ -10,7 +10,7 @@ position: 0
 # {{ site.framework }} DateTimePicker Overview
 
 {% if site.core %}
-The Telerik UI DataSource TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DataSource widget.
+The Telerik UI DateTimePicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DateTimePicker widget.
 {% else %}
 The Telerik UI DateTimePicker HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DateTimePicker widget.
 {% endif %}
@@ -107,8 +107,11 @@ The DateTimePicker component respects DataAnnotations when the `DateTimePickerFo
 | Feature | Description |
 |---------|-------------|
 | [Disabled dates]({% slug disableddates_datetimepicker_aspnetcore %})|The DateTimePicker allows you to disable specific days that shouldn't be selected by the end user, such as weekends and national holidays.|
+| [Component Type]({% slug htmlhelpers_componenttype_datetimepicker_aspnetcore %}) | The DateTimePicker allows you to choose between two rendering options: standard and modern appearance.  |
 | [Selected dates]({% slug selecteddates_datetimepicker_aspnetcore %})|The DateTimePicker allows you to render a pre-selected date and also define the minimum and maximum dates it displays.|
 | [Start view and navigation depth]({% slug navdepth_datetimepicker_aspnetcore %})|The DateTimePicker enables you to set the rendered initial view and define the navigation depth of the views.|
+| [Interval]({% slug htmlhelpers_datetimepicker_interval_aspnetcore %}) | You can configure the interval between the time values. |
+| [Floating Labels]({% slug htmlhelpers_datetimepicker_floatinglabel_aspnetcore %}) | You can explicitly set a floating label which floats above the field and remains visible. |
 | [Validation]({% slug validation_datetimepicker_aspnetcore %})|The DateTimePicker does not automatically update the typed text when the typed text is invalid. Such changes in the input value may lead to unexpected behavior.|
 | [Date and time formatting]({% slug datetimeformatting_datetimepicker_aspnetcore %})|The DateTimePicker allows you to define its date and time formatting.|
 | [Calendar types]({% slug calendartypes_datetimepicker_aspnetcore %})|By default, the DatePicker works with `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.|

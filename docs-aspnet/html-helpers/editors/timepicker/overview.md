@@ -87,14 +87,19 @@ The TimePicker component respects DataAnnotation attributes when using the `Time
     
 ## Functionality and Features
 
-* [Selected time]({% slug htmlhelpers_timepicker_aspnetcore_selectedtimes %})—The TimePicker allows you to render a pre-selected time and also define the minimum and maximum time it displays.
-* [Focused time]({% slug htmlhelpers_timepicker_aspnetcore_focusedtime %})—The TimePicker allows you to define focused time when the pop-up is opened.
-* [Formats]({% slug formats_timepicker_aspnetcore %})—The TimePicker allows you to define its time formatting.
-* [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %})—The TimePicker is designed to keep its input value unchanged even when the typed time is invalid.
-* [Globalization]({% slug globalization_timepicker_aspnetcore %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
-* [Accessibility]({% slug accessibility_timepicker_aspnetcore %})—The TimePicker is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
-* [Automatic Correction]({% slug htmlhelpers_timepicker_autocorrect_aspnetcore %})&mdash;You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set.
-
+|Feature|Description|
+|-------|-----------|
+| [Adaptive Mode]({% slug htmlhelpers_timepicker_adaptive_mode_aspnetcore %}) | The TimePicker supports an adaptive mode that provides a mobile-friendly rendering of its popup. |
+| [Component Type]({% slug htmlhelpers_componenttype_timepicker_aspnetcore %}) | The TimePicker allows you to choose from both a standard and a modern rendering appearance.  |
+| [Floating Labels]({% slug htmlhelpers_timepicker_floatinglabel_aspnetcore %}) | You can explicitly set a floating label which floats above the field and remains visible. |
+| [Selected time]({% slug htmlhelpers_timepicker_aspnetcore_selectedtimes %}) | The TimePicker allows you to render a pre-selected time and also define the minimum and maximum time it displays. |
+| [Focused time]({% slug htmlhelpers_timepicker_aspnetcore_focusedtime %}) |The TimePicker allows you to define focused time when the pop-up is opened. |
+| [Interval]({% slug htmlhelpers_timepicker_interval_aspnetcore %}) | You can configure the interval between the time values. |
+| [Formats]({% slug formats_timepicker_aspnetcore %}) | The TimePicker allows you to define its time formatting. |
+| [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %}) | The TimePicker is designed to keep its input value unchanged even when the typed time is invalid. |
+| [Globalization]({% slug globalization_timepicker_aspnetcore %}) | The globalization process combines the translation of component messages (localization) with adapting them to specific cultures. |
+| [Accessibility]({% slug accessibility_timepicker_aspnetcore %}) | The TimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Automatic Correction]({% slug htmlhelpers_timepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps
 

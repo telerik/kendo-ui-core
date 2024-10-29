@@ -16,12 +16,17 @@ The widget supports configurable options for setting its format, minimum and max
 
 ## Functionality and Features
 
-* [Selected times]({% slug selectedtimes_kendoui_timepicker %})&mdash;-The TimePicker allows you to set a specific time range from which to choose.
-* [Formats]({% slug formats_kendoui_timepicker %})&mdash;Check how you can set the format in the TimePicker.
-* [Validation]({% slug validation_kendoui_timepicker %})&mdash;Check the available validation options in the component.
-* [Floating Label]({% slug floating_label_kendoui_timepicker_widget %})&mdash;Explore the Floating Label feature of the TimePicker.
-* [Appearance]({% slug appearance_kendoui_timepicker_widget %})&mdash;Explore the styling options of the TimePicker component.
-* [Automatic Correction]({% slug autocorrect_kendoui_timepicker %})&mdash;You can configure whether the component will autocorrect the user's input when the `min` and `max` dates are set.
+|Feature|Description|
+|-------|-----------|
+| [Component Type]({% slug componenttypes_timepicker %}) | allows you to choose between two rendering options: standard and modern appearance.  |
+| [Floating Labels]({% slug floating_label_kendoui_timepicker_widget %}) | You can explicitly set a floating label which floats above the field and remains visible. |
+| [Selected times]({% slug selectedtimes_kendoui_timepicker %}) | The TimePicker allows you to render a pre-selected time and also define the minimum and maximum time it displays. |
+| [Appearance ]({% slug appearance_kendoui_timepicker_widget %}) |Explore the styling options of the TimePicker component. |
+| [Interval]({% slug interval_kendoui_timepicker %}) | You can configure the interval between the time values. |
+| [Formats]({% slug formats_kendoui_timepicker %}) | The TimePicker allows you to define its time formatting. |
+| [Validation]({% slug validation_kendoui_timepicker %}) | The TimePicker is designed to keep its input value unchanged even when the typed time is invalid. |
+| [Accessibility]({% slug accessibility_kendoui_timepicker_widget %}) | The TimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Automatic Correction]({% slug autocorrect_kendoui_timepicker %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps
 

@@ -117,7 +117,7 @@ The `img` element can be added automatically by the widget, or an existing eleme
                 { text: "item 1" },
                 { text: "item 2" }
             ],
-            imageUrl: "/images/edit-icon.gif"
+            imageUrl: 'https://demos.telerik.com/kendo-ui/content/shared/icons/16/star.png'
         });
     </script>
 

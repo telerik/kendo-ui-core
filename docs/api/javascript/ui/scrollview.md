@@ -504,7 +504,7 @@ Defines the aria-label for the previous button.
         navigatable: true,
         messages: {
           previousButtonLabel: "Prev button"
-        }
+        },
 		    contentHeight: "100%"
     });
     </script>

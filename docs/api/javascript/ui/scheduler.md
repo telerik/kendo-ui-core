@@ -261,7 +261,24 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
           url: "https://demos.telerik.com/kendo-ui/service/tasks",
           dataType: "jsonp"
         }
-      }
+      },
+      schema: {
+       model: {
+         id: "ID",
+         fields: {
+           ID: { type: "number" },
+           title: { field: "Title", defaultValue: "No title", validation: { required: true } },
+           start: { type: "date", field: "Start" },
+           end: { type: "date", field: "End" },
+           description: { field: "Description" },
+           recurrenceId: { from: "RecurrenceID" },
+           recurrenceRule: { from: "RecurrenceRule" },
+           recurrenceException: { from: "RecurrenceException" },
+           ownerId: { field: "OwnerID", defaultValue: 1 },
+           isAllDay: { type: "boolean", field: "IsAllDay" }
+         }
+       }
+     }
     });
     $("#scheduler").kendoScheduler({
       date: new Date("2022/6/6"),
@@ -4314,7 +4331,7 @@ The field of the resource data item which represents the resource value. The res
       resources: [
         {
           field: "roomId",
-          dataValueField: "roomId"
+          dataValueField: "roomId",
           dataSource: [
             { text: "Small meeting room", roomId: 1 },
             { text: "Big meeting room", roomId: 2 }
@@ -6089,11 +6106,11 @@ The name of the view. Typically, used to get the name of the currently selected 
           }
         ]
       });
-
-      var scheduler = $("#scheduler").data("kendoScheduler");
-      var viewName = scheduler.view().name;
-
-      alert(viewName)
+      setTimeout(function(){
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        var viewName = scheduler.view();
+        alert(scheduler.view().name)
+      })
     </script>
 
 ### views.selected `Boolean` *(default: false)*
@@ -6818,7 +6835,9 @@ Gets currently expanded scheduler events.
     scheduler.saveEvent();
     //get second occurrence
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(scheduler.data()[1]);
+    setTimeout(function(){
+        console.log(scheduler.data()[1]);
+    })
     </script>
 
 ### date
@@ -6902,9 +6921,11 @@ The event which should be put in edit mode. Also accepts a string which is the `
         }
       ]
     });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var event = scheduler.dataSource.at(0);
-    scheduler.editEvent(event);
+    setTimeout(function(){
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        var event = scheduler.dataSource.at(0);
+        scheduler.editEvent(event);
+    })
     </script>
 
 ### items
@@ -7052,9 +7073,11 @@ The event which should be removed. Also accepts a string which is the `uid` of t
         }
       ]
     });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var event = scheduler.dataSource.at(0);
-    scheduler.removeEvent(event);
+    setTimeout(function(){
+      var scheduler = $("#scheduler").data("kendoScheduler");
+      var event = scheduler.dataSource.at(0);
+      scheduler.removeEvent(event);
+    })    
     </script>
 
 ### resourcesBySlot
@@ -7139,7 +7162,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 
 Saves the scheduler event which is open in the edit form and closes it.
 
-#### Example - save an new event
+#### Example - save a new event
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7284,20 +7307,22 @@ Get the time slot from given element.
 
 `Object` The time slot.
 
-#### Example - save an new event
+#### Example - save a new event
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6")
     });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var element = scheduler.view().content.find("tr:first td:first");
-    var slot = scheduler.slotByElement(element);
+    setTimeout(function(){
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        var element = scheduler.view().content.find("tr:first td:first");
+        var slot = scheduler.slotByElement(element);
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log("slot startDate: " + slot.startDate);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log("slot endDate: " + slot.endDate);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("slot startDate: " + slot.startDate);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("slot endDate: " + slot.endDate);
+    })
     </script>
 
 ### view
@@ -7365,7 +7390,9 @@ The name of the current view. Can be used for refreshing the current view data.
         endTime: new Date("2015/1/1 18:00")
       });
 
-      scheduler.view(scheduler.viewName());
+      setTimeout(function(){
+        scheduler.view(scheduler.viewName());
+      })
     </script>
 
 

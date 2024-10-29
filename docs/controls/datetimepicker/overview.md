@@ -16,13 +16,19 @@ The DateTimePicker supports configurable options for minimum and maximum value, 
 
 ## Functionality and Features
 
-* [Disabled dates]({% slug disableddates_kendoui_datetimepicker %})—The DateTimePicker allows you to disable specific days which are not intended to be selected by the end user, for example, weekends and national holidays.
-* [Selected date and time]({% slug selecteddatestimes_kendoui_datetimepicker %})—The DateTimePicker allows you to render a pre-selected date and time, and also define the minimum and maximum date and time slots it displays.
-* [Start view and navigation depth]({% slug navdepth_kendoui_datetimepicker %})—You can also set the initial view rendered by the DateTimePicker and define the navigation depth of its views.
-* [Validation]({% slug validation_kendoui_datetimepicker %})—The DateTimePicker is designed to keep its input value unchanged even when the typed date is invalid.
-* [Date and time formatting]({% slug datetimeformats_kendoui_datetimepicker_widget %})—The DateTimePicker allows you to define its date and time formatting.
-* [Calendar types]({% slug calendartypes_kendoui_datetimepicker %})—You can use a specific calendar type out of the supported DateTimePicker ones.
-* [Automatic Correction]({% slug autocorrect_kendoui_datetimepicker %})&mdash;You can configure whether the component will autocorrect the user's input when the `min` and `max` dates are set.
+|Feature|Description|
+|-------|-----------|
+| [Component Type]({% slug componenttypes_datetimepicker %}) | The DateTimePicker allows you to choose between two rendering options: standard and modern appearance.  |
+| [Floating Labels]({% slug floating_label_kendoui_datetimepicker_widget %}) | You can explicitly set a floating label which floats above the field and remains visible. |
+| [Disabled dates]({% slug disableddates_kendoui_datetimepicker %}) | The DateTimePicker allows you to disable specific days which are not intended to be selected by the end user, for example, weekends and national holidays.  |
+| [Selected date and time]({% slug selecteddatestimes_kendoui_datetimepicker %}) | The DateTimePicker allows you to render a pre-selected date and time, and also define the minimum and maximum date and time slots it displays. |
+| [Start view and navigation depth]({% slug navdepth_kendoui_datetimepicker %}) | You can also set the initial view rendered by the DateTimePicker and define the navigation depth of its views. |
+| [Validation]({% slug validation_kendoui_datetimepicker %}) |The DateTimePicker is designed to keep its input value unchanged even when the typed date is invalid. |
+| [Interval]({% slug interval_kendoui_datetimepicker %}) |You can configure the interval between the time values. |
+| [Date and time formatting]({% slug datetimeformats_kendoui_datetimepicker_widget %}) | The DateTimePicker allows you to define its date and time formatting. |
+| [Accessibility]({% slug accessibility_kendoui_datetimepicker_widget %}) | The DateTimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Automatic Correction]({% slug autocorrect_kendoui_datetimepicker %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
+| [Calendar types]({% slug calendartypes_kendoui_datetimepicker %})| You can use a specific calendar type out of the supported DateTimePicker ones. |
 
 ## Next Steps
 
