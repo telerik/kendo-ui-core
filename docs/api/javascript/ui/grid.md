@@ -10436,7 +10436,7 @@ The jQuery object which represents the table body. Contains all grid table rows.
     });
     var grid = $("#grid").data("kendoGrid");
     var row = grid.tbody.find("tr:eq(0)");
-    var data = grid.dataItem(row);f
+    var data = grid.dataItem(row);
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(data.name); // displays "Jane Doe"
     </script>

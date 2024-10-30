@@ -5451,7 +5451,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
       ]
     });
     var gantt = $("#gantt").data("kendoGantt");
-    var task = gantt.dataItem("tr:eq(0)");
+    var task = gantt.dataItem("tr:eq(1)");
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.title); // displays "Task1"
     </script>
@@ -6373,7 +6373,7 @@ The widget instance which fired the event.
       columns: [ { field: "title", title: "Title", editable: true } ]
     });
     var gantt = $("#gantt").data("kendoGantt");
-    gantt.bind("cancel", gantt_edit);
+    gantt.bind("cancel", gantt_cancel);
     </script>
 
 ### save

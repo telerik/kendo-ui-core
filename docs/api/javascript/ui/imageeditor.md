@@ -51,7 +51,7 @@ Sets the url (or base64 string) for the image to open.
     <div id="imageEditor"></div>
     <script>
     $("#imageEditor").kendoImageEditor({
-        imageUrl: "image.jpg"
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg",
     });
     </script>
 
@@ -64,8 +64,8 @@ Sets the label used for the `<canvas>` element to describe the image contents.
     <div id="imageEditor"></div>
     <script>
     $("#imageEditor").kendoImageEditor({
-        imageUrl: "image.jpg",
-        imageLabel: "Fontana del Moro by night, Piazza Navona, Rome, Italy."
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/5.jpg",
+        imageLabel: "Rose Field."
     });
     </script>
 
@@ -79,7 +79,7 @@ Sets the saveAs options for the save command. Utilizes the [kendo.saveAs](/api/j
     <div id="imageEditor"></div>
     <script>
     $("#imageEditor").kendoImageEditor({
-        imageUrl: "image.jpg",
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg",
         saveAs: {
             fileName: "download.png"
         }
@@ -95,7 +95,7 @@ Sets the filename of the saved file.
     <div id="imageEditor"></div>
     <script>
     $("#imageEditor").kendoImageEditor({
-        imageUrl: "image.jpg",
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg",
         saveAs: {
             fileName: "download.png"
         }
@@ -434,7 +434,7 @@ The Image instance
         $("#imageEditor").kendoImageEditor();
         var imageEditor = $("#imageEditor").data("kendoImageEditor");
 
-        imageEditor.drawImage("image.jpg").done(function (image) {
+        imageEditor.drawImage("https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg").done(function (image) {
             imageEditor.drawCanvas(image);
         }).fail(function (ev) {
             alert("Something went wrong!");
@@ -532,7 +532,7 @@ The command arguments.
     <script>
         $("#imageEditor").kendoImageEditor({
             height: 500,
-            imageUrl: "image.jpg",
+            imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg",
             imageRendered: function (ev) {
                 var imageEditor = ev.sender;
                 imageEditor.executeCommand({ command: "ZoomImageEditorCommand", options: imageEditor.getZoomLevel() - 0.01 });

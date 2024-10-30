@@ -257,6 +257,7 @@ The text of the information message on the top of the filter menu.
         ],
         dataSource: dataSource
       });
+    </script>
 
 ### messages.isFalse `String` *(default: "is false")*
 

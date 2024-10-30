@@ -1371,10 +1371,10 @@ The command arguments.
 
       function renameFolder() {
         let filemanager = $("#filemanager").data("kendoFileManager");
-        let selectedFolder = $(".k-filemanager-treeview").find(".k-selected").parents(".k-item");
+        let selectedFolder = $(".k-filemanager-treeview").find(".k-selected").parents(".k-treeview-item");
 
         if (selectedFolder.length > 0) {
-          filemanager.executeCommand({ command: "RenameCommand", options: { target: $(".k-filemanager-treeview").find(".k-selected").parents(".k-item"), item: filemanager.getSelected()[0] } })
+          filemanager.executeCommand({ command: "RenameCommand", options: { target: $(".k-filemanager-treeview").find(".k-selected").parents(".k-treeview-item"), item: filemanager.getSelected()[0] } })
         }
         else {
           alert("Select a folder in the tree");
@@ -1384,8 +1384,8 @@ The command arguments.
       $(document).ready(function () {
         var filemanager = $("#filemanager").getKendoFileManager();
 
-        filemanager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
-        filemanager.toolbar.fileManagerDetailsToggle.switchInstance.toggle();
+        filemanager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } }); 
+        $("input[title='View Details']").getKendoSwitch().toggle();
       })
     </script>
 

@@ -2400,6 +2400,7 @@ Sets the subject of the PDF file.
     <script>
         $("#editor").kendoEditor({
             tools: ["pdf"],
+            pdf:{
                 subject : "Kendo UI Editor overview"
             }
         });
@@ -2687,8 +2688,7 @@ and a contenteditable iframe is generated.
     <script>
     $("#editor").kendoEditor({
       stylesheets: [
-        "base.css",
-        "theme.css"
+          "https://demos.telerik.com/kendo-ui/content/web/editor/editorStyles.css"
       ]
     });
     </script>
@@ -4242,13 +4242,14 @@ The URL responsible for serving the original file. A file name placeholder shoul
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
-	  tools: [
-		"insertFile"
-	  ],
+      tools: [
+      "insertFile"
+      ],
       fileBrowser: {
         transport: {
           fileUrl: function (e) {
             return "/content/files/" + e;
+          }
         }
       }
     });

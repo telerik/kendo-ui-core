@@ -331,7 +331,7 @@ Specifies CSS position of the FloatingActionButton in the document. Valid option
 
 	<script>
         $('#fab-fixed').kendoFloatingActionButton({
-            icon: 'home'
+            icon: 'home',
             align: 'bottom start'
         });
     </script>

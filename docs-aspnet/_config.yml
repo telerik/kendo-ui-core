@@ -442,15 +442,18 @@ navigation:
      "accessibility":
         title: "Accessibility"
         position: 10
+     "security":
+        title: "Security"
+        position: 11
      "deployment":
         title: "Deployment"
-        position: 11
+        position: 12
      "integration-with-other-telerik-products":
         title: "Integration with Other Telerik Products"
-        position: 12
+        position: 13
      "cloud-integration":
         title: "Cloud Integration"
-        position: 13
+        position: 14
      "cloud-integration/amazon-web-services":
         title: "Amazon Web Services"
         position: 2
@@ -462,7 +465,7 @@ navigation:
         position: 4
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 14
+        position: 15
      "*appearance":
         title: "Appearance"
      "*/binding":

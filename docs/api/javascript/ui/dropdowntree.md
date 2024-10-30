@@ -562,28 +562,35 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
 
-    <input id="dropdowntree"/>
-
+    <input id="ddt" />
     <script>
-    $("#dropdowntree").kendoDropDownTree({
-      dataSource: [{ text: "a-item1", value: 1 }, { text: "b-item2", value: 2 }],
-      filter: "contains"
-    });
+      $("#ddt").kendoDropDownTree({
+        dataSource: [
+          { text: "Chai", value: 1 },
+          { text: "Chang", value: 2 },
+          { text: "Tofu", value: 3 }
+        ],
+        filter: "contains"
+      });
     </script>
 
 ### filterLabel `String`
 
 When filtering is enabled, allows aria-label to be defined for the filter input element.
 
-#### Example - set the filter
+#### Example - set the filter label
 
     <input id="ddt" />
     <script>
-    $("#ddt").kendoDropDownTree({
-      dataSource: ["Chai", "Chang", "Tofu"],
-      filter: "contains",
-      filterLabel: "custom title"
-    });
+        $("#ddt").kendoDropDownTree({
+            dataSource: [
+                { text: "Chai", value: 1 },
+                { text: "Chang", value: 2 },
+                { text: "Tofu", value: 3 }
+            ],
+            filter: "contains",
+            filterLabel: "custom title"
+        });
     </script>
 
 ### fillMode `String`*(default: "solid")*
@@ -600,7 +607,11 @@ Sets a value controlling how the color is applied. Can also be set to the follow
     <input id="ddt" />
     <script>
     $("#ddt").kendoDropDownTree({
-      dataSource: ["Chai", "Chang", "Tofu"],
+      dataSource: [
+          { text: "Chai", value: 1 },
+          { text: "Chang", value: 2 },
+          { text: "Tofu", value: 3 }
+      ],
       fillMode: "flat"
     });
     </script>
@@ -664,7 +675,7 @@ The function context (available through the keyword `this`) will be set to the w
         dataValueField: "id",
         label: function() {
             return "Fruits";
-        }ß
+        }
     });
     </script>
 
@@ -1278,12 +1289,16 @@ Sets a value controlling the border radius. Can also be set to the following str
 - "large"
 - "full"
 
-#### Example - sets the fillMode
+#### Example - set large border radius
 
     <input id="ddt" />
     <script>
     $("#ddt").kendoDropDownTree({
-      dataSource: ["Chai", "Chang", "Tofu"],
+      dataSource: [
+          { text: "Chai", value: 1 },
+          { text: "Chang", value: 2 },
+          { text: "Tofu", value: 3 }
+      ],
       rounded: "large"
     });
     </script>
@@ -1297,12 +1312,16 @@ Sets a value controlling size of the component. Can also be set to the following
 - "large"
 - "none"
 
-#### Example - sets the fillMode
+#### Example - set the size
 
     <input id="ddt" />
     <script>
     $("#ddt").kendoDropDownTree({
-      dataSource: ["Chai", "Chang", "Tofu"],
+      dataSource: [
+          { text: "Chai", value: 1 },
+          { text: "Chang", value: 2 },
+          { text: "Tofu", value: 3 }
+      ],
       size: "large"
     });
     </script>
@@ -1321,17 +1340,18 @@ The [data source](/api/javascript/data/hierarchicaldatasource) of the widget. Co
 
     <input id="dropdowntree"/>
     <script>
-    $("#dropdowntree").kendoDropDownTree({
-      dataSource: [
-        { name: "Apples" },
-        { name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "name"
-    });
-    var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
-    dropdowntree.dataSource.add({ name: "Appricot" });
-    dropdowntree.search("A");
+      $("#dropdowntree").kendoDropDownTree({
+        dataSource: [
+          { name: "Apples" },
+          { name: "Oranges" }
+        ],
+        filter: "startswith",
+        dataTextField: "name",
+        dataValueField: "name"
+      });
+      var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
+      dropdowntree.dataSource.add({ name: "Appricot" });
+      dropdowntree.open(); 
     </script>
 
 ### options `Object`

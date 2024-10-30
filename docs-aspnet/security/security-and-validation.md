@@ -1,17 +1,17 @@
 ---
-title: Security and Validation
-page_title: Security and Validation
+title: Useful Tips
+page_title: Security and Validation Useful Tips
 description: "Get started with Telerik UI for {{ site.framework }} and learn the fundamentals for XSS and CSRF attacks."
 slug: aspnetcore_security_gettingstarted
-previous_url: /getting-started/helper-basics/security-and-validation
-position: 9
+previous_url: /getting-started/helper-basics/security-and-validation, /html-helpers/helper-basics/security-and-validation
+position: 2
 ---
 
-# Security and Validation
+# Security and Validation Useful Tips
 
 Preventing Cross-site scripting (XSS) and implementing validation for Cross-Site Request Forgery(CSRF) tokens can significantly boost the security of the application and prevent malicious script execution. 
 
-## Cross-Site Scritping
+## Cross-Site Scripting
 
 ### XSS Attacks 
 
