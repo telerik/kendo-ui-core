@@ -802,7 +802,7 @@ The `template` data `Array` consists of:
 * files - An array which contains information about all selected files (name, size, and extension).
 
 > * To render an action button for each file, add the following markup to the template: `<button type='button' class='k-upload-action'></button><button type='button' class='k-upload-action'></button>`.
-> * To use the default progress-bar, add the following markup at the beginning of the template: `<span class='k-progress'></span>`. Then, render the rest of the template that relates to it. For a live demo, refer to the example on the [Upload templates](https://demos.telerik.com/kendo-ui/web/upload/templates.html).
+> * To use the default progress-bar, add the following markup at the beginning of the template: `<span class='k-progress'></span>`. Then, render the rest of the template that relates to it. For a live demo, refer to the example on the [Upload templates](https://demos.telerik.com/kendo-ui/upload/templates).
 
 #### Example - specifying the template as a string literal
 
