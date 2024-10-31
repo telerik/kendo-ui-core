@@ -1407,6 +1407,10 @@ function pad(number, digits, end) {
         return value.replace(/^0*/, '');
     }
 
+    function longestDesignatorLength(designators) {
+        return Array.from(designators).sort((a, b) => b.length - a.length)[0].length;
+    }
+
     function parseExact(value, format, culture, strict, shouldUnpadZeros) {
         if (!value) {
             return null;
@@ -1423,7 +1427,6 @@ function pad(number, digits, end) {
                 }
                 return i;
             },
-            longestDesignatorLength = (designators) => Array.from(designators).sort((a, b) => b.length - a.length)[0].length,
             getNumber = function(size) {
                 var rg, match, part = "";
                 if (size === 2) {
@@ -4765,19 +4768,6 @@ function pad(number, digits, end) {
             while (iterator.nextNode()) {
                 if (iterator.referenceNode && !iterator.referenceNode.textContent.trim()) {
                     iterator.referenceNode.parentNode.removeChild(iterator.referenceNode);
-                }
-            }
-        } else { // IE7/8 support
-            for (var i = 0; i < element.childNodes.length; i++) {
-                var child = element.childNodes[i];
-
-                if (child.nodeType == 3 && !/\S/.test(child.nodeValue)) {
-                    element.removeChild(child);
-                    i--;
-                }
-
-                if (child.nodeType == 1) {
-                    kendo.stripWhitespace(child);
                 }
             }
         }

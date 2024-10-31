@@ -2588,7 +2588,7 @@ export const __meta__ = {
             var values = that._values;
             var removed = [];
             var i = 0;
-            var j;
+            var j = 0;
 
             var index, selectedIndex;
             var removedIndices = 0;
@@ -2609,16 +2609,15 @@ export const __meta__ = {
                 that._dataItems = [];
                 that._selectedIndices = [];
             } else if (selectable === "multiple") {
-                for (; i < indices.length; i++) {
+                while (i < indices.length) {
                     index = indices[i];
-
                     if (!$(children[index]).hasClass(KSELECTED)) {
+                        i++;
                         continue;
                     }
 
-                    for (j = 0; j < selectedIndices.length; j++) {
+                    while (j < selectedIndices.length) {
                         selectedIndex = selectedIndices[j];
-
                         if (selectedIndex === index) {
                             $(children[selectedIndex]).removeClass(KSELECTED).attr(ARIA_SELECTED, false);
                             var dataItem = this._view[index].item;
@@ -2628,7 +2627,6 @@ export const __meta__ = {
                                 position: position,
                                 dataItem: dataItem
                             });
-
                             dataItems.splice(j, 1);
                             selectedIndices.splice(j, 1);
                             indices.splice(i, 1);
@@ -2639,7 +2637,9 @@ export const __meta__ = {
                             j -= 1;
                             break;
                         }
+                        j++;
                     }
+                    i++;
                 }
             }
 

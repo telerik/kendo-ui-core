@@ -757,7 +757,7 @@ import "./kendo.html.button.js";
                         } else {
                             newHeight = wrapper.outerHeight() + distance;
                         }
-                    } if (keyCode == keys.LEFT) {
+                    } else if (keyCode == keys.LEFT) {
                         handled = true;
                         newWidth = wrapper.outerWidth() - distance;
                     } else if (keyCode == keys.RIGHT) {

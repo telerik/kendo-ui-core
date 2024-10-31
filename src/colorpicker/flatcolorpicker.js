@@ -66,7 +66,6 @@ import "../kendo.html.button.js";
 
             ColorSelector.fn.init.call(that, element, options);
             options = that.options = kendo.deepExtend({}, that.options, options);
-            element = that.element;
 
             that._wrapper();
 

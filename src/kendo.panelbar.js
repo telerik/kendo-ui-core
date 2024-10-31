@@ -1557,13 +1557,13 @@ export const __meta__ = {
 
                  that.one("complete", function() {
                     setTimeout(function() {
-                        children.each(function(index, child) {
-                            var dataItem = that.dataItem(child);
+                        for (let i = 0; i < children.length; i++) {
+                            let dataItem = that.dataItem(children.eq(i));
 
                             if (dataItem) {
                                 dataItem.set("expanded", false);
                             }
-                        });
+                        }
                     });
                 });
             }

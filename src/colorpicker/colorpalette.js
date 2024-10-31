@@ -30,22 +30,6 @@ import "../kendo.core.js";
         };
     }
 
-    function relative(array, element, delta) {
-        array = Array.prototype.slice.call(array);
-        var n = array.length;
-        var pos = array.indexOf(element);
-        if (pos < 0) {
-            return delta < 0 ? array[n - 1] : array[0];
-        }
-        pos += delta;
-        if (pos < 0) {
-            pos += n;
-        } else {
-            pos %= n;
-        }
-        return array[pos];
-    }
-
     var ColorPalette = ColorSelector.extend({
         init: function(element, options) {
             var that = this;
@@ -141,6 +125,7 @@ import "../kendo.core.js";
                 items = wrapper.find(DOT + TILE_CLASS),
                 current = items.filter(DOT + ITEMSFOCUSEDCLASS).get(0) || items.filter(DOT + ITEMSELECTEDCLASS).get(0),
                 keyCode = e.keyCode,
+                currentParentSibling,
                 index;
 
             if (current) {
@@ -152,9 +137,11 @@ import "../kendo.core.js";
             } else if (keyCode == KEYS.RIGHT) {
                 newCurrent = current ? current.nextSibling : items[0];
             } else if (keyCode == KEYS.DOWN) {
-                newCurrent = current ? (current.parentNode.nextSibling ? current.parentNode.nextSibling.children[index] : null) : items[0];
+                currentParentSibling = current && current.parentNode.nextSibling ? current.parentNode.nextSibling.children[index] : null
+                newCurrent = current ? currentParentSibling : items[0];
             } else if (keyCode == KEYS.UP) {
-                newCurrent = current ? (current.parentNode.previousSibling ? current.parentNode.previousSibling.children[index] : null) : items.get[items.length - 1];
+                currentParentSibling = current && current.parentNode.previousSibling ? current.parentNode.previousSibling.children[index] : null;
+                newCurrent = current ? currentParentSibling : items.get[items.length - 1];
             } else if (keyCode == KEYS.ENTER) {
                 preventDefault(e);
                 if (current) {

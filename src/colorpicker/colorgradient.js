@@ -226,7 +226,6 @@ import "../kendo.icons.js";
             }
 
             options.messages = options.messages ? $.extend(that.options.messages, options.messages) : that.options.messages;
-            element = that.element;
 
             that._wrapper();
             that._sliders();
@@ -353,10 +352,12 @@ import "../kendo.icons.js";
                 var offset = this.offset,
                     dx = x - offset.left, dy = y - offset.top,
                     rw = this.width, rh = this.height,
+                    dxrw = dx > rw ? rw : dx,
+                    dyrh = dy > rh ? rh : dy,
                     resultX, resultY;
 
-                dx = dx < 0 ? 0 : dx > rw ? rw : dx;
-                dy = dy < 0 ? 0 : dy > rh ? rh : dy;
+                dx = dx < 0 ? 0 : dxrw;
+                dy = dy < 0 ? 0 : dyrh;
                 resultX = dx / rw;
                 resultY = 1 - dy / rh;
 

@@ -53,8 +53,8 @@ import "../kendo.core.js";
         if (!isPresent(contender) || isNaN(contender)) {
             return min;
         }
-
-        return contender <= min ? min : contender >= max ? max : contender;
+        let contenderMax = contender >= max ? max : contender;
+        return contender <= min ? min : contenderMax;
     }
 
     function isPresent(value) { return value !== null && value !== undefined; }

@@ -794,19 +794,6 @@ export const __meta__ = {
             });
 
             if (options.showButtons) {
-                var mouseDownHandler = (function(e, sign) {
-                    this._clearTooltipTimeout();
-                    if (e.which === 1 || (support.touch && e.which === 0)) {
-                        move(sign);
-
-                        this.timeout = setTimeout((function() {
-                            this.timer = setInterval(function() {
-                                move(sign);
-                            }, 60);
-                        }).bind(this), 200);
-                    }
-                }).bind(that);
-
                 that.wrapper.find(".k-button")
                     .on(MOUSE_UP, (function(e) {
                         this._clearTimer();
@@ -821,7 +808,7 @@ export const __meta__ = {
                     }).bind(that))
                     .on(MOUSE_DOWN, (function(e) {
                         var sign = $(e.target).closest(".k-button").is(".k-button-increase") ? 1 : -1;
-                        mouseDownHandler(e, sign);
+                        that._mouseDownHandler(e, sign, move);
                     }))
                     .on("click", kendo.preventDefault);
             }
@@ -872,6 +859,20 @@ export const __meta__ = {
                 .off(BLUR);
 
             that.options.enabled = false;
+        },
+
+        _mouseDownHandler: function(e, sign, move) {
+            let that = this;
+            that._clearTooltipTimeout();
+            if (e.which === 1 || (support.touch && e.which === 0)) {
+                move(sign);
+
+                that.timeout = setTimeout(function() {
+                    that.timer = setInterval(function() {
+                        move(sign);
+                    }, 60);
+                }, 200);
+            }
         },
 
         _update: function(val) {

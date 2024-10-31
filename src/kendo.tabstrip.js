@@ -171,6 +171,27 @@ export const __meta__ = {
         return `<span aria-hidden='true' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
     }
 
+    function ajaxXhr() {
+        var current = this,
+            request = $.ajaxSettings.xhr(),
+            event = current.progressUpload ? "progressUpload" : current.progress ? "progress" : false;
+
+        if (request) {
+            $.each([ request, request.upload ], function() {
+                if (this.addEventListener) {
+                    this.addEventListener("progress", function(evt) {
+                        if (event) {
+                            current[event](evt);
+                        }
+                    }, false);
+                }
+            });
+        }
+
+        current.noProgress = !(window.XMLHttpRequest && ('upload' in new XMLHttpRequest()));
+        return request;
+    }
+
     var TabStrip = Widget.extend({
         init: function(element, options) {
             var that = this, value;
@@ -378,17 +399,6 @@ export const __meta__ = {
 
                                 that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
                                 kendo.resize(contentHolder);
-
-                                // Force IE and Edge rendering to fix visual glitches telerik/kendo-ui-core#2777.
-                                if (isAnimationEnabled && (kendo.support.browser.msie || kendo.support.browser.edge)) {
-                                    contentHolder.finish().animate({
-                                        opacity: 0.9
-                                    },"fast", "linear", function() {
-                                        contentHolder.finish().animate({
-                                            opacity: 1
-                                        },"fast", "linear");
-                                    });
-                                }
                             }
                         } ) );
                 },
@@ -447,7 +457,6 @@ export const __meta__ = {
             element = this.tabGroup.find(element);
 
             var that = this,
-                xhr = $.ajaxSettings.xhr,
                 link = element.find("." + LINK),
                 data = {},
                 halfWidth = element.width() / 2,
@@ -477,26 +486,7 @@ export const __meta__ = {
                 url: url,
                 dataType: "html",
                 data: data,
-                xhr: function() {
-                    var current = this,
-                        request = xhr(),
-                        event = current.progressUpload ? "progressUpload" : current.progress ? "progress" : false;
-
-                    if (request) {
-                        $.each([ request, request.upload ], function() {
-                            if (this.addEventListener) {
-                                this.addEventListener("progress", function(evt) {
-                                    if (event) {
-                                        current[event](evt);
-                                    }
-                                }, false);
-                            }
-                        });
-                    }
-
-                    current.noProgress = !(window.XMLHttpRequest && ('upload' in new XMLHttpRequest()));
-                    return request;
-                },
+                xhr: ajaxXhr,
 
                 progress: function(evt) {
                     if (evt.lengthComputable) {

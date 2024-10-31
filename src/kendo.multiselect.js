@@ -1488,29 +1488,31 @@ export const __meta__ = {
             });
         },
 
+        _selectIndices: function(indices) {
+            let listView = this.listView;
+            let that = this;
+
+            listView.select(indices).done(function() {
+                indices.forEach(function(index) {
+                    var dataItem = listView.dataItemByIndex(index);
+                    var candidate = listView.element.children()[index];
+                    var isSelected = $(candidate).hasClass("k-selected");
+
+                    that.trigger(isSelected ? SELECT : DESELECT, { dataItem: dataItem, item: $(candidate) });
+                });
+                that._change();
+            });
+        },
+
         _selectRange: function(startIndex, endIndex) {
             var that = this;
-            var listView = this.listView;
             var maxSelectedItems = this.options.maxSelectedItems;
             var indices = this._getSelectedIndices().slice();
             var indicesToSelect = [];
             var i;
 
-            var selectIndices = function(indices) {
-                listView.select(indices).done(function() {
-                    indices.forEach(function(index) {
-                        var dataItem = listView.dataItemByIndex(index);
-                        var candidate = listView.element.children()[index];
-                        var isSelected = $(candidate).hasClass("k-selected");
-
-                        that.trigger(isSelected ? SELECT : DESELECT, { dataItem: dataItem, item: $(candidate) });
-                    });
-                    that._change();
-                });
-            };
-
             if (indices.length - 1 === endIndex - startIndex) {
-                return selectIndices(indices);
+                return that._selectIndices(indices);
             }
 
             if (startIndex < endIndex) {
@@ -1542,7 +1544,7 @@ export const __meta__ = {
             }
 
             that.persistTagList = false;
-            return selectIndices(indices);
+            return that._selectIndices(indices);
         },
 
         _input: function() {

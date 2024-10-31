@@ -951,21 +951,21 @@ export const __meta__ = {
             value = null;
             originalName = name;
 
-            name = typeof (field.field) === STRING ? field.field : name;
+            let nameToUse = typeof (field.field) === STRING ? field.field : name;
 
             if (!field.nullable || field.defaultValue) {
-                value = proto.defaults[originalName !== name ? originalName : name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+                value = proto.defaults[originalName !== nameToUse ? originalName : nameToUse] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
 
                 if (typeof value === "function") {
-                    functionFields.push(name);
+                    functionFields.push(nameToUse);
                 }
             }
 
-            if (options.id === name) {
+            if (options.id === nameToUse) {
                 proto._defaultId = value;
             }
 
-            proto.defaults[originalName !== name ? originalName : name] = value;
+            proto.defaults[originalName !== nameToUse ? originalName : nameToUse] = value;
 
             if ($.isPlainObject(field)) {
                 field.parse = field.parse || parsers[type];
@@ -4593,26 +4593,31 @@ export const __meta__ = {
             }
 
             data.groupPaging = true;
+            that._queueWithTimeout(data, function() {
+                if (!that.trigger(REQUESTSTART, {
+                        type: "read"
+                    })) {
+                    that.transport.read({
+                        data: data,
+                        success: that._groupItemsSuccessHandler(group, options.skip, that.take(), callback, groupItemsSkip),
+                        error: function() {
+                            var args = slice.call(arguments);
+                            that.error.apply(that, args);
+                        }
+                    });
+                } else {
+                    that._dequeueRequest();
+                }
+            }, 100);
+        },
+
+        _queueWithTimeout: function(options, callback, delay) {
+            let that = this;
 
             clearTimeout(that._timeout);
             that._timeout = setTimeout(function() {
-                that._queueRequest(data, function() {
-                    if (!that.trigger(REQUESTSTART, {
-                            type: "read"
-                        })) {
-                        that.transport.read({
-                            data: data,
-                            success: that._groupItemsSuccessHandler(group, options.skip, that.take(), callback, groupItemsSkip),
-                            error: function() {
-                                var args = slice.call(arguments);
-                                that.error.apply(that, args);
-                            }
-                        });
-                    } else {
-                        that._dequeueRequest();
-                    }
-                });
-            }, 100);
+                that._queueRequest(options, callback);
+            }, delay);
         },
 
         _groupItemsSuccessHandler: function(group, skip, take, callback, groupItemsSkip) {
@@ -5489,26 +5494,22 @@ export const __meta__ = {
             }
 
             if ((that._isServerGroupPaged() && !that._groupRangeExists(skip, size)) || !that._rangeExists(skip, size)) {
-                clearTimeout(that._timeout);
-
-                that._timeout = setTimeout(function() {
-                    that._queueRequest(options, function() {
-                        if (!that.trigger(REQUESTSTART, { type: "read" })) {
-                            if (that._omitPrefetch) {
-                                that.trigger(PROGRESS);
-                            }
-                            that.transport.read({
-                                data: that._params(options),
-                                success: that._prefetchSuccessHandler(skip, size, callback),
-                                error: function() {
-                                    var args = slice.call(arguments);
-                                    that.error.apply(that, args);
-                                }
-                            });
-                        } else {
-                            that._dequeueRequest();
+                that._queueWithTimeout(options, function() {
+                    if (!that.trigger(REQUESTSTART, { type: "read" })) {
+                        if (that._omitPrefetch) {
+                            that.trigger(PROGRESS);
                         }
-                    });
+                        that.transport.read({
+                            data: that._params(options),
+                            success: that._prefetchSuccessHandler(skip, size, callback),
+                            error: function() {
+                                var args = slice.call(arguments);
+                                that.error.apply(that, args);
+                            }
+                        });
+                    } else {
+                        that._dequeueRequest();
+                    }
                 }, 100);
             } else if (callback) {
                 callback();

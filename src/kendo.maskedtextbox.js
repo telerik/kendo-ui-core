@@ -690,7 +690,7 @@ export const __meta__ = {
             var numberFormat = kendo.getCulture(this.options.culture).numberFormat;
             var rules = this._rules;
 
-            for (; idx < length; idx++) {
+            while (idx < length) {
                 chr = maskChars[idx];
                 rule = rules[chr];
 
@@ -716,6 +716,7 @@ export const __meta__ = {
                         tokenIdx += 1;
                     }
                 }
+                idx++;
             }
 
             this.tokens = tokens;

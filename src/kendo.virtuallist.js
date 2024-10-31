@@ -1628,7 +1628,8 @@ export const __meta__ = {
                 this._selectedDataItems = [];
                 this._selectedIndexes = [];
             } else if (selectable === "multiple") {
-                for (var i = 0; i < indices.length; i++) {
+                let i = 0;
+                while (i < indices.length) {
                     result = null;
                     position = $.inArray(indices[i], selectedIndexes);
                     dataItem = this.dataItemByIndex(indices[i]);
@@ -1657,6 +1658,7 @@ export const __meta__ = {
                         removedindexesCounter++;
                         i--;
                     }
+                    i++;
                 }
             }
 

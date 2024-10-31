@@ -1005,6 +1005,50 @@ export const __meta__ = {
             }
         },
 
+        _createPopup: function(div, options) {
+            let that = this;
+            let overflowWrapper = that._overflowWrapper();
+            return div.kendoPopup(extend({
+                activate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: ACTIVATE }); },
+                deactivate: function(e) {
+                    that._closing = false;
+                    e.sender.element // Restore opacity after fade.
+                        .removeData("targetTransform")
+                        .css({ opacity: "" });
+                    that._triggerEvent({ item: this.wrapper.parent(), type: DEACTIVATE });
+                },
+                open: that._popupOpen.bind(that),
+                close: function(e) {
+                    that._closing = e.sender.element;
+                    var li = e.sender.wrapper.parent();
+
+                    if (overflowWrapper) {
+                        var popupId = e.sender.element.data(POPUP_ID_ATTR);
+                        if (popupId) {
+                            li = (overflowWrapper || that.element).find(popupOpenerSelector(popupId));
+                        }
+                        e.sender.wrapper.children(scrollButtonSelector).hide();
+                    }
+
+                    if (!that._triggerEvent({ item: li[0], type: CLOSE })) {
+                        li.css(ZINDEX, li.data(ZINDEX));
+                        li.removeData(ZINDEX);
+
+                        if (that.options.scrollable) {
+                            li.parent().siblings(scrollButtonSelector).css({ zIndex: "" });
+                        }
+
+                        if (touch || allPointers || kendo.support.mouseAndTouchPresent) {
+                            li.removeClass(HOVERSTATE);
+                            that._removeHoverItem();
+                        }
+                    } else {
+                        e.preventDefault();
+                    }
+                }
+            }, options)).data(KENDOPOPUP);
+        },
+
         open: function(element) {
             var that = this;
             var options = that.options;
@@ -1074,12 +1118,7 @@ export const __meta__ = {
                     if (div[0] && that._triggerEvent({ item: li[0], type: OPEN }) === false) {
 
                         if (!div.find(".k-menu-popup")[0] && div.children(".k-menu-group").children(".k-item").length > 1) {
-                            var windowHeight = $(window).height(),
-                                setScrolling = function() {
-                                    div.css({ maxHeight: windowHeight - (kendo._outerHeight(div) - div.height()) - kendo.getShadows(div).bottom, overflow: "auto" });
-                                };
-
-                            setScrolling();
+                            div.css({ maxHeight: $(window).height() - (kendo._outerHeight(div) - div.height()) - kendo.getShadows(div).bottom, overflow: "auto" });
                         } else {
                             div.css({ maxHeight: "", overflow: "visible" });
                         }
@@ -1109,15 +1148,7 @@ export const __meta__ = {
                         }
 
                         if (!popup) {
-                            popup = div.kendoPopup({
-                                activate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: ACTIVATE }); },
-                                deactivate: function(e) {
-                                    that._closing = false;
-                                    e.sender.element // Restore opacity after fade.
-                                        .removeData("targetTransform")
-                                        .css({ opacity: "" });
-                                    that._triggerEvent({ item: this.wrapper.parent(), type: DEACTIVATE });
-                                },
+                            popup = that._createPopup(div, {
                                 origin: directions.origin,
                                 position: directions.position,
                                 collision: collision,
@@ -1127,36 +1158,7 @@ export const __meta__ = {
                                     open: extend(true, { effects: openEffects }, options.animation.open),
                                     close: options.animation.close
                                 },
-                                open: that._popupOpen.bind(that),
-                                close: function(e) {
-                                    that._closing = e.sender.element;
-                                    var li = e.sender.wrapper.parent();
-
-                                    if (overflowWrapper) {
-                                        var popupId = e.sender.element.data(POPUP_ID_ATTR);
-                                        if (popupId) {
-                                            li = (overflowWrapper || that.element).find(popupOpenerSelector(popupId));
-                                        }
-                                        e.sender.wrapper.children(scrollButtonSelector).hide();
-                                    }
-
-                                    if (!that._triggerEvent({ item: li[0], type: CLOSE })) {
-                                        li.css(ZINDEX, li.data(ZINDEX));
-                                        li.removeData(ZINDEX);
-
-                                        if (that.options.scrollable) {
-                                            li.parent().siblings(scrollButtonSelector).css({ zIndex: "" });
-                                        }
-
-                                        if (touch || allPointers || kendo.support.mouseAndTouchPresent) {
-                                            li.removeClass(HOVERSTATE);
-                                            that._removeHoverItem();
-                                        }
-                                    } else {
-                                        e.preventDefault();
-                                    }
-                                }
-                            }).data(KENDOPOPUP);
+                            });
 
                             div.closest(animationContainerSelector).removeAttr(ROLE);
                         } else {
@@ -1215,6 +1217,26 @@ export const __meta__ = {
             }
         },
 
+        _scrollButtonsMouseEnter: function() {
+            let that = this;
+            let popup = that.popup;
+            let overflowWrapper = that._overflowWrapper();
+            $(getChildPopups(popup.element, overflowWrapper)).each(function(i, p) {
+                let popupOpener = overflowWrapper.find(popupOpenerSelector(p.data(POPUP_ID_ATTR)));
+                that.close(popupOpener);
+            });
+        },
+
+        _scrollButtonsMouseLeave: function() {
+            let that = this;
+            let popup = that.popup;
+            setTimeout(function() {
+                if ($.isEmptyObject(that._openedPopups)) {
+                    that._closeParentPopups(popup.element);
+                }
+            }, DELAY);
+        },
+
         _initPopupScrollButtons: function(popup, isHorizontal, skipMouseEvents) {
             let that = this,
                 scrollButtons = popup.wrapper.children(scrollButtonSelector),
@@ -1230,20 +1252,8 @@ export const __meta__ = {
 
                     that._initScrolling(element, backwardBtn, forwardBtn, isHorizontal);
                     if (!skipMouseEvents) {
-                        scrollButtons.on(MOUSEENTER + NS, function() {
-                            let overflowWrapper = that._overflowWrapper();
-                            $(getChildPopups(popup.element, overflowWrapper)).each(function(i, p) {
-                                let popupOpener = overflowWrapper.find(popupOpenerSelector(p.data(POPUP_ID_ATTR)));
-                                that.close(popupOpener);
-                            });
-                        })
-                        .on(MOUSELEAVE + NS, function() {
-                            setTimeout(function() {
-                                if ($.isEmptyObject(that._openedPopups)) {
-                                    that._closeParentPopups(popup.element);
-                                }
-                            }, DELAY);
-                        });
+                        scrollButtons.on(MOUSEENTER + NS, that._scrollButtonsMouseEnter.bind(that))
+                        .on(MOUSELEAVE + NS, that._scrollButtonsMouseLeave.bind(that));
                     }
                 }
                 that._toggleScrollButtons(element, scrollButtons.first(), scrollButtons.last(), isHorizontal);

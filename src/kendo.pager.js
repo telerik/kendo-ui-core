@@ -157,13 +157,13 @@ export const __meta__ = {
                 if (!that._numericWrap.find("[class*='-i-" + FIRST + "']").length) {
                     that._numericWrap.append(icon(FIRST, options.messages.first, "k-pager-first", that._id, buttonSize));
 
-                    first(that._numericWrap, page, totalPages);
+                    first(that._numericWrap, page);
                 }
 
                 if (!that._numericWrap.find("[class*='-i-" + PREV + "']").length) {
                     that._numericWrap.append(icon(PREV, options.messages.previous, null, that._id, buttonSize));
 
-                    prev(that._numericWrap, page, totalPages);
+                    prev(that._numericWrap, page);
                 }
             }
 
@@ -682,9 +682,9 @@ export const __meta__ = {
             }
 
             if (options.previousNext) {
-                first(that.element, page, totalPages);
+                first(that.element, page);
 
-                prev(that.element, page, totalPages);
+                prev(that.element, page);
 
                 next(that.element, page, totalPages);
 
