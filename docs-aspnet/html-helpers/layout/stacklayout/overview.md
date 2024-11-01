@@ -10,7 +10,7 @@ position: 1
 
 The {{ site.framework }} StackLayout is a component that easily aligns multiple elements in a vertical or horizontal order.
 
-> The StackLayout is supported only when you use [Kendo UI Sass themes]({% slug sassbasedthemes_overview%}).
+> The StackLayout is supported only when you use [Kendo UI themes]({% slug sassbasedthemes_overview%}).
 
 ## Initializing the StackLayout
 

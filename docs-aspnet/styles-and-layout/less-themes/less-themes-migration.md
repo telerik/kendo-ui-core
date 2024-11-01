@@ -21,7 +21,7 @@ For additional information about the SASS themes, visit the [`SASS-Based Themes`
 
 The LESS-based themes will receive the new [styling options]({% slug components_rendering_overview %}#styling-options) just like the SASS themes, however after 2022 the LESS themes will be officially deprecated. Customers who continue to use LESS themes after their deprecation will not be able to take advantage of the newest visual updates, features and bug fixes. This also means that Telerik UI for {{ site.framework }} versions starting from 2023 will be incompatible with the LESS themes and you won't be able to use the new versions with the LESS themes.
 
-The SASS-based themes provide unique swatches that are based on the main theme and can be updated at once. This allows us to change the design and color scheme of our components in a more timely manner which in turn leaves more time for new themes and swatches to be developed.
+The SASS-based themes provide unique [swatches]({% slug sassbasedthemes_overview %}#swatch) that are based on the main theme and can be updated at once. This allows us to change the design and color scheme of our components in a more timely manner which in turn leaves more time for new themes and swatches to be developed.
 
 With the LESS-based themes, each individual theme has its own code base. When a new component is introduced, or an existing one is updated, we must recreate each LESS theme to ensure that the new addition is rendered without problems. As a result, keeping the LESS-based themes updated takes a tremendous amount of time and resources.
 

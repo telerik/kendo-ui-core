@@ -282,11 +282,11 @@ Next, you can [change the look and feel](#changing-the-app-theme) of your applic
 
 ## Changing the App Theme
 
-The UI for ASP.NET Core suite comes with a set of 20+ built-in LESS-based and Sass-based themes that allow you to alter the visual appearance of the Telerik components. The most prominent themes are Default (our own styling), Material (based on the Material Design guidelines), and Bootstrap (a theme that matches Bootstrap guidelines).
+The UI for ASP.NET Core suite comes with a set of 20+ built-in [LESS-based]({% slug less_themes_overview_aspnetmvc6_aspnetmvc%}) and [Sass-based themes]({% slug sassbasedthemes_overview%}) that allow you to alter the visual appearance of the Telerik components. The most prominent themes are Default (our own styling), Material (based on the Material Design guidelines), and Bootstrap (a theme that matches Bootstrap guidelines).
 
-The themes are usually referenced in the _Layout file of the application. To change the theme, substitute the existing CSS reference in the _Layout with the new theme.
+The themes are usually referenced in the `_Layout` file of the application. To change the theme, substitute the existing CSS reference in the `_Layout` with the new theme.
 
-If during the creation the project you've chosen the Bootstrap theme, the `_Layout.cshtml` file should contain the following CSS link:
+If during the creation the project you've chosen the Bootstrap theme, the `_Layout.cshtml` file must contain the following CSS link:
 
 ```
 	<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />

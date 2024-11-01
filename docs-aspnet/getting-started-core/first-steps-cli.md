@@ -112,7 +112,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 	> * The Kendo UI scripts have to be placed after `jQuery`.
 	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
-	5.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
+	5.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the [Telerik UI Bootstrap theme]({% slug sassbasedthemes_overview%}#built-in-themes) to match it.
 
   5.2 The Microsoft template comes with a jQuery script reference in the body. Find it and move it to the head.
 

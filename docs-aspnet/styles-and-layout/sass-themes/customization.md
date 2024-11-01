@@ -1,587 +1,136 @@
 ---
 title: Customization
 page_title: Customization
-description: "Learn how to customize the Telerik UI Sass themes."
+description: "Learn how to create a custom theme for you application and alter the default appearance of the {{ site.product }} components."
 slug: sassbasedthemes_customization_telerikui
-position: 3
+position: 2
 ---
 
 # Customization
 
-The Telerik UI theme packages include source files for the respective theme and, provide different options for modifying the theme.
+You can customize the appearance of Telerik UI components using different approaches. Each is suitable for specific scenarios and business requirements. This article describes the pros and cons, and compares all CSS customization alternatives.
 
-You can change the theme colors, remove the CSS of unused components, or use specific theme colors to style your application. The theme source files are located in the `scss` folder of the theme package.
+* [Create custom themes with the Progress ThemeBuilder](#using-themebuilder)
+* [Override theme variables](#setting-theme-variables)
+* [Override theme styles](#overriding-theme-styles)
+* [Use CSS Utilities](#using-css-utilities)
+* [Build custom themes manually](#building-themes-from-source-code)
+* [Load a custom theme in your app](#loading-custom-themes)
 
-For the full list of variables that can be modified in a theme, refer to the [Using Variables](#using-variables) section.
-
-To build a custom theme by using the theme variables, apply any of the following approaches:
-* [(Recommended) Use the build process of your application](#using-the-build-process-of-the-application)&mdash;This approach simplifies the upgrades to new theme package versions.
-* [Use the build process of the themes](#using-the-build-process-of-the-themes)&mdash;This approach requires you to build the theme each time the theme packages are updated.
-* [Use the Telerik UI ThemeBuilder](#using-the-themebuilder)
-
-## Using the Build Process of the Application
-
-To customize a Sass-based theme, create a `.scss` file and consume the theme package:
-
-1. Obtain the theme source through the NPM package.
-
-        npm install @progress/kendo-theme-default
-
-1. Create a `.scss` file that will consume the theme. For the purposes of the example, this is `styles.scss`.
-
-1. To build the theme files, import them into the `styles.scss` file.
-
-        @import "node_modules/@progress/kendo-theme-default/dist/all.scss";
-
-   The `dist/all` file adds the styles for all components that are available in the theme. To trim down the size of the generated CSS, import only the source for the components that you use in your application. Each of them could be found in `scss/` folder.
-
-        // Import only the Grid and TreeView styles using Node Sass
-        @import "~@progress/kendo-theme-default/scss/grid/_index.scss";
-        @import "~@progress/kendo-theme-default/scss/treeview/_index.scss";
-
-        // or using Dart Sass
-        @import "~@progress/kendo-theme-default/scss/grid/";
-        @import "~@progress/kendo-theme-default/scss/treeview/";
-
-1. To customize the variables that are used in the theme, change the theme before you import the theme files.
-
-        $primary: #E82C0C; // brand color
-
-        @import "~@progress/kendo-theme-default/dist/all.scss";
-
-1. Build the `styles.scss` file through a Sass compiler.
-
-    To use Node Sass (which uses [LibSass](https://sass-lang.com/libsass)), install the compiler with `npm install node-sass --save` and then compile the file with the following command
-
-        node-sass styles.scss styles.css
-
-    To use [Dart Sass](https://sass-lang.com/dart-sass), install the compiler with `npm install node-sass@npm:sass --save` and then compile the file with the following command
-
-        sass styles.scss styles.css
-
-
-## Using the Build Process of the Themes
-
-While each Sass-based theme has a dedicated NPM package (for example, `@progress/kendo-theme-default`), the source code for all themes is located in the [kendo-themes](https://github.com/telerik/kendo-themes) repository which contains a build task that compiles the theme sources to CSS. 
-
-To customize a theme, modify the source code of the theme and use the build task to produce a CSS file for your application. This approach avoids the need for a setting up a build configuration when you compile SCSS, but may be harder to maintain as the process has to be repeated each time a theme is updated.
-
-### Customizing the Source Code
-
-To create a custom theme by modifying the themes source code:
-
-1. Clone the [kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository.
-1. Install the dependencies for all themes with `npm run setup`.
-1. Customize the theme variables in the `packages/THEME_NAME/scss/_variables.scss` files.
-1. Build the themes with the `npm run sass` or `npm run dart` command to create the customized version of the themes in the `packages/THEME_NAME/dist/all.css` file.
-1. After the build completes, reference the compiled CSS in your application.
+> When you use custom themes for the components, you must recreate the custom theme every time you update the {{ site.product }} version in your application. This ensures compatibility and allows you to get the theme updates and fixes.
 
 ## Using ThemeBuilder
 
-[**Progress ThemeBuilder**](https://themebuilder.telerik.com/{{ site.platform }}) is a web application that enables you to create new or customize existing themes.
+[ThemeBuilder](https://docs.telerik.com/themebuilder) is a web application that enables you to create new custom themes by changing the styles of existing built-in themes. Every change that you make is visualized instantly. Once you are done styling the UI components, you can export a ZIP file with the desired styles and [add the custom theme to your app](#loading-custom-themes).
 
-For additional information, visit the [ThemeBuilder documentation article]({% slug sass_theme_builder %}) in the Sass-Themes section.
+The ThemeBuilder allows [different customization capabilities, depending on the used tier](https://docs.telerik.com/themebuilder/introduction#themebuilder-tiers).
 
-## Using Variables
+## Setting Theme Variables
 
-The following list describes the theme variables available for adjustment in the Kendo UI Default theme.
+Each theme defines the same collection of variables, but with different values. For example, here are the <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/theme-variables/" target="_blank">Default theme variables</a>. You can override the theme variable values outside the theme CSS file. In this way, you can customize the appearance of the Telerik UI components without the need to create and maintain a full custom theme.
 
+This approach is supported starting with theme version `8.0.0` and {{ site.product }} version `2024.2.514 (2024 Q2)`. Upgrading the Telerik UI components does not require any additional steps with regard to the CSS code, unless the CSS variable names contains breaking changes in the CSS variable names.
+
+The example below shows how to customize some of the theme variables.
+
+>caption Override theme variables
+
+````HtmlHelper
 <style>
-.theme-variables th,
-.theme-variables td {
-  vertical-align: top;
-}
+    :root {
+        --kendo-color-base: #ddf;
+        --kendo-color-base-hover: #eef;
+        --kendo-color-base-active: #ccf;
+        --kendo-color-on-base: #00c;
 
-.color-preview {
-  border-radius: 50%;
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
-  display: inline-block;
-  border: 1px solid rgba(0,0,0,.08);
-}
+        --kendo-color-primary: #c00;
+        --kendo-color-primary-hover: #c66;
+        --kendo-color-primary-active: #900;
+        --kendo-color-on-primary: #fee;
+
+        --kendo-border-radius-md: 1rem;
+
+        --kendo-font-size: 18px;
+    }
 </style>
 
-The following example demonstrates how to use common variables.
+<p><label>Apply Custom Theme Variables</label></p>
 
-<table class="theme-variables">
-<colgroup>
-<col style="white-space:nowrap; width: 200px" />
-<col style="width: 250px" />
-<col />
-</colgroup>
-<tr>
-<th>Name</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>$font-size</td>
-<td>
+@(Html.Kendo().CheckBox().Name("checkBox1").Checked(true).Label("Is Active"))
 
-    14px
-</td>
-<td>Base font size across all components.
-</td>
-</tr>
-<tr>
-<td>$font-family</td>
-<td>
+@(Html.Kendo().Button()
+    .Name("baseTextButton")
+    .Content("Base Button")
+)
 
-    inherit
-</td>
-<td>Font family across all components.
-</td>
-</tr>
-<tr>
-<td>$font-family-monospace</td>
-<td>
+@(Html.Kendo().Button()
+    .Name("primaryTextButton")
+    .ThemeColor(ThemeColor.Primary)
+    .Content("Primary Button")
+)
+````
+{% if site.core %}
+````TagHelper
+@addTagHelper *, Kendo.Mvc
 
-    Consolas, "Ubuntu Mono", "Lucida Console", "Courier New", monospace
-</td>
-<td>Font family for monospaced text. Used for styling the code.
-</td>
-</tr>
-<tr>
-<td>$line-height</td>
-<td>
+<style>
+    :root {
+        --kendo-color-base: #ddf;
+        --kendo-color-base-hover: #eef;
+        --kendo-color-base-active: #ccf;
+        --kendo-color-on-base: #00c;
 
-    (20 / 14)
-</td>
-<td>Line height used along with $font-size.
-</td>
-</tr>
-<tr>
-<td>$border-radius</td>
-<td>
+        --kendo-color-primary: #c00;
+        --kendo-color-primary-hover: #c66;
+        --kendo-color-primary-active: #900;
+        --kendo-color-on-primary: #fee;
 
-    2px
-</td>
-<td>Border radius for all components.
-</td>
-</tr>
-<tr>
-<td>$accent</td>
-<td>
-    <span class="color-preview" style="background-color: #ff6358"></span>
-    #ff6358
-</td>
-<td>The color that focuses the user attention.<br/>
-Used for primary buttons and for elements of primary importance across the theme.
-</td>
-</tr>
-<tr>
-<td>$accent-contrast</td>
-<td>
-    <span class="color-preview" style="background-color: #ffffff"></span>
-    #ffffff
-</td>
-<td>The color used along with the accent color denoted by $accent.<br/>
-Used to provide contrast between the background and foreground colors.
-</td>
-</tr>
-<tr>
-<td>$base-text</td>
-<td>
-    <span class="color-preview" style="background-color: #656565"></span>
-    #656565
-</td>
-<td>The text color of the components' chrome area.
-</td>
-</tr>
-<tr>
-<td>$base-bg</td>
-<td>
-    <span class="color-preview" style="background-color: #f6f6f6"></span>
-    #f6f6f6
-</td>
-<td>The background of the components' chrome area.
-</td>
-</tr>
-<tr>
-<td>$base-border</td>
-<td>
+        --kendo-border-radius-md: 1rem;
 
-    rgba( black, .08 )
-</td>
-<td>The border color of the components' chrome area.
-</td>
-</tr>
-<tr>
-<td>$base-gradient</td>
-<td>
+        --kendo-font-size: 18px;
+    }
+</style>
 
-    $base-bg, darken( $base-bg, 2% )
-</td>
-<td>The gradient background of the components' chrome area.
-</td>
-</tr>
-<tr>
-<td>$hovered-text</td>
-<td>
-    <span class="color-preview" style="background-color: #656565"></span>
-    #656565
-</td>
-<td>The text color of hovered items.
-</td>
-</tr>
-<tr>
-<td>$hovered-bg</td>
-<td>
-    <span class="color-preview" style="background-color: #ededed"></span>
-    #ededed
-</td>
-<td>The background of hovered items.
-</td>
-</tr>
-<tr>
-<td>$hovered-border</td>
-<td>
+<p><label>Apply Custom Theme Variables</label></p>
 
-    rgba( black, .15 )
-</td>
-<td>The border color of hovered items.
-</td>
-</tr>
-<tr>
-<td>$hovered-gradient</td>
-<td>
+<kendo-checkbox name="checkBox1" checked="true" label="Is Active"> </kendo-checkbox>
 
-    $hovered-bg, darken( $hovered-bg, 2% )
-</td>
-<td>The gradient background of hovered items.
-</td>
-</tr>
-<tr>
-<td>$selected-text</td>
-<td>
+<kendo-button name="baseTextButton">
+    Base Button
+</kendo-button>
 
-    $accent-contrast
-</td>
-<td>The text color of selected items.
-</td>
-</tr>
-<tr>
-<td>$selected-bg</td>
-<td>
+<kendo-button name="primaryTextButton" theme-color="ThemeColor.Primary">
+    Primary Button
+</kendo-button>
+````
+{% endif %}
 
-    $accent
-</td>
-<td>The background of selected items.
-</td>
-</tr>
-<tr>
-<td>$selected-border</td>
-<td>
+## Overriding Theme Styles
 
-    rgba( black, .1 )
-</td>
-<td>The border color of selected items.
-</td>
-</tr>
-<tr>
-<td>$selected-gradient</td>
-<td>
+You can [override theme styles with custom CSS]({%slug themes-override%}), no matter if the app is using a built-in or custom theme. This approach makes sense only for a relatively small number of customizations. Beyond that, choose some of the other alternatives on this page.
 
-    none
-</td>
-<td>The gradient background of selected items.
-</td>
-</tr>
-<tr>
-<td>$error</td>
-<td>
-    <span class="color-preview" style="background-color: #f5503e"></span>
-    #f5503e
-</td>
-<td>The color for error messages and states.
-</td>
-</tr>
-<tr>
-<td>$warning</td>
-<td>
-    <span class="color-preview" style="background-color: #fdce3e"></span>
-    #fdce3e
-</td>
-<td>The color for warning messages and states.
-</td>
-</tr>
-<tr>
-<td>$success</td>
-<td>
-    <span class="color-preview" style="background-color: #5ec232"></span>
-    #5ec232
-</td>
-<td>The color for success messages and states.
-</td>
-</tr>
-<tr>
-<td>$info</td>
-<td>
-    <span class="color-preview" style="background-color: #3e80ed"></span>
-    #3e80ed
-</td>
-<td>The color for informational messages and states.
-</td>
-</tr>
-</table>
-
-The following example demonstrates how to configure the Buttons.
-
-<table class="theme-variables">
-<colgroup>
-<col style="white-space:nowrap; width: 200px" />
-<col style="width: 250px" />
-<col />
-</colgroup>
-<tr>
-<th>Name</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>$kendo-button-text</td>
-<td>
-
-    $base-text
-</td>
-<td>The text color of the buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-bg</td>
-<td>
-
-    $base-bg
-</td>
-<td>The background of the buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-border</td>
-<td>
-
-    k-try-shade( $kendo-button-bg, 2 )
-</td>
-<td>The border color of the buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-gradient</td>
-<td>
-
-    $base-gradient
-</td>
-<td>The background gradient of the buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-hover-text</td>
-<td>
-
-    null
-</td>
-<td>The text color of hovered buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-hover-bg</td>
-<td>
-
-    k-try-shade( $kendo-button-bg, 1 )
-</td>
-<td>The background of hovered buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-hover-border</td>
-<td>
-
-    k-try-shade( $kendo-button-bg, 3 )
-</td>
-<td>The border color of hovered buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-hover-gradient</td>
-<td>
-
-    null
-</td>
-<td>The background gradient of hovered buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-active-text</td>
-<td>
-
-    null
-</td>
-<td>The text color of active buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-active-bg</td>
-<td>
-
-    k-try-shade( $kendo-button-bg, 2 )
-</td>
-<td>The background color of active buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-active-border</td>
-<td>
-
-    k-try-shade( $kendo-button-bg, 4 )
-</td>
-<td>The border color of active buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-active-gradient</td>
-<td>
-
-    none
-</td>
-<td>The background gradient of active buttons.
-</td>
-</tr>
-<tr>
-<td>$kendo-button-focus-shadow</td>
-<td>
-
-    0 0 4px 0 rgba( $kendo-button-border, .75 )
-</td>
-<td>The shadow of focused buttons.
-</td>
-</tr>
-</table>
-
-The following example demonstrates how to configure the Charts.
-
-<table class="theme-variables">
-<colgroup>
-<col style="white-space:nowrap; width: 200px" />
-<col style="width: 250px" />
-<col />
-</colgroup>
-<tr>
-<th>Name</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>$series-a</td>
-<td>
-    <span class="color-preview" style="background-color: #ff6358"></span>
-    #ff6358
-</td>
-<td>The color of the first series.
-</td>
-</tr>
-<tr>
-<td>$series-b</td>
-<td>
-    <span class="color-preview" style="background-color: #ffd246"></span>
-    #ffd246
-</td>
-<td>The color of the second series.
-</td>
-</tr>
-<tr>
-<td>$series-c</td>
-<td>
-    <span class="color-preview" style="background-color: #78d237"></span>
-    #78d237
-</td>
-<td>The color of the third series.
-</td>
-</tr>
-<tr>
-<td>$series-d</td>
-<td>
-    <span class="color-preview" style="background-color: #28b4c8"></span>
-    #28b4c8
-</td>
-<td>The color of the fourth series.
-</td>
-</tr>
-<tr>
-<td>$series-e</td>
-<td>
-    <span class="color-preview" style="background-color: #2d73f5"></span>
-    #2d73f5
-</td>
-<td>The color of the fifth series.
-</td>
-</tr>
-<tr>
-<td>$series-f</td>
-<td>
-    <span class="color-preview" style="background-color: #aa46be"></span>
-    #aa46be
-</td>
-<td>The color of the sixth series.
-</td>
-</tr>
-<tr>
-<td>$chart-major-lines</td>
-<td>
-
-    rgba(0, 0, 0, .08)
-</td>
-<td>The color of the Chart grid lines (major).
-</td>
-</tr>
-<tr>
-<td>$chart-minor-lines</td>
-<td>
-
-    rgba(0, 0, 0, .04)
-</td>
-<td>The color of the Chart grid lines (minor).
-</td>
-</tr>
-</table>
-
-The following example demonstrates how to configure the Toolbar.
-
-<table class="theme-variables">
-<colgroup>
-<col style="white-space:nowrap; width: 200px" />
-<col style="width: 250px" />
-<col />
-</colgroup>
-<tr>
-<th>Name</th>
-<th>Default value</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>$toolbar-padding-x</td>
-<td>
-
-    $padding-x
-</td>
-<td>The horizontal padding of the container.
-</td>
-</tr>
-<tr>
-<td>$toolbar-padding-y</td>
-<td>
-
-    $padding-x
-</td>
-<td>The vertical padding of the container.
-</td>
-</tr>
+Upgrading may require changes to the additional custom CSS code, but only if there are breaking changes in the HTML output and styling.
 
 ## Using CSS Utilities
 
 The CSS Utilities allows you to create the desired layout using a collection of CSS classes. Each utility class changes the appearance of the target element by applying a specific CSS rule. For more information on the Telerik UI CSS Utilities and how to install the package, [refer to the CSS Utilities documentation](https://www.telerik.com/design-system/docs/utils/get-started/introduction/).
 
+## Building Themes From Source Code
+
+The most complex and flexible way to use Telerik themes is to build them from the SASS source code in your development environment.
+
+Each <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/customization/" target="_blank">Theme Customization page in the Progress Design System documentation</a> and the [kendo-themes repository wiki](https://github.com/telerik/kendo-themes/wiki/Compiling-themes) provide more information about this process.
+
+## Loading Custom Themes
+
+Custom themes are used in a [similar way as the built-in themes]({%slug sassbasedthemes_overview%}#using-a-theme). The notable differences are:
+
+* The custom theme must reside in the `wwwroot` folder of the {{ site.framework }} app or on a CDN provider.
+* You must recreate custom themes every time you [update the {{ site.product }} version]({%slug upgrade_aspnetcore%}).
+
+Make sure that the application is loading only one Telerik theme at a time. If you are replacing a built-in theme with a custom theme, you must remove the `<link>` element of the built-in theme.
+
 ## See Also
 
-* [SASS Themes Installation]({% slug sassbasedthemes_installation %})
-* [SASS Themes Browser Support]({% slug sass_browser_support %})
+* [ThemeBuilder Online Tool](https://themebuilderapp.telerik.com)
+* [ThemeBuilder Documentation](https://docs.telerik.com/themebuilder)

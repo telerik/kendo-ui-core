@@ -10,7 +10,7 @@ position: 6
 
 As of the R1 SP1 2023 release, the Telerik UI toolset supports rendering of SVG icons instead of the traditional [Font icons]({% slug webfonticons_aspnetmvc6_aspnetmvc %}).
 
-> To ensure that all icons are displayed correctly, use one of the supported SASS themes. For installing a SASS theme, go to the article on [adding SASS themes to your Telerik UI project]({% slug sassbasedthemes_installation %}).
+> To ensure that all icons are displayed correctly, use one of the available [built-in themes]({% slug sassbasedthemes_overview%}).
 
 ## What Are SVG Icons
 
@@ -132,3 +132,5 @@ The following example shows how to globally configure Font icons.
     $('body').append(icon);
 </script>
 ```
+
+@[template](/_contentTemplates/icons-list-section.md#icons-list-section)

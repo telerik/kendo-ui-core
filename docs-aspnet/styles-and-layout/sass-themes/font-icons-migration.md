@@ -8,7 +8,7 @@ position: 8
 
 # Migrating from Font Icons to SVG Icons
 
-With the upcoming R2 2023 release, the default icon type in the Telerik and Kendo UI themes will change from `font` to `svg`. This release marks the next milestone in a series of improvements related to Content Security Policy (CSP) in {{ site.product }}.
+Starting with version R2 2023, the default icon type in the Telerik and Kendo UI themes has changed from `font` to `svg`. This release marks the next milestone in a series of improvements related to Content Security Policy (CSP) in {{ site.product }}.
 
 In this article, you will learn how to start using SVG icons. To continue using font icons, you can change the type of the icons to `font`.
 
@@ -17,8 +17,6 @@ For more information on using SVG and font icons, visit their dedicated articles
 * [SVG Icons]({% slug svgicons_core_mvc %})
 * [Font Icons]({% slug webfonticons_aspnetmvc6_aspnetmvc %})
 
-> With the upcoming R3 2023 release, the fonts will no longer be delivered with the Telerik and Kendo UI themes. To continue using the font icons, you can either add a separate CDN reference to the font icons stylesheet or you can download and reference the stylesheet included in the [{{ site.product }} bundle]({% slug using_local_client_side_resources %}). 
- 
 ## Switching to SVG Icons 
  
 When migrating from font icons to SVG icons, you will face two possible scenarios: 
@@ -108,6 +106,6 @@ Alternatively, you can set the default icon type on the server. Namely, within t
 
 ## See Also
 
-* [SASS Themes Overview]({% slug sassbasedthemes_overview %})
+* [Themes Overview]({% slug sassbasedthemes_overview %})
 * [SVG Icons]({% slug svgicons_core_mvc %})
 * [Font Icons]({% slug webfonticons_aspnetmvc6_aspnetmvc %})

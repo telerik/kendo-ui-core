@@ -338,6 +338,9 @@ navigation:
     "accessibility":
         title: "Accessibility"
         position: 11
+    "security":
+        title: "Security"
+        position: 12
     "jsp":
         title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
         position: 20

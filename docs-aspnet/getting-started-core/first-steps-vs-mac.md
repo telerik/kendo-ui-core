@@ -72,13 +72,13 @@ To get up and running with the project:
         @using Kendo.Mvc.UI
 
 
-7. Include the client-side resources in `~\Views\Shared\_Layout.cshtml`.
+7. Include the [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) in `~\Views\Shared\_Layout.cshtml`.
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
 	> * As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).
 
-  7.1 Since the Microsoft template project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
+  7.1 Since the Microsoft template project uses Bootstrap, you can use the [Telerik UI Bootstrap theme]({% slug sassbasedthemes_overview%}#built-in-themes) to match it.
 
 	7.2 The Microsoft template comes with a jQuery script reference in the body. Find it and move it to the head.
 

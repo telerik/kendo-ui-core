@@ -9557,6 +9557,96 @@ The legend width when the [legend.orientation](/api/javascript/dataviz/ui/chart#
     </script>
 
 
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+### messages.noData `String`
+
+Defines the text of the "no data" message that is rendered when no series are defined or all series are empty.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      legend: {
+        visible: false
+      },
+      series: [
+        { name: "Series 1", data: [] },
+        { name: "Series 2", data: [] }
+      ],
+      messages: {
+        noData: "Loading..."
+      }
+    });
+    </script>
+
+### noData `Boolean|Object` *(default: true)*
+
+When no series data is available, the Chart will display an overlay element that contains a message with the text "No data available". The overlay will be automatically cleared if the series receive data.
+
+To disable the "No Data" overlay, set this option to `false`.
+
+#### Example - disable noData message
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      legend: {
+        visible: false
+      },
+      series: [
+        { name: "Series 1", data: [] },
+        { name: "Series 2", data: [] }
+      ],
+      noData: false
+    });
+    </script>
+
+#### Example - customize noData message
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      legend: {
+        visible: false
+      },
+      series: [
+        { name: "Series 1", data: [] },
+        { name: "Series 2", data: [] }
+      ],
+      messages: {
+        noData: "Loading..."
+      }
+    });
+    </script>
+
+### noData.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which is rendered when no series are defined, or all series are empty.
+
+The message overlays the entire Chart with the exception of the Title and Subtitle.
+
+#### Example - customize the noData template using a function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      legend: {
+        visible: false
+      },
+      series: [
+        { name: "Series 1", data: [] },
+        { name: "Series 2", data: [] }
+      ],
+      noData: {
+        template: () => `Loading...`
+      }
+    });
+    </script>
+
 ### paneDefaults `Object`
 
 The default options for all panes.
@@ -14882,7 +14972,7 @@ The border of the highlighted markers.
             visible: true,
             type: "roundedRect",
           },
-          highlight: {            
+          highlight: {
             border: {
                color: 'blue',
                width: 10
@@ -14891,7 +14981,7 @@ The border of the highlighted markers.
           data: [1, 2, 3]
         }]
       });
-    </script>  
+    </script>
 ```
 
 ### series.highlight.markers.border.color
@@ -14908,7 +14998,7 @@ The border color of the highlighted markers.
             visible: true,
             type: "roundedRect",
           },
-          highlight: {            
+          highlight: {
             border: {
                color: 'blue',
                width: 10
@@ -14917,7 +15007,7 @@ The border color of the highlighted markers.
           data: [1, 2, 3]
         }]
       });
-    </script>  
+    </script>
 ```
 
 ### series.highlight.markers.border.width
@@ -14934,7 +15024,7 @@ The border width of the highlighted markers.
             visible: true,
             type: "roundedRect",
           },
-          highlight: {            
+          highlight: {
             border: {
                color: 'blue',
                width: 10
@@ -14943,7 +15033,7 @@ The border width of the highlighted markers.
           data: [1, 2, 3]
         }]
       });
-    </script>  
+    </script>
 ```
 
 ### series.highlight.markers.color
@@ -14960,7 +15050,7 @@ The color of the highlighted marker.
             visible: true,
             type: "roundedRect",
           },
-          highlight: {            
+          highlight: {
             markers:{
               color: 'red'
             }
@@ -14968,7 +15058,7 @@ The color of the highlighted marker.
           data: [1, 2, 3]
         }]
       });
-    </script>  
+    </script>
 ```
 
 

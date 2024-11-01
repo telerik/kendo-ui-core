@@ -1726,9 +1726,18 @@ if (kendo.dataviz.ui.Map) {
 
 if (kendo.dataviz.ui.Sankey) {
   kendo.dataviz.ui.Sankey.prototype.options.messages =
-  $.extend(true, kendo.ui.Captcha.prototype.options.messages,{
+  $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages,{
       "tooltipUnits": "{0} Units"
   });
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+    $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages,{
+        "noData": "No data available"
+    });
 }
 
 })(window.kendo.jQuery);

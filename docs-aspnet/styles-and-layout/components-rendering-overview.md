@@ -20,7 +20,7 @@ The R1 2022 release introduces new rendering for several components. In the long
 - [List of Updated Components](#updated-components)
 - [Migrating from LESS Themes](#less-themes-migration)
 - [CSS Classes Migration](#css-classes-migration)
-- [JQuery Selectors Migration](#jquery-selectors-migration)
+- [jQuery Selectors Migration](#jquery-selectors-migration)
 
 
 ## What is the Reason Behind These Changes?
@@ -287,7 +287,7 @@ The following example shows a CSS rule that uses the `k-button` class as a selec
 
 Examples of the old rendering, old classes, new rendering, and new classes are available in the [appearance documentation](#updated-components) of each component.
 
-## JQuery Selectors Migration
+## jQuery Selectors Migration
 
 This section concerns developers who use the `k-{classname}` class selectors in custom JavaScript logic.
 

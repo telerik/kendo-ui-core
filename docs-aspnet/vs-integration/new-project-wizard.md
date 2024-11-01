@@ -201,7 +201,7 @@ If you need the Modernizr in your application, remove the existing Modernizr and
 
 When you select a theme, you can select between three main themes: Default, Bootstrap, and Material. In addition to the styles of the main theme, you can select a specific swatch. A swatch is a set of variables which customize the appearance of the selected main visual theme.
 
-* [Using the Build Process of the Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes#using-the-build-process-of-the-themes)
+* [Using the Build Process of the Themes]({% slug sassbasedthemes_overview %})
 * [How Do I Know Which SASS Theme Corresponds to My Current LESS Theme?](https://docs.telerik.com/aspnet-mvc/styles-and-layout/less-themes-migration#how-do-i-know-which-sass-theme-corresponds-to-my-current-less-theme)
 {% endif %}
 

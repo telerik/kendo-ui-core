@@ -10,7 +10,7 @@ position: 1
 
 The {{ site.framework }} GridLayout component allows you to arrange the contents of the component in rows and columns in a grid structure. The arrangement of content relies on the CSS Grid functionality. For more information on the CSS Grid, refer to [the official CSS Grid documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout).
 
-> The GridLayout is supported only when you use [Kendo UI Sass themes]({% slug sassbasedthemes_overview%}).
+> The GridLayout is supported only when you use [Kendo UI themes]({% slug sassbasedthemes_overview%}).
 
 ## Initializing the GridLayout
 

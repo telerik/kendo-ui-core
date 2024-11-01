@@ -1,12 +1,14 @@
 ---
-title: Security and Validation
-page_title: Security and Validation - Working with Components 
+title: Useful Tips
+page_title: Security and Validation Useful Tips
 description: "Get started with Kendo UI for jQuery and learn the fundamentals for XSS and CSRF attacks."
 slug: kendoui_security_gettingstarted
-position: 60
+previous_url: /intro/widget-basics/security-and-validation
+published: True
+position: 2
 ---
 
-# Security and Validation
+# Security and Validation Useful Tips
 
 Preventing Cross-site scripting (XSS) and implementing validation for Cross-Site Request Forgery(CSRF) tokens can significantly boost the security of the application and prevent malicious script execution.
 
@@ -86,8 +88,3 @@ The following examples demonstrate the steps for implementing the CSRF token val
       }
 
   ```
-
-## See Also
-
-* [Creating Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Getting Up and Running with Kendo UI (Guide)]({% slug getting_started_installation_kendoui %})

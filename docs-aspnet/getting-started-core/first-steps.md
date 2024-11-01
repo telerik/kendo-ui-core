@@ -153,14 +153,14 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 ## Including the Telerik UI for ASP.NET Core Client-Side Resources
 
-To implement Telerik UI for ASP.NET Core in an application, you must provide not only the NuGet package with the components, but also the [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) like scripts and CSS files.
+To implement Telerik UI for ASP.NET Core in an application, you must provide not only the NuGet package with the components, but also the [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) like scripts and [theme files]({% slug sassbasedthemes_overview%}).
 
 >* The CDN links and/or package versions must point to the same UI for ASP.NET Core version that your project references.
 >* The Kendo UI scripts must be placed after the `jQuery` script.
 
 Before you can use a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts:
 
-1. Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it:
+1. Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the [Telerik UI Bootstrap theme]({% slug sassbasedthemes_overview%}#built-in-themes) to match it:
 
 		<head>
 		...

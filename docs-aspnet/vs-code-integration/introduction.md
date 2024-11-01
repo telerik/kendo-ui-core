@@ -159,7 +159,7 @@ If you enable the localization option, the language specific files will be copie
 
 ### Themes
 
-You can add styling to your application by selecting one of the [Kendo UI Sass-Based themes]({% slug sassbasedthemes_overview %}) (Default, Fluent, Bootstrap, or Material) and pick from a variety of swatches that come with each theme. When you make your choice, the wizard will add to the `_Layout.cshtml` only these files that are required by the selected theme.
+You can add styling to your application by selecting one of the [Kendo UI Sass-Based themes]({% slug sassbasedthemes_overview %}) (Default, Bootstrap, Material, Fluent, or Classic) and pick from a variety of [swatches]({% slug sassbasedthemes_overview %}#swatch) that come with each theme. When you make your choice, the wizard will add to the `_Layout.cshtml` only these files that are required by the selected theme.
 
 ![{{ site.product_short }} Theme options](images/themes.png)
 

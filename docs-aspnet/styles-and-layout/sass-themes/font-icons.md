@@ -6,7 +6,7 @@ slug: webfonticons_aspnetmvc6_aspnetmvc
 position: 7
 ---
 
-# Web Font Icons
+# Font Icons
 
 > As of the 2023 R3 release, the font icons are detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}). If you use the Kendo UI CDN service to include the Kendo UI theme, to continue using the font icons, add a reference the following stylesheet into your application:
     ```
@@ -15,17 +15,7 @@ position: 7
 
 With the R1 2017 release, Telerik UI delivers integrated font icons intended for the web and data visualization components of the suite.
 
->tip To make sure all the icons are displayed correctly, use one of the SASS themes. For more information on how to install a SASS theme, visit the [installation] ({% slug sassbasedthemes_installation%}) article.
-
-## List of Font Icons
-
-Head to the [Basic Usage](#basic-usage) section to for more information on how to use the icons.
-
-Search for icons by using the browser's search bar (CTRL + F).
-
-<div class="list-container" style="height: 600px;">
-    <iframe src="icons-list.html" class="icons-frame"></iframe>
-</div>
+> To ensure that all icons are displayed correctly, use one of the available [built-in themes]({% slug sassbasedthemes_overview%}).
 
 ## What Are Icon Fonts
 
@@ -37,8 +27,8 @@ Using icon fonts in a user interface (UI) naturally succeeds the outdated [icon 
 
 Font icons demonstrate significant benefits such as:
 
-* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as convenient as setting the `font-size` configuration option.
-* Improved design capabilities&mdash;You can apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
+* Improved scalability&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as convenient as setting the `font-size` configuration option.
+* Improved design capabilities&mdash;You can apply CSS effects on the fly by setting the text color, shadow, or other options for different interaction states. For example, on `:hover`.
 * Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
 * Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
 * Reduced file size&mdash;A 100KB file contains around 500 vector icons.
@@ -47,12 +37,19 @@ Font icons demonstrate significant benefits such as:
 
 To use the Telerik UI font icons:
 
- 1. [Load]({% slug sassbasedthemes_installation %}) a Telerik UI theme into your project.
- 2. Assign a `k-font-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
+ 1. [Include a Telerik UI theme]({% slug sassbasedthemes_overview %}#using-a-theme) into your project.
+ 2. If you use the Kendo UI CDN service to include the theme, register the font icon stylesheet.
+ 3. Assign a `k-font-icon` CSS class followed by a predefined class from the [list of font icons](#icons-list) to an HTML tag. For example, a the `<span>` element.
 
-    ```
-     <span class="k-icon k-font-icon k-i-calendar"></span>
-    ```
+ The following example demonstrates how to render a font calendar icon.
+ ```
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-font-icons/dist/index.css" />
+
+    <span class="k-icon k-font-icon k-i-calendar"></span>
+ ```
+
+@[template](/_contentTemplates/icons-list-section.md#icons-list-section)
 
 ## Rendering with Unicode Numbers
 
@@ -71,9 +68,9 @@ Though the web icon font comes with a set of predefined CSS classes, you will ne
 
 Icon fonts support the following options for visual enhancement:
 
-* Application of [different sizes](#sizes).
-* Application of [icon colors](#colors).
-* [Flipping](#flipping) of icons.
+* Application of [different sizes](#adjusting-the-size).
+* Application of [icon colors](#adjusting-the-colors).
+* [Flipping](#applying-flipping) of icons.
 
 ### Adjusting the Size
 
