@@ -58,13 +58,13 @@ Security fixes are typically included in the next product release. Similar to th
 
 ---
 
-## How will I be notified about security fixes?
+## How can I get notified about security fixes?
 
 Once a vulnerability is fixed, we aim to release a patched version of the product. Depending on the severity of the issue, we may notify customers through CVE publications, email, blog posts, KB articles, or Release Notes for the specific product.
 
 ---
 
-## Does Progress/Telerik have any security certifications or accreditations, such as SOC 2 or other industry-recognized standards?
+## Does Progress Telerik have any security certifications or accreditations, such as SOC 2 or other industry-recognized standards?
 
 Yes, Progress and DevTools products perform annual SOC 2 compliance, which validates our commitment to security, confidentiality, and privacy. You can find more information about our compliance on the [Progress Trust Center](https://www.progress.com/trust-center). Additionally, we align our security practices with industry-leading frameworks to maintain and continually improve our high security standards.
 

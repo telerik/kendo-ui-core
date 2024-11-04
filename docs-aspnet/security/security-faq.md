@@ -22,7 +22,7 @@ We will review the report and follow up in line with our security processes, mak
 
 ---
 
-## What if clients are using a third-party scanning tool and want our assessment?
+## What if I am using a third-party scanning tool and want Progress' assessment?
 
 Clients can open a support ticket through the [Technical Support Center](https://www.telerik.com/account/support-center) for the respective product and submit detailed information, including scan reports (PDF/Word/Excel/Screenshot) triggered against a no-minified version of the scripts and steps to reproduce or evidence of the issue. Our team will review and respond accordingly. We treat Security Vulnerability reports with **highest priority** and we engage with our internal Security Champions for revisions.
 
@@ -56,12 +56,12 @@ Security fixes are typically included in the next product release. Similar to th
 
 ---
 
-## How are customers notified about security fixes?
+## How can I get notified about security fixes?
 
 Once a vulnerability is fixed, we aim to release a patched version of the product. Depending on the severity of the issue, we may notify customers through CVE publications, email, blog posts, KB articles, or Release Notes for the specific product.
 
 ---
 
-## Does Progress/Telerik have any security certifications or accreditation, such as SOC 2 or other industry-recognized standards?
+## Does Progress Telerik have any security certifications or accreditation, such as SOC 2 or other industry-recognized standards?
 
 Yes, Progress and DevTools products perform annual SOC 2 compliance, which validates our commitment to security, confidentiality, and privacy. You can find more information about our compliance on the [Progress Trust Center](https://www.progress.com/trust-center). Additionally, we align our security practices with industry-leading frameworks to maintain and continually improve our high security standards.
