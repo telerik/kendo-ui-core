@@ -232,9 +232,9 @@ The following example demonstrates how to handle custom fonts.
 
         /* Hide toolbar, navigation and footer during export */
         .k-pdf-export .k-scheduler-toolbar,
-        .k-pdf-export .k-scheduler-navigation .k-nav-today,
-        .k-pdf-export .k-scheduler-navigation .k-nav-prev,
-        .k-pdf-export .k-scheduler-navigation .k-nav-next,
+        .k-pdf-export .k-scheduler-navigation [ref-nav-today],
+        .k-pdf-export .k-scheduler-navigation [ref-nav-prev],
+        .k-pdf-export .k-scheduler-navigation [ref-nav-next],
         .k-pdf-export .k-scheduler-footer {
             display: none;
         }

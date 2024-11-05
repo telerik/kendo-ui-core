@@ -80,12 +80,12 @@ The following example demonstrates how to decorate your own custom tool with a F
         </script>
 
         <style>
-          .k-editor .k-toolbar-tool[title="Custom tool 1"] .k-icon:before {
+          .k-editor [ref-toolbar-tool][title="Custom tool 1"] .k-icon:before {
             font-family: FontAwesome;
             content: "\f09e";
           }
 
-          .k-editor .k-toolbar-tool[title="Custom tool 2"] .k-icon:before {
+          .k-editor [ref-toolbar-tool][title="Custom tool 2"] .k-icon:before {
             font-family: FontAwesome;
             content: "\f061";
           }

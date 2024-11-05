@@ -155,7 +155,6 @@
         var content = menu.element.find(".customClass");
 
         assert.isOk(content.hasClass("k-content"));
-        assert.isOk(content.hasClass("k-group"));
         assert.isOk(content.hasClass("k-menu-group"));
     });
 
@@ -180,7 +179,7 @@
 
         var expandArrow = menu.element.find(".k-menu-group .k-icon, .k-menu-group .k-svg-icon");
 
-        assert.isOk(expandArrow.hasClass("k-menu-expand-arrow-icon"));
+        assert.isOk(expandArrow.parent().hasClass("k-menu-expand-arrow"));
     });
 
 

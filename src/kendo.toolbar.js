@@ -43,7 +43,6 @@ export const __meta__ = {
         MENU_ITEM = "k-menu-item",
         OVERFLOW_ANCHOR = "k-toolbar-overflow-button",
         TEMPLATE_ITEM = "k-toolbar-item",
-        TOOLBAR_TOOL = "k-toolbar-tool",
         MENU_LINK_TOGGLE = "k-menu-link-toggle",
         DROPDOWNLIST = "k-dropdownlist",
         INPUT_BUTTON = "k-input-button",
@@ -53,6 +52,7 @@ export const __meta__ = {
         MULTIPLE = "multiple",
         NONE = "none",
         TABINDEX_MINUS_1 = "[tabindex=-1]",
+        TOOLBAR_TOOL = "toolbar-tool",
 
         ARIA_DISABLED = "aria-disabled",
         ARIA_CHECKED = "aria-checked",
@@ -71,6 +71,7 @@ export const __meta__ = {
         SPACER = "spacer",
         PRIMARY = "primary",
         ROLE = "role",
+        ITEM_REF = "ref-",
         SEPARATOR = "separator",
         OVERFLOW = "overflow",
         TABINDEX = "tabindex",
@@ -83,8 +84,8 @@ export const __meta__ = {
         DATA_ROLE_SELECTOR = "[data-role]",
         DATA_TOGGLE_SELECTOR = "[data-toggle]",
         DATA_ROLE_BUTTONMENU = "[data-role=buttonmenu]",
-
-        KENDO_FOCUSABLE = ":kendoFocusable",
+        ITEM_REF_SELECTOR = "[ref-toolbar-tool]",
+        KENDO_FOCUSABLE = ":kendoFocusable:not([class*='pager'])",
 
         OVERFLOW_OPEN = "overflowOpen",
         OVERFLOW_CLOSE = "overflowClose",
@@ -133,7 +134,7 @@ export const __meta__ = {
 
     var POPUP_BUTTON_TEMPLATE = `<button class="k-popup-button"><span class="k-button-icon k-icon"></span><span class="k-button-text">${kendo.ui.icon("caret-alt-down")}</span></button>`;
     var TEMPLATE_WRAPPER = "<div class='k-toolbar-item' aria-keyshortcuts='Enter'></div>";
-    var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-tool k-toolbar-item' tabindex='0'>";
+    var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-item' tabindex='0' ref-toolbar-tool >";
     var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
     var SEPARATOR_EL = '<div role="separator">&nbsp;</div>';
     var SPACER_EL = '<div>&nbsp;</div>';
@@ -565,6 +566,14 @@ export const __meta__ = {
             if (options.overflow === OVERFLOW_NEVER) {
                 element.attr("data-overflow", OVERFLOW_NEVER);
             }
+
+            if (options.items) {
+                options.items.forEach(item => {
+                    if (item && item.groupClass && !element.hasClass(item.groupClass)) {
+                        element.addClass(item.groupClass);
+                    }
+                });
+            }
         },
 
         _addCustomWidget: function(options) {
@@ -591,7 +600,7 @@ export const __meta__ = {
             widget = new kendo.ui[options.component](element, options.componentOptions);
 
             if (SAFE_COMPONENTS.indexOf(options.component) > -1) {
-                widget.wrapper.addClass(TOOLBAR_TOOL + " " + TOOLBAR_TOOLS_CLASSES[options.component]);
+                widget.wrapper.addClass(TOOLBAR_TOOLS_CLASSES[options.component]).attr(ITEM_REF + TOOLBAR_TOOL, '');
                 result = widget.wrapper;
             } else {
                 result = (widget.wrapper || widget.element).wrap(CUSTOM_WIDGET_WRAP).parent();
@@ -820,7 +829,7 @@ export const __meta__ = {
 
             if (!this.options.navigateOnTab && inputsInTemplate.length > 0) {
                 element.attr(TABINDEX, 0);
-                element.addClass(TOOLBAR_TOOL);
+                element.attr(ITEM_REF + TOOLBAR_TOOL, '');
                 inputsInTemplate.attr(TABINDEX, -1);
             }
 
@@ -912,10 +921,10 @@ export const __meta__ = {
             }
 
             if (hasButtons) {
-                element.find(DOT + KBUTTON).addClass(TOOLBAR_TOOL);
+                element.find(DOT + KBUTTON).attr(ITEM_REF + TOOLBAR_TOOL, '');
                 this._groupVisibleButtons(element);
             } else {
-                widget.element.addClass(TOOLBAR_TOOL);
+                widget.element.attr(ITEM_REF + TOOLBAR_TOOL, '');
             }
 
             if (options.type !== "popupButton" && options.type !== "open") {
@@ -995,7 +1004,7 @@ export const __meta__ = {
         },
 
         _getAllItems: function() {
-            return this.wrapper.find(DOT + TOOLBAR_TOOL)
+            return this.wrapper.find(ITEM_REF_SELECTOR)
                 .filter(":visible")
                 .filter((i, el) => {
                     if (el.style.visibility === HIDDEN) {
@@ -1067,7 +1076,7 @@ export const __meta__ = {
             if (!element.length) {
                 return null;
             } else {
-                return element.data(UID) || element.closest(DOT + TOOLBAR_TOOL).data(UID);
+                return element.data(UID) || element.closest(ITEM_REF_SELECTOR).data(UID);
             }
         },
 
@@ -1131,13 +1140,13 @@ export const __meta__ = {
                 templateItem = target.closest(DOT + TEMPLATE_ITEM),
                 isOverflowAnchor = target.is(DOT + OVERFLOW_ANCHOR);
 
-            if (!this.options.navigateOnTab && !target.is(".k-toolbar-tool") && keyCode === keys.ESC && templateItem.length > 0) {
+            if (!this.options.navigateOnTab && !target.is(ITEM_REF_SELECTOR) && keyCode === keys.ESC && templateItem.length > 0) {
                 e.stopPropagation();
                 this._keyDeactivateTemplate(templateItem);
                 return;
             }
 
-            if (!target.hasClass(TOOLBAR_TOOL)) {
+            if (!target.is(ITEM_REF_SELECTOR)) {
                 return;
             }
 
@@ -1156,8 +1165,11 @@ export const __meta__ = {
 
         _keyActivateTemplate: function(target) {
             var innerFocusable = target.find(KENDO_FOCUSABLE + ":not('" + DOT + INPUT_BUTTON + "')" + COMMA + DOT + DROPDOWNLIST);
+            const pagerTool = target.find('.k-pager');
 
-            if (innerFocusable.length > 0) {
+            if (pagerTool.length > 0) {
+                pagerTool.trigger(FOCUS);
+            } else if (innerFocusable.length > 0) {
                 target.attr(TABINDEX, -1);
 
                 innerFocusable.attr(TABINDEX, 0);
@@ -1601,7 +1613,8 @@ export const __meta__ = {
                 isRtl = that._isRtl,
                 horizontalDirection = isRtl ? "left" : "right";
 
-            that.overflowAnchor = $("<button class='k-toolbar-overflow-button k-toolbar-tool' title='More tools'>");
+            that.overflowAnchor = $("<button class='k-toolbar-overflow-button' title='More tools'>");
+            that.overflowAnchor.attr(ITEM_REF + TOOLBAR_TOOL, '');
             that.element.append(that.overflowAnchor);
             that.overflowAnchor.kendoButton({
                 icon: "more-vertical",
@@ -1825,7 +1838,7 @@ export const __meta__ = {
                 focusableItems.attr(TABINDEX, -1);
                 firstFocusable.attr(TABINDEX, 0);
             } else {
-                this.wrapper.find(".k-toolbar-item.k-toolbar-tool").removeAttr(TABINDEX);
+                this.wrapper.find(".k-toolbar-item").removeAttr(TABINDEX);
             }
         },
 

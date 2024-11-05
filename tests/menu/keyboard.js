@@ -13,7 +13,7 @@ describe("menu keyboard navigation", function() {
         };
 
         Mocha.fixture.append(
-            '<ul id="menu" data-role="menu" class="k-widget k-reset k-header k-menu k-menu-horizontal" tabindex="0">' +
+            '<ul id="menu" data-role="menu" class="k-reset k-header k-menu k-menu-horizontal" tabindex="0">' +
             '    <li class="k-item k-first"><span class="k-link">' +
             '        First Item' +
             '        <span class="k-icon k-i-caret-alt-down"></span></span><ul class="k-group">' +

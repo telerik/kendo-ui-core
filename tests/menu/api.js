@@ -34,7 +34,7 @@ var menu,
 describe("menu api", function() {
     beforeEach(function() {
         $("#qunit-fixture").append(
-            '    <ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
+            '    <ul id="menu" class="k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
             '        <li class="k-item" style=""><span class="k-link">ASP.NET MVC<span' +
             '                class="k-icon k-i-caret-alt-down"></span></span>' +
             '            <ul class="k-group">' +
@@ -399,7 +399,7 @@ it("Adding dynamic content element renders properly on root and inner levels", f
     ]);
 
     assert.isOk(m.element.children("li:first").children("div.k-menu-popup").children(".k-content.k-menu-group")[0]);
-    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group.k-group")[0]);
+    assert.isOk(m.element.find("> li:last > div > ul > li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group")[0]);
     assert.isOk(!m.element.children("li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group.k-group").is(":visible"));
     assert.isOk(!m.element.find("> li:last > div > ul > li:first").children("div.k-menu-popup").children("div.k-content.k-menu-group.k-group").is(":visible"));
 
@@ -443,7 +443,7 @@ it("Appending a li item to a parent li adds it to a <ul> instead of the popup wr
     });
     const ref = m.element.find(">li:nth-child(3)");
     m.append(li, ref);
-    assert.equal(ref.find(".k-group").children().length, 1);
+    assert.equal(ref.find(".k-menu-group").children().length, 1);
 
     m.destroy();
 });
@@ -502,10 +502,10 @@ it("Adding dynamic contentUrl element renders contents on root and inner levels"
         var m = new kendo.ui.Menu("<div />");
 
         m.setOptions({ scrollable: true, orientation: "horizontal" });
-        assert.isOk(m._overflowWrapper().is(".k-horizontal"));
+        assert.isOk(m._overflowWrapper());
 
         m.setOptions({ scrollable: true, orientation: "vertical" });
-        assert.isOk(m._overflowWrapper().is(".k-vertical"));
+        assert.isOk(m._overflowWrapper());
 
         m.destroy();
     });

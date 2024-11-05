@@ -11,7 +11,7 @@
     describe("menu open on click", function() {
         beforeEach(function() {
             Mocha.fixture.append(
-                '<ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden;">' +
+                '<ul id="menu" class="k-reset k-header k-menu" style="visibility: hidden;">' +
                 '    <li class="k-item" style=""><span class="k-link">ASP.NET MVC<span' +
                 '            class="k-icon k-i-caret-alt-down"></span></span>' +
                 '        <ul class="k-group">' +

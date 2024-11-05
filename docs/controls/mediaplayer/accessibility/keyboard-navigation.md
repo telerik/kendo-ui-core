@@ -20,6 +20,12 @@ The MediaPlayer supports the following keyboard shortcuts:
 |`Esc`    |Exits the full-screen mode.
 |`Space`  |Toggles the play and pause state.
 |`M`      |Toggles the mute and unmute state.
+| `RightArrow` | Seek forward.
+| `LeftArrow` | Seek backward.
+| `UpArrow` | Increase the volume.
+| `DownArrow` | Decrease the volume.
+| `Control + 1` | Decrease the video quality.
+| `Control + 2` | Increase the video quality.
 
 ## See Also
 

@@ -18,7 +18,7 @@ export const __meta__ = {
     var Button = ui.Button;
     var keys = kendo.keys;
     var NS = ".kendoButtonGroup";
-    var KBUTTONGROUP = "k-button-group k-button-group-solid";
+    var KBUTTONGROUP = "k-button-group k-button-group-";
     var KBUTTON = "k-button";
     var SELECTED = "k-selected";
     var DISABLED = "k-disabled";
@@ -45,9 +45,9 @@ export const __meta__ = {
             that.selectedIndices = [];
 
             that._buttons = that._renderItems(that.options.items);
-
+            const fillMode = options && options.fillMode ? options.fillMode : 'solid';
             that.element
-                .addClass(EMPTY + KBUTTONGROUP)
+                .addClass(EMPTY + KBUTTONGROUP + fillMode)
                 .attr("role", "group");
 
             that._enable = true;

@@ -195,7 +195,7 @@
 
             menu.getKendoMenu().dataSource.view()[0].load();
 
-            menu.data("kendoMenu").disable(menu.find(".k-group li:first"));
+            menu.data("kendoMenu").disable(menu.find(".k-menu-group li:first"));
 
             assert.equal(menu.find("[aria-disabled=true] span:first").text(), "bar");
         });

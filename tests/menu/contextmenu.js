@@ -355,10 +355,10 @@
         contextMenu.open();
 
         setTimeout(() => {
-            assert.isOk(contextMenu._popupsWrapper.find(".k-scroll-down").is(":visible"));
+            assert.isOk(contextMenu._popupsWrapper.find(".k-menu-scroll-button-next").is(":visible"));
             contextMenu.element.scrollTop(130);
-            contextMenu._toggleScrollButtons(contextMenu.element, $(".k-scroll-up"), $(".k-scroll-down"), false);
-            assert.isOk(contextMenu._popupsWrapper.find(".k-scroll-up").is(":visible"));
+            contextMenu._toggleScrollButtons(contextMenu.element, $(".k-menu-scroll-button-prev"), $(".k-menu-scroll-button-next"), false);
+            assert.isOk(contextMenu._popupsWrapper.find(".k-menu-scroll-button-prev").is(":visible"));
             contextMenu.destroy();
             menuContainer.remove();
             done();

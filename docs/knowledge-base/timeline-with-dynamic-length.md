@@ -90,7 +90,7 @@ The following example demonstrates how to achieve the desired scenario.
           views: [{
             type: "MyCustomTimelistView",
             selected: true,
-            dateHeaderTemplate: "<span class='k-link k-nav-day'>#=kendo.toString(date, ' dd/M ddd')#</span>"
+            dateHeaderTemplate: "<span class='k-link' ref-view-day >#=kendo.toString(date, ' dd/M ddd')#</span>"
           }],
           timezone: "Etc/UTC",
           dataSource: {

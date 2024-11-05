@@ -117,10 +117,10 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
 ```HtmlHelper
     <script id="GridToolbarTemplate" type="text/x-kendo-template">
         <div class="refreshBtnContainer">
-            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
         </div>
         
-        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
         
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>
@@ -153,7 +153,7 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
             <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
         </div>
         
-        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
         
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>

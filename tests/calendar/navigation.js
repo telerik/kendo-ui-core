@@ -570,8 +570,8 @@
                 assert.equal(document.activeElement, calendar._table[0]);
             });
 
-            div.find(".k-nav-prev").mousedown();
-            div.find(".k-nav-prev").click();
+            div.find("[title=Previous]").mousedown();
+            div.find("[title=Previous]").click();
         });
 
         it("mouseup on calendar will focus the table", function() {

@@ -34,7 +34,7 @@ export const __meta__ = {
         MENU = "k-menu",
         LINK = "k-link k-menu-link",
         LINK_SELECTOR = ".k-link",
-        ICON_SELECTOR = ".k-menu-expand-arrow-icon",
+        ICON_SELECTOR = ".k-menu-expand-arrow",
         LAST = "k-last",
         CLOSE = "close",
         TIMER = "timer",
@@ -166,7 +166,7 @@ export const __meta__ = {
             contentCssAttributes: function(item) {
                 var result = "";
                 var attributes = item.contentAttr || {};
-                var defaultClasses = "k-content k-group k-menu-group k-menu-group-md";
+                var defaultClasses = "k-content k-menu-group k-menu-group-md";
 
                 if (!attributes['class']) {
                     attributes['class'] = defaultClasses;
@@ -192,7 +192,7 @@ export const __meta__ = {
             },
 
             groupCssClass: function() {
-                return "k-group k-menu-group k-menu-group-md";
+                return "k-menu-group k-menu-group-md";
             },
 
             groupWrapperCssClass: function() {
@@ -297,7 +297,7 @@ export const __meta__ = {
             .each(function() {
                 var item = $(this);
 
-                item.append(`<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: getArrowIconName(item), iconClass: "k-menu-expand-arrow-icon" })}</span>`);
+                item.append(`<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: getArrowIconName(item) })}</span>`);
             });
     }
 
@@ -604,23 +604,44 @@ export const __meta__ = {
             }
         },
 
+        _getNeededSpaceForChildren: function(element, horizontal) {
+            const children = element.children();
+            let total = 0;
+
+            if (children.length > 0) {
+                children.each((_, element) => {
+                    if (horizontal) {
+                        total += kendo._outerWidth(element);
+                    } else {
+                        total += kendo._outerHeight(element);
+                    }
+                });
+            }
+
+            return total;
+        },
+
         _initOverflow: function(options) {
             var that = this;
             var isHorizontal = options.orientation == "horizontal";
             var backwardBtn, forwardBtn;
-
+            const isRtl = kendo.support.isRtl(that.wrapper);
+            that._openedPopups = {};
             if (options.scrollable) {
-                that._openedPopups = {};
-                that._scrollWrapper = that.element.wrap("<div class='k-menu-scroll-wrapper k-" + options.orientation + "'></div>").parent();
+                that._scrollWrapper = that.element.wrap(`<div class="k-menu-scroll-wrapper${options.orientation === 'vertical' ? " k-menu-scroll-wrapper-vertical" : ""}"></div>`).parent();
                 if (isHorizontal) {
                     removeSpacesBetweenItems(that.element);
                 }
+                let backwardBtnIcon = isHorizontal ? (isRtl ? 'right' : 'left') : 'up';
+                let forwardBtnIcon = isHorizontal ? (isRtl ? 'left' : 'right') : 'down';
 
-                backwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "left" : "up" }));
-                forwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "right" : "down" }));
-                backwardBtn.add(forwardBtn).appendTo(that._scrollWrapper);
+                backwardBtn = $(that.templates.scrollButton({ direction: backwardBtnIcon }));
+                forwardBtn = $(that.templates.scrollButton({ direction: forwardBtnIcon }));
 
-                that._initScrolling(that.element, backwardBtn, forwardBtn, isHorizontal);
+                backwardBtn.prependTo(that._scrollWrapper);
+                forwardBtn.appendTo(that._scrollWrapper);
+
+                that._initScrolling(that.element, backwardBtn, forwardBtn, isHorizontal, isRtl);
 
                 var initialWidth = that.element.outerWidth();
                 var initialCssWidth = that.element[0].style.width;
@@ -701,7 +722,7 @@ export const __meta__ = {
             }
         },
 
-        _initScrolling: function(scrollElement, backwardBtn, forwardBtn, isHorizontal) {
+        _initScrolling: function(scrollElement, backwardBtn, forwardBtn, isHorizontal, isRtl) {
             var that = this;
             var scrollable = that.options.scrollable;
             var distance = that.isNumeric(scrollable.distance) ? scrollable.distance : SCROLLSPEED;
@@ -712,7 +733,6 @@ export const __meta__ = {
             var forwardDouble = "+=" + distance * 2;
             var scrolling = false;
             var touchEvents = false;
-
             var scroll = function(value) {
                 var scrollValue = isHorizontal ? { "scrollLeft": value } : { "scrollTop": value };
                 scrollElement.finish().animate(scrollValue, "fast", "linear", function() {
@@ -720,7 +740,7 @@ export const __meta__ = {
                         scroll(value);
                     }
                 });
-                that._toggleScrollButtons(scrollElement, backwardBtn, forwardBtn, isHorizontal);
+                that._toggleScrollButtons(scrollElement, backwardBtn, forwardBtn, isHorizontal, isRtl);
             };
 
             var mouseenterHandler = function(e) {
@@ -737,7 +757,7 @@ export const __meta__ = {
                     if (!touchEvents) {
                         $(e.currentTarget).trigger(MOUSEENTER);
                     } else {
-                         that._toggleScrollButtons(scrollElement, backwardBtn, forwardBtn, isHorizontal);
+                         that._toggleScrollButtons(scrollElement, backwardBtn, forwardBtn, isHorizontal, isRtl);
                          scrolling = true;
                     }
                 });
@@ -747,17 +767,17 @@ export const __meta__ = {
                 e.preventDefault();
             };
 
-            backwardBtn.on(MOUSEENTER + NS, { direction: backward }, mouseenterHandler)
-                .on(kendo.eventMap.down + NS, { direction: backwardDouble }, mousedownHandler);
+            backwardBtn.on(MOUSEENTER + NS, { direction: isRtl && isHorizontal ? forward : backward }, mouseenterHandler)
+                .on(kendo.eventMap.down + NS, { direction: isRtl && isHorizontal ? forwardDouble : backwardDouble }, mousedownHandler);
 
-            forwardBtn.on(MOUSEENTER + NS, { direction: forward }, mouseenterHandler)
-                .on(kendo.eventMap.down + NS, { direction: forwardDouble }, mousedownHandler);
+            forwardBtn.on(MOUSEENTER + NS, { direction: isRtl && isHorizontal ? backward : forward }, mouseenterHandler)
+                .on(kendo.eventMap.down + NS, { direction: isRtl && isHorizontal ? backwardDouble : forwardDouble }, mousedownHandler);
 
             backwardBtn.add(forwardBtn)
                 .on(MOUSELEAVE + NS, function() {
                     scrollElement.stop();
                     scrolling = false;
-                    that._toggleScrollButtons(scrollElement, backwardBtn, forwardBtn, isHorizontal);
+                    that._toggleScrollButtons(scrollElement, backwardBtn, forwardBtn, isHorizontal, isRtl);
                 });
 
             scrollElement.on(MOUSEWHEEL, function(e) {
@@ -782,12 +802,27 @@ export const __meta__ = {
         },
 
         _toggleScrollButtons: function(scrollElement, backwardBtn, forwardBtn, horizontal) {
-            var currentScroll = horizontal ? kendo.scrollLeft(scrollElement) : scrollElement.scrollTop();
-            var scrollSize = horizontal ? SCROLLWIDTH : SCROLLHEIGHT;
-            var offset = horizontal ? OFFSETWIDTH : OFFSETHEIGHT;
+            const neededSpace = this._getNeededSpaceForChildren(scrollElement, horizontal);
+            const elementSpace = horizontal ? kendo._outerWidth(this.element) : kendo._outerHeight(this.element);
 
-            backwardBtn.toggle(currentScroll !== 0);
-            forwardBtn.toggle(currentScroll < scrollElement[0][scrollSize] - scrollElement[0][offset] - 1);
+            backwardBtn.toggle(neededSpace > elementSpace);
+            forwardBtn.toggle(neededSpace > elementSpace);
+
+            const currentScroll = horizontal ? kendo.scrollLeft(scrollElement) : scrollElement.scrollTop();
+            const elementIsPopup = scrollElement.is(popupSelector) || scrollElement.parent().is(childAnimationContainerSelector);
+
+            let disableNextButton = Math.abs(currentScroll - (scrollElement[0].scrollWidth - scrollElement[0].offsetWidth)) <= 1;
+
+            if (!horizontal) {
+                disableNextButton = Math.abs(currentScroll - (scrollElement[0].scrollHeight - scrollElement[0].offsetHeight)) <= 1;
+            }
+
+            if (elementIsPopup) {
+                disableNextButton = Math.abs(currentScroll - (scrollElement[0].scrollHeight - scrollElement[0].offsetHeight) - 1) <= 1;
+            }
+
+            backwardBtn.toggleClass(DISABLEDSTATE, Math.floor(currentScroll) === 0);
+            forwardBtn.toggleClass(DISABLEDSTATE, disableNextButton);
         },
 
         setOptions: function(options) {
@@ -996,7 +1031,7 @@ export const __meta__ = {
                 that._loading = false;
             } else {
                 dataItem.one(CHANGE, function() {
-                    element.find(ICON_SELECTOR).removeClass("k-i-loading");
+                    element.find(ICON_SELECTOR).children().removeClass("k-i-loading");
                     if (that._loading) {
                         that.open(element);
                         that._loading = false;
@@ -1062,7 +1097,7 @@ export const __meta__ = {
 
             if (dataItem && dataItem.hasChildren && !dataItem.loaded() && !that._loading) {
                 that._loading = true;
-                element.find(ICON_SELECTOR).addClass("k-i-loading");
+                element.find(ICON_SELECTOR).children().addClass("k-i-loading");
                 dataItem.load();
                 that._openAfterLoad(element, dataItem);
                 return;
@@ -1116,12 +1151,25 @@ export const __meta__ = {
                     }
 
                     if (div[0] && that._triggerEvent({ item: li[0], type: OPEN }) === false) {
+                        const menuParent = div.children('.k-menu-scroll-wrapper').length ? div.children('.k-menu-scroll-wrapper') : div;
+                        const menu = that._groupElementsInitialSpace.find(({ element }) => menuParent.children('ul').is(element));
 
-                        if (!div.find(".k-menu-popup")[0] && div.children(".k-menu-group").children(".k-item").length > 1) {
-                            div.css({ maxHeight: $(window).height() - (kendo._outerHeight(div) - div.height()) - kendo.getShadows(div).bottom, overflow: "auto" });
-                        } else {
-                            div.css({ maxHeight: "", overflow: "visible" });
+                        let maxHeight = "";
+                        if (menu && Object.keys(menu).length > 0) {
+                            if (menu.height > 0) {
+                                maxHeight = menu.height;
+                            }
+
+                            that._popupToBeOpened = menu;
+
+                            if (menu.inlineHeight) {
+                                $(menu.element).css({ height: menu.inlineHeight });
+                            } else {
+                                $(menu.element).css({ height: "" });
+                            }
                         }
+
+                        div.css({ maxHeight: options.scrollable ? "" : maxHeight, overflow: "visible", });
 
                         li.data(ZINDEX, li.css(ZINDEX));
                         var nextZindex = that.nextItemZIndex++;
@@ -1211,9 +1259,26 @@ export const __meta__ = {
 
         _initPopupScrolling: function(popup, isHorizontal, skipMouseEvents) {
             var that = this;
+            const popupElement = popup.element;
+            const scrollWrapper = popupElement.children('.k-menu-scroll-wrapper');
+            const menu = scrollWrapper.length ? $(scrollWrapper.children('ul')) : $(popupElement.children('ul'));
+            let childrenScrollSpace = that._getNeededSpaceForChildren(menu, isHorizontal);
+            let initScrolling = false;
 
-            if (that.options.scrollable && popup.element[0].scrollHeight > popup.element[0].offsetHeight) {
+            if (isHorizontal) {
+                initScrolling = (kendo._outerWidth(popupElement) < childrenScrollSpace);
+            } else {
+                initScrolling = (kendo._outerHeight(popupElement) < childrenScrollSpace);
+            }
+
+
+            if (that.options.scrollable && ((popupElement[0].scrollHeight > popupElement[0].offsetHeight) || initScrolling)) {
                 that._initPopupScrollButtons(popup, isHorizontal, skipMouseEvents);
+            } else {
+                if (scrollWrapper.length) {
+                    scrollWrapper.find(scrollButtonSelector).remove();
+                    menu.unwrap();
+                }
             }
         },
 
@@ -1239,25 +1304,64 @@ export const __meta__ = {
 
         _initPopupScrollButtons: function(popup, isHorizontal, skipMouseEvents) {
             let that = this,
-                scrollButtons = popup.wrapper.children(scrollButtonSelector),
-                animation = that.options.animation,
-                timeout = ((animation && animation.open && animation.open.duration) || 0) + DELAY,
-                element = that.options.name === "ContextMenu" ? that.element : popup.element;
-            setTimeout(function() {
+                scrollButtons = popup.wrapper.find(scrollButtonSelector),
+                element = popup.element,
+                scrollWrapper = element.children('.k-menu-scroll-wrapper'),
+                menu = element.children('ul');
+                that._denyOpening = true;
+                if (!menu.length && scrollWrapper.length) {
+                    menu = scrollWrapper.children('ul');
+                }
+
+                if (!isHorizontal) {
+                    menu.css({
+                        overflow: 'hidden',
+                    });
+                }
+                const wrapper = scrollWrapper.length > 0 ? scrollWrapper : menu.wrap(`<div class="k-menu-scroll-wrapper${!isHorizontal ? " k-menu-scroll-wrapper-vertical" : ""}"></div>`).parent();
                 if (!scrollButtons.length) {
                     let backwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "left" : "up" }));
                     let forwardBtn = $(that.templates.scrollButton({ direction: isHorizontal ? "right" : "down" }));
 
-                    scrollButtons = backwardBtn.add(forwardBtn).appendTo(popup.wrapper);
+                    scrollButtons = backwardBtn.add(forwardBtn);
+                    scrollButtons.css({
+                        width: !isHorizontal && '100%',
+                    });
 
-                    that._initScrolling(element, backwardBtn, forwardBtn, isHorizontal);
+                    backwardBtn.prependTo(wrapper);
+                    forwardBtn.appendTo(wrapper);
+
+                    that._initScrolling(menu, backwardBtn, forwardBtn, isHorizontal);
                     if (!skipMouseEvents) {
-                        scrollButtons.on(MOUSEENTER + NS, that._scrollButtonsMouseEnter.bind(that))
-                        .on(MOUSELEAVE + NS, that._scrollButtonsMouseLeave.bind(that));
+                        scrollButtons.on(MOUSEENTER + NS, function() {
+                            let overflowWrapper = that._overflowWrapper();
+                            $(getChildPopups(popup.element, overflowWrapper)).each(function(i, p) {
+                                let popupOpener = overflowWrapper.find(popupOpenerSelector(p.data(POPUP_ID_ATTR)));
+                                that.close(popupOpener);
+                            });
+                        })
+                        .on(MOUSELEAVE + NS, function(e) {
+                            setTimeout(function() {
+                                if ($.isEmptyObject(that._openedPopups) && !popup.element.find(e.relatedTarget).length) {
+                                    that._closeParentPopups(popup.element);
+                                }
+                            }, DELAY);
+                        });
+                    }
+                } else {
+                    if (scrollButtons.is(':hidden')) {
+                        scrollButtons.show();
                     }
                 }
-                that._toggleScrollButtons(element, scrollButtons.first(), scrollButtons.last(), isHorizontal);
-            }, timeout);
+
+                if (scrollButtons.length > 0 && !isHorizontal) {
+                    const initialInlineHeight = that._popupToBeOpened ? that._popupToBeOpened.inlineHeight : "";
+
+                    menu.css({ height: initialInlineHeight !== '' ? initialInlineHeight : `${kendo._outerHeight(popup.wrapper) - (kendo._outerHeight(scrollButtons) * 2)}px` });
+                }
+
+                that._toggleScrollButtons(menu, scrollButtons.first(), scrollButtons.last(), isHorizontal);
+                that._denyOpening = false;
         },
 
         _popupOpen: function(e) {
@@ -1281,14 +1385,14 @@ export const __meta__ = {
                 popupOffsetTop = isFixed ? 0 : Math.max(location.top, 0),
                 scrollTop = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollTop"),
                 bottomScrollbar = window.innerHeight - windowHeight,
-                maxHeight = windowHeight - kendo.getShadows(popupElement).bottom + bottomScrollbar,
+                maxHeight = windowHeight + bottomScrollbar,
                 canFit = maxHeight + scrollTop > popupOuterHeight + popupOffsetTop;
 
             if (!canFit) {
                 let popupViewportGap = windowHeight * 0.05, // 5% gap from the viewport.
-                    scrollButtonsHeight = $(scrollButtonSelector).outerHeight() * 2,
-                    height = Math.min(maxHeight, maxHeight - popupOffsetTop + scrollTop - popupViewportGap - scrollButtonsHeight);
-                popups.css({ overflow: "hidden", height: height + "px" });
+                height = Math.min(maxHeight, maxHeight - popupOffsetTop - popupViewportGap + scrollTop);
+                popups.css({ height: height + "px" });
+                popupElement.css({ overflow: 'hidden' });
             }
         },
 
@@ -1422,8 +1526,16 @@ export const __meta__ = {
 
         _wrapGroups: function() {
             var that = this;
+            const elements = that.element.find("li > ul");
 
-            that.element.find("li > ul")
+            that._groupElementsInitialSpace = Array.from(elements).map(element => ({
+                element,
+                width: kendo._outerWidth(element),
+                height: kendo._outerHeight(element),
+                inlineHeight: element.style && element.style.height ? element.style.height : ""
+            }));
+
+            elements
                 .filter(function() {
                     return !$(this).parent().hasClass("k-menu-popup");
                 })
@@ -1447,7 +1559,7 @@ export const __meta__ = {
                 items;
 
             element.removeClass("k-menu-horizontal k-menu-vertical");
-            element.addClass("k-widget k-reset k-header k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
+            element.addClass("k-reset k-header k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
 
             if (this.options.orientation === "vertical") {
                 element.attr("aria-orientation", "vertical");
@@ -1459,7 +1571,7 @@ export const __meta__ = {
                    .filter(function() {
                        return !kendo.support.matchesSelector.call(this, nonContentGroupsSelector);
                    })
-                   .addClass("k-group k-menu-group k-menu-group-md")
+                   .addClass("k-menu-group k-menu-group-md")
                    .attr(ROLE, "menu")
                    .parent("li")
                    .attr("aria-haspopup", "true")
@@ -1487,6 +1599,10 @@ export const __meta__ = {
             var pointerTouch = isPointerTouch(e);
             var isParentClosing = false;
 
+            if (that._denyOpening) {
+                return;
+            }
+
             if (popupId) {
                 that._openedPopups[popupId.toString()] = true;
             }
@@ -1495,7 +1611,7 @@ export const __meta__ = {
                 isParentClosing = !!that._closing.find(element).length;
             }
 
-            if (isParentClosing || (e.delegateTarget != element.parents(menuSelector)[0] && e.delegateTarget != element.parents(".k-menu-scroll-wrapper,.k-popups-wrapper")[0])) {
+            if (isParentClosing) {
                 return;
             }
 
@@ -1636,7 +1752,8 @@ export const __meta__ = {
             var that = this;
             var overflowWrapper = that._overflowWrapper();
             var popupId = current.data(POPUP_ID_ATTR);
-            var popupOpener = overflowWrapper.find(popupOpenerSelector(popupId));
+            const target = overflowWrapper ?? that.element;
+            var popupOpener = target.find(popupOpenerSelector(popupId));
             popupId = popupOpener.closest(popupSelector).data(POPUP_ID_ATTR);
             that.close(popupOpener, true);
             while (popupId && !that._openedPopups[popupId]) {
@@ -1672,7 +1789,7 @@ export const __meta__ = {
                 return;
             }
 
-            if ($(target).closest("span").hasClass('k-menu-expand-arrow-icon')) {
+            if ($(target).closest("span").parent().hasClass('k-menu-expand-arrow')) {
                 this._lastClickedElement = itemElement;
             }
 
@@ -1791,7 +1908,7 @@ export const __meta__ = {
 
         _documentClick: function(e) {
             var that = this;
-            var target = $(e.target).closest("span").hasClass('k-menu-expand-arrow-icon') ? that._lastClickedElement : e.target;
+            var target = $(e.target).closest("span").parent().hasClass('k-menu-expand-arrow') ? that._lastClickedElement : e.target;
 
             if (contains((that._overflowWrapper() || that.element)[0], target)) {
                 that._lastClickedElement = undefined;
@@ -2385,12 +2502,12 @@ export const __meta__ = {
                         "</li>";
                 }),
                 scrollButton: template(({ direction }) =>
-                    `<span class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button k-menu-scroll-button k-scroll-${direction}' unselectable='on'>` +
+                    `<span class='k-button k-button-md k-button-flat k-button-flat-base k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
                         kendo.ui.icon({ icon: `caret-alt-${direction}`, iconClass: "k-button-icon" }) +
                     "</span>"
                 ),
                 arrow: template(({ item, group }) =>
-                    `<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: group.horizontal ? "caret-alt-down" : "caret-alt-right", iconClass: "k-menu-expand-arrow-icon" })}</span>`),
+                    `<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: group.horizontal ? "caret-alt-down" : "caret-alt-right" })}</span>`),
                 sprite: template((data) => {
                     var spriteCssClass = fieldAccessor("spriteCssClass")(data);
                     if (spriteCssClass) {
@@ -2455,7 +2572,7 @@ export const __meta__ = {
             Menu.fn.init.call(that, element, options);
 
             that.element.attr(ROLE, "menu");
-
+            that._initialInlineHeight = that.element[0].style && that.element[0].style.height ? that.element[0].style.height : "";
             that._marker = kendo.guid().substring(0, 8);
 
             that.target = $(that.options.target);
@@ -2466,11 +2583,10 @@ export const __meta__ = {
 
         _initOverflow: function(options) {
             var that = this;
+            that._openedPopups = {};
             if (options.scrollable && !that._overflowWrapper()) {
-                that._openedPopups = {};
-
                 that._popupsWrapper = (that.element.parent().is(childAnimationContainerSelector) ? that.element.closes(animationContainerSelector) : that.element)
-                    .wrap("<div class='k-menu-scroll-wrapper " + options.orientation + "'></div>").parent();
+                    .wrap(`<div class="k-menu-scroll-wrapper${options.orientation === 'vertical' ? " k-menu-scroll-wrapper-vertical" : ""}"></div>`).parent();
 
                 if (that.options.orientation == "horizontal") {
                     removeSpacesBetweenItems(that.element);
@@ -2546,8 +2662,16 @@ export const __meta__ = {
 
         open: function(x, y) {
             var that = this;
-
+            const isHorizontal = that.options.orientation === 'horizontal';
             x = $(x)[0];
+
+            if (typeof x === "number") {
+                if (that._initialInlineHeight) {
+                    $(that.element).css({ height: that._initialInlineHeight });
+                } else {
+                    $(that.element).css({ height: "" });
+                }
+            }
 
             if (contains(that.element[0], $(x)[0]) || that._itemHasChildren($(x))) { // call parent open for children elements
                 Menu.fn.open.call(that, x);
@@ -2580,6 +2704,8 @@ export const __meta__ = {
                         that.popup.open();
                     }
 
+                    that._initPopupScrolling(that.popup, isHorizontal);
+                    that.popup.element.siblings(scrollButtonSelector).hide();
                     DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
                     DOCUMENT_ELEMENT
                         .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
@@ -2626,9 +2752,6 @@ export const __meta__ = {
                     display: "none",
                     position: "absolute"
                 });
-
-                that._initPopupScrollButtons(popup, isHorizontal, true);
-                popup.element.siblings(scrollButtonSelector).hide();
             }
         },
 
@@ -2784,7 +2907,8 @@ export const __meta__ = {
         _popup: function() {
             var that = this;
             var overflowWrapper = that._overflowWrapper();
-            var contextMenuElement = that.element.addClass("k-context-menu");
+            var contextMenuElement = that.element
+                .addClass("k-context-menu");
 
             that._triggerProxy = that._triggerEvent.bind(that);
 

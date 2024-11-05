@@ -47,30 +47,17 @@ describe("menu init", function() {
         kendo.destroy(menu.element);
     });
 
-it('.k-menu is placed on root element', function() {
-    assert.isOk(menu.element.is(".k-menu"));
-});
-
-it('.k-header is placed on root element', function() {
-    assert.isOk(menu.element.is(".k-header"));
-});
-
-it('groups are both k-group and k-menu-group', function() {
-    assert.isOk(menu.element.find("ul").is(".k-menu-group.k-group"));
-});
-
 it('div inside menu is assigned .k-content class', function() {
     assert.isOk(menu.element.find("div").is(".k-content"));
 });
 
 it('UL elements inside content don\'t get k-menu-group class', function() {
-    assert.isOk(!menu.element.find("div.k-content ul").is(".k-group"));
     assert.isOk(!menu.element.find("div.k-content ul").is(".k-menu-group"));
 });
 
 it('menu is inside scroll wrapper', function() {
     menu.setOptions({ scrollable: true, orientation: "horizontal" });
-    assert.isOk(menu.element.parent().is("div.k-menu-scroll-wrapper.horizontal"));
+    assert.isOk(menu.element.parent().is("div.k-menu-scroll-wrapper"));
 });
 
 

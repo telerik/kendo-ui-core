@@ -59,7 +59,6 @@ export const __meta__ = {
     var Popup = Widget.extend({
         init: function(element, options) {
             var that = this, parentPopup;
-
             options = options || {};
 
             if (options.isRtl) {
@@ -79,7 +78,7 @@ export const __meta__ = {
                 that.collisions.push(that.collisions[0]);
             }
 
-            parentPopup = $(that.options.anchor).closest(".k-popup,.k-group").filter(":not([class^=km-])"); // When popup is in another popup, make it relative.
+            parentPopup = $(that.options.anchor).closest(".k-popup,.k-group,.k-menu-group").filter(":not([class^=km-])"); // When popup is in another popup, make it relative.
 
             options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || document.body);
 
@@ -626,7 +625,7 @@ export const __meta__ = {
 
             var pos = getOffset(wrapper, POSITION, anchor[0] === wrapper.offsetParent()[0]),
                 offset = getOffset(wrapper),
-                anchorParent = anchor.offsetParent().parent(".k-animation-container,.k-popup,.k-group"); // If the parent is positioned, get the current positions
+                anchorParent = anchor.offsetParent().parent(".k-animation-container,.k-popup,.k-group,.k-menu-group"); // If the parent is positioned, get the current positions
 
             if (anchorParent.length) {
                 pos = getOffset(wrapper, POSITION, true);

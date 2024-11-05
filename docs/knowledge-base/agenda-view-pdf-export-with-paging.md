@@ -44,7 +44,7 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
     <!-- Load Pako ZLIB library to enable PDF compression -->
     <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     <div id="example">
-      <button id="export" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">Export to PDF</button>
+      <button id="export" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Export to PDF</button>
       <div id="scheduler"></div>
     </div>
     <script>
