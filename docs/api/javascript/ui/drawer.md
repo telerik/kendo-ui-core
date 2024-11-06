@@ -111,7 +111,7 @@ If set to `true` the use could navigate the widget using the keyboard navigation
         });
     </script>
 
-### template `String`
+### template `String | Function`
 
 Specifies the drawer's content.
 
@@ -196,7 +196,7 @@ Defines a specific width for the Kendo UI Drawer when in mini mode.
         });
     </script>
 
-### mini.template `String`
+### mini.template `String | Function`
 
 Defines a specific template for the Kendo UI Drawer when in mini mode.
 
@@ -213,10 +213,25 @@ Defines a specific template for the Kendo UI Drawer when in mini mode.
                 position: 'left',
                 mini: {
                     width: 45,
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-anchor'></span></li><li data-role='drawer-item'><span class='k-icon k-i-paint'></span></li></ul>`
+                    template: handler
                 }
             }).data("kendoDrawer");
         });
+
+        function handler() {
+            return `<ul>
+                <li data-role='drawer-item'>
+                    ${generateIcon('anchor')}
+                </li>
+                <li data-role='drawer-item'>
+                    ${generateIcon('info-circle')}
+                </li>
+            </ul>`
+        }
+
+        function generateIcon(iconName){
+            return kendo.ui.icon(iconName);
+        }
     </script>
 
 ### swipeToOpen `Boolean` *(default: true)*

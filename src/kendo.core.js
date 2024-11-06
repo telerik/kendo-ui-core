@@ -1142,7 +1142,8 @@ function pad(number, digits, end) {
                 number += "-";
             }
 
-            for (idx = start; idx < length; idx++) {
+            idx = start;
+            while (idx < length) {
                 ch = format.charAt(idx);
 
                 if (decimalIndex == -1) {
@@ -1173,6 +1174,7 @@ function pad(number, digits, end) {
                 } else if (ch === SHARP) {
                     number += replacement;
                 }
+                idx++;
             }
 
             if (hasGroup) {

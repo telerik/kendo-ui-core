@@ -15,15 +15,28 @@ Exposes a jQuery plug-in that will handle the widget creation and attach its cli
 
 #### Example
 
-    function TextBox(element, options) {
-    }
+    <input />
+    <script> 
+      var CustomTextBox = kendo.ui.Widget.extend({
+        options: {
+          name: "CustomTextBox"
+        },
+        value: function (value) {
+          if (value !== undefined) {
+            this.element.val(value);
+          } else {
+            return this.element.val();
+          }
+        }
+      });
 
-    kendo.ui.plugin(TextBox);
+      kendo.ui.plugin(CustomTextBox);
 
-    // initialize a new TextBox for each input, with the given options object.
-    $("input").kendoTextBox({ });
-    // get the TextBox object and call the value API method
-    $("input").data("kendoTextBox").value();
+      // initialize a new CustomTextBox for each input, with the given options object.
+      $("input").kendoCustomTextBox({ });
+      // get the CustomTextBox object and call the value API method
+      $("input").data("kendoCustomTextBox").value("some value");
+    </script>
 
 #### Parameters
 
@@ -292,7 +305,7 @@ If a `string` is provided, it will attempt to render a valid SVG icon from the p
 
     <script>
         var icon =  kendo.ui.icon({ 
-            type: (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`
+            type: (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`,
             icon: 'camera'
         });
         $('body').append(icon);

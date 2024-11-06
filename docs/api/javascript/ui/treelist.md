@@ -1723,7 +1723,7 @@ If set to `true`, the TreeList will select all child rows upon parent row select
     <script>
         $("#treelist").kendoTreeList({
           columns: [
-            { selectable: true, includeChildren: true }
+            { selectable: true, includeChildren: true },
             { field: "id", width: 250},
             { field: "name", width: 250 },
             { field: "age", width: 250}

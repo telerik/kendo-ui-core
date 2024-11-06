@@ -1477,11 +1477,11 @@ Optional. When passed, sets the node text to the specified string
 
     var treeview = $("#treeview").data("kendoTreeView");
 
-    var firstItem = treeview.element.find(".k-item:first");
+    var firstItem = treeview.element.find(".k-treeview-item:first");
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(treeview.text(firstItem)); // logs "foo"
 
-    treeview.text(".k-item:last", "qux"); // sets text to "qux"
+    treeview.text(".k-treeview-item:last", "qux"); // sets text to "qux"
     </script>
 
 ### toggle

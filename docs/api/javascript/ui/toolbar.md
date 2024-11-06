@@ -623,8 +623,8 @@ If set, the ToolBar will render an image with the specified URL in the button.
         var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
           items: [
-              { type: "button", text: "foo", imageUrl: "/sports/snowboarding.png" },
-              { type: "button", text: "bar", imageUrl: "/sports/snowboarding.png" }
+            { type: "button", text: "foo", imageUrl: baseUrl + "/sports/snowboarding.png" },
+            { type: "button", text: "bar", imageUrl: baseUrl + "/sports/snowboarding.png" }
           ]
         });
     </script>
@@ -813,8 +813,8 @@ If set, the ToolBar will render an image with the specified URL in the menu butt
                 type: "splitButton",
                 text: "splitButton",
                 menuButtons: [
-                    { id: "foo", text: "Foo", imageUrl: "/sports/snowboarding.png" },
-                    { id: "bar", text: "Bar", imageUrl: "/sports/snowboarding.png" }
+                    { id: "foo", text: "Foo", imageUrl:baseUrl + "/sports/snowboarding.png" },
+                    { id: "bar", text: "Bar", imageUrl:baseUrl + "/sports/snowboarding.png" }
                 ]
             }
             ]

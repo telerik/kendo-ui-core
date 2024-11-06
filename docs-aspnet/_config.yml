@@ -722,7 +722,7 @@ themesCdnVersion: "9.0.0"
 ## The MVC Core version used
 mvcCoreVersion: "2024.3.1015"
 
-ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
+productCode: UIASPCORE
 
 ## Product
 product_long: "Progress Telerik UI for ASP.NET Core"

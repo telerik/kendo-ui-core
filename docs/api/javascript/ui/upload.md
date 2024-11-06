@@ -575,7 +575,7 @@ Sets the text of the validation messages for invalid files when the `batch` prop
         $("#photos").kendoUpload({
             async: {
                 saveUrl: "http://my-app.localhost/save",
-                removeUrl: "http://my-app.localhost/remove"
+                removeUrl: "http://my-app.localhost/remove",
                 batch:true
             },
             localization: {

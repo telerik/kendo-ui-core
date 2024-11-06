@@ -9,40 +9,44 @@ position: 2
 
 # Keyboard Navigation
 
-The keyboard navigation of the MediaPlayer is always available.
+The keyboard navigation of the MediaPlayer is disabled by default.
 
-To enable it, use the `Navigatable(true)` configuration. For a complete example, refer to the [demo on using the keyboard navigation of the MediaPlayer](https://demos.telerik.com/{{ site.platform }}/mediaplayer/keyboard-navigation).
-
-The MediaPlayer supports the following keyboard shortcuts:
-
-|Shortcut |Description
-|:---     |:---
-|`Enter`  |Opens the video in the full-screen mode.
-|`Esc`    |Exits the full-screen mode.
-|`Space`  |Toggles the play and pause state.
-|`M`      |Toggles the mute and unmute state.
+To enable it, use the [`Navigatable(true)`](/api/kendo.mvc.ui.fluent/mediaplayerbuilder#navigatablesystemboolean) configuration. 
 
 ```HtmlHelper
     @(Html.Kendo().MediaPlayer()
-        .Name("mediaplayer")
+        .Name("mediaPlayer")
         .Navigatable(true)
-        .Media(m => m
-            .Title("Our Company Culture - Lesson 1")
-            .Source("Video/video1.mp4")
-        )
-        .HtmlAttributes(new { style = "height:360px; width:640px" })
+        /* Other configuration. */
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-mediaplayer 
-        name="mediaplayer"
-        navigatable="true"
-        style = "height:360px; width:640px">
-        <media title="Our Company Culture - Lesson 1" source="Video/video1.mp4" />
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-mediaplayer name="mediaPlayer" navigatable="true">
+        <!-- Other configuration. -->
     </kendo-mediaplayer>
-```
+``` 
 {% endif %}
+
+For a complete example, refer to the [demo on using the keyboard navigation of the MediaPlayer](https://demos.telerik.com/{{ site.platform }}/mediaplayer/keyboard-navigation).
+
+The MediaPlayer supports the following keyboard shortcuts:
+
+|Shortcut       |Description
+|:---           |:---
+|`Enter`        |Opens the video in the full-screen mode.
+|`Esc`          |Exits the full-screen mode.
+|`Space`        |Toggles the play and pause state.
+|`M`            |Toggles the mute and unmute state.
+|`Right Arrow`  |Seeks forward.
+|`Left Arrow`   |Seels backward.
+|`Up Arrow`     | Increases the volume.
+|`Down Arrow`   | Decreases the volume.
+|`Ctrl`  + `1`  | Decreases the video quality.
+|`Ctrl`  + `2`  | Increases the video quality.
+
 
 ## See Also
 

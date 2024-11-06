@@ -140,7 +140,7 @@ getting-started-mvc/*]
 ## The application virtual path
 baseurl: /aspnet-mvc
 
-ff-sheet-id: 17DDhsKyPUgO6GlvL8WEfCCN6tikyInp4qpRGCvvs794
+productCode: KENDOUIMVC
 
 ## Product
 product_long: "Progress Telerik UI for ASP.NET MVC"
@@ -599,7 +599,7 @@ defaults:
         path: "html-helpers/navigation/splitbutton"
     values:
         title_prefix: "ASP.NET MVC SplitButton Component"
--            
+-
     scope:
         path: "html-helpers/navigation/stepper"
     values:
@@ -689,7 +689,7 @@ defaults:
         path: "html-helpers/scheduling/scheduler"
     values:
         title_prefix: "ASP.NET MVC Scheduler Component"
--   
+-
     scope:
         path: "html-helpers/template"
     values:
