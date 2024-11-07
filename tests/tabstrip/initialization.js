@@ -24,10 +24,10 @@
             assert.equal(tabstrip.wrapper[0], dom.parent().parent()[0]);
         });
 
-        it("the wrapper has k-widget and k-tabstrip css classes", function() {
+        it("the wrapper has k-tabstrip css class", function() {
             tabstrip = new kendo.ui.TabStrip(dom);
 
-            assert.isOk(tabstrip.wrapper.is(".k-widget,.k-tabstrip"), "CSS classes are applied");
+            assert.isOk(tabstrip.wrapper.is(".k-tabstrip"), "CSS classes are applied");
         });
 
         it("navigatable should attach the keydown handler only if true", function() {

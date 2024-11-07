@@ -551,7 +551,7 @@ import "./kendo.icons.js";
                 });
 
                 if (!wrapper[0].style.zIndex || originalZIndex < zIndex) {
-                    wrapper.css(ZINDEX, zIndex + 2);
+                    wrapper.css(ZINDEX, zIndex + 1);
                 }
 
                 wrapper = null;

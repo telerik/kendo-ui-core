@@ -40,7 +40,6 @@ export const __meta__ = {
         READONLY = "readonly",
         FOCUSED = "k-focus",
         SELECTED = "k-selected",
-        HIDDENCLASS = "k-hidden",
         STATEDISABLED = "k-disabled",
         AUTOCOMPLETEVALUE = "off",
         HOVER = "k-hover",
@@ -358,11 +357,12 @@ export const __meta__ = {
         },
 
         search: function(word) {
-            var that = this,
+            let that = this,
             options = that.options,
             ignoreCase = options.ignoreCase,
             separator = that._separator(),
             length,
+            lowerCaseValue,
             accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering,
             element = that.filterInput && activeElement() === that.filterInput[0] ? that.filterInput : that.element;
 
@@ -383,8 +383,10 @@ export const __meta__ = {
                     this.listView.value([]);
                 });
 
+                lowerCaseValue = accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase();
+
                 that._filterSource({
-                    value: ignoreCase ? (accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) : word,
+                    value: ignoreCase ? lowerCaseValue : word,
                     operator: options.filter,
                     field: options.dataTextField,
                     ignoreCase: ignoreCase
@@ -771,10 +773,8 @@ export const __meta__ = {
                 let index = this.listView._view.length - 1;
                 this.listView.focus(index);
                 this.suggest(this.listView._view[index].item);
-            } else if (this.options.suggest && action == "focusFirst") {
-                caret(this.element)[0];
-            } else if (this.options.suggest && action == "focusLast") {
-                caret(this.element)[this.element.val().length - 1];
+            } else if (this.options.suggest && (action == "focusFirst" || action == "focusLast")) {
+               caret(this.element);
             } else if (this.options.suggest && this.listView.focus() != null) {
                 this.suggest(this.listView.focus());
             }

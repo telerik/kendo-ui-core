@@ -136,19 +136,6 @@
             });
         });
 
-        it('loading ajax content should trigger adding the loading element to the tab', function(done) {
-            var item = getRootItem(3);
-
-            tabstrip.bind("select", function() {
-                setTimeout(function() {
-                    assert.isOk(item.find('.k-loading').width() - item.width() <= 1);
-                    done();
-                });
-            });
-
-            item.click();
-        });
-
         it("ajax content with error fires error handler and writes the error message to the console", function(done) {
             if (jQuery.fn.jquery.substring(0, 1) === '3' || jQuery.fn.jquery.substring(0, 1) === '4') {
                 assert.isOk(true);

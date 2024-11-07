@@ -215,7 +215,7 @@
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div id="customId">foo content</div><div>bar content</div></div>')
                 .kendoTabStrip();
 
-            assert.equal(div.find(".k-content").attr("id"), "customId");
+            assert.equal(div.find(".k-tabstrip-content").attr("id"), "customId");
         });
 
         it("TabStrip does not replace the id attributes of Tab items", function() {

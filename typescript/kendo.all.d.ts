@@ -17364,6 +17364,7 @@ declare namespace kendo.dataviz.ui {
         margin?: number | ChartXAxisItemLabelsMargin | undefined;
         mirror?: boolean | undefined;
         padding?: number | ChartXAxisItemLabelsPadding | undefined;
+        position?: string | undefined;
         rotation?: string | number | ChartXAxisItemLabelsRotation | undefined;
         skip?: number | undefined;
         step?: number | undefined;

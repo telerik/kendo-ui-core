@@ -7,13 +7,13 @@ component: chat
 
 # kendo.ui.Chat
 
-Represents the Kendo UI Chat widget. Inherits from [Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Chat component. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 
 ### messages `Object`
 
-Allows localization of the strings that are used in the widget.
+Allows localization of the strings that are used in the component.
 
 #### Example
 
@@ -26,9 +26,50 @@ Allows localization of the strings that are used in the widget.
     }).data("kendoChat");
     </script>
 
+### messages.and `String` *(default: " and ")*
+
+The localization for the ` and ` message that is displayed when several people are typing in the Chat.
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            and: " custom and "
+          }
+    }).data("kendoChat");
+    </script>
+
+### messages.areTyping `String` *(default: " are typing.")*
+
+The localization for the ` are typing.` message that is displayed when several people are typing in the Chat.
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            areTyping: " custom are typing."
+          }
+    }).data("kendoChat");
+    </script>
+
+### messages.isTyping `String` *(default: "User is typing.")*
+
+The localization for the ` is typing.` message that is displayed when someone is typing in the Chat.
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            isTyping: " custom typing message."
+          }
+    }).data("kendoChat");
+    </script>
+
+#### Example
+
 ### messages.placeholder `String` *(default: "Type a message...")*
 
-The hint that is displayed in the input textbox of the widget.
+The hint that is displayed in the input textbox of the component.
 
 #### Example
 

@@ -175,6 +175,8 @@ export const __meta__ = {
                 this._toggleOverflowAnchor();
             }
 
+            this._applyCssClasses();
+
             kendo.notify(this);
         },
 
@@ -194,7 +196,8 @@ export const __meta__ = {
             resizable: true,
             navigateOnTab: false,
             evaluateTemplates: false,
-            size: "medium"
+            size: "medium",
+            fillMode: "solid"
         },
 
         destroy: function() {
@@ -1567,13 +1570,15 @@ export const __meta__ = {
         },
 
         _processOptions: function(options) {
-            var template = options.template,
+            let that = this,
+                template = options.template,
                 overflowTemplate = options.overflowTemplate,
                 uid = kendo.guid(),
                 groupName;
 
             $.extend(options, {
                 uid: uid,
+                fillMode: options.fillMode ? options.fillMode : that.options.fillMode,
                 rootUid: this.uid
             });
 

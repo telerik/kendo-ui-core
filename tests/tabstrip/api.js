@@ -32,7 +32,7 @@
             jasmine.clock().install();
 
             Mocha.fixture.append(
-                ' <div class="k-widget k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
+                ' <div class="k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
                 '    <ul class="k-reset k-tabstrip-items">' +
                 '        <li class="k-item k-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
                 '        <li class="k-item"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
@@ -103,14 +103,14 @@
                 '        </ul>' +
                 '    </div>' +
                 '</div>' +
-                '<div id="parent-tabstrip" class="k-widget k-tabstrip k-header" style="visibility: hidden; position: absolute;">' +
+                '<div id="parent-tabstrip" class="k-tabstrip k-header" style="visibility: hidden; position: absolute;">' +
                 '    <ul class="k-reset k-tabstrip-items">' +
                 '        <li class="k-item">Tab 1</li>' +
                 '        <li class="k-item k-active">Tab 2</li>' +
                 '    </ul>' +
                 '    <div id="parent-tabstrip-1" class="k-content">foo</div>' +
                 '    <div id="parent-tabstrip-2" class="k-content" style="display: block;">' +
-                '        <div id="child-tabstrip" class="k-widget k-tabstrip k-header">' +
+                '        <div id="child-tabstrip" class="k-tabstrip k-header">' +
                 '            <ul class="k-reset k-tabstrip-items">' +
                 '                <li class="k-item">foo</li>' +
                 '                <li class="k-item k-active">bar</li>' +
@@ -128,6 +128,7 @@
 
             $.mockjax({
                 url: "index1.html",
+                responseTime: 0,
                 response: function() {
                     this.responseText = 'Content 1';
                 }
@@ -135,6 +136,7 @@
 
             $.mockjax({
                 url: "index2.html",
+                responseTime: 0,
                 response: function() {
                     this.responseText = 'Content 2';
                 }
@@ -142,6 +144,7 @@
 
             $.mockjax({
                 url: "index3.html",
+                responseTime: 0,
                 response: function() {
                     this.responseText = 'Content 3';
                 }
@@ -266,7 +269,7 @@
         it('contentElement should return content of seventh tab', function() {
             var tabstrip = getTabStrip();
 
-            var expectedContent = $(tabstrip.element).find('> .k-content').eq(6); //second content under Tab-7
+            var expectedContent = $(tabstrip.element).find('> .k-tabstrip-content').eq(6); //second content under Tab-7
 
             assert.equal($(tabstrip.contentElement(6)).index(), expectedContent.index());
         });
@@ -312,7 +315,7 @@
         });
 
         it('animated text-only content is opened on load', function() {
-            assert.equal($('#tabstrip .k-content').css('opacity'), '1');
+            assert.equal($('#tabstrip .k-tabstrip-content').css('opacity'), '1');
         });
 
         it('remove method removes several tabs and their content elements', function() {
@@ -346,8 +349,8 @@
             assert.equal(tabStrip.wrapper.find(".k-item").length, 2);
             assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
             assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
-            assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
-            assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
 
             try {
                 tabStrip.insertAfter({ text: "new", content: "inserted" }, "li:last-child");
@@ -357,9 +360,9 @@
                 assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
                 assert.equal(tabStrip.wrapper.find(".k-item")[2].id, "tabstrip-tab-3");
 
-                assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
-                assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
-                assert.equal(tabStrip.wrapper.find(".k-content")[2].id, "tabstrip-3");
+                assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
+                assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
+                assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[2].id, "tabstrip-3");
             } finally {
                 tabStrip.destroy();
             }
@@ -433,8 +436,8 @@
             assert.equal(tabStrip.wrapper.find(".k-item").length, 2);
             assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
             assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
-            assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
-            assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
 
             try {
                 tabStrip.insertBefore({ text: "new", content: "inserted" }, "li:first-child");
@@ -444,9 +447,9 @@
                 assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
                 assert.equal(tabStrip.wrapper.find(".k-item")[2].id, "tabstrip-tab-3");
 
-                assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
-                assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
-                assert.equal(tabStrip.wrapper.find(".k-content")[2].id, "tabstrip-3");
+                assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
+                assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
+                assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[2].id, "tabstrip-3");
             } finally {
                 tabStrip.destroy();
             }
