@@ -554,7 +554,11 @@ export const __meta__ = {
         },
 
         shouldSerialize: function(field, serializeFunctions) {
-            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && ((serializeFunctions && serializeFunctions[field]) || typeof this[field] !== FUNCTION) && field !== "uid";
+            // This way we cover both if the serializeFunctions parameter is an object OR a boolean.
+            if (typeof serializeFunctions === "object") {
+                serializeFunctions = (serializeFunctions && serializeFunctions[field]);
+            }
+            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && (serializeFunctions || typeof this[field] !== FUNCTION) && field !== "uid";
         },
 
         forEach: function(f) {

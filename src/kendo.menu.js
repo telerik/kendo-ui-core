@@ -574,7 +574,7 @@ export const __meta__ = {
             element.on("keydown" + NS, that._keydown.bind(that))
                    .on("focus" + NS, that._focus.bind(that))
                    .on("focus" + NS, ".k-content", that._focus.bind(that))
-                   .on("blur" + NS, that._removeHoverItem.bind(that))
+                   .on("blur" + NS, that._removeFocusItem.bind(that))
                    .on("blur" + NS, "[tabindex]", that._checkActiveProxy);
 
             if (overflowWrapper) {
@@ -1489,8 +1489,6 @@ export const __meta__ = {
             if (!target.parents("li." + DISABLEDSTATE).length) {
                 target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "pointerover" || e.type == TOUCHSTART);
             }
-
-            this._removeHoverItem();
         },
 
         _preventClose: function() {
@@ -1501,8 +1499,8 @@ export const __meta__ = {
 
         _checkActiveElement: function(e) {
             var that = this,
-                hoverItem = $(e ? e.currentTarget : this._hoverItem()),
-                target = that._findRootParent(hoverItem)[0];
+                focusedItem = $(e ? e.currentTarget : this._focusItem()),
+                target = that._findRootParent(focusedItem)[0];
 
             if (!this._closurePrevented) {
                 setTimeout(function() {
@@ -1515,12 +1513,11 @@ export const __meta__ = {
             this._closurePrevented = false;
         },
 
-        _removeHoverItem: function() {
-            var oldHoverItem = this._hoverItem();
-
-            if (oldHoverItem && oldHoverItem.hasClass(FOCUSEDSTATE)) {
-                oldHoverItem.removeClass(FOCUSEDSTATE);
-                this._oldHoverItem = null;
+        _removeFocusItem: function() {
+            var oldFocusedItem = this._focusItem();
+            if (oldFocusedItem && oldFocusedItem.hasClass(FOCUSEDSTATE)) {
+                oldFocusedItem.removeClass(FOCUSEDSTATE);
+                this._oldFocusItem = null;
             }
         },
 
@@ -1643,6 +1640,7 @@ export const __meta__ = {
             var that = this;
             var element = $(e.currentTarget);
             // needs to close subMenuItems
+            that._mousedownedElement = element;
             if (that.options.openOnClick.subMenuItems && !that._isRootItem(element) || touch) {
                 element.siblings().each(function(_, sibling) {
                     that.close(sibling, true);
@@ -1824,14 +1822,11 @@ export const __meta__ = {
 
             if (options.closeOnClick && (!isLink || isLocalLink) && (!childGroup.length || shouldCloseTheRootItem)) {
                 element.removeClass(HOVERSTATE).css("height"); // Force refresh for Chrome
-                that._oldHoverItem = that._findRootParent(element);
+                that._oldFocusItem = that._findRootParent(element);
                 var item = that._parentsUntil(link, that.element, allItemsSelector);
                 that._forceClose = !!overflowWrapper;
                 that.close(item);
                 that.clicked = false;
-                if ("MSPointerUp".indexOf(e.type) != -1) {
-                    e.preventDefault();
-                }
                 return;
             }
 
@@ -1921,8 +1916,13 @@ export const __meta__ = {
         _focus: function(e) {
             var that = this,
                 target = e.target,
-                hoverItem = that._hoverItem(),
+                focusItem = that._focusItem(),
                 active = activeElement();
+
+            if (that._mousedownedElement) {
+                that._mousedownedElement = null;
+                return;
+            }
 
             if (target != that.wrapper[0] && !$(target).is(":kendoFocusable")) {
                 e.stopPropagation();
@@ -1930,12 +1930,11 @@ export const __meta__ = {
                 that.wrapper.trigger("focus");
                 return;
             }
-
             if (active === e.currentTarget) {
-                if (hoverItem.length) {
-                    that._moveHover([], hoverItem);
-                } else if (!that._oldHoverItem) {
-                    that._moveHover([], that.wrapper.children().first());
+                if (focusItem.length) {
+                    that._moveFocus([], focusItem);
+                } else if (!that._oldFocusItem) {
+                    that._moveFocus([], that.wrapper.children().first());
                 }
             }
         },
@@ -1943,7 +1942,7 @@ export const __meta__ = {
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                hoverItem = that._oldHoverItem,
+                focusItem = that._oldFocusItem,
                 target,
                 belongsToVertical,
                 hasChildren,
@@ -1953,46 +1952,46 @@ export const __meta__ = {
                 return;
             }
 
-            if (!hoverItem) {
-                hoverItem = that._oldHoverItem = that._hoverItem();
+            if (!focusItem) {
+                focusItem = that._oldFocusItem = that._focusItem();
             }
 
-            belongsToVertical = that._itemBelongsToVertival(hoverItem);
-            hasChildren = that._itemHasChildren(hoverItem);
+            belongsToVertical = that._itemBelongsToVertival(focusItem);
+            hasChildren = that._itemHasChildren(focusItem);
             that._keyTriggered = true;
 
             if (key == keys.RIGHT) {
-                target = that[isRtl ? "_itemLeft" : "_itemRight"](hoverItem, belongsToVertical, hasChildren);
+                target = that[isRtl ? "_itemLeft" : "_itemRight"](focusItem, belongsToVertical, hasChildren);
             } else if (key == keys.LEFT) {
-                target = that[isRtl ? "_itemRight" : "_itemLeft"](hoverItem, belongsToVertical, hasChildren);
+                target = that[isRtl ? "_itemRight" : "_itemLeft"](focusItem, belongsToVertical, hasChildren);
             } else if (key == keys.DOWN) {
-                target = that._itemDown(hoverItem, belongsToVertical, hasChildren);
+                target = that._itemDown(focusItem, belongsToVertical, hasChildren);
             } else if (key == keys.UP) {
-                target = that._itemUp(hoverItem, belongsToVertical, hasChildren);
+                target = that._itemUp(focusItem, belongsToVertical, hasChildren);
             } else if (key == keys.HOME) {
-                that._moveHover(hoverItem, hoverItem.parent().children(":visible").first());
+                that._moveFocus(focusItem, focusItem.parent().children(":visible").first());
                 e.preventDefault();
             } else if (key == keys.END) {
-                that._moveHover(hoverItem, hoverItem.parent().children(":visible").last());
+                that._moveFocus(focusItem, focusItem.parent().children(":visible").last());
                 e.preventDefault();
             } else if (key == keys.ESC) {
-                target = that._itemEsc(hoverItem, belongsToVertical);
+                target = that._itemEsc(focusItem, belongsToVertical);
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
-                target = hoverItem.children(".k-link");
+                target = focusItem.children(".k-link");
                 if (target.length > 0) {
                     that._click({ target: target[0], preventDefault: function() {}, enterKey: true });
-                    if (hasChildren && !hoverItem.hasClass(DISABLEDSTATE)) {
-                        that.open(hoverItem);
-                        that._moveHover(hoverItem, that._childPopupElement(hoverItem).children().find("li").first());
-                    } else if (hoverItem.is("li") && hoverItem.attr("role") === "menuitemcheckbox") {
-                        hoverItem.find(".k-checkbox").attr("checked", true);
+                    if (hasChildren && !focusItem.hasClass(DISABLEDSTATE)) {
+                        that.open(focusItem);
+                        that._moveFocus(focusItem, that._childPopupElement(focusItem).children().find("li").first());
+                    } else if (focusItem.is("li") && focusItem.attr("role") === "menuitemcheckbox") {
+                        focusItem.find(".k-checkbox").attr("checked", true);
                     } else {
-                        that._moveHoverToRoot(hoverItem, that._findRootParent(hoverItem));
+                        that._moveFocusToRoot(focusItem, that._findRootParent(focusItem));
                     }
                 }
             } else if (key == keys.TAB) {
-                target = that._findRootParent(hoverItem);
-                that._moveHover(hoverItem, target);
+                target = that._findRootParent(focusItem);
+                that._moveFocus(focusItem, target);
                 that._checkActiveElement();
                 return;
             }
@@ -2003,8 +2002,8 @@ export const __meta__ = {
             }
         },
 
-        _hoverItem: function() {
-            return this.wrapper.find(".k-item.k-hover,.k-item.k-focus").filter(":visible");
+        _focusItem: function() {
+            return this.wrapper.find(".k-item.k-focus").filter(":visible");
         },
 
         _itemBelongsToVertival: function(item) {
@@ -2024,7 +2023,7 @@ export const __meta__ = {
                 (!!item.data(POPUP_OPENER_ATTR) && !!this._overflowWrapper().children(popupGroupSelector(item.data(POPUP_OPENER_ATTR))));
         },
 
-        _moveHover: function(item, nextItem) {
+        _moveFocus: function(item, nextItem) {
             var that = this,
                 id = that._ariaId;
 
@@ -2037,8 +2036,9 @@ export const __meta__ = {
                     id = nextItem[0].id;
                 }
 
+                that.wrapper.find("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
                 nextItem.addClass(FOCUSEDSTATE);
-                that._oldHoverItem = nextItem;
+                that._oldFocusItem = nextItem;
 
                 if (id) {
                     that.element.removeAttr("aria-activedescendant");
@@ -2050,8 +2050,8 @@ export const __meta__ = {
             }
         },
 
-        _moveHoverToRoot: function(item, nextItem) {
-            this._moveHover(item, nextItem);
+        _moveFocusToRoot: function(item, nextItem) {
+            this._moveFocus(item, nextItem);
         },
 
         _findRootParent: function(item) {
@@ -2098,7 +2098,7 @@ export const __meta__ = {
                 nextItem = [];
             }
 
-            that._moveHover(item, nextItem);
+            that._moveFocus(item, nextItem);
             return nextItem;
         },
 
@@ -2129,7 +2129,7 @@ export const __meta__ = {
                 nextItem = that.wrapper.children(".k-item").last();
             }
 
-            that._moveHover(item, nextItem);
+            that._moveFocus(item, nextItem);
             return nextItem;
         },
 
@@ -2154,7 +2154,7 @@ export const __meta__ = {
                 nextItem = that.wrapper.children(".k-item").first();
             }
 
-            that._moveHover(item, nextItem);
+            that._moveFocus(item, nextItem);
             return nextItem;
         },
 
@@ -2174,7 +2174,7 @@ export const __meta__ = {
                 nextItem = that.wrapper.children(".k-item").last();
             }
 
-            that._moveHover(item, nextItem);
+            that._moveFocus(item, nextItem);
             return nextItem;
         },
 
@@ -2224,7 +2224,7 @@ export const __meta__ = {
                 }
 
                 that.close(nextItem);
-                that._moveHover(item, nextItem);
+                that._moveFocus(item, nextItem);
             }
 
             return nextItem;
@@ -2254,7 +2254,7 @@ export const __meta__ = {
             }
 
             setTimeout(function() {
-                that._moveHover([], item);
+                that._moveFocus([], item);
                 if (item.children(".k-content")[0]) {
                     item.parent().closest(".k-item").removeClass(FOCUSEDSTATE);
                 }
@@ -2783,7 +2783,7 @@ export const __meta__ = {
             } else {
                 if (that.popup.visible()) {
                     if (that._triggerEvent({ item: that.element, type: CLOSE }) === false) {
-                        that._removeHoverItem();
+                        that._removeFocusItem();
                         that.element.find("#" + that._ariaId).removeAttr("id");
                         that.popup.close();
                         DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS + that._marker, that._closeProxy);
@@ -2938,18 +2938,18 @@ export const __meta__ = {
             that._targetChild = contains(that.target[0], that.popup.element[0]);
         },
 
-        _moveHoverToRoot: function(item, nextItem) {
-            this._moveHover(item, nextItem);
+        _moveFocusToRoot: function(item, nextItem) {
+            this._moveFocus(item, nextItem);
             this.close();
         },
 
         _focus: function(e) {
-            var hoverItem = this._oldHoverItem = this._hoverItem() || [];
+            var focusItem = this._oldFocusItem = this._focusItem() || [];
 
             Menu.fn._focus.call(this, e);
 
             if (activeElement() === e.currentTarget) {
-                this._moveHover(hoverItem, this.wrapper.children().filter(":visible").not(".k-separator").first());
+                this._moveFocus(focusItem, this.wrapper.children().filter(":visible").not(".k-separator").first());
             }
         }
     });

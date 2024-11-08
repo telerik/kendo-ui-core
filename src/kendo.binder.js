@@ -1032,17 +1032,19 @@ export const __meta__ = {
 
                 handler = binding.get();
 
-                this.handlers[key] = function(e) {
-                    e.data = binding.source;
+                if (handler) {
+                    this.handlers[key] = function(e) {
+                        e.data = binding.source;
 
-                    handler(e);
+                        handler(e);
 
-                    if (e.data === binding.source) {
-                        delete e.data;
-                    }
-                };
+                        if (e.data === binding.source) {
+                            delete e.data;
+                        }
+                    };
 
-                this.widget.bind(key, this.handlers[key]);
+                    this.widget.bind(key, this.handlers[key]);
+                }
             },
 
             destroy: function() {
@@ -1858,8 +1860,8 @@ export const __meta__ = {
         }
     });
 
-    function bindingTargetForRole(element, roles) {
-        var widget = kendo.initWidget(element, {}, roles);
+    function bindingTargetForRole(element, roles, source) {
+        var widget = kendo.initWidget(element, {}, roles, source);
 
         if (widget) {
             return new WidgetBindingTarget(widget);
@@ -1931,7 +1933,7 @@ export const __meta__ = {
         }
 
         if (role) {
-            target = bindingTargetForRole(element, roles);
+            target = bindingTargetForRole(element, roles, source);
         }
 
         if (bind) {

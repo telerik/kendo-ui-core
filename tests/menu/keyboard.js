@@ -122,17 +122,15 @@ it('End moves focus from to last item', function() {
 });
 
 it('Mouse events reset the keyboard navigation active item', function() {
-    menu.wrapper.focus().press(keys.RIGHT);
+    let firstItem = menu.wrapper.children(".k-item").first(),
+    secondItem = firstItem.next();
 
-    var firstItem = menu.wrapper.children(".k-item").first(),
-        secondItem = firstItem.next();
-
-    firstItem.children(".k-link").mouseenter();
-
+    firstItem.children(".k-link").click();
+    
     assert.isOk(!secondItem.hasClass(FOCUSEDSTATE));
-
-    menu.wrapper.press(keys.RIGHT);
-
+    
+    menu.wrapper.focus().press(keys.RIGHT);
+    
     assert.isOk(secondItem.hasClass(FOCUSEDSTATE));
 });
 

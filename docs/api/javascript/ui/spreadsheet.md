@@ -69,7 +69,7 @@ If set to `true`, sets the cell font to underline.
 
 If set to `true`, sets the cell wrap.
 
-### headerHeight `Number` *(default: 20)*
+### headerHeight `Number` *(default: 30)*
 
 The height of the header row in pixels.
 
@@ -735,7 +735,7 @@ Indicates whether to center the content vertically. For more information, refer 
         spreadsheet.saveAsPDF();
     </script>
 
-### rowHeight `Number` *(default: 20)*
+### rowHeight `Number` *(default: 30)*
 
 The default row height in pixels.
 
@@ -1038,7 +1038,7 @@ The format of the cell text. For more information, refer to the article on [crea
     <script>
         $("#spreadsheet").kendoSpreadsheet({
             sheets: [{
-                name: "Order",               
+                name: "Order",
                 rows: [{
                     cells: [{
                         value: 12.39, format: "$#,##0.00"
@@ -1054,7 +1054,7 @@ The cell formula without the leading equals sign, for example, `A1 * 10`.
 
 ### sheets.rows.cells.html `Boolean`
 
-If set to `true`, renders the cell value as HTML. 
+If set to `true`, renders the cell value as HTML.
 It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
@@ -1392,14 +1392,67 @@ Apart from the built-in tools, the Spreadsheet Home, Insert and Data ToolBars fu
         });
     </script>
 
+### toolbar.file `Boolean|Array` *(default: true)*
+
+A Boolean value which indicates if the **File** tab or a collection of tools that will be shown in the **Home** tab will be displayed.
+
+The following list indicates the available tools.
+
+* `open`
+* `exportAs`
+
+#### Example - customizing the File tab
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                file: ["exportAs"]
+            }
+        });
+    </script>
+
+#### Example - disabling the File tab
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                file: false
+            }
+        });
+    </script>
+
+#### Example - showing a custom tool
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                file: [
+                    // for all available options, see the toolbar items configuration
+                    // https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
+                    {
+                        type: "button",
+                        text: "Custom",
+                        showText: "both",
+                        icon: "k-icon k-i-cog",
+                        click: function() {
+                            window.alert("custom tool");
+                        }
+                    }
+                ]
+            }
+        });
+    </script>
+
 ### toolbar.home `Boolean|Array` *(default: true)*
 
 A Boolean value which indicates if the **Home** tab or a collection of tools that will be shown in the **Home** tab will be displayed.
 
 The following list indicates the available tools. The tools which are part of a tool group are defined as an array. For example `["bold", "italic", "underline"]`.
 
-* `open`
-* `exportAs`
+* [`undo`, `redo`]
 * [`cut`, `copy`, `paste`]
 * [`bold`, `italic`, `underline`]
 * `backgroundColor`, `textColor`
@@ -1407,11 +1460,6 @@ The following list indicates the available tools. The tools which are part of a 
 * `fontSize`, `fontFamily`
 * `alignment`
 * `textWrap`
-* [`formatDecreaseDecimal`, `formatIncreaseDecimal`]
-* `format`
-* `merge`
-* `freeze`
-* `filter`
 
 #### Example - customizing the Home tab
 
@@ -1464,6 +1512,9 @@ A Boolean value which indicates if the **Insert** tab or a collection of tools t
 
 The following list indicates the available tools. The tools which are part of a tool group are defined as an array. For example `["deleteColumn", "deleteRow"]`.
 
+* `insertComment`
+* `hyperlink`
+* `insertImage`
 * [ `addColumnLeft`, `addColumnRight`, `addRowBelow`, `addRowAbove` ]
 * [ `deleteColumn`, `deleteRow` ]
 
@@ -1485,6 +1536,38 @@ The following list indicates the available tools. The tools which are part of a 
         $("#spreadsheet").kendoSpreadsheet({
             toolbar: {
                 insert: false
+            }
+        });
+    </script>
+
+### toolbar.format `Boolean|Array` *(default: true)*
+
+A Boolean value which indicates if the **Format** tab or a collection of tools that will be shown in the **Format** tab will be displayed.
+
+The following list indicates the available tools
+
+* `format`
+* `formatDecreaseDecimal`
+* `formatIncreaseDecimal`
+
+#### Example - customizing the **Format** tab
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                format: [ ["formatDecreaseDecimal", "formatIncreaseDecimal"] ]
+            }
+        });
+    </script>
+
+#### Example - disable format tab
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                format: false
             }
         });
     </script>
@@ -1517,6 +1600,38 @@ The available tools are:
         $("#spreadsheet").kendoSpreadsheet({
             toolbar: {
                 data: false
+            }
+        });
+    </script>
+
+### toolbar.view `Boolean|Array` *(default: true)*
+
+A Boolean value which indicates if the **View** tab or a collection of tools that will be shown in the **View** tab will be displayed.
+
+The following list indicates the available tools
+
+* `freeze`
+* `merge`
+* `toggleGridlines`
+
+#### Example - customizing the **View** tab
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                view: [ ["freeze", "toggleGridlines"] ]
+            }
+        });
+    </script>
+
+#### Example - disable view tab
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                view: false
             }
         });
     </script>
@@ -2478,8 +2593,8 @@ If invoked the changing will not be performed and no changes will be applied to 
     <div id="spreadsheet"></div>
     <script>
       $("#spreadsheet").kendoSpreadsheet({
-        sheets: [{               
-          rows: [{           
+        sheets: [{
+          rows: [{
             cells: [
               { value: "First"},
               { value: "Second"},
@@ -2501,15 +2616,15 @@ If invoked the changing will not be performed and no changes will be applied to 
         console.log("The netered value is: " + e.data)
       }
       $("#spreadsheet").kendoSpreadsheet({
-        sheets: [{               
-          rows: [{           
+        sheets: [{
+          rows: [{
             cells: [
               { value: "First"},
               { value: "Second"},
               { value: "Third"}
             ]
           }]
-        }]        
+        }]
       });
 
       var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
