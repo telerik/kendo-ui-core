@@ -4096,10 +4096,14 @@ export const __meta__ = {
 
                     for (const key of keys) {
                         if (item[key] instanceof Object) {
-                            let cleanObject = JSON.parse(kendo.stringify(item[key])),
+                            let stringifiedKey = kendo.stringify(item[key]);
+
+                            if (stringifiedKey) {
+                                let cleanObject = JSON.parse(stringifiedKey),
                                 cleanObjectKeys = Object.keys(cleanObject).map((k) => key + "." + k);
 
-                            result.push(...cleanObjectKeys);
+                                result.push(...cleanObjectKeys);
+                            }
                         }
                     }
 

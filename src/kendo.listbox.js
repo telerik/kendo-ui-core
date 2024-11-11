@@ -852,9 +852,9 @@ export const __meta__ = {
         },
 
         select: function(items) {
-            var that = this;
-            var selectable = that.selectable;
-            var enabledItems;
+            const that = this,
+                selectable = that.selectable;
+            let enabledItems;
 
             if (isUndefined(items)) {
                 return selectable.value();
@@ -867,16 +867,20 @@ export const __meta__ = {
                 enabledItems = enabledItems.first();
             }
 
-            return selectable.value(enabledItems);
+            const result = selectable.value(enabledItems);
+            that._updateAllToolbars();
+            return result;
         },
 
         clearSelection: function() {
-            var that = this;
-            var selectable = that.selectable;
+            const that = this,
+                selectable = that.selectable;
 
             if (selectable) {
                 selectable.clear();
             }
+
+            that._updateAllToolbars();
         },
 
         enable: function(items, enable) {

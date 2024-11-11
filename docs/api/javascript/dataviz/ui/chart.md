@@ -17877,6 +17877,200 @@ The padding around the chart (equal on all sides).
     });
     </script>
 
+### series.pattern `Object`
+
+The configuration options of the series pattern.
+
+> The pattern inherits the [`series.color`](/api/javascript/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
+
+#### Example - set a series pattern
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'crosshatch',
+          background: 'rgba(170, 170, 170, 0.8)',
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.type `String`
+
+The chart series pattern.
+
+The supported values are:
+
+* "crosshatch"
+* "diagonalStripes"
+* "dots"
+* "grid"
+* "verticalStripes"
+
+#### Example - set the series pattern type
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'dots'
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.background `String`
+
+The background color of the pattern.
+
+#### Example - set the series pattern background
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'dots',
+          background: 'rgba(170, 170, 170, 0.8)',
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.color `String`
+
+The color of the pattern. Defaults to series color.
+
+#### Example - set the series pattern color
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'dots',
+          color: '#f00'
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.gap `Number`
+
+The gap between the elements of the pattern.
+
+#### Example - set the series pattern gap
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'grid',
+          gap: 10
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.radius `Number`
+
+The radius of the dots. Applicable only for the `"dots"` pattern.
+
+#### Example - set the series "dots" pattern radius
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'dots',
+          radius: 5
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.size `Number`
+
+The size of the squares in the grid. Applicable only for the `"grid"` pattern.
+
+#### Example - set the series "grid" pattern size
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'grid',
+          size: 6,
+          gap: 2
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.pattern.width `Number`
+
+The width of the lines. Applicable for the `"crosshatch"`, `"diagonalStripes"` and `"verticalStripes"` patterns.
+
+#### Example - set the series pattern line width
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [ {
+        pattern: {
+          type: 'diagonalStripes',
+          width: 2,
+          gap: 4
+        },
+        data: [ 1, 2, 3 ]
+      }]
+    });
+    </script>
+
+### series.patternField `String`
+
+The data item field which contains the series pattern configuration for individual chart segments.
+
+> The `patternField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type)
+is set to `"pie"`, `"donut"`, `"funnel"`, `"heatmap"`, or `"pyramid"`.
+
+#### Example - set pie chart segment patterns
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        {
+          type: "pie",
+          field: "value",
+          patternField: "pattern",
+          startAngle: 120,
+          data: [
+            {
+              value: 1,
+              pattern: {
+                type: "dots",
+                radius: 60,
+                gap: 50
+              },
+            },
+            {
+              value: 2,
+              pattern: {
+                type: "diagonalStripes",
+              },
+            },
+          ],
+        },
+      ],
+    });
+    </script>
+
 ### series.size `Number`
 
 The or radius of the chart donut series in pixels. If not set, the available space is split evenly between the series.

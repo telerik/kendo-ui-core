@@ -11,7 +11,7 @@ position: 4
 
 Unlike other Kendo UI components which use only CSS for styling, you can mainly control the appearance of the Chart elements by using JavaScript style options.
 
-For more information on the structure of the Chart, refer to the articles on the [Chart building elements]({% slug seriestypeofcharts_widget %}).   
+For more information on the structure of the Chart, refer to the articles on the [Chart building elements]({% slug seriestypeofcharts_widget %}).
 
 ## Predefined Themes
 
@@ -121,6 +121,106 @@ To revert to the series colors from version 4.x, you can:
             });
         </script>
     ```
+
+### Using Pattern Fills
+
+In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/javascript/dataviz/ui/chart/configuration/series.pattern) configuration setting.
+
+> The pattern inherits the [`series.color`](slug:api_charts_seriesitemcomponent#toc-color) as main color and accepts an optional `background` color.
+
+The following customizable pattern fills are available:
+* Crosshatch
+* Diagonal Stripes
+* Dots
+* Grid
+* Vertical Stripes
+
+Below is an example of using pattern fills for series:
+
+```dojo
+    <div id="chart"></div>
+    <script>
+        const myPatterns = {
+            verticalStripes: {
+                type: 'verticalStripes',
+                background: 'rgb(75, 96, 250)',
+                width: 1.2,
+                gap: 12
+            },
+            crosshatch: {
+                type: 'crosshatch',
+                background: 'rgb(172, 88, 255)',
+                width: 1.2,
+                gap: 12
+            },
+            diagonalStripes: {
+                type: 'diagonalStripes',
+                background: 'rgb(255, 146, 184)',
+                width: 1.2,
+                gap: 12
+            },
+            grid: {
+                type: 'grid',
+                background: 'rgb(255, 148, 109)',
+                size: 12,
+                gap: 1.2
+            },
+            dots: {
+                type: 'dots',
+                background: 'rgba(255, 255, 99, 0.5)',
+                radius: 7.2,
+                gap: 3.6
+            }
+        };
+
+        jQuery("#chart").kendoChart({
+            title: {
+                text: 'Bar Chart with Patterns'
+            },
+            seriesDefaults: {
+                type: 'column',
+                overlay: {
+                    gradient: 'none'
+                },
+                border: {
+                    width: 0
+                }
+            },
+            series: [
+                {
+                    name: 'Series A',
+                    data: [33],
+                    color: 'rgb(148, 236, 255)',
+                    pattern: myPatterns.verticalStripes
+                },
+                {
+                    name: 'Series B',
+                    data: [19],
+                    color: 'rgb(250, 201, 187)',
+                    pattern: myPatterns.crosshatch
+                },
+                {
+                    name: 'Series C',
+                    data: [28],
+                    color: 'rgb(255, 208, 223)',
+                    pattern: myPatterns.diagonalStripes
+                },
+                {
+                    name: 'Series D',
+                    data: [13],
+                    color: 'rgb(255, 99, 88)',
+                    pattern: myPatterns.grid
+                },
+                {
+                    name: 'Series E',
+                    data: [26],
+                    color: 'rgb(177, 193, 61)',
+                    pattern: myPatterns.dots
+                }
+            ],
+        });
+    </script>
+```
 
 ## Animated Transitions
 

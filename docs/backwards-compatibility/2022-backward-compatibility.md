@@ -3,7 +3,7 @@ title: 2022 Releases
 page_title: 2022 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2022."
 slug: breakingchanges2022_kendoui
-position: 1
+position: 2
 ---
 
 # 2022 Releases

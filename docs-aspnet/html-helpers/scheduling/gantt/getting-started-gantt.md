@@ -261,6 +261,7 @@ Use the Gantt HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the co
 
 In the `Home` controller, declare the CRUD actions. Use the names of the actions you set in the DataSource and the `DependenciesDataSource` configurations in the previous step. 
 
+{% if site.mvc %}
 ```Controller
 public ActionResult Index()
 {
@@ -498,6 +499,244 @@ public virtual JsonResult DestroyDependency([DataSourceRequest] DataSourceReques
 	return Json(new[] { task }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
 }
 ```
+{% else %}
+```Controller
+public ActionResult Index()
+{
+	ViewBag.Message = "Welcome to ASP.NET Core!";
+
+	return View();
+}
+
+public virtual JsonResult ReadTasks([DataSourceRequest] DataSourceRequest request)
+{
+	return Json(GetAllTasks().ToDataSourceResult(request));
+}
+
+public virtual JsonResult DestroyTask([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+{
+	if (ModelState.IsValid)
+	{
+		var newTasks = GetAllTasks().Where(t => t.TaskID != task.TaskID);
+		HttpContext.Session.SetObjectAsJson("tasks", newTasks);
+	}
+
+	return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+}
+
+public virtual JsonResult CreateTask([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+{
+	if (ModelState.IsValid)
+	{
+		task.TaskID = GetAllTasks().Last().TaskID + 1;
+		var newTasks = GetAllTasks().ToList();
+		newTasks.Add(task);
+		HttpContext.Session.SetObjectAsJson("tasks", newTasks);
+	}
+
+	return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+}
+
+public virtual JsonResult UpdateTask([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+{
+	if (ModelState.IsValid)
+	{
+		var newTasks = GetAllTasks().Where(t => t.TaskID != task.TaskID).ToList();
+		newTasks.Add(task);
+		HttpContext.Session.SetObjectAsJson("tasks", newTasks);
+	}
+
+	return Json(new[] { task }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+}
+
+private IEnumerable<TaskViewModel> GetAllTasks()
+{
+	List<TaskViewModel> ganttTasks = new List<TaskViewModel>
+	{
+		new TaskViewModel
+		{
+			TaskID = 7,
+			Title = "Software validation, research and implementation",
+			ParentID = null,
+			OrderId = 0,
+			Start = new DateTime(2020, 6, 1, 3, 0, 0),
+			End = new DateTime(2020, 6, 18, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 1, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 12, 3, 0, 0),
+			PercentComplete = 0.43M,
+			Summary = true,
+			Expanded = true
+		},
+
+		new TaskViewModel
+		{
+			TaskID = 18,
+			Title = "Project Kickoff",
+			ParentID = 7,
+			OrderId = 0,
+			Start = new DateTime(2020, 6, 1, 3, 0, 0),
+			End = new DateTime(2020, 6, 1, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 1, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 1, 3, 0, 0),
+			PercentComplete = 0.23M,
+			Summary = false,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 13,
+			Title = "Implementation",
+			ParentID = 7,
+			OrderId = 1,
+			Start = new DateTime(2020, 6, 3, 3, 0, 0),
+			End = new DateTime(2020, 6, 17, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 2, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 17, 3, 0, 0),
+			PercentComplete = 0.77M,
+			Summary = true,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 100,
+			Title = "Test",
+			ParentID = 13,
+			OrderId = 0,
+			Start = new DateTime(2020, 6, 4, 3, 0, 0),
+			End = new DateTime(2020, 6, 5, 1, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 4, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 5, 1, 0, 0),
+			PercentComplete = 0.3M,
+			Summary = false,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 24,
+			Title = "Prototype",
+			ParentID = 13,
+			OrderId = 0,
+			Start = new DateTime(2020, 6, 3, 3, 0, 0),
+			End = new DateTime(2020, 6, 5, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 3, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 6, 3, 0, 0),
+			PercentComplete = 0.77M,
+			Summary = false,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 26,
+			Title = "Architecture",
+			ParentID = 13,
+			OrderId = 1,
+			Start = new DateTime(2020, 6, 5, 3, 0, 0),
+			End = new DateTime(2020, 6, 7, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 4, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 6, 3, 0, 0),
+			PercentComplete = 0.82M,
+			Summary = false,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 27,
+			Title = "Data Layer",
+			ParentID = 13,
+			OrderId = 2,
+			Start = new DateTime(2020, 6, 3, 3, 0, 0),
+			End = new DateTime(2020, 6, 8, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 2, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 8, 3, 0, 0),
+			PercentComplete = 1.00M,
+			Summary = false,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 28,
+			Title = "Unit Tests",
+			ParentID = 13,
+			OrderId = 4,
+			Start = new DateTime(2020, 6, 9, 3, 0, 0),
+			End = new DateTime(2020, 6, 11, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 8, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 10, 3, 0, 0),
+			PercentComplete = 0.68M,
+			Summary = false,
+			Expanded = true
+		},
+		new TaskViewModel
+		{
+			TaskID = 29,
+			Title = "UI and Interaction",
+			ParentID = 13,
+			OrderId = 5,
+			Start = new DateTime(2020, 6, 5, 3, 0, 0),
+			End = new DateTime(2020, 6, 9, 3, 0, 0),
+			PlannedStart = new DateTime(2020, 6, 4, 3, 0, 0),
+			PlannedEnd = new DateTime(2020, 6, 7, 3, 0, 0),
+			PercentComplete = 0.60M,
+			Summary = false,
+			Expanded = true
+		},
+	};
+
+	HttpContext.Session.SetObjectAsJson("tasks", ganttTasks);
+
+	return ganttTasks;
+}
+
+public virtual JsonResult ReadDependencies([DataSourceRequest] DataSourceRequest request)
+{
+	List<DependencyViewModel> dependencies = new List<DependencyViewModel>()
+	{
+		new DependencyViewModel() { DependencyID = 1, PredecessorID = 24 , SuccessorID = 26, Type = DependencyType.FinishStart },
+		new DependencyViewModel() { DependencyID = 2, PredecessorID = 26 , SuccessorID = 27, Type = DependencyType.FinishStart },
+
+	};
+
+	var result = dependencies.Select(o =>
+		new {
+			DependencyID = o.DependencyID,
+			PredecessorID = o.PredecessorID,
+			SuccessorID = o.SuccessorID,
+			Type = (int)o.Type
+		}).ToList();
+	return Json(result.ToDataSourceResult(request));
+}
+
+public virtual JsonResult CreateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+{
+	if (ModelState.IsValid)
+	{
+		// ... 
+	}
+
+	return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+}
+
+public virtual JsonResult UpdateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+{
+	if (ModelState.IsValid)
+	{
+		// ...
+	}
+
+	return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+}
+
+public virtual JsonResult DestroyDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+{
+	if (ModelState.IsValid)
+	{
+		// ...
+	}
+
+	return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+}
+```
+{% endif %}
 
 ## (Optional) Reference Existing Gantt Instances
 

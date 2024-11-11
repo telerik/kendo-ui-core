@@ -186,8 +186,7 @@ export const __meta__ = {
                 .addClass(KSVGICON)
                 .removeClass(currentIconClass) // Remove any existing icons.
                 .addClass(className)
-                .addClass(iconClass || '')
-                .attr("aria-hidden", true);
+                .addClass(iconClass || '');
 
             if ($.isPlainObject(icon)) {
                 svgElm.attr('viewBox', icon.viewBox || '')

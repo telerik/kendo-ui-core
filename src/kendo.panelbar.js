@@ -677,7 +677,6 @@ export const __meta__ = {
 
             if (node) {
                 this._progress(node, false);
-                this._expanded(node, false);
                 kendo.ui.icon(itemIcon(node), { icon: "arrow-rotate-cw" });
                 e.node.loaded(false);
             } else {

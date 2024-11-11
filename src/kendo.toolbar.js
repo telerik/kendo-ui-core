@@ -1155,7 +1155,7 @@ export const __meta__ = {
 
             if (!this.options.navigateOnTab && keyCode === keys.ENTER && target.hasClass(TEMPLATE_ITEM)) {
                 this._keyActivateTemplate(target);
-            } else if (isOverflowAnchor && (e.altKey && keyCode === keys.DOWN || keyCode === keys.ENTER || keyCode === keys.SPACEBAR)) {
+            } else if (isOverflowAnchor && (e.altKey && keyCode === keys.DOWN || keyCode === keys.SPACEBAR)) {
                 this._keyOpenOverflow(e, keyCode);
             } else if (keyCode === keys.HOME) {
                 this._keyFocusFirst(target, e);

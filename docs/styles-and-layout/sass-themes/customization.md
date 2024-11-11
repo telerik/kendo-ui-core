@@ -647,3 +647,12 @@ To customize the appearance of a particular component instance, you need a custo
     #menu1 .k-link {
         color: red;
     }
+
+## Using CSS Utilities
+
+The CSS Utilities allows you to create the desired layout using a collection of CSS classes. Each utility class changes the appearance of the target element by applying a specific CSS rule. For more information on the Telerik UI CSS Utilities and how to install the package, [refer to the CSS Utilities documentation](https://www.telerik.com/design-system/docs/utils/get-started/introduction/).
+
+## See Also
+
+* [SASS Themes Installation]({% slug sassbasedthemes_installation_kendoui %})
+* [SASS Themes Browser Support]({% slug sassbasedthemes_browser_kendoui %})

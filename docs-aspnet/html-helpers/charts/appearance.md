@@ -159,6 +159,56 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
 ```
 {% endif %}
 
+## Using Pattern Fills
+
+In addition to solid colors, the Chart series can also be filled with repeating patterns by using the `Pattern` configuration setting of the series.
+
+> The pattern inherits the series color as main color and accepts an optional `background` color.
+
+The following customizable pattern fills are available:
+* Crosshatch
+* Diagonal Stripes
+* Dots
+* Grid
+* Vertical Stripes
+
+Below is an example of using pattern fills for series:
+
+```HtmlHelper
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Series(series =>
+        {
+            series.Bar(new double[] {  117000, 138000 }).Name("Total Visits")
+                .Pattern(pattern=>pattern.Color("red").Background("blue").Type(ChartSeriesPattern.Dots).Radius(50));
+            series.Bar(new double[] {  67000, 83000 }).Name("Unique visitors")
+                .Pattern(pattern=>pattern.Type(ChartSeriesPattern.Crosshatch).Width(25));
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-chart name="chart">
+        <series>
+            <series-item type="ChartSeriesType.Bar"
+                        name="Total Visits"
+                        data="new double[] { 117000, 138000 }">
+                <pattern color="red" background="blue" type="ChartSeriesPattern.Dots" radius=50/>
+            </series-item>
+            <series-item type="ChartSeriesType.Bar"
+                        name="Unique visitors"
+                        data="new double[] { 67000, 83000 }">
+                <pattern type="ChartSeriesPattern.Crosshatch" width=25 />
+            </series-item>
+        </series>
+    </kendo-chart>
+
+```
+{% endif %}
+
 ## Animated Transitions
 
 {{ site.product }} Charts use animated transitions to display new and updated data. To disable these transitions, use the `transitions` option.
