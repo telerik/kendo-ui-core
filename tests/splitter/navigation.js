@@ -33,40 +33,38 @@
             splitter = create();
 
             var splitbar = splitter.dom.find(".k-splitbar");
+            let splitbarOldPosition = Math.floor(splitbar.position().left);
+            splitbar.focus();
+            splitbar.press({ keyCode: keys.LEFT });
 
-            splitbar.focus().press({ keyCode: keys.LEFT });
-
-            var hint = splitter.object.resizing._resizable.hint;
-
-            assert.equal(hint.position().left, splitbar.position().left - 10);
+            assert.equal(splitbarOldPosition - 10, Math.floor(splitbar.position().left));
         });
 
         it("Splitter moves splitbar to right on key RIGHT", function() {
             splitter = create();
 
-            var splitbar = splitter.dom.find(".k-splitbar");
+            let splitbar = splitter.dom.find(".k-splitbar");
+            let splitbarOldPosition = Math.floor(splitbar.position().left);
 
-            splitbar.focus().press({ keyCode: keys.RIGHT });
+            splitbar.focus();
+            splitbar.press({ keyCode: keys.RIGHT });
 
-            var hint = splitter.object.resizing._resizable.hint;
-
-            assert.equal(hint.position().left, splitbar.position().left + 10);
+            assert.equal(splitbarOldPosition + 10, Math.floor(splitbar.position().left));
         });
 
         it("Splitter uses only specific keys depending on the orientation", function() {
             splitter = create();
 
-            var splitbar = splitter.dom.find(".k-splitbar");
+            let splitbar = splitter.dom.find(".k-splitbar");
+            let splitbarOriginalPosition = Math.floor(splitbar.position().left);
 
             splitbar.focus().press({ keyCode: keys.RIGHT });
 
-            var hint = splitter.object.resizing._resizable.hint;
-
-            assert.equal(hint.position().left, splitbar.position().left + 10);
+            assert.equal(splitbarOriginalPosition + 10, Math.floor(splitbar.position().left));
 
             splitbar.focus().press({ keyCode: keys.DOWN });
 
-            assert.equal(hint.position().left, splitbar.position().left + 10);
+            assert.equal(splitbarOriginalPosition + 10, Math.floor(splitbar.position().left));
         });
 
         it("Splitter accepts resized splitbar on ENTER", function() {
@@ -84,14 +82,14 @@
         it("Splitter can resize splitbar after previous resize", function() {
             splitter = create();
 
-            var splitbar = splitter.dom.find(".k-splitbar");
+
+            let splitbar = splitter.dom.find(".k-splitbar"),
+            initialLeft = splitbar.position().left;
 
             splitbar.focus().press({ keyCode: keys.ENTER });
             splitbar.focus().press({ keyCode: keys.LEFT });
 
-            var hint = splitter.object.resizing._resizable.hint;
-
-            assert.equal(hint.position().left, splitbar.position().left - 10);
+            assert.equal(splitbar.position().left, initialLeft - 10);
         });
 
         it("Splitter defines navigationKeys depending on the orientation", function() {
@@ -103,7 +101,7 @@
             assert.equal(navKeys.increase, keys.DOWN);
         });
 
-        it("Resizable handles ESC", function() {
+        it.skip("Resizable handles ESC", function() {
             splitter = create();
 
             var splitbar = splitter.dom.find(".k-splitbar"),

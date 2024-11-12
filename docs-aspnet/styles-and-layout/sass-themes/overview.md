@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview
 description: "The {{ site.product }} suite comes with a set of built-in themes that you can choose from. Bootstrap and Material themes are also included."
 slug: sassbasedthemes_overview
-previous_url: /styles-and-layout/sass-themes/installation, /styles-and-layout/sass-themes/browser-support, /styles-and-layout/sass-themes/compatibility, /styles-and-layout/sass-themes/swatches, /styles-and-layout/figma-kits, /styles-and-layout/sass-themes/figma-kits
+previous_url: /styles-and-layout/sass-themes/installation, /styles-and-layout/sass-themes/browser-support, /styles-and-layout/sass-themes/swatches, /styles-and-layout/figma-kits, /styles-and-layout/sass-themes/figma-kits
 position: 1
 ---
 
@@ -11,13 +11,9 @@ position: 1
 
 {{ site.product }} comes with a set of built-in CSS themes that control the visual appearance of the components. Each theme determines the components' colors, borders, backgrounds, size, layout, position, font size, and more.
 
-## Basics
-
-### Theme
-
 A *theme* is a collection of styles in a CSS file, which determine the appearance of the components, including fonts, colors, sizes, and layouts. For example, *Default* and *Bootstrap* are two [built-in theme names](#built-in-themes).
 
-### Swatch
+## Swatch
 
 A *theme swatch* is a color variation of a theme. All <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/swatches/" target="_blank">swatches of a given theme</a> use the same fonts, sizes, and layouts. On the other hand, the text colors, background colors and border colors are different. For example, *Default Ocean Blue* and *Bootstrap Nordic* are two built-in swatch names.
 
@@ -25,7 +21,7 @@ When the {{ site.product }} documentation talks about a given theme name, for ex
 
 The CSS file of any swatch is self-sufficient and contains all required styles for the components, except the optional [font icon styles]({%slug webfonticons_aspnetmvc6_aspnetmvc%}). You can [switch the theme runtime]({%slug howto_changethemeontheclient%}), but the {{ site.framework }} app must always load only one theme at a time.
 
-### Integration with the Telerik Components
+## Integration with the Telerik Components
 
 The CSS themes represent an external dependency to {{ site.product }}:
 
@@ -63,7 +59,7 @@ The Telerik themes are decoupled from the Telerik UI components, which leads to 
 
 >If you have an older version of the Telerik Extensions for Visual Studio and you want to create a new {{ site.product }} project with version 2023.1.314 (R1 2023 SP1), or a newer version of the components, you must first update the Telerik Extension. To download and install the latest version of the Telerik Extensions, follow the [Installing from Visual Studio Marketplace]({% slug overview_visualstudio_aspnetcore %}#installing-from-visual-studio-marketplace) instructions.
 
-* When loading <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/swatches/" target="_blank">theme swatches</a> from a CDN, make sure that the theme version is compatible with the {{ site.product }} version. Our {% if site.core %}[release notes](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history){% else %}[release notes](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history){% endif %} provide theme compatibility information for each components version. You can also use a <a href="https://www.telerik.com/design-system/docs/themes/get-started/changelog/" target="_blank">newer minor theme version</a>, which doesn't contain breaking changes. In other words, the latest major theme version may be still incompatible with the latest version of {{ site.product }}.
+* When loading <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/swatches/" target="_blank">theme swatches</a> from a CDN, make sure that the theme version is compatible with the {{ site.product }} version. Our {% if site.core %}[release notes](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history){% else %}[release notes](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history){% endif %} or [compatibility table]({% slug sass_themes_compatibility_aspnetmvc6_aspnetmvc %}) provide theme compatibility information for each components version. You can also use a <a href="https://www.telerik.com/design-system/docs/themes/get-started/changelog/" target="_blank">newer minor theme version</a>, which doesn't contain breaking changes. In other words, the latest major theme version may be still incompatible with the latest version of {{ site.product }}.
 
 ## Next Steps
 
@@ -74,4 +70,4 @@ The Telerik themes are decoupled from the Telerik UI components, which leads to 
 
 * [Change the Theme at Runtime]({%slug howto_changethemeontheclient%})
 * <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/swatches/#ocean-blue-accessibility-swatch" target="_blank">Default Ocean Blue Accessibility Swatch</a>
-* [Live UI for Blazor Demos](https://demos.telerik.com/{{ site.platform }}/)
+* [Live {{ site.product_short }} Demos](https://demos.telerik.com/{{ site.platform }}/)

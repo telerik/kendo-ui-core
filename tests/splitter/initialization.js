@@ -94,14 +94,15 @@
         it("panes get k-scrollable class if they are scrollable", function() {
             splitter = create({
                 panes: [
-                    { scrollable: false }, {}
+                    { scrollable: false }, {}, { scrollable: true }
                 ]
-            });
+            }, 3);
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.isOk(!panes.eq(0).hasClass("k-scrollable"));
+            assert.isNotOk(panes.eq(0).hasClass("k-scrollable"));
             assert.isOk(panes.eq(1).hasClass("k-scrollable"));
+            assert.isOk(panes.eq(2).hasClass("k-scrollable"));
         });
 
         it("inner splitters get resized after initialization of outer splitters", function() {

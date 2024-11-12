@@ -9,13 +9,13 @@ position: 3
 
 # ThemeBuilder
 
-The [ThemeBuilder is an online tool](https://themebuilderapp.telerik.com) that enables you to create custom themes and instantly preview how the components will look. The tool generates a [CSS file that you can use in your {{ site.framework }} app]({%slug sassbasedthemes_customization_telerikui%}#loading-custom-themes) instead of a built-in theme.
+The <a href="https://themebuilderapp.telerik.com" target="_blank">ThemeBuilder is an online tool</a> that enables you to create custom themes and instantly preview how the components will look. The tool generates a [CSS file that you can use in your {{ site.framework }} app]({%slug sassbasedthemes_customization_telerikui%}#loading-custom-themes) instead of a built-in theme.
 
-Visit the [ThemeBuilder documentation](https://docs.telerik.com/themebuilder) to learn how to:
+Visit the <a href="https://docs.telerik.com/themebuilder" target="_blank">ThemeBuilder documentation</a> to learn how to:
 
-* [Create a custom theme](https://docs.telerik.com/themebuilder/get-started/first-steps-theme-builder)
-* Migrate custom themes to new component versions [automatically](https://docs.telerik.com/themebuilder/web-app/automatic-migrations) or [manually](https://docs.telerik.com/themebuilder/web-app/migrating-projects)
-* [Export and use a theme in your {{ site.framework }} app](https://docs.telerik.com/themebuilder/exported-package)
+* <a href="https://docs.telerik.com/themebuilder/get-started/first-steps-theme-builder" target="_blank">Create a custom theme</a>
+* Migrate custom themes to new component versions <a href="https://docs.telerik.com/themebuilder/web-app/automatic-migrations" target="_blank">automatically</a> or <a href="https://docs.telerik.com/themebuilder/web-app/migrating-projects" target="_blank">manually</a>
+* <a href="https://docs.telerik.com/themebuilder/exported-package" target="_blank">Export and use a theme in your {{ site.framework }} app</a>
 
 ## See Also
 

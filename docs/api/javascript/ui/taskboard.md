@@ -2834,7 +2834,7 @@ Provides configuration options for the messages present in the TaskBoard widget.
           description: "Description:",
           newColumn: "New column",
           deleteColumnConfirm: "Are you sure you want to delete this column?",
-          deleteCardConfirm: "Are you sure you want to delete this card?
+          deleteCardConfirm: "Are you sure you want to delete this card?"
         },
         dataOrderField: "order",
         dataSource: [
@@ -3198,7 +3198,9 @@ Opens edit pane for card.
         ]
       }).data("kendoTaskBoard");
 
-      taskBoard.editCard(taskBoard.items().eq(0));
+      setTimeout(function(){    
+          taskBoard.editCard(taskBoard.items().eq(0));
+      })
     </script>
 
 #### Parameters
@@ -3454,9 +3456,11 @@ Returns the card elements in the TaskBoard.
         ]
       }).data("kendoTaskBoard");
 
-      var cardElm = taskBoard.items().eq(0);
-      var dataItem = taskBoard.dataItem(cardElm);
-      alert(dataItem.get("title"));
+      setTimeout(function(){    
+    	  var cardElm = taskBoard.items().eq(0);
+  		  var dataItem = taskBoard.dataItem(cardElm);
+  		  alert(dataItem.get("title"));
+      })
     </script>
 
 #### Returns
@@ -3488,9 +3492,12 @@ Returns the card elements in the TaskBoard filtered by column status.
         ]
       }).data("kendoTaskBoard");
 
-      var cardElm = taskBoard.itemsByStatus("backlog").eq(0);
-      var dataItem = taskBoard.dataItem(cardElm);
-      alert(dataItem.get("title"));
+      setTimeout(function(){    
+    	  var cardElm = taskBoard.itemsByStatus("backlog").eq(0);
+        var dataItem = taskBoard.dataItem(cardElm);
+        alert(dataItem.get("title"));
+      })
+      
     </script>
 
 #### Parameters
@@ -3528,9 +3535,11 @@ Returns the card elements in the TaskBoard filtered by column elemennt.
         ]
       }).data("kendoTaskBoard");
 
-      var cardElm = taskBoard.itemsByColumn(taskBoard.columns().eq(2)).eq(0);
-      var dataItem = taskBoard.dataItem(cardElm);
-      alert(dataItem.get("title"));
+      setTimeout(function(){    
+        	var cardElm = taskBoard.itemsByColumn(taskBoard.columns().eq(2)).eq(0);
+          var dataItem = taskBoard.dataItem(cardElm);
+          alert(dataItem.get("title"));
+      })      
     </script>
 
 #### Parameters
@@ -3602,7 +3611,9 @@ Opens the preview pane for the card element.
             ],
         }).data("kendoTaskBoard");
 
-        taskBoard.previewCard(taskBoard.items().eq(0));
+        setTimeout(function(){    
+          taskBoard.previewCard(taskBoard.items().eq(0));
+        })
     </script>
 
 #### Parameters
@@ -3710,9 +3721,11 @@ Returns the data item bound to the specific card element.
         ]
       }).data("kendoTaskBoard");
 
-      var cardElm = taskBoard.items().eq(0);
-      var dataItem = taskBoard.dataItem(cardElm);
-      alert(dataItem.get("title"));
+      setTimeout(function(){    
+        var cardElm = taskBoard.items().eq(0);
+        var dataItem = taskBoard.dataItem(cardElm);
+        alert(dataItem.get("title"));
+      })      
     </script>
 
 #### Parameters

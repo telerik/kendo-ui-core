@@ -84,7 +84,20 @@ The TimePicker component respects DataAnnotation attributes when using the `Time
         [Range(typeof(DateTime), minimum: "01/01/2023 03:00:00 AM", maximum: "12/31/2023 10:00:00 AM")]
         public DateTime MyDateTimeProperty{ get; set; }
 ```
-    
+
+{% if site.core %}
+## TimeOnly compatability
+
+As of the 2024 Q4 Release the {{ site.framework }} TimePicker is compatible with the [`TimeOnly`](https://learn.microsoft.com/en-us/dotnet/api/system.timeonly?view=net-8.0) type. Following this release you can also set the value of the component to a `TimeOnly` property:
+
+```HtmlHelper
+    @(Html.Kendo().TimePicker().Name("timeOnly").Value(new TimeOnly(10,20,30)))
+```
+```TagHelper
+    <kendo-timepicker name="timeOnly" value="new TimeOnly(10,20,30)"></kendo-timepicker>
+```
+{% endif %}
+
 ## Functionality and Features
 
 |Feature|Description|

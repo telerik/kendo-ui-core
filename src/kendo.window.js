@@ -1231,7 +1231,7 @@ import "./kendo.html.button.js";
                 if (that._shouldFocus(target)) {
                     if (!avoidFocus) {
                         setTimeout(function() {
-                            that.wrapper.focus();
+                            that.wrapper.trigger("focus");
                         }, openAnimation ? openAnimation.duration : 0);
                     }
 

@@ -308,7 +308,6 @@ Check the `skeleton` loading type in action in the live demo below:
 * [Binding the Grid to Kinvey Backend Services (Demo)](https://demos.telerik.com/kendo-ui/grid/kinvey)
 * [Binding the Grid to GraphQL Services (Demo)](https://demos.telerik.com/kendo-ui/grid/graphql)
 * [Binding the Grid to SignalR (Demo)](https://demos.telerik.com/kendo-ui/grid/signalr)
-* [Binding the Grid to Web Socket (Demo)](https://demos.telerik.com/kendo-ui/grid/web-socket)
 * [Binding the Grid over MVVM (Demo)](https://demos.telerik.com/kendo-ui/grid/mvvm)
 * [Working with the Grid Offline (Demo)](https://demos.telerik.com/kendo-ui/grid/offline)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

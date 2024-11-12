@@ -190,8 +190,8 @@ The Switch options can be changed dynamically with the `setOptions()` method.
         width: 50
       });
 
-      var switch = $("#switch").data("kendoSwitch")
-          switch.setOptions( {
+      var switchInstance = $("#switch").data("kendoSwitch")
+          switchInstance.setOptions( {
               width: 200
           })
     </script>

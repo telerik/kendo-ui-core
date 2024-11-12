@@ -145,8 +145,9 @@ var packageMetadata = {
                     // Extend the base object
                     for ( name in options ) {
                         // filters, concat and : properties are depricated in the jQuery 3.3.0
+                        // cssNumber is deprecated in jQuery 4.0.0
                         // accessing these properties throw a warning when jQuery migrate is included
-                        if (name == "filters" || name == "concat" || name == ":") {
+                        if (name == "filters" || name == "concat" || name == ":" || name == "cssNumber") {
                             continue;
                         }
                         src = target[ name ];

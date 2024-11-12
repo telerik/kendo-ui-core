@@ -113,7 +113,7 @@ Upgrading may require changes to the additional custom CSS code, but only if the
 
 ## Using CSS Utilities
 
-The CSS Utilities allows you to create the desired layout using a collection of CSS classes. Each utility class changes the appearance of the target element by applying a specific CSS rule. For more information on the Telerik UI CSS Utilities and how to install the package, [refer to the CSS Utilities documentation](https://www.telerik.com/design-system/docs/utils/get-started/introduction/).
+The CSS Utilities allows you to create the desired layout using a collection of CSS classes. Each utility class changes the appearance of the target element by applying a specific CSS rule. For more information on the Telerik UI CSS Utilities and how to install the package, <a href="https://www.telerik.com/design-system/docs/utils/get-started/introduction/" target="_blank">refer to the CSS Utilities documentation</a>.
 
 ## Building Themes From Source Code
 
