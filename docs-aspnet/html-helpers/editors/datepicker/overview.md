@@ -37,7 +37,7 @@ The following example demonstrates the basic configuration for the DatePicker.
 {% if site.core %}
 ```TagHelper
     <kendo-datepicker name="datepicker"
-        min="new DateTime(1900, 1, 1)" 
+        min="new DateTime(1900, 1, 1)"
         max="new DateTime(2099, 12, 31)"
         value="DateTime.Today">
     </kendo-datepicker>
@@ -67,6 +67,20 @@ The DatePicker component respects DataAnnotations when the `DatePickerFor(m=>m.P
     [Range(typeof(DateTime), minimum:"01/01/2023", maximum:"31/12/2023")]
     public DateTime MyDateTimeProperty{ get; set; }
 ```
+
+{% if site.core %}
+## DateOnly compatability
+
+As of the 2024 Q4 Release the {{ site.framework }} DatePicker is compatible with the [`DateOnly`](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly?view=net-8.0) type. Following this release you can also set the value of the component to a `DateOnly` property:
+
+```HtmlHelper
+    @(Html.Kendo().DatePicker().Name("datePicker").Value(new DateOnly(2024,5,6)))
+```
+```TagHelper
+    <kendo-datepicker name="datePicker" value="new DateOnly(2024,5,6)">
+    </kendo-datepicker>
+```
+{% endif %}
 
 ## Functionality and Features
 

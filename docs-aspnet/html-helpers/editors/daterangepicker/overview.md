@@ -48,6 +48,24 @@ The following example demonstrates the basic configuration for the DateRangePick
 @[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
 {% endif %}
 
+{% if site.core %}
+## DateOnly compatability
+
+As of the 2024 Q4 Release the {{ site.framework }} DateRangePicker is compatible with the [`DateOnly`](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly?view=net-8.0) type. Following this release you can also set the `Start` and `End` range of the component to a `DateOnly` property:
+
+```HtmlHelper
+    @(Html.Kendo().DateRangePicker()
+        .Name("daterangepicker") 
+        .Range(r => r.Start(new DateOnly(2024,5,6)).End(new DateOnly(2024,5,6).AddDays(10))) // Sets the range of the DateRangePicker.
+    )
+```
+```TagHelper
+     <kendo-daterangepicker name="daterangepicker">
+             <range start="new DateOnly(2024,5,6)" end="new DateOnly(2024,5,6).AddDays(10)"/>
+     </kendo-daterangepicker>
+```
+{% endif %}
+
 ## Functionality and Features
 
 | Feature | Description |

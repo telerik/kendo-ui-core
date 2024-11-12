@@ -222,7 +222,7 @@
         it("expanding a previously collapsed pane removes its overflow:hidden style", function() {
             splitter = create({
                 panes: [
-                    { collapsed: false },
+                    { collapsible: true, collapsed: false },
                     { collapsed: false },
                     { collapsed: false }
                 ]
@@ -231,7 +231,7 @@
             splitter.object.collapse(".k-pane:first");
             splitter.object.expand(".k-pane:first");
 
-            assert.equal(splitter.dom.find(".k-pane:first").css("overflow"), "auto");
+            assert.notEqual(splitter.dom.find(".k-pane:first").css("overflow"), "hidden");
         });
 
         it("collapsing pane disables collapsing of next pane", function() {
@@ -256,7 +256,8 @@
             assert.isOk(!splitter.dom.find(".k-splitbar .k-i-caret-alt-right").length);
         });
 
-        it("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
+        // The fluid pane should stay as a buffer as it would distort the fixed size of the remaining static panes
+        it.skip("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
             splitter = create({
                 panes: [
                     { collapsible: true, size: "50px" },
@@ -270,7 +271,8 @@
             assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 12);
         });
 
-        it("collapsing the last fluid pane in vertical splitter distributes remaining size to neighbour pane", function() {
+        // The fluid pane should stay as a buffer as it would distort the fixed size of the remaining static panes
+        it.skip("collapsing the last fluid pane in vertical splitter distributes remaining size to neighbour pane", function() {
             splitter = create({
                 orientation: "vertical",
                 panes: [

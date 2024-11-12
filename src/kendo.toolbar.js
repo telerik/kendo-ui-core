@@ -175,8 +175,6 @@ export const __meta__ = {
                 this._toggleOverflowAnchor();
             }
 
-            this._applyCssClasses();
-
             kendo.notify(this);
         },
 
@@ -1869,6 +1867,11 @@ export const __meta__ = {
     };
 
     kendo.cssProperties.registerPrefix("ToolBar", "k-toolbar-");
+
+    kendo.cssProperties.registerValues("ToolBar", [{
+        prop: "fillMode",
+        values: ['solid', 'flat']
+    }]);
 
     kendo.ui.plugin(ToolBar);
 })(window.kendo.jQuery);

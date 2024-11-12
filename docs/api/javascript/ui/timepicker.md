@@ -159,15 +159,14 @@ Sets a value that indicates whether to automatically correct the segment when ou
 
 #### Example - specify German culture internationalization
 
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <!--        
+        List of available cultures - https://github.com/telerik/kendo-ui-core/tree/master/src/cultures
 
         For more information check this help topic:
         https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
+
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
     <input id="timepicker" />
     <script>
@@ -802,7 +801,7 @@ An object, which holds the options of the widget.
     var timepicker = $("#timepicker").data("kendoTimePicker");
 
     var options = timepicker.options;
-    <script>
+    </script>
 
 ## Methods
 
@@ -1159,7 +1158,7 @@ The widget instance which fired the event.
 
     <input id="timepicker" />
     <script>
-    $("#timepicker").timepicker();
+    $("#timepicker").kendoTimePicker();
 
     var timepicker = $("#timepicker").data("kendoTimePicker");
 

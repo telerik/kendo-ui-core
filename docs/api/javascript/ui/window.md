@@ -188,12 +188,8 @@ Specifies a URL or request options from where the Window will load its content.
 
 #### Example - fetching content from the server
 
-    <div id="dialog"></div>
-    <script>
-    $("#dialog").kendoWindow({
-      content: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
-    });
-    </script>
+        <base href="https://demos.telerik.com/kendo-ui/window/ajax">
+
 
 ### content.url `String`
 
@@ -201,13 +197,12 @@ Specifies the url from which the content is fetched
 
 #### Example - fetching JSON and displaying it through a template
 
+    <base href="https://demos.telerik.com/kendo-ui/window/ajax">
     <div id="dialog"></div>
-
     <script>
       $("#dialog").kendoWindow({
-        content: {
-          url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html",
-        }
+        content: "../content/web/tabstrip/ajax/ajaxContent2.html"
+        },
       });
     </script>
 

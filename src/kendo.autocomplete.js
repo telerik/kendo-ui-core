@@ -911,7 +911,7 @@ export const __meta__ = {
         _clearValue: function() {
             this._clearValueTrigger = false;
             List.fn._clearValue.call(this);
-            this.element.focus();
+            this.element.trigger("focus");
         }
     });
 

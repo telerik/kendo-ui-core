@@ -264,6 +264,41 @@ When editing is performed, server validation is often needed. This section demon
     }
 </script>
 ```
+
+{% if site.core %}
+## Using DateOnly and TimeOnly properties with .NET 6
+
+`DateOnly` and `TimeOnly` types were introduced with .NET 6, however serialization and model binding support were introduced by the framework at a later stage.
+
+In order to edit `DateOnly` or `TimeOnly` properties when using a Grid configured for PopUp editing in a .NET 6 application you will need to provide a custom PopUp editor template where editors for these properties are defined:
+```OrderViewModel.cs
+    public class OrderViewModel
+    {
+        public int OrderID { get; set; }
+
+        public DateOnly ShipDate { get; set; }
+    }
+```
+```CustomEditorTemplate.cshtml
+    @model OrderViewModel
+
+    <div>
+        @Html.LabelFor(model => model.OrderID)
+        @Html.EditorFor(model => model.OrderID)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.ShipDate)
+        @Html.Kendo().DatePickerFor(model => model.ShipDate)
+    </div>
+```
+```HtmlHelper
+    @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
+        .Name("grid")
+        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("CustomEditorTemplate"))
+    )
+```
+{% endif%}
+
 ## See Also
 
 * [Editing Approaches by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/editing)

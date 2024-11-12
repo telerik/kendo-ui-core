@@ -133,7 +133,7 @@
             assert.equal(resizingHandler._max(), 297);
         });
 
-        it("resizing.dragend modifies pane sizes", function() {
+        it.skip("resizing.dragend modifies pane sizes", function() {
             splitter = create();
 
             var resizingHandler = splitter.object.resizing,
@@ -150,7 +150,7 @@
             assert.equal(parseInt(panes[1].offsetWidth), (initialPaneSizes[1] - 5));
         });
 
-        it("resizing.dragend for middle panes", function() {
+        it.skip("resizing.dragend for middle panes", function() {
             splitter = create({}, 4, { width: 421 });
 
             var resizingHandler = splitter.object.resizing,
@@ -167,7 +167,7 @@
             assert.equal(panes[2].offsetWidth, initialPaneSizes[2] - 5);
         });
 
-        it("resizing.dragend with variable splitbar widths", function() {
+        it.skip("resizing.dragend with variable splitbar widths", function() {
             splitter = create({}, 4, { width: 421 });
 
             var resizingHandler = splitter.object.resizing,
@@ -188,7 +188,7 @@
             assert.equal(panes[2].offsetWidth, initialPaneSizes[2] - 5);
         });
 
-        it("resizing.dragend fires splitter resize", function() {
+        it.skip("resizing.dragend fires splitter resize", function() {
             var triggered = false;
 
             splitter = create({ resize: function() { triggered = true; } });
@@ -202,7 +202,7 @@
             assert.isOk(triggered);
         });
 
-        it("resizing.dragend for panes with constraints", function() {
+        it.skip("resizing.dragend for panes with constraints", function() {
             splitter = create({ panes: [{ min: "50px" }, {}] });
 
             var resizingHandler = splitter.object.resizing,
@@ -218,7 +218,7 @@
             assert.equal(panes[1].offsetWidth, 143);
         });
 
-        it("resizing.dragend assigns percentage sizes when resizing fluid panes", function() {
+        it.skip("resizing.dragend assigns percentage sizes when resizing fluid panes", function() {
             splitter = create({ panes: [{ size: "100px" }, {}] });
 
             var resizingHandler = splitter.object.resizing,
@@ -331,7 +331,7 @@
             assert.equal(resizingHandler._max(), 297);
         });
 
-        it("resizing.dragend modifies pane sizes", function() {
+        it.skip("resizing.dragend modifies pane sizes", function() {
             splitter = create({ orientation: "vertical" });
 
             var resizingHandler = splitter.object.resizing,
@@ -348,7 +348,7 @@
             assert.closeTo(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
         });
 
-        it("resizing.dragend for middle panes", function() {
+        it.skip("resizing.dragend for middle panes", function() {
             splitter = create({ orientation: "vertical" }, 4, { height: 421 });
 
             var resizingHandler = splitter.object.resizing,

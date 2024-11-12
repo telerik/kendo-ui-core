@@ -271,7 +271,7 @@ import "../kendo.icons.js";
                 (options.contrastTool ? '<div class="k-colorgradient-color-contrast k-vbox"></div>' : '')
         ),
         focus: function() {
-            this._hsvHandle.focus();
+            this._hsvHandle.trigger("focus");
         },
         setBackgroundColor: function(color) {
             var that = this;
@@ -370,12 +370,12 @@ import "../kendo.icons.js";
                     this.offset = kendo.getOffset(hsvRect);
                     this.width = hsvRect.width();
                     this.height = hsvRect.height();
-                    hsvHandle.focus();
+                    hsvHandle.trigger("focus");
                     update.call(this, e.x.location, e.y.location);
                 },
                 start: function() {
                     hsvRect.addClass("k-dragging");
-                    hsvHandle.focus();
+                    hsvHandle.trigger("focus");
                 },
                 move: function(e) {
                     e.preventDefault();

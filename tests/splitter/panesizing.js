@@ -47,7 +47,7 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes[0].style.width, "19px");
+            assert.equal(panes[0].style.flexBasis, "19px");
         });
 
         it("sizes of fluid panes get properly rounded", function() {
@@ -116,7 +116,7 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes[0].style.height, "19px");
+            assert.equal(panes[0].style.flexBasis, "19px");
         });
 
         it("sizes of fluid panes get properly rounded", function() {
@@ -136,7 +136,7 @@
 
             var panes = splitter.dom.find(".k-pane");
 
-            assert.equal(panes[0].style.height, "20px");
+            assert.equal(panes[0].style.flexBasis, "20px");
         });
     });
 

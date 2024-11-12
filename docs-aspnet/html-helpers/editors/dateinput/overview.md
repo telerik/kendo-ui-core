@@ -43,6 +43,21 @@ The following example demonstrates the basic configuration for the DateInput.
 @[template](/_contentTemplates/core/declarative-initialization-note.md#declarative-initialization-note)
 {% endif %}
 
+{% if site.core %}
+## DateOnly and TimeOnly compatability
+
+As of the 2024 Q4 Release the {{ site.framework }} DateInput is compatible with the [`DateOnly`](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly?view=net-8.0) and [`TimeOnly`](https://learn.microsoft.com/en-us/dotnet/api/system.timeonly?view=net-8.0) types. Following this release you can also set the value of the component to a `DateOnly` or a `TimeOnly` property:
+
+```HtmlHelper
+    @(Html.Kendo().DateInput().Name("dateOnly").Value(new DateOnly(2024,5,6)))
+    @(Html.Kendo().DateInput().Name("timeOnly").Value(new TimeOnly(10,20,30)))
+```
+```TagHelper
+    <kendo-dateinput name="dateOnly" value="new DateOnly(2024,5,6)"></kendo-dateinput>
+    <kendo-dateinput name="timeOnly" value="new TimeOnly(10,20,30)"></kendo-dateinput>
+```
+{% endif %}
+
 ## Functionality and Features
 
 * [Appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/dateinput/appearance)&mdash;You are able to customize the appearance of the DateInput by configuring its size, fill mode, and border radius.
