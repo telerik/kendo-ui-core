@@ -8,7 +8,7 @@ position: 8
 
 # Migrating Font Icons to SVG Icons
 
-With the upcoming R2 2023 release, the default icon type in the Telerik and Kendo UI themes will change from `font` to `svg`. This release marks the next milestone in a series of improvements related to Content Security Policy (CSP) in Kendo UI. 
+Starting with version R2 2023, the default icon type in the Telerik and Kendo UI themes has changed from `font` to `svg`. This release marks the next milestone in a series of improvements related to Content Security Policy (CSP) in Kendo UI. 
 
 In this article, you will learn how to start using SVG icons. To continue using font icons, you can change the type of the icons to `font`.
 
@@ -68,14 +68,15 @@ When migrating from font icons to SVG icons, you will face two possible scenario
         color: red !important; 
     } 
     </style> 
-
+    ```
+    ```
     <span id="icon"></span>
 
     <script>
         kendo.ui.icon($("#icon"), { icon: 'camera' }); 
     </script>
-    ``` 
- 
+    ```
+    
 ## Continuing with Font Icons
 
 To continue using font icons as the default icon type, call the `kendo.setDefaults` method:
@@ -88,6 +89,7 @@ To continue using font icons as the default icon type, call the `kendo.setDefaul
 
 ## See Also
 
+* [Themes Overview]({% slug sassbasedthemes_kendoui %})
 * [SASS Themes Overview]({% slug sassbasedthemes_kendoui %})
 * [SVG Icons]({% slug svgicons_kendoui_desktopwidgets %})
 * [Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})

@@ -10,7 +10,7 @@ position: 70
 
 The Kendo UI Productivity Tools for Visual Studio Code is an extension for <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> that enhances the application development experience with Kendo UI for jQuery. This extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
 
-The Kendo UI Productivity Tools deliver a Kendo UI Template Wizard that eases the development efforts by providing an interface for creating new projects that are pre-configured for Kendo UI components. The Template Wizard provides a **Blank** project template, which can be further enhanced by the addition of more pages with Grids, Charts, Forms, and others. The wizard lets configure the desired visual theme for your application by choosing between the Default, Bootstrap, and Material themes. The end result is a ready-to-run application with all required configurations and dependencies. This enables you to immediately start using the Kendo UI components.
+The Kendo UI Productivity Tools deliver a Kendo UI Template Wizard that eases the development efforts by providing an interface for creating new projects that are pre-configured for Kendo UI components. The Template Wizard provides a **Blank** project template, which can be further enhanced by the addition of more pages with Grids, Charts, Forms, and others. The wizard lets configure the desired [Kendo UI Sass-Based themes]({% slug sassbasedthemes_kendoui %}#theme) for your application by choosing between the Default, Bootstrap, Material, Fluent, or Classic and pick from a variety of [swatches]({% slug sassbasedthemes_kendoui %}#swatch) that come with each theme. The end result is a ready-to-run application with all required configurations and dependencies. This enables you to immediately start using the Kendo UI components.
 
 ## 1. Get the Extension
 
@@ -42,7 +42,7 @@ To create a Kendo UI for jQuery project with the Kendo UI Template Wizard:
 
 1. Apply the desired styling by selecting a theme.
 
-   To style your application, select one of the built-in [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes): Default, Bootstrap, or Material.
+   To style your application, select one of the built-in [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes): Default, Bootstrap, Material, Fluent, or Classic.
    
    ![Kendo UI for jQuery choose theme](../../images/vscode-wizard-select-theme.png)
 
