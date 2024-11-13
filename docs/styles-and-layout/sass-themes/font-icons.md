@@ -7,23 +7,15 @@ slug: webfonticons_kendoui_desktopwidgets
 position: 7
 ---
 
-# Web Font Icons
+# Font Icons
 
 > Starting with the 2023 R3 release the font icons are detached from the Kendo Themes CDN. You can find more details on how to reference the icons in your project [here](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
 
-As of the R1 2017 release, Kendo UI delivers integrated font icons intended for the web and data visualization widgets of the suite.
-
-> Use one of the SASS themes to make sure all the icons are displayed correctly. To find out how to install a SASS theme, visit the [installation]({% slug sassbasedthemes_installation_kendoui %}) article.
+> To ensure that all icons are displayed correctly, use one of the available [built-in themes]({% slug sassbasedthemes_kendoui%}).
 
 ## List of Font Icons
 
-Visit the [Basic Usage](#basic-usage) section to find out how to display an icon.
-
-You can search for icons by using the browser's default find bar (CTRL + F).
-
-<div class="list-container" style="height: 600px;">
-    <iframe src="icons-list.html" class="icons-frame"></iframe>
-</div>
+Visit the [List of Icons Progress Design System](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/) page to find a complete list of the icons available in the icons font 
 
 ## What Are Icon Fonts
 
@@ -45,12 +37,16 @@ Font icons demonstrate significant benefits such as:
 
 To use the Kendo UI font icons:
 
- 1. [Load]({% slug sassbasedthemes_installation_kendoui %}) a Kendo UI theme into your project.
- 2. Assign a `k-font-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
+ 1. [Include a Kendo UI theme]({% slug sassbasedthemes_kendoui %}#using-a-theme) into your project.
+ 2. If you use the Kendo UI CDN service to include the theme, register the font icon stylesheet.
+ 3. Assign a `k-font-icon` CSS class followed by a predefined class from the [list of font icons](#icons-list) to an HTML tag. For example, a the `<span>` element.
 
-    ```
-     <span class="k-icon k-font-icon k-i-calendar"></span>
-    ```
+ The following example demonstrates how to render a font calendar icon.
+ ```
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-font-icons/dist/index.css" />
+    <span class="k-icon k-font-icon k-i-calendar"></span>
+ ```
 
 ## Rendering with Unicode Numbers
 
@@ -70,9 +66,9 @@ Though the web icon font comes with a set of predefined CSS classes, you might n
 
 Icon fonts support the following options for visual enhancement:
 
-* Application of [different sizes](#sizes).
-* Application of [icon colors](#colors).
-* [Flipping](#flipping) of icons.
+* Application of [different sizes](#qdjusting-the-size).
+* Application of [icon colors](#adjusting-the-colors).
+* [Flipping](#applying-flipping) of icons.
 
 ### Adjusting the Size
 

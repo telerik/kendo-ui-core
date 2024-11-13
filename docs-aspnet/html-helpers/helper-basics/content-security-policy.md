@@ -23,13 +23,17 @@ If the strict CSP mode is enabled, some browser features are disabled by default
 
 * Dynamic code evaluation through `eval()` and string arguments for both `setTimeout` and `setInterval` are blocked.
 
-## (For R1 2023 SP1 and Later) Working with Telerik UI for {{ site.framework }} Components
+## Telerik UI for {{ site.framework }} 2024 Q4 and Later
+
+Starting with 2024 Q4 release, all Telerik UI for {{ site.framework }} components are CSP compliant. 
+
+## Telerik UI for {{ site.framework }} Versions between R1 2023 and 2024 Q4
 
 As of R1 2023 release, the Kendo UI scripts address the `unsafe-eval` directive for all components except for the [Spreadsheet](https://docs.telerik.com/kendo-ui/controls/spreadsheet/overview).
 
-> For the bigger part of its core engine, the Kendo UI for jQuery Spreadsheet uses the `Function` evaluation, and rewriting the logic of the component will lead to a great number of breaking changes.
-
 The rest of the Kendo UI components and internal mechanisms have been rewritten to discard the usage of the `eval()` and `new Function()` calls.
+
+## Achieving CSP Compliance with the Helpers
 
 {% if site.core %}
 
@@ -188,7 +192,7 @@ For a runnable example, refer to the [Template component integration with Grid d
 
 The engine for the Kendo UI [inline](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline) and [external](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external) templates will remain available. However, if you are using the previous template syntax, you must include the `usafe-eval` directive into the application `meta` tag.
 
-## (Prior to R1 2023 SP1) Working with Telerik UI for {{ site.framework }} Components
+## Telerik UI for {{ site.framework }} Before R1 2023 SP1
 
 The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does not support the strict CSP mode. Thus, in these previous versions, if the Content Security Policy (CSP) is enabled, you can set the [`script-src` policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) as follows:
 

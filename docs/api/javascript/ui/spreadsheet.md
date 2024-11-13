@@ -1367,7 +1367,7 @@ A Boolean value which indicates if the sheets-bar will be displayed.
 
 A Boolean value which indicates if the toolbar will be displayed.
 
-Apart from the built-in tools, the Spreadsheet Home, Insert and Data ToolBars fully expose the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
+Apart from the built-in tools, the Spreadsheet File, Home, Insert, Format, Data and View ToolBars fully expose the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself:
 
 #### Example
 

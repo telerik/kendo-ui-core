@@ -29,7 +29,7 @@ The Chart supports the standards for providing accessible web content which are 
 Meeting some of the Success Criteria in WCAG 2.2 may require additional customization:
 * ***1.4.3** Contrast (Minimum)*
 
-  The color of chart elements may need to be customized to meet the minimum required contrast level. Some [Theme Swatches]({% slug sassbasedthemes_swatches_kendoui %}) like the [Ocean Blue A11y Accessibility Swatch]({% slug high_contrast_theme_accessibility_support %}) meet and exceed this criteria.
+  The color of chart elements may need to be customized to meet the minimum required contrast level. Some [Theme Swatches]({% slug sassbasedthemes_kendoui %}) like the [Ocean Blue A11y Accessibility Swatch]({% slug high_contrast_theme_accessibility_support %}) meet and exceed this criteria.
 * ***2.5.8:** Target Size (Minimum)*
 
   The size of [Series Markers](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers) and the font size of [Legend Items](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend.item) may need to be customized to meet the minimum size of 24x24px required by this criteria.

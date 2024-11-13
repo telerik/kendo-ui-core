@@ -23,7 +23,7 @@ The Less-based themes will receive the new [styling options]({% slug components_
 
 The reason behind the deprecation of the Less-based themes is that they take a tremendous amount of time and resources to be kept updated.
 
-The Sass-based themes provide unique swatches that are based on the main theme and can be updated at once. This enables the timely design and color scheme changes of the components which, in turn, leaves more time for new themes and swatches to be developed.
+The SASS-based themes provide unique [swatches]({% slug sassbasedthemes_kendoui %}#swatch) that are based on the main theme and can be updated at once. This allows us to change the design and color scheme of our components in a more timely manner which in turn leaves more time for new themes and swatches to be developed.
 
 With the Less-based themes, each individual theme has its own code base. Any time a component is updated or introduced, you must recreate each Less theme to ensure that the new addition is rendered without problems.
 

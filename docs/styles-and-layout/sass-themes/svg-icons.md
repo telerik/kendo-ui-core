@@ -10,7 +10,7 @@ position: 6
 
 As of the R1 SP1 2023 release, the Kendo UI for jQuery supports rendering of SVG icons instead of the traditional [Font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
 
-> To ensure that all icons are displayed correctly, use one of the supported SASS themes. For installing a SASS theme, go to the article on [adding SASS themes to your Kendo UI for jQuery project]({% slug sassbasedthemes_installation_kendoui %}).
+> To ensure that all icons are displayed correctly, use one of the available [built-in themes]({% slug sassbasedthemes_kendoui%}).
 
 ## What Are SVG Icons
 
@@ -83,6 +83,28 @@ The following example shows how to set a custom SVG icon renderer.
     $('body').append(icon);
 </script>
  ```
+
+## Customizing SVG Icons
+
+You can visually enhance the font and SVG icons by:
+
+* Changing the icon's size.
+* Changing the icon's themeColor.
+* Applying a different color.
+* Flipping and rotating the icon.
+* Applying an iconClass.
+
+The next example shows how to apply `size`, `themeColor`, and a custom CSS class to the SVG icon.
+
+```dojo
+<span id="icon" class="xlarge"></span>
+
+<script>
+    kendo.ui.icon($("#icon"), { icon: 'camera', size: "xlarge", themeColor: "primary", iconClass: "custom-class" });
+</script>
+```
+
+You can find more about visual adjustments for icons in the <a href="https://www.telerik.com/design-system/docs/foundation/iconography/visual-adjustments/" target="_blank">Progress Design System</a>.
 
 ## Reverting to Font Icons
 
