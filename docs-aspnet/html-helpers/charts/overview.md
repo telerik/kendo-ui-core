@@ -311,6 +311,8 @@ You may also need to apply global settings that affect all axes. In such cases, 
 * [Data binding]({% slug htmlhelpers_charts_databinding_aspnetcore %})—You can populate the Telerik UI Chart for {{ site.framework }} with data by binding it to inline data, local data, or remote data.
 * [Appearance]({% slug htmlhelpers_charts_appearance_aspnetcore %})—Unlike other {{ site.product }} components which use only CSS for styling, you can control the appearance of the Chart elements primarily by using JavaScript style options.
 * [Scaffolding](% slug scaffoldingchart_aspnetmvc %)—The Chart for {{ site.framework }} enables you to use the Kendo UI Scaffolder Visual Studio extension.
+* [No Data Template](% slug htmlhelpers_charts_no_data_template %)—The Chart for {{ site.framework }} allows you to display a message when there is no data to show. Here’s how to set up a custom message for scenarios where the chart data is unavailable.
+* [Series Patterns](% slug htmlhelpers_charts_patterns %)—The Telerik UI Chart component for {{ site.framework }} offers customization options for presenting data visually, including support for using patterns in chart series.
 
 ## Chart Types
 
