@@ -7,7 +7,7 @@ capital_casing_redirects: true
 
 # Exclude files which should not be in the output
 exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, all-pages.md, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
-exclude_navigation: ["knowledge-base/*", contribution.html, "third-party/webforms/*"]
+exclude_navigation: ["knowledge-base/*", contribution.html, "third-party/webforms/*", "php/*", "jsp/*"]
 navigation:
 ## List your directory names and order here, like this:
     "api":
@@ -341,14 +341,6 @@ navigation:
     "security":
         title: "Security"
         position: 12
-    "jsp":
-        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
-        position: 20
-    "php":
-        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
-        position: 30
-    "php/widgets":
-        title: "Classes"
     "backwards-compatibility":
         title: "Breaking Changes"
         position: 40
@@ -702,12 +694,6 @@ navigation:
     "api/javascript":
         title: "JavaScript"
         position: 2
-    "api/jsp":
-        title: "JSP"
-        position: 3
-    "api/php":
-        title: "PHP"
-        position: 4
     "all-pages":
         title: "All Pages GSA"
 
@@ -1530,30 +1516,6 @@ defaults:
         category: "default"
         product: "kendo-ui"
         editable: true
--
-    scope:
-        path: "php"
-    values:
-        product: "php-ui"
--
-    scope:
-        path: "api/php"
-    values:
-        product: "php-ui"
-        editable: false
-        has_api_toc: true
--
-    scope:
-        path: "api/jsp"
-    values:
-        product: "jsp-ui"
-        editable: false
-        has_api_toc: true
--
-    scope:
-        path: "jsp"
-    values:
-        product: "jsp-ui"
 -
     scope:
         path: "api"

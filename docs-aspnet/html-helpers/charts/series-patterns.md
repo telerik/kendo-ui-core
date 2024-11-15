@@ -10,6 +10,28 @@ position: 7
 
 The Telerik UI Chart component for {{ site.framework }} offers customization options for presenting data visually, including support for using patterns in chart series. Patterns are providing unique and visually differentiate between them. This article demonstrates how to apply various patterns to the series in a Bar Chart and a Pie Chart.
 
+## Pattern Types
+
+The Telerik UI Chart component for {{ site.framework }} offers several pattern types to enhance the visual presentation of chart series:
+
+* `Crosshatch`
+* `DiagonalStripes`
+* `Dots`
+* `Grid`
+* `VerticalStripes`
+
+## Pattern Settings
+
+The chart series patterns can be customized by adjusting the following settings:
+
+* `Background` - The Background color of the pattern
+* `Color` - The color of the pattern. Defaults to the series color
+* `Gap` - The gap between the elements of the pattern
+* `Radius` - The radius of the dots(applicable only for the "Dots" pattern)
+* `Size` - The size of the squares in the Grid(applicable only for the "Grid" pattern)
+* `Type` - Specifies the type of the pattern
+* `Width` - The width of the lines(applicable for the "Crosshatch", "DiagonalStripes", and "VerticalStripes" patterns)
+
 ## Example with Bar Chart
 
 The following example showcases a bar chart where each series uses a different pattern, allowing viewers to easily differentiate between them.

@@ -93,24 +93,6 @@ Kendo UI for Vue comes in two flavors: [native Kendo UI for Vue](https://www.tel
 * [Get a License](https://www.telerik.com/purchase/aspnet-mvc)
 * [License Agreement](https://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 
-### Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP
-
-[Telerik UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes Java Server Pages (JSP) tags for all commercially available Kendo UI components.
-
-* [Demos](https://demos.telerik.com/jsp-ui/)
-* [Docs](/jsp/introduction)
-* [Get a License](https://www.telerik.com/purchase/jsp-ui)
-* [License Agreement](https://www.telerik.com/purchase/license-agreement/jsp-ui)
-
-### Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP
-
-[Telerik UI for PHP](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI components.
-
-* [Demos](https://demos.telerik.com/php-ui/)
-* [Docs](/php/introduction)
-* [Get a License](https://www.telerik.com/purchase/php-ui)
-* [License Agreement](https://www.telerik.com/purchase/license-agreement/php-ui)
-
 ### RadSpreadProcessing
 
 [RadSpreadProcessing](https://www.telerik.com/products/wpf/spreadsheet-processing.aspx) is a .NET library which allows you to read, create, and write Microsoft Excel (`.xlsx`) documents. It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.

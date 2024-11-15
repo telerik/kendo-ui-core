@@ -10,8 +10,6 @@ position: 4
 
 The Splitter provides options for [nesting its layouts](#nesting-layouts), implementing [automatic](#auto-resizing) and [manual](#resizing-manually) resizing, and [allowing elements to overflow panes](#allowing-elements-to-overflow-panes).
 
-> The Splitter relies on JavaScript size calculations to construct its layout while Flexbox relies on pure CSS. The two techniques are difficult to combine and the Splitter is not designed to work with Flexbox but rather to spare the need to use Flexbox in general. To avoid CSS conflicts, do not apply Flexbox styles to the Splitter elements.
-
 ## Nesting Layouts
 
 To render complex layouts, you can nest layouts in the Splitter.
