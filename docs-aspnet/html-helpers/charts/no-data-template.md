@@ -8,7 +8,7 @@ position: 6
 
 # No Data Template
 
-The Telerik UI Chart component for {{ site.framework }} allows you to display a message when there is no data to show. This feature is particularly useful when loading data asynchronously, as it reassures users that data may appear after a delay. Customizing the No Data Template is simple, enabling you to add styling or interactive elements like buttons to improve usability. Here’s how to set up a custom message for scenarios where the chart data is unavailable.
+The Telerik UI Chart component for {{ site.framework }} allows to display a message when there is no data to show. This feature is particularly useful when loading data asynchronously, as it reassures users that data may appear after a delay. Customizing the No Data Template is simple, enabling to add styling or interactive elements like buttons to improve usability. The No Data Template can be used for all [chart types]({% slug overview_charttypes_charts%}). Here’s how to set up a custom message for scenarios where the chart data is unavailable.
 
 ## Example with Bar Chart
 
@@ -192,6 +192,23 @@ The Telerik UI Chart component for {{ site.framework }} allows you to display a 
             })
         })
     </script>
+```
+
+## Intergation with Template Component
+
+The Telerik Template component can be integrated to further enhance the No Data Template. For example, the Html.Kendo().Template() approach can be used to add more complex UI elements, such as buttons or forms, directly within the template. Here is an example:
+
+```HtmlHelper
+    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
+        .Name("chart")
+        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Bar_Charts")))
+        .Series(series =>
+        {
+            series.Column(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
+            series.Column(model => model.Wind).Name("Wind").CategoryField("Year");
+        })
+        .NoData(nd => nd.Template(Html.Kendo().Template().AddHtml(@<text>No Data To display</text>).AddComponent(c => c.Button().Name("btn").Content("Reload").Events(ev => ev.Click("implementReloadFunctionality")))))
+    )
 ```
 
 ## See Also
