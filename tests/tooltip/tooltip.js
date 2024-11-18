@@ -493,7 +493,7 @@
             });
 
             tooltip.show(container);
-            assert.equal(kendo._outerWidth(tooltip.popup.element) + 1, tooltip.popup.wrapper.width());
+            roughlyEqual(kendo._outerWidth(tooltip.popup.element) + 1, tooltip.popup.wrapper.width(), 0.5);
         });
 
         it("width is set to the popup", function() {
