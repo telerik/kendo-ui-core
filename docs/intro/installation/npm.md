@@ -216,6 +216,39 @@ To bundle the UMD files:
     npx rollup -c
     ```
 
+### Latest Export Settings
+
+As of `2024.4.1112` the `@progress/kendo-ui` NPM package introduce a more fine-grained exports setting to satisfy various module bundlers and easy its usage in the NPM ecosystem.
+
+```javascript
+`@progress/kendo-ui` //Imports the kendo.all.js 
+`@progress/kendo-ui/*.js` //Imports the files corresponding to the modul system used - ESM or CJS.
+`@progress/kendo-ui/esm` //Imports kendo.all.js only for ESM.
+`@progress/kendo-ui/esm/*.js` //Imports the files for ESM.
+`@progress/kendo-ui/cjs` //Importskendo.all.js only for CJS.
+`@progress/kendo-ui/esm/*.js` //Imports the files for CJS.
+`@progress/kendo-ui/umd` //Imports kendo.all.min.js only for UMD.
+`@progress/kendo-ui/umd/*.js` //Imports th files for UMD.
+```
+
+#### Examples
+
+```javascript
+import "@progress/kendo-ui"; //Imports the kendo.all.js 
+```
+
+```javascript
+import "@progress/kendo-ui/esm"; //Imports kendo.all.js only for ESM.
+```
+
+```javascript
+import "@progress/kendo-ui/kendo.grid.js"; //Imports the Grid related files corresponding to the modul system used - ESM or CJS.
+```
+
+```javascript
+import "@progress/kendo-ui/esm/kendo.grid.js"; //Imports the Grid related files for ESM.
+```
+
 ## Known Issues 
 
 * The Progress NPM registry was retired in favor of [npmjs.com](https://www.npmjs.com/). To start using the default registry, remove the two lines which contain `registry.npm.telerik.com` from your `.npmrc` file.

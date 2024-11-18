@@ -31,6 +31,7 @@ All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)
 |[Panes]({% slug panes_charts_widget %}) | The Chart panes enable you to create vertical sub-divisions in a single categorical Chart.
 |[Title]({% slug title_features_charts %}) | The Chart enables you to configure its title.
 |[Tooltip]({% slug tooltip_charts_widget %}) | The Chart enables you to display details about the data point over which the mouse is currently hovering.
+|[No Data Template]({% slug kendo_charts_no_data_template %}) | The Chart allows you to show an overlay with a "No Data Available" message when there's no data in the component.
 
 ## Next Steps 
 
