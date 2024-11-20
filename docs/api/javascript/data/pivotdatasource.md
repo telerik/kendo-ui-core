@@ -721,23 +721,24 @@ The last aggregated result of the function for already processed records.
               "Average": {
                 field: "UnitPrice",
                 aggregate: function(value, state, context) {
-                    if (!isNaN(value)) {
-                        state.count = (state.count || 0) + 1;
-                        return (state.accumulator || 0) + value;
-                    } else {
-                        return state.accumulator;
-                    }
+                  if (!isNaN(value)) {
+                    state.count = (state.count || 0) + 1;
+                    return (state.accumulator || 0) + value;
+                  } else {
+                    return state.accumulator;
+                  }
                 },
                 result: function(state) {
-                    result state.accumulator / state.count;
+                  return state.accumulator / state.count
                 }
+              }
             }
           }
         }
       });
 
       dataSource.fetch(function() {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>

@@ -6722,22 +6722,27 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
     </script>
 
 #### Example - remove a data item from the data source
+    <button id="remove">Remove</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview"
-        }
-      ]
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var event = scheduler.dataSource.at(0);
-    scheduler.dataSource.remove(event);
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview"
+          }
+        ]
+      });
+      $("#remove").click(function(){
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        var event = scheduler.dataSource.at(0);
+        console.log(event);
+        scheduler.dataSource.remove(event);
+      }) 
+
     </script>
 
 ### resources `Array`

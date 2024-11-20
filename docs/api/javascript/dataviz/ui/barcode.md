@@ -308,7 +308,8 @@ If set to false the barcode will not display the value as a text below the barco
       value:"123456",
       text:{
         visible: false
-      }
+      },
+      height:200
     });
     </script>
 

@@ -202,7 +202,6 @@ Specifies the url from which the content is fetched
     <script>
       $("#dialog").kendoWindow({
         content: "../content/web/tabstrip/ajax/ajaxContent2.html"
-        },
       });
     </script>
 

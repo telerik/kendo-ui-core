@@ -1287,7 +1287,7 @@ Triggered when a pane is unpinned.
     $("#dockmanager").kendoDockManager({
                 rootPane: {
                     type: "split",
-                    orientation: "vertical"
+                    orientation: "vertical",
                     panes: [{
                             type: "content",
                             title: "Pane title",

@@ -14,8 +14,7 @@ component: view_mobile
 
 The MVVM model to bind to. If a string is passed, The view will try to resolve a reference to the view model variable in the global scope.
 
-#### Example
-
+```
     <div data-role="view" data-model="foo">
        <span data-bind="text:bar"></span>
     </div>
@@ -24,13 +23,13 @@ The MVVM model to bind to. If a string is passed, The view will try to resolve a
     var foo = { bar: "baz" }
     new kendo.mobile.Application();
     </script>
+```
 
 ### reload `Boolean` *(default: false)*
 
 Applicable to remote views only. If set to true, the remote view contents will be reloaded from the server (using Ajax) each time the view is navigated to.
 
-#### Example
-
+```
     <!-- foo.html -->
     <div data-role="view">
         <a data-role="button" href="bar.html">Go to bar</a>
@@ -41,25 +40,25 @@ Applicable to remote views only. If set to true, the remote view contents will b
       I will be requested from the server every time I am displayed
       <a href="#" id="link">Link</a>
     </div>
+```
 
 ### scroller `Object` *(default: null)*
 
 Configuration options to be passed to the scroller instance instantiated by the view. For more details, check the scroller [configuration options](/api/mobile/scroller#configuration).
 
-#### A view with elastic scrolling set to false
-
+```
     <!-- foo.html -->
     <div data-role="view" data-scroller='{"elastic": false}'>
         This view will not bounce when scrolled
     </div>
+```
 
 ### stretch `Boolean`*(default: false)*
 
 If set to true, the view will stretch its child contents to occupy the entire view, while disabling kinetic scrolling.
 Useful if the view contains an image or a map.
 
-#### Example
-
+```
     <div data-role="view" data-stretch="true">
       <div style="background: gray">This element will be stretched</div>
     </div>
@@ -67,13 +66,13 @@ Useful if the view contains an image or a map.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### title `String`
 
 The text to display in the NavBar title (if present) and the browser title.
 
-#### Example
-
+```
     <div data-role="view" data-title="foo">
       <div data-role="header">
         <div data-role="navbar">
@@ -85,14 +84,14 @@ The text to display in the NavBar title (if present) and the browser title.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### useNativeScrolling `Boolean`*(default: false)*
 
 If set to true, the view will use the native scrolling available in the current platform. This should help with form issues on some platforms (namely Android and WP8).
 Native scrolling is only enabled on platforms that support it: iOS > 5+, Android > 3+, WP8. BlackBerry devices do support it, but the native scroller is flaky.
 
-#### Example
-
+```
     <div data-role="view" data-use-native-scrolling="true">
       <div style="height: 2000px;">Tall element - this view has native scrolling</div>
     </div>
@@ -100,13 +99,13 @@ Native scrolling is only enabled on platforms that support it: iOS > 5+, Android
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### zoom `Boolean`*(default: false)*
 
 If set to true, the user can zoom in/out the contents of the view using the pinch/zoom gesture.
 
-#### Example
-
+```
     <div data-role="view" data-zoom="true">
       <div style="height: 2000px;width:200px;">Big element - the view can be zoomed with two fingers</div>
     </div>
@@ -114,6 +113,7 @@ If set to true, the user can zoom in/out the contents of the view using the pinc
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -123,8 +123,7 @@ Retrieves the current content holder of the View - this is the content element i
 
 > **Important:** Use this method to get a reference container in order to remove or append contents to the View
 
-#### Example
-
+```
     <div data-role="view" id="myView">
         <a data-role="button" data-click="getContentElement">Tap here</a>
     </div>
@@ -138,14 +137,13 @@ Retrieves the current content holder of the View - this is the content element i
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### destroy
 
 Prepares the **View** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the View element from DOM.
-
-#### Example
 
 ```
 <div data-role="view" id="main">
@@ -171,8 +169,7 @@ Enables or disables the user interaction with the view and its contents.
 
 Omitting the parameter or passing `true` enables the view. Passing `false` disables the view.
 
-#### Example - disable a view
-
+```
     <div data-role="view" id="myView">
         <a data-role="button" data-click="disableView">Tap here</a>
     </div>
@@ -184,6 +181,7 @@ Omitting the parameter or passing `true` enables the view. Passing `false` disab
 
     new kendo.mobile.Application();
     </script>
+```
 
 ## Events
 
@@ -191,8 +189,7 @@ Omitting the parameter or passing `true` enables the view. Passing `false` disab
 
 Fires after the mobile View becomes visible. If the view is displayed with transition, the event is triggered after the transition is complete.
 
-#### Example
-
+```
     <div data-role="view" id="foo">
         <a href="#bar" data-role="button">Go to bar</a>
     </div>
@@ -209,6 +206,7 @@ Fires after the mobile View becomes visible. If the view is displayed with trans
         console.log(e.view);
     }
     </script>
+```
 
 #### Event Data
 
@@ -220,8 +218,7 @@ The mobile view instance
 
 Fires before the mobile View becomes hidden.
 
-#### Example
-
+```
     <div data-role="view" id="foo" data-before-hide="beforeHide">
         <a href="#bar" data-role="button">Bar</a>
     </div>
@@ -237,6 +234,7 @@ Fires before the mobile View becomes hidden.
         console.log('foo hidden');
     }
     </script>
+```
 
 #### Event Data
 
@@ -248,8 +246,7 @@ The mobile view instance
 
 Fires before the mobile View becomes visible. The event can be prevented by calling the `preventDefault` method of the event parameter, in case a redirection should happen.
 
-#### Example
-
+```
     <div data-role="view" id="foo">
         <a href="#protected" data-role="button">Go to protected</a>
     </div>
@@ -266,6 +263,7 @@ Fires before the mobile View becomes visible. The event can be prevented by call
         app.navigate("#foo");
     }
     </script>
+```
 
 #### Event Data
 
@@ -277,8 +275,7 @@ The mobile view instance
 
 Fires when the mobile View becomes hidden.
 
-#### Example
-
+```
     <div data-role="view" id="foo" data-hide="onHide">
         <a href="#bar" data-role="button">Bar</a>
     </div>
@@ -294,6 +291,7 @@ Fires when the mobile View becomes hidden.
         console.log('foo hidden');
     }
     </script>
+```
 
 #### Event Data
 
@@ -305,8 +303,7 @@ The mobile view instance
 
 Fires after the mobile View and its child widgets are initialized.
 
-#### Example
-
+```
     <div data-role="view" id="foo" data-init="init">
         Foo
     </div>
@@ -319,6 +316,7 @@ Fires after the mobile View and its child widgets are initialized.
         console.log('init');
     }
     </script>
+```
 
 #### Event Data
 
@@ -330,8 +328,7 @@ The mobile view instance
 
 Fires when the mobile View becomes visible.
 
-#### Example
-
+```
     <div data-role="view" id="foo" data-show="show">
         Foo
     </div>
@@ -343,6 +340,7 @@ Fires when the mobile View becomes visible.
         console.log('show');
     }
     </script>
+```
 
 #### Event Data
 
@@ -396,8 +394,7 @@ The currently set query string parameters
 
 The View mobile scroller container DOM element. Recommended if scrollable mobile View contents need to be manipulated or replaced. If you don't know if the View has a Scroller initialized, please use the `contentElement` method instead.
 
-#### Replace scrollable View contents
-
+```
     <div data-role="view" data-init="replaceContents"> Old content</div>
 
     <script>
@@ -407,3 +404,4 @@ The View mobile scroller container DOM element. Recommended if scrollable mobile
 
     new kendo.mobile.Application();
     </script>
+```

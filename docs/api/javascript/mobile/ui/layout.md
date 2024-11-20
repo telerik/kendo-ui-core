@@ -13,8 +13,7 @@ res_type: api
 
 The id of the layout. **Required**
 
-#### Example
-
+```
     <div data-role="view" data-layout="default">
       Foo view
     </div>
@@ -35,14 +34,14 @@ The id of the layout. **Required**
         color: red;
       }
     </style>
+```
 
 ### platform `String`
 
 The specific platform this layout targets. By default, layouts are displayed
 on all platforms.
 
-#### Example
-
+```
     <div data-role="view" data-layout="default">
       Foo view
     </div>
@@ -68,6 +67,7 @@ on all platforms.
           color: red;
       }
     </style>
+```
 
 ## Events
 
@@ -85,8 +85,7 @@ The mobile layout instance
 
 The mobile view instance
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-layout="default">
       Foo view
     </div>
@@ -112,6 +111,7 @@ The mobile view instance
         console.log(e.view.id + " view hidden");
     }
     </script>
+```
 
 ### init
 
@@ -123,8 +123,7 @@ Fires after a mobile Layout and its child widgets is initialized.
 
 The mobile layout instance
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-layout="default">
       Foo view
     </div>
@@ -145,6 +144,7 @@ The mobile layout instance
         console.log("init");
     }
     </script>
+```
 
 ### show
 
@@ -160,8 +160,7 @@ The mobile layout instance
 
 The mobile view instance
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-layout="default">
       Foo view
     </div>
@@ -187,3 +186,4 @@ The mobile view instance
       console.log("show");
     }
     </script>
+```

@@ -1166,7 +1166,7 @@ Inserts an item into a **ContextMenu** after the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
+                //imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },

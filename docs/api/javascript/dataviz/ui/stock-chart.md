@@ -1039,7 +1039,7 @@ without loading them at once.
         navigator: {
             dataSource: {
                 transport: {
-                    read: "/stock/volume"
+                    //read: "/stock/volume" 
                 }
             }
         }
@@ -1062,8 +1062,8 @@ Applicable only when using a dedicated navigator data source.
         }
     });
 
-    // ...
-    naviDataSource.read();
+    //Call the navigator dataSource's read method
+    //naviDataSource.read();
     </script>
 
 ### navigator.dateField `String`
@@ -1270,8 +1270,7 @@ Omitting the array and specifying a single series is also acceptable.
                 type: "line",
                 field: "volume"
             }
-         },
-         ...
+         } 
     });
     </script>
 
@@ -1305,23 +1304,36 @@ The following dash types are supported:
 
   <div id="stock-chart"></div>
   <script>
-  $("#stock-chart").kendoStockChart({
-    series: [
-      {
-        dashType: "dashDot",
-        type: "line",
-        data: [1, 2, 3]
-      }
-    ],
-    categoryAxis: {
-      baseUnit: "days",
-      categories: [
-        new Date(2012, 1, 1),
-        new Date(2012, 1, 2),
-        new Date(2012, 1, 3)
-      ]
-    }
-  });
+    $("#stock-chart").kendoStockChart({
+      series: [
+        {
+          dashType: "dashDot",
+          type: "line",
+          type: "candlestick",
+          openField: "Open",
+          highField: "High",
+          lowField: "Low",
+          closeField: "Close",
+          data:[{
+            "Date": "2016/01/01",
+            "Open": 41.62,
+            "High": 41.69,
+            "Low": 39.81,
+            "Close": 40.12,
+            "Volume": 2632000
+          }, {
+            "Date": "2016/03/01",
+            "Open": 40.62,
+            "High": 39.69,
+            "Low": 40.81,
+            "Close": 39.12,
+            "Volume": 2631986
+          }
+                ]
+        }
+      ],
+      dateField: "Date"
+    });
   </script>
 
 
@@ -1363,17 +1375,36 @@ Array of data items. The data item type can be either a:
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
-    series: [
-      {
-        type: "candlestick",
-        data: [2, 4, 1, 3]
+      series: [
+          {
+            type: "candlestick",
+            openField: "Open",
+            highField: "High",
+            lowField: "Low",
+            closeField: "Close",
+            data:[{
+              "Date": "2016/01/01",
+              "Open": 41.62,
+              "High": 41.69,
+              "Low": 39.81,
+              "Close": 40.12,
+              "Volume": 2632000
+            }, {
+              "Date": "2016/03/01",
+              "Open": 40.62,
+              "High": 39.69,
+              "Low": 40.81,
+              "Close": 39.12,
+              "Volume": 2631986
+            }
+          ]
+        }
+      ],
+      categoryAxis: {
+        categories: [
+          new Date(2012, 1, 1)
+        ]
       }
-    ],
-    categoryAxis: {
-      categories: [
-        new Date(2012, 1, 1)
-      ]
-    }
     });
     </script>
 
@@ -1691,7 +1722,7 @@ The fields which can be used in the template are:
             name: "Value: #: group.value #",
             visibleInLegend: true,
             labels: {
-              ariaTemplate: "The value for #= e.series.name # in #= e.category # is #= e.value #",
+              ariaTemplate: "The value for #= series.name # in #= category # is #= value #",
               visible: true
             }
           }
@@ -2253,6 +2284,7 @@ If set to `false` the mousewheel will not update the selection.
           }
         }
     });
+    </script>
 
 #### Example - disable the selection mousewheel behavior
 
@@ -2282,6 +2314,7 @@ If set to `false` the mousewheel will not update the selection.
           }
         }
     });
+    </script>
 
 ### navigator.select.mousewheel.reverse `Boolean` *(default: false)*
 
@@ -4097,7 +4130,7 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       categoryAxis: {
-        notesdata {
+        notesdata: {
           data: [{
             value: 1,
             label: {
@@ -5786,7 +5819,7 @@ The author of the PDF document.
 
 #### Example - set the author
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5838,7 +5871,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
 
 #### Example - set the date
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5864,7 +5897,7 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
 
 #### Example - use proxy
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5891,7 +5924,7 @@ Specifies the file name of the exported PDF file.
 
 #### Example - set the default PDF file name
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5917,7 +5950,7 @@ Specifies the keywords of the exported PDF file.
 
 #### Example - set the keywords
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5943,7 +5976,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
 
 #### Example - enable landscape mode
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5971,7 +6004,7 @@ units are "mm", "cm", "in" and "pt" (default).
 
 #### Example - set the margins
 
-    <div id="chart" style="width: 600px; height: 400px;"></div>
+    <div id="stock-chart" style="width: 600px; height: 400px;"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -6024,7 +6057,7 @@ Supported values:
 
 #### Example - set custom paper size
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -6063,7 +6096,7 @@ The proxy should return the decoded file with set "Content-Disposition" header.
 
 #### Example - set the server proxy URL
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -6093,7 +6126,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 
 #### Example - open the generated document in a new window
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -6121,7 +6154,7 @@ Sets the subject of the PDF file.
 
 #### Example - set the subject
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -6147,7 +6180,7 @@ Sets the title of the PDF file.
 
 #### Example - set the title
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -6952,7 +6985,7 @@ The series base color. The supported values are:
 
 #### Example set color as a function
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
         dataSource: {
@@ -8316,7 +8349,7 @@ The fields which can be used in the template are:
       seriesDefaults: {
         labels: {
           template: "#= value #%",
-          ariaTemplate: "The value for #= e.series.name # on #= e.category # is #= e.value #",
+          ariaTemplate: "The value for #= series.name # on #= category # is #= value #",
           visible: true
         }
       },
@@ -9685,8 +9718,7 @@ The border of the title.
                 // set the border style to long dashes
                 dashType: "longDash"
             }
-        },
-        ...
+        }
     });
 ```
 
@@ -11476,7 +11508,7 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       valueAxis: {
-        notesdata {
+        notesdata: {
           data: [{
             value: 1,
             label: {

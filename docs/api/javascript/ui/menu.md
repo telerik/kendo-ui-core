@@ -343,6 +343,7 @@ Sets the field of the data item that provides the text of the menu items.
 
     <ul id="menu"></ul>
     <script>
+        var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
@@ -369,6 +370,7 @@ Sets the field of the data item that provides the url of the menu items.
 
     <ul id="menu"></ul>
     <script>
+        var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
@@ -395,6 +397,7 @@ Sets the field of the data item that provides the sprite css class of the menu i
 
     <ul id="menu"></ul>
     <script>
+        var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
@@ -441,6 +444,7 @@ Sets the field of the data item that provides the content of the menu items.
 
     <ul id="menu"></ul>
     <script>
+        var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
@@ -1039,7 +1043,7 @@ Inserts an item into a **Menu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },

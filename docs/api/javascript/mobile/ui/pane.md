@@ -21,7 +21,7 @@ The id of the initial mobile View to display.
 
 The id of the initial mobile View to display.
 
-#### Example
+```
     <div data-role="splitview">
         <div data-role="pane" data-initial="#bar">
 
@@ -38,12 +38,13 @@ The id of the initial mobile View to display.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### layout `String`
 
 The id of the default Pane Layout.
 
-#### Example
+```
     <div data-role="splitview">
       <div data-role="pane" data-initial="#bar" data-layout="my">
           <div data-role="view" id="foo">
@@ -63,13 +64,13 @@ The id of the default Pane Layout.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### loading `String` *(default: "Loading...")*
 
 The text displayed in the loading popup. Setting this value to false will disable the loading popup.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" id="my-pane" data-loading="Wait!">
           <div data-role="view" id="foo" data-show="showLoading">
@@ -85,6 +86,7 @@ The text displayed in the loading popup. Setting this value to false will disabl
       $("#my-pane").data("kendoMobilePane").showLoading();
     }
     </script>
+```
 
 ### portraitWidth `Number`
 
@@ -94,8 +96,7 @@ Sets the pane width in pixels when the device is in portrait position.
 
 The default View transition.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" data-transition="slide">
           <div data-role="view" id="foo"> <a data-role="button" href="#bar">Bar</a> </div>
@@ -106,6 +107,7 @@ The default View transition.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -119,8 +121,7 @@ Prepares the **Pane** for safe removal from DOM. Detaches all event handlers and
 
 Hide the loading animation.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" id="my-pane" data-loading="Wait!">
           <div data-role="view" id="foo" data-show="showLoading">
@@ -140,13 +141,13 @@ Hide the loading animation.
       }, 1000);
     }
     </script>
+```
 
 ### navigate
 
 Navigate the local or remote view.
 
-#### Navigate to a remote view
-
+```
     <div data-role="splitview">
         <div data-role="pane" id="main-pane">
             <div data-role="view">
@@ -163,9 +164,9 @@ Navigate the local or remote view.
 
     new kendo.mobile.Application();
     </script>
+```
 
-#### Navigate to a local view
-
+```
     <div data-role="splitview">
         <div data-role="pane" id="main-pane">
             <div data-role="view"> <a data-role="button" data-click="goToSettings">Settings</a> </div>
@@ -181,6 +182,7 @@ Navigate the local or remote view.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Parameters
 
@@ -206,8 +208,7 @@ The id or URL of the view.
 
 The transition to apply when navigating. See [View Transitions](/mobile/application#view-transitions) for more information.
 
-#### Example
-
+```
     <div data-role="splitview">
         <div data-role="pane" id="main-pane">
             <div data-role="view" id="foo">
@@ -234,13 +235,13 @@ The transition to apply when navigating. See [View Transitions](/mobile/applicat
 
         new kendo.mobile.Application(document.body);
     </script>
+```
 
 ### showLoading
 
 Show the loading animation.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" id="my-pane" data-loading="Wait!">
           <div data-role="view" id="foo" data-show="showLoading">
@@ -260,13 +261,13 @@ Show the loading animation.
       }, 1000);
     }
     </script>
+```
 
 ### view
 
 Get a reference to the current view.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" data-init="showLoading" id="my-pane" data-loading="Wait!">
           <div data-role="view" id="foo">
@@ -283,6 +284,7 @@ Get a reference to the current view.
      console.log($("#my-pane").data("kendoMobilePane").view());
     }
     </script>
+```
 
 #### Returns
 
@@ -294,8 +296,7 @@ Get a reference to the current view.
 
 Triggered when pane navigates to a view.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" data-navigate="onNavigate">
           <div data-role="view" id="foo"> <a data-role="button" href="#bar">Bar</a> </div>
@@ -311,6 +312,7 @@ Triggered when pane navigates to a view.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 
@@ -322,8 +324,7 @@ The URL of the view
 
 Triggered after the pane displays a view.
 
-#### Example
-
+```
     <div data-role="splitview">
       <div data-role="pane" data-view-show="viewShown">
           <div data-role="view" id="foo"> <a data-role="button" href="#bar">Bar</a> </div>
@@ -338,6 +339,7 @@ Triggered after the pane displays a view.
     }
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 

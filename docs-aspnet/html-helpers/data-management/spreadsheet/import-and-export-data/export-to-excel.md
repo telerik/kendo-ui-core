@@ -33,9 +33,9 @@ The Spreadsheet client-side API includes the [`saveAsExcel`](https://docs.teleri
     )
 ```
 
-## Known Issues
+## Outputting the Result
 
-Currently, the export module does not handle sorting and filtering. This limitation will be addressed before the widget goes out of its Beta version.
+Through its default configuration the {{ site.product }} Spreadsheet exports the current sheet of data with sorting and filtering applied.
 
 ## See Also
 

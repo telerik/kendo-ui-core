@@ -25,34 +25,30 @@ Whether to hide the browser address bar. Supported only in iPhone and iPod. Does
 
 > This option is only available in iOS6. For hiding the address bar in iOS7, enable the native scrolling option.
 
-#### Example
-
+```
     <div data-role="view"><a data-role="button">Foo</a></div>
-
     <script>
     new kendo.mobile.Application($(document.body), { hideAddressBar: false });
     </script>
+```
 
 ### initial `String`
 
 The id of the initial mobile View to display.
 
-#### Example
-
+```
     <div data-role="view"><a data-role="button">Foo</a></div>
-
     <div data-role="view" id="bar"><a data-role="button">Bar</a></div>
-
     <script>
     new kendo.mobile.Application($(document.body), { initial: "#bar" });
     </script>
+```
 
 ### layout `String`
 
 The id of the default Application layout.
 
-#### Example
-
+```
     <div data-role="view">Bar</div>
 
     <div data-role="layout" data-id="foo">
@@ -62,6 +58,7 @@ The id of the default Application layout.
     <script>
     new kendo.mobile.Application($(document.body), { layout: "foo" });
     </script>
+```
 
 ### loading `String`*(default: "&lt;h1&gt;Loading...&lt;/h1&gt;")*
 
@@ -69,8 +66,7 @@ The text displayed in the loading popup. Setting this value to false will disabl
 
  *Note*: The text should be wrapped inside `<h1>` tag.
 
-#### Example
-
+```
     <div data-role="view">Bar</div>
 
     <script>
@@ -78,13 +74,13 @@ The text displayed in the loading popup. Setting this value to false will disabl
         loading: "<h1>Please wait...</h1>"
     });
     </script>
+```
 
 ### modelScope `Object` *(default: "window")*
 
 The view model scope. By default, the views will try to resolve their models from the global scope (window).
 
-#### Example
-
+```
     <div data-role="view" data-model="foo" data-bind="events: {init: onInit }">Bar</div>
 
     <script>
@@ -99,11 +95,11 @@ The view model scope. By default, the views will try to resolve their models fro
         }
     });
     </script>### modelScope `Object` *(default: "window")*
+```
 
 The view model scope. By default, the views will try to resolve their models from the global scope (window).
 
-#### Example
-
+```
     <div data-role="view" data-model="foo" data-bind="events: {init: onInit }">Bar</div>
 
     <script>
@@ -118,14 +114,14 @@ The view model scope. By default, the views will try to resolve their models fro
         }
     });
     </script>
+```
 
 ### platform `String`
 
 Which platform look to force on the application. Supported values are `"ios"` (meaning iOS 6 look), `"ios7"`,`"android"`, `"blackberry"` and `"wp"`.
 You can also set platform variants with it (`"android-light"` or `"android-dark"`), but keep in mind that it will still override the platform. If this is not desired, use the `skin` option.
 
-#### Example
-
+```
     <div data-role="view">Bar</div>
 
     <script>
@@ -133,6 +129,7 @@ You can also set platform variants with it (`"android-light"` or `"android-dark"
         platform: "android"
     });
     </script>
+```
 
 ### pushState `Boolean` *(default: false)*
 
@@ -156,13 +153,13 @@ If set to true, the application will not use AJAX to load remote views.
 
 > Using this configuration option will affect the user experience, as blank screens will be visible between application states. As the page will be completely reloaded, the application state will not be transferred to the next view.
 
-#### Example
-
+```
     <div data-role="view">Bar <a data-role="button" href="another-view.html">Go to another page</a></div>
 
     <script>
     new kendo.mobile.Application($(document.body), { serverNavigation: true });
     </script>
+```
 
 ### skin `String`
 
@@ -174,8 +171,7 @@ You can also set platform variants with it ("android-light" or "android-dark").
 
 > The skin setting will be applied on any device, making the application look the same way.
 
-#### Example
-
+```
     <div data-role="view"><a data-role="button">Foo</a></div>
 
     <script>
@@ -183,6 +179,7 @@ You can also set platform variants with it ("android-light" or "android-dark").
              skin: "flat"
          });
     </script>
+```
 
 ### statusBarStyle `String`*(default: "black")*
 
@@ -191,8 +188,7 @@ Set the status bar style meta tag in iOS used to control the styling of the stat
 > The default setting of "black" pushes down the content of the page, while the rest overlay it. To create seamless status bar in iOS7,
 check [Seamless Status Bar in iOS7](/mobile/application#seamless-status-bar-in-ios7) section in Mobile Application's Getting Started page.
 
-#### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" href="#bar">Bar</a></div>
 
     <script>
@@ -200,31 +196,32 @@ check [Seamless Status Bar in iOS7](/mobile/application#seamless-status-bar-in-i
             statusBarStyle: "black"
         });
     </script>
+```
 
 ### transition `String`
 
 The default View transition. For a list of supported transitions, check the [Getting Started help topic](/mobile/application#view-transitions).
 
-#### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" href="#bar">Bar</a></div>
     <div data-role="view" id="bar"><a data-role="button" href="#foo">Foo</a></div>
 
     <script>
     new kendo.mobile.Application($(document.body), { transition: "slide" });
     </script>
+```
 
 ### updateDocumentTitle `Boolean` *(default: true)*
 
 Whether to update the document title.
 
-#### Example
-
+```
     <div data-role="view"><a data-role="button">Foo</a></div>
 
     <script>
     new kendo.mobile.Application($(document.body), { updateDocumentTitle: false });
     </script>
+```
 
 ### useNativeScrolling `Boolean` *(default: false)*
 
@@ -233,8 +230,7 @@ When the `useNativeScrolling` configuration option is set to true, the view head
 
 For more information regarding native scrolling check [this article](/mobile/native-scrolling).
 
-#### Example
-
+```
     <div data-role="view">
         <header data-role="header">
             <h1>Header</h1>
@@ -248,18 +244,19 @@ For more information regarding native scrolling check [this article](/mobile/nat
     <script>
         new kendo.mobile.Application(document.body, { useNativeScrolling: true });
     </script>
+```
 
 ### webAppCapable `Boolean` **(default: true)**
 
 Disables the default behavior of Kendo UI Mobile apps to be web app capable (open in a chromeless browser). Introduced in Q2 2013.
 
-#### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" href="#bar">Bar</a></div>
 
     <script>
     new kendo.mobile.Application($(document.body), { webAppCapable: false });
     </script>
+```
 
 ## Methods
 
@@ -267,8 +264,7 @@ Disables the default behavior of Kendo UI Mobile apps to be web app capable (ope
 
 Changes the loading message.
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" data-click="showLoading">Show loading</a>
     </div>
@@ -282,6 +278,7 @@ Changes the loading message.
             }, 1000);
         }
     </script>
+```
 
 #### Parameters
 
@@ -293,8 +290,7 @@ New text of the loading animation.
 
 Hide the loading animation.
 
-#### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" href="#bar">Bar</a></div>
 
     <script>
@@ -306,6 +302,7 @@ Hide the loading animation.
         }, 2000);
       });
     </script>
+```
 
 ### navigate
 
@@ -359,8 +356,7 @@ The id or url of the view.
 
 Optional. The transition to apply when navigating. See [View Transitions section](/mobile/application#view-transitions) for more information.
 
-###### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" data-click="navigateToSettings">Bar</a></div>
     <div data-role="view" id="settings">Settings</div>
 
@@ -371,6 +367,7 @@ Optional. The transition to apply when navigating. See [View Transitions section
             app.navigate("#settings", "slide");
         }
     </script>
+```
 
 ### replace
 
@@ -386,7 +383,7 @@ The id or url of the view.
 
 Optional. The transition to apply when navigating. See [View Transitions section](/mobile/application#view-transitions) for more information.
 
-###### Example
+```
 
     <div data-role="view" id="foo">
         Foo
@@ -409,12 +406,13 @@ Optional. The transition to apply when navigating. See [View Transitions section
 
         new kendo.mobile.Application(document.body);
     </script>
+```
 
 ### scroller
 
 Get a reference to the current view's scroller widget instance.
 
-#### Example
+```
 
     <div data-role="view" id="foo"><div style="height: 1000px">Scroll a bit... </div><a data-role="button" data-click="resetScroller">Bar</a></div>
 
@@ -425,6 +423,8 @@ Get a reference to the current view's scroller widget instance.
             app.scroller().reset();
         }
     </script>
+```
+
 
 #### Returns
 
@@ -434,8 +434,7 @@ Get a reference to the current view's scroller widget instance.
 
 Show the loading animation.
 
-#### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" href="#bar">Bar</a></div>
 
     <script>
@@ -447,13 +446,13 @@ Show the loading animation.
         }, 2000);
       });
     </script>
+```
 
 ### skin
 
 Change the current skin of the mobile application. When used without parameters, returns the currently used skin. Available as of Q2 2013.
 
-#### Example
-
+```
     <div data-role="view" id="foo"><a data-role="button" href="#bar">Bar</a></div>
 
     <script>
@@ -463,6 +462,7 @@ Change the current skin of the mobile application. When used without parameters,
       });
 
     </script>
+```
 
 #### Parameters
 
@@ -478,7 +478,7 @@ The skin name to switch to or empty string ("") to return to native.
 
 Get a reference to the current view.
 
-#### Example
+```
     <div data-role="view" id="foo">
         <a id="button" data-role="button" data-click="logCurrentView">I am a mobile button</a>
     </div>
@@ -490,6 +490,7 @@ Get a reference to the current view.
             console.log(app.view()); // the foo mobile view instance
         }
     </script>
+```
 
 #### Returns
 
@@ -501,8 +502,7 @@ Get a reference to the current view.
 
 Fires after the mobile application is instantiated.
 
-#### Example
-
+```
     <div data-role="view" id="foo">
         <a id="button" data-role="button" data-click="logCurrentView">I am a mobile button</a>
     </div>
@@ -515,7 +515,7 @@ Fires after the mobile application is instantiated.
             }
         });
     </script>
-
+```
 
 ## Fields
 

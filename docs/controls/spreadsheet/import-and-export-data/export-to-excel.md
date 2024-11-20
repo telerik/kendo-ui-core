@@ -26,9 +26,9 @@ The following image demonstrates the export of the Spreadsheet data to Excel.
 
 The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/javascript/ui/spreadsheet/configuration/excel.filename).
 
-## Known Issues
+## Outputting the Result
 
-Currently, the export module does not handle sorting and filtering. This limitation will be addressed before the component goes out of its Beta version.
+Through its default configuration the Kendo UI for jQuery Spreadsheet exports the current sheet of data with sorting and filtering applied.
 
 ## See Also
 
