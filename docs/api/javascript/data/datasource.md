@@ -1159,24 +1159,24 @@ The field from the server response which contains server-side errors. Can be set
 #### Example - specify the error field as a function
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "https://run.mocky.io/v3/c9fb4321-bb6f-4f8c-a379-7499329586ed",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests     
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://run.mocky.io/v3/b4361129-3100-44e3-8d99-16e65d7446a4",
+            dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests     
+          }
+        },
+        schema: {
+          errors: function(response) { 
+            return response.error;
+          }
+        },
+        error: function(e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.errors);
         }
-      },
-      schema: {
-        errors: function(response) {
-          return response.error;
-        }
-      },
-      error: function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log(e.errors);
-      }
-    });
-    dataSource.fetch();
+      });
+      dataSource.fetch();
     </script>
 
 ### schema.groups `Function|String`

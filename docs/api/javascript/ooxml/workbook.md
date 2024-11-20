@@ -1232,7 +1232,6 @@ Creates an Excel file that represents the current workbook and returns it as a d
           }
       ]
     });
-    var dataURL = workbook.toDataURL();
     workbook.toDataURLAsync().then(function(dataURL) {
       kendo.saveAs({
         dataURI: dataURL,

@@ -16,8 +16,7 @@ Represents the Kendo UI Mobile ButtonGroup widget. Inherits from [kendo.mobile.u
 
 Defines if the widget is initially enabled or disabled.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="buttongroup" data-enable="false">
         <li>Option 1</li>
@@ -29,13 +28,13 @@ Defines if the widget is initially enabled or disabled.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```    
 
 ### index `Number`
 
 Defines the initially selected Button (zero based index).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="buttongroup" data-index="1">
         <li>Option 1</li>
@@ -47,6 +46,7 @@ Defines the initially selected Button (zero based index).
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```    
 
 ### selectOn `String` *(default "down")*
 
@@ -55,8 +55,7 @@ Sets the DOM event used to select the button. Accepts `"up"` as an alias for `to
 By default, buttons are selected immediately after the user presses the button (on `touchstart` or `mousedown` or `MSPointerDown`, depending on the mobile device).
 However, if the widget is placed in a scrollable view, the user may accidentally press the button when scrolling. In such cases, it is recommended to set this option to `"up"`.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="buttongroup" data-select-on="up">
         <li>Option 1</li>
@@ -68,6 +67,7 @@ However, if the widget is placed in a scrollable view, the user may accidentally
     <script>
       var app = new kendo.mobile.Application();
     </script>
+```    
 
 ## Methods
 
@@ -89,8 +89,7 @@ The target value to be set or false to be removed.
 
 `String|kendo.mobile.ui.Button` the badge value if invoked without parameters, otherwise the ButtonGroup object.
 
-#### Example
-
+```
     <div data-role="view" data-init="setBadges">
       <ul id="buttongroup" data-role="buttongroup">
         <li>Option 1</li>
@@ -116,6 +115,7 @@ The target value to be set or false to be removed.
       buttongroup.badge("li:first", false);
     }
     </script>
+```    
 
 ### current
 
@@ -125,8 +125,7 @@ Get the currently selected Button.
 
 `jQuery` the jQuery object representing the currently selected button.
 
-#### Example - get the index of the currently selected Button
-
+```
     <div data-role="view">
       <ul id="buttongroup" data-role="buttongroup" data-select="onSelect">
         <li>Option 1</li>
@@ -144,6 +143,7 @@ Get the currently selected Button.
         console.log(index);
     }
     </script>
+```    
 
 ### destroy
 
@@ -151,8 +151,7 @@ Prepares the **ButtonGroup** for safe removal from DOM. Detaches all event handl
 
 > **Important:** This method does not remove the ButtonGroup element from DOM.
 
-#### Example
-
+```
     <div data-role="view">
       <ul id="buttongroup" data-role="buttongroup">
         <li>Option 1</li>
@@ -171,6 +170,7 @@ Prepares the **ButtonGroup** for safe removal from DOM. Detaches all event handl
       $("#buttongroup").remove(); //remove the button from the DOM
     }
     </script>
+```    
 
 ### enable
 
@@ -182,8 +182,7 @@ Enables or disables the widget.
 
 A boolean flag that indicates whether the widget should be enabled or disabled.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-click="enable">Enable</a>
       <ul id="btnGroup" data-role="buttongroup" data-enable="false">
@@ -200,6 +199,7 @@ A boolean flag that indicates whether the widget should be enabled or disabled.
         $("#btnGroup").data("kendoMobileButtonGroup").enable(true);
     }
     </script>
+```
 
 ### select
 
@@ -211,8 +211,7 @@ Select a Button.
 
 LI element or index of the Button.
 
-#### Example
-
+```
     <div data-role="view" data-init="setSelected">
       <ul id="buttongroup" data-role="buttongroup">
         <li>Option 1</li>
@@ -233,6 +232,7 @@ LI element or index of the Button.
       buttongroup.select(1);
     }
     </script>
+```
 
 ## Events
 
@@ -240,8 +240,7 @@ LI element or index of the Button.
 
 Fires when a Button is selected.
 
-#### Example - get the index of the currently selected Button
-
+```
     <div data-role="view">
       <ul id="buttongroup" data-role="buttongroup" data-select="onSelect">
         <li>Option 1</li>
@@ -259,6 +258,7 @@ Fires when a Button is selected.
       console.log(index);
     }
     </script>
+```
 
 #### Event Data
 

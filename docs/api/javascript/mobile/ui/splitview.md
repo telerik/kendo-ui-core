@@ -14,8 +14,7 @@ component: split-view
 
 Defines the SplitView style - horizontal or vertical.
 
-#### Vertical SplitView
-
+```
     <div data-role="splitview" data-style="vertical">
       <div data-role="pane">
           <div data-role="view" id="foo">Pane 1 </div>
@@ -28,6 +27,7 @@ Defines the SplitView style - horizontal or vertical.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -52,8 +52,7 @@ Collapses back the collapsible panes (displayed previously with `expandPanes`); 
 
 Fires after the mobile SplitView and its child widgets are initialized.
 
-#### Example
-
+```
     <div data-role="splitview" data-init="onInit">
       <div data-role="pane">
           <div data-role="view" id="foo">Pane 1 </div>
@@ -70,6 +69,7 @@ Fires after the mobile SplitView and its child widgets are initialized.
     }
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 
@@ -81,8 +81,7 @@ The mobile SplitView instance
 
 Fires when the mobile SplitView becomes visible.
 
-#### Example
-
+```
     <div data-role="splitview" data-show="onShow">
       <div data-role="pane">
           <div data-role="view" id="foo">Pane 1 </div>
@@ -99,6 +98,7 @@ Fires when the mobile SplitView becomes visible.
     }
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 

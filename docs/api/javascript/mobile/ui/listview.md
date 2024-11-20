@@ -16,8 +16,7 @@ Represents the Kendo UI Mobile ListView widget. Inherits from [kendo.mobile.ui.W
 
 Used in combination with `pullToRefresh`. If set to `true`, newly loaded data will be appended on top when refreshing. **Notice:** not applicable if ListView is in a virtual mode.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-pull-to-refresh="true" data-append-on-refresh="true" data-template="foo-template">
       </ul>
@@ -50,13 +49,13 @@ Used in combination with `pullToRefresh`. If set to `true`, newly loaded data wi
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### autoBind `Boolean`*(default: true)*
 
 Indicates whether the listview will call read on the DataSource initially. If set to false, the listview will be bound after the DataSource instance `fetch` method is called.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-click="fetchData">Fetch Data</a>
       <ul data-role="listview" data-source="foo" data-auto-bind="false" data-template="foo-template">
@@ -78,13 +77,13 @@ Indicates whether the listview will call read on the DataSource initially. If se
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### dataSource `kendo.data.DataSource | Object`
 
 Instance of DataSource or the data that the mobile ListView will be bound to.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-template="foo-template">
       </ul>
@@ -99,13 +98,13 @@ Instance of DataSource or the data that the mobile ListView will be bound to.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### endlessScroll `Boolean`*(default: false)*
 
 If set to `true`, the listview gets the next page of data when the user scrolls near the bottom of the view.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-endless-scroll="true" data-template="foo-template">
       </ul>
@@ -141,6 +140,7 @@ If set to `true`, the listview gets the next page of data when the user scrolls 
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### fixedHeaders `Boolean`*(default: false)*
 
@@ -149,8 +149,7 @@ Applicable only when the type is set to group, or when binding to grouped DataSo
 
 **Notice:** fixed headers are not supported in virtual mode.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="groupedData" data-fixed-headers="true" data-template="my-template" data-header-template="header-template"></ul>
     </div>
@@ -179,13 +178,13 @@ Applicable only when the type is set to group, or when binding to grouped DataSo
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### headerTemplate `String|Function`*(default: "#:value#")*
 
 The header item template (applicable when the type is set to group).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="groupedData" data-template="my-template" data-header-template="header-template"></ul>
     </div>
@@ -214,13 +213,13 @@ The header item template (applicable when the type is set to group).
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### loadMore `Boolean`*(default: false)*
 
 If set to `true`, a button is rendered at the bottom of the listview. Tapping it fetches and displays the items from the next page of the DataSource.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-load-more="true" data-template="foo-template">
       </ul>
@@ -256,6 +255,7 @@ If set to `true`, a button is rendered at the bottom of the listview. Tapping it
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### messages `Object`
 
@@ -265,8 +265,7 @@ Defines the text of the ListView messages. Used primary for localization.
 
 The text of the rendered load-more button (applies only if `loadMore` is set to `true`).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-load-more="true" data-messages='{ "loadMoreText": "Show more" }' data-template="foo-template">
       </ul>
@@ -302,13 +301,13 @@ The text of the rendered load-more button (applies only if `loadMore` is set to 
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### messages.pullTemplate `String` *(default: "Pull to refresh")*
 
 Text that appears when scroller is pulled (applies only if `pullToRefresh` is set to `true`).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-pull-to-refresh="true" data-messages='{ "pullTemplate": "Pull to refresh!" }' data-template="foo-template">
       </ul>
@@ -344,13 +343,13 @@ Text that appears when scroller is pulled (applies only if `pullToRefresh` is se
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### messages.refreshTemplate `String`*(default: "Refreshing")*
 
 Text that appears when ListView is refreshing (applies only if `pullToRefresh` is set to `true`).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-pull-to-refresh="true" data-messages='{ "refreshTemplate": "Refreshing!" }' data-template="foo-template">
       </ul>
@@ -386,13 +385,13 @@ Text that appears when ListView is refreshing (applies only if `pullToRefresh` i
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### messages.releaseTemplate `String` *(default: "Release to refresh")*
 
 Text that appears when scroller is pulled beyond the threshold (applies only if `pullToRefresh` is set to `true`).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-pull-to-refresh="true" data-messages='{ "releaseTemplate": "Release to refresh!" }' data-template="foo-template">
       </ul>
@@ -428,6 +427,7 @@ Text that appears when scroller is pulled beyond the threshold (applies only if 
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### pullToRefresh `Boolean`*(default: false)*
 
@@ -435,8 +435,7 @@ If set to true, the listview will reload its data when the user pulls the view o
 
 > Pull to refresh option is not compatible with native scrolling containers (view with `use-native-scrolling=true` or scroller with `use-native=true` attributes).
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-pull-to-refresh="true" data-template="foo-template"></ul>
     </div>
@@ -467,6 +466,7 @@ If set to true, the listview will reload its data when the user pulls the view o
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### pullParameters `Function`
 
@@ -475,8 +475,7 @@ A callback function used when the 'pullToRefresh' option is enabled. The result 
 **Notice:** When the listview is in a *virtual mode*, the pull to refresh action **removes** the previously loaded items in the listview (instead of appending new records at the top).
 Previously loaded pages in the DataSource are also discarded.
 
-#### Example
-
+```
     <div data-role="view" data-init="initListView">
       <ul id="listview">
       </ul>
@@ -517,6 +516,7 @@ Previously loaded pages in the DataSource are also discarded.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Parameters
 
@@ -528,8 +528,7 @@ First dataItem of the ListView // => listView.dataSource.get(0);
 
 The style of the widget. Can be either empty string(""), or `inset`.
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-style="inset">
         <li>Foo</li>
@@ -541,13 +540,13 @@ The style of the widget. Can be either empty string(""), or `inset`.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### template `String|Function`*(default: "#:data#")*
 
 The item template.
 
-#### Example:
-
+```
     <div id="foo" data-role="view">
         <ul id="list" data-role="listview" data-source="dataSource" data-template="tmp"></ul>
     </div>
@@ -565,15 +564,14 @@ The item template.
         ]
     });
     </script>
-
+```
 > The ListView automatically wraps the template content in `<li>` tag. Putting a `<li>` tag inside the template creates invalid nesting of elements.
 
 ### type `String` *(default: "flat")*
 
 The type of the control. Can be either `flat` (default) or group. Determined automatically in databound mode.
 
-#### Example
-
+```
     <div data-role="view">
 
       <ul data-role="listview" data-style="inset" data-type="group">
@@ -596,7 +594,7 @@ The type of the control. Can be either `flat` (default) or group. Determined aut
     <script>
     new kendo.mobile.Application();
     </script>
-
+```
 
 ### filterable `Boolean | Object`*(default: false)*
 
@@ -606,8 +604,7 @@ Indicates whether the filter input must be visible or not.
 > * When the filter is applied, it removes all previous filter expressions that have been applied to the DataSource.
 > * The DataSource configuration is required for the filtering to work properly. If initialized from Markup, the MobileListView does not support filtering.
 
-#### Example - enabled filtering
-
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -621,13 +618,13 @@ Indicates whether the filter input must be visible or not.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### filterable.placeholder `String`*(default: "Search...")*
 
 Placeholder text for search input.
 
-#### Example - enabled filtering with custom text for the input placeholder
-
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -643,13 +640,13 @@ Placeholder text for search input.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### filterable.autoFilter `Boolean`*(default: true)*
 
 Indicates whether filtering should be performed on every key up event or when the focus is moved out of the filter input.
 
-#### Example - enabled filtering with auto filtering disabled
-
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -665,14 +662,14 @@ Indicates whether filtering should be performed on every key up event or when th
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### filterable.field `String`
 
 Specifies the field which will be used in the filter expression. The default field value is `undefined` which is usefull when the list view is bound to a list of primitive types.
 If this is not case the field *must* be defined.
 
-#### Example - enabled filtering with default field configuration
-
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -686,9 +683,10 @@ If this is not case the field *must* be defined.
 
     new kendo.mobile.Application();
     </script>
+```
 
-#### Example - enabled filtering with field defined
 
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -708,13 +706,13 @@ If this is not case the field *must* be defined.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### filterable.ignoreCase `Boolean`*(default: false)*
 
 Specifies whether the filter expression must be case sensitive or not.
 
-#### Example - enabled case insensitive filtering
-
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -730,13 +728,13 @@ Specifies whether the filter expression must be case sensitive or not.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### filterable.operator `String`*(default: "startsWith")*
 
 Specifies the comparison operator used in the filter expression. The operator must be one of the available DataSource filter [operators](/api/framework/datasource#configuration-filter.operator).
 
-#### Example - enabled filtering with comparison operator defined
-
+```
     <div data-role="view" data-init="viewInit">
         <ul id="listView"></ul>
     </div>
@@ -752,13 +750,13 @@ Specifies the comparison operator used in the filter expression. The operator mu
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### virtualViewSize `Number`
 
  Used when virtualization of local data is used. This configuration is needed to determine the items displayed, since the datasource does not (and should not) have paging set.
 
-#### Example - virtualization using local data
-
+```
     <script src="../content/shared/js/products.js"></script>
     <div data-role="view" data-init="mobileListViewLocalFiltering" data-title="Products">
       <ul id="local-filterable-listview"></ul>
@@ -799,6 +797,7 @@ Specifies the comparison operator used in the filter expression. The operator mu
     <script>
       var app = new kendo.mobile.Application(document.body);
     </script>
+```
 
 ## Methods
 
@@ -810,8 +809,7 @@ Appends new items generated by rendering the given data items with the listview 
 
 ##### dataItems `Array`
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" data-click="addItem">Add item</a>
         <ul id="listview" data-role="listview" data-template="foo">
@@ -831,6 +829,7 @@ Appends new items generated by rendering the given data items with the listview 
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### prepend
 
@@ -840,8 +839,7 @@ Prepends new items generated by rendering the given data items with the listview
 
 ##### dataItems `Array`
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" data-click="addItem">Add item</a>
         <ul id="listview" data-role="listview" data-template="foo">
@@ -861,6 +859,7 @@ Prepends new items generated by rendering the given data items with the listview
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### replace
 
@@ -870,8 +869,7 @@ Replaces the contents of the listview with the passed rendered data items.
 
 ##### dataItems `Array`
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" data-click="replaceItem">Replace item</a>
         <ul id="listview" data-role="listview" data-template="foo">
@@ -891,6 +889,7 @@ Replaces the contents of the listview with the passed rendered data items.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### remove
 
@@ -900,8 +899,7 @@ Removes the listview items which are rendered with the passed data items.
 
 ##### dataItems `Array`
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" data-click="removeItem">Remove item</a>
         <ul id="listview" data-role="listview" data-template="foo" data-source="fooDS">
@@ -922,6 +920,7 @@ Removes the listview items which are rendered with the passed data items.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### setDataItem
 
@@ -937,8 +936,7 @@ The listview item to update
 
 The new dataItem
 
-#### Example
-
+```
     <div data-role="view" data-init="initialItem">
         <a data-role="button" data-click="changeItem">Add item</a>
         <ul id="listview" data-role="listview" data-template="foo">
@@ -963,6 +961,7 @@ The new dataItem
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### destroy
 
@@ -970,8 +969,7 @@ Prepares the **ListView** for safe removal from DOM. Detaches all event handlers
 
 > **Important:** This method does not remove the ListView element from DOM.
 
-#### Example
-
+```
     <div data-role="view">
        <a data-role="button" data-click="destroyListView">Destroy</a>
 
@@ -990,6 +988,7 @@ Prepares the **ListView** for safe removal from DOM. Detaches all event handlers
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### items
 
@@ -999,9 +998,7 @@ Get the listview DOM element items
 
 `jQuery` The listview DOM element items
 
-#### Example
-
-
+```
     <div data-role="view">
       <a data-role="button" data-click="getListViewItems">Get items</a>
       <ul id="listView" data-role="listview" data-style="inset">
@@ -1018,13 +1015,13 @@ Get the listview DOM element items
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### refresh
 
 Repaints the listview (works only in databound mode).
 
-#### example
-
+```
     <div data-role="view">
       <a data-role="button" data-click="refreshListViewItems">Refresh items</a>
       <ul id="listView" data-role="listview" data-style="inset">
@@ -1040,6 +1037,7 @@ Repaints the listview (works only in databound mode).
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### setDataSource
 
@@ -1049,8 +1047,7 @@ Sets the DataSource of an existing ListView and rebinds it.
 
 ##### dataSource `kendo.data.DataSource`
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-click="rebindListView">Rebind</a>
       <ul id="listView" data-role="listview" data-template="foo-template" data-source="foo" data-style="inset">
@@ -1071,6 +1068,7 @@ Sets the DataSource of an existing ListView and rebinds it.
 
     new kendo.mobile.Application();
     </script>
+```
 
 ## Events
 
@@ -1078,8 +1076,8 @@ Sets the DataSource of an existing ListView and rebinds it.
 
 Fires when item is tapped.
 
-#### Example
 
+```
     <div data-role="view">
     <ul data-role="listview" id="foo" data-click="listViewClick">
         <li>Item 1</li>
@@ -1095,6 +1093,7 @@ Fires when item is tapped.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Accessing dataItem in event
 
@@ -1140,8 +1139,8 @@ The tapped Kendo mobile Button (if present).
 
 Fires when the ListView has received data from the DataSource. **The event is used only when virtual (endless scrolling) mode is disabled.**
 
-#### Example
 
+```
     <div data-role="view">
         <ul id="foo"></ul>
     </div>
@@ -1160,13 +1159,14 @@ Fires when the ListView has received data from the DataSource. **The event is us
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### dataBinding
 
 Fires when the ListView is about to be rendered. **The event is used only when virtual (endless scrolling) mode is disabled.**
 
-#### Example
 
+```
     <div data-role="view">
         <ul id="foo"></ul>
     </div>
@@ -1185,13 +1185,13 @@ Fires when the ListView is about to be rendered. **The event is used only when v
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### itemChange
 
 Fires when a new item is added to the listview. **The event is used in virtual (endless scrolling) mode only.**
 
-#### Example
-
+```
     <div data-role="view">
       <ul data-role="listview" data-source="foo" data-endless-scroll="true" data-template="foo-template" data-item-change="itemChange">
       </ul>
@@ -1232,3 +1232,4 @@ Fires when a new item is added to the listview. **The event is used in virtual (
 
     new kendo.mobile.Application();
     </script>
+```

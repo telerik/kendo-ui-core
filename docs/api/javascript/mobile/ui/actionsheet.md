@@ -16,8 +16,7 @@ Represents the Kendo UI Mobile ActionSheet widget. Inherits from [kendo.mobile.u
 
  The text of the cancel button.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-cancel="Close">
@@ -29,13 +28,13 @@ Represents the Kendo UI Mobile ActionSheet widget. Inherits from [kendo.mobile.u
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### popup `Object`
 
 The popup configuration options (tablet only).
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-popup='{ "height": "auto", "width": 200, "direction": "left" }'>
@@ -47,13 +46,13 @@ The popup configuration options (tablet only).
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### popup.direction `Number | String`*(default: "down")*
 
  The direction to which the popup will expand, relative to the target that opened it.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-popup='{ "direction": "left" }'>
@@ -65,13 +64,13 @@ The popup configuration options (tablet only).
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```   
 
 ### popup.height `Number | String`*(default: "auto")*
 
  The height of the popup in pixels.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-popup='{ "height": 400 }'>
@@ -83,13 +82,13 @@ The popup configuration options (tablet only).
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### popup.width `Number | String`*(default: 240)*
 
  The width of the popup in pixels.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-popup='{ "width": 400 }'>
@@ -101,13 +100,13 @@ The popup configuration options (tablet only).
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### type `String`*(default: auto)*
 
 By default, the actionsheet opens as a full screen dialog on a phone device or as a popover if a tablet is detected. Setting the type to `"phone"` or `"tablet"` will force the looks of the widget regardless of the device.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-type="tablet">
@@ -119,6 +118,7 @@ By default, the actionsheet opens as a full screen dialog on a phone device or a
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```    
 
 ## Methods
 
@@ -126,8 +126,7 @@ By default, the actionsheet opens as a full screen dialog on a phone device or a
 
 Close the ActionSheet.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet">
@@ -142,14 +141,14 @@ Close the ActionSheet.
       $("#actionsheet").data("kendoMobileActionSheet").close();
     }
     </script>
+```
 
 ### destroy
 Prepares the **ActionSheet** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the ActionSheet element from DOM.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-click="destroy">Destroy</a>
       <ul id="actionsheet" data-role="actionsheet">
@@ -166,13 +165,13 @@ Prepares the **ActionSheet** for safe removal from DOM. Detaches all event handl
       $("#actionsheet").data("kendoMobileActionSheet").destroy();
     }
     </script>
+```
 
 ### open
 
 Open the ActionSheet.
 
-#### Example - opens the widget each time the View becomes visible
-
+```
     <div data-role="view" data-show="onShow">
       <ul id="actionsheet" data-role="actionsheet">
         <li><a>Foo</a></li>
@@ -187,9 +186,9 @@ Open the ActionSheet.
       $("#actionsheet").data("kendoMobileActionSheet").open();
     }
     </script>
+```
 
-#### Example
-
+```
     <ul data-role="listview">
       <li> Foo <a data-role="button" id="button">Delete</a></li>
     </ul>
@@ -202,6 +201,7 @@ Open the ActionSheet.
     <script>
     $("#actionsheet").data("kendoMobileActionSheet").open($("#button"));
     </script>
+```
 
 #### Parameters
 
@@ -221,8 +221,7 @@ Open the ActionSheet.
 
 Fires when the ActionSheet is closed.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-close="onClose">
@@ -239,13 +238,13 @@ Fires when the ActionSheet is closed.
         console.log("closed");
       }
     </script>
+```
 
 ### open
 
 Fires when the ActionSheet is opened.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" data-rel="actionsheet" href="#actionsheet">Open</a>
       <ul id="actionsheet" data-role="actionsheet" data-open="onOpen">
@@ -262,6 +261,7 @@ Fires when the ActionSheet is opened.
         console.log("opened");
       }
     </script>
+```
 
 #### Event Data
 

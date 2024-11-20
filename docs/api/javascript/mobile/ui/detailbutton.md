@@ -33,8 +33,7 @@ Prepares the **DetailButton** for safe removal from DOM. Detaches all event hand
 
 > **Important:** This method does not remove the DetailButton element from DOM.
 
-#### Example
-
+```
     <div data-role="view" data-init="onInit">
       <ul data-role="listview">
          <li>Item 1<a data-role="detailbutton"></a></li>
@@ -54,6 +53,7 @@ Prepares the **DetailButton** for safe removal from DOM. Detaches all event hand
       });
     }
     </script>
+```
 
 ## Events
 
@@ -71,8 +71,7 @@ The clicked DOM element
 
 The button DOM element
 
-#### Example - get the item to which DetailButton belongs to
-
+```
     <div data-role="view">
       <ul data-role="listview">
         <li>Item 1<a data-role="detailbutton" data-style="rowinsert" data-click="onClick"></a></li>
@@ -89,3 +88,4 @@ The button DOM element
     item.css("background", "yellow"); //change its background
     }
     </script>
+```

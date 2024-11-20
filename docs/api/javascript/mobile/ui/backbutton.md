@@ -52,8 +52,7 @@ Prepares the **BackButton** for safe removal from DOM. Detaches all event handle
 
 > **Important:** This method does not remove the BackButton element from DOM.
 
-#### Example
-
+```
       <div id="foo" data-role="view">
         <a id="backbutton" data-role="backbutton">Back</a>
         <a data-role="button" data-click="destroy">Destroy it</a>
@@ -66,6 +65,7 @@ Prepares the **BackButton** for safe removal from DOM. Detaches all event handle
         $("#backbutton").data("kendoMobileBackButton").destroy();
       }
       </script>
+```
 
 ## Events
 
@@ -73,8 +73,7 @@ Prepares the **BackButton** for safe removal from DOM. Detaches all event handle
 
 Fires when the user taps the button.
 
-#### Example - prevent navigation
-
+```
     <div id="foo" data-role="view">
       <a data-role="button" href="#bar">Foo</a>
     </div>
@@ -89,6 +88,7 @@ Fires when the user taps the button.
       e.preventDefault(); //prevent navigating back
     }
     </script>
+```
 
 #### Event Data
 

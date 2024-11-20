@@ -20,8 +20,7 @@ The pane configuration options.
 
  The id of the initial mobile View to display.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -38,13 +37,13 @@ The pane configuration options.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### pane.layout `String`
 
  The id of the default Pane Layout.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -75,13 +74,13 @@ The pane configuration options.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### pane.loading `String`*(default: "Loading...")*
 
  The text displayed in the loading popup. Setting this value to false will disable the loading popup.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -104,13 +103,13 @@ The pane configuration options.
       }, 3000);
     }
     </script>
+```
 
 ### pane.transition `String`
 
  The default View transition.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -127,6 +126,7 @@ The pane configuration options.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### popup `Object`
 
@@ -137,8 +137,7 @@ The popup configuration options.
 The direction to which the popup will expand, relative to the target that opened it.
 Supported directions are `up`, `right`, `down`, and `left`.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -152,13 +151,13 @@ Supported directions are `up`, `right`, `down`, and `left`.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### popup.height `Number | String`*(default: 320)*
 
  The height of the popup in pixels.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -172,13 +171,13 @@ Supported directions are `up`, `right`, `down`, and `left`.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### popup.width `Number | String`*(default: 240)*
 
  The width of the popup in pixels.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -192,6 +191,7 @@ Supported directions are `up`, `right`, `down`, and `left`.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -225,8 +225,7 @@ Prepares the **PopOver** for safe removal from DOM. Detaches all event handlers 
 
 > **Important:** This method does not remove the PopOver element from DOM.
 
-#### Example
-
+```
     <div data-role="view">
       <a data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
       <a data-role="button" data-click="destroy">Destroy</a>
@@ -245,6 +244,7 @@ Prepares the **PopOver** for safe removal from DOM. Detaches all event handlers 
       $("#foo").data("kendoMobilePopOver").destroy(); //detach events
     }
     </script>
+```
 
 ### open
 
@@ -256,8 +256,7 @@ Open the PopOver.
 
 The target of the Popover, to which the visual arrow will point to. **This parameter is required for a tablet OS.**
 
-#### Example - opens the PopOver initially on view show
-
+```
     <div data-role="view" data-show="showPopOver">
       <a id="target" data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -275,6 +274,7 @@ The target of the Popover, to which the visual arrow will point to. **This param
       $("#foo").data("kendoMobilePopOver").open("#target");
     }
     </script>
+```
 
 ## Events
 
@@ -288,8 +288,7 @@ Fires when popover is closed.
 
 The widget instance which fired the event.
 
-#### Example
-
+```
     <div data-role="view" data-show="showPopOver">
       <a id="target" data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -309,6 +308,7 @@ The widget instance which fired the event.
       //handle event
     }
     </script>
+```
 
 ### open
 
@@ -324,8 +324,7 @@ The DOM element, which triggered the popover opening.
 
 The widget instance which fired the event.
 
-#### Example
-
+```
     <div data-role="view" data-show="showPopOver">
       <a id="target" data-role="button" href="#foo" data-rel="popover">Open PopOver</a>
 
@@ -345,3 +344,4 @@ The widget instance which fired the event.
       //handle event
     }
     </script>
+```

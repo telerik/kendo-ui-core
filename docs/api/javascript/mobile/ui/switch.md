@@ -16,8 +16,7 @@ Represents the Kendo UI Mobile Switch widget. Inherits from [kendo.mobile.ui.Wid
 
 The checked state of the widget.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input type="checkbox" data-role="switch" data-checked="false" />
       <input type="checkbox" data-role="switch" data-checked="true" />
@@ -26,14 +25,14 @@ The checked state of the widget.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### enable `Boolean`*(default: true)*
 
 If set to `false` the widget will be disabled and will not allow the user to change its checked state. The widget is enabled by default.
 
 
-#### Example - initialize disabled switch.
-
+```
     <div data-role="view">
         <input type="checkbox" data-role="switch" data-enable="false" />
     </div>
@@ -41,13 +40,13 @@ If set to `false` the widget will be disabled and will not allow the user to cha
     <script>
         var app = new kendo.mobile.Application();
     </script>
+```
 
 ### offLabel `String`*(default: "OFF")*
 
 The OFF label.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input type="checkbox" data-role="switch" data-off-label="No" data-on-label="Yes" />
     </div>
@@ -55,13 +54,13 @@ The OFF label.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ### onLabel `String`*(default: "ON")*
 
 The ON label.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input type="checkbox" data-role="switch" data-off-label="No" data-on-label="Yes" />
     </div>
@@ -69,6 +68,7 @@ The ON label.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -86,8 +86,7 @@ Whether to turn the widget on or off.
 
 `Boolean` The checked state of the widget.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input id="switch" type="checkbox" data-role="switch" />
       <a data-role="button" data-click="onClick">Change status</a>
@@ -108,14 +107,14 @@ Whether to turn the widget on or off.
       console.log(switchInstance.check());
     }
     </script>
+```
 
 ### destroy
 Prepares the **Switch** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the Switch element from DOM.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input id="switch" type="checkbox" data-role="switch" />
       <a data-role="button" data-click="onClick">Destroy</a>
@@ -131,6 +130,7 @@ Prepares the **Switch** for safe removal from DOM. Detaches all event handlers a
       switchInstance.wrapper.remove();
     }
     </script>
+```
 
 ### enable
 
@@ -142,8 +142,7 @@ Changes the enabled state of the widget.
 
 Whether to enable or disable the widget.
 
-#### Example
-
+```
     <div data-role="view">
         <input id="foo" type="checkbox" data-role="switch" />
         <a data-role="button" data-click="disable">Disable</a>
@@ -155,13 +154,13 @@ Whether to enable or disable the widget.
             $("#foo").data("kendoMobileSwitch").enable(false);
         }
     </script>
+```
 
 ### refresh
 
 Forces the Switch to recalculate its dimensions. Useful when major changes in the interface happen dynamically, like for instance changing the skin.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input id="switch" type="checkbox" data-role="switch" />
       <a data-role="button" data-click="changeSkin">Flat</a>
@@ -184,13 +183,13 @@ Forces the Switch to recalculate its dimensions. Useful when major changes in th
         $("#switch").data("kendoMobileSwitch").refresh();
     };
     </script>
+```
 
 ### toggle
 
 Toggle the checked state of the widget.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <input id="switch" type="checkbox" data-role="switch" />
       <a data-role="button" data-click="onClick">Toggle</a>
@@ -205,6 +204,7 @@ Toggle the checked state of the widget.
       switchInstance.toggle();
     }
     </script>
+```
 
 ## Events
 
@@ -220,8 +220,7 @@ More information about the Kendo UI Application for mobile can be found in [`thi
 
 The checked state of the widget.
 
-#### Handle mobile Switch change event
-
+```
     <div id="foo" data-role="view">
       <input id="switch" type="checkbox" data-role="switch" data-change="onChange" />
     </div>
@@ -235,3 +234,4 @@ The checked state of the widget.
       console.log(e.checked);//true of false
     }
     </script>
+```

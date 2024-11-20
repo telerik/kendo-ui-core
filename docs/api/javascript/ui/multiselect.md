@@ -1037,7 +1037,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items 
       ],
       dataTextField: "name",
       dataValueField: "id",
-      itemTemplate: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
+      itemTemplate: '<span>#: name #</span>'
     });
     </script>
 

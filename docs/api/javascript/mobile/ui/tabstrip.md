@@ -16,8 +16,7 @@ Represents the Kendo UI Mobile TabStrip widget. Inherits from [kendo.mobile.ui.W
 
  The index of the initially selected tab.
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-layout="default">
       foo
     </div>
@@ -35,6 +34,7 @@ Represents the Kendo UI Mobile TabStrip widget. Inherits from [kendo.mobile.ui.W
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -56,8 +56,7 @@ The target value to be set or false to be removed.
 
 `String|kendo.mobile.ui.TabStrip` Returns the badge value if invoked without parameters, otherwise returns the TabStrip object.
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-init="onInit">
       <div data-role="footer">
         <div data-role="tabstrip">
@@ -80,6 +79,7 @@ The target value to be set or false to be removed.
       console.log(tabstrip.badge(0));
     }
     </script>
+```
 
 ### currentItem
 
@@ -89,8 +89,7 @@ Get the currently selected tab DOM element.
 
 `jQuery` the currently selected tab DOM element.
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-init="onInit">
       <div data-role="footer">
         <div data-role="tabstrip">
@@ -110,14 +109,14 @@ Get the currently selected tab DOM element.
       console.log(currentItem);
     }
     </script>
+```
 
 ### destroy
 Prepares the **TabStrip** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the TabStrip element from DOM.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <a data-role="button" data-click="onClick">Button</a>
       <div data-role="footer">
@@ -137,6 +136,7 @@ Prepares the **TabStrip** for safe removal from DOM. Detaches all event handlers
       tabstrip.wrapper.remove(); //remove DOM elements
     }
     </script>
+```
 
 ### switchTo
 
@@ -148,8 +148,7 @@ Set the mobile TabStrip active tab to the tab with the specified URL. This metho
 
 The URL or zero based index of the tab.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <a data-role="button" data-click="onClick">Button</a>
       <div data-role="footer">
@@ -167,6 +166,7 @@ The URL or zero based index of the tab.
       tabstrip.switchTo("#bar"); //activate "bar" tab
     }
     </script>
+```
 
 ### switchByFullUrl
 
@@ -180,8 +180,7 @@ Set the mobile TabStrip active tab to the tab with the specified full URL. This 
 
 The URL of the tab.
 
-#### Example
-
+```
     <div id="foo" data-role="view">
       <a data-role="button" data-click="onClick">Button</a>
       <div data-role="footer">
@@ -199,6 +198,7 @@ The URL of the tab.
       tabstrip.switchByFullUrl("#foo?bar=qux"); //activate second tab
     }
     </script>
+```
 
 ### clear
 
@@ -234,8 +234,7 @@ Fires when tab is selected.
 
 The selected tab
 
-#### Example - prevent tab selection
-
+```
     <div id="foo" data-role="view">
       <div data-role="footer">
         <div data-role="tabstrip" data-select="onSelect">
@@ -251,3 +250,4 @@ The selected tab
       e.preventDefault(); //prevent the tab selection
     }
     </script>
+```

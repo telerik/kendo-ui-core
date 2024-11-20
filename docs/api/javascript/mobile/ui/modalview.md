@@ -10,7 +10,7 @@ component: modal-view
 
 Represents the Kendo UI Mobile ModalView widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
-## Example
+```
     <div data-role="view">
       <a href="#my-modal" data-rel="modalview" data-role="button">Open Modal</a>
     </div>
@@ -22,6 +22,7 @@ Represents the Kendo UI Mobile ModalView widget. Inherits from [kendo.mobile.ui.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ## Configuration
 
@@ -29,7 +30,7 @@ Represents the Kendo UI Mobile ModalView widget. Inherits from [kendo.mobile.ui.
 
 The height of the ModalView container in pixels. If not set, the element style is used.
 
-#### Example
+```
     <div data-role="view">
       <a href="#my-modal" data-rel="modalview" data-role="button">Open Modal</a>
     </div>
@@ -41,12 +42,13 @@ The height of the ModalView container in pixels. If not set, the element style i
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### modal `Boolean`*(default: true)*
 
 When set to false, the ModalView will close when the user taps outside of its element.
 
-#### Example
+```
     <div data-role="view">
       <a href="#my-modal" data-rel="modalview" data-role="button">Open Modal</a>
     </div>
@@ -58,12 +60,13 @@ When set to false, the ModalView will close when the user taps outside of its el
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ### width `Number`
 
 The width of the ModalView container in pixels. If not set, the element style is used.
 
-#### Example
+```
     <div data-role="view">
       <a href="#my-modal" data-rel="modalview" data-role="button">Open Modal</a>
     </div>
@@ -75,6 +78,7 @@ The width of the ModalView container in pixels. If not set, the element style is
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -82,8 +86,8 @@ The width of the ModalView container in pixels. If not set, the element style is
 
 Close the ModalView
 
-#### Example
 
+```
     <div data-role="view">
         <a data-role="button"  data-click="openModal">open</a>
     </div>
@@ -103,6 +107,7 @@ Close the ModalView
 
     new kendo.mobile.Application();
     </script>
+```
 
 ### destroy
 
@@ -114,8 +119,7 @@ Prepares the **ModalView** for safe removal from DOM. Detaches all event handler
 
 Open the ModalView
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button"  data-click="openModal">open</a>
     </div>
@@ -135,6 +139,7 @@ Open the ModalView
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Parameters
 
@@ -148,8 +153,7 @@ The target of the ModalView
 
 Fires before the ModalView is shown. calling `preventDefault` on the event argument will cancel the open.
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" href="#foo" data-rel="modalview">Foo</a>
     </div>
@@ -167,6 +171,7 @@ Fires before the ModalView is shown. calling `preventDefault` on the event argum
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 
@@ -178,8 +183,7 @@ The invocation target of the ModalView.
 
 Fired when the mobile ModalView is closed by the user.
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" href="#foo" data-rel="modalview">Foo</a>
     </div>
@@ -195,6 +199,7 @@ Fired when the mobile ModalView is closed by the user.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 
@@ -206,8 +211,7 @@ The widget instance which fired the event.
 
 Fired when the mobile ModalView and its child widgets are initialized.
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" href="#foo" data-rel="modalview">Foo</a>
     </div>
@@ -224,6 +228,7 @@ Fired when the mobile ModalView and its child widgets are initialized.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 
@@ -235,8 +240,7 @@ The widget instance which fired the event.
 
 Fires when the ModalView is shown.
 
-#### Example
-
+```
     <div data-role="view">
         <a data-role="button" href="#foo" data-rel="modalview">Foo</a>
     </div>
@@ -253,6 +257,7 @@ Fires when the ModalView is shown.
 
     new kendo.mobile.Application();
     </script>
+```
 
 #### Event Data
 

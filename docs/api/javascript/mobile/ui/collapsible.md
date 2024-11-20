@@ -16,8 +16,7 @@ Represents the Kendo UI Mobile Collapsible widget. Inherits from [kendo.mobile.u
 
 Turns on or off the animation of the widget.
 
-#### Example - turn off the animation
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-animation="false">
             <h2>Header</h2>
@@ -28,13 +27,13 @@ Turns on or off the animation of the widget.
     <script>
     var app = new kendo.mobile.Application();
     </script>
+```    
 
 ### collapsed `Boolean`*(default: true)*
 
 If set to `false` the widget content will be expanded initially. The content of the widget is collapsed by default.
 
-#### Example - create initially expanded collapsible panel
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-collapsed="false">
             <h2>Header</h2>
@@ -47,12 +46,13 @@ If set to `false` the widget content will be expanded initially. The content of 
     </script>
 
     <!-- <script src="../src/kendo.mobile.application.js"></script> -->
+```
+
 ### collapseIcon `String`*(default: "minus")*
 
 Sets the icon for the header of the collapsible widget when it is in a collapsed state.
 
-#### Example
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-collapse-icon="arrow-up" data-expand-icon="arrow-down">
             <h2>Header</h2>
@@ -79,13 +79,13 @@ Sets the icon for the header of the collapsible widget when it is in a collapsed
             content: "\e012";
         }
     </style>
+```    
 
 ### expandIcon `String`*(default: "plus")*
 
 Sets the icon for the header of the collapsible widget when it is in a expanded state.
 
-#### Example
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-collapse-icon="arrow-up" data-expand-icon="arrow-down">
             <h2>Header</h2>
@@ -112,13 +112,13 @@ Sets the icon for the header of the collapsible widget when it is in a expanded 
             content: "\e012";
         }
     </style>
+```    
 
 ### iconPosition `String`*(default: "left")*
 
 Sets the icon position in the header of the collapsible widget. Possible values are "left", "right", "top".
 
-#### Example
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-icon-position="right">
             <h2>Header</h2>
@@ -129,13 +129,13 @@ Sets the icon position in the header of the collapsible widget. Possible values 
     <script>
         var app = new kendo.mobile.Application();
     </script>
+```
 
 ### inset `Boolean`*(default: "false")*
 
 Forces inset appearance - the collapsible panel is padded from the View and receives rounded corners.
 
-#### Example
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-inset="true">
             <h2>Header</h2>
@@ -146,6 +146,7 @@ Forces inset appearance - the collapsible panel is padded from the View and rece
     <script>
         var app = new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -159,8 +160,7 @@ Collapses the content.
 
 Optional. When set to true the collapse action will be performed without animation.
 
-#### Example
-
+```
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible" data-collapsed="false">
             <h2>Header</h2>
@@ -175,14 +175,14 @@ Optional. When set to true the collapse action will be performed without animati
             $("#collapsible").data("kendoMobileCollapsible").collapse();
         }
     </script>
+```
 
 ### destroy
 Prepares the **Collapsible** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the Collapsible element from DOM.
 
-#### Example
-
+```
     <div data-role="view">
         <div id="collapsible" data-role="collapsible" data-collapsed="false">
             <h2>Header</h2>
@@ -199,6 +199,7 @@ Prepares the **Collapsible** for safe removal from DOM. Detaches all event handl
         $("#collapsible").remove();
       }
     </script>
+```
 
 ### expand
 
@@ -210,8 +211,7 @@ Expands the content.
 
 When set to true the expand action will be performed without animation.
 
-#### Example
-
+```
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible">
             <h2>Header</h2>
@@ -226,13 +226,13 @@ When set to true the expand action will be performed without animation.
             $("#collapsible").data("kendoMobileCollapsible").expand();
         }
     </script>
+```
 
 ### resize
 
 Recalculates the content height.
 
-#### Example
-
+```
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible" data-expand="onExpand">
             <h2>Header</h2>
@@ -250,6 +250,7 @@ Recalculates the content height.
             });
         }
     </script>
+```
 
 ### toggle
 
@@ -261,8 +262,7 @@ Toggles the content visibility.
 
 When set to true the expand/collapse action will be performed without animation.
 
-#### Example
-
+```
     <div id="home" data-role="view" data-init="onInit">
         <a data-role="button" data-click="onClick">Toggle</a>
         <div id="collapsible" data-role="collapsible">
@@ -278,6 +278,7 @@ When set to true the expand/collapse action will be performed without animation.
             $("#collapsible").data("kendoMobileCollapsible").toggle();
         }
     </script>
+```
 
 ## Events
 
@@ -285,8 +286,7 @@ When set to true the expand/collapse action will be performed without animation.
 
 Fires when the user collapses the content.
 
-#### Example
-
+```
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible" data-collapse="collapseHandler">
             <h2>Header</h2>
@@ -302,13 +302,13 @@ Fires when the user collapses the content.
             console.log("expand");
         }
     </script>
+```
 
 ### expand
 
 Fires when the user expands the content.
 
-#### Example
-
+```
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible" data-expand="expandHandler">
             <h2>Header</h2>
@@ -324,3 +324,4 @@ Fires when the user expands the content.
             console.log("expand");
         }
     </script>
+```

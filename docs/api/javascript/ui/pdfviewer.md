@@ -22,11 +22,11 @@ Specifies the PDF.JS configuration options. Including `pdfjs` is mandatory.
 #### Example
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
         $("#pdfviewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: ""
@@ -41,17 +41,19 @@ Specifies the default file to be displayed.
 #### Example
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
-        $("#pdfviewer").kendoPDFViewer({
-            pdfjsProcessing: {
-                file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" type="module"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
             }
-        });
-    </script>
+        }
+    });
+</script>
 
 ### pdfjsProcessing.file.cMapUrl `String`
 
@@ -68,31 +70,31 @@ Specifies the `data` to be passed to the pdfjs processor. Accepts `blob`, `byte`
 #### Example
 
     <div id="pdfViewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
-        var request = new XMLHttpRequest();
-        request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);
-        request.responseType = 'blob';
-        request.onload = function() {
-            var reader = new FileReader();
-            reader.readAsDataURL(request.response);
-            reader.onload =  function(e){
-                $("#pdfViewer").kendoPDFViewer({
-                    pdfjsProcessing: {
-                        file: {
-                            //retain the base64 data
-                            data: e.target.result.split(",")[1]
-                        }
-                    },
-                    width: "100%",
-                    height: 1200
-                }).getKendoPDFViewer();
-            };
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
+      var request = new XMLHttpRequest();
+      request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);
+      request.responseType = 'blob';
+      request.onload = function() {
+        var reader = new FileReader();
+        reader.readAsDataURL(request.response);
+        reader.onload =  function(e){
+          $("#pdfViewer").kendoPDFViewer({
+            pdfjsProcessing: {
+              file: {
+                //retain the base64 data
+                data: e.target.result.split(",")[1]
+              }
+            },
+            width: "100%",
+            height: 1200
+          }).getKendoPDFViewer();
         };
-        request.send();
+      };
+      request.send();
     </script>
 
 ### pdfjsProcessing.file.url `String`
@@ -102,11 +104,11 @@ Specifies the url to be passed to the pdfjs processor.
 #### Example
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
         $("#pdfviewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: {
@@ -186,9 +188,12 @@ The width of the PDFViewer.
 
 #### Example - customizing the width of the viewer
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
     <div id="pdf-viewer"></div>
-    <script>
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             width: 480
         });
@@ -200,9 +205,12 @@ The height of the PDFViewer.
 
 #### Example - customizing the height of the viewer
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
     <div id="pdf-viewer"></div>
-    <script>
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             height: 800
         });
@@ -214,9 +222,12 @@ Specifies the default page size if no PDF is displayed in the PDFViewer. The pag
 
 #### Example - customizing the default page sizes
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
     <div id="pdf-viewer"></div>
-    <script>
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             defaultPageSize: {
                 width: 595,
@@ -238,11 +249,14 @@ The selected page number in the viewer.
 Specifies the default scale of the pages.
 
 #### Example - customizing the scale
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+ 
     <div id="pdf-viewer"></div>
-    <script>
-        $("#pdf-viewer").kendoPDFViewer({
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
+         $("#pdf-viewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
             },
@@ -255,11 +269,14 @@ Specifies the default scale of the pages.
 Specifies the minimum zoom that could be applied to the pages.
 
 #### Example - customizing the zoomMin
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+ 
     <div id="pdf-viewer"></div>
-    <script>
-        $("#pdf-viewer").kendoPDFViewer({
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
+         $("#pdf-viewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
             },
@@ -272,15 +289,18 @@ Specifies the minimum zoom that could be applied to the pages.
 Specifies the maximum zoom that could be applied to the pages.
 
 #### Example - customizing the zoomMax
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+ 
     <div id="pdf-viewer"></div>
-    <script>
-        $("#pdf-viewer").kendoPDFViewer({
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
+         $("#pdf-viewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
             },
-            zoomMin: 2
+            zoomMax: 2
         });
     </script>
 
@@ -289,15 +309,18 @@ Specifies the maximum zoom that could be applied to the pages.
 Specifies the zoom rate that could be applied to the pages. Used when zooming on `mousewheel` and for the `zoomIn` and `zoomOut` tools.
 
 #### Example - customizing the zoomRate
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+ 
     <div id="pdf-viewer"></div>
-    <script>
-        $("#pdf-viewer").kendoPDFViewer({
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
+         $("#pdf-viewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
             },
-            zoomRate: 0.5
+            zoomMax: 2
         });
     </script>
 
@@ -311,9 +334,12 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
 #### Example - customizing the type of pages' surfaces
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module"> 
         $("#pdf-viewer").kendoPDFViewer({
             view: {
               type: "svg"
@@ -343,9 +369,12 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
 #### Example - customizing the toolbar items
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             toolbar: {
                 items: [
@@ -358,9 +387,12 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
 #### Example - customizing the pager default tool
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <div id="pdf-viewer"></div>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             toolbar: {
                 items: [
@@ -371,10 +403,13 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
     </script>
 
 #### Example - customizing the zoom default tool
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+ 
     <div id="pdf-viewer"></div>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             toolbar: {
                 items: [
@@ -423,10 +458,13 @@ Sets the text of the button.
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
 #### Example
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+ 
     <div id="pdf-viewer"></div>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdf-viewer").kendoPDFViewer({
         toolbar: {
           items: [            
@@ -509,11 +547,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Print message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -533,11 +571,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for toggleSelection message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -557,11 +595,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for togglePan message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -581,11 +619,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -607,11 +645,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Actual Width message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -633,11 +671,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Auto width message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -659,11 +697,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Fit To Width message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -685,11 +723,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Fit To Page message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -712,11 +750,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Zoom In message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -738,11 +776,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Zoom In message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -765,11 +803,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for Zoom Out message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -832,11 +870,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search dialog close message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -858,11 +896,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search dialog input label text message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -882,11 +920,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search dialog match case text message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -906,11 +944,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search dialog next message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -930,11 +968,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search dialog previous message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -954,11 +992,11 @@ Specifies the localization messages of the toolbar.
 #### Example - set custom text for search dialog of message
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -980,10 +1018,11 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
 
 #### Example - pass an URL to load a file
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-        <script>
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+  
 
         <div id="example">
             <div class="box">
@@ -1000,7 +1039,7 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
             </div>
         </div>
 
-        <script>
+        <script type="module">
             $(document).ready(function () {
 
                 var pdfViewer = $("#pdfViewer").kendoPDFViewer({
@@ -1018,14 +1057,14 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
 
 #### Example - Pass a base64 string to load a file
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
     <div id="pdfViewer">
     </div>
-    <script>
+    <script type="module">
       var data;
       var request = new XMLHttpRequest();
       request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);
@@ -1056,10 +1095,10 @@ Loads and scrolls to the page by number.
 > To run the below example, open it in Dojo
 
 #### Example
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-        <script>
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
         <div id="example">
             <div class="box">
@@ -1076,7 +1115,7 @@ Loads and scrolls to the page by number.
             </div>
         </div>
 
-        <script>
+        <script type="module">
             $(document).ready(function () {
                 var numeric = $("#numeric").kendoNumericTextBox({
                     change: onChange,
@@ -1117,47 +1156,46 @@ Renders page canvas by number
 
 #### Example
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-            <script>
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-            </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
-            <div id="example">
-            <button id="btn">Load 3rd page of the current document</button>
-            <br/><br/>
-            <div id="pdfViewer">
-            </div>
-            </div>
+    <div id="example">
+      <button id="btn">Load 3rd page of the current document</button>
+      <br/><br/>
+      <div id="pdfViewer"></div>
+    </div>
 
-            <script>
-            $(document).ready(function () {
-                var button = $("#btn").kendoButton({
-                click: onChange,
-                }).data("kendoButton");
+    <script type="module">
+      $(document).ready(function () {
+          var button = $("#btn").kendoButton({
+          click: onChange,
+          }).data("kendoButton");
 
-                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
-                pdfjsProcessing: {
-                    file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
-                },
-                width: "100%",
-                height: 700
-                }).data("kendoPDFViewer");
+          var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+          pdfjsProcessing: {
+              file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+          },
+          width: "100%",
+          height: 700
+          }).data("kendoPDFViewer");
 
 
-                function onChange(e) {
-                pdfViewer.bind("render", function(){
-                    var canvas = pdfViewer.pageContainer.find("canvas")[2];
+          function onChange(e) {
+          pdfViewer.bind("render", function(){
+              var canvas = pdfViewer.pageContainer.find("canvas")[2];
 
-                    $('<div></div>').kendoAlert({
-                    content: "<img width ='300' height ='300' src='"+ canvas.toDataURL() +"'/>"
-                    }).data("kendoAlert").open();
-                })
+              $('<div></div>').kendoAlert({
+              content: "<img width ='300' height ='300' src='"+ canvas.toDataURL() +"'/>"
+              }).data("kendoAlert").open();
+          })
 
-                pdfViewer.loadPage(3);
+          pdfViewer.loadPage(3);
 
-                }
-            });
-            </script>
+          }
+      });
+    </script>
 
 ### execute
 Executes a command of the PDFViewer.
@@ -1165,45 +1203,42 @@ Executes a command of the PDFViewer.
 > To run the below example, open it in Dojo
 
 #### Example
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-        <script>
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-        </script>
 
-        <div id="example">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
-            <input type="button" value="Download" onclick="onDownloadClick()"/>
-            <div id="pdfViewer">
-            </div>
+    <div id="example">
+
+        <input type="button" value="Download" onclick="onDownloadClick()"/>
+        <div id="pdfViewer">
         </div>
-
-        <script>
-
-
-
-            $(document).ready(function () {
-                $("#pdfViewer").kendoPDFViewer({
-                    pdfjsProcessing: {
-                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
-                    },
-                    width: "100%",
-                    height: 1000,
-                    toolbar: {
-                        items: [
-                            "pager",
-                            "spacer",
-                            "open",
-                            "download"
-                        ]
-                    }
-                });
+    </div>
+    <script type="module">
+        $(document).ready(function () {
+            $("#pdfViewer").kendoPDFViewer({
+                pdfjsProcessing: {
+                    file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                },
+                width: "100%",
+                height: 1000,
+                toolbar: {
+                    items: [
+                        "pager",
+                        "spacer",
+                        "open",
+                        "download"
+                    ]
+                }
             });
+        });
 
-            function onDownloadClick(){
-                var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
-                pdfViewer.execute({command:"DownloadCommand"});
-            }
-        </script>
+        function onDownloadClick(){
+            var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
+            pdfViewer.execute({command:"DownloadCommand"});
+        }
+    </script>
 
 ### setOptions
 Update the dimensions of the widget, the active page or the processor.
@@ -1211,44 +1246,44 @@ Update the dimensions of the widget, the active page or the processor.
 > To run the below example, open it in Dojo
 
 #### Example
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-        <script>
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
-        <div id="example">
-            <div class="box">
-                <div class="box-col">
-                    <ul class="options">
-                        <li>
-                            <button class="k-button" id="setOptions" type="button">Set the new options</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="pdfViewer">
+    <div id="example">
+        <div class="box">
+            <div class="box-col">
+                <ul class="options">
+                    <li>
+                        <button class="k-button" id="setOptions" type="button">Set the new options</button>
+                    </li>
+                </ul>
             </div>
         </div>
+        <div id="pdfViewer">
+        </div>
+    </div>
 
-        <script>
-            $(document).ready(function () {
+    <script type="module">
+        $(document).ready(function () {
 
-                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
-                    pdfjsProcessing: {
-                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
-                    },
-                    width: "100%",
-                    height: 700
-                }).data("kendoPDFViewer");
+            var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                pdfjsProcessing: {
+                    file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                },
+                width: "100%",
+                height: 700
+            }).data("kendoPDFViewer");
 
-                $("#setOptions").click(function () {
-                    pdfViewer.setOptions({
-                        width: "85%",
-                    height: 450
-                    })
-                });
+            $("#setOptions").click(function () {
+                pdfViewer.setOptions({
+                    width: "85%",
+                height: 450
+                })
             });
-        </script>
+        });
+    </script>
 
 ### destroy
 Destroys the widget.
@@ -1256,46 +1291,46 @@ Destroys the widget.
 > To run the below example, open it in Dojo
 
 #### Example
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-        <script>
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
-        <div id="example">
-            <div class="box">
-                    <ul class="options">
-                        <li>
-                            <button class="k-button" id="destroyBtn" type="button">Destroy the widget</button>
-                        </li>
-                    </ul>
-            </div>
-            <div id="pdfViewer">
-            </div>
+    <div id="example">
+        <div class="box">
+                <ul class="options">
+                    <li>
+                        <button class="k-button" id="destroyBtn" type="button">Destroy the widget</button>
+                    </li>
+                </ul>
         </div>
+        <div id="pdfViewer">
+        </div>
+    </div>
 
-        <script>
-            $(document).ready(function () {
+    <script type="module">
+        $(document).ready(function () {
 
-                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
-                    pdfjsProcessing: {
-                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
-                    },
-                    width: "100%",
-                    height: 700
-                }).data("kendoPDFViewer");
+            var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                pdfjsProcessing: {
+                    file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                },
+                width: "100%",
+                height: 700
+            }).data("kendoPDFViewer");
 
-                $("#destroyBtn").click(function () {
-                  console.log('--- Before Destroy ---')
-                  console.log($("#pdfViewer").data("kendoPDFViewer"))
-                  $("#pdfViewer").data("kendoPDFViewer").destroy();
-                  console.log('--- After Destroy ---')
-                  console.log($("#pdfViewer").data("kendoPDFViewer"))
+            $("#destroyBtn").click(function () {
+              console.log('--- Before Destroy ---')
+              console.log($("#pdfViewer").data("kendoPDFViewer"))
+              $("#pdfViewer").data("kendoPDFViewer").destroy();
+              console.log('--- After Destroy ---')
+              console.log($("#pdfViewer").data("kendoPDFViewer"))
 
-                  // The destroy() method will destroy the PDFViewer widget. To remove the rendered component remove or empty the element from      which the widget has been initialized
-                  //$("#pdfViewer").remove()
-                });
+              // The destroy() method will destroy the PDFViewer widget. To remove the rendered component remove or empty the element from      which the widget has been initialized
+              //$("#pdfViewer").remove()
             });
-        </script>
+        });
+    </script>
 
 ## Events
 
@@ -1320,13 +1355,12 @@ Fires when a PDF is opened in the viewer.
 #### Example
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
-    <script>
-       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-
-    <script>
+    <script type="module">
        $("#pdfviewer").kendoPDFViewer({
           open: function (e) {
              kendo.alert("file opened: " + e.file.name);
@@ -1369,13 +1403,12 @@ The error message displayed in the dialog.
 #### Example
 
     <div id="pdfviewer"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
 
-    <script>
-       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-
-    <script>	
+    <script type="module">	
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "../non-existing-file.pdf"

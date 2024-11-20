@@ -87,8 +87,7 @@ If set to `false`, swiping the view will not activate the drawer. In this case, 
 A list of the view ids on which the drawer will appear when the view is swiped. If omitted, the swipe gesture will work on all views.
 The option has effect only if `swipeToOpen` is set to `true`.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
         <a href="#bar" data-role="button">Go to bar</a>
@@ -106,6 +105,7 @@ The option has effect only if `swipeToOpen` is set to `true`.
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 #### Drawer with swipe to open set to false
 
@@ -143,8 +143,7 @@ The text to display in the Navbar title (if present).
 
 A list of the view ids on which the drawer will appear. If omitted, the drawer will work on any view in the application.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
         <a href="#bar" data-role="button">Go to bar</a>
@@ -162,6 +161,7 @@ A list of the view ids on which the drawer will appear. If omitted, the drawer w
     <script>
     new kendo.mobile.Application();
     </script>
+```
 
 ## Methods
 
@@ -171,8 +171,7 @@ Prepares the **Drawer** for safe removal from DOM. Detaches all event handlers a
 
 > **Important:** This method does not remove the Drawer element from DOM.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
         <a data-role="button" data-click="destroyDrawer">Destroy Drawer</a>
@@ -188,13 +187,13 @@ Prepares the **Drawer** for safe removal from DOM. Detaches all event handlers a
         $("#my-drawer").data("kendoMobileDrawer").destroy();
     }
     </script>
+```
 
 ### hide
 
 Hide the Drawer
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
     </div>
@@ -210,13 +209,13 @@ Hide the Drawer
         $("#my-drawer").data("kendoMobileDrawer").hide();
     }
     </script>
+```
 
 ### show
 
 Show the Drawer
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
         <a data-click="showDrawer" data-role="button">Show drawer</a>
@@ -233,7 +232,7 @@ Show the Drawer
         $("#my-drawer").data("kendoMobileDrawer").show();
     }
     </script>
-
+```
 
 ## Events
 
@@ -241,8 +240,7 @@ Show the Drawer
 
 Fired after the mobile Drawer has been hidden.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
     </div>
@@ -259,6 +257,7 @@ Fired after the mobile Drawer has been hidden.
         console.log(e);
     }
     </script>
+```
 
 #### Event Data
 
@@ -270,8 +269,7 @@ The widget instance which fired the event.
 
 Fires before the mobile Drawer is revealed. The event can be prevented by calling the `preventDefault` method of the event parameter.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
     </div>
@@ -287,13 +285,13 @@ Fires before the mobile Drawer is revealed. The event can be prevented by callin
         e.preventDefault();
     }
     </script>
+```
 
 ### hide
 
 Fired when the mobile Drawer is closed by the user.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
     </div>
@@ -310,6 +308,7 @@ Fired when the mobile Drawer is closed by the user.
         console.log(e);
     }
     </script>
+```
 
 #### Event Data
 
@@ -321,8 +320,7 @@ The widget instance which fired the event.
 
 Fired when the mobile Drawer and its child widgets are initialized.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
     </div>
@@ -339,6 +337,7 @@ Fired when the mobile Drawer and its child widgets are initialized.
         console.log(e);
     }
     </script>
+```
 
 #### Event Data
 
@@ -350,8 +349,7 @@ The widget instance which fired the event.
 
 Fires when the Drawer is shown.
 
-#### Example
-
+```
     <div data-role="view" id="drawer-settings">
         <h1>Settings</h1>
     </div>
@@ -368,6 +366,7 @@ Fires when the Drawer is shown.
         console.log(e);
     }
     </script>
+```
 
 #### Event Data
 
@@ -381,8 +380,7 @@ The widget instance which fired the event.
 
 Holds information about the current state of the Drawer. If it is currently opened then the visible field will be set to true.
 
-#### Example - get the current Drawer state
-
+```
     <div data-role="view" id="drawer-settings" data-show="onShow">
         <h1>Settings</h1>
     </div>
@@ -399,3 +397,4 @@ Holds information about the current state of the Drawer. If it is currently open
         console.log(isVisible); //will output false
     }
     </script>
+```

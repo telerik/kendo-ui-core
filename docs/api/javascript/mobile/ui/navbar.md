@@ -17,8 +17,7 @@ Prepares the **NavBar** for safe removal from DOM. Detaches all event handlers a
 
 > **Important:** This method does not remove the NavBar element from DOM.
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-title="navbar demo">
       <header data-role="header">
         <div data-role="navbar">
@@ -41,6 +40,7 @@ Prepares the **NavBar** for safe removal from DOM. Detaches all event handlers a
       navbar.destroy();
     }
     </script>
+```
 
 ### title
 
@@ -52,8 +52,7 @@ Update the title element text. The title element is specified by setting the `ro
 
 The text of title
 
-#### Example
-
+```
     <div id="foo" data-role="view" data-title="navbar demo">
       <header data-role="header">
         <div data-role="navbar">
@@ -74,3 +73,4 @@ The text of title
       navbar.title("changed");
     }
     </script>
+```

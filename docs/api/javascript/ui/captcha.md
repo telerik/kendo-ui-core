@@ -47,7 +47,7 @@ The URL, AJAX settings or function that fetches the audio of the captcha. When u
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
-            // handler: "url-to-reset", // Response should return captcha (image) and the id
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset",
             // audioHandler: "url-to-audio" // Response should return the audio source - base64 stream or url to the audio file
         });
     </script>
@@ -105,7 +105,7 @@ The field that returns the captcha's image source. Used in the `handler` functio
     <script>
         $("#captcha").kendoCaptcha({
             dataCaptchaField: "captchaImage",
-            handler: "url-to-reset" // Response should return captchaImage and the captchaId
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset" // Response should return captchaImage and the captchaId
         });
     </script>
 
@@ -134,7 +134,7 @@ The field that returns the captcha's id. Used in the `handler` function/response
     <script>
         $("#captcha").kendoCaptcha({
             dataCaptchaIdField: "ID",
-            handler: "url-to-reset" // Response should return captcha and the ID
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset" // Response should return captcha and the ID
         });
     </script>
 
@@ -240,7 +240,7 @@ The title message of the reset button.
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
-            handler: "https://demos.telerik.com/kendo-ui/captcha/reset"
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset",
             messages: {
                 reset: "Reset",
             }
@@ -466,9 +466,10 @@ Speaks the Captcha's text - triggers the `audioHandler` action. The returned pro
             }
         }).data("kendoCaptcha");
 
-        captcha.speak().done(function () {
-            console.log("Audio ended");
-        });
+        // call the speak method
+        //captcha.speak().done(function () {
+           // console.log("Audio ended");
+        //});
     </script>
 
 #### Returns
