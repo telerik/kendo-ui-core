@@ -558,7 +558,7 @@ export const __meta__ = {
 
         return "<button class='k-button k-button-md k-rounded-full k-button-solid k-button-solid-base k-icon-button k-button-" + type + "' " +
                 "title='" + options[type + "ButtonTitle"] + "' " +
-                "aria-label='" + options[type + "ButtonTitle"] + "'>" +
+                `aria-hidden="true" tabindex="-1">` +
                     kendo.ui.icon({ icon: buttonIconName, iconClass: "k-button-icon" }) +
                 "</button>";
     }

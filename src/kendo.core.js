@@ -5196,7 +5196,7 @@ function pad(number, digits, end) {
             //The setActive method does not cause the document to scroll to the active object in the current page
             element[0].setActive();
         } catch (e) {
-            element[0].focus();
+            element.trigger("focus");
         }
 
         scrollableParents.each(function(index, parent) {

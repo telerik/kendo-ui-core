@@ -541,7 +541,7 @@ export const __meta__ = {
             var that = this;
             that.wrapper.addClass(FOCUSED);
             that._toggleText(false);
-            that.element[0].focus();
+            that.element.trigger("focus");
         },
 
         _focusout: function() {

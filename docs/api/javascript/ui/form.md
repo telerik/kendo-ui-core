@@ -30,6 +30,25 @@ Specifies the [template](/api/javascript/kendo/methods/template) which is used f
         });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Specifies if the clearButton should be rendered on initialization.
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            clearButton: false,
+        });
+    </script>
+
 ### focusFirst `Boolean` *(default: false)*
 
 Specifies if the first editor of the form will be focused on initialization.

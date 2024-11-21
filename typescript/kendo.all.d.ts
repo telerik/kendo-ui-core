@@ -6007,6 +6007,7 @@ declare namespace kendo.ui {
     interface FormOptions {
         name?: string | undefined;
         orientation?: string | "horizontal" | "vertical" | undefined;
+        clearButton?: boolean | undefined;
         focusFirst?: boolean | undefined;
         formatLabel?: Function | undefined;
         buttonsTemplate?: string|Function | undefined;
