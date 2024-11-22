@@ -54,7 +54,11 @@ With the **Create New Project Wizard** you can select the desired:
 * Project Template
 * Visual Theme
 
-### Target Framework
+### Essentials
+
+![{{ site.product_short }} The ASP.NET version options](../vs-integration/images/essentials.png)
+
+#### Target Framework
 
 The **Create New Project Wizard** allows you to select a target **Framework**. 
 
@@ -62,26 +66,20 @@ The **Create New Project Wizard** allows you to select a target **Framework**.
 > 
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
 
-![{{ site.product_short }} The ASP.NET version options](../vs-integration/images/core-version.png)
-
-### Helper Selection
+#### ASP.NET Core helper
 
 You can choose if you want the template project to use [HtmlHelpers or TagHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}) in its Views.
-In this article, we use the **Tag** option.
+In this article, we use the **HTML** option.
 
-![{{ site.product_short }} HTML/Tag helper options](../vs-integration/images/tag-html-dropdown.png)
-
-### {{ site.product_short}} version
+#### Select Version
 
 The Project wizard allows you to select the desired version of {{ site.product_short }}. If a newer version is available but it is not downloaded on the machine, you can get it without exiting the wizard.
-
-![{{ site.product_short }} Product version options](../vs-integration/images/telerik-version.png)
 
 ### Available Templates
 
 The following project templates are available:
 
-![{{ site.product_short }} Project template options](../vs-integration/images/new-project-wizard-core.png)
+![{{ site.product_short }} Project template options](../vs-integration/images/available-templates.png)
 
 <table>
     <colgroup>
@@ -168,7 +166,7 @@ The following project templates are available:
 
 The **Select Theme** option allows you to preview the available Kendo UI themes and select the desired one. After selecting a theme, the project will include only the files that are required by the selected theme in the `_Layout.cshtml`.
 
-![{{ site.product_short }} Project Wizard Select Theme](../vs-integration/images/select-theme-core.png)
+![{{ site.product_short }} Project Wizard Select Theme](../vs-integration/images/themes.png)
 
 {% endif %}
 
