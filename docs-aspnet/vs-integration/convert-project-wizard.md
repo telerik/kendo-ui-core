@@ -58,7 +58,7 @@ The conversion wizard provides the following steps:
 The version selection allows you to choose which version of {{ site.product }} to use in your application.
 
 {% if site.core %}
-![{{ site.product_short }} Version selection](../vs-integration/images/convert-wizard-version.png)
+![{{ site.product_short }} Version selection](../vs-integration/images/convert-project.png)
 {% else %}
 ![{{ site.product_short }} Version selection](../vs-integration/images/images-mvc/convert_distribution.png)
 {% endif %}
@@ -68,11 +68,20 @@ The version selection allows you to choose which version of {{ site.product }} t
 The theme selection allows you to choose from a large list of professionally styled built-in themes for your {{ site.product }} application.
 
 {% if site.core %}
-![{{ site.product_short }} Theme selection](../vs-integration/images/theme-selection.png)
+![{{ site.product_short }} Theme selection](../vs-integration/images/convert-theme.png)
 {% else %}
 ![{{ site.product_short }} Theme selection](../vs-integration/images/images-mvc/convert_theme.png)
 {% endif %}
 
+{% if site.core %}
+## Back Up
+
+You can create a back up for the project in the state they were before the update.
+
+![{{ site.product_short }} Theme selection](../vs-integration/images/backup.png)
+{% endif %}
+
+{% if site.mvc %}
 ## Project Settings
 
 The **Project Settings** page enables you to modify the project settings by configuring the following options:
@@ -82,11 +91,10 @@ The **Project Settings** page enables you to modify the project settings by conf
 - **Copy Global Resources**&mdash;Copies the localization files to {% if site.core %}`~/wwwroot/lib/kendo-ui/js/messages`{% else %}`~/Scripts/kendo/{version}/cultures`{% endif %}.
 - **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
-{% if site.core %}
-![{{ site.product_short }} Project settings](../vs-integration/images/project-settings.png)
-{% else %}
 ![{{ site.product_short }} Project settings](../vs-integration/images/images-mvc/convert_settings.png)
 {% endif %}
+
+## Manual Alternative
 
 The wizard automates several steps that are crucial for the project configuration. If you decide to perform these steps manually, follow the links below:
 

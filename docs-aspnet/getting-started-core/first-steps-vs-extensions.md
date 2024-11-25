@@ -35,8 +35,8 @@ You'll learn how to:
 <ul class="toc-ul">
     <li><span class="k-icon k-i-check"></span>Download and install the Telerik UI extensions.</li>
     <li><span class="k-icon k-i-check"></span>Create an ASP.NET Core MVC (Model-View-Controller) project.</li>
-    <li><span class="k-icon k-i-check"></span>Initialize a DatePicker and a Grid.</li>
-    <li><span class="k-icon k-i-check"></span>Bind data to Telerik UI widgets.</li>
+    <li><span class="k-icon k-i-check"></span>Bind data to Telerik UI components like the Grid.</li>
+    <li><span class="k-icon k-i-check"></span>Enhance the project with additional components like the DatePicker.</li>
     <li><span class="k-icon k-i-check"></span>Use the Telerik UI Themes.</li>
 	<li><span class="k-icon k-i-check"></span>Add your license file.</li>
 </ul>
@@ -47,7 +47,7 @@ You'll learn how to:
 
 * [Visual Studio 2017 or later](https://visualstudio.microsoft.com/downloads)
 
-   >For .NET Core 3.1 version or later, Visual Studio 2019 is required.
+   >For newer .NET Core versions, a recent matching Visual Studio might be required.
 
 * Windows 10 or higher
 
@@ -80,11 +80,13 @@ Once you install the Telerik UI Extensions, you can open Visual Studio and start
 
    Using this name guarantees that the `namespace` from the code snippets in this tutorial will match your project.
 
-	![{{ site.product_short }} New project configuration](../getting-started-core/images/new-project-configuration.png)
+	![{{ site.product_short }} New project configuration](../getting-started-core/images/naming.png)
 
-1. From the drop-down boxes, select the **.NET CORE** framework and **ASP.NET Core** version **5.0**.
+1. From the drop-down box, select the latest **ASP.NET Core** version for .NET target framework.
 
-   Telerik UI supports all ASP.NET Core versions, including 3.x, 5.0, and newer. The default is .NET 5.0.
+   Telerik UI supports all newer ASP.NET Core versions.
+
+   	![{{ site.product_short }} New Project Wizard](../vs-integration/images/essentials.png)
 
 1. Select HTML or Tag Helpers.
 
@@ -93,21 +95,23 @@ Once you install the Telerik UI Extensions, you can open Visual Studio and start
 
    >tip In Razor files, Tag Helpers come with predefined strongly-typed attributes that enable server-side code to participate in the creation and rendering of HTML elements. The resulting markup is cleaner and easier to read than with traditional HTML Helpers, which are invoked as methods that are mixed with HTML inside your Razor views.
 
-	![{{ site.product_short }} New Project Wizard](../getting-started-core/images/telerik-app-wizard.png)
-
-1. From the **VERSION** drop-down, select the latest Telerik UI version.
+1. From the **Select Version** list, select the latest Telerik UI version, and then select **Next**.
 
    * If you use the Telerik UI extensions for the first time, you will see a login window. Enter the credentials for your [Telerik account](https://www.telerik.com/account) to download the controls.
    * If you haven't purchased a license, download the trial version of the Telerik UI controls.
 
 
-1. Select **STANDARD**, and then select **Next**.
+1. From the available options Select **Grid and Menu**, and then select **Next**.
 
-   The wizard offers [various templates]({% slug newprojectwizards_visualstudio_aspnetcore %}#available-templates) for projects with pre-configured Grid and Menu controls and for projects using Razor Pages. This tutorial uses the **STANDARD** MVC version.
+   The wizard offers [various templates]({% slug newprojectwizards_visualstudio_aspnetcore %}#available-templates) for projects with pre-configured Grid and Menu controls and for projects using Razor Pages. This tutorial uses the **Grid and Menu** MVC version.
 
-1. Select the default Boostrap-v4 theme, and then select **Finish**.
+   ![{{ site.product_short }} New Project Wizard](../vs-integration/images/available-templates.png)
+
+1. Select the default theme and then select **Finish**.
 
    The selected theme defines the appearance of the Telerik UI components. You can [change the theme](#changing-the-app-theme) at any time.
+
+   ![{{ site.product_short }} New Project Wizard](../vs-integration/images/themes.png)
  
 Congratulations! The created project:
 
@@ -115,36 +119,13 @@ Congratulations! The created project:
 
 * Has all resources required by Telerik UI, and you can start adding components immediately.
 
-## Initializing a DatePicker
+## The Grid and Data Binding
 
-Next, you will add the first Telerik UI component to the project&mdash;the [Telerik UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}). The Telerik UI extensions have already configured the project with all required Telerik UI resources, and all you need now is to add the DatePicker HTML or Tag Helper. Whether you select the HTML or Tag Helper syntax depends on what you have configured when you have [created the project](#creating-the-project).
+The next step is to examine the Telerik UI Grid which the template wizard added to your project. The Grid is the richest component in the entire toolset, but this sample will only demonstrate a basic implementation.
 
-Utilize the [Telerik UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}) component by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+Binding the Grid  requires adding a model and controller. The Wizard has done the following automatically: 
 
-```HtmlHelper
-	<div class="text-center">
-		<h2>Telerik UI DatePicker for ASP.NET Core</h2>
-		@(Html.Kendo().DatePicker()
-			.Name("my-picker")
-		)
-	</div>
-```
-```TagHelper
-	<div class="text-center">
-		<h2>Telerik UI DatePicker for ASP.NET Core</h2>
-		<kendo-datepicker name="my-picker"/>
-	</div>
-```
-
-Run the project. The following page is visualized in the browser:
-
-![{{ site.product_short }} Sample page](../getting-started-core/images/sample-page.png)
-
-## Initializing a Grid and Binding Data
-
-The next step is to add the more complex Telerik UI Grid to your project. You will bind the Grid to data, and this requires adding a model and controller.
-
-1. Add a `Models` folder to the project. Create an `OrderViewModel` class and add it to the `Models` folder.
+1. Added a `Models` folder to the project. Created an `OrderViewModel` class and added it to the `Models` folder.
 
    The model represents the shape of the data that the Grid will display.
 
@@ -185,13 +166,11 @@ The next step is to add the more complex Telerik UI Grid to your project. You wi
 
 	>When the Grid is bound to a strongly-typed model such as the OrderViewModel, it automatically detects the data types of the fields.
 
-1. Right-click the `Controllers` folder. Select **Add** > **Controller...**, and then select **Add**.
+1. Created a new Controller and named the file `GridController`.
 
    The controller handles the incoming requests, retrieves the model data, and then returns the requested data.
 
-1. Name the file `GridController`.
-
-1. In `GridController.cs`, add the following declarations at the top. They enable the data processing by the Telerik UI extensions:
+1. In `GridController.cs`, added the following declarations at the top. They enable the data processing by the Telerik UI extensions:
 	
 	```
 		using Kendo.Mvc.Extensions;
@@ -202,7 +181,7 @@ The next step is to add the more complex Telerik UI Grid to your project. You wi
 		using TelerikAspNetCoreApp.Models;
 	```
 
-1. In `GridController.cs`, add an ActionMethod that will return the data for the Grid.
+1. In `GridController.cs`, added an ActionMethod that will return the data for the Grid.
 
 	```
 		public class GridController : Controller
@@ -224,7 +203,7 @@ The next step is to add the more complex Telerik UI Grid to your project. You wi
 		}
 	```
 
-1. In the `~/Views/Home/Index.cshtml` file, add the Grid:
+1. In the `~/Views/Home/Index.cshtml` file, added the Grid:
 
 	```HtmlHelper
 		@(Html.Kendo().Grid <TelerikAspNetCoreApp.Models.OrderViewModel>()
@@ -272,11 +251,38 @@ The next step is to add the more complex Telerik UI Grid to your project. You wi
 		</kendo-grid>
 	```
 
-1. Run the project.
+1. Now you can run the project and enjoy the neat result:
+
+   ![{{ site.product_short }} Sample page](../getting-started-core/images/grid.png)
 
 >tip For more information on data processing and data binding, see the following articles:
 >* [Binding the Grid to a database]({%slug htmlhelpers_grid_aspnetcore_ajaxbinding%})
 >* [CRUD operations](https://demos.telerik.com/aspnet-core/grid/editing)
+
+## Adding a DatePicker
+
+Next, you will add another Telerik UI component to the project&mdash;the [Telerik UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}). You can add the DatePicker as an HTML or Tag Helper. Whether you select the HTML or Tag Helper syntax depends on what you have configured when you have [created the project](#creating-the-project).
+
+Utilize the [Telerik UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}) component by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+
+```HtmlHelper
+	<div class="text-center">
+		<h2>Telerik UI DatePicker for ASP.NET Core</h2>
+		@(Html.Kendo().DatePicker()
+			.Name("my-picker")
+		)
+	</div>
+```
+```TagHelper
+	<div class="text-center">
+		<h2>Telerik UI DatePicker for ASP.NET Core</h2>
+		<kendo-datepicker name="my-picker"/>
+	</div>
+```
+
+Run the project. The following result is visualized in the browser:
+
+![{{ site.product_short }} Sample page](../getting-started-core/images/sample-page.png)
 
 Next, you can [change the look and feel](#changing-the-app-theme) of your application by selecting another visual theme.
 
