@@ -161,8 +161,10 @@ export const __meta__ = {
                 that.element.attr(NOVALIDATE, NOVALIDATE);
             }
 
-            that._inputSelector = INPUTSELECTOR + validateAttributeSelector;
-            that._checkboxSelector = CHECKBOXSELECTOR + validateAttributeSelector;
+            that._shouldSearchDocument = that.element.is(FORM) && that.element.attr("id") !== undefined;
+            that._containerElement = that._shouldSearchDocument ? $(document) : that.element;
+            that._inputSelector = that._buildSelector(INPUTSELECTOR, validateAttributeSelector);
+            that._checkboxSelector = that._buildSelector(CHECKBOXSELECTOR, validateAttributeSelector);
 
             that._errors = {};
             that._attachEvents();
@@ -192,12 +194,13 @@ export const __meta__ = {
             },
             rules: {
                 required: function(input) {
-                    var noNameCheckbox = !input.attr("name") && !input.is(":checked"),
+                    let containerElement = this._containerElement,
+                        noNameCheckbox = !input.attr("name") && !input.is(":checked"),
                         name = input.attr("name"),
                         quote = !!name && name.indexOf("'") > -1 ? '\"' : "'",
-                        namedCheckbox = input.attr("name") && !this.element.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
+                        namedCheckbox = input.attr("name") && !containerElement.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
                         checkbox = input.filter("[type=checkbox]").length && (noNameCheckbox || namedCheckbox),
-                        radio = input.filter("[type=radio]").length && !this.element.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
+                        radio = input.filter("[type=radio]").length && !containerElement.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
                         value = input.val();
 
                     return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
@@ -296,6 +299,18 @@ export const __meta__ = {
             validationSummary: false
         },
 
+        _buildSelector: function(selectorConstant, validateAttributeSelector) {
+            const that = this,
+            formSelector = `,[form="${that.element.attr("id")}"]`;
+            let selector = selectorConstant + validateAttributeSelector;
+
+            if ( that._shouldSearchDocument) {
+                selector += formSelector;
+            }
+
+            return selector;
+        },
+
         _allowSubmit: function() {
             return kendo.ui.validator.allowSubmit(this.element, this.errors());
         },
@@ -344,28 +359,29 @@ export const __meta__ = {
         },
 
         _attachEvents: function() {
-            var that = this;
+            const that = this,
+            element = that._containerElement;
 
             if (that.element.is(FORM)) {
                 that.element.on("submit" + NS, that._submit.bind(that));
             }
 
             if (that.options.validateOnBlur) {
-                if (!that.element.is(INPUTSELECTOR)) {
-                    that.element.on(BLUR + NS, that._inputSelector, function() {
+                if (!element.is(INPUTSELECTOR)) {
+                    element.on(BLUR + NS, that._inputSelector, function() {
                         that._checkElement($(this));
                     });
 
-                    that.element.on("click" + NS, that._checkboxSelector, function() {
+                    element.on("click" + NS, that._checkboxSelector, function() {
                         that._checkElement($(this));
                     });
                 } else {
-                    that.element.on(BLUR + NS, function() {
+                    element.on(BLUR + NS, function() {
                         that._checkElement(that.element);
                     });
 
-                    if (that.element.is(CHECKBOXSELECTOR)) {
-                        that.element.on("click" + NS, function() {
+                    if (element.is(CHECKBOXSELECTOR)) {
+                        element.on("click" + NS, function() {
                             that._checkElement(that.element);
                         });
                     }
@@ -374,19 +390,19 @@ export const __meta__ = {
         },
 
         validate: function() {
-            var inputs;
-            var idx;
-            var result = false;
-            var length;
-
-            var isValid = this.value();
+            let inputs;
+            let idx;
+            let result = false;
+            let length;
+            let containerElement = this._containerElement;
+            let isValid = this.value();
 
             this._errors = {};
 
             if (!this.element.is(INPUTSELECTOR)) {
-                var invalid = false;
+                let invalid = false;
 
-                inputs = this.element.find(this._inputSelector);
+                inputs = containerElement.find(this._inputSelector);
 
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
                     if (!this.validateInput(inputs.eq(idx))) {
@@ -418,15 +434,14 @@ export const __meta__ = {
 
             this._isValidated = true;
 
-            var that = this,
+            const that = this,
                 template = that._errorTemplate,
                 result = that._checkValidity(input),
                 valid = result.valid,
-                widgetInstance,
                 className = "." + INVALIDMSG,
                 fieldName = (input.attr(NAME) || ""),
                 lbl = that._findMessageContainer(fieldName).add(input.next(className).filter(function() {
-                    var element = $(this);
+                    let element = that._shouldSearchDocument ? $(document) : $(this);
                     if (element.filter("[" + kendo.attr("for") + "]").length) {
                         return element.attr(kendo.attr("for")) === fieldName;
                     }
@@ -439,6 +454,7 @@ export const __meta__ = {
                 wasValid = !input.attr(ARIAINVALID),
                 isInputInner = input.is(INPUTINNER),
                 inputWrapper = input.parent(INPUTWRAPPER);
+            let widgetInstance;
 
             input.removeAttr(ARIAINVALID);
 
@@ -456,7 +472,7 @@ export const __meta__ = {
 
             if (!valid && !input.data("captcha_validating")) {
                 that._errors[fieldName] = messageText;
-                var lblId = lbl.attr('id');
+                let lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
 
@@ -469,9 +485,9 @@ export const __meta__ = {
                     lbl.replaceWith(messageLabel);
                 } else {
                     widgetInstance = widgetInstance || kendo.widgetInstance(input);
-                    var parentElement = input.parent().get(0);
-                    var nextElement = input.next().get(0);
-                    var prevElement = input.prev().get(0);
+                    let parentElement = input.parent().get(0);
+                    let nextElement = input.next().get(0);
+                    let prevElement = input.prev().get(0);
 
                     // Get the instance of the RadioGroup which is not initialized on the input element
                     if (!widgetInstance && input.is("[type=radio]")) {
@@ -520,8 +536,8 @@ export const __meta__ = {
             }
 
             if (widgetInstance) {
-                var inputWrap = widgetInstance._inputWrapper || widgetInstance.wrapper;
-                var inputLabel = widgetInstance._inputLabel;
+                let inputWrap = widgetInstance._inputWrapper || widgetInstance.wrapper;
+                let inputLabel = widgetInstance._inputLabel;
 
                 if (inputWrap && !(input.is("[type=checkbox]") || input.is("[type=radio]"))) {
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
@@ -533,7 +549,7 @@ export const __meta__ = {
             }
 
             if (wasValid !== valid) {
-                var errorId = messageLabel ? messageLabel.attr("id") : lbl.attr("id");
+                let errorId = messageLabel ? messageLabel.attr("id") : lbl.attr("id");
 
                 that._associateMessageContainer(input, errorId);
 
@@ -546,9 +562,9 @@ export const __meta__ = {
         },
 
         hideMessages: function() {
-            var that = this,
+            const that = this,
                 className = "." + INVALIDMSG,
-                element = that.element;
+                element = that._containerElement;
 
             that._disassociateMessageContainers();
 
@@ -560,9 +576,10 @@ export const __meta__ = {
         },
 
         reset: function() {
-            var that = this,
-                inputs = that.element.find("." + INVALIDINPUT),
-                labels = that.element.find("." + INVALIDLABEL);
+            const that = this,
+                containerElement = that._containerElement,
+                inputs = containerElement.find("." + INVALIDINPUT),
+                labels = containerElement.find("." + INVALIDLABEL);
 
             that._errors = [];
 
@@ -576,16 +593,17 @@ export const __meta__ = {
         },
 
         _findMessageContainer: function(fieldName) {
-            var locators = kendo.ui.validator.messageLocators,
+            let locators = kendo.ui.validator.messageLocators,
                 name,
                 containers = $();
 
-            for (var idx = 0, length = this.element.length; idx < length; idx++) {
-                containers = containers.add(searchForMessageContainer(this.element[idx].getElementsByTagName("*"), fieldName));
+            for (let idx = 0, length = this.element.length; idx < length; idx++) {
+                let target = this._shouldSearchDocument ? document : this.element[idx];
+                containers = containers.add(searchForMessageContainer(target.getElementsByTagName("*"), fieldName));
             }
 
             for (name in locators) {
-                containers = containers.add(locators[name].locate(this.element, fieldName));
+                containers = containers.add(locators[name].locate(this._containerElement, fieldName));
             }
 
             return containers;
@@ -663,12 +681,13 @@ export const __meta__ = {
         },
 
         _getInputNames: function() {
-            var that = this,
-                inputs = that.element.find(that._inputSelector),
-                sorted = [];
+            const that = this,
+                containerElement = this._containerElement,
+                inputs = containerElement.find(that._inputSelector);
+            let sorted = [];
 
-            for (var idx = 0, length = inputs.length; idx < length; idx++) {
-                var input = $(inputs[idx]);
+            for (let idx = 0, length = inputs.length; idx < length; idx++) {
+                let input = $(inputs[idx]);
 
                 if (hasAttribute(input, NAME)) {
                     // Add current name if:

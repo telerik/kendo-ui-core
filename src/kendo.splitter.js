@@ -153,7 +153,7 @@ export const __meta__ = {
             that.element
                 .children(".k-splitbar-draggable-" + orientation)
                 .on("keydown" + NS, that._keydown.bind(that))
-                .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
+                .on("mousedown" + NS, function(e) { e.currentTarget.focus({ preventScroll: true }); })
                 .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED); })
                 .on("blur" + NS, function(e) {
                     $(e.currentTarget).removeClass(FOCUSED);
