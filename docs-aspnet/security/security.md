@@ -33,13 +33,22 @@ We value the contributions of security researchers and ethical hackers. If a res
 |------------------|------------------------|
 | First Response    | 7 days                 |
 | Time to Triage    | 10 days                |
-| Time to Resolution| Depends on severity    |
+| Time to Resolution| [Depends on severity](#vulnerability-remediation-guidelines)    |
 
 For more information, visit:
 - [Bugcrowd Vulnerability Disclosure Program](https://bugcrowd.com/engagements/devtools-vdp)
 - [Progress Trust Center](https://www.progress.com/trust-center)
 - [Vulnerability Reporting Policy](https://www.progress.com/trust-center/vulnerability-reporting-policy)
 
+## Vulnerability Remediation Guidelines
+
+Progress follows defined timelines for remediating vulnerabilities based on their severity levels, ensuring a structured and efficient approach to maintaining security across all products. These guidelines are aligned with CVSS (Common Vulnerability Scoring System) scoring:
+
+- **Critical scored issues (CVSS 9.0+):** Resolved within **30 days**.  
+- **High scored issues (CVSS 7.0–8.9):** Resolved within **60 days**.  
+- **Medium or lower scored issues (CVSS < 7):** Resolved within **90–120 days**, depending on the score.  
+
+While these are not strict SLA (Service Level Agreement), they serve as a commitment to providing timely resolutions for identified vulnerabilities.
 
 ## What We Do to Mitigate Risk
 
