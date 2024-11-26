@@ -980,10 +980,10 @@ export const __meta__ = {
 
                     source = that.bindings[bindingName].get();
 
-                    if (widget[fieldName] instanceof kendo.data.DataSource && widget[fieldName] != source) {
+                    if (widget[fieldName] instanceof kendo.data.DataSource && widget[fieldName] != source && source) {
                         if (source instanceof kendo.data.DataSource) {
                             widget[setter](source);
-                        } else if (source && source._dataSource) {
+                        } else if (source._dataSource) {
                             widget[setter](source._dataSource);
                         } else {
                             select = kendo.ui.Select && widget instanceof kendo.ui.Select;

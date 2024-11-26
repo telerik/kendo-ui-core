@@ -23,6 +23,7 @@ export const __meta__ = {
         CONTENTLOAD = "contentLoad",
         ERROR = "error",
         RESIZE = "resize",
+        RESIZING = "resizing",
         LAYOUTCHANGE = "layoutChange",
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
@@ -134,6 +135,7 @@ export const __meta__ = {
             CONTENTLOAD,
             ERROR,
             RESIZE,
+            RESIZING,
             LAYOUTCHANGE
         ],
 
@@ -823,6 +825,8 @@ export const __meta__ = {
 
             paneElement.style[PANE_SIZING_PROP] = size;
             $(paneElement).data("pane").size = size;
+
+            that.trigger(RESIZING, { pane: paneElement });
         },
 
         _getPaneSizes: function(paneIndex) {

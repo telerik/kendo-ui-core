@@ -171,7 +171,7 @@ export const __meta__ = {
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return `<span aria-hidden='true' tabindex='-1' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
+        return `<span aria-hidden='true' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
     }
 
     function ajaxXhr() {
@@ -897,6 +897,8 @@ export const __meta__ = {
             if (options.navigatable) {
                 that.tabGroup.on("keydown" + NS, that._keyDownProxy);
             }
+
+            $(window).on('resize' + NS, that._resize.bind(that));
         },
 
         _click: function(item) {
@@ -1202,6 +1204,14 @@ export const __meta__ = {
             this._scrollable();
         },
 
+        _getChildrenWidth: function(element) {
+            let width = 0;
+            element.children().each(function() {
+                width += outerWidth($(this));
+            });
+            return width;
+        },
+
         _scrollable: function() {
             var that = this,
                 options = that.options,
@@ -1216,8 +1226,9 @@ export const __meta__ = {
 
                 wrapperOffsetWidth = that.wrapper[0].offsetWidth;
                 tabGroupScrollWidth = that.tabGroup[0].scrollWidth;
+                const enableScroll = (tabGroupScrollWidth > wrapperOffsetWidth) || (that._getChildrenWidth(that.tabGroup) > that.tabGroup.outerWidth());
 
-                if (tabGroupScrollWidth > wrapperOffsetWidth && !that._scrollableModeActive) {
+                if (enableScroll && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
                     that._isRtl = kendo.support.isRtl(that.element);
                     var mouseDown = kendo.support.touch ? "touchstart" : "mousedown";
@@ -1248,7 +1259,7 @@ export const __meta__ = {
                     that._scrollableModeActive = true;
 
                     that._toggleScrollButtons();
-                } else if (that._scrollableModeActive && tabGroupScrollWidth <= wrapperOffsetWidth) {
+                } else if (that._scrollableModeActive && !enableScroll) {
                     that._scrollableModeActive = false;
 
                     that.wrapper.removeClass("k-tabstrip-scrollable");
