@@ -8,7 +8,7 @@ slug: howto_showtooltipoverevents_scheduleraspnetmvc
 
 # Show Tooltip over Scheduler Events
 
-To see the example, refer to the project on how to [use the Tooltip HtmlHelper to show additional information over the Scheduler events](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-tooltip-demo) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use the Tooltip HtmlHelper to show additional information over the Scheduler events](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerTooltip) in ASP.NET MVC applications.
 
 ## See Also
 

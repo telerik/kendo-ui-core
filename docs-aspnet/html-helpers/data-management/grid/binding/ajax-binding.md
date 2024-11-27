@@ -169,7 +169,7 @@ If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](
 ![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-binding-mvc.png)
 {% endif %}
 
-To download a Visual Studio Project, refer to [this GitHub repository]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
+To download a Visual Studio Project, refer to [this GitHub repository]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridAjaxBindingDatabase{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
 
 ## See Also
 

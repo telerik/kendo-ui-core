@@ -8,7 +8,7 @@ slug: howto_validatetimeslotagainstexistingrules_scheduleraspnetmvc
 
 # Validate Timeslot Availability against Existing Recurrence Rules
 
-To see the example, refer to the project on how to [validate the timeslot availability against the existing recurrence rules of a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-timeslot-validation-against-recurrence-rules) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [validate the timeslot availability against the existing recurrence rules of a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerValidatingTimeslot) in ASP.NET MVC applications.
 
 ## See Also
 

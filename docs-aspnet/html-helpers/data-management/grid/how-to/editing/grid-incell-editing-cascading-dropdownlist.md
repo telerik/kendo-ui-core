@@ -8,7 +8,7 @@ slug: howto_editincellmodecasacdeddls_gridaspnetmvc
 
 # Edit Grids with Cascading DropDownLists in Incell Mode
 
-To see the example, refer to the project on how to configure the Kendo UI Grid to [handle cascading DropDownLists within itself when using the in-cell editing mode](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-incell-editing-with-cascading-dropdownlist).
+To see the example, refer to the project on how to configure the Kendo UI Grid to [handle cascading DropDownLists within itself when using the in-cell editing mode](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingInCellCascadingDropDownLists).
 
 ## See Also
 

@@ -12,7 +12,7 @@ The following example demonstrates how to export 2 or more Kendo UI TreeLists to
 
 Each TreeList is exported to a separate Excel sheet. For additional information on this topic, refer to the [Excel export overview article](https://docs.telerik.com/kendo-ui/framework/excel/introduction#excel-document-creation).
 
-To see the example, refer to the Visual Studio project on [multiple TreeList Excel export](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treelist/multiple-treelist-export).
+To see the example, refer to the Visual Studio project on [multiple TreeList Excel export](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/TreeListExportingMultiple).
 
 ## See Also
 

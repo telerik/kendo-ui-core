@@ -8,7 +8,7 @@ slug: howto_addnewvaluestorecordsautoceditor_gridaspnetmv
 
 # Add New Values to Records with AutoComplete as Editor
 
-To see the example, refer to the project on how to [add a new value to the Kendo UI Grid records when the Grid is used with the Kendo UI AutoComplete as an editor](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/autocomplete-editor-allow-setting-new-values) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [add a new value to the Kendo UI Grid records when the Grid is used with the Kendo UI AutoComplete as an editor](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingAutoCompleteNewItem) in ASP.NET MVC applications.
 
 ## See Also
 

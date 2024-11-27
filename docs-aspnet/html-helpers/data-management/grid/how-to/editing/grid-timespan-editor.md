@@ -8,7 +8,7 @@ slug: howto_configuretoedittimespanproperty_gridaspnetmvc
 
 # Configure Grids to Edit the TimeSpan Property
 
-To see the example, refer to the project on how to configure the Grid and [use the TimePicker or NumericTextBox editor to edit a `TimeSpan` property from the model](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-timespan-editor).
+To see the example, refer to the project on how to configure the Grid and [use the TimePicker or NumericTextBox editor to edit a `TimeSpan` property from the model](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditTimespan).
 
 ## See Also
 

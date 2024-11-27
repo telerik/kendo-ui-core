@@ -8,7 +8,7 @@ slug: howto_createchartinajaxgridcolumn_chartaspnetmvc
 
 # Create Charts in Ajax Grid Columns
 
-To see the example, refer to the project on how to [use a Chart in the `ClientTemplate` of a Grid column and bind the Chart based on the row data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/chart/ChartInGrid).
+To see the example, refer to the project on how to [use a Chart in the `ClientTemplate` of a Grid column and bind the Chart based on the row data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartInGrid).
 
 ## See Also
 

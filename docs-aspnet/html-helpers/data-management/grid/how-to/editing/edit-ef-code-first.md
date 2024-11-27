@@ -8,7 +8,7 @@ slug: howto_editwithentityframeworkcodefirst_gridaspnetmvc
 
 # Edit Grids with Entity Framework Code First
 
-To see the example, refer to the project on how to [implement CRUD data operations with the Entity Framework Code First](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/editing-ef-code-first).
+To see the example, refer to the project on how to [implement CRUD data operations with the Entity Framework Code First](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingEFCodeFirst).
 
 ## See Also
 

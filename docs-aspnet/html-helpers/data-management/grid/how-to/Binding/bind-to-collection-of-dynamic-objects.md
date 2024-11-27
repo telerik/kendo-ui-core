@@ -8,7 +8,7 @@ slug: howto_bindtocollectionsofdynamicobjects_gridaspnetmv
 
 # Bind to Collections of Dynamic Objects
 
-To see the example, refer to the project on how to [bind the Kendo UI Grid to a collection of dynamic objects in ASP.NET MVC applications](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-bind-to-collection-dynamic).
+To see the example, refer to the project on how to [bind the Kendo UI Grid to a collection of dynamic objects in ASP.NET MVC applications](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridBindingDynamicCollection).
 
 ## See Also
 

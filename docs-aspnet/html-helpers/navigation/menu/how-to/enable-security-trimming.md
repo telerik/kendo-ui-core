@@ -9,7 +9,7 @@ position: 0
 
 # Enable Security Trimming
 
-To see the example, refer to the project on how to [enable security trimming when working with the Menu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/menu/security-trimming) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [enable security trimming when working with the Menu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MenuSecurityTrimming) in ASP.NET MVC applications.
 
 ## See Also
 

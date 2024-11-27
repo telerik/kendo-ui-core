@@ -8,7 +8,7 @@ slug: howto_handleeditingcascadingddls_gridaspnetmvc
 
 # Handle Cascading DropDownLists within the Grid
 
-To see the example, refer to the project on how to configure the Kendo UI Grid to [handle its cascading DropDownLists when using the popup or inline editing modes](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-editing-cascading-dropdownlist).
+To see the example, refer to the project on how to configure the Kendo UI Grid to [handle its cascading DropDownLists when using the popup or inline editing modes](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingWithCascadingDropDownLists).
 
 ## See Also
 

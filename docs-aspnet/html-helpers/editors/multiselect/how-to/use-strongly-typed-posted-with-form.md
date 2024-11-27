@@ -8,7 +8,7 @@ slug: howto_usestronglytypespstedwithform_multiselectaspnetmvc
 
 # Use Strongly-Typed MultiSelect Posted with Form
 
-To see the example, refer to the project on how to [use a strongly-typed Kendo UI MultiSelect posted with form](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/multiselect/strongly-typed-multi-select-posted-with-form) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use a strongly-typed Kendo UI MultiSelect posted with form](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MultiSelectFormPostStronglyTyped) in ASP.NET MVC applications.
 
 ## See Also
 

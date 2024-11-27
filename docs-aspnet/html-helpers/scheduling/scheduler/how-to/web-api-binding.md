@@ -10,7 +10,7 @@ slug: howto_bindtowebapicontroller_scheduleraspnetmvc
 
 The following example demonstrates how to perform CRUD operations using Web API and Kendo UI Scheduler in ASP.NET MVC applications in ASP.NET MVC applications.
 
-To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-web-api-crud).
+To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerEditingWebApi).
 
 ## See Also
 

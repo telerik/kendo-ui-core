@@ -8,7 +8,7 @@ slug: howto_savestateurlhistorybrowserapi_gridaspnetmv
 
 # Save State with URL History Browser API
 
-To see the example, refer to the project on how to [save the state of the Kendo UI Grid by using the URL history browser API](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-save-state-with-url-browser-history-api) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [save the state of the Kendo UI Grid by using the URL history browser API](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridSaveStateWithBrowserHistoryAPI) in ASP.NET MVC applications.
 
 ## See Also
 

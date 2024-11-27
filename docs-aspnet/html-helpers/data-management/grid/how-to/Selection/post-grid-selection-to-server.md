@@ -8,7 +8,7 @@ slug: howto_postselectiontoserver_gridaspnetmv
 
 # Post Grid Selection to Server
 
-To see the example, refer to the project on how to [post the Grid selection to the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/post-grid-selection-to-server).
+To see the example, refer to the project on how to [post the Grid selection to the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridSelectionByField).
 
 ## See Also
 

@@ -1,14 +1,14 @@
 ---
-title: Configure Ajax Editing with Localized Enumerations
-page_title: Configure Ajax Editing with Localized Enumerations
-description: "Create columns bound to an enum field displaying localized texts for corresponding values."
+title: Configure Ajax Editing with Enumerations
+page_title: Configure Ajax Editing with Enumerations
+description: "Create columns bound to an enum field displaying text for corresponding values."
 previous_url: /helpers/data-management/grid/how-to/editing/enum-editing-with-dropdownlist-localization
 slug: howto_doajaxeditlcoalizedenumeration_gridaspnetmvc
 ---
 
-# Configure Ajax Editing with Localized Enumerations
+# Configure Ajax Editing with Enumerations
 
-To see the example, refer to the project on how to [create a column bound to an `enum` field displaying localized texts for corresponding values](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-enum-editing-with-dropdownlist-enum-localization).
+To see the example, refer to the project on how to [create a column bound to an `enum` field displaying text for the corresponding values](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingAjaxWithEnumeration).
 
 The demo also shows how to edit this column using a DropDownList.
 

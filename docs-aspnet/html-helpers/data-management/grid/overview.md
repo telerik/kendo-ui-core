@@ -203,4 +203,4 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 * [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=754) 
 * [Demos](https://demos.telerik.com/aspnet-mvc/grid)
 {% endif %}
-* [How-To Examples](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid)
+* [How-To Examples](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas)

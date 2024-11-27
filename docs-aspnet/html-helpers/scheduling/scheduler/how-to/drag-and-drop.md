@@ -8,7 +8,7 @@ slug: howto_implementdraganddrop_scheduleraspnetmvc
 
 # Implement Drag-and-Drop Support
 
-To see the example, refer to the project on how to [implement the drag-and-drop functionality between a Grid and Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-drag-and-drop) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [implement the drag-and-drop functionality between a Grid and Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerDragAndDrop) in ASP.NET MVC applications.
 
 ## See Also
 

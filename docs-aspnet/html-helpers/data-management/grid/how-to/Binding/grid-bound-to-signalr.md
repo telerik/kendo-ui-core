@@ -8,7 +8,7 @@ slug: howto_bindgridtosignalrhub_gridaspnetmv
 
 # Bind Grids to SignalR Hub
 
-To see the example, refer to the project on [real-time push-notifications from SignalR(v2) with a local hub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/signalR-bound-grid).
+To see the example, refer to the project on [real-time push-notifications from SignalR(v2) with a local hub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridSignalR).
 
 ## See Also
 

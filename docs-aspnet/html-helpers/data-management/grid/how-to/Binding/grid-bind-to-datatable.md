@@ -19,7 +19,7 @@ The sample project example resolves two main issues, which are related to:
 * [Editing](#editing)
 * [Aggregates](#aggregates)
 
-To see the complete project, refer to [this repository on GitHub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/binding-to-datatable).
+To see the complete project, refer to [this repository on GitHub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridBindingDataTable).
 
 ### Editing
 
@@ -28,7 +28,7 @@ The Grid does not have an instance to a model object and cannot infer field type
 **Solution**
 
 The metadata of the DataTable contains this information. Pull it into the model definition as illustrated in
-[`Index.cshtml:29`](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/grid/binding-to-datatable/KendoUIMVC5/Views/Home/Index.cshtml#L29).
+[`Index.cshtml`](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridBindingDataTable/Views/Home/Index.cshtml).
 
 ### Aggregates
 
@@ -36,7 +36,7 @@ The aggregates suffer from a lack of type-information as well. The `ToDataSource
 
 **Solution**
 
-Provide type-information for the requested aggregates in the `DataSourceRequest` object. For more information on this issue, refer to [`HomeController.cs:33`](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/grid/binding-to-datatable/KendoUIMVC5/Controllers/HomeController.cs#L33).
+Provide type-information for the requested aggregates in the `DataSourceRequest` object. For more information on this issue, refer to [`HomeController.cs`](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridBindingDataTable/Controllers/HomeController.cs).
 
 ## See Also
 

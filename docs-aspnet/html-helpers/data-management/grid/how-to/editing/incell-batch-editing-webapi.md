@@ -8,7 +8,7 @@ slug: howto_editincellbatchmodewebapi_gridaspnetmvc
 
 # Edit Grids in Incell Batch Mode Using WebAPI Controller
 
-To see the example, refer to the project on how to [configure the dataSource to communicate with the Web API controller so it uses the incell batch mode editing](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-web-api-crud-incell).
+To see the example, refer to the project on how to [configure the dataSource to communicate with the Web API controller so it uses the incell batch mode editing](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingInCellWebApi).
 
 ## See Also
 

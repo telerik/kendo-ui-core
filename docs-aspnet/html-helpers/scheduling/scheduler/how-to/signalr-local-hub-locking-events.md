@@ -16,7 +16,7 @@ To see the real-time updates:
 2. Open the page in another browser window.
 3. Create, update, or destroy Scheduler items.
 
-To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-signalr-local-hub-locking-events).
+To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerSignalRLocalHub).
 
 ## See Also
 

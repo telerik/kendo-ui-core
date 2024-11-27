@@ -8,7 +8,7 @@ slug: howto_addnewlinesinsteadofnewparaonenter_editoraspnetmvc
 
 # Add New Lines instead of New Paragraphs on Enter
 
-To see the example, refer to the project on how to [add a new line instead of a new paragraph on `Enter` key-press](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/editor/enter-linebreak-shift-enter-paragraph) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [add a new line instead of a new paragraph on `Enter` key-press](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/EditorEnterLinebreakShiftEnterParagraph) in ASP.NET MVC applications.
 
 ## See Also
 

@@ -18,7 +18,7 @@ By default, the Grid creates its `date` objects on the client immediately after 
 
 ## Using UTC on Both Client and Server
 
-To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server (MVC Project)](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/utc-on-server-and-client).
+To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server (MVC Project)](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridDateUtcOnServerAndClient).
 
 ## See also
 

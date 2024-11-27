@@ -8,7 +8,7 @@ slug: howto_usethesamecontrollerdiffareas_menuaspnetmv
 
 # Use the Same Controllers in Different Areas
 
-To see the example, refer to the project on how to [use the same controller in different areas of the Menu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/menu/same-controllers-in-different-areas) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use the same controller in different areas of the Menu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MenuSameControllersInDifferentAreas) in ASP.NET MVC applications.
 
 ## See Also
 

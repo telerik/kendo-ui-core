@@ -89,7 +89,7 @@ Below are listed the 2 corresponding steps for you to follow.
         </script>
     ```
 
-To see the example, refer to the project on how to [use UTC time on both the client and the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/utc-on-server-and-client).
+To see the example, refer to the project on how to [use UTC time on both the client and the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridDateUtcOnServerAndClient).
 
 ## See Also
 

@@ -8,7 +8,7 @@ slug: howto_exportonpdf_gridaspnetmv
 
 # Export Grid Data in PDF
 
-To see the example, refer to the project on how to [export the Kendo UI Grid data to a PDF (portable document format) file server-side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/pdf-export-server-side)
+To see the example, refer to the project on how to [export the Kendo UI Grid data to a PDF (portable document format) file server-side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/PdfExportingServerSide)
 
 ## See Also
 

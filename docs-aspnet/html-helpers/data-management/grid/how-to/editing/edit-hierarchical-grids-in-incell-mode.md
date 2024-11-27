@@ -8,7 +8,7 @@ slug: howto_edithierarchicalinincellmode_gridaspnetmvc
 
 # Edit Hierarchical Grids in Incell Mode
 
-To see the example, refer to the project on how to [edit a hierarchical Kendo UI Grid in incell editing mode](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-ajax-hierarchy-incell-edititng) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [edit a hierarchical Kendo UI Grid in incell editing mode](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridHierarchyInCellEditing) in ASP.NET MVC applications.
 
 ## See Also
 

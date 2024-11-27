@@ -8,7 +8,7 @@ slug: howto_lockeditedevents_signalrdatasource_localhub_scheduleraspnetmvc
 
 # Lock Edited Events with SignalR Data Source
 
-To see the example, refer to the project on how to [lock edited events in the Scheduler with the SignalR data source using local hub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-signal-r-local-hub-locking-events) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [lock edited events in the Scheduler with the SignalR data source using local hub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerSignalRLocalHub) in ASP.NET MVC applications.
 
 ## See Also
 

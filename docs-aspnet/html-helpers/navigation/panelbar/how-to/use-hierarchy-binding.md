@@ -8,7 +8,7 @@ slug: howto_usehierarchybinding_panelbaraspnetmvc
 
 # Use Hierarchy Binding
 
-To see the example, refer to the project on how to [use hierarchy binding with the PanelBar](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/panelbar/panelbar-hierarchy-binding) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use hierarchy binding with the PanelBar](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/PanelBarHierarchyBinding) in ASP.NET MVC applications.
 
 ## See Also
 

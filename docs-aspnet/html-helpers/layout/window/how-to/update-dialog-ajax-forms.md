@@ -8,7 +8,7 @@ slug: howto_update_ajax_forms_windowaspnetmv
 
 # Update Telerik UI Windows with Ajax Forms
 
-To see the example, refer to the project on how to [update AJAX forms with the validation in a Telerik UI Window](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/window/KendoWindow-Ajax-Form) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [update AJAX forms with the validation in a Telerik UI Window](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/WindowFormWithAjax) in ASP.NET MVC applications.
 
 ## See Also
 

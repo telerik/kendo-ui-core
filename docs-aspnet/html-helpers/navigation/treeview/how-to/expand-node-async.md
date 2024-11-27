@@ -10,7 +10,7 @@ slug: howto_expandselectednodeasync_treeviewaspnetmvc
 
 The TreeView for ASP.NET MVC enables you to do Ajax binding by using Entity Framework and to asynchronously expand the selected nodes when `loadOnDemand` is set to `true`.
 
-To see the complete implementation of the approach, refer to the GitHub project on [asynchronously expanding the selected nodes of the TreeView in ASP.NET MVC applications](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treeview/ExpandSelectedItemAsync).
+To see the complete implementation of the approach, refer to the GitHub project on [asynchronously expanding the selected nodes of the TreeView in ASP.NET MVC applications](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/TreeViewExpandSelectedItemAsync).
 
 To asynchronously expand the selected nodes of the TreeView:
 

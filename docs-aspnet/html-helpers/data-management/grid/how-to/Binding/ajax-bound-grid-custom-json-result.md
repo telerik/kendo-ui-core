@@ -12,7 +12,7 @@ This example demonstrates how to use a custom JSON serializer for the controller
 
 For the controller, this is achieved by overriding the `Json` method. For the widgets, this is achieved through the registration (with the ID) of a custom `IJavaScriptInitializer` implementation on the application `start` event.
 
-To see the example, refer to the project on how to [use a custom `JsonResult` with an Ajax-bound Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-bound-grid-custom-json-result).
+To see the example, refer to the project on how to [use a custom `JsonResult` with an Ajax-bound Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridAjaxBindingCustomJsonResult).
 
 ## See Also
 

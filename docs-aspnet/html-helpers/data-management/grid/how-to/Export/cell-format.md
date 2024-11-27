@@ -12,7 +12,7 @@ To format the cell values during the export of the Grid to Excel, set the [`form
 
 The page on how to [create a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats supported by Excel.
 
-To see the example, refer to the project on how to [format the cells during the export of the Grid to Excel](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/cell-format-excel).
+To see the example, refer to the project on how to [format the cells during the export of the Grid to Excel](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridExcelExportCellFormat).
 
 > These projects require a UI for ASP.NET MVC 2014.3.1125 version or later. Earlier versions do not expose the `ExcelExport` event through the fluent API.
 

@@ -9,7 +9,7 @@ position: 0
 
 # Apply Custom Row Styles Based on Model Data
 
-To see the example, refer to the project on how to [apply custom row styles based on model data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-row-styles-based-on-data).
+To see the example, refer to the project on how to [apply custom row styles based on model data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridRowsBackgroundConditional).
 
 ## See Also
 

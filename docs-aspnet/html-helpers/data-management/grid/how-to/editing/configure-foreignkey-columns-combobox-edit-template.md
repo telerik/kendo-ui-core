@@ -8,7 +8,7 @@ slug: howto_confforeignkeycomboboxedittemplates_gridaspnetmvc
 
 # Configure Foreign Key Columns with ComboBox Edit Templates in Grids
 
-To see the example, refer to the project on how to [configure a Kendo UI Grid with a foreign key column and a Kendo UI ComboBox edit template](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/c38659a144485226904341baae368ab05fdb3e88/grid/grid-foreign-key-combo-box-column) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [configure a Kendo UI Grid with a foreign key column and a Kendo UI ComboBox edit template](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridForeignKeyComboBoxColumn) in ASP.NET MVC applications.
 
 ## See Also
 
