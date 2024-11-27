@@ -71,7 +71,7 @@ The following image represents the result view of the Scheduler:
 For the complete implementation on how to connect a Telerik UI Scheduler with the Google Calendar, refer to [this ASP.NET Core GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc).
 
 {% else %}
-For the complete implementation on how to connect a Telerik UI Scheduler with the Google Calendar, refer to [this ASP.NET MVC GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-google-api).
+For the complete implementation on how to connect a Telerik UI Scheduler with the Google Calendar, refer to [this ASP.NET MVC GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerGoogleAPI).
 {% endif %}
 
 ## See Also

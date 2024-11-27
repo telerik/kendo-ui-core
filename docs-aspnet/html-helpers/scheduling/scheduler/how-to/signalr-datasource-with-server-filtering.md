@@ -8,7 +8,7 @@ slug: signalr_datasource_with_server_filtering
 
 # Configure SignalR Data Source with Server Filtering
 
-To see the example, refer to the project on how to [configure Scheduler SignalR DataSource to load events with server filtering](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-signalr-server-filtering) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [configure Scheduler SignalR DataSource to load events with server filtering](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerSignalRServerFiltering) in ASP.NET MVC applications.
 
 The scenario adopted by the project considers the following aspects of the implementation:
 * You need to set the [`serverFiltering`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering) option of the DataSource in the Scheduler to `true`. This way, the widget automatically sends a `read` call to the local hub (service) upon each navigation which occurs in the Scheduler.

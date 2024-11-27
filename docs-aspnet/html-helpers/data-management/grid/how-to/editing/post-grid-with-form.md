@@ -16,7 +16,7 @@ These are:
 * Only the items from the current page are submitted.
 * Server operations must be disabled&mdash;`ServerOperation(false)`.
 
-To see the example, refer to the project on how to [submit the Grid data items as part of an `Html.Form`](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/post-grid-with-form).
+To see the example, refer to the project on how to [submit the Grid data items as part of an `Html.Form`](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridPostWithForm).
 
 ## See Also
 

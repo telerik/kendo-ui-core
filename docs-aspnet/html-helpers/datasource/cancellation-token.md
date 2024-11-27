@@ -39,7 +39,7 @@ In real-case scenarios, developers usually have also to consider other factors l
 You can find a full runnable sample with a Grid integration here:
 
 {% if site.mvc %}
-[Grid Sample with Cancellation Token](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-cancellationtoken/KendoGridCancellationToken)
+[Grid Sample with Cancellation Token](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCancellationToken)
 {% endif %}
 
 {% if site.core %}

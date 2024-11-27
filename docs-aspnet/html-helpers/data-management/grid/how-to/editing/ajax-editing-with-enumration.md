@@ -8,7 +8,7 @@ slug: howto_doajaxeditingenumeration_gridaspnetmvc
 
 # Configure Ajax Editing with Enumeration
 
-To see the example, refer to the project on how to [configure the Kendo UI Grid to use the `enum` type for both displaying and editing](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing-with-enumration).
+To see the example, refer to the project on how to [configure the Kendo UI Grid to use the `enum` type for both displaying and editing](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingAjaxWithEnumeration).
 
 ## See Also
 

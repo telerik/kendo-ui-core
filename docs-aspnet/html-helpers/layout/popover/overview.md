@@ -45,7 +45,7 @@ The PopOver is usually displayed or dismissed as a result of a user action. It e
 The following example demonstrates how to define the PopOver.
 
 ```HtmlHelper
-   <span id="info" class="k-button wider">Hover me!</span>
+   <span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Hover me!</span>
 
     @(Html.Kendo().Popover()
         .For("#info")
@@ -56,9 +56,9 @@ The following example demonstrates how to define the PopOver.
 ```
 {% if site.core %}
 ```TagHelper
-	<span id="info" class="k-button wider">Hover me!</span>
+	<span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Hover me!</span>
 
-	<kendo-popover for="#info" show-on="hover" position="top" body="Main content"></kendo-popover>
+	<kendo-popover for="#info" show-on="mouseenter" position="right" body="Main content"></kendo-popover>
 ```
 {% endif %}
 
@@ -69,17 +69,17 @@ The PopOver provides default configuration options such as its height and width,
 The following example demonstrates the basic configuration of the PopOver.
 
 ```HtmlHelper
-   <span id="info" class="k-button wider">Click here</span>
+   <span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Click here</span>
 
     @(Html.Kendo().Popover()
         .For("#info")
         .Width(120)
         .Height(120)
-        .Position(PopOverPosition.Top)
+        .Position(PopoverPosition.Top)
         .Header("More Information:")
         .Body("Information content")
         .Actions(a => a.Add().Text("Okay"))
-        .ActionsLayout(PopoverActionLayout.Center)
+        .ActionsLayout(PopoverActionsLayout.Center)
         .Animation(animation =>
         {
             animation.Open(op => op.Zoom(ZoomDirection.In).Duration(5));
@@ -90,15 +90,15 @@ The following example demonstrates the basic configuration of the PopOver.
 ```
 {% if site.core %}
 ```TagHelper
-	<span id="info" class="k-button wider">Click here</span>
+	<span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Click here</span>
 
-	<kendo-popover for="#info" show-on="click" position="top" width="120" height="120" header="More Information:" body="Information content">
+	<kendo-popover for="#info" show-on="click" position="top" width="120" height="120" header="More Information:" body="Information content" actions-layout="center">
 		<actions>
 			<action text="Okay"></action>
 		</actions>
 		<animation>
-			<open duration="5" effects="fade:in"/>
-			<close duration="5" effects="fade:out" />
+			<open duration="5" effects="zoom:in"/>
+			<close duration="5" effects="zoom:out" />
 		</animation>
 	</kendo-popover>
 ```
@@ -106,72 +106,8 @@ The following example demonstrates the basic configuration of the PopOver.
 
 ## Functionality and Features
 
-* [Templates]({% slug htmlhelpers_templates_popover %})
-
-## Events
-
-You can subscribe to all PopOver [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover#events). For a complete example on basic PopOver events, refer to the [demo on using the events of the PopOver](https://demos.telerik.com/{{ site.platform }}/popover/events).
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```HtmlHelper
-    <span id="container" class="k-button wider">Click here</span>
-
-    @(Html.Kendo().Popover()
-        .For("#container")
-        .ShowOn(PopoverShowOn.Click)
-        .Events(e => e
-            .Show("onShow")
-            .Hide("onHide")
-        )
-    )
-    <script>
-        function onShow(e) {
-            // Handle the show event.
-        }
-
-        function onHide(e) {
-            // Handle the hide event.
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-	<span id="container" class="k-button wider">Click here</span>
-
-	<kendo-popover for="#container" show-on="click" header="More" on-show="onShow" on-hide="onHide">
-	</kendo-popover>
-
-    <script>
-        function onShow(e) {
-            // Handle the show event.
-        }
-
-        function onHide(e) {
-            // Handle the hide event.
-        }
-    </script>
-```
-{% endif %}
-
-## Referencing Existing Instances
-
-To reference an existing PopOver instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [PopOver client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/popover#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI PopOver for {{ site.framework }} declaration.
-    <script>
-        $(document).ready(function() {
-            // The For() configuration option of the PopOver is used to get its client-side instance.
-            var popover = $("#container").data("kendoPopover");
-        });
-    </script>
-```
-
-## Functionality and Features
-
-* [Templates]({% slug htmlhelpers_templates_popover %})—The Popover allows you to use the Header and Body options to customize the component content.
-* [Events]({% slug events_popover %})—The PopOver emits events that allow you to implement custom functionality.
+* [Templates]({% slug htmlhelpers_templates_popover %})&mdash;The PopOver provides template options that allow you to customize the header and body content.
+* [Events]({% slug events_popover %})&mdash;The component exposes the `Show` and `Hide` events that you can handle and control its behavior.
 
 ## Next Steps
 

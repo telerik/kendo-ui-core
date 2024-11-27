@@ -8,7 +8,7 @@ slug: howto_openwindowfrommenuotemajax_menuaspnetmv
 
 # Open Window from Menu Item Click by Using Ajax
 
-To see the example, refer to the project on how to [open a window when clicking on a Menu item by using Ajax](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/menu/open-window-with-ajax-from-menuitemclick).
+To see the example, refer to the project on how to [open a window when clicking on a Menu item by using Ajax](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MenuOpenWindowWithAjax).
 
 ## See Also
 

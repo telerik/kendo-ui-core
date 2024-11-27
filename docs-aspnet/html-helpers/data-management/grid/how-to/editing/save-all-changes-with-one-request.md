@@ -8,7 +8,7 @@ slug: howto_saveallchangeswithonerequest_gridaspnetmv
 
 # Save All Changes with One Request
 
-To see the example, refer to the project on how to [save all changes in a Kendo UI Grid with one request](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/submit-changes-one-request) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [save all changes in a Kendo UI Grid with one request](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditSyncChangesWithOneRequest) in ASP.NET MVC applications.
 
 ## See Also
 

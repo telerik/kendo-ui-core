@@ -8,7 +8,7 @@ slug: howto_useexcellikefilteringrid_gridaspnetmvc
 
 # Use Excel-Like Filter in Grid
 
-To see the example, refer to the project on how to [use an Excel-like filter in the Kendo UI Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-with-excel-like-filter) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use an Excel-like filter in the Kendo UI Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridFilterExcelLike) in ASP.NET MVC applications.
 
 The example utilizes the [Kendo UI shared DataSource](https://demos.telerik.com/aspnet-mvc/datasource/shared-datasource).
 

@@ -12,7 +12,7 @@ This project demonstrates how to implement a [custom MVVM binding](https://docs.
 
 The approach prevents the initial binding when a selected value is set. It can also be used to avoid the default [value binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#value-binding-of-elements-select) behavior when the ComboBox is bound to a great amount of data.
 
-To see the example, refer to the project on how to [use ComboBoxes with remote binding and filtering](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-editing-with-combobox-remote-binding-and-filtering).
+To see the example, refer to the project on how to [use ComboBoxes with remote binding and filtering](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingWithComboBoxServerFiltering).
 
 ## See Also
 

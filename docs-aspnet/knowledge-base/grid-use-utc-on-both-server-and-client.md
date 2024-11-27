@@ -107,7 +107,7 @@ To apply the explicit transformation:
         </script>
     ```
 
-To explore the complete example, see the project on how to [use UTC time on both the client and the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/utc-on-server-and-client).
+To explore the complete example, see the project on how to [use UTC time on both the client and the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridDateUtcOnServerAndClient).
 
 ## More {{ site.framework }} Grid Resources
 

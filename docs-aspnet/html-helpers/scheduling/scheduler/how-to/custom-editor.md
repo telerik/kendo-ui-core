@@ -9,7 +9,7 @@ position: 0
 
 # Implement Custom Editors
 
-To see the example, refer to the project on how to [implement a custom editor similar to the build-in editor of a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-editor) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [implement a custom editor similar to the build-in editor of a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerEditingCustomEditor) in ASP.NET MVC applications.
 
 > Fields that do not come from the `ISchedulerEvent` interface preserve their exact names. Therefore, when the editor template refers to such a field, it has to apply those names instead. Fields from the `ISchedulerEvent` interface are automatically mapped to camelCase fields.
 

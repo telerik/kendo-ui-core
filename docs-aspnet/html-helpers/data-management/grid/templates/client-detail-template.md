@@ -175,7 +175,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 1. Build and run the project.
 ![{{ site.product_short }} The final result is a Grid with detail template](../images/grid-detail-template.png)
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-detail-template).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridClientDetailTemplate).
 {% endif %}
 
 ## Setting the Client Hierarchy
@@ -390,7 +390,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
 
     ![{{ site.product_short }} The final result is a hierarchical Grid](../images/grid-hierarchy.png)
 
-To download the Visual Studio Project, refer to [this GitHub repository]((https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-hierarchy).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridHierarchyClientDetailTemplate).
 {% endif %}
 
 ## Handling Nested Client Templates

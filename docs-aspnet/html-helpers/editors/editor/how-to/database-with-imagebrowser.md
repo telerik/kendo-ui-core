@@ -8,7 +8,7 @@ slug: howto_storeimagesindatabases_editoraspnetmvc
 
 # Store Images in Database with ImageBrowser
 
-To see the example, refer to the project on how to [set up the Editor `ImageBrowser` to store the images in an MS SQL database when working](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/editor/database-image-browser) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [set up the Editor `ImageBrowser` to store the images in an MS SQL database when working](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/EditorDatabaseImageBrowser) in ASP.NET MVC applications.
 
 ## See Also
 

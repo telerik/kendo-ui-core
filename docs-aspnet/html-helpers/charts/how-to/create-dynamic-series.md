@@ -44,7 +44,7 @@ You can also bind the series to a collection of data items, specifying field bin
    )
 ```
 
-To see the full examples, refer to the GitHub repository of the [sample project on dynamic series](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/chart/dynamic-series).
+To see the full examples, refer to the GitHub repository of the [sample project on dynamic series](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartDynamicSeries).
 
 ## See Also
 

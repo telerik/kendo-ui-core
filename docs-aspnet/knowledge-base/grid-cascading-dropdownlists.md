@@ -25,13 +25,9 @@ How can I implement cascading DropDownLists for editing rows in Telerik UI for {
 
 The Grid provides 3 editing modes - InCell, InLine and PopUp. Usually, in order for the cascading widgets to work, they both (or more) have to be rendered at the same time.
 
-Therefore, for Inline and PopUp editing modes you can check the following sample:
+Therefore, for Inline and PopUp editing modes you can check the [following sample](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingWithCascadingDropDownLists).
 
-https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-editing-cascading-dropdownlist 
-
-However, for InCell editing mode, the only viable approach is demonstrated in this sample:
-
-https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-incell-editing-with-cascading-dropdownlist
+However, for InCell editing mode, the only viable approach is demonstrated in [this sample](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingInCellCascadingDropDownLists).
 
 ## More {{ site.framework }} Grid Resources
 

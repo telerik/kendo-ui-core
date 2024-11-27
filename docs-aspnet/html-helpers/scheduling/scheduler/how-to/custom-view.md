@@ -8,7 +8,7 @@ slug: howto_implementcustomviews_scheduleraspnetmvc
 
 # Implement Custom Views
 
-To see the example, refer to the project on how to [implement a custom view for a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-view) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [implement a custom view for a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerCustomView) in ASP.NET MVC applications.
 
 ## See Also
 

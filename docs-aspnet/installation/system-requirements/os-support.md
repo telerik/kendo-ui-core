@@ -36,8 +36,8 @@ The table below describes the minimum required version of Visual Studio based on
 
 | .NET CORE SDK     | VISUAL STUDIO                 | 
 | :---------------- | :---------------------------- |
+| 9.0               | Visual Studio 2022 |
 | 8.0               | Visual Studio 2022 |
-| 7.0               | Visual Studio 2022 |
 | 6.0               | Visual Studio 2022 | 
 
 >The R1 2024 release will be the last release that supports .NET versions older than 6.0. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).

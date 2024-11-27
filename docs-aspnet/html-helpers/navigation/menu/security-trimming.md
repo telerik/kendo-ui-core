@@ -19,7 +19,7 @@ The Menu hides an item if the [`OnAuthorization`](http://msdn.microsoft.com/en-u
 [`HttpUnauthorizedResult`](http://msdn.microsoft.com/en-us/library/system.web.mvc.httpunauthorizedresult.aspx).
 
 
-[This GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/menu/security-trimming) is representing the usage of the `AuthorizeAttribute`.
+[This GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MenuSecurityTrimming) is representing the usage of the `AuthorizeAttribute`.
 {% endif %}
 
 {% if site.core %}

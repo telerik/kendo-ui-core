@@ -8,7 +8,7 @@ slug: howto_usemultiselectasfilter_gridaspnetmvc
 
 # Use MultiSelect as Filter in Grids
 
-To see the example, refer to the project on how to [use the Kendo UI MultiSelect as a filter in Kendo UI Grids](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-multiselect-filter) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use the Kendo UI MultiSelect as a filter in Kendo UI Grids](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridMultiSelectFilter) in ASP.NET MVC applications.
 
 ## See Also
 

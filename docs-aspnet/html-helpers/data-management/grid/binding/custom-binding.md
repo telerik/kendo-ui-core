@@ -160,7 +160,7 @@ The Grid provides the following custom binding options:
             )
         )
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-server-binding).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCustomServerBinding).
 
 For a complete example, refer to the [demo on implementing server binding of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serverbinding).  
 
@@ -496,7 +496,7 @@ For a complete example, refer to the [demo on implementing server binding of the
     {% endif %}
 
 {% if site.mvc %}
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-ajax-binding).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCustomAjaxBinding).
 {% endif %}
 
 For a complete example, refer to the [demo on implementing custom Ajax binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding).  

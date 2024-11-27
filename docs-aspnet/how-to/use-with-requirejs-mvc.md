@@ -7,7 +7,7 @@ slug: howto_usekendowithrequirejs_aspnetmvc
 
 # Use Kendo UI with RequireJS
 
-To see the example, refer to the project on how to [use Kendo UI with RequireJS](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/general/kendorequirejs).
+To see the example, refer to the project on how to [use Kendo UI with RequireJS](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/RequireJS).
 
 ## See Also
 

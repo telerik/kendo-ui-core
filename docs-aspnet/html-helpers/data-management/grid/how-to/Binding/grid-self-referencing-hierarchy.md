@@ -8,7 +8,7 @@ slug: howto_usegridselfrefhierarchy_gridaspnetmv
 
 # Implement Self-Referencing Hierarchy of Grids
 
-To see the example, refer to the project on how to [implement a Grid which builds multiple levels of hierarchy, using a single table of data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-self-referencing-hierarchy)
+To see the example, refer to the project on how to [implement a Grid which builds multiple levels of hierarchy, using a single table of data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridHierarchySelfReferencing)
 
 ## See Also
 

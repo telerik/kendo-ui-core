@@ -8,7 +8,7 @@ slug: howto_servrefiltering_scheduleraspnetmvc
 
 # Implement Server Filtering
 
-To see the example, refer to the project on how to [implement server filtering for the Scheduler to retrieve only events for the current view](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-server-filtering) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [implement server filtering for the Scheduler to retrieve only events for the current view](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerServerFiltering) in ASP.NET MVC applications.
 
 ## See Also
 

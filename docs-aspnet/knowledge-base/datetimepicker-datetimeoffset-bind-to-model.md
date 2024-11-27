@@ -122,7 +122,7 @@ To achieve the desired results, map database models with `DateTimeOffset` fields
         }
     ```
 
-For the complete implementation, refer to  {% if site.core %}[this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/DateTimeOffset).{% else %} [this GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/general/DateTimeOffset).{% endif %}
+For the complete implementation, refer to  {% if site.core %}[this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/DateTimeOffset).{% else %} [this GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridDateTimeOffset).{% endif %}
 
 ## More {{ site.framework }} DateTimePicker Resources
 

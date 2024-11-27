@@ -8,7 +8,7 @@ slug: howto_editresources_scheduleraspnetmvc
 
 # Edit Scheduler Resources
 
-To see the example, refer to the project on how to [use a custom editor which allows the user to edit the resources of the Scheduler by using the Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-resource-editing) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use a custom editor which allows the user to edit the resources of the Scheduler by using the Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerEditingResources) in ASP.NET MVC applications.
 
 ## See Also
 

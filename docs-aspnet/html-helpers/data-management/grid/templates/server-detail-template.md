@@ -114,7 +114,7 @@ To configure the server detail template:
 
     ![{{ site.product_short }} The final result is a Grid with a detail template](../images/grid-detail-template.png)
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-detail-template).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridHierarchyServerDetailTemplate).
 
 ## Setting the Server Hierarchy
 

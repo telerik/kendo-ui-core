@@ -1,14 +1,14 @@
 ---
-title: Use Grid with Kendo UI ContextMenu
-page_title: Use Grid with Kendo UI ContextMenu
-description: "Use the Kendo UI Grid with the Kendo UI ContextMenu in ASP.NET MVC applications."
+title: Use Grid with Telerik UI ContextMenu
+page_title: Use Grid with Telerik UI ContextMenu
+description: "Use the Telerik UI Grid with the Telerik UI ContextMenu in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/Integration/use-grid-with-contextmenu
 slug: howto_usegridwithontextmenu_gridaspnetmv
 ---
 
 # Use Grid with Kendo UI ContextMenu
 
-To see the example, refer to the project on how to [use the Kendo UI Grid with the Kendo UI ContextMenu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-with-context-menu) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [use the Telerik UI Grid with the Telerik UI ContextMenu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridContextMenu) in ASP.NET MVC applications.
 
 ## See Also
 

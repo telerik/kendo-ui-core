@@ -8,7 +8,7 @@ slug: howto_multiplegridexport_aspnetmvcgrid
 
 # Export Multiple Grids to Excel
 
-To see the example, refer to the project on how to [export multiple Kendo UI Grids to the same Excel document](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/miltiple-grid-excel).
+To see the example, refer to the project on how to [export multiple Kendo UI Grids to the same Excel document](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridExportingExcelMultiple).
 
 As a result, each Grid is exported to a separate Excel sheet.
 

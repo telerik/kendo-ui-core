@@ -7,7 +7,7 @@ slug: howto_definecustomhelpermethodsformvc_aspnetmvc
 
 # Define Custom Kendo UI Helper Methods for ASP.NET MVC
 
-To see the example, refer to the project on how to [define custom Kendo UI helper methods for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/general/DefineCustomKendoHelper).
+To see the example, refer to the project on how to [define custom Kendo UI helper methods for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/DefineCustomHtmlHelper).
 
 ## See Also
 

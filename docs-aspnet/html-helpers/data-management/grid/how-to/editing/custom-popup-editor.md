@@ -33,7 +33,7 @@ To customize it the popup editor:
         @Html.Kendo().TextBoxFor(m => m.Country)
     ```
 
-For a full example, refer to the project on how to [customize the popup editor of the Kendo UI Grid when the mode is configured to `popup`](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-popup-editor).
+For a full example, refer to the project on how to [customize the popup editor of the Kendo UI Grid when the mode is configured to `popup`](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingCustomPopupEditor).
 
 ## See Also
 

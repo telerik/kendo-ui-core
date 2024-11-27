@@ -8,7 +8,7 @@ slug: howto_exportgriddatacsvfile_gridaspnetmv
 
 # Export Grid Data to CSV Files
 
-To see the example, refer to the project on how to [export the Kendo UI Grid data as a CVS (comma-separated value) file server-side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side).
+To see the example, refer to the project on how to [export the Kendo UI Grid data as a CVS (comma-separated value) file server-side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridCsvServerExport).
 
 ## See Also
 

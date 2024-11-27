@@ -12,7 +12,7 @@ OData v4 is not fully supported and the approaches to work with Dates are limite
 
 The reason for this is that WebAPI does not support the `DateTime` type any more. Instead, WebAPI now uses the `DateTimeOffset` time as a main type when it comes to dates. However, to keep information for both Date and Offset, the `DateTimeOffet` requires the Model (that the dataSource creates), which is not possible with the current architecture of the DataSource and Model of Kendo UI.
 
-To see the example, refer to the project on how to [configure the `dataSource` to communicate with the WebAPI controller through the OData 4 protocol](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding-wrappers).
+To see the example, refer to the project on how to [configure the `dataSource` to communicate with the WebAPI controller through the OData 4 protocol](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ODataWebApiWrappers).
 
 ## See Also
 

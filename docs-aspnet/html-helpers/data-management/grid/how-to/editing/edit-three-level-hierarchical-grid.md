@@ -8,7 +8,7 @@ slug: howto_editthreelevelhierarchygrids_gridaspnetmvc
 
 # Edit Three-Level Hierarchical Grids
 
-To see the example, refer to the project on how to [edit Kendo UI Grids of a three-level hierarchy](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-3-level-hierarchy-editing) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [edit Kendo UI Grids of a three-level hierarchy](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditing3LevelHierarchy) in ASP.NET MVC applications.
 
 ## See Also
 

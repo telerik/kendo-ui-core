@@ -11,7 +11,7 @@ position: 0
 
 The Data Source component used by the Chart supports binding to a SignalR hub and subscribing to push notifications.
 
-To see the example, refer to the GitHub repo with the [sample project of a SignalR-bound Chart](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/chart/signalr-bound-chart).
+To see the example, refer to the GitHub repo with the [sample project of a SignalR-bound Chart](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartSignalR).
 
 ## See Also
 

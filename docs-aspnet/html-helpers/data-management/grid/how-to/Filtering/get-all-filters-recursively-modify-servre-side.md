@@ -8,7 +8,7 @@ slug: howto_getallfiltersrecursivelymodifyserverside_gridaspnetmv
 
 # Get All Filters Recursively and Modify Them on the Server Side
 
-To see the example, refer to the project on how to [get all Kendo UI Grid filters recursively and modify them on the server side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-get-all-filters-recursively-and-modify-them-on-server) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [get all Kendo UI Grid filters recursively and modify them on the server side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridModifyFiltersOnTheServer) in ASP.NET MVC applications.
 
 ## See Also
 
