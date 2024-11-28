@@ -210,6 +210,51 @@ The Telerik Template component can be integrated to further enhance the No Data 
         .NoData(nd => nd.Template(Html.Kendo().Template().AddHtml(@<text>No Data To display</text>).AddComponent(c => c.Button().Name("btn").Content("Reload").Events(ev => ev.Click("implementReloadFunctionality")))))
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *,Kendo.Mvc
+     <kendo-chart name="chart">
+        <no-data>
+            <no-data-template>
+                <div class='empty-template'>
+                    <p>There is no data to display.</p>
+                    <button id='button' type='button'>Load Data</button>
+                </div>
+            </no-data-template>
+        </no-data>
+        <category-axis>
+            <category-axis-item>
+                <labels>
+                    <chart-category-axis-labels-rotation angle="-90" />
+                </labels>
+                <major-grid-lines visible="false" />
+            </category-axis-item>
+        </category-axis>
+        <series>
+            <series-item type="ChartSeriesType.Column" category-field="Year" field="Nuclear" name="Nuclear">
+            </series-item>
+            <series-item type="ChartSeriesType.Column" category-field="Year" field="Hydro" name="Hydro">
+            </series-item>
+            <series-item type="ChartSeriesType.Column" category-field="Year" field="Wind" name="Wind">
+            </series-item>
+        </series>
+        <value-axis>
+            <value-axis-item major-unit="10000"
+                                type="numeric">
+                <labels format="{0:N0}">
+                </labels>
+                <line visible="false" />
+            </value-axis-item>
+        </value-axis>
+        <chart-legend position="ChartLegendPosition.Top">
+        </chart-legend>
+        <chart-title text="Spain electricity production (GWh)">
+        </chart-title>
+        <tooltip format="{0:N0}" visible="true">
+        </tooltip>
+    </kendo-chart>
+```
+{% endif %}
 
 ## See Also
 
