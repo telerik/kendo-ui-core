@@ -81,7 +81,7 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
     <script>
         var dataSource;
 
-        $(document).on("kendoReady", function () {
+        $(document).on("ready", function () {
             $.ajax({
                 type: "POST",
                 url: "/bar_charts/_spainelectricityproduction",
@@ -164,7 +164,7 @@ The Telerik UI Chart component for {{ site.framework }} allows to display a mess
     <script>
         var dataSource;
 
-        $(document).on("kendoReady", function () {
+        $(document).on("ready", function () {
             $.ajax({
                 type: "POST",
                 url: "/pie_charts/get_local_data",

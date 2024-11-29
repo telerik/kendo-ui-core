@@ -218,7 +218,7 @@ The following implementation demonstrates the code needed for setting the Date A
 
 
     <script>
-        $(document).on("kendoReady", function () {
+        $(document).on("ready", function () {
             $(".configurator").bind("change", refresh);
         });
         function refresh() {

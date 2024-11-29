@@ -8,7 +8,7 @@ position: 3
 
 # Captcha Validation Setup
 
-This article explains how to use your application's backend to verify the user's response to the Telerik UI Captcha. 
+This article explains how to use your application's backend to verify the user's response to the Telerik UI Captcha.
 
 Always generate the CAPTCHA and apply the validation on the server-side of your application. This approach guarantees that no programs or bots can access the values of the CAPTCHA on the client-side via JavaScript and then bypass the validation.
 
@@ -176,7 +176,7 @@ To generate CAPTCHAs and validate the user's input, the Telerik UI Captcha depen
     ```
     {% if site.core %}
     ```TagHelper
-    <kendo-captcha name="Captcha" 
+    <kendo-captcha name="Captcha"
                    captcha-image="@ViewData["Captcha"]"
                    captcha-id="@ViewData["CaptchaID"]"
                    datacaptchafield="Captcha"
@@ -226,7 +226,7 @@ To generate CAPTCHAs and validate the user's input, the Telerik UI Captcha depen
     public ActionResult Reset()
     {
         CaptchaImage newCaptcha = CaptchaHelper.GetNewCaptcha();
-        
+
         Session["captcha" + newCaptcha.UniqueId] = newCaptcha;
 
         return Json(new CaptchaModel
@@ -241,7 +241,7 @@ To generate CAPTCHAs and validate the user's input, the Telerik UI Captcha depen
         CaptchaImage captcha = (CaptchaImage)Session["captcha" + captchaId];
 
         byte[] bmpBytes;
-        
+
         using (MemoryStream audio = CaptchaHelper.SpeakText(captcha))
         {
             bmpBytes = audio.ToArray();
@@ -330,12 +330,12 @@ The Telerik UI Captcha for {{ site.framework }} prevents automated programs from
     ```
     {% endif %}
 
-1. Instantiate a Telerik UI Validator from the form inside the [document.ready() event](https://learn.jquery.com/using-jquery-core/document-ready/). 
+1. Instantiate a Telerik UI Validator from the form inside the [document.ready() event](https://learn.jquery.com/using-jquery-core/document-ready/).
 
     {% if site.core %}
     ```
     <script>
-        $(document).on("kendoReady", function () {
+        $(document).on("ready", function () {
             $("#form").kendoValidator();
         });
         function audioHandler(args) {
@@ -346,7 +346,7 @@ The Telerik UI Captcha for {{ site.framework }} prevents automated programs from
     {% else %}
     ```
     <script>
-        $(document).on("kendoReady", function() {
+        $(document).on("ready", function() {
             $("#form").kendoValidator();
         });
         function audioHandler(args) {
@@ -356,7 +356,7 @@ The Telerik UI Captcha for {{ site.framework }} prevents automated programs from
     ```
     {% endif %}
 
-> If the state of the Telerik UI Captcha is invalid, the Validator prevents the form submission and shows an error message to the user. 
+> If the state of the Telerik UI Captcha is invalid, the Validator prevents the form submission and shows an error message to the user.
 
 ## See Also
 

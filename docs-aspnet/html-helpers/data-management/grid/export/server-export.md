@@ -17,7 +17,7 @@ For a runnable example, refer to the [demo on Server export by the Grid](https:/
 To enable the Server export option of the grid:
 
 1. Include a reference to the {% if site.core %} Telerik.Core.Export.nupkg from the private Telerik NuGet feed{% else %}`Kendo.Mvc.Export.dll` and `Telerik.Documents.SpreadsheetStreaming.dll` dlls available in the product's installation folder - `~installationFolder\export\binaries\net<version>`{% endif %}.
-1. Include a form HTML element that would post to an ActionMethod on the server-side. 
+1. Include a form HTML element that would post to an ActionMethod on the server-side.
     ```
     {% if site.core %}
         <form action="@Url.Action("ExportServer", "Grid")" method="POST" id="form">
@@ -86,7 +86,7 @@ To enable the Server export option of the grid:
                     hidden: col.hidden
                 }
             }
-            $(document).on("kendoReady", function () {
+            $(document).on("ready", function () {
                 $(".download").click(function () {
                     var grid = $("#grid").data("kendoGrid");
                     var options = {
@@ -102,7 +102,7 @@ To enable the Server export option of the grid:
         </script>
     {% else %}
         <script>
-            $(document).on("kendoReady", function () { 
+            $(document).on("ready", function () {
                 $(".download").click(function () {
                     var grid = $("#Grid").data("kendoGrid");
                     var options = {

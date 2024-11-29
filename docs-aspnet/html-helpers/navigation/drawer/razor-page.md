@@ -8,7 +8,7 @@ position: 5
 
 # Drawer Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name).
 
 You can seamlessly integrate the Telerik UI Drawer for {{ site.framework }} in Razor Pages applications.
 
@@ -237,7 +237,7 @@ For the complete project, refer to the [Drawer in Razor Pages example](https://g
 
     @section scripts {
         <script>
-            $(document).on("kendoReady", function () {
+            $(document).on("ready", function () {
                 $(document).on("keydown.examples", function (e) {
                     if (e.altKey && e.keyCode === 87) {
                         $("#drawer").data("kendoDrawer").element.focus();
