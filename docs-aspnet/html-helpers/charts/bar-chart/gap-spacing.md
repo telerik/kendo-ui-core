@@ -142,7 +142,7 @@ The following implementation demonstrates the code needed for setting Gap and Sp
 
 
     <script>
-        $(document).on("kendoReady", function () {
+        $(document).on("ready", function () {
             var chart = $("#chart").data("kendoChart"),
                 firstSeries = chart.options.series;
             $("#getGap").click(function () {

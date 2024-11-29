@@ -14,7 +14,7 @@ By default, the HTML and Tag Helpers output an initialization script after the h
 
 ## Using Declarative Initialization
 
-The declarative initialization feature serializes the helper declaration as an MVVM configuration and initializes the component from the DOM elements on the client. 
+The declarative initialization feature serializes the helper declaration as an MVVM configuration and initializes the component from the DOM elements on the client.
 
 To enable the declarative initialization:
 
@@ -35,7 +35,7 @@ The following example illustrates the generated declarative configuration of a [
         </div>
 
         <script>
-            $(document).on("kendoReady", function () {
+            $(document).on("ready", function () {
                 kendo.bind($("#textbox-container"), {});
             });
         </script>

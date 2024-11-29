@@ -72,6 +72,8 @@ The following example demonstrates how to configure the PDFViewer to use DPL Pro
 ```
 {% endif %}
 
+> Starting with version 2024 Q4, the `FixedDocument.Load` and `FixedDocument.Download` methods and their overloads accept an additional, optional parameter—`TimeSpan timeOut`. The parameter indicates the timeout for the operation and defaults to 1 minute.
+
 ## See Also
 
 * [DPL Processing by the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/dpl-processing)
