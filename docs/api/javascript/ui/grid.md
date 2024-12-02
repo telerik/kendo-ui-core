@@ -9348,7 +9348,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
 > There are a few important things to keep in mind when using `rowTemplate`.
 >
 >* The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `${uid}`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
->* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/grid/Templates/row-templates) for more information.
+>* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/grid/templates/row-templates) for more information.
 
 #### Example - specify row template as a function
 

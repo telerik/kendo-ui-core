@@ -323,5 +323,4 @@ Razor Pages use `Page` in their routing mechanism which interferes with `GET` re
 
 * [Configure a Custom DataSource for the Grid in Razor Pages]({% slug grid-custom-datasource-razor-ages %})
 * [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})

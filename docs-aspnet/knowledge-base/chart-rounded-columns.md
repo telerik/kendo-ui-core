@@ -24,7 +24,14 @@ How can I change {{ site.product }} Chart columns to appear with rounded corners
 
 ## Solution
 
-You can achieve this requirement using the .Visual() capability offered by the component. Check the full implementation in this live REPL sample:
+You can achieve this requirement using the .Visual() property offered by the component.
+It provides the capability of adding custom content to the chart using the [Kendo Drawing Framework](https://docs.telerik.com/kendo-ui/framework/drawing/overview).
+
+This allows you to create shapes like rectangles and circles with the option to add desired customizations like color and borders:
+
+[Kendo Drawing API](https://docs.telerik.com/kendo-ui/api/javascript/drawing)
+
+Check the full implementation in this live REPL sample:
 
 [Chart Example: All Corners Rounded](https://netcorerepl.telerik.com/myPlcPlg30MY8AnT10)
 
@@ -86,6 +93,7 @@ The result looks like this:
 
         var color = e.options.markers.background;
         var labelColor = e.options.labels.color;
+
         var rect = new geometry.Rect([0, 0], [120, 50]);
         var layout = new drawing.Layout(rect, {
             spacing: 5,
@@ -119,6 +127,7 @@ The result looks like this:
     }
 
     function createColumn(rect, color) {
+        // initiate the drawing framework
         var drawing = kendo.drawing;
         var geometry = kendo.geometry;
 
@@ -140,6 +149,7 @@ The result looks like this:
             }]
         });
 
+        // create a rounded column with fixed radius size
         var cornerRadius = 10;
         var roundedRect = new geometry.Rect(rect.origin, rect.size, cornerRadius);
         var column = new drawing.Rect(roundedRect, {
@@ -246,6 +256,7 @@ Here is the result:
     }
 
     function createColumn(rect, color) {
+         // initiate the drawing framework
         var drawing = kendo.drawing;
         var geometry = kendo.geometry;
 
@@ -267,6 +278,7 @@ Here is the result:
             }]
         });
 
+        // create a rounded column with fixed radius size
         var cornerRadius = 10;
         var roundedRect = new geometry.Rect(rect.origin, rect.size, cornerRadius);
         var column = new drawing.Rect(roundedRect, {
@@ -276,6 +288,7 @@ Here is the result:
             }
         });
 
+        // create another overlapping column for right corners at the bottom
         var baseOrigin = [rect.origin.x, rect.origin.y + rect.size.height - cornerRadius];
         var baseSize = [rect.size.width, cornerRadius];
         var baseRect = new geometry.Rect(baseOrigin, baseSize);

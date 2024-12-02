@@ -12,6 +12,8 @@ Apart from [creating the Grid from an empty `div` element]({% slug getting_start
 
 When you initialize the Grid from an HTML table, you can infer some of its settings from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table. 
 
+> When the Grid is created from a predefined HTML table, the rendering of the column headers will differ from when the columns are created through the kendoGrid() method. As a result, if you are using the <a target="_blank" href="https://docs.telerik.com/themebuilder/introduction">ThemeBuilder</a> to style your component, the styles will have no effect as the corresponding classes in Grid's column headers will be missing. In that case, you can either provide the HTML yourself in the `table` element, or you can skip the `thead` tag and configure the columns through the [`columns`](/api/javascript/ui/grid/configuration/columns) option. 
+
 The HTML table is usually already populated with data which improves the accessibility and search-engine optimization, and ensures that the user will see data even if JavaScript is disabled or if there is a JavaScript error on the page.
 
 When you initialize the Grid from an HTML table, the component uses a Kendo UI DataSource instance. The content of the cell is extracted and populates the DataSource in the following way:

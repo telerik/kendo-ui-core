@@ -48,7 +48,6 @@ There are several common reasons for the observed behavior:
 ## Getting Started with {{ site.product }}
 
 * [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_project_template %})
-* [First steps on Visual Studio for Mac (online guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First steps with CLI (online guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 
 ## More {{ site.framework }} Resources
