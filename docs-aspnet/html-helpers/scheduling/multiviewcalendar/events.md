@@ -10,8 +10,6 @@ position: 7
 
 The MultiViewCalendar exposes [`Change()` and `Navigate()` events](/api/kendo.mvc.ui.fluent/multiviewcalendareventbuilder) that you can handle. 
 
-For a complete example on basic MultiViewCalendar events, refer to the [demo on using the events of the MultiViewCalendar](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/events).
-
 ## Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.

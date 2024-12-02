@@ -10,7 +10,7 @@ position: 7
 
 The Telerik UI Timeline for {{ site.framework }} widget could be bound to a shared data source. Whenever a change external to the Timeline is present, the widget's data source and UI will be automatically updated.
 
-For a runnable example, refer to the [demo on binding to a shared data source](https://demos.telerik.com/{{ site.platform }}/timeline/shared).
+For a runnable example, refer to the [demo on binding to a shared data source](https://demos.telerik.com/{{ site.platform }}/timeline/shared-datasource).
 
 The following example demonstrates how to bind two {{ site.product }} widgets to the same data source. Changes done from one of the widgets is automatically reflected in the data source and UI of the other widget.
 
@@ -87,5 +87,5 @@ The following example demonstrates how to bind two {{ site.product }} widgets to
 
 ## See Also
 
-* [Bindig to a Shared DataSource (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/shared)
+* [Bindig to a Shared DataSource (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/shared-datasource)
 * [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)

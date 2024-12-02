@@ -481,7 +481,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the Spreadsheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/api)
+* [Basic Usage of the Spreadsheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet)
 * [Client-Side API of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 * [Server-Side API of the Spreadsheet](/api/spreadsheet)
 * [Knowledge Base Section](/knowledge-base)

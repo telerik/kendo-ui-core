@@ -277,7 +277,7 @@ You can continue experimenting with the code sample above by running it in the T
 * [Setting the Operators of the Filter]({% slug htmlhelpers_filter_aspnetcore_choose_operators %})
 * [Persisting the State of the Filter]({% slug htmlhelpers_filter_aspnetcore_store_settings %})
 ## See Also
-* [Using the API of the Filter for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/api)
+* [Basic Usage of the Filter for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter)
 * [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
 * [Server-Side API of the Calendar](/api/filter)
 * [Knowledge Base Section](/knowledge-base)

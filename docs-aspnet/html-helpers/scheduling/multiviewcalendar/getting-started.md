@@ -153,8 +153,6 @@ The MultiViewCalendar exposes a `Change()` event that you can handle and assign 
 ```
 {% endif %}
 
-For more examples, refer to the [demo on using the events of the MultiViewCalendar](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/events).
-
 ## 5. (Optional) Reference Existing MultiViewCalendar Instances
 
 You can reference the MultiViewCalendar instances that you have created and build on top of their existing configuration:

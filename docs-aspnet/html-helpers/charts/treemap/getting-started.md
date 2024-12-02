@@ -341,7 +341,7 @@ You can continue experimenting with the code sample above by running it in the T
 * [Use the TreeMap in Razor Pages](https://docs.telerik.com/aspnet-core/html-helpers/charts/treemap/razor-pages)
 
 ## See Also
-* [Using the API of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap/api)
+* [Basic Usage of the TreeMap for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap)
 * [Client-Side API of the TreeMap](https://docs.telerik.com/kendo-ui/api/javascript/ui/treemap)
 * [Server-Side API of the TreeMap](/api/map)
 * [Knowledge Base Section](/knowledge-base)

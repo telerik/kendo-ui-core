@@ -75,10 +75,7 @@ To configure the TimeDurationPicker, pass the configuration options as attribute
 ## Next Steps
 
 * [Getting Started with the TimeDurationPicker]({% slug htmlhelpers_timedurationpickerhelper_getting_started %})
-* [Basic Usage of the TimeDurationPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker)
-{% if site.core %}
-* [Basic Usage of the TimeDurationPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timedurationpicker/tag-helper)
-{% endif %}
+* [Basic Usage of the TimeDurationPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker)
 
 ## See Also
 

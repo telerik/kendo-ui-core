@@ -41,7 +41,6 @@ To make your first steps with {{ site.product_short }}, you can {% if site.core 
 {% if site.core %}
 * [First Steps with {{ site.product_short }} on Visual Studio for Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})&mdash;A tutorial demonstrating how to start using {{ site.product }} in new or existing projects.
 * [Using a Project Template in VS for Windows]({% slug gettingstarted_project_template %})&mdash;The easiest way to create a new project with {{ site.product }}.
-* [First Steps with {{ site.product_short }} on Visual Studio for Mac]({% slug gettingstarted_firststeps_vsmac %})&mdash;Create your first project with {{ site.product }} controls on macOS.
 * [First Steps with {{ site.product_short }} and CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})&mdash;Use .NET CLI to create a project that uses {{ site.product }} controls.
 * [Video Onboarding]({% slug virtualclass_uiforcore %})&mdash;A free course developed to help you get started with the Telerik UI for ASP.NET Core components and features.
 
@@ -90,7 +89,6 @@ For any issues you may come across while working with {{ site.product_short }}, 
 
 {% if site.core %}
 * [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First steps on Visual Studio for Mac (online guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First steps with CLI (online guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Including client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 * [Integrating UI for ASP.NET Core in Visual Studio]({% slug overview_visualstudio_aspnetcore %})

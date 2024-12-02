@@ -260,5 +260,5 @@ The uploaded files must be handled both in the `save` handler and in the `form` 
 
 ## See Also
 
-* [Asynchronous Mode of Operation by the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/async{% if site.core %}upload{% endif %})
+* [Asynchronous Mode of Operation by the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/async)
 * [Server-Side API](/api/upload)

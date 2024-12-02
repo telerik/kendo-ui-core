@@ -81,6 +81,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Using the API of the TreeMap for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap/api)
+* [Basic Usage of the TreeMap for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap)
 * [TreeMap Server-Side API](/api/treemap)
 * [TreeMap Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treemap)

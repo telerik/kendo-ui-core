@@ -18,9 +18,6 @@ The Telerik UI Notification HtmlHelper for {{ site.framework }} is a server-side
 The Notification provides a styled UI widget with arbitrary content which can provide information to the user on various occasions.
 
 * [Demo page for the Notification HtmlHelper](https://demos.telerik.com/{{ site.platform }}/notification/index)
-{% if site.core %}
-* [Demo page for the Notification TagHelper](https://demos.telerik.com/aspnet-core/notification/tag-helper)
-{% endif %}
 
 ## Initializing the Notification
 
@@ -121,9 +118,8 @@ The following example demonstrates the basic configuration of the Notification.
 ## Next Steps
 
 * [Getting Started with the Notification]({% slug aspnetcore_notification_getting_started %})
-* [Basic Usage of the Notification HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification)
+* [Basic Usage of the Notification for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/notification)
 {% if site.core %}
-* [Basic Usage of the Notification TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/tag-helper)
 * [Notification in Razor Pages]({% slug htmlhelpers_notification_razorpage_aspnetcore %})
 {% endif %}
 

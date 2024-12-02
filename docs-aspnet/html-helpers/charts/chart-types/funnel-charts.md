@@ -18,9 +18,6 @@ Funnel Charts display a single series of data in progressively decreasing or inc
 Funnel Charts are suitable for representing stages in a sales process and for showing the amount of the potential revenue from each stage. They are also useful when identifying potential problem areas in the sales processes of an organization. Funnel Charts are similar to the [Stacked Bar Charts](https://demos.telerik.com/{{ site.platform }}/bar-charts/stacked-bar) and are well suited for displaying several values.
 
 * [Demo page for the Funnel Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
-{% if site.core %}
-* [Demo page for the Funnel Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/funnel-charts/tag-helper)
-{% endif %}
 
 ## Concepts
 
@@ -95,8 +92,5 @@ The following example demonstrates how to base the widths of the bases for each 
 
 ## See Also
 
-* [Basic Usage of the Funnel Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
-{% if site.core %}
-* [Basic Usage of the Funnel Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/tag-helper)
-{% endif %}
+* [Basic Usage of the Funnel Chart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/funnel-charts/index)
 * [Server-Side API](/api/chart)

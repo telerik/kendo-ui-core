@@ -61,10 +61,7 @@ The following example demonstrates how to define the SplitButton.
 ## Next Steps
 
 * [Getting Started with the SplitButton]({% slug aspnetcore_splitbutton_getting_started %})
-* [Basic Usage of the SplitButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/index)
-{% if site.core %}
-* [Basic Usage of the SplitButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitbutton/tag-helper)
-{% endif %}
+* [Basic Usage of the SplitButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitbutton/index)
 
 ## See Also
 

@@ -119,6 +119,5 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
 
 * [Introduction to {{ site.product }}]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
 * [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 {% endif %}

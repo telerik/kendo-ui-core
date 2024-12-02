@@ -158,7 +158,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the Radial Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radialgauge/api)
+* [Radial Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge)
 * [Client-Side API of the Radial Gauge](https://docs.telerik.com/kendo-ui/api/javascript/ui/radialgauge)
 * [Server-Side API of the Radial Gauge](/api/radialgauge)
 * [Knowledge Base Section](/knowledge-base)

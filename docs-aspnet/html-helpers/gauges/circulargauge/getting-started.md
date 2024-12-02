@@ -157,7 +157,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the Circular Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/circulargauge/api)
+* [Using the API of the Circular Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/circular-gauge/api)
 * [Client-Side API of the Circular Gauge](https://docs.telerik.com/kendo-ui/api/javascript/ui/circulargauge)
 * [Server-Side API of the Circular Gauge](/api/circulargauge)
 * [Knowledge Base Section](/knowledge-base)

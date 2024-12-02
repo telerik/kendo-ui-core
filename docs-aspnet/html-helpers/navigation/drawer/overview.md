@@ -78,7 +78,6 @@ The following example demonstrates how to define the Drawer.
 * [Getting Started with the Drawer]({% slug drawer_getting_started %})
 * [Basic Usage of the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/index)
 {% if site.core %}
-* [Basic Usage of the Drawer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/tag-helper)
 * [Drawer in Razor Pages]({% slug htmlhelpers_drawer_razorpage_aspnetcore %})
 {% endif %}
 

@@ -16,10 +16,7 @@ The Telerik UI Wizard HtmlHelper for {{ site.framework }} is a server-side wrapp
 
 The Wizard displays content in sequential, stepwise order. Each step of the Wizard component has content, which can be a [Form]({% slug htmlhelpers_form_aspnetcore_overview %}) or any other type of HTML content. The progress indicator shows the user the number of steps left toward the last step of the process.
 
-* [Demo page for the Wizard HtmlHelper](https://demos.telerik.com/{{ site.platform }}/wizard/index)
-{% if site.core %}
-* [Demo page for the Wizard TagHelper](https://demos.telerik.com/aspnet-core/wizard/tag-helper)
-{% endif %}
+* [Demo page for the Wizard](https://demos.telerik.com/{{ site.platform }}/wizard/index)
 
 ## Initializing the Wizard
 

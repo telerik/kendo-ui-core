@@ -10,7 +10,7 @@ position: 7
 
 The Drawer for {{ site.framework }} exposes the `Show`, `Hide`, and `ItemClick` events that you can handle to customize the functions of the component.
 
-For a complete example on basic Drawer events, refer to the [demo on using the events of the Drawer](https://demos.telerik.com/{{ site.platform }}/drawer/events). More details about the Drawer events are available in the [Drawer API](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/drawereventbuilder).
+More details about the Drawer events are available in the [Drawer API](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/drawereventbuilder).
 
 The next example shows how to use the `ItemClick()` event to display the content in the selected Drawer item. To hide the content for the items that aren't currently selected, you will apply the `hidden` CSS style.
 
@@ -129,7 +129,7 @@ The next example shows how to use the `ItemClick()` event to display the content
 
 ## Next Steps
 
-* [Using the Drawer Events (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/events)
+* [Basic Usage of Drawer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer)
 
 ## See Also
 

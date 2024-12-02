@@ -71,7 +71,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Next Steps
 
-* [Configuring the Selection in the MediaPlayer (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/selection)
+* [MediaPlayer Basic Usage (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer)
 
 ## See Also
 

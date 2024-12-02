@@ -17,10 +17,7 @@ The Telerik UI ButtonGroup HtmlHelper for {{ site.framework }} is a server-side 
 
 The ButtonGroup renders a series of buttons together on a single line.
 
-* [Demo page for the ButtonGroup HtmlHelper](https://demos.telerik.com/{{ site.platform }}/buttongroup/index)
-{% if site.core %}
-* [Demo page for the ButtonGroup TagHelper](https://demos.telerik.com/aspnet-core/buttongroup/tag-helper)
-{% endif %}
+* [Demo page for the ButtonGroup](https://demos.telerik.com/{{ site.platform }}/buttongroup/index)
 
 ## Initializing the ButtonGroup
 
@@ -64,7 +61,6 @@ The following example demonstrates how to initialize the ButtonGroup.
 * [Getting Started with the ButtonGroup]({% slug aspnetcore_buttongroup_getting_started %})
 * [Basic Usage of the ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/index)
 {% if site.core %}
-* [Basic Usage of the ButtonGroup TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/tag-helper)
 * [ButtonGroup in Razor Pages]({% slug htmlhelpers_buttongroup_razorpage_aspnetcore %})
 {% endif %}
 

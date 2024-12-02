@@ -15,10 +15,7 @@ The Telerik UI Bullet HtmlHelper for {{ site.framework }} is a server-side wrapp
 
 Bullet Charts represent a variation of the [Bar Chart]({% slug barcharts_aspnetcore_htmlhelper %}).
 
-* [Demo page for the Bullet Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/bullet-charts/index)
-{% if site.core %}
-* [Demo page for the Bullet Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/bullet-charts/tag-helper)
-{% endif %}
+* [Demo page for the Bullet Chart](https://demos.telerik.com/{{ site.platform }}/bullet-charts/index)
 
 ## Getting Started
 
@@ -147,8 +144,5 @@ The following example demonstrates how to use all three options to customize the
 
 ## See Also
 
-* [Basic Usage of the Bullet Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bullet-charts/index)
-{% if site.core %}
-* [Basic Usage of the Bullet Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bullet-charts/tag-helper)
-{% endif %}
+* [Basic Usage of the Bullet Chart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bullet-charts/index)
 * [Server-Side API](/api/chart)

@@ -17,10 +17,7 @@ Pyramid Charts display a single series of data in progressively increasing propo
 
 Pyramid Charts are suitable to represent stages in a priority process, population vizualization, singular datasets, etc. 
 
-* [Demo page for the Pyramid Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/index)
-{% if site.core %}
-* [Demo page for the Pyramid Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/tag-helper)
-{% endif %}
+* [Demo page for the Pyramid Chart](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/index)
 
 ## Concepts
 
@@ -91,8 +88,5 @@ The following example demonstrates how to configure a basic Pyramid chart.
 
 ## See Also
 
-* [Basic Usage of the Pyramid Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/index)
-{% if site.core %}
-* [Basic Usage of the Pyramid Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/tag-helper)
-{% endif %}
+* [Basic Usage of the Pyramid Chart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pyramid-charts/index)
 * [Server-Side API](/api/chart)

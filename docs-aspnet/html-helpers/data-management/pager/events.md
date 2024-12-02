@@ -39,9 +39,8 @@ The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui
 ## Next Steps
 
 * [API for Configuring the Pager Events](/api/kendo.mvc.ui.fluent/pagereventbuilder)
-* [Using the Pager Events (Demo)](https://demos.telerik.com/{{ site.platform }}/pager/events)
 
 ## See Also
 
-* [Using the API of the Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager/api)
+* [Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager)
 

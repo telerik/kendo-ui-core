@@ -305,7 +305,7 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 
 ## See Also
 
-* [Row Drag and Drop by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/row-drag-drop)
+* [Row Drag and Drop by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/drag-drop)
 * [Grid Events]({% slug grid_events %})
 * [Server-Side API](/api/grid)
 * [Grid Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

@@ -88,7 +88,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Next Steps
 
-* [Configuring the Selection in the Captcha (Demo)](https://demos.telerik.com/aspnet-core/captcha/selection)
+* [Captcha for {{ site.framework }} (Demo)](https://demos.telerik.com/aspnet-core/captcha)
 
 ## See Also
 

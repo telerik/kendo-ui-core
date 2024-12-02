@@ -342,7 +342,7 @@ Allows localization of the strings that are used in the widget.
 
 ### messages.labelSuffix `String` 
 
-Controls the label suffix that will be concatenated to the button's text and used for the aria-label attribute.
+Controls the label suffix that will be used for the aria-label attribute.
 
 #### Example
 
@@ -354,7 +354,7 @@ Controls the label suffix that will be concatenated to the button's text and use
                 { text: "item 2" }
             ],
             messages: {
-                labelSuffix: "MenuButton"
+                labelSuffix: "MenuButton" // inspect the aria-label attribute in the browser console
             }
         });
     </script>

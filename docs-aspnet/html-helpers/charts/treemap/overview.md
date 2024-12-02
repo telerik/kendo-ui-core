@@ -23,8 +23,7 @@ The Telerik UI TreeMap HtmlHelper for {{ site.framework }} is a server-side wrap
 
 To see the component in action, check the examples:
 
-* [Demo page for the TreeMap HtmlHelper](https://demos.telerik.com/{{ site.platform }}/treemap/index)
-* [Demo page for the TreeMap TagHelper](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
+* [Demo page for the TreeMap](https://demos.telerik.com/{{ site.platform }}/treemap/index)
 
 ## Initializing the TreeMap
 
@@ -159,8 +158,7 @@ You can customize the TreeMap through the `Colors` configuration option by addin
 * [TreeMap Events]({% slug events_treemap_aspnetcore %})
 
 ## See Also
-* [Basic Usage of the TreeMap HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap/index)
-* [Basic Usage of the TreeMap TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
+* [Basic Usage of the TreeMap for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap/index)
 {% if site.core %}
 * [TreeMap in Razor Pages]({% slug razorpages_treemap_aspnetcore %})
 {% endif %}
