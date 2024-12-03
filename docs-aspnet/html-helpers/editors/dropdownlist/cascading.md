@@ -142,5 +142,6 @@ The following example demonstrates how to configure the cascading functionality 
 
 ## See Also
 
+* [ASP.NET Core Cascading DropDownList](https://demos.telerik.com/{{ site.platform }}/dropdownlist/cascadingdropdownlist)
 * [Grouping by the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/grouping)
 * [Server-Side API](/api/dropdownlist)

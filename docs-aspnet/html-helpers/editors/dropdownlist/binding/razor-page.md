@@ -1,22 +1,22 @@
 ---
 title:  Razor Pages
-page_title: Razor Pages
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI DropDownList component for {{ site.framework }} in a Razor Page."
+page_title: ASP.NET Core DropDownList Razor | Telerik UI for ASP.NET Core
+description: "Find out how to configure the ASP.NET Core DropDownList component in a Razor Pages scenario."
 slug: htmlhelpers_dropdownlist_razorpage_aspnetcore
 position: 3
 ---
 
-# DropDownList in Razor Pages
+# ASP.NET Core Razor DropDownList
 
 Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
 You can seamlessly integrate the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
 
-This article describes how to configure the DropDownList component in a Razor Pages scenario.
+This article describes how to configure the ASP.NET Core Razor DropDownList in a Razor Pages scenario.
 
 For the complete project, refer to the [DropDownList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownList/DropDownListCrudOps.cshtml).
 
-In order to set up the DropDownList component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
+In order to set up the Razor DropDownList component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
 ```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

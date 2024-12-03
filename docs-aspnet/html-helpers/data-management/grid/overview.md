@@ -196,11 +196,10 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)
+* [ASP.NET {{ site.framework_short }} Grid example](https://demos.telerik.com/{{ site.platform }}/grid)
 {% if site.core %}
 * [Forum Discussions](https://www.telerik.com/forums/aspnet-core-ui?tagId=753) 
-* [Demos](https://demos.telerik.com/aspnet-core/grid)
 {% else %}
 * [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=754) 
-* [Demos](https://demos.telerik.com/aspnet-mvc/grid)
 {% endif %}
 * [How-To Examples](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas)

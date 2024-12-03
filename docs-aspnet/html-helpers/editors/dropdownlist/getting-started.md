@@ -314,6 +314,9 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core demo](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
+{% endif %}
 * [Using the API of the DropDownList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/api)
 * [Client-Side API of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
 * [Server-Side API of the DropDownList](/api/dropdownlist)
