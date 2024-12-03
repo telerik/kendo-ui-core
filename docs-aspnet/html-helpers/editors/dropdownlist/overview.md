@@ -235,10 +235,12 @@ The DropDownList configuration options are passed as attributes.
 ## Next Steps
 
 * [Getting Started with the DropDownList]({% slug aspnetcore_dropdownlist_getting_started %})
-* [Basic Usage of the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/index)
 {% if site.core %}
+* [ASP.NET Core demo](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
 * [Basic Usage of the DropDownList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
 * [DropDownList in Razor Pages]({%slug htmlhelpers_dropdownlist_razorpage_aspnetcore%})
+{% else %}
+* [ASP.NET MVC DropDownList Overview Demo](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
 {% endif %}
 
 ## See Also

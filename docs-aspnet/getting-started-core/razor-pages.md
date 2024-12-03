@@ -33,7 +33,7 @@ The two alternative approaches for adding Telerik UI for ASP.NET Core to a new R
 
 ## Adding Components to a Razor Page
 
-All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor Pages framework. The following example demonstrates how to add a Grid to a Razor page and configure its CRUD operations.
+All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor Pages framework. The following example demonstrates how to add a Grid, which is a commonly used ASP.NET Core Razor component, to a Razor page and configure its CRUD operations.
 
    
 1. Add the `@model` directive and an AntiForgeryToken on top of the Razor page:
@@ -217,7 +217,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 ## Post data from a Razor Page
 
-You can post data to the PageModel by binding the model properties to editors and submitting the entire model through a form. The example below demonstrates how to post the selected option from the [AutoComplete component]({% slug htmlhelpers_autocomplete_aspnetcore %}) to the PageModel:
+You can post data to the PageModel by binding the model properties to ASP.NET Core Razor components that serve as  editors and submitting the entire model through a form. The example below demonstrates how to post the selected option from the [AutoComplete component]({% slug htmlhelpers_autocomplete_aspnetcore %}) to the PageModel:
 
 ```tab-HtmlHelper-RazorPage(csthml)
     @page
@@ -303,7 +303,7 @@ For more information on the model binding in Razor Pages application, refer to [
 
 ## GitHub Repo with Razor Pages Examples
 
-A sample project with Razor Pages examples, which demonstrates the usage of the Telerik UI for ASP.NET Core components, is located in the [ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples) repository on GitHub.
+A sample project with Razor Pages examples, which demonstrates the usage of the Telerik UI for ASP.NET Core Razor components, is located in the [ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples) repository on GitHub.
 
 ## Razor Pages Examples
 

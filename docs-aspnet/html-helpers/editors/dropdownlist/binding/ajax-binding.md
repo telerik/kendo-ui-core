@@ -9,9 +9,11 @@ position: 2
 
 # Ajax Binding
 
+In this article you will learn how to bind a DropDownList in ASP.NET Core from a database. 
+
 You can configure the Telerik UI DropDownList for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
 
-> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
+> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data as json.
 
 1. Create an action method which renders the view.
 
@@ -69,6 +71,9 @@ You can configure the Telerik UI DropDownList for Ajax binding to the Northwind 
 </kendo-dropdownlist>
 ```
 {% endif %}
+
+By following this example, you will be able to populate the ASP.NET Core DropDownList from a database, and the component will visualize the data.
+
 ## See Also
 
 * [Server-Side API](/api/dropdownlist)
