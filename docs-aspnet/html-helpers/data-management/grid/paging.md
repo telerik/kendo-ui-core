@@ -245,5 +245,5 @@ Use as small page sizes as possible, because rendering too many records causes p
 ## See Also
 
 * [Paging by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
-* [Setting the Pager Visibility in the Grid HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/grid/pager-visibility)
+* [Pager Functionality in the Grid HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/grid/pager-functionality)
 * [Server-Side API](/api/grid)

@@ -318,7 +318,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager/api)
+* [Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager)
 * [Pager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
 * [Pager server-side API](/api/pager)
 * [Knowledge Base Section](/knowledge-base)

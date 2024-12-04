@@ -27,5 +27,5 @@ The Row Drag and Drop on mobile devices activates on `hold` & `slide` of the row
 
 ## See Also
 
-* [Grid Adaptive Rendering](https://demos.telerik.com/{{ site.platform }}/grid/appearance/adaptive)
+* [Grid Adaptive Rendering](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-rendering)
 * [Server-Side API](/api/grid)

@@ -107,6 +107,5 @@ The following example shows a Form configured to handle its `validate`, `submit`
 ## See Also
 
 * [Using the API of the Form for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/form/api)
-* [Assigning predefined resources to the Form (Demo)](https://demos.telerik.com/{{ site.platform }}/form/resources)
 * [Server-Side API of the Form](/api/form)
 * [Client-Side API of the Form](https://docs.telerik.com/kendo-ui/api/javascript/ui/form)

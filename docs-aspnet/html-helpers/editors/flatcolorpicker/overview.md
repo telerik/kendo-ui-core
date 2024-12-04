@@ -17,7 +17,7 @@ The Telerik UI FlatColorPicker HtmlHelper for {{ site.framework }} is a server-s
 
 The FlatColorPicker is the HSV color selector which is used by default in the `kendo.ui.FlatColorPicker` popup when no palette is set.
 
-* [Demo page for the FlatColorPicker](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/flatcolorpicker)
+* [Demo page for the FlatColorPicker](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker)
 
 ## Initializing the FlatColorPicker
 
@@ -109,10 +109,7 @@ To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.d
 ## Next Steps
 
 * [Getting Started with the FlatColorPicker ]({% slug aspnetcore_flatcolorpicker_getting_started %})
-* [Basic Usage of the FlatColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/index)
-{% if site.core %}
-* [Basic Usage of the FlatColorPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/flatcolorpicker/tag-helper)
-{% endif %}
+* [Basic Usage of the FlatColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/index)
 
 ## See Also
 

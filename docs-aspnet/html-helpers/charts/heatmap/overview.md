@@ -22,10 +22,7 @@ The HeatMap uses colors to indicate the relative value of data points in two dim
 
 To see the component in action, check the examples:
 
-* [Demo page for the HeatMap HtmlHelper](https://demos.telerik.com/{{ site.platform }}/heatmap/index)
-{% if site.core %}
-* [Demo page for the HeatMap TagHelper](https://demos.telerik.com/{{ site.platform }}/heatmap/tag-helper)
-{% endif %}
+* [Demo page for the HeatMap](https://demos.telerik.com/{{ site.platform }}/heatmap/index)
 
 ## Basic configuration
 

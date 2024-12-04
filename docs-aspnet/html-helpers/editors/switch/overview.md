@@ -18,9 +18,6 @@ The Telerik UI Switch HtmlHelper for {{ site.framework }} is a server-side wrapp
 The Switch displays two exclusive choices. With the new Switch variables introduced in the Kendo UI for jQuery R1 2019 release, the default styling of the Switch component for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout. For more information and examples, refer to the article on implementing a [custom layout for the Switch](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout).
 
 * [Demo page for the Switch](https://demos.telerik.com/{{ site.platform }}/switch/index)
-{% if site.core %}
-* [Demo page for the Switch](https://demos.telerik.com/aspnet-core/switch/tag-helper)
-{% endif %}
 
 ## Initializing the Switch
 

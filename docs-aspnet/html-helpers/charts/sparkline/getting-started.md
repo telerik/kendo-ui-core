@@ -181,7 +181,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the Sparkline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sparkline/api)
+* [Basic Usage of the Sparkline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sparklines)
 * [Client-Side API of the Sparkline](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sparkline)
 * [Server-Side API of the Sparkline](/api/sparkline)
 * [Knowledge Base Section](/knowledge-base)

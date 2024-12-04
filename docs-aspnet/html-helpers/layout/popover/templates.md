@@ -97,4 +97,4 @@ You can configure the body section through the `Body` method.
 
 ## See Also
 
-* [Templates in the PopOver HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover/template)
+* [Templates in the PopOver HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover/templates)

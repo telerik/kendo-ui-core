@@ -89,8 +89,8 @@ The following example demonstrates how to subscribe to the `Changing` and `Chang
 
 ## Next Steps
 
+* [Basic Usage of the Spreadsheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet)
 * [Using the Spreadsheet Events (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/events)
-* [Using the API of the Spreadsheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/api)
 
 ## See Also
 

@@ -377,7 +377,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 
-* [Using the API of the DataSource for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datasource/api)
+* [DataSource for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datasource)
 * [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datasource)
 * [DataSource server-side API](/api/datasource)
 * [Knowledge Base Section](/knowledge-base)

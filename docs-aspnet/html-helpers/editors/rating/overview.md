@@ -18,9 +18,6 @@ The Telerik UI Rating HtmlHelper for {{ site.framework }} is a server-side wrapp
 The Rating allows to intuitively rate by selecting number of items stars from a predefined maximum number of items.
 
 * [Demo page for the Rating HtmlHelper](https://demos.telerik.com/{{ site.platform }}/rating/index)
-{% if site.core %}
-* [Demo page for the Rating TagHelper](https://demos.telerik.com/aspnet-core/rating/tag-helper)
-{% endif %}
 
 ## Initializing the Rating
 

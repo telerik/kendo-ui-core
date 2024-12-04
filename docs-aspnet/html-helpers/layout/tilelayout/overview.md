@@ -107,10 +107,7 @@ Currently, the component is not supported in Internet Explorer as the browser do
 ## Next Steps
 
 * [Getting Started with the TileLayout]({% slug tilelayout_getting_started %})
-* [Basic Usage of the TileLayout HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tilelayout/index)
-{% if site.core %}
-* [Basic Usage of the TileLayout TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tilelayout/taghelper)
-{% endif %}
+* [Basic Usage of the TileLayout for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tilelayout/index)
 
 ## See Also
 

@@ -17,10 +17,7 @@ The Telerik UI PDFViewer HtmlHelper for {{ site.framework }} is a server-side wr
 
 The PDFViewer displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements. The default tools collection includes the `pager`, `open`, and `download` tools. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
 
-* [Demo page for the PDFViewer HtmlHelper](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
-{% if site.core %}
-* [Demo page for the PDFViewer TagHelper](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)
-{% endif %}
+* [Demo page for the PDFViewer](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
 
 ## Initializing the PDFViewer
 
@@ -124,9 +121,8 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 
 ## See Also
 
-* [Basic Usage of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
+* [Basic Usage of the PDFViewer for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
 {% if site.core %}
-* [Basic Usage of the PDFViewer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)
 * [PDFViewer in Razor Pages]({% slug htmlhelpers_pdfviewer_aspnetcore_razor_page %})
 {% endif %}
 * [Using the API of the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/api)

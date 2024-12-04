@@ -60,10 +60,7 @@ The following example demonstrates how to define the DropDownButton.
 ## Next Steps
 
 * [Getting Started with the DropDownButton]({% slug dropdownbutton_getting_started %})
-* [Basic Usage of the DropDownButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/index)
-{% if site.core %}
-* [Basic Usage of the DropDownButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownbutton/tag-helper)
-{% endif %}
+* [Basic Usage of the DropDownButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownbutton/index)
 
 ## See Also
 

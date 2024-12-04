@@ -16,10 +16,7 @@ The Telerik UI ChipList HtmlHelper for {{ site.framework }} is a server-side wra
 
 The ChipList acts as a container for two or more individual Chip components and allows you to maintain a set of selected chips. They represent a complex piece of information in a compact form—for example, an entity that can be a person, a place, or a thing. Each chip from the list can be selected or removed and supports various styling options. The ChipList component is commonly used for single or multiple selections such as additions to an ordered meal.
 
-* [Demo page for the ChipList HtmlHelper](https://demos.telerik.com/{{ site.platform }}/chiplist/index)
-{% if site.core %}
-* [Demo page for the ChipList TagHelper](https://demos.telerik.com/aspnet-core/chiplist/tag-helper)
-{% endif %}
+* [Demo page for the ChipList](https://demos.telerik.com/{{ site.platform }}/chiplist/index)
 
 ![Telerik UI Chip for {{ site.framework }} with Basic Configuration](./images/basic-chiplist.png)
 

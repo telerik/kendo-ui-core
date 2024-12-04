@@ -341,8 +341,6 @@ To hide the content for the items that aren't currently selected, you will apply
 ```
 {% endif %}
 
-For more examples, refer to the [demo on using the events of the Drawer](https://demos.telerik.com/{{ site.platform }}/drawer/events).
-
 ## 6. (Optional) Reference Existing Drawer Instances
 
 You can reference the Drawer instances that you have created and build on top of their existing configuration:

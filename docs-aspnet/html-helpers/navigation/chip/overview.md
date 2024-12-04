@@ -18,10 +18,7 @@ The Chip is a compact element that represents an input, attribute, or action. Th
 
 The component can be clicked or removed, and supports various styling options. The Chip is commonly used in email templates where each chip corresponds to a single person.
 
-* [Demo page for the Chip HtmlHelper](https://demos.telerik.com/{{ site.platform }}/chip/index)
-{% if site.core %}
-* [Demo page for the Chip TagHelper](https://demos.telerik.com/aspnet-core/chip/tag-helper)
-{% endif %}
+* [Demo page for the Chip](https://demos.telerik.com/{{ site.platform }}/chip/index)
 
 ![Telerik UI Chip for {{ site.framework }} with Basic Configuration](./images/chip-basic.png)
 

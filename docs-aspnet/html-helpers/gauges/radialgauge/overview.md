@@ -78,5 +78,5 @@ To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [Using the API of the Radial Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge/api)
+* [Basic Usage of the Radial Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge)
 * [Knowledge Base Section](/knowledge-base)
