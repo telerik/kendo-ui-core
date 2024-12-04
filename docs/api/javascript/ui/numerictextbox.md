@@ -116,7 +116,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 ### format `String`*(default: "n")*
 
-Specifies the number format used when the widget is not focused. Any [valid number format](/framework/globalization/numberformatting) is allowed.
+Specifies the number format used when the widget is not focused. Check this page for all [valid number formats](/framework/globalization/numberformatting).
 
 Compare with the [`decimals`](/api/javascript/ui/numerictextbox#configuration-decimals) property.
 

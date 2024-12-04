@@ -37,10 +37,17 @@ Trying to install Telerik.UI.for.AspNet.{{ site.framework_short }} results in an
 
 `Failed to retrieve information about 'Telerik.UI.for.AspNet.{{ site.framework_short }}' from remote source 'https://nuget.telerik.com/nuget/FindPackagesById()?id='Telerik.UI.for.AspNet.{{ site.framework_short }}'`
 
+The error can also state:
+
+`Response status code does not indicate success: 503 (Service Unavailable).`
+
 ### Solution 
 
-* The Telerik NuGet v2 feed is obsolete and will be deprecated after November 2024. You can use the [use the Telerik NuGet v3 feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}) instead.
+* The Telerik NuGet v2 feed is obsolete and was permanently deprecated on November 2024. You can use the [use the Telerik NuGet v3 feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}) instead.
 * Make sure that the NuGet feed URL is configured correctly.
+
+Detailed explanation you can find here:
+[Sunsetting the NuGet v2 Server](https://www.telerik.com/blogs/sunsetting-nuget-v2-server)
 
 ## Issue: Unable to load the service index for source https://nuget.telerik.com/v3/index.json
 

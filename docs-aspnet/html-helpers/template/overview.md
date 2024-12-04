@@ -226,6 +226,38 @@ The examples below show how to use the Template component to create custom edito
     ```
     {% endif %}
 
+The following example demonstrates how to create a Content Security Policy (CSP)-compatible template with a conditional statement in a Grid column.
+
+```HtmlHelper
+    @(Html.Kendo().Grid<OrderViewModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.IsActive).ClientTemplateHandler("handler");
+        })
+        // Other configuration
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="500">
+        <columns>
+            <column field="IsActive" template-handler="handler" />
+        </columns>
+        <!--Other configuration-->
+    </kendo-grid>
+```
+{% endif %}
+```scripts.js
+    function handler(data) {
+        if (data.IsActive) {
+            return '<div><b>Active order</b></div>'
+        } else {
+            return `<div>${data.ShipName} is already shipped</div>`;
+        }
+    }
+```
+
 ## Converting Existing Templates to CSP-Compatible Templates
 
 With the help of the Template, you can convert the existing components templates ([inline]({% slug client_templates_overview %}#inline-client-templates), [external]({% slug client_templates_overview %}#external-client-templates), and [partial]({% slug client_templates_overview %}#partial-client-templates)) into CSP-compatible ones.
