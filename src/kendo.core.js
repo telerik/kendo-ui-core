@@ -1,22 +1,14 @@
 import { defaultBreakpoints, mediaQuery } from './utils/mediaquery.js';
 import { fromESClass } from './utils/convert-class.js';
+import * as licensing from './kendo.licensing.js';
 
 export const __meta__ = {
     id: "core",
     name: "Core",
     category: "framework",
-    description: "The core of the Kendo framework."
+    description: "The core of the Kendo framework.",
+    depends: ["licensing"],
 };
-
-var packageMetadata = {
-    name: '@progress/kendo-ui',
-    productName: 'Kendo UI',
-    productCodes: ['KENDOUICOMPLETE', 'KENDOUI', 'UIASPCORE', 'KENDOMVC', 'KENDOUIMVC'],
-    publishDate: 0,
-    version: '$KENDO_VERSION'.replace(/^\s+|\s+$/g, ''),
-    licensingDocsUrl: 'https://docs.telerik.com/kendo-ui/intro/installation/using-license-code?utm_medium=product&utm_source=kendojquery&utm_campaign=kendo-ui-jquery-purchase-license-keys-warning'
-};
-
 
 (function($, window, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
@@ -3277,8 +3269,8 @@ function pad(number, digits, end) {
         init: function(element, options) {
             var that = this;
 
-            if (!validatePackage()) {
-                that._showWatermarkOverlay = addWatermarkOverlay;
+            if (!licensing.validatePackage()) {
+                that._showWatermarkOverlay = licensing.addWatermarkOverlayAndBanner;
             }
 
             that.element = kendo.jQuery(element).handler(that);
@@ -5758,21 +5750,6 @@ function pad(number, digits, end) {
                 typeof obj;
         };
     }());
-
-    var KendoLicensing = { validatePackage: function() { return true; },setScriptKey: function() {} };
-
-    window.KendoLicensing = {
-        setScriptKey: KendoLicensing.setScriptKey
-    };
-
-    function validatePackage() {
-        return KendoLicensing.validatePackage(packageMetadata);
-    }
-
-    function addWatermarkOverlay(el) {
-        KendoLicensing.addWatermarkOverlay && KendoLicensing.addWatermarkOverlay(el, packageMetadata);
-        KendoLicensing.showBanner && KendoLicensing.showBanner(packageMetadata);
-    }
 
 })(jQuery, window);
 

@@ -13,7 +13,8 @@
     "globals": {
         "define": "writable",
         "kendo": "writable",
-        "jQuery": "readonly"
+        "jQuery": "readonly",
+        "KendoLicensing": "readonly"
     },
     "rules": {
         "array-bracket-spacing": "off", //["error", "always"],

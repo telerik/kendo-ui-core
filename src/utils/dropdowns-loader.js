@@ -1,3 +1,5 @@
+import "../kendo.core.js";
+
 let $ = kendo.jQuery;
 
 const LOADING = "k-loading",
