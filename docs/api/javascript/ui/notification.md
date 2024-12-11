@@ -442,7 +442,10 @@ of each member of the collection, returned by the `getNotifications()` method. I
 
         // remove the two messages from the DOM
         elements.each(function(){
-            $(this).parent().remove();
+            // $(this).parent().remove();
+	    // in new kendo versions, the notification is nested one <div> deeper
+     	    // removing the direct parent only, will lead to moving notifications as the space is still occupied
+	    $(this).parent().parent().remove(); 
         });
 
         messageCount++;
