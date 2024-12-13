@@ -17,6 +17,7 @@ export const __meta__ = {
         isArray = Array.isArray,
         noop = $.noop,
         math = Math,
+        crypto = window.crypto,
         Template,
         JSON = window.JSON || {},
         support = {},
@@ -3210,20 +3211,20 @@ function pad(number, digits, end) {
         },
 
         guid: function() {
-            var id = "", i, random, chars = "abcdef";
-
-            id += chars[Math.floor(Math.random() * Math.floor(chars.length))];
-
-            for (i = 1; i < 32; i++) {
-                random = math.random() * 16 | 0;
-
-                if (i == 8 || i == 12 || i == 16 || i == 20) {
-                    id += "-";
-                }
-                id += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
+            try {
+                // This is available only in HTTPS.
+                return crypto.randomUUID();
+            } catch (e) {
+                // Use this as a fallback.
+                const randomValues = crypto.getRandomValues(new Uint8Array(16));
+                return randomValues.reduce((acc, curr, i) => {
+                    if (i === 4 || i === 6 || i === 8 || i === 10) {
+                        acc += "-";
+                    }
+                    acc += curr.toString(16).padStart(2, '0');
+                    return acc;
+                }, "");
             }
-
-            return id;
         },
 
         roleSelector: function(role) {

@@ -115,7 +115,7 @@
             dataSource.read();
             dataSource.add({ foo: "three" });
 
-            assert.equal(dataSource.view().length, 2);
+            assert.equal(dataSource.view().length, 1);
         });
 
         it("view returns instances of the model", function() {

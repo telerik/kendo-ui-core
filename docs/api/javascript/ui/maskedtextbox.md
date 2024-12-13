@@ -464,7 +464,7 @@ Prepares the **MaskedTextBox** for safe removal from DOM. Detaches all event han
 
     // detach events
     maskedtextbox.destroy();
-    <script>
+    </script>
 
 ### enable
 

@@ -9781,7 +9781,7 @@ The accessible description of the Chart. The description is announced by screen 
     <script>
     $("#stock-chart").kendoStockChart({
       title: {
-        text: "Stock Chart"
+        text: "Stock Chart",
         description: "A sample stock chart with mock data"
       },
       dataSource: {

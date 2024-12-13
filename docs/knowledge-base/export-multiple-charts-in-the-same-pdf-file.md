@@ -231,8 +231,8 @@ How can I export many Charts in the same PDF file?
               field: "Close"
             },
             select: {
-              from: "2009/02/05",
-              to: "2011/10/07"
+              from: "2021/02/05",
+              to: "2023/10/07"
             }
           }
         });

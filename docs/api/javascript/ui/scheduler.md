@@ -71,6 +71,7 @@ If set to `true` the scheduler will display a slot for "all day" events.
 > The option is a shorthand to the view's `allDaySlot` option. To define the `daySlot` visibility using a **data-** attribute set the [views.allDaySlot](/api/javascript/ui/scheduler#configuration-views.allDaySlot) option directly.
 
 #### Example - hide the all day slot
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -117,6 +118,7 @@ data source is fired. That will also apply for data sources for the [resources](
 If set to `false` the "current time" marker of the scheduler would not be displayed.
 
 #### Example - disable "current time" marker
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -133,6 +135,7 @@ If set to `false` the "current time" marker of the scheduler would not be displa
 The update interval of the "current time" marker, in milliseconds.
 
 #### Example - set the update interval of the "current time" marker
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -151,6 +154,7 @@ The update interval of the "current time" marker, in milliseconds.
 If set to `false` the "current time" marker would be displayed using the scheduler [timezone](/api/javascript/ui/scheduler/configuration/timezone).
 
 #### Example - set "current time" marker to use scheduler timezone
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -319,6 +323,7 @@ The fields which can be used in the template are:
 * date - represents the major tick date.
 
 #### Example - set the date header template
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -340,6 +345,7 @@ The fields which can be used in the template are:
 If set to `true` the user would be able to create new scheduler events and modify or delete existing ones.
 
 #### Example - disable editing
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -362,6 +368,7 @@ If set to `true` the scheduler will display a confirmation dialog when the user 
 Can be set to a string which will be used as the confirmation text.
 
 #### Example - disable delete confirmation
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -415,6 +422,7 @@ Can be set to a string which will be used as the confirmation text.
 If set to `true` the user can create new events. Creating is enabled by default.
 
 #### Example - disable event creating
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -441,6 +449,7 @@ If set to `true` the user can create new events. Creating is enabled by default.
 If set to `true` the user can delete events from the view by clicking the "destroy" button. Deleting is enabled by default.
 
 #### Example - disable event deleting
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -470,6 +479,7 @@ Recurring events edit mode. The available modes are:
 - "occurrence" - only the current occurrence will be edited.
 
 #### Example - disable event deleting
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -505,6 +515,7 @@ Recurring events edit mode. The available modes are:
 If set to `true` the scheduler allows event moving. Dragging the event changes the start and end time.
 
 #### Example - disable event moving
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -527,6 +538,7 @@ If set to `true` the scheduler allows event moving. Dragging the event changes t
 If set to `true` the scheduler allows event resizing. Dragging the resize handles changes the start or end time of the event.
 
 #### Example - disable event resizing
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -589,6 +601,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
     </script>
 
 #### Example - using MVVM in the popup editor template
+
     <script id="editor" type="text/x-kendo-template">
        <h3>Edit meeting</h3>
        <p>
@@ -627,6 +640,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
 If set to `true` the user can update events. Updating is enabled by default.
 
 #### Example - disable event updating
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -764,6 +778,7 @@ The fields which can be used in the template are:
 If set to `false` the footer of the scheduler would not be displayed.
 
 #### Example - disable footer
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -784,6 +799,7 @@ If set to `false` the footer of the scheduler would not be displayed.
 Sets the command which will be displayed in the scheduler footer. Currently only "workDay" option is supported. If the option is set to `false`, the "workDay" button will be removed from the footer.
 
 #### Example - disable workDay command in the footer
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -810,6 +826,7 @@ The configuration of the scheduler resource(s) grouping.
 If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
 
 #### Example - define group by date
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -853,6 +870,7 @@ If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configur
 An array of resource names by which the scheduler events will be grouped.
 
 #### Example - define groups
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -895,6 +913,7 @@ An array of resource names by which the scheduler events will be grouped.
 The orientation of the group headers. Supported values are *horizontal* or *vertical*. Note that the agenda view is always in vertical orientation.
 
 #### Example - define group orientation
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -989,6 +1008,7 @@ The fields which can be used in the template are:
 The height of the widget. Numeric values are treated as pixels.
 
 #### Example - set the height of the scheduler
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -3535,6 +3555,7 @@ The fields which can be used in the template are:
 * date - represents the major tick date.
 
 #### Example - set the minor time header template
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -3562,6 +3583,7 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
 > Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the scheduler might have a different height.
 
 #### Example - enable adaptive rendering auto detect
+
     <div id="scheduler"></div>
     <script>
         $("#scheduler").kendoScheduler({
@@ -3580,6 +3602,7 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
     </script>
 
 #### Example - force adaptive rendering
+
     <div id="scheduler"></div>
     <script>
         $("#scheduler").kendoScheduler({
@@ -4605,7 +4628,6 @@ If set to `true` the scheduler will snap events to the nearest slot during dragg
 
 #### Example - allow free event resizing and moving
 
-
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -4660,6 +4682,7 @@ The complete list of the supported timezones is available in the [List of IANA t
 > The **timezone** option will not affect events if the widget's data source is initialized separately. In this case set the [schema.timezone](/api/javascript/data/schedulerdatasource/configuration/schema.timezone) option directly.
 
 #### Example - set the timezone
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5153,6 +5176,7 @@ The fields which can be used in the template are:
 > The `allDayEventTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the all day event template
+
     <script id="event-template" type="text/x-kendo-template">
       <div>Title: #: title #</div>
       <div>Atendees:
@@ -5201,6 +5225,7 @@ If set to `true` the scheduler will display a slot for "all day" events.
 > The `allDaySlot` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - hide the all day slot
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5235,6 +5260,7 @@ The fields which can be used in the template are:
 > The `allDaySlotTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week" or "workWeek".
 
 #### Example - set the date header template
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5257,6 +5283,7 @@ The fields which can be used in the template are:
     </script>
 
 #### Example - modify the all day slot based on resources
+
     <div id="scheduler"></div>
     <script id="allDaySlotTemplate" type="text/x-kendo-template">
         # var resources = data.resources(); #
@@ -5334,6 +5361,7 @@ The fields which can be used in the template are:
 > The `dateHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the date header template
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5391,6 +5419,7 @@ The fields which can be used in the template are:
     </script>
 
 #### Example - modify the day slot based on resources
+
     <div id="scheduler"></div>
     <script id="dayTemplate" type="text/x-kendo-template">
         # var resources = data.resources(); #
@@ -5458,6 +5487,7 @@ Overrides the [editable](/api/javascript/ui/scheduler#configuration-editable) op
 If set to `true` the user can create new events. Creating is enabled by default.
 
 #### Example - disable event creating
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5486,6 +5516,7 @@ If set to `true` the user can create new events. Creating is enabled by default.
 If set to `true` the user can delete events from the view by clicking the "destroy" button. Deleting is enabled by default.
 
 #### Example - disable event deleting
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5514,6 +5545,7 @@ If set to `true` the user can delete events from the view by clicking the "destr
 If set to `true` the user can update events. Updating is enabled by default.
 
 #### Example - disable event updating
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5796,6 +5828,7 @@ The fields which can be used in the template are:
 > The `eventTimeTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "agenda".
 
 #### Example - set the event time template
+
     <script id="event-time-template" type="text/x-kendo-template">
       # if (isAllDay) { #
          All day
@@ -5835,6 +5868,7 @@ If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configur
 Overrides the [date](/api/javascript/ui/scheduler#configuration-group.date) option of the scheduler.
 
 #### Example - define group by date
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5885,6 +5919,7 @@ Overrides the [date](/api/javascript/ui/scheduler#configuration-group.date) opti
 The orientation of the group headers. Supported values are *horizontal* or *vertical*. Note that the agenda view is always in vertical orientation.
 
 #### Example - disable delete confirmation
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6036,6 +6071,7 @@ The fields which can be used in the template are:
 > The `minorTimeHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the minor time header template
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6064,6 +6100,7 @@ Configures the number of months that will be displayed in the year view calendar
 > The `months` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
 
 #### Example - set the number of months rendered in the year view calendar
+
     <div id="scheduler"></div>
 
     <script>
@@ -6147,6 +6184,7 @@ The format used to display the selected date. Uses [kendo.format](/api/javascrip
 Contains two placeholders - "{0}" and "{1}" which represent the start and end date displayed by the view.
 
 #### Example - set the selectedDateFormat
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6210,6 +6248,7 @@ The fields which can be used in the template are:
 > The `slotTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workWeek" or "timeline" views.
 
 #### Example - set the slot template
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6232,6 +6271,7 @@ The fields which can be used in the template are:
     </script>
 
 #### Example - modify the slot based on resources
+
     <div id="scheduler"></div>
     <script id="slotTemplate" type="text/x-kendo-template">
         # var resources = data.resources(); #
@@ -6326,6 +6366,7 @@ The start time of the view. The scheduler will display events starting after the
 The user-friendly title of the view displayed by the scheduler.
 
 #### Example - set the view title
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6359,9 +6400,8 @@ The fields which can be used in the template are:
 * events `Array` - list of the events and their respective resource for the selected date
 * messages `Object` - the configuration of the Scheduler messages used for localization.
 
-#### Example - set the tooltip template for the year view
-
 #### Example - set the view title
+
     <div id="scheduler"></div>
     <script id="tooltip-template" type="text/x-kendo-template">
       <div>Events: </div>
@@ -6420,6 +6460,7 @@ The type of the view. The built-in views are: "day", "week", "workWeek", "month"
 Enables the DOM virtualization for vertical grouping of the view - renders batches of DOM elements as you scroll. The views that support this option are: "day", "week", "workWeek", "month".
 
 #### Example
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6467,6 +6508,7 @@ Enables the DOM virtualization for vertical grouping of the view - renders batch
 Sets the working days (index based).
 
 #### Example - set the workDays of the scheduler
+
     <div id="scheduler"></div>
     <script>
       $("#scheduler").kendoScheduler({
@@ -6545,6 +6587,7 @@ The end of working week (index based).
 The width of the widget. Numeric values are treated as pixels.
 
 #### Example - set the width of the scheduler
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6566,6 +6609,7 @@ The width of the widget. Numeric values are treated as pixels.
 Sets the start of the work day when the  "Show business hours" button is clicked.
 
 #### Example - set the workDayStart of the scheduler
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6587,6 +6631,7 @@ Sets the start of the work day when the  "Show business hours" button is clicked
 Sets the working days (index based).
 
 #### Example - set the workDays of the scheduler
+
     <div id="scheduler"></div>
     <script>
       $("#scheduler").kendoScheduler({
@@ -6614,6 +6659,7 @@ Sets the working days (index based).
 Sets the end of the work day when the  "Show business hours" button is clicked.
 
 #### Example - set the workDayEnd of the scheduler
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6689,6 +6735,7 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
 > Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/scheduler/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6703,6 +6750,7 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
     </script>
 
 #### Example - update a data item in the data source
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6722,6 +6770,7 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
     </script>
 
 #### Example - remove a data item from the data source
+
     <button id="remove">Remove</button>
     <div id="scheduler"></div>
     <script>
@@ -6754,26 +6803,26 @@ The resources of the widget. Configured via the [resources](/api/javascript/ui/s
 The [Calendar widget](/api/javascript/ui/calendar) of the Scheduler. The toolbar Calendar widget allows navigation directly to the chosen date. It will only be available after it has been opened for the first time.
 
 #### Example - get the Calendar selected value
+
     <input type="button" class="k-button" value="Click to get Calendar" id="btn"/>
-	<div id="scheduler"></div>
+	  <div id="scheduler"></div>
 
-	<script>
-	  $("#scheduler").kendoScheduler({
-		date: new Date("2013/6/6")
-	  });
-
-	  $('#btn').on('click', function() {
-		var scheduler = $("#scheduler").getKendoScheduler();
-		var calendar = scheduler.calendar;
-
-		if (!calendar) {
-			alert("Calendar is yet not initialized.");
-		} else {
-			alert("Current date in calendar: " + calendar.value());
-		}
-	  });
-	</script>
-
+	  <script>
+	    $("#scheduler").kendoScheduler({
+	  	date: new Date("2013/6/6")
+	    });
+  
+	    $('#btn').on('click', function() {
+	  	var scheduler = $("#scheduler").getKendoScheduler();
+	  	var calendar = scheduler.calendar;
+  
+	  	if (!calendar) {
+	  		alert("Calendar is yet not initialized.");
+	  	} else {
+	  		alert("Current date in calendar: " + calendar.value());
+	  	}
+	    });
+	  </script>
 
 ## Methods
 
@@ -6788,6 +6837,7 @@ Adds a new scheduler event and opens the edit form.
 The object containing the scheduler event fields.
 
 #### Example - add a new event
+
     <button id='addEvent'>Add New Event</button>
     <div id="scheduler"></div>
     <script>
@@ -6808,6 +6858,7 @@ The object containing the scheduler event fields.
 Cancels the scheduler event editing. Closes the edit form.
 
 #### Example - cancel editing
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6823,6 +6874,7 @@ Cancels the scheduler event editing. Closes the edit form.
 Gets currently expanded scheduler events.
 
 #### Example - add a new event
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6839,7 +6891,7 @@ Gets currently expanded scheduler events.
 
     scheduler.saveEvent();
     //get second occurrence
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
     setTimeout(function(){
         console.log(scheduler.data()[1]);
     })
@@ -6913,6 +6965,7 @@ Opens the specified scheduler event in the edit form.
 The event which should be put in edit mode. Also accepts a string which is the `uid` of the event which should be edited.
 
 #### Example - edit an event
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -6958,6 +7011,7 @@ The `uid` of the occurrence to look for.
 `kendo.data.SchedulerEvent` the occurrence instance. Returns `undefined` if an occurrence with the specified uid is not found.
 
 #### Example - get an occurrence from a recurring series
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7005,6 +7059,7 @@ The end date of the period.
 > All recurring events within the start - end period will be returned in the list.
 
 #### Example - get a list of occurrences
+
     <div id="scheduler"></div>
     <script>
       $("#scheduler").kendoScheduler({
@@ -7065,6 +7120,7 @@ Removes the specified scheduler event.
 The event which should be removed. Also accepts a string which is the `uid` of the event which should be removed.
 
 #### Example - remove an event
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7098,6 +7154,7 @@ Get the relevant resources for a given slot.
 `Object` The relevant resources.
 
 #### Example - get the relevant resources
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7168,6 +7225,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 Saves the scheduler event which is open in the edit form and closes it.
 
 #### Example - save a new event
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7211,6 +7269,7 @@ The end time in which the selection of the slots ends. If 'events' argument is p
 Allows selection of slots in day and time slots of the view (applicable in day/week/workweek views).
 
 #### Example - select event
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7248,6 +7307,7 @@ Sets the data source of the widget.
 The data source to which the widget should be bound.
 
 #### Example - set the data source
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7286,6 +7346,7 @@ The vertical position.
 `Object` The time slot.
 
 #### Example - get slot and it's startDate and endDate
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7313,6 +7374,7 @@ Get the time slot from given element.
 `Object` The time slot.
 
 #### Example - save a new event
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7375,6 +7437,7 @@ The name of the current view. Can be used for refreshing the current view data.
 `String` the name of the current scheduler view.
 
 #### Example - change scheduler options and refresh the view
+
     <div id="scheduler"></div>
     <script>
       $("#scheduler").kendoScheduler({
@@ -7424,6 +7487,7 @@ If invoked prevents the add action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "add" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7493,6 +7557,7 @@ If invoked prevents the cancel action. The scheduler event remains in edit mode.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "cancel" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7581,6 +7646,7 @@ The resources for the slot if resource grouping is enabled.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "change" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7647,6 +7713,7 @@ The event handler function context (available via the `this` keyword) will be se
 The widget instance which fired the event.
 
 #### Example - subscribe to the "dataBinding" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7704,6 +7771,7 @@ The event handler function context (available via the `this` keyword) will be se
 The widget instance which fired the event.
 
 #### Example - subscribe to the "dataBound" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7773,6 +7841,7 @@ If invoked prevents the edit action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "edit" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7838,6 +7907,7 @@ If invoked prevents the move action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "moveStart" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -7915,6 +7985,7 @@ The slot's end date.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "move" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8008,6 +8079,7 @@ The resources for the slot if resource grouping is enabled.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "moveEnd" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8088,6 +8160,7 @@ If invoked, prevents the action.
 The widget instance, which fired the event.
 
 #### Example - subscribe to the "navigate" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8213,6 +8286,7 @@ If invoked prevents the remove action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "remove" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8278,6 +8352,7 @@ If invoked prevents the resize action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "resizeStart" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8359,6 +8434,7 @@ If invoked prevents the resize action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "resize" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8448,6 +8524,7 @@ If invoked prevents the resize action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "resizeEnd" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -8517,6 +8594,7 @@ If invoked prevents the save action.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "save" event during initialization
+
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({

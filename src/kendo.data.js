@@ -4209,7 +4209,7 @@ export const __meta__ = {
                     return item.uid === model.uid;
                 });
 
-                if (!modelIsInView) {
+                if (!modelIsInView && (model.index || model.id === null)) {
                     result.data.splice(model.index, 0, that._isGrouped() ? that._wrapInEmptyGroup(model) : model);
                     result.total++;
                 }

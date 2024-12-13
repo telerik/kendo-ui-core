@@ -379,6 +379,7 @@ Defines a kendo template that will be used as the card header inside the popover
           $("#target").kendoPopover({
             header: "Header content",
             body: "Content description"
+          });
         });
     </script>
 

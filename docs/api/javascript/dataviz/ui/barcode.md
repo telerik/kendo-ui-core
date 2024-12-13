@@ -121,7 +121,7 @@ The height of the barcode in pixels.  By default the height is 100.
       type: "ean13",
       value: "123456789987",
       color: "#10c4b2",
-      width: 300
+      height: 300
     });
     </script>
 
@@ -309,7 +309,7 @@ If set to false the barcode will not display the value as a text below the barco
       text:{
         visible: false
       },
-      height:200
+      height: 300
     });
     </script>
 

@@ -181,12 +181,12 @@ For an interactive example using the [`Stock Chart`](https://docs.telerik.com/ke
                 field: "Close"
               },
               select: {
-                from: "2011/12/01",
-                to: "2011/12/31"
+                from: "2023/12/01",
+                to: "2023/12/31"
               },
               categoryAxis: {
-                max: "2011/12/31",
-                min: "2011/01/01"
+                max: "2023/12/31",
+                min: "2023/01/01"
               }
             }
           });

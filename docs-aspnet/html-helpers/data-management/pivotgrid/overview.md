@@ -29,6 +29,8 @@ The PivotGrid represents multidimensional data in a cross-tabular format.
 * [Demo page for the PivotGrid TagHelper](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
 {% endif %}
 
+> The new PivotGridV2 is now available. It offers a brand new design and a new future-proof architecture that allows the implementation of many upcoming functionalities. As PivotGridV2 aims to replace the legacy PivotGrid, it is recommended to use the PivotGridV2 in your new projects. For information about the differences between the PivotGrid and PivotGridV2, refer to the [Comparison]({% slug htmlhelpers_pivotgridv2_aspnetcore_comparison %}) article.
+
 ## Basic Configuration
 
 To configure the PivotGrid for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/olap/msmdpump.dll`, follow the next steps:
