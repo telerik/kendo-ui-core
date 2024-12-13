@@ -113,8 +113,8 @@ To maintain the navigator settings after it was zoomed in or out:
             field: "Close"
           },
           select: {
-            from: "2009/02/05",
-            to: "2011/10/07"
+            from: "2021/02/05",
+            to: "2023/10/07"
           }
         }
       });
