@@ -225,6 +225,22 @@ declare namespace kendo {
     function widgetInstance(element: JQuery, suite?: typeof kendo.mobile.ui): kendo.ui.Widget;
     function widgetInstance(element: JQuery, suite?: typeof kendo.dataviz.ui): kendo.ui.Widget;
 
+    interface MediaQueryListEvent {
+        isTrusted: boolean;
+        bubbles: boolean;
+        cancelBubble: boolean;
+        composed: boolean;
+        currentTarget: JQuery;
+        defaultPrevented: boolean;
+        eventPhase: number;
+        matches: boolean;
+        media: string;
+        returnValue: boolean;
+        srcElement: MediaQueryList;
+        target: MediaQueryList;
+        timeStamp: number;
+        type: string;
+    }
     interface MediaQueryHandler {
         mediaQueryList: MediaQueryList;
         onChange(callback: (e: MediaQueryListEvent) => void): MediaQueryHandler;
@@ -8583,6 +8599,7 @@ declare namespace kendo.ui {
         groupHeaderTemplate?: string|Function | undefined;
         messages?: OrgChartMessages | undefined;
         template?: string|Function | undefined;
+        noData?: boolean | undefined;
         cancel?(e: OrgChartCancelEvent): void;
         change?(e: OrgChartChangeEvent): void;
         create?(e: OrgChartCreateEvent): void;

@@ -3030,7 +3030,7 @@ export const __meta__ = {
                 }
             } else if (that.isFiltered() || that._skipUpdate || that._emptySearch) {
                 that.focus(0);
-                if (that._skipUpdate) {
+                if (that._skipUpdate || (that._emptySearch && that._selectedIndices.length)) {
                     that._skipUpdate = false;
                     that._selectedIndices = that._valueIndices(that._values, that._selectedIndices);
                 }

@@ -186,6 +186,7 @@ export const __meta__ = {
 
         hide: function() {
             if (this.popup) {
+                this._shown = false;
                 this.popup.close();
             }
         },
