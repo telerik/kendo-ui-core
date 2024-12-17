@@ -23,10 +23,10 @@ https://netcorerepl.telerik.com/
 
 Using this tool, you can demonstrate the issue in a live sample with several simple steps. Here is a sample process with a Grid and its Data Binding functionality.
 
-1. Open the tool's web site:
+* Open the tool's web site:
 https://netcorerepl.telerik.com/
 
-2. Add a Model class definition:
+* Add a Model class definition:
 ```C#
 @using System.ComponentModel.DataAnnotations;
 
@@ -44,7 +44,7 @@ https://netcorerepl.telerik.com/
 }
 ```
 
-3. Add the logic from your controller action :
+* Add the logic from your controller action :
 ```C#
 @{
         // this part simulates Controller Read Action 
@@ -60,7 +60,7 @@ https://netcorerepl.telerik.com/
 }
 ```
 
-4. Add the Grid definition, but instead of Read, use the BindTo property:
+* Add the Grid definition, but instead of Read, use the BindTo property:
 ```Razor
 @(Html.Kendo().Grid<OrderViewModel>()
     .Name("Grid")
@@ -69,7 +69,6 @@ https://netcorerepl.telerik.com/
             columns.Bound(p => p.OrderID).Filterable(false);
             columns.Bound(p => p.Freight);
             columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
-            columns.Bound(p => p.ShipName);
             columns.Bound(p => p.ShipName);
             columns.Bound(p => p.Active);
     })
@@ -89,18 +88,18 @@ https://netcorerepl.telerik.com/
 )
 ```
 
-5. Click Run and ensure the sample is working as expected:
+* Click Run and ensure the sample is working as expected:
 
 ![REPL Result](images/repl-result.png)
 
-6. Modify the sample to reproduce the issue you are facing.
+* Modify the sample to reproduce the issue you are facing.
 
-7. Click the "Share Snippet" button to generate a new URL of the REPL sample and send it in the ongoing thread:
+* Click the "Share Snippet" button to generate a new URL of the REPL sample and send it in the ongoing thread:
 
 ![REPL Share](images/repl-share.png)
 
 Here is a link with the REPL of the entire sample:
-https://netcorerepl.telerik.com/mIPckNvk57VISrJ323
+https://netcorerepl.telerik.com/mSPclqOs53C10jIx47 
 
 ## See Also
 
