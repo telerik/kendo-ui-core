@@ -164,13 +164,13 @@ The action method which renders the view that contains the Grid may need additio
 
     ![{{ site.product_short }} A new entity data model](../images/grid-entity-data-model.png)
 
-1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
+1.  Pick the **EF Designer from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    ![{{ site.product_short }} Choosing the connection](../images/grid-entity-data-model.png)
+    ![{{ site.product_short }} Choosing the connection](../images/grid-binding-choose-data-connection.png)
 
 1. Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-binding-choose-database-objects.png)
 
 1. Open **HomeController.cs** and modify the `Index` action method.
 
@@ -183,6 +183,63 @@ The action method which renders the view that contains the Grid may need additio
             return View();
         }
 
+1. Modify the `Create` method as demonstrated in the following example.
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                productService.Create(product);
+
+                RouteValueDictionary routeValues = this.GridRouteValues();
+
+                return RedirectToAction("Index", routeValues);
+            }
+
+            return View("Index", productService.GetAll());
+        }
+
+1. Modify the `Update` method as demonstrated in the following example.
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Update(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                productService.Update(product);
+
+                RouteValueDictionary routeValues = this.GridRouteValues();
+
+                return RedirectToAction("Index", routeValues);
+            }
+
+            return View("Index", productService.GetAll());
+        }
+
+1. Modify the `Destroy` method as demonstrated in the following example.
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Destroy(int productID)
+        {
+            Product product = productService.GetAll().FirstOrDefault(p => p.ProductID == productID);
+
+            RouteValueDictionary routeValues;
+
+            if (product == null)
+            {
+                routeValues = this.GridRouteValues();
+
+                return RedirectToAction("Index", routeValues);
+            }
+
+            productService.Destroy(product);
+
+            routeValues = this.GridRouteValues();
+
+            return RedirectToAction("Index", routeValues);
+        }
+
 1. Add a Kendo UI Grid to the `Index` view.
 
     ```Razor
@@ -190,15 +247,27 @@ The action method which renders the view that contains the Grid may need additio
             .Name("grid")
             .Columns(columns =>
             {
-                // Create a column bound to the ProductID property.
                 columns.Bound(product => product.ProductID);
-                // Create a column bound to the ProductName property.
                 columns.Bound(product => product.ProductName);
-                // Create a column bound to the UnitsInStock property.
                 columns.Bound(product => product.UnitsInStock);
+                columns.Bound(product => product.Discontinued);
+                columns.Command(commands =>
+                {
+                    commands.Edit(); // The "edit" command will edit and update data items.
+                    commands.Destroy(); // The "destroy" command removes data items.
+                }).Title("Commands").Width(300);
             })
+            .ToolBar(commands => commands.Create())
             .Pageable() //Enable the paging.
             .Sortable() //Enable the sorting.
+            .DataSource(dataSource => dataSource
+                .Server()
+                // Specify that the ProductID property is the unique identifier of the model.
+                .Model(model => model.Id(p => p.ProductID))
+                .Create(create => create.Action("Create", "Home"))
+                .Update(update => update.Action("Update", "Home"))
+                .Destroy(destroy => destroy.Action("Destroy", "Home"))
+            )
         )
     ```
 

@@ -93,7 +93,7 @@ The Slider configuration options are passed as attributes. The following example
 
 * [Appearance]({% slug slider_appearance %})&mdash;Use different configuration settings that control the styling of the component.
 * [Events]({% slug events_slider %})&mdash;Handle the component events and implement any custom functionality.
-* [Accessibility](https://demos.telerik.com/{{ site.platform }}/slider/keyboard-navigation)&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug accessibility_aspnetcore_slider %})&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps
 
