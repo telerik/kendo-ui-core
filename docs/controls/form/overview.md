@@ -20,6 +20,8 @@ The Kendo UI Form component allows you to generate and manage forms. Through a v
 * [Groups]({% slug groups_form_widget %})&mdash;The Form provides an option to display its items in groups.
 * [Orientation]({% slug orientation_form_widget %})&mdash;You can configure the orientation of the component.
 * [Validation]({% slug validation_form_widget %})&mdash;The Form provides built-in validation.
+* [Buttons]({% slug buttons_form_widget %})&mdash;The Form enables you to alter the built-in Submit and Clear buttons.
+
 
 ## Next Steps 
 
