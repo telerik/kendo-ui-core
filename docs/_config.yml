@@ -706,6 +706,9 @@ cdnVersion: "2024.4.1112"
 ## The themes CDN used
 themesCdnVersion: "10.0.1"
 
+## The Pdfjs CDN version used
+pdfjsCdnVersion: "4.3.136"
+
 ## The MVC Core version used
 mvcCoreVersion: "2024.4.1112"
 
