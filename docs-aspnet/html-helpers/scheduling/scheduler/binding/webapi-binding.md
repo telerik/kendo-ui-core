@@ -1,23 +1,28 @@
 ---
 title: WebApi Binding
 page_title: WebApi Binding
-description: "Learn how to enable the WebAPI binding capabilities of the Telerik UI Scheduler for {{ site.framework }}."
+previous_url: /html-helpers/scheduling/scheduler/how-to/web-api-binding, /helpers/scheduling/scheduler/how-to/web-api-binding
+description: "Learn how to enable the Web API binding capabilities of the Telerik UI Scheduler for {{ site.framework }}."
 slug: htmlhelpers_scheduler_webapi_binding
 ---
 
-# WebAPI Binding
+# Web API Binding
 
-Web API is an application programming interface for a web application or server which utilizes the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) for communication. It enables you to make the server-side of the application more monolithic when it comes to establishing communication between clients and websites to have data access.
+Web API is an application programming interface for a web application or server that utilizes the [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) for communication. It enables you to make the server-side of the application more monolithic when it comes to establishing communication between clients and websites to have data access.
 
-For a runnable example, refer to the [demo on WebAPI binding of the Scheduler component](https://demos.telerik.com/{{ site.platform }}/scheduler/webapi).
+{% if site.core %}
+For a runnable example, refer to the [demo on Web API binding of the Scheduler component](https://demos.telerik.com/{{ site.platform }}/scheduler/webapi).
+{% else %}
+For a runnable example, refer to the [demo on Web API binding of the Scheduler component](https://demos.telerik.com/{{ site.platform }}/scheduler/webapi) or review the [ASP.NET MVC application](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerEditingWebApi) in the [UI for ASP.NET MVC Examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master)
+{% endif %}
 
 {% if site.mvc %}
 
-## Setting up the application for WebAPI Binding
+## Setting up the Application for Web API Binding
 
-To ensure that the application is configured for both Web API binding capabilities: 
+To ensure that the application is configured for Web API binding: 
 
-* Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
+* Configure the Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
 
   ```
     public class MvcApplication : System.Web.HttpApplication
@@ -30,7 +35,7 @@ To ensure that the application is configured for both Web API binding capabiliti
     }
   ```
 
-* Create a file named `WebApiConfig.cs` inside the `App_Start` folder and configure the default WebAPI routing convention.
+* Create a file named `WebApiConfig.cs` into the `App_Start` folder and configure the default Web API routing convention.
  
   ```
     public static class WebApiConfig
@@ -53,7 +58,7 @@ To ensure that the application is configured for both Web API binding capabiliti
 
 ## Adding a Web API Controller
 
-To support writing and reading data using WebAPI endpoints, the {% if site.core %} `ControllerBase` {%else%} `ApiController` {% endif %} base class needs to be inherited for a given controller instance.
+To support writing and reading data using Web API endpoints, the {% if site.core %} `ControllerBase` {%else%} `ApiController` {% endif %} base class needs to be inherited for a given controller instance.
 
 {% if site.core %}
 ```
@@ -220,9 +225,9 @@ public class TaskController : System.Web.Http.ApiController
 
 ## Configuring the Scheduler DataSource for Web API Binding
 
-To configure CRUD operations that support Web API Binding, explicitly add a `WebApi()` configuration method within the DataSource. {% if site.mvc %} From there, explicitly specify the WebAPI endpoints by using the `Url.HttpRouteUrl()` extension method. {% endif %}
+To enable the CRUD operations that support Web API Binding, explicitly add a `WebApi()` configuration method within the DataSource. {% if site.mvc %} Also, specify explicitly the Web API endpoints by using the `Url.HttpRouteUrl()` extension method. {% endif %}
 
-> Note that a unique identifier for both the `Update` and `Delete` operations is passed as a [`RouteValueDictionary`]{% if site.core %}(https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.routing.routevaluedictionary?view=aspnetcore-7.0){% else %}(https://learn.microsoft.com/en-us/dotnet/api/system.web.routing.routevaluedictionary?view=netframework-4.8.1){% endif %} which is then processed on the server-side {% if site.core %}through the [`HttpMethodAttribute`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute?view=aspnetcore-7.0).{% else %} as an Action Method argument.{% endif %}
+> Note that a unique identifier for both the `Update` and `Delete` operations is passed as a [`RouteValueDictionary`]{% if site.core %}(https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.routing.routevaluedictionary?view=aspnetcore-7.0){% else %}(https://learn.microsoft.com/en-us/dotnet/api/system.web.routing.routevaluedictionary?view=netframework-4.8.1){% endif %}, which is then processed on the server {% if site.core %}through the [`HttpMethodAttribute`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute?view=aspnetcore-7.0).{% else %} as an Action Method argument.{% endif %}
 
 {% if site.core %}
 ```HtmlHelper
@@ -327,7 +332,6 @@ To configure CRUD operations that support Web API Binding, explicitly add a `Web
 )
 ```
 {% endif %}
-
 
 ## See Also
 
