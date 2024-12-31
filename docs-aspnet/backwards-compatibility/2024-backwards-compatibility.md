@@ -105,16 +105,26 @@ The code is moved to the demo application, where it is used for demo purposes on
 * The `k-button-flat-primary` class is now replaced with `k-button-flat-base` class.
 * Added `k-prompt-view` and `k-prompt-popup`.
 
+**ComboBox**
+
+* The loading icon is now rendered as a separate `span` element with classes `k-input-loading-icon k-icon k-i-loading` before the button `k-input-button`.
+
 **ContextMenu**
 
 * The `k-widget` class is now removed.
 * The `k-menu-expand-arrow-icon` class has also been removed.
+* The `k-state-default` class is now removed.
+* The text of menu items is now wrapped in a `span` element with the `k-menu-link-text` class
 
 **DockManager**
 
 * Buttons in the vertical toolbar are now size `k-button-sm`, instead of `k-button-md`.
 * Unpinned pane has now class `k-pane-unpinned` instead of `k-pane-pinned`.
 * Pin and close button of not active TabStrip Tabs now have `k-button-flat-primary`, instead of `k-button-flat-base`.
+
+**DropDownList**
+
+* The loading icon is now rendered as a separate `span` element with classes `k-input-loading-icon k-icon k-i-loading` before the button `k-input-button`.
 
 **Grid**
 
@@ -127,6 +137,12 @@ The code is moved to the demo application, where it is used for demo purposes on
 * Removed `k-label` class from extra class on `k-pager-info`.
 * Removed `k-reorderable` class from `tbody` of a reorderable grid.
 * Removed `k-editable` class.
+* Use `k-grid-columnmenu-popup` instead of `k-columnmenu-popup`.
+
+**GridLayout**
+
+* The `k-widget` class has been removed.
+* The `k-justify-content-` classes were substituted with `k-justify-items-`.
 
 **ImageEditor**
 
@@ -161,6 +177,12 @@ The code is moved to the demo application, where it is used for demo purposes on
 * Changed `k-button-solid` to `k-button-flat` on the scroll buttons
 * Changed `k-button-solid-base` to `k-button-flat-base` on the scroll buttons
 * Added `k-menu-scroll-wrapper-vertical` to the `div.k-menu-scroll-wrapper` only when the orientation is vertical, not applicable for the horizontal orientation
+
+**PanelBar**
+
+* Removed wrong classes `k-level-0` and `k-panelbar-header` from child items.
+* Removed duplicate class `k-panelbar-item` on items initialized via Items(), which are not k-level-0.
+* Removed extra class `k-content` applied to `k-panelbar-content` div wrapper.
 
 **PDFViewer**
 
@@ -230,6 +252,21 @@ The Splitter has received a rendering update. As a result, the below classes hav
 * New `k-hidden` class has been added to the collapsed panes.
 
 Apart from that, we made changes in the positioning styles of the component. Until now, the panes had the `position:absolute` style. As of the 2024 Q4 release, the panes are positioned using flexbox.
+
+**Spreadsheet**
+
+* The tabs in the Spreadsheet are now rendered via [`Kendo Menu`](/api/javascript/ui/menu) instead of a [`Kendo TabStrip`](/api/javascript/ui/tabstrip).
+* The rendering of the SheetsBar at the bottom is unified with the rendering of a [`Kendo UI TabStrip`](/api/javascript/ui/tabstrip).
+* The `Add New Sheet` tool in the SheetsBar is now created from `<button>` element instead of `<a role="button"\>`.
+* The `Quick Access` section in the top toolbar is removed and the `Undo` and `Redo` buttons are moved in the Home tab.
+* The tools in the toolbar are now splitted into six separate tabs - File, Home, Insert, Format, Data and View.
+* Replaced `k-icon k-i-undo` with `k-icon k-i-reset`.
+* Replaced `k-icon k-i-redo` with `k-icon k-i-reload`.
+* Default values for `RowHeight` and `HeaderHeight` were set to 30 pixels.
+
+**StackLayout**
+
+* The `k-widget` class has been removed.
 
 **TabStrip**
 
