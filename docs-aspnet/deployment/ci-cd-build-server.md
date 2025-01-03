@@ -52,7 +52,7 @@ When using Azure pipelines, we encourage you to review the following resource on
 
 * That Service Connection is selected as the credentials source.
 
-* The credentials being used have a UI for ASP.NET Core license.
+* The credentials being used have a {{ site.product_short }} license.
 
 * Make sure that you use `dotnet restore` and not `nuget restore` in your pipeline step.
 

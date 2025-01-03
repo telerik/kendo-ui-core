@@ -2,6 +2,7 @@
 title: Restoring NuGet Packages in CI
 page_title: Restoring NuGet Packages in CI
 description: "Get started with {{ site.product }} and use NuGet Keys to authenticate with the Telerik NuGet server and restore packages in your CI or desktop environment."
+previous_url: /installation/nuget-keys
 slug: nuget_keys
 position: 10
 ---
@@ -55,7 +56,7 @@ There are two popular ways to use the Telerik NuGet server in a build:
 
 * [Using a nuget.config file with your projects](#using-a-nugetconfig-file-with-your-projects)
 
-* [Using only CLI commands](#using-only-cli-commands)
+* [Using only CLI commands](#using-only-cli-commands) (requires .NET Core 3.1 SDK or newer)
 
 For more information on how to use NuGet keys in a build, check the [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys) blog post by Lance McCarthy.
 
@@ -86,7 +87,7 @@ The exact steps to set the `MY_API_KEY` environment variable depend on your work
 
 ### Using Only CLI Commands
 
-You can use the CLI `add source` (or `update source`) command to set the credentials of a package source. This CLI approach is applicable if your CI system doesn't support default environment variable secrets or if you do not use a custom `nuget.config`.
+You can use the CLI `add source` (or `update source`) command to set the credentials of a package source. This CLI approach is applicable if your CI system doesn't support default environment variable secrets or if you do not use a custom `nuget.config`. Using the CLI requires installing .NET Core 3.1 SDK or newer. 
 
 * To set the credentials in Azure DevOps:
 
@@ -110,8 +111,8 @@ If you just start using the Telerik NuGet server in your CI or inter-department 
 
 ## See Also
 
-* [Set Up Private NuGet Feed for Azure](https://docs.telerik.com/aspnet-core/knowledge-base/setup-private-nuget-feed-azure)
+* [Set Up Private NuGet Feed for Azure](https://docs.telerik.com/{{ site.platform }}/knowledge-base/setup-private-nuget-feed-azure)
 
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 
-* [Scaffolding the Telerik UI for ASP.NET Core Project]({% slug scaffolding_aspnetcore %})
+* [Scaffolding the {{ site.product }} Project]({% slug scaffolding_aspnetcore %})
