@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: Deployment Overview
-description: Troubleshooting deployment issues involving the UI for ASP.NET Core suite.
+description: Troubleshooting deployment issues involving the {{ site.product_short }} suite.
 slug: deployment_overview
 position: 0
 ---
 
 # {{ site.product }} Deployment Overview
 
-This article explains the basics about deploying a UI for ASP.NET Core web application. It consists of the following sections:
+This article explains the basics about deploying a {{ site.product_short }} web application. It consists of the following sections:
 
 
 * [Prerequisites](#prerequisites)
@@ -20,14 +20,17 @@ This article explains the basics about deploying a UI for ASP.NET Core web appli
 
 First, make sure you can deploy an ASP.NET Core application without the Telerik components in order to have the entire pipeline working as a baseline.
 
-You can read more about deploying ASP.NET Core applications in MSDN - make sure that you are familiar with this information, as the Telerik UI for ASP.NET Core suite does not add any specific requirements or steps:
+You can read more about deploying {{ site.framework }} applications in MSDN - make sure that you are familiar with this information, as the {{ site.product }} suite does not add any specific requirements or steps:
 
-* [Host and deploy ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/?view=aspnetcore-5.0)
-
+{% if site.core %}
+* [Host and deploy ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/?view=aspnetcore-9.0)
+{% else %}
+* [Host and deploy ASP.NET MVC](https://learn.microsoft.com/en-us/aspnet/mvc/overview/deployment/)
+{% endif %}
 
 ## Telerik Components
 
-The Telerik UI for ASP.NET Core components consist of:
+The {{ site.product }} components consist of:
 * assembly - it is distributed through [NuGet]({%slug nuget_install_aspnetmvc6_aspnetmvc%}). You could find the list with the packages related to UI for ASP.NET Core [here]({% slug nuget_install_aspnetmvc6_aspnetmvc%}#list-of-provided-packages)
 * [client-side resources]({%slug copyclientresources_aspnetmvc6_aspnetmvc%}) - the required JavaScript and CSS files needed to run the components
 

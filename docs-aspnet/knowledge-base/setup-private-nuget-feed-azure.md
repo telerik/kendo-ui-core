@@ -1,10 +1,10 @@
 ---
 title: Setting Up a Private NuGet Feed for Azure
-description: An example on how to set up the private NuGet feed in Azure to publish an ASP.NET Core application that references the Telerik UI for ASP.NET Core assembly.
+description: An example on how to set up the private NuGet feed in Azure to publish an {{ site.framework }} application that references the {{ site.product }} assembly.
 page_title: Set Up Private NuGet Feed for Azure
 type: how-to
 slug: howto_setupprivatefeedazure_aspnetcore
-tags: aspnet, core, nuget, azure
+tags: aspnet, core, mvc, nuget, azure, artifacts
 res_type: kb
 ---
 
@@ -19,7 +19,7 @@ res_type: kb
 
 ## Description
 
-How can I set up the private NuGet feed in Azure to publish an ASP.NET Core application that references the Telerik UI for ASP.NET Core package?
+How can I set up the private NuGet feed in Azure to publish an {{ site.framework }} application that references the {{ site.product }} package?
 
 ## Solution
 
@@ -108,9 +108,14 @@ If you do not want pipelines to have unfettered access to the Telerik account ho
 
 1. You can get the NuGet package file (nupkg) for any Telerik product you're using by going to the downloads page for that product. You can start at the [My Account - Downloads](https://www.telerik.com/account/my-downloads) page.
 
-1. Underneath the installer for the product, you will find the *Other Setup Files* section where the nupkg files will be. For example, here's what it looks like for the [Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/introduction) packages.
+1. Select the {{ site.product }} product.
 
+1. Underneath the installer for the product, you will find the *Other Setup Files* section where the nupkg files will be. For example, here's what it looks like for the {{ site.product }} packages.
+    {% if site.core %}
     ![{{ site.product_short }} Download nupkg file](images/download-nupkg-file.png)
+    {% else %}
+    ![{{ site.product_short }} Download nupkg file](images/download-nupkg-file-mvc.png)
+    {% endif %}
 
 1. Go to the build pipeline and select that feed for a NuGet Restore step.
 
