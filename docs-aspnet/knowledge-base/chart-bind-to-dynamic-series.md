@@ -3,16 +3,29 @@ title: Bind Chart to Dynamic Series
 description: Learn how to bind a Telerik UI for {{ site.framework }} Chart to dynamic series.
 type: how-to
 page_title: Binding a Chart to dynamic series
-previous_url: html-helpers/charts/how-to/create-dynamic-series
+previous_url: /html-helpers/charts/how-to/create-dynamic-series, /helpers/charts/how-to/create-dynamic-series
 slug: chart-bind-to-dynamic-series
 tags: chart, databound, dynamic, series
 res_type: kb
 ---
 
-# Description
-How can I bind a Telerik UI for {{ site.framework }} Chart to dynamic series?
+## Environment
+	
+	<table>
+	 <tr>
+	  <td>Product</td>
+	  <td>{{ site.product }} Chart</td>
+	 </tr>
+	 <tr>
+	  <td>Product Version</td>
+	  <td>Created with version 2024.4.1112</td>
+	 </tr>
+	</table>
 
-# Example
+## Description
+How can I bind the Chart to dynamic series?
+
+## Example
 ```HtmlHelper
     @model TelerikAspNetCoreApp4.Models.MyViewModel
  
@@ -27,40 +40,6 @@ How can I bind a Telerik UI for {{ site.framework }} Chart to dynamic series?
              .Categories(new string[] { "A", "B", "C" })
           )
     )
-```
-
-```Controller
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            var model = new MyViewModel();
-            model.Categories.AddRange(new string[] { "A", "B", "C" });
-    
-            model.Series.Add(new MySeriesData()
-            {
-                Name = "Foo",
-                Stack = "A",
-                Data = new decimal[] { 1, 2, 3 }
-            });
-    
-            model.Series.Add(new MySeriesData()
-            {
-                Name = "Bar",
-                Stack = "A",
-                Data = new decimal[] { 2, 3, 4 }
-            });
-    
-            model.Series.Add(new MySeriesData()
-            {
-                Name = "Baz",
-                Stack = "B",
-                Data = new decimal[] { 10, 20, 30 }
-            });
-    
-            return View(model);
-        }
-    }
 ```
 
 {% if site.core %}
@@ -97,7 +76,41 @@ How can I bind a Telerik UI for {{ site.framework }} Chart to dynamic series?
 ```
 {% endif %}
 
-To see the full examples, refer to the GitHub repository of the [sample project on dynamic series](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartDynamicSeries).
+```Controller
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            var model = new MyViewModel();
+            model.Categories.AddRange(new string[] { "A", "B", "C" });
+    
+            model.Series.Add(new MySeriesData()
+            {
+                Name = "Foo",
+                Stack = "A",
+                Data = new decimal[] { 1, 2, 3 }
+            });
+    
+            model.Series.Add(new MySeriesData()
+            {
+                Name = "Bar",
+                Stack = "A",
+                Data = new decimal[] { 2, 3, 4 }
+            });
+    
+            model.Series.Add(new MySeriesData()
+            {
+                Name = "Baz",
+                Stack = "B",
+                Data = new decimal[] { 10, 20, 30 }
+            });
+    
+            return View(model);
+        }
+    }
+```
+
+To see the complete example, refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartDynamicSeries) in the [UI for ASP.NET MVC Examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master). {% if site.core %}You can use this as a starting point to configure the same setup in an ASP.NET Core project.{% endif %}
 
 ## More {{ site.framework }} Chart Resources
 

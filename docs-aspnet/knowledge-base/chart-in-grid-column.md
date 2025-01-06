@@ -1,24 +1,36 @@
 ---
-title: Using Chart in column of a Grid
-description: Learn how to use a Telerik UI for {{ site.framework }} Chart in a column of a Grid.
+title: Displaying Chart in a Column of a Grid
+description: Learn how to display a Telerik UI for {{ site.framework }} Chart in a column cell of a Telerik UI for {{ site.framework }} Grid.
 type: how-to
-page_title: Using a Chart in a column of a Grid
-previous_url: /helpers/charts/how-to/use-chart-in-ajax-grid-column, html-helpers/charts/how-to/howto_createchartinajaxgridcolumn_chartaspnetmvc
+page_title: Displaying Chart in a Column of a Grid
+previous_url: /helpers/charts/how-to/use-chart-in-ajax-grid-column, /html-helpers/charts/how-to/use-chart-in-ajax-grid-column
 slug: chart-in-grid-column
 tags: chart, grid, column, template
 res_type: kb
 ---
 
-# Description
-How can I use a Telerik UI for {{ site.framework }} Chart in a column of a Grid?
+## Environment
+	
+	<table>
+	 <tr>
+	  <td>Product</td>
+	  <td>{{ site.product }} Chart</td>
+	 </tr>
+	 <tr>
+	  <td>Product Version</td>
+	  <td>Created with version 2024.4.1112</td>
+	 </tr>
+	</table>
 
-# Solution
+## Description
+How can I initialize a Chart into a specified [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) column?
 
-1. Declare the Telerik UI for {{ site.framework }} Grid.
-1. Use column [`Templates`](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/templates/overview) for the columns of the Grid.
-1. Add the declarations for the Charts in the Templates.
-1. Use the [`DataBinding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databinding) and [`DataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) Events of the Grid.
-1. In the Event handlers, use the [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/destroy) and [`eval`](https://www.w3schools.com/jsref/jsref_eval.asp#:~:text=The%20eval()%20method%20evaluates,eval()%20executes%20the%20statements.) methods to render the Charts.
+## Solution
+
+1. Declare the Grid component.
+1. Use the [`Template()`](/api/kendo.mvc.ui.fluent/gridcolumnfactory#templatesystemstring) option of the Grid column to define the Charts.
+1. Handle the [`DataBinding`](/api/kendo.mvc.ui.fluent/grideventbuilder#databindingsystemstring) and [`DataBound`](/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) events of the Grid.
+1. Within the event handlers, call the [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy) method and the jQuery [`eval`](https://www.w3schools.com/jsref/jsref_eval.asp#:~:text=The%20eval()%20method%20evaluates,eval()%20executes%20the%20statements.) method to render the Charts. By design, the script tags are not automatically evaluated inside the Grid column template, so the scripts must be evaluated manually in the `DataBound` event of the Grid..
 
 
 ```HtmlHelper
@@ -66,42 +78,53 @@ How can I use a Telerik UI for {{ site.framework }} Chart in a column of a Grid?
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
-    @{ 
-        var categories = new string[] { "2000", "2001", "2002", "2003" };
-    }
 
-    <kendo-grid name="grid2" data-binding="onDataBinding" data-bound="onDataBound" >
+    @model IEnumerable<TelerikAspNetCoreApp26.Models.ViewModel>
+    
+    <kendo-grid name="grid" on-data-binding="onDataBinding" on-data-bound="onDataBound">
+        <columns>
+            <column field="ID" title="ID"></column>
+    
+            <column title="Chart Remote Data">
+                <column-template>
+                    <kendo-chart name="remote${data.ID}">
+                        <series-defaults type="ChartSeriesType.Column">
+                            <stack enabled="true" />
+                        </series-defaults>
+                        <datasource>
+                            <transport>
+                                <read type="post" url="@Url.Action("ReadChartData", "Home", new {id = "${data.ID}"})" />
+                            </transport>
+                        </datasource>
+                        <series>
+                            <series-item type="ChartSeriesType.Column" field="Value" category-field="Category" name="Value Series"></series-item>
+                            <series-item type="ChartSeriesType.Column" field="Value1" category-field="Category" name="Value1 Series"></series-item>
+                        </series>
+                        <tooltip template="#:category# - #: value #" visible="true"></tooltip>
+                    </kendo-chart>
+                </column-template>
+            </column>
+    
+            <column title="Chart Local Data">
+                <column-template>
+                    <kendo-chart name="local${data.ID}" class="chart-local">
+                        <series-defaults type="ChartSeriesType.Column">
+                            <stack enabled="true" />
+                        </series-defaults>
+                        <series>
+                            <series-item type="ChartSeriesType.Column" field="Value" category-field="Category" name="Value Series"></series-item>
+                            <series-item type="ChartSeriesType.Column" field="Value1" category-field="Category" name="Value1 Series"></series-item>
+                        </series>
+                    </kendo-chart>
+                </column-template>
+            </column>
+        </columns>
         <datasource type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false" data="@Model">
             <schema>
                 <model id="ID">
                 </model>
             </schema>
         </datasource>
-    
-        <columns>
-            <column field="ID" title="ID"></column>
-    
-            <column title="Chart Remote Data">
-                <column-template>
-                    <kendo-chart name="ID">
-                        <category-axis>
-                            <category-axis-item categories="categories">
-                            </category-axis-item>
-                        </category-axis>
-                        <series>
-                            <series-item type="ChartSeriesType.Bar"
-                                         name="Example Series"
-                                         data="new double[] { 200, 450, 300, 125 }">
-                            </series-item>
-                        </series>
-                        <chart-legend position="ChartLegendPosition.Bottom">
-                        </chart-legend>
-                        <chart-title text="Kendo Chart Example">
-                        </chart-title>
-                    </kendo-chart>
-                </column-template>
-            </column>
-        </columns>
     </kendo-grid>
 ```
 {% endif %}
@@ -133,7 +156,7 @@ How can I use a Telerik UI for {{ site.framework }} Chart in a column of a Grid?
   </style>
 ```
 
-For the complete implementation of the suggested approach [refer to the project on how to use a Chart in the ClientTemplate of a Grid column and bind the Chart based on the row data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartInGrid).
+For the complete implementation of the suggested approach, refer to [the project on how to use a Chart in the ClientTemplate of a Grid column and bind the Chart based on the row data](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChartInGrid). {% if site.core %}You can use this as a starting point to configure the same setup in an ASP.NET Core project.{% endif %}
 
 ## More {{ site.framework }} Chart Resources
 
