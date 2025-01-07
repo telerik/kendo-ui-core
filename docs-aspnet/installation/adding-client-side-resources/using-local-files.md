@@ -2,7 +2,7 @@
 title: Using Local Files
 page_title: Using Local Files
 description: "Learn how to add the Kendo client-side resources in a {{ site.product }} project by using local JavaScript and CSS files."
-previous_url: /installation-mvc/adding-client-side-resources/using-local-files
+previous_url: /installation-mvc/adding-client-side-resources/using-local-files, /how-to/use-with-aspnet-bundles
 slug: using_local_client_side_resources
 position: 3
 ---
