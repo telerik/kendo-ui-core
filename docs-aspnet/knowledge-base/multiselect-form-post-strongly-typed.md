@@ -1,12 +1,13 @@
 ---
-title: Use Strongly-Typed MultiSelect Posted with Form
-description: How to integrate and use a strongly-typed {{ site.product }} MultiSelect within an {{ site.product }} Form?
+title: Use Strongly Typed MultiSelect Posted through a Form
+description: Learn how to integrate and use a strongly typed {{ site.product }} MultiSelect within a form.
 type: how-to
-page_title: Use Strongly-Typed MultiSelect Posted with Form
+page_title: Use Strongly Typed MultiSelect Posted through a Form
+previous_url: /helpers/editors/multiselect/how-to/use-strongly-typed-posted-with-form, /html-helpers/editors/multiselect/how-to/use-strongly-typed-posted-with-form
 slug: multiselect-form-post-strongly-typed
-tags: multiselect, form, post, model, strongly-typed, strongly, typed 
+tags: multiselect, form, post, model, strongly-typed, strongly, typed, telerik, core, mvc
 res_type: kb
-component: MultiSelect
+component: multiselect
 ---
 
 ## Environment
@@ -15,23 +16,26 @@ component: MultiSelect
 	<tbody>
         <tr>
 			<td>Product</td>
-			<td>Progress® Telerik® UI MultiSelect for {{ site.product_short }}</td>
+			<td>{{ site.product }} MultiSelect</td>
+		</tr>
+		<tr>
+			<td>Product Version</td>
+			<td>Created with version 2024.4.1112</td>
 		</tr>
 	</tbody>
 </table>
 
 ## Description
 
-How to integrate and use a strongly-typed {{ site.product }} MultiSelect within a {{ site.product }} Form?
+How can I integrate and use a strongly typed MultiSelect editor in a form?
 
 ## Solution
 
-Using a strongly-typed variable means that the form is bound to a specific model. Rather than a loosely-typed structure like ViewBag. This approach ensures better type safety, validation, and maintainability. Here's how to implement it:
+Using a strongly typed variable means that the form is bound to a specific model rather than a loosely typed structure like `ViewBag`. This approach ensures better type safety, validation, and maintainability. Follow the next steps to implement it.
 
 1. Create ViewModels to store both the available items and the selected values that will be submitted.
-1. Configure and Bind the MultiSelect component to the model.
-1. Implement the Controller Action to populate the model with a list of  items. Handle form submissions, binding the user's selections back to the model.
-1. Process the Form Submission by accessing the selected values from the strongly-typed model in the controller.
+1. Configure and bind the MultiSelect component to the respective model property.
+1. Process the form submission by accessing the selected values from the strongly typed model on the server.
 
 {% if site.core %}
 ```HtmlHelper
@@ -124,7 +128,8 @@ Using a strongly-typed variable means that the form is bound to a specific model
      	};
  	}
 ```
-For the complete implementation on how to integrate and use a strongly-typed {{ site.product }} MultiSelect within a {{ site.product }} Form, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MultiSelectFormPostStronglyTyped).
+
+For the complete implementation of how to integrate and use the MultiSelect in a form, refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/MultiSelectFormPostStronglyTyped) in the [UI for ASP.NET MVC Examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master). {% if site.core %}You can use this application as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}
 
 ## More {{ site.framework }} MultiSelect Resources
 
@@ -151,5 +156,8 @@ For the complete implementation on how to integrate and use a strongly-typed {{ 
 
 * [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
 * [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/multiselect)
+{% endif %}
 * [Telerik UI for {{ site.framework }} Breaking Changes](https://docs.telerik.com/{{ site.platform }}/backwards-compatibility/overview)
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

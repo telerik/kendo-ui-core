@@ -3,11 +3,13 @@ title: Use MultiSelect as Filter in Grids
 description: How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.product }} Grid?
 type: how-to
 page_title: Use MultiSelect as Filter in Grids
+previous_url: /helpers/editors/multiselect/how-to/use-multiselect-filter-in-grids, /html-helpers/editors/multiselect/how-to/use-multiselect-filter-in-grids
 slug: grid-multiselect-as-filter
-tags: multiselect, grid, filter, items
+tags: multiselect, grid, filter, items, telerik, core, mvc
 res_type: kb
-component: Grid, MultiSelect
+component: grid, multiselect
 ---
+
 
 ## Environment
 
@@ -15,22 +17,28 @@ component: Grid, MultiSelect
 	<tbody>
         <tr>
 			<td>Product</td>
-			<td>Progress® Telerik® UI MultiSelect for {{ site.product_short }}</td>
+			<td>
+				{{ site.product }} MultiSelect, <br />
+				{{ site.product }} Grid
+			</td>
+		</tr>
+		<tr>
+			<td>Product Version</td>
+			<td>Created with version 2024.4.1112</td>
 		</tr>
 	</tbody>
 </table>
 
 ## Description
 
-How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.product }} Grid?
+How can I use the [MultiSelect]({% slug htmlhelpers_multiselect_aspnetcore %}) as a filter in the default column filter menu of the [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %})?
 
 ## Solution
 
-1. Configure the [`Grid Column Filterable UI API`](/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#uisystemstring) and pass the `multiselectFilter()` JavaScript function as a parameter.
-1. Implement the JavaScript function to disable the built-in filtration, define the MultiSelect [`dataSource`](/api/kendo.mvc.ui.fluent/multiselectbuilder#datasourcesystemaction), and extend the Grid’s [`dataSource filter()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter#filter) method.
-1. Define the `removeFiltersForField()` script to establish custom filtering logic.
-1. n the Controller, implement the filtering logic with the `GetMultiSelectFilter()` method and update the `Read` Action to support the MultiSelect filtering.
-
+1. Remove the second filter input in the default column filter menu using the [`Extra(false)`](/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#extrasystemboolean) option of the `Filterable` configuration.
+1. Use the [`UI`](/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#uisystemstring) option of the `Filterable` configuration and pass the name of the JavaScript function (`multiselectFilter`) that will create the MultiSelect.
+1. Within the `multiselectFilter` function, initialize the MultiSelect editor and remove the default DropDownList editor with jQuery. Also, handle the `submit` event of the column filter menu, prevent its default action, and filter the Grid based on the selected options in the MultiSelect.
+1. The Grid is configured for remote data binding, and all data operations are performed server-side. As a result, when you call the [`filter()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method of the DataSource, the filter expression will be sent to the server. Intercept the applied filters through the `request` object and filter the data as demonstrated in the `Read` action in the code snippet below.
 
 ```HtmlHelper
 	@(Html.Kendo().Grid<ViewModel>()
@@ -73,26 +81,27 @@ How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.produc
     </kendo-grid>
 ```
  {% endif %}
-```Script.js
+```JS
 	<script>
 		function multiselectFilter(element) {
 			element.removeAttr("data-bind");
-			var dataSource = $("#grid").data("kendoGrid").dataSource;
-			var multiselect = element.kendoMultiSelect({
+			var dataSource = $("#grid").data("kendoGrid").dataSource; // Access the Grid's DataSource.
+			var multiselect = element.kendoMultiSelect({ // Initialize the MultiSelect editor and specify its data.
 				dataSource: ["Tag1", "Tag2", "Tag3"]
 			}).data("kendoMultiSelect");
-			var form = element.closest("form");
-			var popup = form.data("kendoPopup");
-			form.find("[data-role=dropdownlist]").remove();
 
-			form.find("[type='submit']").click(function (e) {
-				e.preventDefault();
+			var form = element.closest("form"); // Select the form of the filter menu.
+			var popup = form.data("kendoPopup"); // Get a reference of the Popup component.
+			form.find("[data-role=dropdownlist]").remove(); // Remove the default DropDownList editor.
+
+			form.find("[type='submit']").click(function (e) { // Handle the "submit" event of the filter menu.
+				e.preventDefault(); // Prevent its default action.
 				e.stopPropagation();
-				var filter = dataSource.filter() || { logic: "and", filters: [] };
-				var tags = multiselect.value();
-				removeFiltersForField(filter, "Tags");
+				var filter = dataSource.filter() || { logic: "and", filters: [] }; // The current DataSource filters.
+				var tags = multiselect.value(); // Get the selected MultiSelect options.
+				removeFiltersForField(filter, "Tags"); // Remove duplicated filters, if any.
 				if (tags.length) {
-					filter.filters = filter.filters.concat($.map(tags, function (value) {
+					filter.filters = filter.filters.concat($.map(tags, function (value) { // Update the existing filters with the selected MultiSelect options.
 						return {
 							operator: "eq",
 							value: value,
@@ -100,11 +109,11 @@ How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.produc
 						}
 					}));
 				}
-				dataSource.filter(filter);
-				popup.close();
+				dataSource.filter(filter); // Filter the Grid (the Read request will be triggered).
+				popup.close(); // Close the column filter menu.
 			}).end()
 				.find("[type='reset']").click(function () {
-					multiselect.value([]);
+					multiselect.value([]); // Reset the MultiSelect when the "Clear" button is clicked.
 				});
 		}
 
@@ -123,36 +132,19 @@ How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.produc
 	</script>
 ```
 ```Controller
-	static List<ViewModel> data;
-	static HomeController()
+	public ActionResult Read([DataSourceRequest] DataSourceRequest request)
 	{
-		data = new List<ViewModel>()
+		List<object> tagFilters = new List<object>();
+		GetMultiSelectFilter(request.Filters, tagFilters, "Tags");
+		IQueryable<ViewModel> result = data.AsQueryable();
+		if (tagFilters.Any())
 		{
-			new ViewModel
-			{
-				ID = 1,
-				Tags = new List<string>(){"Tag1", "Tag2"}
-			},
-			new ViewModel
-			{
-				ID = 2,
-				Tags = new List<string>(){"Tag2", "Tag3"}
-			},
-			new ViewModel
-			{
-				ID = 3,
-				Tags = new List<string>(){"Tag3"}
-			}
-		};
+			result = result.Where(d => d.Tags.Any(t => tagFilters.Contains(t)));
+		}
+	
+		return Json(result.ToDataSourceResult(request));
 	}
-	
-	public ActionResult Index()
-	{
-		ViewBag.Message = "Welcome to ASP.NET MVC!";
-	
-		return View();
-	}
-	
+
 	private void GetMultiSelectFilter(IList<IFilterDescriptor> filters, List<object> result, String member)
 	{
 		for (int i = filters.Count - 1; i >= 0; i--)
@@ -169,21 +161,9 @@ How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.produc
 			}
 		}
 	}
-	
-	public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-	{
-		List<object> tagFilters = new List<object>();
-		GetMultiSelectFilter(request.Filters, tagFilters, "Tags");
-		IQueryable<ViewModel> result = data.AsQueryable();
-		if (tagFilters.Any())
-		{
-			result = result.Where(d => d.Tags.Any(t => tagFilters.Contains(t)));
-		}
-	
-		return Json(result.ToDataSourceResult(request));
-	}
 ```
-For the complete implementation on how to use a {{ site.product }} MultiSelect as a filter in the {{ site.product }} Grid, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridMultiSelectFilter).
+
+For the complete implementation of how to use the MultiSelect as a filter in a specified Grid column, refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridMultiSelectFilter) in the [UI for ASP.NET MVC Examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master). {% if site.core %}You can use this application as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}
 
 ## More {{ site.framework }} Grid Resources
 
@@ -223,7 +203,13 @@ For the complete implementation on how to use a {{ site.product }} MultiSelect a
 
 * [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)
+{% endif %}
 * [Client-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
 * [Server-Side API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/multiselect)
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the MultiSelect for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/multiselect)
+{% endif %}
 * [Telerik UI for {{ site.framework }} Breaking Changes](https://docs.telerik.com/{{ site.platform }}/backwards-compatibility/overview)
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
