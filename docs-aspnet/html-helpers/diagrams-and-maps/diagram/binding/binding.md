@@ -167,3 +167,6 @@ To create a network of visuals and customize the appearance of the Diagram, set 
 
 * [Basic Usage of the Diagram HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram)
 * [Server-Side API](/api/diagram)
+{% if site.core %}
+* [Diagram in Razor Pages]({% slug razorpages_diagramhelper_aspnetcore %})
+{% endif %}

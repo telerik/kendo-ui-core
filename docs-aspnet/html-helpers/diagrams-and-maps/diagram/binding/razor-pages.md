@@ -22,7 +22,6 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
 
 1. Setup CRUD URLs in the `DataSource` and `ConnectionsDataSource` along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
 
-
     ```HtmlHelper
         .DataSource(d => d
               .ShapeDataSource()
@@ -100,14 +99,14 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
     {% endif %}
 1. Add an AntiForgeryToken on top of the `RazorPage`.
 
-    ```
+    ```cshtml
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
 
 1. Send the AntiForgeryToken with each POST request of the page. Additional paratemers can also be supplied.
 
-    ```
+    ```javascript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -117,7 +116,7 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
 1. Within the `.cs` file, introduce ActionMethod for each of the CRUD operations.
 
 
-    ```
+    ```csharp
         public JsonResult OnPostReadShapes([DataSourceRequest] DataSourceRequest request)
         {
             return new JsonResult(DiagramShapes.ToDataSourceResult(request));
@@ -148,4 +147,8 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
 
 ## See Also
 
-* [Server-Side API](/api/diagram)
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Diagram](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram)
+* [Server-Side HtmlHelper API of the Diagram](/api/diagram)
+* [Server-Side TagHelper API of the Diagram](/api/taghelpers/diagram)
+* [Knowledge Base Section](/knowledge-base)

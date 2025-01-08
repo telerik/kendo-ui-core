@@ -12,83 +12,139 @@ Razor Pages is an alternative to the MVC pattern that makes page-focused coding 
 
 You can seamlessly integrate the Telerik UI AutoComplete for {{ site.framework }} in Razor Pages applications.
 
-This article showcases how to configure the AutoComplete component in a Razor Pages scenario.
+This article demonstrates how to configure the AutoComplete component in a Razor Pages scenario.
 
 For the complete project, refer to the [AutoComplete in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/AutoComplete).
 
 ## Getting Started
 
-In order to set up the AutoComplete component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
+To configure the `Read` operation of the AutoComplete DataSource within a Razor Pages application, follow the next steps:
 
-```tab-HtmlHelper(cshtml)        
+1. Specify the Read operation in the DataSource configuration. The URL must refer to the method name in the PageModel.
+
+```tab-HtmlHelper_Index.cshtml        
+    @page
     @model IndexModel
-
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
+    
+    <div>
+        @(Html.Kendo().AutoComplete()
+              .Name("autocomplete")
+              .DataTextField("ShipName")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:100%" })
+              .DataSource(ds => ds
+                  .Custom()
+                  .Transport(transport => transport
+                      .Read(r => r
+                          .Url("/Index?handler=Read").Data("dataFunction")
+                      ))
+                      .ServerFiltering(true)
+              )
+        )
+</div>
 
-    @(Html.Kendo().AutoCompleteFor(model => model.ShipName)
-            .DataTextField("ShipName")
-            .Filter("contains")
-            .MinLength(3)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataSource(ds => ds
-                .Custom()
-                .Transport(transport => transport
-                    .Read(r => r
-                        .Url("/AutoComplete/AutoCompleteCRUDOperations?handler=Read").Data("dataFunction")
-                    ))
-                    .ServerFiltering(true)
-                )
-    )
-    <script>
-
-        function dataFunction() {
-            var value = $("#autocomplete").val();
-            return {
-                __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
-                filterValue: value
-            };
-        }
-
-    </script>
 ```
 {% if site.core %}
-```TagHelper
-    <kendo-autocomplete for="ShipName"
-                        datatextfield="ShipName"
-                        filter="FilterType.Contains"
-                        min-length="3">
-        <datasource type="DataSourceTagHelperType.Custom"
-                    server-filtering="true">
-            <transport>
-                <read url="/AutoComplete/AutoCompleteCRUDOperations?    handler=Read" data="dataFunction" />
-            </transport>
-        </datasource>
+```tab-TagHelper_Index.cshtml
+    @page
+    @model IndexModel
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
     
-    </kendo-autocomplete>
+    <div>
+        <kendo-autocomplete name="autocomplete"
+                            datatextfield="ShipName"
+                            filter="FilterType.Contains"
+                            min-length="3">
+            <datasource type="DataSourceTagHelperType.Custom"
+                        server-filtering="true">
+                <transport>
+                    <read url="/Index?handler=Read" data="dataFunction" />
+                </transport>
+            </datasource>
+        </kendo-autocomplete>
+    </div>
+
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
-        public class IndexModel : PageModel
+
+2. Add an `AntiForgeryToken` at the top of the page to secure the requests.
+
+```cshtml
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+```
+
+3. Send the `AntiForgeryToken` with the Read request.
+
+```javascript
+    <script>
+        function dataFunction() {
+            return {
+                __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+                filterValue: $("#autocomplete").val()
+            };
+        }
+    </script>
+```
+
+You can also include additional parameters if needed:
+```javascript
+    <script>
+        function dataFunction() {
+            return {
+                __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+                filterValue: $("#autocomplete").val()
+            };
+        }
+    </script>
+
+```
+
+4. Add a handler method for the Read operation in the cshtml.cs file.
+
+```tab-Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
+        public static List<OrderViewModel> orders;
+
+        public void OnGet()
         {
-            [BindProperty]
-            public string ShipName { get; set; }
-            
-            public JsonResult OnGetRead(string filterValue)
+            if (orders == null)
             {
-                if (filterValue != null)
+                orders = new List<OrderViewModel>();
+
+                Enumerable.Range(1, 50).ToList().ForEach(i => orders.Add(new OrderViewModel
                 {
-                    //orders is the DBContext
-                    var filteredData = orders.Where(p => p.ShipName.Contains     (filterValue)); 
-                    return new JsonResult(filteredData);
-                }
-                return new JsonResult(orders);
+                    ShipName = "ship name " + i
+                }));
+
             }
         }
+
+        public JsonResult OnGetRead(string filterValue)
+        {
+            if (filterValue != null)
+            {
+                var filteredData = orders.Where(p => p.ShipName.Contains(filterValue));
+                return new JsonResult(filteredData);
+            }
+            return new JsonResult(orders);
+        }
+    }
 ```
 
 ## See Also
 
 * [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [DataBinding Overview]({% slug htmlhelpers_autocomplete_databinding_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the AutoComplete](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Server-Side HtmlHelper API of the AutoComplete](/api/autocomplete)
+{% if site.core %}
+* [Server-Side TagHelper API of the AutoComplete](/api/taghelpers/autocomplete)
+{% endif %}
+* [Knowledge Base Section](/knowledge-base)
 
