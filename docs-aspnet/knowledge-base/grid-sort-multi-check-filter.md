@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product Version</td>
-  <td>2022.3.913</td>
+  <td>2025 Q1</td>
  </tr>
  <tr>
   <td>Product</td>
@@ -47,6 +47,25 @@ How can I sort the multi-check items in the column filter menu of the {{ site.pr
     );
   });
 ```
+{% if site.core %}
+```TagHelper
+    <columns>
+        <column field="Details">
+            <filterable multi="true" search="true" check-all="true">
+                <datasource>
+                    <transport>
+                        <read url="@Url.Action("ReadFilterMenuItems", "Grid")" />
+                    </transport>
+                    <sorts>
+                        <sort field="Details" direction="desc" />
+                    </sorts>
+                </datasource>
+            </filterable>
+        </column>
+    </columns>
+```
+{% endif %}
+
 ```GridController
   public ActionResult ReadFilterMenuItems()
   {
@@ -66,7 +85,7 @@ How can I sort the multi-check items in the column filter menu of the {{ site.pr
 
 
 {% if site.core %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+* [{{ site.framework }} DataGrid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
 
@@ -84,5 +103,8 @@ How can I sort the multi-check items in the column filter menu of the {{ site.pr
 
 * [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
-* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)
+{% endif %}
+* [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2024%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

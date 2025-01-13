@@ -246,7 +246,7 @@ For a complete and autonomous example of the aforementioned approach, refer to t
 * [{{ site.framework }} Grid Demos](https://demos.telerik.com/aspnet-core/grid/index)
 
 {% if site.core %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+* [{{ site.framework }} DataGrid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
 
