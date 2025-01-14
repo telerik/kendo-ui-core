@@ -2211,7 +2211,7 @@ function pad(number, digits, end) {
             destProp;
 
         for (property in source) {
-            if (property === '__proto__' || property === 'constructor') {
+            if (property === '__proto__' || property === 'constructor' || property === 'prototype') {
                 continue;
             }
 

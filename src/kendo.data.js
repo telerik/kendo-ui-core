@@ -5781,6 +5781,12 @@ export const __meta__ = {
                 range.outerEnd = range.outerStart + rangeLength;
                 prevRange = range;
             }
+        },
+        isLocalTransport: function() {
+            return this.transport instanceof LocalTransport;
+        },
+        isRemoteTransport: function() {
+            return this.transport instanceof RemoteTransport;
         }
     });
 
