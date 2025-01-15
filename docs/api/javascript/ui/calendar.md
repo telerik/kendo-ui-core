@@ -784,6 +784,53 @@ Gets/Sets the selected dates for the calendar.
         calendar.selectDates([new Date(2016, 10,10), new Date()]);
     </script>
 
+### selectRange
+
+Gets/Sets the selected range for the calendar.
+
+#### Parameters
+
+##### range `Object`
+
+The range to set. It should have a start and end properties with the respective dates.
+
+#### Returns
+
+`Object` The selected range of the calendar. The object has a start and end properties.
+
+> **Important:** This method requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "range" option to be set.
+
+#### Example - gets the selected range for the widget
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            range: {
+                start: new Date(2018, 9, 10),
+                end: new Date(2018, 10, 10),
+                target: "start"
+            },
+            selectable: "range"
+        });
+
+        var calendar = $("#calendar").data("kendoCalendar");
+
+        var range = calendar.selectRange();
+    </script>
+
+#### Example - sets the range of the widget
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range"
+        });
+
+        var calendar = $("#calendar").data("kendoCalendar");
+
+        calendar.selectRange({ start: new Date(2018, 9, 10), end: new Date(2018, 10, 10), target: "start" });
+    </script>
+
 ### value
 
 Gets/Sets the value of the calendar.
