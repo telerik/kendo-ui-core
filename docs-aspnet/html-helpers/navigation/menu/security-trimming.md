@@ -2,7 +2,7 @@
 title: Security Trimming
 page_title: Security Trimming
 description: "Use the built-in security trimming functionality of the Telerik UI Menu component for {{ site.framework }}"
-previous_url: /helpers/navigation/menu/security-trimming
+previous_url: /helpers/navigation/menu/security-trimming, /helpers/navigation/menu/how-to/enable-security-trimming, /html-helpers/navigation/menu/how-to/enable-security-trimming
 slug: securitytrimming_menu_aspnetmvc
 position: 4
 ---

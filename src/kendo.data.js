@@ -3233,6 +3233,10 @@ export const __meta__ = {
             var that = this,
                 created = [],
                 updated = [],
+                destroyed;
+                that._destroyed = that._destroyed
+                    .filter(item => !item.hasOwnProperty("_isMoved"));
+
                 destroyed = that._destroyed;
 
             var promise = $.Deferred().resolve().promise();
@@ -3279,6 +3283,13 @@ export const __meta__ = {
                     if (that._isServerGroupPaged()) {
                         that.read();
                     }
+
+                    that.data().map(function(item) {
+                        if (item.hasOwnProperty("_isMoved")) {
+                            delete item._isMoved;
+                        }
+                        return item;
+                    });
                 });
             } else {
                 that._storeData(true);

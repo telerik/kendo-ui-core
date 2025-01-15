@@ -2838,10 +2838,10 @@ declare namespace kendo.ui {
         navigateToFuture(): void;
         navigateToPast(): void;
         navigateUp(): void;
+        selectRange(): any;
+        selectRange(range: CalendarRange): void;
         selectDates(): any;
         selectDates(dates: any): void;
-        range(): any;
-        range(range: CalendarRange): void;
         value(): Date;
         value(value: Date): void;
         value(value: string): void;
@@ -8298,7 +8298,7 @@ declare namespace kendo.ui {
         selectDates(): any;
         selectDates(dates: any): void;
         selectRange(): any;
-        selectRange(range: any): void;
+        selectRange(range: MultiViewCalendarRange): void;
         value(): Date;
         value(value: Date): void;
         value(value: string): void;

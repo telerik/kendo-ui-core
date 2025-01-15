@@ -164,75 +164,62 @@ The Grid allows you to specify a page [`TemplateId`](/api/kendo.mvc.ui.fluent/{{
 > To use a page template, you have to set the paper size.
 
 The Grid supports the following page template variables:
-* `pageNumber`
-* `totalPages`
 
-    ```HtmlHelper
-        <style>
-            body {
-                font-family: "DejaVu Serif";
-                font-size: 12px;
-            }
+* `pageNum`&mdash;Specifies the current page number.
+* `totalPages`&mdash;Specifies the total number of pages.
 
-            .page-template {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-            }
-
-            .page-template .header {
-                position: absolute;
-                top: 30px;
-                left: 30px;
-                right: 30px;
-
-                border-bottom: 1px solid #888;
-
-                text-align: center;
-                font-size: 18px;
-            }
-
-            .page-template .footer {
-                position: absolute;
-                bottom: 30px;
-                left: 30px;
-                right: 30px;
-            }
-        </style>
-
-        <script type="x/kendo-template" id="page-template">
-            <div class="page-template">
-                <div class="header">
-                    Acme Inc.
-                </div>
-                <div class="footer">
-                    <div style="float: right">Page #: pageNum # of #: totalPages #</div>
-                </div>
+```Template
+    <script type="x/kendo-template" id="page-template">
+        <div class="page-template">
+            <div class="header">
+                Acme Inc.
             </div>
-        </script>
-
-        @(Html.Kendo().Grid<.ProductViewModel>()
-            .Name("grid")
-            .ToolBar(tools => tools.Pdf())
-            .Pdf(pdf => pdf
-                .AllPages()
-                .PaperSize("A4")
-                .Margin("2cm", "1cm", "1cm", "1cm")
-                .Landscape()
-                .RepeatHeaders()
-                .Scale(0.75)
-                .TemplateId("page-template")
-            )
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .Read(read => read.Action("Products_Read", "Home"))
-            )
+            <div class="footer">
+                <div style="float: right">Page #: pageNum # of #: totalPages #</div>
+            </div>
+        </div>
+    </script>
+```
+```HtmlHelper
+    @(Html.Kendo().Grid<.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Pdf())
+        .Pdf(pdf => pdf
+            .AllPages()
+            .PaperSize("A4")
+            .Margin("2cm", "1cm", "1cm", "1cm")
+            .Landscape()
+            .RepeatHeaders()
+            .Scale(0.75)
+            .TemplateId("page-template")
         )
-    ```
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
+```
 {% if site.core %}
 ```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="pdf"></toolbar-button>
+        </toolbar>
+        <pdf all-pages="true" landscape="true" paper-size="A4" scale="0.75" 
+            repeat-headers="true"
+            template-id="page-template">
+            <grid-pdf-margin top="2" right="1" bottom="1" left="1"  />
+        </pdf>
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read","Home")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
+
+```Styles
     <style>
         body {
             font-family: "DejaVu Serif";
@@ -261,34 +248,7 @@ The Grid supports the following page template variables:
             right: 30px;
         }
     </style>
-
-    <script type="x/kendo-template" id="page-template">
-        <div class="page-template">
-            <div class="header">
-                Acme Inc.
-            </div>
-            <div class="footer">
-                <div style="float: right">Page #: pageNum # of #: totalPages #</div>
-            </div>
-        </div>
-    </script>
-    <kendo-grid name="grid">
-        <toolbar>
-            <toolbar-button name="pdf"></toolbar-button>
-        </toolbar>
-        <pdf all-pages="true" landscape="true" paper-size="A4" scale="0.75" 
-            repeat-headers="true"
-            template-id="page-template">
-            <grid-pdf-margin top="2" right="1" bottom="1" left="1"  />
-        </pdf>
-        <datasource type="DataSourceTagHelperType.Ajax">
-            <transport>
-                <read url="@Url.Action("Products_Read","Home")" />
-            </transport>
-        </datasource>
-    </kendo-grid>
 ```
-{% endif %}
 
 ## Using Server Proxy
 
