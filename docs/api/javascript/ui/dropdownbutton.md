@@ -228,9 +228,9 @@ Specifies a custom template for the menu items.
 The options that will be used for the popup initialization. For more details about the available options
 refer to [Popup](/api/javascript/ui/popup) documentation.
 
-### popup.appendTo `String`
+### popup.appendTo `String` *(default: document.body)*
 
-Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to. The element needs to be relatively positioned.
 
 ### rounded `String` *(default: 'medium')*
 

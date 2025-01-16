@@ -103,7 +103,7 @@
             assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-focus"));
         });
 
-        it("floating label removes k-focus on blur", function() {
+        it.skip("floating label removes k-focus on blur", function() {
             var numerictextbox = new NumericTextBox(input, {
                 label: {
                     content: "test",

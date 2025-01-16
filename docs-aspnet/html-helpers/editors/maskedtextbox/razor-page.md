@@ -16,22 +16,27 @@ This article describes how to configure the MaskedTextBox component in a Razor P
 
 For the complete project, refer to the [MaskedTextBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MaskedTextBox/MaskedTextBoxEditing.cshtml).
 
-## Getting Started
+## Binding the MaskedTextBox to a PageModel Property
 
-To bind the Telerik UI MaskedTextBox within a `RazorPage`:
+To bind the MaskedTextBox to a property from the `PageModel`, follow the next steps:
 
-1. Declare the `PageModel` at the top of the `RazorPage`:
+1. Declare the `PageModel` at the top of the page.
 
-
-    ```
+    ```C#
         @page
-        @model Telerik.Examples.RazorPages.Pages.MaskedTextBox.MaskedTextBoxEditingModel
+        @model IndexModel
     ```
 
 1. Declare the widget either in a form or as a stand-alone widget:
 
 
     ```HtmlHelper
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+
         <form method="post">
             <label for="phone_number">Phone number:</label>
             @(Html.Kendo().MaskedTextBoxFor(c=>c.PhoneNumber)
@@ -43,6 +48,13 @@ To bind the Telerik UI MaskedTextBox within a `RazorPage`:
     ```
     {% if site.core %}
     ```TagHelper
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        @addTagHelper *, Kendo.Mvc
+
         <form method="post">
             <label for="phone_number">Phone number:</label>
             <kendo-maskedtextbox for="PhoneNumber" mask="(999) 000-0000" >
@@ -56,14 +68,14 @@ To bind the Telerik UI MaskedTextBox within a `RazorPage`:
 1. Bind the property values in the backend:
 
     ```
-        public class MaskedTextBoxEditingModel : PageModel
+        public class IndexModel : PageModel
         {
             [BindProperty]
             public string PhoneNumber { get; set; }
 
             public void OnGet()
             {
-                //omitted for clarity
+                PhoneNumber = "555 123 4567"; // Assign value to the "PhoneNumber" property, if needed.
             }
 
             public void OnPost()
@@ -75,4 +87,9 @@ To bind the Telerik UI MaskedTextBox within a `RazorPage`:
 
 ## See Also
 
-* [Server-Side API](/api/maskedtextbox)
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the MaskedTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [Server-Side HtmlHelper API of the MaskedTextBox](/api/maskedtextbox)
+* [Server-Side TagHelper API of the MaskedTextBox](/api/taghelpers/maskedtextbox)
+* [Knowledge Base Section](/knowledge-base)
+

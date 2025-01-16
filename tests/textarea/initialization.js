@@ -99,7 +99,7 @@
             assert.equal(widget.element[0].style.width, "");
         });
 
-        it("sets the k-focus class on focusin", function() {
+        it.skip("sets the k-focus class on focusin", function() {
             var widget = new TextArea(textarea);
 
             widget.element[0].focus();

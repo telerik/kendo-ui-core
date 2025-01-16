@@ -1,7 +1,7 @@
 ---
 title:  Razor Pages
 page_title: Razor Pages
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MultiSelect component for {{ site.framework }} in a Razor Page using CRUD Operations."
+description: "Telerik UI MultiSelect for {{ site.framework }} in a RazorPages application."
 slug: htmlhelpers_multiselect_razorpage_aspnetcore
 position: 3
 ---
@@ -35,10 +35,11 @@ In order to set up the MultiSelect component bindings, you need to configure the
             .Transport(transport => transport
                 .Read(r => r
                     .Url("/MultiSelect/MultiSelectIndex?handler=Read").Data("forgeryToken")
-                ))
-                .ServerFiltering(false)
+                )
             )
+            .ServerFiltering(false)
         )
+    )
 
 	<script>
 		function forgeryToken() {
@@ -81,8 +82,94 @@ In order to set up the MultiSelect component bindings, you need to configure the
 		}
 ```
 
+## Binding the MultiSelect to a PageModel Property
+
+To bind the MultiSelect to a property from the `PageModel`, follow the next steps:
+
+1. Add a property to the `PageModel` that must bind to the MultiSelect.
+
+    ```Index.cshtml.cs
+        public class IndexModel : PageModel
+        {
+            public int[] Orders { get; set; }
+
+
+            public void OnGet()
+            {
+                Orders = new int[] { 2, 3 }; // Assign value to the "Orders" property, if needed.
+            }
+
+            public JsonResult OnGetRead()
+            {
+                var multiSelectData = new List<OrderViewModel>();
+                // Populate the collection with the MultiSelect data.
+                return new JsonResult(multiSelectData);
+            }
+        }
+    ```
+1. Declare the `PageModel` at the top of the page.
+
+    ```C#
+        @page
+        @model IndexModel
+    ```
+
+1. Bind the MultiSelect to the property using the `MultiSelectFor()` configuration.
+
+    ```HtmlHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        
+        @(Html.Kendo().MultiSelectFor(m => m.Orders)  
+            .DataTextField("ShipName")
+            .DataValueField("OrderID")
+            .DataSource(source =>
+            {
+                source.Read(read => read
+                    .Url("/Index?handler=Read").Data("forgeryToken"));
+            })
+        )
+
+        <script>
+            function forgeryToken(e) {
+                return kendo.antiForgeryTokens();
+            }
+        </script>
+    ```
+    ```TagHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-multiselect for="Orders"
+            datatextfield="ShipName" 
+            datavaluefield="OrderID">
+            <datasource>
+                <transport>
+                    <read url="/Index?handler=Read" data="forgeryToken"/>
+                </transport>
+            </datasource>
+        </kendo-multiselect>
+
+        <script>
+            function forgeryToken(e) {
+                return kendo.antiForgeryTokens();
+            }
+        </script>
+    ```
+
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [DataBinding Overview]({% slug htmlhelpers_multicolumncombobox_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the MultiSelect](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Server-Side HtmlHelper API of the MultiSelect](/api/multiselect)
+* [Server-Side TagHelper API of the MultiSelect](/api/taghelpers/)
+* [Knowledge Base Section](/knowledge-base)
+
 

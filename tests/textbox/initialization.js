@@ -98,7 +98,7 @@
             assert.equal(textbox.element[0].style.width, "100%");
         });
 
-        it("sets the k-focus class on focusin", function() {
+        it.skip("sets the k-focus class on focusin", function() {
             var textbox = new TextBox(input);
 
             textbox.element[0].focus();

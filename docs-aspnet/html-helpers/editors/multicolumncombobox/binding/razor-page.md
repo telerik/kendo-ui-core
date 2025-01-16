@@ -107,8 +107,88 @@ In order to set up the MultiColumnComboBox component bindings, you need to confi
     }
 ```
 
+## Binding the MultiColumnComboBox to a PageModel Property
+
+To bind the MultiColumnComboBox to a property from the `PageModel`, follow the next steps:
+
+1. Add a property to the `PageModel` that must bind to the MultiColumnComboBox.
+
+    ```Index.cshtml.cs
+        public class IndexModel : PageModel
+        {
+            [BindProperty]
+            public int OrderID { get; set; }
+
+            public void OnGet()
+            {
+                OrderID = 2; // Assign a value to the "OrderID" property, if needed.
+            }
+
+            public JsonResult OnGetRead()
+            {
+                var comboBoxData = new List<OrderViewModel>();
+                // Populate the collection with the ComboBox data.
+                return new JsonResult(comboBoxData);
+            }
+        }
+    ```
+1. Declare the `PageModel` at the top of the page.
+
+    ```C#
+        @page
+        @model IndexModel
+    ```
+
+1. Bind the MultiColumnComboBox to the property using the `MultiColumnComboBoxFor()` configuration.
+
+    ```HtmlHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        
+        @(Html.Kendo().MultiColumnComboBoxFor(m => m.OrderID)  
+            .DataTextField("ShipName")
+            .DataValueField("OrderID")
+            .DataSource(source =>
+            {
+                source.Read(read => read
+                    .Url("/Index?handler=Read").Data("forgeryToken"));
+            })
+        )
+    ```
+    ```TagHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-multicolumncombobox for="OrderID"
+            datatextfield="ShipName" 
+            datavaluefield="OrderID">
+            <datasource>
+                <transport>
+                    <read url="/Index?handler=Read" data="forgeryToken"/>
+                </transport>
+            </datasource>
+        </kendo-multicolumncombobox>
+    ```
+    ```JS
+        <script>
+            function forgeryToken(e) {
+                return kendo.antiForgeryTokens();
+            }
+        </script>
+    ```
+
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [DataBinding Overview]({% slug htmlhelpers_multicolumncombobox_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [Server-Side HtmlHelper API of the MultiColumnComboBox](/api/multicolumncombobox)
+* [Server-Side TagHelper API of the MultiColumnComboBox](/api/taghelpers/multicolumncombobox)
+* [Knowledge Base Section](/knowledge-base)
 

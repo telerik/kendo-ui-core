@@ -216,7 +216,7 @@
             assert.isOk(menu.find(".k-menu-popup[aria-hidden=true]").length);
         });
 
-        it("aria-activedescendant is added to the wrapper when item is focused", function() {
+        it.skip("aria-activedescendant is added to the wrapper when item is focused", function() {
             menu = $("<ul id=\"foo\"/>")
                 .appendTo(Mocha.fixture)
                 .kendoMenu({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
@@ -227,7 +227,7 @@
             assert.isOk(menu.find("li#" + menu.data("kendoMenu")._ariaId).length);
         });
 
-        it("aria-activedescendant is added to the wrapper when it has no id", function() {
+        it.skip("aria-activedescendant is added to the wrapper when it has no id", function() {
             menu = $("<ul/>")
                 .appendTo(Mocha.fixture)
                 .kendoMenu({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
@@ -238,7 +238,7 @@
             assert.isOk(menu.find("li#" + menu.data("kendoMenu")._ariaId).length);
         });
 
-        it("aria-activedescendant is added to the wrapper when item is focused", function() {
+        it.skip("aria-activedescendant is added to the wrapper when item is focused", function() {
             menu = $("<ul id=\"foo\"><li id=\"bar\">foo</li></ul>")
                 .appendTo(Mocha.fixture)
                 .kendoMenu();

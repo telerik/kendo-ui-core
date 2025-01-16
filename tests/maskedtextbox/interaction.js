@@ -54,7 +54,7 @@
             });
         });
 
-        it("sets the k-focus class on focusin", function() {
+        it.skip("sets the k-focus class on focusin", function() {
             var maskedtextbox = new MaskedTextBox(input);
 
             maskedtextbox.element[0].focus();

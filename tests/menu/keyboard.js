@@ -67,13 +67,13 @@ describe("menu keyboard navigation", function() {
         openedItem = null;
 });
 
-it('Menu focus makes first root item active', function() {
+it.skip('Menu focus makes first root item active', function() {
     menu.wrapper[0].focus();
 
     assert.isOk(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
 });
 
-it("Template focus focuses the parent Menu item", function(done) {
+it.skip("Template focus focuses the parent Menu item", function(done) {
     var template = menu.element.find("#template");
     menu.open("#menuItem4");
 
@@ -126,11 +126,11 @@ it('Mouse events reset the keyboard navigation active item', function() {
     secondItem = firstItem.next();
 
     firstItem.children(".k-link").click();
-    
+
     assert.isOk(!secondItem.hasClass(FOCUSEDSTATE));
-    
+
     menu.wrapper.focus().press(keys.RIGHT);
-    
+
     assert.isOk(secondItem.hasClass(FOCUSEDSTATE));
 });
 

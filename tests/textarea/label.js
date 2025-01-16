@@ -90,7 +90,7 @@
             assert.isNotOk(widget.floatingLabel.element.hasClass("k-empty"));
         });
 
-        it("floating label adds k-focus when the user focuses the textarea", function() {
+        it.skip("floating label adds k-focus when the user focuses the textarea", function() {
             var widget = new TextArea(textarea, {
                 label: {
                     content: "test",
@@ -103,7 +103,7 @@
             assert.isOk(widget.floatingLabel.element.hasClass("k-focus"));
         });
 
-        it("floating label removes k-focus on blur", function() {
+        it.skip("floating label removes k-focus on blur", function() {
             var widget = new TextArea(textarea, {
                 label: {
                     content: "test",

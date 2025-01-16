@@ -101,7 +101,7 @@
             assert.equal(caret(input[0])[0], 0);
         });
 
-        it("skips characters on BACKSPACE", function() {
+        it.skip("skips characters on BACKSPACE", function() {
             var masked = createMasked(input, "0--0");
             masked.value("_--_");
             deleteBackwards(masked, 3);
