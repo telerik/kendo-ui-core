@@ -50,7 +50,7 @@
     "merge2": "~0.3.6",
     "mocha": "^10.0.0",
     "require-dir": "~0.3.0",
-    "rollup": "^2.75.6",
+    "rollup": "^2.79.2",
     "rollup-plugin-polyfill": "^4.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-virtual": "^2.1.0",
