@@ -97,7 +97,7 @@ To achieve the desired scenario:
 * [{{ site.framework }} Grid Documentation]({%slug htmlhelpers_grid_aspnetcore_overview%})
 * [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
 {% if site.core %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+* [{{ site.framework }} DataGrid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
 {% else %}

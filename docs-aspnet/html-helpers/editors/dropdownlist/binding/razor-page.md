@@ -1,12 +1,13 @@
 ---
 title:  Razor Pages
-page_title: ASP.NET Core DropDownList Razor | Telerik UI for ASP.NET Core
+page_title: ASP.NET Core DropDownList Razor Pages | Telerik UI for ASP.NET Core
 description: "Find out how to configure the ASP.NET Core DropDownList component in a Razor Pages scenario."
 slug: htmlhelpers_dropdownlist_razorpage_aspnetcore
 position: 3
 ---
 
-# DropDownList in Razor Pages 
+# ASP.NET Core DropDownList in Razor Pages
+
 Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 You can seamlessly integrate the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
 This article describeshow to configure the DropDownList component in a Razor Pages scenario.

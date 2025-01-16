@@ -51,7 +51,7 @@ When using a Nested Component internally, the special symbols should be manually
 * [{{ site.framework }} Hierarchy Grid Demo](https://demos.telerik.com/{{ site.platform }}/grid/hierarchy)
 
 {% if site.core %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+* [{{ site.framework }} DataGrid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
 

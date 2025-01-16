@@ -16,6 +16,8 @@ This article describes how to configure the DropDownTree component in a Razor Pa
 
 For the complete project, refer to the [DropDownTree in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownTree/DropDownTreeIndex.cshtml).
 
+## Getting Started
+
 In order to set up the ComboBox component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
 ```tab-HtmlHelper(csthml)        
@@ -46,7 +48,6 @@ In order to set up the ComboBox component bindings, you need to configure the `R
 		}
 	</script>
 ```
-{% if site.core %}
 ```TagHelper
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -69,24 +70,90 @@ In order to set up the ComboBox component bindings, you need to configure the `R
 		}
 	</script>
 ```
-{% endif %}
-```tab-PageModel(cshtml.cs)       
 
-        public JsonResult OnGetDropDownTreeRead(int? id)
-        { 
-            var data = dbContext.Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
-                .Select(item => new {
-                    id = item.ID,
-                    Name = item.Name,
-                    hasChildren = item.HasChildren
-                });
+1. Add an `AntiForgeryToken` at the top of the page.
 
-            return new JsonResult(data);
+    ```
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+    ```
+	
+1. Send the `AntiForgeryToken` with the [Read, Create, Update, Destroy] request.
+
+    ```
+        <script>
+            function forgeryToken() {
+                return kendo.antiForgeryTokens();
+            }
+        </script>
+    ```
+
+    Additional parameters can also be supplied.
+
+    ```
+        <script>
+            function forgeryToken() {
+                return {
+                    __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+                    additionalParameter: "test"
+                }
+            }
+        </script>
+    ```
+
+## Binding the DropDownTree to a PageModel Property
+
+To bind the DatePicker to a property from the `PageModel`, follow the next steps:
+
+1. Add a property to the `PageModel` that must bind to the DateTimePicker.
+
+    ```Index.cshtml.cs
+        public class IndexModel : PageModel
+        {
+            [BindProperty]
+            public DateTime DateCreated { get; set; }
+
+            public void OnGet()
+            {
+                DateCreated = DateTime.Now; // Assign value to the "DateCreated" property, if needed.
+            }
         }
-```
+    ```
+1. Declare the `PageModel` at the top of the page.
+
+    ```C#
+        @page
+        @model IndexModel
+    ```
+
+1. Bind the DropDownTree to the property using the `DropDownTreeFor()` configuration.
+
+    ```HtmlHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().DropDownTreeFor(m => m.Employee))
+    ```
+    ```TagHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-dropdowntree for="Employee">
+        </kendo-datetimepicker>
+    ```
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [Data Binding Overview]({% slug htmlhelpers_dropdowntree_databinding_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the [ComponentName]](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Server-Side HtmlHelper API of the [ComponentName]](/api/dropdowntree)
+* [Server-Side TagHelper API of the [ComponentName]](/api/taghelpers/dropdowntree)
+* [Knowledge Base Section](/knowledge-base)
 

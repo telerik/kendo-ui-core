@@ -144,7 +144,7 @@ Get a reference to the Grid and call the [`read()`](https://docs.telerik.com/ken
 * [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
 
 {% if site.core %}
-* [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
+* [{{ site.framework }} DataGrid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiforcore%})
 
