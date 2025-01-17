@@ -6,7 +6,7 @@ slug: overview_rtlsupport_core
 position: 2
 ---
 
-# Right-to-Left Languages
+# Right-to-Left Support
 
 Right-to-left (RTL) support refers to the ability of a library, website, or application to handle and respond to users who communicate through a right-to-left language such as Arabic, Hebrew, Chinese or Japanese.
 

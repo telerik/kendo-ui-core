@@ -1075,7 +1075,6 @@ export const __meta__ = {
 
                         if (touch || allPointers || kendo.support.mouseAndTouchPresent) {
                             li.removeClass(HOVERSTATE);
-                            that._removeHoverItem();
                         }
                     } else {
                         e.preventDefault();

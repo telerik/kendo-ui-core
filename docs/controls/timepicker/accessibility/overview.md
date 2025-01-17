@@ -18,7 +18,7 @@ The TimePicker is accessible by screen readers and provides WAI-ARIA, Section 50
 Out of the box, the Kendo UI for jQuery TimePicker provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The TimePicker is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The TimePicker is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -31,6 +31,8 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | -------- | --------- | ----- |
 | `.k-input-inner` | `role=combobox` | The input element should follow the `combobox` specification. |
 |  | `label for` or `aria-label` or `aria-labelledby` | The input needs an accessible name to be assigned to it. |
+|  | `aria-required=true` | The attribute is rendered only when the TimePicker is in a `form` HTML element and announces the required state of the component. |
+|  | `aria-describedby=.k-form-hint id/.k-form-error id` | Points to the hint for the input, or if the input is invalid, to the error message. This attribute should only be present when a hint is set or when the input is invalid. |
 |  | `aria-expanded=true/false` | Announces whether the Popup is visible or not. |
 |  | `aria-controls=.k-animation-container id` | Points to the popup element. Signifies that the `combobox` element controls the `listbox` popup. |
 |  | `readonly` or `aria-readonly` | Attribute is rendered only when the DatePicker is readonly. |

@@ -20,7 +20,7 @@ The Slider is accessible by screen readers and provides WAI-ARIA, Section 508, W
 Out of the box, the Kendo UI for jQuery Slider provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The Slider is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The Slider is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -47,10 +47,10 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ### Slider Buttons
 
-
-When present, the Slider Buttons must implement the specification for the **Button** component.
-
-[Button accessibility specification]({{button_a11y_link}})
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-slider .k-button-decrease, .k-slider .k-button-increase` | `aria-hidden=true` | Hides the decrease/increase button elements and all their children from assistive technologies. |
+|  | `tabindex=-1` | Excludes the decorative decrease/increase buttons from the natural tab order of the page. |
 
 ## Resources
 

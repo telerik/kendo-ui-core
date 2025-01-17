@@ -18,7 +18,7 @@ The TreeView is accessible by screen readers and provides WAI-ARIA, Section 508,
 Out of the box, the Kendo UI for jQuery TreeView provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The TreeView is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The TreeView is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -40,7 +40,7 @@ If the tree supports the load-more functionality, the **Load More** button is re
 |  | `aria-setsize` | Announces the total count of the items at this level. Enables the user to understand the position of the navigation, for example, item 3 of 14. Must be added only when the load-more functionality of the tree is enabled and there are still nodes belonging to the group that are not loaded (rendered) yet. |
 |  | `aria-expanded=true/false` | Announces the expanded state of the node. The value is `true` when expanded, and `false` when collapsed. |
 |  | `aria-checked=true/false` | Rendered only when checkboxes are enabled. Announces the checked state of the node. If the checkbox is indeterminate, the value is `mixed`. |
-| `.k-treeview-item:has(.k-selected)` | `aria-selected=true` | Rendered only when selection is enabled. Announces the selected state of the node. |
+| `.k-treeview-item:has(> span > .k-selected, > div > .k-selected) ` | `aria-selected=true` | Rendered only when selection is enabled. Announces the selected state of the node. |
 | `.k-checkbox` | `role=none/presentation` | Added to the wrapper element of the checkbox to prevent duplicated information announced to the user. The checked state is controlled by `aria-checked`. |
 |  | `aria-hidden=true` | Added to the checkbox element to prevent duplicated information announced to the user. The checked state is controlled by `aria-checked`. |
 

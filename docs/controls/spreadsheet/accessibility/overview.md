@@ -18,7 +18,7 @@ The Spreadsheet is accessible by screen readers and provides WAI-ARIA, Section 5
 Out of the box, the Kendo UI for jQuery Spreadsheet provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The Spreadsheet is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The Spreadsheet is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -106,9 +106,9 @@ The Sheet area must implement the spec for a Grid component. The column header c
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-spreadsheet-sheet-add` | `role=button` | The add new sheet element is a button. |
-|  | `aria-label` or `title` | The add new sheet element must have a label as it does not have text content. |
-|  | `aria-controls=.k-tabstrip-items id` | Points to the `ul` element of the TabStrip that contains all tabs. Signifies that the `button` element controls the `tablist` one. |
+| `.k-spreadsheet-sheet-add:not(button)` | `role=button` | The add new sheet element is a button. |
+| `.k-spreadsheet-sheet-add` | `aria-label` or `title` | The add new sheet element must have a label as it does not have text content. |
+| `.k-spreadsheet-sheet-add` | `aria-controls=.k-tabstrip-items id` | Points to the `ul` element of the TabStrip that contains all tabs. Signifies that the `button` element controls the `tablist` one. |
 
 ### Menu sheet button
 

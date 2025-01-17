@@ -1,7 +1,7 @@
 ---
 title: Razor Pages
 page_title: Razor Pages
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI PanelBar component for {{ site.framework }} ."
+description: "Learn how to use the Telerik UI PanelBar component for {{ site.framework }} in a Razor Pages application with an example on how to configure its remote binding DataSource."
 slug: htmlhelpers_panelbar_razorpage_aspnetcore
 position: 5
 ---
@@ -15,6 +15,8 @@ You can seamlessly integrate the Telerik UI PanelBar for {{ site.framework }} in
 This article describes how to configure the PanelBar component in a Razor Pages scenario.
 
 For the complete project, refer to the [PanelBar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PanelBar/PanelBarRemoteDate.cshtml).
+
+## Getting Started
 
 In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel.
 
@@ -69,6 +71,10 @@ In order to set up the PanelBar component bindings, you need to configure the `R
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [DataBinding Overview]({% slug htmlhelpers_panelbar_databinding_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the PanelBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [Server-Side HtmlHelper API of the PanelBar](/api/panelbar)
+* [Server-Side TagHelper API of the PanelBar](/api/taghelpers/panelbar)
+* [Knowledge Base Section](/knowledge-base)
+
 

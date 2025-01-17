@@ -305,6 +305,19 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
 Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items`. Inherits [Kendo UI Toolbar](/api/javascript/ui/toolbar).
 
+### toolbar.contextMenu `Boolean` *(default: false)*
+
+When this option is set to true, the toolbar will render a dropdown button as its first item. The dropdown will contain the `open`, `download` and `print` tools instead of them being rendered on the right-side of the toolbar.
+
+    <div id="pdf-viewer"></div>
+    <script type="module">
+        $("#pdf-viewer").kendoPDFViewer({
+            toolbar: {
+                contextMenu: true
+            }
+        });
+    </script>
+
 ### toolbar.items `Array`
 
 The following list indicates the default tools:
@@ -317,6 +330,7 @@ The following list indicates the default tools:
 * `open`
 * `download`
 * `print`
+* `annotations`
 
 For DPL Processing `exportAs` tool could be configured to export a single page to `.png` or `.svg`.
 
@@ -454,6 +468,8 @@ Specifies the default file name used for `Download`.
 
 ### messages.toolbar `Object`
 Specifies the localization messages of the toolbar.
+
+### messages.toolbar.contextMenu `String`  *(default: "Menu")*
 
 ### messages.toolbar.open `String`  *(default: "Open")*
 

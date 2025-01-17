@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: "{{ site.product }} AutoComplete Documentation - AutoComplete Accessibility"
+page_title: AutoComplete Documentation | AutoComplete Accessibility
 description: "Get started with the {{ site.product }} AutoComplete and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_aspnetcore_autocomplete
 position: 1
@@ -8,31 +8,19 @@ position: 1
 
 # AutoComplete Accessibility
 
-The AutoComplete is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
-
 > According to [WAI-ARIA 1.1](https://www.w3.org/TR/wai-aria/#combobox) specification *"Authors must ensure an element with role combobox contains or owns a text input element with role textbox or searchbox..."*. Note, that in our implementation, the text input element is the one that has role="combobox", and does not contain another text input element. **This approach is valid for the [WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/#combobox) specification and also for the [WAI-ARIA 1.0](https://www.w3.org/TR/wai-aria/#combobox) specification .**
 >
 > As it is stated in [WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/#combobox) *"The Guidance for combobox has changed significantly in ARIA 1.2 due to problems with implementation of the previous patterns"*. Therefore, we will keep the current state, even if it contradicts the WAI-ARIA 1.1 specification.
 
-For more information, refer to:
-* [Keyboard navigation by the Telerik UI AutoComplete]({% slug keynav_aspnetcore_autocomplete %})
-* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
+Out of the box, the {{ site.product }} AutoComplete provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
-
-
-
-Out of the box, the Kendo UI for jQuery AutoComplete provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
-
-
-The AutoComplete is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The AutoComplete is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
-
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### AutoComplete Wrapping Element
-
 
 The following table summarizes the selectors and attributes supported by the AutoComplete wrapper element:
 
@@ -54,7 +42,6 @@ The following table summarizes the selectors and attributes supported by the Aut
 | `.k-disabled .k-input-inner` | `disabled=disabled` or `aria-disabled=true` | The attribute is rendered only when the AutoComplete is disabled. |
 
 ### Popup Listbox
-
 
 The popup element of the AutoComplete has to implement the WAI-ARIA specification for a Popup List component. The following table summarizes the selectors and attributes supported by the listbox popup of the AutoComplete:
 
@@ -80,18 +67,15 @@ The popup element of the AutoComplete has to implement the WAI-ARIA specificatio
 
 ## Section 508
 
-
-The AutoComplete is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
+The AutoComplete is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
 
 ## Testing
-
 
 The AutoComplete has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
-
 
 The AutoComplete has been tested with the following screen readers and browsers combinations:
 
@@ -101,14 +85,16 @@ The AutoComplete has been tested with the following screen readers and browsers 
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
 
+### Test Example
 
+To test the AutoComplete component, refer to the [AutoComplete Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/autocomplete).
 
-### Automated Testing
+## Keyboard Navigation
 
-The AutoComplete has been tested with [axe-core](https://github.com/dequelabs/axe-core).
+For details on how the AutoComplete keyboard navigation works, refer to the [AutoComplete Keyboard Navigation]({% slug keynav_aspnetcore_autocomplete %}) article.
 
 ## See Also
 
-* [Keyboard Navigation by the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/keyboard-navigation)
-* [Keyboard Navigation by the AutoComplete HtmlHelper for {{ site.framework }}]({% slug keynav_aspnetcore_autocomplete %})
-* [Accessibility in {{ site.product }}]({% slug compliance_accessibility %})
+* [Keyboard Navigation by the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/keyboard-navigation)
+* [Keyboard Navigation by the AutoComplete for {{ site.framework }}]({% slug keynav_aspnetcore_autocomplete %})
+* [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

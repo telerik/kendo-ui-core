@@ -59,6 +59,9 @@ To create the Sparklines, add the component tags to the view and provide it with
 
 * [Data binding]({% slug overview_sparklinesdatabinding_aspnetcore %})&mdash;You can bind the chart directly to a database.
 * [Axes configuration]({% slug axesconfig_sparklines_aspnetcore %})&mdash;You can customize the configuration of the axes.
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelper_sparkline_razorpages_aspnetcore %})
+{% endif %}
 
 ## See Also
 

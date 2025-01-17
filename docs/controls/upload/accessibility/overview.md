@@ -20,25 +20,30 @@ The Upload is accessible by screen readers and provides WAI-ARIA, Section 508, W
 Out of the box, the Kendo UI for jQuery Upload provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The Upload is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AAA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The Upload is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AAA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
+
+The Upload selected files list implements roving tabindex navigation. Meaning that only one file has tabindex=0.
+
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-upload` | `role=application` | Indicates that the role of the upload is `application`. The component implements single tab stop navigation strategy. Thus, the role is required to support arrow navigation. |
-| `.k-upload .k-upload-button` | `tabindex=0` | Assures that the button element inside the upload is the focusable element. |
-|  | `aria-disabled=true/false` | Announces the disabled state of the upload button. |
-| `.k-upload input` | `tabindex=-1` | Assures that the input element inside the upload is not focusable element. |
+| `.k-upload .k-upload-button` | `aria-disabled=true/false` | Announces the disabled state of the upload button. |
+|  | `aria-expanded=true/false` | Indicates whether the controlled list of files is present/visible |
+|  | `aria-controls=.k-upload-files id` | Creates the relationship between the button and the list of selected files when the list is present. Remove the attribute when list is not present. |
+| `.k-upload input` | `tabindex=-1` | Assures that the input element inside the upload is not focusable. |
 |  | `aria-hidden=true` | The input needs to be hidden from the readers. |
+| `.k-upload-files` | `role=list` | Explicitly sets the UL role to list because of https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns |
+|  | `id` | Unique and deterministic id linked to the button aria-controls attribute. |
+| `.k-upload-files .k-file` | `role=listitem` | Explicitly sets the LI role to listitem because of https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listitem_role#best_practices (note 2). |
+|  | `tabindex=0/-1` | The element should be focusable. Value should be changed dynamically based on the roving tabindex navigation. |
 | `.k-upload .k-file .k-file-validation-message` | `aria-live=polite` | Announces the change in the upload status of the file. |
-| `.k-upload .k-upload-actions .k-upload-action` | `aria-hidden=true.` | The list file action buttons must be hidden from the readers. |
+| `.k-upload .k-upload-actions .k-upload-action` | `aria-hidden=true` | The list file action buttons must be hidden from the readers. |
 |  | `tabindex=-1` | Assures that the list file action buttons are not focusable elements. |
-| `.k-upload .k-actions .k-button` | `role=button` or `nodeName=button` | Announces the purpose of the action button. |
-|  | `tabindex=0` | The action buttons are focusable through arrow navigation and tabbing through them. |
 
 ## Resources
 

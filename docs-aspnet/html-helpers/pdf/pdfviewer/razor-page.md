@@ -14,7 +14,11 @@ You can seamlessly integrate the Telerik UI PDFViewer for {{ site.framework }} i
 
 This article describes how to configure the PDFViewer component in a Razor Pages scenario.
 
+For the complete project, refer to the [PDFViewer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PDFViewer).
+
 ## PDFjs Processing
+
+> **Note:** Newer versions after 2024 R4 require pdf.js version 4+. More information you can find in the [PdfViewer HTMLHelper after the upgrade to pdf.js v4](https://github.com/telerik/kendo-ui-core/issues/8084) item.
 
 The following example demonstrates how to initialize the PDFViewer in RazorPage project by using [PDF.JS](https://mozilla.github.io/pdf.js/):
 
@@ -122,5 +126,8 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [PDFViewer Overview]({% slug htmlhelpers_pdfviewer_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the PdfViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Server-Side HtmlHelper API of the PdfViewer](/api/pdfviewer)
+* [Server-Side TagHelper API of the PdfViewer](/api/taghelpers/pdfviewer)
+* [Knowledge Base Section](/knowledge-base)

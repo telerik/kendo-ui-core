@@ -15,10 +15,10 @@ The PDFViewer is accessible by screen readers and provides WAI-ARIA, Section 508
 
 
 
-Out of the box, the Kendo UI for jQuery PDFViewer provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+Out of the box, the Kendo UI for jQuery PDF Viewer provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The PDFViewer is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The PDF Viewer is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -26,7 +26,7 @@ The PDFViewer is compliant with the [Web Content Accessibility Guidelines (WCAG)
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The PDFViewer component contains two inner elements - a toolbar and a page container.
+The PDF Viewer component contains two inner elements - a toolbar and a page container.
 
 [ToolBar accessibility specification]({{toolbar_a11y_link}})
 
@@ -42,19 +42,19 @@ The PDFViewer component contains two inner elements - a toolbar and a page conta
 ## Section 508
 
 
-The PDFViewer is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
+The PDF Viewer is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
 
 
-The PDFViewer has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
+The PDF Viewer has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
 
 
-The PDFViewer has been tested with the following screen readers and browsers combinations:
+The PDF Viewer has been tested with the following screen readers and browsers combinations:
 
 | Environment | Tool |
 | ----------- | ---- |

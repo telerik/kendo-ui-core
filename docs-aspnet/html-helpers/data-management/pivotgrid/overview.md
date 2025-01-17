@@ -138,4 +138,7 @@ To configure the PivotGrid for Ajax binding to an [Adventure Works](https://lear
 * [Server-Side API of the PivotGrid TagHelper](/api/taghelpers/pivotgrid)
 {% endif %}
 * [Client-Side API of the PivotGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid)
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_pivotgrid_razorpage_aspnetcore %})
+{% endif %}
 

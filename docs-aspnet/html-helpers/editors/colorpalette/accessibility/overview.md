@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ColorPalette Documentation - ColorPalette Accessibility
+page_title: ColorPalette Documentation | ColorPalette Accessibility
 description: "Get started with the {{ site.product }} ColorPalette and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_aspnet_colorpalette_widget
 position: 1
@@ -8,26 +8,57 @@ position: 1
 
 # ColorPalette Accessibility
 
-The ColorPalette is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+Out of the box, the {{ site.product }} ColorPalette provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
-For more information, refer to:
-* [Keyboard navigation by the {{ site.product }} ColorPalette]({% slug keynav_colorpalette_aspnet %})
-* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
+The ColorPalette is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in {{ site.product }}]({% slug overview_accessibility %}#wai-aria).
+This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-colorpalette` | `role=grid` | The focusable wrapper of the component must announce its role as a `grid`. |
+|  | `aria-label` or `aria-labelledby` | The component needs an accessible name to be assigned to it. Must also include the currently selected value in the component. |
+|  | `aria-activedescendant=.k-colorpalette-tile.k-focus id` | Points to the focused cell in the table. The focused cell is changed via keyboard navigation. |
+|  | `tabindex=0` | The element must be focusable. |
+| `.k-colorpalette.k-disabled` | `aria-disabled=true` | Attribute is rendered only when the ColorPalette is disabled. |
+| `.k-colorpalette-table` | `role=none/presentation` | Negates the default role of the element, as it is wrapped within a `role="grid"` element. |
+| `.k-colorpalette-table>tbody>tr` | `role=row` | Required as the semantic role of its parent `<table>` has been removed. |
+| `.k-colorpalette-tile` | `role=gridcell` | Required as the semantic role of its parent `<table>` has been removed. |
+|  | `aria-label` or `title` | The text representation of the color value for the current cell. |
+| `.k-colorpalette-tile.k-selected` | `aria-selected=true` | Present on the currently selected cell in the component. |
 
 ## Section 508
 
-The Colopalette is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in {{ site.product }}]({% slug overview_accessibility %}#section-508).
+The ColorPalette is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
 
-## WCAG 2.2
+## Testing
 
-The ColorPalette supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.2 compliance in {{ site.product }}]({% slug overview_accessibility %}#wcag-21)
+The ColorPalette has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
+
+> To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
+
+### Screen Readers
+
+The ColorPalette has been tested with the following screen readers and browsers combinations:
+
+| Environment | Tool |
+| ----------- | ---- |
+| Firefox | NVDA |
+| Chrome | JAWS |
+| Microsoft Edge | JAWS |
+
+### Test Example
+
+To test the ColorPalette component, refer to the [ColorPalette Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/colorpalette).
+
+## Keyboard Navigation
+
+For details on how the ColorPalette keyboard navigation works, refer to the [ColorPalette Keyboard Navigation]({%slug keynav_colorpalette_aspnet%}) article.
 
 ## See Also
 
-* [Keyboard Navigation by the ColorPalette (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/keyboard-navigation)
-* [Keyboard Navigation by the ColorPalette]({% slug keynav_colorpalette_aspnet %})
-* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
+* [Keyboard Navigation by the ColorPalette for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/keyboard-navigation)
+* [Keyboard Navigation by the ColorPalette for {{ site.framework }}]({% slug keynav_colorpalette_aspnet %})
+* [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

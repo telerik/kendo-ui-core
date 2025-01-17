@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: Telerik UI Charts for {{ site.framework }} Documentation - Keyboard Navigation
 description: "Get started with the Telerik UI Chart component and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_aspnetcore_charts
-position: 2
+position: 3
 ---
 
 # Keyboard Navigation

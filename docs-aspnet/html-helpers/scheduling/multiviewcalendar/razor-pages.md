@@ -1,10 +1,11 @@
 ---
 title: Razor Pages
 page_title: Razor Pages
-description: "Telerik UI MultiViewCalendar for {{ site.framework }} in a Razor Pages application."
+description: "Learn how to use the Telerik UI MultiViewCalendar for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_multiviewcalendar_aspnetcore
 position: 7
 ---
+
 
 # MultiViewCalendar in Razor Pages
 
@@ -15,6 +16,8 @@ You can seamlessly integrate the Telerik UI MultiViewCalendar for {{ site.framew
 This article describes how to configure the MultiViewCalendar component in a Razor Pages scenario.
 
 For the complete project, refer to the [MultiViewCalendar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MultiViewCalendar/MultiViewCalendarIndex.cshtml).
+
+## Getting Started
 
 ```tab-HtmlHelper(cshtml)
     @page
@@ -48,4 +51,8 @@ For the complete project, refer to the [MultiViewCalendar in Razor Pages example
 
 ## See Also
 
-* [Server-Side API](/api/multiviewcalendar)
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the MultiViewCalendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Server-Side HtmlHelper API of the MultiViewCalendar](/api/multiviewcalendar)
+* [Server-Side TagHelper API of the MultiViewCalendar](/api/taghelpers/multiviewcalendar)
+* [Knowledge Base Section](/knowledge-base)

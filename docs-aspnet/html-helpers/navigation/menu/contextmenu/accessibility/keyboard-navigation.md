@@ -2,8 +2,9 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn how to use the keyboard navigation functionality of the Telerik UI ContextMenu component for {{ site.framework }}."
+previous_url: /html-helpers/navigation/menu/contextmenu/keyboard-navigation
 slug: htmlhelpers_contextmenu_keyboardnavigation_aspnetcore
-position: 4
+position: 2
 ---
 
 # Keyboard Navigation

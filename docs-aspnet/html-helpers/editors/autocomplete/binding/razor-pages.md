@@ -137,6 +137,54 @@ You can also include additional parameters if needed:
     }
 ```
 
+## Binding the AutoComplete to a PageModel Property
+
+To bind the AutoComplete to a property from the `PageModel`, follow the next steps:
+
+1. Add a property to the `PageModel` that must bind to the AutoComplete.
+
+    ```Index.cshtml.cs
+        public class IndexModel : PageModel
+        {
+            [BindProperty]
+            public string Country { get; set; }
+
+            public void OnGet()
+            {
+                Country = "Italy";
+            }
+        }
+    ```
+1. Declare the `PageModel` at the top of the page.
+
+    ```C#
+        @page
+        @model IndexModel
+    ```
+
+1. Bind the AutoComplete to the property using the `AutoCompleteFor()` configuration.
+
+    ```HtmlHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().AutoCompleteFor(m => m.Country))
+    ```
+    ```TagHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-autocomplete for="Country">
+        </kendo-datetimepicker>
+    ```
+
 ## See Also
 
 * [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})

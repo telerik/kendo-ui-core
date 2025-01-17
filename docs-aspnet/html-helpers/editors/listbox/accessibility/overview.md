@@ -1,33 +1,79 @@
 ---
 title: Overview
-page_title: Accessibility
-description: "Get started with the Telerik UI ListBox for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+page_title: ListBox Documentation | ListBox Accessibility
+description: "Get started with the {{ site.product }} ListBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: htmlhelpers_listbox_accessibility_aspnetcore
 position: 1
 ---
 
 # ListBox Accessibility
 
-The ListBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+Out of the box, the {{ site.product }} ListBox provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
-For more information, refer to:
-* [Keyboard navigation by the Telerik UI ListBox HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_listbox_navigation_aspnetcore %})
-* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
+The ListBox is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [accessibility support in {{ site.product }}]({% slug compliance_accessibility %}).
+This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
+### ListBox List
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-list-ul` | `role=listbox` | Specifies the role of the ListBox `ul` element. |
+|  | `aria-label` or `aria-labelledby` | Adds a label to the `ul` element of the ListBox. |
+|  | `aria-multiselectable=true` | Signifies that the ListBox allows multiple selection. Present only when the multiple selection of the component is enabled. |
+|  | `tabindex=0` | Makes the ListBox focusable. |
+| `.k-list-item` | `role=option` | Specifies the role of the ListBox `item` element. |
+|  | `aria-selected=true/false` | Set to `true` if the item is selected. |
+
+### ListBox Toolbar
+
+The ListBox toolbar follows the specification of the ToolBar component.
+
+[ToolBar accessibility specification]({%slug accessibility_toolbar_overview%})
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-listbox-actions` | `role=toolbar` | The toolbar is a collection of command buttons. |
+|  | `aria-label` | Clarifies the purpose of the toolbar. |
+|  | `aria-controls=.k-list-ul id` | Points to the ids of the `role=listbox` elements that are being controlled by the ToolBar. |
+| `.k-listbox-actions .k-button` | `aria-label` or `title` | All buttons in the ToolBar must have lables, so that their purpose is clear. |
+
+## Resources
+
+[WAI-ARIA Authoring Practices: ListBox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/)
 
 ## Section 508
 
-The ListBox is compliant with the Section 508 requirements. For more information, refer to the article on [accessibility support in {{ site.product }}]({% slug compliance_accessibility %}).
+The ListBox is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
 
-## WCAG 2.2
+## Testing
 
-The ListBox supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [accessibility support in {{ site.product }}]({% slug compliance_accessibility %}).
+The ListBox has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
+
+> To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
+
+### Screen Readers
+
+The ListBox has been tested with the following screen readers and browsers combinations:
+
+| Environment | Tool |
+| ----------- | ---- |
+| Firefox | NVDA |
+| Chrome | JAWS |
+| Microsoft Edge | JAWS |
+
+### Test Example
+
+To test the ListBox component, refer to the [ListBox Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/listbox).
+
+## Keyboard Navigation
+
+For details on how the ListBox keyboard navigation works, refer to the [ListBox Keyboard Navigation]({%slug htmlhelpers_listbox_navigation_aspnetcore%}) article.
 
 ## See Also
 
-* [Keyboard Navigation by the ListBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/keyboard-navigation)
-* [Keyboard Navigation by the ListBox HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_listbox_navigation_aspnetcore %})
-* [Accessibility in {{ site.product }}]({% slug compliance_accessibility %})
+* [Keyboard Navigation by the ListBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/keyboard-navigation)
+* [Keyboard Navigation by the ListBox for {{ site.framework }}]({% slug htmlhelpers_listbox_navigation_aspnetcore %})
+* [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

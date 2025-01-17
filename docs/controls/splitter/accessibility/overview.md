@@ -18,14 +18,14 @@ The Splitter is accessible by screen readers and provides WAI-ARIA, Section 508,
 Out of the box, the Kendo UI for jQuery Splitter provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The Splitter is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The Splitter is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-### Slitter Pane
+### Splitter Pane
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -40,6 +40,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-splitbar` | `role=separator` | Sets the proper role for the Splitter split-bar element. |
 |  | `aria-label` | An accessible name, with aria-label should be included if there is more than one focusable separator. The value is set through the corresponding SplitterPane API. |
 | `.k-splitbar-horizontal` | `aria-orientation=vertical` | When a splitbar separates two panes horizontally, its aria-orientation must be explicitly set to 'vertical'. |
+|  | `aria-keyshortcuts=ArrowLeft ArrowRight ArrowUp ArrowDown` | Sets the aria-keyshortcuts attribute value to announce available keyboard shortcuts. Some are omitted for brevity. |
 
 > Note: Setting the value-now attribute of the separator element is not applicable, as the Splitter is a complex layout component allowing splitting the content into multiple panes across any number and level of nested Splitters and panes, thus announcing a value would not convey any meaningful information. Moreover, there is no specification, or WAI-ARIA recommendation that explains how value should be set in multiple panes scenario. Further information on this complicated scenario could be found in the following WAI-ARIA GitHub issue:
 

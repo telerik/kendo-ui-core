@@ -20,7 +20,7 @@ The Pager is accessible by screen readers and provides WAI-ARIA, Section 508, WC
 Out of the box, the Kendo UI for jQuery Pager provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The Pager is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The Pager is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -31,7 +31,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 The `PageSize` select must be implemented either as a DropDownList component with no filtering or through a native `<select>` element.
 
 
-The `Page` select, which is present for mobile devices and smaller screens with kimited space for page links, must be a native `<select>` element.
+The `Page` select, which is present for mobile devices and smaller screens with limited space for page links, must be a native `<select>` element.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -43,7 +43,6 @@ The `Page` select, which is present for mobile devices and smaller screens with 
 | `.k-pager-nav` | `role=button` or `nodeName=button` | Specifies the role of the element. |
 |  | `aria-disabled=true` | The attribute is present when the the `Arrow` button is disabled, for example, present on the **Previous** button when the current page is the first one. |
 |  | `title` | Specifies the purpose of each button. |
-| `.k-pager-numbers>.k-link` | `role=button` or `nodeName=button` | Specifies the role of the element. |
 |  | `aria-label` or `title` | Specifies the purpose of each link, for example, `Page 6`. |
 |  | `aria-current=page` | The attribute must be present on the currently selected page element. |
 | `.k-pager-sizes>.k-dropdownlist` | `aria-label` | The element requires an `aria-label` to specify its purpose. |

@@ -129,3 +129,6 @@ The following example demonstrates how to tie a pager to a data source and enabl
 * [Pager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
 * [Pager Server-Side API](/api/pager)
 * [Knowledge Base Section](/knowledge-base)
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_pager_razorpage_aspnetcore %})
+{% endif %}

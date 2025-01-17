@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Telerik UI TimeDurationPicker for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: htmlhelpers_timedurationpickerhelper_keyboard_navigation
-position: 1
+position: 2
 ---
 
 # Keyboard Navigation

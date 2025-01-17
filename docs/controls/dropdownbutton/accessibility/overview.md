@@ -20,7 +20,7 @@ The DropDownButton is accessible by screen readers and provides WAI-ARIA, Sectio
 Out of the box, the Kendo UI for jQuery DropDownButton provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
-The DropDownButton is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2  AA](https://www.w3.org/TR/WCAG22/) standards](https://www.w3.org/TR/WCAG22/) and [Section 508](http://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+The DropDownButton is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
@@ -37,7 +37,6 @@ The following table summarizes the selectors and attributes supported by the mai
 | `.k-menu-button` | `role=button` or `nodeName=button` | Omitted if the `<button>` DOM element is used. |
 |  | `aria-label` | The attribute must be present when no text is initially visible in the button. |
 |  | `aria-expanded=true/false` | Announces the state of the popup visibility. |
-|  | `aria-haspopup=menu` | Indicates the presence of a menu popup. |
 |  | `aria-controls=.k-menu-group id` | Points to the popup element. Builds a relationship between the button and the popup. |
 | `.k-menu-button.k-disabled` | `aria-disabled=true` | Rendered only when the button is disabled and the `disabled` attribute cannot be used. Applicable to the `<button>` or `<input type="button">` elements. |
 
@@ -48,13 +47,12 @@ The following table summarizes the selectors and attributes supported by the pop
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-menu-group` | `role=menu` | Announces the `menu` role of the popup. |
-|  | `aria-labelledby=.k-menu-button id` | Points to the `button` element. |
-| `.k-menu-item` | `role=menuitem` | Announces the `menuitem` role of the popup items. |
+| `.k-menu-group` | `role=list` | Announces the `list` role of the popup. |
+| `.k-menu-item` | `role=listitem` | Announces the `listitem` role of the popup items. |
 
 ## Resources
 
-[WAI-ARIA Authoring Practices: Navigation Menu Button Example](https://www.w3.org/WAI/ARIA/apg/example-index/menu-button/menu-button-links.html)
+[WAI-ARIA Authoring Practices: Disclosure Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)
 
 ## Section 508
 

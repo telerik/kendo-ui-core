@@ -1,33 +1,67 @@
 ---
 title: Overview
-page_title: Accessibility
-description: "Get started with the Telerik UI ListView for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+page_title: ListView Documentation | ListView Accessibility
+description: "Get started with the {{ site.product }} ListView and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_htmlhelpers_listview
 position: 1
 ---
 
 # ListView Accessibility
 
-The ListView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+Out of the box, the {{ site.product }} ListView provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
-For more information, refer to:
-* [Keyboard navigation by the Telerik UI ListView HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_listview_aspnetcore_navigation %})
-* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
+The ListView is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AAA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
-The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [accessibility support in {{ site.product }}]({% slug compliance_accessibility %}).
+This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-listview:not(.k-selectable) .k-listview-content` | `role=list` | Specifies the role of non selectable ListView content element. |
+| `.k-listview.k-selectable .k-listview-content` | `role=listbox` | Specifies the role of selectable ListView content element. |
+| `.k-listview:not(.k-selectable) .k-listview-item` | `role=listitem` | Specifies the role of each item in a non selectable ListView. |
+| `.k-listview.k-selectable .k-listview-item` | `role=option` | Specifies the role of each item in a selectable ListView. |
+| `.k-listview-item` | `aria-setsize` | Specifies the total number of items present in the ListView. |
+|  | `aria-posinset` | Specifies the position of the current item in the entire list of items present in the ListView. Value must be greated than or equal to 1 and smaller than or equal to the total number of items in the ListView. |
+| `.k-listview-item:nth-child(1)` | `tabindex=0` | The first item in the ListView must be focusable by default. |
+
+## Resources
+
+[WAI-ARIA Specification: List](https://www.w3.org/TR/wai-aria-1.2/#list)
+
+[WAI-ARIA Specification: Listitem](https://www.w3.org/TR/wai-aria-1.2/#listitem)
 
 ## Section 508
 
-The ListView is compliant with the Section 508 requirements. For more information, refer to the article on [accessibility support in {{ site.product }}]({% slug compliance_accessibility %}).
+The ListView is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
 
-## WCAG 2.2
+## Testing
 
-The ListView supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [accessibility support in {{ site.product }}]({% slug compliance_accessibility %}).
+The ListView has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
+
+> To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
+
+### Screen Readers
+
+The ListView has been tested with the following screen readers and browsers combinations:
+
+| Environment | Tool |
+| ----------- | ---- |
+| Firefox | NVDA |
+| Chrome | JAWS |
+| Microsoft Edge | JAWS |
+
+### Test Example
+
+To test the ListView component, refer to the [ListView Accessibility Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/listview).
+
+## Keyboard Navigation
+
+For details on how the ListView keyboard navigation works, refer to the [ListView Keyboard Navigation]({%slug htmlhelpers_listview_aspnetcore_navigation%}) article.
 
 ## See Also
 
-* [Keyboard Navigation by the ListView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/keyboard-navigation)
-* [Keyboard Navigation by the ListView HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_listview_aspnetcore_navigation %})
-* [Accessibility in {{ site.product }}]({% slug compliance_accessibility %})
+* [Keyboard Navigation by the ListView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listview/keyboard-navigation)
+* [Keyboard Navigation by the ListView for {{ site.framework }}]({% slug htmlhelpers_listview_aspnetcore_navigation %})
+* [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

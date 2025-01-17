@@ -2,8 +2,9 @@
 title: Keyboard Navigation
 page_title: ExpansionPanel Documentation - Keyboard Navigation
 description: "Get started with Telerik UI ExpansionPanel component for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
+previous_url: /html-helpers/layout/expansionpanel/keyboard-navigation
 slug: keynav_htmlhelpers_expansionpanel_aspnetcore
-position: 4
+position: 2
 ---
 
 # Keyboard Navigation

@@ -138,3 +138,6 @@ The following example demonstrates the basic configuration of the OrgChart compo
 
 * [Using the API of the OrgChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/api)
 * [Knowledge Base Section](/knowledge-base)
+{% if site.core %}
+* [Razor Pages binding]({% slug htmlhelpers_orgchart_razorpage_aspnetcore %})
+{% endif %}

@@ -138,8 +138,11 @@ import "../kendo.color.js";
         },
         _releaseInnerFocus: function() {
             this._tabKeyTrap.removeTrap();
-            this.wrapper.attr("tabindex", this._tabIndex);
-            this._innerTabindex(-1);
+
+            if (this.wrapper) {
+                this.wrapper.attr("tabindex", this._tabIndex);
+                this._innerTabindex(-1);
+            }
         },
         _select: function(color, nohooks) {
             var prev = this._value;

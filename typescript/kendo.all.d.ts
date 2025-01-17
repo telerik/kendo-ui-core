@@ -8794,6 +8794,7 @@ declare namespace kendo.ui {
 
     interface PDFViewerToolbar {
         items?: PDFViewerToolbarItem[] | undefined;
+        contextMenu?: boolean | undefined;
     }
 
     interface PDFViewerView {

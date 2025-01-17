@@ -1,10 +1,11 @@
 ---
 title: Razor Pages
 page_title: Razor Pages
-description: "An example on how to configure remote binding DataSource to populate the Telerik UI Sparkline component for {{ site.framework }} in Razor Pages."
+description: "Learn how to use the Telerik UI Sparkline component for {{ site.framework }} in a Razor Pages application with an example on how to configure its remote binding DataSource."
 slug: htmlhelper_sparkline_razorpages_aspnetcore
 position: 3
 ---
+
 # Sparkline in Razor Pages
 
 Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name).

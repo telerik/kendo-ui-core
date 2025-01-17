@@ -18,9 +18,12 @@ For the complete project, refer to the [DropDownTree in Razor Pages example](htt
 
 ## Getting Started
 
-In order to set up the ComboBox component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
+In order to set up the DropDownTree component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method hedge refer the name of the method in the pagemodel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
-```tab-HtmlHelper(csthml)        
+```tab-HtmlHelper(csthml)     
+    @page
+    @model IndexModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()	
 	
@@ -78,7 +81,7 @@ In order to set up the ComboBox component bindings, you need to configure the `R
         @Html.AntiForgeryToken()
     ```
 	
-1. Send the `AntiForgeryToken` with the [Read, Create, Update, Destroy] request.
+1. Send the `AntiForgeryToken` with the Read request.
 
     ```
         <script>
@@ -103,19 +106,19 @@ In order to set up the ComboBox component bindings, you need to configure the `R
 
 ## Binding the DropDownTree to a PageModel Property
 
-To bind the DatePicker to a property from the `PageModel`, follow the next steps:
+To bind the DropDownTree to a property from the `PageModel`, follow the next steps:
 
-1. Add a property to the `PageModel` that must bind to the DateTimePicker.
+1. Add a property to the `PageModel` that must bind to the DropDownTree.
 
     ```Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
-            public DateTime DateCreated { get; set; }
+            public string Employee { get; set; }
 
             public void OnGet()
             {
-                DateCreated = DateTime.Now; // Assign value to the "DateCreated" property, if needed.
+                Employee = "John"; 
             }
         }
     ```
@@ -152,8 +155,8 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the [ComponentName]](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
-* [Server-Side HtmlHelper API of the [ComponentName]](/api/dropdowntree)
-* [Server-Side TagHelper API of the [ComponentName]](/api/taghelpers/dropdowntree)
+* [Client-Side API of the [DropDownTree]](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Server-Side HtmlHelper API of the [DropDownTree]](/api/dropdowntree)
+* [Server-Side TagHelper API of the [DropDownTree]](/api/taghelpers/dropdowntree)
 * [Knowledge Base Section](/knowledge-base)
 
