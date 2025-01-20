@@ -149,14 +149,14 @@ if (kendo.ui.FileBrowser) {
 kendo.ui.FileBrowser.prototype.options.messages =
 $.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
   "uploadFile": "Upload",
-  "orderBy": "Arrange by",
-  "orderByName": "Name",
-  "orderBySize": "Size",
-  "directoryNotFound": "A directory with this name was not found.",
-  "emptyFolder": "Empty Folder",
-  "deleteFile": 'Are you sure you want to delete "{0}"?',
-  "invalidFileType": "The selected file \"{0}\" is not valid. Supported file types are {1}.",
-  "overwriteFile": "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
+  "orderBy": "Sorteren op",
+  "orderByName": "Naam",
+  "orderBySize": "Grootte",
+  "directoryNotFound": "De map met deze naam is niet gevonden.",
+  "emptyFolder": "Lege map",
+  "deleteFile": 'Weet u zeker dat u "{0}" wilt verwijderen?',
+  "invalidFileType": "Het gekozen bestand \"{0}\" is niet ondersteund. Ondersteunde bestandstypen zijn {1}.",
+  "overwriteFile": "Een bestand met de naam \"{0}\" bestaat al in de huidige map. Wilt u deze overschrijven?",
   "dropFilesHere": "Sleep bestanden hier naar toe om te uploaden",
   "search": "Zoek"
 });
@@ -273,24 +273,59 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
 
 if (kendo.ui.Grid) {
 kendo.ui.Grid.prototype.options.messages =
-$.extend(true, kendo.ui.Grid.prototype.options.messages,{
-  "commands": {
-    "canceledit": "Annuleren",
-    "cancel": "Wijzigingen annuleren",
-    "create": "Item toevoegen",
-    "destroy": "Verwijderen",
-    "edit": "Bewerken",
-    "excel": "Export naar Excel",
-    "pdf": "Export naar PDF",
-    "save": "Wijzigingen opslaan",
-    "select": "Selecteren",
-    "update": "Bijwerken"
-  },
-  "editable": {
-    "cancelDelete": "Annuleren",
-    "confirmation": "Weet u zeker dat u dit item wilt verwijderen?",
-    "confirmDelete": "Verwijderen"
-  }
+$.extend(true, kendo.ui.Grid.prototype.options.messages, {
+    "noRecords": "Geen regels beschikbaar",
+    "expandCollapseColumnHeader": "",
+    "groupHeader": "Gebruik ctrl + space om te groeperen",
+    "ungroupHeader": "Gebruik ctrl + space om uit de groepering te halen",
+    "itemsSelected": "geselecteerde regels",
+    "dragHandleLabel": "Regel slepen",
+    "toolbarLabel": "grid toolbar",
+    "groupingHeaderLabel": "grid groepering kop",
+    "filterCellTitle": "filter cel",
+    "commands": {
+        "canceledit": "Annuleren",
+        "cancel": "Wijzigingen annuleren",
+        "create": "Item toevoegen",
+        "destroy": "Verwijderen",
+        "edit": "Bewerken",
+        "excel": "Exporteer naar Excel",
+        "pdf": "Exporteer naar PDF",
+        "save": "Wijzigingen opslaan",
+        "select": "Selecteren",
+        "update": "Bijwerken",
+        "search": "Zoeken...",
+        "columns": "Kolommen",
+        "selectRow": "Selecteer regel",
+        "selectAllRows": "Alle regels",
+        "clearSelection": "Alles deselecteren",
+        "copySelection": "Selectie kopiëren",
+        "copySelectionNoHeaders": "Selectie kopiëren (zonder headers)",
+        "paste": "Plakken (gebruik CTRL/⌘ + V)",
+        "reorderRow": "Regel hersorteren",
+        "reorderRowUp": "Omhoog",
+        "reorderRowDown": "Omlaag",
+        "reorderRowTop": "Bovenaan",
+        "reorderRowBottom": "Onderaan",
+        "exportPdf": "Exporteer naar PDF",
+        "exportExcel": "Exporteer naar Excel",
+        "exportToExcelAll": "Alles",
+        "exportToExcelSelection": "Selectie",
+        "exportToExcelSelectionNoHeaders": "Selectie (zonder headers)",
+        "sortAsc": "Sorteer oplopend",
+        "sortDesc": "Sorteer aflopen",
+        "moveGroupPrevious": "Verplaats vorige",
+        "moveGroupNext": "Verplaats volgende"
+    },
+    "editable": {
+        "cancelDelete": "Annuleren",
+        "confirmation": "Weet u zeker dat u dit item wilt verwijderen?",
+        "confirmDelete": "Verwijderen"
+    },
+    "loader": {
+        "loading": "Laden...",
+        "exporting": "Exporteren..."
+    }
 });
 }
 
