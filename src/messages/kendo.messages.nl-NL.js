@@ -1,5 +1,6 @@
 (function($, undefined) {
 
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -76,14 +77,30 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
-$.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "columns": "Kolommen",
-  "settings": "Kolom instellingen",
-  "done": "Gereed",
-  "sortAscending": "Sorteer Oplopend",
-  "sortDescending": "Sorteer Aflopend",
-  "lock": "Slot",
-  "unlock": "Ontsluiten"
+$.extend(true, kendo.ui.ColumnMenu.prototype.options.messages, {
+    "sortAscending": "Sorteer oplopend",
+    "sortDescending": "Sorteer aflopend",
+    "filter": "Filter",
+    "clearAllFilters": "Alle filters wissen",
+    "column": "Kolom",
+    "columns": "Kolommen",
+    "columnVisibility": "Kolom zichtbaarheid",
+    "clear": "Wissen",
+    "cancel": "Annuleren",
+    "done": "Klaar",
+    "settings": "Wijzig kolom instellingen",
+    "lock": "Kolom vergrendelen",
+    "unlock": "Kolom ontgrendelen",
+    "stick": "Kolom vastzetten",
+    "unstick": "Kolom losmaken",
+    "setColumnPosition": "Stel kolom positie in",
+    "apply": "Toepassen",
+    "reset": "Resetten",
+    "buttonTitle": "{0} bewerk kolom instellingen",
+    "movePrev": "Naar vorige positie",
+    "moveNext": "Naar volgende positie",
+    "groupColumn": "Kolom aan groepering toevoegen",
+    "ungroupColumn": "Kolom uit groepering halen"
 });
 }
 
