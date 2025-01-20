@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - ".github/workflows/ci.yml"
+      - "package.json"
+      - "gulpfile.js"
+      - "build/**"
+      - "src/**"
+      - "tests/**"
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Build scripts
+        run: npx gulp scripts
+
+      - name: Install Playwright Deps
+        run: npx -y playwright install --with-deps chromium
+
+      - name: Tests
+        run: npm run test
