@@ -18,6 +18,7 @@ The following table showcases the compatibility between Kendo UI and the PDFJS l
 
 | Major Releases												                                             | Compatible PDFJS Versions |
 | :---															                                             | :---			             |
+| [Kendo UI 2025.1.211 (2025 Q1)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-1-211-(2025-q1))  | 4.6.82   |
 | [Kendo UI 2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-4-1112-(2024-q4))| 4.3.136  |
 | [Kendo UI 2024.3.1015](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-3-1015)  | 3.x, 2.x |
 
@@ -28,10 +29,10 @@ Starting with v2024.4.1112(2024 Q4), the PDFViewer requires PDFJS version 4.x.x 
 The following example demonstrates how to configure the PDFViewer to use PDF.js processing with versions starting with 4.x.x
 
 ```html
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" type="module"></script>
-    <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://kendo.cdn.telerik.com/2025.1.211/js/kendo.all.min.js" type="module"></script>
 
     <div id="pdfviewer"></div>
     <script type="module">

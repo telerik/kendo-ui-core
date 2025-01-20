@@ -1,0 +1,181 @@
+import '@progress/kendo-ui/src/kendo.bottomnavigation.js';
+
+let BottomNavigation = kendo.ui.BottomNavigation,
+    element, div;
+
+describe("kendo.ui.bottomnavigation items rendering", function() {
+    beforeEach(function() {
+        element = $("<nav></nav>").appendTo(Mocha.fixture);
+        div = $("<div />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        let component = $(element).data("kendoBottomNavigation");
+        if (component) {
+            component.destroy();
+        }
+
+        kendo.destroy(Mocha.fixture);
+    });
+
+    function setup(options) {
+        return new BottomNavigation(element, options);
+    }
+
+    it("renders items", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "home" },
+                { icon: "home", text: "home" }
+            ]
+        });
+
+        assert.equal(bottomNav.items().length, 2);
+    });
+
+    it("can render items with only icon and icon+text", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home" },
+                { icon: "home", text: "home" }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).find(".k-bottom-nav-item-text").length, 0);
+
+        assert.equal(bottomNav.items().eq(1).find(".k-bottom-nav-item-text").length, 1);
+    });
+
+    it("renders anchor element when url is added", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "home", url: "http://url/" }
+            ]
+        });
+
+        assert.isOk(bottomNav.items().eq(0).is("a.k-bottom-nav-item"));
+    });
+
+    it("item can render custom css class", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "home", cssClass: "customClass" }
+            ]
+        });
+
+        assert.isOk(bottomNav.items().eq(0).is(".customClass"));
+    });
+
+    it("item can render custom attributes", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "home", attributes: { "data-custom": "test" } }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).data("custom"), "test");
+    });
+
+    it("item encodes HTML in text", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "<strong>home</strong>" }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).find(".k-bottom-nav-item-text").html(), "&lt;strong&gt;home&lt;/strong&gt;");
+    });
+
+    it("item renders HTML in text when encoded: false", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "<strong>home</strong>", encoded: false }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).find(".k-bottom-nav-item-text").html(), "<strong>home</strong>");
+    });
+
+    it("item renders custom iconClass to the icon element", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "home", iconClass: "iconClass" }
+            ]
+        });
+
+        assert.isOk(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".iconClass"));
+    });
+
+    it("item renders kendo icons", function() {
+        let bottomNav = setup({
+            items: [
+                { icon: "home", text: "home" }
+            ]
+        });
+
+        assert.isOk(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".k-svg-i-home, .k-i-home"));
+    });
+
+    it("item with no icon omits k-icon class", function() {
+        let bottomNav = setup({
+            items: [
+                { text: "home" }
+            ]
+        });
+
+        assert.isFalse(bottomNav.items().eq(0).find(".k-bottom-nav-item-icon").is(".k-svg-i-home, .k-i-home"));
+    });
+
+    it("item can be disabled", function() {
+        let bottomNav = setup({
+            items: [
+                { text: "home", icon: "home", enabled: false }
+            ]
+        });
+
+        assert.isOk(bottomNav.items().eq(0).is(".k-disabled"));
+    });
+
+    it("item can be selected", function() {
+        let bottomNav = setup({
+            items: [
+                { text: "home", icon: "home", selected: true }
+            ]
+        });
+
+        assert.isOk(bottomNav.items().eq(0).is(".k-selected"));
+    });
+
+    it("item can be rendered from template", function() {
+        let bottomNav = setup({
+            template: () => '<span class="template">custom template</span>',
+            items: [
+                { text: "home", icon: "home" }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).html(), '<span class="template">custom template</span>');
+    });
+
+    it("item can be rendered from template in item's options", function() {
+        let bottomNav = setup({
+            items: [
+                { text: "home", icon: "home", template: () => '<span class="template">custom template</span>' }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).html(), '<span class="template">custom template</span>');
+    });
+
+    it("item's template overrides the widget's option", function() {
+        let bottomNav = setup({
+            template: () => '<span class="template">custom template</span>',
+            items: [
+                { text: "home", icon: "home" },
+                { text: "home", icon: "home", template: () => '<span class="item-template">custom template</span>' }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).html(), '<span class="template">custom template</span>');
+        assert.equal(bottomNav.items().eq(1).html(), '<span class="item-template">custom template</span>');
+    });
+});

@@ -13,7 +13,9 @@ The PivotGridV2 for {{ site.framework }} supports Ajax data binding to an HTTP a
 * [OLAP Cube Fundamentals]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals %})
 * [Local Data Binding]({% slug htmlhelpers_pivotgridv2_aspnetcore_localbinding %})
 * [Using PivotConfiguratorV2]({% slug htmlhelpers_pivotgridv2_aspnetcore_configurator %})
+{% if site.core %}
 * [Razor Pages Binding]({% slug razorpages_pivotgridv2_aspnetcore %})
+{% endif %}
 
 ## OLAP Services
 

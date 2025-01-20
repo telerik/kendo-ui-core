@@ -179,6 +179,8 @@ navigation:
         title: "ColorGradient"
     "controls/imageeditor":
         title: "Image Editor"
+    "controls/chartwizard":
+        title: "ChartWizard"
     "controls/chat":
         title: "Chat"
     "controls/chat/integrations":
@@ -707,7 +709,7 @@ cdnVersion: "2024.4.1112"
 themesCdnVersion: "10.0.1"
 
 ## The Pdfjs CDN version used
-pdfjsCdnVersion: "4.3.136"
+pdfjsCdnVersion: "4.6.82"
 
 ## The MVC Core version used
 mvcCoreVersion: "2024.4.1112"
@@ -1588,6 +1590,12 @@ defaults:
 
 -
     scope:
+        path: "controls/chartwizard"
+    values:
+        component: "chartwizard"
+
+-
+    scope:
         path: "controls/checkbox"
     values:
         component: "checkbox"
@@ -2086,6 +2094,7 @@ intro_columns:
     title: "Charts"
     items:
       "Charts": "overview_kendoui_charts_widget"
+      "ChartWizard": "overview_kendoui_chartwizard_widget"
   -
     title: "Data Management"
     items:
