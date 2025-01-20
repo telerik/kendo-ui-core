@@ -19,6 +19,7 @@ The default tools collection includes the `pager`, `open`, and `download` tools.
 * [PDFjs Processing]({% slug pdfjs_processing_pdfviewer_widget %})&mdash;The PDFViewer uses the PDF.js library to process files.
 * [DPL Processing]({% slug dpl_processing_pdfviewer_widget %})&mdash;You can configure the PDFViewer to use the Telerik Document Processing Library.
 * [Toolbar and Tools]({% slug dpl_processing_pdfviewer_widget %})&mdash;You can configure which tools will be displayed in the PDFViewer.
+* [Annotations]({% slug annotations_pdfviewer %})&mdash;You can highlight important text areas with different colors or add free text notes in the document.
 
 ## Next Steps
 

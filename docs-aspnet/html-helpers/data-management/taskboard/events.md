@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TaskBoard component for {{ site.framework }}."
 slug: taskboard_events
-position: 5
+position: 10
 ---
 
 # Events

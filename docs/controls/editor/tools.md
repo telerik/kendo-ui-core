@@ -37,6 +37,9 @@ The following example demonstrates how to add a custom tool button. To enable st
 
 For a runnable example, refer to the [Custom tools Editor Demo](https://demos.telerik.com/kendo-ui/editor/custom-tools)
 
+```dojo
+    <textarea id="editor"></textarea>
+    <script>
        $("#editor").kendoEditor({
            tools: [
                {
@@ -50,7 +53,10 @@ For a runnable example, refer to the [Custom tools Editor Demo](https://demos.te
                }
            ]
        });
-
+       //Apply an icon for the custom tool
+       kendo.ui.icon($('.k-editor [title="Custom editor tool"] .k-icon'), { icon: 'camera' });
+    </script>
+```
 
 ## Extending the Editor with a Custom Tool
 

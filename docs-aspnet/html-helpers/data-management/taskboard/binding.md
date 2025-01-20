@@ -209,3 +209,6 @@ The following example demonstrates how to enable remote binding in the TaskBoard
 
 * [Local Data Binding in the TaskBoard (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/local-data-binding)
 * [Remote Data Binding in the TaskBoard (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/remote-data-binding)
+{% if site.core %}
+* [TaskBoard in Razor Pages]({% slug razorpages_taskboard_aspnetcore %})
+{% endif %}

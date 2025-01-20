@@ -988,9 +988,10 @@ The following example demonstrates the basic configuration for the Spreadsheet c
 ## Next Steps
 
 * [Getting Started with the Spreadsheet]({% slug spreadsheet_getting_started %})
-* [Basic Usage of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/index)
+* [Basic Usage of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet)
 {% if site.core %}
-* [Basic Usage of the Spreadsheet TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [Basic Usage of the Spreadsheet TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet)
+* [Spreadsheet in Razor Pages]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore%}#data-source-binding-in-razor-pages)
 {% endif %}
 
 ## See Also

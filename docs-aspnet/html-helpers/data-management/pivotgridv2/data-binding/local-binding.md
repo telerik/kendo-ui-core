@@ -6,6 +6,8 @@ slug: htmlhelpers_pivotgridv2_aspnetcore_localbinding
 position: 4
 ---
 
+# Local Binding
+
 When configured for local binding, the PivotGridV2 for {{ site.framework }} will serialize the data as part of its data source and will perform all data operations on the client.
 
 To bind the PivotGridV2 for {{ site.framework }} to local flat data:

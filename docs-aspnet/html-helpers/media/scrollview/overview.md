@@ -219,35 +219,21 @@ If you set the `PageSize` option to a larger value, you will need to use a loop 
 
 ## Functionality and Features
 
-* [Paging]({% slug htmlhelpers_scrollview_aspnetcore_paging %})
-* [Templates]({% slug htmlhelpers_scrollview_aspnetcore_templates %})
-
-## Events
-
-For a complete example on basic ScrollView events, refer to the [demo on using the events of the ScrollView](https://demos.telerik.com/{{ site.platform }}/scrollview/events).
-
-## Referencing Existing Instances
-
-To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview#methods) to control its behavior.
-
-```
-    // Place the following after your Telerik UI ScrollView for {{ site.framework }} declaration.
-    <script>
-    $(function() {
-        // The For() of the ScrollView is used to get its client-side instance.
-        var scrollview = $("#scrollview").data("kendoScrollView");
-    });
-    </script>
-```
+* [Templates]({% slug htmlhelpers_scrollview_aspnetcore_templates %})&mdash;To take control over the rendering of the ScrollView items, utilize the available templates.
+* [Paging]({% slug htmlhelpers_scrollview_aspnetcore_paging %})&mdash;Set an overlay background color for the ScrollView pager.
+* [Events]({% slug events_scrollview_aspnetcore %})&mdash;Subscribe to the available client-side events to implement any custom logic.
+* [Keyboard Navigation]({% slug htmlhelpers_scrollview_accessibility_keyboard_navigation_aspnetcore %})&mdash;The ScrollView delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps
 
 * [Getting Started with the ScrollView]({% slug aspnetcore_scrollview_getting_started %})
-* [Basic Usage of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/index)
+* [Basic Usage of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview)
 {% if site.core %}
 * [Basic Usage of the ScrollView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
 * [ScrollView in Razor Pages]({% slug htmlhelpers_scrollview_razorpage_aspnetcore %})
 {% endif %}
-* [Using the API of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
-* [ScrollView Server-Side API](/api/scrollview)
-* [ScrollView Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
+
+## See Also
+
+* [Using the API of the ScrollView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
+* [Knowledge Base Section](/knowledge-base)

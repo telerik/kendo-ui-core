@@ -164,18 +164,20 @@ The following example demonstrates how to initialize the TaskBoard.
 ## Next Steps
 
 * [Getting Started with the TaskBoard]({% slug taskboard_aspnetcore_get_started %})
-* [Basic Usage of the TaskBoard HtmlHelper for {{site.framework}} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/index)
+* [Basic Usage of the TaskBoard HtmlHelper for {{site.framework}} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard)
 {% if site.core %}
 * [Basic Usage of the TaskBoard TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/taskboard/tag-helper)
+* [TaskBoard in Razor Pages]({% slug razorpages_taskboard_aspnetcore %})
 {% endif %}
 * [Data Binding]({% slug htmlhelpers_taskboard_aspnetcore_databinding %})
 
 ## See Also
 
 * [Using the API of the TaskBoard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/api)
-* [Client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
-* [Server-side API](/api/taskboard)
+* [Client-side API of the TaskBoard](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard)
+* [Server-Side HtmlHelper API of the TaskBoard](/api/taskboard)
 {% if site.core %}
+* [Server-Side TagHelper API of the TaskBoard](/api/taghelpers/taskboard)
 * [Forum Discussions](https://www.telerik.com/forums/aspnet-core-ui?tagId=1735)
 {% else %}
 * [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=1736)

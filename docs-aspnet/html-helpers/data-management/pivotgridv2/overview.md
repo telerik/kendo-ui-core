@@ -114,6 +114,7 @@ The following image demonstrates the output from the example.
 * [Basic Usage of the PivotGridV2 HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgridv2)
 {% if site.core %}
 * [Basic Usage of the PivotGridV2 TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgridv2/tag-helper)
+* [PivotGridV2 in Razor Pages]({% slug razorpages_pivotgridv2_aspnetcore %})
 {% endif %}
 
 ## See Also

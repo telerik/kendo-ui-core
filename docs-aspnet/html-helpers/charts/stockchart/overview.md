@@ -225,6 +225,9 @@ The following example shows how to enable and configure the Navigator of the cha
 
 * [Getting Started with the StockChart]({% slug stockchart_getting_started %})
 * [Basic Usage of the StockChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial)
+{% if site.core %}
+* [StockChart in Razor Pages]({% slug htmlhelper_chart_razorpages_aspnetcore %})
+{% endif %}
 
 
 ## See Also

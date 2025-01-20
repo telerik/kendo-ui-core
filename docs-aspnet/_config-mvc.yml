@@ -128,7 +128,9 @@ html-helpers/navigation/drawer/razor-page.md,
 html-helpers/pdf/pdfviewer/razor-page.md,
 html-helpers/data-management/listview/binding/razor-page.md,
 html-helpers/media/mediaplayer/razor-page.md,
-html-helpers/overview-taghelpers.md]
+html-helpers/overview-taghelpers.md,
+html-helpers/data-management/pivotgridv2/data-binding/razor-page.md,
+html-helpers/data-management/taskboard/razor-page.md]
 
 exclude_navigation: ["knowledge-base/*",
 api/kendo.mvc/*,

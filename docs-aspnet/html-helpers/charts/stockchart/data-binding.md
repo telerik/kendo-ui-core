@@ -194,9 +194,14 @@ The following example demonstrates a sample filter submitted by the StockChart f
     }
 ```
 
-
-
 ## See Also
 
-* [Basic Usage of the StockChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial/index)
-* [Server-Side API of the StockChart for {{ site.framework }}](/api/stockchart)
+* [Basic Usage of the StockChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/financial)
+{% if site.core %}
+* [StockChart in Razor Pages]({% slug htmlhelper_chart_razorpages_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+{% endif %}
+* [Server-Side HtmlHelper API of the StockChart](/api/stockchart)
+{% if site.core %}
+* [Server-Side TagHelper API of the StockChart](/api/taghelpers/stockchart)
+{% endif %}

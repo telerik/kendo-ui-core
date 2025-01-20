@@ -1,9 +1,10 @@
 ---
-title: WebApi Binding
-page_title: WebApi Binding
+title: Web API Binding
+page_title: Web API Binding
 previous_url: /html-helpers/scheduling/scheduler/how-to/web-api-binding, /helpers/scheduling/scheduler/how-to/web-api-binding
 description: "Learn how to enable the Web API binding capabilities of the Telerik UI Scheduler for {{ site.framework }}."
 slug: htmlhelpers_scheduler_webapi_binding
+position: 5
 ---
 
 # Web API Binding

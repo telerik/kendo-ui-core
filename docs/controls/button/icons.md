@@ -10,23 +10,22 @@ position: 5
 
 The Button provides options for visually enhancing its textual content by adding icons to it.
 
-You can add an icon with the `img` element or with a background image (usually a sprite). With regard to web standards, using background images is better because the icon represents a decoration, not structural content.
-
 The Button provides the `icon`, `spriteCssClass`, and `imageUrl` properties for configuring icons. With a specific Button instance you have to use only one of them&mdash;if you define multiple properties, the Button will work with only one of them in the order previously stated.
 
 For a complete example on rendering an Icon Button, refer to the [demo on adding images to the Button](https://demos.telerik.com/kendo-ui/button/images).
 
 To visually enhance the Button:
-* [Use background icons](#background-icons)
+* [Add an icon](#icon)
 * [Use image icons](#image-icons)
-* [Use font icons](#font-icons)
+* [Use CSS Class icons](#css-class-icons)
 
-## Background Icons
+## Icon
 
-Background icons are applied over the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The Button can automatically render the `span` element, or use an existing `span` element if it has a `k-sprite` CSS class or a `k-icon` class if the `icon` property is used. The difference between the `icon` or `spriteCssClass` properties is that `icon` is intended to be used for built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [icons list](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
+The Buttons allows you to set an `svg` (default) or `font` icon through the ['icon'](/api/javascript/ui/button/configuration/icon) option. The option is intended to be used with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [icons list](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
 
-The following example demonstrates how to use icons in the Button component.
+The following example demonstrates how to use `svg` icons in the Button component.
 
+```dojo
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton"><span class="k-icon"></span>Delete</button>
 
@@ -41,75 +40,71 @@ The following example demonstrates how to use icons in the Button component.
 		});
 	});
 	</script>
+```
 
 The `icon` configuration in the previous example will produce the following HTML output.
 
-	<button type="button" id="editButton" class="k-button k-button-icontext"><span class="k-icon k-edit"></span>Edit</button>
-	<button type="button" id="deleteButton" class="k-button k-button-icontext"><span class="k-icon k-delete"></span>Delete</button>
+	<button type="button" id="editButton" data-role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" role="button" aria-disabled="false" tabindex="0">
+		<span class="k-icon k-svg-icon k-svg-i-pencil k-button-icon">
+			<svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg">
+				<path d="m334.9 86.6 45.3-45.3c12.4-12.4 32.8-12.4 45.3 0l45.3 45.3c12.4 12.4 12.4 32.8 0 45.3l-45.3 45.3zm-22.6 22.6L32 389.5V480h90.5l280.3-280.3zM99.9 412.1l-22.6-22.6 235-235 22.6 22.6z">
+				</path>
+			</svg>
+		</span>
+		<span class="k-button-text">Edit</span>
+	</button>
+	
+	<button type="button" id="deleteButton" data-role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" role="button" aria-disabled="false" tabindex="0">
+		<span class="k-icon k-svg-icon k-svg-i-trash k-button-icon">
+			<svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg">
+				<path d="M416 96h-96V64c0-17.6-14.4-32-32-32h-96c-17.6 0-32 14.4-32 32v32H64v64h32v288c0 17.6 14.4 32 32 32h224c17.6 0 32-14.4 32-32V160h32zM192 64h95.9l.1.1V96h-96c.1-.1.1-32.1 0-32m160 384H128.1l-.1-.1V160h32v256h32V160h32v256h32V160h32v256h32V160h32z">
+				</path>
+			</svg>
+		</span>
+		<span class="k-button-text">Delete</span>
+	</button>
 
-The following example demonstrates how to apply the `spriteCssClass`.
+The next example demonstrates how to switch to [font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
 
+```dojo	
+    <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
 	<button type="button" id="editButton">Edit</button>
-	<button type="button" id="deleteButton"><span class="k-sprite"></span>Delete</button>
+	<button type="button" id="deleteButton"><span class="k-icon"></span>Delete</button>
 
 	<script>
 	$(function(){
+		kendo.setDefaults("iconType", "font")
 		$("#editButton").kendoButton({
-			spriteCssClass: "myEditIcon"
+			icon: "pencil"
 		});
 
 		$("#deleteButton").kendoButton({
-			spriteCssClass: "myDeleteIcon"
+			icon: "trash"
 		});
 	});
 	</script>
-
-Technically, `spriteCssClass` can be used to achieve the same result as `icon`. However, `icon` avoids the need to set two CSS classes at the same time and provides a certain level of abstraction. For example, the following two configurations are practically identical. `#button2` also applies a `k-sprite` CSS class to the `span` element but it does not change the appearance of the Button.
-
-	$(function(){
-		$("#button1").kendoButton({
-			icon: "foo"
-		});
-
-		$("#button2").kendoButton({
-			spriteCssClass: "k-icon k-foo"
-		});
-	});
-
-In some cases, you may want to use a Button that renders an icon and no text. To increase the accessibility of the component in this case, you can include a text label inside the sprite `span`.
-
-	<button type="button" id="deleteButton"><span class="k-sprite">Delete</span></button>
-
-	<script>
-	$(function(){
-		$("#deleteButton").kendoButton({
-			spriteCssClass: "myDeleteIcon"
-		});
-	});
-	</script>
+```
 
 ## Image Icons
 
-Image icons are applied over the `imageUrl` property and are displayed as an `img` element. The Button can automatically render the `img` element or use an existing `img` element if it has a `k-image` CSS class. To increase the accessibility of the component when you manually add an `img` element, apply an `alt` attribute.
+Images are applied over the `imageUrl` property and are displayed as an `img` element. The Button can automatically render the `img` element or use an existing `img` element if it has a `k-image` CSS class. To increase the accessibility of the component when you manually add an `img` element, apply an `alt` attribute.
 
 The following example demonstrates how to use the `imageUrl`.
-
-	<button type="button" id="editButton">Edit</button>
-	<button type="button" id="deleteButton"><img class="k-image" alt="Delete" />Delete</button>
+ 
+ ```dojo
+	<button type="button" id="imageIcon"><img class="k-image" alt="Delete" />Delete</button>
 
 	<script>
-	$(function(){
-		$("#editButton").kendoButton({
-			imageUrl: "/images/myEditIcon.gif"
-		});
+	$(function(){ 
 
-		$("#deleteButton").kendoButton({
-			imageUrl: "/images/myDeleteIcon.gif"
+		$("#imageIcon").kendoButton({
+			imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/snowboarding.png"
 		});
 	});
 	</script>
+```
 
-## Font Icons
+## CSS Class Icons
 
 You can also use FontAwesome or other font icons inside the Kendo UI Button by setting the required third-party CSS classes over the `spriteCssClass` property. However, this approach will render a `k-sprite` CSS class which applies font and size styles that may interfere with the font icon styles.
 
@@ -117,40 +112,38 @@ To handle this issue, use either of the following approaches:
 
 * Override the Kendo UI styles which break the font icons.
 
-				```dojo
-				<link rel="stylesheet"
-				    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
-				<style>
-				    .k-button .fa {
-				        font-size: inherit;
-				        line-height: inherit;
-				        width: auto;
-				        height: auto;
-				        margin-left: 0;
-				    }
-				</style>
+```dojo
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+	<style>
+		.k-button .fa {
+			font-size: inherit;
+			line-height: inherit;
+			width: auto;
+			height: auto;
+			margin-left: 0;
+		}
+	</style>
 
-				<button type="button" id="archiveButton">Archive</button>
+	<button type="button" id="archiveButton">Archive</button>
 
-				<script>
-				    $("#archiveButton").kendoButton({
-				        spriteCssClass: "fa fa-archive"
-				    });
-				</script>
-				```
+	<script>
+		$("#archiveButton").kendoButton({
+			spriteCssClass: "fa fa-archive"
+		});
+	</script>
+```
 
 * Include the required HTML markup and CSS classes inside the Kendo UI Button directly as template content. In this way, the Button will not render a `k-sprite` class.
 
-				```dojo
-				<link rel="stylesheet"
-				    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
+```dojo
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-				<button type="button" id="archiveButton"><span class="fa fa-archive"></span> Archive</button>
+	<button type="button" id="archiveButton"><span class="fa fa-archive"></span> Archive</button>
 
-				<script>
-				    $("#archiveButton").kendoButton({});
-				</script>
-				```
+	<script>
+		$("#archiveButton").kendoButton({});
+	</script>
+```
 
 ## See Also
 

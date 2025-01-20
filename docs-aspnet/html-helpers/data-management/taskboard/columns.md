@@ -3,7 +3,7 @@ title: Columns
 page_title: Columns
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about its columns."
 slug: htmlhelpers_taskboard_aspnetcore_columns
-position: 4
+position: 5
 ---
 
 # Columns

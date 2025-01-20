@@ -98,6 +98,36 @@ In order to set up the Razor DropDownList component bindings, you need to config
         }
     ```
 
+1. Declare the `PageModel` at the top of the page.
+
+    ```C#
+        @page
+        @model IndexModel
+    ```
+
+1. Bind the DropDownList to the property using the `DropDownListFor()` configuration.
+
+    ```HtmlHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().DropDownListFor(m => m.Product))
+    ```
+    ```TagHelper_Index.cshtml
+        @page
+        @model IndexModel
+
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-dropdownlist for="Product">
+        </kendo-datepicker>
+    ```
+
 ## See Also
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 * [Client-Side API of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)

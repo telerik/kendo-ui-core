@@ -4,7 +4,7 @@ page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} ScrollView by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 previous_url: /helpers/media/scrollview/accessibility/keyboard-navigation
 slug: htmlhelpers_scrollview_accessibility_keyboard_navigation_aspnetcore
-position: 2
+position: 5
 ---
 
 # Keyboard Navigation
