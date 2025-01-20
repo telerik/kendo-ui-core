@@ -20,7 +20,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Install
         run: npm ci --no-audit --no-fund
@@ -28,7 +28,7 @@ jobs:
       - name: Build scripts
         run: npx gulp scripts
 
-      - name: Karma
-        run: npx gulp karma-ci
+      - name: Tests
+        run: npm run test
         env:
           CHROME_BIN: /usr/bin/google-chrome
