@@ -285,8 +285,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annuleren",
   "clear": "Filter wissen",
   "filter": "Filter",
-  "info": "Toon items met waarde:",
-  "title": "Toon items met waarde",
+  "info": "Toon regels met waarde:",
+  "title": "Toon regels met waarde",
   "isFalse": "is niet waar",
   "isTrue": "is waar",
   "operator": "Operator",
@@ -322,7 +322,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages, {
     "commands": {
         "canceledit": "Annuleren",
         "cancel": "Wijzigingen annuleren",
-        "create": "Item toevoegen",
+        "create": "Regel toevoegen",
         "destroy": "Verwijderen",
         "edit": "Bewerken",
         "excel": "Exporteer naar Excel",
@@ -355,7 +355,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages, {
     },
     "editable": {
         "cancelDelete": "Annuleren",
-        "confirmation": "Weet u zeker dat u dit item wilt verwijderen?",
+        "confirmation": "Weet u zeker dat u deze regel wilt verwijderen?",
         "confirmDelete": "Verwijderen"
     },
     "loader": {
@@ -380,10 +380,10 @@ if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "Alle",
-  "display": "items {0} - {1} van {2}",
-  "empty": "Geen items om te tonen",
+  "display": "regels {0} - {1} van {2}",
+  "empty": "Geen regels om te tonen",
   "first": "Ga naar eerste pagina",
-  "itemsPerPage": "items per pagina",
+  "itemsPerPage": "regels per pagina",
   "last": "Ga naar laatste pagina",
   "next": "Ga naar volgende pagina",
   "of": "van {0}",
