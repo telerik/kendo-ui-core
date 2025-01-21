@@ -37,6 +37,25 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages = 
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages, {
+    "checkAll": "Selecteer alles",
+    "isNull": "is leeg",
+    "clearAll": "Wis alle",
+    "clear": "Wis",
+    "filter": "Filter",
+    "search": "Zoek",
+    "cancel": "Annuleer",
+    "selectedItemsFormat": "{0} optie(s) geselecteerd",
+    "done": "Klaar",
+    "into": "in",
+    "buttonTitle": "{0} filter kolom instellingen"
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
