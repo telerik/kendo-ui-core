@@ -132,17 +132,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### axisDefaults.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
-The dash type of the border.
-
-The following dash types are supported:
-
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
+This option is ignored and deprecated.
 
 ### axisDefaults.crosshair.tooltip.border.width `Number` *(default: 0)*
 
@@ -763,14 +753,14 @@ Category indices at which the value axes cross the category axis (when set as an
 
 > If the Chart uses multiple panes, the crossing values are not scoped to a pane. To be able to customize the crossing values in a given pane, you first need to provide placeholder values for the previous pane axes and then the crossing values for the current pane.
 
-#### Example - set the category axis crossing values
+#### Example - set the category axis crossing values at indexes 0 and 2
 
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
       categoryAxis: {
         categories: [ "2012", "2013"],
-        axisCrossingValue: [0, 10]
+        axisCrossingValue: [0, 2]
       },
       valueAxis: [{}, {}],
       series: [
@@ -1160,41 +1150,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### categoryAxis.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
-The dash type of the border.
-
-The following dash types are supported:
-
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
-
-#### Example - set the category axis crosshair tooltip border dash type
-
-    <div id="chart"></div>
-    <script>
-    $("#chart").kendoChart({
-      categoryAxis: {
-        categories: ["2012", "2013"],
-        crosshair: {
-          tooltip: {
-            border: {
-              dashType: "dashDot",
-              width: 2
-            },
-            visible: true
-          },
-          visible: true
-        }
-      },
-      series: [
-        { type: "line", data: [1, 2, 3] }
-      ]
-    });
-    </script>
+This option is ignored and deprecated.
 
 ### categoryAxis.crosshair.tooltip.border.width `Number` *(default: 0)*
 
@@ -24810,40 +24766,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### valueAxis.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
-The dash type of the border.
-
-The following dash types are supported:
-
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
-
-#### Example - set the value axis crosshair tooltip border dash type
-
-    <div id="chart"></div>
-    <script>
-    $("#chart").kendoChart({
-      valueAxis: {
-        crosshair: {
-          tooltip: {
-            border: {
-              dashType: "dashDot",
-              width: 2
-            },
-            visible: true
-          },
-          visible: true
-        }
-      },
-      series: [
-        { type: "line", data: [1, 2, 3] }
-      ]
-    });
-    </script>
+This option is ignored and deprecated.
 
 ### valueAxis.crosshair.tooltip.border.width `Number` *(default: 0)*
 
@@ -29572,40 +29495,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### xAxis.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
-The dash type of the border.
-
-The following dash types are supported:
-
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
-
-#### Example - set the scatter chart x axis crosshair tooltip border dash type
-
-    <div id="chart"></div>
-    <script>
-    $("#chart").kendoChart({
-      xAxis: {
-        crosshair: {
-          tooltip: {
-            border: {
-              dashType: "dashDot",
-              width: 2
-            },
-            visible: true
-          },
-          visible: true
-        }
-      },
-      series: [
-        { type: "scatter", data: [[1, 2]] }
-      ]
-    });
-    </script>
+This option is ignored and deprecated.
 
 ### xAxis.crosshair.tooltip.border.width `Number` *(default: 0)*
 
@@ -34743,40 +34633,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### yAxis.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
-The dash type of the border.
-
-The following dash types are supported:
-
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
-
-#### Example - set the scatter chart y axis crosshair tooltip border dash type
-
-    <div id="chart"></div>
-    <script>
-    $("#chart").kendoChart({
-      yAxis: {
-        crosshair: {
-          tooltip: {
-            border: {
-              dashType: "dashDot",
-              width: 2
-            },
-            visible: true
-          },
-          visible: true
-        }
-      },
-      series: [
-        { type: "scatter", data: [[1, 2]] }
-      ]
-    });
-    </script>
+This option is ignored and deprecated.
 
 ### yAxis.crosshair.tooltip.border.width `Number` *(default: 0)*
 

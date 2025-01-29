@@ -317,6 +317,7 @@ The following example demonstrates the basic configuration of the Gantt.
 * [Basic Usage of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/index)
 {% if site.core %}
 * [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+* [Gantt in Razor Pages]({% slug htmlhelpers_gantt_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

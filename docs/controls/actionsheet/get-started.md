@@ -47,7 +47,7 @@ After the completion of this guide, you will be able to achieve the following en
             actionsheet.close();
         }
         actionsheet.open();
-</script
+</script>
 ```
 
 ## 1. Create an Empty Div Element
@@ -113,6 +113,7 @@ You can add all the action items you need through the [`items`](/api/javascript/
     });
 
     actionsheet.open();
+    </script>
 ```
 
 ## Next Steps

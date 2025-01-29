@@ -1,12 +1,12 @@
 ---
-title: Overview
+title: Components Rendering
 page_title: Components Rendering Overview
 description: "Learn about the rendering of the {{ site.product }} components and their appearance options."
 slug: components_rendering_overview
 position: 0
 ---
 
-# Components Rendering Overview
+# Components Rendering
 
 > * R1 2023 is the last official release of Telerik UI for {{ site.framework }}, where LESS Themes are supported and shipped with the product.
 > * With the upcoming R3 2023 release in September, the fonts will no longer be delivered with the Telerik and Kendo UI themes. To continue using the font icons, you must add a separate CDN reference to the font icons stylesheet.

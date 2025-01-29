@@ -12429,6 +12429,55 @@ declare namespace kendo.ui {
     interface TextBoxChangeEvent extends TextBoxEvent {
     }
 
+    class OTPInput extends kendo.ui.Widget {
+        static fn: OTPInput;
+
+        options: OTPInputOptions
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): OTPInput;
+
+        constructor(element: Element, options?: OTPInputOptions);
+
+        destroy(): void;
+        enable(enable: boolean): void;
+        focus(): void;
+        readonly(readonly: boolean): void;
+        value(): string;
+        value(value: string): void;
+    }
+
+    interface OTPInputOptions {
+        name?: string | undefined;
+        inputMode?: string | undefined;
+        type?: string | undefined;
+        enable?: boolean | undefined;
+        space?: boolean | undefined;
+        items?: Number | Array<OTPInputItemOptions> | undefined;
+        separator?: string | Function;
+        placeholder?: string | undefined;
+        readonly?: boolean | undefined;
+        value?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        change?(e: OTPInputChangeEvent): void;
+    }
+
+    interface OTPInputItemOptions {
+        groupLength?: Number;
+    }
+
+    interface OTPInputEvent {
+        sender: TextBox;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface OTPInputChangeEvent extends OTPInputEvent {
+    }
 
     class TimePicker extends kendo.ui.Widget {
 

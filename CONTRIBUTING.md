@@ -48,28 +48,6 @@ If you don't use a topic branch, we may ask you to re-do your pull request on a 
 The "production" branch of the Kendo UI Core repository is for production maintenance code only. Never create a pull request from the production branch. Always create a branch for your work from the "master" branch.
 This will facilitate easier pull request management for the continuous work that is done in the master branch. If the issue is a bug fix that should be back ported to a maintenance branch, the core maintainers will cherry-pick it.
 
-### 3. Include tests describing the bug or feature
-
-Kendo UI uses [Mocha](https://www.npmjs.com/package/mocha) for a test framework and [karma](http://karma-runner.github.io/) as the test runner. You may browse the `tests` directory to get a better idea of the structure and conventions used.
-
-To run the tests, execute the following command:
-
-```
-gulp tests
-```
-
-To run the tests for a single widget, pass a `tests` option:
-
-```
-gulp tests --tests="tests/listview/**.*.js"
-```
-
-By default, the tests run in Chrome. Other browser may be used using the `browser` option:
-
-```
-gulp tests --browser=Firefox
-```
-
 #### (optional) Squash your commits
 
 When you've completed your work on a topic branch, you may squash your work down into fewer commits to make the merge process easier. For information on squashing via an interactive rebase, see [the rebase documentation on GitHub](https://help.github.com/articles/interactive-rebase)

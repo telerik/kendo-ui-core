@@ -431,6 +431,11 @@ export const __meta__ = {
         validateInput: function(input) {
             input = $(input);
 
+            if (!kendo.isEmpty(input.closest('.k-otp'))) {
+                let otpContainer = input.closest(".k-otp");
+                input = otpContainer.find("input[data-role='otpinput']");
+            }
+
 
             this._isValidated = true;
 
@@ -458,7 +463,10 @@ export const __meta__ = {
 
             input.removeAttr(ARIAINVALID);
 
-            if (input.hasClass("k-hidden")) {
+            if (input.hasClass("k-hidden") && input.attr("data-role") == "otpinput") {
+                widgetInstance = kendo.widgetInstance(input);
+            }
+            if (input.hasClass("k-hidden") && input.attr("data-role") != "otpinput") {
                 widgetInstance = kendo.widgetInstance(input.closest(".k-signature"));
             }
 
@@ -530,16 +538,26 @@ export const __meta__ = {
             }
 
             widgetInstance = (widgetInstance && widgetInstance.options.name == "Signature") ? widgetInstance : kendo.widgetInstance(input);
+
             if (!widgetInstance || !(widgetInstance._inputWrapper || widgetInstance.wrapper) || (input.is("[type=checkbox]") || input.is("[type=radio]"))) {
                 input.toggleClass(INVALIDINPUT, !valid);
                 input.toggleClass(VALIDINPUT, valid);
             }
 
             if (widgetInstance) {
+                let widgetName = widgetInstance.options.name;
                 let inputWrap = widgetInstance._inputWrapper || widgetInstance.wrapper;
                 let inputLabel = widgetInstance._inputLabel;
 
-                if (inputWrap && !(input.is("[type=checkbox]") || input.is("[type=radio]"))) {
+                if (widgetName == "OTPInput") {
+                    if (!valid) {
+                        widgetInstance._addInvalidState.bind(that);
+                        widgetInstance._addInvalidState(inputWrap, true);
+                    } else {
+                        widgetInstance._removeInvalidState.bind(that);
+                        widgetInstance._removeInvalidState(inputWrap, true);
+                    }
+                } else if (inputWrap && !(input.is("[type=checkbox]") || input.is("[type=radio]"))) {
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
                     inputWrap.toggleClass(VALIDINPUT, valid);
                 }

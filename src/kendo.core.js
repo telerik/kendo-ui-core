@@ -256,7 +256,9 @@ export const __meta__ = {
 
     const isPresent = kendo.isPresent = (value) => value !== null && value !== undefined;
     const isBlank = kendo.isBlank = (value) => value === null || value === undefined;
+    const isEmpty = kendo.isEmpty = (value) => value.length === 0;
     const isString = kendo.isString = (value) => typeof value === 'string';
+    const isInteger = kendo.isInteger = (value) => Number.isInteger(value);
     const isNumeric = kendo.isNumeric = (value) => !isNaN(value - parseFloat(value));
     const isDate = kendo.isDate = (value) => value && value.getTime;
     const isFunction = kendo.isFunction = (value) => typeof value === 'function';
@@ -3092,6 +3094,7 @@ function pad(number, digits, end) {
             F2: 113,
             F10: 121,
             F12: 123,
+            SHIFT: 16,
             NUMPAD_PLUS: 107,
             NUMPAD_MINUS: 109,
             NUMPAD_DOT: 110
@@ -5334,7 +5337,7 @@ function pad(number, digits, end) {
     //var postitionValues = ['edge', 'outside', 'inside'];
     var shapeValues = ['rectangle', 'square'];
     var sizeValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
-    var roundedValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
+    var roundedValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'], ['full', 'full'] ];
     //var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
     var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
     var resizeValues = [ ['both', 'resize'], ['horizontal', 'resize-x'], ['vertical', 'resize-y'] ];

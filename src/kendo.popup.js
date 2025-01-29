@@ -313,6 +313,21 @@ export const __meta__ = {
             }
         },
 
+        _updateDimensions: function() {
+            const that = this;
+            const shouldCorrectWidth = that._shouldCorrectWidth;
+            const element = that.element;
+            const options = that.options;
+
+            that.wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap, shouldCorrectWidth, options.autowidth)
+            .css({
+                overflow: HIDDEN,
+                display: "block",
+                position: ABSOLUTE
+            })
+            .attr("aria-hidden", false);
+        },
+
         _location: function(isFixed) {
             var that = this,
                 element = that.element,
@@ -379,6 +394,7 @@ export const __meta__ = {
 
         position: function() {
             if (this.visible()) {
+                this._updateDimensions();
                 this.flipped = this._position();
             }
         },

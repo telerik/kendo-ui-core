@@ -206,7 +206,7 @@ Defines the editor widget type. Available options are:
 
 * DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
-* Input widgets - "TextBox", "TextArea", "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker", "ColorGradient", "ColorPalette", "FlatColorPicker", "Signature", "hidden"
+* Input widgets - "TextBox", "TextArea", "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker", "ColorGradient", "ColorPalette", "FlatColorPicker", "Signature", "OTPInput", "hidden"
 * Editor widget - "Editor"
 
 #### Example - define editor as string

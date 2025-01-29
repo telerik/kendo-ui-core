@@ -10,7 +10,7 @@ permalink: /getting-started/video-onboarding
 
 # Video Onboarding
 
-Telerik UI for ASP.NET Core has its [own video getting started experience](https://learn.telerik.com/learn/course/external/view/elearning/8/telerik-ui-for-aspnet-core) available to both active trial users and active license holders in [Virtual Classroom](https://learn.telerik.com/learn). The training course is developed to help you get started with the Telerik UI for ASP.NET Core components and features. It aims to put you in the shoes of an engineer who adds new features to an existing application.
+Telerik UI for ASP.NET Core has its own video getting started experience available to both active trial users and active license holders in [Telerik and Kendo UI Video Courses](https://www.telerik.com/support/video-courses). The training course is developed to help you get started with the Telerik UI for ASP.NET Core components and features. It aims to put you in the shoes of an engineer who adds new features to an existing application.
 
 The process starts by adding basic Telerik UI components and widgets to the application and shows how to harness the power of the Telerik UI for ASP.NET Core controls and features in no time. Further on, you'll get into more advanced components, like the Chart and the Grid, and learn how to incorporate Telerik UI components to interact with existing functionality and with each other. Finally, the course will explore how to build your own theme and change it for all components at once.
 
@@ -37,5 +37,5 @@ The Telerik UI for ASP.NET Core technical online training has an approximate dur
 * **Chapter 7: Styling and Theming** (Built-In Themes, Creating Custom Theme, Styling and Icons)
 * **Chapter 8: Enriching your ASP.NET Core App** (Globalization, Localization, RTL, Accessibility, Keyboard Navigation, Document Processing and integration with other Telerik products)*
 
-If you wish to learn more and continue with the video onboarding [enroll in the training](https://learn.telerik.com/learn/course/external/view/elearning/8/telerik-ui-for-aspnet-core) from the [Virtual Classroom](https://learn.telerik.com/learn).
+If you wish to learn more and continue with the video onboarding watch the course available in the [Telerik and Kendo UI Video Courses](https://www.telerik.com/support/video-courses).
   

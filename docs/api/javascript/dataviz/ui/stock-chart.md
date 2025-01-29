@@ -161,17 +161,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### navigator.categoryAxis.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
-The dash type of the border.
-
-The following dash types are supported:
-
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
+This option is ignored and deprecated.
 
 ### navigator.categoryAxis.crosshair.tooltip.border.width `Number` *(default: 0)*
 

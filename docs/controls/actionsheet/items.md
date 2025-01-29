@@ -53,7 +53,7 @@ The following example demonstrates the possible options for the `items` configur
         }
         actionsheet.open();
         setTimeout(function(){actionsheet.close()},2000)
-</script
+    </script>
 ```
 
 ## See Also

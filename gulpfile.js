@@ -13,7 +13,6 @@ var merge = require('merge2');
 var argv = require('yargs').argv;
 
 var license = require('./build/gulp/license');
-var requireDir = require('require-dir');
 
 const exec = require('child_process').exec;
 const terser = require('gulp-terser');
@@ -22,8 +21,6 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 
 var kendoVersion = require("./build/gulp/kendo-version");
-
-requireDir('./build/gulp/tasks');
 
 var makeSourceMaps = !argv['skip-source-maps'];
 
@@ -152,9 +149,7 @@ gulp.task("custom", function() {
 
 gulp.task('build', gulp.series('scripts'));
 
-gulp.task('tests', gulp.series(['karma-mocha']));
-
-gulp.task('ci', gulp.series(['build', 'karma-ci']));
+gulp.task('ci', gulp.series(['build']));
 
 function compileModulesScripts() {
     return HELPERS.execute('npm run scripts:modules');

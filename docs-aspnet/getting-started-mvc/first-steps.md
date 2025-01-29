@@ -23,7 +23,7 @@ Other popular approaches for starting with Telerik UI for ASP.NET MVC include:
 * [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %})&mdash;this method allows you to download the Telerik controls by using the NuGet package manager in Visual Studio.
 * [Manual setup with local files]({% slug manualsetup_aspnetmvc%})&mdash;with this method, you add the `Kendo.Mvc.dll` assembly to your project by using local files. This assembly enables you to use the Telerik UI components. 
 
->tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({%slug virtualclass_uiformvc%}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
+>tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({%slug virtualclass_uiformvc%}) article and learn how to take advantage of the <a href="https://www.telerik.com/support/video-courses" target="_blank">Telerik and Kendo UI Video Courses</a>.
 
 ## Prerequisites
 

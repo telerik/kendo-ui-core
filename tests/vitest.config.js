@@ -28,5 +28,8 @@ export default defineConfig({
                 height: 1080
             }
         },
+        launchOptions: process.platform === 'linux' && process.env.CI ? {
+            executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome',
+        } : {},
     }
 });

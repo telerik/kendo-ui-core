@@ -88,7 +88,9 @@ export const __meta__ = {
                 return paneConfig[propertyName];
             }
 
+            ((this.options.panes || []).find(p => p.uid == paneConfig.uid) || {})[propertyName] = value;
             paneConfig[propertyName] = value;
+            paneConfig.isFluid = isFluid(paneConfig.size);
 
             if (triggersResize) {
                 var splitter = this.element.data("kendo" + this.options.name);
@@ -272,7 +274,7 @@ export const __meta__ = {
             this.resize();
         },
         _getDefaultPaneConfig: function() {
-            return { scrollable: true, resizable: true, size: "auto" };
+            return { scrollable: true, resizable: true, size: "auto", uid: kendo.guid() };
         },
         _updatePaneOrderStyles: function(parentElement) {
             $(parentElement || this.element).children().each(function(i, pane) {
@@ -289,6 +291,7 @@ export const __meta__ = {
             config.fixedSize = config.size && config.size !== "auto";
             pane = $(pane)
                 .attr("role", "group")
+                .attr("data-uid", config.uid)
                 .addClass(KPANE);
 
             let isStaticPane = !config.resizable && !config.collapsible || config.fixedSize;
@@ -403,6 +406,19 @@ export const __meta__ = {
                 that._triggerAction(arrowType, pane);
             };
         },
+        _updatePaneOrders: function()
+        {
+            var that = this;
+            var panes = that._getPaneElements();
+
+            panes.forEach((pane, index) => {
+                var paneConfig = $(pane).data(PANE);
+                if (paneConfig) {
+                    paneConfig.order = index * 2;
+                    pane.style.order = index * 2;
+                }
+            });
+        },
         _updateSplitBar: function(splitbar, previousPane, nextPane, previousPaneEl) {
             var catIconIf = function(actionType, iconType, condition) {
                 var icon = iconType ? ui.icon({ icon: iconType, size: "xsmall" }) : "";
@@ -464,7 +480,6 @@ export const __meta__ = {
         },
         _updateSplitBars: function() {
             var that = this;
-
             this.element.children(".k-splitbar").each(function() {
                 var splitbar = $(this),
                     previousPaneEl = splitbar.prevAll(PANECLASS).first(),
@@ -635,15 +650,14 @@ export const __meta__ = {
         },
 
         _addPane: function(config, idx, paneElement) {
-            var that = this;
+            const that = this;
 
             if (paneElement.length) {
                 that.options.panes.splice(idx, 0, config);
-                // TODO: recalculate order of panes and update them
                 that._initPane(paneElement, config);
 
                 that._removeSplitBars();
-
+                that._updatePaneOrders();
                 that.resize(true);
             }
 
@@ -797,6 +811,7 @@ export const __meta__ = {
                 newSize = toPixel(constrainedSize);
             }
             pane.size = newSize;
+            pane.isFluid = isFluid(newSize);
             that._setPaneSize(pane.index, newSize);
         },
 
@@ -824,7 +839,9 @@ export const __meta__ = {
             }
 
             paneElement.style[PANE_SIZING_PROP] = size;
-            $(paneElement).data("pane").size = size;
+            let paneConfig = $(paneElement).data("pane");
+            paneConfig.size = size;
+            paneConfig.isFluid = isFluid(size);
 
             that.trigger(RESIZING, { pane: paneElement });
         },
@@ -1109,6 +1126,7 @@ export const __meta__ = {
             let splitter = that.owner;
             let orientation = splitter.orientation;
             let delta;
+            let owner = this.owner;
             const splitterBar = e.currentTarget || e.target;
 
             if (!splitterBar) {
@@ -1123,7 +1141,12 @@ export const __meta__ = {
                 delta = e.y.delta;
             }
 
-            splitter._dragSplitterBar(splitterBarIndex, delta);
+            let splitbarPosition = orientation === HORIZONTAL ? splitterBar.position().left : splitterBar.position().top;
+            let ghostPosition = e.position;
+
+            if (Math.abs(splitbarPosition - ghostPosition) > 2) {
+                owner._dragSplitterBar(splitterBarIndex, delta);
+            }
         },
         _stop: function(e) {
             var that = this,
