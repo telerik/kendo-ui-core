@@ -27,6 +27,9 @@ navigation:
     "intro/installation":
         title: "Download and Installation"
         position: 2
+    "intro/installation/licensing":
+        title: "Licensing"
+        position: 1
     "intro/widget-basics":
         title: "Working with Components"
         position: 3
