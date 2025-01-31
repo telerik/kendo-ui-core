@@ -2959,6 +2959,25 @@ function pad(number, digits, end) {
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
 
+    function sanitizeLink(value) {
+        const allowedProtocols = ["http:", "https:"];
+        let link = "";
+
+        try {
+            // Use the default origin in case the value is a relative URL.
+            const url = new URL(value, window.location.origin);
+            if (allowedProtocols.includes(url.protocol)) {
+                link = value;
+            } else {
+                throw new Error("Invalid protocol");
+            }
+        } catch {
+            link = "#INVALIDLINK";
+        }
+
+        return htmlEncode(link);
+    }
+
     function unescape(value) {
         var template;
 
@@ -3126,6 +3145,7 @@ function pad(number, digits, end) {
         stringify: JSON.stringify.bind(JSON),
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
+        sanitizeLink: sanitizeLink,
         unescape: unescape,
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);

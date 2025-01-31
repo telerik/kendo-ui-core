@@ -49,7 +49,7 @@ export const __meta__ = {
 
     var templates = {
         item: template(() => `<span class="${bottomNavigationStyles.item}"></span>`),
-        anchor: template(({ url }) => `<a class="${bottomNavigationStyles.item}"  href="${kendo.htmlEncode(url)}"></a>`),
+        anchor: template(({ url }) => `<a class="${bottomNavigationStyles.item}" href="${kendo.sanitizeLink(url)}"></a>`),
         text: template(({ text }) => `<span class="${bottomNavigationStyles.text}" >${text}</span>`),
         icon: template(({ icon }) => kendo.ui.icon($(`<span class="${bottomNavigationStyles.navIcon}"></span>`), { icon: icon, size: "xlarge" }))
     };

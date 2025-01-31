@@ -103,7 +103,7 @@ export const __meta__ = {
                 return result.join(" ");
             },
             textAttributes: function(item) {
-                return item.url ? " href='" + item.url + "'" : "";
+                return item.url ? " href='" + kendo.sanitizeLink(item.url) + "'" : "";
             },
             text: function(item) {
                 return item.encoded === false ? item.text : kendo.htmlEncode(item.text);

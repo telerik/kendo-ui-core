@@ -113,10 +113,10 @@ describe("tabstrip data binding", function() {
     it("dataUrlField", function() {
         let tabstrip = new kendo.ui.TabStrip(dom, {
             dataUrlField: "foo",
-            dataSource: [{ foo: "http://example.com" }]
+            dataSource: [{ foo: "http://example.com/" }]
         });
 
-        assert.equal(tabstrip.tabGroup.find("a").attr("href"), "http://example.com");
+        assert.equal(tabstrip.tabGroup.find("a").attr("href"), "http://example.com/");
     });
 
     it("dataSpriteCssClass", function() {

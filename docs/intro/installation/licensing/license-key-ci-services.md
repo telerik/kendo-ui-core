@@ -130,14 +130,14 @@ steps:
 bash
 ```
 
-![Azure Devops Classic Step 2](../images/azure-devops-classic-step-2.webp) 
+![Azure Devops Classic Step 2](../images/azure-devops-classic-step-2.png) 
 
 ```bash
 # Activate the license
 npx kendo-ui-license activate
 ```
 
-![Azure Devops Classic Step 3](../images/azure-devops-classic-step-3.webp) 
+![Azure Devops Classic Step 3](../images/azure-devops-classic-step-3.png) 
 
 ## See Also
 

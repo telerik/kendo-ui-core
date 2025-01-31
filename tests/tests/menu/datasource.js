@@ -223,14 +223,14 @@ describe("Client side rendering", function() {
                 data: [
                     {
                         text: "RootItem",
-                        URLTEST: "URLTEST"
+                        URLTEST: "https://telerik.com/"
                     }
                 ]
             })
         });
 
         menu.dataSource.view()[0].load();
-        assert.equal(menu.element.find(".k-link").attr('href'), "URLTEST");
+        assert.equal(menu.element.find(".k-link").attr('href'), "https://telerik.com/");
     });
 
     it('dataSpriteCssClassField configures the item icon class', function() {

@@ -174,13 +174,13 @@ describe("Toolbar rendering:", function() {
     it("url sets a href to the button element if it is an anchor", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", url: "http://www.kendoui.com" }
+                { type: "button", id: "foo", url: "http://www.kendoui.com/" }
             ]
         });
 
         let button = container.find("#foo");
 
-        assert.isOk(button.attr("href") == "http://www.kendoui.com");
+        assert.isOk(button.attr("href") == "http://www.kendoui.com/");
     });
 
     it("align sets a class to the button element to define its alignment", function() {

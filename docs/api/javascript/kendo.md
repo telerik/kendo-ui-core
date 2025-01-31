@@ -315,11 +315,19 @@ The `onChange` method will be executed when the media query is matched or not ma
 
 The `destroy` method will remove the event listeners and destroy the `MediaQueryList` instance. Note that developers should call the `destroy` method when the media query is no longer needed.
 
+You can modify the default [`media queries`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries) for the adaptive components by modifying the breakpoints defined in `kendo.defaults.breakpoints`. The default break points are defined as:
+
+`kendo.defaults.breakpoints = { small: '(max-width: 700px)', medium: '(min-width: 700.1px) and (max-width: 768px)', large: '(min-width: 768.1px)' }`
+
 #### Parameters
 
 ##### media `String`
 
 The media query that will create the [MediaQueryList instance](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList).
+
+#### Returns
+
+`Object` with the `mediaQueryList` field and the `onChange`, `onEnter`, `onLeave` and `destroy` methods.
 
 #### Example - Using a string
 
@@ -359,10 +367,26 @@ The media query that will create the [MediaQueryList instance](https://developer
         mediaQueryListener.destroy();
     </script>
 
-#### Returns
+#### Example - Modify the default breakpoints for the the adaptive components
 
-`Object` with the `mediaQueryList` field and the `onChange`, `onEnter`, `onLeave` and `destroy` methods.
+```dojo
+    <input id="dropdownlist"/>
+    <script>
+      let defaultBreakpoints = {
+        small: '(max-width: 2000px)',
+        medium: '(min-width: 2000px) and (max-width: 2800px)',
+        large: '(min-width: 2800px)'
+      }
 
+      kendo.setDefaults('breakpoints', defaultBreakpoints);
+
+      $("#dropdownlist").kendoDropDownList({
+        adaptiveMode:"auto",
+        dataSource: ["Item1", "Item2"],
+        value: "Item1"
+      });
+    </script>
+```
 
 
 ### observableFileManagerData

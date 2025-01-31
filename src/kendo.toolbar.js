@@ -846,7 +846,7 @@ export const __meta__ = {
                 options.themeColor = PRIMARY;
             }
             if (options.url) {
-                widgetElement = $("<a href='" + options.url + "'>");
+                widgetElement = $("<a href='" + kendo.sanitizeLink(options.url) + "'>");
             }
             if (options.showIcon === OVERFLOW) {
                 delete options.imageUrl;

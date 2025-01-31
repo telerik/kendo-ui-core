@@ -17,6 +17,7 @@ export const __meta__ = {
         ui = kendo.ui,
         keys = kendo.keys,
         encode = kendo.htmlEncode,
+        sanitizeLink = kendo.sanitizeLink,
         extend = $.extend,
 
         DOT = ".",
@@ -85,7 +86,7 @@ export const __meta__ = {
                                                         `${TEXT_TEMPLATE({ text })}` +
                                                     `</span>`;
 
-    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${encode(url)}" ${attributes.target ? `target="${attributes.target}"` : ''} class="${cssClasses.item}">` +
+    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${sanitizeLink(url)}" ${attributes.target ? `target="${attributes.target}"` : ''} class="${cssClasses.item}">` +
                                                     `${IMAGE_TEMPLATE({ imageUrl })}` +
                                                     `${SPRITE_TEMPLATE({ spriteCssClass })}` +
                                                     `${ICON_TEMPLATE({ icon })}` +

@@ -2468,7 +2468,7 @@ export const __meta__ = {
                     var imgAttributes = fieldAccessor("imageAttr")(item);
                     var tag = url ? 'a' : 'span';
 
-                    return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${url}'` : ''} >` +
+                    return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${kendo.sanitizeLink(url)}'` : ''} >` +
                         (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
                         this.templates.sprite(item) +
                         this.options.template(data) +
