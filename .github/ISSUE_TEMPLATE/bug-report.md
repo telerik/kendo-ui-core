@@ -1,3 +1,12 @@
+---
+name: Bug Report
+about: Log new bug
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 ### Bug report
 
 **For Support request - Please do not submit support request here, instead see the** [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui) or our [support system](http://www.telerik.com/support) **at Telerik.com** !
@@ -15,10 +24,12 @@ Provide additional information if the steps for reproducing the faulty behavior 
 ### Expected/desired behavior
 Explain what the expected behavior of the functionality is
 
+### TicketID:
+_(optional)_
+Provide the TicketID, where the bug report initiated.
+
 ### Environment
 
 * **Kendo UI version:** 202x.r.ddd
 * **jQuery version:** x.y
-* **Browser:** [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ] 
-
-
+* **Browser:** [all | Chrome XX | Firefox XX | Edge XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]
