@@ -12,6 +12,12 @@ The new and improved versions of the UI components sometimes bring changes that 
 
 This document describes how to troubleshoot your application and what to be wary of when upgrading to new {{ site.product }} releases.
 
+## 2025 Yearly Releases
+
+The issues listed below are common when upgrading to {{ site.product }} versions released in 2025. Follow the link next to each problem to find the solution.
+
+* You have a commercial license, but a license-related warning message appears in the browser's console, as a banner, and as a watermark for the components&mdash;The solution for {{ site.product }} version `2025.1.212` or newer is to [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates). The solution for {{ site.product }} version `2024.4.1112` or older is [to generate, add, and reference a license file]({% slug remove-license-warning-message %}).
+
 ## 2023 Yearly Releases
 
 The issues listed below are common when upgrading to {{ site.product }} versions released in 2023. Follow the link next to each problem to find the solution.

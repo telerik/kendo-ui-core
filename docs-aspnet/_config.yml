@@ -121,15 +121,27 @@ navigation:
      "installation":
         title: "Installation & Upgrade"
         position: 4
-     "installation-mvc":
-        title: "Installation"
-        position: 4
      "installation/system-requirements":
         title: "System Requirements"
         position: 1
+     "installation/installation-options":
+        title: "Instalation Options"
+        position: 2
+     "installation/activating-your-license":
+        title: "Activating Your License"
+        position: 3
+     "installation-mvc":
+        title: "Installation"
+        position: 4
      "installation-mvc/system-requirements":
         title: "System Requirements"
         position: 1
+     "installation-mvc/installation-options":
+        title: "Instalation Options"
+        position: 2
+     "installation-mvc/activating-your-license":
+        title: "Activating Your License"
+        position: 3
      "installation/adding-client-side-resources":
          title: "Providing Client-Side Resources"
          position: 6
@@ -246,6 +258,9 @@ navigation:
      "tutorials/tutorial-saleshub/order-page":
         title: "Order Page"
         position: 3
+     "licensing":
+        title: "Licensing"
+        position: 59
      "troubleshoot":
         title: "Troubleshooting"
         position: 60

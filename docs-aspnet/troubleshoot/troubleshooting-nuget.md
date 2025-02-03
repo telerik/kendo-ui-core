@@ -4,6 +4,7 @@ description: "Common issues that may occur when you use the Telerik NuGet server
 page_title: Telerik NuGet Troubleshooting
 slug: troubleshooting_telerik_nuget
 tags: long, nuget, package, installation
+position: 4
 ---
 
 # Troubleshooting Telerik NuGet

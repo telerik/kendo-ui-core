@@ -3,7 +3,7 @@ title: Scaffolding
 page_title: Scaffolding Troubleshooting
 description: "Learn about the solutions of issues that may occur while using the Telerik UI Scaffolder Visual Studio Extension."
 slug: troubleshooting_scaffolding_aspnetmvc
-position: 2
+position: 5
 ---
 
 # Scaffolding

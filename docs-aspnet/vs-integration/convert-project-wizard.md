@@ -81,6 +81,10 @@ You can create a back up for the project in the state they were before the updat
 ![{{ site.product_short }} Theme selection](../vs-integration/images/backup.png)
 {% endif %}
 
+### Step 4: Install or Update License Key
+
+If necessary, the Telerik Visual Studio extension will notify you about a missing or outdated [license key]({%slug installation_license_key_aspnetcore%}), and will install or update it.
+
 {% if site.mvc %}
 ## Project Settings
 

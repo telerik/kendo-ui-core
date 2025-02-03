@@ -36,6 +36,9 @@ To create a Telerik-enabled ASP.NET Core project:
 
     ![{{ site.product_short }} choose Telerik template, project name and location](images/project-name-and-location.png)
 
+## Install or Update License Key
+
+If necessary, the Telerik Visual Studio Code extension will notify you about a missing or outdated [license key]({%slug installation_license_key_aspnetcore%}), and will install or update it.
 
 ## Configure the Project
 

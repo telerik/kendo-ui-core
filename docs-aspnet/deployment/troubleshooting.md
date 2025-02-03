@@ -11,7 +11,7 @@ position: 20
 This page provides information for common issues you may encounter while deploying applications with the {{ site.product_short }} components.
 
 
->important The machine that performs the publish build must be able to properly restore the referenced Telerik NuGet packages. See the [CI, CD, Build Server]({%slug deployment_ci_cd_build%}) article for more details on setting automation up.
+>important The machine that performs the publish build must be able to properly restore the referenced Telerik NuGet packages. For guidelines on how to use our online feed, refer to [Setting Up the Telerik NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}#setting-up-the-telerik-nuget-feed). See the [CI, CD, Build Server]({%slug deployment_ci_cd_build%}) article for more details on setting automation up.
 
 
 ### Trial Message

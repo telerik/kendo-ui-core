@@ -28,6 +28,12 @@ You can read more about deploying {{ site.framework }} applications in MSDN - ma
 * [Host and deploy ASP.NET MVC](https://learn.microsoft.com/en-us/aspnet/mvc/overview/deployment/)
 {% endif %}
 
+@[template](/_contentTemplates/licensing-templates.md#ci-cd-support)
+
+## License Key
+
+Before building a {{ site.framework }} app in a CI/CD environment, [set up a Telerik license key in CI/CD]({%slug deployment_license_key_aspnetcore%}). The process is different than in a [local development environment]({%slug installation_license_key_aspnetcore%}).
+
 ## Telerik Components
 
 The {{ site.product }} components consist of:

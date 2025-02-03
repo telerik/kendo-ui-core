@@ -22,7 +22,7 @@ The following general requirements apply to all CI/CD environments:
 
 Each platform has a different process for setting environment variables. Some popular examples are listed below.
 
->note Starting with the 2025 Q1 release, the name of the environment variable changes from KENDO_UI_LICENSE to TELERIK_LICENSE and the downloaded file changes from kendo-ui-license.txt to telerik-ui-license.txt. This change is required as all Telerik UI and Kendo UI products now use the same licensing mechanism with a common license key. See the [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release KB article]({% slug handling-license-file-name-changes %}) for more details.
+>note Starting with the 2025 Q1 release, the name of the environment variable changes from KENDO_UI_LICENSE to TELERIK_LICENSE and the downloaded file changes from `kendo-ui-license.txt` to `telerik-license.txt`. This change is required as all Telerik UI and Kendo UI products now use the same licensing mechanism with a common license key. See the [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release KB article](https://docs.telerik.com/kendo-ui/knowledge-base/license-key-file-name-and-environment-variable) for more details.
 
 ## GitHub Actions
 

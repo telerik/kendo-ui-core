@@ -35,7 +35,7 @@ To download a license key for Kendo UI for jQuery, you must have either a develo
 
 Whenever you purchase a new Kendo UI for jQuery license or renew an existing one, always [download](#downloading-the-license-key) and install a new license key. The new license key includes information about all previous license purchases. The procedure for the installation of a new license key and update of a license key is the same:
 
-1. Copy the `telerik-license.txt` license key file to the root folder of your application. This is the folder that contains the `package.json` file.
+1. Copy the [downloaded](#downloading-the-license-key) `telerik-license.txt`  license key file to your home directory. This makes the license key available to all projects that you develop on your computer.
 
      * For Windows: `%AppData%\Telerik\telerik-license.txt`
      * For Mac/Linux: `~/.telerik/telerik-license.txt`

@@ -2,9 +2,9 @@
 title: Installing with NuGet
 page_title: Installing with NuGet
 description: "Learn how to install {{ site.product }} by using the NuGet packages available from the Telerik NuGet source."
-previous_url: /getting-started/nuget-install, /getting-started/installation/nuget-install, /nuget-install, /installation-mvc/nuget-install
+previous_url: /getting-started/nuget-install, /getting-started/installation/nuget-install, /nuget-install, /installation-mvc/nuget-install, /installation/nuget-install
 slug: nuget_install_aspnetmvc6_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Installing {{ site.product }} with NuGet
@@ -174,7 +174,11 @@ The NuGet packages allow you to use the Telerik UI {% if site.core %}Tag Helpers
 
 ## List of Provided Packages
 
-The NuGet feed provides the following packages related to {{ site.product_short }}:
+Some of the {{ site.product_short }} NuGet packages are provided through the Telerik NuGet feed. Others are publicly available through the default NuGet package source `nuget.org`.
+
+### Telerik Packages Available on the Telerik NuGet Feed
+
+The Telerik NuGet feed provides the following packages related to {{ site.product_short }}:
 
 {% if site.core %}
 - `Telerik.UI.for.AspNet.Core`&mdash;Telerik UI for ASP.NET Core Commercial.
@@ -184,11 +188,27 @@ The NuGet feed provides the following packages related to {{ site.product_short 
 - `Telerik.UI.for.AspNet.Mvc5`&mdash;Telerik UI for ASP.NET MVC 5 Commercial. Installs the `Kendo.Mvc.dll` assembly, the ready-to-use editor templates based on Telerik UI for ASP.NET components, the CSS files used by the themes, and the Kendo JavaScript files.
 - `Telerik.UI.for.AspNet.Mvc5.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Trial. Installs a trial version of the `Kendo.Mvc.dll` assembly and the rest of the files included in the Commercial package.
 - `Telerik.UI.for.AspNet.Mvc5.Lite.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Lite Trial. Installs a trial version of the `Kendo.Mvc.dll` assembly and the ready-to-use editor templates based on Telerik UI for ASP.NET components.
-
->As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
 {% endif %}
 
-To install a specified {{ site.product }} version:
+### Telerik Packages Available on nuget.org
+
+The following three packages are not provided by the Telerik NuGet feed. They are available through the default NuGet package source `nuget.org`:
+
+- [`Telerik.Licensing`](https://www.nuget.org/packages/Telerik.Licensing)&mdash;Verifies the licensing status of the developer during app build. Requires a [license key]({%slug installation_license_key_aspnetcore%}). Available on `nuget.org`.
+- [`Telerik.SvgIcons`](https://www.nuget.org/packages/Telerik.SvgIcons)&mdash;Contains all Telerik SVG icons. Available on `nuget.org`.
+- [`Telerik.FontIcons`](https://www.nuget.org/packages/Telerik.FontIcons)&mdash;Contains all Telerik font icons. Available on `nuget.org`.
+
+To [use a local NuGet feed](https://learn.microsoft.com/en-us/nuget/hosting-packages/local-feeds), download the packages from:
+
+* [Telerik.Licensing](https://www.nuget.org/packages/Telerik.Licensing)
+* [Telerik.SvgIcons](https://www.nuget.org/packages/Telerik.SvgIcons)
+* [Telerik.FontIcons](https://www.nuget.org/packages/Telerik.FontIcons)
+
+>As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
+
+## Telerik NuGet Packages Installation
+
+To install a specific {{ site.product }} version:
 
 1. Select the package in the [NuGet package manager](https://docs.nuget.org/consume/package-manager-dialog).
 1. In the right pane, select a **Version** from the dropdown list.
@@ -198,8 +218,18 @@ To install a specified {{ site.product }} version:
 {% else %}
 	 ![{{ site.product_short }} Installing a specified package version](./images/mvc-install-package-version.png)
 {% endif %}
+1. Install a [Telerik license key](#license-key).
 
 For more information on the list of the provided Kendo UI packages, refer to the article on [installing Kendo UI for jQuery with NuGet](https://docs.telerik.com/kendo-ui/intro/installation/nuget-install).
+
+## Installing Your License Key
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-version)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-manual-steps)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-know-more-link)
+
 
 ## Troubleshooting Issues with NuGet
 

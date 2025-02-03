@@ -2,9 +2,9 @@
 title: Installing with the MSI Installer
 page_title: Installing with the MSI Installer for Windows
 description: "Get started with {{ site.product }} and install the components with the Windows MSI Installer Package."
-previous_url: /getting-started/installation/msi-install, /installation-mvc/msi-install
+previous_url: /getting-started/installation/msi-install, /installation-mvc/msi-install, /installation/msi-install
 slug: msi_install_aspnetmvc6_aspnetmvc
-position: 2
+position: 3
 ---
 
 # Installing {{ site.product }} with the MSI Installer for Windows
@@ -14,6 +14,8 @@ This article describes how to download and install {{ site.product }} on a Windo
 Using the MSI Installer gives you the following advantages:
 
 * It allows you to install the [Telerik UI extensions for Visual Studio]({% slug overview_visualstudio_aspnetcore %})&mdash;the extensions provide project templates and automate the project configuration.
+
+* It automatically downloads the license key and saves it to the home directory of the user.
 
 * It can automatically add the Telerik NuGet server to the package manager in Visual Studio.
 

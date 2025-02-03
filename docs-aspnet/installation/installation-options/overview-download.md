@@ -2,7 +2,7 @@
 title: Installation Options
 page_title: Download and Installation
 description: "Get started with {{ site.product }} and learn about the available installation approaches."
-previous_url: /getting-started/installation/overview-download, /getting-started/installation/overview, /installation-mvc/overview
+previous_url: /getting-started/installation/overview-download, /getting-started/installation/overview, /installation-mvc/overview, /installation/overview-download
 slug: downloadinstall_aspnetcore
 position: 1
 ---
@@ -71,6 +71,15 @@ To download the {{ site.product }} binaries with the components, you can use eit
 {% endif %}
 
 > As of R1 2024, all of the binaries and NuGet packages will be digitally signed {% if site.core %}. {% else %} and the `telerik.ui.for.aspnetmvc.hotfix.{VERSION}.commercial.digitally-signed` package will be deprecated.{% endif %}
+
+## Setting Up Your License Key
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-version)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-manual-steps)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-know-more-link)
+
 
 ## Providing the Client-Side Resources
 

@@ -129,13 +129,10 @@ If you are using Kendo UI versions after `R3 2022` and loading the required scri
       });
 ```
 
-## Related Articles
+## See Also
 
 * [Troubleshooting an Invalid Kendo UI License]({% slug invalid-license %})
 * [Generating and Using a License File]({% slug using-license-code %})
-
-## See Also
-
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
 * [Setting Up Your License Key]({% slug using-license-code %})
 * [Adding the License Key to CI Services]({% slug using-license-code %})
