@@ -52,7 +52,7 @@ Follow the [automatic]({%slug installation_license_key_aspnetcore%}#automatic-in
 
 You are using a product version released outside the validity period of your perpetual license. To remove the error message, do either of the following:
 
-* <a href="https://www.telerik.com/account/your-licenses" target="_blank">Renew your subscribtion</a>. Then, [update your license key](slug://installation-license-key#license-key-updates).
+* <a href="https://www.telerik.com/account/your-licenses" target="_blank">Renew your subscribtion</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
 * Downgrade your app to a {{ site.product }} version that was released within the subscription period of your perpetual license.
 
 ### Your trial license has expired
