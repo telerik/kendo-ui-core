@@ -1,6 +1,6 @@
 #license-key-version
 
->tip Starting with {{ site.product }} version 2025.1.212, you must activate the UI components by providing a license key file. Previous versions do not require a license key.
+>tip Starting with {{ site.product }} 2025 Q1 release, you must activate the UI components by providing a license key file. Previous versions do not require a license key.
 
 #end
 
