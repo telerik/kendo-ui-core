@@ -13,6 +13,7 @@ By using the Telerik REPL for ASP.NET Core, you can write razor code that contai
 
 * [Adding static assets](#adding-static-assets)
 * [Customizing the visual theme](#customizing-the-theme)
+* [Adding snippets](#adding-snippets)
 * [Rendering HTML](#rendering-html)
 * [Using Razor code blocks](#using-razor-code-blocks)
 * [Using Razor local methods](#using-razor-local-methods)
@@ -33,6 +34,14 @@ To add js or CSS files as static assets, click the Static Asset Manager icon and
 To change the theme for the {{site.product}} components, select a new theme from the theme selection dropdown.
 
    ![{{ site.product_short }} REPL Theme Manager](../../getting-started-core/REPL/images/repl-theme-manager.png)
+
+## Adding Snippets
+
+The Telerik REPL for ASP.NET Core provides a list of predefined code snippets for fast UI component reference and configuration.
+
+The basic snippets are listed in the Snippets section of the REPL Sidebar. You can browse to find the desired snippet and use both the `HtmlHelper` or `TagHelper` flavour of the snippet.
+
+   ![{{ site.product_short }} REPL Snippets](../../getting-started-core/REPL/images/repl-built-in-snippets.png)
 
 ## Rendering HTML
 

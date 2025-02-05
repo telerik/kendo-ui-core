@@ -18,7 +18,7 @@ To open an existing {{site.product}} demo in the Telerik REPL:
 1. Navigate to the [{{site.product}} Demos website](https://demos.telerik.com/aspnet-core/).
 1. Select the desired demo, and then click **Edit in Telerik REPL**.
 
-   ![{{ site.product_short }} Running a demo in REPL](../../getting-started-core/repl/images/repl-run-demo.png)
+   ![{{ site.product_short }} Running a demo in REPL](../../getting-started-core/REPL/images/repl-run-demo.png)
 
 ## Using Predefined Models
 
