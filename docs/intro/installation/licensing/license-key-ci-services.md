@@ -4,12 +4,12 @@ page_title: Setting Up and Activating the Kendo UI for jQuery License Key Across
 description: "Get started with Kendo UI for jQuery and learn how to set up and activate the Kendo UI for jQuery license key across popular CI services."
 slug: license-key-to-ci-services
 published: True
-position: 2
+position: 4
 ---
 
 # Adding the License Key to CI Services
 
-This article describes how to set up and activate your Kendo UI for jQuery [license key]({% slug using-license-code %}) across a few popular CI services by using environment variables or secrets.
+This article describes how to set up and activate your Kendo UI for jQuery [license key]({% slug using-license-file %}) across a few popular CI services by using environment variables or secrets.
 
 The following general requirements apply to all CI/CD environments:
 
@@ -26,7 +26,7 @@ Each platform has a different process for setting environment variables. Some po
 
 ## GitHub Actions
 
-1. Create a new [Repository Secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) or an [Organization Secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-an-organization). Set the name of the secret to `TELERIK_LICENSE` and paste the contents of the [license key file]({% slug using-license-code %}) as a value.
+1. Create a new [Repository Secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) or an [Organization Secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-an-organization). Set the name of the secret to `TELERIK_LICENSE` and paste the contents of the [license key file]({% slug using-license-file %}) as a value.
 2. After running `npm install` or `yarn`, add a build step to activate the license:
 
 ```yaml
@@ -50,7 +50,7 @@ steps:
 ## GitLab CI/CD Pipelines
 
 1. Go to `Settings > CI/CD > Variables` in your GitLab project.
-2. Add a new variable named `TELERIK_LICENSE` and paste the content of the [downloaded license key file]({% slug using-license-code %}) as a value.
+2. Add a new variable named `TELERIK_LICENSE` and paste the content of the [downloaded license key file]({% slug using-license-file %}) as a value.
 3. After running `npm install` or `yarn`, add a build step to activate the license.
 
 ```yaml
@@ -77,7 +77,7 @@ activate_license:
 
 ## Azure Pipelines (YAML)
 
-1. Create a new User-defined Variable named `TELERIK_LICENSE`. Paste the contents of the [downloaded license key file]({% slug using-license-code %}) as a value.
+1. Create a new User-defined Variable named `TELERIK_LICENSE`. Paste the contents of the [downloaded license key file]({% slug using-license-file %}) as a value.
 2. After running `npm install` or `yarn`, add a build step to activate the license.
 
 The following example provides the syntax for Windows build agents.
@@ -122,7 +122,7 @@ steps:
 
 ## Azure Pipelines (Classic)
 
-1. Create a new [user-defined variable](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=classic%2Cbatch) named `TELERIK_LICENSE`. Paste the contents of the [downloaded license key file]({% slug using-license-code %}) as a value.
+1. Create a new [user-defined variable](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=classic%2Cbatch) named `TELERIK_LICENSE`. Paste the contents of the [downloaded license key file]({% slug using-license-file %}) as a value.
 2. Before the NPM build task, add a new Bash task to the Agent job.
 3. Change the step to inline and use the following command:
 
@@ -142,5 +142,6 @@ npx kendo-ui-license activate
 ## See Also
 
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
-* [Setting Up Your License Key]({% slug using-license-code %})
+* [Setting Up Your License Key]({% slug using-license-file %})
 * [Frequently Asked Questions about Your Kendo UI for jQuery License Key]({% slug license-code-faq %})
+* [Licensing Overview]({% slug licensing-overview %})

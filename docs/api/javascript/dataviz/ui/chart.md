@@ -7816,6 +7816,8 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 The chart legend configuration options.
 
+> The colors assigned to individual points are not reflected in the legend for series-based charts (e.g. column, line, bar). The legend items are tied to the series, not to individual points, except in cases like pie or donut charts where each point has a dedicated legend item.
+
 #### Example - configure the chart legend
     <div id="chart"></div>
     <script>

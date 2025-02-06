@@ -93,4 +93,4 @@ To use the `Scaffolders` functionality, follow the steps below:
 
 * [First Steps with Kendo UI for jQuery]({% slug getting_started_installation_kendoui %})
 * [Downloading the Bundles]({% slug hosting_kendoui %})
-* [Using Script License Code]({% slug using-license-code %})
+* [Licensing Overview]({% slug licensing-overview %})

@@ -5,7 +5,7 @@ description: "Find answers to the most common questions related to the script li
 slug: license-code-faq
 published: True
 previous_url: /intro/installation/license-code-faq
-position: 3
+position: 6
 ---
 
 # Script License File: Frequently Asked Questions
@@ -131,8 +131,7 @@ If you are using Kendo UI versions after `R3 2022` and loading the required scri
 
 ## See Also
 
-* [Troubleshooting an Invalid Kendo UI License]({% slug invalid-license %})
-* [Generating and Using a License File]({% slug using-license-code %})
+* [Licensing Overview]({% slug licensing-overview %})
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
-* [Setting Up Your License Key]({% slug using-license-code %})
-* [Adding the License Key to CI Services]({% slug using-license-code %})
+* [Adding the License Key to CI Services]({% slug license-key-to-ci-services %})
+* [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release]({% slug handling-license-file-name-changes %})

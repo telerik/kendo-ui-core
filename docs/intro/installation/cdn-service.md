@@ -11,7 +11,7 @@ position: 40
 
 The Kendo UI for jQuery CDN resides on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). The service maintains the official Kendo UI for jQuery releases and service packs, and provides no access to internal builds. 
 
-> As of the R3 2022 release, you need to activate the CDN distribution by [using a license file]({% slug using-license-code %}).
+> As of the R3 2022 release, you need to activate the CDN distribution by [using a license key]({% slug using-license-code %}).
 
 ## 1. Add the Required JavaScript and CSS Files
 
@@ -59,7 +59,7 @@ The minified Kendo UI for jQuery scripts are available as of the Kendo UI Q1 201
 
 ## 2. Set Up the License File
 
-[Generate a license file]({% slug using-license-code %}) and follow the instructions.
+[Generate a license key]({% slug using-license-file %}) and follow the instructions.
 
 ## 3. Add the HTML Element for Component Initialization
 
@@ -140,4 +140,4 @@ The following example demonstrates how to initialize a DropDownList with some ba
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
-* [Using Script License Code]({% slug using-license-code %})
+* [Licensing Overview]({% slug licensing-overview %})

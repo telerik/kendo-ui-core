@@ -1,11 +1,10 @@
 ---
-title: Setting Up Your Kendo UI for jQuery License Key
-page_title: Setting Up the Kendo UI for jQuery License Key - Download and Installation
+title: Adding a License Key File (NPM)
+page_title: Setting Up the Kendo UI for jQuery License Key - Download and Installation by Using NMP registry
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library from the NPM distribution channel and register the script license file."
-slug: using-license-code
-previous_url: /intro/installation/using-license-code
+slug: using-license-file
 published: True
-position: 1
+position: 3
 ---
 
 # Setting Up Your Kendo UI for jQuery License Key
@@ -29,7 +28,7 @@ To download a license key for Kendo UI for jQuery, you must have either a develo
 
 ![Download License Key](../images/download-license-key.png) 
 
->note Starting with the 2025 Q1 release, the name of the downloaded file changes from `kendo-ui-license.txt` to `telerik-ui-license.txt`. This change is required as all Telerik UI and Kendo UI products now use the same licensing mechanism with a common license key. See the [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release] KB article for more details.
+>note Starting with the 2025 Q1 release, the name of the downloaded file changes from `kendo-ui-license.txt` to `telerik-license.txt`. This change is required as all Telerik UI and Kendo UI products now use the same licensing mechanism with a common license key. See the [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release]({% slug handling-license-file-name-changes }) KB article for more details.
 
 ## Installing or Updating the License Key
 
@@ -56,10 +55,16 @@ yarn add @progress/kendo-licensing
 3. Activate the license by running:
 
 ```sh
+npx kendo-ui-license activate
+```
+or
+```sh
 yarn run kendo-ui-license activate
 ```
 ## See Also
 
+* [Licensing Overview]({% slug licensing-overview %})
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
 * [Adding the License Key to CI Services]({% slug license-key-to-ci-services %})
 * [Frequently Asked Questions about Your Kendo UI for jQuery License Key]({% slug license-code-faq %})
+* [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release]({% slug handling-license-file-name-changes %})

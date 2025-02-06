@@ -540,7 +540,8 @@ export const __meta__ = {
             closeOnClick: true,
             hoverDelay: 100,
             scrollable: false,
-            popupCollision: null
+            popupCollision: null,
+            autoSize: false,
         },
 
         _initData: function() {
@@ -1167,8 +1168,9 @@ export const __meta__ = {
                                 $(menu.element).css({ height: "" });
                             }
                         }
-
-                        div.css({ maxHeight: options.scrollable ? "" : maxHeight, overflow: "visible", });
+                        const maxWidthNone = options.scrollable || options.autoSize;
+                        const overflow = options.autoSize ? "auto" : "visible";
+                        div.css({ maxHeight: maxWidthNone ? "" : maxHeight, overflow: overflow });
 
                         li.data(ZINDEX, li.css(ZINDEX));
                         var nextZindex = that.nextItemZIndex++;
@@ -1524,12 +1526,32 @@ export const __meta__ = {
             var that = this;
             const elements = that.element.find("li > ul");
 
-            that._groupElementsInitialSpace = Array.from(elements).map(element => ({
-                element,
-                width: kendo._outerWidth(element),
-                height: kendo._outerHeight(element),
-                inlineHeight: element.style && element.style.height ? element.style.height : ""
-            }));
+
+            that._groupElementsInitialSpace = Array.from(elements).map(element => {
+                let elementConfig;
+                let forceShow = false;
+                let parentPopup = element.closest(".k-animation-container") || element.closest(".k-popup");
+
+                parentPopup = $(parentPopup);
+
+                if (parentPopup && parentPopup.length && !parentPopup.is(":visible")) {
+                    forceShow = true;
+                    parentPopup.show();
+                }
+
+                elementConfig = {
+                    element,
+                    width: kendo._outerWidth(element),
+                    height: kendo._outerHeight(element),
+                    inlineHeight: element.style && element.style.height ? element.style.height : ""
+                };
+
+                if (forceShow) {
+                    parentPopup.hide();
+                }
+
+                return elementConfig;
+        });
 
             elements
                 .filter(function() {

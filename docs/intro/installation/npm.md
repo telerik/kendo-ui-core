@@ -24,7 +24,7 @@ All official releases, service packs, and internal builds are uploaded to both d
 
 The commercial distribution NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry. 
 
-> As of the R2 2022 release, the `@progress/kendo-ui` NPM package requires a [script license activation]({% slug using-license-code %}).
+> As of the R2 2022 release, the `@progress/kendo-ui` NPM package requires a [license activation]({% slug licensing-overview %}).
 
 To install `@progress/kendo-ui`, run the following command: 
 
@@ -277,4 +277,4 @@ import "@progress/kendo-ui/esm/kendo.grid.js"; //Imports the Grid related files 
 * [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Using Script License Code]({% slug using-license-code %})
+* [Licensing Overview]({% slug licensing-overview %})

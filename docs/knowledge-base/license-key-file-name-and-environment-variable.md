@@ -44,8 +44,8 @@ Although the introduced changes are not breaking changes, the Kendo team recomme
 2. Remove the legacy license key file and environment variable (if using environment variables to store the license key):
      * `kendo-ui-license.txt`
      * `KENDO_UI_LICENSE`
-3. [Download]({% slug using-license-code %}) a new license key file called `telerik-license.txt`.
-4. If using [environment variables]({% slug using-license-code %}) or secrets:
+3. [Download]({% slug using-license-file %}) a new license key file called `telerik-license.txt`.
+4. If using [environment variables]({% slug using-license-file %}) or secrets:
      <ol type="a">
        <li>Create a new environment variable called <code>TELERIK_LICENSE</code>.</li>
        <li>Add the newly downloaded license key as a variable value.</li>
@@ -55,7 +55,7 @@ Alternatively, only if you have an existing application or CI/CD environment whe
 
 ## See Also
 
-* [Setting Up Your License Key]({% slug using-license-code %})
+* [Licensing Overview]({% slug licensing-overview %})
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
 * [Adding the License Key to CI Services]({% slug license-key-to-ci-services %})
 * [Frequently Asked Questions about Your Kendo UI for jQuery License Key]({% slug license-code-faq %})
