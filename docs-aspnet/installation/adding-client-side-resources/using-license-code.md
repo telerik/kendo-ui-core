@@ -105,7 +105,7 @@ Add the `kendo-ui-license.js` file as a script reference right after the `kendo.
 ## Next Steps
 
 * [License File Frequently Asked Questions (Kendo UI for jQuery Documentation)](https://docs.telerik.com/kendo-ui/intro/installation/license-code-faq)
-* [License Activation Errors and Warnings]({% slug activation-error-warnings %})
+* [License Activation Errors and Warnings]({% slug troubleshooting-license-key-errors %})
 
 
 ## See Also

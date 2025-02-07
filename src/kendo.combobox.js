@@ -68,6 +68,7 @@ export const __meta__ = {
             element = that.element.on("focus" + ns, that._focusHandler.bind(that));
 
             options.placeholder = options.placeholder || element.attr("placeholder");
+            options.inputMode = options.inputMode || element.attr("inputmode") || "text";
 
             that._reset();
 
@@ -1059,7 +1060,8 @@ export const __meta__ = {
                 })
                 .attr({
                     "role": "combobox",
-                    "aria-expanded": false
+                    "aria-expanded": false,
+                    inputmode: options.inputMode
                 })
                 .show();
 

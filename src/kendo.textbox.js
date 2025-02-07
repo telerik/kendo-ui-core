@@ -41,6 +41,7 @@ export const __meta__ = {
             that.options.readonly = options.readonly !== undefined ? options.readonly : Boolean(that.element.attr("readonly"));
             that.options.enable = options.enable !== undefined ? options.enable : !(Boolean(that.element.attr("disabled")));
             that.options.placeholder = options.placeholder || that.element.attr("placeholder");
+            that.options.inputMode = options.inputMode || that.element.attr("inputmode") || "text";
 
             that.value(that.options.value);
             that._wrapper();
@@ -53,6 +54,7 @@ export const __meta__ = {
             that.element
                 .addClass(INPUT)
                 .attr("placeholder", that.options.placeholder)
+                .attr("inputmode", that.options.inputMode)
                 .attr("autocomplete", "off");
 
             if (options.icon) {

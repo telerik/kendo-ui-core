@@ -66,6 +66,7 @@ export const __meta__ = {
                            .attr("role", "spinbutton");
 
              options.placeholder = options.placeholder || element.attr("placeholder");
+             options.inputMode = options.inputMode || element.attr("inputmode") || "text";
 
              min = that.min(element.attr("min"));
              max = that.max(element.attr("max"));
@@ -575,6 +576,8 @@ export const __meta__ = {
                 wrapper = that.wrapper,
                 inputs = wrapper.find(POINT + INPUT),
                 text;
+
+            that.element.attr("inputmode", options.inputMode);
 
             text = inputs.first();
 

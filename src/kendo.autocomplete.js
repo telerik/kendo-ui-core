@@ -79,6 +79,8 @@ export const __meta__ = {
             options = that.options;
 
             options.placeholder = options.placeholder || element.attr("placeholder");
+            options.inputMode = options.inputMode || element.attr("inputmode") || "text";
+
             if (placeholderSupported) {
                 element.attr("placeholder", options.placeholder);
             }
@@ -119,7 +121,8 @@ export const __meta__ = {
                 .attr({
                     autocomplete: AUTOCOMPLETEVALUE,
                     role: "combobox",
-                    "aria-expanded": false
+                    "aria-expanded": false,
+                    inputmode: options.inputMode
                 });
 
             that._clear.on("click" + ns + " touchend" + ns, that._clearValue.bind(that));

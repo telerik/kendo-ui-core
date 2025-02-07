@@ -67,10 +67,12 @@ export const __meta__ = {
             that._wrapper();
             that._tokenize();
             that._form();
+            that.options.inputMode = that.options.inputMode || element.attr("inputmode") || "text";
 
             that.element
                 .addClass("k-input-inner")
                 .attr("autocomplete", "off")
+                .attr("inputmode", that.options.inputMode)
                 .on("focus" + NS, function() {
                     var value = DOMElement.value;
 

@@ -159,7 +159,7 @@ Sets a value that indicates whether to automatically correct the segment when ou
 
 #### Example - specify German culture internationalization
 
-    <!--        
+    <!--
         List of available cultures - https://github.com/telerik/kendo-ui-core/tree/master/src/cultures
 
         For more information check this help topic:
@@ -253,6 +253,12 @@ Sets a value controlling how the color is applied. Can also be set to the follow
         format: "HH:mm"
     });
     </script>
+
+
+### inputMode `String`*(default: "text")*
+
+Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
+
 
 ### label `String|Function|Object` *(default: null)*
 

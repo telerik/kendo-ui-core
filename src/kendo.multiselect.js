@@ -86,6 +86,7 @@ export const __meta__ = {
 
             that._optionsMap = {};
             that._customOptions = {};
+            that.options.inputMode = that.options.inputMode || that.element.attr("inputmode") || "text";
 
             that._wrapper();
             that._inputValuesContainer();
@@ -1559,6 +1560,7 @@ export const __meta__ = {
 
             element.removeAttr("accesskey");
             input.attr("data-validate", "false");
+            input.attr("inputmode", that.options.inputMode);
 
             that._focused = that.input = input.attr({
                 "autocomplete": AUTOCOMPLETEVALUE,

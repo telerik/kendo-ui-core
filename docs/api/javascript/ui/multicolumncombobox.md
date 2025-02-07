@@ -830,6 +830,11 @@ The widget instance.
     });
     </script>
 
+
+### inputMode `String`*(default: "text")*
+
+Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
+
 ### label `String|Function|Object` *(default: null)*
 
 Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
@@ -2309,7 +2314,7 @@ A number representing the index of the item or function predicate which returns 
 
     var multicolumncombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
     var selectedIndex = multicolumncombobox.select();
-    
+
     /* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(selectedIndex)
     </script>

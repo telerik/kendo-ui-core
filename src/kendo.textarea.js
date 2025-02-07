@@ -40,6 +40,7 @@ export const __meta__ = {
             that.options.enable = options.enable !== undefined ? options.enable : !(Boolean(that.element.attr("disabled")));
             that.options.placeholder = options.placeholder || that.element.attr("placeholder");
             that.options.maxLength = options.maxLength || that.element.attr("maxlength");
+            that.options.inputMode = options.inputMode || that.element.attr("inputmode") || "text";
 
             if (!that.options.value.replace(/\s/g, '').length) {
                 that.options.value = '';
@@ -56,6 +57,7 @@ export const __meta__ = {
             that._applyAttributes();
             that._applyCssClasses();
             that.element.attr("autocomplete", "off");
+            that.element.attr("inputmode", that.options.inputMode);
 
             addInputPrefixSuffixContainers({ widget: that, wrapper: that.wrapper, options: that.options });
             if (that.floatingLabel) {

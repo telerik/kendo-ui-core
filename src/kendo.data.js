@@ -3099,7 +3099,7 @@ export const __meta__ = {
                         // Ensure all children of a parent are removed before the change event is triggered.
                         if (index !== itemsToRemove.length - 1) {
                             items.omitChangeEvent = true;
-                            items.omitCache = [];
+                            items.omitCache = items.omitCache || [];
                         } else {
                             items.omitChangeEvent = false;
                         }

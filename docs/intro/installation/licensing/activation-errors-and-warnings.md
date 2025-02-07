@@ -29,7 +29,7 @@ If you use Kendo UI for jQuery in a project with an invalid license, the UI comp
 
 * A [watermark](#watermark) appears over a number of selected components.
 * A [banner](#banner) is rendered on pages that use the Kendo UI for jQuery components.
-* A [warning message](#warning-message) is logged in the browser console of pages rendering the Kendo UI for jQuery components.
+* A [warning message](#console-warning) is logged in the browser console of pages rendering the Kendo UI for jQuery components.
 
 ### Watermark
 
@@ -37,7 +37,7 @@ If you use Kendo UI for jQuery in a project with an invalid license, the UI comp
 
      ![Watermark in the Light Theme](../images/watermark.png)
 
-* A watermark appearing in the Dark Theme mode:
+* A watermark appearing in the `Dark Theme` mode:
 
      ![Watermark in the Dark Theme](../images/watermark-dark-theme.png)
 

@@ -32,7 +32,7 @@ Specifies the culture info used by the widget.
 
 #### Example - specify German culture internationalization
 
-   
+
     <script src="https://kendo.cdn.telerik.com/2024.3.1015/js/cultures/kendo.culture.de-DE.min.js"></script>
     <input id="maskedtextbox" />
     <script>
@@ -60,6 +60,12 @@ Sets a value controlling how the color is applied. Can also be set to the follow
         fillMode: "flat"
     });
     </script>
+
+
+### inputMode `String`*(default: "text")*
+
+Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
+
 
 ### label `String|Function|Object` *(default: null)*
 

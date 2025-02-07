@@ -657,8 +657,8 @@ export const __meta__ = {
             }
         },
 
-        _wrapperMousedown: function() {
-            this._prevent = !!this.filterInput;
+        _wrapperMousedown: function(e) {
+            this._prevent = this.filterInput ? e.currentTarget !== this.filterInput[0] : true;
         },
 
         _wrapperClick: function(e) {
