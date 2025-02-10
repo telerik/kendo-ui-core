@@ -72,6 +72,178 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 });
 }
 
+if (kendo.ui.ChartWizard) {
+  kendo.ui.ChartWizard.prototype.options.messages =
+  $.extend(true, kendo.ui.ChartWizard.prototype.options.messages,{
+    "window": {
+      "title": "Chart Preview"
+    },
+    "export": "Export",
+    "exportPDF": "PDF File",
+    "exportSVG": "SVG File",
+    "exportPNG": "PNG File",
+    "tab": {
+        "chart": "Chart",
+        "data": "Data",
+        "format": "Format"
+    },
+    "chart": {
+        "bar": {
+            "expandText": "Bar Chart",
+            "bar": "Bar",
+            "stackedBar": "Stacked Bar",
+            "hundredStackedBar": "100% Stacked Bar",
+        },
+        "pie": {
+            "expandText": "Pie Chart",
+            "pie": "Pie",
+        },
+        "column": {
+            "expandText": "Column Chart",
+            "column": "Column",
+            "stackedColumn": "Stacked Column",
+            "hundredStackedColumn": "100% Stacked Column",
+        },
+        "line": {
+            "expandText": "Line Chart",
+            "line": "Line",
+            "stackedLine": "Stacked Line",
+            "hundredStackedLine": "100% Stacked Line",
+        },
+        "scatter": {
+            "expandText": "Scatter Chart",
+            "scatter": "Scatter",
+        },
+    },
+    "data": {
+        "configuration": {
+            "expandText": "Configuration",
+            "series": {
+                "title": "Series",
+                "add": "Add",
+            },
+            "valueAxis": "Value Axis",
+            "categoryAxis": "Category Axis",
+            "xAxis": "X Axis",
+        }
+    },
+    "format": {
+        "chartArea": {
+            "expandText": "Chart Area",
+            "margins": {
+                "default": "Margins",
+                "auto": "Auto",
+                "left": "Left",
+                "right": "Right",
+                "top": "Top",
+                "bottom": "Bottom",
+            },
+            "background": {
+                "default": "Background",
+                "color": "Color",
+            },
+        },
+        "title": {
+            "expandText": "Title",
+            "applyTo": "Apply to",
+            "chartTitle": "Chart Title",
+            "chartSubtitle": "Chart Subtitle",
+            "label": "Title",
+            "font": "Font",
+            "fontPlaceholder": "(inherited font)",
+            "size": "Size",
+            "sizePlaceholder": "px",
+            "color": "Color",
+        },
+        "series": {
+            "expandText": "Series",
+            "applyTo": "Apply to",
+            "allSeries": "All Series",
+            "color": "Color",
+            "showLabels": "Show Labels",
+        },
+        "legend": {
+            "expandText": "Legend",
+            "showLegend": "Show Legend",
+            "font": "Font",
+            "fontPlaceholder": "(inherited font)",
+            "size": "Size",
+            "sizePlaceholder": "px",
+            "color": "Color",
+            "position": {
+                "default": "Position",
+                "top": "Top",
+                "bottom": "Bottom",
+                "left": "Left",
+                "right": "Right",
+            }
+        },
+        "categoryAxis": {
+            "expandText": "Category Axis",
+            "title": {
+                "text": "Title",
+                "placeholder": "Axis Title",
+                "font": "Font",
+                "fontPlaceholder": "(inherited font)",
+                "size": "Size",
+                "sizePlaceholder": "px",
+                "color": "Color",
+            },
+            "labels": {
+                "text": "Labels",
+                "font": "Font",
+                "fontPlaceholder": "(inherited font)",
+                "size": "Size",
+                "sizePlaceholder": "px",
+                "color": "Color",
+                "rotation": {
+                    "text": "Rotation",
+                    "auto": "Auto",
+                },
+                "reverseOrder": "Reverse Order",
+            }
+        },
+        "valueAxis": {
+            "expandText": "Value Axis",
+            "title": {
+                "text": "Title",
+                "placeholder": "Axis Title",
+                "font": "Font",
+                "fontPlaceholder": "(inherited font)",
+                "size": "Size",
+                "sizePlaceholder": "px",
+                "color": "Color",
+            },
+            "labels": {
+                "text": "Labels",
+                "labelFormat": {
+                    "default": "Label Format",
+                    "text": "Text",
+                    "number": "Number",
+                    "currency": "Currency",
+                    "percent": "Percent",
+                },
+                "font": "Font",
+                "fontPlaceholder": "(inherited font)",
+                "size": "Size",
+                "sizePlaceholder": "px",
+                "color": "Color",
+                "rotation": {
+                    "text": "Rotation",
+                    "auto": "Auto",
+                },
+            },
+        },
+        "xAxis": {
+            "expandText": "X Axis",
+        },
+        "yAxis": {
+            "expandText": "Y Axis",
+        },
+    }
+});
+}
+
 /* DateRangePicker messages */
 
 if (kendo.ui.DateRangePicker) {

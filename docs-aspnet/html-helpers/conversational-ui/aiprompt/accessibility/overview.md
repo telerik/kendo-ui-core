@@ -14,9 +14,11 @@ The AIPrompt is compliant with the [Web Content Accessibility Guidelines (WCAG) 
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### AIPrompt
+
 
 The AIPrompt component is a composite one and integrates the accessibility of the Toolbar, TextArea, Card List container.
 
@@ -26,7 +28,8 @@ The AIPrompt component is a composite one and integrates the accessibility of th
 
 ### Prompt Suggestion Component
 
-The Prompt Suggestion list implements roving tabindex navigation. Meaning that only one suggestion has `tabindex=0`. The display of the suggestion list is controlled by the expand button.
+
+The Prompt suggestion list implements roving tabindex navigation. Meaning that only one suggestion has tabindex=0. The display of the suggestion list is controlled by the expand button.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -34,7 +37,7 @@ The Prompt Suggestion list implements roving tabindex navigation. Meaning that o
 |  | `aria-expanded=true/false` | Indicates the expanded state of the prompt expander content. |
 | `.k-prompt-expander .k-prompt-expander-content` | `role=list` | Indicates that the suggestion container element is a list. |
 | `.k-prompt-expander .k-prompt-suggestion` | `role=listitem` | Indicates that the suggestion element is a listitem. |
-|  | `tabindex=0/-1` | The element must be focusable. |
+|  | `tabindex=0/-1` | The element should be focusable. |
 
 ### Toolbar Component
 
@@ -46,15 +49,18 @@ The Prompt Suggestion list implements roving tabindex navigation. Meaning that o
 
 ## Section 508
 
-The AIPrompt is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The AIPrompt is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The AIPrompt has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The AIPrompt has been tested with the following screen readers and browsers combinations:
 
@@ -63,6 +69,8 @@ The AIPrompt has been tested with the following screen readers and browsers comb
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

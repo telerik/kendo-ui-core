@@ -652,7 +652,7 @@ export const __meta__ = {
                 press: that._press.bind(that),
             });
 
-            if (kendo.support.touch) {
+            if (kendo.support.touch && !options.allowTouchActions) {
                 that.element.find(that.options.filter).css('touch-action', 'none');
             }
 
@@ -683,7 +683,8 @@ export const __meta__ = {
             autoScroll: false,
             dropped: false,
             clickMoveClick: false,
-            preventOsHoldFeatures: false
+            preventOsHoldFeatures: false,
+            allowTouchActions: false,
         },
 
         cancelHold: function() {

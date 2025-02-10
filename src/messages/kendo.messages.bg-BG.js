@@ -1425,4 +1425,178 @@ if (kendo.ui.OrgChart) {
     });
 }
 
+/* ChartWizard messages */
+
+if (kendo.ui.ChartWizard) {
+  kendo.ui.ChartWizard.prototype.options.messages =
+  $.extend(true, kendo.ui.ChartWizard.prototype.options.messages,{
+    "window": {
+      "title": "Преглед на диаграмата"
+    },
+    "export": "Експортирай...",
+    "exportPDF": "Свали PDF",
+    "exportSVG": "Свали SVG",
+    "exportPNG": "Свали PNG",
+    "tab": {
+        "chart": "Диаграма",
+        "data": "Данни",
+        "format": "Формат"
+    },
+    "chart": {
+        "bar": {
+            "expandText": "Bar Chart",
+            "bar": "Bar",
+            "stackedBar": "Stacked Bar",
+            "hundredStackedBar": "100% Stacked Bar",
+        },
+        "pie": {
+            "expandText": "Pie Chart",
+            "pie": "Pie",
+        },
+        "column": {
+            "expandText": "Column Chart",
+            "column": "Column",
+            "stackedColumn": "Stacked Column",
+            "hundredStackedColumn": "100% Stacked Column",
+        },
+        "line": {
+            "expandText": "Line Chart",
+            "line": "Line",
+            "stackedLine": "Stacked Line",
+            "hundredStackedLine": "100% Stacked Line",
+        },
+        "scatter": {
+            "expandText": "Scatter Chart",
+            "scatter": "Scatter",
+        },
+    },
+    "data": {
+        "configuration": {
+            "expandText": "Конфигурация",
+            "series": {
+                "title": "Серия",
+                "add": "Добави",
+            },
+            "valueAxis": "Oс на стойностите",
+            "categoryAxis": "Категорийна ос",
+            "xAxis": "X Axis",
+        }
+    },
+    "format": {
+        "chartArea": {
+            "expandText": "Зона на диаграмата",
+            "margins": {
+                "default": "Разстояние",
+                "auto": "Авто",
+                "left": "Ляво",
+                "right": "Дясно",
+                "top": "Отгоре",
+                "bottom": "Отдолу",
+            },
+            "background": {
+                "default": "Фон",
+                "color": "Цвят",
+            },
+        },
+        "title": {
+            "expandText": "Заглавие",
+            "applyTo": "Приложи на",
+            "chartTitle": "Заглавие на диаграмата",
+            "chartSubtitle": "Подзаглавие на диаграмата",
+            "label": "Етикет",
+            "font": "Шрифт",
+            "fontPlaceholder": "(наследен шрифт)",
+            "size": "Размер",
+            "sizePlaceholder": "px",
+            "color": "Цвят",
+        },
+        "series": {
+            "expandText": "Серия",
+            "applyTo": "Приложи на",
+            "allSeries": "Всички серии",
+            "color": "Цвят",
+            "showLabels": "Покажи етикети",
+        },
+        "legend": {
+            "expandText": "Легенда",
+            "showLegend": "Покажи легенда",
+            "font": "Шрифт",
+            "fontPlaceholder": "(наследен шрифт)",
+            "size": "Размер",
+            "sizePlaceholder": "px",
+            "color": "Цвят",
+            "position": {
+                "default": "Позиция",
+                "top": "Отгоре",
+                "bottom": "Отдолу",
+                "left": "Ляво",
+                "right": "Дясно",
+            }
+        },
+        "categoryAxis": {
+            "expandText": "Категорийна ос",
+            "title": {
+                "text": "Заглавие",
+                "placeholder": "Заглавие на Оста",
+                "font": "Шрифт",
+                "fontPlaceholder": "(наследен шрифт)",
+                "size": "Размер",
+                "sizePlaceholder": "px",
+                "color": "Цвят",
+            },
+            "labels": {
+                "text": "Етикети",
+                "font": "Шрифт",
+                "fontPlaceholder": "(наследен шрифт)",
+                "size": "Размер",
+                "sizePlaceholder": "px",
+                "color": "Цвят",
+                "rotation": {
+                    "text": "Завъртане",
+                    "auto": "Авто",
+                },
+                "reverseOrder": "Обратен ред",
+            }
+        },
+        "valueAxis": {
+            "expandText": "Ос на стойностите",
+            "title": {
+                "text": "Заглавие",
+                "placeholder": "Заглавие на оста",
+                "font": "Шрифт",
+                "fontPlaceholder": "(inherited font)",
+                "size": "Размер",
+                "sizePlaceholder": "px",
+                "color": "Цвят",
+            },
+            "labels": {
+                "text": "Етикети",
+                "labelFormat": {
+                    "default": "Формат на етиткетите",
+                    "text": "Текст",
+                    "number": "Число",
+                    "currency": "Валута",
+                    "percent": "Процент",
+                },
+                "font": "Шрифт",
+                "fontPlaceholder": "(наследен шрифт)",
+                "size": "Размер",
+                "sizePlaceholder": "px",
+                "color": "Цвят",
+                "rotation": {
+                    "text": "Завъртане",
+                    "auto": "Авто",
+                },
+            },
+        },
+        "xAxis": {
+            "expandText": "X Ос",
+        },
+        "yAxis": {
+            "expandText": "Y Ос",
+        },
+    }
+});
+}
+
 })(window.kendo.jQuery);

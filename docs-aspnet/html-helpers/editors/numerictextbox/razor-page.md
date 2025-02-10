@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI NumericTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_numerictextboxhelper_aspnetcore
-position: 7
+position: 10
 ---
 
 # NumericTextBox in Razor Pages

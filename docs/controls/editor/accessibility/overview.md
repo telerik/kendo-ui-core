@@ -35,6 +35,7 @@ The Editor component has two distinctive modes - one with `<textarea>` and an `<
 | -------- | --------- | ----- |
 | `.k-iframe` | `tabindex=0` | The element must be part of the page tabsequence. |
 |  | `label for` or `aria-label` or `aria-labelledby` | The component focusable element needs an accessible name to be assigned to it. |
+| `.k-editor.k-readonly div[contenteditable=false]` | `aria-readonly=true` | Attribute is rendered only when the Editor is readonly. |
 
 ### Editor with contenteditable div
 

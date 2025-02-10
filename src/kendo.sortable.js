@@ -85,7 +85,8 @@ export const __meta__ = {
             ignore: null,
             autoScroll: false,
             cursor: "auto",
-            moveOnDragEnter: false
+            moveOnDragEnter: false,
+            allowTouchActions: false,
         },
 
         destroy: function() {
@@ -110,7 +111,8 @@ export const __meta__ = {
                 dragstart: that._dragstart.bind(that),
                 dragcancel: that._dragcancel.bind(that),
                 drag: that._drag.bind(that),
-                dragend: that._dragend.bind(that)
+                dragend: that._dragend.bind(that),
+                allowTouchActions: options.allowTouchActions
             });
         },
 

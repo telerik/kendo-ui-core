@@ -431,8 +431,6 @@ Specifies whether the TabStrip should be keyboard navigatable.
 
 If enabled, the TabStrip will display buttons that will scroll the tabs horizontally, when they cannot fit the TabStrip width. By default scrolling is enabled.
 
-The feature requires `"top"` or `"bottom"` [`tabPosition`](/api/javascript/ui/tabstrip#configuration-tabPosition).
-
 Unless disabled, `scrollable` must be set to a JavaScript object, which represents the scrolling configuration.
 
 See [Scrollable Tabs](/controls/tabstrip/overview#configuration-Scrollable) for more information.
@@ -491,6 +489,191 @@ Sets the scroll amount (in pixels) applied when the user clicks on a scroll butt
 		});
 	</script>
 
+
+### scrollable.scrollButtonsPosition `String` *(default: "split")*
+
+Sets the scroll buttons position.
+
+Can be set to:
+
+* `start` - the buttons are displayed before the tabs
+* `end` - the buttons are displayed after the tabs
+* `split` - the previous button is displayed before the tabs and the next button is displayed after the tabs
+
+#### Example - scrollButtonsPosition set to start
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				scrollButtonsPosition: "start"
+			}
+		});
+	</script>
+
+
+#### Example - scrollButtonsPosition set to end
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				scrollButtonsPosition: "end"
+			}
+		});
+	</script>
+
+
+
+#### Example - scrollButtonsPosition set to split
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				scrollButtonsPosition: "split"
+			}
+		});
+	</script>
+
+### scrollable.scrollButtons `String` *(default: "auto")*
+
+Sets the scroll buttons visibility.
+
+Can be set to:
+
+* `auto` - the buttons are added only when tabstrip enters scrollable mode
+* `visible` - the buttons are always visible
+* `hidden` - the buttons are never visible
+
+#### Example - scrollButtons set to auto
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				scrollButtons: "auto"
+			}
+		});
+	</script>
+
+
+#### Example - scrollButtons set to visible
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				scrollButtons: "visible"
+			}
+		});
+	</script>
+
+
+
+#### Example - scrollButtons set to hidden
+
+    <div id="tabstrip">
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				scrollButtons: "hidden"
+			}
+		});
+	</script>
+
+
+
 ### sortable `Boolean` *(default: false)*
 
 If enabled, users will be able to sort the tabs by dragging them to the desired position.
@@ -519,6 +702,36 @@ If enabled, users will be able to sort the tabs by dragging them to the desired 
 		});
 	</script>
 
+
+### tabAlignment `String`*(default: "start")*
+
+Specifies the alignment of the widget tabs. Valid values are `"start"` (default), `"end"`, `"center"`, `"stretched"` and `"justify"`.
+
+> TabAlignment is not applicable with Scrollable TabStrip.
+
+#### Example
+
+    <div id="tabstrip">
+        <ul>
+            <li>Tab 1</li>
+            <li>Tab 2</li>
+        </ul>
+        <div>Content 1</div>
+        <div>Content 2</div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            tabAlignment: "center",
+            animation: {
+               open: {
+                   effects: "fadeIn"
+               }
+           }
+        });
+    </script>
+
+
 ### tabPosition `String`*(default: "top")*
 
 Specifies the position of the widget tabs. Valid values are `"top"` (default), `"left"`, `"right"` and `"bottom"`.
@@ -545,6 +758,65 @@ A [**fade animation**](/api/javascript/ui/tabstrip#configuration-animation) is h
            }
         });
     </script>
+
+### size `String`*(default: "medium")*
+
+Specifies the size of the widget tabs. Valid values are `"medium"` (default), `"small"` and `"large"`.
+
+#### Example - size set to medium
+
+    <div id="tabstrip">
+        <ul>
+            <li>Tab 1</li>
+            <li>Tab 2</li>
+        </ul>
+        <div>Content 1</div>
+        <div>Content 2</div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            size: "medium",
+        });
+    </script>
+
+
+#### Example - size set to small
+
+    <div id="tabstrip">
+        <ul>
+            <li>Tab 1</li>
+            <li>Tab 2</li>
+        </ul>
+        <div>Content 1</div>
+        <div>Content 2</div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            size: "small",
+        });
+    </script>
+
+
+#### Example - size set to large
+
+    <div id="tabstrip">
+        <ul>
+            <li>Tab 1</li>
+            <li>Tab 2</li>
+        </ul>
+        <div>Content 1</div>
+        <div>Content 2</div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            size: "large",
+        });
+    </script>
+
+
 
 ### value `String`*(default: null)*
 

@@ -16,12 +16,28 @@ For a complete example on basic PDFViewer events, refer to the [demo on using th
 
 The following example demonstrates how to subscribe to events by a handler name.
 
+{% if site.core %}
+```Program.cs
+    builder.Services.AddKendo(x => x.RenderAsModule = true);
+```
+{% else %}
+```Global.asax
+    KendoMvc.Setup(options =>
+    {
+        options.RenderAsModule = true;
+    });
+```
+{% endif %}
 ```HtmlHelper
 @using Kendo.Mvc.UI
 
 <h4>PDFViewer</h4>
 <div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
     <h4>PDFViewer</h4>
     <div>
@@ -61,39 +77,43 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 {% if site.core %}
 ```TagHelper
-@addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
-<div id="example">
-    <kendo-pdfviewer name="pdfviewer"
-        height="400"
-        on-render="onRender"
-        on-open="onOpen"
-        on-error="onError">
-    </kendo-pdfviewer>
-</div>
+    <div id="example">
+        <kendo-pdfviewer name="pdfviewer"
+            height="400"
+            on-render="onRender"
+            on-open="onOpen"
+            on-error="onError">
+        </kendo-pdfviewer>
+    </div>
 
-<script>
-    function onRender(e) {
-        console.log("page rendered: " + e.page.pageNumber);
-    }
+    <script>
+        function onRender(e) {
+            console.log("page rendered: " + e.page.pageNumber);
+        }
 
-    function onOpen(e) {
-        console.log("file open: " + e.file.name);
-    }
+        function onOpen(e) {
+            console.log("file open: " + e.file.name);
+        }
 
-    function onError(e) {
-        console.log("error message: " + e.message);
-    }
-</script>
+        function onError(e) {
+            console.log("error message: " + e.message);
+        }
+    </script>
 
 
-<style>
-    html body #pdfviewer {
-        width: 100% !important;
-    }
-</style>
+    <style>
+        html body #pdfviewer {
+            width: 100% !important;
+        }
+    </style>
 
 ```
 {% endif %}

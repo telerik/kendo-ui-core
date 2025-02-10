@@ -28,7 +28,7 @@ By default, the widget renders **Spin** buttons which increase or decrease the v
 ## Next Steps
 
 * [Getting Started with the Kendo UI NumericTextBox for jQuery]({% slug getting_started_kendoui_numerictextbox_widget %})
-* [Demo Page for the NumerictTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index)
+* [Demo Page for the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index)
 * [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
 
 ## See Also

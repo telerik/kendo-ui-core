@@ -51,6 +51,7 @@ The following table summarizes the selectors and attributes supported by the Com
 | `.k-input-button` | `role=button` or `nodeName=button` | The element must either be a `<button>` element or must have the `role="button"` assigned. |
 |  | `aria-label` | The button element must have discernible text. |
 |  | `tabindex=-1` | The button element must not be focusable. |
+| `.k-combobox.k-disabled .k-button` | `disabled` or `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
 
 ### Popup Listbox
 

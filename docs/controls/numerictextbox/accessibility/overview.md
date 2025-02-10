@@ -40,6 +40,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-disabled .k-input-inner` | `disabled=disabled` or `aria-disabled=true` | The attribute is rendered only when the NumericTextBox is disabled. |
 | `.k-spin-button>.k-button` | `role=button` or `nodeName=button` | Announces the spin button capabilities of the NumericTextBox. |
 |  | `aria-label` | The button element must have discernible text. |
+| `.k-numerictextbox.k-disabled .k-spin-button>.k-button` | `disabled` or `aria-disabled` | Attribute is rendered only when the picker is disabled. |
 
 ## Resources
 

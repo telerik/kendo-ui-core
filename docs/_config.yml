@@ -609,6 +609,9 @@ navigation:
     "*orgchart":
         isNew: true
         title: "OrgChart"
+    "*otpinput":
+        isNew: true 
+        title: "OTPInput"
     "*radiobutton":
         title: "RadioButton"
     "*radiogroup":
@@ -1851,6 +1854,12 @@ defaults:
 
 -
     scope:
+        path: "controls/otpinput"
+    values:
+        component: "otpinput"
+
+-
+    scope:
         path: "controls/orgchart"
     values:
         component: "orgchart"
@@ -2177,6 +2186,7 @@ intro_columns:
   -
     title: "Conversational UI"
     items:
+      "AIPrompt": "overview_kendoui_aiprompt_component"
       "Chat": "overview_kendoui_chat_widget"
   -
     title: "PDF"
@@ -2235,6 +2245,7 @@ intro_columns:
       "Avatar": "overview_kendoui_avatar_widget"
       "Badge": "overview_kendoui_badge_widget"
       "Dialog": "overview_kendoui_dialog_widget"
+      "DockManager": "overview_kendoui_dockmanager_widget"
       "ExpansionPanel": "overview_kendoui_expansionpanel_widget"
       "Form": "overview_kendoui_form_widget"
       "Notification": "overview_kendoui_notification_widget"

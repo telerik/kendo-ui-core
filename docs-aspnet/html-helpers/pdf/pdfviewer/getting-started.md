@@ -41,9 +41,25 @@ Optionally, you can structure the document by adding the desired HTML elements l
 ```
 {% endif %}
 
-## 2. Initialize the PDFViewer
+## 2. Enable the RenderAsModule option
+Enable the `RenderAsModule` option, which will add `type="module"` to the initialization scripts of all Telerik UI components in the application:
 
-Load the `pdf.js` library and use the PDFViewer HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to the view:
+{% if site.core %}
+```Program.cs
+    builder.Services.AddKendo(x => x.RenderAsModule = true);
+```
+{% else %}
+```Global.asax
+    KendoMvc.Setup(options =>
+    {
+        options.RenderAsModule = true;
+    });
+```
+{% endif %}
+
+## 3. Initialize the PDFViewer
+
+Load the `pdf.js` library and use the PDFViewer HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to the view. :
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the PDFViewer element.
 * The `Height()` configuration allows you to control the height of the component. 
@@ -53,7 +69,11 @@ Load the `pdf.js` library and use the PDFViewer HtmlHelper {% if site.core %}or 
 
 <h4>PDFViewer</h4>
 <div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div>
         @(Html.Kendo().PDFViewer()
@@ -72,26 +92,30 @@ Load the `pdf.js` library and use the PDFViewer HtmlHelper {% if site.core %}or 
 ```
 {% if site.core %}
 ```TagHelper
-@addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
-<div id="example">
-    <kendo-pdfviewer name="pdfviewer"
-        height="400">
-    </kendo-pdfviewer>
-</div>
+    <div id="example">
+        <kendo-pdfviewer name="pdfviewer"
+            height="400">
+        </kendo-pdfviewer>
+    </div>
 
-<style>
-    html body #pdfviewer {
-        width: 100% !important;
-    }
-</style>
+    <style>
+        html body #pdfviewer {
+            width: 100% !important;
+        }
+    </style>
 
 ```
 {% endif %}
 
-## 3. Load an Initial PDF Document
+## 4. Load an Initial PDF Document
 
 To load and visualize an initial PDF document, set the `PdfjsProcessing` configuration and specify the path to the PDF file.
 
@@ -100,7 +124,11 @@ To load and visualize an initial PDF document, set the `PdfjsProcessing` configu
 
 <h4>PDFViewer</h4>
 <div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div>
         @(Html.Kendo().PDFViewer()
@@ -120,27 +148,30 @@ To load and visualize an initial PDF document, set the `PdfjsProcessing` configu
 ```
 {% if site.core %}
 ```TagHelper
-@addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
-<div id="example">
-    <kendo-pdfviewer name="pdfviewer"
-        height="400">
-        <pdfjs-processing file="@Url.Content("~/shared/web/pdfViewer/sample.pdf")" />
-    </kendo-pdfviewer>
-</div>
+    <div id="example">
+        <kendo-pdfviewer name="pdfviewer"
+            height="400">
+            <pdfjs-processing file="@Url.Content("~/shared/web/pdfViewer/sample.pdf")" />
+        </kendo-pdfviewer>
+    </div>
 
-<style>
-    html body #pdfviewer {
-        width: 100% !important;
-    }
-</style>
-
+    <style>
+        html body #pdfviewer {
+            width: 100% !important;
+        }
+    </style>
 ```
 {% endif %}
 
-## 4. Handle a PDFViewer Event
+## 5. Handle a PDFViewer Event
 
 The PDFViewer exposes various [events](/api/kendo.mvc.ui.fluent/pdfviewerbuilder) that you can handle and further customize the functionality of the component. In this example, you will use the `Open` event, which fires when a PDF is opened in the PDFViewer. As a result, the browser console will log a message when you open a PDF file.
 
@@ -149,7 +180,11 @@ The PDFViewer exposes various [events](/api/kendo.mvc.ui.fluent/pdfviewerbuilder
 
 <h4>PDFViewer</h4>
 <div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
     <div>
         @(Html.Kendo().PDFViewer()
@@ -178,34 +213,38 @@ The PDFViewer exposes various [events](/api/kendo.mvc.ui.fluent/pdfviewerbuilder
 ```
 {% if site.core %}
 ```TagHelper
-@addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
-<div id="example">
-    <kendo-pdfviewer name="pdfviewer"
-        <pdfjs-processing file="@Url.Content("~/shared/web/pdfViewer/sample.pdf")" />
-        height="400"
-        on-open="onOpen">
-    </kendo-pdfviewer>
-</div>
+    <div id="example">
+        <kendo-pdfviewer name="pdfviewer"
+            <pdfjs-processing file="@Url.Content("~/shared/web/pdfViewer/sample.pdf")" />
+            height="400"
+            on-open="onOpen">
+        </kendo-pdfviewer>
+    </div>
 
-<script>
-    function onOpen(e) {
-        console.log("file open: " + e.file.name);
-    }
-</script>
+    <script>
+        function onOpen(e) {
+            console.log("file open: " + e.file.name);
+        }
+    </script>
 
-<style>
-    html body #pdfviewer {
-        width: 100% !important;
-    }
-</style>
+    <style>
+        html body #pdfviewer {
+            width: 100% !important;
+        }
+    </style>
 
 ```
 {% endif %}
 
-## 5. (Optional) Reference Existing PDFViewer Instances
+## 6. (Optional) Reference Existing PDFViewer Instances
 
 You can reference the PDFViewer instances that you have created and build on top of their existing configuration:
 

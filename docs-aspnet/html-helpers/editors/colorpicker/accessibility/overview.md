@@ -8,13 +8,20 @@ position: 1
 
 # ColorPicker Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} ColorPicker provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The ColorPicker is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
 
 The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_overview_colorgradient%}), [ColorPalette]({%slug overview_colorpalettehelper_aspnetcore%}), a UI to switch between them, and a button to reset its value. All the containing elements must implement their own specification apart from the ColorGradient element where some changes are required.
 
@@ -22,7 +29,7 @@ The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_over
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-colorpicker` | `role=combobox` | The focusable element of the component must have role `combobox` (an input with popup). |
+| `.k-colorpicker` | `role=combobox` | The focusable element of the component should have role `combobox` (an input with popup). |
 |  | `aria-label` or `aria-labelledby` | The component needs an accessible name to be assigned to it. Must also include the currently selected value in the component. |
 |  | `aria-haspopup=dialog` | Indicates the component has a Dialog Popup. |
 |  | `aria-expanded` | Announces the state of the visibility of the popup. |
@@ -30,6 +37,7 @@ The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_over
 |  | `tabindex=0` | The element must be focusable. |
 | `.k-invalid,.ng-invalid` | `aria-invalid=true` | Attribute is rendered only when the picker is in form and announces the valid state of the component. |
 | `.k-colorpicker.k-disabled` | `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
+| `.k-colorpicker.k-disabled .k-button` | `disabled` or `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
 
 ### ColorGradient in the Popup
 
@@ -41,15 +49,18 @@ The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_over
 
 ## Section 508
 
-The ColorPicker is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The ColorPicker is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The ColorPicker has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The ColorPicker has been tested with the following screen readers and browsers combinations:
 
@@ -58,6 +69,8 @@ The ColorPicker has been tested with the following screen readers and browsers c
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

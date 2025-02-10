@@ -27,14 +27,27 @@ You can initialize the PDFViewer from HTML either by using [PDF.JS](#using-pdfjs
 
 The following example demonstrates how to initialize the PDFViewer by using [PDF.JS](https://mozilla.github.io/pdf.js/).
 
+{% if site.core %}
+```Program.cs
+    builder.Services.AddKendo(x => x.RenderAsModule = true);
+```
+{% else %}
+```Global.asax
+    KendoMvc.Setup(options =>
+    {
+        options.RenderAsModule = true;
+    });
+```
+{% endif %}
 ```HtmlHelper
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the component.
         .PdfjsProcessing(pdf => pdf
             .File(Url.Content("~/Content/web/pdfViewer/sample.pdf"))
         )
@@ -43,14 +56,14 @@ The following example demonstrates how to initialize the PDFViewer by using [PDF
 ```
 {% if site.core %}
 ```TagHelper
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
-    <kendo-pdfviewer name="pdfviewer"
-                     height="1200">
-        <pdfjs-processing file="@(Url.Content("~/shared/web/pdfViewer/sample.pdf"))" />
+    <kendo-pdfviewer name="pdfviewer" height="1200">
+        <pdfjs-processing file="@Url.Content("~/Content/web/pdfViewer/sample.pdf")"/>
     </kendo-pdfviewer>
 ```
 {% endif %}

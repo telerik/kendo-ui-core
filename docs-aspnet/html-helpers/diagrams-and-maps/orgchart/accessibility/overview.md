@@ -8,15 +8,22 @@ position: 1
 
 # OrgChart Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} OrgChart provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The OrgChart is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-The OrgChart component represents a tree structure and allows editing of its items.
+
+The `OrgChart` component represents a tree structure and allows editing of its items.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -25,7 +32,7 @@ The OrgChart component represents a tree structure and allows editing of its ite
 | `.k-orgchart-group:not(.k-orgchart-level-1)` | `role=group` | The element that wraps child nodes. |
 | `.k-orgchart-card` | `role=treeitem` | The card (node) representing the treeitem in the hierarchical structure. |
 |  | `aria-level` | Announces the level of the tree node item. The value of level is number-based(>=1). |
-|  | `aria-keyshortcuts=Enter` | Announces the that the edit menu of the OrgChart can be activated via the `Enter` key. |
+|  | `aria-keyshortcuts=Enter` | Announces the that the edit menu of the OrgChart can be activated via the Enter key. |
 | `.k-orgchart-card[aria-owns]` | `aria-expanded=true/false` | Present when a node has subitems. Announces the expanded state of the node. It is true when expanded, and false when collapsed. |
 | `.k-orgchart-card[aria-expanded]` | `aria-owns` | Present when a node has subitems. The value of the attribute is the id of the group element containing the current node children |
 | `.k-orgchart-card.k-focus` | `aria-selected=true` | Announces the selected (focused) item in the OrgChart. |
@@ -55,11 +62,13 @@ The OrgChart is fully compliant with the [Section 508 requirements](https://www.
 
 ## Testing
 
+
 The OrgChart has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The OrgChart has been tested with the following screen readers and browsers combinations:
 
@@ -68,6 +77,8 @@ The OrgChart has been tested with the following screen readers and browsers comb
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

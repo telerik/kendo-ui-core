@@ -8,11 +8,17 @@ position: 1
 
 # ColorGradient Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} ColorGradient provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The ColorGradient is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
+
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
@@ -20,7 +26,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-colorgradient` | `role=textbox` | The focusable wrapper of the component must be considered a `textbox`. That signifies it has a value that could be submitted. |
+| `.k-colorgradient` | `role=textbox` | The focusable wrapper of the component should be considered a `textbox`. That signifies it has a value that could be submitted. |
 |  | `aria-label` or `aria-labelledby` | The component needs an accessible name to be assigned to it. Must also include the currently selected value in the component. |
 |  | `aria-invalid=true` | Attribute is rendered only when the selected value in the component is not valid against the current validation rules. |
 |  | `tabindex=0` | The element must be focusable. |
@@ -28,9 +34,11 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ### Drag handles
 
-All the `k-draghandle` elements implement the Slider specification.
 
-[Slider accessibility specification]({%slug accessibility_aspnetcore_slider%})
+All the `k-draghandle` elements implement the **Slider** specification.
+
+[Slider accessibility specification]({% slug accessibility_aspnetcore_slider %})
+
 
 Apart from that the HSV draghandle must also cover the following additional requirements:
 
@@ -42,9 +50,11 @@ Apart from that the HSV draghandle must also cover the following additional requ
 
 ### NumericTextBoxes
 
-The Numeric inputs must implement the NumericTextBox specification.
 
-[NumericTextBox accessibility specification]({%slug accessibility_numerictextbox_aspnetcore%})
+The Numeric inputs must implement the **NumericTextBox** specification.
+
+[NumericTextBox accessibility specification]({% slug accessibility_numerictextbox_aspnetcore %})
+
 
 Here is one additional requirement for those numerics as their visible labels have only a single letter as text:
 
@@ -54,15 +64,18 @@ Here is one additional requirement for those numerics as their visible labels ha
 
 ## Section 508
 
-The ColorGradient is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The ColorGradient is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The ColorGradient has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The ColorGradient has been tested with the following screen readers and browsers combinations:
 
@@ -71,6 +84,8 @@ The ColorGradient has been tested with the following screen readers and browsers
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

@@ -8,23 +8,31 @@ position: 1
 
 # MultiViewCalendar Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} MultiViewCalendar provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The MultiViewCalendar is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### MultiViewCalendar Grid
 
-The element wrapping the tables in the component must follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid).
+
+The element wrapping the tables in the component should follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid).
+
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-calendar-view` | `role=grid` | Specifies the role of the Calendar dates table. |
-|  | `aria-labelledby` | Points to the `k-calendar-title` element (for example, `March 2022 - April 2022`). |
-|  | `aria-activedescendant=.k-calendar-td.k-focus id` | Points to the currently active (focused) date/month/year/decade cell in the table. |
+|  | `aria-labelledby` | Pointing to the `k-calendar-title` element (e.g. `March 2022 - April 2022`). |
+|  | `aria-activedescendant=.k-calendar-td.k-focus id` | Pointing to the currently active (focused) date/month/year/decade cell in the table. |
 |  | `tabindex=0` | Makes the grid focusable. |
 | `.k-calendar-table` | `role=none` | All `k-calendar-table` elements must have their role set to `none`. That is because their content must be made belonging to a single `grid` component. |
 | `.k-content:first-of-type>.k-calendar-head` | `role=rowgroup` | The first `k-calendar-thead` must explicitly have its role set to `rowgroup` as its semantics has been removed while setting its `<table>` role to `none`. |
@@ -53,15 +61,18 @@ The element wrapping the tables in the component must follow the requirements fo
 
 ## Section 508
 
-The MultiViewCalendar is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The MultiViewCalendar is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The MultiViewCalendar has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The MultiViewCalendar has been tested with the following screen readers and browsers combinations:
 
@@ -70,6 +81,8 @@ The MultiViewCalendar has been tested with the following screen readers and brow
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

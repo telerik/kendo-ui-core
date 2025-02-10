@@ -8,13 +8,20 @@ position: 1
 
 # FlatColorPicker Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} FlatColorPicker provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The FlatColorPicker is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
 
 The FlatColorPicker contains in itself [ColorGradient]({%slug htmlhelpers_overview_colorgradient%}), [ColorPalette]({%slug overview_colorpalettehelper_aspnetcore%}), a UI to switch between them, Cancel, Apply, and a button to reset its value. All the containing elements must implement their own specification apart from the ColorGradient element where some changes are required.
 
@@ -22,7 +29,7 @@ The FlatColorPicker contains in itself [ColorGradient]({%slug htmlhelpers_overvi
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-flatcolorpicker` | `role=textbox` | The focusable wrapper of the component must be considered a `textbox`. That signifies it has a value that could be submitted. |
+| `.k-flatcolorpicker` | `role=textbox` | The focusable wrapper of the component should be considered a `textbox`. That signifies it has a value that could be submitted. |
 |  | `aria-label` or `aria-labelledby` | The component needs an accessible name to be assigned to it. Must also include the currently selected value in the component. |
 |  | `aria-invalid=true` | Attribute is rendered only when the selected value in the component is not valid against the current validation rules. |
 |  | `tabindex=0` | The element must be focusable. |
@@ -38,15 +45,18 @@ The FlatColorPicker contains in itself [ColorGradient]({%slug htmlhelpers_overvi
 
 ## Section 508
 
-The FlatColorPicker is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The FlatColorPicker is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The FlatColorPicker has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The FlatColorPicker has been tested with the following screen readers and browsers combinations:
 
@@ -55,6 +65,8 @@ The FlatColorPicker has been tested with the following screen readers and browse
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

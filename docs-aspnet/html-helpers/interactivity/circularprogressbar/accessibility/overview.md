@@ -8,13 +8,20 @@ position: 1
 
 # CircularProgressBar Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} CircularProgressBar provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The CircularProgressBar is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
 
 The CircularProgressBar follows the specification for the ProgressBar component.
 
@@ -28,15 +35,18 @@ The CircularProgressBar follows the specification for the ProgressBar component.
 
 ## Section 508
 
-The CircularProgressBar is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The CircularProgressBar is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The CircularProgressBar has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The CircularProgressBar has been tested with the following screen readers and browsers combinations:
 
@@ -45,6 +55,8 @@ The CircularProgressBar has been tested with the following screen readers and br
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

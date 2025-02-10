@@ -8,23 +8,30 @@ position: 1
 
 # Calendar Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} Calendar provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The Calendar is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### Calendar Grid Element
 
-The Calendar Grid must follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid). It is a single-tab-stop component. All the button actions available for mouse users are also available through keyboard shortcuts.
+
+The Calendar Grid should follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid). It is a single-tab-stop component. All the button actions available for mouse users are also available via keyboard shortcuts.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-calendar:not(.k-calendar-infinite):not(.k-calendar-range) .k-calendar-table` | `role=grid` | Specifies the role of the Calendar dates table. |
-|  | `aria-labelledby=.k-nav-fast id` | Points to the current view label (for example, `March 2022` or `2020-2029`). |
-|  | `aria-activedescendant=.k-calendar-td.k-focus id` | Points to the currently active (focused) date/month/year/decade in the table. |
+|  | `aria-labelledby=.k-nav-fast id` | Pointing to the current view label (e.g. `March 2022` or `2020-2029`). |
+|  | `aria-activedescendant=.k-calendar-td.k-focus id` | Pointing to the currently active (focused) date/month/year/decade in the table. |
 |  | `tabindex=0` | Makes the grid focusable. |
 | `.k-calendar-thead` | `role=rowgroup` | There must be `<thead>` element or an element with `role="rowgroup"`. That group of rows must contain the header row of cells. |
 | `.k-calendar-tbody` | `role=rowgroup` | There must be `<tbody>` element or an element with `role="rowgroup"`. That group of rows must contain the rows with date/month/tear/decade cells. |
@@ -44,11 +51,11 @@ The Calendar Grid must follow the requirements for the [`grid` role](https://www
 | `.k-nav-next,.k-nav-prev` | `role=button` or `nodeName=button` | Previous / Next buttons must either be `<button>` elements or have the appropriate role. |
 |  | `aria-label` or `title` | Previous and Next buttons must have descriptive text set as they contain only an icon (no text). |
 |  | `tabindex=-1` | The buttons must not be focusable. |
-| `.k-nav-next.k-disabled,.k-nav-prev.k-disabled` | `aria-disabled=true` | When navigation is not allowed outside the current month/year/decade, the Previous and Next buttons must have this attribute set to `true`. |
+| `.k-nav-next.k-disabled,.k-nav-prev.k-disabled` | `aria-disabled=true` | When navigation is not allowed outside the current month/year/decade the Previous and Next buttons should have this attribute set to `true`. |
 | `.k-nav-fast` | `role=button` or `nodeName=button` | Go to parent view button must either be a `<button>` element or must have the appropriate role. |
 |  | `aria-label` or `title` | Go to parent view button must have descriptive text set explaining its purpose. |
 |  | `tabindex=-1` | The buttons must not be focusable. |
-| `.k-nav-fast.k-disabled` | `aria-disabled` | When navigation is not allowed outside the current view, the button must have this attribute set to `true`. |
+| `.k-nav-fast.k-disabled` | `aria-disabled` | When navigation is not allowed outside the current view the button should have this attribute set to `true`. |
 | `.k-nav-today` | `role=link` or `nodeName=a` | Today link must either be `<a>` element or must have the appropriate role. |
 |  | `tabindex=-1` | The link must not be focusable. |
 
@@ -58,15 +65,18 @@ The Calendar Grid must follow the requirements for the [`grid` role](https://www
 
 ## Section 508
 
-The Calendar is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The Calendar is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The Calendar has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The Calendar has been tested with the following screen readers and browsers combinations:
 
@@ -75,6 +85,8 @@ The Calendar has been tested with the following screen readers and browsers comb
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

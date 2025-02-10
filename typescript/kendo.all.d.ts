@@ -2982,6 +2982,375 @@ declare namespace kendo.ui {
         errorThrown?: string;
     }
 
+    class ChartWizard extends kendo.ui.Widget {
+        static fn: ChartWizard;
+
+        options: ChartWizardOptions;
+
+        element: JQuery;
+
+        static extend(proto: Object): ChartWizard;
+
+        constructor(element: Element, options?: ChartWizardOptions);
+
+        open(): void;
+        
+        close(): void;
+        
+        setDataSource(dataSource: kendo.data.DataSource): void;
+
+        setDataColumns(dataColumns: DataColumn[]): void;
+
+        setOptions(options?: any): void;
+
+        destroy(): void;
+
+    }
+
+    interface ChartWizardOptions {
+        name?: string | undefined;
+        dataSource?: ChartWizardDataRow[] | kendo.data.DataSource;
+        dataColumns?: DataColumn[] | any;
+        exportOptions?: ChartWizardExportOptions | undefined;
+        state?: ChartWizardState | undefined;
+        defaultState?: ChartWizardDefaultState | undefined;
+        window?: WindowOptions;
+        messages?: ChartWizardMessages | undefined;
+        open?: (e: ChartWizardEvent) => void;
+        close?: (e: ChartWizardEvent) => void;
+        exportPDF?: (e: ChartWizardExportEvent) => void;
+        exportSVG?: (e: ChartWizardExportEvent) => void;
+        exportImage?: (e: ChartWizardExportEvent) => void;
+        change?: (e: ChartWizardChangeEvent) => void;
+        dataBinding?: (e: ChartWizardDataEvent) => void;
+        dataBound?: (e: ChartWizardDataEvent) => void;
+    }
+
+
+    interface ChartWizardEvent {
+        sender: ChartWizard;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ChartWizardExportEvent extends ChartWizardEvent {
+        chart: any;
+        exportOptions: ChartWizardExportOptions; 
+    }
+
+    interface ChartWizardChangeEvent extends ChartWizardEvent {
+        state: ChartWizardState;
+    }
+
+    interface ChartWizardDataEvent extends ChartWizardEvent {
+        data: ChartWizardDataRow[];
+    }
+
+    interface ChartWizardMessages {
+        window: {
+            title?: string | undefined;
+        };
+        export?: string | undefined;
+        exportPDF?: string | undefined;
+        exportSVG?: string | undefined;
+        exportPNG?: string | undefined;
+        tab?: {
+            chart?: string | undefined;
+            data?: string | undefined;
+            format?: string | undefined;
+        };
+        chart?: {
+            bar?: {
+                expandText?: string | undefined;
+                bar?: string | undefined;
+                stackedBar?: string | undefined;
+                hundredStackedBar?: string | undefined;
+            };
+            pie?: {
+                expandText?: string | undefined;
+                pie?: string | undefined;
+            };
+            column?: {
+                expandText?: string | undefined;
+                column?: string | undefined;
+                stackedColumn?: string | undefined;
+                hundredStackedColumn?: string | undefined;
+            };
+            line?: {
+                expandText?: string | undefined;
+                line?: string | undefined;
+                stackedLine?: string | undefined;
+                hundredStackedLine?: string | undefined;
+            };
+            scatter?: {
+                expandText?: string | undefined;
+                scatter?: string | undefined;
+            };
+        };
+        data?: {
+            configuration: {
+                expandText?: string | undefined;
+                series?: {
+                    title?: string | undefined;
+                    add?: string | undefined;
+                };
+                valueAxis?: string | undefined;
+                categoryAxis?: string | undefined;
+                xAxis?: string | undefined;
+            }
+        };
+        format?: {
+            chartArea?: {
+                expandText?: string | undefined;
+                margins?: {
+                    default?: string | undefined;
+                    auto?: string | undefined;
+                    left?: string | undefined;
+                    right?: string | undefined;
+                    top?: string | undefined;
+                    bottom?: string | undefined;
+                };
+                background?: {
+                    default?: string | undefined;
+                    color?: string | undefined;
+                };
+            };
+            title?: {
+                expandText?: string | undefined;
+                applyTo?: string | undefined;
+                chartTitle?: string | undefined;
+                chartSubtitle?: string | undefined;
+                label?: string | undefined;
+                font?: string | undefined;
+                fontPlaceholder?: string | undefined;
+                size?: string | undefined;
+                sizePLaceholder?: string | undefined;
+                color?: string | undefined;
+            };
+            series?: {
+                expandText?: string | undefined;
+                applyTo?: string | undefined;
+                allSeries?: string | undefined;
+                color?: string | undefined;
+                showLabels?: string | undefined;
+            };
+            legend?: {
+                expandText?: string | undefined;
+                showLegend?: string | undefined;
+                font?: string | undefined;
+                fontPlaceholder?: string | undefined;
+                size?: string | undefined;
+                sizePlaceholder?: string | undefined;
+                color?: string | undefined;
+                position?: {
+                    default?: string | undefined;
+                    top?: string | undefined;
+                    bottom?: string | undefined;
+                    left?: string | undefined;
+                    right?: string | undefined;
+                };
+            };
+            categoryAxis?: {
+                expandText?: string | undefined;
+                title?: {
+                    text?: string | undefined;
+                    placeholder?: string | undefined;
+                    font?: string | undefined;
+                    fontPlaceholder?: string | undefined;
+                    size?: string | undefined;
+                    sizePlaceholder?: string | undefined;
+                    color?: string | undefined;
+                };
+                labels?: {
+                    text?: string | undefined;
+                    font?: string | undefined;
+                    fontPlaceholder?: string | undefined;
+                    size?: string | undefined;
+                    sizePlaceholder?: string | undefined;
+                    color?: string | undefined;
+                    rotation?: {
+                        text?: string | undefined;
+                        auto?: string | undefined;
+                    };
+                    reverseOrder?: string | undefined;
+                };
+            };
+            valueAxis?: {
+                expandText?: string | undefined;
+                title?: {
+                    text?: string | undefined;
+                    placeholder?: string | undefined;
+                    font?: string | undefined;
+                    fontPlaceholder?: string | undefined;
+                    size?: string | undefined;
+                    sizePlaceholder?: string | undefined;
+                    color?: string | undefined;
+                };
+                labels?: {
+                    text?: string | undefined;
+                    labelFormat?: {
+                        default?: string | undefined;
+                        text?: string | undefined;
+                        number?: string | undefined;
+                        currency?: string | undefined;
+                        percent?: string | undefined;
+                    };
+                    font?: string | undefined;
+                    fontPlaceholder?: string | undefined;
+                    size?: string | undefined;
+                    sizePlaceholder?: string | undefined;
+                    color?: string | undefined;
+                    rotation?: {
+                        text?: string | undefined;
+                        auto?: string | undefined;
+                    };
+                };
+            };
+            xAxis?: {
+                expandText?: string | undefined;
+            };
+            yAxis?: {
+                expandText?: string | undefined;
+            };
+        };
+    }
+
+    interface ChartWizardExportOptions {
+        fileName?: string;
+        pdf?: ChartWizardPDFOptions;
+        image?: ChartWizardImageExportOptions;
+    }
+
+    interface ChartWizardPDFOptions {
+        autoPrint?: boolean;
+        creator?: string;
+        date?: Date;
+        imgDPI?: number;
+        jpegQuality?: number;
+        keywords?: string;
+        keepPNG?: boolean;
+        landscape?: boolean;
+        margin?: string | number | ChartWizardPageMargin;
+        paperSize?: string|any | undefined;
+        subject?: string;
+        title?: string;
+    }
+
+    interface ChartWizardImageExportOptions {
+        height?: number;
+        width?: number;
+        cors?: string;
+    }
+
+    interface ChartWizardPageMargin {
+        bottom?: number|string | undefined;
+        left?: number|string | undefined;
+        right?: number|string | undefined;
+        top?: number|string | undefined;
+    }
+
+    interface ChartWizardAreaMargin {
+        top?: number;
+        right?: number;
+        bottom?: number;
+        left?: number;
+    }
+
+    interface ChartWizardDataCell {
+        field: string;
+        value: any;
+    }
+
+    type ChartWizardDataRow = ChartWizardDataCell[];
+
+    type ChartWizardSeriesType = 'bar' | 'column' | 'line' | 'pie' | 'scatter';
+
+    interface DataColumn {
+        field: string;
+        title?: string;
+    }
+
+    interface DataRow {
+        dataItem: any;
+        dataColumns: DataColumn[];
+    }
+
+    interface FontInterface {
+        font?: string;
+        color?: string;
+    }
+
+    export interface ChartWizardTitle extends FontInterface {
+        text?: string;
+    }
+
+    interface ChartWizardSeriesItemLabel {
+        visible?: boolean;
+    }
+
+    interface ChartWizardSeriesStack {
+        type?: 'normal' | '100%';
+    }
+
+    interface ChartWizardArea {
+        background?: string;
+        margin?: ChartWizardAreaMargin;
+    }
+
+    interface ChartWizardAxisLabel extends FontInterface {
+        rotation?: number | 'auto';
+        format?: string;
+    }
+
+    interface ChartAxisItem {
+        title?: ChartWizardTitle;
+        labels?: ChartWizardAxisLabel;
+        reverse?: boolean;
+    }
+
+    interface ChartWizardCategoryAxisItem extends ChartAxisItem {
+        categories?: any[];
+    }
+
+    interface ChartWizardValueAxisItem extends ChartAxisItem { }
+
+    interface ChartWizardLegend {
+        visible?: boolean;
+        position?: 'top' | 'bottom' | 'left' | 'right';
+        labels?: FontInterface;
+    }
+    interface ChartWizardSeriesItem {
+        id: number;
+        name?: string;
+        color?: string;
+        type?: ChartWizardSeriesType;
+        data?: any[];
+        stack?: ChartWizardSeriesStack | false;
+        labels?: ChartWizardSeriesItemLabel;
+        categoryField?: string;
+        field?: string;
+        width?: number;
+    }
+    interface ChartWizardState {
+        title?: ChartWizardTitle; 
+        subtitle?: ChartWizardTitle;
+        area: ChartWizardArea;
+        categoryAxis: ChartWizardCategoryAxisItem[];
+        valueAxis: ChartWizardValueAxisItem[];
+        series: ChartWizardSeriesItem[];
+        initialSeries: ChartWizardSeriesItem[];
+        legend?: ChartWizardLegend;
+        columns: string[];
+        data: ChartWizardDataRow[];
+        seriesType?: ChartWizardSeriesType;
+        categoryField?: string;
+        valueField?: string;
+        stack?: ChartWizardSeriesStack | false;
+    }
+
+    interface ChartWizardDefaultState extends Pick<ChartWizardState, 'stack' | 'seriesType'> { }
+
+    
 
     class Chat extends kendo.ui.Widget {
 
@@ -11811,6 +12180,8 @@ declare namespace kendo.ui {
 
     interface TabStripScrollable {
         distance?: number | undefined;
+        scrollButtons?: string | undefined;
+        scrollButtonsPosition?: string | undefined;
     }
 
     interface TabStripOptions {
@@ -11828,6 +12199,8 @@ declare namespace kendo.ui {
         navigatable?: boolean | undefined;
         scrollable?: boolean | TabStripScrollable | undefined;
         tabPosition?: string | undefined;
+        size?: string | undefined;
+        tabAlignment?: string | undefined;
         value?: string | undefined;
         activate?(e: TabStripActivateEvent): void;
         contentLoad?(e: TabStripContentLoadEvent): void;

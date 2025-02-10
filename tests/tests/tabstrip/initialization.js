@@ -59,6 +59,66 @@ describe("tabstrip initialization", function() {
         assert.isOk(tabstrip.wrapper.children().last().is(".k-tabstrip-items-wrapper"), "Tabs are at the bottom");
     });
 
+    it("applies a top tab alignment CSS class - start - default", function() {
+        tabstrip = new kendo.ui.TabStrip(dom);
+
+        assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-start"), "CSS class is applied");
+    });
+
+    it("applies a top tab alignment CSS class - start - set", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { tabAlignment: "start" });
+
+        assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-start"), "CSS class is applied");
+    });
+
+    it("applies a top tab alignment CSS class - end ", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { tabAlignment: "end" });
+
+        assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-end"), "CSS class is applied");
+    });
+
+    it("applies a top tab alignment CSS class - center ", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { tabAlignment: "center" });
+
+        assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-center"), "CSS class is applied");
+    });
+
+    it("applies a top tab alignment CSS class - justify ", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { tabAlignment: "justify" });
+
+        assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-justify"), "CSS class is applied");
+    });
+
+    it("applies a top tab alignment CSS class - stretched ", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { tabAlignment: "stretched" });
+
+        assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-stretched"), "CSS class is applied");
+    });
+
+    it("applies a bottom tab size CSS class - medium - default", function() {
+        tabstrip = new kendo.ui.TabStrip(dom);
+
+        assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-md"), "CSS class is applied");
+    });
+
+    it("applies a bottom tab size CSS class - small", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { size: "small" });
+
+        assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-sm"), "CSS class is applied");
+    });
+
+    it("applies a bottom tab size CSS class - large", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { size: "large" });
+
+        assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-lg"), "CSS class is applied");
+    });
+
+    it("applies a bottom tab size CSS class - medium - set", function() {
+        tabstrip = new kendo.ui.TabStrip(dom, { size: "medium" });
+
+        assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-md"), "CSS class is applied");
+    });
+
     it("adds tabindex=0 to all tab contents", function() {
         tabstrip = new kendo.ui.TabStrip(dom, {
             dataContentField: "content",

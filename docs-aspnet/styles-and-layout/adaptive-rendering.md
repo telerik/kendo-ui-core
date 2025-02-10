@@ -17,6 +17,7 @@ The following components support the adaptive rendering functionality:
 | **Component** | **Documentation** |
 |-----------|---------------|
 | AutoComplete | [AutoComplete Adaptive Rendering Mode Documentation]({%slug htmlhelpers_autocomplete_adaptive_mode_aspnetcore%}) |
+| ColorPicker | [ColorPicker Adaptive Rendering Mode Documentation]({%slug htmlhelpers_colorpicker_adaptive_mode_aspnetcore %}) |
 | ComboBox | [ComboBox Adaptive Rendering Mode Documentation]({%slug htmlhelpers_combobox_adaptive_mode_aspnetcore%}) |
 | DatePicker | [DatePicker Adaptive Rendering Mode Documentation]({%slug htmlhelpers_datepicker_adaptive_mode_aspnetcore%}) |
 | DateRangePicker | [DateRangePicker Adaptive Rendering Mode Documentation]({%slug htmlhelpers_daterangepicker_adaptive_mode_aspnetcore%}) |
@@ -272,6 +273,7 @@ The following example showcases how to dynamically manage the orientation of the
 ## See also
 
 * [Adaptive Rendering by the AutoComplete for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/adaptive-mode)
+* [Adaptive Rendering by the ColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/adaptive-mode)
 * [Adaptive Rendering by the ComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/adaptive-mode)
 * [Adaptive Rendering by the DatePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datePicker/adaptive-mode)
 * [Adaptive Rendering by the DateRangePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/adaptive-mode)

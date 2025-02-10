@@ -8,21 +8,27 @@ position: 1
 
 # Notification Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} Notification provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The Notification is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-notification` | `role=alert` | Notification element must be marked as an alert. |
-|  | `aria-live=polite` | The `aria-live` value must be set to `polite`, so that it will not obscure other essential information while announced. |
-|  | `aria-label` or `aria-labelledby` | The Notification needs an accessible name to be assigned to it. The label holds info about the type of the Notification (error, warning, info, and more). |
-|  | `aria-describedby=.k-notification-content id` | Used so that the content of the Notification will be announced by the assistive technologies. |
-| `.k-i-close,.k-svg-i-close` | `aria-hidden=true` | The close button of the notification (if any) must not be present in the accessibility tree. |
+| `.k-notification` | `role=alert` | Notification element should be marked as an alert. |
+|  | `aria-live=polite` | The aria-live value must be set to `polite`, so that it will not obscure other essential information while announced. |
+|  | `aria-label` or `aria-labelledby` | The Notification needs an accessible name to be assigned to it. The label holds info about the type of the Notification (error, warning, info, etc.) |
+|  | `aria-describedby=.k-notification-content id` | USed so that the content of the Notification will be announced by the assistive technologies. |
+| `.k-i-close,.k-svg-i-close` | `aria-hidden=true` | The close button of the notification (if any) should not be present in the accessibility tree. |
 
 ## Resources
 
@@ -32,15 +38,18 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ## Section 508
 
-The Notification is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The Notification is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The Notification has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The Notification has been tested with the following screen readers and browsers combinations:
 
@@ -49,6 +58,8 @@ The Notification has been tested with the following screen readers and browsers 
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

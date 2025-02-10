@@ -18,18 +18,31 @@ For the complete project, refer to the [PDFViewer in Razor Pages example](https:
 
 ## PDFjs Processing
 
-> **Note:** Newer versions after 2024 R4 require pdf.js version 4+. More information you can find in the [PdfViewer HTMLHelper after the upgrade to pdf.js v4](https://github.com/telerik/kendo-ui-core/issues/8084) item.
+> Starting with version 2024 R4, the PDFViewer requires PDF.js version 4+. For more information, refer to the [PDF.js processing documentation]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore%}).
 
 The following example demonstrates how to initialize the PDFViewer in RazorPage project by using [PDF.JS](https://mozilla.github.io/pdf.js/):
 
+{% if site.core %}
+```Program.cs
+    builder.Services.AddKendo(x => x.RenderAsModule = true);
+```
+{% else %}
+```Global.asax
+    KendoMvc.Setup(options =>
+    {
+        options.RenderAsModule = true;
+    });
+```
+{% endif %}
 ```tab-HtmlHelper(csthml)
     @page
     @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerIndexModel
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
 
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -44,6 +57,20 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
 ```
 {% if site.core %}
 ```TagHelper
+    @page
+    @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerIndexModel
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js" type="module"></script>
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <h1>PDFViewerPDFJSProcessing</h1>
+
     <kendo-pdfviewer height="1200" 
                     name="pdfviewer">
         <pdfjs-processing file="@Url.Content("~/sample.pdf")"/>
@@ -127,7 +154,7 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the PdfViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
-* [Server-Side HtmlHelper API of the PdfViewer](/api/pdfviewer)
-* [Server-Side TagHelper API of the PdfViewer](/api/taghelpers/pdfviewer)
+* [Client-Side API of the PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [Server-Side HtmlHelper API of the PDFViewer](/api/pdfviewer)
+* [Server-Side TagHelper API of the PDFViewer](/api/taghelpers/pdfviewer)
 * [Knowledge Base Section](/knowledge-base)

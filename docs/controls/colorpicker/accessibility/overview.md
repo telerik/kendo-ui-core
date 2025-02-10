@@ -41,6 +41,7 @@ The ColorPicker popup contains in itself ColorGradient, ColorPalette, a UI to sw
 |  | `tabindex=0` | The element must be focusable. |
 | `.k-invalid,.ng-invalid` | `aria-invalid=true` | Attribute is rendered only when the picker is in form and announces the valid state of the component. |
 | `.k-colorpicker.k-disabled` | `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
+| `.k-colorpicker.k-disabled .k-button` | `disabled` or `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
 
 ### ColorGradient in the Popup
 

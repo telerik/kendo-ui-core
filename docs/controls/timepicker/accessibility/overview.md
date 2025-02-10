@@ -41,6 +41,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-input-button` | `role=button` or `nodeName=button` | The element must either be a `<button>` element or must have `role=button` assigned. |
 |  | `aria-label` | The button needs an accessible name to be assigned to it. |
 |  | `tabindex=-1` | Button element must not be focusable. |
+| `.k-timepicker.k-disabled .k-button` | `disabled` or `aria-disabled` | Attribute is rendered only when the picker is disabled. |
 
 ### ListBox Popup
 

@@ -61,6 +61,7 @@ Besides the `accesskey` attribute support, most Kendo UI components also offer a
 - [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation)
 - [MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/keyboard-navigation)
 - [NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/keyboard-navigation)
+- [OTPInput](https://demos.telerik.com/kendo-ui/otpinput/keyboard-navigation)
 - [Pager](https://demos.telerik.com/kendo-ui/pager/keyboard-navigation)
 - [PanelBar](https://demos.telerik.com/kendo-ui/panelbar/keyboard-navigation)
 - [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/keyboard-navigation)

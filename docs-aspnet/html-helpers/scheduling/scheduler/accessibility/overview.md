@@ -8,13 +8,20 @@ position: 1
 
 # Scheduler Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} Scheduler provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The Scheduler is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
+
 
 The component is a single tab stop, so the arrows must be used for internal navigation. Notable exception is that scrollable containers in non-agenda views should be focusable too.
 
@@ -26,6 +33,7 @@ The component is a single tab stop, so the arrows must be used for internal navi
 |  | `aria-activedescendant=.k-event.k-selected id` | Points to the currently active appointment in the Scheduler. |
 
 ### Scheduler Toolbar
+
 
 The Scheduler toolbar must implement the specification for a ToolBar component.
 
@@ -39,9 +47,11 @@ Below are listed the requirements for those components part of the ToolBar.
 | `.k-nav-current` | `aria-live=polite` | The new date of the Scheduler view will be announced upon navigation to new time span / view type. |
 | `.k-views-dropdown` | `aria-label` | Specifies the purpose of the element. The `<select>` element visible on the toolbar on small screens must have its `aria-label` set. |
 
+
 Depending on the current view, The Scheduler component implements different roles. Below are described the three possible approaches:
 
 ### Scheduler in Agenda view
+
 
 In case of an Agenda view, the role assigned to the Scheduler layout table (`k-scheduler-layout` element) must be `grid`.
 
@@ -66,9 +76,11 @@ In case of an Agenda view, the role assigned to the Scheduler layout table (`k-s
 
 ### Scheduler in Year view
 
+
 Scheduler in Year view implements the [ARIA specification of the MultiViewCalendar]({% slug htmlhelpers_accessibility_multiviewcalendar_aspnetcore %}).
 
 ### Scheduler in all other views
+
 
 For the rest of the views the `role="none/presentation"` must be used on all inner `<table>` elements in the widget. This way we could freely implement managed focused inside the component based on the arrow keys.
 
@@ -87,15 +99,18 @@ For the rest of the views the `role="none/presentation"` must be used on all inn
 
 ## Section 508
 
-The Scheduler is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The Scheduler is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The Scheduler has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The Scheduler has been tested with the following screen readers and browsers combinations:
 
@@ -104,6 +119,8 @@ The Scheduler has been tested with the following screen readers and browsers com
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

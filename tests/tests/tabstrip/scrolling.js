@@ -265,6 +265,75 @@ describe('tabstrip mobile scrolling', function() {
 
         jQuery.fx.off = false;
     });
+});
 
+describe('tabstrip scrollButtons position', function() {
+    beforeEach(function() {
+        setupDom();
+    });
+
+    afterEach(function() {
+        tabstrip.destroy();
+    });
+
+    it('scrollButtonsPosition split - default', function() {
+        createTabStrip();
+
+        const firstChild = tabstrip.tabWrapper.children().first();
+        const secondChild = tabstrip.tabWrapper.children().eq(1);
+        const lastChild = tabstrip.tabWrapper.children().last();
+
+        assert.isOk(firstChild.is(".k-tabstrip-prev"));
+        assert.isOk(secondChild.is(".k-tabstrip-items"));
+        assert.isOk(lastChild.is(".k-tabstrip-next"));
+    });
+
+    it('scrollButtonsPosition split - set', function() {
+        createTabStrip({
+            scrollable: {
+                scrollButtonsPosition: "split"
+            }
+        });
+
+        const firstChild = tabstrip.tabWrapper.children().first();
+        const secondChild = tabstrip.tabWrapper.children().eq(1);
+        const lastChild = tabstrip.tabWrapper.children().last();
+
+        assert.isOk(firstChild.is(".k-tabstrip-prev"));
+        assert.isOk(secondChild.is(".k-tabstrip-items"));
+        assert.isOk(lastChild.is(".k-tabstrip-next"));
+    });
+
+    it('scrollButtonsPosition start', function() {
+        createTabStrip({
+            scrollable: {
+                scrollButtonsPosition: "start"
+            }
+        });
+
+        const firstChild = tabstrip.tabWrapper.children().first();
+        const secondChild = tabstrip.tabWrapper.children().eq(1);
+        const lastChild = tabstrip.tabWrapper.children().last();
+
+        assert.isOk(firstChild.is(".k-tabstrip-prev"));
+        assert.isOk(secondChild.is(".k-tabstrip-next"));
+        assert.isOk(lastChild.is(".k-tabstrip-items"));
+    });
+
+    it('scrollButtonsPosition end', function() {
+        createTabStrip({
+            scrollable: {
+                scrollButtonsPosition: "end"
+            }
+        });
+
+        const firstChild = tabstrip.tabWrapper.children().first();
+        const secondChild = tabstrip.tabWrapper.children().eq(1);
+        const lastChild = tabstrip.tabWrapper.children().last();
+
+        assert.isOk(firstChild.is(".k-tabstrip-items"));
+        assert.isOk(secondChild.is(".k-tabstrip-prev"));
+        assert.isOk(lastChild.is(".k-tabstrip-next"));
+    });
 
 });

@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Telerik UI DateInput for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_dateinput_razorpage_aspnetcore
-position: 5
+position: 10
 ---
 
 # DateInput in Razor Pages

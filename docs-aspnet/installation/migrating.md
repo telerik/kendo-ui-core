@@ -23,8 +23,8 @@ The good news is that there is almost 1:1 parity between the two UI toolsets. Th
 
 For reference, compare the code base of the following live samples to make sure the syntax is identical:
 
-- [Telerik UI for ASP.NET MVC Data Grid](https://demos.telerik.com/aspnet-mvc/grid/local-data-binding).
-- [Telerik UI for ASP.NET Core Data Grid](https://demos.telerik.com/aspnet-core/grid/local-data-binding)
+- [Telerik UI for ASP.NET MVC Data Grid Local Data Binding](https://demos.telerik.com/aspnet-mvc/grid/local-data-binding)
+- [Telerik UI for ASP.NET Core Data Grid Local Data Binding](https://demos.telerik.com/aspnet-core/grid/local-data-binding)
 
 ## Exceptions
 

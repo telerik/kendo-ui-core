@@ -12,15 +12,21 @@ position: 1
 >
 > As it is stated in [WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/#combobox) *"The Guidance for combobox has changed significantly in ARIA 1.2 due to problems with implementation of the previous patterns"*. Therefore, we will keep the current state, even if it contradicts the WAI-ARIA 1.1 specification.
 
+
+
+
 Out of the box, the {{ site.product }} AutoComplete provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The AutoComplete is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### AutoComplete Wrapping Element
+
 
 The following table summarizes the selectors and attributes supported by the AutoComplete wrapper element:
 
@@ -42,6 +48,7 @@ The following table summarizes the selectors and attributes supported by the Aut
 | `.k-disabled .k-input-inner` | `disabled=disabled` or `aria-disabled=true` | The attribute is rendered only when the AutoComplete is disabled. |
 
 ### Popup Listbox
+
 
 The popup element of the AutoComplete has to implement the WAI-ARIA specification for a Popup List component. The following table summarizes the selectors and attributes supported by the listbox popup of the AutoComplete:
 
@@ -67,15 +74,18 @@ The popup element of the AutoComplete has to implement the WAI-ARIA specificatio
 
 ## Section 508
 
-The AutoComplete is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The AutoComplete is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The AutoComplete has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The AutoComplete has been tested with the following screen readers and browsers combinations:
 
@@ -84,6 +94,8 @@ The AutoComplete has been tested with the following screen readers and browsers 
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

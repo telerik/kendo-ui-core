@@ -161,6 +161,93 @@ The theme color of the toolbar item. Available options are `base`, `primary`, `s
 ### toolbarItems.click `Function`
 The click event handler of the toolbar item.
 
+### service `String|Object`
+The URL of the AI service to use for generating outputs.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: "/api/llm"
+    });
+    </script>
+
+### service.url `String`
+The Url of the AI service to use for generating outputs.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: {
+            url: "/api/llm"
+        }
+    });
+    </script>
+
+### service.headers `Object`
+The headers to send with the AI service request.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: {
+            url: "/api/llm",
+            headers: {
+                "Authorization": "Bearer token"
+            }
+        }
+    });
+
+### service.data `Object|Function`
+The data to send with the AI service request.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: {
+            url: "/api/llm",
+            data: {
+                "key": "value"
+            }
+        }
+    });
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: {
+            url: "/api/llm",
+            data: function(prompt, isRetry, history) {
+                return {
+                    "messages": [{
+                        type: messageTypes.user,
+                        text: prompt
+                    }],
+                    "key": "value"
+                }
+            }
+        }
+    });
+
+### service.outputGetter `Function`
+The function to get the output from the AI service response.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: {
+            url: "/api/llm",
+            outputGetter: function(response) {
+                return response.output;
+            }
+        }
+    });
+
 ### showOutputRating `Boolean` *(default: true)*
 
 Specifies if the output rating should be displayed on the output card.
@@ -679,7 +766,13 @@ Triggered when a command item from the Commands view is clicked. The panel bar d
 
 Triggered when the prompt view Generate output button is clicked. The prompt text is available through the event argument. Suitable to make a request to the AI service to receive an output. Use the `addPromptOutput` method to add the generated output to the `promptOutputs` collection.
 
-The `prompt`, `output`and `isRetry` properties are available in the event argument. When the output is generated after clicking the retry button of an output, the `isRetry` property is `true` and the `output` property is the output content of the output card.
+The `prompt`, `output`, `history` and `isRetry` properties are available in the event argument. When the output is generated after clicking the retry button of an output, the `isRetry` property is `true` and the `output` property is the output content of the output card. The history property is an array of prompt outputs generated before the current output.
+
+### promptResponse
+
+Triggered when the AI service response is received. The response object is available through the event argument. Triggered only when the `serviceUrl` option is set.
+
+The `output` property is availble in the event argument.
 
 ### outputRatingChange
 

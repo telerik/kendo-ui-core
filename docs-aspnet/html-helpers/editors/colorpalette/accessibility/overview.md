@@ -8,17 +8,23 @@ position: 1
 
 # ColorPalette Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} ColorPalette provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The ColorPalette is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-colorpalette` | `role=grid` | The focusable wrapper of the component must announce its role as a `grid`. |
+| `.k-colorpalette` | `role=grid` | The focusable wrapper of the component should announce its role as a `grid`. |
 |  | `aria-label` or `aria-labelledby` | The component needs an accessible name to be assigned to it. Must also include the currently selected value in the component. |
 |  | `aria-activedescendant=.k-colorpalette-tile.k-focus id` | Points to the focused cell in the table. The focused cell is changed via keyboard navigation. |
 |  | `tabindex=0` | The element must be focusable. |
@@ -31,15 +37,18 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ## Section 508
 
-The ColorPalette is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The ColorPalette is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The ColorPalette has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The ColorPalette has been tested with the following screen readers and browsers combinations:
 
@@ -48,6 +57,8 @@ The ColorPalette has been tested with the following screen readers and browsers 
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

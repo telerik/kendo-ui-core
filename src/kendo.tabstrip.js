@@ -55,8 +55,8 @@ export const __meta__ = {
         ACTIVESTATE = "k-active",
         FOCUSEDSTATE = "k-focus",
         HOVERSTATE = "k-hover",
-        NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
-        KEYBOARDNAVIGATABLEITEMS = ".k-item",
+        NAVIGATABLEITEMS = ".k-item.k-tabstrip-item:not(." + DISABLEDSTATE + ")",
+        KEYBOARDNAVIGATABLEITEMS = ".k-item.k-tabstrip-item",
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
         DEFAULTDISTANCE = 200,
         ARIA_HIDDEN = "aria-hidden",
@@ -85,7 +85,7 @@ export const __meta__ = {
 
         rendering = {
             wrapperCssClass: function(group, item) {
-                var result = ["k-item"],
+                var result = ["k-item", "k-tabstrip-item"],
                     index = item.index;
 
                 if (item.enabled === false) {
@@ -160,7 +160,7 @@ export const __meta__ = {
     }
 
     function updateFirstLast(tabGroup) {
-        var tabs = tabGroup.children(".k-item");
+        const tabs = tabGroup.children(".k-item.k-tabstrip-item");
 
         tabs.filter(".k-first:not(:first-child)").removeClass(FIRST);
         tabs.filter(".k-last:not(:last-child)").removeClass(LAST);
@@ -220,8 +220,12 @@ export const __meta__ = {
                 that.dataSource.fetch();
             }
 
+            that._removeAdditionalWrapperClasses();
+
+            that._tabSizes();
             that._tabPosition();
             that._scrollable();
+            that._tabAlignment();
             that._sortable();
             that._processContentUrls();
             that._attachEvents();
@@ -260,6 +264,8 @@ export const __meta__ = {
             dataSpriteCssClass: "",
             dataContentUrlField: "",
             tabPosition: "top",
+            tabAlignment: "start",
+            size: "medium",
             tabTemplate: null,
             animation: {
                 open: {
@@ -275,7 +281,9 @@ export const __meta__ = {
             contentUrls: false,
             applyMinHeight: true,
             scrollable: {
-                distance: DEFAULTDISTANCE
+                distance: DEFAULTDISTANCE,
+                scrollButtonsPosition: "split",
+                scrollButtons: "auto",
             },
             sortable: false
         },
@@ -585,19 +593,32 @@ export const __meta__ = {
                     .attr(ARIA_HIDDEN, true);
         },
 
+        _removeAdditionalWrapperClasses: function() {
+            const that = this;
+
+            that.wrapper.removeClass("k-tabstrip-sm k-tabstrip-md k-tabstrip-lg");
+            that.tabGroup.removeClass("k-tabstrip-items-start k-tabstrip-items-center k-tabstrip-items-end k-tabstrip-items-justify k-tabstrip-items-stretched");
+        },
+
         destroy: function() {
             var that = this;
-
+            const isHidden = that.options.scrollable && that.options.scrollable.scrollButtons === "hidden";
             Widget.fn.destroy.call(that);
 
             if (that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler);
             }
 
+            if (that.options.scrollable && isHidden) {
+                that.tabGroup.unbind("scroll" + NS);
+            }
+
+            that._removeAdditionalWrapperClasses();
+
             that.wrapper.off(NS);
             that.tabGroup.off(NS);
 
-            if (that._scrollableModeActive) {
+            if (that._scrollableModeActive && !isHidden) {
                 that._scrollPrevButton.off().remove();
                 that._scrollNextButton.off().remove();
             }
@@ -855,6 +876,19 @@ export const __meta__ = {
             }
         },
 
+        _tabAlignment: function() {
+            const that = this;
+
+            let tabAlignment = that.options.tabAlignment;
+
+            if (that._scrollableModeActive) {
+                tabAlignment = 'start';
+            }
+
+            that.tabGroup.addClass("k-tabstrip-items-" + tabAlignment);
+
+        },
+
         _active: function() {
             var that = this;
             setTimeout(function() {
@@ -886,6 +920,12 @@ export const __meta__ = {
                 .on(CLICK + NS, " > " + NAVIGATABLEITEMS, that._itemClick.bind(that));
 
             that.wrapper.on("focus" + NS, function() { that.tabGroup.trigger("focus"); });
+
+            if (options.scrollable && options.scrollable.scrollButtons === "hidden") {
+                that.tabGroup.bind("scroll", function(e) {
+                    that._toggleScrollButtons();
+                });
+            }
 
             that.tabGroup
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
@@ -1183,7 +1223,7 @@ export const __meta__ = {
             var that = this;
 
             if (that._contentUrls.length) {
-                that.tabGroup.children(".k-item")
+                that.tabGroup.children(".k-item.k-tabstrip-item")
                     .each(function(index, item) {
                         var url = that._contentUrls[index];
 
@@ -1192,7 +1232,7 @@ export const __meta__ = {
                         }
                     });
             } else {
-                that._contentUrls.length = that.tabGroup.find("li.k-item").length;
+                that._contentUrls.length = that.tabGroup.find("li.k-item.k-tabstrip-item").length;
             }
         },
 
@@ -1209,14 +1249,28 @@ export const __meta__ = {
             element.children().each(function() {
                 width += outerWidth($(this));
             });
-            return width;
+            return Math.floor(width);
+        },
+
+        _getChildrenHeight: function(element) {
+            let height = 0;
+            element.children().each(function() {
+                height += outerHeight($(this));
+            });
+            return Math.floor(height);
         },
 
         _scrollable: function() {
-            var that = this,
+            const that = this,
                 options = that.options,
-                wrapperOffsetWidth,
-                tabGroupScrollWidth,
+                scrollButtonsPosition = options.scrollable.scrollButtonsPosition,
+                scrollButtonsVisibility = options.scrollable.scrollButtons,
+                isHorizontal = options.tabPosition == "top" || options.tabPosition == "bottom",
+                isHidden = scrollButtonsVisibility === "hidden",
+                isVisible = scrollButtonsVisibility === "visible";
+
+            let wrapperOffset,
+            tabGroupScroll,
                 scrollPrevButton,
                 scrollNextButton;
 
@@ -1224,20 +1278,44 @@ export const __meta__ = {
 
                 that.wrapper.addClass("k-tabstrip-scrollable");
 
-                wrapperOffsetWidth = that.wrapper[0].offsetWidth;
-                tabGroupScrollWidth = that.tabGroup[0].scrollWidth;
-                const enableScroll = (tabGroupScrollWidth > wrapperOffsetWidth) || (that._getChildrenWidth(that.tabGroup) > that.tabGroup.outerWidth());
+                wrapperOffset = isHorizontal ? that.wrapper[0].offsetWidth : that.wrapper[0].offsetHeight;
+                tabGroupScroll = isHorizontal ? that.tabGroup[0].scrollWidth : that.tabGroup[0].scrollHeight;
+                const condition = isHorizontal ? (that._getChildrenWidth(that.tabGroup) > that.tabGroup.outerWidth()) : (that._getChildrenHeight(that.tabGroup) > that.tabGroup.outerHeight());
+                const enableScroll = (tabGroupScroll > wrapperOffset) || condition;
 
-                if (enableScroll && !that._scrollableModeActive) {
+                if (enableScroll && !that._scrollableModeActive && isHidden) {
+                    that.tabGroup.addClass("k-tabstrip-items-scroll");
+                    that.wrapper.addClass("k-tabstrip-scrollable-overlay");
+
+                    that._scrollableModeActive = true;
+                    that._toggleScrollButtons();
+                } else if ((enableScroll || isVisible) && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
                     that._isRtl = kendo.support.isRtl(that.element);
-                    var mouseDown = kendo.support.touch ? "touchstart" : "mousedown";
-                    var mouseUp = kendo.support.touch ? "touchend" : "mouseup";
-                    var browser = kendo.support.browser;
-                    var isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
+                    const mouseDown = kendo.support.touch ? "touchstart" : "mousedown";
+                    const mouseUp = kendo.support.touch ? "touchend" : "mouseup";
+                    const browser = kendo.support.browser;
+                    const isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
+                    const prevIcon = isHorizontal ? "caret-alt-left" : "caret-alt-up";
+                    const nextIcon = isHorizontal ? "caret-alt-right" : "caret-alt-down";
 
-                        that.tabWrapper.prepend(scrollButtonHtml("prev", "caret-alt-left"));
-                        that.tabWrapper.append(scrollButtonHtml("next", "caret-alt-right"));
+                    const scrollLeft = scrollButtonHtml("prev", prevIcon);
+                    const scrollRight = scrollButtonHtml("next", nextIcon);
+
+                    switch (scrollButtonsPosition) {
+                        case 'split':
+                            that.tabWrapper.prepend(scrollLeft);
+                            that.tabWrapper.append(scrollRight);
+                            break;
+                        case 'start':
+                            that.tabWrapper.prepend(scrollRight);
+                            that.tabWrapper.prepend(scrollLeft);
+                            break;
+                        case 'end':
+                            that.tabWrapper.append(scrollLeft);
+                            that.tabWrapper.append(scrollRight);
+                            break;
+                    }
 
                     scrollPrevButton = that._scrollPrevButton = that.tabWrapper.children(".k-tabstrip-prev");
                     scrollNextButton = that._scrollNextButton = that.tabWrapper.children(".k-tabstrip-next");
@@ -1259,18 +1337,33 @@ export const __meta__ = {
                     that._scrollableModeActive = true;
 
                     that._toggleScrollButtons();
-                } else if (that._scrollableModeActive && !enableScroll) {
+                } else if (that._scrollableModeActive && !enableScroll && !isVisible) {
                     that._scrollableModeActive = false;
 
-                    that.wrapper.removeClass("k-tabstrip-scrollable");
+                   that._removeScrollableClasses();
 
-                    that._scrollPrevButton.off().remove();
-                    that._scrollNextButton.off().remove();
-                } else if (!that._scrollableModeActive) {
-                    that.wrapper.removeClass("k-tabstrip-scrollable");
+                   that._scrollPrevButton && that._scrollPrevButton.off().remove();
+                   that._scrollNextButton && that._scrollNextButton.off().remove();
+                } else if (!that._scrollableModeActive && !isVisible) {
+                    that._removeScrollableClasses();
                 } else {
                     that._toggleScrollButtons();
                 }
+            }
+        },
+
+        _removeScrollableClasses: function() {
+            const that = this;
+            const isHidden = that.options.scrollable.scrollButtons === "hidden";
+
+            that.wrapper.removeClass("k-tabstrip-scrollable");
+
+            if (isHidden) {
+                that.wrapper.removeClass("k-tabstrip-scrollable-overlay");
+                that.wrapper.removeClass("k-tabstrip-scrollable-start");
+                that.wrapper.removeClass("k-tabstrip-scrollable-end");
+
+                that.tabGroup.removeClass("k-tabstrip-items-scroll");
             }
         },
 
@@ -1280,54 +1373,60 @@ export const __meta__ = {
             if (options.scrollable && !options.scrollable.distance) {
                 options.scrollable = { distance: DEFAULTDISTANCE };
             }
-
-            return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
+            return options.scrollable && !isNaN(options.scrollable.distance);
         },
 
         _scrollTabsToItem: function(item) {
             var that = this,
                 tabGroup = that.tabGroup,
-                currentScrollOffset = kendo.scrollLeft(tabGroup),
-                itemWidth = outerWidth(item),
-                itemOffset = that._isRtl ? item.position().left : item.position().left - tabGroup.children().first().position().left,
-                tabGroupWidth = tabGroup[0].offsetWidth,
+                isHorizontal = that.options.tabPosition == "top" || that.options.tabPosition == "bottom",
+                currentScrollOffset = isHorizontal ? kendo.scrollLeft(tabGroup) : tabGroup.scrollTop(),
+                itemSize = isHorizontal ? outerWidth(item) : outerHeight(item),
+                itemOffset = isHorizontal ? (that._isRtl ? item.position().left : item.position().left - tabGroup.children().first().position().left) : item.position().top,
+                tabGroupSize = isHorizontal ? tabGroup[0].offsetWidth : tabGroup[0].offsetHeight,
                 browser = kendo.support.browser,
                 itemPosition;
 
-            if (that._isRtl && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
+            if (that._isRtl && isHorizontal && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
                 currentScrollOffset = currentScrollOffset * -1;
             }
 
-            if (that._isRtl) {
+            if (that._isRtl && isHorizontal) {
                 if (itemOffset < 0) {
-                    itemPosition = currentScrollOffset + itemOffset - (tabGroupWidth - currentScrollOffset);
-                } else if (itemOffset + itemWidth > tabGroupWidth) {
-                    itemPosition = currentScrollOffset + itemOffset - itemWidth;
+                    itemPosition = currentScrollOffset + itemOffset - (tabGroupSize - currentScrollOffset);
+                } else if (itemOffset + itemSize > tabGroupSize) {
+                    itemPosition = currentScrollOffset + itemOffset - itemSize;
                 }
             } else {
-                if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
-                    itemPosition = itemOffset + itemWidth - tabGroupWidth;
+                if (currentScrollOffset + tabGroupSize < itemOffset + itemSize) {
+                    itemPosition = itemOffset + itemSize - tabGroupSize;
                 } else if (currentScrollOffset > itemOffset) {
                     itemPosition = itemOffset;
                 }
             }
 
-            tabGroup.finish().animate({ "scrollLeft": itemPosition }, "fast", "linear", function() {
+            var animationProps = isHorizontal ? { "scrollLeft": itemPosition } : { "scrollTop": itemPosition };
+
+            tabGroup.finish().animate(animationProps, "fast", "linear", function() {
                 that._toggleScrollButtons();
             });
         },
 
         _scrollTabsByDelta: function(delta) {
-            var that = this;
-            var tabGroup = that.tabGroup;
-            var scrLeft = kendo.scrollLeft(tabGroup);
-            var browser = kendo.support.browser;
+            const that = this;
+            const tabGroup = that.tabGroup;
+            const isHorizontal = that.options.tabPosition == "top" || that.options.tabPosition == "bottom";
 
-            if (that._isRtl && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
-                scrLeft = scrLeft * -1;
+            let scrOffset = isHorizontal ? kendo.scrollLeft(tabGroup) : tabGroup.scrollTop();
+            const browser = kendo.support.browser;
+
+            if (that._isRtl && isHorizontal && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
+                scrOffset = scrOffset * -1;
             }
 
-            tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function() {
+            var animationProps = isHorizontal ? { "scrollLeft": scrOffset + delta } : { "scrollTop": scrOffset + delta };
+
+            tabGroup.finish().animate(animationProps, "fast", "linear", function() {
                 if (that._nowScrollingTabs && !jQuery.fx.off) {
                     that._scrollTabsByDelta(delta);
                 } else {
@@ -1340,6 +1439,7 @@ export const __meta__ = {
             var that = this,
             options = that.options,
             position = options.tabPosition,
+            isHidden = options.scrollable && options.scrollable.scrollButtons === "hidden",
             axis = position === 'left' || position === 'right' ? 'y' : 'x';
 
             if (!that.options.sortable) {
@@ -1347,13 +1447,15 @@ export const __meta__ = {
             }
 
             that.sortable = new kendo.ui.Sortable(that.tabGroup, {
-                filter: "li.k-item",
+                filter: "li.k-item.k-tabstrip-item",
                 axis,
+                holdToDrag: isHidden,
+                allowTouchActions: isHidden,
                 container: that.tabWrapper,
                 hint: el => `<div id='hint' class='k-tabstrip k-tabstrip-${position}'>
                                 <div class= 'k-tabstrip-items-wrapper k-hstack'>
                                     <ul class='k-tabstrip-items k-reset'>
-                                        <li class='k-item k-first k-active'>${el.html()}</li>
+                                        <li class='k-item k-tabstrip-item k-first k-active'>${el.html()}</li>
                                     </ul>
                                 </div>
                             </div>`,
@@ -1372,6 +1474,28 @@ export const __meta__ = {
             } else {
                 that.insertBefore(e.item, reference);
             }
+        },
+
+        _tabSizes: function() {
+            const that = this;
+            const tabSize = that.options.size;
+
+            let className;
+            switch (tabSize) {
+                case "small":
+                    className = "k-tabstrip-sm";
+                    break;
+
+                case "medium":
+                    className = "k-tabstrip-md";
+                    break;
+
+                case "large":
+                    className = "k-tabstrip-lg";
+                    break;
+            }
+
+            that.wrapper.addClass(className);
         },
 
         _tabPosition: function() {
@@ -1407,11 +1531,21 @@ export const __meta__ = {
         _toggleScrollButtons: function() {
             var that = this,
                 ul = that.tabGroup,
-                scrollLeft = Math.floor(kendo.scrollLeft(ul));
-                const disableNextButton = Math.abs(scrollLeft - (ul[0].scrollWidth - ul[0].offsetWidth)) <= 1;
+                scrollLeft = Math.floor(kendo.scrollLeft(ul)),
+                scrollTop = Math.floor(ul.scrollTop()),
+                scrollButtonsVisibility = that.options.scrollable.scrollButtons,
+                isHorizontal = that.options.tabPosition == "top" || that.options.tabPosition == "bottom";
 
-                that._scrollPrevButton.toggleClass('k-disabled', scrollLeft === 0);
-                that._scrollNextButton.toggleClass('k-disabled', disableNextButton);
+                const disableNextButton = (isHorizontal ? Math.abs(scrollLeft - (ul[0].scrollWidth - ul[0].offsetWidth)) : Math.abs(scrollTop - (ul[0].scrollHeight - ul[0].offsetHeight))) <= 1;
+                const disablePrevButton = (isHorizontal ? scrollLeft : scrollTop) === 0;
+
+                if (scrollButtonsVisibility !== "hidden") {
+                    that._scrollPrevButton.toggleClass('k-disabled', disablePrevButton);
+                    that._scrollNextButton.toggleClass('k-disabled', disableNextButton);
+                } else {
+                    that.wrapper.toggleClass("k-tabstrip-scrollable-start", disablePrevButton);
+                    that.wrapper.toggleClass("k-tabstrip-scrollable-end", disableNextButton);
+                }
         },
 
         _updateClasses: function() {
@@ -1437,7 +1571,7 @@ export const __meta__ = {
             that.tabWrapper.addClass(isHorizontal ? 'k-hstack' : 'k-vstack');
             that.tabGroup.addClass('k-tabstrip-items k-reset');
 
-            tabs = that.tabGroup.find("li").addClass("k-item");
+            tabs = that.tabGroup.find("li").addClass("k-item k-tabstrip-item");
 
             if (tabs.length) {
                 activeItem = tabs.filter("." + ACTIVESTATE).index();
@@ -1470,7 +1604,7 @@ export const __meta__ = {
         _updateContentElements: function(isInitialUpdate) {
             var that = this,
                 contentUrls = that._contentUrls,
-                items = that.tabGroup.children(".k-item"),
+                items = that.tabGroup.children(".k-item.k-tabstrip-item"),
                 contentElements = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)"),
                 _elementId = that._elementId.bind(that);
 

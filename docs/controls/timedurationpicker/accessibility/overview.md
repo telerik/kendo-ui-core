@@ -39,6 +39,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-disabled .k-input-inner` | `disabled=disabled` or `aria-disabled=true` | Attribute is rendered only when the DatePicker is disabled. |
 | `.k-input-button` | `aria-hidden=true` | The button element must be hidden from the assistive technologies. |
 |  | `tabindex=-1` | Button element must not be focusable. |
+| `k-timedurationpicker.k-disabled .k-button` | `disabled` or `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
 
 ### List Elements on the Popup
 

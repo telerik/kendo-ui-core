@@ -8,15 +8,22 @@ position: 1
 
 # ComboBox Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} ComboBox provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The ComboBox is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
+
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 ### ComboBox Wrapping Element
+
 
 The following table summarizes the selectors and attributes supported by the ComboBox wrapper element:
 
@@ -39,8 +46,10 @@ The following table summarizes the selectors and attributes supported by the Com
 | `.k-input-button` | `role=button` or `nodeName=button` | The element must either be a `<button>` element or must have the `role="button"` assigned. |
 |  | `aria-label` | The button element must have discernible text. |
 |  | `tabindex=-1` | The button element must not be focusable. |
+| `.k-combobox.k-disabled .k-button` | `disabled` or `aria-disabled=true` | Attribute is rendered only when the picker is disabled. |
 
 ### Popup Listbox
+
 
 The popup element of the ComboBox has to implement the WAI-ARIA specification for a Popup List component. The following table summarizes the selectors and attributes supported by the listbox popup of the ComboBox:
 
@@ -66,15 +75,18 @@ The popup element of the ComboBox has to implement the WAI-ARIA specification fo
 
 ## Section 508
 
-The ComboBox is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The ComboBox is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The ComboBox has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The ComboBox has been tested with the following screen readers and browsers combinations:
 
@@ -83,6 +95,8 @@ The ComboBox has been tested with the following screen readers and browsers comb
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 

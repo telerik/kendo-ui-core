@@ -8,11 +8,16 @@ position: 1
 
 # Splitter Accessibility
 
+
+
+
 Out of the box, the {{ site.product }} Splitter provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
 
 The Splitter is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
+
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
@@ -29,11 +34,13 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-splitbar` | `role=separator` | Sets the proper role for the Splitter split-bar element. |
-|  | `aria-label` | An accessible name, with `aria-label` must be included if there is more than one focusable separator. The value is set through the corresponding SplitterPane API. |
-| `.k-splitbar-horizontal` | `aria-orientation=vertical` | When a splitbar separates two panes horizontally, its `aria-orientation` must be explicitly set to `'vertical'`. |
-|  | `aria-keyshortcuts=ArrowLeft ArrowRight ArrowUp ArrowDown` | Sets the `aria-keyshortcuts` attribute value to announce available keyboard shortcuts. Some are omitted for brevity. |
+|  | `aria-label` | An accessible name, with aria-label should be included if there is more than one focusable separator. The value is set through the corresponding SplitterPane API. |
+| `.k-splitbar-horizontal` | `aria-orientation=vertical` | When a splitbar separates two panes horizontally, its aria-orientation must be explicitly set to 'vertical'. |
+|  | `aria-keyshortcuts=ArrowLeft ArrowRight ArrowUp ArrowDown` | Sets the aria-keyshortcuts attribute value to announce available keyboard shortcuts. Some are omitted for brevity. |
 
-> Note: Setting the `value-now` attribute of the separator element is not applicable, as the Splitter is a complex layout component allowing splitting the content into multiple panes across any number and level of nested Splitters and panes, thus announcing a value would not convey any meaningful information. Moreover, there is no specification, or WAI-ARIA recommendation that explains how value must be set in multiple panes scenario. Further information on this complicated scenario can be found in the following [WAI-ARIA GitHub issue](https://github.com/w3c/aria-practices/issues/129#issuecomment-456976215).
+> Note: Setting the value-now attribute of the separator element is not applicable, as the Splitter is a complex layout component allowing splitting the content into multiple panes across any number and level of nested Splitters and panes, thus announcing a value would not convey any meaningful information. Moreover, there is no specification, or WAI-ARIA recommendation that explains how value should be set in multiple panes scenario. If needed, developers can still apply attributes as they see fit, using the respective API option. Further information on this complicated scenario could be found in the following WAI-ARIA GitHub issue:
+
+[WAI-ARIA Practices on GitHub](https://github.com/w3c/aria-practices/issues/129#issuecomment-456976215)
 
 ## Resources
 
@@ -43,15 +50,18 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ## Section 508
 
-The Splitter is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The Splitter is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
+
 
 The Splitter has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
+
 
 The Splitter has been tested with the following screen readers and browsers combinations:
 
@@ -60,6 +70,8 @@ The Splitter has been tested with the following screen readers and browsers comb
 | Firefox | NVDA |
 | Chrome | JAWS |
 | Microsoft Edge | JAWS |
+
+
 
 ### Test Example
 
