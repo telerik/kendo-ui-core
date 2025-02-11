@@ -92,6 +92,25 @@ Whether to render the input.
     });
     </script>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+    <div id="ColorGradient"></div>
+    <script>
+    $("#ColorGradient").kendoColorGradient({
+      size: "small"
+    });
+    </script>
+
+
 ### value `String | kendo.Color` *(default: null)*
 
 Specifies the initially selected color.

@@ -779,7 +779,7 @@ A name or keyword which indicates where to display the document that was returne
         },
       });
     </script>
-    
+
 ### pdf.subject `String` *(default: null)*
 
 Sets the subject of the PDF file.
@@ -900,7 +900,7 @@ If set to `true`, the PropertyGrid will display a scrollbar when the total row h
       });
     </script>
 
-### toolbar `String|Function|Array`
+### toolbar `String|Function|Array|Object`
 
 * If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole PropertyGrid toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
 * If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the contents of the PropertyGrid toolbar.
@@ -913,6 +913,9 @@ If set to `true`, the PropertyGrid will display a scrollbar when the total row h
   * `spacer`&mdash;Renders a spacer element.
   * `excel`&mdash;Exports the data in MS Excel format.
   * `pdf`&mdash;Exports the data in PDF format.
+* If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
+  * `items` - an array of commands as explained above
+  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
 
 #### Example - set the ToolBar as an array of commands
 
@@ -968,15 +971,15 @@ Apart from the built-in tools, the PropertyGrid fully exposes the [ToolBar.items
             valueColumn: { width: 250 }
         },
         toolbar: [
-            "search", 
-            "spacer", 
+            "search",
+            "spacer",
             "sort",
             {
                 name: "splitbtn",
                 type: "splitButton",
                 text: "SplitButton",
                 menuButtons: [
-                    {text: "Option 1"}, 
+                    {text: "Option 1"},
                     {text: "Option 2"}]
             }],
         model: {
@@ -1087,6 +1090,66 @@ The text that is displayed by the command button. If not set, the PropertyGrid w
         width: 500
       });
     </script>
+
+
+
+### toolbar.items.click `Function`
+
+The `click` handler of the toolbar command. Used for custom toolbar commands.
+
+
+### toolbar.items.icon `String`
+
+Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the PropertyGrid renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
+
+
+### toolbar.items.imageClass `String`
+
+A class name that will be rendered inside the toolbar button. When you set this option, the PropertyGrid renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
+
+
+### toolbar.items.name `String`
+
+The name of the toolbar command. Can be either a built-in ("search", "sort", "group" or "details") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
+
+### toolbar.items.text `String`
+
+The text that is displayed by the command button. If not set, the PropertyGrid will use the [`name`](/api/javascript/ui/propertygrid#configuration-toolbar.name) option as the button text instead.
+
+
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
 
 ### width `Number`
 
@@ -1229,7 +1292,7 @@ Cancels any changes in the values of the object's properties. Resets the object 
 
     <button id="btn">Reset state</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1259,7 +1322,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/pr
 
     <button id="export">Export to Excel</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1292,7 +1355,7 @@ Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](
 
     <button id="export">Export to PDF</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1319,7 +1382,7 @@ Updates the state of the object and clears all `dirty` flags. Calling the [`rese
 
     <button id="btn">Save state</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1357,7 +1420,7 @@ A DOM element or a jQuery object which represents the table row.
 
     <button id="btn">Highlight the second row</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1378,7 +1441,7 @@ A DOM element or a jQuery object which represents the table row.
 
     <button id="btn">Get selected row info</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1408,7 +1471,7 @@ Toggles the Details/Info box, when enabled. See the [`showDetails`](/api/javascr
 
     <button id="btn">Toggle expanded/collapsed state</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1442,7 +1505,7 @@ A string, a DOM element, or a jQuery object which represents a grouping row. A s
 
     <button id="btn">Toggle expanded/collapsed state of the first group</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1476,7 +1539,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
 
     <button id="btn">Toggle expanded/collapsed state</button>
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1516,7 +1579,7 @@ The component instance which fired the event.
 #### Example - subscribing to the beforeEdit event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1564,7 +1627,7 @@ The component instance which fired the event.
 #### Example - subscribing to the cancel event before initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1586,7 +1649,7 @@ The component instance which fired the event.
 #### Example - subscribing to the cancel event after initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       function cancel(e) {
         /* The result can be observed in the DevTools(F12) console of the browser. */
@@ -1639,7 +1702,7 @@ The component instance which fired the event.
 #### Example - subscribing to the cellClose event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1674,7 +1737,7 @@ The component instance which fired the event.
 #### Example - getting the selected data item from the selected row
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1716,7 +1779,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
 #### Example - subscribing to the collapse event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1756,7 +1819,7 @@ The component instance which fired the event.
 #### Example - subscribing to the edit event before initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1778,7 +1841,7 @@ The component instance which fired the event.
 #### Example - subscribing to the edit event after initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       function edit(e) {
       /* The result can be observed in the DevTools(F12) console of the browser. */
@@ -1827,7 +1890,7 @@ If invoked, the PropertyGrid will not save the generated file.
 #### Example - subscribing to the excelExport event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1868,7 +1931,7 @@ If invoked, prevents the expand action. The child table rows will not be shown.
 #### Example - subscribing to the expand event before initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1890,7 +1953,7 @@ If invoked, prevents the expand action. The child table rows will not be shown.
 #### Example - subscribing to the expand event after initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       function expand(e) {
       /* The result can be observed in the DevTools(F12) console of the browser. */
@@ -1935,7 +1998,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
 #### Example - subscribing to the collapse event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -1975,7 +2038,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
 #### Example - subscribing to the collapse event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -2015,7 +2078,7 @@ A promise that will be resolved when the export completes.
 #### Example - subscribing to the pdfExport event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -2056,7 +2119,7 @@ The component instance which fired the event.
 #### Example - subscribing to the save event before initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {
@@ -2078,7 +2141,7 @@ The component instance which fired the event.
 #### Example - subscribing to the save event after initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       function save(e) {
           /* The result can be observed in the DevTools(F12) console of the browser. */
@@ -2127,7 +2190,7 @@ The component instance which fired the event.
 #### Example - subscribing to the columnResize event during initialization
 
     <div id="propertyGrid"></div>
-    
+
     <script>
       $("#propertyGrid").kendoPropertyGrid({
         model: {

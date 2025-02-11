@@ -11,7 +11,7 @@ position: 5
 
 The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service. Including the client-side resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
 
-> As of the R3 2022 release, you must install a license file in your application to access the resources provided by the CDN service. For more information, check [Using Script License File]({% slug using_license_code %}).
+> As of the R3 2022 release, you must install a license file in your application to access the resources provided by the CDN service. For more information, check [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
 Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on the CDN.
 
@@ -117,7 +117,7 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 {% endif %}
 
-1. Setup the License File by following the instructions in the [Using Script License File article]({% slug using_license_code %}).
+1. Setup the License File by following the instructions in the [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
 ## Troubleshooting
 

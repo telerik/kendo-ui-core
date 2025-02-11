@@ -182,6 +182,7 @@ For more advanced configuration options you can check:
 * [Supported toolbar command types]({% slug htmlhelpers_toolbar_button_aspnetcore %})&mdash;The ToolBar supports various button command types.
 * [Resizing](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/resizing)&mdash;The ToolBar provides adaptive resizing functionality.
 * [Integration](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/integration)&mdash;The component can be integrated with various form elements to provide an interactive layout to the user.
+* [Appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/appearance)&mdash;The component provides convenient built-in settings for changing its size and overflow options.
 
 ## Next Steps
 

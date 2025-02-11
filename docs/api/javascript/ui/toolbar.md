@@ -1196,6 +1196,106 @@ If set to `true` this configuration option would enable Tab-based navigation amo
         });
     </script>
 
+### overflow `Object`
+
+Configures the overflow behavior of the ToolBar.
+
+#### Example - Customize overflow settings
+
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "auto",
+                scrollButtonsPosition: "split",
+                scrollDistance: 50
+            },
+            items: [
+                { type: "button", text: "Button 1" },
+                { type: "button", text: "Button 2" }
+            ]
+        });
+    </script>
+
+
+### overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+#### Example - Set overflow mode to scroll
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            overflow: {
+                mode: "scroll"
+            }
+        });
+    </script>
+
+
+### overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+#### Example - Hide scroll buttons
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "hidden"
+            }
+        });
+    </script>
+
+
+### overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+#### Example - Position scroll buttons at the end
+
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            overflow: {
+                mode: "scroll",
+                scrollButtonsPosition: "end"
+            }
+        });
+    </script>
+
+
+### overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+#### Example - Set scroll distance
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            overflow: {
+                mode: "scroll",
+                scrollDistance: 100
+            }
+        });
+    </script>
+
+
+
 ### size `String` *(default: 'medium')*
 
 Controls the overall physical size of the ToolBar and its items. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.

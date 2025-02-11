@@ -47,7 +47,7 @@ Clients with a commercial license can use the [Custom Download Builder tool](htt
 {% endif %}
 ## Next Steps
 
-* [Setting Up the License File]({% slug using_license_code %})
+* [Installing a License File]({% slug installation_license_key_aspnetcore %})
 * [Using Local Files to Add Client-Side Resources]({% slug using_local_client_side_resources %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})
 {% if site.core %}

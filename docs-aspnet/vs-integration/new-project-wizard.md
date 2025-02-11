@@ -205,7 +205,7 @@ When you select a theme, you can select between three main themes: Default, Boot
 
 ## Install or Update License Key
 
-If necessary, the Telerik Visual Studio extension will notify you about a missing or outdated [license key](slug://installation-license-key), and will install or update it.
+If necessary, the Telerik Visual Studio extension will notify you about a missing or outdated [license key]({%slug installation_license_key_aspnetcore%}), and will install or update it.
 
 ## See Also
 

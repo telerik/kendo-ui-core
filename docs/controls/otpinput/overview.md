@@ -17,7 +17,7 @@ The OTPInput is a UI component that allows the user to enter a one-time password
 * [Appearance]({% slug appearance_kendoui_otpinput %})&mdash;You can use the available styling options for configuring the size, border radius, and fill mode of the OTPInput.
 * [Separators]({% slug separator_kendoui_otpinput %})&mdash;The OTPInput supports different types of separators between the item groups.
 * [Adaptiveness]({% slug otpinput_input_mode_kendo %})&mdash;The OTPInput allows you to configure what type of virtual keyboard will be displayed when working with the component on a mobile device.
-* [Accessibility]({% slug accessibility_otpinput %})&mdash;The OTPInput is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_otpinput %}).
+* [Accessibility]({% slug accessibility_kendoui_otpinput %})&mdash;The OTPInput is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_otpinput_jquery %}).
 
 ## Next Steps
 

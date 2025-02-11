@@ -2846,8 +2846,8 @@ In order for this property to work, grid's `resizable` property must be set to `
       resizable: true,
       columns: [
         { field: "id", width: 250, resizable: false }, //column will not be resizable anymore
-        { field: "name", width: 250 }, 
-        { field: "age", width: 250 } 
+        { field: "name", width: 250 },
+        { field: "age", width: 250 }
       ],
       dataSource: [
           { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
@@ -3424,7 +3424,7 @@ If set to `true` the column menu would allow the user to filter the grid. By def
 
 If set to `true`, the global column menu will render a button to allow the user to clear all filters applied to the grid.
 
-#### Example 
+#### Example
 
     <div id="grid"></div>
     <script>
@@ -9612,7 +9612,7 @@ The available aggregates are:
 
 When set to `true`, the grid.selectable will not be initialized. Should be enabled when both checkbox selection for the Grid and cell aggregates are required.
 
-#### Example 
+#### Example
 
     <div id="grid"></div>
     <script>
@@ -9918,7 +9918,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the Status 
     });
   </script>
 
-### toolbar `String|Function|Array`
+### toolbar `String|Function|Array|Object`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole grid Toolbar,
 and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
@@ -9946,6 +9946,10 @@ The "columns" command renders a global column menu.
 The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
 
 The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
+
+* If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
+  * `items` - an array of commands as explained above
+  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
 
 #### Example - configure the Grid Toolbar as a string template
 
@@ -10085,6 +10089,51 @@ Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/a
       });
     </script>
 
+### toolbar.items
+
+An array collection of items to be rendered in the toolbar. Each item will be treated as the list of commands displayed in the grid's Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").
+
+- The "cancel" built-in command reverts any data changes done by the end user.
+- The "create" command adds an empty data item to the grid.
+
+- The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/javascript/ui/grid/events/savechanges) grid event.
+
+- The "excel" command exports the grid data in MS Excel format. Fires [`excelExport`](/api/javascript/ui/grid/events/excelexport) grid event.
+
+- The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) grid event.
+
+- The "search" command renders the built-in search panel for the grid.
+
+- The "columns" command renders a global column menu.
+
+- The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
+
+- The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
+
+### toolbar.items.iconClass `String`
+
+The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
+
+> Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
+> Built-in commands have a predefined **iconClass** value.
+
+
+### toolbar.items.name `String`
+
+The name of the toolbar command. Either a built-in ("cancel", "create", "save", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
+This class can be used to obtain reference to the button after Grid initialization and attach click handlers.
+
+### toolbar.items.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.
+
+> Check [Toolbar template](https://demos.telerik.com/kendo-ui/grid/toolbar-template) for a live demo.
+
+
+### toolbar.items.text `String`
+
+The text displayed by the command button. If not set the [name](toolbar.name) option would be used as the button text instead.
+
 ### toolbar.iconClass `String`
 
 The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
@@ -10118,6 +10167,40 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
       editable: true
     });
     </script>
+
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
 
 ### toolbar.name `String`
 
@@ -11951,7 +12034,7 @@ Scrolls the table to the provided item.
         { field: "name", width: 100 },
         { field: "age", width: 50 }
       ],
-      dataSource: 
+      dataSource:
         {
         data: [
             { name: "Jane Doe", age: 30, id: 1 },

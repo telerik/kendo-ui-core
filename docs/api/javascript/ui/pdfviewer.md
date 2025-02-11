@@ -222,7 +222,7 @@ The selected page number in the viewer.
 Specifies the default scale of the pages.
 
 #### Example - customizing the scale
- 
+
     <div id="pdf-viewer"></div>
     <script type="module">
          $("#pdf-viewer").kendoPDFViewer({
@@ -238,7 +238,7 @@ Specifies the default scale of the pages.
 Specifies the minimum zoom that could be applied to the pages.
 
 #### Example - customizing the zoomMin
- 
+
     <div id="pdf-viewer"></div>
     <script type="module">
          $("#pdf-viewer").kendoPDFViewer({
@@ -254,7 +254,7 @@ Specifies the minimum zoom that could be applied to the pages.
 Specifies the maximum zoom that could be applied to the pages.
 
 #### Example - customizing the zoomMax
- 
+
     <div id="pdf-viewer"></div>
     <script type="module">
          $("#pdf-viewer").kendoPDFViewer({
@@ -270,7 +270,7 @@ Specifies the maximum zoom that could be applied to the pages.
 Specifies the zoom rate that could be applied to the pages. Used when zooming on `mousewheel` and for the `zoomIn` and `zoomOut` tools.
 
 #### Example - customizing the zoomRate
- 
+
     <div id="pdf-viewer"></div>
     <script type="module">
          $("#pdf-viewer").kendoPDFViewer({
@@ -292,7 +292,7 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 #### Example - customizing the type of pages' surfaces
 
     <div id="pdf-viewer"></div>
-    <script type="module"> 
+    <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
             view: {
               type: "svg"
@@ -303,7 +303,7 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
 ### toolbar `Boolean|Object` *(default: true)*
 
-Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items`. Inherits [Kendo UI Toolbar](/api/javascript/ui/toolbar).
+Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items` and `overflow` configuration. Inherits [Kendo UI Toolbar](/api/javascript/ui/toolbar).
 
 ### toolbar.contextMenu `Boolean` *(default: false)*
 
@@ -362,7 +362,7 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
     </script>
 
 #### Example - customizing the zoom default tool
- 
+
     <div id="pdf-viewer"></div>
     <script type="module">
         $("#pdf-viewer").kendoPDFViewer({
@@ -413,19 +413,19 @@ Sets the text of the button.
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
 #### Example
- 
+
     <div id="pdf-viewer"></div>
     <script type="module">
       $("#pdf-viewer").kendoPDFViewer({
         toolbar: {
-          items: [            
+          items: [
             {
               name: "myCustomTool",
               template: "<button>My custom button </button>"
             }
           ]
-        }  
-      });     
+        }
+      });
     </script>
 
 ### toolbar.items.showText `String` *(default: "both")*
@@ -457,6 +457,40 @@ Sets icon for the item. The icon should be one of the existing in the Kendo UI t
 
 ### toolbar.items.id `String`
 Specifies the ID of the button.
+
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
 
 ### messages `Object`
 
@@ -507,7 +541,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           toolbar: {
-            print: "Custom Print Message" 
+            print: "Custom Print Message"
           }
         }
       });
@@ -527,7 +561,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           toolbar: {
-              toggleSelection: "Custom Enable Selection Message"  
+              toggleSelection: "Custom Enable Selection Message"
           }
         }
       });
@@ -547,7 +581,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           toolbar: {
-              togglePan: "Custom Enable Panning Message"  
+              togglePan: "Custom Enable Panning Message"
           }
         }
       });
@@ -567,7 +601,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           toolbar: {
-              search: "Custom Search Message"  
+              search: "Custom Search Message"
           }
         }
       });
@@ -590,7 +624,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              actualWidth: "Custom Actual Width Message"                  
+              actualWidth: "Custom Actual Width Message"
             }
           }
         }
@@ -612,7 +646,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              autoWidth: "Custom Automatic Width Message"                  
+              autoWidth: "Custom Automatic Width Message"
             }
           }
         }
@@ -634,7 +668,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              fitToWidth: "Custom Fit To Width Message"                  
+              fitToWidth: "Custom Fit To Width Message"
             }
           }
         }
@@ -656,7 +690,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              fitToPage: "Custom Fit To Page Message"                  
+              fitToPage: "Custom Fit To Page Message"
             }
           }
         }
@@ -679,7 +713,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              zoomIn: "Custom Zoom In Message"                  
+              zoomIn: "Custom Zoom In Message"
             }
           }
         }
@@ -701,7 +735,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              zoomLevel: "Custom Zoom Level Message"                  
+              zoomLevel: "Custom Zoom Level Message"
             }
           }
         }
@@ -724,7 +758,7 @@ Specifies the localization messages of the toolbar.
         messages: {
           toolbar: {
             zoom: {
-              zoomOut: "Custom Zoom Out Message"                  
+              zoomOut: "Custom Zoom Out Message"
             }
           }
         }
@@ -786,7 +820,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           search: {
-              close: "Custom Close Message"  
+              close: "Custom Close Message"
           }
         }
       });
@@ -808,7 +842,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           search: {
-              inputLabel: "Custom Search Text Message"  
+              inputLabel: "Custom Search Text Message"
           }
         }
       });
@@ -828,7 +862,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           search: {
-              matchCase: "Custom Match Case Message"  
+              matchCase: "Custom Match Case Message"
           }
         }
       });
@@ -848,7 +882,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           search: {
-              next: "Custom Next Match Message"  
+              next: "Custom Next Match Message"
           }
         }
       });
@@ -868,7 +902,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           search: {
-              previous: "Custom Previous Match Message"  
+              previous: "Custom Previous Match Message"
           }
         }
       });
@@ -888,7 +922,7 @@ Specifies the localization messages of the toolbar.
         },
         messages: {
           search: {
-              of: "Custom Of Message"  
+              of: "Custom Of Message"
           }
         }
       });
@@ -951,7 +985,7 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
           const string = e.target.result;
           const substring = ",";
 
-          data = string.substring(string.indexOf(substring)+1); 
+          data = string.substring(string.indexOf(substring)+1);
           var pdfViewer = $("#pdfViewer").kendoPDFViewer({
             width: "100%",
             height: 700
@@ -961,7 +995,7 @@ Displays the file passed as a parameter in the PDFViewer. Currently, supported o
         };
       };
       request.send();
-    </script> 
+    </script>
 
 ### activatePage
 Loads and scrolls to the page by number.
@@ -1252,7 +1286,7 @@ The error message displayed in the dialog.
 
     <div id="pdfviewer"></div>
 
-    <script type="module">	
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "../non-existing-file.pdf"

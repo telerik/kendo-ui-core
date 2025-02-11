@@ -85,10 +85,10 @@ import "../kendo.icons.js";
                 let optionsMessagesHex = encode(options.messages.hex);
 
                 hexInputElement =
-                `<div class="k-vstack" data-${ns}bind="visible: isHEXMode">` +
+                `<div class="k-vstack${options._showAdaptiveView ? " k-flex-1" : ""}" data-${ns}bind="visible: isHEXMode">` +
                     `<input type="text" data-${ns}bind="value: hex" data-${ns}role="textbox" data-${ns}size="${optionsSize}" tabindex="${optionsTabIndex}"  aria-label="${optionsMessagesHex}"/>` +
                     '<label class="k-colorgradient-input-label">HEX</label>' +
-                '</div>'
+                '</div>';
             }
 
             // RGBA input
@@ -100,15 +100,15 @@ import "../kendo.icons.js";
 
                 rgbaInputElement =
                 `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
-                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.r" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesRed}" />` +
+                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.r" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesRed}" inputmode="decimal"/>` +
                     '<label class="k-colorgradient-input-label">R</label>' +
                 '</div>' +
                 `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
-                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.g" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesGreen}" />` +
+                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.g" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesGreen}" inputmode="decimal"/>` +
                     '<label class="k-colorgradient-input-label">G</label>' +
                 '</div>' +
                 `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
-                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.b" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesBlue}"/>` +
+                    `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.b" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}max="255" data-${ns}min="0" data-${ns}decimals="0" data-${ns}spinners="false" data-${ns}format="n0" aria-label="${optionsMessagesBlue}" inputmode="decimal"/>` +
                     '<label class="k-colorgradient-input-label">B</label>' +
                 '</div>';
 
@@ -116,7 +116,7 @@ import "../kendo.icons.js";
                     let optionsMessagesAlpha = options.messages.alpha;
                     rgbaInputElement +=
                     `<div class="k-vstack" data-${ns}bind="visible: isRGBMode">` +
-                        `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.a" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}step="0.1" data-${ns}max="1" data-${ns}min="0" data-${ns}decimals="1" data-${ns}spinners="false" data-${ns}format="n1" aria-label="${optionsMessagesAlpha}" />` +
+                        `<input tabindex="${optionsTabIndex}" data-${ns}bind="value: rgb.a" data-${ns}role="numerictextbox" data-${ns}size="${optionsSize}" data-${ns}step="0.1" data-${ns}max="1" data-${ns}min="0" data-${ns}decimals="1" data-${ns}spinners="false" data-${ns}format="n1" aria-label="${optionsMessagesAlpha}" inputmode="decimal"/>` +
                         '<label class="k-colorgradient-input-label">A</label>' +
                     '</div>';
                 }
@@ -221,7 +221,7 @@ import "../kendo.icons.js";
 
             options = that.options = kendo.deepExtend({}, that.options, options);
 
-            if(options.messages.previewInput) {
+            if (options.messages.previewInput) {
                 options.messages.hex = options.messages.previewInput;
             }
 
@@ -257,12 +257,13 @@ import "../kendo.icons.js";
                 blue: "Blue channel",
                 alpha: "Alpha channel"
             },
-            _otOfPicker: true
+            _otOfPicker: true,
+            _showAdaptiveView: false,
         },
         _template: kendo.template((options) =>
-                '<div class="k-colorgradient-canvas k-hstack">' +
+                `<div class="k-colorgradient-canvas ${options._showAdaptiveView ? "k-vstack" : "k-hstack" }">` +
                     '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"><div role="slider" aria-orientation="undefined" class="k-hsv-draghandle k-draghandle"></div></div></div>' +
-                    '<div class="k-hsv-controls k-hstack">' +
+                    `<div class="k-hsv-controls ${options._showAdaptiveView ? "k-vstack" : "k-hstack" }">` +
                         '<input class="k-hue-slider k-colorgradient-slider" />' +
                         (options.opacity ? '<input class="k-alpha-slider k-colorgradient-slider" />' : '') +
                     '</div>' +
@@ -492,13 +493,15 @@ import "../kendo.icons.js";
                 that._updateUI(that._getHSV(e.value, null, null, null));
             }
 
+            const slidersOrientation = that.options._showAdaptiveView ? "horizontal" : "vertical";
+
             hueSlider.attr("aria-label", "hue");
             that._hueSlider = hueSlider.kendoSlider({
                 min: 0,
                 max: 360,
                 tickPlacement: "none",
                 showButtons: false,
-                orientation: "vertical",
+                orientation: slidersOrientation,
                 slide: hueChange,
                 change: hueChange
             }).data("kendoSlider");
@@ -513,7 +516,7 @@ import "../kendo.icons.js";
                 max: 100,
                 tickPlacement: "none",
                 showButtons: false,
-                orientation: "vertical",
+                orientation: slidersOrientation,
                 slide: opacityChange,
                 change: opacityChange
             }).data("kendoSlider");
@@ -522,7 +525,7 @@ import "../kendo.icons.js";
             var color = this._getHSV(null, s, v, null);
             this._updateUI(color);
         },
-        _updateColorContrast: function (color) {
+        _updateColorContrast: function(color) {
             var that = this,
                 contrastOptions = that.options.contrastTool,
                 backgroundColor = contrastOptions.backgroundColor ? parseColor(contrastOptions.backgroundColor) : parseColor(WHITE),
@@ -568,14 +571,14 @@ import "../kendo.icons.js";
 
             that._updateContrastSvg(backgroundColor);
         },
-        _updateContrastSvg: function (backgroundColor) {
+        _updateContrastSvg: function(backgroundColor) {
             var that = this,
                 hsvRect = that._hsvRect,
                 svgClassName = "k-color-contrast-svg",
                 metrics = { width: hsvRect.width(), height: hsvRect.height() },
                 newSvg;
 
-            if(!metrics.width || !metrics.height) {
+            if (!metrics.width || !metrics.height) {
                 return;
             }
 
@@ -602,7 +605,7 @@ import "../kendo.icons.js";
             that._hueSlider.value(color.h);
 
             if (that._opacitySlider) {
-                that._opacitySlider.wrapper.find(".k-slider-track").css("background", "linear-gradient(to top, transparent, " + Color.fromHSV(color.h, 1, 1, 1).toCss());
+                that._opacitySlider.wrapper.find(".k-slider-track").css("background", `linear-gradient(to ${that.options._showAdaptiveView ? "right" : "top"}, transparent, ` + Color.fromHSV(color.h, 1, 1, 1).toCss());
                 that._opacitySlider.value(100 * color.a);
             }
 
@@ -636,10 +639,34 @@ import "../kendo.icons.js";
             that._triggerSelect(color);
             that._updateHsv(color);
 
-            if(that._contrastTool.length) {
+            if (that._contrastTool.length) {
                 that._updateColorContrast(color);
             }
         },
+        _addSizeClass: function(specificSize) {
+            const options = this.options;
+
+            this.wrapper.removeClass("k-colorgradient-lg k-colorgradient-md k-colorgradient-sm");
+            let size = specificSize || options.size;
+
+            if (size) {
+                let sizeClass = "k-colorgradient-";
+
+                switch (size) {
+                    case "large":
+                        sizeClass += "lg";
+                        break;
+                    case "small":
+                        sizeClass += "sm";
+                        break;
+                    default:
+                        sizeClass += "md";
+                        break;
+                }
+                this.wrapper.addClass(sizeClass);
+            }
+        },
+
         _wrapper: function() {
             var options = this.options,
                 wrapper;
@@ -657,11 +684,13 @@ import "../kendo.icons.js";
                 })
                 .append(this._template(options));
 
-            this._hueElements = $(".k-hsv-rectangle, .k-alpha-slider .k-slider-track", wrapper);
-            this._colorgradientInputs = $(".k-colorgradient-inputs", wrapper);
-            this._contrastTool = $(".k-colorgradient-color-contrast", wrapper);
+                this._hueElements = $(".k-hsv-rectangle, .k-alpha-slider .k-slider-track", wrapper);
+                this._colorgradientInputs = $(".k-colorgradient-inputs", wrapper);
+                this._contrastTool = $(".k-colorgradient-color-contrast", wrapper);
 
-            this.wrapper = wrapper;
+                this.wrapper = wrapper;
+
+                this._addSizeClass();
         },
         destroy: function (){
             this._hsvEvents.destroy();

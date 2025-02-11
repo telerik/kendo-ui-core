@@ -10,13 +10,14 @@ import "./kendo.numerictextbox.js";
 import "./kendo.html.button.js";
 import "./colorpicker/colorselector.js";
 import "./colorpicker/flatcolorpicker.js";
+import "./kendo.actionsheet.js";
 
 export const __meta__ = {
     id: "colorpicker",
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core", "color", "popup", "slider", "userevents", "button", "binder", "textbox", "numerictextbox", "html.button", "icons" ]
+    depends: [ "core", "color", "popup", "slider", "userevents", "button", "binder", "textbox", "numerictextbox", "html.button", "icons", "actionsheet" ]
 };
 
 (function($, undefined) {
@@ -46,7 +47,8 @@ export const __meta__ = {
             blue: "Blue",
             alpha: "Alpha",
             gradient: "Gradient view",
-            palette: "Palette view"
+            palette: "Palette view",
+            adaptiveTitle: "Choose Color",
         },
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
@@ -104,6 +106,7 @@ export const __meta__ = {
                 }
             });
 
+            that._bindMediaQueries();
             that._updateUI(value);
         },
         destroy: function() {
@@ -150,6 +153,113 @@ export const __meta__ = {
             }
         },
 
+        _adaptiveView: function() {
+            const that = this;
+
+            if (!that._popup) {
+                that._getPopup();
+            } else if (!that._popup.fullscreen) {
+                that._popup.destroy();
+                that._popup = null;
+                that._getPopup();
+            } else if (!that._showAdaptiveView) {
+                that._popup.wrapper && that._popup.wrapper.remove();
+                that._popup.destroy();
+                that._popup = null;
+            }
+
+            that._toggleAdaptiveModeSizeClasses(that._showAdaptiveView);
+        },
+
+        _toggleSizeClassesForElement: function(element, size, className) {
+            if (element && element.length) {
+                if (element.data("handler") && element.data("handler")._addSizeClass) {
+                    if (size) {
+                        return element.data("handler")._addSizeClass(size);
+                    }
+
+                    return element.data("handler")._addSizeClass();
+                }
+
+                if (!element.is("." + className)) {
+                    element = element.closest("." + className);
+                }
+
+                element.removeClass(`${className}-sm ${className}-md ${className}-lg`);
+
+                if (size) {
+                    element.addClass(`${className}-${size}`);
+                }
+            }
+        },
+
+        _toggleAdaptiveModeSizeClasses: function(toggle) {
+            const that = this;
+            const wrapper = that._popup && that._popup.wrapper;
+            const adaptiveSize = "large";
+
+            const classes = {
+                flatColorPicker: "k-coloreditor",
+                colorGradient: "k-colorgradient",
+                colorPalette: "k-colorpalette",
+            };
+
+            const flatColorPicker = wrapper && wrapper.length && wrapper.find("." + classes.flatColorPicker);
+            const colorGradient = wrapper && wrapper.length && wrapper.find("." + classes.colorGradient);
+            const colorPalette = wrapper && wrapper.length && wrapper.find("." + classes.colorPalette);
+
+            if (toggle) {
+                that._toggleSizeClassesForElement(flatColorPicker, adaptiveSize);
+                that._toggleSizeClassesForElement(colorGradient, adaptiveSize);
+                that._toggleSizeClassesForElement(colorPalette, adaptiveSize);
+
+            } else {
+                that._toggleSizeClassesForElement(flatColorPicker);
+                that._toggleSizeClassesForElement(colorGradient);
+                that._toggleSizeClassesForElement(colorPalette);
+            }
+        },
+
+        _bindMediaQueries: function() {
+            const that = this;
+            const isAdaptive = that.options.adaptiveMode === "auto";
+
+            if (isAdaptive) {
+                that.largeMQL = kendo.mediaQuery("large");
+                that.mediumMQL = kendo.mediaQuery("medium");
+                that.smallMQL = kendo.mediaQuery("small");
+
+                that.smallMQL
+                    .onEnter(() => {
+                        that._showAdaptiveView = true;
+
+                        that._adaptiveView();
+                        that._popup.fullscreen(true);
+                    });
+
+                that.mediumMQL
+                    .onEnter(() => {
+                        that._showAdaptiveView = true;
+
+                        that._adaptiveView();
+                        that._popup.fullscreen(false);
+                    });
+
+                that.largeMQL
+                    .onEnter(() => {
+                        that._showAdaptiveView = false;
+
+                        that._adaptiveView();
+                    });
+            } else {
+                that.smallMQL && that.smallMQL.destroy();
+                that.mediumMQL && that.mediumMQL.destroy();
+                that.largeMQL && that.largeMQL.destroy();
+
+                that._showAdaptiveView = false;
+            }
+        },
+
         _template: kendo.template(({ toolIcon, _buttonHtml }) =>
            '<span role="combobox" aria-haspopup="dialog" aria-expanded="false" class="k-colorpicker k-picker k-icon-picker">' +
                 '<span class="k-input-inner">' +
@@ -184,7 +294,8 @@ export const __meta__ = {
             ARIATemplate: (data) => `Current selected color is ${data || "none"}`,
             size: "medium",
             rounded: "medium",
-            fillMode: "solid"
+            fillMode: "solid",
+            adaptiveMode: "none",
         },
 
         events: [ "activate", "change", "select", "open", "close" ],
@@ -298,8 +409,60 @@ export const __meta__ = {
                 preventDefault(ev);
             }
         },
+
+        _actionFooterButtons: function() {
+            const that = this;
+
+            const buttons = [
+                {
+                    command: "cancel",
+                    text: "Cancel",
+                    size: "large",
+                    fillMode: that.options.fillMode,
+                    themeColor: "base",
+                },
+                {
+                    command: "apply",
+                    text: "Apply",
+                    size: "large",
+                    fillMode: that.options.fillMode,
+                    themeColor: "primary"
+                }
+            ];
+            let buttonsHtml = "";
+
+            buttons.forEach(buttonOptions => {
+                const command = buttonOptions.command;
+                const text = buttonOptions.text;
+
+                delete buttonOptions.command;
+                delete buttonOptions.text;
+
+                buttonsHtml += kendo.html.renderButton(`<button data-command=${command}>${text}</button>`, buttonOptions);
+            });
+
+            return buttonsHtml;
+        },
+
+        _actionSheetApply: function() {
+            const that = this._selector;
+            if (that._clearColor) {
+                that._select(null);
+            } else {
+                that._select(that._view.color());
+            }
+        },
+
+        _actionSheetCancel: function() {
+            const that = this._selector;
+            delete that._clearColor;
+            that._updateUI(that.color());
+            that._cancel();
+        },
+
         _getPopup: function() {
             var that = this, popup = that._popup;
+            const isAdaptive = that._showAdaptiveView;
 
             if (!popup) {
                 var options = that.options;
@@ -307,7 +470,9 @@ export const __meta__ = {
 
                 selectorType = FlatColorPicker;
 
-                options.autoupdate = options.buttons !== true;
+                options.autoupdate = options.buttons !== true && !isAdaptive;
+                options._showAdaptiveView = isAdaptive;
+
                 delete options.select;
                 delete options.change;
                 delete options.cancel;
@@ -316,28 +481,54 @@ export const __meta__ = {
 
                 var id = kendo.guid();
 
-                var selectorWrapper = $('<div id="' + id + '" class="k-colorpicker-popup"></div>').appendTo(document.body);
-                var selector = that._selector = new selectorType($('<div></div>').appendTo(selectorWrapper), options);
+                var selectorWrapper = $(`<div id="${id}" class=${ !isAdaptive ? "k-colorpicker-popup" : ''}></div>`).appendTo(document.body);
+                var selector = that._selector = new selectorType($('<div></div>').appendTo(selectorWrapper), { ...options, buttons: !isAdaptive && options.buttons, value: isAdaptive ? that._value : that.options.value });
 
                 that.wrapper.attr("aria-controls", id);
 
-                that._popup = popup = selectorWrapper.kendoPopup({
-                    anchor: that.wrapper,
-                    adjustSize: { width: 5, height: 0 }
-                }).data("kendoPopup");
+                if (isAdaptive) {
+                    that._popup = popup = selectorWrapper.kendoActionSheet({
+                        adaptive: true,
+                        closeButton: true,
+                        hideOverflowContent: true,
+                        title: kendo.htmlEncode(options.messages.adaptiveTitle),
+                        footerTemplate: that._actionFooterButtons(),
+                    }).data("kendoActionSheet");
+
+                    popup._footer.addClass("k-actions k-actions-horizontal k-actions-stretched");
+
+                    popup._footer.on("click", "button[data-command]", function(e) {
+                        const command = $(e.currentTarget).data("command");
+
+                        switch (command) {
+                            case "apply":
+                                that._actionSheetApply();
+                                break;
+
+                            case "cancel":
+                                that._actionSheetCancel();
+                                break;
+                        }
+                    });
+                } else {
+                    that._popup = popup = selectorWrapper.kendoPopup({
+                        anchor: that.wrapper,
+                        adjustSize: { width: 5, height: 0 }
+                    }).data("kendoPopup");
+                }
 
                 selector.bind({
                     select: function(ev) {
                         that._updateUI(parseColor(ev.value), true);
                     },
                     change: function(ev) {
-                        if (that.options.buttons) {
+                        if (that.options.buttons || isAdaptive) {
                             that._select(selector.color());
                         } else {
                             that._updateUI(parseColor(ev.value), true);
                         }
 
-                        if (that.options.buttons || (that._selector.options.view === "palette" && that.options.closeOnSelect)) {
+                        if ((that.options.buttons || isAdaptive) || (that._selector.options.view === "palette" && that.options.closeOnSelect)) {
                             that.close();
                         }
                     },
@@ -355,7 +546,7 @@ export const __meta__ = {
 
                         var color = selector.color();
 
-                        if (!that.options.buttons) {
+                        if (!that.options.buttons || !isAdaptive) {
                             that._select(color);
                         } else {
                             that._select(that.color());
@@ -367,9 +558,11 @@ export const __meta__ = {
                             that._cachedHue = color.h;
                         }
 
+                        const parentSelector = isAdaptive ? ".k-actionsheet" : ".k-colorpicker-popup";
+
                         var clickedOutside = event &&
                             event instanceof MouseEvent &&
-                            $(event.target).parents(".k-colorpicker-popup").length === 0;
+                            $(event.target).parents(parentSelector).length === 0;
 
                         if (!clickedOutside) {
                             setTimeout(function() {
@@ -393,6 +586,10 @@ export const __meta__ = {
                         var hsvColor,
                             selectedColor = that.color();
 
+                        if (isAdaptive) {
+                            resizeSliders(selector);
+                        }
+
                         if (selectedColor) {
                             selectedColor = selectedColor.toHSV();
                             hsvColor = Color.fromHSV(that._cachedHue || 0, selectedColor.s, selectedColor.v, selectedColor.a);
@@ -408,6 +605,20 @@ export const __meta__ = {
             return popup;
         }
     });
+
+    function resizeSliders(selectorInstance) {
+        const view = selectorInstance._view;
+
+        if (view) {
+            if (view._hueSlider) {
+                view._hueSlider.resize();
+            }
+
+            if (view._opacitySlider) {
+                view._opacitySlider.resize();
+            }
+        }
+    }
 
     function preventDefault(ev) { ev.preventDefault(); }
 

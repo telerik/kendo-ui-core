@@ -116,7 +116,7 @@ A name or keyword indicating where to display the document returned from the pro
 
 ### toolbar `Boolean | Object` *(default: true)*
 
-Configures the Toolbar of the ImageEditor
+Configures the Toolbar of the ImageEditor.
 
 ### toolbar.items `Array`
 
@@ -210,6 +210,40 @@ Fires when the Split Button's popup opens. [Toolbar Events](/api/javascript/ui/t
 ### toolbar.toggle `Function`
 
 Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
 
 ### toolbar.overflowClose `Function`
 
@@ -489,7 +523,7 @@ Returns the Image instance
 #### Returns `HTMLElement`
 
 The `img` element in the ImageEditor.
-#### Example 
+#### Example
 
     <button id="getImage" class='k-button'>Get Image</button>
     <div id="imageEditor"></div>

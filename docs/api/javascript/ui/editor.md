@@ -2563,9 +2563,11 @@ The maximum height that the editor can be resized to.
     });
     </script>
 
-### resizable.toolbar `Boolean`
+### resizable.toolbar `Boolean|Object`
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
+
+If `resizable.toolbar` is assigned an object, it will propagate the [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration to the Editor's toolbar.
 
 > Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor`, `formatting` and `createTable` will **not** be moved to the tool overflow popup and will be always visible.
 
@@ -2579,6 +2581,48 @@ If `resizable` is set to `true` the widget will detect changes in the viewport w
       }
     });
     </script>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+        toolbar: {
+            mode: "section"
+        }
+      }
+    });
+    </script>
+
+### resizable.toolbar.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### resizable.toolbar.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### resizable.toolbar.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### resizable.toolbar.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
 
 ### serialization `Object`
 

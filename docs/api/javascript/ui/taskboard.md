@@ -1,7 +1,7 @@
 ---
 title: TaskBoard
 page_title: Configuration, methods and events of Kendo UI TaskBoard
-description: Configuration options, methods and events for the Kendo UI TaskBoard widget. 
+description: Configuration options, methods and events for the Kendo UI TaskBoard widget.
 res_type: api
 component: taskboard
 ---
@@ -14,7 +14,7 @@ Represents the Kendo UI TaskBoard. Inherits from [Widget](/api/javascript/ui/wid
 
 ### autoBind `Boolean` *(default: true)*
 
-Controls whether to bind the TaskBoard to the data source on initialization. 
+Controls whether to bind the TaskBoard to the data source on initialization.
 
 #### Example
 
@@ -47,7 +47,7 @@ Controls whether to bind the TaskBoard to the data source on initialization.
     </script>
 
 
-### cardMenu `Array | Object` 
+### cardMenu `Array | Object`
 
 Defines the list of buttons rendered in the card.
 
@@ -74,7 +74,7 @@ Defines the list of buttons rendered in the card.
     });
     </script>
 
-### cardMenu.name `String` 
+### cardMenu.name `String`
 
 The name of the button.
 
@@ -112,12 +112,12 @@ The name of the button.
             cardElm.css("border", "solid red 3px");
             columnElm.css("border", "solid red 3px");
             alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
-        } 
+        }
     });
 
     </script>
 
-### cardMenu.text `String` 
+### cardMenu.text `String`
 
 The text of the button.
 
@@ -155,12 +155,12 @@ The text of the button.
             cardElm.css("border", "solid red 3px");
             columnElm.css("border", "solid red 3px");
             alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
-        } 
+        }
     });
 
     </script>
 
-### cardMenu.icon `String` 
+### cardMenu.icon `String`
 
 The icon of the button.
 
@@ -198,12 +198,12 @@ The icon of the button.
             cardElm.css("border", "solid red 3px");
             columnElm.css("border", "solid red 3px");
             alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
-        } 
+        }
     });
 
     </script>
 
-### cardMenu.spriteCssClass `String` 
+### cardMenu.spriteCssClass `String`
 
 The class name of the icon element.
 
@@ -241,12 +241,12 @@ The class name of the icon element.
             cardElm.css("border", "solid red 3px");
             columnElm.css("border", "solid red 3px");
             alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
-        } 
+        }
     });
 
     </script>
 
-### cardMenu.command `String` 
+### cardMenu.command `String`
 
 The command of the button.
 
@@ -284,12 +284,12 @@ The command of the button.
             cardElm.css("border", "solid red 3px");
             columnElm.css("border", "solid red 3px");
             alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
-        } 
+        }
     });
 
     </script>
 
-### cardMenu.options `String` 
+### cardMenu.options `String`
 
 The command options of the button.
 
@@ -327,12 +327,12 @@ The command options of the button.
             cardElm.css("border", "solid red 3px");
             columnElm.css("border", "solid red 3px");
             alert(kendo.format("{0} Card executed Custom command in column with status {1} with value {2}", card.get("title"), column.get("status"), options.value));
-        } 
+        }
     });
 
     </script>
 
-### columns `Object|Array|kendo.data.DataSource` 
+### columns `Object|Array|kendo.data.DataSource`
 
 Sets the [DataSource](/api/javascript/data/datasource) for the Columns of the TaskBoard. Can be bound to a remote service or local data.
 
@@ -409,7 +409,7 @@ Sets the [DataSource](/api/javascript/data/datasource) for the Columns of the Ta
     });
     </script>
 
-### columnSettings `Object` 
+### columnSettings `Object`
 
 Defines the settings for the columns.
 
@@ -438,7 +438,7 @@ Defines the settings for the columns.
       });
     </script>
 
-### columnSettings.buttons `Array` 
+### columnSettings.buttons `Array`
 
 Defines the list of buttons rendered in the column.
 
@@ -467,7 +467,7 @@ Defines the list of buttons rendered in the column.
       });
     </script>
 
-### columnSettings.buttons.name `String` 
+### columnSettings.buttons.name `String`
 
 The name of the button.
 
@@ -504,11 +504,11 @@ The name of the button.
 
           columnElm.css("border", "solid red 3px");
           alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
-        } 
+        }
       });
     </script>
 
-### columnSettings.buttons.text `String` 
+### columnSettings.buttons.text `String`
 
 The text of the button.
 
@@ -545,11 +545,11 @@ The text of the button.
 
           columnElm.css("border", "solid red 3px");
           alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
-        } 
+        }
       });
     </script>
 
-### columnSettings.buttons.icon `String` 
+### columnSettings.buttons.icon `String`
 
 The icon of the button.
 
@@ -586,11 +586,11 @@ The icon of the button.
 
           columnElm.css("border", "solid red 3px");
           alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
-        } 
+        }
       });
     </script>
 
-### columnSettings.buttons.spriteCssClass `String` 
+### columnSettings.buttons.spriteCssClass `String`
 
 The class name of the icon element.
 
@@ -627,11 +627,11 @@ The class name of the icon element.
 
           columnElm.css("border", "solid red 3px");
           alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
-        } 
+        }
       });
     </script>
 
-### columnSettings.buttons.command `String` 
+### columnSettings.buttons.command `String`
 
 The command of the button.
 
@@ -668,11 +668,11 @@ The command of the button.
 
           columnElm.css("border", "solid red 3px");
           alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
-        } 
+        }
       });
     </script>
 
-### columnSettings.buttons.options `String` 
+### columnSettings.buttons.options `String`
 
 The command options of the button.
 
@@ -709,7 +709,7 @@ The command options of the button.
 
           columnElm.css("border", "solid red 3px");
           alert(kendo.format("Custom command executed for column with status {0} and value {1}", column.get("status"), options.value));
-        } 
+        }
       });
     </script>
 
@@ -777,7 +777,7 @@ The text field of the column.
 
 ### columnSettings.dataOrderField `String`
 
-The field used to order columns (number based). Automatically adds sorting to the columns DataSource instance. 
+The field used to order columns (number based). Automatically adds sorting to the columns DataSource instance.
 
 If not set, columns will be rendered in the order they are fetched. And ordering will not be applied to the DataSource and respectively, not synced with the remote data source.
 
@@ -808,7 +808,7 @@ If not set, columns will be rendered in the order they are fetched. And ordering
       });
     </script>
 
-### columnSettings.width `String|Number` 
+### columnSettings.width `String|Number`
 
 Configures the width of the columns
 
@@ -837,9 +837,9 @@ Configures the width of the columns
       });
     </script>
 
-### columnSettings.template `String|Function` 
+### columnSettings.template `String|Function`
 
-Controls the rendering of the column header. In the template context the `buttons` field provides the HTML for the buttons of the column. 
+Controls the rendering of the column header. In the template context the `buttons` field provides the HTML for the buttons of the column.
 
 #### Example
 
@@ -861,8 +861,8 @@ Controls the rendering of the column header. In the template context the `button
           { text: "Done", status: "done" }
         ],
         columnSettings: {
-          template: '<div class="k-taskboard-column-header-actions" style="background-color: lightgray">#=buttons#</div>' + 
-                    '<span class="k-spacer"></span>' + 
+          template: '<div class="k-taskboard-column-header-actions" style="background-color: lightgray">#=buttons#</div>' +
+                    '<span class="k-spacer"></span>' +
                     '<div class="k-taskboard-column-header-text k-text-ellipsis">#:text#(#:status#)</div>'
         }
       });
@@ -958,7 +958,7 @@ The description field of the card.
       });
     </script>
 
-### dataSource `Object|Array|kendo.data.DataSource` 
+### dataSource `Object|Array|kendo.data.DataSource`
 
 Sets the [DataSource](/api/javascript/data/datasource) for the Cards of the TaskBoard. Can be bound to a remote service or local data.
 
@@ -1123,7 +1123,7 @@ Toggles the editing in the TaskBoard. Both for columns and cards.
       });
     </script>
 
-### editable.buttons `Array` 
+### editable.buttons `Array`
 
 Defines a list of buttons rendering in the footer pane
 
@@ -1152,7 +1152,7 @@ Defines a list of buttons rendering in the footer pane
       });
     </script>
 
-### editable.buttons.name `String` 
+### editable.buttons.name `String`
 
 The name of the button.
 
@@ -1164,7 +1164,7 @@ The name of the button.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1191,14 +1191,14 @@ The name of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.buttons.text `String` 
+### editable.buttons.text `String`
 
 The text of the button.
 
@@ -1210,7 +1210,7 @@ The text of the button.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1237,14 +1237,14 @@ The text of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.buttons.icon `String` 
+### editable.buttons.icon `String`
 
 The icon of the button.
 
@@ -1256,7 +1256,7 @@ The icon of the button.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1283,14 +1283,14 @@ The icon of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.buttons.spriteCssClass `String` 
+### editable.buttons.spriteCssClass `String`
 
 The class name of the icon element.
 
@@ -1302,7 +1302,7 @@ The class name of the icon element.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1329,14 +1329,14 @@ The class name of the icon element.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.buttons.command `String` 
+### editable.buttons.command `String`
 
 The command of the button.
 
@@ -1348,7 +1348,7 @@ The command of the button.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1375,14 +1375,14 @@ The command of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.buttons.options `String` 
+### editable.buttons.options `String`
 
 The command options of the button.
 
@@ -1394,7 +1394,7 @@ The command options of the button.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1421,14 +1421,14 @@ The command options of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.buttons.primary `Boolean` 
+### editable.buttons.primary `Boolean`
 
 Toggles whether the color of the button to be primary or not.
 
@@ -1440,7 +1440,7 @@ Toggles whether the color of the button to be primary or not.
       $("#taskBoard").kendoTaskBoard({
         editable: {
           buttons: [
-            "saveChanges", 
+            "saveChanges",
             { name: "resetCard", text: "Default", command: "MyCustomCommand", options: "{ \"title\": \"Card Title\", \"description\": \"Put some description\" }", primary: false }]
         },
         dataOrderField: "order",
@@ -1467,14 +1467,14 @@ Toggles whether the color of the button to be primary or not.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
+
           card.set("title", defaults.title);
           card.set("description", defaults.description);
-        } 
+        }
       });
     </script>
 
-### editable.form `Object` 
+### editable.form `Object`
 
 The Kendo Form configuration for Card editing.
 
@@ -1505,7 +1505,7 @@ The Kendo Form configuration for Card editing.
             { value: "lowpriority", text: "Low Priority", color: "green" }
           ]
         }],
-        editable: { 
+        editable: {
           form: {
             buttonsTemplate: "",
             items: [{
@@ -1533,9 +1533,9 @@ The Kendo Form configuration for Card editing.
       });
     </script>
 
-### editable.headerTemplate `String|Function` 
+### editable.headerTemplate `String|Function`
 
-Controls the rendering of the header 
+Controls the rendering of the header
 
 #### Example
 
@@ -1616,7 +1616,7 @@ Toggles the previewPane in the TaskBoard.
       });
     </script>
 
-### previewPane.buttons `Array` 
+### previewPane.buttons `Array`
 
 Defines a list of buttons rendering in the footer pane.
 
@@ -1628,7 +1628,7 @@ Defines a list of buttons rendering in the footer pane.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -1657,19 +1657,19 @@ Defines a list of buttons rendering in the footer pane.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.name `String` 
+### previewPane.buttons.name `String`
 
 The name of the button.
 
@@ -1681,7 +1681,7 @@ The name of the button.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -1710,19 +1710,19 @@ The name of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.text `String` 
+### previewPane.buttons.text `String`
 
 The text of the button.
 
@@ -1734,7 +1734,7 @@ The text of the button.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -1763,19 +1763,19 @@ The text of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.icon `String` 
+### previewPane.buttons.icon `String`
 
 The icon of the button.
 
@@ -1787,7 +1787,7 @@ The icon of the button.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -1816,19 +1816,19 @@ The icon of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.spriteCssClass `String` 
+### previewPane.buttons.spriteCssClass `String`
 
 The class name of the icon element.
 
@@ -1840,7 +1840,7 @@ The class name of the icon element.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false, spriteCssClass: "custom-class" }
           ]
@@ -1869,19 +1869,19 @@ The class name of the icon element.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.command `String` 
+### previewPane.buttons.command `String`
 
 The command of the button.
 
@@ -1893,7 +1893,7 @@ The command of the button.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -1922,19 +1922,19 @@ The command of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.options `String` 
+### previewPane.buttons.options `String`
 
 The command options of the button.
 
@@ -1946,7 +1946,7 @@ The command options of the button.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -1975,19 +1975,19 @@ The command options of the button.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
-### previewPane.buttons.primary `Boolean` 
+### previewPane.buttons.primary `Boolean`
 
 Toggles whether the color of the button to be primary or not.
 
@@ -1999,7 +1999,7 @@ Toggles whether the color of the button to be primary or not.
       $("#taskBoard").kendoTaskBoard({
         previewPane: {
           buttons: [
-            "edit", 
+            "edit",
             "delete",
             { name: "showDetails", text: "Details", command: "MyCustomCommand", primary: false }
           ]
@@ -2028,15 +2028,15 @@ Toggles whether the color of the button to be primary or not.
           var cardElm = options.cardElement;
           var column = options.column;
           var columnElm = options.columnElement;
-          
-          kendo.alert(kendo.format('<p>Title: {0}</p>' + 
+
+          kendo.alert(kendo.format('<p>Title: {0}</p>' +
                                     '<p>Description: {1}</p>' +
                                     '<p>Status: {2}</p>' +
                                     '<p>Category: {3}</p>' +
-                                    '<p>Order: {4}</p>', 
-                                    card.title, card.description, 
+                                    '<p>Order: {4}</p>',
+                                    card.title, card.description,
                                     card.status, card.category, card.order));
-        } 
+        }
       });
     </script>
 
@@ -2069,7 +2069,7 @@ The template rendering of the preview pane.
       });
     </script>
 
-### previewPane.headerTemplate `String|Function` 
+### previewPane.headerTemplate `String|Function`
 
 The template rendering of the header for the preview pane.
 
@@ -2589,7 +2589,7 @@ Toggles the selection of the TaskBoard.
     });
   </script>
 
-### template `String|Function` 
+### template `String|Function`
 
 Controls the rendering of the card.
 
@@ -2627,9 +2627,9 @@ Controls the rendering of the card.
     });
   </script>
 
-### toolbar `Boolean|Object` *(default: true)*
+### toolbar `Boolean|Array|Object` *(default: true)*
 
-Configures the Tools of the TaskBoard
+Configures the Tools of the TaskBoard.
 
 #### Example
 
@@ -2661,14 +2661,14 @@ Configures the Tools of the TaskBoard
         exec: function () {
           var taskboard = this.taskboard;
           var options = this.options;
-          
+
           taskboard.addCard({ status: "doing", title: "Add Title", description: "Add Description", category: "green" });
           taskboard.dataSource.sync();
-        } 
+        }
       });
     </script>
 
-Apart from the built-in tools, the TaskBoard fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself.
+Apart from the built-in tools, the TaskBoard fully exposes the [ToolBar.items API](/api/javascript/ui/toolbar/configuration/items). This way you can specify any custom tools in the widget using the components available in the ToolBar itself. When passing an `object` to the `toolbar` configuration option it could also contain [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration.
 
 ### toolbar.items `Array`
 
@@ -2706,10 +2706,10 @@ Configures the items collection of the toolbar.
         exec: function () {
           var taskboard = this.taskboard;
           var options = this.options;
-          
+
           taskboard.addCard({ status: "doing", title: "Add Title", description: "Add Description", category: "green" });
           taskboard.dataSource.sync();
-        } 
+        }
       });
     </script>
 
@@ -2770,6 +2770,40 @@ Sets icon for the item. The icon should be one of the existing in the Kendo UI t
 ### toolbar.items.id `String`
 Specifies the ID of the button.
 
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+
 ### width `String|Number` *(default: "100%")*
 
 Configures the width of the TaskBoard wrapper.
@@ -2796,6 +2830,9 @@ Configures the width of the TaskBoard wrapper.
         ]
       });
     </script>
+
+### toolbar.overflow `Object`
+Specifies overflow configuration of the toolbar as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow).
 
 ### messages `Object`
 
@@ -2934,7 +2971,7 @@ Specifies text to be rendered for the "Are you sure you want to delete this card
 
 ## Methods
 
-### addCard 
+### addCard
 
 Adds a card and opens edit pane with the data passed.
 
@@ -3032,7 +3069,7 @@ Optional index parameter to define the index of the column.
 
 Predefine data object for the column.
 
-### columns  
+### columns
 
 Returns all the column elements.
 
@@ -3064,7 +3101,7 @@ Returns all the column elements.
 
 `jQuery`
 
-### columnByStatus  
+### columnByStatus
 
 Returns the column element that is associated to the status.
 
@@ -3103,7 +3140,7 @@ The status of the column.
 `jQuery`
 
 
-### deleteCard 
+### deleteCard
 
 Deletes a card.
 
@@ -3138,7 +3175,7 @@ Deletes a card.
 The jQuery object with the card element to delete.
 
 
-### deleteColumn 
+### deleteColumn
 
 Deletes a column.
 
@@ -3173,7 +3210,7 @@ Deletes a column.
 The jQuery object with the column element to delete.
 
 
-### editCard 
+### editCard
 
 Opens edit pane for card.
 
@@ -3198,7 +3235,7 @@ Opens edit pane for card.
         ]
       }).data("kendoTaskBoard");
 
-      setTimeout(function(){    
+      setTimeout(function(){
           taskBoard.editCard(taskBoard.items().eq(0));
       })
     </script>
@@ -3322,7 +3359,7 @@ If false the card will appear disabled.
 
 ### executeCommand
 
-Executes a command. 
+Executes a command.
 
 #### Example
 
@@ -3347,7 +3384,7 @@ Executes a command.
 
       taskBoard.executeCommand({command: "OpenPaneCommand", options: { value: "Create" }});
     </script>
-    
+
 #### Parameters
 
 ##### options `Object`
@@ -3431,7 +3468,7 @@ The jQuery object with the column element.
 If true the card will appear readonly.
 
 
-### items  
+### items
 
 Returns the card elements in the TaskBoard.
 
@@ -3456,7 +3493,7 @@ Returns the card elements in the TaskBoard.
         ]
       }).data("kendoTaskBoard");
 
-      setTimeout(function(){    
+      setTimeout(function(){
     	  var cardElm = taskBoard.items().eq(0);
   		  var dataItem = taskBoard.dataItem(cardElm);
   		  alert(dataItem.get("title"));
@@ -3467,7 +3504,7 @@ Returns the card elements in the TaskBoard.
 
 `jQuery`
 
-### itemsByStatus  
+### itemsByStatus
 
 Returns the card elements in the TaskBoard filtered by column status.
 
@@ -3492,12 +3529,12 @@ Returns the card elements in the TaskBoard filtered by column status.
         ]
       }).data("kendoTaskBoard");
 
-      setTimeout(function(){    
+      setTimeout(function(){
     	  var cardElm = taskBoard.itemsByStatus("backlog").eq(0);
         var dataItem = taskBoard.dataItem(cardElm);
         alert(dataItem.get("title"));
       })
-      
+
     </script>
 
 #### Parameters
@@ -3510,7 +3547,7 @@ The jQuery object with the card element to select.
 
 `jQuery`
 
-### itemsByColumn  
+### itemsByColumn
 
 Returns the card elements in the TaskBoard filtered by column elemennt.
 
@@ -3535,11 +3572,11 @@ Returns the card elements in the TaskBoard filtered by column elemennt.
         ]
       }).data("kendoTaskBoard");
 
-      setTimeout(function(){    
+      setTimeout(function(){
         	var cardElm = taskBoard.itemsByColumn(taskBoard.columns().eq(2)).eq(0);
           var dataItem = taskBoard.dataItem(cardElm);
           alert(dataItem.get("title"));
-      })      
+      })
     </script>
 
 #### Parameters
@@ -3552,7 +3589,7 @@ The jQuery object with the column element to select.
 
 `jQuery`
 
-### load 
+### load
 
 Loads all DataSource instances (columns, dataSource and resources) configured in the correct order.
 
@@ -3586,7 +3623,7 @@ Loads all DataSource instances (columns, dataSource and resources) configured in
         });
     </script>
 
-### previewCard  
+### previewCard
 
 Opens the preview pane for the card element.
 
@@ -3611,7 +3648,7 @@ Opens the preview pane for the card element.
             ],
         }).data("kendoTaskBoard");
 
-        setTimeout(function(){    
+        setTimeout(function(){
           taskBoard.previewCard(taskBoard.items().eq(0));
         })
     </script>
@@ -3622,7 +3659,7 @@ Opens the preview pane for the card element.
 
 The jQuery object with the card element to select.
 
-### registerShortcut  
+### registerShortcut
 
 Registers a new shortcut for the TaskBoard.
 
@@ -3674,7 +3711,7 @@ Registers a new shortcut for the TaskBoard.
 
 ##### selector `String`
 
-The jQuery selector to match the element(s) on which the shortcut to be affected. 
+The jQuery selector to match the element(s) on which the shortcut to be affected.
 
 ##### shortcut `Object`
 
@@ -3696,7 +3733,7 @@ Command-specific options
 
 A function callback.
 
-### dataItem  
+### dataItem
 
 Returns the data item bound to the specific card element.
 
@@ -3721,11 +3758,11 @@ Returns the data item bound to the specific card element.
         ]
       }).data("kendoTaskBoard");
 
-      setTimeout(function(){    
+      setTimeout(function(){
         var cardElm = taskBoard.items().eq(0);
         var dataItem = taskBoard.dataItem(cardElm);
         alert(dataItem.get("title"));
-      })      
+      })
     </script>
 
 #### Parameters
@@ -3738,7 +3775,7 @@ The jQuery object with the card element to select.
 
 `kendo.data.ObservableObject`
 
-### columnDataItem  
+### columnDataItem
 
 Returns the data item bound to the specific column element.
 
@@ -3778,7 +3815,7 @@ The jQuery object with the column element to select.
 
 `kendo.data.ObservableObject`
 
-### saveCard 
+### saveCard
 
 Saves the edited card and closes editing.
 
@@ -3957,7 +3994,7 @@ The data source to which the columns should be bound.
 
 ## Events
 
-### columnsDataBinding 
+### columnsDataBinding
 
 Fired before the TaskBoard binds the columns' data source.
 
@@ -4008,7 +4045,7 @@ Available if the action is add or remove. Shows the index of the added/removed e
 
 The array of items that shows the elements that are going to be added/removed from the widget dataSource.
 
-### columnsDataBound  
+### columnsDataBound
 
 Fired when the TaskBoard's columns are bound to their data source.
 
@@ -4043,7 +4080,7 @@ Fired when the TaskBoard's columns are bound to their data source.
 
 The widget instance which fired the event.
 
-### select   
+### select
 
 Fired when the user selects a card in the TaskBoard.
 
@@ -4088,9 +4125,9 @@ The selected card element wrapped in jQuery object.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the selection. 
+If invoked prevents the selection.
 
-### dataBinding 
+### dataBinding
 
 Fired before the TaskBoard binds to its data source.
 
@@ -4141,7 +4178,7 @@ Available if the action is add or remove. Shows the index of the added/removed e
 
 The array of items that shows the elements that are going to be added/removed from the widget dataSource.
 
-### dataBound  
+### dataBound
 
 Fired when the TaskBoard is bound to data from its data source.
 
@@ -4217,7 +4254,7 @@ The data item of the card to be deleted.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the deletion. 
+If invoked prevents the deletion.
 
 ### deleteColumn
 
@@ -4260,7 +4297,7 @@ The data item of the column to be deleted.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the deletion. 
+If invoked prevents the deletion.
 
 ### editCard
 
@@ -4303,7 +4340,7 @@ The data item of the card to be edited.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the edit action. 
+If invoked prevents the edit action.
 
 ### editColumn
 
@@ -4378,7 +4415,7 @@ Fires when a command is executed.
           } else {
             // Notify all others
             alert(ev.command + " executed!");
-          } 
+          }
         }
       });
     </script>
@@ -4395,13 +4432,13 @@ The command name to be executed.
 
 ##### e.options `Object`
 
-The options to be passed in the command. Possible fields included are card and column data items, card and column elements and string value passed to the command.  
+The options to be passed in the command. Possible fields included are card and column data items, card and column elements and string value passed to the command.
 
 ##### e.preventDefault `Function`
 
 If invoked prevents the command execution.
 
-### move  
+### move
 
 Fired when the user moves a card.
 
@@ -4450,7 +4487,7 @@ The column data item from where the card is moved.
 
 ##### e.columnElement `jQuery`
 
-The column element (wrapped in a jQuery object) from where the card is moved. 
+The column element (wrapped in a jQuery object) from where the card is moved.
 
 ##### e.item `jQuery`
 
@@ -4519,7 +4556,7 @@ The column data item from where the card is moved.
 
 ##### e.columnElement `jQuery`
 
-The column element (wrapped in a jQuery object) from where the card is moved. 
+The column element (wrapped in a jQuery object) from where the card is moved.
 
 ##### e.action `String`
 
@@ -4594,7 +4631,7 @@ The column data item from where the card is moved.
 
 ##### e.columnElement `jQuery`
 
-The column element (wrapped in a jQuery object) from where the card is moved. 
+The column element (wrapped in a jQuery object) from where the card is moved.
 
 ##### e.draggableEvent `Object`
 
@@ -4608,7 +4645,7 @@ The element that will be dragged.
 
 If invoked prevents the drag start action. The element will remain at its original position. The hint and placeholder will not be initialized.
 
-### change 
+### change
 
 Fired when the user changed the card order or status by dragging.
 
@@ -4681,7 +4718,7 @@ The position where item is placed. In case the item is removed from connected So
 
 The original draggable's drag event data.
 
-### saveCard  
+### saveCard
 
 Fired when the user saves a card.
 
@@ -4722,7 +4759,7 @@ The data item of the card to be saved.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the save action. 
+If invoked prevents the save action.
 
 ### saveColumn
 

@@ -179,10 +179,10 @@ describe("Toolbar: API: ", function() {
             ]
         }).data("kendoToolBar");
 
-        toolbar.remove(toolbar.element.find(".k-separator"));
+        toolbar.remove(toolbar.element.find(".k-separator:not(.k-toolbar-button-separator)"));
 
-        assert.equal(toolbar.element.find(".k-separator").length, 0, "Separator is removed from the toolbar");
-        assert.equal(toolbar.overflowMenu.element.find(".k-separator").length, 0, "Separator is removed from the overflow container");
+        assert.equal(toolbar.element.find(".k-separator:not(.k-toolbar-button-separator)").length, 0, "Separator is removed from the toolbar");
+        assert.equal(toolbar.overflowMenu.element.find(".k-separator:not(.k-toolbar-button-separator)").length, 0, "Separator is removed from the overflow container");
     });
 
     it("remove method removes separator by ID", function() {
@@ -194,8 +194,8 @@ describe("Toolbar: API: ", function() {
 
         toolbar.remove("#foo");
 
-        assert.equal(toolbar.element.find(".k-separator").length, 0, "Separator is removed from the toolbar");
-        assert.equal(toolbar.overflowMenu.element.find(".k-separator").length, 0, "Separator is removed from the overflow container");
+        assert.equal(toolbar.element.find(".k-separator:not(.k-toolbar-button-separator)").length, 0, "Separator is removed from the toolbar");
+        assert.equal(toolbar.overflowMenu.element.find(".k-separator:not(.k-toolbar-button-separator)").length, 0, "Separator is removed from the overflow container");
     });
 
     it("remove method removes button with overflow: 'always'", function() {
@@ -844,7 +844,7 @@ describe("Toolbar: API: ", function() {
 
         toolbar.add({ type: "button", text: "New Button", id: "newButton" });
 
-        assert.equal(toolbar.overflowAnchor.prev()[0], toolbar.element.find("#newButton")[0]);
+        assert.equal(toolbar.overflowAnchorSeparator.prev()[0], toolbar.element.find("#newButton")[0]);
     });
 
 });

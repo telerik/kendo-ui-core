@@ -5670,7 +5670,7 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
       });
     </script>
 
-### toolbar `String|Function|Array`
+### toolbar `String|Function|Array|Object`
 
 * If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole TreeList toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
 * If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the contents of the TreeList toolbar.
@@ -5679,6 +5679,9 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
   * `excel` - Exports the TreeList data in MS Excel format.
   * `pdf` - Exports the TreeList data in PDF format.
   * `search` - built-in search panel for the TreeList.
+* If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
+  * `items` - an array of commands as explained above
+  * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
 
 #### Example - configuring the TreeList toolbar as a string template
 
@@ -5992,6 +5995,73 @@ The text that is displayed by the command button. If not set, the TreeList will 
         }
       });
     </script>
+
+
+
+### toolbar.items.click `Function`
+
+The `click` handler of the toolbar command. Used for custom toolbar commands.
+
+
+### toolbar.items.icon `String`
+
+Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
+
+
+### toolbar.items.imageClass `String`
+
+A class name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
+
+### toolbar.items.name `String`
+
+The name of the toolbar command. Can be either a built-in ("create", "excel", or "pdf") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
+
+
+### toolbar.items.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/javascript/ui/toolbar/configuration/items.template)
+
+
+> Check [Toolbar template](https://demos.telerik.com/kendo-ui/treelist/toolbar-template) for a live demo.
+
+### toolbar.items.text `String`
+
+The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/javascript/ui/treelist#configuration-toolbar.name)` option as the button text instead.
+
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+
 
 ## Fields
 

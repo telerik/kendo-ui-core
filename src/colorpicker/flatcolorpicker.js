@@ -119,7 +119,8 @@ import "../kendo.html.button.js";
             tileSize: 24,
             messages   : MESSAGES,
             size: "medium", // Fake styling option to accomplish colorpicker's size for textbox and button
-            _otOfPicker: true
+            _otOfPicker: true,
+            _showAdaptiveView: false,
         },
         setBackgroundColor: function (color) {
             var that = this;
@@ -197,6 +198,8 @@ import "../kendo.html.button.js";
             delete options.select;
             delete options.cancel;
             delete options._standalone;
+            
+            const size = options._showAdaptiveView ? "large" : options.size;
 
             if (that._view) {
                 selectedColor = that._view.color();
@@ -214,7 +217,7 @@ import "../kendo.html.button.js";
             options._otOfPicker = false;
 
             if (selector) {
-                that._view = new VIEWS[mode]($("<div></div>").appendTo(that._viewsContainer), options);
+                that._view = new VIEWS[mode]($("<div></div>").appendTo(that._viewsContainer), { ...options, size });
                 that._view.value(selectedColor);
 
                 that._view.bind("change", function (ev) {
@@ -293,7 +296,8 @@ import "../kendo.html.button.js";
                 buttonOptions = extend({}, options, {
                     fillMode: "flat",
                     themeColor: "base",
-                    rounded: "medium"
+                    rounded: "medium",
+                    size: options._showAdaptiveView ? "large" : options.size
                 });
 
             return kendo.template((options, buttonOptions) =>
@@ -332,6 +336,31 @@ import "../kendo.html.button.js";
                     : '')
                 )(options, buttonOptions);
         },
+
+        _addSizeClass: function(specificSize) {
+            const options = this.options;
+
+            this.wrapper.removeClass("k-coloreditor-lg k-coloreditor-md k-coloreditor-sm");
+            let size = specificSize || options.size;
+
+            if (size) {
+                let sizeClass = "k-coloreditor-";
+
+                switch (size) {
+                    case "large":
+                        sizeClass += "lg";
+                        break;
+                    case "small":
+                        sizeClass += "sm";
+                        break;
+                    default:
+                        sizeClass += "md";
+                        break;
+                }
+                this.wrapper.addClass(sizeClass);
+            }
+        },
+
         _wrapper: function() {
             var options = this.options,
                 wrapper;
@@ -356,6 +385,7 @@ import "../kendo.html.button.js";
             wrapper.find(".k-button[data-view=" + options.view + "]").addClass(SELECTED).attr(ARIA_PRESSED, true);
 
             this.wrapper = wrapper;
+            this._addSizeClass();
         }
     });
 

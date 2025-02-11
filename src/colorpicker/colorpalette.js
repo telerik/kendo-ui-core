@@ -63,7 +63,8 @@ import "../kendo.core.js";
             name: "ColorPalette",
             columns: 10,
             tileSize: null,
-            palette: "basic"
+            palette: "basic",
+            size: "medium",
         },
         _attachEvents: function() {
             var that = this;
@@ -246,6 +247,29 @@ import "../kendo.core.js";
                 this.wrapper.attr("aria-label", this._ariaTemplate(this.value() || ""));
             }
         },
+        _addSizeClass: function(specificSize) {
+            const options = this.options;
+
+            this.wrapper.removeClass("k-colorpalette-lg k-colorpalette-md k-colorpalette-sm");
+            let size = specificSize || options.size;
+
+            if (size) {
+                let sizeClass = "k-colorpalette-";
+
+                switch (size) {
+                    case "large":
+                        sizeClass += "lg";
+                        break;
+                    case "small":
+                        sizeClass += "sm";
+                        break;
+                    default:
+                        sizeClass += "md";
+                        break;
+                }
+                this.wrapper.addClass(sizeClass);
+            }
+        },
         _wrapper: function() {
             var options = this.options,
                 colors = this._colors(),
@@ -273,6 +297,7 @@ import "../kendo.core.js";
                 .attr("tabindex", this._tabIndex);
 
             this.wrapper = wrapper;
+            this._addSizeClass();
             this._tileSize();
         }
     });

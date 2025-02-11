@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2024.4.1112
+// Type definitions for Kendo UI Professional v2025.1.211
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -2994,9 +2994,9 @@ declare namespace kendo.ui {
         constructor(element: Element, options?: ChartWizardOptions);
 
         open(): void;
-        
+
         close(): void;
-        
+
         setDataSource(dataSource: kendo.data.DataSource): void;
 
         setDataColumns(dataColumns: DataColumn[]): void;
@@ -3035,7 +3035,7 @@ declare namespace kendo.ui {
 
     interface ChartWizardExportEvent extends ChartWizardEvent {
         chart: any;
-        exportOptions: ChartWizardExportOptions; 
+        exportOptions: ChartWizardExportOptions;
     }
 
     interface ChartWizardChangeEvent extends ChartWizardEvent {
@@ -3332,7 +3332,7 @@ declare namespace kendo.ui {
         width?: number;
     }
     interface ChartWizardState {
-        title?: ChartWizardTitle; 
+        title?: ChartWizardTitle;
         subtitle?: ChartWizardTitle;
         area: ChartWizardArea;
         categoryAxis: ChartWizardCategoryAxisItem[];
@@ -3350,7 +3350,7 @@ declare namespace kendo.ui {
 
     interface ChartWizardDefaultState extends Pick<ChartWizardState, 'stack' | 'seriesType'> { }
 
-    
+
 
     class Chat extends kendo.ui.Widget {
 
@@ -3789,6 +3789,7 @@ declare namespace kendo.ui {
         contrastTool?: boolean | ColorGradientContrastTool | undefined;
         format?: string | undefined;
         formats?: any | undefined;
+        size?: string | undefined;
         value?: string|kendo.Color | undefined;
         messages?: ColorGradientMessages | undefined;
         change?(e: ColorGradientChangeEvent): void;
@@ -3836,6 +3837,7 @@ declare namespace kendo.ui {
         palette?: string|any | undefined;
         columns?: number | undefined;
         tileSize?: ColorPaletteTileSize | undefined;
+        size?: string | undefined;
         value?: string | undefined;
         change?(e: ColorPaletteEvent): void;
     }
@@ -3893,6 +3895,7 @@ declare namespace kendo.ui {
         green?: string;
         blue?: string;
         hex?: string;
+        adaptiveTitle?: string;
     }
 
     interface ColorPickerTileSize {
@@ -3902,6 +3905,7 @@ declare namespace kendo.ui {
 
     interface ColorPickerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined; 
         buttons?: boolean | undefined;
         contrastTool?: boolean | ColorPickerContrastTool | undefined;
         clearButton?: boolean | undefined;
@@ -5654,7 +5658,7 @@ declare namespace kendo.ui {
         content?: boolean | undefined;
         min?: number | EditorResizableMin | undefined;
         max?: number | EditorResizableMax | undefined;
-        toolbar?: boolean | undefined;
+        toolbar?: boolean | ToolBarOverflowOptions | undefined;
     }
 
     interface EditorSerialization {
@@ -5972,6 +5976,7 @@ declare namespace kendo.ui {
 
     interface FileManagerToolbar {
         items?: FileManagerToolbarItem[] | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
     }
 
     interface FileManagerViews {
@@ -6281,6 +6286,7 @@ declare namespace kendo.ui {
         formats?: any | undefined;
         view?: string | undefined;
         views?: any | undefined;
+        size?: string | undefined;
         value?: string|kendo.Color | undefined;
         preview?: boolean | undefined;
         autoupdate?: boolean | undefined;
@@ -7383,6 +7389,11 @@ declare namespace kendo.ui {
         head?:GridContextMenuItem[] | undefined;
     }
 
+    interface GridToolbarOptions{
+        items?: (string | GridToolbarItem)[] | ToolBarItem[];
+        overflow?: ToolBarOverflowOptions | undefined;
+    }
+
     interface GridOptions {
         name?: string | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
@@ -7417,7 +7428,7 @@ declare namespace kendo.ui {
         selectable?: boolean|string|GridSelectableOptions | undefined;
         size?: string | undefined;
         sortable?: boolean | GridSortable | undefined;
-        toolbar?: string | Function | (string | GridToolbarItem)[] | ToolBarItem[] | undefined;
+        toolbar?: string | Function | GridToolbarOptions | (string | GridToolbarItem)[] | ToolBarItem[] | undefined;
         width?: number|string | undefined;
         statusBarTemplate?: string | Function | undefined;
         beforeEdit?(e: GridBeforeEditEvent): void;
@@ -7756,6 +7767,7 @@ declare namespace kendo.ui {
         close?: Function | undefined;
         open?: Function | undefined;
         toggle?: Function | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
         overflowClose?: Function | undefined;
         overflowOpen?: Function | undefined;
     }
@@ -9174,6 +9186,7 @@ declare namespace kendo.ui {
     interface PDFViewerToolbar {
         items?: PDFViewerToolbarItem[] | undefined;
         contextMenu?: boolean | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
     }
 
     interface PDFViewerView {
@@ -10184,6 +10197,11 @@ declare namespace kendo.ui {
         toggleItem(row: JQuery): JQueryPromise<any>;
     }
 
+    interface PropertyGridToolbarOptions {
+        items?: PropertyGridToolbarItem[] | ToolBarItem[] | any | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
+    }
+
     interface PropertyGridOptions {
         name?: string | undefined;
         columns?: PropertyGridColumns | undefined;
@@ -10200,7 +10218,7 @@ declare namespace kendo.ui {
         resizable?: boolean | undefined;
         showDetails?: boolean | undefined;
         scrollable?: boolean | undefined;
-        toolbar?: PropertyGridToolbarItem[] | ToolBarItem[] | any | undefined;
+        toolbar?: PropertyGridToolbarOptions | PropertyGridToolbarItem[] | ToolBarItem[] | any | undefined;
         width?: Number | undefined;
         beforeEdit?(e: TreeListBeforeEditEvent): void;
         cancel?(e: TreeListCancelEvent): void;
@@ -12404,6 +12422,7 @@ declare namespace kendo.ui {
 
     interface TaskBoardToolbar {
         items?: TaskBoardToolbarItem[] | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
     }
 
     interface TaskBoardRegisterShortcutOptions {
@@ -13181,12 +13200,20 @@ declare namespace kendo.ui {
         url?: string | undefined;
     }
 
+    interface ToolBarOverflowOptions {
+        mode?: string | undefined;
+        scrollButtons?: string | undefined;
+        scrollButtonsPosition?: string | undefined;
+        scrollDistance?: number;
+    }
+
     interface ToolBarOptions {
         name?: string | undefined;
         resizable?: boolean | undefined;
         items?: ToolBarItem[] | undefined;
         navigateOnTab?: boolean | undefined;
         size?: string | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
         click?(e: ToolBarClickEvent): void;
         close?(e: ToolBarCloseEvent): void;
         open?(e: ToolBarOpenEvent): void;
@@ -13729,6 +13756,11 @@ declare namespace kendo.ui {
         mode?: string | undefined;
     }
 
+    interface TreeListToolbarOptions {
+        items?: TreeListToolbarItem[] | ToolBarItem[] | any | undefined;
+        overflow?: ToolBarOverflowOptions | undefined;
+    }
+
     interface TreeListToolbarItem {
         click?: Function | undefined;
         icon?: string | undefined;
@@ -13758,7 +13790,7 @@ declare namespace kendo.ui {
         search?: TreeListSearch | undefined;
         selectable?: boolean|string | undefined;
         sortable?: boolean | TreeListSortable | undefined;
-        toolbar?: TreeListToolbarItem[] | ToolBarItem[] | any | undefined;
+        toolbar?: TreeListToolbarOptions | TreeListToolbarItem[] | ToolBarItem[] | any | undefined;
         beforeEdit?(e: TreeListBeforeEditEvent): void;
         cancel?(e: TreeListCancelEvent): void;
         cellClose?(e: TreeListCellCloseEvent): void;

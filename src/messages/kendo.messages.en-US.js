@@ -25,7 +25,8 @@ $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
   "apply": "Apply",
   "cancel": "Cancel",
   "noColor": "no color",
-  "clearColor": "Clear color"
+  "clearColor": "Clear color",
+  "adaptiveTitle": "Choose Color"
 });
 }
 

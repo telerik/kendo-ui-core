@@ -24,7 +24,6 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 > ChartWizard component accepts a Table-like data which is an Array consisting of Objects with `dataItem` and `dataColumns` fields. 
 
-
 #### Example - set dataSource as an Array
     <div id="chartwizard"></div>
     <script>
@@ -40,7 +39,6 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
                 ]
             });
     </script>
-
 
 #### Example - set dataSource as a JavaScript object with data
     <div id="chartwizard"></div>
@@ -108,7 +106,6 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
             });
     </script>
 
-
 ### dataColumns `Array`
 
 Configure the columns which will be used to map the dataItems.
@@ -161,6 +158,14 @@ Configure the columns which will be used to map the dataItems.
             });
     </script>
 
+### dataColumns.field `String`
+
+Sets the field name of the column.
+
+### dataColumns.title `String`
+
+Sets the title of the column.
+
 ### exportOptions `Object`
 
 Configure the options for the export functionality
@@ -191,7 +196,7 @@ Configure the options for the export functionality
             });
     </script>
 
-### exportOptions.filename `string`
+### exportOptions.fileName `String`
 
 Configure the name of the exported file.
 
@@ -214,9 +219,9 @@ Configure the name of the exported file.
             });
     </script>
 
-### exportOptions.pdf `kendo.drawing.PDFOptions`
+### exportOptions.pdf `Object`
 
-Parameters for the exported PDF file.
+Parameters for the exported PDF file as `kendo.drawing.PDFOptions`.
 
 #### Example
     <div id="chartwizard"></div>
@@ -272,19 +277,19 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
 Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
 
-#### exportOptions.pdf.margin.bottom `Number|String` *(default: 0)*
+### exportOptions.pdf.margin.bottom `Number|String` *(default: 0)*
 The bottom margin. Numbers are considered as "pt" units.
 
-#### exportOptions.pdf.margin.left `Number|String` *(default: 0)*
+### exportOptions.pdf.margin.left `Number|String` *(default: 0)*
 The left margin. Numbers are considered as "pt" units.
 
-#### exportOptions.pdf.margin.right `Number|String` *(default: 0)*
+### exportOptions.pdf.margin.right `Number|String` *(default: 0)*
 The right margin. Numbers are considered as "pt" units.
 
-#### exportOptions.pdf.margin.top `Number|String` *(default: 0)*
+### exportOptions.pdf.margin.top `Number|String` *(default: 0)*
 The top margin. Numbers are considered as "pt" units.
 
-### exportOptions.pdf.paperSize `Object` *(default: "auto")*
+### exportOptions.pdf.paperSize `String|Array` *(default: "auto")*
 Specifies the paper size of the PDF document.
 The default "auto" means paper size is determined by content.
 
@@ -341,7 +346,6 @@ should be requested.
 Requesting images without CORS will "taint" the canvas. It will still be visible on the page, but all
 script access to it is disabled to prevent information disclosure.
 
-
 #### Example
     <div id="chartwizard"></div>
     <script>
@@ -363,7 +367,6 @@ script access to it is disabled to prevent information disclosure.
                 }
             });
     </script>
-
 
 ### exportOptions.image.width `Number`
 
@@ -450,10 +453,11 @@ Can be set to:
             });
     </script>
 
-
 ### messages `Object`
 
 The configuration of the ChartWizard messages. Use this option to customize or localize the ChartWizard messages.
+
+### messages.window `Object`
 
 ### messages.window.title `String`
 
@@ -1331,7 +1335,7 @@ Specifies the title of the chartArea panel
         });
     </script>
 
-### messages.format.chartArea.margins `String`
+### messages.format.chartArea.margins `Object`
 
 Specifies the text for the margins area of the chartArea panel
 
@@ -1480,7 +1484,7 @@ Specifies the text for the margin bottom label of the chartArea panel
         });
     </script>
 
-### messages.format.chartArea.background `String`
+### messages.format.chartArea.background `Object`
 
 Specifies the text for the background area of the chartArea panel
 
@@ -2149,7 +2153,7 @@ Specifies the text of the label for the color editor of the legend panel
         });
     </script>
 
-### messages.format.legend.positions `Object`
+### messages.format.legend.position `Object`
 
 Specifies the text for the position DropDownList of the legend panel
 
@@ -2330,7 +2334,7 @@ Specifies the title of the categoryAxis panel
         });
     </script>
 
-### messages.format.categoryAxis.title `String`
+### messages.format.categoryAxis.title `Object`
 
 Specifies the text for the title area of the categoryAxis panel
 
@@ -2538,7 +2542,7 @@ Specifies the text for the label of color editor for the title of the categoryAx
         });
     </script>
 
-### messages.format.categoryAxis.labels `String`
+### messages.format.categoryAxis.labels `Object`
 
 Specifies the text for the labels area of the categoryAxis panel
 
@@ -2717,7 +2721,7 @@ Specifies the text for the label of color editor for the labels of the categoryA
     </script>
 
 
-### messages.format.categoryAxis.labels.rotation `String`
+### messages.format.categoryAxis.labels.rotation `Object`
 
 Specifies the text for the rotation area for the labels of the categoryAxis panel
 
@@ -2841,7 +2845,7 @@ Specifies the title of the valueAxis panel
         });
     </script>
 
-### messages.format.valueAxis.title `String`
+### messages.format.valueAxis.title `Object`
 
 Specifies the text for the title area of the valueAxis panel
 
@@ -3049,7 +3053,7 @@ Specifies the text for the label of color editor for the title of the valueAxis 
         });
     </script>
 
-### messages.format.valueAxis.labels `String`
+### messages.format.valueAxis.labels `Object`
 
 Specifies the text for the labels area of the valueAxis panel
 
@@ -3388,7 +3392,7 @@ Specifies the text for the label of color editor for the labels of the valueAxis
     </script>
 
 
-### messages.format.valueAxis.labels.rotation `String`
+### messages.format.valueAxis.labels.rotation `Object`
 
 Specifies the text for the rotation area for the labels of the valueAxis panel
 
@@ -3522,11 +3526,202 @@ Specifies the title of the yAxis panel
 
 Specifies the state of the ChartWizard component. If a state object is provided, the ChartWizard will neglect the dataSource and the creation of an initial state and will use this state instance instead.
 
-> In order to work as expected, the CharWizard requires the `state` object to have defined [columns](/api/javascript/ui/chartwizard#configuration-state.columns), [data](/api/javascript/ui/chartwizard#configuration-state.data), [area](/api/javascript/ui/chartwizard#configuration-state.area), [categoryAxis](/api/javascript/ui/chartwizard#configuration-state.categoryAxis), [valueAxis](/api/javascript/ui/chartwizard#configuration-state.valueAxis), [initialSeries](/api/javascript/ui/chartwizard#configuration-state.initialSeries) and [series](/api/javascript/ui/chartwizard#configuration-state.series) fields.
+> In order to work as expected, the CharWizard requires the `state` object to have defined [data](/api/javascript/ui/chartwizard#configuration-state.data) and [series](/api/javascript/ui/chartwizard#configuration-state.series) fields.
+
+#### Example - configure the initial state of the ChartWizard
+    <div id="chartwizard"></div>
+    <script>
+        $("#chartwizard").kendoChartWizard({
+            window: {
+                    visible: true
+                },
+                state: {
+                    columns: [
+                        "Product Name",
+                        "Quantity",
+                        "Price",
+                        "Tax",
+                        "Total"
+                    ],
+                    data: [
+                            [{
+                                field: "Product Name",
+                                value: "Calzone"
+                            },{
+                                field: "Quantity",
+                                value: 1
+                            },{
+                                field: "Price",
+                                value: 12.39
+                            },{
+                                field: "Tax",
+                                value: 2.48
+                            },{
+                                field: "Total",
+                                value: 14.87
+                            }],
+                            [{
+                                field: "Product Name",
+                                value: "Neapolitana"
+                            },{
+                                field: "Quantity",
+                                value: 2
+                            },{
+                                field: "Price",
+                                value: 7.39
+                            },{
+                                field: "Tax",
+                                value: 1.23
+                            },{
+                                field: "Total",
+                                value: 8.62
+                            }]
+                        ],
+                    series: [
+                        {
+                            name: "Quantity",
+                            type: "bar",
+                            data: [
+                                1
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 0
+                        },
+                        {
+                            name: "Price",
+                            type: "bar",
+                            data: [
+                                12.39
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 1
+                        },
+                        {
+                            name: "Tax",
+                            type: "bar",
+                            data: [
+                                2.48
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 2
+                        },
+                        {
+                            name: "Total",
+                            type: "bar",
+                            data: [
+                                14.87
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 3
+                        }
+                    ],
+                    initialSeries: [
+                        {
+                            name: "Quantity",
+                            type: "bar",
+                            data: [
+                                1
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 0
+                        },
+                        {
+                            name: "Price",
+                            type: "bar",
+                            data: [
+                                12.39
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 1
+                        },
+                        {
+                            name: "Tax",
+                            type: "bar",
+                            data: [
+                                2.48
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 2
+                        },
+                        {
+                            name: "Total",
+                            type: "bar",
+                            data: [
+                                14.87
+                            ],
+                            stack: false,
+                            labels: {
+                                visible: false
+                            },
+                            id: 3
+                        }
+                    ],
+                    categoryAxis: [
+                        {
+                            categories: [
+                                "Calzone"
+                            ],
+                            labels: {
+                                visible: true,
+                                rotation: "auto"
+                            }
+                        }
+                    ],
+                    valueAxis: [
+                        {
+                            labels: {
+                                visible: true,
+                                rotation: "auto"
+                            }
+                        }
+                    ],
+                    area: {
+                        margin: {}
+                    },
+                    title: {
+                        text: ""
+                    },
+                    subtitle: {
+                        text: ""
+                    },
+                    stack: false,
+                    seriesType: "bar",
+                    legend: {
+                        visible: true,
+                        position: "bottom"
+                    },
+                    categoryField: "Product Name",
+                    chartArea: {
+                        margin: {}
+                    }
+                }
+            });
+    </script>
 
 ### state.columns `Array`
 
-Specifies the columns to be used as a [dataColumns](/api/javascript/ui/chartwizard#configuration-dataColumns) for the ChartWizard component.
+Specifies the columns to be used for the ChartWizard component. An array of strings should be provided.
 
 ### state.data `Array`
 
@@ -3564,7 +3759,7 @@ Can be set to :
 * Array of objects. Each point is bound to the field specified via the [series.field](/api/javascript/dataviz/ui/chart#configuration-series.field) option.
 * Array of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "bar", "column", "pie", or "line".
 * Array of arrays of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
-    * Scatter and scatter line series need arrays of two values - X value and Y value
+* Scatter and scatter line series need arrays of two values - X value and Y value
 
 ### state.initialSeries.field `String` *(default: "value")*
 
@@ -3614,7 +3809,6 @@ The line width.
 
 > The `width` option is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "line".
 
-
 ### state.series `Array`
 
 The configuration of the chart [series](/api/javascript/dataviz/ui/chart#configuration-series).
@@ -3634,7 +3828,7 @@ The data item field which contains the category name or date.
 
 The name of the chart series which is visible in the legend.
 
-### state.series.color `String`
+### state.series.color `String|Function`
 
 The series base color. The supported values are:
 
@@ -3650,7 +3844,7 @@ Can be set to :
 * Array of objects. Each point is bound to the field specified via the [series.field](/api/javascript/dataviz/ui/chart#configuration-series.field) option.
 * Array of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "bar", "column", "pie", or "line".
 * Array of arrays of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
-    * Scatter and scatter line series need arrays of two values - X value and Y value
+* Scatter and scatter line series need arrays of two values - X value and Y value
 
 ### state.series.field `String` *(default: "value")*
 
@@ -3700,7 +3894,6 @@ The line width.
 
 > The `width` option is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "line".
 
-
 ### state.title `Object|String`
 
 The chart title configuration options or text.
@@ -3737,34 +3930,33 @@ The text of the chart subtitle.
 
 The chart area configuration options. Represents the entire visible area of the chart.
 
-### state.area.background `String` *(default: "white")*
+### state.area.background `String`
 
 The background color of the chart area. Accepts a valid CSS color string, including hex and rgb.
 
-### state.area.margin `Number|Object` *(default: 5)*
+### state.area.margin `Number|Object`
 
 The margin of the chart area. A numeric value will set all margins.
 
-### state.area.margin.bottom `Number` *(default: 5)*
+### state.area.margin.bottom `Number`
 
 The bottom margin of the chart area.
 
-### state.area.margin.left `Number` *(default: 5)*
+### state.area.margin.left `Number`
 
 The left margin of the chart area.
 
-### state.area.margin.right `Number` *(default: 5)*
+### state.area.margin.right `Number`
 
 The right margin of the chart area.
 
-### state.area.margin.top `Number` *(default: 5)*
+### state.area.margin.top `Number`
 
 The top margin of the chart area.
 
-### state.categoryAxis `Array|Object` *(required)*
+### state.categoryAxis `Array` *(required)*
 
 The category axis configuration options.
-
 
 ### state.categoryAxis.labels `Object`
 
@@ -3785,7 +3977,6 @@ The format used to display the labels. Uses [kendo.format](/api/javascript/kendo
 ### state.categoryAxis.labels.rotation `Number|String` *(default: 0)*
 
 The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
-
 
 ### state.categoryAxis.labels.visible `Boolean` *(default: true)*
 
@@ -3819,15 +4010,11 @@ The reverse option of the axis.
 
 The category names. The chart will create a category for every item of the array.
 
-### state.valueAxis `Array|Object`
+### state.valueAxis `Array`
 
 The value axis configuration options.
 
 If set to `true` the category axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
-
-### state.value.categories `Array`
-
-The category names. The chart will create a category for every item of the array.
 
 ### state.valueAxis.labels `Object`
 
@@ -3844,7 +4031,6 @@ The font style of the labels. Accepts a valid CSS color string, for example "20p
 ### state.valueAxis.labels.format `String` *(default: "{0}")*
 
 The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
-
 
 ### state.valueAxis.labels.rotation `Number|String` *(default: 0)*
 
@@ -3863,7 +4049,6 @@ If set to `true` the value axis direction will be reversed. By default categorie
 The title configuration of the value axis.
 
 > The [valueAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
-
 
 ### state.valueAxis.title.text `String`
 
@@ -3902,13 +4087,9 @@ The positions of the chart legend.
 The supported values are:
 
 * "top" - the legend is positioned on the top.
-
 * "bottom" - the legend is positioned on the bottom.
-
 * "left" - the legend is positioned on the left.
-
 * "right" - the legend is positioned on the right.
-
 * "custom" - the legend is positioned using [legend.offsetX](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/javascript/dataviz/ui/chart#configuration-legend.offsetY).
 
 ### state.legend.visible `Boolean` *(default: true)*
@@ -3927,7 +4108,7 @@ The supported series types are:
 * 'pie'
 * 'scatter'
 
-### state.stack `Boolean|Object`
+### state.stack `Boolean|Object` *(default: false)*
 
 The stack configuration of the series.
 
@@ -4002,7 +4183,7 @@ The supported series types are:
         });
     </script>
 
-### defaultState.stack `Boolean|Object`
+### defaultState.stack `Boolean|Object` *(default: false)*
 
 The stack configuration of the series.
 
@@ -4076,8 +4257,6 @@ Specifies configuration for the [Window](/api/javascript/ui/window/#configuratio
             }
         });
     </script>
-
-
 
 ## Methods
 
@@ -4158,7 +4337,6 @@ Destroys the ChartWizard component.
         chartwizard.destroy()
     }, 1000);
     </script>
-
 
 ### setOptions
 
@@ -4315,15 +4493,15 @@ Prepares the data to be of an acceptable type for the ChartWizard.
     <div id="chartwizard"></div>
     <script>
     const dataColumns: DataColumn[] = [
-    {
-        field: 'Product',
-        title: 'Product Name'
-    },
-    {
-        field: 'Quantity',
-        title: 'Quantity'
-    }
-];
+        {
+            field: 'Product',
+            title: 'Product Name'
+        },
+        {
+            field: 'Quantity',
+            title: 'Quantity'
+        }
+    ];
 
     const dataRows: DataRow[] = [
         {
@@ -4378,7 +4556,7 @@ Prepares the DataRows for the ChartWizard component based on the provided data a
     <button id="get">generateDataRows</button>
     <div id="chartwizard"></div>
     <script>
-   $("#grid").kendoGrid({
+        $("#grid").kendoGrid({
                 dataSource: {
                     data: [
                       {
@@ -4456,7 +4634,7 @@ Prepares the DataRows for the ChartWizard component based on the provided data a
                   const wizardData = kendo.ui.ChartWizard.generateDataRows(data, columns);
 
                   const chartWizard = $("#chartwizard").data("kendoChartWizard");
-                  chartWizard.setDataSource( { dataSource: wizardData });
+                  chartWizard.setDataSource(wizardData);
                   chartWizard.open();
                 }
             });
@@ -4488,7 +4666,7 @@ The widget instance.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4512,25 +4690,25 @@ The widget instance.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_close(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_close(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("close", chartwizard_close);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("close", chartwizard_close);
     </script>
 
 ### open
@@ -4547,7 +4725,7 @@ The widget instance.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4570,25 +4748,25 @@ The widget instance.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_open(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_open(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("open", chartwizard_open);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("open", chartwizard_open);
     </script>
 
 ### change
@@ -4609,7 +4787,7 @@ The state object instance.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4632,10 +4810,10 @@ The state object instance.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_change(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
+        function chartwizard_change(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4649,8 +4827,8 @@ The state object instance.
                     visible: true
                 },
             });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("change", chartwizard_change);
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("change", chartwizard_change);
     </script>
 
 ### exportPDF
@@ -4675,7 +4853,7 @@ The exportOptions object instance.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4698,25 +4876,25 @@ The exportOptions object instance.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_exportPDF(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_exportPDF(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("exportPDF", chartwizard_exportPDF);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("exportPDF", chartwizard_exportPDF);
     </script>
 
 
@@ -4742,7 +4920,7 @@ The exportOptions object instance.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4765,25 +4943,25 @@ The exportOptions object instance.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_exportSVG(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_exportSVG(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("exportSVG", chartwizard_exportSVG);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("exportSVG", chartwizard_exportSVG);
     </script>
 
 ### exportImage
@@ -4808,7 +4986,7 @@ The exportOptions object instance.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4831,25 +5009,25 @@ The exportOptions object instance.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_exportImage(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_exportImage(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("exportImage", chartwizard_exportImage);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("exportImage", chartwizard_exportImage);
     </script>
 
 
@@ -4871,7 +5049,7 @@ The data to which the ChartWizard is about to bind.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4894,25 +5072,25 @@ The data to which the ChartWizard is about to bind.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_dataBinding(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_dataBinding(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("dataBinding", chartwizard_dataBinding);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("dataBinding", chartwizard_dataBinding);
     </script>
 
 ### dataBound
@@ -4933,7 +5111,7 @@ The data to which the ChartWizard is bound.
 
     <div id="chartwizard"></div>
     <script>
-    $("#chartwizard").kendoChartWizard({
+        $("#chartwizard").kendoChartWizard({
                 dataSource: [
                 [
                     { field: 'Product Name', value: 'Calzone' },
@@ -4956,23 +5134,23 @@ The data to which the ChartWizard is bound.
 
     <div id="chartwizard"></div>
     <script>
-    function chartwizard_dataBound(e) {
-      console.log(e);
-    }
-    $("#chartwizard").kendoChartWizard({
-                dataSource: [
-                [
-                    { field: 'Product Name', value: 'Calzone' },
-                    { field: 'Quantity', value: 1 },
-                    { field: 'Price', value: 12.39 },
-                    { field: 'Tax', value: 2.48 },
-                    { field: 'Total', value: 14.87 }
+        function chartwizard_dataBound(e) {
+            console.log(e);
+        }
+        $("#chartwizard").kendoChartWizard({
+                    dataSource: [
+                    [
+                        { field: 'Product Name', value: 'Calzone' },
+                        { field: 'Quantity', value: 1 },
+                        { field: 'Price', value: 12.39 },
+                        { field: 'Tax', value: 2.48 },
+                        { field: 'Total', value: 14.87 }
+                        ],
                     ],
-                ],
-                window: {
-                    visible: true
-                },
-            });
-    var chartwizard = $("#chartwizard").data("kendoChartWizard");
-    chartwizard.bind("dataBound", chartwizard_dataBound);
+                    window: {
+                        visible: true
+                    },
+                });
+        var chartwizard = $("#chartwizard").data("kendoChartWizard");
+        chartwizard.bind("dataBound", chartwizard_dataBound);
     </script>

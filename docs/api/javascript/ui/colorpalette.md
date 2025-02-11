@@ -51,6 +51,25 @@ The number of columns to display.  When you use the "websafe" palette, this will
     });
     </script>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+    <div id="colorpalette"></div>
+    <script>
+    $("#colorpalette").kendoColorPalette({
+      size: "small"
+    });
+    </script>
+
+
 ### tileSize `Number | Object` *(default: 14)*
 
 The size of a color cell.

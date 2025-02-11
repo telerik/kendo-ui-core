@@ -34,9 +34,9 @@ To provide the client-side web assets by using LibMan:
 
     > This step uses unpkg to load the Kendo UI library distributed on NPM. The scripts in the NPM package are not usable in the browser. This requires you to use a bundler such as [WebPack](https://webpack.js.org/).
 
-1. Generate a license file by following the instructions in the [Using Script License File article]({% slug using_license_code %}).
+1. Install license file by following the instructions in the [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
-    > As of the R2 2022 release, the `@progress/kendo-ui` NPM package requires a [script license activation]({% slug using_license_code %}).
+    > As of the R2 2022 release, the `@progress/kendo-ui` NPM package requires [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
 1. Add the following files, containing the configurations provided below:
     * `webpack.config.js` and `package.json` files to the **wwwroot** folder of the application.

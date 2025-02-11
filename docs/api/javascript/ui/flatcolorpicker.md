@@ -132,6 +132,25 @@ Whether to render the input in ColorGradient component.
     });
     </script>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+      size: "small"
+    });
+    </script>
+
+
 ### value `String | kendo.Color` *(default: null)*
 
 Specifies the initially selected color.

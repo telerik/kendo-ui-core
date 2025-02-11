@@ -839,6 +839,20 @@ The opacity of the border.
 
 The width of the border.
 
+### links.focusHighlight.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### links.highlight `Object`
 
 The link highlight configuration options.
@@ -928,6 +942,20 @@ The opacity of the border.
 ### nodes.focusHighlight.border.width `Number` *(default: 2)*
 
 The width of the border.
+
+### nodes.focusHighlight.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### nodes.labels `Object`
 

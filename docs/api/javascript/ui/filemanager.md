@@ -456,6 +456,39 @@ Fires when the Split Button's popup opens. [Toolbar Events](/api/javascript/ui/t
 
 Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/javascript/ui/toolbar#events).
 
+### toolbar.overflow `Object`
+Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+### toolbar.overflow.mode `String` *(default: "menu")*
+
+Defines the overflow mode. The available options are:
+- `"menu"` — Moves overflowing items into a dropdown menu.
+- `"scroll"` — Keeps items visible and enables horizontal scrolling.
+- `"section"` — Groups items into collapsible sections.
+- `"none"` — Disables overflow handling; items may be cut off.
+
+
+### toolbar.overflow.scrollButtons `String` *(default: "auto")*
+
+Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
+- `"auto"` — Displays scroll buttons only when needed.
+- `"hidden"` — Hides the scroll buttons at all times.
+- `"visible"` — Always shows the scroll buttons.
+
+
+### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
+
+Defines the placement of scroll buttons. The available options are:
+- `"split"` — Scroll buttons appear at both ends of the toolbar.
+- `"start"` — Scroll buttons appear only at the start of the toolbar.
+- `"end"` — Scroll buttons appear only at the end of the toolbar.
+
+
+### toolbar.overflow.scrollDistance `Number` *(default: 50)*
+
+Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+
 ### toolbar.overflowClose `Function`
 
 Fires when the overflow popup container is about to close. [Toolbar Events](/api/javascript/ui/toolbar#events).
@@ -689,7 +722,7 @@ Specifies the command of the item.
           }
         },
         contextMenu: {
-          items: [     
+          items: [
             { name: "delete" },
             { name: "custom", text: "Custom command", command: "MyCustomCommand", spriteCssClass:"k-icon k-i-info" }
           ]
@@ -1366,7 +1399,7 @@ The command arguments.
             }
           }
         },
-        uploadUrl: "/kendo-ui/service/FileManager/Upload"  
+        uploadUrl: "/kendo-ui/service/FileManager/Upload"
       });
 
       function renameFolder() {
@@ -1384,7 +1417,7 @@ The command arguments.
       $(document).ready(function () {
         var filemanager = $("#filemanager").getKendoFileManager();
 
-        filemanager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } }); 
+        filemanager.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
         $("input[title='View Details']").getKendoSwitch().toggle();
       })
     </script>

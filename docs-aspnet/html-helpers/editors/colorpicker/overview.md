@@ -93,6 +93,7 @@ The following example demonstrates how to configure the tile size, columns, `Cha
 | [Formats]({% slug htmlhelpers_formats_colorpickerhelper_aspnetcore %})| Configure the ColorPicker input formats. |
 | [Palettes]({% slug palettes_colorpicker %})| Define a color palette that the user can pick from.  |
 | [Events]({% slug events_colorpicker %})| The ColorPicker allows you to handle its events and implement any custom logic. |
+| [Adaptive Mode](% slug htmlhelpers_colorpicker_adaptive_mode_aspnetcore %)| The ColorPicker supports an adaptive mode that renders a mobile-friendly popup. |
 
 ## Next Steps
 
