@@ -15,7 +15,7 @@ For more information, refer to:
 
 ## WAI-ARIA
 
-The component follows the WAI-ARIA Authoring Practices is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug wai_aria_accessibility_support %}).
+The component follows the WAI-ARIA Authoring Practices is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#wai-aria).
 
 If the component is initially visible, you can add `aria-busy="true"` to the container so that its aria-label text would be read:
 
@@ -43,7 +43,7 @@ If the text should be read while dynamically showing/hiding the loader, you can 
 
 ## Section 508
 
-The Loader is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo UI for jQuery]({% slug section508_accessibility_support %}).
+The Loader is compliant with the Section 508 requirements. For more information, refer to the article on [Accessibility Compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %}).
 
 ## WCAG 2.2
 

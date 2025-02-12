@@ -45,5 +45,5 @@ In horizontal mode, the Kendo UI for jQuery TimeLine supports the following keyb
 ## See Also
 
 * [Keyboard Navigation by the Kendo UI for jQuery TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the TimeLine]({% slug accessibility_timeline_jquery %})

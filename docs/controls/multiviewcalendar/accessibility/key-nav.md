@@ -40,5 +40,5 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the MultiViewCalendar]({% slug accessibility_multiviewcalendar %})

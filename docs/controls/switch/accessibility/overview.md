@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Switch Documentation | Switch Accessibility
 description: "Get started with the jQuery Switch by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_switch
@@ -74,5 +74,5 @@ A live test example of the Switch component could be found here: https://demos.t
 ## See Also
 * [Keyboard Navigation by the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/keyboard-navigation)
 * [Keyboard Navigation by the Switch]({% slug keynav_kendoui_switch %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

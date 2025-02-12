@@ -16,5 +16,5 @@ For more information on the keyboard navigation in the widget, please refer to t
 
 * [Keyboard Navigation by the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation)
 * [Keyboard Navigation by the MediaPlayer]({% slug keynav_mediaplayer_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

@@ -3,7 +3,7 @@ title: 2024 Releases
 page_title: 2024 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2024."
 slug: breakingchanges_2024
-position: 1
+position: 2
 ---
 
 # 2024 Releases

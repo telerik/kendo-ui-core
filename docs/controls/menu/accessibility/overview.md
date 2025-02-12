@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Menu Documentation | Menu Accessibility
 description: "Get started with the jQuery Menu by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_menu_jquery
@@ -82,5 +82,5 @@ A live test example of the Menu component could be found here: https://demos.tel
 
 * [Keyboard Navigation by the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/keyboard-navigation)
 * [Keyboard Navigation by the Menu]({% slug keynav_menu_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

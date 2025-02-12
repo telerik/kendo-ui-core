@@ -16,7 +16,7 @@ You can activate the Kendo UI for jQuery license in either of the following ways
 
 1. [Using the script license key](#using-the-script-license-key).
 
-2. [Setting up your license key with NMP](#setting-up-your-license-key-with-npm).
+2. [Setting up your license key with NPM](#setting-up-your-license-key-with-npm).
 
 ## Using the Script License Key
 
@@ -26,7 +26,7 @@ You can activate the Kendo UI for jQuery license in either of the following ways
 
  To activate the Kendo UI for jQuery components, follow the steps in the [Adding Your Script License Key]({% slug using-license-code %}) article.
 
-## Setting Up Your License Key With NMP
+## Setting Up Your License Key With NPM
 
 When using NPM, the Kendo UI package is installed via the npm registry and integrated into your project through package management tools like `npm` or `yarn`. The license key is typically set within the `package.json` or a separate configuration file.
 

@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery ImageEditor Documentation | ImageEditor Accessibility
 description: "Get started with the jQuery ImageEditor by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_imageeditor_widget
@@ -89,5 +89,5 @@ A live test example of the ImageEditor component could be found here: https://de
 ## See Also
 * [Keyboard Navigation by the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/keyboard-navigation)
 * [Keyboard Navigation by the ImageEditor]({% slug keynav_kendoui_imageeditor_widget %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

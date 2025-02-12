@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery RadioButton Documentation | RadioButton Accessibility
 description: "Get started with the jQuery RadioButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_radiobutton_widget
@@ -67,5 +67,5 @@ The RadioButton has been tested with the following screen readers and browsers c
 ### Automated Testing
 The RadioButton has been tested with [axe-core](https://github.com/dequelabs/axe-core).
 ## See Also
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

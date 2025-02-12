@@ -15,5 +15,5 @@ For a complete example, refer to the [demo on keyboard navigation of the DatePic
 ## See Also
 
 * [Keyboard Navigation by the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the DatePicker]({% slug accessibility_datepicker %})

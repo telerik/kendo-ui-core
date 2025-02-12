@@ -34,7 +34,6 @@ steps:
     # ... Install modules before activating the license.
     - name: Install NPM modules
       run: |
-        npm install -g @angular/cli
         npm install
     - name: Activate Kendo UI License
       run: npx kendo-ui-license activate

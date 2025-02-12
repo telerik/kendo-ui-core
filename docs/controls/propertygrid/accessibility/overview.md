@@ -16,11 +16,11 @@ For more information, refer to:
 
 ## WAI-ARIA
 
-The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug wai_aria_accessibility_support %}).
+The component follows the WAI-ARIA Authoring Practices for implementing the keyboard navigation for its component role and is tested against the popular screen readers. For more information, refer to the article on [WAI-ARIA support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#wai-aria).
 
 ## Section 508
 
-The PropertyGrid is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo UI for jQuery]({% slug section508_accessibility_support %}).
+The PropertyGrid is compliant with the Section 508 requirements. For more information, refer to the article on [Accessibility Compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %}).
 
 ## WCAG 2.2
 
@@ -31,5 +31,5 @@ The PropertyGrid supports the standards for providing accessible web content whi
 
 * [Keyboard Navigation by the PropertyGrid (Demo)](https://demos.telerik.com/kendo-ui/propertygrid/keyboard-navigation)
 * [Keyboard Navigation by the PropertyGrid]({% slug keynav_propertygrid_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

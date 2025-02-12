@@ -25,5 +25,5 @@ For a complete example, refer to the [demo on keyboard navigation of the ColorGr
 ## See Also
 
 * [Keyboard Navigation by the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the ColorGradient]({% slug accessibility_kendoui_colorgradient_widget %})

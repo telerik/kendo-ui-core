@@ -46,5 +46,5 @@ The following example demonstrates how to register a shortcut for focusing the l
 ## See Also
 
 * [Keyboard Navigation of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the TaskBoard]({% slug accessibility_kendoui_taskboard_widget %})

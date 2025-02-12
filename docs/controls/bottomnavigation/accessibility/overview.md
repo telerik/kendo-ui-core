@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery BottomNavigation Documentation | BottomNavigation Accessibility
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_bottomnavigation_widget
@@ -71,5 +71,5 @@ A live test example of the BottomNavigation component could be found here: https
 ## See Also
 * [Keyboard Navigation by the BottomNavigation (Demo)](https://demos.telerik.com/kendo-ui/bottomnavigation/keyboard-navigation)
 * [Keyboard Navigation by the BottomNavigation]({% slug keynav_bottomnavigation_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

@@ -630,6 +630,9 @@ navigation:
      "*/otpinput":
          title: "OTPInput"
          isNew: true
+     "*/chartwizard":
+         title: "Chart Wizard"
+         isNew: true
      "html-helpers/interactivity/progressbar":
         title: "ProgressBar"
      "html-helpers/interactivity/circularprogressbar":
@@ -787,6 +790,11 @@ defaults:
         path: "html-helpers/charts"
     values:
         title_prefix: "ASP.NET Core Chart Component"
+-
+    scope:
+        path: "html-helpers/chartwizard"
+    values:
+        title_prefix: "ASP.NET Core Chart Wizard Component"
 -
     scope:
         path: "html-helpers/conversational-ui/chat"

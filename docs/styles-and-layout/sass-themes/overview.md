@@ -57,7 +57,7 @@ The Kendo UI themes are decoupled from the Kendo UI components, which leads to t
 
 * When using a CSS theme as local file, replace the file every time you change the Kendo UI version.
 
-* When loading <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/swatches/" target="_blank">theme swatches</a> from a CDN, make sure that the theme version is compatible with the Kendo UI for jQuery version. Our [release notes](https://www.telerik.com/support/whats-new/kendo-ui/release-history#jquery-release-history) provide theme compatibility information for each components version. You can also use a <a href="https://www.telerik.com/design-system/docs/themes/get-started/changelog/" target="_blank">newer minor theme version</a>, which doesn't contain breaking changes. In other words, the latest major theme version may be still incompatible with the latest version of Kendo UI.
+* When loading <a href="https://www.telerik.com/design-system/docs/themes/kendo-themes/default/swatches/" target="_blank">theme swatches</a> from a CDN, make sure that the theme version is compatible with the Kendo UI for jQuery version. Our [Compatability table](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/compatibility) provide theme compatibility information for each components version. You can also use a <a href="https://www.telerik.com/design-system/docs/themes/get-started/changelog/" target="_blank">newer minor theme version</a>, which doesn't contain breaking changes. In other words, the latest major theme version may be still incompatible with the latest version of Kendo UI.
 
 ## Next Steps
 

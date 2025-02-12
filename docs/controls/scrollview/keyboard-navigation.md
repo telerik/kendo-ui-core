@@ -49,5 +49,5 @@ The ScrollView supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the SrollView (Demo)](https://demos.telerik.com/kendo-ui/scrollview/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [ScrollView Overview](https://docs.telerik.com/kendo-ui/controls/scrollview/overview)

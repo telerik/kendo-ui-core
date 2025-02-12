@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery DropDownButton Documentation | DropDownButton Accessibility
 description: "Get started with the jQuery DropDownButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_dropdownbutton_widget
@@ -86,5 +86,5 @@ A live test example of the DropDownButton component could be found here: https:/
 ## See Also
 * [Keyboard Navigation by the DropDownButton (Demo)](https://demos.telerik.com/kendo-ui/dropdownbutton/keyboard-navigation)
 * [Keyboard Navigation by the DropDownButton]({% slug keynav_kendoui_dropdownbutton_widget %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

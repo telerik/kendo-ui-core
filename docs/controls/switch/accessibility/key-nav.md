@@ -21,5 +21,5 @@ The Switch supports the following keyboard shortcut.
 ## See Also
 
 * [Keyboard Navigation by the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Switch]({% slug accessibility_kendoui_switch %})

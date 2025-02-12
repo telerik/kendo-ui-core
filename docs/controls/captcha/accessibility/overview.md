@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Captcha Documentation | Captcha Accessibility
 description: "Get started with the jQuery Captcha by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_captcha_widget
@@ -82,5 +82,5 @@ A live test example of the Captcha component could be found here: https://demos.
 
 * [Keyboard Navigation by the Captcha (Demo)](https://demos.telerik.com/kendo-ui/captcha/keyboard-navigation)
 * [Keyboard Navigation by the Captcha]({% slug keynav_captcha_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

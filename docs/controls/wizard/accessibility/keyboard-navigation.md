@@ -26,5 +26,5 @@ Kendo UI Wizard supports the following keyboard shortcuts:
 
 ## See Also
 
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Wizard]({% slug accessibility_kendoui_wizard_widget %})

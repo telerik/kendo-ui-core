@@ -26,4 +26,4 @@ The following example demonstrates how to enable the key navigation in the TileL
 ## See Also
 
 * [Keyboard Navigation by the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)

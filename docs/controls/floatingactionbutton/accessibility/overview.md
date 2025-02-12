@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery FloatingActionButton Documentation | FloatingActionButton Accessibility
 description: "Get started with the jQuery FloatingActionButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_floatingactionbutton_widget
@@ -88,5 +88,5 @@ A live test example of the FloatingActionButton component could be found here: h
 
 * [Keyboard Navigation by the FloatingActionButton (Demo)](https://demos.telerik.com/kendo-ui/floatingactionbutton/keyboard-navigation)
 * [Keyboard Navigation by the FloatingActionButton]({% slug keynav_floatingactionbutton_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

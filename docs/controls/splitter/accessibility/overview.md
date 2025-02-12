@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Splitter Documentation | Splitter Accessibility
 description: "Get started with the jQuery Splitter by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_splitter_widget
@@ -83,5 +83,5 @@ The Splitter has been tested with [axe-core](https://github.com/dequelabs/axe-co
 A live test example of the Splitter component could be found here: https://demos.telerik.com/kendo-ui/accessibility/splitter
 ## See Also
 * [Keyboard Navigation by the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

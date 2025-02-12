@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Filter Documentation | Filter Accessibility
 description: "Get started with the jQuery Filter by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_filter_widget
@@ -83,5 +83,5 @@ A live test example of the Filter component could be found here: https://demos.t
 
 * [Keyboard Navigation by the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/keyboard-navigation)
 * [Keyboard navigation by the Filter]({% slug keynav_filter_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

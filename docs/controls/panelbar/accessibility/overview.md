@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery PanelBar Documentation | PanelBar Accessibility
 description: "Get started with the jQuery PanelBar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_panelbar_widget
@@ -70,5 +70,5 @@ The PanelBar has been tested with [axe-core](https://github.com/dequelabs/axe-co
 A live test example of the PanelBar component could be found here: https://demos.telerik.com/kendo-ui/accessibility/panelbar
 ## See Also
 * [Keyboard Navigation by the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)
