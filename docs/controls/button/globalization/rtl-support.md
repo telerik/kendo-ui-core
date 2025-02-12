@@ -12,7 +12,7 @@ Right-to-left (RTL) support reflects the ability of a widget to render its conte
 
 For more information, refer to:
 * [RTL support by the Button (demo)](https://demos.telerik.com/kendo-ui/button/right-to-left-support)
-* [RTL support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [RTL support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 
 ## See Also
 

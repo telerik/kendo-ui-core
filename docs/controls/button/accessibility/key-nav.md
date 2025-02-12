@@ -15,5 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Button]
 ## See Also
 
 * [Keyboard Navigation by the Button (Demo)](https://demos.telerik.com/kendo-ui/button/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
-* [Accessibility in the Grid]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)

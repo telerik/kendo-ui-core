@@ -12,7 +12,7 @@ Right-to-left (RTL) support reflects the ability of a component to render its co
 
 For more information, refer to:
 * [RTL support by the FileManager (demo)](https://demos.telerik.com/kendo-ui/filemanager/right-to-left-support)
-* [RTL support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [RTL support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 
 ## See Also
 

@@ -14,7 +14,7 @@ The provision of proper right-to-left support for the popup notifications when y
 
 For more information, refer to:
 * [RTL support by the Notification (demo)](https://demos.telerik.com/kendo-ui/notification/right-to-left-support)
-* [RTL support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [RTL support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 
 ## See Also
 

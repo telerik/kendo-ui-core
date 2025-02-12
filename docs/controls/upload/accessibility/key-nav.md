@@ -30,5 +30,5 @@ For the complete example, refer to the [demo on Kendo UI Dojo](https://dojo.tele
 ## See Also
 
 * [Keyboard Navigation by the Upload (Demo)](https://dojo.telerik.com/@nenchef/OPAQAjOk)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Upload]({% slug accessibility_upload %})

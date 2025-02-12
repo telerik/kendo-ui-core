@@ -28,5 +28,5 @@ For a complete example, refer to the [demo on keyboard navigation of the OrgChar
 ## See Also
 
 * [Keyboard Navigation of the OrgChart (Demo)](https://demos.telerik.com/kendo-ui/orgchart/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the OrgChart]({% slug accessibility_kendoui_orgchart_widget %})

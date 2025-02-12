@@ -15,5 +15,5 @@ The keyboard navigation of the MultiSelect is always available. For a complete e
 ## See Also
 
 * [Keyboard Navigation by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the MultiSelect]({% slug accessibility_kendoui_multiselect_widget %})

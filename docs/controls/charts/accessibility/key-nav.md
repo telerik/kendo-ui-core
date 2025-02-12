@@ -45,5 +45,5 @@ When the legend area is focused, the following keyboard commands are available:
 ## See Also
 
 * [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Chart]({% slug accessibility_kendoui_charts_widget %})

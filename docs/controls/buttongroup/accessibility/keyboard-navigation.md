@@ -17,5 +17,5 @@ For a complete example, refer to the [demo on keyboard navigation of the ButtonG
 ## See Also
 
 * [Keyboard Navigation by the ButtonGroup (Demo)](https://demos.telerik.com/kendo-ui/buttongroup/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the ButtonGroup]({% slug accessibility_buttongroup_jquery %})

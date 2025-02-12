@@ -47,5 +47,5 @@ For a complete list of all supported key combinations, refer to the [Pager's Key
 ## See Also
 
 * [Keyboard Navigation by the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
-* [Accessibility in the TreeList]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
+* [Accessibility in the TreeList]({% slug overview_accessibility_support_kendoui %})

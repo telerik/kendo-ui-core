@@ -25,5 +25,5 @@ For a complete example, refer to the [demo on keyboard navigation of the Captcha
 ## See Also
 
 * [Keyboard Navigation by the Captcha (Demo)](https://demos.telerik.com/kendo-ui/captcha/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Captcha]({% slug accessibility_kendoui_captcha_widget %})

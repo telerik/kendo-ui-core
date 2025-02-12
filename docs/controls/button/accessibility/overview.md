@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Button Documentation | Button Accessibility
 description: "Get started with the jQuery Button by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_button
@@ -72,5 +72,5 @@ A live test example of the Button component could be found here: https://demos.t
 
 * [Keyboard Navigation by the Button (Demo)](https://demos.telerik.com/kendo-ui/button/keyboard-navigation)
 * [Keyboard Navigation by the Button]({% slug keynav_button %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

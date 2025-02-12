@@ -3,7 +3,7 @@ title: 2018 Releases
 page_title: 2018 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2018."
 slug: breakingchanges_aspnetcore_2018
-position: 6
+position: 7
 ---
 
 # 2018 Releases

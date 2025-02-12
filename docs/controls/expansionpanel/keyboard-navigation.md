@@ -16,4 +16,4 @@ For a complete example, refer to the [demo on using the keyboard navigation of t
 ## See Also
 
 * [Keyboard Navigation by the ExpansionPanel (Demo)](https://demos.telerik.com/kendo-ui/expansionpanel/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)

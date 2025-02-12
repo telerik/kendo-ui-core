@@ -68,5 +68,5 @@ The Kendo UI PivotConfiguratorV2 Chip Menu supports the following keyboard short
 ## See Also
 
 * [Keyboard Navigation by the PivotGridV2 (Demo)](https://demos.telerik.com/kendo-ui/pivotgridv2/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
-* [Accessibility in the PivotGridV2]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
+* [Accessibility in the PivotGridV2]({% slug overview_accessibility_support_kendoui %})

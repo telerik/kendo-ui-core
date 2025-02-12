@@ -26,5 +26,5 @@ For a complete example, refer to the [demo on keyboard navigation of the Filter]
 ## See Also
 
 * [Keyboard Navigation by the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Filter]({% slug accessibility_kendoui_filter_widget %})

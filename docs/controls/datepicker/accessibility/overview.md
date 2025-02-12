@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery DatePicker Documentation | DatePicker Accessibility
 description: "Get started with the jQuery DatePicker by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_datepicker
@@ -46,7 +46,6 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-input-button` | `role=button` or `nodeName=button` | The element should either be a `<button>` element or should have `role="button"` assigned. |
 |  | `aria-label` | The button needs an accessible name to be assigned to it. |
 |  | `tabindex=-1` | The button element should not be focusable. |
-| `.k-datepicker.k-disabled .k-button` | `disabled` or `aria-disabled` | Attribute is rendered only when the picker is disabled. |
 
 ### Calendar Popup
 
@@ -98,5 +97,5 @@ A live test example of the DatePicker component could be found here: https://dem
 
 * [Keyboard Navigation by the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
 * [Keyboard Navigation by the DatePicker]({% slug keynav_datepicker %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

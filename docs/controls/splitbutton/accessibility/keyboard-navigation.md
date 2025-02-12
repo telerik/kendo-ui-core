@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on the keyboard navigation of the Spl
 ## See Also
 
 * [Keyboard Navigation by the SplitButton (Demo)](https://demos.telerik.com/kendo-ui/splitbutton/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)

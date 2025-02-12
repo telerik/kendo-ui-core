@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery Timeline Documentation | Timeline Accessibility
 description: "Get started with the jQuery Timeline by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_timeline_jquery
@@ -98,5 +98,5 @@ A live test example of the Timeline component could be found here: https://demos
 ## See Also
 * [Keyboard Navigation by the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
 * [Keyboard Navigation by the Timeline]({% slug keynav_timeline_jquery %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

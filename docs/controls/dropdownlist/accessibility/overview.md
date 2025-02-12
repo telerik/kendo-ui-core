@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Wai-Aria Support
 page_title: jQuery DropDownList Documentation | DropDownList Accessibility
 description: "Get started with the jQuery DropDownList by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
 slug: accessibility_kendoui_ddl_widget
@@ -120,5 +120,5 @@ A live test example of the DropDownList component could be found here: https://d
 ## See Also
 * [Keyboard Navigation by the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
 * [Keyboard Navigation by the DropDownList]({% slug keynav_kendoui_ddl_widget %})
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
+* [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

@@ -30,5 +30,5 @@ Kendo UI Menu supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
+* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Menu]({% slug accessibility_menu_jquery %})
