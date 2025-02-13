@@ -30,7 +30,7 @@ The national regulations normally share the following characteristics:
 * The legal requirements boil down to common technical standards such as a specific version of [WCAG](#web-context-accessibility-guidelines).
 * The national legislations are slower to adopt newer accessibility standards, compared to Kendo UI for jQuery.
 
-As a result, Kendo UI for jQuery does not review or aim to comply with specific national accessibility legislations. The components [target compliance with the latest official standard WCAG 2.2]({%slug accessibility-compliance%}#compliance-table), which is enough to claim compliance with national legal requirements.
+As a result, Kendo UI for jQuery does not review or aim to comply with specific national accessibility legislations. The components [target compliance with the latest official standard WCAG 2.2]({% slug section508_wcag21_accessibility_support %}#compliance-table), which is enough to claim compliance with national legal requirements.
 
 From technical point of view, Kendo UI for jQuery achieves accessibility through the following features:
 
@@ -50,7 +50,7 @@ Kendo UI for jQuery targets <a href="https://www.w3.org/TR/WCAG22/" target="_bla
 
 <a href="https://www.w3.org/WAI/standards-guidelines/aria/" target="_blank">WAI-ARIA</a> provides a framework for adding HTML attributes to identify features for user interaction, how they relate to each other, and their current state. The WAI-ARIA standard defines HTML element roles and states, which help with dynamic content and advanced user interface controls.
 
-Kendo UI for jQuery targets <a href="https://www.w3.org/TR/wai-aria/" target="_blank">WAI-ARIA version 1.2</a>. The [Compliance Table]({%slug accessibility-compliance%}#compliance-table) provides links to documentation articles, which describe the WAI-ARIA attributes of each applicable component.
+Kendo UI for jQuery targets <a href="https://www.w3.org/TR/wai-aria/" target="_blank">WAI-ARIA version 1.2</a>. The [Compliance Table]({% slug section508_wcag21_accessibility_support %}#compliance-table) provides links to documentation articles, which describe the WAI-ARIA attributes of each applicable component.
 
 ## Keyboard Navigation
 
@@ -62,7 +62,7 @@ Most components represent a single tab stop. Once users reach and focus a compon
 
 ### Types of Keyboard Support
 
-The Kendo UI for jQuery components may provide enhanced, standard, or no keyboard support. See the [compliance table]({%slug accessibility-compliance%}#compliance-table) for component-specific information.
+The Kendo UI for jQuery components may provide enhanced, standard, or no keyboard support. See the [compliance table]({% slug section508_wcag21_accessibility_support %}#compliance-table) for component-specific information.
 
 * *Standard keyboard support* implies similar keyboard navigation capabilities as standard HTML elements. For example, the Button components support `Enter` and `Space` for triggering clicks. All components with standard keyboard support are reachable through the `Tab` key and provide focus styles.
 * *Enhanced keyboard support* builds on top of the standard key combinations and provides additional built-in shortcuts for improved flexibility and user experience.
