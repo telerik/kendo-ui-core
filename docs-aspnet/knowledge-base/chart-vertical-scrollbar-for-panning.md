@@ -7,7 +7,7 @@ slug: chart-vertical-scrollbar-for-panning
 tags: chart, vertical, scrollbar, panning
 res_type: kb
 ---
-# Environment
+## Environment
 <table>
  <tr>
   <td>Product</td>
@@ -19,10 +19,10 @@ res_type: kb
  </tr>
 </table>
 
-# Description
+## Description
 The pan feature of the Chart requires the user to drag the mouse over the X or Y axis. How can I enable Chart panning through a vertical scrollbar rather than dragging through the axes?
 
-# Solution
+## Solution
 Follow the steps below to define a [Slider component]({% slug overview_sliderhelper_aspnetcore %}) that will serve as a vertical scrollbar for panning a Bar Chart:
 
 1. Create a Bar Chart component that binds to remote data and set the `PageSize()` option (series per page).

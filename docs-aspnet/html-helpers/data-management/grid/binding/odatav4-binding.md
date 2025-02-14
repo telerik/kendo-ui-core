@@ -524,8 +524,8 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
                return "/odata/Products(" + dataItem.ProductID + ")"
           }
       </script>
-  ```
-  ```TagHelper
+   ```
+   ```TagHelper
     <script>
         // Initialize DataSource with the dataStore option.
         var dataSourceOptions = {
@@ -596,7 +596,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
         </toolbar>
         <pageable enabled="true"/>
     </kendo-grid>
-  ```
+   ```
 
 ### Enabling Batch Editing in OData-v4 Binding Scenarios with ASP.NET Core 3.1 and 5:
 

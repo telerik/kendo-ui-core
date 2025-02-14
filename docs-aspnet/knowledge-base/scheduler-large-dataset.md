@@ -4,7 +4,7 @@ description: Preventing the Scheduler from crashing when a large amount of event
 type: how-to
 page_title: Scheduler Working with High Amounts of Data
 slug: scheduler-large-dataset
-position: 
+position:
 tags: Scheduler, dataset, large, paging, filtering, pagination, 500k
 ticketid: 1622308
 res_type: kb
@@ -31,10 +31,11 @@ We have implemented a {{ site.product }} Scheduler and have 500K+ entries of dat
 ## Solution
 To control the number of events that are populated in the {{ site.product }} Scheduler add the current date and the currently selected view as additional data to the Read transport of the DataSource:
 
-```
+```RAZOR
 .Read(read=>read.Action("Overview_Read", "Scheduler").Data("additionalData"))
 ```
-```
+
+```JS
 function additionalData(e){
         var scheduler = $("#scheduler").data("kendoScheduler");
         var date = scheduler.date();

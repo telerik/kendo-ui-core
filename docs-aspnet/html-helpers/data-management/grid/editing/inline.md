@@ -256,45 +256,45 @@ For runnable examples, refer to the [demos on implementing the editing approache
 1. The Grid component serializes editors allocated within the `~/Views/Shared/EditorTemplates` folder. If no editors are available in that folder, the Grid will revert to using a default editor based on the primitive type.
 To define a custom editor for a specified column, add the view that contains the editor in the `~/Views/Shared/EditorTemplates` folder and specify the view name in the `EditorTemplateName()` option of the column.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
-            .Name("grid")
-            .Columns(columns =>
-            {
-                ...
-                columns.Bound(product => product.ProductName).EditorTemplateName("ProductNameEditor");
-                ...
-            })
-            // Other configuration.
-        )
-    ```
-    ```ProductNameEditor.cshtml
-        //~/Views/Shared/EditorTemplates/ProductNameEditor.cshtml
+  ```HtmlHelper
+      @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              ...
+              columns.Bound(product => product.ProductName).EditorTemplateName("ProductNameEditor");
+              ...
+          })
+          // Other configuration.
+      )
+  ```
+  ```ProductNameEditor.cshtml
+      //~/Views/Shared/EditorTemplates/ProductNameEditor.cshtml
 
-        @model string
+      @model string
 
-        @(Html.Kendo().TextAreaFor(model => model)
-            .HtmlAttributes(new { data_bind = "value: ProductName"})
-            .Rows(3)
-        )
-    ```
-    {% if site.core %}
-    ```TagHelper
-    <kendo-grid name="grid" height="430">
-        <columns>
-            ...
-            <column field="ProductName">
-                <column-editor-template>
-                    <kendo-textarea name="ProductName" rows="3">
-                    </kendo-textarea>
-                </column-editor-template>
-            </column>
-            ...
-        </columns>
-        <!--Other configuration-->
-    </kendo-grid>
-    ```
-    {% endif %}
+      @(Html.Kendo().TextAreaFor(model => model)
+          .HtmlAttributes(new { data_bind = "value: ProductName"})
+          .Rows(3)
+      )
+  ```
+  {% if site.core %}
+  ```TagHelper
+  <kendo-grid name="grid" height="430">
+      <columns>
+          ...
+          <column field="ProductName">
+              <column-editor-template>
+                  <kendo-textarea name="ProductName" rows="3">
+                  </kendo-textarea>
+              </column-editor-template>
+          </column>
+          ...
+      </columns>
+      <!--Other configuration-->
+  </kendo-grid>
+  ```
+  {% endif %}
 
 For more information on creating editors for the Grid columns, see the [Editor Templates]({% slug editortemplates_grid_aspnetcore %}) article.
 
@@ -433,7 +433,7 @@ When editing is performed, server validation is often needed. This section demon
     }
     </script>
 ```
-         
+
 ## Runnable Samples
 
 To check and download runnable samples demonstrating Inline editing, you can go to these resources:

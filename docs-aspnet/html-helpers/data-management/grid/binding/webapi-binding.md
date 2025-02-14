@@ -17,7 +17,7 @@ For runnable examples, refer to the [demos on WebAPI binding of the Grid compone
 {% if site.mvc %}
 ## Setting up the application for WebAPI Binding
 
-To ensure that the application is configured for both Web API binding capabilities: 
+To ensure that the application is configured for both Web API binding capabilities:
 
 1. Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
     ```
@@ -81,8 +81,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 1. Select the **Products** table. Leave all other options as they are set by default. Click **Finish** to create the Entity Framework model.
-
-    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-binding-choose-database-objects.png)
 
 1. Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
 1. Set **ProductsController** as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and **NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the WebAPI controller.
@@ -105,7 +104,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 {% endif %}
 
 1. Update the `Get` method as demonstrated by The following example.
-   
+
     {% if site.mvc %}
     ```
         public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof    (WebApiDataSourceRequestModelBinder))DataSourceRequest request)
@@ -167,7 +166,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
     {% endif %}
 
 1. Update the `Put` method as demonstrated in The following example.
-    
+
     {% if site.mvc %}
     ```
         public HttpResponseMessage Put(int id, TaskViewModel task)
@@ -213,23 +212,23 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 	        	{
 	        		return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage));
 	        	}
-	        } 
+	        }
      ```
      {% endif %}
 
 1. Update the `Delete` method as demonstrated in the following example.
-     
+
      {% if site.mvc %}
      ```
         public HttpResponseMessage Delete(int id)
         {
             ProductViewModel product = service.Read().FirstOrDefault(p => p.ProductID == id);
-    
+
             if (product == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-    
+
             try
             {
                 service.Destroy(product);
@@ -238,7 +237,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-    
+
             return Request.CreateResponse(HttpStatusCode.OK, product);
         }
        ```
@@ -246,7 +245,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
        ```
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-        {	
+        {
 			try
 			{
 				service.Destroy(new ProductViewModel { ProductID = id } );
@@ -294,7 +293,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
             .Read(read => read.Action("Get", "Product"))
             .Create(create => create.Action("Post", "Product"))
             .Update(update => update.Action("Put", "Product", new { id = "{0}"} ))
-            .Destroy(destroy => destroy.Action("DELETE", "Product", new { id = "{0}" }))	
+            .Destroy(destroy => destroy.Action("DELETE", "Product", new { id = "{0}" }))
             {% endif %}
         )
     )

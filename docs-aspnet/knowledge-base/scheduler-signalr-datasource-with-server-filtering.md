@@ -43,8 +43,8 @@ How can I filter the events of the {{ site.framework }} Scheduler that uses Sign
         )
     ```
 
-* Specify the [`ParameterMap()`](/api/kendo.mvc.ui.fluent/signalrdatasourcetransportbuilder#parametermapsystemstring) option to send 
-the start and end dates of the visible range of the Scheduler to the server when a Read action occurs. In the case of Create, Update, or Destroy action, the function will only send the respective new, edited, or deleted event data.
+* Specify the [`ParameterMap()`](/api/kendo.mvc.ui.fluent/signalrdatasourcetransportbuilder#parametermapsystemstring) option to send
+  the start and end dates of the visible range of the Scheduler to the server when a Read action occurs. In the case of Create, Update, or Destroy action, the function will only send the respective new, edited, or deleted event data.
 
     ```Scheduler
         @(Html.Kendo().Scheduler<MeetingViewModel>()

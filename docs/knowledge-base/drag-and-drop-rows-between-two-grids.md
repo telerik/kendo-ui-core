@@ -33,6 +33,12 @@ How can I drag and drop rows between two Kendo UI Grids for jQuery?
 
 ## Solution
 
+In order to achieve the requirement, you can utilize the [Kendo Draggable](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable) and the [Kendo DropTarget](https://docs.telerik.com/kendo-ui/api/javascript/ui/droptarget) components. Here you will find a small summary of the example below:
+
+* Create `Kendo Draggable` components from the same `div` elements which are used to create the two Grids. Make sure to configure the [group](/api/javascript/ui/draggable/configuration/group) option.
+* Select the wrapper elements of the Grids in order to create a `Kendo DropTarget`. Configuring the [group](/api/javascript/ui/droptarget/configuration/group) here as well will let the `DropTarget` component know that there's a `Draggable` component with the same group. That will allow the `DropTarget` to accept items which are being dragged from the `Draggable` instance. 
+* In the [drop](/api/javascript/ui/droptarget/events/drop) event, you can use the [DataSource API](/api/javascript/data/datasource) to remove the dropped item from one dataSource and add it in the other.
+
 The following example demonstrates how to drag and drop rows between two Kendo UI Grids.
 
 ```dojo

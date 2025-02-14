@@ -5,7 +5,7 @@ description: "Get started with the {{ site.framework }} Pager and learn about it
 slug: templates_pager_aspnet
 ---
 
-## Pager Templates
+# Pager Templates
 
 The {{ site.framework }} Pager component features templates for its page number links.
 

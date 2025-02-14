@@ -3,7 +3,7 @@ title: Row Templates
 page_title: Row Templates
 description: "Get started with the {{ site.product_short }} TreeList by Kendo UI and learn how to place custom content into a treelist row with the help of row templates."
 slug: row_templates_aspnetcore_treelist
-position: 3
+position: 4
 ---
 
 # Row Templates

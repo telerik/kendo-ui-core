@@ -6,7 +6,7 @@ slug: pane_types_dockmanager_aspnetcore
 position: 1
 ---
 
-## Pane Types
+# Pane Types
 
 The Telerik UI for {{ site.framework }} DockManager component exposes the ability to configure different pane types. The following types are as follows.
 

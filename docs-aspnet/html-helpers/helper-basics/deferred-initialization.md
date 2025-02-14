@@ -19,7 +19,7 @@ The following example illustrates how the initialization script of a [Button]({%
             .Name("primaryTextButton")
             .ThemeColor(ThemeColor.Primary)
             .Content("Primary Button")
-        ) 
+        )
     ```
     {% if site.core %}
     ```TagHelper
@@ -177,11 +177,9 @@ To defer components globally:
     </configuration>
     ```
 
-1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations. 
-Any components registered after it will not be included in the script.
-
+1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations.
+    Any components registered after it will not be included in the script.
     Alternatively, call the `DeferredScripts` method to format the components scripts as inline script.
-
     ```Serialization_to_file
         @(Html.Kendo().DeferredScriptFile())
     ```
@@ -214,7 +212,7 @@ The following example shows the content of the generated `JS` file when the load
             tabstrip.Add().Text("Dimensions & Weights")
                 .LoadContentFrom(@Url.Action("Details", "Home"));
         })
-    ) 
+    )
 ```
 {% if site.core %}
 ```Index.cshtml_TagHelper
@@ -255,7 +253,7 @@ The following example shows the content of the generated `JS` file when the load
     });
 ```
 
-According to this example, if the Partial View that is returned by the `Details` Action contains Telerik UI for {{ site.framework }} components, they will not be initialized because their initialization scripts are not included in the simulated `kendo-deferred-scripts-XXX.js` file. To overcome this behavior, you need to call the `DeferredScriptFile()` method in the Partial View after all components declarations. As a result, their initialization scripts will be stored in an external `JS` file, which will load 
+According to this example, if the Partial View that is returned by the `Details` Action contains Telerik UI for {{ site.framework }} components, they will not be initialized because their initialization scripts are not included in the simulated `kendo-deferred-scripts-XXX.js` file. To overcome this behavior, you need to call the `DeferredScriptFile()` method in the Partial View after all components declarations. As a result, their initialization scripts will be stored in an external `JS` file, which will load
 with the Partial View.
 
 The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) in a TabStrip item through a Partial View when the global deferred initialization is enabled.
@@ -271,7 +269,7 @@ The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid
             tabstrip.Add().Text("Dimensions & Weights")
                 .LoadContentFrom(@Url.Action("Details", "Home"));
         })
-    ) 
+    )
 ```
 {% if site.core %}
 ```Index.cshtml_TagHelper
@@ -351,7 +349,7 @@ The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid
 ```
 {% endif %}
 
-When the Content Security Policy (CSP) is enabled, you need to use a [nonce-source](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_inline_script) when loading components dynamically, for example, through Partial Views, or inside Windows or Dialogs. 
+When the Content Security Policy (CSP) is enabled, you need to use a [nonce-source](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_inline_script) when loading components dynamically, for example, through Partial Views, or inside Windows or Dialogs.
 
 The `DeferredScriptFile()` method accepts a nonce, so you can call the method with the respective nonce value. Thereby, the CSP will allow the inline `<script>` tag that loads the external script file, which contains the initialization scripts of the components from the Partial View.
 
@@ -378,7 +376,7 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
             tabstrip.Add().Text("Dimensions & Weights")
                 .LoadContentFrom(@Url.Action("Details", "Home"));
         })
-    ) 
+    )
 ```
 {% if site.core %}
 ```Index.cshtml_TagHelper

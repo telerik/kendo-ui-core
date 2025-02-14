@@ -167,60 +167,59 @@ To pass additional parameters to the action method:
 
 1. Use the `Data` setting.
 1. Provide the name of a JavaScript function which will return an object containing the additional data.
+   The following example demonstrates the action method.
 
-  The following example demonstrates the action method.
+         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
+         {
+             // The implementation is omitted for brevity.
+         }
 
-        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
-        {
-            // The implementation is omitted for brevity.
-        }
+   The following example demonstrates how to send additional data.
 
-  The following example demonstrates how to send additional data.
-
-    ```HtmlHelper
-        @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
-            .Name("ListView")
-            .TagName("div")
-            .ClientTemplateId("template")
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .PageSize(6)
-                .Read(read => read.Action("Orders_Read", "ListView").Data("additionalData"))
-            )
-            .Pageable()
-        )
-        <script>
-            function additionalData() {
-                return {
-                    firstName: "John",
-                    lastName: "Doe"
-                };
-            }
-        </script>
-    ```
-    {% if site.core %}
-    ```TagHelper
-        <kendo-listview name="ListView"
-                        tag-name="div"
-                        template-id="template">
-            <scrollable enabled="true" />
-            <datasource type="DataSourceTagHelperType.Ajax" page-size="6">
-                <transport>
-                    <read url="@Url.Action("Orders_Read", "ListView")" data="additionalData" />
-                </transport>
-            </datasource>
-            <pageable enabled="true" />
-        </kendo-listview>
-        <script>
-            function additionalData() {
-                return {
-                    firstName: "John",
-                    lastName: "Doe"
-                };
-            }
-        </script>
-    ```
-    {% endif %}
+     ```HtmlHelper
+         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
+             .Name("ListView")
+             .TagName("div")
+             .ClientTemplateId("template")
+             .DataSource(dataSource => dataSource
+                 .Ajax()
+                 .PageSize(6)
+                 .Read(read => read.Action("Orders_Read", "ListView").Data("additionalData"))
+             )
+             .Pageable()
+         )
+         <script>
+             function additionalData() {
+                 return {
+                     firstName: "John",
+                     lastName: "Doe"
+                 };
+             }
+         </script>
+     ```
+     {% if site.core %}
+     ```TagHelper
+         <kendo-listview name="ListView"
+                         tag-name="div"
+                         template-id="template">
+             <scrollable enabled="true" />
+             <datasource type="DataSourceTagHelperType.Ajax" page-size="6">
+                 <transport>
+                     <read url="@Url.Action("Orders_Read", "ListView")" data="additionalData" />
+                 </transport>
+             </datasource>
+             <pageable enabled="true" />
+         </kendo-listview>
+         <script>
+             function additionalData() {
+                 return {
+                     firstName: "John",
+                     lastName: "Doe"
+                 };
+             }
+         </script>
+     ```
+     {% endif %}
 ## Processing Client Data
 
 By default, the Telerik UI ListView for {{ site.framework }} requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.

@@ -58,10 +58,10 @@ You can add a Splitter that resizes automatically along with the Kendo UI for jQ
             overflow: hidden;
         }
     </style>
-```    
+```
 {% if site.core %}
 ```TagHelper
-    <kendo-window name="window" 
+    <kendo-window name="window"
                   title="Telerik UI Window"
                   resizable="true"
                   modal="true"
@@ -71,8 +71,8 @@ You can add a Splitter that resizes automatically along with the Kendo UI for jQ
     </kendo-window>
 
     <script id="template" type="text/html">
-        <kendo-splitter name="splitter" 
-                        orientation="SplitterOrientation.Horizontal" 
+        <kendo-splitter name="splitter"
+                        orientation="SplitterOrientation.Horizontal"
                         is-in-client-template="true">
             <pane collapsible="true">
                 left pane <br /><br /> Please resize the Window and watch  the Splitter resize automatically.

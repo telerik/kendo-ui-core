@@ -17,16 +17,16 @@ To enable the ComboBox filtering, set the desired filter operator through the [`
 * [Client-side Filtering](#client-filtering)
 * [Server-side Filtering](#server-filtering)
 
-## Client Filtering 
+## Client Filtering
 
-By design, the ComboBox uses client-side filtering and no specific option must be set. The actual operation is performed through JavaScript directly on the client. No requests are being made to the server. 
+By design, the ComboBox uses client-side filtering and no specific option must be set. The actual operation is performed through JavaScript directly on the client. No requests are being made to the server.
 
 ```HtmlHelper
     @(Html.Kendo().ComboBox()
         .Name("products")
         .Filter(FilterType.Contains)
         .DataTextField("ProductName")
-        .DataValueField("ProductID") 
+        .DataValueField("ProductID")
         .DataSource(source =>
         {
             source.Read(read =>
@@ -39,7 +39,7 @@ By design, the ComboBox uses client-side filtering and no specific option must b
 {% if site.core %}
 ```TagHelper
     <kendo-combobox name="products"
-        datatextfield="ProductName" 
+        datatextfield="ProductName"
         datavaluefield="ProductID"
         filter="FilterType.Contains">
         <datasource>
@@ -64,6 +64,7 @@ By design, the ComboBox uses client-side filtering and no specific option must b
     }
 ```
 {% else %}
+```Controller
     public JsonResult GetProducts()
     {
         var northwind = new DemoDBContext();
@@ -75,6 +76,7 @@ By design, the ComboBox uses client-side filtering and no specific option must b
 
         return Json(products, JsonRequestBehavior.AllowGet);
     }
+```
 {% endif %}
 
 For a runnable example, visit to the [Client Filtering Demo of the ComboBox](https://demos.telerik.com/{{ site.platform }}/combobox/clientfiltering).
@@ -90,7 +92,7 @@ By default, when the ComboBox is configured for server filtering, the filter val
         .Name("products")
         .Filter(FilterType.Contains)
         .DataTextField("ProductName")
-        .DataValueField("ProductID") 
+        .DataValueField("ProductID")
         .DataSource(source =>
         {
             source.Read(read => read.Action("ServerFiltering_GetProducts", "ComboBox"))
@@ -101,7 +103,7 @@ By default, when the ComboBox is configured for server filtering, the filter val
 {% if site.core %}
 ```TagHelper
     <kendo-combobox name="products"
-        datatextfield="ProductName" 
+        datatextfield="ProductName"
         datavaluefield="ProductID"
         filter="FilterType.Contains">
         <datasource server-filtering="true">
@@ -132,6 +134,7 @@ By default, when the ComboBox is configured for server filtering, the filter val
     }
 ```
 {% else %}
+```Controller
     public JsonResult ServerFiltering_GetProducts(string text)
     {
         var northwind = new DemoDBContext();
@@ -148,6 +151,7 @@ By default, when the ComboBox is configured for server filtering, the filter val
 
         return Json(products, JsonRequestBehavior.AllowGet);
     }
+```
 {% endif %}
 
 For a runnable example, visit to the [Server Filtering Demo of the ComboBox](https://demos.telerik.com/{{ site.platform }}/combobox/serverfiltering).

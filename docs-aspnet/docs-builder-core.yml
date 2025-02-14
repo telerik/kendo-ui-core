@@ -1,0 +1,711 @@
+top-navigation-product: asp-net-core
+path-prefix: /aspnet-core-ui/documentation
+default-title-prefix: ASP.NET Core
+
+primary-color:
+  light: rgb(29, 136, 0)
+  dark: rgb(104, 191, 81)
+product-id: 1725
+product-code: UIASPCORE
+product-name: Telerik UI for ASP.NET Core
+product-url: https://www.telerik.com/aspnet-core-ui
+product-trial-url: https://www.telerik.com/try/aspnet-core-ui
+search-engine-id: c5d68ed79c1c44275
+avatar-path: ./images/avatar-ninja.svg
+no-results-image-path: ./images/ninja-no-results.svg
+img-max-width: 100%
+table-layout: fixed
+pdf-cover-png-path: ./images/pdf-cover.png
+
+cta-overview: The @Subject component is part of @ProductLink, a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial.
+cta-intro: "@ProductLink is a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial."
+
+liquid-output-delimiter-left: "{{"
+liquid-output-delimiter-right: "}}"
+liquid:
+  product_long: "Progress Telerik UI for ASP.NET Core"
+  product: "Telerik UI for ASP.NET Core"
+  product_short: "UI for ASP.NET Core"
+  product_url: https://www.telerik.com/aspnet-core-ui
+  framework: "ASP.NET Core"
+  framework_short: "Core"
+  platform: aspnet-core
+  core: true
+  mvc: false
+
+hash-ignore-pattern: "[\\.\\(\\)\\<\\>,]"
+default-code-block-language: Razor
+enable-tabbed-code-blocks: true
+
+markdown-replacements:
+- pattern: (/\.\.)*/aspnet-core/api/
+  replacement: /api/
+- pattern: "```[ ]*(\\r?\\n[ ]*)+((?<liquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})[ ]*(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
+  replacement: "```$<liquid>$<additionalLiquid>$<nextBlock>"
+- pattern: "```(?<lang>(HtmlHelper|View|TagHelper))\\s*?(?<newLine>\\r?\\n)"
+  replacement: "```Razor $<lang>$<newLine>"
+- pattern: "```(?<lang>(Scripts?|Template|Styles|dojo))\\s*?(?<newLine>\\r?\\n)"
+  replacement: "```Html $<lang>$<newLine>"
+- pattern: "```(?<lang>(Controller|Model|HomeController|GridController))\\s*?(?<newLine>\\r?\\n)"
+  replacement: "```C# $<lang>$<newLine>"
+- pattern: "```tab-(?<tab>[^\\s(]+)\\((?<lang>([^\\s)]+))\\)"
+  replacement: "```$<lang> $<tab>"
+- pattern: "```tab-(?<tab>[^\\s(]+)"
+  replacement: "```$<tab>"
+
+excluded-files:
+- "**/all-pages.md"
+- "**/README.md"
+- "**/Gemfile"
+- "**/Gemfile.lock"
+- "**/api_sort.rb"
+- "**/Dockerfile"
+- "**/bs-config.js"
+- "**/build-docs.sh"
+- "**/copy_content.sh"
+- "**/copy_local.sh"
+- "**/docs-watcher/*"
+- "**/exclude_files.txt"
+- "**/install-npm.sh"
+- "**/start-docs.sh"
+- "**/watch.sh"
+- "**/getting-started-mvc/*"
+- "**/html-helpers/helper-basics/build-team-efficiency-dashboard/*"
+- "**/tutorials/*"
+- "**/docs-aspnet/troubleshoot/troubleshooting.md"
+- "**/docs-aspnet/troubleshoot/troubleshooting-validation.md"
+- "**/docs-aspnet/troubleshoot/troubleshooting-scaffolding.md"
+- "**/vs-integration/create-kendo-professional-project.md"
+- "**/vs-integration/upgrade-api-analyzer.md"
+- "**/vs-integration/upgrade-wizard.md"
+- "**/installation/nuget-keys.md"
+- "**/asp-net-mvc-3.md"
+- "**/asp-net-mvc-4.md"
+- "**/html-helpers/helper-basics/fundamentals-mvc.md"
+- "**/html-helpers/helper-basics/vb.md"
+- "**/html-helpers/hybrid/*"
+- "**/html-helpers/charts/scaffolding.md"
+- "**/html-helpers/data-management/grid/scaffolding.md"
+- "**/html-helpers/datasource/custom-datasource.md"
+- "**/html-helpers/navigation/treeview/scaffolding.md"
+- "**/html-helpers/scheduling/scheduler/scaffolding.md"
+- "**/html-helpers/data-management/spreadsheet/spreadsheet-processing.md"
+- "**/html-helpers/data-management/grid/binding/server-binding.md"
+- "**/html-helpers/data-management/grid/editing/server-editing.md"
+- "**/html-helpers/data-management/grid/templates/server-detail-template.md"
+- "**/html-helpers/navigation/menu/binding/sitemap-binding.md"
+- "**/html-helpers/navigation/panelbar/binding/sitemap-binding.md"
+- "**/html-helpers/navigation/panelbar/security-trimming.md"
+- "**/html-helpers/navigation/tabstrip/binding/*"
+- "**/html-helpers/navigation/tabstrip/security-trimming.md"
+- "**/html-helpers/navigation/tabstrip/forms.md"
+- "**/html-helpers/navigation/treeview/security-trimming.md"
+- "**/html-helpers/editors/editor/import-export.md"
+- "**/html-helpers/data-management/grid/how-to/*"
+- "**/html-helpers/data-management/treelist/how-to/*"
+- "**/html-helpers/diagrams-and-maps/map/how-to/*"
+- "**/html-helpers/editors/autocomplete/how-to/*"
+- "**/html-helpers/editors/colorpicker/how-to/*"
+- "**/html-helpers/editors/datepicker/how-to/*"
+- "**/html-helpers/editors/dropdownlist/how-to/*"
+- "**/html-helpers/interactivity/progressbar/how-to/*"
+- "**/html-helpers/layout/window/how-to/*"
+- "**/html-helpers/navigation/menu/how-to/*"
+- "**/html-helpers/navigation/panelbar/how-to/*"
+- "**/html-helpers/navigation/treeview/how-to/*"
+- "**/html-helpers/scheduling/scheduler/how-to/*"
+- "**/tag-helpers/*"
+- "**/knowledge-base/switch-change-messages-inside-grid.md"
+- "**/knowledge-base/upload-files-to-database.md"
+- "**/knowledge-base/treeview-expand-node-async"
+- "**/knowledge-base/mvc-with-requirejs.md"
+
+meta:
+  "*/accessibility":
+    title: Accessibility
+    position: 60
+  "*/globalization":
+    title: Globalization
+    position: 50
+  "*/dropdownbutton":
+    title: DropDownButton
+  "*splitbutton":
+    title: SplitButton
+  "*switch":
+    title: Switch
+  "*template":
+    title: Template
+  "*window":
+    title: Window
+  "*validator":
+    title: Validator
+  "*upload":
+    title: Upload
+  "*treemap":
+    title: TreeMap
+  "*treeview":
+    title: TreeView
+  "*toolbar":
+    title: ToolBar
+  "*togglebutton":
+    title: ToggleButton
+  "*tooltip":
+    title: Tooltip
+  "*timedurationpicker":
+    title: TimeDurationPicker
+  "*timepicker":
+    title: TimePicker
+  "*timeline":
+    title: TimeLine
+  "*tilelayout":
+    title: TileLayout
+  "*textbox":
+    title: TextBox
+  "*textarea":
+    title: TextArea
+  "*taskboard":
+    title: TaskBoard
+  "*tabstrip":
+    title: TabStrip
+  "*stockchart":
+    title: StockChart
+  "*gridlayout":
+    title: GridLayout
+  "*stacklayout":
+    title: StackLayout
+  "*dockmanager":
+    title: DockManager
+  "*splitter":
+    title: Splitter
+  "*sortable":
+    title: Sortable
+  "*slider":
+    title: Slider
+  "*signature":
+    title: Signature
+  "*scrollview":
+    title: ScrollView
+  "*scheduler":
+    title: Scheduler
+  "*pivotgridv2":
+    title: PivotGridV2
+  "*pivotgrid":
+    title: PivotGrid
+  "*panelbar":
+    title: PanelBar
+  "*pager":
+    title: Pager
+  "*responsivepanel":
+    title: ResponsivePanel
+  "*rangeslider":
+    title: RangeSlider
+  "*radialgauge":
+    title: RadialGauge
+  "*/radiobutton":
+    title: RadioButton
+  "*qrcode":
+    title: QRCode
+  html-helpers/interactivity/circularprogressbar:
+    title: CircularProgressBar
+  html-helpers/interactivity/progressbar:
+    title: ProgressBar
+  "*/orgchart":
+    title: OrgChart
+  "*radiogroup":
+    title: RadioGroup
+  "*rating":
+    title: Rating
+  "*numerictextbox":
+    title: NumericTextBox
+  "*popup":
+    title: Popup
+  "*popover":
+    title: PopOver
+  "*notification":
+    title: Notification
+  "*multiselect":
+    title: MultiSelect
+  "*actionsheet":
+    title: ActionSheet
+  "*menu":
+    title: Menu
+  "*mediaplayer":
+    title: MediaPlayer
+  "*maskedtextbox":
+    title: MaskedTextBox
+  "*map":
+    title: Map
+  "*listbox":
+    title: ListBox
+  "*lineargauge":
+    title: LinearGauge
+  "*SkeletonContainer":
+    title: SkeletonContainer
+  "*loader":
+    title: Loader
+  "*imageeditor":
+    title: Image Editor
+  "*gantt":
+    title: Gantt
+  "*form":
+    title: Form
+  "*filemanager":
+    title: FileManager
+  "*flatcolorpicker":
+    title: FlatColorPicker
+  "*expansionpanel":
+    title: ExpansionPanel
+  "*editor":
+    title: Editor
+  "*dropdowntree":
+    title: DropDownTree
+  "*dropdownlist":
+    title: DropDownList
+  "*draganddrop":
+    title: DragAndDrop
+  "*dialog":
+    title: Dialog
+  "*diagram":
+    title: Diagram
+  "*datetimepicker":
+    title: DateTimePicker
+  "*daterangepicker":
+    title: DateRangePicker
+  "*datepicker":
+    title: DatePicker
+  "*dateinput":
+    title: DateInput
+  "*captcha":
+    title: Captcha
+  "*combobox":
+    title: ComboBox
+  "*/multicolumncombobox":
+    title: MultiColumnComboBox
+  "*calendar":
+    title: Calendar
+  "*colorpicker":
+    title: ColorPicker
+  "*colorpalette":
+    title: ColorPalette
+  "*colorgradient":
+    title: ColorGradient
+  "*checkboxgroup":
+    title: CheckBoxGroup
+  "*checkbox":
+    title: CheckBox
+  "*badge":
+    title: Badge
+  html-helpers/scheduling/scheduler/grouping:
+    title: Grouping
+    position: 5
+  html-helpers/scheduling/multiviewcalendar:
+    title: MultiViewCalendar
+  html-helpers/scheduling/calendar:
+    title: Calendar
+  "*buttongroup":
+    title: ButtonGroup
+  "*/button":
+    title: Button
+  "*barcode":
+    title: BarCode
+  "*autocomplete":
+    title: AutoComplete
+  "*circulargauge":
+    title: CircularGauge
+  "*avatar":
+    title: Avatar
+  "*arcgauge":
+    title: ArcGauge
+  "*spreadsheet":
+    title: Spreadsheet
+  "*treelist":
+    title: TreeList
+  "*listview":
+    title: ListView
+  "*drawer":
+    title: Drawer
+  "*grid":
+    title: Grid
+  "*propertygrid":
+    title: PropertyGrid
+  "*how-to":
+    title: How To
+  "*state":
+    title: State Management
+  "*selection":
+    title: Selection
+  "*integration":
+    title: Integration
+  "*filtering":
+    title: Filtering
+  "*export":
+    title: Export
+  "*editing":
+    title: Editing
+  "*troubleshoot":
+    title: Troubleshooting
+  "*/binding":
+    title: Data Binding
+    position: 2
+  "*appearance":
+    title: Appearance
+  backwards-compatibility:
+    title: Breaking Changes
+    position: 15
+  cloud-integration/google-cloud:
+    title: Google Cloud
+    position: 4
+  cloud-integration/azure:
+    title: Azure
+    position: 3
+  cloud-integration/amazon-web-services:
+    title: Amazon Web Services
+    position: 2
+  cloud-integration:
+    title: Cloud Integration
+    position: 14
+  integration-with-other-telerik-products:
+    title: Integration with Other Telerik Products
+    position: 13
+  deployment:
+    title: Deployment
+    position: 12
+  security:
+    title: Security
+    position: 11
+  accessibility:
+    title: Accessibility
+    position: 10
+  globalization:
+    title: Globalization
+    position: 9
+  styles-and-layout/less-themes:
+    title: LESS Themes
+    position: 3
+  styles-and-layout/sass-themes:
+    title: SASS Themes
+    position: 2
+  styles-and-layout:
+    title: Styles and Appearance
+    position: 8
+  html-helpers/pdf/pdfviewer:
+    title: PDFViewer
+  html-helpers/pdf:
+    title: PDF
+  html-helpers/media:
+    title: Media
+  html-helpers/navigation/toolbar/command-types:
+    title: Command Types
+    position: 2
+  html-helpers/interactivity/sortable/integration:
+    title: Integration
+    position: 6
+  html-helpers/interactivity/skeletoncontainer:
+    title: SkeletonContainer
+  html-helpers/interactivity/loader:
+    title: Loader
+  html-helpers/interactivity:
+    title: Interactivity and UX
+  html-helpers/conversational-ui/chat:
+    title: Chat
+  html-helpers/conversational-ui/aiprompt:
+    title: AIPrompt
+  html-helpers/conversational-ui:
+    title: Conversational UI
+  html-helpers/navigation/menu/contextmenu:
+    title: ContextMenu
+    position: 4
+  html-helpers/navigation/menu/binding:
+    title: Data Binding
+    position: 3
+  html-helpers/navigation/radiobutton:
+    title: RadioButton
+  html-helpers/navigation/wizard:
+    title: Wizard
+  html-helpers/navigation/stepper:
+    title: Stepper
+  html-helpers/navigation/chip:
+    title: Chip
+  html-helpers/navigation/chiplist:
+    title: ChipList
+  html-helpers/navigation/floatingactionbutton:
+    title: FloatingActionButton
+  html-helpers/navigation/breadcrumb:
+    title: Breadcrumb
+  html-helpers/navigation/bottomnavigation:
+    title: BottomNavigation
+  html-helpers/navigation/appbar:
+    title: Appbar
+  html-helpers/navigation:
+    title: Navigation
+  html-helpers/layout:
+    title: Layout
+  html-helpers/scheduling:
+    title: Scheduling
+  html-helpers/diagrams-and-maps:
+    title: Diagrams and Maps
+  html-helpers/barcodes:
+    title: Barcodes
+  html-helpers/hybrid:
+    title: Hybrid
+  html-helpers/gauges:
+    title: Gauges
+  html-helpers/charts/heatmap:
+    title: HeatMap
+    position: 11
+  html-helpers/charts/treemap:
+    title: TreeMap
+    position: 10
+  html-helpers/charts/stockchart:
+    title: StockChart
+    position: 9
+  html-helpers/charts/sparkline:
+    title: Sparkline
+    position: 8
+  html-helpers/charts/bar-chart:
+    title: Bar Chart
+    position: 7
+  html-helpers/charts/elements:
+    title: Elements
+    position: 6
+  html-helpers/charts/chart-types:
+    title: Chart Types
+    position: 5
+  html-helpers/charts/chart:
+    title: Chart
+    position: 1
+  html-helpers/charts:
+    title: Charts
+  html-helpers/editors/timedurationpicker:
+    title: TimeDurationPicker
+  html-helpers/editors/imageeditor:
+    title: Image Editor
+  html-helpers/editors/flatcolorpicker:
+    title: FlatColorPicker
+  html-helpers/editors/listbox/binding:
+    title: Data Binding
+    position: 2
+  html-helpers/editors:
+    title: Editors
+  html-helpers/data-management/spreadsheet/end-user:
+    title: End User
+    position: 7
+  html-helpers/data-management/spreadsheet/import-and-export-data:
+    title: Data Import and Export
+    position: 6
+  html-helpers/data-management/pivotgridv2/export:
+    title: Export
+    position: 6
+  html-helpers/data-management/pivotgridv2/data-binding:
+    title: Data Binding
+    position: 2
+  html-helpers/data-management/pivotgridv2:
+    title: PivotGridV2
+  html-helpers/data-management/pivotgrid/export:
+    title: Export
+    position: 6
+  html-helpers/data-management/pivotgrid/data-binding:
+    title: Data Binding
+    position: 2
+  html-helpers/data-management/pivotgrid:
+    title: PivotGrid
+  html-helpers/data-management/treelist/columns:
+    title: Columns
+    position: 7
+  html-helpers/data-management/treelist/export:
+    title: Export
+    position: 6
+  html-helpers/data-management/treelist/editing:
+    title: Editing
+    position: 3
+  html-helpers/data-management/taskboard:
+    title: TaskBoard
+  html-helpers/data-management/grid/performance:
+    title: Performance Tips
+    position: 18
+  html-helpers/data-management/grid/appearance:
+    title: Appearance
+    position: 17
+  html-helpers/data-management/grid/templates:
+    title: Templates
+    position: 15
+  html-helpers/data-management/grid/export:
+    title: Export
+    position: 14
+  html-helpers/data-management/grid/scrolling:
+    title: Scroll Modes
+    position: 12
+  html-helpers/data-management/grid/columns:
+    title: Columns
+    position: 11
+  html-helpers/data-management/grid/grouping:
+    title: Grouping
+    position: 5
+  html-helpers/data-management/grid/editing:
+    title: Editing
+    position: 3
+  html-helpers/data-management/grid:
+    title: Grid
+  html-helpers/data-management/filter:
+    title: Filter
+  html-helpers/data-management:
+    title: Data Management
+  html-helpers/datasource:
+    title: Data Source
+  html-helpers:
+    title: Components
+    position: 7
+  troubleshoot:
+    title: Troubleshooting
+    position: 60
+  tutorials/tutorial-saleshub/order-page:
+    title: Order Page
+    position: 3
+  tutorials/tutorial-saleshub/home-page:
+    title: Home Page
+    position: 2
+  tutorials/tutorial-saleshub:
+    title: Tutorial Sales Hub
+    position: 3
+  tutorials/tutorial-kendo-music-store/music-store-web:
+    title: Music Store Web
+    position: 3
+  tutorials/tutorial-kendo-music-store/music-store-dashboard:
+    title: Music Store Dashboard
+    position: 2
+  tutorials/tutorial-kendo-music-store:
+    title: Tutorial Kendo Music Store
+    position: 2
+  tutorials/quickstart:
+    title: Quick Start
+    position: 1
+  tutorials:
+    title: Tutorials
+    position: 50
+  how-to:
+    title: How To
+    position: 40
+  getting-started-mvc:
+    title: Getting Started
+    position: 2
+  getting-started-core/repl:
+    title: Telerik REPL
+    position: 9
+  getting-started-core:
+    title: Getting Started
+    position: 2
+  getting-started/scripts:
+    title: Helper Script Dependencies
+    position: 8
+  getting-started/vs-integration:
+    title: Integrating with VS
+    position: 7
+  getting-started/repl:
+    title: Telerik REPL
+    position: 9
+  installation-mvc/upgrading:
+    title: Upgrading
+    position: 20
+  installation/upgrading:
+    title: Upgrading
+    position: 20
+  html-helpers/helper-basics-mvc:
+    title: Working with Helpers
+    position: 2
+  html-helpers/helper-basics/build-team-efficiency-dashboard:
+    title: Build Team Efficiency Dashboard
+    position: 15
+  html-helpers/helper-basics:
+    title: Working with Helpers
+    position: 2
+  installation-mvc/adding-client-side-resources/scripts:
+    title: Creating Custom Script Bundles
+    position: 5
+  installation-mvc/adding-client-side-resources:
+    title: Providing Client-Side Resources
+    position: 6
+  installation/adding-client-side-resources:
+    title: Providing Client-Side Resources
+    position: 6
+  installation-mvc/system-requirements:
+    title: System Requirements
+    position: 1
+  installation/system-requirements:
+    title: System Requirements
+    position: 1
+  installation-mvc:
+    title: Installation
+    position: 4
+  installation:
+    title: Installation & Upgrade
+    position: 4
+  installation/installation-options:
+    title: "Instalation Options"
+    position: 2
+  installation/activating-your-license:
+    title: "Activating Your License"
+    position: 3
+  installation/adding-client-side-resources/scripts:
+    title: Creating Custom Script Bundles
+    position: 5
+  vs-code-integration:
+    title: VS Code Integration
+    position: 6
+  vs-integration-mvc:
+    title: Visual Studio Integration
+    position: 5
+  vs-integration:
+    title: Visual Studio Integration
+    position: 5
+  getting-started/installation:
+    title: Download and Installation
+    position: 5
+  getting-started/prerequisites:
+    title: Prerequisites
+    position: 4
+  getting-started:
+    title: Getting Started
+    position: 2
+  api/taghelpers:
+    title: TagHelpers API Reference
+    position: 2
+  api/kendo.mvc.extensions:
+    title: Kendo.Mvc.Extensions
+    position: 1
+  api:
+    title: API Reference
+    position: 0
+    pdfHidden: true
+  knowledge-base:
+    title: Knowledge Base
+    relativeUrl: /knowledge-base
+    position: 280
+    hideChildren: true
+  api/kendo.mvc*:
+    hidden: true
+  api/kendo.mvc.extensions*:
+    hidden: false
+  api/taghelpers*:
+    hidden: false
+  api/*:
+    res_type: api
+    hideCta: true
+
+redirects:
+- from: "^/?$"
+  to: "/introduction"
+
+- from: "^/getting-started/vs-integration/(.*)$"
+  to: "/vs-integration/$1"
+
+- from: "^/styles-and-layout/styling-components/(.*)$"
+  to: "/styles-and-layout/$1"
+
+- from: "^/integration-with-other-telerik-products/capture-issues-with-fiddler-jam$"
+  to: "/introduction"
+
+- from: "^/how-to/setup-private-nuget-feed-azure$"
+  to: "/knowledge-base/setup-private-nuget-feed-azure"
+
+- from: "^/tag-helpers/(.*)$"
+  to: "/html-helpers/$1"

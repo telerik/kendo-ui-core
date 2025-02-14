@@ -82,7 +82,7 @@ The following example demonstrates how to load the Splitter content asynchronous
         panes.Add().LoadContentFrom("https://www.telerik.com/");
     }))
 ```
-{% if site.core%}
+{% if site.core %}
 ```TagHelper
     <kendo-splitter name="splitter">
             <pane content-url="@Url.Action("PaneContent", "Splitter")"></pane>

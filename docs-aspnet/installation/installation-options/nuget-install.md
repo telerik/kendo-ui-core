@@ -58,9 +58,9 @@ To configure the Telerik NuGet feed in Visual Studio:
 1. In the **Source** field, enter `https://nuget.telerik.com/v3/index.json` and click **OK**.
 
 {% if site.core %}
-    ![{{ site.product_short }} Add NuGet source](../getting-started-core/images/add-nuget-source.png)
+    ![{{ site.product_short }} Add NuGet source](../../getting-started-core/images/add-nuget-source.png)
 {% else %}
-    ![{{ site.product_short }} Add NuGet source](../getting-started-mvc/images/add-nuget-source.png)
+    ![{{ site.product_short }} Add NuGet source](../../getting-started-mvc/images/add-nuget-source.png)
 {% endif %}
 
 You have successfully added the Telerik NuGet feed as a Package source.
@@ -74,7 +74,7 @@ The next steps describe how to authenticate your local NuGet instance and displa
 1. Select **Manage NuGet Packages for Solution...**
 
 {% if site.core %}
-	 ![{{ site.product_short }} Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
+	 ![{{ site.product_short }} Locating and opening the NuGet package manager menu](../../getting-started-core/images/manage-nuget.png)
 {% endif %}
 
 1. Select the Telerik NuGet **Package source** from the drop-down list.
@@ -214,9 +214,9 @@ To install a specific {{ site.product }} version:
 1. In the right pane, select a **Version** from the dropdown list.
 
 {% if site.core %}
-	 ![{{ site.product_short }} Installing a specified package version](./images/core-install-package-version.png)
+	 ![{{ site.product_short }} Installing a specified package version](../images/core-install-package-version.png)
 {% else %}
-	 ![{{ site.product_short }} Installing a specified package version](./images/mvc-install-package-version.png)
+	 ![{{ site.product_short }} Installing a specified package version](../images/mvc-install-package-version.png)
 {% endif %}
 1. Install a [Telerik license key](#license-key).
 

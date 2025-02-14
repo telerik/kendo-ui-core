@@ -3,7 +3,7 @@ title: Row and Column Spanning
 page_title: Row and Column Spanning
 description: "Learn how to implement row and column spanning for cells of the Telerik UI Grid for {{ site.framework }}."
 slug: grid_aspnetcore_spanning
-position: 16
+position: 17
 ---
 
 # Row and Column Spanning
@@ -19,7 +19,7 @@ The [`rowspan`](https://www.w3schools.com/tags/att_rowspan.asp) attribute define
 The example below demonstrates how to implement row spanning when the ShipCity field for consequtive cells has the same value:
 
 ```HtmlHelper
-    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()    
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")
         .Columns(columns => {
             columns.Bound(p => p.OrderID).Filterable(false).Width(100);
@@ -185,7 +185,7 @@ The following example demonstrates how you can implement row spanning for produc
             </column>
         </columns>
         <toolbar>
-            <toolbar-button name="create"></toolbar-button> 
+            <toolbar-button name="create"></toolbar-button>
         </toolbar>
         <editable mode="popup"/>
         <pageable enabled="true"/>

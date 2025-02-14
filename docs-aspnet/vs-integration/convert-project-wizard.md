@@ -15,15 +15,16 @@ The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{
 
 {% if site.core %}
 > The Convert Project Wizard does not support converting Razor Pages projects and projects with .Net version 5.
+>
 > The Convert Project Wizard is independent from the Visual Studio version and requires:
- - A .NET Core project version 3.1, 6, 7 or 8
- - The `Microsoft.NET.Sdk.Web` to be included as property of the project file
-    ```
-        <Project Sdk="Microsoft.NET.Sdk.Web">
-            <!-- omitted for brevity -->
-        </Project>
-    ```
-Alternatively, the `Microsoft.NET.Sdk.Web` can be included with the following dependencies as well `Microsoft.AspNetCore`, `Microsoft.AspNetCore.App`, `Microsoft.AspNetCore.All`.
+> - A .NET Core project version 3.1, 6, 7 or 8
+> - The `Microsoft.NET.Sdk.Web` to be included as property of the project file
+>    ```
+>        <Project Sdk="Microsoft.NET.Sdk.Web">
+>            <!-- omitted for brevity -->
+>        </Project>
+>    ```
+>Alternatively, the `Microsoft.NET.Sdk.Web` can be included with the following dependencies as well `Microsoft.AspNetCore`, `Microsoft.AspNetCore.App`, `Microsoft.AspNetCore.All`.
 {% endif %}
 
 ## Using the Convert Project Wizard
@@ -48,7 +49,7 @@ To start the wizard, use either the **Extensions** menu in VS or the context men
 ![{{ site.product_short }} Convert Wizard in VS from context menu](../vs-integration/images/start-wizard-context.png)
 {% endif %}
 
-The conversion wizard provides the following steps:  
+The conversion wizard provides the following steps:
 - [Version selection](#version-selection)
 - [Theme selection](#theme-selection)
 - [Project settings](#project-settings)
@@ -104,7 +105,7 @@ The wizard automates several steps that are crucial for the project configuratio
 
 - [Adding the NuGet Package]{% if site.core %}({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-the-nuget-package){% else %}({% slug setupwithnuget_aspnetmvc %}#installing-the-nuget-package){% endif %}
 {% if site.core %}
-- [Setting for JSON Serialization]({% slug jsonserialization_core %}) 
+- [Setting for JSON Serialization]({% slug jsonserialization_core %})
 {% endif %}
 - [Adding a reference to Kendo.MVC.UI]{% if site.core %}({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-a-reference-to-kendomvcui){% else %}({% slug manualsetup_aspnetmvc %}#downloading-and-referencing-the-kendomvcdll-assembly){% endif %}
 - [Including the client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})

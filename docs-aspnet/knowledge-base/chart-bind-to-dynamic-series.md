@@ -11,16 +11,16 @@ res_type: kb
 
 ## Environment
 	
-	<table>
-	 <tr>
-	  <td>Product</td>
-	  <td>{{ site.product }} Chart</td>
-	 </tr>
-	 <tr>
-	  <td>Product Version</td>
-	  <td>Created with version 2024.4.1112</td>
-	 </tr>
-	</table>
+<table>
+    <tr>
+    <td>Product</td>
+    <td>{{ site.product }} Chart</td>
+    </tr>
+    <tr>
+    <td>Product Version</td>
+    <td>Created with version 2024.4.1112</td>
+    </tr>
+</table>
 
 ## Description
 How can I bind the Chart to dynamic series?

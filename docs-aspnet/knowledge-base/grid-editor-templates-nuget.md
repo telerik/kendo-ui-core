@@ -66,7 +66,7 @@ Having these files still in the project was causing several build errors for our
    - upgrading from an older MVC version to MVC 5
    - '/Project/PropertyGroup/MvcBuildViews' value is set to 'true'
    - msbuild SolutionName.sln /p:PrecompileBeforePublish=true
-    `<PrecompileBeforePublish>True</PrecompileBeforePublish>`
+   - `<PrecompileBeforePublish>True</PrecompileBeforePublish>`
 
 
 **2. Type or namespace definition, or end-of-file expected**

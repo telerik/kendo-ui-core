@@ -142,7 +142,7 @@ When the {{ site.product }} Wizard is initialized as a `<div>` element any forms
         })
     )
 ```
-{% if site.core%}
+{% if site.core %}
 ```TagHelper
     @addTagHelper *,Kendo.Mvc
 

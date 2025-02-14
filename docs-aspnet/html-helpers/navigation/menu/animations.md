@@ -3,7 +3,7 @@ title: Animations
 page_title: Animations
 description: "Learn about the Telerik UI for {{ site.framework }} Menu animation options."
 slug: animations_menu
-position: 3
+position: 4
 ---
 
 # Animations
@@ -84,7 +84,7 @@ The following example shows how to configure different animation effects when op
 
 ## Animation Duration
 
-Each animation style provides a `Duration` option, which determines how many milliseconds it will take for the animation to reach its final state. By default, the defined effects are animated for 400 milliseconds. 
+Each animation style provides a `Duration` option, which determines how many milliseconds it will take for the animation to reach its final state. By default, the defined effects are animated for 400 milliseconds.
 
 The next example shows how to set up a duration for the respective animation style.
 
@@ -121,7 +121,7 @@ The next example shows how to set up a duration for the respective animation sty
 
 ## Reverse Animation
 
-The animations have a `Reverse` option, which, by default, is used for the close effect. For example, when you define the opening animation and enable the `Reverse` option, the same effect will be applied as a closing animation. However, if you define a closing animation, it will override the animation set by the `Reverse` option. 
+The animations have a `Reverse` option, which, by default, is used for the close effect. For example, when you define the opening animation and enable the `Reverse` option, the same effect will be applied as a closing animation. However, if you define a closing animation, it will override the animation set by the `Reverse` option.
 
 The example below shows how to configure the opening animation and use the `Reverse` option to define the closing animation, as well.
 

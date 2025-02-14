@@ -3,7 +3,7 @@ title: Common Scenarios
 page_title: Common Scenarios
 description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn check out the common scenarios."
 slug: htmlhelpers_sortable_aspnetcore_common_scenarios
-position: 7
+position: 8
 ---
 
 # Common Scenarios
@@ -162,7 +162,7 @@ The `<input>` elements inside Sortable items cannot be focused because the items
     @(Html.Kendo().Sortable()
         .For("#sortable")
         .Ignore("input")
-    )   
+    )
 ```
 {% if site.core %}
 ```TagHelper
