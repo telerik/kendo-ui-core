@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TreeList component for {{ site.framework }}."
 slug: treelist_events
-position: 5
+position: 6
 ---
 
 # Events

@@ -53,7 +53,7 @@ How can I use a custom template with editors to create new and edit the existing
     {% endif %}
 
 1. Create a View in the **~Views\Shared\EditorTemplates** folder. The name of the View must match the specified name in the `TemplateName()` option (for example, **CustomEditorTemplate.cshtml**).
-The created template automatically receives the respective Model data. As a reuslt, you can bind the fields through the `<WidgetName>For()` Helpers, as the Scheduler uses the [MVVM Pattern](https://docs.telerik.com/kendo-ui/framework/mvvm/overview) internally to update the data in the views:
+   The created template automatically receives the respective Model data. As a reuslt, you can bind the fields through the `<WidgetName>For()` Helpers, as the Scheduler uses the [MVVM Pattern](https://docs.telerik.com/kendo-ui/framework/mvvm/overview) internally to update the data in the views:
 
     ```CustomEditorTemplate.cshtml
         @model MeetingViewModel
@@ -118,7 +118,7 @@ The created template automatically receives the respective Model data. As a reus
         <div data-container-for="RoomID" class="k-edit-field">
             <kendo-dropdownlist for="RoomID" is-in-client-template="true"
 				datavaluefield="Value"
-                datatextfield="Text" 
+                datatextfield="Text"
                 value-primitive="true"
                 bind-to=ddlData>
             </kendo-dropdownlist>
@@ -132,7 +132,7 @@ The created template automatically receives the respective Model data. As a reus
     {
         public int MeetingID { get; set; }
 
-        [Required]        
+        [Required]
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -195,7 +195,7 @@ The created template automatically receives the respective Model data. As a reus
     }
     ```
 
-    >  Fields from the `ISchedulerEvent` interface are automatically mapped to `camelCase` fields on the client. Therefore, when the Scheduler uses a custom editor template, you must to bind the editors to the `camelCase` property names by using the `data_bind` attribute. 
+    >  Fields from the `ISchedulerEvent` interface are automatically mapped to `camelCase` fields on the client. Therefore, when the Scheduler uses a custom editor template, you must to bind the editors to the `camelCase` property names by using the `data_bind` attribute.
     Fields that do not come from the `ISchedulerEvent` interface preserve their exact names. Therefore, when the editor template refers to such a field, it applies its exact name instead.
 
 For a runnable example, refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/SchedulerEditingCustomEditor) in the [UI for ASP.NET MVC Examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master) on how to implement a custom editor template similar to the built-in editor of the Scheduler. {% if site.core %}You can use this as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}

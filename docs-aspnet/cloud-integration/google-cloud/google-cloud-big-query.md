@@ -23,7 +23,7 @@ Refer to [Creating a Google Cloud Account and Project]({% slug google_cloud_gett
 
 ## Creating New DataSet and Table in BigQuery
 
-For more information on how to create new datasets and tables, refer to the articles about [creating and using datasets](https://cloud.google.com/bigquery/docs/tables) and [creating and using tables](https://cloud.google.com/bigquery/docs/tables) from the official BigQuery documentation. 
+For more information on how to create new datasets and tables, refer to the articles about [creating and using datasets](https://cloud.google.com/bigquery/docs/tables) and [creating and using tables](https://cloud.google.com/bigquery/docs/tables) from the official BigQuery documentation.
 
 1. Navigate to **BigQuery** from the Google Cloud Platform navigation menu.
 
@@ -54,7 +54,7 @@ To start using the Google APIs Client library for .NET:
 
 1. Follow the steps from the [Setting up Authentication](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication) guide.
 
-One of the steps for setting up authentication consists of downloading a JSON key file that holds the credentials information to your computer. Provide the credentials to your application code by setting the environment variable GOOGLE_APPLICATION_CREDENTIALS. To set the variable, use the approach described in the [Setting up Authentication](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication) guide. 
+One of the steps for setting up authentication consists of downloading a JSON key file that holds the credentials information to your computer. Provide the credentials to your application code by setting the environment variable GOOGLE_APPLICATION_CREDENTIALS. To set the variable, use the approach described in the [Setting up Authentication](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication) guide.
 
 If you experience issues with accessing the environment variable, make sure the JSON file is present in an accessible location, for example, `C:\Program Files (x86)\IIS Express\myproject-name-191225-5f6ddc8dc2f6.json`. Try setting the GOOGLE_APPLICATION_CREDENTIALS environment variable in the application:
 
@@ -69,7 +69,7 @@ public ActionResult Index()
 
 ## Configuring the Grid to Consume and Manipulate Available BigQuery Data
 
-Configure the Grid for remote binding and implement the actions the Grid will call to perform CRUD operations. 
+Configure the Grid for remote binding and implement the actions the Grid will call to perform CRUD operations.
 
 1. Configure the Grid.
 
@@ -141,8 +141,8 @@ Configure the Grid for remote binding and implement the actions the Grid will ca
     ```csharp
     using Google.Cloud.BigQuery.V2;
     ```
-    
-    This exemplary implementation shows how you can use a SELECT statement, to get the data and then return it back to the client, for the Grid to visualize it. 
+
+    This exemplary implementation shows how you can use a SELECT statement, to get the data and then return it back to the client, for the Grid to visualize it.
 
     ```Controller
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
@@ -167,7 +167,7 @@ Configure the Grid for remote binding and implement the actions the Grid will ca
 
 1. Implement the Update, Create and Destroy actions.
 
-    This snippet shows an exemplary implementation of the action responsible for the Update operations. 
+    This snippet shows an exemplary implementation of the action responsible for the Update operations.
 
     ```Controller
         [AcceptVerbs(HttpVerbs.Post)]

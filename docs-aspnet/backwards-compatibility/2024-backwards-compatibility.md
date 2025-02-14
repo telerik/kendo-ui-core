@@ -355,9 +355,7 @@ As of the Q1 2024 release, the following APIs will be deprecated.
         )
     ```
 
-* `ChartSeriesLineSettingsBuilder.Width(string)`, `ChartSeriesLineSettingsBuilder.Style(ChartAreaStyle)`,
-`ChartSeriesLineSettingsBuilder.Style(ChartPolarAreaStyle)`,
-`ChartSeriesLineSettingsBuilder.Style(ChartRadarAreaStyle)`
+* `ChartSeriesLineSettingsBuilder.Width(string)`, `ChartSeriesLineSettingsBuilder.Style(ChartAreaStyle)`, `ChartSeriesLineSettingsBuilder.Style(ChartPolarAreaStyle)`, `ChartSeriesLineSettingsBuilder.Style(ChartRadarAreaStyle)`
 
     ```Deprecated
         .Series(series => series

@@ -3,7 +3,7 @@ title: Ajax Binding
 page_title: Ajax Binding
 description: "Learn the basics when working with the TreeList component for {{ site.framework }}."
 slug: htmlhelpers_treelist_aspnetcore_ajaxbinding
-position: 2
+position: 3
 ---
 
 # Ajax Binding

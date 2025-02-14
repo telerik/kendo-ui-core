@@ -227,7 +227,7 @@ The following example demonstrates the Sparkline with its base unit changed to `
     )
 ```
 {% if site.core %}
-```
+```TagHelper
     @{
         var categories_data = new DateTime[] {
                     new DateTime(2011,12,30),

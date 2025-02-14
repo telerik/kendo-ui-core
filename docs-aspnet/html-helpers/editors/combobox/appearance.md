@@ -3,7 +3,7 @@ title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI ComboBox for {{ site.framework }}."
 slug: appearance_combobox_aspnetcore
-position: 2
+position: 3
 ---
 
 # Appearance
@@ -235,7 +235,7 @@ The following example demonstrates how to set `FillMode` in the declaration of t
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 
 ```html
-<span class="k-combobox k-input k-input-outline">   
+<span class="k-combobox k-input k-input-outline">
 </span>
 ```
 

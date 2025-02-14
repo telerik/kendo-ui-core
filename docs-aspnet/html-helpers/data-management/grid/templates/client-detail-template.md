@@ -34,7 +34,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-binding-choose-database-objects.png)
 {% endif %}
 
 1. Open `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
@@ -89,7 +89,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
               .Pageable()
         )
     ```
-    
+
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid">
@@ -317,7 +317,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
             )
         </script>
     ```
-    
+
     {% if site.core %}
     ```TagHelper
         @{
@@ -360,7 +360,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
               .ClientDetailTemplateId("client-template")
         )
     ```
-        {% if site.core %}
+    {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid" detail-template-id="client-template" >
             <datasource type="DataSourceTagHelperType.Ajax" page-size="20"

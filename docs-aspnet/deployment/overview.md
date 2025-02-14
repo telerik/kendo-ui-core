@@ -40,7 +40,7 @@ The {{ site.product }} components consist of:
 * assembly - it is distributed through [NuGet]({%slug nuget_install_aspnetmvc6_aspnetmvc%}). You could find the list with the packages related to UI for ASP.NET Core [here]({% slug nuget_install_aspnetmvc6_aspnetmvc%}#list-of-provided-packages)
 * [client-side resources]({%slug copyclientresources_aspnetmvc6_aspnetmvc%}) - the required JavaScript and CSS files needed to run the components
 
->important The machine that performs the publish build must be able to properly restore the referenced Telerik NuGet packages. See the [CI, CD, Build Server]({%slug deployment-ci-cd-build-pc%}) article for more details on setting automation up.
+>important The machine that performs the publish build must be able to properly restore the referenced Telerik NuGet packages. See the [CI, CD, Build Server]({%slug deployment_ci_cd_build%}) article for more details on setting automation up.
 
 
 ## Next Steps and Troubleshooting

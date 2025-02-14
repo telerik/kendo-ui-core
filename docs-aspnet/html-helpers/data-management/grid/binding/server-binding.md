@@ -45,7 +45,7 @@ To bind the Grid to data, set its data source and render the view by using any o
 
 ## Binding to the View Model
 
-The example below demonstrates how to bind the Grid to a model. 
+The example below demonstrates how to bind the Grid to a model.
 
 ```Controller
     public ActionResult Index()

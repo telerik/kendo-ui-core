@@ -12,7 +12,7 @@ If the RadioGroup is bound to an array of strings, those will be used as both va
 
 ## Set the Label text
 
-To customize the text of the label, use the [`label`](/api/javascript/ui/radiogroup/configuration/items.label) option. 
+To customize the text of the label, use the [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiogroup/configuration/items.label) option.
 
 ```HtmlHelper
     @(Html.Kendo().RadioGroup()

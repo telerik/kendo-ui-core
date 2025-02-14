@@ -3,14 +3,14 @@ title: Aggregates
 page_title: Aggregates
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and group its data by using aggregate functions."
 slug: htmlhelpers_treelist_aspnetcore_aggregates
-position: 3
+position: 4
 ---
 
 # Aggregates
 
 The TreeList enables you to display aggregated number results when the user groups its data.
 
-To enable the aggregate functions, use the `DataSource.Aggregates()` and the `FooterTemplate()` methods of the TreeList, and the `aggregate` fields of its data source. 
+To enable the aggregate functions, use the `DataSource.Aggregates()` and the `FooterTemplate()` methods of the TreeList, and the `aggregate` fields of its data source.
 
 ```HtmlHelper
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
@@ -40,7 +40,7 @@ To enable the aggregate functions, use the `DataSource.Aggregates()` and the `Fo
 ```TagHelper
     <kendo-treelist name="treelist">
         <columns>
-            <treelist-column field="Extension" title="Ext" 
+            <treelist-column field="Extension" title="Ext"
             footer-template="Tota: #= count #, Sum: #= sum #, Min: #= min #, Max: #= max #, Average: #= average #"></treelist-column>
         </columns>
         <treelist-datasource server-operation="false">

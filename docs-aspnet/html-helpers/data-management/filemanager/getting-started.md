@@ -17,7 +17,7 @@ After completing this guide, you will achieve the following results:
 
 @[template](/_contentTemplates/core/getting-started-prerequisites.md#component-gs-prerequisites)
 
-## 1. Prepare the CSHTML File
+# 1. Prepare the CSHTML File
 
 @[template](/_contentTemplates/core/getting-started-directives.md#gs-adding-directives)
 

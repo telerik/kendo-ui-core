@@ -10,18 +10,18 @@ position: 6
 
 As of the 2022.3.1109 version, the Kendo UI code-base is available in the form of ECMAScript modules. As the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps), this allows you to use another method to add the client-side resources to your application.
 
-## ECMAScript Modules vs. Bundled Scripts 
+## ECMAScript Modules vs. Bundled Scripts
 
 The new ECMAScript modules provide the following benefits as compared to the bundled scripts which have been used up to this point:
 
-* [Loading single instead of multiple script files](#loading-single-script-files) 
+* [Loading single instead of multiple script files](#loading-single-script-files)
 * [Dynamic script loading](#dynamic-script-loading)
-* [Optimized debugging](#optimized-debugging) 
-* [Browser compatibility](#browser-compatibility) 
+* [Optimized debugging](#optimized-debugging)
+* [Browser compatibility](#browser-compatibility)
 
 ### Loading Single Script Files
 
-ECMAScript enables you to include a single script file to load a particular component. Taking the scripts for the Grid component as an example, previously, if you wanted to include just the Grid on the page instead of all available components, you had to also include every single script dependency related to it and in a specific order. 
+ECMAScript enables you to include a single script file to load a particular component. Taking the scripts for the Grid component as an example, previously, if you wanted to include just the Grid on the page instead of all available components, you had to also include every single script dependency related to it and in a specific order.
 
 The `<head>` element of your page would've looked similar to the following code snippet:
 

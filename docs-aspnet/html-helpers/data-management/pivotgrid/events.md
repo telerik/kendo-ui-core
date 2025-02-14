@@ -3,19 +3,19 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI for {{ site.framework }} PivotGrid component."
 slug: htmlhelpers_events_pivotgrid_aspnetcore
-position: 6
+position: 7
 ---
 
 # Events
 
 The Telerik UI PivotGrid for {{ site.framework }} [exposes multiple events](/api/kendo.mvc.ui.fluent/pivotgrideventbuilder) that allow you to control the behavior of the UI component.
 
-The following example demonstrates how you can subscribe to the `ExpandMember` and `CollapseMember` events of the component. 
+The following example demonstrates how you can subscribe to the `ExpandMember` and `CollapseMember` events of the component.
 
 ```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
-        .Events(e => 
+        .Events(e =>
         {
             e.ExpandMember("onExpandMember");
             e.CollapseMember("onCollapseMember");

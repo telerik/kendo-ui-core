@@ -9,9 +9,10 @@ position: 7
 # Font Icons
 
 > As of the 2023 R3 release, the font icons are detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}). If you use the Kendo UI CDN service to include the Kendo UI theme, to continue using the font icons, add a reference the following stylesheet into your application:
-    ```
-        <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
-    ```
+
+```
+<link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
+```
 
 With the R1 2017 release, Telerik UI delivers integrated font icons intended for the web and data visualization components of the suite.
 
@@ -120,18 +121,3 @@ To conveniently accommodate an icon in your application, flip it by using the `k
     <span class="k-icon k-font-icon k-i-pencil k-flip-v"></span>
     <span class="k-icon k-font-icon k-i-pencil k-flip-h k-flip-v"></span>
 ```
-
-<style>
-    [data-is-dark='true'] .icons-frame {
-        color: #b5c2e3;
-        background-color: #11184b;
-        border: 2px dashed #1285de;
-    }
-
-    .icons-frame {
-        width: 100%;
-        height: 100%;
-        background-color: rgb(248, 248, 248);
-        border: 2px dashed rgb(235, 236, 238);
-    }
-</style>

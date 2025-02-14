@@ -39,7 +39,7 @@ The Grid supports the following select modes:
 
 You can set the select mode of the Grid to `Multiple` or `Single`. Additionally, the component provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
 
-> If the [`Selectable.Mode`] configuration property is set to `GridSelectionMode.Single`, configuring the [`Select`](/api/kendo.mvc.ui.fluent/gridcolumnfactory#select) column of the Grid overrides [`Selectable.Mode`] and sets the selection mode to `Multiple`. 
+> If the [`Selectable.Mode`] configuration property is set to `GridSelectionMode.Single`, configuring the [`Select`](/api/kendo.mvc.ui.fluent/gridcolumnfactory#select) column of the Grid overrides [`Selectable.Mode`] and sets the selection mode to `Multiple`.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
@@ -75,7 +75,7 @@ The Grid allows you to conditionally drag to select when the multiple selection 
        <kendo-grid name="cellSelection">
              <selectable dragToSelect="false" mode="multiple,row"/>
              <!--Other configuration-->
-       </kendo-grid>      
+       </kendo-grid>
 ```
 {% endif %}
 
@@ -125,6 +125,7 @@ To get data from the selected rows, use the `Change` event of the Grid:
 
 1. Declare the event handler and access the selected data items.
 
+    ````HTML
     <script>
         function onChange(e) {
             var selectedRows = this.select(); //Get the selected Grid rows.
@@ -137,6 +138,7 @@ To get data from the selected rows, use the `Change` event of the Grid:
             console.log(selectedDataItems); // "selectedDataItems" contains all selected data items.
         }
     </script>
+    ````
 
 ## Clearing Selected Row Data
 

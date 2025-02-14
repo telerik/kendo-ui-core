@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI for {{ site.framework }} Sortable component."
 slug: events_sortable
-position: 6
+position: 7
 ---
 
 # Events
@@ -111,7 +111,7 @@ The following example demonstrates how to subscribe to events by a template dele
         <li>Item 3</li>
     </ul>
 
-    <kendo-sortable name="sortable" 
+    <kendo-sortable name="sortable"
         on-start="function() {
                  // Handle the Strat event inline.
               }"

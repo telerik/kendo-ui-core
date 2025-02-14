@@ -36,14 +36,12 @@ The Workbook and worksheets from the {{ site.framework_short }} and DPL are not 
 - An instance method .ToDocument() that all allows any {{ site.framework_short }} Workbook instance to be converted to a DPL Workbook;
 - A static method Workbook.FromDocument() that allows any DPL Workbook to be converted to {% if site.core %}a{% else %}an{% endif %} {{ site.framework_short }} Workbook;
 
-````
+````C#
 using System;
 using DPL = Telerik.Windows.Documents.Spreadsheet.Model;
 using {{ site.framework_short }} = Telerik.Web.Spreadsheet;
 using System.Collections.Generic;
-````
 
-````
 // {{ site.framework_short }} to Document Processing Library
 {{ site.framework_short }}.Workbook {{ site.framework_short }}Workbook = new {{ site.framework_short }}.Workbook();
 {{ site.framework_short }}.Worksheet {{ site.framework_short }}Worksheet = {{ site.framework_short }}Workbook.AddSheet();

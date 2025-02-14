@@ -3,7 +3,7 @@ title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI MultiColumnComboBox for {{ site.framework }}."
 slug: appearance_multicolumncombobox
-position: 2
+position: 3
 ---
 
 # Appearance
@@ -77,7 +77,7 @@ The example below shows a basic configuration and how to set `size` to "large":
         };
     }
 
-    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies" 
+    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies"
     size="ComponentSize.Large"
     bind-to="movies_data">
         <multicolumncombobox-columns>
@@ -155,7 +155,7 @@ The following example demonstrates how to set `Rounded` in the declaration of th
         };
     }
 
-    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies" 
+    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies"
     rounded="Rounded.Medium"
     bind-to="movies_data">
         <multicolumncombobox-columns>
@@ -233,7 +233,7 @@ The following example demonstrates how to set `FillMode` in the declaration of t
         };
     }
 
-    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies" 
+    <kendo-multicolumncombobox datatextfield="Text" datavaluefield="Value" name="movies"
     fill-mode="FillMode.Outline"
     bind-to="movies_data">
         <multicolumncombobox-columns>

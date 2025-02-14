@@ -31,7 +31,7 @@ To configure the server detail template:
 
 1. Choose the **Products** table from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-binding-choose-database-objects.png)
 
 1. Open `HomeController.cs` and edit the `Index` action method.
 

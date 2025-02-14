@@ -4066,7 +4066,7 @@ Sets the subject of the PDF file.
 
 ### pdf.title `String` *(default: null)*
 
-Sets the title of the PDF file.
+Sets the title field of the PDF file in the Document Properties. Not to be mistaken with the name of the exported file.
 
 #### Example - set the title
     <div id="gantt"></div>

@@ -2280,7 +2280,8 @@ The selected node
       ],
       select: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log("Selecting", e.node);
+        console.log("Selecting Node: ", e.node);
+        console.log("DataItem: ", e.sender.dataItem(e.node));
       }
     });
     </script>

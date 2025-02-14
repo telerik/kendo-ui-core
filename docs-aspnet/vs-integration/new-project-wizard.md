@@ -60,10 +60,10 @@ With the **Create New Project Wizard** you can select the desired:
 
 #### Target Framework
 
-The **Create New Project Wizard** allows you to select a target **Framework**. 
+The **Create New Project Wizard** allows you to select a target **Framework**.
 
 >Note
-> 
+>
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
 
 #### ASP.NET Core helper
@@ -186,7 +186,7 @@ As a result, the wizard:
 * Adds a reference to the `Kendo.Mvc` assembly.
 {% endif %}
 
-The wizard creates a `Templates` folder in the root of the application. By default, the `Templates` folder is not visible and is not included in the project. To display it, select the **Show All Files** button in the **Solution Explorer** of Visual Studio.  
+The wizard creates a `Templates` folder in the root of the application. By default, the `Templates` folder is not visible and is not included in the project. To display it, select the **Show All Files** button in the **Solution Explorer** of Visual Studio.
 
 {% if site.mvc %}
 ## Custom Modernizr

@@ -61,12 +61,12 @@ You can define the `Checkboxes` configuration option by:
                     .Action("Read_TreeViewData", "TreeView")
                 )
             )
-          )          
+          )
           <script type="text/kendo-template" id="checkbox-template">
             <input type='checkbox' name='checkedFiles[#= item.id #]' value='true' />
           </script>
     ```
-        {% if site.core %}
+    {% if site.core %}
     ```TagHelper
         <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
             <hierarchical-datasource>

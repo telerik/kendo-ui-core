@@ -3,7 +3,7 @@ title: Context Menu
 page_title: Context Menu
 description: "Learn how to enable and configure the Context Menu of the Telerik UI Grid for {{ site.framework }}."
 slug: grid_aspnetcore_contextmenu
-position: 15
+position: 16
 ---
 
 # Context Menu
@@ -83,7 +83,7 @@ The following example demonstrates how you can customize the Context Menu using 
                 body.Separator();
                 body.ReorderRow();
             })
-        ) 
+        )
         ...
     )
 ```
@@ -129,9 +129,9 @@ The following example demonstrates how to implement a custom command that appear
             .Head(head => {
                 head.Create();
                 head.Separator();
-                head.Custom("myTool").Text("My Custom Tool").Icon("gear"); // "myTool" is the name of the command that will be displayed as "My Custom Tool". 
+                head.Custom("myTool").Text("My Custom Tool").Icon("gear"); // "myTool" is the name of the command that will be displayed as "My Custom Tool".
             })
-        ) 
+        )
         ...
     )
 ```
@@ -164,7 +164,7 @@ The following example demonstrates how to implement a custom command that appear
 The Grid's ContextMenu allows you to subscribe to the following ContextMenu events:
 
 |Event |Description                                                                                                         |
-|---   |---                                                                                                                 | 
+|---   |---                                                                                                                 |
 |`Open`| Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. |
 |`Close`| Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.             |
 |`Select`| Fires when a menu item gets selected.                                                                            |
@@ -180,7 +180,7 @@ The following example demonstrates how to subscribe to the Grid's ContextMenu `O
             .Events(ev=>ev
                 .Open("openMenu")
                 .Close("closeMenu"))
-        ) 
+        )
         ...
     )
 ```

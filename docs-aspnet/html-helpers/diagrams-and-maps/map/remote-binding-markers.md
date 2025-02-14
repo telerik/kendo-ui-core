@@ -6,7 +6,7 @@ slug: htmlhelpers_map_remote_binding_markers
 position: 1
 ---
 
-## Remote Binding Markers
+# Remote Binding Markers
 
 The Telerik UI for {{ site.framework }} Map marker exposes the ability to bind its markers to a remote service. It enables you to transpose the key logic for fetching the markers to a more autonomous server-side location. This omits the need to explicitly declare the markers within the Map definition and makes the component more concise in terms of readability.
 

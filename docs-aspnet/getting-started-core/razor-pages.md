@@ -13,8 +13,8 @@ position: 5
 The ASP.NET Razor Pages framework was introduced in ASP.NET Core 2.0 as an alternative to the ASP.NET Core Model-View-Controller (MVC) framework. Some of the key features of Razor Pages are:
 
 
-* Razor Pages is page-centric. A Razor page consists of a page (`.cshtml`) and a PageModel class (`.cshtml.cs`) with the same name. 
-* The `@page` directive placed at the top of the page makes it a Razor Page. The page contains both HTML and server-side logic, which you include by using Razor syntax. 
+* Razor Pages is page-centric. A Razor page consists of a page (`.cshtml`) and a PageModel class (`.cshtml.cs`) with the same name.
+* The `@page` directive placed at the top of the page makes it a Razor Page. The page contains both HTML and server-side logic, which you include by using Razor syntax.
 
 * The `@model` directive specifies the type of the data that the page is expected to work with. The page uses the PageModel class itself as a view model. The required data is exposed as properties.
 * The page handles requests directly, without using a controller. A naming convention is used to find the proper handler method to execute in the PageModel class. Handler methods are prefixed with the word `On` followed by the HTTP verb used for the request that they process: `OnGet`, `OnPost`, `OnGetAsync` and `OnPostAsync`. Following this convention, additional handlers can be included, for example `OnGetHelloWorld`.
@@ -26,7 +26,7 @@ You can find more information on Razor Pages in the [Microsoft Docs](https://doc
 
 The two alternative approaches for adding Telerik UI for ASP.NET Core to a new Razor Pages project are:
 
-* Use the [Telerik Extensions for Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %}) to create a new project. The [**GRID RAZOR PAGES**]({% slug newprojectwizards_visualstudio_aspnetcore %}#available-templates) template scaffolds a Razor Pages sample, which contains a Grid with enabled CRUD operations. The benefit of this approach is that the template will add the necessary configuration and dependencies automatically. You can focus on adding and configuring the UI components you need. 
+* Use the [Telerik Extensions for Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %}) to create a new project. The [**GRID RAZOR PAGES**]({% slug newprojectwizards_visualstudio_aspnetcore %}#available-templates) template scaffolds a Razor Pages sample, which contains a Grid with enabled CRUD operations. The benefit of this approach is that the template will add the necessary configuration and dependencies automatically. You can focus on adding and configuring the UI components you need.
 * Use the default Visual Studio <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-6.0&tabs=visual-studio" target="_blank">**ASP.NET Core Web App**</a> template, which is based on the ASP.NET Razor Pages framework. Do not use the **Web Application (Model-View-Controller)** template.
 
     Using the default Visual Studio Razor Pages template requires you to configure the project for the Telerik UI components as demonstrated in the [First Steps]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) article&mdash;you must configure the NuGet package source, install the Telerik components, add the required `Kendo.Mvc.UI` references, and provide the client-side resources.
@@ -35,10 +35,10 @@ The two alternative approaches for adding Telerik UI for ASP.NET Core to a new R
 
 All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor Pages framework. The following example demonstrates how to add a Grid, which is a commonly used ASP.NET Core Razor component, to a Razor page and configure its CRUD operations.
 
-   
+
 1. Add the `@model` directive and an AntiForgeryToken on top of the Razor page:
 
-    ``` 
+    ```
         @page
         @model IndexModel
 
@@ -309,7 +309,124 @@ A sample project with Razor Pages examples, which demonstrates the usage of the 
 
 The table below contains links to available examples of using Telerik UI for ASP.NET Core components in Razor Pages.
 
-{% include_relative razor-pages-list-of-helpers.html %}
+<IntroTable>
+    <IntroTableColumn>
+        <IntroTableSection title="Data Source">
+            <IntroTableAnchor title="DataSource" href="slug:htmlhelpers_datasource_aspnetcore_razor_page"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Data Management">
+            <IntroTableAnchor title="FileManager" href="slug:htmlhelpers_filemanager_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Filter"></IntroTableAnchor>
+            <IntroTableAnchor title="Grid" href="slug:razorpages_gridhelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Spreadsheet" href="slug:htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore#data-source-binding-in-razor-pages"></IntroTableAnchor>
+            <IntroTableAnchor title="ListView"></IntroTableAnchor>
+            <IntroTableAnchor title="PivotGrid"></IntroTableAnchor>
+            <IntroTableAnchor title="TreeList"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Conversational UI">
+            <IntroTableAnchor title="Chat" href="slug:htmlhelpers_chat_razorpage_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Media">
+            <IntroTableAnchor title="MediaPLayer"></IntroTableAnchor>
+            <IntroTableAnchor title="ScrollView"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="PDF">
+            <IntroTableAnchor title="PDFViewer" href="slug:htmlhelpers_pdfviewer_aspnetcore_razor_page"></IntroTableAnchor>
+        </IntroTableSection>
+    </IntroTableColumn>
+    <IntroTableColumn>
+        <IntroTableSection title="Editors">
+            <IntroTableAnchor title="AutoComplete" href="slug:htmlhelpers_autocomplete_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ColorPalette"></IntroTableAnchor>
+            <IntroTableAnchor title="ColorPicker" href="slug:htmlhelpers_colorpicker_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ComboBox" href="slug:htmlhelpers_combobox_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="CheckBoxGroup" href="slug:htmlhelpers_checkboxgroup_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="DateInput"></IntroTableAnchor>
+            <IntroTableAnchor title="DatePicker" href="slug:razorpages_datepicker_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="DateRangePicker"></IntroTableAnchor>
+            <IntroTableAnchor title="DateTimePicker" href="slug:razorpages_datetimepicker_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="DropDownList" href="slug:htmlhelpers_dropdownlist_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="DropDownTree" href="slug:htmlhelpers_dropdowntree_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Editor" href="slug:htmlhelpers_editor_image_browser_aspnetcore#imagebrowser-in-razor-page-scenario"></IntroTableAnchor>
+            <IntroTableAnchor title="FlatColorPicker"></IntroTableAnchor>
+            <IntroTableAnchor title="ImageEditor" href="slug:htmlhelpers_imageeditor_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ListBox" href="slug:razorpages_listBoxhelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="MaskedTextBox"></IntroTableAnchor>
+            <IntroTableAnchor title="MultiColumnComboBox" href="slug:htmlhelpers_multicolumncombobox_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="MultiSelect" href="slug:htmlhelpers_multiselect_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="NumericTextBox"></IntroTableAnchor>
+            <IntroTableAnchor title="RadioGroup" href="slug:htmlhelpers_radiogroup_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="Rating" href="slug:htmlhelpers_rating_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Slider" href="slug:htmlhelpers_slider_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Switch" href="slug:htmlhelpers_switch_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="TextArea"></IntroTableAnchor>
+            <IntroTableAnchor title="TextBox"></IntroTableAnchor>
+            <IntroTableAnchor title="TimePicker"></IntroTableAnchor>
+            <IntroTableAnchor title="Upload" href="slug:htmlhelpers_upload_razorpage_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
+    </IntroTableColumn>
+    <IntroTableColumn>
+        <IntroTableSection title="Scheduling">
+            <IntroTableAnchor title="Calendar" href="slug:razorpages_calendar_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="MultiViewCalendar" href="slug:razorpages_multiviewcalendar_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Gantt"></IntroTableAnchor>
+            <IntroTableAnchor title="Scheduler" href="slug:htmlhelpers_scheduler_razorpage_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Charts">
+            <IntroTableAnchor title="Chart"></IntroTableAnchor>
+            <IntroTableAnchor title="StockChart"></IntroTableAnchor>
+            <IntroTableAnchor title="TreeMap" href="slug:razorpages_treemap_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Gauges">
+            <IntroTableAnchor title="ArcGauge"></IntroTableAnchor>
+            <IntroTableAnchor title="CircularGauge"></IntroTableAnchor>
+            <IntroTableAnchor title="LinearGauge"></IntroTableAnchor>
+            <IntroTableAnchor title="RadialGauge"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Barcodes">
+            <IntroTableAnchor title="Barcode"></IntroTableAnchor>
+            <IntroTableAnchor title="QRCode"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Diagrams and Maps">
+            <IntroTableAnchor title="Diagram" href="slug:razorpages_diagramhelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Map"></IntroTableAnchor>
+        </IntroTableSection>
+    </IntroTableColumn>
+    <IntroTableColumn>
+        <IntroTableSection title="Layout">
+            <IntroTableAnchor title="Badge"></IntroTableAnchor>
+            <IntroTableAnchor title="Dialog" href="slug:htmlhelpers_dialog_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Form" href="slug:htmlhelpers_form_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Notification" href="slug:htmlhelpers_notification_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Splitter" href="slug:htmlhelpers_splitter_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="TileLayout"></IntroTableAnchor>
+            <IntroTableAnchor title="Tooltip" href="slug:htmlhelpers_tooltip_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="Window" href="slug:htmlhelpers_window_razorpage_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Navigation">
+            <IntroTableAnchor title="BottomNavigation"></IntroTableAnchor>
+            <IntroTableAnchor title="Breadcrumb" href="slug:htmlhelpers_breadcrumb_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Button" href="slug:htmlhelpers_button_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ButtonGroup" href="slug:htmlhelpers_buttongroup_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Drawer"></IntroTableAnchor>
+            <IntroTableAnchor title="FloatingActionButton"></IntroTableAnchor>
+            <IntroTableAnchor title="Menu" href="slug:htmlhelpers_menu_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="PanelBar" href="slug:htmlhelpers_panelbar_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="RadioButton" href="slug:razor_page_radiobutton_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Stepper" href="slug:htmlhelpers_stepper_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="TabStrip" href="slug:htmlhelpers_tabstrip_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="Timeline" href="slug:razorpages_timelinehelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ToolBar" href="slug:htmlhelpers_toolbar_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="TreeView" href="slug:htmlhelpers_treeview_binding_aspnetcore#razor-pages"></IntroTableAnchor>
+            <IntroTableAnchor title="Wizard" href="slug:htmlhelpers_wizard_razorpage_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Interactivity and UX">
+            <IntroTableAnchor title="Loader" href="slug:htmlhelpers_loader_aspnetcore_razor_page"></IntroTableAnchor>
+            <IntroTableAnchor title="ProgressBar"></IntroTableAnchor>
+            <IntroTableAnchor title="Sortable"></IntroTableAnchor>
+        </IntroTableSection>
+    </IntroTableColumn>
+</IntroTable>
 
 ## Anti-request Forgery
 

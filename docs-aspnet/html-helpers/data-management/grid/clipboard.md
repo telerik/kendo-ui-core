@@ -3,7 +3,7 @@ title: Clipboard
 page_title: Clipboard Support
 description: "Learn how to enable the clipboard functionality of the Telerik UI Grid for {{ site.framework }} that allows you to copy and paste content from Excel to the Grid and vice-versa."
 slug: htmlhelpers_grid_clipboard
-position: 17
+position: 19
 ---
 
 # Clipboard
@@ -17,7 +17,7 @@ By using the Grid clipboard functionality, you enable the user to perform the fo
 The paste operation supports two interaction modes:
 
 * [Replace](#replace-mode)&mdash;Replaces the Grid cell content with the copied content.
-* [Insert](#insert-mode)&mdash;Inserts the copied content as a new Grid row.  
+* [Insert](#insert-mode)&mdash;Inserts the copied content as a new Grid row.
 
 For runnable examples, refer to the following demos:
 * [Using the Grid clipboard functionality (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/paste-from-excel)

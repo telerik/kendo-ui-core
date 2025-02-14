@@ -6,11 +6,11 @@ slug: events_chart_aspnetcore
 position: 6
 ---
 
-## Events
+# Events
 
 You can subscribe to all Chart [events](/api/kendo.mvc.ui.fluent/charteventbuilder).
 
-### Handling by Handler Name
+## Handling by Handler Name
 
 The following examples demonstrates how to subscribe to events by a handler name.
 
@@ -44,7 +44,7 @@ The following examples demonstrates how to subscribe to events by a handler name
     </script>
 ```
 
-### Handling by Template Delegate
+## Handling by Template Delegate
 
 ```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()

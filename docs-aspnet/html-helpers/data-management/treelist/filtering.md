@@ -3,7 +3,7 @@ title: Filtering
 page_title: Filtering
 description: "Learn how to enable the filtering functionality of the Telerik UI TreeList for {{ site.framework }}."
 slug: htmlhelpers_treelist_aspnetcore_filtering
-position: 4
+position: 5
 ---
 
 # Filtering
@@ -47,7 +47,7 @@ TreeList supports the _Filter row_ filter mode. To set the row filter mode, use 
 
 In this filter mode, the Kendo UI TreeList will analyze the underlying columns' data, and then it will render the following filters in the column headers:
 
-* Kendo UI TextBoxes for string values 
+* Kendo UI TextBoxes for string values
 * Kendo UI NumericTextBoxes numeric values
 * Kendo UI DatePickers for dates
 

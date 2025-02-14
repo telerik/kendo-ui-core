@@ -66,7 +66,7 @@ Additionally, the [sourcemap](https://firefox-source-docs.mozilla.org/devtools-u
 
 The following image showcases the directory structure of the loaded scripts in the **Devtools** browser:
 
-![Devtools Sources Tab](images/devtools.png)
+![Devtools Sources Tab](./images/devtools.png)
 
 ### Browser Compatibility
 

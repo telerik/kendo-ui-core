@@ -29,7 +29,7 @@ The card template controls the rendering of the cards.
         #:title# #=cardMenuButton#
         #:description#  
     </script> 
-
+    <div id='taskBoard'></div>
     <script> 
         $("#taskBoard").kendoTaskBoard({ 
             template: $("#card-template").html(), 

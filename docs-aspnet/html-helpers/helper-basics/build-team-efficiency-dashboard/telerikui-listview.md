@@ -26,7 +26,7 @@ The ListView is designed to put you back in control when it comes to displaying 
         .ClientTemplateId("EmployeeItemTemplate") // The template is mandatory and will be used for rendering the listview items.
         .DataSource(dataSource => {
             dataSource.Read(read => read.Action("EmployeesList_Read", "Home"));
-        }) 
+        })
         .Selectable(s => s.Mode(ListViewSelectionMode.Single))
     )
 
@@ -116,14 +116,15 @@ There are three ways to use the hash syntax:
 - Render values as HTML: `#= #`.
 - Use HTML encoding to display values: `#: #`.
 - Execute arbitrary JavaScript code: `# if (true) { # ... non-script content here ... # } #`.
-
-    <script type="text/x-kendo-template" id="myTemplate">
-        #if(isAdmin){#
-            <li>#: name # is Admin</li>
-        #}else{#
-            <li>#: name # is User</li>
-        #}#
-    </script>
+  ````HTML
+  <script type="text/x-kendo-template" id="myTemplate">
+      #if(isAdmin){#
+          <li>#: name # is Admin</li>
+      #}else{#
+          <li>#: name # is User</li>
+      #}#
+  </script>
+  ````
 
 #### Exercise: Create the ListView Template for Showing Employees
 

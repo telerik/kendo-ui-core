@@ -93,7 +93,7 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 1. Open `\Views\Shared\_Layout.cshtml`. Find and remove the `@Scripts.Render("~/bundles/modernizr")` script bundle. This script is included with the Kendo UI assets.
 1. Next, find the CSS `@Styles.Render("~/Content/css")` bundle and move it just above the closing head tag `</head>`. This will ensure that the custom styles are applied when you customize the application.
 1. The final code of the head section should look like the one shown in the example below.
-        
+
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - UI for MVC / Kendo Quick Start Guide</title>

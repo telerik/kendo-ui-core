@@ -6,7 +6,7 @@ slug: pointers_radialgaugehelper_aspnetcore
 position: 3
 ---
 
-## Radial Gauge Pointers
+# Radial Gauge Pointers
 
 The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the values that will be marked on the scale. Customize them via the following options:
 

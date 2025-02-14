@@ -14,7 +14,7 @@ For a runnable example, refer to the [demo on batch editing of the Grid](https:/
 
 > Defining a Schema.Model.Id is mandatory for the proper execution of the Update, Create and Destroy of the Grid.
 
-{% if site.mvc %} 
+{% if site.mvc %}
 1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug newprojectwizard_visualstudio_kendoui %}), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridBatchEditing`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
@@ -26,7 +26,7 @@ For a runnable example, refer to the [demo on batch editing of the Grid](https:/
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-database-objects.png)
+    ![{{ site.product_short }} Choosing the Products table in the database objects](../images/grid-binding-choose-database-objects.png)
 {% endif %}
 
 1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.

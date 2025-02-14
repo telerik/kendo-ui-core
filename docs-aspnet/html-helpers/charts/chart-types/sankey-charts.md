@@ -12,7 +12,7 @@ position: 4
     {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
 {% endif %}
 
-## Sankey Diagram
+# Sankey Diagram
 
 The {{ site.product }} Sankey Diagram allows you to create diagrams that visualize changing flows and their distribution between domains. Sankey diagrams suit a variety of use cases like the representation of website traffic, budget breakdowns, energy flow, and others.
 
@@ -22,9 +22,9 @@ The {{ site.product }} Sankey Diagram allows you to create diagrams that visuali
 
 Sankey Diagram visualize its data using Nodes (items) and Links (connections). You can add them using their respective collections. In addition to that, you can configure the links, legend, and tooltips displayed on the Sankey Diagram by using the following properties:
 
- - [`Links`](/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`ColorType`](/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the link to either `Static`, `Source`, or `Target`. It also allows you to control the opacity and highlighting of the link.
- - [`Legend`](/api/javascript/dataviz/ui/sankey/configuration/legend)&mdash;Provides options to customize the appearance of the diagram legend.
- - [`Tooltip`](/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the the functionality of the diagram element titles.
+ - [`Links`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`ColorType`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the link to either `Static`, `Source`, or `Target`. It also allows you to control the opacity and highlighting of the link.
+ - [`Legend`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/legend)&mdash;Provides options to customize the appearance of the diagram legend.
+ - [`Tooltip`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the the functionality of the diagram element titles.
 
  Here is a sample demonstration:
 
@@ -74,7 +74,7 @@ Sankey Diagram visualize its data using Nodes (items) and Links (connections). Y
 
 ## Configuring the Link Colors
 
-The Sankey diagram provides different [`ColorTypes`](/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the links. The supported LinkColorType values are:
+The Sankey diagram provides different [`ColorTypes`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the links. The supported LinkColorType values are:
 
  * `Static`&mdash;The color is static and is determined by the link's color option.
  * `Source`&mdash;The link color is the same as the source node color.

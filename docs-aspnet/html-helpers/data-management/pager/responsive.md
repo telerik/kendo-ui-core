@@ -5,7 +5,7 @@ description: "Get started with the Pager component for {{ site.framework }} and 
 slug: responsive_pager_aspnet
 ---
 
-## Responsive Design
+# Responsive Design
 
 The Pager component for {{ site.framework }} is responsive by default. To disable the responsive behavior and have all of its elements visible at all times use the `Responsive()` method and pass `false` as a parameter.
 
