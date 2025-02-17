@@ -8,6 +8,12 @@ on:
       - milestoned
       - demilestoned
       - labeled
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  NUMBER: ${{ github.event.issue.number }}
+
 jobs:
   # Label opened issues without milestone as 'Unplanned'
   label_opened_no_milestoned_issues:
@@ -17,11 +23,11 @@ jobs:
       issues: write
     steps:
       - name: Label issues
-        uses: andymckay/labeler@1.0.2
-        with:
-          add-labels: "FP: Unplanned"
-          remove-labels: "FP: Completed, FP: Planned, FP: In Development"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue edit "$NUMBER" --add-label "$LABELS_ADD" --remove-label "$LABELS_REMOVE"
+        env:
+          LABELS_ADD: "FP: Unplanned"
+          LABELS_REMOVE: "FP: Completed,FP: Planned,FP: In Development"
+
   # Label opened issues with milestone as 'Planned'
   label_opened_milestoned_issues:
     if: ${{ github.event.action == 'opened' && github.event.issue.milestone != '' }}
@@ -30,11 +36,11 @@ jobs:
       issues: write
     steps:
       - name: Label issues Planned
-        uses: andymckay/labeler@1.0.2
-        with:
-          add-labels: "FP: Planned"
-          remove-labels: "FP: Completed, FP: Unplanned"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue edit "$NUMBER" --add-label "$LABELS_ADD" --remove-label "$LABELS_REMOVE"
+        env:
+          LABELS_ADD: "FP: Planned"
+          LABELS_REMOVE: "FP: Completed,FP: Unplanned"
+
   # Label issues with milestone as 'Planned'
   label_milestoned_issues:
     if: ${{ github.event.action == 'milestoned' && github.event.issue.state == 'open' && !contains(join(github.event.issue.labels.*.name, ''), 'Development') }}
@@ -43,11 +49,11 @@ jobs:
       issues: write
     steps:
       - name: Label issues Planned
-        uses: andymckay/labeler@1.0.2
-        with:
-          add-labels: "FP: Planned"
-          remove-labels: "FP: Unplanned, FP: Completed"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue edit "$NUMBER" --add-label "$LABELS_ADD" --remove-label "$LABELS_REMOVE"
+        env:
+          LABELS_ADD: "FP: Planned"
+          LABELS_REMOVE: "FP: Unplanned,FP: Completed"
+
   # Label closed issues with 'Completed' label
   label_closed_issues:
     if: ${{ github.event.action == 'closed' }}
@@ -56,11 +62,11 @@ jobs:
       issues: write
     steps:
       - name: Label issues Completed
-        uses: andymckay/labeler@1.0.2
-        with:
-          add-labels: "FP: Completed"
-          remove-labels: "FP: Unplanned, FP: Planned, FP: In Development"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue edit "$NUMBER" --add-label "$LABELS_ADD" --remove-label "$LABELS_REMOVE"
+        env:
+          LABELS_ADD: "FP: Completed"
+          LABELS_REMOVE: "FP: Unplanned,FP: Planned,FP: In Development"
+
   # Label reopened issues with milestone as 'In Development'
   label_reopened_milestoned_issues:
     if: ${{ github.event.action == 'reopened' && github.event.issue.milestone != '' }}
@@ -69,12 +75,12 @@ jobs:
       issues: write
     steps:
       - name: Label issues In Development
-        uses: andymckay/labeler@1.0.2
-        with:
-          add-labels: "FP: In Development"
-          remove-labels: "FP: Completed, FP: Unplanned, FP: Planned"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-  # Remove otber FP labels when issue labeled as 'In Development'
+        run: gh issue edit "$NUMBER" --add-label "$LABELS_ADD" --remove-label "$LABELS_REMOVE"
+        env:
+          LABELS_ADD: "FP: In Development"
+          LABELS_REMOVE: "FP: Completed,FP: Unplanned,FP: Planned"
+
+  # Remove other FP labels when issue labeled as 'In Development'
   issue_labeled_indevelopment:
     if: ${{ github.event.action == 'labeled' && contains(join(github.event.issue.labels.*.name, ''), 'Development') }}
     runs-on: ubuntu-latest
@@ -82,8 +88,7 @@ jobs:
       issues: write
     steps:
       - name: Remove other FP labels when InDevelopment
-        uses: andymckay/labeler@1.0.2
-        with:
-          add-labels: "FP: In Development"
-          remove-labels: "FP: Unplanned, FP: Planned"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue edit "$NUMBER" --add-label "$LABELS_ADD" --remove-label "$LABELS_REMOVE"
+        env:
+          LABELS_ADD: "FP: In Development"
+          LABELS_REMOVE: "FP: Unplanned,FP: Planned"
