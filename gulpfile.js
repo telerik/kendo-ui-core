@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var shell = require('gulp-shell');
 var PluginError = require('plugin-error');
 var clone = require('gulp-clone');
 var sourcemaps = require('gulp-sourcemaps');
@@ -154,10 +153,6 @@ gulp.task('ci', gulp.series(['build']));
 function compileModulesScripts() {
     return HELPERS.execute('npm run scripts:modules');
 }
-
-gulp.task('mdspell', shell.task(
-    ['cd docs && mdspell "**/*.md" -n -a --report']
-));
 
 function packNpm() {
     var internalOption = "";

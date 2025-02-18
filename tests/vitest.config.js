@@ -3,7 +3,7 @@ import path from 'path';
 
 export default defineConfig({
     test: {
-        include: ['tests/**/*.js'],
+        include: ['unit/**/*.js'],
         reporters: ['default', 'json'],
         outputFile: './test-output.json',
         globals: true,
@@ -21,7 +21,11 @@ export default defineConfig({
             screenshotFailures: false,
             provider: 'playwright',
             enabled: true,
-            name: 'chromium', // browser name is required
+            instances: [
+                {
+                    browser: "chromium"
+                }
+            ],
             headless: true,
             viewport: {
                 width: 1920,

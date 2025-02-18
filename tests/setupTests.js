@@ -1,8 +1,8 @@
 import "@progress/kendo-theme-default/dist/default-ocean-blue.css";
-import { axeRun } from "./helpers/axe.js";
-import { stub } from "./helpers/stub.js";
+import { axeRun } from "./helpers/unit/axe.js";
+import { stub } from "./helpers/unit/stub.js";
 import { beforeEach, vi, it, afterEach } from 'vitest';
-import "./helpers/jquery.mockjax.js";
+import "./helpers/unit/jquery.mockjax.js";
 import jQuery from "jquery";
 
 const beforeEachHandler = async({ expect }) => {

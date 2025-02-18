@@ -11,3 +11,7 @@ export const __meta__ = {
 };
 export const addWatermarkOverlayAndBanner = () => {};
 export const validatePackage = () => {};
+
+export const packageMetadata = {
+    version: "$KENDO_VERSION".replace(/^\s+|\s+$/g, '')
+}

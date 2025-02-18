@@ -27016,6 +27016,14 @@ interface JQuery {
     kendoSvgIcon(): JQuery;
     kendoSvgIcon(options: kendo.ui.SvgIconOptions): JQuery;
     data(key: "kendoSvgIcon"): kendo.ui.SvgIcon | undefined;
+
+    kendoChartWizard(): JQuery;
+    kendoChartWizard(options: kendo.ui.ChartWizardOptions): JQuery;
+    data(key: "kendoChartWizard"): kendo.ui.ChartWizard | undefined;
+
+    kendoOTPInput(): JQuery;
+    kendoOTPInput(options: kendo.ui.OTPInputOptions): JQuery;
+    data(key: "kendoOTPInput"): kendo.ui.OTPInput | undefined;
 }
 
 declare namespace KendoLicensing {
