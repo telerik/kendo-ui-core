@@ -178,7 +178,7 @@ export const __meta__ = {
             return target;
         };
 
-    kendo.version = "$KENDO_VERSION".replace(/^\s+|\s+$/g, '');
+    kendo.version = licensing.packageMetadata.version;
 
     function Class() {}
 
