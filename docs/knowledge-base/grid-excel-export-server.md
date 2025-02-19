@@ -111,7 +111,7 @@ As one of our DevCraft Complete clients, you could take advantage of the `DataSo
         return false;
     }
 ```
-```tab-ColumnSettings.cs
+```ColumnSettings.cs
     public class ColumnSettings
     {
         public string Title { get; set; }
@@ -121,7 +121,7 @@ As one of our DevCraft Complete clients, you could take advantage of the `DataSo
         public bool Hidden { get; set; }
     }
 ```
-```tab-Export
+```Controller
     public JsonResult Export([DataSourceRequest]DataSourceRequest request, string columns, string title, string format)
         {
             var data = Enumerable.Range(1, 50).Select(i => new OrderViewModel
@@ -183,7 +183,7 @@ As one of our DevCraft Complete clients, you could take advantage of the `DataSo
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 ```
-```tab-Download
+```Download
     public FileResult Download(string title, string format)
     {
         string mimeType = format == "CSV" ? "text/csv" : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
