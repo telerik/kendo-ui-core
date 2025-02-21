@@ -204,70 +204,6 @@ navigation:
     "controls/sortable/integration":
         title: "Integration"
         position: 6
-    "controls/hybrid":
-        title: "Hybrid UI"
-    "controls/hybrid/styles":
-        title: "Styles and Appearance"
-        position: 5
-    "controls/hybrid/support":
-        title: "Support and Integration"
-        position: 6
-    "controls/hybrid/actionsheet":
-        title: "ActionSheet"
-        position: 7
-    "controls/hybrid/button":
-        title: "Button"
-        position: 8
-    "controls/hybrid/buttongroup":
-        title: "ButtonGroup"
-        position: 9
-    "controls/hybrid/collapsible":
-        title: "Collapsible"
-        position: 10
-    "controls/hybrid/drawer":
-        title: "Drawer"
-        position: 11
-    "controls/hybrid/listview":
-        title: "ListView"
-        position: 12
-    "controls/hybrid/modalview":
-        title: "ModalView"
-        position: 13
-    "controls/hybrid/navbar":
-        title: "NavBar"
-        position: 14
-    "controls/hybrid/pane":
-        title: "Pane"
-        position: 15
-    "controls/hybrid/popover":
-        title: "PopOver"
-        position: 16
-    "controls/hybrid/scroller":
-        title: "Scroller"
-        position: 17
-    "controls/hybrid/scrollview":
-        title: "ScrollView"
-        position: 18
-    "controls/hybrid/splitview":
-        title: "SplitView"
-        position: 19
-    "controls/hybrid/switch":
-        title: "Switch"
-        position: 20
-    "controls/hybrid/tabstrip":
-        title: "TabStrip"
-        position: 21
-    "controls/hybrid/view":
-        title: "View"
-        position: 22
-    "controls/hybrid/how-to":
-        title: "How To"
-        position: 23
-    "controls/hybrid/how-to/application":
-        title: "Application"
-    "controls/hybrid/faq":
-        title: "Frequently Asked Questions"
-        position: 24
     "framework":
         title: "Shared Utilities"
         position: 5
@@ -411,36 +347,6 @@ navigation:
         title: "Excel"
     "*pdf-export":
         title: "PDF Export"
-    "*mobileactionsheet":
-        title: "ActionSheet"
-    "*mobileapplication":
-        title: "Application"
-    "*mobilebuttongroup":
-        title: "ButtonGroup"
-    "*mobilelayout":
-        title: "Layout"
-    "*mobilemodalview":
-        title: "ModalView"
-    "*mobilepopover":
-        title: "PopOver"
-    "*mobilesplitview":
-        title: "SplitView"
-    "*mobileswitch":
-        title: "Switch"
-    "*mobiletabstrip":
-        title: "TabStrip"
-    "*mobilelistview":
-        title: "ListView"
-    "*mobileview":
-        title: "View"
-    "*mobilebutton":
-        title: "Button"
-    "*mobiledrawer":
-        title: "Drawer"
-    "*mobilenavbar":
-        title: "NavBar"
-    "*mobilescrollview":
-        title: "ScrollView"
     "*barcode":
         title: "Barcode"
     "*stockchart":
@@ -1193,24 +1099,6 @@ api:
     group_parents:
       - "tooltip.animation"
 -
-    file: "api/javascript/mobile/ui/actionsheet"
-    group_parents:
-      - "popup"
--
-    file: "api/javascript/mobile/ui/listview"
-    group_parents:
-      - "messages"
-      - "filterable"
--
-    file: "api/javascript/mobile/ui/popover"
-    group_parents:
-      - "pane"
-      - "popup"
--
-    file: "api/javascript/mobile/ui/scroller"
-    group_parents:
-      - "messages"
--
     file: "api/javascript/ooxml/workbook"
     group_parents:
       - "sheets.columns"
@@ -1746,12 +1634,6 @@ defaults:
 
 -
     scope:
-        path: "controls/hybrid/listview"
-    values:
-        component: "mobile-listview"
-
--
-    scope:
         path: "framework/mvvm"
     values:
         component: "mvvm"
@@ -1929,12 +1811,6 @@ defaults:
         path: "controls/scheduler"
     values:
         component: "scheduler"
-
--
-    scope:
-        path: "controls/hybrid/scrollview"
-    values:
-        component: "scrollview"
 
 -
     scope:
@@ -2221,10 +2097,6 @@ intro_columns:
       "ToolBar": "overview_kendoui_toolbar_widget"
       "TreeView": "overview_kendoui_treeview_widget"
       "Wizard": "overview_wizard_widget"
-  -
-    title: "Hybrid UI"
-    items:
-      "Hybrid": "overview_hybridkendoui"
 -
   categories:
   -

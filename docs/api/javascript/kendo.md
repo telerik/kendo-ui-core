@@ -61,9 +61,6 @@ Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elem
 Model View ViewModel ([MVVM](https://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
 
-> **Important:** Kendo UI Mobile is not included in the default list of initialized namespaces. You can initialize it explicitly by
-  running `kendo.bind(element, viewModel, kendo.mobile.ui);`
-
 #### Example - bind a DOM element to a view model
 
      <!-- View -->
@@ -108,7 +105,7 @@ The View-Model which the elements are bound to. Wrapped as an instance of `kendo
 
 ##### namespace `Object` *(optional)*
 
-Optional namespace to look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui`, `kendo.dataviz.ui` and `kendo.mobile.ui`. If omitted
+Optional namespace to look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui` and `kendo.dataviz.ui`. If omitted
 `kendo.ui` will be used. Multiple namespaces can be passed.
 
 ### confirm
@@ -262,9 +259,6 @@ The string that needs to be HTML encoded.
 
 Instantiates Kendo UI widgets in a given DOM element based on role data attributes.
 
-> **Important:** Kendo UI Mobile is not included in the default list of initialized namespaces. You can initialize it explicitly by
-  running `kendo.init(element, kendo.mobile.ui);`
-
 #### Example
      <div id="view">
         <div>
@@ -285,7 +279,7 @@ The root element(s) from which the instantiation starts. Can be a valid jQuery s
 
 ##### namespace `Object` *(optional)*
 
-Optional namespace too look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui`, `kendo.dataviz.ui` and `kendo.mobile.ui`. If omitted
+Optional namespace too look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui` and `kendo.dataviz.ui`. If omitted
 `kendo.ui` will be used. Multiple namespaces can be passed.
 
 #### Example
@@ -300,11 +294,11 @@ Optional namespace too look in when instantiating Kendo UI widgets. The valid na
      <script>
      function foo(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-         console.log(e.sender); // a mobile button
+         console.log(e.sender); // a button
      }
      var data = [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus"  ];
 
-     kendo.init($("#view"), kendo.mobile.ui, kendo.ui);
+     kendo.init($("#view"), kendo.ui);
      </script>
      
 ### mediaQuery
@@ -1137,7 +1131,7 @@ The DOM element that may have a Kendo UI instance attached to it.
 
 ##### suite `Object` *(optional)*
 
-**Optional**. The Kendo UI suite, that the widget is expected to be part of - `kendo.ui` (web widgets), `kendo.mobile.ui` or `kendo.dataviz.ui`. As of Q1 2014 you can also pass an array of suites.
+**Optional**. The Kendo UI suite, that the widget is expected to be part of - `kendo.ui` (web widgets) or `kendo.dataviz.ui`. As of Q1 2014 you can also pass an array of suites.
 
 #### Returns
 

@@ -3,7 +3,7 @@ title: Frequently Asked Questions
 page_title: Licensing Frequently Asked Questions
 description: "Learn the answers to frequently asked questions about the {{ site.product }} licensing."
 slug: licensing-faq
-position: 2
+position: 3
 ---
 
 # Frequently Asked Questions
@@ -79,7 +79,7 @@ To activate {{ site.product }}:
 
 ## Are earlier {{ site.product }} versions affected?
 
-No, versions up to **2024.4.1112** released prior to February 2025 do not require a license key.
+No, versions up to **2024.4.1112** released prior to February 2025 do not require a license key. They use an older licsensing mechanism that requires [Referencing a Script Key]({%slug licensing_aspnetcore%}#old-licensing-mechanism)
 
 ## Next Steps
 
