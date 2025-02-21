@@ -4,7 +4,7 @@ page_title: Telerik License Key Errors
 description: Troubleshooting Telerik license key errors when using {{ site.product }}.
 slug: troubleshooting-license-key-errors
 tags: license, key, error, troubleshooting
-position: 1
+position: 2
 ---
 
 # License Key Errors
@@ -31,6 +31,7 @@ Refer to the error messages below for specific tips.
 
 * [No license key is detected](#no-license-key-is-detected)
 * [Invalid license key](#invalid-license-key)
+* [License key is installed but the banner and watermark do not disappear](#license-key-is-installed-but-the-banner-and-watermark-do-not-disappear)
 * [Your subscription license has expired](#your-subscription-license-has-expired)
 * [Your perpetual license is invalid](#your-perpetual-license-is-invalid)
 * [Your trial license has expired](#your-trial-license-has-expired)
@@ -43,6 +44,43 @@ Refer to the error messages below for specific tips.
 ### Invalid license key
 
 Follow the [automatic]({%slug installation_license_key_aspnetcore%}#automatic-installation) or [manual]({%slug installation_license_key_aspnetcore%}#manual-installation) installation steps from scratch.
+
+### License key is installed but the banner and watermark do not disappear
+
+This is a known issue in version {{ site.product }} 2025.1.211 in scenarios related to deferring the initialization of the components, and in editing scenarios. 
+
+The following workaround can be applied to remove the banner and watermark.
+
+1. Go to the [License Keys page](https://www.telerik.com/account/your-licenses/license-keys) in your Telerik account.
+2. On the `Progress® Kendo UI® for jQuery` row, click the **View key** link in the **SCRIPT KEY** column.
+
+![Get License Key](../images/get-license-key.png)
+
+3.  Copy the JavaScript code snippet into a new file, for example, `telerik-license.js`.
+
+{% if site.core %}
+4. Add the script file to your project, for example, in the `wwwroot\js` folder.
+5. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
+
+```html
+<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.aspnetmvc.min.js"></script>
+<script src="~/js/telerik-license.js"></script>
+
+<!-- Rest of the HTML -->
+```
+{% else %}
+4. Add the script file to your project, for example, in the `Scripts` folder.
+5. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
+
+```html
+<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.aspnetmvc.min.js"></script>
+<script src="~/Scripts/telerik-license.js"></script>
+
+<!-- Rest of the HTML -->
+```
+{% endif %}
 
 ### Your subscription license has expired
 

@@ -1,6 +1,6 @@
 #license-key-version
 
->tip Starting with {{ site.product }} 2025 Q1 release, you must activate the UI components by providing a license key file. Previous versions do not require a license key.
+>tip Starting with {{ site.product }} 2025 Q1 release, you must activate the UI components by providing a license key file. Previous versions require a [script key]({%slug installation_legacy_licensing_aspnetcore%}) instead of a license key file.
 
 #end
 

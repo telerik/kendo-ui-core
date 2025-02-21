@@ -24,7 +24,7 @@ Starting with the 2025 Q1 release, {{ site.product }} requires activation throug
 
 An invalid license results in [errors and warnings]({%slug troubleshooting-license-key-errors%}) during build and run-time indicators such as watermarks and banners.
 
-## Old Licensing Mechanism
+## License.licx in Old Product Versions
 
 As of the Q1 2015 release, Telerik® {{ site.product_short }} uses the standard .NET licensing mechanism&mdash;if you use Telerik® {{ site.product_short }} items in design-time, Visual Studio adds a `license.licx` file to the solution. This file is used only in design-mode and is not needed for deployment explicitly. The .NET framework (`lc.exe`) will embed it in the assembly when your application is built for deployment.
 
