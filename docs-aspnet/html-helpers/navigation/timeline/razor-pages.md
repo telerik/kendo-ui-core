@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Timeline for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_timelinehelper_aspnetcore
-position: 2
+position: 9
 ---
 
 # Timeline in Razor Pages

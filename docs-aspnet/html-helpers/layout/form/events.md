@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Form component for {{ site.framework }}."
 slug: form_events
-position: 4
+position: 11
 ---
 
 # Events

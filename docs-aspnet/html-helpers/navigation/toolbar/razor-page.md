@@ -3,6 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Toolbar component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_toolbar_aspnetcore_razor_page
+position: 8
 ---
 
 # ToolBar in Razor Pages

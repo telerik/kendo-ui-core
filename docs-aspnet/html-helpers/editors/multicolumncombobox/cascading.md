@@ -1,5 +1,5 @@
 ---
-title: Cascading MultiColumnComboBoxes
+title: Cascading
 page_title: Cascading MultiColumnComboBoxes
 description: "Learn how to implement a series of two or more cascading Telerik UI for {{ site.framework }} MultiColumnComboBoxes."
 slug: htmlhelpers_multicolumncombobox_cascading

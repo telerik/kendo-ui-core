@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ToolBar component for {{ site.framework }}."
 slug: toolbar_events
-position: 6
+position: 7
 ---
 
 # Events

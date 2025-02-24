@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Rating component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_rating_razorpage_aspnetcore
-position: 7
+position: 9
 ---
 
 # Rating in Razor Pages

@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Telerik UI DateRangePicker for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_daterangepicker_razorpage_aspnetcore
-position: 9
+position: 12
 ---
 
 # DateRangePicker in Razor Pages

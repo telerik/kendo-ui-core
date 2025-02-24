@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Drawer component for {{ site.framework }}."
 slug: events_drawer
-position: 7
+position: 6
 ---
 
 # Events

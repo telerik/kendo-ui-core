@@ -3,7 +3,7 @@ title: Touchscreen Interactions
 page_title: Touchscreen Interactions
 description: "Utilize the Telerik UI Grid component for {{ site.framework }} and learn the different interactions when using a touch screen device."
 slug: touchscreen_interactions_grid_aspnetcore
-position: 14
+position: 23
 ---
 
 # Touchscreen Interactions

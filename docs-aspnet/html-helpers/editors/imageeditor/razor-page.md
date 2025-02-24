@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI ImageEditor component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_imageeditor_razorpage_aspnetcore
-position: 3
+position: 4
 ---
 
 # ImageEditor in Razor Pages

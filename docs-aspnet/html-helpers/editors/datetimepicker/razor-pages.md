@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI DateTimePicker for {{ site.framework }} in a RazorPages application."
 slug: razorpages_datetimepicker_aspnetcore
-position: 7
+position: 17
 ---
 
 # DateTimePicker in Razor Pages

@@ -3,7 +3,7 @@ title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the adaptive behavior of the the Telerik UI OTPInput component for {{ site.framework }}."
 slug: adaptiveness_otpinputhelper
-position: 8
+position: 7
 ---
 
 # Adaptiveness

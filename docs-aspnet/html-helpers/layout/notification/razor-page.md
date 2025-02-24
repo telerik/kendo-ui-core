@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Notification component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_notification_razorpage_aspnetcore
-position: 6
+position: 7
 ---
 
 # Notification in Razor Pages

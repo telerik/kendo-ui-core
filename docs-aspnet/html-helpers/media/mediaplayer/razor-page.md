@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MediaPlayer component for {{ site.framework }} in Razor Pages."
 slug: htmlhelpers_mediaplayer_razorpage_aspnetcore
-position: 3
+position: 5
 ---
 
 # MediaPlayer in Razor Pages

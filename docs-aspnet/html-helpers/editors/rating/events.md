@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Rating component for {{ site.framework }}."
 slug: rating_events
-position: 3
+position: 8
 ---
 
 # Events

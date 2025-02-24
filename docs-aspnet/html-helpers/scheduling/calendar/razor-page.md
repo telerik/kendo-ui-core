@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Calendar for {{ site.framework }} in a RazorPages application."
 slug: razorpages_calendar_aspnetcore
-position: 7
+position: 11
 ---
 
 # Calendar in Razor Pages

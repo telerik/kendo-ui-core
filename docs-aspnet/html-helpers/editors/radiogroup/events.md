@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI RadioGroup component for {{ site.framework }}."
 slug: events_radioGroup_aspnetcore
-position: 7
+position: 4
 ---
 
 

@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TimePicker component for {{ site.framework }}."
 slug: events_timepicker_aspnetcore
-position: 8
+position: 9
 ---
 
 # Events

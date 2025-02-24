@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Form component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_form_razorpage_aspnetcore
-position: 8
+position: 12
 ---
 
 # Form in Razor Pages

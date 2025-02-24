@@ -24,6 +24,7 @@ A Telerik license key error may occur in the following scenarios:
 * Using an outdated license key after making renewals or purchases.
 * Using a license key that doesn't include {{ site.product }}.
 * Using conflicting license keys in the same environment. For example, using one global license key and one in the app. Or, using a license key file together with an environment variable in CI/CD environment.
+* Mismatching versions of the `Kendo.Mvc.dll` and the Kendo UI JavaScript files referenced in the project.
 
 Refer to the error messages below for specific tips.
 
@@ -81,6 +82,8 @@ The following workaround can be applied to remove the banner and watermark.
 <!-- Rest of the HTML -->
 ```
 {% endif %}
+
+This issue can also be caused by referencing different versions of the `Kendo.Mvc.dll` and the required Kendo UI JavaScript files. Ensure that the `Kendo.Mvc.dll` and the required client-side resources referenced in the project have an identical version, for example, 2025.1.211.
 
 ### Your subscription license has expired
 

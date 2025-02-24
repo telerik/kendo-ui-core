@@ -6,6 +6,8 @@ slug: filemanager_aspnetcore_getting_started
 position: 1
 ---
 
+# Getting Started with the FileManager
+
 This tutorial explains how to set up the Telerik UI for {{ site.framework }} FileManager and highlights the major steps in the configuration of the component.
 
 You will initialize the UI component by adding a data source, configure the columns, and enable a few optional FileManager features such as the `Toolbar` command. To make the FileManager fully operational, you will also configure the CRUD and Upload operations for the files.

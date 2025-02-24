@@ -3,7 +3,7 @@ title: Row and Column Spanning
 page_title: Row and Column Spanning
 description: "Learn how to implement row and column spanning for cells of the Telerik UI Grid for {{ site.framework }}."
 slug: grid_aspnetcore_spanning
-position: 17
+position: 21
 ---
 
 # Row and Column Spanning

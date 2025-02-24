@@ -3622,6 +3622,99 @@ The title of the button that displays the ColumnMenu.
     });
     </script>
 
+### columnMenu.messages.clear `String` *(default: "Clear")*
+
+The text of the `Clear` button in the column menu in mobile Grid.
+
+#### Example - set the clear button in the mobile column menu
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        mobile: true,
+        columns: [
+          { field: "id", width:200 },
+          { field: "name", width:400 },
+          { field: "age", width:400 }
+        ],
+        toolbar: [
+          { name: "columns" }
+        ],
+        columnMenu: {
+          messages: {           
+            clear: "Custom Clear Text"
+          }
+        },        
+        dataSource: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ]
+      });
+    </script>
+
+
+### columnMenu.messages.clearAllFilters `String` *(default: "Clear All Filters")*
+
+The text of the `clearAllFilters` button in the global column menu.
+
+#### Example - set the clear all filter button message
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "id", width:200 },
+          { field: "name", width:400 },
+          { field: "age", width:400 }
+        ],
+        toolbar: [
+          { name: "columns" }
+        ],
+        columnMenu: {          
+          clearAllFilters: true,
+          messages: {           
+            clearAllFilters: "Custom Clear All Filters Message"
+          }
+        },
+        filterable: true,
+        dataSource: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ]
+      });
+    </script>
+
+### columnMenu.messages.column `String` *(default: "Column")*
+
+The text of the column label in the column menu in mobile Grid.
+
+#### Example - set the column label in the mobile column menu
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        mobile: true,
+        columns: [
+          { field: "id", width:200 },
+          { field: "name", width:400 },
+          { field: "age", width:400 }
+        ],
+        toolbar: [
+          { name: "columns" }
+        ],
+        columnMenu: {
+          messages: {           
+            column: "Custom Column label"
+          }
+        },        
+        dataSource: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ]
+      });
+    </script>
+	
+
 ### columnMenu.messages.columns `String` *(default: "Columns")*
 
 The text message displayed for the column selection menu item.
@@ -3645,6 +3738,36 @@ The text message displayed for the column selection menu item.
         { name: "John Doe", age: 33 }
       ]
     });
+    </script>
+
+### columnMenu.messages.columnVisibility `String` *(default: "Column Visibility")*
+
+The text of the column visibility menu item in the global column menu.
+
+#### Example - set the column visibility message
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "id", width:200 },
+          { field: "name", width:400 },
+          { field: "age", width:400 }
+        ],
+        toolbar: [
+          { name: "columns" }
+        ],
+        columnMenu: {
+          messages: {
+            columnVisibility: "Custom Column Visbility Message"
+          }
+        },
+        filterable: true,
+        dataSource: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ]
+      });
     </script>
 
 ### columnMenu.messages.filter `String` *(default: "Filter")*

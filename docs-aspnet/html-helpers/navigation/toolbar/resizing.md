@@ -3,7 +3,7 @@ title: Resizing
 page_title: Resizing
 description: "Learn how the resizing of the Telerik UI ToolBar component for {{ site.framework }} works."
 slug: toolbar_resizing
-position: 8
+position: 5
 ---
 
 # Resizing

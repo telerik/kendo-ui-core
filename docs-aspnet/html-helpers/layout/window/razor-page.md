@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Window component for {{ site.framework }} in a Razor Pages."
 slug: htmlhelpers_window_razorpage_aspnetcore
-position: 8
+position: 12
 ---
 
 # Window in Razor Pages

@@ -3,7 +3,7 @@ title: Images
 page_title: Images
 description: "Learn how to include images and sprite icons in the Telerik UI TabStrip component for {{ site.framework }}."
 slug: htmlhelpers_tabstrip_images_aspnetcore
-position: 7
+position: 4
 ---
 
 # Images 

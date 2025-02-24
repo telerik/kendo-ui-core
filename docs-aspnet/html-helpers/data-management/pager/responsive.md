@@ -3,6 +3,7 @@ title: Responsive Pager
 page_title: Responsive Telerik UI Pager component for {{ site.framework }}
 description: "Get started with the Pager component for {{ site.framework }} and learn about its responsive feature."
 slug: responsive_pager_aspnet
+position: 4
 ---
 
 # Responsive Design

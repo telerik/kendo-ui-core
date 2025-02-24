@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ScrollView component for {{ site.framework }}."
 slug: events_scrollview_aspnetcore
-position: 4
+position: 5
 ---
 
 # Events

@@ -3,7 +3,7 @@ title: Sorting
 page_title: Sorting
 description: "Learn how to enable the sorting functionality of the Telerik UI Grid for {{ site.framework }}."
 slug: htmlhelpers_grid_aspnetcore_sorting
-position: 7
+position: 9
 ---
 
 # Sorting

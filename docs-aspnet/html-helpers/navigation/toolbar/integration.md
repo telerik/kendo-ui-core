@@ -3,7 +3,7 @@ title: Integration
 page_title: Integration
 description: "Learn how to integrate editors within the Telerik UI ToolBar component for {{ site.framework }}."
 slug: toolbar_integration
-position: 9
+position: 6
 ---
 
 # Integration with Editors

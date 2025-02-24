@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Dialog component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_dialog_razorpage_aspnetcore
-position: 5
+position: 6
 ---
 
 # Dialog in Razor Pages

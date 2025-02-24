@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Switch component for {{ site.framework }}."
 slug: events_switch
-position: 6
+position: 3
 ---
 
 

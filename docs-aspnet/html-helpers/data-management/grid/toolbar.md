@@ -3,7 +3,7 @@ title: Toolbar
 page_title: Toolbar
 description: "Learn how to configure the Toolbar of the Telerik UI Grid for {{ site.framework }}."
 slug: htmlhelpers_grid_aspnetcore_toolbar
-position: 10
+position: 15
 ---
 
 # Toolbar

@@ -4,7 +4,7 @@ page_title: Frequently Asked Questions
 description: "Find the answers of the most frequently asked questions related to the Telerik UI Grid component and their answers."
 previous_url: /kendo-ui/aspnet-mvc/helpers/grid/faq, /helpers/data-management/grid/faq
 slug: freqaskedquestions_gridhelper_aspnetmvc
-position: 20
+position: 31
 ---
 
 # Frequently Asked Questions

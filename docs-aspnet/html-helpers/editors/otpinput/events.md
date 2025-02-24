@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI OTPInput component for {{ site.framework }}."
 slug: events_otpinputhelper
-position: 6
+position: 8
 ---
 
 # Events

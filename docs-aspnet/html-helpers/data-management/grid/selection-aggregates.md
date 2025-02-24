@@ -3,7 +3,7 @@ title: Selection Aggregates
 page_title: Selection Aggregates
 description: "Get started with the Telerik UI Grid and learn how to enable selection aggregates that allow users to see precalculated aggregates when they select cells or rows in the Grid table."
 slug: selection_aggregates_grid_aspnetcore
-position: 9
+position: 12
 ---
 
 # Selection Aggregates

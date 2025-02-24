@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Upload component for {{ site.framework }}."
 slug: events_upload_aspnetcore
-position: 7
+position: 11
 ---
 
 # Events

@@ -3,7 +3,7 @@ title: Interval
 page_title: Telerik UI TimePicker for {{ site.framework }} Documentation - Interval
 description: "Get familiar with the Telerik UI TimePicker component for {{ site.framework }} and how to set its interval feature."
 slug: htmlhelpers_timepicker_interval_aspnetcore
-position: 9
+position: 8
 ---
 
 # Interval

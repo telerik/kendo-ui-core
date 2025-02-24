@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Wizard component for {{ site.framework }} in a Razor Pages."
 slug: htmlhelpers_wizard_razorpage_aspnetcore
-position: 5
+position: 6
 ---
 
 # Wizard in Razor Pages

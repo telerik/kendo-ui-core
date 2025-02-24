@@ -3,7 +3,7 @@ title: Filtering
 page_title: Filtering
 description: "Learn how to enable the filtering functionality of the Telerik UI Grid for {{ site.framework }}."
 slug: htmlhelpers_grid_aspnetcore_filtering
-position: 4
+position: 6
 ---
 
 # Filtering

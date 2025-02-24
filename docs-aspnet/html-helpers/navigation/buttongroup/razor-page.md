@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI ButtonGroup component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_buttongroup_razorpage_aspnetcore
-position: 6
+position: 8
 ---
 
 # ButtonGroup in Razor Pages

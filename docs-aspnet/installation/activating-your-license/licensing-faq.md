@@ -46,6 +46,7 @@ The most likely cause is that the new {{ site.product }} version was released af
 
 1. Renew your {{ site.product }} license if necessary.
 1. [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates)
+1. For more details on problems related to the licensing and their solutions, see the [License Key Errors article]({%slug troubleshooting-license-key-errors%}).
 
 ## Can I use the same license key in multiple builds?
 

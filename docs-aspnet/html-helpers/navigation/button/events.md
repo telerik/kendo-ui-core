@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Button component for {{ site.framework }}."
 slug: events_button_aspnetcore
-position: 7
+position: 5
 ---
 
 # Events

@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI Pager component for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_pager_razorpage_aspnetcore
-position: 8
+position: 6
 ---
 
 # Pager in Razor Pages 

@@ -277,31 +277,37 @@ navigation:
         title: "Grid"
      "html-helpers/data-management/grid/editing":
         title: "Editing"
-        position: 3
-     "html-helpers/data-management/grid/columns":
-        title: "Columns"
-        position: 12
-     "html-helpers/data-management/grid/grouping":
-        title: "Grouping"
         position: 5
      "html-helpers/data-management/grid/columns":
         title: "Columns"
-        position: 11
+        position: 3
+     "html-helpers/data-management/grid/grouping":
+        title: "Grouping"
+        position: 7
      "html-helpers/data-management/grid/scrolling":
         title: "Scroll Modes"
-        position: 12
+        position: 10
      "html-helpers/data-management/grid/export":
         title: "Export"
-        position: 14
+        position: 18
      "html-helpers/data-management/grid/templates":
         title: "Templates"
-        position: 15
+        position: 22
      "html-helpers/data-management/grid/appearance":
         title: "Appearance"
-        position: 16
+        position: 4
      "html-helpers/data-management/grid/performance":
         title: "Performance Tips"
-        position: 17
+        position: 27
+     "html-helpers/data-management/grid/globalization":
+        title: "Globalization"
+        position: 28
+     "html-helpers/data-management/grid/accessibility":
+        title: "Accessibility"
+        position: 29
+     "html-helpers/data-management/grid/troubleshoot":
+        title: "Troubleshooting"
+        position: 30
      "html-helpers/data-management/taskboard":
         title: "TaskBoard"
      "html-helpers/data-management/treelist/editing":
@@ -627,10 +633,10 @@ navigation:
      "*/orgchart":
         isNew: true
         title: "OrgChart"
-     "*/otpinput":
+     "*otpinput":
          title: "OTPInput"
          isNew: true
-     "*/chartwizard":
+     "*chartwizard":
          title: "Chart Wizard"
          isNew: true
      "html-helpers/interactivity/progressbar":

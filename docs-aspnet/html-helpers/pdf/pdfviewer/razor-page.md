@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the Telerik UI PDFViewer for {{ site.framework }} in RazorPages scenario."
 slug: htmlhelpers_pdfviewer_aspnetcore_razor_page
-position: 6
+position: 7
 ---
 
 # PDFViewer in Razor Pages 

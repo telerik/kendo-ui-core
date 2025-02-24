@@ -3,7 +3,7 @@ title: Animations
 page_title: Animations
 description: "Learn how to control the animations in the Telerik UI TabStrip component for {{ site.framework }}."
 slug: htmlhelpers_tabstrip_animations_aspnetcore
-position: 8
+position: 5
 ---
 
 # Animations

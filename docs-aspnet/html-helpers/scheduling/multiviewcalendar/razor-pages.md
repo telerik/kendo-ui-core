@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI MultiViewCalendar for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_multiviewcalendar_aspnetcore
-position: 7
+position: 11
 ---
 
 

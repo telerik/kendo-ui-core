@@ -3,7 +3,7 @@ title: Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI Rating component for {{ site.framework }}."
 slug: htmlhelpers_rating_model_binding_aspnetcore
-position: 8
+position: 7
 ---
 
 # Model Binding

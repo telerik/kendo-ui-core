@@ -3,6 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Switch component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_switch_aspnetcore_razor_page
+position: 4
 ---
 
 # Switch in Razor Pages

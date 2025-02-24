@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure a Drawer in Razor Pages."
 slug: htmlhelpers_drawer_razorpage_aspnetcore
-position: 5
+position: 7
 ---
 
 # Drawer Razor Pages
