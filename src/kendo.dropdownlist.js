@@ -658,7 +658,8 @@ export const __meta__ = {
         },
 
         _wrapperMousedown: function(e) {
-            this._prevent = this.filterInput ? e.currentTarget !== this.filterInput[0] : true;
+            const condition = this._hasActionSheet() ? (this.filterInput && e.currentTarget === this.filterInput[0]) : (this.filterInput && e.currentTarget !== this.filterInput[0]);
+            this._prevent = condition;
         },
 
         _wrapperClick: function(e) {

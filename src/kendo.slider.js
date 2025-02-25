@@ -767,9 +767,6 @@ export const __meta__ = {
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
                     .on(TRACK_MOUSE_DOWN, clickHandler)
                     .end()
-                    .on(TRACK_MOUSE_DOWN, function() {
-                        $(document.documentElement).one("selectstart", kendo.preventDefault);
-                    })
                     .on(TRACK_MOUSE_UP, function() {
                         that._drag._end();
                     });
@@ -1473,9 +1470,6 @@ export const __meta__ = {
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
                     .on(TRACK_MOUSE_DOWN, clickHandler)
                     .end()
-                    .on(TRACK_MOUSE_DOWN, function() {
-                        $(document.documentElement).one("selectstart", kendo.preventDefault);
-                    })
                     .on(TRACK_MOUSE_UP, function() {
                         if (that._activeDragHandle) {
                             that._activeDragHandle._end();
