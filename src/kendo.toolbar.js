@@ -1494,7 +1494,7 @@ export const __meta__ = {
 
             if (!this.options.navigateOnTab && keyCode === keys.ENTER && target.hasClass(TEMPLATE_ITEM)) {
                 this._keyActivateTemplate(target);
-            } if (isInSection && keyCode === keys.ESC) {
+            } else if (isInSection && keyCode === keys.ESC) {
                 this.overflowSection.close();
                 this.element.trigger(FOCUS);
             } else if (isOverflowAnchor && (e.altKey && keyCode === keys.DOWN || keyCode === keys.SPACEBAR)) {
