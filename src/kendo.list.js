@@ -1233,6 +1233,9 @@ export const __meta__ = {
             if (list.popup) {
                 list._cachedFilterValue = list.filterInput ? list.filterInput.val() : null;
                 list.popup.destroy();
+                if (list.popup.wrapper) {
+                    list.popup.wrapper.remove();
+                }
                 list._removeFilterHeader();
                 list._removeStaticHeader();
             }
@@ -1265,9 +1268,12 @@ export const __meta__ = {
             if (list.popup) {
                 list._cachedFilterValue = list.filterInput ? list.filterInput.val() : null;
                 list.popup.destroy();
+                if (list.popup.wrapper) {
+                    list.popup.wrapper.remove();
+                }
                 list._removeFilterHeader();
                 list._removeStaticHeader();
-                list.list.parent().css({
+                list.list.add(list.list.parent()).css({
                     width: "",
                     height: "",
                     minWidth: ""
@@ -1352,6 +1358,9 @@ export const __meta__ = {
                 }
 
                 list.listView.destroy();
+                if (list.listView.content) {
+                    this.ul.unwrap();
+                }
                 list._initList({ skipValueUpdate: true });
                 list.listView.value(listViewValue);
             }
