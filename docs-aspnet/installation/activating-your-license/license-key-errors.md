@@ -37,6 +37,9 @@ Refer to the error messages below for specific tips.
 * [Your perpetual license is invalid](#your-perpetual-license-is-invalid)
 * [Your trial license has expired](#your-trial-license-has-expired)
 * [Your license is not valid for the detected product(s)](#your-license-is-not-valid-for-the-detected-products)
+{% if site.mvc %}
+* [Could not load file or assembly 'Telerik.Licensing.Runtime'](#could-not-load-file-or-assembly-teleriklicensingruntime)
+{% endif %}
 
 ### No license key is detected
 
@@ -110,6 +113,19 @@ You are using a product version released outside the validity period of your per
 <a href="https://www.telerik.com/purchase/aspnet-core-ui" target="_blank">Review the purchase options for {{ site.product }}</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
 {% else %}
 <a href="https://www.telerik.com/purchase/aspnet-mvc" target="_blank">Review the purchase options for {{ site.product }}</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
+{% endif %}
+
+{% if site.mvc %}
+### Could not load file or assembly 'Telerik.Licensing.Runtime'
+
+If you experience the error *"The located assembly's manifest definition does not match the assembly reference."* use the following assembly redirect:
+
+```
+    <dependentAssembly>
+        <assemblyIdentity name="Telerik.Licensing.Runtime" publicKeyToken="98bb5b04e55c09ef" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-<latest version of Telerik.Licensing package>" newVersion="<latest version of Telerik.Licensing package>" />
+    </dependentAssembly>
+```
 {% endif %}
 
 ## See Also

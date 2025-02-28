@@ -242,6 +242,21 @@ Use as small page sizes as possible, because rendering too many records causes p
     ```
     {% endif %} 
 
+You can change the position of the Pager in the Grid. The available options for the positions are `top` and `bottom`.
+
+```JavaScript
+    <input type="checkbox" id="btnPagerPosition" />
+
+    $("#btnPagerPosition").change(function () {
+         var position = this.checked ? "top" : "bottom";
+         $("#grid").data("kendoGrid").setOptions({
+             pageable: {
+                 position: position
+             }
+         });
+    });
+```
+
 ## See Also
 
 * [Paging by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
