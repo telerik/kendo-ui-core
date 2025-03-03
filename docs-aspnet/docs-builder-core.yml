@@ -29,6 +29,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
+  cdnVersion: "2025.1.211"
+  themesCdnVersion: "10.2.0"
+  mvcCoreVersion: "2025.1.211"
   platform: aspnet-core
   core: true
   mvc: false
@@ -211,6 +214,8 @@ meta:
     title: ProgressBar
   "*/orgchart":
     title: OrgChart
+  "*otpinput":
+    title: OTP Input
   "*radiogroup":
     title: RadioGroup
   "*rating":
@@ -476,6 +481,8 @@ meta:
     position: 1
   html-helpers/charts:
     title: Charts
+  html-helpers/chartwizard:
+    title: Chart Wizard
   html-helpers/editors/timedurationpicker:
     title: TimeDurationPicker
   html-helpers/editors/imageeditor:
@@ -522,28 +529,37 @@ meta:
     title: TaskBoard
   html-helpers/data-management/grid/performance:
     title: Performance Tips
-    position: 18
+    position: 27
+  html-helpers/data-management/grid/globalization:
+    title: Globalization
+    position: 28
+  html-helpers/data-management/grid/accessibility:
+    title: Accessibility
+    position: 29
+  html-helpers/data-management/grid/troubleshoot:
+    title: Troubleshooting
+    position: 30
   html-helpers/data-management/grid/appearance:
     title: Appearance
-    position: 17
+    position: 4
   html-helpers/data-management/grid/templates:
     title: Templates
-    position: 15
+    position: 22
   html-helpers/data-management/grid/export:
     title: Export
-    position: 14
+    position: 18
   html-helpers/data-management/grid/scrolling:
     title: Scroll Modes
-    position: 12
+    position: 10
   html-helpers/data-management/grid/columns:
     title: Columns
-    position: 11
+    position: 3
   html-helpers/data-management/grid/grouping:
     title: Grouping
-    position: 5
+    position: 7
   html-helpers/data-management/grid/editing:
     title: Editing
-    position: 3
+    position: 5
   html-helpers/data-management/grid:
     title: Grid
   html-helpers/data-management/filter:

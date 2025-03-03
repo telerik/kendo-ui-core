@@ -37,7 +37,13 @@ aspnetcore-browser-refresh.js:329 Refused to connect to 'wss://localhost:.../Tel
 
 ## Solution
 
-To resolve this issue you can add `connect-src ws: http: 'self';` to your CSP meta tag in the `_Layout.cshtml` file:
+To resolve this issue you have two different options:
+
+1. You can disable the functionality from VS:
+
+![Disable](images/csp-browserlink.png)
+
+2. You can add `connect-src ws: http: 'self';` to your CSP meta tag in the `_Layout.cshtml` file:
 
 ```html
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://kendo.cdn.telerik.com https://code.jquery.com/ https://cdn.kendostatic.com https://unpkg.com 'nonce-Telerik-Examples'; style-src 'self' https://kendo.cdn.telerik.com https://unpkg.com; font-src 'self' https://unpkg.com; connect-src ws: http: 'self';" />

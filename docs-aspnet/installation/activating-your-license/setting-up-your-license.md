@@ -54,11 +54,11 @@ If you need to activate {{ site.product }} only in a specific app, then save `te
 
 @[template](/_contentTemplates/licensing-templates.md#license-key-update-whenever)
 
-By default, when you have an active license, the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}) are activated internally. Version 2025.1.227 introduces the `ActivateKendoScripts` method that you can use to activate the Kendo UI scripts manually. Call this method before defining any HtmlHelper {% if site.core %}or TagHelper {% endif %}components. 
+    By default, when you have an active license, the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}) are activated internally. Version 2025.1.227 introduces the `ActivateKendoScripts` method that you can use to activate the Kendo UI scripts manually. Call this method if no HtmlHelper {% if site.core %}or TagHelper {% endif %}components are used on the View. 
 
-```
-    @(Html.Kendo().ActivateKendoScripts())
-```
+    ```
+        @(Html.Kendo().ActivateKendoScripts())
+    ```
 
 ## License Key Updates
 

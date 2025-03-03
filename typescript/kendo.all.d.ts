@@ -10663,7 +10663,7 @@ declare namespace kendo.ui {
 
         addEvent(data: any): void;
         cancelEvent(): void;
-        data(): void;
+        data(): kendo.data.SchedulerEvent[];
         date(): Date;
         date(value?: Date): void;
         destroy(): void;
@@ -25156,7 +25156,7 @@ declare namespace kendo.spreadsheet {
         setDataSource(dataSource: kendo.data.DataSource, columns?: any): void;
         showGridLines(): boolean;
         showGridLines(showGridLines?: boolean): void;
-        toJSON(): void;
+        toJSON(): kendo.ooxml.WorkbookSheet;
         unhideColumn(index: number): void;
         unhideRow(index: number): void;
     }
@@ -25439,7 +25439,7 @@ declare namespace kendo.ooxml {
         rows?: WorkbookSheetRow[] | undefined;
         showGridLines?: boolean | undefined;
         title?: string | undefined;
-        hyperlinks: WorkbookHyperlink[] | undefined;
+        hyperlinks?: WorkbookHyperlink[] | undefined;
     }
 
     interface WorkbookOptions {
@@ -26559,7 +26559,7 @@ interface JQuery {
 
     kendoAvatar(): JQuery;
     kendoAvatar(options: kendo.ui.AvatarOptions): JQuery;
-    data(key: "kendoAvatar"): kendo.ui.Avatar;
+    data(key: "kendoAvatar"): kendo.ui.Avatar | undefined;
 
     kendoBadge(): JQuery;
     kendoBadge(options: kendo.ui.BadgeOptions): JQuery;
@@ -26599,7 +26599,7 @@ interface JQuery {
 
     kendoCheckBox(): JQuery;
     kendoCheckBox(options: kendo.ui.CheckBoxOptions): JQuery;
-    data(key: "kendoCheckBox"): kendo.ui.CheckBox;
+    data(key: "kendoCheckBox"): kendo.ui.CheckBox | undefined;
 
     kendoCheckBoxGroup(): JQuery;
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
@@ -26607,11 +26607,11 @@ interface JQuery {
 
     kendoChip(): JQuery;
     kendoChip(options: kendo.ui.ChipOptions): JQuery;
-    data(key: "kendoChip"): kendo.ui.Chip;
+    data(key: "kendoChip"): kendo.ui.Chip | undefined;
 
     kendoChipList(): JQuery;
     kendoChipList(options: kendo.ui.ChipListOptions): JQuery;
-    data(key: "kendoChipList"): kendo.ui.ChipList;
+    data(key: "kendoChipList"): kendo.ui.ChipList | undefined;
 
     kendoCircularGauge(): JQuery;
     kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
@@ -26683,7 +26683,7 @@ interface JQuery {
 
     kendoDropDownButton(): JQuery;
     kendoDropDownButton(options: kendo.ui.DropDownButtonOptions): JQuery;
-    data(key: "kendoDropDownButton"): kendo.ui.DropDownButton;
+    data(key: "kendoDropDownButton"): kendo.ui.DropDownButton | undefined;
 
     kendoDropDownList(): JQuery;
     kendoDropDownList(options: kendo.ui.DropDownListOptions): JQuery;
@@ -26751,7 +26751,7 @@ interface JQuery {
 
     kendoListView(): JQuery;
     kendoListView(options: kendo.ui.ListViewOptions): JQuery;
-    data(key: "kendoListView"): kendo.ui.ListView;
+    data(key: "kendoListView"): kendo.ui.ListView | undefined;
 
     kendoLoader(): JQuery;
     kendoLoader(options: kendo.ui.LoaderOptions): JQuery;
@@ -26799,7 +26799,7 @@ interface JQuery {
 
     kendoOrgChart(): JQuery;
     kendoOrgChart(options: kendo.ui.OrgChartOptions): JQuery;
-    data(key: "kendoOrgChart"): kendo.ui.OrgChart;
+    data(key: "kendoOrgChart"): kendo.ui.OrgChart | undefined;
 
     kendoPDFViewer(): JQuery;
     kendoPDFViewer(options: kendo.ui.PDFViewerOptions): JQuery;
@@ -26863,7 +26863,7 @@ interface JQuery {
 
     kendoRadioButton(): JQuery;
     kendoRadioButton(options: kendo.ui.RadioButtonOptions): JQuery;
-    data(key: "kendoRadioButton"): kendo.ui.RadioButton;
+    data(key: "kendoRadioButton"): kendo.ui.RadioButton | undefined;
 
     kendoRadioGroup(): JQuery;
     kendoRadioGroup(options: kendo.ui.RadioGroupOptions): JQuery;
@@ -26915,7 +26915,7 @@ interface JQuery {
 
     kendoSplitButton(): JQuery;
     kendoSplitButton(options: kendo.ui.SplitButtonOptions): JQuery;
-    data(key: "kendoSplitButton"): kendo.ui.SplitButton;
+    data(key: "kendoSplitButton"): kendo.ui.SplitButton | undefined;
 
     kendoSplitter(): JQuery;
     kendoSplitter(options: kendo.ui.SplitterOptions): JQuery;
@@ -26959,7 +26959,7 @@ interface JQuery {
 
     kendoTimeDurationPicker(): JQuery;
     kendoTimeDurationPicker(options: kendo.ui.TimeDurationPickerOptions): JQuery;
-    data(key: "kendoTimeDurationPicker"): kendo.ui.TimeDurationPicker;
+    data(key: "kendoTimeDurationPicker"): kendo.ui.TimeDurationPicker | undefined;
 
     kendoTimePicker(): JQuery;
     kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery;

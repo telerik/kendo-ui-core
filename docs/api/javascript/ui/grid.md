@@ -15577,7 +15577,7 @@ If invoked, prevents the save action. In "incell" [editable.mode](/api/javascrip
 
 ### saveChanges
 
-Fired when the user clicks the "save" command button.
+Fired when the user clicks the "Save changes" command button in the toolbar.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
