@@ -44,11 +44,12 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
           <IntroTableAnchor title="FileManager" href="slug:htmlhelpers_filemanager_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="Filter" href="slug:htmlhelpers_filter_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="Grid" href="slug:htmlhelpers_grid_aspnetcore_overview"></IntroTableAnchor>
-          <IntroTableAnchor title="Spreadsheet" href="slug:htmlhelpers_spreadsheet_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ListView" href="slug:htmlhelpers_listview_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="Pager" href="slug:htmlhelpers_pager_aspnet_overview"></IntroTableAnchor>
           <IntroTableAnchor title="PivotGrid" href="slug:overview_pivotgridhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="PivotGridV2" href="slug:overview_pivotgridhelperv2_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="PropertyGrid" href="slug:htmlhelpers_overview_propertygrid"></IntroTableAnchor>
+          <IntroTableAnchor title="Spreadsheet" href="slug:htmlhelpers_spreadsheet_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="TaskBoard" href="slug:htmlhelpers_taskboard_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="TreeList" href="slug:htmlhelpers_treelist_aspnetcore"></IntroTableAnchor>
        </IntroTableSection>
@@ -67,13 +68,13 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
     <IntroTableColumn>
        <IntroTableSection title="Editors">
           <IntroTableAnchor title="AutoComplete" href="slug:htmlhelpers_autocomplete_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="Captcha" href="slug:htmlhelpers_captcha_overview"></IntroTableAnchor>
+          <IntroTableAnchor title="CheckBox" href="slug:htmlhelpers_checkbox_aspnetcore_overview"></IntroTableAnchor>
+          <IntroTableAnchor title="CheckBoxGroup" href="slug:htmlhelpers_checkboxgroup_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="ColorGradient" href="slug:htmlhelpers_overview_colorgradient"></IntroTableAnchor>
           <IntroTableAnchor title="ColorPalette" href="slug:overview_colorpalettehelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ColorPicker" href="slug:overview_colorpickerhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ComboBox" href="slug:htmlhelpers_combobox_aspnetcore"></IntroTableAnchor>
-          <IntroTableAnchor title="Captcha" href="slug:htmlhelpers_captcha_overview"></IntroTableAnchor>
-          <IntroTableAnchor title="CheckBox" href="slug:htmlhelpers_checkbox_aspnetcore_overview"></IntroTableAnchor>
-          <IntroTableAnchor title="CheckBoxGroup" href="slug:htmlhelpers_checkboxgroup_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="DateInput" href="slug:htmlhelpers_dateinput_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="DatePicker" href="slug:htmlhelpers_datepicker_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="DateRangePicker" href="slug:htmlhelpers_daterangepicker_aspnetcore"></IntroTableAnchor>
@@ -81,7 +82,6 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
           <IntroTableAnchor title="DropDownList" href="slug:htmlhelpers_dropdownlist_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="DropDownTree" href="slug:htmlhelpers_dropdowntree_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Editor" href="slug:htmlhelpers_editor_aspnetcore"></IntroTableAnchor>
-          <IntroTableAnchor title="ExpansionPanel" href="slug:htmlhelpers_expansionpanel_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="FlatColorPicker" href="slug:overview_flatcolorpickerhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ImageEditor" href="slug:htmlhelpers_imageeditor_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ListBox" href="slug:htmlhelpers_listbox_aspnetcore"></IntroTableAnchor>
@@ -89,6 +89,7 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
           <IntroTableAnchor title="MultiColumnComboBox" href="slug:htmlhelpers_multicolumncombobox_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="MultiSelect" href="slug:htmlhelpers_multiselect_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="NumericTextBox" href="slug:htmlhelpers_numerictextbox_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="OTP Input" href="slug:overview_otpinputhelper"></IntroTableAnchor>
           <IntroTableAnchor title="RadioButton" href="slug:htmlhelpers_radiobutton_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="RadioGroup" href="slug:htmlhelpers_radiogroup_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="Rating" href="slug:htmlhelpers_rating_aspnetcore_overview"></IntroTableAnchor>
@@ -97,8 +98,8 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
           <IntroTableAnchor title="Switch" href="slug:overview_switchhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="TextArea" href="slug:htmlhelpers_overview_textarea"></IntroTableAnchor>
           <IntroTableAnchor title="TextBox" href="slug:htmlhelpers_overview_textbox"></IntroTableAnchor>
-          <IntroTableAnchor title="TimePicker" href="slug:overview_timepickerhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="TimeDurationPicker" href="slug:htmlhelpers_timedurationpickerhelper_overview"></IntroTableAnchor>
+          <IntroTableAnchor title="TimePicker" href="slug:overview_timepickerhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Upload" href="slug:htmlhelpers_upload_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Validator Demos" href="https://demos.telerik.com/{{ site.platform }}/validator"></IntroTableAnchor>
        </IntroTableSection>
@@ -106,14 +107,20 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
     <IntroTableColumn>
        <IntroTableSection title="Scheduling">
           <IntroTableAnchor title="Calendar" href="slug:htmlhelpers_overview_calendarhelper_aspnetcore"></IntroTableAnchor>
-          <IntroTableAnchor title="MultiViewCalendar" href="slug:overview_multiviewcalendar_htmlhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Gantt" href="slug:htmlhelpers_gantt_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="MultiViewCalendar" href="slug:overview_multiviewcalendar_htmlhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Scheduler" href="slug:htmlhelpers_scheduler_aspnetcore"></IntroTableAnchor>
        </IntroTableSection>
        <IntroTableSection title="Charts">
           <IntroTableAnchor title="Chart" href="slug:htmlhelpers_charts_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="Sparkline" href="slug:overview_sparklineshelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="StockChart" href="slug:overview_stockcharthelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="TreeMap" href="slug:overview_treemaphelper_aspnetcore"></IntroTableAnchor>
+       </IntroTableSection>
+          <IntroTableAnchor title="HeatMap" href="slug:overview_heatmaphelper_aspnetcore"></IntroTableAnchor>
+       </IntroTableSection>
+       <IntroTableSection title="Chart Wizard">
+          <IntroTableAnchor title="Chart Wizard" href="slug:htmlhelpers_overview_chartwizard"></IntroTableAnchor>
        </IntroTableSection>
        <IntroTableSection title="Gauges">
           <IntroTableAnchor title="ArcGauge" href="slug:overview_arcgaugehelper_aspnetcore"></IntroTableAnchor>
@@ -122,7 +129,7 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
           <IntroTableAnchor title="RadialGauge" href="slug:overview_radialgaugehelper_aspnetcore"></IntroTableAnchor>
        </IntroTableSection>
        <IntroTableSection title="Barcodes">
-          <IntroTableAnchor title="Barcode" href="slug:overview_barcodehelper_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="BarCode" href="slug:overview_barcodehelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="QRCode" href="slug:overview_qrcodehelper_aspnetcore"></IntroTableAnchor>
        </IntroTableSection>
        <IntroTableSection title="Diagrams and Maps">
@@ -130,16 +137,27 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
           <IntroTableAnchor title="Map" href="slug:htmlhelpers_map_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="OrgChart" href="slug:htmlhelpers_orgchart_aspnetcore"></IntroTableAnchor>
        </IntroTableSection>
+       <IntroTableSection title="Interactivity and UX">
+          <IntroTableAnchor title="Circular ProgressBar" href="slug:htmlhelpers_circular_progressbar_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="Loader" href="slug:htmlhelpers_loader_aspnetcore_overview"></IntroTableAnchor>
+          <IntroTableAnchor title="ProgressBar" href="slug:htmlhelpers_progressbar_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="SkeletonContainer" href="slug:htmlhelpers_skeletoncontainer_aspnetcore_overview"></IntroTableAnchor>
+          <IntroTableAnchor title="Sortable" href="slug:htmlhelpers_sortable_aspnetcore"></IntroTableAnchor>
+       </IntroTableSection>
     </IntroTableColumn>
     <IntroTableColumn>
        <IntroTableSection title="Layout">
+          <IntroTableAnchor title="Avatar" href="slug:overview_avatarhelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Badge" href="slug:overview_badgehelper_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Cards" href="slug:cards_aspnetmvc6_aspnetmvc"></IntroTableAnchor>
           <IntroTableAnchor title="Dialog" href="slug:overview_dialoghelper_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="DockManager" href="slug:overview_dockmanagerhelper_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="ExpansionPanel" href="slug:htmlhelpers_expansionpanel_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Form" href="slug:htmlhelpers_form_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="GridLayout" href="slug:htmlhelpers_aspnet_gridlayout_overview"></IntroTableAnchor>
           <IntroTableAnchor title="Notification" href="slug:htmlhelpers_notification_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="PopOver" href="slug:htmlhelpers_overview_popover"></IntroTableAnchor>
+          <IntroTableAnchor title="Responsive Panel" href="slug:htmlhelpers_responsivepanel_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Splitter" href="slug:htmlhelpers_splitter_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="StackLayout" href="slug:htmlhelpers_aspnet_stacklayout_overview"></IntroTableAnchor>
           <IntroTableAnchor title="TileLayout" href="slug:htmlhelpers_aspnet_tilelayout_overview"></IntroTableAnchor>
@@ -148,28 +166,25 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
        </IntroTableSection>
        <IntroTableSection title="Navigation">
           <IntroTableAnchor title="ActionSheet" href="slug:htmlhelpers_actionsheet_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="AppBar" href="slug:htmlhelpers_appbar_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="BottomNavigation" href="slug:htmlhelpers_bottomnavigation_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Breadcrumb" href="slug:htmlhelpers_breadcrumb_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="Button" href="slug:htmlhelpers_button_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ButtonGroup" href="slug:htmlhelpers_buttongroup_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="Chip" href="slug:htmlhelpers_chip_aspnetcore_overview"></IntroTableAnchor>
+          <IntroTableAnchor title="ChipList" href="slug:htmlhelpers_chiplist_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="Drawer" href="slug:htmlhelpers_drawer_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="DropDownButton" href="slug:htmlhelpers_dropdownbutton_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="FloatingActionButton" href="slug:htmlhelpers_floatingactionbutton_aspnetcore"></IntroTableAnchor>
-          <IntroTableAnchor title="SplitButton" href="slug:htmlhelpers_splitbutton_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Menu" href="slug:htmlhelpers_menu_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="PanelBar" href="slug:htmlhelpers_panelbar_aspnetcore"></IntroTableAnchor>
+          <IntroTableAnchor title="SplitButton" href="slug:htmlhelpers_splitbutton_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Stepper" href="slug:htmlhelpers_stepper_aspnetcore_overview"></IntroTableAnchor>
           <IntroTableAnchor title="TabStrip" href="slug:htmlhelpers_tabstrip_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Timeline" href="slug:overview_htmlhelpers_timeline_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="ToolBar" href="slug:htmlhelpers_toolbar_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="TreeView" href="slug:htmlhelpers_treeview_aspnetcore"></IntroTableAnchor>
           <IntroTableAnchor title="Wizard" href="slug:htmlhelpers_wizard_aspnetcore_overview"></IntroTableAnchor>
-       </IntroTableSection>
-       <IntroTableSection title="Interactivity and UX">
-          <IntroTableAnchor title="Loader" href="slug:htmlhelpers_loader_aspnetcore_overview"></IntroTableAnchor>
-          <IntroTableAnchor title="ProgressBar" href="slug:htmlhelpers_progressbar_aspnetcore"></IntroTableAnchor>
-          <IntroTableAnchor title="Circular ProgressBar" href="slug:htmlhelpers_circular_progressbar_aspnetcore"></IntroTableAnchor>
-          <IntroTableAnchor title="Sortable" href="slug:htmlhelpers_sortable_aspnetcore"></IntroTableAnchor>
        </IntroTableSection>
     </IntroTableColumn>
     <IntroTableColumn>
