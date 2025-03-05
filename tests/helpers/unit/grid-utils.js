@@ -11,6 +11,40 @@ export function resizeColumn(container, column, from, to) {
     $(document.documentElement).trigger({ type: "mouseup" });
 }
 
+export function generateDataAndColumns(numberOfRows, numberOfColumns, width, hiddenIndex, lockedIndex) {
+    var columns = [];
+    var data = [];
+    var numberOfColumns = 10;
+    var field;
+    var row;
+    var i;
+    var j;
+
+    for (i = 1; i <= numberOfColumns; i++) {
+        field = ("Field" + i);
+        columns.push({
+            field: field,
+            title: field,
+            width: width,
+            hidden: hiddenIndex && i > hiddenIndex,
+            locked: lockedIndex && i > lockedIndex
+        });
+        }
+        for (i = 1; i <= numberOfRows; i++) {
+            row = {};
+            for (j = 1; j <= numberOfColumns; j++) {
+                field = ("Field" + j);
+                row[field] = "R" + i + ":C" + j;
+                }
+                data.push(row);
+        }
+
+        return {
+            data,
+            columns,
+        };
+}
+
 export const largeData = [{
     "ID": 1,
     "col0": "col0",
