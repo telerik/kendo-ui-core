@@ -11,9 +11,9 @@ position: 2
 
 Thank you for choosing Progress<sup>®</sup> Kendo UI for jQuery!  
 
-Kendo UI is a comprehensive HTML5 user interface framework for building interactive and high-performance websites and applications. It comes with a library of 110+ UI components, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library.
+Kendo UI is a comprehensive HTML5 user interface framework for building interactive and high-performance websites and applications. It comes with a library of 120+ UI components, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library.
 
-Kendo UI for jQuery provides AngularJS and Bootstrap integration and is also distributed as part of several product units that you can choose from depending on your project requirements. The suite includes components for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
+Kendo UI for jQuery provides complete UI customization which include Bootstrap, Material, Fluent, and more Sass-based themes from the [Progress Design System Kit](https://www.telerik.com/design-system/docs/themes/get-started/introduction/), and is distributed as part of several product units that you can choose from depending on your project requirements. The suite contains components for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
 To read more about the benefits of using Kendo UI for jQuery, visit the [product overview page](http://www.telerik.com/kendo-jquery-ui).
 
@@ -38,8 +38,7 @@ The following table lists the Kendo UI tools and framework utilities that are av
 | [Excel Export Overview & Demos]({% slug introduction_excelexport_kendoui %}) | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Globalization Overview]({% slug overview_kendoui_globalization %}) & [Demos](https://demos.telerik.com/kendo-ui/globalization/index)| <span class="tag-success">Yes</span>   | <span class="tag-success">Yes</span> |
 | [Localization Overview & Demos]({% slug overview_localization_kendoui %}) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
-| [AngularJS Integration Overview]({% slug angularjs_integration_directives %}) & [Demos](https://demos.telerik.com/kendo-ui/integration/index) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
-| [Bootstrap Integration Overview & Demos]({% slug sassbasedthemes_kendoui %}) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| [Sass Themes Overview]({% slug sassbasedthemes_kendoui %}) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [MVVM Integration Overview]({% slug overview_mvvmpattern_kendoui %}) & [Demos](https://demos.telerik.com/kendo-ui/mvvm/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [PDF Export Overview]({% slug pdfderawingexport_drawingapi %}) & [Demos](https://demos.telerik.com/kendo-ui/pdf-export/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %}) & [Demos](https://demos.telerik.com/kendo-ui/spa/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
@@ -49,7 +48,7 @@ The following table lists the Kendo UI tools and framework utilities that are av
 
 ## Flavors
 
-The Kendo UI for jQuery components are integrated with the Vue JavaScript framework, provide server-side solutions for the ASP.NET MVC and Core frameworks, deliver wrappers for the JSP and PHP technologies, and also utilize the RadSpreadProcessing .NET library to enhance the capabilities of the Spreadsheet component. Part of Kendo UI for jQuery also comes in an open-source Kendo UI bundle.   
+The Kendo UI for jQuery components are integrated with jQuery/JavaScript, provide server-side solutions for the ASP.NET MVC and Core frameworks, and also utilize the RadSpreadProcessing .NET library to enhance the capabilities of the Spreadsheet component. Part of Kendo UI for jQuery also comes in an open-source Kendo UI bundle.   
 
 ### Progress<sup>®</sup> KendoReact
 
@@ -61,7 +60,7 @@ The Kendo UI for jQuery components are integrated with the Vue JavaScript framew
 
 ### Progress<sup>®</sup> Kendo UI for Angular  
 
-[Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui/components/) delivers Kendo UI components natively developed from the ground up and intended for the Angular framework.
+[Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui/components/) is a JavaScript UI library designed for the Angular framework written in TypeScript.
 
 * [Docs & Demos](https://www.telerik.com/kendo-angular-ui/components/)
 * [Get a License](https://www.telerik.com/purchase/kendo-ui)
@@ -69,7 +68,7 @@ The Kendo UI for jQuery components are integrated with the Vue JavaScript framew
 
 ### Progress<sup>®</sup> Kendo UI for Vue
 
-Kendo UI for Vue comes in two flavors: [native Kendo UI for Vue](https://www.telerik.com/kendo-vue-ui/components/introduction/) components and [Kendo UI Wrappers for Vue](https://docs.telerik.com/kendo-ui-wrappers-vue/introduction). These flavors provide an easy way to use and configure Kendo UI components or Kendo UI components in your Vue.js application.
+[Kendo UI for Vue](https://www.telerik.com/kendo-vue-ui/components/introduction/) native components provide an easy way to use and configure Kendo UI components in your Vue.js application.
 
 * [Docs & Demos](https://www.telerik.com/kendo-vue-ui/components/)
 * [Get a License](https://www.telerik.com/purchase/kendo-ui)
