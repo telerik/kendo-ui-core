@@ -167,6 +167,13 @@ excluded-files:
 - "**/html-helpers/pdf/pdfviewer/razor-page.md"
 - "**/html-helpers/data-management/listview/binding/razor-page.md"
 - "**/html-helpers/media/mediaplayer/razor-page.md"
+- "**/html-helpers/charts/sparkline/razor-page.md"
+- "**/html-helpers/diagrams-and-maps/orgchart/binding/razor-page.md"
+- "**/html-helpers/data-management/pager/razor-page.md"
+- "**/html-helpers/pdf/pdfviewer/razor-page.md"
+- "**/html-helpers/data-management/pivotgrid/data-binding/razor-page.md"
+- "**/html-helpers/navigation/timeline/razor-pages.md"
+- "**/html-helpers/navigation/treeview/razor-page.md"
 - "**/html-helpers/overview-taghelpers.md"
 
 meta:
