@@ -8,6 +8,15 @@ tags: spreadsheet, converting, workbook, worksheet, telerik.web.spreadsheet, dpl
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>SpreadSheet for Progress® Telerik® UI for {{ site.framework }}</td>
+ </tr>
+</table>
+
 ## Description
 
 I have implemented a [Spreadsheet Server Export](https://demos.telerik.com/aspnet-core/spreadsheet/server-side-import-export) however I need to convert the exported Workbook to be usable with your [Document Processing Library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/working-with-workbooks/working-with-workbooks-what-is-workbook) so I can modify it further. How can I achieve this?

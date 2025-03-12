@@ -4,17 +4,16 @@ description: Learn how to implement tooltips for both the dropdown list and its 
 type: how-to
 page_title: How to Implement Tooltips in DropDownList Items in a Grid PopUp Editor - Kendo UI DropDownList
 slug: how-to-add-tooltips-to-dropdownlist-items
-tags: kendo, ui, dropdownlist, tooltip, jquery, event handling, grid. popup
+tags: kendo, ui, dropdownlist, tooltip, jquery, event handling, grid, popup
 res_type: kb
 ticketid: 1655113
 ---
 
 ## Environment
 
-| Product | Kendo UI DropDownList |
-| Product | Kendo UI Grid |
+| Product | Version |
 | --- | --- |
-| Version | 2024.2.514 |
+| Kendo UI Grid | 2024.2.514 |
 
 ## Description
 

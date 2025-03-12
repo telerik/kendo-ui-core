@@ -8,6 +8,15 @@ tags: kendo ui, daterangepicker, custom behavior, date selection
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® DateRangePicker for jQuery</td>
+ </tr>
+</table>
+
 ## Description
 When using the [DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker) control, selecting an end date updates the start date field instead of the end date field. The goal is to ensure that when either the start or end date is selected, the corresponding field updates accurately, providing a seamless user experience.
 

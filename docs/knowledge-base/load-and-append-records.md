@@ -10,6 +10,15 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
 > **Deprecated** The functionality is available out of the box. Check [`endless scrolling`]({% slug endless_scrolling_kendoui_grid_widget %})
 
 The following example demonstrates how to load more records when scrolling the Grid rows.

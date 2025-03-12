@@ -9,10 +9,9 @@ res_type: kb
 ---
 
 ## Environment
-| Property | Value |
+| Product | Version |
 |---|---|
-| Product | Progress® Kendo UI® Grid for ASP.NET MVC |
-| Version | 2022.2.621 |
+| Progress® Kendo UI® Grid for ASP.NET MVC | 2022.2.621 |
 
 ## Description
 I want to implement a custom pagination dropdown in the footer of a Kendo UI Grid for ASP.NET MVC that loads all pages by default.

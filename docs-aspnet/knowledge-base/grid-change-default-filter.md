@@ -8,6 +8,15 @@ tags: grid, asp.net core, search, filter, default, contains, equal to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Grid for Progress® Telerik® UI for {{ site.framework }}</td>
+ </tr>
+</table>
+
 ## Description
 
 When selecting a search filter in the Grid, it defaults to 'Equal To'. I want to change the default to 'Contains'. This KB article also answers the following questions:

@@ -10,10 +10,9 @@ res_type: kb
 
 ## Environment
 
-| Property | Value |
+| Product | Version |
 | --- | --- |
-| Product | Progress® Kendo UI® TreeView for ASP.NET MVC |
-| Version | 2023.2.606 |
+| Progress® Kendo UI® TreeView for ASP.NET MVC | 2023.2.606 |
 
 ## Description
 

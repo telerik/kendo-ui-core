@@ -12,8 +12,8 @@ ticketid: 1661761
 ## Environment
 
 | Product | Version |
-| 2024.3.806 | --- |
-| Kendo UI for jQuery | Current |
+| --- | --- |
+| Kendo UI for jQuery | 2024.3.806 |
 
 ## Description
 

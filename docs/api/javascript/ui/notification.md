@@ -442,7 +442,7 @@ of each member of the collection, returned by the `getNotifications()` method. I
 
         // remove the two messages from the DOM
         elements.each(function(){
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         });
 
         messageCount++;

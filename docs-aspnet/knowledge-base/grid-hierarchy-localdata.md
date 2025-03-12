@@ -9,6 +9,15 @@ res_type: kb
 component: grid
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Grid for Progress® Telerik® UI for {{ site.framework }}</td>
+ </tr>
+</table>
+
 ## Description
 
 I want to bind the parent Grid to a model that contains a list of elements and each of these elements has a list of child records and I want a Details Grid to bind to that list. How can I achieve this?

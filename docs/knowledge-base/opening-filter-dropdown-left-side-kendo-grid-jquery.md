@@ -9,9 +9,9 @@ res_type: kb
 ---
 
 ## Environment
-| Property | Value |
+| Product | Version |
 | --- | --- |
-| Product | Grid for Progress® Kendo UI® |
+| Grid for Progress® Kendo UI® | Current |
 
 ## Description
 I want to open the filter dropdown of a Kendo Grid to the left side using jQuery. How can I achieve this?

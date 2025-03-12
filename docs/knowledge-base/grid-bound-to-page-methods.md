@@ -10,6 +10,15 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
 Your project might require the remote CRUD (Create, Read, Update, Destroy) data operations to use a Grid bound to web methods.
 
 To see the example on how to achieve this behavior, refer to [this project](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-page-methods-crud). It is available in the [GitHub repository for Kendo UI examples that use ASP.NET Web technologies](https://github.com/telerik/kendo-examples-asp-net).

@@ -125,7 +125,7 @@ navigation:
         title: "System Requirements"
         position: 1
      "installation/installation-options":
-        title: "Instalation Options"
+        title: "Installation Options"
         position: 2
      "installation/activating-your-license":
         title: "Activating Your License"
@@ -137,7 +137,7 @@ navigation:
         title: "System Requirements"
         position: 1
      "installation-mvc/installation-options":
-        title: "Instalation Options"
+        title: "Installation Options"
         position: 2
      "installation-mvc/activating-your-license":
         title: "Activating Your License"
