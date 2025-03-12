@@ -526,10 +526,16 @@ The following values are available for the themeColor:
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog({
-      actions: ["Maximize"],
-      title: "Customer details"
-    });
+      $("#dialog").kendoDialog({
+        themeColor: "dark",
+        content:"This is a dark-themed Kendo Dialog",
+        actions: [
+          {
+            text: "OK",
+          },
+        ],
+        title: "Customer details",
+      });
     </script>
 
 ### title `String|Boolean` *default: ""*

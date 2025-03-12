@@ -10,6 +10,15 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
 The following examples demonstrate how to add cascading DropDownList editors to a Grid.
 
 > The approach is supported only in the `inline` and `popup` editing mode.

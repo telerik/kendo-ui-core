@@ -8,6 +8,15 @@ tags: kendo, ui, grid, disable, navigation, jquery
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
 ## Description
 
 In some cases, it's necessary to disable a [Kendo UI for jQuery Grid](https://demos.telerik.com/kendo-ui/grid/index) along with its navigation and selection capabilities. This might be required to prevent user interaction with the grid under certain conditions. The goal is to make the grid appear greyed out and non-operable, ensuring that items cannot be selected or navigated using the keyboard.

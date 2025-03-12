@@ -10,10 +10,9 @@ res_type: kb
 
 ## Environment
 
-| Property | Value |
+| Product | Version |
 |---|---|
-| Product | Grid for Progress® Kendo UI® |
-| Version | 2023.3.1114 |
+| Grid for Progress® Kendo UI® | 2023.3.1114 |
 
 ## Description
 

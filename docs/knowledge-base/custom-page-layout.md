@@ -10,6 +10,15 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
 > The example used to demonstrate how to scale the Grid and add a header and footer by using Drawing API shapes. This functionality is now obsolete. For more information,
 refer to the article on [PDF export of a page template]({% slug exporting_pdf_kendoui_grid_widget %}#page-template). The built-in method also guarantees that you get a uniform scale factor across all pages.
 

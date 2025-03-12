@@ -8,10 +8,9 @@ tags: grid, export, excel, group paging
 res_type: kb
 ---
 ## Environment
-| Property | Value |
+| Product | Version |
 | --- | --- |
-| Product | Grid for Progress Kendo UI |
-| Version | 2019.3.917 |
+| Grid for Progress Kendo UI | 2019.3.917 |
 
 ## Description
 

@@ -8,6 +8,15 @@ tags: aspnet, core, dotnet-core, sample, project, repl, memory, database, in, en
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Telerik® UI for {{ site.framework }}</td>
+ </tr>
+</table>
+
 ## Description
 
 Providing a runnable {{ site.framework }} application plays a crucial role during support communication. However, more often than not, isolating a sample by stripping out the database layer inevitably opposes difficulties depending on the application's proportions

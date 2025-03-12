@@ -9,6 +9,15 @@ res_type: kb
 ticketid: 1674797
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® DateTimePicker for jQuery</td>
+ </tr>
+</table>
+
 ## Description
 
 When using two [Kendo UI for jQuery DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker) components for start and end date selections, it's necessary to update the minimum selectable date and time of the end date picker based on the selection in the start date picker. This ensures that the end date cannot precede the start date. 

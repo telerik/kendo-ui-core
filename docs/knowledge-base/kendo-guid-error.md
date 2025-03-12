@@ -8,6 +8,15 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® for jQuery</td>
+ </tr>
+</table>
+
 ## Description
 
 I am getting the following error when I try to initialize a component or when I try to call the `kendo.guid()` method. Why?

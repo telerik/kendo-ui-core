@@ -10,6 +10,15 @@ slug: howto_persist_row_selection_paging_sorting_filtering_grid
 previous_url: /controls/data-management/grid/how-to/Selection/persist-row-selection-while-paging
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress® Kendo UI® Grid for jQuery</td>
+ </tr>
+</table>
+
 > * As of the 2017 R2 release, persisting the selection in the Grid is available out of the box. For more information, refer to the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property.
 > * The suggested approach in this article requires you to define an `ID` field in `schema.model`.
 
