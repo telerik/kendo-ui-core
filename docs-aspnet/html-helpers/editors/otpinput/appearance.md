@@ -12,10 +12,9 @@ In this article, you will find information about the styling options and renderi
 
 For a complete example, refer to the [Appearance Demo of the OTPInput](https://demos.telerik.com/{{ site.platform }}/otpinput/appearance).
 
-
 ## Options
 
-The Kendo UI OTPInput supports the following styling options:
+The OTPInput supports the following styling options:
 
 - [`Size()`](#size)—Configures the overall size of the component.
 - [`FillMode()`](#fillmode)—Defines how the color is applied to the OTPInput.
@@ -42,14 +41,13 @@ The default option is `Medium`.
 {% if site.core %}
 ```TagHelper
     <kendo-otpinput name="otpinput" 
-                    size="ComponentSize.Large"
-                    items="5">
+        size="ComponentSize.Large"
+        items="5">
     </kendo-otpinput>
 ```
 {% endif %}
 ```Html
-    <span class="k-input k-otp-input k-input-lg">
-    </span>
+    <span class="k-input k-otp-input k-input-lg"></span>
 ```
 
 ### FillMode
@@ -65,7 +63,7 @@ The following options are available for the `FillMode` configuration:
 - `Clear`
 - `None`
 
-The default Button fill mode is `Solid`.
+The default OTPInput fill mode is `Solid`.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()
@@ -77,20 +75,18 @@ The default Button fill mode is `Solid`.
 {% if site.core %}
 ```TagHelper
     <kendo-otpinput name="otpinput" 
-                    fill-mode="FillMode.Outline"
-                    items="5">
+        fill-mode="FillMode.Outline"
+        items="5">
     </kendo-otpinput>
 ```
 {% endif %}
-
 ```Html
-    <span class="k-otp-input k-input k-input-outline">
-    </span>
+    <span class="k-otp-input k-input k-input-outline"></span>
 ```
 
 ### Rounded
 
-The border radius of the Button can be customized through the `Rounded()` method.
+The border radius of the component can be customized through the `Rounded()` method.
 
 The following values are available for the `Rounded` option:
 
@@ -112,22 +108,17 @@ The default option is `Medium`.
 {% if site.core %}
 ```TagHelper
     <kendo-otpinput name="otpinput" 
-                    rounded="Rounded.Full"
-                    items="5">
+        rounded="Rounded.Full"
+        items="5">
     </kendo-otpinput>
 ```
 {% endif %}
-
 ```Html
-    <span class="k-input k-otp-input k-rounded-full">
-    </span>
+    <span class="k-input k-otp-input k-rounded-full"></span>
 ```
-
-@[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 
 ## See Also
 
-* [Components Appearance Overview]({% slug components_rendering_overview %})
 * [Appearance of the OTPInput for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/otpinput/appearance)
 * [Server-Side API of the OTPInput HtmlHelper](/api/otpinput)
 {% if site.core %}

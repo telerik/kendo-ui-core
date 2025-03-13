@@ -6,7 +6,7 @@ slug: overview_otpinputhelper
 position: 0
 ---
 
-# {{ site.product }} OTPInput Overview
+# {{ site.framework }} OTPInput Overview
 
 {% if site.core %}
 The Telerik UI OTPInput TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI OTPInput widget.
@@ -15,6 +15,11 @@ The Telerik UI OTPInput HtmlHelper for {{ site.framework }} is a server-side wra
 {% endif %}
 
 The OTPInput is a UI component that allows the user to enter a one-time password (OTP) during multi-factor authentication. Its sole purpose is to strengthen applications in terms of security while offering a seamless user experience during user interaction.
+
+* [Demo page for the OTPInput HtmlHelper](https://demos.telerik.com/{{ site.platform }}/otpinput/index)
+{% if site.core %}
+* [Demo page for the OTPInput TagHelper](https://demos.telerik.com/{{ site.platform }}/otpinput/index)
+{% endif %}
 
 ## Functionality and Features
 

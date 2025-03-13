@@ -30,8 +30,8 @@ The following example demonstrates how to configure the most appropriate on-scre
     @addTagHelper *, Kendo.Mvc
 
     <kendo-otpinput name="otp" 
-                    items="5"
-                    input-mode="text">
+      items="5"
+      input-mode="text">
     </kendo-otpinput>
 ```
 {% endif %}

@@ -25,7 +25,6 @@ The below example demonstrates how to add a separator as a string.
             .Separator("-")
     )
 ```
-
 {% if site.core %}
 ```TagHelper
      <kendo-otpinput name="otp" separator="-">
@@ -51,7 +50,6 @@ The next example shows how to add a separator in the form of a function handler 
             .SeparatorHandler("separatorHandler")
     )
 ```
-
 {% if site.core %}
 ```TagHelper
      <kendo-otpinput name="otp" separator-handler="separatorHandler">
@@ -63,7 +61,6 @@ The next example shows how to add a separator in the form of a function handler 
      </kendo-otpinput>
 ```
 {% endif%}
-
 ```JavaScript
    <script>
         function separatorHandler() {

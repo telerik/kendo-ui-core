@@ -984,6 +984,7 @@ The following example demonstrates the basic configuration for the Spreadsheet c
 | [Disabled Cells]({% slug htmlhelpers_spreadsheet_disabled_cells_aspnetcore %}) | You can control the enabled and disabled state of the cells. |
 | [Validation]({% slug htmlhelpers_spreadsheet_validation_aspnetcore %}) | The Spreadsheet allows you to validate if the user-provided input meets the expected requirements. |
 | [Custom Cell Editors]({% slug htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore %}) | The component supports custom cell editors that aids users enter correct values with ease.  |
+| [Toolbar]({% slug spreadsheet_toolbar_aspnetcore %}) | The Spreadsheet component provides the means to customize its toolbar. |
 
 ## Next Steps
 

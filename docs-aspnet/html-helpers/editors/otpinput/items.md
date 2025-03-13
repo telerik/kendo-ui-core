@@ -8,7 +8,9 @@ position: 5
 
 # Items
 
-In this article, you will find information about the different ways to add items within the boundaries of the {{ site.product }} OTPInput items. The option accepts either an:
+In this article, you will find information about the different ways to add items within the boundaries of the {{ site.product }} OTPInput items. 
+
+The option accepts either an:
 
 * Numerical value
 * Action delegate
@@ -17,11 +19,10 @@ The below example demonstrates how to configure the items by passing a number.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()
-            .Name("otp")
-            .Items(5)
+        .Name("otp")
+        .Items(5)
     )
 ```
-
 {% if site.core %}
 ```TagHelper
      <kendo-otpinput name="otp" items="5">
@@ -29,28 +30,26 @@ The below example demonstrates how to configure the items by passing a number.
 ```
 {% endif%}
 
-
 The next example shows how to to configure the items by passing an Action delegate.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()
-            .Name("otp")
-            .Items(items => {
-                items.Add().GroupLength(3);
-                items.Add().GroupLength(2);
-                items.Add().GroupLength(3);
-            })
+        .Name("otp")
+        .Items(items => {
+            items.Add().GroupLength(3);
+            items.Add().GroupLength(2);
+            items.Add().GroupLength(3);
+        })
     )
 ```
-
 {% if site.core %}
 ```TagHelper
      <kendo-otpinput name="otp">
-            <otpinput-items>
-                <item group-length="3" />
-                <item group-length="2" />
-                <item group-length="3" />
-            </otpinput-items>
+        <otpinput-items>
+            <item group-length="3" />
+            <item group-length="2" />
+            <item group-length="3" />
+        </otpinput-items>
      </kendo-otpinput>
 ```
 {% endif%}
