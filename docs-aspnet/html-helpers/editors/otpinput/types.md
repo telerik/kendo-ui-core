@@ -8,11 +8,13 @@ position: 6
 
 # Types
 
-In this article, you will find information about the different ways to configure the type for the {{ site.product }} OTPInput items. The available types are:
+In this article, you will find information about the different ways to configure the type for the {{ site.product }} OTPInput items. 
+
+The available types are:
 
 * `Number`&mdash;Allows typing only numerical characters.
 * `Text`&mdash;Allows typing characters of a different nature.
-* `Password`&mdash;Behaves like a input element of type [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password).
+* `Password`&mdash;Behaves like a input element of type <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password" target="_blank">password</a>.
 
 The below example demonstrates how to configure the `Type()` configuration of the component.
 
@@ -26,8 +28,8 @@ The below example demonstrates how to configure the `Type()` configuration of th
 {% if site.core %}
 ```TagHelper
     <kendo-otpinput name="otp"
-                    items="5"
-                    type="OTPType.Number">
+        items="5"
+        type="OTPType.Number">
     </kendo-otpinput>
 ```
 {% endif %}

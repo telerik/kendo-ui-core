@@ -127,7 +127,6 @@ The OTPInput components allows you to add a separator between each of the establ
     </div>
 ```
 {% endif %}
-
 ```JavaScript
     <script>
         function separatorHandler(e) {
@@ -179,7 +178,6 @@ The OTPInput component provides a convenient event for implementing your desired
     </div>
 ```
 {% endif %}
-
 ```JavaScript
     <script>
        function onChange(e) {
