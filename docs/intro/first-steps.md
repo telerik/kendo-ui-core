@@ -253,7 +253,7 @@ The runnable example below demonstrates the final version of the page that you w
 
 ## 6. Add Your License File
 
-Using any Kendo UI for jQuery assets from the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}), [Kendo UI NPM]({% slug kendoui_npm_packages_kendoui_installation %}) or the downloaded Kendo UI trial versions requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message]({% slug activation-error-warnings %}) in the browser's console.
+Using any Kendo UI for jQuery assets from the [Kendo UI CDN]({% slug kendoui_cdn_services_installation %}), [Kendo UI NPM]({% slug kendoui_npm_packages_kendoui_installation %}) requires you to add a Kendo UI for jQuery license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message]({% slug activation-error-warnings %}) in the browser's console.
 
 To generate your license file and add it to your application, follow the instructions in the [Licensing Overview]({% slug licensing-overview %}) article.
 

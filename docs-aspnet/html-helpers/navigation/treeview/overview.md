@@ -265,6 +265,7 @@ The following example demonstrates how to configure the TreeView to bind to remo
 * [Basic Usage of the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/basic-usage)
 {% if site.core %}
 * [Basic Usage of the TreeView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
+* [TreeView in Razor Pages]({% slug htmlhelpers_pager_razorpage_aspnetcore %})
 {% endif %}
 
 ## See Also

@@ -61,7 +61,7 @@ npm install -save webpack webpack-cli webpack-dev-server
 ### 3. Install the Kendo NPM Package
 
 The commercial distribution NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry. 
-The following command will install the commercial distribution package:
+The following command will install the distribution package:
 ```
   npm install --save @progress/kendo-ui
 ```

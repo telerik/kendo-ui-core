@@ -1,7 +1,7 @@
 ---
 title:  Razor Pages
 page_title: Razor Pages
-description: "An example on how to configure the Telerik UI Wizard component for {{ site.framework }} in a Razor Pages."
+description: "Learn how to use the Telerik UI Wizard component for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_wizard_razorpage_aspnetcore
 position: 6
 ---
@@ -395,5 +395,8 @@ See the implementation details in the example below, where the JSON errors are a
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [Wizard Overview]({% slug htmlhelpers_wizard_aspnetcore_overview %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Wizard](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard)
+* [Server-Side HtmlHelper API of the Wizard](/api/wizard)
+* [Server-Side TagHelper API of the Wizard](/api/taghelpers/wizard)
+* [Knowledge Base Section](/knowledge-base)

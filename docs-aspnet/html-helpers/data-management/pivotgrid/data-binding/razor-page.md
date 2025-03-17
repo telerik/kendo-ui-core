@@ -16,9 +16,9 @@ This article describes how to configure the PivotGrid component in a Razor Pages
 
 ## Getting Started
 
-The PivotGrid component provides a convenient integration with the Grid and DataSource. This example will demonstrate how to configure them in a Razor Pages scenario so that the PivotGrid appear at the top of the Grid.
+The following example demonstrates how to configure the PivotGrid in a Razor Pages scenario and bind it to a remote data collection.
 
-1. Create the Grid, DataSource and PivotGrid definitions.
+1. Define the PivotGrid and specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
     ```HtmlHelper_Index.cshtml
         @page
@@ -68,38 +68,40 @@ The PivotGrid component provides a convenient integration with the Grid and Data
         @using Kendo.Mvc.UI
 
         <div class="k-pivotgrid-wrapper">
-            <kendo-pivotdatasource type=@(PivotDataSourceType.Ajax) name="pivotSource">
-                <columns>
-                    <pivot-datasource-column name="Country" expand="true"></pivot-datasource-column>
-                    <pivot-datasource-column name="CompanyName"></pivot-datasource-column>
-                </columns>
-                <rows>
-                    <row name="ContactTitle" expand="true"></row>
-                </rows>
-                <schema type="json">
-                    <cube>
-                        <dimensions>
-                            <dimension name="ContactName" caption="All Contact" />
-                            <dimension name="CompanyName" caption="All Companies" />
-                            <dimension name="Country" caption="All Countries" />
-                            <dimension name="ContactTitle" caption="All Titles" />
-                        </dimensions>
-                        <measures>
-                            <measure name="Contacts Count" field="CustomerID" aggregate="count" />
-                        </measures>
-                    </cube>
-                </schema>
-                <measures values='new string[] {"Contacts Count"}'></measures>
-                <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken" datatype="json" content-type="application/json" type="POST" />
-                </transport>
-            </kendo-pivotdatasource>
-        
-            <kendo-pivotconfigurator name="configurator" datasource-id="pivotSource" filterable="true" height="570">
-            </kendo-pivotconfigurator>
-        
-            <kendo-pivotgrid name="pivotgrid" column-width="120" datasource-id="pivotSource" filterable="true" height="570">
-            </kendo-pivotgrid>
+            <kendo-pivotdatasource type="PivotDataSourceType.Custom" name="pivotSource">
+        <columns>
+            <pivot-datasource-column name="Country" expand="true"></pivot-datasource-column>
+            <pivot-datasource-column name="CompanyName"></pivot-datasource-column>
+        </columns>
+        <rows>
+            <row name="ContactTitle" expand="true"></row>
+        </rows>
+        <!-- Add configuration for "data", "total", and "errors" if the DataSource type is "aspnetmvc-ajax" -->
+        <schema data="Data" Total="Total" Errors="Errors"> 
+            <cube>
+                <dimensions>
+                    <dimension name="ContactName" caption="All Contact" />
+                    <dimension name="CompanyName" caption="All Companies" />
+                    <dimension name="Country" caption="All Countries" />
+                    <dimension name="ContactTitle" caption="All Titles" />
+                </dimensions>
+                <measures>
+                    <measure name="Contacts Count" field="CustomerID" aggregate="count" />
+                </measures>
+            </cube>
+        </schema>
+        <measures values='new string[] {"Contacts Count"}'></measures>
+        <transport>
+            <!-- Set the "content-type", so the request is sent in the expected format. -->
+            <read url="/Index?handler=Read" datatype="json" data="forgeryToken" content-type="application/x-www-form-urlencoded" type="POST" />
+        </transport>
+    </kendo-pivotdatasource>
+
+    <kendo-pivotconfigurator name="configurator" datasource-id="pivotSource" filterable="true" height="570">
+    </kendo-pivotconfigurator>
+
+    <kendo-pivotgrid name="pivotgrid" column-width="120" datasource-id="pivotSource" filterable="true" height="570">
+    </kendo-pivotgrid>
         </div>
     ```
     

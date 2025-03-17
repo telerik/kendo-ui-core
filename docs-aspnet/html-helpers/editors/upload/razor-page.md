@@ -1,7 +1,7 @@
 ---
 title: Razor Pages
 page_title: Razor Pages
-description: "An example on how to configure the Telerik UI Upload component for {{ site.framework }} in a Razor Page."
+description: "Learn how to use the Telerik UI Upload component for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_upload_razorpage_aspnetcore
 position: 12
 ---
@@ -118,5 +118,8 @@ For the complete project, refer to the [Upload in Razor Pages example](https://g
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [Upload Overview]({% slug htmlhelpers_upload_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Server-Side HtmlHelper API of the Upload](/api/upload)
+* [Server-Side TagHelper API of the Upload](/api/taghelpers/upload)
+* [Knowledge Base Section](/knowledge-base)

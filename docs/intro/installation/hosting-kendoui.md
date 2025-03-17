@@ -8,9 +8,9 @@ position: 20
 
 ## Downloading the Kendo UI Bundles
 
-You can download the commercial Kendo UI for jQuery bundles by accessing your Telerik account. 
+You can download the Kendo UI for jQuery bundles by accessing your Telerik account. 
 
-To download the commercial distribution bundles: 
+To download the distribution bundles: 
 
 1. Go to [https://www.telerik.com/download/kendo-ui](https://www.telerik.com/download/kendo-ui) and log in with your credentials.
 1. Navigate to the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account.

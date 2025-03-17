@@ -25,7 +25,6 @@ Progress maintains the Telerik NuGet Feed for registered users and all Kendo UI 
 The Telerik NuGet Feed provides the following Kendo UI for jQuery packages:
 
 * `KendoUIProfessional`&mdash;The commercial Kendo UI for jQuery version.
-* `KendoUIProfessional.Trial`&mdash;The trial Kendo UI for jQuery version.
 * `KendoUICore`&mdash;The open-source Kendo UI distribution which contains only the open-sourced components.
 
 ## 2. Register the Feed on Your System
