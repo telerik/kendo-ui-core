@@ -32,6 +32,8 @@ The `Telerik.UI.for.AspNet.Mvc5` NuGet package [depends on the `Telerik.Licensin
 
 Follow the steps below for [automatic](#automatic-installation) or [manual](#manual-installation) license key installation in your local development environment. To build {{ site.product_short }} apps in a CI/CD environment, [set up a Telerik license key in CI/CD]({%slug deployment_license_key_aspnetcore%}).
 
+>The Telerik UI NuGet package (therefore, the Kendo.Mvc.dll that comes with the package) must be the same version as the Kendo UI script files referenced in the project's Layout file. 
+
 An [invalid or missing license key results in app build warnings]({%slug troubleshooting-license-key-errors%}) and watermarks in the application UI.
 
 >warning The license key file is personal and confidential. Do not commit this file to source control and do not save it to a publicly accessible location!
@@ -72,6 +74,22 @@ The new license key includes information about all previous purchases. The downl
 * If you used [automatic license key installation](#automatic-installation), then open the tool that you used to download and install the license key file. You can also update the license key file by using the [manual steps above](#manual-installation).
 * If you used the [manual license key installation](#manual-installation), then repeat the same manual steps.
 * To [update your license key in CI/CD environments]({%slug deployment_license_key_aspnetcore%}), get your new license key and update the environment variable value.
+
+{% if site.mvc %}
+## Referencing the Telerik.Licensing.Runtime.dll Assembly
+
+The activation aproach described here is an alternative to the manual and automatic license activation explained in the sections above. 
+
+If you don't want to install the `Telerik.Licensing` NuGet package, you can activate the license by following the steps below:
+
+1. Create an empty file named `TelerikLicense.cs` in your project's root folder.
+2. Copy the Telerik UI for ASP.NET MVC key available to you on the [License Keys page](https://www.telerik.com/account/your-licenses/license-keys).
+3. Paste the copied key into the `TelerikLicense.cs` you have created in step 1. 
+4. Go to the product's [Download Page](https://www.telerik.com/account/downloads/product-download?product=KENDOUIMVC) and download the `telerik.ui.for.aspnetmvc.[Version].commercial.zip` bundle. 
+5. Open the downloaded archive and navigate to the `\licensing\binaries` folder, which contains the `Telerik.Licensing.Runtime.dll` assembly. 
+6. Extract the `Telerik.Licensing.Runtime.dll` file, copy it to your project's `bin` folder, and then add a reference to it in Visual Studio. 
+
+{% endif %}
 
 ## Next Steps
 
