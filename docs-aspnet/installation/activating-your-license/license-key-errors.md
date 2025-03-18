@@ -128,6 +128,12 @@ If you experience the error *"The located assembly's manifest definition does no
 ```
 {% endif %}
 
+### Your Deployed Application Shows a Banner and a Watermark
+
+Ensure that you have set up an environment variable by following the steps from the [Use License Keys in CI/CD]({%slug deployment_license_key_aspnetcore%}) article.
+
+Alternatively, if you have included the telerik-license.txt file into the project and the project is under source control, add the license file under source control as well.
+
 ## See Also
 
 * [Download and Install License Key]({%slug installation_license_key_aspnetcore%})
