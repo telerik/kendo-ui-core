@@ -305,6 +305,15 @@ Refer to the example below for a list of the supported properties.
 
                 // handle event
              }
+           },
+           {
+                text: "Item 6",
+                icon: "gear"
+           },
+           {
+                text: "Item 7",
+                icon: "pencil",
+                iconClass: "custom-icon-class"
            }]
         })
       });
@@ -427,12 +436,57 @@ Sets the field of the data item that provides the image url of the menu items.
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
-                    Name: "Item 1",                
+                    Name: "Item 1",
                     imgUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png"
                 }]
             },
-            dataTextField:"Name",            
+            dataTextField:"Name",
             dataImageUrlField:"imgUrl"
+        });
+    </script>
+
+### dataIconField `String`
+
+Sets the field of the data item that provides the icon name of the menu items.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    IconName: "gear",
+                    IconClass: "custom-icon-class"
+                }]
+            },
+            dataTextField:"Name",
+            dataIconField:"IconName",
+            dataIconClassField:"IconClass"
+        });
+    </script>
+
+### dataIconClassField `String`
+
+Sets the field of the data item that provides the icon class of the menu items.
+
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    IconName: "gear",
+                    IconClass: "custom-icon-class"
+                }]
+            },
+            dataTextField:"Name",
+            dataIconField:"IconName",
+            dataIconClassField:"IconClass"
         });
     </script>
 
@@ -518,6 +572,25 @@ its sub menus to the left.
     <script>
         $("#menu").kendoMenu({
             hoverDelay: 200
+        });
+    </script>
+
+### iconPosition `String` *(default: "before")*
+
+Specifies the position of the icon in the Menu items using the text content as a reference. The available options are:
+- `before` - the icon is positioned before the text
+- `after` - the icon is positioned after the text
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            iconPosition: "after",
+            dataSource: [
+                { text: "Item 1", icon: "gear" },
+                { text: "Item 2", icon: "pencil" }
+            ]
         });
     </script>
 
@@ -715,6 +788,31 @@ Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons
         $("#menu").kendoMenu({
             scrollable: {
                 distance: 20
+            }
+        });
+    </script>
+
+### scrollable.scrollButtonsPosition `string` *(default: "split")*
+
+Determines where the scroll buttons appear when menu content overflows. Here's an explanation of the available options:
+
+- "split" (default): Places one scroll button at the beginning and another at the end of the scrollable container
+- "start": Places both scroll buttons at the beginning of the scrollable container
+- "end": Places both scroll buttons at the end of the scrollable container
+
+
+#### Example
+
+    <ul id="menu" style="width:150px;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#menu").kendoMenu({
+            scrollable: {
+                scrollButtonsPosition: "start"
             }
         });
     </script>

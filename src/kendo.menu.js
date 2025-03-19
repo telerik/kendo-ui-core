@@ -90,6 +90,8 @@ export const __meta__ = {
             text: "dataTextField",
             url: "dataUrlField",
             spriteCssClass: "dataSpriteCssClassField",
+            icon: "dataIconField",
+            iconClass: "dataIconClassField",
             imageUrl: "dataImageUrlField",
             imageAttr: "dataImageAttrField",
             content: "dataContentField"
@@ -260,7 +262,7 @@ export const __meta__ = {
         item
             .filter(".k-separator")
             .removeClass("k-menu-item")
-            .addClass("k-menu-separator")
+            .addClass("k-separator-horizontal")
             .empty()
             .append("&nbsp;");
 
@@ -542,6 +544,7 @@ export const __meta__ = {
             scrollable: false,
             popupCollision: null,
             autoSize: false,
+            iconPosition: "before", // "before" or "after" text content
         },
 
         _initData: function() {
@@ -639,8 +642,19 @@ export const __meta__ = {
                 backwardBtn = $(that.templates.scrollButton({ direction: backwardBtnIcon }));
                 forwardBtn = $(that.templates.scrollButton({ direction: forwardBtnIcon }));
 
-                backwardBtn.prependTo(that._scrollWrapper);
-                forwardBtn.appendTo(that._scrollWrapper);
+                switch (options.scrollable.scrollButtonsPosition) {
+                    case "start":
+                        forwardBtn.prependTo(that._scrollWrapper);
+                        backwardBtn.prependTo(that._scrollWrapper);
+                        break;
+                    case "end":
+                        backwardBtn.appendTo(that._scrollWrapper);
+                        forwardBtn.appendTo(that._scrollWrapper);
+                        break;
+                    default:
+                        backwardBtn.prependTo(that._scrollWrapper);
+                        forwardBtn.appendTo(that._scrollWrapper);
+                }
 
                 that._initScrolling(that.element, backwardBtn, forwardBtn, isHorizontal, isRtl);
 
@@ -687,7 +701,10 @@ export const __meta__ = {
         _reinitOverflow: function(options) {
             var that = this;
             var overflowChanged = ((options.scrollable && !that.options.scrollable) || (!options.scrollable && that.options.scrollable)) ||
-                (options.scrollable && that.options.scrollable && options.scrollable.distance != that.options.scrollable.distance) ||
+                (options.scrollable && that.options.scrollable && (
+                    options.scrollable.distance != that.options.scrollable.distance ||
+                    options.scrollable.scrollButtonsPosition != that.options.scrollable.scrollButtonsPosition
+                )) ||
                 options.orientation != that.options.orientation;
 
             if (overflowChanged) {
@@ -2306,6 +2323,8 @@ export const __meta__ = {
                     { field: "url" },
                     { field: "cssClass" },
                     { field: "spriteCssClass" },
+                    { field: "icon" },
+                    { field: "iconClass" },
                     { field: "imageUrl" },
                     { field: "imageAttr" },
                     { field: "attr" },
@@ -2485,15 +2504,21 @@ export const __meta__ = {
                 ),
                 itemWrapper: template((data) => {
                     var item = data.item;
+                    var iconPosition = this.options.iconPosition;
                     var url = fieldAccessor("url")(item);
                     var imageUrl = fieldAccessor("imageUrl")(item);
+                    var icon = fieldAccessor("icon")(item);
+                    var iconClass = fieldAccessor("iconClass")(item);
+                    var iconString = (icon ? kendo.ui.icon({ icon: icon, iconClass: iconClass }) : '' );
                     var imgAttributes = fieldAccessor("imageAttr")(item);
                     var tag = url ? 'a' : 'span';
 
                     return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${kendo.sanitizeLink(url)}'` : ''} >` +
                         (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
+                        (iconPosition == "before" ? iconString : '') +
                         this.templates.sprite(item) +
                         this.options.template(data) +
+                        (iconPosition == "after" ? iconString : '') +
                         data.arrow(data) +
                         `</${tag}>`;
                 }),

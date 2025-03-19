@@ -157,5 +157,74 @@ describe("menu init", function() {
 
         m.destroy();
     });
+});
 
+describe("menu icons", function() {
+
+    let menuElement;
+    let menu;
+
+    beforeEach(function() {
+        Mocha.fixture.append('<ul id="menu"></ul>');
+        menuElement = $("#menu");
+        menu = menuElement.kendoMenu({
+            iconPosition: "after",
+            dataSource: [
+                { text: "Item 1", icon: "gear", iconClass: "custom-gear-icon-class" },
+                { text: "Item 2", icon: "pencil" }
+            ]
+        }).data("kendoMenu");
+    });
+
+    afterEach(function() {
+        menu.destroy();
+        menuElement.remove();
+    });
+
+    it("applies icon classes if specified", function() {
+        assert.equal(menuElement.find('.k-icon.custom-gear-icon-class').length, 1);
+    });
+
+    it("places icons after text if iconPosition is 'after'", function() {
+        assert.equal(menuElement.find(".k-menu-link > .k-menu-link-text + .k-svg-i-gear").length, 1);
+    });
+});
+
+describe("menu scrollable", function() {
+    let menuElement;
+    let menu;
+
+    function initMenu(options) {
+        menu = menuElement.kendoMenu(options).data("kendoMenu");
+    }
+
+    beforeEach(function() {
+        Mocha.fixture.append(`<ul id="menu" style="width: 50px"> <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li></ul>`);
+        menuElement = $("#menu");
+    });
+
+    afterEach(function() {
+        menu.destroy();
+        menuElement.remove();
+    });
+
+    it("places scroll buttons at the start when scrollButtonsPosition is 'start'", function() {
+        initMenu({ scrollable: { scrollButtonsPosition: "start" } });
+        assert.isOk(menu.element.prev().prev().is(".k-menu-scroll-button-prev"));
+        assert.isOk(menu.element.prev().is(".k-menu-scroll-button-next"));
+    });
+
+    it("places scroll buttons at the end when scrollButtonsPosition is 'end'", function() {
+        initMenu({ scrollable: { scrollButtonsPosition: "end" } });
+        assert.isOk(menu.element.next().is(".k-menu-scroll-button-prev"));
+        assert.isOk(menu.element.next().next().is(".k-menu-scroll-button-next"));
+    });
+
+    it("places scroll buttons at the end when scrollButtonsPosition is 'split'", function() {
+        initMenu({ scrollable: { scrollButtonsPosition: "split" } });
+        assert.isOk(menu.element.prev().is(".k-menu-scroll-button-prev"));
+        assert.isOk(menu.element.next().is(".k-menu-scroll-button-next"));
+    });
 });

@@ -962,10 +962,6 @@ export const __meta__ = {
             that.overflowMenu?.append(options);
             menuitem = that.overflowMenu.element.find(DOT + MENU_ITEM).last();
 
-            if (options.icon) {
-                menuitem.find(DOT + MENU_LINK).prepend(kendo.ui.icon(options.icon));
-            }
-
             if (component === "ToggleButton" || (component === "Button" && options.togglable === true)) {
                 menuitem.find(DOT + MENU_LINK).addClass(MENU_LINK_TOGGLE);
 
