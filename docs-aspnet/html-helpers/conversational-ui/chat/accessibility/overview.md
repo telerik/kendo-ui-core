@@ -71,7 +71,7 @@ To test the Chat component, refer to the [Chat Accessibility Demo](https://demos
 
 ## Keyboard Navigation
 
-For details on how the Chat keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
+For details on how the Chat keyboard navigation works, refer to the [Chat Keyboard Navigation]({%slug keynav_aspnetcore_chat%}) article.
 
 ## See Also
 

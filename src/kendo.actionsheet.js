@@ -46,22 +46,32 @@ export const __meta__ = {
     var CLICK = "click";
     var KEYDOWN = "keydown";
     var hexColor = /^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/;
-    var HEADER_TEMPLATE = (options) =>
-        `<div class="k-text-center k-actionsheet-titlebar" >` +
+    var HEADER_TEMPLATE = (options) => {
+        const startButtonHtml = options.startButton ?
+            '<div class="k-actionsheet-actions">' +
+                kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-start-button")}></button>`, { icon: options.startButton.icon || "chevron-left", fillMode: "flat", size: "large" }) +
+            '</div>' : "";
+
+        const closeButtonHtml = options.closeButton ?
+            '<div class="k-actionsheet-actions">' +
+                kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "x", fillMode: "flat", size: "large" }) +
+            '</div>' : "";
+
+        const subtitleHtml = options.subtitle ? `<div class="k-actionsheet-subtitle k-text-center">${options.subtitle || ""}</div>` : "";
+
+        return `<div class="k-text-center k-actionsheet-titlebar" >` +
             (options.title ?
                 '<div class="k-actionsheet-titlebar-group k-hbox">' +
+                    startButtonHtml +
                     `<div id="${ACTIONSHEET_TITLE_ID}" class="k-actionsheet-title">` +
                         `<div class="k-text-center">${options.title}</div>` +
-                        (options.subtitle ? `<div class="k-actionsheet-subtitle k-text-center">${options.subtitle || ""}</div>` : "") +
+                        subtitleHtml +
                     '</div>' +
-                    (options.closeButton ?
-                    '<div class="k-actionsheet-actions">' +
-                        kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "x", fillMode: "flat", size: "large" }) +
-                    '</div>'
-                    : "") +
+                    closeButtonHtml +
                 '</div>'
             : "") +
         '</div>';
+    };
     var ITEM_TEMPLATE = ({ disabled, icon, text, description }) =>
                     `<span role="button" tabindex="0" class="k-actionsheet-item ${disabled ? STATEDISABLED : ""}">` +
                         `<span class="k-actionsheet-action">` +
@@ -174,9 +184,57 @@ export const __meta__ = {
             headerTemplate: null,
             contentTemplate: null,
             actionButtons: [],
+            actionButtonsAlignment: "stretched",
+            actionButtonsOrientation: "horizontal",
+            animation: {
+                open: {
+                    effects: "slideIn:up",
+                    transition: true,
+                    duration: 200
+                }
+            },
             closeButton: false,
+            startButton: false,
             adaptive: false,
-            focusOnActivate: true
+            focusOnActivate: true,
+            closeOnClick: true
+        },
+
+        setOptions: function(options) {
+            const that = this;
+            Widget.fn.setOptions.call(that, options);
+
+            if (that._content) {
+                that._content.remove();
+                that._content = null;
+            }
+
+            if (that._footer) {
+                that._footer.remove();
+                that._footer = null;
+            }
+
+            if (that._header) {
+                that._header.remove();
+                that._header = null;
+            }
+
+            if (that.popup.wrapper.length) {
+                that.element.unwrap().unwrap();
+            }
+
+            that.popup.destroy();
+            that.popup = null;
+
+            that._mapItems();
+            that._mapActionButtons();
+            that._popup();
+
+            that._createContent();
+            that._createHeader();
+            that._createFooter();
+
+            that._applyAria();
         },
 
         _mapItems: function() {
@@ -224,17 +282,8 @@ export const __meta__ = {
         },
 
         _popup: function() {
-            var that = this;
-            var options = that.options;
-
-            var popupAnimation = !options.adaptive ? false :
-                {
-                    open: {
-                        effects: "slideIn:up",
-                        transition: true,
-                        duration: 200
-                    }
-                };
+            const that = this;
+            const options = that.options;
 
             options.open = null;
             options.close = null;
@@ -249,7 +298,7 @@ export const __meta__ = {
                     omitOriginOffsets: true,
                     appendTo: that.wrapper,
                     modal: true,
-                    animation: popupAnimation,
+                    animation: options.adaptive ? options.animation : false,
                     position: "top center",
                     anchor: options.anchor || that.wrapper
                 }));
@@ -290,7 +339,8 @@ export const __meta__ = {
                 return;
             }
 
-            that.element.prepend(template(options.headerTemplate || HEADER_TEMPLATE)(options));
+            that._header = $(template(options.headerTemplate || HEADER_TEMPLATE)(options));
+            that.element.prepend(that._header);
         },
 
         _items: function() {
@@ -331,9 +381,6 @@ export const __meta__ = {
                 return;
             }
 
-            if (options.contentTemplate || options.hideOverflowContent) {
-                contentContainer.addClass("!k-overflow-hidden");
-            }
             if (options.contentTemplate) {
                 contentContainer.html(template(options.contentTemplate)(options));
             }
@@ -396,9 +443,9 @@ export const __meta__ = {
         },
 
         _createFooter: function() {
-            var that = this;
-            var options = that.options;
-            var actionsContainer;
+            const that = this;
+            const options = that.options;
+            let actionsContainer;
 
             if (!that._hasActionButtons && !options.footerTemplate) {
                 return;
@@ -408,7 +455,7 @@ export const __meta__ = {
             actionsContainer.insertAfter(that._content);
 
             if (that._hasActionButtons) {
-                actionsContainer.addClass("k-actions k-actions-stretched k-actions-horizontal");
+                actionsContainer.addClass(`k-actions k-actions-${options.actionButtonsAlignment} k-actions-${options.actionButtonsOrientation}`);
                 that._createActionButtons();
                 return;
             }
@@ -562,6 +609,10 @@ export const __meta__ = {
             if (that._isActionableButton(target)) {
                 that._triggerAction(e);
             }
+
+            if (that.options.startButton && $(target).closest("[data-ref-actionsheet-start-button]").length > 0) {
+                that.options.startButton.click.call(this, e);
+            }
         },
 
         _mousedown: function(e) {
@@ -573,7 +624,7 @@ export const __meta__ = {
                 return;
             }
 
-            if (!contains(container, target) || $(target).closest(`[${kendo.attr("ref-actionsheet-close-button")}]`, $(container).find("k-actionsheet-titlebar")).length > 0) {
+            if ((!contains(container, target) && that.options.closeOnClick) || $(target).closest(`[${kendo.attr("ref-actionsheet-close-button")}]`, $(container).find("k-actionsheet-titlebar")).length > 0) {
                 that._closeButtonPressed = true;
                 that.close();
             }

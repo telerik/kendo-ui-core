@@ -46,8 +46,8 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |Charts        |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chart)| [Documentation](https://docs.telerik.com/kendo-ui/controls/charts/accessibility/overview)|
 |Chat          |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/chat)| [Documentation](https://docs.telerik.com/kendo-ui/controls/chat/accessibility/overview)|
 |CheckBox      |AA |n/a| [Documentation](https://docs.telerik.com/kendo-ui/controls/checkbox/accessibility/overview)|
-|CheckBoxGroup |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/checkboxgroup)| [Documentation](https://docs.telerik.com/kendo-ui/controls/checkboxgroup/accessibility/overview)|
-|CircularGauge |AA |[Demo](hhttps://demos.telerik.com/kendo-ui/accessibility/circulargauge)| n/a|
+|CheckBoxGroup |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/checkboxgroup)| [Documentation](https://docs.telerik.com/kendo-ui/controls/checkboxgroup/accessibility/overview)|
+|CircularGauge |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/circulargauge)| n/a|
 |ColorGradient |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorgradient)| [Documentation](https://docs.telerik.com/kendo-ui/controls/colorgradient/accessibility/overview)|
 |ColorPalette  |n/a  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpalette)| [Documentation](https://docs.telerik.com/kendo-ui/controls/colorpalette/accessibility/overview)|
 |ColorPicker   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/colorpicker)| [Documentation](https://docs.telerik.com/kendo-ui/controls/colorpicker/accessibility/overview)|

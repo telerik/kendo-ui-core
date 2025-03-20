@@ -145,7 +145,7 @@ The AIPrompt provides options for configuring its views, toolbar items, and appe
 * [Templates]({% slug htmlhelpers_templates_aiprompt %})&mdash;The available templates allow you to control the rendering of the views and prompt suggestions layout.
 * [Integration with Microsoft.Extensions.AI]({% slug integration_microsoft_extensions_ai %})&mdash;The AIPrompt supports using the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.ai?view=net-9.0-pp" target="_blank">Microsoft.Extensions.AI library</a> to provide seamless integration with various AI models and boost your workflow when connecting the AIPrompt with AI models.
 * [Events]({% slug htmlhelpers_events_aiprompt %})&mdash;The component emits a variety of events that allow you to implement custom functionality.
-* [Accessibility]({% slug accessibility_aspnetcore_aiprompt %})&mdash;The AIPrompt is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts({% slug keynav_aspnetcore_aiprompt %})] for faster navigation.
+* [Accessibility]({% slug accessibility_aspnetcore_aiprompt %})&mdash;The AIPrompt is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_aiprompt %}) for faster navigation.
 
 ## Next Steps
 

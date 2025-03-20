@@ -2155,6 +2155,7 @@ declare namespace kendo.ui {
         open(): void;
         toggle(): void;
         visible(): boolean;
+        setOptions(options: ActionSheetOptions): void;
     }
 
     interface ActionSheetItem {
@@ -2181,17 +2182,27 @@ declare namespace kendo.ui {
         themeColor?: string | undefined;
     }
 
+    interface ActionSheetStartButton {
+        icon?: string | undefined;
+        click?: Function | undefined;
+    }
+
     interface ActionSheetOptions {
         name?: string | undefined;
         adaptive?: boolean | undefined;
         actionButtons?: ActionSheetActionButton[] | undefined;
+        actionButtonsAlignment?: "start" | "center" | "end" | "stretched" | "justify" | undefined;
+        actionButtonsOrientation?: "horizontal" | "vertical" | undefined;
+        animation?: boolean | any | undefined;
         closeButton?: boolean | undefined;
+        closeOnClick?: boolean | undefined;
         contentTemplate?: string | Function | undefined;
         footerTemplate?: string | Function | undefined;
         fullscreen?: boolean | undefined;
         items?: ActionSheetItem[] | undefined;
-        title?: string | undefined;
+        startButton?: ActionSheetStartButton | boolean | undefined;
         subtitle?: string | undefined;
+        title?: string | undefined;
         activate?(e: ActionSheetEvent): void;
         close?(e: ActionSheetEvent): void;
         deactivate?(e: ActionSheetEvent): void;

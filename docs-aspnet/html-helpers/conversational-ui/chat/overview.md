@@ -84,6 +84,8 @@ The following example demonstrates the available configuration options supported
 
 * [Toolbar]({% slug htmlhelpers_chat_toolbar_aspnetcore %})—The component allows you to add toolbar actions for achieving a more user-friendly conversational UI.
 * [Peer-to-Peer Chat]({% slug htmlhelpers_chat_aspnetcore_signalr %})—The Chat provides an option for creating a peer-to-peer Chat application by using SignalR.
+* [Events]({% slug events_chat_aspnetcore %})&mdash;Subscribe to the available client-side events to implement any custom logic.
+* [Accessibility]({% slug accessibility_chat_overview %})&mdash;The Chat is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_chat %}) for faster navigation.
 
 ## Next Steps
 

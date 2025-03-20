@@ -423,6 +423,80 @@ Controls the main color applied to the button. Valid values are:  `"base"`, `"pr
         actionsheet.open();
     </script>
 
+### actionButtonsOrientation `String`*(default: "horizontal")*
+
+Determines the orientation of the action buttons in the footer. Valid values are `"horizontal"` and `"vertical"`.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title: 'Confirmation',
+          actionButtonsOrientation: "vertical",
+          actionButtons: [
+              {
+                  text: "Confirm",
+                  icon: "check",
+                  fillMode: "solid",
+                  themeColor: "primary",
+                  click: onClick
+              },
+              {
+                  text: "Cancel",
+                  icon: "x",
+                  fillMode: "flat",
+                  click: onClick
+              }
+          ]
+      }).data('kendoActionSheet');
+
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+
+      actionsheet.open();
+    </script>
+
+### actionButtonsAlignment `String`*(default: "stretched")*
+
+Controls the alignment of the action buttons in the footer. This configuation works only in horizontal mode.
+
+Valid values are `"stretched"`, `"justify"`, `"start"`, `"center"`, and `"end"`.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title: 'Confirmation',
+          actionButtonsAlignment: "end",
+          actionButtons: [
+              {
+                  text: "Confirm",
+                  icon: "check",
+                  fillMode: "solid",
+                  themeColor: "primary",
+                  click: onClick
+              },
+              {
+                  text: "Cancel",
+                  icon: "x",
+                  fillMode: "flat",
+                  click: onClick
+              }
+          ]
+      }).data('kendoActionSheet');
+
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+
+      actionsheet.open();
+    </script>
+
 ### adaptive `Boolean`*(default: false)*
 
 When the ActionSheet is adaptive, it occupies the full width of the screen and has the option to cover the entire screen if the `fullscreen` is set to `true` as well.
@@ -466,6 +540,59 @@ When the ActionSheet is adaptive, it occupies the full width of the screen and h
       }
     </script>
 
+### animation `Boolean|Object`*(default: false)*
+
+Configures the opening and closing animations of the ActionSheet. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the ActionSheet will open and close instantly. This property has effect only in `adaptive` mode.
+
+`animation:true` is not a valid configuration.
+
+#### Example - disable open and close animations
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title: 'Action Sheet',
+          adaptive: true,
+          animation: false,
+          items:[
+              {
+                  text: 'Edit Item',
+                  icon: 'pencil'
+              }
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+    </script>
+
+#### Example - configure custom animation
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title: 'Action Sheet',
+          adaptive: true,
+          animation: {
+              open: {
+                  effects: "fadeIn",
+                  duration: 300
+              },
+              close: {
+                  effects: "fadeOut",
+                  duration: 150
+              }
+          },
+          items:[
+              {
+                  text: 'Edit Item',
+                  icon: 'pencil'
+              }
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+    </script>
+
 ### closeButton `Boolean`*(default: false)*
 
 Whether a close button would be rendered in the titlebar. A title needs to be set to get the titlebar rendered.
@@ -499,6 +626,39 @@ Whether a close button would be rendered in the titlebar. A title needs to be se
                   group: 'bottom',
                   click: onClick
               },
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+    </script>
+
+### closeOnClick `Boolean`*(default: true)*
+
+Determines whether the ActionSheet will close when clicking outside of it. If set to `false`, the ActionSheet will remain open until explicitly closed through code or by clicking the close button (if enabled).
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title: 'Select item',
+          closeOnClick: false,
+          closeButton: true,
+          items:[
+              {
+                  text: 'Edit Item',
+                  icon: 'pencil',
+                  click: onClick
+              },
+              {
+                  text: 'Add to Favorites',
+                  icon: 'heart',
+                  click: onClick
+              }
           ]
       }).data('kendoActionSheet');
 
@@ -1030,6 +1190,49 @@ Specifies the main text of the item
       }
     </script>
 
+### startButton `Object`*(default: false)*
+
+When configured, a start button will be rendered in the left side of the header section of the ActionSheet. Typically used for navigation or back functionality. The button is only visible when `title` is also specified.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title: 'Select item',
+          startButton: {
+              icon: "chevron-left",
+              click: function(e) {
+                  console.log("Start button clicked");
+              }
+          },
+          items:[
+              {
+                  text: 'Edit Item',
+                  icon: 'pencil',
+                  click: onClick
+              },
+              {
+                  text: 'Add to Favorites',
+                  icon: 'heart',
+                  click: onClick
+              }
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+      }
+    </script>
+
+### startButton.icon `String`
+
+Specifies the icon to be displayed in the start button.
+
+### startButton.click `Function`
+
+The function that will be executed when the start button is clicked.
 
 ### subtitle `String`
 

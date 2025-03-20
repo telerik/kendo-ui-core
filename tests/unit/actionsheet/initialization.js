@@ -240,5 +240,95 @@ describe("kendo.ui.ActionSheet initialization", function() {
 
         assert.isOk(instance.wrapper.find('.k-disabled').length);
     });
+
+    it("startButton should be rendered when configured in options", function() {
+        createInstance({
+            startButton: {
+                icon: "chevron-left",
+                click: function() { }
+            }
+        });
+
+        instance.open();
+
+        const startButton = instance.element.find("[data-ref-actionsheet-start-button]");
+        assert.equal(startButton.length, 1, "Start button should be present in the header");
+        assert.isOk(startButton.find(".k-svg-i-chevron-left").length, "Start button should have the specified icon");
+    });
+
+    it("startButton click handler should be executed when clicked", function() {
+        let clicked = false;
+
+        createInstance({
+            startButton: {
+                icon: "chevron-left",
+                click: function() {
+                    clicked = true;
+                }
+            }
+        });
+
+        instance.open();
+
+        const startButton = instance.element.find("[data-ref-actionsheet-start-button]");
+        startButton.click();
+
+        assert.isOk(clicked, "Start button click handler should be executed");
+    });
+
+    it("should apply default animation for adaptive mode", function() {
+        createInstance({
+            adaptive: true
+        });
+
+        const animation = instance.popup.options.animation;
+
+        assert.isOk(animation, "Animation should be defined");
+        assert.isOk(animation.open, "Open animation should be defined");
+        assert.equal(animation.open.effects, "slideIn:up", "Should use slideIn:up effect");
+        assert.equal(animation.open.duration, 200, "Should have 200ms duration");
+    });
+
+    it("should allow custom animation configuration", function() {
+        const customAnimation = {
+            open: {
+                effects: "fadeIn",
+                duration: 300
+            },
+            close: {
+                effects: "fadeOut",
+                duration: 150
+            }
+        };
+
+        createInstance({
+            adaptive: true,
+            animation: customAnimation
+        });
+
+        const animation = instance.popup.options.animation;
+
+        assert.isOk(animation, "Animation should be defined");
+        assert.equal(animation.open.effects, "fadeIn", "Should use custom open effect");
+        assert.equal(animation.open.duration, 300, "Should use custom open duration");
+        assert.equal(animation.close.effects, "fadeOut", "Should use custom close effect");
+        assert.equal(animation.close.duration, 150, "Should use custom close duration");
+    });
+
+    it("should not use animation when not in adaptive mode", function() {
+        createInstance({
+            adaptive: false,
+            animation: {
+                open: {
+                    effects: "fadeIn",
+                    duration: 300
+                }
+            }
+        });
+
+        const animation = instance.popup.options.animation;
+
+        assert.notEqual(animation.open.effects, "fadeIn", "Should not use adaptive animation");
+    });
 });
 

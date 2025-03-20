@@ -51,5 +51,19 @@ describe("kendo.ui.ActionSheet API", function() {
         instance.close();
         assert.isOk(instance.element.not(':visible'));
     });
+
+    it("setOptions method updates the component configuration", function() {
+        createInstance();
+        
+        instance.setOptions({
+            title: "Updated Title"
+        });
+        
+        instance.open();
+        
+        var title = instance.element.find(".k-actionsheet-title").text();
+        
+        assert.equal(title, "Updated Title");
+    });
 });
 
