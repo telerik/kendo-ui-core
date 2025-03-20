@@ -63,7 +63,7 @@ The CheckBox has been tested with the following screen readers and browsers comb
 
 ## Keyboard Navigation
 
-For details on how the CheckBox keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
+For details on how the CheckBox keyboard navigation works, refer to the [CheckBox Keyboard Navigation]({%slug keynav_aspnetcore_checkbox%}) article.
 
 ## See Also
 
