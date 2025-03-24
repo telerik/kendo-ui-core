@@ -1,6 +1,6 @@
 ---
-title: Helpers Overview
-page_title: Helpers Overview
+title: Overview
+page_title: Overview
 description: "Learn the basics when working with Telerik UI Helpers for {{ site.framework }}"
 previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues, /known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
