@@ -4152,11 +4152,67 @@ Specifies the icon of the item.
 ### contextMenu.body.command `String`
 Specifies the command of the item.
 
+### contextMenu.body.items `Array`
+Specifies the items of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                body: [
+                    {
+                        text: "Custom Command",
+                        icon: "calendar",
+                        items: [
+                            { text: "Nested Custom Command", icon: "home", command: "NestedCustomCommand" }
+                        ]
+                    },
+                    'select'
+                ]
+            },
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["NestedCustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function(e) {
+                 alert("Custom Command Executed")
+            }
+        });
+    </script>
+
+### contextMenu.body.items.name `String`
+Specifies the name of the item.
+
+### contextMenu.body.items.text `String`
+Specifies the text of the item.
+
+### contextMenu.body.items.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.body.items.command `String`
+Specifies the command of the item.
+
 ### contextMenu.groups `Array`
 
 Configures the items of the ContextMenu for the group elements in the Grid header. Those are some valid predifined tools: "separator", "moveGroupPrevious", "moveGroupNext".
 
-You can also specify a custom item and accosiate it with a command.
+You can also specify a custom item and accociate it with a command.
 
 #### Example
 
@@ -4214,6 +4270,62 @@ Specifies the text of the item.
 Specifies the icon of the item.
 
 ### contextMenu.groups.command `String`
+Specifies the command of the item.
+
+### contextMenu.groups.items `Array`
+Specifies the items of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                groups: [
+                    {
+                        text: "Custom Command",
+                        icon: "calendar",
+                        items: [
+                            { text: "Nested Custom Command", icon: "home", command: "NestedCustomCommand" }
+                        ]
+                    },
+                    'select'
+                ]
+            },
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["NestedCustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function(e) {
+                 alert("Custom Command Executed")
+            }
+        });
+    </script>
+
+### contextMenu.groups.items.name `String`
+Specifies the name of the item.
+
+### contextMenu.groups.items.text `String`
+Specifies the text of the item.
+
+### contextMenu.groups.items.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.groups.items.command `String`
 Specifies the command of the item.
 
 ### contextMenu.head `Array`
@@ -4281,6 +4393,62 @@ Specifies the text of the item.
 Specifies the icon of the item.
 
 ### contextMenu.head.command `String`
+Specifies the command of the item.
+
+### contextMenu.head.items `Array`
+Specifies the items of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            contextMenu: {
+                head: [
+                    {
+                        text: "Custom Command",
+                        icon: "calendar",
+                        items: [
+                            { text: "Nested Custom Command", icon: "home", command: "NestedCustomCommand" }
+                        ]
+                    },
+                    'select'
+                ]
+            },
+            dataSource: new kendo.data.DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            name: "name",
+                            foo: "foo",
+                        },
+                    },
+                },
+                data: [
+                    { foo: "bar", name: "tom" },
+                    { foo: "baz", name: "jerry" },
+                ],
+            }),
+        });
+
+        kendo.ui.grid.commands["NestedCustomCommand"] = kendo.ui.grid.GridCommand.extend({
+            exec: function(e) {
+                 alert("Custom Command Executed")
+            }
+        });
+    </script>
+
+### contextMenu.head.items.name `String`
+Specifies the name of the item.
+
+### contextMenu.head.items.text `String`
+Specifies the text of the item.
+
+### contextMenu.head.items.icon `String`
+Specifies the icon of the item.
+
+### contextMenu.head.items.command `String`
 Specifies the command of the item.
 
 ### contextMenu.close `Function`
