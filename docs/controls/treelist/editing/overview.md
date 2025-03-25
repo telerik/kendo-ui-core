@@ -59,6 +59,12 @@ Once the schema is configured, you need to configure the `transport` actions for
             }
         },
 
+## Known Limitations
+
+There are limitations when using editing along with other features of the component.
+
+* If filtering is applied and `serverOperation` is disabled in the DataSource configuration, adding new records is not allowed. 
+
 ## See Also
 
 * [Editing in the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/editing)

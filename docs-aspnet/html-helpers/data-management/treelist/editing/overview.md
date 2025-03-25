@@ -120,6 +120,12 @@ The TreeList supports the following edit modes:
 * [Popup editing]({% slug htmlhelpers_treelist_aspnetcore_popup_editing %})
 * [Editing by dragging and dropping of rows]({% slug htmlhelpers_treelist_aspnetcore_drag_drop_editing %})
 
+## Known Limitations
+
+There are limitations when using editing along with other features of the component.
+
+* If filtering is applied and `ServerOperation` is disabled in the DataSource configuration, adding new records is not allowed.
+
 ## See Also
 
 * [Editing by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/editing)

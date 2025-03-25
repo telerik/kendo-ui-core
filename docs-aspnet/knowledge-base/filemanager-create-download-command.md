@@ -114,7 +114,7 @@ On the server-side, implement a server-side action to return the file for downlo
 
 ## More {{ site.framework }} FileManager Resources
 
-* [{{ site.framework }} FileManager Documentation](({%slug htmlhelpers_filemanager_aspnetcore_overview%})
+* [{{ site.framework }} FileManager Documentation]({%slug htmlhelpers_filemanager_aspnetcore_overview%})
 
 * [{{ site.framework }} FileManager Demos](https://demos.telerik.com/{{ site.platform }}/filemanager)
 
