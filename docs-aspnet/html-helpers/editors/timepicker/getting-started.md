@@ -28,7 +28,7 @@ Use the TimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to add t
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the TimePicker element.
 
-* The `DateInput()` configuration method specifies if the TimePicker will use the [DateInput]{% slug htmlhelpers_dateinput_aspnetcore %}) component for value editing.
+* The `DateInput()` configuration method specifies if the TimePicker will use the [DateInput]({% slug htmlhelpers_dateinput_aspnetcore %}) component for value editing.
 
 * The `Value()` configuration method specifies the initially selected time.
 

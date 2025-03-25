@@ -113,6 +113,13 @@ To enable editing:
 
     >For runnable examples, refer to [the demos on implementing the editing approaches in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing-inline).
 
+## Known Limitations
+
+There are limitations when using editing along with other features of the component.
+
+* If filtering is applied and `ServerOperation` is disabled in the DataSource configuration, adding new records is not allowed. 
+* The component behaves differently, when it is grouped and you add a new record. If `ServerOperation` is enabled in the DataSource configuration, the new row is added as part of a separate (duplicate) group. If `ServerOperation` is disabled, the new row is added as part of an existing group. 
+
 ## See Also
 
 * [Incell Editing by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing)

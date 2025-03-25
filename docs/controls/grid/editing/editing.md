@@ -136,6 +136,13 @@ The following example demonstrates how to configure a basic Grid in the inline o
         editable: "inline" // OR editable: { mode : "popup" }
     });
 
+## Known Limitations
+
+There are limitations when using editing along with other features of the component.
+
+* If filtering is applied and `serverOperation` is disabled in the DataSource configuration, adding new records is not allowed. 
+* The component behaves differently, when it is grouped and you add a new record. If `serverOperation` is enabled in the DataSource configuration, the new row is added as part of a separate (duplicate) group. If `serverOperation` is disabled, the new row is added as part of an existing group. 
+
 ## KB Articles on Editing
 
 * [Customizing the Confirmation Window]({% slug howto_customize_delete_confirmation_dialog_grid %})

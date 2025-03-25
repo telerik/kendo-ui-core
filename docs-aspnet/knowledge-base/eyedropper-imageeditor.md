@@ -89,7 +89,7 @@ In the example below, clicking on the image retrieves the color of the pixel cli
 
 ## More {{ site.framework }} Editor Resources
 
-* [{{ site.framework }} Image Editor Documentation](({%slug htmlhelpers_imageeditor_aspnetcore%})
+* [{{ site.framework }} Image Editor Documentation]({%slug htmlhelpers_imageeditor_aspnetcore%})
 
 * [{{ site.framework }} Image Editor Demos](https://demos.telerik.com/{{ site.platform }}/imageeditor)
 

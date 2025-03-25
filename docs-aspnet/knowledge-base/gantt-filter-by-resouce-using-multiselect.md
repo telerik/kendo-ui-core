@@ -30,7 +30,7 @@ For the complete implementation on how to create a filter for the Gantt by using
 
 ## More {{ site.framework }} Gantt Resources
 
-* [{{ site.framework }} Gantt Documentation](({%slug htmlhelpers_gantt_aspnetcore%})
+* [{{ site.framework }} Gantt Documentation]({%slug htmlhelpers_gantt_aspnetcore%})
 
 * [{{ site.framework }} Gantt Demos](https://demos.telerik.com/{{ site.platform }}/gantt)
 
