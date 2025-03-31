@@ -92,8 +92,9 @@ The following example demonstrates how to configure the tile size, columns, `Cha
 | [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore %})| The ColorPicker supports a contrast tool. |
 | [Formats]({% slug htmlhelpers_formats_colorpickerhelper_aspnetcore %})| Configure the ColorPicker input formats. |
 | [Palettes]({% slug palettes_colorpicker %})| Define a color palette that the user can pick from.  |
+| [Adaptive Mode]({% slug htmlhelpers_colorpicker_adaptive_mode_aspnetcore %})| The ColorPicker supports an adaptive mode that renders a mobile-friendly popup. |
 | [Events]({% slug events_colorpicker %})| The ColorPicker allows you to handle its events and implement any custom logic. |
-| [Adaptive Mode](% slug htmlhelpers_colorpicker_adaptive_mode_aspnetcore %)| The ColorPicker supports an adaptive mode that renders a mobile-friendly popup. |
+| [Accessibility]({% slug accessibility_colorpicker_overview %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_colorpicker %}) for faster navigation. |
 
 ## Next Steps
 

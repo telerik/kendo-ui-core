@@ -53,8 +53,9 @@ The following example demonstrates how to initialize the ChipList.
 
 ## Functionality and Features
 
-* [Customization]({% slug htmlhelpers_chiplist_aspnetcore_customization %})&mdash;You can specify icons for the item content of the chips displayed in the ChipList.
 * [Appearance]({% slug htmlhelpers_chiplist_aspnetcore_appearance %})—The ChipList delivers a number of ready-to-use, predefined sets of styling options.
+* [Customization]({% slug htmlhelpers_chiplist_aspnetcore_customization %})&mdash;You can specify icons for the item content of the chips displayed in the ChipList.
+* [Accessibility]({% slug accessibility_chiplist_overview %})&mdash;The ChipList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_chiplist %}) for faster navigation.
 
 ## Next Steps
  

@@ -466,10 +466,13 @@ meta:
     title: Conversational UI
   html-helpers/navigation/menu/contextmenu:
     title: ContextMenu
-    position: 4
+    position: 9
   html-helpers/navigation/menu/binding:
     title: Data Binding
     position: 3
+  html-helpers/navigation/menu/accessibility:
+    title: Accessibility
+    position: 8
   html-helpers/navigation/radiobutton:
     title: RadioButton
   html-helpers/navigation/wizard:

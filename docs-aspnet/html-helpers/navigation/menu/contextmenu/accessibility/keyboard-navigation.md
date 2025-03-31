@@ -11,23 +11,26 @@ position: 2
 
 The keyboard navigation of the ContextMenu is always available.
 
+For a runnable example, refer to the [demo on using the keyboard navigation of the ContextMenu](https://demos.telerik.com/{{ site.platform }}/menu/context-menu-keyboard-navigation).
+
 When the ContextMenu is focused, the first root item is activated.
 
 The ContextMenu supports the following keyboard shortcuts:
 
-| SHORTCUT						| DESCRIPTION				                                                        |
-|:---                 |:---                                                                               |
-| `Home`              | Focuses the first item.                                                            |
-| `End`               | Focuses the last item.                                                             |
-| `Left Arrow`        | <ul><li>Moves the active item on the root level of a horizontal ContextMenu to the left.</li> <li>Closes an item group.</li></ul> |
-| `Right Arrow`       | <ul><li>Moves the active item on the root level of a horizontal ContextMenu to the right.</li> <li>Opens an item group of a vertical ContextMenu.</li> <li>If the previous active item has been inside an item group, moves the active state to the next root item of a horizontal ContextMenu.</li></ul>        |
-| `Up Arrow`          | Moves upwards the active item of a vertical ContextMenu item group.                        |
-| `Down Arrow`        | <ul><li>Moves downwards the active item of a vertical ContextMenu item group.</li> <li>Opens an item group of a horizontal ContextMenu.</li></ul> |
-| `Enter`             | Selects or navigates the focused item.                                             |
-| `Space`             | Selects or navigates the focused item.                                             |
-| `Esc`               | Closes an item group.                                                              |
-| (`Shift`+) `Tab`    | Blurs the ContextMenu and moves the focus to the next or previous focusable element on the page.  |
+| SHORTCUT | DESCRIPTION |
+| -------- | -------- |
+| `Home` | Focuses the first item. |
+| `End`  | Focuses the last item.  |
+| `Left Arrow` | When a root item is focused, opens the item group and focuses the last child.<br/> When a child item is focused, closes the item group and focuses the parent item. |
+| `Right Arrow` | If the item has children, opens the item and focuses the first child.<br/>For child items without children, focuses and opens the next root item. |
+| `Up Arrow`         | Focuses the previous item. |
+| `Down Arrow`       | Focuses the next item. |
+| `Enter` or `Space` | Selects the focused item.<br/>If the item has children, opens the item group and focuses the first child.<br/>If the item does not have children and has a URL, navigates to the specified URL. |
+| `Shift` + `Tab` | Tabs away from the ContextMenu on the next focusable page element. |
+| `Shift` + `F10` | When the target element is focused, the command opens the ContextMenu. |
+| `Esc` | Closes the innermost open group. If no item group is opened, closes the ContextMenu. |
 
 ## See Also
 
-* [Server-Side API](/api/menu)
+* [Keyboard Navigation by the ContextMenu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/context-menu-keyboard-navigation)
+* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
