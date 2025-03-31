@@ -71,7 +71,7 @@ To test the ChipList component, refer to the [ChipList Accessibility Demo](https
 
 ## Keyboard Navigation
 
-For details on how the ChipList keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
+For details on how the ChipList keyboard navigation works, refer to the [ChipList Keyboard Navigaton]({%slug keynav_aspnetcore_chiplist%}) article.
 
 ## See Also
 

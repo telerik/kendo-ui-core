@@ -44,8 +44,9 @@ The following example demonstrates how to initialize the Chip.
 
 ## Functionality and Features
 
-* [Customization]({% slug htmlhelpers_chip_aspnetcore_customization %})&mdash;You can add a **Select** or **Remove** custom icon to the Chip as well as display avatars in it.
 * [Appearance]({% slug htmlhelpers_chip_aspnetcore_appearance %})&mdash;The Chip delivers a number of ready-to-use, predefined sets of styling options.
+* [Customization]({% slug htmlhelpers_chip_aspnetcore_customization %})&mdash;You can add a **Select** or **Remove** custom icon to the Chip as well as display avatars in it.
+* [Accessibility]({% slug accessibility_chip_overview %})&mdash;The Chip is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_chip %}) for faster navigation.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the Chip, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/chip/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
