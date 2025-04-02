@@ -80,11 +80,96 @@ $("#grid").kendoGrid({
 </script>
 ```
 
-## Additional Requirements
+## Additional Scenarios
 
-I would like to keep the filter state active and show the applied initial filter on the grid.
+1. I would like to use `contains` instead of `equalTo` filter in multiple columns. When the [Column Menu](https://docs.telerik.com/kendo-ui/controls/grid/columns/column-menu) is enabled after filtering and opening the column filter again, the checkbox is not selected and shows unchecked. How I can check again the selected values in the filter popup?
 
-## Suggested solution
+### Suggested solution
+
+```dojo
+  <div id="grid"></div>
+    <script>
+      $(document).ready(function () {
+        $("#grid").kendoGrid({
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            },
+            schema: {
+              model: {
+                fields: {
+                  OrderID: { type: "number" },
+                  ShipCountry: { type: "string" },
+                  ShipName: { type: "string" },
+                  ShipAddress: { type: "string" }
+                }
+              }
+            },
+            pageSize: 30
+          },
+          height: 550,
+          sortable: true,
+          filterable: true,
+          columnMenu: true,
+          filter: function(e){
+            if(e.field == "OrderID" && e.filter){
+              e.filter.filters.forEach(function(f){
+                f.operator = "contains";
+              })
+            }
+          },
+          columnMenuOpen: function(e){
+            if(e.sender.dataSource.filter()){
+              e.sender.dataSource.filter().filters.forEach(function(f){
+
+                if(f.field == "OrderID" || f.field == 'ShipCountry') {
+                  var checkbox = e.container.find("input[value='"+f.value+"']");
+                  if(checkbox[0] && !checkbox[0].checked){
+                    e.container.find("input[value='"+f.value+"']").click()  
+                  }          
+                }else if(f.filters[0].field == "OrderID" || f.filters[0].field == 'ShipCountry'){
+                  var current = f.filters;
+
+                  current.forEach(function(filter){
+                    var checkbox2 = e.container.find("input[value='"+filter.value+"']");
+
+                    if(checkbox2.length > 0 && !checkbox2[0].checked){
+                      e.container.find("input[value='"+filter.value+"']").click()  
+                    } 
+                  })
+                }
+              })
+            }
+          },
+          pageable: true,
+          columns: [{
+            field: "OrderID",
+            filterable: {
+              multi:true,
+              dataSource: [ { OrderID: 255 }, { OrderID: 25 }, { OrderID: 26 } ]
+            }
+          } ,{
+            field: "ShipName",
+            title: "Ship Name",
+            width: 300
+          },{
+            field: "ShipCountry",
+            title: "Ship Country",
+            width: 300,
+            filterable: {
+              multi:true
+            }
+          }]
+        });
+      });
+    </script>
+```
+
+
+2. I would like to keep the filter state active and show the applied initial filter on the grid.
+
+### Suggested solution
 
 It is easiest to add the `k-active` class initially and let the grid with the custom filter handler manage the rest of the state changes.A timeout is needed to accomplish this initial load:
 
@@ -96,7 +181,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
   });
 ```
 
-### Example
+#### Example
 
 ```dojo
   <div id="example">
