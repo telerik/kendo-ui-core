@@ -5,7 +5,7 @@
         kendo.ui.FlatColorPicker.prototype.options.messages =
             $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
                 "apply": "تطبيق",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "noColor": "بلا لون",
                 "clearColor": "إزالة اللون"
             });
@@ -17,7 +17,7 @@
         kendo.ui.ColorPicker.prototype.options.messages =
             $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
                 "apply": "تطبيق",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "noColor": "بدون لون",
                 "clearColor": "إزالة اللون"
             });
@@ -35,13 +35,13 @@
                 "columns": "أعمدة",
                 "columnVisibility": "ظهور العمود",
                 "clear": "مسح",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "done": "تم",
                 "settings": "تعديل إعدادات العمود",
                 "lock": "قفل العمود",
                 "unlock": "الغاء قفل العمود",
                 "stick": "تثبيت العامود",
-                "unstick": "إلغاء تثبيت العمود",
+                "unstick": "تراجع تثبيت العمود",
                 "setColumnPosition": "تعيين موضع العمود",
                 "apply": "تطبيق",
                 "reset": "إعادة ضبط",
@@ -116,7 +116,7 @@
                 "dialogUpdate": "تحديث",
                 "dialogInsert": "إدراج",
                 "dialogButtonSeparator": "أو",
-                "dialogCancel": "إلغاء",
+                "dialogCancel": "تراجع",
                 "cleanFormatting": "إزالة التنسيق",
                 "createTable": "أنشيء جدول",
                 "addColumnLeft": "أضف عمود إلي اليسار",
@@ -246,14 +246,14 @@
                         title: "تأكيد الحذف",
                         content: "<p class='k-text-center'>هل أنت متأكد من حذف الملفات المحددة؟?<br/>لا يمكنك التراجع عن هذا الإجراء.</p>",
                         okText: "حذف",
-                        cancel: "إلغاء",
+                        cancel: "تراجع",
                         close: "إغلاق"
                     },
                     renamePrompt: {
                         title: "إعادة التسمية",
                         content: "<p class='k-text-center'>أدخل اسم ملف جديد</p>",
                         okText: "إعادة التسمية",
-                        cancel: "إلغاء",
+                        cancel: "تراجع",
                         close: "إغلاق"
                     }
                 },
@@ -347,7 +347,7 @@
                 "selectValue": "-اختر القيمة-",
                 "operator": "عامل",
                 "value": "قيمة",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "done": "تم",
                 "into": "في",
                 "buttonTitle": "{0} فرز إعدادات العمود"
@@ -412,7 +412,7 @@
                 "clear": "إزالة",
                 "filter": "فرز",
                 "search": "بحث",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "selectedItemsFormat": "{0} العناصر المحدّدة",
                 "done": "تم",
                 "into": "في"
@@ -431,7 +431,7 @@
                     "insertBefore": "أضف إلى الأعلى",
                     "pdf": "PDF تصدير إلى ملف"
                 },
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "deleteDependencyWindowTitle": "حذف العلاقة الاعتمادية",
                 "deleteTaskWindowTitle": "حذف المهمة",
                 "destroy": "حذف",
@@ -476,8 +476,8 @@
         kendo.ui.Grid.prototype.options.messages =
             $.extend(true, kendo.ui.Grid.prototype.options.messages, {
                 "commands": {
-                    "cancel": "إلغاء التغييرات",
-                    "canceledit": "إلغاء",
+                    "cancel": "تراجع التغييرات",
+                    "canceledit": "تراجع",
                     "create": "إضافة سجل جديد",
                     "destroy": "حذف",
                     "edit": "تعديل",
@@ -488,7 +488,7 @@
                     "update": "تحديث"
                 },
                 "editable": {
-                    "cancelDelete": "إلغاء",
+                    "cancelDelete": "تراجع",
                     "confirmation": "هل أنت متأكد من حذف السجل؟",
                     "confirmDelete": "حذف"
                 },
@@ -496,7 +496,7 @@
                 "search": "بحث...",
                 "expandCollapseColumnHeader": "",
                 "groupHeader": "ctrl + space لعمل مجموعة اضغط",
-                "ungroupHeader": "ctrl + space لإلغاء المجموعة اضغط"
+                "ungroupHeader": "ctrl + space لتراجع المجموعة اضغط"
             });
     }
 
@@ -517,7 +517,7 @@
                 "editColumn": "تعديل العمود",
                 "deleteColumn": "حذف العمود",
                 "close": "إغلاق",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "delete": "حذف",
                 "saveChanges": "حفظ التغييرات",
                 "title": "العنوان:",
@@ -540,7 +540,7 @@
                 "commands": {
                     "edit": "تعديل",
                     "update": "تحديث",
-                    "canceledit": "إلغاء",
+                    "canceledit": "تراجع",
                     "create": "إضافة سجل جديد",
                     "createchild": "إضافة سجل فرعي",
                     "destroy": "حذف",
@@ -577,7 +577,7 @@
                 "pause": "إيقاف مؤقت",
                 "play": "تشغيل",
                 "mute": "كتم الصوت",
-                "unmute": "إلغاء كتم الصوت",
+                "unmute": "تراجع كتم الصوت",
                 "quality": "الجودة",
                 "fullscreen": "تكبير الشاشة"
             });
@@ -648,7 +648,7 @@
                 "title": "الحقول التي يجب تضمينها",
                 "clear": "إزالة",
                 "ok": "حسنا",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "operators": {
                     "contains": "يتضمن",
                     "doesnotcontain": "لا يتضمن",
@@ -732,7 +732,7 @@
     if (kendo.ui.MobileRecurrenceEditor) {
         kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
             $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "update": "حفظ",
                 "endTitle": "إنهاء التكرار",
                 "repeatTitle": "كررّ النمط",
@@ -791,7 +791,7 @@
                 "showWorkDay": "عرض ساعات العمل",
                 "today": "اليوم",
                 "save": "حفظ",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "destroy": "حذف",
                 "resetSeries": "إعادة ضبط السلسلة",
                 "deleteWindowTitle": "حذف الحدث",
@@ -859,7 +859,7 @@
                 "reset": "إعادة تعيين اللون",
                 "customColor": "لون مخصّص...",
                 "apply": "تطبيق",
-                "cancel": "إلغاء"
+                "cancel": "تراجع"
             });
     }
 
@@ -868,7 +868,7 @@
             $.extend(true, kendo.spreadsheet.messages.dialogs, {
                 "apply": "تطبيق",
                 "save": "حفظ",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "remove": "حذف",
                 "retry": "أعد المحاولة",
                 "revert": "تراجع",
@@ -917,7 +917,7 @@
                         "freezePanes": "تجميد الأجزاء",
                         "freezeRows": "تجميد الصفوف",
                         "freezeColumns": "تجميد الأعمدة",
-                        "unfreeze": "إلغاء تجميد الأجزاء"
+                        "unfreeze": "تراجع تجميد الأجزاء"
                     }
                 },
                 "confirmationDialog": {
@@ -1070,7 +1070,7 @@
                 "reset": "إعادة تعيين اللون",
                 "customColor": "لون مخصّص...",
                 "apply": "تطبيق",
-                "cancel": "إلغاء"
+                "cancel": "تراجع"
             });
     }
 
@@ -1126,7 +1126,7 @@
                     "freezePanes": "تجميد الأجزاء",
                     "freezeRows": "تجميد الصفوف",
                     "freezeColumns": "تجميد الأعمدة",
-                    "unfreeze": "إلغاء تجميد الأجزاء"
+                    "unfreeze": "تراجع تجميد الأجزاء"
                 },
                 "insertComment": "إضافة تعليق",
                 "insertImage": "إضافة صورة",
@@ -1136,7 +1136,7 @@
                     "mergeCells": "دمج الكل",
                     "mergeHorizontally": "دمج أفقي",
                     "mergeVertically": "دمج رأسي",
-                    "unmerge": "إلغاء الدمج"
+                    "unmerge": "تراجع الدمج"
                 },
                 "open": "فتح...",
                 "paste": "لصق",
@@ -1215,7 +1215,7 @@
                 "commands": {
                     "edit": "تعديل",
                     "update": "تحديث",
-                    "canceledit": "إلغاء",
+                    "canceledit": "تراجع",
                     "create": "إضافة سجل جديد",
                     "createchild": "إضافة سجل فرعي",
                     "destroy": "حذف",
@@ -1242,7 +1242,7 @@
         kendo.ui.Upload.prototype.options.localization =
             $.extend(true, kendo.ui.Upload.prototype.options.localization, {
                 "select": "تحديد الملفات...",
-                "cancel": "إلغاء",
+                "cancel": "تراجع",
                 "retry": "أعد المحاولة",
                 "remove": "إزالة",
                 "clearSelectedFiles": "إزالة",
@@ -1320,7 +1320,7 @@
         kendo.ui.Confirm.prototype.options.messages =
             $.extend(true, kendo.ui.Confirm.prototype.options.localization, {
                 "okText": "حسنًا",
-                "cancel": "إلغاء"
+                "cancel": "تراجع"
             });
     }
 
@@ -1329,7 +1329,7 @@
         kendo.ui.Prompt.prototype.options.messages =
             $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
                 "okText": "حسنًا",
-                "cancel": "إلغاء"
+                "cancel": "تراجع"
             });
     }
 
@@ -1489,7 +1489,7 @@
                     },
                     "okText": "حسنا",
                     "save": "حفظ",
-                    "cancel": "إلغاء",
+                    "cancel": "تراجع",
                     "search": {
                         "inputLabel": "نص البحث",
                         "matchCase": "حالة متطابقة",
@@ -1525,7 +1525,7 @@
                 destroy: "حذف",
                 destroyContent: "هل أنت متأكد من حذف هذا العنصر والعناصر التابعة له؟",
                 destroyTitle: "حذف عنصر",
-                cancel: "إلغاء",
+                cancel: "تراجع",
                 save: "حفظ",
                 menuLabel: "قائمة التعديل",
                 uploadAvatar: "تحميل صورة جديدة",
