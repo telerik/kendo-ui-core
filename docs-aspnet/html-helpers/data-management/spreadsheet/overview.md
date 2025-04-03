@@ -985,6 +985,7 @@ The following example demonstrates the basic configuration for the Spreadsheet c
 | [Validation]({% slug htmlhelpers_spreadsheet_validation_aspnetcore %}) | The Spreadsheet allows you to validate if the user-provided input meets the expected requirements. |
 | [Custom Cell Editors]({% slug htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore %}) | The component supports custom cell editors that aids users enter correct values with ease.  |
 | [Toolbar]({% slug spreadsheet_toolbar_aspnetcore %}) | The Spreadsheet component provides the means to customize its toolbar. |
+| [Accessibility]({% slug accessibility_spreadsheet_overview %}) | The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_spreadsheet %}) for faster navigation. |
 
 ## Next Steps
 

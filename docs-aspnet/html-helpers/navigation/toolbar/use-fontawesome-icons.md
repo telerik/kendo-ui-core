@@ -8,9 +8,9 @@ position: 4
 
 # Use FontAwesome Icons
 
-The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as its sprite icons.
+The ToolBar enables you to use [FontAwesome icons](https://fontawesome.com/icons) as its sprite icons.
 
-> To use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as ToolBar sprite icons, add `<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>` to the `_Layout.cshtml` file.
+> To use [FontAwesome icons](https://fontawesome.com/icons) as ToolBar sprite icons, add `<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>` to the `_Layout.cshtml` file.
 
 [Open the example below in REPL](https://netcorerepl.telerik.com/cPFPkzPo13LZXYbf45)
 

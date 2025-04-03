@@ -3,7 +3,7 @@ title: Toolbar
 page_title: Toolbar
 description: "Learn how to configure the Toolbar of the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: spreadsheet_toolbar_aspnetcore
-position: 13
+position: 12
 ---
 
 # Toolbar

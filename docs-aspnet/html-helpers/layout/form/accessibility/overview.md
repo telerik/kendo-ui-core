@@ -67,7 +67,7 @@ To test the Form component, refer to the [Form Accessibility Demo](https://demos
 
 ## Keyboard Navigation
 
-For details on how the Form keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
+For details on how the Form keyboard navigation works, refer to the [Keyboard Navigation]({%slug keynav_aspnetcore_form%}) article.
 
 ## See Also
 

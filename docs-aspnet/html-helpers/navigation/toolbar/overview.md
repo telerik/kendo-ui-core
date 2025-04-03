@@ -172,17 +172,16 @@ The following example demonstrates the basic configuration of the ToolBar.
 
 ## Functionality and Features
 
-The ToolBar component provides the .NavigateOnTab() property which can be used to control [its Keyboard Navigation](https://demos.telerik.com/{{ site.platform }}/toolbar/keyboard-navigation).
-
-For more advanced configuration options you can check:
-
-* [Spacer]({% slug spacer_toolbar_aspnetcore %})&mdash;You can use the `Spacer` command type to move the tools that are declared after it to the right side of the ToolBar. The `Spacer` creates space between them and the tools that remain on the left.
-* [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})&mdash;You can configure the ToolBar to close its popup from a button `click` event.
-* [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})&mdash;The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) through its `SpriteCssClass` configuration option.
-* [Supported toolbar command types]({% slug htmlhelpers_toolbar_button_aspnetcore %})&mdash;The ToolBar supports various button command types.
-* [Resizing](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/resizing)&mdash;The ToolBar provides adaptive resizing functionality.
-* [Integration](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/integration)&mdash;The component can be integrated with various form elements to provide an interactive layout to the user.
-* [Appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/appearance)&mdash;The component provides convenient built-in settings for changing its size and overflow options.
+|Feature|Description|
+|-------|-----------|
+| [Appearance]({% slug toolbar_appearance %})| The component provides convenient built-in settings for changing its size and overflow options. |
+| [Command Types]({% slug htmlhelpers_toolbar_button_aspnetcore %})| The ToolBar supports various button command types. |
+| [Manual Closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})| You can configure the ToolBar to close its popup through a button `click` event. |
+| [FontAwesome Icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})| The ToolBar enables you to use <a href="https://fontawesome.com/icons" target="_blank">FontAwesome icons</a> through its `SpriteCssClass()` configuration option. |
+| [Resizing]({% slug toolbar_resizing %})| The ToolBar supports adaptive resizing functionality. |
+| [Integration with Editors]({% slug toolbar_integration %})| The component can be integrated with various form editors to provide an interactive layout to the user. |
+| [Events]({% slug toolbar_events %})| Explore the various ToolBar events that allow you to control what happens when the user interacts with the component. |
+| [Accessibility]({% slug accessibility_toolbar_overview %})| The ToolBar is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_toolbar %}) for faster navigation. |
 
 ## Next Steps
 

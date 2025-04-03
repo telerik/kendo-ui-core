@@ -6,7 +6,7 @@ slug: icons_togglebutton_aspnetcore
 position: 2
 ---
 
-# Icon ToggleButton
+# Icons
 
 The ToggleButton can accommodate an icon which enhances the meaning of the text content.
 
