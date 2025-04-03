@@ -46,7 +46,7 @@ The recommended way to provide your license key to the `Telerik.Licensing` NuGet
 1. After running `npm install` or `yarn`, add a build step to activate the license:
     ```
     env:
-        TELERIK_LICENSE: ${ { secrets.TELERIK_LICENSE } } # remove the spaces between the brackets
+        TELERIK_LICENSE: ${{ "{{ secrets.Telerik_License_Key }}" }}
     ```
 
 ## Next Steps

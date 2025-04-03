@@ -1,12 +1,12 @@
 ---
-title: Badge
-page_title: Badge
+title: Badges
+page_title: ToggleButton Badges
 description: "Include a badge and enhance the meaning of the text content of the Telerik UI ToggleButton component for {{ site.framework }}."
 slug: badges_togglebutton_aspnetcore
 position: 4
 ---
 
-# Badge ToggleButton
+# Badges
 
 The ToggleButton can incorporate a [Badge](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/badge/overview) to enhance the meaning of the text content.
 

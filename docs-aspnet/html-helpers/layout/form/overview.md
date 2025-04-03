@@ -100,15 +100,18 @@ The following example demonstrates how to define the Form.
 {% endif %}
 
 ## Functionality and Features
+
 |Feature|Description|
 |-------|-----------|
-| [Items]({% slug htmlhelpers_form_aspnetcore_items %})| The configuration of the Form Items allows you to customize their appearance and behavior. |
+| [Items]({% slug htmlhelpers_form_aspnetcore_items %})| The configuration of the Form `Items` allows you to customize their appearance and behavior. |
 | [Layout]({% slug htmlhelpers_form_aspnetcore_layout %})| You can choose between the default and `Grid` layout. |
 | [Groups]({% slug htmlhelpers_form_aspnetcore_groups %})| The Form allows you to group the input fields in logical sections. |
+| [Buttons]({% slug form_aspnetcore_buttons %})| Alter the **Submit** and **Clear** buttons appearance.  |
 | [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})|  You can choose between a `vertical` or `horizontal` orientation of the labels in the Form. |
 | [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})| The Form has a built-in validator to enable seamless client-side validaiton. |
-| [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})| The Form is accessible by screen readers and provides WAI-ARIA, Section 508, and WCAG 2.2 support. |
-| [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})| You can hide certain fields like the `ID`. |
+| [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})| You can hide specific fields, like the `ID`. |
+| [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_form %}) for faster navigation. |
+
 ## Next Steps
 
 * [Getting Started with the Form]({% slug form_getting_started %})
