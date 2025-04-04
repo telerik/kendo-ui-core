@@ -168,6 +168,7 @@ excluded-files:
 - "**/html-helpers/data-management/listview/binding/razor-page.md"
 - "**/html-helpers/media/mediaplayer/razor-page.md"
 - "**/html-helpers/overview-taghelpers.md"
+- "**/knowledge-base/grid-azure-empty-cells.md"
 - "**/html-helpers/chartwizard/binding/razor-page.md"
 
 meta:

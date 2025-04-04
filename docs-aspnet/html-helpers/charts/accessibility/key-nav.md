@@ -42,6 +42,48 @@ When the legend area is focused, the following keyboard commands are available:
 | `Tab`                 | Moves the focus to the next focusable element on the page. If the legend position is `top` or `left`, moves focus to the chart area.
 | `Shift` & `Tab`       | Moves the focus to the chart area. If the legend position is `top` or `left`, moves focus to the previous focusable element on the page.
 
+## Focus Highlight
+
+Starting with version 2025 Q2, the Chart component provides the `FocusHighlight` setting, which allows you to customize the border appearance of the highlighted element during keyboard navigation.
+
+The `FocusHighlight` option can be applied to both Chart series and legend elements:
+
+```HtmlHelper
+    .Legend(legend => legend
+        .Position(ChartLegendPosition.Bottom)
+        .FocusHighlight(f=>f.Border(b=>b
+           .Width(3)
+           .Color("brown")
+           .DashType(ChartDashType.Solid)
+           .Opacity(0.7)
+        ))
+    )
+    .SeriesDefaults(s=>s.Donut().FocusHighlight(f=>
+       f.Border(b=>b
+        .Width(4)
+        .Color("green")
+        .DashType(ChartDashType.LongDash)
+        .Opacity(0.7)
+       )
+    ))
+```
+{% if site.core %}
+```TagHelper
+       @addTagHelper *, Kendo.Mvc
+
+       <chart-legend position="ChartLegendPosition.Bottom">
+            <focus-highlight>
+                 <border width="3" color="brown" dash-type="DashType.Solid" opacity="0.7" />
+            </focus-highlight>
+        </chart-legend>
+        <series-defaults type="ChartSeriesType.Donut">
+            <focus-highlight>
+                <border width="4" color="green" dash-type="DashType.LongDash" opacity="0.7" />
+            </focus-highlight>
+        </series-defaults>
+```
+{% endif %}
+
 ## See Also
 
 * [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/{{ site.platform }}/charts/keyboard_navigation)
