@@ -180,7 +180,7 @@ You can implement model binding both with [local](#items-method) and [remote dat
     @(Html.Kendo().CheckBoxGroupFor(model => model.CheckBoxGroupValue)
          .HtmlAttributes(new { style = "height: auto;" })
          .Layout(CheckBoxGroupLayout.Vertical)
-         .BindTo((List<IInputGroupItem>)ViewData["CheckBoxGroupItems"])
+         .BindTo((List<CheckBoxGroupModel>)ViewData["CheckBoxGroupItems"])
     )
 ```
 {% if site.core %}
@@ -189,7 +189,7 @@ You can implement model binding both with [local](#items-method) and [remote dat
 
     <kendo-checkboxgroup for="CheckBoxGroupValue"
                          value="Model.CheckBoxGroupValue"
-                         bind-to='(List<IInputGroupItem>)ViewData["CheckBoxGroupItems"]'>
+                         bind-to='(List<CheckBoxGroupModel>)ViewData["CheckBoxGroupItems"]'>
     </kendo-checkboxgroup>
 ```
 {% endif %}

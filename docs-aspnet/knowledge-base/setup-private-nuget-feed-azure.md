@@ -121,7 +121,7 @@ If you do not want pipelines to have unfettered access to the Telerik account ho
 
 ### Using the Azure Artifact
 
-Just like when using a Service Connection, go to the build pipeline and select the *NuGet Restore* step. Except this time for the *Feeds to Use* option choose **Feed(s) I select here** and choose the *TelerikPackages* feed in the *Use packages from this Azure Artifacts/TFS feed* drop-down list.
+Just like when using a Service Connection, go to the build pipeline and select the **NuGet Restore** step. Except this time, for the **Feeds to Use** option, choose **Feed(s) I select here** and select the **TelerikPackages** feed in the **Use packages from this Azure Artifacts/TFS feed** drop-down list. If you intend to deploy your ASP.NET Core application in Azure, refer to [the official Microsoft documentation](https://learn.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?tabs=net80&pivots=development-environment-vs), where the process is documented in detail.
 
 ![{{ site.product_short }} Using packages from Azure Artifacts feed](images/azure-using-an-artifact-feed.png)
 
