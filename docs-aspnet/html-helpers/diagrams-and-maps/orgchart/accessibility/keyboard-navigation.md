@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the OrgChar
 ## See Also
 
 * [Keyboard Navigation in the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/keyboard-navigation)
-* [Accessibility in the OrgChart HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_orgchart %})
+* [Accessibility in the OrgChart HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_orgchart_accessibility %})

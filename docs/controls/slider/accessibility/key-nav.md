@@ -29,4 +29,4 @@ The user can focus the drag handles of the Slider through tabbing. When focused 
 
 * [Keyboard Navigation by the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Slider]({% slug accessibility_kendoui_slider %})
+* [Accessibility in the Slider]({% slug jquery_slider_accessibility %})

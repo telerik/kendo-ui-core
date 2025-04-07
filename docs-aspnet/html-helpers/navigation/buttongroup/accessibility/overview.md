@@ -2,7 +2,7 @@
 title: Overview
 page_title: ButtonGroup Documentation | ButtonGroup Accessibility
 description: "Get started with the {{ site.product }} ButtonGroup and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_buttongroup
+slug: htmlhelpers_buttongroup_accessibility
 position: 1
 ---
 

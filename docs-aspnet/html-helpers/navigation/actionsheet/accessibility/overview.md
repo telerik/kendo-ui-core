@@ -2,7 +2,7 @@
 title: Overview
 page_title: ActionSheet Documentation | ActionSheet Accessibility
 description: "Get started with the {{ site.product }} ActionSheet and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_actionsheet_aspnetcore
+slug: htmlhelpers_actionsheet_accessibility
 position: 1
 ---
 

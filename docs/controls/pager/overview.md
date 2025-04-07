@@ -22,7 +22,7 @@ The user interface of the Pager is useful for paging data-bound components that 
 * [Responsive Pager]({% slug responsive_kendoui_pager_widget  %})&mdash;Learn more about the responsiveness of the Pager and how to enable/disable it.
 * [Pager Templates]({% slug templates_kendoui_pager_widget %})&mdash;The Pager allows you to use templates to configure its page links.
 * [Globalization and Messages]({% slug globalization_kendoui_pager_widget %})&mdash;The Pager supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_kendoui_pager_widget %}) need to be supported. Additionally, the Pager supports rendering in a right-to-left (RTL) direction.
-* [Accessibility]({% slug accessibility_kendoui_pager_widget %})&mdash;The Pager is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_pager_jquery %}).
+* [Accessibility]({% slug jquery_pager_accessibility %})&mdash;The Pager is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_pager_jquery %}).
 
 ## Next Steps 
 

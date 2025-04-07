@@ -126,7 +126,7 @@ The following example demonstrates the basic configuration of the PanelBar.
 * [Data Binding]({% slug htmlhelpers_panelbar_databinding_aspnetcore %})—The PanelBar supports binding to data. 
 * [Expand modes]({% slug htmlhelpers_panelbar_expandmodes_aspnetcore %})—The component offers `Single` and `Multiple` expand modes. 
 * [Events]({% slug events_panelbar_aspnetcore %})—To control the behavior of the component upon user interaction, you can use the events that the component emits.
-* [Accessibility]({% slug accessibility_aspnetcore_panelbar %})—The PanelBar is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
+* [Accessibility]({% slug htmlhelpers_panelbar_accessibility %})—The PanelBar is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
 
 ## Next Steps

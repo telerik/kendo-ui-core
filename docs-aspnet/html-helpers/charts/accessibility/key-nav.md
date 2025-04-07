@@ -87,4 +87,4 @@ The `FocusHighlight` option can be applied to both Chart series and legend eleme
 ## See Also
 
 * [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/{{ site.platform }}/charts/keyboard_navigation)
-* [Accessibility in the Chart]({% slug accessibility_aspnetcore_charts %})
+* [Accessibility in the Chart]({% slug htmlhelpers_chart_accessibility %})

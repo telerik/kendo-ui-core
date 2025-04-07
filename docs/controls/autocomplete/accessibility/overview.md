@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery AutoComplete Documentation | AutoComplete Accessibility
 description: "Get started with the jQuery AutoComplete by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_autocomplete_widget
+slug: jquery_autocomplete_accessibility
 position: 1
 ---
 

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Rating Documentation | Rating Accessibility
 description: "Get started with the {{ site.product }} Rating and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_rating
+slug: htmlhelpers_rating_accessibility
 position: 1
 ---
 

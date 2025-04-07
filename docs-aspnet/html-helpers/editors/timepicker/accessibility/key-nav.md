@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the TimePic
 ## See Also
 
 * [Keyboard Navigation by the TimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timepicker/keyboard-navigation)
-* [Accessibility in the TimePicker HtmlHelper for {{ site.framework }}]({% slug accessibility_timepicker_aspnetcore %})
+* [Accessibility in the TimePicker HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_timepicker_accessibility %})

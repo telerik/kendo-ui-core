@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ProgressBar Documentation | ProgressBar Accessibility
 description: "Get started with the jQuery ProgressBar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_progressbar_widget
+slug: jquery_progressbar_accessibility
 position: 1
 ---
 

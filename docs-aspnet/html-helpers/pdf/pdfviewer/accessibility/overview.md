@@ -2,7 +2,7 @@
 title: Overview
 page_title: PDFViewer Documentation | PDFViewer Accessibility
 description: "Get started with the {{ site.product }} PDFViewer and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_pdfviewer
+slug: htmlhelpers_pdfviewer_accessibility
 position: 1
 ---
 
@@ -25,7 +25,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The PDFViewer component contains two inner elements - a toolbar and a page container.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Calendar Documentation | Calendar Accessibility
 description: "Get started with the {{ site.product }} Calendar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_calendar_aspnetcore
+slug: htmlhelpers_calendar_accessibility
 position: 1
 ---
 

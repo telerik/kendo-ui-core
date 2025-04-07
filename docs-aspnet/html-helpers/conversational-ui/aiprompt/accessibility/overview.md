@@ -2,7 +2,7 @@
 title: Overview
 page_title: AIPrompt Documentation | AIPrompt Accessibility
 description: "Get started with the {{ site.product }} AIPrompt and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_aiprompt
+slug: htmlhelpers_aiprompt_accessibility
 position: 1
 ---
 
@@ -24,7 +24,7 @@ The AIPrompt component is a composite one and integrates the accessibility of th
 
 ### TextArea Component
 
-[TextArea accessibility specification]({% slug accessibility_textarea_overview %})
+[TextArea accessibility specification]({% slug htmlhelpers_textarea_accessibility %})
 
 ### Prompt Suggestion Component
 
@@ -41,11 +41,11 @@ The Prompt suggestion list implements roving tabindex navigation. Meaning that o
 
 ### Toolbar Component
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 ### More Actions View - PanelBar Component
 
-[PanelBar accessibility specification]({% slug accessibility_aspnetcore_panelbar %})
+[PanelBar accessibility specification]({% slug htmlhelpers_panelbar_accessibility %})
 
 ## Section 508
 

@@ -2,7 +2,7 @@
 title: Overview
 page_title: MultiSelect Documentation | MultiSelect Accessibility
 description: "Get started with the {{ site.product }} MultiSelect and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_multiselect
+slug: htmlhelpers_multiselect_accessibility
 position: 1
 ---
 

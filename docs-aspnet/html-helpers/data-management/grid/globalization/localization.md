@@ -245,6 +245,9 @@ The following example demonstrates how to implement the translations of the page
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Localization Support by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/globalization)
 * [RTL Support by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/right-to-left-support)
 * [Globalization in {{ site.product }}]({% slug overview_globalization_core %})

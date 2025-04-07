@@ -2,7 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} DatePicker and learn about the accessibility support it provides through its keyboard navigation functionality."
-slug: htmlhelpers_datepicker_aspnetcore_accessibility_keyboardnavigation
+slug: htmlhelpers_datepicker_accessibility_keyboardnavigation
 position: 2
 ---
 
@@ -37,4 +37,4 @@ The DatePicker supports the following shortcuts:
 ## See Also
 
 * [Keyboard Navigation in the DatePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/keyboard-navigation)
-* [Accessibility in the DatePicker HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %})
+* [Accessibility in the DatePicker HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_datepicker_accessibility %})

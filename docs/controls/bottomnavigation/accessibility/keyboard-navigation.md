@@ -25,4 +25,4 @@ For a complete example, refer to the [demo on keyboard navigation of the BottomN
 
 * [Keyboard Navigation by the BottomNavigation (Demo)](https://demos.telerik.com/kendo-ui/bottomnavigation/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the BottomNavigation]({% slug accessibility_kendoui_bottomnavigation_widget %})
+* [Accessibility in the BottomNavigation]({% slug jquery_bottomnavigation_accessibility %})

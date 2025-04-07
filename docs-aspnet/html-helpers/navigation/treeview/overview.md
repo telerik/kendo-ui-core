@@ -257,7 +257,7 @@ The following example demonstrates how to configure the TreeView to bind to remo
 | [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})| Render the TreeView items with checkboxes.  |
 | [Templates]({% slug htmlhelpers_treeview_templates_aspnetcore %})| To take full control over the rendering of the TreeView items, use templates. |
 | [Events]({% slug events_treeview_aspnetcore %})| The component exposes various events that allow you to respond to user actions. |
-| [Accessibility]({% slug accessibility_aspnetcore_treeview %})| The TreeView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_treeview_accessibility %})| The TreeView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

@@ -19,7 +19,7 @@ The Rating allows to intuitively rate by selecting number of items stars from a 
 * [Label]({% slug label_rating_widget %})&mdash;The component allows you to customize the label.
 * [Tooltip]({% slug tooltip_rating_widget %})&mdash;The Rating provides a tooltip when you hover over an item.
 * [Templates]({% slug templates_rating_widget %})&mdash;The Rating provides various templates to customize the item appearance.
-* [Accessibility]({% slug accessibility_kendoui_rating_widget %})&mdash;The Rating is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_rating_accessibility %})&mdash;The Rating is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

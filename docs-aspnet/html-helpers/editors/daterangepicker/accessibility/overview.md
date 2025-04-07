@@ -2,7 +2,7 @@
 title: Overview
 page_title: DateRangePicker Documentation | DateRangePicker Accessibility
 description: "Get started with the {{ site.product }} DateRangePicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_daterangepicker_aspnetcore
+slug: htmlhelpers_daterangepicker_accessibility
 position: 1
 ---
 
@@ -44,7 +44,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The Calendars in the Popup element of the component should implement the specification for the **MultiViewCalendar** component.
 
-[Calendar accessibility specification]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})
+[Calendar accessibility specification]({% slug htmlhelpers_calendar_accessibility %})
 
 ## Resources
 

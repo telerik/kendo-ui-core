@@ -100,7 +100,7 @@ The following example demonstrates the basic configuration of the MediaPlayer.
 
 * [Adding multiple sources]({% slug htmlhelpers_mediaplayer_multiplesources_aspnetcore %})&mdash;You can set different sources to the component simultaneously.
 * [Globalization]({% slug globalization_mediaplayer_aspnetcore %})&mdash;The MediaPlayer provides localization capability.
-* [Accessibility]({% slug htmlhelpers_mediaplayer_accessibility_overview_aspnetcore %})&mdash;The component was designed with accessibility in mind.
+* [Accessibility]({% slug htmlhelpers_mediaplayer_accessibility %})&mdash;The component was designed with accessibility in mind.
 
 ## Events
 

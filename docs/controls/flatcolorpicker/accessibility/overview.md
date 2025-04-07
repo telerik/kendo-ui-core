@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery FlatColorPicker Documentation | FlatColorPicker Accessibility
 description: "Get started with the jQuery FlatColorPicker by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_flatcolorpicker_widget
+slug: jquery_flatcolorpicker_accessibility
 position: 1
 ---
 

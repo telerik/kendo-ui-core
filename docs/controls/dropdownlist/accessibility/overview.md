@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery DropDownList Documentation | DropDownList Accessibility
 description: "Get started with the jQuery DropDownList by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_ddl_widget
+slug: jquery_dropdownlist_accessibility
 position: 1
 ---
 

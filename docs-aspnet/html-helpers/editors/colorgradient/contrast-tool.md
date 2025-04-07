@@ -10,7 +10,7 @@ position: 3
 
 The ColorGradient provides a Color Contrast Tool. It provides the option for checking the color contrast ratio between two colors.
 
-The color contrast between text and background is important on web pages. It affects the ability of some people to perceive the presented information. The tool follows [the WCAG recommendations]({% slug htmlhelpers_accessibility_colorgradient %}#wcag-21) for web accessibility.
+The color contrast between text and background is important on web pages. It affects the ability of some people to perceive the presented information. The tool follows [the WCAG recommendations]({% slug htmlhelpers_colorgradient_accessibility %}#wcag-21) for web accessibility.
 
 According to the WCAG standard, there are two levels of contrast ratio:
  * AA (minimum contrast)—the level AA requires a contrast ratio of at least 4.5:1 for normal text.

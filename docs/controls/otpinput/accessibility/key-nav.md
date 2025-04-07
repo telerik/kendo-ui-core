@@ -27,4 +27,4 @@ For a complete example, refer to the [demo on keyboard navigation of the OTPInpu
 
 * [Keyboard Navigation by the OTPInput (Demo)](https://demos.telerik.com/kendo-ui/otpinput/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the OTPInput]({% slug accessibility_kendoui_otpinput %})
+* [Accessibility in the OTPInput]({% slug jquery_otpinput_accessibility %})

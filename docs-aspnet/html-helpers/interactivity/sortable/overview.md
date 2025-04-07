@@ -84,7 +84,7 @@ The following example demonstrates a basic declaration of the Sortable. The comp
 | [Placeholder]({% slug htmlhelpers_sortable_aspnetcore_placeholder %}) | Customize the default Sortable placeholder. |
 | [Integration with other Telerik UI components]({% slug sortable_aspnetcore_integration_grid %}) | Use the Sortable with other Telerik UI components to reoder their items. |
 | [Events]({% slug events_sortable %}) | The Sortable allows you to handle its events and implement the desired custom functionality. |
-| [Accessibility]({% slug accessibility_sortable_overview %}) | The component is accessible for screen readers and supports WAI-ARIA attributes. |
+| [Accessibility]({% slug htmlhelpers_sortable_accessibility %}) | The component is accessible for screen readers and supports WAI-ARIA attributes. |
 
 ## Next Steps
 

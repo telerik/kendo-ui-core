@@ -21,7 +21,7 @@ The component provides rich styling for unordered lists of items, and can be use
 * [Items]({% slug items_kendoui_menu %})—You can add and customize items such as text, icon, and URLs.
 * [Appearance]({% slug appearance_kendoui_menu %})—The Menu allows you to customize its appearance by setting CSS classes, templates, and other styling options.
 * [Context menu]({% slug overview_kendoui_contextmenu_widget %})—The Menu component supports the creation and implementation of context menus that open on right-click or based on custom events.
-* [Accessibility]({% slug accessibility_menu_jquery %})—The Menu adheres to the global accessibility standards and provides WAI-ARIA support and keyboard navigation.
+* [Accessibility]({% slug jquery_menu_accessibility %})—The Menu adheres to the global accessibility standards and provides WAI-ARIA support and keyboard navigation.
 
 ## Next Steps
 

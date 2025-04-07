@@ -301,5 +301,8 @@ In order to edit `DateOnly` or `TimeOnly` properties when using a Grid configure
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Editing Approaches by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/editing)
 * [Server-Side API](/api/grid)

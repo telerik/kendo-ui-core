@@ -183,7 +183,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Set Labels to the TextBox]({% slug htmlhelpers_labels_textbox %})
 * [Customize the Appearance of the TextBox]({% slug textbox_appearance %})
-* [Explore the Accessibility Features of the TextBox]({% slug accessibility_textbox_aspnetcore %})
+* [Explore the Accessibility Features of the TextBox]({% slug htmlhelpers_textbox_accessibility %})
 
 ## See Also
 

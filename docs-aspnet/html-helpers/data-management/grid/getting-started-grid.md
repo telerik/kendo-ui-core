@@ -363,6 +363,9 @@ For more information on referencing specific helper instances, see the [Methods 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using the API of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 * [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Grid server-side API](/api/grid)

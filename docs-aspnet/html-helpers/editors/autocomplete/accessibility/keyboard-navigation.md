@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the AutoCom
 ## See Also
 
 * [Keyboard Navigation in the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/keyboard-navigation)
-* [Accessibility in the AutoComplete HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_autocomplete %})
+* [Accessibility in the AutoComplete HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_autocomplete_accessibility %})

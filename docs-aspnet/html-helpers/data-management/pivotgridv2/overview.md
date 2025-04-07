@@ -104,7 +104,7 @@ The following image demonstrates the output from the example.
 * [Templates]({% slug htmlhelpers_pivotgridv2_aspnetcore_templates %})&mdash;The available templates allow you to control the rendering of the data cells and headers.
 * [Excel export]({% slug htmlhelpers_pivotgridv2_aspnetcore_excelexport %})&mdash;Built-in support for exporting the component data to Excel.
 * [PDF export]({% slug htmlhelpers_pivotgridv2_aspnetcore_pdfexport %})&mdash;You can export the component data to PDF through a single click.
-* [Accessibility]({% slug htmlhelpers_accessibility_actionsheet_aspnetcore %})&mdash;The PivotGridV2 is accessible for screen readers, supports WAI-ARIA, Section 508, WCAG 2.2, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pivotgridv2 %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_actionsheet_accessibility %})&mdash;The PivotGridV2 is accessible for screen readers, supports WAI-ARIA, Section 508, WCAG 2.2, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pivotgridv2 %}) for faster navigation.
 
 ## Next Steps
 

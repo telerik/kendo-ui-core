@@ -16,4 +16,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ImageEd
 
 * [Keyboard Navigation by the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ImageEditor]({% slug accessibility_kendoui_imageeditor_widget %})
+* [Accessibility in the ImageEditor]({% slug jquery_imageeditor_accessibility %})

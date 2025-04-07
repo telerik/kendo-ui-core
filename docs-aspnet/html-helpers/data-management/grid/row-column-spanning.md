@@ -263,5 +263,8 @@ The example below demonstrates how to define the conditions based on which the v
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Row and Column Spanning of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/row-column-spanning)
 * [Server-Side API](/api/grid)

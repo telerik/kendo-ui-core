@@ -40,7 +40,7 @@ The following example demonstrates how to define the CheckBox.
 
 * [Appearance]({% slug checkbox_appearance %})&mdash;The CheckBox enables you to customize its appearance based on your requirements.
 * [Events]({% slug events_checkbox %})&mdash;The CheckBox allows you to handle its events and implement custom functionality.
-* [Accessibility]({% slug accessibility_checkbox_overview %})&mdash;The CheckBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_checkbox %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_checkbox_accessibility %})&mdash;The CheckBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_checkbox %}) for faster navigation.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the CheckBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/checkbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

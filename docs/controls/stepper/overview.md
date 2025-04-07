@@ -18,7 +18,7 @@ The Stepper is an intuitive UI component that visualizes progress by displaying 
 * [Steps]({% slug steps_stepper_widget %})&mdash;You can configure various settings for each step.
 * [Appearance]({% slug appearance_stepper_widget %})&mdash;You can change the component's orientation.
 * [Modes of operation]({% slug modes_stepper_widget %})&mdash;You can configure whether the users can freely move to each step or if they have to follow the step sequence.
-* [Accessibility]({% slug accessibility_kendoui_stepper_widget %})&mdash;The Stepper is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_stepper_accessibility %})&mdash;The Stepper is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

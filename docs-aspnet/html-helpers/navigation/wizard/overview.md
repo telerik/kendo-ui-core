@@ -69,7 +69,7 @@ The following example demonstrates how to define the Wizard.
 * [Content]({% slug htmlhelpers_wizard_aspnetcore_content %})&mdash;The Wizard enables you to render static and asynchronous content.
 * [Layout]({% slug htmlhelpers_wizard_aspnetcore_layout %})&mdash;You can control the layout of the Wizard based on your preferences.
 * [Events]({% slug events_wizard %})&mdash;Subscribe to the Wizard events to implement any custom logic.
-* [Accessibility]({% slug accessibility_aspnetcore_wizard %})&mdash;The Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_wizard_accessibility %})&mdash;The Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
 
 ## Next Steps
 

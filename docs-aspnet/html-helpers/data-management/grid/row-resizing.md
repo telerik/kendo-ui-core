@@ -101,6 +101,9 @@ The `RowResize` event fires when the user resizes one or more rows. You can subs
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Row Resizing in the {{ site.product }} Grid](https://demos.telerik.com/{{ site.platform }}/grid/row-resizing)
 * [Grid events]({% slug grid_events %})
 * [Server-side API](/api/grid)

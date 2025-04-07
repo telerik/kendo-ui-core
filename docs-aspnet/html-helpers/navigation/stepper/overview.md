@@ -105,7 +105,7 @@ You can subscribe to all Stepper events.
 * [Steps]({% slug htmlhelpers_stepper_aspnetcore_steps %})&mdash;The component provides different configuration options for its steps.
 * [Appearance]({% slug htmlhelpers_stepper_aspnetcore_appearance %})&mdash;The Stepper enables you to customize its final appearance.
 * [Operation modes]({% slug htmlhelpers_stepper_aspnetcore_operation_modes %})&mdash;The component provides the capability of operation modes.
-* [Accessibility]({% slug accessibility_aspnetcore_stepper %})&mdash;The Stepper is compatible with the global accessibility requirements.
+* [Accessibility]({% slug htmlhelpers_stepper_accessibility %})&mdash;The Stepper is compatible with the global accessibility requirements.
 
 ## Next Steps
 

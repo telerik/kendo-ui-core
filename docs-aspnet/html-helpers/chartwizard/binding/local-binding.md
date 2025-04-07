@@ -10,7 +10,7 @@ position: 2
 
 The Chart Wizard supports local data binding that enables you to pass an arbitrary Model directly within the boundaries of the component.
 
-For a runnable example, refer to the [demo on binding the Chart Wizard to local data](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-binding).
+For a runnable example, refer to the [demo on binding the Chart Wizard to local data](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-data-binding).
 
 To configure the Chart Wizard to bind to a local data collection available on the View, follow the next steps:
 
@@ -114,7 +114,7 @@ To configure the Chart Wizard to bind to a local data collection available on th
 ## See Also
 
 * [Binding the Chart Wizard to Remote Data]({% slug htmlhelpers_remotebinding_chartwizard %})
-* [Binding the Chart Wizard for {{ site.framework }} to Local Data (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-binding)
+* [Binding the Chart Wizard for {{ site.framework }} to Local Data (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-data-binding)
 * [Server-Side API of the Chart Wizard HtmlHelper](/api/chartwizard)
 {% if site.core %}
 * [Server-Side API of the Chart Wizard TagHelper](/api/taghelpers/chartwizard)

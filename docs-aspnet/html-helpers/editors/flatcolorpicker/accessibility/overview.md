@@ -2,7 +2,7 @@
 title: Overview
 page_title: FlatColorPicker Documentation | FlatColorPicker Accessibility
 description: "Get started with the {{ site.product }} FlatColorPicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_flatcolorpickerhelper_aspnetcore
+slug: htmlhelpers_flatcolorpicker_accessibility
 position: 1
 ---
 

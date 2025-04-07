@@ -2,7 +2,7 @@
 title: Overview
 page_title: ColorGradient Documentation | ColorGradient Accessibility
 description: "Get started with the {{ site.product }} ColorGradient and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_colorgradient
+slug: htmlhelpers_colorgradient_accessibility
 position: 1
 ---
 
@@ -37,7 +37,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 All the `k-draghandle` elements implement the **Slider** specification.
 
-[Slider accessibility specification]({% slug accessibility_aspnetcore_slider %})
+[Slider accessibility specification]({% slug htmlhelpers_slider_accessibility %})
 
 
 Apart from that the HSV draghandle must also cover the following additional requirements:
@@ -53,7 +53,7 @@ Apart from that the HSV draghandle must also cover the following additional requ
 
 The Numeric inputs must implement the **NumericTextBox** specification.
 
-[NumericTextBox accessibility specification]({% slug accessibility_numerictextbox_aspnetcore %})
+[NumericTextBox accessibility specification]({% slug htmlhelpers_numerictextbox_accessibility %})
 
 
 Here is one additional requirement for those numerics as their visible labels have only a single letter as text:

@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ChipList Documentation | ChipList Accessibility
 description: "Get started with the jQuery ChipList by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_chiplist_widget
+slug: jquery_chiplist_accessibility
 position: 1
 ---
 

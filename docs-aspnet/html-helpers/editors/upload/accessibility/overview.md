@@ -2,7 +2,7 @@
 title: Overview
 page_title: Upload Documentation | Upload Accessibility
 description: "Get started with the {{ site.product }} Upload and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_upload
+slug: htmlhelpers_upload_accessibility
 position: 1
 ---
 

@@ -32,4 +32,4 @@ Kendo UI ContextMenu supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the ContextMenu (Demo)](https://demos.telerik.com/kendo-ui/menu/context-menu-keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ContextMenu]({% slug accessibility_kendoui_contextmenu_widget %})
+* [Accessibility in the ContextMenu]({% slug jquery_contextmenu_accessibility %})

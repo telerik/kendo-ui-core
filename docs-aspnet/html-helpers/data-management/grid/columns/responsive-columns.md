@@ -177,5 +177,8 @@ The content within the column `Template()` method will be displayed when the con
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Responsive Columns for the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/responsive-columns)
 * [Server-Side API](/api/grid)

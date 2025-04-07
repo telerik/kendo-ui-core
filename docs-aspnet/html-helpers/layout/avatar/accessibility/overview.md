@@ -2,7 +2,7 @@
 title: Overview
 page_title: Avatar Documentation | Avatar Accessibility
 description: "Get started with the {{ site.product }} Avatar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_avatar_overview
+slug: htmlhelpers_avatar_accessibility
 position: 1
 ---
 

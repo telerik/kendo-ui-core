@@ -17,7 +17,7 @@ The FlatColorPicker component provides a rich interface to choose a color from P
 * [Views]({% slug views_kendoui_flatcolorpicker_widget %})&mdash;The component supports a gradient view and a palette view.
 * [Formats]({% slug rgb_hex_kendoui_flatcolorpicker_widget %})&mdash;The component supports RGB and HEX input formats.
 * [Contrast Tool]({% slug contrast_tool_kendoui_flatcolorpicker_widget %})&mdash;The component provides a color contrast tool, which checks the contrast ratio between two colors.
-* [Accessibility]({% slug accessibility_kendoui_flatcolorpicker_widget %})&mdash;The FlatColorPicker supports various accessibility standards.
+* [Accessibility]({% slug jquery_flatcolorpicker_accessibility %})&mdash;The FlatColorPicker supports various accessibility standards.
 
 ## Next Steps 
 

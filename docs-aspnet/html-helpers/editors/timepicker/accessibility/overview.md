@@ -2,7 +2,7 @@
 title: Overview
 page_title: TimePicker Documentation | TimePicker Accessibility
 description: "Get started with the {{ site.product }} TimePicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_timepicker_aspnetcore
+slug: htmlhelpers_timepicker_accessibility
 position: 1
 ---
 

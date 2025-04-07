@@ -32,4 +32,4 @@ The Splitter supports the following shortcuts:
 ## See Also
 
 * [Keyboard Navigation in the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/keyboard-navigation)
-* [Accessibility in the Splitter HtmlHelper for {{ site.framework }}]({% slug accessbility_aspnetcore_splitter %})
+* [Accessibility in the Splitter HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_splitter_accessibility %})

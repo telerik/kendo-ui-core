@@ -2,7 +2,7 @@
 title: Overview
 page_title: jQuery SplitButton Documentation - Accessibility
 description: "Get started with the jQuery SplitButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_splitbutton_widget
+slug: jquery_splitbutton_accessibility
 position: 1
 ---
 

@@ -37,4 +37,4 @@ The DateRangePicker supports the following shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/keyboard-navigation)
-* [Accessibility in the DateRangePicker HtmlHelper for {{ site.framework }} ]({% slug accessibility_daterangepicker_aspnetcore %})
+* [Accessibility in the DateRangePicker HtmlHelper for {{ site.framework }} ]({% slug htmlhelpers_daterangepicker_accessibility %})

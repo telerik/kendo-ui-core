@@ -2,7 +2,7 @@
 title: Overview
 page_title: ListBox Documentation | ListBox Accessibility
 description: "Get started with the {{ site.product }} ListBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_listbox_accessibility_aspnetcore
+slug: htmlhelpers_listbox_accessibility
 position: 1
 ---
 
@@ -38,7 +38,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The ListBox toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({%slug accessibility_toolbar_overview%})
+[ToolBar accessibility specification]({%slug htmlhelpers_toolbar_accessibility%})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

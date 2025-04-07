@@ -54,5 +54,8 @@ The custom command button offers the following features:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)

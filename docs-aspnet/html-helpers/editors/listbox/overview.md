@@ -184,7 +184,7 @@ The following example demonstrates the basic configuration of two connected List
 | [Selection]({% slug htmlhelpers_listbox_selection_aspnetcore %})| The component supports single and multiple selection modes.|
 | [Events]({% slug events_listbox %})| The ListBox emits various events that you can handle and use to control what happens during the user interaction.|
 | [Globalization]({% slug htmlhelpers_listbox_globalization_aspnetcore %}) | The ListBox provides globalization through the combination of [localization]({% slug htmlhelpers_listbox_localization_aspnetcore %}) and [right-to-left support]({% slug htmlhelpers_listbox_rtl_aspnetcore %}).|
-| [Accessibility]({% slug htmlhelpers_listbox_accessibility_aspnetcore %})| The ListBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug htmlhelpers_listbox_navigation_aspnetcore %}) for faster navigation.| 
+| [Accessibility]({% slug htmlhelpers_listbox_accessibility %})| The ListBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug htmlhelpers_listbox_navigation_aspnetcore %}) for faster navigation.| 
 
 ## Next Steps
 

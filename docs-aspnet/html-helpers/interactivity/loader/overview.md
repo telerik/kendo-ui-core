@@ -61,7 +61,7 @@ The following example demonstrates the Loader in action.
 
 * [Appearance]({% slug htmlhelpers_loader_aspnetcore_appearance %})&mdash;Explore the available options for customizing the Loader appearance.
 * [Integration]({% slug htmlhelpers_loader_aspnetcore_integration %})&mdash;The Loader can be integrated into another components.
-* [Accessibility]({% slug htmlhelpers_loader_aspnetcore_accessibility %})&mdash;The Loader is accessible by screen readers and provides WAI-ARIA, Section 508, and WCAG 2.2 compatibility.
+* [Accessibility]({% slug htmlhelpers_loader_accessibility %})&mdash;The Loader is accessible by screen readers and provides WAI-ARIA, Section 508, and WCAG 2.2 compatibility.
 
 ## Next Steps
 

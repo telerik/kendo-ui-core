@@ -20,7 +20,7 @@ To respond to cutting-end design practices and trends, the MediaPlayer component
 * [Multiple sources]({% slug multiplesources_kendoui_mediaplayer %})
 * [Playlists]({% slug playlists_kendoui_mediaplayer %})
 * [Globalization]({% slug globalization_mediaplayer_jquery %})
-* [Accessibility]({% slug accessibility_mediaplayer_jquery %})
+* [Accessibility]({% slug jquery_mediaplayer_accessibility %})
 
 ## Next Steps
 

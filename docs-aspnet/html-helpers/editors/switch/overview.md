@@ -59,7 +59,7 @@ The configuration options of the Switch are passed as attributes.
 ## Functionality and Features
 
 * [Appearance]({% slug switch_appearance %})&mdash;The Switch enables you to customize its appearance based on your requirements.
-* [Accessibility]({% slug accessibility_aspnetcore_switch %})&mdash;The Switch provides accessibility support through its keyboard navigation.
+* [Accessibility]({% slug htmlhelpers_switch_accessibility %})&mdash;The Switch provides accessibility support through its keyboard navigation.
 * [Events]({% slug events_switch %})&mdash;The Switch allows you to handle its events and implement custom functionality.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the Switch, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/switch/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.

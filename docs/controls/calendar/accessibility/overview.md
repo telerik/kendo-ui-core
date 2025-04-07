@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Calendar Documentation | Calendar Accessibility
 description: "Get started with the jQuery Calendar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_calendar
+slug: jquery_calendar_accessibility
 position: 1
 ---
 

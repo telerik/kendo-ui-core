@@ -19,7 +19,7 @@ Unlike the HTML5 range input, the RangeSlider enables the consistent experience 
 * [Orientation]({% slug orientation_rangeslider_widget %})&mdash;The RangeSlider supports horizontal and vertical orientations.
 * [Steps]({% slug steps_rangeslider_widget %})&mdash;You can use the configuration options of the RangeSlider to define the step which the component uses to increase or decrease its value.
 * [Ticks]({% slug ticks_rangeslider_widget %})&mdash;The RangeSlider provides configuration options for setting the placement of its ticks, which indicate the values resulting from each incremented predefined step.
-* [Accessibility]({% slug accessibility_kendoui_rangeslider_widget %})&mdash;The RangeSlider is accessible for screen readers and supports WAI-ARIA attributes.
+* [Accessibility]({% slug jquery_rangeslider_accessibility %})&mdash;The RangeSlider is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## Next Steps
 

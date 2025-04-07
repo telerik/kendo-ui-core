@@ -19,7 +19,7 @@ The Breadcrumb is an intuitive UI component that allows navigation within a fold
 * [Editing]({% slug editing_breadcrumb_widget %})&mdash;You can edit the path set through the Breadcrumb component.
 * [Navigation]({% slug navigation_breadcrumb_widget %})&mdash;The Breadcrumb allows automatic navigation to its items.
 * [Overflowing]({% slug overflowing_breadcrumb_widget %})&mdash;When the width of the Breadcrumb is insufficient to display the entire path, the component will show only the items that fit the available space.
-* [Accessibility]({% slug accessibility_kendoui_breadcrumb_widget %})&mdash;The Breadcrumb is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+* [Accessibility]({% slug jquery_breadcrumb_accessibility %})&mdash;The Breadcrumb is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps 
 

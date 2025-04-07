@@ -16,4 +16,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ComboBo
 
 * [Keyboard Navigation by the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ComboBox]({% slug accessibility_kendoui_combobox_widget %})
+* [Accessibility in the ComboBox]({% slug jquery_combobox_accessibility %})

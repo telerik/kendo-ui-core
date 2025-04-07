@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ImageEditor Documentation | ImageEditor Accessibility
 description: "Get started with the jQuery ImageEditor by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_imageeditor_widget
+slug: jquery_imageeditor_accessibility
 position: 1
 ---
 

@@ -15,4 +15,4 @@ The Avatar is a non-focusable element.
 ## See Also
 
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility of the Avatar]({% slug accessibility_kendoui_avatar_component %})
+* [Accessibility of the Avatar]({% slug jquery_avatar_accessibility %})

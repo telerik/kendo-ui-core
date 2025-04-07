@@ -2,7 +2,7 @@
 title: Overview
 page_title: DropDownList Documentation | DropDownList Accessibility
 description: "Get started with the {{ site.product }} DropDownList and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_dropdownlist
+slug: htmlhelpers_dropdownlist_accessibility
 position: 1
 ---
 

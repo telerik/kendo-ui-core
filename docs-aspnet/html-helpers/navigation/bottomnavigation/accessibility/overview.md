@@ -2,7 +2,7 @@
 title: Overview
 page_title: BottomNavigation Documentation | BottomNavigation Accessibility
 description: "Get started with the {{ site.product }} BottomNavigation and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_bottomnavigation_aspnetcore
+slug: htmlhelpers_bottomnavigation_accessibility
 position: 1
 ---
 

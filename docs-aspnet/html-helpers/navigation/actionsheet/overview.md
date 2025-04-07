@@ -93,7 +93,7 @@ The following example demonstrates a basic configuration of the ActionSheet comp
 
 * [Items]({% slug htmlhelpers_items_actionsheet_aspnetcore %})&mdash;You can configure the desired items and set various attributes like icons, text, descriptions, and more.
 * [Events]({% slug htmlhelpers_events_actionsheet_aspnetcore %})&mdash;Handle the component events and implement the any custom functionality.
-* [Accessibility]({% slug htmlhelpers_accessibility_actionsheet_aspnetcore %})&mdash;The ActionSheet is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_actionsheet_accessibility %})&mdash;The ActionSheet is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
 
 ## Next Steps
 

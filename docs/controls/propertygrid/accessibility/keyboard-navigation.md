@@ -45,4 +45,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Propert
 
 * [Keyboard Navigation by the PropertyGrid (Demo)](https://demos.telerik.com/kendo-ui/propertygrid/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the PropertyGrid]({% slug accessibility_kendoui_propertygrid %})
+* [Accessibility in the PropertyGrid]({% slug jquery_propertygrid_accessibility %})

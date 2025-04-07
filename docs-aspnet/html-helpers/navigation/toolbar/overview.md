@@ -181,7 +181,7 @@ The following example demonstrates the basic configuration of the ToolBar.
 | [Resizing]({% slug toolbar_resizing %})| The ToolBar supports adaptive resizing functionality. |
 | [Integration with Editors]({% slug toolbar_integration %})| The component can be integrated with various form editors to provide an interactive layout to the user. |
 | [Events]({% slug toolbar_events %})| Explore the various ToolBar events that allow you to control what happens when the user interacts with the component. |
-| [Accessibility]({% slug accessibility_toolbar_overview %})| The ToolBar is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_toolbar %}) for faster navigation. |
+| [Accessibility]({% slug htmlhelpers_toolbar_accessibility %})| The ToolBar is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_toolbar %}) for faster navigation. |
 
 ## Next Steps
 

@@ -28,4 +28,4 @@ Kendo UI Drawer supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Drawer]({% slug accessibility_drawer_jquery %})
+* [Accessibility in the Drawer]({% slug jquery_drawer_accessibility %})

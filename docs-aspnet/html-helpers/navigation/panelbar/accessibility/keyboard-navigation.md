@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the PanelBa
 ## See Also
 
 * [Keyboard Navigation in the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/keyboard-navigation)
-* [Accessibility in the PanelBar HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_panelbar %})
+* [Accessibility in the PanelBar HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_panelbar_accessibility %})

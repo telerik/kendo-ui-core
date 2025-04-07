@@ -17,7 +17,7 @@ The Wizard displays content in sequential, stepwise order. Each step of the Kend
 * [Form Integration]({% slug form_integration_wizard_widget  %})&mdash;The Wizard supports integration with the Kendo Form.
 * [Content]({% slug content_wizard_widget  %})&mdash;The component supports different ways to load its data.
 * [Layout]({% slug layout_wizard_widget %})&mdash;The Wizard provides both vertical and horizontal orientations.
-* [Accessibility]({% slug accessibility_kendoui_wizard_widget %})&mdash;The Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_wizard_accessibility %})&mdash;The Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

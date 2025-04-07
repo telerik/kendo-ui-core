@@ -118,6 +118,9 @@ In order to bind the column to a remote collection of items, supply a URL Action
 ```
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Foreign Key Column Local Binding (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/foreignkeycolumn)
 * [Foreign Key Column Remote Binding (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/foreignkeycolumnbinding)
 * [Server-Side API](/api/grid)

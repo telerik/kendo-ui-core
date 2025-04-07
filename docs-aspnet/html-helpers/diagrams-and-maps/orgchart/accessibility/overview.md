@@ -2,7 +2,7 @@
 title: Overview
 page_title: OrgChart Documentation | OrgChart Accessibility
 description: "Get started with the {{ site.product }} OrgChart and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_orgchart
+slug: htmlhelpers_orgchart_accessibility
 position: 1
 ---
 
@@ -48,9 +48,9 @@ The `OrgChart` component represents a tree structure and allows editing of its i
 
 The edit popup of the OrgChart must implement the specification of the Window component with a Form component in it.
 
-[Window accessibility specification]({% slug accessibility_aspnetcore_window %})
+[Window accessibility specification]({% slug htmlhelpers_window_accessibility %})
 
-[Form accessibility specification]({% slug htmlhelpers_form_aspnetcore_accessibility %})
+[Form accessibility specification]({% slug htmlhelpers_form_accessibility %})
 
 ## Resources
 

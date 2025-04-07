@@ -17,7 +17,7 @@ The Kendo UI for jQuery DropDownButton widget combines a button with a drop-down
 * [Items]({% slug items_kendoui_dropdownbutton_widget %})&mdash;The DropDownButton exposes multiple configurable options for its items.
 * [Appearance]({% slug appearance_kendoui_dropdownbutton_widget %})&mdash;You can change the DropDownButton appearance by using different styling options.
 * [Icons]({% slug icons_kendoui_dropdownbutton_widget %})&mdash;The DropDownButton provides various options to display icons.
-* [Accessibility]({% slug accessibility_kendoui_dropdownbutton_widget %})&mdash;The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_dropdownbutton_widget %}).
+* [Accessibility]({% slug jquery_dropdownbutton_accessibility %})&mdash;The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_dropdownbutton_widget %}).
 
 
 ## Next Steps

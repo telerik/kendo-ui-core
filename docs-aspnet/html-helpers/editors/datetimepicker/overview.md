@@ -118,7 +118,7 @@ The DateTimePicker component respects DataAnnotations when the `DateTimePickerFo
 | [Week number column]({% slug weeknumcolumn_datetimepicker_aspnetcore %})|The DateTimePicker provides options for rendering a column which displays the number of the weeks within the current `Month` view.|
 | [Templates]({% slug templates_datetimepicker_aspnetcore %})|The DateTimePicker provides options for using and customizing its templates.|
 | [Globalization]({% slug globalization_datetimepicker_aspnetcore %})|The DateTimePicker comes with globalization support that allows you to use the component in apps all over the world.|
-| [Accessibility]({% slug accessibility_datetimepicker_aspnetcore %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
+| [Accessibility]({% slug htmlhelpers_datetimepicker_accessibility %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
 | [Automatic Correction]({% slug htmlhelpers_datetimepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps

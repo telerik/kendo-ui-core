@@ -77,5 +77,8 @@ When a specified column has a footer, you can change the alignment of its conten
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Content Alignment of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/cell-alignment)
 * [Server-Side API](/api/grid)

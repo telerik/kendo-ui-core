@@ -2,7 +2,7 @@
 title: Overview
 page_title: ComboBox Documentation | ComboBox Accessibility
 description: "Get started with the {{ site.product }} ComboBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_combobox
+slug: htmlhelpers_combobox_accessibility
 position: 1
 ---
 

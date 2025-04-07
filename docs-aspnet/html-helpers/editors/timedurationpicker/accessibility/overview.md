@@ -2,7 +2,7 @@
 title: Overview
 page_title: TimeDurationPicker Documentation | TimeDurationPicker Accessibility
 description: "Get started with the {{ site.product }} TimeDurationPicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_timedurationpicker_overview
+slug: htmlhelpers_timedurationpicker_accessibility
 position: 1
 ---
 

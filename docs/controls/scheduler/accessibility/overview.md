@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Scheduler Documentation | Scheduler Accessibility
 description: "Get started with the jQuery Scheduler by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_scheduler_widget
+slug: jquery_scheduler_accessibility
 position: 1
 ---
 

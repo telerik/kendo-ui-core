@@ -2,7 +2,7 @@
 title: Overview
 page_title: OTPInput Documentation | OTPInput Accessibility
 description: "Get started with the {{ site.product }} OTPInput and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_otpinputhelper
+slug: htmlhelpers_otpinput_accessibility
 position: 1
 ---
 

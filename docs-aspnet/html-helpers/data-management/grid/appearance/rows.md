@@ -89,6 +89,9 @@ Hover is a UI state which provides better visualization across long table rows a
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using Row Templates in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/rowtemplate)
 * [Row Templates in the Grid HtmlHelper for {{ site.framework }}]({% slug row_templates_aspnetcore_grid %})
 * [Server-Side API](/api/grid)

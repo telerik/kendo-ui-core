@@ -16,7 +16,7 @@ The Chart Wizard component consists of multiple nested components and supports t
 
 | **Component** | **Documentation** |
 |-----------|---------------|
-| ColorPicker | [ColorPicker Keyboard Navigation Documentation]({%slug accessibility_colorpicker_overview%}) |
+| ColorPicker | [ColorPicker Keyboard Navigation Documentation]({%slug htmlhelpers_colorpicker_accessibility%}) |
 | Charts | [Charts Keyboard Navigation Documentation]({%slug keynav_aspnetcore_charts%}) |
 | DropDownButton | [DropDownButton Keyboard Navigation Documentation]({%slug keynav_aspnetcore_dropdownbutton%}) |
 | DropDownList | [DropDownList Keyboard Navigation Documentation]({%slug keynav_aspnetcore_dropdownlist%}) |

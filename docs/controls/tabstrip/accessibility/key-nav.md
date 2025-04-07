@@ -16,4 +16,4 @@ For a complete example, refer to the [demo on keyboard navigation of the TabStri
 
 * [Keyboard Navigation by the TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the TabStrip]({% slug accessibility_tabstrip %})
+* [Accessibility in the TabStrip]({% slug jquery_tabstrip_accessibility %})

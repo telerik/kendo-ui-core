@@ -2,7 +2,7 @@
 title: Overview
 page_title: jQuery PropertyGrid Documentation - PropertyGrid Accessibility
 description: "Get started with the jQuery PropertyGrid by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_propertygrid
+slug: jquery_propertygrid_accessibility
 position: 1
 ---
 

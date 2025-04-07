@@ -189,7 +189,7 @@ The following example demonstrates the basic configuration of the Chart Wizard b
 * [Export Options]({% slug htmlhelpers_export_chartwizard %})&mdash;You can export the generated chart in different file formats.
 * [Window Configuration]({% slug htmlhelpers_window_chartwizard %})&mdash;Define the desired settings of the Window that holds the Chart Wizard.
 * [Events]({% slug htmlhelpers_events_chartwizard %})&mdash;The component emits a variety of events that allow you to implement custom functionality.
-* [Accessibility]({% slug accessibility_chartwizard %})&mdash;The Chart Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_chartwizard %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_chartwizard_accessibility %})&mdash;The Chart Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_chartwizard %}) for faster navigation.
 
 ## Next Steps
 

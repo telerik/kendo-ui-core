@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Breadcrumb Documentation | Breadcrumb Accessibility
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_breadcrumb_widget
+slug: jquery_breadcrumb_accessibility
 position: 1
 ---
 

@@ -25,7 +25,7 @@ To modify the week column template, use the [`WeekNumber`](/api/kendo.mvc.ui.flu
 
 The dates which are out of the `Min` and `Max` range are rendered as empty. To change their template, use the [`month.empty`]({{ MonthEmpty }}) option.
 
-For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %}#wai-aria).
+For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datepicker_accessibility %}#wai-aria).
 
 ## See Also
 

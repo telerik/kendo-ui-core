@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Spreadsheet Documentation | Spreadsheet Accessibility
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_spreadsheet_widget
+slug: jquery_spreadsheet_accessibility
 position: 1
 ---
 

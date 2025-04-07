@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery FloatingActionButton Documentation | FloatingActionButton Accessibility
 description: "Get started with the jQuery FloatingActionButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_floatingactionbutton_widget
+slug: jquery_floatingactionbutton_accessibility
 position: 1
 ---
 

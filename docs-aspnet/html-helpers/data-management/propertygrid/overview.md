@@ -197,7 +197,7 @@ The PropertyGrid provides a variety of options for the items configuration, tool
 * [Items]({% slug htmlhelpers_items_propertygrid %})&mdash;The configuration of the PropertyGrid items allows you to customize their appearance and behavior.
 * [Templates]({% slug htmlhelpers_templates_propertygrid %})&mdash;The available templates allow you to control the rendering of the items and toolbar.
 * [Events]({% slug htmlhelpers_events_propertygrid %})&mdash;The component emits a variety of events that allow you to implement custom functionality.
-* [Accessibility]({% slug accessibility_aspnetcore_propertygrid %})&mdash;The PropertyGrid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_propertygrid %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_propertygrid_accessibility %})&mdash;The PropertyGrid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_propertygrid %}) for faster navigation.
 
 ## Next Steps
 

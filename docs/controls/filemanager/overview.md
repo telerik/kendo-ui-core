@@ -27,7 +27,7 @@ It enables you to organize and manage files and folders and provides you with a 
 | [Search]({% slug search_kendoui_filemanager_widget %}) | The FilelManager enables you to search for specific file or folder.| 
 | [Sort]({% slug sort_kendoui_filemanager_widget %}) | The FileManager provides an inbuilt Sort functionality.|
 | [Toolbar Commands]({% slug toolbar_kendoui_filemanager_widget %}) | You can configure the items displayed in the integrated ToolBar component.|
-| [Accessibility]({% slug accessibility_kendoui_filemanager_widget %}) | The FileManager is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_filemanager_widget %}).|
+| [Accessibility]({% slug jquery_filemanager_accessibility %}) | The FileManager is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_filemanager_widget %}).|
 | [Globalization]({% slug globalization_kendoui_filemanager_widget %}) | The FileManager supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_kendoui_filemanager_widget %}) need to be supported. Additionally, the FileManager supports [rendering in a right-to-left (RTL) direction]({% slug rtl_kendoui_filemanager_widget %}).|
 
 Visit the [Client API section](/api/javascript/ui/filemanager) for full description of the configurations methods and events of the Kendo UI for jQuery FileManager component.

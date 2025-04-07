@@ -2,7 +2,7 @@
 title: Overview
 page_title: ToolBar Documentation | ToolBar Accessibility
 description: "Get started with the {{ site.product }} ToolBar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_toolbar_overview
+slug: htmlhelpers_toolbar_accessibility
 position: 1
 ---
 

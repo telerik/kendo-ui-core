@@ -2,7 +2,7 @@
 title: Overview
 page_title: ProgressBar Documentation | ProgressBar Accessibility
 description: "Get started with the {{ site.product }} ProgressBar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_progressbar_overview
+slug: htmlhelpers_progressbar_accessibility
 position: 1
 ---
 

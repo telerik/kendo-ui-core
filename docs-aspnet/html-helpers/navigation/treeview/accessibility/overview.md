@@ -2,7 +2,7 @@
 title: Overview
 page_title: TreeView Documentation | TreeView Accessibility
 description: "Get started with the {{ site.product }} TreeView and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_treeview
+slug: htmlhelpers_treeview_accessibility
 position: 1
 ---
 

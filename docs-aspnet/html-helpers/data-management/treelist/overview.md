@@ -196,7 +196,7 @@ The following example demonstrates how to define the TreeList.
 | [Scrolling]({% slug htmlhelpers_treelist_aspnetcore_scrolling %}) | You can independently control vertical and horizontal scrolling in the component. |
 | [Row Selection]({% slug htmlhelpers_treelist_selection %}) | The TreeList supports different modes of row selection. |
 | [Localization]({% slug globalization_htmlhelpers_treelist %}) | The control provides [localization]({% slug htmlhelpers_treelist_aspnetcore_localization_overview %}) of its messages. |
-| [Accessibility]({% slug htmlhelpers_treelist_aspnetcore_accessibility %}) | The TreeList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug htmlhelpers_treelist_aspnetcore_keynav %}) for faster navigation.|
+| [Accessibility]({% slug htmlhelpers_treelist_accessibility %}) | The TreeList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug htmlhelpers_treelist_aspnetcore_keynav %}) for faster navigation.|
 
 ## Next Steps
 

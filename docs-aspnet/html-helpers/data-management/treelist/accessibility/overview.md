@@ -2,7 +2,7 @@
 title: Overview
 page_title: TreeList Documentation | TreeList Accessibility
 description: "Get started with the {{ site.product }} TreeList and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_treelist_aspnetcore_accessibility
+slug: htmlhelpers_treelist_accessibility
 position: 1
 ---
 
@@ -34,7 +34,7 @@ The TreeList is a composite component that consists of 2 logically separated str
 
 TreeList Toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -47,7 +47,7 @@ TreeList Toolbar follows the specification of the ToolBar component.
 
 The element with `role=treegrid` must not include the ToolBar element as it does not belong to the `role=treegrid` element itself. It implements the ARIA specification for the Grid component with some exceptions listed below.
 
-[Grid accessibility specification]({% slug accessibility_aspnetcore_grid %})
+[Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
 
 
 In the {{ site.product }} TreeList, the `role=treegrid` is assigned to the `<table>` in the `k-grid-content` element.

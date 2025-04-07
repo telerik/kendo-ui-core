@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ColorGradient Documentation | ColorGradient Accessibility
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_colorgradient_widget
+slug: jquery_colorgradient_accessibility
 position: 1
 ---
 

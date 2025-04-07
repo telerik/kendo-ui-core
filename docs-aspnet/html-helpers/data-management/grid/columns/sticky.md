@@ -58,6 +58,9 @@ The following Grid configuration ensures that it will be possible to scroll colu
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Implementing Sticky Columns in the Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns)
 * [Knowledge Base](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

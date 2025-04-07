@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the DropDow
 ## See Also
 
 * [Keyboard Navigation in the DropDownTree HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/DropDownTree/keyboard-navigation)
-* [Accessibility in the DropDownTree HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_dropdowntree %})
+* [Accessibility in the DropDownTree HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_dropdowntree_accessibility %})

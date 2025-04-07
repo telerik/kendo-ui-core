@@ -217,5 +217,8 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server Detail Template by the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/serverdetails)
 * [Server-Side API](/api/grid)

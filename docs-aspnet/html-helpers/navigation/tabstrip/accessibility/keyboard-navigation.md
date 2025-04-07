@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the TabStri
 ## See Also
 
 * [Keyboard Navigation in the TabStrip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tabstrip/keyboard-navigation)
-* [Accessibility in the TabStrip HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_tabstrip %})
+* [Accessibility in the TabStrip HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_tabstrip_accessibility %})

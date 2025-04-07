@@ -2,7 +2,7 @@
 title: Overview
 page_title: Dialog Documentation | Dialog Accessibility
 description: "Get started with the {{ site.product }} Dialog and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessbility_aspnetcore_dialog
+slug: htmlhelpers_dialog_accessibility
 position: 1
 ---
 

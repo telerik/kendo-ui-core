@@ -30,4 +30,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ColorGr
 ## See Also
 
 * [Keyboard Navigation in the ColorGradient for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorgradient/keyboard-navigation)
-* [Accessibility in the ColorGradient for {{ site.framework }}]({% slug htmlhelpers_accessibility_colorgradient %})
+* [Accessibility in the ColorGradient for {{ site.framework }}]({% slug htmlhelpers_colorgradient_accessibility %})

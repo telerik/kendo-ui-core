@@ -78,7 +78,7 @@ As of the 2024 Q4 Release the {{ site.framework }} DateRangePicker is compatible
 | [Calendar types]({% slug calendartypes_daterangepicker_aspnetcore %})|The DateRangePicker works with `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.|
 | [Week number column]({% slug weeknumcolumn_daterangepicker_aspnetcore %})|The DateRangePicker provides options for rendering a column which displays the number of the weeks within the current `Month` view.|
 | [Globalization]({% slug globalization_daterangepicker_aspnetcore %})|The DateRangePicker comes with globalization support that allows you to use the component in apps all over the world.|
-| [Accessibility]({% slug accessibility_daterangepicker_aspnetcore %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
+| [Accessibility]({% slug htmlhelpers_daterangepicker_accessibility %})|The DateRangePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_daterangepicker_aspnetcore %}) for faster navigation.|
 | [Reverse Selection]({% slug reverse_selection_daterangepicker_aspnetcore %})|The component allows you to pick an end date which is before the start date.|
 | [Buttons]({% slug buttons_daterangepicker_aspnetcore %})|Learn more about the buttons supported by the component.|
 | [Automatic Correction]({% slug htmlhelpers_daterangepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |

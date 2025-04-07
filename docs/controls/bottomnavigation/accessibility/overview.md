@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery BottomNavigation Documentation | BottomNavigation Accessibility
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_bottomnavigation_widget
+slug: jquery_bottomnavigation_accessibility
 position: 1
 ---
 

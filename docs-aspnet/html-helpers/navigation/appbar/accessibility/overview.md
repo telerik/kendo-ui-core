@@ -2,7 +2,7 @@
 title: Overview
 page_title: AppBar Documentation | AppBar Accessibility
 description: "Get started with the {{ site.product }} AppBar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_appbar_overview
+slug: htmlhelpers_appbar_accessibility
 position: 1
 ---
 

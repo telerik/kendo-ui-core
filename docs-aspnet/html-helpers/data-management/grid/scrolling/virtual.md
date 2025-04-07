@@ -98,5 +98,8 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Virtualization of Remote Data by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Server-Side API](/api/grid)

@@ -111,7 +111,7 @@ As of the 2024 Q4 Release the {{ site.framework }} TimePicker is compatible with
 | [Formats]({% slug formats_timepicker_aspnetcore %}) | The TimePicker allows you to define its time formatting. |
 | [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %}) | The TimePicker is designed to keep its input value unchanged even when the typed time is invalid. |
 | [Globalization]({% slug globalization_timepicker_aspnetcore %}) | The globalization process combines the translation of component messages (localization) with adapting them to specific cultures. |
-| [Accessibility]({% slug accessibility_timepicker_aspnetcore %}) | The TimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Accessibility]({% slug htmlhelpers_timepicker_accessibility %}) | The TimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
 | [Automatic Correction]({% slug htmlhelpers_timepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps

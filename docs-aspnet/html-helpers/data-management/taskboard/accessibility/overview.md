@@ -2,7 +2,7 @@
 title: Overview
 page_title: TaskBoard Documentation | TaskBoard Accessibility
 description: "Get started with the {{ site.product }} TaskBoard and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_taskboard_aspnetcore_accessibility
+slug: htmlhelpers_taskboard_accessibility
 position: 1
 ---
 

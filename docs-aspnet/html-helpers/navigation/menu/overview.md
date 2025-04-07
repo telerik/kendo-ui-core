@@ -283,7 +283,7 @@ The following example demonstrates the basic configuration of the Menu.
 | [ContextMenu]({% slug htmlhelpers_contextmenu_aspnetcore %})| The Menu component supports the creation and implementation of context menus that open on right-click or based on custom events. |
 | [Security Trimming]({% slug securitytrimming_menu_aspnetmvc %})| The built-in security trimming functionality of the Menu is enabled by default. |
 | [Events]({% slug events_menu %})| Explore the various Menu events that allow you to control what happens when the user interacts with the component. |
-| [Accessibility]({% slug accessibility_aspnetcore_menu %})| The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_menu_accessibility %})| The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

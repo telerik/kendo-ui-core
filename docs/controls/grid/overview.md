@@ -34,7 +34,7 @@ It provides options for executing data operations, such as paging, sorting, filt
 |[Selection]({% slug selection_kendoui_grid_widget %}) | The Grid is highly flexible on selection as it provides a number of selection modes such as the checkbox-column, single-row, multi-row, single-cell, and multi-cell selection mechanisms. 
 |Rendering and styling | You can take full advantage of the appearance control options the Grid provides, which include [adaptive rendering]({% slug adaptive_rendering_kendoui_grid_widget %}), [initializing the Grid in hidden containers]({% slug hidden_containers_kendoui_grid_widget %}), [styling its rows]({% slug rows_kendoui_grid_widget %}), and [setting its height]({% slug height_kendoui_grid_widget %}) and [width]({% slug width_kendoui_grid_widget %}).
 |[Globalization]({% slug globalization_kendoui_grid_widget %}) | The Grid supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_kendoui_grid_widget %}) need to be supported. Additionally, the Grid supports [rendering in a right-to-left (RTL) direction]({% slug rtl_kendoui_grid_widget %}).
-|[Accessibility]({% slug accessibility_kendoui_grid_widget %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_grid_widget %}).
+|[Accessibility]({% slug jquery_grid_accessibility %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_grid_widget %}).
 
 ## Next Steps 
 

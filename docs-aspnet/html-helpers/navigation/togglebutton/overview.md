@@ -85,7 +85,7 @@ The following example demonstrates the available configuration options for the T
 * [Icons]({% slug icons_togglebutton_aspnetcore %})&mdash;The variety of icons allows you to enhance the appearance of the ToggleButton.
 * [Group]({% slug htmlhelpers_togglebutton_aspnetcore_group %})&mdash;You can group several ToggleButton instances.
 * [Badges]({% slug badges_togglebutton_aspnetcore %})&mdash;Add a [Badge]({% slug overview_badgehelper_aspnetcore %}) to the ToggleButton to conveniently show its status, a notification, or a short message.
-* [Accessibility]({% slug accessibility_togglebutton_overview %})&mdash;The ToggleButton is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_togglebutton%}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_togglebutton_accessibility %})&mdash;The ToggleButton is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_togglebutton%}) for faster navigation.
 
 ## Next Steps
 

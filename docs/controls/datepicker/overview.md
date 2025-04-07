@@ -28,7 +28,7 @@ It provides options for using custom templates for its **Month** view, setting m
 | [Templates]({% slug templates_datepicker %})|The DatePicker supports the implementation of templates which enable you to customize its elements such as cells, footer, and week column.   
 | [Automatic Correction]({% slug autocorrect_kendoui_datepicker %})|You can configure whether the component will autocorrect the user's input when the `min` and `max` dates are set.
 | [Globalization]({% slug globalization_datepicker %})|The DatePicker supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_datepicker %}) need to be supported. Additionally, the DatePicker supports [rendering in a right-to-left (RTL) direction]({% slug rtl_datepicker %}).
-| [Accessibility]({% slug accessibility_datepicker %})|The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_datepicker %}).
+| [Accessibility]({% slug jquery_datepicker_accessibility %})|The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_datepicker %}).
 
 
 ## Next Steps

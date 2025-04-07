@@ -37,4 +37,4 @@ Kendo UI Pager supports the following keyboard shortcuts when a Pager element is
 
 * [Keyboard Navigation by the Pager (Demo)](https://demos.telerik.com/kendo-ui/pager/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Pager]({% slug accessibility_kendoui_pager_widget %})
+* [Accessibility in the Pager]({% slug jquery_pager_accessibility %})

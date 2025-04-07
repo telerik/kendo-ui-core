@@ -86,5 +86,8 @@ The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using the API of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 * [Optimizing the Grid Performance]({% slug bestpractice_aspnetcore_grid %})

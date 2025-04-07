@@ -20,7 +20,10 @@ By default, the Grid creates its `date` objects on the client immediately after 
 
 To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server (MVC Project)](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridDateUtcOnServerAndClient).
 
-## See also
+## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Localization of Messages]({% slug localization_aspnetcore_grid %})
 * [Globalization in {{ site.product }}]({% slug overview_globalization_core %})

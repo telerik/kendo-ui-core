@@ -2,7 +2,7 @@
 title: Overview
 page_title: FileManager Documentation | FileManager Accessibility
 description: "Get started with the {{ site.product }} FileManager and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_filemanager
+slug: htmlhelpers_filemanager_accessibility
 position: 1
 ---
 
@@ -39,32 +39,32 @@ Each component implements its own dedicated ARIA spec.
 
 The FileManager component integrates the ToolBar component and follows its WAI-ARIA spec:
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 
 The component that organizes the inner structure of the FileManager is a Splitter:
 
-[Splitter accessibility specification]({% slug accessbility_aspnetcore_splitter %})
+[Splitter accessibility specification]({% slug htmlhelpers_splitter_accessibility %})
 
 
 The main navigation component in the FileManager is the TreeView:
 
-[TreeView accessibility specification]({% slug accessibility_aspnetcore_treeview %})
+[TreeView accessibility specification]({% slug htmlhelpers_treeview_accessibility %})
 
 
 The helper navigation component in the FileManager is the Breadcrumb:
 
-[Breadcrumb accessibility specification]({% slug accessibility_aspnetcore_breadcrumb %})
+[Breadcrumb accessibility specification]({% slug htmlhelpers_breadcrumb_accessibility %})
 
 
 The component placed in the main pain of the FileManager can be a selectable ListView:
 
-[ListView accessibility specification]({% slug accessibility_htmlhelpers_listview %})
+[ListView accessibility specification]({% slug htmlhelpers_listview_accessibility %})
 
 
 or it can be a Grid:
 
-[Grid accessibility specification]({% slug accessibility_aspnetcore_grid %})
+[Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
 
 
 Apart from that the `.k-filemanager-preview` element must be focusable, so that its content would be communicated to the users:

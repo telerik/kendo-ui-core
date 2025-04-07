@@ -26,7 +26,7 @@ The DateTimePicker supports configurable options for minimum and maximum value, 
 | [Validation]({% slug validation_kendoui_datetimepicker %}) |The DateTimePicker is designed to keep its input value unchanged even when the typed date is invalid. |
 | [Interval]({% slug interval_kendoui_datetimepicker %}) |You can configure the interval between the time values. |
 | [Date and time formatting]({% slug datetimeformats_kendoui_datetimepicker_widget %}) | The DateTimePicker allows you to define its date and time formatting. |
-| [Accessibility]({% slug accessibility_kendoui_datetimepicker_widget %}) | The DateTimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Accessibility]({% slug jquery_datetimepicker_accessibility %}) | The DateTimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
 | [Automatic Correction]({% slug autocorrect_kendoui_datetimepicker %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 | [Calendar types]({% slug calendartypes_kendoui_datetimepicker %})| You can use a specific calendar type out of the supported DateTimePicker ones. |
 

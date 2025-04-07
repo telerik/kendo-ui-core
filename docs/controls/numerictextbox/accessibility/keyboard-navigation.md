@@ -16,4 +16,4 @@ For more information on rendering a numeric software keyboard, refer to the arti
 
 * [Keyboard Navigation by the NumericTextBox (Demo)](https://demos.telerik.com/kendo-ui/numerictextbox/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the NumericTextBox]({% slug accessibility_numerictextbox %})
+* [Accessibility in the NumericTextBox]({% slug jquery_numerictextbox_accessibility %})

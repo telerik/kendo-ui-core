@@ -309,7 +309,7 @@ The following example demonstrates the basic configuration of the Gantt.
 | [Select date range]({% slug htmlhelpers_gantt_select_date_range_aspnetcore %}) | You can configure the component to display tasks in a specified date range only. |
 | [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %}) | The Gantt allows you to assign optional resources to the Gantt tasks. |
 | [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %}) | You can customizing the rendering of the Gantt tasks through templates. |
-| [Accessibility]({% slug accessibility_aspnetcore_gantt %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_gantt_accessibility %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

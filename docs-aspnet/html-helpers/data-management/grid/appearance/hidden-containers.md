@@ -43,6 +43,9 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Initializing the Grid HtmlHelper for {{ site.framework }} in a TabStrip component]({% slug grid-initialize-in-tabstrip%})
 * [Scrolling by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %})

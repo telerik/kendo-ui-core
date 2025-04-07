@@ -25,4 +25,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ActionS
 
 * [Keyboard Navigation by the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ActionSheet]({% slug accessibility_kendoui_actionsheet_widget %})
+* [Accessibility in the ActionSheet]({% slug jquery_actionsheet_accessibility %})

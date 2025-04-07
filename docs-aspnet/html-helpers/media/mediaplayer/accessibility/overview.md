@@ -2,7 +2,7 @@
 title: Overview
 page_title: MediaPlayer Documentation | MediaPlayer Accessibility
 description: "Get started with the {{ site.product }} MediaPlayer and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_mediaplayer_accessibility_overview_aspnetcore
+slug: htmlhelpers_mediaplayer_accessibility
 position: 1
 ---
 

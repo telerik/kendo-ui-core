@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery RangeSlider Documentation | RangeSlider Accessibility
 description: "Get started with the jQuery RangeSlider by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_rangeslider_widget
+slug: jquery_rangeslider_accessibility
 position: 1
 ---
 

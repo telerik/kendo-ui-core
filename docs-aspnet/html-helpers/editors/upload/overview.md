@@ -212,7 +212,7 @@ An Upload widget configured in such way offers support for multiple file selecti
 | [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %})| The Upload enables you to integrate file validation for each of the selected files.|
 | [Identification of files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})|You can identify the file object during its upload process.|
 | [Sending and receiving metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %}) | You can send additional information to the specified endpoint which is used for storing the uploaded file.|
-| [Accessibility]({% slug accessibility_aspnetcore_upload %})| The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_upload %}) for faster navigation.| 
+| [Accessibility]({% slug htmlhelpers_upload_accessibility %})| The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_upload %}) for faster navigation.| 
 | [Events]({% slug events_upload_aspnetcore %})| The Upload allows you to handle its file processing events and implement custom functionality.
 
 ## Next Steps

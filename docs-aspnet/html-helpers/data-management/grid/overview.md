@@ -180,7 +180,7 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 | [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar %}) | You can add command buttons to the toolbar and even define custom commands. |
 | Rendering and styling | You can customize the appearance of the Grid by [configuring its rows]({% slug rows_aspnetcore_grid_widget %}), initializing the Grid from a [hidden container]({% slug hidden_containers_aspnetcore_grid %}), using [adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %}), and setting its [height]({% slug height_aspnetcore_grid %}) and [width]({% slug width_grid_aspnetcore %}). |
 | [Globalization]({% slug globalization_grid_aspnetcore %}) | The Grid provides globalization through the combination of [localization]({% slug localization_aspnetcore_grid %}) with [internationalization]({% slug intl_aspnetcore_grid %}) and [right-to-left support]({% slug rtl_aspnetcore_grid %}).|
-| [Accessibility]({% slug accessibility_aspnetcore_grid %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_grid %}) for faster navigation. |
+| [Accessibility]({% slug htmlhelpers_grid_accessibility %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_grid %}) for faster navigation. |
 
 ## Next Steps
 
@@ -194,6 +194,9 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)
 * [ASP.NET {{ site.framework_short }} Grid example](https://demos.telerik.com/{{ site.platform }}/grid)

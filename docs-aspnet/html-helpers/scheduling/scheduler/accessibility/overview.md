@@ -2,7 +2,7 @@
 title: Overview
 page_title: Scheduler Documentation | Scheduler Accessibility
 description: "Get started with the {{ site.product }} Scheduler and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_scheduler
+slug: htmlhelpers_scheduler_accessibility
 position: 1
 ---
 
@@ -37,7 +37,7 @@ The component is a single tab stop, so the arrows must be used for internal navi
 
 The Scheduler toolbar must implement the specification for a ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 Below are listed the requirements for those components part of the ToolBar.
 
@@ -77,7 +77,7 @@ In case of an Agenda view, the role assigned to the Scheduler layout table (`k-s
 ### Scheduler in Year view
 
 
-Scheduler in Year view implements the [ARIA specification of the MultiViewCalendar]({% slug htmlhelpers_accessibility_multiviewcalendar_aspnetcore %}).
+Scheduler in Year view implements the [ARIA specification of the MultiViewCalendar]({% slug htmlhelpers_multiviewcalendar_accessibility %}).
 
 ### Scheduler in all other views
 

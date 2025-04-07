@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Chat Documentation | Chat Accessibility
 description: "Get started with the jQuery Chat by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_chat_widget
+slug: jquery_chat_accessibility
 position: 1
 ---
 

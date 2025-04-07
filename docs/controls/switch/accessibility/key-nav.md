@@ -22,4 +22,4 @@ The Switch supports the following keyboard shortcut.
 
 * [Keyboard Navigation by the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Switch]({% slug accessibility_kendoui_switch %})
+* [Accessibility in the Switch]({% slug jquery_switch_accessibility %})

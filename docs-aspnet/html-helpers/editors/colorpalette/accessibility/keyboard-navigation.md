@@ -21,4 +21,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ColorPa
 ## See Also
 
 * [Keyboard Navigation by the ColorPalette (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/keyboard-navigation)
-* [Accessibility in the ColorPalette]({% slug accessibility_aspnet_colorpalette_widget %})
+* [Accessibility in the ColorPalette]({% slug htmlhelpers_colorpalette_accessibility %})

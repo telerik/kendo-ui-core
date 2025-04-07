@@ -2,7 +2,7 @@
 title: Overview
 page_title: Accessibility
 description: "Get started with the Telerik UI Loader HtmlHelper for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508 and WCAG 2.2."
-slug: htmlhelpers_loader_aspnetcore_accessibility
+slug: htmlhelpers_loader_accessibility
 position: 1
 ---
 

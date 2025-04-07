@@ -110,7 +110,7 @@ The following example demonstrates how to define the Form.
 | [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})|  You can choose between a `vertical` or `horizontal` orientation of the labels in the Form. |
 | [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})| The Form has a built-in validator to enable seamless client-side validaiton. |
 | [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})| You can hide specific fields, like the `ID`. |
-| [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_form %}) for faster navigation. |
+| [Accessibility]({% slug htmlhelpers_form_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_form %}) for faster navigation. |
 
 ## Next Steps
 

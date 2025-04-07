@@ -16,4 +16,4 @@ For a complete example, refer to the [demo on keyboard navigation of the AutoCom
 
 * [Keyboard Navigation by the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the AutoComplete]({% slug accessibility_kendoui_autocomplete_widget %})
+* [Accessibility in the AutoComplete]({% slug jquery_autocomplete_accessibility %})

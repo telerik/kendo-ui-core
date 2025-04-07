@@ -2,7 +2,7 @@
 title: Overview
 page_title: jQuery PivotGridV2 Documentation - PivotGridV2 Accessibility
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_pivotgridv2
+slug: jquery_pivotgridv2_accessibility
 position: 1
 ---
 

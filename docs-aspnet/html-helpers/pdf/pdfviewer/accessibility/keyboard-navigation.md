@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the PDFView
 ## See Also
 
 * [Keyboard Navigation in the PDFViewer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pdfviewer/keyboard-navigation)
-* [Accessibility in the PDFViewer HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_pdfviewer %})
+* [Accessibility in the PDFViewer HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_pdfviewer_accessibility %})

@@ -31,4 +31,4 @@ The MediaPlayer supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the MediaPlayer]({% slug accessibility_mediaplayer_jquery %})
+* [Accessibility in the MediaPlayer]({% slug jquery_mediaplayer_accessibility %})

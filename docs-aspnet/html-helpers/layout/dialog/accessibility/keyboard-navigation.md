@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Dialog]
 ## See Also
 
 * [Keyboard Navigation in the Dialog HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog/keyboard-navigation)
-* [Accessibility in the Dialog HtmlHelper for {{ site.framework }}]({% slug accessbility_aspnetcore_dialog %})
+* [Accessibility in the Dialog HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_dialog_accessibility %})

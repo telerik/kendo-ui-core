@@ -17,7 +17,7 @@ The Kendo UI ActionSheet is a dialog that displays a set of options for the user
 
 * [Items]({% slug items_actionsheet_widget %})&mdash;The items configuration allows you to set various attributes like icons and text.
 * [Events]({% slug events_actionsheet_widget %})&mdash;The events exposed by the component allow you to implement custom functionality.
-* [Accessibility]({% slug accessibility_kendoui_actionsheet_widget %})&mdash;The ActionSheet is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_actionsheet_accessibility %})&mdash;The ActionSheet is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

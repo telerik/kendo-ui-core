@@ -54,7 +54,7 @@ The following example demonstrates how to define the DropDownButton.
 * [Items]({% slug htmlhelpers_dropdownbutton_aspnetcore_items %})&mdash;You can configure the DropDownButton by adding items to the popup and customizing them.
 * [Appearance]({% slug htmlhelpers_dropdownbutton_aspnetcore_appearance %})&mdash;You can customize the appearance of the DropDownButton by configuring its size, fill mode, theme color, and border radius.
 * [Icons]({% slug htmlhelpers_dropdownbutton_aspnetcore_icons %})&mdash;You can enhance the DropDownButton's textual content by adding icons.
-* [Accessibility]({% slug accessibility_aspnetcore_dropdownbutton %})&mdash;You can access the DropDownButton by using different screen readers.
+* [Accessibility]({% slug htmlhelpers_dropdownbutton_accessibility %})&mdash;You can access the DropDownButton by using different screen readers.
 * [Events]({% slug events_dropdownbutton %})&mdash;Handling the `Click()`, `Open()`, and `Close()` events of the DropDownButton allows you to implement custom functionality.
 
 ## Next Steps

@@ -49,6 +49,6 @@ The Following example demonstrates how you can configure the [Animation effects]
 
 ## See Also
 
-* [Adding Animation Effects to the Window (Demo)](https://demos.telerik.com/{{ site.framework }}/window/animation)
+* [Adding Animation Effects to the Window (Demo)](https://demos.telerik.com/{{ site.platform }}/window/animation)
 * [Server-Side API of the Telerik UI Window for {{ site.framework }}](/api/window)
 * [JavaScript API Reference of the Window](/api/javascript/ui/window)

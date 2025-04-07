@@ -20,7 +20,7 @@ The Kendo UI TaskBoard allows you to organize items and keep track of their stat
 * [Search]({% slug search_kendoui_taskboard_widget %})
 * [Templates]({% slug templates_kendoui_taskboard_widget %})
 * [Toolbar]({% slug toolbar_kendoui_taskboard_widget %})
-* [Accessibility]({% slug accessibility_kendoui_taskboard_widget %})
+* [Accessibility]({% slug jquery_taskboard_accessibility %})
 
 ## Next Steps 
 

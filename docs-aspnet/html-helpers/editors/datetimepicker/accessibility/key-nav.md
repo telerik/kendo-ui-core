@@ -40,4 +40,4 @@ The DateTimePicker supports the following shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the DateTimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/keyboard-navigation)
-* [Accessibility in the DateTimePicker HtmlHelper for {{ site.framework }} ]({% slug accessibility_datetimepicker_aspnetcore %})
+* [Accessibility in the DateTimePicker HtmlHelper for {{ site.framework }} ]({% slug htmlhelpers_datetimepicker_accessibility %})

@@ -253,6 +253,9 @@ To bind the Grid to a property from the `PageModel`, follow the next steps:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 * [Client-Side API of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side HtmlHelper API of the Grid](/api/grid)

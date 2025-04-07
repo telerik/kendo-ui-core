@@ -2,7 +2,7 @@
 title: Overview
 page_title: Chip Documentation | Chip Accessibility
 description: "Get started with the {{ site.product }} Chip and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_chip_overview
+slug: htmlhelpers_chip_accessibility
 position: 1
 ---
 

@@ -20,7 +20,7 @@ The FloatingActionButton floats in the application above other items, and its ma
 * [Alignment]({% slug alignment_floatingactionbutton_widget %})&mdash;The FloatingActionButton provides options that allow you to manipulate the position of the component.
 * [Appearance]({% slug appearance_floatingactionbutton_widget %})&mdash;You can set the size, color, icon, and text of the FloatingActionButton by using the built-in appearance options.
 * [Templates]({% slug templates_floatingactionbutton_widget %})&mdash;The item templates allow you to control the rendering of the items in the FloatingActionButton popup.
-* [Accessibility]({% slug accessibility_kendoui_floatingactionbutton_widget %})&mdash;The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_floatingactionbutton_jquery %}).
+* [Accessibility]({% slug jquery_floatingactionbutton_accessibility %})&mdash;The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_floatingactionbutton_jquery %}).
 
 ## Next Steps
 

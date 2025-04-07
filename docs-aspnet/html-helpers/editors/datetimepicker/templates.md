@@ -19,7 +19,7 @@ To customize the cell template in the **Month** view, use the [`MonthTemplate`](
 
 To modify the footer template of the DatePicker calendar, use the [`Footer`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#footersystemstring) property.
 
-For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug accessibility_datetimepicker_aspnetcore %}#wai-aria).
+For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datetimepicker_accessibility %}#wai-aria).
 
 ## See Also
 

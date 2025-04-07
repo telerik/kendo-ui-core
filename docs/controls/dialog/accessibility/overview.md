@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Dialog Documentation | Dialog Accessibility
 description: "Get started with the jQuery Dialog by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_dialog_widget
+slug: jquery_dialog_accessibility
 position: 1
 ---
 

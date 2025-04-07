@@ -19,6 +19,9 @@ For more information on using localization and right-to-left languages with {{ s
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Globalization of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/globalization)
 * [RTL Support by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/right-to-left-support)
 * [Globalization in {{ site.product }}]({% slug overview_globalization_core %})

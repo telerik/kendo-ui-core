@@ -26,4 +26,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Filter]
 ## See Also
 
 * [Keyboard Navigation by the Filter (Demo)](https://demos.telerik.com/{{site.platform}}/filter/keyboard-navigation)
-* [Accessibility in the Filter]({% slug accessibility_aspnetcore_filter %})
+* [Accessibility in the Filter]({% slug htmlhelpers_filter_accessibility %})

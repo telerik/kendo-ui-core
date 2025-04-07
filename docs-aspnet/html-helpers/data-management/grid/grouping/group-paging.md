@@ -72,4 +72,7 @@ The expanded state of groups is preserved during paging only, but not if sort or
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Virtual Scrolling of the Grid]({% slug virtual_scrolling_aspnetcore_grid %})

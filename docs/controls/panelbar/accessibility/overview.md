@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery PanelBar Documentation | PanelBar Accessibility
 description: "Get started with the jQuery PanelBar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_panelbar_widget
+slug: jquery_panelbar_accessibility
 position: 1
 ---
 

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Chat Documentation | Chat Accessibility
 description: "Get started with the {{ site.product }} Chat and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_chat_overview
+slug: htmlhelpers_chat_accessibility
 position: 1
 ---
 
@@ -34,7 +34,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 Chat ToolBar follows the specification for the the ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 ## Resources
 

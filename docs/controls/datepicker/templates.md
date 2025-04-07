@@ -18,7 +18,7 @@ To modify the week column template, use the [`month.weekNumber`](/api/javascript
 
 The dates which are out of the `min` and `max` range are rendered as empty. To change their template, use the [`month.empty`](/api/javascript/ui/datepicker/configuration/month#monthempty) option.
 
-For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug accessibility_datepicker %}#wai-aria).
+For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug jquery_datepicker_accessibility %}#wai-aria).
 
 ## See Also
 

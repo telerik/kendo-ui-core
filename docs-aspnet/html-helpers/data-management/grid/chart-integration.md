@@ -240,6 +240,9 @@ To create different types of charts from the Grid row and cell selection, procee
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Integrating the Grid HtmlHelper for {{ site.framework }} with Chart Wizard (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/chart-integration)
 * [Server-Side API of the Grid for {{ site.framework }}](/api/grid)
 {% if site.core %}

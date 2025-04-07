@@ -19,7 +19,7 @@ The ButtonGroup is a container for two or more Buttons. Each Button in the compo
 * [Index]({% slug index_kendoui_buttongroup %})&mdash;You can specify which Button of the component will be initially selected.
 * [Badges]({% slug badges_kendoui_buttongroup %})&mdash;You can integrate a Kendo Badge within the ButtonGroup.
 * [Selection]({% slug selection_kendoui_buttongroup %})&mdash;You can allow single or multiple selection in the ButtonGroup.
-* [Accessibility]({% slug accessibility_buttongroup_jquery %})&mdash;The ButtonGroup is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_grid_widget %}).
+* [Accessibility]({% slug jquery_buttongroup_accessibility %})&mdash;The ButtonGroup is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_grid_widget %}).
 
 >tip To learn more about the appearance, anatomy, and accessibility of the ButtonGroup, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/buttongroup/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

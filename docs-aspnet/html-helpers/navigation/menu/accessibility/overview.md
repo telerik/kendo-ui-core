@@ -2,7 +2,7 @@
 title: Overview
 page_title: Menu Documentation | Menu Accessibility
 description: "Get started with the {{ site.product }} Menu and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_menu
+slug: htmlhelpers_menu_accessibility
 position: 1
 ---
 

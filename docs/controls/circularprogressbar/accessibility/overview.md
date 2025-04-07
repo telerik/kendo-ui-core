@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery CircularProgressBar Documentation | CircularProgressBar Accessibility
 description: "Get started with the jQuery CircularProgressBar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_circularprogressbar_widget
+slug: jquery_circularprogressbar_accessibility
 position: 1
 ---
 

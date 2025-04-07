@@ -2,7 +2,7 @@
 title: Overview
 page_title: Grid Documentation | Grid Accessibility
 description: "Get started with the {{ site.product }} Grid and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_grid
+slug: htmlhelpers_grid_accessibility
 position: 1
 ---
 
@@ -36,7 +36,7 @@ The Grid is a composite component that consists of 4 logically separated structu
 
 Grid Toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -49,7 +49,7 @@ Grid Toolbar follows the specification of the ToolBar component.
 
 Grid Grouping Header follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -187,7 +187,7 @@ The Aggregates totals are placed within a `<tfoot>` element in the Content `<tab
 
 For the Grid Pager WAI-ARIA spec, please review the [Pager component]({% slug htmlhelpers_pager_aspnet_overview %}).
 
-[Pager accessibility specification]({% slug accessibility_aspnetcore_pager %}).
+[Pager accessibility specification]({% slug htmlhelpers_pager_accessibility %}).
 
 #### Grid selection aggregates
 
@@ -237,6 +237,9 @@ For details on how the Grid keyboard navigation works, refer to the [Grid Keyboa
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Keyboard Navigation by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation)
 * [Keyboard Navigation by the Grid for {{ site.framework }}]({% slug keynav_aspnetcore_grid %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

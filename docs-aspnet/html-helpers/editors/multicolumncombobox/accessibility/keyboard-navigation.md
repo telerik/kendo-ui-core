@@ -15,4 +15,4 @@ For a complete example, refer to the [demo on keyboard navigation of the MultiCo
 ## See Also
 
 * [Keyboard Navigation in the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/MultiColumnComboBox/keyboard-navigation)
-* [Accessibility in the MultiColumnComboBox HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_multicolumncombobox %})
+* [Accessibility in the MultiColumnComboBox HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_multicolumncombobox_accessibility %})

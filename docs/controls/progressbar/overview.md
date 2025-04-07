@@ -15,7 +15,7 @@ The ProgressBar delivers rich functionality for displaying and tracking the prog
 ## Functionality and Features
 
 * [Appearance]({% slug appearance_kendoui_progressbar %})&mdash;The ProgressBar exposes various options that allow you to change its layout.
-* [Accessibility]({% slug accessibility_kendoui_progressbar_widget %})&mdash;The ProgressBar is accessible for screen readers, and supports WAI-ARIA attributes.
+* [Accessibility]({% slug jquery_progressbar_accessibility %})&mdash;The ProgressBar is accessible for screen readers, and supports WAI-ARIA attributes.
 
 ## Next Steps
 

@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Grid Documentation | Grid Accessibility
 description: "Get started with the jQuery Grid by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_grid_widget
+slug: jquery_grid_accessibility
 position: 1
 ---
 

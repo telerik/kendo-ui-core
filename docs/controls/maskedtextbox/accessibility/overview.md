@@ -2,7 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery MaskedTextBox Documentation | MaskedTextBox Accessibility
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_maskedtextbox_widget
+slug: jquery_maskedtextbox_accessibility
 position: 1
 ---
 
