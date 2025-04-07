@@ -305,6 +305,9 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Row Drag and Drop by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/drag-drop)
 * [Grid Events]({% slug grid_events %})
 * [Server-Side API](/api/grid)

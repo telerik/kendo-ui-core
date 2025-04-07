@@ -10,7 +10,7 @@ position: 3
 
 The Chart Wizard supports remote data binding that enables you to load the chart data through a remote endpoint.
 
-For a runnable example, refer to the [demo on binding the Chart Wizard to remote data](https://demos.telerik.com/{{ site.platform }}/chartwizard/remote-binding).
+For a runnable example, refer to the [demo on binding the Chart Wizard to remote data](https://demos.telerik.com/{{ site.platform }}/chartwizard/remote-data-binding).
 
 To configure the Chart Wizard to bind to data received from a remote endpoint, follow the next steps:
 
@@ -92,7 +92,7 @@ To configure the Chart Wizard to bind to data received from a remote endpoint, f
 ## See Also
 
 * [Binding the Chart Wizard to Local Data]({% slug htmlhelpers_localbinding_chartwizard %})
-* [Binding the Chart Wizard for {{ site.framework }} to Remote Data (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/remote-binding)
+* [Binding the Chart Wizard for {{ site.framework }} to Remote Data (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/remote-data-binding)
 * [Server-Side API of the Chart Wizard HtmlHelper](/api/chartwizard)
 {% if site.core %}
 * [Server-Side API of the Chart Wizard TagHelper](/api/taghelpers/chartwizard)

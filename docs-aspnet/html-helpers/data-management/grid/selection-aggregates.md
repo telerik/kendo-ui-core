@@ -296,6 +296,9 @@ The following example demonstrates how to access the calculated cell aggregates 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Grid Checkbox Selection (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)
 * [Grid Aggregates (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
 * [API Reference of the Grid](https://docs.telerik.com/{{ site.platform }}/api/grid)

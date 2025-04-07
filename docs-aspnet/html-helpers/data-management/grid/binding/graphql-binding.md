@@ -213,6 +213,9 @@ Sending required parameters to the GraphQL server backend and extracting the mea
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [GraphQL Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/graphql)
 * [GraphQL Introduction](https://graphql.org/learn/)
 * [Server-Side API](/api/grid)

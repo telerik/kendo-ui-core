@@ -237,6 +237,9 @@ For details on how the Grid keyboard navigation works, refer to the [Grid Keyboa
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Keyboard Navigation by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation)
 * [Keyboard Navigation by the Grid for {{ site.framework }}]({% slug keynav_aspnetcore_grid %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

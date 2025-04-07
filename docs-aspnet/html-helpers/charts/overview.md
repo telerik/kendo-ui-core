@@ -32,8 +32,7 @@ The following image displays the structure of the Chart.
 
 To see the component in action, check the examples:
 
-* [Demo page for the Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Demo page for the Chart TagHelper](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
+* [Demo page for {{ site.framework }} Charts](https://demos.telerik.com/{{ site.platform }}/charts)
 
 ## Initializing the Chart
 

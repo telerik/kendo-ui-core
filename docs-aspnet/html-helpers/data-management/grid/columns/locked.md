@@ -39,5 +39,8 @@ When you implement custom code and rely on selectors or target the Grid table, t
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Implementing Locked Columns in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/frozen-columns)
 * [Server-Side API](/api/grid)

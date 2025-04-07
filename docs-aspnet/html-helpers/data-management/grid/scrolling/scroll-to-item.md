@@ -263,6 +263,9 @@ The following example shows how to scroll to an item that is not loaded yet when
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Scrolling to Specific Item by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/scroll-to-item)
 * [Client-Side Grid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side Grid HtmlHelper API](/api/grid)

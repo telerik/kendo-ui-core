@@ -869,6 +869,9 @@ To enable batch editing capabilities in an ASP.NET MVC Environment:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [OData-v4 Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
 {% if site.core %}
 * [GitHub Example](https://github.com/telerik/ui-for-aspnet-core-examples/commit/1a513aae311b339349d61e65d4f12fe954e2afc8)

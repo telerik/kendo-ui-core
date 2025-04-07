@@ -173,6 +173,9 @@ To download a Visual Studio Project, refer to [this GitHub repository]({% if sit
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [DataSource Overview]({% slug htmlhelpers_datasource_aspnetcore %})
 * [Grid FAQs]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)

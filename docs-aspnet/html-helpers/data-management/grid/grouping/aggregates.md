@@ -143,5 +143,8 @@ To configure the grid to use server aggregates:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Grouping with Aggregates by the Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
 * [Group Templates]({% slug group_templates_grid_aspnetcore %})

@@ -86,6 +86,9 @@ To set the desired filter mode, use the `Filterable->Mode` property. You can ena
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Filter Rows by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/filter-row)
 * [Filter Checkboxes by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/filter-multi-checkboxes)
 * [Customizing the Filter Menu by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/filter-menu-customization)

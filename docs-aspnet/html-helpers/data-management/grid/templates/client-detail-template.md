@@ -399,5 +399,8 @@ Nesting client templates are not an out-of-the-box feature the Kendo UI Core wra
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Client Detail Templates by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/detailtemplate)
 * [Server-Side API](/api/grid)

@@ -44,4 +44,7 @@ To enable the PDF and Excel Export functionality, add the following ToolBar conf
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)

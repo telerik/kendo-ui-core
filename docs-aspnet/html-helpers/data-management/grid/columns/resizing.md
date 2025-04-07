@@ -69,5 +69,8 @@ By design, the last column of the Grid has no right border, so that no double bo
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Column Resizing by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/column-resizing)
 * [Server-Side API](/api/grid)

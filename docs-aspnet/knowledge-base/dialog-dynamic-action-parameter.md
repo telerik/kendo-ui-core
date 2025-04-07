@@ -116,7 +116,7 @@ For a runnable example based on the code above, refer to the [REPL example on pa
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
 
 {% else %}
-* [{{ site.framework }} Dialog Product Page](https://www.telerik.com/aspnet-mvc/dialog)
+* [{{ site.framework }} Dialog Product Page](https://www.telerik.com/aspnet-mvc/dialog-for-mvc)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
 

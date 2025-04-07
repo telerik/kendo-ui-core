@@ -344,5 +344,8 @@ The final result is a Grid with configured editing![{{ site.product_short }} The
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [WebApi Binding for the Grid HtmlHelper for {{ site.product }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)
 * [Server-Side API](/api/grid)

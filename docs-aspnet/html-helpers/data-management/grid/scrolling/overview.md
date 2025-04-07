@@ -286,6 +286,9 @@ When a web page is zoomed, the browser changes the content size of all pages exc
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Scrolling a Grid HtmlHelper for {{ site.framework }} with Locked Columns (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/frozen-columns)
 * [Virtual Scrolling a Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Endless Scrolling a Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/endless-scrolling-remote)

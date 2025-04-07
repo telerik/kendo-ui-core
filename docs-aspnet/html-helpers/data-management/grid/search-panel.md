@@ -129,5 +129,8 @@ The default search panel message is `Search...`. You can modify it by using the 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)
 * [Knowledge Base Section](/knowledge-base)

@@ -92,4 +92,7 @@ Another option is to use the `TemplateHandler()` option that returns the desired
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/datasource)

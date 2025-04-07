@@ -194,6 +194,9 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)
 * [ASP.NET {{ site.framework_short }} Grid example](https://demos.telerik.com/{{ site.platform }}/grid)

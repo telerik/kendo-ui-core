@@ -36,5 +36,8 @@ You can also avoid the procedure and bypass the keyboard navigation of the Grid,
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Keyboard Navigation by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

@@ -395,5 +395,8 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Editing Approaches by the Grid HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/grid/editing)
 * [Server-Side API](/api/grid)

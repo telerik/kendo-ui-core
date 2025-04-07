@@ -149,5 +149,8 @@ For the complete examples, check out our live demos at:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Custom Editing by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom)
 * [Custom Validator Editing by the Grid HtmlHelper for {{ site.framework }}  (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom-validation)

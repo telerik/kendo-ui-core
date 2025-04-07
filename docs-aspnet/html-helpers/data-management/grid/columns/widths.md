@@ -47,4 +47,7 @@ To remove the misalignment of the columns and headers when the Grid is resized, 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)

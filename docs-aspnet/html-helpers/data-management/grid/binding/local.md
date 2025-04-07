@@ -129,6 +129,9 @@ To configure the Grid for {{ site.framework }} to do local binding:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)

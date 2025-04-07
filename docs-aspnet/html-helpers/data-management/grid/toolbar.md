@@ -391,6 +391,9 @@ The following example demonstrates how to define a server-side Toolbar template.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Toolbar Template of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-template)
 * [Toolbar Columns Menu of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-columns-menu)
 * [Server-Side API of the Grid HtmlHelper](/api/grid)
