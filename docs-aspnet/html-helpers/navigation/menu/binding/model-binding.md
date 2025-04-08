@@ -13,7 +13,7 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
 
 1. Create a new action method and pass the **Categories** table as the model. The **Categories** has to be associated to the **Products** table.
 
-    ```Razor
+    ```C#
     public ActionResult Index()
     {
         NorthwindDataContext northwind = new NorthwindDataContext();

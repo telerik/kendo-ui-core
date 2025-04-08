@@ -59,7 +59,7 @@ The following example demonstrates how to define a TreeMap by using the TreeMap 
     </kendo-treemap>
 ```
 {% endif %}
-```Controler
+```Controller
     public ActionResult Population_Read()
     {
         var result = new List<Population>();

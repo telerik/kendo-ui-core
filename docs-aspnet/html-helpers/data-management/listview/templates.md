@@ -45,7 +45,7 @@ To set the template, refer it when you initialize the ListView. The template dis
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>
@@ -92,7 +92,7 @@ Your project might require you to visually differentiate each alternating item i
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />

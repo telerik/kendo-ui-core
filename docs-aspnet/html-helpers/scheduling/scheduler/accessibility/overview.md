@@ -39,6 +39,7 @@ The Scheduler toolbar must implement the specification for a ToolBar component.
 
 [ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
+
 Below are listed the requirements for those components part of the ToolBar.
 
 | Selector | Attribute | Usage |
@@ -77,7 +78,7 @@ In case of an Agenda view, the role assigned to the Scheduler layout table (`k-s
 ### Scheduler in Year view
 
 
-Scheduler in Year view implements the [ARIA specification of the MultiViewCalendar]({% slug htmlhelpers_multiviewcalendar_accessibility %}).
+Scheduler in Year view implements the ARIA specification of the **MultiViewCalendar**.
 
 ### Scheduler in all other views
 

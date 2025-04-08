@@ -35,7 +35,7 @@ This example shows how to define a custom HtmlHelper named **MyGrid** by extendi
 1. From there, reference the extension method within the page where the component will be utilized.
 
 {% if site.core %}
-```MyGridHelper.cs
+```C# MyGridHelper.cs
     namespace Telerik.Examples.Mvc.Areas.DefineCustomHtmlHelper.Helpers
     {
         public static class MyGridHelper
@@ -55,7 +55,7 @@ This example shows how to define a custom HtmlHelper named **MyGrid** by extendi
     }
 ```
 {% else %}
-```MyGridHelper.cs
+```C# MyGridHelper.cs
     namespace Telerik.Examples.Mvc.Areas.DefineCustomHtmlHelper.Helpers
     {
         public static class MyGridHelper
@@ -75,7 +75,7 @@ This example shows how to define a custom HtmlHelper named **MyGrid** by extendi
     }
 ```
 {% endif %}
-```Index.cshtml
+```Razor Index.cshtml
     @using Telerik.Examples.Mvc.Areas.DefineCustomHtmlHelper.Helpers
 
     @(Html.MyGrid<Telerik.Examples.Mvc.Areas.DefineCustomHtmlHelper.Models.OrderViewModel>("Grid1")

@@ -10,7 +10,7 @@ slug: howto_applydatesignoretimezones_gridaspnetmv
 
 Use the property of the model that should ignore the timezone. Set the value of the property as UTC time by using its ticks. Here is an example:
 
-```
+```C#
     public class Person
     {
         public int PersonID { get; set; }

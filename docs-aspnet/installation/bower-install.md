@@ -68,14 +68,14 @@ To avoid being asked multiple times to provide your credentials while installing
 
 1. In your home directory, create a file called `.netrc` (`~/.netrc`). Verify that you modify the file permissions to make it readable only to you.
 
-      ```sh
+      ```batch sh
       touch ~/.netrc
       chmod 0600 ~/.netrc
       ```
 
 1. Add your credentials to the `~/.netrc` file using the format demonstrated in the following example.
 
-      ```
+      ```batch
       machine bower.telerik.com
           login my-telerik.identity@example.com
           password mysecret

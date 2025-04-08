@@ -58,7 +58,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```
 {% endif %}
-```script
+```JS script
 <script type="text/javascript">
     function onShow(e) {
         console.log("Shown: " + $(e.item).find("> .k-link").text());

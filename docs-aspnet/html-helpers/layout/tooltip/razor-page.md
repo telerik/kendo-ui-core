@@ -16,7 +16,7 @@ This article describes how to configure the Tooltip component in a Razor Pages s
 
 For the complete project, refer to the [Tooltip in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Tooltip/TooltipIndex.cshtml).
 
-```tab-HtmlHelper(cshtml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -53,7 +53,7 @@ For the complete project, refer to the [Tooltip in Razor Pages example](https://
     </script>
 	
 ```
-```tab-TagHelper(cshtml)        
+```TagHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -84,7 +84,7 @@ For the complete project, refer to the [Tooltip in Razor Pages example](https://
     </script>
 	
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
     public void OnGet()
     {

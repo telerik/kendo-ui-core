@@ -31,7 +31,7 @@ How can I display a message in the {{ site.product }} Chart when its data source
 The following example demonstrates how to achieve such behavior in the {{ site.product }} Chart. Note that the `div` element of the message is positioned and decorated through CSS.
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
     @(Html.Kendo().Chart()
         .Name("chart")
@@ -40,7 +40,7 @@ The following example demonstrates how to achieve such behavior in the {{ site.p
     )
 
 ```
-```Script.js
+```JS script.js
     <script>
         function onRender(e) {
             var view = e.sender.dataSource.view();
@@ -54,7 +54,7 @@ The following example demonstrates how to achieve such behavior in the {{ site.p
         }
     </script>
 ```
-```Style.css
+```C# Style.css
 
     <style>
         .container {

@@ -35,7 +35,7 @@ The SplitButton provides options for visually enhancing its textual content by a
         )
     ```
     {% if site.core %}
-    ```TagHelper.cshtml
+    ```TagHelper
         <kendo-splitbutton name="splitButton" text="Plus" sprite-css-class="myPlusIcon">
         </kendo-splitbutton>
     ```

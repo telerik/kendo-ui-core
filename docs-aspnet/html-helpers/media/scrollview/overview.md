@@ -209,7 +209,7 @@ The following example demonstrates how to fetch data from a Controller action.
 
 If you set the `PageSize` option to a larger value, you will need to use a loop in the template.
 
-```
+```JS
     <script id="scrollview-template" type="text/x-kendo-template">
         # for (var i = 0; i < data.length; i++) { #
             <p style="border: 2px solid blue; color: red;">#= data[i].SomeField #</p>

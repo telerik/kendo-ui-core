@@ -18,7 +18,7 @@ To provide the client-side web assets by using LibMan:
 
 1. Add the following configuration to the `libman.json` file to fetch the library in the specified destination:
 
-    ```libman.json
+    ```JS libman.json
     {
     "version": "1.0",
     "defaultProvider": "cdnjs",
@@ -42,7 +42,7 @@ To provide the client-side web assets by using LibMan:
     * `webpack.config.js` and `package.json` files to the **wwwroot** folder of the application.
     * `entry.js` file in the **wwwroot/js/** folder to specify the scripts that should be bundled.
 
-    ```webpack.config.js
+    ```JS webpack.config.js
     const path = require('path');
     var webpack = require("webpack");
 
@@ -69,7 +69,7 @@ To provide the client-side web assets by using LibMan:
         devtool: 'source-map',
     };
     ```
-    ```package.json
+    ```JS package.json
     {
     "version": "1.0.0",
     "name": "asp.net",
@@ -95,7 +95,7 @@ To provide the client-side web assets by using LibMan:
     }
     }
     ```
-    ```entry.js
+    ```JS entry.js
         require("jquery")
         window.$ = window.jQuery = $
 
@@ -119,7 +119,7 @@ To provide the client-side web assets by using LibMan:
 
 1. In the `_Layout.cshtml`, file add a reference to the desired theme, the bundled scripts, and the license file `kendo-ui-license.js`:
 
-    ```_Layout.cshtml
+    ```Razor _Layout.cshtml
         <link rel="stylesheet" href="~/lib/kendo-ui/{{ site.cdnVersion }}/css/web/kendo.default-v2.css" />
         <script src="~/dist/bundle.js"></script>
         <script src="./kendo-ui-license.js"></script>

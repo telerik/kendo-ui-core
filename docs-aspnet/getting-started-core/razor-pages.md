@@ -50,7 +50,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 1. Configure the JSON serialization options of the application in the `Program.cs` file. For more information, refer to the [JSON Serialization article]({% slug jsonserialization_core %}).
 
-    ```Program.cs
+    ```C# Program.cs
 
         var builder = WebApplication.CreateBuilder(args);
 
@@ -139,7 +139,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 1. Send the AntiForgeryToken with each POST request of the page:
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -149,7 +149,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
     You can also pass additional parameters with the request. The names of the custom parameters must be different from the reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -162,7 +162,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 1. In the `PageModel` file, add a handler method for each of the CRUD operations:
 
-    ```
+    ```C# PageModel
         public class IndexModel : PageModel
         {
             public static IList<OrderViewModel> orders;
@@ -219,7 +219,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 You can post data to the PageModel by binding the model properties to ASP.NET Core Razor components that serve as  editors and submitting the entire model through a form. The example below demonstrates how to post the selected option from the [AutoComplete component]({% slug htmlhelpers_autocomplete_aspnetcore %}) to the PageModel:
 
-```tab-HtmlHelper-RazorPage(csthml)
+```HtmlHelper
     @page
     @model IndexModel
 
@@ -250,7 +250,7 @@ You can post data to the PageModel by binding the model properties to ASP.NET Co
         </div>
     </form>
 ```
-```tab-TagHelper-RazorPage(csthml)
+```TagHelper
     @page
     @model IndexModel
 
@@ -280,7 +280,7 @@ You can post data to the PageModel by binding the model properties to ASP.NET Co
         </div>
     </form>
 ```
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     public class IndexModel : PageModel
     {
         [BindProperty]

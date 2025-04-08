@@ -37,7 +37,7 @@ The following example demonstrates how to set up a color-picking custom editor.
                 context = options;
                 open();
             },
-            icon: "k-icon k-i-background"
+            icon: "droplet"
         };
         // This function actually creates the UI if not already there, and
         // caches the dialog and the model.

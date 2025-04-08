@@ -32,7 +32,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-chartwizard>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onChange(e){
             // Handle the Chart Wizard "Change" event that triggers when the component changes its state.

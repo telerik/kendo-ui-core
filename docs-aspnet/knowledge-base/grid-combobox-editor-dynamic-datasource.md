@@ -65,7 +65,7 @@ The desired behavior can be accomplished by using:
 
 - Finally, the read action method can look something like this:
 
-```
+```C#
     public ActionResult GetList(int? ContentId)
     {
         if (ContentId != null && ContentId == 1)

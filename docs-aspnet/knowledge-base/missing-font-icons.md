@@ -34,7 +34,7 @@ Although the SVG icons are used as the predominant font toolset for the suite, t
 
 {% if site.core %}
 * Configure the added server-side Kendo service in the `Program.cs` class:
-    ```
+    ```C#
         builder.Services.AddKendo(options =>
         {
             options.IconType = Kendo.Mvc.IconType.Font;
@@ -53,7 +53,7 @@ Although the SVG icons are used as the predominant font toolset for the suite, t
 
 * Invoke the `Html.Kendo().DefaultSettings()` method within the `_Layout.cshtml` of the application in order for the components to utilize font-icon rendering:
 
-    ```
+    ```Razor
         @Html.Kendo().DefaultSettings()
     ```
 

@@ -106,7 +106,7 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
 
 1. Send the AntiForgeryToken with each POST request of the page. Additional paratemers can also be supplied.
 
-    ```javascript
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();

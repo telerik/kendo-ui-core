@@ -133,7 +133,7 @@ Use the ListView HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 
 In the `ListView` Controller, declare the `Read` Action method. Use the name of the Action (for example, "Products_Read") that you set in the DataSource configuration from the previous step. 
 
-```ListViewController.cs
+```C# ListViewController.cs
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
@@ -206,7 +206,7 @@ The ListView expects a mandatory `ClientTemplateId` configuration to render the 
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <img src="@Url.Content("~/shared/web/foods/")#:ProductID#.jpg" alt="#:ProductName# image" />
@@ -222,7 +222,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var listviewReference = $("#listView").data("kendoListView"); // listviewReference is a reference to the existing instance of the helper.
     </script>
@@ -230,7 +230,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [ListView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control the behavior of the component. In this example, you will see how to turn on the [`selectable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/configuration/selectable) configuration by using the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method. Then you can use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method to programmatically select one of the items.
 
-    ```script
+    ```JS script
         <script>
             var listview = $("#listView").data("kendoListView");
             listview.setOptions({selectable: "single"});  // Turn on the selectable mode of the ListView.

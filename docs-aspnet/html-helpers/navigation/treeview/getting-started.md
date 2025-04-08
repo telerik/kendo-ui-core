@@ -280,7 +280,7 @@ You can reference the TreeView instances that you have created and build on top 
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var treeviewReference = $("#treeview").data("kendoTreeView"); // treeviewReference is a reference to the existing TreeView instance of the helper.
     </script>
@@ -288,7 +288,7 @@ You can reference the TreeView instances that you have created and build on top 
 
 1. Use the [TreeView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview#methods) to control the behavior of the widget. In this example, you will use the `findByText` and `select` methods to select an item.
 
-    ```script
+    ```JS script
     <script>
         var treeviewReference = $("#treeview").data("kendoTreeView"); // treeviewReference is a reference to the existing TreeView instance of the helper.
 

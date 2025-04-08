@@ -24,7 +24,7 @@ When an option is selected in the parent MultiColumnComboBox, the child MultiCol
 
 The following example shows the payload of the request sent by the child MultiColumnComboBox.
 
-```     
+```JS
     filter[filters][0][field]: parentID // "parentID" is the Name() of the parent MultiColumnComboBox.
     filter[filters][0][operator]: eq
     filter[filters][0][value]: slectedOptionValue

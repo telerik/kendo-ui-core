@@ -20,7 +20,7 @@ The ArcGauge export functionality relies on the [Kendo UI Drawing library](https
 
 The ArcGauge allows you to retrieve the PDF representation of the content through the [`exportPDF()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a remote endpoint or downloaded client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-pdf k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export to PDF</button>
     
     @(Html.Kendo().ArcGauge()
@@ -80,7 +80,7 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
 
 You can retrieve the image representation of the ArcGauge content by using the [`exportImage()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded client-side.
 
-```HtmlHelper     
+```HtmlHelper
     <button class='export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as Image</button>
 
     @(Html.Kendo().ArcGauge()
@@ -134,7 +134,7 @@ You can retrieve the image representation of the ArcGauge content by using the [
 
 You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportsvg) to export the ArcGauge as a Scalable Vector Graphics (SVG). The `base64` result can be forwarded to a service or downloaded on the client.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-svg k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as SVG</button>
 
     @(Html.Kendo().ArcGauge()

@@ -88,7 +88,7 @@ How can I validate if a file is selected for upload when working with the {{ sit
 ```
 For the complete example, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/wwYPwobp35zcEZ9d17) example:
 
-```Index.cshtml
+```Razor Index.cshtml
     <div id="validationSummary"></div>
 
     <form id="myForm" method="post">
@@ -105,7 +105,7 @@ For the complete example, refer to the following [Telerik REPL](https://netcorer
         <input type="submit" id="submitForm" />
     </form>
 ```
-```script.js
+```JS script.js
     <script>
           var validator = $("#myForm").kendoValidator({
                 rules: {

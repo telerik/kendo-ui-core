@@ -119,7 +119,7 @@ How can I hide the expand icon for the detail template in a {{ site.product }} G
     </script>    
 ```
 {% else %}
-```Index.cshtml
+```Razor Index.cshtml
     <script id="template" type="text/kendo-tmpl">
         @(Html.Kendo().Grid(@childData)
             .Name("grid#=Id#")
@@ -160,21 +160,21 @@ How can I hide the expand icon for the detail template in a {{ site.product }} G
 ```
 {% endif %}
 
-```Parent.cs
+```C# Parent.cs
     public class Parent {
         public int Id {get;set;}
         public string ParentName {get;set;}
         public bool HasChildren {get;set;}
     }
 ```
-```Child.cs
+```C# Child.cs
     public class Child {
         public int Id {get;set;}
         public int ParentId {get;set;}
         public string ChildName {get;set;}
     }
 ```
-```Script.js
+```JS script.js
     <script>
         function onDataBound(e){
             var items = e.sender.items(); // 1. Gather the DOM element representations of the rows.

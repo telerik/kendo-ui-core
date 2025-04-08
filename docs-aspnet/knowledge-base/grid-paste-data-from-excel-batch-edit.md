@@ -37,7 +37,7 @@ To achieve the desired scenario:
 1. If the user clicks to edit but the context menu is open and the text area is over the Grid's body, handle the [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) event and manually remove the created text area.
 1. To add a native UI look and feel, wire to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) and add the dirty indicator to each of the newly pasted items.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns => {
@@ -71,7 +71,7 @@ To achieve the desired scenario:
         )
     )
 ```
-```Script.js
+```JS script.js
 <script type="text/javascript">
     function onDataBound(e){
         var grid = this;

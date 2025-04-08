@@ -126,7 +126,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
  * For applications using .NET 5 or earlier, open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
 
-	```
+	```C#
 	public void ConfigureServices(IServiceCollection services)
 	{
 		// Add the Kendo UI services to the services container.
@@ -136,7 +136,7 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
  * For applications using .NET 6 and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), open the `Program.cs` file and register the Kendo UI service.
 
-	```
+	```C#
 	var builder = WebApplication.CreateBuilder(args);
 
 	// Add Kendo UI services to the services container.
@@ -145,11 +145,13 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 
 1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`. If you intend to use the Telerik UI ASP.NET Core Tag Helpers, add them with `@addTagHelper *, Kendo.Mvc`.
 
+	```C#
         @using MyTelerikProject
 	    @using MyTelerikProject.Models
         @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
         @addTagHelper *, Kendo.Mvc
         @using Kendo.Mvc.UI
+	```
 
 ## Including the Telerik UI for ASP.NET Core Client-Side Resources
 
@@ -162,45 +164,50 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 
 1. Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the [Telerik UI Bootstrap theme]({% slug sassbasedthemes_overview%}#built-in-themes) to match it:
 
+	```HTML
 		<head>
-		...
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
+			...
+			<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+			<link rel="stylesheet" href="~/css/site.css" />
 
-		@* Add the Kendo Bootstrap theme: *@
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
-		...
+			@* Add the Kendo Bootstrap theme: *@
+			<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
+			...
 		</head>
+	```
 
 1. The Microsoft ASP.NET Core Web Application template comes with a jQuery script reference at the end of _Layout.cshtml file. Find the `jquery.min.js` script line in the `<body>` of the document and remove it.
 
 1. Add the `jQuery` script hosted on the jQuery CDN:
 
+	```HTML
 		<head>
-		...
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
+			...
+			<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+			<link rel="stylesheet" href="~/css/site.css" />
+			<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
 
-		@* Add the jQuery script from the jQuery CDN: *@
-		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-		...
+			@* Add the jQuery script from the jQuery CDN: *@
+			<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+			...
 		</head>
+	```
 
 1. Add the Kendo UI scripts. The Kendo UI script files required by UI for ASP.NET Core must be loaded in the `<head>` tag after the `jQuery` script:
 
+	```HTML
 		<head>
-		...
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
-		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+			...
+			<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+			<link rel="stylesheet" href="~/css/site.css" />
+			<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
+			<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-		@* Add the Kendo UI scripts: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+			@* Add the Kendo UI scripts: *@
+			<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+			<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 		</head>
-
+	```
 >* The `kendo.all.min.js` and `kendo.aspnetmvc.min.js` script must be loaded after the `jquery.min.js` script.
 >* `jQuery` must be loaded only once. Make sure there are no duplicate references elsewhere in the `_Layout`.
 >* As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can use any available jQuery source you prefer (https://jquery.com/download/).

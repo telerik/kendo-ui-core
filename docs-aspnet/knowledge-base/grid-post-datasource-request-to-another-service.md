@@ -36,7 +36,7 @@ I've started using SpreadStreamProcessing and I'm now trying to get it to work w
 1. For get requests, you can use an approach similar to the one demonstrated in [this forum post](https://www.telerik.com/forums/connecting-asp-net-mvc-application-to-asp-net-webapi#f_CGsEPUa0KwgTJ8SEXPIg).
 1. For the standard POST request, you need to serialize the Form request in the same way as the grid request does it. 
 
-```
+```C#
     public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
         var req = JsonConvert.SerializeObject(HttpContext.Request.Form);

@@ -61,7 +61,7 @@ The Telerik UI Diagram for {{ site.framework }} provides options for exporting i
     </kendo-diagram>
 ```
 {% endif %}
-``` JavaScript-export
+```JS JavaScript-export
     <script>
         $(".export-pdf").click(function () {
             var diagram = $("#diagram").getKendoDiagram();
@@ -95,7 +95,7 @@ The Telerik UI Diagram for {{ site.framework }} provides options for exporting i
         });
     </script>
 ```
-``` JavaScript-Template
+```JS JavaScript-Template
     <script>
         function visualTemplate(options) {
             var dataviz = kendo.dataviz;

@@ -36,7 +36,7 @@ How can I customize the **Delete** confirmation dialog in the {{ site.product }}
 1. On confirm delete the record.
 1. On cancel close the Dialog. 
 
-```Index.cshtml
+```Razor Index.cshtml
 @using Kendo.Mvc.UI
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModelGridPopUp>()
@@ -74,7 +74,7 @@ How can I customize the **Delete** confirmation dialog in the {{ site.product }}
         .Visible(false)
     )
 ```
-```Script.js
+```JS script.js
         var currentDataItem;
 
         function onClick(e){

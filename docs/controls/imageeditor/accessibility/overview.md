@@ -38,7 +38,7 @@ The ImageEditor is a composite component containing:
 
 The ToolBar follows the spec for the ToolBar component:
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 
 The image canvas must have an appropriate role and accessible name assigned:
@@ -51,7 +51,7 @@ The image canvas must have an appropriate role and accessible name assigned:
 
 The Edit pane (present on performing crop and resize of image) follows the spec for the Form component:
 
-[Form accessibility specification]({{form_a11y_link}})
+[Form accessibility specification]({% slug jquery_form_accessibility %})
 
 ## Resources
 

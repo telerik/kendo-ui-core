@@ -336,7 +336,7 @@ The Telerik UI for {{ site.framework }} Chart supports an extensive set of serie
 
 To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
-```
+```JavaScript
     // Place the following after the Chart for {{ site.framework }} declaration.
     <script>
         $(function() {

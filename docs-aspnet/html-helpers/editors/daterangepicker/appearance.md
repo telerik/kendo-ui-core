@@ -54,7 +54,7 @@ The default `Size` value is `Medium` and it is applied to the wrapping span elem
 ```html
 <span class="k-dateinput k-input k-input-md">
 </span>
-``` 
+```
 
 ### Rounded
 

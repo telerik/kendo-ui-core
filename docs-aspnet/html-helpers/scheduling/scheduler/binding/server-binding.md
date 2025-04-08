@@ -26,7 +26,7 @@ You can bind the Scheduler to a model.
             public string RecurrenceException { get; set; }
         }
     ```
-    ```Interface
+    ```C# Interface
         public interface ISchedulerEvent
         {
             string Title { get; set; }
@@ -43,6 +43,7 @@ You can bind the Scheduler to a model.
 
 1. Create a new action method which passes the `List` of projections to the view.
 
+    ```C#
         public ActionResult Index()
         {
             List<Projection> cinemaSchedule = new List<Projection> {
@@ -64,6 +65,7 @@ You can bind the Scheduler to a model.
 
             return View(cinemaSchedule);
         }
+    ```
 
 1. Add a Scheduler.
 

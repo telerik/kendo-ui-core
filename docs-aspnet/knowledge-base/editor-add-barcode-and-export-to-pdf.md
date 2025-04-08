@@ -28,7 +28,7 @@ I want to have a Barcode inside the Editor and export everything to PDF when wor
 You can achieve this requirement using the following approach:
 
 
-```Index.cshtml
+```Razor Index.cshtml
 <div id="barcodeContainer" style="display: none;">
     <div style="text-align:center;">
         @(Html.Kendo().Barcode().Name("barcode")
@@ -62,7 +62,7 @@ You can achieve this requirement using the following approach:
            </text>)
     )
 ```
-```script.js
+```JS script.js
     $(document).ready(function () {
         var editor = $("#editor").data().kendoEditor;
         var barcode = $("#barcode").data().kendoBarcode;

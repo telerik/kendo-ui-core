@@ -31,14 +31,16 @@ To include a command column which will render a button for triggering the comman
 
 1. Wire the `click` event of the button to a JavaScript function which will receive the corresponding Grid data item as an argument.  In the function definition, handle the command.
 
-        <script type="text/javascript">
-            function showDetails(e) {
-                e.preventDefault();
+    ```JS
+    <script type="text/javascript">
+        function showDetails(e) {
+            e.preventDefault();
 
-                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-                kendo.alert(dataItem.ShipName);
-            }
-        </script>
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            kendo.alert(dataItem.ShipName);
+        }
+    </script>
+    ```
 
 For a runnable example, refer to the [demo on implementing custom commands in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/custom-command).
 

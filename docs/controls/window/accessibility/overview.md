@@ -36,7 +36,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 Action buttons follow the **Button** specification.
 
-[Button accessibility specification]({{button_a11y_link}})
+[Button accessibility specification]({% slug jquery_button_accessibility %})
 
 ## Resources
 

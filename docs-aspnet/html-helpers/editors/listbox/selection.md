@@ -92,7 +92,7 @@ To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Mul
         </kendo-listbox>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
         <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>

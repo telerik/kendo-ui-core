@@ -90,7 +90,7 @@ By design, when the user hovers over a specified row in the locked Grid table, t
 
     ```
     {% endif %}
-    ```Script
+    ```JS script
         function onDataBound(e) {
             // Replace "Grid" with the Name() of the Grid.
             $("#Grid .k-grid-content-locked table tbody tr").hover(function() { // Hovering the rows within the locked table.
@@ -105,7 +105,7 @@ By design, when the user hovers over a specified row in the locked Grid table, t
     ```
 1. In the `hover` event handler of the Grid tables, toggle a cusom class to the hovered row from the respective table. Set the desired hover color to the custom class with CSS.
 
-    ```Script
+    ```JS script
         function onDataBound(e) {
             $("#Grid .k-grid-content-locked table tbody tr").hover(function() {
                     var uid = $(this).attr("data-uid");
@@ -121,7 +121,7 @@ By design, when the user hovers over a specified row in the locked Grid table, t
             });
         }
     ```
-    ```Styles
+    ```CSS Styles
         <style>
             .custom-hover{
                 background-color: #a5e8e5 !important;

@@ -38,7 +38,7 @@ The example below is implemented as per the following steps:
 1. Use the private `_selectedIds` object of the Grid to save the selected row.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()    
         .Name("grid")
         .Columns(columns => {

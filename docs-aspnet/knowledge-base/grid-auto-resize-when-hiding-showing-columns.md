@@ -69,7 +69,7 @@ Enforce a `min-width` style to the table element using only CSS:
      )
  )
 ```
-```script.js
+```JS script.js
 function onDataBound(e) {
         setGridWidth(e)
     }

@@ -70,7 +70,7 @@ To start using the import and export functionality:
 
 1. Implement the action method in the corresponding controller.
 
-    ```
+    ```C#
     using Kendo.Mvc.Export;
     ...
         [HttpPost]
@@ -120,7 +120,7 @@ To start using the import and export functionality:
 
 1. Implement the action method in the corresponding controller.
 
-    ```
+    ```C#
     using Kendo.Mvc.Export;
     ...
         public ActionResult Import(HttpPostedFileBase file)
@@ -149,7 +149,7 @@ To start using the import and export functionality:
 
 The Document Processing Library provides settings for the import and export which enables you to fine-tune the way the content is handled in the supported document types. The following example demonstrates how to use [`HtmlImportSettings`](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so that you can process HTML images before they are exported to `RadFlowDocument`.
 
-```
+```C#
 using Kendo.Mvc.Export;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
@@ -184,7 +184,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 
 The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
 
-```
+```C#
 using Kendo.Mvc.Export;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...

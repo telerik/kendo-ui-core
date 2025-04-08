@@ -65,7 +65,7 @@ How can I display hierarchical data in the PanelBar component?
             }}
     </items>
 </kendo-panelbar>
-``` 
+```
 {% endif %}
 ```Controller
     public class HomeController : Controller

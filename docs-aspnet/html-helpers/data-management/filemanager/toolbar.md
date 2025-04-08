@@ -48,7 +48,8 @@ To Enable/Disable a Toolbar command button or update the its text you can use th
 As of Kendo UI R1 2020 SP1 the kendo.ui.filemanager namespace exposes the FileManagerCommand class that could be extended to implement a custom FileManager command. The example below demonstrates how to create a custom command that shows the total size of the selected files.
 
 First, create a new command by extending the FileManagerCommand class.
-```
+
+```JS
     <script>
         var filemanagerNS = kendo.ui.filemanager;
 

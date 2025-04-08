@@ -84,7 +84,7 @@ The ListBox supports [`MoveUp()`](https://docs.telerik.com/{{ site.platform }}/a
         </kendo-button>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onClickTop() {
                 var listBox = $("#listBox").data("kendoListBox");

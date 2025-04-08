@@ -59,7 +59,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
     - Set the current value to the `Current` property on the model.
     - Set the target value to the `Target` property on the model.
 
-    ```
+    ```Razor
      .Series(series =>
      {
          series.Bullet(model => model.Current, model => model.Target);
@@ -74,7 +74,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 
 1. Next, add and configure the `ValueAxis` with a Numeric configuration. Since the chart will be a spark line visualization, set the `Labels`, `MajorGridLines`, and `MajorTicks` `Visible` properties to `false` to disable them.
 
-    ```
+    ```Razor
         .ValueAxis(va => va.Numeric()
             .Labels(lab => lab.Visible(false))
             .MajorGridLines(m => m.Visible(false))
@@ -197,7 +197,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
      - Disable markers by setting the `Markers` visible property to `false`.
      - Set the tooltip using a valid [number format](https://docs.telerik.com/kendo-ui/globalization/intl/numberformatting) and enabling its visibility.
 
-    ```
+    ```Razor
         .Series(series =>
         {
             series.Line(model => model.EmployeeSales)

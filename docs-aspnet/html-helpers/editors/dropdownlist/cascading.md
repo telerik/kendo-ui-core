@@ -105,7 +105,7 @@ The following example demonstrates how to configure the cascading functionality 
 </kendo-dropdownlist>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function filterProducts() {
             return {

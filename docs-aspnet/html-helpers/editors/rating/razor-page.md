@@ -16,7 +16,7 @@ This article describes how to configure the Rating component in a Razor Pages sc
 
 For the complete project, refer to the [Rating in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Rating/RatingIndex.cshtml).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	
@@ -38,7 +38,7 @@ For the complete project, refer to the [Rating in Razor Pages example](https://g
                 precision="@Model.Precision">
     </kendo-rating>
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
 	public string Precision { get; set; }
     public int Min { get; set; }

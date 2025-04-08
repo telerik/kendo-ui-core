@@ -343,7 +343,7 @@ You can reference the BottomNavigation instances that you have created and build
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var bottomNavigationReference = $("#bottomNavigation").data("kendoBottomNavigation"); // bottomNavigationReference is a reference to the existing instance of the helper.
     </script>
@@ -351,7 +351,7 @@ You can reference the BottomNavigation instances that you have created and build
 
 1. Use the [BottomNavigation client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/bottomnavigation#methods) to control the behavior of the widget. In this example, you will use the `enable` method to control the state of the BottomNavigation items.
 
-    ```script
+    ```JS script
     <script>
         var bottomNavigationReference = $("#bottomNavigation").data("kendoBottomNavigation"); // bottomNavigationReference is a reference to the existing instance of the helper.
         bottomNavigationReference.enable($("#calendar"), false); // Disable the calendar item.

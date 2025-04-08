@@ -55,7 +55,7 @@ I want to remove the master checkbox of the built-in checkbox column in the Tele
     )
 )
 ```
-```script.js
+```JS script.js
 $(document).ready(function () {
         var grid = $("#grid").data("kendoGrid");
         grid.tbody.on("click", ".k-checkbox", onClick);

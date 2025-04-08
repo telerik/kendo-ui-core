@@ -16,14 +16,14 @@ The following example illustrates how to bind custom attributes.
 
 1. Make sure that you have supplemented the Menu items from the controller side.
 
-    ```Controller.cs
+    ```C# Controller.cs
         public ActionResult Menu_Bind_Attributes()
         {
             var categories = categoryService.GetCategories();
             return View(categories);
         }
     ```
-    ```Model.cs
+    ```C# Model.cs
         public class Category
         {
             public Category()
@@ -210,7 +210,7 @@ The following example illustrates how to bind custom attributes.
         </kendo-menu>
     ```
     {% endif %}
-    ```Script.js
+    ```JS script.js
         <script>
             function onMenuSelect(e){
                 // Gather the constructed custom attributes. 

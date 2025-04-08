@@ -31,7 +31,7 @@ How can I filter the events of the {{ site.framework }} Scheduler that uses Sign
 
 * Enable the [`ServerFiltering()`](/api/kendo.mvc.ui.fluent/signalrdatasourcebuilder#serverfilteringsystemboolean) option of the DataSource in the Scheduler. This way, the component automatically sends a `read` call to the local hub (service) upon each navigation that occurs in the Scheduler.
 
-    ```Scheduler
+    ```Razor Scheduler
         @(Html.Kendo().Scheduler<MeetingViewModel>()
             .Name("scheduler")
             ...// Additional configuration.
@@ -46,7 +46,7 @@ How can I filter the events of the {{ site.framework }} Scheduler that uses Sign
 * Specify the [`ParameterMap()`](/api/kendo.mvc.ui.fluent/signalrdatasourcetransportbuilder#parametermapsystemstring) option to send
   the start and end dates of the visible range of the Scheduler to the server when a Read action occurs. In the case of Create, Update, or Destroy action, the function will only send the respective new, edited, or deleted event data.
 
-    ```Scheduler
+    ```Razor Scheduler
         @(Html.Kendo().Scheduler<MeetingViewModel>()
             .Name("scheduler")
             ...// Additional configuration.
@@ -107,7 +107,7 @@ How can I filter the events of the {{ site.framework }} Scheduler that uses Sign
 
 * Create a `FilterRange` Model to ensure the received date range is parsed correctly. Define the setters of the `start` and `end` properties to convert the dates to UTC.
 
-    ```FilterRange.cs
+    ```C# FilterRange.cs
         using System;
         using System.Collections.Generic;
         using System.Linq;
@@ -139,7 +139,7 @@ How can I filter the events of the {{ site.framework }} Scheduler that uses Sign
 
 * Intercept the parameter of type `FilterRange` in the `Read` Action in the `ProductHub.cs` and return the filtered events data to the client.
 
-    ```ProductHub.cs
+    ```C# ProductHub.cs
         public class ProductHub : Hub
         {
             private SchedulerMeetingService meetingService;

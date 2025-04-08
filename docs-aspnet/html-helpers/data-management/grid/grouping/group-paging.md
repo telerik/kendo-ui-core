@@ -26,7 +26,7 @@ To enable group paging, use the `GroupPaging()` method as part of the data sourc
            x.Add(y => y.City);
         })
     )
-```  
+```
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550">

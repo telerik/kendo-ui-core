@@ -40,7 +40,7 @@ The component is a single tab stop, so the arrows must be used for internal navi
 
 The Scheduler toolbar must implement the specification for a ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 
 Below are listed the requirements for those components part of the ToolBar.

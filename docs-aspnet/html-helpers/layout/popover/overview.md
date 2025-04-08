@@ -16,10 +16,7 @@ The Telerik UI PopOver HtmlHelper for {{ site.framework }} is a server-side wrap
 
 The PopOver is a transient view that appears when the user clicks on a specified element or hovers within a particular area. It can contain elements such as buttons, icons, lists, and so on. 
 
-* [Demo page for the PopOver HtmlHelper](https://demos.telerik.com/{{ site.platform }}/popover/index)
-{% if site.core %}
-* [Demo page for the PopOver TagHelper](https://demos.telerik.com/{{ site.platform }}/popover/tag-helper)
-{% endif %}
+* [Demo page for the PopOver](https://demos.telerik.com/{{ site.platform }}/popover/index)
 
 ## PopOver vs. Tooltip
 
@@ -108,14 +105,12 @@ The following example demonstrates the basic configuration of the PopOver.
 
 * [Templates]({% slug htmlhelpers_templates_popover %})&mdash;The PopOver provides template options that allow you to customize the header and body content.
 * [Events]({% slug events_popover %})&mdash;The component exposes the `Show` and `Hide` events that you can handle and control its behavior.
+* [Accessibility]({% slug accessibility_popover_overview %})&mdash;The PopOver is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## Next Steps
 
 * [Getting Started with the PopOver]({% slug getting_started_popover %})
-* [Basic Usage of the PopOver HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover)
-{% if site.core %}
-* [Basic Usage of the PopOver TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/popover/tag-helper)
-{% endif %}
+* [Basic Usage of the PopOver for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover)
 
 ## See Also
 

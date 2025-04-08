@@ -16,7 +16,7 @@ This article describes how to configure the Drawer component in a Razor Pages sc
 
 For the complete project, refer to the [Drawer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Drawer).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.Drawer.DrawerIndexModel
 @{
@@ -290,7 +290,7 @@ For the complete project, refer to the [Drawer in Razor Pages example](https://g
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 using System;
 using System.Collections.Generic;
 using System.Linq;

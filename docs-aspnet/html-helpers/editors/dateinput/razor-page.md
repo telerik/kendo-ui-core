@@ -16,7 +16,7 @@ This article describes how to configure the DateInput component in a Razor Pages
 
 For the complete project, refer to the [DateInput in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateInput/DateInputIndex.cshtml).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.DateInput.DateInputGlobalizationModel
 @{
@@ -58,7 +58,7 @@ For the complete project, refer to the [DateInput in Razor Pages example](https:
 </style>
 ```
 {% if site.core %}
-```tab-TagHelper(csthml)
+```TagHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.DateInput.DateInputGlobalizationModel
 @{
@@ -99,7 +99,7 @@ For the complete project, refer to the [DateInput in Razor Pages example](https:
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,7 +124,7 @@ To bind the DateInput to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that must bind to the DateInput.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -138,14 +138,14 @@ To bind the DateInput to a property from the `PageModel`, follow the next steps:
     ```
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the DateInput to the property using the `DateInputFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -154,7 +154,7 @@ To bind the DateInput to a property from the `PageModel`, follow the next steps:
         
         @(Html.Kendo().DateInputFor(m => m.DateCreated))
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

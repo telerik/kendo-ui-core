@@ -30,7 +30,7 @@ The TaskBoard binds to two View Models. In this guide, the `Column` model determ
 
 Declare the `ProductViewModel` view model.
 
-```Column
+```C# Column
 
     public class Column
     {
@@ -40,7 +40,7 @@ Declare the `ProductViewModel` view model.
         public string Image { get; set; }
     }
 ```
-```TaskViewModel
+```C# TaskViewModel
     using Kendo.Mvc.UI;
 
     public class TaskViewModel : ISchedulerEvent
@@ -105,7 +105,7 @@ Declare the `ProductViewModel` view model.
         }
     }
 ```
-```Interface
+```C# Interface
     public interface ISchedulerEvent
     {
         string Title { get; set; }
@@ -389,7 +389,7 @@ Referencing existing instances of a component allows you to build on top of thei
 
 1. To reference an existing TaskBoard instance, use the `id` provided to the component by the `Name` configuration property. 
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function(){
                 var taskBoardReference = $("#taskBoard").data("kendoTaskBoard"); // taskBoardReference is a reference to the existing instance of the helper.
@@ -399,7 +399,7 @@ Referencing existing instances of a component allows you to build on top of thei
 
 1. Use the [TaskBoard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard#methods) to control the behavior of the widget. In this example, you will preview a task's card with the [`previewCard`](https://docs.telerik.com/kendo-ui/api/javascript/ui/taskboard/methods/previewcard) method.
 
-    ```script
+    ```JS script
         <script>
             var taskBoard = $("#taskBoard").data("kendoTaskBoard");
             taskBoard.previewCard(taskBoard.items().eq(3));

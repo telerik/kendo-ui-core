@@ -229,7 +229,7 @@ The following example shapes all required methods into one single `Read` operati
 
 {% if site.core %}
 
-```
+```C#
     /// <summary>
     /// Reads all the file entries from a given target path.
     /// </summary>
@@ -254,7 +254,7 @@ The following example shapes all required methods into one single `Read` operati
     }
 ```
 {% else %}
-```
+```C#
     /// <summary>
     /// Reads all the file entries from a given target path.
     /// </summary>
@@ -333,7 +333,7 @@ The FileManager exposes different client-side events that you can handle and use
 ```
 {% endif %}
 
-```Script.js
+```JS script.js
     <script>
         function onDataBound(e){
             e.sender.executeCommand({ command: "TogglePaneCommand", options: { type: "preview" } });
@@ -348,7 +348,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 Use the `id` attribute of the component instance to get a client-side reference.
 
-```script
+```JS script
     <script>
         var fileManagerReference = $("#filemanager").data("kendoFileManager"); // fileManagerReference is a reference to the existing instance of the helper.
     </script>

@@ -43,7 +43,7 @@ The example below relies on the following key steps:
 1. When the page is loaded, get a reference to the hidden Editor, set the page template in the Editor's PDF options, and trigger its `saveAsPDF()` method.
 
 
-    ```Index.cshtml
+    ```Razor Index.cshtml
         @(Html.Kendo().PDFViewer()
             .Name("pdfviewer")
         )
@@ -105,7 +105,7 @@ The example below relies on the following key steps:
         </script>
 
     ```
-    ```PDF_PageTemplate
+    ```JS PDF_PageTemplate
         <script type="x/kendo-template" id="page-template">
             <div class="page-template" style="position:absolute; top:0; left:0; width:100%; height:100%">
                 <div class="header" style="position:absolute; top:10px; left:20px; width:100%; font-size:18px; border-bottom: 1px solid black;">

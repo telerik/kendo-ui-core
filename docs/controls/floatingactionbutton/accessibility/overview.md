@@ -45,7 +45,7 @@ The FloatingActionButton features two distinct modes of operation: button-only a
 
 In the button-with-menu mode, the FloatingActionButton must implement the specification for the DropDownButton component.
 
-[DropDownButton accessibility specification]({{dropdownbutton_a11y_link}})
+[DropDownButton accessibility specification]({% slug jquery_dropdownbutton_accessibility %})
 
 ## Resources
 

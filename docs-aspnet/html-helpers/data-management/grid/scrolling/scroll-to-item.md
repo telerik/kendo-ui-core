@@ -186,7 +186,7 @@ The following example shows how to scroll to an item that is not loaded yet when
         <scrollable enabled="true" virtual="true"/>
     </kendo-grid>
 ```
-```GridController
+```C# GridController
     public IActionResult Index()
     {
         ViewData["initialItemId"] = 10403;
@@ -209,7 +209,7 @@ The following example shows how to scroll to an item that is not loaded yet when
     }
 ```
 {% else %}
-```GridController
+```C# GridController
     public ActionResult Index()
     {
         ViewData["initialItemId"] = 10403;

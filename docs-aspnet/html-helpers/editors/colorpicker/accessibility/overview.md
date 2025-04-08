@@ -23,7 +23,7 @@ The ColorPicker is compliant with the [Web Content Accessibility Guidelines (WCA
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_overview_colorgradient%}), [ColorPalette]({%slug overview_colorpalettehelper_aspnetcore%}), a UI to switch between them, and a button to reset its value. All the containing elements must implement their own specification apart from the ColorGradient element where some changes are required.
+The ColorPicker popup contains in itself ColorGradient, ColorPalette, a UI to switch between them, and a button to reset its value. All the containing elements must implement their own specification apart from the ColorGradient element where some changes are required.
 
 ### ColorPicker Wrapping Element
 

@@ -34,7 +34,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```
 {% endif %}
-```script.js
+```JS script.js
 
     <script>
         function onItemCreated(e) {

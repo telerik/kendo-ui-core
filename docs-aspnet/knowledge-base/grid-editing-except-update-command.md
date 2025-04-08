@@ -35,7 +35,7 @@ Here is one way of achieving the desired result:
 
 1. Add a custom command button. You may use the `IconClass()` to get it to look like the built-in save buttons:
 
-    ```
+    ```Razor
         columns.Command(c =>
         {
             c.Destroy();
@@ -45,7 +45,7 @@ Here is one way of achieving the desired result:
 
 1. Add the click handler which will [save the row](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saverow) and trigger the create action:
     
-    ```
+    ```JS
         function saveRow(e) {
             e.preventDefault();
             // e.target is the DOM element representing the button
@@ -56,7 +56,7 @@ Here is one way of achieving the desired result:
     
 1. Set the visibility of the custom button to true only for [new models](https://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/isnew):
 
-    ```
+    ```JS
         function shouldBeVisible(e) {       
             return e.isNew();
         }

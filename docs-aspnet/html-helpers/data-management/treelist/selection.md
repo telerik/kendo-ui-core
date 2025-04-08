@@ -89,7 +89,7 @@ To get the currently selected items, you can use the [TreeList client-side API](
  1. Call the [`select()` client-side API method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/select).  The method will return an array with the elements of the selected items.
  1. Loop through the selected items and call the [dataItem()](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/dataitem) method for each element to access the data item.
 
-```Script
+```JS script
     var treeListWidget = $("#treeList").data("kendoTreeList"); // Get a reference to the defined TreeList component.
     var selectedItemsElements = treeListWidget.select();
     var selectedDataItems = [];

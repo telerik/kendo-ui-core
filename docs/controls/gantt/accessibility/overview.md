@@ -42,7 +42,7 @@ The Grid is a composite component that consists of 4 logically separated structu
 
 Grid Toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -55,7 +55,7 @@ Grid Toolbar follows the specification of the ToolBar component.
 
 Grid Grouping Header follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -143,14 +143,14 @@ Even if part of the `<thead>`, the Filter row must be composed of `<td>` element
 
 Implements the FilterMenu specification.
 
-[FilterMenu accessibility specification]({{filtermenu_a11y_link}})
+[FilterMenu accessibility specification]({% slug jquery_filtermenu_accessibility %})
 
 #### Grid column menu
 
 
 Implements the ColumnMenu specification.
 
-[ColumnMenu accessibility specification]({{columnmenu_a11y_link}})
+[ColumnMenu accessibility specification]({% slug jquery_columnmenu_accessibility %})
 
 #### Grid content
 
@@ -206,7 +206,7 @@ The Aggregates totals are placed within a `<tfoot>` element in the Content `<tab
 
 For the Grid Pager WAI-ARIA spec, please review the Pager component.
 
-[Pager accessibility specification]({{pager_a11y_link}})
+[Pager accessibility specification]({% slug jquery_pager_accessibility %})
 
 #### Grid selection aggregates
 

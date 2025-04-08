@@ -73,7 +73,7 @@ By design, the Grid column does not support the multi-checkbox and the default m
     </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onFilterMenuInit(e) {
             if (e.field == "ShipName") { // Check if the "ShipName" column filter menu opens.
@@ -182,7 +182,7 @@ By design, the Grid column does not support the multi-checkbox and the default m
         }
     </script>
 ```
-```Styles
+```CSS Styles
 <style>
     .checkbox-container {
         max-height: 200px;

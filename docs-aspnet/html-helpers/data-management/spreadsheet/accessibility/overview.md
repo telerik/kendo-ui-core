@@ -54,7 +54,7 @@ The Spreadsheet is a composite component that is used to render spreadsheet data
 
 The Menu used for selecting the active ToolBar must implement the Menu specification.
 
-[Menu accessibility specification]({%slug htmlhelpers_menu_accessibility%})
+[Menu accessibility specification]({% slug htmlhelpers_menu_accessibility %})
 
 ### ToolBars
 

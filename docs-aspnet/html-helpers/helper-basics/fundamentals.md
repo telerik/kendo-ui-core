@@ -61,7 +61,7 @@ Add the desired options as attributes and set their value.
 
 When binding a Tag Helper editor to a Model property, use the attribute `for`. It will automatically set the `name` attribute to the name of the Model property.
 
-```TagHelperFor
+```TagHelper
     <kendo-numerictextbox for="currency" format="c" min="0" spinners="false" max="200">
     </kendo-numerictextbox>
 ```
@@ -79,7 +79,7 @@ You can get a reference to the client-side object that is initialized by the hel
     <kendo-numerictextbox name="age" value="10">
     </kendo-numerictextbox>
 ```
-```script
+```JS script
     $(function(){
         var numeric = $("#age").data("kendoNumericTextBox");
         numeric.value(10);
@@ -107,7 +107,7 @@ If you have deferred the initialization of the component, make sure you get its 
 
     @Html.Kendo().DeferredScripts()
 ```
-```script
+```JS script
     $(function(){
         var numeric = $("#age").data("kendoNumericTextBox");
         numeric.value(10);

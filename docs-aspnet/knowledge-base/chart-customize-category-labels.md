@@ -37,7 +37,7 @@ Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawi
 1. Use the [`kendo.drawing.align`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align) method to set the alignment within the rectangle.
 1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group/methods/append), and return the results.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Site Visitors Stats")
@@ -70,7 +70,7 @@ Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawi
     )
 ```
 
-```Script.js
+```JS script.js
     <script>
         function customLabels(e) {
             var group = new kendo.drawing.Group(); // Initialize a new kendo.drawing.Group object.

@@ -450,7 +450,7 @@ For example, you can implement a `GreaterDateAttribute` attribute to check wheth
             </fieldset>
         </form>
     ```
-    ```Script
+    ```JS script
         <script>
             $(function () {
                 $("#exampleForm").kendoValidator({
@@ -593,7 +593,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
 		}
 	}
 ```
-```HtmlHelper_View
+```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -613,7 +613,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
         )
     )
 ```
-```TagHelper_View
+```TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-grid name="grid">
@@ -645,7 +645,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
         <scrollable enabled="true"/>
     </kendo-grid>
 ```
-```Script
+```JS script
     <script type="text/javascript">
         // Register custom validation rules after the Grid declaration.
         $(document).ready( function () {

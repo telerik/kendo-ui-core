@@ -84,14 +84,14 @@ The example below demonstrates how to enable the contrast tool in the ColorGradi
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script type="text/javascript">
         function onChange(e) {
             $(".text-wrapper").css("color", e.value);
         }
     </script>
 ```
-```Styles
+```CSS Styles
     <style>
         .row {
             display: flex;         

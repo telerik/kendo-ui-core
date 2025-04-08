@@ -35,7 +35,7 @@ To achieve the desired scenario:
 1. Attach a click handler for the **Cancel** button.
 1. Within the handler, get the `formData`, set the `form` fields programmatically, and make an Ajax request to the desired end-point.
 
-```Form.cshtml
+```Razor Form.cshtml
 @model FormPostModel.Models.Team
 
     @(Html.Kendo().Form<FormPostModel.Models.Team>()
@@ -83,7 +83,7 @@ To achieve the desired scenario:
     </script>
 
 ```
-```script.js
+```JS script.js
    $(document).ready(function(){
          $("#cancelBtn").on("click",function(e){
             var form=$("#formExample").data("kendoForm");

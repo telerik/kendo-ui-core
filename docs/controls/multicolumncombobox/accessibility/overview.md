@@ -30,7 +30,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The MultiColumnComboBox implements the same ARIA specification as the **ComboBox** component.
 
-[ComboBox accessibility specification]({{combobox_a11y_link}})
+[ComboBox accessibility specification]({% slug jquery_combobox_accessibility %})
 
 ## Section 508
 

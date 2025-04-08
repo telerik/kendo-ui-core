@@ -275,7 +275,7 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
         }
 
     ```
-    ```GridController
+    ```C# GridController
         public ActionResult CustomCommand_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetEmployees().ToDataSourceResult(request));
@@ -449,7 +449,7 @@ You can reference the TileLayout instances that you have created and build on to
 
 Use the value of the `Name()` option of the component to establish a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var tileLayoutReference = $("#tilelayout").data("kendoTileLayout"); // tileLayoutReference is a reference to the existing TileLayout instance of the helper.

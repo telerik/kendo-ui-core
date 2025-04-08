@@ -108,13 +108,15 @@ Perform the steps below to initialize the HtmlHelper:
 
 1. Create a model in the `Models` folder of the application.
 
-        public class Product
-        {
-            public int ProductID { get; set; }
-            public string ProductName { get; set; }
-            public Nullable<decimal> UnitPrice { get; set; }
-            public bool Discontinued { get; set; }
-        }
+	```C#
+	public class Product
+	{
+		public int ProductID { get; set; }
+		public string ProductName { get; set; }
+		public Nullable<decimal> UnitPrice { get; set; }
+		public bool Discontinued { get; set; }
+	}
+	```
 
 1. Open the `~/Views/Home/Index.cshtml` view or, if using ASPX, the `Index.aspx` file.
 1. Add a Kendo UI Grid HtmlHelper.
@@ -140,26 +142,30 @@ Perform the steps below to initialize the HtmlHelper:
     ```
 1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult` extension method in the next step.
 
-    	using Kendo.Mvc.Extensions;
-    	using Kendo.Mvc.UI;
+	```C#
+	using Kendo.Mvc.Extensions;
+	using Kendo.Mvc.UI;
+	```
 
 Additionally, import the namespace for the model that you created in step 1.
 
 1. In the `HomeController.cs`, add a new action method which will return the data as JSON. The Grid makes Ajax requests to this action.
 
-        public ActionResult Select([DataSourceRequest]DataSourceRequest request)
-        {
-            var data = Enumerable.Range(1, 10)
-                .Select(index => new Product
-                {
-                    ProductID = index,
-                    ProductName = "Product #" + index,
-                    UnitPrice = index * 10,
-                    Discontinued = false
-                });
+	```C#
+	public ActionResult Select([DataSourceRequest]DataSourceRequest request)
+	{
+		var data = Enumerable.Range(1, 10)
+			.Select(index => new Product
+			{
+				ProductID = index,
+				ProductName = "Product #" + index,
+				UnitPrice = index * 10,
+				Discontinued = false
+			});
 
-            return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
+		return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+	}
+	```
 
 ## Building and Running the Application 
 

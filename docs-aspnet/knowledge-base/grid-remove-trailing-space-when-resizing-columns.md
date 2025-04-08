@@ -26,7 +26,7 @@ How can I avoid the rendering of the blank space after the last column when the 
 
 Add an empty column to the Grid. You can manually calculate its width, so that it fills the available space when the columns are resized. If the columns are wider than the Grid, the empty column is hidden.
 
-```Grid.cshtml
+```Razor Grid.cshtml
 
 @(Html.Kendo().Grid<MyGrid.Models.OrderViewModel>()
     .Name("grid")
@@ -52,7 +52,7 @@ Add an empty column to the Grid. You can manually calculate its width, so that i
 )
 
 ```
-```script.js
+```JS script.js
 
     function getMasterColumnsWidth(tbl) {
         var result = 0;

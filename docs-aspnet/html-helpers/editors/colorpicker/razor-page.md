@@ -16,7 +16,7 @@ This article describes how to configure the ColorPicker component in a Razor Pag
 
 For the complete project, refer to the [ColorPicker in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ColorPicker/ColorPickerIndex.cshtml).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	
@@ -29,7 +29,7 @@ For the complete project, refer to the [ColorPicker in Razor Pages example](http
 	)
 	
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
 	public bool ClearButton { get; set; }	
     public bool Buttons { get; set; }

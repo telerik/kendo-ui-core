@@ -126,7 +126,7 @@ You can reference the Signature instances that you have created and build on top
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var signatureReference = $("#signature").data("kendoSignature"); // signatureReference is a reference to the existing Signature instance of the helper.
     </script>
@@ -134,7 +134,7 @@ You can reference the Signature instances that you have created and build on top
 
 1. Use the [Signature client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/signature#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the Signature.
 
-    ```script
+    ```JS script
     <script>
         var signatureReference = $("#signature").data("kendoSignature"); // signatureReference is a reference to the existing Signature instance of the helper.
         signatureReference.enable(false); 

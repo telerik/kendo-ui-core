@@ -165,7 +165,7 @@ You can reference the TimeDurationPicker instances that you have created and bui
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var timeDurationPickerRef = $("#timedurationpicker").data("kendoTimeDurationPicker"); // timeDurationPickerRef is a reference to the existing currency instance of the helper.
     </script>
@@ -173,7 +173,7 @@ You can reference the TimeDurationPicker instances that you have created and bui
 
 1. Use the [TimeDurationPicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timedurationpicker#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
 
-    ```script
+    ```JS script
     <script>
         var timeDurationPickerRef = $("#timedurationpicker").data("kendoTimeDurationPicker"); // timeDurationPickerRef is a reference to the existing currency instance of the helper.
         timeDurationPickerRef.readonly(true); // Set the readonly method to true and disable user input.

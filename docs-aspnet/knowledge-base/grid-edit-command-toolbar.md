@@ -35,7 +35,7 @@ To achieve the desired result:
 1. Handle the click event for the buttons to enter/exit edit mode.
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
     <script type="text/x-kendo-template" id="template"> // ToolBar Template
         <div class="editBtnContainer">
@@ -81,7 +81,7 @@ To achieve the desired result:
 ```
 
 {% if site.core %}
-```TagHelper.cshtml
+```TagHelper
 
     <script type="text/x-kendo-template" id="template"> // ToolBar Template
         <div class="editBtnContainer">
@@ -133,7 +133,7 @@ To achieve the desired result:
 ```
 {% endif %}
 
-```Script.js
+```JS script.js
     $(document).ready(function(){
 
         $(".k-grid-custom.k-button").on("click", function (e) {
@@ -163,7 +163,7 @@ To achieve the desired result:
 
     })
 ```
-```Styles.css
+```C# Styles.css
     .updateCancelContainer {
         display: none;
     }

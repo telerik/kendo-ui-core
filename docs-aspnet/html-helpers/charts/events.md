@@ -32,7 +32,7 @@ The following examples demonstrates how to subscribe to events by a handler name
     </kendo-chart>
 ```
 {% endif %}
-```script.js
+```JS script.js
     <script>
         function onSeriesClick(e) {
             // Handle the seriesClick event

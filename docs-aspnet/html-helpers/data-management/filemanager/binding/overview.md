@@ -12,7 +12,7 @@ Under the hood, the FileManager formats the responses as `FileManagerEntry` abst
 
 To ensure that the FileManager component processes the files successfully, each of the binding methods that you use must format the responses by using the `FileManagerEntry` abstraction.
 
-```FileManagerEntry
+```C# FileManagerEntry
     public class FileManagerEntry
     {
         public string Name { get; set; }
@@ -28,7 +28,7 @@ To ensure that the FileManager component processes the files successfully, each 
         public DateTime ModifiedUtc { get; set; }
     }
 ```
-```FileManagerDataSourceSchema
+```JS FileManagerDataSourceSchema
     model: {
         id: "path",
         hasChildren: "hasDirectories",

@@ -18,7 +18,7 @@ For the complete project, refer to the [ImageEditor in Razor Pages example](http
 
 The example below demonstrates how to configure the ImageEditor to forward the content to a proxyURL in a Razor Pages scenario even if the browser supports saving files locally.
 
-```tab-HtmlHelper(cshtml) 
+```HtmlHelper
        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -35,7 +35,7 @@ The example below demonstrates how to configure the ImageEditor to forward the c
     )
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
 
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -47,7 +47,7 @@ The example below demonstrates how to configure the ImageEditor to forward the c
     </kendo-imageeditor>
 ```
 {% endif%}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 
     public IActionResult OnPostSave(string contentType, string base64, string fileName)
     {

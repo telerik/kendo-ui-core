@@ -108,7 +108,7 @@ To use the client-side API of the Chat and build on top of its initial configura
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var chatReference = $("#chat").data("kendoChat"); // chatReference is a reference to the existing Chat instance of the helper.
@@ -118,7 +118,7 @@ To use the client-side API of the Chat and build on top of its initial configura
 
 1. Use the [Chat client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat#methods) to control the behavior of the control. In this example, you will set up a `kendoChatBotUser` and will iterate an array of strings to render an automated greeting message with the use of the [`renderMessage`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/methods/rendermessage) method.
 
-    ```script
+    ```JS script
         <script>
         $(document).ready( function () {
             var kendoChatBotUser = {

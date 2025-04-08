@@ -31,6 +31,7 @@ The following features of the TreeList are currently not supported by the GanttL
 
 The example below demonstrates how to get a reference to a GanttList.
 
+```JS
     // Place this after the Gantt for {{ site.framework }} declaration.
     <script>
         $(document).ready(function() {
@@ -40,6 +41,7 @@ The example below demonstrates how to get a reference to a GanttList.
             var ganttList = gantt.list;
         });
     </script>
+```
     
 ## Timeline
 

@@ -16,7 +16,7 @@ This article describes how to configure the Loader component in a Razor Pages sc
 
 For the complete project, refer to the [Loader in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Loader/LoaderIndex.cshtml).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
 	@model Telerik.Examples.RazorPages.Pages.Loader.LoaderIndexModel	
 
@@ -30,7 +30,7 @@ For the complete project, refer to the [Loader in Razor Pages example](https://g
 	)
 ```
 {% if site.core %}
-```tab-TagHelper(csthml)
+```TagHelper
     @page
 	@model Telerik.Examples.RazorPages.Pages.Loader.LoaderIndexModel	
 
@@ -43,7 +43,7 @@ For the complete project, refer to the [Loader in Razor Pages example](https://g
     </kendo-loader>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public class LoaderIndexModel : PageModel
     {
         public LoaderSize Size { get; set; }

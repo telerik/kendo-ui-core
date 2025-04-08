@@ -98,7 +98,7 @@ To add a custom command to the context menu of the FileManager, follow the instu
 
 1. Create the command for the FileManager:
 
-    ```
+    ```JS
         $(function(){
             var filemanagerNS = kendo.ui.filemanager;
 

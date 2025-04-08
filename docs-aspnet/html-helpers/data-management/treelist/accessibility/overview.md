@@ -50,14 +50,11 @@ The element with `role=treegrid` must not include the ToolBar element as it does
 [Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
 
 
-In the {{ site.product }} TreeList, the `role=treegrid` is assigned to the `<table>` in the `k-grid-content` element.
-
-
 The below table lists the ARIA requirements for the TreeList which are not present in the Grid specification:
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-grid-content>table` | `role=treegrid` | The role specifies the element is a TreeGrid. |
+| `.k-treelist .k-grid-aria-root` | `role=treegrid` | Sets the proper role for the TreeList component. |
 | `.k-table-tbody .k-table-row` | `aria-expanded=true/false` | Set on the currently expanded row(s). |
 | `.k-table-tbody .k-i-caret-alt-down,.k-table-tbody .k-i-caret-alt-right,.k-table-tbody .k-svg-i-caret-alt-down,.k-table-tbody .k-svg-i-caret-alt-right` | `aria-hidden=true` | Removes the expand/collapse icon from the accessibility tree. |
 

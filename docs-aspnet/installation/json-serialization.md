@@ -20,7 +20,7 @@ This document describes the recommended approaches to maintain the Pascal case i
 For applications using .NET 6 and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), open the `Program.cs` file. To set the serialization options of the application, use any of the approaches demonstrated below.
 
 * Use the default serialization that is delivered with ASP.NET Core **(recommended approach)**.
-	```Program.cs
+	```C# Program.cs
 		var builder = WebApplication.CreateBuilder(args);
 
 		// Add services to the container.
@@ -36,7 +36,7 @@ For applications using .NET 6 and the [minimal hosting model](https://docs.micro
 
 * Use the [`Newtonsoft`](https://www.newtonsoft.com/json) library.
 
-	```Program.cs
+	```C# Program.cs
 		var builder = WebApplication.CreateBuilder(args);
 
 		// Add services to the container.
@@ -55,7 +55,7 @@ To configure the JSON serialization in ASP.NET Core 3 to 5, use any of the follo
 
 * Use the default serialization that is delivered with ASP.NET Core. Locate the `ConfigureServices` method and update it by adding the code below **(recommended approach)**.
 
-	```
+	```C#
 		public void ConfigureServices(IServiceCollection services)
 		{
 			...
@@ -71,7 +71,7 @@ To configure the JSON serialization in ASP.NET Core 3 to 5, use any of the follo
 
 * Maintain the property names casing globally. Locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
 
-	```
+	```C#
 		using Newtonsoft.Json.Serialization;
 		...
 
@@ -90,7 +90,7 @@ To configure the JSON serialization in ASP.NET Core 3 to 5, use any of the follo
 
 * Use the default JSON serialization throughout the application and include the built-in `System.Text.Json.JsonSerializerOptions` in the Controller Action method response.
 
-	```
+	```C#
 		using System.Text.Json;
 
 		public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
@@ -105,7 +105,7 @@ To configure the JSON serialization in ASP.NET Core 3 to 5, use any of the follo
  
 To maintain the property names casing, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
 
-```
+```C#
 	using Newtonsoft.Json.Serialization;
 	...
     public void ConfigureServices(IServiceCollection services)
@@ -129,7 +129,7 @@ For applications using .NET 9, [`System.Text.Json`](https://learn.microsoft.com/
 
 The following example shows how to set the indentation options for the JSON result in the Grid's read request response.
 
-```HomeController.cs
+```C# HomeController.cs
 	public IActionResult ReadGridData([DataSourceRequest] DataSourceRequest request)
 	{
 		var gridData = new List<OrderViewModel>()
@@ -180,7 +180,7 @@ The following example shows how to set the indentation options for the JSON resu
 
 The next example shows how to set the indentation options for the default JSON serialization of the application.
 
-```Program.cs
+```C# Program.cs
 	var builder = WebApplication.CreateBuilder(args);
 
 	// Add services to the container.

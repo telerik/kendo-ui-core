@@ -25,7 +25,7 @@ To render the week number column, set the [`WeekNumber`](/api/kendo.mvc.ui.fluen
                            style = "width: 100%"
                            week-number="true">
     </kendo-daterangepicker>
-```    
+```
 {% endif %}
 
 ## See Also

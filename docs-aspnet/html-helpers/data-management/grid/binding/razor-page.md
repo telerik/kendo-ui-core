@@ -22,7 +22,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configuration. The URL in each of these options must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -55,7 +55,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -108,7 +108,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
 
 1. Send the `AntiForgeryToken` with the CRUD requests.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -118,7 +118,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -131,7 +131,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
     
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<OrderViewModel> orders;
 
         public void OnGet()
@@ -177,7 +177,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
             return new JsonResult(new[] { order }.ToDataSourceResult(request, ModelState));
         }
     ```
-    ```tab-Model
+    ```Model
         public class OrderViewModel
         {
             public int OrderID { get; set; }
@@ -196,7 +196,7 @@ To bind the Grid to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that holds the data collection that must be loaded in the Grid.
 
-    ```
+    ```C#
         public class GridPageModel : PageModel
         {
             [BindProperty]

@@ -32,7 +32,7 @@ The {{ site.product }} Grid options can be modified through the [`setOptions`](h
 1. Change the text of the button to reflect the current state of the Grid.
 1. (Optional) If the grid has a command column, disable all of the commands when editable is false.
 
-```
+```Razor
 .Columns(columns =>
     {
         columns.Bound(c => c.Id);
@@ -45,7 +45,8 @@ The {{ site.product }} Grid options can be modified through the [`setOptions`](h
 {
     t.Custom().Name("toggleEditable").Text("Toggle Readonly");
 })
-
+```
+```JavaScript
 <script>
     function dataBound(ev) {
         let grid = this,

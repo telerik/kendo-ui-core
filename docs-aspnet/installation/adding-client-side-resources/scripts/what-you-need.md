@@ -78,7 +78,7 @@ To build a custom distribution from the shipped source:
 
 1. Run the following shell commands.
 
-      ```sh
+      ```batch sh
           cd src
           npm install
           npx gulp custom -c autocomplete,dropdownlist

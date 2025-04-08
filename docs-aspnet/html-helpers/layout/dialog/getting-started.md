@@ -188,7 +188,7 @@ You can reference the Dialog instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var dialogReference = $("#dialog").data("kendoDialog"); // dialogReference is a reference to the existing dialog instance of the helper.
     </script>
@@ -196,7 +196,7 @@ You can reference the Dialog instances that you have created and build on top of
 
 1. Use the [Dialog client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#methods) to control the behavior of the widget. In this example, you will use the `toFront` method to bring the Dialog instance on top of any other open Dialogs.
 
-    ```script
+    ```JS script
     <script>
         var dialogReference = $("#dialog").data("kendoDialog"); // dialogReference is a reference to the existing dialog instance of the helper.
         dialog.toFront(); // Bring the Dialog instance on top of any other open Dialogs.

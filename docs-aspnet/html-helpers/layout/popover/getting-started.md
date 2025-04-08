@@ -117,7 +117,7 @@ You can reference the PopOver instances that you have created and build on top o
 
 1. Use the value of the `For()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var popoverReference = $("#buttonHover").data("kendoPopOver"); // popoverReference is a reference to the existing PopOver instance of the helper.
     </script>
@@ -155,7 +155,7 @@ You can reference the PopOver instances that you have created and build on top o
         </kendo-popover>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var popoverReference = $("#target").data("kendoPopOver");

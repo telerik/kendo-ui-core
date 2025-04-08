@@ -16,7 +16,7 @@ This article describes how to configure the Upload component in a Razor Pages sc
 
 For the complete project, refer to the [Upload in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Upload/UploadIndex.cshtml).
 
-```tab-HtmlHelper(cshtml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.Upload.UploadIndexModel
 @{
@@ -39,7 +39,7 @@ For the complete project, refer to the [Upload in Razor Pages example](https://g
 )
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.Upload.UploadIndexModel
 @{
@@ -58,7 +58,7 @@ For the complete project, refer to the [Upload in Razor Pages example](https://g
 </kendo-upload>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     public class UploadIndexModel : PageModel
     {
         public void OnGet()

@@ -209,7 +209,7 @@ You can reference the ButtonGroup instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var buttonGroupReference = $("#player").data("kendoButtonGroup"); // buttonGroupReference is a reference to the existing player instance of the helper.
     </script>
@@ -217,7 +217,7 @@ You can reference the ButtonGroup instances that you have created and build on t
 
 1. Use the [ButtonGroup client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the button.
 
-    ```script
+    ```JS script
     <script>
         var buttonGroupReference = $("#player").data("kendoButtonGroup"); // buttonGroupReference is a reference to the existing player instance of the helper.
         buttonGroupReference.enable(false); // Disable the ButtonGroup.

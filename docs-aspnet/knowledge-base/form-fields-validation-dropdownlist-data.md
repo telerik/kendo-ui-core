@@ -93,7 +93,7 @@ When using {{ site.product }} Form, which contains {{ site.product }} DropDownLi
     </kendo-form>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function validateField(eventData, fieldName) { // Reuse this handler for all editors that loads data from the server.
             if (eventData.response.length > 0) {

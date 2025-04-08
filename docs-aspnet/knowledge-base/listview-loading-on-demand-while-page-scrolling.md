@@ -57,7 +57,7 @@ To achieve the desired scenario:
 
 1. Manipulate the ListView behavior on the front end by using JavaScript or jQuery. This particular solution is implemented with jQuery. The code comments explain what is happening. It also contains many `console.log` statements commented out. If you comment them in, you can track what is happening within the browser console as you scroll.
 
-    ```Script
+    ```JS script
         var wh;
         var dh;
         // Determines weather or not to use the window's height or the document's height.
@@ -124,7 +124,7 @@ To achieve the desired scenario:
 
 1. By default, the ListView has a border. For a full-page implementation, you can remove it with the following CSS:
 
-    ```Styles
+    ```CSS Styles
         .k-listview {
             border: none;
         }

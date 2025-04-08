@@ -92,7 +92,7 @@ How can I bind the Chart to a [SignalR](https://dotnet.microsoft.com/en-us/apps/
         var hubStart = connection.start({ jsonp: true });
     </script>
 ```
-```Styles
+```CSS Styles
   <style>
     .footer:first-of-type {
         display: none !important;

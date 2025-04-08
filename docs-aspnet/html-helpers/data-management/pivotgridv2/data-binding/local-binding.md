@@ -14,100 +14,103 @@ To bind the PivotGridV2 for {{ site.framework }} to local flat data:
 
 1. Define a model class or use an existing one from your application.
 
-        public class ProductViewModel
+    ```C#
+    public class ProductViewModel
+    {
+        [ScaffoldColumn(false)]
+        public int ProductID
         {
-            [ScaffoldColumn(false)]
-            public int ProductID
-            {
-                get;
-                set;
-            }
-
-            [Required]
-            [Display(Name = "Product name")]
-            public string ProductName
-            {
-                get;
-                set;
-            }
-
-            [Display(Name = "Unit price")]
-            [DataType(DataType.Currency)]
-            [Range(0, int.MaxValue)]
-            public decimal UnitPrice
-            {
-                get;
-                set;
-            }
-
-            [Display(Name = "Units in stock")]
-            [DataType("Integer")]
-            [Range(0, int.MaxValue)]
-            public int UnitsInStock
-            {
-                get;
-                set;
-            }
-
-            public bool Discontinued
-            {
-                get;
-                set;
-            }
-
-            [Display(Name = "Last supply")]
-            [DataType(DataType.Date)]
-            public DateTime LastSupply
-            {
-                get;
-                set;
-            }
-
-            [DataType("Integer")]
-            public int UnitsOnOrder
-            {
-                get;
-                set;
-            }
-
-            [UIHint("ClientCategory")]
-            public CategoryViewModel Category
-            {
-                get;
-                set;
-            }
-
-            public int? CategoryID { get; set; }
-
-            public string QuantityPerUnit { get; set; }
+            get;
+            set;
         }
 
+        [Required]
+        [Display(Name = "Product name")]
+        public string ProductName
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Unit price")]
+        [DataType(DataType.Currency)]
+        [Range(0, int.MaxValue)]
+        public decimal UnitPrice
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Units in stock")]
+        [DataType("Integer")]
+        [Range(0, int.MaxValue)]
+        public int UnitsInStock
+        {
+            get;
+            set;
+        }
+
+        public bool Discontinued
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Last supply")]
+        [DataType(DataType.Date)]
+        public DateTime LastSupply
+        {
+            get;
+            set;
+        }
+
+        [DataType("Integer")]
+        public int UnitsOnOrder
+        {
+            get;
+            set;
+        }
+
+        [UIHint("ClientCategory")]
+        public CategoryViewModel Category
+        {
+            get;
+            set;
+        }
+
+        public int? CategoryID { get; set; }
+
+        public string QuantityPerUnit { get; set; }
+    }
+    ```
 1. In the `Index` action return an `IEnumerable` of the model type with the view.
 
-        public ActionResult Index()
+    ```C#
+    public ActionResult Index()
+    {
+        var entities = new SampleEntities();
+
+        var result = entities.Products.Select(product => new ProductViewModel
         {
-            var entities = new SampleEntities();
-
-            var result = entities.Products.Select(product => new ProductViewModel
+            ProductID = product.ProductID,
+            ProductName = product.ProductName,
+            UnitPrice = product.UnitPrice.HasValue ? product.UnitPrice.Value : default(decimal),
+            UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
+            QuantityPerUnit = product.QuantityPerUnit,
+            Discontinued = product.Discontinued,
+            UnitsOnOrder = product.UnitsOnOrder.HasValue ? (int)product.UnitsOnOrder.Value : default(int),
+            CategoryID = product.CategoryID,
+            Category = new CategoryViewModel()
             {
-                ProductID = product.ProductID,
-                ProductName = product.ProductName,
-                UnitPrice = product.UnitPrice.HasValue ? product.UnitPrice.Value : default(decimal),
-                UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
-                QuantityPerUnit = product.QuantityPerUnit,
-                Discontinued = product.Discontinued,
-                UnitsOnOrder = product.UnitsOnOrder.HasValue ? (int)product.UnitsOnOrder.Value : default(int),
-                CategoryID = product.CategoryID,
-                Category = new CategoryViewModel()
-                {
-                    CategoryID = product.Category.CategoryID,
-                    CategoryName = product.Category.CategoryName
-                },
-                LastSupply = DateTime.Today
-            }).ToList();
+                CategoryID = product.Category.CategoryID,
+                CategoryName = product.Category.CategoryName
+            },
+            LastSupply = DateTime.Today
+        }).ToList();
 
-            return View(result);
-        }
+        return View(result);
+    }
+    ```
 
 1. In the `Index.cshtml` view declare the model, an `IEnumerable` of the model type. Declare and configure the PivotGridV2.
 

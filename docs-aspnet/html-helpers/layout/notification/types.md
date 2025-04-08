@@ -28,7 +28,7 @@ The following example demonstrates the built-in Notification types.
 </kendo-notification>
 ```
 {% endif %}
-```script.js
+```JS script.js
     <script>
         $(function(){
             var notificationWidget = $("#notification").data("kendoNotification");

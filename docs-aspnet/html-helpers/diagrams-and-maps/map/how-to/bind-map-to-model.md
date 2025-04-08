@@ -14,7 +14,7 @@ Using this technique, you can also bind Telerik UI Map HtmlHelper for ASP.NET MV
 
 The following example demonstrates how to set up the models.
 
-```Map
+```C# Map
 public class Map
 {
     // The Map properties.
@@ -32,7 +32,7 @@ public class Map
     public IEnumerable<Marker> Markers { get; set; }
 }
 ```
-```Marker
+```C# Marker
 public class Marker
 {
     public Marker(double latitude, double longitude, string sname)
@@ -48,7 +48,7 @@ public class Marker
 
 The following example demonstrates how to set up the Controller.
 
-```
+```C#
 public ActionResult Index()
 {
     var map = new TelerikMvcApp.Models.Map()

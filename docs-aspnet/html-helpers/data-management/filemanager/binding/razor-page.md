@@ -22,7 +22,7 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configuration. The URL in each of these options must refer to the method name in the `PageModel`.
 
-    ```tab-HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -54,7 +54,7 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
             .UploadUrl("/Index?handler=FileManagerUpload")
         )
     ```
-    ```tab-TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -79,7 +79,7 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -89,7 +89,7 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -101,7 +101,7 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
     ```
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
 
         public IndexModel(IWebHostEnvironment hostingEnvironment)
         {

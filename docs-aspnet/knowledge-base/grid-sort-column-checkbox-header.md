@@ -40,7 +40,7 @@ How can I prevent the sorting of the column which uses a header template and has
 1. To allow the selection and deselection of the checkbox only, handle the `click` event of the checkboxes.
 1. To prevent the sorting of the column upon clicking a checkbox, use the conventional [`.stopPropagation()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) method for the event object.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -68,7 +68,7 @@ How can I prevent the sorting of the column which uses a header template and has
         )
     )
 ```
-```Script.js
+```JS script.js
     <script type="text/javascript">
         function onClick(){
             event.stopPropagation();

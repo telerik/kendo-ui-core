@@ -20,7 +20,7 @@ For the complete project, refer to the [DropDownTree in Razor Pages example](htt
 
 In order to set up the DropDownTree component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method hedge refer the name of the method in the pagemodel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
-```tab-HtmlHelper(csthml)     
+```HtmlHelper
     @page
     @model IndexModel
 
@@ -83,7 +83,7 @@ In order to set up the DropDownTree component bindings, you need to configure th
 	
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -93,7 +93,7 @@ In order to set up the DropDownTree component bindings, you need to configure th
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -110,7 +110,7 @@ To bind the DropDownTree to a property from the `PageModel`, follow the next ste
 
 1. Add a property to the `PageModel` that must bind to the DropDownTree.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -131,7 +131,7 @@ To bind the DropDownTree to a property from the `PageModel`, follow the next ste
 
 1. Bind the DropDownTree to the property using the `DropDownTreeFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -140,7 +140,7 @@ To bind the DropDownTree to a property from the `PageModel`, follow the next ste
 
         @(Html.Kendo().DropDownTreeFor(m => m.Employee))
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

@@ -16,7 +16,7 @@ This article describes how to configure the Button component in a Razor Pages sc
 
 For the complete project, refer to the [Button in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Button/ButtonIndex.cshtml).
 
-```tab-HtmlHelper(csthml) 
+```HtmlHelper
        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -49,14 +49,14 @@ For the complete project, refer to the [Button in Razor Pages example](https://g
 </form>
 ```
 {% endif %}
-```script
+```JS script
 	<script>
 		function onClick() {
 			return kendo.antiForgeryTokens();
 		}
 	</script>
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 
     public class ButtonIndexModel : PageModel
     { 

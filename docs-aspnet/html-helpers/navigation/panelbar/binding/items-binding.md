@@ -13,10 +13,12 @@ The PanelBar enables you to manually define the properties of each item.
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for {{ site.framework }}]({% slug overview_aspnetmvc6_aspnetmvc %}).
 1. Create a new action method which renders the view.
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+    ```C#
+    public ActionResult Index()
+    {
+        return View();
+    }
+    ```
 
 1. Add a PanelBar.
 

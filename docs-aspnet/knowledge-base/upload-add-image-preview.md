@@ -31,7 +31,7 @@ How can I add an image preview that appears before the user uploads a file when 
 1. To handle the file selection, subscribe to the [`Select`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring) event.
 1. Within the handler, call the previously created function for each file entry and pass the Upload's wrapper.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Upload()
         .Name("files")
         .Events(e => e.Select("onSelect"))
@@ -42,7 +42,7 @@ How can I add an image preview that appears before the user uploads a file when 
         )
     )
 ```
-```Script.js
+```JS script.js
 <script>
     function onSelect(e){
       var wrapper = this.wrapper;

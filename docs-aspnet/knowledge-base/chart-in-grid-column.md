@@ -148,7 +148,7 @@ How can I initialize a Chart into a specified [Grid]({% slug htmlhelpers_grid_as
     }
 </script>
 ```
-```Styles
+```CSS Styles
   <style>
         #grid .k-chart {
         height: 150px;

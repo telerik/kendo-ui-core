@@ -25,7 +25,7 @@ Before you start using the Grid with CosmosDB, you will need:
 To set-up an application that uses Azure CosmosDB, follow [Microsoft's step-by-step tutorial](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-dotnet-application). Alternatively, you can directly clone the source code from the tutorial available on the [Azure Samples repository on GitHub](https://github.com/Azure-Samples/cosmos-dotnet-core-todo-app).
 
 Once you have an application prepared to use Azure CosmosDB and a Cosmos DB table as demonstrated in [the tutorial](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-dotnet-application), add the URI and account key to the `appsettings.json` of the application.
-```
+```JS appsettings.json
 {
   "Logging": {
     "LogLevel": {
@@ -40,7 +40,7 @@ Once you have an application prepared to use Azure CosmosDB and a Cosmos DB tabl
     "ContainerName": "Item"
   }
 }
-``` 
+```
 
 Refer to [this section of the MSDN documentation](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-dotnet-application#create-an-azure-cosmos-account) for more information on where to find the URI and account key.
 
@@ -120,7 +120,7 @@ Follow the [guidelines for adding {{site.product}} to an existing application]({
     ```
 
 1. Use the already defined service and create the server-side CRUD endpoints to consume it.
-    ```Controller
+    ```C# Controller
         public class ItemController : Controller
         {
             private readonly ICosmosDbService _cosmosDbService;
@@ -182,7 +182,7 @@ Follow the [guidelines for adding {{site.product}} to an existing application]({
             }
         }
     ```
-    ```Service
+    ```C# Service
         public class CosmosDbService : ICosmosDbService
         {
             private Container _container;

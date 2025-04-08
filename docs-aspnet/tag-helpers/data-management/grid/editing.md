@@ -93,7 +93,7 @@ The example below demonstrates how to implement batch editing in the Grid. For a
     )
 )
 ```
-```ProductViewModel.cs
+```C# ProductViewModel.cs
     public class ProductViewModel
     {
         public int ProductID

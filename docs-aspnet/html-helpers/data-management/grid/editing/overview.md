@@ -98,7 +98,7 @@ To enable editing:
 
 4. On the server, the expected parameters must be the DataSource request and the same model as the edited one: 
     
-    ```
+    ```C#
         [AcceptVerbs("Post")]
         public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
         {

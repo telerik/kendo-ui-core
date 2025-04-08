@@ -22,7 +22,7 @@ To bind the MaskedTextBox to a property from the `PageModel`, follow the next st
 
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
@@ -67,7 +67,7 @@ To bind the MaskedTextBox to a property from the `PageModel`, follow the next st
 
 1. Bind the property values in the backend:
 
-    ```
+    ```C#
         public class IndexModel : PageModel
         {
             [BindProperty]

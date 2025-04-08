@@ -77,7 +77,7 @@ The following example demonstrates how to define the Grid.
         }
     }
 ```
-```Customer.cs
+```C# Customer.cs
     public class Customer
     {
         public string ContactName { get; set; }

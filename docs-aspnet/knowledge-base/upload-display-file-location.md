@@ -33,7 +33,7 @@ How can I display the location of the uploaded file as a link within the Upload 
 1. Update the `Save` Action method to return the file location of the uploaded file.
 1. Subscribe to the [`Success`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#successsystemstring) event to intercept the received file location from the server. Select the anchor tag within the file template with jQuery and update the `href` attribute with the respective file location.
 
-```View_HtmlHelper
+```HtmlHelper
     @(Html.Kendo().Upload()
         .Name("files")
         .TemplateId("fileTemplate")
@@ -61,7 +61,7 @@ How can I display the location of the uploaded file as a link within the Upload 
     </script>
 ```
 {% if site.core %}
-```View_TagHelper
+```TagHelper
   @addTagHelper *, Kendo.Mvc
 
    <kendo-upload name="files" template-id="fileTemplate"    on-success="onSuccess">
@@ -85,7 +85,7 @@ How can I display the location of the uploaded file as a link within the Upload 
     </script>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onSuccess(e) {
             var uploadedFileName = e.files[0].name;

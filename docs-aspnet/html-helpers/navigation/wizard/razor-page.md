@@ -22,7 +22,7 @@ As POST request will be sent to the server antiforgery token needs to be added. 
 
 See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```HtmlHelper()
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -165,14 +165,14 @@ See the implementation details in the example below, and for the full project wi
     </kendo-wizard>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function onDone(e) {        
             $("#wizard").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
         }
     </script>
 ```
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 
     [BindProperty]
     public UserModel UserViewModel { get; set; }
@@ -335,7 +335,7 @@ See the implementation details in the example below, where the JSON errors are a
         </wizard-steps>
     </kendo-wizard>
 ```
-```script.js
+```JS script.js
     <script>
         function onDone(e) {
             e.originalEvent.preventDefault();            
@@ -366,7 +366,7 @@ See the implementation details in the example below, where the JSON errors are a
         }
     </script>
 ```
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     [BindProperty]
     public UserViewModel User { get; set; }
     public void OnGet()

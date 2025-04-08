@@ -51,7 +51,7 @@ Here is a sample implementation:
         </kendo-chart>
 ```
 {% endif %}
-```Script
+```JS script
 var initialPlotBands = [];
 
 function onDrillDown(e) {

@@ -744,7 +744,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var ganttReference = $("#gantt").data("kendoGantt"); // ganttReference is a reference to the existing instance of the helper.
     </script>
@@ -752,7 +752,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the [Gantt client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#methods) to control the behavior of the widget. In this example, you will programmatically select the `month` view of the Gantt by using the `view` method.
 
-    ```script
+    ```JS script
     <script>
         var ganttReference = $("#gantt").data("kendoGantt"); // ganttReference is a reference to the existing instance of the helper.
 		ganttReference.view("month"); // Pass the name of the view to the `view` method.

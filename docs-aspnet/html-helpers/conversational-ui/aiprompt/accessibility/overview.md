@@ -8,19 +8,24 @@ position: 1
 
 # AIPrompt Accessibility
 
-Out of the box, the {{ site.product }} AIPrompt provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
-The AIPrompt is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
+
+
+
+Out of the box, the {{ site.product }} AI Prompt provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+
+
+The AI Prompt is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
 
 ## WAI-ARIA
 
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-### AIPrompt
+### AI Prompt
 
 
-The AIPrompt component is a composite one and integrates the accessibility of the Toolbar, TextArea, Card List container.
+The AI Prompt component is a composite one and integrates the accessibility of the Toolbar, TextArea, Card List container
 
 ### TextArea Component
 
@@ -43,6 +48,14 @@ The Prompt suggestion list implements roving tabindex navigation. Meaning that o
 
 [ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
+### Card List Container
+
+[CardList accessibility specification]({% slug htmlhelpers_cardlist_accessibility %})
+
+### Card Component
+
+[Card accessibility specification]({% slug htmlhelpers_card_accessibility %})
+
 ### More Actions View - PanelBar Component
 
 [PanelBar accessibility specification]({% slug htmlhelpers_panelbar_accessibility %})
@@ -50,19 +63,19 @@ The Prompt suggestion list implements roving tabindex navigation. Meaning that o
 ## Section 508
 
 
-The AIPrompt is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
+The AI Prompt is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
 
 
-The AIPrompt has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
+The AI Prompt has been extensively tested automatically with [axe-core](https://github.com/dequelabs/axe-core) and manually with the most popular screen readers.
 
 > To report any accessibility issues, contact the team through the [Telerik Support System](https://www.telerik.com/account/support-center).
 
 ### Screen Readers
 
 
-The AIPrompt has been tested with the following screen readers and browsers combinations:
+The AI Prompt has been tested with the following screen readers and browsers combinations:
 
 | Environment | Tool |
 | ----------- | ---- |

@@ -120,7 +120,7 @@ The example below relies on the following key steps:
     </kendo-window>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script type="text/javascript">
     function showDetails(event) {
         var grid = $("#NotesAudit").getKendoGrid(); // Get a reference to the Grid.

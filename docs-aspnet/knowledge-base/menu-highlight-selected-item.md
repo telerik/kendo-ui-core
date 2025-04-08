@@ -35,7 +35,7 @@ The example implementation relies on the following key steps:
 1. Within the `$(document).ready()` function, loop through the Menu items elements, and check if the item's `href` attribute equals the entire URL of the current page. If yes, add a class `selected-item` to the respective element.
 1. Add the desired background color with CSS to the `selected-item` class and the `k-state-highlight` class, which indicates the current active Menu item.
 
-```_Layout.cshtml
+```Razor _Layout.cshtml
 @(Html.Kendo().Menu()
     .Name("Menu")    // Add a name to the Menu component.
     .Items(items =>
@@ -60,7 +60,7 @@ The example implementation relies on the following key steps:
 ```
 
 {% if site.core %}
-```HomeController.cs
+```C# HomeController.cs
 public class HomeController : Controller
 {
     public IActionResult Index()
@@ -110,7 +110,7 @@ public class HomeController : Controller
 }
 ```
 {% else %}
-```HomeController.cs
+```C# HomeController.cs
 public class HomeController : Controller
 {
     public ActionResult Index()

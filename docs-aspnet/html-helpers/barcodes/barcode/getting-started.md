@@ -86,7 +86,7 @@ To use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/ap
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS
         <script>
             var barcodeReference = $("#barcode").data("kendoBarcode"); // barcodeReference is a reference to the existing instance of the helper.
         </script>
@@ -94,7 +94,7 @@ To use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/ap
 
 1. Use the [client-side API of the Barcode](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode/methods/redraw) method to disable the Barcode.
 
-    ```script
+    ```JS
         <script>
             $(document).ready(function () {
                 var barcode = $("#barcode").data("kendoBarcode");

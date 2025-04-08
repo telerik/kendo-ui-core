@@ -41,7 +41,7 @@ Optionally, you can structure the View content by adding the desired HTML elemen
 
 Declare the [PivotContainer](https://docs.telerik.com/{{ site.platform }}/api/pivotcontainer) that will hold the pivot configurator component and the [PivotConfiguratorButton](https://docs.telerik.com/{{ site.platform }}/api/pivotconfiguratorbutton) that toggles the visibility of the related PivotConfiguratorV2.
 
-```HtmlHelper   
+```HtmlHelper
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
@@ -69,7 +69,7 @@ Declare the [PivotContainer](https://docs.telerik.com/{{ site.platform }}/api/pi
 
 Define the PivotConfiguratorV2 supplementary component into the PivotContainer declaration. The configurator allows you to control the column and row dimensions and the measure fields of the PivotGridV2. Also, enable its `Filterable` and `Sortable` options to filter and sort the rows and columns.
 
-```HtmlHelper   
+```HtmlHelper
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
@@ -111,7 +111,7 @@ Use the PivotGridV2 HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 
 Define the component into the PivotContainer declaration:
 
-```HtmlHelper   
+```HtmlHelper
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
@@ -211,7 +211,7 @@ You can reference the PivotGridV2 instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var pivotGridV2Reference = $("#pivotgrid").data("kendoPivotGridV2"); // pivotGridV2Reference is a reference to the existing PivotGridV2 instance of the helper.
@@ -236,7 +236,7 @@ You can reference the PivotGridV2 instances that you have created and build on t
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var pivotGridV2Reference = $("#pivotgrid").data("kendoPivotGridV2");

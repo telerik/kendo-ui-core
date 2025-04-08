@@ -116,7 +116,7 @@ You can reference the QRCode instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var qrCodeReference = $("#vacationQrCode").data("kendoQRCode"); // qrCodeReference is a reference to the existing QRCode instance of the helper.
@@ -141,7 +141,7 @@ You can reference the QRCode instances that you have created and build on top of
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS Scripts
         <script>
             function onBtnClick() {
                 var qrCodeReference = $("#vacationQrCode").data("kendoQRCode");

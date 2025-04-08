@@ -276,7 +276,7 @@ Handle the `DataBound` event of the ListBox, which fires when the data is receiv
 </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onDataBound(e) {
             let listBoxReference = e.sender;
@@ -331,13 +331,13 @@ Handle the `DataBound` event of the ListBox, which fires when the data is receiv
     }
 
 ```
-```ListBoxViewModel
+```C# ListBoxViewModel
     public class ListBoxViewModel {
         public List<ProductViewModel> SelectedProductIDs { get; set; }   
         public List<ProductViewModel> DisabledProductIDs { get; set; }      
     }
 ```
-```ProductViewModel
+```C# ProductViewModel
     public class ProductViewModel {
         public int ProductID { get; set; }     
         public string ProductName { get; set; }  
@@ -420,7 +420,7 @@ You can reference the ListBox instances that you have created and build on top o
 
 1. Use the value of the `Name()` option of the component to establish a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var listBoxReference = $("#availableProducts").data("kendoListBox"); // listBoxReference is a reference to the existing ListBox instance of the helper.
@@ -434,7 +434,7 @@ You can reference the ListBox instances that you have created and build on top o
 * The `items` method to obtain the `DOM` elements that correspond to the data items.
 * The `reorder` method to change the position of a specified item.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var listBoxReference = $("#availableProducts").data("kendoListBox");

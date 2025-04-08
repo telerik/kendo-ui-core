@@ -90,7 +90,7 @@ In your application, create a model and set up the S3 authorization as demonstra
 
 The following server-side logic authorizes uploads by creating and signing temporary policies for each client:
 
-```
+```Controller
 public ActionResult Index()
 {
     var config = new S3Config
@@ -181,7 +181,7 @@ The policy sets restrictions on the destination, content type, and others. Any r
 
 Add the Upload component to the view and handle its `upload` and `select` events.
 
-```
+```View
 @(Html.Kendo().Upload()
     .Name("file")
     .Async(async => async

@@ -48,21 +48,21 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The Calendar in the Popup element of the component should implement the specification for the **Calendar** component.
 
-[Calendar accessibility specification]({%slug htmlhelpers_calendar_accessibility%})
+[Calendar accessibility specification]({% slug htmlhelpers_calendar_accessibility %})
 
 ### Popup Date/Time View Chooser
 
 
 The Date/Time view chooser in the Popup element of the component should implement the specification for the **ButtonGroup** component.
 
-[ButtonGroup accessibility specification]({%slug htmlhelpers_buttongroup_accessibility%})
+[ButtonGroup accessibility specification]({% slug htmlhelpers_buttongroup_accessibility %})
 
 ### TimePicker Popup
 
 
 Time Popup implementation should follow the specification for the TimePicker component.
 
-[TimePicker accessibility specification]({%slug htmlhelpers_timepicker_accessibility%})
+[TimePicker accessibility specification]({% slug htmlhelpers_timepicker_accessibility %})
 
 ## Resources
 

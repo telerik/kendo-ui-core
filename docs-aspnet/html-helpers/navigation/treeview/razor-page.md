@@ -21,7 +21,7 @@ The following example demonstrates how to configure the TreeView in a Razor Page
 1. Define the TreeView and specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -36,7 +36,7 @@ The following example demonstrates how to configure the TreeView in a Razor Page
                )
        )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -63,7 +63,7 @@ The following example demonstrates how to configure the TreeView in a Razor Page
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -73,7 +73,7 @@ The following example demonstrates how to configure the TreeView in a Razor Page
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -86,7 +86,7 @@ The following example demonstrates how to configure the TreeView in a Razor Page
     
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<HierarchicalViewModel> result = new List<HierarchicalViewModel>()
         {
             new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent Item 1" },
@@ -121,7 +121,7 @@ The following example demonstrates how to configure the TreeView in a Razor Page
             return new JsonResult(data);
         }
     ```
-    ```tab-Model
+    ```Model
     public class HierarchicalViewModel
     {
         public int ID { get; set; }

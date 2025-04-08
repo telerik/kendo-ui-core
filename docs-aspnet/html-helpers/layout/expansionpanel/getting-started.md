@@ -137,7 +137,7 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function favoritesClick(event){
             if($(event.target).hasClass("k-i-heart-outline")) {
@@ -201,7 +201,7 @@ You can reference the ExpansionPanel instances that you have created and build o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var expansionPanelReference = $("#expPanel").data("kendoExpansionPanel"); // expansionPanelReference is a reference to the existing ExpansionPanel instance of the helper.
@@ -226,7 +226,7 @@ You can reference the ExpansionPanel instances that you have created and build o
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var expansionPanelReference = $("#expPanel").data("kendoExpansionPanel");

@@ -104,7 +104,7 @@ You can define the Upload component as an editor in both a standard HTML form an
 
 1. Handle the `submit` event of the Form, prevent its default action, and gather the uploaded files along with the Form fields. Then, trigger an AJAX request to the server to post the Form data.
 
-    ```Script
+    ```JS script
     <script type="text/javascript">
         $(document).ready(function () {
             $("#exampleForm").submit(function (e) {
@@ -151,7 +151,7 @@ You can define the Upload component as an editor in both a standard HTML form an
 1. Access the received Form data on the server and process the uploaded files.
 
     {% if site.core %}
-    ```HomeController.cs
+    ```C# HomeController.cs
         [HttpPost]
         public JsonResult SaveForm(FormViewModel formData)
         {
@@ -173,7 +173,7 @@ You can define the Upload component as an editor in both a standard HTML form an
         }
     ```
     {% else %}
-    ```HomeController.cs
+    ```C# HomeController.cs
         [HttpPost]
         public JsonResult SaveForm(FormViewModel formData)
         {
@@ -302,7 +302,7 @@ You can define the Upload component as an editor in both a standard HTML form an
 
 1. Handle the `submit` event of the form, prevent its default action, and gather the uploaded files along with the form fields. Then, trigger an AJAX request to the server to post the form data.
 
-    ```Script
+    ```JS script
     <script type="text/javascript">
         $(document).ready(function () {
             $("#exampleForm").submit(function (e) {
@@ -348,7 +348,7 @@ You can define the Upload component as an editor in both a standard HTML form an
 1. Access the received form data on the server and process the uploaded files.
 
     {% if site.core %}
-    ```HomeController.cs
+    ```C# HomeController.cs
         [HttpPost]
         public JsonResult SaveForm(FormViewModel formData)
         {
@@ -370,7 +370,7 @@ You can define the Upload component as an editor in both a standard HTML form an
         }
     ```
     {% else %}
-    ```HomeController.cs
+    ```C# HomeController.cs
         [HttpPost]
         public JsonResult SaveForm(FormViewModel formData)
         {

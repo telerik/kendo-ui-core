@@ -16,7 +16,7 @@ This article describes how to configure the Stepper component in a Razor Pages s
 
 For the complete project, refer to the [Stepper in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Stepper/StepperIndex.cshtml).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	
@@ -37,7 +37,7 @@ For the complete project, refer to the [Stepper in Razor Pages example](https://
     )
 	
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
 	public bool Label { get; set; }
     public bool Indicator { get; set; }

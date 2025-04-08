@@ -150,7 +150,7 @@ The following example shows a complete configuration of a StockChart with **Valu
         </series>
     </kendo-stockchart>
 ```
-```HomeController
+```C# HomeController
     public IActionResult _StockData()
     {
         using (var db = GetContext())
@@ -173,7 +173,7 @@ The following example shows a complete configuration of a StockChart with **Valu
     }
 ```
 {% else %}
-```HomeController
+```C# HomeController
     public ActionResult _StockData()
     {
         using (var db = GetContext())

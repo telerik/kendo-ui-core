@@ -27,7 +27,7 @@ The following example demonstrates how to render a DateRangePicker with an initi
     <kendo-daterangepicker name="daterangepicker" min="new DateTime(2019, 9, 4)" max="new DateTime(2099, 12, 31)">
         <range start="DateTime.Now" end="DateTime.Now.AddDays(10)" />
     </kendo-daterangepicker>
-```    
+```
 {% endif %}
 
 You can access the selected start and end range using the .range() method as demonstrated here:

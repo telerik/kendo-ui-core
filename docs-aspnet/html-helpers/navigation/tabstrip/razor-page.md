@@ -16,7 +16,7 @@ This article describes how to configure the TabStrip component in a Razor Pages 
 
 For the complete project, refer to the [TabStrip in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/TabStrip/TabStripIndex.cshtml).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -55,7 +55,7 @@ For the complete project, refer to the [TabStrip in Razor Pages example](https:/
 </kendo-tabstrip>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
     public void OnGet()
     {

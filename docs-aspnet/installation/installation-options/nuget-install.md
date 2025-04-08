@@ -144,7 +144,7 @@ To use a `nuget.config` file for the Telerik feed, you need to:
 
 2. Add the Telerik feed to the `nuget.config` file, and make sure to use plain-text credentials because the .NET Core NuGet tooling does not fully support encrypted credentials. Here is an example of how your config file can look like:
 
-    ```
+    ```XML
         <?xml version="1.0" encoding="utf-8"?>
         <configuration>
          <packageSources>

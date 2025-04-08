@@ -36,7 +36,7 @@ How can I display an empty string when the field value is the minimum Date value
 1. Else - return the date value in the proper format.
 1. Here is an example:
 
-```Index.cshtml
+```Razor Index.cshtml
 columns.Bound(p => p.OrderDate).ClientTemplate("#=orderDetails(data)#");
 ```
 

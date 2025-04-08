@@ -159,7 +159,7 @@ The following example demonstrates how to configure the OrgChart to use editing.
 
 For disabling the Edit functionality set the `Editable` configuration to `false`:
 
-```
+```Razor
 .Editable(false)
 ```
 

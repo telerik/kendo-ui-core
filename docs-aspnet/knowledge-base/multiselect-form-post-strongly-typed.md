@@ -83,7 +83,7 @@ Using a strongly typed variable means that the form is bound to a specific model
 	}
 ```
 {% endif %}
-```Models
+```Model
 	public class CountryInfo
  	{
     	public int[] SelectedCities { get; set; }

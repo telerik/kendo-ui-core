@@ -46,7 +46,7 @@ The example uses an Upload nested in a [Grid]({% slug htmlhelpers_grid_aspnetcor
 
 1. Implement your files saving logic in the `Save` action.
 
-    ```HomeController
+    ```C# HomeController
         public ActionResult Save(IEnumerable<HttpPostedFileBase> files)
         {
             if (files != null)

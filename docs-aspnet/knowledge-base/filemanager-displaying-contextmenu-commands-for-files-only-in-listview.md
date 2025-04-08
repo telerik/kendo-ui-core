@@ -28,7 +28,7 @@ To display ContextMenu commands only for files and not folders in the right pane
 4. Make a reference to the specific command item [using the data attribute.](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)
 5. Conditionally [disable the listItem from the Kendo UI ContextMenu.](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/methods/enable)
 
-```View_HtmlHelper
+```HtmlHelper
 @(Html.Kendo().FileManager().Name("filemanager")
     .ContextMenu(context => context.Items(items =>
     {

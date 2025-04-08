@@ -239,7 +239,7 @@ To use the client-side API of the DropDownTree and build on top of its initial c
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
     <script>
         var dropdowntreeReference = $("#dropdowntree").data("kendoDropDownTree"); // dropdowntreeReference is a reference to the existing instance of the helper.
     </script>
@@ -247,7 +247,7 @@ To use the client-side API of the DropDownTree and build on top of its initial c
 
 1. Use the [DropDownTree client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#methods) to control the behavior of the widget. In this example, you will use the `open` method to open the popup of the DropDownTree programmatically.
 
-    ```script
+    ```JS script
     <script>
         $(document).ready(function () {
             var dropdowntreeReference = $("#dropdowntree").data("kendoDropDownTree");

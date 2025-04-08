@@ -50,7 +50,7 @@ The following example demonstrates how the Loader can be integrated in a Button 
     </style>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         function onClick() {
             var loader = $("#loader").data("kendoLoader");      
@@ -203,7 +203,7 @@ The following example demonstrates how the Loader can be used as a building bloc
     </style>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         var loadingPanelVisible = false;
 

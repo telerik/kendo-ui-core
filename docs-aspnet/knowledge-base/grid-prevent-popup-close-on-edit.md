@@ -33,7 +33,7 @@ To achieve the desired scenario:
 1. To allow the user to close the editor, set a `preventCloseOnSave` flag when the **Cancel** and **Close** buttons are clicked.
 1. Contrary to the previous step, subscribe to the [`Save`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#savesystemstring) event of the Grid and reset the flag.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModelGridPopUp>()
     .Name("grid")
     .Columns(columns =>
@@ -65,7 +65,7 @@ To achieve the desired scenario:
     )
 )
 ```
-```Script.js
+```JS script.js
     <script type="text/javascript">
         var preventCloseOnSave = false;
 

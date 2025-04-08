@@ -16,7 +16,7 @@ This article describes how to configure the RadioButton component in a Razor Pag
 
 For the complete project, refer to the [RadioButton in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/RadioButon/RadioButtonIndex.cshtml).
 
-```tab-HtmlHelper(cshtml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.RadioButon.RadioButtonIndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -33,7 +33,7 @@ For the complete project, refer to the [RadioButton in Razor Pages example](http
     </ul>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.RadioButon.RadioButtonIndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -50,7 +50,7 @@ For the complete project, refer to the [RadioButton in Razor Pages example](http
     </ul>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	[BindProperty]
     public bool IAgreeProp { get; set; }
     public void OnGet()

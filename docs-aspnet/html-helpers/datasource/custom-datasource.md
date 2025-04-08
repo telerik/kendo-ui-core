@@ -96,7 +96,7 @@ The following example demonstrates how to use the `Headers` option to set a requ
         myDataSource.read(); // the header will be set in the request sent to the HomeController ReadOrders action.
     </script> 
 ```
-```HomeController
+```C# HomeController
 
     public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {

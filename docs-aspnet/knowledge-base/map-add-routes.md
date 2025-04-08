@@ -38,7 +38,7 @@ Follow the steps below to achieve the desired scenario:
 
 > The `PointTo` field needs to include a Longitude and Latitude similar to an existing object.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Map()
         .Name("map")
         .Center(30.268107, -97.744821)
@@ -98,7 +98,7 @@ Follow the steps below to achieve the desired scenario:
     </kendo-map>
 ```
 {% endif %}
-```Model.cs
+```C# Model.cs
     public class RouteModel
     {
         public double[] Location { get; set; }
@@ -107,7 +107,7 @@ Follow the steps below to achieve the desired scenario:
     }
 ```
 {% if site.core %}
-```Controller.cs
+```C# Controller.cs
     public IActionResult _LoadRoutes()
     {
         var data = new List<RouteModel>
@@ -121,7 +121,7 @@ Follow the steps below to achieve the desired scenario:
     }
 ```
 {% else %}
-```Controller.cs
+```C# Controller.cs
     public ActionResult _LoadRoutes()
     {
         var data = new List<RouteModel>
@@ -136,7 +136,7 @@ Follow the steps below to achieve the desired scenario:
 ```
 {% endif %}
 
-```Script.js
+```JS script.js
     <script>
          function onReset(e){
             var map = e.sender;

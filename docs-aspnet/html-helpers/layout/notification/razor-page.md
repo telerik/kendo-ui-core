@@ -16,7 +16,7 @@ This article describes how to configure the Notification component in a Razor Pa
 
 For the complete project, refer to the [Notification in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Notification/NotificationIndex.cshtml).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()	
 	
@@ -56,7 +56,7 @@ For the complete project, refer to the [Notification in Razor Pages example](htt
 	</script>
 ```
 {% if site.core%}
-```tab-TagHelper
+```TagHelper
 <kendo-notification name="notification"
                     width="200">
     <templates>
@@ -68,7 +68,7 @@ For the complete project, refer to the [Notification in Razor Pages example](htt
 </kendo-notification>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
 	public JsonResult OnPostRead()
     {

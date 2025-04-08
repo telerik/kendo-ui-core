@@ -32,7 +32,7 @@ How can I display audio files within the {{ site.product }} Grid?
 1. Within the template, add the conventional [audio element](https://www.w3schools.com/html/html5_audio.asp) that is primarily utilized for displaying an audio file on a the web page.
 1.  Specify the file name and extension using the [Template Syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax).
 
-```Model.cs
+```C# Model.cs
 
     public class EmployeeViewModel
     {
@@ -40,7 +40,7 @@ How can I display audio files within the {{ site.product }} Grid?
     }
 
 ```
-```Column
+```Razor Column
     .Columns(columns =>
     {
         columns.Bound(p => p.Sound).Width(350).ClientTemplate("<audio controls><source src='./#=Sound#'/></audio>");

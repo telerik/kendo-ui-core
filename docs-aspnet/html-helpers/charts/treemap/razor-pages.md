@@ -22,7 +22,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`. The `Model` configuration must contain the definition for `Children`—the name of the Model property that stores the collection of child items.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -35,7 +35,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
             ...
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -61,7 +61,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -71,7 +71,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -83,7 +83,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
     ```
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static List<Population> TreeMapItems;
 
         public void OnGet()
@@ -108,7 +108,7 @@ To bind the TreeMap to a data set received from a remote endpoint within a Razor
             return new JsonResult(TreeMapItems);
         }
     ```
-    ```tab-Model
+    ```Model
         public class Population
         {
             public Population(string name, int value, List<Population> items)

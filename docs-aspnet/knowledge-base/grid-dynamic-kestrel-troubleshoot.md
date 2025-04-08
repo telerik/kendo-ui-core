@@ -27,7 +27,7 @@ The functionality works on core 2.2 and doesn't work on core 3.1. No error are r
 
 ## Solution
 
-After I deleted almost everything an error occured:
+After I deleted almost everything an error occurs:
 
 ```
     Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
@@ -35,7 +35,7 @@ After I deleted almost everything an error occured:
 
 It appears that .NET Core changed the defaults so you need to add the following code in `Startup.cs`:
 
-```
+```C#
     services.Configure<IISServerOptions>(options =>
     {
         options.AllowSynchronousIO = true;

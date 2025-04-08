@@ -25,7 +25,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 ### Calendar Grid Element
 
 
-The Calendar Grid should follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid). It is a single-tab-stop component. All the button actions available for mouse users are also available via keyboard shortcuts.
+The Calendar Grid should follow the requirements for the `grid` role (https://www.w3.org/TR/wai-aria-1.2/#grid). It is a single-tab-stop component. All the button actions available for mouse users are also available via keyboard shortcuts.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

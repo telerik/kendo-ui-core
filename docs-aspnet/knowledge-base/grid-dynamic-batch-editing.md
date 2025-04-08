@@ -33,7 +33,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
 1. On the controller side, obtain each of the modified DataTable records by using the [`[Bind(Prefix = "models")]`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.bindattribute.prefix?view=aspnetcore-6.0) attribute.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @model System.Data.DataTable
 
     @(Html.Kendo().Grid<dynamic>()

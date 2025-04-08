@@ -319,7 +319,7 @@ You can reference the Badge instances that you have created and build on top of 
 
 1. Use the `Name()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var badgeReference = $("#messagesBadge").data("kendoBadge"); // badgeReference is a reference to the existing Badge instance of the helper.

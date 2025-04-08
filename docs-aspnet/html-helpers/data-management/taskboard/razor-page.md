@@ -20,7 +20,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` in the [`Columns`](/api/kendo.mvc.ui.fluent/taskboardbuilder#columnssystemaction) and TaskBoard configurations . The URL in each of these options must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -53,7 +53,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @addTagHelper *, Kendo.Mvc
@@ -106,7 +106,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
             </datasource>
         </kendo-taskboard>
     ```
-    ```tab-card-template
+    ```JS card-template
         <script id="card-template" type="text/x-kendo-template">
             <div class="template-container">
                 <div class="template-header">
@@ -121,7 +121,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
     
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```C#
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
@@ -151,7 +151,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
     
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
 
         private ISchedulerEventService<TaskViewModel> taskService;
         public const string SessionKeyID = "ID";
@@ -245,7 +245,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
             return taskBoardColumns;
         }
     ```
-    ```tab-Model
+    ```Model
         using Kendo.Mvc.UI;
 
         public class TaskViewModel : ISchedulerEvent

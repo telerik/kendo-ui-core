@@ -81,7 +81,7 @@ To start using the remote validation in the Grid:
 
 2. Add the [`RemoteAttribute`](https://msdn.microsoft.com/en-us/library/system.web.mvc.remoteattribute(v=vs.98).aspx) to the Model field to configure the validation on the server. The following example demonstrates how to apply this configuration to the `ProductName` field.
 
-    ```
+    ```C#
         [Required]
         [DisplayName("Product name")]
         [Remote("IsProductName_Available", "Validation")]
@@ -94,7 +94,7 @@ To start using the remote validation in the Grid:
 
 3. Add the custom server-side logic that will validate the user input. The `RemoteAttribute` in the previous example specifies that the validation will be performed in a `IsProductName_Available` method located in `ValidationController`. This is a custom approach and has to be implemented per case. In the following example, the code checks whether the entered `ProductName` already exists.
 
-    ```
+    ```C#
         public JsonResult IsProductName_Available(string ProductName)
         {
             var northwind = new SampleEntities();

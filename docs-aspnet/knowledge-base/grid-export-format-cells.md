@@ -37,7 +37,7 @@ Use the [format](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook
 1. Specify the required cell format.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>

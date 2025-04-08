@@ -34,7 +34,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
 1. Inside the template, create a button and attach a handler that passes both the widget `id` and input `value`.
 1. [`Sync`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/sync) the data to update the records.
 
-```Index.cshtml
+```Razor Index.cshtml
     @using Telerik.Examples.Mvc.Models
 
     @(Html.Kendo().DataSource<Location>()
@@ -66,7 +66,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
     )
 ```
 {% if site.core %}
-```Controller.cs
+```C# Controller.cs
     public class AddItemController : Controller
     {
         public IActionResult AddItem()
@@ -95,7 +95,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
     }
 ```
 {% else %}
-```Controller.cs
+```C# Controller.cs
     public class AddItemController : Controller
     {
         public ActionResult AddItem()
@@ -126,7 +126,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
 {% endif %}
 
 
-```Script.js
+```JS script.js
     <script id="noDataTemplate" type="text/x-kendo-tmpl">
         <button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base" onclick="addNew('#: instance.element[0].   id #', '#: instance.filterInput.val() #')">Add new item</button>
     </script>

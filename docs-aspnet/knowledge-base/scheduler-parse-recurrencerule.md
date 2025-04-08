@@ -26,7 +26,7 @@ How can I parse the `RecurrenceRule` of the Scheduler and get the dates of all t
 
 You can use the [ical.net](https://github.com/rianjs/ical.net) library to parse the `RecurrenceRule`. The example below demonstrates how this can be done in the `Create` action, which will be called when a new recurring event is added in the Scheduler. 
 
-```Controler
+```C# Controler
     public class HomeController : Controller
     {
         public ActionResult Index()

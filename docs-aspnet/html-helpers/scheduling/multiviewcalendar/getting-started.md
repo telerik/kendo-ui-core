@@ -40,7 +40,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <p>
 
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the MultiViewCalendar
@@ -159,7 +159,7 @@ You can reference the MultiViewCalendar instances that you have created and buil
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var multiviewcalendarReference = $("#multiViewCalendar").data("kendoMultiViewCalendar"); // multiviewcalendarReference is a reference to the existing multiViewCalendar instance of the helper.
     </script>
@@ -167,7 +167,7 @@ You can reference the MultiViewCalendar instances that you have created and buil
 
 1. Use the [MultiViewCalendar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the multiviewcalendar.
 
-    ```script
+    ```JS script
     <script>
         var multiviewcalendarReference = $("#multiViewCalendar").data("kendoMultiViewCalendar"); // multiviewcalendarReference is a reference to the existing timeMultiViewCalendar instance of the helper.
         var view = multiviewcalendarReference.view(); // Gets an instance of the current view used by the MultiViewCalendar.

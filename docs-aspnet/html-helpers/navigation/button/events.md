@@ -27,7 +27,7 @@ For a complete example on basic Button events, refer to the [demo on using the e
 </kendo-button>
 ```
 {% endif %}
-```script
+```JS script
 	<script>
 		function onClick() {
 			alert('Button clicked!')

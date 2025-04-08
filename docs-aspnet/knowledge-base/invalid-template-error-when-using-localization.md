@@ -37,7 +37,7 @@ Widen the character ranges that are treated as safe by the ASP.NET Core encoding
 1. Open `Startup.cs` file and locate the `ConfigureServices` method.
 1. Add the `services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));` line. Inside that code line, replace `UnicodeRanges.Cyrillic` with the ranges which include all Unicode characters that you use in your localization files. For more information, refer to the relevant table in the [Unicode Character Code Charts list](http://www.unicode.org/charts/index.html). The final result should be similar to the following code snippet:
 
-    ```
+    ```C#
     public void ConfigureServices(IServiceCollection services)
     {
         // Add framework services.

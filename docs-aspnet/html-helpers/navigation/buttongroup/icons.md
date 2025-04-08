@@ -37,17 +37,19 @@ You can configure the icons by using the `.Icon()` method of the ButtonGroup.
 
 This ButtonGroup configuration is expected to produce the following HTML output:
 
-    <div class="k-button-group k-widget" data-role="buttongroup" id="player" role="group" tabindex="0">
-        <span data-icon="play" aria-pressed="false" role="button" class="k-button k-button-icon">
-            <span class="k-icon k-i-play"></span>
-        </span>
-        <span data-icon="pause" aria-pressed="false" role="button" class="k-button k-button-icon">
-            <span class="k-icon k-i-pause"></span>
-        </span>
-        <span data-icon="stop" aria-pressed="false" role="button" class="k-button k-button-icon">
-            <span class="k-icon k-i-stop"></span>
-        </span>
-    </div>
+```HTML
+<div class="k-button-group k-widget" data-role="buttongroup" id="player" role="group" tabindex="0">
+    <span data-icon="play" aria-pressed="false" role="button" class="k-button k-button-icon">
+        <span class="k-icon k-i-play"></span>
+    </span>
+    <span data-icon="pause" aria-pressed="false" role="button" class="k-button k-button-icon">
+        <span class="k-icon k-i-pause"></span>
+    </span>
+    <span data-icon="stop" aria-pressed="false" role="button" class="k-button k-button-icon">
+        <span class="k-icon k-i-stop"></span>
+    </span>
+</div>
+```
 
 ## See Also
 

@@ -66,7 +66,7 @@ How can I sort the multi-check items in the column filter menu of the {{ site.pr
 ```
 {% endif %}
 
-```GridController
+```C# GridController
   public ActionResult ReadFilterMenuItems()
   {
     var result = gridDataCollection.GroupBy(p => p.Details).Select(grp => grp.FirstOrDefault());

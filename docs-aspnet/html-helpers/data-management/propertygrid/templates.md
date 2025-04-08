@@ -48,7 +48,7 @@ The following example demonstrates how to use the `TemplateHandler()` option to 
     </kendo-propertygrid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function fontTemplate(data) {
             var propertyGridModel = $("#propertyGrid").data('kendoPropertyGrid').model();

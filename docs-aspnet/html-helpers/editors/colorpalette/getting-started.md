@@ -201,7 +201,7 @@ The next step is to configure DropDownButtons and handle the ColorPalette color 
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onChange(e){
             let selectedColor = e.value;
@@ -261,7 +261,7 @@ You can reference the ColorPalette instances that you have created and build on 
 
 1. Use the value of the `Name()` option of the component to establish a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var colorPaletteReference = $("#colorpalette").data("kendoColorPalette"); // colorPaletteReference is a reference to the existing ColorPalette instance of the helper.
@@ -286,7 +286,7 @@ You can reference the ColorPalette instances that you have created and build on 
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var colorPaletteReference = $("#colorpalette").data("kendoColorPalette");

@@ -76,7 +76,7 @@ To utilize the hierarchy functionality of the Telerik UI Drawer:
 
 1. Define the `onItemClick` handling function.
 
-    ```html
+    ```JS
         <script>
             function onItemClick(e) {
                 if (!e.item.hasClass("k-drawer-separator")) {

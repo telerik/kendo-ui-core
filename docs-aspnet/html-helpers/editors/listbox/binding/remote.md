@@ -179,7 +179,7 @@ The example below demonstrates how to load the data in the ListBox when a button
         </kendo-listbox>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onClick() {
             //Call the read() method of the dataSource to trigger the Read request.

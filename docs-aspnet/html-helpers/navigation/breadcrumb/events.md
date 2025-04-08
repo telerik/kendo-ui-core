@@ -52,7 +52,7 @@ For a complete example on basic Breadcrumb events, refer to the [demo on using t
 </script>
 ```
 {% if site.core %}
-```tagHelpers
+```TagHelper
 <kendo-breadcrumb name="breadcrumb"
                 on-change="onChange"
                 on-click="onClick">

@@ -13,19 +13,21 @@ You can bind a Telerik UI RadioButton to a model.
 
 1. Create a new action method and pass the instance of the model to the View.
 
-        public class RadioButtonModel
-        {
-            public bool IAgreeProp { get; set; }
-        }
+    ```C#
+    public class RadioButtonModel
+    {
+        public bool IAgreeProp { get; set; }
+    }
 
-        public partial class ButtonController : Controller
+    public partial class ButtonController : Controller
+    {
+        public ActionResult RadioButton()
         {
-            public ActionResult RadioButton()
-            {
-                RadioButtonModel myModel = new RadioButtonModel() { IAgreeProp = false };
-                return View(myModel);
-            }
+            RadioButtonModel myModel = new RadioButtonModel() { IAgreeProp = false };
+            return View(myModel);
         }
+    }
+    ```
 
 1. Make your view strongly typed.
 

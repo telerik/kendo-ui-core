@@ -222,32 +222,37 @@ As of `2024.4.1112` the `@progress/kendo-ui` NPM package introduce a more fine-g
 
 ```javascript
 `@progress/kendo-ui` //Imports the kendo.all.js 
-`@progress/kendo-ui/*.js` //Imports the files corresponding to the modul system used - ESM or CJS.
+`@progress/kendo-ui/*.js` //Imports the files corresponding to the module system used - ESM or CJS.
 `@progress/kendo-ui/esm` //Imports kendo.all.js only for ESM.
 `@progress/kendo-ui/esm/*.js` //Imports the files for ESM.
-`@progress/kendo-ui/cjs` //Importskendo.all.js only for CJS.
+`@progress/kendo-ui/cjs` //Imports kendo.all.js only for CJS.
 `@progress/kendo-ui/esm/*.js` //Imports the files for CJS.
 `@progress/kendo-ui/umd` //Imports kendo.all.min.js only for UMD.
-`@progress/kendo-ui/umd/*.js` //Imports th files for UMD.
+`@progress/kendo-ui/umd/*.js` //Imports the files for UMD.
 ```
 
 #### Examples
+
 
 ```javascript
 import "@progress/kendo-ui"; //Imports the kendo.all.js 
 ```
 
-```javascript
-import "@progress/kendo-ui/esm"; //Imports kendo.all.js only for ESM.
-```
 
 ```javascript
-import "@progress/kendo-ui/kendo.grid.js"; //Imports the Grid related files corresponding to the modul system used - ESM or CJS.
+import "@progress/kendo-ui/esm"; //Imports kendo.all.js only for ESM.
+``` 
+
+
+```javascript
+import "@progress/kendo-ui/kendo.grid.js"; //Imports the Grid related files corresponding to the module system used - ESM or CJS.
 ```
+
 
 ```javascript
 import "@progress/kendo-ui/esm/kendo.grid.js"; //Imports the Grid related files for ESM.
 ```
+
 
 ## Known Issues 
 

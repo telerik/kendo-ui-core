@@ -46,6 +46,7 @@ The following example demonstrates the possible markup and a possible placement 
 
 The following example demonstrates how the markup of the page from the previous example changes after the initialization of the Dialog when the widget is moved to become a child of the `<body>` and its additional markup (the wrapper and the title bar) is generated.
 
+```HTML
     <body>
         <div id="container1">
             ...
@@ -60,6 +61,7 @@ The following example demonstrates how the markup of the page from the previous 
             </div>
         </div>
     </body>
+```
 
 ## See Also
 

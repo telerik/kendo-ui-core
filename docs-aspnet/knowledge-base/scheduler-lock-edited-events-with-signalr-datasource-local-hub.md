@@ -77,7 +77,7 @@ This example demonstrates locking the currently edited events of the Scheduler s
             });
         </script>
     ```
-    ```ProductHub.cs
+    ```C# ProductHub.cs
         public class ProductHub : Hub
         {
             public void LockRecord(int id)

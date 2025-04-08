@@ -223,7 +223,7 @@ A more flexible alternative is to provide the series with an array of objects. T
 You can bind the Chart to a data set in the view model or to items that are stored in `ViewBag`/`ViewData`.
 
 {% if site.core %}
-```tab-Controller
+```Controller
         public IActionResult Local_Data_Binding()
         {
             var internetUsers = new InternetUsers[] {
@@ -244,7 +244,7 @@ You can bind the Chart to a data set in the view model or to items that are stor
         }
 ```
 {% else %}
-```tab-Controller
+```Controller
         public ActionResult Local_Data_Binding()
         {
             var internetUsers = new InternetUsers[] {
@@ -265,7 +265,7 @@ You can bind the Chart to a data set in the view model or to items that are stor
         }
 ```
 {% endif %}
-```tab-Model
+```Model
     public class InternetUsers
     {
         public InternetUsers()
@@ -330,7 +330,7 @@ You can bind the Chart to a data set in the view model or to items that are stor
             </value-axis-item>
         </value-axis>
     </kendo-chart>
-```    
+```
 {% endif %}
 
 ## Remote Data
@@ -342,7 +342,7 @@ To bind to remote data by using the DataSource component:
 1. Add a new action method in your controller that returns the data set.
 
     {% if site.core %}
-    ```tab-Controller
+    ```Controller
             [HttpPost]
             public IActionResult _SpainElectricityProduction()
             {
@@ -366,7 +366,7 @@ To bind to remote data by using the DataSource component:
             }
     ```
     {% else %}
-    ```tab-Controller
+    ```Controller
             [HttpPost]
             public ActionResult _SpainElectricityProduction()
             {
@@ -390,7 +390,7 @@ To bind to remote data by using the DataSource component:
             }
     ```
     {% endif %}
-    ```tab-Model
+    ```Model
         public class ElectricityProduction
         {
             public ElectricityProduction()
@@ -483,14 +483,14 @@ To bind to remote data by using the DataSource component:
     Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response. For further details on the DataSource configuration refer to the [DataSource section of the documentation]({% slug htmlhelpers_datasource_aspnetcore %}).
 
     {% if site.core %}
-    ```tab-Controller
+    ```Controller
         public IActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(productService.Read().ToDataSourceResult(request));
         }
     ```
     {% else %}
-    ```tab-Controller
+    ```Controller
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(productService.Read().ToDataSourceResult(request));

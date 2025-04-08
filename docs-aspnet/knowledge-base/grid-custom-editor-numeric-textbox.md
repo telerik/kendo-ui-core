@@ -28,13 +28,13 @@ How can I create a Grid with a custom number editor by using the {{ site.product
 
 2. Pass the newly created view name to the following column configuration:
 
-```
+```Razor
 columns.Bound(p => p.Freight).EditorTemplateName("CustomNumericTextBox");
 ```
 
 ### Example
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<GridColumnEditorTemplateKB.Models.OrderViewModel>()
     .Name("grid")
     .Columns(columns =>
@@ -51,7 +51,7 @@ columns.Bound(p => p.Freight).EditorTemplateName("CustomNumericTextBox");
     )
 )
 ```
-```CustomNumericTextBox.cshtml
+```Razor CustomNumericTextBox.cshtml
 @model double?
 
 @(Html.Kendo().NumericTextBoxFor(m => m)

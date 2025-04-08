@@ -291,7 +291,7 @@ The scenario relies on the following key steps:
   </script>
 
 ```
-```Styles
+```CSS Styles
   <style>
     .k-stepper [class*="correct"] .k-step-indicator {
         background-color: green;

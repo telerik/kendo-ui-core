@@ -25,7 +25,7 @@ To ensure that the application is configured for Web API binding:
 
 * Configure the Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
 
-  ```
+  ```C#
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -38,7 +38,7 @@ To ensure that the application is configured for Web API binding:
 
 * Create a file named `WebApiConfig.cs` into the `App_Start` folder and configure the default Web API routing convention.
  
-  ```
+  ```C#
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -62,7 +62,7 @@ To ensure that the application is configured for Web API binding:
 To support writing and reading data using Web API endpoints, the {% if site.core %} `ControllerBase` {%else%} `ApiController` {% endif %} base class needs to be inherited for a given controller instance.
 
 {% if site.core %}
-```
+```C#
     [Route("api/[controller]")]
     public class TaskController : Controller
     {
@@ -136,7 +136,7 @@ To support writing and reading data using Web API endpoints, the {% if site.core
     }
 ```
 {% else %}
-```
+```C#
 public class TaskController : System.Web.Http.ApiController
     {
         SchedulerTaskService service;

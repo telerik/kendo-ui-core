@@ -17,7 +17,7 @@ This article describes how to configure the Calendar component in a Razor Pages 
 For the complete project, refer to the [Calendar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Calendar/CalendarIndex.cshtml).
 
 
-```tab-HtmlHelper(csthml)   
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -28,7 +28,7 @@ For the complete project, refer to the [Calendar in Razor Pages example](https:/
 ```
 
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -39,7 +39,7 @@ For the complete project, refer to the [Calendar in Razor Pages example](https:/
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
     public void OnGet()
     {

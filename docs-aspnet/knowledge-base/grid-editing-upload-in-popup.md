@@ -63,7 +63,7 @@ Instead:
 
 1. Add a `ClientTemplate` which caters for the difference in the file names sent by the success handler and the `IFormFile`:
 
-    ```
+    ```Razor
         columns.Bound(p => p.FileUploads).ClientTemplate("#=getFileTemplate(data)#");
         <script>
             function getFileTemplate(data) {

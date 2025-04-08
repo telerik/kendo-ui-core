@@ -22,7 +22,7 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configuration. The URL in each of these options must refer to the method name in the `PageModel`.
 
-    ```tab-HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -52,7 +52,7 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
             ... // Additional configuration options.
         )
     ```
-    ```tab-TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @addTagHelper *, Kendo.Mvc
@@ -94,7 +94,7 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```C#
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
@@ -124,7 +124,7 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
 
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<MeetingViewModel> meetings;
 
         public void OnGet()
@@ -180,7 +180,7 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
             return new JsonResult(new[] { meeting }.ToDataSourceResult(request, ModelState));
         }
     ```
-    ```tab-Model
+    ```Model
         @using Kendo.Mvc.UI;
         @using System.ComponentModel.DataAnnotations;
 

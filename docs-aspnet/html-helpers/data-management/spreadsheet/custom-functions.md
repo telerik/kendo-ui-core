@@ -16,17 +16,19 @@ The first argument (string) is the name for your function in formulas (case-inse
 
 The following example demonstrates how to define a function that calculates the distance between two points.
 
-    kendo.spreadsheet.defineFunction("distance", function(x1, y1, x2, y2){
-        var dx = Math.abs(x1 - x2);
-        var dy = Math.abs(y1 - y2);
-        var dist = Math.sqrt(dx*dx + dy*dy);
-        return dist;
-    }).args([
-        [ "x1", "number" ],
-        [ "y1", "number" ],
-        [ "x2", "number" ],
-        [ "y2", "number" ]
-    ]);
+```JS
+kendo.spreadsheet.defineFunction("distance", function(x1, y1, x2, y2){
+    var dx = Math.abs(x1 - x2);
+    var dy = Math.abs(y1 - y2);
+    var dist = Math.sqrt(dx*dx + dy*dy);
+    return dist;
+}).args([
+    [ "x1", "number" ],
+    [ "y1", "number" ],
+    [ "x2", "number" ],
+    [ "y2", "number" ]
+]);
+```
 
 If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, to find the distance between coordinate points `(2,2)` and `(5,6)`, type in a cell `=DISTANCE(2, 2, 5, 6)`. Optionally, you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`.
 
@@ -36,16 +38,18 @@ In the above example, `defineFunction` returns an object that has an `args` meth
 
 To retrieve currency information from a remote server, define a primitive to make this information available in formulas. To define an asynchronous function, call `argsAsync` instead of `args`.
 
-    kendo.spreadsheet.defineFunction("currency", function(callback, base, curr){
-        // A suggested fetchCurrency function.
-        // The way it is implemented is not relevant to the goal of the demonstrated scenario.
-        fetchCurrency(base, curr, function(value){
-            callback(value);
-        });
-    }).argsAsync([
-        [ "base", "string" ],
-        [ "curr", "string" ]
-    ]);
+```JS
+kendo.spreadsheet.defineFunction("currency", function(callback, base, curr){
+    // A suggested fetchCurrency function.
+    // The way it is implemented is not relevant to the goal of the demonstrated scenario.
+    fetchCurrency(base, curr, function(value){
+        callback(value);
+    });
+}).argsAsync([
+    [ "base", "string" ],
+    [ "curr", "string" ]
+]);
+```
 
 > The `argsAsync` passes a callback as the first argument to your implementation function, which you need to call with the return value.
 
@@ -79,11 +83,13 @@ The Spreadsheet supports the following type specifiers.
 
 Some specifiers actually modify the value that your function receives. For example, you can implement a function that truncates the argument to integer.
 
-    defineFunction("truncate", function(value){
-        return value;
-    }).args([
-        [ "value", "integer" ]
-    ]);
+```JS
+defineFunction("truncate", function(value){
+    return value;
+}).args([
+    [ "value", "integer" ]
+]);
+```
 
 If you call `=TRUNCATE(12.634)`, the result is `12`. You can also call `=TRUNCATE(TRUE)`, it returns `1`. All numeric types silently accept a Boolean, and convert `true` to `1` and `false` to `0`.
 
@@ -91,17 +97,21 @@ If you call `=TRUNCATE(12.634)`, the result is `12`. You can also call `=TRUNCAT
 
 By default, if an argument is an error, your function is not called and that error is returned.
 
-    defineFunction("iserror", function(value){
-        return value instanceof kendo.spreadsheet.CalcError;
-    }).args([
-        [ "value", "anyvalue" ]
-    ]);
+```JS
+defineFunction("iserror", function(value){
+    return value instanceof kendo.spreadsheet.CalcError;
+}).args([
+    [ "value", "anyvalue" ]
+]);
+```
 
 With this implementation, when you type `=ISERROR(1/0)`, `#DIV/0!` instead of `true` is returned&mdash;the error is passed over and aborts the computation. To allow the passing of errors, append a `!` to the type.
 
-    ...args([
-        [ "value", "anyvalue!" ]
-    ]);
+```JS
+...args([
+    [ "value", "anyvalue!" ]
+]);
+```
 
 The result is that `true` is returned.
 
@@ -111,12 +121,14 @@ All above-mentioned type specifiers force references. FBecasues of this, `=TRUNC
 
 Sometimes you might need to write functions that receive a reference instead of a resolved value. Such an example is the `ROW` function of Excel. In its basic form, it takes a cell reference and returns its row number, as demonstrated in the following example. The actual `ROW` function is more complicated.
 
-    defineFunction("row", function(cell){
-        // Add one because internally row indexes are zero-based.
-        return cell.row + 1;
-    }).args([
-        [ "reference", "cell" ]
-    ]);
+```JS
+defineFunction("row", function(cell){
+    // Add one because internally row indexes are zero-based.
+    return cell.row + 1;
+}).args([
+    [ "reference", "cell" ]
+]);
+```
 
 If you now call `=ROW(A5)`, you get `5` as a result, regardless of the content in the `A5` cell&mdash;it might be empty or it is possible that this very formula sits in the `A5` cell and there must be no circular reference error in such a case.
 
@@ -154,19 +166,23 @@ In addition to the basic type specifiers that are strings, you can also use the 
 
 In certain clauses you might need to refer to values of previously type-checked arguments. For example, if you want to write a primitive that takes a minimum, a maximum, and a value that must be between them, and should return as a fraction the position of that value between min and max.
 
-    defineFunction("my.position", function(min, max, value){
-        return (value - min) / (max - min);
-    }).args([
-        [ "min", "number" ],
-        [ "max", "number" ],
-        [ "value", [ "and", "number",
-                     [ "[between]", "$min", "$max" ] ] ]
-    ]);
+```JS
+defineFunction("my.position", function(min, max, value){
+    return (value - min) / (max - min);
+}).args([
+    [ "min", "number" ],
+    [ "max", "number" ],
+    [ "value", [ "and", "number",
+                    [ "[between]", "$min", "$max" ] ] ]
+]);
+```
 
 Note the type specifier for `"value"`:
 
-    [ "and", "number",
-      [ "[between]", "$min", "$max" ] ]
+```JS
+[ "and", "number",
+    [ "[between]", "$min", "$max" ] ]
+```
 
 The code requires that the parameter is a number and that it has to be between `min` and `max`. To refer to a previous argument, prefix the identifier with a `$` character. This approach works for arguments of `"between"` (and friends), `"assert"`, `"values"` and `"null"`.
 
@@ -174,15 +190,17 @@ The code requires that the parameter is a number and that it has to be between `
 
 The above function is not quite correct because it does not check that `max` is actually greater than `min`. To do that, use `"assert"`, as demonstrated in the following example.
 
-    defineFunction("my.position", function(min, max, value){
-        return (value - min) / (max - min);
-    }).args([
-        [ "min", "number" ],
-        [ "max", "number" ],
-        [ "value", [ "and", "number",
-                     [ "[between]", "$min", "$max" ] ] ],
-        [ "?", [ "assert", "$min < $max", "N/A" ] ]
-    ]);
+```JS
+defineFunction("my.position", function(min, max, value){
+    return (value - min) / (max - min);
+}).args([
+    [ "min", "number" ],
+    [ "max", "number" ],
+    [ "value", [ "and", "number",
+                    [ "[between]", "$min", "$max" ] ] ],
+    [ "?", [ "assert", "$min < $max", "N/A" ] ]
+]);
+```
 
 The `"assert"` type specification allows you to introduce an arbitrary condition into the JavaScript code of the type-checking function. An argument name of `"?"` does not actually introduce a new argument, but provides a place for such assertions. The third argument to `"assert"` is the error code that it should produce if the condition does not stand (and `#N/A!` is actually the default).
 
@@ -192,19 +210,21 @@ As hinted above, you can use the `"null"` specifier to support optional argument
 
 The following example demonstrates the actual definition of the `ROW` function.
 
-    defineFunction("row", function(ref){
-        if (!ref) {
-            return this.formula.row + 1;
-        }
-        if (ref instanceof CellRef) {
-            return ref.row + 1;
-        }
-        return this.asMatrix(ref).mapRow(function(row){
-            return row + ref.topLeft.row + 1;
-        });
-    }).args([
-        [ "ref", [ "or", "area", "null" ]]
-    ]);
+```JS
+defineFunction("row", function(ref){
+    if (!ref) {
+        return this.formula.row + 1;
+    }
+    if (ref instanceof CellRef) {
+        return ref.row + 1;
+    }
+    return this.asMatrix(ref).mapRow(function(row){
+        return row + ref.topLeft.row + 1;
+    });
+}).args([
+    [ "ref", [ "or", "area", "null" ]]
+]);
+```
 
 The code requires that the argument can either be an area (a cell or a range) or `null` (that is, missing). By using the `"or"` combiner, you make it accept either of these. If the argument is missing, your function gets `null`. In such cases, it has to return the row of the current formula that you get by `this.formula.row`. For more details, refer to the [section on context objects](#context-objects).
 
@@ -212,13 +232,15 @@ In most cases, “optional” means that the argument takes some default value i
 
 The following example demonstrates this implementation.
 
-    defineFunction("log", function(num, base){
-        return Math.log(num) / Math.log(base);
-    }).args([
-        [ "*num", "number++" ],
-        [ "*base", [ "or", "number++", [ "null", 10 ] ] ],
-        [ "?", [ "assert", "$base != 1", "DIV/0" ] ]
-    ]);
+```JS
+defineFunction("log", function(num, base){
+    return Math.log(num) / Math.log(base);
+}).args([
+    [ "*num", "number++" ],
+    [ "*base", [ "or", "number++", [ "null", 10 ] ] ],
+    [ "?", [ "assert", "$base != 1", "DIV/0" ] ]
+]);
+```
 
 <!--*-->
 The type specification for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead. Note that it uses an assertion to make sure the `base` is not 1. If the `base` is 1, a `#DIV/0!` error is returned.
@@ -227,28 +249,32 @@ The type specification for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. Th
 
 To return an error code, return a `spreadsheet.CalcError` object.
 
-    defineFunction("tan", function(x){
-        // If x is sufficiently close to PI, "tan" will return
-        // infinity or some really big number.
-        // The example will error out instead.
-        if (Math.abs(x - Math.PI/2) < 1e-10) {
-            return new spreadsheet.CalcError("DIV/0");
-        }
-        return Math.tan(x);
-    }).args([
-        [ "x", "number" ]
-    ]);
+```JS
+defineFunction("tan", function(x){
+    // If x is sufficiently close to PI, "tan" will return
+    // infinity or some really big number.
+    // The example will error out instead.
+    if (Math.abs(x - Math.PI/2) < 1e-10) {
+        return new spreadsheet.CalcError("DIV/0");
+    }
+    return Math.tan(x);
+}).args([
+    [ "x", "number" ]
+]);
+```
 
 > For convenience, you can also `throw` a `CalcError` object for synchronous primitives&mdash;that is, if you use `args` and not `argsAsync`.
 
 It is possible to do the above through an assertion as well.
 
-    defineFunction("tan", function(x){
-        return Math.tan(x);
-    }).args([
-        [ "x", [ "and", "number",
-                 [ "assert", "1e-10 < Math.abs($x - Math.PI/2)", "DIV/0" ] ] ]
-    ]);
+```JS
+defineFunction("tan", function(x){
+    return Math.tan(x);
+}).args([
+    [ "x", [ "and", "number",
+                [ "assert", "1e-10 < Math.abs($x - Math.PI/2)", "DIV/0" ] ] ]
+]);
+```
 
 ### Variable Argument List
 
@@ -260,12 +286,14 @@ The simplest way is to use the `"rest"` type specifier. In such cases, the last 
 
 The following example demonstrates how to use a function that joins arguments with a separator producing a string.
 
-    defineFunction("join", function(sep, list){
-        return list.join(sep);
-    }).args([
-        [ "sep", "string" ],
-        [ "list", "rest" ]
-    ]);
+```JS
+defineFunction("join", function(sep, list){
+    return list.join(sep);
+}).args([
+    [ "sep", "string" ],
+    [ "list", "rest" ]
+]);
+```
 
 This allows for `=JOIN("-", 1, 2, 3)` which returns `1-2-3` and for `=JOIN(".")` which returns the empty string because the list will be empty.
 
@@ -275,13 +303,15 @@ The `"collect"` clauses collect all remaining arguments that match a certain typ
 
 The following example demonstrates the definition of `SUM`.
 
-    defineFunction("sum", function(numbers){
-        return numbers.reduce(function(sum, num){
-            return sum + num;
-        }, 0);
-    }).args([
-        [ "numbers", [ "collect", "number" ] ]
-    ]);
+```JS
+defineFunction("sum", function(numbers){
+    return numbers.reduce(function(sum, num){
+        return sum + num;
+    }, 0);
+}).args([
+    [ "numbers", [ "collect", "number" ] ]
+]);
+```
 
 The `"collect"` clause aborts when it encounters an error. To ignore errors as well, use the `"#collect"` specification. Note that `"collect"` and `"#collect"` only make sense when either is the first specifier&mdash;that is, they cannot be nested in `"or"`, `"and"`, and the like.
 
@@ -291,27 +321,31 @@ There are functions that allow an arbitrary number of arguments of specific type
 
 The following example demonstrates the argument specification.
 
-    [
-        [ "a1", "matrix" ],
-        [ "+",
-          [ "a2", [ "and", "matrix",
-                    [ "assert", "$a2.width == $a1.width" ],
-                    [ "assert", "$a2.height == $a1.height" ] ] ] ]
-    ]
+```JS
+[
+    [ "a1", "matrix" ],
+    [ "+",
+        [ "a2", [ "and", "matrix",
+                [ "assert", "$a2.width == $a1.width" ],
+                [ "assert", "$a2.height == $a1.height" ] ] ] ]
+]
+```
 
 The `"+"` in the second definition means that one or more arguments are expected to follow and that the `a2` argument, defined there, can repeat. Notice how you can use assertions to make sure the matrices have the same shape as the first one (`a1`).
 
 For another example, look at the `SUMIFS` function ([see Excel documentation](https://support.office.com/en-us/article/SUMIFS-function-c9e748f5-7ea7-455d-9406-611cebce642b)). It takes a `sum_range`, a `criteria_range`, and a `criteria`. These are the required arguments. Then, any number of `criteria_range` and `criteria` arguments can follow. In particular, criteria ranges must all have the same shape (width/height). Here is the argument definition for `SUMIFS`:
 
-    [
-        [ "range", "matrix" ],
-        [ "m1", "matrix" ],
-        [ "c1", "anyvalue" ],
-        [ [ "m2", [ "and", "matrix",
-                    [ "assert", "$m1.width == $m2.width" ],
-                    [ "assert", "$m1.height == $m2.height" ] ] ],
-          [ "c2", "anyvalue" ] ]
-    ]
+```JS
+[
+    [ "range", "matrix" ],
+    [ "m1", "matrix" ],
+    [ "c1", "anyvalue" ],
+    [ [ "m2", [ "and", "matrix",
+                [ "assert", "$m1.width == $m2.width" ],
+                [ "assert", "$m1.height == $m2.height" ] ] ],
+        [ "c2", "anyvalue" ] ]
+]
+```
 
 The repeating part now is simply enclosed in an array, not preceded by `"+"`. This indicates to the system that any number might follow, including zero, while `"+"` requires at least one argument.
 
@@ -325,22 +359,24 @@ Time is kept as a fraction of a day&mdash;that is, 0.5 means 12:00:00. For examp
 
 Functions to pack or unpack dates are available in `spreadsheet.calc.runtime`.
 
-    var runtime = kendo.spreadsheet.calc.runtime;
+```JS
+var runtime = kendo.spreadsheet.calc.runtime;
 
-    // Unpacking
-    var date = runtime.unpackDate(28922.55);
-    console.log(date); // { year: 1979, month: 2, date: 8, day: 4 }
+// Unpacking
+var date = runtime.unpackDate(28922.55);
+console.log(date); // { year: 1979, month: 2, date: 8, day: 4 }
 
-    var time = runtime.unpackTime(28922.55);
-    console.log(time); // { hours: 13, minutes: 12, seconds: 0, milliseconds: 0 }
+var time = runtime.unpackTime(28922.55);
+console.log(time); // { hours: 13, minutes: 12, seconds: 0, milliseconds: 0 }
 
-    var date = runtime.serialToDate(28922.55); // produces JavaScript Date object
-    console.log(date.toISOString()); // 1979-03-08T13:12:00.000Z
+var date = runtime.serialToDate(28922.55); // produces JavaScript Date object
+console.log(date.toISOString()); // 1979-03-08T13:12:00.000Z
 
-    // Packing
-    console.log(runtime.packDate(2015, 5, 25)); // year, month, date
-    console.log(runtime.packTime(13, 35, 0, 0)); // hours, minutes, seconds, ms
-    console.log(runtime.dateToSerial(new Date()))
+// Packing
+console.log(runtime.packDate(2015, 5, 25)); // year, month, date
+console.log(runtime.packTime(13, 35, 0, 0)); // hours, minutes, seconds, ms
+console.log(runtime.dateToSerial(new Date()))
+```
 
 Note that the serial date representation does not carry any timezone information, so the functions involving `Date` objects (`serialToDate` and `dateToSerial`) use the local components and not UTC&mdash;as Excel does.
 
@@ -348,18 +384,20 @@ Note that the serial date representation does not carry any timezone information
 
 As mentioned earlier, certain type specifiers allow you to get a reference in your function rather than the resolved value. Note that when you do so, you cannot rely on the values in those cells to be calculated. As a result, if your function might need the values as well, you have to compute them. Because the function which does this is asynchronous, your primitive has to be defined in an asynchronous style as well.
 
-    defineFunction("test", function(callback, x){
-        this.resolveCells([ x ], function(){
-            console.log(x instanceof spreadsheet.CellRef); // true
-            console.log("So we have a cell:");
-            console.log(x.sheet, x.row, x.col);
-            console.log("And its value is:");
-            console.log(this.getRefData(x));
-            callback("Cell value: " + this.getRefData(x));
-        });
-    }).argsAsync([
-        [ "x", "cell" ]
-    ]);
+```JS
+defineFunction("test", function(callback, x){
+    this.resolveCells([ x ], function(){
+        console.log(x instanceof spreadsheet.CellRef); // true
+        console.log("So we have a cell:");
+        console.log(x.sheet, x.row, x.col);
+        console.log("And its value is:");
+        console.log(this.getRefData(x));
+        callback("Cell value: " + this.getRefData(x));
+    });
+}).argsAsync([
+    [ "x", "cell" ]
+]);
+```
 
 This function accepts a cell argument and you can only call it like `=test(B4)`. It calls `this.resolveCells` from the context object to verify that the cell value is calculated. Without this step and if the cell actually contains a formula, the value returned by `this.getRefData` could be outdated. Then it prints some information about that cell.
 
@@ -375,45 +413,49 @@ The following list explains the types of references that your primitive can rece
 
 The following example demonstrates how to use a function that takes an arbitrary reference and returns its type of reference.
 
-      defineFunction("refkind", function(x){
-          if (x === spreadsheet.NULLREF) {
-              return "null";
-          }
-          if (x instanceof spreadsheet.CellRef) {
-              return "cell";
-          }
-          if (x instanceof spreadsheet.RangeRef) {
-              return "range";
-          }
-          if (x instanceof spreadsheet.UnionRef) {
-              return "union";
-          }
-          return "unknown";
-      }).args([
-          [ "x", "ref" ]
-      ]);
+```JS
+defineFunction("refkind", function(x){
+    if (x === spreadsheet.NULLREF) {
+        return "null";
+    }
+    if (x instanceof spreadsheet.CellRef) {
+        return "cell";
+    }
+    if (x instanceof spreadsheet.RangeRef) {
+        return "range";
+    }
+    if (x instanceof spreadsheet.UnionRef) {
+        return "union";
+    }
+    return "unknown";
+}).args([
+    [ "x", "ref" ]
+]);
+```
 
 The following example demonstrates how to use a function that takes an arbitrary reference and returns the total number of cells it covers.
 
-      defineFunction("countcells", function(x){
-          var count = 0;
-          function add(x) {
-              if (x instanceof spreadsheet.CellRef) {
-                  count++;
-              } else if (x instanceof spreadsheet.RangeRef) {
-                  count += x.width() * x.height();
-              } else if (x instanceof spreadsheet.UnionRef) {
-                  x.refs.forEach(add);
-              } else {
-                  // unknown reference type.
-                  throw new CalcError("REF");
-              }
-          }
-          add(x);
-          return count;
-      }).args([
-          [ "x", "ref" ]
-      ]);
+```JS
+defineFunction("countcells", function(x){
+    var count = 0;
+    function add(x) {
+        if (x instanceof spreadsheet.CellRef) {
+            count++;
+        } else if (x instanceof spreadsheet.RangeRef) {
+            count += x.width() * x.height();
+        } else if (x instanceof spreadsheet.UnionRef) {
+            x.refs.forEach(add);
+        } else {
+            // unknown reference type.
+            throw new CalcError("REF");
+        }
+    }
+    add(x);
+    return count;
+}).args([
+    [ "x", "ref" ]
+]);
+```
 
 You can now say:
 
@@ -424,13 +466,15 @@ You can now say:
 
 Here is a function that returns the background color of some cell:
 
-      defineFunction("backgroundof", function(cell){
-          var workbook = this.workbook();
-          var sheet = workbook.sheetByName(cell.sheet);
-          return sheet.range(cell).background();
-      }).args([
-          [ "cell", "cell" ]
-      ]);
+```JS
+defineFunction("backgroundof", function(cell){
+    var workbook = this.workbook();
+    var sheet = workbook.sheetByName(cell.sheet);
+    return sheet.range(cell).background();
+}).args([
+    [ "cell", "cell" ]
+]);
+```
 
 It uses `this.workbook()` to retrieve the workbook, and then uses the Workbook/Sheet/Range APIs to fetch the background color of the given cell.
 
@@ -442,13 +486,15 @@ Matrices were primarily added to deal with the “array formulas” concept in E
 
 The following example demonstrates how to use a function that doubles each number in a range and returns a matrix of the same shape.
 
-    defineFunction("doublematrix", function(m){
-        return m.map(function(value){
-            return value * 2;
-        });
-    }).args([
-        [ "m", "matrix" ]
-    ]);
+```JS
+defineFunction("doublematrix", function(m){
+    return m.map(function(value){
+        return value * 2;
+    });
+}).args([
+    [ "m", "matrix" ]
+]);
+```
 
 To use this formula:
 
@@ -498,9 +544,11 @@ If `args` or `argsAsync` are not called, the primitive function receives exactly
 
 The following example demonstrates how to use a function that adds two things.
 
-    defineFunction("add", function(callback, args){
-        callback(args[0] + args[1]);
-    });
+```JS
+defineFunction("add", function(callback, args){
+    callback(args[0] + args[1]);
+});
+```
 
 Results:
 

@@ -31,7 +31,7 @@ Start with installing the SignalR NuGet package and configuring SignalR to conne
 
 3. In the `Startup.cs` file of the solution, map the endpoint of the SignalR hub.
 
-```
+```C#
 using SignalR.Mvc;
 
  public void ConfigureServices(IServiceCollection services)
@@ -70,7 +70,7 @@ SignalR uses [hubs to communicate between clients and servers](https://docs.micr
 
 Define the hub in the `Hubs/GridHub.cs` file:
 
-```
+```C#
 using Core_CustomKendoGrid_with_SignalR.Models;
 using Microsoft.AspNetCore.SignalR;
 using System;

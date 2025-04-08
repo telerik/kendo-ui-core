@@ -32,7 +32,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onPromptRequest(e){
             // Handle the AIPrompt PromptRequest event that triggers when the prompt view 'Generate output' button is clicked.

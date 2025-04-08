@@ -144,7 +144,7 @@ You can reference the Switch instances that you have created and build on top of
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var switchReference = $("#switch").data("kendoSwitch"); // switchReference is a reference to the existing Switch instance of the helper.
@@ -153,7 +153,7 @@ You can reference the Switch instances that you have created and build on top of
     ```
 1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/methods/check) client-side method.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                var switchInstance = $("#switch").kendoSwitch().data("kendoSwitch");// switchReference is a reference to the existing Switch instance of the helper.

@@ -126,7 +126,7 @@ The example below shows how to configure the `Commands` view and specify a custo
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         var promptData = [
         {
@@ -202,7 +202,7 @@ The following example demonstrates how to create a custom view that contains a b
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function initializeComponents() {
             this.element.find("[ref-custom-button]").kendoButton({

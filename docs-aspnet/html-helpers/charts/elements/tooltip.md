@@ -138,7 +138,7 @@ You can also use an external template by specifying [`TemplateId`]({{ TemplateId
 ```
 {% endif %}
 
-```Template
+```JS Template
     <script id="tooltipTemplate" type="text/x-kendo-template">
         Value: #= value # ; Category: #= category #
     </script>

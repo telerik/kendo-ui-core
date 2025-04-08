@@ -32,7 +32,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 ```TagHelper
 @addTagHelper *, Kendo.Mvc
 <h4>Timeline with event handler</h4>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Timeline
@@ -265,13 +265,13 @@ You can reference the Timeline instances that you have created and build on top 
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var timeline = $("#timeline").data().kendoTimeline; // timeline is a reference to the existing timeline instance of the helper.
     </script>
     ```
 1. Use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods) to control the behavior of the widget. In this example, you will use the `open` method to open an event details of the Timeline.
-    ```script
+    ```JS script
     <script>
         var timeline = $("#timeline").data().kendoTimeline; // timeline is a reference to the existing timeline instance of the helper.
         var firstEvent = timeline.element.find(".k-timeline-track-item:eq(3)");

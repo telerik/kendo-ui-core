@@ -16,7 +16,7 @@ This article describes how to configure the ButtonGroup component in a Razor Pag
 
 For the complete project, refer to the [ButtonGroup in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ButtonGroup/ButtonGroupIndex.cshtml).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.ButtonGroup.ButtonGroupIndexModel
 @{
@@ -39,7 +39,7 @@ For the complete project, refer to the [ButtonGroup in Razor Pages example](http
     .Events(ev => ev.Select("onSelect"))
 )
 ```
-```tab-TagHelper(cshtml)
+```TagHelper
         <kendo-buttongroup name="player"
                             on-select="onSelect">
                 <buttongroup-items>
@@ -49,14 +49,14 @@ For the complete project, refer to the [ButtonGroup in Razor Pages example](http
                 </buttongroup-items>
         </kendo-buttongroup>
 ```
-```script
+```JS script
 <script>
 	function onSelect(e) {
 		console.log("selected index:" + e.indices);
 	}
 </script>
 ```
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     public class ButtonGroupIndexModel : PageModel
     {
         public void OnGet()

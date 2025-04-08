@@ -192,7 +192,7 @@ When the {{ site.product }} Wizard is initialized as a `<div>` element any forms
     </kendo-wizard>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function onSubmit(event){
             event.preventDefault();

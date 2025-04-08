@@ -28,7 +28,7 @@ Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid
 
 With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) method or another way to format the date, concatenate the date to the filename.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<GridExportCustomName.Models.OrderViewModel>()
     .Name("grid")
     .Columns(columns =>
@@ -52,7 +52,7 @@ With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/glob
 
 )
 ```
-```script.js
+```JS script.js
     function onExcelExport(e) {
         e.workbook.fileName = kendo.toString(new Date, "dd/MM/yyyy HH:mm") + " Grid.xlsx";
     }

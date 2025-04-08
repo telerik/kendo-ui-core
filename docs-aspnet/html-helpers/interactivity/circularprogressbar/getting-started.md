@@ -136,7 +136,7 @@ The next step is to create a basic [Form]({% slug htmlhelpers_form_aspnetcore_ov
     </div>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         function onValidateField(e){
             // Form ValidateField event handler.
@@ -159,7 +159,7 @@ Now, you can implement the client-side logic that will validate the Form and dis
 
     Also, you can set the [`opacity`](https://developer.mozilla.org/en-US/docs/Web/CSS/opacity) CSS property to the Form container during the progress loading for a better look and feel.
 
-    ```Scripts
+    ```JS scripts
         <script>
             function onSubmit(e) {
                 e.preventDefault();
@@ -177,7 +177,7 @@ Now, you can implement the client-side logic that will validate the Form and dis
     ```
 * In the Form [`ValidateField`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/formeventbuilder#validatefieldsystemstring) event handler, check the validation state of the field and use the jQuery [`hide()`](http://api.jquery.com/hide/) method to hide the `div` container that holds the Circular ProgressBar if it is `false`. This way, the  Circular ProgressBar will be hidden when any Form field is invalid.
 
-    ```Scripts
+    ```JS scripts
         <script>
             function onValidateField(e) {
                 if(!e.valid) {
@@ -188,7 +188,7 @@ Now, you can implement the client-side logic that will validate the Form and dis
     ```
 * Handle the `click` event of the Form `Clear` button and hide the Circular ProgressBar container when the values of the Form fields are cleared.
 
-    ```Scripts
+    ```JS scripts
         <script>
             $(document).ready(function(){
                 $(".k-form-clear").on("click", function(){
@@ -263,7 +263,7 @@ You can reference the Circular ProgressBar instance that you have created, [as d
 
 1. Use the `Name()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var progressBarReference = $("#form-progressbar").data("kendoCircularProgressBar"); // progressBarReference is a reference to the existing Circular ProgressBar instance of the helper.
@@ -288,7 +288,7 @@ You can reference the Circular ProgressBar instance that you have created, [as d
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var progressBarReference = $("#form-progressbar").data("kendoCircularProgressBar");

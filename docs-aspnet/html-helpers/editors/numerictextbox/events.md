@@ -33,7 +33,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-numerictextbox>
 ```
 {% endif %}
-```script
+```JS script
 <script>
     function numerictextbox_spin() {
         // Handle the spin event.

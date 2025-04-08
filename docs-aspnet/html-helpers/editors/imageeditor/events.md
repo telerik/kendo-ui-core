@@ -36,7 +36,7 @@ The example below demonstrates how to use the [`Execute` event](api/kendo.mvc.ui
     </kendo-imageeditor>
 ```
 {% endif %}
-```script
+```JS script
 	<script>	
 	function onExecute(e) {
 		console.log(e.command);

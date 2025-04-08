@@ -42,7 +42,7 @@ To connect the Timeline to a data set retrieved from a remote endpoint in a Razo
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset:
 
 
-    ```
+    ```C#
         public JsonResult OnGetEvents()
         {
             return new JsonResult(Events);

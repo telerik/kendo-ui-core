@@ -123,7 +123,7 @@ Follow the steps below to define a [Slider component]({% slug overview_sliderhel
   </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script>
     var viewSize = 0;
 
@@ -146,7 +146,7 @@ Follow the steps below to define a [Slider component]({% slug overview_sliderhel
     }
 </script>
 ```
-```Styles
+```CSS Styles
   <style>
     #chart{
         float: left;

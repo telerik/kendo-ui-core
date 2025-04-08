@@ -59,7 +59,7 @@ Use the Upload HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
 ```TagHelper
     <kendo-upload name="upload" multiple="true">
     </kendo-upload>
-```    
+```
 {% endif %}
 
 ## 3. Configure the Mode of Operation
@@ -254,7 +254,7 @@ You can reference the Upload instances that you have created and build on top of
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var uploadReference = $("#upload").data("kendoUpload"); // uploadReference is a reference to the existing Upload instance of the helper.
@@ -264,7 +264,7 @@ You can reference the Upload instances that you have created and build on top of
 
 1. Use the [Upload client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload#methods) to control the behavior of the control. In this example, you will use the `removeAllFiles` method to remove all of the uploaded files by sending a remove request to the specified handler.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var uploadReference = $("#upload").data("kendoUpload");

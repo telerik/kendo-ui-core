@@ -92,7 +92,7 @@ As a result of selecting the **GRID AND MENU** template, a Grid component has be
 
 Add a DatePicker to the `Index.cshtml` view:
 
-```
+```Razor
     <h4>Telerik UI for ASP.NET MVC DatePicker:</h4>
 
     @(Html.Kendo().DatePicker()

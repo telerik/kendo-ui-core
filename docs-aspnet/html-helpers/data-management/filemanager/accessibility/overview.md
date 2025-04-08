@@ -67,7 +67,7 @@ or it can be a Grid:
 [Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
 
 
-Apart from that the `.k-filemanager-preview` element must be focusable, so that its content would be communicated to the users:
+Apart from that the `.k-filemanager-preview` element must be focusable, so that its content would be comunicated to the users:
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

@@ -27,7 +27,7 @@ The following example demonstrates how to create a Calendar by using a custom te
 
 The template wraps the `value` in a `<div>` HTML element. The structure of the `data` object that is passed to the template function:
 
-```
+```JS
     data = {
         date: date, // A date object corresponding to the current cell.
         title: kendo.toString(date, "D"),

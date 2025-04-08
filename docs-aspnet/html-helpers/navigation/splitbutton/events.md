@@ -35,7 +35,7 @@ For a complete example on basic SplitButton events, refer to the [demo on using 
 </kendo-splitbutton>
 ```
 {% endif %}
-```script
+```JS script
 	<script>
 		function onClick() {
 			alert('SplitButton clicked!')

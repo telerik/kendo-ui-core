@@ -137,7 +137,7 @@ The following example demonstrates the basic configuration of two connected List
     </kendo-listbox>
 
 ```
-```ListBoxController
+```C# ListBoxController
 
     public IActionResult GetProducts()
     {
@@ -155,7 +155,7 @@ The following example demonstrates the basic configuration of two connected List
     }
 ```
 {% else %}
-```ListBoxController
+```C# ListBoxController
 
     public ActionResult GetProducts()
     {

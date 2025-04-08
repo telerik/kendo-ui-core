@@ -102,7 +102,7 @@ Create a `Product` Model and define an Action method that returns the data colle
         public int Quantity { get; set; }
     }
 ```
-```HomeController.cs
+```C# HomeController.cs
     public JsonResult Read([DataSourceRequest] DataSourceRequest request)
     {
         return Json(ProductsData().ToDataSourceResult(request));
@@ -248,7 +248,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `Name()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var chartWizardReference = $("#chartwizard").data("kendoChartWizard"); // chartWizardReference is a reference to the existing instance of the helper.
         </script>

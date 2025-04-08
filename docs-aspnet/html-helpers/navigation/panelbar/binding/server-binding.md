@@ -15,7 +15,7 @@ You can bind the PanelBar locally on the server by passing the appropriate colle
 
 1. Pass the data to the view through `ViewData`.
 
-    ```HtmlHelper
+    ```HtmlHelper C#
         public ActionResult Index()
         {
             ViewBag.panelbarData = GetData();
@@ -69,7 +69,7 @@ You can bind the PanelBar locally on the server by passing the appropriate colle
         }
      ```
     {% if site.core %}
-    ```TagHelper
+    ```C# TagHelper
         using Kendo.Mvc.TagHelpers;
         
         public ActionResult Index()

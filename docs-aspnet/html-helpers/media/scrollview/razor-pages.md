@@ -22,7 +22,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```tab-HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -40,7 +40,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             )
         </div>
     ```
-    ```tab-TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -57,7 +57,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             </kendo-scrollview>
         </div>
     ```
-    ```tab-scrollview-template
+    ```JS scrollview-template
         <script id="scrollview-template" type="text/x-kendo-template">
             <div class="img-wrapper">
                 # for (var i = 0; i < data.length; i++) { #
@@ -104,7 +104,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
     
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
 
         public static List<Product> ScrollViewItems { get; set; }
         
@@ -132,7 +132,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             return new JsonResult(ScrollViewItems.ToDataSourceResult(request));
         }
     ```
-    ```tab-Model
+    ```Model
         public class Product
         {
             public int ProductID { get; set; }

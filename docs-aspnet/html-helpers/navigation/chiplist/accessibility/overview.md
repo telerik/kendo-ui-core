@@ -34,7 +34,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-chip:has(.k-i-x-circle),.k-chip:has(.k-svg-i-x-circle)` | `aria-keyshortcuts=Enter Delete` | Announces the Delete action along with the default Enter key used for selection/click action. |
 
 
-When selection is disabled in the ChipList, it should not have its role set to `listbox`. Instead, the attribute should either be omitted, or its value should be set to `none`. In that case the `role` of the Chip elements should remain `button` as per the [Chip component specification]({%slug htmlhelpers_chip_accessibility%}).
+When selection is disabled in the ChipList, it should not have its role set to `listbox`. Instead, the attribute should either be omitted, or its value should be set to `none`. In that case the `role` of the Chip elements should remain `button` as per the Chip component specification.
 
 ## Resources
 
@@ -71,7 +71,7 @@ To test the ChipList component, refer to the [ChipList Accessibility Demo](https
 
 ## Keyboard Navigation
 
-For details on how the ChipList keyboard navigation works, refer to the [ChipList Keyboard Navigaton]({%slug keynav_aspnetcore_chiplist%}) article.
+For details on how the ChipList keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
 
 ## See Also
 

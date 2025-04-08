@@ -22,7 +22,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configuration. The URL in each of these options must refer to the method name in the `PageModel`
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -43,7 +43,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -92,7 +92,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
             </div>
         </script>
     ```
-    ```Template
+    ```JS Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order-view k-widget">
                 <dl>
@@ -120,7 +120,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
 1. Send the `AntiForgeryToken` with the CRUD requests.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -130,7 +130,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -143,7 +143,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<OrderViewModel> orders;
 
         public void OnGet()
@@ -196,7 +196,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that holds the data collection that must be loaded in the ListView.
 
-    ```
+    ```C#
         public class ListViewPageModel : PageModel
         {
             [BindProperty]
@@ -221,11 +221,11 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
 
     ```
         @model ListViewPageModel
-    ```  
+    ```
 
 1. Bind the ListView to the collection property and disable the server data operations (`ServerOperations(false)`).
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model ListViewPageModel
 
@@ -241,7 +241,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model ListViewPageModel
 
@@ -250,7 +250,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
             <datasource type="DataSourceTagHelperType.Ajax" page-size="18" server-operation="false" />
         </kendo-listview>
     ```
-    ```Template
+    ```JS Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order-view k-widget">
                 <dl>

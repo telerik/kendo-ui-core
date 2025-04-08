@@ -23,44 +23,46 @@ To implement the editing functionality of the ListView:
 
 The following example demonstrates how to configure the Telerik UI ListView for {{ site.framework }} for editing.
 
-    namespace ListViewExample.Models
+```C#
+namespace ListViewExample.Models
+{
+    public class OrderViewModel
     {
-        public class OrderViewModel
+        public int OrderID
         {
-            public int OrderID
-            {
-                get;
-                set;
-            }
+            get;
+            set;
+        }
 
-            public decimal? Freight
-            {
-                get;
-                set;
-            }
+        public decimal? Freight
+        {
+            get;
+            set;
+        }
 
-            [Required]
-            public DateTime? OrderDate
-            {
-                get;
-                set;
-            }
+        [Required]
+        public DateTime? OrderDate
+        {
+            get;
+            set;
+        }
 
-            [Required]
-            public string ShipCity
-            {
-                get;
-                set;
-            }
+        [Required]
+        public string ShipCity
+        {
+            get;
+            set;
+        }
 
-            [Required]
-            public string ShipName
-            {
-                get;
-                set;
-            }
+        [Required]
+        public string ShipName
+        {
+            get;
+            set;
         }
     }
+}
+```
 
 ## Defining the Item Template
 
@@ -337,84 +339,94 @@ The following example demonstrates how to specify the action methods which will 
  
 For a quick test add a static list and copy and paste it in the controller, or use own service or data base which returns an `IEnumerable` or `IQueriable`.
 
-    public class ListViewController : Controller
+```C#
+public class ListViewController : Controller
+{
+    public static List<OrderViewModel> dbOrders = Enumerable.Range(1, 20).Select(i => new OrderViewModel
     {
-        public static List<OrderViewModel> dbOrders = Enumerable.Range(1, 20).Select(i => new OrderViewModel
-        {
-            OrderID = i,
-            Freight = i * 10,
-            OrderDate = new DateTime(2016, 9, 15).AddDays(i % 7),
-            ShipName = "ShipName " + i,
-            ShipCity = "ShipCity " + i
-        }).ToList();
-    }
+        OrderID = i,
+        Freight = i * 10,
+        OrderDate = new DateTime(2016, 9, 15).AddDays(i % 7),
+        ShipName = "ShipName " + i,
+        ShipCity = "ShipCity " + i
+    }).ToList();
+}
+```
 
 The following example demonstrates how to implement the `read` action method.
 
-    public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-    {
-        var dsResult = dbOrders.ToDataSourceResult(request);
-        return Json(dsResult);
-    }
+```C#
+public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+{
+    var dsResult = dbOrders.ToDataSourceResult(request);
+    return Json(dsResult);
+}
+```
 
 The following example demonstrates how to implement the `create` action method.
 
-    public ActionResult Orders_Create([DataSourceRequest] DataSourceRequest request,  OrderViewModel order)
+```C#
+public ActionResult Orders_Create([DataSourceRequest] DataSourceRequest request,  OrderViewModel order)
+{
+    if (order != null && ModelState.IsValid)
     {
-        if (order != null && ModelState.IsValid)
-        {
-            // Own update logic or use with sample data to test.
+        // Own update logic or use with sample data to test.
 
-                var nextId = dbOrders.Count + 1;
-                order.OrderID = nextId;
-                dbOrders.Add(order);
-        }
-
-        // Return any validation errors, if any.
-        return Json(new [] { order }.ToDataSourceResult(request, ModelState));
+            var nextId = dbOrders.Count + 1;
+            order.OrderID = nextId;
+            dbOrders.Add(order);
     }
+
+    // Return any validation errors, if any.
+    return Json(new [] { order }.ToDataSourceResult(request, ModelState));
+}
+```
 
 The following example demonstrates how to implement the `update` action method.
 
-    public ActionResult Orders_Update([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
+```C#
+public ActionResult Orders_Update([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
+{
+    if (order != null && ModelState.IsValid)
     {
-        if (order != null && ModelState.IsValid)
+        // Own create logic or use with sample data to test.
+        for (int i = 0; i < dbOrders.Count; i++)
         {
-            // Own create logic or use with sample data to test.
-            for (int i = 0; i < dbOrders.Count; i++)
+            if (order.OrderID == dbOrders[i].OrderID)
             {
-                if (order.OrderID == dbOrders[i].OrderID)
-                {
-                    dbOrders[i] = order;
-                }
+                dbOrders[i] = order;
             }
         }
-
-        // Return any validation errors, if any.
-        return Json(new[] { order }.ToDataSourceResult(request, ModelState));
     }
+
+    // Return any validation errors, if any.
+    return Json(new[] { order }.ToDataSourceResult(request, ModelState));
+}
+```
 
 The following example demonstrates how to implement the `destroy` action method.
 
-    public ActionResult Orders_Destroy([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
+```C#
+public ActionResult Orders_Destroy([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
+{
+    if (order != null)
     {
-        if (order != null)
-        {
-            // Own destroy logic or use with sample data to test.
+        // Own destroy logic or use with sample data to test.
 
-            for (int i = 0; i < dbOrders.Count; i++)
+        for (int i = 0; i < dbOrders.Count; i++)
+        {
+            if (order.OrderID == dbOrders[i].OrderID)
             {
-                if (order.OrderID == dbOrders[i].OrderID)
-                {
-                    dbOrders.Remove(dbOrders[i]);
-                    break;
-                }
+                dbOrders.Remove(dbOrders[i]);
+                break;
             }
         }
-
-        // Return any validation errors, if any.
-        return Json(new[] { order }.ToDataSourceResult(request, ModelState));
     }
+
+    // Return any validation errors, if any.
+    return Json(new[] { order }.ToDataSourceResult(request, ModelState));
+}
+```
 
 ## See Also
 

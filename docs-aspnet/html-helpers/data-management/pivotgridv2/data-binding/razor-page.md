@@ -21,7 +21,7 @@ The following example demonstrates how to configure the PivotGridV2 DataSource f
 * Add the OLAP service dll (`https://demos.telerik.com/olap/msmdpump.dll`) as a Read request URL in the `DataSource` configuration to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Since the data is requested from the online accessible OLAP service, it is not required to send the anti-forgery token with the POST request.
 * Define the desired initial rows, columns and measures in the `DataSource`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -47,7 +47,7 @@ The following example demonstrates how to configure the PivotGridV2 DataSource f
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -68,7 +68,7 @@ The following example demonstrates how to configure the PivotGridV2 DataSource f
             </pivot-datasource>
         </kendo-pivotgridv2>
     ```
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             public void OnGet()

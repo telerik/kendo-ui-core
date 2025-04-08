@@ -46,7 +46,7 @@ To bind the Telerik UI NumericTextBox within a `RazorPage`:
 
 1. Bind the property values in the backend:
 
-    ```
+    ```C#
         public class NumericTextBoxBindingModel : PageModel
         {
             [BindProperty]

@@ -32,7 +32,7 @@ To configure the Chart Wizard to bind to a local data collection available on th
 1. Create a data collection of type `Product` in the Controller Action and pass it to the View that holds the Chart Wizard definition.
 
     {% if site.core %}
-    ```HomeController.cs      
+    ```C# HomeController.cs      
         public IActionResult Index()
         {
             // Returns a collection of type "Product".
@@ -52,7 +52,7 @@ To configure the Chart Wizard to bind to a local data collection available on th
         }
     ```
     {% else %}
-    ```HomeController.cs  
+    ```C# HomeController.cs  
         public ActionResult Index()
         {
             // Returns a collection of type "Product".

@@ -42,7 +42,7 @@ I have a requirement to validate an email address and web address for basic form
     ```
 1. To use custom validation on the server, prevent the popup from closing and display the server error underneath the field, you can do this programmatically as the data source has no knowledge of the server validation error:
 
-```
+```Razor
     .DataSource(dataSource => dataSource
        .Ajax()
        .Events(events => events.Error("onError"))

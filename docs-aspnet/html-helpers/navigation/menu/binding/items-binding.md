@@ -13,10 +13,12 @@ The Menu enables you to manually define the properties of each item.
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for {{ site.framework }}]({% slug overview_aspnetmvc6_aspnetmvc %}).
 1. Create a new action method which renders the view.
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+    ```C#
+    public ActionResult Index()
+    {
+        return View();
+    }
+    ```
 
 1. Add a simple Menu.
 
@@ -27,17 +29,19 @@ The Menu enables you to manually define the properties of each item.
             {
                 items.Add().Text("Item 1"); // Add an item with the text "Item1".
                 items.Add().Text("Item 2"); // Add an item with the text "Item2".
-            }
+            })
         )
     ```
+    {% if site.core %}
     ```TagHelper
         <kendo-menu name="menu">
-        <items>
-            <menu-item text="Home" asp-action="Index" asp-controller="Home"></menu-item>
-            <menu-item text="Second Page" asp-action="SecondIndex" asp-controller="Home"></menu-item>
-        </items>
+            <items>
+                <menu-item text="Home" asp-action="Index" asp-controller="Home"></menu-item>
+                <menu-item text="Second Page" asp-action="SecondIndex" asp-controller="Home"></menu-item>
+            </items>
         </kendo-menu>
     ```
+    {% endif%}
 
 ## See Also
 

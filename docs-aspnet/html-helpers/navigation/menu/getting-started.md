@@ -296,7 +296,7 @@ You can reference the Menu instances that you have created and build on top of t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var menuReference = $("#menu").data("kendoMenu"); // menuReference is a reference to the existing instance of the helper.
     </script>
@@ -304,7 +304,7 @@ You can reference the Menu instances that you have created and build on top of t
 
 1. Use the [Menu client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable one of the Menu items.
 
-    ```script
+    ```JS script
     <script>
         $(document).ready(function () {
             var menuReference = $("#menu").data("kendoMenu"); // menuReference is a reference to the existing instance of the helper.

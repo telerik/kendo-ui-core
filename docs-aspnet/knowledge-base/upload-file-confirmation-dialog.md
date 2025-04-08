@@ -70,7 +70,7 @@ The following example demonstrates how to implement these steps:
 ```
  {% endif %}
 
-```Script.js
+```JS script.js
 <script>
     function onUpload(e){
         let upload = $("#files").getKendoUpload();

@@ -78,7 +78,7 @@ The following example demonstrates how to configure the markers for remote data 
         }
     }
 ```
-```MapDataRepository
+```C# MapDataRepository
     public class MapDataRepository
     {
         public static IList<Marker> StoreLocations() 

@@ -67,7 +67,7 @@ How can I highlight dynamically specific dates within the Scheduler month view o
         </kendo-scheduler>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             var highlightedDays = [
             {
@@ -112,7 +112,7 @@ How can I highlight dynamically specific dates within the Scheduler month view o
             }
         </script>
     ```
-    ```Styles
+    ```CSS Styles
         <style>
             .highlightedDay {
                 background-color: yellow;

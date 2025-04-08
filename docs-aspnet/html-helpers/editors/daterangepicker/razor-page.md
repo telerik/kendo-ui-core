@@ -16,7 +16,7 @@ This article describes how to configure the DateRangePicker component in a Razor
 
 For the complete project, refer to the [DateRangePicker in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateRangePicker/DateRangePickerIndex.cshtml).
 
-```tab-HtmlHelper(cshtml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.DateRangePicker.DateRangePickerDefaultValueModel
 @{
@@ -39,7 +39,7 @@ For the complete project, refer to the [DateRangePicker in Razor Pages example](
 </style>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.DateRangePicker.DateRangePickerDefaultValueModel
 @{
@@ -61,7 +61,7 @@ For the complete project, refer to the [DateRangePicker in Razor Pages example](
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,7 +86,7 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
 
 1. Add a property to the `PageModel` that must bind to the DatePicker.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -104,14 +104,14 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
     ```
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the DatePicker to the property using the `DatePickerFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -123,7 +123,7 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
             .Range(r => r.Start(Model.StartDate).End(Model.EndDate))
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

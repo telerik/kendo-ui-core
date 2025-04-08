@@ -80,7 +80,7 @@ Another option is to use the `TemplateHandler()` option that returns the desired
     </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script>
     function noRecordsMsg() {
         if(new Date() > new Date(2024,4,28)) { // Specify the required condition.

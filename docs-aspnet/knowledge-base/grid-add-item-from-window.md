@@ -137,7 +137,7 @@ How can I use the [Window]({% slug htmlhelpers_window_aspnetcore %}) component t
         }
     </script>
 ```
-```_OrderCreate
+```Razor _OrderCreate
     @model TelerikAspNetCoreApp24.Models.OrderViewModel
 
     <div id="updateWrapper">
@@ -232,7 +232,7 @@ How can I use the [Window]({% slug htmlhelpers_window_aspnetcore %}) component t
 
 ```
 
-```HomeController
+```C# HomeController
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -249,7 +249,7 @@ How can I use the [Window]({% slug htmlhelpers_window_aspnetcore %}) component t
     }
 ```
 
-```GridController
+```C# GridController
     public partial class GridController : Controller
     {
 		private static List<OrderViewModel> _orders = new List<OrderViewModel>()

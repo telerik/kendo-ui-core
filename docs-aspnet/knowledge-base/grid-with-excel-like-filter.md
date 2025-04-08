@@ -52,7 +52,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
 ```
 * Set the commmon DataSource for the columns that will be filtered through the [`Filterable`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/gridboundcolumnfilterablebuilder#kendomvcuifluentgridboundcolumnfilterablebuilder) configuration method.
 
-```
+```Razor
     .Columns(columns =>
     {
         columns.Bound(p => p.ProductName).Filterable(ftb => ftb.Multi(true).DataSource("dataSourceShared"));
@@ -64,7 +64,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
 ```
 * Initialize a function to remove the duplicate data items from the shared dataSource when filtering.
 
-```
+```JS
     function removeDuplicates(items, field) {
          var getter = function (item) { return item[field] },
              result = [],
@@ -83,7 +83,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
 ```
 * Sort and set unique items in the [`FilterMenuInit`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#filtermenuinitsystemstring) event whilst removing the duplicate data items.
 
-```
+```Razor
     .Events(events => events.FilterMenuInit("onFilterMenuInit"))
     
     function onFilterMenuInit(e) {
@@ -96,7 +96,7 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
     }
 ```
 * Update the data items by subscribing to the [`Change`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) event of the DataSource.
-```
+```JS
     function onChange(e) {
             dataSourceShared.data(e.items);
     }

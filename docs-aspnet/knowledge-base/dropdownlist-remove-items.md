@@ -33,7 +33,7 @@ To achieve the desired scenario:
 1. Create a `button` that will be responsible for removing an item in the DropDownList.
 1. To remove an item, handle `click` event of the previously created button and use the [`.remove()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/remove) configuration method of the DropDownList's DataSource.
 
-```Index.cshtml
+```Razor Index.cshtml
     <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" id="remove">Remove Items</button>
 
     @(Html.Kendo().DropDownList()
@@ -58,7 +58,7 @@ To achieve the desired scenario:
          .HtmlAttributes(new { style = "width: 100%" })
     )
 ```
-```Script.js
+```JS script.js
     <script>
         $("#remove").click(function() {
            var ddl =  $("#color").data("kendoDropDownList"); // Get the reference of the DropDownList. 

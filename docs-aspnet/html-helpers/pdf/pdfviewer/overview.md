@@ -28,7 +28,7 @@ You can initialize the PDFViewer from HTML either by using [PDF.JS](#using-pdfjs
 The following example demonstrates how to initialize the PDFViewer by using [PDF.JS](https://mozilla.github.io/pdf.js/).
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}

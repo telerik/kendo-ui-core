@@ -16,7 +16,7 @@ This article describes how to configure the RadioGroup component in a Razor Page
 
 For the complete project, refer to the [RadioGroup in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/RadioGroup/RadioGroupIndex.cshtml).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.RadioGroup.RadioGroupIndexModel
 
@@ -37,7 +37,7 @@ For the complete project, refer to the [RadioGroup in Razor Pages example](https
     )
 ```
 {% if site.core %}
-```tab-TagHelper(csthml)
+```TagHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.RadioGroup.RadioGroupIndexModel
 
@@ -57,7 +57,7 @@ For the complete project, refer to the [RadioGroup in Razor Pages example](https
     </kendo-radiogroup>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public class RadioGroupIndexModel : PageModel
     {
         public void OnGet()

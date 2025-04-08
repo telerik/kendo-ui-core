@@ -17,7 +17,7 @@ This article describes how to configure the CheckBoxGroup component in a Razor P
 For the complete project, refer to the [CheckBoxGroup in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/CheckBoxGroup/CheckBoxGroupIndex.cshtml).
 
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.CheckBoxGroup.CheckBoxGroupIndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -36,7 +36,7 @@ For the complete project, refer to the [CheckBoxGroup in Razor Pages example](ht
                         bind-to="@Model.CheckBoxGroupModel.Items">
     </kendo-checkboxgroup>
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public List<IInputGroupItem> itemsList { get; set; }
     [BindProperty]
     public CheckBoxGroupViewModel CheckBoxGroupModel { get; set; }
@@ -67,7 +67,7 @@ For the complete project, refer to the [CheckBoxGroup in Razor Pages example](ht
         }
     }
 ```
-```InputGroupItemModel.cs
+```C# InputGroupItemModel.cs
     public class InputGroupItemModel: IInputGroupItem
     {
         public IDictionary<string, object> HtmlAttributes { get; set; }
@@ -83,7 +83,7 @@ For the complete project, refer to the [CheckBoxGroup in Razor Pages example](ht
         public string Value { get; set; }
     }
 ```
-```CheckBoxGroupViewModel.cs
+```C# CheckBoxGroupViewModel.cs
     public class CheckBoxGroupViewModel
     {
         public List<IInputGroupItem> Items { get; set; }

@@ -22,7 +22,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` in the [`DataSource`](/api/kendo.mvc.ui.fluent/ganttbuilder#datasourcesystemaction) configuration. The URL in each of these options must refer to the method name in the `PageModel`.
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
     @model IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -78,7 +78,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
     </script>
 ```
 
-```tab-TagHelper_Index.cshtml
+```TagHelper
     @page
     @model IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -158,15 +158,18 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
     ```
 
 1. Send the `AntiForgeryToken` with the Read request.
-    ```
+
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
             }
         </script>
     ```
+    
     Additional parameters can also be supplied.
-    ```
+
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -179,7 +182,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
 
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
         {
             return new JsonResult(tasks.ToDataSourceResult(request));

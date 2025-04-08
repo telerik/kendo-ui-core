@@ -224,7 +224,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
         </kendo-autocomplete>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onAdditionalData1() {
                 let selectedOrganizationNumber = $("#OrganizationNumber").data("kendoAutoComplete").value(); // Get the currently selected option of the OrganizationNumber AutoComplete, if any
@@ -351,7 +351,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
         </kendo-autocomplete>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onSelectOrganizationName(e) {
                 let selectedOption = e.sender.value(); // Get the selected organization name.

@@ -348,7 +348,7 @@ To extend the Editor with a custom tool:
 
 1. Create a custom command through the `kendo.ui.editor.Command.extend` method
 
-    ```
+    ```JS
          var MyCustomCommand = kendo.ui.editor.Command.extend({
            exec: function (e) {
               // Custom Logic.
@@ -358,12 +358,12 @@ To extend the Editor with a custom tool:
 
 1. Insert the Command in the Editor widget object instance.
 
-    ```
+    ```JS
         kendo.ui.editor.MyCustomCommand = MyCustomCommand;
     ```
 1. Register the tool by using the built-in `registerTool()` method.
 
-    ```
+    ```JS
           kendo.ui.editor.EditorUtils.registerTool(
            'MyCustomCommand', new kendo.ui.editor.Tool({
                command: MyCustomCommand, 
@@ -419,13 +419,13 @@ To extend the Editor with a custom tool:
 
 1. Within an event handler in the custom tool, execute the required command by using the [`exec()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/exec) method.
 
-    ```
-        <script>
-            function onClick(e){
-            
-                $("#editor").getKendoEditor().exec("ToggleFullScreen");
-            }
-        </script>
+    ```JS
+    <script>
+        function onClick(e){
+        
+            $("#editor").getKendoEditor().exec("ToggleFullScreen");
+        }
+    </script>
     ```
 
 > Note that the tool name should correspond with the registered command.

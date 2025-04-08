@@ -143,7 +143,7 @@ You can integrate the Badge into other UI components. The following example demo
     </script>
 ```
 {% if site.core %}
-```TagHelper.cshtml
+```TagHelper
 
     @addTagHelper *, Kendo.Mvc
 

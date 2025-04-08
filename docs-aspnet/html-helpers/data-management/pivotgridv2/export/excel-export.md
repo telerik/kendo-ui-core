@@ -16,7 +16,7 @@ To use the Excel export feature, reference the JSZip library before the Kendo UI
 
 To export the PivotGridV2, call the [`saveAsExcel()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgridv2/methods/saveasexcel) client-side API method of the component.
 
-```script
+```JS script
 <script>
     function buttonClick() {
         var pivotgrid = $("#pivotgrid").data("kendoPivotGridV2");
@@ -44,7 +44,7 @@ The PivotGridV2 also provides an Excel configuration that allows you to set addi
         <excel proxy-url="@Url.Action("Excel_Export_Save","Home")" filterable="true" file-name="Kendo UI PivotGridV2 Export.xlsx" />
         //... Other configuration ...
     </kendo-pivotgridv2>
-````
+```
 {% endif %}
 
 ## Next Steps

@@ -43,7 +43,7 @@ The example below is implemented as per the following steps:
 
 The following examples demonstrates the steps described above.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().MultiSelect()
           .Name("freight")
           .AutoClose(false)

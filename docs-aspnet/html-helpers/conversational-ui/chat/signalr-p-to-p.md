@@ -43,7 +43,7 @@ Depending on your preferred editor, use any of the following approaches:
 
     > If in the `app.UseSignalR` line the editor throws an `IApplicationBuilder does not contain definition for UseSignalR` error, add the Microsoft.AspNetCore.SignalR v.1.0.0 package to the project.
 
-    ```
+    ```C#
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
@@ -76,7 +76,7 @@ Depending on your preferred editor, use any of the following approaches:
 
 1. Add a `ChatHub` class to the project.
 
-    ```
+    ```C#
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
 
@@ -222,20 +222,20 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Get the SignalR client script from NPM.
 
-    ```
+    ```batch
     npm install @aspnet/signalr
     ```
 
 1. Copy the `@aspnet/signalr` folder from the `node_modules` directory to the `wwwroot/lib` folder of the Core project.
 1. Include the SignalR script on the HTML page where you have initialized the Chat component.
 
-    ```
+    ```HTML
     <script src="lib/signalr/dist/browser/signalr.min.js"></script>
     ```
 
 1. Initialize the SignalR Hub proxy.
 
-    ```
+    ```JS
     // Point to the Hub remote endpoint.
     window.chatHub = new signalR.HubConnectionBuilder()
         .withUrl('/chat')
@@ -244,7 +244,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Start the Hub proxy and configure it to detect errors.
 
-    ```
+    ```JS
     chatHub.start()
         .catch(function(err) {
             console.error(err.toString());
@@ -253,7 +253,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Attach the event handlers for the respective remote Hub actions.
 
-    ```
+    ```JS
     $(document).ready(function() {
         window.chat = $("#chat").getKendoChat();
 
@@ -276,7 +276,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Complete SignalR Client Hub Proxy configuration.
 
-    ```
+    ```HTML
     <script src="lib/signalr/dist/browser/signalr.min.js"></script>
     
     <script>
@@ -316,15 +316,15 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 {% else %}
 
 1. Include the SignalR 2 script in the page. It is distributed with the SignalR NuGet package.
-
+    ```
         <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
-
+    ```
 1. Reference the auto-generated SignalR hub script for the application.
-
+    ```
         <script src="~/signalr/hubs"></script>
-
+    ```
 1. Implement the initialization logic for the SignalR Hub proxy.
-
+    ```JS
         function startHub(startCallback) {
             var hub = $.connection.chatHub;
 
@@ -334,9 +334,9 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
             return hub;
         }
-
+    ```
 1. In the `$(document).ready()` handler, start the Hub proxy and attach event handlers for the respective remote hub actions.
-
+    ```JS
         $(document).ready(function () {
             window.chat = $('#chat').getKendoChat();
             window.chatHub = startHub(function (hub) { });
@@ -356,7 +356,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
                 chat.renderMessage({ type: "typing" }, sender);
             });
         });
-
+    ```
 1. Start the Peer-to-Peer Chat Application.
 
 {% endif %}

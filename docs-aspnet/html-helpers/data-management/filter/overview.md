@@ -165,19 +165,6 @@ public class SampleData
 * [Persisting the state]({% slug htmlhelpers_filter_aspnetcore_store_settings %})&mdash;The Filter enables you to store its filter expression and restore its state for the user.
 * [Globalization]({% slug globalization_filter_aspnetcore %})&mdash;The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
 
-## Referencing Existing Instances
-
-To refer to an existing Filter instance use the `jQuery.data()` method. Once a reference is established, use the [Filter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter#methods) to control its behavior.
-
-```
-<script>
-    $(function() {
-        // The Name() of the Filter is used to get its client-side instance.
-        var filter = $("#theFilter").data("kendoFilter");
-    });
-</script>
-```
-
 ## See Also
 
 * [Basic Usage of the Filter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/filter/index)

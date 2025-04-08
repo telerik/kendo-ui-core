@@ -40,26 +40,26 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
 
 
 {% if site.core %}
-    ```LocalFiles
+    ```HTML LocalFiles
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
         <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
         <script src="~/lib/kendo-ui/js/cultures/kendo.culture.es-ES.min.js"></script>
     ```
-    ```CDN
+    ```HTML CDN
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.es-ES.min.js"></script>
     ```
 {% else %}
-    ```LocalFiles
+    ```HTML LocalFiles
         <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
         <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
     ```
-    ```CDN
+    ```HTML CDN
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
@@ -69,9 +69,11 @@ To use a culture that is different from the default `en-US` one in {{ site.produ
 
 1. Set the current culture by calling the [`kendo.culture`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/culture) method. You have to add the script block after the culture JavaScript file. As a result, all {{ site.product }} helpers will use the `es-ES` culture for parsing and formatting dates and numbers.
 
+    ```JavaScript
         <script>
             kendo.culture("es-ES");
         </script>
+    ```
 
 >tip You can find the complete list of available cultures in the [Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/tree/master/src/cultures).
 
@@ -84,6 +86,7 @@ The cultures that are set on the client and on the server have to match. This en
 {% if site.core %}
 To set the server-side culture, add the following at the beginning of the `Configure` method in the `Startup.cs` file of the application.
 
+```C#
     var supportedCultures = new[] { new CultureInfo("es-ES") };
 
     app.UseRequestLocalization(new RequestLocalizationOptions
@@ -92,6 +95,7 @@ To set the server-side culture, add the following at the beginning of the `Confi
         SupportedCultures = supportedCultures,
         SupportedUICultures = supportedCultures
     });
+```
 {% else %}
 You can set the server-side culture either globally or per request.
 
@@ -106,6 +110,7 @@ To set the server-side culture globally, update the `web.config` file of your {{
 <!-- -->
 To set the server-side culture per request, override the [`Controller.Initialize`](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [`CurrentCulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx) and [`CurrentUICulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
 
+```C#
     protected override void Initialize(System.Web.Routing.RequestContext requestContext)
     {
         Thread.CurrentThread.CurrentCulture =
@@ -114,6 +119,7 @@ To set the server-side culture per request, override the [`Controller.Initialize
 
         base.Initialize(requestContext);
     }
+```
 
 {% endif %}
 
@@ -134,11 +140,11 @@ To make the helpers use the same culture as the culture set on the server side:
 
 {% if site.core %}
     ```Razor
-        <script src="@Url.Content("~/lib/kendo/js/cultures/kendo.culture." + culture + ".min.js")"></script>
+    <script src="@Url.Content("~/lib/kendo/js/cultures/kendo.culture." + culture + ".min.js")"></script>
     ```
 {% else %}
     ```Razor
-        <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
+    <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
     ```
 {% endif %}
 
@@ -146,7 +152,7 @@ To make the helpers use the same culture as the culture set on the server side:
 
     > Set the client-side culture before initializing any helpers that rely on it.
 
-    ```Razor
+    ```JavaScript
         <script>
             kendo.culture("@culture");
         </script>
@@ -159,10 +165,10 @@ The Kendo UI culture scripts are generated based on the Windows 8 formats. If yo
 
 The following example demonstrates how to generate the current and specified cultures.
 
-```Current
+```Razor Current
     @Html.Kendo().Culture()
 ```
-```Specified
+```Razor Specified
     @Html.Kendo().Culture("bg-BG")
 ```
 
@@ -170,12 +176,12 @@ The culture helper also provides the option to disable the rendering inside a sc
 
 The following example demonstrates how to generate the current and specified cultures in an existing script file.
 
-```Current
+```Razor Current
     <script>
         @Html.Kendo().Culture(false)
     </script>
 ```
-```Specified
+```Razor Specified
     <script>
         @Html.Kendo().Culture("bg-BG", false)
     </script>

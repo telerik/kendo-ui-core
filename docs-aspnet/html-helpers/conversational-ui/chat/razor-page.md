@@ -17,7 +17,7 @@ This article showcases how to configure a basic Chat component in a Razor Pages 
 For the complete project, refer to the [Chat in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Chat/ChatIndex.cshtml).
 
 
-```tab-HtmlHelper_Index.cshtml  
+```HtmlHelper
     @page
     @IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -38,7 +38,7 @@ For the complete project, refer to the [Chat in Razor Pages example](https://git
         })   
     )
 ```
-```tab-TagHelper_Index.cshtml  
+```TagHelper
     @page
     @IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -54,7 +54,7 @@ For the complete project, refer to the [Chat in Razor Pages example](https://git
         </toolbar>
     </kendo-chat>
 ```
-```tab-Index.cshtml.cs     
+```C# Index.cshtml.cs     
     public void OnGet()
     {
 

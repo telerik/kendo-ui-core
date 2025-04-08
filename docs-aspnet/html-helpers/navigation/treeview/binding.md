@@ -135,7 +135,7 @@ private IEnumerable<TreeViewItemModel> GetData()
     return inline;
 }
 ```
-```TreeViewItemModel
+```C# TreeViewItemModel
 public class TreeViewItemViewModel
 {
 	public string Id { get; set; }
@@ -247,7 +247,7 @@ public ActionResult Read_TreeViewData(int? id)
 {% endif %}
 
 
-```HierarchicalViewModel
+```C# HierarchicalViewModel
 public class HierarchicalViewModel
 {
 	public int ID { get; set; }

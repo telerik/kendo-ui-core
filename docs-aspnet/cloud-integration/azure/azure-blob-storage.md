@@ -34,7 +34,7 @@ After you create the Storage Container, set the permission level. This allows yo
 
 Add the Azure account and the Azure Storage Container details to the `appsettings.json` of the application as they will be used to access the Container.
 
-```
+```js
 {
   "ApplicationInsights": {
     "InstrumentationKey": ""
@@ -131,7 +131,7 @@ The following server-side logic demonstrates the server-side configuration of th
 * The `Save` and `Remove` endpoints of the Upload component demonstrate the configuration required to save uploaded images in the Azure Storage Container or remove them, respectively.
 * The `GetImageDetails` action method demonstrates the configuration for the ListView endpoint.
 
-```ImagesController
+```C# ImagesController
     public class ImagesController : Controller
     {
         private readonly AzureStorageConfig storageConfig = null;
@@ -281,7 +281,7 @@ The following server-side logic demonstrates the server-side configuration of th
         }
     }
 ```
-```AzureStorageConfig
+```C# AzureStorageConfig
     public class AzureStorageConfig
     {
         public string AccountName { get; set; }

@@ -20,7 +20,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -36,7 +36,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
             })
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -70,7 +70,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -80,7 +80,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -93,7 +93,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
     
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static List<Product> products;
 
         public void OnGet(string culture)
@@ -124,7 +124,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
             };
         }
     ```
-    ```tab-Model
+    ```Model
         public class Product
         {
             public int ProductID { get; set; }

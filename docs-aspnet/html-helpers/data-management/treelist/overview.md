@@ -130,7 +130,7 @@ The following example demonstrates how to define the TreeList.
         return Json(result, JsonRequestBehavior.AllowGet);
     }
 ```
-```AsyncController  
+```C# AsyncController  
     public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
     {
         var northwind = new NortwindEntities();
@@ -159,7 +159,7 @@ The following example demonstrates how to define the TreeList.
         return Json(result);
     }
 ```
-```AsyncController  
+```C# AsyncController  
     public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
     {
         var northwind = new NortwindEntities();

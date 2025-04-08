@@ -47,7 +47,7 @@ In the data cell template, you can access the following fields:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="dataCellTemplate" type="text/x-kendo-tmpl">
         # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
         # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
@@ -85,7 +85,7 @@ In the column header template, you can access the following fields:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length) { #
             <em>#: member.caption #</em>
@@ -119,7 +119,7 @@ In the row header template, you can access the following fields:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length) { #
             <em>#: member.caption #</em>
@@ -185,7 +185,7 @@ The fields which can be used in the template are:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="kpiStatusTemplate" type="text/x-kendo-tmpl">
         # if (!dataItem) { #
             <em>N/A</em>
@@ -255,7 +255,7 @@ The fields which can be used in the template are:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="kpiTrendTemplate" type="text/x-kendo-tmpl">
         # if (!dataItem) { #
             <em>N/A</em>

@@ -60,21 +60,23 @@ Your project may require you to create a custom editor for a specific property. 
 
 1. Consider the following models which represent the `Order` and `Employee` entities from the **Northwind** database.
 
-        public class Order
-        {
-            public int OrderID { get; set; }
+    ```C#
+    public class Order
+    {
+        public int OrderID { get; set; }
 
-            public string ShipCountry { get; set; }
+        public string ShipCountry { get; set; }
 
-            public Employee Employee { get; set; }
-        }
+        public Employee Employee { get; set; }
+    }
 
-        public class Employee
-        {
-            public int EmployeeID { get; set; }
+    public class Employee
+    {
+        public int EmployeeID { get; set; }
 
-            public string EmployeeName { get; set; }
-        }
+        public string EmployeeName { get; set; }
+    }
+    ```
 
 1. Create an editor template for the `Employee` property. The template will display a [DropDownList]({% slug htmlhelpers_dropdownlist_aspnetcore %}) editor with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`. In case the Editor Templates folder does not exist, you must add it manually.
 1. Add the DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
@@ -100,41 +102,45 @@ Your project may require you to create a custom editor for a specific property. 
 
 1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees. Point the DefaultValue for the `Employee` field when adding a new item.
 
-        public ActionResult Index()
+    ```C#
+    public ActionResult Index()
+    {
+        List<Employee> employees = new List<Employee>();
+
+        for (int i = 1; i < 6; i++)
         {
-            List<Employee> employees = new List<Employee>();
-
-            for (int i = 1; i < 6; i++)
+            Employee employee = new Employee
             {
-                Employee employee = new Employee
-                {
-                    EmployeeID = i,
-                    EmployeeName = "EmployeeName " + i
-                };
-                employees.Add(employee);
-            }
-
-            ViewData["employees"] = employees;
-            ViewData["defaultEmployee"] = employees[0];
-
-            return View();
+                EmployeeID = i,
+                EmployeeName = "EmployeeName " + i
+            };
+            employees.Add(employee);
         }
+
+        ViewData["employees"] = employees;
+        ViewData["defaultEmployee"] = employees[0];
+
+        return View();
+    }
+    ```
 
 1. Decorate the `Employee` property with the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute. It needs the name of the editor template ("EmployeeEditor") created in **Step 3** without the extension `".cshtml"`.
 
-        public class Order
-        {
-            public int OrderID { get; set; }
+    ```C#
+    public class Order
+    {
+        public int OrderID { get; set; }
 
-            public string ShipCountry { get; set; }
+        public string ShipCountry { get; set; }
 
-            [UIHint("EmployeeEditor")]
-            public Employee Employee { get; set; }
-        }
+        [UIHint("EmployeeEditor")]
+        public Employee Employee { get; set; }
+    }
+    ```
 
     If the Grid is configured for InLine editing, use the [`EditorTemplateName()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#editortemplatenamesystemstring) method to set the name of the created custom editor template.
 
-    ```
+    ```Razor
         .Editable(editable => editable.Mode(GridEditMode.InLine))
         .Columns(columns =>
         {

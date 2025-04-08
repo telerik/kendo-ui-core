@@ -184,7 +184,7 @@ The usage of [Kendo Templates allows the developer to decide whether the display
 
 The [`DataSourceRequest`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui/datasourcerequest) object contains information on how the data, requested by a the Kendo widget, should be paged, filtered, sorted, grouped. This information is further translated internally to System.Linq.Expressions.Expression class. In the end, the ToDataSourceResult executes a LINQ query based on the information contained DataSourceRequest object, passed to an action method. The DataSourceRequest object itself does not contain user-provided data and does not contain HTML.
  
-```
+```C#
     //
     // Summary:
     //     Provides information about paging, sorting, filtering and grouping of data.
@@ -255,7 +255,7 @@ The anti-forgery tokens are used to ensure that a form or a request has been sub
 1. Send the token to the server-side by using the transport.data option of the DataSource. The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens that are found on the page.
 
 
-    ```
+    ```Razor
         .Read(read=>read.Action("DetailProducts_Read", "Grid").Data("sendForgery"))
 
             // .  .  .
@@ -270,7 +270,7 @@ The anti-forgery tokens are used to ensure that a form or a request has been sub
 
 1. Validate the token by decorating the ActionMethods with the `[ValidateAntiForgeryToken]` data annotation:
 
-    ```
+    ```C#
         [ValidateAntiForgeryToken]
         public ActionResult ActionMethodName( ModelName model ) 
         {

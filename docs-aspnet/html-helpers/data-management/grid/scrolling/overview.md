@@ -277,12 +277,14 @@ When a web page is zoomed, the browser changes the content size of all pages exc
 
 > If the Grid is in the right-to-left (RTL) mode, use the `padding-left` instead of the `padding-right` CSS attribute.
 
+```JS
     $(function () {
         $(window).resize(function (e) {
             var grid = $('#GridID').data("kendoGrid"); // Get a reference to the Grid.
             grid.thead.closest(".k-grid-header").css("padding-right", kendo.support.scrollbar(true));
         });
     });
+```
 
 ## See Also
 

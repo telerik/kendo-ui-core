@@ -45,7 +45,7 @@ To validate the Editor value, use the [Kendo UI for jQuery Validator](https://do
         <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Submit</button>
     </form>
 ```
-```Script
+```JS script
     <script>
         // Register custom validation rules.
         (function ($, kendo) {

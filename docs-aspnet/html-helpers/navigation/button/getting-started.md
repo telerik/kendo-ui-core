@@ -237,7 +237,7 @@ You can reference the Button instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var buttonReference = $("#dateButton").data("kendoButton"); // buttonReference is a reference to the existing dateButton instance of the helper.
     </script>
@@ -245,7 +245,7 @@ You can reference the Button instances that you have created and build on top of
 
 1. Use the [Button client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the button.
 
-    ```script
+    ```JS script
     <script>
         var buttonReference = $("#dateButton").data("kendoButton"); // buttonReference is a reference to the existing dateButton instance of the helper.
         buttonReference.enable(false); // Disable the button.

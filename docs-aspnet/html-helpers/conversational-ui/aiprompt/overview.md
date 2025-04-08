@@ -90,7 +90,7 @@ The AIPrompt provides options for configuring its views, toolbar items, and appe
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         var defaultResponse = 'For real prompt processing, please connect the component to a preferred AI service.';
         var promptData = [

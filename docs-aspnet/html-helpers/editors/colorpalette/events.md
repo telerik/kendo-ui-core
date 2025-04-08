@@ -30,7 +30,7 @@ The following example demonstrates how to subscribe to the `Change` event by a h
     </kendo-colorpalette>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function colorpalette_change(e) {
             // Handle the change event.

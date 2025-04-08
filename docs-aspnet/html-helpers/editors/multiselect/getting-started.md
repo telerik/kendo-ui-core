@@ -285,7 +285,7 @@ You can reference the MultiSelect instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var multiselectReference = $("#multiselect").data("kendoMultiSelect"); // multiselectReference is a reference to the existing MultiSelect instance of the helper.
     </script>
@@ -293,7 +293,7 @@ You can reference the MultiSelect instances that you have created and build on t
 
 1. Use the [MultiSelect client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control the behavior of the widget. In this example, you will use the `value` method to select an item.
 
-    ```script
+    ```JS script
     <script>
         var multiselectReference = $("#multiselect").data("kendoMultiSelect"); // multiselectReference is a reference to the existing MultiSelect instance of the helper.
         multiselectReference.value("3"); 

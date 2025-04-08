@@ -34,7 +34,7 @@ Therefore, the most straightforward way is to overlay the Wizard's Form:
 
 1. Subscribe to the [`Activate` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard/events/activate) of the component.
 
-    ```
+    ```Razor
         .Events(ev => ev.Activate("onActivate"))
     ```
 
@@ -43,7 +43,7 @@ Therefore, the most straightforward way is to overlay the Wizard's Form:
 4. Use the [`getBoundingRect` method](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) of the Web API to get the position of the form on the page.
 5. Use the form's position to append a `div` that has the same position and size as the form but with a `transparency`, greater that the `z-index`, and `position:absolute`.
 
-    ```
+    ```JS
         function onActivate(e){
             if(e.sender.currentStep.options.index==e.sender.currentStep.options.totalSteps-1){
                 var form = e.sender.currentStep.form.element;

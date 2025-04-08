@@ -129,7 +129,7 @@ You can reference the FlatColorPicker instances that you have created and build 
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var flatColorPickerReference = $("#flatColorPicker").data("kendoFlatColorPicker"); // flatColorPickerReference is a reference to the existing FlatColorPicker instance of the helper.
@@ -138,7 +138,7 @@ You can reference the FlatColorPicker instances that you have created and build 
     ```
 1. Toggle the state of the component by using the [`enable()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker/methods/enable) client-side method.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                var flatColorPickerReference = $("#flatColorPicker").data("kendoColorPicker"); // flatColorPickerReference is a reference to the existing FlatColorPicker instance of the helper.

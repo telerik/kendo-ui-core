@@ -42,7 +42,7 @@ To achieve the desired scenario:
 1. Export.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<wrap_text_in_Export_excel.Models.OrderViewModel>()
         .Name("grid")
         .Columns(columns =>

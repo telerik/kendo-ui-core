@@ -16,7 +16,7 @@ This article describes how to configure the Slider component in a Razor Pages sc
 
 For the complete project, refer to the [Slider in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Slider/SliderIndex.cshtml).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.Slider.SliderIndexModel
 @{
@@ -77,7 +77,7 @@ For the complete project, refer to the [Slider in Razor Pages example](https://g
 </style>
 ```
 {% if site.core %}
-```tab-TagHelper
+```TagHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.Slider.SliderIndexModel
     @{
@@ -135,7 +135,7 @@ For the complete project, refer to the [Slider in Razor Pages example](https://g
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     public void OnGet()
     {
 

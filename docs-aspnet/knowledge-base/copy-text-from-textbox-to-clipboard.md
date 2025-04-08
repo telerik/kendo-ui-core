@@ -68,7 +68,7 @@ To achieve the desired result:
     </kendo-textbox>
 ```
 {% else %}
-```Index.cshtml
+```Razor Index.cshtml
      @(Html.Kendo().TextBox()
         .Name("email")
         .Label(l => l.Content("Email Address").Floating(false))
@@ -89,7 +89,7 @@ To achieve the desired result:
 ```
 {% endif %}
 
-```Script.js
+```JS script.js
     <script>
         function onClick(e){
             var textBoxValue = $("#email").getKendoTextBox().value();

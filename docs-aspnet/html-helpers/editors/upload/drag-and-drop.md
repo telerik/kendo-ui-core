@@ -63,6 +63,7 @@ By default, the drop zone is not visible.
 
 The following example demonstrates how to override the default drop zone&mdash;when the Upload itself is used as a drop zone&mdash;by applying CSS rules.
 
+```CSS
     div.k-dropzone {
         border: 1px solid #c5c5c5; /* For Default; Different for each theme */
     }
@@ -70,9 +71,11 @@ The following example demonstrates how to override the default drop zone&mdash;w
     div.k-dropzone em {
         visibility: visible;
     }
+```
 
 The following example demonstrates how to customize the appearance of the drop zone during the process of dragging and dropping.
 
+```CSS
     div.k-dropzone {
         border: 1px solid red;
     }
@@ -83,6 +86,7 @@ The following example demonstrates how to customize the appearance of the drop z
     .customDropZone.k-dropzone-active.k-dropzone-hovered {
         border: 1px solid green;
     }
+```
 
 ## See Also
 

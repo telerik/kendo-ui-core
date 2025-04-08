@@ -39,7 +39,6 @@ If the tree supports the load-more functionality, the **Load More** button is re
 |  | `aria-checked=true/false` | Rendered only when checkboxes are enabled. Announces the checked state of the node. If the checkbox is indeterminate, the value is `mixed`. |
 | `.k-treeview-item:has(> span > .k-selected, > div > .k-selected) ` | `aria-selected=true` | Rendered only when selection is enabled. Announces the selected state of the node. |
 | `.k-checkbox` | `role=none/presentation` | Added to the wrapper element of the checkbox to prevent duplicated information announced to the user. The checked state is controlled by `aria-checked`. |
-|  | `aria-hidden=true` | Added to the checkbox element to prevent duplicated information announced to the user. The checked state is controlled by `aria-checked`. |
 
 ## Resources
 

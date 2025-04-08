@@ -168,7 +168,7 @@ The Grid supports the following page template variables:
 * `pageNum`&mdash;Specifies the current page number.
 * `totalPages`&mdash;Specifies the total number of pages.
 
-```Template
+```JS Template
     <script type="x/kendo-template" id="page-template">
         <div class="page-template">
             <div class="header">
@@ -219,7 +219,7 @@ The Grid supports the following page template variables:
 ```
 {% endif %}
 
-```Styles
+```CSS Styles
     <style>
         body {
             font-family: "DejaVu Serif";
@@ -322,7 +322,7 @@ To send the generated file to a remote service, use the `ProxyURL()` and `ForceP
     </kendo-grid>
 ```
 {% endif %}
-```SampleProxy
+```C# SampleProxy
     [HttpPost]
     public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
     {

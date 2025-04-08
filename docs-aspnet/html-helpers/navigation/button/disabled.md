@@ -55,6 +55,7 @@ At runtime, you can disable the Button at with JavaScript by using its [`enable(
 @(Html.Kendo().Button()
         .Name("editButton")
         .Content("Edit")
+)
 ```
 ```TagHelper
     <kendo-button name="editButton">Edit</kendo-button>

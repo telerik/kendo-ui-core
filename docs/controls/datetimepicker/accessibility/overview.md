@@ -52,21 +52,21 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The Calendar in the Popup element of the component should implement the specification for the **Calendar** component.
 
-[Calendar accessibility specification]({{calendar_a11y_link}})
+[Calendar accessibility specification]({% slug jquery_calendar_accessibility %})
 
 ### Popup Date/Time View Chooser
 
 
 The Date/Time view chooser in the Popup element of the component should implement the specification for the **ButtonGroup** component.
 
-[ButtonGroup accessibility specification]({{buttongroup_a11y_link}})
+[ButtonGroup accessibility specification]({% slug jquery_buttongroup_accessibility %})
 
 ### TimePicker Popup
 
 
 Time Popup implementation should follow the specification for the TimePicker component.
 
-[TimePicker accessibility specification]({{timepicker_a11y_link}})
+[TimePicker accessibility specification]({% slug jquery_timepicker_accessibility %})
 
 ## Resources
 

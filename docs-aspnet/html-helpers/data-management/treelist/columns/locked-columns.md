@@ -88,7 +88,7 @@ Locked columns cannot be scrolled on touch because they are wrapped in a contain
 
 Locked columns rely on synchronizing the row height of the frozen and non-frozen parts of the TreeList. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise, the synchronization might not work properly because of sub-pixel issues.
 
-```
+```CSS
 div.k-treelist td
 {
   line-height: 18px;

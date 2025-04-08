@@ -282,7 +282,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var pagerReference = $("#pager").data("kendoPager"); // pagerReference is a reference to the existing instance of the helper.
     </script>
@@ -290,7 +290,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the [Pager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager#methods) to control the behavior of the widget. In this example, you will hide one of the Pager columns by using `hideColumn` method.
 
-    ```script
+    ```JS script
     <script>
         var pagerReference = $("#pager").data("kendoPager"); // pagerReference is a reference to the existing instance of the helper.
         pagerReference.page(2); // Select page 2.

@@ -95,7 +95,7 @@ How can I use a Telerik UI for {{ site.framework }} Menu item click to open a Te
     }
 ```
 
-```PartialView
+```Razor PartialView
     <script type="text/javascript">
     	 // Destroy the Window after close to allow the opening of multiple Windows.
     	 function onClose(e) {

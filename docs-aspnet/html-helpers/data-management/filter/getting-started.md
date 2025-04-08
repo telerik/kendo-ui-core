@@ -32,7 +32,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <h4>Filter with event handler</h4>
 <p>
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Filter
@@ -253,13 +253,13 @@ You can reference the Filter instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to get a reference.
 
-    ```script
+    ```JS script
     <script>
         var filterInstance = $("#filter").data("kendoFilter"); // filterInstance is a reference to the existing Filter instance of the helper.
     </script>
     ```
 1. Use the [Filter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter#methods) to control the behavior of the widget. In this example, you will use the `applyFilter` method to apply the generated filter to the dataSource.
-    ```script
+    ```JS script
     <script>
         var filterInstance = $("#filter").data("kendoFilter"); // filterInstance is a reference to the existing Filter instance of the helper.
         filterInstance.applyFilter();

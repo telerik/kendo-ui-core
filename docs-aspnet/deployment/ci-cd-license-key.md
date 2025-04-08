@@ -44,7 +44,7 @@ The recommended way to provide your license key to the `Telerik.Licensing` NuGet
 1. Create a new <a href="https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository" target="_blank">Repository Secret</a> or an <a href="https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-an-organization" target="_blank">Organization Secret</a>.
 1. Set the name of the secret to `TELERIK_LICENSE` and paste the contents of the license file as a value.
 1. After running `npm install` or `yarn`, add a build step to activate the license:
-    ```
+    ```YAML
     env:
         TELERIK_LICENSE: ${{ "{{ secrets.Telerik_License_Key }}" }}
     ```

@@ -42,7 +42,7 @@ Binding the column to a local collection of items can be done by passing a valid
         }
     }
 ```
-```ForeignKeyModel
+```C# ForeignKeyModel
     public class CategoryViewModel{
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
@@ -110,7 +110,7 @@ In order to bind the column to a remote collection of items, supply a URL Action
 ```
 {% endif %}
 
-```ForeignKeyModel
+```C# ForeignKeyModel
     public class CategoryViewModel{
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }

@@ -53,7 +53,7 @@ The following example demonstrates how to define the Drawer.
         </content>
     </kendo-drawer>
 ```
-```Template
+```JS Template
     <script id="template" type="text/x-kendo-template">
         <ul>
             <li data-role='drawer-item'>First Item</li>

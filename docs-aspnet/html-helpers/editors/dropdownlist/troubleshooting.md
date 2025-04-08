@@ -12,11 +12,11 @@ This article provides solutions to common issues that you might come across when
 
 ## Items return as undefined when configuring the DropDownList for Remote Binding
 
-By default, the {{ site.framework }} predominantly configures the JSON property naming convetion for server responses to `camelCase`. Where the DropDownList relies on `PascalCase` formatted response instead.
+By default, the {{ site.framework }} predominantly configures the JSON property naming convention for server responses to `camelCase`. Where the DropDownList relies on `PascalCase` formatted response instead.
 
 The following example demonstrates the differences between the format of responses.
 
-```PascalCase
+```JS PascalCase
 [
     {
         "Value": "1",
@@ -28,7 +28,7 @@ The following example demonstrates the differences between the format of respons
     }
 ]
 ```
-```camelCase
+```JS camelCase
 [
     {
         "value": "1",

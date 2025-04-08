@@ -153,7 +153,7 @@ You can reference the TextBox instances that you have created and build on top o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var textboxReference = $("#textbox").data("kendoTextBox"); // textboxReference is a reference to the existing TextBox instance of the helper.
     </script>
@@ -161,7 +161,7 @@ You can reference the TextBox instances that you have created and build on top o
 
 1. Use the [TextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox#methods) to control the behavior of the widget. In this example, you will use the `value()` method to change its current content.
 
-    ```script
+    ```JS script
     <script>
         var textboxReference = $("#textbox").data("kendoTextBox"); // textboxReference is a reference to the existing TextBox instance of the helper.
         textboxReference.value("Sample text"); // Update the current TextBox value.

@@ -59,7 +59,7 @@ For further details refer to [the official Microsoft documentation](https://docs
 
  To setup an application to use the Scheduler for {{ site.framework }} and the Microsoft.AspNet.SignalR library you need to:
  * Map to the hub when application starts
- ```
+ ```C#
     public class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -178,7 +178,7 @@ There are several major diferences when configuring ASP.NET Core SignalR compare
 
 The steps below outline what you need to do to configure the Scheduler HtmlHelper for {{ site.framework }} when using ASP.NET Core SignalR.
 * ASP.NET Core SignalR is an ASP.NET Core middleware. Therefore, on the server, you will need to add it in the ConfigureServices method and also map routes to hubs:
-```Startup.cs
+```C# Startup.cs
     public void ConfigureServices(IServiceCollection services)
     {
         // Add framework services.
@@ -215,7 +215,7 @@ The steps below outline what you need to do to configure the Scheduler HtmlHelpe
 ```
 
 * Configure a Hub with CRUD methods
-```
+```C#
     public class MeetingHub : Hub
     {
         //static collection used for Demo purposes. You can fetch events from a database, for example.

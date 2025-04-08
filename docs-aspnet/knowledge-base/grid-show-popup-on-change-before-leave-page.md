@@ -51,7 +51,7 @@ To detect the changes in the Grid when the user attempts to navigate away from t
     </kendo-grid>
 ```
 {% endif %}
-```Script
+```JS script
     $(document).ready(function () {
         $(window).bind("beforeunload", function (event) {
             var gridDS = $('#grid').getKendoGrid().dataSource; // Access the Grid's DataSource.

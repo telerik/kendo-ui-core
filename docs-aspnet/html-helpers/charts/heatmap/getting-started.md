@@ -402,7 +402,7 @@ To use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/ap
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var chartReference = $("#chart").data("kendoChart"); // chartReference is a reference to the existing instance of the helper.
         </script>
@@ -410,7 +410,7 @@ To use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/ap
 
 1. Use the [client-side API of the HeatMap](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart) to control the behavior of the widget. In this example, you will use the [`redraw`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/redraw) method to redraw the HeatMap in the DOM.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var chart= $("#chart").data("kendoChart");

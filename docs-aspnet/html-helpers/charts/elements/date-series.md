@@ -317,14 +317,14 @@ To set the base units in the categorical charts, use any of the following approa
 
 To determine a default base, use the smallest duration between categories.
 
-```HtmlHelper_BaseUnit_Years
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2006, 1, 1) })
         // baseUnit is set to "years".
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Years
+```TagHelper
 
     @{
         var categories_data = new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2006, 1, 2) };
@@ -338,14 +338,14 @@ To determine a default base, use the smallest duration between categories.
 ```
 {% endif %}
 
-```HtmlHelper_BaseUnit_Days
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) })
         // baseUnit is set to "days".
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Days
+```TagHelper
 
     @{
         var categories_data = new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) };
@@ -494,7 +494,7 @@ To set the base units in the scatter charts, use any of the following approaches
 
 The default base unit is determined by the axis (or series) range.
 
-```HtmlHelper_BaseUnit_Years
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2006,1,1))
@@ -502,7 +502,7 @@ The default base unit is determined by the axis (or series) range.
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Years
+```TagHelper
 
     <x-axis>
         <x-axis-item min="new DateTime(2005,1,1)" max="new DateTime(2006,1,1)">
@@ -512,7 +512,7 @@ The default base unit is determined by the axis (or series) range.
 ```
 {% endif %}
 
-```HtmlHelper_BaseUnit_Days
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2005,1,2))
@@ -520,7 +520,7 @@ The default base unit is determined by the axis (or series) range.
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Days
+```TagHelper
 
     <x-axis>
         <x-axis-item min="new DateTime(2005,1,1)" max="new DateTime(2005,1,2)">

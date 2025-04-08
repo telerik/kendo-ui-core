@@ -167,7 +167,7 @@ To send the generated file to a remote endpoint, use the `ProxyURL()` and `Force
 ```
 {% endif %}
 
-```ServerProxy
+```C# ServerProxy
     [HttpPost]
     public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
     {
@@ -220,7 +220,7 @@ The following example demonstrates how to handle custom fonts.
     </kendo-scheduler>
 ```
 {% endif %}
-```Style
+```CSS Style
    <style>
         /*
             Use the DejaVu Sans font for display and embedding in the PDF file.

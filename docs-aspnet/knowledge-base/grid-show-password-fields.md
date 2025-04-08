@@ -32,7 +32,7 @@ To achieve the desired scenario:
 1. Create a common function that will be responsible for altering each of the characters for the required field.
 1. Utilize the [`Columns.Bound.ClientTemplate()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplatesystemstring) configuration method of the Grid and utilize the conventional hash Syntax that is accustomed for the [`Kendo Templating`](https://docs.telerik.com/kendo-ui/framework/templates/overview) mechanism.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -53,7 +53,7 @@ To achieve the desired scenario:
             )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function replaceString(value){
             value = value.split('').map(function(character){

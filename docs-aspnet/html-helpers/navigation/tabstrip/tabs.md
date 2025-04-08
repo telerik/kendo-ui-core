@@ -109,7 +109,7 @@ The following example demonstrates how to add a new TabStrip tab and position it
     </kendo-tabstrip>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         var tabstrip = $("#tabstrip").data("kendoTabStrip");
 

@@ -34,7 +34,7 @@ To achieve the desired scenario:
 1. To add initial text icons once the data is bound to the Grid, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event.
 1. To add text to the **Expand** and **Collapse** icons, subscribe to both the [`DetailExpand`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailexpandsystemstring) and [`DetailCollapse`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#detailcollapsesystemstring) events and alter the initially provided style classes by using the conventional [removeclass()](https://api.jquery.com/removeclass/) and [text()](https://api.jquery.com/text/) jQuery methods.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -62,7 +62,7 @@ To achieve the desired scenario:
             })
     )
 ```
-```Script.js
+```JS script.js
     <script id="template" type="text/kendo-tmpl">
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
                 .Name("grid_#=EmployeeID#")
@@ -106,7 +106,7 @@ To achieve the desired scenario:
         }
     </script>
 ```
-```Style.css
+```C# Style.css
     <style>
         /* Update Expand icon. */
         .k-i-expand:before {

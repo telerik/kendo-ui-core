@@ -150,7 +150,7 @@ The next step is to define the Card and the Button components—the ActionSheet 
 
 Handle the `Click` event of the Button and call the [`open()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet/methods/open) client-side method to open the ActionSheet.
 
-```Scripts
+```JS scripts
     <script>
         function moreOptionsClick() {
             var actionsheet = $("#actionsheet").data("kendoActionSheet");
@@ -161,7 +161,7 @@ Handle the `Click` event of the Button and call the [`open()`](https://docs.tele
 
 Handle the `Click` event of each ActionSheet item and call the [`close()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet/methods/close) client-side method to close the ActionSheet when an item is selected.
 
-```Scripts
+```JS scripts
     <script>
         function onItemClick() {
             var actionsheet = $("#actionsheet").data("kendoActionSheet");
@@ -202,7 +202,7 @@ The ActionSheet exposes [events](/api/kendo.mvc.ui.fluent/actionsheeteventbuilde
     </kendo-actionsheet>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         var isAdmin = false;
         function onActivate() {
@@ -219,7 +219,7 @@ You can reference the ActionSheet instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var actionSheetReference = $("#actionsheet").data("kendoActionSheet"); // actionSheetReference is a reference to the existing ActionSheet instance of the helper.
@@ -266,7 +266,7 @@ You can reference the ActionSheet instances that you have created and build on t
         </kendo-actionsheet>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var actionSheetReference = $("#actionsheet").data("kendoActionSheet");

@@ -46,7 +46,7 @@ The `OrgChart` component represents a tree structure and allows editing of its i
 |  | `tabindex=-1` | The expand/collapse button must not be part of the page tab sequence. |
 
 
-The edit popup of the OrgChart must implement the specification of the Window component with a Form component in it.
+The edit popup of the OrgChart should implement the specification of the Window component with a Form component in it.
 
 [Window accessibility specification]({% slug htmlhelpers_window_accessibility %})
 
@@ -58,7 +58,8 @@ The edit popup of the OrgChart must implement the specification of the Window co
 
 ## Section 508
 
-The OrgChart is fully compliant with the [Section 508 requirements](https://www.section508.gov/).
+
+The OrgChart is fully compliant with the [Section 508 requirements](http://www.section508.gov/).
 
 ## Testing
 

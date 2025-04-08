@@ -39,7 +39,7 @@ The following approaches can help you make the charts and graphs more accessible
 
 1. Add a plain-text description of your Chart to the page by using the following markup.
 
-    ```
+    ```HTML
         <figure>
             <figcaption>
                 In 2008, Spain produced electricity for its residents in four ways.
@@ -122,7 +122,7 @@ For more information, refer to the [brief video](https://www.youtube.com/watch?v
 
 To enhance the accessibility of the Chart, you can also add WAI-ARIA `role` and `title` attributes to the chart element using the `HtmlAttributes` configuration.
 
-```
+```Razor
     .HtmlAttributes(new { role="img",title="Sources of Electricity Produced in Spain, 2008" })
 ```
 In the [previous video](https://www.youtube.com/watch?v=QyB3sTVRd3E&ab_channel=KendoUI), even though VoiceOver reads the title and title legend of the Chart, it is not able to select the container or tell that the user is interacting with an HTML element. By adding a role of `img` and a `title`, VoiceOver can do both, which is demonstrated in the first 15 seconds of the video.

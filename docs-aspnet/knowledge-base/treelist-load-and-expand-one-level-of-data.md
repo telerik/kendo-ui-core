@@ -36,7 +36,7 @@ To achieve the desired results:
 1. To expand only the items which are in the view, use the client-side [`expand()`](/api/javascript/ui/treelist/methods/expand) method - this will not make a request for non-loaded items.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().TreeList<EmployeeDirectoryRemoteModel>()
         .Name("treelist")
         .Columns(columns =>
@@ -59,7 +59,7 @@ To achieve the desired results:
         )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         $(document).ready(function () {
 
@@ -79,7 +79,7 @@ To achieve the desired results:
     </script>
 ```
 {% if site.core %}
-```Controller.cs
+```C# Controller.cs
 	public class EmployeeDirectoryController : Controller
     {
         private IEmployeeDirectoryService employeeDirectory;
@@ -104,7 +104,7 @@ To achieve the desired results:
     }
 ```
 {% else %}
-```Controller.cs
+```C# Controller.cs
     public class EmployeeDirectoryController : Controller
     {
         private EmployeeDirectoryService employeeDirectory;

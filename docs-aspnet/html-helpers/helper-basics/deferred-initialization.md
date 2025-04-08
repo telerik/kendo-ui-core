@@ -31,7 +31,7 @@ The following example illustrates how the initialization script of a [Button]({%
 
 * Generated HTML markup and initialization script
 
-    ```
+    ```HTML
         <button id="primaryTextButton" name="primaryTextButton" data-role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" type="button" role="button" aria-disabled="false" tabindex="0"><span class="k-button-text">Primary Button</span></button>
         <script>kendo.syncReady(function(){jQuery("#primaryTextButton").kendoButton({"themeColor":"primary"});});</script>
     ```
@@ -71,9 +71,11 @@ To defer individual components:
 
   The `DeferredScripts` method accepts a `Boolean` parameter which determines whether the `script` elements will be automatically rendered. This behavior is useful for rendering the deferred initialization scripts inside an existing `script` element.
 
-        <script>
-            @Html.Kendo().DeferredScripts(false)
-        </script>
+    ```JavaScript
+    <script>
+        @Html.Kendo().DeferredScripts(false)
+    </script>
+    ```
 
     To render the deferred initialization script of a particular helper, use the `DeferredScriptsFor` method.
 
@@ -98,10 +100,11 @@ To defer individual components:
 
     You can also use the `DeferredScriptsFor` method to suppress the `script` element that wraps the initialization script.
 
-        <script>
-            @Html.Kendo().DeferredScriptsFor("age", false)
-        </script>
-
+    ```JavaScript
+    <script>
+        @Html.Kendo().DeferredScriptsFor("age", false)
+    </script>
+    ```
 
 ## Deferring Components Globally
 
@@ -114,7 +117,7 @@ To defer components globally:
 
  * For applications using .NET 6 or later and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), the `AddKendo` method is defined in the `Program.cs` file.
 
-	```
+	```C#
 	var builder = WebApplication.CreateBuilder(args);
 
 	builder.Services.AddKendo(x =>
@@ -125,7 +128,7 @@ To defer components globally:
 
  * For applications using .NET 5 or earlier, the `AddKendo` method is defined in the `ConfigureServices` method in the `Startup.cs` file.
 
-	```
+	```C#
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddKendo(x =>
@@ -137,7 +140,7 @@ To defer components globally:
 
 1. Set the `KendoDefferedScriptsMiddleware` middleware. After the compilation of the views, all scripts are stored in the memory cache. When the browser requests the dynamic `js` file, this middleware handles the request and returns the cached scripts.
 
-    ```
+    ```C#
         app.UseMiddleware<KendoDeferredScriptsMiddleware>();
     ```
 
@@ -145,10 +148,10 @@ To defer components globally:
 
     Alternatively, call the `DeferredScripts` method to format the components scripts as inline script.
 
-    ```Serialization_to_file
+    ```Razor Serialization_to_file
         @(Html.Kendo().DeferredScriptFile())
     ```
-    ```Serialization_to_inline_script
+    ```Razor Serialization_to_inline_script
         @Html.Kendo().DeferredScripts()
     ```
 
@@ -156,7 +159,7 @@ To defer components globally:
 
 1. Enable the `DeferToScriptFiles` setting in the `Global.asax.cs` file.
 
-    ```
+    ```Razor
         KendoMvc.Setup(x =>
         {
             x.DeferToScriptFiles = true;
@@ -180,10 +183,10 @@ To defer components globally:
 1. Serialize the script tag into a file by adding `@(Html.Kendo().DeferredScriptFile())` after all components declarations.
     Any components registered after it will not be included in the script.
     Alternatively, call the `DeferredScripts` method to format the components scripts as inline script.
-    ```Serialization_to_file
+    ```Razor Serialization_to_file
         @(Html.Kendo().DeferredScriptFile())
     ```
-    ```Serialization_to_inline_script
+    ```Razor Serialization_to_inline_script
         @Html.Kendo().DeferredScripts()
     ```
 
@@ -197,7 +200,7 @@ When deferring the components globally and calling the `DeferredScriptFile()` me
 
 The following example shows the content of the generated `JS` file when the loaded page contains only a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetcore %}) component with two tabs. The content of the second tab loads from a Partial View.
 
-```Index.cshtml
+```Razor Index.cshtml
     @{
         ViewData["Title"] = "Home Page";
     }
@@ -215,7 +218,7 @@ The following example shows the content of the generated `JS` file when the load
     )
 ```
 {% if site.core %}
-```Index.cshtml_TagHelper
+```Razor Index.cshtml_TagHelper
     @{
         ViewData["Title"] = "Home Page";
     }
@@ -233,7 +236,7 @@ The following example shows the content of the generated `JS` file when the load
     </kendo-tabstrip>
 ```
 {% endif %}
-```HomeController.cs
+```C# HomeController.cs
     public class HomeController : Controller
     {
         public ActionResult Details()
@@ -242,10 +245,10 @@ The following example shows the content of the generated `JS` file when the load
         }
     }
 ```
-```Details.cshtml
+```Razor Details.cshtml
     Partial View Content
 ```
-```kendo-deferred-scripts-XXX.js
+```JS kendo-deferred-scripts-XXX.js
     kendo.syncReady(function() {
         jQuery("#tabstrip").kendoTabStrip({
             "contentUrls": ["", "/Home/Details"]
@@ -258,7 +261,7 @@ with the Partial View.
 
 The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) in a TabStrip item through a Partial View when the global deferred initialization is enabled.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().TabStrip()
         .Name("tabstrip")
         .Items(tabstrip =>
@@ -272,7 +275,7 @@ The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid
     )
 ```
 {% if site.core %}
-```Index.cshtml_TagHelper
+```Razor Index.cshtml_TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-tabstrip name="tabstrip">
@@ -286,7 +289,7 @@ The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid
     </kendo-tabstrip>
 ```
 {% endif %}
-```HomeController.cs
+```C# HomeController.cs
     public class HomeController : Controller
     {
         public ActionResult Details()
@@ -295,7 +298,7 @@ The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid
         }
     }
 ```
-```Details.cshtml
+```Razor Details.cshtml
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -318,7 +321,7 @@ The following example demonstrates how to load a [Grid]({% slug htmlhelpers_grid
 
 ```
 {% if site.core %}
-```Details.cshtml_TagHelper
+```Razor Details.cshtml_TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-grid name="grid" height="400">
@@ -356,16 +359,16 @@ The `DeferredScriptFile()` method accepts a nonce, so you can call the method wi
 > As of the R2 2023 SP1, the `DeferredScriptFile()` method supports nonce.
 
 
-```PartialView
+```Razor PartialView
     @(Html.Kendo().DeferredScriptFile("Telerik-CSP-Example"))
 ```
-```_Layout.cshtml
+```Razor _Layout.cshtml
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-Telerik-CSP-Example' https://kendo.cdn.telerik.com;" />
 ```
 
 The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) in a TabStrip item through a Partial View when the CSP is enabled.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().TabStrip()
         .Name("tabstrip")
         .Items(tabstrip =>
@@ -379,7 +382,7 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
     )
 ```
 {% if site.core %}
-```Index.cshtml_TagHelper
+```Razor Index.cshtml_TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-tabstrip name="tabstrip">
@@ -393,7 +396,7 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
     </kendo-tabstrip>
 ```
 {% endif %}
-```HomeController.cs
+```C# HomeController.cs
     public class HomeController : Controller
     {
         public ActionResult Details()
@@ -402,7 +405,7 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
         }
     }
 ```
-```Details.cshtml
+```Razor Details.cshtml
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -425,7 +428,7 @@ The following example showcases how to load a [Grid]({% slug htmlhelpers_grid_as
 
 ```
 {% if site.core %}
-```Details.cshtml_TagHelper
+```Razor Details.cshtml_TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-grid name="grid" height="400">

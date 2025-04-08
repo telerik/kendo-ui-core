@@ -18,7 +18,7 @@ For the complete project, refer to the [MultiSelect in Razor Pages example](http
 
 In order to set up the MultiSelect component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
-```tab-HtmlHelper(cshtml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	
@@ -48,7 +48,7 @@ In order to set up the MultiSelect component bindings, you need to configure the
 	</script>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)    
+```TagHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -73,7 +73,7 @@ In order to set up the MultiSelect component bindings, you need to configure the
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
 		public JsonResult OnGetRead(string filterValue)
 		{
@@ -88,7 +88,7 @@ To bind the MultiSelect to a property from the `PageModel`, follow the next step
 
 1. Add a property to the `PageModel` that must bind to the MultiSelect.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             public int[] Orders { get; set; }
@@ -109,14 +109,14 @@ To bind the MultiSelect to a property from the `PageModel`, follow the next step
     ```
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the MultiSelect to the property using the `MultiSelectFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -139,7 +139,7 @@ To bind the MultiSelect to a property from the `PageModel`, follow the next step
             }
         </script>
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

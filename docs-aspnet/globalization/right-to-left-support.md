@@ -21,7 +21,7 @@ For example, if you want to allow the user to trigger RTL support by selecting a
 1. Add a button to your page by using the `<input type="button" id="toggleRTL" value="Activate RTL Support" class="k-button" />` setting.
 1. Add a click handler for the button and toggle RTL support by adding or removing the `k-rtl` class to a form, in this case, a collection of form fields to which you assigned an ID of `speakerForm`. With that handler in place, the user can now trigger RTL support on demand.
 
-```
+```JS
     $('#toggleRTL').on('click', function(event) {
         var form = $('#speakerForm');
 

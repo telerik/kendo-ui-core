@@ -8,6 +8,10 @@ position: 1
 
 # Chat Accessibility
 
+
+
+
+
 Out of the box, the {{ site.product }} Chat provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
@@ -71,7 +75,7 @@ To test the Chat component, refer to the [Chat Accessibility Demo](https://demos
 
 ## Keyboard Navigation
 
-For details on how the Chat keyboard navigation works, refer to the [Chat Keyboard Navigation]({%slug keynav_aspnetcore_chat%}) article.
+For details on how the Chat keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
 
 ## See Also
 

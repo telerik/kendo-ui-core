@@ -54,7 +54,7 @@ To achieve the desired results, map database models with `DateTimeOffset` fields
 
 1. Add a Mapping profile class that inherits from `AutoMapper.Profile` and list the required mappings.
 
-    ```MappingProfile.cs
+    ```C# MappingProfile.cs
         public class MappingProfile : Profile
         {
             public MappingProfile()
@@ -66,13 +66,13 @@ To achieve the desired results, map database models with `DateTimeOffset` fields
             }
         }
     ```
-    ```DataBaseModel
+    ```C# DataBaseModel
         public class Car
         {
             public DateTimeOffset ProductionDate { get; set; }
         }
     ```
-    ```ViewModel
+    ```C# ViewModel
         public class CarViewModel
         {
             public DateTime ProductionDate { get; set; }

@@ -186,7 +186,7 @@ To define the prompt suggestions, use the `PromptSuggestions()` option of the `P
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onPromptRequest(ev) {
             var aipromptWidget = ev.sender; // Get a reference to the AIPrompt.
@@ -246,7 +246,7 @@ In this step, handle the `CommandExecute` event of the AIPromprt that triggers w
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onCommandExecute(ev) {
             var aipromptWidget = ev.sender; // Get a reference to the AIPrompt.
@@ -289,7 +289,7 @@ To alter the appearance of the prompt suggestion cards, use the `PromptSuggestio
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function promptSuggestionTemplate(data) {
             let suggestionText = data.suggestion;
@@ -297,7 +297,7 @@ To alter the appearance of the prompt suggestion cards, use the `PromptSuggestio
         }
     </script>
 ```
-```Styles
+```CSS Styles
     <style>
         .prompt-suggestion-item {
             cursor: pointer;
@@ -335,7 +335,7 @@ The AIPrompt exposes events that you can handle and further customize the functi
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onOutputRatingChange(e) {
             console.log("Output Rated: " + ev.rateType);
@@ -349,7 +349,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `Name()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var aipromptReference = $("#aiprompt").data("kendoAIPrompt"); // aipromptReference is a reference to the existing instance of the helper.
         </script>

@@ -100,7 +100,7 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
     </script>   
 ```
 {% endif %}
-```HomeController
+```C# HomeController
 
     public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
@@ -197,7 +197,7 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
     </script> 
 ```
 {% endif %}
-```ProductController
+```C# ProductController
 
     [HttpGet]
 	public DataSourceResult Get([DataSourceRequest]DataSourceRequest request)

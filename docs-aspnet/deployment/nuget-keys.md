@@ -91,13 +91,13 @@ You can use the CLI `add source` (or `update source`) command to set the credent
 
 * To set the credentials in Azure DevOps:
 
-    ```
+    ```batch
     dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '$(TELERIK_NUGET_KEY)' --configfile './nuget.config' --store-password-in-clear-text
     ```
 
 * To set the credentials in GitHub Actions:
 
-    ```
+    ```batch
     dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '${{ secrets.TELERIK_NUGET_KEY }}' --configfile './nuget.config' --store-password-in-clear-text
     ```
 

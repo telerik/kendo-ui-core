@@ -20,7 +20,7 @@ For the complete project, refer to the [Captcha in Razor Pages example](https://
 
 To set up the Captcha for a Razor Pages scenario, you need to configure the server-side handler methods that will validate the user's input. The URL in these methods must refer to the name of the `PageModel`. From there, to further configure your application's backend, refer to the [Validation](https://docs.telerik.com/aspnet-core/html-helpers/editors/captcha/validation) article.
 
-```HtmlHelper.cshtml
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 
     @{
@@ -69,14 +69,14 @@ To set up the Captcha for a Razor Pages scenario, you need to configure the serv
             })
     )
 ```
-```Script.js
+```JS Script.js
     <script>
         function audioHandler(args) {
             args.success("../shared/UserFiles/Folders/captcha/" + args.data.CaptchaID + ".wav");
         }
     </script>
 ```
-```PageModel.cshtml
+```C# PageModel
     public class CaptchaIndexModel : PageModel
     {
         [BindProperty]

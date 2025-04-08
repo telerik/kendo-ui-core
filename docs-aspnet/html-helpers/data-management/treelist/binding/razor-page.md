@@ -22,7 +22,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
 
 1. Configure the `Create`, `Read`, `Update`, and `Delete` methods of the `DataSource` instance. The URL in each option must refer to the method name in the `PageModel`. Also, set the `Id` field in the `Model()` configuration of the `DataSource`. It is mandatory for the `Create`, `Update`, `Delete` operations.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -66,7 +66,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
             .Height(540)
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -119,7 +119,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
 
 1. Send the `AntiForgeryToken` with the CRUD requests.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -129,7 +129,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -142,7 +142,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
 
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         private static IList<EmployeeDirectoryModel> employees;
 
         public void OnGet()
@@ -219,7 +219,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
             return new JsonResult(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
         }
     ```
-    ```tab-Model
+    ```Model
         public class EmployeeDirectoryModel
         {
             [ScaffoldColumn(false)]

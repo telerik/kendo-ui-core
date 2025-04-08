@@ -84,7 +84,7 @@ To use the client-side API of the DateInput and build on top of its initial conf
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var dateinputReference = $("#dateinput").data("kendoDateInput"); // dateinputReference is a reference to the existing DateInput instance of the helper.
@@ -94,7 +94,7 @@ To use the client-side API of the DateInput and build on top of its initial conf
 
 1. Use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods) to control the behavior of the control. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput/methods/enable) method to disable the input.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var dateinputReference = $("#dateinput").data("kendoDateInput"); // dateinputReference is a reference to the existing DateInput instance of the helper.

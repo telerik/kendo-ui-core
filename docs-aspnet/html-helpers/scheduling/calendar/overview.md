@@ -105,7 +105,7 @@ The following example demonstrates how to subscribe to events by a handler name.
             kendo.alert(calendar.value());
         }
     </script>
-```    
+```
 {% endif %}
 
 ### Handling by Template Delegate
@@ -132,7 +132,7 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 ```
 {% if site.core %}
-```TagHelper.cshtml
+```TagHelper
     <kendo-calendar name="calendar"
                     on-change='function(e)
                     {

@@ -29,16 +29,16 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-list-ul` | `role=listbox` | Specifies the role of the ListBox `ul` element. |
 |  | `aria-label` or `aria-labelledby` | Adds a label to the `ul` element of the ListBox. |
 |  | `aria-multiselectable=true` | Signifies that the ListBox allows multiple selection. Present only when the multiple selection of the component is enabled. |
-|  | `tabindex=0` | Makes the ListBox focusable. |
 | `.k-list-item` | `role=option` | Specifies the role of the ListBox `item` element. |
 |  | `aria-selected=true/false` | Set to `true` if the item is selected. |
+|  | `tabindex=0` | The focused listbox item should have tabindex 0, while all others -1. |
 
 ### ListBox Toolbar
 
 
 The ListBox toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({%slug htmlhelpers_toolbar_accessibility%})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

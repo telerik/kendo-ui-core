@@ -88,10 +88,10 @@ To solve the issue:
 
 Avoid using an online encoder utility for a password. Instead, use a Powershell command:
 
-````PowerShell.skip-repl
+```batch PowerShell.skip-repl
 Add-Type -AssemblyName System.Web
 [System.Web.HttpUtility]::HtmlEncode('my§uper&P@§§word')
-````
+```
 
 ![Powershell Encoding](images/encode-passwords-with-powershell.png)
 

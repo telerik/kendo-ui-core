@@ -66,7 +66,7 @@ How can I prevent the user from moving the initially added groups of the Grid, c
         </kendo-grid>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onGroup(e) {
                 var currentGroups = e.sender.dataSource.group(); // Get the current groups.

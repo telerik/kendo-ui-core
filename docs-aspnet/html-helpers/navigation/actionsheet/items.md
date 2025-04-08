@@ -45,7 +45,7 @@ The following example demonstrates the possible options for the `Items` configur
     </kendo-actionsheet>
 ````
 {% endif %}
-```Script
+```JS script
     <script>
         function onClick(e) {
             e.preventDefault();

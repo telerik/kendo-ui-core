@@ -16,7 +16,7 @@ This article describes how to configure the DatePicker component in a Razor Page
 
 For the complete project, refer to the [DatePicker in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateTimePicker/DateTimePickerIndex.cshtml).
 
-```tab-HtmlHelper(cshtml)
+```HtmlHelper
 @page
 
 <div>
@@ -28,7 +28,7 @@ For the complete project, refer to the [DatePicker in Razor Pages example](https
 
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
 @page
 
 <div>
@@ -40,7 +40,7 @@ For the complete project, refer to the [DatePicker in Razor Pages example](https
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 
  public void OnGet()
  {
@@ -55,7 +55,7 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
 
 1. Add a property to the `PageModel` that must bind to the DatePicker.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -69,14 +69,14 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
     ```
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the DatePicker to the property using the `DatePickerFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -85,7 +85,7 @@ To bind the DatePicker to a property from the `PageModel`, follow the next steps
         
         @(Html.Kendo().DatePickerFor(m => m.DateCreated))
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

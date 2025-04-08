@@ -62,10 +62,12 @@ The example below demonstrates how to disable resizing for the `ShipCity` column
 
 By design, the last column of the Grid has no right border, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid width. If needed, you can apply a right border with the CSS code from the following example. The color value of the `#ccc` border has to match the color of the cell border from the Kendo UI theme. To obtain this, check the styles of the table cell by using a DOM inspector.
 
-    .k-grid-header-wrap > table,
-    .k-grid-content > table {
-        border-right: 1px solid #ccc;
-    }
+```CSS
+.k-grid-header-wrap > table,
+.k-grid-content > table {
+    border-right: 1px solid #ccc;
+}
+```
 
 ## See Also
 

@@ -38,7 +38,7 @@ The following example demonstrates how to create the PivotConfigurator.
     <kendo-pivotgridv2 name="pivotgridv2" height="570" configurator="#configurator">
         <!--Other configuration. -->
     </kendo-pivotgridv2>
-````
+```
 {% endif %}
 
 ## Basic Configuration
@@ -100,7 +100,7 @@ The following example demonstrates how to configure the PivotConfigurator.
             </transport>
         </pivot-datasource>
     </kendo-pivotgridv2>
-````
+```
 {% endif %}
 
 The following image demonstrates the output from the previous example.
@@ -111,7 +111,9 @@ The following image demonstrates the output from the previous example.
 
 To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfiguratorv2#methods) to control its behavior.
 
-    var pivotconfiguratorv2 = $("#pivotconfiguratorv2").data("kendoPivotConfiguratorV2");
+```JS
+var pivotconfiguratorv2 = $("#pivotconfiguratorv2").data("kendoPivotConfiguratorV2");
+```
 
 ## See Also
 

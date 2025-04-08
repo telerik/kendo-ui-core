@@ -17,6 +17,7 @@ To configure the Grid for {{ site.framework }} to do local binding:
 
 1. Define a model class or use an existing one from your application.
 
+    ```C#
         public class OrderViewModel
         {
 
@@ -32,11 +33,12 @@ To configure the Grid for {{ site.framework }} to do local binding:
                 set;
             }
         }
-
+    ```
+    
 1. Open the `HomeController.cs` and return an `IEnumerable` of the model type with the View. This is the `View()` which holds the Grid definition.
 
     {% if site.core %}
-    ```HomeController.cs      
+    ```C# HomeController.cs      
         public IActionResult Index()
         {
             // Returns a collection of OrderViewModels.
@@ -54,7 +56,7 @@ To configure the Grid for {{ site.framework }} to do local binding:
         }
     ```
     {% else %}
-    ```HomeController.cs  
+    ```C# HomeController.cs  
         public ActionResult Index()
         {
             // Returns a collection of OrderViewModels.

@@ -54,7 +54,7 @@ You can show a validation summary with a few lines of JavaScript.
     </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function addValidationSummary(e) {
             var validator = e.container.data("kendoValidator");
@@ -72,7 +72,7 @@ As a result, the error messages will be displayed as a list above the editors:
 
 To keep the tooltips, as well, do not reset the "errorTemplate" option:
 
-```Scripts
+```JS scripts
     <script>
         function addValidationSummary(e) {
             var validator = e.container.data("kendoValidator");

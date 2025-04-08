@@ -25,7 +25,7 @@ The RangeSlider is compliant with the [Web Content Accessibility Guidelines (WCA
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-[Slider accessibility specification]({{slider_a11y_link}})
+[Slider accessibility specification]({% slug jquery_slider_accessibility %})
 
 
 The two focusable elements of the RangeSlider must implement the specification for the **Slider** component. Here is just one clarification for the use of `aria-valuetext` attribute:

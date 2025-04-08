@@ -26,16 +26,18 @@ This exception is thrown when the length of the JSON response exceeds the defaul
 * Serialize only the required properties of your model by [using a View Model](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/faq#how-to-convert-my-models-to-view-model-objects).
 * Manually serialize the `DataSourceResult`.
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-        {
-            var data = GetData();
-            var serializer = new JavaScriptSerializer();
-            var result = new ContentResult();
-            serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
-            result.Content = serializer.Serialize(data.ToDataSourceResult(request));
-            result.ContentType = "application/json";
-            return result;
-        }
+    ```C#
+    public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+    {
+        var data = GetData();
+        var serializer = new JavaScriptSerializer();
+        var result = new ContentResult();
+        serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
+        result.Content = serializer.Serialize(data.ToDataSourceResult(request));
+        result.ContentType = "application/json";
+        return result;
+    }
+    ```
 
 ## Sensitive Information Error Message
 
@@ -80,9 +82,9 @@ Yet another reason is that you explicitly specified that the Grid should make HT
 ## Limited Usage of Templates
 
 {% if site.core %}
-    The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
+The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
 {% else %}
-    An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
+An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
 
 **Solution** Use a popup edit form with a custom editor template.
 

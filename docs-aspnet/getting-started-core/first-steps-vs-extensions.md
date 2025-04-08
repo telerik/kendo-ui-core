@@ -129,7 +129,7 @@ Binding the Grid  requires adding a model and controller. The Wizard has done th
 
    The model represents the shape of the data that the Grid will display.
 
-	```
+	```C#
 		public class OrderViewModel
 		{
 			public int OrderID
@@ -172,7 +172,7 @@ Binding the Grid  requires adding a model and controller. The Wizard has done th
 
 1. In `GridController.cs`, added the following declarations at the top. They enable the data processing by the Telerik UI extensions:
 	
-	```
+	```C#
 		using Kendo.Mvc.Extensions;
 		using Kendo.Mvc.UI;
 		using Microsoft.AspNetCore.Mvc;
@@ -183,7 +183,7 @@ Binding the Grid  requires adding a model and controller. The Wizard has done th
 
 1. In `GridController.cs`, added an ActionMethod that will return the data for the Grid.
 
-	```
+	```C#
 		public class GridController : Controller
 		{
 			public ActionResult Orders_Read([DataSourceRequest] DataSourceRequest request)
@@ -294,19 +294,19 @@ The themes are usually referenced in the `_Layout` file of the application. To c
 
 If during the creation the project you've chosen the Bootstrap theme, the `_Layout.cshtml` file must contain the following CSS link:
 
-```
+```HTML
 	<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
 ```
 
 To change the theme to the Default theme, substitute the link above with the following:
 
-```
+```HTML
 	<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" type="text/css" />
 ```
 
 Since both the Bootstrap and Default themes are Sass-based themes, no additional CSS files are required. LESS theme files are no longer support after the R1 2023 SP1 release. If you need to reference LESS CSS files in an older version of the {{ site.product }}, you must add a common and a theme CSS files. The following example shows how to reference the Default LESS theme (applicable to versions of {{ site.product }} before R1 2023 SP1):
 
-```
+```HTML
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default.min.css" />
 ```

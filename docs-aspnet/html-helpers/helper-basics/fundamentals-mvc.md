@@ -57,14 +57,16 @@ To subscribe to the client-side events that are exposed by a helper, use the `Ev
 
 1. Declare the event handlers.
 
-            <script>
-            function age_change(e) {
-                // Handle the event.
-            }
-            function age_spin(e) {
-                // Handle the event.
-            }
-            </script>
+    ```JS
+    <script>
+        function age_change(e) {
+            // Handle the event.
+        }
+        function age_spin(e) {
+            // Handle the event.
+        }
+    </script>
+    ```
 
 ## Referencing Client-Side Objects
 

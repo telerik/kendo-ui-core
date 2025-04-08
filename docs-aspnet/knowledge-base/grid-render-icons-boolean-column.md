@@ -35,7 +35,7 @@ To achieve the desired scenario:
 1. Within the handler, replace the default `true` and `false` values by using the conventional [Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/font-icons).
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("Grid")
         .Columns(columns => {
@@ -67,7 +67,7 @@ To achieve the desired scenario:
         )
     )
 ```
-```Script.js
+```JS script.js
     <script type="text/javascript">
        function discTemplate(data) { // Render an icon based on a ternary operator evaluation.
              return data.Discontinued ? "<span class='k-icon k-i-check'></span>" : "<span class='k-icon k-i-x'></span>"

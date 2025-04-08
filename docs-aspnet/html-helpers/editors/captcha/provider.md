@@ -35,7 +35,7 @@ The server-side Telerik UI Captcha provider comes with the **Telerik.Web.Captcha
 In the C# backend file or controller, add references to the following namespaces:
 
 {% if site.mvc %}
-```
+```C#
     using System;
     using System.Drawing.Imaging;
     using System.IO;
@@ -43,7 +43,7 @@ In the C# backend file or controller, add references to the following namespaces
     using Telerik.Web.Captcha;
 ```
 {% else %}
-```
+```C#
     using System.IO;
     using System.Drawing.Imaging;
     using Newtonsoft.Json;

@@ -209,7 +209,7 @@ To use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var multicolumnComboBox = $("#customers").data("kendoMultiColumnComboBox"); // MultiColumnComboBox Reference is a reference to the existing instance of the helper.
         </script>
@@ -217,7 +217,7 @@ To use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com
 
 1. Use the [client-side API of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/methods/enable) method to disable the MultiColumnComboBox.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
             var multicolumnComboBox = $("#customers").data("kendoMultiColumnComboBox");

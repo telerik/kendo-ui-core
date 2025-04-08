@@ -36,7 +36,7 @@ The following example demonstrates how to subscribe to events by handler name.
         on-change="signature_change"/>
 ```
 {% endif %}
-```script.js
+```JS script.js
     function signature_open() {
         // Handle the open event.
     }

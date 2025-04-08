@@ -40,7 +40,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <p>
 
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Sparkline
@@ -150,7 +150,7 @@ You can reference the Sparkline instances that you have created and build on top
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var sparklineReference = $("#sparkline").data("kendoSparkline"); // sparklineReference is a reference to the existing sparkline instance of the helper.
     </script>
@@ -158,7 +158,7 @@ You can reference the Sparkline instances that you have created and build on top
 
 1. Use the [Sparkline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sparkline) to control the behavior of the widget. In this example, you will use the `refresh` method to reset the sparkline content.
 
-    ```script
+    ```JS script
     <script>
         var sparklineReference = $("#sparkline").data("kendoSparkline"); // sparklineReference is a reference to the existing timeSparkline instance of the helper.
         var view = sparklineReference.refresh(); 

@@ -41,7 +41,7 @@ To achieve the desired scenario:
   1. To ensure proper stylization regarding the cards, update the card callout classes.
 
 
-```Model.cs
+```C# Model.cs
 
     public class TimelineEventModel
     {
@@ -51,7 +51,7 @@ To achieve the desired scenario:
     }
 
 ```
-```Timeline.cshtml
+```Razor Timeline.cshtml
 
     @(Html.Kendo().Timeline<TimelineDemoApp.Models.TimelineEventModel>()
             .Name("Timeline")
@@ -60,7 +60,7 @@ To achieve the desired scenario:
     )
 
 ```
-```script.js
+```JS script.js
 
     function onDataBound(){
          var items=this.dataSource.data(); 

@@ -22,21 +22,11 @@ The Editor is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-
-The Editor component has two distinctive modes - one with `<textarea>` and an `<iframe>` containing an HTML document and another one with only a contenteditable `<div>` (Inline Editor). The inline mode of the Editor does not require any particular ARIA attributes to be present in the widget.
-
-### Editor with textarea
-
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-iframe` | `tabindex=0` | The element must be part of the page tabsequence. |
+| `div[contenteditable='true']` | `role=textbox` | Specifies the role of the component as text input. |
 |  | `label for` or `aria-label` or `aria-labelledby` | The component focusable element needs an accessible name to be assigned to it. |
 | `.k-editor.k-readonly div[contenteditable=false]` | `aria-readonly=true` | Attribute is rendered only when the Editor is readonly. |
-
-### Editor with contenteditable div
-
-
-When in its inline mode (with a contenteditable `div` element), the editor does not represent a form input. Hence, no additional attributes are required in that scenario.
 
 ## Resources
 

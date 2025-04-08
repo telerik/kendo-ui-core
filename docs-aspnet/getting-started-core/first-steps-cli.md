@@ -35,14 +35,14 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 1. Navigate to the folder of your choice by using the Terminal (cmd). Create a new folder and navigate in it.
 
-      ```
+      ```batch
       mkdir MyASPNETCoreProject
       cd MyASPNETCoreProject
       ```
 
 2. Create a .NET Core application with the default web MVC template by running [`dotnet new mvc`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new). The following example demonstrates a sample response that you are expected to receive.
 
-      ```
+      ```batch
       dotnet new mvc
 
       Getting ready...
@@ -53,7 +53,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 3. Start the application by running [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run). The following example demonstrates a sample response that you are expected to receive.
 
-      ```
+      ```batch
       dotnet run
 
       Now listening on: http://localhost:5000
@@ -71,7 +71,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
     In all cases, the `NuGet.Config` file has to include your `telerik.com` credentials.
 
-      ```
+      ```xml
       <?xml version="1.0" encoding="utf-8"?>
       <configuration>
           <packageSources>
@@ -98,9 +98,9 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
 4. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`. If you intend to use the Telerik UI ASP.NET Core Tag Helpers, add them with `@addTagHelper *, Kendo.Mvc`.
 
-      ```
+      ```C#
       @using MyASPNETCoreProject
-	    @using MyASPNETCoreProject.Models
+	@using MyASPNETCoreProject.Models
       @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
       @addTagHelper *, Kendo.Mvc
       @using Kendo.Mvc.UI
@@ -118,17 +118,17 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 
   5.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match `Kendo.Mvc.dll`.
 
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
-      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+```HTML
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
+<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
+<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+```
 
-      If you prefer to include the client-side resources from a local source instead of CDNs, consider the following article:
-
-      [Local Client-side Resources](https://docs.telerik.com/aspnet-core/installation/getting-started-copy-client-resources#including-client-side-resources)
+If you prefer to include the client-side resources from a local source instead of CDNs, follow the instructions in the [local client-side resources](https://docs.telerik.com/aspnet-core/installation/getting-started-copy-client-resources#including-client-side-resources) documentation.
 
 6. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
-	```tab-HtmlHelper
+	```HtmlHelper
 		<div class="text-center">
     		<h2>Kendo UI DatePicker</h2>
     		@(Html.Kendo().DatePicker()
@@ -136,7 +136,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
     		)
 		</div>
 	```
-	```tab-TagHelper
+	```TagHelper
 		<div class="text-center">
     		<h2>Kendo UI DatePicker</h2>
 			<kendo-datepicker name="my-picker"/>

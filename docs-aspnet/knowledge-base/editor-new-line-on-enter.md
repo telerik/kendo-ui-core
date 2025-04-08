@@ -34,7 +34,7 @@ By default, the Editor adds a paragraph (`p` element) when the focus is in the E
 1. Add a script that customizes the `insertLineBreak` and `insertParagraph` tools. As a result, a new line is added when pressing the `Enter` key, and a paragraph is inserted by pressing `Shift + Enter`.  
 1. Declare the Editor after the script tag with the custom logic.
 
-```Script
+```JS script
     <script>
         var editorNS = kendo.ui.editor,
             registerTool = editorNS.EditorUtils.registerTool,

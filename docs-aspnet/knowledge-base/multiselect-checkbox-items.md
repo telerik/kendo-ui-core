@@ -137,7 +137,7 @@ How can I create a {{ site.product }} MultiSelect with checkboxes for each of th
     </kendo-multiselect>
  ```
 {% endif %}
-```Script.js
+```JS script.js
 	<script>
 		function checkInputs(elements) { // Toggle 'checked' property, based on the selected items.
 			elements.each(function() {

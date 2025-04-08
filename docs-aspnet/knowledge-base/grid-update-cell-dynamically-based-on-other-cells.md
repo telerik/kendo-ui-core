@@ -109,7 +109,7 @@ Follow the next steps to update the <b>TransactionAmount</b> when the <b>CreditA
         </kendo-grid>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onCellClose(e) {
                 var closedCreditAmountCell = $(e.container).hasClass("creditAmountCell");

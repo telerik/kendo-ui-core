@@ -23,7 +23,7 @@ For the complete project, refer to the [PDFViewer in Razor Pages example](https:
 The following example demonstrates how to initialize the PDFViewer in RazorPage project by using [PDF.JS](https://mozilla.github.io/pdf.js/):
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
@@ -34,7 +34,7 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
     });
 ```
 {% endif %}
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerIndexModel
 
@@ -77,7 +77,7 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
     </kendo-pdfviewer>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public class PDFViewerIndexModel : PageModel
     {
         public void OnGet()
@@ -90,7 +90,7 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
 
 The following example demonstrates how to initialize the PDFViewer by using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction):
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerDPLModel
 
@@ -116,7 +116,7 @@ The following example demonstrates how to initialize the PDFViewer by using the 
     </kendo-pdfviewer>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public class PDFViewerDPLModel : PageModel
     {
         private IHostingEnvironment _hostingEnvironment;

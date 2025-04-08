@@ -27,7 +27,7 @@ How can I automatically persist the sort, filter, and group Grid options when th
 
 The state of the Grid is persisted in the [`beforeunload`](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload) event handler. This way, any operation which the user performs before leaving the page is persisted. To restore the Grid state, use the [`document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) event.
 
-````C#
+```View
 @(Html.Kendo().Grid<TelerikMvcApp9.Models.OrderViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -50,7 +50,8 @@ The state of the Grid is persisted in the [`beforeunload`](https://developer.moz
                 .Read(read => read.Action("Orders_Read", "Grid"))
             )
         )
-
+```
+```JavaScript
 <script>
 $(document).ready(function () {
     var options = localStorage["grid-options"];
@@ -68,4 +69,4 @@ $(document).ready(function () {
     }
 });
 </script>
-````
+```

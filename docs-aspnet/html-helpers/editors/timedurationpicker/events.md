@@ -37,7 +37,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         </kendo-timedurationpicker>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function timedurationpicker_open(e) {
             // Handle the open event.

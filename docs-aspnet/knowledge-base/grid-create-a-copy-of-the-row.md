@@ -32,7 +32,7 @@ How can I create a copy of a Grid row when the user clicks a button?
 1. In the `click` handler, get the current table row and the data item bound to it through the [`dataitem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
 1. Add a new record to the grid [`dataSource`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) with the corresponding properties of the current data item. 
 
-```Index.cshtml
+```Razor Index.cshtml
 	@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
 	    .Name("grid")
 	    .Columns(columns =>
@@ -62,7 +62,7 @@ How can I create a copy of a Grid row when the user clicks a button?
 	    )
 	)
 ```
-```script.js
+```JS script.js
 <script type="text/javascript">
 	function onClickHandler(e){
 	   // prevent page scroll position change

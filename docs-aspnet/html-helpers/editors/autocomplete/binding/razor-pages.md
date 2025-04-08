@@ -22,7 +22,7 @@ To configure the `Read` operation of the AutoComplete DataSource within a Razor 
 
 1. Specify the Read operation in the DataSource configuration. The URL must refer to the method name in the PageModel.
 
-```tab-HtmlHelper_Index.cshtml        
+```HtmlHelper
     @page
     @model IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -48,7 +48,7 @@ To configure the `Read` operation of the AutoComplete DataSource within a Razor 
 
 ```
 {% if site.core %}
-```tab-TagHelper_Index.cshtml
+```TagHelper
     @page
     @model IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -106,7 +106,7 @@ You can also include additional parameters if needed:
 
 4. Add a handler method for the Read operation in the cshtml.cs file.
 
-```tab-Index.cshtml.cs
+```C# Index.cshtml.cs
     public class IndexModel : PageModel
     {
         public static List<OrderViewModel> orders;
@@ -143,7 +143,7 @@ To bind the AutoComplete to a property from the `PageModel`, follow the next ste
 
 1. Add a property to the `PageModel` that must bind to the AutoComplete.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -157,14 +157,14 @@ To bind the AutoComplete to a property from the `PageModel`, follow the next ste
     ```
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the AutoComplete to the property using the `AutoCompleteFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -173,7 +173,7 @@ To bind the AutoComplete to a property from the `PageModel`, follow the next ste
 
         @(Html.Kendo().AutoCompleteFor(m => m.Country))
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

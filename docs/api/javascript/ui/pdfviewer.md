@@ -1104,34 +1104,27 @@ Executes a command of the PDFViewer.
 #### Example
 
     <div id="example">
-
-        <input type="button" value="Download" onclick="onDownloadClick()"/>
-        <div id="pdfViewer">
-        </div>
+      <button id="download">Download</button>
+      <div id="pdfViewer"></div>
     </div>
     <script type="module">
-        $(document).ready(function () {
-            $("#pdfViewer").kendoPDFViewer({
-                pdfjsProcessing: {
-                    file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
-                },
-                width: "100%",
-                height: 1000,
-                toolbar: {
-                    items: [
-                        "pager",
-                        "spacer",
-                        "open",
-                        "download"
-                    ]
-                }
-            });
+      $(document).ready(function () {
+        $("#pdfViewer").kendoPDFViewer({
+          pdfjsProcessing: {
+            file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf",
+          },
+          width: "100%",
+          height: 1000,
+          toolbar: {
+            items: ["pager", "spacer", "open", "download"],
+          },
         });
-
-        function onDownloadClick(){
-            var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
-            pdfViewer.execute({command:"DownloadCommand"});
+        $("#download").click(onDownloadClick)
+        function onDownloadClick() {
+          var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
+          pdfViewer.execute({ command: "DownloadCommand" });
         }
+      });
     </script>
 
 ### setOptions

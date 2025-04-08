@@ -21,7 +21,7 @@ To enable PDF export in the Diagram:
 ```HTML
     <button class='export-pdf k-button'>Save as PDF</button>
 ```
-```JavaScrtipt
+```JS
     <script>
         $(".export-pdf").click(function () {
             $("#diagram").getKendoDiagram().saveAsPDF();

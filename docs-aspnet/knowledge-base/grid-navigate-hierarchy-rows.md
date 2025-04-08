@@ -55,7 +55,7 @@ The [`Navigatable()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc
 
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         $(document).ready(function () {
             var grid = $('#grid').data('kendoGrid');

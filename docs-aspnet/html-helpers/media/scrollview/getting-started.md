@@ -36,7 +36,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <h4>ScrollView with event handler</h4>
 <p>
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the ScrollView
@@ -452,13 +452,13 @@ You can reference the ScrollView instances that you have created and build on to
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var scrollView = $("#scrollView").kendoScrollView().data().kendoScrollView; // scrollView is a reference to the existing scrollView instance of the helper.
     </script>
     ```
 1. Use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview#methods) to control the behavior of the widget. In this example, you will use the `next` method to switch to the next page with an animation.
-    ```script
+    ```JS script
     <script>
         var scrollView = $("#scrollView").kendoScrollView().data().kendoScrollView; // scrollView is a reference to the existing scrollView instance of the helper.
         scrollView.next();

@@ -118,7 +118,7 @@ To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kend
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var dateTimePickerReference = $("#datetimepicker").data("kendoDateTimePicker"); // DateTimePicker Reference is a reference to the existing instance of the helper.
         </script>
@@ -126,7 +126,7 @@ To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kend
 
 1. Use the [client-side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/enable) method to disable the DateTimePicker.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var dateTimePicker= $("#datetimepicker").data("kendoDateTimePicker");

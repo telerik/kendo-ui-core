@@ -30,7 +30,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 
 Declare the `Shape` an `Connection` view models.
 
-```OrgChartShape
+```C# OrgChartShape
     public partial class OrgChartShape
     {
         public int Id { get; set; }
@@ -38,7 +38,7 @@ Declare the `Shape` an `Connection` view models.
         public string JobTitle { get; set; }
     }
 ```
-```OrgChartConnection
+```C# OrgChartConnection
     public partial class OrgChartConnection
     {
         public long Id { get; set; }
@@ -169,7 +169,7 @@ Use the Diagram HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
     </kendo-diagram>
 ```
 {% endif %}
-```Script.js
+```JS script.js
     <script>
         function visualTemplate(options) {
             var dataviz = kendo.dataviz;
@@ -495,7 +495,7 @@ The Diagram exposes a variety of client-side events that you can explicitly hand
     </kendo-diagram>
 ```
 {% endif %}
-```Script.js
+```JS script.js
     <script>
         function visualTemplate(options) {
             var dataviz = kendo.dataviz;
@@ -549,7 +549,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var diagramReference = $("#diagram").data("kendoDiagram"); // diagramReference is a reference to the existing instance of the helper.
     </script>
@@ -557,7 +557,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the [Diagram client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram) to control the behavior of the widget. In this example, you will bring the Diagram into focus by using the `focus` method.
 
-    ```script
+    ```JS script
     <script>
         var diagramReference = $("#diagram").data("kendoDiagram"); // diagramReference is a reference to the existing instance of the helper.
         diagramReference.focus(); // Bring the Diagram into focus.

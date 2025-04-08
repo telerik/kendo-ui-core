@@ -25,7 +25,7 @@ To customize it the popup editor:
 
 3. Implement the new editor template.
 
-    ```CustomPopUp.cshtml
+    ```Razor CustomPopUp.cshtml
         @model TelerikProject.Models.Customer
 
         @Html.Kendo().TextBoxFor(m => m.ContactName)

@@ -53,9 +53,9 @@ The `OrgChart` component represents a tree structure and allows editing of its i
 
 The edit popup of the OrgChart should implement the specification of the Window component with a Form component in it.
 
-[Window accessibility specification]({{window_a11y_link}})
+[Window accessibility specification]({% slug jquery_window_accessibility %})
 
-[Form accessibility specification]({{form_a11y_link}})
+[Form accessibility specification]({% slug jquery_form_accessibility %})
 
 ## Resources
 

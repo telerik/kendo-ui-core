@@ -11,7 +11,7 @@ position: 5
 As of {{site.product}} UI R2 SP1 2023, users can reorder the TreeList's rows by using the click-move-click functionality provided by the [`Editable.Move.ClickMoveClick`](/api/kendo.mvc.ui.fluent/treelisteditablemovesettingsbuilder#clickmoveclicksystemboolean) configuration option. To allow the user to use the functionality make sure to also add a column with a drag handle via the [`.Draggable()`](/api/kendo.mvc.ui.fluent/treelistcolumnbuilder#draggable) configuration method. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
 Refer to the example below for the configuration details:
 
-```tab-HtmlHelper
+```HtmlHelper
     @(Html.Kendo().TreeList<EmployeeViewModel>()
     	.Name("treelist")
         .Columns(columns =>
@@ -74,7 +74,7 @@ When the `.Editable(editable=>editable.Move(true))` property is set to `true`, t
 
 To persist the new hierarchy, configure the TreeList data source for CRUD operations and set `transport.update` as a bare minimum. For a runnable example, refer to the [demo on editing by dragging and dropping the rows of the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/dragdrop).
 
-```tab-HtmlHelper
+```HtmlHelper
     @(Html.Kendo().TreeList<EmployeeViewModel>()
     	.Name("treelist")
 		.Editable(editable => editable.Move(move => move.Reorderable(true))
@@ -115,7 +115,7 @@ To persist the new hierarchy, configure the TreeList data source for CRUD operat
 	</kendo-treelist>
 ```
 {% endif %}
-```tab-Controller
+```Controller
 	// The TreeList sends the updated items with prefix "models".
   // Remember to bind it in the controller so that the collection can be intercepted.
 	public JsonResult Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EmployeeDirectoryModel> employees).

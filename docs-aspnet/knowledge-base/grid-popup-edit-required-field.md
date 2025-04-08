@@ -39,7 +39,7 @@ The example below is implemented as per the following steps:
 
 The following example demonstrates the steps described above.
 
-```TestEditor.cshtml
+```Razor TestEditor.cshtml
 @model string
 
 @(Html.Kendo().DropDownList()

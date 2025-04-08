@@ -45,7 +45,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 Enable the `RenderAsModule` option, which will add `type="module"` to the initialization scripts of all Telerik UI components in the application:
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
@@ -250,7 +250,7 @@ You can reference the PDFViewer instances that you have created and build on top
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var pdfviewerReference = $("#pdfviewer").data("kendoPDFViewer"); // pdfviewerReference is a reference to the existing PDFViewer instance of the helper.
     </script>

@@ -97,7 +97,7 @@ Bound columns support many settings and amongst the most used are the following 
     </kendo-grid>
 ```
 {% endif %}
-```script
+```JS script
 <script>
     function calculateField(data) {
         return data.UnitPrice * data.UnitsInStock;

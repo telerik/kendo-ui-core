@@ -16,7 +16,7 @@ This article describes how to configure the ContextMenu component in a Razor Pag
 
 For the complete project, refer to the [ContextMenu in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ContextMenu/ContextMenuIndex.cshtml).
 
-```tab-HtmlHelper(csthml)   
+```HtmlHelper
      
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -58,7 +58,7 @@ For the complete project, refer to the [ContextMenu in Razor Pages example](http
 	</script>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
 	<div id="target">Right click here</div>
 
     <kendo-contextmenu name="menu" target="#target" orientation="ContextMenuOrientation.Vertical"
@@ -88,7 +88,7 @@ For the complete project, refer to the [ContextMenu in Razor Pages example](http
 ```
 {% endif %}
 
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 
     public void OnPostCustom()
         {

@@ -22,7 +22,7 @@ By default, when the View containing the Form is loaded, clicking on the Submit 
 
 See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -64,7 +64,7 @@ See the implementation details in the example below, and for the full project wi
     </script>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -97,7 +97,7 @@ See the implementation details in the example below, and for the full project wi
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     [BindProperty]
     public OrderViewModel Order { get; set; }
 
@@ -129,7 +129,7 @@ When the Form is submitted with ajax, the default submit event of the component 
 
 See the implementation details in the example below, where the JSON errors are appended to the validation summary and it is toggled it in the ajax success and error callbacks. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -216,7 +216,7 @@ See the implementation details in the example below, where the JSON errors are a
     </script>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -293,7 +293,7 @@ See the implementation details in the example below, where the JSON errors are a
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     [BindProperty]
     public OrderViewModel Order { get; set; }
 

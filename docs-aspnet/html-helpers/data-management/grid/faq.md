@@ -467,9 +467,11 @@ Use the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasourc
 
 The following example demonstrates how to reload an Ajax-bound Grid.
 
-    var grid = $("#Grid").data("kendoGrid");
+```JS
+var grid = $("#Grid").data("kendoGrid");
 
-    grid.dataSource.read();
+grid.dataSource.read();
+```
 
 ## How can I convert my models to view model objects?
 
@@ -479,17 +481,19 @@ The `ToDataSourceResult` extension method supports an optional selector, which c
 
 The following example demonstrates how to convert the processed data.
 
-    public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-    {
-        var northwind = new NorthwindDataContext();
-        var orders = northwind.Orders;
+```C#
+public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+{
+    var northwind = new NorthwindDataContext();
+    var orders = northwind.Orders;
 
-        var result = orders.ToDataSourceResult(request, o => new {
-            OrderID = o.OrderID,
-            CustomerName = o.Customer.ContactName
-        });
-        return Json(result);
-    }
+    var result = orders.ToDataSourceResult(request, o => new {
+        OrderID = o.OrderID,
+        CustomerName = o.Customer.ContactName
+    });
+    return Json(result);
+}
+```
 
 ## How can I avoid circular reference exceptions?
 
@@ -498,34 +502,35 @@ properties which create the circular references.
 
 The following example demonstrates how to avoid circular references.
 
-    // Models.
-    public class Order
-    {
-        public int OrderID { get; set; }
+```C# Model
+public class Order
+{
+    public int OrderID { get; set; }
 
-        // This property creates a circular reference because of the Customer class.
-        // Refers to the Order class through the Orders property.
-        public Customer Customer { get; set; }
-    }
+    // This property creates a circular reference because of the Customer class.
+    // Refers to the Order class through the Orders property.
+    public Customer Customer { get; set; }
+}
 
-    public class Customer
-    {
-        public string ContactName { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
-    }
+public class Customer
+{
+    public string ContactName { get; set; }
+    public IEnumerable<Order> Orders { get; set; }
+}
+```
+```C# Controller
+public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+{
+    var northwind = new NorthwindDataContext();
+    var orders = northwind.Orders;
 
-    // Action.
-    public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-    {
-        var northwind = new NorthwindDataContext();
-        var orders = northwind.Orders;
-
-        // Avoid the circular reference by creating a View Model object and skipping the Customer property.
-        var result = orders.ToDataSourceResult(request, o => new {
-            OrderID = o.OrderID,
-            CustomerName = o.Customer.ContactName
-        });
-    }
+    // Avoid the circular reference by creating a View Model object and skipping the Customer property.
+    var result = orders.ToDataSourceResult(request, o => new {
+        OrderID = o.OrderID,
+        CustomerName = o.Customer.ContactName
+    });
+}
+```
 
 ## How can I handle errors in Ajax binding mode?
 
@@ -606,29 +611,35 @@ Prevent the caching and browser re-use of Ajax responses in either of the follow
 {% if site.mvc %}
 * Use an `OutputCache` attribute for the action method.
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public JsonResult MyReadMethod()
-        {
-            /* ... */
-        }
+    ```C#
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+    public JsonResult MyReadMethod()
+    {
+        /* ... */
+    }
+    ```
 {% endif %}
 
 {% if site.core %}
 * Use an `ResponseCache` attribute for the action method.
 
-        [ResponseCache(NoStore = true, Duration = 0)]
-        public JsonResult MyReadMethod()
-        {
-            /* ... */
-        }
+    ```C#
+    [ResponseCache(NoStore = true, Duration = 0)]
+    public JsonResult MyReadMethod()
+    {
+        /* ... */
+    }
+    ```
 {% endif %}
 
 * Configure the Kendo UI DataSource to make `POST` instead of `GET` Ajax requests for the `Read` action.
 * Use jQuery's [`ajaxSetup`](https://api.jquery.com/jquery.ajaxsetup/) configuration method. This influences all Ajax requests that the web application performs.
 
-        $.ajaxSetup ({
-           cache: false
-        });
+    ```JS
+    $.ajaxSetup ({
+        cache: false
+    });
+    ```
 
 ## How can I display model state errors?
 
@@ -759,11 +770,13 @@ By default, all properties are read-only. Decorate the read-only properties with
 
 The following example demonstrates the Read-only property through the `ReadOnly` attribute.
 
-    public class Order
-    {
-        [ReadOnly(true)]
-        public int OrderID { get; set; }
-    }
+```C#
+public class Order
+{
+    [ReadOnly(true)]
+    public int OrderID { get; set; }
+}
+```
 
 The following example demonstrates the Read-only property through the `Editable` method.
 
@@ -818,15 +831,17 @@ To validate a date by using the Kendo UI DateTimePicker:
 
 1. Decorate the `Date` property in the model by using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.
 
-        public class Order
-        {
-            public int OrderID { get; set; }
+    ```C#
+    public class Order
+    {
+        public int OrderID { get; set; }
 
-            public string ShipCountry { get; set; }
+        public string ShipCountry { get; set; }
 
-            [UIHint("KendoDateEditor")]
-            public Date OrderDate { get; set; }
-        }
+        [UIHint("KendoDateEditor")]
+        public Date OrderDate { get; set; }
+    }
+    ```
 
 To validate a number by using the Kendo UI NumericTextBox:
 
@@ -848,15 +863,17 @@ To validate a number by using the Kendo UI NumericTextBox:
 
 1. Decorate the `number` property in the model by using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.
 
-        public class Order
-        {
-            public int OrderID { get; set; }
+    ```C#
+    public class Order
+    {
+        public int OrderID { get; set; }
 
-            public string ShipCountry { get; set; }
+        public string ShipCountry { get; set; }
 
-            [UIHint("KendoNumberEditor")]
-            public decimal Price { get; set; }
-        }
+        [UIHint("KendoNumberEditor")]
+        public decimal Price { get; set; }
+    }
+    ```
 
 ## How can I distinguish between Add and Edit mode?
 

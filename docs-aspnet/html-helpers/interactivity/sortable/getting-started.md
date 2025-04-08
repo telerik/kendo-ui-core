@@ -48,7 +48,7 @@ Optionally, you can structure the View content by adding the desired HTML elemen
 
 1. Declare the `UserViewModel` Model.
 
-    ```Model_UserViewModel.cs
+    ```C# Model_UserViewModel.cs
         public class UserViewModel {
             public string ID { get; set; }     
             public string FirstName { get; set; }   
@@ -59,7 +59,7 @@ Optionally, you can structure the View content by adding the desired HTML elemen
 
 1. Create a List collection that holds instances of the `UserViewModel`.
 
-    ```Controller_HomeController.cs
+    ```C# Controller_HomeController.cs
         public ActionResult Index()
         {
             var users = new List<UserViewModel>
@@ -74,7 +74,7 @@ Optionally, you can structure the View content by adding the desired HTML elemen
             return View(users);
         }
     ```
-    ```View_Index.cshtml
+    ```View
         @model List<UserViewModel>
 
         <h5>Users</h5>
@@ -88,7 +88,7 @@ Optionally, you can structure the View content by adding the desired HTML elemen
 
 In this step, you will iterate through the List collection and create a Card for each record. The Card's background color will be set based on the Model property `BackgroundColor` Model property.
 
-```View_Index.cshtml
+```View
     @model List<UserViewModel>
 
     <h5>Users</h5>
@@ -200,7 +200,7 @@ The Sortable exposes [events](/api/kendo.mvc.ui.fluent/sortableeventbuilder) tha
 
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onChange(e) {
             var newIndex = e.newIndex;
@@ -217,7 +217,7 @@ You can reference the Sortable instances that you have created and build on top 
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var sortableReference = $("#user-list").data("kendoSortable"); // sortableReference is a reference to the existing Sortable instance of the helper.
@@ -243,7 +243,7 @@ You can reference the Sortable instances that you have created and build on top 
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var sortableReference = $("#user-list").data("kendoSortable");

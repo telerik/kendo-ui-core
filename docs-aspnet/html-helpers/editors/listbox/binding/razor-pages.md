@@ -22,7 +22,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -56,7 +56,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
         .Selectable(ListBoxSelectable.Multiple)
     )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -92,7 +92,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JS
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -102,7 +102,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JS
         <script>
             function forgeryToken() {
                 return {
@@ -115,7 +115,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<SelectListItem> items;
 
         public void OnGet()
@@ -143,7 +143,7 @@ To bind the ListBox to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that holds the data collection that must be loaded in the ListBox.
 
-    ```
+    ```C#
         public class ListBoxPageModel : PageModel
         {
             [BindProperty]
@@ -170,11 +170,11 @@ To bind the ListBox to a property from the `PageModel`, follow the next steps:
 
     ```
         @model ListBoxPageModel
-    ```  
+    ```
 
 1. Bind the ListBox to the collection property and disable the server data operations (`ServerOperations(false)`).
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model ListBoxPageModel
 
@@ -206,7 +206,7 @@ To bind the ListBox to a property from the `PageModel`, follow the next steps:
             .BindTo(new List<SelectListItem>())
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model ListBoxPageModel
 

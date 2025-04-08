@@ -20,7 +20,7 @@ The Telerik UI Circular Gauge for {{ site.framework }} export relies on the [Tel
 
 The circular gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/circulargauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-pdf k-button'>Export as PDF</button>
     
     @(Html.Kendo().CircularGauge()
@@ -74,7 +74,7 @@ The circular gauge allows you to retrieve the PDF representation of the content 
 
 The Circular Gauge allows you to retrieve the Image representation of the content through the [`exportImage` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/circulargauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper     
+```HtmlHelper
     <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().CircularGauge()
@@ -128,7 +128,7 @@ The Circular Gauge allows you to retrieve the Image representation of the conten
 
 The Circular Gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content through the [`exportSVG` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/circulargauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().CircularGauge()

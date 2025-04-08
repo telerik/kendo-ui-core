@@ -58,7 +58,7 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
     </kendo-listbox>
 ```
 {% endif %}
-```IndexController.cs
+```C# IndexController.cs
     public class ListBoxController : Controller
     {
         public ActionResult Index()

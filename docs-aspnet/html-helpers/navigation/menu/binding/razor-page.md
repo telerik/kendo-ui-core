@@ -18,7 +18,7 @@ For the complete project, refer to the [Menu in Razor Pages example](https://git
 
 In order to set up the Menu component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
 
-```tab-HtmlHelper(csthml)   
+```HtmlHelper
      
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -40,7 +40,7 @@ In order to set up the Menu component bindings, you need to configure the `Read`
 	</script>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     <kendo-menu name="Menu" datatextfield="Name">
         <hierarchical-datasource>
             <schema>
@@ -59,7 +59,7 @@ In order to set up the Menu component bindings, you need to configure the `Read`
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 
     public JsonResult OnGetRead()
     {

@@ -207,7 +207,7 @@ You can reference the ColorPicker instances that you have created and build on t
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var colorPickerReference = $("#colorPicker").data("kendoColorPicker"); // colorPickerReference is a reference to the existing ColorPicker instance of the helper.
@@ -216,7 +216,7 @@ You can reference the ColorPicker instances that you have created and build on t
     ```
 1. Toggle the popup of the component by using the [`toggle()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker/methods/toggle) client-side method.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                var colorPickerReference = $("#colorPicker").data("kendoColorPicker"); // colorPickerReference is a reference to the existing ColorPicker instance of the helper.

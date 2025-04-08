@@ -75,5 +75,5 @@ The OTPInput has been tested with [axe-core](https://github.com/dequelabs/axe-co
 A live test example of the OTPInput component could be found here: https://demos.telerik.com/kendo-ui/accessibility/otpinput
 ## See Also
 * [Keyboard Navigation by the OTPInput (Demo)](https://demos.telerik.com/kendo-ui/otpinput/keyboard-navigation)
-* [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
+* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

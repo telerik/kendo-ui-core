@@ -47,7 +47,7 @@ The following example demonstrates how to use the `PromptSuggestionItemTemplateH
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         var promptSuggestionsData = [
         {

@@ -186,7 +186,7 @@ You can reference the Splitter instances that you have created and build on top 
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var splitterReference = $("#splitter").data("kendoSplitter"); // splitterReference is a reference to the existing Splitter instance of the helper.
     </script>
@@ -194,7 +194,7 @@ You can reference the Splitter instances that you have created and build on top 
 
 1. Use the [Splitter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter#methods) to control the behavior of the widget. In this example, you will use the `collapse` method to close a pane of the Splitter.
 
-    ```script
+    ```JS script
     <script>
         var splitterReference = $("#splitter").data("kendoSplitter"); // splitterReference is a reference to the existing Splitter instance of the helper.
         splitterReference.collapse(".k-pane:first");

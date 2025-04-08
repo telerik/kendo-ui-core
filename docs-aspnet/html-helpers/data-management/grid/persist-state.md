@@ -16,7 +16,7 @@ By design, the `getOptions()` method retrieves the current Grid settings along w
 
 The example below shows how to retrieve and set the options of the Grid columns.
 
-```
+```JS
     let grid = $("#grid").data("kendoGrid"); // Get a reference to the Grid.
     let currentOptions = grid.getOptions(); // Get the current Grid options and DataSource state.
     let columnOptionsForSaving = kendo.stringify(currentOptions.columns); // Extract the Grid columns options.

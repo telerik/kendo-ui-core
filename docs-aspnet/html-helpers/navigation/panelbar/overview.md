@@ -65,35 +65,32 @@ The following example demonstrates the basic configuration of the PanelBar.
     )
 ```
 ```TagHelper
-    <kendo-panelbar name="employees" datatextfield="FullName">
-        <hierarchical-datasource>
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Employees" datatype="jsonp" />
-            </transport>
-            <schema type="json">
-                <hierarchical-model id="EmployeeId" has-children="HasEmployees">
-                </hierarchical-model>
-            </schema>
-        </hierarchical-datasource>
-    </kendo-panelbar>
-```
-```TagHelper-items
-    <kendo-panelbar name="project">
+    <kendo-panelbar name="panelbar" expand-mode="single">
         <items>
-            <panelbar-item text="Storage" expanded="true">
+            <panelbar-item text="Projects">
                 <items>
-                    <panelbar-item text="Wall Shelving"></panelbar-item>
-                    <panelbar-item text="Floor Shelving"></panelbar-item>
-                    <panelbar-item text="Kids Storage"></panelbar-item>
+                    <panelbar-item text="New Business Plan"></panelbar-item>
+                    <panelbar-item text="Sales Forecasts">
+                        <items>
+                            <panelbar-item text="Q1 Forecast"></panelbar-item>
+                            <panelbar-item text="Q2 Forecast"></panelbar-item>
+                            <panelbar-item text="Q3 Forecast"></panelbar-item>
+                            <panelbar-item text="Q4 Forecast"></panelbar-item>
+                        </items>
+                    </panelbar-item>
+                    <panelbar-item text="Sales Reports"></panelbar-item>
                 </items>
             </panelbar-item>
-            <panelbar-item text="Lights">
+            <panelbar-item text="Programs">
                 <items>
-                    <panelbar-item text="Ceiling"></panelbar-item>
-                    <panelbar-item text="Table"></panelbar-item>
-                    <panelbar-item text="Floor"></panelbar-item>
+                    <panelbar-item text="Monday"></panelbar-item>
+                    <panelbar-item text="Tuesday"></panelbar-item>
+                    <panelbar-item text="Wednesday"></panelbar-item>
+                    <panelbar-item text="Thursday"></panelbar-item>
+                    <panelbar-item text="Friday"></panelbar-item>
                 </items>
             </panelbar-item>
+            <panelbar-item text="Communication" enabled="false"></panelbar-item>
         </items>
     </kendo-panelbar>
 ```

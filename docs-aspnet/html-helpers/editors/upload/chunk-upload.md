@@ -46,7 +46,7 @@ To enable the chunk upload:
 {% if site.core %}
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
 
-    ```
+    ```C#
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -186,7 +186,7 @@ To enable the chunk upload:
 {% else %}
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
 
-    ```
+    ```C#
     [DataContract]
     public class ChunkMetaData
     {

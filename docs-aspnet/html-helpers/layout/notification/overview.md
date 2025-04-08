@@ -84,7 +84,7 @@ The following example demonstrates the basic configuration of the Notification.
 	</kendo-notification>
 ```
 {% else %}
-```    
+```
     @(Html.Kendo().Notification()
         .Name("notification")
         .Stacking(NotificationStackingSettings.Down)

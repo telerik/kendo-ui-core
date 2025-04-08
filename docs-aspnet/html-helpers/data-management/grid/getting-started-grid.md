@@ -338,7 +338,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the `id` attribute of the component instance to get a client-side reference.
 
-    ```script
+    ```JS script
     <script>
         var gridReference = $("#grid").data("kendoGrid"); // gridReference is a reference to the existing instance of the helper.
     </script>
@@ -346,7 +346,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control the behavior of the widget. In this example, you will hide one of the Grid columns by using `hideColumn` method.
 
-    ```script
+    ```JS script
     <script>
         var gridReference = $("#grid").data("kendoGrid"); // gridReference is a reference to the existing instance of the helper.
         gridReference.hideColumn("ProductID"); // Hide a column by using its field name.

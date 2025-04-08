@@ -16,7 +16,7 @@ This article describes how to configure the ToolBar component in a Razor Pages s
 
 For the complete project, refer to the [ToolBar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Toolbar/ToolbarIndex.cshtml).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -73,7 +73,7 @@ For the complete project, refer to the [ToolBar in Razor Pages example](https://
 
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     @addTagHelper *, Kendo.Mvc
     <kendo-toolbar name="ToolBar">
         <toolbar-items>
@@ -137,7 +137,7 @@ For the complete project, refer to the [ToolBar in Razor Pages example](https://
     </script>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 
     public void OnGet()
     {

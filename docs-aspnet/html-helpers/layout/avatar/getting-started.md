@@ -135,7 +135,7 @@ You can reference the Avatar instances that you have created and build on top of
     </kendo-avatar>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         $(document).ready(function() {
             var avatar = $("#avatar").data("kendoAvatar"); // The `avatar` variable holds a reference to the existing Avatar instance of the helper.

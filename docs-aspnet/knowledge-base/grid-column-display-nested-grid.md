@@ -117,7 +117,7 @@ Here are the steps for implementation:
 1. Handle the `click` event of the **Expand** button and toggle the Grid's container.
 Get a reference to the Grid and call the [`read()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method of its DataSource by passing the **Id** field to the server to filter the data based on the data item of the current row (the main Grid's row).
 
-  ```Scripts
+  ```JS scripts
       function onDetailsClick(e) {
           var id = $(e.target).attr("id").split("_")[1];
           var btnLabel = $(e.target).find(".k-button-text").html(); // Get the current label of the Button.
@@ -129,7 +129,7 @@ Get a reference to the Grid and call the [`read()`](https://docs.telerik.com/ken
           var grid = $(`#detailsGrid_${id}`).data("kendoGrid").dataSource.read({ parentId: id });
       }
   ```
-  ```GridController.cs
+  ```C# GridController.cs
       public ActionResult DetailsRead([DataSourceRequest] DataSourceRequest request, int parentId)
       {
           var filteredData = gridData.Where(x => x.Id == parentId); // Filter the nested Grid based on the "Id" of the parent record.

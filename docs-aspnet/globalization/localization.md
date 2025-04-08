@@ -46,17 +46,21 @@ By default, all Telerik UI for ASP.NET Core helpers display their messages in US
 
 The following example demonstrates how to register the localization script in the `_Layout.cshtml` file.
 
+```HTML
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
     <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
     <script src="~/lib/kendo-ui/js/cultures/kendo.messages.es-ES.min.js"></script>
+```
 
 The following example demonstrates how to register the localization script in the`_Layout.cshtml` file by using CDN.    
 
+```HTML
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.es-ES.min.js"></script>
+```
 
 To change the current culture and language dynamically, refer to the [demo on globalization by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/globalization).
 
@@ -69,15 +73,17 @@ The localization script replaces the default messages in the helper prototype wi
 
 The following example demonstrates how to create a new localization file. The `kendo.messages.en-US.js` contains all messages and may be used as a reference when you create the new localization file&mdash;copy the file, rename it, and translate the messages.
 
+```JavaScript
     /* <Helper-name> messages */
 
     if (kendo.ui.<Helper-name>) {
-    kendo.ui.<Helper-name>.prototype.options.messages =
-    $.extend(true, kendo.ui.<Helper-name>.prototype.options.messages,{
-      "<message-name>": "<translation",
-      //...
-    });
+        kendo.ui.<Helper-name>.prototype.options.messages =
+        $.extend(true, kendo.ui.<Helper-name>.prototype.options.messages,{
+        "<message-name>": "<translation",
+        //...
+        });
     }
+```
 
 <!--*-->
 {% else %}

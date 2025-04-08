@@ -63,7 +63,7 @@ The popup element of the DropDownTree has to implement the WAI-ARIA specificatio
 
 The tree that is placed in the `popup` element of the component must implement the specification for a TreeView component.
 
-[TreeView accessibility specification]({{treeview_a11y_link}})
+[TreeView accessibility specification]({% slug jquery_treeview_accessibility %})
 
 ## Resources
 

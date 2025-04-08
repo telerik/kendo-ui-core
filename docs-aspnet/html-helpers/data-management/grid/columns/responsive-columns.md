@@ -149,7 +149,7 @@ The content within the column `Template()` method will be displayed when the con
   </kendo-grid>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         var resColTemplate;
 
@@ -159,7 +159,7 @@ The content within the column `Template()` method will be displayed when the con
         });
     </script>
 ```
-```Template
+```JS Template
     <script id="responsive-column-template" type="text/x-kendo-template">
         <strong>Contact Name</strong>
         <p class="col-template-val">#=data.ContactName#</p>

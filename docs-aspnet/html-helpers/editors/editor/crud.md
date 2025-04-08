@@ -17,7 +17,7 @@ For a runnable project, refer to [this GitHub repository](https://github.com/tel
 
 The following example demonstrates how to define the database model.
 
-```
+```C#
 public class EditorDataContext : DbContext
 {
     public EditorDataContext(DbContextOptions<EditorDataContext> options)

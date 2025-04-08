@@ -26,7 +26,7 @@ As Telerik REPL provides the [predefined models]({% slug using_predefined_models
 
 If you need to test a local binding scenario with your own data, you can use the available models to generate data by using the approach demonstrated in the examples below:
 
-```Grid
+```Razor Grid
     @using Kendo.Mvc.Examples.Models
     @{
         var data = Enumerable.Range(1,30).Select(x=>new ProductViewModel()
@@ -59,7 +59,7 @@ If you need to test a local binding scenario with your own data, you can use the
         )
     )
 ```
-```ListBox
+```Razor ListBox
     @{
         var attendees = new List<SelectListItem>
         {

@@ -49,7 +49,7 @@ The default size value is `Medium`.
 ```html
 <span class="k-timepicker k-input k-input-md">
 </span>
-``` 
+```
 
 ### Rounded
 

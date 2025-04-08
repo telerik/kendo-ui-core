@@ -22,7 +22,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         <div>
@@ -38,7 +38,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             )
         </div>
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @addTagHelper *, Kendo.Mvc
@@ -75,7 +75,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
     Additional parameters can also be supplied. For example, when the [server filtering]({% slug htmlhelpers_combobox_filtering_aspnetcore%}#server-filtering) of the ComboBox is enabled, send the filter value along with the antiforgery token to the server using the JavaScript handler specified in the `Data()` option.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         <div>
@@ -95,7 +95,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             )
         </div>
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @addTagHelper *, Kendo.Mvc
@@ -132,7 +132,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             public JsonResult OnGetRead()
@@ -154,7 +154,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 
     When the server filtering is enabled, intercept the filter value sent through the `dataFunction` handler in the Read method and filter the data on the server before returning it to the ComboBox.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             public JsonResult OnGetRead(string filterValue)
@@ -178,7 +178,7 @@ To bind the ComboBox to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that must bind to the ComboBox.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -192,14 +192,14 @@ To bind the ComboBox to a property from the `PageModel`, follow the next steps:
     ```
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the ComboBox to the property using the `ComboBoxFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -216,7 +216,7 @@ To bind the ComboBox to a property from the `PageModel`, follow the next steps:
             })
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 

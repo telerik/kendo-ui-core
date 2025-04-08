@@ -71,7 +71,7 @@ How can I upload the edited image from the ImageEditor directly to the server?
 
 1. Use the [`toDataURL()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) method to convert the canvas to Base64 and trigger an AJAX request to the server to send the edited image.
 
-  ```Scripts
+  ```JS scripts
     <script>
       function onClick() {
         var imageEditor = $("#imageEditor").getKendoImageEditor();
@@ -89,7 +89,7 @@ How can I upload the edited image from the ImageEditor directly to the server?
       }
     </script>
   ```
-  ```HomeController.cs
+  ```C# HomeController.cs
     [HttpPost]
     public JsonResult UploadImage(string base64)
     {

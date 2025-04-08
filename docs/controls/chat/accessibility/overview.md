@@ -41,7 +41,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 Chat ToolBar follows the specification for the the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 ## Resources
 

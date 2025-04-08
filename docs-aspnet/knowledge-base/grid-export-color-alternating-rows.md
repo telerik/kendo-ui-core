@@ -38,7 +38,7 @@ Use the [`background`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/wo
 1. Specify the desired background color.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>

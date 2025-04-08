@@ -247,7 +247,7 @@ You can reference the NumericTextBox instances that you have created and build o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var numericTextBoxRef = $('#currency').data('kendoNumericTextBox'); // numericTextBoxRef is a reference to the existing currency instance of the helper.
     </script>
@@ -255,7 +255,7 @@ You can reference the NumericTextBox instances that you have created and build o
 
 1. Use the [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
 
-    ```script
+    ```JS script
     <script>
         var numericTextBoxRef = $('#currency').data('kendoNumericTextBox'); // numericTextBoxRef is a reference to the existing currency instance of the helper.
         numericTextBoxRef.readonly(true); // Set the readonly method to true and disable user input.

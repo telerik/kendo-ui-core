@@ -26,7 +26,7 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
   > This approach is applicable only if frozen columns and virtual scrolling are not used.
 
-    ```
+    ```CSS
       #GridID .k-grid-content
       {
           height: 270px;
@@ -37,7 +37,7 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
   > This approach is applicable if virtual scrolling is enabled and the Kendo UI version is older than 2014.3.1119.
 
-    ```
+    ```JS
     $("#GridID").data("kendoGrid").dataSource.fetch();
     ```
 

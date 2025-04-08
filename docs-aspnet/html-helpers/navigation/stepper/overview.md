@@ -71,32 +71,6 @@ The following example demonstrates the basic configuration for the Stepper.
         </steps>
     </kendo-stepper>
 ```
-
-## Events
-
-You can subscribe to all Stepper events.
-
-```TagHelper
-    <kendo-stepper name="stepper" on-activate="onActivate" on-select="onSelect">
-        <steps>
-            <step label="First" icon="home"></step>
-            <step label="Second" selected="true"></step>
-            <step label="Third"></step>
-            <step label="Fourth" enabled="false"></step>
-            <step label="Fifth"></step>
-        </steps>
-    </kendo-stepper>
-
-    <script>
-        function onActivate(e) {
-            console.log("Activated: " + e.step.options.label);
-        }
-
-        function onSelect(e) {
-            console.log("Selected: " + e.step.options.label);
-        }
-    </script>
-```
 {% endif %}
 
 ## Functionality and Features

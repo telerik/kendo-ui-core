@@ -40,7 +40,7 @@ Since PDF.js 4 (versions 4.x.x) uses <a href="https://developer.mozilla.org/en-U
 The following example demonstrates how to configure the PDFViewer to use PDF.js processing with PDF.js 4.
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
@@ -51,7 +51,7 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
     });
 ```
 {% endif %}
-```_Layout
+```Razor _Layout
     <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.mjs" type="module"></script>

@@ -90,7 +90,7 @@ I am trying to bind a DataTable to a {{ site.product }} Grid. The main reason fo
 
 - The `System.Data.DataColumn` has a [`Caption`](https://docs.microsoft.com/en-us/dotnet/api/system.data.datacolumn.caption?view=netcore-3.1#System_Data_DataColumn_Caption) property that can be used to dynamically change the tile of the columns:
 
-```
+```Razor
     .Columns(columns =>
     {
         foreach (System.Data.DataColumn column in Model.Columns)
@@ -106,7 +106,7 @@ Since the dynamic editing is not part of the official built-in options which uti
 
 The first thing is to add the model Id - the primary key of the table and define the editors based on the column types:
 
-```
+```Razor
     .Model(model =>
     {
         var id = Model.PrimaryKey[0].ColumnName;
@@ -124,13 +124,13 @@ The first thing is to add the model Id - the primary key of the table and define
 
 1. You can use `IFormCollection` to intercept the updated item.
 
-    ```Inline_Popup
+    ```C# Inline_Popup
         public ActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
     ```
-    ```InCell
+    ```C# InCell
         public JsonResult OnPostUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
     ```
-    ```Controller_Inline_Popup
+    ```C# Controller_Inline_Popup
         public static DataTable db = new DataTable();
         public ActionResult Index()
         {
@@ -292,7 +292,7 @@ To define editors based on a condition, you can use a switch case as shown below
 
 ## Dynamic Grid In Razor Page
 
-```Index.cshtml
+```Razor Index.cshtml
     @Html.AntiForgeryToken()
 
     <script>
@@ -323,7 +323,7 @@ To define editors based on a condition, you can use a switch case as shown below
         )
     )
 ```
-```Index.cshtml.cs
+```C# Index.cshtml.cs
 
     public DataTable DataTable { get; set; }
 

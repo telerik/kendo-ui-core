@@ -74,7 +74,7 @@ How can I pass a parameter dynamically to a specified action button of a Dialog 
         </kendo-dialog>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onClick() {
                 var customParam = "ABC123";

@@ -35,7 +35,7 @@ The DropDownButton provides the `Icon`, `SpriteCssClass`, and `ImageUrl` propert
         )
     ```
     {% if site.core %}
-    ```TagHelper.cshtml
+    ```TagHelper
         <kendo-dropdownbutton name="DropDownButton" text="Plus" sprite-css-class="myPlusIcon">
         </kendo-dropdownbutton>
     ```

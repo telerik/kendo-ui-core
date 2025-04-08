@@ -23,7 +23,7 @@ The FloatingActionButton is compliant with the [Web Content Accessibility Guidel
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The FloatingActionButton features two distinct modes of operation: [button-only](#button-only-mode) and [button-with-menu](#button-with-menu-mode).
+The FloatingActionButton features two distinct modes of operation: button-only and button-with-menu.
 
 ### Button-Only Mode
 

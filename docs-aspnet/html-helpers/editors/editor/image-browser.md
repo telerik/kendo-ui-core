@@ -42,7 +42,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
 ```
 {% endif %}
 {% if site.core %}
-```ImageBrowserController
+```C# ImageBrowserController
     public class ImageBrowserController : EditorImageBrowserController
     {
         private const string contentFolderRoot = "shared/";
@@ -102,7 +102,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
         }
     }
 ```
-```EditorImageBrowserController
+```C# EditorImageBrowserController
     public abstract class EditorImageBrowserController : BaseFileBrowserController, IImageBrowserController
     {
         protected EditorImageBrowserController(IHostingEnvironment hostingEnvironment)
@@ -145,7 +145,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
         }
     }
 ```
-```BaseFileBrowserController
+```C# BaseFileBrowserController
     public abstract class BaseFileBrowserController : Controller, IFileBrowserController
     {
         private readonly IDirectoryBrowser directoryBrowser;
@@ -430,7 +430,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
     }
 ```
 {% else %}
-```ImageBrowserController
+```C# ImageBrowserController
     public class ImageBrowserController : EditorImageBrowserController
     {
         private const string contentFolderRoot = "~/Content/";
@@ -486,7 +486,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
         }
     }
 ```
-```EditorImageBrowserController
+```C# EditorImageBrowserController
     public abstract class EditorImageBrowserController : BaseFileBrowserController, IImageBrowserController
     {
         private readonly IThumbnailCreator thumbnailCreator;
@@ -577,7 +577,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
         }
     }
 ```
-```BaseFileBrowserController
+```C# BaseFileBrowserController
     public abstract class BaseFileBrowserController : Controller, IFileBrowserController
     {
         private readonly IDirectoryBrowser directoryBrowser;
@@ -834,13 +834,13 @@ To retrieve and upload the files and directories, the image browser needs a serv
     }
 ```
 {% endif %}
-```IImageBrowserController
+```C# IImageBrowserController
     public interface IImageBrowserController : IFileBrowserController
     {
         IActionResult Thumbnail(string path);
     }
 ```
-```IFileBrowserController
+```C# IFileBrowserController
     public interface IFileBrowserController
     {
         JsonResult Read(string path);
@@ -857,11 +857,13 @@ The following list provides information about the default requests and responses
 
 - `Create()`&mdash;Makes a `POST` request for the creation of a directory with the following parameters and does not expect a response.
 
+    ```JS
         { "name": "New folder name", "type": "d", "path": "foo/" }
+    ```
 
 - `Read()`&mdash;Makes a `POST` request that contains the `path` parameter which specifies the path that is browsed and expects a file listing in the following format.
 
-    ```
+    ```JS
     [
         { "name": "foo.png", "type": "f", "size": 73289 },
         { "name": "bar.jpg", "type": "f", "size": 15289 },
@@ -882,7 +884,7 @@ The following list provides information about the default requests and responses
 
 - `Upload()`&mdash;Makes a `POST` request. The request includes `FormData` which contains the upload path and the file name and type. Its payload consists of the uploaded file. The expected response is a `file` object in the following format:
 
-    ```
+    ```JS
     { "name": "foo.png", "type": "f", "size": 12345 }
     ```
 {% if site.mvc %}
@@ -897,7 +899,7 @@ You can update all of these requests and responses through the [`ImageBrowser()`
 
 In order to set up the ImageBrowser of the Telerik UI Editor for {{ site.framework }} component in Razor page scenario, you need to configure the `Read` , `Create`, `Update` and `Destroy` methods of the ImageBrowser `Transport` configuration. The URL in these methods should refer the name of the handler in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @(Html.Kendo().Editor()
             .Name("editor")
             .ImageBrowser(imageBrowser => imageBrowser
@@ -921,7 +923,7 @@ In order to set up the ImageBrowser of the Telerik UI Editor for {{ site.framewo
         )
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     <kendo-editor name="editor">
         <image-browser>
             <image-browser-transport upload-url="/Editor/ImageBrowser?handler=Upload" image-url="/Images/{0}">
@@ -942,7 +944,7 @@ In order to set up the ImageBrowser of the Telerik UI Editor for {{ site.framewo
     </kendo-editor>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     public JsonResult OnPostRead(string path)
     {
         var fullPath = NormalizePath(path);

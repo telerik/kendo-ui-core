@@ -31,7 +31,7 @@ How can I configure the messages of the date input in the {{ site.product }} Dat
 To achieve the desired scenario, reference the `dateInput` of the DateTimePicker and use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/setoptions) method of the DateTimePicker to change its messages. 
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
     @(Html.Kendo().DatePicker()
             .Name("datepicker")
@@ -40,7 +40,7 @@ To achieve the desired scenario, reference the `dateInput` of the DateTimePicker
     )
 
 ```
-```Script.js
+```JS script.js
 
     <script>
         $(document).ready(function () {

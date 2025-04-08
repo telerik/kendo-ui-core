@@ -51,7 +51,7 @@ Reverting to the previous appearance is possible by:
 
 - setting the Search Panel as the last element in the toolbar
 
-```
+```Razor
 .ToolBar(toolbar =>
     {
         toolbar.Excel();
@@ -62,7 +62,7 @@ Reverting to the previous appearance is possible by:
 
 - utilizing the following styles:
 
-```
+```CSS
     <style>
      .k-grid .k-grid-search {
             margin-left: auto;

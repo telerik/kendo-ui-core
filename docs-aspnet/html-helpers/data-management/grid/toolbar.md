@@ -109,7 +109,7 @@ The following example shows how to create a template for the Toolbar using an [e
     <toolbar client-template-id="GridToolbarTemplate">
     </toolbar>
 ```
-```GridToolbarTemplate
+```JS GridToolbarTemplate
     <script id="GridToolbarTemplate" type="text/x-kendo-template">
         <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Custom command</button>
     </script>

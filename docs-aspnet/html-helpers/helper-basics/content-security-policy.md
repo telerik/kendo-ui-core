@@ -13,7 +13,7 @@ position: 10
 
 The following code shows how to turn on the strict CSP mode:
 
- ```
+ ```HTML
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://kendo.cdn.telerik.com https://code.jquery.com/; style-src 'self' https://kendo.cdn.telerik.com;" />
  ```
 
@@ -174,7 +174,7 @@ The example below demonstrates how to use the [Template component]({% slug htmlh
     @Html.Kendo().DeferredScriptFile()
 ```
 {% endif %}
-```GridController.cs
+```C# GridController.cs
     public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
     {
         return Json(productsData.ToDataSourceResult(request));
@@ -220,7 +220,7 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
 
 1. Render the initialization logic in a script using `nonce`.
 
-    ```
+    ```JS
         <script type="text/javascript" nonce="kendoInlineScript">
             @Html.Kendo().DeferredScripts(false)
         </script>
@@ -228,13 +228,13 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
 
 1. Extend the `meta` CSP tag to include the `unsafe-eval` keyword and the `nonce` signature for enabling the CSP mode:
 
-    ```
+    ```HTML
         <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://kendo.cdn.telerik.com;">
     ```
 
 1. Add the links used in the _Layout such as for example - `kendostatic`, `jquery`, and `unpkg(jszip)`:
 
-    ```
+    ```HTML
         <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' 'nonce-kendoInlineScript' https://cdn.kendostatic.com https://code.jquery.com https://unpkg.com/;" />
     ```
 

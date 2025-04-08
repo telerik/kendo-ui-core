@@ -79,7 +79,7 @@ How can I show a Tooltip when hovering over the {{ site.framework }} Scheduler e
         </kendo-tooltip>
     ```
     {% endif %}
-    ```Template
+    ```JS Template
         <script id="template" type="text/x-kendo-template">
             #var element = target.is(".k-task") ? target : target.parent();# // Select the respective target element.
             #var uid = element.attr("data-uid");# // Access the "uid" of the hovered event.

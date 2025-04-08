@@ -185,7 +185,7 @@ You can reference the DropDownButton instances that you have created and build o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var dropDownButtonReference = $("#dropDownButton").data("kendoDropDownButton"); // dropDownButtonReference is a reference to the existing instance of the helper.
     </script>
@@ -193,7 +193,7 @@ You can reference the DropDownButton instances that you have created and build o
 
 1. Use the [DropDownButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton#methods) to control the behavior of the widget. In this example, you will use the `enable` method to control the state of the DropDownButton items.
 
-    ```script
+    ```JS script
     <script>
         var dropDownButtonReference = $("#dropDownButton").data("kendoDropDownButton"); // dropDownButtonReference is a reference to the existing instance of the helper.
         dropDownButtonReference.enable(false, "#settings"); // Disable the settings item.

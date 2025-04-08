@@ -109,7 +109,7 @@ To achieve the desired outcome:
     </kendo-grid>
 ```
 {% else %}
-```Index.cshtml
+```Razor Index.cshtml
     @{
         var data = new List<GridModel>()
         {
@@ -149,14 +149,14 @@ To achieve the desired outcome:
     )
 ```
 {% endif %}
-```Model.cs
+```C# Model.cs
     public class GridModel
     {
         public string Name { get; set; }
         public string Link { get; set; }
     }
 ```
-```Script.js
+```JS script.js
     <script>
         function onExcelExport(e) {
             let columnIndex = 1, // The Link column is in the first index.

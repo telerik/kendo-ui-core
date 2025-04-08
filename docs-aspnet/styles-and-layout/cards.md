@@ -38,7 +38,7 @@ The header of the Card is an optional element. To render a Card header, use the 
 * Adding a title requires you to set the `.k-card-title` class to an `h` element.
 * Adding a subtitle requires you to set the `.k-card-subtitle` class to an `h` element.
 
-```
+```html
  <div class="k-card" style="width: 300px;">
     <div class="k-card-header">
         <h5 class="k-card-title">Card Title</h5>
@@ -52,7 +52,7 @@ The header of the Card is an optional element. To render a Card header, use the 
 
 You can also use titles and subtitles outside the header.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
@@ -70,7 +70,7 @@ You can also use titles and subtitles outside the header.
 
 The main content of a card is the body which can be defined through the `.k-card-body` class.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <p>
@@ -84,7 +84,7 @@ The main content of a card is the body which can be defined through the `.k-card
 
 You can add a list of actions to a Card by using the `.k-actions k-card-actions` class.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-header">
         Card Header
@@ -101,7 +101,7 @@ You can add a list of actions to a Card by using the `.k-actions k-card-actions`
 
 To achieve a consistent styling, each action can be wrapped in a `.k-card-action` container.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
@@ -121,7 +121,7 @@ To achieve a consistent styling, each action can be wrapped in a `.k-card-action
 
 The actions can be stretched to take the entire container by adding the `.k-actions-stretched`.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
@@ -141,7 +141,7 @@ The actions can be stretched to take the entire container by adding the `.k-acti
 
 The actions can also be forced to display vertically through the `.k-actions-vertical` class.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
@@ -159,7 +159,7 @@ The actions can also be forced to display vertically through the `.k-actions-ver
 
 Cards support images through the `.k-card-media` class.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-card-header">
             Card Header
@@ -175,7 +175,7 @@ Cards support images through the `.k-card-media` class.
 
 To include Card separators, use the `.k-hr` class.
 
-```
+```html
 <div class="k-card" style="width: 300px;">
     <div class="k-columnset k-flex-auto">
         <div class="k-card-body">
@@ -201,7 +201,7 @@ Cards expose additional classes that are used for laying out series of cards.
 
 To render cards that are detached from one another in a column, use the `.k-card-list` class.
 
-```
+```html
     <div class="k-card-list">
         <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
@@ -243,7 +243,7 @@ To render cards that are detached from one another in a column, use the `.k-card
 
 To render Cards that are attached to one another on a single row, use the `.k-card-group` class.
 
-```
+```html
     <div class="k-card-group">
         <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
@@ -285,7 +285,7 @@ To render Cards that are attached to one another on a single row, use the `.k-ca
 
 To render Cards that are detached from one another on a single row, use the `.k-card-deck` class.
 
-```
+```html
     <div class="k-card-deck">
         <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
@@ -327,7 +327,7 @@ To render Cards that are detached from one another on a single row, use the `.k-
 
 The Card content can be arranged vertically or horizontally through the `.k-card-vertical` and `.k-card-horizontal` classes:
 
-```
+```html
 <div class="k-card k-card-vertical k-text-center">
     <div class="k-card-header">
         <h5 class="k-card-title">Sofia</h5>
@@ -349,7 +349,7 @@ The main advantage of the Card structure is the full customization of the desire
 
 The sample below contains two different container layout options.
 
-```
+```html
     <style>
         .cards-container {
             display: flex;
@@ -408,7 +408,7 @@ The sample below contains two different container layout options.
 
 Cards provide predefined state classes that you can use to change the Card appearance.
 
-```
+```html
 <div class="k-card k-state-primary" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title Primary</h5>
@@ -475,7 +475,7 @@ Cards provide predefined state classes that you can use to change the Card appea
 Thanks to the Telerik Sortable integration, the Card is capable to provide the user with drag-n-drop functionality.
 
 To achieve this behavior, you can use the following structure:
-```
+```html
     <div id="list">
         <div class="cards-container">
             <div class="k-card">
@@ -491,19 +491,19 @@ To achieve this behavior, you can use the following structure:
 
 And then implement the kendoSortable logic:
 ```JavaScript
-    <script>
-            $(document).ready( function () {
-                $("#list").kendoSortable({
-                    filter: ".k-card",
-                    cursor: "move",
-                    placeholder: function (element) {
-                        return element.clone().css("opacity",  0.1);
-                    },
-                    hint: function (element) {
-                        return element.clone().css("width", element.width()).removeClass("k-selected");
-                    }
-                });
-            });
-     </script>
+<script>
+    $(document).ready( function () {
+        $("#list").kendoSortable({
+            filter: ".k-card",
+            cursor: "move",
+            placeholder: function (element) {
+                return element.clone().css("opacity",  0.1);
+            },
+            hint: function (element) {
+                return element.clone().css("width", element.width()).removeClass("k-selected");
+            }
+        });
+    });
+</script>
 ```
 

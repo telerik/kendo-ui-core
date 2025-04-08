@@ -103,7 +103,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
         }
     }
 ```
-```EditorTemplate
+```JS EditorTemplate
     <div class="k-edit-form-container">
         @{ foreach (System.Data.DataColumn dcolumn in ViewData["modelData"] as IList<System.Data.DataColumn>) //Loop through the DataColumns and create the editors based on the column DataType.
             {

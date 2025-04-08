@@ -33,14 +33,14 @@ To achieve the desired scenario:
 1. Add a custom button in the ToolBar of the ImageEditor that executes a custom command.
 1. When the command is triggered, execute custom logic to rotate the image.
 
-```CustomCommand
+```Razor CustomCommand
         .Toolbar(toolbar => toolbar.Items(i =>
         {
             i.Add().Command("RotateImageRightImageEditorCommand").Type("button").Text("Rotate Image");
 
         }))         
 ```
-```script.js
+```JS script.js
     $(document).ready(function () {
         var imageEditor = $("#imageEditor").getKendoImageEditor();
         imageEditor.one("imageRendered", function () {

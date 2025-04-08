@@ -22,7 +22,7 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @IndexModel
 
@@ -53,7 +53,7 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
             .DataSource("dataSource1")
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @IndexModel
 
@@ -92,7 +92,7 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -102,7 +102,7 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -115,7 +115,7 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<CustomerViewModel> Customers;
         public static IList<string> Countries = new List<string>() {"UK", "Germany", "Italy", "Venezuela", "China", "Bulgaria", "USA" };
         public static IList<string> Positions = new List<string>() { "Sales Agent", "Sales Representative",  "Owner",  "Order Administrator", "Marketing Manager", "Accounting Manager" };
@@ -144,7 +144,7 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
             return new JsonResult(Customers.ToDataSourceResult(request));
         }
     ```
-    ```tab-Model
+    ```Model
         public class CustomerViewModel
         {
             public int CustomerID { get; set; }

@@ -18,8 +18,10 @@ By default, the Kendo UI Grid for ASP.NET MVC makes POST requests when configure
 
 The following example demonstrates the correct order of JavaScript files.
 
-    <script src="/Scripts/kendo.all.min.js"></script>
-    <script src="/Scripts/kendo.aspnetmvc.min.js"></script>
+```HTML
+<script src="/Scripts/kendo.all.min.js"></script>
+<script src="/Scripts/kendo.aspnetmvc.min.js"></script>
+```
 
 ## Ajax-Bound Grid Does Not Populate
 
@@ -40,11 +42,11 @@ The causes of this issue are various.
 ## Client-Side Events Are Not Raised in Server-Bound Mode
 
 {% if site.core %}
-    Client-side events, which are related to data-binding (sorting, filtering, paging, grouping, etc.) and CRUD data operations, will not be raised when the Grid is configured for server binding.
+Client-side events, which are related to data-binding (sorting, filtering, paging, grouping, etc.) and CRUD data operations, will not be raised when the Grid is configured for server binding.
     
-    For an Ajax() bound Grid, make sure that the `.ServerOperation(false)` property is disabled.
+For an Ajax() bound Grid, make sure that the `.ServerOperation(false)` property is disabled.
 {% else %}
-    When configured for server binding, the Kendo UI Grid for ASP.NET MVC does not fire all client-side events.
+When configured for server binding, the Kendo UI Grid for ASP.NET MVC does not fire all client-side events.
 
 **Solution** For more information on how to resolve this issue, refer to the [article on server binding of the Grid]({% slug serverbinding_grid_aspnetmvc %}#supported-client-side-events).
 
@@ -52,7 +54,7 @@ For an Ajax() bound Grid, make sure that the `.ServerOperation(false)` property 
 {% endif %}
 
 {% if site.mvc %}
-   ## Grid Fails to Update Dates and Numbers When Current Culture Is Not en-US
+## Grid Fails to Update Dates and Numbers When Current Culture Is Not en-US
 
 **Solution** Make sure the JavaScript file for that culture is included. For additional information on this issue, refer to [this section](#include-javascript-for-the-current-culture-razor).
 {% endif %}

@@ -26,7 +26,7 @@ How can I create fixed headers on scroll in the Grid for {{ site.product_short }
 
 To create fixed headers on scroll, apply the following CSS rule:
 
-```style.css
+```C# style.css
 <style>
     #second > table > thead,
     #first > table > thead {
@@ -35,7 +35,7 @@ To create fixed headers on scroll, apply the following CSS rule:
     }
 </style>
 ```
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<GridFixedHeaders.Models.OrderViewModel>()
         .Name("first")
         .Columns(columns => {

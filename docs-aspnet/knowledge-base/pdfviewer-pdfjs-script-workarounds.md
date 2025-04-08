@@ -76,7 +76,7 @@ The recommended solution is to include the required Kendo UI scripts as modules 
 Also, it is important to ensure that `type="module"` is added to all script tags that contain custom logic related to the Telerik UI components.
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
@@ -87,7 +87,7 @@ Also, it is important to ensure that `type="module"` is added to all script tags
     });
 ```
 {% endif %}
-```_Layout
+```Razor _Layout
     <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.mjs" type="module"></script>
@@ -179,7 +179,7 @@ Another workaround is to include the Kendo UI scripts twice—with and without `
 
 Instead of loading the whole "kendo.all.min.js" script file twice, you can include only the specific PDFViewer scripts. Also, you can load the scripts and the PDFViewer declaration through a Partial View:
 
-```_Layout
+```Razor _Layout
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2024.4.1112/js/kendo.all.min.js"></script>

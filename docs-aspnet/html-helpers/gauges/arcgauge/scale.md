@@ -64,13 +64,13 @@ The ArcGauge has a scale that renders the values, pointers and labels. You can c
 
 The `Reverse()` option reverses the scale direction - the values increase counterclockwise.
 
-````HtmlHelper
+```HtmlHelper
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)
         .Scale(x => x.Reverse(true))
     )
-````
+```
 {% if site.core %}
 ```TagHelper
     <kendo-arcgauge name="gauge" value="65">

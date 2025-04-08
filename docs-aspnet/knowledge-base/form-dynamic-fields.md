@@ -39,7 +39,7 @@ This example demonstrates how to add/remove fields dynamically in the "Phones" F
 1. Handle the "click" event of the remove button to remove the specified "Phone" input.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @model ProjectName.Models.PersonViewModel
 
     @(Html.Kendo().Form<PersonViewModel>()

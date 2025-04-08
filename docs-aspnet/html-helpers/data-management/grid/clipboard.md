@@ -184,7 +184,7 @@ The following example demonstrates how to subscribe to the `Paste` event.
     </kendo-grid>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         function onPaste(e){
             // Handle the Paste event.

@@ -27,7 +27,7 @@ To enable it, use the [`Navigatable(true)`](/api/kendo.mvc.ui.fluent/mediaplayer
     <kendo-mediaplayer name="mediaPlayer" navigatable="true">
         <!-- Other configuration. -->
     </kendo-mediaplayer>
-``` 
+```
 {% endif %}
 
 For a complete example, refer to the [demo on using the keyboard navigation of the MediaPlayer](https://demos.telerik.com/{{ site.platform }}/mediaplayer/keyboard-navigation).

@@ -20,7 +20,7 @@ For the complete project, refer to the [PanelBar in Razor Pages example](https:/
 
 In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel.
 
-```tab-HtmlHelper(cshtml)   
+```HtmlHelper
      
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -36,7 +36,7 @@ In order to set up the PanelBar component bindings, you need to configure the `R
 	)	
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -50,7 +50,7 @@ In order to set up the PanelBar component bindings, you need to configure the `R
     </kendo-panelbar>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 
     public JsonResult OnGetRead(int? id)
     {       

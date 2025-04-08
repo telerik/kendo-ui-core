@@ -30,15 +30,17 @@ You might need to manually destroy helpers in the following possible cases:
 
 The following example demonstrates how to destroy and remove a Grid helper.
 
-	<script>
-		$(document).ready(function () {
-			$("#grid").data("kendoGrid").destroy(); // Get a reference to an existing Grid instance and destroy the Grid.
+```JS
+<script>
+	$(document).ready(function () {
+		$("#grid").data("kendoGrid").destroy(); // Get a reference to an existing Grid instance and destroy the Grid.
 
-			$("#grid").empty(); // Empty the Grid content (inner HTML)
-			// or
-			$("#grid").remove(); // remove all Grid HTML.
-		});
-	</script>
+		$("#grid").empty(); // Empty the Grid content (inner HTML)
+		// or
+		$("#grid").remove(); // remove all Grid HTML.
+	});
+</script>
+```
 
 ## Destroying Helpers Automatically
 

@@ -31,12 +31,12 @@ Then, in the popup window, you can select or drag in a file from the file system
 1. To properly configure the Spreadsheet to display an image on one its sheets, add a definition for the image to the Spreadsheet [`images`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/images) field. In the `images` object each image should be specified with unique key (property name) holding as value the image URL. The image URLs can be either [data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), in which case the images are fully contained in the definition, or can be external URLs.
 1. Reference that image and place it accordingly using the [`drawings`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
 
-  The drawing definition has to contain:
+The drawing definition has to contain:
 
-      * A pointer to the cell that will hold the top-left corner of the image: `TopLeftCell`.
-      * X and Y offset of the top-left corner: `OffsetX` and  `OffsetY`.
-      * Dimensions of the rendered image: `Width` and `Height`.
-      * A pointer to the image key that is used in the `Images` configuration of the Spreadsheet: `Image`.
+* A pointer to the cell that will hold the top-left corner of the image: `TopLeftCell`.
+* X and Y offset of the top-left corner: `OffsetX` and  `OffsetY`.
+* Dimensions of the rendered image: `Width` and `Height`.
+* A pointer to the image key that is used in the `Images` configuration of the Spreadsheet: `Image`.
 
 The following example demonstrates how to configure the Spreadsheet to display an image with top-left corner placed in the `J6` cell.
 

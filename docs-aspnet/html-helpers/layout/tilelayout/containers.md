@@ -32,7 +32,7 @@ The main tile content is rendered from the [`BodyTemplate()`](/api/kendo.mvc.ui.
 
 The TileLayout exposes an object that allows you to override the following styles:
 
-```
+```JS
     var tileLayoutStyles = {
         wrapper: "k-widget k-tilelayout",
         item: "k-tilelayout-item k-card",
@@ -46,7 +46,7 @@ The TileLayout exposes an object that allows you to override the following style
 
 To override any of the classes, add your own or remove some, insert the new definition before the widget is initialized:
 
-```
+```JS
     kendo.ui.TileLayout.styles.item = "k-tilelayout-item k-card my-own-class";
 ```
 

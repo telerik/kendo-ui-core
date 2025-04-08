@@ -47,7 +47,7 @@ The single selection functionality allows the user to select only one item at a 
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>
@@ -94,7 +94,7 @@ The multiple selection functionality allows the user to select one or more items
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>

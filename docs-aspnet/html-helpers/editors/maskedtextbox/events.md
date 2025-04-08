@@ -32,7 +32,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 </kendo-maskedtextbox>
 ```
 {% endif %}
-```script.js
+```JS script.js
   <script>
   function maskedtextbox_change() {
       // Handle the change event.

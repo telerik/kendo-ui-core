@@ -62,13 +62,15 @@ To initiate the Excel export, press the **Toolbar** button or use the [Grid clie
 
 > Browser versions, such as Internet Explorer 9 and earlier, and Safari, require the implementation of a server proxy.
 
-        [HttpPost]
-        public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
-        {
-            var fileContents = Convert.FromBase64String(base64);
+```C#
+    [HttpPost]
+    public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
+    {
+        var fileContents = Convert.FromBase64String(base64);
 
-            return File(fileContents, contentType, fileName);
-        }
+        return File(fileContents, contentType, fileName);
+    }
+```
 
 ## Outputting the Result
 
@@ -142,19 +144,21 @@ The [`ExcelExport()`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsyste
 
 1. In the handler, manipulate the generated workbook. The example alternates the [background color of the row cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
 
-        <script>
-            function excelExport(e) {
-                var sheet = e.workbook.sheets[0];
-                for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-                    if (rowIndex % 2 == 0) {
-                        var row = sheet.rows[rowIndex];
-                        for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
-                            row.cells[cellIndex].background = "#aabbcc";
-                        }
+    ```JS
+    <script>
+        function excelExport(e) {
+            var sheet = e.workbook.sheets[0];
+            for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
+                if (rowIndex % 2 == 0) {
+                    var row = sheet.rows[rowIndex];
+                    for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+                        row.cells[cellIndex].background = "#aabbcc";
                     }
                 }
             }
-        </script>
+        }
+    </script>
+    ```
 
 ## Exporting Right-to-Left Content
 
@@ -204,16 +208,18 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
 
 1. In the handler, manipulate the generated workbook. The example applies the column template to the cell by assigning it to the [rows.cells.value](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.value).
 
-        <script>
-            function excelExport(e) {
-                var sheet = e.workbook.sheets[0];
-                var template = kendo.template(e.sender.columns[1].template);
-                var data = e.sender.dataSource.view();
-                for (var i = 0; i < data.length; i++) {
-                    sheet.rows[i + 1].cells[1].value = template(data[i]);
-                }
+    ```JS
+    <script>
+        function excelExport(e) {
+            var sheet = e.workbook.sheets[0];
+            var template = kendo.template(e.sender.columns[1].template);
+            var data = e.sender.dataSource.view();
+            for (var i = 0; i < data.length; i++) {
+                sheet.rows[i + 1].cells[1].value = template(data[i]);
             }
-        </script>
+        }
+    </script>
+    ```
 
 ## Defining the Column Format
 
@@ -254,18 +260,20 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
 
 1. In the handler, manipulate the generated workbook. The example applies a format to the cell by assigning it to the [rows.cells.format](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format)
 
-        <script>
-            function excelExport(e) {
+    ```JS
+    <script>
+        function excelExport(e) {
+            var sheet = e.workbook.sheets[0];
+            for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
                 var sheet = e.workbook.sheets[0];
                 for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-                    var sheet = e.workbook.sheets[0];
-                    for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-                        var row = sheet.rows[rowIndex];
-                        row.cells[1].format = "[Blue]#,##0.0_);[Red](#,##0.0);0.0;"
-                    }
+                    var row = sheet.rows[rowIndex];
+                    row.cells[1].format = "[Blue]#,##0.0_);[Red](#,##0.0);0.0;"
                 }
             }
-        </script>
+        }
+    </script>
+    ```
 
 {% if site.mvc %}
 
@@ -289,7 +297,7 @@ In some scenarios, you will want to hide given column or multiple columns from b
 
 ```HtmlHelper
     columns.Bound(p => p.ProductName).Exportable(false);
-``` 
+```
 {% if site.core %}
 ```TagHelper
     <column field="ProductName">

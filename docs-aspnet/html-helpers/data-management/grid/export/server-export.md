@@ -34,91 +34,94 @@ To enable the Server export option of the grid:
     {% endif %}
     ```
 1. Attach the click event handler to the buttons in the form and include the data and the settings of the columns:
-    ```
     {% if site.core %}
-        <script>
-            function addOptionsToForm(options, form, parents) {
-                for (var option in options) {
-                    if (!options[option]) {
-                        continue;
-                    }
-
-                    if (typeof options[option] === 'object') {
-                        parents.push(option)
-                        addOptionsToForm(options[option], form, parents);
-                        parents.pop();
-                    } else {
-                        form.append('<input type="hidden" name="' + inputName(option, parents) + '" value="' + options[option] + '" />');
-                    }
-                }
-            }
-
-            function inputName(option, parents) {
-                var result = "";
-
-                if (!parents.length) {
-                    return option;
+    ```JS
+    <script>
+        function addOptionsToForm(options, form, parents) {
+            for (var option in options) {
+                if (!options[option]) {
+                    continue;
                 }
 
-                for (var i = 0; i < parents.length; i++) {
-                    if (i === 0) {
-                        result += parents[i];
-                        continue;
-                    }
-                    result += "[" + parents[i] + "]";
-                }
-
-                result += "[" + option + "]";
-
-                return result;
-            }
-
-            function columnsFilterHandler(col) {
-                return col.field;
-            }
-
-            function columnsMapHandler(col) {
-                return {
-                    title: col.title,
-                    width: col.width,
-                    field: col.field,
-                    format: col.format,
-                    hidden: col.hidden
+                if (typeof options[option] === 'object') {
+                    parents.push(option)
+                    addOptionsToForm(options[option], form, parents);
+                    parents.pop();
+                } else {
+                    form.append('<input type="hidden" name="' + inputName(option, parents) + '" value="' + options[option] + '" />');
                 }
             }
-            $(document).on("ready", function () {
-                $(".download").click(function () {
-                    var grid = $("#grid").data("kendoGrid");
-                    var options = {
-                        format: $(this).data("format"),
-                        title: $(this).data("title"),
-                        columnSettings: grid.columns.filter(columnsFilterHandler).map(columnsMapHandler),
-                        selectedIds: grid.selectedKeyNames()
-                    }
-                    $('#form input[type="hidden"]').remove();
-                    addOptionsToForm(options, $('#form'), []);
-                });
+        }
+
+        function inputName(option, parents) {
+            var result = "";
+
+            if (!parents.length) {
+                return option;
+            }
+
+            for (var i = 0; i < parents.length; i++) {
+                if (i === 0) {
+                    result += parents[i];
+                    continue;
+                }
+                result += "[" + parents[i] + "]";
+            }
+
+            result += "[" + option + "]";
+
+            return result;
+        }
+
+        function columnsFilterHandler(col) {
+            return col.field;
+        }
+
+        function columnsMapHandler(col) {
+            return {
+                title: col.title,
+                width: col.width,
+                field: col.field,
+                format: col.format,
+                hidden: col.hidden
+            }
+        }
+        $(document).on("ready", function () {
+            $(".download").click(function () {
+                var grid = $("#grid").data("kendoGrid");
+                var options = {
+                    format: $(this).data("format"),
+                    title: $(this).data("title"),
+                    columnSettings: grid.columns.filter(columnsFilterHandler).map(columnsMapHandler),
+                    selectedIds: grid.selectedKeyNames()
+                }
+                $('#form input[type="hidden"]').remove();
+                addOptionsToForm(options, $('#form'), []);
             });
-        </script>
-    {% else %}
-        <script>
-            $(document).on("ready", function () {
-                $(".download").click(function () {
-                    var grid = $("#Grid").data("kendoGrid");
-                    var options = {
-                        format: $(this).data("format"),
-                        title: "DemoSheet"
-                    }
-                    $("#export-data").val(encodeURIComponent(JSON.stringify(options)));
-                    $("#export-model").val(encodeURIComponent(JSON.stringify(grid.columns)));
-                });
-            });
-        </script>
-    {% endif %}
+        });
+    </script>
     ```
+    {% else %}
+    ```JS
+    <script>
+        $(document).on("ready", function () {
+            $(".download").click(function () {
+                var grid = $("#Grid").data("kendoGrid");
+                var options = {
+                    format: $(this).data("format"),
+                    title: "DemoSheet"
+                }
+                $("#export-data").val(encodeURIComponent(JSON.stringify(options)));
+                $("#export-model").val(encodeURIComponent(JSON.stringify(grid.columns)));
+            });
+        });
+    </script>
+    ```
+    {% endif %}
+
 1. Create the File on the server-side and push it to the client:
-    ```
     {% if site.core %}
+    ```C#
         public FileStreamResult ExportServer(string model, string data)
         {
             var columnsData = JsonConvert.DeserializeObject<IList<ExportColumnSettings>>(HttpUtility.UrlDecode(model));
@@ -166,66 +169,69 @@ To enable the Server export option of the grid:
             double width = e.Name == "Product name" || e.Name == "Category Name" ? 250 : 100;
             e.Column.SetWidthInPixels(width);
         }
-    {% else %}
-        public FileStreamResult ExportServer(string model, string data)
-        {
-            var columnsData = JsonConvert.DeserializeObject<IList<ExportColumnSettings>>(HttpUtility.UrlDecode(model));
-            dynamic options = JsonConvert.DeserializeObject(HttpUtility.UrlDecode(data));
-            SpreadDocumentFormat exportFormat = options.format.ToString() == "csv" ? exportFormat = SpreadDocumentFormat.Csv : exportFormat = SpreadDocumentFormat.Xlsx;
-            Action<ExportCellStyle> cellStyle = new Action<ExportCellStyle>(ChangeCellStyle);
-            Action<ExportRowStyle> rowStyle = new Action<ExportRowStyle>(ChangeRowStyle);
-            Action<ExportColumnStyle> columnStyle = new Action<ExportColumnStyle>(ChangeColumnStyle);
-
-            string fileName = string.Format("{0}.{1}", options.title, options.format);
-            string mimeType = Helpers.GetMimeType(exportFormat);
-
-            Stream exportStream = exportFormat == SpreadDocumentFormat.Xlsx ?
-                productService.Read().ToXlsxStream(columnsData, (string)options.title.ToString(), cellStyleAction: cellStyle, rowStyleAction: rowStyle, columnStyleAction: columnStyle) :
-                productService.Read().ToCsvStream(columnsData);
-
-            var fileStreamResult = new FileStreamResult(exportStream, mimeType);
-            fileStreamResult.FileDownloadName = fileName;
-            fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin);
-
-            return fileStreamResult;
-        }
-
-        private void ChangeCellStyle(ExportCellStyle e)
-        {
-            bool isHeader = e.Row == 0;
-            SpreadCellFormat format = new SpreadCellFormat
-            {
-                ForeColor = isHeader ? SpreadThemableColor.FromRgb(50, 54, 58) : SpreadThemableColor.FromRgb(214, 214, 217),
-                IsItalic = true,
-                VerticalAlignment = SpreadVerticalAlignment.Center,
-                WrapText = true,
-                Fill = SpreadPatternFill.CreateSolidFill(isHeader ? new SpreadColor(93, 227, 0) : new SpreadColor(50, 54, 58))
-            };
-            e.Cell.SetFormat(format);
-        }
-
-        private void ChangeRowStyle(ExportRowStyle e)
-        {
-            e.Row.SetHeightInPixels(e.Index == 0 ? 80 : 30);
-        }
-
-        private void ChangeColumnStyle(ExportColumnStyle e)
-        {
-            double width = e.Name == "Product name" || e.Name == "Category Name" ? 250 : 100;
-            e.Column.SetWidthInPixels(width);
-        }
-    {% endif %}
     ```
+    {% else %}
+    ```C#
+        public FileStreamResult ExportServer(string model, string data)
+        {
+            var columnsData = JsonConvert.DeserializeObject<IList<ExportColumnSettings>>(HttpUtility.UrlDecode(model));
+            dynamic options = JsonConvert.DeserializeObject(HttpUtility.UrlDecode(data));
+            SpreadDocumentFormat exportFormat = options.format.ToString() == "csv" ? exportFormat = SpreadDocumentFormat.Csv : exportFormat = SpreadDocumentFormat.Xlsx;
+            Action<ExportCellStyle> cellStyle = new Action<ExportCellStyle>(ChangeCellStyle);
+            Action<ExportRowStyle> rowStyle = new Action<ExportRowStyle>(ChangeRowStyle);
+            Action<ExportColumnStyle> columnStyle = new Action<ExportColumnStyle>(ChangeColumnStyle);
+
+            string fileName = string.Format("{0}.{1}", options.title, options.format);
+            string mimeType = Helpers.GetMimeType(exportFormat);
+
+            Stream exportStream = exportFormat == SpreadDocumentFormat.Xlsx ?
+                productService.Read().ToXlsxStream(columnsData, (string)options.title.ToString(), cellStyleAction: cellStyle, rowStyleAction: rowStyle, columnStyleAction: columnStyle) :
+                productService.Read().ToCsvStream(columnsData);
+
+            var fileStreamResult = new FileStreamResult(exportStream, mimeType);
+            fileStreamResult.FileDownloadName = fileName;
+            fileStreamResult.FileStream.Seek(0, SeekOrigin.Begin);
+
+            return fileStreamResult;
+        }
+
+        private void ChangeCellStyle(ExportCellStyle e)
+        {
+            bool isHeader = e.Row == 0;
+            SpreadCellFormat format = new SpreadCellFormat
+            {
+                ForeColor = isHeader ? SpreadThemableColor.FromRgb(50, 54, 58) : SpreadThemableColor.FromRgb(214, 214, 217),
+                IsItalic = true,
+                VerticalAlignment = SpreadVerticalAlignment.Center,
+                WrapText = true,
+                Fill = SpreadPatternFill.CreateSolidFill(isHeader ? new SpreadColor(93, 227, 0) : new SpreadColor(50, 54, 58))
+            };
+            e.Cell.SetFormat(format);
+        }
+
+        private void ChangeRowStyle(ExportRowStyle e)
+        {
+            e.Row.SetHeightInPixels(e.Index == 0 ? 80 : 30);
+        }
+
+        private void ChangeColumnStyle(ExportColumnStyle e)
+        {
+            double width = e.Name == "Product name" || e.Name == "Category Name" ? 250 : 100;
+            e.Column.SetWidthInPixels(width);
+        }
+    ```
+    {% endif %}
+    
 1. Add the following references in the Controller file:
 
     {% if site.core %}
-    ```
+    ```C#
         using Kendo.Mvc.Export;
         using Telerik.Documents.SpreadsheetStreaming;
         using Microsoft.AspNetCore.Mvc;
     ```
     {% else %}
-      ```
+      ```C#
         using Kendo.Mvc.Export;
         using Telerik.Documents.SpreadsheetStreaming;
     ```

@@ -68,7 +68,7 @@ How can I add a button that opens the PDF file in full screen when using the PDF
     </kendo-pdfviewer>
 ```
 {% endif %}
-```Script
+```JS script
 <script>
     function toggleBtn(ev) {
         var viewerElement = kendo.widgetInstance($("#pdfviewer")).element[0];

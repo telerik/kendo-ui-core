@@ -36,7 +36,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <h4>Map with event handler</h4>
 <p>
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Map
@@ -244,13 +244,13 @@ You can reference the Map instances that you have created and build on top of th
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var map = $("#map").data("kendoMap"); // map is a reference to the existing map instance of the helper.
     </script>
     ```
 1. Use the [Map client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/map#methods) to control the behavior of the widget. In this example, you will use the `center` method to access center the view of the Map
-    ```script
+    ```JS script
     <script>
         var map = $("#map").data("kendoMap"); // map is a reference to the existing map instance of the helper.
         map.center([32.7758, -96.7966]).zoom(10); // set the Map center

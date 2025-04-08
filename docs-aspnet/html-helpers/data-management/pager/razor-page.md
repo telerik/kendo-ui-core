@@ -20,7 +20,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
 
 1. Create the Grid, DataSource and Pager definitions.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -51,7 +51,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
                 .DataSource("dataSource1")
             )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -101,7 +101,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -111,7 +111,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -124,7 +124,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
     
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<OrderViewModel> orders;
 
         public void OnGet()
@@ -148,7 +148,7 @@ The Pager component provides a convenient integration with the Grid and DataSour
             return new JsonResult(orders.ToDataSourceResult(request));
         }
     ```
-    ```tab-Model
+    ```Model
         public class OrderViewModel
         {
             public int OrderID { get; set; }

@@ -225,7 +225,7 @@ When the Grid is configured for [Popup editng]({% slug popupediting_grid_aspnetc
         public ShipmentStatus Status { get; set; }
     }
 ```
-```EnumEditor.cshtml
+```Razor EnumEditor.cshtml
     // ~Views\Shared\EditorTemplates\EnumEditor.cshtml
 
     @model ShipmentStatus

@@ -46,7 +46,7 @@ To get a reference to a helper instance, use the [jQuery `data`](http://api.jque
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     $(document).ready(function () {
         // Retrieve the helper instance.
         var autoCompleteWidget = $("#animals").data("kendoAutoComplete");
@@ -81,7 +81,7 @@ To get a reference to a helper instance, you may also use the `getKendo<WidgetNa
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     $(document).ready(function () {
         // Retrieve the helper instance.
         var autoCompleteWidget = $("#animals").getKendoAutoComplete();
@@ -116,7 +116,7 @@ After the helper instance is available, you can call its methods by using the st
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     $(document).ready(function () {
         // Retrieve the helper instance when it is available.
         var autoCompleteWidget = $("#animals").data("kendoAutoComplete");
@@ -160,7 +160,7 @@ Event handlers which are attached during the initialization of the helper will b
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     function onChange(e) {
         console.log("change event handler");
     }
@@ -193,7 +193,7 @@ All helpers provide the `bind` and the `one` method. Both methods attach event h
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     $(document).ready(function () {
 
         var autoCompleteWidget = $("#animals").data("kendoAutoComplete");
@@ -241,7 +241,7 @@ Each helper passes a single argument to the event handler&mdash;the so-called "e
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     function onChange(e) {
         var autoCompleteWidget = e.sender;
     }
@@ -279,7 +279,7 @@ Certain helper events can be prevented by calling the `preventDefault` method of
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     function onOpen(e) {
         e.preventDefault();
     }
@@ -314,7 +314,7 @@ To unbind from a specific event, keep a reference to the event handler function 
     </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     $(document).ready(function () {
 
         var handler = function (e) { console.log(e); };

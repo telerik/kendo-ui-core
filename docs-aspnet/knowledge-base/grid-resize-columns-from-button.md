@@ -26,7 +26,7 @@ How can I resize the columns of the {{ site.product }} Grid by using a custom bu
 
 The following example demonstrates how to resize the columns of the Grid by using a custom button.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<ResizeColumnsFromButton.Models.OrderViewModel>()
     .Name("grid")
     .Columns(columns =>
@@ -52,7 +52,7 @@ The following example demonstrates how to resize the columns of the Grid by usin
 
 <button class="k-button myBtn">Disable Resizing</button>
 ```
-```script.js
+```JS script.js
 
     $(".myBtn").on("click", function () {
         $(function () {

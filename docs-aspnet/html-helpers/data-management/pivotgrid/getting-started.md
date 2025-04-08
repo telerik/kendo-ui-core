@@ -259,7 +259,7 @@ You can reference the PivotGrid instances that you have created and build on top
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var pivotGridReference = $("#pivotgrid").data("kendoPivotGrid"); // pivotGridReference is a reference to the existing PivotGrid instance of the helper.
@@ -284,7 +284,7 @@ You can reference the PivotGrid instances that you have created and build on top
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var pivotGridReference = $("#pivotgrid").data("kendoPivotGrid");

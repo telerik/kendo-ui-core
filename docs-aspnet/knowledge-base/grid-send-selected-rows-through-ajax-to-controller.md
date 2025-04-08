@@ -73,7 +73,7 @@ How can I get the selected rows in the {{ site.product }} Grid and send them thr
         });
     }
 ```
-```GridController
+```C# GridController
   public ActionResult GetSelectedRows([FromBody] List<GridModel> rows)
   {
     List<GridModel> selecteditems = rows;

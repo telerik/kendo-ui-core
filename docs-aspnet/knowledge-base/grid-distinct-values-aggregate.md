@@ -76,7 +76,7 @@ The Grid's DataSource supports [`Count()` aggregate]({% slug htmlhelper_datasour
 
     ```
     {% endif %}
-    ```Script
+    ```JS script
         function getDistinctValues() {
             ...
         }
@@ -84,7 +84,7 @@ The Grid's DataSource supports [`Count()` aggregate]({% slug htmlhelper_datasour
 
 1. Calculate the distinct values of the "ShipName" field on the client with jQuery.
 
-    ```Script
+    ```JS script
         function getDistinctValues() {
             var grid = $("#grid").getKendoGrid(); // Get a reference to the Grid.
             var allGridData = grid.dataSource.data(); // Get the Grid's data.
@@ -115,7 +115,7 @@ The Grid's DataSource supports [`Count()` aggregate]({% slug htmlhelper_datasour
 
 1. Handle the `DataBound` event of the Grid and update the displayed distinct values count when the Grid is filtered and/or grouped.
 
-    ```Script
+    ```JS script
         function onDataBound(e) {
             if (e.sender.dataSource.filter() != null) { // Check if the data is filtered.
                 var appliedFilters = e.sender.dataSource.filter(); // Get the current filter expressions.

@@ -40,7 +40,7 @@ I have a {{ site.product }} Chart with multiple axes. One has negative values an
 {% endif %}
 
 
-```Index.cshtml   
+```Razor Index.cshtml   
     @(Html.Kendo().Chart(Model)
         .Name("chart")
         .Title("Hybrid car mileage report")
@@ -98,7 +98,7 @@ I have a {{ site.product }} Chart with multiple axes. One has negative values an
         )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function onlyPositive(e) {
             console.log(e.value);

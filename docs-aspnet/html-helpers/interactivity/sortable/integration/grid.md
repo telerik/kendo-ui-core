@@ -150,7 +150,9 @@ The editing functionality of the Telerik UI Grid for {{ site.framework }} is ren
 
 If you use the inline or the popup edit mode, set a more specific filter which excludes the item that is currently in edit mode.
 
+```JS
     .filter(">tbody >tr:not(.k-grid-edit-row)")
+```
 
 ### Using Grids in Batch Edit Mode
 
@@ -166,6 +168,7 @@ The `change` event of the Sortable fires after a row position is changed. You ca
 
 The following example demonstrates how to shift the position of the items in the DataSource.
 
+```JS
     // The change event handler of the Sortable.
     function onChange(e) {
         var grid = e.sender.element.data("kendoGrid"),
@@ -192,9 +195,11 @@ The following example demonstrates how to shift the position of the items in the
 
         grid.dataSource.sync(); // Submit the changes through the update transport and refresh the Grid.
     }
+```
 
 The following example demonstrates how to send the `newIndex` and `oldIndex` to the server.
 
+```JS
     // The change event handler of the Sortable.
     function onChange(e) {
         var grid = e.sender.element.data("kendoGrid"),
@@ -215,6 +220,7 @@ The following example demonstrates how to send the `newIndex` and `oldIndex` to 
             }
         });
     }
+```
 
 ## Known Limitations
 

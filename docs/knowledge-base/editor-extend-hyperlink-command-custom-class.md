@@ -25,6 +25,9 @@ When I use the insert hyperlink dialog in Kendo UI for jQuery Editor I need to a
 
 ## Solution
 
+####  The solution below is suitable with Kendo UI versions before Kendo UI R1 2023 SP1 (version 2023.1.314).
+
+
 1. You can extend the template for the insertHyperlink dialog in order to add custom checkboxes. The user can select the checkboxes when adding a custom class or attribute is needed:
 
     ```
@@ -206,6 +209,262 @@ The described above is demonstrated in the below runnable example:
       });
     </script>
 ``` 
+
+####  The example below demonstrates how the same functionality can be achieved with Kendo UI R1 2023 SP1 (version 2023.1.314) and after
+
+1. Customize the Link Dialog Form
+
+The `Insert hyperlink` dialog displays internally a `kendoForm` component. You need to override the internal `_createForm` method and add the needed additional elements to the Form:
+
+```
+    kendo.ui.editor.LinkCommand.fn._createForm = function (dialog) {
+        var that = this;
+        var formElement = $("<div/>").appendTo(dialog.element);
+        var messages = that.editor.options.messages;
+        var form = formElement
+          .kendoForm({
+            renderButtons: false,
+            items: [
+              ...
+            ]
+          })
+    }
+```
+
+2. In the kendo.ui.editor.LinkCommand `_apply` function you can check the state of the checkboxes and apply the custom attributes or classes:
+
+```
+        if (
+            $("#k-editor-link-class-green").is(":checked") &&
+            !this.attributes.className
+          ) {
+            this.attributes.className = "green";
+            isInsert = true;
+          } else if ($("#k-editor-link-class-green").is(":checked")) {
+            this.attributes.className += " green";
+            isInsert = true;
+          }
+```
+
+Below is a runnable example:
+
+```dojo
+ <textarea id="editor"></textarea>
+    <script>
+      var isInsert = false;
+
+      var textNodes = kendo.ui.editor.RangeUtils.textNodes;
+      var dom = kendo.ui.editor.Dom;
+      var encode = kendo.htmlEncode;
+
+      kendo.ui.editor.LinkCommand.fn._createForm = function (dialog) {
+        var that = this;
+        var formElement = $("<div/>").appendTo(dialog.element);
+        var messages = that.editor.options.messages;
+        var form = formElement
+          .kendoForm({
+            renderButtons: false,
+            items: [
+              {
+                field: "k-editor-link-url",
+                label: encode(messages.linkWebAddress),
+                title: encode(messages.linkWebAddress),
+                editor: "TextBox",
+              },
+              {
+                field: "k-editor-link-text",
+                label: encode(messages.linkText),
+                title: encode(messages.linkText),
+                editor: "TextBox",
+              },
+              {
+                field: "k-editor-link-title",
+                label: encode(messages.linkToolTip),
+                title: encode(messages.linkToolTip),
+                editor: "TextBox",
+              },
+              {
+                field: "k-editor-link-target",
+                editorOptions: {
+                  label: encode(messages.linkOpenInNewWindow),
+                },
+                label: "",
+                title: encode(messages.linkOpenInNewWindow),
+                editor: "CheckBox",
+              },
+              {
+                field: "k-editor-link-class-red",
+                label: "",
+                editorOptions: {
+                  label: "Set custom class - red",
+                },
+                editor: "CheckBox",
+              },
+              {
+                field: "k-editor-link-class-green",
+                label: "",
+                editorOptions: {
+                  label: "Set custom class - green",
+                },
+                editor: "CheckBox",
+              },
+            ],
+          })
+          .data("kendoForm");
+
+        formElement
+          .find("#k-editor-link-text")
+          .parents(".k-form-field")
+          .addClass("k-editor-link-text-row");
+
+        dialog.element.after(
+          $(
+            that._actionButtonsTemplate({
+              messages,
+              insertButtonIcon: "link",
+              cancelButtonIcon: "cancel-outline",
+            }),
+          ),
+        );
+
+        return form;
+      };
+
+      var originalExec = kendo.ui.editor.LinkCommand.fn.exec;
+
+      kendo.ui.editor.LinkCommand.fn.exec = function () {
+        var messages = this.editor.options.messages;
+        this._initialText = "";
+        this._range = this.lockRange(true);
+        this.formatter.immutables = this.immutables();
+
+        var nodes = textNodes(this._range);
+        var a = nodes.length
+          ? this.formatter.finder.findSuitable(nodes[0])
+          : null;
+        var img = nodes.length && dom.name(nodes[0]) == "img";
+
+        var dialog = this.createDialog("<div/>", {
+          title: messages.createLink,
+          minWidth: 340,
+          close: this._close.bind(this),
+          visible: false,
+        }).data("kendoWindow");
+
+        this._form = this._createForm(dialog);
+
+        if (a) {
+          this._range.selectNodeContents(a);
+          nodes = textNodes(this._range);
+        }
+
+        this._initialText = this.linkText(nodes);
+
+        dialog.wrapper
+          .find(".k-dialog-insert")
+          .on("click", this._apply.bind(this))
+          .end()
+          .find(".k-dialog-close")
+          .on("click", this._close.bind(this))
+          .end()
+          .find(".k-form-field input")
+          .on("keydown", this._keydown.bind(this))
+          .end()
+          .find("#k-editor-link-url")
+          .val(this.linkUrl(a))
+          .end()
+          .find("#k-editor-link-text")
+          .val(this._initialText)
+          .end()
+          .find("#k-editor-link-title")
+          .val(a ? a.title : "")
+          .end()
+          .find("#k-editor-link-target")
+          .prop("checked", a ? a.target == "_blank" : false)
+          .end()
+          .find(".k-editor-link-text-row")
+          .toggle(!img);
+
+        this._dialog = dialog.center().open();
+
+        $("#k-editor-link-url", dialog.element).trigger("focus").select();
+      };
+
+      var originalApply = kendo.ui.editor.LinkCommand.fn._apply;
+
+      kendo.ui.editor.LinkCommand.fn._apply = function (e) {
+        var element = this._dialog.element;
+        var href = $("#k-editor-link-url", element).val();
+        var title, text, target;
+        var textInput = $("#k-editor-link-text", element);
+
+        if (href && href != "http://") {
+          if (href.indexOf("@") > 0 && !/^(\w+:)|(\/\/)/i.test(href)) {
+            href = "mailto:" + href;
+          }
+
+          this.attributes = { href: href };
+
+          title = $("#k-editor-link-title", element).val();
+          if (title) {
+            this.attributes.title = title;
+          }
+
+          if (textInput.is(":visible")) {
+            text = kendo.trim(textInput.val());
+            if (!text && !this._initialText) {
+              this.attributes.innerText = href;
+            } else if (text && text !== this._initialText) {
+              this.attributes.innerText = kendo.ui.editor.Dom.stripBom(text);
+            }
+          }
+
+          target = $("#k-editor-link-target", element).is(":checked");
+          this.attributes.target = target ? "_blank" : null;
+
+          if ($("#k-editor-link-class-red").is(":checked")) {
+            this.attributes.className = "red";
+            isInsert = true;
+          }
+
+          if (
+            $("#k-editor-link-class-green").is(":checked") &&
+            !this.attributes.className
+          ) {
+            this.attributes.className = "green";
+            isInsert = true;
+          } else if ($("#k-editor-link-class-green").is(":checked")) {
+            this.attributes.className += " green";
+            isInsert = true;
+          }
+
+          this.formatter.apply(this._range, this.attributes);
+        }
+
+        this._close(e);
+
+        if (this.change) {
+          this.change();
+        }
+      };
+
+      $("#editor").kendoEditor({
+        select: function (e) {
+          if (isInsert) {
+            $(e.sender.selectionRestorePoint.body)
+              .find(".red")
+              .attr("red", "red");
+            $(e.sender.selectionRestorePoint.body)
+              .find(".green")
+              .attr("green", "green");
+            isInsert = false;
+          }
+        },
+      });
+    </script>
+```
+
+
 
 ## See Also
 

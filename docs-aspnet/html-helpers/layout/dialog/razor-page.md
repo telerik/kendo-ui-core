@@ -16,7 +16,7 @@ This article describes how to configure the Dialog component in a Razor Pages sc
 
 For the complete project, refer to the [Dialog in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Dialog/DialogIndex.cshtml).
 
-```tab-HtmlHelper(csthml)  	
+```HtmlHelper
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 
@@ -47,7 +47,7 @@ For the complete project, refer to the [Dialog in Razor Pages example](https://g
 	</script>
 ```
 {% if site.core %}
-```tab-TagHelper
+```TagHelper
     <kendo-dialog name="dialog" title="Data Update" width="400" modal="false" >
         <actions>            
             <action text="Cancel">
@@ -73,7 +73,7 @@ For the complete project, refer to the [Dialog in Razor Pages example](https://g
 		}
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 
     public void OnPost()
         {

@@ -113,13 +113,13 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
 
 1. Implement the `Read` action method.
 
-    ```Index
+    ```C# Index
         public ActionResult Index()
         {
             return View(ProductService.GetAll());
         }
     ```
-    ```ProductService
+    ```C# ProductService
         public class ProductService : IDisposable
         {
             private static bool UpdateDatabase = false;
@@ -321,7 +321,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
                 entities.Dispose();
             }
         }
-    ```    
+    ```
 
 1. Implement the `Create` action method.
 

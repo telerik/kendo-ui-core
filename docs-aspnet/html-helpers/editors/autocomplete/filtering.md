@@ -53,7 +53,7 @@ The following example demonstrates how to configure AutoComplete for Server Filt
 </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function onAdditionalData() {
             return {

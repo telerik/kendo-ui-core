@@ -25,8 +25,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 ### MultiViewCalendar Grid
 
 
-The element wrapping the tables in the component should follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid).
-
+The element wrapping the tables in the component should follow the requirements for the `grid` role (https://www.w3.org/TR/wai-aria-1.2/#grid).
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

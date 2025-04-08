@@ -276,7 +276,7 @@ To use the client-side API of the ComboBox and build on top of its initial confi
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var comboboxReference = $("#combobox").data("kendoComboBox"); // comboboxReference is a reference to the existing ComboBox instance of the helper.
@@ -286,7 +286,7 @@ To use the client-side API of the ComboBox and build on top of its initial confi
 
 1. Use the [ComboBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var comboboxReference = $("#combobox").data("kendoComboBox"); // comboboxReference is a reference to the existing ComboBox instance of the helper.

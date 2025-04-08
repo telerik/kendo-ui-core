@@ -34,9 +34,10 @@ For more information, refer to the article on [ASP.NET Core Authorization](https
 The security trimming functionality can be enabled through the `SecurityTrimming` property.
 
 ```HtmlHelper
-    Html.Kendo().Menu()
+    @(Html.Kendo().Menu()
         .Name("MainMenu")
         .SecurityTrimming(true)
+    )
 ```
 {% if site.core %}
 ```TagHelper

@@ -59,7 +59,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
         <toolbar position="ListBoxToolbarPosition.Right"
                     tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
     </kendo-listbox>
-````
+```
 {% endif %}
 
 ## Client-Side Arrays
@@ -115,7 +115,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
                 "Madrid"]
         })
     </script>
-````
+```
 {% endif %}
 
 ## See Also

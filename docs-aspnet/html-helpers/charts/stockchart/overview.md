@@ -77,7 +77,7 @@ The following example demonstrates a basic StockChart configuration with a DataS
         </series>
     </kendo-stockchart>
 ```
-```HomeController
+```C# HomeController
     public IActionResult Index()
     {
         return View(); // The Action that returns the View with the StockChart.
@@ -105,7 +105,7 @@ The following example demonstrates a basic StockChart configuration with a DataS
     }
 ```
 {% else %}
-```HomeController
+```C# HomeController
     public ActionResult Index()
     {
         return View(); // The Action that returns the View with the StockChart.

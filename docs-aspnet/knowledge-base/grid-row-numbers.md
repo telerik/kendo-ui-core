@@ -31,7 +31,7 @@ How can I implement row numbers in a {{ site.product }} Grid?
 To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) and [`pageSize()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
 {% if site.mvc %}
-```Grid.cshtml
+```Razor Grid.cshtml
         @(Html.Kendo().Grid<App.Models.OrderViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -49,7 +49,7 @@ To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/ken
         )
 ```
 {% else %}
-```Grid.cshtml
+```Razor Grid.cshtml
         @(Html.Kendo().Grid<App.Models.OrderViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -67,7 +67,7 @@ To achieve the desired scenario, use the [`page()`](https://docs.telerik.com/ken
         )
 ```
 {% endif %}
-```script.js
+```JS script.js
     var record = 0;
     function getRecord() {
         record += 1;

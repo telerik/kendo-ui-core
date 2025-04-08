@@ -40,7 +40,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <p>
 
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the MediaPlayer
@@ -168,7 +168,7 @@ You can reference the MediaPlayer instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var mediaplayerReference = $("#mediaplayer").data("kendoMediaPlayer"); // mediaplayerReference is a reference to the existing mediaplayer instance of the helper.
     </script>
@@ -176,7 +176,7 @@ You can reference the MediaPlayer instances that you have created and build on t
 
 1. Use the [MediaPlayer client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#methods) to control the behavior of the widget. In this example, you will use the `mute` method to silence the media source.
 
-    ```script
+    ```JS script
     <script>
         var mediaplayerReference = $("#mediaplayer").data("kendoMediaPlayer"); // mediaplayerReference is a reference to the existing timeMediaPlayer instance of the helper.
         mediaplayerReference.mute(); // Mutes the currently playing file.

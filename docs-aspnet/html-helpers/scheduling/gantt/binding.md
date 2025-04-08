@@ -19,6 +19,7 @@ You can bind the Gantt by using the data model classes for its Tasks and Depende
 
 The following example demonstrates how to bind the Gantt through the `TaskViewModel`.
 
+```C#
     public class TaskViewModel : IGanttTask
     {
         public int TaskID { get; set; }
@@ -74,9 +75,11 @@ The following example demonstrates how to bind the Gantt through the `TaskViewMo
             };
         }
     }
+```
 
 The following example demonstrates how to bind the Gantt through the `DependencyViewModel`.
 
+```C#
     public class DependencyViewModel : IGanttDependency
     {
         public int DependencyID { get; set; }
@@ -96,6 +99,7 @@ The following example demonstrates how to bind the Gantt through the `Dependency
             };
         }
     }
+```
 
 ## Binding to Items from ViewData
 

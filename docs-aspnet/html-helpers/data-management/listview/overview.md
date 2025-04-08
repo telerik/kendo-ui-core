@@ -54,7 +54,7 @@ The following example demonstrates how to define the ListView.
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>
@@ -147,7 +147,7 @@ The following example demonstrates the basic configuration for the ListView.
     </kendo-listview>
 ```
 {% endif %}
-```Templates
+```JS Templates
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product-view k-widget">
             <dl>

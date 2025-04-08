@@ -32,7 +32,7 @@ By default, the data in .NET Core is serialized in camelCase while the property 
 
 Edit the `ConfigureServices` method in the `Startup.cs` file.
 
-```
+```C#
     public void ConfigureServices(IServiceCollection services)
     {
         ...

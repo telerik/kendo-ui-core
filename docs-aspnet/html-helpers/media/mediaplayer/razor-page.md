@@ -26,7 +26,7 @@ The following example uses two widgets: a MediaPlayer and a ListView, which serv
 
 See the implementation details in the example below. For the full project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.MediaPlayer.MediaPlayerPlaylistModel
 @{
@@ -149,7 +149,7 @@ See the implementation details in the example below. For the full project with R
 </style>
 ```
 {% if site.core %}
-```tab-TagHelper(csthml)
+```TagHelper
 @page
 @addTagHelper "*, Kendo.Mvc"
 @model Telerik.Examples.RazorPages.Pages.MediaPlayer.MediaPlayerPlaylistModel
@@ -271,7 +271,7 @@ See the implementation details in the example below. For the full project with R
 </style>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
 using System.Collections.Generic;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -330,7 +330,7 @@ namespace Telerik.Examples.RazorPages.Pages.MediaPlayer
 }
 ```
 
-```tab-Video.cs
+```C# Video.cs
 namespace Telerik.Examples.RazorPages.Models
 {
     public class Video

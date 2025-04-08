@@ -43,7 +43,7 @@ The following example illustrates the generated declarative configuration of a [
 
 * Generated declarative configuration
 
-    ```
+    ```HTML
         <div id="textbox-container">
             <label class="k-label k-input-label" for="textbox">Comments:</label>
             <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">

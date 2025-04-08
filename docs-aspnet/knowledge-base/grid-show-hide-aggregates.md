@@ -31,7 +31,7 @@ How to show and hide the aggregates in the {{ site.product }} Grid?
 1. Hook up for the event that, when triggered, will toggle the aggregates. The example below uses the [`Change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/events/change) event of the [Switch](https://demos.telerik.com/aspnet-core/switch) component.
 1. Show or hide the aggregates based on a condition. To set up the aggregates, you can use the [`aggregate`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/aggregate) method of the [DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource). To show or hide the aggregates, you can change the value of the template. The example below uses the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate) of the Grid in which the aggregate values are displayed.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Switch()
         .Name("switch")
         .Events(e => e.Change("onChange"))
@@ -58,7 +58,7 @@ How to show and hide the aggregates in the {{ site.product }} Grid?
         )
     )
 ```
-```Script.js
+```JS script.js
     function onChange(e){
         var grid = $("#grid").data("kendoGrid");
 

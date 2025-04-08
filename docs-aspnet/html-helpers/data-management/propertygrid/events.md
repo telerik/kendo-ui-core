@@ -35,7 +35,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-propertygrid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onEdit(e){
             // Handle the PropertyGrid Edit event that triggers when the user edits a data item.

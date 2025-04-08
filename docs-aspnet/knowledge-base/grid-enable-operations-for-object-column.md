@@ -47,7 +47,7 @@ How can I enable sorting, filtering, and grouping for a column which holds compl
     )
 )
 ```
-```Models
+```Model
 using System;
 using System.Collections.Generic;
 using System.Linq;

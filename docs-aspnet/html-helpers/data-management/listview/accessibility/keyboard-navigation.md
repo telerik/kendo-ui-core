@@ -33,7 +33,7 @@ The following example demonstrates how to enable the key navigation in the ListV
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>

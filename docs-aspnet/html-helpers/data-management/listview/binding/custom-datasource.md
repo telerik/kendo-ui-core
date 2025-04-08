@@ -1,5 +1,5 @@
 ---
-title: ListView Custom DataSource
+title: Custom DataSource
 page_title: Custom DataSource of the ListView Component
 description: "Get started with Telerik UI for ASP.NET MVC and use the CustomDataSource builder for the ListView component."
 slug: listview_customdatasource_aspnetmvc

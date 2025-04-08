@@ -23,7 +23,7 @@ If you are newcomer, follow the [First Steps guide on getting started with Kendo
 
 ## List of Components
 
-The following table lists all Kendo UI components (widgets) that are available in the commercial Kendo UI bundle and in the open-source Kendo UI distribution. For more information on all Kendo UI suites, refer to the section on [Kendo UI flavors](#flavors).   
+The following table lists all Kendo UI components (widgets) that are available in the Kendo UI bundle and in the open-source Kendo UI distribution. For more information on all Kendo UI suites, refer to the section on [Kendo UI flavors](#flavors).   
 
 {% include intro-page-table.html %}
 

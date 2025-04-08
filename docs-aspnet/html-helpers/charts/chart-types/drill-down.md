@@ -113,7 +113,7 @@ To configure a chart series for drill-down:
 ```
 {% endif %}
 
-```ChartDataRepository
+```C# ChartDataRepository
     public partial class ChartDataRepository
     {
         public static List<CompanyModel> Companies()
@@ -332,7 +332,7 @@ To populate the drill-down series on dynamically:
            }
        }
     </script>     
-```   
+```
 ```Controller
         public ActionResult Dynamic_Data()
         {
@@ -349,7 +349,7 @@ To populate the drill-down series on dynamically:
 ```
 {% endif %}
 
-```ChartDataRepository
+```C# ChartDataRepository
     public partial class ChartDataRepository
     {
         public static List<VehicleMake> VehicleMakes()
@@ -588,7 +588,7 @@ To populate the drilldown series asynchronously:
           });
        }
     </script>     
-```   
+```
 ```Controller
     public ActionResult Dynamic_Data()
     {
@@ -604,7 +604,7 @@ To populate the drilldown series asynchronously:
 ```
 {% endif %}
 
-```ChartDataRepository
+```C# ChartDataRepository
     public partial class ChartDataRepository
     {
         public static List<VehicleMake> VehicleMakes()
@@ -745,7 +745,7 @@ To customize the root item of the Chart's Breadcrumb and change its appearance, 
 ```
 {% endif %}
 
-```ChartDataRepository
+```C# ChartDataRepository
     public partial class ChartDataRepository
     {
         public static List<CompanyModel> Companies()
@@ -928,7 +928,7 @@ To implement a custom drill-down navigation:
 ```
 {% endif %}
 
-```ChartDataRepository
+```C# ChartDataRepository
     public partial class ChartDataRepository
     {
         public static List<CompanyModel> Companies()

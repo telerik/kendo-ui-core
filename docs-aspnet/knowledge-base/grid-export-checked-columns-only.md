@@ -38,7 +38,7 @@ To achieve the desired scenario:
 1. From there, get the selected Grid rows by using the built-in [`.selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method, traverse through each of the items, and push their column values with the help of the previously obtained Grid column fields.
 1. Create a common function that will be responsible for creating the workbook document.
 
-```Index.cshtml
+```Razor Index.cshtml
     <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script> // To take full advantage of the Excel export   feature, download the JSZip library and include the file.
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
@@ -64,7 +64,7 @@ To achieve the desired scenario:
         )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function onExcelExport(e) {
             e.preventDefault();

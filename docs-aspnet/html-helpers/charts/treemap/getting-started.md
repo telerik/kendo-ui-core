@@ -36,7 +36,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <h4>TreeMap with event handler</h4>
 <p>
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the TreeMap
@@ -315,13 +315,13 @@ You can reference the Map instances that you have created and build on top of th
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var treeMap = $("#treeMap").getKendoTreeMap(); // treeMap is a reference to the existing treeMap instance of the helper.
     </script>
     ```
 1. Use the [TreeMap client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treemap#methods) to control the behavior of the widget. In this example, you will use the `resize` method to resize the element of the TreeMap.
-    ```script
+    ```JS script
     <script>
         $("#treeMap").css("width", "800px"); // Set new width to the element.
         var treeMap = $("#treeMap").getKendoTreeMap(); // treeMap is a reference to the existing treeMap instance of the helper.

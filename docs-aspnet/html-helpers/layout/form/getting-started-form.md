@@ -321,7 +321,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var formReference = $("#formExample").data("kendoForm"); // formReference is a reference to the existing instance of the helper.
     </script>
@@ -329,7 +329,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [Form client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/form#methods) to control the behavior of the widget. In this example, you will see how to clear the form programmatically.
 
-    ```script
+    ```JS script
         <script>
             var formReference = $("#formExample").data("kendoForm");
             formReference.clear(); // Programmatically clear the inputs of the Form.

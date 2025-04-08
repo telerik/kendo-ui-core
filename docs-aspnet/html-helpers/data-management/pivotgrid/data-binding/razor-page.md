@@ -20,7 +20,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
 
 1. Define the PivotGrid and specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -62,7 +62,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
            )
         </div>
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @using Kendo.Mvc.UI
@@ -114,7 +114,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -124,7 +124,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -137,7 +137,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
     
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static IList<CustomerViewModel> customers;
 
         public void OnGet(string culture)
@@ -168,7 +168,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
             return new JsonResult(customers.ToDataSourceResult(request));
         }
     ```
-    ```tab-Model
+    ```Model
        public class CustomerViewModel
        {
            public string CustomerID { get; set; }

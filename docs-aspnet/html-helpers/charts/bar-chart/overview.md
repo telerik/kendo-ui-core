@@ -99,12 +99,12 @@ To create the Bar Chart, provide it with a `Name`. Optionally, set the width and
 
 | Features | Description |
 |---------|-------------|
-| [Date axis](% slug barcharts_date_axis %) | Scale the date axis of your Bar Chart to get a better visualization of the seasonal data in your app. |
-| [Gap and spacing](% slug barcharts_gap_and_spacing %) | The Bar Chart component allows you to control the distance between its categories as well as between series points within a category. This can be done through the `series.gap` and `series.spacing` client-side settings of the Chart.|
-| [Logarithmic axis](% slug barcharts_logarithmic_axis%) | A logarithmic axis is a special numeric axis that transforms the actual values by using a logarithmic function with a particular base.|
-| [Multiple axes](% slug barcharts_multi_axis %)| The Bar chart supports multiple axes. This helps you leverage the best charting performance and visualize data on any number axes to provide solid business reports for your users.|
-| [Plotbands](% slug barcharts_plotbands%) | Plot Bands are colored ranges, which are used to highlight certain areas in the Chart.|
-|[100% Stacked and Grouped Bars](% slug barcharts_aspnetcore_htmlhelper_stacked100_and_grouped_bars%)| The Bar Chart supports 100% stacking that could be grouped in the same time.|
+| [Date axis]({% slug barcharts_date_axis %}) | Scale the date axis of your Bar Chart to get a better visualization of the seasonal data in your app. |
+| [Gap and spacing]({% slug barcharts_gap_and_spacing %}) | The Bar Chart component allows you to control the distance between its categories as well as between series points within a category. This can be done through the `series.gap` and `series.spacing` client-side settings of the Chart.|
+| [Logarithmic axis]({% slug barcharts_logarithmic_axis%}) | A logarithmic axis is a special numeric axis that transforms the actual values by using a logarithmic function with a particular base.|
+| [Multiple axes]({% slug barcharts_multi_axis %})| The Bar chart supports multiple axes. This helps you leverage the best charting performance and visualize data on any number axes to provide solid business reports for your users.|
+| [Plotbands]({% slug barcharts_plotbands%}) | Plot Bands are colored ranges, which are used to highlight certain areas in the Chart.|
+|[100% Stacked and Grouped Bars]({% slug barcharts_aspnetcore_htmlhelper_stacked100_and_grouped_bars%})| The Bar Chart supports 100% stacking that could be grouped in the same time.|
 
 ## Next Steps
 

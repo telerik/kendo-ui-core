@@ -37,7 +37,7 @@ Follow the steps below to achieve the desired scenario:
 1. To change a given button's state upon selection, add the [`k-selected`](https://docs.telerik.com/kendo-ui/styles-and-layout/components-rendering-overview#state-classes) state class.
 1. Subscribe to the [window.resize](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event) event and replace the transformed DropDownList when the view dimensions are changed.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
     .Name("scheduler")
     .Date(new DateTime(2022, 6, 13))
@@ -176,7 +176,7 @@ Follow the steps below to achieve the desired scenario:
 </kendo-scheduler>
 ```
 {% endif %}
-```Script.js
+```JS script.js
     <script>
          var buttonGroup = `<span data-role='buttongroup' class='k-widget   k-button-group k-toolbar-button-group' role='group'   data-uid='f01bcb47-94d9-4c40-8e55-53a28b45134d'>
              <button class='k-button k-button-md k-rounded-md k-button-solid     k-button-solid-base k-toggle-button k-group-start    ' ref-view-day data-name='day'    data-uid='dda9916c-3486-4407-9a69-4d5acca5ab52'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>

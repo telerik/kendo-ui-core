@@ -37,7 +37,7 @@ To achieve the desired result:
 
 The following example illustrates how to define a custom HtmlHelper method for the Grid:
 
-```Index.cshtml
+```Razor Index.cshtml
     @using TelerikExample.Extensions
 
     @(Html.Kendo().Grid<OrderViewModel>()
@@ -55,7 +55,7 @@ The following example illustrates how to define a custom HtmlHelper method for t
           )
     )
 ```
-```GridExtension.cs
+```C# GridExtension.cs
     namespace TelerikExample.Extensions
     {
         public static class GridExtension

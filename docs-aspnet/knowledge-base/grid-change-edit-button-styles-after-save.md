@@ -104,7 +104,7 @@ To implement the solution, follow the steps below:
   </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script type="text/javascript">
    var successfulSavedRow = null;
 
@@ -145,7 +145,7 @@ To implement the solution, follow the steps below:
     });
     </script>
 ```
-```Styles
+```CSS Styles
   <style>
    .successfullSave, .successfullSave:hover{
      background-color: green;

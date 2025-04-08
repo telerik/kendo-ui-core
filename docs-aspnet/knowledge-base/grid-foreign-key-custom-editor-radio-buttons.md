@@ -31,7 +31,7 @@ I was wondering if there is a way to convert the foreign key column from a dropd
 
 -  Define a new editor in `Shared/EditorTemplates` and pass the collection via the `EditorViewData` to it:
 
-```
+```Razor
 	columns.ForeignKey(x => x.NameCodeId, (System.Collections.IEnumerable)ViewData["NameCodes"], "Id", "Description")
         .Title("Foreign Key Column")
         .Width(200)
@@ -58,10 +58,10 @@ I was wondering if there is a way to convert the foreign key column from a dropd
             @Html.Kendo().RadioButton().Name("radio" + options[i].Id.ToString()).Label(options[i].  Description).HtmlAttributes(new { @name = "NameCodeId" }).Value(options[i].Id)
         }
     }
-```  
+```
 - In the case of in cell editing, every time you click on the edit cell, it closes. So you need to also add a mouse-down handler targeting the label as the input element is hidden:
 
-```
+```JS
 	$(document).ready(function () {
         $("#grid").on("mousedown", ".k-radio-label", function (e) {
             e.preventDefault();

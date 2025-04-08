@@ -16,7 +16,7 @@ This article describes how to configure the Breadcrumb component in a Razor Page
 
 For the complete project, refer to the [Breadcrumb in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Breadcrumb/BreadcrumbIndex.cshtml).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	
@@ -41,7 +41,7 @@ For the complete project, refer to the [Breadcrumb in Razor Pages example](https
     )
 	
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	
 	public List<BreadcrumbItem> Items { get; set; }
         

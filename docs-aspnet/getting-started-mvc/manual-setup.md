@@ -62,9 +62,9 @@ The `Kendo.Mvc.dll` assembly contains the UI for ASP.NET MVC Html helpers. Follo
 
 Add the `Kendo.Mvc.UI` namespace to the `~/Views/Home/Index.cshtml` view. 
 
-    ```Razor
-        @using Kendo.Mvc.UI
-    ```
+```Razor
+    @using Kendo.Mvc.UI
+```
 
 ## Initializing the Grid HtmlHelper 
 
@@ -72,13 +72,15 @@ Perform the steps below to add a Grid to the project:
 
 1. Create a model in the `Models` folder of the application.
 
-        public class Product
-        {
-            public int ProductID { get; set; }
-            public string ProductName { get; set; }
-            public Nullable<decimal> UnitPrice { get; set; }
-            public bool Discontinued { get; set; }
-        }
+    ```C#
+    public class Product
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public bool Discontinued { get; set; }
+    }
+    ```
 
 1. Open the `~/Views/Home/Index.cshtml` view and add the Grid HtmlHelper.
 
@@ -103,26 +105,30 @@ Perform the steps below to add a Grid to the project:
     ```
 1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult` extension method in the next step.
 
-    	using Kendo.Mvc.Extensions;
-    	using Kendo.Mvc.UI;
+    ```C#
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+    ```
 
 1. Additionally, import the namespace for the model that you created in step 1.
 
 1. In the `HomeController.cs`, add a new action method which will return the data as JSON. The Grid makes an Ajax request to this action, to get its data.
 
-        public ActionResult Select([DataSourceRequest]DataSourceRequest request)
-        {
-            var data = Enumerable.Range(1, 10)
-                .Select(index => new Product
-                {
-                    ProductID = index,
-                    ProductName = "Product #" + index,
-                    UnitPrice = index * 10,
-                    Discontinued = false
-                });
+    ```C#
+    public ActionResult Select([DataSourceRequest]DataSourceRequest request)
+    {
+        var data = Enumerable.Range(1, 10)
+            .Select(index => new Product
+            {
+                ProductID = index,
+                ProductName = "Product #" + index,
+                UnitPrice = index * 10,
+                Discontinued = false
+            });
 
-            return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
+        return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+    }
+    ```
 
 ## Building and Running the Application 
 

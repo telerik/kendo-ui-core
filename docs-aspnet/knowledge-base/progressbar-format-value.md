@@ -59,7 +59,7 @@ Follow the steps below to initialize a ProgressBar into a specified Grid column 
     </kendo-grid>
   ```
   {% endif %}
-  ```Scripts
+  ```JS scripts
     <script>
       function onDataBound(e) {
         var grid = this;
@@ -77,7 +77,7 @@ Follow the steps below to initialize a ProgressBar into a specified Grid column 
 
 1. Within the `DataBound` event handler, select the `k-progressbar` elements, and access the respective ProgressBar value through the `k-progressbar-status` element. Use the [`kendo.parseFloat()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/parsefloat) and [`kendo.toString()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/tostring) methods to format the value and update it with jQuery.
 
-  ```Scripts
+  ```JS scripts
     <script>
       function onDataBound(e) {
         var grid = this;

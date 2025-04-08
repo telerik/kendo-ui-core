@@ -121,7 +121,7 @@ To be sure that the server will return only the events visible in the current Sc
 
 Here is a function that returns the current timespan boundries:
 
-```
+```JS
 function getAdditionalData() {
     var scheduler = $("#scheduler").data("kendoScheduler");
 
@@ -153,7 +153,7 @@ function getAdditionalData() {
 
 Once the result of the getAdditionalData function is passed to the server it receives it in the ``range`` variable in the below Read method definition:
 
-```Razor
+```C#
 public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request, FilterRange range)
 {
     var data = taskService.GetRange(range.Start, range.End);
@@ -165,7 +165,7 @@ The Start and End properties of the range object are then passed to the GetRange
 
 Here is the definition of the GetRange method:
 
-```Razor
+```C#
 public virtual IEnumerable<TaskViewModel> GetRange(DateTime start, DateTime end)
 {
     var result = GetAll().ToList().Where(t => (t.RecurrenceRule != null || (t.Start >= start && t.Start <= end) || (t.End >= start && t.End <= end)));

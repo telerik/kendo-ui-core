@@ -12,7 +12,7 @@ This article describes how to configure the Telerik UI Splitter for {{ site.fram
 
 See the Splitter configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(cshtml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.Splitter.SplitterIndexModel
     @{
@@ -109,7 +109,7 @@ See the Splitter configuration in the example below, and for the full project wi
     </style>
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.Splitter.SplitterIndexModel
     @{
@@ -180,7 +180,7 @@ See the Splitter configuration in the example below, and for the full project wi
     </style>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)
+```C# PageModel
     public class SplitterIndexModel : PageModel
     {
         public void OnGet()

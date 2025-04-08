@@ -106,7 +106,7 @@ The following example demonstrates how to achieve the desired outcome:
 ```
  {% endif %}
 
-```Script.js
+```JS script.js
     <script>
         function envelopeAction(e, action){
             switch(action){

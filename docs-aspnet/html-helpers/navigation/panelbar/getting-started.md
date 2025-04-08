@@ -193,7 +193,7 @@ You can reference the PanelBar instances that you have created and build on top 
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var panelBarReference = $("#panelbar").data("kendoPanelBar"); // panelBarReference is a reference to the existing PanelBar instance of the helper.
     </script>
@@ -201,7 +201,7 @@ You can reference the PanelBar instances that you have created and build on top 
 
 1. Use the [PanelBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control the behavior of the widget. In this example, you will use the `expand` method to expand a parent item.
 
-    ```script
+    ```JS script
     <script>
         $(document).ready(function() {
             //get a reference to the PanelBar instance

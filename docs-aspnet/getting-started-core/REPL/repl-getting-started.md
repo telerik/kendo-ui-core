@@ -47,7 +47,7 @@ The basic snippets are listed in the Snippets section of the REPL Sidebar. You c
 
 By using the Telerik REPL for ASP.NET Core, you can render plain HTML:
 
-```
+```HTML
     <table>
     <tr>
         <th>Position</th>
@@ -71,7 +71,7 @@ By using the Telerik REPL for ASP.NET Core, you can render plain HTML:
 
 Razor code blocks start with `@` and are enclosed by `{}`:
 
-```
+```Razor
     @using System;
     @using System.Globalization;
 
@@ -87,7 +87,7 @@ Razor code blocks start with `@` and are enclosed by `{}`:
 
 In code blocks, you can declare local functions with markup to serve as templating methods:
 
-```
+```Razor
     @{
         void RenderName(string name)
         {
@@ -103,7 +103,7 @@ In code blocks, you can declare local functions with markup to serve as templati
 
 The `@functions` directive enables you to add C# members (fields, properties, and methods) to the generated class. The following example demonstrates how to generate an HTML table from a collection by using the Telerik REPL for ASP.NET Core:
 
-```
+```Razor
     @using System.Linq.Expressions
     @using System.Text
     @using System.Reflection

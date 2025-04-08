@@ -92,7 +92,7 @@ How can I change the color of the entire element of the {{ site.product }} Sched
     </kendo-scheduler>
 ```
 {% else %}
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Scheduler<SchedulerModel>()
         .Name("scheduler")
         .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
@@ -114,7 +114,7 @@ How can I change the color of the entire element of the {{ site.product }} Sched
     )
 ```
 {% endif %}
-```SchedulerModel.cs
+```C# SchedulerModel.cs
 public class SchedulerModel : ISchedulerEvent
     {
         public int TaskID { get; set; }
@@ -179,7 +179,7 @@ public class SchedulerModel : ISchedulerEvent
         }
     }
 ```
-```Script.js
+```JS script.js
     <script>
         function onDataBound(e) {
             var view = this.view();

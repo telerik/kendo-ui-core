@@ -17,11 +17,11 @@ This article lists the breaking or important changes in the 2024 releases of {{ 
 For a while, the [CSS Utilities](https://www.telerik.com/design-system/docs/utils/get-started/introduction/) were bundled with the Kendo UI themes. Starting with version Q4 2024, the CSS Utilities are no longer included in the [Kendo UI themes]({% slug sassbasedthemes_overview %}).
 The Kendo UI theme stylesheet still contains all the necessary styles. However, in case you need to create an additional layout, dependent on the utility classes, you need to include the additional stylesheet `kendo-theme-utils.css`, which is available in the `styles` folder of the {{ site.product }} distribution and through the Kendo CDN service.
 
-```LocalFiles
+```HTML LocalFiles
     <link rel="stylesheet" href="~/lib/kendo/styles/default-ocean-blue.css" />
     <link rel="stylesheet" href="~/lib/kendo/styles/kendo-theme-utils.css" />
 ```
-```CDN
+```HTML CDN
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-ocean-blue.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/utils/all.css"/>
 ```
@@ -343,13 +343,13 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 {% if site.core %}
 * `ChartSeriesBuilder.Type(string)`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series
              .Bar(new double[] { 3.907 })
              .Type("bar")
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series
            .Bar(new double[] { 3.907 }) // Type is determined by the declared Series builder.
         )
@@ -357,7 +357,7 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `ChartSeriesLineSettingsBuilder.Width(string)`, `ChartSeriesLineSettingsBuilder.Style(ChartAreaStyle)`, `ChartSeriesLineSettingsBuilder.Style(ChartPolarAreaStyle)`, `ChartSeriesLineSettingsBuilder.Style(ChartRadarAreaStyle)`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Line(line => line
@@ -368,7 +368,7 @@ As of the Q1 2024 release, the following APIs will be deprecated.
            )
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Line(line => line
@@ -380,13 +380,13 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `ChartSeriesOverlaySettingsBuilder.Gradient`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Overlay(overlay => overlay.Gradient(ChartBarGradient.Glass))
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Overlay(overlay => overlay.Gradient(ChartSeriesGradient.Glass))
@@ -395,13 +395,13 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `SplitterEventBuilder.LayoutChange`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Events(events => events
            .LayoutChange("change")
            .LayoutChange(@<text>function () { return; }</text>)
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Events(events => events
            .Render("change")
            .Render(@<text>function () { return; }</text>)
@@ -413,26 +413,26 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `ChartSeriesBuilderBase.GroupNameTemplate`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series.Bar(s => s.Sales)
             .Name("Sales")
             .GroupNameTemplate("#= series.name # for #= group.field #   #=    group.value #")
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series.Bar(s => s.Sales)
             .Name("#= series.name # for #= group.field #   #=    group.value #")
         )
     ```
 
 * `EditorMessages.FormatBlock`, `EditorMessages.Styles`
-    ```Deprecated
+    ```Razor Deprecated
         .Messages(messages => messages
             .FormatBlock("Format")
             .Styles("Style")
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Messages(messages => messages
                .Formatting("Format")
                .Style("Style")

@@ -132,7 +132,7 @@ To send the generated file to a remote endpoint, use the `ProxyURL()` and `Force
 ```
 {% endif %}
 
-```ServerProxy
+```C# ServerProxy
     [HttpPost]
     public ActionResult PdfExportSave(string contentType, string base64, string fileName)
     {
@@ -147,7 +147,7 @@ The default fonts in PDF files do not provide Unicode support. To support intern
 
 The following example demonstrates how to handle custom fonts.
 
-```Style
+```CSS Style
     <style>
         /*
             Use the DejaVu Sans font for display and embedding in the PDF file.

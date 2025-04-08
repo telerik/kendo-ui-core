@@ -15,107 +15,111 @@ You can configure an AutoComplete to use virtualization.
 
 1. Create the `Read` and `ValueMapper` actions.
 
-            {% if site.core %}
-            public IActionResult Index()
+    {% if site.core %}
+    ```C#
+    public IActionResult Index()
+    {
+        return View(new ProductViewModel
+        {
+            ProductID = 4,
+            ProductName = "ProductName4"
+        });
+    }
+
+    [HttpPost]
+    public IActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+    {
+        return Json(GetProducts().ToDataSourceResult(request));
+    }
+
+    public IActionResult Products_ValueMapper(int[] values)
+    {
+        var indices = new List<int>();
+
+        if (values != null && values.Any())
+        {
+            var index = 0;
+
+            foreach (var product in GetProducts())
             {
-                return View(new ProductViewModel
+                if (values.Contains(product.ProductID))
                 {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
-
-            [HttpPost]
-            public IActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
-            {
-                return Json(GetProducts().ToDataSourceResult(request));
-            }
-
-            public IActionResult Products_ValueMapper(int[] values)
-            {
-                var indices = new List<int>();
-
-                if (values != null && values.Any())
-                {
-                    var index = 0;
-
-                    foreach (var product in GetProducts())
-                    {
-                        if (values.Contains(product.ProductID))
-                        {
-                            indices.Add(index);
-                        }
-
-                        index += 1;
-                    }
+                    indices.Add(index);
                 }
 
-                return Json(indices);
+                index += 1;
             }
+        }
 
-            private static IEnumerable<ProductViewModel> GetProducts()
+        return Json(indices);
+    }
+
+    private static IEnumerable<ProductViewModel> GetProducts()
+    {
+        var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+        {
+            ProductID = i,
+            ProductName = "ProductName" + i
+        });
+
+        return products;
+    }
+    ```
+    {% else %}
+    ```C#
+    public ActionResult Index()
+    {
+        return View(new ProductViewModel
+        {
+            ProductID = 4,
+            ProductName = "ProductName4"
+        });
+    }
+
+    [HttpPost]
+    public ActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+    {
+        return Json(GetProducts().ToDataSourceResult(request));
+    }
+
+    public ActionResult Products_ValueMapper(int[] values)
+    {
+        var indices = new List<int>();
+
+        if (values != null && values.Any())
+        {
+            var index = 0;
+
+            foreach (var product in GetProducts())
             {
-                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+                if (values.Contains(product.ProductID))
                 {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
-
-                return products;
-            }
-            {% else %}
-            public ActionResult Index()
-            {
-                return View(new ProductViewModel
-                {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
-
-            [HttpPost]
-            public ActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
-            {
-                return Json(GetProducts().ToDataSourceResult(request));
-            }
-
-            public ActionResult Products_ValueMapper(int[] values)
-            {
-                var indices = new List<int>();
-
-                if (values != null && values.Any())
-                {
-                    var index = 0;
-
-                    foreach (var product in GetProducts())
-                    {
-                        if (values.Contains(product.ProductID))
-                        {
-                            indices.Add(index);
-                        }
-
-                        index += 1;
-                    }
+                    indices.Add(index);
                 }
 
-                return Json(indices, JsonRequestBehavior.AllowGet);
+                index += 1;
             }
+        }
 
-            private static IEnumerable<ProductViewModel> GetProducts()
-            {
-                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
-                {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
+        return Json(indices, JsonRequestBehavior.AllowGet);
+    }
 
-                return products;
-            }
-            {% endif %}
+    private static IEnumerable<ProductViewModel> GetProducts()
+    {
+        var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+        {
+            ProductID = i,
+            ProductName = "ProductName" + i
+        });
+
+        return products;
+    }
+    ```
+    {% endif %}
 
 1. Add the AutoComplete to the view and configure it to use virtualization.
 
-```HtmlHelper
+    ```HtmlHelper
     @model MvcApplication1.Models.ProductViewModel
 
     @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
@@ -140,26 +144,23 @@ You can configure an AutoComplete to use virtualization.
         })
         .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
     )
-
-```
-{% if site.core %}
-```TagHelper
-
-   <kendo-autocomplete for="ProductName" style="width:100%"
-            dataTextField="ProductName"
-            filter="FilterType.Contains">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="aspnetmvc-ajax" page-size="80" server-filtering="true" server-paging="true">
-                <schema data="Data" total="Total"></schema>
-                <transport>
-                    <read url="@Url.Action("ProductsVirtualization_Read", "Home")"/>
-                </transport>
-            </datasource>
-            <virtual item-height="26" value-mapper="valueMapper" />
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-autocomplete for="ProductName" style="width:100%"
+        dataTextField="ProductName"
+        filter="FilterType.Contains">
+        <datasource type="DataSourceTagHelperType.Custom" custom-type="aspnetmvc-ajax" page-size="80" server-filtering="true" server-paging="true">
+            <schema data="Data" total="Total"></schema>
+            <transport>
+                <read url="@Url.Action("ProductsVirtualization_Read", "Home")"/>
+            </transport>
+        </datasource>
+        <virtual item-height="26" value-mapper="valueMapper" />
     </kendo-autocomplete>
-    
-```
-{% endif %}
-```script
+    ```
+    {% endif %}
+    ```JS script
     <script>
         function valueMapper(options) {
             $.ajax({
@@ -183,7 +184,7 @@ You can configure an AutoComplete to use virtualization.
             return data;
         }
     </script>
-```
+    ```
 
 ## See Also
 

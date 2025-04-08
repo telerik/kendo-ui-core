@@ -30,13 +30,11 @@ To upgrade the version with NuGet or Bower:
 
    * If the scripts and styles are referenced through the Kendo CDN service, update the links with the new version.
 
-      ```_Layout.cshtml
-      
-            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
-            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-
+      ```HTML _Layout.cshtml
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
       ```
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
@@ -52,13 +50,11 @@ To upgrade the version with NuGet or Bower:
 
    * If the scripts and styles are referenced through the Kendo CDN service, update the links with the new version.
 
-      ```_Layout.cshtml
-      
-            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
-            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-
+      ```HTML _Layout.cshtml
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
       ```
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
@@ -92,13 +88,11 @@ To upgrade your project with the Upgrade Project Wizard, refer to the following 
 
    * If the scripts and styles are referenced through the Kendo CDN service, update the links with the new version.
 
-      ```_Layout.cshtml
-      
-            <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
-            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-
+      ```HTML _Layout.cshtml
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
       ```
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.

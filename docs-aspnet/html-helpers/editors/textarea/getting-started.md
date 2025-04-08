@@ -155,7 +155,7 @@ You can reference the TextArea instances that you have created and build on top 
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var textAreaReference = $("#textArea").data("kendoTextArea"); // textAreaReference is a reference to the existing TextArea instance of the helper.
@@ -165,7 +165,7 @@ You can reference the TextArea instances that you have created and build on top 
 
 1. Use the [TextArea Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textarea#methods) to control the behavior of the widget. In this example, you will change the value of the widget programmatically.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var textAreaReference = $("#textArea").data("kendoTextArea"); 

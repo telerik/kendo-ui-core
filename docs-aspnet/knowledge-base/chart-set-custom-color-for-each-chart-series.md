@@ -32,7 +32,7 @@ How to set custom colors for each series of the {{ site.product }} Chart?
 2. By using the [setOptions](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/setoptions) method, set the colors for the series. 
 
 
-    ```Index.cshtml
+    ```Razor Index.cshtml
     <div class="demo-section k-content wide">
         @(Html.Kendo().Chart()
             .Name("chart")
@@ -98,7 +98,7 @@ How to set custom colors for each series of the {{ site.product }} Chart?
         )
     </div>
     ```
-    ```Script.js
+    ```JS script.js
         var seriesColors = []; //stores the colors from the color picker
         function isSeriesColorsExceeded(){ //asserts if more than 3 colors are pushed into the seriesColors variable
             if (seriesColors.length >= 3) {

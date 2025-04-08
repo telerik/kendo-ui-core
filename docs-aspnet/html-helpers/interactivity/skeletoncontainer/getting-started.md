@@ -394,7 +394,7 @@ You can reference the SkeletonContainer instances that you have created and buil
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var skeletoncontainer = $("#skeleton").data("kendoSkeletonContainer"); // skeletoncontainer is a reference to the existing skeletoncontainer instance of the helper.
     </script>
