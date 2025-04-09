@@ -50,11 +50,11 @@ The Prompt suggestion list implements roving tabindex navigation. Meaning that o
 
 ### Card List Container
 
-[CardList accessibility specification]({% slug htmlhelpers_cardlist_accessibility %})
+[CardList accessibility specification]({{cardlist_a11y_link}})
 
 ### Card Component
 
-[Card accessibility specification]({% slug htmlhelpers_card_accessibility %})
+[Card accessibility specification]({{card_a11y_link}})
 
 ### More Actions View - PanelBar Component
 

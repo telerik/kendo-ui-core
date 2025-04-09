@@ -93,11 +93,11 @@ The following project templates are available:
         </tr>
         <tr>
             <td><strong>Blank</strong></td>
-            <td><p>The Blank template has the package references and the client-side resources loaded in the <code>_Layout.cshtml</code> file. It also features the expected <a href="https://docs.telerik.com/{{ site.platform }}/installation/json-serialization">JSON serialization configuration</a> in the <code>Program.cs</code> file. The default editor templates are included in the <code>~Views\Shared\EditorTemplates</code> folder.</p></td>
+            <td><p>The Blank template allows you to quickly scaffold Telerik UI for ASP.NET Core applications.</p><p>The template has the package references and the client-side resources loaded in the <code>_Layout.cshtml</code> file. It also features the expected <a href="https://docs.telerik.com/{{ site.platform }}/installation/json-serialization">JSON serialization configuration</a> in the <code>Program.cs</code> file. The default editor templates are included in the <code>~Views\Shared\EditorTemplates</code> folder.</p></td>
         </tr>
         <tr>
             <td><strong>Standard</strong></td>
-            <td><p>The Standard template features:</p>
+            <td><p>The Standart template lets you jump quickly into three example pages with integrated PanelBar, Cards, and TabStrip components.</p><p>The Standard template features:</p>
                 <ul>
                     <li> Everything from the <strong>Blank Project<strong>.</li>
                     <li> A Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
@@ -108,8 +108,8 @@ The following project templates are available:
             </td>
         </tr>
         <tr>
-            <td><strong>The Content Security Policy (CSP)</strong></td>
-            <td><p>Content Security Policy (CSP) template features:</p>
+            <td><strong>Grid with TabStrip</strong></td>
+            <td><p>This template illustrates the usage of Grid and TabStrip components in an application running in strict CSP mode.</p><p>Grid with TabStrip template features:</p>
                 <ul>
                     <li> A Menu in <code>_Layout.cshtml</code>.</li>
                     <li> A Detail Grid with a TabStrip in <code>Index.cshtml</code>.</li>
@@ -124,7 +124,7 @@ The following project templates are available:
         </tr>
         <tr>
             <td><strong>Grid and Menu</strong></td>
-            <td><p>The Grid and Menu template features:</p>
+            <td><p>The Grid and Menu template contains a Grid, Menu, and Buttons as a starting point for your Telerik UI for ASP.NET Core application.</p><p>The Grid and Menu template features:</p>
                 <ul>
                     <li> Everything from the <strong>Blank Project</strong>.</li>
                     <li> Buttons and Grid in <code>Index.cshtml</code>.</li>
@@ -138,7 +138,7 @@ The following project templates are available:
         </tr>
         <tr>
             <td><strong>Dashboard</strong></td>
-            <td><p>The Dashboard template features:</p>
+            <td><p>The Dashboard template lets you quickly develop dashboards and dashboard-like applications using the built-in TileLayout, Charts, and Grid components.</p><p>The Dashboard template features:</p>
                 <ul>
                     <li> Everything from the <strong>Blank Project</strong> except the editor templates folder.</li>
                     <li> A TileLayout with Charts and Grids in the <code>Index.cshtml</code> as well as shared DataSource and dynamically populated templates.</li>
@@ -147,7 +147,7 @@ The following project templates are available:
         </tr>
         <tr>
             <td><strong>Admin</strong></td>
-            <td><p>The Admin is a Razor Pages template configured with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/overview">TagHelpers</a>. It features:</p>
+            <td><p>The Admin template lets you jump quickly into the action of a complete app developed using Telerik UI for ASP.NET Core.</p><p>The Admin is a Razor Pages template configured with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/overview">TagHelpers</a>. It features:</p>
                 <ul>
                     <li>Everything from the <strong>Blank Project</strong>.</li>
                     <li>Authentication functionallity (Registration, Login, and Logout) in <code>Areas/Login/Pages</code>.</li>
@@ -162,13 +162,96 @@ The following project templates are available:
     </tbody>
 </table>
 
+{% else %}
+
+### Available Templates
+
+The following project templates are available:
+
+![{{ site.product_short }} Project template options](../vs-integration/images/available-templates-mvc.png)
+
+<table>
+    <colgroup>
+        <col width="25%"></col>
+        <col></col>
+    </colgroup>
+    <tbody>
+        <tr>
+            <th >Project</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Blank</strong></td>
+            <td><p>The Blank template allows you to quickly scaffold Telerik UI for ASP.NET MVC applications.</p><p>The Blank template has the package references and the client-side resources loaded in the <code>_Layout.cshtml</code> file. The default editor templates are included in the <code>~Views\Shared\EditorTemplates</code> folder.</p></td>
+        </tr>
+        <tr>
+            <td><strong>Standard</strong></td>
+            <td><p>The Standart template lets you jump quickly into three example pages with integrated PanelBar, Cards, and TabStrip components.</p><p>The Standard template features:</p>
+                <ul>
+                    <li> Everything from the <strong>Blank Project<strong>.</li>
+                    <li> A Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
+                    <li> A PanelBar in <code>Index.cshtml</code>.</li>
+                    <li> A TabStrip in <code>Contact.cshtml</code>.</li>
+                    <li> An HTML styled with <a href="https://docs.telerik.com/{{ site.platform }}/knowledge-base/cards">Cards</a> in <code>About.cshtml</code>.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Grid with TabStrip</strong></td>
+            <td><p>This template illustrates the usage of Grid and TabStrip components in an application running in strict CSP mode.</p><p>Grid with TabStrip template features:</p>
+                <ul>
+                    <li> A Menu in <code>_Layout.cshtml</code>.</li>
+                    <li> A Detail Grid with a TabStrip in <code>Index.cshtml</code>.</li>
+                    <li> A Child Grid in <code>_Child_Grid.cshtml</code>.</li>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Grid and Menu</strong></td>
+            <td><p>The Grid and Menu template contains a Grid, Menu, and Buttons as a starting point for your Telerik UI for ASP.NET MVC application.</p><p>The Grid and Menu template features:</p>
+                <ul>
+                    <li> Everything from the <strong>Blank Project</strong>.</li>
+                    <li> Buttons and Grid in <code>Index.cshtml</code>.</li>
+                    <li> A Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Dashboard</strong></td>
+            <td><p>The Dashboard template lets you quickly develop dashboards and dashboard-like applications using the built-in TileLayout, Charts, and Grid components.</p><p>The Dashboard template features:</p>
+                <ul>
+                    <li> Everything from the <strong>Blank Project</strong> except the editor templates folder.</li>
+                    <li> A TileLayout with Charts and Grids in the <code>Index.cshtml</code> as well as shared DataSource and dynamically populated templates.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Admin</strong></td>
+            <td><p>The Admin Dashboard template lets you jump quickly into the action of a complete app developed using Telerik UI for ASP.NET MVC. It features:</p>
+                <ul>
+                    <li>Everything from the <strong>Blank Project</strong>.</li>
+                    <li>Authentication functionallity (Registration, Login, and Logout) in <code>Views/Account</code>.</li>
+                    <li>A navigation that is created by using the <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/navigation/drawer/overview">Drawer</a> and <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/navigation/appbar/overview">AppBar</a> components.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://www.telerik.com/aspnet-mvc/documentation/styles-and-layout/cards">Cards</a>, <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/gauges/arcgauge/overview">Arc Gauge</a>, <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/charts/overview">Chart</a> and <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/data-management/grid/overview">Grid</a> in <code>Index.cshtml</code>.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/layout/tilelayout/overview">TileLayout</a> with a variety of <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/charts/overview">Charts</a> and <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/gauges/radialgauge/overview">Gauges</a> in <code>Performance.cshtml</code>.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/charts/overview">Bubble Chart</a> and <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/data-management/listview/overview">ListView</a> with editable <a href="https://www.telerik.com/aspnet-mvc/documentation/styles-and-layout/cards">Cards</a> in <code>Products.cshtml</code> as well as <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/data-management/pager/overview">Pager</a> and search panel.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/layout/form/overview">Form</a> and <a href="https://docs.telerik.com/aspnet-mvc/html-helpers/scheduling/calendar/overview">Calendar</a> in <code>Settings.cshtml</code>.</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endif %}
+
+> Starting with version 2025 Q1, all templates enforce strict CSP mode.
+
 ### Themes
 
 The **Select Theme** option allows you to preview the available Kendo UI themes and select the desired one. After selecting a theme, the project will include only the files that are required by the selected theme in the `_Layout.cshtml`.
 
 ![{{ site.product_short }} Project Wizard Select Theme](../vs-integration/images/themes.png)
-
-{% endif %}
 
 ## Creating the Application
 

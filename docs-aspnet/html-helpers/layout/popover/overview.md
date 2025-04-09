@@ -105,7 +105,7 @@ The following example demonstrates the basic configuration of the PopOver.
 
 * [Templates]({% slug htmlhelpers_templates_popover %})&mdash;The PopOver provides template options that allow you to customize the header and body content.
 * [Events]({% slug events_popover %})&mdash;The component exposes the `Show` and `Hide` events that you can handle and control its behavior.
-* [Accessibility]({% slug accessibility_popover_overview %})&mdash;The PopOver is accessible for screen readers and supports WAI-ARIA attributes.
+* [Accessibility]({% slug htmlhelpers_popover_accessibility %})&mdash;The PopOver is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## Next Steps
 

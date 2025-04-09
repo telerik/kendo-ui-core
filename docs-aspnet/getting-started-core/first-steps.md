@@ -250,9 +250,8 @@ To generate your license file and add it to your application, follow the instruc
 ## Next Steps
 
 * [Overview of the UI for ASP.NET Core installation methods]({% slug downloadinstall_aspnetcore %})
-* [Create your own custom bundles]({% slug custombundles_core %})
-* [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [How to update UI for ASP.NET Core to a new version]({% slug upgrade_aspnetcore %}#upgrading-to-new-versions)
+* [Create a New Telerik UI for ASP.NET Core Application through Visual Studio Extension]({% slug newprojectwizards_visualstudio_aspnetcore %})
 
 ## See Also
 
@@ -260,3 +259,4 @@ To generate your license file and add it to your application, follow the instruc
 * [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
 * [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
 * [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)
+

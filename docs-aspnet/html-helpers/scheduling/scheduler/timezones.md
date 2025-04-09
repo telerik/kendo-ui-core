@@ -117,3 +117,4 @@ You can find a full working sample with Timezone defined and different cultures 
 ## See Also
 
 * [Server-Side API](/api/scheduler)
+* [Knowledge Base: Change Timezone in Scheduler Dynamically]({% slug scheduler-change-timezone %})

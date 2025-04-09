@@ -2787,9 +2787,24 @@ declare namespace kendo.ui {
 
     }
 
+    interface ButtonGroupItemBadge {
+        align?: string | undefined;
+        cutoutBorder?: boolean | undefined;
+        fill?: string | undefined;
+        icon?: string | undefined;
+        max?: number | undefined;
+        position?: string | undefined;
+        shape?: string | undefined;
+        size?: string | undefined;
+        template?: string | Function | undefined;
+        text?: string | number | undefined;
+        themeColor?: string | undefined;
+        visible?: boolean | undefined;
+    }
+
     interface ButtonGroupItem {
         attributes?: any;
-        badge?: string | undefined;
+        badge?: ButtonGroupItemBadge | undefined;
         enabled?: boolean | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
@@ -17411,6 +17426,7 @@ declare namespace kendo.dataviz.ui {
         scatterLine?: any;
         spacing?: number | undefined;
         stack?: boolean | ChartSeriesDefaultsStack | undefined;
+        startAngle?: number | undefined;
         type?: string | undefined;
         tooltip?: ChartSeriesDefaultsTooltip | undefined;
         verticalArea?: any;
@@ -20498,6 +20514,7 @@ declare namespace kendo.dataviz.ui {
         exportImage(options: any): JQueryPromise<any>;
         exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
         exportSVG(options: any): JQueryPromise<any>;
+        redraw(): void;
         refresh(): void;
         setDataSource(dataSource: kendo.data.DataSource): void;
         setOptions(options: any): void;

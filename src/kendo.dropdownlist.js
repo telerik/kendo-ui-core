@@ -658,8 +658,18 @@ export const __meta__ = {
         },
 
         _wrapperMousedown: function(e) {
-            const condition = this._hasActionSheet() ? (this.filterInput && e.currentTarget === this.filterInput[0]) : (this.filterInput && e.currentTarget !== this.filterInput[0]);
-            this._prevent = condition;
+            const that = this;
+            let condition = that.filterInput && !that._touchEnabled() ? e.currentTarget !== that.filterInput[0] : true;
+
+            if (that.popup && that._hasActionSheet()) {
+                condition = true;
+                that.popup.unbind("close");
+
+                that.popup.bind("close", function() {
+                    that._change();
+                });
+            }
+            that._prevent = condition;
         },
 
         _wrapperClick: function(e) {
@@ -953,12 +963,16 @@ export const __meta__ = {
             });
         },
 
+        _touchEnabled: function() {
+            return support.mobileOS && (support.touch || support.MSPointers || support.pointers);
+        },
+
         _focusElement: function(element) {
             var active = activeElement();
             var wrapper = this.wrapper;
             var filterInput = this.filterInput;
             var compareElement = element === filterInput ? wrapper : filterInput;
-            var touchEnabled = support.mobileOS && (support.touch || support.MSPointers || support.pointers);
+            var touchEnabled = this._touchEnabled();
 
             if (filterInput && filterInput[0] === element[0] && touchEnabled) {
                 return;

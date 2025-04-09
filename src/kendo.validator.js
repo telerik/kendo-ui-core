@@ -161,7 +161,8 @@ export const __meta__ = {
                 that.element.attr(NOVALIDATE, NOVALIDATE);
             }
 
-            that._shouldSearchDocument = that.element.is(FORM) && that.element.attr("id") !== undefined;
+            const formId = that.element.attr("id");
+            that._shouldSearchDocument = that.element.is(FORM) && formId != undefined && $(`:input[form='${formId}']`).length > 0;
             that._containerElement = that._shouldSearchDocument ? $(document) : that.element;
             that._inputSelector = that._buildSelector(INPUTSELECTOR, validateAttributeSelector);
             that._checkboxSelector = that._buildSelector(CHECKBOXSELECTOR, validateAttributeSelector);
@@ -300,15 +301,12 @@ export const __meta__ = {
         },
 
         _buildSelector: function(selectorConstant, validateAttributeSelector) {
-            const that = this,
-            formSelector = `,[form="${that.element.attr("id")}"]`;
-            let selector = selectorConstant + validateAttributeSelector;
-
-            if ( that._shouldSearchDocument) {
-                selector += formSelector;
+            if (!this._shouldSearchDocument) {
+                return selectorConstant + validateAttributeSelector;
             }
+            const id = this.element.attr("id");
 
-            return selector;
+            return `#${id} ` + selectorConstant + validateAttributeSelector + `,[form="${id}"]`;
         },
 
         _allowSubmit: function() {

@@ -143,14 +143,14 @@ Even if part of the `<thead>`, the Filter row must be composed of `<td>` element
 
 Implements the FilterMenu specification.
 
-[FilterMenu accessibility specification]({% slug jquery_filtermenu_accessibility %})
+[FilterMenu accessibility specification]({{filtermenu_a11y_link}})
 
 #### Grid column menu
 
 
 Implements the ColumnMenu specification.
 
-[ColumnMenu accessibility specification]({% slug jquery_columnmenu_accessibility %})
+[ColumnMenu accessibility specification]({{columnmenu_a11y_link}})
 
 #### Grid content
 
