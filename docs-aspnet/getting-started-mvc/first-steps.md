@@ -118,6 +118,7 @@ To generate your license file and add it to your application, follow the instruc
 * [Explore the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Grid Data Binding Overview]({% slug htmlhelpers_grid_aspnetcore_binding_overview %})
 * [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
+* [Create a New Telerik UI for ASP.NET MVC Application through Visual Studio Extension]({% slug newprojectwizards_visualstudio_aspnetcore %})
 
 ## See Also
 
@@ -128,3 +129,4 @@ To generate your license file and add it to your application, follow the instruc
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
 * [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
 * [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)
+
