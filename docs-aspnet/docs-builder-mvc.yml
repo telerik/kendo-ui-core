@@ -112,6 +112,7 @@ excluded-files:
 - "**/knowledge-base/vs-2015-support.md"
 - "**/knowledge-base/trial-to-commercial-license-troubleshooting.md"
 - "**/knowledge-base/vs-code-extension-issues.md"
+- "**/knowledge-base/razor-class-library.md"
 - "**/html-helpers/hybrid/*"
 - "**/html-helpers/helper-basics/fundamentals.md"
 - "**/html-helpers/helper-basics/declarative-initialization.md"
