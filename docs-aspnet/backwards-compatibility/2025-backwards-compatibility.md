@@ -13,6 +13,10 @@ This article lists the breaking or important changes in the 2025 releases of {{ 
 {% if site.core %}
 ## {{ site.product }} Q2 2025
 
+### Target Framework
+
+With the Q2 2025 release, {{ site.product }} support for .NET 6 has been dropped as .NET 6 has reached the end of its lifecycle on November 12, 2024. You can update to a supported [LTS and STS versions of .NET Core](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#lifecycle).
+
 ### PopOver
 
 The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssystemstring) option of the PopOver HtmlHelper and the [`icon-class`](/api/kendo.mvc.taghelpers/popoveractiontaghelper#attributes) attribute of the PopOver TagHelper now expect a `string` instead of a JavaScript handler or a template delegate (`System.Func<Object,Object>`).
@@ -43,6 +47,20 @@ The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssyste
     </kendo-popover>
 ```
 {% endif %}
+
+### Telerik.Zip
+
+As of the Q2 2025 release, the following NuGet packages and assemblies no longer have a dependency to the `Telerik.Zip` library:
+
+{% if site.core %}
+* Telerik.Core.Export
+{% else %}
+* Telerik.Mvc.Export
+{% endif %}
+* Telerik.Web.Pdf
+* Telerik.Web.Spreadsheet
+
+The `Telerik.Zip` library will continue to be shipped as a standalone library.
 
 ## {{ site.product }} Q1 2025
 
