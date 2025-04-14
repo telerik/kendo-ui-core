@@ -204,7 +204,9 @@ To [use a local NuGet feed](https://learn.microsoft.com/en-us/nuget/hosting-pack
 * [Telerik.SvgIcons](https://www.nuget.org/packages/Telerik.SvgIcons)
 * [Telerik.FontIcons](https://www.nuget.org/packages/Telerik.FontIcons)
 
+{% if site.mvc %}
 >As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
+{% endif %}
 
 ## Telerik NuGet Packages Installation
 

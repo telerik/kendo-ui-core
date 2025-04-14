@@ -31,7 +31,8 @@ How can I implement cascading {{ site.framework }} ComboBoxes that bind to Web A
 The example below relies on the following key steps:
 
 1. Create the Web API service:
-```C#
+{% if site.mvc %}
+```C# Controller
     public class SpecialtyController : ApiController
     {
         // GET api/Specialty
@@ -53,31 +54,93 @@ The example below relies on the following key steps:
         }
     }
 ```
+{% else %}
+```C# Controller
+[ApiController()]
+[Route("api/[controller]")]
+public class SpecialtyController : Controller
+{
+    public IEnumerable<Specialty> Get(int typeId, string filterValue)
+    {
+        List<Specialty> specialty = new List<Specialty>();
 
-2. Bind the ComboBoxes to the Web API:
+        specialty.Add(new Specialty { Name = "Test" + new Random().Next(1000).ToString(), Value = 1, TypeId = typeId });
+        specialty.Add(new Specialty { Name = "Test" + new Random().Next(1000).ToString(), Value = 2, TypeId = typeId });
+        specialty.Add(new Specialty { Name = "Test" + new Random().Next(1000).ToString(), Value = 3, TypeId = typeId });
+        specialty.Add(new Specialty { Name = "Test" + new Random().Next(1000).ToString(), Value = 4, TypeId = typeId });
+
+        if (!string.IsNullOrWhiteSpace(filterValue))
+        {
+            specialty = specialty.Where(s => s.Name.StartsWith(filterValue)).ToList();
+        }
+
+        return specialty.AsEnumerable();
+    }
+}
+```
+{% endif %}
+
+2. Configure the ComboBox for Web API data binding:
+
 ```HtmlHelper
-                @(Html.Kendo().ComboBox()
-                  .Name("specialty")
-                  .DataTextField("Name")
-                  .DataValueField("Id")
-                  .DataSource(source => source
-                        .Custom()
-                        .Type("json")
-                        .Transport(transport => transport
-                            .Read(read=>read.Url("../../api/Specialty/get")
-                         )
-                    )
-                )
+@(Html.Kendo().ComboBox()
+    .Name("specialty")
+    .DataTextField("Name")
+    .DataValueField("Value")
+    .Filter(FilterType.StartsWith)
+    .DataSource(source => source
+        .Custom()
+        .ServerFiltering(true)
+        .Transport(transport => transport
+            .Read(read => read
+                .Url("/api/Specialty")
+                .DataType("json")
+                .Data("filterSpecialtyData")
+            )
+        )
+    )
+    .Enable(false)
+    .AutoBind(false)
+    .CascadeFrom("type")
+    .CascadeFromField("TypeId")
+)
+
+<script>
+    function filterSpecialtyData() {
+        return {
+            typeId: $("#type").val(),
+            filterValue: $("#specialty").data("kendoComboBox").input.val()
+        }
+    }
+</script>
 ```
+{% if site.core %}
 ```TagHelper
-                <kendo-combobox datatextfield="Name" datavaluefield="Id" name="specialty">
-                    <datasource type="DataSourceTagHelperType.Custom">
-                      <transport >
-                          <read url="../../api/Specialty/get" dataType="json"/>
-                      </transport>
-                  </datasource>
-                </kendo-combobox>
+<kendo-combobox name="specialty"
+    datatextfield="Name" 
+    datavaluefield="Value"
+    enable="false"
+    auto-bind="false" 
+    cascade-from="type"
+    cascade-from-field="TypeId"
+    filter="FilterType.StartsWith">
+    <datasource type="DataSourceTagHelperType.Custom">
+        <transport >
+            <read url="/api/Specialty" dataType="json" data="filterSpecialtyData"/>
+        </transport>
+    </datasource>
+</kendo-combobox>
+
+<script>
+    function filterSpecialtyData() {
+        return {
+            typeId: $("#type").val(),
+            filterValue: $("#specialty").data("kendoComboBox").input.val()
+        }
+    }
+</script>
 ```
+{% endif %}
 
 You can refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/DropDownListWebApi) in the [UI for ASP.NET MVC Examples repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master) to review the complete example. {% if site.core %}You can use this as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}
 
@@ -106,4 +169,7 @@ You can refer to the [ASP.NET MVC application](https://github.com/telerik/ui-for
 
 * [Client-Side API Reference of the ComboBox for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
 * [Server-Side API Reference of the ComboBox for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/combobox)
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the ComboBox for {{ site.framework }}](/api/taghelpers/combobox)
+{% endif %}
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

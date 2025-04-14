@@ -29,75 +29,78 @@ How can I add a mask to the Telerik UI DatePicker?
 > The DatePicker does not officially support the suggested approach and its implementation might lead to undesired side-effects. Starting with version R2 2017, the DatePicker supports the [`DateInput`](/api/kendo.mvc.ui.fluent/datepickerbuilder#dateinput) property, which provides a built-in mask.
 
 ## Solution
+
 Include the following script before the DatePicker declaration.
-```html
-    <script>
-      //maskedDatePicker.js
-      (function ($) {
-        var kendo = window.kendo,
-            ui = kendo.ui,
-            Widget = ui.Widget,
-            proxy = $.proxy,
-            CHANGE = "change",
-            PROGRESS = "progress",
-            ERROR = "error",
-            NS = ".generalInfo";
 
-        var MaskedDatePicker = Widget.extend({
-          init: function (element, options) {
-            var that = this;
-            Widget.fn.init.call(this, element, options);
+```JS
+<script>
+  //maskedDatePicker.js
+  (function ($) {
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        Widget = ui.Widget,
+        proxy = $.proxy,
+        CHANGE = "change",
+        PROGRESS = "progress",
+        ERROR = "error",
+        NS = ".generalInfo";
 
-            $(element).kendoMaskedTextBox({ mask: that.options.dateOptions.mask || "00/00/0000" })
-            .kendoDatePicker({
-              format: that.options.dateOptions.format || "MM/dd/yyyy",
-              parseFormats: that.options.dateOptions.parseFormats || ["MM/dd/yyyy", "MM/dd/yy"]
-            })
-            .closest(".k-datepicker")
-            .add(element)
-            .removeClass("k-textbox");
+    var MaskedDatePicker = Widget.extend({
+      init: function (element, options) {
+        var that = this;
+        Widget.fn.init.call(this, element, options);
 
-            that.element.data("kendoDatePicker").bind("change", function() {
-              that.trigger(CHANGE);
-            });
-          },
-          options: {
-            name: "MaskedDatePicker",
-            dateOptions: {}
-          },
-          events: [
-            CHANGE
-          ],
-          destroy: function () {
-            var that = this;
-            Widget.fn.destroy.call(that);
+        $(element).kendoMaskedTextBox({ mask: that.options.dateOptions.mask || "00/00/0000" })
+        .kendoDatePicker({
+          format: that.options.dateOptions.format || "MM/dd/yyyy",
+          parseFormats: that.options.dateOptions.parseFormats || ["MM/dd/yyyy", "MM/dd/yy"]
+        })
+        .closest(".k-datepicker")
+        .add(element)
+        .removeClass("k-textbox");
 
-            kendo.destroy(that.element);
-          },
-          value: function(value) {
-            var datepicker = this.element.data("kendoDatePicker");
-
-            if (value === undefined) {
-              return datepicker.value();
-            }
-
-            datepicker.value(value);
-          }
+        that.element.data("kendoDatePicker").bind("change", function() {
+          that.trigger(CHANGE);
         });
+      },
+      options: {
+        name: "MaskedDatePicker",
+        dateOptions: {}
+      },
+      events: [
+        CHANGE
+      ],
+      destroy: function () {
+        var that = this;
+        Widget.fn.destroy.call(that);
 
-        ui.plugin(MaskedDatePicker);
+        kendo.destroy(that.element);
+      },
+      value: function(value) {
+        var datepicker = this.element.data("kendoDatePicker");
 
-      })(window.kendo.jQuery);
-    </script>
+        if (value === undefined) {
+          return datepicker.value();
+        }
 
-    <div id="example">
-      <input id="maskedDatePicker" />
-      <script>
-        $(document).ready(function() {
-        	$('#maskedDatePicker').kendoMaskedDatePicker();
-        });
-      </script>
-    </div>
+        datepicker.value(value);
+      }
+    });
+
+    ui.plugin(MaskedDatePicker);
+
+  })(window.kendo.jQuery);
+</script>
+```
+```HTML
+<div id="example">
+  <input id="maskedDatePicker" />
+  <script>
+    $(document).ready(function() {
+      $('#maskedDatePicker').kendoMaskedDatePicker();
+    });
+  </script>
+</div>
 ```
 
 ## More {{ site.framework }} DatePicker Resources

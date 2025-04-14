@@ -32,102 +32,205 @@ To implement cascading DropDownLists and still virtualize the data, you must use
 
 ```HtmlHelper
 @(Html.Kendo().DropDownList()
-      .Name("Category")
-      .BindTo(ViewBag.Categories)
-      .DataTextField("CategoryName")
-      .DataValueField("CategoryId")
+    .Name("Category")
+    .BindTo(ViewBag.Categories)
+    .DataTextField("CategoryName")
+    .DataValueField("CategoryId")
 )
 
 <h5>Type "4" in the filter input</h5>
 
 @(Html.Kendo().DropDownList()
-                    .Name("SelectEmployeeId")
-                    .CascadeFrom("Category")
-                    .DataValueField("Id")
-                    .DataTextField("Name")
-                    .OptionLabel("Test")
-                            .HtmlAttributes(new { @class = "width500" })
-                    .Filter("contains")
-                    .Virtual(v => v.ValueMapper("SelectEmployeeValueMapper").ItemHeight(26))
-                    .DataSource(source =>
-                    {
-                        source.Custom()
-                              .ServerFiltering(true)
-                              .ServerPaging(true)
-                              .Type("aspnetmvc-ajax")
-                              .Transport(transport => transport.Read(r => r.Action("GetVirtualData", "Home")))
-                              .Schema(schema =>
-                              {
-                                  schema.Data("Data")
-                                        .Total("Total");
-                              });
-                    })
-                )
+    .Name("SelectEmployeeId")
+    .CascadeFrom("Category")
+    .DataValueField("Id")
+    .DataTextField("Name")
+    .Filter("contains")
+    .Virtual(v => v.ValueMapper("SelectEmployeeValueMapper").ItemHeight(26))
+    .DataSource(source =>
+    {
+        source.Custom()
+        .ServerFiltering(true)
+        .ServerPaging(true)
+        .Type("aspnetmvc-ajax")
+        .Transport(transport => transport.Read(r => r.Action("GetVirtualData", "Home")))
+        .Schema(schema =>
+        {
+            schema.Data("Data").Total("Total");
+        });
+    })
+)
 ```
 {% if site.core %}
 ```TagHelper
-    @addTagHelper *, Kendo.Mvc
+@addTagHelper *, Kendo.Mvc
 
-        <kendo-dropdownlist name="SelectEmployeeId" cascade-from="category"
-            datatextfield="Name" option-label="Test"
-            datavaluefield="Id" class="width500"
-            filter="FilterType.Contains">
-            <datasource type="DataSourceTagHelperType.Custom" page-size="80" server-paging="true" server-filtering="true">
-                <schema data="Data" total="Total"></schema>
-                <transport>
-                    <read url="@Url.Action("GetVirtualData", "Home")"/>
-                </transport>
-            </datasource>
-            <virtual item-height="26" value-mapper="SelectEmployeeValueMapper" />
-        </kendo-dropdownlist>
+<kendo-dropdownlist name="Category"
+    datatextfield="CategoryName"
+    datavaluefield="CategoryId"
+    bind-to="ViewBag.Categories">
+</kendo-dropdownlist>
+
+<h5>Type "4" in the filter input</h5>
+
+<kendo-dropdownlist name="SelectEmployeeId" cascade-from="category"
+    datatextfield="Name"
+    datavaluefield="Id"
+    filter="FilterType.Contains">
+    <datasource type="DataSourceTagHelperType.Custom" 
+        page-size="80" 
+        server-paging="true" 
+        server-filtering="true">
+        <schema data="Data" total="Total"></schema>
+        <transport>
+            <read url="@Url.Action("GetVirtualData", "Home")"/>
+        </transport>
+    </datasource>
+    <virtual item-height="26" value-mapper="SelectEmployeeValueMapper" />
+</kendo-dropdownlist>
 ```
- {% endif %}
-```js
+{% endif %}
+```JavaScript Scripts
 <script>
-    // The valueMapper function is called when you want to select a data item that is not present in the data source
+    // The valueMapper function is called when you want to select a data item that is not present in the DataSource.
     function SelectEmployeeValueMapper(options) {
         $.ajax({
             url: "@Url.Action("EmployeeValueMapper", "Home")",
-                        data: {
-                            value: options.value || 0,
-                            status: 1,
-                            excludeId: -1
-                        },
-                        success: function (data) {
-                            options.success(data);
-                        }
-                    });
-                }
+            data: {
+                value: options.value || 0,
+                status: 1,
+                excludeId: -1
+            },
+            success: function (data) {
+                options.success(data);
+            }
+        });
+    }
 </script>
 ```
-```C#
-        public ActionResult GetVirtualData([DataSourceRequest] DataSourceRequest request)
-        {
-            var data = GetEmployee();
-            return Json(data.ToDataSourceResult(request));
-        }
-
-        public ActionResult EmployeeValueMapper(int value)
-        {
-            var dataItemIndex = -1;
-            var data = GetEmployee();
-            if (value != 0)
+{% if site.mvc %}
+```C# Controller
+public class HomeController : Controller
+{
+    public ActionResult Index()
+    {
+        var categories = Enumerable.Range(1, 5).Select(i => {
+            return new Category
             {
-                var index = 0;
-                foreach (var vm in data)
-                {
-                    if (vm.Id == value)
-                    {
-                        dataItemIndex = index;
-                        break;
-                    }
+                CategoryId = i,
+                CategoryName = "Category " + i.ToString()
+            };
+        });
+        ViewBag.Categories = categories;
+        return View();
+    }
 
-                    index += 1;
+    public JsonResult GetVirtualData([DataSourceRequest] DataSourceRequest request)
+    {
+        var data = GetEmployee();
+        return Json(data.ToDataSourceResult(request));
+    }
+
+    private static List<Employee> GetEmployee()
+    {
+        var rand = new Random();
+
+        var data = Enumerable.Range(0, 1000).Select(i => {
+            return new Employee
+            {
+                Id = i,
+                CategoryId = rand.Next(1, 5),
+                Name = "Emp" + i.ToString()
+            };
+        }).ToList();
+
+        return data;
+    }
+
+    public JsonResult EmployeeValueMapper(int value)
+    {
+        var dataItemIndex = -1;
+        var data = GetEmployee();
+        if (value != 0)
+        {
+            var index = 0;
+            foreach (var vm in data)
+            {
+                if (vm.Id == value)
+                {
+                    dataItemIndex = index;
+                    break;
                 }
+
+                index += 1;
             }
-            return Json(dataItemIndex, JsonRequestBehavior.AllowGet);
         }
+        return Json(dataItemIndex, JsonRequestBehavior.AllowGet);
+    }
+}
 ```
+{% else %}
+```C# Controller
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        var categories = Enumerable.Range(1, 5).Select(i => {
+            return new Category
+            {
+                CategoryId = i,
+                CategoryName = "Category " + i.ToString()
+            };
+        });
+        ViewBag.Categories = categories;
+        return View();
+    }
+
+    public JsonResult GetVirtualData([DataSourceRequest] DataSourceRequest request)
+    {
+        var data = GetEmployee();
+        return Json(data.ToDataSourceResult(request));
+    }
+
+    private static List<Employee> GetEmployee()
+    {
+        var rand = new Random();
+
+        var data = Enumerable.Range(0, 1000).Select(i => {
+            return new Employee
+            {
+                Id = i,
+                CategoryId = rand.Next(1, 5),
+                Name = "Emp" + i.ToString()
+            };
+        }).ToList();
+
+        return data;
+    }
+    
+    public JsonResult EmployeeValueMapper(int value)
+    {
+        var dataItemIndex = -1;
+        var data = GetEmployee();
+        if (value != 0)
+        {
+            var index = 0;
+            foreach (var vm in data)
+            {
+                if (vm.Id == value)
+                {
+                    dataItemIndex = index;
+                    break;
+                }
+
+                index += 1;
+            }
+        }
+        return Json(dataItemIndex);
+    }
+}
+```
+{% endif %}
 
 To see the complete example, refer to the ASP.NET MVC project on how to [cascade DropDownLists with enabled virtualization](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/DropDownListVirtualization). {% if site.core %}You can use this as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}
 
@@ -156,4 +259,7 @@ To see the complete example, refer to the ASP.NET MVC project on how to [cascade
 
 * [Client-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
 * [Server-Side API Reference of the DropDownList for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/dropdownlist)
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the DropDownList for {{ site.framework }}](/api/taghelpers/dropdownlist)
+{% endif %}
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

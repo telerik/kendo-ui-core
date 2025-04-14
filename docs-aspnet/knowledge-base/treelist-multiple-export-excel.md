@@ -36,7 +36,7 @@ In this example, each TreeList is exported to a separate Excel sheet. For more i
 1. Create a new Workbook that contains the sheets with the TreeLists data and save it through the [`kendo.saveAs()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas) method.
 
 ```HtmlHelper
-﻿<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
 <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="export">Export TreeLists to Excel</button>
 
@@ -52,65 +52,87 @@ In this example, each TreeList is exported to a separate Excel sheet. For more i
     .Events(e => e.ExcelExport("onExcelExportLead"))
     ... // Additional configuration.
 )
+```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
+<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="export">Export TreeLists to Excel</button>
+
+<h3>Designers</h3>
+<kendo-treelist name="designers" on-excel-export="onExcelExportDesigners">
+    <!-- Additional configuration.-->
+</kendo-treelist>
+
+<h3>Lead personnel</h3>
+<kendo-treelist name="leads" on-excel-export="onExcelExportLead">
+    <!-- Additional configuration.-->
+</kendo-treelist>
+```
+{% endif %}
+```JS Scripts
 <script>
     function onExcelExportDesigners(e) {
         e.preventDefault();
-
         promises[0].resolve(e.workbook);
     }
 
     function onExcelExportLead(e) {
         e.preventDefault();
-
         promises[1].resolve(e.workbook);
     }
 
-    // used to sync the exports
+    // Used to sync the exports.
     var promises = [
         $.Deferred(),
         $.Deferred()
     ];
 
-    $("#export").click(function (e) {
-        // trigger export of the products grid
-        $("#designers").data("kendoTreeList").saveAsExcel();
-        // trigger export of the orders grid
-        $("#leads").data("kendoTreeList").saveAsExcel();
-        // wait for both exports to finish
-        $.when.apply(null, promises)
-            .then(function (designersWorkbook, leadsWorkbook) {
+    $(document).ready(function(){
+        $("#export").click(function (e) {
+            // Trigger the export of the "designers" TreeList.
+            $("#designers").data("kendoTreeList").saveAsExcel();
+            // Trigger the export of the "leads" TreeList.
+            $("#leads").data("kendoTreeList").saveAsExcel();
+            // Wait for both exports to finish.
+            $.when.apply(null, promises)
+                .then(function (designersWorkbook, leadsWorkbook) {
 
-                // create a new workbook using the sheets of the products and orders workbooks
-                var sheets = [
-                    designersWorkbook.sheets[0],
-                    leadsWorkbook.sheets[0]
-                ];
+                    // Create a new workbook using the sheets of the "designers" and "leads" workbooks.
+                    var sheets = [
+                        designersWorkbook.sheets[0],
+                        leadsWorkbook.sheets[0]
+                    ];
 
-                sheets[0].title = "Designers";
-                sheets[1].title = "Leads";
+                    sheets[0].title = "Designers";
+                    sheets[1].title = "Leads";
 
-                var workbook = new kendo.ooxml.Workbook({
-                    sheets: sheets
+                    var workbook = new kendo.ooxml.Workbook({
+                        sheets: sheets
+                    });
+
+                    promises = [
+                        $.Deferred(),
+                        $.Deferred()
+                    ];
+
+                    // Save the new workbook.
+                    kendo.saveAs({
+                        dataURI: workbook.toDataURL(),
+                        fileName: "DesignersAndLeaders.xlsx"
+                    });
                 });
-
-                promises = [
-                    $.Deferred(),
-                    $.Deferred()
-                ];
-
-                // save the new workbook,b
-                kendo.saveAs({
-                    dataURI: workbook.toDataURL(),
-                    fileName: "DesignersAndLeaders.xlsx"
-                })
-            });
+        });
     });
 </script>
 ```
+
 For a runnable example, refer to the [ASP.NET MVC application on how to export the data of multiple TreeLists in a single Excel document](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/TreeListExportingMultiple). {% if site.core %}You can use this as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}
 
 ## More {{ site.framework }} TreeList Resources
+
 * [{{ site.framework }} TreeList Documentation]({%slug htmlhelpers_treelist_aspnetcore%})
 * [{{ site.framework }} TreeList Demos](https://demos.telerik.com/{{ site.platform }}/treelist)
 {% if site.core %}

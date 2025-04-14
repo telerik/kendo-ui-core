@@ -31,71 +31,119 @@ How can I use the {{ site.framework }} AutoComplete component as an editor in an
 The AutoComplete editor will provide a convenient list of options to hint the user of the available options. You can achieve this implementation through the following key steps:
 
 1. [Define an InCell editable Grid]({% slug batchediting_grid_aspnetcore %}) and bind its column to the complex Model property **Person**.
-```Razor
-@(Html.Kendo().Grid<Telerik.Examples.Mvc.Areas.GridEditingAutoCompleteNewItem.Models.GridViewModel>()
-    .Name("grid")
-    .HtmlAttributes(new { style = "width: 800px; margin: 100px 0 0 200px" })
-    .Columns(columns =>
-    {
-        columns.Bound(p => p.Person).ClientTemplate("#= data.Person ? Person.Name : '' # ").Title("AUTOCOMPLETE").Width(200);
-        columns.Bound(p => p.Text).Width(200).Title("Text");
-    })
-    .ToolBar(commands =>
-    {
-        commands.Create().Text("New");
-        commands.Save();
-    })
-    .Editable(editing => editing.Mode(GridEditMode.InCell))
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Model(model =>
+
+    ```HtmlHelper
+    @(Html.Kendo().Grid<Telerik.Examples.Mvc.Areas.GridEditingAutoCompleteNewItem.Models.GridViewModel>()
+        .Name("grid")
+        .Columns(columns =>
         {
-            model.Id(p => p.ID);
+            columns.Bound(p => p.Person).ClientTemplate("#= data.Person ? Person.Name : '' # ").Title("AUTOCOMPLETE");
+            columns.Bound(p => p.Text).Title("Text");
         })
-        .Update("Update", "Home", new { Area = "GridEditingAutoCompleteNewItem" })
-        .Read("Read", "Home", new { Area = "GridEditingAutoCompleteNewItem" })
-        .ServerOperation(false)
-        .Events(e => e.Change("onChange"))
+        .ToolBar(commands =>
+        {
+            commands.Create().Text("New");
+            commands.Save();
+        })
+        .Scrollable()
+        .HtmlAttributes(new { style = "height: 430px;" })
+        .Editable(editing => editing.Mode(GridEditMode.InCell))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false)
+            .Model(model =>
+            {
+                model.Id(p => p.ID);
+            })
+            .Update("Update", "Home")
+            .Read("Read", "Home")
+            .Events(e => e.Change("onChange"))
+        )
     )
-)
-```
+    ```
+    {% if site.core %}
+    ```TagHelper
+    @addTagHelper *, Kendo.Mvc
 
+    <kendo-grid name="grid" height="430">
+        <columns>
+            <column field="Person" template="#= data.Person ? Person.Name : '' #" title="AUTOCOMPLETE"></column>
+            <column field="Text" title="Text"></column>
+        </columns>
+        <toolbar>
+            <toolbar-button name="create" text="New"></toolbar-button>
+            <toolbar-button name="save"></toolbar-button>
+        </toolbar>
+        <editable mode="incell"/>
+        <scrollable enabled="true"/>
+        <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" on-change="onChange">
+            <schema>
+                <model id="ID"></model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Read", "Home")" />
+                <update url="@Url.Action("Update", "Home")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+    ```
+    {% endif %}
 
-2. Create a [custom editor template for the column]({% slug customediting_grid_aspnetcore %}) that contains an AutoComplete editor, which binds to remote data.
-3. Configure the AutoComplete for [server-side filtering]({% slug htmlhelpers_autocomplete_filtering_aspnetcore %}).
-4. Handle the [`Change` event](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) of the Grid's DataSource and update the **Person** field of the respective record when its current value is changed through the AutoComplete editor. Then, trigger the [`closeCell()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell) method of the Grid to exit edit mode.
+1. Create a [custom editor template for the column]({% slug customediting_grid_aspnetcore %}) that contains an AutoComplete editor, which binds to remote data.
+1. Configure the AutoComplete for [server-side filtering]({% slug htmlhelpers_autocomplete_filtering_aspnetcore %}).
 
-```PersonFieldEditor.cshtml
-@(Html.Kendo().AutoComplete()
-	.Name("Person")
-	.DataTextField("Name")
-	.DataSource(dataSource => dataSource.Read(read => read.Action("GetAutocomplete", "Home", new { Area = "GridEditingAutoCompleteNewItem" }).Data("onAdditionalData")).ServerFiltering(true))
-	.Delay(500)
-	.HighlightFirst(true)
-)
-```
-```js
-<script type="text/javascript">
-    // handle the Grid's DataSource Change event 
-    function onChange(e) {
-        // the Change event provides the action argument to show the type of the operation
-        if (e.action == "itemchange") {
-            if (e.field == "Person") {
-                if (typeof (e.items[0].Person) == "string") {
-                    e.items[0].set("Person", { ID: "0", Name: e.items[0].Person });
-                    $("#grid").data("kendoGrid").closeCell($("[data-role=autocomplete]").closest("td"));
+    ```HtmlHelper
+    @model ResultEntryViewModel
+
+    @(Html.Kendo().AutoCompleteFor(m => m.ID)
+        .DataTextField("Name")
+        .DataSource(dataSource => 
+            dataSource.Read(read => read.Action("GetAutocomplete", "Home").Data("onAdditionalData"))
+            .ServerFiltering(true))
+        .Delay(500)
+        .HighlightFirst(true)
+    )
+    ```
+    {% if site.core %}
+    ```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @model ResultEntryViewModel
+
+    <kendo-autocomplete for="ID" highlight-first="true" delay="500"
+        dataTextField="Name">
+        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+            <transport>
+                <read url="@Url.Action("GetAutocomplete", "Home")" data="onAdditionalData" />
+            </transport>
+        </datasource>
+    </kendo-autocomplete>
+    ```
+    {% endif %}
+
+1. Handle the [`Change`](/api/kendo.mvc.ui.fluent/datasourceeventbuilder#changesystemstring) event of the Grid's DataSource and update the **Person** field of the respective record when its current value is changed through the AutoComplete editor. Then, trigger the [`closeCell()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell) method of the Grid to exit edit mode.
+
+    ```JS
+    <script type="text/javascript">
+        // Handle the Grid's DataSource Change event.
+        function onChange(e) {
+            // The Change event provides the action argument for the type of the operation.
+            if (e.action == "itemchange") {
+                if (e.field == "Person") {
+                    if (typeof (e.items[0].Person) == "string") {
+                        e.items[0].set("Person", { ID: "0", Name: e.items[0].Person });
+                        $("#grid").data("kendoGrid").closeCell($("[data-role=autocomplete]").closest("td"));
+                    }
                 }
             }
         }
-    }
 
-    function onAdditionalData() {
-        return {
-            text: $("#Person").val()
-        };
-    }
-</script>
-```
+        function onAdditionalData() {
+            return {
+                text: $("#Person").val()
+            };
+        }
+    </script>
+    ```
 
 To see the complete example, refer to the  ASP.NET MVC project on how to [add a new value to the Grid records](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridEditingAutoCompleteNewItem) when the Grid uses the Telerik UI AutoComplete as an editor. {% if site.core %}You can use this as a starting point to configure the same behavior in an ASP.NET Core project.{% endif %}
 
