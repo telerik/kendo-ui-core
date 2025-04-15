@@ -22,7 +22,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-virtual": "^2.1.0",
     "@rollup/stream": "^2.0.0",
-    "@vitest/browser": "^3.0.5",
+    "@vitest/browser": "^3.1.1",
     "acorn": "^8.8.0",
     "axe-core": "^4.9.1",
     "chai": "^4.3.9",
@@ -53,7 +53,7 @@
     "validate-commit-msg": "^2.14.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
-    "vitest": "^3.0.5",
+    "vitest": "^3.1.1",
     "yargs": "~3.27.0"
   },
   "overrides": {
