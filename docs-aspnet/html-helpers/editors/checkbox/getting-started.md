@@ -102,7 +102,7 @@ To change the [appearance]({% slug checkbox_appearance %}) of the CheckBox, use 
 
 ## 5. Handle the CheckBox Events
 
-The CheckBox component exposes an [event](api/kendo.mvc.ui.fluent/checkboxbuilder#eventssystemaction) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the CheckBox changes through user interaction.
+The CheckBox component exposes an [event](/api/kendo.mvc.ui.fluent/checkboxbuilder#eventssystemaction) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the CheckBox changes through user interaction.
 
 ```HtmlHelper
     @(Html.Kendo().CheckBox()

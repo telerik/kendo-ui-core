@@ -27,7 +27,7 @@ How can I display hierarchical data in the PanelBar component?
 
 ## Solution
 
-1. Create a `List` collection of type [`PanelBarItemModel`](/api/kendo.mvc.ui/panelbaritemmodell) and access it in the view.
+1. Create a `List` collection of type [`PanelBarItemModel`](/api/kendo.mvc.ui/panelbaritemmodel) and access it in the view.
 1.  Use the [`BindTo()`](/api/kendo.mvc.ui.fluent/panelbarbuilder#bindtosystemcollectionsienumerablesystemaction) method of the PanelBar to bind the component to the collection.
 
 ```HtmlHelper

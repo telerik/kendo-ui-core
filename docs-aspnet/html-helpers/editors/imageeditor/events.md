@@ -10,7 +10,7 @@ position: 3
 
 You can subscribe to [all ImageEditor events](/api/kendo.mvc.ui.fluent/imageeditoreventbuilder) and then use them to further customize the behavior of the component.
 
-The example below demonstrates how to use the [`Execute` event](api/kendo.mvc.ui.fluent/imageeditoreventbuilder#executesystemstring) that the ImageEditor generates when the user executes a command.
+The example below demonstrates how to use the [`Execute` event](/api/kendo.mvc.ui.fluent/imageeditoreventbuilder#executesystemstring) that the ImageEditor generates when the user executes a command.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI

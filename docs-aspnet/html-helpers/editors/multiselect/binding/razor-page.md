@@ -169,7 +169,7 @@ To bind the MultiSelect to a property from the `PageModel`, follow the next step
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 * [Client-Side API of the MultiSelect](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
 * [Server-Side HtmlHelper API of the MultiSelect](/api/multiselect)
-* [Server-Side TagHelper API of the MultiSelect](/api/taghelpers/)
+* [Server-Side TagHelper API of the MultiSelect](/api/taghelpers/multiselect)
 * [Knowledge Base Section](/knowledge-base)
 
 
