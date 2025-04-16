@@ -8,7 +8,7 @@ position: 5
 
 # Events
 
-The Telerik UI PropertyGrid for {{ site.framework }} [exposes various events](/api/kendo.mvc.ui.fluent/propertygridventbuilder) that allow you to control the behavior of the UI component.
+The Telerik UI PropertyGrid for {{ site.framework }} [exposes various events](/api/kendo.mvc.ui.fluent/propertygrideventbuilder) that allow you to control the behavior of the UI component.
 
 For a complete example on basic PropertyGrid events, refer to the [demo on using the events of the PropertyGrid](https://demos.telerik.com/{{ site.platform }}/propertygrid/events).
 

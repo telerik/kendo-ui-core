@@ -30,7 +30,7 @@ To use the DateInput in a DatePicker, enable the [`DateInput`](/api/kendo.mvc.ui
 ```
 {% endif %}
 
-To customize the placeholders of the DateInput use the [`Messages`](/api/kendo.mvc.ui.fluent/datepickermessagessettingsbuilder) configuration and set the desired DateInput message. The component also provides the `Format()` option that you can leverage to set the date format, which will be used to parse and format the machine date. Defaults to `CultureInfo.DateTimeFormat.ShortDatePattern`.
+To customize the placeholders of the DateInput use the [`Messages`](/api/kendo.mvc.ui.fluent/datepickerbuilder#messagessystemaction) configuration and set the desired DateInput message. The component also provides the `Format()` option that you can leverage to set the date format, which will be used to parse and format the machine date. Defaults to `CultureInfo.DateTimeFormat.ShortDatePattern`.
 
 ## AutoFill Functionality
 

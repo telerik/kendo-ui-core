@@ -22,7 +22,7 @@ res_type: kb
 
 
 ## Description
-How can I pass additional data through the [`DataSourceResult`](api/kendo.mvc.ui/datasourceresult) from the Controller back to the View?
+How can I pass additional data through the [`DataSourceResult`](/api/kendo.mvc.ui/datasourceresult) from the Controller back to the View?
 
 ## Solution
 The desired result can be achieved by following the steps below:

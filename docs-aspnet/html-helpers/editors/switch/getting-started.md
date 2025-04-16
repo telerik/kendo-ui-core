@@ -102,7 +102,7 @@ To change the [appearance]({% slug switch_appearance %}) of the Switch, use any 
 
 ## 5. Handle the Switch Events
 
-The Switch component exposes various [events](api/kendo.mvc.ui.fluent/switcheventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the Switch changes through user interaction.
+The Switch component exposes various [events](/api/kendo.mvc.ui.fluent/switcheventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the Switch changes through user interaction.
 
 ```HtmlHelper
     @(Html.Kendo().Switch()

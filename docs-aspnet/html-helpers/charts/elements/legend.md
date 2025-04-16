@@ -166,7 +166,7 @@ To exclude series from the legend, set their `VisibleInLegend` option to `false`
 
 You can configure the legend section of the Chart to render a title with customizable layout and content.
 
-To define a title, configure the [`Title`](/api/kendo.mvc.ui.fluent/chartlegendsettingsbuilder#titlesystemaction) property of the `Legend` configuration.
+To define a title, configure the [`Title`](/api/kendo.mvc.ui.fluent/chartlegendbuilder#titlesystemaction) property of the `Legend` configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Chart()

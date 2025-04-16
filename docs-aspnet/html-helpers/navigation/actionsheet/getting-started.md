@@ -227,7 +227,7 @@ You can reference the ActionSheet instances that you have created and build on t
         </script>
     ```
 
-1. Use the [ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet#methods) to control the behavior of the component. In this example, you will enable the adaptive mode of the ActionSheet through the [`Adaptive()`](api/kendo.mvc.ui.fluent/actionsheetbuilder#adaptive) option and use the `fullscreen()` method to set the ActionSheet in full-screen mode dynamically (for example, when a button is clicked).
+1. Use the [ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet#methods) to control the behavior of the component. In this example, you will enable the adaptive mode of the ActionSheet through the [`Adaptive()`](/api/kendo.mvc.ui.fluent/actionsheetbuilder#adaptivesystemboolean) option and use the `fullscreen()` method to set the ActionSheet in full-screen mode dynamically (for example, when a button is clicked).
 
 
     ```HtmlHelper

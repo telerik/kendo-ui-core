@@ -8,7 +8,7 @@ position: 6
 
 # Events
 
-You can subscribe to all [ProgressBar events](api/kendo.mvc.ui.fluent/progressbareventbuilder). For a complete example on basic ProgressBar events, refer to the [demo on using the events of the ProgressBar](https://demos.telerik.com/{{ site.platform }}/progressbar/events).
+You can subscribe to all [ProgressBar events](/api/kendo.mvc.ui.fluent/progressbareventbuilder). For a complete example on basic ProgressBar events, refer to the [demo on using the events of the ProgressBar](https://demos.telerik.com/{{ site.platform }}/progressbar/events).
 
 ## Handling by Handler Name
 
