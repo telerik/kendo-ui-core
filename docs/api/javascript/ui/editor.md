@@ -5062,6 +5062,8 @@ The parameters for the executed command.
 
 The arguments for commands that expect such
 
+> List of commands can be found here: [tools](/api/javascript/ui/editor#configuration-tools)
+
 #### Example
 
     <textarea id="editor"></textarea>
