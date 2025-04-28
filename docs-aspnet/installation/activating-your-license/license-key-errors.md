@@ -60,11 +60,12 @@ The following workaround can be applied to remove the banner and watermark.
 
 ![Get License Key](../images/get-license-key.png)
 
-3.  Copy the JavaScript code snippet into a new file, for example, `telerik-license.js`.
+3. Copy the JavaScript code snippet into a new file, for example, `telerik-license.js`.
+4. Save the file using ASCII or UTF-8 encoding.
 
 {% if site.core %}
-4. Add the script file to your project, for example, in the `wwwroot\js` folder.
-5. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
+5. Add the script file to your project, for example, in the `wwwroot\js` folder.
+6. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
 
 ```html
 <script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.all.min.js"></script>
@@ -74,8 +75,8 @@ The following workaround can be applied to remove the banner and watermark.
 <!-- Rest of the HTML -->
 ```
 {% else %}
-4. Add the script file to your project, for example, in the `Scripts` folder.
-5. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
+5. Add the script file to your project, for example, in the `Scripts` folder.
+6. Add the file as a script reference right after the `kendo.aspnetmvc.min.js` reference or the Kendo UI scripts you are using.
 
 ```html
 <script src="https://kendo.cdn.telerik.com/2024.4.1112/kendo.all.min.js"></script>

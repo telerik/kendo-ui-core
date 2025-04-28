@@ -207,13 +207,16 @@ An Upload widget configured in such way offers support for multiple file selecti
 | Feature | Description |
 |---------|-------------|
 | [Modes of operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})| You can specify whether the Upload behaves like a regular file input or like a standalone component with asynchronous operations.|
-| [Dragging and dropping of files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})| The Upload enables you to drag and drop items within the component's drop zone.|
 | [Chunk upload of files]({% slug htmlhelpers_upload_chunks_aspnetcore %})| You can send large chunks of files that will be processed asynchronously.|
-| [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %})| The Upload enables you to integrate file validation for each of the selected files.|
+| [Dragging and dropping of files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})| The Upload enables you to drag and drop items within the component's drop zone.|
 | [Identification of files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})|You can identify the file object during its upload process.|
 | [Sending and receiving metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %}) | You can send additional information to the specified endpoint which is used for storing the uploaded file.|
-| [Accessibility]({% slug htmlhelpers_upload_accessibility %})| The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_upload %}) for faster navigation.| 
+| [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %})| The Upload enables you to integrate file validation for each of the selected files.|
+| [Uploading directories]({% slug htmlhelpers_upload_directory_aspnetcore %})| The component supports uploading of entire directories, preserving their structure.|
+| [Templates]({% slug htmlhelpers_upload_templates_aspnetcore %})| Customize the appearance of the files in the file list. |
+| [Form Integration]({% slug htmlhelpers_upload_form_integration %})| You can use the Upload as an editor in a form. |
 | [Events]({% slug events_upload_aspnetcore %})| The Upload allows you to handle its file processing events and implement custom functionality.
+| [Accessibility]({% slug htmlhelpers_upload_accessibility %})| The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_upload %}) for faster navigation.| 
 
 ## Next Steps
 
