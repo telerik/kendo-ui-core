@@ -10,6 +10,8 @@ position: 5
 
 Adaptiveness is an advanced capability that enhances the Telerik UI for {{ site.framework }} AutoComplete by enabling a completely new layout based on the screen size. It also allows you to adjust the displayed on-screen keyboard for a more user-friendly interaction on touchscreen devices.
 
+<demo metaUrl="autocomplete/adaptive_mode/" height="600"></demo>
+
 ## Adaptive Mode
 
 The AutoComplete supports an adaptive mode that provides a mobile-friendly rendering of its popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/autocompletebuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.

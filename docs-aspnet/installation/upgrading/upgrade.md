@@ -63,8 +63,7 @@ To upgrade the version with NuGet or Bower:
 
 ## Switching to a Developer License
 
-1. Delete (uninstall) the trial version from your machine. This approach will prevent trial assemblies to end up in the project references or in production.
-1. [Install]({% slug downloadinstall_aspnetcore %}#installation) the commercial Kendo UI version and follow the steps for updating the Telerik UI for ASP.NET Core version.
+1. After the purchase of a Developer License, follow the [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates) guidelines.
 
 If you still see the Trial message after you switch to a developer (commercial) license, check the [troubleshooting knowledge base article]({% slug troubleshooting_trial_message %}).
 
@@ -101,8 +100,8 @@ To upgrade your project with the Upgrade Project Wizard, refer to the following 
 
 ## Switching to a Developer License
 
-1. Delete (uninstall) the trial version from your machine. This approach will prevent trial assemblies to end up in the project references or in production.
-1. Install the licensed Kendo UI version and follow the steps for [updating the Telerik UI for ASP.NET MVC version](#upgrading-to-new-versions).
+1. After the purchase of a Developer License, follow the [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates) guidelines.
+1. To upgrade to the latest product version, follow the steps for [updating the Telerik UI for ASP.NET MVC version](#upgrading-to-new-versions).
 
 ## See Also
 

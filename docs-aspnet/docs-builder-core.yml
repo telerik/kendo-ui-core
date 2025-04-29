@@ -40,6 +40,106 @@ hash-ignore-pattern: "[\\.\\(\\)\\<\\>,]"
 default-code-block-language: Razor
 enable-tabbed-code-blocks: true
 
+demos:
+  metaFileName: demo.json
+  defaultTheme: default-ocean-blue-a11y
+  uris:
+      www.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
+      wwwuat.telerik.com: https://aspnet-core-demos-staging.azurewebsites.net/aspnet-core/docsbuilder/
+      default: https://localhost:5000/docsbuilder/
+  themes:
+      default-main:
+          name: Main
+          group: Default
+          colors: ['#FFFFFF', '#ff6358', '#424242']
+      default-main-dark:
+          name: Main Dark
+          group: Default
+          tags: [dark]
+          colors: ['#333333', '#ff6358', '#FFFFFF']
+      default-ocean-blue:
+          name: Ocean Blue
+          group: Default
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-ocean-blue-a11y:
+          name: Ocean Blue A11y
+          group: Default
+          tags: [accessibility]
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-nordic:
+          name: Nordic
+          group: Default
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      default-purple:
+          name: Purple
+          group: Default
+          colors: ['#ffffff', '#bf70cc', '#424242']
+      default-turquoise:
+          name: Turquoise
+          group: Default
+          colors: ['#ffffff', '#28bfba', '#424242']
+
+      bootstrap-main:
+          name: Main
+          group: Bootstrap
+          colors: ['#ffffff', '#0d6efd', '#212529']
+      bootstrap-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Bootstrap
+          colors: ['#212529', '#0d6efd', '#ffffff']
+      bootstrap-nordic:
+          name: Nordic
+          group: Bootstrap
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      bootstrap-urban:
+          name: Urban
+          group: Bootstrap
+          colors: ['#ffffff', '#447a99', '#ff804d']
+      bootstrap-vintage:
+          name: Vintage
+          group: Bootstrap
+          colors: ['#744662', '#f2efe8', '#90b8c1']
+
+      material-main:
+          name: Main
+          group: Material
+          colors: ['#ffffff', '#3f51b5', '#424242']
+      material-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#3f51b5', '#ffffff']
+      material-arctic:
+          name: Arctic
+          group: Material
+          colors: ['#ffffff', '#2196f3', '#455a64']
+      material-lime-dark:
+          name: Lime Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#8bc34a', '#ffffff']
+      material-nova:
+          name: Nova
+          group: Material
+          colors: ['#ffffff', '#e91e63', '#455a64']
+
+      fluent-main:
+          name: Main
+          group: Fluent
+          colors: ['#ffffff', '#0078D4', '#323130']
+
+      fluent-main-dark:
+          name: Main Dark
+          group: Fluent
+          colors: ['#323130', '#0078D4', '#ffffff']
+  actions:
+    open-telerik-repl:
+        name: Telerik REPL
+        group: Edit in
+        iconUri: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAcCAYAAACQ0cTtAAAAAXNSR0IArs4c6QAAAYxJREFUSA21luFtwjAQhd8IHaEjMAIj8Lexo2aDdoNmg44AI3QD2KAjRAI7qfqHEVqdidNLsBPbjZEQBtv3cfeezwEiXlWHR9niKDQa2eEtYmv40qrBQ9niXWr88DdBRYfn8EgLKykDqXHlkLtxiyNlvRDKPy07bEWL5i7wJDs+X2rsk6CFQhULI3CynqSVvKDm/z50nKyncaHCIRQ0WpeqZ6GwSSktwZ2uNaXrHegTPFHPemRH+YUXl83pjLlcFqnnDWZsrvE5qvXE4j7BI/SsQaWag0znjLVb7EYlAWCg84f/lplQeI0V3qVnOd8E/jSLKMeoPxbf2Ngsg2F2A0FLjY9p+bzfL9javdEwuzHY3mvALHRRzzVhBC0VqqxlJO1sdtlg9lYWGvtsMN4TqWTZYK5bOQvM167Whj2d+xbnOlOrwRRO3GzGB6ZdsUeAEBhVxZqIPnkHEXSLsDPI1w1jA1U4zMIUTq5APexKjWAIGDLgqdtzRtfLUHtHEIKQqx1T4T/JM3Z0K/830C/YJNOpFlsHxgAAAABJRU5ErkJggg==
+
+
 markdown-replacements:
 - pattern: (/\.\.)*/aspnet-core/api/
   replacement: /api/

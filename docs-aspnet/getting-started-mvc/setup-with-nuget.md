@@ -45,28 +45,11 @@ If you already have an existing project and you want to add Telerik UI for ASP.N
 
 Telerik maintains a NuGet feed with official UI ASP.NET MVC releases and service packs. These packages are available for registered users with active licenses.
 
-* If you will use a free trial license, follow [these steps](#adding-the-telerik-nuget-feed-for-trial-license-users) to add the NuGet feed to Visual Studio.
-* If you have already purchased a commercial license, follow [these steps](#adding-the-telerik-nuget-feed-for-users-with-commercial-license) to add the NuGet feed to Visual Studio.
-
 >tip If you have already configured the Telerik NuGet feed in Visual Studio, jump to [Installing the NuGet Package](#installing-the-nuget-package).
 	
-### Adding the Telerik NuGet Feed for Trial License Users
+### Adding the Telerik NuGet Feed
 
-The easiest way to add the Telerik NuGet feed to Visual Studio if you are a trial user is to install the UI for ASP.NET MVC free trial:
-
-1. Download the [UI for ASP.NET MVC free trial](https://www.telerik.com/aspnet-mvc) installer. You need to create a free account if don't have one.
-
-1. Run the installer.
-
-1. Select the option **Set up Telerik NuGet package source** to automatically add the [Telerik NuGet feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %}).
-
-	![{{ site.product_short }} NuGet checkbox in Progress Trial Installer](../getting-started-mvc/images/check-nuget.png)
-
-	>The setup wizard activates your trial license when you complete the installation. This step is mandatory because the Telerik NuGet packages are available only to clients with active licenses.
-	
-### Adding the Telerik NuGet Feed for Users with Commercial License
-
-The easiest way to add the Telerik NuGet feed to Visual Studio if you purchased a commercial license is to use the Progress Control Panel:
+The easiest way to add the Telerik NuGet feed to Visual Studio is to use the Progress Control Panel:
 
 1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/). 
 
@@ -92,7 +75,7 @@ Once you configure Visual Studio to access the Telerik NuGet server, you can add
 	
 1. From the **Package source** drop-down, select the Telerik NuGet source.
 
-1. Click the **Browse** tab, search for `Telerik.UI.for.AspNet.Mvc5` (or `Telerik.UI.for.AspNet.Mvc5.Trial`), and install it.
+1. Click the **Browse** tab, search for `Telerik.UI.for.AspNet.Mvc5` and install it.
 
 	![{{ site.product_short }} Selecting and installing the NuGet package](../getting-started-mvc/images/install-nuget-mvc.png)
 	

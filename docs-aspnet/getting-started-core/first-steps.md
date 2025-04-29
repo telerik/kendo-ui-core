@@ -41,11 +41,9 @@ In this tutorial, you will:
 ## Prerequisites
 
 * [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet)
-* [Visual Studio 2017 or later](https://visualstudio.microsoft.com/downloads)
+* [Visual Studio 2022 or later](https://visualstudio.microsoft.com/downloads)
 * Windows 10 or higher
 * [Telerik account](https://www.telerik.com/account)&mdash;if you don't have an account yet, you can [create one for free](https://www.telerik.com/account).
-
-> For .NET Core 3.1 version or later, Visual Studio 2019 is required.
 
 ## Creating the Application
 
@@ -67,26 +65,11 @@ Telerik maintains a NuGet Feed with official UI for ASP.NET Core releases and se
 
 The next step is to add the Telerik NuGet Feed to Visual Studio:
 
-* If you use a free trial license, go to [Add the Telerik NuGet Feed for Trial License Users](#adding-the-telerik-nuget-feed-for-trial-license-users).
-* If you purchased a commercial license, go to [Add the Telerik NuGet Feed for Users with Commercial License](#adding-the-telerik-nuget-feed-for-users-with-commercial-license).
-
 >tip If you have already configured the Telerik NuGet feed in Visual Studio, jump to [Add the NuGet Package](#adding-the-nuget-package).
 
-### Adding the Telerik NuGet Feed for Trial License Users
+### Adding the Telerik NuGet Feed
 
-The easiest way to add the Telerik NuGet feed to Visual Studio if you are a trial user is to install the UI for ASP.NET Core free trial:
-
-1. Download the [UI for ASP.NET Core free trial](https://www.telerik.com/aspnet-core-ui) installer. You need to create a free account if don't have one.
-
-1. Run the installer.
-
-    ![{{ site.product_short }} NuGet checkbox in Progress Trial Installer](../getting-started-core/images/check-nuget.png)
-
->To activate your UI for ASP.NET Core trial license, you must complete the installation procedure. Otherwise, the `Telerik.UI.for.AspNet.Core` NuGet packages will not appear in the NuGet Package Manager.
-
-### Adding the Telerik NuGet Feed for Users with Commercial License
-
-The easiest way to add the Telerik NuGet feed to Visual Studio if you have purchased a commercial license is to use the Progress Control Panel:
+The easiest way to add the Telerik NuGet feed to Visual Studio is to use the Progress Control Panel:
 
 1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/).
 
@@ -101,8 +84,6 @@ The easiest way to add the Telerik NuGet feed to Visual Studio if you have purch
 1. Go to the Progress Control Panel options and scroll to **NUGET SETTINGS**. Enter your Telerik credentials and click the **Save and Close** button.
 
     ![{{ site.product_short }} Set Up Nuget on Progress Control Panel options](../getting-started-core/images/nuget-control-panel-options.png)
-
->You need a commercial license that includes UI for ASP.NET Core. Otherwise, the `Telerik.UI.for.AspNet.Core` NuGet packages will not appear in the NuGet Package Manager. If you don't have the required license, follow the instructions in the [trial license section](#adding-the-telerik-nuget-feed-for-trial-license-users).
 
 ## Adding the NuGet Package
 

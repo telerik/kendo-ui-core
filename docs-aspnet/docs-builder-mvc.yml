@@ -40,6 +40,100 @@ hash-ignore-pattern: "[\\.\\(\\)\\<\\>,]"
 default-code-block-language: Razor
 enable-tabbed-code-blocks: true
 
+demos:
+  metaFileName: demo.json
+  defaultTheme: default-ocean-blue-a11y
+  uris:
+      www.telerik.com: https://demos.telerik.com/aspnet-mvc/docsbuilder/
+      wwwuat.telerik.com: https://aspnet-mvc-demos-staging.azurewebsites.net/aspnet-mvc/docsbuilder/
+      default: https://localhost:44356/docsbuilder/
+  themes:
+      default-main:
+          name: Main
+          group: Default
+          colors: ['#FFFFFF', '#ff6358', '#424242']
+      default-main-dark:
+          name: Main Dark
+          group: Default
+          tags: [dark]
+          colors: ['#333333', '#ff6358', '#FFFFFF']
+      default-ocean-blue:
+          name: Ocean Blue
+          group: Default
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-ocean-blue-a11y:
+          name: Ocean Blue A11y
+          group: Default
+          tags: [accessibility]
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-nordic:
+          name: Nordic
+          group: Default
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      default-purple:
+          name: Purple
+          group: Default
+          colors: ['#ffffff', '#bf70cc', '#424242']
+      default-turquoise:
+          name: Turquoise
+          group: Default
+          colors: ['#ffffff', '#28bfba', '#424242']
+
+      bootstrap-main:
+          name: Main
+          group: Bootstrap
+          colors: ['#ffffff', '#0d6efd', '#212529']
+      bootstrap-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Bootstrap
+          colors: ['#212529', '#0d6efd', '#ffffff']
+      bootstrap-nordic:
+          name: Nordic
+          group: Bootstrap
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      bootstrap-urban:
+          name: Urban
+          group: Bootstrap
+          colors: ['#ffffff', '#447a99', '#ff804d']
+      bootstrap-vintage:
+          name: Vintage
+          group: Bootstrap
+          colors: ['#744662', '#f2efe8', '#90b8c1']
+
+      material-main:
+          name: Main
+          group: Material
+          colors: ['#ffffff', '#3f51b5', '#424242']
+      material-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#3f51b5', '#ffffff']
+      material-arctic:
+          name: Arctic
+          group: Material
+          colors: ['#ffffff', '#2196f3', '#455a64']
+      material-lime-dark:
+          name: Lime Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#8bc34a', '#ffffff']
+      material-nova:
+          name: Nova
+          group: Material
+          colors: ['#ffffff', '#e91e63', '#455a64']
+
+      fluent-main:
+          name: Main
+          group: Fluent
+          colors: ['#ffffff', '#0078D4', '#323130']
+
+      fluent-main-dark:
+          name: Main Dark
+          group: Fluent
+          colors: ['#323130', '#0078D4', '#ffffff']
+
 markdown-replacements:
 - pattern: "```(\\r?\\n[ ]*)+((?<liquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
   replacement: "```$<liquid>$<additionalLiquid>$<nextBlock>"

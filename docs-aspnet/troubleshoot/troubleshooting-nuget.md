@@ -31,7 +31,7 @@ Visit <a href="https://status.telerik.com" target="_blank">status.telerik.com</a
 The most common reasons for issues with the private Telerik NuGet feed are related to:
 
 * Authentication and credentials.
-* Licensing. For example, requesting commercial packages with a trial license or vice-versa.
+* Licensing. For example, using an old license key after a renewal, or after a new Telerik license purchase.
 * Missing or wrong local configuration (`NuGet.Config`).
 * Network connectivity issues, including **proxies** and **firewalls**.
 
@@ -41,7 +41,7 @@ Errors like `Unable to load the service index for source https://nuget.telerik.c
 
 To verify if you can access the Telerik NuGet server and the expected packages, open `https://nuget.telerik.com/v3/search?q=blazor&prerelease=true&skip=0&take=100&semVerLevel=2.0.0` directly in the web browser and enter your Telerik credentials in the prompt.
 
-As a result, you will see a JSON output with the NuGet packages and versions that are available for you. Depending on your license, search for {% if site.core %}`Telerik.UI.for.AspNet.Core` or `Telerik.UI.for.AspNet.Core.Trial`{% else %}`Telerik.UI.for.AspNet.Mvc5` or `Telerik.UI.for.AspNet.Mvc5.Trial`{% endif %}.
+As a result, you will see a JSON output with the NuGet packages and versions that are available for you. Search for {% if site.core %}`Telerik.UI.for.AspNet.Core`{% else %}`Telerik.UI.for.AspNet.Mvc5` or `Telerik.UI.for.AspNet.Mvc5.Lite`{% endif %}.
 
 If the above URL does not open, you have either come across a local networking issue or [the NuGet server is down](#error-503-service-unavailable).
 
@@ -111,6 +111,8 @@ Such an error implies that the [Telerik NuGet source]({% slug nuget_install_aspn
 * The correct `NuGet.Config` file is not used, because it is missing or misplaced.
 
 If the error occurs in a Docker scenario, the solution is to copy the `NuGet.Config` file (or configure the NuGet source) explicitly during the Docker image build. You can also <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore#options" target="_blank">reference the `NuGet.Config` file path explicitly in the `dotnet restore` command</a>.
+
+>tip If you attempt to upgrade a trial NuGet package to a Q2 2025 version, change the name of the referenced NuGet package name. As of  Q2 2025, the package has no `Trial` identifier in its name. Uninstall the older package version and install the Q2 2025 version of the {% if site.core %}`Telerik.UI.for.AspNet.Core`{% else %}`Telerik.UI.for.AspNet.Mvc5`{% endif %} package.
 
 ## Error 503 Service Unavailable
 

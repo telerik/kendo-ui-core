@@ -14,9 +14,9 @@ This page provides information for common issues you may encounter while deployi
 >important The machine that performs the publish build must be able to properly restore the referenced Telerik NuGet packages. For guidelines on how to use our online feed, refer to [Setting Up the Telerik NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}#setting-up-the-telerik-nuget-feed). See the [CI, CD, Build Server]({%slug deployment_ci_cd_build%}) article for more details on setting automation up.
 
 
-### Trial Message
+### Your Deployed Application Shows a Banner and a Watermark
 
-`Trial Message` - Such behavior will occur if there is a reference to the {{ site.product_short }} Trial version left in the application. Make sure that the trial version is removed from the release build pipeline. Follow the steps described in the [Switching to a Developer License]({%slug upgrade_aspnetcore%}#switching-to-a-developer-license) article.
+Ensure that you have set up an environment variable by following the steps from the [Use License Keys in CI/CD]({%slug deployment_license_key_aspnetcore%}) article.
 
 
 ## See Also

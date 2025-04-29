@@ -34,5 +34,5 @@ The Telerik Document Processing Libraries' <a href="https://docs.telerik.com/dev
 
 * <a href="https://docs.telerik.com/devtools/document-processing/getting-started/getting-started#getting-started-with-telerik-document-processing" target="_blank">Getting Started with Telerik Document Processing Libraries</a>
 * <a href="https://docs.telerik.com/devtools/document-processing/getting-started/installation/installing-on-your-computer" target="_blank">Installing on Your Computer</a>
-* <a href="https://docs.telerik.com/devtools/document-processing/introduction#trial-version-and-commercial-license" target="_blank">Trial Version and Commercial License</a>
+* <a href="https://docs.telerik.com/devtools/document-processing/introduction#trial-version-and-commercial-license" target="_blank">Trial and Commercial License</a>
 * <a href="https://docs.telerik.com/devtools/document-processing/getting-started/installation/system-requirements" target="_blank">System Requirements</a>

@@ -98,7 +98,7 @@ Once you install the Telerik UI Extensions, you can open Visual Studio and start
 1. From the **Select Version** list, select the latest Telerik UI version, and then select **Next**.
 
    * If you use the Telerik UI extensions for the first time, you will see a login window. Enter the credentials for your [Telerik account](https://www.telerik.com/account) to download the controls.
-   * If you haven't purchased a license, download the trial version of the Telerik UI controls.
+   * If you haven't purchased a license, you can download the Telerik UI controls with a trial license.
 
 
 1. From the available options Select **Grid and Menu**, and then select **Next**.

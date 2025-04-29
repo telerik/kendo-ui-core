@@ -1,8 +1,8 @@
 ---
-title: Removing the Trial Version Message
-description: I switched from a Trial to Commercial license, but I still see the Trial message. How to remove the trial version message?
+title: Removing the Trial Message
+description: I switched from a Trial to Commercial license, but I still see the Trial message. How to remove the trial message?
 type: troubleshooting
-page_title: Removing the Trial Version Message
+page_title: Removing the Trial Message
 slug: troubleshooting_trial_message
 tags: trial, troubleshooting, commercial, license
 res_type: kb
@@ -24,6 +24,8 @@ res_type: kb
 I switched from a Trial to Commercial license, but I still see the Trial message.
 
 ## Solution
+
+>tip  The steps described in this KB article are valid for Telerik UI for {{ site.product_short }} versions up to 2025 Q2. Starting with 2025 Q2, the trial installer is deprecated. You can start a free trial by [using the unified installer]({% slug msi_install_aspnetmvc6_aspnetmvc %})
 
 There are several common reasons for the observed behavior:
 

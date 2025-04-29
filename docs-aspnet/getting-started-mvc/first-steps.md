@@ -42,7 +42,7 @@ Follow these steps to download and install Telerik UI for ASP.NET MVC:
 
 1. Download the installation file:
 
-    * To get the free trial version, follow [this link](https://www.telerik.com/try/ui-for-asp.net-mvc) to download UI for ASP.NET MVC. The installer will activate your trial when you complete the installation.
+    * To get the free trial, follow [this link](https://www.telerik.com/try/ui-for-asp.net-mvc) to download UI for ASP.NET MVC. The installer will activate your trial when you complete the installation.
 
     * If you have already purchased a license:
 

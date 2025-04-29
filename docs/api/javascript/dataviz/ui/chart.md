@@ -20283,6 +20283,133 @@ The donut chart series options. Accepts all values supported by the [series](/ap
     });
     </script>
 
+### series.focusHighlight `Object`
+
+The focus highlight configuration options.
+
+### series.focusHighlight.border `Object`
+
+The border of the focus highlight.
+
+#### Example - set the focus highlight options
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        focusHighlight: {
+          border: {
+            color: 'blue',
+            width: 3,
+            dashType: 'dash',
+            opacity: 0.5
+          }
+        }
+      },
+      series: [
+        { type: "donut",  data: [3, 4] }
+      ]
+    });
+    </script>
+
+### series.focusHighlight.border.color `String` *(default: "black")*
+
+The color of the focus highlight border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the chart seriesDefaults focus highlight border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        focusHighlight: {
+          border: {
+            color: 'blue'
+          }
+        }
+      },
+      series: [
+        { type: "donut",  data: [3, 4] }
+      ]
+    });
+    </script>
+
+### series.focusHighlight.border.dashType `String` *(default: "solid")*
+
+The dash type of the focus highlight border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the chart seriesDefaults focus highlight border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        focusHighlight: {
+          border: {
+            dashType: 'dash'
+          }
+        }
+      },
+      series: [
+        { type: "donut",  data: [3, 4] }
+      ]
+    });
+    </script>
+
+### series.focusHighlight.border.width `Number` *(default: 2)*
+
+The width of the focus highlight border in pixels.
+
+#### Example - set the chart seriesDefaults focus highlight border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        focusHighlight: {
+          border: {
+            width: 3
+          }
+        }
+      },
+      series: [
+        { type: "donut",  data: [3, 4] }
+      ]
+    });
+    </script>
+	
+### series.focusHighlight.border.opacity `Number` *(default: 1)*
+
+The opacity of the focus highlight border.
+
+#### Example - set the chart seriesDefaults focus highlight border opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        focusHighlight: {
+          border: {
+            opacity: 0.5
+          }
+        }
+      },
+      series: [
+        { type: "donut",  data: [3, 4] }
+      ]
+    });
+    </script>
+
 ### seriesDefaults.focusHighlight `Object`
 
 The focus highlight configuration options.

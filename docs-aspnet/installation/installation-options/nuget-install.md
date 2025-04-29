@@ -27,8 +27,6 @@ Before you can use the Telerik NuGet Feed as a **Package source**, you must conf
 
 * [Use the NuGet Package Manager in Visual Studio](#setup-with-the-nuget-package-manager).
 
-* [Use the {{ site.product }} trial installer](#setup-with-the-trial-installer).
-
 * [Use the Progress Control Panel application](#setup-with-the-progress-control-panel-application).
 
 * [Use NuGet CLI](#setup-with-nuget-cli).
@@ -85,21 +83,13 @@ The next steps describe how to authenticate your local NuGet instance and displa
 
 1. In the Visual Studio Package Manager, you will see all packages that are licensed to your user account.
 
-### Setup with the Trial Installer
-
-{% if site.core %}
-The UI for ASP.NET Core <a href="https://www.telerik.com/try/aspnet-core-ui" target="_blank">free trial installer package</a> comes with an option that will automatically configure the Telerik NuGet feed for you. Refer to the [NuGet feed setup section]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-the-telerik-nuget-feed-for-trial-license-users) in the First Steps article for step-by-step instructions.
-{% else %}
-The UI for ASP.NET MVC free trial installer package comes with an option that will automatically configure the Telerik NuGet feed for you. Refer to the [Getting Started article]({% slug setupwithnuget_aspnetmvc %}#adding-the-telerik-nuget-feed-for-trial-license-users) for more details.
-{% endif %}
-
 ### Setup with the Progress Control Panel Application
 
-If you have already purchased a commercial Telerik UI license, you can use the <a href="https://www.telerik.com/try/control-panel" target="_blank">Progress Control Panel application</a> to configure the Telerik NuGet. The Control Panel has an option that you can select, and it will configure the Visual Studio Package Manager to use the Telerik NuGet feed.
+You can use the <a href="https://www.telerik.com/try/control-panel" target="_blank">Progress Control Panel application</a> to configure the Telerik NuGet. The Control Panel has an option that you can select, and it will configure the Visual Studio Package Manager to use the Telerik NuGet feed.
 {% if site.core %}
-Refer to the [NuGet feed setup section]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}#adding-the-telerik-nuget-feed-for-users-with-commercial-license) in the First Steps article for step-by-step instructions.
+Refer to the [NuGet feed setup section]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}#adding-the-telerik-nuget-feed) in the First Steps article for step-by-step instructions.
 {% else %}
-Refer to the [Getting Started article]({% slug setupwithnuget_aspnetmvc %}#adding-the-telerik-nuget-feed-for-users-with-commercial-license) for step-by-step instructions.
+Refer to the [Getting Started article]({% slug setupwithnuget_aspnetmvc %}#adding-the-telerik-nuget-feed) for step-by-step instructions.
 {% endif %}
 
 ### Setup with NuGet CLI
@@ -182,12 +172,9 @@ The Telerik NuGet feed provides the following packages related to {{ site.produc
 
 {% if site.core %}
 - `Telerik.UI.for.AspNet.Core`&mdash;Telerik UI for ASP.NET Core Commercial.
-- `Telerik.UI.for.AspNet.Core.Trial`&mdash;Telerik UI for ASP.NET Core Trial.
 {% else %}
 - `Telerik.UI.for.AspNet.Mvc5.Lite`&mdash;Telerik UI for ASP.NET MVC 5 Lite. Installs only the `Kendo.Mvc.dll` assembly and the ready-to-use editor templates based on Telerik UI for ASP.NET components.
 - `Telerik.UI.for.AspNet.Mvc5`&mdash;Telerik UI for ASP.NET MVC 5 Commercial. Installs the `Kendo.Mvc.dll` assembly, the ready-to-use editor templates based on Telerik UI for ASP.NET components, the CSS files used by the themes, and the Kendo JavaScript files.
-- `Telerik.UI.for.AspNet.Mvc5.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Trial. Installs a trial version of the `Kendo.Mvc.dll` assembly and the rest of the files included in the Commercial package.
-- `Telerik.UI.for.AspNet.Mvc5.Lite.Trial`&mdash;Telerik UI for ASP.NET MVC 5 Lite Trial. Installs a trial version of the `Kendo.Mvc.dll` assembly and the ready-to-use editor templates based on Telerik UI for ASP.NET components.
 {% endif %}
 
 ### Telerik Packages Available on nuget.org
