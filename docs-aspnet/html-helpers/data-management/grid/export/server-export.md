@@ -2,6 +2,7 @@
 title: Server Export
 page_title: Server Export
 description: "Export the Telerik UI Grid for {{ site.framework }} on the Server."
+previous_url: /kendo-ui/aspnet-mvc/helpers/grid/how-to/excel-export-server-side, /helpers/data-management/grid/how-to/Export/excel-export-server-side, /html-helpers/data-management/grid/how-to/Export/excel-export-server-side
 slug: serverexport_gridhelper_aspnetcore
 position: 5
 ---

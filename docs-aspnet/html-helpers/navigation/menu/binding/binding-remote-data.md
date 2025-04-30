@@ -15,7 +15,7 @@ The Menu supports remote data binding as of the R2 2019 release.
 
 1. Implement an action method in your controller that returns the collection for the Menu.
 
-    ```C#
+    ```
     public JsonResult GetCategories()
     {
         SampleEntities northwind = new SampleEntities();
@@ -30,10 +30,9 @@ The Menu supports remote data binding as of the R2 2019 release.
             }
         );
 
-        return Json(result, JsonRequestBehavior.AllowGet);
+        return Json(result{% if site.mvc %}, JsonRequestBehavior.AllowGet {% endif %});
     }
     ```
-
 1. Use the DataSource to configure the action URL to the end-point. Set up the `DataTextField` to define the field which will be bound to the text of the items. If the children items are not in an items field, configure the Model with the corresponding field that holds the children collection.
 
     ```HtmlHelper

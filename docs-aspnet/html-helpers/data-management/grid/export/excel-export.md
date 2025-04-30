@@ -279,7 +279,7 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
 
 ## Using the Detail Template
 
-The Kendo UI Grid does not export its `DetailTemplate` for the same reason it does not export the column templates. If the detail template contains another Grid, follow [this runnable how-to example]({% slug howto_detailgridexcelexport_aspnetmvcgrid %}).
+The Kendo UI Grid does not export its `DetailTemplate` for the same reason it does not export the column templates. If the detail template contains another Grid, follow [this runnable how-to example]({% slug howto_exportto_excel_masterand_detail_grid %}).
 
 ## Exporting Multiple Grids
 

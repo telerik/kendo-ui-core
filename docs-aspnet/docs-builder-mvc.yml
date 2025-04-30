@@ -10,6 +10,7 @@ product-code: KENDOUIMVC
 product-name: Telerik UI for ASP.NET MVC
 product-url: https://www.telerik.com/aspnet-mvc
 product-trial-url: https://www.telerik.com/try/ui-for-asp.net-mvc
+contribute-url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet/
 search-engine-id: 403521cf8c97d434d
 avatar-path: ./images/avatar-ninja.svg
 no-results-image-path: ./images/ninja-no-results.svg
@@ -183,7 +184,6 @@ excluded-files:
 - "**/knowledge-base/grid-enable-operations-for-object-column.md"
 - "**/knowledge-base/grid-export-color-alternating-rows.md"
 - "**/knowledge-base/grid-export-format-cells.md"
-- "**/knowledge-base/grid-export-multiple-grids-to-excel.md"
 - "**/knowledge-base/grid-header-multicolumn-title-change.md"
 - "**/knowledge-base/grid-icon-command-button-no-text.md"
 - "**/knowledge-base/grid-is-not-showing-data.md"

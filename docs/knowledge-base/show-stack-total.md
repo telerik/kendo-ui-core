@@ -80,6 +80,48 @@ It is possible to use this configuration to display the cumulative point value f
     </script>
 ```
 
+Since the label is defined at last field level, when you unselect the last field from legend the `stackValue` is no longer visible. To overcome this, add a 'dummy' series field with the total label:
+
+```dojo
+    <div id="chart"></div>
+    <script>
+      $(function () {
+        $("#chart").kendoChart({
+          dataSource: {
+            data: [
+              { a: 22, b: 11, c: 33, d: 0 },
+              { a: 2, b: 1, c: 3, d: 0 },
+            ],
+          },
+          seriesDefaults: {
+            type: "column",
+            stack: true,
+          },
+          series: [
+            {
+              field: "a",
+              name: "a",
+            },
+            {
+              field: "b",
+              name: "b",
+            },
+            {
+              field: "c",
+              name: "c",
+            },
+            {
+              field: "d",
+              labels: {
+                template: "#= stackValue #",
+                visible: true,
+              }
+            }]
+        });
+      });
+    </script>
+```
+
 ## See Also
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

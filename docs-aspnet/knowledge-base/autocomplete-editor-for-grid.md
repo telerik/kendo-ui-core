@@ -3,7 +3,7 @@ title: Add New Values to Grid Records with AutoComplete as Editor
 page_title: Add New Values to Grid Records with AutoComplete as Editor
 description: "Learn how to add a new value to the Grid records when the {{ site.product }} AutoComplete is used as an editor in the Grid."
 type: how-to
-previous_url: /helpers/editors/autocomplete/how-to/add-new-values-to-grid-with-autocomplete-editor, /html-helpers/editors/autocomplete/how-to/add-new-values-to-grid-with-autocomplete-editor
+previous_url: /helpers/editors/autocomplete/how-to/add-new-values-to-grid-with-autocomplete-editor, /html-helpers/editors/autocomplete/how-to/add-new-values-to-grid-with-autocomplete-editor, /helpers/data-management/grid/how-to/editing/add-new-values-to-records-with-autocomplete-editor, /html-helpers/data-management/grid/how-to/editing/add-new-values-to-records-with-autocomplete-editor
 slug: howto_addnewvaluestogridrecordsautoceditor_autocompleteaspnetmv
 tags: grid, autocomplete, editor, add, new, options, telerik, core, mvc
 res_type: kb

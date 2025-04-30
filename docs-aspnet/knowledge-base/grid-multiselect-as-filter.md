@@ -3,7 +3,7 @@ title: Use MultiSelect as Filter in Grids
 description: How can I use a {{ site.product }} MultiSelect as a filter in the {{ site.product }} Grid?
 type: how-to
 page_title: Use MultiSelect as Filter in Grids
-previous_url: /helpers/editors/multiselect/how-to/use-multiselect-filter-in-grids, /html-helpers/editors/multiselect/how-to/use-multiselect-filter-in-grids
+previous_url: /helpers/editors/multiselect/how-to/use-multiselect-filter-in-grids, /html-helpers/editors/multiselect/how-to/use-multiselect-filter-in-grids, /helpers/data-management/grid/how-to/Filtering/use-multiselect-filter, /html-helpers/data-management/grid/how-to/Filtering/use-multiselect-filter
 slug: grid-multiselect-as-filter
 tags: multiselect, grid, filter, items, telerik, core, mvc
 res_type: kb

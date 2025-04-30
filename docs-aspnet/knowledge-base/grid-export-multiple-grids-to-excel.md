@@ -3,6 +3,7 @@ title: Exporting Multiple Grids to Excel
 description: How can I export multiple Grids to the same Excel file when working with {{ site.product }}?
 type: how-to
 page_title: Exporting Multiple Grids to Excel.
+previous_url: /helpers/data-management/grid/how-to/Export/multiple-grid-export, /html-helpers/data-management/grid/how-to/Export/multiple-grid-export
 slug: excel-export-multiple-grids
 position:
 tags: grid, export, excel, multiple
@@ -18,7 +19,7 @@ res_type: kb
 		</tr>
 		<tr>
 			<td>Product</td>
-			<td>Grid for ASP.NET Core</td>
+			<td>{{ site.product }} Grid</td>
 		</tr>
 	</tbody>
 </table>
@@ -34,7 +35,7 @@ The example below relies on the following key steps:
 
 1. Create an external button to export the data when it is clicked.
 1. Use the client-side [`saveAsExcel` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel) to trigger the data export of each Grid.
-1. Handle the [`ExcelExport`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the two Grids and prevent their default action.
+1. Handle the [`ExcelExport`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event of the two Grids and prevent their default action.
 1. Create a new Workbook by using the sheets of the Grids Workbooks and save it through the [`kendo.saveAs()` method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas).
 
 ```Razor Index.cshtml
@@ -135,7 +136,13 @@ The example below relies on the following key steps:
     </script>
 ```
 
+{% if site.mvc %}
+> The solution requires Telerik UI for ASP.NET MVC 2014.3.1125 version or later. Earlier versions do not expose the `ExcelExport` event through the fluent API.
+
+To review the complete example, refer to the [ASP.NET MVC project on how to export multiple Grids to the same Excel file](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridExportingExcelMultiple).
+{% else %}
 For a runnable example based on the code above, refer to the REPL project on [exporting multiple Grids to Excel](https://netcorerepl.telerik.com/wcYKwCPR52YDsbfP56).
+{% endif %}
 
 ## More {{ site.framework }} Grid Resources
 

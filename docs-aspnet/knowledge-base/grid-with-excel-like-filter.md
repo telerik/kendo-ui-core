@@ -1,7 +1,7 @@
 ---
 title: Implementing Excel-Like Filter Menus in the Grid
 page_title: Using AutoComplete for the Current Grid Filter
-description: Learn how to filter the Telerik UI Grid for {{ site.framework }} by using the AutoComplete component and by showing results from the current Grid filter.
+description: "Learn how to filter the Telerik UI Grid for {{ site.framework }} by using the AutoComplete component and by showing results from the current Grid filter."
 slug: grid-with-excel-like-filter
 tags: grid, similar, excel, filter, menus, using, autocomplete, showing, results, current, filtering
 component: grid
@@ -101,10 +101,17 @@ The following example demonstrates how to set the Grid with an **Excel-like** fi
             dataSourceShared.data(e.items);
     }
 ```
+
+{% if site.mvc %}
+To review the comlete example, refer to the [project on how to use an Excel-like filter in the Telerik UI Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridFilterExcelLike) in ASP.NET MVC applications.
+{% else %}
+
 To observe this behavior, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/wvPmkPvy30Ei9kbn39) and:
 
 1. Filter the **Product Name** column.
 2. Open the **Unit Price** column. Note that the values are filtered based on the currently applied filter on the **Product Name** column.
+
+{% endif %}
 
 ## More {{ site.framework }} Grid Resources
 
@@ -131,5 +138,8 @@ To observe this behavior, refer to the following [Telerik REPL](https://netcorer
 
 * [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+{% if site.core %}
+* [Server-Side TagHelper API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/grid)
+{% endif %}
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)
