@@ -220,7 +220,7 @@ Also, you can integrate Telerik UI for {{ site.framework }} components in the ex
 
 ### Adding HTML Helpers inside External Client Templates
 
-By default, {% if site.core %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_core%}#deferred-initialization){% else %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_aspnetmvc%}#deferred-initialization){% endif %}. If the helper declaration is placed inside an external Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
+By default, [every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug deferred_initialization_overview%}). If the helper declaration is placed inside an external Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
 
     <script id="template" type="text/x-kendo-template">
         @(Html.Kendo().NumericTextBox()

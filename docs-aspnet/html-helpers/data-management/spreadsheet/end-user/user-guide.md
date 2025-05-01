@@ -28,7 +28,7 @@ The Spreadsheet is used for the implementation of related data and its visualiza
 
 **Figure 1: Main Elements of the Spreadsheet**
 
-<center>![{{ site.product_short }} Spreadsheet UI components](../images/spreadsheet-components.png)</center>
+ ![{{ site.product_short }} Spreadsheet UI components](../images/spreadsheet-components.png)
 
 ## Actions
 

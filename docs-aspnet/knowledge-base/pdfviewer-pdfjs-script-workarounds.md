@@ -80,7 +80,7 @@ Also, it is important to ensure that `type="module"` is added to all script tags
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

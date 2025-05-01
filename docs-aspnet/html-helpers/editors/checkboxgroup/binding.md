@@ -8,7 +8,7 @@ position: 2
 
 # Binding
 
-When using the helpers, you can bind the checkbox items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
+When using the helpers, you can bind the checkbox items by using the [Items()](#items-method) method or the [BindTo()](#bindto-method) method.
 
 ## Items Method
 

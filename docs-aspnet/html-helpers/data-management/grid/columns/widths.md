@@ -31,12 +31,11 @@ Depending on whether scrolling is enabled, the columns of the Grid acquire diffe
 
 Change the `table-layout` to `fixed`.
 
-    ```CSS
-    #GridID > table /*A header and data table*/.
-    {
-        table-layout: fixed;
-    }
-    ```
+```CSS
+#GridID > table { /* A header and data table. */
+    table-layout: fixed;
+}
+```
 
 ## Removing Column and Header Misalignment
 

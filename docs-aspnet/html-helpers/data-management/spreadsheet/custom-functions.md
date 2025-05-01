@@ -226,7 +226,7 @@ defineFunction("row", function(ref){
 ]);
 ```
 
-The code requires that the argument can either be an area (a cell or a range) or `null` (that is, missing). By using the `"or"` combiner, you make it accept either of these. If the argument is missing, your function gets `null`. In such cases, it has to return the row of the current formula that you get by `this.formula.row`. For more details, refer to the [section on context objects](#context-objects).
+The code requires that the argument can either be an area (a cell or a range) or `null` (that is, missing). By using the `"or"` combiner, you make it accept either of these. If the argument is missing, your function gets `null`. In such cases, it has to return the row of the current formula that you get by `this.formula.row`. For more details, refer to the [section on context objects](#context-object).
 
 In most cases, “optional” means that the argument takes some default value if one is not provided. For example, the `LOG` function computes the logarithm of the argument to a base, but if the base is not specified, it defaults to 10.
 

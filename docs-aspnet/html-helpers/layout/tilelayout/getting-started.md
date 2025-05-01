@@ -284,7 +284,7 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
 
 ## 4. Handle a TileLayout Event
 
-The TileLayout exposes convenient events for implementing your desired logic. In this example, you will use the [`Reorder`](/api/Kendo.Mvc.UI.Fluent/tilelayouteventbuilder#reordersystemstring) event to log the title, previous, and new position of the reordered item in the browser's console.
+The TileLayout exposes convenient events for implementing your desired logic. In this example, you will use the [`Reorder`](/api/kendo.mvc.ui.fluent/tilelayouteventbuilder#reordersystemstring) event to log the title, previous, and new position of the reordered item in the browser's console.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI

@@ -49,7 +49,7 @@ Enable the `RenderAsModule` option, which will add `type="module"` to the initia
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

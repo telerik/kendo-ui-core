@@ -12,7 +12,7 @@ The Spreadsheet supports cell-formatting options such as formatting of strings, 
 
 ## Strings
 
-While the format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), some [notable exceptions](#differences-to-excel) still exist. A format string consists of one or more sections that are separated by semicolons. Optionally, a section specifies a color and a condition.
+While the format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), some exceptions still exist. A format string consists of one or more sections that are separated by semicolons. Optionally, a section specifies a color and a condition.
 
 The following example demonstrates how to display a number with up to three decimals.
 

@@ -283,7 +283,7 @@ The Kendo UI Grid does not export its `DetailTemplate` for the same reason it do
 
 ## Exporting Multiple Grids
 
-For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
+For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug excel-export-multiple-grids%}).
 {% endif %}
 
 ## Server-Side Processing

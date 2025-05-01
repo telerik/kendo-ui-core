@@ -34,7 +34,7 @@ How can I export parent and child {{ site.framework }} Grids to Excel?
 
 The following examples demonstrate how to export detail Grids to Excel and merge their workbooks with the master Grid workbook.
 
-To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/kendo.mvc.ui.fluent/GridEventBuilder#excelexportsystemfuncsystemobjectsystemobject) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](https://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
+To get the workbook of the detail Grids, the demos use the [`ExcelExport`](/api/kendo.mvc.ui.fluent/grideventbuilder#excelexportsystemstring) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](https://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
 The following example demonstrates how to export a detail Grid to Excel including the current page only.
 

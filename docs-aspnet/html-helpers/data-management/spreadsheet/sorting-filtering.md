@@ -12,7 +12,7 @@ The Spreadsheet for {{ site.framework }} allows you to set predefined sort and f
 
 ## Sorting
 
-You can set the Sorting configuration via the [`Sort()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetbuilder#sortsystemactionkendomvcuifluentspreadsheetsheetsortsettingsbuilder)  option. set the reference over which the sorting will be applied via the [`Ref()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetsortsettingsbuilder) configuration and define further sorting settings via the [`Columns()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetsortsettingsbuilder) configuration option.
+You can set the Sorting configuration via the [`Sort()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetbuilder#sortsystemaction)  option. set the reference over which the sorting will be applied via the [`Ref()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetsortsettingsbuilder) configuration and define further sorting settings via the [`Columns()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetsortsettingsbuilder) configuration option.
 
 ```HtmlHelper
     .Sheets(sheets =>
@@ -43,7 +43,7 @@ You can set the Sorting configuration via the [`Sort()`](/api/kendo.mvc.ui.fluen
 
 ## Filtering
 
-You can set the Filtering configuration via the [`Filter()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetbuilder#filtersystemactionkendomvcuifluentspreadsheetsheetfiltersettingsbuilder) option. set the reference over which the filtering will be applied via the [`Ref()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetfiltersettingsbuilder) configuration and define further filtering settings via the [`Columns()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetfiltersettingsbuilder) configuration option. you will need to set a [`Filter`](/api/kendo.mvc.ui.fluent/spreadsheetsheetfiltersettingscolumnfactory#topfiltersystemactionkendomvcuifluentspreadsheettopfilterbuilder) and the additional parameters for each filter.
+You can set the Filtering configuration via the [`Filter()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetbuilder#filtersystemaction) option. set the reference over which the filtering will be applied via the [`Ref()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetfiltersettingsbuilder) configuration and define further filtering settings via the [`Columns()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetfiltersettingsbuilder) configuration option. you will need to set a `Filter` and the additional parameters for each filter.
 
 The supported filters are:
 * ValueFilter - Represents a filter applied to a column of a given range. Used to filter a column by a predefined set of values.

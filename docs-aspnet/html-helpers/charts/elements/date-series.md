@@ -5,22 +5,22 @@ description: "Learn how to display dates in the Telerik UI Charts for {{ site.fr
 slug: htmlhelpers_charts_dateseries_aspnetcore
 ---
 {% if site.core %}
-    {% assign CategoryAxisType = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#typekendomvcuichartcategoryaxistype" %}
-    {% assign CategoryField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#categoryfieldsystemstring" %}
-    {% assign BaseUnit = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitkendomvcuichartaxisbaseunit" %}
-    {% assign BaseUnitStep = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitstepsystemint32" %}
-    {% assign MaxDateGroups = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#maxdategroupssystemdouble" %}
+    {% assign CategoryAxisType = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#typekendomvcuichartcategoryaxistype" %}
+    {% assign CategoryField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring" %}
+    {% assign BaseUnit = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#baseunitkendomvcuichartaxisbaseunit" %}
+    {% assign BaseUnitStep = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#baseunitstepsystemint32" %}
+    {% assign MaxDateGroups = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#maxdategroupssystemdouble" %}
     {% assign AutoBaseUnitSteps = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisAutoBaseUnitStepsSettingsBuilder" %}
-    {% assign LabelsFormat = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#formatsystemstring" %}
-    {% assign LabelsCulture = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#culturesystemstring" %}
-    {% assign Min = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minsystemobject" %}
-    {% assign Max = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#maxsystemobject" %}
-    {% assign AxisCrossingValue = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#axiscrossingvaluesystemobject" %}
-    {% assign MinorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minorunitsystemdouble" %}
-    {% assign MajorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#majorunitsystemdouble" %}
+    {% assign LabelsFormat = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#formatsystemstring" %}
+    {% assign LabelsCulture = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#culturesystemstring" %}
+    {% assign Min = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#minsystemobject" %}
+    {% assign Max = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#maxsystemobject" %}
+    {% assign AxisCrossingValue = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#axiscrossingvaluesystemobject" %}
+    {% assign MinorUnit = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#minorunitsystemdouble" %}
+    {% assign MajorUnit = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#majorunitsystemdouble" %}
 {% else %}
-    {% assign CategoryAxisType = "/api/Kendo.Mvc.UI/ChartCategoryAxis#type" %}
-    {% assign CategoryField = "/api/Kendo.Mvc.UI.Fluent/ChartPieSeriesBuilder#categoryfieldsystemstring" %}
+    {% assign CategoryAxisType = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#typekendomvcuichartcategoryaxistype" %}
+    {% assign CategoryField = "/api/kendo.mvc.ui.fluent/chartpieseriesbuilder#categoryfieldsystemstring" %}
     {% assign BaseUnit = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunit" %}
     {% assign BaseUnitStep = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunitstep" %}
     {% assign MaxDateGroups = "/api/Kendo.Mvc.UI/ChartCategoryAxis#maxdategroups" %}
@@ -311,7 +311,7 @@ To set the base units in the categorical charts, use any of the following approa
 * [Default configuration](#default-configuration)
 * [Manual configuration](#manual-configuration)
 * [Automatic fitting](#automatic-fitting)
-* [Labels format](#label-format)
+* [Labels format](#labels-format)
 
 #### Default Configuration
 
@@ -488,7 +488,7 @@ To set the base units in the scatter charts, use any of the following approaches
 
 * [Default configuration](#default-configuration)
 * [Manual configuration](#manual-configuration)
-* [Labels format](#label-format)
+* [Labels format](#labels-format)
 
 #### Default Configuration
 

@@ -6,17 +6,12 @@ previous_url: /helpers/charts/stockchart/data-binding
 slug: databinding_stockchart_aspnetcore
 position: 2
 ---
-{% if site.core %}
-    {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
-{% else %}
-    {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
-{% endif %}
 
 # Data Binding
 
 The Telerik UI StockChart provides the [single data-source](#single-data-source-mode) and [master and navigator data-source](#master-and-navigator-data-source-mode) binding modes.
 
-In both modes, you have to set a [`DateField`]({{ DateField }}) to indicate the field that contains the date of the data item.
+In both modes, you have to set a [`DateField`](/api/kendo.mvc.ui.fluent/stockchartbuilder#datefieldsystemstring) to indicate the field that contains the date of the data item.
 
 > * The StockChart supports only binding to time series.
 > * Discrete categories and XY or Scatter series are not supported.

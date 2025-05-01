@@ -53,7 +53,7 @@ The following articles provide information on the most common issues and questio
 
 * [Telerik Private NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}) - general guidance on setting up our private NuGet feed for local use
 
-* [NuGet Feed Troubleshooting]({%slug nuget_install_aspnetmvc6_aspnetmvc%}#troubleshooting) - troubleshooting the most common issues with our nuget feed.
+* [NuGet Feed Troubleshooting]({%slug troubleshooting_telerik_nuget%}) - troubleshooting the most common issues with our nuget feed.
 
 
 ## See Also

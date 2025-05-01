@@ -24,7 +24,7 @@ You need to download and install a new license key after:
 * Renewing an existing license
 * Upgrading an existing license
 
-An expired [perpetual license](https://www.telerik.com/purchase/faq/licensing-purchasing#licensing) key is valid for all {{ site.product }} versions published before the license expiration date.
+>An expired [perpetual license](https://www.telerik.com/purchase/faq/licensing-purchasing#licensing) key is valid for all {{ site.product }} versions published before the license expiration date.
 
 ## Will {{ site.product }} function with an expired license key?
 
@@ -44,7 +44,7 @@ Scenarios that do not match the above three descriptions result in the following
 
 The most likely cause is that the new {{ site.product }} version was released after the expiration date of your current license or license key. To fix this issue:
 
-1. Renew your {{ site.product }} license if necessary.
+1. Renew your {{ site.product }} license, if necessary.
 1. [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates)
 1. For more details on problems related to the licensing and their solutions, see the [License Key Errors article]({%slug troubleshooting-license-key-errors%}).
 
@@ -60,7 +60,7 @@ No, the license validation and activation occur offline.
 
 No, do not add the `telerik-license.txt` license key file or its contents to source control.
 
-Do not store the license key in plain text in GitHub Actions Workflow definitions. Build servers [must use the `TELERIK_LICENSE` environment variable]({%slug deployment_license_key_aspnetcore%}).
+Do not store the license key in plain text in GitHub Actions Workflow definitions. Build servers must use the [`TELERIK_LICENSE` environment variable]({%slug deployment_license_key_aspnetcore%}).
 
 ## What happens if both the environment variable and the license key file are present?
 
@@ -73,14 +73,15 @@ If both a global and a project-specific `telerik-license.txt` files exist, then 
 
 ## My team has more than one license holder. Which key do we have to use?
 
-To activate {{ site.product }}:
+To activate {{ site.product }} on your development machine, use the key associated with your personal account.
 
-* [Every developer must be assigned their own license or seat](https://www.telerik.com/purchase/faq/licensing-purchasing).
-* Every developer must use a license key that is associated with their personal Telerik account.
+To activate {{ site.product }} in a CI/CD environment, use any of the license keys in your team.
+
+>Every developer must be assigned [their own license or seat](https://www.telerik.com/purchase/faq/licensing-purchasing) and they must use a license key that is associated with their personal Telerik account.
 
 ## Are earlier {{ site.product }} versions affected?
 
-No, versions up to **2024.4.1112** released prior to February 2025 do not require a license key. They use an older licsensing mechanism that requires [Referencing a Script Key]({%slug licensing_aspnetcore%}#old-licensing-mechanism)
+No, versions up to **2024.4.1112** released prior to February 2025 do not require a license key. They use an older licsensing mechanism that requires [Referencing a Script Key]({%slug installation_legacy_licensing_aspnetcore%})
 
 ## Next Steps
 

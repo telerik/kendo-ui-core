@@ -6,11 +6,11 @@ slug: navdepth_daterangepicker_aspnetcore
 position: 4
 ---
 {% if site.core %}
-    {% assign Start = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#startkendomvcuicalendarview" %}
-    {% assign Depth = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#depthkendomvcuicalendarview" %}
+    {% assign Start = "/api/kendo.mvc.ui.fluent/daterangepickerbuilder#startkendomvcuicalendarview" %}
+    {% assign Depth = "/api/kendo.mvc.ui.fluent/daterangepickerbuilder#depthkendomvcuicalendarview" %}
 {% else %}
-    {% assign Start = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#startsystemstring" %}
-    {% assign Depth = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#depthsystemstring" %}
+    {% assign Start = "/api/kendo.mvc.ui.fluent/daterangepickerbuilder#startsystemstring" %}
+    {% assign Depth = "/api/kendo.mvc.ui.fluent/daterangepickerbuilder#depthsystemstring" %}
 {% endif %}
 
 # Start View and Navigation Depth

@@ -19,24 +19,22 @@ The following example shows how to set up a DropDownTree to use Ajax data bindin
 
     >The `HasChildren` property of the Model is required to render items as parent nodes on the client-side.
 
-    ```Model
-        public class HierarchicalViewModel
-        {
-            public int ID { get; set; }
-
-            public string Name { get; set; }
-
-            public int? ParentID { get; set; }
-
-            public bool HasChildren { get; set; }
-        }
+    ```C#
+    public class HierarchicalViewModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int? ParentID { get; set; }
+        public bool HasChildren { get; set; }
+    }
     ```
 
 1. Define an Action method in the Controller that returns a JSON-formatted data collection.
-By default, the DropDownTree sends to the remote endpoint the `id` of the expanded node as a query string parameter. In this way, you can filter the data collection in the Action method based on the received id parameter, and return the child nodes to the DataSource of the component.
+
+    By default, the DropDownTree sends to the remote endpoint the `id` of the expanded node as a query string parameter. In this way, you can filter the data collection in the Action method based on the received id parameter, and return the child nodes to the DataSource of the component.
 
     {% if site.core %}
-    ```Controller
+    ```C# Controller
         public IActionResult Read_DropDownTreeData(int? id)
         {
             var result = GetHierarchicalData()
@@ -65,7 +63,7 @@ By default, the DropDownTree sends to the remote endpoint the `id` of the expand
         }
     ```
     {% else %}
-    ```Controller
+    ```C# Controller
         public ActionResult Read_DropDownTreeData(int? id)
         {
             var result = GetHierarchicalData()

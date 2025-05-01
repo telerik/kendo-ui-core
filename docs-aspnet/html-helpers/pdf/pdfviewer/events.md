@@ -21,7 +21,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

@@ -32,7 +32,7 @@ The following example demonstrates how to initialize the PDFViewer by using [PDF
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

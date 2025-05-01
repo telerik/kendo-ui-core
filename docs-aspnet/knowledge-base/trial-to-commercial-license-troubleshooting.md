@@ -37,11 +37,11 @@ There are several common reasons for the observed behavior:
 
     Inspect the `.csproj` file of the application and make sure that it doesn't contain a reference to the trial version of the {{site.product}} package:
 
-        ```
-        <ItemGroup>
-            <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2021.3.914" />
-        </ItemGroup>
-        ```
+    ```
+    <ItemGroup>
+        <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2021.3.914" />
+    </ItemGroup>
+    ```
 
 * A reference to the Trial package has been pushed to source control.
 

@@ -417,7 +417,7 @@ The table below contains links to available examples of using Telerik UI for ASP
             <IntroTableAnchor title="TabStrip" href="slug:htmlhelpers_tabstrip_aspnetcore_razor_page"></IntroTableAnchor>
             <IntroTableAnchor title="Timeline" href="slug:razorpages_timelinehelper_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="ToolBar" href="slug:htmlhelpers_toolbar_aspnetcore_razor_page"></IntroTableAnchor>
-            <IntroTableAnchor title="TreeView" href="slug:htmlhelpers_treeview_binding_aspnetcore#razor-pages"></IntroTableAnchor>
+            <IntroTableAnchor title="TreeView" href="slug:htmlhelpers_treeview_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Wizard" href="slug:htmlhelpers_wizard_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
         <IntroTableSection title="Interactivity and UX">

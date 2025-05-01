@@ -6,9 +6,9 @@ slug: pdfexport_gridhelper_aspnetcore
 position: 3
 ---
 {% if site.core %}
-    {% assign pdfbuilder = "GridPdfSettingsBuilder" %}
+    {% assign pdfbuilder = "gridpdfsettingsbuilder" %}
 {% else %}
-    {% assign pdfbuilder = "PDFSettingsBuilder" %}
+    {% assign pdfbuilder = "pdfsettingsbuilder" %}
 {% endif %}
 
 # PDF Export

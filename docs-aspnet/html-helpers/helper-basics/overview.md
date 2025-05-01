@@ -80,7 +80,7 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
         @removeTagHelper "*, Microsoft.AspNetCore.Mvc.Razor"
 
 * The `TagMode` enum of the MultiSelect is now renamed to `MultiSelectTagMode`.
-* [`Deferred()`]({% slug fundamentals_core%}#deferred-initialization) can be invoked only as a last setting.
+* [`Deferred()`]({% slug deferred_initialization_overview%}) can be invoked only as a last setting.
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")

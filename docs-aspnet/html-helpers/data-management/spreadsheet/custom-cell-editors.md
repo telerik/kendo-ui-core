@@ -16,7 +16,7 @@ A cell editor allows the user to enter the data in the correct format. For examp
 To define a custom editor, use `kendo.spreadsheet.registerEditor(name, editor)`:
  *  `name` is an ID of your choice. You will use it to select the particular editor on a `Range`.
 
- *  `editor` can be an [object](#configuring-editor-as-object) or a [function](#configuring-editor-as-function).
+ *  `editor` can be an [object](#configuring-editor-as-object) or a function.
 
  ### Configuring `editor` as Object
 

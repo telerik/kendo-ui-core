@@ -44,7 +44,7 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

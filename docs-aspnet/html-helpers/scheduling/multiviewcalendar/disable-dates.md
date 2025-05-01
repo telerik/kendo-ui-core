@@ -11,7 +11,7 @@ position: 6
 
 The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
 
-To disable a date, either [set an array](#setting-and-array) or [add a function](#adding-a-function).
+To disable a date, either [set an array](#setting-an-array) or [add a function](#adding-a-function).
 
 ## Setting an Array
 

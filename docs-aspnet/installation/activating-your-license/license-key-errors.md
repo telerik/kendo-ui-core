@@ -26,7 +26,11 @@ A Telerik license key error may occur in the following scenarios:
 * Using conflicting license keys in the same environment. For example, using one global license key and one in the app. Or, using a license key file together with an environment variable in CI/CD environment.
 * Mismatching versions of the `Kendo.Mvc.dll` and the Kendo UI JavaScript files referenced in the project.
 
-Refer to the error messages below for specific tips.
+A missing, expired, or invalid license will result in:
+
+* A watermark appearing on application startup.
+* A modal dialog appearing on application startup. Clicking the `OK` button of the dialog closes the dialog and removes the banner until the next application startup.
+* A warning message in the build log
 
 ## Error Messages
 
@@ -134,6 +138,24 @@ If you experience the error *"The located assembly's manifest definition does no
 Ensure that you have set up an environment variable by following the steps from the [Use License Keys in CI/CD]({%slug deployment_license_key_aspnetcore%}) article.
 
 Alternatively, if you have included the telerik-license.txt file into the project and the project is under source control, add the license file under source control as well.
+
+## Error Message Codes
+
+When using {{ site.product }} in a project with an expired or missing license, the `Telerik.Licensing` build task will indicate the following errors or conditions:
+
+| Error or Condition                                                       | Message Code       | Solution                                                                                                                                                            |
+| ------------------------------------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `No Telerik and Kendo UI License file found`                             | `TKL002`           | [Install a license key]({%slug installation_license_key_aspnetcore%}) to activate the UI controls and remove the error message.                                                   |
+| `Corrupted Telerik and Kendo UI License Key content`                     | `TKL003`           | [Download a new license key]({%slug installation_license_key_aspnetcore%}) and install it to activate the UI components and remove the error message. |
+| `Unable to locate licenses for all products`                             | `TKL004`           | Your license is not valid for all Telerik and Kendo products added to your project. If you have already purchased the required license, then [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).                      |
+| `{{ site.product }} is not listed in your current license file` | `TKL101`           | Review the purchase options for the listed products. Alternatively, remove the references to the listed packages from `package.json`.                               |
+| `Your current license has expired`                                       | `TKL002` | You are using a product version released outside the validity period of your perpetual license. To remove the error message, do either of the following:            |
+|                                                                          |                    | - Renew your subscription and [Download a new license key]({%slug installation_license_key_aspnetcore%})                                                                        |
+|                                                                          |                    | - Downgrade to a product version included in your perpetual license as indicated in the message.                                                                    |
+| `Your subscription has expired`                                          | `TKL103`, `TKL104` | Renew your subscription and [Download a new license key]({%slug installation_license_key_aspnetcore%})                                                                            |
+| `Your trial expired`                                                     | `TKL105`           | Purchase a commercial license to continue using the product.                                                                     |
+| `No Telerik or Kendo UI product references detected in project`       | `TKL001`           | - If you use Telerik products and see this message, update the `Telerik.Licensing` package to version 1.4.9 or later.                                                 |
+|                                                                          |                    | - If you do not use Telerik products, remove the `Telerik.Licensing` NuGet reference from your project.                                                               |
 
 ## See Also
 

@@ -145,7 +145,7 @@ The `ThemeColor` option controls the color that will be applied to the rendered 
 ```
 {% endif %}
 
-The [`ThemeColor`](/api/kendo.mvc.ui.fluent/chiplistbuilder#themecolorkendomvcuithemecolor) option accepts the following values:
+The [`ThemeColor`](/api/kendo.mvc.ui.fluent/chiplistitembuilder#themecolorkendomvcuichipthemecolor) option accepts the following values:
 
 - (Default) `ChipThemeColor.Base`
 - `ChipThemeColor.Info`

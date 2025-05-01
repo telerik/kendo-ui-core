@@ -267,7 +267,7 @@ As demonstrated in the examples above, the `k-button-icontext` class is no longe
 
 ### How Can I Update the Reference to Target the Element In the New Rendering?
 
-The easiest way to solve the [issue with missing classes](#how-do-i-know-if-i-have-overriden-a-class-name) is to update the selectors of the CSS rules that target a  specific element.
+The easiest way to solve the [issue with missing classes](#how-do-i-know-if-i-have-overridden-a-class-name) is to update the selectors of the CSS rules that target a  specific element.
 
 The following example shows a CSS rule that uses an old class selector `k-button-icontext`, which does not exist in the new rendering:
 

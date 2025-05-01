@@ -142,7 +142,7 @@ If the editing functionality of the Grid is enabled, use a more specific filter 
 
 If the Grid is configured to display details, use a selector that matches only the master Grid rows, for example, `filter: ">tbody >tr.k-master-row"`. In this way, the detail rows will not be draggable.
 
-For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/sortable#eventssystemactionkendomvcuifluentsortableeventbuilder) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/{{ site.platform }}/sortable/integration-grid).
+For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/kendo.mvc.ui.fluent/sortableeventbuilder) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/{{ site.platform }}/sortable/integration-grid).
 
 The editing functionality of the Telerik UI Grid for {{ site.framework }} is rendered through its [inline](https://demos.telerik.com/{{ site.platform }}/grid/editing-inline), [popup](https://demos.telerik.com/{{ site.platform }}/grid/editing-popup), and [batch](https://demos.telerik.com/{{ site.platform }}/grid/editing) edit modes. The inline and popup modes are more common and easier to implement than the batch edit mode.
 

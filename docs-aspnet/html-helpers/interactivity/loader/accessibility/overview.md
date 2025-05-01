@@ -39,11 +39,11 @@ If the text should be read while dynamically showing/hiding the loader, you can 
 
 ## Section 508
 
-The Loader is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in {{ site.product }}]({% slug overview_accessibility %}#section-508).
+The Loader is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in {{ site.product }}]({%slug overview_accessibility%}#legal-and-technical-compliance).
 
 ## WCAG 2.2
 
-The Loader supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.2 compliance in {{ site.product_short }} ]({% slug overview_accessibility %}#wcag-21).
+The Loader supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.2 compliance in {{ site.product_short }} ]({% slug overview_accessibility %}#web-content-accessibility-guidelines).
 
 ##
 

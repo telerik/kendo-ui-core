@@ -5,25 +5,25 @@ description: "Learn how to configure the error bars of Telerik UI Charts, bind t
 slug: htmlhelpers_charts_errorbars_aspnetcore
 ---
 {% if site.core %}
-    {% assign ErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorlowfieldsystemstring" %}
-    {% assign ErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorhighfieldsystemstring" %}
-    {% assign XErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorlowfieldsystemstring" %}
-    {% assign XErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorhighfieldsystemstring" %}
-    {% assign YErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorlowfieldsystemstring" %}
-    {% assign YErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorhighfieldsystemstring" %}
-    {% assign ErrorBarsValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#valuesystemstring" %}
-    {% assign ErrorBarsXValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#xvaluesystemstring" %}
-    {% assign ErrorBarsYValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#yvaluesystemstring" %}
+    {% assign ErrorLowField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#errorlowfieldsystemstring" %}
+    {% assign ErrorHighField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#errorhighfieldsystemstring" %}
+    {% assign XErrorLowField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#xerrorlowfieldsystemstring" %}
+    {% assign XErrorHighField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#xerrorhighfieldsystemstring" %}
+    {% assign YErrorLowField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#yerrorlowfieldsystemstring" %}
+    {% assign YErrorHighField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#yerrorhighfieldsystemstring" %}
+    {% assign ErrorBarsValue = "/api/kendo.mvc.ui.fluent/chartserieserrorbarssettingsbuilder#valuesystemstring" %}
+    {% assign ErrorBarsXValue = "/api/kendo.mvc.ui.fluent/chartserieserrorbarssettingsbuilder#xvaluesystemstring" %}
+    {% assign ErrorBarsYValue = "/api/kendo.mvc.ui.fluent/chartserieserrorbarssettingsbuilder#yvaluesystemstring" %}
 {% else %}
-    {% assign ErrorLowField = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#lowfieldsystemstring" %}
-    {% assign ErrorHighField = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#highfieldsystemstring" %}
-    {% assign XErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ScatterErrorBarsBuilder#xlowfieldsystemstring" %}
-    {% assign XErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ScatterErrorBarsBuilder#xhighfieldsystemstring" %}
-    {% assign YErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ScatterErrorBarsBuilder#ylowfieldsystemstring" %}
-    {% assign YErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ScatterErrorBarsBuilder#yhighfieldsystemstring" %}
-    {% assign ErrorBarsValue = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#valuesystemstring" %}
-    {% assign ErrorBarsXValue = "/api/Kendo.Mvc.UI.Fluent/ScatterErrorBarsBuilder#xvaluesystemstring" %}
-    {% assign ErrorBarsYValue = "/api/Kendo.Mvc.UI.Fluent/ScatterErrorBarsBuilder#yvaluesystemstring" %}
+    {% assign ErrorLowField = "/api/kendo.mvc.ui.fluent/categoricalerrorbarsbuilder#lowfieldsystemstring" %}
+    {% assign ErrorHighField = "/api/kendo.mvc.ui.fluent/categoricalerrorbarsbuilder#highfieldsystemstring" %}
+    {% assign XErrorLowField = "/api/kendo.mvc.ui.fluent/scattererrorbarsbuilder#xlowfieldsystemstring" %}
+    {% assign XErrorHighField = "/api/kendo.mvc.ui.fluent/scattererrorbarsbuilder#xhighfieldsystemstring" %}
+    {% assign YErrorLowField = "/api/kendo.mvc.ui.fluent/scattererrorbarsbuilder#ylowfieldsystemstring" %}
+    {% assign YErrorHighField = "/api/kendo.mvc.ui.fluent/scattererrorbarsbuilder#yhighfieldsystemstring" %}
+    {% assign ErrorBarsValue = "/api/kendo.mvc.ui.fluent/categoricalerrorbarsbuilder#valuesystemstring" %}
+    {% assign ErrorBarsXValue = "/api/kendo.mvc.ui.fluent/scattererrorbarsbuilder#xvaluesystemstring" %}
+    {% assign ErrorBarsYValue = "/api/kendo.mvc.ui.fluent/scattererrorbarsbuilder#yvaluesystemstring" %}
 {% endif %}
 
 # Error Bars

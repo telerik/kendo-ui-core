@@ -18,7 +18,7 @@ To enable the Excel export option of the TreeList:
 
 1. Include the corresponding toolbar command and set the export settings.
     * [Toolbar configuration](/api/kendo.mvc.ui.fluent/treelisttoolbarfactory#excel)
-    * [Excel export configuration](/api/kendo.mvc.ui.fluent/treelistbuilder#excelsystemactionkendomvcuifluenttreelistexcelsettingsbuildert)
+    * [Excel export configuration](/api/kendo.mvc.ui.fluent/treelistbuilder#excelsystemaction)
 1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% slug exportsupport_core %}#jszip-library).
 
     ```HtmlHelper

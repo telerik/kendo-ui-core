@@ -39,7 +39,7 @@ As of the [Kendo UI R1 2017 release](https://docs.telerik.com/kendo-ui/backwards
 
 If you upgrade your project from a prior version to the R1 2017 version (2017.1.118) or later, you have to change the [classes of the custom CSS rules that you use accordingly](https://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1).
 
-If the icons are still missing after you change the classes, verify that the version is fully [updated](#upgrade-to-newer-versions).
+If the icons are still missing after you change the classes, verify that the version is fully [updated]({% slug upgrade_aspnetcore%}).
 
 
 ## JavaScript
@@ -307,7 +307,7 @@ This can happens if the wrapper is declared without `ToClientTemplate()`.
 
 **Solution**
 
-For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug fundamentals_aspnetmvc %}#client-templates)
+For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug client_templates_overview %})
 
 On the other hand, note that [template script expressions](https://docs.telerik.com/kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
 
@@ -440,7 +440,7 @@ Alternatively, just remove the non-minified script from the project. Obviously, 
 
 **Solution**
 
-When the Kendo UI theme images do not appear in this case, refer to the [article on CSS bundling]({% slug fundamentals_aspnetmvc %}#css-bundling).
+When the Kendo UI theme images do not appear in this case, refer to the [article on CSS bundling]({% slug fundamentals_aspnetmvc %}#using-css-bundling).
 
 ### MVC Wrapper with Ajax Binding Shows Outdated Data
 

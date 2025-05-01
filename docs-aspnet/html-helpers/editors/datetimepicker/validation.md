@@ -6,9 +6,9 @@ slug: validation_datetimepicker_aspnetcore
 position: 5
 ---
 {% if site.core %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#parseformatssystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/datetimepickerbuilder#parseformatssystemstring" %}
 {% else %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#parseformatssystemcollectionsgenericienumerablesystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/datetimepickerbuilder#parseformatssystemcollectionsgenericienumerable" %}
 {% endif %}
 
 # Validation

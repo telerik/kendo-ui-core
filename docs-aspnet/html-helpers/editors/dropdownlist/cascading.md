@@ -30,7 +30,7 @@ The following example demonstrates the parameters of the request.
         filter[filters][0][operator]: eq
         filter[filters][0][value]:
 
-To send additional data through the request, use the [`Data()`]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) method and provide the name of a JavaScript function that returns an object with the additional data.
+To send additional data through the request, use the [`Data()`](/api/kendo.mvc.ui.fluent/crudoperationbuilder#datasystemstring) method and provide the name of a JavaScript function that returns an object with the additional data.
 
 > * The cascading functionality works only when you define the `CascadeFrom` property and initialize the parent DropDownList.
 > * The filter operator is always `"eq"`. To filter the data, the child DropDownList uses the `DataValueField` option of the parent DropDownList.

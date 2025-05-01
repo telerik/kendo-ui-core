@@ -8,7 +8,7 @@ position: 4
 
 # Layout Containers
 
-The Telerik UI TileLayout for {{ site.framework }} component tiles are configured by using the [`Containers`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#containerssystemactionkendomvcuifluenttilelayoutcontainerfactory) configurator. 
+The Telerik UI TileLayout for {{ site.framework }} component tiles are configured by using the [`Containers`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#containerssystemaction) configurator. 
 
 ## Dimensions
 

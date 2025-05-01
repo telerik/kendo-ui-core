@@ -37,7 +37,7 @@ The `Rounded` configuration for the HTML Helpers now expects [`Kendo.Mvc.UI.Roun
 
 ### PanelBar TagHelper
 
-The `PanelBarItemBase(ViewContext)` constructor of the `PanelBarItemBase.cs` class is now obsolete. Use the parameterless constructo instead.
+The `PanelBarItemBase(ViewContext)` constructor of the `PanelBarItemBase.cs` class is now obsolete. Use the parameterless constructor instead.
 
 ### Form TagHelper
 
@@ -50,7 +50,7 @@ The `<WidgetName>.AsChildComponent()` method has been deprecated.
 
 #### Content browsing APIs
 
-The following interfaces, classes and their methods have been depreceted and removed from the `Kendo.Mvc` dll:
+The following interfaces, classes and their methods have been deprecated and removed from the `Kendo.Mvc` dll:
 
 {% if site.mvc %}
 | Component        | Class                      |
@@ -82,7 +82,7 @@ The following interfaces, classes and their methods have been depreceted and rem
 | FileManager      | `IContentPermission.cs`    |
 {% endif %}
 
-The code is moved to the demo application, where it is used for demo purposes only, demonstrating a possible implementation of the directory and file access functionality{% if site.mvc %}, and thumbnail creation{% endif %}. It is advisable to follow the best practices of your company/organisation when implementing the read/write access for the backend required for the above-listed components.
+The code is moved to the demo application, where it is used for demo purposes only, demonstrating a possible implementation of the directory and file access functionality{% if site.mvc %}, and thumbnail creation{% endif %}. It is advisable to follow the best practices of your company/organization when implementing the read/write access for the backend required for the above-listed components.
 
 #### Editor APIs
 
@@ -257,9 +257,9 @@ Apart from that, we made changes in the positioning styles of the component. Unt
 
 * The tabs in the Spreadsheet are now rendered via [`Kendo Menu`](/api/javascript/ui/menu) instead of a [`Kendo TabStrip`](/api/javascript/ui/tabstrip).
 * The rendering of the SheetsBar at the bottom is unified with the rendering of a [`Kendo UI TabStrip`](/api/javascript/ui/tabstrip).
-* The `Add New Sheet` tool in the SheetsBar is now created from `<button>` element instead of `<a role="button"\>`.
+* The `Add New Sheet` tool in the SheetsBar is now created from `<button>` element instead of `<a role="button"></a>`.
 * The `Quick Access` section in the top toolbar is removed and the `Undo` and `Redo` buttons are moved in the Home tab.
-* The tools in the toolbar are now splitted into six separate tabs - File, Home, Insert, Format, Data and View.
+* The tools in the toolbar are now split into six separate tabs - File, Home, Insert, Format, Data and View.
 * Replaced `k-icon k-i-undo` with `k-icon k-i-reset`.
 * Replaced `k-icon k-i-redo` with `k-icon k-i-reload`.
 * Default values for `RowHeight` and `HeaderHeight` were set to 30 pixels.

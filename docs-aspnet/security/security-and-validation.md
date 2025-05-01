@@ -120,7 +120,7 @@ When the [`Html()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetrowcellbuilder#html
 
 ### PanelBar
 
-The [PanelBar]({% slug htmlhelpers_panelbar_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/panelbarbuilder#itemssystemactionkendomvcuifluentpanelbaritemfactory) configuration option allows the developer to disable the encoding for a particular item. {% if site.core %} for the [panelbar taghelper]({% slug htmlhelpers_panelbar_aspnetcore %}), disable the `encoded` attribute in the `panelbar-item` tag.{% endif %}
+The [PanelBar]({% slug htmlhelpers_panelbar_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/panelbarbuilder#itemssystemaction) configuration option allows the developer to disable the encoding for a particular item. {% if site.core %} for the [panelbar taghelper]({% slug htmlhelpers_panelbar_aspnetcore %}), disable the `encoded` attribute in the `panelbar-item` tag.{% endif %}
 
 ```HtmlHelper
     @(Html.Kendo().PanelBar()
@@ -149,7 +149,7 @@ In such scenarios, the use of HTML for the item text is allowed. The developer s
 
 ### Menu
 
-The [Menu]({% slug htmlhelpers_menu_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/menubuilder#itemssystemactionkendomvcuifluentmenuitemfactory) configuration option {% if site.core %}or the  `menu-item` tag {% endif %} allows the developer to disable the encoding for a menu item. 
+The [Menu]({% slug htmlhelpers_menu_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/menubuilder#itemactionsystemaction) configuration option {% if site.core %}or the  `menu-item` tag {% endif %} allows the developer to disable the encoding for a menu item. 
 
 ```HtmlHelper
     @(Html.Kendo().Menu()

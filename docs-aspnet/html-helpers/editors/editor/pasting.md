@@ -12,7 +12,7 @@ Pasting content from HTML and Microsoft (MS) Word documents to the Editor is ess
 
 ## Basic Concepts
 
-The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/kendo.mvc.ui.fluent/editorbuilder#pastecleanupsystemactionkendomvcuifluenteditorpastecleanupsettingsbuilder) options which help control the content that will be pasted.
+The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/kendo.mvc.ui.fluent/editorbuilder#pastecleanupsystemaction) options which help control the content that will be pasted.
 
 ## Cleaning HTML on Paste
 

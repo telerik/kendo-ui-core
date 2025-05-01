@@ -207,7 +207,7 @@ To install a specific {{ site.product }} version:
 {% else %}
 	 ![{{ site.product_short }} Installing a specified package version](../images/mvc-install-package-version.png)
 {% endif %}
-1. Install a [Telerik license key](#license-key).
+1. Install a [Telerik license key](#installing-your-license-key).
 
 For more information on the list of the provided Kendo UI packages, refer to the article on [installing Kendo UI for jQuery with NuGet](https://docs.telerik.com/kendo-ui/intro/installation/nuget-install).
 

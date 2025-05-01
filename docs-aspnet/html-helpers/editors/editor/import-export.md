@@ -99,7 +99,7 @@ To start using the import and export functionality:
     > To send a file to the server, the `Import` tool integrates the [Telerik UI Upload HtmlHelper]({%slug htmlhelpers_upload_aspnetcore %}). You can configure it through the following exposed helper methods:
     >
     > * [`AllowedExtensions()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#allowedextensionssystemstring)
-    > * [`MaxFileSize()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#maxfilesizesystemnullablesystemdouble)
+    > * [`MaxFileSize()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#maxfilesizesystemnullable)
     > * [`Complete()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#completesystemstring)
     > * [`Progress()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#progresssystemstring)
     > * [`Select()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring)

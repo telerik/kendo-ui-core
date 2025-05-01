@@ -10,11 +10,11 @@ position: 4
 
 The Telerik UI Circular Gauge for {{ site.framework }} export relies on the [Telerik UI DrawingAPI library](https://docs.telerik.com/kendo-ui/framework/drawing/dom-elements/overview). It enables you to export the content as:
 
-* [PDF](#export-to-pdf)
+* [PDF](#export-as-pdf)
 
-* [Image](#export-to-image)
+* [Image](#export-as-image)
 
-* [SVG](#export-to-svg)
+* [SVG](#export-as-svg)
 
 ## Export as PDF
 

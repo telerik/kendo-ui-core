@@ -7,9 +7,9 @@ position: 3
 ---
 
 {% if site.core %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign Position = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#positionkendomvcuichartaxislabelsposition" %}
 {% else %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign Position = "/api/kendo.mvc.ui.fluent/chartaxislabelsbuilder#positionkendomvcuichartaxislabelsposition" %}
 {% endif %}
 
 # Scatter Charts

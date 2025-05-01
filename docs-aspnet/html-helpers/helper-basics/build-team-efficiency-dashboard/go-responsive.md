@@ -137,7 +137,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
     - `Name: menuPanelClose`
     - `Content: Close`
     - `Icon: close`
-    - `HtmlAttributes: new { @class = "k-rpanel-toggle" }``
+    - `HtmlAttributes: new { @class = "k-rpanel-toggle" }`
 
 1. Wrap the button in a `div` with a class of `text-right` to position the button on the right hand edge of the panel.
 

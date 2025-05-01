@@ -25,7 +25,7 @@ How can I create common function handler that can be reused in different modules
 
 In the context of {{ site.product }} Helpers, adding a function with additional parameters requires a given event to expose a delegate overload. 
 
-Most of the {{ site.product }} Components event handlers provide this overload. This allows you to subscribe to events by a {% if site.core %} [Func<TResult>](https://learn.microsoft.com/en-us/dotnet/api/system.func-1?view=net-8.0) delegate{% else %} [Func<TResult>](https://learn.microsoft.com/en-us/dotnet/api/system.func-2?view=netframework-4.7.2) delegate{% endif%}.
+Most of the {{ site.product }} Components event handlers provide this overload. This allows you to subscribe to events by a {% if site.core %} [`Func<TResult>`](https://learn.microsoft.com/en-us/dotnet/api/system.func-1?view=net-8.0) delegate{% else %} [`Func<TResult>`](https://learn.microsoft.com/en-us/dotnet/api/system.func-2?view=netframework-4.7.2) delegate{% endif%}.
 
 The following example demonstrates how to achieve the desired outcome:
 

@@ -47,7 +47,7 @@ The example below will render a grid with two rows and two columns which can be 
 
 ## Event Handling
 
-The widget triggers a [`Resize()`](/api/kendo.mvc.ui.fluent/tilelayouteventbuilder#resizesystemstringe) event which provides access to the resized container.
+The component triggers the [`Resize`](/api/kendo.mvc.ui.fluent/tilelayouteventbuilder#resizesystemstring) event, which provides access to the resized container.
 
 ```HtmlHelper
     .Events(e=>e.Resize("onResize"))

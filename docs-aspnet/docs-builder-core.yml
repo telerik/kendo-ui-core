@@ -205,7 +205,6 @@ excluded-files:
 - "**/html-helpers/navigation/tabstrip/forms.md"
 - "**/html-helpers/navigation/treeview/security-trimming.md"
 - "**/html-helpers/editors/editor/import-export.md"
-- "**/html-helpers/data-management/grid/how-to/*"
 - "**/html-helpers/editors/colorpicker/how-to/*"
 - "**/html-helpers/interactivity/progressbar/how-to/*"
 - "**/html-helpers/layout/window/how-to/*"

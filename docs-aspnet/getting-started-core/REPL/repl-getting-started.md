@@ -17,7 +17,7 @@ By using the Telerik REPL for ASP.NET Core, you can write razor code that contai
 * [Rendering HTML](#rendering-html)
 * [Using Razor code blocks](#using-razor-code-blocks)
 * [Using Razor local methods](#using-razor-local-methods)
-* [Using Razor `@functions` directive](#using-razor-funcitons-directive)
+* [Using Razor `@functions` directive](#using-razor-the-functions-directive)
 
 To get a grasp of runnable examples that tackle different use-cases, see the [Starting Fast with Pre-Built Examples](https://www.telerik.com/aspnet-core-ui/repl/getting-started) article.
 

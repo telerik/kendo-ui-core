@@ -8,7 +8,7 @@ position: 2
 
 # Binding
 
-When using the RadioGroup component, you can bind the radio button items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
+When using the RadioGroup component, you can bind the radio button items by using the [Items()](#items-method) method or the [BindTo()](#bindto-method) method.
 
 ## Items method
 

@@ -24,4 +24,4 @@ Ensure that you have set up an environment variable by following the steps from 
 * [Blog Post: Azure DevOps and Telerik NuGet Packages](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
 * [DevOpsExamples repo by Lance McCarthy](https://github.com/LanceMcCarthy/DevOpsExamples)
 * [Setup of the Telerik Online Private NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%})
-* [NuGet Feed Troubleshooting]({%slug nuget_install_aspnetmvc6_aspnetmvc%}#troubleshooting) 
+* [NuGet Feed Troubleshooting]({%slug troubleshooting_telerik_nuget%}) 

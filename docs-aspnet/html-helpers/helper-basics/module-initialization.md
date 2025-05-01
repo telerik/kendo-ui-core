@@ -19,7 +19,7 @@ More information about the ECMAScript Modules peculiarities in context of the Ke
 
 To initialize the Telerik UI for {{ site.framework }} components as JavaScript modules, apply either of the following approaches:
 
- * [Initialize specific components as modules](#initializing-specific-components-as-module)
+ * [Initialize specific components as modules](#initializing-specific-components-as-modules)
  * [Initialize components globally as modules](#initializing-components-globally-as-modules)
 
 ### Initializing Specific Components as Modules

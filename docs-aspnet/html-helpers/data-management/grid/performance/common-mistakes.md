@@ -11,7 +11,7 @@ position: 2
 This article lists the configuration approaches which most frequently affect the performance of the Grid.
 
 * [Rendering everything](#rendering-everything)
-* [Excessive use of editors or widgets directly in the columns](#excessive-use-of-editors-or-widgets-in-cells)
+* [Excessive use of editors or widgets directly in the columns](#using-editors-or-widgets-in-cells-excessively)
 * [Extreme number of columns](#using-too-many-columns)
 * [Expanding all content](#expanding-all-content)
 

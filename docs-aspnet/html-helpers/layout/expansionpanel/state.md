@@ -58,7 +58,7 @@ The ExpansionPanel can be rendered in an expanded state by default. To configure
 
 ## Toggleable State
 
-By default, the user can expand or collapse the ExpansionPanel. To prevent this behavior, set the [`Toggleable`](/api/kendo.mvc.ui.fluent/ExpansionPanelBuilder#toggleablesystemboolean) property to `false`.
+By default, the user can expand or collapse the ExpansionPanel. To prevent this behavior, set the [`Toggleable`](/api/kendo.mvc.ui.fluent/expansionpanelbuilder#toggleablesystemboolean) property to `false`.
 
 ```HtmlHelper
     @(Html.Kendo().ExpansionPanel()

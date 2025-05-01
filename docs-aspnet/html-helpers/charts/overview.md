@@ -6,11 +6,6 @@ previous_url: /helpers/html-helpers/charts/charts, /helpers/html-helpers/charts,
 slug: htmlhelpers_charts_aspnetcore
 position: 0
 ---
-{% if site.core %}
-    {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultssettingsbuildert" %}
-{% else %}
-    {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultsbuildert" %}
-{% endif %}
 
 # {{ site.framework }} Chart Overview
 
@@ -289,7 +284,7 @@ The Chart enables you to configure each axis to display bands with different col
 
 ### Global Settings
 
-You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`]({{ AxisDefaults }}).
+You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`](/api/kendo.mvc.ui.fluent/chartbuilder#axisdefaultssystemaction).
 
 ```HtmlHelper
     .AxisDefaults(a=> a

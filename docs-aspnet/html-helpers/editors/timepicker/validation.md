@@ -6,9 +6,9 @@ slug: htmlhelpers_timepicker_aspnetcore_validation
 position: 4
 ---
 {% if site.core %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/TimePickerBuilder#parseformatssystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/timepickerbuilder#parseformatssystemstring" %}
 {% else %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#parseformatssystemcollectionsgenericienumerablesystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/timepickerbuilder#parseformatssystemcollectionsgenericienumerable" %}
 {% endif %}
 
 # Validation

@@ -18,7 +18,7 @@ To enable PDF export:
 
 1. Include the corresponding toolbar command and set the export settings.
     * [Toolbar configuration](/api/kendo.mvc.ui.fluent/treelisttoolbarfactory#pdf)
-    * [PDF export configuration](/api/kendo.mvc.ui.fluent/treelistbuilder#pdfsystemactionkendomvcuifluenttreelistpdfsettingsbuildert)
+    * [PDF export configuration](/api/kendo.mvc.ui.fluent/treelistbuilder#pdfsystemaction)
 1. Include the Pako Deflate library in the page to enable compression.
 
 To initiate the PDF export, press the **Toolbar** button or use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist) and call the [`saveAsPDF`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/saveaspdf) method.

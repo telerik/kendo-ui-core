@@ -10,7 +10,7 @@ position: 10
 
 The [`ToolBar()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory) configuration option of the TreeList lets you add command buttons that allow the user to invoke built-in TreeList functionalities, such as adding data items, saving changes, searching, and so on.
 
-You can also define and add [custom commands](#custom-commands) to the TreeList's ToolBar, further expanding its functionality. To customize the appearance of the ToolBar, you can [utilize templates](#toolbar-template).
+You can also define and add [custom commands](#custom-commands) to the TreeList's ToolBar, further expanding its functionality. To customize the appearance of the ToolBar, you can [utilize templates](#toolbar-template-handler).
 
 ## Built-In Commands
 

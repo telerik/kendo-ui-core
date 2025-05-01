@@ -52,7 +52,9 @@ To start the wizard, use either the **Extensions** menu in VS or the context men
 The conversion wizard provides the following steps:
 - [Version selection](#version-selection)
 - [Theme selection](#theme-selection)
+{% if site.mvc %}
 - [Project settings](#project-settings)
+{% endif %}
 
 ## Version Selection
 

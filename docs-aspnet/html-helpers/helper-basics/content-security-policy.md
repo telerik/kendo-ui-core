@@ -240,7 +240,7 @@ The Telerik UI for {{ site.framework }} releases before the R1 2023 SP1 one does
 
 ## See Also
 
-* [Content Security Policy (CSP) Templates]({% slug client_templates_overview %}#content-security-policy-(csp)-templates)
+* [Content Security Policy (CSP) Templates]({% slug client_templates_overview %}#content-security-policy-csp-templates)
 * [Deferred Initialization]({% slug deferred_initialization_overview %})
 {% if site.core %}
 * [Declarative Initialization]({% slug declarative_initialization_overview %})

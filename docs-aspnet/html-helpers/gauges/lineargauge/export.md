@@ -10,11 +10,11 @@ position: 4
 
 The Telerik UI LinearGauge for {{ site.framework }} export relies on the [Telerik UI DrawingAPI library](https://docs.telerik.com/kendo-ui/framework/drawing/dom-elements/overview). It enables you to export the content to:
 
-* [Export as PDF](#export-to-pdf)
+* [Export as PDF](#export-as-pdf)
 
-* [Export as Image](#export-to-image)
+* [Export as Image](#export-as-image)
 
-* [Export as SVG](#export-to-svg)
+* [Export as SVG](#export-as-svg)
 
 ## Export as PDF
 

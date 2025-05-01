@@ -259,7 +259,7 @@ public class HierarchicalViewModel
 }
 ```
 
-By default, the TreeView sends to the remote endpoint the `id` of the expanded node. To [send additional data]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) use the DataSource `Data` method and provide the name of a JavaScript function which will return a JavaScript object with the additional data.
+By default, the TreeView sends to the remote endpoint the `id` of the expanded node. To send additional data, use the DataSource [`Data`](/api/kendo.mvc.ui.fluent/crudoperationbuilder#datasystemstring) method and provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 
 ## See Also
 

@@ -7,8 +7,8 @@ position: 2
 ---
 
 {% if site.core %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#positionkendomvcuichartaxislabelsposition" %}
-    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisbuildert" %}
+    {% assign Position = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign ValueAxis = "/api/kendo.mvc.ui.fluent/chartbuilder#valueaxissystemaction" %}
 {% else %}
     {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
     {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}

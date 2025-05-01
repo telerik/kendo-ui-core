@@ -18,7 +18,7 @@ For the feature to work properly, the following configuration settings has to be
 * Define the height of the TreeList.
 * Set explicit pixel widths to all columns to allow the TreeList to adjust the layout of the frozen and non-frozen table parts.
 * Make sure that the total width of all locked columns is equal to or less than the width of the TreeList minus three times the width of the scrollbar.
-* Make sure that the TreeList is not [initialized inside a hidden container](#hidden-containers).
+* Make sure that the TreeList is not [initialized inside a hidden container]({% slug hidden_containers_aspnetcore_grid%}).
 
 ```HtmlHelper
   @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
