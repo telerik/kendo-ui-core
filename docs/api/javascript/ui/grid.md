@@ -8073,6 +8073,8 @@ If set to `true` and the grid is viewed on mobile browser it will use adaptive r
 
 Can be set to a string `phone` which will force the widget to use adaptive rendering regardless of browser type.
 
+> Avoid using the `mobile` option as it will be deprecated. Use the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option instead.
+
 > Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the grid might have a different height.
 
 #### Example - enable adaptive rendering auto detect

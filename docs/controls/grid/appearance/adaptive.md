@@ -13,6 +13,8 @@ The Kendo UI Grid for jQuery provides consistency to the customer experience on 
 
 For example, when you filter or edit data on mobile, Kendo UI slides in a new screen for the user, which is a departure from the desktop-like inline and popup behaviors. To see these features in action, refer to the [adaptive rendering demo](https://demos.telerik.com/kendo-ui/grid/adaptive-rendering).
 
+> Avoid using the `mobile` option as it will be deprecated. Use the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option instead. To learn more, see the [Adaptive Tools article]({% slug adaptive_tools_kendoui_grid_component %}).
+
 ## Enabling Responsive Design
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true` or `"phone"`:
