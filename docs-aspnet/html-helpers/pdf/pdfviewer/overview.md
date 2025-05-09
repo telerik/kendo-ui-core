@@ -125,6 +125,7 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 * [DPL Processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})&mdash;The component can use the Telerik Document Processing library to process and visualize a PDF document.
 * [Toolbar and Tools]({% slug htmlhelpers_pdfviewer_toolbar_aspnetcore %})&mdash;The PDFViewer offers diverse tools and commands.
 * [Annotations]({% slug annotations_pdfviewer_aspnetcore %})&mdash;You can highlight important text areas with different colors or add free text notes in the document.
+* [Form Filling]({% slug form_filling_pdfviewer_core %})&mdash;You can import files containing PDF forms and fill in the input elements.
 * [Events]({% slug events_pdfviewer_aspnetcore %})&mdash;To control the behavior of the component upon user interaction, you can use the events that the component emits.
 * [Accessibility]({% slug htmlhelpers_pdfviewer_accessibility %})&mdash;The PDFViewer is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pdfviewer %}) for faster navigation.
 

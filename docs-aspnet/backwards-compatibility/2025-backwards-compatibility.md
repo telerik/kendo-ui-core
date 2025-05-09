@@ -10,8 +10,13 @@ position: 1
 
 This article lists the breaking or important changes in the 2025 releases of {{ site.product }}.
 
-{% if site.core %}
 ## {{ site.product }} Q2 2025
+
+### Unified Distribution for Trial and Commercial Packages
+
+With the goal of streamlining user experience, the trial and commercial packages have been consolidated into a single unified distribution for {{ site.product }}. Access is now managed through a license key file, eliminating the need for separate trial download. For more information, please refer to [Setting Up Your License Key]({% slug installation_license_key_aspnetcore %}).
+
+{% if site.core %}
 
 ### Target Framework
 

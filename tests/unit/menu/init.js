@@ -171,7 +171,8 @@ describe("menu icons", function() {
             iconPosition: "after",
             dataSource: [
                 { text: "Item 1", icon: "gear", iconClass: "custom-gear-icon-class" },
-                { text: "Item 2", icon: "pencil" }
+                { text: "Item 2", icon: "pencil" },
+                { text: "Item 3", iconClass: "fa-solid fa-house" }
             ]
         }).data("kendoMenu");
     });
@@ -183,6 +184,10 @@ describe("menu icons", function() {
 
     it("applies icon classes if specified", function() {
         assert.equal(menuElement.find('.k-icon.custom-gear-icon-class').length, 1);
+    });
+
+    it("applies only icon class", function() {
+        assert.equal(menuElement.find('.fa-solid.fa-house').length, 1);
     });
 
     it("places icons after text if iconPosition is 'after'", function() {
