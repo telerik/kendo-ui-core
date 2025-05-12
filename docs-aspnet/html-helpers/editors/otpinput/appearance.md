@@ -59,8 +59,6 @@ The following options are available for the `FillMode` configuration:
 - `Solid`
 - `Outline`
 - `Flat`
-- `Link`
-- `Clear`
 - `None`
 
 The default OTPInput fill mode is `Solid`.

@@ -14,7 +14,7 @@ The Telerik UI Chart Wizard TagHelper and HtmlHelper for {{ site.framework }} ar
 The Telerik UI Chart Wizard HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Chart Wizard widget.
 {% endif %}
 
-The Chart Wizard lets you configure the visual representation in various charts by selecting different data from an external source or a particular [Grid]({%slug htmlhelpers_grid_aspnetcore_overview%}) data. 
+The Chart Wizard lets you create and configure various chart visualizations by selecting different data from an external source or a particular [Grid]({%slug htmlhelpers_grid_aspnetcore_overview%}) data. 
 
 The component has a user-friendly interface that allows you to specify the chart type and its elements, such as series, axes, chart area, title, legend, and more. When you configure the desired chart, you can export it to PDF, SVG, or PNG files.
 

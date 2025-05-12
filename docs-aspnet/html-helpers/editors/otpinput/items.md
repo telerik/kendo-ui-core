@@ -8,7 +8,7 @@ position: 5
 
 # Items
 
-In this article, you will find information about the different ways to add items within the boundaries of the {{ site.product }} OTPInput items. 
+In this article, you will find information about different ways to configure the {{ site.product }} OTPInput items. 
 
 The option accepts either an:
 
@@ -30,7 +30,7 @@ The below example demonstrates how to configure the items by passing a number.
 ```
 {% endif%}
 
-The next example shows how to to configure the items by passing an Action delegate.
+The next example shows how to configure the items by passing an Action delegate.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()

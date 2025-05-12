@@ -10,7 +10,9 @@ position: 1
 
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} OTPInput component and highlights the major steps in the configuration of the component.
 
-You will initialize an OTPInput component with a set of items. Then, you will use the events of the UI component. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
+You will initialize an OTPInput component with a set of items. Which will be either grouped together or rendered as standalone OTPInputs. This gives you control over the component's input composition.
+
+Then, you will use the events of the UI component. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
  ![Sample Telerik UI for {{ site.framework }} OTPInput](./images/otpinput-getting-started.png)
 
@@ -45,7 +47,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 
 ## 2. Initialize the OTPInput
 
-Use the OTPInput HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to a page:
+Use the OTPInput HtmlHelper{% if site.core %} or TagHelper{% endif %} to add the component to a page:
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the OTPInput element.
 * The `Items()` collection contains the list of items representing the different input groups.
@@ -88,7 +90,7 @@ Use the OTPInput HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 
 ## 3. Configure the Separator
 
-The OTPInput components allows you to add a separator between each of the established input groups. In this tutorial, you will use the available `SeparatorHandler()` option to render a [SVG Icon](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/sass-themes/svg-icons#what-are-svg-icons).
+The OTPInput components allows you to add a separator between each of the established input groups. In this tutorial, you will use the available `SeparatorHandler()` option to render an [SVG Icon](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/sass-themes/svg-icons#what-are-svg-icons).
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
