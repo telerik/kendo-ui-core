@@ -10,7 +10,7 @@ position: 4
 
 By design, the Chart Wizard is displayed in a [Window]({% slug htmlhelpers_window_aspnetcore%}) component. 
 
-To configure the Window settings like dimensions, position, resizing, and more, utilize the `Window()` configuration. The Window of the Chart Wizard has all the functionalities available in the stand-alone [Window]({% slug htmlhelpers_window_aspnetcore%}) component.
+To configure the Window settings like dimensions, position, resizing, and more, utilize the `Window()` configuration. The Window of the Chart Wizard has all the functionalities available in the standalone [Window]({% slug htmlhelpers_window_aspnetcore%}) component.
 
 The following example demonstrates how to customize the Window of the Chart Wizard. The Window opens when a button is clicked.
 
