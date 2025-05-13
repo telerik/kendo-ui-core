@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI ExpansionPanel TagHelper for ASP.NET Core is a layout component that provides the user with an easy way to expand and collapse a content area within the application.
 
-The Telerik UI ExpansionPanel TagHelper for ASP.NET Core is a server-side wrapper for the [Kendo UI ExpansionPanel](/api/javascript/ui/expansionpanel) widget.
+The Telerik UI ExpansionPanel TagHelper for ASP.NET Core is a server-side wrapper for the [Kendo UI ExpansionPanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel) widget.
 
 Visit the [ExpansionPanel demo page](https://demos.telerik.com/aspnet-core/expansionpanel/tag-helper) to see it in action.
 

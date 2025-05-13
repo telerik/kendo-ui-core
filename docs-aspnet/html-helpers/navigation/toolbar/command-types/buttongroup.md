@@ -46,4 +46,4 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar co
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar)
 * [Server-Side API Reference of the ToolBar](/api/toolbar)
-* [Client-Side API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [Client-Side API Reference of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

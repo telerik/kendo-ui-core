@@ -154,4 +154,4 @@ The result from the configuration is :
 ## See Also
 
 * [Palette Presets of the ColorPalette (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/palette-presets)
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette)

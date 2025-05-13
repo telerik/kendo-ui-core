@@ -101,4 +101,4 @@ public ActionResult PaneContent()
 
 * [Loading Content with AJAX in the Splitter (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/ajax)
 * [Server-Side API](/api/splitter)
-* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)
+* [JavaScript API Reference of the Splitter](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)

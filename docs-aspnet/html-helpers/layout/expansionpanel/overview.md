@@ -11,7 +11,7 @@ position: 0
 {% if site.core %}
 The Telerik UI ExpansionPanel TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ExpansionPanel widget.
 {% else %}
-The Telerik UI ExpansionPanel HtmlHelper is a server-side wrapper for the [Kendo UI ExpansionPanel](/api/javascript/ui/expansionpanel) widget.
+The Telerik UI ExpansionPanel HtmlHelper is a server-side wrapper for the [Kendo UI ExpansionPanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel) widget.
 {% endif %}
 
 The ExpansionPanel is a layout component that allows the user to expand and collapse a content area within the application.

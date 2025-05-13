@@ -8,9 +8,9 @@ position: 4
 
 # Signature Image Export
 
-You can export the Telerik UI Signature for {{ site.framework }} to a PNG file through the Kendo UI [`saveAs`](/api/javascript/kendo/methods/saveas) method.
+You can export the Telerik UI Signature for {{ site.framework }} to a PNG file through the Kendo UI [`saveAs`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/saveas) method.
 
-To achieve this functionality, retrieve the base64 value of the Signature by using the [`value`](/api/javascript/ui/signature/methods/value) method of the component.
+To achieve this functionality, retrieve the base64 value of the Signature by using the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/signature/methods/value) method of the component.
 
 ```HtmlHelper
     <button id="export">Export as PNG</button>

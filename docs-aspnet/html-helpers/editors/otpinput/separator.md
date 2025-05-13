@@ -37,7 +37,7 @@ The below example demonstrates how to add a separator as a string.
 ```
 {% endif%}
 
-The next example shows how to add a separator in the form of a function handler by using the [`kendo.ui.icon`](/api/javascript/ui/ui/methods/icon) method.
+The next example shows how to add a separator in the form of a function handler by using the [`kendo.ui.icon`](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/icon) method.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()

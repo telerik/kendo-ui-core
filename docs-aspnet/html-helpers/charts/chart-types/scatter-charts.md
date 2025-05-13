@@ -222,7 +222,7 @@ The primary Y axis crosses the X axis at point 0 (leftmost). The second, `torque
 ## Smooth Scatter Line
 
 By default, the series in the Scatter Line Chart are connected with a straight line.
-To display a smooth line, use the [`Style(ChartScatterLineStyle.Smooth)`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartscatterlinestyle) setting of the `Series` configuration.
+To display a smooth line, use the {% if site.core %}[`Style(ChartScatterLineStyle.Smooth)`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartscatterlinestyle){% else %}[`Style(ChartScatterLineStyle.Smooth)`](api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartlinestyle){% endif %} setting of the `Series` configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Chart()

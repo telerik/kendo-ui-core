@@ -58,7 +58,7 @@ To set a predefined filter when using Xmla data use the above-described approach
 
 ### Filtering when using Flat Data
 
-Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter).
+Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter).
 
 ```HtmlHelper
     .Filter(f =>

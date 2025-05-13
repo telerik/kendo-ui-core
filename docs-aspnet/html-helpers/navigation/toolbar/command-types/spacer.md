@@ -62,4 +62,4 @@ You can use multiple Spacers to create an equal amount of space between several 
 ## See Also
 
 * [Server-Side API](/api/toolbar)
-* [Client-Side API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [Client-Side API Reference of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

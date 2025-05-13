@@ -24,4 +24,4 @@ As of {{ site.product }} R2 SP1 2023, users can resize the Splitter's panes by u
 
 - [Overview of the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter)
 - [Server-Side API of the Splitter](/api/splitter)
-- [Client-Side API Reference of the Splitter](/api/javascript/ui/splitter)
+- [Client-Side API Reference of the Splitter](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)

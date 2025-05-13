@@ -99,8 +99,8 @@ To enable the Readonly mode, use the `Editable.Readonly()` configuration method.
 
 The {{ site.product }} Grid allows you to programmatically alter the editable state of the component through the following methods:
 
-* [`disableEditing()`](/api/javascript/ui/grid/methods/disableediting)&mdash;Disables editing operations.
-* [`enableEditing()`](/api/javascript/ui/grid/methods/enableediting)&mdash;Enables editing operations.
+* [`disableEditing()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/disableediting)&mdash;Disables editing operations.
+* [`enableEditing()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/enableediting)&mdash;Enables editing operations.
 
 
 ```JavaScript

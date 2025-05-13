@@ -16,20 +16,20 @@ For a live example, refer to the [Appearance Demo of the TimeDurationPicker](htt
 
 The Telerik UI TimeDurationPicker for {{ site.framework }} supports the following styling options:
 
-- [`size`](#size)—Configures the overall size of the component.
-- [`fillMode`](#fillmode)—Configures how the color is applied to the component.
-- [`rounded`](#rounded)—Configures the border radius of the component.
+- [`Size`](#size)—Configures the overall size of the component.
+- [`FillMode`](#fillmode)—Configures how the color is applied to the component.
+- [`Rounded`](#rounded)—Configures the border radius of the component.
 
 ### Size
 
-The `size` option controls how big or small the rendered `input` looks. The structure of the class is `k-input-{size}`.
+The `Size` option controls how big or small the rendered `input` looks. The structure of the class is `k-input-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/timedurationpicker/configuration/size) option:
+The following values are available for the [`Size`](/api/kendo.mvc.ui.fluent/timedurationpickerbuilder#sizekendomvcuicomponentsize) option:
 
-- `sm`—Small size.
-- `md`—Medium size.
-- `lg`—Large size.
-- `none`—Unset.
+- `Small`
+- `Medium`
+- `Large`
+- `None`
 
 The default size value is `medium` and is applied to the wrapping `span` element through the `k-input-md` class.
 
@@ -40,15 +40,15 @@ The default size value is `medium` and is applied to the wrapping `span` element
 
 ### Rounded
 
-The `rounded` option controls the border radius of the rendered `input`. The structure of the class is `k-rounded-{size}`.
+The `Rounded` option controls the border radius of the rendered `input`. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rouned`](/api/javascript/ui/timedurationpicker/configuration/rounded) option:
+The following values are available for the [`Rouned`](/api/kendo.mvc.ui.fluent/timedurationpickerbuilder#roundedkendomvcuirounded) option:
 
-- `sm`—Small border radius.
-- `md`—Medium border radius.
-- `lg`—Large border radius.
-- `full`—Ellipse-like border radius.
-- `none`—Unset.
+- `Small` — Small border radius.
+- `Medium` — Medium border radius.
+- `Large` — Large border radius.
+- `Full` — Ellipse-like border radius.
+- `None` — Unset.
 
 The structure of the class is `k-rounded-{size}`.
 
@@ -60,14 +60,14 @@ The default rounded value is `medium` and it is applied to the wrapping `span` e
 
 ### FillMode
 
-The `fillMode` option controls the way the color is applied to the rendered `input`. The structure of the class is `k-input-{fillMode}`
+The `FillMode` option controls the way the color is applied to the rendered `input`. The structure of the class is `k-input-{fillMode}`
 
-The following values are available for the [`fillMode`](/api/javascript/ui/timedurationpicker/configuration/fillmode) option:
+The following values are available for the [`FillMode`](/api/kendo.mvc.ui.fluent/timedurationpickerbuilder#fillmodekendomvcuifillmode) option:
 
-- `solid`
-- `flat`
-- `outline`
-- `none`
+- `Solid`
+- `Flat`
+- `Outline`
+- `None`
 
 The default `fillMode` value is `solid` and it is applied to the wrapping `span` element through the `k-input-solid` class.
 

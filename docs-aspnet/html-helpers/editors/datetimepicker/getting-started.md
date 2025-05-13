@@ -56,7 +56,7 @@ Use the DateTimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to a
 
 ## 3. Handle the DateTimePicker Events
 
-The DateTimePicker [exposes various events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the DateTimePicker.
+The DateTimePicker {% if site.core %}[exposes various events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder){% else %}[exposes various events](/api/kendo.mvc.ui.fluent/datepickereventbuilderbase){% endif %} that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the DateTimePicker.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI

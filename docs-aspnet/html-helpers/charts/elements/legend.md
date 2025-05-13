@@ -10,7 +10,7 @@ slug: htmlhelpers_charts_legend_aspnetcore
 The {{ site.product }} Chart supports customization of its legend, which displays the name of the configured data series.
 
 > * Series without a specified name will not display legend items.
-> * To render a legend item for the Pie, Donut, and Funnel series, set the [`categoryField`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring) of the items.
+> * To render a legend item for the Pie, Donut, and Funnel series, set the {% if site.core %}[`categoryField`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring){% else %}[`categoryField`](/api/kendo.mvc.ui.fluent/chartserieslegenditemsettingsbuilder){% endif %} of the items.
 
 ## Configuring the Legend Items
 

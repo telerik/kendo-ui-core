@@ -143,4 +143,4 @@ select a color.
 ## See Also
 
 * [Implementing Custom Cell Editors in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)

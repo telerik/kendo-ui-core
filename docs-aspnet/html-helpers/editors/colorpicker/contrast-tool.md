@@ -110,5 +110,5 @@ The example below demonstrates how to enable the contrast tool in the ColorPicke
 
 * [Contrast Tool of the ColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/contrast-tool)
 * [Server-Side API](/api/colorpicker)
-* [Client-Side API](/api/javascript/ui/colorpicker)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
 

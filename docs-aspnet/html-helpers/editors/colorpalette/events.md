@@ -8,7 +8,7 @@ position: 3
 
 # Events
 
-The Telerik UI ColorPalette for {{ site.framework }} exposes a [`Change`](/api/kendo.mvc.ui.fluent/colorpaletteeventbuilder) event that allows you to control the behavior of the UI component.
+The Telerik UI ColorPalette for {{ site.framework }} exposes a {% if site.core %}[`Change`](/api/kendo.mvc.ui.fluent/colorpaletteeventbuilder){% else %}[`Change`](/api/kendo.mvc.ui.fluent/simplecolorpickereventbuilder#changesystemfunc){% endif %} event that allows you to control the behavior of the UI component.
 
 For a runnable example on the component `Change` event, refer to the [demo on using the events of the ColorPalette](https://demos.telerik.com/{{ site.platform }}/colorpalette/events).
 

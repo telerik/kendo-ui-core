@@ -241,4 +241,4 @@ If you observe any of these symptoms, this means you have hit the processing lim
 
 * [OLAP Cube Fundamentals]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals %})
 * [OLAP Cube Setup]({% slug htmlhelpers_pivotgridv2_aspnetcore_olap_cube_setup %})
-* [PivotConfiguratorV2 JavaScript API Reference](/api/javascript/ui/pivotconfiguratorv2)
+* [PivotConfiguratorV2 JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfiguratorv2)

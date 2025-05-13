@@ -240,8 +240,8 @@ You can continue experimenting with the code sample above by running it in the T
 * [Client-Side API of the Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
 * [Client-Side API of the RangeSlider](https://docs.telerik.com/kendo-ui/api/javascript/ui/rangeslider)
 * [Server-Side API of the Slider](/api/slider)
-* [Server-Side API of the RangeSlider](/api/rangeslider)
 {% if site.core %}
+* [Server-Side API of the RangeSlider](/api/rangeslider)
 * [Server-Side API of the Slider TagHelper](/api/taghelpers/slider)
 {% endif %}
 {% if site.core %}

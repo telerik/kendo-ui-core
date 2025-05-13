@@ -16,7 +16,7 @@ The GanttList of the Gantt extends the TreeList widget and offers its functional
 
 * [TreeList Documentation](https://docs.telerik.com/kendo-ui/controls/treelist/overview)
 * [TreeList Demos](https://demos.telerik.com/kendo-ui/treelist/index)
-* [TreeList API](/api/javascript/ui/treelist)
+* [TreeList Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
 
 The following features of the TreeList are currently not supported by the GanttList.
 

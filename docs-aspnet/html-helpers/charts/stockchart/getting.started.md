@@ -238,7 +238,7 @@ In the `Home` controller, declare the `RemoteDataBindingData` action that you se
 
 ## 6. Handle the StockChart Events
 
-The StockChart [exposes various events](/api/kendo.mvc.ui.fluent/stockcharteventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `DataBound` event of the StockChart.
+The StockChart {% if site.core %}[exposes various events](/api/kendo.mvc.ui.fluent/stockcharteventbuilder){% else %}[exposes various events](/api/kendo.mvc.ui.fluent/charteventbuilder){% endif %} that you can handle and further customize the functionality of the component. In this tutorial, you will use the `DataBound` event of the StockChart.
 
 ```HtmlHelper
     @(Html.Kendo().StockChart<StockDataPoint>()

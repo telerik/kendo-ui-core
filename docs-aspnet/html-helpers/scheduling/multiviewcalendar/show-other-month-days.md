@@ -10,7 +10,7 @@ position: 8
 
 The {{ site.product }} MultiViewCalendar allows you to explicitly render days from the previous and next months in the current view.
 
-> The `ShowOtherDays()` configuration is not compatible with the [`range`](/api/javascript/ui/calendar/configuration/selectable) selection. It is advised that this property is set to **false** when the `Selectable()` configuration is set to **range**.
+> The `ShowOtherDays()` configuration is not compatible with the [`range`](/api/kendo.mvc.ui.fluent/multiviewcalendarbuilder#selectablesystemstring) selection. It is advised that this property is set to `false` when the `Selectable()` configuration is set to `range`.
 
 ```HtmlHelper
         @(Html.Kendo().MultiViewCalendar()

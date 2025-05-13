@@ -73,7 +73,7 @@ The next step is to set the columns configuration, which:
 
 ## 3. Configure the Separator
 
-The TimeDurationPicker enables you to specify your own [`separator`](/api/javascript/ui/timedurationpicker/configuration/separator) that will be used to divide the individual time portions such as hours, minutes, and seconds.
+The TimeDurationPicker enables you to specify your own [`Separator`](/api/kendo.mvc.ui.fluent/timedurationpickerbuilder#separatorsystemstring) to divide the individual time portions, such as hours, minutes, and seconds.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

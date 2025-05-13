@@ -8,7 +8,7 @@ position: 16
 
 # Events
 
-You can subscribe to the `Open`, `Close`, and `Change` [DateTimePicker events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder) and further customize the functionality of the component.
+You can subscribe to the `Open`, `Close`, and `Change` {% if site.core %}[DateTimePicker events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder){% else %}[DateTimePicker events](/api/kendo.mvc.ui.fluent/datepickereventbuilderbase){% endif %} and further customize the functionality of the component.
 
 For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateRangePicker](https://demos.telerik.com/{{ site.platform }}/datetimepicker/events).
 

@@ -21,7 +21,7 @@ To modify the footer template of the DatePicker calendar, use the [`Footer`](/ap
 
 To modify the week column template, use the [`WeekNumber`](/api/kendo.mvc.ui.fluent/datepickerbuilder#weeknumbersystemboolean) property.
 
-The dates which are out of the `Min` and `Max` range are rendered as empty. To change their template, use the [`Empty`](/api/kendo.mvc.ui.fluent/monthtemplatebuilder#emptysystemstring) option of the `MonthTemplate` configuration.
+The dates which are out of the `Min` and `Max` range are rendered as empty. To change their template, use the {% if site.core %}[`MonthTemplate.Empty`](/api/kendo.mvc.ui/monthtemplatebuilder#emptysystemstring){% else %}[`MonthTemplate.Empty`](/api/kendo.mvc.ui.fluent/monthtemplatebuilder#emptysystemstring){% endif %} option.
 
 For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datepicker_accessibility %}#wai-aria).
 

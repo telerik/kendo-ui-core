@@ -55,4 +55,4 @@ The example below demonstrates how to configure the {{ site.product }} ColorPick
 
 * [RGB and HEX formats of the {{ site.product }} ColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/rgb-hex)
 * [Server-Side API](/api/colorpicker)
-* [Client-Side API](/api/javascript/ui/colorpicker)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)

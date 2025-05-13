@@ -10,7 +10,7 @@ position: 1
 
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} ColorPalette and highlights the major steps in the configuration of the component.
 
-You will initialize a ColorPalette control with a custom set of colors. Next, you will handle the [`Change` event](/api/kendo.mvc.ui.fluent/colorpaletteeventbuilder) of the component to get the selected color and apply it as a background color to [DropDownButtons]({% slug htmlhelpers_dropdownbutton_aspnetcore %}). {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
+You will initialize a ColorPalette control with a custom set of colors. Next, you will handle the {% if site.core %}[`Change` event](/api/kendo.mvc.ui.fluent/colorpaletteeventbuilder){% else %} [`Change` event](/api/kendo.mvc.ui.fluent/simplecolorpickereventbuilder#changesystemfunc){% endif %} of the component to get the selected color and apply it as a background color to [DropDownButtons]({% slug htmlhelpers_dropdownbutton_aspnetcore %}). {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
  ![Sample Telerik UI for {{ site.framework }} ColorPalette](./images/color-palette-getting-started.png)
 

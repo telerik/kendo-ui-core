@@ -173,4 +173,4 @@ In some scenarios, the specified TreeList rows must be selected by default. The 
 ## See Also
 
 * [Selection of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/checkbox-selection)
-* [Server-Side API](/api/selection)
+* [Server-Side API](/api/treelist)

@@ -77,6 +77,7 @@ knowledge-base/vs-code-extension-issues.md,
 html-helpers/hybrid/*,
 html-helpers/helper-basics/fundamentals.md,
 html-helpers/helper-basics/declarative-initialization.md,
+*/razor-page.md,
 html-helpers/data-management/filemanager/binding/razor-page.md,
 html-helpers/datasource/razor-page.md,
 html-helpers/diagrams-and-maps/diagram/binding/razor-pages

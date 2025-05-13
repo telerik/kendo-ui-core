@@ -11,6 +11,8 @@ position: 2
 
 You can configure the Telerik UI Chat component for {{ site.framework }} and a {% if site.core %}[.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/){% else %}[SignalR 2](https://www.asp.net/signalr){% endif %} service to create a Peer-to-Peer Chat application.
 
+For the complete project, refer to the [Chat Peer to Peer example]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Chat/ChatPeerToPeer.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChatPeerToPeer{% endif %}).
+
 To create the Peer-to-Peer Chat, you have to implement the SignalR Hub server and then to implement the application client:
 
 1. [Create the new application](#creating-the-new-application)

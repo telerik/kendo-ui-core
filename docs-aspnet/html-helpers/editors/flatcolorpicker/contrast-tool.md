@@ -45,4 +45,4 @@ The example below demonstrates how to enable the contrast tool in the ColorPicke
 ## See Also
 
 * [Contrast Tool of the FlatColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/contrast-tool)
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)

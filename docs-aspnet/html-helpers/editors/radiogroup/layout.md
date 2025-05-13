@@ -8,7 +8,7 @@ position: 3
 
 # Layout
 
-The RadioGroup supports two types of [`layout`](/api/javascript/ui/radiogroup/configuration/layout) - "horizontal" and "vertical". By default the radio buttons are rendered vertically.
+The RadioGroup supports two types of [`Layout`](/api/kendo.mvc.ui.fluent/radiogroupbuilder#layoutsystemstring) - `horizontal` and `vertical`. By default, the radio buttons are rendered vertically.
 
 The following example shows how to set the RadioGroup layout:
 

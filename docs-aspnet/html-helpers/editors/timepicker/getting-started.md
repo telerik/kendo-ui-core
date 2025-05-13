@@ -55,7 +55,7 @@ Use the TimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to add t
 
 ## 3. Handle the TimePicker Events
 
-The TimePicker [exposes various events](/api/kendo.mvc.ui.fluent/timepickereventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the TimePicker to log a message in the Browser's console.
+The TimePicker {% if site.core %}[exposes various events](/api/kendo.mvc.ui.fluent/timepickereventbuilder){% else %}[exposes various events](/api/kendo.mvc.ui.fluent/datepickereventbuilderbase){% endif %} that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the TimePicker to log a message in the Browser's console.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI

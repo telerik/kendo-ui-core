@@ -8,7 +8,7 @@ position: 3
 
 # RGB and HEX Input Formats
 
-The FlatColorPicker supports both RGB and HEX formats as input through its [formats](/api/javascript/ui/flatcolorpicker/configuration/formats) configuration. To choose the default format, you can use the [format](/api/javascript/ui/flatcolorpicker/configuration/format) option:
+The FlatColorPicker supports both RGB and HEX formats as input through its [`Formats`](/api/kendo.mvc.ui.fluent/flatcolorpickerbuilder#formatssystemstring) configuration. To choose the default format, use the {% if site.core %}[`Format`](/api/kendo.mvc.ui.fluent/flatcolorpickerbuilder#formatkendomvcuicolorpickerformat){% else %}[`Format`](/api/kendo.mvc.ui.fluent/flatcolorpickerbuilder#formatsystemstring){% endif%} option:
 
 {% if site.core %}
 ```HtmlHelper
@@ -47,4 +47,4 @@ The FlatColorPicker supports both RGB and HEX formats as input through its [form
 ## See Also
 
 * [RGB and HEX formats of the FlatColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/rgb-hex)
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)
