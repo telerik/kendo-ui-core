@@ -160,8 +160,8 @@ Create a folder named `dist` and add the `index.html` file in it.
 
 In the root directory add a new `src` folder that will contain the scripts. Then, add a `index.js` file and import the needed modules:
 ```
-    import '@progress/kendo-ui/esm/kendo.button'
-    import '@progress/kendo-ui/esm/kendo.dropdownlist'
+    import '@progress/kendo-ui/esm/kendo.button.js'
+    import '@progress/kendo-ui/esm/kendo.dropdownlist.js'
 
     $(function () {
         $("#btn").kendoButton();

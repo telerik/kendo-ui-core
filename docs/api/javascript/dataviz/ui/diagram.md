@@ -10306,6 +10306,35 @@ The point to zoom into or out of.
       });
     </script>
 
+#### Example - zoom Diagram dynamically to point
+
+	  <button id="btn">Zoom Diagram</button>
+    <div id="diagram"></div>
+    <script>
+      $("#btn").on("click", function () {
+        var diagram = $("#diagram").getKendoDiagram();
+        var point = new kendo.dataviz.diagram.Point(100, 100);
+        diagram.zoom(2.5, { point: point });
+      });
+
+      $("#diagram").kendoDiagram({
+        shapes: [
+          {
+            id: "1",
+            x: 70,
+            y: 120,
+            fill: {
+              color: "#0000ff",
+              opacity: 0.5,
+            },
+            width: 140,
+            height: 80,
+          },
+        ],
+      });
+    </script>
+
+
 ## Events
 
 ### add
