@@ -72,7 +72,7 @@ As of the 2022.3.1109 version, the `package.json` file comes with three [fields 
 To bundle the Kendo UI scripts by using one of the [module systems](#3-choose-a-module-system-to-use), you can use a plugin such as [rollup](https://rollupjs.org/guide/en/).
 
 > Starting from version 2023.3.718, the `kendo` instance is exported as a default export for the CommonJS and ECMAScript modules. This allows you to:
-> * Use the `import kendo from '@progress/kendo-ui'` syntax to import the Kendo UI scripts in your application. 
+> * Use the `import kendo from "@progress/kendo-ui"` syntax to import the Kendo UI scripts in your application. 
 > * Use the `kendo` instance to get the jQuery in which the Kendo UI components are defined. For example, `const $ = kendo.jQuery; $("#grid").kendoGrid({...});`.
 
 ### ECMAScript
@@ -83,18 +83,18 @@ To bundle the ECMAScript files:
 
     ```javascript
      // rollup.config.js
-     import { nodeResolve } from '@rollup/plugin-node-resolve';
+     import { nodeResolve } from "@rollup/plugin-node-resolve";
 
      export default {
-        input: 'index.js',
+        input: "index.js",
         output: [{
-          file: 'dist/bundled.js',
-          sourcemap: 'inline',
+          file: "dist/bundled.js",
+          sourcemap: "inline",
           globals: {
-            jquery: '$'
+            jquery: "$"
           }
         }],
-        external: ['jquery'],
+        external: ["jquery"],
         treeshake: false,
         plugins: [
           nodeResolve()
@@ -107,8 +107,8 @@ To bundle the ECMAScript files:
     ```javascript
     // index.js file located in the main directory of your project (same level as rollup.config.js).
 
-    import `jquery`;
-    import `@progress/kendo-ui`;
+    import "jquery";
+    import "@progress/kendo-ui";
 
     // A sample Kendo UI component in your project.
     $("#grid").kendoGrid({...grid configs...});
@@ -129,19 +129,19 @@ To bundle the CommonJS files:
 
     ```javascript
      // rollup.config.js
-     import { nodeResolve } from '@rollup/plugin-node-resolve';
-     import commonjs from '@rollup/plugin-commonjs';
+     import { nodeResolve } from "@rollup/plugin-node-resolve";
+     import commonjs from "@rollup/plugin-commonjs";
 
      export default {
-        input: 'index.js',
+        input: "index.js",
         output: [{
-          file: 'dist/bundled.js',
-          sourcemap: 'inline',
+          file: "dist/bundled.js",
+          sourcemap: "inline",
           globals: {
-            jquery: '$'
+            jquery: "$"
           }
         }],
-        external: ['jquery'],
+        external: ["jquery"],
         treeshake: false,
         plugins: [
           commonjs(), // Add the commonjs plugin.
@@ -155,8 +155,8 @@ To bundle the CommonJS files:
     ```javascript
     // index.js file located in the main directory of your project (same level as rollup.config.js).
 
-    require(`jquery`);
-    require(`@progress/kendo-ui`);
+    require("jquery");
+    require("@progress/kendo-ui");
 
     // A sample Kendo UI component in your project.
     $("#grid").kendoGrid({...grid configs...});
@@ -177,18 +177,18 @@ To bundle the UMD files:
 
     ```javascript
      // rollup.config.js
-     import { nodeResolve } from '@rollup/plugin-node-resolve';
+     import { nodeResolve } from "@rollup/plugin-node-resolve";
 
      export default {
-        input: 'index.js',
+        input: "index.js",
         output: [{
-          file: 'dist/bundled.js',
-          sourcemap: 'inline',
+          file: "dist/bundled.js",
+          sourcemap: "inline",
           globals: {
-            jquery: '$'
+            jquery: "$"
           }
         }],
-        external: ['jquery'],
+        external: ["jquery"],
         treeshake: false,
         plugins: [
           nodeResolve({
@@ -203,8 +203,8 @@ To bundle the UMD files:
     ```javascript
     // index.js file located in the main directory of your project (same level as rollup.config.js).
 
-    import `jquery`;
-    import `@progress/kendo-ui`;
+    import "jquery";
+    import "@progress/kendo-ui";
 
     // A sample Kendo UI component in your project.
     $("#grid").kendoGrid({...grid configs...});
@@ -221,14 +221,14 @@ To bundle the UMD files:
 As of `2024.4.1112` the `@progress/kendo-ui` NPM package introduce a more fine-grained exports setting to satisfy various module bundlers and easy its usage in the NPM ecosystem.
 
 ```javascript
-`@progress/kendo-ui` //Imports the kendo.all.js 
-`@progress/kendo-ui/*.js` //Imports the files corresponding to the module system used - ESM or CJS.
-`@progress/kendo-ui/esm` //Imports kendo.all.js only for ESM.
-`@progress/kendo-ui/esm/*.js` //Imports the files for ESM.
-`@progress/kendo-ui/cjs` //Imports kendo.all.js only for CJS.
-`@progress/kendo-ui/esm/*.js` //Imports the files for CJS.
-`@progress/kendo-ui/umd` //Imports kendo.all.min.js only for UMD.
-`@progress/kendo-ui/umd/*.js` //Imports the files for UMD.
+"@progress/kendo-ui" //Imports the kendo.all.js 
+"@progress/kendo-ui/*.js" //Imports the files corresponding to the module system used - ESM or CJS.
+"@progress/kendo-ui/esm" //Imports kendo.all.js only for ESM.
+"@progress/kendo-ui/esm/*.js" //Imports the files for ESM.
+"@progress/kendo-ui/cjs" //Imports kendo.all.js only for CJS.
+"@progress/kendo-ui/esm/*.js" //Imports the files for CJS.
+"@progress/kendo-ui/umd" //Imports kendo.all.min.js only for UMD.
+"@progress/kendo-ui/umd/*.js" //Imports the files for UMD.
 ```
 
 #### Examples
