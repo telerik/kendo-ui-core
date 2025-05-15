@@ -47,7 +47,7 @@ The example below demonstrates how to use the mobile view of the Toolbar. It is 
 
 
 
-```dojo
+```
 <div id="toolbar"></div>
 <script>
   $("#toolbar").kendoToolBar({

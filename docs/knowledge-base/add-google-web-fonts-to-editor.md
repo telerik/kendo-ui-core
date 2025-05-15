@@ -79,10 +79,10 @@ The following example demonstrates how to achieve the desired scenario.
 		// Load Google Web Font in the editing area.
 		$(editor.data("kendoEditor").body)
 		  .prevAll("head")
-			.append("<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet'>")
-			.append("<link href='http://fonts.googleapis.com/css?family=Griffy' rel='stylesheet' type='text/css'>")
-			.append("<link href='http://fonts.googleapis.com/css?family=Jacques+Francois+Shadow' rel='stylesheet' type='text/css'>")
-			.append("<link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>");
+			.append("<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet'>")
+			.append("<link href='https://fonts.googleapis.com/css?family=Griffy' rel='stylesheet' type='text/css'>")
+			.append("<link href='https://fonts.googleapis.com/css?family=Jacques+Francois+Shadow' rel='stylesheet' type='text/css'>")
+			.append("<link href='https://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>");
 	</script>
 ```
 

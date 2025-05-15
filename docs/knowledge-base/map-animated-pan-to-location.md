@@ -70,7 +70,7 @@ The following example demonstrates the full implementation of the suggested appr
         center: [0, 0],
         layers: [{
             type: "tile",
-            urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             attribution: "&copy; OpenStreetMap"
         }]
     });

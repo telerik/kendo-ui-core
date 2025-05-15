@@ -110,7 +110,7 @@ Specifies the DPL configuration options. For a complete demo and a backend imple
 #### Example
 
     <div id="pdfviewer"></div>
-    <script>
+    <script type="module">
         $("#pdfviewer").kendoPDFViewer({
             dplProcessing: {
                 read: {

@@ -30,8 +30,9 @@ Toggles the audio button.
 
 The URL, AJAX settings or function that fetches the audio of the captcha. When used with function, call the `args.success` method with the source of the audio.
 
-#### Example - function
+#### Set the audio handler as function
 
+```
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -41,9 +42,11 @@ The URL, AJAX settings or function that fetches the audio of the captcha. When u
             }
         });
     </script>
+```
 
-#### Example - URL or AJAX
+#### Set the Audio Handler as URL or AJAX
 
+```
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -51,6 +54,7 @@ The URL, AJAX settings or function that fetches the audio of the captcha. When u
             // audioHandler: "url-to-audio" // Response should return the audio source - base64 stream or url to the audio file
         });
     </script>
+```
 
 ### captcha `String`
 
@@ -156,16 +160,21 @@ The URL, AJAX settings or function that fetches the image and id of the captcha.
         });
     </script>
 
-#### Example - ajax
+Example - ajax
 
+
+```html
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
             handler: "https://demos.telerik.com/kendo-ui/captcha/reset" // Response should return captcha and the captchaId
         });
     </script>
+```
 
-#### Example - custom ajax settings
+Example - custom ajax settings
+
+```html
 
     <input id="captcha" />
     <script>
@@ -179,6 +188,8 @@ The URL, AJAX settings or function that fetches the image and id of the captcha.
             } // Response should return captcha and the captchaId
         });
     </script>
+
+```
 
 ### messages `Object`
 
@@ -297,8 +308,9 @@ Whether to trigger validation when input is blurred. This option is useful if yo
 
 The URL, AJAX settings or function that validates the text input. When used with function, call the `args.success` method with boolean value.
 
-#### Example
+#### Configure the Handler as a Function
 
+```
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -309,9 +321,11 @@ The URL, AJAX settings or function that validates the text input. When used with
             },
         });
     </script>
+``` 
 
-#### Example - ajax
+#### Configure the Handler by Passing a Link
 
+```
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -320,6 +334,7 @@ The URL, AJAX settings or function that validates the text input. When used with
             validationHandler: "https://demos.telerik.com/kendo-ui/captcha/validate",
         });
     </script>
+```
 
 ### volumeControl `Boolean` *(default: true)*
 
@@ -534,8 +549,9 @@ Fired when a request to a handler is finished - can be distinguished via the `ty
 
 The type triggered the request: "reset|validation|audio".
 
-#### Example
+#### Handle the requestEnd event
 
+```
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -546,9 +562,11 @@ The type triggered the request: "reset|validation|audio".
             }
         }).data("kendoCaptcha");
     </script>
+```
 
-#### Example - reset Captcha on validation fail
+#### Reset Captcha on validation fail
 
+```
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -561,6 +579,7 @@ The type triggered the request: "reset|validation|audio".
             }
         }).data("kendoCaptcha");
     </script>
+```
 
 ### requestStart
 

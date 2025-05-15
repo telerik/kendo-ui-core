@@ -3070,7 +3070,7 @@ A promise that will be resolved when the export completes.
     <script>
     $("#pivotgrid").kendoPivotGrid({
         pdfExport: function(e) {
-            alert("PDF export");
+            console.log("PDF export");
         },
         height: 550,
         dataSource: {

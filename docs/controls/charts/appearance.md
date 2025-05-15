@@ -107,6 +107,9 @@ To revert to the series colors from version 4.x, you can:
     ```dojo
         <div id="chart"></div>
             <script>
+            var chartDefaultV4Colors =
+            ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
+
             $("#chart").kendoChart({
                 theme: "sass",
                 seriesColors: chartDefaultV4Colors,

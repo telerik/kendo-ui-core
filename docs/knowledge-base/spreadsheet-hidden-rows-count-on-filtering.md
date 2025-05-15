@@ -42,7 +42,7 @@ How can I count the number of hidden rows after filtering in the Spreadsheet?
 ```dojo
 <div id="spreadsheet" style="width: 100%"></div>
 <script>
-    kendo.spreadsheet.Controller.fn.onCommandRequest = function (e) {
+    kendo.spreadsheet.Controller.prototype.onCommandRequest = function (e) {
         if (e.command) {
           this._execute(e);
         } else {

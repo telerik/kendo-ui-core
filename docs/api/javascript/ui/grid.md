@@ -11901,26 +11901,27 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example - remove the first table row
 
+    <button id="btn">Remove Row</button>
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
-        }
-      },
-      editable: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.removeRow("tr:eq(1)");
+      $("#grid").kendoGrid({
+        columns: [{ field: "name" }, { field: "age" }],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 },
+          ],
+          schema: {
+            model: { id: "id" },
+          },
+        },
+        editable: true,
+      });
+
+      $("#btn").on("click", function () {
+        var grid = $("#grid").data("kendoGrid");
+        grid.removeRow("tr:eq(1)");
+      });
     </script>
 
 #### Example - remove the selected table row

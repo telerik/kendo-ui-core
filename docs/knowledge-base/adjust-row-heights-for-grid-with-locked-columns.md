@@ -33,7 +33,7 @@ In such cases, if you show the content later, you might cause issues related to 
 
 The following example demonstrates how to adjust the row heights in a Kendo UI Grid with locked columns and with a column template that uses the `ng-if` directive.
 
-```dojo
+```
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid k-scope-field="grid" options="mainGridOptions"></kendo-grid>

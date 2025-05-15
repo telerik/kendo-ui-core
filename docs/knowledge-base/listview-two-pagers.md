@@ -78,7 +78,7 @@ To add a pager to a Kendo UI ListView for ASP.NET MVC, apply the same configurat
 
 The following example demonstrates how to customize the default behavior of the ListView wrapper and implement a pager at its top and bottom.
 
-```dojo
+```
 <div id="pager1" class="k-pager"></div>
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("listView")

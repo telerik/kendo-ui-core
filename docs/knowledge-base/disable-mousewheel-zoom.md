@@ -49,9 +49,9 @@ The following example demonstrates how to disable the mouse-wheel zoom in the Ma
           zoom: 3,
           layers: [{
             type: "tile",
-            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>."
           }],
           markers: [{
             location: [30.268107, -97.744821],

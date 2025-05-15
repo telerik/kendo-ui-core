@@ -384,7 +384,7 @@ The value to set.
         
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.value("123");
-        optInput.trigger("change")
+        otpInput.trigger("change")
     </script>
 
 

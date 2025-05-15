@@ -43,7 +43,7 @@ How can I resize the columns of the Kendo UI Grid for jQuery by using a custom b
 
 The following example demonstrates how to resize the columns of the Grid by using a custom button and AngularJS handlers.
 
-```dojo
+```
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="kg" options="mainGridOptions">

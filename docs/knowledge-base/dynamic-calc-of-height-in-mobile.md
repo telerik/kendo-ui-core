@@ -39,7 +39,7 @@ How can I dynamically calculate the height of the Kendo UI for jQuery Scheduler 
 
 The following example demonstrates how to achieve the desired scenario.
 
-```dojo
+```
 <div data-init="initLoginView" data-role="view" id="login"  data-stretch="true">
 <header data-role="header">
   <div data-role="navbar">

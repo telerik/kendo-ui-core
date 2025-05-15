@@ -74,7 +74,6 @@ The following example shows how to create a SkeletonContainer using a grid featu
                     columns: 20
                 },
             });
-        });
     </script>
 ```
 

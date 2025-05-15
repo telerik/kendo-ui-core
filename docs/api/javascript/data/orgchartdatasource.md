@@ -204,6 +204,6 @@ The item the prospect parents should be identified for.
 
       dataSource.read().then(function() {
         var possibleParents = dataSource.prospectParents(dataSource.data()[1]);
-        console.log(children);
+        console.log(possibleParents);
       });
     </script>

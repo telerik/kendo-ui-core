@@ -74,7 +74,7 @@ The following example demonstrates how to achieve the desired scenario.
       #to-do {
         height: 52px;
         width: 221px;
-        background: url('../content/web/datepicker/todo.png') transparent no-repeat 0 0;
+        background: url('https://demos.telerik.com/kendo-ui/content/web/datepicker/todo.png') transparent no-repeat 0 0;
       }
     </style>
   </div>

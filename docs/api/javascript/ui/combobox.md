@@ -1179,8 +1179,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items.
     <input id="combobox" />
     <script id="template" type="text/x-kendo-template">
       <span>
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
+        <img src="https://demos.telerik.com/kendo-ui/content/web/treeview/folder.png" alt="#: name #" style="vertical-align: middle;"/>#: name #
       </span>
     </script>
     <script>

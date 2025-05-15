@@ -167,13 +167,13 @@ $(function() {
 }
 
 #team-schedule {
-    background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
+    background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/team-schedule.png') transparent no-repeat;
     height: 115px;
     position: relative;
 }
 
 #people {
-    background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
+    background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/scheduler-people.png') no-repeat;
     width: 345px;
     height: 115px;
     position: absolute;

@@ -115,6 +115,7 @@ To achieve the desired scenario:
         var grid = e.sender;
         gridCols = grid.options.columns; //get the grid columns initially
       })
+  </script>
 ```
 
 ## See Also

@@ -43,7 +43,7 @@ How to prevent the selection for disabled cells in the Spreadsheet?
       </div>
       <div id="spreadsheet" style="width: 100%;"></div>
       <script>
-        kendo.spreadsheet.Sheet.fn.select = function (ref, changeActiveCell) {
+        kendo.spreadsheet.Sheet.prototype.select = function (ref, changeActiveCell) {
           var selectionState = this._selectionState();
 
           var expandedRef;

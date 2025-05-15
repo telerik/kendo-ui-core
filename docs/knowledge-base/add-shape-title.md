@@ -47,9 +47,9 @@ The following example demonstrates how to add title text for Map shapes that are
       zoom: 6,
       layers: [{
         type: "tile",
-        urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+        urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
         subdomains: ["a", "b", "c"],
-        attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>."
+        attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>."
       }, {
         type: "shape",
         style: {

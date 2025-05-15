@@ -1015,8 +1015,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items 
 
     <select id="multiselect" multiple="multiple"></select>
     <script id="itemTemplate" type="text/x-kendo-template">
-      <span>
-        <img src="/img/#: id #.png" alt="#: name #" />
+      <span> 
         #: name #
       </span>
     </script>

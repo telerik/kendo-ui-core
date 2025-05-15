@@ -46,7 +46,7 @@ The following example demonstrates how to achieve this behavior and add a red bo
         height: 323px;
         margin: 0 auto;
         padding: 10px 20px 20px 170px;
-        background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
+        background: url('https://demos.telerik.com/kendo-ui/content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
       }
       #tickets h3 {
         font-weight: normal;

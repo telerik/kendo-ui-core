@@ -14,7 +14,7 @@ The reordering takes advantage of the [CSS Grid](https://css-tricks.com/snippets
 
 ## Enabling Click-Move-Click
 
-As of Kendo UI R2 SP1 2023, users can reorder the TileLayout's containers by using the click-move-click functionality provided by the [`reorderable.clickMoveClick``](/api/javascript/ui/tilelayout/configuration/reorderable.clickmoveclick) option. Users can click a container to start moving it, and then click again to place it in its new position.
+As of Kendo UI R2 SP1 2023, users can reorder the TileLayout's containers by using the click-move-click functionality provided by the [`reorderable.clickMoveClick`](/api/javascript/ui/tilelayout/configuration/reorderable.clickmoveclick) option. Users can click a container to start moving it, and then click again to place it in its new position.
 
 ```dojo
     <script id="first" type="text/x-kendo-template">

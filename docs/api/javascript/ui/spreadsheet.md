@@ -1742,8 +1742,9 @@ Gets the `contextMenu` instance of the cell.
 
 `kendo.ui.ContextMenu` - The menu instance.
 
-#### Example - dynamically adding a context menu item and associating a selection command
+#### Dynamically adding a context menu item and associating a selection command
 
+```
     <div id="spreadsheet"></div>
 
     <script>
@@ -1765,7 +1766,8 @@ Gets the `contextMenu` instance of the cell.
            });
         });
     </script>
-
+```
+ 
 ### cleanupImages
 
 Discards the images that are no longer in use.  Note that you cannot
@@ -1782,8 +1784,9 @@ Gets the `contextMenu` instance of the row header.
 
 `kendo.ui.ContextMenu` - The menu instance.
 
-#### Example - removing the hide command for the first row in the rowHeaderContextMenu
+#### Removing the hide command for the first row in the rowHeaderContextMenu
 
+```
     <div id="spreadsheet"></div>
 
     <script>
@@ -1806,6 +1809,7 @@ Gets the `contextMenu` instance of the row header.
         });
     });
     </script>
+```
 
 ### colHeaderContextMenu
 
@@ -1815,8 +1819,9 @@ Gets the `contextMenu` instance of the column header.
 
 `kendo.ui.ContextMenu` - The menu instance.
 
-#### Example - removing the hide command for the first column in the colHeaderContextMenu
+#### Removing the hide command for the first column in the colHeaderContextMenu
 
+```
     <div id="spreadsheet"></div>
 
     <script>
@@ -1839,6 +1844,7 @@ Gets the `contextMenu` instance of the column header.
         });
     });
     </script>
+```
 
 ### sheets
 
@@ -2810,7 +2816,8 @@ A promise that will be resolved when the export completes.
             }],
             pdfExport: function(e) {
                 e.promise.done(function() {
-                    alert("Export completed!");
+                    /* The result can be observed in the DevTools(F12) console of the browser. */
+                    console.log("Export completed!");
                 });
             }
         });

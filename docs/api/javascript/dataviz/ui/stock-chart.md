@@ -1015,8 +1015,7 @@ it will automatically set "from" and "to" filters on the main data source.
 This, in conjunction with server filtering, allows you to visualize large data sets
 without loading them at once.
 
-#### Example
-
+```
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -1035,14 +1034,14 @@ without loading them at once.
         }
     });
     </script>
+```
 
 ### navigator.autoBind `Boolean`*(default: true)*
 
 Indicates whether the navigator will call read on the data source initially.
 Applicable only when using a dedicated navigator data source.
 
-#### Example
-
+```
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -1055,6 +1054,7 @@ Applicable only when using a dedicated navigator data source.
     //Call the navigator dataSource's read method
     //naviDataSource.read();
     </script>
+```
 
 ### navigator.dateField `String`
 
@@ -1336,8 +1336,9 @@ Array of data items. The data item type can be either a:
 * Array of arrays of numbers. Available for:
     * OHLC and candlestick series (open, high, low, close)
 
-#### Example - set the chart series data as array of objects
+Set the chart series data as array of objects
 
+```
   <div id="stock-chart"></div>
   <script>
   $("#stock-chart").kendoStockChart({
@@ -1359,6 +1360,7 @@ Array of data items. The data item type can be either a:
     }
   });
   </script>
+```
 
 #### Example - set the chart series data as array of arrays
 
@@ -5835,7 +5837,7 @@ The creator of the PDF document.
 
 #### Example - set the creator
 
-    <div id="chart"></div>
+    <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
           pdf: {
@@ -5885,8 +5887,8 @@ The date when the PDF document is created. Defaults to `new Date()`.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/dataviz/ui/stock-chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
-#### Example - use proxy
 
+```
     <div id="stock-chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5908,6 +5910,7 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
       var chart = $("#stock-chart").getKendoStockChart();
       chart.saveAsPDF();
     </script>
+```
 
 ### pdf.fileName `String` *(default: "Export.pdf")*
 Specifies the file name of the exported PDF file.
