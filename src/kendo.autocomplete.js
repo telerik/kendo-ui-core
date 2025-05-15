@@ -102,7 +102,12 @@ export const __meta__ = {
                 .on("keypress" + ns, that._keypress.bind(that))
                 .on("input" + ns, that._search.bind(that))
                 .on("paste" + ns, that._search.bind(that))
-                .on("focus" + ns, function() {
+                .on("focus" + ns, function(e) {
+                    if (that._hasActionSheet()) {
+                        that.element.attr("readonly", true);
+                    } else if (!that.options.readonly) {
+                        that.element.removeAttr("readonly");
+                    }
                     that._prev = that._accessor();
                     that._oldText = that._prev;
                     that._placeholder(false);
@@ -190,6 +195,8 @@ export const __meta__ = {
             fillMode: "solid",
             rounded: "medium",
             label: null,
+            adaptiveTitle: null,
+            adaptiveTitleSubtitle: null,
         },
 
         _clearValueMouseDownHandler: function(ev) {
@@ -205,6 +212,10 @@ export const __meta__ = {
         _onActionSheetCreate: function() {
             var that = this;
 
+            that._unboundClick = true;
+            that.element
+                .on("click", function() { that.popup.toggle(); });
+
             if (that.filterInput) {
                 that.filterInput
                     .on("keydown" + ns, that._keydown.bind(that))
@@ -218,11 +229,23 @@ export const __meta__ = {
                     });
 
                 that.popup.bind("activate", () => {
+                    // that.wrapper.off("focusout");
                     that.filterInput.val(that.element.val());
                     that.filterInput.trigger("focus");
                 });
-
                 that.popup.bind("deactivate", () => {
+                    // that.wrapper.on("focusout", function(ev) {
+                    //     if ((that.filterInput && ev.relatedTarget === that.filterInput[0]) || !that.wrapper.hasClass(FOCUSED)) {
+                    //         return;
+                    //     }
+
+                    //     that._change();
+                    //     that._placeholder();
+                    //     that.close();
+                    //     that.wrapper.removeClass(FOCUSED);
+                    // });
+
+                    // that.wrapper.focus();
                     that.element.trigger("focus");
                 });
             }

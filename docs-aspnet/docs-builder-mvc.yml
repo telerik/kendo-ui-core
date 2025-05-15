@@ -47,7 +47,7 @@ demos:
   uris:
       www.telerik.com: https://demos.telerik.com/aspnet-mvc/docsbuilder/
       wwwuat.telerik.com: https://aspnet-mvc-demos-staging.azurewebsites.net/aspnet-mvc/docsbuilder/
-      default: https://localhost:44356/docsbuilder/
+      default: https://localhost:44300/docsbuilder/
   themes:
       default-main:
           name: Main

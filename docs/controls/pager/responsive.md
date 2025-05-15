@@ -37,6 +37,7 @@ When the Pager width is less than 360 pixels, the current page is represented by
 
 ## See Also
 
+* [Pager Adaptive Mode]({% slug adaptivemode_kendoui_pager_widget %})
 * [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
 * [Pager Settings and Types]({% slug settings_kendoui_pager_widget %})
 * [Pager Templates]({% slug templates_kendoui_pager_widget %})

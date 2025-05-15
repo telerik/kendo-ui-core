@@ -4492,7 +4492,7 @@ Prepares the data to be of an acceptable type for the ChartWizard.
 #### Example
     <div id="chartwizard"></div>
     <script>
-    const dataColumns: DataColumn[] = [
+    const dataColumns = [
         {
             field: 'Product',
             title: 'Product Name'
@@ -4503,7 +4503,7 @@ Prepares the data to be of an acceptable type for the ChartWizard.
         }
     ];
 
-    const dataRows: DataRow[] = [
+    const dataRows = [
         {
             dataItem: {
                 ID: 216321,

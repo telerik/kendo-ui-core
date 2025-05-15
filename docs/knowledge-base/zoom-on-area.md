@@ -52,9 +52,9 @@ To define the area, use a set of markers. You can use any list of locations. The
     $("#map").kendoMap({
         layers: [{
             type: "tile",
-            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "© <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>."
+            attribution: "© <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>."
         }, {
             type: "marker",
             dataSource: {

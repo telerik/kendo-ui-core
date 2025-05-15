@@ -5831,30 +5831,40 @@ The fields which can be used in the template are:
 
     <script id="event-time-template" type="text/x-kendo-template">
       # if (isAllDay) { #
-         All day
+        All day
       # } else { #
-         #= kendo.toString(start, "t") # - #= kendo.toString(end, "t") #
+        #= kendo.toString(start, "t") # - #= kendo.toString(end, "t") #
       # }  #
     </script>
+
     <div id="scheduler"></div>
+
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      views: [
-        {
-          type: "agenda",
-          eventTimeTemplate: $("#event-time-template").html(),
-        }
-      ],
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview"
-        }
-      ]
-    });
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        views: [
+          {
+            type: "agenda",
+            eventTimeTemplate: $("#event-time-template").html(),
+          }
+        ],
+        dataSource: [
+          {
+            isAllDay:true,
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview"
+          },
+          {
+            isAllDay:false,
+            id: 2,
+            start: new Date("2013/6/6 09:00 AM"),
+            end: new Date("2013/6/6 10:00 AM"),
+            title: "Workshop"
+          }
+        ]
+      });
     </script>
 
 ### views.group `Object`
@@ -6144,9 +6154,11 @@ The name of the view. Typically, used to get the name of the currently selected 
         ]
       });
       setTimeout(function(){
+        // Check the browser console to see the result
+
         var scheduler = $("#scheduler").data("kendoScheduler");
         var viewName = scheduler.view();
-        alert(scheduler.view().name)
+        console.log(scheduler.view().name)
       })
     </script>
 
@@ -6751,22 +6763,25 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
 
 #### Example - update a data item in the data source
 
+    <button id="btn">Set Date</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview"
-        }
-      ]
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var event = scheduler.dataSource.at(0);
-    event.set("end", new Date("2013/6/6 10:00 AM"));
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview",
+          },
+        ],
+      });
+      $("#btn").on("click", function () {
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        var event = scheduler.dataSource.at(0);
+        event.set("end", new Date("2013/6/6 10:00 AM"));
+      });
     </script>
 
 #### Example - remove a data item from the data source
@@ -6937,21 +6952,25 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 #### Example
 
+    <button id="destroy">Destroy</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview"
-        }
-      ]
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    scheduler.destroy();
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview",
+          },
+        ],
+      });
+
+      $("#destroy").click(function () {
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        scheduler.destroy();
+      });
     </script>
 
 ### editEvent
@@ -7012,28 +7031,30 @@ The `uid` of the occurrence to look for.
 
 #### Example - get an occurrence from a recurring series
 
+    <button id="uid">Get Event By Uid</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      views: ["week"],
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          title: "Interview",
-          recurrenceRule: "FREQ=DAILY"
-        }
-      ]
-    });
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        views: ["week"],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview",
+            recurrenceRule: "FREQ=DAILY",
+          },
+        ],
+      });
 
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var uid = scheduler.wrapper.find(".k-event:last").data("uid");
-    var event = scheduler.occurrenceByUid(uid);
-
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(event);
+      $("#uid").click(function () {
+        var scheduler = $("#scheduler").data("kendoScheduler");
+        var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+        var event = scheduler.occurrenceByUid(uid);
+        console.log(event);
+      });
+      /* The result can be observed in the DevTools(F12) console of the browser. */
     </script>
 
 ### occurrencesInRange
@@ -7155,37 +7176,40 @@ Get the relevant resources for a given slot.
 
 #### Example - get the relevant resources
 
+    <button id="getResource">Get Resource for Slot</button>
     <div id="scheduler"></div>
     <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      group: {
-        resources: ["Rooms"]
-      },
-      resources: [
-        {
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        group: {
+          resources: ["Rooms"],
+        },
+        resources: [
+          {
             field: "roomId",
             name: "Rooms",
             dataSource: [
-                { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
-                { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
-            ]
+              { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+              { text: "Meeting Room 201", value: 2, color: "#f58a8a" },
+            ],
+          },
+        ],
+      });
+      
+      $("#getResource").click(function () {
+        var scheduler = $("#scheduler").data("kendoScheduler");
+
+        var element = scheduler.view().content.find("tr:first td:first");
+
+        var slot = scheduler.slotByElement(element);
+
+        var resource = scheduler.resourcesBySlot(slot);
+
+        for (var key in resource) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log("resouce - {" + key + ": " + resource[key] + " }");
         }
-      ]
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-
-    var element = scheduler.view().content.find("tr:first td:first");
-
-    var slot = scheduler.slotByElement(element);
-
-    var resource = scheduler.resourcesBySlot(slot);
-
-    for (var key in resource) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log("resouce - {" + key + ": " + resource[key] + " }");
-    }
-
+      });
     </script>
 
 ### saveAsPDF
@@ -7285,14 +7309,16 @@ Allows selection of slots in day and time slots of the view (applicable in day/w
       ]
     });
 
-    var scheduler = $("#scheduler").data("kendoScheduler");
+    setTimeout(function () {
+        var scheduler = $("#scheduler").data("kendoScheduler");
 
-    //find event for selection:
-    var event = scheduler.data()[0];
-    scheduler.select([event.uid]);
+        //find event for selection:
+        var event = scheduler.dataSource.data(); 
+        scheduler.select([event[0].uid]);
 
-    //log selected event data
-    console.log(scheduler.select());
+        //log selected event data
+        console.log(scheduler.select());
+      });
     </script>
 
 

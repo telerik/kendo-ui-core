@@ -199,55 +199,55 @@ The headers to send with the AI service request.
             }
         }
     });
-
+    </script>
 ### service.data `Object|Function`
 The data to send with the AI service request.
 
 #### Example
     <div id="aiprompt"></div>
     <script>
-    $("#aiprompt").kendoAIPrompt({
-        service: {
-            url: "/api/llm",
-            data: {
-                "key": "value"
-            }
-        }
-    });
-
-#### Example
-    <div id="aiprompt"></div>
-    <script>
-    $("#aiprompt").kendoAIPrompt({
-        service: {
-            url: "/api/llm",
-            data: function(prompt, isRetry, history) {
-                return {
-                    "messages": [{
-                        type: messageTypes.user,
-                        text: prompt
-                    }],
+        $("#aiprompt").kendoAIPrompt({
+            service: {
+                url: "/api/llm",
+                data: {
                     "key": "value"
                 }
             }
-        }
-    });
-
+        });
+    </script>
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+        $("#aiprompt").kendoAIPrompt({
+            service: {
+                url: "/api/llm",
+                data: function(prompt, isRetry, history) {
+                    return {
+                        "messages": [{
+                            type: messageTypes.user,
+                            text: prompt
+                        }],
+                        "key": "value"
+                    }
+                }
+            }
+        });
+    </script>
 ### service.outputGetter `Function`
 The function to get the output from the AI service response.
 
 #### Example
     <div id="aiprompt"></div>
     <script>
-    $("#aiprompt").kendoAIPrompt({
-        service: {
-            url: "/api/llm",
-            outputGetter: function(response) {
-                return response.output;
+        $("#aiprompt").kendoAIPrompt({
+            service: {
+                url: "/api/llm",
+                outputGetter: function(response) {
+                    return response.output;
+                }
             }
-        }
-    });
-
+        });
+    </script>
 ### showOutputRating `Boolean` *(default: true)*
 
 Specifies if the output rating should be displayed on the output card.

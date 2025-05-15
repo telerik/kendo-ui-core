@@ -3474,31 +3474,70 @@ Returns the card elements in the TaskBoard.
 
 #### Example
 
+  <button id="btn">Get item</button>
     <div id="taskBoard"></div>
 
     <script>
-      var taskBoard = $("#taskBoard").kendoTaskBoard({
-        dataOrderField: "order",
-        dataSource: [
-          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
-          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
-          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
-          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
-          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
-        ],
-        columns: [
-          { text: "Doing", status: "doing" },
-          { text: "Backlog", status: "backlog" },
-          { text: "Done", status: "done" }
-        ]
-      }).data("kendoTaskBoard");
+      var taskBoard = $("#taskBoard")
+        .kendoTaskBoard({
+          dataOrderField: "order",
+          dataSource: [
+            {
+              id: 1,
+              order: 1,
+              title: "Task 1",
+              description: "Description 1",
+              status: "backlog",
+              category: "red",
+            },
+            {
+              id: 2,
+              order: 2,
+              title: "Task 11",
+              description: "Description 11",
+              status: "backlog",
+              category: "red",
+            },
+            {
+              id: 3,
+              order: 3,
+              title: "Task 2",
+              description: "Description 2",
+              status: "doing",
+              category: "green",
+            },
+            {
+              id: 4,
+              order: 4,
+              title: "Task 22",
+              description: "Description 22",
+              status: "doing",
+              category: "green",
+            },
+            {
+              id: 5,
+              order: 5,
+              title: "Task 3",
+              description: "Description 3",
+              status: "done",
+              category: "blue",
+            },
+          ],
+          columns: [
+            { text: "Doing", status: "doing" },
+            { text: "Backlog", status: "backlog" },
+            { text: "Done", status: "done" },
+          ],
+        })
+        .data("kendoTaskBoard");
 
-      setTimeout(function(){
-    	  var cardElm = taskBoard.items().eq(0);
-  		  var dataItem = taskBoard.dataItem(cardElm);
-  		  alert(dataItem.get("title"));
-      })
+      $("#btn").on("click", function () {
+        var cardElm = taskBoard.items().eq(1);
+        var dataItem = taskBoard.dataItem(cardElm);
+        alert(dataItem.get("title"));
+      });
     </script>
+    
 
 #### Returns
 
@@ -3530,9 +3569,11 @@ Returns the card elements in the TaskBoard filtered by column status.
       }).data("kendoTaskBoard");
 
       setTimeout(function(){
+        // Check the browser console to see the result
+
     	  var cardElm = taskBoard.itemsByStatus("backlog").eq(0);
         var dataItem = taskBoard.dataItem(cardElm);
-        alert(dataItem.get("title"));
+        console.log(dataItem.get("title"));
       })
 
     </script>
@@ -3759,9 +3800,11 @@ Returns the data item bound to the specific card element.
       }).data("kendoTaskBoard");
 
       setTimeout(function(){
+        // Check the browser console to see the result
+
         var cardElm = taskBoard.items().eq(0);
         var dataItem = taskBoard.dataItem(cardElm);
-        alert(dataItem.get("title"));
+        console.log(dataItem.get("title"));
       })
     </script>
 
@@ -3800,9 +3843,11 @@ Returns the data item bound to the specific column element.
         ]
       }).data("kendoTaskBoard");
 
+      // Check the browser console to see the result
+
       var columnElm = taskBoard.columns().eq(0);
       var dataItem = taskBoard.columnDataItem(columnElm);
-      alert(dataItem.get("text"));
+      console.log(dataItem.get("text"));
     </script>
 
 #### Parameters
@@ -4018,7 +4063,7 @@ Fired before the TaskBoard binds the columns' data source.
           { text: "Done", status: "done" }
         ],
         columnsDataBinding: function () {
-          alert("columnsDataBinding fired!")
+          console.log("columnsDataBinding fired!")
         }
       });
     </script>
@@ -4069,7 +4114,9 @@ Fired when the TaskBoard's columns are bound to their data source.
           { text: "Done", status: "done" }
         ],
         columnsDataBound: function () {
-          alert("columnsDataBound fired!")
+          // Check the browser console to see the result
+
+          console.log("columnsDataBound fired!")
         }
       });
     </script>
@@ -4151,7 +4198,8 @@ Fired before the TaskBoard binds to its data source.
           { text: "Done", status: "done" }
         ],
         dataBinding: function () {
-          alert("dataBinding fired!")
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log("dataBinding fired!")
         }
       });
     </script>
@@ -4202,7 +4250,7 @@ Fired when the TaskBoard is bound to data from its data source.
           { text: "Done", status: "done" }
         ],
         dataBound: function () {
-          alert("dataBound fired!")
+          console.log("dataBound fired!")
         }
       });
     </script>

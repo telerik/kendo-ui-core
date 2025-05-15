@@ -48,7 +48,6 @@ export const __meta__ = {
             alpha: "Alpha",
             gradient: "Gradient view",
             palette: "Palette view",
-            adaptiveTitle: "Choose Color",
         },
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
@@ -296,6 +295,8 @@ export const __meta__ = {
             rounded: "medium",
             fillMode: "solid",
             adaptiveMode: "none",
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
         },
 
         events: [ "activate", "change", "select", "open", "close" ],
@@ -491,7 +492,8 @@ export const __meta__ = {
                         adaptive: true,
                         closeButton: true,
                         hideOverflowContent: true,
-                        title: kendo.htmlEncode(options.messages.adaptiveTitle),
+                        title: kendo.htmlEncode(options.adaptiveTitle) || "Choose Color",
+                        subtitle: kendo.htmlEncode(options.adaptiveSubtitle) || "",
                         footerTemplate: that._actionFooterButtons(),
                     }).data("kendoActionSheet");
 

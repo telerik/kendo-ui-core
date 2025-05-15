@@ -16,6 +16,14 @@ Represents the Kendo UI TimeDurationPicker widget. Inherits from [Widget](/api/j
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
+
 ### columns `Array`
 
 The configuration of the picker columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the

@@ -39,7 +39,7 @@ How can I create a custom **Edit** button by using AngularJS in the Kendo UI Gri
 
 The following example demonstrates how to create a custom **Edit** button in the Toolbar of the Grid in AngularJS applications.
 
-```dojo
+```
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="myGrid" options="mainGridOptions"></div>

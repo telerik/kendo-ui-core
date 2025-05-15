@@ -178,6 +178,8 @@ export const __meta__ = {
             fillMode: "solid",
             rounded: "medium",
             label: null,
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
             clearOnEscape: true,
             _removeDataItems: true,
             _shouldRefresh: true
@@ -227,12 +229,17 @@ export const __meta__ = {
         },
 
         _popup: function() {
+            const that = this;
             Select.fn._popup.call(this);
-            this.popup.element.addClass("k-combobox-popup");
+            that.popup.element.addClass("k-combobox-popup");
         },
 
         _onActionSheetCreate: function() {
             var that = this;
+
+            that._unboundClick = true;
+            that.input
+                .on('click', that._arrowClick.bind(that));
 
             if (that.filterInput) {
                 that.filterInput
@@ -241,7 +248,7 @@ export const __meta__ = {
                     .on("paste" + ns, that._inputPaste.bind(that))
                     .attr({
                         "role": "combobox",
-                        "aria-expanded": false
+                        "aria-expanded": false,
                     });
 
                 that.popup.bind("activate", () => {
@@ -332,8 +339,14 @@ export const __meta__ = {
         },
 
         _inputFocus: function() {
-            this.wrapper.addClass(FOCUSED);
-            this._placeholder(false);
+            const that = this;
+            if (that._hasActionSheet()) {
+                that.input.attr("readonly", true);
+            } else if (!that.options.readonly) {
+                that.input.removeAttr("readonly");
+            }
+            that.wrapper.addClass(FOCUSED);
+            that._placeholder(false);
         },
 
         _inputFocusout: function(e) {

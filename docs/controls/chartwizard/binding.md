@@ -35,7 +35,7 @@ The following example demonstrates how to bind the Chart Wizard to an array of d
 
 When the ChartWizard is bound to remote data, the remote service must return one or more arrays of objects with `field` and `value` properties. The example below demonstrates how to bind the ChartWizard to remote data:
 
-```dojo
+```
 <div id="chartwizard"></div>
 
 <script>

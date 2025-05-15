@@ -20,38 +20,7 @@ The adaptive mode changes the rendering of the DropDownTree popup element based 
 
 The following example demonstrates how to enable the adaptive mode of the DropDownTree by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().DropDownTree()
-        .Name("dropdowntree")
-        .DataTextField("Name")
-        .DataValueField("id")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .DataSource(dataSource => dataSource
-            .Read(read => read
-                .Action("Read_DropDownTreeData", "Home")
-            )
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-dropdowntree name="dropdowntree" 
-        datatextfield="Name" 
-        datavaluefield="id" 
-        adaptive-mode="AdaptiveMode.Auto">
-        <hierarchical-datasource>
-            <schema>
-                <hierarchical-model id="id"></hierarchical-model>
-            </schema>
-            <transport>
-                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
-            </transport>
-        </hierarchical-datasource>
-    </kendo-dropdowntree>
-```
-{% endif %}
+<demo metaUrl="dropdowntree/adaptive_mode/" height="600"></demo>
 
 ## See Also
 

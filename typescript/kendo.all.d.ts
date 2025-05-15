@@ -2422,6 +2422,8 @@ declare namespace kendo.ui {
     interface AutoCompleteOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | AutoCompleteAnimation | undefined;
         autoWidth?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
@@ -3921,7 +3923,6 @@ declare namespace kendo.ui {
         green?: string;
         blue?: string;
         hex?: string;
-        adaptiveTitle?: string;
     }
 
     interface ColorPickerTileSize {
@@ -3931,7 +3932,9 @@ declare namespace kendo.ui {
 
     interface ColorPickerOptions {
         name?: string | undefined;
-        adaptiveMode?: "none" | "auto" | undefined; 
+        adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         buttons?: boolean | undefined;
         contrastTool?: boolean | ColorPickerContrastTool | undefined;
         clearButton?: boolean | undefined;
@@ -4044,6 +4047,8 @@ declare namespace kendo.ui {
     interface ComboBoxOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | ComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -4441,6 +4446,8 @@ declare namespace kendo.ui {
         autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DatePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
@@ -4541,6 +4548,8 @@ declare namespace kendo.ui {
         calendarButton?: boolean | undefined;
         clearButton?: boolean | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         ARIATemplate?: string | undefined;
         culture?: string | undefined;
         dates?: any;
@@ -4643,6 +4652,8 @@ declare namespace kendo.ui {
         autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DateTimePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
@@ -4990,6 +5001,8 @@ declare namespace kendo.ui {
     interface DropDownListOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DropDownListAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -5142,6 +5155,8 @@ declare namespace kendo.ui {
     interface DropDownTreeOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DropDownTreeAnimation | undefined;
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -6246,6 +6261,9 @@ declare namespace kendo.ui {
     interface FilterMenuOptions {
         name?: string | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         extra?: boolean | undefined;
         field?: string | undefined;
         messages?: FilterMenuMessages | undefined;
@@ -7053,6 +7071,7 @@ declare namespace kendo.ui {
     interface GridColumnMenu {
         columns?: boolean | GridColumnMenuColumns | undefined;
         filterable?: boolean | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         clearAllFilters?: boolean | undefined;
         sortable?: boolean | undefined;
         messages?: GridColumnMenuMessages | undefined;
@@ -7422,10 +7441,12 @@ declare namespace kendo.ui {
     interface GridToolbarOptions{
         items?: (string | GridToolbarItem)[] | ToolBarItem[];
         overflow?: ToolBarOverflowOptions | undefined;
+        showInactiveTools?: boolean | undefined;
     }
 
     interface GridOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
         allowPaste?: boolean | undefined;
         altRowTemplate?: string|Function | undefined;
@@ -8449,6 +8470,8 @@ declare namespace kendo.ui {
     interface MultiColumnComboBoxOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | MultiColumnComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -8608,6 +8631,8 @@ declare namespace kendo.ui {
     interface MultiSelectOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | MultiSelectAnimation | undefined;
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -9188,6 +9213,7 @@ declare namespace kendo.ui {
     }
 
     interface PDFViewerPdfjsProcessing {
+        renderForms?: boolean | undefined;
         file?: any|string | undefined;
     }
 
@@ -12721,6 +12747,8 @@ declare namespace kendo.ui {
     interface TimeDurationPickerOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         columns?: TimeDurationPickerColumn[] | undefined;
         enable?: boolean | undefined;
         fillMode?: string | undefined;
@@ -12966,6 +12994,8 @@ declare namespace kendo.ui {
         autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | TimePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         componentType?: string | undefined;

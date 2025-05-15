@@ -41,6 +41,14 @@ Specifies whether the calendar popup should close automatically when a range is 
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
+
 ### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
  Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar..The parameters available for the template are:

@@ -184,7 +184,9 @@ export const __meta__ = {
             fillMode: "solid",
             rounded: "medium",
             label: null,
-            popupFilter: true
+            popupFilter: true,
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
         },
 
         events: [

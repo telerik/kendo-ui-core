@@ -11,6 +11,54 @@ Represents the Kendo UI FilterMenu widget. Inherits from [Widget](/api/javascrip
 
 ## Configuration
 
+### adaptiveMode `String` *(default: 'none')*
+
+If set to `auto` and the filterMenu will use adaptive rendering.
+
+#### Example - set dataSource as an existing instance
+
+    <div id="filter-menu"></div>
+    <br /><br />
+    <div id="grid"></div>
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter-menu").kendoFilterMenu({
+      	dataSource: dataSource,
+        field: "age",
+        adaptiveMode: "auto",
+        messages: {
+            and: "and",
+            or: "or",
+            filter: "Apply filter",
+            clear: "Clear filter"
+        }
+      });
+
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: dataSource
+      });
+    </script>
+
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)

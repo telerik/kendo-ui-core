@@ -308,8 +308,10 @@ The value to be set.
 	  });
 
 	  $(function() {
+		// The result can be seen in the browser console
+		
 	    var pb = $("#progressbar").data("kendoProgressBar");
-        alert("The current value is " + pb.value());
+        console.log("The current value is " + pb.value());
       });
 	</script>
 

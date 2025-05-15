@@ -1131,8 +1131,9 @@ The field from the server response which contains server-side errors. Can be set
 
 > If this option is set and the server response contains that field, then the `error` event will be fired. The `errors` field of the event argument will contain the errors returned by the server.
 
-#### Example - specify the error field as a string
+#### Specify the error field as a string
 
+```
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1150,14 +1151,16 @@ The field from the server response which contains server-side errors. Can be set
       },
       error: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log("error event handler", e.errors[0]);
+        console.log("error event handler", e.errorThrown);
       }
     });
     dataSource.fetch();
     </script>
+```
 
-#### Example - specify the error field as a function
+#### Specify the error field as a function
 
+```
     <script>
       var dataSource = new kendo.data.DataSource({
         transport: {
@@ -1178,6 +1181,7 @@ The field from the server response which contains server-side errors. Can be set
       });
       dataSource.fetch();
     </script>
+```
 
 ### schema.groups `Function|String`
 
@@ -2512,8 +2516,7 @@ which should follow the `schema.data` configuration.
 A function that should be invoked to notify the data source about updated data items that are pushed from the server. Accepts a single argument - the object pushed from the server
 which should follow the `schema.data` configuration.
 
-#### Example
-
+```
     <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
     <script>
     var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
@@ -2557,7 +2560,7 @@ which should follow the `schema.data` configuration.
       console.log(dataSource.data());
     });
     </script>
-
+```
 
 ### transport.read `Object|String|Function`
 

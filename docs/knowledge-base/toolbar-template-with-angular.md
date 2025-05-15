@@ -43,7 +43,7 @@ The following example demonstrates how to create a custom ToolBar template in An
 
 > The example loads Kendo UI 2023.3.1010 version.
 
-```dojo
+```
     <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
 

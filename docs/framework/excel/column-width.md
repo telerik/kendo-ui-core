@@ -34,9 +34,11 @@ var workbook = new kendo.ooxml.Workbook({
     }
   ]
 });
-kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+workbook.toDataURLAsync().then(function (dataURI) {
+    kendo.saveAs({
+      dataURI: dataURI,
+      fileName: "Test.xlsx",
+    });
 });
 </script>
 ```

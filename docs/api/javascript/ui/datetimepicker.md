@@ -17,6 +17,14 @@ Specifies the adaptive rendering of the component. The supported values are: `no
 
 The adaptive rendering of the DateTimePicker provides consistency to the customer experience on any device by supporting adaptive enhancements such as changes in styling and behavior.
 
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popups. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.

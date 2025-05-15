@@ -33,7 +33,7 @@ How can I have different editors appear depending on the current operator of the
 The following example demonstrates how to achieve the desired scenario:
 
 ```dojo
-    <script src="../content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
       <div id="filter"></div>
       <br />

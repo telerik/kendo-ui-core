@@ -56,7 +56,7 @@ To generate Captchas and validate the user's input, the Kendo UI Captcha depends
 
 1. Introduce the Kendo UI for jQuery Captcha:
 
-    ```dojo
+    ```
         <input id="captcha" />
     
         <script>

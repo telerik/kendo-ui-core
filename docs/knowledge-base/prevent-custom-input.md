@@ -138,7 +138,7 @@ The following example demonstrates how to allow only existing values in the Auto
           width: 482px;
           height: 152px;
           padding: 110px 0 0 30px;
-          background: url('../content/web/autocomplete/shipping.png') transparent no-repeat 0 0;
+          background: url('https://demos.telerik.com/kendo-ui/content/web/autocomplete/shipping.png') transparent no-repeat 0 0;
           margin: 100px auto;
         }
 

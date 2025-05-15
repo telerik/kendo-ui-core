@@ -1652,6 +1652,6 @@ The content element of the activated tab.
         };
 
         // attach show event handler via bind()
-        var tabStrip = $("#tabStrip").kendoTabStrip().data("kendoTabStrip");
+        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
         tabStrip.bind("show", onShow);
     </script>

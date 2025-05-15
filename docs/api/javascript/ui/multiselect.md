@@ -15,6 +15,14 @@ Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/javascri
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
@@ -1015,8 +1023,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the items 
 
     <select id="multiselect" multiple="multiple"></select>
     <script id="itemTemplate" type="text/x-kendo-template">
-      <span>
-        <img src="/img/#: id #.png" alt="#: name #" />
+      <span> 
         #: name #
       </span>
     </script>

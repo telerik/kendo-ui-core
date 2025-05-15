@@ -362,7 +362,7 @@ Checks whether the popup is visible
 
     var popup = $("#popup").data("kendoPopup");
 
-    alert(popup.visible());
+    console.log(popup.visible());
     </script>
 
 ## Events

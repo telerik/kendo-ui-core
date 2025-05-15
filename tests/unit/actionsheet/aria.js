@@ -69,9 +69,7 @@ describe("kendo.ui.ActionSheet WAI-ARIA", function() {
     it("ActionSheet items collection has role='group'", async function() {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-list-ul").attr("role"), "group");
-                });
+                assert.equal(instance.wrapper.find(".k-list-ul").attr("role"), "group");
             },
         });
 
@@ -81,9 +79,7 @@ describe("kendo.ui.ActionSheet WAI-ARIA", function() {
     it("ActionSheet li elements have role='none'", async function() {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-actionsheet-item").attr("role"), "button");
-                });
+                assert.equal(instance.wrapper.find(".k-actionsheet-item").attr("role"), "button");
             },
         });
 
@@ -93,9 +89,7 @@ describe("kendo.ui.ActionSheet WAI-ARIA", function() {
     it("ActionSheet has role='dialog'", async function() {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-actionsheet").attr("role"), "dialog");
-                });
+                assert.equal(instance.wrapper.find(".k-actionsheet").attr("role"), "dialog");
             },
         });
 
@@ -105,9 +99,7 @@ describe("kendo.ui.ActionSheet WAI-ARIA", function() {
     it("ActionSheet has aria-modal='true'", async function() {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-modal"), "true");
-                });
+                assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-modal"), "true");
             },
         });
 

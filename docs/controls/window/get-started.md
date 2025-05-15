@@ -13,56 +13,65 @@ This guide demonstrates how to get up and running with the Kendo UI for jQuery W
 After the completion of this guide, you will be able to achieve the following end result:
 
 ```dojo
-<div id="window"></div>
+<div id="window">
+  <p>Hello, get started with the Kendo UI for jQuery Window!</p>
+</div>
 
 <script>
     $("#window").kendoWindow({
       height:500,
       width:500,
-      title: "Your Kendo Window",
-      content: "../content/web/window/ajax/ajaxContent.html"
+      title: "Your Kendo Window"
     });
 </script>
 ```
 
-## 1. Create an Empty div Element
+## 1. Create a div Element
 
-First, create an empty `<div>` element on the page that will serve as the main container of the Window widget.
+First, create an `<div>` element on the page that will serve as the main container of the Window component. In the `<div>` element, you can pre-define the content for the component.
 
 ```html
-<div id="window"></div>
+<div id="window">
+  <p>Hello, get started with the Kendo UI for jQuery Window!</p>
+</div>
 ```
 
 ## 2. Initialize the Window 
 
-In this step, you will initialize the Window from the empty `<div>` element. When you initialize the widget from an empty `div`, all settings of the Window will be provided in the initialization script statement and you have to describe its layout and configuration in JavaScript.
+In this step, you will initialize the Window from the `<div>` element. When you initialize the component from a `div`, all settings of the Window will be provided in the initialization script statement and you have to describe its layout and configuration in JavaScript.
 
 ```html
-<div id="window"></div>
+<div id="window">
+  <p>Hello, get started with the Kendo UI for jQuery Window!</p>
+</div>
 
 <script>
     // Target the div element by using jQuery and then call the kendoWindow() method.
     $("#window").kendoWindow({
         // Add some basic configurations such as width and height.
         width: 500,
-        height: 500
+        height: 500,
+        title: "Your Kendo Window"
     });
 </script>
 ```
 
-## 3. Load the Content with AJAX 
+## 3. Set the Title 
 
-Once the basic initialization is completed, you can start adding additional configurations to the Window such as loading its content through an AJAX request.
+You can use the [`title`](/api/javascript/ui/window/configuration/title) field to set the header text in the Window component.
 
 ```html
-<div id="window"></div>
+<div id="window">
+  <p>Hello, get started with the Kendo UI for jQuery Window!</p>
+</div>
 
 <script>
+    // Target the div element by using jQuery and then call the kendoWindow() method.
     $("#window").kendoWindow({
-      height:500,
-      width:500,
-      title: "Your Kendo Window",
-      content: "../content/web/window/ajax/ajaxContent.html"
+        // Add some basic configurations such as width and height.
+        width: 500,
+        height: 500,
+        title: 
     });
 </script>
 ```
@@ -74,5 +83,5 @@ Once the basic initialization is completed, you can start adding additional conf
 
 ## See Also 
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](/api/javascript/ui/window)
 * [Knowledge Base Section](/knowledge-base)

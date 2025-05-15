@@ -24,21 +24,7 @@ The adaptive mode changes the rendering of the TimeDurationPicker popup element 
 
 The following example demonstrates how to enable the adaptive mode of the TimeDurationPicker by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-     @(Html.Kendo().TimeDurationPicker()
-	     .Name("timeDurationPicker")
-          .AdaptiveMode(AdaptiveMode.Auto)
-     )
-```
-{% if site.core %}
-```TagHelper
-     @addTagHelper *, Kendo.Mvc
-
-     <kendo-timedurationpicker name="timeDurationPicker" 
-          adaptive-mode="AdaptiveMode.Auto">
-     </kendo-timedurationpicker>
-```
-{% endif %}
+<demo metaUrl="timedurationpicker/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

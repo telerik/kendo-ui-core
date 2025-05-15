@@ -100,7 +100,7 @@ As of R3 2023 version of the Kendo UI, the Grid component supports a new `tabbed
         columnMenu: {
           autoSize: true,
           componentType: "tabbed"
-        }
+        },
         columns: [
           { field: "name" },
           { field: "age" }
@@ -155,7 +155,7 @@ As of R1 2024, the Kendo UI Grid has a new built-in toolbar command - `columns`.
           columns: {
               sort: "asc",
           }
-        }
+        },
         columns: [
           { field: "name" },
           { field: "age" }

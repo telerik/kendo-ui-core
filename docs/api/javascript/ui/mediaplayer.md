@@ -18,11 +18,11 @@ If set to `true`, the widget will start playing the video or videos after initia
 
 #### Example - enable automatic play
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
@@ -32,11 +32,11 @@ If set to `true`, the widget will start playing the video or videos after initia
 
 #### Example - enable automatic play
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoRepeat: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
@@ -46,11 +46,11 @@ If set to `false`, the user will be prevented from seeking the video forward.
 
 #### Example - enable fullscreen
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         forwardSeek: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
@@ -60,11 +60,11 @@ If set to `true`, the widget will enter fullscreen mode.
 
 #### Example - enable fullscreen
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         fullScreen: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
@@ -74,10 +74,10 @@ The object which holds the information about the media that will be played by th
 
 #### Example - specify a video
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
@@ -87,21 +87,21 @@ String or an array of objects that hold the URL or URLs of the videos.
 
 #### Example - specify a video
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
 #### Example - specify a video with alternative sources
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         media: {
-            title: "Digital Transformation: A New Way of Thinking",
-            source: [ { quality: "480p", url: "The480pVideoURL" }, { quality: "720p", url: "The720pVideoURL" } ]
+            title: "Kendo UI for jQuery: Welcome and Overview",
+            source: [ { quality: "480p", url: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }, { quality: "720p", url: "https://www.youtube.com/watch?v=UbkbVBNYZMc" } ]
         }
     });
     </script>
@@ -112,10 +112,10 @@ Specifies the title of the media that will be played.
 
 #### Example - specify a video
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
 
@@ -153,7 +153,7 @@ If set to `true`, the video will be played without sound.
 
 #### Example - enable fullscreen
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         mute: true,
@@ -167,7 +167,7 @@ If set to `true`, the option enables the keyboard navigation for the widget.
 
 #### Example - keyboard navigation
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         navigatable: true,
@@ -181,7 +181,7 @@ A value between 0 and 100 that specifies the volume of the video.
 
 #### Example - set volume
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         volume: 50,
@@ -197,19 +197,23 @@ Gets or sets the fullscreen mode of the widget.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div> 
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // check if the media player is currently in fullscreen mode
-    mediaPlayer.fullScreen();
-    // force the widget to enter fullscreen
-    mediaPlayer.fullScreen(true);
-    </script>
+
+    setTimeout(function(){ 
+        // get a reference to the media player widget
+        var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+        // check if the media player is currently in fullscreen mode
+        mediaPlayer.fullScreen();
+        // force the widget to enter fullscreen
+        mediaPlayer.fullScreen(true);
+    }, 1000)    
+
+    </script> 
 
 #### Parameters
 
@@ -227,7 +231,7 @@ Gets or sets the information about the media that is loaded in the widget.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
       $("#mediaplayer").kendoMediaPlayer({
         media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
@@ -259,21 +263,24 @@ The media configuration to load in the MediaPlayer. Accepts the same values as t
 
 Gets or sets a value between 0 and 100 that specifies the volume of the video.
 
-#### Example
-
-    <div id="mediaplayer" />
+```
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // check the current volume of the player
-    mediaPlayer.volume();
-    // sets the current volume to 50
-    mediaPlayer.volume(50);
+    
+    setTimeout(function () {
+        // get a reference to the media player widget
+        var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+        // check the current volume of the player
+        mediaPlayer.volume();
+        // sets the current volume to 50
+        mediaPlayer.volume(50);
+      }, 1000);
     </script>
+```
 
 #### Parameters
 
@@ -291,20 +298,23 @@ The value that indicates whether the player is muted.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+    setTimeout(function () {
+        var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
 
-    // mute the audio
-    mediaPlayer.mute(true);
-    //gets if the player is currently muted
-    mediaPlayer.mute();
-    // unmute the audio
-    mediaPlayer.mute(false);
+        // mute the audio
+        mediaPlayer.mute(true);
+        //gets if the player is currently muted
+        mediaPlayer.mute();
+        // unmute the audio
+        mediaPlayer.mute(false);
+      }, 1000);
     </script>
 
 #### Parameters
@@ -325,19 +335,24 @@ Gets a value indicating whether the media has finished playing.
 
 `Boolean` A value indicating whether the media has finished playing.
 
-#### Example
 
+```
     <div id="mediaplayer" />
     <script>
-    $("#mediaplayer").kendoMediaPlayer({
-        autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
-    });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // check if the video has finished
-    mediaPlayer.isEnded();
+          $("#mediaplayer").kendoMediaPlayer({
+            autoPlay: true,
+            media: {
+              title: "Kendo UI for jQuery: Welcome and Overview",
+              source: "https://www.youtube.com/watch?v=UbkbVBNYZMc",
+            },
+          });
+          setTimeout(function () {
+            var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+            // check if the video has finished
+            console.log(mediaPlayer.isEnded());
+          },1000);         
     </script>
+```
 
 ### isPaused
 
@@ -349,11 +364,11 @@ Gets a value indicating whether the media is paused, stopped, or ended.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     // get a reference to the media player widget
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
@@ -371,16 +386,20 @@ Gets a value indicating whether the media is currently playing.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
-    $("#mediaplayer").kendoMediaPlayer({
-        autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
-    });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // check if the video is playing
-    mediaPlayer.isPlaying();
+          $("#mediaplayer").kendoMediaPlayer({
+            autoPlay: true,
+            media: {
+              title: "Kendo UI for jQuery: Welcome and Overview",
+              source: "https://www.youtube.com/watch?v=UbkbVBNYZMc",
+            },
+          });
+          setTimeout(function () {
+            var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+            // check if the video is playing
+            console.log(mediaPlayer.isPlaying());
+          },1000);
     </script>
 
 ### pause
@@ -389,16 +408,18 @@ Pauses the currently played video.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // pauses the video
-    mediaPlayer.pause();
+    setTimeout(function(){
+        // get a reference to the media player widget
+        var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+        // pauses the video
+        mediaPlayer.pause();        
+    },1000)
     </script>
 
 ### play
@@ -407,15 +428,18 @@ Forces the video to start playing.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // Starts the playing of the video
-    mediaPlayer.play();
+    
+    setTimeout(function () {
+        // get a reference to the media player widget
+        var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+        // Starts the playing of the video
+        mediaPlayer.play();
+    }, 1000);
     </script>
 
 ### seek
@@ -424,16 +448,19 @@ Proceeds the video to a certain time.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
-    // get a reference to the media player widget
-    var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // Starts playing the video at the first second
-    mediaPlayer.seek(1000);
+    setTimeout(function(){
+        // get a reference to the media player widget
+        var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+        // Starts playing the video at the first second
+        mediaPlayer.seek(1000);
+    },1000)
+    
     </script>
 
 #### Parameters
@@ -452,11 +479,11 @@ Stops the currently played video.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     // get a reference to the media player widget
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
@@ -474,11 +501,11 @@ Gets a reference to the title bar.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     // get a reference to the media player widget
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
@@ -496,10 +523,10 @@ Gets a reference to the toolbar.
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     // get a reference to the media player widget
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
@@ -517,11 +544,11 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" },
         end: function(){
             //handle event
         }
@@ -536,11 +563,11 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" },
         pause: function(){
             //handle event
         }
@@ -555,11 +582,11 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" },
         play: function(){
             //handle event
         }
@@ -574,11 +601,11 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" },
         ready: function(){
             //handle event
         }
@@ -593,11 +620,11 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" },
         timeChange: function(){
             //handle event
         }
@@ -612,11 +639,11 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Example
 
-    <div id="mediaplayer" />
+    <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
         autoPlay: true,
-        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" },
         volumeChange: function(){
             //handle event
         }

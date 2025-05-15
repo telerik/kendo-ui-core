@@ -107,7 +107,7 @@ The following example demonstrates how to preserve the Grid state&mdash;filterin
 
             setCookie("employeesState", state, 1);
             if(getCookie('empRows')){
-              $.each(JSON.parse($.cookie('empRows')),function(){
+              $.each(JSON.parse(getCookie('empRows')),function(){
                 var item = dataSource.get(this);
                 var row = grid.tbody.find('[data-uid='+item.uid+']');
                 row.addClass('k-selected');

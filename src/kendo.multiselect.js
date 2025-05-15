@@ -203,7 +203,9 @@ export const __meta__ = {
             size: "medium",
             fillMode: "solid",
             rounded: "medium",
-            label: null
+            label: null,
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
         },
 
         events: [
@@ -310,7 +312,8 @@ export const __meta__ = {
                     "aria-expanded": false,
                     "aria-controls": that.input.attr("aria-controls"),
                     "aria-autocomplete": that.input.attr("aria-autocomplete"),
-                    "aria-describedby": that.input.attr("aria-describedby")
+                    "aria-describedby": that.input.attr("aria-describedby"),
+                    "placeholder": that.options.placeholder,
                 });
 
             that.popup.bind("activate", () => {
@@ -318,7 +321,7 @@ export const __meta__ = {
                 that.filterInput.trigger("focus");
             });
 
-            that.popup.bind("close", () => {
+            that.popup.bind("deactivate", () => {
                 that.input.trigger("focus");
             });
         },
@@ -428,8 +431,14 @@ export const __meta__ = {
         },
 
         _inputFocus: function() {
-            this._placeholder(false, true);
-            this.wrapper.addClass(FOCUSEDCLASS);
+            const that = this;
+            if (that._hasActionSheet()) {
+                that.input.attr("readonly", true);
+            } else if (!that.options.readonly) {
+                that.input.removeAttr("readonly");
+            }
+            that._placeholder(false, true);
+            that.wrapper.addClass(FOCUSEDCLASS);
         },
 
         _inputFocusout: function(e) {

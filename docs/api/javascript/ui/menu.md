@@ -359,7 +359,7 @@ Sets the field of the data item that provides the text of the menu items.
                     Name: "Item 1",
                     UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    imgUrl: imgUrl,
                     description: "some description"
                 }]
             },
@@ -386,7 +386,7 @@ Sets the field of the data item that provides the url of the menu items.
                     Name: "Item 1",
                     UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    imgUrl: imgUrl,
                     description: "some description"
                 }]
             },
@@ -413,7 +413,7 @@ Sets the field of the data item that provides the sprite css class of the menu i
                     Name: "Item 1",
                     UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    imgUrl: imgUrl,
                     description: "some description"
                 }]
             },
@@ -505,7 +505,7 @@ Sets the field of the data item that provides the content of the menu items.
                     Name: "Item 1",
                     UrlPath: "urlPath",
                     Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
+                    imgUrl: imgUrl,
                     description: "some description"
                 }]
             },

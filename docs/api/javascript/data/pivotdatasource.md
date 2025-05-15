@@ -271,8 +271,9 @@ The configuration which is used when the data source discovers the schema inform
 * If the value of `transport.discover` is a string, the data source uses this string as the URL of the remote service.
 * If the value of `transport.discover` is omitted, the data source uses `transport.read` for schema discovery.
 
-#### Example - set the discover remote service
+#### Set the discover remote service
 
+```
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
@@ -293,6 +294,7 @@ The configuration which is used when the data source discovers the schema inform
       console.log(dimensions.length);
     });
     </script>
+```
 
 ### transport.connection `Object`
 

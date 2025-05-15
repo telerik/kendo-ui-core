@@ -40,7 +40,7 @@ The Map accepts a `[Latitude, Longitude]` format for its locations field. When y
           wraparound: false,
           layers: [{
             type: "tile",
-            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
             attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
           }, {

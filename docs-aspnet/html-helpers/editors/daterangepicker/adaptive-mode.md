@@ -24,22 +24,7 @@ The adaptive mode changes the rendering of the DateRangePicker popup element bas
 
 The following example demonstrates how to enable the adaptive mode of the DateRangePicker by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().DateRangePicker()
-        .Name("daterangepicker") 
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .Range(r => r.Start(DateTime.Now).End(DateTime.Now.AddDays(10)))
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-    
-    <kendo-daterangepicker name="daterangepicker" adaptive-mode="AdaptiveMode.Auto">
-        <range start="DateTime.Now" end="DateTime.Now.AddDays(10)"/>
-    </kendo-daterangepicker>
-```
-{% endif %}
+<demo metaUrl="daterangepicker/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

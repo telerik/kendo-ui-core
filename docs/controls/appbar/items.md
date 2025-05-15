@@ -21,6 +21,15 @@ There are two approaches to using templates with **Content Items**:
 The following example shows how to utilize both approaches:
 
 ```dojo
+    <script id="search-template" type="text/x-kendo-tmpl">
+        <span class="k-textbox k-display-flex">
+            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+            <span class="k-input-icon">
+                <span class="k-icon k-i-search"></span>
+            </span>
+        </span>
+    </script>
+    
     <div id="appbar"></div>
 
     <script>
@@ -31,16 +40,7 @@ The following example shows how to utilize both approaches:
                 { template: kendo.template($("#search-template").html()), type: "contentItem" }
             ]
         });
-    </script>
-
-    <script id="search-template" type="text/x-kendo-tmpl">
-        <span class="k-textbox k-display-flex">
-            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
-            <span class="k-input-icon">
-                <span class="k-icon k-i-search"></span>
-            </span>
-        </span>
-    </script>
+    </script>    
 ```
 
 ## Spacer

@@ -169,7 +169,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
                 landscape: true
             });
         })
-        .done(function(data) {
+        .done(function(dataURI) {
             //Extracting the base64-encoded string and the contentType
             var data = {};
             var parts = dataURI.split(";base64,");

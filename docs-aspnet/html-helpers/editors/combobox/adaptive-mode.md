@@ -24,39 +24,7 @@ The adaptive mode changes the rendering of the ComboBox popup element based on t
 
 The following example demonstrates how to enable the adaptive mode of the ComboBox by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().ComboBox()
-        .Name("combobox")
-        .DataTextField("ProductName")
-        .DataValueField("ProductID")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .Filter(FilterType.StartsWith)
-        .DataSource(source =>
-        {
-            source.Read(read =>
-            {
-                read.Action("Products_Read", "ComboBox");
-            });
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-combobox name="combobox"
-        adaptive-mode="AdaptiveMode.Auto"
-        datatextfield="ProductName"
-        datavaluefield="ProductID"
-        filter="FilterType.StartsWith">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("Products_Read", "ComboBox")" />
-            </transport>
-        </datasource>
-    </kendo-combobox>
-```
-{% endif %}
+<demo metaUrl="combobox/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

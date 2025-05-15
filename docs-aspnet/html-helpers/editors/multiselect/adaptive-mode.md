@@ -24,38 +24,7 @@ The adaptive mode changes the rendering of the MultiSelect popup element based o
 
 The following example demonstrates how to enable the adaptive mode of the MultiSelect by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().MultiSelect()
-        .Name("multiSelect")
-        .DataTextField("ProductName")
-        .DataValueField("ProductID")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .DataSource(source =>
-        {
-            source.Read(read =>
-            {
-                read.Action("GetProducts", "Home");
-            })
-            .ServerFiltering(true);
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-multiselect name="multiSelect"
-        adaptive-mode="AdaptiveMode.Auto"
-        datatextfield="ProductName"
-        datavaluefield="ProductID">
-       <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
-           <transport>
-                <read url="@Url.Action("GetProducts", "Home")" />
-           </transport>
-       </datasource>
-    </kendo-multiselect>
-```
-{% endif %}
+<demo metaUrl="multiselect/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

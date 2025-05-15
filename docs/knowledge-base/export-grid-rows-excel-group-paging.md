@@ -24,7 +24,8 @@ However, there is a workaround available that allows you to export a group-paged
 
 The example below demonstrates how to achieve the desired scenario.
 
-```dojo
+```
+ <script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.aspnetmvc.min.js"></script>
  <div id="grid"></div>
     <script>
       $(document).ready(function () {

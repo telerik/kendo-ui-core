@@ -20,6 +20,14 @@ the DOM.
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
+
 ### buttons `Boolean` *(default: true)*
 
 Specifies whether the widget should display the Apply / Cancel buttons.
@@ -314,10 +322,6 @@ Allows customization of the rgb's alpha input's aria-label in the Gradient's inp
 ### messages.hex `String` *(default: "HEX")*
 
 Allows customization of the hex input's aria-label in the Gradient's input editor.
-
-### messages.adaptiveTitle `String` *(default: "Choose Color")*
-
-Allows customization of the title's text in the adaptive view of the component.
 
 ### palette `String|Array` *(default: null)*
 

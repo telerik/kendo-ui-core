@@ -1506,7 +1506,7 @@ The loaded content element
     </ul>
     <script>
         // get a reference to the panel bar
-        var panelBar = $("#panelbar").data("kendoPanelBar");
+        var panelBar = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
         // bind the contentLoad event
         panelBar.bind("contentLoad", function(e) {
             // handle event

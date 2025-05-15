@@ -29,7 +29,7 @@ The following example demonstrates the `none` selection mode.
                 { label: 'Three' }
             ]
         });
-    </
+    </script>
 ```
 
 ## Single Selection

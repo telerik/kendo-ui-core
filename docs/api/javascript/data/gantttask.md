@@ -80,7 +80,7 @@ The `id` of the parent task. Required for child tasks.
 #### Example - create a child task
 
     <script>
-    var parent = new kendo.data.GanttTask({
+    var parentTask = new kendo.data.GanttTask({
         id: 1,
         title: "Parent",
         summary: true,
@@ -103,7 +103,7 @@ The completion percentage of the task. A value between 0 and 1 representing how 
 #### Example - set the percentComplete of a task
 
     <script>
-    var parent = new kendo.data.GanttTask({
+    var parentTask = new kendo.data.GanttTask({
         id: 1,
         title: "Parent",
         percentComplete: 0.55,
@@ -271,7 +271,7 @@ The `id` of the parent task.
 #### Example - get the parentId field of a task
 
     <script>
-    var parent = new kendo.data.GanttTask({
+    var parentTask = new kendo.data.GanttTask({
         id: 1,
         title: "Parent",
         summary: true,
@@ -296,7 +296,7 @@ The completion percentage of the task.
 #### Example - get the percentComplete field of a task
 
     <script>
-    var parent = new kendo.data.GanttTask({
+    var parentTask = new kendo.data.GanttTask({
         id: 1,
         title: "Parent",
         percentComplete: 0.55,
@@ -304,7 +304,7 @@ The completion percentage of the task.
         end: new Date("2014/6/17 11:00")
     });
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(parent.percentComplete); // outputs "0.55"
+    console.log(parentTask.percentComplete); // outputs "0.55"
     </script>
 
 ### start `Date`

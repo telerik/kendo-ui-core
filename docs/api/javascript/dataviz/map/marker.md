@@ -48,7 +48,7 @@ will disable all animations in the widget.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -267,7 +267,7 @@ By default the tooltip will display the target element title attribute content.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -319,7 +319,7 @@ The height (in pixels) of the tooltip.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -345,7 +345,7 @@ The width (in pixels) of the tooltip.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -371,7 +371,7 @@ The position relative to the target element, at which the tooltip will be shown.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -397,7 +397,7 @@ Specify the delay in milliseconds before the tooltip is shown. This option is ig
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [

@@ -45,7 +45,7 @@ Your AngularJS project might require you to hide Grid columns and sub-columns by
 
 The following example demonstrates how to achieve this behavior.
 
-```dojo
+```
 <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="grid" k-options="gridOptions"></div>

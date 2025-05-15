@@ -20,6 +20,45 @@ describe("kendo.ui.ActionSheet initialization", function() {
             ]
         }, options));
     }
+
+    function createInstanceWithViews(options, viewsConfig) {
+        if (!viewsConfig) {
+            viewsConfig = [];
+        }
+
+        instance = new ActionSheet(div, $.extend(true, {}, {
+            views: [
+                {
+                    title: "Some title",
+                    items: [
+                        {
+                            title: 'first item'
+                        },
+                        {
+                            title: 'second item',
+                            disabled: true
+                        }
+                    ],
+                    ...viewsConfig[0]
+                },
+                {
+                    title: "Some title",
+                    actionButtons: [
+                        {
+                            text: "Cancel",
+                            icon: "x"
+                        },
+                        {
+                            text: "Save",
+                            icon: "check",
+                            primary: true
+                        }
+                    ],
+                    ...viewsConfig[1]
+                },
+            ],
+        }, options));
+    }
     beforeEach(function() {
         div = $("<div style='color:green'></div>").appendTo(Mocha.fixture);
 
@@ -36,6 +75,111 @@ describe("kendo.ui.ActionSheet initialization", function() {
         assert.isOk(instance.element.parents('.k-actionsheet-container').length);
     });
 
+    it("widget should render a actionsheet views", function() {
+        createInstanceWithViews();
+
+        instance.open();
+        assert.isOk(instance.element.children(".k-actionsheet-view").length === 2);
+    });
+
+    it("actionsheet view renders with items", function() {
+        createInstanceWithViews();
+
+        instance.open();
+        const viewWithItems = instance._hasItems();
+
+        assert.isOk(viewWithItems.wrapper.find(".k-actionsheet-item").length === 2);
+    });
+
+    it("actionsheet view renders with actionButtons", function() {
+        createInstanceWithViews();
+
+        instance.open();
+        const viewWithActionButtons = instance.views[1];
+
+        assert.isOk(viewWithActionButtons.wrapper.find("[ref-actionsheet-action-button]").length === 2);
+    });
+
+    it("each actionsheet view has title", function() {
+        createInstanceWithViews();
+
+        instance.open();
+
+        const headers = instance._header;
+
+        assert.isOk(headers.length === 2);
+        assert.isOk(headers[0].text() === "Some title");
+        assert.isOk(headers[1].text() === "Some title");
+    });
+
+    it("each actionsheet view has footer", function() {
+        createInstanceWithViews({}, [{
+            footerTemplate: () => document.createTextNode("Some footer")
+        }, {
+            actionButtons: [],
+            footerTemplate: () => document.createTextNode("Some footer")
+        }]);
+
+        instance.open();
+
+        const footers = instance._footer;
+
+        assert.isOk(footers.length === 2);
+        assert.isOk(footers[0].text() === "Some footer");
+        assert.isOk(footers[1].text() === "Some footer");
+    });
+
+    it("each actionsheet view has content", function() {
+        createInstanceWithViews({}, [{
+            items: [],
+            contentTemplate: () => document.createTextNode("Some content")
+        }, {
+            contentTemplate: () => document.createTextNode("Some content")
+        }]);
+
+        instance.open();
+
+        const contents = instance._content;
+
+        assert.isOk(contents.length === 2);
+        assert.isOk(contents[0].text() === "Some content");
+        assert.isOk(contents[1].text() === "Some content");
+    });
+
+    it("actionsheet addView()", function() {
+        createInstance();
+
+        assert.isOk(instance.views.length === 1);
+
+        instance._addView({
+            title: "Some title",
+            contentTemplate: () => document.createTextNode("Some content"),
+            actionButtons: [
+                {
+                    text: "Cancel",
+                    icon: "x"
+                },
+                {
+                    text: "Save",
+                    icon: "check",
+                    primary: true
+                }
+            ]
+        });
+
+        assert.isOk(instance.views.length === 2);
+    });
+
+    it("actionsheet removeView()", function() {
+        createInstanceWithViews();
+
+        assert.isOk(instance.views.length === 2);
+
+        instance._removeView(instance.views[1]);
+
+        assert.isOk(instance.views.length === 1);
+    });
+
     it("widget should have an overlay element", function() {
         createInstance();
         assert.isOk(instance.element.parent().find('.k-overlay').length);
@@ -43,11 +187,11 @@ describe("kendo.ui.ActionSheet initialization", function() {
 
     it("widget should add default values to missing item settings", function() {
         createInstance();
-        assert.isOk(instance.options.items[0].group === "top");
-        assert.isOk(instance.options.items[0].description === "");
-        assert.isOk(instance.options.items[0].click === $.noop);
-        assert.isOk(instance.options.items[0].iconClass === "");
-        assert.isOk(instance.options.items[0].title === "first item");
+        assert.isOk(instance.views[0].options.items[0].group === "top");
+        assert.isOk(instance.views[0].options.items[0].description === "");
+        assert.isOk(instance.views[0].options.items[0].click === $.noop);
+        assert.isOk(instance.views[0].options.items[0].iconClass === "");
+        assert.isOk(instance.views[0].options.items[0].title === "first item");
     });
 
     it("widget should instanciate a popup", function() {

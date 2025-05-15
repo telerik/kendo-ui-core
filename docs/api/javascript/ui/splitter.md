@@ -104,14 +104,18 @@ Specifies the URL from which to load the content of a pane.
 
 #### Example
 
+    <base href="https://demos.telerik.com/kendo-ui/panelbar/ajax" />
     <div id="splitter">
       <div>Pane A</div>
       <div></div>
     </div>
     <script>
-    $("#splitter").kendoSplitter({
-      panes: [ {}, { contentUrl: "https://www.telerik.com/" } ]
-    });
+      $("#splitter").kendoSplitter({
+        panes: [
+          {},
+          { contentUrl: "../content/web/panelbar/ajax/ajaxContent1.html" },
+        ],
+      });
     </script>
 
 ### panes.label `String`
@@ -267,20 +271,21 @@ Any data that is necessary to be sent to the server.
 
 #### Example
 
-    <div id="splitter">
-      <div id="pane1">Pane A</div>
-      <div>Pane B</div>
-    </div>
-    <script>
+  <base href="https://demos.telerik.com/kendo-ui/panelbar/ajax" />
+  <div id="splitter">
+    <div id="pane1">Pane A</div>
+    <div>Pane B</div>
+  </div>
+  <script>
     $("#splitter").kendoSplitter();
     var splitter = $("#splitter").data("kendoSplitter");
 
     // load a complete page in the last pane
-    splitter.ajaxRequest(".k-pane:last", "https://www.telerik.com");
+    splitter.ajaxRequest(".k-pane:last", "../content/web/panelbar/ajax/ajaxContent1.html");
 
-    // load content into the pane with ID="pane1"
-    splitter.ajaxRequest("#pane1", "/customer/profile", { id: 42 });
-    </script>
+    // example of loading content into the pane with ID="pane1"
+    //splitter.ajaxRequest("#pane1", "/customer/profile", { id: 42 });
+  </script>
 
 ### append
 

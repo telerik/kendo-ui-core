@@ -12,6 +12,33 @@ Represents the Kendo UI Grid widget. Inherits from [Widget](/api/javascript/ui/w
 
 ## Configuration
 
+### adaptiveMode `String` *(default: 'none')*
+
+If set to `auto` and the grid will use adaptive rendering.
+
+#### Example - enable adaptive rendering auto detect
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       filterable: true,
+       columnMenu: {
+         componentType: "modern"
+       },
+       adaptiveMode: "auto",
+       height: 550
+    });
+    </script>
+
 ### allowCopy `Boolean|Object` *(default: false)*
 
 If set to `true` and selection of the Grid is enabled, the user could copy the selection into the clipboard and paste it into Excel or other similar programs that understand TSV/CSV formats. By default allowCopy is disabled and the default format is TSV.
@@ -3244,6 +3271,38 @@ Can be set to a JavaScript object which represents the column menu configuration
     </script>
 
 > Check [Column menu](https://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
+
+### columnMenu.adaptiveMode `String` *(default: 'none')*
+
+If set to `auto` and the filterMenu will use adaptive rendering.
+
+> The Adaptive Rendering of the Column Menu is available only for `modern`[componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype)
+
+#### Example - enable adaptive rendering
+
+
+    <div id="grid"></div>
+    <script type="module">
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       filterable: true,
+       columnMenu: {
+        componentType: "modern",
+        adaptiveMode: "auto",
+       },
+       adaptiveMode: "none",
+       height: 550
+    });
+    </script>
+
 
 ### columnMenu.autoSize `Boolean` *(default: false)*
 
@@ -10240,6 +10299,12 @@ The "columns" command generates a button to open a [global columns menu]({% slug
 
 The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
 
+The "sort" command enables the user to use the sorting functionallity of the grid.
+
+The "filter" command enables the user to use the filtering functionallity of the grid.
+
+The "columnChooser" command enables the user to change the visibillity of the grid's columns.
+
 * If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
   * `items` - an array of commands as explained above
   * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
@@ -10387,7 +10452,16 @@ Apart from the built-in tools, the Grid fully exposes the [ToolBar.items API](/a
 An array collection of items to be rendered in the toolbar. Each item will be treated as the list of commands displayed in the grid's Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").
 
 - The "cancel" built-in command reverts any data changes done by the end user.
+
 - The "create" command adds an empty data item to the grid.
+
+- The "canceledit" command cancels the changes to the dataItem that is being currenly edited.
+
+- The "update" command save the changes to the dataItem that is being currenly edited.
+
+- The "destroy" command removes the selected item. To work as expected, the grid should be [selectable](/api/javascript/ui/grid/configuration/selectable). If multiple selection is enabled, the item which will be remoed is the last selected one.
+
+- The "edit" command triggers the edit state of currently selected item. To work as expected, the grid should be [selectable](/api/javascript/ui/grid/configuration/selectable). If multiple selection is enabled, the item which will be edited is the last selected one.
 
 - The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/javascript/ui/grid/events/savechanges) grid event.
 
@@ -10402,6 +10476,14 @@ An array collection of items to be rendered in the toolbar. Each item will be tr
 - The "columns" command generates a button to open a [global columns menu]({% slug columnmenu_kendoui_grid_widget %}).
 
 - The "paste" command enables the user to switch between the "replace" and "insert" modes of the paste functionality. The [`allowPaste`](/api/javascript/ui/grid/configuration/allowpaste) configuration must enabled for the dropdown to appear.
+
+- The "sort" command enables the user to use the sorting functionallity of the grid.
+
+- The "filter" command enables the user to use the filtering functionallity of the grid.
+
+- The "group" command enables the user to use the grouping functionallity of the grid.
+
+- The "columnChooser" command enables the user to change the visibillity of the grid's columns.
 
 ### toolbar.items.iconClass `String`
 
@@ -10426,6 +10508,12 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 ### toolbar.items.text `String`
 
 The text displayed by the command button. If not set the [name](toolbar.name) option would be used as the button text instead.
+
+### toolbar.items.clearButton `boolean`
+
+Show a clear all sorts or clear all filters button.
+
+> Only applicable for Sort,Filter, and Group tools.
 
 ### toolbar.iconClass `String`
 
@@ -10473,6 +10561,7 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+> The new Sort, Filter, ColumnChooser tools will not work as expected with the `menu` option. Currently these tools are not supported by the overflow menu. It is recomended to use the `scroll` options when using any of these tools.
 
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
@@ -10530,6 +10619,10 @@ This class can be used to obtain reference to the button after Grid initializati
         // handler body
     });
     </script>
+
+### toolbar.showInactiveTools `boolean`
+
+If set to true, the toolbar will show the inactive tools in a disabled state. Otherwise the tools will be hidden.
 
 ### toolbar.template `String|Function`
 
@@ -12071,26 +12164,27 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example - remove the first table row
 
+    <button id="btn">Remove Row</button>
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
-        }
-      },
-      editable: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.removeRow("tr:eq(1)");
+      $("#grid").kendoGrid({
+        columns: [{ field: "name" }, { field: "age" }],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 },
+          ],
+          schema: {
+            model: { id: "id" },
+          },
+        },
+        editable: true,
+      });
+
+      $("#btn").on("click", function () {
+        var grid = $("#grid").data("kendoGrid");
+        grid.removeRow("tr:eq(1)");
+      });
     </script>
 
 #### Example - remove the selected table row

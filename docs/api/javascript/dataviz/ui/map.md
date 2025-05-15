@@ -27,7 +27,7 @@ The map center. Coordinates are listed as `[Latitude, Longitude]`.
             zoom: 3,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -47,7 +47,7 @@ The configuration of built-in map controls.
             },
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -66,7 +66,7 @@ Configures or disables the built-in attribution control.
             },
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -111,7 +111,7 @@ Configures or disables the built-in navigator control (directional pad).
             },
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -156,7 +156,7 @@ Configures or disables the built-in zoom control (+/- button).
             },
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -203,7 +203,7 @@ The default configuration for map layers by type.
             },
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -2032,7 +2032,7 @@ The attribution for the layer. Accepts valid HTML.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -2161,7 +2161,7 @@ If not specified, the layer is always visible.
             zoom: 12,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"]
             }, {
                 extent: [
@@ -2890,13 +2890,13 @@ The maximum zoom level at which to show this layer.
             zoom: 14,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
                 maxZoom: 13
             }, {
                 minZoom: 14,
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"]
             }]
         });
@@ -2914,13 +2914,13 @@ The minimum zoom level at which to show this layer.
             zoom: 14,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
                 maxZoom: 13
             }, {
                 minZoom: 14,
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"]
             }]
         });
@@ -2937,7 +2937,7 @@ The the opacity for the layer.
             layers: [{
                 type: "tile",
                 opacity: 0.5,
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
                 attribution: "&copy; OpenStreetMap"
             }]
@@ -2955,7 +2955,7 @@ Alternating between different subdomains allows more requests to be executed in 
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
                 attribution: "&copy; OpenStreetMap"
             }]
@@ -3013,7 +3013,7 @@ The layer type. Supported types are:
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -3314,7 +3314,7 @@ The URL template for tile layers. Template variables:
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 subdomains: ["a", "b", "c"],
                 attribution: "&copy; OpenStreetMap"
             }]
@@ -3358,7 +3358,7 @@ Layers are normally stacked in declaration order (last one is on top).
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap",
           zIndex: 1
         }, {
@@ -3387,7 +3387,7 @@ The default options for all markers.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markerDefaults: {
@@ -3417,7 +3417,7 @@ For example "pinTarget" is rendered as "k-marker-pin-target".
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markerDefaults: {
@@ -4040,7 +4040,7 @@ Static markers to display on the map.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4061,7 +4061,7 @@ The marker location on the map. Coordinates are listed as `[Latitude, Longitude]
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markerDefaults: {
@@ -4089,7 +4089,7 @@ For example "pinTarget" is rendered as "k-marker-pin-target".
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4109,7 +4109,7 @@ The marker title. Displayed as browser tooltip.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4134,7 +4134,7 @@ Specifies if the tooltip will be hidden when mouse leaves the target element. If
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4158,7 +4158,7 @@ will disable all animations in the widget.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4345,7 +4345,7 @@ By default the tooltip will display the target element title attribute content.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4425,7 +4425,7 @@ The fields which can be used in the template are:
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4447,7 +4447,7 @@ Specifies if the tooltip callout will be displayed.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4470,7 +4470,7 @@ Explicitly states whether content iframe should be created.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4497,7 +4497,7 @@ The height (in pixels) of the tooltip.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4520,7 +4520,7 @@ The width (in pixels) of the tooltip.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4543,7 +4543,7 @@ The position relative to the target element, at which the tooltip will be shown.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4566,7 +4566,7 @@ Specify the delay in milliseconds before the tooltip is shown. This option is ig
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4590,7 +4590,7 @@ The event on which the tooltip will be shown. Predefined values are "mouseenter"
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             markers: [{
@@ -4616,7 +4616,7 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             minZoom: 3,
@@ -4637,7 +4637,7 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             maxZoom: 10,
@@ -4667,7 +4667,7 @@ Controls whether the user can pan the map.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             center: [32.7758, -96.7966],
@@ -4686,7 +4686,7 @@ Specifies whether the map should wrap around the east-west edges.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             wraparound: false
@@ -4709,7 +4709,7 @@ The map size is derived from the zoom level and minScale options: `size = (2 ^ z
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             center: [32.7758, -96.7966],
@@ -4727,7 +4727,7 @@ Controls whether the map zoom level can be changed by the user.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             center: [32.7758, -96.7966],
@@ -4760,7 +4760,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4781,7 +4781,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4823,7 +4823,7 @@ The DOM or jQuery mouse event.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4858,7 +4858,7 @@ The DOM or jQuery mouse event.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4891,7 +4891,7 @@ The DOM or jQuery mouse event.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4941,7 +4941,7 @@ The DOM or jQuery mouse event.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4974,7 +4974,7 @@ The new extent of the map.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -4992,9 +4992,9 @@ The new extent of the map.
           zoom: 4,
           layers: [{
             type: "tile",
-            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "© <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: "© <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
           }]
         });
 
@@ -5033,7 +5033,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             zoom: 1,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5052,7 +5052,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             zoom: 1,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5091,7 +5091,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             zoom: 1,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5110,7 +5110,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             zoom: 1,
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5146,7 +5146,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5166,7 +5166,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5192,7 +5192,7 @@ Adjusts the widget layout to match the size of the container.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5224,7 +5224,7 @@ The new options to be applied.
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5251,7 +5251,7 @@ Retrieves the size of the visible portion of the map.
             zoom: 1, // Layer size is 512px (2^1 * 256)
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5290,7 +5290,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5310,7 +5310,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5345,7 +5345,7 @@ The new zoom level. The value is clamped to the
         $("#map").kendoMap({
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             center: [32.7758, -96.7966]
@@ -5395,7 +5395,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             click: function(e) {
@@ -5417,7 +5417,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5592,7 +5592,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             pan: function(e) {
@@ -5652,7 +5652,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             panEnd: function(e) {
@@ -5670,7 +5670,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5701,7 +5701,7 @@ The source widget instance.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             reset: function() {
@@ -5719,7 +5719,7 @@ The source widget instance.
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -5761,7 +5761,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             shapeClick: function() {
@@ -5779,7 +5779,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -6172,7 +6172,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomStart: function() {
@@ -6190,7 +6190,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });
@@ -6210,7 +6210,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomStart: function(e) {
@@ -6241,7 +6241,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomEnd: function(e) {
@@ -6259,7 +6259,7 @@ The source jQuery event instance
             center: [0, 0],
             layers: [{
                 type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                 attribution: "&copy; OpenStreetMap"
             }]
         });

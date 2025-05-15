@@ -1526,8 +1526,8 @@ Checks whether the actionsheet is visible
     <div id="actionsheet">CONTENT</div>
     <script>
         var actionsheet = $("#actionsheet").kendoActionSheet().data("kendoActionSheet");
-
-        alert(actionsheet.visible());
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(actionsheet.visible());
     </script>
 
 ## Events

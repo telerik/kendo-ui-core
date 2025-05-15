@@ -586,7 +586,7 @@ Forces the selected state to the specified one.
         }).data("kendoBottomNavigation");
 
         bottomNav.select(bottomNav.item(0));
-        alert(bottomNav.select().text());
+        console.log(bottomNav.select().text());
     </script>
 
 ### showText

@@ -42,10 +42,10 @@ The marker layer is added to the Map when the Map is initialized. To filter the 
                 zoom: 15,
                 layers: [{
                     type: "tile",
-                    urlTemplate: "http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                    urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                     subdomains: ["a", "b", "c"],
-                    attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>." +
-                                 "Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>"
+                    attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>." +
+                    "Tiles courtesy of <a href='https://www.opencyclemap.org/'>Andy Allan</a>"
                 }, {
                     type: "marker",
                     dataSource: {

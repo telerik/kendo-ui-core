@@ -1584,7 +1584,8 @@ A promise that will be resolved when the export completes.
     <script>
     $("#pivotgrid").kendoPivotGridV2({
         pdfExport: function(e) {
-            alert("PDF export");
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("PDF export");
         },
         height: 550,
         dataSource: {
@@ -1627,7 +1628,8 @@ A promise that will be resolved when the export completes.
     });
     var pivotgrid = $("#pivotgrid").data("kendoPivotGridV2");
     pivotgrid.bind("pdfExport", function(e) {
-        alert("PDF export");
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("PDF export");
     });
     pivotgrid.saveAsPDF();
     </script>

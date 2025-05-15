@@ -16,6 +16,13 @@ Represents the Kendo UI TimePicker. Inherits from [Widget](/api/javascript/ui/wi
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+### adaptiveTitle `String`
+
+Allows customization of the title's text in the adaptive view of the component.
+
+### adaptiveSubtitle `String`
+
+Allows customization of the subtitle's text in the adaptive view of the component.
 
 ### animation `Boolean|Object`
 

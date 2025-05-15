@@ -24,50 +24,7 @@ The adaptive mode changes the rendering of the MultiColumnComboBox popup element
 
 The following example demonstrates how to enable the adaptive mode of the MultiColumnComboBox by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().MultiColumnComboBox()
-        .Name("products")
-        .DataTextField("ProductName")
-        .DataValueField("ProductID")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .Columns(columns =>
-        {
-            columns.Add().Field("ProductName").Title("Name");
-            columns.Add().Field("ProductID").Title("ID");
-        })
-        .HtmlAttributes(new { style = "width:100%;" })
-        .DataSource(source =>
-        {
-            source.Read(read =>
-            {
-                read.Action("AdaptiveMode_GetProducts", "MultiColumnComboBox");
-            });
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-multicolumncombobox name="products"
-        datatextfield="ProductName"
-        datavaluefield="ProductID"
-        adaptive-mode="AdaptiveMode.Auto"
-        style="width:100%;">
-        <multicolumncombobox-columns>
-            <column field="ProductName" title="Name">
-            </column>
-            <column field="ProductID" title="ID">
-            </column>
-        </multicolumncombobox-columns>
-        <datasource>
-            <transport>
-                <read url="@Url.Action("AdaptiveMode_GetProducts", "MultiColumnComboBox")" />
-            </transport>
-        </datasource>
-    </kendo-multicolumncombobox>
-```
-{% endif %}
+<demo metaUrl="multicolumncombobox/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

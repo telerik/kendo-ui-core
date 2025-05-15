@@ -31,21 +31,22 @@ The timezone.
 #### Example
 
     <script>
-        // include kendo.timezones.js
-        var version = kendo.version;
-      
-        $('<script/>', { 
-            type:'text/javascript', 
-            src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
-        }).appendTo('head');
-    </script>
+      var version = kendo.version;
 
-    <script>
-        var targetDate = new Date(2016,10,5,15,25,11);
-        var timeZoneOffset = kendo.timezone.offset(targetDate,"Europe/Sofia");
+      $.getScript(
+        "https://kendo.cdn.telerik.com/" +
+          version +
+          "/js/kendo.timezones.min.js",
+        loadExample,
+      );
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+      function loadExample() {
+        var targetDate = new Date(2016, 10, 5, 15, 25, 11);
+        var timeZoneOffset = kendo.timezone.offset(targetDate, "Europe/Sofia");
+
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(timeZoneOffset); //-120
+      }
     </script>
 
 ### convert
@@ -73,24 +74,29 @@ The `'to'` offset represented as minutes (that is, the `Number` type) or timezon
 #### Example
 
     <script>
-        // include kendo.timezones.js
-        var version = kendo.version;
-      
-        $('<script/>', { 
-            type:'text/javascript', 
-            src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
-        }).appendTo('head');
-    </script>
+      var version = kendo.version;
 
-    <script>
-        var targetDate = new Date(2016,10,5,15,25,11);
-        var convertedDate1 = kendo.timezone.convert(targetDate, "Etc/GMT+2", "Etc/GMT-6");
+      $.getScript(
+        "https://kendo.cdn.telerik.com/" +
+          version +
+          "/js/kendo.timezones.min.js",
+        loadExample,
+      );
+
+      function loadExample() {
+        var targetDate = new Date(2016, 10, 5, 15, 25, 11);
+        var convertedDate1 = kendo.timezone.convert(
+          targetDate,
+          "Etc/GMT+2",
+          "Etc/GMT-6",
+        );
         var convertedDate2 = kendo.timezone.convert(targetDate, 120, -360);
-        
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate1); // Sat Nov 05 2016 23:25:11 GMT+0200 (FLE Standard Time);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate2); // Sat Nov 05 2016 23:25:11 GMT+0200 (FLE Standard Time);
+      }
     </script>
 
 ### apply
@@ -113,26 +119,27 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
 
 #### Example
 
-    <script>
-        // include kendo.timezones.js
-        var version = kendo.version;
-      
-        $('<script/>', { 
-            type:'text/javascript', 
-            src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
-        }).appendTo('head');
-    </script>
+<script>
+      var version = kendo.version;
 
-    <script>
-        var targetDate = new Date(2016,10,5,15,25,11);
+      $.getScript(
+        "https://kendo.cdn.telerik.com/" +
+          version +
+          "/js/kendo.timezones.min.js",
+        loadExample,
+      );
+
+      function loadExample() {
+        var targetDate = new Date(2016, 10, 5, 15, 25, 11);
         var convertedDate1 = kendo.timezone.apply(targetDate, "Etc/GMT-6");
         var convertedDate2 = kendo.timezone.apply(targetDate, -360);
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate1); // Sat Nov 05 2016 23:25:11 GMT+0200 (FLE Standard Time);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate2); // Sat Nov 05 2016 23:25:11 GMT+0200 (FLE Standard Time);
-    </script>
+      }
+</script>
 
 ### remove
 
@@ -154,25 +161,26 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
 
 #### Example
 
-    <script>
-        // include kendo.timezones.js
-        var version = kendo.version;
-      
-        $('<script/>', { 
-            type:'text/javascript', 
-            src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
-        }).appendTo('head');
-    </script>
+   <script>
+      var version = kendo.version;
 
-    <script>
-        var targetDate = new Date(2016,10,5,15,25,11);
+      $.getScript(
+        "https://kendo.cdn.telerik.com/" +
+          version +
+          "/js/kendo.timezones.min.js",
+        loadExample,
+      );
+
+      function loadExample() {
+        var targetDate = new Date(2016, 10, 5, 15, 25, 11);
         var convertedDate1 = kendo.timezone.remove(targetDate, "Etc/GMT-6");
         var convertedDate2 = kendo.timezone.remove(targetDate, -360);
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate1); // Sat Nov 05 2016 11:25:11 GMT+0200 (FLE Standard Time);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate2); // Sat Nov 05 2016 11:25:11 GMT+0200 (FLE Standard Time);
+      }
     </script>
 
 ### abbr
@@ -195,21 +203,22 @@ The name of the particular timezone that will be used to get the abbreviation of
 
 #### Example
 
-    <script>
-        // include kendo.timezones.js
-        var version = kendo.version;
-      
-        $('<script/>', { 
-            type:'text/javascript', 
-            src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
-        }).appendTo('head');
-    </script>
+     <script>
+      var version = kendo.version;
 
-    <script>
-        var targetDate = new Date(2016,10,5,15,25,11);
-        var abbr = kendo.timezone.abbr(targetDate, "Europe/Sofia");
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+      $.getScript(
+        "https://kendo.cdn.telerik.com/" +
+          version +
+          "/js/kendo.timezones.min.js",
+        loadExample,
+      );
+
+      function loadExample() {
+        var targetDate = new Date(2016, 10, 5, 15, 25, 11);
+        var abbr = kendo.timezone.abbr(targetDate, "Europe/Rome");
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(abbr); // EET
+      }
     </script>
 
 ### toLocalDate

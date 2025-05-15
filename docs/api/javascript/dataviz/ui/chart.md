@@ -88,7 +88,7 @@ The crosshair configuration options.
         { type: "column", data: [[1, 2], [3, 4], [4, 5]] }
       ]
     });
-</script>
+    </script>
 
 ### axisDefaults.crosshair.color `String`
 

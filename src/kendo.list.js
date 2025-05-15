@@ -308,7 +308,7 @@ export const __meta__ = {
             if (this._isFilterEnabled()) {
                 this.filterInput = $('<input class="k-input-inner" type="text" />')
                     .attr({
-                        placeholder: this.element.attr("placeholder"),
+                        placeholder: this.element.attr("placeholder") || "Filter",
                         title: this.options.filterTitle || this.element.attr("title"),
                         role: "searchbox",
                         "aria-label": this.options.filterTitle,
@@ -1229,6 +1229,14 @@ export const __meta__ = {
 
         _createPopup: function() {
             var list = this;
+            if (list._unboundClick) {
+                if (list.input) {
+                    list.input.off(CLICK);
+                } else if (list.element) {
+                    list.element.off(CLICK);
+                }
+                list._unboundClick = false;
+            }
 
             if (list.popup) {
                 list._cachedFilterValue = list.filterInput ? list.filterInput.val() : null;
@@ -1285,12 +1293,12 @@ export const __meta__ = {
                 `<div class="k-text-center k-actionsheet-titlebar" >` +
                         '<div class="k-actionsheet-titlebar-group k-hbox">' +
                             `<div  class="k-actionsheet-title">` +
-                                (list.options.label ? `<div class="k-text-center">${list.options.label}</div>` : '') +
-                                (list.options.placeholder ? `<div class="k-actionsheet-subtitle k-text-center">${list.options.placeholder || ""}</div>` : "") +
+                                (list.options.adaptiveTitle || list.options.label ? `<div class="k-text-center">${list.options.adaptiveTitle || list.options.label}</div>` : '') +
+                                (list.options.adaptiveSubtitle ? `<div class="k-actionsheet-subtitle k-text-center">${list.options.adaptiveSubtitle || ""}</div>` : "") +
                             '</div>' +
                             (options.closeButton ?
                             '<div class="k-actionsheet-actions">' +
-                                kendo.html.renderButton(`<button tabindex="-1" ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "x", fillMode: "flat", size: "large" }) +
+                                kendo.html.renderButton(`<button tabindex="-1" ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "check", fillMode: "flat", size: "large", themeColor: 'primary' }) +
                             '</div>'
                             : "") +
                         '</div>' +

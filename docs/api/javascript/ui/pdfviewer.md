@@ -31,6 +31,28 @@ Specifies the PDF.JS configuration options. Including `pdfjs` is mandatory.
         });
     </script>
 
+### pdfjsProcessing.renderForms `Boolean` *(default: false)*
+
+Enables form filling capabilities by rendering widgets such as:
+
+* TextBox
+* CheckBox
+* DropDown
+* RadioButton
+* Button
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+            renderForms: true,
+            file: ""
+        }
+    });
+    </script>
+
 ### pdfjsProcessing.file `Object | String` *default: ""*
 
 Specifies the default file to be displayed.
@@ -110,7 +132,7 @@ Specifies the DPL configuration options. For a complete demo and a backend imple
 #### Example
 
     <div id="pdfviewer"></div>
-    <script>
+    <script type="module">
         $("#pdfviewer").kendoPDFViewer({
             dplProcessing: {
                 read: {

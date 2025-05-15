@@ -39,7 +39,7 @@ To simulate the layout of the week view, implement a **More Events** button simi
             selectedDateFormat: "{0:D} - {1:D}",
             selectedShortDateFormat: "{0:d} - {1:d}"
         },
-        name: "my-week",
+        name: "MyWeekView",
         calculateDateRange: function () {
             var selectedDate = this.options.date,
                 start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
@@ -107,7 +107,7 @@ To simulate the layout of the week view, implement a **More Events** button simi
             "day",
                 { type: "week" },
                 // "custom week",
-                { type: MyWeekView, title: "my week view", selected: true }
+                { type: "MyWeekView", title: "my week view", selected: true }
             ],
             timezone: "Etc/UTC",
             dataSource: {

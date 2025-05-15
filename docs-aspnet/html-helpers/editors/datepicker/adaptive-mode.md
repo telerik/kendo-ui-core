@@ -24,20 +24,7 @@ The adaptive mode changes the rendering of the DatePicker popup element based on
 
 The following example demonstrates how to enable the adaptive mode of the DatePicker by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().DatePicker()
-        .Name("datepicker")
-        .AdaptiveMode(AdaptiveMode.Auto)
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-datepicker name="datepicker" adaptive-mode="AdaptiveMode.Auto">
-    </kendo-datepicker>
-```
-{% endif %}
+<demo metaUrl="datepicker/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

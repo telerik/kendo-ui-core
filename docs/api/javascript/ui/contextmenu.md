@@ -418,7 +418,7 @@ Refer to the example below for a list of the supported properties.
                     },
                     {
                         text: "Item 3",
-                        imageUrl: "https://www.telerik.com/kendo-ui/test.jpg", // Item image URL, optional.
+                        imageUrl: "https://demos.telerik.com/kendo-ui/content/web/toolbar/done.png", // Item image URL, optional.
                         items: [{                                    // Sub item collection
                              text: "Sub Item 1"
                         },

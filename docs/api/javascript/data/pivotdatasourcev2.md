@@ -475,8 +475,9 @@ The name of the catalog.
 
 `String`&mdash;The current catalog name.
 
-#### Example - set the catalog
+#### Set the catalog
 
+```
     <script>
     var dataSource = new kendo.data.PivotDataSourceV2({
       type: "xmla",
@@ -488,6 +489,7 @@ The name of the catalog.
 
     dataSource.catalog("Adventure Works DW 2008R2");
     </script>
+```
 
 #### Example - get the catalog name
 
@@ -572,8 +574,9 @@ The name of the cube.
 
 `String`&mdash;The current cube name.
 
-#### Example - set the cube
+#### Set the cube
 
+```
     <script>
     var dataSource = new kendo.data.PivotDataSourceV2({
       type: "xmla",
@@ -590,6 +593,7 @@ The name of the cube.
 
     dataSource.fetch();
     </script>
+```
 
 #### Example - get the cube name
 

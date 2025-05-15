@@ -20,27 +20,7 @@ The adaptive mode changes the rendering of the ColorPicker popup element based o
 
 The following example demonstrates how to enable the adaptive mode of the ColorPicker by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-        @(Html.Kendo().ColorPicker()
-            .Name("colorpicker")
-            .Input(false)
-            .Preview(false)
-            .Value("#8174F2")
-            .AdaptiveMode(AdaptiveMode.Auto)
-        )
-```
-{% if site.core %}
-```TagHelper
-        @addTagHelper *, Kendo.Mvc
-        
-        <kendo-colorpicker name="colorpicker" 
-                             input="false" 
-                             preview="false"
-                             value="#8174F2" 
-                             adaptive-mode="AdaptiveMode.Auto">
-        </kendo-colorpicker>
-```
-{% endif %}
+<demo metaUrl="colorpicker/adaptive_mode/" height="600"></demo>
 
 ## See Also
 

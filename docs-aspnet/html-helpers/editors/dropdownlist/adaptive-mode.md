@@ -20,36 +20,7 @@ The adaptive mode changes the rendering of the DropDownList popup element based 
 
 The following example demonstrates how to enable the adaptive mode of the DropDownList by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().DropDownList()
-        .Name("dropdownlist")
-        .DataTextField("ProductName")
-        .DataValueField("ProductID")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .DataSource(source => {
-            source.Read(read =>
-            {
-                read.Action("Products_Read", "DropDownList");
-            });
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-   <kendo-dropdownlist name="dropdownlist"
-        adaptive-mode="AdaptiveMode.Auto"
-        datatextfield="ProductName"
-        datavaluefield="ProductID">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("Products_Read", "DropDownList")" />
-            </transport>
-        </datasource>
-    </kendo-dropdownlist>
-```
-{% endif %}
+<demo metaUrl="dropdownlist/adaptive_mode/" height="600"></demo>
 
 ## See Also
 
