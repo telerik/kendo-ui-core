@@ -239,15 +239,32 @@ The function to get the output from the AI service response.
 #### Example
     <div id="aiprompt"></div>
     <script>
-        $("#aiprompt").kendoAIPrompt({
-            service: {
-                url: "/api/llm",
-                outputGetter: function(response) {
-                    return response.output;
-                }
+    $("#aiprompt").kendoAIPrompt({
+        service: {
+            url: "/api/llm",
+            outputGetter: function(response) {
+                return response.output;
             }
+        }
+
+### showOutputSubtitleTooltip `Boolean` *(default: false)*
+
+Controls whether the subtitle of the card in the output view displays a tooltip containing the full content of the subtitle, which is the prompt used to generate the output.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+        $("#aiprompt").kendoAIPrompt({
+            activeView: 1,
+            showOutputSubtitleTooltip: true,
+            promptOutputs: [
+                { prompt: "A very long subtitle that will be shown in a tooltip", output: "Description 1" },
+                { prompt: "Another long subtitle for tooltip demonstration", output: "Description 2" }
+            ]
         });
     </script>
+
+
 ### showOutputRating `Boolean` *(default: true)*
 
 Specifies if the output rating should be displayed on the output card.

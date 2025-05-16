@@ -2249,6 +2249,7 @@ declare namespace kendo.ui {
     interface AIPromptOptions {
         name?: string | undefined;
         activeView?: number | string | undefined;
+        service?: string | AIPromptServiceOptions | undefined;
         views?: AIPromptView[] | any[] | undefined;
         promptOutputs?: AIPromptPromptOutput[] | any[] | undefined;
         promptSuggestionItemTemplate?: string | Function | undefined;
@@ -2261,6 +2262,13 @@ declare namespace kendo.ui {
         promptRequest?(e: AIPromptEvent): void;
         outputRatingChange?(e: AIPromptEvent): void;
         outputCopy?(e: AIPromptEvent): void;
+    }
+
+    interface AIPromptServiceOptions {
+        url?: string | undefined;
+        headers?: any[] | undefined;
+        outputGetter?: Function | undefined,
+        data?: Function | any | undefined,
     }
 
     interface AIPromptMessages {
@@ -5357,6 +5365,38 @@ declare namespace kendo.ui {
 
     }
 
+    interface EditorAIPrompt {
+        service?: AIPromptServiceOptions | undefined;
+        inline?: EditorAIInlineOptions | undefined;
+        popup?: EditorAIPopupOptions | undefined;
+
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
+    interface EditorAIBaseSettings {
+        systemPrompt?: Function | undefined,
+        commands?: EditorAICommandOptions[] | undefined;
+    }
+
+    interface EditorAIPopupOptions extends EditorAIBaseSettings { 
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
+    interface EditorAIInlineOptions extends EditorAIBaseSettings {
+        promptSuggestions?: string[] | any[] | undefined;
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
+    interface EditorAICommandOptions {
+        text?: string | undefined,
+        prompt?: Function | undefined,
+        icon?: string | undefined,
+        id?: string | undefined
+    }
+
     interface EditorDeserialization {
         custom?: Function | undefined;
     }
@@ -5756,6 +5796,7 @@ declare namespace kendo.ui {
         nonce?: string | undefined;
         formattingMarksRefreshDelay?: number | boolean | undefined;
         unsafeInline?: boolean | undefined;
+        ai?: EditorAIPrompt;
         change?(e: EditorEvent): void;
         execute?(e: EditorExecuteEvent): void;
         keydown?(e: EditorEvent): void;

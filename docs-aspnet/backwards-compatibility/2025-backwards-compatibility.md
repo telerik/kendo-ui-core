@@ -51,6 +51,12 @@ The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssyste
         </actions>
     </kendo-popover>
 ```
+{% else %}
+
+### Kendo.Mvc.Export
+
+As of the Q2 2025 release, the `Telerik.Core.Export` package targets .NET Framework 4.6.2 in addition to .NET. You can the `Telerik.Core.Export` package in ASP.NET MVC5 applications, as well as in .NET applications. The old `Kendo.Mvc.Export` assembly will no longer be distributed. 
+
 {% endif %}
 
 ### Telerik.Zip

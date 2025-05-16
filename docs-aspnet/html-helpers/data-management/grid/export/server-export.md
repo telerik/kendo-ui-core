@@ -17,7 +17,7 @@ For a runnable example, refer to the [demo on Server export by the Grid](https:/
 
 To enable the Server export option of the grid:
 
-1. Include a reference to the {% if site.core %} Telerik.Core.Export.nupkg from the private Telerik NuGet feed{% else %}`Kendo.Mvc.Export.dll` and `Telerik.Documents.SpreadsheetStreaming.dll` dlls available in the product's installation folder - `~installationFolder\export\binaries\net<version>`{% endif %}.
+1. Include a reference to the {% if site.core %} Telerik.Core.Export.nupkg from the private Telerik NuGet feed{% else %}Telerik.Core.Export.nupkg and `Telerik.Documents.SpreadsheetStreaming.dll` dlls available in the product's installation folder - `~installationFolder\export\binaries\net<version>`{% endif %}.
 1. Include a form HTML element that would post to an ActionMethod on the server-side.
     ```
     {% if site.core %}
@@ -227,13 +227,13 @@ To enable the Server export option of the grid:
 
     {% if site.core %}
     ```C#
-        using Kendo.Mvc.Export;
+        using Telerik.Core.Export;
         using Telerik.Documents.SpreadsheetStreaming;
         using Microsoft.AspNetCore.Mvc;
     ```
     {% else %}
       ```C#
-        using Kendo.Mvc.Export;
+        using Telerik.Core.Export;
         using Telerik.Documents.SpreadsheetStreaming;
     ```
     {% endif%}

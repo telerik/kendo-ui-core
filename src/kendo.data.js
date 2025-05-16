@@ -2134,6 +2134,117 @@ export const __meta__ = {
         }
     });
 
+    var AiTransport = Class.extend( {
+        init: function(options) {
+            const that = this;
+
+            options = that.options = extend({}, that.options, options);
+
+            that.messageTypes = {
+                "ai": "assistant",
+                "system": "system",
+                "user": "user",
+                "tool": "tool"
+            };
+        },
+
+        read: function(options) {
+            const that = this;
+
+            options = that.setup(options);
+
+            if (that.options.requestStart) {
+                that.options.requestStart(options);
+            }
+
+            $.ajax(options);
+        },
+
+        success: function(response, options) {
+            const that = this;
+            const service = that.options.service;
+            const outputGetter = service?.outputGetter || that._getResponseData;
+            const isRetry = options.isRetry;
+            const prompt = options.prompt;
+            const output = {
+                id: kendo.guid(),
+                output: outputGetter(response),
+                prompt: prompt,
+                isRetry: isRetry
+            };
+
+            if (that.options.success) {
+                that.options.success(output);
+            }
+        },
+
+        error: function(response) {
+            const that = this;
+
+            if (that.options.error) {
+                that.options.error(response);
+            }
+        },
+
+        setup: function(options = {}) {
+            const that = this;
+            const service = that.options.service;
+            const data = that.getData(options);
+            const url = typeof service === "string" ? service : service.url;
+            const requestOptions = {
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    that.success.call(that, response, options);
+                },
+                error: that.error
+            };
+
+            if (service?.headers) {
+                requestOptions.headers = service.headers;
+            }
+
+            return requestOptions;
+        },
+
+        getData: function(options) {
+            const that = this;
+            const service = options.service;
+            const isRetry = options.isRetry;
+            const history = options.history;
+            const prompt = options.prompt;
+
+            let defaultData = [
+                {
+                    role: {
+                        value: that.messageTypes.user
+                    },
+                    text: prompt
+                }
+            ];
+
+            if (history?.length) {
+                defaultData = history.concat(defaultData);
+            }
+
+            if (service?.data && isFunction(service?.data)) {
+                return service.data(prompt, isRetry, history);
+            }
+
+            if (service?.data && Object.keys(service.data).length) {
+                return $.extend({}, service.data, { messages: defaultData });
+            }
+
+            return defaultData;
+        },
+
+        _getResponseData: function(response) {
+            return response?.Message?.Text || "An error occurred while processing the request.";
+        },
+    });
+
     var Cache = Class.extend({
         init: function() {
             this._store = {};
@@ -6761,6 +6872,7 @@ export const __meta__ = {
         LazyObservableArray: LazyObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
+        AiTransport: AiTransport,
         Cache: Cache,
         DataReader: DataReader,
         Model: Model,

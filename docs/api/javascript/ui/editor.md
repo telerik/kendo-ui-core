@@ -12,6 +12,383 @@ Represents the Kendo UI Editor widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
+### ai `Object`
+
+Defines the configuration options for the AI tools in the Editor.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: {
+          url: "/api/llm"
+        }
+      }
+    });
+    </script>
+
+### ai.aiPrompt `Object|Boolean`
+
+Defines the configuration options for the side panel AI Prompt tool in the Editor. If set to `false`, the side panel AI Prompt tool is disabled.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        aiPrompt: {
+          // configuration options for the AI prompt
+        }
+      }
+    });
+    </script>
+
+### ai.aiPrompt.systemPrompt `Function`
+Defines the system prompt for the side panel AI Prompt tool. The function accepts the following arguments:
+
+- `context` - The selected text in the editor.
+- `prompt` - The user prompt.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        aiPrompt: {
+          systemPrompt: (context, prompt) => `You are an advanced AI language assistant.
+                                A user has selected a portion of their text and provided a query regarding how they want it modified.
+                                Your task is to accurately respond to their request while preserving the original intent of the text.
+                                Follow the instructions strictly and provide only the requested output unless explicitly asked to explain your changes.
+
+                                Selected Text:
+                                ${context}
+
+                                User's Request:
+                                ${prompt}
+
+                                Response:`
+        }
+      }
+    });
+    </script>
+
+### ai.aiPrompt.commands `Array`
+
+Defines the commands for the side panel AI Prompt tool. The commands are displayed in the side panel AI Prompt dropdown.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        aiPrompt: {
+          commands: [
+            {
+              id: "1",
+              text: "Make the text funnier",
+              icon: "star",
+              prompt: (context) => `Make the following text funnier: ${context}`
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.aiPrompt.commands.text `String`
+
+The text of the command.
+
+### ai.aiPrompt.commands.id `String`
+
+The id of the command.
+
+### ai.aiPrompt.commands.icon `String`
+
+The icon of the command.
+
+### ai.aiPrompt.commands.prompt `Function`
+
+The prompt for the command. The function accepts the following arguments:
+
+- `context` - The text in the editor.
+
+### ai.aiPrompt.promptSuggestions `Array`
+
+Defines the suggestions for the side panel AI Prompt tool. The suggestions are displayed in the side panel AIPrompt tool.
+
+
+### ai.aiPrompt.commands `Array`
+
+Defines the shared fast commands for the side panel AI Prompt tool and the inline popup prompt tool. The commands are displayed in the side panel AI Prompt view and the context menu of the inline popup tool.
+
+The commands can be configured separately in the `ai.aiPrompt.commands` and `ai.inlineAIPrompt.commands` properties.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        commands: [
+          {
+            id: "1",
+            text: "Make the text funnier",
+            icon: "star",
+            prompt: (context) => `Make the following text funnier: ${context}`
+          }
+        ]
+      }
+    });
+    </script>
+
+### ai.commands.text `String`
+
+The text of the command.
+
+### ai.commands.id `String`
+
+The id of the command.
+
+### ai.commands.icon `String`
+
+The icon of the command.
+
+### ai.commands.prompt `Function`
+
+The prompt for the command. The function accepts the following arguments:
+
+- `context` - The text in the editor.
+
+### ai.inlineAIPrompt `Object|Boolean`
+
+Defines the configuration options for the inline AI Prompt tool in the Editor. If set to `false`, the inline AI Prompt tool is disabled.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        inlineAIPrompt: {
+          // configuration options
+        }
+      }
+    });
+    </script>
+
+### ai.inlineAIPrompt.systemPrompt `Function`
+Defines the system prompt for the inline AI Prompt tool. The function accepts the following arguments:
+
+- `context` - The selected text in the editor.
+- `prompt` - The user prompt.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        inlineAIPrompt: {
+          systemPrompt: (context, prompt) => `You are an advanced AI language assistant.
+                                A user has selected a portion of their text and provided a query regarding how they want it modified.
+                                Your task is to accurately respond to their request while preserving the original intent of the text.
+                                Follow the instructions strictly and provide only the requested output unless explicitly asked to explain your changes.
+
+
+          Selected Text:
+                                ${context}
+
+
+          User's Request:
+          ${prompt}
+
+          Response:`
+        }
+      }
+    });
+    </script>
+
+### ai.inlineAIPrompt.commands `Array`
+
+Defines the commands for the inline AI Prompt tool. The commands are displayed in the inline AI Prompt dropdown.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        inlineAIPrompt: {
+          commands: [
+            {
+              id: "funnier",
+              text: "Make the text funnier",
+              icon: "star",
+              prompt: (context) => `Make the following text funnier: ${context}`
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
+### ai.inlineAIPrompt.commands.text `String`
+
+The text of the command.
+
+### ai.inlineAIPrompt.commands.id `String`
+
+The id of the command.
+
+### ai.inlineAIPrompt.commands.icon `String`
+
+The icon of the command.
+
+### ai.inlineAIPrompt.commands.prompt `Function`
+
+The prompt for the command. The function accepts the following arguments:
+
+- `context` - The selected text in the editor.
+
+### ai.pane `Object`
+
+Defines the configuration options for the Splitter Pane containing the side panel AI Prompt. This allows you to control the pane's size, minimum size, collapsibility, and collapsed state.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        pane: {
+          min: "370px",
+          size: "370px",
+          collapsible: true,
+          collapsed: true
+        }
+      }
+    });
+    </script>
+
+### ai.service `String|Object`
+
+The URL of the AI service to use for generating outputs.
+
+#### Example
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: "/api/llm"
+      }
+    });
+    </script>
+
+### ai.service.url `String`
+The Url of the AI service to use for generating outputs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: {
+          url: "/api/llm"
+        }
+      }
+    });
+    </script>
+
+
+### ai.service.headers `Object`
+
+The headers to send with the AI service request.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: {
+            url: "/api/llm",
+            headers: {
+                "Authorization": "Bearer token"
+            }
+        }
+      }
+    });
+    </script>
+
+### ai.service.data `Object|Function`
+
+The data to send with the AI service request.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: {
+            url: "/api/llm",
+            data: {
+                "key": "value"
+            }
+        }
+      }
+    });
+    </script>
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: {
+            url: "/api/llm",
+            data: function(prompt, isRetry, history) {
+                return {
+                    "messages": [{
+                        type: messageTypes.user,
+                        text: prompt
+                    }],
+                    "key": "value"
+                }
+            }
+        }
+      }
+    });
+    </script>
+
+### ai.service.outputGetter `Function`
+
+The function to get the output from the AI service response.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      ai: {
+        service: {
+            url: "/api/llm",
+            outputGetter: function(response) {
+                return response.output;
+            }
+        }
+      }
+    });
+    </script>
+
 ### deserialization `Object`
 
 Fine-tune deserialization in the Editor widget. Deserialization is the process of parsing the HTML string input from the value() method or from the viewHtml dialog into editable content.

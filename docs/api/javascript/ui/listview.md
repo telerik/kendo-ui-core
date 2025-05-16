@@ -597,11 +597,11 @@ Defines the width of the gutters between the columns / rows.
       }
     </style>
 
-### scrollable `Boolean|String` *(default: false)*
+### scrollable `String`
 
-If set to `true` the listview will display a scrollbar when the content exceeds the listview [height](/api/javascript/ui/listview/configuration/height) value. By default scrolling is disabled.
+Accepts `endless` to enable the endless scrolling functionality. In endless scrolling mode the [height](/api/javascript/ui/listview/configuration/height) should be configured to display a scrollbar. Scrolling to the end of the scrollbar will load more items (equal to the pageSize number) and append them to the listview DOM element utill all items are loaded and displayed.
 
-It could be also set to `endless` in order to enable the endless scrolling functionality. In endless scrolling mode the [height](/api/javascript/ui/listview/configuration/height) should be configured to display a scrollbar. Scrolling to the end of the scrollbar will load more items (equal to the pageSize number) and append them to the listview DOM element utill all items are loaded and displayed.
+If set to any other value the listview will display a scrollbar when the content exceeds the listview [height](/api/javascript/ui/listview/configuration/height) value.
 
 #### Example - set the scrollable to endless
 

@@ -80,7 +80,7 @@ You will find the following in the {{ site.product }} installation directory:
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts.
 * `pdfviewer`&mdash;The `Telerik.Web.PDF` assembly from the Telerik Document Processing library and its dependencies.
 * `dpl`&mdash;The NuGet packages for the Telerik Document Processing library. 
-* `export`&mdash;The `Kendo.Mvc.Export` assembly that allows exporting `IEnumerable` sources to XLSX and CSV formats.
+* `export`&mdash;The `Telerik.Core.Export` NuGet package that allows exporting `IEnumerable` sources to XLSX and CSV formats.
 * `license-agreements`&mdash;End-user license agreements files.
 * `spreadsheet`&mdash;The `Telerik.Web.Spreadsheet` assembly from the Telerik Document Processing library and its dependencies.
 {% if site.core %}
