@@ -1,5 +1,6 @@
 import "./kendo.data.js";
 import "./kendo.icons.js";
+import "./kendo.html.button.js";
 import "./kendo.sortable.js";
 
 export const __meta__ = {
@@ -7,7 +8,7 @@ export const __meta__ = {
     name: "TabStrip",
     category: "web",
     description: "The TabStrip widget displays a collection of tabs with associated tab content.",
-    depends: [ "data", "icons", "sortable" ],
+    depends: [ "data", "icons", "html.button", "sortable" ],
     features: [ {
         id: "tabstrip-fx",
         name: "Animation",
@@ -71,9 +72,11 @@ export const __meta__ = {
                 `<div class='k-tabstrip-content' ${data.contentAttributes(data)} tabindex='0'>${data.content(data.item)}</div>`,
             textWrapper: ({ tag, item , contentUrl, textAttributes, image, sprite, text }) =>
                 `<${tag(item)} class='${LINK}' ${contentUrl(item)} ${textAttributes(item)}>` + `${image(item)}${sprite(item)}` +
+                    (item.icon && item.iconPosition === 'before' ? kendo.ui.icon({ icon: item.icon }) : '') +
                         `<span class='${LINK_TEXT}'>${text(item)}</span>` +
+                    (item.icon && item.iconPosition === 'after' ? kendo.ui.icon({ icon: item.icon }) : '') +
                 `</${tag(item)}>`,
-            item: (data) =>templates.itemWrapper(data,`${data.textWrapper(data)}`),
+            item: (data) => templates.itemWrapper(data,`${data.textWrapper(data)}`),
             itemWrapper: (data, item) =>
                 `<li class='${data.wrapperCssClass(data.group, data.item)}' role='tab' ${data.item.active ? "aria-selected='true'" : ''}>` +
                     item +
@@ -81,6 +84,8 @@ export const __meta__ = {
             image: ({ imageUrl }) => `<img class='k-image' alt='' src='${imageUrl}' />`,
             sprite: ({ spriteCssClass }) => `<span class='k-sprite ${spriteCssClass}'></span>`,
             empty: () => "",
+            itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,
+            itemActionTemplate: ({ icon, iconClass, attributes }) => kendo.html.renderButton($("<button unselectable='on'></button>").attr(attributes || {}), { icon, iconClass, themeColor: "base", fillMode: "flat" }),
         },
 
         rendering = {
@@ -175,24 +180,7 @@ export const __meta__ = {
     }
 
     function ajaxXhr() {
-        var current = this,
-            request = $.ajaxSettings.xhr(),
-            event = current.progressUpload ? "progressUpload" : current.progress ? "progress" : false;
-
-        if (request) {
-            $.each([ request, request.upload ], function() {
-                if (this.addEventListener) {
-                    this.addEventListener("progress", function(evt) {
-                        if (event) {
-                            current[event](evt);
-                        }
-                    }, false);
-                }
-            });
-        }
-
-        current.noProgress = !(window.XMLHttpRequest && ('upload' in new XMLHttpRequest()));
-        return request;
+        return $.ajaxSettings.xhr();
     }
 
     var TabStrip = Widget.extend({
@@ -263,6 +251,8 @@ export const __meta__ = {
             dataUrlField: "",
             dataSpriteCssClass: "",
             dataContentUrlField: "",
+            dataIconField: "icon",
+            dataIconPositionField: "iconPosition",
             tabPosition: "top",
             tabAlignment: "start",
             size: "medium",
@@ -276,6 +266,7 @@ export const __meta__ = {
                     duration: 200
                 }
             },
+            closable: false,
             collapsible: false,
             navigatable: true,
             contentUrls: false,
@@ -708,6 +699,8 @@ export const __meta__ = {
                 image = kendo.getter(options.dataImageUrlField),
                 url = kendo.getter(options.dataUrlField),
                 sprite = kendo.getter(options.dataSpriteCssClass),
+                icon = kendo.getter(options.dataIconField),
+                iconPosition = kendo.getter(options.dataIconPositionField),
                 idx,
                 tabs = [],
                 tab,
@@ -756,6 +749,19 @@ export const __meta__ = {
                 if (options.dataSpriteCssClass) {
                     tab.spriteCssClass = sprite(view[idx]);
                 }
+
+                if (view[idx].actions) {
+                    const actions = typeof view[idx].actions === 'object' ? Array.from(view[idx].actions) : view[idx].actions;
+                    tab.actions = actions;
+                }
+
+                if (icon(view[idx])) {
+                    tab.icon = icon(view[idx]);
+                    tab.iconPosition = iconPosition(view[idx]) ?? 'before';
+                }
+
+                tab.enabled = view[idx].enabled;
+                tab.closable = view[idx].closable ?? options.closable;
 
                 tabs[idx] = tab;
             }
@@ -874,6 +880,56 @@ export const __meta__ = {
             } else {
                 return that.select().text();
             }
+        },
+
+        _initTabActions: function(tab, tabOptions) {
+            const that = this;
+            const tabElement = $(tab);
+            let actions = [];
+
+            let closeButtonAttributes = { icon: "x", attributes: { "ref-close-button": true }, action: that._handleClose };
+
+            if (tabOptions.actions) {
+                actions = Array.from(tabOptions.actions);
+            }
+
+            if (tabOptions.closable) {
+                actions.push(closeButtonAttributes);
+            }
+
+            if (actions?.length) {
+                const actionsWrapperTemplate = $(templates.itemActionsWrapperTemplate());
+
+                actions.forEach(action => {
+                    const actionTemplate = $(templates.itemActionTemplate(action));
+                    actionsWrapperTemplate.append(actionTemplate);
+                    if (isFunction(action?.action)) {
+                        actionTemplate.bind(CLICK, action.action.bind(that));
+                    }
+                });
+
+                tabElement.append(actionsWrapperTemplate);
+            }
+
+            return tabElement[0];
+        },
+
+        _handleClose: function(e) {
+            const that = this;
+            const target = $(e.currentTarget);
+
+            const tab = target.closest('.k-item');
+
+            if (tab.hasClass(ACTIVESTATE)) {
+
+                if (tab.prev().length > 0) {
+                    that.activateTab(tab.prev());
+                } else {
+                    that.activateTab(tab.next());
+                }
+            }
+
+            that.remove(tab);
         },
 
         _tabAlignment: function() {
@@ -1011,13 +1067,15 @@ export const __meta__ = {
                 newTabsCreated = true;
 
                 tabs = map(tab, function(value, idx) {
-                            that._appendUrlItem(tab[idx].contentUrl || null);
+                    that._appendUrlItem(tab[idx].contentUrl || null);
+                    const renderedTabItem = TabStrip.renderItem({
+                        group: that.tabGroup,
+                        item: extend(value, { index: idx })
+                    });
 
-                            return $(TabStrip.renderItem({
-                                group: that.tabGroup,
-                                item: extend(value, { index: idx })
-                            }));
-                        });
+                    value.closable = value.closable ?? that.options.closable;
+                    return $(that._initTabActions(renderedTabItem, value));
+                });
 
                 contents = map( tab, function(value, idx) {
                             if (typeof value.content == "string" || value.contentUrl) {
@@ -1156,6 +1214,10 @@ export const __meta__ = {
         _itemClick: function(e) {
             var that = this,
                 tabGroup = that.tabGroup[0];
+
+            if (e.target.closest('.k-item-actions')) {
+                return;
+            }
 
             if (tabGroup !== document.activeElement) {
                 var msie = kendo.support.browser.msie;
@@ -1683,18 +1745,18 @@ export const __meta__ = {
     extend(TabStrip, {
         renderItem: function(options) {
             options = extend({ tabStrip: {}, group: {} }, options);
-
             var empty = templates.empty,
                 item = options.item,
                 templateOptions = extend(options, {
                     image: item.imageUrl ? templates.image : empty,
                     sprite: item.spriteCssClass ? templates.sprite : empty,
-                    textWrapper: templates.textWrapper
+                    textWrapper: templates.textWrapper,
+                    itemActions: templates.itemActionsWrapperTemplate,
                 }, rendering);
 
-                if (item.template) {
-                    return templates.itemWrapper(templateOptions, kendo.template(item.template)(item.model));
-                }
+            if (item.template) {
+                return templates.itemWrapper(templateOptions, kendo.template(item.template)(item.model));
+            }
 
             return templates.item(templateOptions);
         },

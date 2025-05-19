@@ -41,6 +41,31 @@ An array of prompt outputs to display in the prompt view.
     });
     </script>
 
+### encodedPromptOutputs `Boolean` *(default: true)*
+
+Specifies whether the prompt outputs are HTML-encoded before being displayed in the output view. When set to true (default), the output is encoded and displayed as plain text, preventing any HTML formatting or scripts from being rendered.
+
+> **Important**: When set to `false`, the output is rendered as raw HTML, allowing for custom formatting (such as rendering markdown as HTML). If you set this to false, you **must ensure that the output is properly sanitized to prevent XSS attacks**.
+
+    <div id="aiprompt"></div>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.5/dist/purify.min.js"></script>
+    <script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js"></script>
+    <script>
+        $("#aiprompt").kendoAIPrompt({
+            service: "/api/llm",
+            encodedPromptOutputs: false,
+            promptResponse: function(e) {
+                // Convert markdown to HTML
+                let output = markdown.toHTML(e.output.output, "Maruku");
+                // Sanitize the HTML output
+                if (window.DOMPurify) {
+                    e.output.output = DOMPurify.sanitize(output, { USE_PROFILES: { html: true } });
+                }
+            }
+        });
+    </script>
+
+
 ### promptOutputs.id `String`
 
 The id of the prompt output. If none is provided, the id will be generated as a `kendo.guid()`. The ID is rendered as data-id attribute in the prompt output.
@@ -237,6 +262,7 @@ The data to send with the AI service request.
 The function to get the output from the AI service response.
 
 #### Example
+
     <div id="aiprompt"></div>
     <script>
     $("#aiprompt").kendoAIPrompt({
@@ -246,6 +272,8 @@ The function to get the output from the AI service response.
                 return response.output;
             }
         }
+    })
+    </script>
 
 ### showOutputSubtitleTooltip `Boolean` *(default: false)*
 

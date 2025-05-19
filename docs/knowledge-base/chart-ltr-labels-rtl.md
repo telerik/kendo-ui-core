@@ -66,7 +66,7 @@ The following example demonstrates how to apply the suggested approach to a Bar 
     </style>
     <div id="example">
       <div class="demo-section k-content wide">
-        <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+        <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
       </div>
       <script>
         kendo.drawing.svg.TextNode.fn.renderTextAnchor = function(){

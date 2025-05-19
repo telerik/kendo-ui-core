@@ -119,7 +119,7 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
 
 #### Example
 
-<script>
+    <script>
       var version = kendo.version;
 
       $.getScript(
@@ -139,7 +139,7 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
         /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(convertedDate2); // Sat Nov 05 2016 23:25:11 GMT+0200 (FLE Standard Time);
       }
-</script>
+    </script>
 
 ### remove
 
@@ -161,7 +161,7 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
 
 #### Example
 
-   <script>
+    <script>
       var version = kendo.version;
 
       $.getScript(

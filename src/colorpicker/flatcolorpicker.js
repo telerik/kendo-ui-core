@@ -329,9 +329,9 @@ import "../kendo.html.button.js";
                     '</div>' +
                     '<div class="k-coloreditor-views k-vstack"></div>' +
                     (options.buttons ?
-                    '<div class="k-coloreditor-footer k-actions k-actions-end k-actions-horizontal">' +
-                        html.renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: "solid" })) +
+                    '<div class="k-coloreditor-footer k-actions k-actions-start k-actions-horizontal">' +
                         html.renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: "solid", themeColor: "primary" })) +
+                        html.renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: "solid" })) +
                     '</div>'
                     : '')
                 )(options, buttonOptions);

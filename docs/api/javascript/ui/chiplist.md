@@ -522,7 +522,9 @@ Forces the selected state to the specified one.
         }).data("kendoChipList");
 
         chiplist.select(chiplist.item(1));
-        alert(chiplist.select().eq(0).text());
+
+        // Check the browser console to see the result
+        console.log(chiplist.select().eq(0).text());
     </script>
 
 

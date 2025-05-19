@@ -51,7 +51,7 @@ The marker layer is added to the Map when the Map is initialized. To filter the 
                     dataSource: {
                         transport: {
                             read: {
-                                url: "../content/dataviz/map/store-locations.json",
+                                url: "https://demos.telerik.com/kendo-ui/content/dataviz/map/store-locations.json",
                                 dataType: "json"
                             }
                         },

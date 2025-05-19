@@ -129,7 +129,7 @@ Here's a step-by-step guide to implementing this functionality:
             }, {
               field: "ProductName",
               title: "Product Name",
-              template: "<div class='product-photo' style='background-image: url(../content/web/foods/#:data.ProductID#.jpg);'></div><div class='product-name'>#: ProductName #</div>",
+              template: "<div class='product-photo' style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/foods/#:data.ProductID#.jpg);'></div><div class='product-name'>#: ProductName #</div>",
               width: 300
             }, {
               field: "UnitPrice",

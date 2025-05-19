@@ -208,6 +208,7 @@ Defines the editor widget type. Available options are:
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
 * Input widgets - "TextBox", "TextArea", "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker", "ColorGradient", "ColorPalette", "FlatColorPicker", "Signature", "OTPInput", "hidden"
 * Editor widget - "Editor"
+* Upload widget - "Upload"
 
 #### Example - define editor as string
 

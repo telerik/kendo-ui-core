@@ -53,7 +53,7 @@ The following example demonstrates the full implementation of the suggested appr
         }
     </style>
 
-        <script src="../content/shared/js/people.js"></script>
+        <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
         <div id="example">
         <div id="grid"></div>
 

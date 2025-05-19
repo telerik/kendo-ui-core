@@ -20,6 +20,7 @@ The following example demonstrates how to bind the Chart Wizard to an array of d
 
 ```dojo
     <div id="chartwizard"></div>
+    <script>
     $("#chartwizard").kendoChartWizard({            
         dataSource: [
            [
@@ -31,6 +32,7 @@ The following example demonstrates how to bind the Chart Wizard to an array of d
            ]
         ],
     });
+    </script>
 ```
 
 When the ChartWizard is bound to remote data, the remote service must return one or more arrays of objects with `field` and `value` properties. The example below demonstrates how to bind the ChartWizard to remote data:
@@ -110,7 +112,7 @@ The example below demonstrates ChartWizard bound to local table-like data:
         }
     ];
 
-    const chartWizardData = kendo.ChartWizard.getWizardDataFromDataRows(dataRows);
+    const chartWizardData = window.kendo.ui.ChartWizard.getWizardDataFromDataRows(dataRows);
 
     var chartwizard = $("#chartwizard").kendoChartWizard({
         dataSource: chartWizardData

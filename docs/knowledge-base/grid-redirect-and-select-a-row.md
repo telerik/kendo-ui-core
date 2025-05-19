@@ -39,7 +39,7 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
 
 ```
     <a href="https://runner.telerik.io/fullscreen/oDUzU?id=#:data.EmployeeID#"/>                
-        <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
     </a>
 ```
 

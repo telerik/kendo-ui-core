@@ -2813,7 +2813,7 @@ function pad(number, digits, end) {
             }
 
             if (options.hide) {
-                element.data("olddisplay", element.css("display")).hide();
+                element.data("olddisplay", element.data("olddisplay") || element.css("display")).hide();
             }
 
             if (options.init) {

@@ -711,13 +711,13 @@ Specifies the parent item.
         });
 
         var orgChart = $("#orgchart").getKendoOrgChart();
-        var parent = orgChart.items()[1];
+        var parentTask = orgChart.items()[1];
 
         orgChart.append({
             id: 9,
             name: "Added",
             title: "Support"
-        }, parent);
+        }, parentTask);
     </script>
 
 ### cancelChanges

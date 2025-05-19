@@ -18,6 +18,7 @@ Toggles the audio button.
 
 #### Example
 
+```pseudo
     <input id="captcha" name="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -25,6 +26,7 @@ Toggles the audio button.
             audioButton: false
         });
     </script>
+```
 
 ### audioHandler `String|Function|Object`
 
@@ -32,7 +34,7 @@ The URL, AJAX settings or function that fetches the audio of the captcha. When u
 
 #### Set the audio handler as function
 
-```
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -46,7 +48,7 @@ The URL, AJAX settings or function that fetches the audio of the captcha. When u
 
 #### Set the Audio Handler as URL or AJAX
 
-```
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -69,7 +71,7 @@ The source of an image to be rendered as captcha initially. If not set the `hand
             captchaId: "1234"
         });
     </script>
-
+ 
 ### captchaId `String`
 
 The ID of the captcha to be added to the hidden input initially. If not set the `handler` to reset the ID will be called. 
@@ -103,8 +105,10 @@ The field that returns the captcha's image source. Used in the `handler` functio
         });
     </script>
 
+
 #### Example - ajax
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -112,6 +116,7 @@ The field that returns the captcha's image source. Used in the `handler` functio
             handler: "https://demos.telerik.com/kendo-ui/captcha/reset" // Response should return captchaImage and the captchaId
         });
     </script>
+```
 
 ### dataCaptchaIdField `String` *(default: "captchaId")*
 
@@ -134,6 +139,7 @@ The field that returns the captcha's id. Used in the `handler` function/response
 
 #### Example - ajax
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -141,6 +147,7 @@ The field that returns the captcha's id. Used in the `handler` function/response
             handler: "https://demos.telerik.com/kendo-ui/captcha/reset" // Response should return captcha and the ID
         });
     </script>
+```
 
 ### handler `String|Function|Object`
 
@@ -160,10 +167,9 @@ The URL, AJAX settings or function that fetches the image and id of the captcha.
         });
     </script>
 
-Example - ajax
+#### Example - ajax
 
-
-```html
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -172,10 +178,9 @@ Example - ajax
     </script>
 ```
 
-Example - custom ajax settings
+#### Example - custom ajax settings
 
-```html
-
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -188,7 +193,6 @@ Example - custom ajax settings
             } // Response should return captcha and the captchaId
         });
     </script>
-
 ```
 
 ### messages `Object`
@@ -197,6 +201,7 @@ Provides configuration options for the messages present in the Captcha widget.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -209,6 +214,7 @@ Provides configuration options for the messages present in the Captcha widget.
             }
         });
     </script>
+```
 
 ### messages.audio `String`*(default: "Speak captcha")*
 
@@ -216,6 +222,7 @@ The title message of the audio button.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -225,6 +232,7 @@ The title message of the audio button.
             }
         });
     </script>
+``` 
 
 ### messages.imageAlt `String`*(default: "Type the Captcha code from the image"")*
 
@@ -232,6 +240,7 @@ The alt value of the captcha's image tag.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -241,6 +250,7 @@ The alt value of the captcha's image tag.
             }
         });
     </script>
+```
 
 ### messages.reset `String`*(default: "Reset captcha")*
 
@@ -248,6 +258,7 @@ The title message of the reset button.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -257,6 +268,7 @@ The title message of the reset button.
             }
         });
     </script>
+```
 
 ### messages.success `String` *(default: "Verification successful")*
 
@@ -264,6 +276,7 @@ The message rendered when validation is successful.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -274,6 +287,7 @@ The message rendered when validation is successful.
             }
         });
     </script>
+```
 
 ### resetButton `Boolean` *(default: true)*
 
@@ -281,6 +295,7 @@ Toggles the reset button.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -288,6 +303,7 @@ Toggles the reset button.
             resetButton: false
         });
     </script>
+```
 
 ### validateOnBlur `Boolean` *(default: false)*
 
@@ -295,6 +311,7 @@ Whether to trigger validation when input is blurred. This option is useful if yo
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -303,6 +320,7 @@ Whether to trigger validation when input is blurred. This option is useful if yo
             validateOnBlur: true
         });
     </script>
+```
 
 ### validationHandler `String|Function|Object`
 
@@ -310,7 +328,7 @@ The URL, AJAX settings or function that validates the text input. When used with
 
 #### Configure the Handler as a Function
 
-```
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -325,7 +343,7 @@ The URL, AJAX settings or function that validates the text input. When used with
 
 #### Configure the Handler by Passing a Link
 
-```
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -344,6 +362,7 @@ Whether to show a volume control when audio is played.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         $("#captcha").kendoCaptcha({
@@ -354,8 +373,7 @@ Whether to show a volume control when audio is played.
             }
         });
     </script>
-
-
+```
 
 ## Methods
 
@@ -365,6 +383,7 @@ Enables or disables the widget.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -373,6 +392,7 @@ Enables or disables the widget.
 
         captcha.enable(false);
     </script>
+```
 
 #### Parameters
 
@@ -387,6 +407,7 @@ Returns the ID of the current captcha.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -395,6 +416,7 @@ Returns the ID of the current captcha.
 
         console.log(captcha.getCaptchaId());
     </script>
+```
 
 #### Returns
 
@@ -406,6 +428,7 @@ Returns true if validated and valid, false if validated and not valid and null o
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -417,6 +440,7 @@ Returns true if validated and valid, false if validated and not valid and null o
             console.log(captcha.isValid());
         });
     </script>
+```
 
 #### Returns
 
@@ -428,6 +452,7 @@ Toggles the readonly state of the widget.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -436,6 +461,7 @@ Toggles the readonly state of the widget.
 
         captcha.readonly();
     </script>
+```
 
 #### Parameters
 
@@ -449,6 +475,7 @@ Resets the Captcha with new image and id - triggers the `handler` action.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -461,6 +488,7 @@ Resets the Captcha with new image and id - triggers the `handler` action.
             });
         }, 1500);
     </script>
+```
 
 #### Returns
 
@@ -472,6 +500,7 @@ Speaks the Captcha's text - triggers the `audioHandler` action. The returned pro
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -486,6 +515,7 @@ Speaks the Captcha's text - triggers the `audioHandler` action. The returned pro
            // console.log("Audio ended");
         //});
     </script>
+```
 
 #### Returns
 
@@ -497,6 +527,7 @@ Validates the Captcha remotely - triggers the `validationHandler` action.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -510,6 +541,7 @@ Validates the Captcha remotely - triggers the `validationHandler` action.
             });
         }, 1500);
     </script>
+```
 
 #### Returns
 
@@ -529,6 +561,7 @@ The value entered in the Captcha's tetxbox
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -538,6 +571,7 @@ The value entered in the Captcha's tetxbox
             }
         }).data("kendoCaptcha");
     </script>
+```
 
 ### requestEnd
 
@@ -551,7 +585,7 @@ The type triggered the request: "reset|validation|audio".
 
 #### Handle the requestEnd event
 
-```
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -566,7 +600,7 @@ The type triggered the request: "reset|validation|audio".
 
 #### Reset Captcha on validation fail
 
-```
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -597,6 +631,7 @@ The context passed to the request.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -607,6 +642,7 @@ The context passed to the request.
             }
         }).data("kendoCaptcha");
     </script>
+```
 
 ### error
 
@@ -632,6 +668,7 @@ The error message.
 
 #### Example
 
+```pseudo
     <input id="captcha" />
     <script>
         var captcha = $("#captcha").kendoCaptcha({
@@ -642,6 +679,6 @@ The error message.
             }
         }).data("kendoCaptcha");
     </script>
-
+```
 
 

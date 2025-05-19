@@ -276,6 +276,22 @@ Defines the configuration options for the Splitter Pane containing the side pane
     });
     </script>
 
+### ai.pane.min `String`
+
+Sets the minimum size of the pane.
+
+### ai.pane.size `String`
+
+Sets the size of the pane.
+
+### ai.pane.collapsible `Boolean`
+
+Enables the collapsibility of the pane.
+
+### ai.pane.collapsed `Boolean`
+
+Sets the collapsed of the pane.
+
 ### ai.service `String|Object`
 
 The URL of the AI service to use for generating outputs.

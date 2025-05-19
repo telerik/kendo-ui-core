@@ -115,11 +115,11 @@ The following example demonstrates how to achieve the desired scenario.
     }
 
     .one-way {
-      background: url('../content/web/sortable/one-way.png') no-repeat 50% 50%;
+      background: url('https://demos.telerik.com/kendo-ui/content/web/sortable/one-way.png') no-repeat 50% 50%;
     }
 
     .two-way {
-      background: url('../content/web/sortable/two-way.png') no-repeat 50% 50%;
+      background: url('https://demos.telerik.com/kendo-ui/content/web/sortable/two-way.png') no-repeat 50% 50%;
     }
 
     .list-wrapper {

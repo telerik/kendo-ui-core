@@ -54,7 +54,7 @@ How can I scroll the last column into view when a Grid with many columns is init
 
             columns: [{
                 template: "<div class='customer-photo'" +
-                    "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+                    "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
                     "<div class='customer-name'>#: ContactName #</div>",
                 field: "ContactName",
                 title: "Contact Name",

@@ -1744,7 +1744,7 @@ Gets the `contextMenu` instance of the cell.
 
 #### Dynamically adding a context menu item and associating a selection command
 
-```
+```pseudo
     <div id="spreadsheet"></div>
 
     <script>
@@ -1786,7 +1786,7 @@ Gets the `contextMenu` instance of the row header.
 
 #### Removing the hide command for the first row in the rowHeaderContextMenu
 
-```
+```pseudo
     <div id="spreadsheet"></div>
 
     <script>
@@ -1821,7 +1821,7 @@ Gets the `contextMenu` instance of the column header.
 
 #### Removing the hide command for the first column in the colHeaderContextMenu
 
-```
+```pseudo
     <div id="spreadsheet"></div>
 
     <script>

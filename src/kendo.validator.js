@@ -21,6 +21,7 @@ export const __meta__ = {
         INVALIDLABEL = "k-text-error",
         MESSAGEBOX = "k-messagebox k-messagebox-error",
         INPUTINNER = ".k-input-inner",
+        UPLOADBUTTONWRAPPER = ".k-upload-button-wrap",
         INPUTWRAPPER = ".k-input",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
@@ -201,10 +202,26 @@ export const __meta__ = {
                         quote = !!name && name.indexOf("'") > -1 ? '\"' : "'",
                         namedCheckbox = input.attr("name") && !containerElement.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
                         checkbox = input.filter("[type=checkbox]").length && (noNameCheckbox || namedCheckbox),
+                        file = input.filter("[type=file]").parents(UPLOADBUTTONWRAPPER).children("input").length,
                         radio = input.filter("[type=radio]").length && !containerElement.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
                         value = input.val();
 
-                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
+                        if (file) {
+                            let isValid = false;
+
+                            input.filter("[type=file]")
+                                .parents(UPLOADBUTTONWRAPPER)
+                                .children("input")
+                                .each(function(idx) {
+                                    if (input.val()) {
+                                        isValid = true;
+                                    }
+                                });
+
+                            return !(hasAttribute(input, "required") && !isValid);
+                        }
+
+                        return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search],[type=password]").filter("[pattern]").length && input.val() !== "") {
@@ -401,7 +418,11 @@ export const __meta__ = {
                 let invalid = false;
 
                 inputs = containerElement.find(this._inputSelector);
+                let fileInput = containerElement.find("input[type='file']");
 
+                if (fileInput.length) {
+                    inputs.push($(fileInput.first())[0]);
+                }
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
                     if (!this.validateInput(inputs.eq(idx))) {
                         invalid = true;
@@ -461,10 +482,10 @@ export const __meta__ = {
 
             input.removeAttr(ARIAINVALID);
 
-            if (input.hasClass("k-hidden") && input.attr("data-role") == "otpinput") {
+            if (input.hasClass("k-hidden") && (input.attr("data-role") == "otpinput" || input.attr("data-role") == "upload")) {
                 widgetInstance = kendo.widgetInstance(input);
             }
-            if (input.hasClass("k-hidden") && input.attr("data-role") != "otpinput") {
+            if (input.hasClass("k-hidden") && input.attr("data-role") == "signature") {
                 widgetInstance = kendo.widgetInstance(input.closest(".k-signature"));
             }
 

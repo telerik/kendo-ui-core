@@ -62,7 +62,7 @@ tooltip: {
           id="chart"
           style="
             background: center no-repeat
-              url(&quot;../content/shared/styles/world-map.png&quot;);
+              url(&quot;https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png&quot;);
           "
         ></div>
       </div>

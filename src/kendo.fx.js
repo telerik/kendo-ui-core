@@ -463,7 +463,7 @@ export const __meta__ = {
                 .dequeue(); // call next animation from the queue
 
             if (options.hide) {
-                element.data("olddisplay", element.css("display")).hide();
+                element.data("olddisplay", element.data("olddisplay") || element.css("display")).hide();
             }
 
             this.restoreCallback();

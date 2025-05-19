@@ -51,6 +51,11 @@ The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssyste
         </actions>
     </kendo-popover>
 ```
+
+### Pager Position in Grid TagHelper
+
+The [`position`](/api/kendo.mvc.taghelpers/gridpageablesettingstaghelper#attributes) attribute of the Grid TagHelper `pageable` configuration accepts a `PagerPosition` enum type instead of the previously used `GridPagerPosition`.
+
 {% else %}
 
 ### Kendo.Mvc.Export
@@ -72,6 +77,17 @@ As of the Q2 2025 release, the following NuGet packages and assemblies no longer
 * Telerik.Web.Spreadsheet
 
 The `Telerik.Zip` library will continue to be shipped as a standalone library.
+
+### Pager
+
+The [responsive behavior]({% slug responsive_pager_aspnet%}) of the Pager has been enhanced, which introduces the following changes:
+
+* The Pager's sizing is no longer based on breakpoints. Instead, the optimized responsive behavior renders as many elements as possible within the available space.
+* `Input` Type&mdash;When the [`Input()`](/api/kendo.mvc.ui.fluent/pagerbuilder#inputsystemboolean) option of the Pager is enabled, the TextBox next to the navigation arrows is replaced with a NumericTextBox, and the numeric page number buttons are no longer rendered.
+* Page Selection&mdash;The page selection drop-down has been replaced with a NumericTextBox for improved user interaction.
+* `NumbersSelectLabel()` Property&mdash;The [`NumbersSelectLabel()`](/api/kendo.mvc.ui.fluent/pagermessagessettingsbuilder#numbersselectlabelsystemstring) option in the `Messages()` configuration has been removed as it is no longer needed with the replacement of the page selection drop-down.
+
+> These changes to the Pager affect all components that use a built-in pager, including the Grid, PDFViewer, and other data management components.
 
 ## {{ site.product }} Q1 2025
 

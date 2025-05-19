@@ -100,7 +100,7 @@ The following example demonstrates how to implement the suggested approach.
           dataSource: {
             transport: {
               read: {
-                url: "../content/dataviz/js/boeing-stock.json",
+                url: "https://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
                 dataType: "json"
               }
             },

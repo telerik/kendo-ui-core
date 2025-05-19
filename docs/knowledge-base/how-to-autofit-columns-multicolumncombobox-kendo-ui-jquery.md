@@ -82,7 +82,7 @@ Below is a runnable example:
                 title: "Contact Name",
                 template:
                   "<span class='customer-photo'" +
-                  "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></span>" +
+                  "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></span>" +
                   "<span class='customer-name'>#: ContactName #</span>",
                 width: 200,
               },
@@ -120,7 +120,7 @@ Below is a runnable example:
                     title: "Contact Name",
                     template:
                       "<span class='customer-photo'" +
-                      "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></span>" +
+                      "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></span>" +
                       "<span class='customer-name'>#: ContactName #</span>",
                     width: newWidth,
                   },

@@ -34,7 +34,7 @@ You can use the internal logic of the Endless Scrolling feature to load more ite
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
       </div>

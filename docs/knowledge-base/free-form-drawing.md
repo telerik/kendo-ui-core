@@ -39,7 +39,7 @@ How can I enable free drawing when working with the Kendo UI Drawing API library
 
 The following example demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
 
-```dojo
+```pseudo
     <div id="surface" style="width: 1000px; height: 1000px;border: 1px solid black;cursor: crosshair"></div>
     <script>
       var draw = kendo.drawing;

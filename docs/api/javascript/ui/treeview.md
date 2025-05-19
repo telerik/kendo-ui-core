@@ -1258,13 +1258,13 @@ The child node whose parent will be returned.
 
     var treeview = $("#treeview").data("kendoTreeView");
 
-    var parent = treeview.parent(treeview.findByText("bar"));
+    var parentTask = treeview.parent(treeview.findByText("bar"));
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(treeview.text(parent)); // logs "foo"
+    console.log(treeview.text(parentTask)); // logs "foo"
 
-    parent = treeview.parent(parent);
+    parentTask = treeview.parent(parentTask);
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(parent.length); // logs 0
+    console.log(parentTask.length); // logs 0
     </script>
 
 ### remove

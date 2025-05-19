@@ -177,7 +177,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
             data.base64 = parts[1];
 
             //Sending the data via jQuery.post method
-            jQuery.post("url/to/save/pdf", data)
+            //jQuery.post("url/to/save/pdf", data)
         });
     </script>
 

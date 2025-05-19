@@ -111,12 +111,12 @@ The following example demonstrates how to tie a pager to a data source and enabl
 
 ## Functionality and Features
 
-* [Pager Settings and Types]({% slug settings_pager_aspnet %})—You can choose between the available settings and types.
-* [Responsive Pager]({% slug responsive_pager_aspnet  %})—The Pager supports responsive design by default. 
-* [Pager Templates]({% slug templates_pager_aspnet %})—Customize the look and feel of the Pager with Kendo Templates.
-* [Globalization and Messages]({% slug globalization_pager_aspnet %})—The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support).
-* [Accessibility]({% slug htmlhelpers_pager_accessibility %})—The Pager is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
-
+* [Pager Settings and Types]({% slug settings_pager_aspnet %})&mdash;Control the Pager functions and rendering.
+* [Responsiveness]({% slug responsive_pager_aspnet %})&mdash;The Pager supports responsive design by default. 
+* [Adaptive Mode]({% slug htmlhelpers_pager_adaptive_mode %})&mdash;Enable the adaptive mode that changes the rendering of the Pager based on the screen resolution of the device.
+* [Templates]({% slug templates_pager_aspnet %})&mdash;Customize the look and feel of the Pager.
+* [Globalization]({% slug globalization_pager_aspnet %})&mdash;Localize the texts and tooltips of the Pager.
+* [Accessibility]({% slug htmlhelpers_pager_accessibility %})&mdash;The Pager is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 

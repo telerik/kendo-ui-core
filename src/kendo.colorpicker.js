@@ -492,8 +492,8 @@ export const __meta__ = {
                         adaptive: true,
                         closeButton: true,
                         hideOverflowContent: true,
-                        title: kendo.htmlEncode(options.adaptiveTitle) || "Choose Color",
-                        subtitle: kendo.htmlEncode(options.adaptiveSubtitle) || "",
+                        title: options.adaptiveTitle ? kendo.htmlEncode(options.adaptiveTitle) : "Choose Color",
+                        subtitle: options.adaptiveSubtitle ? kendo.htmlEncode(options.adaptiveSubtitle) : "",
                         footerTemplate: that._actionFooterButtons(),
                     }).data("kendoActionSheet");
 

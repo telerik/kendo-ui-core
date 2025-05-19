@@ -112,6 +112,7 @@ The following example demonstrates how to create a logarithmic trendline for Cat
                 categories: [2005, 2006, 2007, 2008, 2009]
             }
         });
+    </script>
 ```
 
 ### Power Trendline

@@ -1133,7 +1133,7 @@ The field from the server response which contains server-side errors. Can be set
 
 #### Specify the error field as a string
 
-```
+```pseudo
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1160,7 +1160,7 @@ The field from the server response which contains server-side errors. Can be set
 
 #### Specify the error field as a function
 
-```
+```pseudo
     <script>
       var dataSource = new kendo.data.DataSource({
         transport: {
@@ -2516,7 +2516,7 @@ which should follow the `schema.data` configuration.
 A function that should be invoked to notify the data source about updated data items that are pushed from the server. Accepts a single argument - the object pushed from the server
 which should follow the `schema.data` configuration.
 
-```
+```pseudo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
     <script>
     var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";

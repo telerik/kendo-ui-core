@@ -20,11 +20,11 @@ The child `kendo.data.HierarchicalDataSource` of the node. This field is initial
 #### Example - get the child nodes
 
     <script>
-    var parent = new kendo.data.Node({ text: "Parent" });
-    parent.append({ text: "Child" });
+    var parentTask = new kendo.data.Node({ text: "Parent" });
+    parentTask.append({ text: "Child" });
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(parent.children.data().length); // outputs "1"
-    var child = parent.children.at(0);
+    console.log(parentTask.children.data().length); // outputs "1"
+    var child = parentTask.children.at(0);
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(child.text); // outputs "Child"
     </script>
@@ -32,9 +32,9 @@ The child `kendo.data.HierarchicalDataSource` of the node. This field is initial
 #### Example - sync the child datasource
 
     <script>
-    var parent = new kendo.data.Node({ text: "Parent" });
-    parent.append({ text: "Child" }); // add new child node
-    parent.children.sync();
+    var parentTask = new kendo.data.Node({ text: "Parent" });
+    parentTask.append({ text: "Child" }); // add new child node
+    parentTask.children.sync();
     </script>
 
 ## Methods
@@ -54,11 +54,11 @@ The data for the new item.
 #### Example - append child nodes
 
     <script>
-    var parent = new kendo.data.Node({ text: "Parent" });
-    parent.append({ text: "Child" });
+    var parentTask = new kendo.data.Node({ text: "Parent" });
+    parentTask.append({ text: "Child" });
 	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log(parent.children.data().length); // outputs "1"
-    var child = parent.children.at(0);
+    console.log(parentTask.children.data().length); // outputs "1"
+    var child = parentTask.children.at(0);
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(child.text); // outputs "Child"
     </script>

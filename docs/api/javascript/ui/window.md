@@ -215,6 +215,7 @@ The type of result expected from the remote service. Used values are "html" and 
 
 #### Example - fetching and displaying JSON content it in the Window
 
+```pseudo
     <div id="dialog"></div>
 
     <script>
@@ -225,6 +226,7 @@ The type of result expected from the remote service. Used values are "html" and 
         }
       });
     </script>
+```
 
 ### content.iframe `Boolean`
 
@@ -236,6 +238,7 @@ To control the creation of iframe Window content, you have to explicitly configu
 
 #### Example - Explicitly configure an iframe
 
+```pseudo
     <div id="dialog"></div>
 
     <script>
@@ -247,6 +250,7 @@ To control the creation of iframe Window content, you have to explicitly configu
       }
     });
     </script>
+```
 
 ### content.template `String`
 
@@ -258,6 +262,7 @@ If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON res
 
 #### Example - fetching JSON and displaying it through a template
 
+```pseudo
     <div id="dialog">
         <p><strong>This example will not work unless you define a valid JSON service URL for `content.url`.</p>
         <p>The expected JSON response is:
@@ -279,6 +284,7 @@ If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON res
       }
     });
     </script>
+```
 
 ### draggable `Object|Boolean` *(default: true)*
 

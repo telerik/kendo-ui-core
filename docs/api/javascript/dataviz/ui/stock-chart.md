@@ -1015,7 +1015,7 @@ it will automatically set "from" and "to" filters on the main data source.
 This, in conjunction with server filtering, allows you to visualize large data sets
 without loading them at once.
 
-```
+```pseudo
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -1041,7 +1041,7 @@ without loading them at once.
 Indicates whether the navigator will call read on the data source initially.
 Applicable only when using a dedicated navigator data source.
 
-```
+```pseudo
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -1338,7 +1338,7 @@ Array of data items. The data item type can be either a:
 
 Set the chart series data as array of objects
 
-```
+```pseudo
   <div id="stock-chart"></div>
   <script>
   $("#stock-chart").kendoStockChart({
@@ -1362,8 +1362,9 @@ Set the chart series data as array of objects
   </script>
 ```
 
-#### Example - set the chart series data as array of arrays
+#### Set the chart series data as array of arrays
 
+```pseudo
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -1399,6 +1400,7 @@ Set the chart series data as array of objects
       }
     });
     </script>
+```
 
 ### navigator.series.highField `String`
 

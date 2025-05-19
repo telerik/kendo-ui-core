@@ -75,7 +75,7 @@ The following example demonstrates how to use dates inside a Grid row template.
       <script id="rowTemplate" type="text/x-kendo-tmpl">
 	            <tr data-uid="#: uid #">
 		            <td class="photo">
-                       <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
         </td>
 		            <td class="details">
 			           <span class="name">#: FirstName# #: LastName# </span>
@@ -95,7 +95,7 @@ The following example demonstrates how to use dates inside a Grid row template.
       <script id="altRowTemplate" type="text/x-kendo-tmpl">
 	            <tr class="k-alt" data-uid="#: uid #">
 		            <td class="photo">
-                       <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
         </td>
 		            <td class="details">
 			           <span class="name">#: FirstName# #: LastName# </span>

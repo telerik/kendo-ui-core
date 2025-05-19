@@ -29,7 +29,7 @@ Use CSS and apply a background to the diagram `div` element.
 ```html
   <style>
     #diagram {
-    /* background: center no-repeat url('../content/shared/styles/world-map.png'); */ /* Apply background image */
+    /* background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png'); */ /* Apply background image */
     /* background: yellow; */ /* Apply background color */
        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(139,148,45,1) 35%, rgba(0,212,255,1) 100%); /* Apply background gradient */
     }
@@ -41,7 +41,7 @@ Use CSS and apply a background to the diagram `div` element.
 
 <style>
     #diagram {
-        /* background: center no-repeat url('../content/shared/styles/world-map.png'); */
+        /* background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png'); */
         /* Apply background image */
         /* background: yellow; */
         /* Apply background color */
@@ -142,7 +142,7 @@ Use CSS and apply a background to the diagram `div` element.
         }));
 
         g.append(new dataviz.diagram.Image({
-            source: "../content/dataviz/diagram/people/" + dataItem.image,
+            source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
             x: 3,
             y: 3,
             width: 68,

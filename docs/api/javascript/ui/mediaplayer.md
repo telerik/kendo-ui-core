@@ -58,8 +58,9 @@ If set to `false`, the user will be prevented from seeking the video forward.
 
 If set to `true`, the widget will enter fullscreen mode.
 
-#### Example - enable fullscreen
+#### Enable fullscreen
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -67,6 +68,7 @@ If set to `true`, the widget will enter fullscreen mode.
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### media `Object`
 

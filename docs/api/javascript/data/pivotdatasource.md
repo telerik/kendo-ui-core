@@ -273,7 +273,7 @@ The configuration which is used when the data source discovers the schema inform
 
 #### Set the discover remote service
 
-```
+```pseudo
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",

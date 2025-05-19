@@ -84,7 +84,7 @@ The animation that will be used when a Tooltip closes.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -115,7 +115,7 @@ Effect to be used for closing of the tooltip.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -145,7 +145,7 @@ Defines the animation duration.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -175,7 +175,7 @@ The animation that will be used when a Tooltip opens.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -206,7 +206,7 @@ Effect to be used for opening of the Tooltip.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -236,7 +236,7 @@ Defines the animation duration.
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [
@@ -423,7 +423,7 @@ The event on which the tooltip will be shown. Predefined values are "mouseenter"
       $("#map").kendoMap({
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         markers: [

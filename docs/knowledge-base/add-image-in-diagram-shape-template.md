@@ -190,7 +190,7 @@ The following example shows how to implement the desired scenario by using the [
             var dataItem = options.dataItem;
 
             g.append(new dataviz.diagram.Image({
-                source: "../content/dataviz/diagram/people/antonio.jpg",
+                source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/antonio.jpg",
                 x: 3,
                 y: 3,
                 width: 68,

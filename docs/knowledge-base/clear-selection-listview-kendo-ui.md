@@ -37,13 +37,13 @@ Below is an example how to implement this functionality:
 
 ```dojo
 
-      <script src="../content/shared/js/products.js"></script>
+      <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
       <div id="listView"></div>
 
       <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
             <h3>#:ProductName#</h3>
         </div>
       </script>

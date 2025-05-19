@@ -201,6 +201,36 @@ A whitespace-separated string of animation effects that are used when a new tab 
         });
     </script>
 
+### closable `Boolean`*(default: false)*
+
+Specifies whether each tab can be closed via a close button. When enabled, each tab includes a close icon that triggers tab removal on click. This applies to all tabs in the TabStrip. In case you want to have specific tabs with a different closable behavior, you can set the `closable` option in the specific tab item options.
+
+#### Example
+
+    <div id="tabstrip"></div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            closable: true,
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+                {
+                    text: "Tab 1",
+                    content: "Tab 1 content"
+                },
+                {
+                    text: "Tab 2",
+                    content: "Tab 2 non-closable content",
+                    closable: false
+                },
+                {
+                    text: "Tab 3",
+                    content: "Tab 3 content"
+                }]
+        });
+    </script>
+
 ### collapsible `Boolean`*(default: false)*
 
 Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.
@@ -308,6 +338,45 @@ Sets the field of the data item that provides the URL for the Ajax loaded tab co
         });
     </script>
 
+### dataIconField `String`*(default: "icon")*
+
+Sets the field of the data item that provides the icon for the tab.
+
+#### Example
+
+    <div id="tabstrip"></div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "Name",
+            dataIconField: "Icon",
+            dataSource: [
+              { Name: "Tab1", Icon: "gear" },
+              { Name: "Tab2", Icon: "pencil" }
+            ]
+        });
+    </script>
+
+### dataIconPositionField `String`*(default: "iconPosition")*
+
+Sets the field of the data item that provides the position of the icon relative to the tab text. Possible values are "before" and "after".
+
+#### Example
+
+    <div id="tabstrip"></div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "Name",
+            dataIconField: "Icon",
+            dataIconPositionField: "IconPosition",
+            dataSource: [
+              { Name: "Tab1", Icon: "gear", IconPosition: "before" },
+              { Name: "Tab2", Icon: "pencil", IconPosition: "after" }
+            ]
+        });
+    </script>
+
 ### dataImageUrlField `String`*(default: "")*
 
 Sets the field of the data item that provides the image URL of the tab.
@@ -348,6 +417,308 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
           { Name: "Tab2"}
         ]
       });
+    </script>
+
+### dataSource.text `String` *(default: "")*
+
+The display text of the tab. This is the text that will be shown in the tab header.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              { text: "Tab 1", content: "Tab 1 content" },
+              { text: "Tab 2", content: "Tab 2 content" }
+            ]
+        });
+    </script>
+
+### dataSource.content `String` *(default: "")*
+
+The content to be displayed in the tab panel when the tab is selected.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              { text: "Tab 1", content: "Tab 1 content" },
+              { text: "Tab 2", content: "Tab 2 content" }
+            ]
+        });
+    </script>
+
+### dataSource.icon `String` *(default: "")*
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the tab element.
+
+See [web icons help article](/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataIconField: "icon",
+            dataSource: [
+              { text: "Home", icon: "home", content: "Home content" },
+              { text: "Settings", icon: "gear", content: "Settings content" }
+            ]
+        });
+    </script>
+
+### dataSource.iconPosition `String` *(default: "before")*
+
+Sets the position of the icon relative to the tab text. Possible values are "before" and "after".
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataIconField: "icon",
+            dataIconPositionField: "iconPosition",
+            dataSource: [
+              { text: "Home", icon: "home", iconPosition: "before", content: "Home content" },
+              { text: "Settings", icon: "gear", iconPosition: "after", content: "Settings content" }
+            ]
+        });
+    </script>
+
+### dataSource.iconClass `String` *(default: "")*
+
+If set, this value will be appended to the icon element's class attribute.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              { text: "Home", icon: "home", iconClass: "my-home-icon", content: "Home content" },
+              { text: "Settings", icon: "gear", iconClass: "my-settings-icon", content: "Settings content" }
+            ]
+        });
+    </script>
+
+### dataSource.closable `Boolean` *(default: false)*
+
+Specifies whether this specific tab can be closed via a close button. When set to true, the tab includes a close icon that triggers tab removal when clicked. This overrides the global `closable` setting for this specific tab.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              { text: "Tab 1", content: "Tab 1 content" },
+              { text: "Tab 2 (closable)", content: "Tab 2 content", closable: true },
+              { text: "Tab 3", content: "Tab 3 content" }
+            ]
+        });
+    </script>
+
+### dataSource.actions `Array`
+
+Defines a collection of action buttons that are rendered in the tab. The actions buttons are rendered as part of the tab and can be used to provide additional functionality beyond the built-in close button.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    icon: "pencil",
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  },
+                  {
+                    icon: "refresh",
+                    action: function(e) {
+                      console.log("Refresh tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.actions.icon `String` *(default: "")*
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content that is used for the action button.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    icon: "pencil",
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.actions.iconClass `String` *(default: "")*
+
+If set, this value will be appended to the action button's icon element class attribute. Provides an alternative way to specify an icon using custom CSS classes.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    iconClass: "k-icon k-i-pencil",
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.actions.attributes `Object`
+
+Defines custom attributes to be applied to the action button element.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    icon: "pencil",
+                    attributes: { "title": "Edit", "data-id": "edit-action" },
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.actions.action `Function`
+
+A function to be executed when the action button is clicked. The event object is passed as a parameter to the function.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab with actions",
+                content: "Tab content",
+                actions: [
+                  {
+                    icon: "pencil",
+                    action: function(e) {
+                      console.log("Edit tab", e);
+                    }
+                  }
+                ]
+              }
+            ]
+        });
+    </script>
+
+### dataSource.enabled `Boolean` *(default: true)*
+
+Specifies whether the tab is enabled or disabled. Disabled tabs cannot be selected or focused and are displayed with a different visual style.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              { text: "Tab 1", content: "Tab 1 content" },
+              { text: "Tab 2", content: "Tab 2 content", enabled: false },
+              { text: "Tab 3", content: "Tab 3 content" }
+            ]
+        });
+    </script>
+
+### dataSource.attributes `Object`
+
+Defines custom attributes to be applied to the tab element.
+
+#### Example
+
+    <div id="tabstrip"></div>
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataContentField: "content",
+            dataSource: [
+              {
+                text: "Tab 1",
+                content: "Tab 1 content",
+                attributes: { "data-custom": "value", "title": "Tab 1 tooltip" }
+              },
+              { text: "Tab 2", content: "Tab 2 content" }
+            ]
+        });
     </script>
 
 ### dataSpriteCssClass `String`*(default: "")*
@@ -903,7 +1274,7 @@ Appends a tab to the collection of tabs in a **TabStrip**.
                             }
                         ]
         }).data("kendoTabStrip");
-  
+
         tabStrip.append(
             [{
                 text: "<b>Appended Tab 1</b>",
@@ -913,7 +1284,7 @@ Appends a tab to the collection of tabs in a **TabStrip**.
             },
             {
                 text: "<i>Appended Tab 2</i>",
-                encoded: false,                             // Allows use of HTML for item text                           
+                encoded: false,                             // Allows use of HTML for item text
                 contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html", // Provides the URL for the Ajax loaded tab content
                 spriteCssClass: "brazilFlag"  // Item image sprite CSS class, optional.
             }]
@@ -1270,7 +1641,7 @@ Reloads TabStrip tab(s) via AJAX.
       }).data("kendoTabStrip");
 
       $('#btn').click(function(){
-        //The result can be observed in Network tab in the browser`s Developer Tools. 
+        //The result can be observed in Network tab in the browser`s Developer Tools.
         //When the button is clicked a request for loading the content will be performed.
         tabStrip.reload("li:first");
       })

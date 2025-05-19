@@ -126,7 +126,7 @@ For an interactive example using the [`Stock Chart`](https://docs.telerik.com/ke
             dataSource: {
               transport: {
                 read: {
-                  url: "../content/dataviz/js/boeing-stock.json",
+                  url: "https://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
                   dataType: "json"
                 }
               },

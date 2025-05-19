@@ -84,7 +84,7 @@ The following example demonstrates the outcome of the suggested approach.
   <script id="rowTemplate" type="text/x-kendo-tmpl">
     <tr data-uid="#: uid #">
       <td class="photo">
-        <img src="../content/web/Employees/#: EmployeeID #.jpg" alt="#: EmployeeID #" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#: EmployeeID #.jpg" alt="#: EmployeeID #" />
       </td>
       <td class="details">
         <span class="name">#: FirstName# #: LastName# </span>
@@ -101,7 +101,7 @@ The following example demonstrates the outcome of the suggested approach.
   <script id="altRowTemplate" type="text/x-kendo-tmpl">
     <tr class="k-alt" data-uid="#: uid #">
       <td class="photo">
-        <img src="../content/web/Employees/#: data.EmployeeID #.jpg" alt="#: EmployeeID #" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#: data.EmployeeID #.jpg" alt="#: EmployeeID #" />
       </td>
       <td class="details">
         <span class="name">#: FirstName# #: LastName# </span>

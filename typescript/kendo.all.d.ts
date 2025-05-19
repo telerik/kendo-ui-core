@@ -12302,12 +12302,15 @@ declare namespace kendo.ui {
     interface TabStripOptions {
         name?: string | undefined;
         animation?: boolean | TabStripAnimation | undefined;
+        closable?: boolean | undefined;
         collapsible?: boolean | undefined;
         contentUrls?: any;
         dataContentField?: string | undefined;
         dataContentUrlField?: string | undefined;
+        dataIconField?: string | undefined;
+        dataIconPositionField?: string | undefined;
         dataImageUrlField?: string | undefined;
-        dataSource?: any|any|kendo.data.DataSource | undefined;
+        dataSource?: any| TabStripItem[] |kendo.data.DataSource | undefined;
         dataSpriteCssClass?: string | undefined;
         dataTextField?: string | undefined;
         dataUrlField?: string | undefined;
@@ -12323,6 +12326,22 @@ declare namespace kendo.ui {
         select?(e: TabStripSelectEvent): void;
         show?(e: TabStripShowEvent): void;
     }
+
+    interface TabStripItem {
+        icon?: string | undefined;
+        iconPosition?: 'before' | 'after' | undefined;
+        closable?: boolean | undefined;
+        enabled?: boolean | undefined;
+        actions?: TabStripTabAction[] | undefined;
+    }
+
+    interface TabStripTabAction {
+        action?: Function | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        attributes?: any | undefined;
+    }
+
     interface TabStripEvent {
         sender: TabStrip;
         preventDefault: Function;

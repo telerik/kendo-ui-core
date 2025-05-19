@@ -56,7 +56,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
 
       <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
-            <img src="../content/web/foods/#:ProductID#.jpg" alt="#:ProductName# image" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#:ProductID#.jpg" alt="#:ProductName# image" />
             <h3>#:ProductName#</h3>
         </div>
       </script>

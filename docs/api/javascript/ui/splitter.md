@@ -124,6 +124,7 @@ The label of the current pane. Will be used as a `aria-label` for the Splitter `
 
 #### Example
 
+    <base href="https://demos.telerik.com/kendo-ui/panelbar/ajax" />
     <div id="splitter">
       <div>Pane A</div>
       <div></div>
@@ -133,7 +134,7 @@ The label of the current pane. Will be used as a `aria-label` for the Splitter `
       panes: [ {
         label: "Label A"
       }, {
-        contentUrl: "https://www.telerik.com/",
+        contentUrl: "../content/web/panelbar/ajax/ajaxContent1.html",
         label: "Label from URL"
       } ]
     });
@@ -271,12 +272,12 @@ Any data that is necessary to be sent to the server.
 
 #### Example
 
-  <base href="https://demos.telerik.com/kendo-ui/panelbar/ajax" />
-  <div id="splitter">
-    <div id="pane1">Pane A</div>
-    <div>Pane B</div>
-  </div>
-  <script>
+    <base href="https://demos.telerik.com/kendo-ui/panelbar/ajax" />
+    <div id="splitter">
+      <div id="pane1">Pane A</div>
+      <div>Pane B</div>
+    </div>
+    <script>
     $("#splitter").kendoSplitter();
     var splitter = $("#splitter").data("kendoSplitter");
 
@@ -285,7 +286,7 @@ Any data that is necessary to be sent to the server.
 
     // example of loading content into the pane with ID="pane1"
     //splitter.ajaxRequest("#pane1", "/customer/profile", { id: 42 });
-  </script>
+    </script>
 
 ### append
 

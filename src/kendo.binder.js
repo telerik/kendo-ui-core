@@ -1348,7 +1348,9 @@ export const __meta__ = {
                             widget._preselect(value, text);
                         }
                     } else {
-                        widget.value(value);
+                       if (widget.options.name != "Upload") {
+                           widget.value(value);
+                       }
                     }
                 }
 

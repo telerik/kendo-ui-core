@@ -477,7 +477,7 @@ The name of the catalog.
 
 #### Set the catalog
 
-```
+```pseudo
     <script>
     var dataSource = new kendo.data.PivotDataSourceV2({
       type: "xmla",
@@ -576,7 +576,7 @@ The name of the cube.
 
 #### Set the cube
 
-```
+```pseudo
     <script>
     var dataSource = new kendo.data.PivotDataSourceV2({
       type: "xmla",

@@ -10620,7 +10620,7 @@ This class can be used to obtain reference to the button after Grid initializati
     });
     </script>
 
-### toolbar.showInactiveTools `boolean`
+### toolbar.showInactiveTools `Boolean`
 
 If set to true, the toolbar will show the inactive tools in a disabled state. Otherwise the tools will be hidden.
 

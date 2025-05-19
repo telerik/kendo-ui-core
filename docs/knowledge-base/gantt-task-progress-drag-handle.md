@@ -45,7 +45,7 @@ For the full implementation of the approach, refer to [this Dojo example](https:
     	<script id="task-template" type="text/x-kendo-template">
     		# if (resources[0]) { #
     		<div class="template" style="background-color: #= resources[0].color #;">
-    			<img class="resource-img" src="../content/web/gantt/resources/#:resources[0].id#.jpg" alt="#: resources[0].id #" />
+    			<img class="resource-img" src="https://demos.telerik.com/kendo-ui/content/web/gantt/resources/#:resources[0].id#.jpg" alt="#: resources[0].id #" />
     			<div class="wrapper">
     				<strong class="title">#= title # </strong>
     				<span class="resource">#= resources[0].name #</span>

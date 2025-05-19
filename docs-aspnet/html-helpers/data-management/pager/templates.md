@@ -1,12 +1,12 @@
 ---
-title: Pager Templates
+title: Templates
 page_title: Pager Templates
 description: "Get started with the {{ site.framework }} Pager and learn about its templating options."
 slug: templates_pager_aspnet
-position: 3
+position: 5
 ---
 
-# Pager Templates
+# Templates
 
 The {{ site.framework }} Pager component features templates for its page number links.
 

@@ -40,7 +40,7 @@ The dialog confirmation is an asynchronous action. To add it during the drag-and
 
       <script id="photo-template" type="text/x-kendo-template">
                <div class='employee-photo'
-                    style='background-image: url(../content/web/treelist/people/#:data.EmployeeID#.jpg);'></div>
+                    style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/treelist/people/#:data.EmployeeID#.jpg);'></div>
                <div class='employee-name'>#: FirstName #</div>
       </script>
 

@@ -141,7 +141,7 @@ Note that the path to the images points to another domain. Since retrieving the 
                 pageable: true,
                 columns: [{
                     template: "<div class='customer-photo'" +
-                    "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>",
+                    "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>",
                     field: "CustomerID",
                     title: "Contact",
                     width: 80

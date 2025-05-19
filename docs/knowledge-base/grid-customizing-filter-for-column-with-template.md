@@ -48,7 +48,7 @@ You can refer to the [Filter Menu Customization Demo](https://demos.telerik.com/
 By using this custom filter, the values displayed in the filter will be modified based on the template, allowing you to find values based on the modified data.
 
 ```dojo
- <script src="../content/shared/js/products.js"></script>
+ <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="example">
       <div id="grid"></div>

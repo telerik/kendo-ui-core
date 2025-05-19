@@ -10,6 +10,8 @@ position: 5
 
 The Telerik UI for {{ site.framework }} DropDownTree supports an adaptive mode that renders a mobile-friendly rendering of its popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.
 
+> Starting with the 2025 Q2 release, when the adaptive rendering mode is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
+
 The DropDownTree component automatically adapts to the current screen size and changes its rendering accordingly. On medium-sized screens, the suggestion list is displayed as docked to the bottom of the screen, while on smaller screens, it is rendered as a full-screen modal dialog. In all other scenarios, including when the `AdaptiveMode()` option is not specified or is set to its default value of `AdaptiveMode.None`, the standard popup is rendered docked to the input of the component.
 
 The adaptive mode changes the rendering of the DropDownTree popup element based on the screen resolution of the device (the horizontal value in `px`) with the following breakpoints:

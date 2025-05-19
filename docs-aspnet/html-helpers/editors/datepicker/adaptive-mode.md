@@ -14,6 +14,8 @@ Adaptiveness is an advanced capability that enhances the Telerik UI for {{ site.
 
 The DatePicker supports an adaptive mode that provides a mobile-friendly rendering of its calendar popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/datepickerbuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.
 
+> Starting with the 2025 Q2 release, when the adaptive rendering mode is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
+
 The DatePicker component automatically adapts to the current screen size and changes its rendering accordingly. On medium-sized screens, the calendar is displayed as docked to the bottom of the screen, while on smaller screens, it is rendered as a full-screen modal dialog. In all other scenarios, including when the `AdaptiveMode()` option is not specified or is set to its default value of `AdaptiveMode.None`, the standard calendar popup is rendered docked to the input of the component.
 
 The adaptive mode changes the rendering of the DatePicker popup element based on the screen resolution of the device (the horizontal value in `px`) with the following breakpoints:

@@ -44,7 +44,7 @@ The following example demonstrates how to configure such behavior.
 
     <div id="example">
       <div class="demo-section k-content wide">
-        <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+        <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
       </div>
       <script>
         function createChart() {

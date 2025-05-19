@@ -133,7 +133,7 @@ The following example demonstrates how to use the [drawing tooltip options](/api
         }));
 
         g.append(new dataviz.diagram.Image({
-          source: "../content/dataviz/diagram/people/" + dataItem.image,
+          source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
           x: 3,
           y: 3,
           width: 68,

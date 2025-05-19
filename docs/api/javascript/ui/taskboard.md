@@ -3616,7 +3616,7 @@ Returns the card elements in the TaskBoard filtered by column elemennt.
       setTimeout(function(){
         	var cardElm = taskBoard.itemsByColumn(taskBoard.columns().eq(2)).eq(0);
           var dataItem = taskBoard.dataItem(cardElm);
-          alert(dataItem.get("title"));
+          console.log(dataItem.get("title"));
       })
     </script>
 

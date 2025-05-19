@@ -36,7 +36,7 @@ How can I add a trend line and/or an average line to the Chart?
 ```
 <div id="example">
   <div class="demo-section k-content wide">
-    <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+    <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
   </div>
   <script>
     $(document).ready(function() {
