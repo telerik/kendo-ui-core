@@ -15,6 +15,7 @@ The TabStrip provides options for enhancing the behavior of its tabs.
 * [Rendering sortable tabs](#sortable-tabs)
 * [Positioning the tabs](#positioning-the-tabs)
 * [Selecting tabs on initial load](#selecting-tabs-on-initial-load)
+* [Rendering disabled tabs](#disabled-tabs)
 
 ## Dynamic Tabs
 
@@ -49,7 +50,7 @@ For a complete example, refer to the [demo on implementing scrollable tabs in th
 
 ## Sortable Tabs
 
-You can also implement sortable (draggable) tabs which users are able to close when they are no longer required. For the complete example, refer to the [demo on implementing sortable and closable tabs in the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/sortable-closable).
+You can also implement sortable (draggable) tabs. For the complete example, refer to the [demo on implementing sortable and closable tabs in the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/sortable-closable).
 
 ## Positioning the Tabs
 
@@ -110,6 +111,77 @@ The following example demonstrates how to initialize a TabStrip and select the f
             tabstrip.select(0);
         });
     </script>
+
+## Disabled Tabs
+
+Starting with Kendo UI for jQuery R2 2025, you can configure disabled tabs in the component through the `enabled` field in the `dataSource`.
+
+```dojo
+<div id="tabstrip"></div> 
+<script>
+    $("#tabstrip").kendoTabStrip({ 
+        dataTextField: "text", 
+        dataContentField: "content",
+        dataSource: [
+            {
+                text: "Baseball",
+                content: "Baseball tab", 
+            },
+            {
+                text: "Golf",
+                content: "Golf tab"
+            },
+            {
+                text: "Swimming",
+                content: "Swimming tab", 
+                enabled: false
+            },
+            {
+                text: "Snowboarding",
+                content: "Snowboarding tab", 
+                enabled: false,
+            }
+        ]
+    }).data("kendoTabStrip"); 
+</script>
+```
+
+## Closable Tabs
+
+Starting with Kendo UI for jQuery R2 2025, you can configure closable tabs in the component through the `closable` field in the `dataSource`. Setting the option for a specific tab will override the global `closable` option.
+
+```dojo
+<div id="tabstrip"></div> 
+<script>
+    $("#tabstrip").kendoTabStrip({ 
+        dataTextField: "text", 
+        dataContentField: "content",
+        closable:true,
+        dataSource: [
+            {
+                text: "Baseball",
+                content: "Baseball tab",                
+                closable: false,
+            },
+            {
+                text: "Golf",
+                content: "Golf tab",
+                closable: false,
+            },
+            {
+                text: "Swimming",
+                content: "Swimming tab", 
+                closable: true
+            },
+            {
+                text: "Snowboarding",
+                content: "Snowboarding tab", 
+                closable: true,
+            }
+        ]
+    }).data("kendoTabStrip"); 
+</script>
+```
 
 ## See Also
 

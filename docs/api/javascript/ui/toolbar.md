@@ -1616,9 +1616,9 @@ Fires when the SplitButton's popup closes.
 
 #### Event Data
 
-##### e.SplitButton `jQuery`
+##### e.widget `jQuery`
 
-The jQuery object that represents the SplitButton element.
+A reference to the closed Kendo component.
 
 ##### e.preventDefault `Function`
 
@@ -1676,9 +1676,9 @@ Fires when the Split Button's popup opens.
 
 #### Event Data
 
-##### e.SplitButton `jQuery`
+##### e.widget `jQuery`
 
-The jQuery object that represents the SplitButton element.
+A reference to the opened Kendo component.
 
 ##### e.preventDefault `Function`
 

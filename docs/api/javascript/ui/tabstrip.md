@@ -203,7 +203,7 @@ A whitespace-separated string of animation effects that are used when a new tab 
 
 ### closable `Boolean`*(default: false)*
 
-Specifies whether each tab can be closed via a close button. When enabled, each tab includes a close icon that triggers tab removal on click. This applies to all tabs in the TabStrip. In case you want to have specific tabs with a different closable behavior, you can set the `closable` option in the specific tab item options.
+Specifies whether each tab can be closed via a close button. When enabled, each tab includes a close icon that triggers tab removal on click. This applies to all tabs in the TabStrip. You can configure the closable behavior for individual tabs by setting the `closable` option in the specific tab item options.
 
 #### Example
 
@@ -359,7 +359,7 @@ Sets the field of the data item that provides the icon for the tab.
 
 ### dataIconPositionField `String`*(default: "iconPosition")*
 
-Sets the field of the data item that provides the position of the icon relative to the tab text. Possible values are "before" and "after".
+Sets the field of the data item that provides the position of the icon relative to the tab text. Possible values are `before` and `after`.
 
 #### Example
 
@@ -457,9 +457,9 @@ The content to be displayed in the tab panel when the tab is selected.
 
 ### dataSource.icon `String` *(default: "")*
 
-Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the tab element.
+Тhe name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the tab element.
 
-See [web icons help article](/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
+See [web icons help article](/kendo-ui/styles-and-layout/sass-themes/svg-icons) for more details on Kendo UI icons.
 
 #### Example
 
@@ -478,7 +478,7 @@ See [web icons help article](/kendo-ui/styles-and-layout/icons-web) for more det
 
 ### dataSource.iconPosition `String` *(default: "before")*
 
-Sets the position of the icon relative to the tab text. Possible values are "before" and "after".
+Sets the position of the icon relative to the tab text. Possible values are `before` and `after`.
 
 #### Example
 
@@ -1641,7 +1641,7 @@ Reloads TabStrip tab(s) via AJAX.
       }).data("kendoTabStrip");
 
       $('#btn').click(function(){
-        //The result can be observed in Network tab in the browser`s Developer Tools.
+        //The result can be observed in the Network tab in the browser`s Developer Tools.
         //When the button is clicked a request for loading the content will be performed.
         tabStrip.reload("li:first");
       })

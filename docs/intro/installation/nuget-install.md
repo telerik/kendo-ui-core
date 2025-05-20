@@ -101,8 +101,6 @@ To install the Kendo UI for jQuery packages by using the **Package Manager** dia
 
 1. Set the package source to `telerik.com` and install the `KendoUIProfessional` NuGet package.
 
-    ![Kendo UI for jQuery NuGet Package](../../images/kendo-ui-package.png)
-
 ### Install with the Package Manager Console
 
 To install the Kendo UI for jQuery packages by using the **Package Manager** console:

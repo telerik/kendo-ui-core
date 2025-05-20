@@ -12,9 +12,9 @@ Starting with Telerik UI {{ site.framework }} version Q2 2025, the PDFViewer int
 
 When uploading PDF files that contain forms, users can utilize the form editors by entering data and making selections without requiring external PDF editing tools. The Form Filling feature simplifies the process of editing and managing PDF forms, enhancing user experience and productivity.
 
-> Form Filing feature is available only with [PDF.js processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore%}).
+> The Form Filling feature is available only with [PDF.js processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore%}).
 
-To activate the Form Filling feature, enable the `RenderForms` option in the `PdfjsProcessing` configuration:
+To activate the Form Filling feature, enable the `RenderForms()` option in the `PdfjsProcessing()` configuration:
 
 ```HtmlHelper
     @(Html.Kendo().PDFViewer()
@@ -40,10 +40,8 @@ The supported form input types include:
 
 - Text Box&mdash;Enables users to input and edit text within designated form fields.
 - Password Box&mdash;Provides secure entry of sensitive information through password-protected fields.
-- Combo Box&mdash;Allows users to select options from a drop-down menu within the PDF form.
 - Check Box&mdash;Lets users toggle between selected and deselected states for predefined options.
 - Radio Button&mdash;Implements radio button functionality for selecting exclusive options within a group.
-- Signature Field&mdash;Enables users to digitally sign PDF documents directly within the viewer.
 - List Box&mdash;Allows users to select multiple options from a list of predefined items.
 
 ## Form Styling

@@ -4277,6 +4277,12 @@ If set to `true`, the pager will display buttons for navigating to specific page
         });
     </script>
 
+### pageable.adaptiveMode `String`*(default: "none")*
+Specifies a value whether the page sizes dropdown will be adaptive. Possible values are:
+
+* `none` - The current page.
+* `auto` - The total number of pages.
+
 ### pageable.buttonCount `Number` *(default: 10)*
 
 The maximum number of buttons that are displayed in the numeric pager. If more pages than the specified number are rendered, the pager will display ellipsis (`...`).
@@ -5996,7 +6002,9 @@ The text that is displayed by the command button. If not set, the TreeList will 
       });
     </script>
 
+### toolbar.items `Array`
 
+A JavaScript array that contains the ToolBar's commands configuration.
 
 ### toolbar.items.click `Function`
 

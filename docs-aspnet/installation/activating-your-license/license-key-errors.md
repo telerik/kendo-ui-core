@@ -34,24 +34,60 @@ A missing, expired, or invalid license will result in:
 
 ## Error Messages
 
-* [No license key is detected](#no-license-key-is-detected)
-* [Invalid license key](#invalid-license-key)
-* [License key is installed but the banner and watermark do not disappear](#license-key-is-installed-but-the-banner-and-watermark-do-not-disappear)
-* [Your subscription license has expired](#your-subscription-license-has-expired)
-* [Your perpetual license is invalid](#your-perpetual-license-is-invalid)
-* [Your trial license has expired](#your-trial-license-has-expired)
-* [Your license is not valid for the detected product(s)](#your-license-is-not-valid-for-the-detected-products)
-{% if site.mvc %}
-* [Could not load file or assembly 'Telerik.Licensing.Runtime'](#could-not-load-file-or-assembly-teleriklicensingruntime)
+### No Telerik or Kendo UI product references detected in project (TKL001)
+
+This error can occur when a project references `Telerik.Licensing`, but not any other Telerik packages. In this case, remove the `Telerik.Licensing` package from the project. If your scenario is different, [contact Technical Support](https://www.telerik.com/account/support-center).
+
+### No Telerik and Kendo UI License file found (TKL002)
+
+The error means that the license key is missing or not set up correctly. For example, the environment variable is not set, or [the license file may be located in the wrong place]({%slug installation_license_key_aspnetcore%}#manual-installation).
+
+[Install a license key]({%slug installation_license_key_aspnetcore%}) again. Also, check how to [set up a license key in CI/CD environments]({%slug deployment_license_key_aspnetcore%}).
+
+### Corrupted Telerik and Kendo UI License Key content (TKL003)
+
+The license key is detected, but its value is invalid and cannot be decrypted. For example, if you have set a `TELERIK_LICENSE` environment variable through the Windows operating system's UI, then it may be truncated. In such cases, remove the environment variable and use a license key file instead.
+
+Follow the [automatic]({%slug installation_license_key_aspnetcore%}#automatic-installation) or [manual]({%slug installation_license_key_aspnetcore%}#manual-installation) installation steps from scratch. Also, check how to [set up a license key in CI/CD environments]({%slug deployment_license_key_aspnetcore%}).
+
+### Unable to locate licenses for all products (TKL004)
+
+Your license is not valid for the detected product(s), because it doesn't include them.
+
+{% if site.core %}
+[Review the purchase options for {{ site.product }}](https://www.telerik.com/purchase/aspnet-core-ui). If you have already purchased the required license, then [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
+{% else %}
+[Review the purchase options for {{ site.product }}](https://www.telerik.com/purchase/aspnet-mvc). If you have already purchased the required license, then [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
 {% endif %}
 
-### No license key is detected
+### {{ site.product }} is not listed in your current license file (TKL101)
 
-[Install a license key file]({%slug installation_license_key_aspnetcore%}). If you already downloaded it, make sure it's [saved at the right place]({%slug installation_license_key_aspnetcore%}#manual-installation).
+Your license key does not include {{ site.product }}.
 
-### Invalid license key
+{% if site.core %}
+[Review the purchase options for {{ site.product }}](https://www.telerik.com/purchase/aspnet-core-ui). If you have already purchased the required license, then [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
+{% else %}
+[Review the purchase options for {{ site.product }}](https://www.telerik.com/purchase/aspnet-mvc). If you have already purchased the required license, then [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
+{% endif %}
 
-Follow the [automatic]({%slug installation_license_key_aspnetcore%}#automatic-installation) or [manual]({%slug installation_license_key_aspnetcore%}#manual-installation) installation steps from scratch.
+### Your current license has expired (TKL102)
+
+This error applies to perpetual licenses. It means that you are using a product version released outside the validity period of your license. To remove the error message, do either of the following:
+
+* [Renew your license](https://www.telerik.com/account/your-licenses) and then [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
+* Use a {{ site.product }} version that was released within the subscription period of your perpetual license.
+
+### Your subscription has expired (TKL103, TKL104)
+
+This error applies to subscription licenses. [Renew your subscription](https://www.telerik.com/account/your-licenses) and then [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
+
+### Your trial expired (TKL105)
+
+{% if site.core %}
+[Purchase a commercial license to continue using {{ site.product }}](https://www.telerik.com/purchase/aspnet-core-ui).
+{% else %}
+[Purchase a commercial license to continue using {{ site.product }}](https://www.telerik.com/purchase/aspnet-mvc).
+{% endif %}
 
 ### License key is installed but the banner and watermark do not disappear
 
@@ -93,33 +129,6 @@ The following workaround can be applied to remove the banner and watermark.
 
 This issue can also be caused by referencing different versions of the `Kendo.Mvc.dll` and the required Kendo UI JavaScript files. Ensure that the `Kendo.Mvc.dll` and the required client-side resources referenced in the project have an identical version, for example, 2025.1.211.
 
-### Your subscription license has expired
-
-<a href="https://www.telerik.com/account/your-licenses" target="_blank">Renew your subscribtion</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
-
-### Your perpetual license is invalid
-
-You are using a product version released outside the validity period of your perpetual license. To remove the error message, do either of the following:
-
-* <a href="https://www.telerik.com/account/your-licenses" target="_blank">Renew your subscribtion</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
-* Downgrade your app to a {{ site.product }} version that was released within the subscription period of your perpetual license.
-
-### Your trial license has expired
-
-{% if site.core %}
-<a href="https://www.telerik.com/purchase/aspnet-core-ui" target="_blank">Purchase a commercial license to continue using {{ site.product }}</a>.
-{% else %}
-<a href="https://www.telerik.com/purchase/aspnet-mvc" target="_blank">Purchase a commercial license to continue using {{ site.product }}</a>.
-{% endif %}
-
-### Your license is not valid for the detected product(s)
-
-{% if site.core %}
-<a href="https://www.telerik.com/purchase/aspnet-core-ui" target="_blank">Review the purchase options for {{ site.product }}</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
-{% else %}
-<a href="https://www.telerik.com/purchase/aspnet-mvc" target="_blank">Review the purchase options for {{ site.product }}</a>. Then, [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).
-{% endif %}
-
 {% if site.mvc %}
 ### Could not load file or assembly 'Telerik.Licensing.Runtime'
 
@@ -139,23 +148,6 @@ Ensure that you have set up an environment variable by following the steps from 
 
 Alternatively, if you have included the telerik-license.txt file into the project and the project is under source control, add the license file under source control as well.
 
-## Error Message Codes
-
-When using {{ site.product }} in a project with an expired or missing license, the `Telerik.Licensing` build task will indicate the following errors or conditions:
-
-| Error or Condition                                                       | Message Code       | Solution                                                                                                                                                            |
-| ------------------------------------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `No Telerik and Kendo UI License file found`                             | `TKL002`           | [Install a license key]({%slug installation_license_key_aspnetcore%}) to activate the UI controls and remove the error message.                                                   |
-| `Corrupted Telerik and Kendo UI License Key content`                     | `TKL003`           | [Download a new license key]({%slug installation_license_key_aspnetcore%}) and install it to activate the UI components and remove the error message. |
-| `Unable to locate licenses for all products`                             | `TKL004`           | Your license is not valid for all Telerik and Kendo products added to your project. If you have already purchased the required license, then [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates).                      |
-| `{{ site.product }} is not listed in your current license file` | `TKL101`           | Review the purchase options for the listed products. Alternatively, remove the references to the listed packages from `package.json`.                               |
-| `Your current license has expired`                                       | `TKL002` | You are using a product version released outside the validity period of your perpetual license. To remove the error message, do either of the following:            |
-|                                                                          |                    | - Renew your subscription and [Download a new license key]({%slug installation_license_key_aspnetcore%})                                                                        |
-|                                                                          |                    | - Downgrade to a product version included in your perpetual license as indicated in the message.                                                                    |
-| `Your subscription has expired`                                          | `TKL103`, `TKL104` | Renew your subscription and [Download a new license key]({%slug installation_license_key_aspnetcore%})                                                                            |
-| `Your trial expired`                                                     | `TKL105`           | Purchase a commercial license to continue using the product.                                                                     |
-| `No Telerik or Kendo UI product references detected in project`       | `TKL001`           | - If you use Telerik products and see this message, update the `Telerik.Licensing` package to version 1.4.9 or later.                                                 |
-|                                                                          |                    | - If you do not use Telerik products, remove the `Telerik.Licensing` NuGet reference from your project.                                                               |
 
 ## See Also
 

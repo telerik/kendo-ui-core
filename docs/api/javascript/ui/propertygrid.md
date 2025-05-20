@@ -1091,7 +1091,9 @@ The text that is displayed by the command button. If not set, the PropertyGrid w
       });
     </script>
 
+### toolbar.items `Array`
 
+A JavaScript array that contains the ToolBar's commands configuration.
 
 ### toolbar.items.click `Function`
 

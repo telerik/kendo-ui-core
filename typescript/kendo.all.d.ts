@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2025.1.227
+// Type definitions for Kendo UI Professional v2025.2.520
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -9354,7 +9354,6 @@ declare namespace kendo.ui {
         display?: string | undefined;
         empty?: string | undefined;
         allPages?: string | undefined;
-        numbersSelectLabel?: string | undefined;
         pageButtonLabel?: string | undefined;
         pageSizeDropDownLabel?: string | undefined;
         page?: string | undefined;
@@ -9369,6 +9368,7 @@ declare namespace kendo.ui {
 
     interface PagerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         ARIATemplate?: string | undefined;
         autoBind?: boolean | undefined;
         buttonCount?: number | undefined;
@@ -17497,6 +17497,15 @@ declare namespace kendo.dataviz.ui {
         visible?: boolean | undefined;
     }
 
+    interface ChartSeriesDefaultsFocusHighlight {
+        border?: {
+            width?: number;
+            color?: string;
+            opacity?: number;
+            dashType?: string;
+        };
+    }
+
     interface ChartSeriesDefaults {
         area?: any;
         bar?: any;
@@ -17504,10 +17513,14 @@ declare namespace kendo.dataviz.ui {
         bubble?: any;
         candlestick?: any;
         column?: any;
+        dynamicSlope?: boolean | undefined;
+        dynamicHeight?: boolean | undefined;
         donut?: any;
+        focusHighLight?: ChartSeriesDefaultsFocusHighlight | undefined;
         gap?: number | undefined;
         labels?: ChartSeriesDefaultsLabels | undefined;
         line?: any;
+        legendItem?: ChartLegendItem | undefined;
         ohlc?: any;
         overlay?: ChartSeriesDefaultsOverlay | undefined;
         pie?: any;
@@ -17517,6 +17530,7 @@ declare namespace kendo.dataviz.ui {
         spacing?: number | undefined;
         stack?: boolean | ChartSeriesDefaultsStack | undefined;
         startAngle?: number | undefined;
+        style?: string | undefined;
         type?: string | undefined;
         tooltip?: ChartSeriesDefaultsTooltip | undefined;
         verticalArea?: any;

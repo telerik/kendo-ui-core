@@ -8333,6 +8333,12 @@ Introduced in the Kendo UI 2017 R3 release.
     });
     </script>
 
+### pageable.adaptiveMode `String`*(default: "none")*
+Specifies a value whether the page sizes dropdown will be adaptive. Possible values are:
+
+* `none` - The current page.
+* `auto` - The total number of pages.
+
 ### pageable.buttonCount `Number` *(default: 10)*
 
 The maximum number of buttons displayed in the numeric pager. The pager will display ellipsis (...) if there are more pages than the specified number.

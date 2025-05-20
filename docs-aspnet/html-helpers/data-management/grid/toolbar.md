@@ -43,6 +43,30 @@ You can configure the Toolbar and include any of the built-in commands:
 ```
 {% endif %} 
 
+In the 2025 Q2 release an alternative way to configure the tools has been implemented. It relies on the `Items` configuration of the Grid toolbar:
+
+```HtmlHelper
+    .ToolBar(toolbar =>toolbar
+        .Items(itm=>{
+            itm.Edit();
+            itm.Update();
+            itm.CancelEdit();
+            itm.Destroy();
+            itm.Search();
+            itm.Excel();
+            itm.Sort();
+            itm.Filter();
+            itm.ColumnChooser();
+            itm.Group().ReorderButtons(true);
+            itm.Pdf();
+        })
+        .Overflow(overflow => overflow
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Visible)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Split)
+        )
+    )
+```
 
 | Command | Description | Resources|
 |---|---|---|
@@ -55,6 +79,58 @@ You can configure the Toolbar and include any of the built-in commands:
 | Search | Adds the built-in search panel for the Grid.| [Search Panel documentation]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})|
 | Spacer | Moves the tools that are declared after it to the right side of the ToolBar.| |
 | Separator | Acts as a delimiter between the ToolBar commands.| |
+
+## Disable Inactive Tools
+
+Starting with 2025 Q2 release the Grid component provides the possibility to disable or hide the inactive tools when editing. By default the inactive tools will be hidden. When the `ToolBar.ShowInactiveTools` option is enabled the inactive tools will be displayed as disabled.
+In the example below, the inactive buttons will be disabled until a change in the Grid data is made:
+
+The following example demonstrates how to add a custom command to the Toolbar:
+```HtmlHelper
+    @(Html.Kendo().Grid<MyApplication1.Models.ProductViewModel>()
+        .Name("grid")
+        .Columns(columns => {
+            columns.Bound(p => p.ProductName);
+            columns.Bound(p => p.UnitPrice).Width(140);
+            columns.Bound(p => p.UnitsInStock).Width(140);
+            columns.Bound(p => p.Discontinued).Width(100);
+            columns.Command(command => command.Destroy()).Width(150);
+        })
+        .ToolBar(toolbar =>toolbar
+            .Items(itm=>{
+                itm.Create();
+                itm.Edit();
+                itm.Save();
+                itm.CancelEdit();
+            })
+            .ShowInactiveTools(true)
+            .Overflow(overflow => overflow
+                .Mode(ToolBarOverflowMode.Scroll)
+                .ScrollButtons(ScrollButtonsType.Visible)
+                .ScrollButtonsPosition(ScrollButtonsPositionType.Split)
+            )
+        )
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        //additional configuration omitted for brevity
+    )
+    </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <toolbar show-inactive-tools="true">
+            <overflow mode=ToolBarOverflowMode.Scroll
+                scroll-buttons=ScrollButtonsType.Visible
+                scroll-buttons-position=ScrollButtonsPositionType.Split/>
+            <toolbar-button name="create"></toolbar-button>
+            <toolbar-button name="edit"></toolbar-button>
+            <toolbar-button name="save"></toolbar-button>
+            <toolbar-button name="cancelEdit"></toolbar-button>
+        </toolbar>
+        <editable mode="incell"/>
+    </kendo-grid>
+```
+{% endif %} 
 
 ## Custom Commands
 
@@ -92,6 +168,23 @@ The following example demonstrates how to add a custom command to the Toolbar:
 ```
 {% endif %} 
 
+If you are using the `Toolbar.Items` configuration (available since the Q2 2025 release), you can add a custom command as shown below:
+
+```HtmlHelper
+    .ToolBar(toolbar =>toolbar
+        .Items(itm=>{
+            itm.Excel();
+            itm.Pdf();
+            itm.Custom().ClientTemplate(
+                Html.Kendo().Template().AddComponent(c => c
+                    .Button()
+                    .Name("refresh")
+                    .Icon("arrow-rotate-cw")
+                    .HtmlAttributes(new { title = "Refresh" })
+                ));
+        })
+    )
+```
 
 ## Toolbar Template
 

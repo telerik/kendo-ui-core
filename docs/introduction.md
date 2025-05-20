@@ -116,15 +116,15 @@ Progress provides up-to-date information about the live services it delivers to 
 
 * [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/)
 
-## Trial Version and Commercial License
+## Licensing
 
-This Kendo UI for jQuery library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Kendo UI for jQuery [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
+Kendo UI for jQuery is a commercial UI library. To use it in your applications, you need to obtain the appropriate license. For detailed information about the available license options, pricing, and how to purchase, visit the [licensing page](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Kendo UI for jQuery [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
 
 ## Support Options
 
 For any issues you might encounter while working with Kendo UI for jQuery, use any of the available support channels:
 
-* Commercial Kendo UI distribution license holders and active trialists can take advantage of our outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [Kendo UI for jQuery dedicated support](https://www.telerik.com/account/support-tickets/) system.
+* All developers with an active license—whether on a trial or paid plan—benefit from direct support provided by the library's developers. To submit a support ticket, use the [Kendo UI for jQuery dedicated support](https://www.telerik.com/account/support-tickets/) system.
 * [Kendo UI for jQuery forums](https://www.telerik.com/forums/kendo-ui) are part of the free support you can get from the community and from the Kendo UI for jQuery team on all kinds of general issues.
 * [Kendo UI for jQuery feedback portal](https://feedback.telerik.com/kendo-jquery-ui) and [Kendo UI for jQuery roadmap](https://www.telerik.com/support/whats-new/kendo-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
 * Kendo UI for jQuery uses [GitHub Issues](https://github.com/telerik/kendo-ui-core/issues/) as its bug tracker and you can submit any related reports there. Also, check out the [closed list](https://github.com/telerik/kendo-ui-core/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed).

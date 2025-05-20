@@ -20,6 +20,7 @@ The component is composed of an unordered list of items which represent tabs, an
 |[Tabs]({% slug tabs_tabstrip %}) | You can further customize the tabs by utilizing any of the supported features such as sorting, scrolling, and positioning.
 |[Animation]({% slug animations_tabstrip %}) | The TabStrip also supports a set of animation effects which allow you to enhance the visual representation of its content.
 |[Content operations]({% slug content_tabstrip %}) | The TabStrip allows you to load its content by using AJAX requests.
+|[DataSource Binding]({% slug datasource_binding_tabstrip %}) | The TabStrip allows you to bind to a `dataSource` and configure various fields.
 |[Accessibility]({% slug jquery_tabstrip_accessibility %}) | The TabStrip is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_tabstrip %}).
 
 ## Next Steps 

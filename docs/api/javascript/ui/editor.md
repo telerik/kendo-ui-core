@@ -2956,7 +2956,7 @@ The maximum height that the editor can be resized to.
     });
     </script>
 
-### resizable.toolbar `Boolean|Object`
+### resizable.toolbar `Boolean|Object` *(default: false)*
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
 

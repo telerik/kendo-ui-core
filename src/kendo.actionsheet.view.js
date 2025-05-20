@@ -18,7 +18,7 @@ import "./kendo.button.js";
     const HEADER_TEMPLATE = (options) => {
         const startButtonHtml = options.startButton ?
             '<div class="k-actionsheet-actions">' +
-                kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-start-button")}></button>`, { icon: "chevron-left", fillMode: "flat", size: "large", ...options.startButton }) +
+                kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-start-button")} aria-label="${options.startButton.text || "Start"}"></button>`, { icon: "chevron-left", fillMode: "flat", size: "large", ...options.startButton }) +
             '</div>' : "";
 
         const closeButtonHtml = options.closeButton ?
@@ -38,7 +38,7 @@ import "./kendo.button.js";
                     '</div>' +
                     (options.closeButton ?
                     '<div class="k-actionsheet-actions">' +
-                        kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")}></button>`, { icon: "x", fillMode: "flat", size: "large", ...options.closeButton }) +
+                        kendo.html.renderButton(`<button ${kendo.attr("ref-actionsheet-close-button")} aria-label="${options.closeButton.text || "Close"}"></button>`, { icon: "x", fillMode: "flat", size: "large", ...options.closeButton }) +
                     '</div>'
                     : "") +
                 '</div>'

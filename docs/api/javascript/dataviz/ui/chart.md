@@ -20283,6 +20283,59 @@ The donut chart series options. Accepts all values supported by the [series](/ap
     });
     </script>
 
+### seriesDefaults.dynamicSlope `Boolean` *(default: false)*
+
+> The `dynamicSlope` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
+
+When set to true the ratio of the bases of each segment is calculated based on the ratio of currentDataItem.value/nextDataItem.value
+The last element is always created like a rectangle since there is no following element.
+
+
+#### Example - set the chart series dynamicSlope field
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        seriesDefaults: {
+          type: "funnel",
+          dynamicSlope: true,
+        },
+        series: [
+          {
+            data: [1, 2, 3, 4, 5],
+          },
+        ],
+      });
+    </script>
+
+
+### seriesDefaults.dynamicHeight `Boolean` *(default: true)*
+
+> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" or "pyramid".
+
+When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
+
+#### Example - set the chart series dynamicHeight field
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        seriesDefaults: {
+          type: "funnel",
+          dynamicHeight: false,
+        },
+        series: [
+          {
+            data: [
+              { value: 2 }, //height of this segment is 10% of the whole chart
+              { value: 4 }, //height of this segment is 20% of the whole chart
+              { value: 14 }, //height of this segment is 70% of the whole chart
+            ],
+          },
+        ],
+      });
+    </script>
+
 ### series.focusHighlight `Object`
 
 The focus highlight configuration options.
@@ -22062,6 +22115,39 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
       ]
     });
     </script>
+
+### seriesDefaults.style `String` *(default: "normal")*
+
+The supported values are:
+
+* "normal" - The values will be connected with straight line.
+* "step" - The values will be connected with a line with right angle.
+* "smooth" - The values will be connected with a smooth line.
+
+> The default value is "normal".
+
+> The `style` option is supported when [seriesDefaults.type](/api/javascript/dataviz/ui/chart#configuration-seriesdefaults.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
+
+> The `step` value is only supported when [seriesDefaults.type](/api/javascript/dataviz/ui/chart#configuration-seriesdefaults.type) is set to "line".
+
+> The `smooth` options is not supported for stacked area series with missing values.
+
+#### Example - set the style behavior
+   <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        seriesDefaults: {
+          type: "line",
+          style: "step",
+        },
+        series: [
+          {
+            data: [1, 2, 3, 4, 5],
+          },
+        ],
+      });
+    </script>
+
 
 ### seriesDefaults.type `String`
 

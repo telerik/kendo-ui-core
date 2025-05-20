@@ -11,6 +11,39 @@ Represents the Kendo UI Pager widget. Inherits from [Widget](/api/javascript/ui/
 
 ## Configuration
 
+### adaptiveMode `String`*(default: "none")*
+Specifies a value whether the page sizes dropdown will be adaptive. Possible values are:
+
+* `none` - The pager will not be adaptive.
+* `auto` - The page sizes dropdown will be adaptive and on small devices an action sheet will be displayed.
+
+#### Example - setting the adaptiveMode property
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { productName: "Tea", category: "Beverages" },
+                { productName: "Coffee", category: "Beverages" },
+                { productName: "Ham", category: "Food" },
+                { productName: "Bread", category: "Food" }
+            ],
+            pageSize: 25
+          });
+
+        dataSource.read();
+
+        $("#pager").kendoPager({
+          adaptiveMode: "auto",
+          dataSource: dataSource
+        });
+    </script>
+    <style>
+      #pager{
+       margin-top: 100px;
+      }
+    </style>
+
 ### ARIATemplate `String`*(default: "Page navigation, page #=page# of #=totalPages#")*
 Specifies a template used to populate the value of the aria-label attribute of the pager element.The parameters available for the template are:
 
@@ -254,7 +287,7 @@ Defines if a label showing current paging information will be displayed.
     </style>
 
 ### input `Boolean`*(default: false)*
-Defines if an input element which allows the user to navigate to given page will be displayed.
+Defines if an input element which allows the user to navigate to given page will be displayed. If enabled the numeric buttons for pages will not be rendered.
 
 #### Example - show the navigate-to-page input
 
@@ -571,41 +604,6 @@ The text displayed for the item that represents the allPages option when allPage
       }
     </style>
 
-### messages.numbersSelectLabel `String`*(default: "Page select")*
-
-The label applied to the Pager select element (when visible).
-
-#### Example - reduce view width to see the Pager select
-    <div id="pager"></div>
-
-    <script>
-        var dataSource = new kendo.data.DataSource({
-          data: [
-            { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" },
-            { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" },
-            { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" }
-          ],
-          pageSize: 1
-        });
-
-        $("#pager").kendoPager({
-          dataSource: dataSource,
-          messages: {
-            numbersSelectLabel: "Select page number"
-          }
-        });
-
-        dataSource.read();
-    </script>
 
 ### messages.page `String`*(default: "Page")*,
 The label displayed before the pager input.

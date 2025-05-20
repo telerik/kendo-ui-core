@@ -23,6 +23,17 @@ describe("SplitButton intialization", function() {
         assert.isOk(button.hasClass("k-button"));
     });
 
+    it("SplitButton renders wrapper and button", function() {
+        let splitButton = new SplitButton(button, { items: [
+                    { id: "keep-text", text: "Keep Text Only", icon: "clipboard-text" },
+                    { id: "paste-html", text: "Paste as HTML", imageUrl: "paste-as-html", hidden: true },
+                    { id: "paste-markdown", text: "Paste Markdown", icon: "clipboard-markdown", enabled: false },
+                    { id: "favourite", text: "Mark As Favourite", imageUrl: '../content/shared/icons/16/star.png', attributes: { "data-context": "some arbitrary data" } },
+                    { id: "telerik", text: "Go to SplitButton Demos", url: "https://demos.telerik.com/kendo-ui/splitbutton/items" }
+                ] });
+       assert.isOk(splitButton.menu.element.is(":hidden"));
+    });
+
     it("SplitButton renders arrow button", function() {
         let splitButton = new SplitButton(button, { items: defaultItems });
         let arrowBtn = button.next();

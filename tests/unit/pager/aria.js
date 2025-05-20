@@ -49,11 +49,6 @@ describe('pager aria', function() {
         assert.equal(element.attr("aria-label"), "Page navigation, page 1 of 5");
     });
 
-    it("page select select should have aria label", function() {
-        let element = setup(null, { pageSizes: [1, 2] });
-        assert.equal(element.find(".k-pager-numbers-wrap select").attr("aria-label"), "Page select");
-    });
-
     it("refresh button should have role=button", function() {
         let element = setup(null, { refresh: true });
         assert.equal(element.find(".k-pager-refresh").attr("role"), "button");
@@ -68,7 +63,9 @@ describe('pager aria', function() {
         let element = setup(null, { input: true });
         pager.page(1);
 
-        assert.equal(element.find("input").attr("aria-label"), pager.options.messages.page + " 1");
+        const input = element.find(".k-pager-numbers-wrap .k-input-inner").first();
+        assert.equal(input.attr("aria-label"), pager.options.messages.page);
+        assert.equal(input.attr("aria-valuenow"), "1");
     });
 
     it("page buttons should have role=button", function() {

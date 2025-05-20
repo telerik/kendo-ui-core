@@ -12,10 +12,8 @@ Starting with Kendo UI for jQuery version Q2 2025, the PDFViewer introduces a co
 
 - Text Box&mdash;Enables users to input and edit text within designated form fields.
 - Password Box&mdash;Provides secure entry of sensitive information through password-protected fields.
-- Combo Box&mdash;Allows users to select options from a dropdown menu within the PDF form.
 - Check Box&mdash;Lets users toggle between selected and deselected states for predefined options.
 - Radio Button&mdash;Implements radio button functionality for selecting exclusive options within a group.
-- Signature Field&mdash;Enables users to digitally sign PDF documents directly within the viewer.
 - List Box&mdash;Allows users to select multiple options from a list of predefined items.
 
 The Form Filling feature enhances the usability of PDF forms, making it easier for users to complete and submit forms without requiring external tools.

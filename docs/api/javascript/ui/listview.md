@@ -807,6 +807,12 @@ Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same ti
       });
     </script>
 
+### pageable.adaptiveMode `String`*(default: "none")*
+Specifies a value whether the page sizes dropdown will be adaptive. Possible values are:
+
+* `none` - The current page.
+* `auto` - The total number of pages.
+
 ### pageable.messages `Object`
 
 The text messages displayed in pager. Use this option to customize or localize the pager messages.

@@ -490,7 +490,10 @@ export const __meta__ = {
                 if (isAdaptive) {
                     that._popup = popup = selectorWrapper.kendoActionSheet({
                         adaptive: true,
-                        closeButton: true,
+                        closeButton: {
+                            icon: "check",
+                            themeColor: "primary",
+                        },
                         hideOverflowContent: true,
                         title: options.adaptiveTitle ? kendo.htmlEncode(options.adaptiveTitle) : "Choose Color",
                         subtitle: options.adaptiveSubtitle ? kendo.htmlEncode(options.adaptiveSubtitle) : "",

@@ -1,5 +1,6 @@
 import '@progress/kendo-ui/src/kendo.pager.js';
 import { stub } from '../../helpers/unit/stub.js';
+import { asyncTest } from '../../helpers/unit/async-utils.js';
 
 let DataSource = kendo.data.DataSource,
     pager,
@@ -67,12 +68,12 @@ describe('pager', function() {
         assert.equal(links[4].innerHTML, '<span class="k-button-text">5</span>');
     });
 
-    it("setting responsive to false hides select by default", function() {
+    it("setting responsive to false hides input by default", function() {
         let div = setup({}, { responsive: false });
 
         dataSource.read();
 
-        assert.isNotOk(div.data("kendoPager")._numericSelect.is(":visible"));
+        assert.isNotOk(div.data("kendoPager")._numericTextBox.wrapper.is(":visible"));
     });
 
     it("one button is rendered on init", function() {
@@ -81,6 +82,20 @@ describe('pager', function() {
 
         assert.equal(links.length, 1);
         assert.equal(links[0].innerHTML, '<span class="k-button-text">0</span>');
+    });
+
+    it("pager should have class k-pager-responsive if responsive=true", function() {
+        let div = setup();
+        dataSource.read();
+
+        assert.isOk(div.hasClass("k-pager-responsive"));
+    });
+
+    it("pager should not have class k-pager-responsive if responsive=false", function() {
+        let div = setup(null, { responsive: false });
+        dataSource.read();
+
+        assert.isNotOk(div.hasClass("k-pager-responsive"));
     });
 
     it("buttons are rendered if read before init", function() {
@@ -304,43 +319,66 @@ describe('pager', function() {
         assert.equal(pager.find(".k-pager-input").length, 1);
     });
 
-    it("input pager changes the page", function() {
+    it("pager input is placed inside numeric wrap", function() {
+        let pager = setup({ data: [] }, { input: true });
+        dataSource.read();
+
+        assert.equal(pager.find(".k-pager-numbers-wrap .k-pager-input .k-numerictextbox").length, 1);
+    });
+
+    asyncTest("input pager changes the page", function(done) {
         let pager = setup({}, { input: true });
         dataSource.read();
 
         pager.find(".k-pager-input").find("input").val(2).trigger({ type: "keydown", keyCode: 13 });
 
-        assert.equal(dataSource.page(), 2);
+        setTimeout(function() {
+            done(() => {
+                assert.equal(dataSource.page(), 2);
+            });
+        }, 150);
     });
 
-    it("input pager stays on current page if the input value is less than one is specified", function() {
+    asyncTest("input pager stays on current page if the input value is less than one is specified", function(done) {
         let pager = setup({}, { input: true });
         dataSource.read();
 
         pager.find(".k-pager-input").find("input").val(0).trigger({ type: "keydown", keyCode: 13 });
 
-        assert.equal(dataSource.page(), 1);
-        assert.equal(pager.find(".k-pager-input").find("input").val(), "1");
+        setTimeout(function() {
+            done(() => {
+                assert.equal(dataSource.page(), 1);
+                assert.equal(pager.find(".k-pager-input").find("input").val(), "1");
+            });
+        }, 150);
     });
 
-    it("input pager stays on current page if the input value is more than the total number of pages", function() {
+    asyncTest("input pager stays on current page if the input value is more than the total number of pages", function(done) {
         let pager = setup({}, { input: true });
         dataSource.read();
 
         pager.find(".k-pager-input").find("input").val(10).trigger({ type: "keydown", keyCode: 13 });
 
-        assert.equal(dataSource.page(), 1);
-        assert.equal(pager.find(".k-pager-input").find("input").val(), "1");
+        setTimeout(function() {
+            done(() => {
+                assert.equal(dataSource.page(), 1);
+                assert.equal(pager.find(".k-pager-input").find("input").val(), "1");
+            });
+        }, 150);
     });
 
-    it("input pager stays on current page if the input value is not a number", function() {
+    asyncTest("input pager stays on current page if the input value is not a number", function(done) {
         let pager = setup({}, { input: true });
         dataSource.read();
 
         pager.find(".k-pager-input").find("input").val("foo").trigger({ type: "keydown", keyCode: 13 });
 
-        assert.equal(dataSource.page(), 1);
-        assert.equal(pager.find(".k-pager-input").find("input").val(), "1");
+        setTimeout(function() {
+            done(() => {
+                assert.equal(dataSource.page(), 1);
+                assert.equal(pager.find(".k-pager-input").find("input").val(), "1");
+            });
+        }, 150);
     });
 
     it("input pager is updated when the page is changed", function() {
@@ -624,6 +662,12 @@ describe('pager', function() {
         assert.isOk(pager.find(".k-pager-sizes select").getKendoDropDownList().wrapper.hasClass("k-picker-sm"));
     });
 
+    it("drop down inherits adaptiveMode of pager", function() {
+        let pager = setup({}, { pageSizes: ["all", 1, 2], adaptiveMode: "auto" });
+
+        assert.isOk(pager.find(".k-pager-sizes select").getKendoDropDownList().options.adaptiveMode === "auto");
+    });
+
     it("changing page size to All with upper case letter sets page size to all pages", function() {
         let pager = setup({}, { pageSizes: [1, 2, "All"] });
         let dropdownlist = pager.find(".k-pager-sizes select").data("kendoDropDownList");
@@ -763,20 +807,6 @@ describe('pager', function() {
 
         assert.isOk(!dataSource._pageSize);
         assert.isOk(!dataSource._take);
-    });
-
-    it("numbers wrap select element is present when AutoBind is false", function() {
-        let dataSource = new DataSource({
-            pageSize: 1,
-            data: [1, 2, 3]
-        });
-
-        let pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
-            dataSource: dataSource,
-            autoBind: false
-        });
-
-        assert.equal(pager.find(".k-pager-numbers-wrap > select.k-dropdown").length, 1);
     });
 
     it("selected li is present when AutoBind is false", function() {
