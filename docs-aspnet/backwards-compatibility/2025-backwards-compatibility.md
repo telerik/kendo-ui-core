@@ -52,9 +52,19 @@ The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssyste
     </kendo-popover>
 ```
 
-### Pager Position in Grid TagHelper
+### Pager Position in Grid
 
-The [`position`](/api/kendo.mvc.taghelpers/gridpageablesettingstaghelper#attributes) attribute of the Grid TagHelper `pageable` configuration accepts a `PagerPosition` enum type instead of the previously used `GridPagerPosition`.
+#### HtmlHelper Grid
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `Position(GridPagerPosition.Top)`     | `Position(PagerPosition.Top)`|
+ 
+#### TagHelper Grid
+ 
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `position="GridPagerPosition.Top"`     | `position="PagerPosition.Top"`|
 
 {% else %}
 
@@ -88,6 +98,46 @@ The [responsive behavior]({% slug responsive_pager_aspnet%}) of the Pager has be
 * `NumbersSelectLabel()` Property&mdash;The [`NumbersSelectLabel()`](/api/kendo.mvc.ui.fluent/pagermessagessettingsbuilder#numbersselectlabelsystemstring) option in the `Messages()` configuration has been removed as it is no longer needed with the replacement of the page selection drop-down.
 
 > These changes to the Pager affect all components that use a built-in pager, including the Grid, PDFViewer, and other data management components.
+
+### Rendering Changes
+
+The {{ site.product }} 2025 Q2 release introduces changes in the rendering of the following components:
+
+**AIPrompt**
+
+* The `k-white-space-pre-line` class has been removed from the `k-card-body` element where the output from the prompt is rendered.
+
+**DockManager**
+
+* The `k-header` class has been removed from the TabStrip element. 
+
+**ExpansionPanel**
+
+* The `k-d-none` class on the `k-expander-content-wrapper` element has been replaced with the `k-hidden` class.
+
+**Gantt**
+
+* The `k-alt` class has been removed from the rows in the TreeList and the timeline in the Gantt.
+
+**Grid**
+
+* The `k-alt` class has been removed from the `tr.k-table-alt-row` elements.
+* The `k-grid-draggable-header` class and the `draggable=true` attribute have been added to the `k-grid-header` element when grouping or column reodering is enabled.
+* The `k-touch-action-none` class has been removed from the draggable cell elements due to the addition of the `k-grid-draggable-header`.
+* The `k-drag-cell` class (when row-reordering is enabled) has been removed from the `k-table-th` element.
+
+**Menu**
+
+* The `k-menu-separator` class has been replaced with the `k-separator-horizontal` class.
+
+**Spreadsheet**
+
+* The `k-tabstrip-item` class has been added to the `k-item` elements in the sheet bar.
+
+**TreeList**
+
+* The `k-treelist-group` class has been removed from the parent nodes. 
+* The `k-drag-cell` class (in row-reordering scenario) has been removed. 
 
 ## {{ site.product }} Q1 2025
 
