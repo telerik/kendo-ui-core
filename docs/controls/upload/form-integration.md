@@ -196,7 +196,8 @@ For detailed information about browser compatibility, refer to the [Upload Brows
 
 ## See Also
 
-- [Form Component API Reference]({% slug api_kendoform %})
-- [Upload Component API Reference]({% slug api_kendoupload %})
-- [Form Demo Examples]({% slug form_overview %})
+
+- [Form Component API Reference](/api/javascript/ui/form)
+- [Upload Component API Reference](/api/javascript/ui/upload)
+- [Form Demo Examples](https://demos.telerik.com/kendo-ui/form/index)
 - [Upload Validation]({% slug validation_upload_widget %})

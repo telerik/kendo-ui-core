@@ -281,6 +281,7 @@ The following example showcases how to dynamically manage the orientation of the
 * [Adaptive Rendering by the DateTimePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/adaptive-mode)
 * [Adaptive Rendering by the DropDownList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/adaptive-mode)
 * [Adaptive Rendering by the DropDownTree for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/adaptive-mode)
+* [Adaptive Rendering by the Grid Tools for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-tools)
 * [Adaptive Rendering by the MultiColumnComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/adaptive-mode)
 * [Adaptive Rendering by the MultiSelect for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/adaptive-mode)
 * [Adaptive Rendering by the Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager/adaptive-mode)

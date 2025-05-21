@@ -3,7 +3,7 @@ title: Sizing
 page_title: Telerik UI Grid component for {{ site.framework }} Documentation - Sizing
 description: "Get started with the Telerik UI Grid for {{ site.framework }} and learn about its sizing options."
 slug: sizing_grid
-position: 6
+position: 7
 ---
 
 # Sizing
