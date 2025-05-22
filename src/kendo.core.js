@@ -1929,6 +1929,10 @@ function pad(number, digits, end) {
         var length;
         var tzoffset;
 
+        if(isEmpty(value)){
+            return null;
+        }
+
         if (value && value.indexOf("/D") === 0) {
             date = dateRegExp.exec(value);
             if (date) {
