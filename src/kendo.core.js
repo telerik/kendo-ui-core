@@ -257,6 +257,7 @@ export const __meta__ = {
     const isPresent = kendo.isPresent = (value) => value !== null && value !== undefined;
     const isBlank = kendo.isBlank = (value) => value === null || value === undefined;
     const isEmpty = kendo.isEmpty = (value) => value.length === 0;
+    const isEmptyObject = kendo.isEmptyObject = (value) => Object.keys(value).length === 0;
     const isString = kendo.isString = (value) => typeof value === 'string';
     const isInteger = kendo.isInteger = (value) => Number.isInteger(value);
     const isNumeric = kendo.isNumeric = (value) => !isNaN(value - parseFloat(value));
@@ -1929,7 +1930,7 @@ function pad(number, digits, end) {
         var length;
         var tzoffset;
 
-        if(isEmpty(value)){
+        if(isBlank(value) || isEmptyObject(value)){
             return null;
         }
 
