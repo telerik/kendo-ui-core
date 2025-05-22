@@ -14,11 +14,11 @@ The PivotGridV2 uses [`kendo.data.PivotDataSourceV2`](/api/javascript/data/pivot
 
 The following image from the [Local Binding](https://demos.telerik.com/kendo-ui/pivotgridv2/local-flat-data-binding) demo demonstrates how end-users can apply a filter.
 
-[Applying Filter](pvg2localbindingfilter.png)
+![Applying Filter](pvg2localbindingfilter.png)
 
 The next image demonstrates the result when the end-user applies a filter to the **Country** row.
 
-[Filter Result](pvg2appliedfilter.png)
+![Filter Result](pvg2appliedfilter.png)
 
 ## Enabling Filtering
 

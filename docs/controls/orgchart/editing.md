@@ -73,7 +73,7 @@ The OrgChart uses an OrgChart dataSource instance.
 > * Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
 > * Define the model fields.
 
-For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
+For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
 
 The following example demonstrates how to configure the OrgChart DataSource for CRUD (Create, Read, Update, Destroy) data operations.
 

@@ -175,8 +175,3 @@ The Menu enables you to modify the default open and close [`animations`](/api/ja
 * [JavaScript API Reference of the jQuery Menu](/api/javascript/ui/menu)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

@@ -141,8 +141,8 @@ How to populate Spreadsheet remote dataSource conditionally by dynamically chang
 
 
 ## See Also
-* [JavaScript API Reference of the DropDown](/api/javascript/ui/dropdown)
-* [JavaScript API Reference of the DataSource](/api/javascript/ui/datasource)
+* [JavaScript API Reference of the DropDown](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
 * [JavaScript API Reference of the Spreadsheet](/api/javascript/ui/spreadsheet)
-* [JavaScript API Reference of the Spreadsheet's Sheet](/api/javascript/ui/spreadsheet/sheet)
+* [JavaScript API Reference of the Spreadsheet's Sheet](/api/javascript/ui/spreadsheet/configuration/sheets)
 * [jQuery API Reference of the AJAX method](https://api.jquery.com/jquery.ajax/)

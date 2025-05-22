@@ -8,7 +8,7 @@ position: 5
 
 # Window Configuration
 
-To configure the Chart Wizard Window utilize the [window](/api/javascript/ui/chartwizard/configuration/window) object and set the options provided by the nested [Window](/api/javascript/ui/window/) component.
+To configure the Chart Wizard Window utilize the [window](/api/javascript/ui/chartwizard/configuration/window) object and set the options provided by the nested [Window](/api/javascript/ui/window) component.
 
 The following example demonstrates how to customize the ChartWizard window.
 

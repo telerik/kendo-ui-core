@@ -97,8 +97,3 @@ You can customize the format of the displayed time by setting the [`format`](/ap
 * [JavaScript API Reference of the jQuery TimePicker](/api/javascript/ui/timepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

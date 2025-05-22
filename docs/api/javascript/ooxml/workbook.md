@@ -546,23 +546,23 @@ The cells of each row. Each cell represents a cell from the final Excel document
 
 #### Example - specify the cells of each row
 
-<script>
-  var workbook = new kendo.ooxml.Workbook({
-    sheets: [{
-      rows: [
-        { cells: [ { value: "Document Title" }  ] },
-        { cells: [ { value: 22 }, { value: 33 }, { value: 44 }, {value: 55}  ] }
-      ]
-    }]
-  });
-
-  workbook.toDataURLAsync().then(function(dataURL) {
-    kendo.saveAs({
-      dataURI: dataURL,
-      fileName: "Test.xlsx"
-    });
-  });
-</script>
+    <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [{
+          rows: [
+            { cells: [ { value: "Document Title" }  ] },
+            { cells: [ { value: 22 }, { value: 33 }, { value: 44 }, {value: 55}  ] }
+          ]
+        }]
+      });
+    
+      workbook.toDataURLAsync().then(function(dataURL) {
+        kendo.saveAs({
+          dataURI: dataURL,
+          fileName: "Test.xlsx"
+        });
+      });
+    </script>
 
 ### sheets.rows.cells.background `String` *(default: null)*
 

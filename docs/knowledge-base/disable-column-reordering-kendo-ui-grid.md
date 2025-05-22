@@ -55,26 +55,26 @@ $("#grid").kendoGrid({
 
 For a practical demonstration, refer to the below Dojo demo.
 
-``dojo
-    <div id="grid"></div>
-    <script>
-      $("#grid").kendoGrid({
-        columns: [
-          { field: "name" },
-          { field: "age" }
-        ],
-        reorderable: true,
-        columnMenu: true,
-        dataSource: [
-          { name: "Jane Doe", age: 30 },
-          { name: "John Doe", age: 33 }
-        ],
-        columnMenuInit: function(e) {
-          let positionItem = $(e.container).find("ul").children("li").eq(1);
-          positionItem.hide();
-        }
-      });
-    </script>
+```dojo
+<div id="grid"></div>
+<script>
+  $("#grid").kendoGrid({
+    columns: [
+      { field: "name" },
+      { field: "age" }
+    ],
+    reorderable: true,
+    columnMenu: true,
+    dataSource: [
+      { name: "Jane Doe", age: 30 },
+      { name: "John Doe", age: 33 }
+    ],
+    columnMenuInit: function(e) {
+      let positionItem = $(e.container).find("ul").children("li").eq(1);
+      positionItem.hide();
+    }
+  });
+</script>
 ```
 
 ## See Also

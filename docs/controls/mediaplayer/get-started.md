@@ -45,6 +45,7 @@ In this step, you will initialize the MediaPlayer from the `<div>` element.
     <script type="text/javascript">
         $(document).ready(function () {
             $("#mediaplayer").kendoMediaPlayer();
+        });
     </script>
 ```
 
@@ -83,8 +84,4 @@ Other functionalities may also be limited due to iOS restrictions. For more info
 * [JavaScript API Reference of the MediaPlayer](/api/javascript/ui/mediaplayer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

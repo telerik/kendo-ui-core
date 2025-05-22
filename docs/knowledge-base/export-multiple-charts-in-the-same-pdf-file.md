@@ -274,4 +274,4 @@ How can I export many Charts in the same PDF file?
     </style>
 ```
 
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

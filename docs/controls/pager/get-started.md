@@ -136,8 +136,3 @@ The [`PageSizes`](/api/javascript/ui/pager/configuration/pagesizes) configuratio
 * [JavaScript API Reference of the Pager](/api/javascript/ui/pager)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

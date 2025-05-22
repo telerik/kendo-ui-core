@@ -1,6 +1,6 @@
 ---
 title: TextArea
-description: Configuration, methods and events of the Kendo UI TextArea
+page_title: Configuration, methods and events of the Kendo UI TextArea
 description: Code examples and tips how to configure TextArea widget, use available methods and events.
 res_type: api
 component: textarea

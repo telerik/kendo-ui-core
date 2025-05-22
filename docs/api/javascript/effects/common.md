@@ -7,6 +7,8 @@ res_type: api
 
 All Kendo effects support the following methods:
 
+## Methods
+
 ### duration
 
 Sets the effect duration.

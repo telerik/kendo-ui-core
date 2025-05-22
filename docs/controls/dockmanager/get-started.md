@@ -215,8 +215,4 @@ Here you will define the nested panes for the DockManager.
 * [JavaScript API Reference of the DockManager](/api/javascript/ui/dockmanager)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

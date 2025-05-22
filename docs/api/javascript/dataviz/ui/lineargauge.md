@@ -514,7 +514,7 @@ The supported values are:
 * "svg" - renders the widget as inline SVG document, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="gauge"></div>
     <script>
@@ -849,19 +849,19 @@ The width of the range indicators.
 
 #### Example
 
-<div id="linear-gauge"></div>
-<script>
-    $("#linear-gauge").kendoLinearGauge({
-      scale: {
-        ranges: [{
-          from: 10,
-          to: 20,
-          color: "green"
-        }],
-        rangeSize: 20
-      }
-    });
-</script>
+    <div id="linear-gauge"></div>
+    <script>
+        $("#linear-gauge").kendoLinearGauge({
+          scale: {
+            ranges: [{
+              from: 10,
+              to: 20,
+              color: "green"
+            }],
+            rangeSize: 20
+          }
+        });
+    </script>
 
 ### scale.reverse `Boolean`*(default: false)*
 

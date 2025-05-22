@@ -68,8 +68,4 @@ Here, you will apply configuration settings, such as [`type`](/api/javascript/ui
 * [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

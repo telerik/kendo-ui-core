@@ -30,22 +30,22 @@ As of the Kendo UI 2017 R2 release, the Upload enables the user to send large fi
 
 1. Set up the [`async.chunkSize`](/api/javascript/ui/upload/configuration/async.chunksize) option of the Upload.
 
-        ```
-        <input name="files" id="files" type="file" />
-
-        <script>
-            $(document).ready(function() {
-                $("#files").kendoUpload({
-                    async: {
-                        chunkSize: 11000, // Will separate the file into chunks of size 11000 bytes.
-                        saveUrl: "chunkSave",
-                        removeUrl: "remove",
-                        autoUpload: true
-                    }
-                });
+    ```
+    <input name="files" id="files" type="file" />
+    
+    <script>
+        $(document).ready(function() {
+            $("#files").kendoUpload({
+                async: {
+                    chunkSize: 11000, // Will separate the file into chunks of size 11000 bytes.
+                    saveUrl: "chunkSave",
+                    removeUrl: "remove",
+                    autoUpload: true
+                }
             });
-        </script>
-        ```
+        });
+    </script>
+    ```
 
 1. Implement the server-side logic (that is, the `serverUrl` action is assigned) which processes the file chunks and merges them into file. For more information on how to achieve this, refer to the section on the [server-side implementation](#server-side-implementation).
 

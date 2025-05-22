@@ -82,8 +82,4 @@ The RadioButton component allows you to define whether it will be enabled or dis
 * [JavaScript API Reference of the jQuery RadioButton](/api/javascript/ui/radiobutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -153,7 +153,7 @@ The Form allows you to configure each of the displayed items. For example, you c
 
 ## 5. Add Editors for the Form Items
 
-The Form allows you to configure a specific editor for the displayed items. The example below demonstrates how to set one of the predefined [`editors'](/api/javascript/ui/form/configuration/items#itemseditor). 
+The Form allows you to configure a specific editor for the displayed items. The example below demonstrates how to set one of the predefined [`editors`](/api/javascript/ui/form/configuration/items#itemseditor). 
 However, you can also implement a [`custom editor`](https://docs.telerik.com/kendo-ui/controls/form/items#custom-editor) that will fit the needs of your application. 
 
 ```html
@@ -338,8 +338,4 @@ The [`orientation`](/api/javascript/ui/form/configuration/orientation) of the Fo
 * [JavaScript API Reference of the Form](/api/javascript/ui/form)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -128,8 +128,4 @@ The AutoComplete enables you to configure its label by using its [`label`](/api/
 * [JavaScript API Reference of the jQuery AutoComplete](/api/javascript/ui/autocomplete)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

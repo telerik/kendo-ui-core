@@ -140,8 +140,4 @@ In this step, you will apply Breadcrumb configuration settings, such as [`size`]
 * [JavaScript API Reference of the Breadcrumb](/api/javascript/ui/breadcrumb)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

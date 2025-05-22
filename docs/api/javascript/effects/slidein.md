@@ -8,7 +8,7 @@ res_type: api
 Slides the element to its original position in the specified direction, using the element width or height as an offset.
 Playing the effect in reverse will slide the element out of its position.
 
-## Sliding an element in
+#### Sliding an element in
 
     <div id="foo">
         I will be animated

@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I filter the data source of the ListView based on a [`Slider`](/kendo-ui/controls/editors/rangeslider/overview) selection?
+How can I filter the data source of the ListView based on a [`Slider`](/controls/editors/rangeslider/overview) selection?
 
 ## Solution
 

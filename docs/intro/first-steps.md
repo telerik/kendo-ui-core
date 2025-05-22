@@ -40,16 +40,16 @@ To make sure all scripts are loaded, make a simple API call to render the [Kendo
 
 > The `$(function() { });` code block is a [jQuery `document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) handler. All JavaScript code from this guide has to go inside this closure.
 
-	```html
-		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" />
-		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-		
-    <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script>
+```html
+  <link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+  
+  <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script>
 
-    <!-- OR by using the BUNDLED JAVASCRIPT -->
-		<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-	```
+  <!-- OR by using the BUNDLED JAVASCRIPT -->
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+```
 
 ## 3. Bind the Grid to Data
 

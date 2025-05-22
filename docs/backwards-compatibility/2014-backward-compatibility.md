@@ -95,7 +95,7 @@ Because of security precautions, scripts are no longer posted to the server by d
 
 **PivotDataSource**
 
-The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource/configuration/schema.cube) uses **objects** instead of numbers for the `state` argument. The field you should set to accumulate the value is called `accumulator`.
+The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource/configuration/schema#schemacube) uses **objects** instead of numbers for the `state` argument. The field you should set to accumulate the value is called `accumulator`.
 
 ```tab-Old
 	aggregate: function(value, state) { return value + state; }

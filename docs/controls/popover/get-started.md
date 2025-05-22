@@ -106,8 +106,4 @@ You can specify a selector so that the Popover would appear only for certain par
 * [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

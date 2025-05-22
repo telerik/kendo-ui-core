@@ -209,7 +209,7 @@ The name of the field which changed.
     observable.set("name", "Jane Doe"); // raises the "change" event and the handler outputs "name"
     </script>
 
-### get event
+### get
 
 Fired when the `get` method is invoked.
 
@@ -230,7 +230,7 @@ The name of the field which is retrieved.
     observable.get("name"); // raises the "get" event and the handler outputs "name"
     </script>
 
-### set event
+### set
 
 Fires when the `set` method is invoked.
 

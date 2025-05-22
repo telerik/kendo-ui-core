@@ -156,8 +156,4 @@ The MultiSelect enables you to configure the label by using its [`label`](https:
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

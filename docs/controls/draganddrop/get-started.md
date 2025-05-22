@@ -219,8 +219,3 @@ For a better visualization of the scenario, you can add styles to the Draggable 
 * [JavaScript API Reference of the Draggable](/api/javascript/ui/draggable)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

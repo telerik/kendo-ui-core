@@ -32,7 +32,7 @@ In this case, the specified [`timezone`](/api/javascript/ui/scheduler/configurat
 
 ## Solution
 
-To handle the issue, directly set the [`schema.timezone`](/api/javascript/data/schedulerdatasource/configuration/schema.timezone) option of the `SchedulerDataSource` instance to the desired value.
+To handle the issue, directly set the [`schema.timezone`](/api/javascript/data/schedulerdatasource/configuration/schema#schematimezone) option of the `SchedulerDataSource` instance to the desired value.
 
 ## See Also
 

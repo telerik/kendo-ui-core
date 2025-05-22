@@ -120,7 +120,7 @@ The example below demonstrates ChartWizard bound to local table-like data:
 </script>
 ```
 
-To bind the ChartWizard component to a remote data source, which returns only the `dataItems`, set the [`dataColumns`](/api/javascript/ui/chartwizard/#dataColumns) field.
+To bind the ChartWizard component to a remote data source, which returns only the `dataItems`, set the [`dataColumns`](/api/javascript/ui/chartwizard/configuration/datacolumns) field.
 
 ```dojo
     <div id="chartwizard"></div>

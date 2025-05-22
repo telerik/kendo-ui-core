@@ -117,8 +117,4 @@ Here, you will apply some settings as [tileSize](/api/javascript/ui/colorpalette
 * [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

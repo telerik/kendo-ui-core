@@ -1292,39 +1292,39 @@ The following dash types are supported:
 
 #### Example - set the chart legend border dash type
 
-  <div id="stock-chart"></div>
-  <script>
-    $("#stock-chart").kendoStockChart({
-      series: [
-        {
-          dashType: "dashDot",
-          type: "line",
-          type: "candlestick",
-          openField: "Open",
-          highField: "High",
-          lowField: "Low",
-          closeField: "Close",
-          data:[{
-            "Date": "2016/01/01",
-            "Open": 41.62,
-            "High": 41.69,
-            "Low": 39.81,
-            "Close": 40.12,
-            "Volume": 2632000
-          }, {
-            "Date": "2016/03/01",
-            "Open": 40.62,
-            "High": 39.69,
-            "Low": 40.81,
-            "Close": 39.12,
-            "Volume": 2631986
+    <div id="stock-chart"></div>
+    <script>
+      $("#stock-chart").kendoStockChart({
+        series: [
+          {
+            dashType: "dashDot",
+            type: "line",
+            type: "candlestick",
+            openField: "Open",
+            highField: "High",
+            lowField: "Low",
+            closeField: "Close",
+            data:[{
+              "Date": "2016/01/01",
+              "Open": 41.62,
+              "High": 41.69,
+              "Low": 39.81,
+              "Close": 40.12,
+              "Volume": 2632000
+            }, {
+              "Date": "2016/03/01",
+              "Open": 40.62,
+              "High": 39.69,
+              "Low": 40.81,
+              "Close": 39.12,
+              "Volume": 2631986
+            }
+                  ]
           }
-                ]
-        }
-      ],
-      dateField: "Date"
-    });
-  </script>
+        ],
+        dateField: "Date"
+      });
+    </script>
 
 
 ### navigator.series.data `Array`
@@ -5806,7 +5806,7 @@ The text of the title.
 The visibility of the title.
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/stock-chart/methods/saveaspdf) method.
+Configures the export settings for the [exportPDF](/api/javascript/dataviz/ui/stock-chart/methods/exportpdf) method.
 
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.

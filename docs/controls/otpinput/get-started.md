@@ -140,8 +140,3 @@ The OTPInput supports three [types](/api/javascript/ui/otpinput/configuration/ty
 * [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

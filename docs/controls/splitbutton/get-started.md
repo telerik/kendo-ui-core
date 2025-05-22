@@ -95,8 +95,4 @@ You can add an icon to the SplitButton by utilizing the [`icon`](/api/javascript
 * [JavaScript API Reference of the jQuery SplitButton](/api/javascript/ui/splitbutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

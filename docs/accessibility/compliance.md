@@ -17,7 +17,7 @@ This article lists the accessibility compliance of the Kendo UI for jQuery compo
 
 The [Accessibility Conformance Report (ACR)](https://www.section508.gov/sell/acr/) is a document that explains how information and communication technology products such as software, hardware, electronic content, and support documentation conform to leading global accessibility standards. Kendo UI for jQuery provides an ACR through the <a href="https://www.itic.org/policy/accessibility/vpat" target="_blank">Voluntary Product Accessibility Template (VPAT®)</a>.
 
->tip Download the latest version of the <a href="assets/KendoUI-VPAT2.4RevINT.doc" download>Kendo UI for jQuery Accessibility Conformance Report</a>.
+>tip Download the latest version of the [Kendo UI for jQuery Accessibility Conformance Report](assets/KendoUI-VPAT2.4RevINT.doc).
 
 ## Compliance Table
 

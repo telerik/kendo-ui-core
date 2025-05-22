@@ -317,8 +317,4 @@ In a similar fashion, if you wish to execute a command to process the generated 
 * [JavaScript API Reference of the jQuery AIPrompt](/api/javascript/ui/aiprompt)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

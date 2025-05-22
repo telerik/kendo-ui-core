@@ -72,8 +72,4 @@ Here, you will apply some settings such as [`clearButton`](/api/javascript/ui/fl
 * [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -90,8 +90,4 @@ You fill the AppBar with content of your choice through the [`items`](/api/javas
 * [JavaScript API Reference of the jQuery AppBar](/api/javascript/ui/appbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

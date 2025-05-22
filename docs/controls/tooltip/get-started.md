@@ -116,8 +116,3 @@ You can now set where the Tooltip will be displayed. For example,  if there is e
 * [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

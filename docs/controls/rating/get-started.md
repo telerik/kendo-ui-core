@@ -88,8 +88,4 @@ You can set the value of the Rating upon initialization.
 * [JavaScript API Reference of the jQuery Rating](/api/javascript/ui/rating)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

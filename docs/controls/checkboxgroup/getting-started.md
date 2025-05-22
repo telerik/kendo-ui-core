@@ -76,8 +76,4 @@ Once the basic initialization is completed, you can start adding additional conf
 * [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -21,20 +21,23 @@ You can bind the StockChart to both local and remote data over its DataSource.
 
 The following example demonstrates a service that returns stock price history data as JSON.
 
- 	 [
-    		{
-        		"Date": "2000/01/03",
-        		"Open": 41.62,
-        		"High": 41.69,
-        		"Low": 39.81,
-        		"Close": 40.12,
-    			"Volume": 2632000
-    		},
-			...
-		]
+````javascript
+ [
+		{
+    		"Date": "2000/01/03",
+    		"Open": 41.62,
+    		"High": 41.69,
+    		"Low": 39.81,
+    		"Close": 40.12,
+			"Volume": 2632000
+		},
+		...
+	]
+````
 
 The following example demonstrates how to bind the StockChart to the remote service.
 
+````javascript
     $("#stockChart").kendoStockChart({
 		dataSource: {
 			transport: {
@@ -43,9 +46,12 @@ The following example demonstrates how to bind the StockChart to the remote serv
 		},
 		dateField: "Date"
     });
+````
 
 The following example demonstrates how to define the main and the Navigator series.
 
+
+````javascript
     $("#stockChart").kendoStockChart({
 		dataSource: {
 			transport: {
@@ -67,6 +73,7 @@ The following example demonstrates how to define the main and the Navigator seri
 			}
 		}
     });
+````
 
 ## Single Data-Source Mode
 

@@ -127,14 +127,14 @@ Popup-based widgets nested in other Popup-based widgets create their Popup conta
 
 `Refresh()` no longer invokes `Read()` of the DataSource.
 
-    ```tab-Old
-        var chart = $("#chart").data("kendoChart");
-        chart.refresh();
-    ```
-    ```tab-New
-       var chart = $("#chart").data("kendoChart");
-       chart.dataSource.read();
-    ```
+```tab-Old
+    var chart = $("#chart").data("kendoChart");
+    chart.refresh();
+```
+```tab-New
+   var chart = $("#chart").data("kendoChart");
+   chart.dataSource.read();
+```
 
 ## Kendo UI 2012 Q1 (2012.1.322)
 

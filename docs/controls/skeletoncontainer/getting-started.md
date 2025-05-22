@@ -90,8 +90,4 @@ Here, you will apply configuration settings, such as [`animation`](/api/javascri
 * [JavaScript API Reference of the SkeletonContainer](/api/javascript/ui/skeletoncontainer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

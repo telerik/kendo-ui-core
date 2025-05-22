@@ -87,8 +87,4 @@ The component's [`steps`](/api/javascript/ui/stepper/configuration/steps) provid
 * [JavaScript API Reference of the jQuery Stepper](/api/javascript/ui/stepper)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

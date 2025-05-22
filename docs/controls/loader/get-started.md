@@ -82,8 +82,4 @@ The component has a [`type`](/api/javascript/ui/loader/configuration/type) optio
 * [JavaScript API Reference of the jQuery Loader](/api/javascript/ui/loader)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -8,7 +8,7 @@ position: 4
 
 # Row Click-Move-Click
 
-As of Kendo UI R2 SP1 2023, users can reorder the TreeList's rows can be by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/treelist/configuration/editable.move.clickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
+As of Kendo UI R2 SP1 2023, users can reorder the TreeList's rows can be by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/treelist/configuration/editable#editablemoveclickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
 
 ```dojo
     <div id="treeList"></div>

@@ -94,7 +94,7 @@ The Grid also supports using a template for the Toolbar. You can define the temp
 
 ## Disable Inactive Tools
 
-Starting with 2025 Q2 release the Grid component provides the possibility to disable or hide the inactive tools when editing. By default the inactive tools will be hidden. When the [showInactiveTools](/api/javascript/ui/grid/configuration/showinactivetools) option is enabled the inactive tools will be displayed as disabled.
+Starting with 2025 Q2 release the Grid component provides the possibility to disable or hide the inactive tools when editing. By default the inactive tools will be hidden. When the [showInactiveTools](/api/javascript/ui/grid/configuration/toolbar.showinactivetools) option is enabled the inactive tools will be displayed as disabled.
 In the example below, the `Save Changes` and `Cancel Changes` buttons will be disabled until a change in the Grid is performed:
 
 ```dojo

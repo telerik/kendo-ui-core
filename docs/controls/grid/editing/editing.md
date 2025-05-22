@@ -52,7 +52,7 @@ The following example demonstrates how to configure the DataSource for CRUD (Cre
 
 ### Defining Fields through schema
 
-The following example demonstrates how to declare the fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource/configuration/schema.model).
+The following example demonstrates how to declare the fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource/configuration/schema#schemamodel).
 
 > * Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
 > * Define the datatype of the fields to take advantage of the built-in editors, filterable UI and correct sorting, filtering and grouping.

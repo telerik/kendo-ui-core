@@ -116,7 +116,7 @@ The adaptive filter UI is based on the Grid’s [`filterable`](/api/javascript/u
 
 ## Grouping
 
-The adaptive `grouping` tool allows users to add, remove, and reorder grouped columns. By default, groups can be rearranged via drag-and-drop within the popup. When the [`reorderButtons`](/api/javascript/ui/grid/configuration/toolbar.items.reorderbuttons) option is enabled, you can reorder the groups from the displayed arrow up and down arrow buttons. 
+The adaptive `grouping` tool allows users to add, remove, and reorder grouped columns. By default, groups can be rearranged via drag-and-drop within the popup. When the `reorderButtons` option is enabled, you can reorder the groups from the displayed arrow up and down arrow buttons. 
 
 ```dojo
     <div id="grid"></div>
@@ -424,9 +424,9 @@ When popup editing is enabled, selected rows can be edited or deleted using the 
 
 The following configuration options provide additional control over the appearance and behavior of adaptive tools:
 
-* [`showInactiveTools`](/api/javascript/ui/grid/configuration/toolbar.showiactivetools)&mdash;Controls whether the inactive tools in the toolbar are hidden or displayed in disabled state; 
-* [`adaptiveTitle`](/api/javascript/ui/grid/configuration/toolbar.adaptivetitle)&mdash;Customizes the title text displayed in the adaptive view;
-* [`adaptiveSubtitle`](/api/javascript/ui/grid/configuration/toolbar.adaptivesubtitle)&mdash;Customizes the subtitle text displayed in the adaptive view;
+* [`showInactiveTools`](/api/javascript/ui/grid/configuration/toolbar.showinactivetools)&mdash;Controls whether the inactive tools in the toolbar are hidden or displayed in disabled state; 
+* `adaptiveTitle`&mdash;Customizes the title text displayed in the adaptive view;
+* `adaptiveSubtitle`&mdash;Customizes the subtitle text displayed in the adaptive view;
 
 
 ## See Also

@@ -38,9 +38,9 @@ The following example demonstrates how to customize the default Delete confirmat
 To achieve this behavior:
 
 1. Add a Kendo UI Window component and create its template.
-1. Subscribe to the [`remove`](/api/javascript/javascript/ui/gantt/events/remove) event and prevent the default behavior.
+1. Subscribe to the [`remove`](/api/javascript/ui/gantt/events/remove) event and prevent the default behavior.
 1. Add [`Kendo UI Template`]({% slug overview_kendoui_templatescomponent %}) and handle the button configurations to remove the task/close the window.
-1. The Kendo UI Gantt's [`editable.confirmation'](/api/javascript/javascript/ui/gantt/configuration/editable.confirmation) should be set to `false` to prevent the default confirm window from showing.
+1. The Kendo UI Gantt's [`editable.confirmation`](/api/javascript/ui/gantt/configuration/editable.confirmation) should be set to `false` to prevent the default confirm window from showing.
 
 ```dojo
 	<style>

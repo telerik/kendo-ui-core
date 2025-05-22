@@ -62,7 +62,7 @@ You can reference a widget by using any of the following approaches:
             };
             });
         </script>
-      ```
+    ```
 
 * Using the `tag` directive&mdash;As of the Kendo UI Q1 2015 release, if you use the `tag` directive variant, you can set the `k-scope-field` to achieve the same.
 

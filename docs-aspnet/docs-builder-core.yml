@@ -46,6 +46,7 @@ demos:
   defaultTheme: default-ocean-blue-a11y
   uris:
       www.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
+      wwwsit.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
       wwwuat.telerik.com: https://aspnet-core-demos-staging.azurewebsites.net/aspnet-core/docsbuilder/
       default: https://localhost:44314/docsbuilder/
   themes:

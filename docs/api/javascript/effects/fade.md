@@ -8,7 +8,7 @@ res_type: api
 Fades the element in or out.
 Supported directions are `in` and `out`.
 
-## Fading an element out
+#### Fading an element out
     <div id="foo">
         I will fade out
     </div>
@@ -19,7 +19,7 @@ Supported directions are `in` and `out`.
         // kendo.fx($("#foo")).fadeOut.play();
     </script>
 
-## Fading an element in
+#### Fading an element in
 
     <div id="foo">
         I will fade in

@@ -203,8 +203,4 @@ The user can filter the data through both the PivotGridV2 headers and the PivotC
 * [JavaScript API Reference of the jQuery PivotGridV2](/api/javascript/ui/pivotgridv2)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

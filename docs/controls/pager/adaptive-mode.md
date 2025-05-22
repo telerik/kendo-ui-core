@@ -11,7 +11,7 @@ Starting with Q2 2025, the Pager provides an adaptive mode that enhances its res
 
 The adaptive mode is an enhancement to the default [`responsive behavior`]({% slug responsive_kendoui_pager_widget %}) of the Pager. When enabled, it provides a more streamlined interface when the available space is limited.
 
-To enable the adaptive mode, set the [`adaptiveMode`](/api/javascript/ui/pager/configuration/adaptivemode) option to `true`:
+To enable the adaptive mode, set the `adaptiveMode` option to `true`:
 
 ```dojo
 <div id="pager"></div>

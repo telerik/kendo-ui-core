@@ -191,8 +191,4 @@ The user can sort and filter the data through both the PivotGrid headers and the
 * [JavaScript API Reference of the jQuery PivotGrid](/api/javascript/ui/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

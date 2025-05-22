@@ -37,21 +37,21 @@ Use the Kendo UI Drawing API to customize the appearance of the labels in the Ba
 1. [Use the `kendo.drawing.align` method](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align) to set the alignment within the rectangle.
 1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group/methods/append), and return the results.
 
-        ```javascript
-                  labels: {
-                    visual: function(e){  //1
-                      var group = new kendo.drawing.Group();  //2
+    ```javascript
+              labels: {
+                visual: function(e){  //1
+                  var group = new kendo.drawing.Group();  //2
+                  var text = new kendo.drawing.Text(e.value, e.rect.origin, { font: "Verdana; font-weight: bold;" });  //3
 
-                      var text = new kendo.drawing.Text(e.value, e.rect.origin, { font: "Verdana; font-weight: bold;" });  //3
-                      var rect = new kendo.geometry.Rect(e.rect.origin, [60, 20]);  //4
-                      kendo.drawing.align([text], rect, "start");  //5
-
-                      group.append(new kendo.drawing.Rect(rect, { fill: null, stroke: null}), text);  //6
-                      return group;
-                    }
-                  },
-                },
-        ```
+                  var rect = new kendo.geometry.Rect(e.rect.origin, [60, 20]);  //4
+                  kendo.drawing.align([text], rect, "start");  //5
+                  
+                  group.append(new kendo.drawing.Rect(rect, { fill: null, stroke: null}), text);  //6
+                  return group;
+                }
+              },
+            },
+    ```
 
 The following example demonstrates the full implementation of the suggested approach.
 

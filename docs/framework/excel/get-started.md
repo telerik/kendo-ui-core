@@ -181,8 +181,3 @@ Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save t
 
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

@@ -2520,47 +2520,47 @@ By default the TaskBoard expects that field to contain a primitive value (string
 
 #### Example
 
-  <div id="taskBoard"></div>
-
-  <script id="card-template" type="text/x-kendo-template">
-      <div class="template-container">
-          <div class="template-header">
-              <p><a class="k-card-title k-link" href="" data-command="SelectCardCommand">#: title #</a></p>
-          </div>
-          <p>#: description#</p>
-          <p>#:resources.priority.title#: <span style="color:#:resources.priority.color#">#:resources.priority.text#<span></p>
-      </div>
-  </script>
-
-  <script>
-    $("#taskBoard").kendoTaskBoard({
-      resources: [{
-        field: "priority",
-        valuePrimitive: false,
-        dataValueField: "type",
-        title: "Priority",
+    <div id="taskBoard"></div>
+  
+    <script id="card-template" type="text/x-kendo-template">
+        <div class="template-container">
+            <div class="template-header">
+                <p><a class="k-card-title k-link" href="" data-command="SelectCardCommand">#: title #</a></p>
+            </div>
+            <p>#: description#</p>
+            <p>#:resources.priority.title#: <span style="color:#:resources.priority.color#">#:resources.priority.text#<span></p>
+        </div>
+    </script>
+  
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        resources: [{
+          field: "priority",
+          valuePrimitive: false,
+          dataValueField: "type",
+          title: "Priority",
+          dataSource: [
+            { type: "urgent", text: "Urgent", color: "orange" },
+            { type: "highpriority", text: "High Priority", color: "blue" },
+            { type: "lowpriority", text: "Low Priority", color: "green" }
+          ]
+        }],
+        template: $("#card-template").html(),
+        dataCategoryField: "category",
         dataSource: [
-          { type: "urgent", text: "Urgent", color: "orange" },
-          { type: "highpriority", text: "High Priority", color: "blue" },
-          { type: "lowpriority", text: "Low Priority", color: "green" }
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", priority: { type: "urgent" } },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", priority: { type: "urgent" }  },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", priority: { type: "highpriority" }  },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", priority: { type: "lowpriority" } },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", priority: { type: "lowpriority" } }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
         ]
-      }],
-      template: $("#card-template").html(),
-      dataCategoryField: "category",
-      dataSource: [
-        { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", priority: { type: "urgent" } },
-        { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", priority: { type: "urgent" }  },
-        { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", priority: { type: "highpriority" }  },
-        { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", priority: { type: "lowpriority" } },
-        { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", priority: { type: "lowpriority" } }
-      ],
-      columns: [
-        { text: "Doing", status: "doing" },
-        { text: "Backlog", status: "backlog" },
-        { text: "Done", status: "done" }
-      ]
-    });
-  </script>
+      });
+    </script>
 
 ### selectable `Boolean` *(default: true)*
 
@@ -2568,26 +2568,26 @@ Toggles the selection of the TaskBoard.
 
 #### Example
 
-  <div id="taskBoard"></div>
-
-  <script>
-    $("#taskBoard").kendoTaskBoard({
-      selectable: false,
-      dataOrderField: "order",
-      dataSource: [
-        { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
-        { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
-        { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
-        { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
-        { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
-      ],
-      columns: [
-        { text: "Doing", status: "doing" },
-        { text: "Backlog", status: "backlog" },
-        { text: "Done", status: "done" }
-      ]
-    });
-  </script>
+    <div id="taskBoard"></div>
+  
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        selectable: false,
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
+        ]
+      });
+    </script>
 
 ### template `String|Function`
 
@@ -2595,37 +2595,37 @@ Controls the rendering of the card.
 
 #### Example
 
-  <div id="taskBoard"></div>
+    <div id="taskBoard"></div>
 
-  <script id="card-template" type="text/x-kendo-template">
-      <div class="my-card-template-container">
-         <div class="#:styles.header# #:styles.hbox#">
-           <a class="#:styles.title# #:styles.link#" href="\\#" data-command="SelectCardCommand">#:title#</a>
-           <span class="#:styles.spacer#"></span>
-           #=cardMenuButton#
-          </div>
-          <div class="#:styles.body#"><p>#:description#</p></div>
-      </div>
-  </script>
+    <script id="card-template" type="text/x-kendo-template">
+        <div class="my-card-template-container">
+           <div class="#:styles.header# #:styles.hbox#">
+             <a class="#:styles.title# #:styles.link#" href="\\#" data-command="SelectCardCommand">#:title#</a>
+             <span class="#:styles.spacer#"></span>
+             #=cardMenuButton#
+            </div>
+            <div class="#:styles.body#"><p>#:description#</p></div>
+        </div>
+    </script>
 
-  <script>
-    $("#taskBoard").kendoTaskBoard({
-      template: $("#card-template").html(),
-      dataOrderField: "order",
-      dataSource: [
-        { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
-        { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
-        { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
-        { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
-        { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
-      ],
-      columns: [
-        { text: "Doing", status: "doing" },
-        { text: "Backlog", status: "backlog" },
-        { text: "Done", status: "done" }
-      ]
-    });
-  </script>
+    <script>
+      $("#taskBoard").kendoTaskBoard({
+        template: $("#card-template").html(),
+        dataOrderField: "order",
+        dataSource: [
+          { id: 1, order: 1, title: "Task 1", description: "Description 1", status: "backlog", category: "red" },
+          { id: 2, order: 2, title: "Task 11", description: "Description 11", status: "backlog", category: "red" },
+          { id: 3, order: 3, title: "Task 2", description: "Description 2", status: "doing", category: "green" },
+          { id: 4, order: 4, title: "Task 22", description: "Description 22", status: "doing", category: "green" },
+          { id: 5, order: 5, title: "Task 3", description: "Description 3", status: "done", category: "blue" }
+        ],
+        columns: [
+          { text: "Doing", status: "doing" },
+          { text: "Backlog", status: "backlog" },
+          { text: "Done", status: "done" }
+        ]
+      });
+    </script>
 
 ### toolbar `Boolean|Array|Object` *(default: true)*
 

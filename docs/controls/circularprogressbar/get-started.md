@@ -175,8 +175,4 @@ You can specify how the center of the CircularProgressBar will appear using a te
 * [JavaScript API Reference of the CircularProgressBar](/api/javascript/ui/circularprogressbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

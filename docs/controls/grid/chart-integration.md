@@ -3,7 +3,7 @@ title: Chart Integration
 page_title: jQuery Grid Documentation - Chart Integration
 description: "Get started with the jQuery Grid by Kendo UI and learn how to quickly create the desired chart using the Grid datae."
 slug: chart_integration_kendoui_grid
-position: 18
+position: 19
 ---
 
 # Chart Integration

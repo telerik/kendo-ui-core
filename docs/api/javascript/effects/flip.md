@@ -8,7 +8,7 @@ res_type: api
 Flips the element around the axis specified by the axis parameter.  Supported directions are `horizontal` and `vertical`. The effect needs certain markup and styling in order to function properly.
 The element **should be positioned absolutely/relatively**, and contain two child elements (*face* and *back*) with the same size as their parent, positioned absolutely on top of each other.
 
-## Flip Effect Example
+#### Flip Effect Example
 
     <style>
         #container {

@@ -23,7 +23,7 @@ The Kendo UI TabStrip supports the following styling options:
 
 The `tabSize` option controls how big or small the rendered `tabstrip` looks. 
 
-The following values are available for the [`tabSize`](/api/javascript/ui/tabstrip/configuration/tabsize) option:
+The following values are available for the [`size`](/api/javascript/ui/tabstrip/configuration/size) option:
 
 - `small`—small size
 - `medium`—medium size

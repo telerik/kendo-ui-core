@@ -312,35 +312,35 @@ Specifies the content of a **Dialog**.
 
 #### Example - use a template to define the Dialog's content
 
-  <script id="template-dialog" type="text/x-kendo-template">
-    <div class="form-group">
-    <label>Label (Question)</label>
-    <textarea id="editor" rows="10" cols="30"></textarea>
-    </div>
-  </script>
-
-  <div id="dialog"></div>
-  <script>
-    $("#dialog").kendoDialog({
-      width: '450px',
-      title: 'Multiple Choice',
-      closable: false,
-      modal: false,
-      content: kendo.template($('#template-dialog').html()),
-      actions: [
-        { text: 'Cancel' },
-        {
-          text: 'Save',
-          primary: true,
-
+    <script id="template-dialog" type="text/x-kendo-template">
+      <div class="form-group">
+      <label>Label (Question)</label>
+      <textarea id="editor" rows="10" cols="30"></textarea>
+      </div>
+    </script>
+  
+    <div id="dialog"></div>
+    <script>
+      $("#dialog").kendoDialog({
+        width: '450px',
+        title: 'Multiple Choice',
+        closable: false,
+        modal: false,
+        content: kendo.template($('#template-dialog').html()),
+        actions: [
+          { text: 'Cancel' },
+          {
+            text: 'Save',
+            primary: true,
+  
+          }
+        ],
+        initOpen: function() {
+          $('#editor').kendoEditor();
+          $('#upImport').kendoUpload();
         }
-      ],
-      initOpen: function() {
-        $('#editor').kendoEditor();
-        $('#upImport').kendoUpload();
-      }
-    });
-  </script>
+      });
+    </script>
 
 ### height `Number | String`
 

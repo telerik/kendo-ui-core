@@ -95,8 +95,4 @@ The TextArea enables you to configure the label by using the [`label`](https://d
 * [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

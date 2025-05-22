@@ -85,8 +85,4 @@ Now you can use the [`label`](/api/javascript/ui/chip/configuration/label) optio
 * [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -77,6 +77,7 @@ In this step, you will initialize the FileManager from the `<div>` element.
     <script>
     $(document).ready(function() {
         $("#filemanager").kendoFileManager();
+    });
     </script>
 ```
 
@@ -280,8 +281,4 @@ The following example demonstrates how to configure the `noFileTemplate`:
 * [JavaScript API Reference of the FileManager](/api/javascript/ui/filemanager)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

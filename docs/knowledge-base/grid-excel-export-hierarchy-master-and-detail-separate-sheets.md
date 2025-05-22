@@ -174,5 +174,5 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 ## See Also
 
 * [Exporting All Data]({% slug grid-excel-export-entire-data %})
-* [sheets.filter API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.filter)
-* [sheets.columns.width API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.columns.width)
+* [sheets.filter API](/api/javascript/ooxml/workbook/configuration/sheets.filter)
+* [sheets.columns.width API](/api/javascript/ooxml/workbook/configuration/sheets.columns#sheetscolumnswidth)

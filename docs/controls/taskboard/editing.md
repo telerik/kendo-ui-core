@@ -151,7 +151,7 @@ The TaskBoard uses two different data source instances for its columns and cards
 > * Define the `id` field of the data items in `schema.model.id`. This ensures correct adding, editing, and deleting of items.
 > * Define the model fields.
 
-For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
+For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
 
 The following example demonstrates how to configure the data source of the columns.
 

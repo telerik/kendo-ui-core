@@ -183,8 +183,4 @@ Among other functionalities, the TreeList supports editing and filtering. The [e
 * [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

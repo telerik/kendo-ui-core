@@ -229,8 +229,3 @@ Among other functionalities, the Validator provides the ability to list validati
 * [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

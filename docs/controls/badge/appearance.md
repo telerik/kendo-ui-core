@@ -95,9 +95,9 @@ The example below demonstrates how to set the `size` option to "large":
 
 ## FillMode
 
-The Badge enables you to set styling options and create solid or outline badges by setting the [`fill`](/api/javascript/ui/badge/configuration/fill) property.
+The Badge enables you to set styling options and create solid or outline badges by setting the [`fill`](/api/javascript/ui/badge/configuration/fillmode) property.
 
-The available [fill](/api/javascript/ui/badge/configuration/fill) values are:
+The available [fill](/api/javascript/ui/badge/configuration/fillmode) values are:
 
 - "solid" (Default)
 - "outline"

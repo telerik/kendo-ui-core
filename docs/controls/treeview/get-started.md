@@ -157,8 +157,4 @@ Now, you can change the default animations for expanding and collapsing the Tree
 * [JavaScript API Reference of the jQuery TreeView](/api/javascript/ui/treeview)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

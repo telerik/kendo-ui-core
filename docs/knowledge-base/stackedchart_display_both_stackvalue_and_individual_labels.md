@@ -172,6 +172,6 @@ The following example demonstrates how to achieve the desired scenario:
 ```
 
 ## See Also
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 * [Show a Total Sum for Stacked Chart Series](/knowledge-base/show-stack-total)
 * [jQuery Bar Charts Stacked and Grouped Bars Demo](/bar-charts/grouped-stacked-bar)

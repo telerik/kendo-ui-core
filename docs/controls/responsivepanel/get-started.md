@@ -100,8 +100,4 @@ The ResponsivePanel provides several options that enable you to modify its behav
 * [JavaScript API Reference of the jQuery ResponsivePanel](/api/javascript/ui/responsivepanel)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

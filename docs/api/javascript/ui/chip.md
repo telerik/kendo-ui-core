@@ -15,7 +15,7 @@ Represents the Kendo UI Chip widget. Inherits from [Widget](/api/javascript/ui/w
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the chip by a `span.k-icon` or `span.k-svg-icon` element.
 
-See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
+See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 #### Example
 
@@ -64,7 +64,7 @@ If set, value will be appended to the icon's element class attribute. It also ap
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content for the remove button when `removable=true`. The icon is rendered inside the chip by a `span.k-icon` or `span.k-svg-icon` element.
 
-See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
+See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 #### Example
 

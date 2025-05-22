@@ -4237,7 +4237,7 @@ The supported stack values are:
 
 ### window `Object`
 
-Specifies configuration for the [Window](/api/javascript/ui/window/#configuration).
+Specifies configuration for the [Window](/api/javascript/ui/window#configuration).
 
 #### Example - set the "window" options for the ChartWizard 
     <div id="chartwizard"></div>

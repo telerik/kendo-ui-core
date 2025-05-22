@@ -192,8 +192,4 @@ By default, the ArcGauge does not render content in the center. To add content a
 * [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

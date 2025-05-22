@@ -87,8 +87,4 @@ Next, you can configure the [`smallStep`](/api/javascript/ui/slider/configuratio
 * [JavaScript API Reference of the jQuery Slider](/api/javascript/ui/slider)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

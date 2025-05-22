@@ -178,8 +178,4 @@ The ProgressBar supports the [`change`](/api/javascript/ui/progressbar/events/ch
 * [JavaScript API Reference of the ProgressBar](/api/javascript/ui/progressbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -245,8 +245,4 @@ Among other functionalities, the Grid supports editing and filtering. The [editi
 * [JavaScript API Reference of the jQuery Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -101,8 +101,4 @@ The Switch allows you to configure the text of the checked/unchecked states thro
 * [JavaScript API Reference of the Switch](/api/javascript/ui/switch)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

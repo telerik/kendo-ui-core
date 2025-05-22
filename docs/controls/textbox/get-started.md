@@ -94,8 +94,4 @@ The TextBox enables you to configure the label by using the [`label`](https://do
 * [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

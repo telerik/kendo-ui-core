@@ -156,7 +156,7 @@ The configurations of the different chips inside the chiplist.
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the chip by a `span.k-icon` or `span.k-svg-icon` element.
 
-See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
+See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 #### Example
 

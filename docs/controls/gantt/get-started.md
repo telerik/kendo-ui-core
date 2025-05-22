@@ -196,8 +196,4 @@ Among other functionalities, the Gantt supports editing and filtering. The editi
 * [JavaScript API Reference of the jQuery Gantt](/api/javascript/ui/gantt)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -40,7 +40,7 @@ If the JSZip JavaScript library is not found, an exception is thrown when you cl
 
 ### Excel Export is not working in Internet Explorer and Safari
 
-Internet Explorer 10 and earlier and Safari do not support file saving. These browsers require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/pivotgrid/configuration/excel.proxyurl) option.
+Internet Explorer 10 and earlier and Safari do not support file saving. These browsers require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/pivotgrid/configuration/excel#excelproxyurl) option.
 
     <div id="grid"></div>
     <script>

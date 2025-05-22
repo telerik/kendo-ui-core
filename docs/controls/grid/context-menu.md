@@ -14,7 +14,7 @@ For a runnable example, refer to the [demo on ContextMenu in the Grid](https://d
 
 ## Getting Started
 
-To enable the ContextMenu functionality, set the [`contextmenu`](/api/javascript/ui/grid/cofiguration/contextmenu) property to `true`.
+To enable the ContextMenu functionality, set the [`contextmenu`](/api/javascript/ui/grid/configuration/contextmenu) property to `true`.
 
 ```
      $("#grid").kendoGrid({
@@ -25,7 +25,7 @@ To enable the ContextMenu functionality, set the [`contextmenu`](/api/javascript
 
 ## Predefined Tools
 
-The Grid component allows you to choose between a predefined list of commands that will be included in the ContextMenu. You can add the needed tools in the [`contextmenu.body`](/api/javascript/ui/grid/cofiguration/contextmenu.body) configuration option.
+The Grid component allows you to choose between a predefined list of commands that will be included in the ContextMenu. You can add the needed tools in the [`contextmenu.body`](/api/javascript/ui/grid/configuration/contextmenu.body) configuration option.
 The valid predefined tools are: *"separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc".*
 In the example below all predefined commands are included in a customized order.
 

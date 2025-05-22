@@ -73,7 +73,7 @@ $(function(){
 </script>
 ```
 
-# Validate Radio Buttons with Only One Error Message when the validationSummary is enabled
+## Validate Radio Buttons with Only One Error Message when the validationSummary is enabled
 
 In scenario when the `validationSummary` is enabled a custom class can be added to the radio inputs. All the items, except one with the specified class needs to be hidden when the validation fails. 
 

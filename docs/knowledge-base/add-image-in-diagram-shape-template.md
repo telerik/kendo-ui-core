@@ -232,5 +232,5 @@ The following example shows how to implement the desired scenario by using the [
 
 * [Overview of the Kendo UI for jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [Using the API of the jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/api)
-* [JavaScript API Reference of the jQuery Diagram](/api/javascript/ui/diagram)
+* [JavaScript API Reference of the jQuery Diagram](/api/javascript/dataviz/ui/diagram)
 * [jQuery Diagram Product Page](https://www.telerik.com/kendo-jquery-ui/diagram)

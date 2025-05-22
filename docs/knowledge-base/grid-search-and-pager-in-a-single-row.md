@@ -33,34 +33,32 @@ Indeed, there is no pager template and the toolbar and pager are separate divs (
     - [`pageable.position`](/api/javascript/ui/grid/configuration/pageable.position) set to `top`
     - [`pageable.responsive`](/api/javascript/ui/grid/configuration/pageable.responsive) set to `false`
 1. In the `document.ready` event, get the grid instance and use its `dataBound` event to wrap the pager and toolbar elements with another div. This will give us the chance to control them together in a container and reorder them.
-
-    ```
-        var grid = $("#grid").data("kendoGrid");
-        grid.one("dataBound", function(e){
-            $(".k-grid-toolbar, .k-grid-pager").wrapAll($("<div class='pager-toolbar-container'/>"))
-        });
-    ```
-    ```
-        <style>
-            .pager-toolbar-container{
-              display: flex;
-              flex-direction: row;
-            }
-            .k-grid-toolbar{
-              order: 1; 
-              width: 35%;
-            }
-            .k-grid-pager{
-              order: 2; 
-              width: 65%;
-              border-bottom-color:rgba(0, 0, 0, 0.08)
-            }
-
-            .k-grid .k-grid-search {
-              width: auto;
-            }
-            </style>
-    ```
+  ```js
+      var grid = $("#grid").data("kendoGrid");
+      grid.one("dataBound", function(e){
+          $(".k-grid-toolbar, .k-grid-pager").wrapAll($("<div class='pager-toolbar-container'/>"))
+      });
+  ```
+  ```html
+      <style>
+          .pager-toolbar-container{
+            display: flex;
+            flex-direction: row;
+          }
+          .k-grid-toolbar{
+            order: 1; 
+            width: 35%;
+          }
+          .k-grid-pager{
+            order: 2; 
+            width: 65%;
+            border-bottom-color:rgba(0, 0, 0, 0.08)
+           
+          .k-grid .k-grid-search {
+            width: auto;
+          }
+          </style>
+  ```
 
 
 ```dojo

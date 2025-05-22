@@ -101,8 +101,3 @@ The TimeDurationPicker enables you to specify your own [`separator`](/api/javasc
 * [JavaScript API Reference of the TimeDurationPicker](/api/javascript/ui/timedurationpicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

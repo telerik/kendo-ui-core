@@ -124,10 +124,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
 #### Example - specify alternating row template
 
-  <div id="grid"></div>
+    <div id="grid"></div>
     <script>
       let encode = kendo.htmlEncode;
-
       $("#grid").kendoGrid({
         dataSource: [ { name: "Jane Doe", age: 30 }, { name: "John Doe", age: 33 } ],
         altRowTemplate: ({ uid, name, age }) => `<tr data-uid="${uid}"><td colspan="2"><strong>${encode(name)} - </strong><strong>${encode(age)}</strong></td></tr>`
@@ -1449,7 +1448,7 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter.operator) option.
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter#filteroperator) option.
 
 > This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
 
@@ -2214,7 +2213,7 @@ Takes the form "{0:format}" where "format" can be a:
     </script>
 
 
-### columns.groupable `Boolean|Object` *(default: true)
+### columns.groupable `Boolean|Object` *(default: true)*
 
 If set to `false` the user will not be able to group the grid by this column (requires Grid [`groupable`](/api/javascript/ui/grid/configuration/groupable) property to be enabled). By default all columns are groupable.
 
@@ -5053,7 +5052,7 @@ The template should contain elements whose `name` HTML attributes are set as the
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
 
 > Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
-> The validation that is set in `schema.model`(/api/javascript/data/datasource/configuration/schema.model) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
+> The validation that is set in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
 
 To change the size of the popup editor you can follow the approach outlined in [this article](/knowledge-base/grid-adjust-popup-size).
 
@@ -9483,7 +9482,7 @@ Sets a value indicating whether the selection will be persisted when sorting, pa
 
 > **Note:** Selection persistence works only for row selection.
 >
-> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
+> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
 >
 > Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work.
 
@@ -10250,31 +10249,31 @@ The [template](/api/javascript/kendo/methods/template) which renders the Status 
 
 #### Example
 
-<div id="grid"></div>
-  <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
         ],
-        schema: {
-          model: {
-            id: "id"
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
           }
-        }
-      },
-      selectable: {
-        mode: "cell",
-        cellAggregates: true
-      },
-      statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
-    });
-  </script>
+        },
+        selectable: {
+          mode: "cell",
+          cellAggregates: true
+        },
+        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+      });
+    </script>
 
 ### toolbar `String|Function|Array|Object`
 
@@ -12553,7 +12552,7 @@ Gets an array that holds the id field values of the selected rows.
 
 > There are a few important things to keep in mind when using `selectedKeyNames`.
 >
-> * **In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).**
+> * **In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).**
 > * **The selected IDs are sorted in ascending order inside the `selectedKeyNames` array.**
 
 
@@ -12895,7 +12894,7 @@ To unlock a column when it is the only one locked use the [`setOptions`](/api/ja
 
 #### Example - unlock the last locked column
 
-<div id="grid"></div>
+    <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
         columns: [

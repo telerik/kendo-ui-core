@@ -105,8 +105,4 @@ You can customize the [`position`](https://docs.telerik.com/kendo-ui/api/javascr
 * [JavaScript API Reference of the jQuery Notification](/api/javascript/ui/notification)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

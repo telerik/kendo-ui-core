@@ -9,7 +9,7 @@ Slides the element to its original position in the specified direction, while sl
 Supported directions are `left`, `right`, `up` and `down`.
 For this effect to work as expected, the elements should be positioned on top of each other.
 
-## Tiling Elements Left
+#### Tiling Elements Left
 
     <style>
         #container {

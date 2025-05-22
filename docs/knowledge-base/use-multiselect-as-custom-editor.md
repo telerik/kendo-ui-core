@@ -39,7 +39,7 @@ How can I use the Kendo UI MultiSelect as an editor for comma-separated string f
 
 To enable the mobile view of the ToolBar widget:
 
-1. Create a custom binding for the MultiSelect editor that inherits from the [`kendo.data.Binder`](/api/javascript/data/binder) class. This is done via the [`extend`](/api/javascript/data/binder/class%20methods/extend) method of the Binder.
+1. Create a custom binding for the MultiSelect editor that inherits from the [`kendo.data.Binder`](/api/javascript/data/binder) class. This is done via the [`extend`](/api/javascript/data/binder/class-methods/extend) method of the Binder.
 2. Declare the MultiSelect editor and pass is to the [`columns.editor`](/api/javascript/ui/grid/configuration/columns.editor)
 
 

@@ -129,7 +129,7 @@ To revert to the series colors from version 4.x, you can:
 
 In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/javascript/dataviz/ui/chart/configuration/series.pattern) configuration setting.
 
-> The pattern inherits the [`series.color`](slug:api_charts_seriesitemcomponent#toc-color) as main color and accepts an optional `background` color.
+> The pattern inherits the [`series.color`](/api/javascript/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
 
 The following customizable pattern fills are available:
 * Crosshatch

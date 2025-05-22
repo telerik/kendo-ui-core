@@ -195,8 +195,4 @@ By default, the CircularGauge does not render content in the center. To add cont
 * [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

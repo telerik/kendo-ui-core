@@ -7,16 +7,16 @@ slug: using-daterangepicker-inside-form-kendo-ui
 tags: form, daterangepicker, date range, custom editor
 res_type: kb
 ---
-# Environment
+## Environment
 | Product | Version |
 |---------|---------|
 | Form for Progress® Kendo UI® | 2023.3.1114 |
 
-# Description
+## Description
 I want to use the DateRangePicker inside a form in Kendo UI. However, based on the documentation, it seems that the DateRangePicker is not supported in the jQuery Kendo UI Form. I need a date range for the start and end time as one field in the form. Is it possible to achieve this functionality?
 
-# Solution
-To add editors that are not part of the supported list in the Kendo UI Form, you can use the [`items.editor`] (/api/javascript/ui/form/configuration/items#itemseditor) option and add a custom editor. The [Custom Editor](https://docs.telerik.com/kendo-ui/controls/form/items#custom-editor) article demonstrates how to do this. However, using a DateRangePicker is a bit more specific because it requires two values for its range, while the Form is bound to a single field. To achieve the desired behavior, follow these steps:
+## Solution
+To add editors that are not part of the supported list in the Kendo UI Form, you can use the [`items.editor`](/api/javascript/ui/form/configuration/items#itemseditor) option and add a custom editor. The [Custom Editor](https://docs.telerik.com/kendo-ui/controls/form/items#custom-editor) article demonstrates how to do this. However, using a DateRangePicker is a bit more specific because it requires two values for its range, while the Form is bound to a single field. To achieve the desired behavior, follow these steps:
 
 1. Bind the [`items.editor`](/api/javascript/ui/form/configuration/items#itemseditor)  to a single field that is an object containing the `start` and `end` for the DateRangePicker:
 

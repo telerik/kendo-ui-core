@@ -82,8 +82,3 @@ The server-side logic must be implemented by the developers themselves. You can 
 * [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

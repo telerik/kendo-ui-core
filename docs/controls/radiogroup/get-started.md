@@ -142,8 +142,3 @@ You can preset the value of the component using the [`value`](/api/javascript/ui
 * [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

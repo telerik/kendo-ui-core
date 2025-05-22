@@ -666,11 +666,11 @@ Specifies a title of the current step.
 
 ### activeStep
 
-Returns the currently active in the **Wizard** `[Step](/api/javascript/wizard/step)` instance.
+Returns the currently active in the **Wizard** [`Step`](/api/javascript/wizard/step) instance.
 
 #### Returns `kendo.stepper.Step`
 
-`Step` The currently active (selected) `[Step](/api/javascript/wizard/step)` instance.
+`Step` The currently active (selected) [`Step`](/api/javascript/wizard/step) instance.
 
 
 #### Example

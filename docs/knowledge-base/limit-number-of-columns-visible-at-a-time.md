@@ -30,7 +30,7 @@ How can I limit the number of columns that can be shown with the Column menu?
 ## Solution
 
 1. Specify the maximum number of columns that can be visible In the [`columnMenuInit`](/api/javascript/ui/grid/events/columnmenuinit) event handler. Disable the items in the Column menu by adding the `k-disabled` / `k-state-disabled` CSS class if the checked items are equal to or higher than the max number.
-1. Disable or enable items based on the checked item number in the [`columnHide`](/api/javascript/ui/grid/events/columnhide) and [`columnShow`](/kendo-ui/api/javascript/ui/grid/events/columnshow) event handlers.
+1. Disable or enable items based on the checked item number in the [`columnHide`](/api/javascript/ui/grid/events/columnhide) and [`columnShow`](/api/javascript/ui/grid/events/columnshow) event handlers.
 
 The following example demonstrates how to collapse a Grid row that was previously expanded when the user expands a new one.
 
