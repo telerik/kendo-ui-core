@@ -37,7 +37,7 @@ How can I draw a checkbox that matches the visible state of the Chart series?
 
 ## Solution
 
-The [`legend.item.visual`](/api/javascript/dataviz/ui/chart/configuration/legend.item.visual) can be overridden to render custom text, images, and shapes.
+The [`legend.item.visual`](/api/javascript/dataviz/ui/chart/configuration/legend.item#legenditemvisual) can be overridden to render custom text, images, and shapes.
 
 For example, you might need to draw a checkbox that matches the visible state of the series. In this case, the checkbox is represented by using an [Unicode Ballot Box symbol](https://en.wikipedia.org/wiki/Checkbox#Unicode).
 

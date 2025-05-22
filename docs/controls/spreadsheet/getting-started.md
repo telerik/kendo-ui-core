@@ -195,8 +195,4 @@ The Spreadsheet component provides multiple configuration options that let you c
 * [JavaScript API Reference of the Range](/api/javascript/spreadsheet/range)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

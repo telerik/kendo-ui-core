@@ -73,8 +73,3 @@ To apply a format to the rendered value, use the [`format`](/api/javascript/ui/n
 * [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

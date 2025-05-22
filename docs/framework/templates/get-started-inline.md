@@ -66,8 +66,3 @@ This is it! Now you are ready to dive more deeply into the Kendo UI Templates, l
 * [Knowledge Base Section](/knowledge-base)
 
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

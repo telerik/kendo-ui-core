@@ -128,8 +128,4 @@ The ComboBox enables you to configure its label by using its [`label`](/api/java
 * [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -236,7 +236,7 @@ The built-in commands are:
 
 Custom commands are supported by specifying the [`click`](/api/javascript/ui/treelist#configuration-columns.command.click) option.
 
-> * Each custom command requires you to explicitly specify its [`name`](/api/javascript/ui/treelist/configuration/columns.command.name).
+> * Each custom command requires you to explicitly specify its [`name`](/api/javascript/ui/treelist/configuration/columns.command#columnscommandname).
 > * A command column cannot be [`expandable`](/api/javascript/ui/treelist#configuration-columns.expandable).
 > * The built-in commands work only if editing is enabled through the [`editable`](/api/javascript/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](https://docs.telerik.com/kendo-ui/framework/datasource/crud).
 
@@ -1045,7 +1045,7 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter.operator) option.
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter#filteroperator) option.
 
 > This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
 
@@ -6441,7 +6441,7 @@ Depending on the current selection [mode](/api/javascript/ui/treelist#configurat
 
 ### closeCell
 
-Stops editing the table cell which is in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
+Stops editing the table cell which is in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable#editablemode).
 
 > When the user applies keyboard navigation, [`table`](/api/javascript/ui/treelist/fields/table) must be focused programmatically after calling `closeCell`.
 
@@ -6582,7 +6582,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 ### editCell
 
-Switches the specified table cell in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable.mode). Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
+Switches the specified table cell in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable#editablemode). Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
@@ -7102,27 +7102,27 @@ A DOM element or a jQuery object which represents the table rows or cells.
 
 #### Example - getting the selected table row when checkbox selection is enabled
 
-<button id="btn">Get selected row/rows</button>
-<div id="treeList"></div>
-<script>
-  $("#treeList").kendoTreeList({
-    columns: [
-      { selectable: true, width: "65px" },
-      { field: "id" },
-      { field: "name" },
-      { field: "age" }
-    ],
-    dataSource: [
-      { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
-      { id: 2, parentId: 1, name: "John Doe", age: 24 },
-      { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
-    ]
-  });
-  $("#btn").click(function(){
-    var treeList = $("#treeList").data("kendoTreeList");
-    console.log(treeList.select())
-  });
-</script>
+    <button id="btn">Get selected row/rows</button>
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { selectable: true, width: "65px" },
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        console.log(treeList.select())
+      });
+    </script>
 
 ### setDataSource
 

@@ -19119,7 +19119,7 @@ The color of the whiskers.
     });
     </script>
 
-### series.whiskers.dashType `String` (default: "solid")
+### series.whiskers.dashType `String` *(default: "solid")*
 
 The dash type of the whiskers.
 
@@ -19165,7 +19165,7 @@ The following dash types are supported:
     });
     </script>
 
-### series.whiskers.opacity `Number` (default: 1)
+### series.whiskers.opacity `Number` *(default: 1)*
 
 The opacity of the whiskers.
 

@@ -126,8 +126,4 @@ You can add all the action items you need through the [`items`](/api/javascript/
 * [JavaScript API Reference of the jQuery ActionSheet](/api/javascript/ui/actionsheet)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

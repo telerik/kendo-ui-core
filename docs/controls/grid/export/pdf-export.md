@@ -378,7 +378,6 @@ columns: [
 ## KB Articles on PDF Export
 
 * [Exporting the Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
-* [Exporting All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
 * [Exporting Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})
 * [Find Out More in the Knowledge Base](/knowledge-base)
 

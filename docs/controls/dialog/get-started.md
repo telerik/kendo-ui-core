@@ -128,8 +128,3 @@ You can use the [`open`](/api/javascript/ui/dialog/methods/open) method of the D
 * [JavaScript API Reference of the jQuery Dialog](/api/javascript/ui/dialog)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

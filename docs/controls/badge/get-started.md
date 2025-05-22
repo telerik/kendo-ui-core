@@ -93,8 +93,4 @@ To refer to an existing Badge instance:
 * [JavaScript API Reference of the Badge](/api/javascript/ui/badge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

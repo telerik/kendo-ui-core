@@ -1298,11 +1298,11 @@ The returned value does not indicate if the given Kendo UI version represents a 
 
 ## Standard number formats
 
-### *n*
+#### *n*
 
 Formats the value as a number with decimal and thousand separators.
 
-#### Example
+##### Example
 
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
@@ -1313,11 +1313,11 @@ Formats the value as a number with decimal and thousand separators.
     console.log(kendo.toString(1234.567, "n3")); //outputs "1.234,567"
     </script>
 
-### *c*
+#### *c*
 
 Formats the value by adding the currency symbol.
 
-#### Example
+##### Example
 
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
@@ -1328,11 +1328,11 @@ Formats the value by adding the currency symbol.
     console.log(kendo.toString(1234.567, "c3")); // outputs "1.234,567 €"
     <script>
 
-### *p*
+#### *p*
 
 Formats the value as percentage (the value is multiplied by 100).
 
-#### Example
+##### Example
 
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -1341,11 +1341,11 @@ Formats the value as percentage (the value is multiplied by 100).
     console.log(kendo.toString(0.22, "p3")); // outputs "22.000 %"
     </script>
 
-### *e*
+#### *e*
 
 Returns the value in exponential format.
 
-#### Example
+##### Example
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(0.122, "e")); // outputs "1.22e-1"
@@ -1355,7 +1355,7 @@ Returns the value in exponential format.
 
 Custom number formats can be created by using one or more custom numeric specifiers.
 
-### Format Specifiers
+#### Format Specifiers
 
 #### *0*
 
@@ -1525,7 +1525,7 @@ Month year pattern.
 ## Custom date formats
 Custom date formats can be created by using one or more custom date specifiers.
 
-### Format Specifiers
+#### Format Specifiers
 
 #### *d*
 

@@ -14,7 +14,7 @@ If the cell value needs more space, it will be clipped. This article provides in
 
 ## Setting Fixed Column Widths
 
-To manually set the column width in pixels, use the [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns.width) option.
+To manually set the column width in pixels, use the [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns#sheetscolumnswidth) option.
 
 ```dojo
 <script>
@@ -45,7 +45,7 @@ workbook.toDataURLAsync().then(function (dataURI) {
 
 ## Automatically Adjusting Widths to Content
 
-To enable the automatic width calculation, set the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns.autowidth) option to `true`. When set, the he column stretches to accommodate the longest cell value.
+To enable the automatic width calculation, set the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns#sheetscolumnsautowidth) option to `true`. When set, the he column stretches to accommodate the longest cell value.
 
 ```dojo
 <script>

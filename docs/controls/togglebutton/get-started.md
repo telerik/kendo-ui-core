@@ -91,8 +91,4 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 * [JavaScript API Reference of the ToggleButton](/api/javascript/ui/togglebutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

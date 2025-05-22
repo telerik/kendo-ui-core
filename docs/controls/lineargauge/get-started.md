@@ -238,8 +238,4 @@ The LinearGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/
 * [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

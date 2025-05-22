@@ -25,7 +25,7 @@ To enable the Drag and Drop functionality, set the `resizable.rows` property to 
 
 ## Multiple Rows
 
-The user can resize more than one row at the same time. To do so, set the [`selectable`](/api/javascript/ui/grid/cofiguration/selectable) property to `multiple row`. Once the user has made multiple selections, they can drag the resize handle on one of the rows and the resize will affect the rest of the selected elements automatically.
+The user can resize more than one row at the same time. To do so, set the [`selectable`](/api/javascript/ui/grid/configuration/selectable) property to `multiple row`. Once the user has made multiple selections, they can drag the resize handle on one of the rows and the resize will affect the rest of the selected elements automatically.
 
     $("#grid").kendoGrid({
         resizable: {

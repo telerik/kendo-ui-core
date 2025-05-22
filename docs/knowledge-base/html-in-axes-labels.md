@@ -37,7 +37,7 @@ How can I use HTML for the `categoryAxis.labels` configuration of the Chart?
 
 ## Solution
 
-The following example demonstrates how to achieve this through the [`visual`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels.visual) option.
+The following example demonstrates how to achieve this through the [`visual`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) option.
 
 ```dojo
 

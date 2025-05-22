@@ -35,8 +35,6 @@ The [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) uses an o
 
 To handle this issue in Internet Explorer, set **Internet Options** > **Security** > **Internet** (or Local intranet) > **Custom Level** > **Binary and script behaviors** to **Enable**.
 
-![Kendo UI for jQuery Upload Behaviors](upload-ie-script-behaviors.png)
-
 ## See Also
 
 * [JavaScript API Reference of the Upload](/api/javascript/ui/upload)

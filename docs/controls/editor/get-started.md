@@ -156,8 +156,4 @@ The Editor provides several options that enable you to modify its behavior. The 
 * [JavaScript API Reference of the jQuery Editor](/api/javascript/ui/editor)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

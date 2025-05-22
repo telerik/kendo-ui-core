@@ -8,7 +8,7 @@ position: 4
 
 # Appearance 
 
-The Kendo UI BottomNavigation allows you to alter the appearance of the widget by setting its [itemFlow](/api/javascript/ui/bottomnavigation/configuration/itemflow), [themeColor](/api/javascript/ui/bottomnavigation/configuration/themeColor), [border](/api/javascript/ui/bottomnavigation/configuration/border), [shadow](/api/javascript/ui/bottomnavigation/configuration/shadow) and [fill](/api/javascript/ui/bottomnavigation/configuration/fill) options.
+The Kendo UI BottomNavigation allows you to alter the appearance of the widget by setting its [itemFlow](/api/javascript/ui/bottomnavigation/configuration/itemflow), [themeColor](/api/javascript/ui/bottomnavigation/configuration/themeColor), [border](/api/javascript/ui/bottomnavigation/configuration/border), [shadow](/api/javascript/ui/bottomnavigation/configuration/shadow) and [fillMode](/api/javascript/ui/bottomnavigation/configuration/fillmode) options.
 
 The example below demonstrates how to modify the appearance by using the above settings:
 

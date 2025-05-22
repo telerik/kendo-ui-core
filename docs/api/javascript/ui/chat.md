@@ -709,30 +709,30 @@ The URL that is used to show the sender avatar.
 
 #### Example - register a custom template
 
-    ```
-        <div id="chat"></div>
+```
+    <div id="chat"></div>
 
-        <script id="custom-template" type="text/x-kendo-template">
-	      	<div class="#=styles.message#">
-  	    		<div class="#=styles.bubble#">#=text#</div>
-        		<b>#=additionalData#</b>
-          </div>
-        </script>
+    <script id="custom-template" type="text/x-kendo-template">
+	  	<div class="#=styles.message#">
+  			<div class="#=styles.bubble#">#=text#</div>
+    		<b>#=additionalData#</b>
+      </div>
+    </script>
 
-        <script>
-          var CUSTOM_TEMPLATE = kendo.template($('#custom-template').html());
-          kendo.chat.registerTemplate("custom", CUSTOM_TEMPLATE);     
+    <script>
+      var CUSTOM_TEMPLATE = kendo.template($('#custom-template').html());
+      kendo.chat.registerTemplate("custom", CUSTOM_TEMPLATE);     
 
-          var chat = $("#chat").kendoChat().data("kendoChat");  
+      var chat = $("#chat").kendoChat().data("kendoChat");  
 
-          chat.renderMessage({
-            type: "custom",
-            text: "<h3>Title</h3><i>description</i>",
-            additionalData: "Some other data"
-          }, chat.getUser()); 
+      chat.renderMessage({
+        type: "custom",
+        text: "<h3>Title</h3><i>description</i>",
+        additionalData: "Some other data"
+      }, chat.getUser()); 
 
-        </script>
-    ```
+    </script>
+```
 
 
 ### renderSuggestedActions

@@ -119,8 +119,4 @@ Now you are ready to use the [`itemClick`](/api/javascript/ui/drawer/events/item
 * [JavaScript API Reference of the jQuery Drawer](/api/javascript/ui/drawer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

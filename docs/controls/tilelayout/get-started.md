@@ -161,8 +161,4 @@ You can enable the [`resizable`](/api/javascript/ui/tilelayout/configuration/res
 * [JavaScript API Reference of the jQuery TileLayout](/api/javascript/ui/tilelayout)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -84,5 +84,5 @@ To achieve the desired scenario, utilize the [`series.labels.visual`](/api/javas
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the jQuery Chart](/api/javascript/dataviz/ui/chart)
 * [jQuery Bar Charts Stacked Bars Demo](https://demos.telerik.com/kendo-ui/bar-charts/stacked-bar)

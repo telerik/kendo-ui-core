@@ -76,8 +76,4 @@ The ImageEditor enables you to set the URL (or base64 string) of the image that 
 * [JavaScript API Reference of the ImageEditor](/api/javascript/ui/imageeditor)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

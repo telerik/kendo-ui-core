@@ -107,8 +107,4 @@ For more information about the alternative approach to load the content, refer t
 * [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

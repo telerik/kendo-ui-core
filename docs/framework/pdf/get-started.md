@@ -183,8 +183,3 @@ You can convert the generated PDF to Data URI or a Blob. By doing so you can att
 
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

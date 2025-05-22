@@ -911,7 +911,7 @@ Pins the Window to its current position with a `position:fixed` style, that is, 
 
 ### refresh
 
-Refreshes the content of a Window from a remote URL or from the initially defined [content template](/api/javascript/ui/window/configuration/content.template).
+Refreshes the content of a Window from a remote URL or from the initially defined [content template](/api/javascript/ui/window/configuration/content#contenttemplate).
 
 > Passing `data` and non-`GET` requests cannot be sent to an `iframe` as they require a form with a `target` attribute.
 

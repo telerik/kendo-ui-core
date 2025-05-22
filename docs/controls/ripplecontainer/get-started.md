@@ -68,8 +68,4 @@ Next, set the contents of the RippleContainer. The ripple effect will be applied
 * [JavaScript API Reference of the jQuery RippleContainer](/api/javascript/ui/ripplecontainer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

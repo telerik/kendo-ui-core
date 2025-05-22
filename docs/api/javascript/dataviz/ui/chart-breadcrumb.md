@@ -16,40 +16,40 @@ The `kendo.dataviz.ui.Chart` instance to control or a CSS selector to its elemen
 
 #### Example - attach to a Chart instance
 
-  <nav id="breadcrumb"></nav>
-  <div id="chart"></div>
-  <script>
-    $('#chart').kendoChart({
-      series: [{
-        type: 'column',
-        name: 'Total Sales By Company',
-        field: 'sales',
-        categoryField: 'company',
-        drilldownField: 'details',
-        data: [{
-            company: 'Company A',
-            sales: 100,
-            details: {
-                name: 'Company A Sales By Product',
-                type: 'column',
-                field: 'sales',
-                categoryField: 'product',
-                data: [{
-                  product: 'Product 1',
-                  sales: 80
-                }, {
-                  product: 'Product 2',
-                  sales: 20
-                }]
-            }
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      $('#chart').kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }]
         }]
-      }]
-    });
-
-    $('#breadcrumb').kendoChartBreadcrumb({
-      chart: '#chart'
-    });
-  </script>
+      });
+  
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: '#chart'
+      });
+    </script>
 
 ### rootItem `Object`
 
@@ -59,41 +59,41 @@ The default root item is `{ type: 'rootitem', icon: 'home', text: 'Home', showIc
 
 #### Example - set custom rootItem
 
-  <nav id="breadcrumb"></nav>
-  <div id="chart"></div>
-  <script>
-    $('#chart').kendoChart({
-      series: [{
-        type: 'column',
-        name: 'Total Sales By Company',
-        field: 'sales',
-        categoryField: 'company',
-        drilldownField: 'details',
-        data: [{
-            company: 'Company A',
-            sales: 100,
-            details: {
-                name: 'Company A Sales By Product',
-                type: 'column',
-                field: 'sales',
-                categoryField: 'product',
-                data: [{
-                  product: 'Product 1',
-                  sales: 80
-                }, {
-                  product: 'Product 2',
-                  sales: 20
-                }]
-            }
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      $('#chart').kendoChart({
+        series: [{
+          type: 'column',
+          name: 'Total Sales By Company',
+          field: 'sales',
+          categoryField: 'company',
+          drilldownField: 'details',
+          data: [{
+              company: 'Company A',
+              sales: 100,
+              details: {
+                  name: 'Company A Sales By Product',
+                  type: 'column',
+                  field: 'sales',
+                  categoryField: 'product',
+                  data: [{
+                    product: 'Product 1',
+                    sales: 80
+                  }, {
+                    product: 'Product 2',
+                    sales: 20
+                  }]
+              }
+          }]
         }]
-      }]
-    });
-
-    $('#breadcrumb').kendoChartBreadcrumb({
-      chart: '#chart',
-      rootItem: { type: 'rootitem', text: 'Home', showIcon: false, showText: true }
-    });
-  </script>
+      });
+  
+      $('#breadcrumb').kendoChartBreadcrumb({
+        chart: '#chart',
+        rootItem: { type: 'rootitem', text: 'Home', showIcon: false, showText: true }
+      });
+    </script>
 
 ### rootItem.encoded `Boolean` _(default: true)_
 

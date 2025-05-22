@@ -558,21 +558,21 @@ The `Popup` instance is available only once the Popover is shown.
 
 #### Example - get the Popover Popup instance in the show event handler
 
-<span id="target">
-  Some content
-</span>
-
-<script>
-  $(document).ready(function() {
-    $("#target").kendoPopover({
-      template: "Content",
-      show: function(e) {
-      /* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log(e.sender.popup)
-      }
-    });
-  });
-</script>
+    <span id="target">
+      Some content
+    </span>
+    
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoPopover({
+          template: "Content",
+          show: function(e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log(e.sender.popup)
+          }
+        });
+      });
+    </script>
 
 ## Methods
 

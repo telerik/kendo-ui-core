@@ -95,8 +95,4 @@ You can add an icon to the FloatingActionButton by utilizing the [`icon`](/api/j
 * [JavaScript API Reference of the jQuery FloatingActionButton](/api/javascript/ui/floatingactionbutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -819,16 +819,16 @@ Switches to the next page with an animation.
 
 #### Example
 
-<div id="scrollView" style="height: 150px">
-    <div data-role="page">Foo</div>
-    <div data-role="page">Bar</div>
-    <div data-role="page">Baz</div>
-    <div data-role="page">Bat</div>
-</div>
-<script>
-    var scrollView = $("#scrollView").kendoScrollView().data().kendoScrollView;
-    scrollView.next();
-</script>
+    <div id="scrollView" style="height: 150px">
+        <div data-role="page">Foo</div>
+        <div data-role="page">Bar</div>
+        <div data-role="page">Baz</div>
+        <div data-role="page">Bat</div>
+    </div>
+    <script>
+        var scrollView = $("#scrollView").kendoScrollView().data().kendoScrollView;
+        scrollView.next();
+    </script>
 
 ### prev
 

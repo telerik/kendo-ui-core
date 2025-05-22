@@ -768,7 +768,7 @@ The fields which can be used in the template are:
 * member - the member of the corresponding column header cell
 * tuple - the tuple of the corresponding column header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
 
 #### Example - emphasize the title of a specific member
 
@@ -811,8 +811,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema#schemadata).
 
 #### Example - bold the value for the *2010* column and use the formatted value for the other columns.
 
@@ -940,7 +940,7 @@ The fields which can be used in the template are:
 * member - the member of the corresponding row header cell
 * tuple - the tuple of the corresponding row header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema#schemaaxes).
 
 #### Example - emphasize the title of a specific member
 

@@ -116,8 +116,3 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 * [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

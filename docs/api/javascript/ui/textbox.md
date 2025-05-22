@@ -1,6 +1,6 @@
 ---
 title: TextBox
-description: Configuration, methods and events of the Kendo UI TextBox
+page_title: Configuration, methods and events of the Kendo UI TextBox
 description: Code examples and tips how to configure TextBox widget, use available methods and events.
 res_type: api
 component: textbox

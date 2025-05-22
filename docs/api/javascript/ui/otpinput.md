@@ -1,6 +1,6 @@
 ---
 title: OTPInput
-description: Configuration, methods and events of the Kendo UI OTPInput
+page_title: Configuration, methods and events of the Kendo UI OTPInput
 description: Code examples and tips how to configure OTPInput widget, use available methods and events.
 res_type: api
 component: otpinput
@@ -20,7 +20,7 @@ Sets type of the input. Can also be set to the following string values:
 - "number"
 - "password"
 
-### Example - sets the input type
+#### Example - sets the input type
 
     <input id="otpinput" />
     <script>
@@ -30,11 +30,11 @@ Sets type of the input. Can also be set to the following string values:
         });
     </script>
 
-### inputMode `String` (default: "text")
+### inputMode `String` *(default: "text")*
 
 Sets the appearance of the keyboard for a devices with a virtual keyboard
 
-### Example - sets the input mode
+#### Example - sets the input mode
 
 
     <input id="otpinput" />
@@ -77,7 +77,7 @@ If set to `false`, the user will be will unable to enter values within the input
 
 If set to `true`, each of the input groups will not be concatenated with one another.
 
-### Example - set the spacing of the input groups
+#### Example - set the spacing of the input groups
 
     <input id="otpinput" />
     <script>
@@ -219,7 +219,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 - "outline"
 - "none"
 
-### Example - sets the fillMode
+#### Example - sets the fillMode
 
     <input id="otpinput" />
     <script>

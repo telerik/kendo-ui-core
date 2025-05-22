@@ -75,7 +75,7 @@ The following example demonstrates how to configure the components.
 
 The following image demonstrates the output from the previous example.
 
-![Kendo UI for jQuery PivotConfiguratorV2 Overview](../../../../images/pivotconfiguratorv2-overview.png)
+![Kendo UI for jQuery PivotConfiguratorV2 Overview](../../../images/pivotconfiguratorv2-overview.png)
 
 ## Referencing Existing Instances
 

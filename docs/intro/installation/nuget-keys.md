@@ -99,7 +99,7 @@ You can use the CLI `add source` (or `update source`) command to set the credent
 * To set the credentials in GitHub Actions:
 
     ```
-    dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '${{ secrets.TELERIK_NUGET_KEY }}' --configfile './nuget.config' --store-password-in-clear-text
+    dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '${{ "{{ secrets.TELERIK_NUGET_KEY }}" }}' --configfile './nuget.config' --store-password-in-clear-text
     ```
 
 ## Additional Resources

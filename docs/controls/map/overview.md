@@ -25,10 +25,10 @@ It also provides tile layers, shape (vector) layers, and marker layers.
 
 * [Getting Started with the Kendo UI Map for jQuery]({% slug getting_started_kendoui_map_component %})
 * [Overview of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
 
 ## See Also
 
 * [Overview of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

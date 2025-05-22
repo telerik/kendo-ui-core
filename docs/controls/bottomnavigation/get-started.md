@@ -74,8 +74,4 @@ Here, you will specify the [`items`](/api/javascript/ui/bottomnavigation/configu
 * [JavaScript API Reference of the BottomNavigation](/api/javascript/ui/bottomnavigation)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

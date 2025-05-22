@@ -78,8 +78,4 @@ To change the appearance of the component, use the `fillMode`, `rounded`, and `s
 * [JavaScript API Reference of the jQuery MaskedTextBox](/api/javascript/ui/maskedtextbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

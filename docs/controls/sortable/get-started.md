@@ -262,8 +262,4 @@ Specify which of the items in the Sortable are valid drop targets by using the [
 * [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

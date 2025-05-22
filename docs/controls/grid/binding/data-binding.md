@@ -50,41 +50,41 @@ The following example demonstrates how to implement the suggested approach. In t
 * The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
 
-      ```dojo
-          <div id="grid">
-          </div>
+    ```dojo
+    <div id="grid">
+    </div>
 
-          <script>
-            $(function() {
-              $("#grid").kendoGrid({
-                dataSource: {   
-                  transport: {   
-                    read: {
-                      url: "https://api.flickr.com/services/feeds/photos_public.gne",
-                      data: {
-                        tags: "nature",
-                        format: "json"
-                      },
-                      dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-                      jsonp: "jsoncallback",
-                    }
-                  },
-                  schema: {
-                    data: "items",
-                    model: {
-                      fields: {
-                        published: {type: "date"}
-                      }
-                    }
-                  }
+    <script>
+      $(function() {
+        $("#grid").kendoGrid({
+          dataSource: {   
+            transport: {   
+              read: {
+                url: "https://api.flickr.com/services/feeds/photos_public.gne",
+                data: {
+                  tags: "nature",
+                  format: "json"
                 },
-                height: 500,
-                scrollable: true,
-                selectable: true
-              });
-            });
-          </script>   
-      ```
+                dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                jsonp: "jsoncallback",
+              }
+            },
+            schema: {
+              data: "items",
+              model: {
+                fields: {
+                  published: {type: "date"}
+                }
+              }
+            }
+          },
+          height: 500,
+          scrollable: true,
+          selectable: true
+        });
+      });
+    </script>   
+    ```
 
 ### Adding the Data
 

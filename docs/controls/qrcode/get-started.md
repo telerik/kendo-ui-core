@@ -98,8 +98,4 @@ You can customize the QRCode appearance by setting the [`color`](/api/javascript
 * [JavaScript API Reference of the jQuery QRCode](/api/javascript/dataviz/ui/qrcode)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

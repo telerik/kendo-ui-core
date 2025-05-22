@@ -36,7 +36,7 @@ The Kendo UI components that support editing provide the following common events
 To enable the editing feature of the component:
 
 1. Configure the [CRUD](/framework/datasource/crud) (Create, Read, Update, Destroy) data operation actions of the DataSource.
-2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) option.
+2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) option.
 3. Enable the `editable` option.
 
 For more information on setting up editing in Kendo UI, refer to the [article on editing of the Grid]({% slug editing_kendoui_grid_widget %}). The approaches are largely applicable to the other Kendo UI components which support the editing.
@@ -62,7 +62,7 @@ Data Type | Editor | Parser
 `boolean` | `<input type="checkbox" name="fieldName" data-type="boolean" data-bind="checked:fieldName">`| Internal method. Boolean conversion.
 `object` |  `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
 
-The following example demonstrates how to declare the fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource/configuration/schema.model).
+The following example demonstrates how to declare the fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource/configuration/schema#schemamodel).
 
         schema: {
             model: {

@@ -301,11 +301,7 @@ The Chart [`tooltip`](/api/javascript/dataviz/ui/chart/configuration/tooltip#too
 
 ## See Also 
 
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

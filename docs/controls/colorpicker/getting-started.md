@@ -77,8 +77,4 @@ Here, you will apply some settings such as [`views`](/api/javascript/ui/colorpic
 * [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

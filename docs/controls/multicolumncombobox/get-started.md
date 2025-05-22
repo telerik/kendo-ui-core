@@ -56,6 +56,7 @@ In this step, you will initialize the MultiColumnComboBox from the `<input>` ele
     <script>
     $(document).ready(function() {
         $("#comboBox").kendoMultiColumnComboBox();
+    });
     </script>
 ```
 
@@ -149,8 +150,4 @@ The [`dataValueField`](/api/javascript/ui/multicolumncombobox/configuration/data
 * [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

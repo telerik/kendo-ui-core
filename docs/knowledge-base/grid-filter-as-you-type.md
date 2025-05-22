@@ -42,9 +42,9 @@ Your project might require you to filter the Grid as the user types.
 To achieve this behavior, provide for the following requirements:
 
 * Enable the [row filtering mode](/api/javascript/ui/grid/configuration/filterable.mode).
-* Use a custom [filter cell template](/api/javascript/ui/grid/configuration/columns.filterable.cell.template) for the desired Grid column.
+* Use a custom [filter cell template](/api/javascript/ui/grid/configuration/columns.filterable.cell#columnsfilterablecelltemplate) for the desired Grid column.
 * The purpose of the filter cell template is to attach a `data-value-update` attribute on the `input` event handler to the textbox (`args.element`) which will trigger the `change` event of the textbox. The `change` event will trigger the filtering functionality of the Grid.
-* [Change the default `"eq"` operator](/api/javascript/ui/grid/configuration/columns.filterable.cell.operator) of the column with `"contains"`, `"startswith"` or any other [supported operator](/api/javascript/data/datasource/configuration/filter.operator).
+* [Change the default `"eq"` operator](/api/javascript/ui/grid/configuration/columns.filterable.cell#columnsfilterablecelloperator) of the column with `"contains"`, `"startswith"` or any other [supported operator](/api/javascript/data/datasource/configuration/filter#filteroperator).
 
 The following example demonstrates how to filter the Grid on the fly, as the user types in the filter row textbox.
 

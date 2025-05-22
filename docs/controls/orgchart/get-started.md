@@ -54,6 +54,7 @@ In this step, you will initialize the OrgChart from the `<div>` element.
     <script>
     $(document).ready(function() {
         $("#orgchart").kendoOrgChart();
+    });
     </script>
 ```
 
@@ -122,8 +123,4 @@ The OrgChart allows you to specify colors for the displayed cards. In this step,
 * [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

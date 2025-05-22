@@ -29,7 +29,7 @@ To add tooltips to form item labels, utilize the Kendo UI Tooltip component. Ini
 
 1. Initialize the Tooltip component on your Form element. Use the [`filter`](/api/javascript/ui/tooltip/configuration/filter) option to target form inputs specifically. 
 
-2. Use the [`autoHide`](/api/javascript/ui/tooltip/configuration/filtautohideer) property set to `false` to keep the tooltip visible until the user closes it (if desired).
+2. Use the [`autoHide`](/api/javascript/ui/tooltip/configuration/autohide) property set to `false` to keep the tooltip visible until the user closes it (if desired).
 
 Here is an example of initializing a Tooltip for the Form:
 

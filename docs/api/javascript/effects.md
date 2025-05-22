@@ -1,5 +1,5 @@
 ---
-title: effects
+title: "effects "
 page_title: API reference for Kendo UI Effects
 res_type: api
 component: effects

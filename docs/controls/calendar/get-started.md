@@ -109,8 +109,4 @@ You can change the appearance of the dates by using the [`month`](/api/javascrip
 * [JavaScript API Reference of the jQuery Calendar](/api/javascript/ui/calendar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

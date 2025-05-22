@@ -121,8 +121,3 @@ The DropDownTree supports both single and multiple (default) tag modes. The exam
 * [JavaScript API Reference of the DropDownTree](/api/javascript/ui/datepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

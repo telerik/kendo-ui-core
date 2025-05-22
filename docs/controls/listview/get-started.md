@@ -290,8 +290,4 @@ The ListView allows you to display a scrollbar inside the component so end-users
 * [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

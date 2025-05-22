@@ -11,7 +11,7 @@ Scales and repositions the element on top of the provided target. The element an
 
 > **Note**: The first time the effect performs, the element is detached from its current position and re-attached in the body element.
 
-## Transferring an element to a target
+#### Transferring an element to a target
 
     <div id="foo" style="width: 200px; height: 200px; position: absolute; border: 1px solid black; background: grey;">
         I will be animated to a given target

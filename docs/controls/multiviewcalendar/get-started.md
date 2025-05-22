@@ -97,8 +97,4 @@ You can set a footer for the MultiViewCalendar by using the [`footer`](/api/java
 * [JavaScript API Reference of the jQuery MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -464,7 +464,7 @@ Recalculates the dimensions of the underlying ProgressBar indicating the Stepper
 
 ### select
 
-Selects a Step that is present at a given index. If used without parameter returns the currently selected `[Step](/api/javascript/stepper/step)` instance.
+Selects a Step that is present at a given index. If used without parameter returns the currently selected [`Step`](/api/javascript/stepper/step) instance.
 
 #### Parameters
 
@@ -474,7 +474,7 @@ The index of the Step which should be selected.
 
 #### Returns `kendo.stepper.Step`
 
-`Step` The currently selected `[Step](/api/javascript/stepper/step)` instance.
+`Step` The currently selected [`Step`](/api/javascript/stepper/step) instance.
 
 #### Example
 

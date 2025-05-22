@@ -53,7 +53,7 @@ For more information on the Kendo UI Data Source abstraction, refer to [its intr
 
 ## See Also
 
-* [Kendo UI DataSource API](/api/javascript/data/datasource.html)
+* [Kendo UI DataSource API](/api/javascript/data/datasource)
 * [Online Tutorial](https://www.telerik.com/blogs/building-sharepoint-add-ins-with-kendo-ui)
 * [GitHub Project](https://github.com/telerik/kendo-ui-sharepoint-2013-demo)
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})

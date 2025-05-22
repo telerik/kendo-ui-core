@@ -235,8 +235,4 @@ Here, you will specify the [`colors of the scale ranges`](/api/javascript/datavi
 * [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

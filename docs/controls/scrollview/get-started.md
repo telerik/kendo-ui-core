@@ -106,8 +106,4 @@ To add pages in the ScrollView, you need to nest a `<div data-role="page"></div>
 * [JavaScript API Reference of the jQuery ScrollView](/api/javascript/ui/scrollview)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -31,7 +31,7 @@ Below you can find a list of the impacted components:
 
 **Toolbar**
 
-As of 2022 R2 SP1, the Toolbar's SplitButton is replaced with the [standalone SplitButton widget](../api/javascript/ui/splitbutton.md).
+As of 2022 R2 SP1, the Toolbar's SplitButton is replaced with the [standalone SplitButton widget](/api/javascript/ui/splitbutton).
 
 ### Old vs New Rendering of the SplitButton in the Toolbar
 

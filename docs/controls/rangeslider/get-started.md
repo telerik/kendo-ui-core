@@ -132,8 +132,3 @@ You can also choose how the tooltip for the currently selected range will be for
 * [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

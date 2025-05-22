@@ -31,8 +31,8 @@ Change in rendering the widget list. The `ul` element of the widget is wrapped i
         <ul class="k-list">
         </ul>
     </div>
-    ```
-    ```tab-New
+```
+```tab-New
     <div class="k-list-container k-popup">
         <div class="k-group-header"></div>
         <div style="overflow: auto; position: relative; height: 104px">
@@ -95,13 +95,13 @@ Selected item is still visible. This allows to de-select item from the popup lis
             <li>Option Label</li>
             <li>First Item</li>
         </ul>
-      ```
-      ```tab-New
-        <div class="k-list-optionlabel">Option Label</div>
-        <ul>
-            <li>First Item</li>
-        </ul>
-      ```
+    ```
+    ```tab-New
+      <div class="k-list-optionlabel">Option Label</div>
+      <ul>
+          <li>First Item</li>
+      </ul>
+    ```
 
 * To match the Html `Select` behavior better and solve some issues related to MVVM `value` binding, the DropDownList now allows to clear its value (deselect the selected item). This will introduce the following breaking changes:
 

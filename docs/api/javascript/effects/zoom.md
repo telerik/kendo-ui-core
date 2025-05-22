@@ -8,7 +8,7 @@ res_type: api
 Zoom the element in or out.
 Supported directions are `in` and `out`.
 
-## Zooming an element in
+#### Zooming an element in
 
     <div id="foo">
         I will be animated
@@ -20,7 +20,7 @@ Supported directions are `in` and `out`.
         // kendo.fx($("#foo")).zoomOut.play();
     </script>
 
-## Zooming an element out
+#### Zooming an element out
 
     <div id="foo">
         I will be animated

@@ -236,8 +236,4 @@ You can use the Filter together with a number of Kendo UI for jQuery components.
 * [JavaScript API Reference of the jQuery Filter](/api/javascript/ui/filter)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

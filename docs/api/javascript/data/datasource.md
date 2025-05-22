@@ -198,7 +198,7 @@ makes an HTTP request for every CRUD operation.
 
 ### data `Array|String`
 
-The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) is set).
+The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) is set).
 
 Can be set to a string value if the [`schema.type`](/api/javascript/data/datasource#configuration-schema.type) option is set to `"xml"`.
 
@@ -3560,10 +3560,10 @@ The optional data item (model). If specified, only the changes of this data item
 Gets or sets the data items of the data source.
 
 If the data source is bound to a remote service (via the [`transport`](/api/javascript/data/datasource#configuration-transport) option), the `data` method will return the service response.
-Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) option is set).
+Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) option is set).
 
 If the data source is bound to a JavaScript array (via the [`data`](/api/javascript/data/datasource#configuration-data) option), the `data` method will return the items of that array.
-Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) option is set).
+Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) option is set).
 
 If the data source is grouped (via the [`group`](/api/javascript/data/datasource#configuration-group) option or the [group](/api/javascript/data/datasource/methods/group) method) and the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) is set to `true`, the `data` method will return the group items.
 

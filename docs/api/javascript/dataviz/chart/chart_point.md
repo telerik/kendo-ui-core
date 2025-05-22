@@ -30,7 +30,7 @@ The sum of point values since the last "runningTotal" [summary point](/api/javas
 
 The sum of all previous series values. Available for waterfall series points.
 
-###value `Number`
+### value `Number`
 
 The point value.
 

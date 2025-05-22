@@ -107,7 +107,7 @@ The following options are valid:
 
 If two or more categories fall within a base unit, its values are aggregated to display a single point.
 
-  span id="sparkline"></span>
+    <span id="sparkline"></span>
     <script>
     $("#sparkline").kendoSparkline({
         series: [{

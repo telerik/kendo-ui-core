@@ -46,11 +46,11 @@ As of the Kendo UI Q1 2016 release, all Kendo UI themes feature styles for row h
 However, if your project requires you to avoid the `hover` state, use either of the following approaches:
 * Open the Kendo UI theme CSS file (for example, `kendo.default.min.css`) and remove the following CSS rule.
 
-      ```
-      .k-grid tr:hover {
-          /* ...background styles here... */
-        }
-      ```
+    ```
+    .k-grid tr:hover {
+        /* ...background styles here... */
+      }
+    ```
 
 * Override the `hover` styling by using the CSS code from the following example (which utilizes Sass Bootstrap v.4 theme). The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
 

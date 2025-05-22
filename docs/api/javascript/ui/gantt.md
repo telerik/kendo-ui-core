@@ -6690,7 +6690,7 @@ Fires when the user shows a column. The event handler function context (availabl
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [`column`](/api/javascript/ui/ganttt#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/gantt/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Gantt`
 

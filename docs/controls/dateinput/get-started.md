@@ -108,8 +108,4 @@ In this step, you can apply different styling settings to the component such as 
 * [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

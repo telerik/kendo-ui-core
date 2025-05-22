@@ -3353,7 +3353,7 @@ Layers are normally stacked in declaration order (last one is on top).
 
 #### Example - setting a zIndex for a layer
 
-   <div id="map"></div>
+    <div id="map"></div>
     <script>
       $("#map").kendoMap({
         layers: [{

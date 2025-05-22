@@ -111,8 +111,4 @@ You can specify whether the CheckBox will be checked by default or not.
 * [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

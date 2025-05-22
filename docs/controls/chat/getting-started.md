@@ -82,8 +82,4 @@ Here, you will apply some settings, such as [`toolbar.buttons`](/api/javascript/
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

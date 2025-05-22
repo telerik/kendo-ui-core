@@ -12,7 +12,7 @@ The Wizard provides options for loading content via AJAX, defining local content
 
 ## Loading Content with AJAX
 
-The Wizard provides built-in support for asynchronously loading content from remote URLs via the [`contentUrl`](/api/javascript/ui/wizard/configuration/steps/contentUrl) configuration option. These remote call should return HTML content that will be loaded in the content area of the respective Wizard step. The Wizard also provides  [`loadOnDemand`](/api/javascript/ui/wizard/configuration/loadondemand) configuration option which determines whether each step content will be loaded when it is selected or all of them will be loaded initially with the rendering of the component. It is possible also to specify whether the step content will be reloaded on each navigation to the given Step via the [`reloadOnSelect`](/api/javascript/ui/wizard/configuration/reloadonselect) configuration option.
+The Wizard provides built-in support for asynchronously loading content from remote URLs via the [`contentUrl`](/api/javascript/ui/wizard/configuration/steps.contenturl) configuration option. These remote call should return HTML content that will be loaded in the content area of the respective Wizard step. The Wizard also provides  [`loadOnDemand`](/api/javascript/ui/wizard/configuration/loadondemand) configuration option which determines whether each step content will be loaded when it is selected or all of them will be loaded initially with the rendering of the component. It is possible also to specify whether the step content will be reloaded on each navigation to the given Step via the [`reloadOnSelect`](/api/javascript/ui/wizard/configuration/reloadonselect) configuration option.
 
 For a complete example, refer to the [demo on loading Wizard content with AJAX](https://demos.telerik.com/kendo-ui/wizard/ajax).
 
@@ -68,7 +68,7 @@ The Wizard integrates the Kendo UI Form component and supports all its configura
 
 ### Defining HTML Content
 
-The content of each Wizard step can be specified via the [`steps.content`](/api/javascript/ui/wizard/configuration/steps/content) or [`steps.contentId`](/api/javascript/ui/wizard/configuration/steps/contentId) configuration options. In this way a specific HTML string or a DOM element, specified by its Id, will be used as content:
+The content of each Wizard step can be specified via the [`steps.content`](/api/javascript/ui/wizard/configuration/steps.content) or [`steps.contentId`](/api/javascript/ui/wizard/configuration/steps.contentId) configuration options. In this way a specific HTML string or a DOM element, specified by its Id, will be used as content:
 
 ```dojo
     <div id="wizard"></div>

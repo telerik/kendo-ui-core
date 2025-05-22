@@ -352,8 +352,4 @@ Here, you will define the `vertical` layout of the component, set the events ren
 * [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

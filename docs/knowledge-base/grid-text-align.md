@@ -64,4 +64,4 @@ Apply the `k-text-left`, `k-text-right` or `k-text-center` classes through the G
 
 ## Notes
 
-* [JavaScript API Reference of the Data Grid](/api/javascript/dataviz/ui/grid)
+* [JavaScript API Reference of the Data Grid](/api/javascript/ui/grid)

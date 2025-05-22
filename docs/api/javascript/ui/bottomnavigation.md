@@ -180,7 +180,7 @@ Contextual data to be used for events within the component.
 
 Defines the name for an existing icon in a Kendo UI theme.
 
-See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for more details on Kendo UI icons.
+See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
 
 #### Example
 

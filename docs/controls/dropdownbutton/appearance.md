@@ -54,11 +54,11 @@ The following values are available for the [`fillMode`](/api/javascript/ui/dropd
 
 The default `fillMode` value is `solid` and it is applied to the button element through the `k-button-solid` class.
 
-    ```html
-        <button class="k-menu-button k-button k-button-solid" >
-            ...
-        </button>
-    ```
+```html
+<button class="k-menu-button k-button k-button-solid" >
+    ...
+</button>
+```
 
 ### ThemeColor
 

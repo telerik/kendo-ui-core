@@ -78,9 +78,9 @@ The `kendo.geometry` namespace contains primitives, such as:
 * [`Size`](/api/javascript/geometry/size)
 
 The `kendo.drawing` namespace contains elements, such as:
-* [`Path`](/api/javascript/dataviz/drawing/path)
-* [`Image`](/api/javascript/dataviz/drawing/image)
-* [`Group`](/api/javascript/dataviz/drawing/group)
+* [`Path`](/api/javascript/drawing/path)
+* [`Image`](/api/javascript/drawing/image)
+* [`Group`](/api/javascript/drawing/group)
 
 ## 2. Drawing the Path
 
@@ -177,8 +177,4 @@ To render the scene, use the [`Surface.create`](/api/javascript/drawing/surface#
 
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

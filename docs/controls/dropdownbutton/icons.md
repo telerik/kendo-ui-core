@@ -44,26 +44,26 @@ The following example demonstrates how to use icons in the DropDownButton compon
 
 The `icon` configuration in the previous example will produce the following HTML output:
 
-	```html
-    <button type="button" id="dropDownButton" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" aria-label="Plus dropdownbutton">
-        <span class="k-icon k-i-plus k-button-icon"></span>
-        <span class="k-button-text">Plus</span>
-    </button>
-    ```
+```html
+<button type="button" id="dropDownButton" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" aria-label="Plus dropdownbutton">
+    <span class="k-icon k-i-plus k-button-icon"></span>
+    <span class="k-button-text">Plus</span>
+</button>
+```
 
 The following example demonstrates how to apply the `spriteCssClass`:
 
-	```
-    <button type="button" id="dropDownButton">Plus</button>
+```
+<button type="button" id="dropDownButton">Plus</button>
 
-	<script>
-	$(function(){
-		$("#dropDownButton").kendoDropDownButton({
-			spriteCssClass: "myPlusIcon"
-		});
+<script>
+$(function(){
+	$("#dropDownButton").kendoDropDownButton({
+		spriteCssClass: "myPlusIcon"
 	});
-	</script>
-    ```
+});
+</script>
+```
 
 Technically, you can use the `spriteCssClass` to achieve the same result as `icon`. However, `icon` avoids the need to set two CSS classes at the same time and provides a certain level of abstraction.
 

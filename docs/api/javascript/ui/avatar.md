@@ -72,7 +72,7 @@ Specifies the appearance fill style of the Avatar. The available values are `"ou
 
 ### icon `String`
 
-Specifies an icon name to be used if the avatar `type` is set to `icon`. For a list of available icon names, please refer to the [Web Font Icons article](/kendo-ui/styles-and-layout/icons-web).
+Specifies an icon name to be used if the avatar `type` is set to `icon`. For a list of available icon names, please refer to the [Web Font Icons article](/styles-and-layout/icons-web).
 
 #### Example
 

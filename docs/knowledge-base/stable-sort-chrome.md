@@ -72,7 +72,7 @@ A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm
     </script>
 ```
 
-The solution for this issue is to add a position field and use it to maintain stability. This is done through a custom [`columns.sortable.compare function`](/api/javascript/ui/grid/configuration/columns.sortable.compare).
+The solution for this issue is to add a position field and use it to maintain stability. This is done through a custom [`columns.sortable.compare function`](/api/javascript/ui/grid/configuration/columns.sortable#columnssortablecompare).
 
  - a stable sort function using a position field
 

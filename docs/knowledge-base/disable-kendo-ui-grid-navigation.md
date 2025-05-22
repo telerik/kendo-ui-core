@@ -43,7 +43,7 @@ $("#disable").click(function(){
     selectable: false
   });
 });
-``
+```
 
 This approach ensures that once a button is clicked, the Kendo UI for jQuery Grid appears greyed out and does not respond to user interactions such as selection and keyboard navigation. 
 

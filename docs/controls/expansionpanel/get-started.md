@@ -66,8 +66,4 @@ In this step, you will initialize the ExpansionPanel from the `<div>` element.
 * [JavaScript API Reference of the ExpansionPanel](/api/javascript/ui/expansionpanel)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

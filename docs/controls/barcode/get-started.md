@@ -97,11 +97,7 @@ You can customize the Barcode appearance by setting the [`color`](/api/javascrip
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Barcode](/api/javascript/ui/barcode)
+* [JavaScript API Reference of the jQuery Barcode](/api/javascript/dataviz/ui/barcode)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

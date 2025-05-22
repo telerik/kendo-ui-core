@@ -74,8 +74,4 @@ In this step, you will initialize the Popup from the `<div>` element. All settin
 * [JavaScript API Reference of the jQuery Popup](/api/javascript/ui/popup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

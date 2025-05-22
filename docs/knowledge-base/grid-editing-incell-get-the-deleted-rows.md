@@ -30,13 +30,13 @@ Is there any way to can retrieve deleted Rows on Click of custom button using in
 
 It is possible to get hold of the destroyed items in the data source with the help of the `destroyed()` internal method. It returns a collection of the destroyed items before they are synced. However, please be cautious of its usage and test it when moving to new versions. Since it is not a publically revealed property, it may be subject to change.
 
-    ```       
-        function getDestroyed(){
-            var grid = $("#grid").data("kendoGrid");
-            var destroyed = grid.dataSource.destroyed();
-            kendo.alert(kendo.stringify(destroyed));
-        }
-    ```
+```       
+    function getDestroyed(){
+        var grid = $("#grid").data("kendoGrid");
+        var destroyed = grid.dataSource.destroyed();
+        kendo.alert(kendo.stringify(destroyed));
+    }
+```
 
 ```dojo
     <div id="example">

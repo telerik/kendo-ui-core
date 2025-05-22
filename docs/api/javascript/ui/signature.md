@@ -1,6 +1,6 @@
 ---
 title: Signature
-description: Configuration, methods and events of the Signature
+page_title: Configuration, methods and events of the Signature
 description: Code examples and tips how to configure Signature widget, use available methods and events.
 res_type: api
 component: signature

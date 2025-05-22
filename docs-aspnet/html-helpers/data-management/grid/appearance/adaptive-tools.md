@@ -21,8 +21,7 @@ The tools appear in the ActionSheet automatically on small or medium screen size
 To enable sorting in adaptive mode, configure the Grid with `Sortable()`.
 
 * In [single-column sorting mode]({% slug htmlhelpers_grid_aspnetcore_sorting%}#single-column-sorting), the sorting popup will close immediately after a field is selected, and the Grid will be sorted accordingly.
-* In [multi-column]({% slug htmlhelpers_grid_aspnetcore_sorting%}#multi-column-sorting) or 
-mixed-column]({% slug htmlhelpers_grid_aspnetcore_sorting%}#mixed-column-sorting) sorting modes, the popup will remain open until the user clicks the **Done** button. Sorting is applied in the background as fields are selected.
+* In [multi-column]({% slug htmlhelpers_grid_aspnetcore_sorting%}#multi-column-sorting) or [mixed-column]({% slug htmlhelpers_grid_aspnetcore_sorting%}#mixed-column-sorting) sorting modes, the popup will remain open until the user clicks the **Done** button. Sorting is applied in the background as fields are selected.
 
 ```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()

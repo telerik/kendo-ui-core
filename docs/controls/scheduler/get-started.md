@@ -206,8 +206,4 @@ To customize the appearance of the events, use the [`eventTemplate`](/api/javasc
 * [JavaScript API Reference of the jQuery Scheduler](/api/javascript/ui/scheduler)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

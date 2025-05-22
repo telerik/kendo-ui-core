@@ -83,8 +83,4 @@ The ButtonGroup provides various configurations to change its appearance. Below 
 * [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

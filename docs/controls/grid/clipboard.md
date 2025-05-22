@@ -3,7 +3,7 @@ title: Clipboard
 page_title: jQuery Grid Documentation - Clipboard Support
 description: "Learn how to enable the clipboard functionality of the jQuery Grid of Kendo UI that allows you to copy and paste content from Excel to the Grid and vice-versa"
 slug: clipboard_kendoui_grid_component
-position: 18
+position: 19
 ---
 
 # Clipboard

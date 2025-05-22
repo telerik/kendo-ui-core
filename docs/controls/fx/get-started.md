@@ -85,8 +85,4 @@ In this step, you will play the effects.
 * [JavaScript API Reference of the FX](/api/javascript/effects/common)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

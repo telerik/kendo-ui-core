@@ -90,8 +90,4 @@ The ToolBar enables you to configure its items by using the [`items`](https://do
 * [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -207,7 +207,7 @@ The component value.
 
 > **Note:** The value should be a number between 0 and 100.
 
-<div id="progressbar"></div>
+    <div id="progressbar"></div>
     <script>
      $("#progressbar").kendoCircularProgressBar({
         value: 30,

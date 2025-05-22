@@ -24,16 +24,15 @@ For more information on using SVG and font icons, visit their dedicated articles
 When migrating from font icons to SVG icons, you will face two possible scenarios: 
 
 1. The font icons that you use currently are not customized. 
-
     The following example shows a font icon without customizations used in {{ site.product }} versions prior to R2 2023: 
 
-    ``` 
+    ```html
     <span class="k-icon k-font-icon k-i-camera"></span> 
     ``` 
 
     To set an SVG icon in R2 2023 and later versions, use the `kendo.ui.icon` utility: 
 
-    ``` 
+    ```html
     <span id="icon"></span> 
 
     <script> 
@@ -42,10 +41,9 @@ When migrating from font icons to SVG icons, you will face two possible scenario
     ```
 
 1. The font icons that you use currently are customized. 
-
     The following example shows a font icon with a CSS rule that customizes the color of the font icon in Kendo UI versions prior to R2 2023:
 
-    ``` 
+    ```html
     <style> 
         .k-icon { 
         color: red !important; 
@@ -57,7 +55,7 @@ When migrating from font icons to SVG icons, you will face two possible scenario
 
     To set an SVG icon in R2 2023 and later versions, replace the font icon with an SVG icon by using `kendo.ui.icon` or add `.k-svg-icon` to the selector. 
 
-    ``` 
+    ```html
     <script> 
         kendo.setDefaults('iconType', 'svg');
     </script> 
@@ -69,7 +67,8 @@ When migrating from font icons to SVG icons, you will face two possible scenario
     } 
     </style> 
     ```
-    ```
+
+    ```html
     <span id="icon"></span>
 
     <script>
@@ -81,7 +80,7 @@ When migrating from font icons to SVG icons, you will face two possible scenario
 
 To continue using font icons as the default icon type, call the `kendo.setDefaults` method:
 
-```
+```html
 <script>
     kendo.setDefaults('iconType', 'font');
 </script>
