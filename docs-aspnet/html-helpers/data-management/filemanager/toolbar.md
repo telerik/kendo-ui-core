@@ -114,6 +114,76 @@ You can also add the custom command to the ContextMenu of the FileManager
 ```
 {% endif %}
 
+## Overflow
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+@(Html.Kendo().FileManager().Name("filemanager")
+    .DataSource(ds =>
+        {
+           ...
+        );
+    })
+    .UploadUrl("Upload", "FileManagerData")
+    .Toolbar(tb => tb.Items(items =>
+    {
+        items.Add("createFolder");
+        items.Add("upload");
+        items.Add("sortField");
+        items.Add("changeView");
+        items.Add("spacer");
+        items.Add("details");
+        items.Add("search");
+    })
+    .Overflow(o => o
+       .Mode(ToolBarOverflowMode.Scroll)
+       .ScrollButtons(ScrollButtonsType.Auto)
+       .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+       .ScrollDistance(50))
+    )
+    .ContextMenu(context => context.Items(items => items.Add("rename")))
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-filemanager name="filemanager" upload-url="@Url.Action("Upload", "FileManagerData")">
+	<filemanager-datasource>
+ 	 		...
+	</filemanager-datasource>
+	<toolbar enabled="true">
+ 		<items>
+ 	 		<item name="createFolder">
+ 	 		</item>
+ 	 		<item name="upload">
+ 	 		</item>
+ 	 		<item name="sortField">
+ 	 		</item>
+ 	 		<item name="changeView">
+ 	 		</item>
+ 	 		<item name="spacer">
+ 	 		</item>
+ 	 		<item name="details">
+ 	 		</item>
+ 	 		<item name="search">
+ 	 		</item>
+ 		</items>
+        <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+	</toolbar>
+	<context-menu enabled="true">
+ 		<items>
+ 	 		<item name="rename">
+ 	 		</item>
+ 		</items>
+	</context-menu>
+</kendo-filemanager>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## See Also
 
 * [Overview of {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_overview %})

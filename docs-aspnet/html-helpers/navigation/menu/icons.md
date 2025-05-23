@@ -8,12 +8,70 @@ position: 6
 
 # Icons
 
-Starting with Telerik UI for {{ site.framework }} R2 2025, the Menu exposes two new icon-related fields&mdash;the [`DataIconField`](/api/kendo.mvc.ui.fluent/menubuilder#dataiconfieldsystemstring) and the [`DataIconClassField`](/api/kendo.mvc.ui.fluent/menubuilder#dataiconclassfieldsystemstring) options. Depending on your project's needs, you can enhance the content of the Menu by displaying either an SVG or a Font Icon. To display an icon in the items of the Menu, select one from the <a href="https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/" target="_blank">list of icons supported by Telerik UI for {{ site.framework }}</a>, and set the `Icon` field to the necessary icon name. 
+Starting with version R2 2025, you can use icons in the Menu items.
 
+For a runnable example, refer to the [demo on displaying icons in the Menu](https://demos.telerik.com/{{ site.platform }}/menu/icons).
+
+## Basic Usage
+
+The icons of the items can be configured depending on how the Menu binds to its data. For more information on the available data-binding approaches, refer to the [data binding article of the Menu]({% slug htmlhelpers_menu_databinding_aspnetcore%}).
+
+### Remote Data Binding
+
+When the [Menu is configured for remote data binding]({% slug htmlhelpers_menu_bindingremotedata_aspnetcore%}) or [binds to a Model collection using the `BindTo()` method]({% slug htmlhelpers_menu_modelbinding_aspnetcore%}), specify the Model property that stores the icon's name through the [`DataIconField`](/api/kendo.mvc.ui.fluent/menubuilder#dataiconfieldsystemstring) option. Also, you can define an additional Model property that holds a custom CSS `class` for the respective icon and set it in the Menu configuration using the [`DataIconClassField`](/api/kendo.mvc.ui.fluent/menubuilder#dataiconclassfieldsystemstring) method.
+
+```HtmlHelper
+    @(Html.Kendo().Menu()
+        .Name("menu")
+        .DataTextField("Text")
+        .DataIconField("Icon")
+        .DataSource(dataSource => dataSource
+            .Read(read => read.Action("GetItems", "Menu"))
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-menu name="menu" datatextfield="Text" dataiconfield="Icon">
+        <hierarchical-datasource>
+            <transport>
+                <read url="@Url.Action("GetItems", "Menu")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-menu>
+```
+{% endif %}
+
+### Items Binding
+
+When using [Items binding]({% slug itemsbinding_menu_aspnetmvc%}) to define the Menu items, you can specify an icon for each item through the `Icon` option. 
+To define a custom CSS `class` for the respective icon, use the `IconClass` option.
+
+```HtmlHelper
+    @(Html.Kendo().Menu()
+        .Name("menu")
+        .Items(items => {
+            items.Add().Text("Item 1").Icon("pencil");
+            items.Add().Text("Item 2").Icon("home");
+            items.Add().Text("Item 3").Icon("plus");
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-menu name="menu">
+        <items>
+            <menu-item text="Item 1" icon="pencil"></menu-item>
+            <menu-item text="Item 2" icon="home"></menu-item>
+            <menu-item text="Item 3" icon="plus"></menu-item>
+        </items>
+    </kendo-menu>
+```
+{% endif %}
 
 ## SVG Icons
 
-The following example demonstrates how to display SVG icons in the Menu's items when the component is configured for remote data binding. Also, the icon of the first item has a custom CSS class added through the `IconClass` option.
+The following example demonstrates how to display {% if site.core %}[SVG icons](https://www.telerik.com/aspnet-core-ui/documentation/styles-and-layout/sass-themes/svg-icons){% else %}[SVG icons](https://www.telerik.com/aspnet-mvc/documentation/styles-and-layout/sass-themes/svg-icons){% endif %} in the Menu's items when the component is configured for remote data binding. Also, the icon of the first item has a custom CSS class added through the `IconClass` option.
 
 ```HtmlHelper
 @(Html.Kendo().Menu()
@@ -52,7 +110,7 @@ The following example demonstrates how to display SVG icons in the Menu's items 
 
 ## Font Icons
 
-The following example demonstrates how to display Font icons in the Menu's items when the component binds to a data collection.
+The following example demonstrates how to display {% if site.core %}[Font icons](https://www.telerik.com/aspnet-core-ui/documentation/styles-and-layout/sass-themes/font-icons){% else %}[Font icons](https://www.telerik.com/aspnet-mvc/documentation/styles-and-layout/sass-themes/font-icons){% endif %} in the Menu's items when the component binds to a data collection.
 
 ```HtmlHelper
 <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-font-icons/dist/index.css" />

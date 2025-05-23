@@ -3,7 +3,7 @@ title: Formatting Marks
 page_title: Formatting Marks
 description: "Learn about the Formatting Marks functionality of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_formattingmarks_aspnetcore
-position: 13
+position: 14
 ---
 
 # Formatting Marks

@@ -3,7 +3,7 @@ title: Format Painter
 page_title: Editor Format Painter
 description: "Learn about the format painter of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_format_painter_aspnetcore
-position: 11
+position: 12
 ---
 
 # Format Painter

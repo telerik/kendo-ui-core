@@ -3,7 +3,7 @@ title: Table Editing
 page_title: Editor Table Editing
 description: "Learn about the table editing of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_table_editing_aspnetcore
-position: 12
+position: 13
 ---
 
 # Table Editing

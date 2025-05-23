@@ -3,7 +3,7 @@ title: Immutable Elements
 page_title: Immutable Elements
 description: "Learn how to use immutable elements in the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_immutable_aspnetcore
-position: 7
+position: 8
 ---
 
 # Immutable Elements

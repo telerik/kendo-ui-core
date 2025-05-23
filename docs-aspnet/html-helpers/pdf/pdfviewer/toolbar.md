@@ -133,6 +133,39 @@ You can also use the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/
     </script>
 ```
 
+### Overflow Behavior
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+    @(Html.Kendo().PDFViewer().Name("pdfviewer")
+        .PdfjsProcessing(pdf => pdf.File(Url.Content("~/shared/web/pdfViewer/sample.pdf")))
+        .Height(700)
+        .Toolbar(t => t
+            .Overflow(o => o
+              .Mode(ToolBarOverflowMode.Scroll)
+              .ScrollButtons(ScrollButtonsType.Auto)
+              .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+              .ScrollDistance(50)
+            )
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-pdfviewer name="pdfviewer"
+                     height="700">
+        <pdfjs-processing file="@Url.Content("~/shared/web/pdfViewer/sample.pdf")" />
+        <toolbar>
+            <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </toolbar>
+    </kendo-pdfviewer>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## Custom Tools
 
 The toolbar of the PDFViewer component supports custom tools.
