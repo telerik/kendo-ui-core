@@ -17599,16 +17599,16 @@ The rotation angle of the extremes.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        type: "boxPlot",
-        data: [1,2,3,4,5,3.5,[0,0,0.5,6,7,11]],
-        extremes: {
-          type: "square",
-          rotation: 45
-        }
-      }]
-    });
+      $("#chart").kendoChart({
+        series: [{
+          type: "boxPlot",
+          data: [1,2,3,4,5,3.5,[0,0,0.5,6,7,11]],
+          extremes: {
+            type: "square",
+            rotation: 45
+          }
+        }]
+      });
     </script>
 
 #### Example
@@ -17724,15 +17724,16 @@ The supported values are:
 > The `smooth` options is not supported for stacked area series with missing values.
 
 #### Example - set the style behavior
+
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        type: "line",
-        style: "step",
-        data: [1, 2, 3, 4, 5]
-      }]
-    });
+      $("#chart").kendoChart({
+        series: [{
+          type: "line",
+          style: "step",
+          data: [1, 2, 3, 4, 5]
+        }]
+      });
     </script>
 
 ### series.name `String`
@@ -22133,7 +22134,8 @@ The supported values are:
 > The `smooth` options is not supported for stacked area series with missing values.
 
 #### Example - set the style behavior
-   <div id="chart"></div>
+
+    <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
         seriesDefaults: {

@@ -4,7 +4,7 @@ page_title: Editor Image Browser
 description: "Learn about the Image Browser component of the Telerik UI Editor component for {{ site.framework }}."
 previous_url: /helpers/editors/editor/image-browser
 slug: htmlhelpers_editor_image_browser_aspnetcore
-position: 6
+position: 7
 ---
 
 # Image Browser

@@ -3,7 +3,7 @@ title: Serialization and Deserialization
 page_title: Serialization and Deserialization
 description: "Learn how to control the serializing and deserializing behavior of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_serialize_aspnetcore
-position: 5
+position: 6
 ---
 
 # Serialize and Deserialize Content

@@ -128,6 +128,40 @@ Then add the custom command to the ImageEditor Toolbar:
 ```
 {% endif %}
 
+## Overflow
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+    @(Html.Kendo().ImageEditor()
+        .Name("imageEditor")
+        .Height(900)
+        .SaveAs(s => s.FileName("image_edited.png"))
+        .Toolbar(t => t
+          .Overflow(o => o
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Auto)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+            .ScrollDistance(50)
+          )
+        )
+        .ImageUrl(@Url.Content("~/shared/images/photos/11.jpg"))
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-imageeditor name="imageEditor" height="900" image-url="@Url.Content("~/shared/images/photos/11.jpg")">
+        <save-as file-name="image_edited.png" />
+        <toolbar>
+            <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </toolbar>
+    </kendo-imageeditor>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## Loading Images in the ImageEditor
 
 If the ImageUrl configuration option is used to set a predefined image for the ImageEditor and the image is hosted on another domain, the image editing tools will be disabled. If loading of an image from another domain is required provide the image as base64string. When the image is loaded from the same domain make sure a relative path to the image is used or the image is provided as base64string.
