@@ -629,6 +629,7 @@ Defines custom attributes to be applied to the action button element.
 
 #### Example
 
+```html
     <div id="tabstrip"></div>
     <script>
         $("#tabstrip").kendoTabStrip({
@@ -651,6 +652,7 @@ Defines custom attributes to be applied to the action button element.
             ]
         });
     </script>
+```
 
 ### dataSource.actions.action `Function`
 
