@@ -12,22 +12,9 @@ The Kendo UI for jQuery DateTimePicker provides adaptive mode&mdash;built-in mob
 
 > Starting with the 2025 Q2 release, when the `adaptiveMode` property is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
 
-To set the adaptive mode, use the `adaptiveMode` option. In the example below, you can resize the browser to see how the component will adapt to different resolutions.
+To set the adaptive mode, use the `adaptiveMode` option.
 
-```dojo
-    <div style="justify-content:center">
-      <div style="width:600px; ">
-        <input id="datetimepicker" style="width: 100%;"/>
-      </div>
-    </div>
-    <script>
-      $(document).ready(function() {
-        $("#datetimepicker").kendoDateTimePicker({
-          adaptiveMode: "auto"
-        });
-      });
-    </script>
-```
+<demo metaUrl="datetimepicker/adaptive-mode/" height="600"></demo>
 
 # On-Screen Keyboard
 

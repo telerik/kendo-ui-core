@@ -10,7 +10,9 @@ position: 6
 
 Starting with the Q2 2025 release, the Grid component supports rendering selected toolbar tools in adaptive mode. This feature improves usability on smaller screens by displaying certain UI elements—such as sorting, filtering, grouping, and editing—in a mobile-friendly ActionSheet.
 
-To enable this behavior, configure the Grid with the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option.  
+To enable this behavior, configure the Grid with the [`adaptiveMode`](/api/javascript/ui/grid/configuration/adaptivemode) configuration option.
+
+<demo metaUrl="grid/adaptive-tools/" height="600"></demo>
 
 When the `adaptiveMode` is enabled and the Grid is rendered on small or medium screens, the Grid will display popups for sorting, filtering, and grouping in an ActionSheet. To ensure these tools function as expected, the corresponding configuration options (e.g., `sortable`, `filterable`, `groupable`) must be enabled on the Grid instance. If the Grid has editable mode `pop` set, an ActionSheet will also be displayed for editing or creating records. 
 
