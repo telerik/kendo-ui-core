@@ -43,7 +43,7 @@ The `valueAxis` on categorical Kendo UI Charts supports the display of numbers o
 
 The following example demonstrates how to display time on the value axis of categorical Kendo UI Charts.
 
-```dojo
+```html
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
