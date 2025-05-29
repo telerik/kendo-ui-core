@@ -272,8 +272,7 @@ export const __meta__ = {
                         overflow: HIDDEN,
                         display: "block",
                         position: ABSOLUTE
-                    })
-                    .attr("aria-hidden", false);
+                    });
 
                 parent = element.parent();
 
@@ -308,8 +307,8 @@ export const __meta__ = {
                        .kendoStop(true)
                        .kendoAnimate(animation);
 
-
                 element.attr("aria-hidden", false);
+
             }
         },
 
@@ -418,6 +417,10 @@ export const __meta__ = {
             if (that.visible()) {
                 wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).hide());
 
+                if ($(document.activeElement).parents(".k-list-filter").length) {
+                    $(document.activeElement).blur();
+                }
+
                 that._toggleResize(false);
 
                 if (that._closing || that._trigger(CLOSE)) {
@@ -455,15 +458,16 @@ export const __meta__ = {
                 }
 
                 parent.kendoStop(true);
-                that.element.attr("aria-hidden", true);
                 wrap
-                    .css({ overflow: HIDDEN }) // stop callback will remove hidden overflow
-                    .attr("aria-hidden", true);
+                    .css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
+
                 parent.kendoAnimate(animation);
 
                 if (skipEffects) {
                     that._animationClose();
                 }
+
+                that.element.attr("aria-hidden", true);
             }
         },
 
