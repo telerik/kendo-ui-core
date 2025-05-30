@@ -80,6 +80,52 @@ In the 2025 Q2 release an alternative way to configure the tools has been implem
 | Spacer | Moves the tools that are declared after it to the right side of the ToolBar.| |
 | Separator | Acts as a delimiter between the ToolBar commands.| |
 
+### Overflow
+
+The built-in Toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the Toolbar through the `Oveflow()` configuration.
+
+```Razor
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+            .Name("grid")
+            .ToolBar(t => t.Items(item =>
+            {
+                item.Pdf();
+                item.Excel();
+                item.Custom().Text("Custom Button 1");
+                item.Custom().Text("Custom Button 2");
+                item.Custom().Text("Custom Button 3");
+                item.Search();
+            })
+            .Overflow(o => o
+               .Mode(ToolBarOverflowMode.Scroll)
+               .ScrollButtons(ScrollButtonsType.Auto)
+               .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+               .ScrollDistance(50))
+            )
+            ... // Additional configuration.
+         )
+```
+{% if site.core %}
+```TagHelper
+<kendo-grid name="grid">
+    <toolbar>
+        <toolbar-button name="pdf"></toolbar-button>
+        <toolbar-button name="excel"></toolbar-button>
+        <toolbar-button name="custom" text="Custom Button 1"></toolbar-button>
+        <toolbar-button name="custom" text="Custom Button 2"></toolbar-button>
+        <toolbar-button name="custom" text="Custom Button 3"></toolbar-button>
+        <toolbar-button name="Search"></toolbar-button>
+        <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+    </toolbar>
+    <!-- Additional configuration. -->
+</kendo-grid>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## Disable Inactive Tools
 
 Starting with 2025 Q2 release the Grid component provides the possibility to disable or hide the inactive tools when editing. By default the inactive tools will be hidden. When the `ToolBar.ShowInactiveTools` option is enabled the inactive tools will be displayed as disabled.

@@ -674,9 +674,12 @@ export const __meta__ = {
 
             customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || customMessage || input.attr("title") || "",
+            const closestParentWithFieldName = input.parent().closest("[name='" + fieldName + "']");
+            const target = closestParentWithFieldName.length ? closestParentWithFieldName : input;
+
+            return kendo.format(target.attr(kendo.attr(ruleKey + "-msg")) || target.attr("validationMessage") || nonDefaultMessage || customMessage || target.attr("title") || "",
                 fieldName,
-                input.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
+                target.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
         },
 
         _checkValidity: function(input) {

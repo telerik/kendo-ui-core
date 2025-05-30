@@ -58,6 +58,44 @@ You can configure the ToolBar and include any of the built-in commands:
 | Spacer | Moves the tools that are declared after it to the right side of the ToolBar.| NA|
 | Separator | Acts as a delimiter between the ToolBar Commands.| NA|
 
+### Overflow
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+@(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+     .Name("treelist")
+     .Toolbar(t => t.Items(item =>
+     {
+         item.Pdf();
+         item.Search();
+     })
+     .Overflow(o => o
+        .Mode(ToolBarOverflowMode.Scroll)
+        .ScrollButtons(ScrollButtonsType.Auto)
+        .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+        .ScrollDistance(50))
+     )
+     ... // Additional configuration.
+   )
+```
+{% if site.core %}
+```TagHelper
+<kendo-treelist name="treelist">
+    <toolbar>
+        <treelist-toolbar-button name="pdf" />
+        <treelist-toolbar-button name="search" />
+        <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+    </toolbar>
+    <!-- Additional configuration. -->
+</kendo-treelist>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## Custom Commands
 
 The {{site.product}} TreeList supports adding Custom Commands to its ToolBar. The following example demonstrates how to add a Custom Command to the ToolBar:
