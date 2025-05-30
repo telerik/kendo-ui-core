@@ -191,6 +191,105 @@ The PropertyGrid provides a variety of options for the items configuration, tool
     }
 ```
 
+## Toolbar
+
+The [`Toolbar()`](/api/kendo.mvc.ui.fluent/propertygridtoolbarfactory) configuration option of the PropertyGrid allows you to add command buttons and allow the user to invoke built-in PropertyGrid functionalities. You can also define custom commands or use templates to customize the Toolbar of the {{ site.product }} PropertyGrid.
+
+### Built-In Commands
+
+You can configure the Toolbar and include any of the built-in commands:
+
+```HtmlHelper
+    .Toolbar(t => 
+    {
+        t.Group();
+        t.Separator();
+        t.Details();
+        t.Search();
+        t.Spacer();
+        t.Sort();
+    })
+```
+{% if site.core %}
+```TagHelper
+        <toolbar>
+            <property-grid-toolbar-button name="group"></property-grid-toolbar-button>
+            <property-grid-toolbar-button name="details"></property-grid-toolbar-button>
+            <property-grid-toolbar-button name="search"></property-grid-toolbar-button>
+            <property-grid-toolbar-button name="sort"></property-grid-toolbar-button>
+            <property-grid-toolbar-button name="seperator"  type="separator"></property-grid-toolbar-button>
+            <property-grid-toolbar-button name="spacer" type="spacer"></property-grid-toolbar-button>
+        </toolbar>
+```
+{% endif %} 
+
+Starting with version 2025 Q2, an alternative way to configure the tools of the PropertyGrid{% if site.core %} HtmlHelper{% endif %} is to use the `Items()` configuration of the Toolbar:
+
+```HtmlHelper
+    .Toolbar(toolbar =>toolbar
+        .Items(item=>{
+            item.Group();
+            item.Separator();
+            item.Details();
+            item.Search();
+            item.Spacer();
+            item.Sort();
+        })
+        .Overflow(overflow => overflow
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Visible)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Split)
+        )
+    )
+```
+
+| Command | Description |
+|---|---|
+| Group | Adds a toggle button to show the items in Groups or a List.|
+| Details | Adds an info button for additional details.|
+| Sort | Adds a DropDownList to control the order of the items.|
+| Search | Adds a built-in Search input for the PropertyGrid.|
+| Spacer | Moves the tools that are declared after it to the right side of the Toolbar.| 
+| Separator | Acts as a delimiter between the Toolbar commands.|
+
+#### Overview 
+
+The built-in Toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the Toolbar through the `Oveflow()` configuration.
+
+```Razor
+    @(Html.Kendo().PropertyGrid<PropertyViewModel>()
+        .Name("propertyGrid")
+        .Toolbar(t => t.Items(item =>
+        {
+            item.Spacer();
+            item.Search();
+        })
+        .Overflow(o => o
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Auto)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+            .ScrollDistance(50))
+        )
+            ... // Additional configuration.
+         )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-propertygrid name="propertyGrid">
+        <toolbar>
+            <property-grid-toolbar-button name="spacer" type="spacer"></property-grid-toolbar-button>
+            <property-grid-toolbar-button name="search"></property-grid-toolbar-button>
+            <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </toolbar>
+    <!-- Additional configuration. -->
+</kendo-propertygrid>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## Functionality and Features
 
 * [Columns]({% slug htmlhelpers_columns_propertygrid %})&mdash;The PropertyGrid displays fields and values in columns.

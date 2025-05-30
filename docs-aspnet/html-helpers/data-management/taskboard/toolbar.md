@@ -10,6 +10,63 @@ position: 9
 
 By default, the toolbar of the TaskBoard displays the `addColumn` and the `search` tools. Default tools can be excluded, or custom tools can be added through the `Toolbar` configuration. 
 
+## Built-In Tools
+
+You can control the number and type of the rendered tools by adding only the desired tools in the [`Items()`](/api/kendo.mvc.ui.fluent/taskboardtoolbarsettingsbuilder#itemssystemaction) configuration of the `Toolbar`. 
+
+The toolbar of the TaskBaord supports the following built-in tools:
+
+```Razor
+        .Toolbar(t => t.Items(items =>
+        {
+            items.Add().Name("addColumn");
+            items.Add().Name("spacer").Type("spacer");
+            items.Add().Name("search");
+        }))
+```
+{% if site.core %}
+```TagHelper
+    <toolbar>
+        <items>
+            <item name="addColumn"></item>
+            <item name="spacer" type="spacer"></item>
+            <item name="search"></item>
+        </items>
+    </toolbar>
+```
+{% endif %} 
+
+### Overflow
+
+The built-in Toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the Toolbar through the `Oveflow()` configuration.
+
+```Razor
+    @(Html.Kendo().TaskBoard()
+        .Name("taskBoard")
+        .Toolbar(t => t.Overflow(o => o
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Auto)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+            .ScrollDistance(50))
+        )
+            ... // Additional configuration.
+         )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-taskboard name="taskBoard">
+        <toolbar>
+            <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </toolbar>
+    <!-- Additional configuration. -->
+</kendo-taskboard>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
+
 ## Custom Tools
 
 The `Toolbar Items` configuration allows you to set the desired tools that will be rendered in the toolbar of the TaskBoard.
@@ -85,6 +142,37 @@ The following example demonstrates how to add a custom tool to the toolbar.
         });
     </script>
 ```
+
+## Overflow
+
+The built-in Toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the Toolbar through the `Oveflow()` configuration.
+
+```Razor
+    @(Html.Kendo().TaskBoard()
+        .Name("taskBoard")
+        .Toolbar(t => t.Overflow(o => o
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Auto)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+            .ScrollDistance(50))
+        )
+            ... // Additional configuration.
+         )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-taskboard name="taskBoard">
+        <toolbar>
+            <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </toolbar>
+    <!-- Additional configuration. -->
+</kendo-taskboard>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
 
 ## See Also
 
