@@ -6,7 +6,7 @@ slug: adaptive_tools_kendoui_grid_component
 position: 6
 ---
 
-# Adaptive Tools
+# ToolBar Adaptive Tools
 
 Starting with the Q2 2025 release, the Grid component supports rendering selected toolbar tools in adaptive mode. This feature improves usability on smaller screens by displaying certain UI elements—such as sorting, filtering, grouping, and editing—in a mobile-friendly ActionSheet.
 

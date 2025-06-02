@@ -25,10 +25,34 @@ $("#grid").kendoGrid({
       { name: "excel" },
       { name: "search" },
       { name: "columns" },
+      { name: "group" },
+      { name: "sort" },
+      { name: "filter" },
     ]
   ....
 });
 </script>
+```
+
+In the 2025 Q2 release an alternative way to configure the tools has been implemented. It relies on the Items configuration of the Grid toolbar:
+
+```
+$("#grid").kendoGrid({
+    toolbar: {         
+       items: [
+        { name: "create" },
+        { name: "edit" },
+        { name: "destroy" },
+        { type: "separator", name: "separator"},
+        { name: "filter" },
+        { name: "sort" },
+        { name: "group" },
+        { type: "spacer", name: "spacer"},
+        { name: "columnChooser" },
+      ]
+    },
+  ....
+});
 ```
 
 | Command | Description | Resources|
@@ -41,6 +65,14 @@ $("#grid").kendoGrid({
 | pdf | Exports the Grid data in PDF format.| [PDF Export documentation]({% slug exporting_pdf_kendoui_grid_widget %})|
 | excel | Exports the Grid data in MS Excel format.| [Excel Export documentation]({% slug exporting_excel_kendoui_grid_widget %})|
 | search | Adds the built-in search panel for the Grid.| [Search Panel documentation]({% slug searchpanel_kendoui_grid_widget %})|
+| group | Allows grouping from the toolbar tool. | [ToolBar Grouping Tool]({% slug adaptive_tools_kendoui_grid_component %}#grouping) |
+| sort | Displays a sort tool. | [ToolBar Sorting Tool]({% slug adaptive_tools_kendoui_grid_component %}#sorting) |
+| filter | Allows filtering to be performed from the toolbar tool. | [ToolBar filtering Tool]({% slug adaptive_tools_kendoui_grid_component %}#filtering) |
+
+
+### Adaptive ToolBar Tools
+
+Starting with the 2025 Q2 release the Grid component supports rendering selected toolbar tools in adaptive mode. This feature improves usability on smaller screens by displaying certain UI elements—such as sorting, filtering, grouping, and editing—in a mobile-friendly ActionSheet. You can learn more in the article [linked here]({% slug adaptive_tools_kendoui_grid_component %}).
 
 ## Custom Commands
 
