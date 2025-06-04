@@ -253,7 +253,7 @@ meta:
   "*timepicker":
     title: TimePicker
   "*timeline":
-    title: TimeLine
+    title: Timeline
   "*tilelayout":
     title: TileLayout
   "*textbox":

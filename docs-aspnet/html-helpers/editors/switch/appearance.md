@@ -120,6 +120,10 @@ The `ThumbRounded` option supports the following values:
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 
+## Custom Layout
+
+You can implement a custom layout for the Switch by using the available [Sass variables](https://www.telerik.com/design-system/docs/components/switch/styles/).
+
 ## See Also
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})

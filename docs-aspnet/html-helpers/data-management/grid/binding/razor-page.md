@@ -197,7 +197,7 @@ To bind the Grid to a property from the `PageModel`, follow the next steps:
 1. Add a property to the `PageModel` that holds the data collection that must be loaded in the Grid.
 
     ```C#
-        public class GridPageModel : PageModel
+        public class IndexModel : PageModel
         {
             [BindProperty]
             public IList<OrderViewModel> orders { get; set; }
@@ -220,7 +220,7 @@ To bind the Grid to a property from the `PageModel`, follow the next steps:
 1. Declare the `PageModel` at the top of the page.
 
     ```
-        @model GridPageModel
+        @model IndexModel
     ```
 
 1. Bind the Grid to the collection property and disable the server data operations (`ServerOperations(false)`).

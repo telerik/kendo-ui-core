@@ -1,7 +1,7 @@
 ---
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Learn how to use the keyboard navigation functionality of the Telerik UI TimeLine component for {{ site.framework }}."
+description: "Learn how to use the keyboard navigation functionality of the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /html-helpers/navigation/timeline/keyboard-navigation
 slug: htmlhelpers_timeline_keyboardnavigation_aspnetcore
 position: 2
@@ -9,9 +9,9 @@ position: 2
 
 # Keyboard Navigation
 
-The keyboard navigation of the TimeLine is always available.
+The keyboard navigation of the Timeline is always available.
 
-In Vertical mode when the TimeLine is focused, the first card gets focused. In Horizontal mode when the TimeLine is focused, the timeline scrollable wrap element gets focused. For a complete example, refer to the [demo on keyboard navigation of the TimeLine](https://demos.telerik.com/{{ site.platform }}/timeline/keyboard-navigation).
+In Vertical mode when the Timeline is focused, the first card gets focused. In Horizontal mode when the Timeline is focused, the timeline scrollable wrap element gets focused. For a complete example, refer to the [demo on keyboard navigation of the Timeline](https://demos.telerik.com/{{ site.platform }}/timeline/keyboard-navigation).
 
 #### Focusing the widget with the ALT+W key combination in Horizontal mode
 The demo showcases how to focus the widget when the Vertical mode is used. In order to focus the widget with the ALT+W key combination in Horizontal mode, you should use the ".k-timeline-scrollable-wrap" class as a selector.
@@ -23,7 +23,7 @@ $(document.body).keydown(function (e) {
 });
 ```
 
-Kendo UI TimeLine supports the following keyboard shortcuts in **Vertical mode**:
+The Timeline component supports the following keyboard shortcuts in **Vertical mode**:
 
 | SHORTCUT						| DESCRIPTION				                                                        |
 |:---                 |:---                                                                                |
@@ -32,7 +32,7 @@ Kendo UI TimeLine supports the following keyboard shortcuts in **Vertical mode**
 | `Space`              | Toggle the expand/collapse state of the item.                                                             |
 | `Enter`              | Toggle the expand/collapse state of the item.                                                             |
 
-Kendo UI TimeLine supports the following keyboard shortcuts in **Horizontal mode**:
+The component supports the following keyboard shortcuts in **Horizontal mode**:
 
 | SHORTCUT						| DESCRIPTION				                                                        |
 |:---                 |:---                                                                                |
@@ -43,5 +43,5 @@ Kendo UI TimeLine supports the following keyboard shortcuts in **Horizontal mode
 
 ## See Also
 
-* [Keyboard Navigation by the TimeLine HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/keyboard-navigation)
+* [Keyboard Navigation by the Timeline HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/keyboard-navigation)
 * [Server-Side API](/api/timeline)
