@@ -10,6 +10,22 @@ position: 1
 
 This article lists the breaking or important changes in the 2025 releases of {{ site.product }}.
 
+## {{ site.product }} Q3 2025
+
+### UIPrimitives
+
+The {{ site.product }} 2025 Q3 release introduces changes in the naming of several properties in the `UIPrimitives.cs` class:
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `UIPrimitives.Grid.Toolbar`     | `UIPrimitives.Grid.GridToolbar`|
+| `UIPrimitives.Slider.Item`     | `UIPrimitives.Slider.SliderItem`|
+| `UIPrimitives.Window.Content`     | `UIPrimitives.Window.WindowContent`|
+| `UIPrimitives.PanelBar.Item`     | `UIPrimitives.PanelBar.PanelBarItem`|
+| `UIPrimitives.PanelBar.Content`     | `UIPrimitives.PanelBar.PanelBarContent`|
+| `UIPrimitives.PanelBar.Header`     | `UIPrimitives.PanelBar.PanelBarHeader`|
+| `UIPrimitives.PanelBar.Group`     | `UIPrimitives.PanelBar.PanelBarGroup`|
+
 ## {{ site.product }} Q2 2025
 
 ### Unified Distribution for Trial and Commercial Packages
@@ -59,9 +75,9 @@ The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssyste
 | Old                            | New                              |
 | -----------                    | -----------                      |
 | `Position(GridPagerPosition.Top)`     | `Position(PagerPosition.Top)`|
- 
+
 #### TagHelper Grid
- 
+
 | Old                            | New                              |
 | -----------                    | -----------                      |
 | `position="GridPagerPosition.Top"`     | `position="PagerPosition.Top"`|
@@ -70,7 +86,7 @@ The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssyste
 
 ### Kendo.Mvc.Export
 
-As of the Q2 2025 release, the `Telerik.Core.Export` package targets .NET Framework 4.6.2 in addition to .NET. You can the `Telerik.Core.Export` package in ASP.NET MVC5 applications, as well as in .NET applications. The old `Kendo.Mvc.Export` assembly will no longer be distributed. 
+As of the Q2 2025 release, the `Telerik.Core.Export` package targets .NET Framework 4.6.2 in addition to .NET. You can the `Telerik.Core.Export` package in ASP.NET MVC5 applications, as well as in .NET applications. The old `Kendo.Mvc.Export` assembly will no longer be distributed.
 
 {% endif %}
 
@@ -109,7 +125,7 @@ The {{ site.product }} 2025 Q2 release introduces changes in the rendering of th
 
 **DockManager**
 
-* The `k-header` class has been removed from the TabStrip element. 
+* The `k-header` class has been removed from the TabStrip element.
 
 **ExpansionPanel**
 
@@ -136,8 +152,8 @@ The {{ site.product }} 2025 Q2 release introduces changes in the rendering of th
 
 **TreeList**
 
-* The `k-treelist-group` class has been removed from the parent nodes. 
-* The `k-drag-cell` class (in row-reordering scenario) has been removed. 
+* The `k-treelist-group` class has been removed from the parent nodes.
+* The `k-drag-cell` class (in row-reordering scenario) has been removed.
 
 ## {{ site.product }} Q1 2025
 

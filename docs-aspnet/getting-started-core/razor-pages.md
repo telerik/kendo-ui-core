@@ -311,105 +311,85 @@ The table below contains links to available examples of using Telerik UI for ASP
 
 <IntroTable>
     <IntroTableColumn>
-        <IntroTableSection title="Data Source">
-            <IntroTableAnchor title="DataSource" href="slug:htmlhelpers_datasource_aspnetcore_razor_page"></IntroTableAnchor>
+        <IntroTableSection title="Chart Wizard">
+            <IntroTableAnchor title="Chart Wizard" href="slug:razorpages_chartwizard"></IntroTableAnchor>
         </IntroTableSection>
-        <IntroTableSection title="Data Management">
-            <IntroTableAnchor title="FileManager" href="slug:htmlhelpers_filemanager_razorpage_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="Filter"></IntroTableAnchor>
-            <IntroTableAnchor title="Grid" href="slug:razorpages_gridhelper_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="Spreadsheet" href="slug:htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore#data-source-binding-in-razor-pages"></IntroTableAnchor>
-            <IntroTableAnchor title="ListView"></IntroTableAnchor>
-            <IntroTableAnchor title="PivotGrid"></IntroTableAnchor>
-            <IntroTableAnchor title="TreeList"></IntroTableAnchor>
+        <IntroTableSection title="Charts">
+            <IntroTableAnchor title="Chart" href="slug:htmlhelper_chart_razorpages_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Sparkline" href="slug:htmlhelper_sparkline_razorpages_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="TreeMap" href="slug:razorpages_treemap_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
         <IntroTableSection title="Conversational UI">
             <IntroTableAnchor title="Chat" href="slug:htmlhelpers_chat_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
-        <IntroTableSection title="Media">
-            <IntroTableAnchor title="MediaPLayer"></IntroTableAnchor>
-            <IntroTableAnchor title="ScrollView"></IntroTableAnchor>
+        <IntroTableSection title="Data Management">
+            <IntroTableAnchor title="FileManager" href="slug:htmlhelpers_filemanager_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Filter" href="slug:razorpages_filterhelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Grid" href="slug:razorpages_gridhelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ListView" href="slug:htmlhelpers_listview_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Pager" href="slug:htmlhelpers_pager_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="PivotGrid" href="slug:htmlhelpers_pivotgrid_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="PivotGridV2" href="slug:razorpages_pivotgridv2_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Spreadsheet" href="slug:htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore#data-source-binding-in-razor-pages"></IntroTableAnchor>
+            <IntroTableAnchor title="TaskBoard" href="slug:razorpages_taskboard_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="TreeList" href="slug:htmlhelpers_treelist_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
-        <IntroTableSection title="PDF">
-            <IntroTableAnchor title="PDFViewer" href="slug:htmlhelpers_pdfviewer_aspnetcore_razor_page"></IntroTableAnchor>
+        <IntroTableSection title="Data Source">
+            <IntroTableAnchor title="DataSource" href="slug:htmlhelpers_datasource_aspnetcore_razor_page"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Diagrams and Maps">
+            <IntroTableAnchor title="Diagram" href="slug:razorpages_diagramhelper_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="OrgChart" href="slug:htmlhelpers_orgchart_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
     </IntroTableColumn>
     <IntroTableColumn>
         <IntroTableSection title="Editors">
             <IntroTableAnchor title="AutoComplete" href="slug:htmlhelpers_autocomplete_razorpage_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="ColorPalette"></IntroTableAnchor>
+            <IntroTableAnchor title="Captcha" href="slug:htmlhelpers_captcha_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="CheckBoxGroup" href="slug:htmlhelpers_checkboxgroup_aspnetcore_razor_page"></IntroTableAnchor>
             <IntroTableAnchor title="ColorPicker" href="slug:htmlhelpers_colorpicker_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="ComboBox" href="slug:htmlhelpers_combobox_razorpage_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="CheckBoxGroup" href="slug:htmlhelpers_checkboxgroup_aspnetcore_razor_page"></IntroTableAnchor>
-            <IntroTableAnchor title="DateInput"></IntroTableAnchor>
+            <IntroTableAnchor title="DateInput" href="slug:htmlhelpers_dateinput_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="DateRangePicker" href="slug:htmlhelpers_daterangepicker_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="DatePicker" href="slug:razorpages_datepicker_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="DateRangePicker"></IntroTableAnchor>
             <IntroTableAnchor title="DateTimePicker" href="slug:razorpages_datetimepicker_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="DropDownList" href="slug:htmlhelpers_dropdownlist_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="DropDownTree" href="slug:htmlhelpers_dropdowntree_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Editor" href="slug:htmlhelpers_editor_image_browser_aspnetcore#imagebrowser-in-razor-page-scenario"></IntroTableAnchor>
-            <IntroTableAnchor title="FlatColorPicker"></IntroTableAnchor>
             <IntroTableAnchor title="ImageEditor" href="slug:htmlhelpers_imageeditor_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="ListBox" href="slug:razorpages_listBoxhelper_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="MaskedTextBox"></IntroTableAnchor>
+            <IntroTableAnchor title="MaskedTextBox" href="slug:razorpages_maskedtextboxhelper_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="MultiColumnComboBox" href="slug:htmlhelpers_multicolumncombobox_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="MultiSelect" href="slug:htmlhelpers_multiselect_razorpage_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="NumericTextBox"></IntroTableAnchor>
+            <IntroTableAnchor title="NumericTextBox" href="slug:razorpages_numerictextboxhelper_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="RadioGroup" href="slug:htmlhelpers_radiogroup_aspnetcore_razor_page"></IntroTableAnchor>
             <IntroTableAnchor title="Rating" href="slug:htmlhelpers_rating_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Slider" href="slug:htmlhelpers_slider_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Switch" href="slug:htmlhelpers_switch_aspnetcore_razor_page"></IntroTableAnchor>
-            <IntroTableAnchor title="TextArea"></IntroTableAnchor>
-            <IntroTableAnchor title="TextBox"></IntroTableAnchor>
-            <IntroTableAnchor title="TimePicker"></IntroTableAnchor>
             <IntroTableAnchor title="Upload" href="slug:htmlhelpers_upload_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
-    </IntroTableColumn>
-    <IntroTableColumn>
-        <IntroTableSection title="Scheduling">
-            <IntroTableAnchor title="Calendar" href="slug:razorpages_calendar_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="MultiViewCalendar" href="slug:razorpages_multiviewcalendar_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="Gantt"></IntroTableAnchor>
-            <IntroTableAnchor title="Scheduler" href="slug:htmlhelpers_scheduler_razorpage_aspnetcore"></IntroTableAnchor>
-        </IntroTableSection>
-        <IntroTableSection title="Charts">
-            <IntroTableAnchor title="Chart"></IntroTableAnchor>
-            <IntroTableAnchor title="StockChart"></IntroTableAnchor>
-            <IntroTableAnchor title="TreeMap" href="slug:razorpages_treemap_aspnetcore"></IntroTableAnchor>
-        </IntroTableSection>
-        <IntroTableSection title="Gauges">
-            <IntroTableAnchor title="ArcGauge"></IntroTableAnchor>
-            <IntroTableAnchor title="CircularGauge"></IntroTableAnchor>
-            <IntroTableAnchor title="LinearGauge"></IntroTableAnchor>
-            <IntroTableAnchor title="RadialGauge"></IntroTableAnchor>
-        </IntroTableSection>
-        <IntroTableSection title="Barcodes">
-            <IntroTableAnchor title="Barcode"></IntroTableAnchor>
-            <IntroTableAnchor title="QRCode"></IntroTableAnchor>
-        </IntroTableSection>
-        <IntroTableSection title="Diagrams and Maps">
-            <IntroTableAnchor title="Diagram" href="slug:razorpages_diagramhelper_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="Map"></IntroTableAnchor>
+        <IntroTableSection title="Interactivity and UX">
+            <IntroTableAnchor title="Loader" href="slug:htmlhelpers_loader_aspnetcore_razor_page"></IntroTableAnchor>
         </IntroTableSection>
     </IntroTableColumn>
     <IntroTableColumn>
         <IntroTableSection title="Layout">
-            <IntroTableAnchor title="Badge"></IntroTableAnchor>
             <IntroTableAnchor title="Dialog" href="slug:htmlhelpers_dialog_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Form" href="slug:htmlhelpers_form_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Notification" href="slug:htmlhelpers_notification_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Splitter" href="slug:htmlhelpers_splitter_razorpage_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="TileLayout"></IntroTableAnchor>
             <IntroTableAnchor title="Tooltip" href="slug:htmlhelpers_tooltip_aspnetcore_razor_page"></IntroTableAnchor>
             <IntroTableAnchor title="Window" href="slug:htmlhelpers_window_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
+        <IntroTableSection title="Media">
+            <IntroTableAnchor title="MediaPLayer" href="slug:htmlhelpers_mediaplayer_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="ScrollView" href="slug:htmlhelpers_scrollview_razorpage_aspnetcore"></IntroTableAnchor>
+        </IntroTableSection>
         <IntroTableSection title="Navigation">
-            <IntroTableAnchor title="BottomNavigation"></IntroTableAnchor>
             <IntroTableAnchor title="Breadcrumb" href="slug:htmlhelpers_breadcrumb_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Button" href="slug:htmlhelpers_button_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="ButtonGroup" href="slug:htmlhelpers_buttongroup_razorpage_aspnetcore"></IntroTableAnchor>
-            <IntroTableAnchor title="Drawer"></IntroTableAnchor>
-            <IntroTableAnchor title="FloatingActionButton"></IntroTableAnchor>
+            <IntroTableAnchor title="Drawer" href="slug:htmlhelpers_drawer_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Menu" href="slug:htmlhelpers_menu_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="PanelBar" href="slug:htmlhelpers_panelbar_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="RadioButton" href="slug:razor_page_radiobutton_aspnetcore"></IntroTableAnchor>
@@ -420,10 +400,16 @@ The table below contains links to available examples of using Telerik UI for ASP
             <IntroTableAnchor title="TreeView" href="slug:htmlhelpers_treeview_razorpage_aspnetcore"></IntroTableAnchor>
             <IntroTableAnchor title="Wizard" href="slug:htmlhelpers_wizard_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
-        <IntroTableSection title="Interactivity and UX">
-            <IntroTableAnchor title="Loader" href="slug:htmlhelpers_loader_aspnetcore_razor_page"></IntroTableAnchor>
-            <IntroTableAnchor title="ProgressBar"></IntroTableAnchor>
-            <IntroTableAnchor title="Sortable"></IntroTableAnchor>
+    </IntroTableColumn>
+    <IntroTableColumn>
+        <IntroTableSection title="PDF">
+            <IntroTableAnchor title="PDFViewer" href="slug:htmlhelpers_pdfviewer_aspnetcore_razor_page"></IntroTableAnchor>
+        </IntroTableSection>
+        <IntroTableSection title="Scheduling">
+            <IntroTableAnchor title="Calendar" href="slug:razorpages_calendar_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Gantt" href="slug:htmlhelpers_gantt_razorpage_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="MultiViewCalendar" href="slug:razorpages_multiviewcalendar_aspnetcore"></IntroTableAnchor>
+            <IntroTableAnchor title="Scheduler" href="slug:htmlhelpers_scheduler_razorpage_aspnetcore"></IntroTableAnchor>
         </IntroTableSection>
     </IntroTableColumn>
 </IntroTable>

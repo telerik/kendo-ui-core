@@ -673,7 +673,7 @@ defaults:
     scope:
         path: "html-helpers/navigation/timeline"
     values:
-        title_prefix: "ASP.NET MVC TimeLine Component"
+        title_prefix: "ASP.NET MVC Timeline Component"
 -
     scope:
         path: "html-helpers/navigation/toolbar"

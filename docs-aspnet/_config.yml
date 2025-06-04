@@ -741,7 +741,7 @@ navigation:
      "*tilelayout":
         title: "TileLayout"
      "*timeline":
-        title: "TimeLine"
+        title: "Timeline"
      "*timepicker":
         title: "TimePicker"
      "*timedurationpicker":
@@ -1313,7 +1313,7 @@ defaults:
     scope:
         path: "html-helpers/navigation/timeline"
     values:
-        title_prefix: "ASP.NET Core TimeLine Component"
+        title_prefix: "ASP.NET Core Timeline Component"
 -
     scope:
         path: "html-helpers/navigation/toolbar"

@@ -15,9 +15,11 @@ The Telerik UI Switch TagHelper and HtmlHelper for {{ site.framework }} are serv
 The Telerik UI Switch HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Switch widget.
 {% endif %}
 
-The Switch displays two exclusive choices. With the new Switch variables introduced in the Kendo UI for jQuery R1 2019 release, the default styling of the Switch component for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout. For more information and examples, refer to the article on implementing a [custom layout for the Switch](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout).
+The Switch displays two exclusive choices, and when initialized, the Switch renders the currently selected value. 
 
 * [Demo page for the Switch](https://demos.telerik.com/{{ site.platform }}/switch/index)
+
+> By default, the labels of the Switch are not visible when using Bootstrap or Material themes.
 
 ## Initializing the Switch
 
@@ -59,8 +61,8 @@ The configuration options of the Switch are passed as attributes.
 ## Functionality and Features
 
 * [Appearance]({% slug switch_appearance %})&mdash;The Switch enables you to customize its appearance based on your requirements.
-* [Accessibility]({% slug htmlhelpers_switch_accessibility %})&mdash;The Switch provides accessibility support through its keyboard navigation.
 * [Events]({% slug events_switch %})&mdash;The Switch allows you to handle its events and implement custom functionality.
+* [Accessibility]({% slug htmlhelpers_switch_accessibility %})&mdash;The Switch provides accessibility support through its keyboard navigation.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the Switch, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/switch/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
