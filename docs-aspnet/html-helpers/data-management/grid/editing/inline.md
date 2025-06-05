@@ -237,7 +237,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
                 </model>
             </schema>
             <transport>
-                <read url=@Url.Action("Products_Create", "Home") />
+                <read url=@Url.Action("Products_Read", "Home") />
                 <update url=@Url.Action("Products_Update", "Home") />
                 <create url=@Url.Action("Products_Create", "Home") />
                 <destroy url=@Url.Action("Products_Destroy", "Home") />
@@ -398,7 +398,7 @@ When editing is performed, server validation is often needed. This section demon
             </model>
         </schema>
         <transport>
-            <read url=@Url.Action("Products_Create", "Home") />
+            <read url=@Url.Action("Products_Read", "Home") />
             <update url=@Url.Action("Products_Update", "Home") />
             <create url=@Url.Action("Products_Create", "Home") />
             <destroy url=@Url.Action("Products_Destroy", "Home") />
