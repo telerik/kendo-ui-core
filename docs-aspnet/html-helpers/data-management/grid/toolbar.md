@@ -6,7 +6,7 @@ slug: htmlhelpers_grid_aspnetcore_toolbar
 position: 15
 ---
 
-# Toolbar
+# ToolBar Adaptive Tools
 
 The [`ToolBar()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory) configuration option of the Grid allows you to add command buttons and allow the user to invoke built-in Grid functionalities. You can also define custom commands or use templates to customize the Toolbar of the {{ site.product }} Grid.
 
@@ -79,6 +79,9 @@ In the 2025 Q2 release an alternative way to configure the tools has been implem
 | Search | Adds the built-in search panel for the Grid.| [Search Panel documentation]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})|
 | Spacer | Moves the tools that are declared after it to the right side of the ToolBar.| |
 | Separator | Acts as a delimiter between the ToolBar commands.| |
+| Group | Allows grouping the data from the ToolBar tool. | [Grouping tool documentation]({% slug adaptive_tools_gridhelper_aspnetcore %}#grouping) |
+| Sort | Displays a sort tool. | [Sorting tool documentation]({% slug adaptive_tools_gridhelper_aspnetcore %}#sorting) |
+| Filter | Allows column filtering from the ToolBar tool. | [Filtering tool documentation]({% slug adaptive_tools_gridhelper_aspnetcore %}#filtering) |
 
 ### Overflow
 
@@ -89,15 +92,20 @@ The following example demonstrates how to modify the default overflow settings o
 ```Razor
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("grid")
-            .ToolBar(t => t.Items(item =>
-            {
-                item.Pdf();
-                item.Excel();
-                item.Custom().Text("Custom Button 1");
-                item.Custom().Text("Custom Button 2");
-                item.Custom().Text("Custom Button 3");
-                item.Search();
-            })
+            .ToolBar(toolbar => toolbar
+                .Items(itm =>
+                {
+                    itm.Create();
+                    itm.Edit();
+                    itm.Destroy();
+                    itm.Separator();
+                    itm.Filter();
+                    itm.Sort();
+                    itm.Group();
+                    itm.Spacer();
+                    itm.ColumnChooser();
+                })
+            )
             .Overflow(o => o
                .Mode(ToolBarOverflowMode.Scroll)
                .ScrollButtons(ScrollButtonsType.Auto)
@@ -111,13 +119,15 @@ The following example demonstrates how to modify the default overflow settings o
 ```TagHelper
 <kendo-grid name="grid">
     <toolbar>
-        <toolbar-button name="pdf"></toolbar-button>
-        <toolbar-button name="excel"></toolbar-button>
-        <toolbar-button name="custom" text="Custom Button 1"></toolbar-button>
-        <toolbar-button name="custom" text="Custom Button 2"></toolbar-button>
-        <toolbar-button name="custom" text="Custom Button 3"></toolbar-button>
-        <toolbar-button name="Search"></toolbar-button>
-        <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        <toolbar-button name="create"></toolbar-button>
+        <toolbar-button name="edit"></toolbar-button>
+        <toolbar-button name="destroy"></toolbar-button>
+        <toolbar-button name="separator"></toolbar-button>
+        <toolbar-button name="filter"></toolbar-button>
+        <toolbar-button name="sort"></toolbar-button>
+        <toolbar-button name="group"></toolbar-button>
+        <toolbar-button name="spacer" type="spacer" />
+        <toolbar-button name="columnChooser"></toolbar-button>
     </toolbar>
     <!-- Additional configuration. -->
 </kendo-grid>
@@ -143,11 +153,17 @@ The following example demonstrates how to add a custom command to the Toolbar:
             columns.Command(command => command.Destroy()).Width(150);
         })
         .ToolBar(toolbar =>toolbar
-            .Items(itm=>{
+            .Items(itm =>
+            {
                 itm.Create();
                 itm.Edit();
-                itm.Save();
-                itm.CancelEdit();
+                itm.Destroy();
+                itm.Separator();
+                itm.Filter();
+                itm.Sort();
+                itm.Group();
+                itm.Spacer();
+                itm.ColumnChooser();
             })
             .ShowInactiveTools(true)
             .Overflow(overflow => overflow
@@ -164,14 +180,16 @@ The following example demonstrates how to add a custom command to the Toolbar:
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid">
-        <toolbar show-inactive-tools="true">
-            <overflow mode=ToolBarOverflowMode.Scroll
-                scroll-buttons=ScrollButtonsType.Visible
-                scroll-buttons-position=ScrollButtonsPositionType.Split/>
+        <toolbar show-inactive-tools="false">
             <toolbar-button name="create"></toolbar-button>
             <toolbar-button name="edit"></toolbar-button>
-            <toolbar-button name="save"></toolbar-button>
-            <toolbar-button name="cancelEdit"></toolbar-button>
+            <toolbar-button name="destroy"></toolbar-button>
+            <toolbar-button name="separator"></toolbar-button>
+            <toolbar-button name="filter"></toolbar-button>
+            <toolbar-button name="sort"></toolbar-button>
+            <toolbar-button name="group"></toolbar-button>
+            <toolbar-button name="spacer" type="spacer" />
+            <toolbar-button name="columnChooser"></toolbar-button>
         </toolbar>
         <editable mode="incell"/>
     </kendo-grid>
