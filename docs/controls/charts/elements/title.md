@@ -65,7 +65,7 @@ The following example demonstrates how to display the title at the bottom of the
 
 # Subtitle
 
-The Kendo UI Chart supports configuring an additional subtitle via the [`subtitle`](/api/dataviz/chart/configuration/subtitle) option.
+The Kendo UI Chart supports configuring an additional subtitle via the [`subtitle`](/api/javascript/dataviz/ui/chart/configuration/subtitle) option.
 
 By default, the subtitle is displayed below the main title.
 

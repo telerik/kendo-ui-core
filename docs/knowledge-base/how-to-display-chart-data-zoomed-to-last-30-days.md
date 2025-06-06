@@ -199,6 +199,6 @@ For an interactive example using the [`Stock Chart`](https://docs.telerik.com/ke
 
 ## See Also
 
-- [Chart Configuration - API ](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration.)
+- [Chart Configuration - API ](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
 - [Overview of the Chart Component](https://docs.telerik.com/kendo-ui/controls/charts/chart/overview)
 - [Overview of the Stock Chart Component](https://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)

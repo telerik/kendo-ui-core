@@ -80,7 +80,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |MaskedTextbox |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/maskedtextbox/accessibility/overview)|
 |MediaPlayer   |n/a|[Demo](https://demos.telerik.com/kendo-ui/accessibility/mediaplayer)| [Documentation](https://docs.telerik.com/kendo-ui/controls/mediaplayer/accessibility/overview)|
 |Menu          |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/menu)| [Documentation](https://docs.telerik.com/kendo-ui/controls/menu/accessibility/overview)|
-|MultiColumnComboBox |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicombobox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/multicombobox/accessibility/overview)|
+|MultiColumnComboBox |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicombobox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/multicolumncombobox/accessibility/overview)|
 |MultiSelect   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect)| [Documentation](https://docs.telerik.com/kendo-ui/controls/multiselect/accessibility/overview)|
 |Notification  |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/notification)| [Documentation](https://docs.telerik.com/kendo-ui/controls/notification/accessibility/overview)|
 |NumericTextbox|AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/numerictextbox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/numerictextbox/accessibility/overview)|
@@ -101,7 +101,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |Rating    |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/rating)| [Documentation](https://docs.telerik.com/kendo-ui/controls/rating/accessibility/overview)|
 |ResponsivePanel |AA |n/a| n/a|
 |Scheduler	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scheduler)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scheduler/accessibility/overview)|
-|ScrollView	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scrollview/accessibility/overview)|
+|ScrollView	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scrollview/overview)|
 |Signature	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/signature)| [Documentation](https://docs.telerik.com/kendo-ui/controls/signature/accessibility/overview)|
 |SkeletonContainer	   |AAA | n/a| n/a|
 |Slider	       |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/slider)| [Documentation](https://docs.telerik.com/kendo-ui/controls/slider/accessibility/overview)|

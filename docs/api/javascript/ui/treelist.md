@@ -7566,7 +7566,7 @@ Fires when the incell edit mode is used and the cell will be closed. The event i
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](edit).
+The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](/api/javascript/ui/treelist/events/edit).
 
 ##### e.model `kendo.data.Model`
 

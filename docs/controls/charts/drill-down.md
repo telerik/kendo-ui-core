@@ -212,7 +212,7 @@ To populate the drilldown series on demand:
 
 ## Customizing the Breadcrumb Root Item
 
-To customize the root item of the chart Breadcrumb, set the [`rootItem`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chartbreadcrumb/configuration/rootItem).
+To customize the root item of the chart Breadcrumb, set the [`rootItem`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart-breadcrumb/configuration/rootitem).
 
 ```dojo
   <nav id="breadcrumb"></nav>

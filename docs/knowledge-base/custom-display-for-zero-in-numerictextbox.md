@@ -24,7 +24,7 @@ ticketid: 1670959
 </table>
 
 ## Description
-I want to change my existing [NumericTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/overview) to display a custom format when the value is zero. Specifically, double zeros should be displayed for zero values, whereas all other values should be displayed normally. 
+I want to change my existing [NumericTextBox](https://www.telerik.com/kendo-jquery-ui/documentation/controls/numerictextbox/overview) to display a custom format when the value is zero. Specifically, double zeros should be displayed for zero values, whereas all other values should be displayed normally. 
 
 This KB article also answers the following questions:
 - How to customize the zero value display in NumericTextBox?

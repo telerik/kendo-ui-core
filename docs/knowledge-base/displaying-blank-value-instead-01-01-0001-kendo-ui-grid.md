@@ -49,9 +49,9 @@ Now, the {{ site.framework }} Grid will display a blank value instead of 01/01/0
 
 ## More {{ site.framework }} Grid Resources
 
-* [{{ site.framework }} Grid Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/overview)
+* [{{ site.framework }} Grid Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/overview)
 
-* [{{ site.framework }} Grid Demos](https://demos.telerik.com/{{ site.platform }}/grid/index)
+* [{{ site.framework }} Grid Demos](https://demos.telerik.com/kendo-ui/grid/index)
 
 {% if site.core %}
 * [{{ site.framework }} Grid Product Page](https://www.telerik.com/aspnet-core-ui/grid)
@@ -68,5 +68,5 @@ Now, the {{ site.framework }} Grid will display a blank value instead of 01/01/0
 
 ## See Also
 * [Client-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Server-Side API Reference of the Grid for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/grid)
+* [Server-Side API Reference of the Grid for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid)
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

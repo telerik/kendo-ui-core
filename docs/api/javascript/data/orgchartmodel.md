@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.OrgChartModel
 
-The `kendo.data.OrgChartModel` class represents a data item from the [kendo.data.OrgCharttDataSource](orgchartdatasource). Inherits from [kendo.data.Model](model).
+The `kendo.data.OrgChartModel` class represents a data item from the [kendo.data.OrgCharttDataSource](/api/javascript/data/orgchartdatasource). Inherits from [kendo.data.Model](/api/javascript/data/model).
 
 ## Configuration
 

@@ -57,4 +57,4 @@ In order to select or deselect all of the child items of the currently selected 
 ## See Also
 
 * [Selection of the Kendo UI TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/checkbox-selection)
-* [TreeList JavaScript API Reference](/api/selection)
+* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)
