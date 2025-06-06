@@ -43,7 +43,7 @@ template: ({ task, title }) => `Title: ${kendo.htmlEncode(task.title)}\
 
 This customization applies date formatting to the tooltip content, specifically to the start date, using the 'D' format specifier, which displays the date without the time.
 
-For more information on date formatting options and how to apply them, refer to the [Date Formatting - Kendo UI Globalization - Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) article.
+For more information on date formatting options and how to apply them, refer to the [Date Formatting - Kendo UI Globalization - Kendo UI for jQuery](https://www.telerik.com/kendo-jquery-ui/documentation/globalization/intl/dateformatting) article.
 
 For a runnable demontsration, please refer to the below Dojo example:
 ```dojo

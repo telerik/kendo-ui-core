@@ -12,7 +12,7 @@ The Kendo UI TileLayout widget supports the option to dynamically add and remove
 
 ## Usage
 
-This functionality is a custom implementation based on the [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JS array method and the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout/methods/setOptions) TileLayout client-side method.
+This functionality is a custom implementation based on the [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JS array method and the `setOptions` method.
 
 
 The example below demonstrates how you can enable users to remove a tile from the TileLayout by a clicking on its close button.

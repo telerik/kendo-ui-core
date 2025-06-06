@@ -22,7 +22,7 @@ component: grid
 
 ## Description
 
-I am trying to implement the copy-and-paste functionality for multiple rows from Excel to the Kendo UI Grid. I am using the example on [copying data from Excel](https://docs.telerik.com/kendo-ui/controls/grid/how-to/excel/copy-from-excel-to-grid), but after I paste them, none of the events fire andit takes much time to add rows.
+I am trying to implement the copy-and-paste functionality for multiple rows from Excel to the Kendo UI Grid. I am using the example on [copying data from Excel](/knowledge-base/copy-from-excel-to-grid), but after I paste them, none of the events fire andit takes much time to add rows.
 
 How can I enable the copying of multiple rows from Excel and pasting them in the Grid?
 

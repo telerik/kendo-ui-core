@@ -459,7 +459,7 @@ The content to be displayed in the tab panel when the tab is selected.
 
 Тhe name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the tab element.
 
-See [web icons help article](/kendo-ui/styles-and-layout/sass-themes/svg-icons) for more details on Kendo UI icons.
+See [web icons help article](https://www.telerik.com/kendo-jquery-ui/documentation/styles-and-layout/sass-themes/svg-icons) for more details on Kendo UI icons.
 
 #### Example
 

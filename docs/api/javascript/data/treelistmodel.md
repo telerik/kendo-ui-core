@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.TreeListModel
 
-The `kendo.data.TreeListModel` class represents a data item from the [kendo.data.TreeListDataSource](treelistdatasource). Inherits from [kendo.data.Model](model).
+The `kendo.data.TreeListModel` class represents a data item from the [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource). Inherits from [kendo.data.Model](/api/javascript/data/model).
 
 ## Configuration
 

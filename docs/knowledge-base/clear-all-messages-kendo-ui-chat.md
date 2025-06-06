@@ -95,4 +95,4 @@ Both methods effectively clear the chat window, allowing for a fresh start. For 
 ## See Also
 
 - [Kendo UI Chat Overview](https://docs.telerik.com/kendo-ui/controls/chat/overview)
-- [Kendo UI Chat API](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/methods)
+- [Kendo UI Chat API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat)

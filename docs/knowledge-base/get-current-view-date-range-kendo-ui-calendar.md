@@ -75,5 +75,5 @@ For a complete example and to see the code in action, check the following Dojo d
 
 ## See Also
 - [Calendar Overview](https://docs.telerik.com/kendo-ui/controls/editors/calendar/overview)
-- [Calendar Methods API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods)
+- [Calendar Methods API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/calendar#methods)
 - [Kendo UI Dojo - Interactive Examples](https://dojo.telerik.com/)

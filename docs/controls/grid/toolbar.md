@@ -121,7 +121,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
 
 ## Toolbar Template
 
-The Grid also supports using a template for the Toolbar. You can define the template as a string, as an [external Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external), or return its content using a JavaScript function. For more information on the available template options, refer to the [`Toolbar Templates`](/https://docs.telerik.com/kendo-ui/controls/grid/templates/toolbar-template) API.
+The Grid also supports using a template for the Toolbar. You can define the template as a string, as an [external Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external), or return its content using a JavaScript function. For more information on the available template options, refer to the [`Toolbar Templates`](/controls/grid/templates/toolbar-template) dedicated article.
 
 
 ## Disable Inactive Tools

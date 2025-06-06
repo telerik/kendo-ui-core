@@ -102,7 +102,7 @@ Below you will find a runnable example:
 
 
 ## See Also
-- [Spreadsheet Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration)
+- [Spreadsheet API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 - [Spreadsheet setDataSource Method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/setdatasource)
 - [Spreadsheet removeSheet Method](/api/javascript/ui/spreadsheet/methods/removesheet)
 - [Official Documentation for Kendo UI Spreadsheet](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)

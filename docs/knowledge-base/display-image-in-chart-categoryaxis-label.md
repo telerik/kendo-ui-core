@@ -73,5 +73,5 @@ The following example demonstrates how to achieve the desired scenario:
 ```
 
 ## See Also
-* [Kendo UI for jQuery Chart Overview (Demo)](/charts/index)
+* [Kendo UI for jQuery Chart Overview (Demo)](https://demos.telerik.com/kendo-ui/charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

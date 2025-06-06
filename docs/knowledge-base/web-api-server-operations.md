@@ -27,7 +27,7 @@ How can I implement the server-side data operations of paging, sorting, and filt
 
 Kendo UI does not provide any out-of-the-box capability for implementing server-side paging, sorting, and grouping.
 
-However, you can implement server-side data operations by using [Telerik UI for ASP.NET Core](/aspnet-core). The following example demonstrates how to use the `ToDataSourceResult` extension method to implement the server-side data operations of paging, sorting, and grouping.
+However, you can implement server-side data operations by using [Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui/documentation/introduction). The following example demonstrates how to use the `ToDataSourceResult` extension method to implement the server-side data operations of paging, sorting, and grouping.
 
 ```Controller
 using ApiJqueryGrid.Models;

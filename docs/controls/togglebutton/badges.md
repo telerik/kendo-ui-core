@@ -8,7 +8,7 @@ position: 4
 
 # Badge ToggleButton
 
-The ToggleButton can incorporate a [Badge](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/badge/overview) to enhance the meaning of the text content.
+The ToggleButton can incorporate a [Badge](https://docs.telerik.com/kendo-ui/controls/badge/overview) to enhance the meaning of the text content.
 
 The ToggleButton provides the `badge` setting for configuring the ToggleButton's Badge. The [API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge) exposes several methods that you can use to customize the appearance of the Badge:
 

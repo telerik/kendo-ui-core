@@ -7166,7 +7166,7 @@ The data source to which the widget will be bound.
 ### setOptions
 
 Sets the options of the Treelist. Use this method if you want to enable/disable a particular feature/option or to load
-the complete state obtained previously with the [`getOptions`](getoptions) method.
+the complete state obtained previously with the [`getOptions`](/api/javascript/ui/treelist/methods/getoptions) method.
 
 When `setOptions` is called, the Treelist widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
@@ -7566,7 +7566,7 @@ Fires when the incell edit mode is used and the cell will be closed. The event i
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](edit).
+The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](/api/javascript/ui/treelist/events/edit).
 
 ##### e.model `kendo.data.Model`
 

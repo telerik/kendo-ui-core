@@ -42,5 +42,5 @@ The following example demonstrates how to achieve the desired scenario:
 ```
 
 ## See Also
-* [jQuery Editor Events (Demo)](/editor/events)
+* [jQuery Editor Events (Demo)](https://demos.telerik.com/kendo-ui/editor/events)
 * [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

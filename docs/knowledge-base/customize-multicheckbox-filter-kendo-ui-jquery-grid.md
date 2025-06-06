@@ -185,4 +185,4 @@ A practical example demonstrating custom 'Update' and 'Cancel' buttons for speci
 
 - [Kendo UI for jQuery Grid - Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
 - [DataSource API Reference](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
-- [Customizing Filter Menus in Kendo UI Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-customize-filter-menu-multicheck-items)
+- [Use MultiSelect for Column Filtering in Kendo UI Grid](https://docs.telerik.com/kendo-ui/knowledge-base/multiselect-used-for-column-filtering)

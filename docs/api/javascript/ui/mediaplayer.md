@@ -255,7 +255,7 @@ Gets or sets the information about the media that is loaded in the widget.
 
 ##### value `Object`
 
-The media configuration to load in the MediaPlayer. Accepts the same values as the [`media`](../configuration/media) option.
+The media configuration to load in the MediaPlayer. Accepts the same values as the [`media`](/api/javascript/ui/mediaplayer/configuration/media) option.
 
 #### Returns
 

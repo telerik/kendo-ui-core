@@ -9,7 +9,7 @@ res_type: api
 Draws a composite path consisting of multiple sub-paths.
 Using composite paths is more efficient than drawing the paths individually.
 
-The interface of MultiPath mirrors that of [Path](path),
+The interface of MultiPath mirrors that of [Path](/api/javascript/drawing/multi-path/fields/paths),
 but each moveTo command starts a new sub-path.
 
 #### Example - drawing a multi-path

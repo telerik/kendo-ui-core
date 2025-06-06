@@ -134,4 +134,4 @@ How can I change the format of a date column during the Excel export in the Kend
 
 ## See Also
 
-* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/controls/grid/how-to/excel/cell-format)
+* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/knowledge-base/cell-format)

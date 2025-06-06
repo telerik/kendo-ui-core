@@ -77,4 +77,4 @@ This CSS rule ensures that checkboxes in the selectable column are not visible i
 ## See Also
 
 - [Grud PDF Export Documentation](https://docs.telerik.com/kendo-ui/controls/grid/export/pdf-export)
-- [Customizing the PDF Export](https://docs.telerik.com/kendo-ui/knowledge-base/grid-hide-columns-pdf-export)
+- [Customizing the PDF Export](https://docs.telerik.com/kendo-ui/knowledge-base/grid-exclude-columns-from-exported-pdf)

@@ -116,7 +116,7 @@ How can I show the checkbox in the checkbox column of the Kendo UI TreeList for 
 ```
 
 ## See Also
-- [Show Checkbox Column](https://docs.telerik.com/kendo-ui/controls/treelist/how-to/show-a-checkbox-column)
+- [Show Checkbox Column](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/show-a-checkbox-column)
 - [CSS visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp)
 - [columns.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/columns.template)
 - [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/events/databound)

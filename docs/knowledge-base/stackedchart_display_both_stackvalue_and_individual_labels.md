@@ -174,4 +174,4 @@ The following example demonstrates how to achieve the desired scenario:
 ## See Also
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 * [Show a Total Sum for Stacked Chart Series](/knowledge-base/show-stack-total)
-* [jQuery Bar Charts Stacked and Grouped Bars Demo](/bar-charts/grouped-stacked-bar)
+* [jQuery Bar Charts Stacked and Grouped Bars Demo](https://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar)

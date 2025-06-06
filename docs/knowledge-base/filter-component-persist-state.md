@@ -156,5 +156,3 @@ Refer to the below Dojo demo for a complete example.
 
 - [Kendo UI Filter Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter)
 - [Kendo.stringify Function Documentation](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/stringify)
-- [Kendo UI Filter getOptions Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter/methods/getoptions)
-- [Kendo UI Filter setOptions Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter/methods/setoptions)

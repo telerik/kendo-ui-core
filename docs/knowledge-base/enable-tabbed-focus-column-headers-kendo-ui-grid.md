@@ -98,4 +98,4 @@ Below is a runnable example:
 
 - [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 - [Keyboard Navigation in Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/grid/accessibility/key-nav)
-- [Kendo UI Grid Accessibility Guide](https://docs.telerik.com/kendo-ui/accessibility/accessibility)
+- [Kendo UI Grid Accessibility Guide](https://www.telerik.com/kendo-jquery-ui/documentation/accessibility/accessibility-overview)

@@ -121,7 +121,7 @@ The MultiSelect provides several options that enable you to modify its appearanc
 
 ## 5. Configure the Label 
 
-The MultiSelect enables you to configure the label by using its [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/mulstiselect/configuration/label) property.
+The MultiSelect enables you to configure the label by using its [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/label) property.
 
 ```html
 <select id="customers"></select>

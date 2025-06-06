@@ -375,7 +375,7 @@ The "destroy" built-in command removes the data item to which the current table 
 
 Custom commands are supported by specifying the [click](columns.command.click) option.
 
-> The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](editable) option. The "edit" command supports "inline" and "popup" editing modes.
+> The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](/api/javascript/ui/grid/configuration/editable) option. The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as a string
 
@@ -1012,17 +1012,25 @@ The jQuery object representing the container element.
 
 The name of the field to which the column is bound.
 
-##### options.format `String`
+##### options.label `String`
 
-The format string of the column specified via the [format](columns.format) option.
+The column [title](columns.title).
 
 ##### options.model `kendo.data.Model`
 
 The model instance to which the current table row is bound.
 
-##### options.values `Array`
+##### options.editorOptions `Object`
 
-Array of values specified via the [values](columns.values) option.
+The object representing the editor options.
+
+##### options.editorOptions.adaptiveMode `string`
+
+Specifies the adaptive rendering of the editor component.
+
+##### options.editorOptions.size `size`
+
+The editor component size.
 
 #### Example - create a custom column editor using the Kendo UI AutoComplete
 
@@ -1235,7 +1243,7 @@ Only columns that are bound to a field can be sortable or filterable.
 ### columns.filterable `Boolean|Object` *(default: true)*
 
 If set to `true` a filter menu will be displayed for this column when filtering is enabled. If set to `false` the filter menu will not be displayed. By default a filter menu is displayed
-for all columns when filtering is enabled via the [filterable](filterable) option.
+for all columns when filtering is enabled via the [filterable](/api/javascript/ui/grid/configuration/filterable) option.
 
 Can be set to a JavaScript object which represents the filter menu configuration.
 
@@ -2818,7 +2826,7 @@ Also accepts the device identifiers that are [available in Bootstrap 4](https://
 
 The pixel screen width below which the user will not be able to resize the column via the UI.
 
-> This option is meaningful when the grid is set as [resizable](resizable).
+> This option is meaningful when the grid is set as [resizable](/api/javascript/ui/grid/configuration/resizable).
 
 #### Example - set the column width as a number
 
@@ -2907,7 +2915,7 @@ More about the Grid Selection feature you can find in [this documentation articl
 ### columns.sortable `Boolean|Object` *(default: true)*
 
 If set to `true` the user can click the column header and sort the grid by the column [field](columns.field) when sorting is enabled. If set to `false` sorting will
-be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](sortable) option.
+be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](/api/javascript/ui/grid/configuration/sortable) option.
 
 #### Example - disable sorting
 
@@ -2964,7 +2972,7 @@ The basic function implementation is as follows (pseudo-code):
 ```
 
 One notable exception is that we also supply a third parameter that indicates the sort direction (true for descending).
-See [How-to: Stable Sort in Chrome](/web/grid/how-to/stable-sort-chrome) for more details on how this can be useful.
+See [How-to: Stable Sort in Chrome](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/stable-sort-chrome) for more details on how this can be useful.
 
 #### Example - define custom compare function
 
@@ -3448,7 +3456,7 @@ The text displayed in the header of the group.
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](filterable).
+If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](/api/javascript/ui/grid/configuration/filterable).
 
 #### Example - disable column menu filtering
 
@@ -3506,7 +3514,7 @@ If set to `true`, the global column menu will render a button to allow the user 
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](sortable) option.
+If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](/api/javascript/ui/grid/configuration/sortable) option.
 
 > If this option is set to `false` the user could still sort by clicking the column header cell.
 
@@ -11867,7 +11875,7 @@ If set to true, the exported items will include the column headers.
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
 Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
-> Please refer to the [`setOptions()`](setoptions) method documentation for more important information.
+> Please refer to the [`setOptions()`](/api/javascript/ui/grid/methods/setoptions) method documentation for more important information.
 
 #### Parameters
 
@@ -12686,7 +12694,7 @@ The data source to which the widget should be bound.
 ### setOptions
 
 Sets the [`options`](/api/javascript/ui/grid#configuration) of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
-the complete state obtained previously with the [`getOptions`](getoptions) method.
+the complete state obtained previously with the [`getOptions`](/api/javascript/ui/grid/methods/getoptions) method.
 
 When `setOptions` is called, the Grid widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
@@ -13050,7 +13058,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](edit).
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](/api/javascript/ui/grid/events/edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -13129,7 +13137,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](edit).
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](/api/javascript/ui/grid/events/edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -15757,7 +15765,7 @@ The data item to which the table row is bound. If `e.model.id` is null, then a n
 
 ##### e.container `jQuery`
 
-The jQuery object representing the current edit container element. More information is available in the [edit event arguments' description](edit).
+The jQuery object representing the current edit container element. More information is available in the [edit event arguments' description](/api/javascript/ui/grid/events/edit).
 
 ##### e.sender `kendo.ui.Grid`
 

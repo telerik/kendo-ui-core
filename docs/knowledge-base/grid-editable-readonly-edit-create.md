@@ -139,4 +139,4 @@ The following example demonstrates how, upon creating a new record, `ProductName
 
 ## See Also
 
-* [Editing the Kendo UI Grid Widget](https://docs.telerik.com/kendo-ui/controls/grid/editing)
+* [Grid Editing Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/editing/editing)

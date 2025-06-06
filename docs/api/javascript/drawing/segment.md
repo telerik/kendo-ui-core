@@ -8,7 +8,7 @@ res_type: api
 
 Defines a path segment with an anchor point and optional curve control points.
 
-Segments are created implicitly by the [Path](path) lineTo and curveTo commands.
+Segments are created implicitly by the [Path](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/drawing/path) lineTo and curveTo commands.
 
 #### Example - accessing path segments
     <div id="surface"></div>

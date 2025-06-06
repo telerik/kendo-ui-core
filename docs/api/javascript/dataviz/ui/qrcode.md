@@ -453,7 +453,7 @@ Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozi
 
 Redraws the QR code using the current value and options.
 
-> The [`setOptions`](setOptions) method sets new options to the QRCode and redraws it att he same time. Calling `redraw()` int his case is not necessary.
+> The [`setOptions`](/api/javascript/dataviz/ui/qrcode/methods/setoptions) method sets new options to the QRCode and redraws it att he same time. Calling `redraw()` int his case is not necessary.
 
 #### Example - set background property and redraw QRCode
 

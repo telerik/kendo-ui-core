@@ -101,5 +101,5 @@ dataBound: function(e){
 ## See Also
 
 - [Scheduler Overview](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
-- [Scheduler Templates](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/templates)
+- [Scheduler Templates](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/custom-edit-and-event-templates)
 - [Scheduler dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound)
