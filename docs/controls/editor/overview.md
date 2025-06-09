@@ -48,5 +48,5 @@ The Editor component relies on inline styles for several of its features. If str
 * [JavaScript API Reference of the Editor](/api/javascript/ui/editor)
 * [Demo Page for the jQuery Editor](https://demos.telerik.com/kendo-ui/grid/index)
 * [Knowledge Base Section](/knowledge-base)
-* [jQuery Editor Product Page](https://www.telerik.com/kendo-jquery-ui/editor)
+* [jQuery Editor Product Page](https://www.telerik.com/kendo-jquery-ui/rich-text-editor)
 
