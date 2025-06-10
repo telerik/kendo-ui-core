@@ -52,9 +52,8 @@ The following example demonstrates how to move the group label on top of the gro
           groupTemplate: "FULL LINE ABOVE ROW: #: data #",
           height: 400,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             group: { field: "Country" }
           }

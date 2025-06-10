@@ -59,8 +59,7 @@ You can use the internal logic of the Endless Scrolling feature to load more ite
         var dataSource = new kendo.data.DataSource({
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Products",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/Products"
             }
           },
           pageSize: 9

@@ -34,7 +34,7 @@ Below is a runnable example of how to implement this logic:
 <div id="spreadsheet" style="width: 100%"></div>
     <script>
       $(function() {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         var dataSource = new kendo.data.DataSource({
           transport: {
@@ -126,8 +126,7 @@ Below is a runnable example of how to implement this logic:
 
         function onRead(options) {
           $.ajax({
-            url: crudServiceBaseUrl + "/Products",
-            dataType: "jsonp",
+            url: crudServiceBaseUrl + "/Products"
             success: function (result) {
               options.success(result);
             },

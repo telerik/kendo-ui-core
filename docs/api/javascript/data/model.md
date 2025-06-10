@@ -43,12 +43,11 @@ The value of the ID of the `Model`. This field is available only if the `id` is 
 #### Example - define the model.id in dataSource schema
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 20,

@@ -49,7 +49,7 @@ The following example demonstrates how to get the row and column index of the ce
             sheetsbar: false,
             excel: {
               // Required to enable Excel Export in some browsers
-              proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+              proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             sheets: [
               {

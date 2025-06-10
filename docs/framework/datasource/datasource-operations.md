@@ -56,11 +56,11 @@ The following example demonstrates how to configure `serverSorting`.
 
     <script>
       var dataSource = new kendo.data.DataSource({
-        type: "odata",           
+        type: "odata-v4",           
         serverSorting: true,
         sort: { field: "ProductName", dir: "asc" },           
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          read: "https://demos.telerik.com/service/v2/odata/Products"
         },
       });    
 

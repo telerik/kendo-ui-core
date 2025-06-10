@@ -38,12 +38,12 @@ Subscribe to the `dataBound` event of the TreeView and [`expand()`](https://docs
 <script>
 $(document).ready(function() {
     var OrderDetails = {
-        type: "odata",
+        type: "odata-v4",
         transport: {
             read: {
                 url: function(options) {
                     return kendo.format(
-                        "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products({0})/Order_Details",
+                        "https://demos.telerik.com/service/v2/odata/Products({0})/Order_Details",
                         options.ProductID
                     );
                 }
@@ -59,7 +59,7 @@ $(document).ready(function() {
     };
 
     var Products = {
-        type: "odata",
+        type: "odata-v4",
         schema: {
             model: {
                 id: "ProductID",
@@ -71,7 +71,7 @@ $(document).ready(function() {
             read: {
                 url: function(options) {
                     return kendo.format(
-                        "//demos.telerik.com/kendo-ui/service/Northwind.svc/Categories({0})/Products",
+                        "https://demos.telerik.com/service/v2/odata/Categories({0})/Products",
                         options.CategoryID
                     );
                 }
@@ -80,10 +80,10 @@ $(document).ready(function() {
     };
 
     var Categories = new kendo.data.HierarchicalDataSource({
-        type: "odata",
+        type: "odata-v4",
         transport: {
             read: {
-                url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                url: "https://demos.telerik.com/service/v2/odata/Categories"
             }
         },
         schema: {

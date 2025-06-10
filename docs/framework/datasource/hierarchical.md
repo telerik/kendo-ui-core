@@ -79,8 +79,7 @@ To bind the `HierarchicalDataSource` component to remote data:
         var homogeneous = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "json"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {
@@ -93,7 +92,7 @@ To bind the `HierarchicalDataSource` component to remote data:
 
 1. After you execute `homogeneous.read()`, the service endpoint has no `EmployeeId` parameter.
 
-        GET https://demos.telerik.com/kendo-ui/service/Employees
+        GET https://demos.telerik.com/service/v2/core/Employees
 
         => [ { "EmployeeId": 2, "Name": "Andrew", "HasEmployees": true } ]
 
@@ -105,7 +104,7 @@ To bind the `HierarchicalDataSource` component to remote data:
 
 1. This approach hits the service endpoint and supplies the `id` of the data item.
 
-        GET https://demos.telerik.com/kendo-ui/service/Employees?EmployeeId=2
+        GET https://demos.telerik.com/service/v2/core/Employees?EmployeeId=2
 
         => [
               { "EmployeeId": 3, "Name": "Bob", "HasEmployees": false },
@@ -137,8 +136,7 @@ The following example demonstrates how to create the HierarchicalDataSource comp
     var Products = {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Products",
-                    dataType: "json"
+                    url: "https://demos.telerik.com/service/v2/core/Products"
                 }
             },
             schema: {
@@ -154,8 +152,7 @@ The following example demonstrates how to create the HierarchicalDataSource comp
     var Categories = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Categories",
-                dataType: "json"
+                url: "https://demos.telerik.com/service/v2/core/Categories"
             }
         },
         schema: {
@@ -183,10 +180,10 @@ The following example demonstrates how to share the HierarchicalDataSource compo
 
     <script>
     var Categories = new kendo.data.HierarchicalDataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+          url: "https://demos.telerik.com/service/v2/odata/Categories"
         }
       },
       schema: {
@@ -194,10 +191,10 @@ The following example demonstrates how to share the HierarchicalDataSource compo
           id: "CategoryID",
           hasChildren: "Products",
           children: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                url: "https://demos.telerik.com/service/v2/odata/Products"
               }
             },
             schema: {
@@ -243,8 +240,11 @@ If you have a way of fetching data that cannot be achieved through the default [
           // [additional processing here]
 
           $.ajax({
-            url: "https://demos.telerik.com/kendo-ui/service/employees",
-            dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+<<<<<<< HEAD
+            url: "https://demos.telerik.com/service/v2/core/employees",
+=======
+            url: "https://demos.telerik.com/service/v2/core/Employees",
+>>>>>>> 8f27c13c7d (chore: update docs examples to new service)
             data: { EmployeeId: id },
             success: function(result) {
               // Notify the data source that the request succeeded.

@@ -57,8 +57,7 @@ The following example demonstrates how to achieve the desired scenario.
           batch: true,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/meetings",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/meetings"
             }
           }
         });
@@ -86,7 +85,7 @@ The following example demonstrates how to achieve the desired scenario.
         }
 
         $.ajax({
-          url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
+          url: "https://demos.telerik.com/service/v2/core/meetings/update",
           data: dataForSync,
           success: function (e) {
           	destroyed = [];

@@ -41,24 +41,25 @@ Here's a step-by-step guide to implementing this functionality:
 <div id="grid"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read: {
-                    url: crudServiceBaseUrl + "/detailproducts",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/detailproducts"                    
                   },
                   update: {
                     url: crudServiceBaseUrl + "/detailproducts/Update",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   destroy: {
                     url: crudServiceBaseUrl + "/detailproducts/Destroy",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                      return { models: kendo.stringify(options.models) };
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

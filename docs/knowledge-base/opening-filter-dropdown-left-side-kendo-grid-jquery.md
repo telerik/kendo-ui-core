@@ -36,8 +36,7 @@ columnMenuInit: function(e){
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/products"
           }
         },
         pageSize: 10

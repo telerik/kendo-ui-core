@@ -42,9 +42,9 @@ Use the [`column.template`](/api/javascript/ui/grid/configuration/columns.templa
         .controller("MyCtrl", function($scope){
         $scope.mainGridOptions = {
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 5,
             serverPaging: true,
@@ -78,9 +78,9 @@ Use the [`column.template`](/api/javascript/ui/grid/configuration/columns.templa
         $scope.detailGridOptions = function(dataItem) {
           return {
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

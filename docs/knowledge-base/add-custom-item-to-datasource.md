@@ -72,17 +72,17 @@ To achieve the desired scenario:
         batch: true,
         transport: {
           read: {
-            url: "//demos.telerik.com/kendo-ui/service/products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products",
           },
           create: {
-            url: "//demos.telerik.com/kendo-ui/service/products/create",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products/Create",
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function(options, operation) {
             if (operation !== "read" && options.models) {
               // This request structure is required by the data service. Related to batch: true.
-              return { models: kendo.stringify(options.models) };
+              return kendo.stringify(options.models);
             }
           }
         },

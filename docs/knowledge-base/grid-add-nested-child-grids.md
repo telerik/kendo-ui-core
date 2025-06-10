@@ -40,9 +40,9 @@ Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
         $(document).ready(function() {
           var element = $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
               },
               pageSize: 6,
               serverPaging: true,
@@ -84,9 +84,9 @@ Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
         function detailInit(e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,
@@ -110,9 +110,9 @@ Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
         function detailInitCustomers(e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/odata/Customers"
               },
               serverPaging: true,
               serverSorting: true,
@@ -134,7 +134,7 @@ Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
         function detailInitOrdersByCustomers(e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               schema: {
                 model: {
                   fields: {
@@ -146,7 +146,7 @@ Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
                 }
               },
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,
@@ -170,9 +170,9 @@ Handle the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
         function detailInitShippers (e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Shippers"
+                read: "https://demos.telerik.com/service/v2/odata/Shippers"
               },
               serverFiltering: true,
               filter: { field: "ShipperID", operator: "eq", value: e.data.ShipVia }

@@ -51,9 +51,8 @@ Internet Explorer 10 and earlier and Safari do not support file saving. These br
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },

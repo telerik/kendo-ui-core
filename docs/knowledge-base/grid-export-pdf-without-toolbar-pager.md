@@ -155,14 +155,13 @@ The following example demonstrates the outcome of the suggested approach.
       pdf: {
         allPages: true,
         fileName: "Kendo UI Grid Export.pdf",
-        proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       },
       toolbar: kendo.template($("#template").html()),
       dataSource: {
-        type: "odata",
         transport: {
           read: {
-            url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+            url: "https://demos.telerik.com/service/v2/core/Employees",
           }
         },
         pageSize: 5

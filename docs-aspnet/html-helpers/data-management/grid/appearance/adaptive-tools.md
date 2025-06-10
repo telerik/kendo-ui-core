@@ -6,7 +6,7 @@ slug: adaptive_tools_gridhelper_aspnetcore
 position: 6
 ---
 
-# Adaptive Tools
+# ToolBar Adaptive Tools
 
 The Telerik UI Grid for {{ site.framework }} supports rendering selected toolbar tools in adaptive mode starting with version Q2 2025. This feature improves usability on smaller screens by displaying sorting, filtering, grouping, and editing UI elements in a mobile-friendly ActionSheet.
 
@@ -453,6 +453,6 @@ To delete a specified record, the user must first select the row, then click the
 ## See Also
 
 * [{{ site.framework }} Grid Overview](https://www.telerik.com/{{ site.platform }}/grid)
-* [Adaptive Tools Demo](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-tools)
-* [Adaptive Tools Editing Demo](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-tools-editing)
+* [Adaptive Tools Demo](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-tools)
+* [Adaptive Tools Editing Demo](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-editing)
 * [Server-Side API](/api/grid)

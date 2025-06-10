@@ -382,8 +382,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
         var dataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {
@@ -540,8 +539,7 @@ If set to `true` the widget will not show all items when the text of the search 
         var dataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {
@@ -827,8 +825,7 @@ The component calls the valueMapper function when the component receives a value
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Employees",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/Employees"
             }
           },
           schema: {

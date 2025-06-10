@@ -28,8 +28,7 @@ After the completion of this guide, you will achieve the following end result:
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -73,8 +72,7 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configur
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -100,8 +98,7 @@ In this step you will define the columns rendered in the table of the MultiColum
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -130,8 +127,7 @@ The [`dataValueField`](/api/javascript/ui/multicolumncombobox/configuration/data
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }

@@ -45,14 +45,13 @@ The dialog confirmation is an asynchronous action. To add it during the drag-and
       </script>
 
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {

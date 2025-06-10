@@ -41,7 +41,7 @@ Use a third-party library. To submit the actual request, the following example u
         function queueCreated(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
+              url: "https://demos.telerik.com/service/v2/core/Customers",
               type: "POST",
               data: items[i]
             });
@@ -54,7 +54,7 @@ Use a third-party library. To submit the actual request, the following example u
         function queueUpdated(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
+              url: "https://demos.telerik.com/service/v2/core/Customers/" +
               items[i].CustomerID,
               type: "PUT",
               data: items[i]
@@ -65,7 +65,7 @@ Use a third-party library. To submit the actual request, the following example u
         function queueDestroyed(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
+              url: "https://demos.telerik.com/service/v2/odata/Customers/" +
               items[i].CustomerID,
               type: "DELETE"
             });
@@ -74,7 +74,7 @@ Use a third-party library. To submit the actual request, the following example u
 
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             batch: true,
             transport: {
               // Not an official feature, but it's close to being one.
@@ -89,7 +89,7 @@ Use a third-party library. To submit the actual request, the following example u
                 // Check out the network tab on "Save Changes".
                 $.ajaxBatch({
                   // Note that this service doesn't actually support batching.
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Batch",
+                  url: "https://demos.telerik.com/service/v2/odata/Batch",
                   data: requests
                 })
                   .done(function() {
@@ -104,10 +104,9 @@ Use a third-party library. To submit the actual request, the following example u
               read: function(e) {
                 var data = kendo.data.transports.odata.parameterMap(e.data, "read");
                 $.ajax({
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
-                  dataType: "jsonp",
+                  url: "https://demos.telerik.com/service/v2/odata/Customers",                  
                   data: data,
-                  jsonp: "$callback"
+                  json: "$callback"
                 })
                   .done(e.success)
                   .fail(e.error);

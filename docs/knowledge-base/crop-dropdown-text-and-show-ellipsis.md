@@ -60,8 +60,7 @@ Use the `white-space`, `overflow`, and `text-overflow` CSS properties.
           dataSource: {
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
+                url: "https://demos.telerik.com/service/v2/core/Products",
               }
             }
           }

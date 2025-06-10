@@ -56,7 +56,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
 
       <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
-            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#:ProductID#.jpg" alt="#:ProductName# image" />
+            <img src="../content/web/foods/#:ProductID#.jpg" alt="#:ProductName# image" />
             <h3>#:ProductName#</h3>
         </div>
       </script>
@@ -82,8 +82,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
           var dataSource = new kendo.data.DataSource({
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Products"
               }
             },
             pageSize: 15

@@ -125,24 +125,26 @@ Extend the **Agenda** view of the Scheduler and implement a custom render functi
                 batch: true,
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                        dataType: "jsonp"
-                    },
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
+                },
+                update: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                create: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                destroy: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
+                },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {models: kendo.stringify(options.models)};
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

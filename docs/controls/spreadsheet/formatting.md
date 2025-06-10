@@ -43,10 +43,10 @@ The following example demonstrates how to format the Spreadsheet conditionally.
         $("#spreadsheet").kendoSpreadsheet({
             excel: {                
                 // Required to enable saving files in older browsers.
-                proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             pdf: {                
-                proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             sheets: [
                 {

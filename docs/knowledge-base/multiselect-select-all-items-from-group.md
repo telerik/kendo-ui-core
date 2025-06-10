@@ -48,9 +48,8 @@ How can I select all items from a group in the MultiSelect by clicking the group
           dataValueField: "CustomerID",
           height: 400,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             group: { field: "Country" }
           }

@@ -37,28 +37,30 @@ In the example below all predefined commands are included in a customized order.
 
     	<script>
     		$(document).ready(function () {
-    			var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+    			var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
     				dataSource = new kendo.data.DataSource({
     					transport: {
     						read: {
-    							url: crudServiceBaseUrl + "/Products",
-    							dataType: "jsonp"
+    							url: crudServiceBaseUrl + "/Products"
     						},
     						update: {
     							url: crudServiceBaseUrl + "/Products/Update",
-    							dataType: "jsonp"
+    							type: "POST",
+          						contentType: "application/json"
     						},
     						destroy: {
     							url: crudServiceBaseUrl + "/Products/Destroy",
-    							dataType: "jsonp"
+    							type: "POST",
+          						contentType: "application/json"
     						},
     						create: {
     							url: crudServiceBaseUrl + "/Products/Create",
-    							dataType: "jsonp"
+    							type: "POST",
+          						contentType: "application/json"
     						},
     						parameterMap: function (options, operation) {
     							if (operation !== "read" && options.models) {
-    								return { models: kendo.stringify(options.models) };
+    								return kendo.stringify(options.models);
     							}
     						}
     					},
@@ -134,28 +136,30 @@ The example below demonstrates how the pages in the Grid can be changed using cu
 
 	<script>
 		$(document).ready(function () {
-			var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+			var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
 				dataSource = new kendo.data.DataSource({
 					transport: {
 						read: {
-							url: crudServiceBaseUrl + "/Products",
-							dataType: "jsonp"
+							url: crudServiceBaseUrl + "/Products"
 						},
 						update: {
 							url: crudServiceBaseUrl + "/Products/Update",
-							dataType: "jsonp"
+							type: "POST",
+          					contentType: "application/json"
 						},
 						destroy: {
 							url: crudServiceBaseUrl + "/Products/Destroy",
-							dataType: "jsonp"
+							type: "POST",
+          					contentType: "application/json"
 						},
 						create: {
 							url: crudServiceBaseUrl + "/Products/Create",
-							dataType: "jsonp"
+							type: "POST",
+          					contentType: "application/json"
 						},
 						parameterMap: function (options, operation) {
 							if (operation !== "read" && options.models) {
-								return { models: kendo.stringify(options.models) };
+								return kendo.stringify(options.models);
 							}
 						}
 					},

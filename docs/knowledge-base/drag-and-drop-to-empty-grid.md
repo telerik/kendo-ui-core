@@ -42,13 +42,12 @@ You can add the new item always to the bottom of the Grid by replacing the [`ins
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         var inStockData = [],
             discontinuedData = [];
         $.ajax({
           type: "READ",
           url: crudServiceBaseUrl + "/Products",
-          dataType: "jsonp",
           success: function (data) {
             data.forEach(function (item) {
               item.Discontinued === false ? inStockData.push(item) : discontinuedData.push(item);

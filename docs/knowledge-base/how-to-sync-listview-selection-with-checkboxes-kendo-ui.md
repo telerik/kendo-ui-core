@@ -76,12 +76,11 @@ For a practical demonstration, refer to the example below:
         var selected = listView.select();
         console.log(selected.length);
       })
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 10

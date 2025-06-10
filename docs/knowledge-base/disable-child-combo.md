@@ -81,10 +81,10 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "CategoryName",
           dataValueField: "CategoryID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/odata/Categories"
             }
           }
         }).data("kendoComboBox");
@@ -96,10 +96,10 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "ProductName",
           dataValueField: "ProductID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/odata/Products"
             }
           },
           dataBound: function() {

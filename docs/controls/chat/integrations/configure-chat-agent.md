@@ -26,8 +26,7 @@ An example of such communication is to send an AJAX request to a server endpoint
       var chat = args.sender;
 
       // Initiate an AJAX request and pass the args.text value.
-      $.ajax("https://demos.telerik.com/kendo-ui/service/Products/Read", {
-        dataType: "jsonp",
+      $.ajax("https://demos.telerik.com/service/v2/core/Products/Read", {
         data: {
           skip: args.text,
           take: 1
@@ -109,8 +108,7 @@ You can achieve the same result by encapsulating the communication logic in an `
       var chat = this.chat;
 
       // Initiate an AJAX request and pass the args.text value.
-      $.ajax("https://demos.telerik.com/kendo-ui/service/Products/Read", {
-        dataType: "jsonp",
+      $.ajax("https://demos.telerik.com/service/v2/core/Products/Read", {
         data: {
           skip: args.text,
           take: 1

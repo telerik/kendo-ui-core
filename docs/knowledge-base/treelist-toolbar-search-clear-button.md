@@ -65,12 +65,11 @@ The TreeList search panel does not feature a clear button at present. Therefore,
       <div id="treelist"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
           var dataSource = new kendo.data.TreeListDataSource({
             transport: {
               read: {
-                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory/All"
               }
             },
             batch: true,

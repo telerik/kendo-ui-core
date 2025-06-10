@@ -81,7 +81,7 @@ The easiest way to accomplish the desired behaviour would be to:
                   catalog: "Adventure Works DW 2008R2",
                   cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
               },
               schema: {
                 type: "xmla"

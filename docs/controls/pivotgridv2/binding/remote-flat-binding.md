@@ -32,7 +32,7 @@ The following code snippet showcases how you can use the [`transport`](/api/java
 $("#pivotgrid").kendoPivotGridV2({
     dataSource: {
 		transport: {
-			read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+			read: "https://demos.telerik.com/service/v2/core/Products"
 		}
         ......
     }

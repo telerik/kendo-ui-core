@@ -45,12 +45,11 @@ The following example demonstrates how to dynamically update the button's label 
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                   },
                 },
                 pageSize: 20,

@@ -49,9 +49,9 @@ Manipulate the columnMenu within the `columnMenuInit` event of the Grid. With th
                     		removeColumnsFromColumnMenu(["OrderID", "ShipCountry"], e);            				
             			},
             			dataSource: {
-            				type: "odata",
+            				type: "odata-v4",
             				transport: {
-            					read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            					read: "https://demos.telerik.com/service/v2/odata/Orders"
             				},
             				schema: {
             					model: {

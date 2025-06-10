@@ -38,8 +38,7 @@ The following example demonstrates how to change the disabled state of the DropD
           dataSource: {
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Customers",
+                url: "https://demos.telerik.com/service/v2/core/Customers",
               }
             }
           },
@@ -75,8 +74,7 @@ The following example demonstrates how to change the read-only state of the Drop
           dataSource: {
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Customers",
+                url: "https://demos.telerik.com/service/v2/core/Customers",
               }
             }
           },

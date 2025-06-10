@@ -152,8 +152,7 @@ The following example demonstrates a full implementation of the described approa
               dataSource: {            
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Products",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 },
                 pageSize: 21

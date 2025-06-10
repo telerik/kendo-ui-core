@@ -35,9 +35,8 @@ How can I display the count of each unique value in the current view of the Grid
         $(document).ready(function () {
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     },
                     pageSize: 5
                 },

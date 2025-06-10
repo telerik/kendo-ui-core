@@ -105,11 +105,11 @@ The following example demonstrates how to achieve the desired scenario.
         viewModel.set('productName', productName);
 
         var ds = new kendo.data.DataSource({
-          type: "odata",
+          type: "odata-v4",
           serverFiltering: true,
           transport: {
               read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                  url: "https://demos.telerik.com/service/v2/odata/Products",
               }
           }
         });

@@ -363,7 +363,7 @@ Sets the [DataSource](/api/javascript/data/datasource) for the Columns of the Ta
     <div id="taskBoard"></div>
 
     <script>
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
     $("#taskBoard").kendoTaskBoard({
       columnSettings: {
@@ -989,7 +989,7 @@ Sets the [DataSource](/api/javascript/data/datasource) for the Cards of the Task
     <div id="taskBoard"></div>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
       $("#taskBoard").kendoTaskBoard({
         dataDescriptionField: "Description",

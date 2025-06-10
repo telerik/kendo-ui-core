@@ -65,9 +65,8 @@ You can alter the generated workbook to include a column with formulas by follow
           allPages: true
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 7
         },

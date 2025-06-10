@@ -59,9 +59,9 @@ The following example demonstrates code snippets for Grid components. For more r
 
     constructor() {
       this.datasource = {
-        type: 'odata',
+        type: 'odata-v4',
         transport: {
-          read: '//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers'
+          read: 'https://demos.telerik.com/service/v2/odata/Customers'
           },
           pageSize: 5
         };

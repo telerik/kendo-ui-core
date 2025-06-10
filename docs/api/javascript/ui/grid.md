@@ -1179,9 +1179,9 @@ If set to `false` the column will be excluded from the exported Excel file.
     $("#grid").kendoGrid({
       toolbar: ["excel"],
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          read: "https://demos.telerik.com/service/v2/odata/Products"
         },
         schema:{
           model: {
@@ -4590,8 +4590,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
       transport: {
         read: {
           // The remote endpoint from which the data is retrieved.
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/products"
         }
       },
       pageSize: 10
@@ -5287,8 +5286,7 @@ If set to `true` the grid will export all pages of data. By default the grid exp
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -5313,8 +5311,7 @@ Specifies the file name of the exported Excel file. Must end with ".xlsx".
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -5339,8 +5336,7 @@ Enables or disables column filtering in the Excel file. When set to true the exp
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -5361,14 +5357,13 @@ Enables or disables collapsible (grouped) rows, for grids with aggregates.
        toolbar: ["excel"],
        excel: {
          fileName: "excel-collapsible.xlsx",
-         proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+         proxyURL: "https://demos.telerik.com/service/v2/core/export",
          filterable: true,
          collapsible: true
        },
        dataSource: {
-         type: "odata",
          transport: {
-           read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+           read: "https://demos.telerik.com/service/v2/core/Products"
          },
          schema:{
            model: {
@@ -5449,8 +5444,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -7729,9 +7723,9 @@ Defines what loader will be used while loading the data. Possible values are:
           { field: "ShipCity" }
         ],
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/odata/Orders"
           },
           schema: {
             model: {
@@ -9049,8 +9043,7 @@ The author of the PDF document.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9085,8 +9078,7 @@ It's also possible to pass a CSS selector as argument. All matching links will b
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9115,8 +9107,7 @@ The creator of the PDF document.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9141,8 +9132,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9167,8 +9157,7 @@ Specifies the file name of the exported PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9204,8 +9193,7 @@ Specifies the keywords of the exported PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9230,8 +9218,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9262,8 +9249,7 @@ units are "mm", "cm", "in" and "pt" (default).
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9314,8 +9300,7 @@ Supported values:
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9383,8 +9368,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9414,8 +9398,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9440,8 +9423,7 @@ Sets the subject of the PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10
@@ -9466,8 +9448,7 @@ Sets the title of the PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 }
             },
             pageSize: 10

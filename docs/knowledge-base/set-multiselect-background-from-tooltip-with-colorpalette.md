@@ -50,11 +50,11 @@ Is it possible to assign a color to the MultiSelect tags from a ToolTip as we ca
           dataValueField: "ProductID",
           autoBind: false,
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/service/v2/odata/Products",
               }
             }
           },

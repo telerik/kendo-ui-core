@@ -44,11 +44,10 @@ I want to set [`autoClose`](/api/javascript/ui/multiselect/configuration/autoclo
               e.sender.wrapper.find('input').val("");
               e.sender.dataSource.filter({});
             },
-            dataSource: {
-              type: "odata",                   
+            dataSource: {              
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                  url: "https://demos.telerik.com/service/v2/core/Products",
                 }
               }
             }

@@ -41,9 +41,9 @@ To properly display properly the group headers, configure a [`groupTemplate`](ht
       groupTemplate: "Group: #= kendo.toString(kendo.parseDate(data), 'd') #",
       fixedGroupTemplate: "Group: #= kendo.toString(kendo.parseDate(data), 'd') #",
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/odata/Orders"
         },
         group: {
           field: "OrderDate"

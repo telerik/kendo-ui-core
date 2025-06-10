@@ -73,8 +73,7 @@ The following example demonstrates how to implement a custom `noRecords` templat
             },
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
               }
             }
           })

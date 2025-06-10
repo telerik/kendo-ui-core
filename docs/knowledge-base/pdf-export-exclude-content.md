@@ -69,7 +69,7 @@ Elements that you do not want to be exported can be hidden just before the expor
 	              kendo.saveAs({
 	                  dataURI: data,
 	                  fileName: "Example.pdf",
-	                  proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+	                  proxyURL: "https://demos.telerik.com/service/v2/core/export"
 	              });
 	          });
 	      });

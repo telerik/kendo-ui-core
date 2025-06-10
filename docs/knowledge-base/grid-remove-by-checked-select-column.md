@@ -68,8 +68,7 @@ To detect if the checkbox that is used to remove a row belongs to the header of 
             pageSize: 10,
             transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
             },
             schema: {

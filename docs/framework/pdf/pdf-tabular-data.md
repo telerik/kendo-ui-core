@@ -54,9 +54,8 @@ To control the generated table, use any of the following options:
   $(document).ready(function() {
     window.grid = $("#grid").kendoGrid({
       dataSource: {
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
           model: {

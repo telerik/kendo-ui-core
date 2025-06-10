@@ -77,10 +77,10 @@ The following example demonstrates how to use different popup editors in a Grid 
                 e.model.ProductID = e.sender.dataSource.data().length;
               },
               dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                  read: "https://demos.telerik.com/service/v2/odata/Categories"
                 }
               }
             });
@@ -94,10 +94,10 @@ The following example demonstrates how to use different popup editors in a Grid 
                 e.model.ProductName = this.text();
               },
               dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                  read: "https://demos.telerik.com/service/v2/odata/Products"
                 }
               }
             });

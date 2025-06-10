@@ -48,8 +48,7 @@ How can I perform a server check (validation) before a new or edited task or eve
 				var dataSource = e.sender.dataSource;
 
 				$.ajax({
-					url: "https://demos.telerik.com/kendo-ui/service/Products",
-					dataType: 'jsonp',
+					url: "https://demos.telerik.com/service/v2/core/Products",
 					data: JSON.stringify(e.event),
 					success: function(response) {
 						// Perform the required check / validation.

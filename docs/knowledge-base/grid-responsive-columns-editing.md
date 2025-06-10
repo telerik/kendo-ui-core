@@ -76,24 +76,30 @@ To see the following demo in action, click **Open in Dojo**. You should resize t
     <div id="grid"></div>
     <script>
         $(document).ready(function () {
-           var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+           var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                     transport: {
                         read:  {
-                            url: crudServiceBaseUrl + "/Products",
-                            dataType: "jsonp"
+                            url: crudServiceBaseUrl + "/Products"
                         },
                         update: {
                             url: crudServiceBaseUrl + "/Products/Update",
-                            dataType: "jsonp"
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
                         },
                         create: {
                             url: crudServiceBaseUrl + "/Products/Create",
-                            dataType: "jsonp"
+                            type: "POST",
+                    		contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {models: kendo.stringify(options.models)};
+                                return kendo.stringify(options.models);
                             }
                         }
                     },

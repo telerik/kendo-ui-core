@@ -41,8 +41,7 @@ The item template manages the way the list items of a DropDownList are rendered.
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -74,8 +73,7 @@ The value template manages the way the selected value of a DropDownList is rende
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -105,8 +103,7 @@ The header template manages the way the popup header of a DropDownList is render
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -136,8 +133,7 @@ The footer template manages the way the popup footer of a DropDownList is render
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -169,8 +165,7 @@ The DropDownList widget displays `noDataTemplate` in the popup when the data sou
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }

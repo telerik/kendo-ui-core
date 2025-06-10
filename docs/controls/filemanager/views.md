@@ -18,7 +18,7 @@ This view is achieved with the Kendo Grid and in renders the files in a tabular 
 ```dojo
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 	    
         $("#fileManager").kendoFileManager({
           views: {
@@ -29,19 +29,19 @@ This view is achieved with the Kendo Grid and in renders the files in a tabular 
           dataSource: {
             transport: {
               read: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Read"
               },
               update: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Update"
               },
               create: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Create"
               },
               destroy: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Destroy"
               }
             }
@@ -61,7 +61,7 @@ The List view is implemented with the help of the Kendo ListView component. The 
 ```dojo
      <div id="fileManager"></div>
     <script>
-      var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+      var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
       $("#fileManager").kendoFileManager({
         views: {          
@@ -72,19 +72,19 @@ The List view is implemented with the help of the Kendo ListView component. The 
         dataSource: {
           transport: {
             read: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Read"
             },
             update: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Update"
             },
             create: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Create"
             },
             destroy: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Destroy"
             }
           }

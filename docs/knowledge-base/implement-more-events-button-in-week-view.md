@@ -39,7 +39,7 @@ To simulate the layout of the week view, implement a **More Events** button simi
             selectedDateFormat: "{0:D} - {1:D}",
             selectedShortDateFormat: "{0:d} - {1:d}"
         },
-        name: "MyWeekView",
+        name: "my-week",
         calculateDateRange: function () {
             var selectedDate = this.options.date,
                 start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
@@ -100,38 +100,40 @@ To simulate the layout of the week view, implement a **More Events** button simi
 
     $(function () {
         $("#scheduler").kendoScheduler({
-            date: new Date("2022/6/13"),
-            startTime: new Date("2022/6/13 07:00 AM"),
+            date: new Date("2025/6/13"),
+            startTime: new Date("2025/6/13 07:00 AM"),
             height: 600,
             views: [
             "day",
                 { type: "week" },
                 // "custom week",
-                { type: "MyWeekView", title: "my week view", selected: true }
+                { type: MyWeekView, title: "my week view", selected: true }
             ],
             timezone: "Etc/UTC",
             dataSource: {
                 batch: true,
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks"
                     },
                     update: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                         type: "POST",
+                    		contentType: "application/json"
                     },
                     create: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                         type: "POST",
+                    		contentType: "application/json"
                     },
                     destroy: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                         type: "POST",
+                    		contentType: "application/json"
                     },
                     parameterMap: function (options, operation) {
                         if (operation !== "read" && options.models) {
-                            return { models: kendo.stringify(options.models) };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

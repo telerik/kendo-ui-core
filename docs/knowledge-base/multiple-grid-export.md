@@ -88,8 +88,7 @@ Each Grid is exported in a separate Excel sheet. For additional information abou
     dataSource: {
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Products",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/Products"
         }
       },
       pageSize: 20
@@ -105,9 +104,9 @@ Each Grid is exported in a separate Excel sheet. For additional information abou
 
   $("#orders").kendoGrid({
     dataSource: {
-      type: "odata",
+      type: "odata-v4",
       transport: {
-        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+        read: "https://demos.telerik.com/service/v2/odata/Orders"
       },
       pageSize: 20,
       serverPaging: true

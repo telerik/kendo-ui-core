@@ -127,9 +127,8 @@ You can also target specific columns by using the `:nth-child()` selector.
           scale: 0.6
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 10
         },

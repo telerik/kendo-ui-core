@@ -51,9 +51,8 @@ The following example demonstrates how to enable the Excel export functionality 
                 fileName: "Kendo UI Grid Export.xlsx"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -94,9 +93,8 @@ By default, the Grid exports only the current page of data. To export all pages,
                 allPages: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -141,9 +139,8 @@ Each row has a `type` field that can be used to distinguish between the various 
           allPages: true
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 7
         },
@@ -183,10 +180,9 @@ To send the generated file to a remote service, prevent the default file saving 
     <script>
         $("#grid").kendoGrid({
             toolbar: ["excel"],
-            dataSource: {
-                type: "odata",
+            dataSource: {                
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },

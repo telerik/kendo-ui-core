@@ -105,9 +105,8 @@ The following examples demonstrates the full code implementation.
         $("#employees").kendoGrid({
           dataBound:onDataBound,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             }
           },
           columns: [{

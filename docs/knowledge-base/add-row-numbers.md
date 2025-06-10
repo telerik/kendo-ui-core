@@ -34,9 +34,9 @@ To achieve the desired scenario, use the [`page()`](/api/javascript/data/datasou
 
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/odata/Customers"
           },
           pageSize: 20
 

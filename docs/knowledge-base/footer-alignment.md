@@ -63,9 +63,8 @@ Normally, to achieve this behavior, you can use HTML and CSS. However, Excel doe
         }
       },
       dataSource: {
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          read: "https://demos.telerik.com/service/v2/core/Products"
         },
         schema:{
           model: {

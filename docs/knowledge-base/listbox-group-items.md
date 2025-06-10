@@ -72,9 +72,8 @@ Currently the Kendo UI ListBox does not offer such functionality out of the box 
             },
             height: 400,
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               sort: { field: "Country", dir: "asc" }
             },

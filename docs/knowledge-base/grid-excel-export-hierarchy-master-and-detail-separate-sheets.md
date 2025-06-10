@@ -42,9 +42,8 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 
 
       var dataSource = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         }
       });
 
@@ -53,9 +52,9 @@ How can I have separate sheets for the rows of the master Grid and for all detai
       $("#grid").kendoGrid({
         toolbar: ["excel"],
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+            read: "https://demos.telerik.com/service/v2/odata/Employees"
           },
           pageSize: 6,
           serverPaging: true
@@ -148,9 +147,9 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 
         $("<div/>").appendTo(e.detailCell).kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             serverPaging: true,
             serverSorting: true,

@@ -39,7 +39,7 @@ This sample demonstrates how to save the changes in all Grids with InCell editin
         $(document).ready(function() {
           var element = $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               batch: true,
               schema: {
                 model: {
@@ -47,7 +47,7 @@ This sample demonstrates how to save the changes in all Grids with InCell editin
                 }
               },
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
               },
               pageSize: 6,
               serverPaging: true,
@@ -91,7 +91,7 @@ This sample demonstrates how to save the changes in all Grids with InCell editin
         function detailInit(e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               batch: true,
               schema: {
                 model: {
@@ -99,7 +99,7 @@ This sample demonstrates how to save the changes in all Grids with InCell editin
                 }
               },
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

@@ -94,9 +94,8 @@ The following example demonstrates how to achieve this behavior.
 
         $scope.gridOptions = {
           dataSource: {
-            type: "odata",
             transport: {
-              read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
           },

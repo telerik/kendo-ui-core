@@ -80,28 +80,30 @@ The following example demonstrates the implementation of the suggested approach.
 <script>
   angular.module("KendoDemos", [ "kendo.directives", "nzToggle" ])
     .controller("MyCtrl", function($scope, $compile){
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     $scope.dataSource = new kendo.data.DataSource({
       transport: {
         read:  {
-          url: crudServiceBaseUrl + "/Products",
-          dataType: "jsonp"
+            url: crudServiceBaseUrl + "/Products"
         },
         update: {
-          url: crudServiceBaseUrl + "/Products/Update",
-          dataType: "jsonp"
+            url: crudServiceBaseUrl + "/Products/Update",
+            type: "POST",
+            contentType: "application/json"
         },
         destroy: {
-          url: crudServiceBaseUrl + "/Products/Destroy",
-          dataType: "jsonp"
+            url: crudServiceBaseUrl + "/Products/Destroy",
+            type: "POST",
+            contentType: "application/json"
         },
         create: {
-          url: crudServiceBaseUrl + "/Products/Create",
-          dataType: "jsonp"
+            url: crudServiceBaseUrl + "/Products/Create",
+            type: "POST",
+            contentType: "application/json"
         },
         parameterMap: function(options, operation) {
           if (operation !== "read" && options.models) {
-            return {models: kendo.stringify(options.models)};
+            return kendo.stringify(options.models);
           }
         }
       },
@@ -124,8 +126,7 @@ The following example demonstrates the implementation of the suggested approach.
     $scope.ddlDataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          dataType: "jsonp",
-          url: "https://demos.telerik.com/kendo-ui/service/Products",
+          url: "https://demos.telerik.com/service/v2/core/Products",
         }
       }
     });

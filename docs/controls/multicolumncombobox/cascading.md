@@ -48,10 +48,10 @@ To initialize a cascading MultiColumnComboBox, use the following example.
             dataTextField: "CategoryName",
             dataValueField: "CategoryID",
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                    read: "https://demos.telerik.com/service/v2/odata/Categories"
                 }
             }
         }).data("kendoMultiColumnComboBox");
@@ -69,10 +69,10 @@ To initialize a cascading MultiColumnComboBox, use the following example.
                 { field: "UnitsInStock ", title: "UnitsInStock", width: 120 }
             ],
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/odata/Products"
                 }
             }
         }).data("kendoMultiColumnComboBox");

@@ -60,7 +60,7 @@ To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "https://demos.telerik.com/olap/msmdpump.dll",
+                        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                       parameterMap: function(options, type) {
                         var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
 

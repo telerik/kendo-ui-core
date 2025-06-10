@@ -189,27 +189,29 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
       dataSource: {
         batch: true,
         transport: {
-          read: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks",
-            dataType: "jsonp"
-          },
-          update: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-            dataType: "jsonp"
-          },
-          create: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-            dataType: "jsonp"
-          },
-          destroy: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-            dataType: "jsonp"
-          },
-          parameterMap: function(options, operation) {
-            if (operation !== "read" && options.models) {
-              return {models: kendo.stringify(options.models)};
+            read: {
+                url: "https://demos.telerik.com/service/v2/core/tasks"
+            },
+            update: {
+                url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                type: "POST",
+                contentType: "application/json"
+            },
+            create: {
+                url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                type: "POST",
+                contentType: "application/json"
+            },
+            destroy: {
+                url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                type: "POST",
+                contentType: "application/json"
+            },
+            parameterMap: function (options, operation) {
+                if (operation !== "read" && options.models) {
+                    return kendo.stringify(options.models);
+                }
             }
-          }
         },
         schema: {
            model: {
@@ -262,8 +264,7 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
     var dataSource = new kendo.data.SchedulerDataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/tasks",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/tasks"
         }
       },
       schema: {
@@ -4692,24 +4693,26 @@ The complete list of the supported timezones is available in the [List of IANA t
             batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
                 },
-                parameterMap: function(options, operation) {
+                parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },

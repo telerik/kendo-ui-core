@@ -45,28 +45,30 @@ How can I change the width and height of the popup editor window in the Grid?
 
 <script>
     $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
                 transport: {
-                    read: {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
+                    read:  {
+                        url: crudServiceBaseUrl + "/Products"
                     },
                     update: {
                         url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
+                        type: "POST",
+                		contentType: "application/json"
                     },
                     destroy: {
                         url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
+                        type: "POST",
+                		contentType: "application/json"
                     },
                     create: {
                         url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
+                        type: "POST",
+                		contentType: "application/json"
                     },
-                    parameterMap: function (options, operation) {
+                    parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return { models: kendo.stringify(options.models) };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

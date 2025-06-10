@@ -92,9 +92,8 @@ $("#grid").kendoGrid({
       $(document).ready(function () {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/core/Orders"
             },
             schema: {
               model: {
@@ -249,7 +248,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
           return flatValues;
         }
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+          var telerikWebServiceBase = "https://demos.telerik.com/service/v2/";
 
 
 
@@ -262,9 +261,9 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
               }
             },
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: telerikWebServiceBase + "Northwind.svc/Employees"
+                read: telerikWebServiceBase + "odata/Employees"
               },
               pageSize: 20,
               serverPaging: true,
@@ -284,8 +283,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique",
-                        dataType: "jsonp",
+                        url: telerikWebServiceBase + "Employees/Unique"
                         data: {
                           field: "FirstName"
                         }
@@ -300,8 +298,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique",
-                        dataType: "jsonp",
+                        url: telerikWebServiceBase + "Employees/Unique"
                         data: {
                           field: "LastName"
                         }
@@ -319,8 +316,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique",
-                        dataType: "jsonp",
+                        url: telerikWebServiceBase + "Employees/Unique"
                         data: {
                           field: "Country"
                         }
@@ -362,8 +358,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique",
-                        dataType: "jsonp",
+                        url: telerikWebServiceBase + "Employees/Unique"
                         data: {
                           field: "Title"
                         }

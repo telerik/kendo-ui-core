@@ -442,8 +442,7 @@ Refer to the example below for a list of the supported properties.
         var dataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {
@@ -1086,8 +1085,7 @@ Returns the ContextMenu item by the dataItem's uid.
         var dataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {
@@ -1466,8 +1464,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         var dataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {
@@ -1497,8 +1494,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         var dataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {

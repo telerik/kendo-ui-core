@@ -58,7 +58,7 @@ For a practical demonstration, refer to the example below:
 <div id="spreadsheet" style="width: 100%"></div>
     <script>
       $(function() {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         var dataSource = new kendo.data.DataSource({
           transport: {
@@ -151,9 +151,8 @@ For a practical demonstration, refer to the example below:
         function onSubmit(e) {
           $.ajax({
             url: crudServiceBaseUrl + "/Products/Submit",
-            data: { models: kendo.stringify(e.data) },
+            data: kendo.stringify(e.data),
             contentType: "application/json",
-            dataType: "jsonp",
             success: function (result) {
               e.success(result.Updated, "update");
               e.success(result.Created, "create");
@@ -168,7 +167,6 @@ For a practical demonstration, refer to the example below:
         function onRead(options) {
           $.ajax({
             url: crudServiceBaseUrl + "/Products",
-            dataType: "jsonp",
             success: function (result) {
               options.success(result);
             },

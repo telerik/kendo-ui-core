@@ -90,8 +90,7 @@ If set to `false`, the TreeList will not bind to the specified DataSource during
       var dataSource = new kendo.data.TreeListDataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
           }
         },
         schema: {
@@ -245,7 +244,7 @@ Custom commands are supported by specifying the [`click`](/api/javascript/ui/tre
       <div id="treelist"></div>
 
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             editable: true,
@@ -259,20 +258,21 @@ Custom commands are supported by specifying the [`click`](/api/javascript/ui/tre
             dataSource: {
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 create: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -512,14 +512,13 @@ If set to `true` a draghandle will be rendered and the user could reorder the ro
 
       <div id="treelist"></div>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2258,14 +2257,13 @@ The data source of the widget which is used to render table rows. Can be a JavaS
       <div id="treelist"></div>
 
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: new kendo.data.TreeListDataSource({
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2309,7 +2307,7 @@ The supported string values are:
 
       <div id="treelist"></div>
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             editable: true,
@@ -2323,16 +2321,16 @@ The supported string values are:
             dataSource: {
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -2358,7 +2356,7 @@ The supported string values are:
 
       <div id="treelist"></div>
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             editable: "popup",
@@ -2372,16 +2370,16 @@ The supported string values are:
             dataSource: {
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -2419,7 +2417,7 @@ The supported edit modes are:
 
       <div id="treelist"></div>
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             editable: {
@@ -2435,16 +2433,16 @@ The supported edit modes are:
             dataSource: {
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -2474,14 +2472,13 @@ Enables the drag-and-drop UI of rows between parents.
 
       <div id="treelist"></div>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2517,14 +2514,13 @@ If set to `true` (default), when there is a drag column for the items in the Tre
 
       <div id="treelist"></div>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2564,14 +2560,13 @@ Enables reordering of rows via a drag-and-drop UI.
 
       <div id="treelist"></div>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2632,14 +2627,13 @@ the field to which it has to bind the each editor. Alternatively, use [MVVM](/fr
         </p>
       </script>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2691,14 +2685,13 @@ the field to which it has to bind the each editor. Alternatively, use [MVVM](/fr
         </p>
       </script>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2736,14 +2729,13 @@ Configures the Kendo UI Window instance which is used when the TreeList edit mod
 
       <div id="treelist"></div>
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {
@@ -2809,8 +2801,7 @@ If set to `true` the TreeList will export all pages of data. By default the Tree
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -2849,8 +2840,7 @@ Specifies the file name of the exported Excel file.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -2888,8 +2878,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -2937,8 +2926,7 @@ The proxy will receive a POST request with the following parameters in the reque
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -3969,8 +3957,7 @@ Defines the text of the **Loading...** message when the widget loads its root-le
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory"
             }
           },
           schema: {
@@ -4856,8 +4843,7 @@ Exports all TreeList pages, starting from the first one.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -4896,8 +4882,7 @@ The author of the PDF document.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -4945,8 +4930,7 @@ The creator of the PDF document.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -4985,8 +4969,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5025,8 +5008,7 @@ Specifies the file name of the exported PDF file.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5077,8 +5059,7 @@ Specifies the keywords of the exported PDF file.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5117,8 +5098,7 @@ If set to `true`, reverses the paper dimensions in such a way that the width bec
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5169,8 +5149,7 @@ The supported units are:
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5237,8 +5216,7 @@ The supported values are:
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5283,8 +5261,7 @@ The proxy will receive a POST request with the following parameters in the reque
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5325,8 +5302,7 @@ A name or keyword whcih indicates where to display the document that was returne
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5365,8 +5341,7 @@ Sets the subject of the PDF file.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5405,8 +5380,7 @@ Sets the title of the PDF file.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -5504,8 +5478,7 @@ If set to `true`, the TreeList will display a scrollbar when the total row heigh
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -6145,26 +6118,27 @@ A string, DOM element, or a jQuery object which represents the parent table row.
 
       <div id="treelist"></div>
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             dataSource: {
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 create: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -6204,26 +6178,27 @@ A string, DOM element, or a jQuery object which represents the parent table row.
       <div id="treelist"></div>
 
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             dataSource: {
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 create: {
                   url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -6359,26 +6334,27 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
       <div id="treelist"></div>
 
       <script>
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory/All"
               },
               update: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
               },
               create: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },
@@ -6626,26 +6602,27 @@ The jQuery object which represents the table row.
       <div id="treelist"></div>
 
       <script>
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory/All"
               },
               update: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
               },
               create: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },
@@ -6845,16 +6822,16 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
       var dataSource = new kendo.data.TreeListDataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
           },
           destroy: {
-            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Destroy",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Destroy",
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function(options, operation) {
             if (operation !== "read" && options.models) {
-              return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
             }
           }
         },
@@ -6978,26 +6955,27 @@ Switches the table row which is in edit mode and saves any changes that are made
     <div id="treelist"></div>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All"
             },
             update: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             create: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },
@@ -7183,14 +7161,13 @@ When `setOptions` is called, the Treelist widget will be destroyed and recreated
 
     <div id="treelist"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -7870,14 +7847,13 @@ The model of the source row.
 
     <div id="treelist"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -7913,7 +7889,7 @@ The model of the source row.
 
     <div id="treeList"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       function dragstart(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -7924,8 +7900,7 @@ The model of the source row.
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8007,14 +7982,13 @@ Pre-defined status classes are:
 
     <div id="treelist"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8050,7 +8024,7 @@ Pre-defined status classes are:
 
     <div id="treeList"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       function drag(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -8061,8 +8035,7 @@ Pre-defined status classes are:
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8097,14 +8070,13 @@ Pre-defined status classes are:
 
     <div id="treelist"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8166,14 +8138,13 @@ The widget instance which fired the event.
 
     <div id="treelist"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8209,7 +8180,7 @@ The widget instance which fired the event.
 
     <div id="treeList"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       function dragend(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -8220,8 +8191,7 @@ The widget instance which fired the event.
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8293,14 +8263,13 @@ Both operations cancel the default drag operation but the indication to the user
 
     <div id="treelist"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8336,7 +8305,7 @@ Both operations cancel the default drag operation but the indication to the user
 
     <div id="treeList"></div>
     <script>
-      var service = "https://demos.telerik.com/kendo-ui/service";
+      var service = "https://demos.telerik.com/service/v2/core";
 
       function drop(e) {
         debugger
@@ -8348,8 +8317,7 @@ Both operations cancel the default drag operation but the indication to the user
         dataSource: {
           transport: {
             read: {
-              url: service + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: service + "/EmployeeDirectory/All"
             }
           },
           schema: {
@@ -8403,22 +8371,22 @@ The widget instance which fired the event.
     <div id="treelist"></div>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
       $("#treelist").kendoTreeList({
         dataSource: {
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All"
             },
             update: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-              dataType: "jsonp"
+              type: "POST",
+                  contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },
@@ -8458,7 +8426,7 @@ The widget instance which fired the event.
     <div id="treelist"></div>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
       function edit(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -8469,16 +8437,16 @@ The widget instance which fired the event.
         dataSource: {
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All"
             },
             update: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },
@@ -8884,16 +8852,16 @@ If invoked, prevents the removal of the data item. The table rows will remain un
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Destroy",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Destroy"
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },
@@ -8937,16 +8905,16 @@ If invoked, prevents the removal of the data item. The table rows will remain un
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Destroy",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Destroy",
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },
@@ -9012,16 +8980,16 @@ The widget instance which fired the event.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Update",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Update",
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
               }
             }
           },
@@ -9064,16 +9032,16 @@ The widget instance which fired the event.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Update",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Update",
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
               }
             }
           },

@@ -662,12 +662,11 @@ Can be set to a JavaScript object which represents the pager configuration.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/Products"
                 }
               },
               pageSize: 10
@@ -701,12 +700,11 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/Products"
                 }
               },
               pageSize: 10
@@ -742,12 +740,11 @@ If set to `true` the pager will display information about the current page and t
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/Products"
                 }
               },
               pageSize: 10
@@ -785,12 +782,11 @@ Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same ti
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/Products"
                 }
               },
               pageSize: 10
@@ -841,12 +837,11 @@ Contains three placeholders:
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/Products"
                 }
               },
               pageSize: 2
@@ -905,12 +900,10 @@ The label displayed before the pager input.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
+        var dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 2
@@ -949,12 +942,10 @@ The label displayed before the pager input. Uses [kendo.format](/api/javascript/
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
+        var dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 2
@@ -993,12 +984,11 @@ The label displayed after the page size DropDownList.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 2
@@ -1036,12 +1026,11 @@ The tooltip of the button which goes to the first page.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 10
@@ -1079,12 +1068,11 @@ The tooltip of the button which goes to the last page.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 10
@@ -1122,12 +1110,11 @@ The Tooltip of the button which goes to the next page.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 10
@@ -1165,12 +1152,11 @@ The Tooltip of the button which goes to the previous page.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 10
@@ -1208,12 +1194,11 @@ The Tooltip of the refresh button.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 10
@@ -1252,12 +1237,11 @@ The Tooltip of the ellipsis ("...") button, which appears when the number of pag
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 1
@@ -1299,12 +1283,11 @@ Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 1
@@ -1380,12 +1363,11 @@ If a `pageSize` setting is provided for the data source then this value will be 
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 1
@@ -1416,12 +1398,11 @@ If a `pageSize` setting is provided for the data source then this value will be 
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               pageSize: 2
@@ -1601,12 +1582,11 @@ If set to `false` the pager will not be responsive.
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                   }
                 },
                 pageSize: 10
@@ -1652,12 +1632,11 @@ Multiple item selection.
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                   }
                 },
                 pageSize: 10
@@ -1892,12 +1871,11 @@ Clears ListView selected items and triggers the [`change` event](/api/javascript
       $("#clearBtn").click(function(){
         $("#listView").data("kendoListView").clearSelection();
       });
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 10
@@ -2086,8 +2064,7 @@ Repaints the ListView using the data available in the DataSource.
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Products",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/Products"
             }
           },
           pageSize: 21
@@ -2234,12 +2211,11 @@ Gets/sets the selected ListView item(s).
     </script>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 10
@@ -2294,8 +2270,7 @@ The DataSource to which the widget should be bound.
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         },
         pageSize: 21
@@ -2438,12 +2413,11 @@ The event handler function context (available via the `this` keyword) will be se
     </script>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 10
@@ -2473,12 +2447,11 @@ The event handler function context (available via the `this` keyword) will be se
     </script>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 10

@@ -83,17 +83,16 @@ For a practical implementation, refer to the below runnable demo: [Kendo UI for 
     <script>
       $(document).ready(function () {
         var telerikWebServiceBase =
-          "https://demos.telerik.com/kendo-ui/service/";
+          "https://demos.telerik.com/service/v2/core/";
         $("#client").kendoGrid({
           dataSource: {
             transport: {
               read: {
-                url: telerikWebServiceBase + "/Products",
-                dataType: "jsonp",
+                url: telerikWebServiceBase + "/Products"
               },
               parameterMap: function (options, operation) {
                 if (operation !== "read" && options.models) {
-                  return { models: kendo.stringify(options.models) };
+                  return kendo.stringify(options.models);
                 }
               },
             },

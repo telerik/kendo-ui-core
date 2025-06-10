@@ -19,20 +19,16 @@ To enable the editing functionality of the Diagram:
         var dataSource = new kendo.data.DataSource({
           transport: {
             read: {
-              url: "/DiagramShapes",
-              dataType: "jsonp"
+              url: "/DiagramShapes"
             },
             update: {
-              url: "/DiagramShapes/Update",
-              dataType: "jsonp"
+              url: "/DiagramShapes/Update"
             },
             destroy: {
-              url: "/DiagramShapes/Destroy",
-              dataType: "jsonp"
+              url: "/DiagramShapes/Destroy"
             },
             create: {
-              url: "/DiagramShapes/Create",
-              dataType: "jsonp"
+              url: "/DiagramShapes/Create"
             },
             //...
     	  }
@@ -43,20 +39,16 @@ To enable the editing functionality of the Diagram:
         var connectionsDataSource = new kendo.data.DataSource({
           transport: {
             read: {
-              url: "/DiagramConnections",
-              dataType: "jsonp"
+              url: "/DiagramConnections"
             },
             update: {
-              url: "/DiagramConnections/Update",
-              dataType: "jsonp"
+              url: "/DiagramConnections/Update"
             },
             destroy: {
-              url: "/DiagramConnections/Destroy",
-              dataType: "jsonp"
+              url: "/DiagramConnections/Destroy"
             },
             create: {
-              url: "/DiagramConnections/Create",
-              dataType: "jsonp"
+              url: "/DiagramConnections/Create"
             },
             //...
     	  }

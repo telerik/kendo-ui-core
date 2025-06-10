@@ -51,8 +51,8 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/26"),
-          startTime: new Date("2022/6/26 07:00 AM"),
+          date: new Date("2025/6/26"),
+          startTime: new Date("2025/6/26 07:00 AM"),
 					views: [
             { type: "day", selected: true },
             { type: "week", selectedDateFormat: "{0:ddd,MMM dd,yyyy} - {1:ddd,MMM dd,yyyy}" },
@@ -65,24 +65,26 @@ The following example demonstrates how to achieve the desired scenario.
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                 type: "POST",
+                 contentType: "application/json"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                 type: "POST",
+                 contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                 type: "POST",
+                 contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

@@ -151,7 +151,7 @@ To consume the data from the endpoints and display it in the Grid, configure the
                },
                parameterMap: function (options, operation) {
                    if (operation !== "read" && options.models) {
-                     return { models: kendo.stringify(options.models) };
+                     return kendo.stringify(options.models);
                  }
                }
            },

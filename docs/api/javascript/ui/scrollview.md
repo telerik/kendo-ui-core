@@ -65,10 +65,10 @@ If set to `false` the widget will not bind to the DataSource during initializati
 
 
         var dataSource = new kendo.data.DataSource({
-          type: "odata",
+          type: "odata-v4",
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              url: "https://demos.telerik.com/service/v2/odata/Products"
             }
           },
           serverPaging: true,
@@ -183,11 +183,11 @@ An instance of a DataSource to which the ScrollView will be bound.
     </script>
     <script>
         var dataSource = new kendo.data.DataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                }
+              read: {
+                url: "https://demos.telerik.com/service/v2/odata/Products"
+              }
             },
             serverPaging: true,
             pageSize: 3
@@ -275,10 +275,10 @@ The template for rendering the pages without content. By default, the ScrollView
     <script>
 
     var dataSource = new kendo.data.DataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          url: "https://demos.telerik.com/service/v2/odata/Products"
         }
       },
       serverPaging: true
@@ -317,11 +317,11 @@ If set to `true`, the ScrollView will display a pager. By default, the pager is 
     </script>
     <script>
         var dataSource = new kendo.data.DataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                }
+              read: {
+                url: "https://demos.telerik.com/service/v2/odata/Products"
+              }
             },
             serverPaging: true,
             pageSize: 3
@@ -433,11 +433,11 @@ Defines the aria-label for the pager.
     </script>
     <script>
         var dataSource = new kendo.data.DataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                }
+              read: {
+                url: "https://demos.telerik.com/service/v2/odata/Products"
+              }
             },
             serverPaging: true,
             pageSize: 3
@@ -552,10 +552,10 @@ Can be set to a JavaScript object which represents the pager configuration.
     });
 
     var dataSource = new kendo.data.DataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          url: "https://demos.telerik.com/service/v2/odata/Products"
         }
       },
       serverPaging: true
@@ -590,10 +590,10 @@ Specifies a template is used to populate the aria-label for each pager element.
     });
 
     var dataSource = new kendo.data.DataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          url: "https://demos.telerik.com/service/v2/odata/Products"
         }
       },
       serverPaging: true
@@ -643,11 +643,11 @@ Sets an overlay background color for the pager. It can be configured to one of t
     </script>
     <script>
         var dataSource = new kendo.data.DataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                }
+              read: {
+                url: "https://demos.telerik.com/service/v2/odata/Products"
+              }
             },
             serverPaging: true,
             pageSize: 3
@@ -723,11 +723,11 @@ The template for rendering the content of the pages. By default, the ScrollView 
 
     $("#scrollview").kendoScrollView({
         dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                }
+              read: {
+                url: "https://demos.telerik.com/service/v2/odata/Products"
+              }
             },
             serverPaging: true,
             pageSize: 2
@@ -971,10 +971,10 @@ If invoked, prevents the change action.
     });
 
     var dataSource = new kendo.data.DataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          url: "https://demos.telerik.com/service/v2/odata/Products"
         }
       },
       serverPaging: true,

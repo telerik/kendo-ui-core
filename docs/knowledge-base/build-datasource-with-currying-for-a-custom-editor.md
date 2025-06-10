@@ -79,9 +79,8 @@ The following sample demonstrates how to create a custom data source based on th
 
         function createDataSource(id) {
           return new kendo.data.DataSource({
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/core/Categories"
             },
             change: function() {
               alert(id);

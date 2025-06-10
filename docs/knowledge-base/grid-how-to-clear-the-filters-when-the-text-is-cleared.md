@@ -62,9 +62,9 @@ In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/a
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            type: "odata",
+                            type: "odata-v4",
                             transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                                read: "https://demos.telerik.com/service/v2/odata/Orders"
                             },
                             schema: {
                                 model: {

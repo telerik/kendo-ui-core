@@ -34,193 +34,208 @@ How can I implement custom UI for editing the Diagram shapes?
 The following example demonstrates how to define a `shapeTemplate` to display a DropDownList and a ColorPicker when editing the shape values of the Diagram.
 
 ```dojo
-        <div id="diagram" style="height:600px;"></div>
+    <div id="diagram" style="height: 600px"></div>
 
-        <script id="popup-editor" type="text/x-kendo-template">
-          <h3 class="centre">Edit Shape Data</h3>
-          <div class="k-edit-label">
-            <label >Job title: </label>
-          </div>
-          <div class="k-edit-field">
-            <input name="JobTitle" data-role="dropdownlist" data-bind="value: JobTitle" data-source="titles" data-text-field="JobTitle" data-value-field="JobTitle" />
-          </div>
-          <div class="k-edit-label">
-            <label>Color: </label>
-          </div>
-          <div class="k-edit-field">
-            <input class="k-edit-field" name="Color" data-role="colorpicker" data-bind="value: Color" />
-          </div>
-        </script>
-        <script>
-          function visualTemplate(options) {
-            var dataviz = kendo.dataviz;
-            var g = new dataviz.diagram.Group();
-            var dataItem = options.dataItem;
+    <script id="popup-editor" type="text/x-kendo-template">
+      <h3 class="centre">Edit Shape Data</h3>
+      <div class="k-edit-label">
+        <label >Job title: </label>
+      </div>
+      <div class="k-edit-field">
+        <input name="JobTitle" data-role="dropdownlist" data-bind="value: JobTitle" data-source="titles" data-text-field="JobTitle" data-value-field="JobTitle" />
+      </div>
+      <div class="k-edit-label">
+        <label>Color: </label>
+      </div>
+      <div class="k-edit-field">
+        <input class="k-edit-field" name="Color" data-role="colorpicker" data-bind="value: Color" />
+      </div>
+    </script>
+    <script>
+      function visualTemplate(options) {
+        var dataviz = kendo.dataviz;
+        var g = new dataviz.diagram.Group();
+        var dataItem = options.dataItem;
 
-            if (dataItem.JobTitle === "President") {
-              g.append(new dataviz.diagram.Circle({
-                radius: 60,
-                stroke: {
-                  width: 2,
-                  color: dataItem.Color || "#586477"
-                },
-                fill: "#e8eff7"
-              }));
-            } else {
-              g.append(new dataviz.diagram.Rectangle({
-                width: 240,
-                height: 67,
-                stroke: {
-                  width: 0
-                },
-                fill: "#e8eff7"
-              }));
-
-              g.append(new dataviz.diagram.Rectangle({
-                width: 8,
-                height: 67,
-                fill: dataItem.Color,
-                stroke: {
-                  width: 0
-                }
-              }));
-            }
-
-            return g;
-          }
-
-          function onDataBound(e) {
-            var that = this;
-            setTimeout(function () {
-              that.bringIntoView(that.shapes);
-            }, 0);
-          }
-
-          function createDiagram() {
-            var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
-
-            var shapesDataSource = {
-              batch: false,
-              transport: {
-                read: {
-                  url: serviceRoot + "/DiagramShapes",
-                  dataType: "jsonp"
-                },
-                update: {
-                  url: serviceRoot + "/DiagramShapes/Update",
-                  dataType: "jsonp"
-                },
-                destroy: {
-                  url: serviceRoot + "/DiagramShapes/Destroy",
-                  dataType: "jsonp"
-                },
-                create: {
-                  url: serviceRoot + "/DiagramShapes/Create",
-                  dataType: "jsonp"
-                },
-                parameterMap: function (options, operation) {
-                  if (operation !== "read") {
-                    return { models: kendo.stringify(options.models || [options]) };
-                  }
-                }
+        if (dataItem.JobTitle === "President") {
+          g.append(
+            new dataviz.diagram.Circle({
+              radius: 60,
+              stroke: {
+                width: 2,
+                color: dataItem.Color || "#586477",
               },
-              schema: {
-                model: {
-                  id: "id",
-                  fields: {
-                    id: { from: "Id", type: "number", editable: false },
-                    JobTitle: { type: "string" },
-                    Color: { type: "string", defaultValue: "#fff",
-                            parse: function(val){
-                      				return val== "" ? "#fff" : val;
-														}
-                           }
-                  }
-                }
+              fill: "#e8eff7",
+            }),
+          );
+        } else {
+          g.append(
+            new dataviz.diagram.Rectangle({
+              width: 240,
+              height: 67,
+              stroke: {
+                width: 0,
+              },
+              fill: "#e8eff7",
+            }),
+          );
+
+          g.append(
+            new dataviz.diagram.Rectangle({
+              width: 8,
+              height: 67,
+              fill: dataItem.Color,
+              stroke: {
+                width: 0,
+              },
+            }),
+          );
+        }
+
+        return g;
+      }
+
+      function onDataBound(e) {
+        var that = this;
+        setTimeout(function () {
+          that.bringIntoView(that.shapes);
+        }, 0);
+      }
+
+      function createDiagram() {
+        var serviceRoot =
+          "https://demos.telerik.com/service/v2/core";
+
+        var shapesDataSource = {
+          batch: false,
+          transport: {
+            read: {
+              url: serviceRoot + "/DiagramShapes",
+            },
+            update: {
+              url: serviceRoot + "/DiagramShapes/Update",
+              type: "POST",
+              contentType: "application/json",
+            },
+            destroy: {
+              url: serviceRoot + "/DiagramShapes/Destroy",
+              type: "POST",
+              contentType: "application/json",
+            },
+            create: {
+              url: serviceRoot + "/DiagramShapes/Create",
+              type: "POST",
+              contentType: "application/json",
+            },
+            parameterMap: function (options, operation) {
+              if (operation !== "read") {
+                return kendo.stringify(options.models || [options]);
               }
-            };
-
-            var connectionsDataSource = {
-              batch: false,
-              transport: {
-                read: {
-                  url: serviceRoot + "/DiagramConnections",
-                  dataType: "jsonp"
+            },
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { from: "Id", type: "number", editable: false },
+                JobTitle: { type: "string" },
+                Color: {
+                  type: "string",
+                  defaultValue: "#fff",
+                  parse: function (val) {
+                    return val == "" ? "#fff" : val;
+                  },
                 },
-                update: {
-                  url: serviceRoot + "/DiagramConnections/Update",
-                  dataType: "jsonp"
-                },
-                destroy: {
-                  url: serviceRoot + "/DiagramConnections/Destroy",
-                  dataType: "jsonp"
-                },
-                create: {
-                  url: serviceRoot + "/DiagramConnections/Create",
-                  dataType: "jsonp"
-                },
-                parameterMap: function (options, operation) {
-                  if (operation !== "read") {
-                    return { models: kendo.stringify(options.models || [options]) };
-                  }
-                }
               },
-              schema: {
-                model: {
-                  id: "id",
-                  fields: {
-                    id: { from: "Id", type: "number", editable: false },
-                    from: { from: "FromShapeId", type: "number" },
-                    to: { from: "ToShapeId", type: "number" },
-                    fromX: { from: "FromPointX", type: "number" },
-                    fromY: { from: "FromPointY", type: "number" },
-                    toX: { from: "ToPointX", type: "number" },
-                    toY: { from: "ToPointY", type: "number" }
-                  }
-                }
+            },
+          },
+        };
+
+        var connectionsDataSource = {
+          batch: false,
+          transport: {
+            read: {
+              url: serviceRoot + "/DiagramConnections",
+            },
+            update: {
+              url: serviceRoot + "/DiagramConnections/Update",
+              type: "POST",
+              contentType: "application/json",
+            },
+            destroy: {
+              url: serviceRoot + "/DiagramConnections/Destroy",
+              type: "POST",
+              contentType: "application/json",
+            },
+            create: {
+              url: serviceRoot + "/DiagramConnections/Create",
+              type: "POST",
+              contentType: "application/json",
+            },
+            parameterMap: function (options, operation) {
+              if (operation !== "read") {
+                return kendo.stringify(options.models || [options]);
               }
-            };
+            },
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { from: "Id", type: "number", editable: false },
+                from: { from: "FromShapeId", type: "number" },
+                to: { from: "ToShapeId", type: "number" },
+                fromX: { from: "FromPointX", type: "number" },
+                fromY: { from: "FromPointY", type: "number" },
+                toX: { from: "ToPointX", type: "number" },
+                toY: { from: "ToPointY", type: "number" },
+              },
+            },
+          },
+        };
 
-            $("#diagram").kendoDiagram({
-              dataSource: shapesDataSource,
-              connectionsDataSource: connectionsDataSource,
-              editable: {
-                shapeTemplate: kendo.template($("#popup-editor").html())
-              },
-              layout: {
-                type: "layered"
-              },
-              shapeDefaults: {
-                visual: visualTemplate,
-                content: {
-                  template: "#= dataItem.JobTitle #",
-                  fontSize: 17
-                }
-              },
-              connectionDefaults: {
-                stroke: {
-                  color: "#586477",
-                  width: 2
-                }
-              },
-              dataBound: onDataBound
-            });
-          }
-          var titles = [{JobTitle: "Relations Manager"},
-                      {JobTitle: "Accountant"},
-                      {JobTitle: "Budget Analyst"},
-                      {JobTitle: "Technical Support Manager"},
-                      {JobTitle: "Compensation Manager"},
-                      {JobTitle: "Payrol Specialist"},
-                      {JobTitle: "VP Finance"},
-                      {JobTitle: "VP Human Resources"},
-                      {JobTitle: "VP Customer Relations"},
-                      {JobTitle: "President"},];
-          $(document).ready(createDiagram);
-        </script>
-        <style>
-         .centre {
-           text-align:center;
-         }
-        </style>
+        $("#diagram").kendoDiagram({
+          dataSource: shapesDataSource,
+          connectionsDataSource: connectionsDataSource,
+          editable: {
+            shapeTemplate: kendo.template($("#popup-editor").html()),
+          },
+          layout: {
+            type: "layered",
+          },
+          shapeDefaults: {
+            visual: visualTemplate,
+            content: {
+              template: "#= dataItem.JobTitle #",
+              fontSize: 17,
+            },
+          },
+          connectionDefaults: {
+            stroke: {
+              color: "#586477",
+              width: 2,
+            },
+          },
+          dataBound: onDataBound,
+        });
+      }
+      var titles = [
+        { JobTitle: "Relations Manager" },
+        { JobTitle: "Accountant" },
+        { JobTitle: "Budget Analyst" },
+        { JobTitle: "Technical Support Manager" },
+        { JobTitle: "Compensation Manager" },
+        { JobTitle: "Payrol Specialist" },
+        { JobTitle: "VP Finance" },
+        { JobTitle: "VP Human Resources" },
+        { JobTitle: "VP Customer Relations" },
+        { JobTitle: "President" },
+      ];
+      $(document).ready(createDiagram);
+    </script>
+    <style>
+      .centre {
+        text-align: center;
+      }
+    </style>
 ```

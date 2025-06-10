@@ -29,9 +29,8 @@ The following example demonstrates how to create an Excel workbook based on the 
 ```dojo
     <script>
       var ds = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
           model: {

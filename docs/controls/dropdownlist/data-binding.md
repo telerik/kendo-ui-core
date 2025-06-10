@@ -49,9 +49,8 @@ To initialize the DropDownList by binding the widget to remote data arrays and t
                 dataTextField: "ContactName",
                 dataValueField: "CustomerID",
                 dataSource: {
-                    type: "odata", // specifies data protocol
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     }
                 }
             });

@@ -43,7 +43,7 @@ It also addresses the following important issues:
                 '<head>' +
                 '<meta charset="utf-8" />' +
                 '<title>Kendo UI Grid</title>' +
-                '<link href="https://kendo.cdn.telerik.com/themes/' + {{site.themesCdnVersion}} + '/default/default-main.css" rel="stylesheet" /> ' +
+                '<link href="https://kendo.cdn.telerik.com/themes/{{site.themesCdnVersion}}/default/default-main.css" rel="stylesheet" /> ' +
                 '<style>' +
                 'html { font: 11pt sans-serif; }' +
                 '.k-grid { border-top-width: 0; }' +
@@ -83,9 +83,9 @@ It also addresses the following important issues:
         $(function () {
             var grid = $('#grid').kendoGrid({
                 dataSource: {
-                    type: 'odata',
+                    type: 'odata-v4',
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                        read: "https://demos.telerik.com/service/v2/odata/Products"
                     },
                     pageSize: 20,
                     serverPaging: true,

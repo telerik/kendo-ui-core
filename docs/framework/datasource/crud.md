@@ -605,8 +605,7 @@ When you use custom transport, the create, update, and delete operations will be
         transport: {
             read:  function(options){
                 $.ajax({
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp",
+                    url: "https://demos.telerik.com/service/v2/core/products",
                     success: function(result) {
                         options.success(result);
                     },

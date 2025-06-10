@@ -56,8 +56,7 @@ The header template manages the way the popup header of a MultiColumnComboBox is
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -89,8 +88,7 @@ The footer template manages the way the popup footer of a MultiColumnComboBox is
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -121,8 +119,7 @@ The MultiColumnComboBox widget displays `noDataTemplate` in the popup when the d
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }

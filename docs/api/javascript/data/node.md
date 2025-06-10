@@ -105,8 +105,7 @@ Loads the child nodes in the child data source and supplies the `id` of the `Nod
     var dataSource = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Employees"
             }
         },
       schema: {
@@ -132,8 +131,7 @@ Gets or sets the loaded flag of the `Node`. Setting the loaded flag to `false` a
     var dataSource = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Employees"
             }
         },
       schema: {

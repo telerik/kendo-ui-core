@@ -48,12 +48,12 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
 <script>
     $(document).ready(function() {
         var OrderDetails = {
-            type: "odata",
+            type: "odata-v4",
             transport: {
                 read: {
                     url: function(options) {
                         return kendo.format(
-                            "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products({0})/Order_Details",
+                            "https://demos.telerik.com/service/v2/odata/Products({0})/Order_Details",
                             options.ProductID
                         );
                     }
@@ -69,7 +69,7 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
         };
 
         var Products = {
-            type: "odata",
+            type: "odata-v4",
             schema: {
                 model: {
                     id: "ProductID",
@@ -81,7 +81,7 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
                 read: {
                     url: function(options) {
                         return kendo.format(
-                            "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories({0})/Products",
+                            "https://demos.telerik.com/service/v2/odata/Categories({0})/Products",
                             options.CategoryID
                         );
                     }
@@ -90,10 +90,10 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
         };
 
         var Categories = new kendo.data.HierarchicalDataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                    url: "https://demos.telerik.com/service/v2/odata/Categories"
                 }
             },
             schema: {

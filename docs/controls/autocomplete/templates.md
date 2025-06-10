@@ -33,8 +33,7 @@ The following example demonstrates how to define an item template.
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -61,8 +60,7 @@ The header template manages the way the popup header of an AutoComplete is rende
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -89,8 +87,7 @@ The footer template manages the way the popup footer of an AutoComplete is rende
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -119,8 +116,7 @@ The AutoComplete displays `noDataTemplate` in the popup when the data source is 
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }

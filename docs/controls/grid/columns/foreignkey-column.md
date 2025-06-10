@@ -49,9 +49,8 @@ columns:[{
         dataTextField: "CategoryName",
         dataValueField: "CategoryID",
         dataSource: {
-                        type: "odata",
                         transport: {
-                            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                            read: "https://demos.telerik.com/service/v2/core/Categories"
                         }
                     },
         title: "Category" 

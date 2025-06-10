@@ -97,8 +97,7 @@ The following example demonstrates how to display the `Chai` option in the Multi
           dataSource: {
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
               }
             }
           }
@@ -134,8 +133,7 @@ The following example demonstrates how to display `Chai` and `Mishi Kobe Niku` a
           dataSource: {
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
               }
             }
           }

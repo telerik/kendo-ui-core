@@ -59,9 +59,8 @@ To achieve the desired scenarion, use the following suggested implemetation. Not
         }];
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/core/Products"
             },
             schema:{
               model: {

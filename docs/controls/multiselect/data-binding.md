@@ -59,8 +59,7 @@ To initialize the MultiSelect by binding the component to remote data arrays and
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -83,11 +82,11 @@ The following example demonstrates how to preselect values on initial loading.
                 dataTextField: "Name",
                 dataValueField: "Id",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                            url: "https://demos.telerik.com/service/v2/odata/Products",
                         }
                     }
                 },

@@ -24,13 +24,12 @@ As of Kendo UI R2 SP1 2023,the TreeList's Column Menu provides an option to chan
       <div id="treelist"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           var dataSource = new kendo.data.TreeListDataSource({
             transport: {
               read: {
-                url: crudServiceBaseUrl + "/EmployeeDirectory",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory"
               }
             },
             schema: {

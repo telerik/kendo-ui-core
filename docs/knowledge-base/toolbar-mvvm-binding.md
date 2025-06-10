@@ -81,20 +81,21 @@ The following example demonstrates how to create a [custom MVVM binding](/framew
             batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products/update",
+                     type: "POST",
+                 contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products/create",
+                     type: "POST",
+                 contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             }

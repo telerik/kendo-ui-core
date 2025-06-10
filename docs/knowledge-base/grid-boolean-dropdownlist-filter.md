@@ -91,8 +91,7 @@ The following example demonstrates the full implementation of the suggested appr
           dataSource: {
             transport: {
               read:  {
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Products"
               }
             },
             schema: {

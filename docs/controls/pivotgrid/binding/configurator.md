@@ -43,7 +43,7 @@ The following example demonstrates how to configure the PivotConfigurator.
                             cube: "Adventure Works"
                         },
                         read: {
-                            url: "https://demos.telerik.com/olap/msmdpump.dll",
+                            url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                             dataType: "text",
                             contentType: "text/xml",
                             type: "POST"

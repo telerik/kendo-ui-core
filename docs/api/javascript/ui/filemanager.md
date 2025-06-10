@@ -20,14 +20,14 @@ Configures the width of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             width: 500,
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -43,14 +43,14 @@ Configures the height of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             height: 500,
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -66,14 +66,14 @@ Configures the initial view of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             initialView: "grid",
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -89,14 +89,14 @@ Configures the resizable features of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             resizable: false,
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -112,14 +112,14 @@ Enables or disables the drag and drop features of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             draggable: false,
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -138,25 +138,25 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     },
                     update: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Update"
                     },
                     create: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Create"
                     },
                     destroy: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Destroy"
                     }
                 }
@@ -168,7 +168,7 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dataSource: {
@@ -178,7 +178,6 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Read",
-                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -191,7 +190,6 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Update",
-                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -204,7 +202,6 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Update",
-                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -217,7 +214,6 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Destroy",
-                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -283,14 +279,14 @@ Sets the upload url for the Upload widget.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             uploadUrl: baseUrl + "Upload",
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -355,7 +351,7 @@ Configures the items collection of the toolbar.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             toolbar: {
@@ -373,7 +369,7 @@ Configures the items collection of the toolbar.
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -509,7 +505,7 @@ Configures the Upload dialog - [kendoDialog](/api/javascript/ui/dialog)
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dialogs: {
@@ -520,7 +516,7 @@ Configures the Upload dialog - [kendoDialog](/api/javascript/ui/dialog)
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -536,7 +532,7 @@ Configures the Move (when drag/drop action is performed) dialog - [kendoConfirm]
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dialogs: {
@@ -547,7 +543,7 @@ Configures the Move (when drag/drop action is performed) dialog - [kendoConfirm]
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -563,7 +559,7 @@ Configures the Delete dialog - [kendoConfirm](/api/javascript/ui/confirm)
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dialogs: {
@@ -574,7 +570,7 @@ Configures the Delete dialog - [kendoConfirm](/api/javascript/ui/confirm)
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -590,7 +586,7 @@ Configures the Rename dialog - [kendoPrompt](/api/javascript/ui/prompt)
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dialogs: {
@@ -601,7 +597,7 @@ Configures the Rename dialog - [kendoPrompt](/api/javascript/ui/prompt)
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -617,14 +613,14 @@ Configures the ContextMenu of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             contextMenu: false,
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -640,7 +636,7 @@ Configures the items of the ContextMenu.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             contextMenu: {
@@ -651,7 +647,7 @@ Configures the items of the ContextMenu.
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -676,7 +672,7 @@ Specifies the icon of the item.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             contextMenu: {
@@ -690,7 +686,7 @@ Specifies the icon of the item.
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -705,18 +701,18 @@ Specifies the command of the item.
 
 	<div id="fileManager"></div>
     <script>
-      var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+      var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
       $("#fileManager").kendoFileManager({
         height: 500,
         dataSource: {
           transport: {
             read: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Read"
             },
             destroy: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Destroy"
             }
           }
@@ -763,7 +759,7 @@ Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/co
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             contextMenu: {
@@ -774,7 +770,7 @@ Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/co
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -794,7 +790,7 @@ Configures the built-in grid view - accepts [kendoGrid options](/api/javascript/
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             views: {
@@ -805,7 +801,7 @@ Configures the built-in grid view - accepts [kendoGrid options](/api/javascript/
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -821,7 +817,7 @@ Configures the built-in list view (thumbnails) - accepts [kendoListView options]
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             views: {
@@ -832,7 +828,7 @@ Configures the built-in list view (thumbnails) - accepts [kendoListView options]
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -848,7 +844,7 @@ Configures the built-in tree view - accepts [kendoTreeView options](/api/javascr
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             views: {
@@ -859,7 +855,7 @@ Configures the built-in tree view - accepts [kendoTreeView options](/api/javascr
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -879,7 +875,7 @@ Configures the meta fields to be showed in the preview pane.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             previewPane: {
@@ -888,7 +884,7 @@ Configures the meta fields to be showed in the preview pane.
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -913,14 +909,14 @@ Configures or disables the Breadcrumb component.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             breadcrumb: false,
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -941,7 +937,7 @@ Defines the text of the localizable UI parts of the FileManager.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             messages: {
@@ -1016,7 +1012,7 @@ Defines the text of the localizable UI parts of the FileManager.
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     }
                 }
@@ -1382,19 +1378,19 @@ The command arguments.
           schema: kendo.data.schemas.filemanager,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
               method: "POST"
             },
             create: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
               method: "POST"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
               method: "POST"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
               method: "POST"
             }
           }
@@ -1431,14 +1427,14 @@ Gets the selected files (the JSON representation of the files).
     <div id="fileManager"></div>
 
     <script>
-      var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+      var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
       $("#fileManager").kendoFileManager({
         width: 500,
         dataSource: {
           transport: {
             read: {
-              type: "post",
+              method: "POST",
               url: baseUrl + "Read"
             }
           }
@@ -1476,25 +1472,25 @@ Sets the dataSource of an existing FileManager and rebinds it.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dataSource: {
             transport: {
                 read: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Read"
                 },
                 update: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Update"
                 },
                 create: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Create"
                 },
                 destroy: {
-                type: "post",
+                method: "POST",
                 url: baseUrl + "Destroy"
                 }
             }
@@ -1623,7 +1619,7 @@ The error message.
             schema: kendo.data.schemas.filemanager,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
                 method: "POST"
               }
             }
@@ -1670,7 +1666,7 @@ Fired when the widget is bound to data from its data source.
 
     <div id="filemanager"></div>
     <script>
-    var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+    var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
             $("#filemanager").kendoFileManager({
                 dataSource: {
@@ -1765,25 +1761,25 @@ The returned response by the service.
 
     <div id="fileManager"></div>
     <script>
-        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
 
         $("#fileManager").kendoFileManager({
             dataSource: {
                 transport: {
                     read: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Read"
                     },
                     update: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Update"
                     },
                     create: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Create"
                     },
                     destroy: {
-                        type: "post",
+                        method: "POST",
                         url: baseUrl + "Destroy"
                     }
                 }

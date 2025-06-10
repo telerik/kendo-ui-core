@@ -81,9 +81,9 @@ Add an empty column to the Grid. You can manually calculate its width, so that i
 
     $("#grid1").kendoGrid({
         dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 6,
             serverPaging: true,

@@ -52,12 +52,11 @@ The value template manages the way the selected items in the input area of the D
     </script>
 
     <script>
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         var myDataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                url: serviceRoot + "/Employees",
-                dataType: "jsonp"
+                url: serviceRoot + "/Employees"
                 }
             },
             schema: {
@@ -110,16 +109,13 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
     <strong>this is footer</strong>
     </script>
 
-    <script>
-    var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
-
+    <script>  
     $("#dropdowntree").kendoDropDownTree({
         footerTemplate: $("#footerTemplate").html(),
         dataSource: {
         transport: {
             read: {
-            dataType: "jsonp",
-            url: "https://demos.telerik.com/kendo-ui/service/Employees"
+            url: "https://demos.telerik.com/service/v2/core/Employees"
             }
         },
         schema: {
@@ -146,7 +142,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
     </script>
 
     <script>
-    var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+    var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
     $("#dropdowntree").kendoDropDownTree({
         noDataTemplate: $("#noDataTemplate").html(),
@@ -154,8 +150,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
         dataSource: {
         transport: {
             read: {
-            dataType: "jsonp",
-            url: "https://demos.telerik.com/kendo-ui/service/Employees"
+            url: "https://demos.telerik.com/service/v2/core/Employees"
             }
         },
         schema: {

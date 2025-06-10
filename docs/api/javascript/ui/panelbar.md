@@ -421,8 +421,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
     var dataSource = new kendo.data.HierarchicalDataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Employees",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/Employees"
         }
       },
       schema: {
@@ -1277,8 +1276,7 @@ The new dataSource that the widget will bind to
      var ds = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {

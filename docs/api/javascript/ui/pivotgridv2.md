@@ -37,7 +37,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSourceV2](/api/ja
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -57,7 +57,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSourceV2](/api/ja
                 catalog: "Adventure Works DW 2008R2",
                 cube: "Adventure Works"
             },
-            read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
         }
     });
 
@@ -91,7 +91,7 @@ data source is fired. By default the widget will bind to the data source specifi
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -120,7 +120,7 @@ If set to `true` the user could navigate the component using the keyboard naviga
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -156,7 +156,7 @@ Specifies the file name of the exported Excel file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -193,7 +193,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -246,7 +246,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "https://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -287,7 +287,7 @@ The author of the PDF document.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -326,7 +326,7 @@ The creator of the PDF document.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -355,7 +355,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -384,7 +384,7 @@ Specifies the file name of the exported PDF file.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -424,7 +424,7 @@ Specifies the keywords of the exported PDF file.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -453,7 +453,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -488,7 +488,7 @@ units are "mm", "cm", "in" and "pt" (default).
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -543,7 +543,7 @@ Supported values:
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -585,7 +585,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -619,7 +619,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -648,7 +648,7 @@ Sets the subject of the PDF file.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -677,7 +677,7 @@ Sets the title of the PDF file.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -705,7 +705,7 @@ The width of the table columns. Value is treated as pixels.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -731,7 +731,7 @@ The height of the PivotGridV2. Numeric values are treated as pixels.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -753,7 +753,7 @@ The height of the PivotGridV2. Numeric values are treated as pixels.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -794,7 +794,7 @@ For information about the tuple structure check this [link](/api/javascript/data
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -840,7 +840,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -875,7 +875,7 @@ The fields which can be used in the template are:
                         cube: "Adventure Works"
                     },
                     read: {
-                        url: "https://demos.telerik.com/olap/msmdpump.dll",
+                        url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                         dataType: "text",
                         contentType: "text/xml",
                         type: "POST"
@@ -918,7 +918,7 @@ The fields which can be used in the template are:
                         cube: "Adventure Works"
                     },
                     read: {
-                        url: "https://demos.telerik.com/olap/msmdpump.dll",
+                        url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                         dataType: "text",
                         contentType: "text/xml",
                         type: "POST"
@@ -966,7 +966,7 @@ For information about the tuple structure check this [link](/api/javascript/data
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -998,7 +998,7 @@ The [data source](/api/javascript/data/pivotdatasourcev2) of the widget. Configu
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1051,7 +1051,7 @@ The fields of the result object:
                         catalog: "Adventure Works DW 2008R2",
                         cube: "Adventure Works"
                     },
-                    read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                    read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                 }
             }
         }).data("kendoPivotGridV2");
@@ -1105,7 +1105,7 @@ The fields of the result object:
                         catalog: "Adventure Works DW 2008R2",
                         cube: "Adventure Works"
                     },
-                    read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                    read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                 }
             }
         }).data("kendoPivotGridV2");
@@ -1141,7 +1141,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1169,7 +1169,7 @@ Renders all content using the current data items.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1203,7 +1203,7 @@ The data source to which the widget should be bound.
                         catalog: "Adventure Works DW 2008R2",
                         cube: "Adventure Works"
                     },
-                    read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                    read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                 }
             }
         });
@@ -1217,7 +1217,7 @@ The data source to which the widget should be bound.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         });
 
@@ -1253,7 +1253,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1301,7 +1301,7 @@ The widget instance which fired the event.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1327,7 +1327,7 @@ The widget instance which fired the event.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1367,7 +1367,7 @@ The widget instance which fired the event.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1394,7 +1394,7 @@ The widget instance which fired the event.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1446,7 +1446,7 @@ The path to the field that will be expanded.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1473,7 +1473,7 @@ The path to the field that will be expanded.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1525,7 +1525,7 @@ The path to the field that will be collapsed.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1552,7 +1552,7 @@ The path to the field that will be collapsed.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1598,7 +1598,7 @@ A promise that will be resolved when the export completes.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1622,7 +1622,7 @@ A promise that will be resolved when the export completes.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });

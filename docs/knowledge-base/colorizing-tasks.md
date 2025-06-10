@@ -40,17 +40,17 @@ How can I colorize each task based on a condition in the Kendo UI for jQuery Gan
 The following example demonstrates how to achieve the desired behavior.
 
 ```dojo
-    <div id="gantt"></div>
+     <div id="gantt"></div>
 
     <script>
       function onDataBound() {
         var gantt = this;
 
-        gantt.element.find(".k-task").each(function(e) {
+        gantt.element.find(".k-task").each(function (e) {
           var dataItem = gantt.dataSource.getByUid($(this).attr("data-uid"));
 
           // Colorize the task per business requirement.
-          if (dataItem.percentComplete < .5) {
+          if (dataItem.percentComplete < 0.5) {
             this.style.backgroundColor = "#f99";
           } else {
             this.style.backgroundColor = "#9f9";
@@ -58,74 +58,92 @@ The following example demonstrates how to achieve the desired behavior.
         });
       }
 
-      $(document).ready(function() {
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      $(document).ready(function () {
         var tasksDataSource = new kendo.data.GanttDataSource({
           batch: false,
           transport: {
             read: {
-              url: serviceRoot + "/GanttTasks",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttTasks",
             },
             update: {
-              url: serviceRoot + "/GanttTasks/Update",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttTasks/Update",
+              type: "POST",
+              contentType: "application/json",
+              timeout: 5000,
             },
             destroy: {
-              url: serviceRoot + "/GanttTasks/Destroy",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttTasks/Destroy",
+              type: "POST",
+              contentType: "application/json",
+              timeout: 5000,
             },
             create: {
-              url: serviceRoot + "/GanttTasks/Create",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttTasks/Create",
+              type: "POST",
+              contentType: "application/json",
+              timeout: 5000,
             },
-            parameterMap: function(options, operation) {
+            parameterMap: function (options, operation) {
               if (operation !== "read") {
-                return { models: kendo.stringify(options.models || [options]) };
+                return kendo.stringify(options.models || [options]);
               }
-            }
+            },
           },
           schema: {
             model: {
               id: "id",
               fields: {
                 id: { from: "ID", type: "number" },
-                orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                parentId: { from: "ParentID", type: "number", defaultValue: null },
+                orderId: {
+                  from: "OrderID",
+                  type: "number",
+                  validation: { required: true },
+                },
+                parentId: {
+                  from: "ParentID",
+                  type: "number",
+                  defaultValue: null,
+                },
                 start: { from: "Start", type: "date" },
                 end: { from: "End", type: "date" },
                 title: { from: "Title", defaultValue: "", type: "string" },
                 percentComplete: { from: "PercentComplete", type: "number" },
                 summary: { from: "Summary", type: "boolean" },
-                expanded: { from: "Expanded", type: "boolean", defaultValue: true }
-              }
-            }
-          }
+                expanded: {
+                  from: "Expanded",
+                  type: "boolean",
+                  defaultValue: true,
+                },
+              },
+            },
+          },
         });
 
         var dependenciesDataSource = new kendo.data.GanttDependencyDataSource({
           transport: {
             read: {
-              url: serviceRoot + "/GanttDependencies",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttDependencies",
             },
             update: {
-              url: serviceRoot + "/GanttDependencies/Update",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttDependencies/Update",
+              type: "POST",
+              contentType: "application/json",
             },
             destroy: {
-              url: serviceRoot + "/GanttDependencies/Destroy",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttDependencies/Destroy",
+              type: "POST",
+              contentType: "application/json",
             },
             create: {
-              url: serviceRoot + "/GanttDependencies/Create",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/GanttDependencies/Create",
+              type: "POST",
+              contentType: "application/json",
             },
-            parameterMap: function(options, operation) {
-              if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+            parameterMap: function (options, operation) {
+              if (operation !== "read") {
+                return kendo.stringify(options.models || [options]);
               }
-            }
+            },
           },
           schema: {
             model: {
@@ -134,25 +152,35 @@ The following example demonstrates how to achieve the desired behavior.
                 id: { from: "ID", type: "number" },
                 predecessorId: { from: "PredecessorID", type: "number" },
                 successorId: { from: "SuccessorID", type: "number" },
-                type: { from: "Type", type: "number" }
-              }
-            }
-          }
+                type: { from: "Type", type: "number" },
+              },
+            },
+          },
         });
 
         $("#gantt").kendoGantt({
           dataSource: tasksDataSource,
           dependencies: dependenciesDataSource,
-          views: [
-            "day",
-            { type: "week", selected: true },
-            "month"
-          ],
+          views: ["day", { type: "week", selected: true }, "month"],
           columns: [
             { field: "id", title: "ID", width: 50 },
             { field: "title", title: "Title", editable: true, sortable: true },
-            { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true },
-            { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true }
+            {
+              field: "start",
+              title: "Start Time",
+              format: "{0:MM/dd/yyyy}",
+              width: 100,
+              editable: true,
+              sortable: true,
+            },
+            {
+              field: "end",
+              title: "End Time",
+              format: "{0:MM/dd/yyyy}",
+              width: 100,
+              editable: true,
+              sortable: true,
+            },
           ],
           height: 700,
 
@@ -161,10 +189,9 @@ The following example demonstrates how to achieve the desired behavior.
 
           snap: false,
 
-          dataBound: onDataBound
+          dataBound: onDataBound,
         });
       });
-
     </script>
 ```
 

@@ -51,9 +51,8 @@ The following example demonstrates how to bind the AutoComplete to a remote data
             minLength: 3,
             dataTextField: "ContactName", // JSON property name to use
             dataSource: new kendo.data.DataSource({
-                type: "odata", // specifies data protocol
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 }
             })
         });

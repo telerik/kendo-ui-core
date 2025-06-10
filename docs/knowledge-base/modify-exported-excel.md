@@ -52,7 +52,7 @@ The following example demonstrates how to achieve this behavior.
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                 excel: {
                     fileName: "Kendo UI PivotGrid Export.xlsx",
-                    proxyURL: "//demos.telerik.com/kendo-ui/service/export",
+                    proxyURL: "https://demos.telerik.com/service/v2/core/export",
                     filterable: true
                 },
                 excelExport: function(e) {

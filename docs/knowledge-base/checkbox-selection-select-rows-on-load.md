@@ -45,8 +45,7 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
                     pageSize: 10,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/Products",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/Products"
                         }
                     },
                     schema: {

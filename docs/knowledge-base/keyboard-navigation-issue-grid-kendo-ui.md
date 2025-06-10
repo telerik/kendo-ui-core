@@ -37,9 +37,8 @@ Here is an example of how you can implement this workaround:
           if (kendo.support.browser.msie !== true) {
             $("#grid").kendoGrid({
               dataSource: {
-                type: "odata",
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                  read: "https://demos.telerik.com/service/v2/core/Orders"
                 },
                 schema: {
                   model: {

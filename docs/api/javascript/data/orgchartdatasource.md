@@ -68,8 +68,7 @@ The field the items should be grouped by.
       var dataSource = new kendo.data.OrgChartDataSource({
           transport: {
                   read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
               }
           },
           schema: {
@@ -150,8 +149,7 @@ The parent item for which the tree should be created. If this parameter is not s
       var dataSource = new kendo.data.OrgChartDataSource({
           transport: {
                   read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
               }
           },
           schema: {

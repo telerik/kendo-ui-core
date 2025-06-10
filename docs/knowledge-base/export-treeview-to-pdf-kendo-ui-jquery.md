@@ -92,12 +92,11 @@ Below is a sample runnable example demonstrating how to export the TreeView to P
           themeColor: 'success'
         });
 
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         homogeneous = new kendo.data.HierarchicalDataSource({
           transport: {
             read: {
-              url: serviceRoot + "/Employees",
-              dataType: "jsonp",
+              url: serviceRoot + "/Employees"
             },
           },
           schema: {

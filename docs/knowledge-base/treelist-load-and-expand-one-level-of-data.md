@@ -56,13 +56,12 @@ To load the Kendo UI TreeList expanded initially up to a certain point(level in 
       <script>
         $(document).ready(function () {
 
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
                     var dataSource = new kendo.data.TreeListDataSource({
                             transport: {
                                 read: {
-                                    url: crudServiceBaseUrl + "/EmployeeDirectory",
-                                    dataType: "jsonp"
+                                    url: crudServiceBaseUrl + "/EmployeeDirectory"
                                 }
                             },
                             schema: {

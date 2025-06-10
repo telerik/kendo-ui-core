@@ -76,13 +76,12 @@ The following example demonstrates how to achieve the desired scenario.
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+          proxyURL: "https://demos.telerik.com/service/v2/core/export"
         },
         dataSource: {
-          type: "odata",
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+              url: "https://demos.telerik.com/service/v2/core/Employees",
             }
           }
         },

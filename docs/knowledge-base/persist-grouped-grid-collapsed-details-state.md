@@ -48,8 +48,7 @@ The following example demonstrates how to persist the collapsed state of grouped
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Products"
               }
             },
             pageSize: 20,

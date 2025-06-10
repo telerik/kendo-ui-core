@@ -116,10 +116,9 @@ The following example demonstrates how to use dates inside a Grid row template.
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+                  url: "hhttps://demos.telerik.com/service/v2/core/Employees",
                 }
               }
             },

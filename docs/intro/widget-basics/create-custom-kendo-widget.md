@@ -390,9 +390,8 @@ kendo.cssProperties.propertyDictionary["CustomMultiSelect"] = kendo.cssPropertie
           })(jQuery);
 
           var dataSource = new kendo.data.DataSource({
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/core/Products"
             }
           });
 

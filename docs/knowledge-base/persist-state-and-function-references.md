@@ -57,9 +57,8 @@ Just before you pass the options to the [`setOptions`](https://docs.telerik.com/
         $(document).ready(function () {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               pageSize: 20
             },
