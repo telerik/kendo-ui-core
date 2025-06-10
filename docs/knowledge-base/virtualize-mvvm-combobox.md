@@ -53,9 +53,9 @@ Specify the `itemHeight` and the `valueMapper` in the `data-virtual` attribute o
 $(document).ready(function() {
         var model = kendo.observable({
         source: new kendo.data.DataSource({
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 schema: {
                         model: {
@@ -79,9 +79,8 @@ $(document).ready(function() {
 
 function orderValueMapper(options) {
         $.ajax({
-                url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
                 type: "GET",
-                dataType: "jsonp",
                 data: convertValues(options.value),
                 success: function (data) {
                 options.success(data);

@@ -59,7 +59,7 @@ I am returning errors from server and catch it in kendo datasource error event. 
 
 ###### Example - the update response contains errors which trigger the error event of the dataSource
 
-```dojo
+```
 <div id="grid"></div>
     <script>
       var dataSource = new kendo.data.DataSource({

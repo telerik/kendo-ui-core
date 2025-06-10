@@ -66,83 +66,86 @@ The following example demonstrates how to bind the component to a remote service
         dataSource: {
           batch: true, // Enable the batch updates.
           transport: {
-            read: {
-              url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
-              dataType: "jsonp"
-            },
-            update: {
-              url: "https://demos.telerik.com/kendo-ui/service/gantttasks/update",
-              dataType: "jsonp"
-            },
-            create: {
-              url: "https://demos.telerik.com/kendo-ui/service/gantttasks/create",
-              dataType: "jsonp"
-            },
-            destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/gantttasks/destroy",
-              dataType: "jsonp"
-            },
-            parameterMap: function(options, operation) {
-              if (operation !== "read") {
-                return { models: kendo.stringify(options.models || [options]) };
+              read: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttTasks"
+              },
+              update: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttTasks/Update",
+                  type: "POST",
+                  contentType: "application/json",
+                  timeout: 5000
+              },
+              destroy: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttTasks/Destroy",
+                  type: "POST",
+                  contentType: "application/json",
+                  timeout: 5000
+              },
+              create: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttTasks/Create",
+                  type: "POST",
+                  contentType: "application/json",
+                  timeout: 5000
+              },
+              parameterMap: function(options, operation) {
+                  if (operation !== "read") {
+                      return kendo.stringify(options.models || [options]);
+                  }
               }
-            }
           },
           schema: {
-            model: {
-              id: "id", // The "id" of the task is the "ID" field.
-              fields: {
-                // Describe the Gantt task fields and map them to the fields that are returned by the remote service.
-                id: {
-                  from: "ID", // The 'ID' server-side field is mapped to the 'id' client-side field.
-                  type: "number"
-                },
-                orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                parentId: { from: "ParentID", type: "number", nullable: true },
-                start: { from: "Start", type: "date" },
-                end: { from: "End", type: "date" },
-                title: { from: "Title", defaultValue: "", type: "string" },
-                percentComplete: { from: "PercentComplete", type: "number" },
-                summary: { from: "Summary" },
-                expanded: { from: "Expanded" }
+              model: {
+                  id: "id",
+                  fields: {
+                      id: { from: "ID", type: "number" },
+                      orderId: { from: "OrderID", type: "number", validation: { required: true } },
+                      parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true },
+                      start: { from: "Start", type: "date" },
+                      end: { from: "End", type: "date" },
+                      title: { from: "Title", defaultValue: "", type: "string" },
+                      percentComplete: { from: "PercentComplete", type: "number" },
+                      summary: { from: "Summary", type: "boolean" },
+                      expanded: { from: "Expanded", type: "boolean", defaultValue: true }
+                  }
               }
-            }
-          }
+          },
         },
         dependencies: {
           transport: {
-            read: {
-              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies",
-              dataType: "jsonp"
-            },
-            update: {
-              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies/Update",
-              dataType: "jsonp"
-            },
-            destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies/Destroy",
-              dataType: "jsonp"
-            },
-            create: {
-              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies/Create",
-              dataType: "jsonp"
-            },
-            parameterMap: function(options, operation) {
-              if (operation !== "read") {
-                return { models: kendo.stringify(options.models || [options]) };
+              read: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttDependencies"
+              },
+              update: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttDependencies/Update",
+                  type: "POST",
+                  contentType: "application/json"
+              },
+              destroy: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttDependencies/Destroy",
+                  type: "POST",
+                  contentType: "application/json"
+              },
+              create: {
+                  url: "https://demos.telerik.com/service/v2/core/GanttDependencies/Create",
+                  type: "POST",
+                  contentType: "application/json"
+              },
+              parameterMap: function (options, operation) {
+                  if (operation !== "read") {
+                      return kendo.stringify(options.models || [options]);
+                  }
               }
-            }
           },
           schema: {
-            model: {
-              id: "id",
-              fields: {
-                id: { from: "ID", type: "number" },
-                predecessorId: { from: "PredecessorID", type: "number" },
-                successorId: { from: "SuccessorID", type: "number" },
-                type: { from: "Type", type: "number" }
+              model: {
+                  id: "id",
+                  fields: {
+                      id: { from: "ID", type: "number" },
+                      predecessorId: { from: "PredecessorID", type: "number" },
+                      successorId: { from: "SuccessorID", type: "number" },
+                      type: { from: "Type", type: "number" }
+                  }
               }
-            }
           }
         }
       });

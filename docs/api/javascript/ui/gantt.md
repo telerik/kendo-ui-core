@@ -1580,8 +1580,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
       dataSource: {
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/gantttasks"
           }
         },
         schema: {
@@ -1647,8 +1646,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
     var dataSource = new kendo.data.GanttDataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/gantttasks"
         }
       },
       schema: {
@@ -1722,8 +1720,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
       dataSource: {
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/gantttasks"
           }
         },
         schema: {
@@ -1746,8 +1743,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
       dependencies: {
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/ganttdependencies"
           }
         },
         schema: {
@@ -1807,8 +1803,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
     var dataSource = new kendo.data.GanttDataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/gantttasks"
         }
       },
       schema: {
@@ -1831,8 +1826,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
     var dependencyDataSource = new kendo.data.GanttDependencyDataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/ganttdependencies"
         }
       },
       schema: {
@@ -5541,8 +5535,7 @@ A kendo.data.GanttTask object which represents the currently selected task.
       dataSource: {
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/gantttasks"
           }
         },
         schema: {

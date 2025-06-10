@@ -54,8 +54,7 @@ How can I filter the DropDownList items by multiple properties?
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers",
+                            url: "https://demos.telerik.com/service/v2/core/Customers",
                         }
                     }
                 },

@@ -44,9 +44,8 @@ The following example demonstrates how to enable the PDF export functionality of
                 fileName: "Kendo UI Grid Export.pdf"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -86,9 +85,8 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
                 allPages: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -127,9 +125,8 @@ You can specify a paper size that will be applied to the whole document. The con
                 scale: 0.75
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -210,9 +207,8 @@ The Grid allows you to specify a page template and use the template to position 
                 template: $("#page-template").html()
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -240,9 +236,8 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -271,9 +266,8 @@ To send the generated file to a remote service, set a `proxyUrl` and `forceProxy
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -328,9 +322,8 @@ The following example demonstrates how to handle custom fonts.
                 allPages: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },

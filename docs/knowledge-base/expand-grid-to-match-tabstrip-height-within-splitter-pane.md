@@ -120,9 +120,8 @@ The following example demonstrates how to expand a Grid that is located in a Tab
 
         $("#grid").kendoGrid({
           dataSource: {
-             type: "odata",
              transport: {
-               read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+               read: "https://demos.telerik.com/service/v2/core/Orders"
            },
              schema: {
                model: {

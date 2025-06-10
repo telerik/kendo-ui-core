@@ -51,7 +51,7 @@ Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com
       var task = e.task;
       var start = e.start;
       var end = e.end;
-      $.get("https://demos.telerik.com/kendo-ui/service/GanttTasks", function(data) {
+      $.get("https://demos.telerik.com/service/v2/core/GanttTasks", function(data) {
         var randomNumber = Math.floor(Math.random() * 2) + 1;
 
         // If validation passes save the updated task
@@ -60,7 +60,7 @@ Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com
           task.set('end', end);
           gantt.dataSource.sync();
         }
-      }, "jsonp");
+      });
     }
   });
 </script>

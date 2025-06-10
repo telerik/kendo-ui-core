@@ -24,8 +24,7 @@ data source is fired. By default the widget will bind to the data source specifi
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/stockdata",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/stockdata"
         }
       }
     });
@@ -3147,8 +3146,7 @@ The maximum number of ticks, labels and grid lines to display. Applicable for da
           dataSource: {
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/StockData",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/StockData"
               }
             },
             schema: {
@@ -7799,8 +7797,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/stockdata",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/stockdata"
         }
       }
     });
@@ -11727,7 +11724,7 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
     <script>
       $("#chart").kendoChart({
           pdf: {
-              proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+              proxyURL: "https://demos.telerik.com/service/v2/core/export",
               forceProxy: true
           },
           legend: {
@@ -18968,8 +18965,7 @@ Sets the visible property of a chart series
         var dataSource = new kendo.data.DataSource({
         transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/stockdata",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/stockdata"
             }
           }
         });

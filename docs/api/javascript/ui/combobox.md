@@ -324,8 +324,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/products"
         }
       }
     });
@@ -419,11 +418,11 @@ If set to `true` the widget will not show all items when the text of the search 
         minLength: 3,
         enforceMinLength: true,
         dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
                 read: {
-                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    url: "https://demos.telerik.com/service/v2/odata/Products",
                 }
             }
         }
@@ -481,9 +480,8 @@ The [template](/api/javascript/kendo/methods/template) used to render the fixed 
                 fixedGroupTemplate: "Fixed group: #:data#",
                 height: 400,
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -634,9 +632,8 @@ The [template](/api/javascript/kendo/methods/template) used to render the groups
                 groupTemplate: "Group: #:data#",
                 height: 400,
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -1310,9 +1307,8 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
                             type: "GET",
-                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 //the **data** is either index or array of indices.
@@ -1327,9 +1323,9 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                 },
                 height: 520,
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     pageSize: 80,
                     serverPaging: true,
@@ -1371,9 +1367,9 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
             var model = kendo.observable({
                     order: "10249",
               source: new kendo.data.DataSource({
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                  read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 schema: {
                   model: {
@@ -1398,9 +1394,8 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
         function orderValueMapper(options) {
             $.ajax({
-              url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
               type: "GET",
-              dataType: "jsonp",
               data: convertValues(options.value),
               success: function (data) {
                 options.success(data);

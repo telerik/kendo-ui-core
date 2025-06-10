@@ -65,9 +65,9 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     <div id="chartwizard"></div>
     <script>
     var dataSource = new kendo.data.DataSource({
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         model: {
@@ -117,9 +117,9 @@ Configure the columns which will be used to map the dataItems.
     <div id="chartwizard"></div>
     <script>
     var dataSource = new kendo.data.DataSource({
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         model: {
@@ -4438,9 +4438,9 @@ Sets the provided [dataColumns](/api/javascript/ui/chartwizard#configuration-dat
             }).data("kendoChartWizard");
     setTimeout(() => {
         var dataSource = new kendo.data.DataSource({
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         model: {

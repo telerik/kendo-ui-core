@@ -148,10 +148,9 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
                $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                          type: "odata",
                           transport: {
                               read: {
-                                  url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+                                  url: "https://demos.telerik.com/service/v2/core/Employees",
                               }
                           }
                         },

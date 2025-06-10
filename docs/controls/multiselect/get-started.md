@@ -19,9 +19,9 @@ After the completion of this guide, you will be able to achieve the following en
         dataTextField: "ContactName",
         dataValueField: "CustomerID",
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/odata/Customers"
           },
         },
         label: { 
@@ -86,9 +86,9 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/multiselect/configura
         dataTextField: "ContactName", // The field of the data item that provides the text content of the list items. 
         dataValueField: "CustomerID", // The field of the data item that provides the value of the component.
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/odata/Customers"
           },
         },
         height: 150
@@ -108,9 +108,8 @@ The MultiSelect provides several options that enable you to modify its appearanc
         dataTextField: "ContactName",
         dataValueField: "CustomerID",
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/core/Customers"
           },
         },
         height: 150,
@@ -131,9 +130,8 @@ The MultiSelect enables you to configure the label by using its [`label`](https:
         dataTextField: "ContactName",
         dataValueField: "CustomerID",
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/core/Customers"
           },
         },
         height: 150,

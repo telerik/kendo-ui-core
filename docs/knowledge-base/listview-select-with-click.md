@@ -52,8 +52,7 @@ How can I allow the users to select or deselect ListView items only with the mou
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Products"
                 }
             },
             pageSize: 15

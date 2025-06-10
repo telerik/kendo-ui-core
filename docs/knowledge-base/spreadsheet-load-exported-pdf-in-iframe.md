@@ -50,10 +50,10 @@ Load the generated base64 PDF data in the `<iframe>` element. To do that, use th
 
     $("#spreadsheet").kendoSpreadsheet({
       excel: {
-        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       },
       pdf: {
-        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       },
       sheets: [{
         name: "Food Order"

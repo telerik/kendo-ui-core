@@ -83,9 +83,8 @@ How can I add top and bottom scroll shadows which disappear when the Grid is scr
       $(document).ready(function () {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
           },

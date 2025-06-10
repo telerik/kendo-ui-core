@@ -60,9 +60,9 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
                 var model = kendo.observable({
                         order: "10548",
                   source: new kendo.data.DataSource({
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                      read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                      read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                       model: {
@@ -87,9 +87,8 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
 
             function orderValueMapper(options) {
                 $.ajax({
-                  url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                  url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
                   type: "GET",
-                  dataType: "jsonp",
                   data: convertValues(options.value),
                   success: function (data) {
                     options.success(data);

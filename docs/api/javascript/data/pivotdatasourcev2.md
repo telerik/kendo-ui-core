@@ -28,7 +28,7 @@ The configuration of the column axis members. An array of JavaScript objects or 
               catalog: "Adventure Works DW 2008R2",
               cube: "Adventure Works"
           },
-          read: 'https://demos.telerik.com/olap/msmdpump.dll'
+          read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
       }
     });
     dataSource.fetch();
@@ -49,7 +49,7 @@ If set to `true`, the member will be expanded.
               catalog: "Adventure Works DW 2008R2",
               cube: "Adventure Works"
           },
-          read: 'https://demos.telerik.com/olap/msmdpump.dll'
+          read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
       }
     });
     dataSource.fetch();
@@ -70,7 +70,7 @@ The hierarchical name of the column.
               catalog: "Adventure Works DW 2008R2",
               cube: "Adventure Works"
           },
-          read: 'https://demos.telerik.com/olap/msmdpump.dll'
+          read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
       }
 
     });
@@ -98,7 +98,7 @@ The configuration of measures. A string array whose values are interpreted as th
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -126,7 +126,7 @@ A string array whose values are interpreted as the name of the measures that wil
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -155,7 +155,7 @@ The name of the axis on which the measures will be displayed. The supported valu
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
     
@@ -179,7 +179,7 @@ The configuration of the row axis members. An array of JavaScript objects or str
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
     dataSource.fetch();
@@ -200,7 +200,7 @@ If set to `true`, the member will be expanded.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
     dataSource.fetch();
@@ -221,7 +221,7 @@ The hierarchical name of the rows.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
     dataSource.fetch();
@@ -247,7 +247,7 @@ The configuration which is used when the data source discovers the schema inform
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
     dataSource.discover({ command: "schemaCatalogs" });
@@ -270,7 +270,7 @@ The catalog name.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
       }
 
     });
@@ -290,7 +290,7 @@ The cube name in the current data source.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
       }
     });
     </script>
@@ -452,7 +452,7 @@ Gets the parsed axes data.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -483,7 +483,7 @@ The name of the catalog.
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -501,7 +501,7 @@ The name of the catalog.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -534,7 +534,7 @@ The columns configuration. Accepts the same values as the [`columns`](/api/javas
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -551,7 +551,7 @@ The columns configuration. Accepts the same values as the [`columns`](/api/javas
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -585,7 +585,7 @@ The name of the cube.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -606,7 +606,7 @@ The name of the cube.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -638,7 +638,7 @@ The options of the discover request.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -677,7 +677,7 @@ The measures configuration. Accepts the same values as the [`measures`](/api/jav
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -694,7 +694,7 @@ The measures configuration. Accepts the same values as the [`measures`](/api/jav
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -725,7 +725,7 @@ Gets the name of the axis on which the measures are displayed.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -758,7 +758,7 @@ The rows configuration. Accepts the same values as the [`row`](/api/javascript/d
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -775,7 +775,7 @@ The rows configuration. Accepts the same values as the [`row`](/api/javascript/d
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -798,7 +798,7 @@ Requests the catalogs information.
     var dataSource = new kendo.data.PivotDataSourceV2({
       type: "xmla",
       transport: {
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -826,7 +826,7 @@ Requests the cubes schema information.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -854,7 +854,7 @@ Requests the dimensions schema information.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -888,7 +888,7 @@ The name of the dimensions which is the "owner" of the hierarchy.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -924,7 +924,7 @@ The name of the hierarchy which is the "owner" of the level.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 
@@ -954,7 +954,7 @@ Requests the measures schema information.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "https://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       }
     });
 

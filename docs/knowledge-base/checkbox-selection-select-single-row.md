@@ -59,8 +59,7 @@ I want to remove the master checkbox of the built-in checkbox column in the Kend
                     pageSize: 10,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/Products",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/Products"
                         }
                     },
                     schema: {

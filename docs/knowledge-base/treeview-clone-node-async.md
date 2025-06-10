@@ -40,8 +40,7 @@ $(document).ready(function() {
     var homogeneous = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Employees"
             }
         },
         schema: {

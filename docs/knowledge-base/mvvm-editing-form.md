@@ -84,31 +84,33 @@ The example below demonstrates how to achieve the desired scenario.
       </ul>
     </div>
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
       var validator;
       var viewModel = kendo.observable({
         //create a dataSource
         dataSource: new kendo.data.DataSource({
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
             },
             update: {
-              url: crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products/Update",
+                type: "POST",
+            contentType: "application/json"
             },
             destroy: {
-              url: crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products/Destroy",
+                type: "POST",
+            contentType: "application/json"
             },
             create: {
-              url: crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products/Create",
+                type: "POST",
+            contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },

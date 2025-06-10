@@ -37,9 +37,8 @@ To enable the grouping functionality in a MultiColumnComboBox, use the remote tr
                 { field: "CustomerID", title: "Customer ID" }
             ],
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -72,9 +71,8 @@ To customize the inline group title which is displayed next to the suggestion it
                 { field: "CustomerID", title: "Customer ID" }
             ],
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }

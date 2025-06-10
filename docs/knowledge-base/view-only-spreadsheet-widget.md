@@ -37,10 +37,10 @@ Apply either of the following approaches:
         $("#spreadsheet").kendoSpreadsheet({
             excel: {                
                 // Required to enable saving files in older browsers
-                proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             pdf: {                
-                proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             sheets: [
                 {

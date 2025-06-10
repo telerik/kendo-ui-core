@@ -50,7 +50,7 @@ You can load the widget data with a `$http` call and initialize the widget when 
 </div>
 <script>
   angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope, $http) {
-    $http({method: "GET", url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"})
+    $http({method: "GET", url: "https://demos.telerik.com/service/v2/core/Products"})
       .success(function(result){
         $scope.customOptions.dataSource = new kendo.data.DataSource({
           data: result.d

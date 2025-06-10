@@ -181,28 +181,30 @@ The inline editing mode is demonstrated in the example below:
         <div id="grid"></div>
         <script>
             $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                     transport: {
                         read:  {
-                            url: crudServiceBaseUrl + "/Products",
-                            dataType: "jsonp"
+                            url: crudServiceBaseUrl + "/Products"
                         },
                         update: {
                             url: crudServiceBaseUrl + "/Products/Update",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         destroy: {
                             url: crudServiceBaseUrl + "/Products/Destroy",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         create: {
                             url: crudServiceBaseUrl + "/Products/Create",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {models: kendo.stringify(options.models)};
+                                return kendo.stringify(options.models);
                             }
                         }
                     },
@@ -264,28 +266,30 @@ To delete a row, the user must first select the row, then click the **Delete** b
 <div id="grid"></div>
         <script>
             $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                     transport: {
                         read:  {
-                            url: crudServiceBaseUrl + "/Products",
-                            dataType: "jsonp"
+                            url: crudServiceBaseUrl + "/Products"
                         },
                         update: {
                             url: crudServiceBaseUrl + "/Products/Update",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         destroy: {
                             url: crudServiceBaseUrl + "/Products/Destroy",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         create: {
                             url: crudServiceBaseUrl + "/Products/Create",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {models: kendo.stringify(options.models)};
+                                return kendo.stringify(options.models);
                             }
                         }
                     },
@@ -346,28 +350,30 @@ When popup editing is enabled, selected rows can be edited or deleted using the 
 <div id="grid"></div>
         <script>
             $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                     transport: {
                         read:  {
-                            url: crudServiceBaseUrl + "/Products",
-                            dataType: "jsonp"
+                            url: crudServiceBaseUrl + "/Products"
                         },
                         update: {
                             url: crudServiceBaseUrl + "/Products/Update",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         destroy: {
                             url: crudServiceBaseUrl + "/Products/Destroy",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         create: {
                             url: crudServiceBaseUrl + "/Products/Create",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {models: kendo.stringify(options.models)};
+                                return kendo.stringify(options.models);
                             }
                         }
                     },

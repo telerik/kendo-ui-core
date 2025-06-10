@@ -63,8 +63,7 @@ To implement the scenario, use jQuery.
     dataSource: {
       transport: {
         read: {
-          dataType: "jsonp",
-          url: "https://demos.telerik.com/kendo-ui/service/Products",
+          url: "https://demos.telerik.com/service/v2/core/Products",
         }
       }
     }

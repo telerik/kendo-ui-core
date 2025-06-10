@@ -29,22 +29,30 @@ The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/fr
 
     <script>
     var dataSource = new kendo.data.SchedulerDataSource({
+        batch: true,
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks"
             },
             update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                type: "POST",
+                contentType: "application/json"
             },
             create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                type: "POST",
+                contentType: "application/json"
             },
             destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                type: "POST",
+                contentType: "application/json"
+            },
+            parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                    return kendo.stringify(options.models);
+                }
             }
         },
         schema: {
@@ -93,22 +101,30 @@ The complete list of the supported timezones is available in the [List of IANA t
     }).appendTo('head');
     
     var dataSource = new kendo.data.SchedulerDataSource({
+        batch: true,
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks"
             },
             update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                type: "POST",
+                contentType: "application/json"
             },
             create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                type: "POST",
+                contentType: "application/json"
             },
             destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                type: "POST",
+                contentType: "application/json"
+            },
+            parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                    return kendo.stringify(options.models);
+                }
             }
         },
         schema: {

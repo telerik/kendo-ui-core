@@ -42,12 +42,11 @@ The following example demonstrates how to create a DropDownTree and bind it to a
     <input id="dropdowntree"></input>
 
     <script>
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         var myDataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                url: serviceRoot + "/Employees",
-                dataType: "jsonp"
+                url: serviceRoot + "/Employees"
                 }
             },
             schema: {

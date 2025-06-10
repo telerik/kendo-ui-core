@@ -28,8 +28,7 @@ The following example demonstrates how to set the offline storage key.
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
             }
         },
         schema: {
@@ -52,16 +51,16 @@ The following example demonstrates how to go in offline mode.
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
             },
             update: {
-                url: "https://demos.telerik.com/kendo-ui/service/products/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products/update",
+                method: "POST",
+                contentType: "application/json"
             },
             parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                 }
             }
         },
@@ -93,16 +92,16 @@ The [`offlineData`](/api/javascript/data/datasource/methods/offlinedata) method 
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
             },
             update: {
-                url: "https://demos.telerik.com/kendo-ui/service/products/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products/update",
+                type: "POST",
+                contentType: "application/json"
             },
             parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                 }
             }
         },
@@ -141,8 +140,7 @@ To use custom offline storage, set the `offlineStorage` option to a JavaScript o
         },
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
             }
         }
     });
@@ -161,8 +159,7 @@ The `online` and `offline` events behave differently across the browsers. Firefo
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
             }
         }
     });
@@ -182,8 +179,7 @@ AJAX polling is more robust than using the `online` and `offline` events, works 
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
             }
         }
     });

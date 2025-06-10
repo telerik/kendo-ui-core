@@ -87,7 +87,7 @@ Allow the user to draw on the screen (Canvas) and export the drawing as an SVG f
       kendo.saveAs({
         dataURI: data,
         fileName: "signature.svg",
-        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       });
     });
   });
@@ -167,7 +167,7 @@ To use this approach mobile devices (touch screens) you need to use the touch ev
           kendo.saveAs({
             dataURI: data,
             fileName: "signature.svg",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
           });
         });
       });

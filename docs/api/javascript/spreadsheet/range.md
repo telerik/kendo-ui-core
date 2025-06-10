@@ -413,7 +413,7 @@ The name of the custom cell editor, registered as [described in this help articl
            sheetsbar: false,
            excel: {
                // Required to enable Excel Export in some browsers
-               proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+               proxyURL: "https://demos.telerik.com/service/v2/core/export"
            },
            sheets: [{
                rows: [{

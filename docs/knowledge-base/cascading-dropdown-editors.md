@@ -197,10 +197,10 @@ $(function () {
                 dataTextField: "CategoryName",
                 dataValueField: "CategoryID",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                        read: "https://demos.telerik.com/service/v2/odata/Categories"
                     }
                 }
             }).data("kendoDropDownList");
@@ -212,10 +212,10 @@ $(function () {
                 dataTextField: "ProductName",
                 dataValueField: "ProductID",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                        read: "https://demos.telerik.com/service/v2/odata/Products"
                     }
                 }
             }).data("kendoDropDownList");
@@ -227,10 +227,10 @@ $(function () {
                 dataTextField: "Quantity",
                 dataValueField: "OrderID",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                        read: "https://demos.telerik.com/service/v2/odata/Order_Details?$expand=Order"
                     }
                 }
             }).data("kendoDropDownList");
@@ -332,10 +332,10 @@ $(function () {
                 dataTextField: "CategoryName",
                 dataValueField: "CategoryID",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                        read: "https://demos.telerik.com/service/v2/odata/Categories"
                     }
                 }
             }).data("kendoDropDownList");
@@ -347,10 +347,10 @@ $(function () {
                 dataTextField: "ProductName",
                 dataValueField: "ProductID",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                        read: "https://demos.telerik.com/service/v2/odata/Products"
                     }
                 }
             }).data("kendoDropDownList");
@@ -362,10 +362,10 @@ $(function () {
                 dataTextField: "Quantity",
                 dataValueField: "OrderID",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                        read: "https://demos.telerik.com/service/v2/odata/Order_Details?$expand=Order"
                     }
                 }
             }).data("kendoDropDownList");

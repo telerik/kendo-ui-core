@@ -109,8 +109,7 @@ Here are the important steps:
           dataSource: {
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Customers",
+                url: "https://demos.telerik.com/service/v2/core/Customers",
               }
             }
           },

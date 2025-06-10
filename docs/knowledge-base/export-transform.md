@@ -102,7 +102,7 @@ For more information, refer to the article on [transformation API](/api/javascri
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.png",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
           });
         });
       });

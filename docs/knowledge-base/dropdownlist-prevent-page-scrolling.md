@@ -43,8 +43,7 @@ How can I prevent the page scroll when the DropDownList is opened?
             dataSource: {
               transport: {
                 read: {
-                  dataType: "jsonp",
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
+                  url: "https://demos.telerik.com/service/v2/core/Products",
                 }
               }
             },

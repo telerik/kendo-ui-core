@@ -46,9 +46,9 @@ The following example demonstrates how to initialize a Grid by using data attrib
          data-bind="source: dataSource, events: { dataBound: dataBound }"></div>
     <script>
       var dataSource = new kendo.data.DataSource({
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+          read: "https://demos.telerik.com/service/v2/odata/Employees"
         },
         pageSize: 6,
         serverPaging: true,
@@ -60,9 +60,9 @@ The following example demonstrates how to initialize a Grid by using data attrib
         detailInit: function (e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

@@ -62,9 +62,9 @@ How can I access the selected rows of a nested grid in my hierarchical Grid?
 
             },
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
               },
               pageSize: 6,
               serverPaging: true,
@@ -107,9 +107,9 @@ How can I access the selected rows of a nested grid in my hierarchical Grid?
         function detailInit(e) {
           $("<div id='child"+e.data.EmployeeID+"'/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

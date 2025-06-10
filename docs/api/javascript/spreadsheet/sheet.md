@@ -22,8 +22,7 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
       var dataSource = new kendo.data.DataSource({
         transport: {
           read:  {
-            url: "//demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         }
       });
@@ -622,8 +621,7 @@ The DataSource instance.
       var dataSource = new kendo.data.DataSource({
         transport: {
           read:  {
-            url: "//demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         }
       });
@@ -650,8 +648,7 @@ Columns configuration.
       var dataSource = new kendo.data.DataSource({
         transport: {
           read:  {
-            url: "//demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         }
       });
@@ -673,8 +670,7 @@ Columns configuration.
       var dataSource = new kendo.data.DataSource({
         transport: {
           read:  {
-            url: "//demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         }
       });

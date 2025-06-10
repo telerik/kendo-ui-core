@@ -49,8 +49,7 @@ How can I export to Excel filtered Grid data when columns and data fields inform
     <script>
       var isDateField =[];
       $.ajax({
-        url: "https://www.mocky.io/v2/5835e736110000020e0c003c",
-        dataType: "jsonp",
+        url: "https://www.mocky.io/v2/5835e736110000020e0c003c"
         success: function(result) {
           generateGrid(result);
         }

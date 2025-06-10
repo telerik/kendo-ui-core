@@ -214,9 +214,8 @@ The following example demonstrates the configuration for SystemJS 0.20.x.
 
     $(".grid").kendoGrid({
         dataSource: {
-            type: "odata",
             transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
         },

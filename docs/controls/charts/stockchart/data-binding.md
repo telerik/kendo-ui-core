@@ -153,8 +153,7 @@ The following example demonstrates a StockChart in the master and navigator data
             serverFiltering: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/StockData",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/StockData"
                 },
                 parameterMap: function(data) {
                     return { filter: JSON.stringify(data.filter) };
@@ -177,8 +176,7 @@ The following example demonstrates a StockChart in the master and navigator data
             dataSource: {
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/StockData",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/StockData"
                     }
                 },
                 schema: stockDataSchema

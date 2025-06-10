@@ -117,6 +117,7 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
       </script>
 
       <script>
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
         var viewModel = kendo.observable({
           newProductName: "test",
           updateValue: function() {
@@ -134,21 +135,27 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
             },
             batch: true,
             transport: {
-              read: {
-                url: "//demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: "//demos.telerik.com/kendo-ui/service/products/update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: "//demos.telerik.com/kendo-ui/service/products/create",
-                dataType: "jsonp"
-              },
+               read:  {
+                   url: crudServiceBaseUrl + "/Products"
+               },
+               update: {
+                   url: crudServiceBaseUrl + "/Products/Update",
+                   type: "POST",
+               contentType: "application/json"
+               },
+               destroy: {
+                   url: crudServiceBaseUrl + "/Products/Destroy",
+                   type: "POST",
+               contentType: "application/json"
+               },
+               create: {
+                   url: crudServiceBaseUrl + "/Products/Create",
+                   type: "POST",
+               contentType: "application/json"
+               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             }

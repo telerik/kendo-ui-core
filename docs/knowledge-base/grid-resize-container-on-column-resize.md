@@ -37,9 +37,8 @@ Manually change the width of the Grid-wrapping element to match the width of the
             	$(document).ready(function () {
             		$("#grid").kendoGrid({
             			dataSource: {
-            				type: "odata",
             				transport: {
-            					read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            					read: "https://demos.telerik.com/service/v2/core/Orders"
             				},
             				schema: {
             					model: {

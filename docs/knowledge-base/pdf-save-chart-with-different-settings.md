@@ -88,7 +88,7 @@ The following example demonstrates how to achieve this behavior.
           var options = {
             pdf: {
               fileName: "Kendo UI Chart Export.pdf",
-              proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+              proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             title: {
               text: "Gross domestic product growth \n /GDP annual %/",

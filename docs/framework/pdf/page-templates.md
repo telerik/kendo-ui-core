@@ -63,10 +63,9 @@ This template will be inserted into each page before producing the output. You c
     <script>
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                        url: "https://demos.telerik.com/service/v2/core/Products",
                     }
                 }
             },

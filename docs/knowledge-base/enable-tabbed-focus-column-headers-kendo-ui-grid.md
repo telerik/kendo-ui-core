@@ -50,9 +50,8 @@ Below is a runnable example:
         $("#grid").kendoGrid({
           selectable: true,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
           },

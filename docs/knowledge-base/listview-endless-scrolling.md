@@ -60,10 +60,10 @@ The following example demonstrates how to implement the described approach.
           };
 
           var dataSource = new kendo.data.DataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                url: "https://demos.telerik.com/service/v2/odata/Orders",
                 type: "POST"
               }
             },
@@ -72,10 +72,10 @@ The following example demonstrates how to implement the described approach.
           });
 
           var dataSourceScroll = new kendo.data.DataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                url: "https://demos.telerik.com/service/v2/odata/Orders",
                 type: "POST"
               }
             },

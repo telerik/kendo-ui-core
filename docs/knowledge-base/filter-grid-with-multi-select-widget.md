@@ -48,9 +48,8 @@ How can I apply multiple filters in a Grid for a single field with the Kendo UI 
                   }
                 },
                 dataSource: {
-                  type: "odata",
                   transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                   },
                   pageSize: 20
                 },

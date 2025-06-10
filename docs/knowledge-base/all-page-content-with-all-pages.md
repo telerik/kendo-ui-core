@@ -139,10 +139,10 @@ The following example demonstrates how to export all Grid pages and their full p
           allPages: true
         },
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
             read: {
-              url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+              url: "https://demos.telerik.com/service/v2/odata/Employees",
             }
           },
           pageSize: 5

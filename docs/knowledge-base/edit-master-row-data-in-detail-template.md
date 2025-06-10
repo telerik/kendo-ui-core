@@ -41,10 +41,10 @@ The following example demonstrates how to edit records in a child Grid.
     var preventBinding = false,
     grid = $("#grid").kendoGrid({
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+            url: "https://demos.telerik.com/service/v2/odata/Employees",
             data: { $expand: "Orders" }
           }
         },

@@ -51,30 +51,32 @@ The following example demonstrates how to create a custom **Edit** button in the
              .controller("MyCtrl", MyCtrl);
 
       function MyCtrl($scope) {
-        $scope.crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        $scope.crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         $scope.dataSource = new kendo.data.DataSource({
           transport: {
-            read:  {
-              url: $scope.crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
-            },
-            update: {
-              url: $scope.crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
-            },
-            destroy: {
-              url: $scope.crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
-            },
-            create: {
-              url: $scope.crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
-            },
-            parameterMap: function(options, operation) {
-              if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+              read:  {
+                  url: crudServiceBaseUrl + "/Products"
+              },
+              update: {
+                  url: crudServiceBaseUrl + "/Products/Update",
+                  type: "POST",
+          		contentType: "application/json"
+              },
+              destroy: {
+                  url: crudServiceBaseUrl + "/Products/Destroy",
+                  type: "POST",
+          		contentType: "application/json"
+              },
+              create: {
+                  url: crudServiceBaseUrl + "/Products/Create",
+                  type: "POST",
+          		contentType: "application/json"
+              },
+              parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                      return kendo.stringify(options.models);
+                  }
               }
-            }
           },
           batch: true,
           pageSize: 20,

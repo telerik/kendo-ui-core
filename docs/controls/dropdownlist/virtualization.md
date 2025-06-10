@@ -70,9 +70,8 @@ The following example demonstrates how to enable virtualization in the DropDownL
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
                             type: "GET",
-                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);
@@ -82,9 +81,9 @@ The following example demonstrates how to enable virtualization in the DropDownL
                 },
                 height: 520,
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     pageSize: 80,
                     serverPaging: true,
@@ -120,7 +119,7 @@ When the widget receives a value which is not fetched from the remote server yet
 ```javascript
     valueMapper: function(options) {
         $.ajax({
-            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
             type: "GET",
             data: options.value, // Send value to the server.
             success: function (data) {
@@ -138,7 +137,7 @@ If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` w
     mapValueTo: "dataItem",
     valueMapper: function(options) {
         $.ajax({
-            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
             type: "GET",
             data: options.value, //send value to the server
             success: function (dataItems) {
@@ -178,9 +177,8 @@ The `valueMapper` is expected to return a row index or a list of indices when a 
 
 ```javascript
 $.ajax({
-    url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+    url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
     type: "GET",
-    dataType: "jsonp",
     data: { "values[0]": "10661" }
     success: function (data) {
         // The returned data is [413].
@@ -189,7 +187,7 @@ $.ajax({
 })
 ```
 
-The AJAX method calls URLs similar to `https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661`. The result is `callback([413]) //the result is JSONP`. The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
+The AJAX method calls URLs similar to `https://demos.telerik.com/service/v2/core/Orders/ValueMapper?values[0]=10661`. The result is `callback([413]) //the result is JSONP`. The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 
 ### Mapping to Data Item Values
 

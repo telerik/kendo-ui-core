@@ -46,21 +46,20 @@ How can I sort the items between connected ListBoxes when I move items from one 
 
 <script>
     $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
-        var dataSource = new kendo.data.DataSource({
-            serverFiltering: false,
-            transport: {
-                read: {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                },
-                update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                },
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                 parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                        return { models: kendo.stringify(options.models) };
+                        return kendo.stringify(options.models);
                     }
                 }
             },

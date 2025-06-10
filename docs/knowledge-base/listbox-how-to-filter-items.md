@@ -59,9 +59,8 @@ Use an external input element as a search box. You can retrieve the string that 
             },
             selectable: "multiple",
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               }
             },
             dataTextField: "ContactName",

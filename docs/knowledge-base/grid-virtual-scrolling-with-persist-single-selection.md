@@ -40,12 +40,12 @@ Programmatically handle the collection of item selection on the [`change`](https
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            type: "odata",
+                            type: "odata-v4",
                             serverPaging: true,
                             serverSorting: true,
                             pageSize: 100,
                             transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                                read: "https://demos.telerik.com/service/v2/odata/Orders"
                             },
                           	schema: {
                                model: {

@@ -50,9 +50,9 @@ It is possible to perform filtering over the parent Grid and the child Grid by e
       $(document).ready(function() {
         var element = $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 20,
             serverPaging: true,
@@ -104,9 +104,9 @@ It is possible to perform filtering over the parent Grid and the child Grid by e
 
         detailRow.find(".orders").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             serverPaging: true,
             serverSorting: true,

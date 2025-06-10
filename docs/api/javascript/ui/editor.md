@@ -4378,11 +4378,17 @@ Configuration for file browser dialog.
 	  ],
       fileBrowser: {
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/filebrowser/read",
-          destroy: "https://demos.telerik.com/kendo-ui/service/filebrowser/destroy",
-          create: "https://demos.telerik.com/kendo-ui/service/filebrowser/createDirectory",
-          uploadUrl: "https://demos.telerik.com/kendo-ui/service/filebrowser/upload",
-          fileUrl: "https://demos.telerik.com/kendo-ui/service//content/File?fileName={0}",
+          read: "https://demos.telerik.com/service/v2/core/FileBrowser/read",
+          destroy: {
+              url: "https://demos.telerik.com/service/v2/core/FileBrowser/Destroy",
+              type: "POST"
+          },
+          create: {
+              url: "https://demos.telerik.com/service/v2/core/FileBrowser/Create",
+              type: "POST"
+          },
+          uploadUrl: "https://demos.telerik.com/service/v2/core/FileBrowser/upload",
+          fileUrl: "https://demos.telerik.com/service/v2/core/FileBrowser/File?fileName={0}",
         }
       }
     });

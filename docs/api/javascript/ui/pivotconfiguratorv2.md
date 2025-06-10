@@ -35,7 +35,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSourceV2](/api/ja
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -55,7 +55,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSourceV2](/api/ja
                 catalog: "Adventure Works DW 2008R2",
                 cube: "Adventure Works"
             },
-            read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
         }
     });
 
@@ -84,7 +84,7 @@ If set to `true` the user will be able to filter by using the field menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -110,7 +110,7 @@ If set to `true` the user could sort the widget by using the field menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -136,7 +136,7 @@ The height of the PivotConfiguratorV2. Numeric values are treated as pixels.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -158,7 +158,7 @@ The height of the PivotConfiguratorV2. Numeric values are treated as pixels.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -191,7 +191,7 @@ The text messages displayed in the fields sections.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -219,7 +219,7 @@ The text of the apply button.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -247,7 +247,7 @@ The text of the cancel button.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -275,7 +275,7 @@ The text messages displayed in the measure fields section when empty.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -303,7 +303,7 @@ The text messages displayed in the column fields section when empty.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -331,7 +331,7 @@ The text messages displayed in the row fields section when empty.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -359,7 +359,7 @@ The title message in the configurator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -402,7 +402,7 @@ The text messages displayed in the field menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -433,7 +433,7 @@ The text message displayed for the apply button in the includes menu item.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -464,7 +464,7 @@ The text message displayed for the menu item which performs ascending sort.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -495,7 +495,7 @@ The text message displayed for the menu item which performs descending sort.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -526,7 +526,7 @@ The text messages of the fields filter menu item.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -557,7 +557,7 @@ The text messages of the filter button.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -588,7 +588,7 @@ The text messages of the include menu item.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -619,7 +619,7 @@ The text of the clear filter expressions button.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -650,7 +650,7 @@ The text of the reset button in the filter includes menu item.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -681,7 +681,7 @@ The text of the move to columns action in the menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -712,7 +712,7 @@ The text of the move to rows action in the menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -743,7 +743,7 @@ The text of the move as next action in the menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -774,7 +774,7 @@ The text of the move as previous action in the menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -812,7 +812,7 @@ The text of the filter operators displayed in the filter menu.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -845,7 +845,7 @@ The text of the "contains" filter operator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -878,7 +878,7 @@ The text of the "Does not contain" filter operator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -911,7 +911,7 @@ The text of the "Starts with" filter operator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -944,7 +944,7 @@ The text of the "Ends with" filter operator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -977,7 +977,7 @@ The text of the "equal" filter operator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1010,7 +1010,7 @@ The text of the "not equal" filter operator.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1038,7 +1038,7 @@ If set to `true` the user could navigate the component using the keyboard naviga
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1070,7 +1070,7 @@ Defines a value indicating the type of layout that the configurator has. Possibl
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1101,7 +1101,7 @@ The [data source](/api/javascript/data/pivotdatasourcev2) of the widget. Configu
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1133,7 +1133,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1161,7 +1161,7 @@ Refresh widget content
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         }
     });
@@ -1195,7 +1195,7 @@ The data source to which the widget should be bound.
                         catalog: "Adventure Works DW 2008R2",
                         cube: "Adventure Works"
                     },
-                    read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                    read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                 }
             }
         });
@@ -1210,7 +1210,7 @@ The data source to which the widget should be bound.
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
         });
 

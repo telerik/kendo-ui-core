@@ -64,9 +64,8 @@ Meanwhile, the easiest way to accomplish the desired behaviour would be to:
             columnWidth: 120,
             height: 570,
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               schema: {
                 cube: {

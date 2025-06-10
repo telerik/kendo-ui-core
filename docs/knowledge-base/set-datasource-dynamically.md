@@ -87,10 +87,10 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "CategoryName",
           dataValueField: "CategoryID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/odata/Categories"
             }
           }
         }).data("kendoDropDownList");
@@ -110,20 +110,20 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "Order.ShipCity",
           dataValueField: "OrderID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+              read: "https://demos.telerik.com/service/v2/odata/Order_Details?$expand=Order"
             }
           }
         }).data("kendoDropDownList");
 
         $("#set").click(function() {
           products.setDataSource({
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/odata/Products"
             }
           });
         });

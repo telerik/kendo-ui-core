@@ -113,9 +113,9 @@ The following example demonstrates how to hide the last column during PDF Export
           scale: 0.6
         },
         dataSource: {
-          type: "odata",
+          type: "odata-v3",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/Products"
           },
           pageSize: 10
         },
@@ -170,9 +170,8 @@ The following example demonstrates how to hide the last column during PDF Export
               scale: 0.8
             },
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               pageSize: 20
             },

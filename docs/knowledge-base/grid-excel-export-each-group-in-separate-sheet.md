@@ -45,13 +45,12 @@ How can I export each group in a separate Excel sheet with the Kendo UI Grid?
         toolbar: ["excel"],
         excel: {
             fileName: "Kendo UI Grid Export.xlsx",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+            proxyURL: "https://demos.telerik.com/service/v2/core/export",
             allPages: true
         },
         dataSource: {
-            type: "odata",
             transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                read: "https://demos.telerik.com/service/v2/core/Products"
             },
             schema: {
                 model: {

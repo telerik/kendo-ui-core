@@ -40,8 +40,7 @@ The item template manages the way the list items of a MultiSelect are rendered.
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -69,8 +68,7 @@ The tag template manages the way the tag of a MultiSelect is rendered.
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -98,8 +96,7 @@ The header template manages the way the popup header of a MultiSelect is rendere
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -127,8 +124,7 @@ The footer template manages the way the pop-up footer of a MultiSelect is render
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }
@@ -158,8 +154,7 @@ The MultiSelect component displays `noDataTemplate` in the popup when the data s
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     }
                 }

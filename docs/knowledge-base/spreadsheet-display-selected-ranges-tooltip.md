@@ -39,7 +39,7 @@ How can I get the data of the selected range in the Spreadsheet and display it i
     <div id="spreadsheet" style="width: 100%"></div>
     <script>
       $(function() {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         var dataSource = new kendo.data.DataSource({
           transport: {
@@ -134,7 +134,6 @@ How can I get the data of the selected range in the Spreadsheet and display it i
         function onRead(options) {
           $.ajax({
             url: crudServiceBaseUrl + "/Products",
-            dataType: "jsonp",
             success: function (result) {
               options.success(result);
             },

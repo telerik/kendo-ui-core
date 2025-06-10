@@ -57,9 +57,8 @@ Programmatically apply the time offset before the filter is set again.
         $(document).ready(function () {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Meetings"
+                read: "https://demos.telerik.com/service/v2/core/Meetings"
               },
               pageSize: 20
             },

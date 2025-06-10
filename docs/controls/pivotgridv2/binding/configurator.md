@@ -48,7 +48,7 @@ The following example demonstrates how to configure the components.
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                        read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                     }
                 }
             }).data("kendoPivotGridV2");

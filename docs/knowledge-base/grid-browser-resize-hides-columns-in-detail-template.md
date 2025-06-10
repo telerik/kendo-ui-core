@@ -56,9 +56,9 @@ The following example demonstrates the full implementation of the suggested appr
         $(document).ready(function () {
             var grid = $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                        read: "https://demos.telerik.com/service/v2/odata/Employees"
                     },
                     pageSize: 20,
                     serverPaging: true,

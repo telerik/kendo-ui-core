@@ -47,13 +47,12 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
 
     <div id="example">
       <script>
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           var dataSource = new kendo.data.OrgChartDataSource({
             transport: {
               read: {
-                url: crudServiceBaseUrl + "/EmployeeDirectory",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory"
               }
             },
             schema: {

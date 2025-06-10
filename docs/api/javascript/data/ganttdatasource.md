@@ -30,20 +30,24 @@ Note that if the `parentId` type is `number`, its `defaultValue` should be set t
     var dataSource = new kendo.data.GanttDataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/GanttTasks",
+          type: "POST",
+          contentType: "application/json"
         },
         update: {
-          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks/Update",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/GanttTasks/Update",
+          type: "POST",
+          contentType: "application/json"
         },
         destroy: {
-          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks/Destroy",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/GanttTasks/Destroy",
+          type: "POST",
+          contentType: "application/json"
         },
         create: {
-          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks/Create",
-          dataType: "jsonp"
+          url: "https://demos.telerik.com/service/v2/core/GanttTasks/Create",
+          type: "POST",
+          contentType: "application/json"
         }
       },
       schema: {

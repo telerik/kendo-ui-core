@@ -70,9 +70,9 @@ The following example demonstrates how to create a custom editor in the [Data Gr
       });
 
       $scope.ddlDataSource = new kendo.data.DataSource({
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+          read: "https://demos.telerik.com/service/v2/odata/Categories"
         }
       });
 

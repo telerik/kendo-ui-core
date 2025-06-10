@@ -40,9 +40,9 @@ AngularJS evaluates a template expression which is placed as [`column.title`](/a
         .controller("MyCtrl", function($scope){
             $scope.mainGridOptions = {
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                        read: "https://demos.telerik.com/service/v2/odata/Employees"
                     }
                 },
                 columns: [{
@@ -293,7 +293,7 @@ The following example demonstrates how to use `$http` to bind the Grid.
             pageSize: 5,
             transport: {
               read: function (e) {
-                $http.jsonp('https://demos.telerik.com/kendo-ui/service/Products?callback=JSON_CALLBACK')
+                $http.jsonp('https://demos.telerik.com/service/v2/core/Products?callback=JSON_CALLBACK')
                   .then(function success(response) {
                   e.success(response.data)
                 }, function error(response) {

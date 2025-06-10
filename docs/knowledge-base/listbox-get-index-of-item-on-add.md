@@ -87,9 +87,8 @@ The [`add`](/api/javascript/ui/listbox/events/add) event does not provide the in
                     dropSources: ["selected"],
                     selectable: "multiple",
                     dataSource: {
-                        type: "odata",
                         transport: {
-                            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                            read: "https://demos.telerik.com/service/v2/core/Customers"
                         }
                     },
                     dataTextField: "ContactName",

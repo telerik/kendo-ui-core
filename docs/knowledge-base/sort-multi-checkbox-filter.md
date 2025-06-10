@@ -44,29 +44,31 @@ The following example demonstrates how to sort the Kendo UI multiple checkbox fi
 	<div id="client"></div>
       <script>
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+          var telerikWebServiceBase = "https://demos.telerik.com/service/v2/core/";
           $("#client").kendoGrid({
             dataSource: {
               transport: {
                 read:  {
-                  url: telerikWebServiceBase + "/Products",
-                  dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                 },
                 update: {
-                  url: telerikWebServiceBase + "/Products/Update",
-                  dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    type: "POST",
+                contentType: "application/json"
                 },
                 destroy: {
-                  url: telerikWebServiceBase + "/Products/Destroy",
-                  dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    type: "POST",
+                contentType: "application/json"
                 },
                 create: {
-                  url: telerikWebServiceBase + "/Products/Create",
-                  dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products/Create",
+                    type: "POST",
+                contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                   if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                   }
                 }
               },

@@ -70,30 +70,33 @@ How can I add a button which will expand or collapse all tasks in my Gantt?
                 gantt.refresh();
             })
 
-            var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
-            var tasksDataSource = new kendo.data.GanttDataSource({
+            var serviceRoot = "https://demos.telerik.com/service/v2/core";
+                var tasksDataSource = new kendo.data.GanttDataSource({
                 transport: {
                     read: {
-                        url: serviceRoot + "/GanttTasks",
-                        dataType: "jsonp"
+                        url: serviceRoot + "/GanttTasks"
                     },
                     update: {
                         url: serviceRoot + "/GanttTasks/Update",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json",
+                        timeout: 5000
                     },
                     destroy: {
                         url: serviceRoot + "/GanttTasks/Destroy",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json",
+                        timeout: 5000
                     },
                     create: {
                         url: serviceRoot + "/GanttTasks/Create",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json",
+                        timeout: 5000
                     },
                     parameterMap: function(options, operation) {
                         if (operation !== "read") {
-                            return {
-                                models: kendo.stringify(options.models || [options])
-                            };
+                            return kendo.stringify(options.models || [options]);
                         }
                     }
                 },
@@ -151,26 +154,26 @@ How can I add a button which will expand or collapse all tasks in my Gantt?
             var dependenciesDataSource = new kendo.data.GanttDependencyDataSource({
                 transport: {
                     read: {
-                        url: serviceRoot + "/GanttDependencies",
-                        dataType: "jsonp"
+                        url: serviceRoot + "/GanttDependencies"
                     },
                     update: {
                         url: serviceRoot + "/GanttDependencies/Update",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     destroy: {
                         url: serviceRoot + "/GanttDependencies/Destroy",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     create: {
                         url: serviceRoot + "/GanttDependencies/Create",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     parameterMap: function(options, operation) {
                         if (operation !== "read") {
-                            return {
-                                models: kendo.stringify(options.models || [options])
-                            };
+                            return kendo.stringify(options.models || [options]);
                         }
                     }
                 },

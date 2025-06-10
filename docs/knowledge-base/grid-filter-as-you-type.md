@@ -87,8 +87,7 @@ The following example demonstrates how to filter the Grid on the fly, as the use
         },
         transport: {
           read: {
-            url: "//demos.telerik.com/kendo-ui/service/products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/products"
           }
         }
       });

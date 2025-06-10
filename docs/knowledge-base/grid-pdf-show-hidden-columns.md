@@ -108,9 +108,8 @@ The usage of the `showColumn()` and `hideColumn()` methods [is known for causing
           scale: 0.6
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 10
         },

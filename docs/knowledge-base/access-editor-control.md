@@ -109,9 +109,8 @@ For brevity, the following demo does not include the configuration for the Data 
                 .kendoDropDownList({
                     autoBind: false,
                     dataSource: {
-                        type: "odata",
                         transport: {
-                            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                            read: "https://demos.telerik.com/service/v2/core/Categories"
                         }
                     }
                 });

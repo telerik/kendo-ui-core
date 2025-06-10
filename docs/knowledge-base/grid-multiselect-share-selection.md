@@ -41,8 +41,7 @@ To share a selection between a MultiSelect and a Grid:
             dataSource: {
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/products",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/products"
                     }
                 }
             },
@@ -107,8 +106,7 @@ To share a selection between a MultiSelect and a Grid:
             dataSource: {
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/products",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/products"
                     }
                 }
             }

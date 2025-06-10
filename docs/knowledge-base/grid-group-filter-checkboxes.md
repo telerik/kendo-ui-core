@@ -40,31 +40,33 @@ Although sorting the dataSource of the checkboxes is possible, applying group ex
     <div id="client"></div>
       <script>
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+          var telerikWebServiceBase = "https://demos.telerik.com/service/v2/core/";
           $("#client").kendoGrid({
             dataSource: {
               transport: {
-                read:  {
-                  url: telerikWebServiceBase + "/Products",
-                  dataType: "jsonp"
-                },
-                update: {
-                  url: telerikWebServiceBase + "/Products/Update",
-                  dataType: "jsonp"
-                },
-                destroy: {
-                  url: telerikWebServiceBase + "/Products/Destroy",
-                  dataType: "jsonp"
-                },
-                create: {
-                  url: telerikWebServiceBase + "/Products/Create",
-                  dataType: "jsonp"
-                },
-                parameterMap: function(options, operation) {
-                  if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                  read:  {
+                      url: crudServiceBaseUrl + "/Products"
+                  },
+                  update: {
+                      url: crudServiceBaseUrl + "/Products/Update",
+                      type: "POST",
+              		contentType: "application/json"
+                  },
+                  destroy: {
+                      url: crudServiceBaseUrl + "/Products/Destroy",
+                      type: "POST",
+              		contentType: "application/json"
+                  },
+                  create: {
+                      url: crudServiceBaseUrl + "/Products/Create",
+                      type: "POST",
+              		contentType: "application/json"
+                  },
+                  parameterMap: function(options, operation) {
+                      if (operation !== "read" && options.models) {
+                          return kendo.stringify(options.models);
+                      }
                   }
-                }
               },
               batch: true,
               pageSize: 20,

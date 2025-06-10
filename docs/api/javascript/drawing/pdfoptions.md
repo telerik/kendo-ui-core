@@ -95,7 +95,7 @@ Supported values:
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.pdf",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
           });
         });
       });

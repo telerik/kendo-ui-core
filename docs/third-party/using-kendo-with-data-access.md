@@ -84,9 +84,9 @@ The following example demonstrates some sample code you need.
             // Select the div and create the Grid element.
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "/EntitiesModelService.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         data: "value",

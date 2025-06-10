@@ -39,9 +39,8 @@ Because `GroupHeaderTemplate` is displayed next to the expanding icon of the gro
     <script>
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
 
                 pageSize: 7,

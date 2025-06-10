@@ -37,24 +37,26 @@ Once the schema is configured, you need to configure the `transport` actions for
 	var dataSource = new kendo.data.TreeListDataSource({
         transport: {
             read: {
-                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory/All"
             },
             update: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
             },
             destroy: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Destroy",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
             },
             create: {
                 url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-                dataType: "jsonp"
+                type: "POST",
+                contentType: "application/json"
             },
             parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                    return kendo.stringify(options.models);
                 }
             }
         },

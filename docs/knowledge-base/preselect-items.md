@@ -85,10 +85,10 @@ The following example demonstrates how to achieve the desired scenario. This app
           dataTextField: "CategoryName",
           dataValueField: "CategoryID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/odata/Categories"
             }
           },
           dataBound: function() {
@@ -104,10 +104,10 @@ The following example demonstrates how to achieve the desired scenario. This app
           dataTextField: "ProductName",
           dataValueField: "ProductID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/odata/Products"
             }
           },
           dataBound: function() {
@@ -123,10 +123,10 @@ The following example demonstrates how to achieve the desired scenario. This app
           dataTextField: "Order.ShipCity",
           dataValueField: "OrderID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+              read: "https://demos.telerik.com/service/v2/odata/Order_Details?$expand=Order"
             }
           },
           dataBound: function() {

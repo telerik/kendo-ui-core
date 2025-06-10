@@ -78,8 +78,7 @@ The following example demonstrates how to achieve the desired scenario.
           customerSource: new kendo.data.DataSource({
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Customers"
+                url: "https://demos.telerik.com/service/v2/core/Customers"
               }
             }
           }),

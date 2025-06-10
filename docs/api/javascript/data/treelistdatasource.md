@@ -67,8 +67,7 @@ The model that must be loaded.
       var dataSource = new kendo.data.TreeListDataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory"
           }
         },
         schema: {
@@ -224,8 +223,7 @@ The model whose level must be calculated.
       var dataSource = new kendo.data.TreeListDataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
           }
         },
         schema: {

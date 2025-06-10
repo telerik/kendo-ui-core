@@ -15,298 +15,368 @@ You can use it with both the Telerik UI helpers for MVC and Core because they wr
 
  For a runnable example, refer to the [demo on SignalR binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/signalr).
 
-
 > As of the [{{ site.framework }} R2 2018 release](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1), the suite provides SignalR support for its components.
-> The feature is tested with SignalR 1.0.0-rc1-final.
 
 This article provides step-by-step instructions on using SignalR binding with the Grid.
 
-## Setting Up the SignalR Service
+## SignalR Versions
 
-Start with installing the SignalR NuGet package and configuring SignalR to connect to Hubs upon SignalR requests:
+Two versions of SignalR exist&mdash;[ASP.NET Core SignalR](https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-8.0) and [ASP.NET SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr). It is important to note that ASP.NET Core SignalR  is not compatible with clients or servers for ASP.NET SignalR. This means, for example, that you cannot connect a ASP.NET SignalR server to a client using ASP.NET Core SignalR client library.
 
-1. Install the Microsoft.AspNetCore.SignalR NuGet package in your project.
+The table below highlights the major differences between ASP.NET SignalR and ASP.NET Core SignalR:
 
-2. Register the service and serialize the returned JSON to PascalCase. Refer to our [JSON Serialization article](https://docs.telerik.com/aspnet-core/compatibility/json-serialization) for more information about serialization.
+<table>
+      <thead>
+         <tr>
+            <th></th>
+            <th>ASP.NET SignalR</th>
+            <th>ASP.NET Core SignalR</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td><strong>Server NuGet package</strong></td>
+            <td>Microsoft.AspNet.SignalR</a></td>
+            <td>None. Included in the Microsoft.AspNetCore.App shared framework.</td>
+         </tr>
+         <tr>
+            <td><strong>Client NuGet packages</strong></td>
+            <td>Microsoft.AspNet.SignalR.Client<br>Microsoft.AspNet.SignalR.JS</td>
+            <td>Microsoft.AspNetCore.SignalR.Client</td>
+         </tr>
+         <tr>
+            <td><strong>JavaScript client npm package</strong></td>
+            <td>signalr</td>
+            <td>@microsoft/signalr</td>
+         </tr>
+         <tr>
+            <td><strong>Server app type</strong></td>
+            <td>ASP.NET (System.Web) or OWIN Self-Host</td>
+            <td>ASP.NET Core</td>
+         </tr>
+         <tr>
+            <td><strong>Supported server platforms</strong></td>
+            <td>.NET Framework 4.5 or later</td>
+            <td>.NET Core 3.0 or later</td>
+         </tr>
+      </tbody>
+</table>
 
-3. In the `Startup.cs` file of the solution, map the endpoint of the SignalR hub.
+For further details, refer to [the official Microsoft documentation](https://learn.microsoft.com/en-us/aspnet/core/signalr/version-differences?view=aspnetcore-8.0).
 
-```C#
-using SignalR.Mvc;
+{% if site.core %}
+>tip The {{ site.product }} Grid uses the [ASP.NET Core SignalR service](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs), and the example below demonstrates how to set up the Grid with this service. If you use ASP.NET SignalR, refer to Microsoft's documentation for complete details on configuring the server and client-side hubs and hub connections.
 
- public void ConfigureServices(IServiceCollection services)
+### Setting Up the ASP.NET Core SignalR Service
+
+To configure ASP.NET Core SignalR service, edit the `Program.cs` file and add SignalR to the services collection. Once done, ensure the hubs are mapped, as well.
+
+```
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddSignalR(opt => opt.EnableDetailedErrors = true).AddJsonProtocol(options => {
+        options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+    });
+    ...
+    var app = builder.Build();
+    ...
+    app.MapHub<ProductHub>("/products");
+
+    app.Run();
+
+```
+{% else %}
+### Setting Up ASP.NET SignalR Service
+
+Complete details on setting up an ASP.NET SignalR service are available in [Microsoft's documentation](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/tutorial-getting-started-with-signalr). In general, the following steps must be taken:
+
+1. Add the `Microsoft.AspNet.SignalR` NuGet package.
+1. Add an OWIN Startup Class and the SignalR configuration.
+1. Ensure the hubs are mapped.
+
+```
+    public class Startup
+    {
+        public void Configuration(IAppBuilder app)
         {
-            // Add framework services.
-            services
-                .AddControllersWithViews()
-                // Maintain property names during serialization. See:
-                // https://github.com/aspnet/Announcements/issues/194
-                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
-            // Add Kendo UI services to the services container.
-            services.AddKendo();
-            // Add SignalR.
-            services.AddSignalR().AddJsonProtocol(x => x.PayloadSerializerOptions.PropertyNamingPolicy = null);
-        }
-
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            //Some code is omitted for clarity.
-            app.UseEndpoints(endpoints =>
+            // Any connection or hub wire up and configuration should go here, for example, the Demo Service configuration is below
+            app.MapSignalR("/signalr/hubs", new HubConfiguration
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHub<GridHub>("/gridHub");
+                EnableJSONP = true
             });
         }
-
-```
-
-## Configuring the Hub to Access and Store Data
-
-
-SignalR uses [hubs to communicate between clients and servers](https://docs.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-2.1). A hub is a high-level pipeline that allows the client-server communication. The SignalR Hubs API enables you to call methods on connected clients from the server.
-
-Define the hub in the `Hubs/GridHub.cs` file:
-
-```C#
-using Core_CustomKendoGrid_with_SignalR.Models;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SignalR.Mvc
-{
-    public class GridHub : Hub
-    {
-        
-            public override System.Threading.Tasks.Task OnConnectedAsync()
-            {
-                Groups.AddToGroupAsync(Context.ConnectionId, GetGroupName());
-                return base.OnConnectedAsync();
-            }
-
-            public override System.Threading.Tasks.Task OnDisconnectedAsync(Exception e)
-            {
-                Groups.RemoveFromGroupAsync(Context.ConnectionId, GetGroupName());
-                return base.OnDisconnectedAsync(e);
-            }
-
-            public IEnumerable<OrderViewModel> Read()
-            {
-
-                    var result = Enumerable.Range(1, 50).Select(i => new OrderViewModel
-                    {
-                        OrderID = i,
-                        Freight = i * 10,
-                        OrderDate = new DateTime(2016, 9, 15).AddDays(i % 7),
-                        ShipName = "ShipName " + i,
-                        ShipCity = "ShipCity " + i
-                    }).ToList();
-
-                    return result;
-                
-            }
-
-            public OrderViewModel Create(OrderViewModel product)
-            {
-
-                Clients.OthersInGroup(GetGroupName()).SendAsync("create", product);
-
-                return product;
-            }
-
-            public void Update(OrderViewModel product)
-            {
-                Clients.OthersInGroup(GetGroupName()).SendAsync("update", product);
-            }
-
-            public void Destroy(OrderViewModel product)
-            {
-                Clients.OthersInGroup(GetGroupName()).SendAsync("destroy", product);
-            }
-
-            public string GetGroupName()
-            {
-                return GetRemoteIpAddress();
-            }
-
-            public string GetRemoteIpAddress()
-            {
-                return Context.GetHttpContext()?.Connection.RemoteIpAddress.ToString();
-            }
-        
     }
-}
+```
+{% endif %}
+
+## Configuring the Hub
+
+SignalR uses [hubs to communicate between clients and servers](https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-8.0). A hub is a high-level pipeline that allows the client-server communication. The SignalR Hubs API enables you to call methods on connected clients from the server.
+
+The example below demonstrates a sample Hub implementation:
+
+```
+    public class ProductHub(SampleEntitiesDataContext context) : Hub
+    {
+        public override Task OnConnectedAsync()
+        {
+            Groups.AddToGroupAsync(Context.ConnectionId, GetGroupName());
+            return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception e)
+        {
+            Groups.RemoveFromGroupAsync(Context.ConnectionId, GetGroupName());
+            return base.OnDisconnectedAsync(e);
+        }
+
+        public IEnumerable<ProductSignalR> Read()
+        {
+            var products = context.Products.Select(p => new ProductSignalR
+            {
+                ID = p.ProductID,
+                ProductName = p.ProductName,
+                UnitPrice = (double)p.UnitPrice.GetValueOrDefault(),
+                UnitsInStock = p.UnitsInStock.GetValueOrDefault(),
+                CreatedAt = DateTime.Now.AddMilliseconds(1),
+                Category = new CategorySignalR
+                {
+                    CategoryID = p.Category.CategoryID,
+                    CategoryName = p.Category.CategoryName
+                }
+            }).ToList();
+
+            return products;
+        }
+
+        public ProductSignalR Create(ProductSignalR product)
+        {
+            product.ID = DateTime.Now.Ticks;
+            product.CreatedAt = DateTime.Now;
+            product.Category ??= new CategorySignalR { CategoryID = 1 };
+
+            Clients.OthersInGroup(GetGroupName()).SendAsync("create", product);
+            return product;
+        }
+
+        public ProductSignalR Update(ProductSignalR product)
+        {
+            Clients.OthersInGroup(GetGroupName()).SendAsync("update", product);
+            return product;
+        }
+
+        public void Destroy(ProductSignalR product)
+        {
+            Clients.OthersInGroup(GetGroupName()).SendAsync("destroy", product);
+        }
+
+        public string GetGroupName()
+        {
+            return GetRemoteIpAddress();
+        }
+
+        public string GetRemoteIpAddress()
+        {
+            return Context.GetHttpContext()?.Connection.RemoteIpAddress?.ToString();
+        }
+    }
 
 ```
 
-## Including the Client-Side Implementation of SignalR in the Page
+## Including the Client-Side Library
 
-Connect the View (for example, `Views/Home/Index.cshtml`) to a hub before initializing the Grid that uses the hub.
+Ensure the client-side library matches the server-side library version. Connecting an ASP.NET SignalR server to a client using ASP.NET Core SignalR client library and vice versa is not supported.
 
-The SignalR clients ship alongside the server components and are versioned to match. Any supported client can safely connect to any supported server. Refer to the [official SignalR documentation](https://docs.microsoft.com/en-us/aspnet/core/signalr/javascript-client?view=aspnetcore-2.1) for client-side installation information.
+{% if site.core %}
+### Configuring the ASP.NET Core SignalR Client-Side Hub
 
+1. Add a reference to the client-side SignalR library.
+1. Initialize a hub.
+1. Start the hub.
 
+For complete details and API reference on the client-side SignalR library, refer to [Microsoft's documentation](https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client?view=aspnetcore-8.0&tabs=visual-studio).
+
+```JavaScript
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js" integrity="sha512-7SRCYIJtR6F8ocwW7UxW6wGKqbSyqREDbfCORCbGLatU0iugBLwyOXpzhkPyHIFdBO0K2VCu57fvP2Twgx1o2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var hubUrl = "path/to/hub";
+        var hub = new signalR.HubConnectionBuilder()
+            .withUrl(hubUrl,{
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
+            })
+            .build();
+
+        var hubStart = hub.start()
+            .then(function (e) {
+                $("#notification").data("kendoNotification").success("SignalR Hub Started!");
+            })
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+    </script>
 ```
-<script src="https://unpkg.com/@@aspnet/signalr@1.0.0/dist/browser/signalr.js"></script>
-<script>
-    //signalR config
-    var hubUrl = "/gridHub";
+{% else %}
+### Configuring the ASP.NET SignalR Client-Side Hub
 
-    var hub = new signalR.HubConnectionBuilder()
-        .withUrl(hubUrl, {
-            transport: signalR.HttpTransportType.LongPolling
-        })
-        .build();
+If you use the ASP.NET SignalR service, you must use the ASP.NET SignalR client-side library. 
 
-    var hubStart = hub.start()
-</script>
-```
+1. Add a reference to the client-side SignalR library.
+1. Initialize a hub.
+1. Start the hub.
 
-> Use Long Polling because [WebSockets](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/websockets?view=aspnetcore-2.1) work only in [some scenarios](https://github.com/aspnet/SignalR/issues/1457#issuecomment-366280873) and [server-sent events](https://caniuse.com/#search=server%20sent%20events) are not supported by IE/Edge.
+For additional guidance on the client-side API of the ASP.NET SignalR library, refer to [Microsoft's documentation](https://learn.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
+The example below demonstrates the hub configuration:
 
-## Configuring the Grid's DataSource Transport 
+ ```JavaScript
+    <script src="Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script>
+        var hubUrl = "path/to/hub";
+        var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
+        var meetingHub = connection.createHubProxy("products");
+        var hubStart = connection.start({ jsonp: true });
+    </script>
+ ```
+{% endif %}
 
-The next steps are to configure the Grid's DataSource Transport to connect to the SignalR Hub.
-Instruct the data source to use SignalR protocol for transmitting and operating with data in real time.
+## Configuring the Grid's DataSource
+
+The next steps describe how to set up the `Transport` configuration of the Grid's DataSource to connect to the SignalR Hub.
+
+Instruct the DataSource to use SignalR protocol for transmitting and operating with data in real-time.
 
 ```HtmlHelper
-@(Html.Kendo().Grid<Core_Grid_CRUD.Models.OrderViewModel>()
-                .Name("grid")
-                .Columns(columns =>
-                {
-                    columns.Select();
-                    columns.Bound(p => p.OrderID).Filterable(true);
-                    columns.Bound(p => p.Freight);
-                    columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
-                    columns.Bound(p => p.ShipName);
-                    columns.Bound(p => p.ShipCity).Width(250);
-                    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
-                })
-                .ToolBar(c =>
-                {
-                    c.Create();
-                    c.Save();
-                    c.Search();
-                })
-                .Scrollable()
-                .Sortable()
-                .DataSource(dataSource => dataSource
-                    .SignalR()
-                    .Transport(tr => tr
-                        .Promise("hubStart")
-                        .Hub("hub")
-                        .Client(c => c
-                            .Read("read")
-                            .Create("create")
-                            .Update("update")
-                            .Destroy("destroy"))
-                        .Server(s => s
-                            .Read("read")
-                            .Create("create")
-                            .Update("update")
-                            .Destroy("destroy")))
-                    .Schema(schema => schema
-                        .Model(model =>
-                        {
-                            model.Id("OrderID");
-                            model.Field("OrderID", typeof(string)).Editable(false);
-                            model.Field("Freight", typeof(decimal));
-                            model.Field("OrderDate", typeof(DateTime));
-                            model.Field("ShipName", typeof(string));
-                            model.Field("ShipCity", typeof(string));
-                            
-                        }
-                        )
-                    )
-            )
+@(Html.Kendo().Grid<ProductViewModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductName).Width(150);
+        columns.Bound(p => p.UnitsInStock).Width(120);
+        columns.Bound(p => p.Category).ClientTemplate("#=Category.CategoryName#").Width(150);
+        columns.Bound(p => p.Category.CategoryName).Filterable(false);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+    })
+    .ToolBar(c =>
+    {
+        c.Create();
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Scrollable()
+    .Sortable()
+    .DataSource(dataSource => dataSource
+        .SignalR()
+        .Transport(tr => tr
+            .Promise("hubStart")
+            .Hub("hub")
+            .Client(c => c
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy"))
+            .Server(s => s
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy")))
+        .Schema(schema => schema
+            .Model(model =>
+            {
+                model.Id("ID");
+                model.Field("ID", typeof(int)).Editable(false);
+                model.Field("UnitsInStock", typeof(int));
+                model.Field(m => m.Category).DefaultValue(new CategoryViewModel() { CategoryID = 1, CategoryName = "Beverages" });
+            })
+        )
+    )
+)
 ```
 
 ## SignalR with Push Notifications
 
-The following example demonstrates a sample implementation of a Grid which uses SignalR to show push notifications. The used service is available in [this GitHub repository](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs):
+The following example demonstrates a sample implementation of a Grid that uses SignalR to show push notifications.
 
 ```JavaScript
 $(document).ready(function() {
-    var hubUrl = "http://domain/signalr-service/products";
+    var hubUrl = "path/to/hub";
     var hub = new signalR.HubConnectionBuilder()
-        .withUrl(hubUrl, {
-            transport: signalR.HttpTransportType.LongPolling
+        .withUrl(hubUrl,{
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets
         })
         .build();
 
-    var hubStart = hub.start();
+    var hubStart = hub.start()
+        .then(function (e) {
+            $("#notification").data("kendoNotification").success("SignalR Hub Started!");
+        })
+        .catch(function (err) {
+            return console.error(err.toString());
+        });
 });
 
 function onPush(e) {
     var notification = $("#notification").data("kendoNotification");
     notification.success(e.type);
 }
-
 ```
 ```HtmlHelper
 @(Html.Kendo().Notification()
-        .Name("notification")
-        .Width("100%")
-        .Position(position => position
-            .Top(50)
-            .Left(50))
+    .Name("notification")
+    .Width("100%")
+    .Position(position => position
+        .Top(50)
+        .Left(50))
 )
 
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
-        .Name("Grid")
-        .Columns(columns =>
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductName);
+        columns.Bound(p => p.UnitPrice);
+        columns.Bound(p => p.CreatedAt);
+        columns.Command(command =>
         {
-            columns.Bound(p => p.ProductName);
-            columns.Bound(p => p.UnitPrice);
-            columns.Bound(p => p.CreatedAt);
-            columns.Command(command =>
+            command.Edit();
+            command.Destroy();
+        }).Width(150);
+    })
+    .HtmlAttributes(new { style = "height: 550px;margin-bottom:20px;" })
+    .ToolBar(toolbar =>
+    {
+        toolbar.Create();
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InCell))
+    .Sortable()
+    .Scrollable()
+    .DataSource(dataSource => dataSource
+        .SignalR()
+        .AutoSync(true)
+        .Events(events => events.Push("onPush"))
+        .Transport(tr => tr
+            .Promise("hubStart")
+            .Hub("hub")
+            .Client(c => c
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy"))
+            .Server(s => s
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy")))
+        .Schema(schema => schema
+            .Model(model =>
             {
-                command.Edit();
-                command.Destroy();
-            }).Width(150);
-        })
-        .HtmlAttributes(new { style = "height: 550px;margin-bottom:20px;" })
-        .ToolBar(toolbar =>
-        {
-            toolbar.Create();
-        })
-        .Editable(editable => editable.Mode(GridEditMode.InCell))
-        .Sortable()
-        .Scrollable()
-        .DataSource(dataSource => dataSource
-            .SignalR()
-            .AutoSync(true)
-            .Events(events => events.Push("onPush"))
-            .Transport(tr => tr
-                .Promise("hubStart")
-                .Hub("hub")
-                .Client(c => c
-                    .Read("read")
-                    .Create("create")
-                    .Update("update")
-                    .Destroy("destroy"))
-                .Server(s => s
-                    .Read("read")
-                    .Create("create")
-                    .Update("update")
-                    .Destroy("destroy")))
-            .Schema(schema => schema
-                .Model(model =>
-                {
-                    model.Id("ID");
-                    model.Field("ID", typeof(string)).Editable(false);
-                    model.Field("ProductName", typeof(string));
-                    model.Field("CreatedAt", typeof(DateTime));
-                    model.Field("UnitPrice", typeof(int));
-                }
-                )
-            )
+                model.Id("ID");
+                model.Field("ID", typeof(string)).Editable(false);
+                model.Field("ProductName", typeof(string));
+                model.Field("CreatedAt", typeof(DateTime));
+                model.Field("UnitPrice", typeof(int));
+            })
         )
+    )
 )
 ```
 
@@ -316,5 +386,5 @@ function onPush(e) {
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
 * [SignalR Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/signalr)
-* [Official Microsoft Documentation on Getting Started with {{ site.framework }} SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/get-started?view=aspnetcore-2.1&tabs=visual-studio)
+* [Official Microsoft Documentation on Getting Started with {{ site.framework }} SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/)
 * [Server-Side API](/api/grid)

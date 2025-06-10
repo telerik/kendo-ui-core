@@ -162,13 +162,12 @@ The fields which can be used in the template are:
 
     <div id="diagram"></div>
     <script>
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -185,8 +184,7 @@ The fields which can be used in the template are:
       var connectionsDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -1967,30 +1965,32 @@ Specifies the connection editor template which shows up when editing the connect
 
     <div id="diagram"></div>
     <script>
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           },
           update: {
             url: serviceRoot + "/DiagramShapes/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramShapes/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramShapes/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -2011,23 +2011,27 @@ Specifies the connection editor template which shows up when editing the connect
         transport: {
           read: {
             url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           update: {
             url: serviceRoot + "/DiagramConnections/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramConnections/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramConnections/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -2499,30 +2503,32 @@ Specifies the shape editor template. You can use it to customize the editing UI 
       }
 
       function createDiagram() {
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
         var shapesDataSource = {
           batch: false,
           transport: {
             read: {
-              url: serviceRoot + "/DiagramShapes",
-              dataType: "jsonp"
+              url: serviceRoot + "/DiagramShapes"
             },
             update: {
               url: serviceRoot + "/DiagramShapes/Update",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             destroy: {
               url: serviceRoot + "/DiagramShapes/Destroy",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             create: {
               url: serviceRoot + "/DiagramShapes/Create",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function (options, operation) {
               if (operation !== "read") {
-                return { models: kendo.stringify(options.models || [options]) };
+                return kendo.stringify(options.models || [options]);
               }
             }
           },
@@ -2541,24 +2547,26 @@ Specifies the shape editor template. You can use it to customize the editing UI 
           batch: false,
           transport: {
             read: {
-              url: serviceRoot + "/DiagramConnections",
-              dataType: "jsonp"
+              url: serviceRoot + "/DiagramConnections"
             },
             update: {
               url: serviceRoot + "/DiagramConnections/Update",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             destroy: {
               url: serviceRoot + "/DiagramConnections/Destroy",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             create: {
               url: serviceRoot + "/DiagramConnections/Create",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function (options, operation) {
               if (operation !== "read") {
-                return { models: kendo.stringify(options.models || [options]) };
+                return kendo.stringify(options.models || [options]);
               }
             }
           },
@@ -4030,13 +4038,12 @@ The fields which can be used in the template are:
 
     <div id="diagram"></div>
     <script>
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -4053,8 +4060,7 @@ The fields which can be used in the template are:
       var connectionsDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -7309,30 +7315,32 @@ Cancels edit and close the popup form.
         }
       }
 
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           },
           update: {
             url: serviceRoot + "/DiagramShapes/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramShapes/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramShapes/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -7352,24 +7360,26 @@ Cancels edit and close the popup form.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           },
           update: {
             url: serviceRoot + "/DiagramConnections/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramConnections/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramConnections/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -7643,30 +7653,30 @@ Adds an empty connection data item and a popup window will be displayed.
         var diagram = $("#diagram").getKendoDiagram();
         diagram.createConnection();
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           },
           update: {
-            url: serviceRoot + "/DiagramShapes/Update",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes/Update"
           },
           destroy: {
             url: serviceRoot + "/DiagramShapes/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramShapes/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -7686,24 +7696,26 @@ Adds an empty connection data item and a popup window will be displayed.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           },
           update: {
             url: serviceRoot + "/DiagramConnections/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramConnections/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramConnections/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -7752,30 +7764,32 @@ Adds an empty shape data item and a popup window will be displayed.
         var diagram = $("#diagram").getKendoDiagram();
         diagram.createShape();
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           },
           update: {
             url: serviceRoot + "/DiagramShapes/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramShapes/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramShapes/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -7795,24 +7809,26 @@ Adds an empty shape data item and a popup window will be displayed.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           },
           update: {
             url: serviceRoot + "/DiagramConnections/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramConnections/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramConnections/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -8152,30 +8168,32 @@ A diagram item to edit.
         var diagram = $("#diagram").getKendoDiagram();
         diagram.edit(diagram.shapes[0]);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           },
           update: {
             url: serviceRoot + "/DiagramShapes/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramShapes/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramShapes/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -8195,24 +8213,26 @@ A diagram item to edit.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           },
           update: {
             url: serviceRoot + "/DiagramConnections/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramConnections/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramConnections/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -8463,14 +8483,13 @@ The model id value.
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Connection between shapes " + conn.from + " and " + conn.to);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -8487,8 +8506,7 @@ The model id value.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -8543,14 +8561,13 @@ The model uid value.
         var conn = diagram.getConnectionByModelUid(dataItem.uid);
         diagram.select(conn);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -8567,8 +8584,7 @@ The model uid value.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -8622,14 +8638,13 @@ The unique identifier of the Shape or Connection
         var shape = diagram.getShapeById(diagram.connections[0].from.id);
         diagram.select(shape);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -8646,8 +8661,7 @@ The unique identifier of the Shape or Connection
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -8700,14 +8714,13 @@ The model id value.
         var shape = diagram.getShapeByModelId(3);
         diagram.select(shape);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -8724,8 +8737,7 @@ The model id value.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -8779,14 +8791,13 @@ The model uid value.
         var shape = diagram.getShapeByModelUid(dataItem.uid);
         diagram.select(shape);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -8803,8 +8814,7 @@ The model uid value.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -9483,30 +9493,32 @@ Saves any changes made by the user.
 
     <div id="diagram"></div>
     <script>
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           },
           update: {
             url: serviceRoot + "/DiagramShapes/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramShapes/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramShapes/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -9532,24 +9544,26 @@ Saves any changes made by the user.
         batch: false,
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           },
           update: {
             url: serviceRoot + "/DiagramConnections/Update",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           destroy: {
             url: serviceRoot + "/DiagramConnections/Destroy",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
             url: serviceRoot + "/DiagramConnections/Create",
-            dataType: "jsonp"
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read") {
-              return { models: kendo.stringify(options.models || [options]) };
+              return kendo.stringify(options.models || [options]);
             }
           }
         },
@@ -9807,13 +9821,12 @@ The data source to which the widget should be bound.
         var diagram = $("#diagram").getKendoDiagram();
         diagram.setConnectionsDataSource(connectionsDataSource);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -9829,8 +9842,7 @@ The data source to which the widget should be bound.
       var connectionsDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {
@@ -9876,13 +9888,12 @@ The data source to which the widget should be bound.
         var diagram = $("#diagram").getKendoDiagram();
         diagram.setConnectionsDataSource(connectionsDataSource);
       });
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
       var shapesDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramShapes",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramShapes"
           }
         },
         schema: {
@@ -9898,8 +9909,7 @@ The data source to which the widget should be bound.
       var connectionsDataSource = {
         transport: {
           read: {
-            url: serviceRoot + "/DiagramConnections",
-            dataType: "jsonp"
+            url: serviceRoot + "/DiagramConnections"
           }
         },
         schema: {

@@ -119,8 +119,7 @@ How to populate Spreadsheet remote dataSource conditionally by dynamically chang
               read: function(options) {
 				  
                 $.ajax({
-                  url: "https://demos.telerik.com/kendo-ui/service"+url,
-                  dataType: "jsonp", 
+                  url: "https://demos.telerik.com/service/v2/core" + url,
                   success: function(result) {
                     options.success(result);
                   },

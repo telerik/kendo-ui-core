@@ -48,9 +48,8 @@ The following example demonstrates the full implementation of this approach and 
     	$(document).ready(function () {
     		$("#grid").kendoGrid({
     			dataSource: {
-    				type: "odata",
     				transport: {
-    					read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+    					read: "https://demos.telerik.com/service/v2/core/Customers"
     				},
     				pageSize: 20
     			},

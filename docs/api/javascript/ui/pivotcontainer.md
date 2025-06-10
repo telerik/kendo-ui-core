@@ -35,7 +35,7 @@ Sets the position of the configurator and button related to the pivot inside the
                         catalog: "Adventure Works DW 2008R2",
                         cube: "Adventure Works"
                     },
-                    read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                    read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                 }
             }
         }).data("kendoPivotGridV2");

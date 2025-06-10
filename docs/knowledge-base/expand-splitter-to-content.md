@@ -68,9 +68,8 @@ The following example demonstrates how to make the Kendo UI Splitter expand its 
 
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
-                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
                 }
             },
             columns: [{

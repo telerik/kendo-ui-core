@@ -51,31 +51,36 @@ I want to be able to click on the expand/collapse icon of the parent task and se
 
     <script>
         $(document).ready(function() {
-            var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+            var serviceRoot = "https://demos.telerik.com/service/v2/core";
             var tasksDataSource = new kendo.data.GanttDataSource({
-            transport: {
-                read: {
-                url: serviceRoot + "/GanttTasks",
-                dataType: "jsonp"
+                transport: {
+                    read: {
+                        url: serviceRoot + "/GanttTasks"
+                    },
+                    update: {
+                        url: serviceRoot + "/GanttTasks/Update",
+                        type: "POST",
+                        contentType: "application/json",
+                        timeout: 5000
+                    },
+                    destroy: {
+                        url: serviceRoot + "/GanttTasks/Destroy",
+                        type: "POST",
+                        contentType: "application/json",
+                        timeout: 5000
+                    },
+                    create: {
+                        url: serviceRoot + "/GanttTasks/Create",
+                        type: "POST",
+                        contentType: "application/json",
+                        timeout: 5000
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read") {
+                            return kendo.stringify(options.models || [options]);
+                        }
+                    }
                 },
-                update: {
-                url: serviceRoot + "/GanttTasks/Update",
-                dataType: "jsonp"
-                },
-                destroy: {
-                url: serviceRoot + "/GanttTasks/Destroy",
-                dataType: "jsonp"
-                },
-                create: {
-                url: serviceRoot + "/GanttTasks/Create",
-                dataType: "jsonp"
-                },
-                parameterMap: function(options, operation) {
-                if (operation !== "read") {
-                    return { models: kendo.stringify(options.models || [options]) };
-                }
-                }
-            },
             schema: {
                 model: {
                 id: "id",
@@ -97,25 +102,27 @@ I want to be able to click on the expand/collapse icon of the parent task and se
         var dependenciesDataSource = new kendo.data.GanttDependencyDataSource({
             transport: {
                 read: {
-                url: serviceRoot + "/GanttDependencies",
-                dataType: "jsonp"
+                    url: serviceRoot + "/GanttDependencies"
                 },
                 update: {
-                url: serviceRoot + "/GanttDependencies/Update",
-                dataType: "jsonp"
+                    url: serviceRoot + "/GanttDependencies/Update",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 destroy: {
-                url: serviceRoot + "/GanttDependencies/Destroy",
-                dataType: "jsonp"
+                    url: serviceRoot + "/GanttDependencies/Destroy",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 create: {
-                url: serviceRoot + "/GanttDependencies/Create",
-                dataType: "jsonp"
+                    url: serviceRoot + "/GanttDependencies/Create",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
-                if (operation !== "read") {
-                    return { models: kendo.stringify(options.models || [options]) };
-                }
+                    if (operation !== "read") {
+                        return kendo.stringify(options.models || [options]);
+                    }
                 }
             },
             schema: {

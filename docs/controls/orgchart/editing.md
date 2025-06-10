@@ -25,13 +25,12 @@ The following example demonstrates how to configure CRUD (Create, Read, Update, 
     <div id="orgchart"></div>    
 
     <script>  
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         $("#orgchart").kendoOrgChart({
             dataSource: {
                 transport: {
                     read: {
-                        url: crudServiceBaseUrl + "/EmployeesOrgChart",
-                        dataType: "json"
+                        url: crudServiceBaseUrl + "/EmployeesOrgChart"
                     },
                     create: {
                         url: crudServiceBaseUrl + "/EmployeesOrgChart/create",
@@ -80,20 +79,22 @@ The following example demonstrates how to configure the OrgChart DataSource for 
 	var ds = new kendo.data.OrgChartDataSource({
         transport: {
             read: {
-                url: crudServiceBaseUrl + "/EmployeesOrgChart",
-                dataType: "json"
+                url: crudServiceBaseUrl + "/EmployeesOrgChart"
             },
             create: {
                 url: crudServiceBaseUrl + "/EmployeesOrgChart/create",
-                method: "POST"
+                type: "POST",
+                contentType: "application/json"
             },
             update: {
                 url: crudServiceBaseUrl + "/EmployeesOrgChart/update",
-                method: "POST"
+                type: "POST",
+                contentType: "application/json"
             },
             destroy: {
                 url: crudServiceBaseUrl + "/EmployeesOrgChart/destroy",
-                method: "POST"
+                type: "POST",
+                contentType: "application/json"
             }
         },
         //....

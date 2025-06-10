@@ -38,9 +38,9 @@ Conditionally change the background color of the header cells in the `dataBound`
     $(document).ready(function() {
         var element = $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                    read: "https://demos.telerik.com/service/v2/odata/Employees"
                 },
                 pageSize: 6,
                 serverPaging: true,
@@ -81,9 +81,9 @@ Conditionally change the background color of the header cells in the `dataBound`
     function detailInit(e) {
         $("<div id='grid_" + e.data.EmployeeID + "'/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 serverPaging: true,
                 serverSorting: true,

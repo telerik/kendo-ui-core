@@ -12,7 +12,7 @@ The Kendo UI PivotGrid supports data binding to an HTTP accessible Online Analyt
 
 ## OLAP Services
 
-Kendo UI provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/olap/msmdpump.dll`. To see the responses, the service needs to be queried and cannot be opened directly in the browser. For more information on binding the PivotGrid to data over an OLAP cube, refer to the following articles:
+Kendo UI provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/service/v2/olap/msmdpump.dll`. To see the responses, the service needs to be queried and cannot be opened directly in the browser. For more information on binding the PivotGrid to data over an OLAP cube, refer to the following articles:
 * [OLAP Cube Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 * [PivotConfigurator Overview]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})

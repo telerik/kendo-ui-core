@@ -81,7 +81,7 @@ Place and initialize the Chart in the [`dayTemplate`](https://docs.telerik.com/k
         }
       },
       dayTemplate: kendo.template($("#dayTemplate").html()),
-      date: new Date("2022/6/13"),
+      date: new Date("2025/6/13"),
       editable: false,
       height: 1000,
       views: [
@@ -91,24 +91,26 @@ Place and initialize the Chart in the [`dayTemplate`](https://docs.telerik.com/k
         batch: true,
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/tasks"
           },
           update: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/tasks/update",
+            type: "POST",
+            contentType: "application/json"
           },
           create: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/tasks/create",
+             type: "POST",
+             contentType: "application/json"
           },
           destroy: {
-            url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+            type: "POST",
+            contentType: "application/json"
           },
           parameterMap: function(options, operation) {
             if (operation !== "read" && options.models) {
-              return {models: kendo.stringify(options.models)};
+              return kendo.stringify(options.models);
             }
           }
         },

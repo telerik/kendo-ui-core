@@ -70,24 +70,25 @@ The Kendo UI PDF export adds a [special class during the export](/framework/draw
   </style>
    <div id="grid"></div>
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
-            transport: {
-              read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: crudServiceBaseUrl + "/Products/Update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: crudServiceBaseUrl + "/Products/Destroy",
-                dataType: "jsonp"
+              transport: {
+                 read:  {
+                     url: crudServiceBaseUrl + "/Products"
+                 },
+                 update: {
+                     url: crudServiceBaseUrl + "/Products/Update",
+                     type: "POST",
+             		     contentType: "application/json"
+                 },
+                 destroy: {
+                     url: crudServiceBaseUrl + "/Products/Destroy",
+                     type: "POST",
+             		     contentType: "application/json"              
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

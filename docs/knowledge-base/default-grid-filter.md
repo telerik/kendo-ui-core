@@ -38,9 +38,9 @@ How can I change the default filter operator and select to display a different o
             $(document).ready(function() {
               var grid = $("#grid").kendoGrid({
                 dataSource: {
-                  type: "odata",
+                  type: "odata-v4",
                   transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                   },
                   schema: {
                     model: {

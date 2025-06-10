@@ -96,9 +96,8 @@ The following example demonstrates how to select a row on any page of a client-s
 
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/core/Products"
             },
             schema: {
               model: {

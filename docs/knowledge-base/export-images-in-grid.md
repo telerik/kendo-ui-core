@@ -58,7 +58,7 @@ Note that the path to the images points to another domain. Since retrieving the 
                 toolbar: ["excel"],
                 excel: {
                     fileName: "Kendo UI Grid Export.xlsx",
-                    proxyURL: "//demos.telerik.com/kendo-ui/service/export",
+                    proxyURL: "https://demos.telerik.com/service/v2/core/export",
                     filterable: true
                 },
                 excelExport: function (e) {
@@ -118,9 +118,8 @@ Note that the path to the images points to another domain. Since retrieving the 
                     }, 2000);
                 },
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/core/Orders"
                     },
                     schema: {
                         model: {

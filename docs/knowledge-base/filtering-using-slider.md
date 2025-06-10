@@ -84,8 +84,7 @@ The following example demonstrates how to achieve this behavior and display the 
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         },
         pageSize: 4

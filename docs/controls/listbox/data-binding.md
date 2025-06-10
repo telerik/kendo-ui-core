@@ -39,7 +39,11 @@ When you use complex data objects, use the `dataTextField` and `dataValueField` 
 The following example demonstrates how to bind the ListBox to a remote data service.
 
 ```dojo
-
+    <style>
+       .k-listbox{
+         width: 300px
+       }
+    </style>
      <select id="listbox"></select>
 
     <!-- Initialize the ListBox -->
@@ -47,9 +51,8 @@ The following example demonstrates how to bind the ListBox to a remote data serv
         $(document).ready(function(){
             $("#listbox").kendoListBox({
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     }
                 },
                 dataTextField: "ContactName",

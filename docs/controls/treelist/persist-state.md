@@ -25,12 +25,11 @@ The following example demonstrates how to automatically maintain an up-to-date s
     <div id="treelist"></div>
     <script>
         $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
             var dataSource = new kendo.data.TreeListDataSource({
                 transport: {
                     read: {
-                        url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                        dataType: "jsonp"
+                        url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                     }
                 },
                 batch: true,

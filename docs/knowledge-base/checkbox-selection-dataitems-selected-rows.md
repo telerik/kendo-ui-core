@@ -65,8 +65,7 @@ To get the `dataItem` for each selected row:
               pageSize: 10,
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"                  
                 }
               },
               schema: {
@@ -139,8 +138,7 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
               pageSize: 10,
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"                  
                 }
               },
               schema: {

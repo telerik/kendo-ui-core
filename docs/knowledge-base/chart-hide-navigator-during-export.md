@@ -68,7 +68,7 @@ To maintain the navigator settings after it was zoomed in or out:
       $("#stock-chart").kendoStockChart({
         pdf: {
           fileName: "Kendo UI Stock Chart Export.pdf",
-          proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+          proxyURL: "https://demos.telerik.com/service/v2/core/export"
         },
         dataSource: {
           transport: {

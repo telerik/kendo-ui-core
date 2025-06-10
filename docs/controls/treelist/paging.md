@@ -15,14 +15,13 @@ To enable the paging functionality of the TreeList, configure the [`pageable`](h
 > Remember to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize). You can define a `pageSize` in the `pageable` or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings. If an already existing dataSource instance is passed to the TreeList, then the `pageSize` option has to be set in the dataSource settings and not in the `pageable` settings.
 
     $(document).ready(function () {
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
             dataSource: {
                 transport: {
                     read: {
-                        url: service + "/EmployeeDirectory/All",
-                        dataType: "jsonp"
+                        url: service + "/EmployeeDirectory/All"
                     }
                 },
                 schema: {

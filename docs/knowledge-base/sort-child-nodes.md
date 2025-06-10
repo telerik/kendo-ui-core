@@ -61,13 +61,12 @@ The following example demonstrates how to programmatically change the order of a
           }
         }
 
-        var serviceRoot = "//demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         asc = new kendo.data.HierarchicalDataSource({
           sort: { field: "FullName", dir: "asc" },
           transport: {
             read: {
-              url: serviceRoot + "/Employees",
-              dataType: "jsonp"
+              url: serviceRoot + "/Employees"
             }
           },
           schema: {
@@ -81,8 +80,7 @@ The following example demonstrates how to programmatically change the order of a
           sort: { field: "FullName", dir: "desc" },
           transport: {
             read: {
-              url: serviceRoot + "/Employees",
-              dataType: "jsonp"
+              url: serviceRoot + "/Employees"
             }
           },
           schema: {

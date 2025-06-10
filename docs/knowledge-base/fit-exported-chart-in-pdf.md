@@ -108,7 +108,7 @@ The following example demonstrates how to work around this issue and fit a PDF-e
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.pdf",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
           });
         });
       });
