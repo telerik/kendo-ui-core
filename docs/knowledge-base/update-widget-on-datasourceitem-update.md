@@ -117,7 +117,7 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
       </script>
 
       <script>
-        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         var viewModel = kendo.observable({
           newProductName: "test",
           updateValue: function() {

@@ -59,6 +59,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
                           url: crudServiceBaseUrl + "/Products/Create",
                           type: "POST",
                   		    contentType: "application/json"
+                      }
                   },
                 batch: true,
                 pageSize: 20,

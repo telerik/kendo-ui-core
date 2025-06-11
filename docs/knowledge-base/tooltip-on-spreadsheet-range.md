@@ -110,7 +110,7 @@ The following example demonstrates how to display a selected range from the Spre
 
           function onRead(options) {
             $.ajax({
-              url: crudServiceBaseUrl + "/Products"
+              url: crudServiceBaseUrl + "/Products",
               success: function (result) {
                 options.success(result);
               },

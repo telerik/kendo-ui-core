@@ -33,7 +33,7 @@ Use a third-party library. To submit the actual request, the following example u
 
 > The scenario uses an experimental `transport.submit` Data Source option. It is not yet included as an officially supported API call.
 
-```dojo
+```
     <div id="grid"></div>
     <script>
       $(document).ready(function () {

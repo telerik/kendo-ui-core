@@ -47,7 +47,7 @@ How can I prevent the filter popup from closing when the user scrolls the page o
 <script>
     var scroll = false;
     $(document).ready(function() {
-        var telerikWebServiceBase = "https://demos.telerik.com/service/v2/core/";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core/";
         $("#client").kendoGrid({
             dataSource: {
                 transport: {

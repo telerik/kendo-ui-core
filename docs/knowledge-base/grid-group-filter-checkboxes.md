@@ -40,7 +40,7 @@ Although sorting the dataSource of the checkboxes is possible, applying group ex
     <div id="client"></div>
       <script>
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/service/v2/core/";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core/";
           $("#client").kendoGrid({
             dataSource: {
               transport: {

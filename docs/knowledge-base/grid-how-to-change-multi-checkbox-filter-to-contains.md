@@ -248,7 +248,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
           return flatValues;
         }
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/service/v2/";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/";
 
 
 
@@ -263,7 +263,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
             dataSource: {
               type: "odata-v4",
               transport: {
-                read: telerikWebServiceBase + "odata/Employees"
+                read: crudServiceBaseUrl + "odata/Employees"
               },
               pageSize: 20,
               serverPaging: true,
@@ -283,7 +283,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique"
                         data: {
                           field: "FirstName"
                         }
@@ -298,7 +298,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique"
                         data: {
                           field: "LastName"
                         }
@@ -316,7 +316,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique"
                         data: {
                           field: "Country"
                         }
@@ -358,7 +358,7 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
                   dataSource: {
                     transport: {
                       read: {
-                        url: telerikWebServiceBase + "Employees/Unique"
+                        url: crudServiceBaseUrl + "Employees/Unique"
                         data: {
                           field: "Title"
                         }

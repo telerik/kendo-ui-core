@@ -39,7 +39,7 @@ How can I use dates inside the row template of the Kendo UI Grid for jQuery?
 
 The following example demonstrates how to use dates inside a Grid row template.
 
-```dojo
+```
      <div id="example">
       <table id="grid">
         <colgroup>
