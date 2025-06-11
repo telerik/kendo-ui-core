@@ -50,7 +50,7 @@ To filter the hidden column:
 			</div>
 			<script>
 				$(document).ready(function() {
-					var telerikWebServiceBase = "https://demos.telerik.com/service/v2/core/";
+					var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core/";
 
 					$("#client").kendoGrid({
 						dataSource: {

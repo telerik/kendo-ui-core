@@ -70,7 +70,7 @@ The following example demonstrates how to achieve this behavior, create editors 
     </ul>
 </div>
 <script>
-    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     var validator;
     var viewModel = kendo.observable({
         dataSource: new kendo.data.DataSource({

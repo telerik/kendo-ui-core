@@ -952,7 +952,7 @@ The configuration used to parse the remote service response.
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/service/v2/core/products/read/",
+            url: "https://demos.telerik.com/service/v2/core/products",
             contentType: "application/json",
             type: "POST"
           },
@@ -965,7 +965,7 @@ The configuration used to parse the remote service response.
         schema: {
           data: function(response) {
             console.log(response)            
-            return response.Data; // the response from the service is { Data: [array of objects] }
+            return response;
           }
         }
       });
@@ -1068,11 +1068,12 @@ The field from the server response which contains the data items. Can be set to 
 
 #### Example - specify the field which contains the data items as a string
 
+```pseudo
     <script>
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/service/v2/core/products/read/",
+            url: "https://demos.telerik.com/service/v2/core/products",
             contentType: "application/json",
             type: "POST"
           },
@@ -1092,6 +1093,7 @@ The field from the server response which contains the data items. Can be set to 
         console.log(data.length);
       });
     </script>
+```
 
 #### Example - specify the field which contains the data items as a function
 
@@ -1099,7 +1101,7 @@ The field from the server response which contains the data items. Can be set to 
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/service/v2/core/products/read/",
+            url: "https://demos.telerik.com/service/v2/core/products",
             contentType: "application/json",
             type: "POST"
           },
@@ -1112,7 +1114,7 @@ The field from the server response which contains the data items. Can be set to 
         schema: {
           data: function(response) {
             console.log(response)            
-            return response.Data; // the response from the service is { Data: [array of objects] }
+            return response; 
           }
         }
       });
@@ -1870,7 +1872,7 @@ If the value of `transport.create` is a string, the data source uses this string
           $.ajax({
             url: "https://demos.telerik.com/service/v2/core/products/create",
             type: "POST",
-            contentType: "application/json"
+            contentType: "application/json",
             data: kendo.stringify(options.data.models),
             success: function(result) {
               // notify the data source that the request succeeded
@@ -2131,8 +2133,8 @@ If the value of `transport.destroy` is a string, the data source uses this strin
           $.ajax({
             url: "https://demos.telerik.com/service/v2/core/products/destroy",
             type: "POST",
-            contentType: "application/json"
-            data: kendo.stringify(options.data.models)
+            contentType: "application/json",
+            data: kendo.stringify(options.data.models),
             success: function(result) {
               // notify the data source that the request succeeded
               options.success(result);
@@ -2446,7 +2448,7 @@ The supported values are:
         }
       },
       schema: {
-        data: "d"
+        data: "value"
       },
       pageSize: 20,
       serverPaging: true // enable serverPaging so take and skip are sent as request parameters
@@ -2584,7 +2586,7 @@ If the value of `transport.read` is a string, the data source uses this string a
       transport: {
         type: "odata-v4",
         read: {
-          url: "https://demos.telerik.com/service/v2/core/products/read",
+          url: "https://demos.telerik.com/service/v2/core/products",
           data: function() {
               return {
                   skip: 0,
@@ -2604,7 +2606,7 @@ If the value of `transport.read` is a string, the data source uses this string a
       transport: {
         read: function(options) {
           $.ajax({
-            url: "https://demos.telerik.com/service/v2/core/products"
+            url: "https://demos.telerik.com/service/v2/core/products",
             success: function(result) {
               // notify the data source that the request succeeded
               options.success(result);
@@ -2690,7 +2692,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
       transport: {
         type: "odata-v4",
         read: {
-          url: "https://demos.telerik.com/service/v2/core/products/read",
+          url: "https://demos.telerik.com/service/v2/core/products",
           data: function() {
               return {
                   skip: 0,
@@ -2789,101 +2791,67 @@ The configuration used when [`type`](/api/javascript/data/datasource#configurati
 
 A live demo is available at [demos.telerik.com/kendo-ui](https://demos.telerik.com/kendo-ui/grid/signalr).
 
-It is recommended to get familiar with the SignalR [JavaScript API](https://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
+It is recommended to get familiar with the SignalR [JavaScript API](https://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client) and [ASP.NET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/).
 
 #### Example
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
-    <script>
-        var hubUrl = "https://demos.telerik.com/service/v2/signalr/hubs";
-        var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
-        var hub = connection.createHubProxy("productHub");
-        var hubStart = connection.start({ jsonp: true });
-
-        var dataSource = new kendo.data.DataSource({
-            type: "signalr",
-            schema: {
-                model: {
-                    id: "ID",
-                    fields: {
-                        "ID": { editable: false, nullable: true },
-                        "CreatedAt": { type: "date" },
-                        "UnitPrice": { type: "number" }
-                    }
-                }
-            },
-            transport: {
-                signalr: {
-                    promise: hubStart,
-                    hub: hub,
-                    server: {
-                        read: "read",
-                        update: "update",
-                        destroy: "destroy",
-                        create: "create"
-                    },
-                    client: {
-                        read: "read",
-                        update: "update",
-                        destroy: "destroy",
-                        create: "create"
-                    }
-                }
-            }
-        });
-
-        dataSource.fetch(function() {
-          /* The result can be observed in the DevTools(F12) console of the browser. */
-          console.log(dataSource.data());
-        });
-    </script>
-
-Configuration with [ASP.NET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/):
-
-#### Example
-
-    <script src="https://unpkg.com/@aspnet/signalr@1.0.0/dist/browser/signalr.js"></script>
-    <script>
-        var hubUrl = "https://demos.telerik.com/aspnet-core/service/signalr/hubs/products";
-
-        var hub = new signalR.HubConnectionBuilder()
-            .withUrl(hubUrl, {
-                transport: signalR.HttpTransportType.LongPolling
+        <script>
+        $.when(
+            $.getScript("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"),
+        ).done(function () {
+            var hubUrl = "https://demos.telerik.com/service/v2/signalr/products";
+            var hub = new signalR.HubConnectionBuilder()
+            .withUrl(hubUrl,{
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
             })
             .build();
 
-        var hubStart = hub.start()
+            var hubStart = hub.start()
+                .then(function (e) {
+                    console.log("SignalR Hub Started!");
+                })
+                .catch(function (err) {
+                    return console.error(err.toString());
+                });
 
+           
         var dataSource = new kendo.data.DataSource({
-            type: "signalr",
-            schema: {
-                model: {
-                    id: "ID",
-                    fields: {
-                        "ID": { editable: false, nullable: true },
-                        "CreatedAt": { type: "date" },
-                        "UnitPrice": { type: "number" }
-                    }
-                }
+        type: "signalr",
+        schema: {
+          model: {
+            id: "ID",
+            fields: {
+              ID: { editable: false, nullable: true },
+              CreatedAt: { type: "date" },
+              UnitPrice: { type: "number" },
             },
-            transport: {
-                signalr: {
-                    promise: hubStart,
-                    hub: hub,
-                    server: {
-                        read: "read",
-                        update: "update",
-                        destroy: "destroy",
-                        create: "create"
-                    },
-                    client: {
-                        read: "read",
-                        update: "update",
-                        destroy: "destroy",
-                        create: "create"
-                    }
-                }
-            }
+          },
+        },
+        transport: {
+          signalr: {
+            promise: hubStart,
+            hub: hub,
+            server: {
+              read: "read",
+              update: "update",
+              destroy: "destroy",
+              create: "create",
+            },
+            client: {
+              read: "read",
+              update: "update",
+              destroy: "destroy",
+              create: "create",
+            },
+          },
+        },
+      });
+
+      dataSource.fetch(function () {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(dataSource.data());
+      });
         });
     </script>
 
@@ -3030,7 +2998,7 @@ If the value of `transport.update` is a string, the data source uses this string
     var dataSource = new kendo.data.DataSource({
       transport: {
         read:  {
-          url: "https://demos.telerik.com/service/v2/core/products/read"
+          url: "https://demos.telerik.com/service/v2/core/products"
         },
         update: {
           url: "https://demos.telerik.com/service/v2/core/products/update",
@@ -4479,7 +4447,7 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
         }
       },
       change: function(e) {
-        var view = this.view();tes.net/products",
+        var view = this.view();
         /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view)
         console.log(view[0].ProductName); // displays "Manjimup Dried Apples"
@@ -4898,7 +4866,7 @@ The array of data items that were affected (or read).
         }
       }
     });
-    dataSource.bind("change", dataSource_change);tes.net/products",
+    dataSource.bind("change", dataSource_change);
     dataSource.fetch();
     </script>
 

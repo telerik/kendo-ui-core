@@ -52,6 +52,7 @@ Handle the `mousedown` event for the Grid header. In the handler, check if an ed
                           url: crudServiceBaseUrl + "/Products/Create",
                           type: "POST",
                   		    contentType: "application/json"
+                      }
                   },
                 batch: true,
                 pageSize: 20,

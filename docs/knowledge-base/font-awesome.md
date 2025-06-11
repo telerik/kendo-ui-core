@@ -41,7 +41,7 @@ Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.gi
 
 The following example demonstrates how to achieve the desired scenario.
 
-```dojo
+```
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 
     <script>

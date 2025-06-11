@@ -41,12 +41,12 @@ To work around this issue, use either of the following approaches:
 	    <div id="grid"></div>
 	    <script>
 	      $(document).ready(function() {
-	        var telerikWebServiceBase = "https://demos.telerik.com/service/v2/odata/";
+	        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/odata/";
 	        $("#grid").kendoGrid({
 	          dataSource: {
 	            type: "odata-v4",
     		    transport: {
-    		      read: telerikWebServiceBase + "Employees",
+    		      read: crudServiceBaseUrl + "Employees",
     		    },
 	            pageSize: 20,
 	            serverPaging: true,
@@ -65,7 +65,7 @@ To work around this issue, use either of the following approaches:
 	                dataSource: {
 	                  transport: {
 	                    read: {
-	                      url: telerikWebServiceBase + "Employees/Unique",
+	                      url: crudServiceBaseUrl + "Employees/Unique",
 	                      dataType: "jsonp",
 	                      data: {
 	                        field: "FirstName"
@@ -82,7 +82,7 @@ To work around this issue, use either of the following approaches:
 	                dataSource: {
 	                  transport: {
 	                    read: {
-	                      url: telerikWebServiceBase + "Employees/Unique",
+	                      url: crudServiceBaseUrl + "Employees/Unique",
 	                      dataType: "jsonp",
 	                      data: {
 	                        field: "LastName"
@@ -124,7 +124,7 @@ To work around this issue, use either of the following approaches:
 	                dataSource: {
 	                  transport: {
 	                    read: {
-	                      url: telerikWebServiceBase + "Employees/Unique",
+	                      url: crudServiceBaseUrl + "Employees/Unique",
 	                      dataType: "jsonp",
 	                      data: {
 	                        field: "Title"
@@ -166,12 +166,12 @@ To work around this issue, use either of the following approaches:
 	    <div id="grid"></div>
 	    <script>
 	      $(document).ready(function() {
-	        var telerikWebServiceBase = "https://demos.telerik.com/service/v2/odata/";
+	        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/odata/";
 
 		    var FirstNameMultiDataSource = new kendo.data.DataSource({
 		      transport: {
 		        read: {
-		          url: telerikWebServiceBase + "Employees/Unique",
+		          url: crudServiceBaseUrl + "Employees/Unique",
 		          data: {
 		            field: "FirstName"
 		          }
@@ -182,7 +182,7 @@ To work around this issue, use either of the following approaches:
 	          dataSource: {
 	            type: "odata-v4",
 	            transport: {
-	              read: telerikWebServiceBase + "Northwind.svc/Employees"
+	              read: crudServiceBaseUrl + "Northwind.svc/Employees"
 	            },
 	            pageSize: 20,
 	            serverPaging: true,
@@ -208,7 +208,7 @@ To work around this issue, use either of the following approaches:
 	                dataSource: {
 	                  transport: {
 	                    read: {
-	                      url: telerikWebServiceBase + "Employees/Unique",
+	                      url: crudServiceBaseUrl + "Employees/Unique",
 	                      dataType: "jsonp",
 	                      data: {
 	                        field: "LastName"
@@ -250,7 +250,7 @@ To work around this issue, use either of the following approaches:
 	                dataSource: {
 	                  transport: {
 	                    read: {
-	                      url: telerikWebServiceBase + "Employees/Unique",
+	                      url: crudServiceBaseUrl + "Employees/Unique",
 	                      dataType: "jsonp",
 	                      data: {
 	                        field: "Title"

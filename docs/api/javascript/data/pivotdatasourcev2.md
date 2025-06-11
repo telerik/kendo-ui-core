@@ -642,16 +642,7 @@ The options of the discover request.
       }
     });
 
-    dataSource.discover({
-        data: {
-          command: "schemaMeasures",
-          restrictions: {
-            catalogName: dataSource.catalog(),
-            cubeName: dataSource.cube()
-          }
-        }
-      });
-    </script>
+    dataSource.discover({ command: "schemaMeasures" });
 
 ### measures
 

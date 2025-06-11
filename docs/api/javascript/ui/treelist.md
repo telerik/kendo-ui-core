@@ -8855,7 +8855,7 @@ If invoked, prevents the removal of the data item. The table rows will remain un
               url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/All"
             },
             destroy: {
-              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Destroy"
+              url: "https://demos.telerik.com/service/v2/core/EmployeeDirectory/Destroy",
               type: "POST",
               contentType: "application/json"
             },

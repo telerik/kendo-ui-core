@@ -46,7 +46,7 @@ To see the same scenario for inline data, refer to the [**Bar Charts / Stacked a
 
 The following example demonstrates how to implement the steps previously described.
 
-```dojo
+```
     <div id="chart"></div>
     <script>
         var dataUrl = "https://www.mocky.io/v2/5bfc002c3100006f0039bbff";

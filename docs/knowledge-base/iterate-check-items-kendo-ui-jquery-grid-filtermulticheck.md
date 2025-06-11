@@ -82,13 +82,13 @@ For a practical implementation, refer to the below runnable demo: [Kendo UI for 
 <div id="client"></div>
     <script>
       $(document).ready(function () {
-        var telerikWebServiceBase =
+        var crudServiceBaseUrl =
           "https://demos.telerik.com/service/v2/core/";
         $("#client").kendoGrid({
           dataSource: {
             transport: {
               read: {
-                url: telerikWebServiceBase + "/Products"
+                url: crudServiceBaseUrl + "/Products"
               },
               parameterMap: function (options, operation) {
                 if (operation !== "read" && options.models) {

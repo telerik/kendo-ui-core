@@ -107,7 +107,7 @@ To simulate the layout of the week view, implement a **More Events** button simi
             "day",
                 { type: "week" },
                 // "custom week",
-                { type: MyWeekView, title: "my week view", selected: true }
+                { type: MyWeekView, name: "my-week-view", title: "my week view", selected: true }
             ],
             timezone: "Etc/UTC",
             dataSource: {

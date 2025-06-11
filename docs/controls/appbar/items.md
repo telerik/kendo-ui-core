@@ -22,25 +22,34 @@ The following example shows how to utilize both approaches:
 
 ```dojo
     <script id="search-template" type="text/x-kendo-tmpl">
-        <span class="k-textbox k-display-flex">
-            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
-            <span class="k-input-icon">
-                <span class="k-icon k-i-search"></span>
-            </span>
-        </span>
+      <span class="k-textbox k-display-flex">
+          <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+          <span class="k-input-icon">
+              <span class="k-icon k-i-search"></span>
+          </span>
+      </span>
     </script>
-    
+
     <div id="appbar"></div>
 
     <script>
-        $("#appbar").kendoAppBar({
-            items: [
-                { template: '<a class="k-button" href="\\#"><span class="k-icon k-i-menu"></span></a>', type: "contentItem" },
-                { type: "spacer", width: "12px" },
-                { template: kendo.template($("#search-template").html()), type: "contentItem" }
-            ]
-        });
-    </script>    
+      $("#appbar").kendoAppBar({
+        items: [
+          {
+            template: '<a class="k-button" href="\\#"><span class="k-icon k-i-menu"></span></a>',
+            type: "contentItem",
+          },
+          { type: "contentItem", template: "Kendo UI for jQuery AppBar" },
+          { type: "spacer" },
+          {
+            template: kendo.template($("#search-template").html()),
+            type: "contentItem",
+          },
+        ],
+      });
+      kendo.ui.icon($(".k-i-menu"), "menu");
+      kendo.ui.icon($(".k-i-search"), "search");
+    </script>
 ```
 
 ## Spacer
@@ -51,13 +60,24 @@ The `spacer` item could be utilized to easily separate the content items from on
     <div id="appbar"></div>
 
     <script>
-        $("#appbar").kendoAppBar({
-            items: [
-                { template: '<h3>AppBar Demo</h3>', type: "contentItem" },
-                { width: 16, type: "spacer" },
-                { template: '<a class="k-button" href="\\#"><span class="k-icon k-i-menu"></span></a>', type: "contentItem" }
-            ]
-        });
+      $("#appbar").kendoAppBar({
+        items: [
+          {
+            template: '<a class="k-button" href="\\#"><span class="k-icon k-i-menu"></span></a>',
+            type: "contentItem",
+          },
+
+          { width: 50, type: "spacer" },
+          {
+            template: "<h3>Kendo UI for jQuery AppBar</h3>",
+            type: "contentItem",
+          },
+          { type: "spacer" },
+          { type: "contentItem", template: "About Us"}
+        ],
+      });
+
+      kendo.ui.icon($(".k-i-menu"), "menu");
     </script>
 ```
 
