@@ -643,6 +643,7 @@ The options of the discover request.
     });
 
     dataSource.discover({ command: "schemaMeasures" });
+    </script>
 
 ### measures
 

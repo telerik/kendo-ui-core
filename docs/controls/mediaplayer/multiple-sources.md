@@ -12,7 +12,7 @@ To add multiple sources for the same video, you have to configure the quality-de
 
 When you add multiple sources for the video, an **HD** button is automatically displayed in the bottom right corner next to the **FullScreen** button. This behavior enables you to select your preferred quality.
 
-```dojo
+```
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
 <script>
     $("#mediaplayer1").kendoMediaPlayer({

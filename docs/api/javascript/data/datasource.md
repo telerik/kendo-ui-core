@@ -2671,8 +2671,8 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
     <script>
     var dataSource = new kendo.data.DataSource({
-      transport: {
-        type: "odata-v4",
+      type: "odata-v4",
+      transport: {       
         read: {
           url: "https://demos.telerik.com/service/v2/odata/products",
           data:  {
