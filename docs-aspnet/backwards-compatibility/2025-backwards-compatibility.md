@@ -90,6 +90,12 @@ As of the Q2 2025 release, the `Telerik.Core.Export` package targets .NET Framew
 
 {% endif %}
 
+### ToolBar Buttons in Grid
+
+The Grid component now provides a new property to disable or hide the inactive tools when editing. Its ToolBar buttons like `Save Changes` and `Cancel` will be hidden by default. When the `ToolBar.ShowInactiveTools` option is enabled the inactive tools will be displayed as disabled.
+
+More details you can find in the dedicated [Grid ToolBar article]({% slug htmlhelpers_grid_aspnetcore_toolbar%}).
+
 ### Telerik.Zip
 
 As of the Q2 2025 release, the following NuGet packages and assemblies no longer have a dependency to the `Telerik.Zip` library:
