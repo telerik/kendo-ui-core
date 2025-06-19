@@ -13,22 +13,16 @@ res_type: kb
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>All</td>
- </tr>
- <tr>
-  <td>Browser</td>
-  <td>All</td>
- </tr>
- <tr>
-  <td>Browser Version</td>
-  <td>All</td>
- </tr>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI Grid for jQuery</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.2.520</td>
+</tr>
+</tbody>
 </table>
 
 ## Description
@@ -39,7 +33,7 @@ How can I use dates inside the row template of the Kendo UI Grid for jQuery?
 
 The following example demonstrates how to use dates inside a Grid row template.
 
-```
+```dojo
      <div id="example">
       <table id="grid">
         <colgroup>
@@ -116,9 +110,10 @@ The following example demonstrates how to use dates inside a Grid row template.
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
+              type: "odata-v4",
               transport: {
                 read: {
-                  url: "hhttps://demos.telerik.com/service/v2/core/Employees",
+                  url: "https://demos.telerik.com/service/v2/odata/Employees",
                 }
               }
             },

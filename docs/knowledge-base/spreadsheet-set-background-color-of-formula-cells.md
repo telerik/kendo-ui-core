@@ -25,10 +25,10 @@ res_type: kb
 I want to identify all the formula cells so that I can perform actions on them after initialization such as change background color or disable them. How do I get all the formula values and return their respective ranges?
 
 ## Solution
-1. Get the Spreadsheet's `[activeSheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/activesheet)`
+1. Get the Spreadsheet's [`activeSheet`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/activesheet)
 1. Use its private **_properties.get("formula").values()** method to get an Array of the cells values that have formulas
 1. Utilize the [JS .map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method, to map the Array
-1. In the callback of the map method use the `[sheet.range](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/range)` method to get the `[Range](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)` of the formula cells currently being mapped and return it to enable later manipulation
+1. In the callback of the map method use the [`sheet.range`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/range) method to get the [`Range`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) of the formula cells currently being mapped and return it to enable later manipulation
  
 ```dojo
 <div id="example">

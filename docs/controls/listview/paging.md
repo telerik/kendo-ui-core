@@ -144,6 +144,7 @@ The following example demonstrates the full implementation of the suggested appr
 
 <script>
 var dataSource = new kendo.data.DataSource({
+    pageSize: 10,
     transport: {
         read: {
             url: "https://demos.telerik.com/service/v2/core/Products"

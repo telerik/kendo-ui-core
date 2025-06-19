@@ -146,7 +146,10 @@ The following example demonstrates how to allow the user to manually select the 
           $("#grid").kendoGrid({
             dataSource: dataSource,
             height: 430,
-            toolbar: ["create", "save", "cancel"],
+            toolbar: {
+              showInactiveTools: true,
+              items: ["create", "save", "cancel"]
+            },
             editable:true,
             pageable: true,
             columns:[

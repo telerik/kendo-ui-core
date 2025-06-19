@@ -53,7 +53,7 @@ There a different options to choose from when it comes to the UI of the aggregat
       var model;
       var columns;
       $.ajax({
-        url: "https://www.mocky.io/v2/5835e736110000020e0c003c",
+        url: "https://runner.telerik.io/fullscreen/DEUMgSey.json",
         success: function (result) {
           generateGrid(result);
         }

@@ -73,7 +73,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
               read: {
                 url: "https://demos.telerik.com/service/v2/core/Products",
               }
-            }
+            },
             pageSize: 15
           });
 
