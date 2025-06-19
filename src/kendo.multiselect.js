@@ -451,6 +451,7 @@ export const __meta__ = {
             clearTimeout(that._typingTimeout);
 
             that.wrapper.removeClass(FOCUSEDCLASS);
+            that.tagList.children(CHIP).removeClass(FOCUSEDCLASS);
 
             that._placeholder(!that.listView.selectedDataItems()[0], true);
             that.close();

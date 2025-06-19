@@ -134,8 +134,10 @@ In the example below, the `Save Changes` and `Cancel Changes` buttons will be di
     <script>
       $(document).ready(function () {
         $("#grid").kendoGrid({
-          showInactiveTools: true,
-          toolbar: ["save", "cancel"],
+          toolbar: {
+            showInactiveTools: true,
+            items: ["save", "cancel"]
+          },
           columns: [{ field: "name" }, { field: "age" }],
           dataSource: {
             data: [

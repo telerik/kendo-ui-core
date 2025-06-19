@@ -66,7 +66,7 @@ To initialize a cascading MultiColumnComboBox, use the following example.
             columns: [
                 { field: "ProductID", title: "ID", width: 120 },
                 { field: "ProductName", title: "Name", width: 120 },
-                { field: "UnitsInStock ", title: "UnitsInStock", width: 120 }
+                { field: "UnitsInStock", title: "UnitsInStock", width: 120 }
             ],
             dataSource: {
                 type: "odata-v4",

@@ -2509,14 +2509,15 @@ export const __meta__ = {
                     var imageUrl = fieldAccessor("imageUrl")(item);
                     var icon = fieldAccessor("icon")(item);
                     var iconClass = fieldAccessor("iconClass")(item);
-                    var iconString = ((icon || iconClass) ? kendo.ui.icon({ icon: icon, iconClass: iconClass }) : '' );
+                    var sprite = this.templates.sprite(item);
+                    var iconString = (((icon || iconClass) && sprite == '') ? kendo.ui.icon({ icon: icon, iconClass: iconClass }) : '' );
                     var imgAttributes = fieldAccessor("imageAttr")(item);
                     var tag = url ? 'a' : 'span';
 
                     return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${kendo.sanitizeLink(url)}'` : ''} >` +
                         (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
                         (iconPosition == "before" ? iconString : '') +
-                        this.templates.sprite(item) +
+                        sprite +
                         this.options.template(data) +
                         (iconPosition == "after" ? iconString : '') +
                         data.arrow(data) +

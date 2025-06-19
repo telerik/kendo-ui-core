@@ -13,22 +13,16 @@ res_type: kb
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Drawing API</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Visual Studio Version</td>
-  <td>Visual Studio 2017</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
- </tr>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI Grid for jQuery</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.2.520</td>
+</tr>
+</tbody>
 </table>
 
 ## Description
@@ -41,8 +35,8 @@ Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.gi
 
 The following example demonstrates how to achieve the desired scenario.
 
-```
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+```dojo
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 
     <script>
       // The font file location must be set explicitly if it's not hosted in the same domain
@@ -61,14 +55,14 @@ The following example demonstrates how to achieve the desired scenario.
                <i class="fa fa-thumbs-down fa-2x"></i>
                 </td>
             <td class="details">
-               <span class="title">Title: #: Title #</span>
+               <span class="name">Name: #: FullName #</span>
                 </td>
-            <td class="country">
-                #: Country #
+            <td class="employees">
+                #: HasEmployees #
                </td>
-            <td class="employeeID">
-               #: EmployeeID #
-                </td>
+            <td class="employeeId">
+               #: EmployeeId #
+            </td>
       </tr>
     </script>
     <script>
@@ -87,9 +81,9 @@ The following example demonstrates how to achieve the desired scenario.
         },
         columns: [
           { title: "Photo", width: 140 },
-          { title: "Details", width: 400 },
-          { title: "Country" },
-          { title: "EmployeeID" }
+          { title: "FullName", width: 400 },
+          { title: "HasEmployees" },
+          { title: "EmployeeId" }
         ],
         rowTemplate: kendo.template($("#rowTemplate").html()),
         scrollable: false
