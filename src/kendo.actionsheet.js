@@ -165,13 +165,13 @@ export const __meta__ = {
             if (that.views.length) {
                 that.views.splice(index, 1);
                 if (view._content) {
-                    that._content.splice(index, 1);
+                    Array.prototype.splice.call(that._content, index, 1);
                 }
                 if (view._footer) {
-                    that._footer.splice(index, 1);
+                    Array.prototype.splice.call(that._footer, index, 1);
                 }
                 if (view._header) {
-                    that._header.splice(index, 1);
+                    Array.prototype.splice.call(that._header, index, 1);
                 }
 
                 view.destroy();

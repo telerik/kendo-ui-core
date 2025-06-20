@@ -112,6 +112,7 @@ export const __meta__ = {
             that.requireValueMapper(that.options);
             that._initList();
             that.listView.one("dataBound", that._attachAriaActiveDescendant.bind(that));
+            that.listView.bind("dataBound", () => that._refreshFloatingLabel());
 
             that._cascade();
 

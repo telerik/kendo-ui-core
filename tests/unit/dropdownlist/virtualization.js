@@ -81,6 +81,29 @@ describe("kendo.ui.DropDownList Virtualization", function() {
         dropdownlist.value("0");
     });
 
+    asyncTest("renders floating label when value is set and", function(done) {
+        let dropdownlist = new DropDownList(select, {
+            autoBind: true,
+            value: "1",
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            label: {
+                content: "some label",
+                floating: true
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            setTimeout(function() {
+                let classes = dropdownlist.label.floatingLabel.element.attr("class");
+                done(() => assert.isNotOk(classes.includes("k-empty")));
+            }, 100);
+
+        });
+    });
+
     asyncTest("DropDownList selects correct item when optionLabel is defined", function(done) {
         let dropdownlist = new DropDownList(select, {
             optionLabel: "test",
