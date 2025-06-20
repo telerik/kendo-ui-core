@@ -181,6 +181,7 @@ export const __meta__ = {
             },
             enforceMinLength: false,
             delay: 100,
+            downArrow: false,
             value: null,
             maxSelectedItems: null,
             placeholder: "",

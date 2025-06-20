@@ -421,7 +421,7 @@ export const __meta__ = {
                 let fileInput = containerElement.find("input[type='file']");
 
                 if (fileInput.length) {
-                    inputs.push($(fileInput.first())[0]);
+                    Array.prototype.push.call(inputs, $(fileInput.first())[0]);
                 }
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
                     if (!this.validateInput(inputs.eq(idx))) {
