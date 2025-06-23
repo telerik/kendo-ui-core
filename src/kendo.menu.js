@@ -1097,6 +1097,11 @@ export const __meta__ = {
                     } else {
                         e.preventDefault();
                     }
+
+                    const focusedSubItem = e.sender.element.find("." + FOCUSEDSTATE);
+                    if (focusedSubItem.length) {
+                        that._removeFocusItem();
+                    }
                 }
             }, options)).data(KENDOPOPUP);
         },
@@ -1185,9 +1190,12 @@ export const __meta__ = {
                                 $(menu.element).css({ height: "" });
                             }
                         }
-                        const maxWidthNone = options.scrollable || options.autoSize;
-                        const overflow = options.autoSize ? "auto" : "visible";
-                        div.css({ maxHeight: maxWidthNone ? "" : maxHeight, overflow: overflow });
+                        const rect = li[0].getBoundingClientRect();
+                        const fits = ((menu && menu.inlineHeight) || maxHeight) <= (window.innerHeight - rect.top);
+
+                        const maxHeightNone = options.scrollable || options.autoSize;
+                        const overflow = options.autoSize && !fits ? "auto" : "visible";
+                        div.css({ maxHeight: maxHeightNone ? "" : maxHeight, overflow: overflow });
 
                         li.data(ZINDEX, li.css(ZINDEX));
                         var nextZindex = that.nextItemZIndex++;

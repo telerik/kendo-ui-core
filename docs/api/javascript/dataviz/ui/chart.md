@@ -24,7 +24,8 @@ data source is fired. By default the widget will bind to the data source specifi
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/service/v2/core/stockdata"
+          url: "https://demos.telerik.com/service/v2/core/stockdata",
+          contentType: "application/json"
         }
       }
     });
@@ -3146,7 +3147,8 @@ The maximum number of ticks, labels and grid lines to display. Applicable for da
           dataSource: {
             transport: {
               read: {
-                url: "https://demos.telerik.com/service/v2/core/StockData"
+                url: "https://demos.telerik.com/service/v2/core/StockData",
+                contentType: "application/json"
               }
             },
             schema: {
@@ -7797,7 +7799,8 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/service/v2/core/stockdata"
+          url: "https://demos.telerik.com/service/v2/core/stockdata",
+          contentType: "application/json"
         }
       }
     });
@@ -18965,7 +18968,8 @@ Sets the visible property of a chart series
         var dataSource = new kendo.data.DataSource({
         transport: {
             read: {
-              url: "https://demos.telerik.com/service/v2/core/stockdata"
+              url: "https://demos.telerik.com/service/v2/core/stockdata",
+              contentType: "application/json"
             }
           }
         });
