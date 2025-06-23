@@ -321,7 +321,6 @@ export const __meta__ = {
 
             that.wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap, shouldCorrectWidth, options.autowidth)
             .css({
-                overflow: HIDDEN,
                 display: "block",
                 position: ABSOLUTE
             })

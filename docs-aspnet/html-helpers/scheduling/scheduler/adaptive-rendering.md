@@ -9,16 +9,16 @@ position: 6
 
 # Adaptive Rendering
 
-The Scheduler supports adaptive enhancements such as changes in styling and behavior in order to remain consistent with the specific user device experience.
+The Scheduler provides adaptive enhancements that adjust its styling and behavior to suit the viewing device.
 
-For example, when editing on a mobile device, the edit container will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
+For example, when editing on a mobile device, the edit container slides in on full screen instead of appearing as a popup&mdash;providing a more mobile-friendly experience.
 
 To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/schedulerbuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
 
-* If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
-* If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.
+* If set to `MobileMode.Auto`, the component uses adaptive rendering when viewed in a mobile browser.
+* If set to `MobileMode.Phone`, the component always uses adaptive rendering, regardless of the browser type.
 
-> Important: With the mobile rendering, we recommend to set up `height` as well. Without setting an explicit height, every view of the scheduler might have a different height.
+> When using mobile rendering, set the `Height` explicitly. Otherwise, each Scheduler view might render with a different height.
 
 The following example demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
@@ -50,49 +50,50 @@ The following example demonstrates how to configure the adaptive rendering mode 
     )
 )
 ```
+
 {% if site.core %}
 ```TagHelper
-        @{
-            string defaultTitle = "No Title";
-        }
-        <kendo-scheduler name="scheduler" 
-            mobile="MobileMode.Auto"
-            date="new DateTime(2021, 6, 13)" 
-            start-time="new DateTime(2021, 6, 13, 7, 00, 00)"
-            timezone="Etc/UTC"
-            height="600">
-			<views>
-                <view type="day"></view>
-                <view type="week" selected="true"></view>
-                <view type="month"></view>
-				<view type="agenda"></view>
-            </views>
-            <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
-                <transport>
-                    <read url="@Url.Action("Tasks_Read", "Home")" />
-                    <create url="@Url.Action("Tasks_Create", "Home")" />
-                    <destroy url="@Url.Action("Tasks_Destroy", "Home")" />
-                    <update url="@Url.Action("Tasks_Update", "Home")" />
-                </transport>
-                <schema data="Data" total="Total" errors="Errors">
-                    <scheduler-model id="TaskID">
-                        <fields>
-                            <field name="TaskID" type="number"></field>
-                            <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
-                            <field name="start" from="Start" type="date"></field>
-                            <field name="end" from="End" type="date"></field>
-                            <field name="description" from="Description" type="string"></field>
-                            <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
-                            <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
-                            <field name="recurrenceException" from="RecurrenceException" type="string"></field>
-                            <field name="startTimezone" from="StartTimezone" type="string"></field>
-                            <field name="endTimezone" from="EndTimezone" type="string"></field>
-                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
-                        </fields>
-                    </scheduler-model>
-                </schema>
-            </scheduler-datasource>
-        </kendo-scheduler>
+@{
+    string defaultTitle = "No Title";
+}
+<kendo-scheduler name="scheduler" 
+    mobile="MobileMode.Auto"
+    date="new DateTime(2021, 6, 13)" 
+    start-time="new DateTime(2021, 6, 13, 7, 00, 00)"
+    timezone="Etc/UTC"
+    height="600">
+    <views>
+        <view type="day"></view>
+        <view type="week" selected="true"></view>
+        <view type="month"></view>
+        <view type="agenda"></view>
+    </views>
+    <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+        <transport>
+            <read url="@Url.Action("Tasks_Read", "Home")" />
+            <create url="@Url.Action("Tasks_Create", "Home")" />
+            <destroy url="@Url.Action("Tasks_Destroy", "Home")" />
+            <update url="@Url.Action("Tasks_Update", "Home")" />
+        </transport>
+        <schema data="Data" total="Total" errors="Errors">
+            <scheduler-model id="TaskID">
+                <fields>
+                    <field name="TaskID" type="number"></field>
+                    <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                    <field name="start" from="Start" type="date"></field>
+                    <field name="end" from="End" type="date"></field>
+                    <field name="description" from="Description" type="string"></field>
+                    <field name="recurrenceId" from="RecurrenceID" type="number" default-value="null"></field>
+                    <field name="recurrenceRule" from="RecurrenceRule" type="string"></field>
+                    <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                    <field name="startTimezone" from="StartTimezone" type="string"></field>
+                    <field name="endTimezone" from="EndTimezone" type="string"></field>
+                    <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                </fields>
+            </scheduler-model>
+        </schema>
+    </scheduler-datasource>
+</kendo-scheduler>
 ```
 {% endif %}
 
