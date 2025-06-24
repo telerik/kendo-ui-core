@@ -6,7 +6,7 @@ slug: htmlhelpers_grid_aspnetcore_toolbar
 position: 15
 ---
 
-# ToolBar Adaptive Tools
+# ToolBar
 
 The [`ToolBar()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory) configuration option of the Grid allows you to add command buttons and allow the user to invoke built-in Grid functionalities. You can also define custom commands or use templates to customize the Toolbar of the {{ site.product }} Grid.
 

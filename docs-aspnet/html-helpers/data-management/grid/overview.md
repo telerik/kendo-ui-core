@@ -162,7 +162,7 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 | Feature | Description |
 |---------|-------------|
 | [Data binding]({% slug htmlhelpers_grid_aspnetcore_binding_overview %}) | You can bind the Grid to remote data or to local arrays of data. Additionally, you can use [SignalR]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %}) or configure your [custom binding]({% slug custombinding_grid_aspnetmvc %}). |
-| [Editing]({% slug batchediting_grid_aspnetcore %}) | The Grid supports various editing modes that allow you to control the way the data is represented.  |
+| [Editing]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}) | The Grid supports various editing modes that allow you to control the way the data is represented.  |
 | [Filtering]({% slug htmlhelpers_grid_aspnetcore_filtering %}) | To filter the displayed data, you can use row, checkbox, and menu filtering. |
 | [Grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %}) | The Grid provides built-in aggregates for a grand total row and column values. Additionally, you can use group paging to load groups on demand and page through the groups at the same time. |
 | [Paging]({% slug htmlhelpers_grid_aspnetcore_paging %}) | Use the built-in paging functionality to paginate the data. For optimal performance, perform the paging operations on the server. |
