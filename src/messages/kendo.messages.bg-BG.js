@@ -750,7 +750,18 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "ungroupHeader": "Натиснете ctrl + space за да разгрупирате",
   "toolbarLabel": "тулбар на таблицата",
   "groupingHeaderLabel": "ред за групиране на таблицата",
-  "filterCellTitle": "клетка за филтриране"
+  "filterCellTitle": "клетка за филтриране",
+  "clearButtons": {
+    "clearFiltering": "Премахни всички филтри",
+    "clearSorting": "Премахни сортирането",
+    "clearGrouping": "Премахни групирането",
+    "columnChooserReset": "Нулиране",
+  },
+  "applyButtons": {
+    "applyGrouping": "Готово",
+    "applySorting": "Готово",
+    "columnChooserApply": "Приложи",
+  }
 });
 }
 
