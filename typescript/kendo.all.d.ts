@@ -7344,6 +7344,23 @@ declare namespace kendo.ui {
         excel?: string | undefined;
         save?: string | undefined;
         update?: string | undefined;
+        filter?: string | undefined;
+        sort?: string | undefined;
+        group?: string | undefined;
+        columnchooser?: string | undefined;
+    }
+
+    interface GridClearButtons {
+        clearFiltering?: string | undefined;
+        clearSorting?: string | undefined;
+        clearGrouping?: string | undefined;
+        columnChooserReset?: string | undefined;
+    }
+
+    interface GridApplyButtons {
+        applyGrouping?: string | undefined;
+        applySorting?: string | undefined;
+        columnChooserApply?: string | undefined;
     }
 
     interface GridMessages {
@@ -7353,6 +7370,8 @@ declare namespace kendo.ui {
         toolbarLabel?: string | undefined;
         groupingHeaderLabel?: string | undefined;
         filterCellTitle?: string | undefined;
+        clearButtons?: GridClearButtons | undefined;
+        applyButtons?: GridApplyButtons | undefined;
     }
 
     interface GridNoRecords {

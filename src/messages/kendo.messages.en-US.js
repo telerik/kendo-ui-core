@@ -750,7 +750,18 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "ungroupHeader": "Press ctrl + space to ungroup",
   "toolbarLabel": "grid toolbar",
   "groupingHeaderLabel": "grid grouping header",
-  "filterCellTitle": "filter cell"
+  "filterCellTitle": "filter cell",
+  "clearButtons": {
+    "clearFiltering": "Clear All Filters",
+    "clearSorting": "Clear Sorting",
+    "clearGrouping": "Clear Grouping",
+    "columnChooserReset": "Reset",
+  },
+  "applyButtons": {
+    "applyGrouping": "Done",
+    "applySorting": "Done",
+    "columnChooserApply": "Apply",
+  },
 });
 }
 

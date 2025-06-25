@@ -89,7 +89,8 @@ The AutoComplete editor will provide a convenient list of options to hint the us
     ```
     {% endif %}
 
-1. Create a [custom editor template for the column]({% slug customediting_grid_aspnetcore %}) that contains an AutoComplete editor, which binds to remote data.
+1. Create a [custom editor template for the column]({% slug batchediting_grid_aspnetcore
+ %}#editors) that contains an AutoComplete editor, which binds to remote data.
 1. Configure the AutoComplete for [server-side filtering]({% slug htmlhelpers_autocomplete_filtering_aspnetcore %}).
 
     ```HtmlHelper

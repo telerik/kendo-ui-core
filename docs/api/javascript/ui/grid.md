@@ -580,9 +580,9 @@ When it is defined as an object it allows to customize the web font icon for the
         { command: [{
             name: "edit",
             iconClass: {
-                edit: "k-icon k-i-edit",
+                edit: "k-icon k-i-pencil",
                 update: "k-icon k-i-copy",
-                cancel: "k-icon k-i-arrow-60-up"
+                cancel: "k-icon k-i-cancel"
               }
             }]
        }
@@ -650,7 +650,7 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
         { command: [{
             name: "edit",
             iconClass: {
-                edit: "k-icon k-i-edit"
+                edit: "k-icon k-i-pencil"
               }
             }]
        }
@@ -749,7 +749,7 @@ The template of the command column.
             {
               // for click to work when there is template, add class "k-grid-[command.name]" to some element, otherwise the click handler will not be triggered
               name: "settings",
-              template: "Some text in the command column <a class='k-button k-grid-settings'><span class='k-icon k-i-settings'></span>Settings</a>",
+              template: "Some text in the command column <a class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-settings'><span class='k-icon k-i-settings'></span>Settings</a>",
               click(e){
                 kendo.alert("Settings clicked!")
               }
@@ -8048,6 +8048,126 @@ Defines the text of the "Update" button that is rendered in `inline` or `popup` 
     });
     </script>
 
+### messages.commands.sort `String`
+
+Defines the text of the "Sort" button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: ["sort"],
+      messages: {
+        commands: {
+          sort: "Sorting"
+        }
+      }
+    });
+    </script>
+
+### messages.commands.filter `String`
+
+Defines the text of the "Filter" button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: ["filter"],
+      messages: {
+        commands: {
+          filter: "Filtering"
+        }
+      }
+    });
+    </script>
+
+### messages.commands.group `String`
+
+Defines the text of the "Group" button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: ["group"],
+      messages: {
+        commands: {
+          group: "Grouping"
+        }
+      }
+    });
+    </script>
+
+### messages.commands.columnchooser `String`
+
+Defines the text of the "ColumnChooser" button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: ["columnChooser"],
+      messages: {
+        commands: {
+          columnchooser: "Choose column"
+        }
+      }
+    });
+    </script>
+
 ### messages.noRecords `String`
 
 Defines the text of the "noRecords" option that is rendered when no records are available in current view. The "noRecords" options should be set to `true`.
@@ -8118,6 +8238,280 @@ The text that will be used for the `aria-lable` attribute of the grouping header
 ### messages.toolbarLabel `String` *(default: "grid toolbar")*
 
 The text that will be used for the `aria-lable` attribute of the ToolBar of the Grid.
+
+### messages.clearButtons `Object`
+
+Defines the text of the clear buttons that are shown within the Grid Toolbar tools. Used primarily for localization.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: ["sort", "filter", "group"],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      messages: {
+        clearButtons: {
+          clearFiltering: "Remove filters",
+          clearSorting: "Unsort all",
+          clearGrouping: "Ungroup all",
+        }
+      }
+    });
+    </script>
+
+### messages.clearButtons.clearFiltering `String`
+
+Defines the text of the "Filter" clear all button that is rendered in filter toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["sort", "filter", "group"],
+      messages: {
+        clearButtons: {
+          clearFiltering: "Remove filters",
+        }
+      }
+    });
+    </script>
+
+### messages.clearButtons.clearSorting `String`
+
+Defines the text of the "Sort" clear all button that is rendered in sort toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["sort", "filter", "group"],
+      messages: {
+        clearButtons: {
+          clearSorting: "Unsort all",
+        }
+      }
+    });
+    </script>
+
+### messages.clearButtons.clearGrouping `String`
+
+Defines the text of the "Group" clear all button that is rendered in group toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["sort", "filter", "group"],
+      messages: {
+        clearButtons: {
+          clearGrouping: "Ungroup all",
+        }
+      }
+    });
+    </script>
+
+### messages.clearButtons.columnChooserReset `String`
+
+Defines the text of the "ColumnChooser" reset button that is rendered in columnChooser toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["sort", "columnChooser"],
+      messages: {
+        clearButtons: {
+          columnChooserReset: "Return",
+        }
+      }
+    });
+    </script>
+
+### messages.applyButtons `Object`
+
+Defines the text of the apply buttons that are shown within the Grid Toolbar tools. Used primarily for localization.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: ["columnChooser"],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      messages: {
+        applyButtons: {
+          columnChooserApply: "Apply columns",
+        }
+      }
+    });
+    </script>
+
+### messages.applyButtons.applyGrouping `String`
+
+Defines the text of the "Group" apply button that is rendered in the adaptive mode of the group toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      adaptiveMode: "auto",
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["group"],
+      messages: {
+        applyButtons: {
+          applyGrouping: "Done grouping",
+        }
+      }
+    });
+    </script>
+
+### messages.applyButtons.applySorting `String`
+
+Defines the text of the "Sort" apply button that is rendered in the adaptive mode of the sort toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      adaptiveMode: "auto",
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["sort"],
+      messages: {
+        applyButtons: {
+          applySorting: "Done sorting",
+        }
+      }
+    });
+    </script>
+
+### messages.applyButtons.columnChooserApply `String`
+
+Defines the text of the "ColumnChooser" apply button that is rendered in columnChooser toolbar tool.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      groupable: true,
+      filterable: true,
+      toolbar: ["columnChooser"],
+      messages: {
+        applyButtons: {
+          columnChooserApply: "Done",
+        }
+      }
+    });
+    </script>
 
 ### mobile `Boolean|String` *(default: false)*
 
@@ -10618,7 +11012,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
     <div id="grid"></div>
     <script id="template" type="text/x-kendo-template">
-    <a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
+    <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" href="\#" onclick="return toolbar_click()">Command</a>
     </script>
     <script>
     function toolbar_click() {
@@ -10655,7 +11049,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     $("#grid").kendoGrid({
       toolbar: [
         {
-          template: '<a class="k-button" href="\\#" onclick="return toolbar_click()">Command</a>'
+          template: '<a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" href="\\#" onclick="return toolbar_click()">Command</a>'
         }
       ],
       columns: [
@@ -10813,7 +11207,7 @@ The jQuery object which represents the grid footer element.
 
     <div id="grid"></div>
     <br />
-    <button id="btn" class='k-button'>Highlight footer row's cells</button>
+    <button id="btn" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Highlight footer row's cells</button>
 
     <script>
       let encode = kendo.htmlEncode;
@@ -10904,7 +11298,7 @@ The jQuery object which represents the grid table header element.
 
     <div id="grid"></div>
     <br />
-    <button id="btn" class='k-button'>Highlight header row's cells</button>
+    <button id="btn" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Highlight header row's cells</button>
 
     <script>
       $("#grid").kendoGrid({
@@ -10935,7 +11329,7 @@ The jQuery object which represents the grid content element, which holds the scr
 
     <div id="grid"></div>
     <br />
-    <button id="btn" class='k-button'>Highlight content's cells</button>
+    <button id="btn" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Highlight content's cells</button>
     <script>
       $("#grid").kendoGrid({
         columns: [
@@ -11462,7 +11856,7 @@ If set to true, the copied items will include the column headers.
 #### Example
 
      <div id="grid"></div>
-     <a class="k-button" onclick="selectAndCopy()">Select and copy</a>
+     <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="selectAndCopy()">Select and copy</a>
      <script>
             $("#grid").kendoGrid({
                 columns: [
@@ -11816,7 +12210,7 @@ If set to true, the exported items will include the column headers.
 #### Example
 
      <div id="grid"></div>
-     <a class="k-button" onclick="selectAndExport()">Select and export</a>
+     <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="selectAndExport()">Select and export</a>
      <script>
             $("#grid").kendoGrid({
                 columns: [
@@ -11890,7 +12284,7 @@ Returns the selected elements mapped to objects.
 #### Example
 
      <div id="grid"></div>
-     <a class="k-button" onclick="printSelected()">Select and print</a>
+     <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="printSelected()">Select and print</a>
      <script>
             $("#grid").kendoGrid({
                 columns: [
@@ -12099,7 +12493,7 @@ Renders all table rows using the current data items.
 
 #### Example - change the value of a dataItem and refresh the widget
 
-    <button id="refresh" class="k-button">Refresh</button>
+    <button id="refresh" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Refresh</button>
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -12175,7 +12569,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example - remove the selected table row
 
-    <button class="k-button" onclick="remove()">Remove selected row</button>
+    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="remove()">Remove selected row</button>
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
@@ -12498,7 +12892,7 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 #### Example - get the selected table rows
 
     <div id="grid"></div>
-    <button class='k-button' id="btn">Get selected rows</button>
+    <button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base' id="btn">Get selected rows</button>
     <script>
       $("#grid").kendoGrid({
         columns: [
