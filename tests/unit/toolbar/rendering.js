@@ -1680,6 +1680,40 @@ describe("Toolbar rendering:", function() {
         assert.isOk($("#foo").hasClass("foo"));
     });
 
+    it("template handler is evaluated when wrapper components are used in template", function(done) {
+
+        let toolbar = container.kendoToolBar({
+            items: [{
+                template: function(data) {
+                    var result = '';
+                    result += `<button id="btn" name="btn">foo</button>`; /*kendoTmpPlaceholder*/
+                    queueMicrotask(() => {
+                        jQuery(`#btn`).kendoButton({
+                            "themeColor": `warning`
+                        });
+
+                        let btn = $("#btn").getKendoButton();
+                        assert.isOk(btn instanceof kendo.ui.Button);
+                    });
+                    return result;
+                }
+            }]
+        }).data("kendoToolBar");
+    });
+
+    it("string template is evaluated when wrapper components are used in template", function() {
+
+        let toolbar = container.kendoToolBar({
+            items: [
+                { template: '<button id="btn2">fooo</button><script>$("\#btn2").kendoButton({themeColor:"success"})<\/script>' },
+
+            ]
+        }).data("kendoToolBar");
+
+        let btn = kendo.widgetInstance($("#btn2"));
+        assert.isOk(btn instanceof kendo.ui.Button);
+    });
+
     /* MISC */
     it("click event of disabled button is prevented", function() {
         container.kendoToolBar({
