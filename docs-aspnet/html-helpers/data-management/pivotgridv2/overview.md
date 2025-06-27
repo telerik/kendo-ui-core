@@ -23,7 +23,7 @@ The PivotGridV2 represents multidimensional data in a cross-tabular format. Comp
 
 ## Basic Configuration
 
-To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/olap/msmdpump.dll`, follow the next steps:
+To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/service/v2/olap/msmdpump.dll`, follow the next steps:
 
 {% if site.core %}
 1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET Core Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to install {{ site.product }} in the application.
@@ -59,7 +59,7 @@ To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://le
                         .Catalog("Adventure Works DW 2008R2")
                         .Cube("Adventure Works"))
                     .Read(read => read
-                        .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                        .Url("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                         .DataType("text")
                         .ContentType("text/xml")
                         .Type(HttpVerbs.Post)
@@ -83,7 +83,7 @@ To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://le
                     <row name="[Geography].[City]"></row>
                 </rows>
                 <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
-                <transport read-url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
+                <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
                     <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
                 </transport>
             </pivot-datasource>

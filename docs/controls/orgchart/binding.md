@@ -66,7 +66,7 @@ The following example demonstrates how to enable remote binding for the OrgChart
      <div id="orgchart"></div>
 
     <script>
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         $("#orgchart").kendoOrgChart({
             editable: false,
             dataSource: {

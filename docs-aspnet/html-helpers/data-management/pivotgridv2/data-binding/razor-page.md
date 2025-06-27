@@ -8,7 +8,7 @@ position: 6
 
 # PivotGridV2 in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name).
 
 You can seamlessly integrate the Telerik UI PivotGridV2 for {{ site.framework }} in Razor Pages applications.
 
@@ -18,7 +18,7 @@ This article describes how to configure the PivotGridV2 component in a Razor Pag
 
 The following example demonstrates how to configure the PivotGridV2 DataSource for Ajax data binding to an [Online Analytical Processing (OLAP)](https://learn.microsoft.com/en-us/previous-versions/sql/sql-server-2005/ms175367(v=sql.90)) cube within a Razor Pages application.
 
-* Add the OLAP service dll (`https://demos.telerik.com/olap/msmdpump.dll`) as a Read request URL in the `DataSource` configuration to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Since the data is requested from the online accessible OLAP service, it is not required to send the anti-forgery token with the POST request.
+* Add the OLAP service dll (`https://demos.telerik.com/service/v2/olap/msmdpump.dll`) as a Read request URL in the `DataSource` configuration to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Since the data is requested from the online accessible OLAP service, it is not required to send the anti-forgery token with the POST request.
 * Define the desired initial rows, columns and measures in the `DataSource`.
 
     ```HtmlHelper
@@ -42,7 +42,7 @@ The following example demonstrates how to configure the PivotGridV2 DataSource f
                     .Connection(connection => connection
                         .Catalog("Adventure Works DW 2008R2")
                         .Cube("Adventure Works"))
-                    .Read("https://demos.telerik.com/olap/msmdpump.dll")
+                    .Read("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                 )
             )
         )
@@ -62,7 +62,7 @@ The following example demonstrates how to configure the PivotGridV2 DataSource f
                     <row name="[Geography].[City]" expand="true"></row>
                 </rows>
                 <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
-                <transport read-url="https://demos.telerik.com/olap/msmdpump.dll">
+                <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll">
                     <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
                 </transport>
             </pivot-datasource>

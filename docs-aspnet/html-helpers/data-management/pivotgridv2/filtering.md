@@ -46,7 +46,7 @@ To set a predefined filter when using Xmla data use the above-described approach
         <schema type="xmla"/>
         <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
         <transport>
-            <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+            <read url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
             <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
         </transport>
         <filters>

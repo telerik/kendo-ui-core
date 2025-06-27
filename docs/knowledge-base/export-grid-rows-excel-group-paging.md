@@ -62,7 +62,7 @@ The example below demonstrates how to achieve the desired scenario.
             type: 'aspnetmvc-ajax',
             transport: {
               read: {
-                url: "https://demos.telerik.com/aspnet-core/service/api/customers"
+                url: "https://demos.telerik.com/service/v2/graphql/customers"
               }
             },
             pageSize: 50,

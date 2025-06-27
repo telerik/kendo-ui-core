@@ -71,7 +71,7 @@ The following example demonstrates how to reload the data source of the PivotGri
                   catalog: "Adventure Works DW 2008R2",
                   cube: "Adventure Works"
                 },
-                read: "//demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
               },
               schema: { type: "xmla" },
               error: function (e) { alert("error: " + kendo.stringify(e.errors[0])); }

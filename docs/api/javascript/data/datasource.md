@@ -4908,7 +4908,7 @@ The current [`jqXHR`](https://api.jquery.com/Types/#jqXHR).
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/"
+          url: "https://demos.telerik.com/service/v2/core"
         }
       }
     });
