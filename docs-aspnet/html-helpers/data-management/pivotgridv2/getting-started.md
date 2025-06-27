@@ -45,7 +45,7 @@ Declare the [PivotContainer](https://docs.telerik.com/{{ site.platform }}/api/pi
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
-        .Content(@<text>        
+        .Content(@<text>
             @(Html.Kendo().PivotConfiguratorButton()
                 .Name("toggleConfiguratorBtn")
                 .Text("Toggle Configurator")
@@ -73,7 +73,7 @@ Define the PivotConfiguratorV2 supplementary component into the PivotContainer d
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
-        .Content(@<text>   
+        .Content(@<text>
             @(Html.Kendo().PivotConfiguratorV2()
                 .Name("configurator")
                 .Sortable()
@@ -107,7 +107,7 @@ Use the PivotGridV2 HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the PivotGridV2 element.
 * The `Configurator()` option sets the `Name()` of the defined PivotConfiguratorV2 that is connected to the component.
-* Add the `DataSource()` configuration option and set its type to [`Xmla`]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-xmla). Configure the OLAP service dll (`https://demos.telerik.com/olap/msmdpump.dll`) in the `Read` action to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Also, define the desired initial rows, columns and measures.
+* Add the `DataSource()` configuration option and set its type to [`Xmla`]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-xmla). Configure the OLAP service dll (`https://demos.telerik.com/service/v2/olap/msmdpump.dll`) in the `Read` action to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Also, define the desired initial rows, columns and measures.
 
 Define the component into the PivotContainer declaration:
 
@@ -115,7 +115,7 @@ Define the component into the PivotContainer declaration:
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
-        .Content(@<text>   
+        .Content(@<text>
             ... // PivotConfiguratorV2 declaration.
 
             @(Html.Kendo().PivotGridV2()
@@ -134,7 +134,7 @@ Define the component into the PivotContainer declaration:
                         .Connection(connection => connection
                             .Catalog("Adventure Works DW 2008R2")
                             .Cube("Adventure Works"))
-                        .Read("https://demos.telerik.com/olap/msmdpump.dll")
+                        .Read("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                     )
                 )
             )
@@ -159,7 +159,7 @@ Define the component into the PivotContainer declaration:
                     <row name="[Geography].[City]" expand="true"></row>
                 </rows>
                 <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
-                <transport read-url="https://demos.telerik.com/olap/msmdpump.dll">
+                <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll">
                     <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
                 </transport>
             </pivot-datasource>

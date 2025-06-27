@@ -71,7 +71,7 @@ The following example demonstrates how to configure the PivotConfigurator.
                     .Catalog("Adventure Works DW 2008R2")
                     .Cube("Adventure Works"))
                 .Read(read => read
-                    .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                    .Url("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                     .DataType("text")
                     .ContentType("text/xml")
                     .Type(HttpVerbs.Post)
@@ -95,7 +95,7 @@ The following example demonstrates how to configure the PivotConfigurator.
                 <row name="[Geography].[City]"></row>
             </rows>
             <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
-            <transport read-url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
+            <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
                 <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
             </transport>
         </pivot-datasource>
