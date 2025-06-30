@@ -177,6 +177,7 @@
         "sortAscending": "Tri croissant",
         "sortDescending": "Tri décroissant",
         "filter": "Filtrer",
+        "clearAllFilters": "Enlever tous les filtres",
         "column": "Colonne",
         "columns": "Colonnes",
         "columnVisibility": "Visibilité de la colonne",
