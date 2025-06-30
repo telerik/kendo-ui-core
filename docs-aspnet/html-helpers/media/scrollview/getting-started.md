@@ -58,8 +58,8 @@ Use the ScrollView HtmlHelper {% if site.core %}or TagHelper{% endif %} to add t
                 .TemplateId("scrollview-template")
                 .DataSource(d =>
                         d.Custom()
-                          .Type("odata")
-                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products")))
+                          .Type("odata-v4")
+                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Products")))
                           .ServerPaging(true)
                           .PageSize(3))
                 .HtmlAttributes(new { style = "height:500px; width:890px; max-width: 100%;" })
@@ -116,9 +116,9 @@ Use the ScrollView HtmlHelper {% if site.core %}or TagHelper{% endif %} to add t
 <p>
 
     <kendo-scrollview name="scrollView" enable-pager="false" content-height="100%" template-id="scrollview-template" style="height:500px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="3" server-paging="true">
+        <datasource custom-type="odata-v4" page-size="3" server-paging="true">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+                <read url="https://demos.telerik.com/service/v2/odata/Products" />
             </transport>
         </datasource>
     </kendo-scrollview>
@@ -189,8 +189,8 @@ The next step is to configure Duration configuration. The `Duration` (in millise
                 .TemplateId("scrollview-template")
                 .DataSource(d =>
                         d.Custom()
-                          .Type("odata")
-                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products")))
+                          .Type("odata-v4")
+                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Products")))
                           .ServerPaging(true)
                           .PageSize(3))
                 .HtmlAttributes(new { style = "height:500px; width:890px; max-width: 100%;" })
@@ -247,9 +247,9 @@ The next step is to configure Duration configuration. The `Duration` (in millise
 <p>
 
     <kendo-scrollview name="scrollView" enable-pager="false" content-height="100%" duration=1500 template-id="scrollview-template" style="height:500px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="3" server-paging="true">
+        <datasource custom-type="odata-v4" page-size="3" server-paging="true">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+                <read url="https://demos.telerik.com/service/v2/odata/Products" />
             </transport>
         </datasource>
     </kendo-scrollview>
@@ -320,8 +320,8 @@ The ScrollView exposes a `Change()` event that you can handle and assign specifi
                 .TemplateId("scrollview-template")
                 .DataSource(d =>
                         d.Custom()
-                          .Type("odata")
-                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products")))
+                          .Type("odata-v4")
+                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Products")))
                           .ServerPaging(true)
                           .PageSize(3))
                 .HtmlAttributes(new { style = "height:500px; width:890px; max-width: 100%;" })
@@ -383,9 +383,9 @@ The ScrollView exposes a `Change()` event that you can handle and assign specifi
 <p>
 
     <kendo-scrollview name="scrollView" enable-pager="false" content-height="100%" duration=1500 template-id="scrollview-template" style="height:500px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="3" server-paging="true" on-change="onChange">
+        <datasource custom-type="odata-v4" page-size="3" server-paging="true" on-change="onChange">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+                <read url="https://demos.telerik.com/service/v2/odata/Products" />
             </transport>
         </datasource>
     </kendo-scrollview>

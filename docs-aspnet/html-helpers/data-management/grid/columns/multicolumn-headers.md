@@ -94,20 +94,22 @@ A full Grid with Multi-column headers would look like below
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" reorderable="true"resizable="true" height="550">
-    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+<kendo-grid name="grid" resizable="true" height="550">
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+        <schema data="Data" total="Total" errors="Errors">
+        </schema>
         <transport>
-            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+            <read url="@Url.Action("MultiColumn_Customers_Read", "Grid")"/>
         </transport>
     </datasource>
+    <scrollable enabled="true"/>
     <groupable enabled="true" />
     <sortable enabled="true" />
-    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-    </pageable>
-    <filterable enabled="true" />
+    <pageable enabled="true"/>
     <column-menu enabled="true"/>
+    <reorderable enabled="true" columns="true"/>
     <columns>
-        <column field="ContactName" title="Contact Name" width="240" />
+        <column field="CompanyName" width="420" />
         <column title="Contact Info" >
             <columns>
                 <column field="ContactTitle" title="Contact Title" width="200" />

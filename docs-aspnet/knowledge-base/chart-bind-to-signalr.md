@@ -86,7 +86,7 @@ How can I bind the Chart to a [SignalR](https://dotnet.microsoft.com/en-us/apps/
 
 ```JavaScript
     <script>
-        var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
+        var hubUrl = "path/to/hub";
         var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
         var hub = connection.createHubProxy("productHub");
         var hubStart = connection.start({ jsonp: true });

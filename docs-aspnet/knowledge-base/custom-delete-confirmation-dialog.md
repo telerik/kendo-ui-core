@@ -86,20 +86,22 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) 
             .Transport(transport =>
             {
                 transport.Read(read =>
-                read.Url("https://demos.telerik.com/kendo-ui/service/products")
-                    .DataType("jsonp")
+                read.Url("https://demos.telerik.com/service/v2/core/products")
                 );
                 transport.Create(create =>
-                create.Url("https://demos.telerik.com/kendo-ui/service/products/create")
-                        .DataType("jsonp")
+                create.Url("https://demos.telerik.com/service/v2/core/products/create")
+                .Type(HttpVerbs.Post)
+                .ContentType("application/json")
                 );
                 transport.Update(update =>
-                update.Url("https://demos.telerik.com/kendo-ui/service/products/update")
-                        .DataType("jsonp")
+                update.Url("https://demos.telerik.com/service/v2/core/products/update")
+                .Type(HttpVerbs.Post)
+                .ContentType("application/json")
                 );
                 transport.Destroy(destroy =>
-                destroy.Url("https://demos.telerik.com/kendo-ui/service/products/destroy")
-                        .DataType("jsonp")
+                destroy.Url("https://demos.telerik.com/service/v2/core/products/destroy")
+                .Type(HttpVerbs.Post)
+                .ContentType("application/json")
                 );
                 transport.ParameterMap("parameterMap");
             })
@@ -109,7 +111,7 @@ Refer to [this REPL sample](https://netcorerepl.telerik.com/cGuMPwON29unf7PH26) 
         var windowTemplate = kendo.template($("#windowTemplate").html());
         function parameterMap(options, operation) {
             if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                return kendo.stringify(options.models);
             }
         }
         function onDelete(e){

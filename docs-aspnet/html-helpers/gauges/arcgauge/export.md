@@ -40,7 +40,7 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -67,7 +67,7 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -97,7 +97,7 @@ You can retrieve the image representation of the ArcGauge content by using the [
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -121,7 +121,7 @@ You can retrieve the image representation of the ArcGauge content by using the [
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -151,7 +151,7 @@ You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/jav
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -175,7 +175,7 @@ You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/jav
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });

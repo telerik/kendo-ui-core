@@ -79,7 +79,7 @@ The following example demonstrates how to use the `Headers` option to set a requ
         .Custom(dataSource =>
         {
             dataSource
-            .Type("odata")
+            .Type("odata-v4")
             .Transport(transport =>
             {
                 transport.Read(read =>
@@ -144,8 +144,7 @@ The following example demonstrates how to set a JavaScript function for the `Rea
     <script>
         function customRead(options) {
             $.ajax({
-                url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                dataType: "jsonp",
+                url: "https://demos.telerik.com/service/v2/core/meetings",
                 success: function (data) {
                     alert("Data is received");
                     options.success(data);
@@ -235,20 +234,22 @@ The following example demonstrates how to bind the Grid to the Kendo UI online d
             .Transport(transport =>
             {
                 transport.Read(read =>
-                   read.Url("https://demos.telerik.com/kendo-ui/service/products")
-                       .DataType("jsonp")
+                   read.Url("https://demos.telerik.com/service/v2/core/products")
                 );
                 transport.Create(create =>
-                   create.Url("https://demos.telerik.com/kendo-ui/service/products/create")
-                         .DataType("jsonp")
+                   create.Url("https://demos.telerik.com/service/v2/core/products/create")
+                   .Type(HttpVerbs.Post)
+                   .ContentType("application/json")
                 );
                 transport.Update(update =>
-                   update.Url("https://demos.telerik.com/kendo-ui/service/products/update")
-                         .DataType("jsonp")
+                   update.Url("https://demos.telerik.com/service/v2/core/products/update")
+                   .Type(HttpVerbs.Post)
+                   .ContentType("application/json")
                 );
                 transport.Destroy(destroy =>
-                   destroy.Url("https://demos.telerik.com/kendo-ui/service/products/destroy")
-                          .DataType("jsonp")
+                   destroy.Url("https://demos.telerik.com/service/v2/core/products/destroy")
+                   .Type(HttpVerbs.Post)
+                   .ContentType("application/json")
                 );
                 transport.ParameterMap("parameterMap");
             })
@@ -257,7 +258,7 @@ The following example demonstrates how to bind the Grid to the Kendo UI online d
     <script>
         function parameterMap(options, operation) {
             if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                return kendo.stringify(options.models);
             }
         }
     </script>
@@ -278,9 +279,9 @@ The following example demonstrates how to bind the Grid to the oData service. Fo
         })
         .DataSource(dataSource => dataSource
             .Custom()
-            .Type("odata")
+            .Type("odata-v4")
             .Transport(transport =>
-               transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
+               transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"))
             )
             .PageSize(20)
             .ServerPaging(true)
@@ -318,7 +319,7 @@ The following example demonstrates how to use the CustomDataSource builder to bi
             .Type("odata-v4")
             .Transport(transport =>
             {
-                transport.Read(read => read.Url("/odata/Products").Data("{'$expand': 'Category'}");
+                transport.Read(read => read.Url("/odata/Products").Data("{'$expand': 'Category'}"));
             })
             .Events(ev => ev.RequestEnd("onRequestEnd"))
             .PageSize(20)

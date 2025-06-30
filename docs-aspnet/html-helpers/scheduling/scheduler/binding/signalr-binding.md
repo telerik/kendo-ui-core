@@ -76,9 +76,9 @@ For further details refer to [the official Microsoft documentation](https://docs
  * Create a [Hub with CRUD operation support](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Hubs/MeetingHub.cs)
  * Configure the Scheduler for SignalR binding and the client-side hub connection
  ```JavaScript
-  <script src="~/shared/web/integration/jquery.signalr-1.1.3.min.js"></script>
+    <script src="~/shared/web/integration/jquery.signalr-1.1.3.min.js"></script>
     <script>
-        var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
+        var hubUrl = "path/to/hub";
         var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
         var meetingHub = connection.createHubProxy("meetingHub");
         var hubStart = connection.start({ jsonp: true });

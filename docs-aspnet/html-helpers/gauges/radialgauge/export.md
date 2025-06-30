@@ -39,7 +39,7 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -66,7 +66,7 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -98,7 +98,7 @@ The radial gauge allows you to retrieve the Image representation of the content 
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -125,7 +125,7 @@ The radial gauge allows you to retrieve the Image representation of the content 
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -157,7 +157,7 @@ The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) repre
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -184,7 +184,7 @@ The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) repre
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });

@@ -43,9 +43,9 @@ With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/glob
     .Events(ev=>ev.ExcelExport("onExcelExport"))
     .DataSource(dataSource => dataSource
         .Custom()
-        .Type("odata")
+        .Type("odata-v4")
         .Transport(transport =>
-           transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
+           transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"))
         )
         .PageSize(10)
     )

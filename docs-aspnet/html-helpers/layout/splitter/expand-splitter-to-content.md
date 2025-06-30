@@ -38,8 +38,7 @@ You can expand the height of the Splitter based on the content inside a pane.
             .Transport(transport =>
             {
                 transport.Read(read =>
-                   read.Url("https://demos.telerik.com/kendo-ui/service/products")
-                       .DataType("jsonp")
+                   read.Url("https://demos.telerik.com/service/v2/core/products")
                 );
             })
         )
@@ -86,7 +85,7 @@ You can expand the height of the Splitter based on the content inside a pane.
                 <model id="ProductID"></model>
             </schema>
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/products" datatype="jsonp" />
+                <read url="https://demos.telerik.com/service/v2/core/products" />
             </transport>
         </datasource>
     </kendo-grid>

@@ -78,33 +78,31 @@ Follow the steps below to achieve the desired scenario:
             });
     })
     .DataSource(d => d
-            .Custom()
-            .Batch(true)
-            .Schema(schema => schema
-                .Model(m =>
-                {
-                    m.Id(f => f.MeetingID);
-                    m.Field("title", typeof(string)).DefaultValue("No title").From("Title");
-                    m.Field("start", typeof(DateTime)).From("Start");
-                    m.Field("end", typeof(DateTime)).From("End");
-                    m.Field("description", typeof(string)).From("Description");
-                    m.Field("recurrenceID", typeof(int)).From("RecurrenceID");
-                    m.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
-                    m.Field("recurrenceException", typeof(string)).From("RecurrenceException");
-                    m.Field("isAllDay", typeof(bool)).From("IsAllDay");
-                    m.Field("startTimezone", typeof(string)).From("StartTimezone");
-                    m.Field("endTimezone", typeof(string)).From("EndTimezone");
-                }))
-            .Transport(transport => transport
-                .Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/meetings")
-                      .DataType("jsonp"))
-                .Create(create => create.Url("https://demos.telerik.com/kendo-ui/service/meetings/create")
-                      .DataType("jsonp"))
-                .Destroy(destroy => destroy.Url("https://demos.telerik.com/kendo-ui/service/meetings/destroy")
-                      .DataType("jsonp"))
-                .Update(update => update.Url("https://demos.telerik.com/kendo-ui/service/meetings/update")
-                      .DataType("jsonp"))
-                .ParameterMap("parameterMap"))
+        .Custom()
+        .Batch(true)
+        .Schema(schema => schema
+            .Model(m =>
+            {
+                m.Id(f => f.MeetingID);
+                m.Field("title", typeof(string)).DefaultValue("No title").From("Title");
+                m.Field("start", typeof(DateTime)).From("Start");
+                m.Field("end", typeof(DateTime)).From("End");
+                m.Field("description", typeof(string)).From("Description");
+                m.Field("recurrenceID", typeof(int)).From("RecurrenceID");
+                m.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
+                m.Field("recurrenceException", typeof(string)).From("RecurrenceException");
+                m.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                m.Field("startTimezone", typeof(string)).From("StartTimezone");
+                m.Field("endTimezone", typeof(string)).From("EndTimezone");
+            })
+        )
+        .Transport(transport => transport
+            .Read(read => read.Url("https://demos.telerik.com/service/v2/core/meetings"))
+            .Create(create => create.Url("https://demos.telerik.com/service/v2/core/meetings/create").Type(HttpVerbs.Post).ContentType("application/json"))
+            .Destroy(destroy => destroy.Url("https://demos.telerik.com/service/v2/core/meetings/destroy").Type(HttpVerbs.Post).ContentType("application/json"))
+            .Update(update => update.Url("https://demos.telerik.com/service/v2/core/meetings/update").Type(HttpVerbs.Post).ContentType("application/json"))
+            .ParameterMap("parameterMap")
+        )
     )
 )
 ```
@@ -150,10 +148,10 @@ Follow the steps below to achieve the desired scenario:
     </resources>
     <scheduler-datasource type="@DataSourceTagHelperType.Custom" batch="true">
         <transport parameter-map="parameterMap">
-            <read url="https://demos.telerik.com/kendo-ui/service/meetings" dataType="jsonp"/>
-            <create url="https://demos.telerik.com/kendo-ui/service/meetings/create" dataType="jsonp"/>
-            <destroy url="https://demos.telerik.com/kendo-ui/service/meetings/destroy" dataType="jsonp" />
-            <update url="https://demos.telerik.com/kendo-ui/service/meetings/update" dataType="jsonp"/>
+            <read url="https://demos.telerik.com/service/v2/core/meetings"/>
+            <create url="https://demos.telerik.com/service/v2/core/meetings/create" type="POST" content-type="application/json" />
+            <destroy url="https://demos.telerik.com/service/v2/core/meetings/destroy" type="POST" content-type="application/json" />
+            <update url="https://demos.telerik.com/service/v2/core/meetings/update" type="POST" content-type="application/json" />
         </transport>
         <schema>
             <scheduler-model id="MeetingID">
@@ -239,7 +237,7 @@ Follow the steps below to achieve the desired scenario:
         })
         function parameterMap(options, operation) {
             if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                kendo.stringify(options.models);
             }
         }
     </script>
