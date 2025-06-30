@@ -480,7 +480,7 @@ export const __meta__ = {
                     that._resizeTimeout = null;
                 }, 50);
             } else {
-                if (!that._hovered || (that._activated && that.element.find(".k-list").length > 0)) {
+                if (!that._hovered || (that._activated && that.element.find(".k-list:visible").length > 0)) {
                     that.close();
                 }
             }
