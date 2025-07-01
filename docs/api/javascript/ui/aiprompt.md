@@ -225,6 +225,7 @@ The headers to send with the AI service request.
         }
     });
     </script>
+
 ### service.data `Object|Function`
 The data to send with the AI service request.
 
@@ -240,6 +241,7 @@ The data to send with the AI service request.
             }
         });
     </script>
+
 #### Example
     <div id="aiprompt"></div>
     <script>
@@ -258,6 +260,7 @@ The data to send with the AI service request.
             }
         });
     </script>
+    
 ### service.outputGetter `Function`
 The function to get the output from the AI service response.
 

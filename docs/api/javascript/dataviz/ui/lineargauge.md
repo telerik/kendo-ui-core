@@ -228,7 +228,7 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
- #### Example - set gaugeArea border width
+#### Example - set gaugeArea border width
 
     <div id="gauge-container">
       <div id="gauge"></div>
