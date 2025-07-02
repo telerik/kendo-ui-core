@@ -398,7 +398,13 @@ export const __meta__ = {
                     result.push(popup);
                 }
                 opener = popup.find(popupOpenerSelector());
-                popupId = opener.data(POPUP_OPENER_ATTR);
+
+                if (opener && opener.length && opener.length > 1) {
+                    result.push(...getChildPopups(popup, overflowWrapper));
+                    popupId = null;
+                } else {
+                    popupId = opener.data(POPUP_OPENER_ATTR);
+                }
             }
         });
 
@@ -2832,7 +2838,6 @@ export const __meta__ = {
 
         close: function() {
             var that = this;
-
             if (contains(that.element[0], $(arguments[0])[0]) || that._itemHasChildren(arguments[0])) {
                 Menu.fn.close.call(that, arguments[0]);
             } else {

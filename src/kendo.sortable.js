@@ -429,12 +429,6 @@ export const __meta__ = {
 
                 this._originalCursorType = body.css("cursor");
                 body.css({ "cursor": cursor });
-
-                if (!this._cursorStylesheet) {
-                    this._cursorStylesheet = $("<style>* { cursor: " + cursor + " !important; }</style>");
-                }
-
-                this._cursorStylesheet.appendTo(body);
             }
         },
 
@@ -442,8 +436,6 @@ export const __meta__ = {
             if (this._originalCursorType) {
                 $(document.body).css("cursor", this._originalCursorType);
                 this._originalCursorType = null;
-
-                this._cursorStylesheet.remove();
             }
         },
 

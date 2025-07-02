@@ -66,6 +66,30 @@ describe("Notification WAI-ARIA", function() {
         assert.equal(element.attr("aria-hidden"), "true");
     });
 
+    it("Notification popup has aria-hidden set to 'true'", function() {
+        notification = createNotification({
+            button: true
+        });
+
+        notification.show("foo");
+
+        let element = $(".k-notification");
+        notification.hide();
+
+        assert.equal(element.attr("aria-hidden"), "true");
+    });
+
+    it("Notification popup has aria-hidden set to 'false'", function() {
+        notification = createNotification({
+            button: true
+        });
+
+        notification.show("foo");
+
+        let element = $(".k-notification");
+        assert.equal(element.attr("aria-hidden"), "false");
+    });
+
     it("Notification does not violate AXE", async function() {
         notification = createNotification({
             button: true
