@@ -10,6 +10,7 @@ The following table lists the Telerik UI for {{ site.framework }} versions and t
 
 | Telerik UI for {{ site.framework }} | Kendo UI Sass Themes |
 |:---         |:---                     |
+| Telerik UI 2025.2.702 (2025.2.702) | @progress/kendo-theme-bootstrap@11.0.2<br>@progress/kendo-theme-classic@11.0.2<br>@progress/kendo-theme-default@11.0.2<br>@progress/kendo-theme-fluent@11.0.2<br>@progress/kendo-theme-material@11.0.2 |
 | Telerik UI 2025.2.520 (Q2 2025.2.520) | @progress/kendo-theme-bootstrap@11.0.2<br>@progress/kendo-theme-classic@11.0.2<br>@progress/kendo-theme-default@11.0.2<br>@progress/kendo-theme-fluent@11.0.2<br>@progress/kendo-theme-material@11.0.2 |
 | Telerik UI 2025.1.227 (2025.1.227) | @progress/kendo-theme-bootstrap@10.2.0<br>@progress/kendo-theme-classic@10.2.0<br>@progress/kendo-theme-default@10.2.0<br>@progress/kendo-theme-fluent@10.2.0<br>@progress/kendo-theme-material@10.2.0 |
 | Telerik UI 2025.1.211 (Q1 2025) | @progress/kendo-theme-bootstrap@10.2.0<br>@progress/kendo-theme-classic@10.2.0<br>@progress/kendo-theme-default@10.2.0<br>@progress/kendo-theme-fluent@10.2.0<br>@progress/kendo-theme-material@10.2.0 |

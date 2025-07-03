@@ -225,17 +225,15 @@ The following example demonstrates how to consume an OData service.
         .Custom(dataSource =>
         {
             dataSource
-            .Type("odata")
+            .Type("odata-v4")
             .PageSize(20)
             .ServerPaging(true)
             .ServerFiltering(true)
             .ServerSorting(true)
-            .Transport(transport => {
-                  transport.Read(read => {
-                      read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders")
-                      .DataType("jsonp");
-                  });
-              });
+            .Transport(transport => 
+            {
+                transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"));
+            });
         })
     )
     
@@ -249,13 +247,13 @@ The following example demonstrates how to consume an OData service.
 ```TagHelper
 	<kendo-datasource name="myDataSource" 
         type="DataSourceTagHelperType.Custom" 
-        custom-type="odata"
+        custom-type="odata-v4"
         page-size="20"
         server-paging="true"
         server-sorting="true"
         server-filtering="true">
 	    <transport>
-	        <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+	        <read url="https://demos.telerik.com/service/v2/odata/Orders" />
 	    </transport>
 	</kendo-datasource>
 

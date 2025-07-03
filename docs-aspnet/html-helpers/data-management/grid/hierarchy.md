@@ -63,10 +63,91 @@ The Grid provides options for visualizing the relations between parent and child
 ```
 {% if site.core %}
 ```TagHelper
-        <kendo-grid name="grid" height="550" selectable="true" on-detail-init="onDetailInit">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+    @{
+        var detailGridReadUrl = @Url.Action("HierarchyBinding_Orders","Grid");
+    }
+
+    <kendo-grid name="grid" height="600" detail-template-id="template">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="6">
+            <schema data="Data" total="Total" errors="Errors">
+            </schema>
+            <transport>
+                <read url="@Url.Action("HierarchyBinding_Employees","Grid")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true" />
+        <sortable enabled="true" />
+        <scrollable enabled="true" />
+        <columns>
+            <column field="FirstName" title="First Name" width="130" />
+            <column field="LastName" title="Last Name" width="130" />
+            <column field="Country" title="Country" width="130" />
+            <column field="City" title="City" width="110" />
+            <column field="Title"></column>
+        </columns>
+    </kendo-grid>
+
+    <script id="template" type="text/html">
+        <kendo-grid name="grid_#=EmployeeID#" is-in-client-template="true">
+            <columns>
+                <column field="OrderID" width="110">
+                </column>
+                <column field="ShipCountry" width="150">
+                </column>
+                <column field="ShipAddress" width="150">
+                </column>
+                <column field="ShipName" width="300">
+                </column>
+            </columns>
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
+                <schema data="Data" total="Total" errors="Errors">
+                </schema>
                 <transport>
-                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees" />
+                    <read url="@Html.Raw(detailGridReadUrl+"?employeeID=#=EmployeeID#")" />
+                </transport>
+            </datasource>
+            <pageable enabled="true" />
+            <sortable enabled="true" />
+        </kendo-grid>
+    </script>
+```
+{% endif %}
+
+If the detail Grid contains [client templates]({% slug client_templates_overview%}), any `#` characters that are part of binding expressions in these templates must be escaped. As a result, the Kendo UI template that holds the detail Grid will ignore the `#` characters, while the inner template will handle it correctly. For more information on how to escape `#` characters in nested templates, refer to the [Kendo UI Template documentation](https://www.telerik.com/kendo-jquery-ui/documentation/framework/templates/essentials).
+
+```HtmlHelper
+    <script id="template" type="text/kendo-tmpl">
+        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+                .Name("grid_#=EmployeeID#") // template expression, to be evaluated in the master context
+                .Columns(columns =>
+                {
+                    columns.Bound(o => o.OrderID).Width(110);
+                    columns.Bound(o => o.ShipCountry).Width(150);
+                    columns.Bound(o => o.ShipAddress).ClientTemplate("\\#= ShipAddress \\#"); // escaped template expression, to be evaluated in the child/detail context
+                    columns.Bound(o => o.ShipName).Width(300);
+                })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(10)
+                    .Read(read => read.Action("HierarchyBinding_Orders", "Grid", new { employeeID = "#=EmployeeID#" }))
+                )
+                .Pageable()
+                .Sortable()
+                .ToClientTemplate()
+        )
+    </script>
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var detailGridReadUrl = @Url.Action("HierarchyBinding_Orders","Grid");
+    }
+
+    <script id="template" type="text/html">
+        <kendo-grid name="grid_#=EmployeeID#" is-in-client-template="true">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
+                <transport>
+                    <read url="@Html.Raw(detailGridReadUrl + "?employeeID=#=EmployeeID#")" />
                 </transport>
             </datasource>
             <sortable enabled="true" />

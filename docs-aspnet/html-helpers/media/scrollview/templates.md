@@ -15,136 +15,134 @@ You can configure the items of the ScrollView by using [plain HTML and CSS](#htm
 The following example demonstrates how to use HTML templates to set the ScrollView items.
 
 ```HtmlHelper
-    @(Html.Kendo().ScrollView()
-                .Name("scrollView")
-                .ContentHeight("100%")
-                .Items(x =>
-                {
-                    x.Add().Content("<div class='photo photo1'></div>");
-                    x.Add().Content("<div class='photo photo2'></div>");
-                    x.Add().Content("<div class='photo photo3'></div>");
-                    x.Add().Content("<div class='photo photo4'></div>");
-                    x.Add().Content("<div class='photo photo5'></div>");
-                    x.Add().Content("<div class='photo photo6'></div>");
-                    x.Add().Content("<div class='photo photo7'></div>");
-                    x.Add().Content("<div class='photo photo8'></div>");
-                    x.Add().Content("<div class='photo photo9'></div>");
-                    x.Add().Content("<div class='photo photo10'></div>");
-                })
-                .HtmlAttributes(new { style = "height:748px; width:1022px; max-width: 100%;" })
-    )
+@(Html.Kendo().ScrollView()
+    .Name("scrollView")
+    .ContentHeight("100%")
+    .Items(x =>
+    {
+        x.Add().Content("<div class='photo photo1'></div>");
+        x.Add().Content("<div class='photo photo2'></div>");
+        x.Add().Content("<div class='photo photo3'></div>");
+        x.Add().Content("<div class='photo photo4'></div>");
+        x.Add().Content("<div class='photo photo5'></div>");
+        x.Add().Content("<div class='photo photo6'></div>");
+        x.Add().Content("<div class='photo photo7'></div>");
+        x.Add().Content("<div class='photo photo8'></div>");
+        x.Add().Content("<div class='photo photo9'></div>");
+        x.Add().Content("<div class='photo photo10'></div>");
+    })
+    .HtmlAttributes(new { style = "height:748px; width:1022px; max-width: 100%;" })
+)
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-scrollview name="scrollView" content-height="100%"
-                                        style="height:748px; width:1022px; max-width: 100%;">
-            <items>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo1'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo2'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo3'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo4'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo5'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo6'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo7'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo8'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo9'></div>
-                    </content>
-                </scrollview-item>
-                <scrollview-item>
-                    <content>
-                        <div class='photo photo10'></div>
-                    </content>
-                </scrollview-item>
-            </items>
-    </kendo-scrollview>
+<kendo-scrollview name="scrollView" content-height="100%" style="height:748px; width:1022px; max-width: 100%;">
+    <items>
+        <scrollview-item>
+            <content>
+                <div class='photo photo1'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo2'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo3'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo4'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo5'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo6'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo7'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo8'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo9'></div>
+            </content>
+        </scrollview-item>
+        <scrollview-item>
+            <content>
+                <div class='photo photo10'></div>
+            </content>
+        </scrollview-item>
+    </items>
+</kendo-scrollview>
 ```
 {% endif %}
 ```CSS
-    <style>
+<style>
+    .photo {
+        display: inline-block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width:inherit;
+        height:inherit;
+    }
 
-        .photo {
-            display: inline-block;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            width:inherit;
-            height:inherit;
-        }
+    .photo1 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo1 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo2 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo2 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo3 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo3 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo4 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo4 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo5 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo5 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo6 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo6 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo7 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo7 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo8 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo8 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
+    .photo9 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
 
-        .photo9 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
-
-        .photo10 {
-            background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
-        }
-    </style>
+    .photo10 {
+        background-image: url("../shared/images/photos/@(random.Next(1,30)).jpg");
+    }
+</style>
 ```
 
 ## Dynamic Template
@@ -152,49 +150,49 @@ The following example demonstrates how to use HTML templates to set the ScrollVi
 The ScrollView allows for configuring a dynamic template which loops through all of its data items.
 
 ```HtmlHelper
-    @(Html.Kendo().ScrollView()
-                .Name("scrollView")
-                .EnablePager(false)
-                .ContentHeight("100%")
-                .TemplateId("scrollview-template")
-                .DataSource(d =>
-                        d.Custom()
-                          .Type("odata")
-                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products")))
-                          .ServerPaging(true)
-                          .PageSize(3))
-                .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
-    )
+@(Html.Kendo().ScrollView()
+    .Name("scrollView")
+    .EnablePager(false)
+    .ContentHeight("100%")
+    .TemplateId("scrollview-template")
+    .DataSource(d =>
+        d.Custom()
+        .Type("odata-v4")
+        .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Products")))
+        .ServerPaging(true)
+        .PageSize(3))
+    .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
+)
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-scrollview name="scrollView" content-height="100%" 
-                                        template-id="scrollview-template" 
-                                        style="height:600px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="3" server-paging="true">
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
-            </transport>
-        </datasource>
-    </kendo-scrollview>
+<kendo-scrollview name="scrollView" content-height="100%" 
+    template-id="scrollview-template" 
+    style="height:600px; width:890px; max-width: 100%;">
+    <datasource custom-type="odata-v4" page-size="3" server-paging="true">
+        <transport>
+            <read url="https://demos.telerik.com/service/v2/odata/Products" />
+        </transport>
+    </datasource>
+</kendo-scrollview>
 ```
 {% endif %}
 ```JavaScript
-    <script id="scrollview-template" type="text/x-kendo-template">
-        <div class="img-wrapper">
-            # for (var i = 0; i < data.length; i++) { #
-            <div>
-                <div style="width: 140px; height: 140px;  background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
-                <p>#= data[i].ProductName #</p>
-            </div>
-            # } #
+<script id="scrollview-template" type="text/x-kendo-template">
+    <div class="img-wrapper">
+        # for (var i = 0; i < data.length; i++) { #
+        <div>
+            <div style="width: 140px; height: 140px;  background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+            <p>#= data[i].ProductName #</p>
         </div>
-    </script>
-    <script>
-        function setBackground(id) {
-            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
-        }
-    </script>
+        # } #
+    </div>
+</script>
+<script>
+    function setBackground(id) {
+        return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
+    }
+</script>
 ```
 
 ## No-Item Template
@@ -202,21 +200,21 @@ The ScrollView allows for configuring a dynamic template which loops through all
 The following example demonstrates how to set a template when no ScrollView items will be displayed.
 
 ```HtmlHelper
-    @(Html.Kendo().ScrollView()
-            .Name("scrollview")
-            .EmptyTemplateId("scrollview-empty")
-    )
+@(Html.Kendo().ScrollView()
+        .Name("scrollview")
+        .EmptyTemplateId("scrollview-empty")
+)
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-scrollview name="scrollView" empty-template-id="scrollview-empty">
-    </kendo-scrollview>
+<kendo-scrollview name="scrollView" empty-template-id="scrollview-empty">
+</kendo-scrollview>
 ```
 {% endif %}
 ```JavaScript
-    <script id="scrollview-empty" type="text/x-kendo-template">
-    <div style="width: 100%; height: 100%; background-color: red;">empty</div>
-    </script>
+<script id="scrollview-empty" type="text/x-kendo-template">
+<div style="width: 100%; height: 100%; background-color: red;">empty</div>
+</script>
 ```
 
 ## See Also

@@ -68,24 +68,24 @@ You can achieve this requirement using the following implementation:
 
     ```JS
         function batchProduct() {
-            return "https://demos.telerik.com/kendo-ui/service-v4/odata/$batch";
+            return "https://demos.telerik.com/service/v2/odata/$batch";
         }
 
         function readProduct() {
-            return "https://demos.telerik.com/kendo-ui/service-v4/odata/Products";
+            return "https://demos.telerik.com/service/v2/odata/Products";
         }
 
         function updateProduct(dataItem) {
-            return "https://demos.telerik.com/kendo-ui/service-v4/odata/Products(" + dataItem.ProductID + ")";
+            return "https://demos.telerik.com/service/v2/odata/Products(" + dataItem.ProductID + ")";
         }
 
         function createProduct(dataItem) {
             delete dataItem.ProductID;
-            return "https://demos.telerik.com/kendo-ui/service-v4/odata/Products";
+            return "https://demos.telerik.com/service/v2/odata/Products";
         }
 
         function destroyProduct(dataItem) {
-            return "https://demos.telerik.com/kendo-ui/service-v4/odata/Products(" + dataItem.ProductID + ")";
+            return "https://demos.telerik.com/service/v2/odata/Products(" + dataItem.ProductID + ")";
         }
     ```
 

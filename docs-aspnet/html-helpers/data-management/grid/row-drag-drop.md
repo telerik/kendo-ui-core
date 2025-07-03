@@ -29,7 +29,7 @@ To enable the Drag and Drop feature:
             .Columns(columns =>
             {
                 columns.Template("").Draggable(true);
-                columns.Bound(p => p.ShipName).Title("Order");
+                columns.Bound(p => p.ShipName).Title("Ship Name");
             })
             .DataSource(dataSource => dataSource
                 .Ajax()
@@ -37,23 +37,21 @@ To enable the Drag and Drop feature:
                 .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
                 .Read(read => read.Action("Orders_Read", "Grid"))
             )
-            ...
         )
     ```
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid" height="550">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
                 <transport>
-                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                    <read url="@Url.Action("Orders_Read","Grid")" />
                 </transport>
-                <schema>
+                <schema data="Data" total="Total" errors="Errors">
                     <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                     </model>
                 </schema>
             </datasource>
             <reorderable rows="true"/>
-            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
             <columns>
                 <column template="" draggable="true" />
                 <column field="ShipName" title="Ship Name"/>
@@ -75,7 +73,7 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
         .Columns(columns =>
         {
             columns.Template("").Draggable(true);
-            columns.Bound(p => p.ShipName).Title("Order");
+            columns.Bound(p => p.ShipName).Title("Ship Name");
         })
         .DataSource(dataSource => dataSource
             .Ajax()
@@ -83,29 +81,27 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
             .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
             .Read(read => read.Action("Orders_Read", "Grid"))
         )
-        ...
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" selectable="multiple, row">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+    <kendo-grid name="grid" selectable="multiple, row">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")" />
             </transport>
-            <schema>
+            <schema data="Data" total="Total" errors="Errors">
                 <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                 </model>
             </schema>
         </datasource>
         <reorderable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column template="" draggable="true" />
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-````
+```
 {% endif %}
 
 ## Drag and Drop Rows between Grids
@@ -150,15 +146,15 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
     )
 ```
 ```TagHelper
-    <kendo-grid name="grid" navigatable="true" style="height:430px;" width="550">
+    <kendo-grid name="grid" navigatable="true" height="430">
         <columns>
-            <column template="" draggable="true">
+            <column template="" draggable="true" width="100">
             </column>
-            <column field="ProductName" title="Product">
+            <column field="ProductName" title="Product" width="200">
             </column>
-            <column field="UnitPrice" title="Price">
+            <column field="UnitPrice" title="Price" width="140">
             </column>
-            <column field="Discontinued" title="In Stock" template="<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>">
+            <column field="Discontinued" title="In Stock" template="<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>" width="130">
             </column>
         </columns>
         <pageable enabled="true" />
@@ -167,7 +163,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
         <reorderable columns="true" >
             <rows click-move-click="true" />
         </reorderable>
-        <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <schema data="Data" total="Total" errors="Errors">
                 <model id="ProductID">
                 </model>
@@ -228,10 +224,10 @@ You can allow the user to reorder the Grid rows by dragging the row through a dr
     )
 ```
 ```TagHelper
-    <kendo-grid name="grid" navigatable="true" style="height:430px;" width="550">
+    <kendo-grid name="grid">
         <columns>
-            <column template="" draggable="true"></column>
-            <column field="ProductName" title="Product"></column>
+            <column template="" draggable="true" width="100"></column>
+            <column field="ProductName" title="Product" width="200"></column>
         </columns>
     </kendo-grid>
 ````
@@ -266,7 +262,7 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
         .Columns(columns =>
         {
             columns.Template("").Draggable(true);
-            columns.Bound(p => p.ShipName).Title("Order");
+            columns.Bound(p => p.ShipName).Title("Ship Name");
         })
         .DataSource(dataSource => dataSource
             .Ajax()
@@ -280,23 +276,22 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550" navigatable="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")" />
             </transport>
-            <schema>
+            <schema data="Data" total="Total" errors="Errors">
                 <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                 </model>
             </schema>
         </datasource>
         <reorderable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column template="" draggable="true" />
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-````
+```
 {% endif %}
 
 ## Known Limitations

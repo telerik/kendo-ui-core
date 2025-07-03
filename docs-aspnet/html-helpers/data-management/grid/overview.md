@@ -62,9 +62,9 @@ The following example demonstrates how to define the Grid.
 ```Controller
     public class GridController : Controller
     {
-        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        public JsonResult Customers_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = Enumerable.Range(0, 50).Select(i => new Customer
+            var result = Enumerable.Range(1, 50).Select(i => new Customer
             {
                 CompanyName = "Company Name " + i,
                 ContactName = "Contact Name " + i,
@@ -107,6 +107,7 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
             columns.Bound(p => p.ShipName).Width(300);
             columns.Bound(p => p.ShipCity).Width(250);
         })
+        .Scrollable()
         .Groupable()
         .Sortable()
         .Filterable()
@@ -114,34 +115,33 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
         .ButtonCount(5)
         .Refresh(true)
         .PageSizes(new[] { 5, 10, 20 }))
+        .HtmlAttributes(new { style = "height: 550px;" })
         .DataSource(dataSource => dataSource
-            .Custom()
-            .Transport(transport => transport
-            .Read(read => read.Action("Orders_Read", "Grid")))
-            .Schema(schema => schema
-                .Data("Data")
-                .Model(model => {
-                    model.Field("OrderDate", typeof(DateTime));
-                })
-            )
+            .Ajax()
+            .PageSize(20)
+            .Read(read => read.Action("Orders_Read", "Grid"))
         )
     )
 ```
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")"/>
             </transport>
             <schema>
-                <model>
+                <model id="OrderID">
                     <fields>
-                        <field name="OrderDate" type="Date"></field>
+                        <field name="OrderID" type="number"></field>
+                        <field name="OrderDate" type="date"></field>
+                        <field name="ShipName" type="string"></field>
+                        <field name="ShipCity" type="string"></field>
                     </fields>
                 </model>
             </schema>
         </datasource>
+        <scrollable enabled="true"/>
         <groupable enabled="true" />
         <sortable enabled="true" />
         <filterable enabled="true" />

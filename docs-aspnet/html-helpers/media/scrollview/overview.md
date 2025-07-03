@@ -94,8 +94,8 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
          .TemplateId("employee-template")
          .DataSource(d =>
                 d.Custom()
-                  .Type("odata")
-                  .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees")))
+                  .Type("odata-v4")
+                  .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Employees")))
                   .ServerPaging(true)
                   .PageSize(1))
          .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
@@ -118,9 +118,9 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
     <kendo-scrollview name="scrollView" content-height="100%" 
                                         template-id="employee-template" 
                                         style="height:600px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="1" server-paging="true">
+        <datasource custom-type="odata-v4" page-size="1" server-paging="true">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees" />
+                <read url="https://demos.telerik.com/service/v2/odata/Employees" />
             </transport>
         </datasource>
     </kendo-scrollview>

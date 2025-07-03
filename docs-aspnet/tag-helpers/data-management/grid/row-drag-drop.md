@@ -17,84 +17,14 @@ To enable the Drag and Drop feature:
 1. Set the `rows` attribute to "true" through the `reorderable` tag.
 1. Add a draggable column by using the `draggable` attribute. As a result, the Grid will render a drag handle on each row and will make the rows draggable.
 
-    ```tagHelper
-
-            <kendo-grid name="grid" height="550">
-                <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-                    <transport>
-                        <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
-                    </transport>
-                    <schema>
-                        <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
-                        </model>
-                    </schema>
-                </datasource>
-                <reorderable rows="true"/>
-                <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
-                <columns>
-                    <column template="" draggable="true" />
-                    <column field="ShipName" title="Ship Name"/>
-                </columns>
-            </kendo-grid>
-
-    ```
-    ```cshtml
-
-            @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
-                .Name("Grid")
-                .Reorderable(reorder => reorder.Rows(true))
-                .Columns(columns =>
-                {
-                    columns.Template("").Draggable(true);
-                    columns.Bound(p => p.ShipName).Title("Order");
-                })
-                .DataSource(dataSource => dataSource
-                    .Ajax()
-                    .PageSize(10)
-                    .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
-                    .Read(read => read.Action("Orders_Read", "Grid"))
-                )
-                ...
-            )
-
-    ```
-
-## Drag and Drop Multiple Rows in the same Grid
-
-To drag and drop multiple Grid rows, set the `selectable` attribute to `multiple, row`. In this case, only the selected rows will be draggable. If the user drags selected rows, the current row selection will be cleared on row drop.
-Additionally, the row drag clue will be `N items selected` where `N` is the number of the selected rows.
-
-```tagHelper
-
-    <kendo-grid name="grid" height="550" selectable="multiple, row">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-            <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
-            </transport>
-            <schema>
-                <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
-                </model>
-            </schema>
-        </datasource>
-        <reorderable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
-        <columns>
-            <column template="" draggable="true" />
-            <column field="ShipName" title="Ship Name"/>
-        </columns>
-    </kendo-grid>
-
-```
-```cshtml
-
+    ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Reorderable(reorder => reorder.Rows(true))
-        .Selectable(select => select.Mode(GridSelectionMode.Multiple))
         .Columns(columns =>
         {
             columns.Template("").Draggable(true);
-            columns.Bound(p => p.ShipName).Title("Order");
+            columns.Bound(p => p.ShipName).Title("Ship Name");
         })
         .DataSource(dataSource => dataSource
             .Ajax()
@@ -104,7 +34,67 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
         )
         ...
     )
+    ```
+    ```TagHelper
+    <kendo-grid name="grid" height="550">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
+            <transport>
+                <read url="@Url.Action("Orders_Read", "Grid")"/>
+            </transport>
+            <schema data="Data" total="Total">
+                <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
+                </model>
+            </schema>
+        </datasource>
+        <reorderable rows="true"/>
+        <columns>
+            <column template="" draggable="true" />
+            <column field="ShipName" title="Ship Name"/>
+        </columns>
+    </kendo-grid>
+    ```
 
+## Drag and Drop Multiple Rows in the same Grid
+
+To drag and drop multiple Grid rows, set the `selectable` attribute to `multiple, row`. In this case, only the selected rows will be draggable. If the user drags selected rows, the current row selection will be cleared on row drop.
+Additionally, the row drag clue will be `N items selected` where `N` is the number of the selected rows.
+
+```TagHelper
+<kendo-grid name="grid" height="550" selectable="multiple, row">
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
+        <transport>
+            <read url="@Url.Action("Orders_Read", "Grid")"/>
+        </transport>
+        <schema data="Data" total="Total">
+            <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
+            </model>
+        </schema>
+    </datasource>
+    <reorderable rows="true"/>
+    <columns>
+        <column template="" draggable="true" />
+        <column field="ShipName" title="Ship Name"/>
+    </columns>
+</kendo-grid>
+```
+```HtmlHelper
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+    .Name("Grid")
+    .Reorderable(reorder => reorder.Rows(true))
+    .Selectable(select => select.Mode(GridSelectionMode.Multiple))
+    .Columns(columns =>
+    {
+        columns.Template("").Draggable(true);
+        columns.Bound(p => p.ShipName).Title("Order");
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
+        .Read(read => read.Action("Orders_Read", "Grid"))
+    )
+    ...
+)
 ```
 
 ## Drag and Drop Rows between Grids
@@ -119,29 +109,25 @@ You can reorder the rows through the keyboard when the `navigatable` property is
 
 The example below demonstrates how to drag and drop the Grid rows by using the keys `Ctrl + Up/Down`.
 
-```tagHelper
-
+```TagHelper
     <kendo-grid name="grid" height="550" navigatable="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read", "Grid")"/>
             </transport>
-            <schema>
+            <schema data="Data" total="Total">
                 <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                 </model>
             </schema>
         </datasource>
         <reorderable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column template="" draggable="true" />
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-
 ```
-```cshtml
-
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Reorderable(reorder => reorder.Rows(true))
@@ -159,7 +145,6 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
         )
         ...
     )
-
 ```
 
 ## Known Limitations

@@ -65,12 +65,13 @@ You will also have to add this configuration in your Web.config file:
 ## Binding the Grid
 
 Once the Web service is up and running, you define the Grid's DataSource instance and can apply its settings to point to the RESTful API URL:
-```C#
+
+```HtmlHelper
     .DataSource(dataSource => dataSource
         .Custom()
-        .Type("odata")
+        .Type("odata-v4")
         .Transport(transport =>
-           transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
+           transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"))
         ) 
         .PageSize(20)
         .ServerPaging(true)
@@ -79,13 +80,13 @@ Once the Web service is up and running, you define the Grid's DataSource instanc
     )
 ```
 {% if site.core %}
-```HTML
-    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20"
+```TagHelper
+    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata-v4" page-size="20"
         server-paging="true"
         server-sorting="true"
         server-filtering="true">
         <transport>
-            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"/>
+            <read url="https://demos.telerik.com/service/v2/odata/Orders"/>
         </transport>
     </datasource>
 ```

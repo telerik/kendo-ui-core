@@ -59,7 +59,7 @@ This example demonstrates locking the currently edited events of the Scheduler s
             var hubStart = {};
 
             // Create a new SignalR connection to the specified hubUrl.
-            var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
+            var hubUrl = "path/to/hub";
             var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
             var productHub = connection.createHubProxy("meetingHub");
 

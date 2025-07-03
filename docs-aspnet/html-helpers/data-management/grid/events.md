@@ -50,9 +50,9 @@ The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+                <read url="@Url.Action("Orders_Read","Grid")"/>
             </transport>
         </datasource>
         <groupable enabled="true" />

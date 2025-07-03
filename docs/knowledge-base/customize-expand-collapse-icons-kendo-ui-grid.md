@@ -125,9 +125,9 @@ For a runnable example, please refer to the next demo.
       $(document).ready(function() {
         var element = $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Products"
             },
             pageSize: 6,
             serverPaging: true,
@@ -205,9 +205,9 @@ For a runnable example, please refer to the next demo.
       function detailInit(e) {
         $("<div/>").appendTo(e.detailCell).kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             serverPaging: true,
             serverSorting: true,

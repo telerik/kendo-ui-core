@@ -33,6 +33,6 @@ To override the default CSS style of the TileLayout component and set the `grid-
 
 Here's an example of the effect of this CSS rule when applied to a TileLayout that has a TreeView in its second container:
 
-![TileLayout example](https://netcorerepl.telerik.com/GdvQFcPR16ya7oT458)
+* [TileLayout REPL example](https://netcorerepl.telerik.com/GdvQFcPR16ya7oT458)
 
 That's it! With this CSS override, the first container (tile) will no longer automatically resize when you expand the hierarchy of the TreeView in the second container.

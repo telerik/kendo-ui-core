@@ -71,10 +71,10 @@ When the DataSource is part of the Grid definition, as in the example above, the
     @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("dataSource1")
         .Custom(x => x
-            .Type("odata")
+            .Type("odata-v4")
             .Transport(transport =>
             {
-                transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders").DataType("json"));
+                transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"));
             })
             .PageSize(20)
             .Aggregates(aggregates =>

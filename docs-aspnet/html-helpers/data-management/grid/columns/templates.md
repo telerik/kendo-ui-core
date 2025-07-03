@@ -34,7 +34,7 @@ The following example demonstrates how to specify your own custom layout for the
             .Ajax()
             .Read(read => read.Action("Customers_Read", "Grid"))
         )
-)
+    )
 
     <script>
         function template(data) {
@@ -44,50 +44,29 @@ The following example demonstrates how to specify your own custom layout for the
                     `
         }
     </script>
-
-    <style type="text/css">
-        .customer-photo {
-            display: inline-block;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-size: 32px 35px;
-            background-position: center center;
-            vertical-align: middle;
-            line-height: 32px;
-            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
-            margin-left: 5px;
-        }
-
-        .customer-name {
-            display: inline-block;
-            vertical-align: middle;
-            line-height: 32px;
-            padding-left: 3px;
-        }
-    </style>
 ````
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+    <kendo-grid name="grid" height="380">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <schema data="Data" total="Total" errors="Errors">
+            </schema>
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+                <read url="@Url.Action("Customers_Read", "Grid")"/>
             </transport>
         </datasource>
+        <scrollable enabled="true"/>
         <groupable enabled="true" />
         <sortable enabled="true" />
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+        <pageable button-count="5" refresh="true" page-sizes-enabled="true">
         </pageable>
-        <filterable enabled="true" />
         <columns>
-            <column field="ContactName" template="#=template(data)#" title="Contact Name" width="240" />
-            <column field="ContactTitle" title="Contact Title" />
+            <column field="ContactName" template="#=template(data)#" title="Contact Name" width="140" />
+            <column field="ContactTitle" title="Contact Title" width="190"/>
             <column field="CompanyName" title="Company Name" />
-            <column field="Country" title="Country" width="150" />
+            <column field="Country" title="Country" width="110" />
         </columns>
     </kendo-grid>
-
 
     <script>
         function template(data) {
@@ -97,27 +76,28 @@ The following example demonstrates how to specify your own custom layout for the
                     `
         }
     </script>
-
-    <style type="text/css">
-        .customer-photo {
-            display: inline-block;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-size: 32px 35px;
-            background-position: center center;
-            vertical-align: middle;
-            line-height: 32px;
-            box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
-            margin-left: 5px;
-        }
-
-        .customer-name {
-            display: inline-block;
-            vertical-align: middle;
-            line-height: 32px;
-            padding-left: 3px;
-        }
-    </style>
-````
+```
 {% endif %}
+```CSS Styles
+<style type="text/css">
+    .customer-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 32px;
+        padding-left: 3px;
+    }
+</style>
+```
