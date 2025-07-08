@@ -128,6 +128,8 @@ If `label` is set to `false`, the widget will not display the label.
 
 ### label.template `String|Function`
 
+The template for the label.
+
 #### Parameters
 
 ##### value `Number`

@@ -3549,7 +3549,7 @@ export const __meta__ = {
         },
 
         _readData: function(data) {
-            var read = !this._isServerGrouped() ? this.reader.data : this.reader.groups;
+            let read = !this._isServerGrouped() ? this.reader.data : this.reader.groups;
             return read.call(this.reader, data);
         },
 
@@ -3859,6 +3859,9 @@ export const __meta__ = {
                     that._pristineData.push(items[j]);
                 }
             } else {
+                if (kendo.isBlank(data)) {
+                    data = [];
+                }
                 that._pristineData = data.slice(0);
             }
 

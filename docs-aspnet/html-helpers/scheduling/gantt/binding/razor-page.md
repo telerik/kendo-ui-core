@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Gantt component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_gantt_razorpage_aspnetcore
-position: 10
+position: 3
 ---
 
 # Gantt in Razor Pages
@@ -27,7 +27,6 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
     @model IndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
-
     @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
         .Name("gantt")
         .Columns(columns =>
@@ -70,7 +69,6 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
             .Read(r => r.Url("/Gantt/GanttIndex?handler=DependenciesRead").Data("forgeryToken"))
         )
     )
-
     <script>
         function forgeryToken() {
             return kendo.antiForgeryTokens();
@@ -84,7 +82,6 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
     @addTagHelper *, Kendo.Mvc
-
     <kendo-gantt snap="false" height="700" show-work-days="false" show-work-hours="false" name="gantt">
     	<columns>
     	 	<gantt-column  field="TaskID" title="ID" width="50px">
@@ -156,9 +153,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
-
 1. Send the `AntiForgeryToken` with the Read request.
-
     ```JavaScript
         <script>
             function forgeryToken() {
@@ -168,7 +163,6 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
     ```
     
     Additional parameters can also be supplied.
-
     ```JavaScript
         <script>
             function forgeryToken() {
@@ -179,9 +173,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
             }
         </script>
     ```
-
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
-
     ```C# Index.cshtml.cs
         public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
         {
@@ -246,9 +238,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
             return new JsonResult(new[] { dependency }.ToDataSourceResult(request, ModelState));
         }
     ```
-
 ## See Also
-
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 * [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
 * [Server-Side HtmlHelper API of the Gantt](/api/gantt)

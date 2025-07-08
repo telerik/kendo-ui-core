@@ -302,7 +302,7 @@ The following example demonstrates the basic configuration of the Gantt.
 | Feature | Description |
 |:---         |:---
 | [Layout]({% slug htmlhelpers_gantt_layout_aspnetcore %}) | The layout of the Gantt consists of the GanttList and Timeline sections separated by a splitbar. |
-| [Data binding]({% slug htmlhelpers_gantt_binding_aspnetcore %}) | The Gantt provides various options for data binding. |
+| [Data binding]({% slug htmlhelpers_gantt_databinding %}) | The Gantt provides various options for data binding. |
 | [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %}) | The Gantt columns offer configuration options for customizing the columns in the list section of the Gantt  |
 | [Planned vs Actual]({% slug htmlhelpers_gantt_planned_vs_actual_aspnetcore %}) | You can compare the actual `start` and `end` dates with the originaly planned dates. |
 | [PDF export]({% slug htmlhelpers_gantt_pdf_export_aspnetcore %}) | The Gantt has built-in PDF export capabilities. |

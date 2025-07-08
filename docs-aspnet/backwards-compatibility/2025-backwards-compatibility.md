@@ -12,6 +12,10 @@ This article lists the breaking or important changes in the 2025 releases of {{ 
 
 ## {{ site.product }} Q3 2025
 
+### ActionSheet
+
+The ActionSheet's action buttons now accept enums for the `FillMode`, `Rounded`, `ThemeColor`, `Size` properties instead of strings. The `ActionSheetItem.Group` property now accepts the `ActionSheetItemGroup` enum instead of a string.
+
 ### UIPrimitives
 
 The {{ site.product }} 2025 Q3 release introduces changes in the naming of several properties in the `UIPrimitives.cs` class:

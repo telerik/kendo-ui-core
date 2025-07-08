@@ -1,13 +1,12 @@
 ---
-title: Data Binding
-page_title: Data Binding
-description: "Learn the binding options for the Telerik UI Gantt component for {{ site.framework }}."
-previous_url: /helpers/scheduling/gantt/server-binding
-slug: htmlhelpers_gantt_binding_aspnetcore
-position: 3
+title: Server Binding
+page_title: Server Binding
+description: "Learn how to configure the Telerik UI Gantt for {{ site.framework }} to use server binding."
+slug: htmlhelpers_gantt_serverbinding_aspnetcore
+position: 2
 ---
 
-# Data Binding
+# Server Binding
 
 By default, the Telerik UI Gantt for {{ site.framework }} performs server-side requests (`HTTP` and `GET`) when doing paging, sorting, and filtering.
 
@@ -109,7 +108,6 @@ The following example demonstrates how to bind the Gantt to items by using the `
     public ActionResult ServerBinding()
     {
         var sampleEntities = new SampleEntities();
-
         ViewData["tasks"] = sampleEntities.GanttTasks
             .ToList().Select(task => new TaskViewModel
             {
@@ -123,8 +121,6 @@ The following example demonstrates how to bind the Gantt to items by using the `
                 Expanded = task.Expanded,
                 Summary = task.Summary
             }).AsQueryable();
-
-
         ViewData["dependencies"] = sampleEntities.GanttDependencies
             .ToList().Select(dependency => new DependencyViewModel
             {
@@ -133,7 +129,6 @@ The following example demonstrates how to bind the Gantt to items by using the `
                 SuccessorID = dependency.SuccessorID,
                 Type = (DependencyType)dependency.Type
             }).AsQueryable();
-
         return View();
     }
 ```
@@ -176,10 +171,9 @@ The following example demonstrates how to bind the Gantt to items by using the `
 The following example demonstrates how to bind the Gantt to items by using the `ViewBag` configuration.
 
 ```Controller
-    public IActionResult ServerBinding()
+    public ActionResult ServerBinding()
     {
         var sampleEntities = new SampleEntities();
-
         ViewBag.Tasks = sampleEntities.GanttTasks
             .ToList().Select(task => new TaskViewModel
             {
@@ -193,8 +187,6 @@ The following example demonstrates how to bind the Gantt to items by using the `
                 Expanded = task.Expanded,
                 Summary = task.Summary
             }).AsQueryable();
-
-
         ViewBag.Dependencies = sampleEntities.GanttDependencies
             .ToList().Select(dependency => new DependencyViewModel
             {
@@ -203,7 +195,6 @@ The following example demonstrates how to bind the Gantt to items by using the `
                 SuccessorID = dependency.SuccessorID,
                 Type = (DependencyType)dependency.Type
             }).AsQueryable();
-
         return View();
     }
 ```
@@ -243,10 +234,8 @@ The following example demonstrates how to bind the Gantt to items by using the `
 
 ## See Also
 
-* [Basic Usage of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt)
+* [Gantt Server Binding (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/serverbinding)
+* [Gantt Server-Side API](/api/gantt)
 {% if site.core %}
-* [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
-* [Gantt in Razor Pages]({% slug htmlhelpers_gantt_razorpage_aspnetcore %})
+* [Server-Side TagHelper API of the Gantt](/api/taghelpers/gantt)
 {% endif %}
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
-* [Server-Side API](/api/gantt)
