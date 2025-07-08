@@ -764,7 +764,7 @@ For more information on referencing specific helper instances, see the [Methods 
 ## Next Steps
 
 * [Configuring the Gantt Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %})
-* [Binding the Gantt to Data]({% slug htmlhelpers_gantt_binding_aspnetcore %})
+* [Binding the Gantt to Data]({% slug htmlhelpers_gantt_databinding %})
 * [Planned vs Actual Functionality]({% slug htmlhelpers_gantt_planned_vs_actual_aspnetcore %})
 
 ## See Also
