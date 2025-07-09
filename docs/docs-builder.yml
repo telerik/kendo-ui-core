@@ -26,7 +26,7 @@ liquid-output-delimiter-right: "}}"
 liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
-  cdnVersion: "2025.2.520"
+  cdnVersion: "2025.2.702"
   themesCdnVersion: "11.0.2"
 
 markdown-replacements:
@@ -41,7 +41,7 @@ default-code-block-language: js
 
 kendo-api-path: ./api
 dojo-scripts:
-  kendoCdnVersion: 2025.2.520
+  kendoCdnVersion: 2025.2.702
   themesCdnVersion: 11.0.2
   pdfJsVersion: 4.6.82
   jQueryVersion: 3.4.1
@@ -164,6 +164,7 @@ excluded-files:
 - "**/start-docs.sh"
 - "**/watch.sh"
 - "**/api/*"
+- "**/intro/scripts/*"
 
 meta:
   api/javascript:
@@ -731,9 +732,6 @@ meta:
     position: 2
   controls:
     title: Components
-    position: 4
-  intro/scripts:
-    title: Script Dependencies
     position: 4
   intro/widget-basics:
     title: Working with Components
@@ -2044,3 +2042,6 @@ redirects:
 
 - from: ^/copyright$
   to: https://www.progress.com/legal/documentation-copyright
+
+- from: ^/intro/scripts/(.*)$
+  to: /intro/creating-custom-bundles

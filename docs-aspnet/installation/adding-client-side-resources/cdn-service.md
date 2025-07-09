@@ -4,7 +4,7 @@ page_title: Using CDN
 description: "Get started with {{ site.product }} and install the helpers by using the Telerik UI CDN services."
 previous_url: /getting-started/installation/cdn-service, /installation/cdn-service, /installation-mvc/adding-client-side-resources/cdn-service
 slug: cdnservices_core
-position: 5
+position: 2
 ---
 
 # Using CDN with {{ site.product }}
@@ -132,7 +132,7 @@ The following articles provide solutions to common issues related to the Telerik
 
 ## Next Steps
 
-* [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Creating Your Own Custom Script Bundles]({% slug creating-custom-bundles %})
 * [Using ECMAScript Modules]({% slug core_ecmascript_overview %})
 ## See Also
 

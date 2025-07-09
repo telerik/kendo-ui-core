@@ -53,7 +53,6 @@ Based on the preferred technologies, you can also use other approaches to add Ke
 * [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Operation System Support]({% slug ossupport_kendo %})
 * [PDF and Excel Export Support]({% slug export_support_kendoui %})
-* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
