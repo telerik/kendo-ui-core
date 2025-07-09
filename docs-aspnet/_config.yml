@@ -36,6 +36,7 @@ vs-integration/create-kendo-professional-project.md,
 vs-integration/upgrade-api-analyzer.md,
 vs-integration/upgrade-wizard.md,
 installation/nuget-keys.md,
+installation/adding-client-side-resources/scripts/*,
 asp-net-mvc-3.md,
 asp-net-mvc-4.md,
 html-helpers/helper-basics/fundamentals-mvc.md,
@@ -163,9 +164,6 @@ navigation:
      "vs-code-integration":
         title: "VS Code Integration"
         position: 6
-     "installation/adding-client-side-resources/scripts":
-        title: "Creating Custom Script Bundles"
-        position: 5
      "installation":
         title: "Installation & Upgrade"
         position: 4
@@ -196,9 +194,6 @@ navigation:
      "installation-mvc/adding-client-side-resources":
          title: "Providing Client-Side Resources"
          position: 6
-     "installation-mvc/adding-client-side-resources/scripts":
-        title: "Creating Custom Script Bundles"
-        position: 5
      "html-helpers/helper-basics":
         title: "Working with Helpers"
         position: 2

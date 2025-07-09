@@ -19,11 +19,11 @@ The supported data-binding approaches are:
 * [Ajax binding]({% slug htmlhelpers_scheduler_ajaxbinding_aspnetcore %})
 * [Server binding]({% slug htmlhelpers_scheduler_serverbinding_aspnetcore %})
 * [Custom binding]({% slug htmlhelpers_scheduler_custombinding_aspnetcore %})
-{% if site.core %}
 * [SignalR binding]({% slug htmlhelpers_scheduler_signalr_binding_aspnetcore %})
+* [Web API binding]({% slug htmlhelpers_scheduler_webapi_binding %})
+{% if site.core %}
 * [Razor Pages binding]({% slug htmlhelpers_scheduler_razorpage_aspnetcore %})
 {% endif %}
-* [Web API binding]({% slug htmlhelpers_scheduler_webapi_binding %})
 
 ## Model Requirements
 

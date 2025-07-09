@@ -324,7 +324,7 @@ To generate your license file and add it to your application, follow the instruc
 * [Check out the free Telerik UI onboarding course]({%slug virtualclass_uiforcore%})
 * [Getting Started with Telerik UI Video Tutorial](https://www.youtube.com/embed/AIFNeWrZCdM?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps)
 * [Using Telerik UI in Razor Pages projects]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %}) 
-* [Create your own custom bundles]({% slug custombundles_core %})
+* [Create your own custom bundles]({% slug creating-custom-bundles %})
 * [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
 
 ## See Also

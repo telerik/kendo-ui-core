@@ -231,7 +231,7 @@ The files for all these module systems are available in the [downloaded zip or 7
 
 {% if site.core %}
 * [Using LibMan to Add Client-Side Resources]({% slug using_libman %})
-* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
+* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug creating-custom-bundles %})
 {% endif %}
 * [Using ECMAScript Resources]({% slug core_ecmascript_overview %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})

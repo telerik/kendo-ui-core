@@ -129,4 +129,4 @@ To provide the client-side web assets by using LibMan:
 
 * [Using Local Files to Add Client-Side Resources]({% slug using_local_client_side_resources %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})
-* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
+* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug creating-custom-bundles %})

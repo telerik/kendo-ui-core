@@ -118,7 +118,6 @@ To install the Kendo UI for jQuery packages by using the **Package Manager** con
 * [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 * [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 
 ## See Also
 

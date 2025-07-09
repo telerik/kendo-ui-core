@@ -30,9 +30,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
-  cdnVersion: "2025.1.211"
-  themesCdnVersion: "10.2.0"
-  mvcCoreVersion: "2025.1.211"
+  cdnVersion: "2025.2.702"
+  themesCdnVersion: "11.0.2"
+  mvcCoreVersion: "2025.2.702"
   platform: aspnet-core
   core: true
   mvc: false
@@ -184,6 +184,7 @@ excluded-files:
 - "**/vs-integration/upgrade-api-analyzer.md"
 - "**/vs-integration/upgrade-wizard.md"
 - "**/installation/nuget-keys.md"
+- "**/installation/adding-client-side-resources/scripts/*"
 - "**/asp-net-mvc-3.md"
 - "**/asp-net-mvc-4.md"
 - "**/html-helpers/helper-basics/fundamentals-mvc.md"
@@ -771,9 +772,6 @@ meta:
   html-helpers/helper-basics:
     title: Working with Helpers
     position: 2
-  installation-mvc/adding-client-side-resources/scripts:
-    title: Creating Custom Script Bundles
-    position: 5
   installation-mvc/adding-client-side-resources:
     title: Providing Client-Side Resources
     position: 6
@@ -798,9 +796,6 @@ meta:
   installation/activating-your-license:
     title: "Activating Your License"
     position: 3
-  installation/adding-client-side-resources/scripts:
-    title: Creating Custom Script Bundles
-    position: 5
   vs-code-integration:
     title: VS Code Integration
     position: 6
@@ -850,6 +845,9 @@ redirects:
 
 - from: "^/getting-started/vs-integration/(.*)$"
   to: "/vs-integration/$1"
+
+- from: "^/installation/adding-client-side-resources/scripts/(.*)$"
+  to: "/installation/adding-client-side-resources/creating-custom-bundles"
 
 - from: "^/styles-and-layout/styling-components/(.*)$"
   to: "/styles-and-layout/$1"

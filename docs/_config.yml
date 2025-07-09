@@ -33,9 +33,6 @@ navigation:
     "intro/widget-basics":
         title: "Working with Components"
         position: 3
-    "intro/scripts":
-        title: "Script Dependencies"
-        position: 4
     "controls":
         title: "Components"
         position: 4

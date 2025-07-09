@@ -150,7 +150,6 @@ To generate your license file and add it to your application, follow the instruc
 
 ## See Also
 
-* [Exploring the Helper Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
