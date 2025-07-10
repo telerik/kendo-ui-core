@@ -140,6 +140,7 @@ To configure the grid to use server aggregates:
 
 * You should define only aggregates that you will use to avoid unnecessary calculations that may be noticeable on large data sets.
 * If you try to use an aggregate that is not defined, or an aggregate over an unsupported field type, a JavaScript exception will be thrown.
+* When using local data (serveroperation="false"), grouping and aggregation are handled entirely on the client. If the DataSource is pre-grouped, Kendo expects the data to already include aggregates for fields used in groupFooterTemplate, groupHeaderTemplate, or footerTemplate. Without listed aggregates, the grid doesn't compute them during grouping—sums are undefined, leading to errors.
 
 ## See Also
 
