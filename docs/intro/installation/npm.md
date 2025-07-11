@@ -69,7 +69,7 @@ As of the 2022.3.1109 version, the `package.json` file comes with three [fields 
 - `main`—Points to the CommonJS `kendo.all.js` script in the `js` folder.
 - `browser`—Points to the UMD `kendo.all.min.js` script in the `umd` folder.
 
-To bundle the Kendo UI scripts by using one of the [module systems](#3-choose-a-module-system-to-use), you can use a plugin such as [rollup](https://rollupjs.org/guide/en/).
+To bundle the Kendo UI scripts by using one of the [module systems](#3-choose-a-module-system-to-use), you can use a plugin such as [rollup](https://rollupjs.org/guide/en/). For more information on working with different module bundlers, see [Module Bundlers]({% slug module_bundlers_integration_kendoui %}) and [Webpack Support]({% slug webpacksupport_integration_kendoui %}).
 
 > Starting from version 2023.3.718, the `kendo` instance is exported as a default export for the CommonJS and ECMAScript modules. This allows you to:
 > * Use the `import kendo from "@progress/kendo-ui"` syntax to import the Kendo UI scripts in your application. 
@@ -263,6 +263,8 @@ import "@progress/kendo-ui/esm/kendo.grid.js"; //Imports the Grid related files 
 ## Next Steps
 
 * [Create Your Own Custom Bundles]({% slug include_only_what_you_need_kendoui_scripts %})
+* [Work with Module Bundlers]({% slug module_bundlers_integration_kendoui %})
+* [Use Kendo UI with Webpack]({% slug webpacksupport_integration_kendoui %})
 * [The Component DOM Element Structure]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Initialize Components as jQuery Plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Components with MVVM]({% slug mvvm_initialization_kendoui %})
@@ -274,11 +276,12 @@ import "@progress/kendo-ui/esm/kendo.grid.js"; //Imports the Grid related files 
 
 ## See Also
 
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
+* [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Troubleshooting When Installing with NPM]({% slug troubleshoot_npm_installing %})
 * [Hosting Kendo UI for jQuery in Your Project]({% slug hosting_kendoui %})
 * [Installing Kendo UI for jQuery with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})
-* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [Licensing Overview]({% slug licensing-overview %})

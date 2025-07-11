@@ -16,7 +16,7 @@ For versions of Visual Studio prior to Visual Studio 2017, refer to the [section
 
 ## VS 2017
 
-As of the Visual Studio 2017 release, Microsoft use a [new language service for JavaScript IntelliSense](https://docs.microsoft.com/en-us/visualstudio/ide/javascript-intellisense?view=vs-2017) that is based on TypeScript. This means that the `-vsdoc.js` files are no longer read and supported for JavaScript IntelliSense and that to get IntelliSense for non-standard object types including custom widgets like the Kendo UI widgets, you need to treat it like a strongly typed language.
+As of the Visual Studio 2017 release, Microsoft use a [new language service for JavaScript IntelliSense](https://docs.microsoft.com/en-us/visualstudio/ide/javascript-intellisense?view=vs-2017) that is based on TypeScript. This means that the `-vsdoc.js` files are no longer read and supported for JavaScript IntelliSense and that to get IntelliSense for non-standard object types including custom components like the Kendo UI components, you need to treat it like a strongly typed language.
 
 For more information on this service, the way it works, and the features it supports, refer to:
 * [Microsoft/TypeScript GitHub repo wiki: JavaScript Language Service in Visual Studio](https://github.com/Microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio)
@@ -55,7 +55,7 @@ Make sure the naming prefix of the IntelliSense file matches the `kendoui` bundl
 
 ## Features
 
-* Options for widget initialization
+* Options for components initialization
 
     ![Kendo UI for jQuery plugin](../images/vsdoc/jquery-plugin.png)
 
@@ -92,13 +92,10 @@ The following screenshots demonstrate how to declare variable types with [JSDoc 
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})

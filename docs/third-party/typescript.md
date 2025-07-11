@@ -1,14 +1,14 @@
 ---
 title: TypeScript
 page_title: TypeScript - Kendo UI Third-Party Tools
-description: "Learn how to enable strongly-typed access to the Kendo UI widgets and their configuration."
+description: "Learn how to enable strongly-typed access to the Kendo UI components and their configuration."
 previous_url: /howto/typescript/overview, /typescript
 slug: typescript_integration_kendoui
 ---
 
 # TypeScript
 
-Kendo UI provides a [TypeScript](http://www.typescriptlang.org/) definitions file which enables strongly-typed access to the Kendo UI widgets and their configuration.
+Kendo UI provides a [TypeScript](http://www.typescriptlang.org/) definitions file which enables strongly-typed access to the Kendo UI components and their configuration.
 
 ## Getting Started
 
@@ -31,49 +31,49 @@ Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped]
 
 ## Features
 
-* Getting instances of existing widgets
+* Getting instances of existing components
 
-    ![Kendo UI for jQuery Getting an instance of an existing Kendo UI widget](../images/get-instance.png)
+    ![Kendo UI for jQuery Getting an instance of an existing Kendo UI component](../images/get-instance.png)
 
-* Initializing and configuring widgets
+* Initializing and configuring components
 
-    ![Kendo UI for jQuery All Kendo UI widgets](../images/all-widgets.png)
+    ![Kendo UI for jQuery All Kendo UI components](../images/all-widgets.png)
 
 * Initializing the Kendo UI DataSource
 
     ![Kendo UI for jQuery Initializing a Kendo UI DataSource](../images/datasource.png)
 
-* Creating widgets through TypeScript inheritance&mdash;The following example demonstrates how to inherit from an existing Kendo UI widget.
+* Creating components through TypeScript inheritance&mdash;The following example demonstrates how to inherit from an existing Kendo UI component.
 
 ```
 /// <reference path="jquery.d.ts" />
 /// <reference path="kendo.all.d.ts" />
 
 module KendoWidgets {
-    // (Optional) Extend the default widget options.
+    // (Optional) Extend the default component options.
     export interface MyDatePickerOptions extends kendo.ui.DatePickerOptions {
     }
 
-    // Create a class which inherits from the Kendo UI widget.
+    // Create a class which inherits from the Kendo UI component.
     export class MyDatePicker extends kendo.ui.DatePicker {
         constructor(element: Element, options?: MyDatePickerOptions) {
             super(element, options);
         }
-        // (Optional) Override a widget method.
+        // (Optional) Override a component method.
         open() {
             // Log to the console (optional).
             console.log("open");
 
-            // Invoke a base widget method.
+            // Invoke a base component method.
 
             super.open();
         }
     }
     // Create an alias of the prototype (required by kendo.ui.plugin).
     MyDatePicker.fn = MyDatePicker.prototype;
-    // Deep clone the widget default options.
+    // Deep clone the component default options.
     MyDatePicker.fn.options = $.extend(true, {}, kendo.ui.DatePicker.fn.options);
-    // Specify the name of your Kendo UI widget. Used to create the corresponding jQuery plugin.
+    // Specify the name of your Kendo UI component. Used to create the corresponding jQuery plugin.
     MyDatePicker.fn.options.name = "MyDatePicker";
     // Create a jQuery plugin.
     kendo.ui.plugin(MyDatePicker);
@@ -83,11 +83,11 @@ interface JQuery {
     kendoMyDatePicker(options?: kendo.ui.DatePickerOptions): JQuery;
 }
 $(function () {
-    // Initialize your custom widget.
+    // Initialize your custom component.
     $("#datepicker").kendoMyDatePicker();
-    // Get a reference to the widget instance.
+    // Get a reference to the component instance.
     var myDatePicker = <KendoWidgets.MyDatePicker>$("#datepicker").data("kendoMyDatePicker");
-    // Call a widget method.
+    // Call a component method.
     myDatePicker.open();
 });
 ```
@@ -129,13 +129,5 @@ $(function () {
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
-* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
-* [RequireJS]({% slug requirejs_integration_kendoui %})
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
-* [SystemJS Support]({% slug systemjs_integration_kendoui %})
-* [Webpack Support]({% slug webpacksupport_integration_kendoui %})
-* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})
+* [MVVM Pattern Overview]({% slug overview_mvvmpattern_kendoui %})
+* [Installing with NPM]({% slug kendoui_npm_packages_kendoui_installation %})

@@ -27,7 +27,7 @@ Using the responsive features of Bootstrap does not differ from other responsive
 
 ## Nesting Components and Bootstrap Grid Layout
 
-Kendo UI uses the default `content-box` box model (`box-sizing` CSS property), while Bootstrap uses the non-default `border-box` model and applies it to all elements on the page, including the ones that are unrelated to Bootstrap. This breaks the layout of the Kendo UI components, which are placed inside a Bootstrap grid layout, leading to the overriding of the Bootstrap CSS and reapplying the `content-box` box model to the components. As a result, a Bootstrap grid layout, placed inside a Kendo UI widget, is not going to work as expected. In general, the multiple-level nesting of the two products will break the one that is on the inside, unless an additional CSS rule is used for each new level of nesting.
+Kendo UI uses the default `content-box` box model (`box-sizing` CSS property), while Bootstrap uses the non-default `border-box` model and applies it to all elements on the page, including the ones that are unrelated to Bootstrap. This breaks the layout of the Kendo UI components, which are placed inside a Bootstrap grid layout, leading to the overriding of the Bootstrap CSS and reapplying the `content-box` box model to the components. As a result, a Bootstrap grid layout, placed inside a Kendo UI component, is not going to work as expected. In general, the multiple-level nesting of the two products will break the one that is on the inside, unless an additional CSS rule is used for each new level of nesting.
 
 A possible easy workaround is to override the Bootstrap CSS, apply the `content-box` box model to all elements on the page and use a `border-box` box model only to the Bootstrap elements which need it. These are all `.col-...` classes, `.row`, `.container`, `.container-fluid` and `form-control`.
 
@@ -44,7 +44,7 @@ You can add the following CSS rules _after_ the Bootstrap and Kendo UI styleshee
 
     /* set a border-box model only to elements that need it */
 
-    .form-control, /* if this class is applied to a Kendo UI widget, its layout may change */
+    .form-control, /* if this class is applied to a Kendo UI component, its layout may change */
     .container,
     .container-fluid,
     .row,
@@ -85,7 +85,7 @@ You can use FontAwesome icons alongside the Kendo UI components by adjusting the
 
 ## Using `form-control` Bootstrap CSS Class
 
-The `form-control` Bootstrap CSS class is normally added to textboxes to apply borders, padding, background, and font styles. However, some Kendo UI components copy the custom CSS classes of their originating `<input>` elements to the widget wrapper element. This results in an incorrect padding style applied to a widget element that is not intended to have such. Also, `.form-control` defines a 100% width style, which the components may override. Finally, the `.form-control` class applies height, border and other styles that may interfere with the Kendo UI styling.
+The `form-control` Bootstrap CSS class is normally added to textboxes to apply borders, padding, background, and font styles. However, some Kendo UI components copy the custom CSS classes of their originating `<input>` elements to the component wrapper element. This results in an incorrect padding style applied to a component element that is not intended to have such. Also, `.form-control` defines a 100% width style, which the components may override. Finally, the `.form-control` class applies height, border and other styles that may interfere with the Kendo UI styling.
 
 **Solution One** Place the Bootstrap stylesheet _before_ the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precedence.
 
@@ -110,13 +110,10 @@ The `form-control` Bootstrap CSS class is normally added to textboxes to apply b
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})
