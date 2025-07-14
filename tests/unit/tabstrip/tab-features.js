@@ -147,6 +147,48 @@ describe('TabStrip Tab Features', function() {
         assert.isOk(handler2.mock.calls.length > 0);
     });
 
+    it('renders tab actions with custom attributes', function() {
+        const handler = vi.fn();
+        createTabStrip({
+            dataTextField: 'text',
+            dataContentField: 'content',
+            dataSource: [
+                {
+                    text: 'Tab with actions',
+                    content: 'Tab content',
+                    actions: [
+                        {
+                            icon: 'pencil',
+                            attributes: { 'title': 'Edit', 'data-id': 'edit-action' },
+                            action: handler
+                        },
+                        {
+                            icon: 'gear',
+                            attributes: { 'title': 'Settings', 'data-role': 'settings-btn' }
+                        }
+                    ]
+                }
+            ]
+        });
+
+        const actionBtns = dom.find('.k-tabstrip-item .k-item-actions .k-button');
+        assert.equal(actionBtns.length, 2);
+
+        // Verify first action button has correct attributes
+        const editBtn = actionBtns.eq(0);
+        assert.equal(editBtn.attr('title'), 'Edit');
+        assert.equal(editBtn.attr('data-id'), 'edit-action');
+
+        // Verify second action button has correct attributes
+        const settingsBtn = actionBtns.eq(1);
+        assert.equal(settingsBtn.attr('title'), 'Settings');
+        assert.equal(settingsBtn.attr('data-role'), 'settings-btn');
+
+        // Verify the action handler is still triggered when button with attributes is clicked
+        editBtn.trigger('click');
+        assert.isOk(handler.mock.calls.length > 0);
+    });
+
     it('removes tab and content when close icon is clicked', function() {
         createTabStrip({
             dataTextField: 'text',

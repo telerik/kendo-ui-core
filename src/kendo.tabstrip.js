@@ -31,6 +31,7 @@ export const __meta__ = {
         outerHeight = kendo._outerHeight,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(a|div)$/i,
+        excludedNodesRegExp_DOM_DS = /^(a|div|button)$/i,
         NS = ".kendoTabStrip",
         IMG = "img",
         HREF = "href",
@@ -56,6 +57,7 @@ export const __meta__ = {
         ACTIVESTATE = "k-active",
         FOCUSEDSTATE = "k-focus",
         HOVERSTATE = "k-hover",
+        DOM_DATASOURCE_EMPTY = "EMPTY_URL",
         NAVIGATABLEITEMS = ".k-item.k-tabstrip-item:not(." + DISABLEDSTATE + ")",
         KEYBOARDNAVIGATABLEITEMS = ".k-item.k-tabstrip-item",
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
@@ -72,26 +74,31 @@ export const __meta__ = {
                 `<div class='k-tabstrip-content' ${data.contentAttributes(data)} tabindex='0'>${data.content(data.item)}</div>`,
             textWrapper: ({ tag, item , contentUrl, textAttributes, image, sprite, text }) =>
                 `<${tag(item)} class='${LINK}' ${contentUrl(item)} ${textAttributes(item)}>` + `${image(item)}${sprite(item)}` +
-                    (item.icon && item.iconPosition === 'before' ? kendo.ui.icon({ icon: item.icon }) : '') +
+                    ((item.icon || item.iconClass) && item.iconPosition === 'before' ? kendo.ui.icon({ icon: item.icon || "none", iconClass: item.iconClass }) : '') +
                         `<span class='${LINK_TEXT}'>${text(item)}</span>` +
-                    (item.icon && item.iconPosition === 'after' ? kendo.ui.icon({ icon: item.icon }) : '') +
+                    ((item.icon || item.iconClass) && item.iconPosition === 'after' ? kendo.ui.icon({ icon: item.icon || "none", iconClass: item.iconClass }) : '') +
                 `</${tag(item)}>`,
             item: (data) => templates.itemWrapper(data,`${data.textWrapper(data)}`),
             itemWrapper: (data, item) =>
-                `<li class='${data.wrapperCssClass(data.group, data.item)}' role='tab' ${data.item.active ? "aria-selected='true'" : ''}>` +
+                `<li class='${data.wrapperCssClass(data.group, data.item)}' ${data.itemAttributes(data.item)} role='tab' ${data.item.active ? "aria-selected='true'" : ''}>` +
                     item +
                 "</li>",
             image: ({ imageUrl }) => `<img class='k-image' alt='' src='${imageUrl}' />`,
             sprite: ({ spriteCssClass }) => `<span class='k-sprite ${spriteCssClass}'></span>`,
             empty: () => "",
             itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,
-            itemActionTemplate: ({ icon, iconClass, attributes }) => kendo.html.renderButton($("<button unselectable='on'></button>").attr(attributes || {}), { icon, iconClass, themeColor: "base", fillMode: "flat" }),
+            itemActionTemplate: ({ element, icon, iconClass, attributes }) => {
+                let resolvedAttributes = attributes ? (attributes.toJSON ? attributes.toJSON() : attributes) : {};
+                return kendo.html.renderButton(element || $("<button unselectable='on'></button>").attr(resolvedAttributes), { icon, iconClass, themeColor: "base", fillMode: "flat" });
+            },
         },
 
         rendering = {
             wrapperCssClass: function(group, item) {
                 var result = ["k-item", "k-tabstrip-item"],
                     index = item.index;
+
+                const classAttributes = (item.attributes && item.attributes.class) || "";
 
                 if (item.enabled === false) {
                     result.push("k-disabled");
@@ -105,7 +112,24 @@ export const __meta__ = {
                     result.push("k-last");
                 }
 
+                classAttributes.split(" ").forEach(function(className) {
+                    if (className && !result.includes(className)) {
+                        result.push(className);
+                    }
+                });
+
                 return result.join(" ");
+            },
+            itemAttributes: function(item) {
+                const attributes = item.attributes || {};
+                return Object.entries(attributes)
+                    .map(([key, value]) => {
+                        if (key === "class" || key === "role" || key === "aria-selected") {
+                            return "";
+                        }
+                        return `${kendo.attr(key)}='${kendo.sanitizeAttribute(value)}'`;
+                    })
+                    .join(" ");
             },
             textAttributes: function(item) {
                 return item.url ? " href='" + kendo.sanitizeLink(item.url) + "'" : "";
@@ -127,7 +151,7 @@ export const __meta__ = {
             }
         };
 
-    function updateTabClasses(tabs) {
+    function updateTabClasses(tabs, options) {
         tabs.children(IMG)
             .addClass(IMAGE);
 
@@ -153,10 +177,11 @@ export const __meta__ = {
             var item = $(this);
             item.attr(ARIA_SELECTED, item.is("." + ACTIVESTATE));
 
+            const regex = options._enableDOMDataSource ? excludedNodesRegExp_DOM_DS : excludedNodesRegExp;
             if (!item.children("." + LINK).length) {
                 item
                     .contents() // exclude groups, real links, templates and empty text nodes
-                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
+                    .filter(function() { return (!this.nodeName.match(regex) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
                     .wrapAll("<span UNSELECTABLE='on' class='" + LINK + "'/>")
                     .wrapAll("<span UNSELECTABLE='on' class='" + LINK_TEXT + "'/>");
             }
@@ -193,6 +218,10 @@ export const __meta__ = {
 
             options = that.options;
 
+            if (kendo.isPresent(TabStrip._enableDOMDataSource)) {
+                options._enableDOMDataSource = TabStrip._enableDOMDataSource;
+            }
+
             that._contentUrls = options.contentUrls || [];
 
             that._wrapper();
@@ -204,7 +233,7 @@ export const __meta__ = {
             that._tabindex(that.tabGroup);
             that.tabGroup.attr("role", "tablist");
 
-            if (options.dataSource) {
+            if (options.dataSource || options._enableDOMDataSource) {
                 that.dataSource.fetch();
             }
 
@@ -225,6 +254,15 @@ export const __meta__ = {
             that._initialActivate();
             that.value(value);
             kendo.notify(that);
+
+
+            if (options._enableDOMDataSource && options.contentUrls) {
+                that._contentUrls = options.contentUrls.map(function(url) {
+                    return url || DOM_DATASOURCE_EMPTY;
+                });
+
+                that._updateContentElements(options._enableDOMDataSource);
+            }
 
             if (that._showWatermarkOverlay) {
                 that._showWatermarkOverlay(that.element[0]);
@@ -276,7 +314,8 @@ export const __meta__ = {
                 scrollButtonsPosition: "split",
                 scrollButtons: "auto",
             },
-            sortable: false
+            sortable: false,
+            _enableDOMDataSource: false,
         },
 
         setDataSource: function(dataSource) {
@@ -708,6 +747,7 @@ export const __meta__ = {
                 view = that.dataSource.view(),
                 length;
 
+            const enableDOMDataSource = that._enableDataSourceFromDOM;
 
             e = e || {};
             action = e.action;
@@ -718,7 +758,7 @@ export const __meta__ = {
 
             for (idx = 0, length = view.length; idx < length; idx ++) {
                 tab = {
-                    text: text(view[idx])
+                    text: (view[idx] && view[idx].text) || text(view[idx]),
                 };
 
                 if (options.tabTemplate) {
@@ -755,13 +795,18 @@ export const __meta__ = {
                     tab.actions = actions;
                 }
 
-                if (icon(view[idx])) {
+                if (icon(view[idx]) || view[idx].iconClass) {
                     tab.icon = icon(view[idx]);
+                    tab.iconClass = view[idx].iconClass;
                     tab.iconPosition = iconPosition(view[idx]) ?? 'before';
                 }
 
                 tab.enabled = view[idx].enabled;
                 tab.closable = view[idx].closable ?? options.closable;
+                tab.attributes = view[idx].attributes;
+                if (view[idx].content) {
+                    tab.content = view[idx].content;
+                }
 
                 tabs[idx] = tab;
             }
@@ -785,6 +830,10 @@ export const __meta__ = {
                 if (e.field === options.dataUrlField) {
                     that._contentUrls[idx] = view[0].get(e.field);
                 }
+            } else if (enableDOMDataSource && kendo.isPresent(that.dataSource)) {
+                that._wrapExistingDOMItems();
+                that._updateContentElements();
+                that._enableDataSourceFromDOM = false;
             } else {
                 that.trigger("dataBinding");
                 that.remove("li");
@@ -792,6 +841,75 @@ export const __meta__ = {
                 that.append(tabs);
                 that.trigger("dataBound");
             }
+        },
+
+        _wrapExistingDOMItems: function() {
+           const that = this;
+           const items = that.tabGroup.children("li");
+           const dataSource = that.dataSource;
+           const dataItems = dataSource.view();
+
+           dataItems.forEach((dataItem, index) => {
+                const item = items.eq(index);
+                const linkContainer = item.find("." + LINK);
+                const tabText = linkContainer.find("." + LINK_TEXT);
+                const checkActions = (kendo.isPresent(dataItem.actions) && dataItem.actions.length) || (dataItem.closable) || (!dataItem.closable && that.options.closable);
+
+                if (dataItem.contentUrl) {
+                    linkContainer.attr("data-content-url", dataItem.contentUrl);
+                }
+
+                if (!that.options.contentUrls) {
+                    that._contentUrls.push(dataItem.contentUrl || DOM_DATASOURCE_EMPTY);
+                }
+
+                if (dataItem.icon || dataItem.iconClass) {
+                    if (dataItem.iconPosition === 'before') {
+                        linkContainer.prepend(kendo.ui.icon({ icon: dataItem.icon || "none", iconClass: dataItem.iconClass }));
+                    }
+                    if (dataItem.iconPosition === 'after') {
+                        linkContainer.append(kendo.ui.icon({ icon: dataItem.icon || "none", iconClass: dataItem.iconClass }));
+                    }
+                }
+
+                let template = "";
+                if (dataItem.imageUrl) {
+                    template += templates.image({ imageUrl: dataItem.imageUrl });
+                }
+
+                if (dataItem.spriteCssClass) {
+                    template += templates.sprite({ spriteCssClass: dataItem.spriteCssClass });
+                }
+
+                linkContainer.prepend(template);
+
+                if (checkActions) {
+                    that._initTabActions(item, dataItem);
+                }
+
+                if (dataItem.text) {
+                    const text = dataItem.encoded ? kendo.htmlEncode(dataItem.text) : dataItem.text;
+                    tabText.text(text);
+                }
+
+                if (item.attr("data-content") && !dataItem.contentUrl) {
+                    let tabContent = that.contentElements.eq(index);
+                    tabContent.text(dataItem.content);
+                }
+
+                if (dataItem.hasOwnProperty("enabled")) {
+                    dataItem.enabled ? item
+                                        .removeClass(DISABLEDSTATE)
+                                        .attr(ARIA_DISABLED, true)
+                                    : item
+                                       .addClass(DISABLEDSTATE)
+                                       .removeAttr(ARIA_DISABLED, false);
+                }
+                else if (item.hasClass(DISABLEDSTATE)) {
+                    item.addClass(DISABLEDSTATE)
+                        .removeAttr(ARIA_DISABLED, false);
+                }
+           });
         },
 
         reload: function(element) {
@@ -886,6 +1004,7 @@ export const __meta__ = {
             const that = this;
             const tabElement = $(tab);
             let actions = [];
+            let isClosable = tabOptions.closable;
 
             let closeButtonAttributes = { icon: "x", attributes: { "ref-close-button": true }, action: that._handleClose };
 
@@ -893,22 +1012,45 @@ export const __meta__ = {
                 actions = Array.from(tabOptions.actions);
             }
 
-            if (tabOptions.closable) {
+            if (isClosable) {
                 actions.push(closeButtonAttributes);
             }
 
             if (actions?.length) {
                 const actionsWrapperTemplate = $(templates.itemActionsWrapperTemplate());
+                const existingActionButtons = tabElement.find("button");
 
-                actions.forEach(action => {
+                actions.forEach((action, index) => {
+                    const isClosableAction = isClosable && index > existingActionButtons.length - 1;
+
+                    if (existingActionButtons.length && !isClosableAction) {
+                        action.element = existingActionButtons.eq(index);
+                    }
+
                     const actionTemplate = $(templates.itemActionTemplate(action));
-                    actionsWrapperTemplate.append(actionTemplate);
+
+                    if (!existingActionButtons.length) {
+                        actionsWrapperTemplate.append(actionTemplate);
+                    }
+
+                    if (isClosableAction && existingActionButtons.length) {
+                        existingActionButtons.parent().append(actionTemplate);
+                    }
+
                     if (isFunction(action?.action)) {
-                        actionTemplate.bind(CLICK, action.action.bind(that));
+                        if (!existingActionButtons.length || isClosableAction) {
+                            actionTemplate.bind(CLICK, action.action.bind(that));
+                        } else {
+                            existingActionButtons.eq(index).bind(CLICK, action.action.bind(that));
+                        }
                     }
                 });
 
-                tabElement.append(actionsWrapperTemplate);
+                if (existingActionButtons.length) {
+                    existingActionButtons.wrapAll(actionsWrapperTemplate);
+                } else {
+                    tabElement.append(actionsWrapperTemplate);
+                }
             }
 
             return tabElement[0];
@@ -1105,7 +1247,7 @@ export const __meta__ = {
                     contents = contents.add(content);
                 });
 
-                updateTabClasses(tabs);
+                updateTabClasses(tabs, that.options);
             }
 
             return { tabs: tabs, contents: contents, newTabsCreated: newTabsCreated };
@@ -1142,9 +1284,116 @@ export const __meta__ = {
             } else {
                 that._refreshHandler = that.refresh.bind(that);
             }
+            const dataSource = that.options.dataSource || that._createDataSourceFromDOM();
 
-            that.dataSource = kendo.data.DataSource.create(that.options.dataSource)
+            that.dataSource = kendo.data.DataSource.create(dataSource)
                                 .bind("change", that._refreshHandler);
+        },
+
+        _createDataSourceFromDOM: function() {
+            const that = this;
+            const dataSourceOptions = [];
+            const enableDOMDataSource = that.options._enableDOMDataSource;
+            const itemOptions = [
+                "text",
+                "content",
+                "icon",
+                "iconPosition",
+                "iconClass",
+                "spriteCssClass",
+                "imageUrl",
+                "contentUrl",
+                "encoded",
+                "closable",
+                "actions",
+                "enabled",
+            ];
+
+            const actionOptions = [
+                "icon",
+                "iconClass",
+                "text",
+                "action"
+            ];
+
+            if (!enableDOMDataSource) {
+                return that.options.dataSource;
+            }
+
+            const dataItems = that.tabGroup.children("li");
+            const contentElements = that.contentElements;
+
+            that._enableDataSourceFromDOM = dataItems.length > 0;
+            dataItems.each(function(idx, item) {
+                const $item = $(item);
+                const actions = $item.find("button");
+                const itemData = {};
+
+                itemOptions.forEach(function(option) {
+                    let data = $item.data(option);
+
+                    if (option === "text" && !data) {
+                        data = $item
+                            .find(".k-link-text")
+                            .text()
+                            .trim();
+                    }
+
+                    if (option === "content" && !data) {
+                        const content = $(contentElements[idx]);
+                        if (content.length) {
+                            data = content.html();
+                        }
+                    }
+
+                    if (option === "closable" && data === undefined) {
+                        data = that.options.closable;
+                    }
+
+                    if (data !== undefined) {
+                        itemData[option] = data;
+                    }
+                });
+
+                if (itemData.iconPosition === undefined) {
+                    itemData.iconPosition = "before";
+                }
+
+                if (actions.length) {
+                    itemData.actions = [];
+                    that._decorateActions(actions, actionOptions, itemData);
+                }
+
+                dataSourceOptions.push(itemData);
+            });
+
+            return dataSourceOptions;
+        },
+
+        _decorateActions: function(actions, actionOptions, itemData) {
+            actions.each(function(idx, action) {
+                  const $action = $(action);
+                  const actionData = {};
+                  actionOptions.forEach(function(option) {
+                      let data = $action.data(option);
+
+                      if (option === "text" && !data) {
+                          data = kendo.htmlEncode($action.text().trim());
+                      }
+
+                      if (option === "action" && typeof data === "string") {
+                          let fn = window[data];
+                          if (typeof fn === "function") {
+                              data = fn;
+                          }
+                      }
+
+                      if (data !== undefined) {
+                          actionData[option] = data;
+                      }
+                  }, this);
+                  itemData.actions.push(actionData);
+            });
         },
 
         _elementId: function(element, idx, tab) {
@@ -1654,7 +1903,7 @@ export const __meta__ = {
                 .css({ display: "block" });
 
             if (tabs.length) {
-                updateTabClasses(tabs);
+                updateTabClasses(tabs, that.options);
                 activeItem = tabs.filter("." + ACTIVESTATE).index();
 
                 that.tabGroup.attr("aria-activedescendant", tabs.eq(activeItem).attr("id"));
@@ -1692,7 +1941,8 @@ export const __meta__ = {
                     // set the get (possibly existing) ID on the content element
                     this.setAttribute("id", contentId);
                 });
-            } else {
+            }
+            else {
                 items.each(function(idx) {
                     var currentContent = contentElements.eq(idx),
                         contentId = _elementId(currentContent, idx),
@@ -1705,7 +1955,13 @@ export const __meta__ = {
 
                     if (!currentContent.length && contentUrls[idx]) {
                         // Append content element in case contentUrl is used
-                        $("<div class='" + CONTENT + "'/>").appendTo(that.wrapper).attr("id", contentId);
+                        $("<div class='" + CONTENT + "'/>")
+                            .appendTo(that.wrapper)
+                            .attr("id", contentId);
+
+                        if (contentUrls[idx] == DOM_DATASOURCE_EMPTY) {
+                            that._contentUrls[idx] = null;
+                        }
                     } else {
                         // set the ID on the content element
                         currentContent.attr("id", contentId);
@@ -1716,6 +1972,39 @@ export const __meta__ = {
                     currentContent.attr(ARIA_LABELLEDBY, tabId);
                     currentContent.filter(":not(." + ACTIVESTATE + ")").attr(ARIA_HIDDEN, true);
                 });
+
+                that._removeEmptyUrls();
+            }
+
+            if (that.options._enableDOMDataSource && isInitialUpdate) {
+                items.each(function(idx) {
+                    contentElements = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)");
+
+                    let currentContent = contentElements.eq(idx),
+                        contentId = _elementId(currentContent, idx),
+                        tabId;
+
+                    // set the tab aria-controls attribute to the content ID
+                    this.setAttribute(ARIA_CONTROLS, contentId);
+
+                    if (!currentContent.length && contentUrls[idx]) {
+                        $("<div class='" + CONTENT + "'/>")
+                            .appendTo(that.wrapper)
+                            .attr("id", contentId);
+
+                        if (contentUrls[idx] == DOM_DATASOURCE_EMPTY) {
+                            that._contentUrls[idx] = null;
+                        }
+                    }
+
+                    currentContent.attr("role", "tabpanel");
+                    currentContent.attr("tabindex", "0");
+                    currentContent.attr(ARIA_LABELLEDBY, tabId);
+                    currentContent.filter(":not(." + ACTIVESTATE + ")").attr(ARIA_HIDDEN, true);
+
+                });
+
+                that._removeEmptyUrls();
             }
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)"); // refresh the contents
@@ -1728,6 +2017,16 @@ export const __meta__ = {
                 kendo.touchScroller(that.contentElements);
                 that.contentElements = that.contentElements.children(".km-scroll-container");
             }
+        },
+
+        _removeEmptyUrls: function() {
+             let that = this;
+
+             if (that._contentUrls.length) {
+                that._contentUrls.forEach(function(url, idx) {
+                      that._contentUrls[idx] = url == DOM_DATASOURCE_EMPTY ? null : url;
+                });
+             }
         },
 
         _wrapper: function() {
