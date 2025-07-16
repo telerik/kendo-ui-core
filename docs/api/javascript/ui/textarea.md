@@ -264,11 +264,14 @@ If set to `true`, the widget will be readonly and will not allow user input. The
 
 ### resize `String`*(default: "none")*
 
+The `auto` option can be used only with the `maxRows` configuration.
+
 Sets a value controlling how the resize is applied. Can also be set to the following string values:
 
 - "both"
 - "horizontal"
 - "vertical"
+- "auto"
 - "none"
 
 #### Example
@@ -404,6 +407,20 @@ Sets a value controlling size of the component. Can also be set to the following
         size: "large",
         rounded: "large"
     });
+    </script>
+
+### maxRows `Number` *(default: null)*
+
+The maximum number of visible rows to which the textarea can auto-resize. Used in combination with `resize: "auto"`.
+
+#### Example - specify maxRows
+
+    <textarea id="description"></textarea>
+    <script>
+        $("#description").kendoTextArea({
+            autoResize: true,
+            maxRows: 5
+        })
     </script>
 
 ## Methods

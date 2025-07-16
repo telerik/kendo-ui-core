@@ -12894,6 +12894,7 @@ declare namespace kendo.ui {
         inputMode?: string | undefined;
         label?: string | Function | TextAreaLabel | undefined;
         maxLength?: number | undefined;
+        maxRows?: number | undefined;
         placeholder?: string | undefined;
         readonly?: boolean | undefined;
         rows?: number | undefined;

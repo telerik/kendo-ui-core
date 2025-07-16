@@ -86,6 +86,7 @@ export const __meta__ = {
             label: null,
             resizable: "none",
             maxLength: null,
+            maxRows: null,
             cols: 20,
             rows: 1,
             rounded: "medium",
@@ -103,27 +104,29 @@ export const __meta__ = {
         },
 
         _applyCssClasses: function(action) {
-            var that = this,
-                options = that.options,
-                resize = kendo.cssProperties.getValidClass({
-                    widget: options.name,
-                    propName: "resize",
-                    value: options.resize
-                }),
-                overflow = kendo.cssProperties.getValidClass({
-                    widget: options.name,
-                    propName: "overflow",
-                    value: options.overflow
-                }),
-                layoutFlow = kendo.cssProperties.getValidClass({
-                    widget: options.name,
-                    propName: "layoutFlow",
-                    value: options.layoutFlow
-                });
+            let that = this;
+            let options = that.options;
+            let resize = kendo.cssProperties.getValidClass({
+                widget: options.name,
+                propName: "resize",
+                value: options.resize
+            });
+
+            let overflow = kendo.cssProperties.getValidClass({
+                widget: options.name,
+                propName: "overflow",
+                value: options.overflow
+            });
+
+            let layoutFlow = kendo.cssProperties.getValidClass({
+                widget: options.name,
+                propName: "layoutFlow",
+                value: options.layoutFlow
+            });
 
             Widget.fn._applyCssClasses.call(that);
 
-            if (!resize && options.resize === "none") {
+            if (!resize && (options.resize === "none" || options.resize === "auto")) {
                 resize = "k-resize-none";
             }
 
@@ -245,6 +248,7 @@ export const __meta__ = {
 
                 element.on("focusin" + NS, that._focusin.bind(that));
                 element.on("focusout" + NS, that._focusout.bind(that));
+                element.on("input" + NS, that._input.bind(that));
             } else {
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
@@ -311,6 +315,33 @@ export const __meta__ = {
                 that._value = newValue;
 
                 that.trigger(CHANGE);
+            }
+        },
+
+        _input: function() {
+            const that = this;
+            const element = that.element;
+            const options = that.options;
+
+            if (options.resize === "auto" && options.maxRows) {
+                const computedStyle = getComputedStyle(element[0]);
+                const lineHeight = parseInt(computedStyle.lineHeight, 10) || 16;
+                const paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
+                const paddingBottom = parseInt(computedStyle.paddingBottom, 10) || 0;
+                const totalPadding = paddingTop + paddingBottom;
+                const minHeight = (options.rows * lineHeight) + totalPadding;
+                const maxHeight = (options.maxRows * lineHeight) + totalPadding;
+
+                element.css({
+                    height: minHeight + "px"
+                });
+
+                const scrollHeight = element[0].scrollHeight;
+
+                element.css({
+                    maxHeight: maxHeight + "px",
+                    height: scrollHeight + "px"
+                });
             }
         },
 
