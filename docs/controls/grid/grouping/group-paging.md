@@ -60,7 +60,7 @@ The grid data source will send the following additional parameters: `take`, `ski
 - If the currently expanded row does not have subgroups, only one request is sent with the `filter` parameter containing the group and subgroup value for which the items are requested. 
 - If the currently expanded row has subgroups, an additional request is sent with the `includeSubGroupCount` parameter prompting that the response must include the total of items in the sub group
 
-For more information about the response when using server grouping, check the [`schema.groups`](/api/javascript/data/datasource/configuration/schema#schemagroups) and the article for the data source grouping [here](/framework/datasource/basic-usage#server-grouping).
+For more information about the response when using server grouping, check the [`schema.groups`](/api/javascript/data/datasource/configuration/schema#schemagroups) and the article for the data source grouping [here](https://www.telerik.com/kendo-jquery-ui/documentation/framework/datasource/datasource-operations#server-grouping).
 
 Alternatively, you can use the ASP.NET MVC or Core server-side extensions which perform all the data operations and group paging out of the box when used with the `aspnetmvc-ajax` and `webapi` transport type.
 
@@ -78,3 +78,4 @@ The expanded state of groups is preserved during paging only, but not if sort or
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Virtual Scrolling of the Grid]({% slug virtual_scrolling_kendoui_grid_widget %})
+* [Grid Group Paging of Remote Data (Demo)](https://demos.telerik.com/kendo-ui/grid/grouppaging)

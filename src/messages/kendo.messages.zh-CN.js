@@ -1647,10 +1647,6 @@
                 "noData": "无相关数据",
                 "clear": "清空"
             });
-        kendo.ui.DropDownList.prototype.options =
-            $.extend(true, kendo.ui.DropDownList.prototype.options, {
-                "noDataTemplate": "无相关数据"
-            });
     }
 
     /* ComboBox messages */
