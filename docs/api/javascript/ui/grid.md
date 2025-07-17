@@ -10974,7 +10974,7 @@ Specifies the distance (in pixels) the toolbar scrolls when a scroll button is c
 
 ### toolbar.name `String`
 
-The name of the toolbar command. Either a built-in ("cancel", "create", "save", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
+The name of the toolbar command. Either a built-in ("cancel", "create", "save", "excel", "pdf") or custom. When a custom command is added the `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
 This class can be used to obtain reference to the button after Grid initialization and attach click handlers.
 
 #### Example - specify the name of the command

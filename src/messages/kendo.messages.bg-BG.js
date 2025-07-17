@@ -347,7 +347,10 @@ $.extend(true, kendo.spreadsheet.messages.view,{
   "tabs": {
     "home": "Начало",
     "insert": "Вмъкване",
-    "data": "Данни"
+    "data": "Данни",
+    "file": "Файл",
+    "format": "Форматиране",
+    "view": "Изглед",
   }
 });
 }

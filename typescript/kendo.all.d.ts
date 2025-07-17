@@ -5379,7 +5379,7 @@ declare namespace kendo.ui {
         commands?: EditorAICommandOptions[] | undefined;
     }
 
-    interface EditorAIPopupOptions extends EditorAIBaseSettings { 
+    interface EditorAIPopupOptions extends EditorAIBaseSettings {
         initializeComponent(container: JQuery): void;
         initializeComponent(): void;
     }
@@ -13213,6 +13213,57 @@ declare namespace kendo.ui {
 
     interface TimelineNavigateEvent extends TimelineEvent {
         action?: string | undefined;
+    }
+
+    class SpeechToTextButton extends kendo.ui.Button {
+        options: SpeechToTextButtonOptions;
+        element: JQuery;
+        wrapper: JQuery;
+        speechRecognition: any;
+        constructor(element: Element, options?: SpeechToTextButtonOptions);
+        isListening(): boolean;
+        startRecognition(): void;
+        stopRecognition(): void;
+        abortRecognition(): void;
+        destroy(): void;
+    }
+
+    interface SpeechToTextButtonMessages {
+        unsupported?: string;
+        notInitialized?: string;
+        start?: string;
+        stop?: string;
+    }
+
+    interface SpeechToTextButtonEvent extends kendo.ui.ButtonEvent {
+        sender: SpeechToTextButton;
+    }
+
+    interface SpeechToTextButtonResultEvent extends SpeechToTextButtonEvent {
+        isFinal: boolean;
+        alternatives: {
+            transcript: string;
+            confidence: number;
+        }[];
+    }
+
+    interface SpeechToTextButtonErrorEvent extends SpeechToTextButtonEvent {
+        error: string | any;
+    }
+
+    interface SpeechToTextButtonOptions extends kendo.ui.ButtonOptions {
+        name?: string;
+        stopIcon?: string;
+        integrationMode?: "webSpeech" | "none";
+        lang?: string;
+        continuous?: boolean;
+        interimResults?: boolean;
+        maxAlternatives?: number;
+        messages?: SpeechToTextButtonMessages;
+        start?(e: SpeechToTextButtonEvent): void;
+        end?(e: SpeechToTextButtonEvent): void;
+        result?(e: SpeechToTextButtonResultEvent): void;
+        error?(e: SpeechToTextButtonErrorEvent): void;
     }
 
     class ToggleButton extends kendo.ui.Button {

@@ -1432,6 +1432,16 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "duration": "Duration",
     "moreFormats": "More formats..."
   },
+  formatTypesSamples: {
+    "number": "1,499.99",
+    "percent": "14.50%",
+    "financial": "(1,000.12)",
+    "currency": "$1,499.99",
+    "date": "4/21/2012",
+    "time": "5:49:00 PM",
+    "dateTime": "4/21/2012 5:49:00",
+    "duration": "168:05:00"
+  },
   "formatDecreaseDecimal": "Decrease decimal",
   "formatIncreaseDecimal": "Increase decimal",
   "freeze": "Freeze panes",
