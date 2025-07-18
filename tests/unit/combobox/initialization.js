@@ -1371,5 +1371,22 @@ import { stub } from '../../helpers/unit/stub.js';
             assert.equal(combobox.label.element.text(), "some label");
         });
 
+        it ("Should set readonly state", function() {
+            let combobox = new ComboBox(input, {
+                readonly: true,
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ]
+                }
+            });
+
+            assert.isOk(combobox.wrapper.attr("aria-readonly", true));
+            assert.isOk(combobox.input.attr("readonly"));
+        })
     });
 

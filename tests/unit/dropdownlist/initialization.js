@@ -1767,4 +1767,24 @@ describe("kendo.ui.DropDownList initialization", function() {
 
         assert.equal(dropdownlist.label.element.text(), "some label");
     });
+
+    it ("Should set readonly state", function() {
+        let dropdownlist = new DropDownList(input, {
+            dataValueField: "name",
+            dataTextField: "name",
+            readonly: true,
+            dataSource: {
+                data: [
+                    { name: "item1", value: "1" },
+                    { name: "item2", value: "2" },
+                    { name: "item3", value: "3" }
+                ],
+                group: "name"
+            },
+            label: () => `some label`
+        });
+
+        assert.isOk(dropdownlist.wrapper.attr("aria-readonly", true));
+        assert.isOk(dropdownlist.element.attr("readonly"));
+    })
 });

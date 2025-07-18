@@ -4065,6 +4065,7 @@ declare namespace kendo.ui {
         cascadeFromParentField?: string | undefined;
         cascadeOnCustomValue?: boolean | undefined;
         clearButton?: boolean | undefined;
+        readonly?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
@@ -5020,6 +5021,7 @@ declare namespace kendo.ui {
         dataSource?: any|any|kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
+        readonly?: boolean | undefined;
         delay?: number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
@@ -8702,6 +8704,7 @@ declare namespace kendo.ui {
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
         delay?: number | undefined;
+        readonly?: boolean | undefined;
         downArrow?: boolean | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;

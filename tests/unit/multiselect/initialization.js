@@ -1080,4 +1080,24 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
 
         assert.equal(multiselect.label.element.text(), "some label");
     });
+
+    it ("Should set readonly state", function() {
+        let multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            readonly: true,
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
+        });
+
+        assert.isOk(multiselect.wrapper.attr("aria-readonly", true));
+        assert.isOk(multiselect.input.attr("readonly"));
+    })
     });

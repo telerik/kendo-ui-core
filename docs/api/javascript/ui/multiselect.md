@@ -1688,6 +1688,22 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
         }
     </script>
 
+### readonly `Boolean`*(default: "false")*
+
+If set to `true`, the widget will be readonly and will not allow user input. The widget is not readonly be default and allow user input.
+
+#### Example - make the widget readonly
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      readonly: true
+    });
+    </script>
+
 ### rounded `String`*(default: "medium")*
 
 Sets a value controlling the border radius. Can also be set to the following string values:

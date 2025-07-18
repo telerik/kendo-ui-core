@@ -1006,6 +1006,24 @@ If set to `false`, the prefix adornment will not have a separator.
       })
     </script>
 
+### readonly `Boolean`*(default: "false")*
+
+If set to `true`, the widget will be readonly and will not allow user input. The widget is not readonly be default and allow user input.
+
+#### Example - make the widget readonly
+
+    <input id="combobox" />
+    <script>
+        $("#combobox").kendoComboBox({
+          readonly: true,
+          dataSource: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" }
+          ],
+          dataTextField: "name",
+          dataValueField: "id",
+        });
+    </script>
 
 ### rounded `String`*(default: "medium")*
 

@@ -928,6 +928,29 @@ The [template](/api/javascript/kendo/methods/template) used to render the option
     });
     </script>
 
+### readonly `Boolean`*(default: "false")*
+
+If set to `true`, the widget will be readonly and will not allow user input. The widget is not readonly be default and allow user input.
+
+#### Example - make the widget readonly
+
+    <input id="dropdownlist" />
+    <script>
+       $("#dropdownlist").kendoDropDownList({
+          readonly: true,
+          dataSource: [
+            { productName: "Product 1", productId: 1 },
+            { productName: "Product 2", productId: 2 },
+            { productName: "Product 3", productId: 3 },
+            { productName: "Product 4", productId: 4 }
+          ],
+          dataTextField: "productName",
+          dataValueField: "productId",
+          optionLabel: "-- Please select --",
+          optionLabelTemplate:'<span style="color:red">-- Please select --</span>'
+      });
+    </script>
+
 ### rounded `String`*(default: "medium")*
 
 Sets a value controlling the border radius. Can also be set to the following string values:

@@ -67,6 +67,7 @@ export const __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, that._focusHandler.bind(that));
 
+            options.readonly = kendo.isPresent(options.readonly) ? options.readonly : Boolean(that.element.attr("readonly"));
             options.placeholder = options.placeholder || element.attr("placeholder");
             options.inputMode = options.inputMode || element.attr("inputmode") || "text";
 
@@ -147,6 +148,7 @@ export const __meta__ = {
             delay: 200,
             dataTextField: "",
             dataValueField: "",
+            readonly: false,
             minLength: 1,
             enforceMinLength: false,
             height: 200,
