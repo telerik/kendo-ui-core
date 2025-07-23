@@ -128,4 +128,4 @@ npm run dev
 
 * [Installing with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Licensing Overview]({% licensing-overview %})
+* [Licensing Overview]({% slug licensing-overview %})
