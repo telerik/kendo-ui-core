@@ -10,7 +10,7 @@ position: 1
 
 # Licensing Overview
 
-Activating your Kendo UI for jQuery license in your project is a straightforward process that ensures the uninterrupted operation of the components and full access to their features. This guide walks you through the steps to properly integrate and activate your license key.
+Kendo UI for jQuery requires activation through a license key for both trial and commercial licenses. Activating the license in your project is a straightforward process that ensures the uninterrupted operation of the components and full access to their features. This guide walks you through the steps to properly integrate and activate your license key.
 
 You can activate the Kendo UI for jQuery license in either of the following ways:
 
