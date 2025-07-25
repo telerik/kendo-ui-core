@@ -6519,14 +6519,20 @@ declare namespace kendo.ui {
         encoded?: boolean | undefined;
     }
 
+    interface ResponsiveFormBreakPoint  {
+        minWidth?: number | undefined;
+        maxWidth?: number | undefined;
+        value: number;
+    }
+
     interface FormGridGutterOptions {
-        rows?: string | number | undefined;
-        cols?: string | number | undefined;
+        rows?: string | Array<ResponsiveFormBreakPoint> | number | undefined;
+        cols?: string | Array<ResponsiveFormBreakPoint> | number | undefined;
     }
 
     interface FormGridOptions {
-        cols?: string | number | undefined;
-        gutter?: string | number | FormGridGutterOptions | undefined;
+        cols?: string | Array<ResponsiveFormBreakPoint> | number | undefined;
+        gutter?: string | Array<ResponsiveFormBreakPoint> | number | FormGridGutterOptions | undefined;
     }
 
     interface FormItem {
@@ -6536,7 +6542,7 @@ declare namespace kendo.ui {
         id?: string | undefined;
         hint?: string | undefined;
         title?: string | undefined;
-        colSpan?: number | undefined;
+        colSpan?: number | Array<ResponsiveFormBreakPoint> | undefined;
         attributes?: any;
         editor?: string|Function | undefined;
         editorOptions?: any;

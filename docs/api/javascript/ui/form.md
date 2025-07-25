@@ -645,9 +645,215 @@ Defines the hint text that will be shown underneath the form editor.
         });
     </script>
 
-### items.colSpan `Number`
+### items.colSpan `Number|Array`
 
 Defines the field size when grid layout is used.
+
+#### Example
+
+ <form id="myForm"></form>
+
+    <script>
+      $("#myForm").kendoForm({
+        formData: {
+            ID: 1,
+            FirstName: "John",
+            LastName: "Doe",
+            Address: "London",
+            Postcode: "SW1A 1AA"
+        },
+        layout:"grid",
+        grid: {
+            cols: 2,
+            gutter: 20
+        },
+        items: [{
+            type: "group",
+            label: "Personal Information",
+            layout: "grid",
+            grid: {
+                cols: 6,
+                gutter: 10
+            },
+            items:[{
+                field: "FirstName",
+                label: "First Name:",
+                validation: { required: true },
+                colSpan: [{
+                    maxWidth: 600,
+                    value: 2
+                },
+                {
+                    minWidth: 601,
+                    maxWidth: 1000,
+                    value: 4
+                }]
+            },{
+                field: "LastName",
+                label: "Last Name:",
+                validation: { required: true },
+                colSpan: 4
+            }]
+        },{ 
+            type: "group",
+            label: "Shipping Address",
+            layout: "grid",
+            colSpan: 2,
+            grid: {
+                cols: 4,
+                gutter: 10
+            },
+            items:[{
+                field: "Address",
+                label: "Address:",
+                colSpan: 2,
+            },{
+                field: "Postcode",
+                label: "Postcode:",
+                colSpan: 2
+            }]
+        }]
+      });
+    </script>
+
+### items.colSpan.maxWidth `Number`
+
+Defines the maximum width in pixels for which the specific breakpoint colSpan value will be applied.
+
+#### Example
+
+ <form id="myForm"></form>
+
+    <script>
+      $("#myForm").kendoForm({
+        formData: {
+            ID: 1,
+            FirstName: "John",
+            LastName: "Doe",
+            Address: "London",
+            Postcode: "SW1A 1AA"
+        },
+        layout:"grid",
+        grid: {
+            cols: 2,
+            gutter: 20
+        },
+        items: [{
+            type: "group",
+            label: "Personal Information",
+            layout: "grid",
+            grid: {
+                cols: 6,
+                gutter: 10
+            },
+            items:[{
+                field: "FirstName",
+                label: "First Name:",
+                validation: { required: true },
+                colSpan: [{
+                    maxWidth: 600,
+                    value: 2
+                },
+                {
+                    minWidth: 601,
+                    maxWidth: 1000,
+                    value: 4
+                }]
+            },{
+                field: "LastName",
+                label: "Last Name:",
+                validation: { required: true },
+                colSpan: 4
+            }]
+        },{ 
+            type: "group",
+            label: "Shipping Address",
+            layout: "grid",
+            colSpan: 2,
+            grid: {
+                cols: 4,
+                gutter: 10
+            },
+            items:[{
+                field: "Address",
+                label: "Address:",
+                colSpan: 2,
+            },{
+                field: "Postcode",
+                label: "Postcode:",
+                colSpan: 2
+            }]
+        }]
+      });
+    </script>
+
+### items.colSpan.minWidth `Number`
+
+Defines the minimum width in pixels for which the specific breakpoint colSpan value will be applied.
+
+#### Example
+
+ <form id="myForm"></form>
+
+    <script>
+      $("#myForm").kendoForm({
+        formData: {
+            ID: 1,
+            FirstName: "John",
+            LastName: "Doe",
+            Address: "London",
+            Postcode: "SW1A 1AA"
+        },
+        layout:"grid",
+        grid: {
+            cols: 2,
+            gutter: 20
+        },
+        items: [{
+            type: "group",
+            label: "Personal Information",
+            layout: "grid",
+            colSpan: 2,
+            grid: {
+                cols: 6,
+                gutter: 10
+            },
+            items:[{
+                field: "FirstName",
+                label: "First Name:",
+                validation: { required: true },
+                colSpan: 2
+            },{
+                field: "LastName",
+                label: "Last Name:",
+                validation: { required: true },
+                colSpan: 4
+            }]
+        },{ 
+            type: "group",
+            label: "Shipping Address",
+            layout: "grid",
+            colSpan: 2,
+            grid: {
+                cols: 4,
+                gutter: 10
+            },
+            items:[{
+                field: "Address",
+                label: "Address:",
+                colSpan: 2,
+            },{
+                field: "Postcode",
+                label: "Postcode:",
+                colSpan: 2
+            }]
+        }]
+      });
+    </script>
+
+### items.colSpan.value `Number`
+
+Defines the colSpan value that will be applied when the width of the form meets the breakpoint criteria.
 
 #### Example
 
@@ -824,6 +1030,780 @@ Specify the layout of the item when `items.type` is set to "group". Valid option
                         label: "Personal Information",
                         layout: "grid",
                         grid: { cols: 1, gutter: 10},
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.cols `Number|Array`
+
+Defines the columns of the grid.
+
+#### Example - setting columns to number
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { cols: 1, gutter: 10},
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+
+### items.grid.cols.maxWidth `Number`
+
+Defines the maximum width in pixels for which the specific breakpoint col value for the columns applies.
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            cols: [{
+                                maxWidth: 600,
+                                value: 2
+                            },
+                            {
+                                minWidth: 601,
+                                maxWidth: 800,
+                                value: 3
+                            },
+                            {
+                                minWidth: 801,
+                                maxWidth: 2800,
+                                value: 4
+                            }], 
+                            gutter: 10
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.cols.minWidth `Number`
+
+Defines the minimum width in pixels for which the specific breakpoint col value for the columns applies.
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            cols: [{
+                                maxWidth: 600,
+                                value: 2
+                            },
+                            {
+                                minWidth: 601,
+                                maxWidth: 800,
+                                value: 3
+                            },
+                            {
+                                minWidth: 801,
+                                maxWidth: 2800,
+                                value: 4
+                            }], 
+                            gutter: 10
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.cols.value `Number`
+
+Defines the number of columns to be applied if current width of the form is between the maxWidth and minWidth values
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            cols: [{
+                                maxWidth: 600,
+                                value: 2
+                            },
+                            {
+                                minWidth: 601,
+                                maxWidth: 800,
+                                value: 3
+                            },
+                            {
+                                minWidth: 801,
+                                maxWidth: 2800,
+                                value: 4
+                            }], 
+                            gutter: 10
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter `Number|String|Object`
+
+Defines the width of the gutters between the columns / rows.
+
+### items.grid.gutter.rows `String|Number|Array`
+
+Defines the width of the gutters between the rows.
+
+#### Example - setting the gutter rows value
+     <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                rows: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                cols: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+
+### items.grid.gutter.rows.maxWidth `Number`
+
+Defines the maximum width in pixels for the specific breakpoint gutter row value.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                rows: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                cols: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter.rows.minWidth `Number`
+
+Defines the minimum width in pixels for the specific breakpoint gutter row value.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                rows: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                cols: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter.rows.value `Number`
+
+Defines the row gap value for the specific breakpoint.
+
+#### Example - setting the gutter rows value
+<form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                rows: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                cols: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter.cols `String|Number|Array`
+
+Defines the width of the gutters between the columns.
+
+#### Example - setting the gutter cols value
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                cols: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                rows: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter.cols.maxWidth `Number`
+
+Defines the maximum width in pixels for the specific breakpoint gutter col value.
+
+#### Example - setting the gutter cols value
+        <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                cols: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                rows: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter.cols.minWidth `Number`
+
+Defines the minimum width in pixels for the specific breakpoint gutter col value.
+
+#### Example - setting the gutter cols value
+        <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                cols: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                rows: 3
+                            }
+                        },
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid.gutter.cols.value `Number`
+
+Defines the col gap value for the specific breakpoint.
+
+#### Example - setting the gutter rows value
+        <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { 
+                            gutter: {
+                                cols: [{
+                                    maxWidth: 600,
+                                    value: 2
+                                },
+                                {
+                                    minWidth: 601,
+                                    maxWidth: 800,
+                                    value: 4
+                                },
+                                {
+                                    minWidth: 801,
+                                    maxWidth: 2800,
+                                    value: 6
+                                }],
+                                rows: 3
+                            }
+                        },
                         items: [
                             { 
                                 field: "FirstName", 
@@ -1145,21 +2125,537 @@ Specify the layout of Form content. Valid options are:
 
 Grid layout settings.
 
-### grid.cols `Number|String`
+### grid.cols `Number|Array`
 
 Defines the columns of the grid.
+
+#### Example - setting columns to number
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: 10,
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: [{
+                    maxWidth: 600,
+                    value: 2
+                },
+                {
+                    minWidth: 601,
+                    maxWidth: 800,
+                    value: 3
+                },
+                {
+                    minWidth: 801,
+                    maxWidth: 2800,
+                    value: 4
+                }],
+                gutter: 10,
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.cols.maxWidth `Number`
+
+Defines the maximum width in pixels for which the specific breakpoint col value for the columns applies.
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: [{
+                    maxWidth: 600,
+                    value: 2
+                },
+                {
+                    minWidth: 601,
+                    maxWidth: 800,
+                    value: 3
+                },
+                {
+                    minWidth: 801,
+                    maxWidth: 2800,
+                    value: 4
+                }],
+                gutter: 10,
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.cols.minWidth `Number`
+
+Defines the minimum width in pixels for which the specific breakpoint col value for the columns applies.
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: [{
+                    maxWidth: 600,
+                    value: 2
+                },
+                {
+                    minWidth: 601,
+                    maxWidth: 800,
+                    value: 3
+                },
+                {
+                    minWidth: 801,
+                    maxWidth: 2800,
+                    value: 4
+                }],
+                gutter: 10,
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.cols.value `Number`
+
+Defines the number of columns to be applied if current width of the form is between the maxWidth and minWidth values
+
+#### Example - setting columns to an array
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: [{
+                    maxWidth: 600,
+                    value: 2
+                },
+                {
+                    minWidth: 601,
+                    maxWidth: 800,
+                    value: 3
+                },
+                {
+                    minWidth: 801,
+                    maxWidth: 2800,
+                    value: 4
+                }],
+                gutter: 10,
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
 
 ### grid.gutter `Number|String|Object`
 
 Defines the width of the gutters between the columns / rows.
 
-### grid.gutter.rows `Number|String`
+### grid.gutter.rows `String|Number|Array`
 
 Defines the width of the gutters between the rows.
 
-### grid.gutter.cols `Number|String`
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    rows: 1,
+                    cols: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.rows.maxWidth `Number`
+
+Defines the maximum width in pixels for the specific breakpoint gutter row value.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    rows: [{
+                        maxWidth: 600,
+                        value: 5
+                    },
+                    {
+                        minWidth: 601,
+                        maxWidth: 800,
+                        value: 10
+                    },
+                    {
+                        minWidth: 801,
+                        maxWidth: 2800,
+                        value: 15
+                    }],
+                    cols: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.rows.minWidth `Number`
+
+Defines the minimum width in pixels for the specific breakpoint gutter row value.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    rows: [{
+                        maxWidth: 600,
+                        value: 5
+                    },
+                    {
+                        minWidth: 601,
+                        maxWidth: 800,
+                        value: 10
+                    },
+                    {
+                        minWidth: 801,
+                        maxWidth: 2800,
+                        value: 15
+                    }],
+                    cols: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.rows.value `Number`
+
+Defines the row gap value for the specific breakpoint.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    rows: [{
+                        maxWidth: 600,
+                        value: 5
+                    },
+                    {
+                        minWidth: 601,
+                        maxWidth: 800,
+                        value: 10
+                    },
+                    {
+                        minWidth: 801,
+                        maxWidth: 2800,
+                        value: 15
+                    }],
+                    cols: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.cols `String|Number|Array`
 
 Defines the width of the gutters between the columns.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    rows: 1,
+                    cols: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.cols.maxWidth `Number`
+
+Defines the maximum width in pixels for the specific breakpoint gutter col value.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    cols: [{
+                        maxWidth: 600,
+                        value: 5
+                    },
+                    {
+                        minWidth: 601,
+                        maxWidth: 800,
+                        value: 10
+                    },
+                    {
+                        minWidth: 801,
+                        maxWidth: 2800,
+                        value: 15
+                    }],
+                    rows: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.cols.minWidth `Number`
+
+Defines the minimum width in pixels for the specific breakpoint gutter col value.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    cols: [{
+                        maxWidth: 600,
+                        value: 5
+                    },
+                    {
+                        minWidth: 601,
+                        maxWidth: 800,
+                        value: 10
+                    },
+                    {
+                        minWidth: 801,
+                        maxWidth: 2800,
+                        value: 15
+                    }],
+                    rows: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
+
+### grid.gutter.cols.value `Number`
+
+Defines the col gap value for the specific breakpoint.
+
+#### Example - setting the gutter rows value
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "Ivan",
+                Address: "Sofia"
+            },
+            grid: {
+                cols: 2,
+                gutter: {
+                    cols: [{
+                        maxWidth: 600,
+                        value: 5
+                    },
+                    {
+                        minWidth: 601,
+                        maxWidth: 800,
+                        value: 10
+                    },
+                    {
+                        minWidth: 801,
+                        maxWidth: 2800,
+                        value: 15
+                    }],
+                    rows: 2
+                },
+                rows: 1
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    </script>
 
 ### size `String`*(default: "medium")*
 
