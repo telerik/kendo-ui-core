@@ -301,9 +301,6 @@ navigation:
      "tutorials/tutorial-saleshub/order-page":
         title: "Order Page"
         position: 3
-     "licensing":
-        title: "Licensing"
-        position: 59
      "troubleshoot":
         title: "Troubleshooting"
         position: 60

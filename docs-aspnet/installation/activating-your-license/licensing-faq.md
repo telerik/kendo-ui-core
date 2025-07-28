@@ -3,12 +3,27 @@ title: Frequently Asked Questions
 page_title: Licensing Frequently Asked Questions
 description: "Learn the answers to frequently asked questions about the {{ site.product }} licensing."
 slug: licensing-faq
+previous_url: /licensing
 position: 3
 ---
 
 # Frequently Asked Questions
 
-This article lists the answers to the most frequently asked questions (FAQs) about working with the {{ site.product }} license key.
+This article lists the answers to the most frequently asked questions (FAQs) about {{ site.product }} licensing.
+
+## What types of licenses are available for {{ site.product }}?
+
+Progress<sup>®</sup> {{ site.product }} is available under a developer (commercial) or a trial license.
+
+Regardless of the license version you hold, to use {{ site.product }}, you have to activate a license key and agree to the [End User License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui).
+
+You can find the license agreement in your Telerik controls installation folder under `\license-agreements\EULA.rtf`. For example, the default location for the Q4 2024 release is `C:\Program Files (x86)\Progress\{{ site.product }} 2024 Q4\license-agreements\EULA.rtf`.
+
+## What is the current licensing mechanism?
+
+Starting with the 2025 Q1 release, {{ site.product }} requires activation through a license key (trial or commercial). To download your personal activation key and activate the {{ site.product }} components, follow [License Key Installation]({%slug installation_license_key_aspnetcore%}) steps.
+
+An invalid license results in [errors and warnings]({%slug troubleshooting-license-key-errors%}) during build and run-time indicators such as watermarks and banners.
 
 ## Does the license key expire?
 
@@ -81,7 +96,21 @@ To activate {{ site.product }} in a CI/CD environment, use any of the license ke
 
 ## Are earlier {{ site.product }} versions affected?
 
-No, versions up to **2024.4.1112** released prior to February 2025 do not require a license key. They use an older licsensing mechanism that requires [Referencing a Script Key]({%slug installation_legacy_licensing_aspnetcore%})
+No, versions up to **2024.4.1112** released prior to February 2025 do not require a license key. They use an older licensing mechanism that requires [Referencing a Script Key]({%slug installation_legacy_licensing_aspnetcore%})
+
+## What about the license.licx file in old product versions?
+
+As of the Q1 2015 release, Telerik® {{ site.product_short }} uses the standard .NET licensing mechanism—if you use Telerik® {{ site.product_short }} items in design-time, Visual Studio adds a `license.licx` file to the solution. This file is used only in design-mode and is not needed for deployment explicitly. The .NET framework (`lc.exe`) will embed it in the assembly when your application is built for deployment.
+
+The `license.licx` license file is maintained by Visual Studio and contains information about all licensed components in the application, including non-Telerik products. Having this license file is not expected to bring any performance or compilation issues and you can ignore it.
+
+If your project build fails with errors which point to the license file, you can delete it and rebuild. Alternatively, you can clear its contents and mark it as **Read Only**.
+
+If you are working under source control, once the file is created, it will be detected as a change by your source control system. Telerik suggests that you check in this file initially. When the file is checked out again during your work, it is up to you to decide whether to check it in, or discard the changes.
+
+## Where can I find information about Bill of Materials (BOM) and third-party software licenses?
+
+You can find a Bill of Materials (BOM) and a list of the third-party software, including open-source software, in the `\LicenseAgreements\ThirdParty\NOTICE.txt` location in your Telerik controls installation folder. For example, the default location for the Q4 2024 release is `C:\Program Files (x86)\Progress\{{ site.product }} 2024 Q4\license-agreements\third-party\NOTICE.txt`. For versions prior to R2 2018 SP1, the file is called `licenses.txt`.
 
 ## Next Steps
 
