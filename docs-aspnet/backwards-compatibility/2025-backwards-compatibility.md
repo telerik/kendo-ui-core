@@ -16,6 +16,21 @@ This article lists the breaking or important changes in the 2025 releases of {{ 
 
 The ActionSheet's action buttons now accept enums for the `FillMode`, `Rounded`, `ThemeColor`, `Size` properties instead of strings. The `ActionSheetItem.Group` property now accepts the `ActionSheetItemGroup` enum instead of a string.
 
+{% if site.core %}
+### TabStrip
+
+In versions before 2025 Q3, the `icon-class` configuration option sets a sprite CSS class in the items of the TabStrip TagHelper. Starting with version 2025 Q3, the `icon-class` attribute applies a custom CSS class to the default SVG tab icon element. The `sprite-css-classes` attribute sets sprite icons to the TabStrip tabs.
+
+Before Q3 2025:
+```TagHelper
+<tabstrip-item icon-class="netherlandsFlag" text="Netherlands"></tabstrip-item>
+```    
+After Q3 2025:
+```TagHelper
+<tabstrip-item sprite-css-classes='new string[] {"netherlandsFlag"}' text="Netherlands"></tabstrip-item>
+```
+{% endif %}
+
 ### UIPrimitives
 
 The {{ site.product }} 2025 Q3 release introduces changes in the naming of several properties in the `UIPrimitives.cs` class:

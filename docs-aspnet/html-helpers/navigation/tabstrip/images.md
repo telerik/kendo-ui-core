@@ -66,7 +66,7 @@ To include images in the Telerik UI for {{ site.framework }} TabStrip items, use
 
 ## Sprites
 
-To include sprites in the Telerik UI for {{ site.framework }} TabStrip items, use the `.SpriteCssClasses()` configuration option and specify the sprite CSS class:  
+To include sprites in the Telerik UI for {{ site.framework }} TabStrip items, use the `.SpriteCssClasses()` configuration option and specify the sprite CSS class:
 
 ```HtmlHelper
 @(Html.Kendo().TabStrip()
@@ -98,20 +98,17 @@ To include sprites in the Telerik UI for {{ site.framework }} TabStrip items, us
 ```TagHelper
 <kendo-tabstrip name="tabstrip-sprites">
     <items>
-        <tabstrip-item text="Brazil"
-                       icon-class="k-sprite brazilFlag">
+        <tabstrip-item text="Brazil" sprite-css-classes='new string[] {"brazilFlag"}'>
             <content>
                 Brazil, officially the Federative Republic of Brazil, is the largest country in South America.
             </content>
         </tabstrip-item>
-        <tabstrip-item text="India"
-                       icon-class="k-sprite indiaFlag">
+        <tabstrip-item text="India" sprite-css-classes='new string[] {"indiaFlag"}'>
             <content>
                 India, officially the Republic of India, is a country in South Asia.
             </content>
         </tabstrip-item>
-        <tabstrip-item text="Netherlands"
-                       icon-class="k-sprite netherlandsFlag">
+        <tabstrip-item text="Netherlands" sprite-css-classes='new string[] {"netherlandsFlag"}'>
             <content>
                 The Netherlands is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with several islands in the Caribbean.
             </content>
@@ -119,6 +116,8 @@ To include sprites in the Telerik UI for {{ site.framework }} TabStrip items, us
     </items>
 </kendo-tabstrip>
 ```
+
+> Note: In versions before 2025 Q3, the `icon-class` configuration option sets a sprite CSS class in the items of the TabStrip TagHelper. Starting with version 2025 Q3, the `icon-class` attribute applies a custom CSS class to the default SVG tab icon element. The `sprite-css-classes` attribute sets sprite icons to the TabStrip tabs.
 {% endif %}
 
 ## See Also
