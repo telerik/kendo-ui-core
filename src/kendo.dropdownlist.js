@@ -66,7 +66,12 @@ export const __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, that._focusHandler.bind(that));
 
-            options.readonly = kendo.isPresent(options.readonly) ? options.readonly : Boolean(that.element.attr("readonly"));
+            if (!kendo.isPresent(options.readonly) && element.attr("readonly")) {
+                 options.readonly = true;
+            }
+            else if (!kendo.isPresent(options.readonly)) {
+                 options.readonly = false;
+            }
 
             that._focusInputHandler = that._focusInput.bind(that);
 
@@ -183,7 +188,7 @@ export const __meta__ = {
             autoWidth: false,
             popup: null,
             filterTitle: null,
-            readonly: false,
+            readonly: null,
             size: "medium",
             fillMode: "solid",
             rounded: "medium",

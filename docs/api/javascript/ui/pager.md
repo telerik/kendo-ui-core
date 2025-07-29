@@ -287,7 +287,7 @@ Defines if a label showing current paging information will be displayed.
     </style>
 
 ### input `Boolean`*(default: false)*
-Defines if an input element which allows the user to navigate to given page will be displayed. If enabled the numeric buttons for pages will not be rendered.
+Defines if an input element which allows the user to navigate to given page will be displayed. If enabled only the numeric input will be rendered in the numeric portion of the pager.
 
 #### Example - show the navigate-to-page input
 
@@ -307,7 +307,7 @@ Defines if an input element which allows the user to navigate to given page will
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
-          numeric: false
+          numeric: true
         });
 
         dataSource.read();
@@ -625,7 +625,7 @@ The label displayed before the pager input.
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
-          numeric: false,
+          numeric: true,
           messages: {
             page: "Enter page"
           }
@@ -661,7 +661,6 @@ The title of the numeric link page buttons of the **Pager**. The parameters avai
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
-          numeric: false,
           messages: {
             pageButtonLabel: "This is page {0}"
           }
@@ -677,7 +676,7 @@ The title of the numeric link page buttons of the **Pager**. The parameters avai
 
 ### messages.pageSizeDropDownLabel `String`*(default: "Page sizes drop down")*
 
-The label applied to the page size DropDOwnList.
+The label applied to the page size DropDownList.
 
 #### Example
     <div id="pager"></div>
@@ -696,7 +695,7 @@ The label applied to the page size DropDOwnList.
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
-          numeric: false,
+          numeric: true,
           messages: {
             pageSizeDropDownLabel: "page size"
           },
@@ -726,7 +725,7 @@ The label displayed before the pager input. Uses [kendo.format](/api/javascript/
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
-          numeric: false,
+          numeric: true,
           messages: {
             of: "from {0}"
           }

@@ -951,7 +951,7 @@ export const __meta__ = {
             if (!options.enabled || disabled) {
                 that.enable(false);
             } else {
-                that.readonly(options.readonly || that.element.is("[readonly]"));
+                that.readonly(kendo.isPresent(options.readonly) ? options.readonly : that.element.is("[readonly]"));
             }
         },
 

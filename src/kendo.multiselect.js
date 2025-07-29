@@ -87,7 +87,13 @@ export const __meta__ = {
             that._optionsMap = {};
             that._customOptions = {};
             that.options.inputMode = that.options.inputMode || that.element.attr("inputmode") || "text";
-            that.options.readonly = kendo.isPresent(that.options.readonly) ? that.options.readonly : Boolean(that.element.attr("readonly"));
+
+            if (!kendo.isPresent(that.options.readonly) && that.element.attr("readonly")) {
+                 that.options.readonly = true;
+            }
+            else if (!kendo.isPresent(that.options.readonly)) {
+                 that.options.readonly = false;
+            }
 
             that._wrapper();
             that._inputValuesContainer();
@@ -167,7 +173,7 @@ export const __meta__ = {
             enabled: true,
             autoBind: true,
             autoClose: true,
-            readonly: false,
+            readonly: null,
             highlightFirst: true,
             dataTextField: "",
             dataValueField: "",

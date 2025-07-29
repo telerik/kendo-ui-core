@@ -1098,6 +1098,51 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         });
 
         assert.isOk(multiselect.wrapper.attr("aria-readonly", true));
+        assert.equal(multiselect.options.readonly, true);
         assert.isOk(multiselect.input.attr("readonly"));
-    })
     });
+
+    it ("Should set readonly state from attribute", function() {
+        select = $("<select multiple readonly='readonly' />").appendTo(Mocha.fixture);
+
+         let multiSelect = new MultiSelect(select, {
+             dataValueField: "name",
+             dataTextField: "name",
+             dataSource: {
+                 data: [
+                     { name: "item1", value: "1" },
+                     { name: "item2", value: "2" },
+                     { name: "item3", value: "3" }
+                 ],
+                 group: "name"
+             },
+             label: () => `some label`
+         });
+
+          assert.isOk(multiSelect.wrapper.attr("aria-readonly", true));
+          assert.isOk(multiSelect.element.attr("readonly"));
+          assert.equal(multiSelect.options.readonly, true);
+     });
+
+     it ("Should take readonly option with higher precedent over attribute", function() {
+          select = $("<select multiple readonly='readonly' />").appendTo(Mocha.fixture);
+
+          let multiSelect = new MultiSelect(select, {
+              dataValueField: "name",
+              dataTextField: "name",
+              readonly: false,
+              dataSource: {
+                  data: [
+                      { name: "item1", value: "1" },
+                      { name: "item2", value: "2" },
+                      { name: "item3", value: "3" }
+                  ],
+                  group: "name"
+              },
+              label: () => `some label`
+          });
+
+          assert.isOk(multiSelect.wrapper.attr("aria-readonly", false));
+          assert.equal(multiSelect.options.readonly, false);
+     });
+});

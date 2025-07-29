@@ -418,11 +418,14 @@ export const __meta__ = {
                 let invalid = false;
 
                 inputs = containerElement.find(this._inputSelector);
-                let fileInput = containerElement.find("input[type='file']");
 
-                if (fileInput.length) {
-                    Array.prototype.push.call(inputs, $(fileInput.first())[0]);
-                }
+                containerElement.find(UPLOADBUTTONWRAPPER).each(function() {
+                    let firstFileInput = $(this).find("input[type='file']").first();
+                    if (firstFileInput.length) {
+                        Array.prototype.push.call(inputs, firstFileInput[0]);
+                    }
+                });
+
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
                     if (!this.validateInput(inputs.eq(idx))) {
                         invalid = true;

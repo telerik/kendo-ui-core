@@ -1387,6 +1387,51 @@ import { stub } from '../../helpers/unit/stub.js';
 
             assert.isOk(combobox.wrapper.attr("aria-readonly", true));
             assert.isOk(combobox.input.attr("readonly"));
-        })
-    });
+            assert.equal(combobox.options.readonly, true);
+        });
+
+        it ("Should set readonly state from attribute", function() {
+            input = $("<input readonly='readonly' class='test' style='width: 200px' />").appendTo(Mocha.fixture);
+
+            let combobox = new ComboBox(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: () => `some label`
+            });
+
+             assert.isOk(combobox.wrapper.attr("aria-readonly", true));
+             assert.isOk(combobox.element.attr("readonly"));
+             assert.equal(combobox.options.readonly, true);
+        });
+
+        it ("Should take readonly option with higher precedent over attribute", function() {
+             input = $("<input readonly='readonly' class='test' style='width: 200px' />").appendTo(Mocha.fixture);
+
+             let combobox = new ComboBox(input, {
+                 dataValueField: "name",
+                 dataTextField: "name",
+                 readonly: false,
+                 dataSource: {
+                     data: [
+                         { name: "item1", value: "1" },
+                         { name: "item2", value: "2" },
+                         { name: "item3", value: "3" }
+                     ],
+                     group: "name"
+                 },
+                 label: () => `some label`
+             });
+
+             assert.isOk(combobox.wrapper.attr("aria-readonly", false));
+             assert.equal(combobox.options.readonly, false);
+        });
+});
 
