@@ -647,7 +647,7 @@ Defines the hint text that will be shown underneath the form editor.
 
 ### items.colSpan `Number|Array`
 
-Defines the field size when grid layout is used.
+Defines the field size when grid layout is used. A fixed number defines the colspan for the form field. An array is used to map the colSpan to responsive breakpoints.
 
 #### Example
 
@@ -2127,7 +2127,7 @@ Grid layout settings.
 
 ### grid.cols `Number|Array`
 
-Defines the columns of the grid.
+A number defines the columns of the grid. When an array is used it is used to map the columns to the provided responsive breakpoints.
 
 #### Example - setting columns to number
     <form id="myForm"></form>
@@ -2325,7 +2325,7 @@ Defines the width of the gutters between the columns / rows.
 
 ### grid.gutter.rows `String|Number|Array`
 
-Defines the width of the gutters between the rows.
+Defines the width of the gutters between the rows. When an array is used, it is mapped to set the gutter between the rows for the provided responsive breakpoints.
 
 #### Example - setting the gutter rows value
     <form id="myForm"></form>
@@ -2492,7 +2492,7 @@ Defines the row gap value for the specific breakpoint.
 
 ### grid.gutter.cols `String|Number|Array`
 
-Defines the width of the gutters between the columns.
+Defines the width of the gutters between the columns. When an array is used, it is mapped to set the gutter between the columns for the provided responsive breakpoints.
 
 #### Example - setting the gutter rows value
     <form id="myForm"></form>
