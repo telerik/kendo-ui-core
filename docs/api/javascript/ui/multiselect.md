@@ -1392,16 +1392,28 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 #### Example - specify that the View-Model field should be updated with the selected item value
 
-    <select id="multiselect" multiple="multiple" data-bind="value: selectedProductId, source: products"></select>
+  <div id="container">
+    <select id="multiselect" multiple="multiple"
+            data-bind="value: selectedProductId, source: products"></select>
 
-    <script>
+    <div>
+      <h4>Selected Product IDs:</h4>
+      <div data-bind="text: selectedProductIdText"></div>
+    </div>
+  </div>
+
+  <script>
     $("#multiselect").kendoMultiSelect({
       valuePrimitive: true,
       dataTextField: "name",
       dataValueField: "id"
     });
+
     var viewModel = kendo.observable({
       selectedProductId: [],
+      selectedProductIdText: function () {
+        return this.get("selectedProductId").join(", ");
+      },
       products: [
         { id: 1, name: "Coffee" },
         { id: 2, name: "Tea" },
@@ -1409,8 +1421,8 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
       ]
     });
 
-    kendo.bind($("#multiselect"), viewModel);
-    </script>
+    kendo.bind($("#container"), viewModel);
+  </script>
 
 ### virtual `Boolean|Object`*(default: false)*
 
