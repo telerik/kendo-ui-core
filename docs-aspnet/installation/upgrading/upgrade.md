@@ -9,16 +9,20 @@ position: 1
 
 # Upgrading {{ site.product }}
 
-This document describes how to upgrade the version of the {{ site.product }} helpers and how to switch from a trial to a developer (commercial) license.
+This document describes how to upgrade the version of the {{ site.product }} helpers.
 
 ## Upgrading to New Versions
 
 To update {{ site.product }} to a new version, either:
 
 {% if site.core %}
-
 * [Upgrade with NuGet or Bower](#using-nuget-or-bower).
+{% else %}
+* [Use the Upgrade Project Wizard](#using-the-upgrade-project-wizard).
+{% endif %}
 * [Manually replace the references and files](#upgrading-manually).
+
+{% if site.core %}
 
 ### Using NuGet or Bower
 
@@ -42,6 +46,37 @@ To upgrade the version with NuGet or Bower:
 
 > To properly load the Telerik and Kendo UI packages, both [NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) and [Bower](https://docs.telerik.com/kendo-ui/intro/installation/bower-install#kendo-ui-professional) require authentication.
 
+{% else %}
+
+### Using the Upgrade Project Wizard
+
+To upgrade your project by using the **Upgrade Project Wizard**, follow these steps:
+
+1. Open the **Extensions->Telerik Menu** or click the **Update Now** button as in the screenshot below to start the upgrading process.
+
+    ![Upgrade Step 1](../images/upgrade-step-0.png)
+1. Select the files that must be included in the update process and click **Next**.
+
+    ![Upgrade Step 2](../images/upgrade-step-1.png)
+1. Choose the project or projects you want to upgrade.
+
+    ![Upgrade Step 3](../images/upgrade-step-2.png)
+1. Pick an option for the **EditorTemplates** folder.
+
+    ![Upgrade Step 4](../images/upgrade-step-3.png)
+1. Create a backup.
+
+    ![Upgrade Step 5](../images/upgrade-step-4.png)
+1. Be careful not to overwrite any existing customized editor templates.
+
+    ![Upgrade Step 6](../images/upgrade-step-5.png)
+
+The project will be upgraded to the latest {{ site.product }} version.
+
+{% endif %}
+
+{% if site.core %}
+
 ### Upgrading Manually
 
 1. [Download]({% slug downloadinstall_aspnetcore %}#getting-the-binaries) the desired version from the **Download** section of your account.
@@ -61,31 +96,16 @@ To upgrade the version with NuGet or Bower:
 
 > The `NuGet package` and the required [`client-side resources`]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) must have identical versions.
 
-## Switching to a Developer License
-
-1. After the purchase of a Developer License, follow the [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates) guidelines.
-
-If you still see the Trial message after you switch to a developer (commercial) license, check the [troubleshooting knowledge base article]({% slug troubleshooting_trial_message %}).
 
 {% else %}
-
-* Use the [Upgrade Project Wizard](#using-the-upgrade-project-wizard)
-* [Manually replace the scripts and the style files](#upgrading-manually).
-
-### Using the Upgrade Project Wizard
-
-To upgrade your project with the Upgrade Project Wizard, refer to the following articles:
-
-1. [Download the new Telerik UI version]({% slug latestversionretrieval_visualstudio_aspnetcore %}).
-1. [Start the **Upgrade Wizard**]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}).
 
 ### Upgrading Manually
 
 1. Replace all scripts, styles, and images that are related to Telerik UI for ASP.NET MVC with the desired version of the framework.
-1. Download the desired version from the **Download** section of your account.
-1. In the application, manually replace any references which point to the old Kendo UI [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+1. Download the desired version from the [UI for ASP.NET MVC download page](https://www.telerik.com/account/product-download?product=KENDOUIMVC).
+1. In the application, manually replace any references that point to the old Kendo UI [scripts and styles]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
-   * If the scripts and styles are referenced through the Kendo CDN service, update the links with the new version.
+   * If the scripts and styles are referenced through the Kendo UI CDN service, update the links with the new version.
 
       ```HTML _Layout.cshtml
       <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
@@ -97,22 +117,25 @@ To upgrade your project with the Upgrade Project Wizard, refer to the following 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
 
 > The `Kendo.Mvc.dll` and the required [`client-side resources`]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) must have identical versions.
-
-## Switching to a Developer License
-
-1. After the purchase of a Developer License, follow the [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates) guidelines.
-1. To upgrade to the latest product version, follow the steps for [updating the Telerik UI for ASP.NET MVC version](#upgrading-to-new-versions).
-
-## See Also
-
-* [Upgrade Troubleshooting]({% slug upgrade_aspnetcore_troubleshooting %})
-* [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-
 {% endif %}
 
+## Switching to a Developer License [Deprecated]
+
+> Starting with version 2025 Q3, the Trial package is deprecated, and the toolset is available only with a Developer License.
+
+1. After the purchase of a Developer License, follow the [Update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates) guidelines.
+1. To upgrade to the latest product version, follow the steps for [updating the {{ site.product }} version](#upgrading-to-new-versions).
+
+{% if site.core %}
+If you still see the Trial message after you switch to a developer (commercial) license, check the [troubleshooting knowledge base article]({% slug troubleshooting_trial_message %}).
+{% endif %}
 
 ## See Also
 
 * [Upgrade Troubleshooting]({% slug upgrade_aspnetcore_troubleshooting %})
+{% if site.core %}
 * [Telerik UI for ASP.NET Core Download and Installation]({% slug downloadinstall_aspnetcore %})
+* [Downloading New Versions of Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui/documentation/vs-integration/latest-version-retrieval).
+{% else %}
+* [Upgrading Telerik UI for ASP.NET MVC Projects](https://www.telerik.com/aspnet-mvc/documentation/vs-integration/upgrade-wizard).
+{% endif %}

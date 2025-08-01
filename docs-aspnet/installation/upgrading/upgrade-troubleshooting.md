@@ -17,6 +17,8 @@ This document describes how to troubleshoot your application and what to be wary
 The issues listed below are common when upgrading to {{ site.product }} versions released in 2025. Follow the link next to each problem to find the solution.
 
 * You have a commercial license, but a license-related warning message appears in the browser's console, as a banner, and as a watermark for the components&mdash;The solution for {{ site.product }} version `2025.1.211` or newer is to [update your license key]({%slug installation_license_key_aspnetcore%}#license-key-updates). The solution for {{ site.product }} version `2024.4.1112` or older is [to generate, add, and reference a license file]({% slug remove-license-warning-message %}).
+* Starting with version Q2 2025, the Trial packages are removed and they contain no `Trial` identifier in their name. If you attempt to upgrade a trial NuGet package to a Q2 2025 version, change the name of the referenced NuGet package name.  
+* An attempt to use the obsolete Telerik NuGet v2 feed will now result in an error. The solution is to use the [Telerik NuGet v3 feed](https://www.telerik.com/{{ site.platform }}/documentation/installation/installation-options/nuget-install).
 
 ## 2023 Yearly Releases
 
