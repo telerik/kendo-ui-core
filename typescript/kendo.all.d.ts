@@ -2232,12 +2232,20 @@ declare namespace kendo.ui {
         addPromptOutput(promptOutput: AIPromptPromptOutput): void;
 
         getViews(): AIPromptView[] | any[];
+
+        updatePromptOutputContent(content: string, outputIdOrElement?: string | Object): void;
+
+        startStreaming(): void;
+
+        stopStreaming(): void;
     }
 
     interface AIPromptPromptOutput {
-        id: string;
-        prompt: string;
+        id?: string | undefined;
+        prompt?: string | undefined;
         output: string;
+        isLoading?: boolean | undefined;
+        isRetry?: boolean | undefined;
     }
 
     interface AIPromptEvent {
@@ -2246,20 +2254,94 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    interface AIPromptCommandExecuteEvent extends AIPromptEvent {
+        // Command execution event data
+    }
+
+    interface AIPromptPromptRequestEvent extends AIPromptEvent {
+        prompt: string;
+        output?: string | undefined;
+        history?: AIPromptPromptOutput[] | undefined;
+        isRetry?: boolean | undefined;
+    }
+
+    interface AIPromptPromptResponseEvent extends AIPromptEvent {
+        output: string;
+        prompt: string;
+        outputId: string;
+        isRetry: boolean;
+    }
+
+    interface AIPromptOutputActionEvent extends AIPromptEvent {
+        command: string;
+        outputId: string;
+        output: string;
+        prompt: string;
+        button: JQuery;
+    }
+
+    interface AIPromptPromptRequestCancelEvent extends AIPromptEvent {
+        output?: Object | undefined;
+    }
+
+    interface AIPromptSpeechToTextOptions {
+        integrationMode?: string | undefined;
+        lang?: string | undefined;
+        continuous?: boolean | undefined;
+        interimResults?: boolean | undefined;
+        maxAlternatives?: number | undefined;
+    }
+
+    interface AIPromptPromptTextAreaOptions {
+        fillMode?: string | undefined;
+        inputMode?: string | undefined;
+        label?: {
+            content?: string | undefined;
+            floating?: boolean | undefined;
+        } | undefined;
+        maxLength?: number | undefined;
+        overflow?: string | undefined;
+        placeholder?: string | undefined;
+        resize?: string | undefined;
+        rows?: number | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+    }
+
+    interface AIPromptOutputAction {
+        command?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        themeColor?: string | undefined;
+        title?: string | undefined;
+        type?: string | undefined;
+    }
+
     interface AIPromptOptions {
         name?: string | undefined;
         activeView?: number | string | undefined;
         service?: string | AIPromptServiceOptions | undefined;
         views?: AIPromptView[] | any[] | undefined;
         promptOutputs?: AIPromptPromptOutput[] | any[] | undefined;
+        encodedPromptOutputs?: boolean | undefined;
         promptSuggestionItemTemplate?: string | Function | undefined;
         promptSuggestions?: string[] | any[] | undefined;
         toolbarItems?: ToolBarItem[] | any[] | undefined;
         showOutputRating?: boolean | undefined;
+        showOutputSubtitleTooltip?: boolean | undefined;
+        speechToText?: boolean | AIPromptSpeechToTextOptions | undefined;
+        promptTextArea?: AIPromptPromptTextAreaOptions | undefined;
+        outputActions?: (string | AIPromptOutputAction)[] | undefined;
+        outputTemplate?: Function | undefined;
         messages?: AIPromptMessages | undefined;
 
-        commandExecute?(e: AIPromptEvent): void;
-        promptRequest?(e: AIPromptEvent): void;
+        commandExecute?(e: AIPromptCommandExecuteEvent): void;
+        promptRequest?(e: AIPromptPromptRequestEvent): void;
+        promptResponse?(e: AIPromptPromptResponseEvent): void;
+        outputAction?(e: AIPromptOutputActionEvent): void;
+        promptRequestCancel?(e: AIPromptPromptRequestCancelEvent): void;
         outputRatingChange?(e: AIPromptEvent): void;
         outputCopy?(e: AIPromptEvent): void;
     }
@@ -2280,9 +2362,12 @@ declare namespace kendo.ui {
         generateOutput?: string | undefined;
         outputRetryTitle?: string | undefined;
         outputTitle?: string | undefined;
-        promptPlaceHolder?: string | undefined;
+        promptPlaceholder?: string | undefined;
         promptSuggestions?: string | undefined;
         retryGeneration?: string | undefined;
+        ratePositive?: string | undefined;
+        rateNegative?: string | undefined;
+        stopGeneration?: string | undefined;
     }
 
     interface AIPromptView {
@@ -2292,8 +2377,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         viewTemplate?: string | Function | undefined;
         footerTemplate?: string | Function | undefined;
-        initializeComponent(container: JQuery): void;
-        initializeComponent(): void;
+        initializeComponents?: Function | undefined;
     }
 
     class Alert extends kendo.ui.Dialog {

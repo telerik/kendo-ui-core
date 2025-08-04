@@ -56,10 +56,10 @@ Specifies whether the prompt outputs are HTML-encoded before being displayed in 
             encodedPromptOutputs: false,
             promptResponse: function(e) {
                 // Convert markdown to HTML
-                let output = markdown.toHTML(e.output.output, "Maruku");
+                let htmlOutput = markdown.toHTML(e.output, "Maruku");
                 // Sanitize the HTML output
                 if (window.DOMPurify) {
-                    e.output.output = DOMPurify.sanitize(output, { USE_PROFILES: { html: true } });
+                    e.output = DOMPurify.sanitize(htmlOutput, { USE_PROFILES: { html: true } });
                 }
             }
         });
@@ -112,6 +112,340 @@ The prompt text used to generate this output.
             { prompt: "create object 1", output: "Description 1" },
             { prompt: "create object 2", output: "Description 2" }
         ]
+    });
+    </script>
+
+### speechToText `Boolean|Object` *(default: false)*
+
+Configures speech-to-text functionality for the prompt input. When `true`, enables speech-to-text with default settings. When `false`, disables the feature. When an object, configures custom speech-to-text options.
+
+#### Example - Enable with default settings
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        speechToText: true
+    });
+    </script>
+
+#### Example - Custom configuration
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        speechToText: {
+            integrationMode: "webSpeech",
+            lang: "en-US",
+            continuous: false,
+            interimResults: true,
+            maxAlternatives: 1
+        }
+    });
+    </script>
+
+#### Example - Disable speech-to-text
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        speechToText: false
+    });
+    </script>
+
+### speechToText.integrationMode `String` *(default: "webSpeech")*
+
+Specifies the integration mode for speech recognition. Available modes:
+- `"webSpeech"` - Uses the Web Speech API
+- `"none"` - Provides button without actual speech recognition
+
+### speechToText.lang `String` *(default: "en-US")*
+
+Specifies the language code for speech recognition.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        speechToText: {
+            lang: "es-ES"
+        }
+    });
+    </script>
+
+### speechToText.continuous `Boolean` *(default: false)*
+
+Specifies whether to continue listening after a result is received.
+
+### speechToText.interimResults `Boolean` *(default: false)*
+
+Specifies whether to return interim results during speech recognition.
+
+### speechToText.maxAlternatives `Number` *(default: 1)*
+
+Specifies the maximum number of alternatives to return from speech recognition.
+
+### promptTextArea `Object`
+
+Configuration options for the [Kendo UI TextArea](/api/javascript/ui/textarea) component used in the prompt view. Only specific properties from the Kendo UI TextArea are supported.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        promptTextArea: {
+            resize: "vertical",
+            rows: 4,
+            placeholder: "Enter your AI prompt here...",
+            fillMode: "outline",
+            rounded: "medium",
+            size: "large",
+            maxLength: 1000,
+            label: {
+                content: "AI Prompt",
+                floating: true
+            }
+        }
+    });
+    </script>
+
+### promptTextArea.fillMode `String`
+
+Specifies the fill mode of the textarea. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
+
+### promptTextArea.inputMode `String`
+
+Specifies the input mode attribute for mobile keyboards.
+
+### promptTextArea.label `Object`
+
+Specifies the label configuration for the textarea.
+
+### promptTextArea.label.content `String`
+
+Specifies the label text content.
+
+### promptTextArea.label.floating `Boolean`
+
+Specifies whether the label floats above the input.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        promptTextArea: {
+            label: {
+                content: "Enter your prompt",
+                floating: true
+            }
+        }
+    });
+    </script>
+
+### promptTextArea.maxLength `Number`
+
+Specifies the maximum number of characters allowed in the textarea.
+
+### promptTextArea.overflow `String`
+
+Specifies the overflow behavior. Available options: `"auto"`, `"hidden"`, `"visible"`, `"scroll"`.
+
+### promptTextArea.placeholder `String`
+
+Specifies the placeholder text for the textarea.
+
+### promptTextArea.resize `String`
+
+Specifies the resize behavior. Available options: `"none"`, `"both"`, `"horizontal"`, `"vertical"`.
+
+### promptTextArea.rows `Number`
+
+Specifies the number of visible text lines.
+
+### promptTextArea.rounded `String`
+
+Specifies the border radius. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
+
+### promptTextArea.size `String`
+
+Specifies the size of the component. Available options: `"small"`, `"medium"`, `"large"`, `"none"`.
+
+### outputActions `Array` *(default: ["copy", "retry"])*
+
+An array of action configurations for the output cards. Can contain strings for built-in actions or objects with custom action properties.
+
+**Built-in actions:**
+- `"copy"` - Copy output content to clipboard
+- `"retry"` - Retry generating the output
+- `"rating"` - Expands to both positive and negative rating buttons
+- `"spacer"` - Adds spacing between action buttons
+
+Custom actions trigger the `outputAction` event with the action command and output data.
+
+#### Example - Built-in actions
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: ["copy", "retry", "rating"]
+    });
+    </script>
+
+#### Example - Custom actions
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            "copy",
+            "retry",
+            { command: "export", text: "Export", icon: "download" },
+            "spacer",
+            { command: "share", text: "Share", icon: "share" }
+        ],
+        outputAction: function(e) {
+            if (e.command === "export") {
+                // Handle export action
+                // e.output contains the text content directly
+                console.log("Exporting output ID:", e.outputId);
+                console.log("Content:", e.output);
+                console.log("Original prompt:", e.prompt);
+            } else if (e.command === "share") {
+                // Handle share action
+                console.log("Sharing output:", e.output);
+            }
+        }
+    });
+    </script>
+
+### outputActions.command `String`
+
+The command identifier for the action. This is used to identify the action when the `outputAction` event is triggered.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "export", text: "Export", icon: "download" }
+        ]
+    });
+    </script>
+
+### outputActions.text `String`
+
+The text displayed on the action button.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "export", text: "Export to PDF", icon: "download" }
+        ]
+    });
+    </script>
+
+### outputActions.icon `String`
+
+The icon name for the action button. Uses Kendo UI icon names.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "bookmark", text: "Bookmark", icon: "bookmark" },
+            { command: "share", text: "Share", icon: "share" }
+        ]
+    });
+    </script>
+
+### outputActions.fillMode `String`
+
+Specifies the fill mode of the action button. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "primary", text: "Primary", fillMode: "solid" },
+            { command: "secondary", text: "Secondary", fillMode: "outline" }
+        ]
+    });
+    </script>
+
+### outputActions.rounded `String`
+
+Specifies the border radius of the action button. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "rounded", text: "Rounded", rounded: "full" }
+        ]
+    });
+    </script>
+
+### outputActions.themeColor `String`
+
+Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"light"`, `"inverse"`, `"dark"`.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "danger", text: "Delete", themeColor: "error" },
+            { command: "success", text: "Approve", themeColor: "success" }
+        ]
+    });
+    </script>
+
+### outputActions.title `String`
+
+Specifies the title attribute (tooltip) for the action button.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "help", icon: "question", title: "Get help with this output" }
+        ]
+    });
+    </script>
+
+### outputActions.type `String`
+
+Specifies the type of the action. Available options: `"button"`, `"spacer"`. Default is `"button"`.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: [
+            { command: "export", text: "Export" },
+            { type: "spacer" },
+            { command: "delete", text: "Delete", themeColor: "error" }
+        ]
+    });
+    </script>
+
+### outputTemplate `Function`
+
+A template function for customizing the display of output content. This function is called when an output has finished streaming and final content needs to be rendered.
+
+The function receives an object with `output` (the output data) and `content` (the output text) properties and should return HTML string.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputTemplate: function({ output, content }) {
+            return `<div class="custom-output">
+                <h4>AI Response:</h4>
+                <p>${content}</p>
+                <small>Generated at: ${new Date().toLocaleString()}</small>
+            </div>`;
+        }
     });
     </script>
 
@@ -260,7 +594,7 @@ The data to send with the AI service request.
             }
         });
     </script>
-    
+
 ### service.outputGetter `Function`
 The function to get the output from the AI service response.
 
@@ -753,6 +1087,18 @@ The text of the prompt view button in the ToolBar.
 
 The text of the retry generation button in the output card.
 
+### messages.ratePositive `String` *(default: "")*
+
+The text of the positive rating button in the output card.
+
+### messages.rateNegative `String` *(default: "")*
+
+The text of the negative rating button in the output card.
+
+### messages.stopGeneration `String` *(default: "Stop Generation")*
+
+The aria-label and title of the stop generation button that appears during streaming operations.
+
 ## Methods
 
 ### activeView
@@ -777,7 +1123,7 @@ The index of the active view or the name of the view to show. If no argument is 
 
 ### addPromptOutput
 
-Adds a prompt output to the `promptOutputs` collection. If the active views is `OutputView`, calls the view's `addPromptOutput` method.
+Adds a prompt output to the `promptOutputs` collection. If the active view is `OutputView`, calls the view's `addPromptOutput` method.
 
 #### Parameters
 
@@ -788,12 +1134,44 @@ The prompt output to add. The output should have the following properties:
 - `output` - The output content generated from the prompt.
 - `prompt` - The prompt text used to generate this output.
 - `id` - *Optional* - The id of the prompt output. If none is provided, the id will be generated as a `kendo.guid()`. The ID is rendered as data-id attribute in the prompt output.
+- `isLoading` - *Optional* - Whether the output is in loading state (shows skeleton). Default: `false`
+- `isStreaming` - *Optional* - Whether the output is being streamed. Default: `false`
+- `isRetry` - *Optional* - Whether this output is from a retry operation. Default: `false`
 
 #### Example
     <div id="aiprompt"></div>
     <script>
     var aiprompt = $("#aiprompt").kendoAIPrompt({ activeView: 1 }).data("kendoAIPrompt");
     aiprompt.addPromptOutput({ prompt: "create object 1", output: "Description 1" });
+    </script>
+
+#### Example - Adding streaming output
+    <div id="aiprompt"></div>
+    <script>
+    var aiprompt = $("#aiprompt").kendoAIPrompt({ activeView: 1 }).data("kendoAIPrompt");
+
+    // Add output in loading state for streaming
+    var outputId = kendo.guid();
+    aiprompt.addPromptOutput({
+        id: outputId,
+        prompt: "Generate a story",
+        output: "",
+        isLoading: true,
+        isStreaming: true
+    });
+
+    // Start streaming - this will show the stop button
+    aiprompt.startStreaming();
+
+    // Simulate streaming updates
+    setTimeout(() => {
+        aiprompt.updatePromptOutputContent("Once upon a time...", outputId);
+    }, 1000);
+
+    setTimeout(() => {
+        aiprompt.updatePromptOutputContent("Once upon a time, there was a brave knight...", outputId);
+        aiprompt.stopStreaming(); // Stop streaming and show final content
+    }, 3000);
     </script>
 
 ### getViews
@@ -803,6 +1181,54 @@ Returns an array of views of the AIPrompt.
 #### Returns
 
 `Array` An array of views of the AIPrompt.
+
+### updatePromptOutputContent
+
+Updates the content of a specific prompt output or the most recent output. This method is typically used during streaming operations to update content in real-time.
+
+#### Parameters
+
+##### content `String`
+
+The new content to display.
+
+##### outputIdOrElement `String|Object` *(optional)*
+
+The output ID (string) or output element/object to update. If not provided, updates the most recent output.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    var aiprompt = $("#aiprompt").kendoAIPrompt().data("kendoAIPrompt");
+
+    // Update most recent output
+    aiprompt.updatePromptOutputContent("Updated content");
+
+    // Update specific output by ID
+    aiprompt.updatePromptOutputContent("Updated content", "output-id-123");
+    </script>
+
+### startStreaming
+
+Starts streaming mode for the component. This shows the stop generation button and sets up the UI for real-time content updates.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    var aiprompt = $("#aiprompt").kendoAIPrompt().data("kendoAIPrompt");
+    aiprompt.startStreaming();
+    </script>
+
+### stopStreaming
+
+Stops streaming mode for the component. This hides the stop generation button, shows regular action buttons, and applies final content templates.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    var aiprompt = $("#aiprompt").kendoAIPrompt().data("kendoAIPrompt");
+    aiprompt.stopStreaming();
+    </script>
 
 ## Events
 
@@ -818,15 +1244,126 @@ The `prompt`, `output`, `history` and `isRetry` properties are available in the 
 
 ### promptResponse
 
-Triggered when the AI service response is received. The response object is available through the event argument. Triggered only when the `serviceUrl` option is set.
+Triggered when the AI service response is received. The response data is available through the event argument. Triggered only when the `serviceUrl` option is set.
 
-The `output` property is availble in the event argument.
+#### Event Data
+
+##### e.output `Object`
+
+The output object containing the AI service response data with the following properties:
+
+- `output` - The generated text content from the AI service
+- `prompt` - The original prompt text that was sent to the AI service
+- `id` - The unique identifier for the output
+- `isRetry` - Whether this is a retry operation
+- `activeView` - The index of the view to activate after adding the output
+- `isLoading` - Whether the output is in loading state
+- `isStreaming` - Whether the output is being streamed
+
+##### e.prompt `String`
+
+The original prompt text that was sent to the AI service.
+
+##### e.outputId `String`
+
+The unique identifier for the output.
+
+##### e.isRetry `Boolean`
+
+Whether this is a retry operation.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        service: "/api/llm",
+        promptResponse: function(e) {
+            console.log("AI Response received:");
+            console.log("Output object:", e.output);
+            console.log("Generated content:", e.output.output);
+            console.log("Output ID:", e.outputId);
+            console.log("Original prompt:", e.prompt);
+            console.log("Is retry:", e.isRetry);
+        }
+    });
+    </script>
 
 ### outputRatingChange
+
+> **Note:** This event is deprecated. Use the [`outputAction`](#outputaction) event instead.
 
 Triggered when the rating of an output is changed through the rate buttons of an output. The output id and the new rating are available through the event argument.
 
 ### outputCopy
 
+> **Note:** This event is deprecated. Use the [`outputAction`](#outputaction) event instead.
+
 Triggered when the copy output button of an output is clicked. The `prompt` and the `output` object are available through the event argument.
+
+### outputAction
+
+Triggered when an action button on an output card is clicked. This event is fired for both built-in and custom actions.
+
+#### Event Data
+
+##### e.command `String`
+
+The command identifier of the clicked action.
+
+##### e.outputId `String`
+
+The unique identifier of the output associated with the action.
+
+##### e.output `String`
+
+The output text content associated with the action.
+
+##### e.prompt `String`
+
+The prompt text that was used to generate the output.
+
+##### e.button `jQuery`
+
+The jQuery element of the clicked button.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        outputActions: ["copy", "retry", { command: "bookmark", icon: "bookmark" }],
+        outputAction: function(e) {
+            console.log("Action:", e.command, "Output ID:", e.outputId, "Output:", e.output, "Prompt:", e.prompt);
+
+            if (e.command === "bookmark") {
+                // Handle custom bookmark action
+                console.log("Bookmarking output with ID:", e.outputId);
+                console.log("Output content:", e.output);
+                console.log("Original prompt:", e.prompt);
+                return false; // Prevent default handling
+            }
+            // Return true or don't return to allow default handling
+        }
+    });
+    </script>
+
+### promptRequestCancel
+
+Triggered when a prompt request is cancelled, typically by clicking the stop generation button during streaming operations.
+
+#### Event Data
+
+##### e.output `Object` *(optional)*
+
+The output object being generated when the cancellation occurred.
+
+#### Example
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        promptRequestCancel: function(e) {
+            console.log("Request cancelled for output:", e.output);
+            // Abort any ongoing API requests here
+        }
+    });
+    </script>
 

@@ -55,10 +55,14 @@ import "./kendo.button.js";
             options: {
                 name: "ToggleButton",
                 group: undefined,
-                selected: false
+                selected: false,
+                toggleIcon: '',
+                applySelectedState: true,
+                applyToggleIcon: false,
             },
 
             toggle: function(toggle) {
+                let that = this;
                 if (toggle === undefined) {
                     toggle = !this._selected;
                 }
@@ -67,10 +71,33 @@ import "./kendo.button.js";
 
                 if (toggle === true) {
                     this.element.attr(ARIA_PRESSED, true);
-                    this.element.addClass(SELECTED);
+                    if (this.options.applySelectedState) {
+                        this.element.addClass(SELECTED);
+                    }
+
+                    if (this.options.applyToggleIcon && this.options.toggleIcon) {
+                        that._updateIcon(that.options.toggleIcon);
+                    }
+
                 } else if (toggle === false) {
                     this.element.attr(ARIA_PRESSED, false);
-                    this.element.removeClass(SELECTED);
+
+                    if (this.options.applySelectedState) {
+                        this.element.removeClass(SELECTED);
+                    }
+
+                    if (this.options.applyToggleIcon) {
+                        that._updateIcon(that.options.icon);
+                    }
+                }
+            },
+
+            _updateIcon: function(icon) {
+                let that = this;
+                let iconElement = that.element.find(".k-icon, .k-svg-icon");
+
+                if (iconElement.length) {
+                    kendo.ui.icon(iconElement, { icon: icon });
                 }
             },
 
