@@ -1434,6 +1434,27 @@ function pad(number, digits, end) {
     kendo.format = function(fmt) {
         var values = arguments;
 
+        // Fix for spreadsheet validation message regression: detect malformed arguments
+        // Pattern: kendo.format("Please enter a valid {0} value {1}.", "any", "greater than 10,,10,,number,reject,greaterThan")
+        // Should be: kendo.format("Please enter a valid {0} value {1}.", "number", "greater than 10")
+        if (values.length === 3 && typeof values[1] === "string" && typeof values[2] === "string" &&
+            values[2].indexOf(",,") > -1) {
+
+            // Split the malformed second argument
+            var parts = values[2].split(",");
+            if (parts.length >= 5) {
+                // Check if this looks like the validation message pattern
+                var criteriaType = parts[4]; // Should be "number", "text", "date", etc.
+                var comparerMessage = parts[0]; // Should be the comparer message
+
+                // Only apply fix if criteriaType is a known validation type
+                if (criteriaType === "number" || criteriaType === "text" || criteriaType === "date" ||
+                    criteriaType === "custom" || criteriaType === "list") {
+                    values = [fmt, criteriaType, comparerMessage];
+                }
+            }
+        }
+
         return fmt.replace(formatRegExp, function(match, index, placeholderFormat) {
             var value = values[parseInt(index, 10) + 1];
 
