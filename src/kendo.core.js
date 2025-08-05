@@ -1444,12 +1444,20 @@ function pad(number, digits, end) {
             var parts = values[2].split(",");
             if (parts.length >= 5) {
                 // Check if this looks like the validation message pattern
-                var criteriaType = parts[4]; // Should be "number", "text", "date", etc.
+                // Find the criteria type by looking for known validation types
+                var criteriaType = null;
                 var comparerMessage = parts[0]; // Should be the comparer message
-
-                // Only apply fix if criteriaType is a known validation type
-                if (criteriaType === "number" || criteriaType === "text" || criteriaType === "date" ||
-                    criteriaType === "custom" || criteriaType === "list") {
+                
+                var validationTypes = ["number", "text", "date", "custom", "list"];
+                for (var i = 0; i < parts.length; i++) {
+                    if (validationTypes.indexOf(parts[i]) > -1) {
+                        criteriaType = parts[i];
+                        break;
+                    }
+                }
+                
+                // Only apply fix if we found a valid criteria type
+                if (criteriaType) {
                     values = [fmt, criteriaType, comparerMessage];
                 }
             }
