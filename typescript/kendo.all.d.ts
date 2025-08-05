@@ -13115,6 +13115,121 @@ declare namespace kendo.ui {
     interface OTPInputChangeEvent extends OTPInputEvent {
     }
 
+    class InlineAIPrompt extends kendo.ui.Widget {
+
+       static fn: InlineAIPrompt;
+
+       options: InlineAIPromptOptions;
+
+       element: JQuery;
+       wrapper: JQuery;
+
+       static extend(proto: Object): InlineAIPrompt;
+
+       constructor(element: Element, options?: InlineAIPromptOptions);
+
+       close(): void;
+       destroy(): void;
+       enable(enable: boolean): void;
+       focus(): void;
+       open(): void;
+       open(x: number, y: number): void;
+       readonly(readonly: boolean): void;
+       setOptions(options: InlineAIPromptOptions): void;
+       startStreaming(): void;
+       stopStreaming(): void;
+       updatePromptOutputContent(content: string): void;
+       value(): string;
+       value(value: string): void;
+    }
+
+    interface InlineAIPromptMessages {
+        promptSend?: string | undefined;
+        stopOutputRetrieval?: string | undefined;
+        commandsMenu?: string | undefined;
+        retryOutputAction?: string | undefined;
+        copyOutputAction?: string | undefined;
+        discardOutputAction?: string | undefined;
+    }
+
+    interface InlineAIPromptCommand {
+        id?: string | undefined;
+        text?: string | undefined;
+        icon?: string | Function | undefined;
+        prompt?: Function | undefined;
+        items?: InlineAIPromptCommand[] | undefined;
+    }
+
+    interface InlineAIPromptServiceOptions {
+        url?: string | undefined;
+        headers?: any | undefined;
+        data?: any | Function | undefined;
+        outputGetter?: Function | undefined;
+    }
+
+    interface InlineAIPromptOutputAction {
+        command?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        themeColor?: string | undefined;
+        title?: string | undefined;
+    }
+
+    interface InlineAIPromptOptions {
+        name?: string | undefined;
+        enable?: boolean | undefined;
+        readonly?: boolean | undefined;
+        placeholder?: string | undefined;
+        messages?: InlineAIPromptMessages | undefined;
+        speechToText?: boolean | SpeechToTextButtonOptions | undefined;
+        service?: string | InlineAIPromptServiceOptions | undefined;
+        isStreaming?: boolean | undefined;
+        systemPrompt?: Function | undefined;
+        outputActions?: string[] | InlineAIPromptOutputAction[] | (string | InlineAIPromptOutputAction)[] | undefined;
+        commands?: InlineAIPromptCommand[] | undefined;
+        responseTemplate?: string | Function | undefined;
+        popup?: InlineAIPromptPopup | undefined;
+        commandExecute?(e: InlineAIPromptCommandExecuteEvent): void;
+        outputAction?(e: InlineAIPromptOutputActionEvent): void;
+        promptRequest?(e: InlineAIPromptPromptRequestEvent): void;
+        promptRequestCancel?(e: InlineAIPromptEvent): void;
+        promptResponse?(e: InlineAIPromptPromptResponseEvent): void;
+        show?(e: InlineAIPromptEvent): void;
+        hide?(e: InlineAIPromptEvent): void;
+    }
+
+    interface InlineAIPromptPopup {
+        width?: number | string | undefined;
+        height?: number | string | undefined;
+        animation?: boolean | PopupAnimation | undefined;
+        appendTo?: string | JQuery | undefined;
+    }
+    interface InlineAIPromptEvent {
+        sender: InlineAIPrompt;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface InlineAIPromptCommandExecuteEvent extends InlineAIPromptEvent {
+        query?: string | undefined;
+        selection?: string | undefined;
+    }
+
+    interface InlineAIPromptOutputActionEvent extends InlineAIPromptEvent {
+        action?: string | undefined;
+        content?: string | undefined;
+    }
+
+    interface InlineAIPromptPromptRequestEvent extends InlineAIPromptEvent {
+        prompt?: string | undefined;
+    }
+
+    interface InlineAIPromptPromptResponseEvent extends InlineAIPromptEvent {
+        response?: any | undefined;
+    }
+
     class TimePicker extends kendo.ui.Widget {
 
         static fn: TimePicker;

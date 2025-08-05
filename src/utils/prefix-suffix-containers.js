@@ -19,6 +19,10 @@ export function addInputPrefixSuffixContainers({ widget, wrapper, options, prefi
         prefixContainer = wrapper.children(".k-input-prefix");
 
         if (!prefixContainer[0]) {
+            if (options._isInInlineAIPrompt) {
+                containerOrientation = layoutFlow || "horizontal";
+            }
+
             prefixContainer = $(`<span class="k-input-prefix k-input-prefix-${containerOrientation}" />`);
             if (prefixInsertBefore) {
                 prefixContainer.insertBefore(prefixInsertBefore);
