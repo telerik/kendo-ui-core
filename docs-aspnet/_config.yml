@@ -763,6 +763,9 @@ navigation:
         isNew: true
      "*switch":
         title: "Switch"
+     "*speechtotextbutton":
+         title: "SpeechToTextButton"
+         isNew: true
      "*splitbutton":
         title: "SplitButton"
      "*/dropdownbutton":
@@ -1246,6 +1249,11 @@ defaults:
         path: "html-helpers/navigation/floatingactionbutton"
     values:
         title_prefix: "ASP.NET Core FloatingActionButton Component"
+-
+    scope:
+        path: "html-helpers/navigation/speechtotextbutton"
+    values:
+        title_prefix: "ASP.NET Core SpeechToTextButton Component"
 -
     scope:
         path: "html-helpers/navigation/splitbutton"

@@ -65,10 +65,10 @@ However, adding the scripts without `type="module"` is also not an option becaus
 Apply any of the following approaches when using {{ site.product }} PDFViewer (version 2024.4.1112 or later):
 
 - [Using RenderAsModule option for module-based script initialization](#using-renderasmodule-for-module-based-script-initialization)
-- [Loading Kendo UI scripts twice](#loading-kendo-ui-scripts-twice)
 - [Loading the PDFViewer through a partial View](#loading-pdfviewer-through-a-partial-view)
 - [Using `kendo.aspnetmvc.ready.min.js` script](#using-kendoaspnetmvcreadyminjs-script)
 - [Compiling the PDF.js scripts to UMD modules](#compiling-pdfjs-scripts-to-umd-modules)
+- [Loading Kendo UI scripts twice](#loading-kendo-ui-scripts-twice)
 
 ### Using RenderAsModule for Module-Based Script Initialization
 
@@ -122,57 +122,6 @@ Also, it is important to ensure that `type="module"` is added to all script tags
             console.log(pdfviewer);
         })
     </script>
-```
-{% endif %}
-
-### Loading Kendo UI Scripts Twice
-
-Another workaround is to include the Kendo UI scripts twice—with and without `type="module"`:
-
-```HtmlHelper
-    <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <!-- Add the Kendo UI scripts in standard fashion. -->
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js"></script>
-
-    <!-- Add the "pdf.mjs" and "pdf.worker.mjs" module scripts. -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
-
-    <!-- Add the Kendo UI script as a module afterwards -->
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-
-    @(Html.Kendo().PDFViewer().Name("pdfviewer")
-        .PdfjsProcessing(pdf => pdf.File(@Url.Content("../sample.pdf")))
-            .Height(1200)
-        )
-    @(Html.Kendo().DateTimePicker().Name("picker"))
-```
-{% if site.core %}
-```TagHelper
-    <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <!-- Add the Kendo UI scripts in standard fashion. -->
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js"></script>
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js"></script>
-
-    <!-- Add the "pdf.mjs" and "pdf.worker.mjs" module scripts. -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
-
-    <!-- Add the Kendo UI script as a module afterwards -->
-    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
-
-    <kendo-pdfviewer name="pdfviewer" height="1200">
-        <pdfjs-processing file-url="@Url.Content("../sample.pdf")" />
-    </kendo-pdfviewer>
-
-    <kendo-datetimepicker name="picker"/>
 ```
 {% endif %}
 
@@ -246,6 +195,57 @@ To avoid enabling the `RenderAsModule` option, you can include the `kendo.aspnet
 ### Compiling PDF.js Scripts to UMD Modules
 
 Theoretically, you can download the PDF.js scripts and use a JS bundler tool like [webpack](https://webpack.js.org/) to compile them to UMD modules.
+
+### Loading Kendo UI Scripts Twice
+
+Another workaround is to include the Kendo UI scripts twice—with and without `type="module"`:
+
+```HtmlHelper
+    <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Add the Kendo UI scripts in standard fashion. -->
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js"></script>
+
+    <!-- Add the "pdf.mjs" and "pdf.worker.mjs" module scripts. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+
+    <!-- Add the Kendo UI script as a module afterwards -->
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+
+    @(Html.Kendo().PDFViewer().Name("pdfviewer")
+        .PdfjsProcessing(pdf => pdf.File(@Url.Content("../sample.pdf")))
+            .Height(1200)
+        )
+    @(Html.Kendo().DateTimePicker().Name("picker"))
+```
+{% if site.core %}
+```TagHelper
+    <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-ocean-blue.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Add the Kendo UI scripts in standard fashion. -->
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.aspnetmvc.min.js"></script>
+
+    <!-- Add the "pdf.mjs" and "pdf.worker.mjs" module scripts. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
+
+    <!-- Add the Kendo UI script as a module afterwards -->
+    <script src="https://cdn.kendostatic.com/2024.4.1112/js/kendo.all.min.js" type="module"></script>
+
+    <kendo-pdfviewer name="pdfviewer" height="1200">
+        <pdfjs-processing file-url="@Url.Content("../sample.pdf")" />
+    </kendo-pdfviewer>
+
+    <kendo-datetimepicker name="picker"/>
+```
+{% endif %}
 
 ## More {{ site.framework }} PDFViewer Resources
 

@@ -267,6 +267,8 @@ meta:
     position: 50
   "*/dropdownbutton":
     title: DropDownButton
+  "*speechtotextbutton":
+    title: SpeechToTextButton
   "*splitbutton":
     title: SplitButton
   "*switch":

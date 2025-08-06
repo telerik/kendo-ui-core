@@ -618,7 +618,7 @@ Prepares the prompt animation for streaming.
 
 Stops the prompt animation for streaming.
 
-### updatePromptOutputContent()
+### updatePromptOutputContent
 
 Updates the prompt output content.
 

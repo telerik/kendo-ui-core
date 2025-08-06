@@ -165,10 +165,12 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
          <IntroTableAnchor title="FloatingActionButton" href="slug:htmlhelpers_floatingactionbutton_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Menu" href="slug:htmlhelpers_menu_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="PanelBar" href="slug:htmlhelpers_panelbar_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="SpeechToTextButton" href="slug:htmlhelpers_overview_speechtotextbutton"></IntroTableAnchor>
          <IntroTableAnchor title="SplitButton" href="slug:htmlhelpers_splitbutton_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Stepper" href="slug:htmlhelpers_stepper_aspnetcore_overview"></IntroTableAnchor>
          <IntroTableAnchor title="TabStrip" href="slug:htmlhelpers_tabstrip_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Timeline" href="slug:overview_htmlhelpers_timeline_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="ToggleButton" href="slug:htmlhelpers_togglebutton_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="ToolBar" href="slug:htmlhelpers_toolbar_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="TreeView" href="slug:htmlhelpers_treeview_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Wizard" href="slug:htmlhelpers_wizard_aspnetcore_overview"></IntroTableAnchor>

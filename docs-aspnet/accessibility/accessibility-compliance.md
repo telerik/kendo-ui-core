@@ -110,6 +110,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 | SkeletonContainer | AAA | N/A | N/A |
 | Slider | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/slider) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/slider/accessibility/overview) |
 | Sortable | AA | N/A | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/interactivity/sortable/accessibility/overview) |
+| SpeechToTextButton | AAA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/speechtotextbutton) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/speechtotextbutton/accessibility/overview) |
 | SplitButton | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/splitbutton) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/splitbutton/accessibility/overview) |
 | Splitter | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/splitter) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/splitter/accessibility/overview) |
 | Spreadsheet | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/spreadsheet) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/spreadsheet/accessibility/overview) |
