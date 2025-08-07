@@ -15,6 +15,19 @@ As the SpeechToTextButton inherits from the Kendo UI Button, it supports the com
 
 ## Configuration
 
+### enable `Boolean` *(default: true)*
+
+Indicates whether the button must be enabled or disabled. By default, it is enabled, unless a `disabled="disabled"` attribute is detected.
+
+#### Example
+
+    <button id="speechButton"></button>
+    <script>
+    $("#speechButton").kendoSpeechToTextButton({
+        enable: false
+    });
+    </script>
+
 ### integrationMode `String` *(default: "webSpeech")*
 Specifies which speech recognition engine or integration the component should use.
 - `webSpeech` - Utilizes the browser's native Web Speech API.
