@@ -2213,21 +2213,21 @@ export const __meta__ = {
             const that = this;
             const service = options.service;
             const isRetry = options.isRetry;
-            const history = options.history;
+            const history = options.history || [];
             const prompt = options.prompt;
 
             let defaultData = [
+                ...history,
                 {
-                    role: {
-                        value: that.messageTypes.user
-                    },
-                    text: prompt
+                    role: that.messageTypes.user,
+                    contents: [
+                        {
+                            $type: "text",
+                            text: prompt
+                        }
+                    ]
                 }
             ];
-
-            if (history?.length) {
-                defaultData = history.concat(defaultData);
-            }
 
             if (service?.data && isFunction(service?.data)) {
                 return service.data(prompt, isRetry, history);
@@ -2241,7 +2241,7 @@ export const __meta__ = {
         },
 
         _getResponseData: function(response) {
-            return response?.Message?.Text || "An error occurred while processing the request.";
+            return response?.messages?.[0]?.contents?.[0]?.text || "An error occurred while processing the request.";
         },
     });
 

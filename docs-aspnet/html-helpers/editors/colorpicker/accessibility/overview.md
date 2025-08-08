@@ -47,6 +47,18 @@ The ColorPicker popup contains in itself ColorGradient, ColorPalette, a UI to sw
 |  | `aria-label=undefined` | The ColorGradient element must have its `aria-label` attribute removed. |
 |  | `tabindex=-1/undefined` | The ColorGradient must be removed from the page tab sequence. |
 
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-colorgradient` | `role=none/undefined` | The ColorGradient element must have its role removed. |
+|  | `aria-label=undefined` | The ColorGradient element must have its `aria-label` attribute removed. |
+
 ## Section 508
 
 

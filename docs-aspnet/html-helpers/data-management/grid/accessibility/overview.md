@@ -137,6 +137,15 @@ Implements the ColumnMenu specification.
 | `.k-grid-header-wrap .k-grid-header-table .k-table-row` | `role=presentation/none` | When there are locked columns, the rows from the non-locked header table should have their default semantic role removed, as their children are owned by the corresponding row from the locked table. |
 | `.k-grid-content .k-grid-table .k-table-row` | `role=presentation/none` | When there are locked columns, the rows from the non-locked content table should have their default semantic role removed, as their children are owned by the corresponding row from the locked table. |
 
+#### Grid popup editor
+
+
+The popup editor consists of a Window component containing a Form component.
+
+[Window accessibility specification]({% slug htmlhelpers_window_accessibility %})
+
+[Form accessibility specification]({% slug htmlhelpers_form_accessibility %})
+
 #### Grid footer
 
 
@@ -165,6 +174,15 @@ The selection aggregates are placed within a `.k-grid-selection-aggregates` elem
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-grid-selection-aggregates` | `aria-live=polite` | Ensures that changes in the calculated selection aggregates are announced by assistive technologies. |
+
+### Data Grid Stacked Layout
+
+
+The element is a regular Grid cell (td element) that holds a stacked layout content representing all available column headers and content for the given row. All internal "stacked cell" elements become focusable when focus is moved within the cell.
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-grid-stack-cell` | `tabindex=0` | "Stacked cell" elements receive tabindex '0' when focus is within their parent '.k-grid-stack-row' element. This allows the end user to navigate through the content using Tab. The tabindex attribute is removed when focus leaves the '.k-grid-stack-row' element. |
 
 ## Resources
 

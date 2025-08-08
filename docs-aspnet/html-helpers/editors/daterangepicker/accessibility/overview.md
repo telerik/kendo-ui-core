@@ -46,6 +46,13 @@ The Calendars in the Popup element of the component should implement the specifi
 
 [Calendar accessibility specification]({% slug htmlhelpers_calendar_accessibility %})
 
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
+
 ## Resources
 
 [WAI ARIA specification for combobox](https://www.w3.org/TR/wai-aria-1.2/#combobox)

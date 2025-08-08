@@ -68,6 +68,13 @@ Time Popup implementation should follow the specification for the TimePicker com
 
 [TimePicker accessibility specification]({% slug jquery_timepicker_accessibility %})
 
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug jquery_actionsheet_accessibility %})
+
 ## Resources
 
 [WAI ARIA specification for combobox](https://www.w3.org/TR/wai-aria-1.2/#combobox)

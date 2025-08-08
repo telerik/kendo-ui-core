@@ -65,6 +65,13 @@ The tree that is placed in the `popup` element of the component must implement t
 
 [TreeView accessibility specification]({% slug jquery_treeview_accessibility %})
 
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug jquery_actionsheet_accessibility %})
+
 ## Resources
 
 [WAI-ARIA Authoring Practices: TreeView Example](https://www.w3.org/WAI/ARIA/apg/example-index/treeview/treeview-navigation)

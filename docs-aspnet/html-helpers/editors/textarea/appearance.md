@@ -181,6 +181,9 @@ The option is applied to the wrapping span element through the `k-resize-none` c
 
 The following values are available for the `Resize` option:
 
+> **Important**: The `Auto` option can be used only with the `MaxRow()` configuration.
+
+- `Auto`
 - `Both`
 - `Horizontal`
 - `Vertical`

@@ -73,7 +73,17 @@ describe('AiTransport tests', () => {
 
         instance.options.success = successSpy;
 
-        const response = { Message: { Text: 'default-output' } };
+        const response = {
+            messages: [
+                {
+                    contents: [
+                        {
+                            text: "default-output"
+                        }
+                    ]
+                }
+            ]
+        };
         const opts = { prompt: 'default test', isRetry: true };
 
         instance.success(response, opts);
@@ -143,8 +153,13 @@ describe('AiTransport tests', () => {
 
         expect(data).toEqual([
             {
-                role: { value: instance.messageTypes.user },
-                text: prompt
+                role: instance.messageTypes.user,
+                contents: [
+                    {
+                        $type: "text",
+                        text: prompt
+                    }
+                ]
             }
         ]);
     });
@@ -152,14 +167,21 @@ describe('AiTransport tests', () => {
     it('should prepend history to the messages array if provided', () => {
         const prompt = 'new message';
         const history = [
-            { role: { value: 'system' }, text: 'old message' }
+            {
+                role: 'system', contents: [
+                    {
+                        $type: "text",
+                        text: 'old message'
+                    }
+                ]
+            }
         ];
         const opts = { prompt, history };
         const data = instance.getData(opts);
 
         expect(data).toEqual([
-            { role: { value: 'system' }, text: 'old message' },
-            { role: { value: instance.messageTypes.user }, text: prompt }
+            { role: 'system', contents: [ { $type: "text", text: 'old message' } ] },
+            { role: instance.messageTypes.user, contents: [ { $type: "text", text: prompt } ] }
         ]);
     });
 
@@ -177,8 +199,13 @@ describe('AiTransport tests', () => {
             foo: 'bar',
             messages: [
                 {
-                    role: { value: instance.messageTypes.user },
-                    text: prompt
+                    role: instance.messageTypes.user,
+                    contents: [
+                        {
+                            $type: "text",
+                            text: prompt
+                        }
+                    ]
                 }
             ]
         });
@@ -204,13 +231,13 @@ describe('AiTransport tests', () => {
         expect(data).toBe('function result');
     });
 
-    it('should return Message.Text if present', () => {
-        const response = { Message: { Text: 'response text' } };
+    it('should return messages.contents.text if present', () => {
+        const response = { messages: [{ contents: [{ text: 'response text' }] }] };
 
         expect(instance._getResponseData(response)).toBe('response text');
     });
 
-    it('should return a default error message if Message.Text is missing', () => {
+    it('should return a default error message if messages.contents.text is missing', () => {
         const response = {};
 
         expect(instance._getResponseData(response)).toBe('An error occurred while processing the request.');
