@@ -58,7 +58,6 @@ The following example demonstrates how to specify the `Output` view as active wh
     @(Html.Kendo().AIPrompt()
         .Name("aiprompt")
         .ActiveView(1)
-        .ShowOutputRating(false)
         .Views(views =>
         {
             views.Add().Type(ViewType.Prompt);
@@ -70,7 +69,7 @@ The following example demonstrates how to specify the `Output` view as active wh
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    <kendo-aiprompt name="aiprompt" active-view="1" show-output-rating="false">
+    <kendo-aiprompt name="aiprompt" active-view="1">
         <aiprompt-views>
             <aiprompt-view type="ViewType.Prompt"></aiprompt-view>
             <aiprompt-view type="ViewType.Output"></aiprompt-view>

@@ -159,32 +159,13 @@ export const __meta__ = {
 
             if (options.numeric) {
                 if (!that.element.find(".k-pager-input").length) {
-                    that._numericWrap.append('<span class="k-pager-input">' +
-                     '<span>' + encode(options.messages.page) + '</span>' +
-                    `<input aria-label='${that.options.messages.page}'/>` +
-                    '<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>' +
-                    '</span>');
-
-                    that._numericTextBox = that._numericWrap.find(".k-pager-input input").kendoNumericTextBox({
-                        spinners: false,
-                        size: options.size,
-                        min: 1,
-                        format: "n0",
-                        change: function(e) {
-                            let page = this.value();
-
-                            if (page < 1 || page > that.totalPages()) {
-                                page = that.page();
-                            }
-
-                            setTimeout(function() {
-                                that.page(page);
-                            },100);
-                        }
-                    }).data("kendoNumericTextBox");
-                    that._numericTextBox.element.on("focus" + NS, () => that._restoreTabIndexes());
-                    that._numericTextBox.wrapper.find(".k-input-spinner").remove();
-                    that._pagerInputWrap = that.element.find(".k-pager-input");
+                    let pagerInput = that._decoratePagerInput($("<span class='k-pager-input'></span>"), totalPages);
+                    that._numericWrap.append(pagerInput);
+                    that._initNumericInputTextBox();
+                }
+                else {
+                    that._decoratePagerInput(that.element.find(".k-pager-input"), totalPages);
+                    that._initNumericInputTextBox();
                 }
                 if (!options.input) {
                     if (!that.list) {
@@ -282,6 +263,43 @@ export const __meta__ = {
             that.resize();
 
             kendo.notify(that);
+        },
+
+        _initNumericInputTextBox: function() {
+            let that = this,
+                options = that.options;
+
+             that._numericTextBox = that._numericWrap.find(".k-pager-input input").kendoNumericTextBox({
+                        spinners: false,
+                        size: options.size,
+                        min: 1,
+                        format: "n0",
+                        change: function(e) {
+                            let page = this.value();
+
+                            if (page < 1 || page > that.totalPages()) {
+                                page = that.page();
+                            }
+
+                            setTimeout(function() {
+                                that.page(page);
+                            },100);
+                        }
+                    }).data("kendoNumericTextBox");
+                    that._numericTextBox.element.on("focus" + NS, () => that._restoreTabIndexes());
+                    that._numericTextBox.wrapper.find(".k-input-spinner").remove();
+                    that._pagerInputWrap = that.element.find(".k-pager-input");
+        },
+
+        _decoratePagerInput: function(pagerInputWrap, totalPages) {
+            let that = this,
+                options = that.options;
+
+            $(pagerInputWrap).append('<span>' + encode(options.messages.page) + '</span>' +
+                    `<input aria-label='${that.options.messages.page}'/>` +
+                    '<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>');
+
+            return pagerInputWrap;
         },
 
         destroy: function() {

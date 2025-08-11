@@ -274,6 +274,8 @@ An array of action configurations for the output cards. Can contain strings for 
 - `"copy"` - Copy output content to clipboard
 - `"retry"` - Retry generating the output
 - `"rating"` - Expands to both positive and negative rating buttons
+- `"ratingPositive"` - Renders the positive rating button
+- `"ratingNegative"` - Renders the negative rating button
 - `"spacer"` - Adds spacing between action buttons
 
 Custom actions trigger the `outputAction` event with the action command and output data.
@@ -429,7 +431,7 @@ Specifies the type of the action. Available options: `"button"`, `"spacer"`. Def
     });
     </script>
 
-### outputTemplate `Function`
+### outputTemplate `String | Function`
 
 A template function for customizing the display of output content. This function is called when an output has finished streaming and final content needs to be rendered.
 
@@ -633,6 +635,7 @@ Controls whether the subtitle of the card in the output view displays a tooltip 
 ### showOutputRating `Boolean` *(default: true)*
 
 Specifies if the output rating should be displayed on the output card.
+> **Note:** This property is deprecated. Use the `outputActions` configuration instead.
 
 #### Example
     <div id="aiprompt"></div>

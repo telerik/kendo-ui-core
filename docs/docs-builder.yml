@@ -27,7 +27,7 @@ liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
   cdnVersion: "2025.3.812"
-  themesCdnVersion: "11.3.0"
+  themesCdnVersion: "11.3.2"
 
 markdown-replacements:
 # TODO:REPLACE WITH SLUGS
@@ -42,7 +42,7 @@ default-code-block-language: js
 kendo-api-path: ./api
 dojo-scripts:
   kendoCdnVersion: 2025.3.812
-  themesCdnVersion: 11.3.0
+  themesCdnVersion: 11.3.2
   pdfJsVersion: 4.6.82
   jQueryVersion: 3.4.1
 

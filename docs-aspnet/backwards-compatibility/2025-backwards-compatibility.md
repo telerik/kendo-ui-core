@@ -16,6 +16,14 @@ This article lists the breaking or important changes in the 2025 releases of {{ 
 
 The ActionSheet's action buttons now accept enums for the `FillMode`, `Rounded`, `ThemeColor`, `Size` properties instead of strings. The `ActionSheetItem.Group` property now accepts the `ActionSheetItemGroup` enum instead of a string.
 
+### AIPrompt
+
+* The `ShowOutputRating()` option of the AIPrompt HtmlHelper {% if site.core %} and `show-output-rating` attribute of AIPrompt TagHelper{% endif %} is deprecated. Use [`OutputActions()`](/api/kendo.mvc.ui.fluent/aipromptbuilder#outputactionsactionaipromptoutputactionfactory) configuration option that is more flexible.
+
+* The `outputRatingChange` event is deprecated. Use `outputAction` instead.
+
+* The `outputCopy` event is deprecated. Use `outputAction` event instead.
+
 {% if site.core %}
 ### TabStrip
 

@@ -738,11 +738,16 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "sortDesc": "Sort Descending",
     "moveGroupPrevious": "Move previous",
     "moveGroupNext": "Move next",
+    "selectall": "Select all",
   },
   "editable": {
     "cancelDelete": "Cancel",
     "confirmation": "Are you sure you want to delete this record?",
     "confirmDelete": "Delete"
+  },
+  "details": {
+    "expand": "Expand",
+    "collapse": "Collapse"
   },
   "noRecords": "No records available.",
   "expandCollapseColumnHeader": "",

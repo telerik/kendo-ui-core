@@ -615,7 +615,7 @@ baseurl: /kendo-ui
 cdnVersion: "2025.3.812"
 
 ## The themes CDN used
-themesCdnVersion: "11.3.0"
+themesCdnVersion: "11.3.2"
 
 ## The Pdfjs CDN version used
 pdfjsCdnVersion: "4.6.82"

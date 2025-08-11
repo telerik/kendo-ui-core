@@ -31,7 +31,7 @@ liquid:
   framework: "ASP.NET MVC"
   framework_short: "MVC"
   cdnVersion: "2025.3.812"
-  themesCdnVersion: "11.3.0"
+  themesCdnVersion: "11.3.2"
   mvcCoreVersion: "2025.3.812"
   platform: aspnet-mvc
   core: false

@@ -28,8 +28,11 @@ The {{ site.product }} editors support the following `DataAnnotation` attributes
 - `Required`
 - `StringLength`
 - `UrlAttribute`
+- `ReadOnly`
 
 The `HTML5` <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*" target="_blank">`data-*` attributes</a> are generated in the HTML markup of each editor component based on the `DataAnnotation` attributes applied to the Model properties. To enable the client-side validation, the <a href="https://docs.telerik.com/kendo-ui/controls/validator/overview" target="_blank">Kendo UI for jQuery Validator</a> must be activated on the form that contains the editor components. The Validator automatically creates <a href="https://docs.telerik.com/kendo-ui/controls/validator/rules" target="_blank">validation rules</a> based on the unobtrusive HTML attributes. Also, the Validator creates rules for the unobtrusive attributes that are generated implicitly by {{ site.framework }} for numbers and dates.
+
+>The `ReadOnly` attribute will not generate a `data-*` attribute or create an internal validator rule, but the respective DOM input element will contain a [`readonly` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/readonly).
 
 The following example demonstrates how to enable the Kendo UI Validator to perform client-side validation based on the applied `DataAnnotation` attributes.
 
@@ -58,6 +61,9 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
             [Required]
             [Display(Name = "Order Date")]
             public DateTime? OrderDate { get; set; }
+
+            [ReadOnly(true)]
+            public string ShipCountry { get; set; }
         }
     ```
 

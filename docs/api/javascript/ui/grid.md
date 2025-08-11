@@ -8176,6 +8176,176 @@ Defines the text of the "ColumnChooser" button.
     });
     </script>
 
+### messages.commands.selectall `String`
+
+Defines the text of the label of the "SelectAll" checkbox.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      dataLayoutMode: "stacked",
+      columns: [
+        { selectable: true },
+        { field: "name" },
+        { field: "age" },
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: ["selectAll"],
+      messages: {
+        commands: {
+          selectall: "Check All"
+        }
+      }
+    });
+    </script>
+
+### messages.details `Object`
+
+Defines the text of the detail expand and collapse buttons that are shown within the Grid with `stacked` layout and `detailTemplate` initialized.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols:[100, 200],
+        },
+        detailTemplate: ({ name, age }) => `<div>Name: ${name}</div><div>Age: ${age}</div>`,
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        messages: {
+          details: {
+            expand: "Open",
+            collapse: "Close"
+          }
+        }
+      });
+    </script>
+
+### messages.details.expand `String`
+
+Defines the text of the detail expand button that are shown within the Grid with `stacked` layout and `detailTemplate` initialized.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols:[100, 200],
+        },
+        detailTemplate: ({ name, age }) => `<div>Name: ${name}</div><div>Age: ${age}</div>`,
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        messages: {
+          details: {
+            expand: "Open",
+          }
+        }
+      });
+    </script>
+
+### messages.details.collapse `String`
+
+Defines the text of the detail collapse button that are shown within the Grid with `stacked` layout and `detailTemplate` initialized.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols:[100, 200],
+        },
+        detailTemplate: ({ name, age }) => `<div>Name: ${name}</div><div>Age: ${age}</div>`,
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        messages: {
+          details: {
+            collapse: "Close",
+          }
+        }
+      });
+    </script>
+
+### messages.commands.cancel `String`
+
+Defines the text of the "Cancel Changes" button located in the toolbar of the widget.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: ["create", "save", "cancel"],
+      messages: {
+        commands: {
+          cancel: "Cancel changes"
+        }
+      }
+    });
+    </script>
+
 ### messages.noRecords `String`
 
 Defines the text of the "noRecords" option that is rendered when no records are available in current view. The "noRecords" options should be set to `true`.
@@ -10626,6 +10796,176 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
     });
     </script>
 
+
+### dataLayoutMode `String`
+
+Sets the Grid's data layout. Possible values are: `stacked`, `columns`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        dataLayoutMode: "stacked",
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+      });
+    </script>
+
+### stackedLayoutSettings `Object`
+
+The `stacked` layout settings of the Grid.
+
+### stackedLayoutSettings.cols `Number|Array`
+
+Sets the amount of columns in which the `stacked` cells will be displayed.
+If set as `array`, the size of the array represents the number of columns, and the values represent the column widths. Possible values are: `string`, `number`, and `object`.
+
+#### Example - cols set as number
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols: 2
+        }
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        selectable: {
+          mode: "cell",
+          cellAggregates: true
+        },
+        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+      });
+    </script>
+
+#### Example - cols set as array of strings
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols: ["1fr", "20px"]
+        }
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        selectable: {
+          mode: "cell",
+          cellAggregates: true
+        },
+        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+      });
+    </script>
+
+#### Example - cols set as array of numbers
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols: [100, 400]
+        }
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        selectable: {
+          mode: "cell",
+          cellAggregates: true
+        },
+        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+      });
+    </script>
+
+#### Example - cols set as array of objects
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataLayoutMode: "stacked",
+        stackedLayoutSettings: {
+          cols: [
+            { width: 700 },
+            { width: 300 }
+          ]
+        }
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        selectable: {
+          mode: "cell",
+          cellAggregates: true
+        },
+        statusBarTemplate: ({ aggregates }) => `${aggregates.count}`
+      });
+    </script>
+
+
 ### statusBarTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the Status Bar/Aggregates Bar.
@@ -10692,6 +11032,8 @@ The "sort" command enables the user to use the sorting functionallity of the gri
 The "filter" command enables the user to use the filtering functionallity of the grid.
 
 The "columnChooser" command enables the user to change the visibillity of the grid's columns.
+
+The "selectAll" command enables the user to select all rows if the grid is `selectable`. Requires enabled checkbox selection and multiple row selection.
 
 * If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
   * `items` - an array of commands as explained above
@@ -10872,6 +11214,8 @@ An array collection of items to be rendered in the toolbar. Each item will be tr
 - The "group" command enables the user to use the grouping functionallity of the grid.
 
 - The "columnChooser" command enables the user to change the visibillity of the grid's columns.
+
+- The "selectAll" command enables the user to select all rows if the grid is `selectable`.
 
 ### toolbar.items.iconClass `String`
 

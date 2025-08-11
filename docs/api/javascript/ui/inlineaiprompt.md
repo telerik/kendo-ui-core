@@ -40,6 +40,29 @@ Specifies whether the underlying TextArea widget will be readonly or not.
     });
     </script>
 
+### encodedPromptOutputs `Boolean` *(default: true)*
+
+Specifies whether the prompt outputs are HTML-encoded before being displayed in the output view. When set to true (default), the output is encoded and displayed as plain text, preventing any HTML formatting or scripts from being rendered.
+
+> **Important**: When set to `false`, the output is rendered as raw HTML, allowing for custom formatting (such as rendering markdown as HTML). If you set this to false, you **must ensure that the output is properly sanitized to prevent XSS attacks**.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        encodedPromptOutputs: false,
+        promptResponse: function(e) {
+            // Convert markdown to HTML
+            let htmlOutput = markdown.toHTML(e.response.output, "Maruku");
+            // Sanitize the HTML output
+            if (window.DOMPurify) {
+                e.response.output = DOMPurify.sanitize(htmlOutput, { USE_PROFILES: { html: true } });
+            }
+        }
+    });
+    </script>
+
 ### placeholder `String` *(default: "")*
 
 Specifies the placeholder text for the underlying TextArea widget.
@@ -257,6 +280,32 @@ Specifies whether to return interim results during speech recognition.
 ### speechToText.maxAlternatives `Number` *(default: 1)*
 
 Specifies the maximum number of alternatives to return from speech recognition.
+
+### responseTemplate `String | Function`
+
+A template function for customizing the display of output content. This function is called when an output's and final content needs to be rendered.
+
+The function receives an object with `output` (the output data) and `prompt` (the output prompt text) properties and should return HTML string.
+
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+           responseTemplate: function(response) {
+                return `
+                    <p>Prompt:</p>
+                    <br/>
+                    <br/>
+                    <p>${response.prompt}</p>
+                    <br/>
+                    <br/>
+                    <p><strong>Output:</strong></p>
+                    <br/>
+                    <br/>
+                    <p><strong>${response.output}</strong></p>
+                `
+           },
+    })
+    </script>
+
+
 
 ### isStreaming `Boolean` *(default: false)*
 
@@ -550,6 +599,10 @@ Specifies the title attribute (tooltip) for the action button.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the prompt send and stop output retrieval buttons.
+
 ### messages.promptSend `String` *(default: "Prompt Send")*
 
 The text of the prompt send button that will be used to as aria labels.
@@ -557,6 +610,22 @@ The text of the prompt send button that will be used to as aria labels.
 ### messages.stopOutputRetrieval `String` *(default: "Stop Output Retrieval")*
 
 The text of the stop output retrieval button that will be used to as aria labels.
+
+### messages.commandsMenu `String` *(default: "Commands Menu")*
+
+The text of the prompt context menu that will render the commands.
+
+### messages.retryOutputAction `String` *(default: "Retry")*
+
+The text of the default retry output command.
+
+### messages.copyOutputAction `String` *(default: "Copy")*
+
+The text of the default copy output command.
+
+### messages.discardOutputAction `String` *(default: "Discard")*
+
+The text of the default discard output command.
 
 ## Methods
 

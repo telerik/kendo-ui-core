@@ -2329,7 +2329,6 @@ declare namespace kendo.ui {
         promptSuggestionItemTemplate?: string | Function | undefined;
         promptSuggestions?: string[] | any[] | undefined;
         toolbarItems?: ToolBarItem[] | any[] | undefined;
-        showOutputRating?: boolean | undefined;
         showOutputSubtitleTooltip?: boolean | undefined;
         speechToText?: boolean | AIPromptSpeechToTextOptions | undefined;
         promptTextArea?: AIPromptPromptTextAreaOptions | undefined;
@@ -13180,6 +13179,7 @@ declare namespace kendo.ui {
     interface InlineAIPromptOptions {
         name?: string | undefined;
         enable?: boolean | undefined;
+        encodedPromptOutputs?: boolean | undefined;
         readonly?: boolean | undefined;
         placeholder?: string | undefined;
         messages?: InlineAIPromptMessages | undefined;

@@ -11,6 +11,17 @@ position: 0
 
 This article lists the breaking or important changes in the 2025 releases of Kendo UI. For the complete list of changes in the UI components, see the [product release history](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
+## Kendo UI 2025 Q3
+
+**AIPrompt**
+
+* The **showOutputRating** property is deprecated as there is now **outputActions** configuration option that is more flexible.
+
+* The **outputRatingChange** event is deprecated. Use **outputAction** event instead.
+
+* The **outputCopy** event is deprecated. Use **outputAction** event instead.
+
+
 ## Kendo UI 2025 Q2
 
 **Pager**
