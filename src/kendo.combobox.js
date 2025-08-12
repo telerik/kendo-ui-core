@@ -1070,7 +1070,9 @@ export const __meta__ = {
 
             maxLength = parseInt(this.element.prop("maxlength") || this.element.attr("maxlength"), 10);
             if (maxLength > -1) {
-                input[0].maxLength = maxLength;
+                if (!kendo.isPresent(ComboBox._isServerRendered) || !ComboBox._isServerRendered) {
+                    input[0].maxLength = maxLength;
+                }
             }
 
             input.addClass(element.className)

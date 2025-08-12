@@ -767,6 +767,11 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "applySorting": "Done",
     "columnChooserApply": "Apply",
   },
+  "ai": {
+    "outputPlaceholder": "No AI output available",
+    "success": "Operation is successful. Data is:",
+    "error": "Operation is not successful. Error:",
+  }
 });
 }
 

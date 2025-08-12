@@ -104,10 +104,17 @@ describe('AiTransport tests', () => {
         const errorSpy = vi.fn();
         instance.options.error = errorSpy;
         const response = { error: 'error-data' };
+        const newResponseObject = {
+            "id": "test-guid",
+            "isRetry": undefined,
+            "output": "An error occurred while processing the request.",
+            "prompt": undefined,
+            "response": response,
+        };
 
         instance.error(response);
 
-        expect(errorSpy).toHaveBeenCalledWith(response);
+        expect(errorSpy).toHaveBeenCalledWith(newResponseObject);
     });
 
     it('should create requestOptions correctly when service is an object', () => {
@@ -120,7 +127,7 @@ describe('AiTransport tests', () => {
         expect(requestOptions.contentType).toBe('application/json');
         expect(requestOptions.data).toBe(JSON.stringify(data));
         expect(requestOptions.success).toBeInstanceOf(Function);
-        expect(requestOptions.error).toBe(instance.error);
+        expect(requestOptions.error).toBeInstanceOf(Function);
     });
 
     it('should create requestOptions correctly when service is a string', () => {

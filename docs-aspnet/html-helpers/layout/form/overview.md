@@ -108,6 +108,7 @@ The following example demonstrates how to define the Form.
 | [Groups]({% slug htmlhelpers_form_aspnetcore_groups %})| The Form allows you to group the input fields in logical sections. |
 | [Buttons]({% slug form_aspnetcore_buttons %})| Alter the **Submit** and **Clear** buttons appearance.  |
 | [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})|  You can choose between a `vertical` or `horizontal` orientation of the labels in the Form. |
+| [Responsive Form]({% slug htmlhelpers_form_aspnetcore_responsive %})| Configure column spans and breakpoints to make the Form responsive on various screen sizes. |
 | [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})| The Form has a built-in validator to enable seamless client-side validaiton. |
 | [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})| You can hide specific fields, like the `ID`. |
 | [Accessibility]({% slug htmlhelpers_form_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_form %}) for faster navigation. |
