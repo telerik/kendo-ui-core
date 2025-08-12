@@ -39,6 +39,1905 @@ If set to `auto` and the grid will use adaptive rendering.
     });
     </script>
 
+### ai `Object`
+
+Defines the configuration options for the AI tools in the Grid.
+
+#### Example - enable AI Assistant with basic configuration
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       columnMenu: {
+         componentType: "modern"
+       },
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       height: 550
+    });
+    </script>
+
+### ai.service `String|Object`
+
+The URL or the configuration of the AI service to use for generating outputs.
+
+#### Example - configure AI service as string
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.service.url `String`
+
+The URL of the AI service to use for generating outputs.
+
+#### Example - configure AI service URL
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: {
+           url: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+         }
+       }
+    });
+    </script>
+
+### ai.service.headers `Object`
+
+The headers to send with the AI service request.
+
+#### Example - configure AI service headers
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: {
+           url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+           headers: {
+             "Content-Type": "application/json"
+           }
+         }
+       }
+    });
+    </script>
+
+### ai.service.data `Object|Function`
+
+The data to send with the AI service request.
+
+#### Example - configure AI service data
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: {
+           url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+           data: (prompt) => ({
+            "role": "user",
+            "contents": [{
+              "$type": "text",
+              "text": prompt
+            }],
+            "columns": [{ field: "name" }],
+          })
+         }
+       }
+    });
+    </script>
+
+### ai.service.outputGetter `Function`
+
+The function to get the output from the AI service response.
+
+#### Example - configure AI service output getter
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: {
+           url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+           outputGetter: function(response) {
+             return response.messages.join("---");
+           }
+         }
+       }
+    });
+    </script>
+
+### ai.aiAssistant `Object`
+
+Defines the configuration options for the AI Assistant tool in the Grid.
+
+#### Example - configure AI Assistant tool
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "ProductName" },
+         { field: "UnitPrice" },
+         { field: "UnitsInStock" }
+       ],
+       dataSource: {
+         transport: {
+           read: {
+             url: "https://demos.telerik.com/service/v2/core/detailproducts",
+           },
+         },
+         pageSize: 5
+       },
+       sortable: true,
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           promptSuggestions: ["Show me the most expensive products",],
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+
+### ai.aiAssistant.promptSuggestions `Array`
+
+Defines the suggestions for the AI Assistant tool. The suggestions are displayed in the AI Assistant tool.
+
+#### Example - configure prompt suggestions
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "product" }, { field: "category" }],
+       dataSource: [{ product: "Tea", category: "Beverages" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           promptSuggestions: [
+             "Show me the top selling products",
+             "Which category has the highest revenue?",
+             "Identify products with low stock",
+             "Compare sales across regions"
+           ]
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.promptOutputs `Array`
+
+An array of prompt outputs to display in the AI Assistant output view.
+
+#### Example - configure initial prompt outputs
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }, { field: "age" }],
+       dataSource: [{ name: "Jane Doe", age: 30 }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           promptOutputs: [
+             { 
+               prompt: "Analyze the grid data", 
+               output: "This grid contains user information with 1 record showing Jane Doe, age 30." 
+             }
+           ]
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.promptOutputs.id `String`
+
+The id of the prompt output. If none is provided, the id will be generated as a `kendo.guid()`.
+
+### ai.aiAssistant.promptOutputs.output `String`
+
+The output content generated from the prompt.
+
+### ai.aiAssistant.promptOutputs.prompt `String`
+
+The prompt text used to generate this output.
+
+### ai.aiAssistant.encodedPromptOutputs `Boolean` *(default: true)*
+
+Specifies whether the prompt outputs are HTML-encoded before being displayed. When set to false, ensure output is properly sanitized to prevent XSS attacks.
+
+#### Example - allow HTML in outputs
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           encodedPromptOutputs: false
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.speechToText `Boolean|Object` *(default: true)*
+
+Configures speech-to-text functionality for the AI Assistant prompt input.
+
+#### Example - enable speech-to-text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           speechToText: {
+             integrationMode: "webSpeech",
+             lang: "en-US",
+             continuous: false
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.speechToText.integrationMode `String` *(default: "webSpeech")*
+
+Specifies the integration mode for speech recognition. Available modes: `"webSpeech"`, `"none"`.
+
+### ai.aiAssistant.speechToText.lang `String` *(default: "en-US")*
+
+Specifies the language code for speech recognition.
+
+### ai.aiAssistant.speechToText.continuous `Boolean` *(default: false)*
+
+Specifies whether to continue listening after a result is received.
+
+### ai.aiAssistant.speechToText.interimResults `Boolean` *(default: false)*
+
+Specifies whether to return interim results during speech recognition.
+
+### ai.aiAssistant.speechToText.maxAlternatives `Number` *(default: 1)*
+
+Specifies the maximum number of alternatives to return from speech recognition.
+
+### ai.aiAssistant.promptTextArea `Object`
+
+Configuration options for the TextArea component used in the AI Assistant prompt view.
+
+#### Example - configure prompt textarea
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           promptTextArea: {
+             resize: "vertical",
+             rows: 4,
+             placeholder: "Ask AI about your grid data...",
+             fillMode: "outline",
+             rounded: "medium",
+             size: "large",
+             maxLength: 1000,
+             label: {
+               content: "Grid AI Prompt",
+             }
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.promptTextArea.fillMode `String`
+
+Specifies the fill mode of the textarea. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
+
+### ai.aiAssistant.promptTextArea.inputMode `String`
+
+Specifies the input mode attribute for mobile keyboards.
+
+### ai.aiAssistant.promptTextArea.label `Object`
+
+Specifies the label configuration for the textarea.
+
+### ai.aiAssistant.promptTextArea.label.content `String`
+
+Specifies the label text content.
+
+### ai.aiAssistant.promptTextArea.label.floating `Boolean`
+
+Specifies whether the label floats above the input.
+
+### ai.aiAssistant.promptTextArea.maxLength `Number`
+
+Specifies the maximum number of characters allowed in the textarea.
+
+### ai.aiAssistant.promptTextArea.overflow `String`
+
+Specifies the overflow behavior. Available options: `"auto"`, `"hidden"`, `"visible"`, `"scroll"`.
+
+### ai.aiAssistant.promptTextArea.placeholder `String`
+
+Specifies the placeholder text for the textarea.
+
+### ai.aiAssistant.promptTextArea.resize `String`
+
+Specifies the resize behavior. Available options: `"none"`, `"both"`, `"horizontal"`, `"vertical"`.
+
+### ai.aiAssistant.promptTextArea.rows `Number`
+
+Specifies the number of visible text lines.
+
+### ai.aiAssistant.promptTextArea.rounded `String`
+
+Specifies the border radius. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
+
+### ai.aiAssistant.promptTextArea.size `String`
+
+Specifies the size of the component. Available options: `"small"`, `"medium"`, `"large"`, `"none"`.
+
+### ai.aiAssistant.outputActions `Array` *(default: ["copy", "retry"])*
+
+An array of action configurations for the output cards in the AI Assistant.
+
+#### Example - configure output actions
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           outputActions: [
+             "copy",
+             "retry",
+             "rating",
+             { command: "export", text: "Export", icon: "download" },
+             { command: "share", text: "Share", icon: "share" }
+           ]
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.outputActions.command `String`
+
+The command identifier for the action.
+
+### ai.aiAssistant.outputActions.text `String`
+
+The text displayed on the action button.
+
+### ai.aiAssistant.outputActions.icon `String`
+
+The icon name for the action button.
+
+### ai.aiAssistant.outputActions.fillMode `String`
+
+Specifies the fill mode of the action button. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
+
+### ai.aiAssistant.outputActions.rounded `String`
+
+Specifies the border radius of the action button. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
+
+### ai.aiAssistant.outputActions.themeColor `String`
+
+Specifies the theme color of the action button.
+
+### ai.aiAssistant.outputActions.title `String`
+
+Specifies the title attribute (tooltip) for the action button.
+
+### ai.aiAssistant.outputActions.type `String`
+
+Specifies the type of the action. Available options: `"button"`, `"spacer"`.
+
+### ai.aiAssistant.outputTemplate `Function`
+
+A template function for customizing the display of output content in the AI Assistant.
+
+#### Example - customize output template
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           outputTemplate: function({ output, content }) {
+             return `<div class="custom-grid-output">
+               <h4>Grid Analysis</h4>
+               <div class="content">${content}</div>
+             </div>`;
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.promptSuggestionItemTemplate `String|Function`
+
+The template of the prompt suggestion item in the AI Assistant.
+
+#### Example - customize suggestion template
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           promptSuggestions: [
+             "Analyze grid data",
+             "Find patterns"
+           ],
+           promptSuggestionItemTemplate: function({ suggestion }) {
+             return `<div class="k-prompt-suggestion custom-grid-suggestion">
+               <i class="k-icon k-i-chart-line"></i>
+               ${suggestion}
+             </div>`;
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.toolbarItems `Array`
+
+An array of toolbar items to display in the AI Assistant header toolbar.
+
+#### Example - add custom toolbar items
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           toolbarItems: [
+             { type: "spacer" },
+             { 
+               type: "button", 
+               icon: "gear", 
+               fillMode: "flat", 
+               rounded: "full", 
+               click: function(e) { 
+                 console.log("Settings clicked"); 
+               } 
+             },
+             { 
+               type: "button", 
+               icon: "x", 
+               fillMode: "flat", 
+               rounded: "full", 
+               themeColor: "primary",
+               click: function(e) { 
+                 console.log("X clicked");
+               } 
+             }
+           ]
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.toolbarItems.type `String`
+
+The type of the toolbar item. Available options: `"button"`, `"spacer"`.
+
+### ai.aiAssistant.toolbarItems.icon `String`
+
+The icon name of the toolbar item.
+
+### ai.aiAssistant.toolbarItems.fillMode `String`
+
+The fill mode of the toolbar item. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
+
+### ai.aiAssistant.toolbarItems.rounded `String`
+
+The rounded mode of the toolbar item. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
+
+### ai.aiAssistant.toolbarItems.themeColor `String`
+
+The theme color of the toolbar item.
+
+### ai.aiAssistant.toolbarItems.click `Function`
+
+The click event handler of the toolbar item.
+
+### ai.aiAssistant.showOutputSubtitleTooltip `Boolean` *(default: false)*
+
+Controls whether the subtitle of the card in the output view displays a tooltip containing the full content of the subtitle.
+
+#### Example - enable output subtitle tooltip
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           showOutputSubtitleTooltip: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.views `Array`
+
+An array of view configurations for the AI Assistant.
+
+#### Example - configure custom views
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           views: [
+             {
+               type: "prompt",
+               name: "ask",
+               buttonText: "Ask AI",
+               buttonIcon: "comment"
+             },
+             {
+               type: "output", 
+               name: "results",
+               buttonText: "Results",
+               buttonIcon: "chart-line"
+             },
+             {
+               type: "custom",
+               name: "insights",
+               buttonText: "Insights",
+               buttonIcon: "light-bulb",
+               viewTemplate: "<div>Custom insights view for grid data</div>"
+             }
+           ]
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.views.buttonText `String`
+
+The text of the toolbar button rendered for the view.
+
+### ai.aiAssistant.views.buttonIcon `String`
+
+The icon name of the toolbar button rendered for the view.
+
+### ai.aiAssistant.views.type `String`
+
+The type of the view. Available options: `"prompt"`, `"output"`, `"commands"`, `"custom"`.
+
+### ai.aiAssistant.views.name `String`
+
+The name of the view. Must be unique.
+
+### ai.aiAssistant.views.viewTemplate `String|Function`
+
+The template of the view content.
+
+### ai.aiAssistant.views.footerTemplate `String|Function`
+
+The template of the view footer.
+
+### ai.aiAssistant.views.initializeComponents `Function`
+
+A function executed when the view is rendered to initialize components.
+
+### ai.aiAssistant.views.promptCommands `Array`
+
+The commands to display in the prompt view.
+
+### ai.aiAssistant.views.promptCommands.id `String`
+
+The id of the command item.
+
+### ai.aiAssistant.views.promptCommands.text `String`
+
+The text of the command item.
+
+### ai.aiAssistant.views.promptCommands.icon `String`
+
+The icon name of the command item.
+
+### ai.aiAssistant.messages `Object`
+
+The text messages displayed in the AI Assistant. Use this option to customize or localize the messages.
+
+#### Example - customize AI Assistant messages
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           messages: {
+             promptPlaceholder: "Ask AI about your grid data...",
+             generateOutput: "Analyze",
+             outputTitle: "Grid Analysis Result",
+             promptView: "Ask Grid AI",
+             outputView: "Analysis Results"
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.messages.commandsView `String` *(default: "")*
+
+The text of the commands view button.
+
+### ai.aiAssistant.messages.copyOutput `String` *(default: "Copy")*
+
+The text of the copy output button.
+
+### ai.aiAssistant.messages.customView `String` *(default: "Custom View")*
+
+The text of the custom view button.
+
+### ai.aiAssistant.messages.generateOutput `String` *(default: "Generate")*
+
+The text of the generate output button.
+
+### ai.aiAssistant.messages.outputRetryTitle `String` *(default: "Generated with AI")*
+
+The title of the output card when regenerated.
+
+### ai.aiAssistant.messages.outputTitle `String` *(default: "Generated with AI")*
+
+The title of the output card.
+
+### ai.aiAssistant.messages.outputView `String` *(default: "Output")*
+
+The text of the output view button.
+
+### ai.aiAssistant.messages.promptPlaceholder `String` *(default: "Ask or generate content with AI")*
+
+The placeholder text of the textarea input.
+
+### ai.aiAssistant.messages.promptSuggestions `String` *(default: "Prompt Suggestions")*
+
+The text of the prompt suggestions toggle button.
+
+### ai.aiAssistant.messages.promptView `String` *(default: "Ask AI")*
+
+The text of the prompt view button.
+
+### ai.aiAssistant.messages.retryGeneration `String` *(default: "Retry")*
+
+The text of the retry generation button.
+
+### ai.aiAssistant.messages.ratePositive `String` *(default: "")*
+
+The text of the positive rating button.
+
+### ai.aiAssistant.messages.rateNegative `String` *(default: "")*
+
+The text of the negative rating button.
+
+### ai.aiAssistant.messages.stopGeneration `String` *(default: "Stop Generation")*
+
+The aria-label and title of the stop generation button.
+
+### ai.aiAssistant.commandExecute
+
+Triggered when a command item from the Commands view is clicked. The panel bar dataItem of the selected item is available through the event argument.
+
+### ai.aiAssistant.promptRequest
+
+Triggered when the prompt view Generate output button is clicked. The prompt text is available through the event argument. Suitable to make a request to the AI service to receive an output. Use the `addPromptOutput` method to add the generated output to the `promptOutputs` collection.
+
+The `prompt`, `output`, `history`, `isRetry` and `response` properties are available in the event argument. When the output is generated after clicking the retry button of an output, the `isRetry` property is `true` and the `output` property is the output content of the output card. The history property is an array of prompt outputs generated before the current output.
+
+### promptResponse
+
+Triggered when the AI service response is received. The response data is available through the event argument. Triggered only when the `serviceUrl` option is set.
+
+#### Event Data
+
+##### e.output `Object`
+
+The output object containing the AI service response data with the following properties:
+
+- `output` - The generated text content from the AI service
+- `prompt` - The original prompt text that was sent to the AI service
+- `id` - The unique identifier for the output
+- `isRetry` - Whether this is a retry operation
+- `activeView` - The index of the view to activate after adding the output
+- `isLoading` - Whether the output is in loading state
+- `isStreaming` - Whether the output is being streamed
+
+##### e.prompt `String`
+
+The original prompt text that was sent to the AI service.
+
+##### e.outputId `String`
+
+The unique identifier for the output.
+
+##### e.response `Object`
+
+The original response object.
+
+##### e.isRetry `Boolean`
+
+Whether this is a retry operation.
+
+#### Example
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "product" }, { field: "category" }],
+       dataSource: [{ product: "Tea", category: "Beverages" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           promptResponse: (e) => {
+              console.log("Prompt respones:", e);
+           } 
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+
+### ai.aiAssistant.outputAction
+
+Triggered when an action button on an output card is clicked. This event is fired for both built-in and custom actions.
+
+#### Event Data
+
+##### e.command `String`
+
+The command identifier of the clicked action.
+
+##### e.outputId `String`
+
+The unique identifier of the output associated with the action.
+
+##### e.output `String`
+
+The output text content associated with the action.
+
+##### e.prompt `String`
+
+The prompt text that was used to generate the output.
+
+##### e.button `jQuery`
+
+The jQuery element of the clicked button.
+
+#### Example
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "product" }, { field: "category" }],
+       dataSource: [{ product: "Tea", category: "Beverages" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistant: {
+           outputAction: (e) => {
+            console.log("outputAction:", e);
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistant.promptRequestCancel
+
+Triggered when a prompt request is cancelled, typically by clicking the stop generation button during streaming operations.
+
+#### Event Data
+
+##### e.output `Object` *(optional)*
+
+The output object being generated when the cancellation occurred.
+
+### ai.aiAssistantWindow `Object`
+
+Defines the configuration options for the AI AssistantWindow in the Grid.
+
+#### Example - configure AI AssistantWindow
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "productName" }, { field: "unitPrice" }],
+       dataSource: [{ productName: "Coffee", unitPrice: 12.99 }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           promptRequestCancel: (e) => {
+            console.log("Request canceled!");
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.actions `Array`
+
+The buttons for interacting with the AI AssistantWindow.
+
+The predefined array values are:
+
+* `Close`
+* `Refresh`
+* `Minimize`
+* `Maximize`
+* `Pin`
+
+#### Example - configure AI AssistantWindow actions
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           actions: ["Minimize", "Maximize", "Close"]
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.animation `Boolean|Object`
+
+A collection of `{Animation}` objects that is used to change the default animations for the AI AssistantWindow. When set to `false`, all animations will be disabled.
+
+#### Example - disable AI AssistantWindow animation
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           animation: false
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.animation.close `Object`
+
+The animation that will be used when the AI AssistantWindow closes.
+
+#### Example - configure AI AssistantWindow closing animation
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           animation: {
+             close: {
+               effects: "fade:out",
+               duration: 300
+             }
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.animation.close.effects `String`
+
+The effect that will be used when the AI AssistantWindow closes.
+
+### ai.aiAssistantWindow.animation.close.duration `Number`
+
+Defines the duration of the closing animation.
+
+### ai.aiAssistantWindow.animation.open `Object`
+
+The animation that will be used when the AI AssistantWindow opens.
+
+#### Example - configure AI AssistantWindow opening animation
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           animation: {
+             open: {
+               effects: "fade:in",
+               duration: 200
+             }
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.animation.open.effects `String`
+
+The effect that will be used when the AI AssistantWindow opens.
+
+### ai.aiAssistantWindow.animation.open.duration `Number`
+
+Defines the duration of the opening animation.
+
+### ai.aiAssistantWindow.appendTo `Object|String` *(default: document.body)*
+
+The element to which the AI AssistantWindow will be appended.
+
+#### Example - append AI AssistantWindow to specific container
+
+    <div id="container">
+      <div id="grid"></div>
+    </div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           appendTo: "#container"
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.autoFocus `Boolean` *(default: true)*
+
+Determines whether the AI AssistantWindow will be focused automatically when opened.
+
+#### Example - disable AI AssistantWindow auto focus
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           autoFocus: false
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.draggable `Object|Boolean` *(default: true)*
+
+Enables (`true`) or disables (`false`) the dragging of the AI AssistantWindow.
+
+#### Example - disable AI AssistantWindow dragging
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           draggable: false
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.draggable.containment `String|Element|jQuery` *default: ""*
+
+Defines the element in which the AI AssistantWindow will be able to move.
+
+#### Example - contain AI AssistantWindow dragging
+
+    <div id="container" style="position: relative; height: 600px; border: 1px solid #ccc;">
+      <div id="grid"></div>
+    </div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           draggable: {
+             containment: "#container"
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.height `Number | String`
+
+Specifies the height of the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow height
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           height: 500
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.maxHeight `Number` *(default: Infinity)*
+
+The maximum height (in pixels) that may be achieved by resizing the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow maximum height
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           maxHeight: 600,
+           resizable: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.maxWidth `Number` *(default: Infinity)*
+
+The maximum width (in pixels) that may be achieved by resizing the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow maximum width
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           maxWidth: 800,
+           resizable: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.minHeight `Number` *(default: 50)*
+
+The minimum height (in pixels) that may be achieved by resizing the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow minimum height
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           minHeight: 300,
+           resizable: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.minWidth `Number` *(default: 50)*
+
+The minimum width (in pixels) that may be achieved by resizing the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow minimum width
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           minWidth: 400,
+           resizable: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.modal `Boolean|Object` *(default: false)*
+
+Specifies whether the AI AssistantWindow will display a modal overlay over the page.
+
+#### Example - make AI AssistantWindow modal
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           modal: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.modal.preventScroll `Boolean` *(default: false)*
+
+Specifies whether the document will stop scrolling when the modal AI AssistantWindow is opened.
+
+#### Example - prevent scrolling when AI AssistantWindow is modal
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           modal: {
+             preventScroll: true
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.pinned `Boolean` *(default: false)*
+
+Specifies whether the AI AssistantWindow will be pinned, that is, that it will not move together with the page content during scrolling.
+
+#### Example - pin AI AssistantWindow
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           pinned: true,
+           position: { top: 100, left: 200 }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.position `Object`
+
+A collection of one or two members which define the initial top and/or left position of the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow position
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           position: {
+             top: 100,
+             left: 150
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.position.top `Number|String`
+
+Specifies the initial top position of the AI AssistantWindow. Numeric values are treated as pixels.
+
+### ai.aiAssistantWindow.position.left `Number|String`
+
+Specifies the initial left position of the AI AssistantWindow. Numeric values are treated as pixels.
+
+### ai.aiAssistantWindow.resizable `Boolean` *(default: true)*
+
+Enables (`true`) or disables (`false`) the resizing of the AI AssistantWindow.
+
+#### Example - disable AI AssistantWindow resizing
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           resizable: false
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.scrollable `Boolean` *(default: true)*
+
+Enables (`true`) or disables (`false`) the scrolling of the AI AssistantWindow contents.
+
+#### Example - disable AI AssistantWindow scrolling
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           scrollable: false
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.themeColor `String` *default: ""*
+
+The `themeColor` option controls the color that will be applied to the AI AssistantWindow.
+
+The following values are available for the themeColor:
+
+- `primary`
+- `dark`
+- `light`
+- `none`
+
+#### Example - set AI AssistantWindow theme color
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           themeColor: "primary"
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.title `Object|String|Boolean` *default: "AI Assistant"*
+
+The text in the title bar of the AI AssistantWindow. If set to `false`, the AI AssistantWindow will be displayed without a title bar.
+
+#### Example - set AI AssistantWindow title
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           title: "Grid AI Assistant"
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.title.text `String` *default: "AI Assistant"*
+
+The text in the title bar of the AI AssistantWindow.
+
+#### Example - configure AI AssistantWindow title text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           title: {
+             text: "Smart Grid Assistant"
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.title.encoded `Boolean` *default: true*
+
+Specifies whether the title text will be encoded.
+
+#### Example - disable AI AssistantWindow title encoding
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           title: {
+             text: "<strong>AI Assistant</strong>",
+             encoded: false
+           }
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.visible `Boolean` *(default: false)*
+
+Specifies whether the AI AssistantWindow will be initially visible.
+
+#### Example - show AI AssistantWindow initially
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           visible: true
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.width `Number | String`
+
+Specifies the width of the AI AssistantWindow.
+
+#### Example - set AI AssistantWindow width
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           width: 600
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.size `String` *(default: "auto")*
+
+Sets a predefined size to the AI AssistantWindow. The `width` and `height` configuration options override the predefined `size`.
+
+The supported values are:
+
+* `auto`
+* `small`
+* `medium`
+* `large`
+
+#### Example - set AI AssistantWindow size
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           size: "large"
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.content
+
+Specifies a URL or request options from where the AI Assistant Window will load its content.
+
+> For URLs which start with a protocol (for example, http://), a container `iframe` element is automatically created. As this behavior may change in future versions, try to always use the [iframe configuration option](#iframe).
+
+### ai.aiAssistantWindow.content.url `String`
+
+Specifies the url from which the content is fetched
+
+#### Example - fetching JSON and displaying it through a template
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           content: {
+              url: "../content/web/tabstrip/ajax/ajaxContent2.html",
+            }
+          }
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.content.dataType `String`
+
+The type of result expected from the remote service. Used values are "html" and "json".
+
+#### Example - fetching and displaying JSON content it in the Window
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           content: {
+              url: "https://demos.telerik.com/kendo-ui/content/shared/js/products.js",
+              dataType: "json"
+            }
+          }
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.content.iframe `Boolean`
+
+If the URL for the  AI Assistant Window content contains a protocol, the  AI Assistant Window creates an iframe for the content and assumes that the nested page resides in another domain.
+
+If the URL does not contain a protocol, the URL is treated as a local URL which will load a partial view and the  AI Assistant Window does not create an iframe for the content.
+
+To control the creation of iframe  AI Assistant Window content, you have to explicitly configure the option.
+
+#### Example - Explicitly configure an iframe
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           content: {
+              url: "https://demos.telerik.com/kendo-ui/content/shared/js/products.js",
+              dataType: "json",
+              iframe: true
+            }
+          }
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.content.template `String`
+
+The template for the content of a AI Assistant Window. Returned data from the server will be given as the `data` of this template.
+
+If the returned data is JSON, the [`dataType`](https://api.jquery.com/jQuery.ajax/) parameter has to be passed so that the data gets parsed by jQuery.
+
+If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON response will be injected in the content area of the AI Assistant Window as is.
+
+#### Example - displaying a template
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           content: {
+              template: "<div class='k-ai-assistant'></div>"
+            },
+            open: (e) => {
+              const el = e.sender.element.find(".k-ai-assistant");
+              el.kendoChat();
+            }
+          }
+       }
+    });
+    </script>
+
+
+### ai.aiAssistantWindow.activate
+
+Triggered when a AI Assistant Window has finished its opening animation.
+
+#### Example - subscribing to the activate event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           activate: () => console.log("AI Assistant Window activated!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.close
+
+Triggered when a AI Assistant Window is closed either by the user or through the `close()` method.
+
+#### Event Data
+
+##### e.userTriggered `Boolean`
+
+Indicates whether the close action was triggered by the user either by clicking the **Close** button or by pressing `Esc`. When the `close` method was called, this field is `false`.
+
+##### e.preventDefault `Function`
+
+If invoked prevents the Window from closing.
+
+#### Example - subscribing to the close event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           close: () => console.log("AI Assistant Window closed!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.deactivate
+
+Triggered when a AI Assistant Window has finished its closing animation.
+
+#### Example - subscribing to the deactivate event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+           deactivate: () => console.log("AI Assistant Window deactivated!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+
+### ai.aiAssistantWindow.dragend
+
+Triggered when a AI Assistant Window has been moved by the user.
+
+#### Example - subscribing to the dragend event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            dragend: () => console.log("AI Assistant Window dragend!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+
+### ai.aiAssistantWindow.dragstart
+
+Triggered when a AI Assistant Window has been moved by the user.
+
+#### Example - subscribing to the dragstart event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            dragstart: () => console.log("AI Assistant Window dragstart!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.maximize
+
+Triggered when the user maximizes the AI Assistant Window.
+
+#### Example - subscribing to the maximize event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            maximize: () => console.log("AI Assistant Window maximize!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.minimize
+
+Triggered when the user minimizes the AI Assistant Window.
+
+#### Example - subscribing to the minimize event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            minimize: () => console.log("AI Assistant Window minimize!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.open
+
+Triggered when a AI Assistant Window is opened, that is, when the `open()` method is called.
+
+#### Example - subscribing to the open event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            open: () => console.log("AI Assistant Window open!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.resize
+
+Triggered when the user resizes the AI Assistant Window.
+
+#### Example - subscribing to the resize event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            resize: () => console.log("AI Assistant Window resize!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.error
+
+Triggered when an Ajax request for content fails.
+
+#### Event Data
+
+##### e.xhr `jqXHR`
+
+The XHR request object as returned from [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
+
+##### e.status `String`
+
+The status of the request as returned from [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
+
+#### Example - subscribing to the error event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            error: () => console.log("AI Assistant Window error!")
+         },
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.restore
+
+Triggered when the AI Assistant Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/javascript/ui/window/methods/restore) method is called.
+
+#### Example - subscribing to the restore event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            resize: () => console.log("AI Assistant Window resize!")
+         },
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+       }
+    });
+    </script>
+
+### ai.aiAssistantWindow.refresh
+
+Triggered when the content of a AI Assistant Window has finished loading via Ajax, when the Window `iframe` has finished loading, or when the **Refresh** button has been clicked on a Window with static content.
+
+#### Example - subscribing to the refresh event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         aiAssistantWindow: {
+            actions: ["Refresh],
+            refresh: () => console.log("AI Assistant Window refresh!")
+         },
+       }
+    });
+    </script>
+
+
 ### allowCopy `Boolean|Object` *(default: false)*
 
 If set to `true` and selection of the Grid is enabled, the user could copy the selection into the clipboard and paste it into Excel or other similar programs that understand TSV/CSV formats. By default allowCopy is disabled and the default format is TSV.
@@ -7784,6 +9683,137 @@ Defines the text of the command buttons that are shown within the Grid. Used pri
     });
     </script>
 
+### messages.ai `Object`
+
+Defines the text configurations for the ai features. Used primarily for localization.
+
+#### Example - change the text configuration for the ai features
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       messages: {
+        ai: {
+          success: "Operation successful."
+          error: "Operation not successful."
+          outputPlaceholder: "Currently there is no output available"
+        }
+       },
+       height: 550
+    });
+    </script>
+
+
+### messages.ai.outputPlaceholder `String`
+
+Defines the text to be displayed for the output placeholder when there are no other outputs available. Used primarily for localization.
+
+#### Example - change the text configuration for the ai features
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       messages: {
+        ai: {
+          outputPlaceholder: "Currently there is no output available"
+        }
+       },
+       height: 550
+    });
+    </script>
+
+### messages.ai.success `String`
+
+Defines the text to be displayed for the output text for a successful operation. Used primarily for localization.
+
+#### Example - change the text configuration for the ai features
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       messages: {
+        ai: {
+          success: "Operation is successful."
+        }
+       },
+       height: 550
+    });
+    </script>
+
+### messages.ai.error `String`
+
+Defines the text to be displayed for the output text for a unsuccessful operation. Used primarily for localization.
+
+#### Example - change the text configuration for the ai features
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       messages: {
+        ai: {
+          error: "Operation is not successful."
+        }
+       },
+       height: 550
+    });
+    </script>
+
 ### messages.commands `Object`
 
 Defines the text of the command buttons that are shown within the Grid. Used primarily for localization.
@@ -13408,6 +15438,105 @@ The data source to which the widget should be bound.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.setDataSource(dataSource);
+    </script>
+
+### highlight
+
+Gets or sets the table rows (or cells) which are highlighted.
+
+#### Parameters
+
+##### elements `jQuery|Array`
+
+A jQuery object or array of jQuery objects which represents the table row(s) or cell(s).
+
+
+#### Returns
+
+`jQuery` the selected table rows or cells.
+
+> The `highlight` method will not trigger the [`change event`](/api/javascript/ui/grid/events/change).
+
+> In case of using frozen (locked) columns, the `highlight` method will return **two** table row elements for each highlighted item. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`.
+
+> In order to clear the currently selected row, use the [clearHighlight() method](/api/javascript/ui/grid/methods/clearhighlight).
+
+#### Example - highlight the first table row
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+      });
+      var grid = $("#grid").data("kendoGrid");
+      const row = grid.tbody.find("tr:eq(0)");
+      grid.highlight(row);
+    </script>
+
+#### Example - get the selected table rows
+
+    <div id="grid"></div>
+    <button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base' id="btn">Get selected rows</button>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row"
+      });
+      var grid = $("#grid").data("kendoGrid");
+      const row = grid.tbody.find("tr:eq(0)");
+      grid.highlight(row);
+
+      $("#btn").on("click", function(e){
+        var rows = grid.highlight();
+        var highlightedIds = [];
+
+        $(rows).each(function(){
+          highlightedIds.push($(this).attr("data-uid"))
+        });
+
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Highlighted row id: " + highlightedIds.join(", "));
+      })
+    </script>
+
+### clearHighlight
+
+Clears the currently selected table rows or cells.
+
+#### Example - highlight the first table row
+
+    <button id="clearHighlight" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Clear Highlight</button>
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+      });
+      var grid = $("#grid").data("kendoGrid");
+      const row = grid.tbody.find("tr:eq(0)");
+      grid.highlight(row);
+
+      $("#clearHighlight").click(() => grid.clearHighlight());
     </script>
 
 ### setOptions

@@ -7143,6 +7143,9 @@ declare namespace kendo.ui {
         select(rows: string): void;
         select(rows: Element): void;
         select(rows: JQuery): void;
+        highlight(): JQuery;
+        highlight(elements: JQuery|JQuery[]): void;
+        clearHighlight(): void;
         selectedKeyNames(): any;
         setDataSource(dataSource: kendo.data.DataSource): void;
         setOptions(options: any): void;

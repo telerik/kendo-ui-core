@@ -764,6 +764,11 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "applyGrouping": "Готово",
     "applySorting": "Готово",
     "columnChooserApply": "Приложи",
+  },
+  "ai": {
+    "outputPlaceholder": "В момента няма наличен резултат.",
+    "success": "Операцията е успешна. Данните са:",
+    "error": "Операцията не е успешна. Грешка:",
   }
 });
 }

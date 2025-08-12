@@ -2162,15 +2162,16 @@ export const __meta__ = {
 
         success: function(response, options) {
             const that = this;
-            const service = that.options.service;
+            const service = options?.service || that.options.service;
             const outputGetter = service?.outputGetter || that._getResponseData;
-            const isRetry = options.isRetry;
-            const prompt = options.prompt;
+            const isRetry = options?.isRetry;
+            const prompt = options?.prompt;
             const output = {
                 id: kendo.guid(),
                 output: outputGetter(response),
                 prompt: prompt,
-                isRetry: isRetry
+                isRetry: isRetry,
+                response: response,
             };
 
             if (that.options.success) {
@@ -2178,17 +2179,35 @@ export const __meta__ = {
             }
         },
 
-        error: function(response) {
+        error: function(response, options) {
             const that = this;
+            const service = options?.service || that.options.service;
+            const outputGetter = service?.outputGetter || that._getResponseData;
+            const isRetry = options?.isRetry;
+            const prompt = options?.prompt;
+
+            const resObject = {
+                status: response.status,
+                statusText: response.statusText,
+                responseText: response.responseText,
+            };
+
+            const output = {
+                id: kendo.guid(),
+                output: outputGetter(resObject),
+                prompt: prompt,
+                isRetry: isRetry,
+                response: response,
+            };
 
             if (that.options.error) {
-                that.options.error(response);
+                that.options.error(output);
             }
         },
 
         setup: function(options = {}) {
             const that = this;
-            const service = that.options.service;
+            const service = options?.service || that.options.service;
             const data = that.getData(options);
             const url = typeof service === "string" ? service : service.url;
             const requestOptions = {
@@ -2199,7 +2218,9 @@ export const __meta__ = {
                 success: function(response) {
                     that.success.call(that, response, options);
                 },
-                error: that.error
+                error: function(response) {
+                    that.error.call(that, response, options);
+                }
             };
 
             if (service?.headers) {
@@ -2211,10 +2232,10 @@ export const __meta__ = {
 
         getData: function(options) {
             const that = this;
-            const service = options.service;
-            const isRetry = options.isRetry;
-            const history = options.history || [];
-            const prompt = options.prompt;
+            const service = options?.service;
+            const isRetry = options?.isRetry;
+            const history = options?.history || [];
+            const prompt = options?.prompt;
 
             let defaultData = [
                 ...history,
@@ -2775,6 +2796,45 @@ export const __meta__ = {
             result.push(target);
         }
         return result;
+    }
+
+    function convertHighlightDescriptors(data, filters, idField) {
+        var getHighlightFromResults = function(results, filter) {
+            const highlighted = filter.cells && Object.keys(filter.cells).length > 0 ? filter.cells : true;
+            const acc = {};
+            let idx, length;
+
+            for (idx = 0, length = results.length; idx < length; idx++) {
+                const item = results[idx];
+                if (item && item.uid !== undefined) {
+                    const key = String(item[idField]);
+                    acc[key] = highlighted;
+                }
+            }
+
+            return acc;
+        };
+
+        let results = {};
+        let idx, length, filter, filteredData, highlightResults;
+
+        if (!isArray(filters)) {
+            return results;
+        }
+
+        for (idx = 0, length = filters.length; idx < length; idx++) {
+            filter = filters[idx];
+            if (filter) {
+                filteredData = new Query(data).filter(filter).toArray();
+                highlightResults = getHighlightFromResults(filteredData, filter);
+
+                if (highlightResults) {
+                    results = extend(true, results, highlightResults);
+                }
+            }
+        }
+
+        return results;
     }
 
     var DataSource = Observable.extend({
@@ -5079,6 +5139,16 @@ export const __meta__ = {
             }
 
             return that._group;
+        },
+
+        parseHighlightDescriptors: function(descriptors, idField) {
+            const data = this._data ? this._flatData(this._data) : [];
+            if (!descriptors || !descriptors.length || !data.length) {
+                return [];
+            }
+
+            const highlightDescriptors = convertHighlightDescriptors(data, descriptors, idField || "id");
+            return highlightDescriptors;
         },
 
         getGroupsFlat: function(data) {

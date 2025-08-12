@@ -342,6 +342,7 @@ Referencing existing component instances allows you to build on top of their con
 * [Handling JavaScript Events of the User Interactions]({% slug form_events %}) 
 * [Configuring the Grouping in the Form]({% slug htmlhelpers_form_aspnetcore_groups %})
 * [Setting the Orientation of the Labels]({% slug htmlhelpers_form_aspnetcore_orientation %})
+* [Creating a Responsive Layout]({% slug htmlhelpers_form_aspnetcore_responsive %})
 
 ## See Also
 
