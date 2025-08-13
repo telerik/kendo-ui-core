@@ -215,7 +215,7 @@ The following example demonstrates how to create a custom view that contains a b
 
 ## See Also
 
-* [Configuring the AIPrompt Templates]({% slug htmlhelpers_templates_aiprompt %})
+* [Configuring the AIPrompt Output Actions]({% slug htmlhelpers_output_actions_aiprompt %})
 * [Server-Side API of the AIPrompt HtmlHelper](/api/aiprompt)
 {% if site.core %}
 * [Server-Side API of the AIPrompt TagHelper](/api/taghelpers/aiprompt)

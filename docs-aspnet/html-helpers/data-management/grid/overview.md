@@ -177,6 +177,8 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 | [Templates]({% slug clientdetailtemplate_grid_aspnetcore %}) | The abundance of templates allows you to customize the way the data is visualized in the table. |
 | [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %}) | The virtual scrolling and endless scrolling modes allow you to further enhance the user experience. |
 | [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %}) | The selection functionality and its various options allow the users to quickly manipulate the desired data. |
+| [Stacked display mode]({% slug htmlhelpers_grid_aspnetcore_stacked_layout %}) | Displays Grid rows in a compact, card-like stacked arrangement with configurable column widths, ideal for limited horizontal space or mobile-friendly layouts.
+|
 | [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar %}) | You can add command buttons to the toolbar and even define custom commands. |
 | Rendering and styling | You can customize the appearance of the Grid by [configuring its rows]({% slug rows_aspnetcore_grid_widget %}), initializing the Grid from a [hidden container]({% slug hidden_containers_aspnetcore_grid %}), using [adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %}), and setting its [height]({% slug height_aspnetcore_grid %}) and [width]({% slug width_grid_aspnetcore %}). |
 | [Globalization]({% slug globalization_grid_aspnetcore %}) | The Grid provides globalization through the combination of [localization]({% slug localization_aspnetcore_grid %}) with [internationalization]({% slug intl_aspnetcore_grid %}) and [right-to-left support]({% slug rtl_aspnetcore_grid %}).|

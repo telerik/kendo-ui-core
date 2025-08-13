@@ -21,6 +21,7 @@ This article lists the breaking or important changes in the 2025 releases of Ken
 
 * The **outputCopy** event is deprecated. Use **outputAction** event instead.
 
+* The `k-prompt-suggestion` class on the `role='listitem'` element has been replaced with the `k-suggestion` class.
 
 ## Kendo UI 2025 Q2
 

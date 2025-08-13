@@ -19,10 +19,9 @@ The ActionSheet's action buttons now accept enums for the `FillMode`, `Rounded`,
 ### AIPrompt
 
 * The `ShowOutputRating()` option of the AIPrompt HtmlHelper {% if site.core %} and `show-output-rating` attribute of AIPrompt TagHelper{% endif %} is deprecated. Use [`OutputActions()`](/api/kendo.mvc.ui.fluent/aipromptbuilder#outputactionsactionaipromptoutputactionfactory) configuration option that is more flexible.
-
-* The `outputRatingChange` event is deprecated. Use `outputAction` instead.
-
-* The `outputCopy` event is deprecated. Use `outputAction` event instead.
+* The `OutputRatingChange` event is deprecated. Use `OutputAction` instead.
+* The `OutputCopy` event is deprecated. Use `OutputAction` event instead.
+* The `k-prompt-suggestion` class on the `role='listitem'` element has been replaced with the `k-suggestion` class.
 
 {% if site.core %}
 ### TabStrip
