@@ -17,6 +17,7 @@ The Kendo UI for jQuery AIPrompt provides users with a modern interface to inter
 * [Views]({% slug views_aiprompt_component %})&mdash;You can configure the available views in the component. You can also implement a custom view.
 * [Templates]({% slug templates_aiprompt_component %})&mdash;The AIPrompt allows you to customize the prompt suggestions' appearance and define a custom view by using templates.
 * [Accessibility]({% slug jquery_actionsheet_accessibility %})&mdash;The AIPrompt is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Output Actions]({% slug output_actions_kendoui_aiprompt %})&mdash;The AIPrompt autput actions are interactive controls shown on every generated output card in the `Output` view of the AIPrompt.
 
 ## Next Steps 
 

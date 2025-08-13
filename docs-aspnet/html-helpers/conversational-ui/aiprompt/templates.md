@@ -3,7 +3,7 @@ title: Templates
 page_title: Templates
 description: "Use templates and customize the appearance of the prompt suggestion and view items of the Telerik UI AIPrompt component for {{ site.framework }}."
 slug: htmlhelpers_templates_aiprompt
-position: 3
+position: 4
 ---
 
 # Templates
@@ -48,27 +48,62 @@ The following example demonstrates how to use the `PromptSuggestionItemTemplateH
 ```
 {% endif %}
 ```JS scripts
-    <script>
-        var promptSuggestionsData = [
-        {
-            suggestion: "Out of office (contact colleague)",
-            color:"yellow",
-            background: "red"
-        },
-        {
-            suggestion: "LinkedIn post for work/life balance and well-being",
-            color: "darkgreen",
-            background: "lightblue"
-        }];
+<script>
+    var promptSuggestionsData = [
+    {
+        suggestion: "Out of office (contact colleague)",
+        color:"yellow",
+        background: "red"
+    },
+    {
+        suggestion: "LinkedIn post for work/life balance and well-being",
+        color: "darkgreen",
+        background: "lightblue"
+    }];
 
-        function promptSuggestionTemplate(data) {
-            let suggestionText = data.suggestion;
-            let getSuggestionData = $.grep(promptSuggestionsData, function (item) {
-                return item.suggestion == suggestionText;
-            });
-            return `<span role="listitem" class="k-prompt-suggestion" style="color:${getSuggestionData[0].color}; background-color: ${getSuggestionData[0].background}">${getSuggestionData[0].suggestion}</span>`;
-        }
-    </script>
+    function promptSuggestionTemplate(data) {
+        let suggestionText = data.suggestion;
+        let getSuggestionData = $.grep(promptSuggestionsData, function (item) {
+            return item.suggestion == suggestionText;
+        });
+        return `<span role="listitem" class="k-suggestion" style="color:${getSuggestionData[0].color}; background-color: ${getSuggestionData[0].background}">${getSuggestionData[0].suggestion}</span>`;
+    }
+</script>
+```
+
+## Output Items Template
+
+Use the `OutputTemplate()` option to control how each generated output card is rendered in the `Output` view. The specified template is applied after the output has finished streaming to render the final content.
+
+The option has a various overloads like `OutputTemplateHandler()`, `OutputTemplateId()`, `OutputTemplate()` that accepts a [Template component](slug:htmlhelpers_overview_template), and `OutputTemplateView()`.
+
+The following example demonstrates how to customize the default appearance of the output cards.
+
+```HtmlHelper
+@(Html.Kendo().AIPrompt()
+    .Name("aiprompt")
+    .OutputTemplateHandler("outputTemplate")
+    ... // Additional configuration.
+)
+```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-aiprompt name="aiprompt" output-template-handler="outputTemplate">
+    <!-- Additional configuration. -->
+</kendo-aiprompt>
+```
+{% endif %}
+```JS scripts
+<script>
+    function outputTemplate({output, content}) {
+        return `<div class="ai-response">
+                    <small>Prompt: ${kendo.htmlEncode(output.prompt)}</small><br/>
+                    <strong>AI:</strong> ${content}
+                </div>`;
+    }
+</script>
 ```
 
 ## View Content Templates
@@ -107,5 +142,5 @@ The following example demonstrates how to add a custom view in the AIPrompt comp
 
 ## See Also
 
-* [Templates in the AIPrompt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/aiprompt/templates)
+* [Templates in the AIPrompt for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/aiprompt/templates)
 * [Using Client Templates]({% slug client_templates_overview %})

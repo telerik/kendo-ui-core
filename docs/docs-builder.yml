@@ -300,6 +300,8 @@ meta:
     title: PropertyGrid
   "*imageeditor":
     title: Image Editor
+  "*inline-aiprompt":
+    title: InlineAIPrompt
   "*gantt":
     title: Gantt
   "*/expansionpanel":
@@ -589,6 +591,8 @@ meta:
     title: ChartWizard
   controls/imageeditor:
     title: Image Editor
+  controls/inline-aiprompt:
+    title: Inline AIPrompt
   controls/colorgradient:
     title: ColorGradient
   controls/treeview/binding:
@@ -670,6 +674,8 @@ meta:
   controls/treelist/editing:
     title: Editing
     position: 3
+  controls/speechtotextbutton:
+    title: SpeechToTextButton
   controls/spreadsheet/end-user:
     title: End User
     position: 9
@@ -715,6 +721,9 @@ meta:
   controls/grid/grouping:
     title: Grouping
     position: 7
+  controls/grid/smart-grid:
+    title: Smart Grid
+    position: 5
   controls/grid/editing:
     title: Editing
     position: 5

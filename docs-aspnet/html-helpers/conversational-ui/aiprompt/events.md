@@ -3,7 +3,7 @@ title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI AIPrompt component for {{ site.framework }}."
 slug: htmlhelpers_events_aiprompt
-position: 4
+position: 6
 ---
 
 # Events
