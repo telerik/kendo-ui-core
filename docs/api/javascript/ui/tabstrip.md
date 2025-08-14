@@ -706,7 +706,7 @@ Specifies whether the tab is enabled or disabled. Disabled tabs cannot be select
 Defines custom attributes to be applied to the tab element.
 
 #### Example
-
+```pseudo
     <div id="tabstrip"></div>
     <script>
         $("#tabstrip").kendoTabStrip({
@@ -722,7 +722,7 @@ Defines custom attributes to be applied to the tab element.
             ]
         });
     </script>
-
+```
 ### dataSpriteCssClass `String`*(default: "")*
 
 Sets the field of the data item that provides the CSS class of the tab.

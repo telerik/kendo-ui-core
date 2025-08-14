@@ -1029,7 +1029,7 @@ The font weight of the connection content text.
 The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 #### Example - using a template for the connection label
-
+```pseudo
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1062,7 +1062,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the labels.
         ]
       });
     </script>
-
+```
 ### connections.content.text `String`
 
 The text displayed for the connection.
