@@ -2139,6 +2139,7 @@ A number defines the columns of the grid. When an array is used it is used to ma
                 Name: "Ivan",
                 Address: "Sofia"
             },
+            layout: "grid",
             grid: {
                 cols: 2,
                 gutter: 10,
@@ -2164,6 +2165,7 @@ A number defines the columns of the grid. When an array is used it is used to ma
                 Name: "Ivan",
                 Address: "Sofia"
             },
+            layout: "grid",
             grid: {
                 cols: [{
                     maxWidth: 600,
@@ -2206,6 +2208,7 @@ Defines the maximum width in pixels for which the specific breakpoint col value 
                 Name: "Ivan",
                 Address: "Sofia"
             },
+            layout: "grid",
             grid: {
                 cols: [{
                     maxWidth: 600,
@@ -2248,6 +2251,7 @@ Defines the minimum width in pixels for which the specific breakpoint col value 
                 Name: "Ivan",
                 Address: "Sofia"
             },
+            layout: "grid",
             grid: {
                 cols: [{
                     maxWidth: 600,
@@ -2290,6 +2294,7 @@ Defines the number of columns to be applied if current width of the form is betw
                 Name: "Ivan",
                 Address: "Sofia"
             },
+            layout: "grid",
             grid: {
                 cols: [{
                     maxWidth: 600,

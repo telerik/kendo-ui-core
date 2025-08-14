@@ -1930,7 +1930,7 @@ Triggered when the content of a AI Assistant Window has finished loading via Aja
        toolbar: ["aiAssistant"],
        ai: {
          aiAssistantWindow: {
-            actions: ["Refresh],
+            actions: ["Refresh"],
             refresh: () => console.log("AI Assistant Window refresh!")
          },
        }
@@ -9708,8 +9708,8 @@ Defines the text configurations for the ai features. Used primarily for localiza
        },
        messages: {
         ai: {
-          success: "Operation successful."
-          error: "Operation not successful."
+          success: "Operation successful.",
+          error: "Operation not successful.",
           outputPlaceholder: "Currently there is no output available"
         }
        },
@@ -12876,7 +12876,7 @@ If set as `array`, the size of the array represents the number of columns, and t
         dataLayoutMode: "stacked",
         stackedLayoutSettings: {
           cols: 2
-        }
+        },
         dataSource: {
           data: [
             { id: 1, name: "Jane Doe", age: 30 },
@@ -12908,7 +12908,7 @@ If set as `array`, the size of the array represents the number of columns, and t
         dataLayoutMode: "stacked",
         stackedLayoutSettings: {
           cols: ["1fr", "20px"]
-        }
+        },
         dataSource: {
           data: [
             { id: 1, name: "Jane Doe", age: 30 },
@@ -12940,7 +12940,7 @@ If set as `array`, the size of the array represents the number of columns, and t
         dataLayoutMode: "stacked",
         stackedLayoutSettings: {
           cols: [100, 400]
-        }
+        },
         dataSource: {
           data: [
             { id: 1, name: "Jane Doe", age: 30 },
@@ -12975,7 +12975,7 @@ If set as `array`, the size of the array represents the number of columns, and t
             { width: 700 },
             { width: 300 }
           ]
-        }
+        },
         dataSource: {
           data: [
             { id: 1, name: "Jane Doe", age: 30 },

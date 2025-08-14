@@ -210,7 +210,7 @@ Returns `true` if the speech recognition is active (listening), otherwise `false
     <button id="speechButton"></button>
     <script>
         var speechButton = $("#speechButton").kendoSpeechToTextButton().data("kendoSpeechToTextButton");
-        speechButton.start();
+        speechButton.startRecognition();
         console.log(speechButton.isListening()); // logs true
     </script>
 

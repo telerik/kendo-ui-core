@@ -274,10 +274,10 @@ This property allows you to add [`promptSuggestions`](https://www.telerik.com/ke
 
 You can also customize the appearance of the [Window](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/window/) component, in which the AIPrompt of the toolbar tool is rendered. 
 
-To achieve this, use the [`ai.windowSettings`]https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/ai.windowsettings) property, which allows you to control the positioning and visual appearance of the Window to match your application's design and requirements.
+To achieve this, use the [`ai.aiassistantwindow`]https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/ai.aiassistantwindow) property, which allows you to control the positioning and visual appearance of the Window to match your application's design and requirements.
 
   ```
-      windowSettings: {
+      aiassistantwindow: {
             width: 500,
             height: 460
         }
