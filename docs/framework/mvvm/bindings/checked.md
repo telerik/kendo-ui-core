@@ -64,7 +64,7 @@ The following example demonstrates how to use the `checked` binding with a group
 
 ## Using with Data-Type Attributes
 
-Checkbox inputs bound to an array and radio buttons also support [strong typing](https://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](value#strongly-typed-value-binding).
+Checkbox inputs bound to an array and radio buttons also support [strong typing](https://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](slug://valuebinding_mvvm_kendoui#strongly-typed-value-binding).
 
 ```dojo
     <div id="view">

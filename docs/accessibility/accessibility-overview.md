@@ -118,4 +118,4 @@ Kendo UI for jQuery components are tested in the following environments:
 
 ## See Also
 
-* [Telerik and Kendo UI Design System Accessibility Documentation](https://www.telerik.com/design-system/docs/foundation/accessibility/global-accessibility)
+* [Telerik and Kendo UI Design System Accessibility Documentation](https://www.telerik.com/design-system/docs/foundation/guides/accessibility/global-accessibility/)

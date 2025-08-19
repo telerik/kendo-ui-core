@@ -11935,7 +11935,7 @@ Set this to `true` to repeat the grid headers on each page.
 
 ### pdf.scale `Number` *(default: 1)*
 
-A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Scaling).
+A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the [Scaling the Drawings](slug://scalingofcontent_drawing) article.
 
 > **Important**
 >
@@ -13840,7 +13840,7 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 
 > The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/grid/appearance#widths), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
 >
 > Use `autoFitColumn` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 
@@ -13909,7 +13909,7 @@ Applies the minimum possible width for all columns, so that all text fits withou
 
 > The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/grid/appearance#widths), according to their content.
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](slug://width_kendoui_grid_widget), according to their content.
 >
 > Use `autoFitColumns` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 

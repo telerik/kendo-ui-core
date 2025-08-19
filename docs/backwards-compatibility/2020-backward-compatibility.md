@@ -3,7 +3,7 @@ title: 2020 Releases
 page_title: 2020 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2020."
 slug: breakingchanges2020_kendoui
-position: 4
+position: 5
 ---
 
 # 2020 Releases

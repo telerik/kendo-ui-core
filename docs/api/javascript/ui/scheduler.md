@@ -564,7 +564,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the editor.
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the Scheduler will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
 
-> Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/intro/widget-basics/mvvm-initialization) for more info.
+> Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](slug://mvvm_initialization_kendoui) for more info.
 
 #### Example - customize the popup editor
 

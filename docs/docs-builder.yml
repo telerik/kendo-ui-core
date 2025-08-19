@@ -1929,6 +1929,9 @@ redirects:
 - from: ^/styles-and-layout/using-kendo-in-responsive-web-pages$
   to: /api/javascript/kendo/methods/resize
 
+- from: ^/using-kendo-in-responsive-web-pages(.*)$
+  to: /api/javascript/kendo/methods/resize
+
 - from: ^/styles-and-layout/rendering$
   to: /api/javascript/dataviz/ui/chart/configuration/renderas
 
@@ -2054,3 +2057,24 @@ redirects:
 
 - from: ^/intro/scripts/(.*)$
   to: /intro/creating-custom-bundles
+
+- from: ^/combbox$
+  to: /controls/combobox/overview
+
+- from: ^/widgets/kendo-jquery-ui/combobox$
+  to: /controls/combobox/overview
+
+- from: ^/components/charts/$
+  to: /controls/charts/overview
+
+- from: ^/components/charts$
+  to: /controls/charts/overview
+
+- from: ^/aspnet-mvc/globalization$
+  to: https://www.telerik.com/aspnet-mvc/documentation/globalization/overview
+
+- from: ^/web/grid/appearance$
+  to: /controls/grid/appearance/height
+
+- from: ^/controls/grid/appearance$
+  to: /controls/grid/appearance/height

@@ -91,7 +91,7 @@ namespace ApiJqueryGrid.Controllers
 }
 ```
 
-> The `dataSource` type Web API is intended for [Telerik UI for ASP.NET Core](/aspnet-core). As a result, you need to include `kendo.aspnetmvc.js`.
+> The `dataSource` type Web API is intended for [Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui/documentation/introduction). As a result, you need to include `kendo.aspnetmvc.js`.
 
 ```jQuery
     <div id="grid"></div>

@@ -15,11 +15,11 @@ This article lists the breaking or important changes in the 2025 releases of Ken
 
 **AIPrompt**
 
-* The **showOutputRating** property is deprecated as there is now **outputActions** configuration option that is more flexible.
+* The **showOutputRating** property is deprecated as there is now [`outputActions`](/api/javascript/ui/aiprompt/configuration/outputactions) configuration option that is more flexible.
 
-* The **outputRatingChange** event is deprecated. Use **outputAction** event instead.
+* The **outputRatingChange** event is deprecated. Use [`outputAction`](/api/javascript/ui/aiprompt/events/outputaction) event instead.
 
-* The **outputCopy** event is deprecated. Use **outputAction** event instead.
+* The **outputCopy** event is deprecated. Use [`outputAction`](/api/javascript/ui/aiprompt/events/outputaction) event instead.
 
 * The `k-prompt-suggestion` class on the `role='listitem'` element has been replaced with the `k-suggestion` class.
 

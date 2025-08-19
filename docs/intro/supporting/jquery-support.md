@@ -32,7 +32,7 @@ The following table provides a list of the jQuery versions that are compatible w
 | [Kendo UI 2023.3.1010 (R3 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2023-(version-2023-3-1010))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2023-(version-2023-2-606))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2023-(version-2023-1-117))|3.6.4, 3.6.1, 2.2.x, 1.12.4, 1.10.x|
-| [Kendo UI 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-(version-2022-3-913))|3.6.1, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendoui-r3-2022-(version-2022-3-913))|3.6.1, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2022-(version-2022-2-510))|3.6.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2022.1.119 (R1 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2022-(version-2022-1-119))|3.6.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2021.3.914 (R3 2021)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2021)|3.6.0, 2.2.x, 1.12.4, 1.10.x|

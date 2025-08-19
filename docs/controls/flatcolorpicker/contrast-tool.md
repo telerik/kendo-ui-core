@@ -8,7 +8,7 @@ position: 5
 
 # Contrast Tool
 
-As of the end of 2021, the FlatColorPicker provides a Color Contrast Tool. It provides the option for checking the color contrast ratio between two colors. Color contrast between text and background is important on web pages. It affects some people’s ability to perceive the information. The tool follows [the WCAG recommendations](/flatcolorpicker/accessibility/overview#wcag-21) for web accessibility.
+As of the end of 2021, the FlatColorPicker provides a Color Contrast Tool. It provides the option for checking the color contrast ratio between two colors. Color contrast between text and background is important on web pages. It affects some people’s ability to perceive the information. The tool follows [the WCAG recommendations](slug://jquery_flatcolorpicker_accessibility#wai-aria) for web accessibility.
 
 According to the WCAG standard, there are two levels of contrast ratio:
  * AA (minimum contrast)—The level AA requires a contrast ratio of at least 4.5:1 for normal text.

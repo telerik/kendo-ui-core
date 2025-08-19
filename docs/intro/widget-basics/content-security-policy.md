@@ -16,7 +16,7 @@ If the strict `Content-Security-Policy` (CSP) mode is enabled, it disables the f
 
 ## Kendo UI for jQuery Version 2024 Q4 and Later
 
-Starting with the [2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-4-1112) release, all Kendo UI for jQuery components are CSP compliant. 
+Starting with the [2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-4-1112-(2024-q4)) release, all Kendo UI for jQuery components are CSP compliant. 
 
 
 ## Kendo UI for jQuery Versions between R1 2023 and 2024 Q4

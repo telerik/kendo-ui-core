@@ -71,10 +71,10 @@ It's also possible to pass a CSS selector as argument. All matching links will b
 ##### options.forcePageBreak `String`
 An optional CSS selector that specifies the elements that should cause page breaks.
 
-See [Multi-page PDF output](/framework/drawing/drawing-dom#multi-page-pdf-output).
+See [Multi-page PDF output](slug://multipagecontent_drawing).
 
 ##### options.paperSize `String` *(default: "auto")*
-The paper size for [automatic page breaking](/framework/drawing/drawing-dom#automatic-page-breaking-q1-2015).
+The paper size for [automatic page breaking](slug://multipagecontent_drawing#automatic-page-breaking).
 The default "auto" means paper size is determined by content.
 
 Supported values:
@@ -101,7 +101,7 @@ The right margin. Numbers are considered as "pt" units.
 The top margin. Numbers are considered as "pt" units.
 
 ##### options.template `String`
-The [page template](/framework/drawing/drawing-dom#page-template-headers-and-footers) for multi-page output.
+The [page template](slug://templates_drawing) for multi-page output.
 
 #### Returns
 `Promise` A promise that will be resolved with the root Group of the scene.
