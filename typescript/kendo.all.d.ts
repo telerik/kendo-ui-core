@@ -12192,7 +12192,7 @@ declare namespace kendo.ui {
 
     interface SpreadsheetExcelImportEvent extends SpreadsheetEvent {
         file?: Blob|File | undefined;
-        progress?: JQueryPromise<any> | undefined;
+        promise?: JQueryPromise<any> | undefined;
     }
 
     interface SpreadsheetPdfExportEvent extends SpreadsheetEvent {

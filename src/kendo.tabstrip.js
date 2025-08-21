@@ -127,7 +127,7 @@ export const __meta__ = {
                         if (key === "class" || key === "role" || key === "aria-selected") {
                             return "";
                         }
-                        return `${kendo.attr(key)}='${kendo.sanitizeAttribute(value)}'`;
+                        return `${key}='${kendo.htmlEncode(value)}'`;
                     })
                     .join(" ");
             },
@@ -748,6 +748,7 @@ export const __meta__ = {
                 length;
 
             const enableDOMDataSource = that._enableDataSourceFromDOM;
+            const pristineData = that.dataSource._pristineData;
 
             e = e || {};
             action = e.action;
@@ -803,7 +804,11 @@ export const __meta__ = {
 
                 tab.enabled = view[idx].enabled;
                 tab.closable = view[idx].closable ?? options.closable;
-                tab.attributes = view[idx].attributes;
+
+                if (pristineData) {
+                    tab.attributes = pristineData[idx].attributes;
+                }
+
                 if (view[idx].content) {
                     tab.content = view[idx].content;
                 }
