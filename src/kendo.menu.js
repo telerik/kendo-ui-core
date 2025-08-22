@@ -2721,9 +2721,10 @@ export const __meta__ = {
             }
         },
 
-        open: function(x, y) {
+        open: function(x, y, keydown) {
             var that = this;
             const isHorizontal = that.options.orientation === 'horizontal';
+            let target = null;
             x = $(x)[0];
 
             if (typeof x === "number") {
@@ -2734,43 +2735,49 @@ export const __meta__ = {
                 }
             }
 
+            if (keydown) {
+                target = $(x);
+            }
+
             if (contains(that.element[0], $(x)[0]) || that._itemHasChildren($(x))) { // call parent open for children elements
                 Menu.fn.open.call(that, x);
             } else {
-                if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
-                    if (that.popup.visible() && that.options.filter) {
-                        that.popup.close(true);
-                        that.popup.element.parent().kendoStop(true);
-                    }
-
-                    if (!that._triggerFocusOnActivate) {
-                        that._triggerFocusOnActivate = that._focusMenu.bind(that);
-                    }
-                    that.bind(ACTIVATE, that._triggerFocusOnActivate);
-
-                    if (y !== undefined) {
-                        var overflowWrapper = that._overflowWrapper();
-                        if (overflowWrapper) {
-                            var offset = overflowWrapper.offset();
-                            x -= offset.left;
-                            y -= offset.top;
-                        }
-                        that.popup.wrapper.hide();
-                        that._configurePopupScrolling(x, y);
-                        that.popup.open(x, y);
-                    } else {
-                        that.popup.options.anchor = (x ? x : that.popup.anchor) || that.target;
-                        that.popup.element.kendoStop(true);
-                        that._configurePopupScrolling();
-                        that.popup.open();
-                    }
-
-                    that._initPopupScrolling(that.popup, isHorizontal);
-                    that.popup.element.siblings(scrollButtonSelector).hide();
-                    DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
-                    DOCUMENT_ELEMENT
-                        .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
+                if (that._triggerEvent({ item: that.element, type: OPEN, target }) !== false) {
+                    return;
                 }
+
+                if (that.popup.visible() && that.options.filter) {
+                    that.popup.close(true);
+                    that.popup.element.parent().kendoStop(true);
+                }
+
+                if (!that._triggerFocusOnActivate) {
+                    that._triggerFocusOnActivate = that._focusMenu.bind(that);
+                }
+                that.bind(ACTIVATE, that._triggerFocusOnActivate);
+
+                if (y !== undefined) {
+                    var overflowWrapper = that._overflowWrapper();
+                    if (overflowWrapper) {
+                        var offset = overflowWrapper.offset();
+                        x -= offset.left;
+                        y -= offset.top;
+                    }
+                    that.popup.wrapper.hide();
+                    that._configurePopupScrolling(x, y);
+                    that.popup.open(x, y);
+                } else {
+                    that.popup.options.anchor = (x ? x : that.popup.anchor) || that.target;
+                    that.popup.element.kendoStop(true);
+                    that._configurePopupScrolling();
+                    that.popup.open();
+                }
+
+                that._initPopupScrolling(that.popup, isHorizontal);
+                that.popup.element.siblings(scrollButtonSelector).hide();
+                DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
+                DOCUMENT_ELEMENT
+                    .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
             }
 
             return that;
@@ -2948,7 +2955,12 @@ export const __meta__ = {
                 target.on("keydown", (e) => {
                     if (e.keyCode === kendo.keys.F10 && e.shiftKey) {
                         e.preventDefault();
-                        that.open(e.target);
+
+                        if (that.options.keyboardAlignToAnchor) {
+                            that.popup.options.anchor = e.target;
+                        }
+
+                        that.open(e.target, null, true);
                     }
                 });
             }
@@ -2957,11 +2969,12 @@ export const __meta__ = {
         _triggerEvent: function(e) {
             var that = this,
                 anchor = $(that.popup.options.anchor)[0],
-                origin = that._eventOrigin;
+                origin = that._eventOrigin,
+                target = e.target;
 
             that._eventOrigin = undefined;
 
-            return that.trigger(e.type, extend({ type: e.type, item: e.item || this.element[0], target: anchor }, origin ? { event: origin } : {} ));
+            return that.trigger(e.type, extend({ type: e.type, item: e.item || this.element[0], target: target ?? anchor }, origin ? { event: origin } : {} ));
         },
 
         _popup: function() {

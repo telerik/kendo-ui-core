@@ -2978,6 +2978,46 @@ function pad(number, digits, end) {
         return htmlEncode(link);
     }
 
+    // Function to convert text URLs to HTML links
+    function convertTextUrlToLink(text) {
+        const urlRegex = /(https?|chrome|mailto):\/\/[^\s$.?#].[^\s]*/gi;
+
+        return text.replace(urlRegex, function(match) {
+            let url = match;
+            const displayText = match;
+
+            if (!url.match(/^[a-zA-Z][a-zA-Z0-9+.-]*:/)) {
+                if (url.toLowerCase().startsWith('www.')) {
+                    url = 'https://' + url;
+                } else if (url.includes('@')) {
+                    url = 'mailto:' + url;
+                } else {
+                    url = 'https://' + url;
+                }
+            }
+
+            // Validate URL using browser's URL constructor
+            try {
+                url = new URL(url).href;
+            } catch (e) {
+                // If URL is invalid, return original text
+                return match;
+            }
+
+            // Determine target and rel attributes based on protocol
+            let target = '_blank';
+            let rel = 'noopener noreferrer';
+            const protocol = url.split(':')[0].toLowerCase();
+
+            if (['mailto', 'tel', 'sms'].includes(protocol)) {
+                target = '_self';
+                rel = '';
+            }
+
+            return `<a href="${htmlEncode(url)}" target="${target}"${rel ? ` rel="${rel}"` : ''}>${htmlEncode(displayText)}</a>`;
+        });
+    }
+
     function unescape(value) {
         var template;
 
@@ -3146,6 +3186,7 @@ function pad(number, digits, end) {
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
         sanitizeLink: sanitizeLink,
+        convertTextUrlToLink: convertTextUrlToLink,
         unescape: unescape,
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);

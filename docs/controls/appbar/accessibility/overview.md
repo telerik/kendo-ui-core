@@ -9,7 +9,7 @@ position: 1
 # Appbar Accessibility
 
 The Appbar is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
-For more information, refer to [Accessibility in Kendo UI for jQuery].({% slug overview_accessibility_support_kendoui %})
+For more information, refer to [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}).
 
 
 

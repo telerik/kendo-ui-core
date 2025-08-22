@@ -466,7 +466,7 @@ export default kendo;
                 root: that.root
             });
 
-            // eslint-disable-next-line no-undef
+
             var initEventObject = { url: history.current || "/", preventDefault: $.noop };
 
             if (!that.trigger(INIT, initEventObject)) {

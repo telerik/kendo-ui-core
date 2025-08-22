@@ -181,6 +181,55 @@ The function to get the output from the AI service response.
     });
     </script>
 
+### ai.autoClose `Boolean` *(default: true)*
+
+Configures if the AI Assistant Window should remain visible after the response.
+
+#### Example - configure AI service output getter
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         autoClose: false,
+         service: {
+           url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+           outputGetter: function(response) {
+             return response.messages.join("---");
+           }
+         }
+       }
+    });
+    </script>
+
+### ai.keepOutputHistory `Boolean` *(default: false)*
+
+Configures if the AI Assistant output should be cleared after closing.
+
+#### Example - configure AI service output getter
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         autoClose: true,
+         keepOutputHistory: false,
+         service: {
+           url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+           outputGetter: function(response) {
+             return response.messages.join("---");
+           }
+         }
+       }
+    });
+    </script>
+
 ### ai.aiAssistant `Object`
 
 Defines the configuration options for the AI Assistant tool in the Grid.
@@ -805,7 +854,7 @@ Triggered when the prompt view Generate output button is clicked. The prompt tex
 
 The `prompt`, `output`, `history`, `isRetry` and `response` properties are available in the event argument. When the output is generated after clicking the retry button of an output, the `isRetry` property is `true` and the `output` property is the output content of the output card. The history property is an array of prompt outputs generated before the current output.
 
-### promptResponse
+### ai.aiAssistant.promptResponse
 
 Triggered when the AI service response is received. The response data is available through the event argument. Triggered only when the `serviceUrl` option is set.
 

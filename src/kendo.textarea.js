@@ -200,6 +200,33 @@ export const __meta__ = {
             that.element[0].focus();
         },
 
+        updateAutoHeight: function() {
+            const that = this;
+            const element = that.element;
+            const options = that.options;
+
+            if (options.resize === "auto" && options.maxRows) {
+                const computedStyle = getComputedStyle(element[0]);
+                const lineHeight = parseInt(computedStyle.lineHeight, 10) || 16;
+                const paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
+                const paddingBottom = parseInt(computedStyle.paddingBottom, 10) || 0;
+                const totalPadding = paddingTop + paddingBottom;
+                const minHeight = (options.rows * lineHeight) + totalPadding;
+                const maxHeight = (options.maxRows * lineHeight) + totalPadding;
+
+                element.css({
+                    height: minHeight + "px"
+                });
+
+                const scrollHeight = element[0].scrollHeight;
+
+                element.css({
+                    maxHeight: maxHeight + "px",
+                    height: scrollHeight + "px"
+                });
+            }
+        },
+
         destroy: function() {
             var that = this;
 
@@ -319,30 +346,7 @@ export const __meta__ = {
         },
 
         _input: function() {
-            const that = this;
-            const element = that.element;
-            const options = that.options;
-
-            if (options.resize === "auto" && options.maxRows) {
-                const computedStyle = getComputedStyle(element[0]);
-                const lineHeight = parseInt(computedStyle.lineHeight, 10) || 16;
-                const paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
-                const paddingBottom = parseInt(computedStyle.paddingBottom, 10) || 0;
-                const totalPadding = paddingTop + paddingBottom;
-                const minHeight = (options.rows * lineHeight) + totalPadding;
-                const maxHeight = (options.maxRows * lineHeight) + totalPadding;
-
-                element.css({
-                    height: minHeight + "px"
-                });
-
-                const scrollHeight = element[0].scrollHeight;
-
-                element.css({
-                    maxHeight: maxHeight + "px",
-                    height: scrollHeight + "px"
-                });
-            }
+            this.updateAutoHeight();
         },
 
         _wrapper: function() {

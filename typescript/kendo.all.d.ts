@@ -470,37 +470,31 @@ declare namespace kendo {
 }
 
 declare namespace kendo.chat {
-    class ChatMessageBox extends  kendo.Class {
+    // @deprecated Use the main Chat widget instead
+    class ChatView extends kendo.Class {
         init?(options: any): void;
         exec?(): void;
         styles?(options: any): void;
     }
 
-    class ChatToolBar extends  kendo.Class {
-        init?(options: any): void;
-        exec?(): void;
-        styles?(options: any): void;
-    }
-
-    class ChatView extends  kendo.Class {
-        init?(options: any): void;
-        exec?(): void;
-        styles?(options: any): void;
-    }
-
-    class Component extends  kendo.Class {
+    // @deprecated Use the main Chat widget instead
+    class Component extends kendo.Class {
         init?(options: any): void;
         exec?(): void;
     }
 
+    // @deprecated
     interface Templates {
-       heroCard?(): void;
-       message?(): void;
     }
 
+    // Deprecated methods - kept for backwards compatibility
+    // @deprecated Use built-in templates or append elements manually
     function getComponent(componentName: string): void;
+    // @deprecated Use built-in templates or append elements manually
     function getTemplate(templateName: string): kendo.chat.Templates | string;
+    // @deprecated Use built-in templates or append elements manually
     function registerComponent(componentName: string, component: kendo.chat.Component): void;
+    // @deprecated Use built-in templates or append elements manually
     function registerTemplate(templateName: string, template: string | Function): void;
 }
 
@@ -3469,7 +3463,21 @@ declare namespace kendo.ui {
 
     interface ChartWizardDefaultState extends Pick<ChartWizardState, 'stack' | 'seriesType'> { }
 
-
+    interface ChatMessage {
+        id?: string | any;
+        uid?: string | undefined;
+        text?: string | undefined;
+        authorId?: string | undefined;
+        authorName?: string | undefined;
+        authorImageUrl?: string | undefined;
+        authorImageAltText?: string | undefined;
+        timestamp?: Date | undefined;
+        replyToId?: string | any | undefined;
+        isDeleted?: boolean | undefined;
+        isPinned?: boolean | undefined;
+        files?: ChatFile[] | undefined;
+        type?: string | undefined;
+    }
 
     class Chat extends kendo.ui.Widget {
 
@@ -3477,6 +3485,7 @@ declare namespace kendo.ui {
 
         options: ChatOptions;
 
+        dataSource: kendo.data.DataSource;
 
         element: JQuery;
         wrapper: JQuery;
@@ -3485,71 +3494,117 @@ declare namespace kendo.ui {
 
         constructor(element: Element, options?: ChatOptions);
 
-
-        clearUserTypingIndicator(sender: any): void;
-        getUser(): any;
-        postMessage(message: string): void;
-        removeTypingIndicator(): void;
-        renderAttachments(options: any, sender: any): void;
-        renderMessage(message: any, sender: any): void;
-        renderSuggestedActions(suggestedActions: any): void;
-        renderUserTypingIndicator(sender: any): void;
-        toggleToolbar(skipEffects: boolean): void;
+        clearMessages(): void;
+        clearPinnedMessage(): void;
+        clearReplyState(): void;
+        dataItem(message: JQuery): any;
+        destroy(): void;
+        fileDataItem(message: any, file: JQuery): ChatFile;
+        getMessageByUid(uid: string): ChatMessage | null;
+        getUserId(): string;
+        postMessage(message: string | ChatMessage): ChatMessage;
+        removeMessage(message: ChatMessage): boolean;
+        scrollToBottom(): void;
+        setDataSource(dataSource: kendo.data.DataSource | any[] | any): void;
+        setOptions(options: ChatOptions): void;
+        toggleSendButtonGenerating(generating: boolean): void;
+        updateMessage(message: ChatMessage, newData: ChatMessage): ChatMessage;
     }
 
     interface ChatMessages {
         messageListLabel?: string | undefined;
         placeholder?: string | undefined;
         sendButton?: string | undefined;
-        toggleButton?: string | undefined;
+        speechToTextButton?: string | undefined;
+        fileButton?: string | undefined;
+        downloadAll?: string | undefined;
+        selfMessageDeleted?: string | undefined;
+        otherMessageDeleted?: string | undefined;
+        pinnedMessageCloseButton?: string | undefined;
+        replyMessageCloseButton?: string | undefined;
+        fileMenuButton?: string | undefined;
     }
 
-    interface ChatUser {
-        iconUrl?: string | undefined;
+    interface ChatMenuAction {
         name?: string | undefined;
-    }
-
-    interface ChatRenderAttachmentsOptionsAttachments {
-        content?: any;
-        contentType?: string | undefined;
-    }
-
-    interface ChatRenderAttachmentsOptions {
-        attachments?: ChatRenderAttachmentsOptionsAttachments | undefined;
-        attachmentLayout?: string | undefined;
-    }
-
-    interface ChatRenderAttachmentsSender {
-        id?: any;
-        name?: string | undefined;
-        iconUrl?: string | undefined;
-    }
-
-    interface ChatRenderMessageMessage {
-        type?: string | undefined;
         text?: string | undefined;
+        icon?: string | undefined;
+        attr?: any;
+        enabled?: boolean | undefined;
     }
 
-    interface ChatRenderMessageSender {
-        id?: any;
+    interface ChatMessageToolbarAction {
         name?: string | undefined;
-        iconUrl?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        type?: string | undefined;
+        attributes?: any;
+        fillMode?: string | undefined;
+        overflow?: string | undefined;
     }
 
-    interface ChatRenderSuggestedActionsSuggestedActions {
-        title?: string | undefined;
-        value?: string | undefined;
+    interface ChatFile {
+        uid?: string | undefined;
+        name?: string | undefined;
+        size?: number | undefined;
+        type?: string | undefined;
+        url?: string | undefined;
+        extension?: string | undefined;
+    }
+
+    interface ChatSuggestion {
+        text?: string | undefined;
     }
 
     interface ChatOptions {
         name?: string | undefined;
+        allowMessageCollapse?: boolean | undefined;
+        fileActions?: ChatMenuAction[] | undefined;
+        autoBind?: boolean | undefined;
+        authorId?: string | number | undefined;
+        authorIdField?: string | undefined;
+        authorImageAltTextField?: string | undefined;
+        authorImageUrlField?: string | undefined;
+        authorNameField?: string | undefined;
+        dataSource?: kendo.data.DataSource | kendo.data.DataSourceOptions | any[] | undefined;
+        dir?: string | undefined;
+        fileAttachment?: boolean | undefined;
+        filesField?: string | undefined;
+        filesTemplate?: Function | undefined;
+        headerItems?: AppBarItem[] | undefined;
+        height?: number | string | undefined;
+        idField?: string | undefined;
+        isDeletedField?: string | undefined;
+        isPinnedField?: string | undefined;
+        isTypingField?: string | undefined;
+        messageActions?: ChatMenuAction[] | undefined;
+        messageGroupTemplate?: Function | undefined;
+        messageReferenceTemplate?: Function | undefined;
         messages?: ChatMessages | undefined;
-        user?: ChatUser | undefined;
-        actionClick?(e: ChatActionClickEvent): void;
-        post?(e: ChatPostEvent): void;
+        messageTemplate?: Function | undefined;
+        messageTimeFormat?: string | undefined;
+        messageToolbarActions?: ChatMessageToolbarAction[] | undefined;
+        messageWidthMode?: string | undefined;
+        replyToIdField?: string | undefined;
+        skipSanitization?: boolean | undefined;
+        speechToText?: boolean | undefined;
+        suggestedActionsScrollable?: boolean | undefined;
+        suggestedActionsTemplate?: Function | undefined;
+        suggestions?: ChatSuggestion[] | undefined;
+        suggestionsScrollable?: boolean | undefined;
+        suggestionsTemplate?: Function | undefined;
+        textField?: string | undefined;
+        timestampTemplate?: Function | undefined;
+        timestampField?: string | undefined;
+        width?: number | string | undefined;
+        input?(e: ChatInputEvent): void;
         sendMessage?(e: ChatSendMessageEvent): void;
-        typingEnd?(e: ChatTypingEndEvent): void;
-        typingStart?(e: ChatTypingStartEvent): void;
+        suggestionClick?(e: ChatSuggestionClickEvent): void;
+        unpin?(e: ChatUnpinEvent): void;
+        toolbarAction?(e: ChatToolbarActionEvent): void;
+        fileMenuAction?(e: ChatFileMenuActionEvent): void;
+        contextMenuAction?(e: ChatContextMenuActionEvent): void;
+        download?(e: ChatDownloadEvent): void;
     }
     interface ChatEvent {
         sender: Chat;
@@ -3557,24 +3612,48 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
-    interface ChatActionClickEvent extends ChatEvent {
-        text?: string | undefined;
+    interface ChatActionExecuteEvent extends ChatEvent {
+        type?: string | undefined;
+        message?: ChatMessage | undefined;
+        file?: ChatFile | undefined;
     }
 
-    interface ChatPostEvent extends ChatEvent {
-        text?: string | undefined;
-        timestamp?: Date | undefined;
-        from?: any;
+    interface ChatInputEvent extends ChatEvent {
+        value?: string | undefined;
     }
 
     interface ChatSendMessageEvent extends ChatEvent {
+        message?: ChatMessage | undefined;
+        generating?: boolean | undefined;
+    }
+
+    interface ChatSuggestionClickEvent extends ChatEvent {
         text?: string | undefined;
     }
 
-    interface ChatTypingEndEvent extends ChatEvent {
+    interface ChatUnpinEvent extends ChatEvent {
+        message?: ChatMessage | undefined;
     }
 
-    interface ChatTypingStartEvent extends ChatEvent {
+    interface ChatToolbarActionEvent extends ChatEvent {
+        type?: string | undefined;
+        message?: ChatMessage | undefined;
+    }
+
+    interface ChatFileMenuActionEvent extends ChatEvent {
+        type?: string | undefined;
+        file?: ChatFile | undefined;
+        message?: ChatMessage | undefined;
+    }
+
+    interface ChatContextMenuActionEvent extends ChatEvent {
+        type?: string | undefined;
+        message?: ChatMessage | undefined;
+    }
+
+    interface ChatDownloadEvent extends ChatEvent {
+        files?: ChatFile[] | undefined;
+        message?: ChatMessage | undefined;
     }
 
     class CheckBox extends kendo.ui.Widget {
@@ -7598,9 +7677,18 @@ declare namespace kendo.ui {
         showInactiveTools?: boolean | undefined;
     }
 
+    interface GridAIOptions {
+        keepOutputHistory?: boolean | undefined;
+        autoClose?: boolean | undefined;
+        service?: string | AIPromptServiceOptions | undefined;
+        aiAssistant?: AIPromptOptions | undefined;
+        aiAssistantWindow?: WindowOptions | undefined;
+    }
+
     interface GridOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        ai?: GridAIOptions | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
         allowPaste?: boolean | undefined;
         altRowTemplate?: string|Function | undefined;
