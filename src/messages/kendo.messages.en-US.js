@@ -318,6 +318,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogCancel": "Cancel",
   "cleanFormatting": "Clean formatting",
   "createTable": "Create table",
+  "createTableHint": "Create a {0} x {1} table", 
   "addColumnLeft": "Add column on the left",
   "addColumnRight": "Add column on the right",
   "addRowAbove": "Add row above",
