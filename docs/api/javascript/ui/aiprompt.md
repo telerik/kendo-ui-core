@@ -1245,9 +1245,13 @@ Triggered when the prompt view Generate output button is clicked. The prompt tex
 
 The `prompt`, `output`, `history` and `isRetry` properties are available in the event argument. When the output is generated after clicking the retry button of an output, the `isRetry` property is `true` and the `output` property is the output content of the output card. The history property is an array of prompt outputs generated before the current output.
 
+You can prevent the default behavior of the `promptRequest` event by calling `e.preventDefault()` in the event handler.
+
 ### promptResponse
 
 Triggered when the AI service response is received. The response data is available through the event argument. Triggered only when the `serviceUrl` option is set.
+
+You can prevent the default behavior of the `promptResponse` event by calling `e.preventDefault()` in the event handler.
 
 #### Event Data
 
