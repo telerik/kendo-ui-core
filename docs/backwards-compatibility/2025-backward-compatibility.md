@@ -11,7 +11,12 @@ position: 0
 
 This article lists the breaking or important changes in the 2025 releases of Kendo UI. For the complete list of changes in the UI components, see the [product release history](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
+
 ## Kendo UI 2025 Q3
+
+**Chat**
+
+Starting with the **2025.3.825** Kendo UI for jQuery version, the Chat component has been completely redesigned. The API is updated accordingly to support the newly introduced features.
 
 **AIPrompt**
 

@@ -26,8 +26,8 @@ liquid-output-delimiter-right: "}}"
 liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
-  cdnVersion: "2025.3.812"
-  themesCdnVersion: "11.3.2"
+  cdnVersion: "2025.3.825"
+  themesCdnVersion: "12.0.0"
 
 markdown-replacements:
 # TODO:REPLACE WITH SLUGS
@@ -41,8 +41,8 @@ default-code-block-language: js
 
 kendo-api-path: ./api
 dojo-scripts:
-  kendoCdnVersion: 2025.3.812
-  themesCdnVersion: 11.3.2
+  kendoCdnVersion: 2025.3.825
+  themesCdnVersion: 12.0.0
   pdfJsVersion: 4.6.82
   jQueryVersion: 3.4.1
 
@@ -165,6 +165,9 @@ excluded-files:
 - "**/watch.sh"
 - "**/api/*"
 - "**/intro/scripts/*"
+- "**/controls/chat/integrations/*"
+- "**/controls/chat/toolbar.md"
+- "**/controls/chat/chat-items.md"
 
 meta:
   api/javascript:
@@ -1601,6 +1604,15 @@ redirects:
 
 - from: ^/web/chat/(.*)$
   to: /controls/chat/$1
+
+- from: ^/controls/chat/integrations/(.*)$
+  to: /controls/chat/index/$1
+
+- from: ^/controls/chat/toolbar/
+  to: /controls/chat/index/$1
+
+- from: ^/controls/chat/chat-items/
+  to: /controls/chat/index/$1
 
 - from: ^/dataviz/(sparkline|treemap|stockchart)/(.*)$
   to: /controls/charts/$1/$2

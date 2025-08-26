@@ -30,9 +30,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-mvc
   framework: "ASP.NET MVC"
   framework_short: "MVC"
-  cdnVersion: "2025.3.812"
-  themesCdnVersion: "11.3.2"
-  mvcCoreVersion: "2025.3.812"
+  cdnVersion: "2025.3.825"
+  themesCdnVersion: "12.0.0"
+  mvcCoreVersion: "2025.3.825"
   platform: aspnet-mvc
   core: false
   mvc: true
@@ -586,6 +586,8 @@ meta:
     title: TimeDurationPicker
   html-helpers/editors/imageeditor:
     title: Image Editor
+  html-helpers/conversational-ui/inline-aiprompt:
+    title: InlineAIPrompt
   html-helpers/editors/flatcolorpicker:
     title: FlatColorPicker
   html-helpers/editors/listbox/binding:

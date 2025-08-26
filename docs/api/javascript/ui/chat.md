@@ -1455,6 +1455,10 @@ Defines the icon class for the toolbar action.
     });
     </script>
 
+### messageToolbarActions.text `String`
+
+Defines the text for the toolbar action.
+
 ### messageToolbarActions.name `String`
 
 Defines the name identifier for the toolbar action.
@@ -1706,6 +1710,10 @@ The template used to render suggested actions. The `k-suggestions` class must be
 
 Defines the collection of suggested messages that users can quickly select. These appear as clickable buttons below the message input area, allowing users to send common responses quickly.
 
+### suggestions.text `String`
+
+The text of the suggestion.
+
 #### Example
 
     <div id="chat"></div>
@@ -1750,7 +1758,7 @@ Defines the collection of suggested messages that users can quickly select. Thes
 
 Enables or disables scrollable behavior for message suggestions.
 
-#### Example
+### suggestionsTemplate `Function`
 
     <div id="chat"></div>
     <script>

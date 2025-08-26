@@ -373,6 +373,11 @@ defaults:
         title_prefix: "ASP.NET MVC Image Editor Component"
 -
     scope:
+        path: "html-helpers/conversational-ui/inline-aiprompt"
+    values:
+        title_prefix: "ASP.NET MVC InlineAIPrompt Component"
+-
+    scope:
         path: "html-helpers/editors/listbox"
     values:
         title_prefix: "ASP.NET MVC ListBox Component"

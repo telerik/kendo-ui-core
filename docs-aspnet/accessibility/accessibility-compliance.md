@@ -77,6 +77,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 | Grid                | AA      | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/grid) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/accessibility/overview) |
 | GridLayout          | N/A      | N/A                   | N/A                         |
 | ImageEditor         | AA      | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/imageeditor) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/imageeditor/accessibility/overview) |
+| InlineAIPrompt      | AAA     | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/inline-aiprompt) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/conversational-ui/inline-aiprompt/accessibility/overview) |
 | LinearGauge         | N/A      | N/A                   | N/A                         |
 | ListBox             | AA      | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/listbox) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/listbox/accessibility/overview) |
 | ListView            | AAA     | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/listview) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/listview/accessibility/overview) |

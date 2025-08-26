@@ -51,6 +51,7 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
       <IntroTableSection title="Conversational UI">
          <IntroTableAnchor title="AIPrompt" href="slug:htmlhelpers_overview_aiprompt"></IntroTableAnchor>
          <IntroTableAnchor title="Chat" href="slug:htmlhelpers_chat_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="InlineAIPrompt" href="slug:htmlhelpers_overview_inline_aiprompt"></IntroTableAnchor>
       </IntroTableSection>
       <IntroTableSection title="Data Source">
          <IntroTableAnchor title="DataSource" href="slug:htmlhelpers_datasource_aspnetcore"></IntroTableAnchor>
