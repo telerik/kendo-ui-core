@@ -4,7 +4,7 @@ page_title: Peer-to-Peer Chat with SignalR
 description: "Learn how to create a peer-to-peer Telerik UI Chat with {{ site.framework }} SignalR."
 previous_url: /helpers/conversational-ui/chat/signalr-p-to-p
 slug: htmlhelpers_chat_aspnetcore_signalr
-position: 2
+position: 8
 ---
 
 # Peer-to-Peer Chat

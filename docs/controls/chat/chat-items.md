@@ -17,7 +17,7 @@ To provide better customer experience, the Chat offers support for predefined an
 
 ## Default Cards
 
-The Chat supports the `heroCards` option which can be displayed in the chat flow by manually calling the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the component.
+The Chat supports the `heroCards` option which can be displayed in the chat flow by manually calling the `renderAttachments` method of the component.
 
 ```dojo
 <div id="chat"></div>
@@ -69,7 +69,7 @@ You can also add images to the `heroCard` setting by passing the proper values t
 
 ## Suggested Actions
 
-The Chat also supports the implementation of suggested actions. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the component.
+The Chat also supports the implementation of suggested actions. To display the `suggestedActions` prompt, manually call the `renderSuggestedActions` method of the component.
 
 ```dojo
 <div id="chat"></div>
@@ -153,7 +153,7 @@ The following example demonstrates how to implement a simple template and regist
 
 The Chat allows you to implement custom components and use JavaScript to render content.
 
-The following example demonstrates how to place a [Kendo UI Calendar]({% slug overview_kendoui_calendar_widget %}) in a custom Chat component.
+The following example demonstrates how to place a Kendo UI Calendar in a custom Chat component.
 
 ```dojo
 <div id="chat"></div>

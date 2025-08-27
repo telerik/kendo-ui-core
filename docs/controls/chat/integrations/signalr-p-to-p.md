@@ -123,8 +123,6 @@ In the `wwwroot/js` folder, create a `chat.js` file where the Chat will be initi
 
 You are now ready to run the project! Open the Chat in two separate tabs and start typing.
 
-To review the complete project, go to the [Kendo UI examples repository](https://github.com/telerik/kendo-examples-asp-net).
-
 
 ## See Also
 

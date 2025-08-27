@@ -8,20 +8,20 @@ position: 1
 
 # {{ site.product }} Chat Overview
 
-The Chat allows the user to participate in chat sessions with other users or with chat bots.
+> Starting with the **2025.3.825** Kendo UI for jQuery version, the Chat component has been completely redesigned. The API is updated accordingly to support the newly introduced features.
 
-Chats provide support for default cards and actions, and enable the configuration of custom templates and custom components. They provide rich conversational experience that goes beyond the natural language understanding and personality of the chatbot. These features allow you to implement conversational UI in your applications by utilizing AI-powered frameworks that work with natural language processing either by following a predefined logical tree or for integrating P2P chat capabilities in the applications.
+The Kendo UI for jQuery Chat component empowers developers to create sophisticated conversational experiences within web applications. It facilitates seamless communication between users, chatbots, and AI-powered systems through an intuitive and highly customizable interface. The component offers extensive functionality including message threading, file attachments, user avatars, quick action suggestions, and comprehensive accessibility support. Built with flexibility in mind, it enables easy integration with various messaging services, machine learning models, and custom business workflows to meet diverse application requirements.
 
-![Kendo UI for jQuery Chat Structure](images/chat-structure-no-toolbar.png)
+![Kendo UI for jQuery Chat](images/chat-overview.png)
 
 ## Functionality and Features
 
-* [Items]({% slug chat_items %})&mdash;The Chat component supports predefined and customizable items.
-* [Toolbar]({% slug toolbar_for_chat %})&mdash;You can customize the tools displayed in the Chat`s toolbar.
-* [Peer-to-Peer Chat with SignalR]({% slug peertopeerp_chat_kendoui %})&mdash;You can configure a Kendo UI Chat component and a .Net Core SignalR service to create a Peer-to-Peer Chat application.
-* [Chat Bot service integration]({% slug connect_to_chatbot_service %})&mdash;The Chat allows you to connect to any remote service that can return content to the component.
-* [Microsoft Bot Framework integration]({% slug connect_to_ms_bot_framework %})&mdash;You can configure a `Chat agent class` that handles the communication between the Chat component and the `Microsoft Bot Framework`.
-* [Google DialogFlow integration]({% slug connect_to_google_dialogflow %})&mdash;You can configure a `Chat agent class` that handles the communication between the Chat component and the `Google DialogFlow`.
+* [Data Binding]({% slug databinding_kendoui_chat %})&mdash;Bind the Chat component either to a local data collection, to data retrieved from a remote endpoint.
+* [AI Integration]({% slug databinding_kendoui_chat %})&mdash;Configure the Chat to interact with a large language model through a standalone AI chat client service.
+* [Tools]({% slug tools_kendoui_chat %})&mdash;Utilize the available context menu actions and toolbar and commands.
+* [File Uploads and Media]({% slug media_kendoui_chat %})&mdash;Enable the file uploads, media sharing, and speech-to-text functionality of the Chat component.
+* [Quick Actions]({% slug suggestions_kendoui_chat %})&mdash;Define quick response suggestions that appear below the message input.
+* [Templates]({% slug templates_kendoui_chat %})&mdash;Use the template options to customize the rendering of the messages, attachments, and quick actions.
 
 ## Next Steps 
 

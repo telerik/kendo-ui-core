@@ -105,7 +105,6 @@ Extend the **Agenda** view of the Scheduler and implement a custom render functi
             }
 
             var items = this._eventsList = flattenTaskGroups(groups);
-            this._angularItems(table, items);
 
             this.refreshLayout();
             this.trigger("activate");
@@ -114,8 +113,8 @@ Extend the **Agenda** view of the Scheduler and implement a custom render functi
 
     $(function() {
         $("#scheduler").kendoScheduler({
-            date: new Date("2018/1/13"),
-            startTime: new Date("2018/1/13 07:00 AM"),
+            date: new Date("2026/1/13"),
+            startTime: new Date("2026/1/13 07:00 AM"),
             height: 600,
             views: [
                 { type: "CustomAgenda", title: "Custom Agenda" }

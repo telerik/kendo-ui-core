@@ -30,6 +30,7 @@ installation/adding-client-side-resources/scripts/*,
 installation/adding-client-side-resources/using-libman.md,
 vs-integration/snippets.md,
 vs-code-integration/*,
+ai/*,
 asp-net-mvc-3.md,
 asp-net-mvc-4.md,
 troubleshoot/troubleshooting-net8.md,
@@ -371,6 +372,11 @@ defaults:
         path: "html-helpers/editors/imageeditor"
     values:
         title_prefix: "ASP.NET MVC Image Editor Component"
+-
+    scope:
+        path: "html-helpers/conversational-ui/inline-aiprompt"
+    values:
+        title_prefix: "ASP.NET MVC InlineAIPrompt Component"
 -
     scope:
         path: "html-helpers/editors/listbox"

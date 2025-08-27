@@ -36,7 +36,7 @@ The example below demonstrates how to implement this using the [markdown-js](htt
 
 To show the message:
 
-1. Register a custom message type with the [`kendo.template`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) and [`kendo.chat.registerTemplate`](https://docs.telerik.com/kendo-ui/controls/chat/chat-items#custom-templates)
+1. Set a *messageTemplate* [`kendo.template`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template)
 1. In the Template render the Markdown to Html using the third-party library
 1. Show the message using the `renderMessage` method
 
@@ -57,19 +57,16 @@ To show the message:
       '</div>'
     );
 
-  	kendo.chat.registerTemplate("md_message", MD_MESSAGE);
-
-  	$("#chat").kendoChat();
+  	$("#chat").kendoChat({
+      messageTemplate: MD_MESSAGE
+    });
 
     var chat = $("#chat").data("kendoChat");
 
     chat.renderMessage({
-        type: "md_message",
-        text: "*Hello* __MD__ Message [link](http://www.telerik.com)"
-    }, {
-        id: kendo.guid(),
-        name: "Sample Bot",
-        iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/InsuranceBot.png"
+      text: "*Hello* __MD__ Message [link](http://www.telerik.com)",
+      id: kendo.guid(),
+      authorName: "Sample Bot"
     });
 </script>
 ```

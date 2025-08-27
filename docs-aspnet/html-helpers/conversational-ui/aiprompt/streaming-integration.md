@@ -16,6 +16,8 @@ In this article, you will build a practical, end-to-end example that wires the A
 
 To creare an AI chat serivce that connects to the AIPrompt, follow the next steps:
 
+> The example uses a Telerik-hosted AI service for demonstration purposes only. For production applications, you can implement your own AI service that understands your specific domain, data, and business requirements.
+
 1. Add a reference to the AI chat client script and initialize the client.
 
     ```JS
