@@ -16,26 +16,56 @@ For a runnable example, refer to the [demo on using the keyboard navigation of t
 
 Focusable elements in the Chat are part of the page tab sequence:
 
-- `k-quick-reply` (if present);
-- `k-message-box input`;
-- `k-input-suffix button` elements;
-- `k-toolbar-box` (if present)&mdash;it implements the keyboard navigation for a ToolBar component.
+- `.k-suggestion` (if present);
+- `.k-message-box textarea`;
+- all `.k-input-suffix button` elements;
+- all `.k-chat-file .k-menu-button` elements (if any);
+- all `.k-chat-download-button` elements (if any);
+- all `.k-message-reference .k-button` elements (if any);
 
-## Keyboard Shortcuts Applicable to the Message Input
+## Keyboard Shortcuts
 
-The Chat supports the following keyboard shortcuts when the message input is focused:
+This section lists the keyboard shortcuts supported by the Chat composite component.
+
+### ToolBar Component
+
+The Chat includes a ToolBar component for message actions and file operations. Refer to the [ToolBar keyboard navigation documentation](slug:keynav_aspnetcore_toolbar) for the available shortcuts.
+
+### DropDownButton Component
+
+The Chat uses DropDownButtons for various actions. Refer to the [DropDownButton keyboard navigation documentation](slug:keynav_aspnetcore_dropdownbutton) for the available shortcuts.
+
+### SpeechToTextButton Component
+
+When speech-to-text functionality is enabled refer to the [SpeechToTextButton keyboard navigation documentation](slug:htmlhelpers_speechtotextbutton_keynav) for the available shortcuts.
+
+### ContextMenu Component
+
+The ContextMenu component provides a context menu for the chat bubble upon `Right Click` or `Shift + F10` key press. Refer to the [ContextMenu keyboard navigation documentation](slug:htmlhelpers_contextmenu_keyboardnavigation_aspnetcore) for the available shortcuts.
+
+## Keyboard Shortcuts Applicable to Chat Bubbles
+
+The Chat supports the following keyboard shortcuts when a chat bubble is focused:
 
 | SHORTCUT | DESCRIPTION |
 | -------- | -------- |
-| `F10` | Opens and focuses the Chat ToolBar (if present). |
+| `Up Arrow` | Selects and focuses the previous Chat bubble. |
+| `Down Arrow` | Selects and focuses the next Chat bubble. |
+| `Home` | Selects and focuses the first Chat bubble. |
+| `End` | Selects and focuses the last Chat bubble. |
 
-## Keyboard Shortcuts Аpplicable to the Buttons
-
-The Chat supports the following keyboard shortcuts when any of the buttons is focused:
+## Keyboard Shortcuts Applicable to Suggestions and Button Elements
 
 | SHORTCUT | DESCRIPTION |
 | -------- | -------- |
-| `Enter` or `Space` | Triggers a `click` action on the button. |
+| `Enter` or `Space` | Triggers a `click` action on the element. |
+
+## Keyboard Shortcuts Applicable to Message Box
+
+| SHORTCUT | DESCRIPTION |
+| -------- | -------- |
+| `Enter` | Sends the message. |
+| `Shift + Enter` | Start a new line in the textarea message box. |
 
 ## See Also
 

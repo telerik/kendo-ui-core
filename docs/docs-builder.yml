@@ -1875,6 +1875,9 @@ redirects:
 - from: ^/knowledge-base/use-angularjs-sortable-batch-editable-grid$
   to: /knowledge-base
 
+- from: ^/knowledge-base/clear-all-messages-kendo-ui-chat$
+  to: /knowledge-base
+
 - from: ^/controls/sortable/how-to/angularjs/(use-sortable-grid-angular|angularjs-reorder-grid-rows|angularjs-batch-editable-grid)$
   to: /knowledge-base
 

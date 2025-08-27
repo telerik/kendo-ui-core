@@ -275,7 +275,7 @@ Specifies the field name in the data source from which the alt text for the auth
             text: "Hello!", 
             authorId: "user1", 
             authorName: "John",
-            authorImageUrl: "avatar.jpg",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
             authorAltText: "John's profile picture",
             timestamp: new Date() 
         }
@@ -1662,7 +1662,7 @@ Enables or disables scrollable behavior for suggested actions.
         }
     ];
     $("#chat").kendoChat({
-        dataSource: chatData,
+        dataSource: messagesData,
         suggestedActionsScrollable: true
     });
     </script>

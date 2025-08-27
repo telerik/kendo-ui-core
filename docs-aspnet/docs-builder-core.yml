@@ -517,10 +517,10 @@ meta:
     position: 11
   accessibility:
     title: Accessibility
-    position: 10
+    position: 11
   globalization:
     title: Globalization
-    position: 9
+    position: 10
   styles-and-layout/less-themes:
     title: LESS Themes
     position: 3
@@ -530,6 +530,9 @@ meta:
   styles-and-layout:
     title: Styles and Appearance
     position: 8
+  ai:
+    title: AI Coding Assistant
+    position: 9
   html-helpers/pdf/pdfviewer:
     title: PDFViewer
   html-helpers/pdf:

@@ -10,7 +10,7 @@ position: 1
 
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} Chat and highlights the major steps in the configuration of the component.
 
-You will initialize a Chat component and load it with data. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
+You will initialize a Chat component configure its DataSource, add suggestions, set dimensions, configure header items, and handle context menu actions. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
  ![Sample Telerik UI for {{ site.framework }} Chat](./images/chat-getting-started.png)
 
@@ -24,7 +24,6 @@ You will initialize a Chat component and load it with data. {% if site.core %}Fi
 
 Use the Chat HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to the page. The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the Chat element. 
 
-
 ```HtmlHelper
     @using Kendo.Mvc.UI
 
@@ -34,10 +33,10 @@ Use the Chat HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the com
 ```
 {% if site.core %}
 ```TagHelper
-    @addTagHelper *, Kendo.Mvc
+@addTagHelper *, Kendo.Mvc
 
-    <kendo-chat name="chat">
-    </kendo-chat>
+<kendo-chat name="chat">
+</kendo-chat>
 ```
 {% endif %}
 

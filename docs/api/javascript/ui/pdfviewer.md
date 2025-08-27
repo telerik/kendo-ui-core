@@ -1298,7 +1298,7 @@ The encountered error. Might show the file or xhr request.
 The error message displayed in the dialog.
 
 #### Example
-
+```pseudo
     <div id="pdfviewer"></div>
 
     <script type="module">
@@ -1311,3 +1311,4 @@ The error message displayed in the dialog.
         }
       });
     </script>
+```
