@@ -638,9 +638,12 @@ meta:
   html-helpers/data-management/grid/accessibility:
     title: Accessibility
     position: 29
+  html-helpers/data-management/grid/smart-grid:
+    title: Smart Grid
+    position: 30
   html-helpers/data-management/grid/troubleshoot:
     title: Troubleshooting
-    position: 30
+    position: 31
   html-helpers/data-management/grid/appearance:
     title: Appearance
     position: 4

@@ -145,7 +145,7 @@ demos:
 markdown-replacements:
 - pattern: (/\.\.)*/aspnet-core/api/
   replacement: /api/
-- pattern: "```[ ]*(\\r?\\n[ ]*)+((?<liquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})[ ]*(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
+- pattern: "```[ ]*(\\r?\\n[ ]*)+(?=(?<followedBy>\\{%|\\r?\\n[ ]*```(?!prompt)))((?<liquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})[ ]*(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
   replacement: "```$<liquid>$<additionalLiquid>$<nextBlock>"
 - pattern: "```(?<lang>(HtmlHelper|View|TagHelper))\\s*?(?<newLine>\\r?\\n)"
   replacement: "```Razor $<lang>$<newLine>"
@@ -681,9 +681,12 @@ meta:
   html-helpers/data-management/grid/accessibility:
     title: Accessibility
     position: 29
+  html-helpers/data-management/grid/smart-grid:
+    title: Smart Grid
+    position: 30
   html-helpers/data-management/grid/troubleshoot:
     title: Troubleshooting
-    position: 30
+    position: 31
   html-helpers/data-management/grid/appearance:
     title: Appearance
     position: 4
