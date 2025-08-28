@@ -117,9 +117,7 @@ public class HomeController : Controller
   }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Filtering
 #telerik_aspnetcorehtml_assistant Implement a Grid with filter row functionality. Show how to set up default filter operators for text, numeric, and date columns.
@@ -259,9 +257,7 @@ namespace ProjectName.Models
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Export
 #telerik_aspnetcorehtml_assistant Add Excel and PDF export functionality to a Grid.
@@ -324,9 +320,7 @@ public ActionResult Pdf_Export_Save(string contentType, string base64, string fi
 <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Virtualization
 #telerik_aspnetcorehtml_assistant Set up a Grid with virtual scrolling to handle large datasets efficiently.
@@ -357,9 +351,7 @@ public ActionResult Pdf_Export_Save(string contentType, string base64, string fi
 )
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Column Templates
 #telerik_aspnetcorehtml_assistant Create a Grid that bind to a Model and has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in foramt "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
@@ -498,9 +490,7 @@ public class Employee
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Filtering
 #telerik_aspnetcoretag_assistant Implement a basic Grid with enabled default filter row functionality. Set up default filter operators for some of the columns.
@@ -670,9 +660,7 @@ namespace ProjectName.Models
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Export
 #telerik_aspnetcoretag_assistant Add Excel and PDF export functionality to a Grid.
@@ -722,9 +710,7 @@ public IActionResult Pdf_Export_Save(string contentType, string base64, string f
 <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Virtualization
 #telerik_aspnetcoretag_assistant Set up a TagHelper Grid with enabled virtual scrolling to handle large datasets efficiently.
@@ -816,9 +802,7 @@ public class Employee
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Column Templates
 #telerik_aspnetcoretag_assistant Create a Grid that has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in foramt "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
@@ -897,9 +881,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 )
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Area Chart
 #telerik_aspnetcorehtml_assistant Self-contained Area Chart (normal stacking) for Product A/B/C with month categories; .Name("chartAreaStacked"); legend visible; shared tooltip; height ~420px.
@@ -932,9 +914,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 )
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Column Chart
 #telerik_aspnetcorehtml_assistant Self-contained Column Chart comparing three products over Jan–Jun with inline numbers; .Name("chartColumnProducts"); shared tooltip; value axis format "{0} units".
@@ -967,9 +947,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 )
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Donut Chart
 #telerik_aspnetcorehtml_assistant Implement a donut chart with custom center text displaying total values and hover effects for individual segments.
@@ -1029,9 +1007,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Pie Chart
 #telerik_aspnetcorehtml_assistant Create a pie chart for market share data with custom colors, data labels showing percentages, and legend positioning.
@@ -1103,9 +1079,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 </kendo-chart>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Area Chart
 #telerik_aspnetcoretag_assistant Self-contained Area Chart (normal stacking) for Product A/B/C with month categories; name="chartAreaStacked"; visible legend and a shared tooltip.
@@ -1145,9 +1119,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 </kendo-chart>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Column Chart
 #telerik_aspnetcoretag_assistant Self-contained Column Chart comparing three products over Jan–Jun with inline numbers; name="chartColumnProducts"; a shared tooltip; value axis format "{0} units".
@@ -1192,9 +1164,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Donut Chart
 #telerik_aspnetcoretag_assistant Implement a donut chart with custom center text displaying total values and hover effects for individual segments.
@@ -1297,9 +1267,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Pie Chart
 #telerik_aspnetcoretag_assistant Create a pie chart for market share data with custom colors, data labels showing percentages, and legend positioning.
@@ -1373,9 +1341,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 )
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Disabled Dates
 #telerik_aspnetcorehtml_assistant Build a DatePicker for appointment booking that disables specific dates (holidays array).
@@ -1444,9 +1410,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </style>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Range Selection
 #telerik_aspnetcorehtml_assistant Implement two DatePickers for "From" and "To" date selection where the "To" picker's min date updates based on "From" selection.
@@ -1499,9 +1463,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Adaptive Mode
 #telerik_aspnetcorehtml_assistant Create an adaptive DatePicker using the adaptive mode for a mobile friendly user interface.
@@ -1538,9 +1500,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </style>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Form Integration
 #telerik_aspnetcorehtml_assistant Add the DatePicker as an editor into the Telerik UI for ASP.NET Core Form with 2 fields: Name and StartDate.
@@ -1596,9 +1556,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </div>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Disabled Dates
 #telerik_aspnetcoretag_assistant Build a DatePicker for appointment booking that disables specific dates (holidays array).
@@ -1654,9 +1612,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Range Selection
 #telerik_aspnetcoretag_assistant Implement two DatePickers for "From" and "To" date selection where the "To" picker's min date updates based on "From" selection.
@@ -1709,9 +1665,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Adaptive Mode
 #telerik_aspnetcoretag_assistant Create an adaptive DatePicker using the adaptive mode for a mobile friendly user interface.
@@ -1733,9 +1687,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 </div>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Form Integration
 #telerik_aspnetcoretag_assistant Add the DatePicker as an editor into the Telerik UI for ASP.NET Core Form with 2 fields: Name and StartDate.
@@ -1825,9 +1777,7 @@ public class UserProfileViewModel
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Editors
 #telerik_aspnetcorehtml_assistant Show me how to create a Telerik UI Form that has three fields - a textbox for the name, a DatePicker for start date and DropDownList for the selected tier (free, premium, ultimate).
@@ -1892,9 +1842,7 @@ public class UserProfileViewModel
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Validation
 #telerik_aspnetcorehtml_assistant Generate a Form with required field validation for email and password inputs.
@@ -1953,9 +1901,7 @@ namespace ProjectName.Models
     }
 }
 ```
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Custom Buttons
 #telerik_aspnetcorehtml_assistant Create a Form with fields First Name, Last Name, Email, date of birth. Submit button with an icon and a Clear button.
@@ -2028,9 +1974,7 @@ namespace ProjectName.Models
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Form Layout
 #telerik_aspnetcorehtml_assistant Self-contained Kendo Form (HtmlHelper) bound to Model with grid layout: 2 columns, 20 gutter. Items: TextBox FirstName, TextBox LastName, TextBox Email, TextBox Phone. Enable Validatable with ValidationSummary Template (error list).
@@ -2152,9 +2096,7 @@ public class UserProfileViewModel
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Editors
 #telerik_aspnetcoretag_assistant Show me how to create a Telerik UI Form that has three fields - a textbox for the name, a DatePicker for start date and DropDownList for the selected tier (free, premium, ultimate).
@@ -2212,9 +2154,7 @@ public class UserProfileViewModel
 </script>
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Validation
 #telerik_aspnetcoretag_assistant Generate a Form with required field validation for email and password inputs.
@@ -2274,9 +2214,7 @@ namespace ProjectName.Models
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Custom Buttons
 #telerik_aspnetcoretag_assistant Create a Form with fields First Name, Last Name, Email, date of birth. Submit button with an icon and a Clear button.
@@ -2363,9 +2301,7 @@ namespace ProjectName.Models
 }
 ```
 
-</div>
 
-<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Form Layout
 #telerik_aspnetcoretag_assistant Self-contained Kendo Form (TagHelper) with grid layout: 2 columns, 20 gutter. Items: TextBox FirstName, TextBox LastName, TextBox Email, TextBox Phone. Enable Validatable with ValidationSummary Template (error list).
