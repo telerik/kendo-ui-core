@@ -8,7 +8,7 @@ position: 7
 
 # Templates
 
-The Chat components provides extensive template customization options that allow you to control the rendering of various chat elements. 
+The Chat component provides extensive template customization options that allow you to control the rendering of various chat elements. 
 
 By using templates, you can adjust the default appearance and behavior of messages, file attachments, suggestions, and other UI components to match your application's design and requirements. For more information on the capabilities and syntax of the templates, see the [Using Client Templates]({% slug client_templates_overview %}) article.
 
@@ -352,7 +352,7 @@ The following example demonstrates how to use the `TimestampTemplateHandler()` o
 ```JavaScript Scripts
 <script>
     function getTimeStampFormat(data) {
-        const date = data.date; // The Date*() object representing the timestamp.
+        const date = data.date; // The Date() object representing the timestamp.
         const now = new Date();
         const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
 

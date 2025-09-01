@@ -254,13 +254,13 @@ To create an AI chat service that connects to the Chat, follow the steps below:
 1. Handle the following Chat client events:
 
     * `SendMessage` event&mdash;Fires when a message is about to be sent (the user clicks the **Send** button) or when the send process is triggered. Within the event handler, get the message object (`e.message`) and post a message as a reply based on the received message text. For example, if the message text matches any of the predefined quick actions, post a templated answer. Otherwise, start the asynchronous call to the AI service. Provide the following callbacks:
-      - `onStart`: creates a new AI message in the Chat and toggles the **Send** button to generating state to show the loading indicator;
-      - `onStreaming`: accumulates the raw response for final processing, updates the displayed message with HTML-encoded content, and scrolls the chat to bottom to follow the streaming text;
-      - `onComplete`: calls `completeStream()` to process the final message with Markdown formatting and updates token usage display with `data.message`;
-      - `onError`: clears the current AI message reference and stops the generating indicator;
-      - `onAbort`: calls `completeStream()` to finalize whatever content was received before cancellation;
+      - `onStart`: Creates a new AI message in the Chat and toggles the **Send** button to generating state to show the loading indicator.
+      - `onStreaming`: Accumulates the raw response for final processing, updates the displayed message with HTML-encoded content, and scrolls the chat to the bottom to follow the streaming text.
+      - `onComplete`: Calls `completeStream()` to process the final message with Markdown formatting and updates token usage display with `data.message`.
+      - `onError`: Clears the current AI message reference and stops the generating indicator.
+      - `onAbort`: Calls `completeStream()` to finalize whatever content was received before cancellation.
 
-    * `Download` event&mdash;Fires when a download action is triggered, either from the **Download All** button or from a file menu download action. Within the event handler, iterate through each file in the message, convert the file URL to a downloadable blob, and trigger a browser download using [`kendo.saveAs()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/kendo/methods/saveas) method.
+    * `Download` event&mdash;Fires when a download action is triggered, either from the **Download All** button or from a file menu download action. Within the event handler, iterate through each file in the message, convert the file URL to a downloadable blob, and trigger a browser download using the [`kendo.saveAs()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/kendo/methods/saveas) method.
 
     ```HtmlHelper
     @(Html.Kendo().Chat()
@@ -303,7 +303,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
                 streamingService = new StreamingService("https://demos.telerik.com/service/v2/ai"); // Replace with your AI service endpoint (for example, "https://api.yourdomain.com/ai").
                 markedInstance = await initializeMarkdown();
                 const { chatSession, currentChatId, initialData } = await initializeChatSession(streamingService, author, markedInstance);
-                // Set Chat's data.
+                // Set the Chat's data.
                 chat.dataSource.data(initialData);
             }
         });
@@ -323,7 +323,7 @@ To create an AI chat service that connects to the Chat, follow the steps below:
                     });
                 });
             } else {
-                kendo.alert("The file can not be downloaded.");
+                kendo.alert("The file cannot be downloaded.");
             }
         }
 

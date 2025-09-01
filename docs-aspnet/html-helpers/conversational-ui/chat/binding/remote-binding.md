@@ -26,10 +26,9 @@ When the Chat is configured for remote data binding, you must specify the follow
 - `FilesField()`&mdash;Maps to attached files.
 - `IsDeletedField()`&mdash;Maps to the deleted status of the message.
 - `IsTypingField()`&mdash;Maps to the typing indicator status.
-- `IsPinnedField()`&mdash;Maps to the pinned indicator status
+- `IsPinnedField()`&mdash;Maps to the pinned indicator status.
 
-
-## Ajax Data Bnding
+## Ajax Data Binding
 
 To configure the Chat for Ajax data binding, follow these steps:
 
@@ -152,7 +151,7 @@ To configure the Chat for Ajax data binding, follow these steps:
 
         public JsonResult UpdateMessage([DataSourceRequest] DataSourceRequest request, ChatMessage message)
         {
-            // Perform custom update operation to the existing database.
+            // Perform a custom update operation to the existing database.
             return Json(new[] { message }.ToDataSourceResult(request));
         }
     ```

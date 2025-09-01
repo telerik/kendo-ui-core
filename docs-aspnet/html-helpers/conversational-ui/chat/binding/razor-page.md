@@ -72,8 +72,8 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
         <datasource type="DataSourceTagHelperType.Ajax">
             <transport>
                 <read url="/Index?handler=ReadMessages" data="forgeryToken"/>
-                <create url="/Index?handler=CreateMessages" data="forgeryToken" />
-                <update url="/Index?handler=UpdateMessages" data="forgeryToken" />
+                <create url="/Index?handler=CreateMessage" data="forgeryToken" />
+                <update url="/Index?handler=UpdateMessage" data="forgeryToken" />
             </transport>
         </datasource>
     </kendo-chat>
@@ -82,8 +82,8 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
 1. Add an `AntiForgeryToken` at the top of the page.
 
     ```
-        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-        @Html.AntiForgeryToken()
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
     ```
 
 1. Send the `AntiForgeryToken` with the Read request.
@@ -164,7 +164,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
 
         public JsonResult OnPostUpdateMessage([DataSourceRequest] DataSourceRequest request, ChatMessage message)
         {
-            // Perform custom update operation to the existing database.
+            // Perform a custom update operation to the existing database.
             return new JsonResult(new[] { message }.ToDataSourceResult(request));
         }
 
@@ -215,7 +215,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
                      AuthorName = "Emma",
                      AuthorImageUrl = "https://demos.telerik.com/aspnet-core/shared/web/Customers/DUMON.jpg",
                      AuthorImageAltText = "Emma's profile picture",
-                     Text = "Definitely book in advance, especially during cherry blossom season! It gets super busy. I recommend staying in a ryokan in Kyoto for the traditional experience. Here you will find the scheduler we have used when we were there.",
+                     Text = "Definitely book in advance, especially during cherry blossom season! It gets super busy. I recommend staying in a ryokan in Kyoto for the traditional experience. Here you will find the schedule we used when we were there.",
                      TimeStamp = new DateTime(2025, 7, 20),
                      IsPinned = false,
                      IsTyping = false,

@@ -30,14 +30,14 @@ The generic settings of the Telerik {{ site.framework }} MCP server are:
 * Type: `stdio` (standard input/output transport)
 * Command: `npx` (the MCP server works through an npm package)
 * Arguments: `-y`
-* Server name: `telerikAspnetcoreHtmlAssistant` for HtmlHelper and `telerikAspnetcoreTagAssistant` for TagHelper
+* Server name: `telerik-aspnetcorehtml-assistant` for HtmlHelper and `telerik-aspnetcorehtml-assistant` for TagHelper
 
 You also need to add your [Telerik licence key](slug:installation_license_key_aspnetcore) as an `env` parameter in the `mcp.json` file. There are two options:
 
 * (recommended) Use a `TELERIK_LICENSE_PATH` argument and point to the location of your Telerik license file.
 * Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key](slug:installation_license_key_aspnetcore#license-key-updates) when necessary.
 
-> * Do not use hyphens (`-`) or underscores (`_`) in the MCP server name in the MCP `.json` file, due to potential compatibility issues with some MCP clients, such as Visual Studio.
+> * Do not use underscores (`_`) in the MCP server name in the MCP `.json` file, due to potential compatibility issues with some MCP clients, such as Visual Studio.
 > * Some MCP clients expect the MCP servers to be listed under a `servers` JSON key, while others expect `mcpServers`.
 > * Some MCP clients expect an `mcp.json` file, while others like Visual Studio 2022 expect an `.mcp.json` file.
 
@@ -58,7 +58,7 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
   ```JSON
   {
     "servers": {
-      "telerikAspnetcoreHtmlAssistant": {
+      "telerik-aspnetcorehtml-assistant": {
         "type": "stdio",
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-html-mcp@latest" ],
@@ -77,7 +77,7 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
   ```JSON
   {
     "servers": {
-      "telerikAspnetcoreTagAssistant": {
+      "telerik-aspnetcoretag-assistant": {
         "type": "stdio",
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
@@ -93,7 +93,7 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
 
 To enable global automatic discovery of the Telerik MCP Servers in Visual Studio, add the above `.mcp.json` file to your user directory (`%USERPROFILE%`), for example, `C:\Users\____\.mcp.json`.
 
-> Once the Telerik MCP server is added, make sure that the `telerikAspnetcoreHtmlAssistant` or `telerikAspnetcoreTagAssistant` tool is [enabled (checked) in the Copilot Chat window's tool selection dropdown](https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers?view=vs-2022#configuration-example-with-github-mcp-server). This dropdown opens when clicking on a wrench icon 🔧 at the bottom of the Copilot Window. The Telerik MCP server may get disabled when starting a new chat, changing threads, or relaunching Visual Studio. This is a known issue with MCP servers in general.
+> Once the Telerik MCP server is added, make sure that the `telerik-aspnetcorehtml-assistant` or `telerik-aspnetcoretag-assistant` tool is [enabled (checked) in the Copilot Chat window's tool selection dropdown](https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers?view=vs-2022#configuration-example-with-github-mcp-server). This dropdown opens when clicking on a wrench icon 🔧 at the bottom of the Copilot Window. The Telerik MCP server may get disabled when starting a new chat, changing threads, or relaunching Visual Studio. This is a known issue with MCP servers in general.
 
 ### VS Code
 
@@ -114,7 +114,7 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
   ```JSON
   {
     "servers": {
-      "telerikAspnetcoreHtmlAssistant": {
+      "telerik-aspnetcorehtml-assistant": {
         "type": "stdio",
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-html-mcp@latest" ],
@@ -133,7 +133,7 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
   ```JSON
   {
     "servers": {
-      "telerikAspnetcoreTagAssistant": {
+      "telerik-aspnetcoretag-assistant": {
         "type": "stdio",
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
@@ -145,7 +145,7 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
   }
   ```
 
-This enables you to call the respective MCP Server with the `#telerikCoreAssistant`.
+This enables you to call the respective MCP Server with the `#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant`.
 
 #### Global Configuration
 
@@ -179,7 +179,7 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
   ```JSON
   {
     "mcpServers": {
-      "telerikAspnetcoreHtmlAssistant": {
+      "telerik-aspnetcorehtml-assistant": {
         "type": "stdio",
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-html-mcp@latest" ],
@@ -198,7 +198,7 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
   ```JSON
   {
     "mcpServers": {
-      "telerikAspnetcoreTagAssistant": {
+      "telerik-aspnetcoretag-assistant": {
         "type": "stdio",
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
@@ -210,7 +210,7 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
   }
   ```
 
-This enables you to call the respective MCP Server with the `#telerikCoreAssistant`.
+This enables you to call the respective MCP Server with the `#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant`.
 
 #### Global Configuration
 
@@ -222,10 +222,10 @@ To add the Telerik MCP Servers [globally for Cursor](https://docs.cursor.com/con
 
 To use the Telerik {{ site.framework }} MCP Server:
 
-1. Start your prompt with `#telerikCoreAssistant` (or with `#` followed by your custom server name, if set).
+1. Start your prompt with `#telerik-aspnetcorehtml-assistant` / `#telerik-aspnetcoretag-assistant` (or with `#` followed by your custom server name, if set).
 1. Confirm that the respective Telerik MCP server is used, because this doesn't happen deterministically. Look for a statement in the output, which is similar to:
-    * `Running telerikAspnetcoreHtmlAssistant` or `Running telerikAspnetcoreTagAssistant` (in VS Code)
-    * `Calling MCP tool telerikAspnetcoreHtmlAssistant` or `Calling MCP tool telerikAspnetcoreTagAssistant` (in Cursor)
+    * `Running telerik-aspnetcorehtml-assistant` or `Running telerik-aspnetcoretag-assistant` (in VS Code)
+    * `Calling MCP tool telerik-aspnetcorehtml-assistant` or `Calling MCP tool telerik-aspnetcoretag-assistant` (in Cursor)
 
     ![MCP Server uses Telerik {{ site.framework }} AI Coding Assistant in VS Code](images/mcp-confirmation.png)
 
@@ -241,15 +241,15 @@ The following list describes how your prompts may look like:
 
 * When generating HtmlHelper components:
 
-  * &quot;`@telerikaspnetcorehtml` Generate a {{ site.product }} Grid with sorting and paging enabled. Bind the Grid to dummy data.&quot;
-  * &quot;`@telerikaspnetcorehtml`  Generate a ComboBox that shows a list of products. Create a Product class and generate sample data.&quot;
-  * &quot;`@telerikaspnetcorehtml` Show me sample code for a {{ site.product }} Grid with virtual scrolling for the rows and columns.&quot;
+  * &quot;`#telerik-aspnetcorehtml-assistant` Generate a {{ site.product }} Grid with sorting and paging enabled. Bind the Grid to dummy data.&quot;
+  * &quot;`#telerik-aspnetcorehtml-assistant`  Generate a ComboBox that shows a list of products. Create a Product class and generate sample data.&quot;
+  * &quot;`#telerik-aspnetcorehtml-assistant` Show me sample code for a {{ site.product }} Grid with virtual scrolling for the rows and columns.&quot;
 
 * When generating TagHelper components:
 
-  * &quot;`@telerikaspnetcoretag` Generate a {{ site.product }} Grid with sorting and paging enabled. Bind the Grid to dummy data.&quot;
-  * &quot;`@telerikaspnetcoretag`  Generate a ComboBox that shows a list of products. Create a Product class and generate sample data.&quot;
-  * &quot;`@telerikaspnetcoretag` Show me sample code for a {{ site.product }} Grid with virtual scrolling for the rows and columns.&quot;
+  * &quot;`#telerik-aspnetcoretag-assistant` Generate a {{ site.product }} Grid with sorting and paging enabled. Bind the Grid to dummy data.&quot;
+  * &quot;`#telerik-aspnetcoretag-assistant`  Generate a ComboBox that shows a list of products. Create a Product class and generate sample data.&quot;
+  * &quot;`#telerik-aspnetcoretag-assistant` Show me sample code for a {{ site.product }} Grid with virtual scrolling for the rows and columns.&quot;
 
 ## Usage Limits
 

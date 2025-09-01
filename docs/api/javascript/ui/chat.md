@@ -688,7 +688,7 @@ Specifies the field name in the data source that indicates whether a message is 
 
 ### messageActions `Array`
 
-Defines the collection of actions that will be rendered in the context menu for messages. By default, the Chat includes four actions: Reply, Copy, Pin, and Delete. You can customize this list by providing your own actions or combining default actions with custom ones.
+Defines the collection of actions that will be rendered in the context menu for messages. By default, the Chat includes four actions: Reply, Copy, and Pin. You can customize this list by providing your own actions or combining default actions with custom ones.
 
 **Default actions:**
 - `{ name: "reply", text: "Reply", icon: "undo" }`

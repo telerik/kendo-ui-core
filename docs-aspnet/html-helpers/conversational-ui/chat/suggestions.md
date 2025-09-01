@@ -76,7 +76,7 @@ Subscribe to the `SuggestionClick` client-side event to handle user interactions
 ```TagHelper
 @addTagHelper *, Kendo.Mvc
 
-<kendo-chat name="chat" on-suggestio-click="onSuggestionClick">
+<kendo-chat name="chat" on-suggestion-click="onSuggestionClick">
     <suggestions>
         <suggestion text="Yes, please" />
         <suggestion text="No, thanks" />
@@ -99,7 +99,7 @@ Subscribe to the `SuggestionClick` client-side event to handle user interactions
                 console.log('Canceling process...');
                 break;
             case 'Tell me more':
-                console.log('Find more infromation...');
+                console.log('Finding more information...');
                 break;
             case 'Need help':
                 console.log('Contact support...');
@@ -116,7 +116,7 @@ Subscribe to the `SuggestionClick` client-side event to handle user interactions
 
 You can customize the appearance of the defined suggestions by using the `SuggestionsTemplate()` method. 
 
-The option has a various overloads like `SuggestionsTemplateHandler()`, `SuggestionsTemplateId()`, and `SuggestionsTemplate()` that accepts a [Template component](slug:htmlhelpers_overview_template).
+The option has various overloads like `SuggestionsTemplateHandler()`, `SuggestionsTemplateId()`, and `SuggestionsTemplate()` that accepts a [Template component](slug:htmlhelpers_overview_template).
 
 The following example demonstrates how to customize the default appearance of the suggestion messages.
 

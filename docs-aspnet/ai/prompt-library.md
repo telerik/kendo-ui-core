@@ -18,10 +18,10 @@ This collection of prompts is not exhaustive and the Telerik {{ site.framework }
 
 ## How to Use the Prompts
 
-All prompts in this library target the [MCP Server](slug:ai_mcp_server) through the `#telerik_aspnetcorehtml_assistant` or `#telerik_aspnetcoretag_assistant` handle. Make sure that you have installed and enabled either the Telerik {{ site.framework }} HtmlHelpers or Telerik {{ site.framework }} TagHelpers MCP Server before attempting to run the prompts.
+All prompts in this library target the [MCP Server](slug:ai_mcp_server) through the `#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant` handle. Make sure that you have installed and enabled either the Telerik {{ site.framework }} HtmlHelpers or Telerik {{ site.framework }} TagHelpers MCP Server before attempting to run the prompts.
 
 1. Browse the prompt library to find a prompt that suits your needs.
-2. Copy the prompt text (including the `#telerik_aspnetcorehtml_assistant` or `#telerik_aspnetcoretag_assistant` handle, based on the used HtmlHelper or TagHelper synax).
+2. Copy the prompt text (including the `#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcorehtml-assistant` handle, based on the used HtmlHelper or TagHelper synax).
 3. (Optional) Customize the prompt as needed for your specific use case but keep the `#telerik_aspnetcore{syntax type}_assistant` handle.<br/>When modifying the prompts, make sure the changes comply with the [intended use](slug:overview_ai#intended-use) and the [recommendations](slug:overview_ai#recommendations) for the AI Coding Assistant.
 4. Run the prompt against the [MCP Server](slug:ai_mcp_server).
 
@@ -44,7 +44,7 @@ The [{{ site.product }} Grid](slug:htmlhelpers_grid_aspnetcore_overview) lets yo
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Grid
-#telerik_aspnetcorehtml_assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality. 
+#telerik-aspnetcorehtml-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality. 
 ```
 ```C# Output
 // View
@@ -120,7 +120,7 @@ public class HomeController : Controller
 
 
 ```prompt Filtering
-#telerik_aspnetcorehtml_assistant Implement a Grid with filter row functionality. Show how to set up default filter operators for text, numeric, and date columns.
+#telerik-aspnetcorehtml-assistant Implement a Grid with filter row functionality. Show how to set up default filter operators for text, numeric, and date columns.
 ```
 ```C# Output
 // View
@@ -260,7 +260,7 @@ namespace ProjectName.Models
 
 
 ```prompt Export
-#telerik_aspnetcorehtml_assistant Add Excel and PDF export functionality to a Grid.
+#telerik-aspnetcorehtml-assistant Add Excel and PDF export functionality to a Grid.
 ```
 ```C# Output
 //View
@@ -323,7 +323,7 @@ public ActionResult Pdf_Export_Save(string contentType, string base64, string fi
 
 
 ```prompt Virtualization
-#telerik_aspnetcorehtml_assistant Set up a Grid with virtual scrolling to handle large datasets efficiently.
+#telerik-aspnetcorehtml-assistant Set up a Grid with virtual scrolling to handle large datasets efficiently.
 ```
 ```C# Output
 @(Html.Kendo().Grid<ProjectName.Models.Employee>()
@@ -354,7 +354,7 @@ public ActionResult Pdf_Export_Save(string contentType, string base64, string fi
 
 
 ```prompt Column Templates
-#telerik_aspnetcorehtml_assistant Create a Grid that bind to a Model and has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in foramt "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
+#telerik-aspnetcorehtml-assistant Create a Grid that bind to a Model and has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in foramt "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
 ```
 ```C# Output
 //View
@@ -410,7 +410,7 @@ public class Employee
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Grid
-#telerik_aspnetcoretag_assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality. 
+#telerik-aspnetcoretag-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality. 
 ```
 ```C# Output
 // View
@@ -493,7 +493,7 @@ public class Employee
 
 
 ```prompt Filtering
-#telerik_aspnetcoretag_assistant Implement a basic Grid with enabled default filter row functionality. Set up default filter operators for some of the columns.
+#telerik-aspnetcoretag-assistant Implement a basic Grid with enabled default filter row functionality. Set up default filter operators for some of the columns.
 ```
 ```C# Output
 //View
@@ -663,7 +663,7 @@ namespace ProjectName.Models
 
 
 ```prompt Export
-#telerik_aspnetcoretag_assistant Add Excel and PDF export functionality to a Grid.
+#telerik-aspnetcoretag-assistant Add Excel and PDF export functionality to a Grid.
 ```
 ```C# Output
 //View
@@ -713,7 +713,7 @@ public IActionResult Pdf_Export_Save(string contentType, string base64, string f
 
 
 ```prompt Virtualization
-#telerik_aspnetcoretag_assistant Set up a TagHelper Grid with enabled virtual scrolling to handle large datasets efficiently.
+#telerik-aspnetcoretag-assistant Set up a TagHelper Grid with enabled virtual scrolling to handle large datasets efficiently.
 ```
 ```C# Output
 //View
@@ -805,7 +805,7 @@ public class Employee
 
 
 ```prompt Column Templates
-#telerik_aspnetcoretag_assistant Create a Grid that has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in foramt "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
+#telerik-aspnetcoretag-assistant Create a Grid that has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in foramt "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
 ```
 ```C# Output
 //View
@@ -859,7 +859,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Line Chart
-#telerik_aspnetcorehtml_assistant Return a self-contained Razor snippet for a Line Chart showing sales for the 12 months, using inline numeric data and explicit month categories; .Name("chartLineBasic"), .Title, shared tooltip, and height 400px.
+#telerik-aspnetcorehtml-assistant Return a self-contained Razor snippet for a Line Chart showing sales for the 12 months, using inline numeric data and explicit month categories; .Name("chartLineBasic"), .Title, shared tooltip, and height 400px.
 ```
 ```C# Output
 @(Html.Kendo().Chart()
@@ -884,7 +884,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Area Chart
-#telerik_aspnetcorehtml_assistant Self-contained Area Chart (normal stacking) for Product A/B/C with month categories; .Name("chartAreaStacked"); legend visible; shared tooltip; height ~420px.
+#telerik-aspnetcorehtml-assistant Self-contained Area Chart (normal stacking) for Product A/B/C with month categories; .Name("chartAreaStacked"); legend visible; shared tooltip; height ~420px.
 ```
 ```C# Output
 @(Html.Kendo().Chart<object>()
@@ -917,7 +917,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Column Chart
-#telerik_aspnetcorehtml_assistant Self-contained Column Chart comparing three products over Jan–Jun with inline numbers; .Name("chartColumnProducts"); shared tooltip; value axis format "{0} units".
+#telerik-aspnetcorehtml-assistant Self-contained Column Chart comparing three products over Jan–Jun with inline numbers; .Name("chartColumnProducts"); shared tooltip; value axis format "{0} units".
 ```
 ```C# Output
 @(Html.Kendo().Chart<object>()
@@ -950,7 +950,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Donut Chart
-#telerik_aspnetcorehtml_assistant Implement a donut chart with custom center text displaying total values and hover effects for individual segments.
+#telerik-aspnetcorehtml-assistant Implement a donut chart with custom center text displaying total values and hover effects for individual segments.
 ```
 ```C# Output
 <div style="position: relative;">
@@ -1010,7 +1010,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Pie Chart
-#telerik_aspnetcorehtml_assistant Create a pie chart for market share data with custom colors, data labels showing percentages, and legend positioning.
+#telerik-aspnetcorehtml-assistant Create a pie chart for market share data with custom colors, data labels showing percentages, and legend positioning.
 ```
 ```C# Output
 @(Html.Kendo().Chart<object>()
@@ -1055,7 +1055,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Line Chart
-#telerik_aspnetcoretag_assistant Return a self-contained snippet for a Line Chart showing sales for the 12 months, using inline numeric data and explicit month categories; name="chartLineBasic", title, a shared tooltip, and height 400px.
+#telerik-aspnetcoretag-assistant Return a self-contained snippet for a Line Chart showing sales for the 12 months, using inline numeric data and explicit month categories; name="chartLineBasic", title, a shared tooltip, and height 400px.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1082,7 +1082,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Area Chart
-#telerik_aspnetcoretag_assistant Self-contained Area Chart (normal stacking) for Product A/B/C with month categories; name="chartAreaStacked"; visible legend and a shared tooltip.
+#telerik-aspnetcoretag-assistant Self-contained Area Chart (normal stacking) for Product A/B/C with month categories; name="chartAreaStacked"; visible legend and a shared tooltip.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1122,7 +1122,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Column Chart
-#telerik_aspnetcoretag_assistant Self-contained Column Chart comparing three products over Jan–Jun with inline numbers; name="chartColumnProducts"; a shared tooltip; value axis format "{0} units".
+#telerik-aspnetcoretag-assistant Self-contained Column Chart comparing three products over Jan–Jun with inline numbers; name="chartColumnProducts"; a shared tooltip; value axis format "{0} units".
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1167,7 +1167,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Donut Chart
-#telerik_aspnetcoretag_assistant Implement a donut chart with custom center text displaying total values and hover effects for individual segments.
+#telerik-aspnetcoretag-assistant Implement a donut chart with custom center text displaying total values and hover effects for individual segments.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1270,7 +1270,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 
 ```prompt Pie Chart
-#telerik_aspnetcoretag_assistant Create a pie chart for market share data with custom colors, data labels showing percentages, and legend positioning.
+#telerik-aspnetcoretag-assistant Create a pie chart for market share data with custom colors, data labels showing percentages, and legend positioning.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1329,7 +1329,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Validation
-#telerik_aspnetcorehtml_assistant Create a DatePicker for birthdate selection with min date to today's date in 2018 year and max date to today's date in 2028 year. The date format must be dd/MM/yyyy.
+#telerik-aspnetcorehtml-assistant Create a DatePicker for birthdate selection with min date to today's date in 2018 year and max date to today's date in 2028 year. The date format must be dd/MM/yyyy.
 ```
 ```C# Output
 @(Html.Kendo().DatePicker()
@@ -1344,7 +1344,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Disabled Dates
-#telerik_aspnetcorehtml_assistant Build a DatePicker for appointment booking that disables specific dates (holidays array).
+#telerik-aspnetcorehtml-assistant Build a DatePicker for appointment booking that disables specific dates (holidays array).
 ```
 ```C# Output
 <div class="container">
@@ -1413,7 +1413,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Range Selection
-#telerik_aspnetcorehtml_assistant Implement two DatePickers for "From" and "To" date selection where the "To" picker's min date updates based on "From" selection.
+#telerik-aspnetcorehtml-assistant Implement two DatePickers for "From" and "To" date selection where the "To" picker's min date updates based on "From" selection.
 ```
 ```C# Output
 <div class="container">
@@ -1466,7 +1466,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Adaptive Mode
-#telerik_aspnetcorehtml_assistant Create an adaptive DatePicker using the adaptive mode for a mobile friendly user interface.
+#telerik-aspnetcorehtml-assistant Create an adaptive DatePicker using the adaptive mode for a mobile friendly user interface.
 ```
 ```C# Output
 <div class="container">
@@ -1503,7 +1503,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Form Integration
-#telerik_aspnetcorehtml_assistant Add the DatePicker as an editor into the Telerik UI for ASP.NET Core Form with 2 fields: Name and StartDate.
+#telerik-aspnetcorehtml-assistant Add the DatePicker as an editor into the Telerik UI for ASP.NET Core Form with 2 fields: Name and StartDate.
 ```
 ```C# Output
 @using Kendo.Mvc.UI
@@ -1541,7 +1541,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Validation
-#telerik_aspnetcoretag_assistant Create a DatePicker for birthdate selection with min date to today's date in 2018 year and max date to today's date in 2028 year. The date format must be dd/MM/yyyy.
+#telerik-aspnetcoretag-assistant Create a DatePicker for birthdate selection with min date to today's date in 2018 year and max date to today's date in 2028 year. The date format must be dd/MM/yyyy.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1559,7 +1559,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Disabled Dates
-#telerik_aspnetcoretag_assistant Build a DatePicker for appointment booking that disables specific dates (holidays array).
+#telerik-aspnetcoretag-assistant Build a DatePicker for appointment booking that disables specific dates (holidays array).
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1615,7 +1615,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Range Selection
-#telerik_aspnetcoretag_assistant Implement two DatePickers for "From" and "To" date selection where the "To" picker's min date updates based on "From" selection.
+#telerik-aspnetcoretag-assistant Implement two DatePickers for "From" and "To" date selection where the "To" picker's min date updates based on "From" selection.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1668,7 +1668,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Adaptive Mode
-#telerik_aspnetcoretag_assistant Create an adaptive DatePicker using the adaptive mode for a mobile friendly user interface.
+#telerik-aspnetcoretag-assistant Create an adaptive DatePicker using the adaptive mode for a mobile friendly user interface.
 ```
 ```C# Output
 @addTagHelper "*, Kendo.Mvc"
@@ -1690,7 +1690,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 
 ```prompt Form Integration
-#telerik_aspnetcoretag_assistant Add the DatePicker as an editor into the Telerik UI for ASP.NET Core Form with 2 fields: Name and StartDate.
+#telerik-aspnetcoretag-assistant Add the DatePicker as an editor into the Telerik UI for ASP.NET Core Form with 2 fields: Name and StartDate.
 ```
 ```C# Output
 @addTagHelper *, Kendo.Mvc
@@ -1725,7 +1725,7 @@ The [{{ site.product }} Form](slug:htmlhelpers_form_aspnetcore_overview) provide
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Form
-#telerik_aspnetcorehtml_assistant Create a basic user profile settings page using the Telerik UI for ASP.NET Core HtmlHelper Form. The form must have 3 fields - name, email, and Agree.
+#telerik-aspnetcorehtml-assistant Create a basic user profile settings page using the Telerik UI for ASP.NET Core HtmlHelper Form. The form must have 3 fields - name, email, and Agree.
 ```
 ```C# Output
 //View
@@ -1780,7 +1780,7 @@ public class UserProfileViewModel
 
 
 ```prompt Editors
-#telerik_aspnetcorehtml_assistant Show me how to create a Telerik UI Form that has three fields - a textbox for the name, a DatePicker for start date and DropDownList for the selected tier (free, premium, ultimate).
+#telerik-aspnetcorehtml-assistant Show me how to create a Telerik UI Form that has three fields - a textbox for the name, a DatePicker for start date and DropDownList for the selected tier (free, premium, ultimate).
 ```
 ```C# Output
 @model ProjectName.Models.UserSubscriptionModel
@@ -1845,7 +1845,7 @@ public class UserProfileViewModel
 
 
 ```prompt Validation
-#telerik_aspnetcorehtml_assistant Generate a Form with required field validation for email and password inputs.
+#telerik-aspnetcorehtml-assistant Generate a Form with required field validation for email and password inputs.
 ```
 ```C# Output
 //View
@@ -1904,7 +1904,7 @@ namespace ProjectName.Models
 
 
 ```prompt Custom Buttons
-#telerik_aspnetcorehtml_assistant Create a Form with fields First Name, Last Name, Email, date of birth. Submit button with an icon and a Clear button.
+#telerik-aspnetcorehtml-assistant Create a Form with fields First Name, Last Name, Email, date of birth. Submit button with an icon and a Clear button.
 ```
 ```C# Output
 //View
@@ -1977,7 +1977,7 @@ namespace ProjectName.Models
 
 
 ```prompt Form Layout
-#telerik_aspnetcorehtml_assistant Self-contained Kendo Form (HtmlHelper) bound to Model with grid layout: 2 columns, 20 gutter. Items: TextBox FirstName, TextBox LastName, TextBox Email, TextBox Phone. Enable Validatable with ValidationSummary Template (error list).
+#telerik-aspnetcorehtml-assistant Self-contained Kendo Form (HtmlHelper) bound to Model with grid layout: 2 columns, 20 gutter. Items: TextBox FirstName, TextBox LastName, TextBox Email, TextBox Phone. Enable Validatable with ValidationSummary Template (error list).
 ```
 ```C# Output
 //View
@@ -2051,7 +2051,7 @@ public class PersonModel
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Form
-#telerik_aspnetcoretag_assistant Create a basic user profile settings page using the Telerik UI for ASP.NET Core TagHelper Form. The form must have 3 fields - name, email, and Agree.
+#telerik-aspnetcoretag-assistant Create a basic user profile settings page using the Telerik UI for ASP.NET Core TagHelper Form. The form must have 3 fields - name, email, and Agree.
 ```
 ```C# Output
 //View
@@ -2099,7 +2099,7 @@ public class UserProfileViewModel
 
 
 ```prompt Editors
-#telerik_aspnetcoretag_assistant Show me how to create a Telerik UI Form that has three fields - a textbox for the name, a DatePicker for start date and DropDownList for the selected tier (free, premium, ultimate).
+#telerik-aspnetcoretag-assistant Show me how to create a Telerik UI Form that has three fields - a textbox for the name, a DatePicker for start date and DropDownList for the selected tier (free, premium, ultimate).
 ```
 ```C# Output
 @model ProjectName.Models.UserTierModel
@@ -2157,7 +2157,7 @@ public class UserProfileViewModel
 
 
 ```prompt Validation
-#telerik_aspnetcoretag_assistant Generate a Form with required field validation for email and password inputs.
+#telerik-aspnetcoretag-assistant Generate a Form with required field validation for email and password inputs.
 ```
 ```C# Output
 //View
@@ -2217,7 +2217,7 @@ namespace ProjectName.Models
 
 
 ```prompt Custom Buttons
-#telerik_aspnetcoretag_assistant Create a Form with fields First Name, Last Name, Email, date of birth. Submit button with an icon and a Clear button.
+#telerik-aspnetcoretag-assistant Create a Form with fields First Name, Last Name, Email, date of birth. Submit button with an icon and a Clear button.
 ```
 ```C# Output
 //View
@@ -2304,7 +2304,7 @@ namespace ProjectName.Models
 
 
 ```prompt Form Layout
-#telerik_aspnetcoretag_assistant Self-contained Kendo Form (TagHelper) with grid layout: 2 columns, 20 gutter. Items: TextBox FirstName, TextBox LastName, TextBox Email, TextBox Phone. Enable Validatable with ValidationSummary Template (error list).
+#telerik-aspnetcoretag-assistant Self-contained Kendo Form (TagHelper) with grid layout: 2 columns, 20 gutter. Items: TextBox FirstName, TextBox LastName, TextBox Email, TextBox Phone. Enable Validatable with ValidationSummary Template (error list).
 ```
 ```C# Output
 //View

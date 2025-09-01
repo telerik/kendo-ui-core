@@ -114,7 +114,7 @@ The following example demonstrates how to define header items, predefined sugges
 
 |Feature|Description|
 |-------|-----------|
-| [Data Binding]({% slug htmlhelpers_databinding_overview_chat %}) | Bind the Chat either to a local data collection or to data retrieved from a remote endpoint. |
+| [Data Binding]({% slug htmlhelpers_databinding_overview_chat %}) | Bind the Chat to either a local data collection or to data retrieved from a remote endpoint. |
 | [AI Integration]({% slug htmlhelpers_ai_integration_chat %}) | Configure the Chat to interact with a large language model through a streaming AI chat service. |
 | [Tools]({% slug htmlhelpers_tools_chat %}) | Utilize the available context menu actions and toolbar commands. |
 | [File Uploads and Media]({% slug htmlhelpers_files_and_media_chat %}) | Enable file uploads, media sharing, and speech-to-text functionality of the Chat component. |
