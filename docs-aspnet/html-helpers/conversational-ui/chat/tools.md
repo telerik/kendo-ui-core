@@ -14,7 +14,7 @@ The Chat component delivers powerful message interaction features that allow use
 
 Right-click functionality on chat messages reveals a context menu with actionable options for enhanced user productivity. This feature streamlines message management by providing instant access to common operations without disrupting the conversation flow.
 
-The built-in options include **Reply**, **Copy**, **Pin**, and **Delete**, while the `MessageActions()` configuration allows you to add custom operations tailored to your application's workflow requirements.
+The built-in options include **Reply**, **Copy**, and **Pin**, while the `MessageActions()` configuration allows you to add custom operations tailored to your application's workflow requirements.
 
 ```HtmlHelper
 @(Html.Kendo().Chat()
@@ -126,7 +126,7 @@ Visual customization options enable you to tailor message presentation to align 
 
 ### Expandable Message Content
 
-Long message content can be made collapsible to optimize screen real estate while maintaining access to full information. Users can toggle between expanded and collapsed states by clicking on messages, creating a cleaner interface for extensive conversations. Enable the `AllowMessageCollapse()` option to allow the users to collapse the messages. 
+Long message content can be made collapsible to optimize screen real estate while maintaining access to full information. Users can toggle between expanded and collapsed states by clicking on messages, creating a cleaner interface for extensive conversations. Enable the `AllowMessageCollapse()` option to allow users to collapse the messages. 
 
 ```HtmlHelper
 @(Html.Kendo().Chat()

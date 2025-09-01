@@ -8,11 +8,11 @@ position: 5
 
 # File Uploads and Media
 
-The Chat component supports built-in file upload functionality, share media, and utilize speech-to-text functionality to enhance the messaging experience.
+The Chat component supports built-in file upload functionality, media sharing, and speech-to-text functionality to enhance the messaging experience.
 
 ## Attachments
 
-The Chat component provides built-in file upload functionality, allowing users to attach files to their messages. By default, the option is enabled, and a file attachment button appears in the message input area. The user can select files, which are automatically attached to the current message. 
+The Chat component provides built-in file upload functionality, allowing users to attach files to their messages. By default, this option is enabled, and a file attachment button appears in the message input area. Users can select files, which are automatically attached to the current message. 
 
 To remove the attachment functionality, disable the `FileAttachment()` option.
 
@@ -33,7 +33,7 @@ To remove the attachment functionality, disable the `FileAttachment()` option.
 
 ## Attachment Actions
 
-By default, each attachment in the sent messages have a context menu with a **Download** action. When the message contains multiple attachments, a **Download all** button is displated below the attachment list.
+By default, each attachment in the sent messages has a context menu with a **Download** action. When the message contains multiple attachments, a **Download all** button is displayed below the attachment list.
 You can configure more actions for the file attachments using the `FileActions()` configuration (for example, **share**, **delete**, **preview**, and more). 
 
 The following example shows how to define custom actions for the uploaded files in the messages

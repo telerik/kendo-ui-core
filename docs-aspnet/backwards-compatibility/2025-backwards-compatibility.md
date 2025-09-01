@@ -10,7 +10,50 @@ position: 1
 
 This article lists the breaking or important changes in the 2025 releases of {{ site.product }}.
 
-## {{ site.product }} Q3 2025
+## {{ site.product }} Q3 2025 (2025.3.825)
+
+### Chat
+
+The [Chat component has been completely redesigned](slug:htmlhelpers_chat_aspnetcore). 
+
+* `Toolbar()` and `User()` configurations have been deprecated.
+* The following client-side methods have been deprecated: `getUser()`, `renderAttachments()`, `renderMessage()`, `renderSuggestedActions()`, `renderUserTypingIndicator()`, `clearUserTypingIndicator()`, `removeTypingIndicator()`, and `toggleToolbar()`. For more information on the new client-side methods, refer to the [client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat#methods).
+
+#### HtmlHelper Chat Options
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `User(user => user.Name())`    | `AuthorId()`<br/>`AuthorIdField()`<br/>`AuthorNameField()` |
+| `User(user => user.IconUrl())` | `AuthorImageUrlField()`<br/>`AuthorImageAltTextField()` |
+
+#### HtmlHelper Chat Events
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `ActionClick`    | [`SuggestionClick`](/api/kendo.mvc.ui.fluent/chateventbuilder#suggestionclicksystemstring) and [`FileMenuAction`](/api/kendo.mvc.ui.fluent/chateventbuilder#filemenuactionsystemstring) |
+| `Post` | [`SendMessage`](/api/kendo.mvc.ui.fluent/chateventbuilder#sendmessagesystemstring) |
+| `TypingStart` and `TypingEnd` | [`Input`](/api/kendo.mvc.ui.fluent/chateventbuilder#inputsystemstring) |
+| `ToolClick` | No longer available. |
+
+{% if site.core %}
+#### TagHelper Chat Options
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `<user name="authorName" />`    | `author-id="1"`<br/>`author-id-field="AuthorId"`<br/>`author-name-field="AuthorName"` |
+| `<user icon-url="url" />` | `author-image-url-field="AuthorImageUrl"`<br/>`author-image-alt-text-field="AuthorImageAltTextField"` |
+
+#### TagHelper Chat Events
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `on-action-click`    | `on-suggestion-click` and `on-file-menu-action` |
+| `on-post` | `on-send-message` |
+| `on-typing-start` and `on-typing-end` | `on-input` |
+| `on-tool-click` | No longer available. |
+{% endif %}
+
+## {{ site.product }} Q3 2025 (2025.3.812)
 
 ### ActionSheet
 
