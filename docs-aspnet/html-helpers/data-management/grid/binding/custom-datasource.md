@@ -128,6 +128,6 @@ The following example demonstrates a CustomDataSourceBuilder definition.
 {% if site.core %}
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
-* [Custom DataSource for {{ site.framework }} (https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/custom-datasource)
+* [Custom DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/custom-datasource)
 * [Server-Side API](/api/grid)
 * [Custom DataSource in Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)
