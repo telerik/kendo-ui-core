@@ -118,6 +118,8 @@ You can customize the appearance of the defined suggestions by using the `Sugges
 
 The option has various overloads like `SuggestionsTemplateHandler()`, `SuggestionsTemplateId()`, and `SuggestionsTemplate()` that accepts a [Template component](slug:htmlhelpers_overview_template).
 
+> The `k-suggestions` class must be applied to the individual suggestion element. The wrapping element must have the `ref-chat-suggestion-group` attribute.
+
 The following example demonstrates how to customize the default appearance of the suggestion messages.
 
 ```HtmlHelper
@@ -246,9 +248,11 @@ Suggested actions automatically trigger the `SendMessage` client-side event when
 
 ### Customizing Suggested Actions
 
-You can customize the appearance of suggested actions using the `SuggestedActionsTemplate()` option that accepts a [Template component](slug:htmlhelpers_overview_template). The `k-suggestions` class must be applied to the individual suggestion element. The wrapping element must have the `ref-chat-suggestion-group` attribute.
+You can customize the appearance of suggested actions using the `SuggestedActionsTemplate()` option that accepts a [Template component](slug:htmlhelpers_overview_template). 
 
 The template option provides overloads like `SuggestedActionsTemplateHandler()` and `SuggestedActionsTemplateId()`.
+
+> The `k-suggestions` class must be applied to the individual suggestion element. The wrapping element must have the `ref-chat-suggestion-group` attribute.
 
 The following example demonstrates how to customize the default appearance of the suggested actions.
 

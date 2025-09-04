@@ -35,7 +35,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
         .FilesField("Files")
         .AuthorIdField("AuthorId")
         .AuthorImageUrlField("AuthorImageUrl")
-        .AuthorImageAltTextField("AuthorImageAltTextField")
+        .AuthorImageAltTextField("AuthorImageAltText")
         .TimestampField("TimeStamp")
         .IdField("Id")
         .IsPinnedField("IsPinned")
@@ -47,6 +47,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
             .Create(r => r.Url("/Index?handler=CreateMessage").Data("forgeryToken"))
             .Update(r => r.Url("/Index?handler=UpdateMessage").Data("forgeryToken"))
         )
+        .Events(events => events.SendMessage("onSendMessage"))
     )
     ```
     ```TagHelper
@@ -62,7 +63,7 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
         files-field="Files"
         author-id-field="AuthorId"
         author-image-url-field="AuthorImageUrl"
-        author-image-alt-text-field="AuthorImageAltTextField"
+        author-image-alt-text-field="AuthorImageAltText"
         timestamp-field="TimeStamp"
         id-field="Id"
         is-pinned-field="IsPinned"
@@ -77,6 +78,27 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
             </transport>
         </datasource>
     </kendo-chat>
+    ```
+    ```JS Scripts
+    <script>
+        function onSendMessage(e) {
+            const currentUser = {
+                id: 1,
+                name: "John Doe",
+                iconUrl: "https://demos.telerik.com/aspnet-core/shared/web/Customers/RICSU.jpg",
+                iconAltText: "John's profile picture"
+            };
+
+            e.message.authorId = currentUser.id;
+            e.message.authorName = currentUser.name;
+            e.message.authorImageUrl = currentUser.iconUrl;
+            e.message.authorImageAltText = currentUser.iconAltText;
+
+            setTimeout(() => {
+                e.sender.scrollToBottom();
+            }, 30);
+        }
+    </script>
     ```
     
 1. Add an `AntiForgeryToken` at the top of the page.
@@ -159,13 +181,51 @@ To connect the Chat to a data set retrieved from a remote endpoint in a Razor Pa
         {
             message.Id = Guid.NewGuid().ToString();
             // Set the Message ID explicitly and perform a custom create operation to the database.
-            return new JsonResult(new[] { message }.ToDataSourceResult(request));
+            var messageObject = new {
+                Id = message.Id,
+                AuthorId = message.AuthorId,
+                AuthorName = message.AuthorName,
+                AuthorImageUrl = message.AuthorImageUrl,
+                AuthorImageAltText = message.AuthorImageAltText,
+                Text = message.Text,
+                TimeStamp = message.TimeStamp,
+                IsDeleted = message.IsDeleted,
+                IsPinned = message.IsPinned,
+                IsTyping = message.IsTyping,
+                Files = message.Files?.Select(file => new
+                {
+                    extension = file.Extension,
+                    size = file.Size,
+                    type = file.Type,
+                    name = file.Name
+                }).ToList() ?? []
+            };
+            return new JsonResult(new[] { messageObject }.ToDataSourceResult(request));
         }
 
         public JsonResult OnPostUpdateMessage([DataSourceRequest] DataSourceRequest request, ChatMessage message)
         {
             // Perform a custom update operation to the existing database.
-            return new JsonResult(new[] { message }.ToDataSourceResult(request));
+            var messageObject = new {
+                Id = message.Id,
+                AuthorId = message.AuthorId,
+                AuthorName = message.AuthorName,
+                AuthorImageUrl = message.AuthorImageUrl,
+                AuthorImageAltText = message.AuthorImageAltText,
+                Text = message.Text,
+                TimeStamp = message.TimeStamp,
+                IsDeleted = message.IsDeleted,
+                IsPinned = message.IsPinned,
+                IsTyping = message.IsTyping,
+                Files = message.Files?.Select(file => new
+                {
+                    extension = file.Extension,
+                    size = file.Size,
+                    type = file.Type,
+                    name = file.Name
+                }).ToList() ?? []
+            };
+            return new JsonResult(new[] { messageObject }.ToDataSourceResult(request));
         }
 
         private static List<ChatMessage> GetData()
