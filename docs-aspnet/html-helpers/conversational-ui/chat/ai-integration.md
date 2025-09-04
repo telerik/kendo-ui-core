@@ -10,8 +10,6 @@ position: 3
 
 Integrating AI services with the {{ site.product }} Chat component transforms a simple messaging interface into an intelligent conversational experience. Such integration allows you to create applications that can understand natural language, provide contextual responses, and deliver real-time AI-powered assistance to users.
 
-By leveraging streaming responses, the available client-side Chat events and methods, and its built-in UI components, such as [SpeechToTextButton](slug:htmlhelpers_overview_speechtotextbutton), message actions, and tools, you can implement robust AI integrations with minimal custom infrastructure.
-
 In this article, you will build a practical, end-to-end example that demonstrates how to wire the Chat component to a lightweight AI chat client. This implementation covers opening a chat session, sending messages or quick replies, and streaming the AI model's response into the chat conversation.
 
 ## Getting Started

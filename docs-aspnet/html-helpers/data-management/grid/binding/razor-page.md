@@ -44,6 +44,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
                     column.Destroy();
                 }).Width(230);
             })
+            .HtmlAttributes(new { style = "height:430px;" })
             .DataSource(ds => ds
                 .Ajax()
                 .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
@@ -60,7 +61,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
         @model IndexModel
         @using Kendo.Mvc.UI
 
-        <kendo-grid name="grid">
+        <kendo-grid name="grid" height="430">
             <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
                 <schema data="Data" errors="Errors" total="Total">
                     <model id="OrderID">
@@ -226,29 +227,53 @@ To bind the Grid to a property from the `PageModel`, follow the next steps:
 1. Bind the Grid to the collection property and disable the server data operations (`ServerOperations(false)`).
 
     ```HtmlHelper
-        @page
-        @model IndexModel
-        @using Kendo.Mvc.UI
+    @page
+    @model IndexModel
+    @using Kendo.Mvc.UI
 
-        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-        @Html.AntiForgeryToken()
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
 
-        @(Html.Kendo().Grid<OrderViewModel>(Model.orders)
-            .Name("grid")
-            .Scrollable()
-            .Pageable()
-            .Columns(columns =>
-            {
-                columns.Bound(column => column.Freight);
-                columns.Bound(column => column.ShipName);
-                columns.Bound(column => column.ShipCity);
-            })
-            .DataSource(ds => ds
-                .Ajax()
-                .PageSize(20)
-                .ServerOperation(false)
-            )
+    @(Html.Kendo().Grid<OrderViewModel>(Model.orders)
+        .Name("grid")
+        .Scrollable()
+        .Pageable()
+        .Columns(columns =>
+        {
+            columns.Bound(column => column.Freight);
+            columns.Bound(column => column.ShipName);
+            columns.Bound(column => column.ShipCity);
+        })
+        .HtmlAttributes(new { style = "height:430px;" })
+        .DataSource(ds => ds
+            .Ajax()
+            .PageSize(20)
+            .ServerOperation(false)
         )
+    )
+    ```
+    ```TagHelper
+    @page
+    @model IndexModel
+    @using Kendo.Mvc.UI
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <kendo-grid name="grid" height="430">
+        <datasource type="DataSourceTagHelperType.Ajax" 
+            page-size="20" 
+            server-operation="false" 
+            data="@Model.orders">
+        </datasource>
+        <columns>
+            <column field="Freight"/>
+            <column field="ShipName"/>
+            <column field="ShipCity"/>
+        </columns>
+        <pageable enabled="true"/>
+        <scrollable enabled="true"/>
+    </kendo-grid>
     ```
 
 ## See Also

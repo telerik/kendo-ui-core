@@ -105,8 +105,10 @@ To test the Chat component, refer to the [Chat Accessibility Demo](https://demos
 
 ## Keyboard Navigation
 
-For details on how the Chat keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
+For details on how the Chat keyboard navigation works, refer to the [Chat Keyboard Navigation]({%slug keynav_aspnetcore_chat%}) article.
 
 ## See Also
 
+* [Keyboard Navigation by the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/keyboard-navigation)
+* [Keyboard Navigation by the Chat for {{ site.framework }}]({% slug keynav_aspnetcore_chat %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

@@ -82,7 +82,7 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
         "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\lukanova\\AppData\\Roaming\\Telerik\\telerik-license.txt"
+          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
         }
       }
     }
@@ -138,7 +138,7 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
         "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\lukanova\\AppData\\Roaming\\Telerik\\telerik-license.txt"
+          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
         }
       }
     }
@@ -203,7 +203,7 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
         "command": "npx",
         "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
         "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\lukanova\\AppData\\Roaming\\Telerik\\telerik-license.txt"
+          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
         }
       }
     }
