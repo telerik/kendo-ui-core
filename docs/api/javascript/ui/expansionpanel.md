@@ -139,6 +139,8 @@ The number of milliseconds used for the visual animation when an item is opened.
 A whitespace-delimited string of animation effects that are used when an item is expanded. Available options are
 **"expandVertical"**, **"zoomIn"** and **"fadeIn"**.
 
+#### Example
+
     <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
     <script>
@@ -154,6 +156,8 @@ A whitespace-delimited string of animation effects that are used when an item is
 ### collapseIconClass `String` *(default: "chevron-up")*
 
 The name of the collapse icon.
+
+#### Example
 
     <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
@@ -195,6 +199,8 @@ If set to true the widget will be expanded by default.
 
 The class of the expand icon.
 
+#### Example
+
     <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
     <script>
@@ -206,6 +212,16 @@ The class of the expand icon.
 ### height `Number|String`
 
 The height of the widget. Numeric values are treated as pixels.
+
+#### Example
+
+    <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <script>
+        $("#expansionPanel").kendoExpansionPanel({
+            height: 300
+        });
+    </script>
 
 ### subTitle `String` *(default: null)*
 

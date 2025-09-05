@@ -1230,9 +1230,45 @@ When configured, a start button will be rendered in the left side of the header 
 
 Specifies the icon to be displayed in the start button.
 
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: "folder" },
+            { text: "Item 2", icon: "file" }
+        ],
+        startButton: {
+            text: "Start",
+            icon: "play"
+        }
+    }).data("kendoActionSheet").open();
+    </script>
+
 ### startButton.click `Function`
 
 The function that will be executed when the start button is clicked.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: "folder" },
+            { text: "Item 2", icon: "file" }
+        ],
+        startButton: {
+            text: "Start",
+            click: function(e) {
+                console.log("Start button clicked");
+            }
+        }
+    }).data("kendoActionSheet").open();
+    </script>
 
 ### subtitle `String`
 
@@ -1538,11 +1574,45 @@ Fired when the widget is opened.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: "folder" },
+            { text: "Item 2", icon: "file" }
+        ],
+        activate: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("ActionSheet activated");
+        }
+    }).data("kendoActionSheet").open();
+    </script>
+
 ### close
 
 Fired when the widget closes.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: "folder" },
+            { text: "Item 2", icon: "file" }
+        ],
+        close: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("ActionSheet closed");
+        }
+    }).data("kendoActionSheet").open();
+    </script>
 
 ### deactivate
 
@@ -1550,8 +1620,42 @@ Fired when the widget is closed.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: "folder" },
+            { text: "Item 2", icon: "file" }
+        ],
+        deactivate: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("ActionSheet deactivated");
+        }
+    }).data("kendoActionSheet").open();
+    </script>
+
 ### open
 
 Fired when the widget opens.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+    $("#actionsheet").kendoActionSheet({
+        title: "Select action",
+        items: [
+            { text: "Item 1", icon: "folder" },
+            { text: "Item 2", icon: "file" }
+        ],
+        open: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("ActionSheet opened");
+        }
+    }).data("kendoActionSheet").open();
+    </script>

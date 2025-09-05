@@ -50,10 +50,125 @@ The element **should be positioned absolutely/relatively**, and contain two chil
 
 The axis of the flip. Accepted values are `"horizontal"` or `"vertical"`
 
+#### Example
+
+    <style>
+        #container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        #front, #back {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+        }
+        #front {
+            background: lightblue;
+        }
+        #back {
+            background: lightcoral;
+        }
+    </style>
+
+    <div id="container">
+        <div id="front">Front Side</div>
+        <div id="back">Back Side</div>
+    </div>
+
+    <script>
+        // Flip horizontally
+        kendo.fx($("#container")).flip("horizontal", $("#front"), $("#back")).play();
+        
+        // Or flip vertically
+        // kendo.fx($("#container")).flip("vertical", $("#front"), $("#back")).play();
+    </script>
+
 ### face `jQuery`
 
 The initially visible element in the container.
 
+#### Example
+
+    <style>
+        #container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .face, .back {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+        }
+        .face {
+            background: #4CAF50;
+            color: white;
+        }
+        .back {
+            background: #FF5722;
+            color: white;
+        }
+    </style>
+
+    <div id="container">
+        <div class="face" id="frontElement">This is the Face</div>
+        <div class="back" id="backElement">This is the Back</div>
+    </div>
+
+    <script>
+        // The face parameter specifies which element is initially visible
+        var faceElement = $("#frontElement");
+        var backElement = $("#backElement");
+        
+        kendo.fx($("#container")).flip("horizontal", faceElement, backElement).play();
+    </script>
+
 ### back `jQuery`
 
 The finally visible element in the container.
+
+#### Example
+
+    <style>
+        #flipContainer {
+            position: relative;
+            width: 250px;
+            height: 150px;
+            margin: 20px;
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 250px;
+            height: 150px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+        .card-front {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+        }
+        .card-back {
+            background: linear-gradient(45deg, #FF9800, #FF5722);
+        }
+    </style>
+
+    <div id="flipContainer">
+        <div class="card-front" id="frontCard">Front Card</div>
+        <div class="card-back" id="backCard">Back Card</div>
+    </div>
+    <button id="flipBtn">Flip Card</button>
+
+    <script>
+        $("#flipBtn").click(function() {
+            var frontElement = $("#frontCard");
+            var backElement = $("#backCard"); // This is the 'back' parameter - element shown after flip
+            
+            kendo.fx($("#flipContainer")).flip("horizontal", frontElement, backElement).play();
+        });
+    </script>

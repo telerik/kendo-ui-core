@@ -13,6 +13,24 @@ component: map
 ### layers `Array`
 The [Map layers](/api/javascript/dataviz/map/layer) ordered by index.
 
+#### Example - accessing map layers
+    <div id="map"></div>
+    <script>
+        var map = $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }]
+        }).data("kendoMap");
+        
+        // Access the layers array
+        console.log("Number of layers:", map.layers.length);
+        console.log("First layer:", map.layers[0]);
+    </script>
+
 ## Configuration
 
 ### center `Array|kendo.dataviz.map.Location`
@@ -270,6 +288,35 @@ For example "pinTarget" is rendered as "k-i-marker-pin-target".
 ### layerDefaults.marker.tooltip `Object`
 
 The default Kendo UI Tooltip options for all marker layers.
+
+#### Example - configuring marker tooltip defaults
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            layerDefaults: {
+                marker: {
+                    tooltip: {
+                        autoHide: false,
+                        showOn: "click",
+                        template: (data) => `<strong>${data.title}</strong><br/>${data.description}`,
+                        position: "top"
+                    }
+                }
+            },
+            layers: [{
+                type: "marker",
+                locationField: "latlng",
+                titleField: "title",
+                dataSource: {
+                    data: [{
+                        latlng: [42.6977, 23.3219],
+                        title: "Sofia",
+                        description: "Capital of Bulgaria"
+                    }]
+                }
+            }]
+        });
+    </script>
 
 ### layerDefaults.marker.tooltip.autoHide `Boolean`*(default: true)*
 
@@ -1779,6 +1826,21 @@ The function return value must be a `kendo.drawing.Shape`.
 ### layerDefaults.tileSize `Number` *(default: 256)*
 The size of the image tile in pixels.
 
+#### Example - setting default tile size
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            layerDefaults: {
+                tileSize: 512
+            },
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }]
+        });
+    </script>
+
 ### layerDefaults.tile `Object`
 
 The default configuration for tile layers.
@@ -1973,6 +2035,22 @@ The bing map tile types. Possible options:
     * aerial - Aerial imagery.
     * aerialWithLabels - Aerial imagery with a road overlay.
     * road - Roads without additional imagery. (default)
+
+#### Example - setting default Bing imagery type
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            layerDefaults: {
+                bing: {
+                    imagerySet: "aerialWithLabels"
+                }
+            },
+            layers: [{
+                type: "bing",
+                key: "YOUR API KEY"
+            }]
+        });
+    </script>
 
 ### layerDefaults.bing.culture `String` *(default: "en-US")*
 
@@ -2204,6 +2282,20 @@ If not specified, the layer is always visible.
 
 The API key for the layer. Currently supported only for Bing (tm) tile layers.
 
+#### Example - setting Bing API key for a layer
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            layers: [{
+                type: "bing",
+                key: "YOUR_BING_MAPS_API_KEY",
+                imagerySet: "road"
+            }]
+        });
+    </script>
+
 ### layers.imagerySet `String` *(default: "road")*
 
 The bing map tile types. Possible options:
@@ -2213,6 +2305,20 @@ The bing map tile types. Possible options:
     * birdseye - Bird’s eye (oblique-angle) imagery
     * birdseyeWithLabels - Bird’s eye imagery with a road overlay.
     * road - Roads without additional imagery. (default)
+
+#### Example - setting Bing imagery type for a layer
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            layers: [{
+                type: "bing",
+                key: "YOUR_BING_MAPS_API_KEY",
+                imagerySet: "aerial"
+            }]
+        });
+    </script>
 
 ### layers.culture `String` *(default: "en-US")*
 
@@ -2287,6 +2393,21 @@ For example "pinTarget" is rendered as "k-marker-pin-target".
 ### layers.tileSize `Number` *(default: 256)*
 The size of the image tile in pixels.
 
+#### Example - setting tile size for a layer
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap",
+                tileSize: 512
+            }]
+        });
+    </script>
+
 ### layers.titleField `String` *(default: "title")*
 
 The data item field which contains the marker title.
@@ -2313,6 +2434,31 @@ Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-da
 ### layers.tooltip `Object`
 
 The default Kendo UI Tooltip options for data-bound markers.
+
+#### Example - configuring layer tooltip options
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            layers: [{
+                type: "marker",
+                locationField: "latlng",
+                titleField: "title",
+                tooltip: {
+                    autoHide: false,
+                    template: (data) => `<strong>${data.title}</strong><br/>${data.description}`,
+                    position: "top",
+                    showOn: "click"
+                },
+                dataSource: {
+                    data: [{
+                        latlng: [42.6977, 23.3219],
+                        title: "Sofia",
+                        description: "Capital of Bulgaria"
+                    }]
+                }
+            }]
+        });
+    </script>
 
 ### layers.tooltip.autoHide `Boolean`*(default: true)*
 
@@ -3435,6 +3581,26 @@ For example "pinTarget" is rendered as "k-marker-pin-target".
 
 Default Kendo UI Tooltip options for this marker.
 
+#### Example - configuring default marker tooltip
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            markerDefaults: {
+                tooltip: {
+                    autoHide: false,
+                    template: (data) => `<strong>${data.title || 'Marker'}</strong><br/>Location: ${data.location}`,
+                    position: "bottom",
+                    showOn: "click"
+                }
+            },
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }]
+        });
+    </script>
+
 ### markerDefaults.tooltip.autoHide `Boolean`*(default: true)*
 
 Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.
@@ -4124,6 +4290,27 @@ The marker title. Displayed as browser tooltip.
 
 Kendo UI Tooltip options for this marker.
 
+#### Example - configuring marker tooltip
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }],
+            markers: [{
+                location: [42.6977, 23.3219],
+                tooltip: {
+                    autoHide: false,
+                    content: "Sofia, Bulgaria - Capital city",
+                    position: "top",
+                    showOn: "click"
+                }
+            }]
+        });
+    </script>
+
 ### markers.tooltip.autoHide `Boolean`*(default: true)*
 
 Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.
@@ -4649,13 +4836,62 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
 
 The size of the map in pixels at zoom level 0.
 
+#### Example - setting minimum map size
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            minSize: 512,
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }]
+        });
+    </script>
+
 ### messages `Object`
 
 Allows localization of the strings that are used in the widget.
 
+#### Example - configuring map messages
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            messages: {
+                tileTitle: "Mapa del territorio"
+            },
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }]
+        });
+    </script>
+
 ### messages.tileTitle `String` *(default: "Map tile")*
 
 Specifies `alt` attribute value for the Map tile `<img>` elements.
+
+#### Example - setting custom tile title message
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            messages: {
+                tileTitle: "Interactive Map Tile"
+            },
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }]
+        });
+    </script>
 
 ### pannable `Boolean` *(default: true)*
 
@@ -5138,7 +5374,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
 
 `kendo.geometry.Point` The view coordinates that correspond to a geographical location.
 
-#### Retrieves the view coordinates of the map center (Array)
+#### Example - retrieve view coordinates of map center
     <div id="map" style="width: 1024px; height: 1024px;"></div>
     <script>
         $("#map").kendoMap({
@@ -5362,6 +5598,24 @@ The new zoom level. The value is clamped to the
 
 Fired immediately before the map is reset.
 This event is typically used for cleanup by layer implementers.
+
+#### Example - handling beforeReset event
+    <div id="map"></div>
+    <script>
+        $("#map").kendoMap({
+            center: [30.268107, -97.744821],
+            zoom: 3,
+            layers: [{
+                type: "tile",
+                urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                attribution: "&copy; OpenStreetMap"
+            }],
+            beforeReset: function(e) {
+                console.log("Map is about to reset");
+                // Perform cleanup operations here
+            }
+        });
+    </script>
 
 #### Event Data
 

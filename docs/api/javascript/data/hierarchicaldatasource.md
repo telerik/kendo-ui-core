@@ -127,6 +127,36 @@ The filters which are applied over the data items. It applies the filter to all 
 
 The schema configuration. See the [`DataSource.schema` configuration](/api/framework/datasource#configuration-schema) for all available options.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [
+            { name: "Documents", items: [
+                { name: "Report.pdf", size: "1MB" },
+                { name: "Presentation.pptx", size: "5MB" }
+            ]},
+            { name: "Images", items: [
+                { name: "photo1.jpg", size: "2MB" },
+                { name: "photo2.png", size: "3MB" }
+            ]}
+        ],
+        schema: {
+            model: {
+                children: "items",
+                fields: {
+                    name: { type: "string" },
+                    size: { type: "string" }
+                }
+            }
+        }
+    });
+
+    dataSource.read();
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(dataSource.view().length); // displays 2
+    </script>
+
 ### schema.model `Object|kendo.data.Node`
 
 The data item (model) configuration. See the [`DataSource.schema.model` configuration](/api/framework/datasource#configuration-schema.model) for all available options.

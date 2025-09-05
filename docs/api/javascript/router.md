@@ -13,11 +13,52 @@ Router class is responsible for tracking the application state and navigating be
 
 Introduced with Q3 2014. If set to `false`, the router instance will perform case sensitive match of the url against the defined routes.
 
+#### Example
+
+    <script>
+    var router = new kendo.Router({ ignoreCase: false });
+
+    router.route("/Items/:id", function(id) {
+        console.log("Case sensitive route matched for item:", id);
+    });
+
+    router.route("/items/:id", function(id) {
+        console.log("Lowercase route matched for item:", id);
+    });
+
+    $(function() {
+        router.start();
+        
+        // This will match the lowercase route only
+        router.navigate("/items/123");
+        
+        // This will match the case sensitive route only
+        router.navigate("/Items/456");
+    });
+    </script>
+
 ### pushState `Boolean` *(default: false)*
 
 If set to true, the router will use the [history pushState API](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#The_pushState().C2.A0method).
 
 > The history `pushState` API currently has [limited support across current browsers](https://caniuse.com/#search=pushstate).
+
+#### Example
+
+    <script>
+    var router = new kendo.Router({ pushState: true });
+
+    router.route("/products/:category", function(category) {
+        console.log("Navigated to category:", category);
+    });
+
+    $(function() {
+        router.start();
+        
+        // Navigate using pushState (no hash fragment)
+        router.navigate("/products/electronics");
+    });
+    </script>
 
 
 ### root `String` *(default: "/")*
@@ -82,6 +123,8 @@ Activates the router binding to the URL changes.
     </script>
 
 ### route
+
+Adds a new route definition to the router.
 
 #### Example
 
@@ -186,6 +229,28 @@ If set to `true`, the router callbacks will not be called.
 
 Unbinds the router instance listeners from the URL fragment part changes.
 
+#### Example
+
+    <script>
+    var router = new kendo.Router();
+
+    router.route("/users/:id", function(id) {
+        console.log("User route activated for id:", id);
+    });
+
+    $(function() {
+        router.start();
+        
+        // Navigate to trigger the route
+        router.navigate("/users/123");
+        
+        // Later, clean up the router when no longer needed
+        router.destroy();
+        
+        console.log("Router destroyed - no longer listening to URL changes");
+    });
+    </script>
+
 ## Events
 
 ### back
@@ -203,6 +268,37 @@ The current part of the URL
 The fragment part of the previous URL
 
 > Calling the `preventDefault` method of the event object will stop the change and restore the previous URL.
+
+#### Example
+
+    <script>
+    var router = new kendo.Router();
+
+    router.bind("back", function(e) {
+        console.log("Navigating back from:", e.to, "to:", e.url);
+        
+        // Optionally prevent the back navigation
+        // e.preventDefault();
+    });
+
+    router.route("/page1", function() {
+        console.log("Page 1 loaded");
+    });
+
+    router.route("/page2", function() {
+        console.log("Page 2 loaded");
+    });
+
+    $(function() {
+        router.start();
+        
+        // Navigate forward
+        router.navigate("/page1");
+        router.navigate("/page2");
+        
+        // Navigate back (will trigger the back event)
+    });
+    </script>
 
 ### change
 

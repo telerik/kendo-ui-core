@@ -48,6 +48,23 @@ Specifies the orientation of the widget. Supported values are *"horizontal"* and
 
 An array of pane definitions.
 
+#### Example
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div>Pane B</div>
+      <div>Pane C</div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      panes: [
+        { size: "30%" },
+        { size: "40%" },
+        { size: "30%" }
+      ]
+    });
+    </script>
+
 ### panes.collapsed `Boolean` *(default: false)*
 
 Specifies whether a pane is initially collapsed (**true**) or expanded (**false**).

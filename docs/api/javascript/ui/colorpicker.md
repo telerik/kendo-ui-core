@@ -20,13 +20,42 @@ the DOM.
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        adaptiveMode: "auto"
+      });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Pick a Color"
+      });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        adaptiveMode: "auto",
+        adaptiveSubtitle: "Select your preferred color"
+      });
+    </script>
 
 ### buttons `Boolean` *(default: true)*
 
@@ -264,6 +293,18 @@ Allows customization of the "Cancel" button text.
 
 Allows customization of the Clear Color button label.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        clearButton: true,
+        messages: {
+          clearColor: "Remove Color"
+        }
+      });
+    </script>
+
 ### messages.previewInput `String`
 
 Overrides the messages.hex property. Legacy option.
@@ -283,45 +324,176 @@ Overrides the messages.hex property. Legacy option.
 
 Allows customization of the "Contrast ratio" text in the contrast tool.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        contrastTool: true,
+        messages: {
+          contrastRatio: "Color Contrast"
+        }
+      });
+    </script>
+
 ### messages.fail `String` *(default: "Fail")*
 
 Allows customization of the "Fail" text in the contrast tool.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        contrastTool: true,
+        messages: {
+          fail: "Poor"
+        }
+      });
+    </script>
 
 ### messages.pass  `String` *(default: "Pass")*
 
 Allows customization of the "Pass" text in the contrast tool.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        contrastTool: true,
+        messages: {
+          pass: "Good"
+        }
+      });
+    </script>
+
 ### messages.gradient `String` *(default: "Gradient view")*
 
 Allows customization of the Gradient view button.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        views: ["gradient", "palette"],
+        messages: {
+          gradient: "Color Gradient"
+        }
+      });
+    </script>
 
 ### messages.palette `String` *(default: "Palette view")*
 
 Allows customization of the Palette view button.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        views: ["gradient", "palette"],
+        messages: {
+          palette: "Color Palette"
+        }
+      });
+    </script>
+
 ### messages.toggleFormat `String` *(default: "Toggle format")*
 
 Allows customization of the toggle format button's title in the Gradient's input editor.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        messages: {
+          toggleFormat: "Switch Format"
+        }
+      });
+    </script>
 
 ### messages.red `String` *(default: "Red")*
 
 Allows customization of the rgb's red input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        format: "rgb",
+        messages: {
+          red: "Red Component"
+        }
+      });
+    </script>
+
 ### messages.green `String` *(default: "Green")*
 
 Allows customization of the rgb's green input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        format: "rgb",
+        messages: {
+          green: "Green Component"
+        }
+      });
+    </script>
 
 ### messages.blue `String` *(default: "Blue")*
 
 Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        format: "rgb",
+        messages: {
+          blue: "Blue Component"
+        }
+      });
+    </script>
+
 ### messages.alpha `String` *(default: "Alpha")*
 
 Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        opacity: true,
+        messages: {
+          alpha: "Transparency"
+        }
+      });
+    </script>
+
 ### messages.hex `String` *(default: "HEX")*
 
 Allows customization of the hex input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+      $("#colorpicker").kendoColorPicker({
+        format: "hex",
+        messages: {
+          hex: "Hexadecimal"
+        }
+      });
+    </script>
 
 ### palette `String|Array` *(default: null)*
 
@@ -570,6 +742,22 @@ The color that should be set as the current value
 #### Returns
 
 `kendo.Color` the current value
+
+#### Example
+
+    <div id="colorpicker"></div>
+    <script>
+    $("#colorpicker").kendoColorPicker();
+    var colorpicker = $("#colorpicker").data("kendoColorPicker");
+    
+    // set picker color
+    colorpicker.color(kendo.parseColor("#ff0000"));
+    
+    // get picker color
+    var currentColor = colorpicker.color();
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(currentColor.toHex()); // logs the color in hex format
+    </script>
 
 ### enable
 

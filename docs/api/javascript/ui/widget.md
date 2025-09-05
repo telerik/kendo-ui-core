@@ -52,18 +52,100 @@ See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more informa
 
 Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable#bind) section of the `kendo.Observable` API reference.
 
+#### Example
+
+    <div id="button"></div>
+    <script>
+    $("#button").kendoButton({
+        click: function() {
+            console.log("Button clicked");
+        }
+    });
+    
+    var widget = $("#button").data("kendoButton");
+    widget.bind("click", function(e) {
+        console.log("Additional click handler attached via bind");
+    });
+    </script>
+
 ### destroy
 
 Prepares the widget for safe removal from the DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+        title: "Sample Dialog",
+        content: "This dialog will be destroyed"
+    });
+    
+    var widget = $("#dialog").data("kendoDialog");
+    
+    // Later, when you need to remove the widget
+    widget.destroy();
+    $("#dialog").remove(); // Remove the DOM element
+    </script>
 
 ### one
 
 Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/javascript/observable/methods/one) section of the
 `kendo.Observable` API reference.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        dataSource: [
+            { id: 1, name: "John" },
+            { id: 2, name: "Jane" }
+        ],
+        columns: [
+            { field: "name", title: "Name" }
+        ]
+    });
+    
+    var widget = $("#grid").data("kendoGrid");
+    widget.one("dataBound", function(e) {
+        console.log("Grid data bound - this handler will only execute once");
+    });
+    
+    // Trigger data binding multiple times - handler only runs once
+    widget.dataSource.read();
+    widget.dataSource.read();
+    </script>
+
 ### resize
 
 Readjusts the layout of the widget. For more information, refer to the article on [responsive web design](/styles-and-layout/using-kendo-in-responsive-web-pages).
+
+#### Example
+
+    <div id="chart" style="height: 300px;"></div>
+    <script>
+    $("#chart").kendoChart({
+        title: {
+            text: "Sample Chart"
+        },
+        series: [{
+            type: "column",
+            data: [10, 20, 30, 40]
+        }]
+    });
+    
+    var widget = $("#chart").data("kendoChart");
+    
+    // Resize the chart when container size changes
+    $(window).resize(function() {
+        widget.resize();
+    });
+    
+    // Force resize after changing container size
+    $("#chart").width(800);
+    widget.resize();
+    </script>
 
 ### setOptions
 
@@ -102,7 +184,57 @@ The options to be changed or added.
 Executes all handlers attached to the given event. More info can be found in the [trigger](/api/javascript/observable/methods/trigger) section of the
 `kendo.Observable` API reference.
 
+#### Example
+
+    <div id="slider"></div>
+    <script>
+    $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        value: 50,
+        change: function(e) {
+            console.log("Slider value changed to: " + e.value);
+        }
+    });
+    
+    var widget = $("#slider").data("kendoSlider");
+    
+    // Manually trigger the change event
+    widget.trigger("change", { value: widget.value() });
+    
+    // Trigger custom event
+    widget.bind("customEvent", function(e) {
+        console.log("Custom event triggered with data: " + e.data);
+    });
+    widget.trigger("customEvent", { data: "test data" });
+    </script>
+
 ### unbind
 
 Remove a previously attached event handler. More info can be found in the [unbind](/api/javascript/observable/methods/unbind) section of the
 `kendo.Observable` API reference.
+
+#### Example
+
+    <div id="textbox"></div>
+    <script>
+    $("#textbox").kendoTextBox({
+        change: function(e) {
+            console.log("Original change handler");
+        }
+    });
+    
+    var widget = $("#textbox").data("kendoTextBox");
+    
+    // Add additional handler
+    var customHandler = function(e) {
+        console.log("Custom change handler");
+    };
+    widget.bind("change", customHandler);
+    
+    // Remove the custom handler
+    widget.unbind("change", customHandler);
+    
+    // Remove all change handlers
+    widget.unbind("change");
+    </script>

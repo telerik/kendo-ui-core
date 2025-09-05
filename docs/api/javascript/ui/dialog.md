@@ -634,6 +634,20 @@ Possible values are:
 ### center
 
 Centers the Dialog within the viewport.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    var dialog = $("#dialog").kendoDialog({
+        title: "Centered Dialog",
+        content: "This dialog will be centered in the viewport."
+    }).data("kendoDialog");
+    
+    // Center the dialog in the viewport
+    dialog.center();
+    </script>
+
 #### Returns
 
 `kendo.ui.Dialog` - Returns the Dialog object to support chaining. 

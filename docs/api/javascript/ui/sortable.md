@@ -196,9 +196,35 @@ By default, the hint is initially positioned on top of the draggable source offs
 
 The left offset of the hint element relative to the mouse cursor/finger.
 
+#### Example
+
+    <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+    <script>
+        $("#sortable").kendoSortable({
+            cursorOffset: { left: 50 }
+        });
+    </script>
+
 ### cursorOffset.top `Number`
 
 The top offset of the hint element relative to the mouse cursor/finger.
+
+#### Example
+
+    <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+    <script>
+        $("#sortable").kendoSortable({
+            cursorOffset: { top: 25 }
+        });
+    </script>
 
 ### disabled `String`*(default: null)*
 

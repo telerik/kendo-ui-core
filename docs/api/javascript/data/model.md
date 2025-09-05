@@ -69,6 +69,22 @@ The value of the ID of the `Model`. This field is available only if the `id` is 
 
 The name of the `Model` ID field. This field is available only if the `id` is defined in the Model configuration.
 
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        id: "productId",
+        fields: {
+            productId: { type: "number" },
+            name: { type: "string" }
+        }
+    });
+    var product = new Product({ productId: 1, name: "Sample Product" });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.idField); // outputs "productId"
+    </script>
+
     <script>
     var Person = kendo.data.Model.define({
         id: "personId",
@@ -98,6 +114,20 @@ The name of the `Model` ID field. This field is available only if the `id` is de
 
 The unique identifier of the `Model`. Inherited from `ObservableObject`. For more information, refer to the [`uid`](/api/javascript/data/observableobject#fields-uid) API reference.
 
+#### Example
+
+    <script>
+    var model1 = new kendo.data.Model({ name: "Item 1" });
+    var model2 = new kendo.data.Model({ name: "Item 2" });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(model1.uid); // outputs a unique identifier string like "1e3b4c5d-6789"
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(model2.uid); // outputs a different unique identifier string
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(model1.uid === model2.uid); // outputs false - each model has a unique uid
+    </script>
+
 The main benefit of the `uid` identifiers is to represent a link between data items (that may not have an ID of their own) and the corresponding rendered DOM elements (list items, table rows, and so on). The `uid` identifiers are generated randomly and are not persisted on reloading of data or web pages.
 
 ### dirty `Boolean`
@@ -123,6 +153,28 @@ Indicates whether the model is modified.
 ### bind
 
 Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable/methods/bind) API reference.
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" }
+        }
+    });
+    
+    var product = new Product({ name: "Laptop", price: 999 });
+    
+    // Bind to the change event
+    product.bind("change", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Field '" + e.field + "' changed to: " + e.value);
+    });
+    
+    product.set("name", "Gaming Laptop"); // triggers change event
+    product.set("price", 1299); // triggers change event
+    </script>
 
 ### define
 
@@ -307,6 +359,27 @@ The field that will be checked.
 
 Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/methods/get) API reference.
 
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            category: { type: "string", defaultValue: "Electronics" }
+        }
+    });
+    
+    var product = new Product({ name: "Smartphone", price: 599 });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("name")); // outputs "Smartphone"
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("price")); // outputs 599
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("category")); // outputs "Electronics" (default value)
+    </script>
+
 ### isNew
 
 Checks if the `Model` is new or not. The `id` field is used to determine if a model instance is new or existing. If the value of the specified field is equal to the default value that is specified through the `fields` configuration, the model is considered new.
@@ -337,9 +410,68 @@ Checks if the `Model` is new or not. The `id` field is used to determine if a mo
 
 Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/methods/set) API reference.
 
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            inStock: { type: "boolean", defaultValue: true }
+        }
+    });
+    
+    var product = new Product({ name: "Tablet", price: 299 });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("name")); // outputs "Tablet"
+    
+    // Set new values
+    product.set("name", "iPad Pro");
+    product.set("price", 1099);
+    product.set("inStock", false);
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("name")); // outputs "iPad Pro"
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("price")); // outputs 1099
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("inStock")); // outputs false
+    </script>
+
 ### toJSON
 
 Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`toJSON`](/api/javascript/data/observableobject/methods/tojson) API reference.
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        id: "productId",
+        fields: {
+            productId: { type: "number" },
+            name: { type: "string" },
+            price: { type: "number" },
+            category: { type: "string" }
+        }
+    });
+    
+    var product = new Product({
+        productId: 1,
+        name: "Wireless Mouse",
+        price: 29.99,
+        category: "Computer Accessories"
+    });
+    
+    var jsonObject = product.toJSON();
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(jsonObject); // outputs { productId: 1, name: "Wireless Mouse", price: 29.99, category: "Computer Accessories" }
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(typeof jsonObject); // outputs "object" - it's a plain JavaScript object
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(JSON.stringify(jsonObject)); // outputs JSON string representation
+    </script>
 
 ## Events
 
@@ -347,10 +479,92 @@ Creates a plain JavaScript object which contains all fields of the `Model`. Inhe
 
 Fires when a field value is updated through the `set` method. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`change`](/api/javascript/data/observableobject/events/change) API reference.
 
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            inStock: { type: "boolean" }
+        }
+    });
+    
+    var product = new Product({ name: "Monitor", price: 299, inStock: true });
+    
+    // Bind to the change event
+    product.bind("change", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Change event fired!");
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Field: " + e.field);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("New value: " + e.value);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Old value: " + e.previousValue);
+    });
+    
+    product.set("name", "Gaming Monitor"); // triggers change event
+    product.set("price", 399); // triggers change event
+    product.set("inStock", false); // triggers change event
+    </script>
+
 ### get
 
 Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/events/get) API reference.
 
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" }
+        }
+    });
+    
+    var product = new Product({ name: "Keyboard", price: 79 });
+    
+    // Bind to the get event
+    product.bind("get", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Get event fired for field: " + e.field);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Value being retrieved: " + e.value);
+    });
+    
+    var name = product.get("name"); // triggers get event
+    var price = product.get("price"); // triggers get event
+    </script>
+
 ### set
 
 Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/events/set) API reference.
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            available: { type: "boolean" }
+        }
+    });
+    
+    var product = new Product({ name: "Headphones", price: 149, available: true });
+    
+    // Bind to the set event
+    product.bind("set", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Set event fired for field: " + e.field);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("New value being set: " + e.value);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Previous value: " + e.previousValue);
+    });
+    
+    product.set("name", "Wireless Headphones"); // triggers set event
+    product.set("price", 199); // triggers set event
+    product.set("available", false); // triggers set event
+    </script>

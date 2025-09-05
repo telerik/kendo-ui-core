@@ -62,6 +62,31 @@ The configuration options.
 ### fromArc
 Create a curve from the given arc.
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var arc = new geom.Arc([100, 100], {
+            startAngle: 0,
+            endAngle: 90,
+            radiusX: 50,
+            radiusY: 50
+        });
+
+        var path = draw.Path.fromArc(arc, {
+            stroke: {
+                color: "#ff6358",
+                width: 3
+            }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 #### Parameters
 
 ##### arc `kendo.geometry.Arc`
@@ -75,6 +100,31 @@ The [configuration](/api/javascript/drawing/path#configuration) options for the 
 
 ### fromPoints
 Create a straight path from the given points.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var points = [
+            new geom.Point(50, 50),
+            new geom.Point(150, 100),
+            new geom.Point(200, 50),
+            new geom.Point(250, 150)
+        ];
+
+        var path = draw.Path.fromPoints(points, {
+            stroke: {
+                color: "#2ecc71",
+                width: 2
+            }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -90,6 +140,29 @@ The [configuration](/api/javascript/drawing/path#configuration) options for the 
 
 ### fromRect
 Create a straight path from the given rectangle.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([50, 50], [150, 100]);
+
+        var path = draw.Path.fromRect(rect, {
+            stroke: {
+                color: "#9b59b6",
+                width: 2
+            },
+            fill: {
+                color: "#ecf0f1"
+            }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -141,41 +214,294 @@ The [configuration](/api/javascript/drawing/path#configuration) options for the 
 The element clipping path.
 Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        // Create a clipping path
+        var clipPath = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(150, 50)
+            .lineTo(150, 150)
+            .lineTo(50, 150)
+            .close();
+
+        // Create the main path
+        var path = new draw.Path({
+            clip: clipPath,
+            stroke: {
+                color: "#e74c3c",
+                width: 3
+            }
+        })
+        .moveTo(0, 100)
+        .lineTo(200, 100);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 ### cursor `String`
 The element cursor.
 Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path({
+            cursor: "pointer",
+            stroke: {
+                color: "#3498db",
+                width: 3
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 200);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 ### fill `kendo.drawing.FillOptions`
 The fill options of the shape.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path({
+            fill: {
+                color: "#f39c12",
+                opacity: 0.7
+            },
+            stroke: {
+                color: "#e67e22",
+                width: 2
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 50)
+        .lineTo(125, 200)
+        .close();
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 ### opacity `Number`
 The element opacity.
 Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path({
+            opacity: 0.5,
+            stroke: {
+                color: "#2c3e50",
+                width: 4
+            },
+            fill: {
+                color: "#1abc9c"
+            }
+        })
+        .moveTo(50, 100)
+        .lineTo(150, 50)
+        .lineTo(200, 150)
+        .close();
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 ### stroke `kendo.drawing.StrokeOptions`
 The stroke options of the shape.
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path({
+            stroke: {
+                color: "#e74c3c",
+                width: 5,
+                lineCap: "round",
+                lineJoin: "round",
+                dashType: "dash"
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 50)
+        .lineTo(200, 200)
+        .lineTo(50, 200)
+        .close();
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 ### tooltip `kendo.drawing.TooltipOptions`
 The tooltip options of the shape.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path({
+            tooltip: {
+                content: "This is a drawing path"
+            },
+            stroke: {
+                color: "#9b59b6",
+                width: 3
+            }
+        })
+        .moveTo(50, 100)
+        .lineTo(200, 100);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var transform = geom.transform()
+            .rotate(45, [125, 125])
+            .scale(1.2, 1.2);
+
+        var path = new draw.Path({
+            transform: transform,
+            stroke: {
+                color: "#34495e",
+                width: 3
+            },
+            fill: {
+                color: "#ecf0f1"
+            }
+        })
+        .moveTo(75, 75)
+        .lineTo(175, 75)
+        .lineTo(175, 175)
+        .lineTo(75, 175)
+        .close();
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 ### visible `Boolean`
 A flag, indicating if the element is visible.
 Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var visiblePath = new draw.Path({
+            visible: true,
+            stroke: {
+                color: "#27ae60",
+                width: 3
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 50);
+
+        var hiddenPath = new draw.Path({
+            visible: false,
+            stroke: {
+                color: "#e74c3c",
+                width: 3
+            }
+        })
+        .moveTo(50, 100)
+        .lineTo(200, 100);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(visiblePath);
+        surface.draw(hiddenPath); // This won't be visible
+    </script>
 
 ## Fields
 
 ### segments `Array`
 A collection of the path [segments](/api/javascript/drawing/segment).
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(150, 50)
+            .curveTo([200, 100], [200, 150], [150, 200])
+            .lineTo(50, 200)
+            .close();
+
+        // Access and log the segments
+        console.log("Path has " + path.segments.length + " segments");
+        for (var i = 0; i < path.segments.length; i++) {
+            console.log("Segment " + i + ":", path.segments[i]);
+        }
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 ## Methods
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
 Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(200, 100)
+            .lineTo(150, 200)
+            .close();
+
+        var bbox = path.bbox();
+        console.log("Bounding box:", bbox);
+        console.log("Top-left:", bbox.topLeft());
+        console.log("Size:", bbox.size);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with transformations applied.
@@ -184,6 +510,33 @@ Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
 ### clip
 Gets or sets the element clipping path.
 Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(200, 50)
+            .lineTo(200, 200)
+            .lineTo(50, 200)
+            .close();
+
+        // Create a circular clipping path
+        var clipPath = new draw.Path()
+            .arc(125, 125, 75, 0, 360)
+            .close();
+
+        // Apply the clipping path
+        path.clip(clipPath);
+
+        console.log("Current clip path:", path.clip());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -197,6 +550,36 @@ The element clipping path.
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
 Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(200, 50)
+            .lineTo(200, 200)
+            .lineTo(50, 200)
+            .close();
+
+        // Create a clipping path
+        var clipPath = new draw.Path()
+            .moveTo(75, 75)
+            .lineTo(175, 75)
+            .lineTo(175, 175)
+            .lineTo(75, 175)
+            .close();
+
+        path.clip(clipPath);
+
+        var clippedBBox = path.clippedBBox();
+        console.log("Clipped bounding box:", clippedBBox);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
@@ -228,6 +611,36 @@ Closes the path by linking the current end point with the start point.
 
 ### containsPoint
 Returns true if the shape contains the specified point.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var path = new draw.Path({
+            fill: {
+                color: "#3498db",
+                opacity: 0.5
+            },
+            stroke: {
+                color: "#2980b9",
+                width: 2
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 50)
+        .lineTo(125, 200)
+        .close();
+
+        var testPoint = new geom.Point(125, 100);
+        var contains = path.containsPoint(testPoint);
+        console.log("Point (125, 100) is inside path:", contains);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -273,6 +686,25 @@ The curve end point.
 
 ### fill
 Sets the shape [fill](/api/javascript/drawing/path#configuration-fill).
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(200, 50)
+            .lineTo(125, 200)
+            .close();
+
+        // Set fill using the fill method
+        path.fill("#e74c3c", 0.7);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -363,6 +795,35 @@ Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path({
+            fill: {
+                color: "#2ecc71"
+            },
+            stroke: {
+                color: "#27ae60",
+                width: 2
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 50)
+        .lineTo(125, 200)
+        .close();
+
+        // Set opacity using the opacity method
+        path.opacity(0.5);
+
+        console.log("Current opacity:", path.opacity());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 #### Parameters
 
 ##### opacity `Number`
@@ -374,6 +835,26 @@ The element opacity. Ranges from 0 (completely transparent) to 1 (completely opa
 
 ### stroke
 Sets the shape [stroke](/api/javascript/drawing/path#configuration-stroke).
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path = new draw.Path()
+            .moveTo(50, 50)
+            .lineTo(200, 50)
+            .lineTo(200, 200)
+            .lineTo(50, 200)
+            .close();
+
+        // Set stroke using the stroke method
+        path.stroke("#e74c3c", 5, 0.8);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -394,6 +875,41 @@ The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to s
 Gets or sets the transformation of the element.
 Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var path = new draw.Path({
+            stroke: {
+                color: "#9b59b6",
+                width: 3
+            },
+            fill: {
+                color: "#ecf0f1"
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(150, 50)
+        .lineTo(150, 150)
+        .lineTo(50, 150)
+        .close();
+
+        // Apply transformation using the transform method
+        var transformation = geom.transform()
+            .rotate(45, [100, 100])
+            .scale(1.5, 1.5);
+
+        path.transform(transformation);
+
+        console.log("Current transformation:", path.transform());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path);
+    </script>
+
 #### Parameters
 
 ##### transform `kendo.geometry.Transformation`
@@ -406,6 +922,41 @@ The transformation to apply to the element.
 ### visible
 Gets or sets the visibility of the element.
 Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+
+        var path1 = new draw.Path({
+            stroke: {
+                color: "#27ae60",
+                width: 3
+            }
+        })
+        .moveTo(50, 50)
+        .lineTo(200, 50);
+
+        var path2 = new draw.Path({
+            stroke: {
+                color: "#e74c3c",
+                width: 3
+            }
+        })
+        .moveTo(50, 100)
+        .lineTo(200, 100);
+
+        // Hide the second path using the visible method
+        path2.visible(false);
+
+        console.log("Path1 visible:", path1.visible());
+        console.log("Path2 visible:", path2.visible());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(path1);
+        surface.draw(path2); // This won't be visible
+    </script>
 
 #### Parameters
 

@@ -296,49 +296,181 @@ Allows customization of "Cancel" label.
 
 Allows customization of the Clear Color button label.
 
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            clearColor: "Remove Color"
+        }
+    });
+    </script>
+
 ### messages.contrastRatio `String` *(default: "Contrast ratio")*
 
 Allows customization of the "Contrast ratio" text in the contrast tool.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            contrastRatio: "Color Contrast Ratio"
+        }
+    });
+    </script>
 
 ### messages.fail `String` *(default: "Fail")*
 
 Allows customization of the "Fail" text in the contrast tool.
 
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            fail: "Failed"
+        }
+    });
+    </script>
+
 ### messages.pass  `String` *(default: "Pass")*
 
 Allows customization of the "Pass" text in the contrast tool.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            pass: "Passed"
+        }
+    });
+    </script>
 
 ### messages.gradient `String` *(default: "Gradient view")*
 
 Allows customization of the Gradient view button.
 
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            gradient: "Color Gradient"
+        }
+    });
+    </script>
+
 ### messages.palette `String` *(default: "Palette view")*
 
 Allows customization of the Palette view button.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            palette: "Color Palette"
+        }
+    });
+    </script>
 
 ### messages.toggleFormat `String` *(default: "Toggle format")*
 
 Allows customization of the toggle format button's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            toggleFormat: "Switch Color Format"
+        }
+    });
+    </script>
+
 ### messages.red `String` *(default: "Red")*
 
 Allows customization of the rgb's red input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            red: "Red Channel"
+        }
+    });
+    </script>
 
 ### messages.green `String` *(default: "Green")*
 
 Allows customization of the rgb's green input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            green: "Green Channel"
+        }
+    });
+    </script>
+
 ### messages.blue `String` *(default: "Blue")*
 
 Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            blue: "Blue Channel"
+        }
+    });
+    </script>
 
 ### messages.alpha `String` *(default: "Alpha")*
 
 Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            alpha: "Transparency"
+        }
+    });
+    </script>
+
 ### messages.hex `String` *(default: "HEX")*
 
 Allows customization of the hex input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+        messages: {
+            hex: "Hexadecimal"
+        }
+    });
+    </script>
 
 ## Methods
 
@@ -390,6 +522,21 @@ This does not trigger the "change" event.
 ### color
 
 Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/javascript/color).
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker();
+    var flatpicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
+
+    // set the color
+    flatpicker.color("#ff6358");
+
+    // get the currently selected color
+    var selectedColor = flatpicker.color();
+    console.log(selectedColor.toHex()); // "#ff6358"
+    </script>
 
 #### Parameters
 

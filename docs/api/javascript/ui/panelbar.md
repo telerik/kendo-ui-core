@@ -223,6 +223,8 @@ The number of milliseconds used for the visual animation when an item is opened.
 A whitespace-delimited string of animation effects that are used when an item is expanded. Options include
 **"expandVertical"** and **"fadeIn"**.
 
+#### Example
+
     <ul id="panelbar">
         <li>Item 1
             <ul>
@@ -1302,6 +1304,32 @@ Triggered when an item of a PanelBar is activated.
 
 The activated item of the PanelBar.
 
+#### Example
+
+    <ul id="panelbar">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#panelbar").kendoPanelBar({
+            activate: function(e) {
+                console.log("Activated item:", e.item);
+            }
+        });
+    </script>
+
 #### Attach activate event handler during initialization; detach via unbind()
 
     <ul id="panelbar">
@@ -1377,6 +1405,32 @@ Triggered when an item of a PanelBar is collapsed.
 ##### e.item `Element`
 
 The collapsing item of the PanelBar.
+
+#### Example
+
+    <ul id="panelbar">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#panelbar").kendoPanelBar({
+            collapse: function(e) {
+                console.log("Collapsed item:", e.item);
+            }
+        });
+    </script>
 
 #### Attach collapse event handler during initialization; detach via unbind()
 
@@ -1653,6 +1707,32 @@ Triggered when an item of a PanelBar is expanded.
 
 The expanding item of the PanelBar.
 
+#### Example
+
+    <ul id="panelbar">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#panelbar").kendoPanelBar({
+            expand: function(e) {
+                console.log("Expanded item:", e.item);
+            }
+        });
+    </script>
+
 #### Attach expand event handler during initialization; detach via unbind()
 
     <ul id="panelbar">
@@ -1728,6 +1808,32 @@ Triggered when an item of a PanelBar is selected by the user.
 ##### e.item `Element`
 
 The selected item of the PanelBar.
+
+#### Example
+
+    <ul id="panelbar">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#panelbar").kendoPanelBar({
+            select: function(e) {
+                console.log("Selected item:", e.item);
+            }
+        });
+    </script>
 
 #### Attach select event handler during initialization; detach via unbind()
 

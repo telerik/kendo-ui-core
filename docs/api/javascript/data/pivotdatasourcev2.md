@@ -231,6 +231,22 @@ The hierarchical name of the rows.
 
 The configuration used to load data items and discover schema information.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSourceV2({
+      type: "xmla",
+      transport: {
+        connection: {
+          catalog: "Adventure Works DW 2008R2",
+          cube: "Adventure Works"
+        },
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+        discover: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+      }
+    });
+    </script>
+
 ### transport.discover `Object|String|Function`
 
 The configuration which is used when the data source discovers the schema information about the current cube.
@@ -256,6 +272,21 @@ The configuration which is used when the data source discovers the schema inform
 ### transport.connection `Object`
 
 The configuration that is used for setting the connection options.
+
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSourceV2({
+      type: "xmla",
+      transport: {
+        connection: {
+          catalog: "Adventure Works DW 2008R2",
+          cube: "Adventure Works"
+        },
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+      }
+    });
+    </script>
 
 ### transport.connection.catalog `String`
 
@@ -298,6 +329,28 @@ The cube name in the current data source.
 ### schema `Object`
 
 The schema configuration of the PivotDataSourceV2.
+
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSourceV2({
+      type: "odata",
+      transport: {
+        read: "/odata/SalesData"
+      },
+      schema: {
+        cube: {
+          dimensions: {
+            "ProductName": { caption: "Product Name" },
+            "Category": { caption: "Category" }
+          },
+          measures: {
+            "TotalSales": { field: "TotalSales", aggregate: "sum" }
+          }
+        }
+      }
+    });
+    </script>
 
 ### schema.cube `Object`
 

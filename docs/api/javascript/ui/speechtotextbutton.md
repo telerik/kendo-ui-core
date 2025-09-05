@@ -111,6 +111,17 @@ Represents the maximum number of alternative transcriptions to return for each r
 ### messages `Object`
 Allows customization of the messages displayed by the widget.
 
+#### Example
+
+    <button id="speechButton"></button>
+    <script>
+        $("#speechButton").kendoSpeechToTextButton({
+            messages: {
+                unsupported: "Speech recognition is not available in this browser."
+            }
+        });
+    </script>
+
 ### messages.unsupported `String` *(default: "Speech recognition is not supported in this browser.")*
 The message shown when speech recognition is not supported by the browser.
 

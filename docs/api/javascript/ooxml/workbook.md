@@ -12,6 +12,29 @@ res_type: api
 
 The [`sheets`](/api/javascript/ooxml/workbook#configuration-sheets) of the workbook. Every sheet represents a page from the final Excel file.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              name: "Sheet1",
+              rows: [
+                  { cells: [ { value: "Header 1" }, { value: "Header 2" } ] },
+                  { cells: [ { value: "Data 1" }, { value: "Data 2" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "workbook.xlsx"
+      });
+    });
+    </script>
+
 ## Configuration
 
 ### creator `String` *(default: "Kendo UI")*
@@ -177,9 +200,74 @@ Sets the direction of the workbook. By default, the direction is left-to-right.
 
 The sheets of the workbook. Every sheet represents a page from the final Excel file.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              name: "Products",
+              rows: [
+                  { cells: [ { value: "Product" }, { value: "Price" } ] },
+                  { cells: [ { value: "Laptop" }, { value: 999.99 } ] },
+                  { cells: [ { value: "Phone" }, { value: 599.99 } ] }
+              ]
+          },
+          {
+              name: "Summary", 
+              rows: [
+                  { cells: [ { value: "Total Items" }, { value: 2 } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "multiple-sheets.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.columns `Array`
 
 The column configuration.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              columns: [
+                  { width: 100 },
+                  { width: 200, autoWidth: false },
+                  { width: 150 }
+              ],
+              rows: [
+                  { cells: [ 
+                      { value: "ID" }, 
+                      { value: "Product Name" }, 
+                      { value: "Price" } 
+                  ] },
+                  { cells: [ 
+                      { value: 1 }, 
+                      { value: "Laptop Computer" }, 
+                      { value: 999.99 } 
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "columns-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.columns.autoWidth `Boolean` *(default: false)*
 
@@ -263,41 +351,391 @@ The width (in pixels) of the column.
 
 An array which contains the drawings used in this sheet.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "logo": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "B2",
+                      offsetX: 10,
+                      offsetY: 10,
+                      width: 100,
+                      height: 100,
+                      image: "logo"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "Data with image" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "drawings-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.drawings.topLeftCell `String`
 
 A cell to which the drawing's top-left corner is anchored.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "chart": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "C3",
+                      width: 150,
+                      height: 100,
+                      image: "chart"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "A1" }, { value: "B1" }, { value: "C1" } ] },
+                  { cells: [ { value: "A2" }, { value: "B2" }, { value: "C2" } ] },
+                  { cells: [ { value: "A3" }, { value: "B3" }, { value: "Image will be here" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "anchor-cell-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.drawings.offsetX `Number`
 
 The horizontal offset from the anchor cell's top-left corner, in pixels.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "icon": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "B2",
+                      offsetX: 25,
+                      offsetY: 10,
+                      width: 50,
+                      height: 50,
+                      image: "icon"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "Product" }, { value: "Icon will be offset 25px right" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "offset-x-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.drawings.offsetY `Number`
 
 The vertical offset from the anchor cell's top-left corner, in pixels.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "banner": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "A1",
+                      offsetX: 10,
+                      offsetY: 15,
+                      width: 200,
+                      height: 40,
+                      image: "banner"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "Banner will be offset 15px down" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "offset-y-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.drawings.width `Number`
 
 The drawing's width in pixels.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "logo": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "B2",
+                      offsetX: 5,
+                      offsetY: 5,
+                      width: 120,
+                      height: 80,
+                      image: "logo"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "Company" }, { value: "Logo (120px wide)" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "drawing-width-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.drawings.height `Number`
 
 The drawing's height in pixels.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "chart": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "C2",
+                      offsetX: 0,
+                      offsetY: 0,
+                      width: 150,
+                      height: 100,
+                      image: "chart"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "Year" }, { value: "Sales" }, { value: "Chart (100px high)" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "drawing-height-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.drawings.image `String`
 
 The ID of the image to display.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      images: {
+        "productImage": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        },
+        "companyLogo": {
+          data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+          type: "image/png"
+        }
+      },
+      sheets: [
+          {
+              drawings: [
+                  {
+                      topLeftCell: "B2",
+                      width: 100,
+                      height: 100,
+                      image: "productImage"
+                  },
+                  {
+                      topLeftCell: "D2", 
+                      width: 80,
+                      height: 50,
+                      image: "companyLogo"
+                  }
+              ],
+              rows: [
+                  { cells: [ { value: "Product" }, { value: "Image" }, { value: "Brand" }, { value: "Logo" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "image-id-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.freezePane `Object`
 
 Deprecated in versions 2015.3 and later. Use [`frozenColumns`](/api/javascript/ooxml/workbook#configuration-sheets.frozenColumns) and [`frozenRows`](/api/javascript/ooxml/workbook#configuration-sheets.frozenRows) instead.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              freezePane: {
+                  colSplit: 2,
+                  rowSplit: 1
+              },
+              rows: [
+                  { cells: [ { value: "Frozen Row" }, { value: "Frozen Row" }, { value: "Frozen Row" } ] },
+                  { cells: [ { value: "Frozen Col" }, { value: "Frozen Col" }, { value: "Free Cell" } ] },
+                  { cells: [ { value: "Frozen Col" }, { value: "Frozen Col" }, { value: "Free Cell" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "freeze-pane-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.freezePane.colSplit `Number` *(default: 0)*
 
 Deprecated in versions 2015.3 and later. Use [`frozenColumns`](/api/javascript/ooxml/workbook#configuration-sheets.frozenColumns) instead.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              freezePane: {
+                  colSplit: 3
+              },
+              rows: [
+                  { cells: [ 
+                      { value: "Frozen 1" }, 
+                      { value: "Frozen 2" }, 
+                      { value: "Frozen 3" }, 
+                      { value: "Scrollable" } 
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "col-split-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.freezePane.rowSplit `Number` *(default: 0)*
 
 Deprecated in versions 2015.3 and later. Use [`frozenRows`](/api/javascript/ooxml/workbook#configuration-sheets.frozenRows) instead.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              freezePane: {
+                  rowSplit: 2
+              },
+              rows: [
+                  { cells: [ { value: "Header Row 1" } ] },
+                  { cells: [ { value: "Header Row 2" } ] },
+                  { cells: [ { value: "Scrollable Data" } ] },
+                  { cells: [ { value: "More Data" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "row-split-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.frozenColumns `Number` *(default: 0)*
 
@@ -380,9 +818,81 @@ The configuration of the Excel auto-filter. When set, the final document will be
 
 The index of the first filterable column.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              filter: {
+                  from: 1,
+                  to: 3
+              },
+              rows: [
+                  { cells: [ 
+                      { value: "ID" }, 
+                      { value: "Name" }, 
+                      { value: "Category" }, 
+                      { value: "Price" } 
+                  ] },
+                  { cells: [ 
+                      { value: 1 }, 
+                      { value: "Product A" }, 
+                      { value: "Electronics" }, 
+                      { value: 100 } 
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "filter-from-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.filter.to `Number`
 
 The index of the last filterable column.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              filter: {
+                  from: 0,
+                  to: 2
+              },
+              rows: [
+                  { cells: [ 
+                      { value: "Product" }, 
+                      { value: "Quantity" }, 
+                      { value: "Total" }, 
+                      { value: "Notes" } 
+                  ] },
+                  { cells: [ 
+                      { value: "Laptop" }, 
+                      { value: 5 }, 
+                      { value: 5000 }, 
+                      { value: "In stock" } 
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "filter-to-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.hyperlinks `Array`
 
@@ -468,6 +978,8 @@ The target link that will be opened when the cell is clicked.
 ### sheets.mergedCells `Array`
 
 A range of cells that will be merged into one. The value of the first cell in the range will be displayed in the new merged cell.
+
+#### Example
 
     <script>
       var workbook = new kendo.ooxml.Workbook({
@@ -592,9 +1104,60 @@ Sets the background color of the cell. Supports hex CSS-like values that start w
 
 The style information for the bottom border of the cell.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Cell with bottom border", borderBottom: { color: "#0066cc", size: 2 } } 
+                  ] },
+                  { cells: [ 
+                      { value: "Regular cell below" } 
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "border-bottom-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.rows.cells.borderBottom.color `String`
 
 The color of the bottom border of the cell. While many standard CSS formats are supported, the canonical form is `#ccff00`.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Red border", borderBottom: { color: "#ff0000", size: 1 } },
+                      { value: "Green border", borderBottom: { color: "#00ff00", size: 1 } },
+                      { value: "Blue border", borderBottom: { color: "#0000ff", size: 1 } }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "border-colors-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.rows.cells.borderBottom.size `Number`
 
@@ -629,9 +1192,58 @@ The allowed values are:
 
 The style information for the left border of the cell.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "No border" },
+                      { value: "Left border", borderLeft: { color: "#ff6600", size: 3 } }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "border-left-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.rows.cells.borderLeft.color `String`
 
 The color of the left border of the cell. While many standard CSS formats are supported, the canonical form is `#ccff00`.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Purple", borderLeft: { color: "#800080", size: 2 } },
+                      { value: "Orange", borderLeft: { color: "#ff8000", size: 2 } },
+                      { value: "Teal", borderLeft: { color: "#008080", size: 2 } }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "left-border-colors-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.rows.cells.borderLeft.size `Number`
 
@@ -666,9 +1278,60 @@ The allowed values are:
 
 The style information for the top border of the cell.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Top border", borderTop: { color: "#cc0066", size: 2 } }
+                  ] },
+                  { cells: [ 
+                      { value: "Regular cell" } 
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "border-top-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.rows.cells.borderTop.color `String`
 
 The color of the top border of the cell. While many standard CSS formats are supported, the canonical form is `#ccff00`.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Maroon", borderTop: { color: "#800000", size: 1 } },
+                      { value: "Navy", borderTop: { color: "#000080", size: 1 } },
+                      { value: "Lime", borderTop: { color: "#00ff00", size: 1 } }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "top-border-colors-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.rows.cells.borderTop.size `Number`
 
@@ -703,9 +1366,58 @@ The allowed values are:
 
 The style information for the right border of the cell.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Right border", borderRight: { color: "#009900", size: 3 } },
+                      { value: "Next cell" }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "border-right-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.rows.cells.borderRight.color `String`
 
 The color of the right border of the cell. While many standard CSS formats are supported, the canonical form is `#ccff00`.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Crimson", borderRight: { color: "#dc143c", size: 2 } },
+                      { value: "Gold", borderRight: { color: "#ffd700", size: 2 } },
+                      { value: "Silver", borderRight: { color: "#c0c0c0", size: 2 } }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "right-border-colors-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.rows.cells.borderRight.size `Number`
 
@@ -837,6 +1549,31 @@ Sets the font for displaying the cell value.
 
 Deprecated in versions 2015.3 and later. Use [`fontFamily`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontFamily) instead.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Arial Font", fontName: "Arial" },
+                      { value: "Times Font", fontName: "Times New Roman" },
+                      { value: "Default Font" }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "font-name-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.rows.cells.fontSize `Number` *(default: 11)*
 
 Sets the font size in pixels.
@@ -917,6 +1654,31 @@ Sets the formula that Excel uses to compute and display the cell content.
 ### sheets.rows.cells.hAlign `String`
 
 Deprecated in versions 2015.3 and later. Use [`textAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.textAlign) instead.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ 
+                      { value: "Left", hAlign: "left" },
+                      { value: "Center", hAlign: "center" },
+                      { value: "Right", hAlign: "right" }
+                  ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "horizontal-align-example.xlsx"
+      });
+    });
+    </script>
 
 ### sheets.rows.cells.index `Object`
 
@@ -1079,6 +1841,34 @@ Setting `sheets.rows.cells.wrap` to `true` wraps the cell content.
 
 Deprecated in versions 2015.3 and later. Use [`verticalAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.verticalAlign) instead.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { 
+                      height: 50,
+                      cells: [ 
+                          { value: "Top", vAlign: "top" },
+                          { value: "Center", vAlign: "center" },
+                          { value: "Bottom", vAlign: "bottom" }
+                      ] 
+                  }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "vertical-align-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.rows.cells.verticalAlign `String` *(default: "bottom")*
 
 Sets the vertical alignment of the cell content.
@@ -1200,13 +1990,105 @@ Used to distinguish between the various row types in the Grid. The supported val
 - "group-footer"
 - "data"
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { 
+                      type: "header",
+                      cells: [ { value: "Header Row" } ] 
+                  },
+                  { 
+                      type: "data",
+                      cells: [ { value: "Data Row 1" } ] 
+                  },
+                  { 
+                      type: "data",
+                      cells: [ { value: "Data Row 2" } ] 
+                  },
+                  { 
+                      type: "footer",
+                      cells: [ { value: "Footer Row" } ] 
+                  }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "row-types-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.showGridLines `Boolean` *(default: true)*
 
 A Boolean value which indicates if the grid lines of the sheet will be displayed.
 
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              name: "With Grid Lines",
+              showGridLines: true,
+              rows: [
+                  { cells: [ { value: "A1" }, { value: "B1" } ] },
+                  { cells: [ { value: "A2" }, { value: "B2" } ] }
+              ]
+          },
+          {
+              name: "No Grid Lines",
+              showGridLines: false,
+              rows: [
+                  { cells: [ { value: "A1" }, { value: "B1" } ] },
+                  { cells: [ { value: "A2" }, { value: "B2" } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "grid-lines-example.xlsx"
+      });
+    });
+    </script>
+
 ### sheets.title `String`
 
 Deprecated in versions 2015.3 and later. Use [`name`](/api/javascript/ooxml/workbook#configuration-sheets.name) instead.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              title: "Sales Report",
+              rows: [
+                  { cells: [ { value: "Quarter" }, { value: "Sales" } ] },
+                  { cells: [ { value: "Q1" }, { value: 100000 } ] },
+                  { cells: [ { value: "Q2" }, { value: 120000 } ] }
+              ]
+          }
+      ]
+    });
+    
+    workbook.toDataURLAsync().then(function(dataURL) {
+      kendo.saveAs({
+        dataURI: dataURL,
+        fileName: "sheet-title-example.xlsx"
+      });
+    });
+    </script>
 
 ## Methods
 

@@ -17,6 +17,33 @@ See the [`Node` fields](/api/framework/node#fields) for all inherited fields.
 
 The child `kendo.data.FileManagerDataSource` of the node. This field is initialized lazily if the `hasChildren` or `isDirectory` field is set or when the [`load`](/api/javascript/data/node/methods/load) or [`append`](/api/javascript/data/node/methods/append) methods were called.
 
+#### Example
+
+    <div id="filemanager"></div>
+    <script>
+    $("#filemanager").kendoFileManager({
+        dataSource: {
+            data: [
+                {
+                    name: "Documents",
+                    isDirectory: true,
+                    hasDirectories: true,
+                    size: 0
+                }
+            ]
+        }
+    });
+
+    // Access the FileEntry for a directory
+    var fileManager = $("#filemanager").data("kendoFileManager");
+    var dataSource = fileManager.dataSource;
+    var rootEntry = dataSource.at(0);
+    
+    // Access the children property
+    console.log("Has children:", rootEntry.hasChildren);
+    console.log("Children DataSource:", rootEntry.children);
+    </script>
+
 ## Methods
 
 See the [`Node` events](/api/framework/node#methods) for all inherited methods.

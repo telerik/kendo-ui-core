@@ -45,19 +45,9 @@ Enables the user to select an end date that is before the start date. This optio
 
 ### culture `String`*(default: "en-US")*
 
- Specifies the culture info used by the widget.
+Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>`
 
-#### Example - specify German culture internationalization
-
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
-    -->
+#### Example - specify a culture
 
     <div id="multiViewCalendar"></div>
     <script>
@@ -252,6 +242,18 @@ Allows customization of the week column header text. Set the value to make the w
 
  Templates for the cells rendered in "month" view.
 
+#### Example
+
+    <div id="multiViewCalendar"></div>
+    <script>
+        $("#multiViewCalendar").kendoMultiViewCalendar({
+            month: {
+                content: (data) => `<span class="custom-cell">${data.value}</span>`,
+                empty: (data) => `<span class="empty-cell">&nbsp;</span>`
+            }
+        });
+    </script>
+
 ### month.content `String`
 
  The template to be used for rendering the cells in "month" view, which are between the min/max range.
@@ -349,6 +351,19 @@ This property controls how many months to be shown at same time. By default it s
 ### range `Object`
 
 Configures the Kendo UI MultiViewCalendar range settings.
+
+#### Example
+
+    <div id="multiViewCalendar"></div>
+    <script>
+        $("#multiViewCalendar").kendoMultiViewCalendar({
+            range: {
+                start: new Date(2023, 5, 10),
+                end: new Date(2023, 5, 20)
+            },
+            selectable: "range"
+        });
+    </script>
 
 ### range.start `Date`
 

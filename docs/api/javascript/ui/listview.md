@@ -60,6 +60,21 @@ data source is fired. By default the widget will bind to the data source specifi
 
 Renders border around the listview element.
 
+#### Example
+
+    <div id="listview"></div>
+    <script>
+    $("#listview").kendoListView({
+        dataSource: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" }
+        ],
+        template: "<div class='k-listview-item'>#: name #</div>",
+        bordered: false
+    });
+    </script>
+
 ### borders `String` *(default: '')*
 
 Renders border around the listview items. Valid values are:
@@ -68,11 +83,41 @@ Renders border around the listview items. Valid values are:
 * `horizontal`: renders top border of listview items. Useful when setting `layout: "flex"` and `flex.direction: column`.
 * `vertical`: renders top border of listview items. Useful when setting `layout: "flex"` and `flex.direction: row`.
 
+#### Example
+
+    <div id="listview"></div>
+    <script>
+    $("#listview").kendoListView({
+        dataSource: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" }
+        ],
+        template: "<div class='k-listview-item'>#: name #</div>",
+        borders: "all"
+    });
+    </script>
+
 > Note: in order for the property to work, set `k-listview-item` class name to listview items in your template.
 
 ### contentElement `String` *(default: 'div')*
 
 Defines the type of element that holds the listview content.
+
+#### Example
+
+    <div id="listview"></div>
+    <script>
+    $("#listview").kendoListView({
+        dataSource: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" }
+        ],
+        template: "<div class='k-listview-item'>#: name #</div>",
+        contentElement: "ul"
+    });
+    </script>
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
@@ -271,6 +316,25 @@ Specify the layout of listview content. Valid options are:
 ### flex `Object`
 
 Flex layout settings
+
+#### Example
+
+    <div id="listview"></div>
+    <script>
+    $("#listview").kendoListView({
+        dataSource: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" }
+        ],
+        template: "<div class='k-listview-item'>#: name #</div>",
+        layout: "flex",
+        flex: {
+            direction: "column",
+            wrap: "wrap"
+        }
+    });
+    </script>
 
 ### flex.direction `String` *(default: 'row')*
 
@@ -725,7 +789,7 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
 
 If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.
 
-##### Example - hide the paging information
+#### Example - hide the paging information
 
     <div id="listView"></div>
 
@@ -809,9 +873,70 @@ Specifies a value whether the page sizes dropdown will be adaptive. Possible val
 * `none` - The current page.
 * `auto` - The total number of pages.
 
+#### Example
+
+    <div id="listview"></div>
+    <div id="pager"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" },
+            { name: "Item 4" },
+            { name: "Item 5" }
+        ],
+        pageSize: 2
+    });
+
+    $("#listview").kendoListView({
+        dataSource: dataSource,
+        template: "<div class='k-listview-item'>#: name #</div>",
+        pageable: {
+            adaptiveMode: "auto",
+            pageSizes: [2, 5, 10]
+        }
+    });
+    </script>
+
 ### pageable.messages `Object`
 
 The text messages displayed in pager. Use this option to customize or localize the pager messages.
+
+#### Example
+
+    <div id="listview"></div>
+    <div id="pager"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" },
+            { name: "Item 4" },
+            { name: "Item 5" }
+        ],
+        pageSize: 2
+    });
+
+    $("#listview").kendoListView({
+        dataSource: dataSource,
+        template: "<div class='k-listview-item'>#: name #</div>",
+        pageable: {
+            messages: {
+                display: "Showing {0} to {1} of {2} entries",
+                empty: "No records to display",
+                page: "Page",
+                of: "of {0}",
+                itemsPerPage: "entries per page",
+                first: "Go to first page",
+                previous: "Go to previous page",
+                next: "Go to next page",
+                last: "Go to last page"
+            }
+        }
+    });
+    </script>
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
@@ -1722,6 +1847,29 @@ The [DataSource](/api/javascript/data/datasource) of the widget. Configured via 
 
 > **Important:** Assigning a new DataSource would have no effect. Use the [setDataSource](/api/javascript/ui/listview/methods/setdatasource) method instead.
 
+#### Example
+
+    <div id="listview"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" }
+        ]
+    });
+
+    var listview = $("#listview").kendoListView({
+        dataSource: dataSource,
+        template: "<div class='k-listview-item'>#: name #</div>"
+    }).data("kendoListView");
+
+    // Access the dataSource
+    var currentDataSource = listview.dataSource;
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(currentDataSource.data()); // logs the data array
+    </script>
+
 ## Methods
 
 ### add
@@ -2050,6 +2198,30 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 #### Returns
 
 `Array` The currently rendered ListView items (`<div>`, `<li>`, `<tr>` elements, etc., depending on the item template).
+
+#### Example
+
+    <div id="listview"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { name: "Item 1" },
+            { name: "Item 2" },
+            { name: "Item 3" }
+        ]
+    });
+
+    var listview = $("#listview").kendoListView({
+        dataSource: dataSource,
+        template: "<div class='k-listview-item'>#: name #</div>"
+    }).data("kendoListView");
+
+    // Get the DOM elements for all items
+    var items = listview.items();
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(items.length); // logs 3
+    console.log(items[0]); // logs the first DOM element
+    </script>
 
 ### refresh
 

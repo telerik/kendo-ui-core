@@ -16,6 +16,20 @@ Represents the Kendo UI Spreadsheet widget. Inherits from [Widget](/api/javascri
 
 The name of the currently active sheet. Must exactly match one of the (sheet names)[#configuration-sheets.name].
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        activeSheet: "Sheet2",
+        sheets: [
+          { name: "Sheet1" },
+          { name: "Sheet2" },
+          { name: "Sheet3" }
+        ]
+      });
+    </script>
+
 ### columnWidth `Number` *(default: 64)*
 
 The default column width in pixels.
@@ -33,53 +47,195 @@ The default column width in pixels.
 
 The number of columns in the document.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        columns: 100
+      });
+    </script>
+
 ### defaultCellStyle `Object`
 
 The default cell styles that will be applied to the sheet cells.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          background: "#f5f5f5",
+          color: "#333",
+          fontFamily: "Arial",
+          fontSize: "12px",
+          bold: true
+        }
+      });
+    </script>
 
 ### defaultCellStyle.background `String`
 
 The background [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) of the cell.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          background: "#e6f3ff"
+        }
+      });
+    </script>
+
 ### defaultCellStyle.color `String`
 
 The text [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) of the cell.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          color: "#ff6600"
+        }
+      });
+    </script>
 
 ### defaultCellStyle.fontFamily `String`
 
 The font family of the cell.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          fontFamily: "Times New Roman"
+        }
+      });
+    </script>
+
 ### defaultCellStyle.fontSize `String`
 
 The font size of the cell in pixels.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          fontSize: "14px"
+        }
+      });
+    </script>
 
 ### defaultCellStyle.Italic `Boolean`
 
 If set to `true`, sets the cell font to italic.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          italic: true
+        }
+      });
+    </script>
+
 ### defaultCellStyle.bold `Boolean`
 
 If set to `true`, sets the cell font to bold.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          bold: true
+        }
+      });
+    </script>
 
 ### defaultCellStyle.underline `Boolean`
 
 If set to `true`, sets the cell font to underline.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          underline: true
+        }
+      });
+    </script>
+
 ### defaultCellStyle.wrap `Boolean`
 
 If set to `true`, sets the cell wrap.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        defaultCellStyle: {
+          wrap: true
+        }
+      });
+    </script>
 
 ### headerHeight `Number` *(default: 30)*
 
 The height of the header row in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        headerHeight: 40
+      });
+    </script>
+
 ### headerWidth `Number` *(default: 32)*
 
 The width of the header column in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        headerWidth: 50
+      });
+    </script>
+
 ### excel `Object`
 
 Configures the Excel export settings of the Spreadsheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        excel: {
+          fileName: "MySpreadsheet.xlsx",
+          forceProxy: true
+        }
+      });
+    </script>
 
 ### excel.fileName `String` *(default: "Spreadsheet.xlsx")*
 
@@ -114,6 +270,18 @@ Specifies the file name of the exported Excel file.
 ### excel.forceProxy `Boolean` *(default: false)*
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/spreadsheet#configuration-excel.proxyURL) even if the browser supports the saving of files locally.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        excel: {
+          forceProxy: true,
+          proxyURL: "/save"
+        }
+      });
+    </script>
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -209,6 +377,19 @@ information about a drawing's properties.
 
 Configures the PDF export settings of the Spreadsheet.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          area: "selection",
+          fileName: "MySpreadsheet.pdf",
+          forceProxy: false
+        }
+      });
+    </script>
+
 ### pdf.area `String`
 
 The area that will be exported.
@@ -272,6 +453,17 @@ The author of the PDF document.
 Specifies if the Print dialog should be opened immediately after loading the document.
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          autoPrint: true
+        }
+      });
+    </script>
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -387,6 +579,18 @@ Indicates whether to fit the content of the Spreadsheet to the width of the page
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/spreadsheet#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          forceProxy: true,
+          proxyURL: "/save"
+        }
+      });
+    </script>
+
 ### pdf.guidelines `Boolean` *(default: false)*
 
 Indicates whether to export the cell guidelines.
@@ -445,9 +649,31 @@ Indicates whether to center the content horizontally. For more information, refe
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          jpegQuality: 0.8
+        }
+      });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          keepPNG: true
+        }
+      });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -546,17 +772,69 @@ The supported values are:
 
 The bottom margin. Numbers are considered as `pt` units.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          margin: {
+            bottom: 20
+          }
+        }
+      });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as `pt` units.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          margin: {
+            left: 15
+          }
+        }
+      });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as `pt` units.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          margin: {
+            right: 15
+          }
+        }
+      });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as `pt` units.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        pdf: {
+          margin: {
+            top: 20
+          }
+        }
+      });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -739,6 +1017,15 @@ Indicates whether to center the content vertically. For more information, refer 
 
 The default row height in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        rowHeight: 40
+      });
+    </script>
+
 ### rows `Number` *(default: 200)*
 
 The number of rows in the document.
@@ -755,6 +1042,27 @@ The number of rows in the document.
 ### sheets `Array`
 
 An array which defins the document sheets and their content.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            name: "Sheet1",
+            rows: [
+              { cells: [{ value: "A1" }, { value: "B1" }] },
+              { cells: [{ value: "A2" }, { value: "B2" }] }
+            ]
+          },
+          {
+            name: "Sheet2",
+            activeCell: "B2"
+          }
+        ]
+      });
+    </script>
 
 ### sheets.activeCell `String`
 
@@ -777,61 +1085,302 @@ The active cell in the sheet, for example, `A1`.
 
 The name of the sheet.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          { name: "Employees" },
+          { name: "Sales Data" }
+        ]
+      });
+    </script>
+
 ### sheets.columns `Array`
 
 An array which defines the columns in this sheet and their content.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          columns: [
+            { index: 0, width: 100 },
+            { index: 1, width: 200 },
+            { index: 2, width: 150 }
+          ]
+        }]
+      });
+    </script>
 
 ### sheets.columns.index `Number`
 
 The zero-based index of the column. Required to ensure correct positioning.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          columns: [
+            { index: 0, width: 100 },
+            { index: 2, width: 150 }
+          ]
+        }]
+      });
+    </script>
+
 ### sheets.columns.width `Number`
 
 The width of the column in pixels. Defaults to [`columnWidth`](/api/javascript/ui/spreadsheet#configuration-columnWidth).
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          columns: [
+            { index: 0, width: 120 },
+            { index: 1, width: 80 }
+          ]
+        }]
+      });
+    </script>
 
 ### sheets.dataSource `kendo.data.DataSource`
 
 The DataSource instance for this sheet. For more information, refer to the article on [binding to the DataSource](/web/spreadsheet/import-and-export-data/bind-to-data-source).
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          dataSource: new kendo.data.DataSource({
+            data: [
+              { Name: "John", Age: 30 },
+              { Name: "Jane", Age: 25 }
+            ]
+          })
+        }]
+      });
+    </script>
+
 ### sheets.drawings `Array`
 
 An array which contains the drawings used in this sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        images: {
+          "1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        },
+        sheets: [{
+          drawings: [{
+            topLeftCell: "A1",
+            offsetX: 10,
+            offsetY: 10,
+            width: 100,
+            height: 100,
+            image: "1"
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.drawings.topLeftCell `String`
 
 A cell to which the drawing's top-left corner is anchored.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          drawings: [{
+            topLeftCell: "B2",
+            width: 50,
+            height: 50
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.drawings.offsetX `Number`
 
 The horizontal offset from the anchor cell's top-left corner, in pixels.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          drawings: [{
+            topLeftCell: "A1",
+            offsetX: 15,
+            width: 50,
+            height: 50
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.drawings.offsetY `Number`
 
 The vertical offset from the anchor cell's top-left corner, in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          drawings: [{
+            topLeftCell: "A1",
+            offsetY: 20,
+            width: 50,
+            height: 50
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.drawings.width `Number`
 
 The drawing's width in pixels.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          drawings: [{
+            topLeftCell: "A1",
+            width: 120,
+            height: 80
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.drawings.height `Number`
 
 The drawing's height in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          drawings: [{
+            topLeftCell: "A1",
+            width: 100,
+            height: 150
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.drawings.image `String`
 
 The ID of the image to display.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        images: {
+          "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        },
+        sheets: [{
+          drawings: [{
+            topLeftCell: "A1",
+            width: 100,
+            height: 100,
+            image: "logo"
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.filter `Object`
 
 Defines the filtering criteria for this sheet, if any.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            ref: "A1:C10",
+            columns: [
+              { index: 0, type: "value", value: "John", filter: "custom", criteria: [{ value: "J", operator: "contains" }] }
+            ]
+          }
+        }]
+      });
+    </script>
+
 ### sheets.filter.columns `Array`
 
 An array which defines the filter configuration of individual columns.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            ref: "A1:C10",
+            columns: [
+              { index: 0, type: "value", value: "Product A", filter: "custom", criteria: [{ value: "A", operator: "contains" }] },
+              { index: 1, type: "custom", logic: "and", filter: "custom", criteria: [{ value: "A", operator: "contains" }] }
+            ]
+          }
+        }]
+      });
+    </script>
+
 ### sheets.filter.columns.criteria `Array`
 
 An array of filter criteria for custom filters.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              type: "custom",
+              criteria: [
+                { operator: "gte", value: "100" },
+                { operator: "lte", value: "500" }
+              ]
+            }]
+          }
+        }]
+      });
+    </script>
 
 ### sheets.filter.columns.criteria.operator `String`
 
@@ -857,9 +1406,45 @@ The supported types vary based on the inferred column data type (inferred):
         - `lte` - Is less than or equal to the value.
         - `lt` - Is less than the value.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              criteria: [
+                { operator: "contains", value: "text" }
+              ]
+            }]
+          }
+        }]
+      });
+    </script>
+
 ### sheets.filter.columns.criteria.value `String`
 
 The value for the criteria operator.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              criteria: [
+                { operator: "eq", value: "Product A" }
+              ]
+            }]
+          }
+        }]
+      });
+    </script>
 
 ### sheets.filter.columns.filter `String`
 
@@ -872,9 +1457,46 @@ The supported filters are:
 * `top` - Filters the top or bottom records.
 * `dynamic` - Filters based on dynamic criteria.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              filter: "value",
+              value: "Category A"
+            }]
+          }
+        }]
+      });
+    </script>
+
 ### sheets.filter.columns.index `Number`
 
 The index of the column relative to the [`filter` range](/api/javascript/ui/spreadsheet#configuration-sheets.filter.ref).
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            ref: "A1:D10",
+            columns: [{
+              index: 2,
+              type: "value",
+              value: "Active",
+              filter: "custom",
+              criteria: [{ value: "A", operator: "contains" }]
+            }]
+          }
+        }]
+      });
+    </script>
 
 ### sheets.filter.columns.logic `String`
 
@@ -884,6 +1506,27 @@ The supported values are:
 
 * `and`
 * `or`
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              type: "custom",
+              logic: "and",
+              criteria: [
+                { operator: "gte", value: "100" },
+                { operator: "lte", value: "500" }
+              ]
+            }]
+          }
+        }]
+      });
+    </script>
 
 ### sheets.filter.columns.type `String`
 
@@ -916,117 +1559,611 @@ The applicable types according to the [main `filter`](/api/javascript/ui/spreads
     * `lastYear`
     * `yearToDate`
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              filter: "top",
+              type: "topNumber",
+              value: 10
+            }]
+          }
+        }]
+      });
+    </script>
+
 ### sheets.filter.columns.value `Number|String|Date`
 
 The filter value for filters that require a single value, for example, `top`.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              type: "value",
+              value: "Category A"
+            }]
+          }
+        }]
+      });
+    </script>
 
 ### sheets.filter.columns.values `Array`
 
 The filter values for filters that support multiple values.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            columns: [{
+              index: 0,
+              type: "value",
+              values: ["Category A", "Category B", "Category C"]
+            }]
+          }
+        }]
+      });
+    </script>
+
 ### sheets.filter.ref `String`
 
 The active range for the filter, for example, `B1:D8`.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          filter: {
+            ref: "A1:C10",
+            columns: [{
+              index: 0,
+              type: "value",
+              value: "Product",
+              filter: "custom",
+              criteria: [{ value: "A", operator: "contains" }]
+            }]
+          }
+        }]
+      });
+    </script>
 
 ### sheets.frozenColumns `Number`
 
 The number of frozen columns in this sheet.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          frozenColumns: 2
+        }]
+      });
+    </script>
+
 ### sheets.frozenRows `Number`
 
 The number of frozen rows in this sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          frozenRows: 1
+        }]
+      });
+    </script>
 
 ### sheets.mergedCells `Array`
 
 An array of merged cell ranges, for example, `B1:D2`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          mergedCells: ["A1:C1", "B2:D3"]
+        }]
+      });
+    </script>
+
 ### sheets.rows `Array`
 
 The row data for this sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [
+            {
+              height: 25,
+              cells: [
+                { value: "Name", bold: true },
+                { value: "Age", bold: true }
+              ]
+            },
+            {
+              cells: [
+                { value: "John" },
+                { value: 30 }
+              ]
+            }
+          ]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells `Array`
 
 The cells for this row.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [
+              { value: "Product", fontFamily: "Arial", fontSize: "14px" },
+              { value: "Price", textAlign: "center" },
+              { value: "Quantity", color: "#ff0000" }
+            ]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.background `String`
 
 The background color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [
+              { value: "Header", background: "#ffff00" }
+            ]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.borderBottom `Object`
 
 The style information for the bottom border of the cell.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell with bottom border",
+              borderBottom: {
+                color: "#000000",
+                size: "2px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.borderBottom.color `String`
 
 The bottom border color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderBottom: {
+                color: "#ff0000"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.borderBottom.size `String`
 
 The width of the border in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderBottom: {
+                size: "3px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.borderLeft `Object`
 
 The style information for the left border of the cell.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderLeft: {
+                color: "#0000ff",
+                size: "1px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.borderLeft.color `String`
 
 The left border color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderLeft: {
+                color: "#00ff00"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.borderLeft.size `String`
 
 The width of the border in pixels.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderLeft: {
+                size: "2px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.borderTop `Object`
 
 The style information for the top border of the cell.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderTop: {
+                color: "#ff00ff",
+                size: "3px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.borderTop.color `String`
 
 The top border color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderTop: {
+                color: "#ff6600"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.borderTop.size `String`
 
 The width of the border in pixels.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderTop: {
+                size: "4px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.borderRight `Object`
 
 The style information for the right border of the cell.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderRight: {
+                color: "#000000",
+                size: "1px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.borderRight.color `String`
 
 The right border color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderRight: {
+                color: "#cccccc"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.borderRight.size `String`
 
 The width of the border in pixels.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Cell",
+              borderRight: {
+                size: "2px"
+              }
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.color `String`
 
 The font color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Colored text",
+              color: "#ff0000"
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.comment `String`
 
 The comment of the cell - a tooltip that appears when the cell is hovered.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Hover me",
+              comment: "This is a cell comment"
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.fontFamily `String`
 
 The font family of the cell.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Custom Font",
+              fontFamily: "Courier New"
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.fontSize `Number`
 
 The font size of the cell in pixels.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Large Text",
+              fontSize: 18
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.italic `Boolean`
 
 If set to `true`, sets the cell font to italic.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Italic text",
+              italic: true
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.bold `Boolean`
 
 If set to `true`, sets the cell font to bold.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Bold text",
+              bold: true
+            }]
+          }]
+        }]
+      });
+    </script>
+
 ### sheets.rows.cells.enable `Boolean`
 
 If set to `false`, disables the cell.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          rows: [{
+            cells: [{
+              value: "Disabled cell",
+              enable: false
+            }]
+          }]
+        }]
+      });
+    </script>
 
 ### sheets.rows.cells.format `String`
 
@@ -1052,18 +2189,96 @@ The format of the cell text. For more information, refer to the article on [crea
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 10
+                }, {
+                    formula: "A1 * 2"
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.html `Boolean`
 
 If set to `true`, renders the cell value as HTML.
 It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: "<strong>Bold Text</strong>",
+                    html: true
+                }, {
+                    value: "Regular Text",
+                    html: false
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.index `Number`
 
 The zero-based index of the cell. Required to ensure correct positioning.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    index: 0,
+                    value: "Cell A1"
+                }, {
+                    index: 2,
+                    value: "Cell C1"
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.link `String`
 
 The hyperlink (URL) of the cell.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: "Visit Telerik",
+                    link: "https://www.telerik.com"
+                }, {
+                    value: "Email Us",
+                    link: "mailto:info@telerik.com"
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.rows.cells.textAlign `String`
 
@@ -1073,11 +2288,54 @@ The available options are:
 * `left`
 * `center`
 * `right`
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: "Left aligned",
+                    textAlign: "left"
+                }, {
+                    value: "Center aligned",
+                    textAlign: "center"
+                }, {
+                    value: "Right aligned",
+                    textAlign: "right"
+                }]
+            }]
+        }]
+    });
+    </script>
 * `justify`
 
 ### sheets.rows.cells.underline `Boolean`
 
 If set to `true`, sets the cell font to underline.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: "Underlined text",
+                    underline: true
+                }, {
+                    value: "Normal text",
+                    underline: false
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.rows.cells.value `Number|String|Boolean|Date`
 
@@ -1156,9 +2414,53 @@ The supported options are:
 * `reject`
 * `warning` (default)
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 10,
+                    validation: {
+                        type: "reject",
+                        dataType: "number",
+                        comparerType: "greaterThan",
+                        from: 5
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.validation.comparerType `String`
 
 Defines the comparer type that is used to validate the cell value.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 15,
+                    validation: {
+                        dataType: "number",
+                        comparerType: "between",
+                        from: 10,
+                        to: 20
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
 
 The supported values are:
 
@@ -1184,21 +2486,125 @@ The supported values are:
 * `list`
 * `custom`
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: "test@example.com",
+                    validation: {
+                        dataType: "custom",
+                        from: "AND(EXACT(FIND(\"@\",A1),FIND(\"@\",SUBSTITUTE(A1,\"@\",\"\",ROW(INDIRECT(\"1:\"&LEN(A1)-LEN(SUBSTITUTE(A1,\"@\",\"\"))))))),ISERROR(FIND(\" \",A1)))"
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.validation.from `String`
 
 Defines a formula or a value that is used for the comparison process. Used as the only compare value if the comparer type does not require a second argument. Mandatory for validation to work.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 8,
+                    validation: {
+                        dataType: "number",
+                        comparerType: "greaterThan",
+                        from: "5"
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.rows.cells.validation.showButton `Boolean` *(default: false)*
 
 A Boolean value which indicates if a button for selecting list items will be displayed (`dataType` set to `list`).
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    validation: {
+                        dataType: "list",
+                        from: "A,B,C",
+                        showButton: true
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.validation.to `String`
 
 Defines a formula or a value that is used for the comparison process. Will be used if the comparer type requires a second argument.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 15,
+                    validation: {
+                        dataType: "number",
+                        comparerType: "between",
+                        from: "10",
+                        to: "20"
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.validation.allowNulls `Boolean`
 
 Specifies whether to allow `null` values.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    validation: {
+                        dataType: "number",
+                        comparerType: "greaterThan",
+                        from: "0",
+                        allowNulls: true
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.rows.cells.validation.messageTemplate `String`
 
@@ -1305,6 +2711,28 @@ The template provides access to the following variables:
 
 Defines the `hint` title that will be displayed if the value is invalid.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 5,
+                    validation: {
+                        dataType: "number",
+                        comparerType: "greaterThan",
+                        from: "10",
+                        titleTemplate: "Value must be greater than {0}"
+                    }
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.verticalAlign `String`
 
 The vertical align setting for the cell content.
@@ -1315,53 +2743,319 @@ The available options are:
 * `center`
 * `bottom`
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                height: 60,
+                cells: [{
+                    value: "Top aligned",
+                    verticalAlign: "top"
+                }, {
+                    value: "Center aligned",
+                    verticalAlign: "center"
+                }, {
+                    value: "Bottom aligned",
+                    verticalAlign: "bottom"
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.cells.wrap `Boolean`
 
 If set to `true`, wraps the cell content.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                height: 60,
+                cells: [{
+                    value: "This is a very long text that should wrap to multiple lines",
+                    wrap: true
+                }, {
+                    value: "This text will not wrap and will overflow",
+                    wrap: false
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.rows.height `Number`
 
 The row height in pixels. Defaults to [`rowHeight`](/api/javascript/ui/spreadsheet#configuration-rowHeight).
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                height: 80,
+                cells: [{
+                    value: "Tall row"
+                }]
+            }, {
+                height: 30,
+                cells: [{
+                    value: "Short row"
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.rows.index `Number`
 
 The absolute row index. Required to ensure correct positioning.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                index: 0,
+                cells: [{
+                    value: "Row 1"
+                }]
+            }, {
+                index: 3,
+                cells: [{
+                    value: "Row 4 (skipping rows 2 and 3)"
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.rows.type `String`
 
 The table row element role in the context of the Grid table structure.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                type: "data",
+                cells: [{
+                    value: "Data row"
+                }]
+            }, {
+                type: "header",
+                cells: [{
+                    value: "Header row"
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.selection `String`
 
 The selected range in the sheet, for example, `A1:B10`.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            selection: "A1:C3",
+            rows: [{
+                cells: [{
+                    value: "Cell A1"
+                }, {
+                    value: "Cell B1"
+                }, {
+                    value: "Cell C1"
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.showGridLines `Boolean` *(default: true)*
 
 A Boolean value which indicates if the grid lines of the sheet will be displayed.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            showGridLines: false,
+            rows: [{
+                cells: [{
+                    value: "No grid lines"
+                }]
+            }]
+        }]
+    });
+    </script>
+
 ### sheets.sort `Object`
 
 Defines the sort criteria for the sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            sort: {
+                ref: "A1:B5",
+                columns: [{
+                    index: 0,
+                    ascending: false
+                }]
+            },
+            rows: [{
+                cells: [{
+                    value: "Name"
+                }, {
+                    value: "Age"
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### sheets.sort.columns `Array`
 
 Specifies the sort options for individual columns.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            sort: {
+                ref: "A1:C5",
+                columns: [{
+                    index: 0,
+                    ascending: true
+                }, {
+                    index: 1,
+                    ascending: false
+                }]
+            }
+        }]
+    });
+    </script>
+
 ### sheets.sort.columns.ascending `Boolean`
 
 Indicates if the data in the cell will be sorted in ascending (`true`) or descending order (`false`).
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            sort: {
+                ref: "A1:B5",
+                columns: [{
+                    index: 0,
+                    ascending: true
+                }]
+            }
+        }]
+    });
+    </script>
 
 ### sheets.sort.columns.index `Number`
 
 The index of the column within the sheet. For example, column **C** will have an index of `2`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            sort: {
+                ref: "A1:C5",
+                columns: [{
+                    index: 2,
+                    ascending: true
+                }]
+            }
+        }]
+    });
+    </script>
+
 ### sheets.sort.ref `String`
 
 The sorted range, for example, `A1:D5`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            sort: {
+                ref: "A1:D5",
+                columns: [{
+                    index: 0,
+                    ascending: true
+                }]
+            }
+        }]
+    });
+    </script>
+
 ### sheetsbar `Boolean` *(default: true)*
 
 A Boolean value which indicates if the sheets-bar will be displayed.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        sheetsbar: false,
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: "No sheets bar"
+                }]
+            }]
+        }]
+    });
+    </script>
 
 ### toolbar `Boolean|Object` *(default: true)*
 
@@ -1647,6 +3341,27 @@ This flag has implications on how formulas are entered. When it is set to `true`
 
 This flag only affects the presentation - the way formulas are entered by the end user or displayed on screen. Serialization to JSON or XLSX as well as the public API functions will continue to use the dot as decimal separator and the comma as an argument separator (canonical form). For example, to apply a formula by using the API, even if `useCultureDecimals` is in effect, you still need to use the canonical form.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    kendo.culture("de-DE");
+    $("#spreadsheet").kendoSpreadsheet({
+        useCultureDecimals: true,
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{
+                    value: 3.14,
+                    format: "0,00"
+                }, {
+                    formula: "A1*2"
+                }]
+            }]
+        }]
+    });
+    </script>
+
     sheet.range('B1').formula('SUM(A1, A2, 3.14)');
     // or:
     sheet.range('B1').input('=SUM(A1, A2, 3.14)');
@@ -1742,6 +3457,18 @@ Gets the `contextMenu` instance of the cell.
 
 `kendo.ui.ContextMenu` - The menu instance.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet");
+    var cellContextMenu = spreadsheet.cellContextMenu();
+    cellContextMenu.append([{ text: "Custom Action", cssClass: "custom" }]);
+    cellContextMenu.bind("select", function(e) {
+        console.log("Custom action selected");
+    });
+    </script>
+
 #### Dynamically adding a context menu item and associating a selection command
 
 ```pseudo
@@ -1776,6 +3503,18 @@ multiple sheets, or they can be referenced by the undo/redo queue.
 This function acts like a "garbage collector" — it checks which images
 are no longer needed, and removes them.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet");
+    
+    // Add some images then remove them
+    // Later cleanup unused images
+    spreadsheet.cleanupImages();
+    console.log("Unused images cleaned up");
+    </script>
+
 ### rowHeaderContextMenu
 
 Gets the `contextMenu` instance of the row header.
@@ -1783,6 +3522,18 @@ Gets the `contextMenu` instance of the row header.
 #### Returns
 
 `kendo.ui.ContextMenu` - The menu instance.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet");
+    var rowHeaderContextMenu = spreadsheet.rowHeaderContextMenu();
+    rowHeaderContextMenu.append([{ text: "Custom Row Action", cssClass: "custom-row" }]);
+    rowHeaderContextMenu.bind("select", function(e) {
+        console.log("Custom row action selected");
+    });
+    </script>
 
 #### Removing the hide command for the first row in the rowHeaderContextMenu
 
@@ -1819,6 +3570,18 @@ Gets the `contextMenu` instance of the column header.
 
 `kendo.ui.ContextMenu` - The menu instance.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet");
+    var colHeaderContextMenu = spreadsheet.colHeaderContextMenu();
+    colHeaderContextMenu.append([{ text: "Custom Column Action", cssClass: "custom-col" }]);
+    colHeaderContextMenu.bind("select", function(e) {
+        console.log("Custom column action selected");
+    });
+    </script>
+
 #### Removing the hide command for the first column in the colHeaderContextMenu
 
 ```pseudo
@@ -1853,6 +3616,22 @@ Returns an array with the sheets in the workbook.
 #### Returns
 
 `Array` - The available sheets.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "Sheet2" },
+            { name: "Sheet3" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var allSheets = spreadsheet.sheets();
+    console.log("Total sheets:", allSheets.length);
+    </script>
 
 ### fromFile
 
@@ -1975,6 +3754,24 @@ The name of the sheet that will be located.
 
 `kendo.spreadsheet.Sheet` - The sheet that matches the name.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "MyData" },
+            { name: "Sheet3" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var sheet = spreadsheet.sheetByName("MyData");
+    if (sheet) {
+        console.log("Found sheet:", sheet.name());
+    }
+    </script>
+
 ### sheetIndex
 
 Returns the index of the specified sheet.
@@ -1984,6 +3781,23 @@ Returns the index of the specified sheet.
 ##### sheet `kendo.spreadsheet.Sheet`
 
 The sheet whose index will be determined.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "MyData" },
+            { name: "Sheet3" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var sheet = spreadsheet.sheetByName("MyData");
+    var index = spreadsheet.sheetIndex(sheet);
+    console.log("Sheet index:", index);
+    </script>
 
 #### Returns
 
@@ -2002,6 +3816,22 @@ The index of the sheet to locate.
 #### Returns
 
 `kendo.spreadsheet.Sheet` - The sheet that matches the index.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "MyData" },
+            { name: "Sheet3" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var sheet = spreadsheet.sheetByIndex(1);
+    console.log("Sheet at index 1:", sheet.name());
+    </script>
 
 ### insertSheet
 
@@ -2084,9 +3914,47 @@ The sheet instance that will be moved.
 
 The new zero-based index of the sheet.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "Sheet2" },
+            { name: "Sheet3" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var sheet = spreadsheet.sheetByName("Sheet3");
+    spreadsheet.moveSheetToIndex(sheet, 0);
+    console.log("Sheet3 moved to first position");
+    </script>
+
 ### refresh
 
 Re-renders all data in the Spreadsheet. In a DataSource binding scenario, uses the current data items to populate the widget.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+            name: "MySheet",
+            rows: [{
+                cells: [{ value: "Initial Data" }]
+            }]
+        }]
+    }).data("kendoSpreadsheet");
+    
+    // Modify data programmatically
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("Updated Data");
+    
+    // Refresh the view
+    spreadsheet.refresh();
+    </script>
 
 ### removeSheet
 
@@ -2097,6 +3965,23 @@ Removes the specified sheet.
 ##### sheet `kendo.spreadsheet.Sheet`
 
 The sheet instance that will be removed.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "TempSheet" },
+            { name: "Sheet3" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var tempSheet = spreadsheet.sheetByName("TempSheet");
+    spreadsheet.removeSheet(tempSheet);
+    console.log("TempSheet removed");
+    </script>
 
 ### renameSheet
 
@@ -2111,6 +3996,22 @@ The sheet instance that will be renamed.
 ##### newSheetName `String`
 
 The new name of the sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { name: "Sheet1" },
+            { name: "Sheet2" }
+        ]
+    }).data("kendoSpreadsheet");
+    
+    var sheet = spreadsheet.sheetByName("Sheet2");
+    spreadsheet.renameSheet(sheet, "RenamedSheet");
+    console.log("Sheet renamed to:", sheet.name());
+    </script>
 
 #### Returns
 
@@ -2278,6 +4179,20 @@ Deletes a name.
 
 To delete a fully qualified name, prefix the name of the sheet. For example, `spreadsheet.undefineName("Sheet1!Foo")`.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet");
+    
+    // First define a name
+    spreadsheet.defineName("MyRange", "A1:B2");
+    
+    // Later remove the name
+    spreadsheet.undefineName("MyRange");
+    console.log("Name removed");
+    </script>
+
 ## Events
 
 ### insertSheet
@@ -2293,6 +4208,17 @@ The widget instance which fired the event.
 ##### e.preventDefault `Function`
 
 If invoked, the Spreadsheet will not insert the sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        insertSheet: function(e) {
+            console.log("Sheet is being inserted:", e.sheet);
+        }
+    });
+    </script>
 
 ### removeSheet
 
@@ -2311,6 +4237,18 @@ The sheet instance which will be removed.
 ##### e.preventDefault `Function`
 
 If invoked, the Spreadsheet will not remove the sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        removeSheet: function(e) {
+            console.log("Sheet is being removed:", e.sheet.name());
+            // e.preventDefault(); // Uncomment to prevent removal
+        }
+    });
+    </script>
 
 ### renameSheet
 
@@ -2334,6 +4272,18 @@ The new sheet name.
 
 If invoked, the Spreadsheet will not rename the sheet.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        renameSheet: function(e) {
+            console.log("Sheet being renamed from", e.sheet.name(), "to", e.newSheetName);
+            // e.preventDefault(); // Uncomment to prevent renaming
+        }
+    });
+    </script>
+
 ### selectSheet
 
 Triggered when a sheet will be activated. Introduced in the 2017 Q1 release.
@@ -2351,6 +4301,18 @@ The sheet instance which will be activated.
 ##### e.preventDefault `Function`
 
 If invoked, the Spreadsheet will not activate the sheet.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        selectSheet: function(e) {
+            console.log("Sheet being selected:", e.sheet.name());
+            // e.preventDefault(); // Uncomment to prevent selection
+        }
+    });
+    </script>
 
 ### unhideColumn
 
@@ -2374,6 +4336,17 @@ The index of the column.
 
 If invoked, the Spreadsheet will execute the change.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        unhideColumn: function(e) {
+            console.log("Column", e.index, "is being unhidden in sheet", e.sheet.name());
+        }
+    });
+    </script>
+
 ### unhideRow
 
 Triggered when a row will be shown. Introduced in the 2017 Q1 release.
@@ -2395,6 +4368,17 @@ The index of the row.
 ##### e.preventDefault `Function`
 
 If invoked, the Spreadsheet will execute the change.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        unhideRow: function(e) {
+            console.log("Row", e.index, "is being unhidden in sheet", e.sheet.name());
+        }
+    });
+    </script>
 
 ### hideColumn
 
@@ -2418,6 +4402,17 @@ The index of the column.
 
 If invoked, the Spreadsheet will execute the change.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        hideColumn: function(e) {
+            console.log("Column", e.index, "is being hidden in sheet", e.sheet.name());
+        }
+    });
+    </script>
+
 ### hideRow
 
 Triggered when a row will be hidden. Introduced in the 2017 Q1 release.
@@ -2439,6 +4434,17 @@ The index of the row.
 ##### e.preventDefault `Function`
 
 If invoked, the Spreadsheet will execute the change.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        hideRow: function(e) {
+            console.log("Row", e.index, "is being hidden in sheet", e.sheet.name());
+        }
+    });
+    </script>
 
 ### deleteColumn
 
@@ -2462,6 +4468,17 @@ The index of the column.
 
 If invoked, the Spreadsheet will execute the change.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        deleteColumn: function(e) {
+            console.log("Column", e.index, "is being deleted from sheet", e.sheet.name());
+        }
+    });
+    </script>
+
 ### deleteRow
 
 Triggered when a row will be deleted. Introduced in the 2017 Q1 release.
@@ -2483,6 +4500,17 @@ The index of the row.
 ##### e.preventDefault `Function`
 
 If invoked, the Spreadsheet will execute the change.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        deleteRow: function(e) {
+            console.log("Row", e.index, "is being deleted from sheet", e.sheet.name());
+        }
+    });
+    </script>
 
 ### insertColumn
 
@@ -2506,6 +4534,17 @@ The index of the column.
 
 If invoked, the Spreadsheet will execute the change.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        insertColumn: function(e) {
+            console.log("Column being inserted at index", e.index, "in sheet", e.sheet.name());
+        }
+    });
+    </script>
+
 ### insertRow
 
 Triggered when a row will be inserted. Introduced in the 2017 Q1 release.
@@ -2528,6 +4567,17 @@ The index of the row.
 
 If invoked, the Spreadsheet will execute the change.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        insertRow: function(e) {
+            console.log("Row being inserted at index", e.index, "in sheet", e.sheet.name());
+        }
+    });
+    </script>
+
 ### select
 
 Triggered when the Spreadsheet selection is changed. Introduced in the 2017 Q1 release.
@@ -2542,6 +4592,17 @@ The widget instance which fired the event.
 
 The [`Range`](/api/javascript/spreadsheet/range) that is selected.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        select: function(e) {
+            console.log("Selection changed to:", e.range.ref());
+        }
+    });
+    </script>
+
 ### changeFormat
 
 Triggered when the range format is changed from the UI. Introduced in the 2017 Q1 release.
@@ -2555,6 +4616,17 @@ The widget instance which fired the event.
 ##### e.range `kendo.spreadsheet.Range`
 
 The [`Range`](/api/javascript/spreadsheet/range) whose format is changed.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        changeFormat: function(e) {
+            console.log("Format changed for range:", e.range.ref());
+        }
+    });
+    </script>
 
 ### changing
 
@@ -2651,6 +4723,17 @@ The widget instance which fired the event.
 
 The [`Range`](/api/javascript/spreadsheet/range) that triggered the change.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        change: function(e) {
+            console.log("Value changed in range:", e.range.ref());
+        }
+    });
+    </script>
+
 ### render
 
 Triggered after the widget has completed rendering. The event will also fire when a cell is selected or when the Spreadsheet's tools (bold, italic) are used, as the target element is re-generated with new styles (e.g background-color, box-shadow, font-weight, etc.).
@@ -2660,6 +4743,17 @@ Triggered after the widget has completed rendering. The event will also fire whe
 ##### e.sender `kendo.ui.Spreadsheet`
 
 The widget instance which fired the event.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        render: function(e) {
+            console.log("Spreadsheet rendered");
+        }
+    });
+    </script>
 
 ### excelExport
 
@@ -2844,6 +4938,17 @@ The [Range](/api/javascript/spreadsheet/range) that is selected and about to be 
 
 If invoked the range data will not be retained in the clipboard.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        copy: function(e) {
+            console.log("Copying range:", e.range.ref());
+        }
+    });
+    </script>
+
 ### cut
 
 Fired when a range of a sheet is about to be cut.
@@ -2861,6 +4966,17 @@ The [Range](/api/javascript/spreadsheet/range) that is selected and about to be 
 ##### e.preventDefault `Function`
 
 If invoked the range will not be cut and it will not be passed to the clipboard.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        cut: function(e) {
+            console.log("Cutting range:", e.range.ref());
+        }
+    });
+    </script>
 
 ### paste
 
@@ -2969,6 +5085,17 @@ The sheet that is about to be populated with the DataSource data.
 
 If invoked the spreadsheet will not be populated with the data from its DataSource.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        dataBinding: function(e) {
+            console.log("Data binding to sheet:", e.sheet.name());
+        }
+    });
+    </script>
+
 ### dataBound
 
 Fired when the data from a DataSource is already populated in a sheet. Available only if DataSource has been defined for at least one sheet.
@@ -2982,3 +5109,14 @@ The widget instance which fired the event.
 ##### e.sheet `kendo.spreadsheet.Sheet`
 
 The sheet that has been populated with the DataSource data.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet({
+        dataBound: function(e) {
+            console.log("Data bound to sheet:", e.sheet.name());
+        }
+    });
+    </script>

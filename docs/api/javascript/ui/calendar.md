@@ -62,19 +62,9 @@ Enables the user to select an end date that is before the start date. This optio
 
 ### culture `String`*(default: "en-US")*
 
- Specifies the culture info used by the widget.
+Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>`
 
-#### Example - specify German culture internationalization
-
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
-    -->
+#### Example - specify a culture
 
     <div id="calendar"></div>
     <script>
@@ -271,6 +261,22 @@ Allows customization of the "Navigate to " text that would be used for `title` a
 
 Allows customization of names of the views used in the `title` attribute of the Calendar title in the header. The label is also a button allowing navigation to parent view.
 
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "parentViews": {
+                month: "Go to year view",
+                year: "Go to decade view",
+                decade: "Go to century view"
+            }
+        }
+     })
+    </script>
+
 ### messages.parentViews.month `String` *(default: "year view")*
 
 Allows customization of parent view name used in the `title` attribute of the Calendar title when in Month view.
@@ -358,6 +364,20 @@ Allows customization of the text of the Today button present in the widget in it
 ### month `Object`
 
  Templates for the cells rendered in "month" view.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            month: {
+                content: (data) => `<div class="custom-cell">${data.value}</div>`,
+                empty: "-",
+                weekNumber: (data) => `<span class="week-num">${data.weekNumber}</span>`
+            },
+            weekNumber: true
+        });
+    </script>
 
 ### month.content `String`
 
@@ -534,8 +554,34 @@ Specifies an initial range selection. This option is available only when the [`s
 ### range.start `Date`
 Specifies the start date of the range selection.
 
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range",
+            range: { 
+                start: new Date(2024, 5, 10), // June 10, 2024
+                end: new Date(2024, 5, 20) 
+            }
+        });
+    </script>
+
 ### range.end `Date`
 Specifies the end date of the range selection.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "range",
+            range: { 
+                start: new Date(2024, 5, 10), 
+                end: new Date(2024, 5, 25) // June 25, 2024
+            }
+        });
+    </script>
 
 ### showOtherMonthDays `Boolean`*(default: true)*
 

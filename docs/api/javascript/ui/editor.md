@@ -104,13 +104,60 @@ Defines the commands for the side panel AI Prompt tool. The commands are display
 
 The text of the command.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                commands: [{
+                    text: "Summarize"
+                }]
+            }
+        }
+    });
+    </script>
+
 ### ai.aiPrompt.commands.id `String`
 
 The id of the command.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                commands: [{
+                    id: "summarize",
+                    text: "Summarize"
+                }]
+            }
+        }
+    });
+    </script>
+
 ### ai.aiPrompt.commands.icon `String`
 
 The icon of the command.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                commands: [{
+                    icon: "gear",
+                    text: "Summarize"
+                }]
+            }
+        }
+    });
+    </script>
 
 ### ai.aiPrompt.commands.prompt `Function`
 
@@ -118,9 +165,45 @@ The prompt for the command. The function accepts the following arguments:
 
 - `context` - The text in the editor.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                commands: [{
+                    text: "Summarize",
+                    prompt: function(context) {
+                        return "Please summarize the following text: " + context;
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+
 ### ai.aiPrompt.promptSuggestions `Array`
 
 Defines the suggestions for the side panel AI Prompt tool. The suggestions are displayed in the side panel AIPrompt tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            aiPrompt: {
+                promptSuggestions: [
+                    "Summarize this text",
+                    "Improve grammar",
+                    "Make it more formal",
+                    "Translate to Spanish"
+                ]
+            }
+        }
+    });
+    </script>
 
 
 ### ai.aiPrompt.commands `Array`
@@ -151,19 +234,76 @@ The commands can be configured separately in the `ai.aiPrompt.commands` and `ai.
 
 The text of the command.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            commands: [{
+                text: "Proofread"
+            }]
+        }
+    });
+    </script>
+
 ### ai.commands.id `String`
 
 The id of the command.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            commands: [{
+                id: "proofread",
+                text: "Proofread"
+            }]
+        }
+    });
+    </script>
+
 ### ai.commands.icon `String`
 
 The icon of the command.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            commands: [{
+                icon: "spell-checker",
+                text: "Proofread"
+            }]
+        }
+    });
+    </script>
 
 ### ai.commands.prompt `Function`
 
 The prompt for the command. The function accepts the following arguments:
 
 - `context` - The text in the editor.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            commands: [{
+                text: "Proofread",
+                prompt: function(context) {
+                    return "Please proofread and correct any errors in the following text: " + context;
+                }
+            }]
+        }
+    });
+    </script>
 
 ### ai.inlineAIPrompt `Object|Boolean`
 
@@ -242,19 +382,84 @@ Defines the commands for the inline AI Prompt tool. The commands are displayed i
 
 The text of the command.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            inlineAIPrompt: {
+                commands: [{
+                    text: "Enhance"
+                }]
+            }
+        }
+    });
+    </script>
+
 ### ai.inlineAIPrompt.commands.id `String`
 
 The id of the command.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            inlineAIPrompt: {
+                commands: [{
+                    id: "enhance",
+                    text: "Enhance"
+                }]
+            }
+        }
+    });
+    </script>
+
 ### ai.inlineAIPrompt.commands.icon `String`
 
 The icon of the command.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            inlineAIPrompt: {
+                commands: [{
+                    icon: "sparkline",
+                    text: "Enhance"
+                }]
+            }
+        }
+    });
+    </script>
 
 ### ai.inlineAIPrompt.commands.prompt `Function`
 
 The prompt for the command. The function accepts the following arguments:
 
 - `context` - The selected text in the editor.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            inlineAIPrompt: {
+                commands: [{
+                    text: "Enhance",
+                    prompt: function(context) {
+                        return "Please enhance the following text: " + context;
+                    }
+                }]
+            }
+        }
+    });
+    </script>
 
 ### ai.pane `Object`
 
@@ -280,17 +485,69 @@ Defines the configuration options for the Splitter Pane containing the side pane
 
 Sets the minimum size of the pane.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            pane: {
+                min: "200px"
+            }
+        }
+    });
+    </script>
+
 ### ai.pane.size `String`
 
 Sets the size of the pane.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            pane: {
+                size: "350px"
+            }
+        }
+    });
+    </script>
 
 ### ai.pane.collapsible `Boolean`
 
 Enables the collapsibility of the pane.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            pane: {
+                collapsible: true
+            }
+        }
+    });
+    </script>
+
 ### ai.pane.collapsed `Boolean`
 
 Sets the collapsed of the pane.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        ai: {
+            pane: {
+                collapsed: false
+            }
+        }
+    });
+    </script>
 
 ### ai.service `String|Object`
 
@@ -408,6 +665,19 @@ The function to get the output from the AI service response.
 ### deserialization `Object`
 
 Fine-tune deserialization in the Editor widget. Deserialization is the process of parsing the HTML string input from the value() method or from the viewHtml dialog into editable content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        deserialization: {
+            custom: function(html) {
+                return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+            }
+        }
+    });
+    </script>
 
 ### deserialization.custom `Function`
 
@@ -540,6 +810,8 @@ Kendo template or a callback that allows custom serialization of an immutable el
 This property enables you to configure height for the Editor when the component is in [`inline`](https://demos.telerik.com/kendo-ui/editor/inline-editing) mode.
 
 > This configuration is required when you want to use the `formattingMarks` tool in an inline editor.
+
+#### Example
 
     <div id="editor">
         <h2>
@@ -2551,6 +2823,19 @@ Remove all span elements from the content, ensuring much of the inline formattin
 
 Configures the Kendo UI Editor PDF export settings.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            paperSize: "A4",
+            margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" }
+        }
+    });
+    </script>
+
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
@@ -2573,12 +2858,36 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            autoPrint: true
+        }
+    });
+    </script>
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
 It's also possible to pass a CSS selector as argument. All matching links will be ignored.
 
 > Available in versions 2015.3.1020 and later
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            avoidLinks: true
+        }
+    });
+    </script>
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -2631,13 +2940,50 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            forceProxy: true,
+            proxyURL: "/save"
+        }
+    });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            jpegQuality: 0.8
+        }
+    });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            keepPNG: true
+        }
+    });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2697,17 +3043,73 @@ units are "mm", "cm", "in" and "pt" (default).
 
 The bottom margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            margin: {
+                bottom: "1cm"
+            }
+        }
+    });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            margin: {
+                left: 20
+            }
+        }
+    });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            margin: {
+                right: "2cm"
+            }
+        }
+    });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["pdf"],
+        pdf: {
+            margin: {
+                top: 25
+            }
+        }
+    });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -2996,6 +3398,19 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        resizable: {
+            toolbar: {
+                mode: "scroll"
+            }
+        }
+    });
+    </script>
+
 
 ### resizable.toolbar.scrollButtons `String` *(default: "auto")*
 
@@ -3003,6 +3418,20 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"auto"` — Displays scroll buttons only when needed.
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        resizable: {
+            toolbar: {
+                mode: "scroll",
+                scrollButtons: "visible"
+            }
+        }
+    });
+    </script>
 
 
 ### resizable.toolbar.scrollButtonsPosition `String` *(default: "split")*
@@ -3012,14 +3441,55 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        resizable: {
+            toolbar: {
+                mode: "scroll",
+                scrollButtonsPosition: "end"
+            }
+        }
+    });
+    </script>
+
 
 ### resizable.toolbar.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        resizable: {
+            toolbar: {
+                mode: "scroll",
+                scrollDistance: 100
+            }
+        }
+    });
+    </script>
+
 ### serialization `Object`
 
 Allows setting of serialization options.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        serialization: {
+            custom: function(html) {
+                return html.replace(/(<\/?)strong(\s?)/, "$1b$2");
+            }
+        }
+    });
+    </script>
 
 ### serialization.custom `Function`
 
@@ -3559,6 +4029,22 @@ Defines the initial folder to display, relative to the root.
 ### imageBrowser.transport `Object`
 
 Specifies the settings for loading and saving data.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            transport: {
+                read: "/imagebrowser/read",
+                uploadUrl: "/imagebrowser/upload",
+                imageUrl: "/imagebrowser/image"
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.transport.read `Object|String|Function`
 
@@ -4144,55 +4630,326 @@ The remote url to call when creating a new record.
 
 Set the object responsible for describing the image raw data format.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            transport: {
+                read: "/imagebrowser/read"
+            },
+            schema: {
+                type: "json",
+                data: "data"
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.schema.model `Object`
 
 Set the object which describes the image/directory entry fields. Note that a name, type and size fields should be set.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    id: "name",
+                    fields: {
+                        name: { field: "Name" },
+                        type: { field: "Type" },
+                        size: { field: "Size" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.schema.model.id `String`
 
 The name of the field which acts as an identifier.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    id: "name"
+                }
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.schema.model.fields `Object`
+
+Defines the field mappings for the image browser data model. This configuration specifies which fields in the server response contain the name, type, and size information for files and directories. The fields object allows you to map the server data structure to the expected properties that the image browser uses to display and manage files. Each field can be configured as either a string (field name) or an object with additional parsing options.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: "Name",
+                        type: "Type",
+                        size: "Size"
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.schema.model.fields.name `Object|String`
 
 The field which contains the name of the image/directory
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: { field: "FileName" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.schema.model.fields.name.field `String`
 
 The name of the field.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: { field: "FileName" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.schema.model.fields.name.parse `Function`
 
 Specifies the function which will parse the field value. If not set default parsers will be used.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: { 
+                            field: "FileName",
+                            parse: function(value) {
+                                return value.toString();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.schema.model.fields.type `Object|String`
 
 The field which contains the type of the entry. Either *f* for image or *d* for directory.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        type: { field: "Type" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.schema.model.fields.type.parse `Function`
 
 Specifies the function which will parse the field value. If not set default parsers will be used.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        type: { 
+                            field: "Type",
+                            parse: function(value) {
+                                return value === "directory" ? "d" : "f";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.schema.model.fields.type.field `String`
 
 The name of the field.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        type: { field: "EntryType" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.schema.model.fields.size `Object|String`
 
 The field which contains the size of image.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        size: { field: "Size" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.schema.model.fields.size.field `String`
 
 The name of the field.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        size: { field: "FileSize" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.schema.model.fields.size.parse `Function`
 
 Specifies the function which will parse the field value. If not set default parsers will be used.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        size: { 
+                            field: "FileSize",
+                            parse: function(value) {
+                                return parseInt(value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### imageBrowser.messages `Object`
 
 Defines texts shown within the image browser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["insertImage"],
+        imageBrowser: {
+            messages: {
+                uploadFile: "Upload Image",
+                orderBy: "Sort by",
+                orderByName: "Name",
+                orderBySize: "Size"
+            }
+        }
+    });
+    </script>
 
 ### imageBrowser.messages.uploadFile `String` *(default: "Upload")*
 
@@ -4435,6 +5192,21 @@ Defines the initial folder to display, relative to the root.
 ### fileBrowser.transport `Object`
 
 Specifies the settings for loading and saving data.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            transport: {
+                read: "/filebrowser/read",
+                uploadUrl: "/filebrowser/upload"
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.transport.read `Object|String|Function`
 
@@ -5069,55 +5841,326 @@ The remote url to call when creating a new record.
 
 Set the object responsible for describing the file raw data format.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            transport: {
+                read: "/filebrowser/read"
+            },
+            schema: {
+                type: "json",
+                data: "data"
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.schema.model `Object`
 
 Set the object which describes the file/directory entry fields. Note that a name, type and size fields should be set.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    id: "name",
+                    fields: {
+                        name: { field: "Name" },
+                        type: { field: "Type" },
+                        size: { field: "Size" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.schema.model.id `String`
 
 The name of the field which acts as an identifier.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    id: "name"
+                }
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.schema.model.fields `Object`
+
+Defines the field mappings for the file browser data model. This configuration specifies which fields in the server response contain the name, type, and size information for files and directories. The fields object allows you to map the server data structure to the expected properties that the file browser uses to display and manage files. Each field can be configured as either a string (field name) or an object with additional parsing options.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: "Name",
+                        type: "Type",
+                        size: "Size"
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.schema.model.fields.name `Object|String`
 
 The field which contains the name of the file/directory
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: { field: "FileName" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.schema.model.fields.name.field `String`
 
 The name of the field.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: { field: "FileName" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.schema.model.fields.name.parse `Function`
 
 Specifies the function which will parse the field value. If not set default parsers will be used.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        name: { 
+                            field: "FileName",
+                            parse: function(value) {
+                                return value.toString();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.schema.model.fields.type `Object|String`
 
 The field which contains the type of the entry. Either *f* for file or *d* for directory.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        type: { field: "Type" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.schema.model.fields.type.parse `Function`
 
 Specifies the function which will parse the field value. If not set default parsers will be used.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        type: { 
+                            field: "Type",
+                            parse: function(value) {
+                                return value === "directory" ? "d" : "f";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.schema.model.fields.type.field `String`
 
 The name of the field.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        type: { field: "EntryType" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.schema.model.fields.size `Object|String`
 
 The field which contains the size of file.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        size: { field: "Size" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.schema.model.fields.size.field `String`
 
 The name of the field.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        size: { field: "FileSize" }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.schema.model.fields.size.parse `Function`
 
 Specifies the function which will parse the field value. If not set default parsers will be used.
 
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            schema: {
+                model: {
+                    fields: {
+                        size: { 
+                            field: "FileSize",
+                            parse: function(value) {
+                                return parseInt(value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### fileBrowser.messages `Object`
 
 Defines texts shown within the file browser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: ["createLink"],
+        fileBrowser: {
+            messages: {
+                uploadFile: "Upload File",
+                orderBy: "Sort by",
+                orderByName: "Name",
+                orderBySize: "Size"
+            }
+        }
+    });
+    </script>
 
 ### fileBrowser.messages.uploadFile `String` *(default: "Upload")*
 

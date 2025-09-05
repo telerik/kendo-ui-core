@@ -16,13 +16,46 @@ Represents the Kendo UI DropDownList widget. Inherits from [Widget](/api/javascr
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Option 1", "Option 2", "Option 3"],
+        adaptiveMode: "auto"
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Small", "Medium", "Large"],
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Size"
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Product A", "Product B", "Product C"],
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Product",
+        adaptiveSubtitle: "Choose your preferred option"
+    });
+    </script>
 
 ### animation `Boolean|Object`
 
@@ -63,6 +96,8 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 ### animation.close `Object`
 
+The animation that is applied when the popup is closing.
+
 #### Example - configure the close animation
 
     <input id="dropdownlist" />
@@ -84,9 +119,37 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Option 1", "Option 2", "Option 3"],
+        animation: {
+            close: {
+                effects: "zoomOut"
+            }
+        }
+    });
+    </script>
+
 ### animation.close.duration `Number` *(default: 100)*
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Red", "Blue", "Green"],
+        animation: {
+            close: {
+                duration: 500
+            }
+        }
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -112,9 +175,37 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Morning", "Afternoon", "Evening"],
+        animation: {
+            open: {
+                effects: "zoomIn"
+            }
+        }
+    });
+    </script>
+
 ### animation.open.duration `Number` *(default: 200)*
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Fast", "Medium", "Slow"],
+        animation: {
+            open: {
+                duration: 800
+            }
+        }
+    });
+    </script>
 
 ### autoBind `Boolean`*(default: true)*
 
@@ -443,6 +534,8 @@ When filtering is enabled, allows custom title to be defined for the filter inpu
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
+#### Example
+
     <input id="customers" style="width: 400px" />
     <script>
         let encode = kendo.htmlEncode;
@@ -591,6 +684,8 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+
+#### Example
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -1148,16 +1243,95 @@ Enables the virtualization feature of the widget. The configuration can be set o
 
 For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+      $("#dropdownlist").kendoDropDownList({
+          dataTextField: "ShipName",
+          dataValueField: "OrderID",
+          virtual: {
+              itemHeight: 26,
+              valueMapper: function(options) {
+              $.ajax({
+                  url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
+                  type: "GET",
+                  success: function (data) {
+                    console.log(data);
+                  }
+                })
+              }
+          },
+          height: 320,
+          dataSource: {
+            type: "odata-v4",
+            transport: {
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
+            },
+            pageSize: 80,
+            serverPaging: true,
+            serverFiltering: true
+          }
+      });
+    </script>
+
 ### virtual.itemHeight `Number`*(default: null)*
 
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataTextField: "ShipName",
+        dataValueField: "OrderID",
+        virtual: {
+            itemHeight: 30
+        },
+        height: 520,
+        dataSource: {
+            type: "odata-v4",
+            transport: {
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
+            },
+            pageSize: 80,
+            serverPaging: true,
+            serverFiltering: true
+        }
+    });
+    </script>
 
 ### virtual.mapValueTo `String`*(default: "index")*
 
 The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
 For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        virtual: {
+            itemHeight: 26,
+            mapValueTo: "dataItem"
+        },
+        height: 520,
+        dataSource: {
+            type: "odata-v4",
+            transport: {
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
+            },
+            pageSize: 80,
+            serverPaging: true,
+            serverFiltering: true
+        }
+    });
+    </script>
 
 ### virtual.valueMapper `Function`*(default: null)*
 
@@ -1503,6 +1677,19 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 #### Returns
 
 `Array` The currently rendered dropdown list items (`<li>` elements).
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: ["Tea", "Coffee", "Water"]
+    });
+
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    var items = dropdownlist.items();
+    console.log(items); // logs the li elements
+    </script>
 
 ### enable
 

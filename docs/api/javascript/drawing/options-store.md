@@ -22,6 +22,26 @@ Stores nested settings and notifies an (optional) observer of changes.
 ### options `Object`
 The initial values of all options.
 
+#### Example
+
+    <script>
+        var options = new kendo.drawing.OptionsStore({
+            title: "My Chart",
+            series: {
+                type: "line",
+                color: "#ff0000"
+            },
+            categoryAxis: {
+                labels: {
+                    font: "12px Arial"
+                }
+            }
+        });
+        
+        console.log(options.get("title")); // "My Chart"
+        console.log(options.get("series.type")); // "line"
+    </script>
+
 ## Fields
 
 ### observer `Object`
@@ -31,6 +51,28 @@ Upon field modification, the optionsChange(e) method on the observer will be cal
 with a single argument containing two fields:
 * field - The fully qualified field name
 * value - The new field value
+
+#### Example
+
+    <script>
+        var myObserver = {
+            optionsChange: function(e) {
+                console.log("Option changed: " + e.field + " = " + e.value);
+            }
+        };
+        
+        var options = new kendo.drawing.OptionsStore({
+            color: "red",
+            size: 10
+        });
+        
+        // Set the observer
+        options.observer = myObserver;
+        
+        // This will trigger the optionsChange callback
+        options.set("color", "blue"); // Logs: "Option changed: color = blue"
+        options.set("size", 15);      // Logs: "Option changed: size = 15"
+    </script>
 
 ## Methods
 

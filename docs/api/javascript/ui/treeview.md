@@ -1227,6 +1227,33 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 
 `Array` The currently rendered tree items (`<div>` elements, that are children of the `<li>` elements).
 
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "Item 1" },
+        { text: "Item 2" },
+        { text: "Item 3", items: [
+          { text: "Sub Item 1" },
+          { text: "Sub Item 2" }
+        ]}
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+    
+    // Get all currently rendered tree items
+    var items = treeview.items();
+    
+    console.log("Number of rendered items:", items.length);
+    // Log each item's text content
+    items.each(function(index, element) {
+      console.log("Item " + index + ":", $(element).find(".k-in").text());
+    });
+    </script>
+
 ### parent
 
 Gets the parent node of the item

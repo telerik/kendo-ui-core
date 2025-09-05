@@ -32,6 +32,16 @@ Toggles the audio button.
 
 The URL, AJAX settings or function that fetches the audio of the captcha. When used with function, call the `args.success` method with the source of the audio.
 
+#### Example
+
+    <input id="captcha" />
+    <script>
+        $("#captcha").kendoCaptcha({
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset",
+            audioHandler: "https://demos.telerik.com/kendo-ui/captcha/audio"
+        });
+    </script>
+
 #### Set the audio handler as function
 
 ```pseudo
@@ -326,6 +336,16 @@ Whether to trigger validation when input is blurred. This option is useful if yo
 
 The URL, AJAX settings or function that validates the text input. When used with function, call the `args.success` method with boolean value.
 
+#### Example
+
+    <input id="captcha" />
+    <script>
+        $("#captcha").kendoCaptcha({
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset",
+            validationHandler: "https://demos.telerik.com/kendo-ui/captcha/validate"
+        });
+    </script>
+
 #### Configure the Handler as a Function
 
 ```pseudo
@@ -582,6 +602,19 @@ Fired when a request to a handler is finished - can be distinguished via the `ty
 ##### e.type `String`
 
 The type triggered the request: "reset|validation|audio".
+
+#### Example
+
+    <input id="captcha" />
+    <script>
+        $("#captcha").kendoCaptcha({
+            handler: "https://demos.telerik.com/kendo-ui/captcha/reset",
+            requestEnd: function (ev) {
+                // Handle the request end event
+                console.log("Request ended: " + ev.type);
+            }
+        });
+    </script>
 
 #### Handle the requestEnd event
 

@@ -88,6 +88,15 @@ This does not modify the current object, it creates a new one instead.
 #### Returns
 `Object` An object with h, s, v and a fields.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    var hsvColor = color.toHSV();
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(hsvColor); // logs {h: 0, s: 1, v: 1, a: 1}
+    </script>
+
 ### toRGB
 
 Returns the color in RGB representation.  The result has the following
@@ -104,6 +113,15 @@ This does not modify the current object, it creates a new one instead.
 
 `Object` An object with r, g, b and a fields.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    var rgbColor = color.toRGB();
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(rgbColor); // logs {r: 1, g: 0, b: 0, a: 1}
+    </script>
+
 ### toBytes
 
 Returns the color in "Bytes" representation.  It has the same properties as
@@ -114,6 +132,15 @@ This does not modify the current object, it creates a new one instead.
 #### Returns
 `Object` An object with r, g and b fields.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    var bytesColor = color.toBytes();
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(bytesColor); // logs {r: 255, g: 0, b: 0, a: 1}
+    </script>
+
 ### toHex
 
 Returns a string in `"FF0000"` form (without a leading `#`).
@@ -121,6 +148,14 @@ Returns a string in `"FF0000"` form (without a leading `#`).
 #### Returns
 
 `String` The color in hex notation.
+
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.toHex()); // logs "ff0000"
+    </script>
 
 ### toCss
 
@@ -130,6 +165,14 @@ Like `toHex`, but includes a leading `#`.
 
 `String` The color in CSS notation.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.toCss()); // logs "#ff0000"
+    </script>
+
 ### toCssRgba
 
 Returns the color in RGBA notation (includes the opacity).
@@ -137,6 +180,18 @@ Returns the color in RGBA notation (includes the opacity).
 #### Returns
 
 `String` The color in RGBA notation.
+
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.toCssRgba()); // logs "rgba(255, 0, 0, 1)"
+    
+    var transparentColor = kendo.Color.fromRGB(1, 0, 0, 0.5);
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(transparentColor.toCssRgba()); // logs "rgba(255, 0, 0, 0.5)"
+    </script>
 
 ### toDisplay
 
@@ -148,6 +203,14 @@ RGBA form.
 
 `String` The color in the best notation supported by the current browser.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.toDisplay()); // logs "rgba(255, 0, 0, 1)" in modern browsers
+    </script>
+
 
 ## Fields
 
@@ -155,13 +218,49 @@ RGBA form.
 
 The red channel of the color, in the range from 0 to 1.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.r); // logs 1
+    
+    var greenColor = kendo.parseColor("#00ff00");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(greenColor.r); // logs 0
+    </script>
+
 ### g `Number`
 
 The green channel of the color, in the range from 0 to 1.
 
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#00ff00");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.g); // logs 1
+    
+    var redColor = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(redColor.g); // logs 0
+    </script>
+
 ### b `Number`
 
 The blue channel of the color, in the range from 0 to 1.
+
+#### Example
+
+    <script>
+    var color = kendo.parseColor("#0000ff");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(color.b); // logs 1
+    
+    var redColor = kendo.parseColor("#ff0000");
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(redColor.b); // logs 0
+    </script>
 
 
 ## Static Methods

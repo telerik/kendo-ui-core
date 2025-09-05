@@ -301,7 +301,7 @@ Specifies the field name in the data source from which the URL for the author's 
             text: "Hello!", 
             authorId: "user1", 
             authorName: "John",
-            avatarUrl: "https://example.com/avatar.jpg",
+            avatarUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
             timestamp: new Date() 
         }
     ];
@@ -1459,6 +1459,33 @@ Defines the icon class for the toolbar action.
 
 Defines the text for the toolbar action.
 
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message has a custom toolbar action with text",
+            authorId: "assistant",
+            authorName: "Virtual Assistant",
+            timestamp: new Date()
+        }
+    ];
+    
+    $("#chat").kendoChat({
+        messageToolbarActions: [
+            { 
+                name: "bookmark", 
+                icon: "star", 
+                text: "Save Message"
+            }
+        ],
+        authorId: "user",
+        dataSource: messagesData
+    });
+    </script>
+
 ### messageToolbarActions.name `String`
 
 Defines the name identifier for the toolbar action.
@@ -1710,6 +1737,34 @@ The template used to render suggested actions. The `k-suggestions` class must be
 
 Defines the collection of suggested messages that users can quickly select. These appear as clickable buttons below the message input area, allowing users to send common responses quickly.
 
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Hello! How can I help you today?",
+            authorId: "assistant",
+            authorName: "Virtual Assistant",
+            timestamp: new Date()
+        }
+    ];
+    
+    $("#chat").kendoChat({
+        suggestions: [
+            { text: "I need help with my order" },
+            { text: "Tell me about your services" },
+            { text: "Contact support" }
+        ],
+        authorId: "user",
+        dataSource: messagesData,
+        suggestionClick: function(e) {
+            console.log("User selected suggestion:", e.text);
+        }
+    });
+    </script>
+
 ### suggestions.text `String`
 
 The text of the suggestion.
@@ -1758,39 +1813,28 @@ The text of the suggestion.
 
 Enables or disables scrollable behavior for message suggestions.
 
-### suggestionsTemplate `Function`
+#### Example
 
     <div id="chat"></div>
     <script>
     let messagesData = [
         {
             id: 1,
-            text: "What would you like to do today? Notice the scrollable suggestions below:",
+            text: "Choose from the scrollable suggestions below:",
             authorId: "assistant",
             authorName: "Virtual Assistant",
-            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
-            timestamp: new Date(2026, 0, 1, 9, 0)
-        },
-        {
-            id: 2,
-            text: "I'd like to check the weather please.",
-            authorId: "user",
-            authorName: "User",
-            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
-            timestamp: new Date(2026, 0, 1, 9, 5)
+            timestamp: new Date()
         }
     ];
     
     $("#chat").kendoChat({
         suggestions: [
-            { text: "Check Weather" },
-            { text: "Set Reminder" },
-            { text: "Play Music" },
-            { text: "Get News Updates" },
-            { text: "Schedule Meeting" },
-            { text: "Send Email" },
-            { text: "View Calendar" },
-            { text: "Help & Support" }
+            { text: "Option 1" },
+            { text: "Option 2" },
+            { text: "Option 3" },
+            { text: "Option 4" },
+            { text: "Option 5" },
+            { text: "Option 6" }
         ],
         suggestionsScrollable: true,
         authorId: "user",
@@ -2673,7 +2717,7 @@ The new data to apply to the message.
         let messageObject = chat.dataSource.get(1); // Get message with id 1
         if (messageObject) {
             let updatedMessage = chat.updateMessage(messageObject, {
-                text: "✅ This message has been updated successfully!"
+                text: "This message has been updated successfully!"
             });
             console.log("Message updated:", updatedMessage.text);
         }

@@ -183,7 +183,7 @@ Determines whether notifications can be hidden by clicking anywhere on their con
 It determines the position of the first notification on the screen, as well as whether the notifications will move together with the page content during scrolling.
 `top` takes precedence over `bottom` and `left` takes precedence over `right`.
 
-#### Default position settings
+#### Example
 
     <span id="notification"></span>
     <script>
@@ -349,11 +349,51 @@ Describes the HTML markup of the different notification types as Kendo UI templa
 
 **Required.** Specified a unique identifier, which is used to retrieve the correct template when a notification of this type is shown.
 
+#### Example
+
+    <div id="notification"></div>
+    <script>
+    $("#notification").kendoNotification({
+        templates: [{
+            type: "info",
+            template: (data) => `<div class='info-notification'>${data.content}</div>`
+        }, {
+            type: "warning",  
+            template: (data) => `<div class='warning-notification'>${data.content}</div>`
+        }]
+    });
+    
+    // Show notification with specific type
+    $("#notification").getKendoNotification().show("This is an info message", "info");
+    </script>
+
 See the [example above](/api/javascript/ui/notification#configuration-templates).
 
 ### templates.template `String` *(default: "")*
 
 Defines a Kendo UI template to be used with the corresponding notification type.
+
+#### Example
+
+    <div id="notification"></div>
+    <script>
+    $("#notification").kendoNotification({
+        templates: [{
+            type: "custom",
+            template: (data) => `<div class='custom-template'>
+                <strong>${data.title || 'Notification'}</strong>
+                <p>${data.message}</p>
+                <button onclick='$(this).closest(\".k-notification\").find(\".k-notification-wrap\").click()'>Close</button>
+            </div>`
+        }]
+    });
+    
+    // Show notification with custom template
+    $("#notification").getKendoNotification().show({
+        title: "Custom Title",
+        message: "This notification uses a custom template"
+    }, "custom");
+    </script>
 
 See the [example above](/api/javascript/ui/notification#configuration-templates).
 
@@ -400,6 +440,24 @@ Defines the notifications' width. Numbers are treated as pixels.
 ### error
 
 This is a shorthand method for [`show(data, "error")`](/api/javascript/ui/notification/methods/show)
+
+#### Example
+
+    <div id="notification"></div>
+    <script>
+    $("#notification").kendoNotification();
+    
+    var notification = $("#notification").getKendoNotification();
+    
+    // Show error notification with string message
+    notification.error("An error occurred while processing your request");
+    
+    // Show error notification with object data
+    notification.error({
+        title: "Error",
+        message: "Failed to save data"
+    });
+    </script>
 
 #### Parameters
 
@@ -480,6 +538,24 @@ then use the [`getNotifications()`](/api/javascript/ui/notification/methods/getn
 ### info
 
 This is a shorthand method for [`show(data, "info")`](/api/javascript/ui/notification/methods/show)
+
+#### Example
+
+    <div id="notification"></div>
+    <script>
+    $("#notification").kendoNotification();
+    
+    var notification = $("#notification").getKendoNotification();
+    
+    // Show info notification with string message
+    notification.info("This is an informational message");
+    
+    // Show info notification with object data  
+    notification.info({
+        title: "Information",
+        message: "Your data has been saved successfully"
+    });
+    </script>
 
 #### Parameters
 
@@ -579,6 +655,24 @@ If this argument is not supplied, then `"info"` is assumed.
 
 This is a shorthand method for [`show(data, "success")`](/api/javascript/ui/notification/methods/show)
 
+#### Example
+
+    <div id="notification"></div>
+    <script>
+    $("#notification").kendoNotification();
+    
+    var notification = $("#notification").getKendoNotification();
+    
+    // Show success notification with string message
+    notification.success("Operation completed successfully!");
+    
+    // Show success notification with object data
+    notification.success({
+        title: "Success",
+        message: "Your changes have been saved"
+    });
+    </script>
+
 #### Parameters
 
 ##### data `Object|String|Function`
@@ -588,6 +682,24 @@ This is a shorthand method for [`show(data, "success")`](/api/javascript/ui/noti
 ### warning
 
 This is a shorthand method for [`show(data, "warning")`](/api/javascript/ui/notification/methods/show)
+
+#### Example
+
+    <div id="notification"></div>
+    <script>
+    $("#notification").kendoNotification();
+    
+    var notification = $("#notification").getKendoNotification();
+    
+    // Show warning notification with string message
+    notification.warning("Please review your input before proceeding");
+    
+    // Show warning notification with object data
+    notification.warning({
+        title: "Warning",
+        message: "Some fields are incomplete"
+    });
+    </script>
 
 #### Parameters
 

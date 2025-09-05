@@ -15,13 +15,54 @@ Represents the Kendo UI DropDownTree widget. Inherits from [Widget](/api/javascr
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        adaptiveMode: "auto",
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ]
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Items",
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ]
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        adaptiveMode: "auto",
+        adaptiveSubtitle: "Choose from options below",
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ]
+    });
+    </script>
 
 ### animation `Boolean|Object`
 
@@ -62,6 +103,8 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 ### animation.close `Object`
 
+The animation that is applied when the popup is closing.
+
 #### Example - configure the close animation
 
     <input id="dropdowntree"/>
@@ -84,9 +127,43 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ],
+        animation: {
+            close: {
+                effects: "zoomOut"
+            }
+        }
+    });
+    </script>
+
 ### animation.close.duration `Number` *(default: 100)*
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ],
+        animation: {
+            close: {
+                duration: 500
+            }
+        }
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -114,9 +191,43 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ],
+        animation: {
+            open: {
+                effects: "zoomIn"
+            }
+        }
+    });
+    </script>
+
 ### animation.open.duration `Number` *(default: 200)*
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2 }
+        ],
+        animation: {
+            open: {
+                duration: 400
+            }
+        }
+    });
+    </script>
 
 ### autoBind `Boolean`*(default: true)*
 
@@ -183,6 +294,8 @@ When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdownt
 ### checkAllTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the checkAll label. By default, the widget displays only a span element with text "Check all".
+
+#### Example
 
     <input id="dropdowntree" />
 
@@ -1501,6 +1614,24 @@ Focuses the widget.
 ### items
 
 Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI HierarchicalDataSource [view](/api/javascript/data/datasource/methods/view).
+
+#### Example
+
+    <input id="dropdowntree" />
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+        dataSource: [
+            { text: "Item 1", value: 1 },
+            { text: "Item 2", value: 2, items: [
+                { text: "Sub Item 1", value: 3 }
+            ]}
+        ]
+    });
+    
+    var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
+    var items = dropdowntree.items();
+    console.log("Number of items:", items.length);
+    </script>
 
 #### Returns
 

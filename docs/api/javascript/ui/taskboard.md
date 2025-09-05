@@ -2716,62 +2716,498 @@ Configures the items collection of the toolbar.
 ### toolbar.items.type `String`
 Specifies the type of the button.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { type: "button", text: "Custom Button", icon: "plus" },
+                {
+                    type: "splitButton", text: "Split Button", menuButtons: [
+                        { id: "foo", text: "Foo" },
+                        { id: "bar", text: "Bar" }
+                    ]
+                }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.overflow `String`
 Specifies the overflow of the button.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Always Visible", overflow: "never" },
+                { text: "Can Overflow", overflow: "auto" },
+                { text: "Always Hidden", overflow: "always" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.click `Function`
 Specifies the click handler of the button.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { 
+                    text: "Custom Action", 
+                    icon: "star",
+                    click: function(e) {
+                        console.log("Custom button clicked!");
+                        alert("Button clicked");
+                    }
+                }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.command `String`
 Specifies the command of the button.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { command: "CustomCommand", text: "Custom Command", icon: "gear" },
+                { command: "AddCard", text: "Add Card", icon: "plus" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.options `String`
 Specifies the command options of the button.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { 
+                    command: "CustomCommand", 
+                    text: "Custom Command", 
+                    options: "option1,option2",
+                    icon: "gear"
+                }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.name `String`
 Specifies the name of the button.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { name: "addCard", text: "Add Card", icon: "plus" },
+                { name: "customButton", text: "Custom", icon: "gear" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.togglable `Boolean` *(default: false)*
 Specifies if the button is togglable, e.g. has a selected and unselected state.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Toggle View", icon: "eye", togglable: true },
+                { text: "Regular Button", icon: "gear", togglable: false }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.text `String`
 Sets the text of the button.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Add New Card", icon: "plus" },
+                { text: "Export Data", icon: "download" },
+                { text: "Settings", icon: "gear" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.template `String|Function`
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { 
+                    template: (data) => `<button class="k-button"><span class="k-icon k-i-star"></span>Custom Template</button>`
+                },
+                { text: "Regular Button", icon: "gear" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.showText `String` *(default: "both")*
 Specifies where the text will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Toolbar Only", icon: "plus", showText: "toolbar" },
+                { text: "Overflow Only", icon: "gear", showText: "overflow" },
+                { text: "Both Places", icon: "star", showText: "both" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.primary `Boolean` *(default: false)*
 Specifies whether the button is primary. Primary buttons receive different styling.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Primary Action", icon: "plus", primary: true },
+                { text: "Secondary Action", icon: "gear", primary: false }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.attributes `Object`
 Specifies the HTML attributes of a ToolBar button.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { 
+                    text: "Custom Button", 
+                    icon: "plus",
+                    attributes: {
+                        "data-action": "add",
+                        "title": "Add new card",
+                        "class": "custom-button"
+                    }
+                }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.enable `Boolean` *(default: true)*
 Specifies whether the control is initially enabled or disabled. Default value is "true".
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Enabled Button", icon: "plus", enable: true },
+                { text: "Disabled Button", icon: "gear", enable: false }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.hidden `Boolean` *(default: false)*
 Determines if a button is visible or hidden. By default buttons are visible.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Visible Button", icon: "plus", hidden: false },
+                { text: "Hidden Button", icon: "gear", hidden: true }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.spriteCssClass `String`
 Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Custom Icon", spriteCssClass: "custom-icon-class" },
+                { text: "Another Icon", spriteCssClass: "icon-sprite custom-class" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.imageUrl `String`
 If set, the ToolBar will render an image with the specified URL in the button.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Custom Image", imageUrl: "/images/custom-icon.png" },
+                { text: "Another Image", imageUrl: "https://via.placeholder.com/16x16" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.showIcon `String` *(default: "both")*
 Specifies where the button icon will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Toolbar Only", icon: "plus", showIcon: "toolbar" },
+                { text: "Overflow Only", icon: "gear", showIcon: "overflow" },
+                { text: "Both Places", icon: "star", showIcon: "both" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.items.icon `String`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Add", icon: "plus" },
+                { text: "Settings", icon: "gear" },
+                { text: "Delete", icon: "trash" },
+                { text: "Save", icon: "save" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### toolbar.items.id `String`
 Specifies the ID of the button.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            items: [
+                { text: "Add Card", icon: "plus", id: "addCardButton" },
+                { text: "Settings", icon: "gear", id: "settingsButton" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### toolbar.overflow `Object`
 Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            overflow: {
+                mode: "menu",
+                scrollButtons: "auto",
+                scrollButtonsPosition: "split"
+            },
+            items: [
+                { text: "Button 1", icon: "plus" },
+                { text: "Button 2", icon: "gear" },
+                { text: "Button 3", icon: "star" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 
 ### toolbar.overflow.mode `String` *(default: "menu")*
@@ -2782,6 +3218,31 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            overflow: {
+                mode: "scroll"
+            },
+            items: [
+                { text: "Button 1", icon: "plus" },
+                { text: "Button 2", icon: "gear" },
+                { text: "Button 3", icon: "star" },
+                { text: "Button 4", icon: "save" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
@@ -2789,6 +3250,31 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"auto"` — Displays scroll buttons only when needed.
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible"
+            },
+            items: [
+                { text: "Button 1", icon: "plus" },
+                { text: "Button 2", icon: "gear" },
+                { text: "Button 3", icon: "star" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 
 ### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
@@ -2798,10 +3284,62 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible",
+                scrollButtonsPosition: "end"
+            },
+            items: [
+                { text: "Button 1", icon: "plus" },
+                { text: "Button 2", icon: "gear" },
+                { text: "Button 3", icon: "star" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 
 ### toolbar.overflow.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible",
+                scrollDistance: 100
+            },
+            items: [
+                { text: "Button 1", icon: "plus" },
+                { text: "Button 2", icon: "gear" },
+                { text: "Button 3", icon: "star" }
+            ]
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 
 ### width `String|Number` *(default: "100%")*
@@ -2833,6 +3371,28 @@ Configures the width of the TaskBoard wrapper.
 
 ### toolbar.overflow `Object`
 Specifies overflow configuration of the toolbar as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow).
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        toolbar: {
+            overflow: {
+                mode: "menu",
+                scrollButtons: "auto",
+                scrollButtonsPosition: "split",
+                scrollDistance: 75
+            }
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages `Object`
 
@@ -2893,81 +3453,421 @@ Provides configuration options for the messages present in the TaskBoard widget.
 
 Specifies text to be rendered for the "Edit" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            edit: "Modify Card"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.createNewCard `String` *(default: "Create new card")*
 
 Specifies text to be rendered for the "Create new card" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            createNewCard: "Add New Task Card"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.create `String` *(default: "Create")*
 
 Specifies text to be rendered for the "Create" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            create: "Add Task"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.search `String` *(default: "Search")*
 
 Specifies text to be rendered for the "Search" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            search: "Find Tasks"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.previewCard `String` *(default: "Preview card")*
 
 Specifies text to be rendered for the "Preview card" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            previewCard: "View Card Details"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.addCard `String` *(default: "Add card")*
 
 Specifies text to be rendered for the "Add card" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            addCard: "Create New Task"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.editCard `String` *(default: "Edit card")*
 
 Specifies text to be rendered for the "Edit card" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            editCard: "Modify Task"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.deleteCard `String` *(default: "Delete Card")*
 
 Specifies text to be rendered for the "Delete Card" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            deleteCard: "Remove Task"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.addColumn `String` *(default: "Add column")*
 
 Specifies text to be rendered for the "Add column" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            addColumn: "Create New Column"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.editColumn `String` *(default: "Edit column")*
 
 Specifies text to be rendered for the "Edit column" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            editColumn: "Modify Column"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.deleteColumn `String` *(default: "Delete column")*
 
 Specifies text to be rendered for the "Delete column" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            deleteColumn: "Remove Column"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.close `String` *(default: "Close")*
 
 Specifies text to be rendered for the "Close" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            close: "Exit"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.cancel `String` *(default: "Cancel")*
 
 Specifies text to be rendered for the "Cancel" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            cancel: "Discard Changes"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.delete `String` *(default: "Delete")*
 
 Specifies text to be rendered for the "Delete" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            "delete": "Remove"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.saveChanges `String` *(default: "Save changes")*
 
 Specifies text to be rendered for the "Save changes" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            saveChanges: "Apply Changes"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.title `String` *(default: "Title:")*
 
 Specifies text to be rendered for the "Title:" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            title: "Task Name:"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.description `String` *(default: "Description:")*
 
 Specifies text to be rendered for the "Description:" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            description: "Task Details:"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.newColumn `String` *(default: "New column")*
 
 Specifies text to be rendered for the "New column" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            newColumn: "Add Status Column"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ### messages.deleteColumnConfirm `String` *(default: "Are you sure you want to delete this column?")*
 
 Specifies text to be rendered for the "Are you sure you want to delete this column?" message.
 
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            deleteColumnConfirm: "Do you really want to remove this column permanently?"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
+
 ### messages.deleteCardConfirm `String` *(default: "Are you sure you want to delete this card?")*
 
 Specifies text to be rendered for the "Are you sure you want to delete this card?" message.
+
+#### Example
+
+    <div id="taskBoard"></div>
+    <script>
+    $("#taskBoard").kendoTaskBoard({
+        messages: {
+            deleteCardConfirm: "Do you really want to remove this task permanently?"
+        },
+        dataSource: [
+            { id: 1, title: "Task 1", status: "todo" }
+        ],
+        columns: [
+            { text: "To Do", status: "todo" }
+        ]
+    });
+    </script>
 
 ## Methods
 

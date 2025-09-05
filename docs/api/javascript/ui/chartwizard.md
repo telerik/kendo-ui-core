@@ -162,9 +162,45 @@ Configure the columns which will be used to map the dataItems.
 
 Sets the field name of the column.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        dataColumns: [
+            {
+                field: "productName",
+                title: "Product"
+            },
+            {
+                field: "unitPrice", 
+                title: "Price"
+            }
+        ]
+    });
+    </script>
+
 ### dataColumns.title `String`
 
 Sets the title of the column.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        dataColumns: [
+            {
+                field: "productName",
+                title: "Product Name"
+            },
+            {
+                field: "unitPrice", 
+                title: "Unit Price"
+            }
+        ]
+    });
+    </script>
 
 ### exportOptions `Object`
 
@@ -249,45 +285,228 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                autoPrint: true
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 The creator of the PDF document.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                creator: "My Application v1.0"
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.date `Date`
 The date when the PDF document is created. Defaults to `new Date()`.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                date: new Date(2023, 11, 25)
+            }
+        }
+    });
+    </script>
 
 ### exportOptions.pdf.imgDPI `Number`
 The forced resolution (in dpi) of the images in the exported PDF document.
 By default, the images are exported at their full resolution.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                imgDPI: 300
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                jpegQuality: 0.8
+            }
+        }
+    });
+    </script>
 
 ### exportOptions.pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                keepPNG: true
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.keywords `String` *(default: null)*
 Specifies the keywords of the exported PDF file.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                keywords: "chart, data visualization, report"
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.landscape `Boolean` *(default: false)*
 Set to `true` to reverse the paper dimensions if needed such that width is the larger edge.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                landscape: true,
+                paperSize: "A4"
+            }
+        }
+    });
+    </script>
 
 ### exportOptions.pdf.margin `Object`
 Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                margin: {
+                    top: "20mm",
+                    left: "20mm",
+                    bottom: "20mm",
+                    right: "20mm"
+                }
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.margin.bottom `Number|String` *(default: 0)*
 The bottom margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                margin: {
+                    bottom: "15mm"
+                }
+            }
+        }
+    });
+    </script>
 
 ### exportOptions.pdf.margin.left `Number|String` *(default: 0)*
 The left margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                margin: {
+                    left: "20mm"
+                }
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.margin.right `Number|String` *(default: 0)*
 The right margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                margin: {
+                    right: "20mm"
+                }
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.margin.top `Number|String` *(default: 0)*
 The top margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                margin: {
+                    top: "25mm"
+                }
+            }
+        }
+    });
+    </script>
 
 ### exportOptions.pdf.paperSize `String|Array` *(default: "auto")*
 Specifies the paper size of the PDF document.
@@ -326,8 +545,34 @@ Supported values:
 ### exportOptions.pdf.subject `String` *(default: null)*
 Sets the subject of the PDF file.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                subject: "Sales Report Q4 2023"
+            }
+        }
+    });
+    </script>
+
 ### exportOptions.pdf.title `String` *(default: null)*
 Sets the title of the PDF file.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        exportOptions: {
+            pdf: {
+                title: "Annual Sales Chart Report"
+            }
+        }
+    });
+    </script>
 
 ### exportOptions.image `Object`
 
@@ -457,7 +702,45 @@ Can be set to:
 
 The configuration of the ChartWizard messages. Use this option to customize or localize the ChartWizard messages.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            window: {
+                title: "Custom Chart Wizard"
+            },
+            chart: {
+                bar: {
+                    expandText: "Custom Bar Chart"
+                }
+            },
+            data: {
+                configuration: {
+                    expandText: "Custom"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.window `Object`
+
+Specifies the text configuration for the ChartWizard window messages.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            window: {
+                title: "Chart Creation Wizard"
+            }
+        }
+    });
+    </script>
 
 ### messages.window.title `String`
 
@@ -580,6 +863,21 @@ Specifies the text of the export to PNG item.
 
 Specifies the text of the tabs.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            tab: {
+                chart: "Chart Type",
+                data: "Data Source",
+                format: "Formatting"
+            }
+        }
+    });
+    </script>
+
 ### messages.tab.chart `String`
 
 Specifies the text of the chart tab.
@@ -659,9 +957,46 @@ Specifies the text of the format tab.
 
 Specifies the text of the chart tab content.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            chart: {
+                bar: {
+                    expandText: "Bar Charts"
+                },
+                column: {
+                    expandText: "Column Charts"
+                },
+                line: {
+                    expandText: "Line Charts"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.chart.bar `Object`
 
 Specifies the text of the bar chart panel.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            chart: {
+                bar: {
+                    expandText: "Bar Chart Options",
+                    description: "Create horizontal bar charts"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.chart.bar.expandText `String`
 
@@ -775,6 +1110,22 @@ Specifies the text for the 100% stacked bar chart type item.
 
 Specifies the text of the pie chart panel.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            chart: {
+                pie: {
+                    expandText: "Pie Chart Options",
+                    description: "Create circular pie charts"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.chart.pie.expandText `String`
 
 Specifies the title of the panel for pie chart.
@@ -833,6 +1184,22 @@ Specifies the text for the pie chart type item.
 ### messages.chart.column `Object`
 
 Specifies the text of the column chart panel.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            chart: {
+                column: {
+                    expandText: "Column Chart Options",
+                    description: "Create vertical column charts"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.chart.column.expandText `String`
 
@@ -945,6 +1312,22 @@ Specifies the text for the 100% stacked column chart type item.
 ### messages.chart.line `Object`
 
 Specifies the text of the line chart panel.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            chart: {
+                line: {
+                    expandText: "Line Chart Options",
+                    description: "Create trend line charts"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.chart.line.expandText `String`
 
@@ -1059,6 +1442,22 @@ Specifies the text for the 100% stacked line chart type item.
 
 Specifies the text of the scatter chart panel.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            chart: {
+                scatter: {
+                    expandText: "Scatter Chart Options",
+                    description: "Create scatter plot charts"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.chart.scatter.expandText `String`
 
 Specifies the title of the panel for scatter chart.
@@ -1119,9 +1518,40 @@ Specifies the text for the scatter chart type item.
 
 Specifies the text of the data tab content.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            data: {
+                configuration: {
+                    expandText: "Data Configuration Options"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.data.configuration `Object`
 
 Specifies the text of the configuration panel.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            data: {
+                configuration: {
+                    expandText: "Configure Data Source",
+                    description: "Set up data fields and series"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.data.configuration.expandText `String`
 
@@ -1154,6 +1584,24 @@ Specifies the title of the configuration panel
 ### messages.data.configuration.series `Object`
 
 Specifies the text for the series fields in the configuration panel
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            data: {
+                configuration: {
+                    series: {
+                        title: "Chart Series Configuration",
+                        addSeries: "Add New Series"
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.data.configuration.series.title `String`
 
@@ -1304,9 +1752,44 @@ Specifies the text of the xAxis legend of the configuration panel. xAxis is pres
 
 Specifies the text of the format tab content.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            format: {
+                chartArea: {
+                    expandText: "Chart Area Settings"
+                },
+                title: {
+                    expandText: "Title Settings"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.chartArea `Object`
 
 Specifies the text of the chartArea panel.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            format: {
+                chartArea: {
+                    expandText: "Chart Area Configuration",
+                    background: "Background Settings",
+                    margins: "Margin Settings"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.chartArea.expandText `String`
 
@@ -1338,6 +1821,24 @@ Specifies the title of the chartArea panel
 ### messages.format.chartArea.margins `Object`
 
 Specifies the text for the margins area of the chartArea panel
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            format: {
+                chartArea: {
+                    margins: {
+                        default: "Default Margins",
+                        custom: "Custom Margins"
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.chartArea.margins.default `String`
 
@@ -1488,6 +1989,24 @@ Specifies the text for the margin bottom label of the chartArea panel
 
 Specifies the text for the background area of the chartArea panel
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            format: {
+                chartArea: {
+                    background: {
+                        default: "Default Background",
+                        color: "Background Color"
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.chartArea.background.default `String`
 
 Specifies the text for the background legend of the chartArea panel
@@ -1549,6 +2068,23 @@ Specifies the text of the label for the color editor of the chartArea panel
 ### messages.format.title `Object`
 
 Specifies the text of the title panel.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            format: {
+                title: {
+                    expandText: "Title Configuration",
+                    color: "Title Color",
+                    font: "Title Font"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.title.expandText `String`
 
@@ -1824,6 +2360,23 @@ Specifies the text of the label for the color editor of the title panel
 
 Specifies the text of the series panel.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        messages: {
+            format: {
+                series: {
+                    expandText: "Series Configuration",
+                    color: "Series Color",
+                    labels: "Series Labels"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.series.expandText `String`
 
 Specifies the title of the series panel
@@ -1962,6 +2515,22 @@ Specifies the text of the checkbox label of the series panel
 ### messages.format.legend `Object`
 
 Specifies the text of the legend panel.
+
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                legend: {
+                    expandText: "Expand Legend",
+                    collapseText: "Collapse Legend"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.legend.expandText `String`
 
@@ -2157,6 +2726,27 @@ Specifies the text of the label for the color editor of the legend panel
 
 Specifies the text for the position DropDownList of the legend panel
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                legend: {
+                    position: {
+                        default: "Position",
+                        top: "Top",
+                        bottom: "Bottom",
+                        left: "Left",
+                        right: "Right"
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.legend.position.default `String`
 
 Specifies the text of label for the position editor of the legend panel
@@ -2307,6 +2897,22 @@ Specifies the text of position dropdownlist item which represent the right posit
 
 Specifies the text of the categoryAxis panel. The categoryAxis panel is visible only for categorical chart types.
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                categoryAxis: {
+                    expandText: "Category Axis",
+                    collapseText: "Collapse Category Axis"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.categoryAxis.expandText `String`
 
 Specifies the title of the categoryAxis panel
@@ -2337,6 +2943,25 @@ Specifies the title of the categoryAxis panel
 ### messages.format.categoryAxis.title `Object`
 
 Specifies the text for the title area of the categoryAxis panel
+
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                categoryAxis: {
+                    title: {
+                        text: "Title Text",
+                        color: "Title Color",
+                        font: "Title Font"
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.categoryAxis.title.text `String`
 
@@ -2546,6 +3171,26 @@ Specifies the text for the label of color editor for the title of the categoryAx
 
 Specifies the text for the labels area of the categoryAxis panel
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                categoryAxis: {
+                    labels: {
+                        text: "Labels Text",
+                        color: "Labels Color",
+                        font: "Labels Font",
+                        rotation: "Labels Rotation"
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.categoryAxis.labels.text `String`
 
 Specifies the text for the labels legend of the categoryAxis panel
@@ -2725,6 +3370,26 @@ Specifies the text for the label of color editor for the labels of the categoryA
 
 Specifies the text for the rotation area for the labels of the categoryAxis panel
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                categoryAxis: {
+                    labels: {
+                        rotation: {
+                            text: "Rotation",
+                            auto: "Auto"
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.categoryAxis.labels.rotation.text `String`
 
 Specifies the text for the label of the rotation editor for the labels of the categoryAxis panel
@@ -2818,6 +3483,22 @@ Specifies the text for the checkbox label of the categoryAxis panel
 
 Specifies the text of the valueAxis panel. The valueAxis panel is visible only for categorical chart types.
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                valueAxis: {
+                    expandText: "Value Axis",
+                    collapseText: "Collapse Value Axis"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.valueAxis.expandText `String`
 
 Specifies the title of the valueAxis panel
@@ -2848,6 +3529,25 @@ Specifies the title of the valueAxis panel
 ### messages.format.valueAxis.title `Object`
 
 Specifies the text for the title area of the valueAxis panel
+
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                valueAxis: {
+                    title: {
+                        text: "Title Text",
+                        color: "Title Color",
+                        font: "Title Font"
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.valueAxis.title.text `String`
 
@@ -3057,6 +3757,27 @@ Specifies the text for the label of color editor for the title of the valueAxis 
 
 Specifies the text for the labels area of the valueAxis panel
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                valueAxis: {
+                    labels: {
+                        text: "Labels Text",
+                        color: "Labels Color",
+                        font: "Labels Font",
+                        labelFormat: "Label Format",
+                        rotation: "Labels Rotation"
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.valueAxis.labels.text `String`
 
 Specifies the text for the labels legend of the valueAxis panel
@@ -3090,6 +3811,29 @@ Specifies the text for the labels legend of the valueAxis panel
 ### messages.format.valueAxis.labels.labelFormat `Object`
 
 Specifies the text for the labelFormat area of the valueAxis panel
+
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                valueAxis: {
+                    labels: {
+                        labelFormat: {
+                            default: "Default",
+                            text: "Text",
+                            number: "Number",
+                            currency: "Currency",
+                            percent: "Percent"
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.valueAxis.labels.labelFormat.default `String`
 
@@ -3396,6 +4140,26 @@ Specifies the text for the label of color editor for the labels of the valueAxis
 
 Specifies the text for the rotation area for the labels of the valueAxis panel
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                valueAxis: {
+                    labels: {
+                        rotation: {
+                            text: "Rotation",
+                            auto: "Auto"
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.valueAxis.labels.rotation.text `String`
 
 Specifies the text for the label of the rotation editor for the labels of the valueAxis panel
@@ -3462,6 +4226,22 @@ Specifies the text for the placeholder of the rotation editor for the labels of 
 
 Specifies the text of the xAxis panel. The xAxis panel is visible only for non-categorical chart types.
 
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                xAxis: {
+                    expandText: "X Axis",
+                    collapseText: "Collapse X Axis"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.format.xAxis.expandText `String`
 
 Specifies the title of the xAxis panel
@@ -3493,6 +4273,22 @@ Specifies the title of the xAxis panel
 ### messages.format.yAxis `Object`
 
 Specifies the text of the xAxis panel. The yAxis panel is visible only for non-categorical chart types.
+
+#### Example
+
+    <div id="chartwizard"></div>
+    <script>
+    $("#chartwizard").kendoChartWizard({
+        messages: {
+            format: {
+                yAxis: {
+                    expandText: "Y Axis",
+                    collapseText: "Collapse Y Axis"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.format.yAxis.expandText `String`
 
@@ -3723,15 +4519,74 @@ Specifies the state of the ChartWizard component. If a state object is provided,
 
 Specifies the columns to be used for the ChartWizard component. An array of strings should be provided.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            columns: [
+                "Product Name",
+                "Sales",
+                "Profit",
+                "Region"
+            ]
+        }
+    });
+    </script>
+
 ### state.data `Array`
 
 Specifies the data to be visualized in ChartWizard component.
 
 > ChartWizard component needs a specific type of data(`ChartWizardDataRow`) to work as expected. This type of data, which is an array consists of single or multiple arrays of Objects, which have the `field` and `value` properties.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            data: [
+                [
+                    { field: "Product", value: "Widget A" },
+                    { field: "Sales", value: 1000 },
+                    { field: "Profit", value: 250 }
+                ],
+                [
+                    { field: "Product", value: "Widget B" },
+                    { field: "Sales", value: 1500 },
+                    { field: "Profit", value: 400 }
+                ]
+            ]
+        }
+    });
+    </script>
+
 ### state.initialSeries `Array`
 
 The initial series configuration of the chart.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: [{
+                name: "Sales",
+                data: [
+                    { category: "Jan", value: 100 },
+                    { category: "Feb", value: 150 },
+                    { category: "Mar", value: 200 }
+                ],
+                field: "value",
+                categoryField: "category",
+                type: "column"
+            }]
+        }
+    });
+    </script>
 
 ### state.initialSeries.categoryField `String` *(default: "category")*
 
@@ -3739,13 +4594,55 @@ The data item field which contains the category name or date.
 
 > The points will be rendered in chronological order if the category is a date.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                categoryField: "month",
+                field: "sales"
+            }
+        }
+    });
+    </script>
+
 ### state.initialSeries.name `String`
 
 The name of the chart series which is visible in the legend.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                name: "Sales Data",
+                field: "sales"
+            }
+        }
+    });
+    </script>
+
 ### state.initialSeries.color `String`
 
 The series base color. The supported values are:
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                color: "#ff6800",
+                field: "sales"
+            }
+        }
+    });
+    </script>
 
 * CSS color string, including hex and rgb
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
@@ -3761,9 +4658,44 @@ Can be set to :
 * Array of arrays of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
 * Scatter and scatter line series need arrays of two values - X value and Y value
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                data: [
+                    { category: "Q1", value: 100 },
+                    { category: "Q2", value: 150 },
+                    { category: "Q3", value: 200 },
+                    { category: "Q4", value: 180 }
+                ]
+            }
+        }
+    });
+    </script>
+
 ### state.initialSeries.field `String` *(default: "value")*
 
 The data item field which contains the series value. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                field: "sales",
+                data: [
+                    { month: "Jan", sales: 100 },
+                    { month: "Feb", sales: 150 }
+                ]
+            }
+        }
+    });
+    </script>
 
 ### state.initialSeries.labels `Object`
 
@@ -3771,9 +4703,41 @@ The chart series label configuration.
 
 > The chart displays the series labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                labels: {
+                    visible: true,
+                    format: "{0:C}",
+                    color: "red"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.initialSeries.labels.visible `Boolean|Function` *(default: false)*
 
 If set to `true` the chart will display the series labels. By default chart series labels are not displayed.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                labels: {
+                    visible: true
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.initialSeries.stack `Boolean|String|Object` *(default: false)*
 
@@ -3784,12 +4748,42 @@ A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                stack: {
+                    type: "100%"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.initialSeries.stack.type `String` *(default: "normal")*
 
 The type of stack to plot. The following types are supported:
 
 * "normal" - the value of the stack is the sum of all points in the category (or group)
 * "100%" - the value of the stack is always 100% (1.00). Points within the category (or group) are represented as percentages.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                stack: {
+                    type: "100%"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.initialSeries.type `String` *(default: "column")*
 
@@ -3803,11 +4797,38 @@ The supported values are:
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`scatter`](/controls/charts/chart-types/scatter-charts)
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                type: "line"
+            }
+        }
+    });
+    </script>
+
 ### state.initialSeries.width `Number`
 
 The line width.
 
 > The `width` option is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "line".
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            initialSeries: {
+                type: "line",
+                width: 3
+            }
+        }
+    });
+    </script>
 
 ### state.series `Array`
 
@@ -3818,15 +4839,65 @@ If a type value is missing, the type is assumed to be the one specified in serie
 
 > Some options accept function as argument. They will be evaluated for each point (supplied as parameter). The theme/seriesDefaults value will be used if no value is returned.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                name: "Sales",
+                data: [100, 150, 200],
+                type: "column"
+            }, {
+                name: "Profit",
+                data: [20, 30, 40],
+                type: "line"
+            }]
+        }
+    });
+    </script>
+
 ### state.series.categoryField `String` *(default: "category")*
 
 The data item field which contains the category name or date.
 
 > The points will be rendered in chronological order if the category is a date.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                categoryField: "month",
+                data: [
+                    { month: "Jan", value: 100 },
+                    { month: "Feb", value: 150 }
+                ]
+            }]
+        }
+    });
+    </script>
+
 ### state.series.name `String`
 
 The name of the chart series which is visible in the legend.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                name: "Monthly Sales",
+                data: [100, 150, 200]
+            }]
+        }
+    });
+    </script>
 
 ### state.series.color `String|Function`
 
@@ -3834,6 +4905,20 @@ The series base color. The supported values are:
 
 * CSS color string, including hex and rgb
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                color: "#ff6600",
+                data: [100, 150, 200]
+            }]
+        }
+    });
+    </script>
 
 ### state.series.data `Array`
 
@@ -3846,9 +4931,40 @@ Can be set to :
 * Array of arrays of numbers. Supported when the [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) option is set to "scatter".
 * Scatter and scatter line series need arrays of two values - X value and Y value
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                data: [
+                    { quarter: "Q1", sales: 100 },
+                    { quarter: "Q2", sales: 150 },
+                    { quarter: "Q3", sales: 200 }
+                ]
+            }]
+        }
+    });
+    </script>
+
 ### state.series.field `String` *(default: "value")*
 
 The data item field which contains the series value. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                field: "revenue",
+                name: "Monthly Revenue"
+            }]
+        }
+    });
+    </script>
 
 ### state.series.labels `Object`
 
@@ -3856,9 +4972,41 @@ The chart series label configuration.
 
 > The chart displays the series labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                labels: {
+                    visible: true,
+                    format: "{0:C}",
+                    color: "blue"
+                }
+            }]
+        }
+    });
+    </script>
+
 ### state.series.labels.visible `Boolean|Function` *(default: false)*
 
 If set to `true` the chart will display the series labels. By default chart series labels are not displayed.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                labels: {
+                    visible: true
+                }
+            }]
+        }
+    });
+    </script>
 
 ### state.series.stack `Boolean|String|Object` *(default: false)*
 
@@ -3869,12 +5017,42 @@ A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                stack: {
+                    type: "100%"
+                }
+            }]
+        }
+    });
+    </script>
+
 ### state.series.stack.type `String` *(default: "normal")*
 
 The type of stack to plot. The following types are supported:
 
 * "normal" - the value of the stack is the sum of all points in the category (or group)
 * "100%" - the value of the stack is always 100% (1.00). Points within the category (or group) are represented as percentages.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                stack: {
+                    type: "100%"
+                }
+            }]
+        }
+    });
+    </script>
 
 ### state.series.type `String` *(default: "column")*
 
@@ -3888,99 +5066,463 @@ The supported values are:
 * [`pie`](/controls/charts/chart-types/pie-charts)
 * [`scatter`](/controls/charts/chart-types/scatter-charts)
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                type: "line",
+                data: [100, 150, 200]
+            }]
+        }
+    });
+    </script>
+
 ### state.series.width `Number`
 
 The line width.
 
 > The `width` option is supported when [series.type](/api/javascript/ui/chartwizard#configuration-state.series.type) is set to "line".
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            series: [{
+                type: "line",
+                width: 4,
+                data: [100, 150, 200]
+            }]
+        }
+    });
+    </script>
+
 ### state.title `Object|String`
 
 The chart title configuration options or text.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            title: {
+                text: "Sales Report",
+                color: "#333",
+                font: "16px Arial"
+            }
+        }
+    });
+    </script>
 
 ### state.title.color `String`
 
 The color of the chart title.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            title: {
+                color: "#ff0000"
+            }
+        }
+    });
+    </script>
+
 ### state.title.font `String`
 
 The font of the chart title.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            title: {
+                font: "18px Arial, sans-serif"
+            }
+        }
+    });
+    </script>
 
 ### state.title.text `String`
 
 The text of the chart title.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            title: {
+                text: "Annual Sales Report",
+                color: "#333",
+                font: "18px Arial"
+            }
+        }
+    });
+    </script>
+
 ### state.subtitle `Object`
 
 The chart subtitle configuration options or text.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            subtitle: {
+                text: "Q1-Q4 2023",
+                color: "#666",
+                font: "14px Arial"
+            }
+        }
+    });
+    </script>
 
 ### state.subtitle.color `String`
 
 The color of the chart subtitle.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            subtitle: {
+                color: "#999999"
+            }
+        }
+    });
+    </script>
+
 ### state.subtitle.font `String`
 
 The font of the chart subtitle.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            subtitle: {
+                font: "12px Arial, sans-serif"
+            }
+        }
+    });
+    </script>
 
 ### state.subtitle.text `String`
 
 The text of the chart subtitle.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            subtitle: {
+                text: "Quarterly Performance Report"
+            }
+        }
+    });
+    </script>
+
 ### state.area `Object` *(required)*
 
 The chart area configuration options. Represents the entire visible area of the chart.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                background: "#f5f5f5",
+                margin: {
+                    top: 20,
+                    right: 15,
+                    bottom: 25,
+                    left: 30
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.area.background `String`
 
 The background color of the chart area. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                background: "#ffffff"
+            }
+        }
+    });
+    </script>
+
 ### state.area.margin `Number|Object`
 
 The margin of the chart area. A numeric value will set all margins.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                margin: {
+                    top: 10,
+                    right: 15,
+                    bottom: 20,
+                    left: 25
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.area.margin.bottom `Number`
 
 The bottom margin of the chart area.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                margin: {
+                    bottom: 30
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.area.margin.left `Number`
 
 The left margin of the chart area.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                margin: {
+                    left: 40
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.area.margin.right `Number`
 
 The right margin of the chart area.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                margin: {
+                    right: 25
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.area.margin.top `Number`
 
 The top margin of the chart area.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            area: {
+                margin: {
+                    top: 15
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.categoryAxis `Array` *(required)*
 
 The category axis configuration options.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    color: "#333",
+                    font: "12px Arial",
+                    rotation: 45
+                },
+                title: {
+                    text: "Categories",
+                    color: "#666"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.labels `Object`
 
 The axis labels configuration.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    color: "#666",
+                    font: "11px Arial",
+                    format: "{0:MMM}",
+                    rotation: 30,
+                    visible: true
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.categoryAxis.labels.color `String`
 
 The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    color: "#ff0000"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    font: "14px 'Times New Roman'"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.categoryAxis.labels.format `String` *(default: "{0}")*
 
 The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    format: "{0:MMM yyyy}"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.labels.rotation `Number|String` *(default: 0)*
 
 The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    rotation: 45
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.labels.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the category axis labels. By default the category axis labels are visible.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                labels: {
+                    visible: false
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.categoryAxis.title `Object`
 
@@ -3988,13 +5530,60 @@ The title configuration of the category axis.
 
 > The [categoryAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                title: {
+                    text: "Time Period",
+                    color: "#333",
+                    font: "14px Arial"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.title.color `String`
 
 The text color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                title: {
+                    color: "#0066cc"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                title: {
+                    font: "18px 'Segoe UI'"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.categoryAxis.title.text `String`
 
@@ -4002,13 +5591,54 @@ The text of the title.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                title: {
+                    text: "Categories"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.reverse `Boolean` *(default: false)*
 
 The reverse option of the axis.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                reverse: true
+            }
+        }
+    });
+    </script>
+
 ### state.categoryAxis.categories `Array`
 
 The category names. The chart will create a category for every item of the array.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryAxis: {
+                categories: ["Q1", "Q2", "Q3", "Q4"]
+            }
+        }
+    });
+    </script>
 
 ### state.valueAxis `Array`
 
@@ -4016,25 +5646,125 @@ The value axis configuration options.
 
 If set to `true` the category axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                labels: {
+                    color: "#666",
+                    font: "12px Arial",
+                    format: "{0:C}"
+                },
+                title: {
+                    text: "Values",
+                    color: "#333"
+                },
+                reverse: false
+            }
+        }
+    });
+    </script>
+
 ### state.valueAxis.labels `Object`
 
 The axis labels configuration.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                labels: {
+                    color: "#333",
+                    font: "11px Arial",
+                    format: "{0:N0}",
+                    rotation: 0
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.valueAxis.labels.color `String`
 
 The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                labels: {
+                    color: "#0066cc"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.valueAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                labels: {
+                    font: "14px 'Georgia'"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.valueAxis.labels.format `String` *(default: "{0}")*
 
 The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                labels: {
+                    format: "{0:C2}"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.valueAxis.labels.rotation `Number|String` *(default: 0)*
 
 The rotation angle (in degrees) of the labels. By default the labels are not rotated. Angles increase clockwise and zero is to the left. Negative values are acceptable. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                labels: {
+                    rotation: -45
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.valueAxis.reverse `Boolean` *(default: false)*
 
@@ -4044,11 +5774,41 @@ If set to `true` the value axis direction will be reversed. By default categorie
 >
 > A reverse value axis is not supported for radar and polar charts.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                reverse: true
+            }
+        }
+    });
+    </script>
+
 ### state.valueAxis.title `Object`
 
 The title configuration of the value axis.
 
 > The [valueAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                title: {
+                    text: "Sales Amount",
+                    color: "#333",
+                    font: "14px Arial"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.valueAxis.title.text `String`
 
@@ -4056,29 +5816,138 @@ The text of the title.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                title: {
+                    text: "Revenue ($)"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.valueAxis.title.color `String`
 
 The color of the title.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                title: {
+                    color: "#009900"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.valueAxis.title.font `String`
 
 The font of the title.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueAxis: {
+                title: {
+                    font: "16px 'Segoe UI'"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.legend `Object`
 
 The chart legend configuration options.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            legend: {
+                position: "bottom",
+                visible: true,
+                labels: {
+                    color: "#333",
+                    font: "12px Arial"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.legend.labels `Object`
 
 The chart legend label configuration.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            legend: {
+                labels: {
+                    color: "#444",
+                    font: "11px Verdana"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.legend.labels.color `String` *(default: "black")*
 
 The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            legend: {
+                labels: {
+                    color: "#666666"
+                }
+            }
+        }
+    });
+    </script>
+
 ### state.legend.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            legend: {
+                labels: {
+                    font: "13px 'Tahoma'"
+                }
+            }
+        }
+    });
+    </script>
 
 ### state.legend.position `String` *(default: "right")*
 
@@ -4092,9 +5961,35 @@ The supported values are:
 * "right" - the legend is positioned on the right.
 * "custom" - the legend is positioned using [legend.offsetX](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/javascript/dataviz/ui/chart#configuration-legend.offsetY).
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            legend: {
+                position: "top"
+            }
+        }
+    });
+    </script>
+
 ### state.legend.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the legend. By default the chart legend is visible.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            legend: {
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### state.seriesType `String`
 
@@ -4108,9 +6003,33 @@ The supported series types are:
 * 'pie'
 * 'scatter'
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            seriesType: "line"
+        }
+    });
+    </script>
+
 ### state.stack `Boolean|Object` *(default: false)*
 
 The stack configuration of the series.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            stack: {
+                type: "100%"
+            }
+        }
+    });
+    </script>
 
 ### state.stack.type `String`
 
@@ -4144,13 +6063,49 @@ The supported stack values are:
 
 The field which represents the configuration of the [series.categoryField](/api/javascript/ui/chartwizard#configuration-state.series.categoryField).
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            categoryField: "month"
+        }
+    });
+    </script>
+
 ### state.valueField `String`
 
 The field which represents the configuration of the [series.valueField](/api/javascript/ui/chartwizard#configuration-state.series.valueField).
 
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        state: {
+            valueField: "sales"
+        }
+    });
+    </script>
+
 ### defaultState `Object`
 
 Specifies the default [seriesType](/api/javascript/ui/chartwizard#configuration-defaultState.seriesType) and [stack](/api/javascript/ui/chartwizard#configuration-defaultState.stack) of the ChartWizard component. If a [state](/api/javascript/ui/chartwizard#configuration-state) is not defined, the ChartWizard will use the values of the defaultState to create an initial state.
+
+#### Example
+
+    <div id="chart-wizard"></div>
+    <script>
+    $("#chart-wizard").kendoChartWizard({
+        defaultState: {
+            seriesType: "column",
+            stack: {
+                type: "normal"
+            }
+        }
+    });
+    </script>
 
 ### defaultState.seriesType `String`
 

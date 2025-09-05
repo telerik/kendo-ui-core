@@ -215,7 +215,6 @@ The type of result expected from the remote service. Used values are "html" and 
 
 #### Example - fetching and displaying JSON content it in the Window
 
-```pseudo
     <div id="dialog"></div>
 
     <script>
@@ -226,7 +225,6 @@ The type of result expected from the remote service. Used values are "html" and 
         }
       });
     </script>
-```
 
 ### content.iframe `Boolean`
 
@@ -238,7 +236,6 @@ To control the creation of iframe Window content, you have to explicitly configu
 
 #### Example - Explicitly configure an iframe
 
-```pseudo
     <div id="dialog"></div>
 
     <script>
@@ -250,7 +247,6 @@ To control the creation of iframe Window content, you have to explicitly configu
       }
     });
     </script>
-```
 
 ### content.template `String`
 
@@ -262,29 +258,17 @@ If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON res
 
 #### Example - fetching JSON and displaying it through a template
 
-```pseudo
-    <div id="dialog">
-        <p><strong>This example will not work unless you define a valid JSON service URL for `content.url`.</p>
-        <p>The expected JSON response is:
-            <pre>
-
-            { username: "...my username here..." }
-
-            </pre>
-        </strong></p>
-    </div>
-
+    <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
       content: {
-        url: "/userDetails",
+        url: "https://runner.telerik.io/fullscreen/tZWehimq.json",
         dataType: "json",
         iframe: false,
         template: ({ username }) => `User name: ${username}`
       }
     });
     </script>
-```
 
 ### draggable `Object|Boolean` *(default: true)*
 
@@ -547,9 +531,31 @@ A collection of one or two members which define the initial top and/or left posi
 
 Specifies the initial top position of the Window. Numeric values are treated as pixels. String values can specify pixels, percentages, ems, or other valid values.
 
+#### Example
+
+    <div id="window"></div>
+    <script>
+    $("#window").kendoWindow({
+      position: {
+        top: 150 // or "150px" or "20%"
+      }
+    });
+    </script>
+
 ### position.left `Number|String`
 
 Specifies the initial left position of the Window. Numeric values are treated as pixels. String values can specify pixels, percentages, ems or other valid values.
+
+#### Example
+
+    <div id="window"></div>
+    <script>
+    $("#window").kendoWindow({
+      position: {
+        left: 200 // or "200px" or "25%"
+      }
+    });
+    </script>
 
 ### resizable `Boolean` *(default: true)*
 

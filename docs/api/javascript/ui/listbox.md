@@ -199,6 +199,31 @@ Indicates whether the ListBox items can be dragged and dropped.
 > * The draggable option allows you to drag and drop items within a single or across multiple ListBoxes. If your project requires the multiple-widget scenario, set the `dropSources` option on the target widgets. If your project requires the single-widget scenario, the `dropSources` option is not necessary.
 > * If you set the `draggable` option to `true`, you also have to set `selectable`.
 
+#### Example
+
+    <select id="listBoxA">
+        <option>ItemA1</option>
+        <option>ItemA2</option>
+        <option>ItemA3</option>
+    </select>
+    <select id="listBoxB">
+        <option>ItemB1</option>
+        <option>ItemB2</option>
+        <option>ItemB3</option>
+    </select>
+    <script>
+    $("#listBoxA").kendoListBox({
+        draggable: true,
+        selectable: "single",
+        dropSources: ["listBoxB"]
+    });
+    $("#listBoxB").kendoListBox({
+        draggable: true,
+        selectable: "single",
+        dropSources: ["listBoxA"]
+    });
+    </script>
+
 ### draggable.enabled `Boolean` *(default: true)*
 
 Indicates whether dragging is enabled.
@@ -341,6 +366,32 @@ Indicates whether the keyboard navigation is enabled or disabled.
 ### messages `Object`
 
 Defines the localization texts for the ListBox. Used primarily for localization.
+
+#### Example
+
+    <select id="listBox">
+        <option>Orange</option>
+        <option>Apple</option>
+        <option>Banana</option>
+    </select>
+    <script>
+    $("#listBox").kendoListBox({
+        toolbar: {
+            tools: ["moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"]
+        },
+        messages: {
+            tools: {
+                moveUp: "Move Up",
+                moveDown: "Move Down", 
+                transferTo: "Transfer To",
+                transferFrom: "Transfer From",
+                transferAllTo: "Transfer All To",
+                transferAllFrom: "Transfer All From",
+                remove: "Remove"
+            }
+        }
+    });
+    </script>
 
 ### messages.tools `Object`
 
@@ -815,6 +866,8 @@ A string, DOM element, or jQuery object which represents the item. A string is t
 
 ### dataItems
 
+Returns an array of the data items that are bound to the ListBox widget. This method provides access to the underlying data objects, which can be useful for programmatic manipulation or inspection of the widget's data. The returned array contains observable objects that reflect the current state of the data source. Unlike the `items()` method which returns DOM elements, `dataItems()` returns the actual data objects.
+
 #### Returns
 
 `kendo.data.ObservableArray` An array of data items to which the widget is bound.
@@ -898,6 +951,8 @@ Obtains an array of the DOM elements which correspond to the data items from the
 #### Returns
 
 `Array` - The currently rendered view items ( depending on the item template, `<div>`, `<li>`, `<tr>`, and other elements).
+
+#### Example
 
     <select id="listBox">
         <option>Orange</option>

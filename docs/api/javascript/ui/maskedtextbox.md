@@ -66,6 +66,16 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <input id="maskedtextbox" />
+    <script>
+    $("#maskedtextbox").kendoMaskedTextBox({
+        mask: "000-000-0000",
+        inputMode: "numeric"
+    });
+    </script>
+
 
 ### label `String|Function|Object` *(default: null)*
 

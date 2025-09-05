@@ -261,6 +261,24 @@ The hierarchical name of the rows.
 
 The configuration used to load data items and discover schema information.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSource({
+      type: "xmla",
+      transport: {
+        connection: {
+          catalog: "Adventure Works DW 2008R2",
+          cube: "Adventure Works"
+        },
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+      },
+      schema: {
+        type: "xmla"
+      }
+    });
+    </script>
+
 ### transport.discover `Object|String|Function`
 
 The configuration which is used when the data source discovers the schema information about the current cube.
@@ -270,6 +288,29 @@ The configuration which is used when the data source discovers the schema inform
 * If the value of `transport.discover` is a function, the data source invokes that function instead of `jQuery.ajax`.
 * If the value of `transport.discover` is a string, the data source uses this string as the URL of the remote service.
 * If the value of `transport.discover` is omitted, the data source uses `transport.read` for schema discovery.
+
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSource({
+      type: "xmla",
+      transport: {
+        connection: {
+          catalog: "Adventure Works DW 2008R2",
+          cube: "Adventure Works"
+        },
+        discover: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+      },
+      schema: {
+        type: "xmla"
+      }
+    });
+    dataSource.schemaDimensions().done(function(dimensions) {
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(dimensions.length);
+    });
+    </script>
 
 #### Set the discover remote service
 
@@ -299,6 +340,24 @@ The configuration which is used when the data source discovers the schema inform
 ### transport.connection `Object`
 
 The configuration that is used for setting the connection options.
+
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSource({
+      type: "xmla",
+      transport: {
+        connection: {
+          catalog: "Adventure Works DW 2008R2",
+          cube: "Adventure Works"
+        },
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+      },
+      schema: {
+        type: "xmla"
+      }
+    });
+    </script>
 
 ### transport.connection.catalog `String`
 
@@ -347,6 +406,25 @@ The cube name in the current data source.
 ### schema `Object`
 
 The schema configuration of the PivotDataSource.
+
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.PivotDataSource({
+      type: "xmla",
+      transport: {
+        connection: {
+          catalog: "Adventure Works DW 2008R2",
+          cube: "Adventure Works"
+        },
+        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+      },
+      schema: {
+        type: "xmla",
+        cubes: "Catalogs"
+      }
+    });
+    </script>
 
 ### schema.axes `Function|String`
 

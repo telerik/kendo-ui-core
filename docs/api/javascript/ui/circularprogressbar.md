@@ -47,6 +47,16 @@ Template variables:
 
 The color of the value pointer. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="progressbar"></div>
+    <script>
+     $("#progressbar").kendoCircularProgressBar({
+        value: 70,
+        color: "#ff6358"
+     });
+    </script>
+
 ### colors `Array`
 
 The color ranges of the value pointer. The pointer color will be set to the color from the range that contains the current value.
@@ -79,13 +89,73 @@ The color ranges of the value pointer. The pointer color will be set to the colo
 
 The color of the pointer in the specified range.
 
+#### Example
+
+    <div id="progressbar"></div>
+    <script>
+     $("#progressbar").kendoCircularProgressBar({
+        value: 40,
+        colors: [{
+            to: 50,
+            color: '#e74c3c'
+        }, {
+            from: 50,
+            color: '#2ecc71'
+        }]
+     });
+    </script>
+
 ### colors.from `Number`
 
 The lower range value of the applied color.
 
+#### Example
+
+    <div id="progressbar"></div>
+    <script>
+     $("#progressbar").kendoCircularProgressBar({
+        value: 60,
+        colors: [{
+            from: 0,
+            to: 30,
+            color: '#e74c3c'
+        }, {
+            from: 30,
+            to: 70,
+            color: '#f39c12'
+        }, {
+            from: 70,
+            to: 100,
+            color: '#2ecc71'
+        }]
+     });
+    </script>
+
 ### colors.to `Number`
 
 The upper range value of the applied color.
+
+#### Example
+
+    <div id="progressbar"></div>
+    <script>
+     $("#progressbar").kendoCircularProgressBar({
+        value: 25,
+        colors: [{
+            from: 0,
+            to: 25,
+            color: '#e74c3c'
+        }, {
+            from: 25,
+            to: 75,
+            color: '#f39c12'
+        }, {
+            from: 75,
+            to: 100,
+            color: '#2ecc71'
+        }]
+     });
+    </script>
 
 ### label `String`
 
@@ -182,6 +252,8 @@ A value indicating if transition animations should be played.
 
 A value indicating whether endloess loading is enabled
 
+#### Example
+
     <div id="progressbar"></div>
     <script>
      $("#progressbar").kendoCircularProgressBar({
@@ -192,6 +264,8 @@ A value indicating whether endloess loading is enabled
 ### pointerWidth `Number`*(default: true)*
 
 A value indicating how wide will the pointer be
+
+#### Example
 
     <div id="progressbar"></div>
     <script>
@@ -206,6 +280,8 @@ A value indicating how wide will the pointer be
 The component value.
 
 > **Note:** The value should be a number between 0 and 100.
+
+#### Example
 
     <div id="progressbar"></div>
     <script>

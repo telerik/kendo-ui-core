@@ -2054,9 +2054,51 @@ The text message that is displayed for the filter menu item.
 
 The text message that is displayed for the Move to next position column menu item.
 
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        columnMenu: {
+          messages: {
+            moveNext: "Move to Next Position"
+          }
+        }
+      });
+    </script>
+
 ### columnMenu.messages.movePrev `String` *(default: "Move Previous")*
 
 The text message that is displayed for the Move to previous position column menu item.
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        columnMenu: {
+          messages: {
+            movePrev: "Move to Previous Position"
+          }
+        }
+      });
+    </script>
 
 ### columnMenu.messages.sortAscending `String` *(default: "Sort Ascending")*
 
@@ -2777,6 +2819,26 @@ Configures the Kendo UI Window instance which is used when the TreeList edit mod
 
 Configures the Excel export settings of the TreeList.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        excel: {
+          fileName: "TreeListData.xlsx",
+          allPages: true
+        }
+      });
+    </script>
+
 ### excel.allPages `Boolean` *(default: false)*
 
 If set to `true` the TreeList will export all pages of data. By default the TreeList exports only the current page.
@@ -2898,6 +2960,27 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
 ### excel.forceProxy `Boolean` *(default: false)*
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-excel.proxyURL) even if the browser supports local file saving.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        excel: {
+          fileName: "TreeListData.xlsx",
+          forceProxy: true,
+          proxyURL: "/save"
+        }
+      });
+    </script>
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -3172,6 +3255,27 @@ The text of the information message on top of the filter menu.
 
 The text that is rendered for the `title` attribute of the filter menu form.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          messages: {
+            title: "Filter by value:"
+          }
+        }
+      });
+    </script>
+
 ### filterable.messages.isFalse `String` *(default: "is false")*
 
 The text of the radio button for `false` values. Displayed when the user filters Boolean fields.
@@ -3397,41 +3501,271 @@ In the following example, only the `Contains...` and `Starts with...` operators 
 
 The text of the `eq` (equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              eq: "Equals"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.string.neq `String` *(default: "Is not equal to")*
 
 The text of the `ne` (not equal to) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              neq: "Not equal to"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.string.isnull `String` *(default: "Is null")*
 
 The text of the `isnull` filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              isnull: "Is null"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.string.isnotnull `String` *(default: "Is not null")*
 
 The text of the `isnotnull` filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              isnotnull: "Is not null"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.string.isempty `String` *(default: "Is empty")*
 
 The text of the `isempty` filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              isempty: "Is empty"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.string.isnotempty `String` *(default: "Is not empty")*
 
 The text of the `isnotempty` filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              isnotempty: "Is not empty"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.string.startswith `String` *(default: "Starts with")*
 
 The text of the `startswith` filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              startswith: "Starts with"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.string.contains `String` *(default: "Contains")*
 
 The text of the `contains` filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              contains: "Contains"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.string.doesnotcontain `String` *(default: "Does not contain")*
 
 The text of the `doesnotcontain` filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              doesnotcontain: "Does not contain"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.string.endswith `String` *(default: "Ends with")*
 
 The text of the `endswith` filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            string: {
+              endswith: "Ends with"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.number `Object`
 
@@ -3480,33 +3814,217 @@ In the following example, only the `Equal to...` and `Not equal to...` operators
 
 The text of the `eq` (equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              eq: "Equals"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.number.neq `String` *(default: "Is not equal to")*
 
 The text of the `ne` (not equal to) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              neq: "Not equal to"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.number.isnull `String` *(default: "Is null")*
 
 The text of the `isnull` filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              isnull: "Is null"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.number.isnotnull `String` *(default: "Is not null")*
 
 The text of the `isnotnull` filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              isnotnull: "Is not null"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.number.gte `String` *(default: "Is greater than or equal to")*
 
 The text of the `gte` (greater than or equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              gte: "Greater than or equal to"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.number.gt `String` *(default: "Is greater than")*
 
 The text of the `gt` (greater than) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              gt: "Greater than"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.number.lte `String` *(default: "Is less than or equal to")*
 
 The text of the `lte` (less than or equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              lte: "Less than or equal to"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.number.lt `String` *(default: "Is less than")*
 
 The text of the `lt` (less than) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Age", type: "number" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Age: 45, parentId: null },
+          { id: 2, Name: "Guy Wooten", Age: 35, parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            number: {
+              lt: "Less than"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.date `Object`
 
@@ -3555,33 +4073,217 @@ In the following example, only the `Is before...` and `Is after...` operators wi
 
 The text of the `eq` (equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              eq: "Equals"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.date.neq `String` *(default: "Is not equal to")*
 
 The text of the `ne` (not equal to) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              neq: "Not equal to"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.date.isnull `String` *(default: "Is null")*
 
 The text of the `isnull` filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              isnull: "Is null"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.date.isnotnull `String` *(default: "Is not null")*
 
 The text of the `isnotnull` filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              isnotnull: "Is not null"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.date.gte `String` *(default: "Is after or equal to")*
 
 The text of the `gte` (greater than or equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              gte: "Is after or equal to"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.date.gt `String` *(default: "Is after")*
 
 The text of the `gt` (greater than) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              gt: "Is after"
+            }
+          }
+        }
+      });
+    </script>
 
 ### filterable.operators.date.lte `String` *(default: "Is before or equal to")*
 
 The text of the "lte" (less than or equal to) filter operator.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              lte: "Is before or equal to"
+            }
+          }
+        }
+      });
+    </script>
+
 ### filterable.operators.date.lt `String` *(default: "Is before")*
 
 The text of the `lt` (less than) filter operator.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "HireDate", type: "date" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", HireDate: new Date("2023/1/1"), parentId: null },
+          { id: 2, Name: "Guy Wooten", HireDate: new Date("2023/2/1"), parentId: 1 }
+        ],
+        filterable: {
+          operators: {
+            date: {
+              lt: "Is before"
+            }
+          }
+        }
+      });
+    </script>
 
 ### height `Number|String`
 
@@ -4270,6 +4972,26 @@ Specifies a value whether the page sizes dropdown will be adaptive. Possible val
 * `none` - The current page.
 * `auto` - The total number of pages.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pageable: {
+          adaptiveMode: "auto",
+          pageSize: 5
+        }
+      });
+    </script>
+
 ### pageable.buttonCount `Number` *(default: 10)*
 
 The maximum number of buttons that are displayed in the numeric pager. If more pages than the specified number are rendered, the pager will display ellipsis (`...`).
@@ -4441,6 +5163,25 @@ If set to `false`, the pager will not be responsive. By default, the pager is re
 
 If set to `true`, the pager will display information about the current page and the total number of data items. By default, the paging information is displayed.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pageable: {
+          info: false
+        }
+      });
+    </script>
+
 ##### Example - hiding the paging information
 
     <div id="treeList"></div>
@@ -4468,6 +5209,28 @@ If set to `true`, the pager will display information about the current page and 
 ### pageable.messages `Object`
 
 The text messages that are displayed in the pager. Use this option to customize or localize the pager messages.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pageable: {
+          messages: {
+            display: "Showing {0} to {1} of {2} entries",
+            empty: "No data available"
+          }
+        }
+      });
+    </script>
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
@@ -4814,6 +5577,26 @@ The tooltip of the **...** (ellipsis) button which appears when the number of pa
 
 Configures the PDF export settings of the TreeList.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          fileName: "TreeListData.pdf",
+          allPages: true
+        }
+      });
+    </script>
+
 ### pdf.allPages `Boolean` *(default: false)*
 
 Exports all TreeList pages, starting from the first one.
@@ -4905,9 +5688,47 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          autoPrint: true
+        }
+      });
+    </script>
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 
 (Available as of the 2015.3.1020 release) A flag which indicates whether to produce actual hyperlinks in the exported PDF file. You can also pass a CSS selector as an argument. All matching links will be ignored.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          avoidLinks: true
+        }
+      });
+    </script>
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -5030,13 +5851,71 @@ Specifies the file name of the exported PDF file.
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          forceProxy: true,
+          proxyURL: "/save"
+        }
+      });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          jpegQuality: 0.8
+        }
+      });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          keepPNG: true
+        }
+      });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -5171,17 +6050,101 @@ The supported units are:
 
 The bottom margin. Numbers are considered as `pt` units.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          margin: {
+            bottom: 20
+          }
+        }
+      });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as `pt` units.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          margin: {
+            left: 25
+          }
+        }
+      });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as `pt` units.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          margin: {
+            right: 25
+          }
+        }
+      });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as `pt` units.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdf: {
+          margin: {
+            top: 25
+          }
+        }
+      });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -5499,6 +6462,26 @@ If set to `true`, the TreeList will display a scrollbar when the total row heigh
 ### search `Object`
 
 Configures the Kendo UI TreeList search bar settings.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: ["search"],
+        search: {
+          fields: ["Name", "Position"]
+        }
+      });
+    </script>
 
 ### search.fields `Array`
 
@@ -5979,28 +6962,178 @@ The text that is displayed by the command button. If not set, the TreeList will 
 
 A JavaScript array that contains the ToolBar's commands configuration.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf" },
+            { name: "excel" },
+            { name: "custom", text: "Custom", click: function() { console.log("Custom clicked"); } }
+          ]
+        }
+      });
+    </script>
+
 ### toolbar.items.click `Function`
 
 The `click` handler of the toolbar command. Used for custom toolbar commands.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            {
+              name: "custom",
+              text: "Custom Action", 
+              click: function(e) { 
+                console.log("Custom action clicked"); 
+                alert("Custom toolbar button clicked!");
+              } 
+            }
+          ]
+        }
+      });
+    </script>
 
 
 ### toolbar.items.icon `String`
 
 Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            {
+              name: "settings",
+              text: "Settings", 
+              icon: "k-icon k-i-gear"
+            }
+          ]
+        }
+      });
+    </script>
+
 
 ### toolbar.items.imageClass `String`
 
 A class name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            {
+              name: "custom",
+              text: "Custom", 
+              imageClass: "custom-toolbar-icon"
+            }
+          ]
+        }
+      });
+    </script>
+
 ### toolbar.items.name `String`
 
 The name of the toolbar command. Can be either a built-in ("create", "excel", or "pdf") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf", text: "Export to PDF" },
+            { name: "excel", text: "Export to Excel" }
+          ]
+        }
+      });
+    </script>
 
 
 ### toolbar.items.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button. Uses the template for a ToolBar item [toolbar.items.template](/api/javascript/ui/toolbar/configuration/items.template)
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { 
+              template: (data) => `<button class='k-button' onclick='myFunction()'>Custom Button</button>`
+            }
+          ]
+        }
+      });
+      
+      function myFunction() {
+        console.log("Custom template button clicked");
+      }
+    </script>
 
 
 > Check [Toolbar template](https://demos.telerik.com/kendo-ui/treelist/toolbar-template) for a live demo.
@@ -6009,8 +7142,57 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/javascript/ui/treelist#configuration-toolbar.name)` option as the button text instead.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf", text: "Export to PDF" },
+            { name: "excel", text: "Export to Excel" }
+          ]
+        }
+      });
+    </script>
+
 ### toolbar.overflow `Object`
 Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf" },
+            { name: "excel" },
+            { name: "custom1", text: "Custom1" },
+            { name: "custom2", text: "Custom2" }
+          ],
+          overflow: {
+            mode: "menu"
+          }
+        }
+      });
+    </script>
 
 
 ### toolbar.overflow.mode `String` *(default: "menu")*
@@ -6021,6 +7203,33 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf" },
+            { name: "excel" },
+            { name: "custom1", text: "Custom1" },
+            { name: "custom2", text: "Custom2" }
+          ],
+          overflow: {
+            mode: "scroll"
+          }
+        }
+      });
+    </script>
+
 
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
@@ -6029,6 +7238,34 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+    $("#treelist").kendoTreeList({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id: 1, parentId: null, name: "Jane Doe", age: 30 },
+        { id: 2, parentId: 1, name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        overflow: {
+          mode: "scroll",
+          scrollButtons: "visible"
+        },
+        items: [
+          { name: "create" },
+          { name: "save" },
+          { name: "cancel" },
+          { name: "pdf" },
+          { name: "excel" }
+        ]
+      }
+    });
+    </script>
 
 ### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
 
@@ -6037,10 +7274,66 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf" },
+            { name: "excel" },
+            { name: "custom1", text: "Custom1" },
+            { name: "custom2", text: "Custom2" }
+          ],
+          overflow: {
+            mode: "scroll",
+            scrollButtonsPosition: "start"
+          }
+        }
+      });
+    </script>
+
 
 ### toolbar.overflow.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        toolbar: {
+          items: [
+            { name: "pdf" },
+            { name: "excel" },
+            { name: "custom1", text: "Custom1" },
+            { name: "custom2", text: "Custom2" }
+          ],
+          overflow: {
+            mode: "scroll",
+            scrollDistance: 100
+          }
+        }
+      });
+    </script>
 
 
 
@@ -6078,29 +7371,170 @@ The columns of the TreeList that are initialized from the [`columns`](/api/javas
 
 The jQuery object which represents the TreeList `table` element.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Access the table element
+      var table = treelist.table;
+      console.log(table);
+    </script>
+
 ### tbody `jQuery`
 
 The jQuery object which represents the table body. Contains all TreeList table rows.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Access the tbody element
+      var tbody = treelist.tbody;
+      console.log(tbody);
+    </script>
 
 ### thead `jQuery`
 
 The jQuery object which represents the TreeList table header element.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Access the thead element
+      var thead = treelist.thead;
+      console.log(thead);
+    </script>
+
 ### content `jQuery`
 
 The jQuery object which represents the TreeList `content` element which holds the scrollable content. Available only when `scrollable` is set to `true`.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        scrollable: true
+      }).data("kendoTreeList");
+      
+      // Access the content element
+      var content = treelist.content;
+      console.log(content);
+    </script>
 
 ### lockedHeader `jQuery`
 
 The jQuery object which represents the TreeList locked `header` element. Available only in a TreeList with locked columns.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name", locked: true },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Access the locked header element
+      var lockedHeader = treelist.lockedHeader;
+      console.log(lockedHeader);
+    </script>
+
 ### lockedTable `jQuery`
 
 The jQuery object which represents the TreeList locked `table` element. Available only in a TreeList with locked columns.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name", locked: true },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Access the locked table element
+      var lockedTable = treelist.lockedTable;
+      console.log(lockedTable);
+    </script>
+
 ### lockedContent `jQuery`
 
 The jQuery object which represents the TreeList locked `content` element. Available only in a TreeList with locked columns.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name", locked: true },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Access the locked content element
+      var lockedContent = treelist.lockedContent;
+      console.log(lockedContent);
+    </script>
 
 ## Methods
 
@@ -6727,6 +8161,28 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
 Retrieves the options that are currently enabled or disabled on the Treelist, also gives the current state of the dataSource.
 Use this method if you want to save the state of the Treelist into a variable. It is also possible to extract and store only some of the Treelist options.
 
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        sortable: true,
+        filterable: true
+      }).data("kendoTreeList");
+      
+      // Get current options
+      var options = treelist.getOptions();
+      console.log(options);
+    </script>
+
 ### itemFor
 
 (Available as of the 2015.3.930 release) Returns the rendered HTML element for a given model.
@@ -6771,6 +8227,26 @@ A model from the DataSource, or the `id` of a model in the DataSource.
 ### items
 
 Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource/methods/view) of the data source.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      }).data("kendoTreeList");
+      
+      // Get all rendered items
+      var items = treelist.items();
+      console.log("Number of rendered items:", items.length);
+    </script>
 
 #### Returns
 

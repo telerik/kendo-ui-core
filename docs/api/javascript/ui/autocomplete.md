@@ -18,13 +18,46 @@ Represents the Kendo UI AutoComplete widget. Inherits from [Widget](/api/javascr
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        adaptiveMode: "auto"
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Fruit"
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Fruit",
+        adaptiveSubtitle: "Choose from available options"
+    });
+    </script>
 
 ### animation `Boolean|Object`
 
@@ -81,11 +114,39 @@ The animation played when the suggestion popup is closed.
 
 The duration of the close animation in milliseconds.
 
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        animation: {
+            close: {
+                duration: 500
+            }
+        }
+    });
+    </script>
+
 ### animation.close.effects `String`
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
 [Complete list of available animations](/api/javascript/effects/common)
+
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        animation: {
+            close: {
+                effects: "zoomOut"
+            }
+        }
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -98,7 +159,7 @@ The animation played when the suggestion popup is opened.
     $("#autocomplete").kendoAutoComplete({
       animation: {
        open: {
-         effects: "zoom:in",
+         effects: "zoomIn",
          duration: 300
        }
       }
@@ -109,11 +170,39 @@ The animation played when the suggestion popup is opened.
 
 The duration of the open animation in milliseconds.
 
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        animation: {
+            open: {
+                duration: 800
+            }
+        }
+    });
+    </script>
+
 ### animation.open.effects `String`
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
 [Complete list of available animations](/api/javascript/effects/common)
+
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Orange", "Banana"],
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        }
+    });
+    </script>
 
 ### autoWidth `Boolean`
 
@@ -301,6 +390,8 @@ all data items which begin with the current widget value are displayed in the su
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
+#### Example
+
     <input id="customers" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -346,6 +437,16 @@ The widget instance.
 ### inputMode `String`*(default: "text")*
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
+
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["1", "2", "3", "4", "5"],
+        inputMode: "numeric"
+    });
+    </script>
 
 ### label `String|Function|Object` *(default: null)*
 
@@ -449,6 +550,25 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+
+#### Example
+
+    <input id="customers" style="width: 400px" />
+    <script>
+    $(document).ready(function() {
+        $("#customers").kendoAutoComplete({
+            dataTextField: "ContactName",
+            groupTemplate: (data) => `<strong>Country: ${data}</strong>`,
+            height: 400,
+            dataSource: {
+                transport: {
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
+                },
+                group: { field: "Country" }
+            }
+        });
+    });
+    </script>
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -1165,6 +1285,30 @@ The changes introduced with the Kendo UI R3 2016 release enable you to determine
 
 For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
 
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataTextField: "ProductName",
+        dataSource: {
+            transport: {
+                read: "https://demos.telerik.com/service/v2/core/Products"
+            },
+            serverFiltering: true
+        },
+        virtual: {
+            itemHeight: 26,
+            valueMapper: function(options) {
+                // Custom value mapping logic
+                console.log("Value mapper called with:", options.value);
+                options.success(options.value);
+            },
+            mapValueTo: "dataItem" // Map to dataItem instead of index
+        }
+    });
+    </script>
+
 ### virtual.valueMapper `Function`*(default: null)*
 
 > **Important**
@@ -1407,6 +1551,30 @@ Focuses the widget.
 ### items
 
 Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view) (e.g. the ones that match the user's last filtering input).
+
+#### Example
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: ["Apple", "Banana", "Cherry", "Date", "Elderberry"],
+        filter: "startswith",
+        suggest: true
+    });
+    
+    // Get reference to the autocomplete widget
+    var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+    
+    // Type some text to filter the items
+    autocomplete.search("a");
+    
+    // Get the currently rendered items
+    setTimeout(function() {
+        var items = autocomplete.items();
+        console.log("Number of rendered items:", items.length);
+        console.log("First item text:", items.first().text());
+    }, 100);
+    </script>
 
 #### Returns
 

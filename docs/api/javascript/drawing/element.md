@@ -13,6 +13,25 @@ An abstract base class representing common members of all drawing elements.
 ### options `Object`
 The configuration of this element.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var options = {
+            opacity: 0.7,
+            visible: true,
+            transform: geom.transform().scale(1.5, 1.5)
+        };
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 50), options);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
+
 ## Configuration
 
 ### clip `kendo.drawing.Path`
@@ -62,24 +81,140 @@ Applicable to an SVG output.
 ### opacity `Number`
 The element opacity.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 50), {
+            opacity: 0.3,
+            fill: { color: "blue" }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
+
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new draw.Rect(new geom.Rect([50, 50], [100, 50]), {
+            transform: geom.transform().rotate(45, [100, 75]),
+            fill: { color: "green" }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(rect);
+    </script>
+
 ### visible `Boolean`
 A flag, indicating if the element is visible.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var visibleCircle = new draw.Circle(new geom.Circle([75, 75], 40), {
+            visible: true,
+            fill: { color: "red" }
+        });
+
+        var hiddenCircle = new draw.Circle(new geom.Circle([125, 75], 40), {
+            visible: false,
+            fill: { color: "blue" }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(visibleCircle);
+        surface.draw(hiddenCircle);
+    </script>
 
 ## Fields
 
 ### options `kendo.drawing.OptionsStore`
 The configuration options of the drawing element.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 50), {
+            fill: { color: "purple" },
+            opacity: 0.8
+        });
+
+        console.log("Element options:", circle.options);
+        console.log("Fill color:", circle.options.fill.color);
+        console.log("Opacity:", circle.options.opacity);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
+
 ### parent `kendo.drawing.Group`
 The parent group element, if any.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var group = new draw.Group();
+        var circle = new draw.Circle(new geom.Circle([100, 100], 50), {
+            fill: { color: "orange" }
+        });
+
+        group.append(circle);
+
+        console.log("Circle parent:", circle.parent);
+        console.log("Is parent a Group?", circle.parent instanceof draw.Group);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(group);
+    </script>
 
 ## Methods
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new draw.Rect(new geom.Rect([50, 50], [100, 60]), {
+            fill: { color: "cyan" },
+            transform: geom.transform().scale(1.5, 1.5)
+        });
+
+        var bbox = rect.bbox();
+        console.log("Bounding box:", bbox);
+        console.log("Origin:", bbox.origin);
+        console.log("Size:", bbox.size);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(rect);
+    </script>
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with transformations applied.
@@ -143,11 +278,57 @@ Returns the bounding box of the element with clipping and transformations applie
 
 This is the rectangle that will fit around the actual rendered element.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var clipPath = new draw.Path();
+        clipPath.moveTo(50, 50).lineTo(150, 50).lineTo(150, 100).lineTo(50, 100).close();
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 60), {
+            clip: clipPath,
+            fill: { color: "red" }
+        });
+
+        var clippedBBox = circle.clippedBBox();
+        var bbox = circle.bbox();
+
+        console.log("Regular bounding box:", bbox);
+        console.log("Clipped bounding box:", clippedBBox);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
+
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping and transformations applied.
 
 ### containsPoint
 Returns true if the shape contains the specified point.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 50), {
+            fill: { color: "lightblue" }
+        });
+
+        var pointInside = new geom.Point(100, 100);
+        var pointOutside = new geom.Point(200, 200);
+
+        console.log("Point (100,100) inside circle:", circle.containsPoint(pointInside));
+        console.log("Point (200,200) inside circle:", circle.containsPoint(pointOutside));
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
 
 #### Parameters
 
@@ -211,6 +392,35 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 50), {
+            fill: { color: "yellow" }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+
+        console.log("Initial visibility:", circle.visible());
+
+        // Hide the element after 2 seconds
+        setTimeout(function() {
+            circle.visible(false);
+            console.log("Visibility after hiding:", circle.visible());
+        }, 2000);
+
+        // Show it again after 4 seconds
+        setTimeout(function() {
+            circle.visible(true);
+            console.log("Visibility after showing:", circle.visible());
+        }, 4000);
+    </script>
 
 #### Parameters
 

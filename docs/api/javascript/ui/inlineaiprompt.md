@@ -202,17 +202,65 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
 
 Specifies the width of the Popup.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        popup: {
+            width: 400
+        }
+    });
+    </script>
+
 ### popup.height `Number | String`
 
 Specifies the height of the Popup.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        popup: {
+            height: 300
+        }
+    });
+    </script>
 
 ### popup.animation `Boolean | Object`
 
 Configures the opening and closing animations of the popup. The same limitations apply as the originating widget's [`animation`](/api/javascript/ui/popup/configuration/animation) configuration.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        popup: {
+            animation: {
+                open: { effects: "fade:in", duration: 300 },
+                close: { effects: "fade:out", duration: 200 }
+            }
+        }
+    });
+    </script>
+
 ### popup.appendTo `String|jQuery` *(default: document.body)*
 
 Which element the popup will be appended to. The principles apply as per the widget's originating [`appendTo`](/api/javascript/ui/popup/configuration/appendto) configuration.
+
+#### Example
+
+    <div id="container"></div>
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        popup: {
+            appendTo: "#container"
+        }
+    });
+    </script>
 
 ### speechToText `Boolean|Object` *(default: false)*
 
@@ -255,6 +303,17 @@ Specifies the integration mode for speech recognition. Available modes:
 - `"webSpeech"` - Uses the Web Speech API
 - `"none"` - Provides button without actual speech recognition
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        speechToText: {
+            integrationMode: "webSpeech"
+        }
+    });
+    </script>
+
 ### speechToText.lang `String` *(default: "en-US")*
 
 Specifies the language code for speech recognition.
@@ -273,19 +332,61 @@ Specifies the language code for speech recognition.
 
 Specifies whether to continue listening after a result is received.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        speechToText: {
+            continuous: true
+        }
+    });
+    </script>
+
 ### speechToText.interimResults `Boolean` *(default: false)*
 
 Specifies whether to return interim results during speech recognition.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        speechToText: {
+            interimResults: true
+        }
+    });
+    </script>
+
 ### speechToText.maxAlternatives `Number` *(default: 1)*
 
 Specifies the maximum number of alternatives to return from speech recognition.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        speechToText: {
+            maxAlternatives: 3
+        }
+    });
+    </script>
 
 ### responseTemplate `String | Function`
 
 A template function for customizing the display of output content. This function is called when an output's and final content needs to be rendered.
 
 The function receives an object with `output` (the output data) and `prompt` (the output prompt text) properties and should return HTML string.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        responseTemplate: (data) => `<div class="custom-response"><strong>Prompt:</strong> ${data.prompt}<br><strong>Response:</strong> ${data.output}</div>`
+    });
+    </script>
 
     $("#inlineaiprompt").kendoInlineAIPrompt({
            responseTemplate: function(response) {
@@ -414,21 +515,91 @@ The commands to display in the Prompt's Context Menu.
 
 The id of the command item.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "summarize",
+            text: "Summarize",
+            icon: "file-text"
+        }]
+    });
+    </script>
+
 ### commands.text `String`
 
 The text of the command item.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "translate",
+            text: "Translate to Spanish",
+            icon: "translate"
+        }]
+    });
+    </script>
 
 ### commands.icon `String`
 
 The icon name of the command item.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "explain",
+            text: "Explain",
+            icon: "info-circle"
+        }]
+    });
+    </script>
+
 ### commands.prompt `Function`
 
 The prompt that will be composed for the command.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "summarize",
+            text: "Summarize",
+            icon: "file-text",
+            prompt: (context) => `Please summarize the following text: ${context.selectedText}`
+        }]
+    });
+    </script>
+
 ### commands.items `Object`
 
 Allows nesting commands in a hierarchical manner.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commands: [{
+            id: "translate",
+            text: "Translate",
+            icon: "translate",
+            items: [
+                { id: "translate-es", text: "Spanish", prompt: (context) => `Translate to Spanish: ${context.selectedText}` },
+                { id: "translate-fr", text: "French", prompt: (context) => `Translate to French: ${context.selectedText}` }
+            ]
+        }]
+    });
+    </script>
 
 ### outputActions `Array` *(default: ["copy", "retry", "discard"])*
 
@@ -519,7 +690,7 @@ The icon name for the action button. Uses Kendo UI icon names.
     <script>
     $("#inlineaiprompt").kendoInlineAIPrompt({
         outputActions: [
-            { command: "bookmark", text: "Bookmark", icon: "bookmark" },
+            { command: "bookmark", text: "Bookmark", icon: "star" },
             { command: "share", text: "Share", icon: "share" }
         ]
     });
@@ -603,29 +774,107 @@ Specifies the title attribute (tooltip) for the action button.
 
 The text messages displayed in the prompt send and stop output retrieval buttons.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            promptSend: "Send Message",
+            stopOutputRetrieval: "Stop Generation"
+        }
+    });
+    </script>
+
 ### messages.promptSend `String` *(default: "Prompt Send")*
 
 The text of the prompt send button that will be used to as aria labels.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            promptSend: "Submit Prompt"
+        }
+    });
+    </script>
 
 ### messages.stopOutputRetrieval `String` *(default: "Stop Output Retrieval")*
 
 The text of the stop output retrieval button that will be used to as aria labels.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            stopOutputRetrieval: "Cancel Generation"
+        }
+    });
+    </script>
+
 ### messages.commandsMenu `String` *(default: "Commands Menu")*
 
 The text of the prompt context menu that will render the commands.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            commandsMenu: "AI Commands"
+        }
+    });
+    </script>
 
 ### messages.retryOutputAction `String` *(default: "Retry")*
 
 The text of the default retry output command.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            retryOutputAction: "Try Again"
+        }
+    });
+    </script>
+
 ### messages.copyOutputAction `String` *(default: "Copy")*
 
 The text of the default copy output command.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            copyOutputAction: "Copy Text"
+        }
+    });
+    </script>
+
 ### messages.discardOutputAction `String` *(default: "Discard")*
 
 The text of the default discard output command.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        messages: {
+            discardOutputAction: "Remove"
+        }
+    });
+    </script>
 
 ## Methods
 
@@ -680,12 +929,34 @@ Closes the popup.
 
 Prepares the prompt animation for streaming.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    var inlineAiPrompt = $("#inlineaiprompt").kendoInlineAIPrompt({
+        isStreaming: true
+    }).data("kendoInlineAIPrompt");
+    
+    inlineAiPrompt.startStreaming();
+    </script>
+
 
 ### stopStreaming
 
 > **Important**: Applicable when the `isStreaming` configuration is explicitly set to `true`.
 
 Stops the prompt animation for streaming.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    var inlineAiPrompt = $("#inlineaiprompt").kendoInlineAIPrompt({
+        isStreaming: true
+    }).data("kendoInlineAIPrompt");
+    
+    inlineAiPrompt.stopStreaming();
+    </script>
 
 ### updatePromptOutputContent
 
@@ -698,6 +969,17 @@ Updates the prompt output content.
 #### content `String`
 
 The content that will be passed onto the output response card.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    var inlineAiPrompt = $("#inlineaiprompt").kendoInlineAIPrompt({
+        isStreaming: true
+    }).data("kendoInlineAIPrompt");
+    
+    inlineAiPrompt.updatePromptOutputContent("Updated response content");
+    </script>
 
 ### readonly
 
@@ -741,26 +1023,103 @@ Sets the prompt value within the underlying TextArea widget.
 
 Triggered before a request has been initiated to the specified service.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        promptRequest: function(e) {
+            console.log("Prompt request initiated:", e.data);
+        }
+    });
+    </script>
+
 ### promptResponse 
 
 Triggered once a response has been sent back from the specified service.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        promptResponse: function(e) {
+            console.log("Prompt response received:", e.response);
+        }
+    });
+    </script>
 
 ### promptRequestCancel 
 
 Triggered when a prompt request is cancelled, typically by clicking the stop generation button during streaming operations.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        promptRequestCancel: function(e) {
+            console.log("Prompt request was cancelled");
+        }
+    });
+    </script>
+
 ### commandExecute
 
 Triggered once a command is selected.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        commandExecute: function(e) {
+            console.log("Command executed:", e.command);
+        }
+    });
+    </script>
 
 ### outputAction
 
 This event will be fired with the button options that will be received, after the command has finished. Currently, these would be the `Copy`, `Retry`, and `Discard` options.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        outputAction: function(e) {
+            console.log("Output action executed:", e.action);
+        }
+    });
+    </script>
+
 ### show 
 
 Triggered once the component has been opened programmatically.
 
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        show: function(e) {
+            console.log("InlineAIPrompt opened");
+        }
+    });
+    </script>
+
 ### hide
 
 Triggered once the component has been closed programmatically.
+
+#### Example
+
+    <div id="inlineaiprompt"></div>
+    <script>
+    $("#inlineaiprompt").kendoInlineAIPrompt({
+        hide: function(e) {
+            console.log("InlineAIPrompt closed");
+        }
+    });
+    </script>

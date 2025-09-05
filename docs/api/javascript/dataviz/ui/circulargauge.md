@@ -30,6 +30,16 @@ Template variables:
 
 The color of the value pointer. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 30,
+        color: "#ff6358"
+    });
+    </script>
+
 ### colors `Array`
 
 The color ranges of the value pointer. The pointer color will be set to the color from the range that contains the current value.
@@ -62,33 +72,158 @@ The color ranges of the value pointer. The pointer color will be set to the colo
 
 The color of the pointer in the specified range.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 30,
+        colors: [{
+            to: 50,
+            color: '#0058e9'
+        }, {
+            from: 50,
+            color: '#37b400'
+        }]
+    });
+    </script>
+
 ### colors.from `Number`
 
 The lower range value of the applied color.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 60,
+        colors: [{
+            from: 0,
+            to: 50,
+            color: '#0058e9'
+        }, {
+            from: 50,
+            to: 100,
+            color: '#37b400'
+        }]
+    });
+    </script>
 
 ### colors.to `Number`
 
 The upper range value of the applied color.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 30,
+        colors: [{
+            from: 0,
+            to: 25,
+            color: '#0058e9'
+        }, {
+            from: 25,
+            to: 75,
+            color: '#37b400'
+        }]
+    });
+    </script>
+
 ### gaugeArea `Object`
 
 The gauge area configuration options. This is the entire visible area of the gauge.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            background: "#f0f0f0",
+            height: 300,
+            width: 300,
+            margin: 20
+        }
+    });
+    </script>
 
 ### gaugeArea.background `String`*(default: "white")*
 
 The background of the gauge area. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            background: "#e8f4f8"
+        }
+    });
+    </script>
+
 ### gaugeArea.border `Object`
 
 The border of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            border: {
+                color: "#0058e9",
+                width: 2
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            border: {
+                color: "#ff6358",
+                width: 1
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            border: {
+                dashType: "dash",
+                color: "#0058e9",
+                width: 2
+            }
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -122,13 +257,57 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The opacity of the border. By default the border is opaque.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            border: {
+                color: "#0058e9",
+                width: 2,
+                opacity: 0.5
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.border.width `Number`*(default: 0)*
 
 The width of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            border: {
+                color: "#0058e9",
+                width: 3
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.height `Number`
 
 The height of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            height: 400,
+            width: 300
+        }
+    });
+    </script>
 
 ### gaugeArea.margin `Number|Object`*(default: 5)*
 
@@ -150,25 +329,116 @@ The margin of the gauge area.
 
 The top margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            margin: {
+                top: 30,
+                bottom: 10,
+                left: 10,
+                right: 10
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.margin.bottom `Number`
 
 The bottom margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            margin: {
+                top: 10,
+                bottom: 40,
+                left: 10,
+                right: 10
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.margin.left `Number`
 
 The left margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            margin: {
+                top: 10,
+                bottom: 10,
+                left: 35,
+                right: 10
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.margin.right `Number`
 
 The right margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            margin: {
+                top: 10,
+                bottom: 10,
+                left: 10,
+                right: 25
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.width `Number`
 
 The width of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        gaugeArea: {
+            width: 350,
+            height: 300
+        }
+    });
+    </script>
+
 ### opacity `Number`
 
 The opacity of the value pointer.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        opacity: 0.7
+    });
+    </script>
 
 ### renderAs `String`
 
@@ -194,26 +464,123 @@ The supported values are:
 
 Configures the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 75,
+        scale: {
+            min: 0,
+            max: 100,
+            majorUnit: 20,
+            minorUnit: 5
+        }
+    });
+    </script>
+
 ### scale.labels `Object`
 
 Configures the scale labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                visible: true,
+                color: "#0058e9",
+                font: "14px Arial"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.background `String`
 
 The background color of the labels.
 Any valid CSS color string will work here, including hex and rgb
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                background: "#e8f4f8"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border `Object`
 
 The border of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                border: {
+                    color: "#0058e9",
+                    width: 1
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.border.color `String`
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                border: {
+                    color: "#ff6358",
+                    width: 2
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                border: {
+                    dashType: "dot",
+                    color: "#0058e9",
+                    width: 1
+                }
+            }
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -247,18 +614,81 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The opacity of the border. By default the border is opaque.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                border: {
+                    color: "#0058e9",
+                    width: 2,
+                    opacity: 0.6
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                border: {
+                    color: "#0058e9",
+                    width: 3
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.color `String`
 
 The text color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                color: "#ff6358"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                font: "16px Georgia, serif"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.format `String`
 
@@ -286,45 +716,239 @@ The format of the labels.
 
 The margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                margin: 10
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.top `Number`
 
 The top margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                margin: {
+                    top: 15,
+                    bottom: 5,
+                    left: 5,
+                    right: 5
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.bottom `Number`
 
 The bottom margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                margin: {
+                    top: 5,
+                    bottom: 12,
+                    left: 5,
+                    right: 5
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.left `Number`
 
 The left margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                margin: {
+                    top: 5,
+                    bottom: 5,
+                    left: 10,
+                    right: 5
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.right `Number`
 
 The right margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                margin: {
+                    top: 5,
+                    bottom: 5,
+                    left: 5,
+                    right: 8
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding `Number | Object`*(default: 0)*
 
  The padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                padding: 8
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.top `Number`
 
 The top padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                padding: {
+                    top: 10,
+                    bottom: 3,
+                    left: 3,
+                    right: 3
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.bottom `Number`
 
 The bottom padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                padding: {
+                    top: 3,
+                    bottom: 8,
+                    left: 3,
+                    right: 3
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.left `Number`
 
 The left padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                padding: {
+                    top: 3,
+                    bottom: 3,
+                    left: 6,
+                    right: 3
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.right `Number`
 
 The right padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                padding: {
+                    top: 3,
+                    bottom: 3,
+                    left: 3,
+                    right: 7
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.position `String`*(default: "inside")*
 
 The labels positions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                position: "outside"
+            }
+        }
+    });
+    </script>
 
 #### *"inside"*
 
@@ -362,90 +986,371 @@ Template variables:
 
  The visibility of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            labels: {
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks `Object`
 
 Configures the scale major ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            majorTicks: {
+                visible: true,
+                color: "#0058e9",
+                size: 10
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.color `String`
 
 The color of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            majorTicks: {
+                color: "#ff6358"
+            }
+        }
+    });
+    </script>
 
 ### scale.majorTicks.size `Number`
 
 The major tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            majorTicks: {
+                size: 12
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.visible `Boolean`*(default: false)*
 
 The visibility of the major ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            majorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.width `Number`*(default: 0.5)*
 
- The width of the major ticks.
+The width of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            majorTicks: {
+                width: 2
+            }
+        }
+    });
+    </script>
 
 ### scale.majorUnit `Number`
 
 The interval between major divisions.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            min: 0,
+            max: 100,
+            majorUnit: 25
+        }
+    });
+    </script>
+
 ### scale.max `Number`*(default: 100)*
 
 The maximum value of the scale.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            max: 200
+        }
+    });
+    </script>
 
 ### scale.min `Number`*(default: 0)*
 
 The minimum value of the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            min: -10,
+            max: 100
+        }
+    });
+    </script>
+
 ### scale.minorTicks `Object`
 
 Configures the scale minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            minorTicks: {
+                visible: true,
+                color: "#0058e9",
+                size: 5
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.color `String`
 
 The color of the minor ticks.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            minorTicks: {
+                color: "#ff6358"
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.size `Number`
 
 The minor tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            minorTicks: {
+                size: 8
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.visible `Boolean`*(default: false)*
 
 The visibility of the minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            minorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.width `Number`*(default: 0.5)*
 
 The width of the minor ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            minorTicks: {
+                width: 1.5
+            }
+        }
+    });
+    </script>
+
 ### scale.minorUnit `Number`
 
 The interval between minor divisions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            min: 0,
+            max: 100,
+            minorUnit: 2.5
+        }
+    });
+    </script>
 
 ### scale.rangePlaceholderColor `String`
 
 The default color for the ranges.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            rangePlaceholderColor: "#e0e0e0"
+        }
+    });
+    </script>
+
 ### scale.rangeSize `Number`
 
 The width of the range indicators.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            rangeSize: 20
+        }
+    });
+    </script>
 
 ### scale.rangeDistance `Number`
 
 The distance from the range indicators to the ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            rangeDistance: 10
+        }
+    });
+    </script>
+
 ### scale.reverse `Boolean`*(default: false)*
 
 Reverses the scale direction - values are increase anticlockwise.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            reverse: true
+        }
+    });
+    </script>
 
 ### scale.startAngle `Number`*(default: 0)*
 
 The start angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        scale: {
+            startAngle: 45
+        }
+    });
+    </script>
+
 ### theme `String` *(default: "sass")*
 
 The gauge theme. With versions prior to R1 2023 this can be either the respective LESS theme from the list below or "sass".
 When set to "sass" the gauge will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        theme: "bootstrap"
+    });
+    </script>
 
 Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
@@ -467,9 +1372,28 @@ The supported values are:
 
 A value indicating if transition animations should be played.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 50,
+        transitions: false
+    });
+    </script>
+
 ### value `Number`
 
 The gauge value.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoCircularGauge({
+        value: 75
+    });
+    </script>
 
 ## Methods
 

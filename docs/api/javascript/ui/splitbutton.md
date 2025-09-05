@@ -145,9 +145,47 @@ Specifies the menu buttons of the **SplitButton**.
 
 Adds custom attributes to the LI element of the menu button.
 
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Item 1", attributes: { "data-value": "value1", "data-info": "custom" } },
+                { text: "Item 2", attributes: { "data-value": "value2", "class": "special-item" } }
+            ]
+        });
+    </script>
+
 ### items.click `Function`
 
 Adds unique click callback for the menu item.
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { 
+                    text: "Save", 
+                    click: function(e) {
+                        console.log("Save clicked", e);
+                        alert("Document saved!");
+                    }
+                },
+                { 
+                    text: "Delete", 
+                    click: function(e) {
+                        console.log("Delete clicked", e);
+                        if (confirm("Are you sure?")) {
+                            alert("Document deleted!");
+                        }
+                    }
+                }
+            ]
+        });
+    </script>
 
 ### items.data `Function`
 
@@ -195,32 +233,139 @@ Adds a custom data callback to be added to the context of menu item - useful to 
 
 Toggles the enabled state of the item.
 
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Available Option", enabled: true },
+                { text: "Disabled Option", enabled: false },
+                { text: "Another Available", enabled: true }
+            ]
+        });
+    </script>
+
 ### items.hidden `Boolean` *(default: false)*
 
 Indicates wether the item should hidden.
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Visible Option", hidden: false },
+                { text: "Hidden Option", hidden: true },
+                { text: "Another Visible", hidden: false }
+            ]
+        });
+    </script>
 
 ### items.icon `String`
 
 Specifies the icon of the item.
 
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Save", icon: "save" },
+                { text: "Download", icon: "download" },
+                { text: "Print", icon: "print" }
+            ]
+        });
+    </script>
+
 ### items.id `String`
 
 Specifies the id of the item.
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Option 1", id: "option-1" },
+                { text: "Option 2", id: "option-2" },
+                { text: "Option 3", id: "option-3" }
+            ]
+        });
+    </script>
 
 ### items.imageUrl `String`
 
 Specifies the image of the item.
 
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Profile", imageUrl: "/images/profile.png" },
+                { text: "Settings", imageUrl: "/images/settings.png" },
+                { text: "Help", imageUrl: "/images/help.png" }
+            ]
+        });
+    </script>
+
 ### items.spriteCssClass `String`
 
 Specifies the custom CSS class that is added to the sprite icon element of the item.
 
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Home", spriteCssClass: "k-sprite sprite-home" },
+                { text: "Dashboard", spriteCssClass: "k-sprite sprite-dashboard" },
+                { text: "Reports", spriteCssClass: "k-sprite sprite-reports" }
+            ]
+        });
+    </script>
+
 ### items.text `String`
 
 Specifies the text of the item.
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "New Document" },
+                { text: "Open Document" },
+                { text: "Save Document" },
+                { text: "Print Document" }
+            ]
+        });
+    </script>
+
 ### items.url `String`
 
 Specifies the url of the item - it will render `a` element and will navigate the browser on click.
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Home", url: "/home" },
+                { text: "Products", url: "/products" },
+                { text: "Support", url: "/support" },
+                { text: "Contact", url: "/contact" }
+            ]
+        });
+    </script>
 
 ### itemTemplate `String|Function`
 
@@ -245,9 +390,49 @@ Specifies a custom template for the menu items.
 The options that will be used for the popup initialization. For more details about the available options
 refer to [Popup](/api/javascript/ui/popup) documentation.
 
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Option 1" },
+                { text: "Option 2" },
+                { text: "Option 3" }
+            ],
+            popup: {
+                origin: "top left",
+                position: "bottom left",
+                collision: "flip",
+                animation: {
+                    open: { effects: "slideIn:down" },
+                    close: { effects: "slideIn:up" }
+                }
+            }
+        });
+    </script>
+
 ### popup.appendTo `String`
 
 Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example
+
+    <div id="container">
+        <button id="splitButton">Command</button>
+    </div>
+    <script>
+        $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Option 1" },
+                { text: "Option 2" },
+                { text: "Option 3" }
+            ],
+            popup: {
+                appendTo: "#container"
+            }
+        });
+    </script>
 
 ### rounded `String` *(default: 'medium')*
 
@@ -472,6 +657,28 @@ Collection of the items to show.
 ### items
 
 Returns the menu items as DOM elements wrapped in jQuery collection.
+
+#### Example
+
+    <button id="splitButton">Command</button>
+    <script>
+        var splitButton = $("#splitButton").kendoSplitButton({
+            items: [
+                { text: "Option 1", id: "opt1" },
+                { text: "Option 2", id: "opt2" },
+                { text: "Option 3", id: "opt3" }
+            ]
+        }).data("kendoSplitButton");
+
+        // Get all menu items
+        var items = splitButton.items();
+        console.log("Number of menu items:", items.length);
+        
+        // Access specific item
+        items.each(function(index, item) {
+            console.log("Item " + index + ":", $(item).text());
+        });
+    </script>
 
 #### Returns
 

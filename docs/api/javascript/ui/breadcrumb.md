@@ -78,41 +78,183 @@ Array of items to be rendered in **Breadcrumb**.
 
 Defines whether to encode the item's text. To render entities or HTML, set it to `false`.
 
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type:"rootitem", text: "Home", showText: true },
+				{ type:"item", text: "&lt;strong&gt;HTML Content&lt;/strong&gt;", encoded: false },
+				{ type:"item", text: "Regular Text", encoded: true }
+			]
+		});
+	</script>
+
 ### items.type `String`
 
 Defines the type of the item "rootitem" or "item".
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", text: "Home", showText: true },
+				{ type: "item", text: "Products" },
+				{ type: "item", text: "Laptops" }
+			]
+		});
+	</script>
 
 ### items.href `String`
 
 Defines the navigation link's url of the item (rendered if `navigational` is `true`).
 
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			navigational: true,
+			items: [
+				{ type: "rootitem", href: "/", text: "Home", showText: true },
+				{ type: "item", href: "/products", text: "Products" },
+				{ type: "item", href: "/products/laptops", text: "Laptops" }
+			]
+		});
+	</script>
+
 ### items.text `String`
 
 Defines the text of the item.
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", text: "Dashboard", showText: true },
+				{ type: "item", text: "User Management" },
+				{ type: "item", text: "Edit Profile" }
+			]
+		});
+	</script>
 
 ### items.icon `String`
 
 Defines the icon to be rendered.
 
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", icon: "home", showIcon: true, showText: false },
+				{ type: "item", icon: "folder", text: "Documents", showIcon: true },
+				{ type: "item", icon: "file", text: "readme.txt", showIcon: true }
+			]
+		});
+	</script>
+
 ### items.itemClass `String`
 
 Defines the item classes (the `li` element).
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", text: "Home", itemClass: "custom-root-item", showText: true },
+				{ type: "item", text: "Products", itemClass: "custom-nav-item" },
+				{ type: "item", text: "Laptops", itemClass: "custom-nav-item highlighted" }
+			]
+		});
+	</script>
 
 ### items.linkClass `String`
 
 Defines the link classes (the `a` element).
 
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			navigational: true,
+			items: [
+				{ type: "rootitem", href: "/", text: "Home", linkClass: "custom-root-link", showText: true },
+				{ type: "item", href: "/products", text: "Products", linkClass: "custom-nav-link" },
+				{ type: "item", href: "/products/laptops", text: "Laptops", linkClass: "custom-nav-link active" }
+			]
+		});
+	</script>
+
 ### items.iconClass `String`
 
 Defines the icon classes (the `span` element).
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", icon: "home", iconClass: "custom-root-icon", showIcon: true, showText: false },
+				{ type: "item", icon: "folder", text: "Documents", iconClass: "custom-folder-icon", showIcon: true },
+				{ type: "item", icon: "file", text: "readme.txt", iconClass: "custom-file-icon large", showIcon: true }
+			]
+		});
+	</script>
 
 ### items.showIcon `Boolean`
 
 Defines whether to show the icon. Default value is *true* for `rootItem` and *false* for `item`.
 
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", icon: "home", showIcon: true, showText: false },
+				{ type: "item", icon: "folder", text: "Documents", showIcon: false },
+				{ type: "item", icon: "file", text: "readme.txt", showIcon: true }
+			]
+		});
+	</script>
+
 ### items.showText `Boolean`
 
 Defines whether to show the text. Default value is *false* for `rootItem` and *true* for `item`.
+
+#### Example
+
+	<nav id="breadcrumb"></nav>
+
+	<script>
+        $("#breadcrumb").kendoBreadcrumb({
+			items: [
+				{ type: "rootitem", icon: "home", text: "Home", showIcon: true, showText: false },
+				{ type: "item", text: "Documents", showText: true },
+				{ type: "item", text: "readme.txt", showText: false, icon: "file", showIcon: true }
+			]
+		});
+	</script>
 
 ### gap `Number` *(default: 0)*
 

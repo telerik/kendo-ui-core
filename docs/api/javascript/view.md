@@ -230,3 +230,15 @@ Fires after the view transition container has its `k-fx-end` class set. The `typ
 
 The element of the **View**. Gets instantiated after the `render` method is called.
 
+#### Example
+
+    <div id="app"></div>
+
+    <script>
+    var view = new kendo.View('<span>Hello World!</span>');
+    view.render($("#app"));
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(view.element.text()); // Hello World!
+    console.log(view.element.prop('tagName')); // SPAN
+    </script>
+

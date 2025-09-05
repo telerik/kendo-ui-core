@@ -320,13 +320,94 @@ An array of prompt outputs to display in the AI Assistant output view.
 
 The id of the prompt output. If none is provided, the id will be generated as a `kendo.guid()`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptOutputs: [
+            {
+              id: "output-1",
+              prompt: "Generate marketing text",
+              output: "This is the generated marketing content."
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptOutputs.output `String`
 
 The output content generated from the prompt.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptOutputs: [
+            {
+              id: "marketing-output",
+              prompt: "Create product description",
+              output: "Delicious beverages perfect for any time of day. Our premium tea and coffee selections offer exceptional quality and taste."
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptOutputs.prompt `String`
 
 The prompt text used to generate this output.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptOutputs: [
+            {
+              id: "summary-output",
+              prompt: "Summarize the product data in this grid and provide insights about the beverage category",
+              output: "The grid contains beverage products including tea and coffee."
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.encodedPromptOutputs `Boolean` *(default: true)*
 
@@ -378,21 +459,136 @@ Configures speech-to-text functionality for the AI Assistant prompt input.
 
 Specifies the integration mode for speech recognition. Available modes: `"webSpeech"`, `"none"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          speechToText: {
+            integrationMode: "webSpeech"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.speechToText.lang `String` *(default: "en-US")*
 
 Specifies the language code for speech recognition.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          speechToText: {
+            lang: "en-GB"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.speechToText.continuous `Boolean` *(default: false)*
 
 Specifies whether to continue listening after a result is received.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          speechToText: {
+            continuous: true
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.speechToText.interimResults `Boolean` *(default: false)*
 
 Specifies whether to return interim results during speech recognition.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          speechToText: {
+            interimResults: true
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.speechToText.maxAlternatives `Number` *(default: 1)*
 
 Specifies the maximum number of alternatives to return from speech recognition.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          speechToText: {
+            maxAlternatives: 3
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptTextArea `Object`
 
@@ -430,49 +626,333 @@ Configuration options for the TextArea component used in the AI Assistant prompt
 
 Specifies the fill mode of the textarea. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            fillMode: "outline"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptTextArea.inputMode `String`
 
 Specifies the input mode attribute for mobile keyboards.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            inputMode: "text"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptTextArea.label `Object`
 
 Specifies the label configuration for the textarea.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            label: {
+              content: "Enter your prompt",
+              floating: true
+            }
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptTextArea.label.content `String`
 
 Specifies the label text content.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            label: {
+              content: "AI Prompt Input"
+            }
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptTextArea.label.floating `Boolean`
 
 Specifies whether the label floats above the input.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            label: {
+              content: "Prompt",
+              floating: true
+            }
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptTextArea.maxLength `Number`
 
 Specifies the maximum number of characters allowed in the textarea.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            maxLength: 500
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptTextArea.overflow `String`
 
 Specifies the overflow behavior. Available options: `"auto"`, `"hidden"`, `"visible"`, `"scroll"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            overflow: "auto"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptTextArea.placeholder `String`
 
 Specifies the placeholder text for the textarea.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            placeholder: "Type your AI prompt here..."
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptTextArea.resize `String`
 
 Specifies the resize behavior. Available options: `"none"`, `"both"`, `"horizontal"`, `"vertical"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            resize: "vertical"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptTextArea.rows `Number`
 
 Specifies the number of visible text lines.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            rows: 4
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptTextArea.rounded `String`
 
 Specifies the border radius. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            rounded: "medium"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.promptTextArea.size `String`
 
 Specifies the size of the component. Available options: `"small"`, `"medium"`, `"large"`, `"none"`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptTextArea: {
+            size: "large"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.outputActions `Array` *(default: ["copy", "retry"])*
 
@@ -505,33 +985,257 @@ An array of action configurations for the output cards in the AI Assistant.
 
 The command identifier for the action.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "copyOutput",
+              text: "Copy",
+              icon: "copy"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.outputActions.text `String`
 
 The text displayed on the action button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "export",
+              text: "Export Results",
+              icon: "download"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.outputActions.icon `String`
 
 The icon name for the action button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "share",
+              text: "Share",
+              icon: "share"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.outputActions.fillMode `String`
 
 Specifies the fill mode of the action button. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "save",
+              text: "Save",
+              fillMode: "outline"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.outputActions.rounded `String`
 
 Specifies the border radius of the action button. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "refresh",
+              text: "Refresh",
+              rounded: "large"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.outputActions.themeColor `String`
 
 Specifies the theme color of the action button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "approve",
+              text: "Approve",
+              themeColor: "success"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.outputActions.title `String`
 
 Specifies the title attribute (tooltip) for the action button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "help",
+              text: "Help",
+              title: "Get help about this output"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.outputActions.type `String`
 
 Specifies the type of the action. Available options: `"button"`, `"spacer"`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          outputActions: [
+            {
+              command: "action1",
+              text: "Action 1",
+              type: "button"
+            },
+            {
+              type: "spacer"
+            },
+            {
+              command: "action2", 
+              text: "Action 2",
+              type: "button"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.outputTemplate `Function`
 
@@ -635,25 +1339,191 @@ An array of toolbar items to display in the AI Assistant header toolbar.
 
 The type of the toolbar item. Available options: `"button"`, `"spacer"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              text: "Custom Action"
+            },
+            {
+              type: "spacer"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.toolbarItems.icon `String`
 
 The icon name of the toolbar item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              icon: "gear",
+              text: "Settings"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.toolbarItems.fillMode `String`
 
 The fill mode of the toolbar item. Available options: `"solid"`, `"outline"`, `"flat"`, `"none"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              text: "Action",
+              fillMode: "outline"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.toolbarItems.rounded `String`
 
 The rounded mode of the toolbar item. Available options: `"small"`, `"medium"`, `"large"`, `"full"`, `"none"`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              text: "Action",
+              rounded: "large"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.toolbarItems.themeColor `String`
 
 The theme color of the toolbar item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              text: "Primary Action",
+              themeColor: "primary"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.toolbarItems.click `Function`
 
 The click event handler of the toolbar item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          toolbarItems: [
+            {
+              type: "button",
+              text: "Custom Action",
+              click: function(e) {
+                alert("Custom toolbar item clicked!");
+              }
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.showOutputSubtitleTooltip `Boolean` *(default: false)*
 
@@ -721,45 +1591,375 @@ An array of view configurations for the AI Assistant.
 
 The text of the toolbar button rendered for the view.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "analytics",
+              buttonText: "Analytics View"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.views.buttonIcon `String`
 
 The icon name of the toolbar button rendered for the view.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "charts",
+              buttonText: "Charts",
+              buttonIcon: "chart-line"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.views.type `String`
 
 The type of the view. Available options: `"prompt"`, `"output"`, `"commands"`, `"custom"`.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "commands",
+              name: "customCommands",
+              buttonText: "Commands"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.views.name `String`
 
 The name of the view. Must be unique.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "dataInsights",
+              buttonText: "Insights"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.views.viewTemplate `String|Function`
 
 The template of the view content.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "summary",
+              buttonText: "Summary",
+              viewTemplate: "<div class='summary-view'><h3>Data Summary</h3><p>View data insights here.</p></div>"
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.views.footerTemplate `String|Function`
 
 The template of the view footer.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "report",
+              buttonText: "Report",
+              viewTemplate: "<div>Report content</div>",
+              footerTemplate: "<div class='footer'>Generated at: #{new Date()}</div>"
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.views.initializeComponents `Function`
 
 A function executed when the view is rendered to initialize components.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "custom",
+              name: "dashboard",
+              buttonText: "Dashboard",
+              viewTemplate: "<div id='dashboard-content'></div>",
+              initializeComponents: function(container) {
+                container.find("#dashboard-content").html("Dashboard initialized!");
+              }
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.views.promptCommands `Array`
 
 The commands to display in the prompt view.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "prompt",
+              name: "customPrompt",
+              buttonText: "Custom Prompts",
+              promptCommands: [
+                {
+                  id: "analyze",
+                  text: "Analyze Data",
+                  icon: "chart"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.views.promptCommands.id `String`
 
 The id of the command item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "prompt",
+              name: "quickPrompts",
+              promptCommands: [
+                {
+                  id: "summarize",
+                  text: "Summarize Data",
+                  icon: "list"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.views.promptCommands.text `String`
 
 The text of the command item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "prompt",
+              name: "analysis",
+              promptCommands: [
+                {
+                  id: "trend",
+                  text: "Find Trends",
+                  icon: "trend-up"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.views.promptCommands.icon `String`
 
 The icon name of the command item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          views: [
+            {
+              type: "prompt",
+              name: "insights",
+              promptCommands: [
+                {
+                  id: "insights",
+                  text: "Generate Insights",
+                  icon: "lightbulb"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages `Object`
 
@@ -792,61 +1992,406 @@ The text messages displayed in the AI Assistant. Use this option to customize or
 
 The text of the commands view button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            commandsView: "Quick Commands"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.copyOutput `String` *(default: "Copy")*
 
 The text of the copy output button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            copyOutput: "Copy to Clipboard"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages.customView `String` *(default: "Custom View")*
 
 The text of the custom view button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            customView: "Analytics Dashboard"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.generateOutput `String` *(default: "Generate")*
 
 The text of the generate output button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            generateOutput: "Create Analysis"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages.outputRetryTitle `String` *(default: "Generated with AI")*
 
 The title of the output card when regenerated.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            outputRetryTitle: "AI Analysis (Regenerated)"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.outputTitle `String` *(default: "Generated with AI")*
 
 The title of the output card.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            outputTitle: "Grid Data Analysis"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages.outputView `String` *(default: "Output")*
 
 The text of the output view button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            outputView: "Results"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.promptPlaceholder `String` *(default: "Ask or generate content with AI")*
 
 The placeholder text of the textarea input.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            promptPlaceholder: "Ask AI to analyze your grid data..."
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages.promptSuggestions `String` *(default: "Prompt Suggestions")*
 
 The text of the prompt suggestions toggle button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            promptSuggestions: "Quick Ideas"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.promptView `String` *(default: "Ask AI")*
 
 The text of the prompt view button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            promptView: "Chat with AI"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages.retryGeneration `String` *(default: "Retry")*
 
 The text of the retry generation button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            retryGeneration: "Try Again"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.ratePositive `String` *(default: "")*
 
 The text of the positive rating button.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            ratePositive: "Good"
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.messages.rateNegative `String` *(default: "")*
 
 The text of the negative rating button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            rateNegative: "Poor"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.messages.stopGeneration `String` *(default: "Stop Generation")*
 
 The aria-label and title of the stop generation button.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          messages: {
+            stopGeneration: "Cancel Generation"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistant.commandExecute
 
 Triggered when a command item from the Commands view is clicked. The panel bar dataItem of the selected item is available through the event argument.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          commandExecute: function(e) {
+            console.log("Command executed:", e.item.text);
+          }
+        }
+      }
+    });
+    </script>
 
 ### ai.aiAssistant.promptRequest
 
@@ -854,7 +2399,32 @@ Triggered when the prompt view Generate output button is clicked. The prompt tex
 
 The `prompt`, `output`, `history`, `isRetry` and `response` properties are available in the event argument. When the output is generated after clicking the retry button of an output, the `isRetry` property is `true` and the `output` property is the output content of the output card. The history property is an array of prompt outputs generated before the current output.
 
-### ai.aiAssistant.promptResponse
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptRequest: function(e) {
+            console.log("Prompt request:", e.prompt);
+            // Simulate AI response
+            e.sender.addPromptOutput(e.prompt, "AI analysis result for: " + e.prompt);
+          }
+        }
+      }
+    });
+    </script>
+
+### promptResponse
 
 Triggered when the AI service response is received. The response data is available through the event argument. Triggered only when the `serviceUrl` option is set.
 
@@ -961,6 +2531,32 @@ Triggered when a prompt request is cancelled, typically by clicking the stop gen
 
 The output object being generated when the cancellation occurred.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistant: {
+          promptRequestCancel: function(e) {
+            console.log("AI request cancelled");
+            if (e.output) {
+              console.log("Partial output was:", e.output);
+            }
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistantWindow `Object`
 
 Defines the configuration options for the AI AssistantWindow in the Grid.
@@ -1064,9 +2660,51 @@ The animation that will be used when the AI AssistantWindow closes.
 
 The effect that will be used when the AI AssistantWindow closes.
 
+#### Example - configure AI AssistantWindow closing animation effects
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+         aiAssistantWindow: {
+           animation: {
+             close: {
+               effects: "fadeOut"
+             }
+           }
+         }
+       }
+    });
+    </script>
+
 ### ai.aiAssistantWindow.animation.close.duration `Number`
 
 Defines the duration of the closing animation.
+
+#### Example - configure AI AssistantWindow closing animation duration
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+         aiAssistantWindow: {
+           animation: {
+             close: {
+               duration: 300
+             }
+           }
+         }
+       }
+    });
+    </script>
 
 ### ai.aiAssistantWindow.animation.open `Object`
 
@@ -1098,9 +2736,51 @@ The animation that will be used when the AI AssistantWindow opens.
 
 The effect that will be used when the AI AssistantWindow opens.
 
+#### Example - configure AI AssistantWindow opening animation effects
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+         aiAssistantWindow: {
+           animation: {
+             open: {
+               effects: "fadeIn"
+             }
+           }
+         }
+       }
+    });
+    </script>
+
 ### ai.aiAssistantWindow.animation.open.duration `Number`
 
 Defines the duration of the opening animation.
+
+#### Example - configure AI AssistantWindow opening animation duration
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+         aiAssistantWindow: {
+           animation: {
+             open: {
+               duration: 400
+             }
+           }
+         }
+       }
+    });
+    </script>
 
 ### ai.aiAssistantWindow.appendTo `Object|String` *(default: document.body)*
 
@@ -1395,9 +3075,47 @@ A collection of one or two members which define the initial top and/or left posi
 
 Specifies the initial top position of the AI AssistantWindow. Numeric values are treated as pixels.
 
+#### Example - configure AI AssistantWindow top position
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+         aiAssistantWindow: {
+           position: {
+             top: 100
+           }
+         }
+       }
+    });
+    </script>
+
 ### ai.aiAssistantWindow.position.left `Number|String`
 
 Specifies the initial left position of the AI AssistantWindow. Numeric values are treated as pixels.
+
+#### Example - configure AI AssistantWindow left position
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }],
+       dataSource: [{ name: "Jane Doe" }],
+       toolbar: ["aiAssistant"],
+       ai: {
+         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+         aiAssistantWindow: {
+           position: {
+             left: 200
+           }
+         }
+       }
+    });
+    </script>
 
 ### ai.aiAssistantWindow.resizable `Boolean` *(default: true)*
 
@@ -1613,11 +3331,36 @@ Specifies a URL or request options from where the AI Assistant Window will load 
 
 > For URLs which start with a protocol (for example, http://), a container `iframe` element is automatically created. As this behavior may change in future versions, try to always use the [iframe configuration option](#iframe).
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      ai: {
+        aiAssistantWindow: {
+          content: {
+            url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html",
+            dataType: "html"
+          }
+        }
+      }
+    });
+    </script>
+
 ### ai.aiAssistantWindow.content.url `String`
 
 Specifies the url from which the content is fetched
 
 #### Example - fetching JSON and displaying it through a template
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1627,7 +3370,7 @@ Specifies the url from which the content is fetched
        ai: {
          aiAssistantWindow: {
            content: {
-              url: "../content/web/tabstrip/ajax/ajaxContent2.html",
+              url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html"
             }
           }
        }
@@ -1639,6 +3382,7 @@ Specifies the url from which the content is fetched
 The type of result expected from the remote service. Used values are "html" and "json".
 
 #### Example - fetching and displaying JSON content it in the Window
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1665,6 +3409,7 @@ If the URL does not contain a protocol, the URL is treated as a local URL which 
 To control the creation of iframe  AI Assistant Window content, you have to explicitly configure the option.
 
 #### Example - Explicitly configure an iframe
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1692,6 +3437,7 @@ If the returned data is JSON, the [`dataType`](https://api.jquery.com/jQuery.aja
 If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON response will be injected in the content area of the AI Assistant Window as is.
 
 #### Example - displaying a template
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2105,6 +3851,8 @@ dataSource instance is fired. By default, `autoBind` is set to `true` and the wi
 ### columnResizeHandleWidth `Number` *(default: 3)*
 
 Defines the width of the column resize handle in pixels. Apply a larger value for easier grasping.
+
+#### Example
 
     <div id="grid"></div>
     <script>
@@ -2881,13 +4629,94 @@ instance.
 
 > **Note:** When the dataSource property is set one should also set the [dataTextField](/api/javascript/ui/grid/configuration/columns.datatextfield) and [dataValueField](/api/javascript/ui/grid/configuration/columns.datavaluefield).
 
+#### Example - configure column data source for foreign key column
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { 
+          field: "categoryId", 
+          title: "Category",
+          dataSource: {
+            transport: {
+              read: {
+                url: "https://demos.telerik.com/service/v2/core/categories"
+              }
+            }
+          },
+          dataTextField: "categoryName",
+          dataValueField: "categoryId"
+        }
+      ],
+      dataSource: [
+        { name: "Tea", categoryId: 1 },
+        { name: "Coffee", categoryId: 1 },
+        { name: "Ham", categoryId: 2 }
+      ]
+    });
+    </script>
+
 ### columns.dataTextField `String`
 
 The data text field of the foreign key item.
 
+#### Example - configure column data text field
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { 
+          field: "categoryId", 
+          title: "Category",
+          dataSource: [
+            { id: 1, name: "Beverages" },
+            { id: 2, name: "Food" }
+          ],
+          dataTextField: "name",
+          dataValueField: "id"
+        }
+      ],
+      dataSource: [
+        { name: "Tea", categoryId: 1 },
+        { name: "Coffee", categoryId: 1 },
+        { name: "Ham", categoryId: 2 }
+      ]
+    });
+    </script>
+
 ### columns.dataValueField `String`
 
 The data value field of the foreign key item.
+
+#### Example - configure column data value field
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { 
+          field: "categoryId", 
+          title: "Category",
+          dataSource: [
+            { categoryId: 1, categoryName: "Beverages" },
+            { categoryId: 2, categoryName: "Food" }
+          ],
+          dataTextField: "categoryName",
+          dataValueField: "categoryId"
+        }
+      ],
+      dataSource: [
+        { name: "Tea", categoryId: 1 },
+        { name: "Coffee", categoryId: 1 },
+        { name: "Ham", categoryId: 2 }
+      ]
+    });
+    </script>
 
 ### columns.draggable `Boolean` *(default: false)*
 
@@ -3124,6 +4953,24 @@ If set to `false` the column will be excluded from the exported Excel/PDF files.
 
 Can be set to a JavaScript object which specifies whether the column should be exported per format.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["excel", "pdf"],
+      columns: [
+        { field: "productName", title: "Product" },
+        { field: "unitPrice", title: "Price" },
+        { field: "internalCode", title: "Code", exportable: false }
+      ],
+      dataSource: [
+        { productName: "Tea", unitPrice: 2.5, internalCode: "TEA001" },
+        { productName: "Coffee", unitPrice: 3.0, internalCode: "COF001" }
+      ]
+    });
+    </script>
+
 ### columns.exportable.excel `Boolean` *(default: true)*
 
 If set to `false` the column will be excluded from the exported Excel file.
@@ -3166,6 +5013,24 @@ If set to `false` the column will be excluded from the exported Excel file.
 ### columns.exportable.pdf `Boolean` *(default: true)*
 
 If set to `false` the column will be excluded from the exported PDF file.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["pdf"],
+      columns: [
+        { field: "productName", title: "Product" },
+        { field: "unitPrice", title: "Price" },
+        { field: "description", title: "Description", exportable: { pdf: false } }
+      ],
+      dataSource: [
+        { productName: "Tea", unitPrice: 2.5, description: "Premium green tea" },
+        { productName: "Coffee", unitPrice: 3.0, description: "Organic coffee beans" }
+      ]
+    });
+    </script>
 
 ### columns.field `String`
 
@@ -5402,6 +7267,37 @@ The titles of the columns that are part of the group. In case some column does n
 
 The text displayed in the header of the group.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName", title: "Product" },
+        { field: "unitPrice", title: "Price" },
+        { field: "category", title: "Category" }
+      ],
+      dataSource: [
+        { productName: "Tea", unitPrice: 2.5, category: "Beverages" },
+        { productName: "Coffee", unitPrice: 3.0, category: "Beverages" }
+      ],
+      columnMenu: {
+        columns: {
+          groups: [
+            {
+              title: "Product Information",
+              columns: ["productName", "category"]
+            },
+            {
+              title: "Pricing",
+              columns: ["unitPrice"]
+            }
+          ]
+        }
+      }
+    });
+    </script>
+
 ### columnMenu.filterable `Boolean` *(default: true)*
 
 If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](/api/javascript/ui/grid/configuration/filterable).
@@ -5433,6 +7329,26 @@ If set to `true` the column menu would allow the user to filter the grid. By def
 * `"classic"` - Uses the standard rendering of the column menu.
 * `"modern"` - Uses new rendering with a fresh and modern look and feel.
 * `"tabbed"` - Uses the rendering of the `"modern"` menu, but splits its content into different tabs.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName", title: "Product" },
+        { field: "unitPrice", title: "Price" },
+        { field: "category", title: "Category" }
+      ],
+      dataSource: [
+        { productName: "Tea", unitPrice: 2.5, category: "Beverages" },
+        { productName: "Coffee", unitPrice: 3.0, category: "Beverages" }
+      ],
+      columnMenu: {
+        componentType: "modern"
+      }
+    });
+    </script>
 
 ### columnMenu.clearAllFilters `Boolean` *(default: false)*
 
@@ -5841,17 +7757,107 @@ The text message displayed in the column menu for locking a column.
 
 The text message that is displayed for the Move to next position column menu item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      columnMenu: {
+        messages: {
+          moveNext: "Move Right"
+        }
+      }
+    });
+    </script>
+
 ### columnMenu.messages.movePrev `String` *(default: "Move previous")*
 
 The text message that is displayed for the Move to previous position column menu item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      columnMenu: {
+        messages: {
+          movePrev: "Move Left"
+        }
+      }
+    });
+    </script>
 
 ### columnMenu.messages.groupColumn `String` *(default: "Group column")*
 
 The text message that is displayed for the Group column menu item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      groupable: true,
+      columnMenu: {
+        messages: {
+          groupColumn: "Group by this column"
+        }
+      }
+    });
+    </script>
+
 ### columnMenu.messages.ungroupColumn `String` *(default: "Ungroup column")*
 
 The text message that is displayed for the Ungroup column menu item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      groupable: true,
+      columnMenu: {
+        messages: {
+          ungroupColumn: "Remove grouping"
+        }
+      }
+    });
+    </script>
 
 ### columnMenu.messages.reset `String` *(default: "Reset")*
 
@@ -6157,14 +8163,112 @@ You can also specify a custom item and accosiate it with a command.
 ### contextMenu.body.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            name: "customAction",
+            text: "Custom Action",
+            command: "CustomCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.body.text `String`
 Specifies the text of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Analyze Row",
+            command: "AnalyzeCommand"
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.body.icon `String`
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Settings",
+            icon: "gear",
+            command: "SettingsCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.body.command `String`
 Specifies the command of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Export Row",
+            command: "ExportRowCommand"
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.body.items `Array`
 Specifies the items of the item.
@@ -6213,14 +8317,132 @@ Specifies the items of the item.
 ### contextMenu.body.items.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Actions",
+            items: [
+              {
+                name: "subAction1",
+                text: "Sub Action 1",
+                command: "SubCommand1"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.body.items.text `String`
 Specifies the text of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "More Options",
+            items: [
+              {
+                text: "Copy Value",
+                command: "CopyCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.body.items.icon `String`
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Tools",
+            items: [
+              {
+                text: "Edit",
+                icon: "edit",
+                command: "EditCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.body.items.command `String`
 Specifies the command of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      contextMenu: {
+        body: [
+          {
+            text: "Advanced",
+            items: [
+              {
+                text: "Process",
+                command: "ProcessCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.groups `Array`
 
@@ -6277,14 +8499,116 @@ You can also specify a custom item and accociate it with a command.
 ### contextMenu.groups.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            name: "groupAction",
+            text: "Group Action",
+            command: "GroupCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.groups.text `String`
 Specifies the text of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Manage Group",
+            command: "ManageGroupCommand"
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.groups.icon `String`
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Settings",
+            icon: "gear",
+            command: "GroupSettingsCommand"
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.groups.command `String`
 Specifies the command of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Export Group",
+            command: "ExportGroupCommand"
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.groups.items `Array`
 Specifies the items of the item.
@@ -6333,14 +8657,136 @@ Specifies the items of the item.
 ### contextMenu.groups.items.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Tools",
+            items: [
+              {
+                name: "subGroupAction",
+                text: "Sub Group Action",
+                command: "SubGroupCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.groups.items.text `String`
 Specifies the text of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Operations",
+            items: [
+              {
+                text: "Expand All",
+                command: "ExpandAllCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.groups.items.icon `String`
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Group Actions",
+            items: [
+              {
+                text: "Collapse",
+                icon: "minus",
+                command: "CollapseCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.groups.items.command `String`
 Specifies the command of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      groupable: true,
+      contextMenu: {
+        groups: [
+          {
+            text: "Advanced",
+            items: [
+              {
+                text: "Custom Group Action",
+                command: "CustomGroupCommand"
+              }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.head `Array`
 
@@ -6400,14 +8846,119 @@ You can also specify a custom item and accosiate it with a command.
 ### contextMenu.head.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          { 
+            name: "editrow",
+            text: "Edit Row",
+            icon: "edit"
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.head.text `String`
 Specifies the text of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          { 
+            name: "editrow",
+            text: "Edit Current Row",
+            icon: "edit"
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.head.icon `String`
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          { 
+            name: "editrow",
+            text: "Edit Row",
+            icon: "k-icon k-i-edit"
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.head.command `String`
 Specifies the command of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      editable: "inline",
+      contextMenu: {
+        head: [
+          { 
+            name: "editrow",
+            text: "Edit Row",
+            command: "edit"
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.head.items `Array`
 Specifies the items of the item.
@@ -6456,34 +9007,261 @@ Specifies the items of the item.
 ### contextMenu.head.items.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          { 
+            name: "actions",
+            text: "Row Actions",
+            items: [
+              { name: "edititem", text: "Edit", command: "edit" },
+              { name: "deleteitem", text: "Delete", command: "destroy" }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.head.items.text `String`
 Specifies the text of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          { 
+            name: "actions",
+            text: "Actions",
+            items: [
+              { name: "edititem", text: "Edit Row", command: "edit" },
+              { name: "deleteitem", text: "Delete Row", command: "destroy" }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.head.items.icon `String`
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        head: [
+          { 
+            name: "actions",
+            text: "Actions",
+            items: [
+              { name: "edititem", text: "Edit", icon: "k-icon k-i-edit", command: "edit" },
+              { name: "deleteitem", text: "Delete", icon: "k-icon k-i-delete", command: "destroy" }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
+
 ### contextMenu.head.items.command `String`
 Specifies the command of the item.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      editable: "inline",
+      contextMenu: {
+        head: [
+          { 
+            name: "actions",
+            text: "Actions",
+            items: [
+              { name: "edititem", text: "Edit", command: "edit" },
+              { name: "deleteitem", text: "Delete", command: "destroy" }
+            ]
+          }
+        ]
+      }
+    });
+    </script>
 
 ### contextMenu.close `Function`
 
 Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        close: function(e) {
+          console.log("Context menu is closing");
+        }
+      }
+    });
+    </script>
+
 ### contextMenu.open `Function`
 
 Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        open: function(e) {
+          console.log("Context menu is opening");
+        }
+      }
+    });
+    </script>
 
 ### contextMenu.activate `Function`
 
 Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        activate: function(e) {
+          console.log("Context menu activated");
+        }
+      }
+    });
+    </script>
+
 ### contextMenu.deactivate `Function`
 
 Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        deactivate: function(e) {
+          console.log("Context menu deactivated");
+        }
+      }
+    });
+    </script>
+
 ### contextMenu.select `Function`
 
 Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      contextMenu: {
+        select: function(e) {
+          console.log("Context menu item selected:", e.item.text);
+        }
+      }
+    });
+    </script>
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
@@ -7220,9 +9998,49 @@ For more information, please refer to the [Window configuration API](/api/javasc
 
 If set to `true` the column title will be HTML-encoded before it is displayed. If set to `false` the column title will be displayed as is.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName", title: "<b>Product Name</b>" },
+        { field: "category", title: "<i>Category</i>" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      encodeTitles: true // HTML in titles will be encoded and displayed as text
+    });
+    </script>
+
 ### excel `Object`
 
 Configures the Kendo UI Grid Excel export settings.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      toolbar: ["excel"],
+      excel: {
+        fileName: "ProductData.xlsx",
+        allPages: true,
+        filterable: true
+      }
+    });
+    </script>
 
 ### excel.allPages `Boolean` *(default: false)*
 
@@ -7369,6 +10187,27 @@ Enables or disables collapsible (grouped) rows, for grids with aggregates.
 
 ### excel.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](excel.proxyurl) even if the browser supports saving files locally.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["excel"],
+      excel: {
+        forceProxy: true,
+        proxyURL: "/save"
+      }
+    });
+    </script>
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -7687,6 +10526,28 @@ The text of the information message on the top of the filter menu.
 ### filterable.messages.title `String` *(default: "Show items with value that: ")*
 
 The text rendered for the title attribute of the filter menu form.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      filterable: {
+        messages: {
+          title: "Filter items where value:"
+        }
+      }
+    });
+    </script>
 
 ### filterable.messages.isFalse `String` *(default: "is false")*
 
@@ -9589,6 +12450,29 @@ The supported values are:
 
 The text messages displayed during grouping.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 },
+        { productName: "Bread", category: "Food", unitPrice: 1.5 }
+      ],
+      groupable: {
+        messages: {
+          empty: "Drop column headers here to group your data"
+        }
+      }
+    });
+    </script>
+
 ### groupable.messages.empty `String` *(default: "Drag a column header and drop it here to group by that column")*
 
 The text displayed in the grouping drop area.
@@ -10488,13 +13372,57 @@ Allows the customization of the text in the column header for the expand or coll
 
 The text that will be used for the `title` attribute of all filter cells belonging to a filter row in the Grid.
 
+#### Example - configure filter cell title message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }, { field: "age" }],
+       dataSource: [{ name: "Jane Doe", age: 30 }],
+       filterable: {
+         mode: "row"
+       },
+       messages: {
+         filterCellTitle: "Filter this column"
+       }
+    });
+    </script>
+
 ### messages.groupingHeaderLabel `String` *(default: "grid grouping header")*
 
 The text that will be used for the `aria-lable` attribute of the grouping header of the Grid.
 
+#### Example - configure grouping header label message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }, { field: "age" }],
+       dataSource: [{ name: "Jane Doe", age: 30 }],
+       groupable: true,
+       messages: {
+         groupingHeaderLabel: "Drag column headers here to group by column"
+       }
+    });
+    </script>
+
 ### messages.toolbarLabel `String` *(default: "grid toolbar")*
 
 The text that will be used for the `aria-lable` attribute of the ToolBar of the Grid.
+
+#### Example - configure toolbar label message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [{ field: "name" }, { field: "age" }],
+       dataSource: [{ name: "Jane Doe", age: 30 }],
+       toolbar: ["create", "excel"],
+       messages: {
+         toolbarLabel: "Grid action toolbar"
+       }
+    });
+    </script>
 
 ### messages.clearButtons `Object`
 
@@ -10983,6 +13911,28 @@ Specifies a value whether the page sizes dropdown will be adaptive. Possible val
 * `none` - The current page.
 * `auto` - The total number of pages.
 
+#### Example - configure adaptive mode for pager
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        adaptiveMode: "auto"
+      }
+    });
+    </script>
+
 ### pageable.buttonCount `Number` *(default: 10)*
 
 The maximum number of buttons displayed in the numeric pager. The pager will display ellipsis (...) if there are more pages than the specified number.
@@ -11013,7 +13963,7 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
 
 If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.
 
-##### Example - hide the paging information
+#### Example - hide the paging information
 
     <div id="grid"></div>
     <script>
@@ -11066,6 +14016,36 @@ Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same ti
 ### pageable.messages `Object`
 
 The text messages displayed in pager. Use this option to customize or localize the pager messages.
+
+#### Example - configure pager messages
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        messages: {
+          display: "Showing {0} to {1} of {2} entries",
+          page: "Page",
+          of: "of {0}",
+          first: "First",
+          last: "Last",
+          next: "Next",
+          previous: "Previous"
+        }
+      }
+    });
+    </script>
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
@@ -11610,6 +14590,31 @@ If set to `false` the pager will not be responsive. By default the pager is resp
 
 Configures the Kendo UI Grid PDF export settings.
 
+#### Example - configure PDF export settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        fileName: "Products.pdf",
+        title: "Product List",
+        author: "Company Name",
+        allPages: true
+      }
+    });
+    </script>
+
 ### pdf.allPages `Boolean` *(default: false)*
 
 Exports all grid pages, starting from the first one.
@@ -11708,6 +14713,27 @@ The author of the PDF document.
 Specifies if the Print dialog should be opened immediately after loading the document.
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
+#### Example - enable auto print for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        autoPrint: true,
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
 
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
@@ -11820,13 +14846,77 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](pdf.proxyurl) even if the browser supports saving files locally.
 
+#### Example - force proxy usage for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        forceProxy: true,
+        proxyURL: "/proxy/pdf",
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example - configure JPEG quality for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        jpegQuality: 0.5,
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example - preserve PNG format in PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        keepPNG: true,
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -11913,17 +15003,109 @@ units are "mm", "cm", "in" and "pt" (default).
 
 The bottom margin. Numbers are considered as "pt" units.
 
+#### Example - set bottom margin for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        margin: {
+          bottom: "20mm"
+        },
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as "pt" units.
+
+#### Example - set left margin for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        margin: {
+          left: 15
+        },
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as "pt" units.
 
+#### Example - set right margin for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        margin: {
+          right: "10pt"
+        },
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as "pt" units.
+
+#### Example - set top margin for PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        margin: {
+          top: "5mm"
+        },
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -11974,6 +15156,30 @@ Available template variables include:
 >
 > Using a template requires setting [paper size](pdf.papersize)
 
+#### Example - add header template to PDF export
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        paperSize: "A4",
+        template: ({ pageNum, totalPages }) => `<div class="page-template">
+          <h2>Product Catalog - Page ${kendo.htmlEncode(pageNum)} of ${kendo.htmlEncode(totalPages)}</h2>
+          </div>`,
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
+
 ### pdf.repeatHeaders `Boolean` *(default: false)*
 
 Set this to `true` to repeat the grid headers on each page.
@@ -11982,9 +15188,55 @@ Set this to `true` to repeat the grid headers on each page.
 >
 > Using a repeatHeaders requires setting [paper size](pdf.papersize)
 
+#### Example - repeat headers on each PDF page
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        paperSize: "A4",
+        repeatHeaders: true,
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
+
 ### pdf.scale `Number` *(default: 1)*
 
 A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the [Scaling the Drawings](slug://scalingofcontent_drawing) article.
+
+#### Example - scale PDF content
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["pdf"],
+      pdf: {
+        paperSize: "A4",
+        scale: 0.8,
+        fileName: "Products.pdf"
+      }
+    });
+    </script>
 
 > **Important**
 >
@@ -12401,15 +15653,86 @@ Can also be set to the following string values:
 
 Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
 
+#### Example - enable virtual scrolling for rows
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: {
+        type: "odata",
+        transport: {
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        },
+        pageSize: 50
+      },
+      height: 400,
+      scrollable: {
+        virtual: "rows"
+      }
+    });
+    </script>
+
 ### scrollable.endless `Boolean` *(default: false)*
 
 If set to `true` the grid will always display a single page of data. Scrolling to the end will load more items untill all items are displayed.
 
 > Check [Endless scrolling of local data](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local) and [Endless scrolling of remote data](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote) for live demos.
 
+#### Example - enable endless scrolling
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: {
+        type: "odata",
+        transport: {
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        },
+        pageSize: 50
+      },
+      height: 400,
+      scrollable: {
+        endless: true
+      }
+    });
+    </script>
+
 ### search `Object`
 
 Configures the Kendo UI Grid search bar settings.
+
+#### Example - configure search functionality
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      toolbar: ["search"],
+      search: {
+        fields: [
+          { name: "productName", operator: "contains" },
+          { name: "category", operator: "eq" }
+        ]
+      }
+    });
+    </script>
 
 ### search.fields `Array`
 
@@ -12908,6 +16231,28 @@ Sets the Grid's data layout. Possible values are: `stacked`, `columns`.
 
 The `stacked` layout settings of the Grid.
 
+#### Example - configure stacked layout settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { field: "city" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, city: "New York" },
+        { name: "John Doe", age: 33, city: "Boston" }
+      ],
+      dataLayoutMode: "stacked",
+      stackedLayoutSettings: {
+        cols: 2
+      },
+      height: 550
+    });
+    </script>
+
 ### stackedLayoutSettings.cols `Number|Array`
 
 Sets the amount of columns in which the `stacked` cells will be displayed.
@@ -13296,6 +16641,35 @@ An array collection of items to be rendered in the toolbar. Each item will be tr
 
 - The "selectAll" command enables the user to select all rows if the grid is `selectable`.
 
+#### Example - configure toolbar items
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create", text: "Add New" },
+          { name: "excel", text: "Export to Excel" },
+          { name: "pdf", iconClass: "k-icon k-i-file-pdf" },
+          { name: "custom", text: "Custom Action", template: "<button class='k-button' onclick='customAction()'>Custom</button>" }
+        ]
+      },
+      editable: true
+    });
+    
+    function customAction() {
+      alert("Custom action executed!");
+    }
+    </script>
+
 ### toolbar.items.iconClass `String`
 
 The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
@@ -13303,11 +16677,59 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
 > Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
 > Built-in commands have a predefined **iconClass** value.
 
+#### Example - configure toolbar item icon class
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create", iconClass: "k-icon k-i-plus", text: "Add" },
+          { name: "excel", iconClass: "k-icon k-i-file-excel" }
+        ]
+      },
+      editable: true
+    });
+    </script>
 
 ### toolbar.items.name `String`
 
 The name of the toolbar command. Either a built-in ("cancel", "create", "save", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
 This class can be used to obtain reference to the button after Grid initialization and attach click handlers.
+
+#### Example - configure toolbar item name
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "myCustomCommand", text: "My Command" }
+        ]
+      }
+    });
+    
+    // Access button by CSS class derived from name
+    $(".k-grid-myCustomCommand").click(function() {
+      alert("Custom command clicked!");
+    });
+    </script>
 
 ### toolbar.items.template `String|Function`
 
@@ -13315,16 +16737,92 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 > Check [Toolbar template](https://demos.telerik.com/kendo-ui/grid/toolbar-template) for a live demo.
 
+#### Example - configure toolbar item template
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { 
+            name: "customDropDown", 
+            template: (data) => `<select class="k-dropdown">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>`
+          }
+        ]
+      }
+    });
+    </script>
 
 ### toolbar.items.text `String`
 
 The text displayed by the command button. If not set the [name](toolbar.name) option would be used as the button text instead.
+
+#### Example - configure toolbar item text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create", text: "Add New Record" },
+          { name: "excel", text: "Download Excel" }
+        ]
+      },
+      editable: true
+    });
+    </script>
 
 ### toolbar.items.clearButton `boolean`
 
 Show a clear all sorts or clear all filters button.
 
 > Only applicable for Sort,Filter, and Group tools.
+
+#### Example - configure clear button for toolbar items
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: {
+        items: [
+          { name: "sort", clearButton: true },
+          { name: "filter", clearButton: true },
+          { name: "group", clearButton: true }
+        ]
+      }
+    });
+    </script>
 
 ### toolbar.iconClass `String`
 
@@ -13363,6 +16861,37 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
 ### toolbar.overflow `Object`
 Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
+#### Example - configure toolbar overflow settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create" },
+          { name: "excel" },
+          { name: "pdf" },
+          { name: "custom1", text: "Action 1" },
+          { name: "custom2", text: "Action 2" }
+        ],
+        overflow: {
+          mode: "scroll",
+          scrollButtons: "visible",
+          scrollButtonsPosition: "split",
+          scrollDistance: 100
+        }
+      },
+      editable: true
+    });
+    </script>
 
 ### toolbar.overflow.mode `String` *(default: "menu")*
 
@@ -13374,6 +16903,34 @@ Defines the overflow mode. The available options are:
 
 > The new Sort, Filter, ColumnChooser tools will not work as expected with the `menu` option. Currently these tools are not supported by the overflow menu. It is recomended to use the `scroll` options when using any of these tools.
 
+#### Example - configure toolbar overflow mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create" },
+          { name: "excel" },
+          { name: "pdf" },
+          { name: "custom", text: "Custom Action" }
+        ],
+        overflow: {
+          mode: "scroll"
+        }
+      },
+      editable: true
+    });
+    </script>
+
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
 Defines the visibility of scroll buttons when `mode` is `"scroll"`. The available options are:
@@ -13381,6 +16938,33 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
 
+#### Example - configure toolbar overflow scroll buttons
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create" },
+          { name: "excel" },
+          { name: "pdf" }
+        ],
+        overflow: {
+          mode: "scroll",
+          scrollButtons: "visible"
+        }
+      },
+      editable: true
+    });
+    </script>
 
 ### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
 
@@ -13389,10 +16973,66 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example - configure toolbar overflow scroll buttons position
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create" },
+          { name: "excel" },
+          { name: "pdf" }
+        ],
+        overflow: {
+          mode: "scroll",
+          scrollButtons: "visible",
+          scrollButtonsPosition: "end"
+        }
+      },
+      editable: true
+    });
+    </script>
 
 ### toolbar.overflow.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+#### Example - configure toolbar overflow scroll distance
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      toolbar: {
+        items: [
+          { name: "create" },
+          { name: "excel" },
+          { name: "pdf" }
+        ],
+        overflow: {
+          mode: "scroll",
+          scrollDistance: 75
+        }
+      },
+      editable: true
+    });
+    </script>
 
 
 ### toolbar.name `String`
@@ -13434,6 +17074,33 @@ This class can be used to obtain reference to the button after Grid initializati
 ### toolbar.showInactiveTools `Boolean`
 
 If set to true, the toolbar will show the inactive tools in a disabled state. Otherwise the tools will be hidden.
+
+#### Example - show inactive tools in disabled state
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: true,
+      filterable: true,
+      groupable: true,
+      toolbar: {
+        items: [
+          { name: "sort" },
+          { name: "filter" },
+          { name: "group" }
+        ],
+        showInactiveTools: true
+      }
+    });
+    </script>
 
 ### toolbar.template `String|Function`
 
@@ -13673,6 +17340,38 @@ The jQuery object which represents the grid footer element.
 
 The [Pager widget](/api/javascript/ui/pager) attached to the Grid.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: {
+        data: [
+          { productName: "Tea", category: "Beverages" },
+          { productName: "Coffee", category: "Beverages" },
+          { productName: "Ham", category: "Food" },
+          { productName: "Bread", category: "Food" }
+        ],
+        pageSize: 2
+      },
+      pageable: true
+    });
+
+    var grid = $("#grid").data("kendoGrid");
+    var pager = grid.pager;
+    
+    // Access the pager widget methods
+    console.log("Current page:", pager.page());
+    console.log("Total pages:", pager.totalPages());
+    
+    // Navigate to a specific page
+    pager.page(2);
+    </script>
+
 ### table `jQuery`
 
 The jQuery object which represents the grid table element.
@@ -13807,6 +17506,30 @@ The jQuery object which represents the grid locked header element. Available onl
 ### lockedTable `jQuery`
 
 The jQuery object which represents the grid locked table element. Available only in a grid with locked columns.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", locked: true, width: 250 },
+        { field: "name", locked: true, width: 250 },
+        { field: "age", width: 250 }
+      ],
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 31 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+
+    var grid = $("#grid").data("kendoGrid");
+    var lockedTable = grid.lockedTable;
+    
+    // Style the locked table
+    lockedTable.css("border", "2px solid red");
+    console.log("Locked table element:", lockedTable);
+    </script>
 
 ### lockedContent `jQuery`
 
@@ -14020,6 +17743,8 @@ A set of column objects obtained from the [columns](/api/javascript/ui/grid/fiel
 ### cancelChanges
 
 Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state.
+
+#### Example
 
     <div id="grid"></div>
     <script>

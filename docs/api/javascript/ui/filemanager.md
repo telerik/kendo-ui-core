@@ -271,6 +271,32 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
 Configures the composite Upload widget of the FileManager. Accepts the same options as the [kendoUpload widget](/api/javascript/ui/upload).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                multiple: true,
+                showFileList: true,
+                async: {
+                    saveUrl: baseUrl + "Upload",
+                    removeUrl: baseUrl + "Remove"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### uploadUrl `String`
 
 Sets the upload url for the Upload widget.
@@ -298,50 +324,328 @@ Sets the upload url for the Upload widget.
 
 Fires when the upload was cancelled while in progress. [Upload Events](/api/javascript/ui/upload#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                cancel: function(e) {
+                    console.log("Upload cancelled: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### upload.clear `Function`
 
 Fires when the files are cleared by clicking on the **Clear** button. [Upload Events](/api/javascript/ui/upload#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                clear: function(e) {
+                    console.log("Upload list cleared");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### upload.complete `Function`
 
 Fires when all active uploads complete&mdash;either successfully or with errors. [Upload Events](/api/javascript/ui/upload#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                complete: function(e) {
+                    console.log("Upload completed");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### upload.error `Function`
 
 Fires when an `upload` or `remove` operation fails. [Upload Events](/api/javascript/ui/upload#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                error: function(e) {
+                    console.log("Upload error: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### upload.pause `Function`
 
 Fires when the files are cleared by clicking the **Pause** button. The button is visible if `chunksize` is set. [Upload Events](/api/javascript/ui/upload#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                pause: function(e) {
+                    console.log("Upload paused: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### upload.progress `Function`
 
 Fires when the data about the progress of the upload is available. [Upload Events](/api/javascript/ui/upload#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                progress: function(e) {
+                    console.log("Upload progress: " + Math.round(e.percentComplete) + "%");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### upload.resume `Function`
 
 Fires when the files are resumed through clicking the **Resume** button. The button is visible if `chunksize` is set and the file upload is paused. [Upload Events](/api/javascript/ui/upload#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                resume: function(e) {
+                    console.log("Upload resumed: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### upload.remove `Function`
 
 Fires when an uploaded file is about to be removed. If the event is canceled, the `remove` operation is prevented. [Upload Events](/api/javascript/ui/upload#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                remove: function(e) {
+                    console.log("File removed: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### upload.select `Function`
 
 Fires when a file is selected. [Upload Events](/api/javascript/ui/upload#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                select: function(e) {
+                    console.log("Files selected: " + e.files.length);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### upload.success `Function`
 
 Fires when an `upload` or `remove` operation is completed successfully. [Upload Events](/api/javascript/ui/upload#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                success: function(e) {
+                    console.log("Upload successful: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### upload.upload `Function`
 
 Fires when one or more files are about to be uploaded. The canceling of the event prevents the upload. [Upload Events](/api/javascript/ui/upload#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            upload: {
+                upload: function(e) {
+                    console.log("Starting upload: " + e.files[0].name);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 
 ### toolbar `Boolean | Object` *(default: true)*
 
 Configures the Toolbar of the FileManager
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder" },
+                    { name: "upload" },
+                    { name: "search" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items `Array`
 
@@ -382,78 +686,655 @@ Apart from the built-in tools, the FileManager fully exposes the [ToolBar.items 
 ### toolbar.items.type `String`
 Specifies the type of the button.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", type: "button" },
+                    { name: "upload", type: "button" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.overflow `String`
 Specifies the overflow of the button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", overflow: "auto" },
+                    { name: "upload", overflow: "never" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.click `Function`
 Specifies the click handler of the button.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { 
+                        name: "custom", 
+                        text: "Custom",
+                        click: function() {
+                            alert("Custom button clicked");
+                        }
+                    }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.command `String`
 Specifies the command of the button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", command: "CreateFolderCommand" },
+                    { name: "upload", command: "UploadCommand" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.options `String`
 Specifies the command options of the button.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", options: { text: "New Folder" } }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.name `String`
 Specifies the name of the button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder" },
+                    { name: "upload" },
+                    { name: "search" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.togglable `Boolean` *(default: false)*
 Specifies if the button is togglable, e.g. has a selected and unselected state.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "details", togglable: true }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.text `String`
 Sets the text of the button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", text: "New Folder" },
+                    { name: "upload", text: "Upload Files" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.template `String|Function`
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { template: "<button class='k-button'>Custom Button</button>" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.showText `String` *(default: "both")*
 Specifies where the text will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", showText: "toolbar" },
+                    { name: "upload", showText: "both" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.primary `Boolean` *(default: false)*
 Specifies whether the button is primary. Primary buttons receive different styling.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", primary: true },
+                    { name: "upload", primary: false }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.attributes `Object`
 Specifies the HTML attributes of a ToolBar button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { 
+                        name: "createFolder", 
+                        attributes: { 
+                            "data-role": "button",
+                            "title": "Create a new folder"
+                        } 
+                    }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.enable `Boolean` *(default: true)*
 Specifies whether the control is initially enabled or disabled. Default value is "true".
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", enable: true },
+                    { name: "upload", enable: false }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.hidden `Boolean` *(default: false)*
 Determines if a button is visible or hidden. By default buttons are visible.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", hidden: false },
+                    { name: "upload", hidden: true }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.spriteCssClass `String`
 Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", spriteCssClass: "k-icon k-i-folder" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.imageUrl `String`
 If set, the ToolBar will render an image with the specified URL in the button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", imageUrl: "/path/to/folder-icon.png" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.items.showIcon `String` *(default: "both")*
 Specifies where the button icon will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", showIcon: "toolbar" },
+                    { name: "upload", showIcon: "both" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.icon `String`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", icon: "folder" },
+                    { name: "upload", icon: "upload" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.items.id `String`
 Specifies the ID of the button.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                items: [
+                    { name: "createFolder", id: "createFolderBtn" },
+                    { name: "upload", id: "uploadBtn" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.click `Function`
 
 Fires when the user clicks a command button. [Toolbar Events](/api/javascript/ui/toolbar#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                click: function(e) {
+                    console.log("Toolbar button clicked: " + e.id);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.close `Function`
 
 Fires when the SplitButton's popup closes. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                close: function(e) {
+                    console.log("Toolbar popup closed");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.open `Function`
 
 Fires when the Split Button's popup opens. [Toolbar Events](/api/javascript/ui/toolbar#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                open: function(e) {
+                    console.log("Toolbar popup opened");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.toggle `Function`
 
 Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/javascript/ui/toolbar#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                toggle: function(e) {
+                    console.log("Toolbar button toggled: " + e.checked);
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.overflow `Object`
 Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflow: {
+                    mode: "menu"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.overflow.mode `String` *(default: "menu")*
 
@@ -463,6 +1344,28 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflow: {
+                    mode: "scroll"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
@@ -471,6 +1374,29 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflow: {
+                    mode: "scroll",
+                    scrollButtons: "visible"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
 
@@ -479,23 +1405,142 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflow: {
+                    mode: "scroll",
+                    scrollButtonsPosition: "end"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### toolbar.overflow.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflow: {
+                    mode: "scroll",
+                    scrollDistance: 100
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 
 ### toolbar.overflowClose `Function`
 
 Fires when the overflow popup container is about to close. [Toolbar Events](/api/javascript/ui/toolbar#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflowClose: function(e) {
+                    console.log("Toolbar overflow popup is closing");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### toolbar.overflowOpen `Function`
 
 Fires when the overflow popup container is about to open. [Toolbar Events](/api/javascript/ui/toolbar#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            toolbar: {
+                overflowOpen: function(e) {
+                    console.log("Toolbar overflow popup is opening");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### dialogs `Object`
 
 Specifies the composite Dialog widgets of the FileManager.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dialogs: {
+                upload: {
+                    title: "Upload Files"
+                },
+                deleteConfirm: {
+                    title: "Confirm Deletion"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### dialogs.upload `Object`
 
@@ -658,11 +1703,82 @@ Configures the items of the ContextMenu.
 ### contextMenu.items.name `String`
 Specifies the name of the item.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                items: [
+                    { name: "delete" },
+                    { name: "rename" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### contextMenu.items.text `String`
 Specifies the text of the item.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                items: [
+                    { name: "delete", text: "Delete File" },
+                    { name: "rename", text: "Rename File" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### contextMenu.items.spriteCssClass `String`
 Specifies the spriteCssClass of the item.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                items: [
+                    { name: "delete", spriteCssClass: "k-icon k-i-delete" }
+                ]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### contextMenu.items.icon `String`
 
@@ -739,17 +1855,109 @@ Specifies the command of the item.
 
 Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                close: function(e) {
+                    console.log("ContextMenu is closing");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### contextMenu.open `Function`
 
 Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                open: function(e) {
+                    console.log("ContextMenu is opening");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### contextMenu.activate `Function`
 
 Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                activate: function(e) {
+                    console.log("ContextMenu activated");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### contextMenu.deactivate `Function`
 
 Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                deactivate: function(e) {
+                    console.log("ContextMenu deactivated");
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### contextMenu.select `Function`
 
@@ -781,6 +1989,32 @@ Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/co
 ### views `Object`
 
 Configures every view registered for the FileManager.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            views: {
+                grid: {
+                    sortable: true
+                },
+                list: {
+                    pageable: false
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### views.grid `Object`
 
@@ -867,6 +2101,27 @@ Configures the built-in tree view - accepts [kendoTreeView options](/api/javascr
 
 Configures the Preview Pane of the FileManager.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            previewPane: {
+                metaFields: ["created", "size", "extension"]
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### previewPane.metaFields `Array`
 
 Configures the meta fields to be showed in the preview pane.
@@ -895,11 +2150,74 @@ Configures the meta fields to be showed in the preview pane.
 ### previewPane.noFileTemplate `String|Function`
 Defines a new template for the preview pane when no file/folder is selected.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            previewPane: {
+                noFileTemplate: "<div class='no-file-message'>Please select a file to preview</div>"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### previewPane.singleFileTemplate `String|Function`
 Defines a new template for the preview pane when a single file/folder is selected.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            previewPane: {
+                singleFileTemplate: "<div><h3>#: name #</h3><p>Size: #: size # bytes</p></div>"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### previewPane.multipleFilesTemplate `String|Function`
 Defines a new template for the preview pane when multiple files/folders are selected.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            previewPane: {
+                multipleFilesTemplate: "<div><h3>#: files.length # files selected</h3></div>"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### breadcrumb `Object|Boolean` *(default: true)*
 
@@ -927,8 +2245,50 @@ Configures or disables the Breadcrumb component.
 ### breadcrumb.rootIcon `String`
 Defines a new root icon for the breadcrumb.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            breadcrumb: {
+                rootIcon: "home"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### breadcrumb.delimiterIcon `String`
 Defines a new delimiter icon for the breadcrumb.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            breadcrumb: {
+                delimiterIcon: "arrow-right"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages `Object`
 Defines the text of the localizable UI parts of the FileManager.
@@ -1023,118 +2383,1576 @@ Defines the text of the localizable UI parts of the FileManager.
 ### messages.toolbar `Object`
 Defines the localization messages for the toolbar.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    createFolder: "New Folder",
+                    upload: "Upload Files",
+                    search: "Search Files"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.createFolder `String`
+
+Defines the text for the create folder button in the toolbar. This message appears as a tooltip and button label for the create folder action in the FileManager toolbar. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    createFolder: "Create New Folder"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.upload `String`
 
+Defines the text for the upload button in the toolbar. This message appears as a tooltip and button label for the file upload action in the FileManager toolbar. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    upload: "Upload Files"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.sortDirection `String`
+
+Defines the text for the sort direction dropdown in the toolbar. This message appears as a label for the dropdown that allows users to select between ascending and descending sort orders. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    sortDirection: "Sort Direction"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.sortDirectionAsc `String`
 
+Defines the text for the ascending sort direction option in the toolbar dropdown. This message appears as an option in the sort direction dropdown menu, allowing users to sort files and folders in ascending order. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    sortDirectionAsc: "Sort Ascending"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.sortDirectionDesc `String`
+
+Defines the text for the descending sort direction option in the toolbar dropdown. This message appears as an option in the sort direction dropdown menu, allowing users to sort files and folders in descending order. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    sortDirectionDesc: "Sort Descending"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.sortField `String`
 
+Defines the text for the sort field dropdown in the toolbar. This message appears as a label for the dropdown that allows users to select which column to sort by (name, size, type, or date). It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    sortField: "Sort By"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.nameField `String`
+
+Defines the text for the name field option in the sort field dropdown. This message appears as an option in the sort field dropdown menu, allowing users to sort files and folders by their name. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    nameField: "Name"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.sizeField `String`
 
+Defines the text for the size field option in the sort field dropdown. This message appears as an option in the sort field dropdown menu, allowing users to sort files and folders by their size. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    sizeField: "File Size"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.typeField `String`
+
+Defines the text for the type field option in the sort field dropdown. This message appears as an option in the sort field dropdown menu, allowing users to sort files and folders by their file type or extension. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    typeField: "Type"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.dateModifiedField `String`
 
+Defines the text for the date modified field option in the sort field dropdown. This message appears as an option in the sort field dropdown menu, allowing users to sort files and folders by their last modification date. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    dateModifiedField: "Date Modified"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.dateCreatedField `String`
+
+Defines the text for the date created field option in the sort field dropdown. This message appears as an option in the sort field dropdown menu, allowing users to sort files and folders by their creation date. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    dateCreatedField: "Date Created"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.search `String`
 
+Defines the text for the search functionality in the toolbar. This message appears as a placeholder or label for the search input field, allowing users to search for files and folders by name. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    search: "Search"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.details `String`
+
+Defines the text for the details toggle button in the toolbar. This message appears as a tooltip and button label for the toggle that switches the details pane visibility in the FileManager. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    details: "View Details"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.detailsChecked `String`
 
+Defines the text for the details toggle button when the details pane is visible. This message appears as an accessibility label or tooltip text when the details pane is currently shown, indicating the checked state of the toggle. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    detailsChecked: "On"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.detailsUnchecked `String`
+
+Defines the text for the details toggle button when the details pane is hidden. This message appears as an accessibility label or tooltip text when the details pane is currently hidden, indicating the unchecked state of the toggle. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    detailsUnchecked: "Off"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.toolbar.delete `String`
 
+Defines the text for the delete button in the toolbar. This message appears as a tooltip and button label for the delete action that removes selected files or folders from the FileManager. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    delete: "Delete"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.toolbar.rename `String`
+
+Defines the text for the rename button in the toolbar. This message appears as a tooltip and button label for the rename action that allows users to rename selected files or folders in the FileManager. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                toolbar: {
+                    rename: "Rename"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.views  `Object`
 Defines the localization messages for the views.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    nameField: "Name",
+                    sizeField: "File Size",
+                    items: "items"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.views.nameField `String`
+
+Defines the text for the name field column header in the FileManager view. This message appears as a column header in both list and grid views, identifying the column that displays file and folder names. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    nameField: "Name"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.views.sizeField `String`
 
+Defines the text for the size field column header in the FileManager view. This message appears as a column header in both list and grid views, identifying the column that displays file sizes. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    sizeField: "File Size"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.views.typeField `String`
+
+Defines the text for the type field column header in the FileManager view. This message appears as a column header in both list and grid views, identifying the column that displays file types or extensions. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    typeField: "Type"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.views.dateModifiedField `String`
 
+Defines the text for the date modified field column header in the FileManager view. This message appears as a column header in both list and grid views, identifying the column that displays the last modification date of files and folders. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    dateModifiedField: "Date Modified"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.views.dateCreatedField `String`
+
+Defines the text for the date created field column header in the FileManager view. This message appears as a column header in both list and grid views, identifying the column that displays the creation date of files and folders. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    dateCreatedField: "Date Created"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.views.items `String`
 
+Defines the text suffix used when displaying item counts in the FileManager views. This message appears alongside numerical values to indicate the number of items (files and folders) in a directory or selection. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    items: "items"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.views.listViewLabel `String`
+
+Defines the accessibility label for the list view in the FileManager. This message provides screen reader support and accessibility compliance by describing the list view mode for assistive technologies. It provides localization support for different languages and ensures proper accessibility standards.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                views: {
+                    listViewLabel: "List View"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs `Object`
 Defines the localization messages for the dialogs.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    upload: {
+                        title: "Upload Files",
+                        clear: "Clear List",
+                        done: "Done"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.upload `Object`
+
+Defines the localization messages for the upload dialog in the FileManager. This object contains all text messages displayed within the file upload dialog, including the dialog title, action buttons, and status messages. It provides comprehensive localization support for the upload functionality.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    upload: {
+                        title: "Upload Files",
+                        clear: "Clear List",
+                        done: "Done"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.upload.title `String`
 
+Defines the title text for the upload dialog in the FileManager. This message appears in the dialog header when users open the file upload dialog, providing a clear indication of the dialog's purpose. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    upload: {
+                        title: "Upload Files"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.upload.clear `String`
+
+Defines the text for the clear button in the upload dialog. This message appears on the button that allows users to remove all selected files from the upload queue before uploading. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    upload: {
+                        clear: "Clear List"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.upload.done `String`
 
+Defines the text for the done button in the upload dialog. This message appears on the button that closes the upload dialog after files have been successfully uploaded or when users want to dismiss the dialog. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    upload: {
+                        done: "Done"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.moveConfirm `Object`
+
+Defines the localization messages for the move confirmation dialog in the FileManager. This object contains all text messages displayed when users drag and drop files or folders, providing options to move or copy the selected items. It provides comprehensive localization support for the move/copy functionality.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    moveConfirm: {
+                        title: "Confirm",
+                        content: "<p style='text-align: center;'>Do you want to move or copy?</p>",
+                        okText: "Copy",
+                        cancel: "Move"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.moveConfirm.title `String`
 
+Defines the title text for the move confirmation dialog in the FileManager. This message appears in the dialog header when users perform a drag-and-drop operation that requires choosing between move or copy actions. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    moveConfirm: {
+                        title: "Confirm Move"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.moveConfirm.content `String`
+
+Defines the content text for the move confirmation dialog in the FileManager. This message appears as the main body text that asks users whether they want to move or copy the selected files and folders. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    moveConfirm: {
+                        content: "<p style='text-align: center;'>Do you want to move or copy?</p>"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.moveConfirm.okText `String`
 
+Defines the text for the primary action button in the move confirmation dialog. This message appears on the button that performs the copy action when users choose to duplicate files and folders instead of moving them. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    moveConfirm: {
+                        okText: "Copy"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.moveConfirm.cancel `String`
+
+Defines the text for the secondary action button in the move confirmation dialog. This message appears on the button that performs the move action when users choose to relocate files and folders instead of copying them. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    moveConfirm: {
+                        cancel: "Move"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.moveConfirm.close `String`
 
+Defines the text for the close button in the move confirmation dialog. This message appears on the button or link that dismisses the dialog without performing any action, canceling the move or copy operation. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    moveConfirm: {
+                        close: "close"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.deleteConfirm `Object`
+
+Defines the localization messages for the delete confirmation dialog in the FileManager. This object contains all text messages displayed when users attempt to delete files or folders, ensuring they confirm the destructive action before proceeding. It provides comprehensive localization support for the delete functionality.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    deleteConfirm: {
+                        title: "Confirm",
+                        content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?</p>",
+                        okText: "Delete",
+                        cancel: "Cancel"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.deleteConfirm.title `String`
 
+Defines the title text for the delete confirmation dialog in the FileManager. This message appears in the dialog header when users attempt to delete selected files or folders, providing a clear warning about the destructive action. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    deleteConfirm: {
+                        title: "Confirm Deletion"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.deleteConfirm.content `String`
+
+Defines the content text for the delete confirmation dialog in the FileManager. This message appears as the main body text that asks users to confirm the permanent deletion of selected files and folders. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    deleteConfirm: {
+                        content: "<p style='text-align: center;'>Are you sure you want to delete the selected file(s)?</p>"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.deleteConfirm.okText `String`
 
+Defines the text for the primary action button in the delete confirmation dialog. This message appears on the button that executes the deletion when users confirm they want to permanently remove the selected files and folders. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    deleteConfirm: {
+                        okText: "Delete"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.deleteConfirm.cancel `String`
+
+Defines the text for the cancel button in the delete confirmation dialog. This message appears on the button that dismisses the dialog without deleting any files or folders, allowing users to abort the deletion operation. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    deleteConfirm: {
+                        cancel: "Cancel"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.deleteConfirm.close `String`
 
+Defines the text for the close button in the delete confirmation dialog. This message appears on the button or link that dismisses the dialog without performing the deletion, effectively canceling the destructive operation. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    deleteConfirm: {
+                        close: "close"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.renamePrompt `Object`
+
+Defines the localization messages for the rename prompt dialog in the FileManager. This object contains all text messages displayed when users attempt to rename files or folders, including the dialog title, input prompt, and action buttons. It provides comprehensive localization support for the rename functionality.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    renamePrompt: {
+                        title: "Prompt",
+                        content: "<p style='text-align: center;'>Enter new name for the file.</p>",
+                        okText: "Rename",
+                        cancel: "Cancel"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.renamePrompt.title `String`
 
+Defines the title text for the rename prompt dialog in the FileManager. This message appears in the dialog header when users initiate a rename operation on a selected file or folder. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    renamePrompt: {
+                        title: "Rename File"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.renamePrompt.content `String`
+
+Defines the content text for the rename prompt dialog in the FileManager. This message appears as instructional text that prompts users to enter a new name for the selected file or folder. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    renamePrompt: {
+                        content: "<p style='text-align: center;'>Enter new name for the file.</p>"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.dialogs.renamePrompt.okText `String`
 
+Defines the text for the primary action button in the rename prompt dialog. This message appears on the button that executes the rename operation when users have entered a new name for the selected file or folder. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    renamePrompt: {
+                        okText: "Rename"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.renamePrompt.cancel `String`
 
+Defines the text for the cancel button in the rename prompt dialog. This message appears on the button that dismisses the dialog without renaming the file or folder, allowing users to abort the rename operation. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    renamePrompt: {
+                        cancel: "Cancel"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.dialogs.renamePrompt.close `String`
+
+Defines the text for the close button in the rename prompt dialog. This message appears on the button or link that dismisses the dialog without performing the rename action, effectively canceling the operation. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                dialogs: {
+                    renamePrompt: {
+                        close: "close"
+                    }
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.previewPane `Object`
 Defines the localization messages for the preview pane.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    noFileSelected: "No File Selected",
+                    extension: "Type",
+                    size: "Size",
+                    created: "Date Created"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.previewPane.noFileSelected `String`
+
+Defines the text displayed in the preview pane when no file is currently selected. This message appears in the details panel to inform users that they need to select a file or folder to view its properties and information. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    noFileSelected: "No File Selected"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.previewPane.extension `String`
 
+Defines the label text for the file extension field in the preview pane. This message appears as a label next to the file type or extension information when a file is selected in the FileManager. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    extension: "Type"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.previewPane.size `String`
+
+Defines the label text for the file size field in the preview pane. This message appears as a label next to the file size information when a file is selected in the FileManager, displaying the file's storage size. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    size: "Size"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### messages.previewPane.created `String`
 
+Defines the label text for the creation date field in the preview pane. This message appears as a label next to the file creation date information when a file or folder is selected in the FileManager. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    created: "Date Created"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.previewPane.modified `String`
 
+Defines the label text for the modification date field in the preview pane. This message appears as a label next to the last modification date information when a file or folder is selected in the FileManager. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    modified: "Date Modified"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### messages.previewPane.items `String`
+
+Defines the label text for the item count field in the preview pane when a folder is selected. This message appears as a suffix alongside numerical values to indicate the number of files and subfolders contained within a selected directory. It provides localization support for different languages and allows customization of the user interface text.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            messages: {
+                previewPane: {
+                    items: "items"
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ## Methods
 
@@ -1460,6 +4278,32 @@ Gets the size of the FileManager wrapper.
 
 `Object` The width and height of the FileManager wrapper in pixels.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            width: 800,
+            height: 600,
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+
+        var fileManager = $("#fileManager").data("kendoFileManager");
+        var size = fileManager.getSize();
+
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Width: " + size.width + ", Height: " + size.height);
+    </script>
+
 ### setDataSource
 
 Sets the dataSource of an existing FileManager and rebinds it.
@@ -1527,6 +4371,27 @@ Sets the dataSource of an existing FileManager and rebinds it.
 ### destroy
 Destroys the FileManagers.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+
+        var fileManager = $("#fileManager").data("kendoFileManager");
+        fileManager.destroy();
+    </script>
+
 ## Events
 
 ### navigate
@@ -1543,6 +4408,27 @@ The widget instance which fired the event.
 
 The navigation path.
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            navigate: function(e) {
+                console.log("Navigated to: " + e.path);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### select
 
 Fired when selection changes.
@@ -1557,6 +4443,27 @@ The widget instance which fired the event.
 
 The selected file/files (the JSON representation of the files).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            select: function(e) {
+                console.log("Selected files: ", e.entries);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### open
 
 Fired when a file is opened (with double click).
@@ -1570,6 +4477,54 @@ The widget instance which fired the event.
 ##### e.entry `Object`
 
 The opened file (the JSON representation of the file).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            open: function(e) {
+                console.log("Opened file: " + e.entry.name);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
+The widget instance which fired the event.
+
+##### e.entry `Object`
+
+The opened file (the JSON representation of the file).
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            open: function(e) {
+                console.log("Opened file: " + e.entry.name);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### execute
 
@@ -1588,6 +4543,27 @@ The name of the command.
 ##### e.options `Object`
 
 The options of the command.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            execute: function(e) {
+                console.log("Executed command: " + e.command);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### error
 
@@ -1657,6 +4633,27 @@ The array of items that shows the elements that are going to be added/removed fr
 ##### e.source `String`
 
 The source which triggered the event.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataBinding: function(e) {
+                console.log("Data binding with action: " + e.action);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### dataBound
 
@@ -1728,6 +4725,27 @@ The drop target's id.
 ##### e.items `Array`
 
 The items dragged and dropped over the target.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/service/v2/core/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            drop: function(e) {
+                console.log("Dropped " + e.items.length + " items on target: " + e.target);
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        method: "POST",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
 
 ### command
 

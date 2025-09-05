@@ -37,6 +37,19 @@ Supported directions are `in` and `out`.
 
 The direction of the effect. Accepted values are `"in"` or `"out"`. 
 
+#### Example
+
+    <div id="example">
+        Direction example
+    </div>
+    <script>
+    // Fade in
+    kendo.fx($("#example")).fade("in").play();
+    
+    // Fade out
+    kendo.fx($("#example")).fade("out").play();
+    </script>
+
 ## Methods
 
 ### startValue
@@ -44,6 +57,16 @@ The direction of the effect. Accepted values are `"in"` or `"out"`.
 Sets the initial **opacity** value of the element. 
 1 means the element will be fully opaque. 
 0 means that the element will be fully transparent.
+
+#### Example
+
+    <div id="startExample">
+        Start Value Example
+    </div>
+    <script>
+    // Fade out starting from 75% opacity
+    kendo.fx($("#startExample")).fade("out").startValue(0.75).play();
+    </script>
 
 #### Fading an element out, starting from 50%
 
@@ -71,6 +94,16 @@ the initial opacity value.
 Sets the final **opacity** value of the element. 
 1 means the element will be fully opaque. 
 0 means that the element will be fully transparent.
+
+#### Example
+
+    <div id="endExample">
+        End Value Example
+    </div>
+    <script>
+    // Fade in to 25% opacity
+    kendo.fx($("#endExample")).fade("in").endValue(0.25).play();
+    </script>
 
 #### Fading an element in to 50% opacity
 

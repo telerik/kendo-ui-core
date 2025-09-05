@@ -14,9 +14,36 @@ component: sparkline
 
 Default options for all chart axes.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        axisDefaults: {
+            color: "#ff0000",
+            visible: true
+        }
+    });
+    </script>
+
 ### categoryAxis `Array`
 
 The category axis configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            categories: ["A", "B", "C", "D", "E"],
+            color: "#ff0000",
+            visible: true
+        }
+    });
+    </script>
 
 ### categoryAxis.axisCrossingValue `Object | Date | Array`
 
@@ -27,18 +54,76 @@ Category indicies at which the value axes cross the category axis. (Only for arr
 **Note:**Specify an index greater than or equal to the number
 of categories to denote the far end of the axis.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            axisCrossingValue: 2,
+            categories: ["A", "B", "C", "D", "E"]
+        }
+    });
+    </script>
+
 ### categoryAxis.categories `Array`
 
 Array of category names.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            categories: ["Q1", "Q2", "Q3", "Q4", "Q5"]
+        }
+    });
+    </script>
 
 ### categoryAxis.color `String`
 
 Color to apply to all axis elements. Any valid CSS color string will work here, including hex and rgb.
 Individual color settings for line and labels take priority.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            color: "#ff0000"
+        }
+    });
+    </script>
+
 ### categoryAxis.field `String`
 
 The data field containing the category name.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        dataSource: {
+            data: [
+                { category: "Q1", value: 1 },
+                { category: "Q2", value: 2 },
+                { category: "Q3", value: 3 }
+            ]
+        },
+        categoryAxis: {
+            field: "category"
+        },
+        series: [{
+            field: "value"
+        }]
+    });
+    </script>
 
 ### categoryAxis.justified `Boolean`*(default: false)*
 
@@ -46,21 +131,97 @@ Positions categories and series points on major ticks. This removes the empty sp
 
 This option is ignored if either bar or column series are plotted on the axis.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            justified: true
+        }
+    });
+    </script>
+
 ### categoryAxis.labels `Object`
 
 Configures the axis labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                visible: true,
+                color: "#ff0000",
+                font: "12px Arial"
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.labels.background `String`
 
 The background color of the labels. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                background: "#ffe0e0"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.border `Object`
 
 The border of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                border: {
+                    color: "#ff0000",
+                    width: 2,
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                border: {
+                    color: "#00ff00"
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.labels.border.dashType `String`*(default: "solid")*
 
@@ -94,21 +255,95 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                border: {
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                border: {
+                    width: 2
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.labels.color `String`
 
 The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                color: "#0000ff"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                font: "16px Verdana"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.format `String`
 
 The format of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                format: "{0:N2}"
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.labels.margin `Number | Object`*(default: 0)*
 
@@ -129,6 +364,20 @@ Mirrors the axis labels and ticks.
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                mirror: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.padding `Number | Object`*(default: 0)*
 
 The padding of the labels.
@@ -146,15 +395,57 @@ The padding of the labels.
 
 The rotation angle of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                rotation: 45
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.skip `Number`*(default: 1)*
 
 Number of labels to skip.
 Skips rendering the first n labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                skip: 2
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.step `Number`*(default: 1)*
 
 Label rendering step.
 Every n-th label is rendered where n is the step
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                step: 2
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.labels.template `String | Function`
 
@@ -169,19 +460,77 @@ The fields which can be used in the template are:
 * index - the 0-based index of the current label
 * count - the total number of labels on the axis
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                template: (data) => `Category: ${data.value}`
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.labels.visible `Boolean`*(default: true)*
 
 The visibility of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            labels: {
+                visible: false
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.line `Object`
 
 Configures the axis line. This will also effect major and minor ticks, but not gridlines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            line: {
+                color: "#ff0000",
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.line.color `String`*(default: "black")*
 
 The color of the lines. Any valid CSS color string will work here, including hex and rgb.
 
 **Note:**This will also effect the major and minor ticks, but not the grid lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            line: {
+                color: "#00ff00"
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.line.dashType `String`*(default: "solid")*
 
@@ -215,23 +564,95 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            line: {
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.line.visible `Boolean`*(default: true)*
 
 The visibility of the lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            line: {
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.line.width `Number`*(default: 1)*
 
 The width of the line. This will also effect the major and minor ticks, but
 not the grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            line: {
+                width: 3
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorGridLines `Object`
 
 Configures the major grid lines.
 These are the lines that are an extension of the major ticks through the body of the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                color: "#ff0000",
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorGridLines.color `String`*(default: "black")*
 
 The color of the lines. Any valid CSS color string will work here, including hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                color: "#00ff00"
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.majorGridLines.dashType `String`*(default: "solid")*
 
@@ -265,50 +686,221 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorGridLines.visible `Boolean`*(default: false)*
 
 The visibility of the lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.majorGridLines.width `Number`*(default: 1)*
 
 The width of the lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                width: 3
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorGridLines.step `Number` *(default: 1)*
 
 The step of the category axis major grid lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                step: 2
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.majorGridLines.skip `Number` *(default: 0)*
 
 The skip of the category axis major grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorGridLines: {
+                skip: 1
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorTicks `Object`
 
 The major ticks of the axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                size: 8,
+                color: "#ff0000",
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.majorTicks.size `Number`*(default: 4)*
 
 The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                size: 10
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorTicks.visible `Boolean`*(default: true)*
 
 The visibility of the major ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.majorTicks.color `String` *(default: "black")*
 
 The color of the category axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                color: "#0000ff"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorTicks.width `Number` *(default: 1)*
 
 The width of the major ticks in pixels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                width: 3
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.majorTicks.step `Number` *(default: 1)*
 
 The step of the category axis major ticks.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                step: 2
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.majorTicks.skip `Number` *(default: 0)*
 
 The skip of the category axis major ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            majorTicks: {
+                skip: 1
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorGridLines `Object`
 
@@ -317,6 +909,22 @@ the body of the chart.
 
 Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to**true**.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                color: "#ff0000",
+                width: 1,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorGridLines.color `String`*(default: "black")*
 
 The color of the lines. Any valid CSS color string will work here, including hex and
@@ -324,6 +932,21 @@ rgb.
 
 Note that this setting has no effect if the visibility of the minor
 grid lines is not set to**true**.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                color: "#00ff00",
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorGridLines.dashType `String`*(default: "solid")*
 
@@ -357,9 +980,38 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                dashType: "dash",
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorGridLines.visible `Boolean`*(default: false)*
 
 The visibility of the lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorGridLines.width `Number`
 
@@ -368,89 +1020,413 @@ The width of the lines.
 Note that this setting has no effect if the visibility of the minor
 grid lines is not set to**true**.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorGridLines.step `Number` *(default: 1)*
 
 The step of the category axis minor grid lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                step: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorGridLines.skip `Number` *(default: 0)*
 
 The skip of the category axis minor grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorGridLines: {
+                skip: 1,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorTicks `Object`
 
 The minor ticks of the axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                size: 5,
+                color: "#ff0000",
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorTicks.size `Number`*(default: 3)*
 
 The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                size: 6,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorTicks.visible `Boolean`*(default: false)*
 
 The visibility of the minor ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorTicks.color `String` *(default: "black")*
 
 The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                color: "#0000ff",
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorTicks.width `Number` *(default: 1)*
 
 The width of the minor ticks in pixels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                width: 3,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.minorTicks.step `Number` *(default: 1)*
 
 The step of the category axis minor ticks.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                step: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.minorTicks.skip `Number` *(default: 0)*
 
 The skip of the category axis minor ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            minorTicks: {
+                skip: 1,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.name `String`*(default: "primary")*
 
 The unique axis name.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            name: "customCategoryAxis"
+        }
+    });
+    </script>
+
 ### categoryAxis.plotBands `Array`
 
 The plot bands of the category axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            plotBands: [{
+                from: 1,
+                to: 3,
+                color: "#ff0000",
+                opacity: 0.3
+            }]
+        }
+    });
+    </script>
 
 ### categoryAxis.plotBands.from `Number`
 
 The start position of the plot band in axis units.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            plotBands: [{
+                from: 1,
+                to: 3,
+                color: "#ff0000"
+            }]
+        }
+    });
+    </script>
+
 ### categoryAxis.plotBands.to `Number`
 
 The end position of the plot band in axis units.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            plotBands: [{
+                from: 0,
+                to: 2,
+                color: "#00ff00"
+            }]
+        }
+    });
+    </script>
 
 ### categoryAxis.plotBands.color `String`
 
 The color of the plot band.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            plotBands: [{
+                from: 1,
+                to: 3,
+                color: "#0000ff"
+            }]
+        }
+    });
+    </script>
+
 ### categoryAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            plotBands: [{
+                from: 1,
+                to: 3,
+                color: "#ff0000",
+                opacity: 0.5
+            }]
+        }
+    });
+    </script>
 
 ### categoryAxis.reverse `Boolean`*(default: false)*
 
 Reverses the axis direction -
 categories are listed from right to left and from top to bottom.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            reverse: true
+        }
+    });
+    </script>
+
 ### categoryAxis.title `Object`
 
 The title of the category axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                color: "#ff0000",
+                font: "14px Arial"
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.title.background `String`
 
 The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                background: "#ffe0e0"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.title.border `Object`
 
 The border of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                border: {
+                    color: "#ff0000",
+                    width: 2,
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.title.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including
 hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                border: {
+                    color: "#00ff00"
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.title.border.dashType `String`*(default: "solid")*
 
@@ -484,21 +1460,100 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                border: {
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.title.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                border: {
+                    width: 3
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.title.color `String`
 
 The text color of the title. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                color: "#0000ff"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.title.font `String`*(default: "16px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                font: "18px Verdana"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.title.margin `Number|Object`*(default: 5)*
 
 The margin of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                margin: 10
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.title.position `String`*(default: "center")*
 
@@ -524,17 +1579,76 @@ The axis title is positioned on the right (applicable to horizontal axis)
 
 The axis title is positioned in the center
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                position: "left"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.title.rotation `Number`*(default: 0)*
 
 The rotation angle of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                rotation: 45
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.title.text `String`
 
 The text of the title.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Custom Category Title"
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.title.visible `Boolean`*(default: true)*
 
 The visibility of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        categoryAxis: {
+            title: {
+                text: "Categories",
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.type `String`*(default: "category")*
 
@@ -547,6 +1661,25 @@ Discrete category axis.
 #### *"date"*
 
 Specialized axis for displaying chronological data.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/01/02"),
+                new Date("2023/01/03")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps `Object`
 
@@ -601,6 +1734,27 @@ that the total number of categories does not exceed**maxDateGroups**.
 Series data is aggregated for the specified base unit by using the
 **series.aggregate**function.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            baseUnit: "days",
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/01/02"),
+                new Date("2023/01/03"),
+                new Date("2023/01/04")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.baseUnitStep `Object`*(default: 1)*
 
 Sets the step (interval) between categories in base units.
@@ -608,11 +1762,55 @@ Specifiying "auto" will set the step to such value that the total number of cate
 
 This option is ignored if**baseUnit**is set to "fit".
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            baseUnit: "days",
+            baseUnitStep: 2,
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/01/03"),
+                new Date("2023/01/05"),
+                new Date("2023/01/07")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 
 ### categoryAxis.labels.culture `String`
 
 Culture to use for formatting the dates. See [Globalization](/framework/globalization/overview) for more information.
 It uses the global culture by default.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            labels: {
+                culture: "de-DE"
+            },
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/02/01"),
+                new Date("2023/03/01")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
 
 ### categoryAxis.labels.dateFormats `Object`
 
@@ -641,6 +1839,31 @@ Date format strings
 The Chart will choose the appropriate format for the current `baseUnit`.
 Setting the labels**format**option will override these defaults.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            baseUnit: "months",
+            labels: {
+                dateFormats: {
+                    months: "MMM yyyy"
+                }
+            },
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/02/01"),
+                new Date("2023/03/01")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
+
 ### categoryAxis.max `Object`
 
 The last date displayed on the axis.
@@ -648,12 +1871,52 @@ By default, the minimum date is the same as the last category.
 This is often used in combination with the**min**and**roundToBaseUnit**configuration options to
 set up a fixed date range.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            max: new Date("2023/03/31"),
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/02/01"),
+                new Date("2023/03/01")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
+
 ### categoryAxis.min `Object`
 
 The first date displayed on the axis.
 By default, the minimum date is the same as the first category.
 This is often used in combination with the**max**and**roundToBaseUnit**configuration options to
 set up a fixed date range.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            min: new Date("2022/12/01"),
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/02/01"),
+                new Date("2023/03/01")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
 
 ### categoryAxis.roundToBaseUnit `Boolean`*(default: true)*
 
@@ -663,6 +1926,28 @@ Specifying**false**for this option will disable this behavior.
 This option is most useful in combination with explicit**min**and**max**dates.
 
 It will be ignored if either bar or column series are plotted on the axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            roundToBaseUnit: false,
+            min: new Date("2023/01/15"),
+            max: new Date("2023/03/15"),
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/02/01"),
+                new Date("2023/03/01")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
 
 ### categoryAxis.weekStartDay `Number`*(default: kendo.days.Sunday)*
 
@@ -677,11 +1962,56 @@ Use the *kendo.days* constants to specify the day by name.
 * kendo.days.Friday (5)
 * kendo.days.Saturday (6)
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            baseUnit: "weeks",
+            weekStartDay: kendo.days.Monday,
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/01/08"),
+                new Date("2023/01/15")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
+
 
 ### categoryAxis.maxDateGroups `Number`*(default: 10)*
 
 Specifies the maximum number of groups (categories) to produce when
 either**baseUnit**is set to "fit" or**baseUnitStep**is set to "auto".
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            baseUnit: "fit",
+            maxDateGroups: 5,
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/01/15"),
+                new Date("2023/02/01"),
+                new Date("2023/02/15"),
+                new Date("2023/03/01"),
+                new Date("2023/03/15")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8, 12, 6, 9]
+        }]
+    });
+    </script>
 
 ### categoryAxis.maxDivisions `Number`
 
@@ -689,61 +2019,364 @@ The maximum number of ticks and labels to display. Applicabable for date categor
 
 This option is ignored in all other cases.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            maxDivisions: 3,
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/02/01"),
+                new Date("2023/03/01"),
+                new Date("2023/04/01"),
+                new Date("2023/05/01")
+            ]
+        },
+        series: [{
+            data: [10, 15, 8, 12, 6]
+        }]
+    });
+    </script>
+
 ### categoryAxis.visible `Boolean`*(default: false)*
 
 The visibility of the axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            visible: true,
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair `Object`
 
 The crosshair configuration options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                color: "red",
+                width: 2,
+                opacity: 0.8,
+                dashType: "dash"
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.color `String`
 
 The color of the crosshair.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                color: "blue"
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair.width `Number`
 
 The width of the crosshair.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                width: 3
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.opacity `Number`
 
 The opacity of the crosshair.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                opacity: 0.5
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair.dashType `Number`
 
 The dash type of the crosshair.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                dashType: "dot"
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.visible `Boolean`*(default: false)*
 
 The dash type of the crosshair.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair.tooltip `Object`
 
 The crosshair tooltip configuration options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    background: "lightblue",
+                    color: "darkblue"
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.tooltip.background `String`
 
 The background color of the tooltip.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    background: "yellow"
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair.tooltip.border `Object`
 
 The border configuration options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    border: {
+                        color: "red",
+                        width: 2
+                    }
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.tooltip.border.color `String`*(default: "black")*
 
 The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    border: {
+                        color: "green"
+                    }
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    border: {
+                        width: 3
+                    }
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.tooltip.color `String`
 
 The text color of the tooltip.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    color: "white",
+                    background: "black"
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.crosshair.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    font: "14px Arial"
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.crosshair.tooltip.format `String`
 
@@ -792,9 +2425,57 @@ Template variables:
 
 A value indicating if the tooltip should be displayed.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true
+                }
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.notes `Object`
 
 The category axis notes configuration.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            notes: {
+                position: "top",
+                icon: {
+                    background: "red",
+                    size: 10
+                },
+                label: {
+                    text: "Important note"
+                },
+                data: [{
+                    value: "Q2",
+                    text: "Peak quarter"
+                }]
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### categoryAxis.notes.position `String`
 
@@ -805,9 +2486,52 @@ The position of the category axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            notes: {
+                position: "bottom",
+                data: [{
+                    value: "Q2",
+                    text: "Bottom note"
+                }]
+            },
+            categories: ["Q1", "Q2", "Q3", "Q4"]
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### categoryAxis.notes.icon `Object`
 
 The icon of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Q2 Note"
+                }],
+                icon: {
+                    background: "red",
+                    type: "circle",
+                    size: 15
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.icon.background `String`
 
@@ -987,6 +2711,28 @@ The icon visibility.
 ### categoryAxis.notes.label `Object`
 
 The label of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Q2 Label Note"
+                }],
+                label: {
+                    background: "yellow",
+                    color: "black",
+                    visible: true
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.label.background `String`
 
@@ -1273,9 +3019,51 @@ The position of the labels.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Q2 Note"
+                }],
+                label: {
+                    position: "outside"
+                }
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.notes.line `Object`
 
 The line of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Q2 Note"
+                }],
+                line: {
+                    width: 3,
+                    color: "blue",
+                    length: 20
+                }
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.line.width `Number`
 
@@ -1350,9 +3138,46 @@ The line length of the notes.
 
 The items of the notes.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q1",
+                    text: "First Quarter"
+                }, {
+                    value: "Q3", 
+                    text: "Third Quarter"
+                }]
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.notes.data.value `Object`
 
 The value of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Second Quarter Note"
+                }]
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.data.position `String`
 
@@ -1363,9 +3188,49 @@ The position of the category axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Bottom Note",
+                    position: "bottom"
+                }]
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.notes.data.icon `Object`
 
 The icon of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Custom Icon Note",
+                    icon: {
+                        background: "green",
+                        type: "triangle",
+                        size: 20
+                    }
+                }]
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.data.icon.background `String`
 
@@ -1559,6 +3424,28 @@ The icon visibility.
 ### categoryAxis.notes.data.label `Object`
 
 The label of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Second Quarter",
+                    label: {
+                        background: "yellow",
+                        color: "black",
+                        template: "Note: #: value #"
+                    }
+                }]
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.data.label.background `String`
 
@@ -1892,9 +3779,51 @@ The position of the category axis note label.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Outside Label",
+                    label: {
+                        position: "outside"
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+
 ### categoryAxis.notes.data.line `Object`
 
 The line of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        categoryAxis: {
+            notes: {
+                data: [{
+                    value: "Q2",
+                    text: "Custom Line Note",
+                    line: {
+                        width: 5,
+                        color: "red",
+                        length: 30
+                    }
+                }]
+            }
+        }
+    });
+    </script>
 
 ### categoryAxis.notes.data.line.width `Number`
 
@@ -1976,21 +3905,92 @@ The line length of the note.
 The chart area configuration options.
 This is the entire visible area of the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            background: "#f0f0f0",
+            opacity: 0.8,
+            border: {
+                color: "#ff0000",
+                width: 2
+            }
+        }
+    });
+    </script>
+
 ### chartArea.background `String`*(default: "white")*
 
 The background color of the chart area.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            background: "#ffe0e0"
+        }
+    });
+    </script>
 
 ### chartArea.opacity `Number`*(default: 1)*
 
 The background opacity of the chart area.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            opacity: 0.5
+        }
+    });
+    </script>
+
 ### chartArea.border `Object`
 
 The border of the chart area.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            border: {
+                color: "#00ff00",
+                width: 3,
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
+
 ### chartArea.border.color `String`*(default: "black")*
 
 The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            border: {
+                color: "#0000ff"
+            }
+        }
+    });
+    </script>
 
 ### chartArea.border.dashType `String`*(default: "solid")*
 
@@ -2024,13 +4024,53 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            border: {
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
+
 ### chartArea.border.width `Number`*(default: 0)*
 
 The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            border: {
+                width: 3
+            }
+        }
+    });
+    </script>
+
 ### chartArea.height `Number`*(default: 400)*
 
 The height of the chart area.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            height: 300
+        }
+    });
+    </script>
 
 ### chartArea.margin `Number|Object`*(default: 2)*
 
@@ -2048,6 +4088,18 @@ The margin of the chart area.
 ### chartArea.width `Number`*(default: 600)*
 
  The width of the chart area.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [1, 2, 3, 4, 5],
+        chartArea: {
+            width: 500
+        }
+    });
+    </script>
 
 ### data `Array`
 
@@ -2118,25 +4170,127 @@ Indicates whether the chart will call read on the data source initially.
 
 The plot area configuration options. This is the area containing the plotted series.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            background: "lightgray",
+            opacity: 0.8,
+            border: {
+                color: "red",
+                width: 2,
+                dashType: "dash"
+            },
+            margin: 10
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### plotArea.background `String`*(default: "white")*
 
  The background color of the plot area.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            background: "lightblue"
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### plotArea.opacity `Number`*(default: 1)*
 
  The background opacity of the plot area.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            background: "red",
+            opacity: 0.5
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### plotArea.border `Object`
 
 The border of the plot area.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            border: {
+                color: "blue",
+                width: 3,
+                dashType: "dot"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### plotArea.border.color `String`*(default: "black")*
 
  The color of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            border: {
+                color: "green",
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### plotArea.border.dashType `String`*(default: "solid")*
 
  The dash type of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            border: {
+                dashType: "longDash",
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 
 #### *"solid"*
@@ -2171,6 +4325,23 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        plotArea: {
+            border: {
+                width: 5,
+                color: "orange"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### plotArea.margin `Number|Object`*(default: 5)*
 
  The margin of the plot area.
@@ -2187,6 +4358,18 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 ### pointWidth `Number`*(default: 5)*
 
 The width to allocate for each data point.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        pointWidth: 10,
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### renderAs `String`
 
@@ -2220,6 +4403,23 @@ Each series type has a different set of options.
 
 >**Info:**Some options accept function as argument. They will be evaluated for each point (supplied as parameter). The theme/seriesDefaults value will be used if no value is returned.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "line",
+            data: [10, 15, 8, 12],
+            color: "blue"
+        }, {
+            type: "column",
+            data: [5, 7, 3, 6],
+            color: "red"
+        }]
+    });
+    </script>
+
 ### series.type `String`*(default: "line")*
 
 The type of the series. Available types:
@@ -2230,11 +4430,36 @@ The type of the series. Available types:
 * pie
 * bullet
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "area",
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### series.dashType `String`*(default: "solid")*
 
 The series line dash type.
 
 **Applicable only to line series**
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "line",
+            dashType: "dash",
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 #### *"solid"*
 
@@ -2271,17 +4496,61 @@ Array of data items. The data item type can be either a:
 * Array of objects. Each point is bound to the specified series fields.
 * Array of numbers. Available for area, bar, column, pie and line series.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            data: [10, 15, 8, 12, 6, 18]
+        }]
+    });
+    </script>
+
 ### series.explodeField `String`
 
 The data field containing a Boolean value that indicates if the sector is exploded.
 
 **Available for pie series**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "pie",
+            explodeField: "exploded",
+            data: [
+                { value: 10, exploded: false },
+                { value: 15, exploded: true },
+                { value: 8, exploded: false }
+            ]
+        }]
+    });
+    </script>
+
 ### series.currentField `String`
 
 The data field containing the current value.
 
 **Available for bullet and verticalBullet series.**
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "bullet",
+            currentField: "current",
+            data: [
+                { current: 10, target: 15 },
+                { current: 8, target: 12 }
+            ]
+        }]
+    });
+    </script>
 
 ### series.targetField `String`
 
@@ -2291,9 +4560,42 @@ The data field containing the target value.
 
 **Available for pie series**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "bullet",
+            targetField: "target",
+            currentField: "current",
+            data: [
+                { current: 10, target: 15 },
+                { current: 8, target: 12 }
+            ]
+        }]
+    });
+    </script>
+
 ### series.field `String`
 
 The data field containing the series value.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            field: "value",
+            data: [
+                { value: 10 },
+                { value: 15 },
+                { value: 8 }
+            ]
+        }]
+    });
+    </script>
 
 ### series.name `String`
 
@@ -2308,9 +4610,41 @@ The fields which can be used in the template are:
 *   group.field - the name of the field used for grouping
 *   group.value - the field value for this group.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            name: "Sales Data",
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### series.highlight `Object`
 
 Configures the appearance of highlighted points.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            highlight: {
+                visible: true,
+                color: "yellow",
+                opacity: 0.8,
+                border: {
+                    width: 2,
+                    color: "red"
+                }
+            },
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### series.highlight.border `Object`
 
@@ -2318,17 +4652,87 @@ The border of highlighted points. The color is computed automatically from the b
 
 **Applicable to pie series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "pie",
+            highlight: {
+                border: {
+                    width: 3,
+                    color: "blue",
+                    opacity: 0.7
+                }
+            },
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
+
 ### series.highlight.border.width `Number`
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "pie",
+            highlight: {
+                border: {
+                    width: 4
+                }
+            },
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
 
 ### series.highlight.border.color `String`
 
 The border color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "pie",
+            highlight: {
+                border: {
+                    color: "orange"
+                }
+            },
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
+
 ### series.highlight.border.opacity `Number`
 
 The border opacity.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "pie",
+            highlight: {
+                border: {
+                    opacity: 0.5
+                }
+            },
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
 
 ### series.highlight.color `String`
 
@@ -2336,15 +4740,59 @@ The highlight color.
 
 **Available only for pie series**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            type: "pie",
+            highlight: {
+                color: "lightgreen"
+            },
+            data: [10, 15, 8]
+        }]
+    });
+    </script>
+
 ### series.highlight.opacity `Number`
 
 The opacity of the highlighted points.
 
 **Applicable to pie series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            highlight: {
+                opacity: 0.5
+            }
+        }]
+    });
+    </script>
+
 ### series.highlight.visible `Boolean`
 
 A value indicating if the series points should be highlighted.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        series: [{
+            highlight: {
+                visible: false
+            },
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### series.aggregate `String|Function` *(default: "max")*
 
@@ -2365,11 +4813,56 @@ The supported values are:
 * function(values, series, dataItems, category) - user-defined aggregate function. Returns single value or data item.
 * object  - (compound aggregate)**Applicable to "candlestick" and ohlc "series"**. Specifies the aggregate for each data item field.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        categoryAxis: {
+            type: "date",
+            categories: [
+                new Date("2023/01/01"),
+                new Date("2023/01/01"),
+                new Date("2023/01/02"),
+                new Date("2023/01/02")
+            ]
+        },
+        series: [{
+            aggregate: "avg",
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### series.axis `String`*(default: "primary")*
 
 The name of the value axis to use.
 
 **Applicable to area, bar, column and line series**
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+     $("#sparkline").kendoSparkline({
+        valueAxis: [{ name: "first" }],
+        series: [
+          {
+            type: "column",
+            data: [200, 450, 300, 125],
+            color: function (point) {
+              if (point.value > 300) {
+                // Colorize matching points
+                return "#f00";
+              }
+
+              // Use default theme color
+            },
+            axis: "first",
+          },
+        ],
+      });
+    </script>
 
 ### series.border `Object`
 
@@ -2377,9 +4870,41 @@ The border of the points.
 
 **Applicable to bar, column and pie series**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            border: {
+                color: "blue",
+                width: 2,
+                dashType: "dash"
+            }
+        }]
+    });
+    </script>
+
 ### series.border.color `String|Function`
 
 The color of the border.  It defaults to the color of the current series.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            border: {
+                color: "red"
+            }
+        }]
+    });
+    </script>
 
 ### series.border.dashType `String|Function`*(default: "solid")*
 
@@ -2413,19 +4938,85 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            border: {
+                dashType: "dash",
+                width: 2
+            }
+        }]
+    });
+    </script>
+
 ### series.border.opacity `Number|Function`
 
 The border opacity.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            border: {
+                opacity: 0.6,
+                width: 3
+            }
+        }]
+    });
+    </script>
+
 ### series.border.width `Number|Function`*(default: 1)*
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            border: {
+                width: 4,
+                color: "green"
+            }
+        }]
+    });
+    </script>
 
 ### series.categoryField `String`
 
 The data field containing the point category name.
 
 **Applicable to pie series.**
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        dataSource: [
+            { category: "Apples", value: 10 },
+            { category: "Oranges", value: 15 },
+            { category: "Bananas", value: 8 }
+        ],
+        series: [{
+            categoryField: "category",
+            field: "value"
+        }]
+    });
+    </script>
 
 ### series.color `String|Function`
 
@@ -2471,23 +5062,103 @@ The data field containing the point color.
 
 **Applicable for bar, column and pie series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        dataSource: [
+            { value: 10, color: "red" },
+            { value: 15, color: "blue" },
+            { value: 8, color: "green" }
+        ],
+        series: [{
+            field: "value",
+            colorField: "color"
+        }]
+    });
+    </script>
+
 ### series.connectors `Object`
 
 The label connectors options.
 
 **Applicable to pie series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            connectors: {
+                color: "red",
+                width: 2,
+                padding: 8
+            }
+        }]
+    });
+    </script>
+
 ### series.connectors.color `String`
 
 The color of the connector line.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            connectors: {
+                color: "blue"
+            }
+        }]
+    });
+    </script>
 
 ### series.connectors.padding `Number`*(default: 4)*
 
 The padding between the connector line and the label, and connector line and pie chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            connectors: {
+                padding: 10
+            }
+        }]
+    });
+    </script>
+
 ### series.connectors.width `Number`*(default: 1)*
 
 The width of the connector line.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            connectors: {
+                width: 3
+            }
+        }]
+    });
+    </script>
 
 ### series.gap `Number`*(default: 1.5)*
 
@@ -2495,9 +5166,39 @@ The distance between category clusters.
 
 **Applicable for bar and column series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            gap: 0.5
+        }]
+    });
+    </script>
+
 ### series.labels `Object`
 
 Configures the series data labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                background: "yellow",
+                color: "black"
+            }
+        }]
+    });
+    </script>
 
 ### series.labels.align `String`*(default: "circle")*
 
@@ -2513,17 +5214,87 @@ The labels are positioned in circle around the chart.
 
 The labels are positioned in columns to the left and right of the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                align: "column",
+                visible: true
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.background `String|Function`
 
 The background color of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                background: "lightblue"
+            }
+        }]
+    });
+    </script>
 
 ### series.labels.border `Object`
 
 The border of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                border: {
+                    color: "red",
+                    width: 2,
+                    dashType: "dash"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.border.color `String|Function`*(default: "black")*
 
  The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                border: {
+                    color: "green"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.labels.border.dashType `String|Function`*(default: "solid")*
 
@@ -2557,13 +5328,67 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                border: {
+                    dashType: "dot",
+                    width: 2
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.border.width `Number|Function`*(default: 0)*
 
  The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                border: {
+                    width: 3,
+                    color: "blue"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.color `String|Function`
 
 The text color of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                color: "red"
+            }
+        }]
+    });
+    </script>
 
 ### series.labels.distance `Number`*(default: 35)*
 
@@ -2571,9 +5396,41 @@ The distance of the labels.
 
 **Available for pie series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                distance: 50
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.font `String|Function`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                font: "16px Arial"
+            }
+        }]
+    });
+    </script>
 
 ### series.labels.format `String|Function`
 
@@ -2663,6 +5520,22 @@ The label is positioned to the left of the marker.
 
 **Applicable for area and line series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                position: "below"
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.template `String | Function`
 
 The [template](/api/framework/kendo#methods-template) which renders the chart series label.
@@ -2675,9 +5548,40 @@ The fields which can be used in the template are:
 *   series - the data series
 *   value - the point value. Can be a number or object containing each bound field.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true,
+                template: (data) => `Value: ${data.value}`
+            }
+        }]
+    });
+    </script>
+
 ### series.labels.visible `Boolean|Function`*(default: false)*
 
  The visibility of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            labels: {
+                visible: true
+            }
+        }]
+    });
+    </script>
 
 ### series.line `String | Object`
 
@@ -2685,17 +5589,79 @@ Line options.
 
 **Applicable to area series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "area",
+        series: [{
+            data: [10, 15, 8, 12],
+            line: {
+                color: "blue",
+                width: 3,
+                style: "smooth"
+            }
+        }]
+    });
+    </script>
+
 ### series.line.color `String`
 
 The line color.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "area",
+        series: [{
+            data: [10, 15, 8, 12],
+            line: {
+                color: "red"
+            }
+        }]
+    });
+    </script>
 
 ### series.line.opacity `Number`*(default: 1)*
 
 The line opacity.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "area",
+        series: [{
+            data: [10, 15, 8, 12],
+            line: {
+                opacity: 0.5
+            }
+        }]
+    });
+    </script>
+
 ### series.line.width `String`*(default: 0.5)*
 
 The line width.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "area",
+        series: [{
+            data: [10, 15, 8, 12],
+            line: {
+                width: 4
+            }
+        }]
+    });
+    </script>
 
 ### series.line.style `String`*(default: "normal")*
 
@@ -2709,31 +5675,151 @@ The supported values are:
 
 > The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area".
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "area",
+        series: [{
+            data: [10, 15, 8, 12],
+            line: {
+                style: "smooth"
+            }
+        }]
+    });
+    </script>
+
 ### series.markers `Object`
 
 Marker options.
 
 **Applicable to area and line series**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                background: "blue",
+                size: 8,
+                type: "circle"
+            }
+        }]
+    });
+    </script>
+
 ### series.markers.background `String|Function`
 
 The background color of the current series markers.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                background: "green"
+            }
+        }]
+    });
+    </script>
 
 ### series.markers.border `Object|Function`
 
 The border of the markers.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                border: {
+                    color: "red",
+                    width: 2
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.markers.border.color `String|Function`*(default: "black")*
 
  The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                border: {
+                    color: "blue"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.markers.border.width `Number|Function`*(default: 0)*
 
  The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                border: {
+                    width: 3
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.markers.size `Number|Function`*(default: 6)*
 
  The marker size.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                size: 12
+            }
+        }]
+    });
+    </script>
 
 ### series.markers.type `String|Function`*(default: "circle")*
 
@@ -2751,13 +5837,61 @@ The marker shape is triangle.
 
 The marker shape is circle.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                type: "triangle"
+            }
+        }]
+    });
+    </script>
+
 ### series.markers.visible `Boolean|Function`*(default: false)*
 
-The markers visibility.
+ The markers visibility.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true
+            }
+        }]
+    });
+    </script>
 
 ### series.markers.rotation `Number|Function`
 
 The rotation angle of the markers.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            markers: {
+                visible: true,
+                type: "triangle",
+                rotation: 45
+            }
+        }]
+    });
+    </script>
 
 ### series.missingValues `String`
 
@@ -2795,19 +5929,73 @@ The supported values are:
 
 > The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "line".
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            style: "smooth"
+        }]
+    });
+    </script>
+
 ### series.negativeColor `String`
 
 Color to use for bars with negative values.
 
 **Applicable only to bar and column series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, -5, 8, -12],
+            negativeColor: "red"
+        }]
+    });
+    </script>
+
 ### series.opacity `Number`
 
 The series opacity.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            opacity: 0.7
+        }]
+    });
+    </script>
+
 ### series.overlay `Object`
 
 The effects overlay.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            overlay: {
+                gradient: "glass"
+            }
+        }]
+    });
+    </script>
 
 ### series.overlay.gradient `String`
 
@@ -2820,11 +6008,39 @@ Available options:
 ***sharpBevel**(pie series)
 ***none**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            overlay: {
+                gradient: "glass"
+            }
+        }]
+    });
+    </script>
+
 ### series.padding `Number`
 
 The padding around the chart (equal on all sides).
 
 **Available for pie series.**
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            padding: 20
+        }]
+    });
+    </script>
 
 ### series.size `Number`
 
@@ -2833,17 +6049,56 @@ If not specified, the available space is split evenly between the series.
 
 **Available for only.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            size: 150
+        }]
+    });
+    </script>
+
 ### series.startAngle `Number`*(default: 90)*
 
 The start angle of the first segment.
 
 **Available for pie series.**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        series: [{
+            data: [10, 15, 8, 12],
+            startAngle: 180
+        }]
+    });
+    </script>
+
 ### series.spacing `Number`*(default: 0.4)*
 
 Space between points as proportion of the point width.
 
 **Available for bar and column series.**
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12],
+            spacing: 0.8
+        }]
+    });
+    </script>
 
 ### series.stack `Boolean|String|Object` *(default: false)*
 
@@ -2912,29 +6167,149 @@ Indicates that the series should be stacked in a group with the specified name.
 
 The data point tooltip configuration options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                background: "yellow",
+                color: "black"
+            }
+        }]
+    });
+    </script>
+
 ### series.tooltip.background `String`
 
 The background color of the tooltip. The default is determined from the series color.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                background: "lightblue"
+            }
+        }]
+    });
+    </script>
 
 ### series.tooltip.border `Object`
 
 The border configuration options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                border: {
+                    color: "red",
+                    width: 2
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.tooltip.border.color `String`*(default: "black")*
 
 The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                border: {
+                    color: "green"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                border: {
+                    width: 3
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.tooltip.color `String`
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                color: "red"
+            }
+        }]
+    });
+    </script>
+
 ### series.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: true,
+                font: "16px Arial"
+            }
+        }]
+    });
+    </script>
 
 ### series.tooltip.format `String`
 
@@ -2989,35 +6364,166 @@ Template variables:
 
  A value indicating if the tooltip should be displayed.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            tooltip: {
+                visible: false
+            }
+        }]
+    });
+    </script>
+
 ### series.width `Number`*(default: 0.5)*
 
 The line width.
 
 **Available for line series**
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            width: 3
+        }]
+    });
+    </script>
+
 ### series.target `Object`
 
 The target of the bullet chart.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                line: {
+                    width: 2
+                },
+                color: "red"
+            }
+        }]
+    });
+    </script>
 
 ### series.target.line `Object`
 
 The target line.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                line: {
+                    width: 3
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.target.line.width `Object|Function`
 
 The width of the line.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                line: {
+                    width: 4
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.target.color `String|Function`
 
 The target color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                color: "green"
+            }
+        }]
+    });
+    </script>
+
 ### series.target.border `Object|Function`
 
 The border of the target.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                border: {
+                    color: "blue",
+                    width: 2,
+                    dashType: "dash"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.target.border.color `String|Function`*(default: "black")*
 
 The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                border: {
+                    color: "red"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.target.border.dashType `String|Function`*(default: "solid")*
 
@@ -3051,15 +6557,99 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                border: {
+                    dashType: "dash",
+                    color: "red",
+                    width: 2
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.target.border.width `Number`*(default: 0)*
 
 The width of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bullet",
+        series: [{
+            data: [10, 15, 8, 12],
+            target: {
+                border: {
+                    width: 3
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes `Object`
 The series notes configuration.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    background: "orange"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.icon `Object`
 The icon of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    background: "red",
+                    size: 16,
+                    type: "circle",
+                    border: {
+                        color: "black",
+                        width: 1
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.position `String`
 The position of the series note.
@@ -3069,21 +6659,153 @@ The position of the series note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                position: "top",
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }]
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.icon.background `String`
 The background color of the notes icon.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    background: "lightblue"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.icon.border `Object`
 The border of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    border: {
+                        color: "red",
+                        width: 2
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.icon.border.color `String`
 The border color of the icon.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    border: {
+                        color: "green",
+                        width: 2
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.icon.border.width `Number`
 The border width of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    border: {
+                        color: "red",
+                        width: 3
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.icon.size `Number`
 The size of the icon.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    size: 20
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.icon.type `String` *(default: "circle")*
 The icon shape.
@@ -3094,20 +6816,154 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    type: "square"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.icon.visible `Boolean` *(default: "true")*
 The icon visibility.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                icon: {
+                    visible: false
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label `Object`
 The label of the notes.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    background: "yellow",
+                    color: "black",
+                    font: "12px Arial"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.label.background `String`
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    background: "lightgreen"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label.border `Object`
 The border of the label.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    border: {
+                        color: "red",
+                        width: 2,
+                        dashType: "solid"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.label.border.color `String` *(default: "black")*
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    border: {
+                        color: "blue"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label.border.dashType `String` *(default: "solid")*
 The dash type of the border.
@@ -3122,14 +6978,105 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    border: {
+                        dashType: "dash",
+                        color: "red",
+                        width: 2
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.label.border.width `Number` *(default: 0)*
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    border: {
+                        width: 3,
+                        color: "red"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label.color `String`
 The text color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    color: "blue"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 The font style of the label.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    font: "16px Arial, sans-serif"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label.template `String|Function`
 The [template](/api/framework/kendo#methods-template) which renders the labels.
@@ -3138,14 +7085,98 @@ The fields which can be used in the template are:
 
 * value - the point value
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    template: (data) => `Value: ${data.value}`
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.label.visible `Boolean` *(default: true)*
 If set to `true` the chart will display the series notes label. By default the series notes label are visible.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    visible: false
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label.rotation `Number` *(default: 0)*
 The rotation angle of the label. By default the label are not rotated.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    rotation: 45
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.label.format `String` *(default: "{0}")*
 The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    format: "Value: {0}"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.label.position `String` *(default: "inside")*
 The position of the labels.
@@ -3153,17 +7184,124 @@ The position of the labels.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                label: {
+                    position: "outside"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.line `Object`
 The line of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                line: {
+                    width: 3,
+                    color: "red",
+                    length: 20
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.notes.line.width `Number`
 The line width of the notes.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                line: {
+                    width: 4
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.line.color `String`
 The line color of the notes.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                line: {
+                    color: "green"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### series.notes.line.length `Number`
 The length of the connecting lines in pixels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12],
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Peak Value"
+                }],
+                line: {
+                    length: 30
+                }
+            }
+        }]
+    });
+    </script>
 
 ### series.zIndex `Number`
 An optional Z-index that can be used to change the default stacking order of series.
@@ -3200,26 +7338,132 @@ For example line series will be on top with bar and area following below.
 
 The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesColors: ["red", "blue", "green", "orange"],
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults `Object`
 
 Default values for each series.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesDefaults: {
+            color: "blue",
+            line: {
+                width: 3
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.area `Object`
 
 The area configuration options.
 The default options for all area series. For more details see the series options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "area",
+        seriesDefaults: {
+            area: {
+                color: "lightblue",
+                opacity: 0.7
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.bar `Object`
 
 The default options for all bar series. For more details see the series options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "bar",
+        seriesDefaults: {
+            bar: {
+                color: "orange",
+                border: {
+                    width: 1,
+                    color: "black"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.border `Object`
 
 The border of the series.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesDefaults: {
+            border: {
+                color: "red",
+                width: 2,
+                dashType: "dash"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.border.color `String`*(default: "black")*
 
 The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesDefaults: {
+            border: {
+                color: "green"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.border.dashType `String`*(default: "solid")*
 
@@ -3253,35 +7497,187 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesDefaults: {
+            border: {
+                dashType: "dash",
+                color: "red",
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesDefaults: {
+            border: {
+                width: 3,
+                color: "blue"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.column `Object`
 
 The column configuration options.
 The default options for all column series. For more details see the series options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            column: {
+                color: "purple",
+                border: {
+                    width: 1,
+                    color: "black"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.gap `Number`*(default: 1.5)*
 
  The distance between category clusters.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            gap: 0.5
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.labels `Object`
 
 Configures the series data labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                background: "yellow",
+                color: "black"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.labels.background `String`
 
 The background color of the labels. Any valid CSS color string will work here,
 including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                background: "lightblue"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.labels.border `Object`
 
 The border of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                border: {
+                    color: "red",
+                    width: 2,
+                    dashType: "solid"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.labels.border.color `String`*(default: "black")*
 
  The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                border: {
+                    color: "green"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.labels.border.dashType `String`*(default: "solid")*
 
@@ -3316,19 +7712,98 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                border: {
+                    dashType: "dash",
+                    color: "red",
+                    width: 2
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.labels.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                border: {
+                    width: 3,
+                    color: "blue"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.labels.color `String`
 
 The text color of the labels. Any valid CSS color string will work here, including hex
 and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                color: "red"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
 labels
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                font: "16px Arial, sans-serif"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.labels.format `String`
 
@@ -3342,6 +7817,24 @@ The format of the labels.
 ### seriesDefaults.labels.margin `Number|Object`*(default: 0)*
 
  The margin of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                margin: 5
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.labels.padding `Number|Object`*(default: 0)*
 
@@ -3368,27 +7861,133 @@ Template variables:
 *  **dataItem**- the original data item used to construct the point.
         Will be null if binding to array.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                template: (data) => `Value: ${data.value}`
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.labels.visible `Boolean`*(default: false)*
 
  The visibility of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            labels: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.line `Object`
 
 The line configuration options.
 The default options for all line series. For more details see the series options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        seriesDefaults: {
+            line: {
+                color: "red",
+                width: 3,
+                style: "smooth"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.overlay `Object`
 
 The effects overlay.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            overlay: {
+                gradient: "glass"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.pie `Object`
 
 The pie configuration options.
 The default options for all pie series. For more details see the series options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "pie",
+        seriesDefaults: {
+            pie: {
+                border: {
+                    width: 2,
+                    color: "black"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.spacing `Number`*(default: 0.4)*
 
  Space between bars.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            spacing: 0.1
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.stack `Boolean|Object` *(default: false)*
 
@@ -3443,33 +8042,182 @@ The type of the series. Available types:
 * pie
 * bullet
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        seriesDefaults: {
+            type: "column"
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.tooltip `Object`
 
 The data point tooltip configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                background: "yellow",
+                color: "black"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.tooltip.background `String`
 
 The background color of the tooltip. The default is determined from the series color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                background: "lightblue"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.tooltip.border `Object`
 
 The border configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                border: {
+                    color: "red",
+                    width: 2
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.tooltip.border.color `String`*(default: "black")*
 
  The color of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                border: {
+                    color: "green"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.tooltip.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                border: {
+                    width: 3,
+                    color: "blue"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.tooltip.color `String`
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                color: "#ff0000"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### seriesDefaults.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
  The tooltip font.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true,
+                font: "16px Arial, sans-serif"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### seriesDefaults.tooltip.format `String`
 
@@ -3521,6 +8269,23 @@ Template variables:
 
  A value indicating if the tooltip should be displayed.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        seriesDefaults: {
+            tooltip: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### theme `String`
 
 The sparkline theme. This can be either a built-in theme or "sass".
@@ -3540,33 +8305,165 @@ The supported values are:
 * "silver"
 * "uniform"
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        theme: "bootstrap",
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### tooltip `Object`
 
 The data point tooltip configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            background: "lightblue",
+            color: "darkblue",
+            font: "14px Arial",
+            border: {
+                color: "blue",
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### tooltip.background `String`
 
 The background color of the tooltip. The default is determined from the series color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            background: "yellow"
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### tooltip.border `Object`
 
 The border configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            border: {
+                color: "red",
+                width: 3
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### tooltip.border.color `String`*(default: "black")*
 
  The color of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            border: {
+                color: "green"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### tooltip.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            border: {
+                width: 4
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### tooltip.color `String`
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            color: "white",
+            background: "black"
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
  The tooltip font.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            font: "16px Georgia"
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### tooltip.format `String`
 
@@ -3615,9 +8512,40 @@ Template variables:
 
 A value indicating if the tooltip should be displayed.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### tooltip.shared `Boolean`*(default: false)*
 
 A value indicating if the tooltip should be shared.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        tooltip: {
+            visible: true,
+            shared: true
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }, {
+            data: [5, 8, 12, 6]
+        }]
+    });
+    </script>
 
 ### tooltip.sharedTemplate `String`
 
@@ -3661,6 +8589,19 @@ Template variables:
 
 A value indicating if transition animations should be played.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        transitions: true,
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### type `String`*(default: "line")*
 
 The default series type.
@@ -3676,6 +8617,30 @@ The default series type.
 
 The value axis configuration options.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        valueAxis: {
+            min: 0,
+            max: 20,
+            color: "blue",
+            labels: {
+                visible: true,
+                color: "red"
+            },
+            line: {
+                visible: true,
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.axisCrossingValue `Object | Date | Array`
 
 Value at which the category axis crosses this axis. (Only for object)
@@ -3684,28 +8649,143 @@ Value indicies at which the category axes cross the value axis. (Only for array)
 
 Date at which the category axis crosses this axis. (Only for date)
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        valueAxis: {
+            axisCrossingValue: 5
+        },
+        series: [{
+            data: [2, 8, 12, 4, 15]
+        }]
+    });
+    </script>
+
 ### valueAxis.color `String`
 
 Color to apply to all axis elements.
 Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        valueAxis: {
+            color: "green",
+            labels: {
+                visible: true
+            },
+            line: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels `Object`
 
 Configures the axis labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        valueAxis: {
+            labels: {
+                visible: true,
+                background: "lightgray",
+                color: "blue",
+                font: "12px Arial",
+                format: "C",
+                rotation: 45
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.labels.background `String`
 
 The background color of the labels. Any valid CSS color string will work here, including
 hex and rgb
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                background: "yellow"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.border `Object`
 
 The border of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                border: {
+                    color: "red",
+                    width: 2,
+                    dashType: "solid"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.labels.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including
 hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                border: {
+                    color: "blue"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.labels.border.dashType `String`*(default: "solid")*
 
@@ -3739,21 +8819,118 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                border: {
+                    width: 2,
+                    color: "blue",
+                    dashType: "dash"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                border: {
+                    width: 3,
+                    color: "green"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.labels.color `String`
 
 The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                color: "#ff6600"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                font: "14px Georgia, serif"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.format `String`
 
 The format of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                format: "{0}%"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.labels.margin `Number|Object`*(default: 0)*
 
@@ -3774,6 +8951,24 @@ Mirrors the axis labels and ticks.
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                mirror: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.padding `Number | Object`*(default: 0)*
 
 The padding of the labels.
@@ -3791,15 +8986,69 @@ The padding of the labels.
 
 The rotation angle of the labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                rotation: 45
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.skip `Number`*(default: 1)*
 
 Number of labels to skip.
 Skips rendering the first n labels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                skip: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25, 18]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.step `Number`*(default: 1)*
 
 Label rendering step.
 Every n-th label is rendered where n is the step
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                step: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25, 18]
+        }]
+    });
+    </script>
 
 ### valueAxis.labels.template `String | Function`
 
@@ -3808,18 +9057,88 @@ Template variables:
 
 *  **value**- the value
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: true,
+                template: (data) => `Val: ${data.value}`
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.labels.visible `Boolean`*(default: true)*
 
 The visibility of the labels.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            labels: {
+                visible: false
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.line `Object`
 
 Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            line: {
+                color: "blue",
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.line.color `String`*(default: "black")*
 
 The color of the line. This will also effect the major and minor ticks, but
 not the grid lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            line: {
+                color: "#ff0000"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.line.dashType `String`*(default: "solid")*
 
@@ -3853,91 +9172,460 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            line: {
+                dashType: "dash",
+                color: "blue"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.line.visible `Boolean`*(default: true)*
 
 The visibility of the line.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            line: {
+                visible: false
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.line.width `Number`*(default: 1)*
 
 The width of the line. This will also effect the major and minor ticks, but
 not the grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            line: {
+                width: 3,
+                color: "green"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorGridLines `Object`
 
 Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorGridLines: {
+                visible: true,
+                color: "#dddddd",
+                width: 1
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorGridLines.color `String`*(default: "black")*
 
 The color of the lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorGridLines: {
+                visible: true,
+                color: "#0000ff"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.majorGridLines.visible `Boolean`*(default: false)*
 
 The visibility of the lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorGridLines: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorGridLines.width `Number`*(default: 1)*
 
 The width of the lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorGridLines: {
+                visible: true,
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.majorGridLines.step `Number` *(default: 1)*
 
 The step of the value axis major grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorGridLines: {
+                visible: true,
+                step: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorGridLines.skip `Number` *(default: 0)*
 
 The skip of the value axis major grid lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorGridLines: {
+                visible: true,
+                skip: 1
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
 
 ### valueAxis.majorTicks `Object`
 
 The major ticks of the axis.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: true,
+                size: 6,
+                color: "blue"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorTicks.size `Number`*(default: 4)*
 
 The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: true,
+                size: 8
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.majorTicks.visible `Boolean`*(default: true)*
 
 The visibility of the major ticks.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: false
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorTicks.color `String` *(default: "black")*
 
 The color of the value axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: true,
+                color: "#ff0000"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.majorTicks.width `Number` *(default: 1)*
 
 The width of the major ticks in pixels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: true,
+                width: 3
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorTicks.step `Number` *(default: 1)*
 
 The step of the value axis major ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: true,
+                step: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
 
 ### valueAxis.majorTicks.skip `Number` *(default: 0)*
 
 The skip of the value axis major ticks.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorTicks: {
+                visible: true,
+                skip: 1
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.majorUnit `Number`
 
 The interval between major divisions.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            majorUnit: 5
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
 
 ### valueAxis.max `Number`*(default: 1)*
 
 The maximum value of the axis.
 This is often used in combination with the**min**configuration option.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            max: 30
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.min `Number`*(default: 0)*
 
 The minimum value of the axis.
 This is often used in combination with the**max**configuration option.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            min: 5
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorGridLines `Object`
 
 Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true,
+                color: "#eeeeee",
+                width: 1
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorGridLines.color `String`*(default: "black")*
 
 The color of the lines.
 
 Note that this has no effect if the visibility of the minor grid lines is not set to**true**.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true,
+                color: "#cccccc"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorGridLines.dashType `String`*(default: "solid")*
 
@@ -3970,6 +9658,26 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 #### *"longDashDotDot"*
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true,
+                dashType: "dot",
+                color: "#aaaaaa"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 body of the chart.
 
 Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid lines visibility being set to**true**.
@@ -3978,102 +9686,536 @@ Note that minor grid lines are not visible by default, therefore none of these s
 
 The visibility of the lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorGridLines.width `Number`*(default: 1)*
 
 The width of the lines.
 
 Note that this settings has no effect if the visibility of the minor grid lines is not set to**true**.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true,
+                width: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorGridLines.step `Number` *(default: 1)*
 
 The step of the value axis minor grid lines.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true,
+                step: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorGridLines.skip `Number` *(default: 0)*
 
 The skip of the value axis minor grid lines.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorGridLines: {
+                visible: true,
+                skip: 1
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorTicks `Object`
 
 The minor ticks of the axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true,
+                size: 5,
+                color: "green"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorTicks.size `Number`*(default: 3)*
 
 The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true,
+                size: 6
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorTicks.color `String` *(default: "black")*
 
 The color of the value axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true,
+                color: "#ff0000"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorTicks.width `Number` *(default: 1)*
 
 The width of the minor ticks in pixels.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true,
+                width: 3
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorTicks.visible `Boolean`*(default: false)*
 
 The visibility of the minor ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorTicks.step `Number` *(default: 1)*
 
 The step of the value axis minor ticks.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true,
+                step: 2
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.minorTicks.skip `Number` *(default: 0)*
 
 The skip of the value axis minor ticks.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorTicks: {
+                visible: true,
+                skip: 1
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
 
 ### valueAxis.minorUnit `Number`
 
 The interval between minor divisions.
 It defaults to 1/5th of the majorUnit.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            minorUnit: 2
+        },
+        series: [{
+            data: [10, 15, 8, 12, 20, 25]
+        }]
+    });
+    </script>
+
 ### valueAxis.name `Object`*(default: "primary")*
 
 The unique axis name.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            name: "customAxis"
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.narrowRange `Boolean`*(default: true)*
 
 Prevents the automatic axis range from snapping to 0.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            narrowRange: false
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.plotBands `Array`
 
 The plot bands of the value axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            plotBands: [{
+                from: 10,
+                to: 20,
+                color: "#ffcccc",
+                opacity: 0.5
+            }]
+        },
+        series: [{
+            data: [5, 15, 8, 25, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.plotBands.from `Number`
 
 The start position of the plot band in axis units.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            plotBands: [{
+                from: 5,
+                to: 15,
+                color: "#ccffcc"
+            }]
+        },
+        series: [{
+            data: [5, 15, 8, 25, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.plotBands.to `Number`
 
 The end position of the plot band in axis units.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            plotBands: [{
+                from: 10,
+                to: 20,
+                color: "#ffcccc"
+            }]
+        },
+        series: [{
+            data: [5, 15, 8, 25, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.plotBands.color `String`
 
 The color of the plot band.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            plotBands: [{
+                from: 10,
+                to: 20,
+                color: "#0000ff"
+            }]
+        },
+        series: [{
+            data: [5, 15, 8, 25, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            plotBands: [{
+                from: 10,
+                to: 20,
+                color: "#ff0000",
+                opacity: 0.3
+            }]
+        },
+        series: [{
+            data: [5, 15, 8, 25, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.reverse `Boolean`*(default: false)*
 
 Reverses the axis direction -
 values increase from right to left and from top to bottom.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            reverse: true
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title `Object`
 
 The title of the value axis.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                color: "blue",
+                font: "14px Arial"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.title.background `String`
 
 The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                background: "#f0f0f0"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title.border `Object`
 
 The border of the title.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                border: {
+                    color: "blue",
+                    width: 2,
+                    dashType: "solid"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title.border.color `String`*(default: "black")*
 
 The color of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                border: {
+                    color: "#ff0000",
+                    width: 1
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.title.border.dashType `String`*(default: "solid")*
 
@@ -4107,17 +10249,96 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                border: {
+                    color: "blue",
+                    width: 2,
+                    dashType: "dash"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                border: {
+                    color: "green",
+                    width: 3
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.title.color `String`
 
 The text color of the title. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                color: "#ff6600"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title.font `String`*(default: "16px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                font: "18px Georgia, serif"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.title.margin `Number | Object`*(default: 5)*
 
@@ -4169,73 +10390,424 @@ The axis title is positioned on the left (applicable to horizontal axis).
 
 "The axis title is positioned in the center.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                position: "top"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title.rotation `Number`*(default: 0)*
 
 The rotation angle of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                rotation: 90
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.title.text `String`
 
 The text of the title.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Custom Title"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.title.visible `Boolean`*(default: true)*
 
 The visibility of the title.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            title: {
+                text: "Values",
+                visible: false
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.visible `Boolean`*(default: false)*
 
 The visibility of the axis.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            visible: true
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair `Object`
 
 The crosshair configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                color: "red",
+                width: 2,
+                opacity: 0.8
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.color `String`
 
 The color of the crosshair.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                color: "#0000ff"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair.width `Number`
 
 The width of the crosshair.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                width: 3
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.opacity `Number`
 
 The opacity of the crosshair.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                opacity: 0.5
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair.dashType `Number`
 
 The dash type of the crosshair.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                dashType: "dash"
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.visible `Boolean`*(default: true)*
 
 The dash type of the crosshair.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: false
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair.tooltip `Object`
 
 The crosshair tooltip configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    background: "#ffffff",
+                    color: "#000000"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.tooltip.background `String`
 
 The background color of the tooltip.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    background: "#f0f0f0"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair.tooltip.border `Object`
 
 The border configuration options.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    border: {
+                        color: "blue",
+                        width: 2
+                    }
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.tooltip.border.color `String`*(default: "black")*
 
 The color of the border.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    border: {
+                        color: "#ff0000"
+                    }
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    border: {
+                        width: 2,
+                        color: "blue"
+                    }
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.tooltip.color `String`
 
 The text color of the tooltip.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    color: "#0000ff"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.crosshair.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    font: "14px Georgia, serif"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.crosshair.tooltip.format `String`
 
@@ -4286,9 +10858,53 @@ Template variables:
 
 A value indicating if the tooltip should be displayed.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.notes `Object`
 
 The value axis notes configuration.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                position: "left",
+                icon: {
+                    background: "red"
+                },
+                data: [{
+                    value: 15,
+                    text: "Target"
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.notes.position `String`
 
@@ -4299,9 +10915,51 @@ The position of the value axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                position: "top",
+                data: [{
+                    value: 15,
+                    text: "Peak"
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.notes.icon `Object`
 
 The icon of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [10, 15, 8, 12, 18, 6, 14],
+        valueAxis: {
+            notes: {
+                icon: {
+                    background: "lightblue",
+                    border: {
+                        color: "blue",
+                        width: 2
+                    }
+                },
+                data: [{ value: 12 }]
+            }
+        }
+    });
+    </script>
 
 ### valueAxis.notes.icon.background `String`
 
@@ -4481,6 +11139,31 @@ The icon visibility.
 ### valueAxis.notes.label `Object`
 
 The label of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target"
+                }],
+                label: {
+                    background: "#ffff00",
+                    color: "#000000",
+                    position: "outside"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.notes.label.background `String`
 
@@ -4767,9 +11450,56 @@ The position of the labels.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target"
+                }],
+                label: {
+                    position: "outside"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.notes.line `Object`
 
 The line of the notes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target"
+                }],
+                line: {
+                    width: 3,
+                    color: "blue"
+                }
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.notes.line.width `Number`
 
@@ -4844,9 +11574,45 @@ The line length of the notes.
 
 The items of the notes.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [10, 15, 8, 12, 18, 6, 14],
+        valueAxis: {
+            notes: {
+                data: [
+                    { value: 8, icon: { background: "red" } },
+                    { value: 18, icon: { background: "green" } },
+                    { value: 6, icon: { background: "orange" } }
+                ]
+            }
+        }
+    });
+    </script>
+
 ### valueAxis.notes.data.value `Object`
 
 The value of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        data: [10, 15, 8, 12, 18, 6, 14],
+        valueAxis: {
+            notes: {
+                data: [
+                    { value: 12 },
+                    { value: 15 },
+                    { value: 8 }
+                ]
+            }
+        }
+    });
+    </script>
 
 ### valueAxis.notes.data.position `String`
 
@@ -4857,9 +11623,55 @@ The position of the value axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target",
+                    position: "left"
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.notes.data.icon `Object`
 
 The icon of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target",
+                    icon: {
+                        background: "red",
+                        size: 20,
+                        type: "circle"
+                    }
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.notes.data.icon.background `String`
 
@@ -5053,6 +11865,31 @@ The icon visibility.
 ### valueAxis.notes.data.label `Object`
 
 The label of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target",
+                    label: {
+                        background: "#ffff00",
+                        color: "#000000",
+                        position: "outside"
+                    }
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.notes.data.label.background `String`
 
@@ -5386,9 +12223,56 @@ The position of the value axis note label.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target",
+                    label: {
+                        position: "outside"
+                    }
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
+
 ### valueAxis.notes.data.line `Object`
 
 The line of the note.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "column",
+        valueAxis: {
+            notes: {
+                data: [{
+                    value: 15,
+                    text: "Target",
+                    line: {
+                        width: 3,
+                        color: "red"
+                    }
+                }]
+            }
+        },
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    });
+    </script>
 
 ### valueAxis.notes.data.line.width `Number`
 
@@ -5473,11 +12357,41 @@ Prepares the Sparkline for safe removal from the DOM.
 
 Detaches event handlers and removes data entries in order to avoid memory leaks.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    var sparkline = $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    }).data("kendoSparkline");
+    
+    sparkline.destroy();
+    </script>
 
 ### exportImage
 Exports the chart as an image.
 
 Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart/methods/exportimage)
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    var sparkline = $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    }).data("kendoSparkline");
+    
+    sparkline.exportImage().then(function(dataURI) {
+        // Display the exported image or save it
+        console.log(dataURI);
+    });
+    </script>
 
 #### Parameters
 
@@ -5499,6 +12413,26 @@ Exports the chart as a PDF file.
 
 Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart/methods/exportpdf)
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    var sparkline = $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    }).data("kendoSparkline");
+    
+    sparkline.exportPDF().then(function(dataURI) {
+        // Download or display the PDF
+        kendo.saveAs({
+            dataURI: dataURI,
+            fileName: "sparkline.pdf"
+        });
+    });
+    </script>
+
 #### Parameters
 
 ##### options `kendo.drawing.PDFOptions` *(optional)*
@@ -5512,6 +12446,23 @@ Parameters for the exported PDF file.
 Exports the chart as an SVG document.
 
 Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg)
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    var sparkline = $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    }).data("kendoSparkline");
+    
+    sparkline.exportSVG().then(function(dataURI) {
+        // Display or save the SVG
+        console.log(dataURI);
+    });
+    </script>
 
 #### Parameters
 
@@ -5529,9 +12480,45 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Reloads the data and repaints the chart.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    var sparkline = $("#sparkline").kendoSparkline({
+        type: "column",
+        series: [{
+            data: [10, 15, 8, 12]
+        }]
+    }).data("kendoSparkline");
+    
+    // Update data and refresh
+    sparkline.options.series[0].data = [20, 25, 18, 22];
+    sparkline.refresh();
+    </script>
+
 ### setDataSource
 
 Sets the dataSource of an existing Chart and rebinds it.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    var sparkline = $("#sparkline").kendoSparkline({
+        type: "column"
+    }).data("kendoSparkline");
+    
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { value: 10 },
+            { value: 15 },
+            { value: 8 },
+            { value: 12 }
+        ]
+    });
+    
+    sparkline.setDataSource(dataSource);
+    </script>
 
 #### Parameters
 
@@ -5689,6 +12676,22 @@ Fires when the user has used the mouse or a swipe gesture to drag the sparkline.
 
 The drag operation can be aborted by calling `e.preventDefault()`.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12, 18, 5]
+        }],
+        dragStart: function(e) {
+            console.log("Drag started");
+            // Optionally prevent drag: e.preventDefault();
+        }
+    });
+    </script>
+
 #### Event Data
 
 ##### e.axisRanges `Object`
@@ -5736,6 +12739,22 @@ The original user event that triggered the drag action.
 
 Fires when the user stops dragging the sparkline.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12, 18, 5]
+        }],
+        dragEnd: function(e) {
+            console.log("Drag ended");
+            console.log("Final axis ranges:", e.axisRanges);
+        }
+    });
+    </script>
+
 #### Event Data
 
 ##### e.axisRanges `Object`
@@ -5750,6 +12769,21 @@ The original user event that triggered the drag action.
 ### paneRender
 
 Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12]
+        }],
+        paneRender: function(e) {
+            console.log("Pane rendered:", e.name);
+        }
+    });
+    </script>
 
 #### Event Data
 
@@ -5807,6 +12841,21 @@ The X axis value or array of values for multi-axis charts.
 
 Fired when the user hovers the plot area.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12]
+        }],
+        plotAreaHover: function(e) {
+            console.log("Plot area hovered at category:", e.category);
+        }
+    });
+    </script>
+
 #### Event Data
 
 ##### e.category `Object`
@@ -5832,6 +12881,21 @@ The data point value.
 ### plotAreaLeave
 
 Fired when the cursor leaves the plotArea.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12]
+        }],
+        plotAreaLeave: function(e) {
+            console.log("Left plot area");
+        }
+    });
+    </script>
 
 #### Event Data
 
@@ -5959,6 +13023,21 @@ The point value represented as a percentage value. Available only for donut, pie
 
 Fired when the cursor is over the chart series.
 
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12]
+        }],
+        seriesOver: function(e) {
+            console.log("Series over:", e.value, "at category:", e.category);
+        }
+    });
+    </script>
+
 #### Event Data
 
 ##### e.category `Object`
@@ -6012,6 +13091,21 @@ The data point value.
 ### seriesLeave
 
 Fired when the cursor leaves a chart series.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12]
+        }],
+        seriesLeave: function(e) {
+            console.log("Left series:", e.value, "at category:", e.category);
+        }
+    });
+    </script>
 
 #### Event Data
 
@@ -6068,6 +13162,22 @@ The data point value.
 Fires when the user has used the mousewheel to zoom the chart.
 
 The zoom operation can be aborted by calling `e.preventDefault()`.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12, 18, 5, 22, 14]
+        }],
+        zoomStart: function(e) {
+            console.log("Zoom started");
+            // Optionally prevent zoom: e.preventDefault();
+        }
+    });
+    </script>
 
 #### Event Data
 
@@ -6130,6 +13240,22 @@ This event can be used to prevent the default mousewheel action (scroll).
 ### zoomEnd
 
 Fires when the user stops zooming the chart.
+
+#### Example
+
+    <div id="sparkline"></div>
+    <script>
+    $("#sparkline").kendoSparkline({
+        type: "line",
+        series: [{
+            data: [10, 15, 8, 12, 18, 5, 22, 14]
+        }],
+        zoomEnd: function(e) {
+            console.log("Zoom ended");
+            console.log("Final axis ranges:", e.axisRanges);
+        }
+    });
+    </script>
 
 #### Event Data
 

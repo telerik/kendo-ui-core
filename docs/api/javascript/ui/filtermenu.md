@@ -55,9 +55,35 @@ If set to `auto` and the filterMenu will use adaptive rendering.
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        adaptiveTitle: "Custom Filter Title",
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ]
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        adaptiveSubtitle: "Select filtering options",
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ]
+    });
+    </script>
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
@@ -213,13 +239,61 @@ The text messages displayed in the filter menu. Use it to customize or localize 
 
 The text of the additional filter value editor.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            additionalValue: "Enter another value"
+        }
+    });
+    </script>
+
 ### messages.additionalOperator `String` *(default: "Additional operator")*
 
 The text of the additional filter operator editor.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            additionalOperator: "Select another operator"
+        }
+    });
+    </script>
+
 ### messages.and `String` *(default: "And")*
 
 The text of the option which represents the "and" logical operation.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            and: "AND"
+        }
+    });
+    </script>
 
 ### messages.buttonTitle `String` *(default: "{0} filter column settings")*
 
@@ -267,9 +341,41 @@ The title of the button that displays the FilterMenu.
 
 The text of the button which clears the filter.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            clear: "Reset Filter"
+        }
+    });
+    </script>
+
 ### messages.filter `String` *(default: "Filter")*
 
 The text of the button which applies the filter.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            filter: "Apply Filter"
+        }
+    });
+    </script>
 
 ### messages.info `String` *(default: "Show items with value that: ")*
 
@@ -311,17 +417,81 @@ The text of the information message on the top of the filter menu.
 
 The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", active: true },
+            { name: "Jane", active: false }
+        ],
+        field: "active",
+        messages: {
+            isFalse: "No"
+        }
+    });
+    </script>
+
 ### messages.isTrue `String` *(default: "is true")*
 
 The text of the radio button for `true` values. Displayed when filtering `Boolean` fields.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", active: true },
+            { name: "Jane", active: false }
+        ],
+        field: "active",
+        messages: {
+            isTrue: "Yes"
+        }
+    });
+    </script>
 
 ### messages.logic `String` *(default: "Filters logic")*
 
 The text of the filter logic editor.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            logic: "Logical Operator"
+        }
+    });
+    </script>
+
 ### messages.or `String` *(default: "Or")*
 
 The text of the option which represents the "or" logical operation.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            or: "OR"
+        }
+    });
+    </script>
 
 ### messages.selectValue `String` *(default: "-Select value-")*
 
@@ -367,6 +537,22 @@ The text of the DropDownList displayed in the filter menu for columns whose [val
 
 The text rendered for the title attribute of the filter menu form.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        messages: {
+            title: "Filter data by criteria:"
+        }
+    });
+    </script>
+
 ### operators `Object`
 
 The text of the filter operators displayed in the filter menu.
@@ -374,59 +560,318 @@ The text of the filter operators displayed in the filter menu.
 > If `operators` are defined manually, then the default messages will be overridden too. If you would like to control the `operators` and still use the default messages,
 then you will need to retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where type can be "string", "date", "number" and "enums".
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "name",
+        operators: {
+            string: {
+                eq: "Equals",
+                neq: "Not Equals",
+                contains: "Contains"
+            }
+        }
+    });
+    </script>
+
 ### operators.string `Object`
 
 The texts of the filter operators displayed for columns bound to string fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: "Manager" },
+            { name: "Jane", category: "Developer" }
+        ],
+        field: "name",
+        operators: {
+            string: {
+                eq: "Is exactly",
+                neq: "Is not",
+                contains: "Includes",
+                startswith: "Begins with"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.eq `String` *(default: "Is equal to")*
 
 The text of the "equal" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: "Manager" },
+            { name: "Jane", category: "Developer" }
+        ],
+        field: "name",
+        operators: {
+            string: {
+                eq: "Matches exactly"
+            }
+        }
+    });
+    </script>
 
 ### operators.string.neq `String` *(default: "Is not equal to")*
 
 The text of the "not equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: "Manager" },
+            { name: "Jane", category: "Developer" }
+        ],
+        field: "name",
+        operators: {
+            string: {
+                neq: "Does not match"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.isnull `String` *(default: "Is null")*
 
 The text of the "isnull" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: "Manager" },
+            { name: "Jane", category: null }
+        ],
+        field: "category",
+        operators: {
+            string: {
+                isnull: "Has no value"
+            }
+        }
+    });
+    </script>
 
 ### operators.string.isnotnull `String` *(default: "Is not null")*
 
 The text of the "isnotnull" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: "Manager" },
+            { name: "Jane", category: null }
+        ],
+        field: "category",
+        operators: {
+            string: {
+                isnotnull: "Has a value"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.isempty `String` *(default: "Is empty")*
 
 The text of the "isempty" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", description: "Manager" },
+            { name: "Jane", description: "" }
+        ],
+        field: "description",
+        operators: {
+            string: {
+                isempty: "Is blank"
+            }
+        }
+    });
+    </script>
 
 ### operators.string.isnotempty `String` *(default: "Is not empty")*
 
 The text of the "isnotempty" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", description: "Manager" },
+            { name: "Jane", description: "" }
+        ],
+        field: "description",
+        operators: {
+            string: {
+                isnotempty: "Is not blank"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.startswith `String` *(default: "Starts with")*
 
 The text of the "starts with" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", title: "Manager" },
+            { name: "Jane", title: "Developer" }
+        ],
+        field: "title",
+        operators: {
+            string: {
+                startswith: "Begins with"
+            }
+        }
+    });
+    </script>
 
 ### operators.string.contains `String` *(default: "Contains")*
 
 The text of the "contains" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", title: "Senior Manager" },
+            { name: "Jane", title: "Lead Developer" }
+        ],
+        field: "title",
+        operators: {
+            string: {
+                contains: "Includes"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.doesnotcontain `String` *(default: "Does not contain")*
 
 The text of the "does not contain" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", title: "Senior Manager" },
+            { name: "Jane", title: "Lead Developer" }
+        ],
+        field: "title",
+        operators: {
+            string: {
+                doesnotcontain: "Excludes"
+            }
+        }
+    });
+    </script>
 
 ### operators.string.endswith `String` *(default: "Ends with")*
 
 The text of the "ends with" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", email: "john@company.com" },
+            { name: "Jane", email: "jane@example.org" }
+        ],
+        field: "email",
+        operators: {
+            string: {
+                endswith: "Finishes with"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.isnullorempty `String` *(default: "Has no value")*
 
 The text of the "isnullorempty" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", notes: "Manager" },
+            { name: "Jane", notes: "" },
+            { name: "Bob", notes: null }
+        ],
+        field: "notes",
+        operators: {
+            string: {
+                isnullorempty: "Is blank or null"
+            }
+        }
+    });
+    </script>
+
 ### operators.string.isnotnullorempty `String` *(default: "Has value")*
 
 The text of the "isnotnullorempty" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", notes: "Manager" },
+            { name: "Jane", notes: "" },
+            { name: "Bob", notes: null }
+        ],
+        field: "notes",
+        operators: {
+            string: {
+                isnotnullorempty: "Has content"
+            }
+        }
+    });
+    </script>
 
 ### operators.number `Object`
 
@@ -482,33 +927,177 @@ In this example only two operators would be displayed in the DropDownList - "Equ
 
 The text of the "equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                eq: "Equals"
+            }
+        }
+    });
+    </script>
+
 ### operators.number.neq `String` *(default: "Is not equal to")*
 
 The text of the "not equal" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                neq: "Not equal"
+            }
+        }
+    });
+    </script>
 
 ### operators.number.isnull `String` *(default: "Is null")*
 
 The text of the "isnull" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: null }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                isnull: "Has no value"
+            }
+        }
+    });
+    </script>
+
 ### operators.number.isnotnull `String` *(default: "Is not null")*
 
 The text of the "isnotnull" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: null }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                isnotnull: "Has a value"
+            }
+        }
+    });
+    </script>
 
 ### operators.number.gte `String` *(default: "Is greater than or equal to")*
 
 The text of the "greater than or equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                gte: "At least"
+            }
+        }
+    });
+    </script>
+
 ### operators.number.gt `String` *(default: "Is greater than")*
 
 The text of the "greater than" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                gt: "Greater than"
+            }
+        }
+    });
+    </script>
 
 ### operators.number.lte `String` *(default: "Is less than or equal to")*
 
 The text of the "less than or equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                lte: "At most"
+            }
+        }
+    });
+    </script>
+
 ### operators.number.lt `String` *(default: "Is less than")*
 
 The text of the "less than" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ],
+        field: "age",
+        operators: {
+            number: {
+                lt: "Less than"
+            }
+        }
+    });
+    </script>
 
 ### operators.date `Object`
 
@@ -516,37 +1105,201 @@ The texts of the filter operators displayed for columns bound to date fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                eq: "On",
+                gte: "On or after",
+                lte: "On or before"
+            }
+        }
+    });
+    </script>
+
 ### operators.date.eq `String` *(default: "Is equal to")*
 
 The text of the "equal" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                eq: "On date"
+            }
+        }
+    });
+    </script>
 
 ### operators.date.neq `String` *(default: "Is not equal to")*
 
 The text of the "not equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                neq: "Not on date"
+            }
+        }
+    });
+    </script>
+
 ### operators.date.isnull `String` *(default: "Is null")*
 
 The text of the "isnull" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: null }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                isnull: "No date set"
+            }
+        }
+    });
+    </script>
 
 ### operators.date.isnotnull `String` *(default: "Is not null")*
 
 The text of the "isnotnull" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: null }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                isnotnull: "Has date"
+            }
+        }
+    });
+    </script>
+
 ### operators.date.gte `String` *(default: "Is after or equal to")*
 
 The text of the "greater than or equal" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                gte: "On or after"
+            }
+        }
+    });
+    </script>
 
 ### operators.date.gt `String` *(default: "Is after")*
 
 The text of the "greater than" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                gt: "After"
+            }
+        }
+    });
+    </script>
+
 ### operators.date.lte `String` *(default: "Is before or equal to")*
 
 The text of the "less than or equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                lte: "On or before"
+            }
+        }
+    });
+    </script>
+
 ### operators.date.lt `String` *(default: "Is before")*
 
 The text of the "less than" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", hired: new Date(2020, 5, 15) },
+            { name: "Jane", hired: new Date(2021, 8, 20) }
+        ],
+        field: "hired",
+        operators: {
+            date: {
+                lt: "Before"
+            }
+        }
+    });
+    </script>
 
 ### operators.enums `Object`
 
@@ -554,21 +1307,132 @@ The texts of the filter operators displayed for columns which have their [values
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", status: 1 },
+            { name: "Jane", status: 2 }
+        ],
+        field: "status",
+        values: [
+            { text: "Active", value: 1 },
+            { text: "Inactive", value: 2 }
+        ],
+        operators: {
+            enums: {
+                eq: "Is",
+                neq: "Is not"
+            }
+        }
+    });
+    </script>
+
 ### operators.enums.eq `String` *(default: "Is equal to")*
 
 The text of the "equal" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: 1 },
+            { name: "Jane", category: 2 }
+        ],
+        field: "category",
+        values: [
+            { text: "Manager", value: 1 },
+            { text: "Developer", value: 2 }
+        ],
+        operators: {
+            enums: {
+                eq: "Is exactly"
+            }
+        }
+    });
+    </script>
 
 ### operators.enums.neq `String` *(default: "Is not equal to")*
 
 The text of the "not equal" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: 1 },
+            { name: "Jane", category: 2 }
+        ],
+        field: "category",
+        values: [
+            { text: "Manager", value: 1 },
+            { text: "Developer", value: 2 }
+        ],
+        operators: {
+            enums: {
+                neq: "Is not"
+            }
+        }
+    });
+    </script>
+
 ### operators.enums.isnull `String` *(default: "Is null")*
 
 The text of the "isnull" filter operator.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: 1 },
+            { name: "Jane", category: null }
+        ],
+        field: "category",
+        values: [
+            { text: "Manager", value: 1 },
+            { text: "Developer", value: 2 }
+        ],
+        operators: {
+            enums: {
+                isnull: "No category"
+            }
+        }
+    });
+    </script>
+
 ### operators.enums.isnotnull `String` *(default: "Is not null")*
 
 The text of the "isnotnull" filter operator.
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", category: 1 },
+            { name: "Jane", category: null }
+        ],
+        field: "category",
+        values: [
+            { text: "Manager", value: 1 },
+            { text: "Developer", value: 2 }
+        ],
+        operators: {
+            enums: {
+                isnotnull: "Has category"
+            }
+        }
+    });
+    </script>
 
 ## Fields
 
@@ -576,9 +1440,39 @@ The text of the "isnotnull" filter operator.
 The [data source](/api/javascript/data/datasource) of the widget.
 Configured via the [dataSource](/api/javascript/ui/filtermenu#configuration-dataSource) option.
 
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 }
+        ]
+    });
+    
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: dataSource,
+        field: "name"
+    });
+    </script>
+
 ### field `String`
 
 The field from the model that filtering will be applied on
+
+#### Example
+
+    <div id="filtermenu"></div>
+    <script>
+    $("#filtermenu").kendoFilterMenu({
+        dataSource: [
+            { name: "John", age: 25, department: "IT" },
+            { name: "Jane", age: 30, department: "HR" }
+        ],
+        field: "department"
+    });
+    </script>
 
 ## Methods
 

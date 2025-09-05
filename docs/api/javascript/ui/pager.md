@@ -506,6 +506,45 @@ Defines if the pager will be responsive.
 ### messages `Object`
 Defines texts shown within the pager. Use this option to customize or localize the pager messages.
 
+#### Example
+
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Milk", category: "Beverages" },
+            { productName: "Cheese", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          input: true,
+          numeric: true,
+          pageSizes: [2, 4, "all"],
+          messages: {
+            display: "Showing {0}-{1} of {2} items",
+            empty: "No data available",
+            page: "Page",
+            of: "of {0}",
+            itemsPerPage: "items per page",
+            first: "Go to first page",
+            previous: "Go to previous page",
+            next: "Go to next page",
+            last: "Go to last page",
+            allPages: "All"
+          }
+        });
+
+        dataSource.read();
+    </script>
+
 ### messages.display `String`*(default: "{0} - {1} of {2} items")*
 The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
 

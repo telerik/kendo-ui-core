@@ -18,6 +18,19 @@ The [template](/api/javascript/kendo/methods/template) which renders the validat
 
 > The `errorTemplate` content must be enclosed in a single DOM element parent. There are no restrictions with regard to nested child elements.
 
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+        $("#myform").kendoValidator({
+            errorTemplate: ({ message }) => `<div class="custom-error">${message}</div>`
+        });
+    </script>
+
 #### Define a custom error template
     <form id="myform">
         <input name="username" required /> <br />
@@ -35,6 +48,23 @@ The [template](/api/javascript/kendo/methods/template) which renders the validat
 
 Set of messages (either strings or functions) which will be shown when given validation rule fails.
 By setting already existing key the appropriate built-in message will be overridden.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <input type="email" name="userEmail" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+        $("#myform").kendoValidator({
+            messages: {
+                required: "This field is mandatory",
+                email: "Please enter a valid email address"
+            }
+        });
+    </script>
 
 #### Defining custom messages
     <form id="myform">
@@ -76,6 +106,37 @@ By setting already existing key the appropriate built-in message will be overrid
 ### rules `Object`
 
 Set of custom validation rules. Those rules will extend the [built-in ones](/framework/validator/overview#default-validation-rules).
+
+#### Example
+
+    <form id="myform">
+        <input name="username" /> <br />
+        <input name="age" type="number" /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+        $("#myform").kendoValidator({
+            rules: {
+                minLength: function(input) {
+                    if (input.is("[name=username]")) {
+                        return input.val().length >= 3;
+                    }
+                    return true;
+                },
+                adultAge: function(input) {
+                    if (input.is("[name=age]")) {
+                        return parseInt(input.val()) >= 18;
+                    }
+                    return true;
+                }
+            },
+            messages: {
+                minLength: "Username must be at least 3 characters",
+                adultAge: "Age must be 18 or older"
+            }
+        });
+    </script>
 
 #### Defining custom rules
 

@@ -132,6 +132,28 @@ Any valid CSS color string will work here, including hex and rgb.
 
 The border of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25
+        },
+        gaugeArea: {
+            border: {
+                color: "#4caf50",
+                width: 2,
+                dashType: "solid"
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### gaugeArea.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
@@ -195,6 +217,27 @@ The color of the border. Any valid CSS color string will work here, including he
 
 The dash type of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25
+        },
+        gaugeArea: {
+            border: {
+                color: "#ff9800",
+                width: 3,
+                dashType: "dash"
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -288,6 +331,25 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 The height of the gauge area.  By default, the vertical gauge is 200px and
 the horizontal one is 60px.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        gaugeArea: {
+            height: 150
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            vertical: true
+        }
+    });
+    </script>
+
 ### gaugeArea.margin `Number|Object`*(default: 5)*
 
  The margin of the gauge area.
@@ -305,22 +367,121 @@ the horizontal one is 60px.
 
 The top margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        gaugeArea: {
+            margin: {
+                top: 20
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### gaugeArea.margin.bottom `Number`
 
 The bottom margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        gaugeArea: {
+            margin: {
+                bottom: 15
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### gaugeArea.margin.left `Number`
 
 The left margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        gaugeArea: {
+            margin: {
+                left: 25
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### gaugeArea.margin.right `Number`
 
 The right margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        gaugeArea: {
+            margin: {
+                right: 10
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### gaugeArea.width `Number`
 
 The width of the gauge area.  By default the vertical gauge is 60px and
 horizontal gauge is 200px.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        gaugeArea: {
+            width: 100
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            vertical: true
+        }
+    });
+    </script>
 
 ### pointer `Array`
 
@@ -354,15 +515,73 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
 
 The border of the pointer.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            border: {
+                color: "#e91e63",
+                width: 2,
+                dashType: "solid"
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.border.color `String`
 
 The color of the border.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            border: {
+                color: "#2196f3",
+                width: 1
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            border: {
+                color: "#ff5722",
+                width: 2,
+                dashType: "dot"
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -396,9 +615,44 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            border: {
+                color: "#9c27b0",
+                width: 3
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.color `String`
 
 The color of the pointer.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            color: "#ff6b35"
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### pointer.margin `Number|Object`*(default: 3)*
 
@@ -417,10 +671,42 @@ The color of the pointer.
 
  The opacity of the pointer.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            color: "#f44336",
+            opacity: 0.6
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.shape `String`
 
 The shape of the pointer.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "arrow"
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 #### *"barIndicator"*
 
@@ -434,23 +720,130 @@ Specifies a arrow shape.
 
 The size of the pointer.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "arrow",
+            size: 8
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.track `Object`
 
 The element arround/under the pointer.
 (available only for 'barIndicator' shape)
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#e0e0e0",
+                size: 5
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.track.border `Object`
 
 The border of the track.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#f5f5f5",
+                border: {
+                    color: "#9e9e9e",
+                    width: 1,
+                    dashType: "solid"
+                }
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### pointer.track.border.color `String`
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#ffffff",
+                border: {
+                    color: "#2196f3",
+                    width: 2
+                }
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.track.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#ffffff",
+                border: {
+                    color: "#ff9800",
+                    width: 2,
+                    dashType: "dash"
+                }
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -484,25 +877,143 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#ffffff",
+                border: {
+                    color: "#4caf50",
+                    width: 3
+                }
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.track.color `String`
 
 The color of the track.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#e3f2fd"
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### pointer.track.opacity `Number`
 
 The opacity of the track.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#ffeb3b",
+                opacity: 0.5
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.track.size `Number`
 
 The size of the track.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#e8f5e8",
+                size: 10
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### pointer.track.visible `Boolean`*(default: false)*
 
  The visibility of the track.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25,
+            shape: "barIndicator",
+            track: {
+                color: "#f3e5f5",
+                visible: true
+            }
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### pointer.value `Number`
 
 The value of the gauge.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 35,
+            color: "#3f51b5"
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ### renderAs `String`
 
@@ -534,17 +1045,93 @@ The supported values are:
 
 Configures the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 100,
+            majorUnit: 20,
+            minorUnit: 5,
+            vertical: true,
+            reverse: false
+        }
+    });
+    </script>
+
 ### scale.line `Object`
 
 Configures the axis line.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            line: {
+                color: "#2196f3",
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.line.color `String`*(default: "black")*
 
 The color of the lines. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            line: {
+                color: "#4caf50"
+            }
+        }
+    });
+    </script>
+
 ### scale.line.dashType `String`*(default: "solid")*
 
 The dash type of the line.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            line: {
+                color: "#ff9800",
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -578,30 +1165,172 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The visibility of the lines.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            line: {
+                visible: false
+            }
+        }
+    });
+    </script>
+
 ### scale.line.width `Number`*(default: 1)*
 
 The width of the line..
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            line: {
+                color: "#9c27b0",
+                width: 3
+            }
+        }
+    });
+    </script>
+
 ### scale.labels `Object`
 
 Configures the scale labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                color: "#2196f3",
+                font: "12px Arial",
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.background `String`
 
 The background color of the labels.
 Any valid CSS color string will work here, including hex and rgb
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                background: "#fff3e0",
+                color: "#e65100"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border `Object`
 
 The border of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                background: "#ffffff",
+                border: {
+                    color: "#2196f3",
+                    width: 1,
+                    dashType: "solid"
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                border: {
+                    color: "#4caf50",
+                    width: 2
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                border: {
+                    color: "#ff9800",
+                    width: 1,
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -635,14 +1364,72 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                border: {
+                    color: "#e91e63",
+                    width: 2
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.color `String`
 
 The text color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                color: "#9c27b0"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                font: "16px Verdana",
+                color: "#3f51b5"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.format `String`
 
@@ -679,37 +1466,220 @@ The format of the labels.
 
 The top margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                margin: {
+                    top: 10
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.bottom `Number`
 
 The bottom margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                margin: {
+                    bottom: 8
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.left `Number`
 
 The left margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                margin: {
+                    left: 12
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.right `Number`
 
 The right margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                margin: {
+                    right: 6
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding `Number | Object`*(default: 0)*
 
  The padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                padding: 5,
+                background: "#f5f5f5"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.top `Number`
 
 The top padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                padding: {
+                    top: 4
+                },
+                background: "#e8f5e8"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.bottom `Number`
 
 The bottom padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                padding: {
+                    bottom: 6
+                },
+                background: "#fff3e0"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.left `Number`
 
 The left padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                padding: {
+                    left: 8
+                },
+                background: "#f3e5f5"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.right `Number`
 
 The right padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                padding: {
+                    right: 7
+                },
+                background: "#e1f5fe"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.template `String|Function`
 
@@ -738,70 +1708,358 @@ Template variables:
 
  The visibility of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            labels: {
+                visible: false
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks `Object`
 
 Configures the scale major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            majorTicks: {
+                color: "#2196f3",
+                size: 10,
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.majorTicks.color `String`
 
 The color of the major ticks.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            majorTicks: {
+                color: "#4caf50"
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.size `Number`
 
 The major tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            majorTicks: {
+                size: 12,
+                color: "#ff9800"
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.visible `Boolean`*(default: true)*
 
  The visibility of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            majorTicks: {
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### scale.majorTicks.width `Number`*(default: 0.5)*
 
  The width of the major ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            majorTicks: {
+                width: 3,
+                color: "#9c27b0"
+            }
+        }
+    });
+    </script>
+
 ### scale.majorUnit `Number`
 
 The interval between major divisions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 100,
+            majorUnit: 25
+        }
+    });
+    </script>
 
 ### scale.max `Number`*(default: 100)*
 
  The maximum value of the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 75
+        },
+        scale: {
+            min: 0,
+            max: 80
+        }
+    });
+    </script>
+
 ### scale.min `Number`*(default: 0)*
 
  The minimum value of the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 25
+        },
+        scale: {
+            min: 10,
+            max: 50
+        }
+    });
+    </script>
+
 ### scale.minorTicks `Object`
 
 Configures the scale minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            minorTicks: {
+                color: "#9e9e9e",
+                size: 5,
+                width: 1,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.color `String`
 
 The color of the minor ticks.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            minorTicks: {
+                color: "#607d8b"
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.size `Number`
 
 The minor tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            minorTicks: {
+                size: 3,
+                color: "#795548"
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.visible `Boolean`*(default: true)*
 
  The visibility of the minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            minorTicks: {
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.width `Number`*(default: 0.5)*
 
  The width of the minor ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            minorTicks: {
+                width: 2,
+                color: "#ffc107"
+            }
+        }
+    });
+    </script>
+
 ### scale.minorUnit `Number`
 
 The interval between minor divisions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            majorUnit: 10,
+            minorUnit: 2
+        }
+    });
+    </script>
 
 ### scale.mirror `Boolean`
 
 Mirrors the scale labels and ticks.
 If the labels are normally on the left side of the scale, mirroring the scale will render them to the right.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            mirror: true,
+            vertical: true
+        }
+    });
+    </script>
 
 ### scale.ranges `Array`
 
@@ -826,22 +2084,124 @@ The ranges of the scale.
 
 The start position of the range in scale units.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            ranges: [{
+                from: 0,
+                to: 20,
+                color: "#4caf50"
+            }]
+        }
+    });
+    </script>
+
 ### scale.ranges.to `Number`
 
 The end position of the range in scale units.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            ranges: [{
+                from: 20,
+                to: 40,
+                color: "#ff9800"
+            }]
+        }
+    });
+    </script>
+
 ### scale.ranges.opacity `Number`
 
 The opacity of the range.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            ranges: [{
+                from: 10,
+                to: 30,
+                color: "#f44336",
+                opacity: 0.7
+            }]
+        }
+    });
+    </script>
 
 ### scale.ranges.color `String`
 
 The color of the range.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            ranges: [{
+                from: 35,
+                to: 50,
+                color: "#9c27b0"
+            }]
+        }
+    });
+    </script>
+
 ### scale.rangePlaceholderColor `String`
 
 The default color for the ranges.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            ranges: [{
+                from: 10,
+                to: 20,
+                color: "#2196f3"
+            }],
+            rangePlaceholderColor: "#e0e0e0"
+        }
+    });
+    </script>
 
 ### scale.rangeSize `Number`
 
@@ -867,9 +2227,41 @@ The width of the range indicators.
 
 Reverses the axis direction - values increase from right to left and from top to bottom.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            reverse: true
+        }
+    });
+    </script>
+
 ### scale.vertical `Boolean`
 
 The position of the gauge.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50,
+            vertical: false
+        }
+    });
+    </script>
 
 ### theme `String` *(default: "sass")*
 
@@ -892,9 +2284,41 @@ The supported values are:
 * "silver"
 * "uniform"
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        theme: "bootstrap",
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
+
 ### transitions `Boolean`*(default: true)*
 
 A value indicating if transition animations should be played.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        transitions: false,
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+    </script>
 
 ## Methods
 
@@ -945,6 +2369,24 @@ An array of values to be set.
 Prepares the Gauge for safe removal from the DOM.
 
 Detaches event handlers and removes data entries in order to avoid memory leaks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: {
+            value: 30
+        },
+        scale: {
+            min: 0,
+            max: 50
+        }
+    });
+
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    gauge.destroy();
+    </script>
 
 ### exportImage
 Exports the Gauge as an image.

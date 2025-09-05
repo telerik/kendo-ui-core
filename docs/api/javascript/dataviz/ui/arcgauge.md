@@ -30,6 +30,16 @@ Template variables:
 
 The color of the value pointer. Accepts a valid CSS color string, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        color: "#ff6800"
+    });
+    </script>
+
 ### colors `Array`
 
 The color ranges of the value pointer. The pointer color will be set to the color from the range that contains the current value.
@@ -62,33 +72,160 @@ The color ranges of the value pointer. The pointer color will be set to the colo
 
 The color of the pointer in the specified range.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 30,
+        colors: [{
+            to: 50,
+            color: '#ff6800'
+        }, {
+            from: 50,
+            color: '#37b400'
+        }]
+    });
+    </script>
+
 ### colors.from `Number`
 
 The lower range value of the applied color.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 60,
+        colors: [{
+            from: 0,
+            to: 50,
+            color: '#0058e9'
+        }, {
+            from: 50,
+            to: 100,
+            color: '#f31700'
+        }]
+    });
+    </script>
 
 ### colors.to `Number`
 
 The upper range value of the applied color.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 30,
+        colors: [{
+            from: 0,
+            to: 50,
+            color: '#37b400'
+        }, {
+            from: 50,
+            to: 100,
+            color: '#ffc000'
+        }]
+    });
+    </script>
+
 ### gaugeArea `Object`
 
 The gauge area configuration options. This is the entire visible area of the gauge.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            background: "#f0f0f0",
+            border: {
+                color: "#333",
+                width: 2
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.background `String`*(default: "white")*
 
 The background of the gauge area. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            background: "#e8f5e8"
+        }
+    });
+    </script>
+
 ### gaugeArea.border `Object`
 
 The border of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            border: {
+                color: "#0058e9",
+                width: 3,
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            border: {
+                color: "#ff6800",
+                width: 2
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            border: {
+                color: "#333",
+                width: 2,
+                dashType: "dash"
+            }
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -122,13 +259,56 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The opacity of the border. By default the border is opaque.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            border: {
+                color: "#333",
+                width: 3,
+                opacity: 0.5
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.border.width `Number`*(default: 0)*
 
 The width of the border.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            border: {
+                color: "#0058e9",
+                width: 4
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.height `Number`
 
 The height of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            height: 300
+        }
+    });
+    </script>
 
 ### gaugeArea.margin `Number|Object`*(default: 5)*
 
@@ -150,25 +330,103 @@ The margin of the gauge area.
 
 The top margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            margin: {
+                top: 30
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.margin.bottom `Number`
 
 The bottom margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            margin: {
+                bottom: 40
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.margin.left `Number`
 
 The left margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            margin: {
+                left: 25
+            }
+        }
+    });
+    </script>
+
 ### gaugeArea.margin.right `Number`
 
 The right margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            margin: {
+                right: 35
+            }
+        }
+    });
+    </script>
 
 ### gaugeArea.width `Number`
 
 The width of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        gaugeArea: {
+            width: 400
+        }
+    });
+    </script>
+
 ### opacity `Number`
 
 The opacity of the value pointer.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        opacity: 0.7
+    });
+    </script>
 
 ### renderAs `String`
 
@@ -194,31 +452,144 @@ The supported values are:
 
 Configures the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            min: 0,
+            max: 100,
+            startAngle: -90,
+            endAngle: 90,
+            majorTicks: {
+                color: "#333"
+            }
+        }
+    });
+    </script>
+
 ### scale.endAngle `Number`*(default: 180)*
 
 The end angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            endAngle: 270
+        }
+    });
+    </script>
+
 ### scale.labels `Object`
 
 Configures the scale labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                color: "#0058e9",
+                font: "14px Arial",
+                background: "#f0f0f0"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.background `String`
 
 The background color of the labels.
 Any valid CSS color string will work here, including hex and rgb
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                background: "#ffffe0"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border `Object`
 
 The border of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                border: {
+                    color: "#37b400",
+                    width: 2,
+                    dashType: "solid"
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.border.color `String`
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                border: {
+                    color: "#ff6800",
+                    width: 1
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                border: {
+                    color: "#333",
+                    width: 1,
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
 
 #### *"solid"*
 
@@ -252,18 +623,81 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The opacity of the border. By default the border is opaque.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                border: {
+                    color: "#333",
+                    width: 2,
+                    opacity: 0.6
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                border: {
+                    color: "#0058e9",
+                    width: 3
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.color `String`
 
 The text color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                color: "#37b400"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                font: "16px Verdana"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.format `String`
 
@@ -291,45 +725,216 @@ The format of the labels.
 
 The margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                margin: 10
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.top `Number`
 
 The top margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                margin: {
+                    top: 15
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.bottom `Number`
 
 The bottom margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                margin: {
+                    bottom: 20
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.left `Number`
 
 The left margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                margin: {
+                    left: 12
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.right `Number`
 
 The right margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                margin: {
+                    right: 18
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding `Number | Object`*(default: 0)*
 
  The padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                padding: 8
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.top `Number`
 
 The top padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                padding: {
+                    top: 10
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.bottom `Number`
 
 The bottom padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                padding: {
+                    bottom: 8
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.left `Number`
 
 The left padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                padding: {
+                    left: 6
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.right `Number`
 
 The right padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                padding: {
+                    right: 12
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.position `String`*(default: "inside")*
 
 The labels positions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                position: "outside",
+                visible: true
+            }
+        }
+    });
+    </script>
 
 #### *"inside"*
 
@@ -367,68 +972,299 @@ Template variables:
 
  The visibility of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            labels: {
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks `Object`
 
 Configures the scale major ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            majorTicks: {
+                color: "#0058e9",
+                size: 10,
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.color `String`
 
 The color of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            majorTicks: {
+                color: "#37b400",
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.majorTicks.size `Number`
 
 The major tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            majorTicks: {
+                size: 15,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.visible `Boolean`*(default: false)*
 
 The visibility of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            majorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.majorTicks.width `Number`*(default: 0.5)*
 
  The width of the major ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            majorTicks: {
+                width: 3,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorUnit `Number`
 
 The interval between major divisions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            majorUnit: 20,
+            majorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.max `Number`*(default: 100)*
 
 The maximum value of the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            max: 200
+        }
+    });
+    </script>
+
 ### scale.min `Number`*(default: 0)*
 
 The minimum value of the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            min: -50
+        }
+    });
+    </script>
+
 ### scale.minorTicks `Object`
 
 Configures the scale minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            minorTicks: {
+                color: "#999",
+                size: 5,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.color `String`
 
 The color of the minor ticks.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            minorTicks: {
+                color: "#ffc000",
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.size `Number`
 
 The minor tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            minorTicks: {
+                size: 8,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.visible `Boolean`*(default: false)*
 
 The visibility of the minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            minorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.width `Number`*(default: 0.5)*
 
 The width of the minor ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            minorTicks: {
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.minorUnit `Number`
 
 The interval between minor divisions.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            minorUnit: 5,
+            minorTicks: {
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.rangeLineCap `String`*(default: "round")*
 
 The lineCap style of the ranges.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            rangeLineCap: "butt"
+        }
+    });
+    </script>
 
 The supported values are:
 
@@ -440,22 +1276,82 @@ The supported values are:
 
 The default color for the ranges.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            rangePlaceholderColor: "#e0e0e0"
+        }
+    });
+    </script>
+
 ### scale.rangeSize `Number`
 
 The width of the range indicators.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            rangeSize: 10
+        }
+    });
+    </script>
 
 ### scale.rangeDistance `Number`
 
 The distance from the range indicators to the ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            rangeDistance: 5
+        }
+    });
+    </script>
+
 ### scale.reverse `Boolean`*(default: false)*
 
 Reverses the scale direction - values are increase anticlockwise.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            reverse: true
+        }
+    });
+    </script>
 
 ### scale.startAngle `Number`*(default: 0)*
 
 The start angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        scale: {
+            startAngle: -90
+        }
+    });
+    </script>
 
 ### theme `String` *(default: "sass")*
 
@@ -463,6 +1359,16 @@ The gauge theme. With versions prior to R1 2023 this can be either the respectiv
 When set to "sass" the gauge will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        theme: "bootstrap"
+    });
+    </script>
 
 The supported values are:
 
@@ -482,9 +1388,28 @@ The supported values are:
 
 A value indicating if transition animations should be played.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 65,
+        transitions: false
+    });
+    </script>
+
 ### value `Number`
 
 The gauge value.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoArcGauge({
+        value: 75
+    });
+    </script>
 
 ## Methods
 

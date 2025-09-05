@@ -37,21 +37,104 @@ The configuration of the PropertyGrid columns which allows for setting the field
 
 The configuration of the field column.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        columns: {
+            fieldColumn: {
+                width: 200,
+                resizable: true
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### columns.fieldColumn.width `Number`
 
 The width of the column. Numeric values are treated as pixels. Refer to the documentation for details on using column widths and scrolling.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        columns: {
+            fieldColumn: {
+                width: 300
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### columns.valueColumn `Object`
 
 The configuration of the value column.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        columns: {
+            valueColumn: {
+                width: 400,
+                resizable: true
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### columns.valueColumn.width `Number`
 
 The width of the column. Numeric values are treated as pixels. Refer to the documentation for details on using column widths and scrolling.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        columns: {
+            valueColumn: {
+                width: 350
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### contextMenu `Object|Boolean` *(default: false)*
 
 Configures the ContextMenu of the PropertyGrid. If set to `true` enables the default ContextMenu.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: true,
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### contextMenu.body `Array`
 
@@ -100,17 +183,94 @@ You can also specify a custom item and associate it with a command.
 
 Specifies the name of the item.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: {
+            body: [{
+                name: "custom",
+                text: "Custom Action",
+                command: "CustomCommand"
+            }]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### contextMenu.body.text `String`
 
 Specifies the text of the item.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: {
+            body: [{
+                name: "customItem",
+                text: "Custom Menu Item",
+                command: "CustomCommand"
+            }]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### contextMenu.body.icon `String`
 
 Specifies the icon of the item.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: {
+            body: [{
+                name: "customItem",
+                text: "Custom Item",
+                icon: "k-icon k-i-gear",
+                command: "CustomCommand"
+            }]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### contextMenu.body.command `String`
 
 Specifies the command of the item.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        contextMenu: {
+            body: [{
+                name: "customItem",
+                text: "Execute Command",
+                command: "MyCustomCommand"
+            }]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### editMode `Boolean|String` *(default: true)*
 
@@ -142,6 +302,22 @@ The supported string values are:
 ### excel `Object`
 
 Configures the Excel export settings of the PropertyGrid.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        excel: {
+            fileName: "PropertyGrid.xlsx",
+            forceProxy: true
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### excel.fileName `String` *(default: "Export.xslx")*
 
@@ -192,6 +368,23 @@ Enables or disables column filtering in the Excel file.
 ### excel.forceProxy `Boolean` *(default: false)*
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/propertygrid#configuration-excel.proxyURL) even if the browser supports local file saving.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        excel: {
+            fileName: "PropertyGrid.xlsx",
+            forceProxy: true,
+            proxyURL: "/api/export"
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -316,11 +509,46 @@ Additional configuration options for the properties of the model.
 
 Sets the description for the property.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { field: "name", description: "The name of the item" },
+            { field: "price", description: "The price in USD" }
+        ],
+        model: {
+            name: "Laptop",
+            price: 999
+        }
+    });
+    </script>
+
 ### items.editable `Boolean|Function`
 
 The JavaScript function that is executed when the value cell is about to be opened for editing. The returned result will determine whether an editor  will be created.
 
 > Items of type Object are not editable.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { field: "name", editable: true },
+            { field: "id", editable: false },
+            { field: "status", editable: (data) => data.category === "active" }
+        ],
+        model: {
+            name: "Laptop",
+            id: 123,
+            status: "pending",
+            category: "active"
+        }
+    });
+    </script>
 
 ### items.editor `String|Function`
 
@@ -331,13 +559,76 @@ Provides a way to specify a custom editing UI for the value of the property. To 
 
 When used as `String`, defines the editor component type. Set the options for the component via the [items.editorOptions](/api/javascript/ui/propertygrid/configuration/items#editoroptions).For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditor)
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { field: "name", editor: "TextBox" },
+            { field: "price", editor: "NumericTextBox" },
+            { field: "category", editor: "DropDownList" }
+        ],
+        model: {
+            name: "Laptop",
+            price: 999,
+            category: "Electronics"
+        }
+    });
+    </script>
+
 ### items.editorOptions `Object`
 
 Defines the component options for the custom property value UI editor that is set via the `items.editor` configuration. For further info check the Form API: [`field`](/api/javascript/ui/form/configuration/items#itemseditoroptions).
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { 
+                field: "price", 
+                editor: "NumericTextBox",
+                editorOptions: { min: 0, max: 10000, decimals: 2 }
+            },
+            { 
+                field: "category", 
+                editor: "DropDownList",
+                editorOptions: { 
+                    dataSource: ["Electronics", "Books", "Clothing"],
+                    filter: "startswith"
+                }
+            }
+        ],
+        model: {
+            price: 999.99,
+            category: "Electronics"
+        }
+    });
+    </script>
+
 ### items.field `String`
 
 Maps the item configuration to the model property.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { field: "name" },
+            { field: "price" },
+            { field: "category" }
+        ],
+        model: {
+            name: "Laptop",
+            price: 999,
+            category: "Electronics"
+        }
+    });
+    </script>
 
 ### items.format `String`
 
@@ -345,25 +636,160 @@ The format that is applied to the value before it is displayed. Takes the `{0:fo
 
 > The [`kendo.format`](/api/javascript/kendo/methods/format) function is used to format the value.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { field: "price", format: "{0:C2}" },
+            { field: "percent", format: "{0:P}" },
+            { field: "date", format: "{0:MM/dd/yyyy}" }
+        ],
+        model: {
+            price: 999.99,
+            percent: 0.15,
+            date: new Date(2023, 5, 15)
+        }
+    });
+    </script>
+
 ### items.group `String`
 
 Sets the name of the group to which the property will belong, if grouping is enabled. Only root level items can be grouped.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { field: "name", group: "Basic Info" },
+            { field: "description", group: "Basic Info" },
+            { field: "price", group: "Financial" },
+            { field: "cost", group: "Financial" }
+        ],
+        model: {
+            name: "Laptop",
+            description: "High-performance laptop",
+            price: 999,
+            cost: 500
+        }
+    });
+    </script>
 
 ### items.items `Array`
 
 Additional configuration options for the nested properties of the model, if any.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { 
+                field: "address",
+                items: [
+                    { field: "street" },
+                    { field: "city" },
+                    { field: "zipCode" }
+                ]
+            }
+        ],
+        model: {
+            address: {
+                street: "123 Main St",
+                city: "Anytown",
+                zipCode: "12345"
+            }
+        }
+    });
+    </script>
+
 ### items.template `String|Function`
 
 The [`template`](/api/javascript/kendo/methods/template) which is rendered for the property's value.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { 
+                field: "name", 
+                template: (data) => `<strong>${data.value}</strong>` 
+            },
+            { 
+                field: "status", 
+                template: (data) => `<span class="${data.value}">${data.value}</span>` 
+            }
+        ],
+        model: {
+            name: "Laptop",
+            status: "active"
+        }
+    });
+    </script>
 
 ### items.validation `Object`
 
 Specifies the validation rules for the field.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        items: [
+            { 
+                field: "name", 
+                validation: { required: true, minLength: 2 }
+            },
+            { 
+                field: "email", 
+                validation: { required: true, email: true }
+            },
+            { 
+                field: "age", 
+                validation: { min: 18, max: 120 }
+            }
+        ],
+        model: {
+            name: "",
+            email: "",
+            age: 25
+        }
+    });
+    </script>
+
 ### messages `Object`
 
 Defines the text of the command buttons that are shown within the PropertyGrid. Used primarily for localization.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            defaultGroupName: "General",
+            commands: {
+                details: "Show Details",
+                excel: "Export to Excel",
+                group: "Group",
+                pdf: "Export to PDF",
+                search: "Search",
+                sort: "Sort"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### messages.defaultGroupName `String` *(default: Other)*
 
@@ -400,29 +826,153 @@ When grouping is enabled, sets the name for the group, to which any root propert
 
 Defines the text and/or title for the command buttons that are used across the component.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                details: "View Details",
+                excel: "Export Excel File",
+                group: "Group Properties",
+                pdf: "Export PDF File",
+                search: "Search properties...",
+                sort: "Sort Properties"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### messages.commands.details `String` *(default: "Toggle Info box")*
 
 Defines the title attribute for the `details` command.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                details: "Show Property Details"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### messages.commands.excel `String` *(default: "Export to Excel")*
 
 Defines the text of the **Export to Excel** button that exports the component's data in spreadsheet format.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                excel: "Export as Spreadsheet"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### messages.commands.group `String` *(default: "Group Items")*
 
 Defines the title attribute for the `group` DropDownList.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                group: "Group by Category"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### messages.commands.pdf `String` *(default: "Export to PDF")*
 
 Defines the text of the **Export to PDF** button that exports the component's data in PDF format.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                pdf: "Export as Document"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### messages.commands.search `String` *(default: "Search...")*
 
 Defines the placeholder text in the PropertyGrid search panel.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                search: "Find properties..."
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### messages.commands.sort `String` *(default: "Sort")*
 
 Defines the title attribute for the Sort DropDownList.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        messages: {
+            commands: {
+                sort: "Sort Properties"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### model `Object`
 
@@ -471,6 +1021,24 @@ Configures the PDF export settings of the PropertyGrid.
 >
 > `<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>`
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            author: "Kendo UI Team",
+            autoPrint: true,
+            margin: { top: 20, left: 20, right: 20, bottom: 20 }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
@@ -500,9 +1068,41 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 > Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            autoPrint: true
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 
 A flag which indicates whether to produce actual hyperlinks in the exported PDF file. You can also pass a CSS selector as an argument. All matching links will be ignored.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            avoidLinks: true
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -580,13 +1180,62 @@ Specifies the file name of the exported PDF file.
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/propertygrid#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            forceProxy: true,
+            proxyURL: "/api/export-pdf"
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            jpegQuality: 0.8
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to `true` all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            keepPNG: true
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -676,17 +1325,89 @@ The supported units are:
 
 The bottom margin. Numbers are considered as `pt` units.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            margin: {
+                bottom: 30
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as `pt` units.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            margin: {
+                left: 25
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as `pt` units.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            margin: {
+                right: 25
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as `pt` units.
+
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        pdf: {
+            fileName: "PropertyGrid.pdf",
+            margin: {
+                top: 30
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -1095,33 +1816,176 @@ The text that is displayed by the command button. If not set, the PropertyGrid w
 
 A JavaScript array that contains the ToolBar's commands configuration.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "custom", text: "Custom Action", icon: "k-icon k-i-gear" }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### toolbar.items.click `Function`
 
 The `click` handler of the toolbar command. Used for custom toolbar commands.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { 
+                    name: "custom", 
+                    text: "Custom Action",
+                    click: function(e) {
+                        console.log("Custom button clicked");
+                        alert("Custom action executed!");
+                    }
+                }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.items.icon `String`
 
 Specifies the icon's name that will be rendered inside the toolbar button. When you set this option, the PropertyGrid renders an additional `span` element inside the toolbar button which has a name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { 
+                    name: "custom", 
+                    text: "Settings",
+                    icon: "k-icon k-i-gear"
+                }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.items.imageClass `String`
 
 A class name that will be rendered inside the toolbar button. When you set this option, the PropertyGrid renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { 
+                    name: "custom", 
+                    text: "Action",
+                    imageClass: "custom-icon"
+                }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.items.name `String`
 
 The name of the toolbar command. Can be either a built-in ("search", "sort", "group" or "details") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "customAction", text: "Custom" }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
+
 ### toolbar.items.text `String`
 
 The text that is displayed by the command button. If not set, the PropertyGrid will use the [`name`](/api/javascript/ui/propertygrid#configuration-toolbar.name) option as the button text instead.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search", text: "Find Properties" },
+                { name: "sort", text: "Sort Items" },
+                { name: "custom", text: "Custom Action" }
+            ]
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.overflow `Object`
 Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "group" }
+            ],
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "auto",
+                scrollButtonsPosition: "split",
+                scrollDistance: 100
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.overflow.mode `String` *(default: "menu")*
 
@@ -1131,6 +1995,27 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "group" }
+            ],
+            overflow: {
+                mode: "scroll"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
@@ -1139,6 +2024,28 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "group" }
+            ],
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
 
@@ -1147,11 +2054,57 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "group" }
+            ],
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible",
+                scrollButtonsPosition: "start"
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### toolbar.overflow.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
 
+#### Example
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        toolbar: {
+            items: [
+                { name: "search" },
+                { name: "sort" },
+                { name: "group" }
+            ],
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible",
+                scrollDistance: 75
+            }
+        },
+        model: {
+            foo: "bar",
+            baz: 5
+        }
+    });
+    </script>
 
 ### width `Number`
 

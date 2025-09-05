@@ -1219,6 +1219,22 @@ Specifies the selected tab. Should be corresponding to the dataTextField configu
 
 The jQuery object which contains the TabStrip items.
 
+#### Example
+
+    <div id="tabstrip">
+        <ul>
+            <li>First Tab</li>
+            <li>Second Tab</li>
+        </ul>
+        <div>First tab content</div>
+        <div>Second tab content</div>
+    </div>
+    <script>
+    var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    var tabGroup = tabstrip.tabGroup;
+    console.log("TabStrip items:", tabGroup);
+    </script>
+
 ## Methods
 
 ### activateTab
@@ -1314,7 +1330,7 @@ Obtains the DOM element that encloses tab content by its tab index in the **TabS
 
 > **Important:** To remove the tab contents safely, use **contentHolder** to get the element to empty.
 
-#### Obtain the content element representing the first tab in a TabStrip
+#### Example
 
     <div id="tabstrip">
         <ul>
@@ -1348,7 +1364,7 @@ The difference between `contentElement` and `contentHolder` is that `contentHold
 
 > **Important:** To remove the tab contents safely, use this method to get the element to empty.
 
-#### Obtain the content holder representing the first tab in a TabStrip
+#### Example
 
     <div id="tabstrip">
         <ul>
@@ -1606,6 +1622,8 @@ A reference tab to insert the new item before
 
 Gets the list of DOM elements that represent the tabs.
 
+#### Example
+
     <div id="tabstrip">
         <ul>
             <li>Tab 1</li>
@@ -1628,6 +1646,8 @@ Gets the list of DOM elements that represent the tabs.
 ### reload
 
 Reloads TabStrip tab(s) via AJAX.
+
+#### Example
 
     <button id="btn">Reload</button>
     <div id="tabstrip"></div>
@@ -1663,7 +1683,7 @@ The target tab(s), specified as a selector or jQuery object, to be reloaded via 
 
 Removes a specified tab from a TabStrip.
 
-#### Remove a tab with ID, tab1 from a TabStrip
+#### Example
 
     <div id="tabstrip">
         <ul>
@@ -1767,7 +1787,7 @@ The activated tab.
 
 The content element of the activated tab.
 
-#### Attach activate event handler during initialization; detach via unbind()
+#### Example
 
     <div id="tabStrip">
         <ul>
@@ -1832,7 +1852,7 @@ The selected item
 
 The loaded content element that is retrieved via AJAX.
 
-#### Attach contentLoad event handler during initialization; detach via unbind()
+#### Example
 
     <div id="tabstrip"></div>
 
@@ -1873,7 +1893,7 @@ The jqXHR object used to load the content
 
 The returned status.
 
-#### Attach error event handler during initialization; detach via unbind()
+#### Example
 
     <div id="tabstrip">
         <ul>
@@ -1913,7 +1933,7 @@ The selected item chosen by a user.
 
 The content element of the tab going to be selected.
 
-#### Attach select event handler during initialization; detach via unbind()
+#### Example
 
     <div id="tabstrip">
         <ul>
@@ -1978,7 +1998,7 @@ The activated tab.
 
 The content element of the activated tab.
 
-#### Attach show event handler during initialization; detach via unbind()
+#### Example
 
     <div id="tabstrip">
         <ul>

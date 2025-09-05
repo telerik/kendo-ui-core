@@ -16,13 +16,51 @@ Represents the Kendo UI Slider widget. Inherits from [Widget](/api/javascript/ui
 
 The title of the decrease button of the **Slider**.
 
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        decreaseButtonTitle: "Decrease Value",
+        showButtons: true,
+        min: 0,
+        max: 100,
+        value: 25
+      });
+    </script>
+
 ### dragHandleTitle `String`*(default: "drag")*
 
 The title of the drag handle of the **Slider**.
 
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        dragHandleTitle: "Slider Handle",
+        min: 0,
+        max: 100,
+        value: 50
+      });
+    </script>
+
 ### increaseButtonTitle `String`*(default: "Increase")*
 
 The title of the increase button of the **Slider**.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        increaseButtonTitle: "Increase Value",
+        showButtons: true,
+        min: 0,
+        max: 100,
+        value: 75
+      });
+    </script>
 
 ### largeStep `Number`*(default: 5)*
 
@@ -31,22 +69,87 @@ handle must be focused). Note: `largeStep` will also set a large tick for every 
 
 Must be a positive number, larger than [smallStep](/api/javascript/ui/slider#configuration-smallStep).
 
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        smallStep: 1,
+        largeStep: 10,
+        value: 50,
+        tickPlacement: "both"
+      });
+    </script>
+
 ### max `Number`*(default: 10)*
 
 The maximum value of the **Slider**.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 200,
+        value: 100,
+        smallStep: 5
+      });
+    </script>
 
 ### min `Number`*(default: 0)*
 
 The minimum value of the **Slider**.
 
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: -50,
+        max: 50,
+        value: 0,
+        smallStep: 2
+      });
+    </script>
+
 ### orientation `String`*(default: "horizontal")*
 
 The orientation of a **Slider**: `"horizontal"` or `"vertical"`.
+
+#### Example
+
+    <div style="height: 200px; width: 100px;">
+      <input id="slider" />
+    </div>
+    <script>
+      $("#slider").kendoSlider({
+        orientation: "vertical",
+        min: 0,
+        max: 100,
+        value: 30,
+        smallStep: 5
+      });
+    </script>
 
 ### showButtons `Boolean`*(default: true)*
 
 Can be used to show (**true**) or hide (**false**) the
 increase and decrease buttons of a **Slider**.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        showButtons: false,
+        min: 0,
+        max: 100,
+        value: 40
+      });
+    </script>
 
 ### smallStep `Number`*(default: 1)*
 
@@ -57,6 +160,18 @@ The small step value determines the amount of Slider value change when the end u
 * clicks on the increase or decrease buttons of the **Slider**;
 * presses the arrow keys (the drag handle must be focused);
 * drags the drag handle.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        smallStep: 0.5,
+        value: 25.5
+      });
+    </script>
 
 ### tickPlacement `String`*(default: "both")*
 
@@ -70,14 +185,57 @@ Denotes the location of the tick marks in the **Slider**. The available options 
 * both - Tick marks are located on both sides of the widget.
 * none - Tick marks are not visible.
 
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        value: 40,
+        largeStep: 20,
+        smallStep: 5,
+        tickPlacement: "topLeft"
+      });
+    </script>
+
 ### tooltip `Object`
 
 Configuration of the **Slider** tooltip.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        value: 60,
+        tooltip: {
+          enabled: true,
+          format: "{0:N2}"
+        }
+      });
+    </script>
 
 ### tooltip.enabled `Boolean`*(default: true)*
 
 Disables (**false**) or enables (**true**) the tooltip of
 the **Slider**.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        value: 35,
+        tooltip: {
+          enabled: false
+        }
+      });
+    </script>
 
 ### tooltip.format `String`*(default: "{0:#,#.##}")*
 
@@ -137,6 +295,19 @@ Template of the tooltip. The following variables are passed by the Slider and ar
 ### value `Number`
 
 The underlying value of the **Slider**.
+
+#### Example
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        min: 0,
+        max: 100,
+        value: 65,
+        smallStep: 1,
+        largeStep: 10
+      });
+    </script>
 
 ## Methods
 

@@ -89,9 +89,42 @@ Defines the fill options of the circle.
 
 Defines the fill color of the circle.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          color: "#ff6358"
+        }
+      }]
+    });
+    </script>
+
 ### fill.opacity `Number` *(default: 1)*
 
 Defines the fill opacity of the circle.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          color: "#ff6358",
+          opacity: 0.5
+        }
+      }]
+    });
+    </script>
 
 ### fill.gradient `Object`
 
@@ -147,14 +180,82 @@ The type of the gradient. Supported values are:
 * linear
 * radial
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "radial",
+            stops: [
+              { color: "#ff6358", offset: 0 },
+              { color: "#ffd246", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
+
 ### fill.gradient.center `Array`
 The center of the radial gradient.
 
 Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "radial",
+            center: [0.5, 0.3],
+            stops: [
+              { color: "#ff6358", offset: 0 },
+              { color: "#ffd246", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
+
 ### fill.gradient.radius `Number` *(default: 1)*
 The radius of the radial gradient relative to the shape bounding box.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "radial",
+            radius: 0.8,
+            stops: [
+              { color: "#ff6358", offset: 0 },
+              { color: "#ffd246", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
 
 ### fill.gradient.start `Array`
 The start point of the linear gradient.
@@ -162,18 +263,112 @@ The start point of the linear gradient.
 Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "linear",
+            start: [0, 0],
+            end: [1, 1],
+            stops: [
+              { color: "#ff6358", offset: 0 },
+              { color: "#ffd246", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
+
 ### fill.gradient.end `Array`
 The end point of the linear gradient.
 
 Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "linear",
+            start: [0, 0],
+            end: [0.8, 0.8],
+            stops: [
+              { color: "#ff6358", offset: 0 },
+              { color: "#ffd246", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
+
 ### fill.gradient.stops `Array`
 The array of gradient color stops.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "linear",
+            stops: [
+              { color: "#ff6358", offset: 0, opacity: 1 },
+              { color: "#ffd246", offset: 0.5, opacity: 0.8 },
+              { color: "#28b4c8", offset: 1, opacity: 0.6 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
 
 ### fill.gradient.stops.offset `Number`
 The stop offset from the start of the element.
 Ranges from 0 (start of gradient) to 1 (end of gradient).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "linear",
+            stops: [
+              { color: "#ff6358", offset: 0 },
+              { color: "#ffd246", offset: 0.3 },
+              { color: "#28b4c8", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
 
 ### fill.gradient.stops.color `String`
 The color in any of the following formats.
@@ -186,9 +381,55 @@ The color in any of the following formats.
 
 Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "linear",
+            stops: [
+              { color: "red", offset: 0 },
+              { color: "#ff6358", offset: 0.5 },
+              { color: "rgb(40, 180, 200)", offset: 1 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
+
 ### fill.gradient.stops.opacity `Number`
 The fill opacity.
 Ranges from 0 (completely transparent) to 1 (completely opaque).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        fill: {
+          gradient: {
+            type: "linear",
+            stops: [
+              { color: "#ff6358", offset: 0, opacity: 1 },
+              { color: "#ffd246", offset: 0.5, opacity: 0.5 },
+              { color: "#28b4c8", offset: 1, opacity: 0.2 }
+            ]
+          }
+        }
+      }]
+    });
+    </script>
 
 ### radius `Number`
 
@@ -269,9 +510,43 @@ Defines the stroke configuration.
 
 Defines the stroke color of the circle.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        stroke: {
+          color: "#ff6358",
+          width: 2
+        }
+      }]
+    });
+    </script>
+
 ### stroke.width `Number`
 
 Defines the stroke width of the circle.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+      shapes: [{
+        type: "circle",
+        x: 100,
+        y: 100,
+        stroke: {
+          color: "#ff6358",
+          width: 4
+        }
+      }]
+    });
+    </script>
 
 ## Fields
 

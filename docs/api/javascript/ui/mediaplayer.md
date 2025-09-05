@@ -44,7 +44,7 @@ If set to `true`, the widget will start playing the video or videos after initia
 
 If set to `false`, the user will be prevented from seeking the video forward.
 
-#### Example - enable fullscreen
+#### Example - enable forward seek
 
     <div id="mediaplayer"></div>
     <script>
@@ -57,6 +57,16 @@ If set to `false`, the user will be prevented from seeking the video forward.
 ### fullScreen `Boolean` *(default: false)*
 
 If set to `true`, the widget will enter fullscreen mode.
+
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        fullScreen: true,
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
 
 #### Enable fullscreen
 
@@ -125,29 +135,118 @@ Specifies the title of the media that will be played.
 
 The object which holds the localization strings.
 
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            pause: "Pause",
+            play: "Play",
+            mute: "Mute",
+            unmute: "Unmute",
+            quality: "Quality",
+            fullscreen: "Fullscreen"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
+
 ### messages.pause `String`
 
 **Pause** button tooltip message.
+
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            pause: "Pause Video"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
 
 ### messages.play `String`
 
 **Play** button tooltip message.
 
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            play: "Play Video"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
+
 ### messages.mute `String`
 
 **Mute** button tooltip message.
+
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            mute: "Mute Audio"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
 
 ### messages.unmute `String`
 
 **Unmute** button tooltip message.
 
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            unmute: "Unmute Audio"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
+
 ### messages.quality `String`
 
 **Quality** button tooltip message.
 
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            quality: "Video Quality"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
+
 ### messages.fullscreen `String`
 
 **Fullscreen** button tooltip message.
+
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        messages: {
+            fullscreen: "Enter Fullscreen"
+        },
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    </script>
 
 ### mute `Boolean` *(default: false)*
 
@@ -180,6 +279,16 @@ If set to `true`, the option enables the keyboard navigation for the widget.
 ### volume `Number` *(default: 100)*
 
 A value between 0 and 100 that specifies the volume of the video.
+
+#### Example
+
+    <div id="mediaplayer"></div>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        volume: 50,
+        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+    });
+    </script>
 
 #### Example - set volume
 
@@ -265,7 +374,8 @@ The media configuration to load in the MediaPlayer. Accepts the same values as t
 
 Gets or sets a value between 0 and 100 that specifies the volume of the video.
 
-```
+#### Example
+
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -282,7 +392,6 @@ Gets or sets a value between 0 and 100 that specifies the volume of the video.
         mediaPlayer.volume(50);
       }, 1000);
     </script>
-```
 
 #### Parameters
 
@@ -332,6 +441,21 @@ The value indicates if the sound has to be muted.
 ### isEnded
 
 Gets a value indicating whether the media has finished playing.
+
+#### Example
+
+    <div id="mediaplayer"></div>
+    <button id="checkEnded">Check if ended</button>
+    <script>
+    $("#mediaplayer").kendoMediaPlayer({
+        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
+    });
+    
+    $("#checkEnded").click(function() {
+        var mediaplayer = $("#mediaplayer").data("kendoMediaPlayer");
+        console.log("Media ended: " + mediaplayer.isEnded());
+    });
+    </script>
 
 #### Returns
 

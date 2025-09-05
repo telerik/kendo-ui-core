@@ -59,6 +59,29 @@ internals of this object are not intended to be public API at this point, but
 you can pass this object reference to [`removeDrawing`](#methods-removeDrawing)
 if you want to remove this drawing.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet();
+
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+
+    // Add a drawing to the sheet
+    var drawing = sheet.addDrawing({
+        topLeftCell: "B2",
+        offsetX: 10,
+        offsetY: 10,
+        width: 200,
+        height: 100,
+        type: "image",
+        src: "https://via.placeholder.com/200x100"
+    });
+
+    console.log("Drawing added:", drawing);
+    </script>
+
 ### clearFilter
 
 Clears the filters for the passed column index. If an array is passed, `clearFilter` will clear the filter for each column index.
@@ -166,8 +189,7 @@ Deletes the contents of the column at the provided index and shifts the remainin
 
 The zero-based index of the column
 
-##### Example
-
+#### Example
 
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
@@ -518,6 +540,31 @@ Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
 
 The drawing object.
 
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+    $("#spreadsheet").kendoSpreadsheet();
+
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+
+    // Add a drawing to the sheet
+    var drawing = sheet.addDrawing({
+        topLeftCell: "B2",
+        offsetX: 10,
+        offsetY: 10,
+        width: 200,
+        height: 100,
+        type: "image",
+        src: "https://via.placeholder.com/200x100"
+    });
+
+    // Later, remove the drawing
+    sheet.removeDrawing(drawing);
+    console.log("Drawing removed");
+    </script>
+
 ### resize
 
 Resize the sheet to accommodate the specified number of rows and columns. If the
@@ -612,8 +659,7 @@ Binds the sheet to a DataSource instance. For more information on the data-bindi
 
 The DataSource instance.
 
-###### Example
-
+#### Example
 
     <div id="spreadsheet"></div>
     <script>

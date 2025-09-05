@@ -21,6 +21,32 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 The schema configuration of the SchedulerDataSource.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.SchedulerDataSource({
+        transport: {
+            read: {
+                url: "https://demos.telerik.com/service/v2/core/tasks"
+            }
+        },
+        schema: {
+            timezone: "Europe/Sofia",
+            model: {
+                id: "taskId",
+                fields: {
+                    taskId: { from: "TaskID", type: "number" },
+                    title: { from: "Title", validation: { required: true } },
+                    start: { type: "date", from: "Start" },
+                    end: { type: "date", from: "End" },
+                    description: { from: "Description" },
+                    isAllDay: { type: "boolean", from: "IsAllDay" }
+                }
+            }
+        }
+    });
+    </script>
+
 ### schema.model `Object`
 
 The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/framework/schedulerevent#configuration) for more info.

@@ -1055,6 +1055,8 @@ Merges the range cells into a single merged cell. If the range already includes 
 
 Sets the sheet selection to the range cells.
 
+#### Example
+
 ```
 <div id="spreadsheet"></div>
 <script type="text/javascript" charset="utf-8">
@@ -1167,6 +1169,8 @@ One of the following values: "left", "center", "right" and "justify".
 ### unmerge
 
 Un-merges any merged cells which are included in the range.
+
+#### Example
 
 ```
 <div id="spreadsheet"></div>

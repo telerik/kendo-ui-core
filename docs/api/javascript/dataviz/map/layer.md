@@ -82,10 +82,41 @@ The layer [`options`](/api/javascript/dataviz/ui/map/configuration/layers#relate
 ### map `kendo.dataviz.ui.Map`
 The owner Map widget.
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+      function createMap() {
+        $("#map").kendoMap({
+          center: [45, 45],
+          minZoom: 3,
+          zoom: 4,
+          wraparound: false,
+          layers: [
+            {
+              type: "tile",
+              urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+              subdomains: ["a", "b", "c"],
+              attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
+            }
+          ]
+        });
+        
+        // Access the owner Map widget from the layer
+        let map = $("#map").data("kendoMap");
+        let layer = map.layers[0];
+        console.log("Owner map widget:", layer.map);
+      }
+
+      $(document).ready(createMap);
+    </script>
+
 ## Methods
 
 ### show
 Shows the layer, if not visible.
+
+#### Example
 
     <button class="k-button k-button-lg k-button-solid-primary" id="show">Show Layer</button>
     <div id="map"></div>
@@ -123,6 +154,8 @@ Shows the layer, if not visible.
 
 ### hide
 Hides the layer, if visible.
+
+#### Example
 
     <button class="k-button k-button-lg k-button-solid-primary" id="hide">Hide Layer</button>
     <div id="map"></div>

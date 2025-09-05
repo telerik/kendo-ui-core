@@ -17,13 +17,43 @@ Specifies the adaptive rendering of the component. The supported values are: `no
 
 The adaptive rendering of the DateTimePicker provides consistency to the customer experience on any device by supporting adaptive enhancements such as changes in styling and behavior.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        adaptiveMode: "auto"
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Date and Time"
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Date and Time",
+        adaptiveSubtitle: "Choose the desired date and time"
+    });
+    </script>
 
 ### animation `Boolean|Object`
 
@@ -82,9 +112,36 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        animation: {
+            close: {
+                effects: "fadeOut slideUp"
+            }
+        }
+    });
+    </script>
+
 ### animation.close.duration `Number`
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        animation: {
+            close: {
+                effects: "fadeOut",
+                duration: 500
+            }
+        }
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -110,9 +167,36 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        animation: {
+            open: {
+                effects: "fadeIn slideDown"
+            }
+        }
+    });
+    </script>
+
 ### animation.open.duration `Number`
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        animation: {
+            open: {
+                effects: "fadeIn",
+                duration: 600
+            }
+        }
+    });
+    </script>
 
 ### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
@@ -180,19 +264,9 @@ Sets a value that indicates whether to automatically correct the segment when ou
 
 ### culture `String`*(default: "en-US")*
 
- Specifies the culture info used by the widget.
+Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>`
 
-#### Example - specify German culture internationalization
-
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
-    -->
+#### Example - specify a culture
 
     <input id="datetimepicker" />
     <script>
@@ -402,6 +476,14 @@ For more information on date and time formats please refer to [Date Formatting](
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        inputMode: "numeric"
+    });
+    </script>
 
 ### label `String|Function|Object` *(default: null)*
 
@@ -584,33 +666,137 @@ The messages that DateInput uses.  Use it to customize or localize the placehold
 
 The placeholder for the years part.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                year: "Year"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.month `String` *(default: "month")*
 
 The placeholder for the months part.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                month: "Month"
+            }
+        }
+    });
+    </script>
 
 ### messages.dateInput.day `String` *(default: "day")*
 
 The placeholder for the day of the month part.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                day: "Day"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.weekday `String` *(default: "day of the week")*
 
 The placeholder for the day of the week part.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                weekday: "Weekday"
+            }
+        }
+    });
+    </script>
 
 ### messages.dateInput.hour `String` *(default: "hours")*
 
 The placeholder for the hours part.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                hour: "Hours"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.minute `String` *(default: "minutes")*
 
 The placeholder for the minutes part.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                minute: "Minutes"
+            }
+        }
+    });
+    </script>
 
 ### messages.dateInput.second `String` *(default: "seconds")*
 
 The placeholder for the seconds part.
 
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                second: "Seconds"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.dayperiod `String` *(default: "AM/PM")*
 
 The placeholder for the AM/PM part.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        messages: {
+            dateInput: {
+                dayperiod: "AM/PM"
+            }
+        }
+    });
+    </script>
 
 ### min `Date`*(default: Date(1900, 0, 1))*
 
@@ -628,6 +814,17 @@ The placeholder for the AM/PM part.
 ### month `Object`
 
  Templates for the cells rendered in the calendar "month" view.
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        month: {
+            content: '<div class="custom">#= data.value #</div>'
+        }
+    });
+    </script>
 
 ### month.content `String`
 
