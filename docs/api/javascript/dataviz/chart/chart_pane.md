@@ -14,9 +14,43 @@ Represents a chart pane.
 
 The group holding the charts drawing elements.
 
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        series: [{
+            data: [1, 2, 3, 4, 5]
+        }],
+        render: function(e) {
+            var chart = e.sender;
+            var pane = chart.options.panes[0];
+            var chartsVisual = pane.chartsVisual;
+            console.log("Charts visual group:", chartsVisual);
+        }
+    });
+    </script>
+
 ### visual `kendo.drawing.Group`
 
 The drawing group used to draw the pane.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        series: [{
+            data: [1, 2, 3, 4, 5]
+        }],
+        render: function(e) {
+            var chart = e.sender;
+            var pane = chart.options.panes[0];
+            var visual = pane.visual;
+            console.log("Pane visual group:", visual);
+        }
+    });
+    </script>
 
 ## Methods
 
@@ -33,6 +67,25 @@ The axis name.
 #### Returns
 
 `kendo.dataviz.ChartAxis` The chart axis.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        series: [{
+            data: [1, 2, 3, 4, 5]
+        }],
+        valueAxis: {
+            name: "primaryAxis"
+        },
+        render: function(e) {
+            var chart = e.sender;
+            var axis = chart.findAxisByName("primaryAxis");
+            console.log("Found axis:", axis);
+        }
+    });
+    </script>
 
 ### series
 

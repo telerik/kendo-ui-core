@@ -49,6 +49,16 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <textarea id="textarea"></textarea>
+    <script>
+    $("#textarea").kendoTextArea({
+        inputMode: "numeric",
+        placeholder: "Enter numbers only"
+    });
+    </script>
+
 
 ### layoutFlow `String` *(default: "vertical")*
 

@@ -61,6 +61,8 @@ Menu content expands from the top down. Similar to slideIn.
 
 The animation that will be used when closing sub menus.
 
+#### Example
+
     <ul id="menu">
         <li>Item 1
             <ul>
@@ -87,6 +89,8 @@ The animation that will be used when closing sub menus.
 
 Effect to be used for closing of the popup.
 
+#### Example
+
     <ul id="menu">
         <li>Item 1
             <ul>
@@ -112,6 +116,8 @@ Effect to be used for closing of the popup.
 ### animation.close.duration `Number`
 
 Defines the animation duration in milliseconds.
+
+#### Example
 
     <ul id="menu">
         <li>Item 1
@@ -142,6 +148,8 @@ Defines the animation duration in milliseconds.
 
 The animation that will be used when opening sub menus.
 
+#### Example
+
     <ul id="menu">
         <li>Item 1
             <ul>
@@ -168,6 +176,8 @@ The animation that will be used when opening sub menus.
 
 Effect to be used for opening of the popup.
 
+#### Example
+
     <ul id="menu">
         <li>Item 1
             <ul>
@@ -193,6 +203,8 @@ Effect to be used for opening of the popup.
 ### animation.open.duration `Number`
 
 Defines the animation duration in milliseconds.
+
+#### Example
 
     <ul id="menu">
         <li>Item 1

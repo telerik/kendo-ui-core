@@ -19,6 +19,27 @@ If the `HierarchicalDataSource` option is set to a JavaScript object or array th
 
 If the `HierarchicalDataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/framework/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
 
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+      $("#treemap").kendoTreeMap({
+          dataSource: [
+              {
+                  name: "Technology",
+                  value: 30,
+                  items: [
+                      { name: "Mobile", value: 15 },
+                      { name: "Desktop", value: 15 }
+                  ]
+              },
+             
+          ],
+          valueField: "value",
+          textField: "name"
+      });
+    </script>
+
 ### autoBind `Boolean` *(default: true)*
 
 If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/framework/hierarchicaldatasource#events-change) event of the
@@ -56,23 +77,102 @@ The Supported values are:
 * horizontal
 * vertical
 
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { name: "Category A", value: 40 },
+            { name: "Category B", value: 30 },
+            { name: "Category C", value: 20 },
+            { name: "Category D", value: 10 }
+        ],
+        type: "horizontal",
+        valueField: "value",
+        textField: "name"
+    });
+    </script>
+
 ### theme `String` *(default: "sass")*
 
 The theme of the TreeMap.
 
 Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
 
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { name: "Product A", value: 50 },
+            { name: "Product B", value: 30 },
+            { name: "Product C", value: 20 }
+        ],
+        theme: "bootstrap",
+        valueField: "value",
+        textField: "name"
+    });
+    </script>
+
 ### valueField `String` *(default: "value")*
 
 The data item field which contains the tile value.
+
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { title: "Sales", revenue: 120000 },
+            { title: "Marketing", revenue: 80000 },
+            { title: "Development", revenue: 95000 }
+        ],
+        valueField: "revenue",
+        textField: "title"
+    });
+    </script>
 
 ### colorField `String` *(default: "color")*
 
 The data item field which contains the tile color.
 
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { name: "High Priority", value: 40, tileColor: "#ff6347" },
+            { name: "Medium Priority", value: 30, tileColor: "#ffa500" },
+            { name: "Low Priority", value: 20, tileColor: "#90ee90" }
+        ],
+        valueField: "value",
+        textField: "name",
+        colorField: "tileColor"
+    });
+    </script>
+
 ### textField `String` *(default: "text")*
 
 The data item field which contains the tile title.
+
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { description: "Technology Sector", value: 45 },
+            { description: "Healthcare Sector", value: 35 },
+            { description: "Finance Sector", value: 25 }
+        ],
+        valueField: "value",
+        textField: "description"
+    });
+    </script>
 
 ### template `String|Function`
 
@@ -82,6 +182,22 @@ The fields which can be used in the template are:
 
 * dataItem - the original data item used to construct the point.
 * text - the original tile text.
+
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { name: "Technology", value: 50, percentage: 45 },
+            { name: "Healthcare", value: 35, percentage: 32 },
+            { name: "Finance", value: 25, percentage: 23 }
+        ],
+        valueField: "value",
+        textField: "name",
+        template: (data) => `${data.text}<br/>Value: ${data.dataItem.value}<br/>${data.dataItem.percentage}%`
+    });
+    </script>
 
 ### colors `Array`
 
@@ -236,6 +352,24 @@ The source widget instance.
 Prepares the TreeMap for safe removal from the DOM.
 
 Detaches event handlers and removes data entries in order to avoid memory leaks.
+
+#### Example
+
+    <div id="treemap"></div>
+    <script>
+    $("#treemap").kendoTreeMap({
+        dataSource: [
+            { name: "Item 1", value: 30 },
+            { name: "Item 2", value: 25 },
+            { name: "Item 3", value: 20 }
+        ],
+        valueField: "value",
+        textField: "name"
+    });
+
+    var treemap = $("#treemap").getKendoTreeMap();
+    treemap.destroy();
+    </script>
 
 ### findByUid
 

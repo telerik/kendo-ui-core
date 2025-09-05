@@ -16,13 +16,46 @@ Represents the Kendo UI ComboBox widget. Inherits from [Widget](/api/javascript/
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        adaptiveMode: "auto",
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select an Item",
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Choose Option",
+        adaptiveSubtitle: "Please select from the list",
+        dataSource: ["Option1", "Option2", "Option3"]
+    });
+    </script>
 
 ### animation `Object`
 
@@ -57,6 +90,8 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 ### animation.close `Object`
 
+The animation that is applied when the popup is closing.
+
 #### Example - configure the close animation
 
     <input id="combobox" />
@@ -77,9 +112,38 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        animation: {
+            close: {
+                effects: "zoomOut",
+            }
+        },
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    </script>
+
 ### animation.close.duration `Number` *(default: 100)*
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        animation: {
+            close: {
+                effects: "zoomOut",
+                duration: 500
+            }
+        },
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -105,9 +169,38 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        animation: {
+            open: {
+                effects: "zoomIn",
+            }
+        },
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    </script>
+
 ### animation.open.duration `Number` *(default: 200)*
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        animation: {
+            open: {
+                effects: "zoomIn",
+                duration: 400
+            }
+        },
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    </script>
 
 ### autoBind `Boolean`*(default: true)*
 
@@ -471,6 +564,8 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
+#### Example
+
     <input id="customers" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -519,6 +614,15 @@ The widget instance.
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        inputMode: "numeric",
+        dataSource: ["1", "2", "3", "4", "5"]
+    });
+    </script>
 
 ### label `String|Function|Object` *(default: null)*
 
@@ -622,6 +726,8 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+
+#### Example
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -1292,16 +1398,88 @@ Enables the virtualization feature of the widget. The configuration can be set o
 
 For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        virtual: true,
+        height: 320,
+        dataSource: {
+            type: "odata-v4",
+            pageSize: 10,
+            transport: {
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
+            },
+            serverPaging: true,
+            serverFiltering: true,
+        },
+        dataTextField: "ShipName",
+        dataValueField: "OrderID"
+    });
+    </script>
+
 ### virtual.itemHeight `Number`*(default: null)*
 
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        virtual: {
+            itemHeight: 30
+        },
+        height: 320,
+        dataSource: {
+            type: "odata-v4",
+            pageSize: 10,
+            transport: {
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
+            },
+            serverPaging: true,
+            serverFiltering: true,
+        },
+        dataTextField: "ShipName",
+        dataValueField: "OrderID"
+    });
+    </script>
 
 ### virtual.mapValueTo `String`*(default: "index")*
 
 The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
 For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        virtual: {
+            itemHeight: 26,
+            mapValueTo: "dataItem",
+            valueMapper: function(options) {
+                // Implementation for dataItem mapping
+                options.success(options.value);
+            }
+        },
+        height: 320,
+        dataSource: {
+            type: "odata-v4",
+            pageSize: 10,
+            transport: {
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
+            },
+            serverPaging: true,
+            serverFiltering: true,
+        },
+        dataTextField: "ShipName",
+        dataValueField: "OrderID"
+    });
+    </script>
 
 ### virtual.valueMapper `Function`*(default: null)*
 
@@ -1632,6 +1810,21 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 #### Returns
 
 `Array` The currently rendered dropdown list items (`<li>` elements).
+
+#### Example
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        dataSource: ["Item1", "Item2", "Item3"]
+    });
+    
+    var combobox = $("#combobox").data("kendoComboBox");
+    var items = combobox.items();
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(items); // [li, li, li...]
+    </script>
 
 ### open
 

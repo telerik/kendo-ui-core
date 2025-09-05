@@ -15,22 +15,106 @@ component: gauges
 The gauge area configuration options.
 This is the entire visible area of the gauge.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            background: "#eeeeee",
+            width: 300,
+            height: 300,
+            margin: 10
+        },
+        pointer: [{
+            value: 65
+        }]
+    });
+    </script>
+
 ### gaugeArea.background `String`*(default: "white")*
 
  The background of the gauge area.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            background: "#f0f0f0"
+        },
+        pointer: [{
+            value: 50
+        }]
+    });
+    </script>
+
 ### gaugeArea.border `Object`
 
 The border of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            border: {
+                color: "#cccccc",
+                width: 2,
+                dashType: "dash"
+            }
+        },
+        pointer: [{
+            value: 75
+        }]
+    });
+    </script>
 
 ### gaugeArea.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            border: {
+                color: "#ff6600",
+                width: 3
+            }
+        },
+        pointer: [{
+            value: 40
+        }]
+    });
+    </script>
+
 ### gaugeArea.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            border: {
+                color: "#333333",
+                width: 2,
+                dashType: "dot"
+            }
+        },
+        pointer: [{
+            value: 60
+        }]
+    });
+    </script>
 
 
 #### *"solid"*
@@ -65,14 +149,63 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The opacity of the border. By default the border is opaque.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            border: {
+                color: "#333333",
+                width: 4,
+                opacity: 0.5
+            }
+        },
+        pointer: [{
+            value: 45
+        }]
+    });
+    </script>
+
 ### gaugeArea.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            border: {
+                color: "#000000",
+                width: 5
+            }
+        },
+        pointer: [{
+            value: 80
+        }]
+    });
+    </script>
 
 ### gaugeArea.height `Number`
 
 The height of the gauge area.  By default, the vertical gauge is 200px and
 the horizontal one is 60px.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            height: 400
+        },
+        pointer: [{
+            value: 30
+        }]
+    });
+    </script>
 
 ### gaugeArea.margin `Number|Object`*(default: 5)*
 
@@ -96,22 +229,100 @@ The margin of the gauge area.
 
 The top margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            margin: {
+                top: 30
+            }
+        },
+        pointer: [{
+            value: 55
+        }]
+    });
+    </script>
+
 ### gaugeArea.margin.bottom `Number`
 
 The bottom margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            margin: {
+                bottom: 25
+            }
+        },
+        pointer: [{
+            value: 70
+        }]
+    });
+    </script>
 
 ### gaugeArea.margin.left `Number`
 
 The left margin of the gauge area.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            margin: {
+                left: 40
+            }
+        },
+        pointer: [{
+            value: 35
+        }]
+    });
+    </script>
+
 ### gaugeArea.margin.right `Number`
 
 The right margin of the gauge area.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            margin: {
+                right: 35
+            }
+        },
+        pointer: [{
+            value: 85
+        }]
+    });
+    </script>
 
 ### gaugeArea.width `Number`
 
 The width of the gauge area.  By default the vertical gauge is 60px
 and horizontal gauge is 200px.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        gaugeArea: {
+            width: 350
+        },
+        pointer: [{
+            value: 42
+        }]
+    });
+    </script>
 
 ### pointer `Array`
 
@@ -143,19 +354,75 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
 
 The cap configuration options.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 60,
+            cap: {
+                color: "#ff0000",
+                size: 0.8
+            }
+        }]
+    });
+    </script>
+
 ### pointer.cap.color `String`
 
 The color of the cap.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 75,
+            cap: {
+                color: "#00aa00"
+            }
+        }]
+    });
+    </script>
+
 ### pointer.cap.size `Number`
 
 The size of the cap in percents. (from 0 to 1)
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 50,
+            cap: {
+                color: "#0066cc",
+                size: 0.6
+            }
+        }]
+    });
+    </script>
 
 ### pointer.color `String`
 
 The color of the pointer.
 Any valid CSS color string will work here, including hex and rgb.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 65,
+            color: "#ff6600"
+        }]
+    });
+    </script>
 
 ### pointer.length `Number`
 
@@ -189,6 +456,21 @@ Accepts values between `0.1` and `1.5`.
 
 The value of the gauge.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 85
+        }],
+        scale: {
+            min: 0,
+            max: 100
+        }
+    });
+    </script>
+
 ### renderAs `String`
 
 Sets the preferred rendering engine.
@@ -219,31 +501,158 @@ The supported values are:
 
 Configures the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 40
+        }],
+        scale: {
+            min: 0,
+            max: 100,
+            startAngle: -45,
+            endAngle: 225,
+            majorUnit: 20,
+            minorUnit: 5
+        }
+    });
+    </script>
+
 ### scale.endAngle `Number`*(default: 210)*
 
  The end angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 70
+        }],
+        scale: {
+            endAngle: 180
+        }
+    });
+    </script>
+
 ### scale.labels `Object`
 
 Configures the scale labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 25
+        }],
+        scale: {
+            labels: {
+                color: "#333333",
+                font: "14px Arial",
+                visible: true,
+                position: "outside"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.background `String`
 
 The background color of the labels.
 Any valid CSS color string will work here, including hex and rgb
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 55
+        }],
+        scale: {
+            labels: {
+                background: "#ffffcc"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border `Object`
 
 The border of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 80
+        }],
+        scale: {
+            labels: {
+                border: {
+                    color: "#999999",
+                    width: 1,
+                    dashType: "solid"
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 45
+        }],
+        scale: {
+            labels: {
+                border: {
+                    color: "#ff0000",
+                    width: 2
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 30
+        }],
+        scale: {
+            labels: {
+                border: {
+                    color: "#333333",
+                    width: 1,
+                    dashType: "dash"
+                }
+            }
+        }
+    });
+    </script>
 
 
 #### *"solid"*
@@ -278,18 +687,89 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The opacity of the border. By default the border is opaque.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 60
+        }],
+        scale: {
+            labels: {
+                border: {
+                    color: "#000000",
+                    width: 3,
+                    opacity: 0.5
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 75
+        }],
+        scale: {
+            labels: {
+                border: {
+                    color: "#666666",
+                    width: 2
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.color `String`
 
 The text color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 50
+        }],
+        scale: {
+            labels: {
+                color: "#0066cc"
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 35
+        }],
+        scale: {
+            labels: {
+                font: "16px 'Arial Black'"
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.format `String`
 
@@ -319,45 +799,247 @@ The [`format`](/globalization/intl/numberformatting) of the labels.
 
 The margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 65
+        }],
+        scale: {
+            labels: {
+                margin: {
+                    top: 10,
+                    bottom: 5,
+                    left: 8,
+                    right: 8
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.top `Number`
 
 The top margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 40
+        }],
+        scale: {
+            labels: {
+                margin: {
+                    top: 15
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.bottom `Number`
 
 The bottom margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 85
+        }],
+        scale: {
+            labels: {
+                margin: {
+                    bottom: 12
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.margin.left `Number`
 
 The left margin of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 25
+        }],
+        scale: {
+            labels: {
+                margin: {
+                    left: 20
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.margin.right `Number`
 
 The right margin of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 70
+        }],
+        scale: {
+            labels: {
+                margin: {
+                    right: 18
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding `Number | Object`*(default: 0)*
 
  The padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 55
+        }],
+        scale: {
+            labels: {
+                padding: {
+                    top: 8,
+                    bottom: 8,
+                    left: 10,
+                    right: 10
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.top `Number`
 
 The top padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 45
+        }],
+        scale: {
+            labels: {
+                padding: {
+                    top: 12
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.bottom `Number`
 
 The bottom padding of the labels.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 80
+        }],
+        scale: {
+            labels: {
+                padding: {
+                    bottom: 15
+                }
+            }
+        }
+    });
+    </script>
 
 ### scale.labels.padding.left `Number`
 
 The left padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 35
+        }],
+        scale: {
+            labels: {
+                padding: {
+                    left: 14
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.padding.right `Number`
 
 The right padding of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 90
+        }],
+        scale: {
+            labels: {
+                padding: {
+                    right: 16
+                }
+            }
+        }
+    });
+    </script>
+
 ### scale.labels.position `String`*(default: "inside")*
 
 The labels positions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 65
+        }],
+        scale: {
+            labels: {
+                position: "outside"
+            }
+        }
+    });
+    </script>
 
 
 #### *"inside"*
@@ -400,65 +1082,307 @@ Template variables:
 
  The visibility of the labels.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 40
+        }],
+        scale: {
+            labels: {
+                visible: false
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks `Object`
 
 Configures the scale major ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 70
+        }],
+        scale: {
+            majorTicks: {
+                color: "#ff0000",
+                size: 10,
+                width: 2,
+                visible: true
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.color `String`
 
 The color of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 50
+        }],
+        scale: {
+            majorTicks: {
+                color: "#00aa00"
+            }
+        }
+    });
+    </script>
 
 ### scale.majorTicks.size `Number`
 
 The major tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 30
+        }],
+        scale: {
+            majorTicks: {
+                size: 15
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.visible `Boolean`*(default: true)*
 
  The visibility of the major ticks.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 85
+        }],
+        scale: {
+            majorTicks: {
+                visible: false
+            }
+        }
+    });
+    </script>
+
 ### scale.majorTicks.width `Number`*(default: 0.5)*
 
- The width of the major ticks.
+The width of the major ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 60
+        }],
+        scale: {
+            majorTicks: {
+                width: 3
+            }
+        }
+    });
+    </script>
 
 ### scale.majorUnit `Number`
 
 The interval between major divisions.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 75
+        }],
+        scale: {
+            min: 0,
+            max: 100,
+            majorUnit: 25
+        }
+    });
+    </script>
+
 ### scale.max `Number`*(default: 100)*
 
  The maximum value of the scale.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 180
+        }],
+        scale: {
+            max: 200
+        }
+    });
+    </script>
 
 ### scale.min `Number`*(default: 0)*
 
  The minimum value of the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 40
+        }],
+        scale: {
+            min: 20,
+            max: 100
+        }
+    });
+    </script>
+
 ### scale.minorTicks `Object`
 
 Configures the scale minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 55
+        }],
+        scale: {
+            minorTicks: {
+                color: "#0066cc",
+                size: 5,
+                width: 1,
+                visible: true
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.color `String`
 
 The color of the minor ticks.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 80
+        }],
+        scale: {
+            minorTicks: {
+                color: "#666666"
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.size `Number`
 
 The minor tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 25
+        }],
+        scale: {
+            minorTicks: {
+                size: 8
+            }
+        }
+    });
+    </script>
+
 ### scale.minorTicks.visible `Boolean`*(default: true)*
 
  The visibility of the minor ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 95
+        }],
+        scale: {
+            minorTicks: {
+                visible: false
+            }
+        }
+    });
+    </script>
 
 ### scale.minorTicks.width `Number`*(default: 0.5)*
 
  The width of the minor ticks.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 45
+        }],
+        scale: {
+            minorTicks: {
+                width: 2
+            }
+        }
+    });
+    </script>
+
 ### scale.minorUnit `Number`
 
 The interval between minor divisions.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 35
+        }],
+        scale: {
+            majorUnit: 20,
+            minorUnit: 5
+        }
+    });
+    </script>
 
 ### scale.ranges `Array`
 
@@ -489,22 +1413,114 @@ The ranges of the scale.
 
 The start position of the range in scale units.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 65
+        }],
+        scale: {
+            ranges: [{
+                from: 50,
+                to: 80,
+                color: "orange"
+            }]
+        }
+    });
+    </script>
+
 ### scale.ranges.to `Number`
 
 The end position of the range in scale units.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 30
+        }],
+        scale: {
+            ranges: [{
+                from: 20,
+                to: 40,
+                color: "yellow"
+            }]
+        }
+    });
+    </script>
+
 ### scale.ranges.opacity `Number`
 
 The opacity of the range.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 75
+        }],
+        scale: {
+            ranges: [{
+                from: 60,
+                to: 90,
+                color: "red",
+                opacity: 0.7
+            }]
+        }
+    });
+    </script>
 
 ### scale.ranges.color `String`
 
 The color of the range.
 Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 45
+        }],
+        scale: {
+            ranges: [{
+                from: 30,
+                to: 60,
+                color: "#00ff00"
+            }]
+        }
+    });
+    </script>
+
 ### scale.rangePlaceholderColor `String`
 
 The default color for the ranges.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 70
+        }],
+        scale: {
+            rangePlaceholderColor: "#cccccc",
+            ranges: [{
+                from: 0,
+                to: 50,
+                color: "blue"
+            }]
+        }
+    });
+    </script>
 
 ### scale.rangeSize `Number`
 
@@ -556,10 +1572,38 @@ The distance from the range indicators to the ticks.
 
 Reverses the scale direction - values are increase anticlockwise.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 60
+        }],
+        scale: {
+            reverse: true
+        }
+    });
+    </script>
+
 ### scale.startAngle `Number`*(default: -30)*
 
  The start angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 40
+        }],
+        scale: {
+            startAngle: 0
+        }
+    });
+    </script>
 
 ### theme `String` *(default: "sass")*
 
@@ -567,6 +1611,18 @@ The gauge theme. With versions prior to R1 2023 this can be either the respectiv
 When set to "sass" the gauge will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 Note: Since Q2 2024 release, the default value for the `theme` property is "sass" instead of "default". It is recommended to use "sass" with version Q2 2024 or later.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 50
+        }],
+        theme: "bootstrap"
+    });
+    </script>
 
 The supported values are:
 
@@ -585,6 +1641,18 @@ The supported values are:
 ### transitions `Boolean`*(default: true)*
 
 A value indicating if transition animations should be played.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 80
+        }],
+        transitions: false
+    });
+    </script>
 
 ## Methods
 

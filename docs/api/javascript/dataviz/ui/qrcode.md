@@ -30,6 +30,19 @@ The background color of the QR code. Accepts a valid CSS color string, including
 
 The border of the QR code.
 
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+      value: "https://demos.telerik.com/kendo-ui/",
+      border: {
+        color: "#000000",
+        width: 3
+      }
+    });
+    </script>
+
 ### border.color `String`
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.

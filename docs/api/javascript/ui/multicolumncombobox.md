@@ -16,13 +16,73 @@ Represents the Kendo UI MultiColumnComboBox widget. Inherits from [Widget](/api/
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        adaptiveMode: "auto",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Item",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Item",
+        adaptiveSubtitle: "Choose from the list below",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
 
 ### animation `Object`
 
@@ -77,6 +137,8 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 ### animation.close `Object`
 
+The animation played when the suggestion popup is closed. Configures the closing animation effects, duration, and other animation-related settings. By default, the popup closes with a simple fade-out effect. You can customize this behavior by specifying different effects and duration values.
+
 #### Example - configure the close animation
 
     <input id="multicolumncombobox" />
@@ -107,9 +169,55 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        animation: {
+            close: {
+                effects: "fadeOut slideUp"
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
+
 ### animation.close.duration `Number` *(default: 100)*
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        animation: {
+            close: {
+                duration: 500
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -145,9 +253,55 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        animation: {
+            open: {
+                effects: "fadeIn slideDown"
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
+
 ### animation.open.duration `Number` *(default: 200)*
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        animation: {
+            open: {
+                duration: 600
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
 
 ### autoBind `Boolean`*(default: true)*
 
@@ -785,6 +939,8 @@ Enables multicolumn filtering.
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
+#### Example
+
     <input id="customers" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -840,6 +996,25 @@ The widget instance.
 ### inputMode `String`*(default: "text")*
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        inputMode: "numeric",
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Item 1", value: "1" },
+            { text: "Item 2", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
 
 ### label `String|Function|Object` *(default: null)*
 
@@ -944,6 +1119,8 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+
+#### Example
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -1713,16 +1890,105 @@ Enables the virtualization feature of the widget. The configuration can be set o
 
 For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        virtual: true,
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    // simulate large dataset
+                    var data = [];
+                    for(var i = 0; i < 10000; i++) {
+                        data.push({ text: "Item " + i, value: i });
+                    }
+                    options.success(data);
+                }
+            }
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
+
 ### virtual.itemHeight `Number`*(default: null)*
 
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        virtual: {
+            itemHeight: 40
+        },
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    // simulate large dataset
+                    var data = [];
+                    for(var i = 0; i < 10000; i++) {
+                        data.push({ text: "Item " + i, value: i });
+                    }
+                    options.success(data);
+                }
+            }
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
 
 ### virtual.mapValueTo `String`*(default: "index")*
 
 The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
 For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        virtual: {
+            mapValueTo: "dataItem",
+            valueMapper: function(options) {
+                // implement value mapping logic
+                options.success([]);
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    // simulate large dataset
+                    var data = [];
+                    for(var i = 0; i < 10000; i++) {
+                        data.push({ text: "Item " + i, value: i });
+                    }
+                    options.success(data);
+                }
+            }
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+    </script>
 
 ### virtual.valueMapper `Function`*(default: null)*
 
@@ -2075,6 +2341,30 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 #### Returns
 
 `Array` The currently rendered dropdown list items (`<li>` elements).
+
+#### Example
+
+    <input id="multicolumncombobox" />
+    <script>
+    $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            { text: "Apples", value: "1" },
+            { text: "Oranges", value: "2" }
+        ],
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
+    });
+
+    var multicolumncombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
+    
+    // get the list items
+    var items = multicolumncombobox.items();
+    console.log(items.length); // outputs the number of items
+    </script>
 
 ### open
 

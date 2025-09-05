@@ -679,6 +679,34 @@ The default value that will be shown in the popup's input.
 
 Creates a wrapper object over the passed one, with get/set properties that set the original object `dirty` flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { id: 1, name: "John Doe", age: 30 },
+            { id: 2, name: "Jane Smith", age: 25 }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    name: { type: "string" },
+                    age: { type: "number" }
+                }
+            }
+        }
+    });
+
+    dataSource.read();
+    var model = dataSource.get(1);
+    var proxy = kendo.proxyModelSetters(model);
+    
+    // Changes to the proxy will mark the model as dirty
+    proxy.name = "Updated Name";
+    console.log(model.dirty); // true
+    </script>
+
 #### Parameters
 
 ##### data `kendo.data.Model`
@@ -1187,6 +1215,25 @@ The collection includes only key codes, which are used by the Kendo UI widgets' 
 
 The key codes are especially helpful in keydown, keyup and keypress event handlers.
 
+#### Example
+
+    <input type="text" id="textbox" />
+    <script>
+    $("#textbox").on("keydown", function(e) {
+        // Check for specific keys using kendo.keys
+        if (e.keyCode === kendo.keys.ENTER) {
+            console.log("Enter key pressed");
+        } else if (e.keyCode === kendo.keys.ESC) {
+            console.log("Escape key pressed");
+            $(this).val("");
+        } else if (e.keyCode === kendo.keys.TAB) {
+            console.log("Tab key pressed");
+        } else if (e.keyCode === kendo.keys.DELETE || e.keyCode === kendo.keys.BACKSPACE) {
+            console.log("Delete or Backspace key pressed");
+        }
+    });
+    </script>
+
 #### kendo.keys usage example
 
     function onMyKeyPress(e) {
@@ -1199,6 +1246,23 @@ The key codes are especially helpful in keydown, keyup and keypress event handle
 ### support
 
 A range of useful supported by the current browser capabilities and features.
+
+#### Example
+
+    <div id="support-info"></div>
+    <script>
+    var supportInfo = kendo.support;
+    var html = "<h3>Browser Support Information:</h3>";
+    html += "<p>Touch support: " + supportInfo.touch + "</p>";
+    html += "<p>Pointer support: " + supportInfo.pointers + "</p>";
+    html += "<p>Hardware 3D support: " + supportInfo.hasHW3D + "</p>";
+    html += "<p>Native scrolling support: " + supportInfo.hasNativeScrolling + "</p>";
+    html += "<p>Device pixel ratio: " + supportInfo.devicePixelRatio + "</p>";
+    html += "<p>Placeholder support: " + supportInfo.placeholder + "</p>";
+    html += "<p>Scrollbar width: " + supportInfo.scrollbar() + "px</p>";
+    
+    $("#support-info").html(html);
+    </script>
 
 #### support
 
@@ -1228,6 +1292,36 @@ Returns the current zoom level on a mobile browser (returns 1 on desktop).
 
 ### support.mobileOS `Object`
 Returns a number of properties that identify the current mobile browser. Parses navigator.userAgent to do it. False on desktop.
+
+#### Example
+
+    <div id="mobile-info"></div>
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    var html = "<h3>Mobile OS Information:</h3>";
+    
+    if (mobileOS) {
+        html += "<p>Device: " + mobileOS.device + "</p>";
+        html += "<p>Tablet: " + (mobileOS.tablet || "false") + "</p>";
+        html += "<p>Browser: " + mobileOS.browser + "</p>";
+        html += "<p>OS Name: " + mobileOS.name + "</p>";
+        html += "<p>Major Version: " + mobileOS.majorVersion + "</p>";
+        html += "<p>Minor Version: " + mobileOS.minorVersion + "</p>";
+        html += "<p>Flat Version: " + mobileOS.flatVersion + "</p>";
+        html += "<p>App Mode: " + mobileOS.appMode + "</p>";
+        html += "<p>Cordova: " + mobileOS.cordova + "</p>";
+        
+        if (mobileOS.android) {
+            html += "<p>Running on Android device</p>";
+        } else if (mobileOS.ios) {
+            html += "<p>Running on iOS device</p>";
+        }
+    } else {
+        html += "<p>Not running on a mobile device</p>";
+    }
+    
+    $("#mobile-info").html(html);
+    </script>
 
 #### support.mobileOS
 ##### device `String`
@@ -1271,6 +1365,35 @@ Returns true if running in a Cordova/PhoneGap/Telerik AppBuilder application.
 Convenience replacement for the now deprecated jQuery.browser. It returns an object with the browser identifier initialized as a boolean property and a version.
 The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie", "edge" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
 
+#### Example
+
+    <div id="browser-info"></div>
+    <script>
+    var browser = kendo.support.browser;
+    var html = "<h3>Browser Information:</h3>";
+    html += "<p>Browser version: " + browser.version + "</p>";
+    
+    if (browser.webkit) {
+        html += "<p>WebKit-based browser detected</p>";
+        if (browser.chrome) {
+            html += "<p>Google Chrome</p>";
+        } else if (browser.safari) {
+            html += "<p>Safari</p>";
+        }
+    } else if (browser.msie) {
+        html += "<p>Internet Explorer</p>";
+    } else if (browser.edge) {
+        html += "<p>Microsoft Edge</p>";
+    } else if (browser.mozilla) {
+        html += "<p>Mozilla Firefox</p>";
+    } else if (browser.opera) {
+        html += "<p>Opera</p>";
+    }
+    
+    $("#browser-info").html(html);
+    console.log("Full browser object:", kendo.stringify(browser));
+    </script>
+
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.stringify(kendo.support.browser));
@@ -1294,6 +1417,40 @@ R3 service packs and internal builds may be released in the following year. In t
 For example `"2012.3.1315"` means a service pack (internal build) released after R3 **2012** on January 15, **2013**.
 
 The returned value does not indicate if the given Kendo UI version represents a major release, service pack, or the so-called internal (nightly) build.
+
+#### Example
+
+    <div id="version-info"></div>
+    <script>
+    var kendoVersion = kendo.version;
+    var html = "<h3>Kendo UI Version Information:</h3>";
+    html += "<p>Current version: " + kendoVersion + "</p>";
+    
+    // Parse version components
+    var parts = kendoVersion.split(".");
+    if (parts.length >= 3) {
+        html += "<p>Year: " + parts[0] + "</p>";
+        html += "<p>Release: R" + parts[1] + "</p>";
+        
+        var dateStr = parts[2];
+        if (dateStr.length >= 3) {
+            var month = parseInt(dateStr.substring(0, dateStr.length - 2));
+            var day = parseInt(dateStr.substring(dateStr.length - 2));
+            
+            // Handle R3 service packs in following year
+            if (month > 12) {
+                month = month - 12;
+                html += "<p>Service pack released in following year</p>";
+            }
+            
+            html += "<p>Release month: " + month + "</p>";
+            html += "<p>Release day: " + day + "</p>";
+        }
+    }
+    
+    $("#version-info").html(html);
+    console.log("Kendo UI Version:", kendoVersion);
+    </script>
 
 ## Standard number formats
 
@@ -1325,7 +1482,7 @@ Formats the value by adding the currency symbol.
     kendo.culture("de-DE");
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "c3")); // outputs "1.234,567 €"
-    <script>
+    </script>
 
 #### *p*
 

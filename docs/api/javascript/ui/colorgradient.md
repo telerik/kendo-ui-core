@@ -144,37 +144,146 @@ Allows customization labels and messages in the ColorGradient.
 
 Allows customization of the "Contrast ratio" text in the contrast tool.
 
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        contrastTool: true,
+        messages: {
+            contrastRatio: "Color Contrast"
+        }
+    });
+    </script>
+
 ### messages.fail `String` *(default: "Fail")*
 
 Allows customization of the "Fail" text in the contrast tool.
+
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        contrastTool: true,
+        messages: {
+            fail: "Does not meet contrast standards"
+        }
+    });
+    </script>
 
 ### messages.pass  `String` *(default: "Pass")*
 
 Allows customization of the "Pass" text in the contrast tool.
 
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        contrastTool: true,
+        messages: {
+            pass: "Meets contrast standards"
+        }
+    });
+    </script>
+
 ### messages.toggleFormat `String` *(default: "Toggle format")*
 
 Allows customization of the toggle format button's title in the Gradient's input editor.
+
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        input: true,
+        messages: {
+            toggleFormat: "Switch color format"
+        }
+    });
+    </script>
 
 ### messages.red `String` *(default: "Red")*
 
 Allows customization of the rgb's red input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        input: true,
+        messages: {
+            red: "Red channel"
+        }
+    });
+    </script>
+
 ### messages.green `String` *(default: "Green")*
 
 Allows customization of the rgb's green input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        input: true,
+        messages: {
+            green: "Green channel"
+        }
+    });
+    </script>
 
 ### messages.blue `String` *(default: "Blue")*
 
 Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        input: true,
+        messages: {
+            blue: "Blue channel"
+        }
+    });
+    </script>
+
 ### messages.alpha `String` *(default: "Alpha")*
 
 Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.
 
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        input: true,
+        opacity: true,
+        messages: {
+            alpha: "Alpha channel"
+        }
+    });
+    </script>
+
 ### messages.hex `String` *(default: "HEX")*
 
 Allows customization of the hex input's aria-label in the Gradient's input editor.
+
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient({
+        input: true,
+        messages: {
+            hex: "Hexadecimal value"
+        }
+    });
+    </script>
 
 ## Methods
 
@@ -236,6 +345,22 @@ The color that should be set as the current value
 #### Returns
 
 `kendo.Color` the current value
+
+#### Example
+
+    <div id="colorgradient"></div>
+    <script>
+    $("#colorgradient").kendoColorGradient();
+    var colorgradient = $("#colorgradient").data("kendoColorGradient");
+
+    // set picker color using kendo.Color object
+    var color = kendo.Color.fromRGB(255, 0, 0, 1);
+    colorgradient.color(color);
+
+    // get picker color as kendo.Color object
+    var currentColor = colorgradient.color();
+    console.log(currentColor.toCss()); // logs the color in CSS format
+    </script>
 
 ### enable
 

@@ -16,13 +16,46 @@ Represents the Kendo UI TimeDurationPicker widget. Inherits from [Widget](/api/j
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <div id="timedurationpicker"></div>
+    <script>
+    $("#timedurationpicker").kendoTimeDurationPicker({
+        adaptiveMode: "auto",
+        columns: [ "hours", "minutes" ]
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <div id="timedurationpicker"></div>
+    <script>
+    $("#timedurationpicker").kendoTimeDurationPicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Duration",
+        columns: [ "hours", "minutes" ]
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <div id="timedurationpicker"></div>
+    <script>
+    $("#timedurationpicker").kendoTimeDurationPicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Duration",
+        adaptiveSubtitle: "Choose hours and minutes",
+        columns: [ "hours", "minutes" ]
+    });
+    </script>
 
 ### columns `Array`
 
@@ -147,6 +180,15 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <input id="timedurationpicker" />
+    <script>
+    $("#timedurationpicker").kendoTimeDurationPicker({
+        inputMode: "numeric",
+        columns: [ "hours", "minutes" ]
+    });
+    </script>
 
 ### messages `Object`
 

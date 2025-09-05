@@ -20,6 +20,30 @@ See the [TreeListDataSource configuration](/api/javascript/data/treelistdatasour
 
 The schema configuration of the OrgChartDataSource.
 
+#### Example
+
+    <script>
+      var dataSource = new kendo.data.OrgChartDataSource({
+        data: [
+          { EmployeeID: 1, name: "Daryl Sweeney", title: "CEO", parentId: null },
+          { EmployeeID: 2, name: "Guy Wooten", title: "Chief Technical Officer", parentId: 1 },
+          { EmployeeID: 3, name: "Priscilla Frank", title: "Chief Product Officer", parentId: 1 }
+        ],
+        schema: {
+          model: {
+            id: "EmployeeID",
+            parentId: "parentId",
+            fields: {
+              EmployeeID: { type: "number" },
+              name: { type: "string" },
+              title: { type: "string" },
+              parentId: { type: "number" }
+            }
+          }
+        }
+      });
+    </script>
+
 ### schema.model `Object`
 
 The model configuration of the OrgChartDataSource. See [kendo.data.OrgChartModel](/api/javascript/data/orgchartmodel) for more info.

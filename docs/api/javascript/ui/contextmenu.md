@@ -96,6 +96,8 @@ ContextMenu content expands from the top down. Similar to slideIn.
 
 The animation that will be used when closing sub menus.
 
+#### Example
+
     <div id="target">Target</div>
     <ul id="context-menu">
         <li>Item 1
@@ -128,6 +130,8 @@ The animation that will be used when closing sub menus.
 
 Effect to be used when closing the popup.
 
+#### Example
+
     <div id="target">Target</div>
     <ul id="context-menu">
         <li>Item 1
@@ -159,6 +163,8 @@ Effect to be used when closing the popup.
 ### animation.close.duration `Number`
 
 Defines the close animation duration in milliseconds.
+
+#### Example
 
     <div id="target">Target</div>
     <ul id="context-menu">
@@ -193,6 +199,8 @@ Defines the close animation duration in milliseconds.
 
 The animation that will be used when opening sub menus.
 
+#### Example
+
     <div id="target">Target</div>
     <ul id="context-menu">
         <li>Item 1
@@ -225,6 +233,8 @@ The animation that will be used when opening sub menus.
 
 Effect to be used when opening the popup.
 
+#### Example
+
     <div id="target">Target</div>
     <ul id="context-menu">
         <li>Item 1
@@ -256,6 +266,8 @@ Effect to be used when opening the popup.
 ### animation.open.duration `Number`
 
 Defines the open animation duration in milliseconds.
+
+#### Example
 
     <div id="target">Target</div>
     <ul id="context-menu">
@@ -635,7 +647,7 @@ The example below will initialize the sub menus to open to the left.
 
 Specifies ContextMenu filter selector - the ContextMenu will only be shown on items that satisfy the provided selector.
 
-#### Show the ContextMenu on some elements inside the target
+#### Example - Show the ContextMenu on some elements inside the target
 
     <div id="target">Target
         <div class="box"></div>
@@ -822,7 +834,7 @@ Sets the scroll amount (in pixels) that the ContextMenu scrolls when the scroll 
 Specifies the event or events on which ContextMenu should open. By default ContextMenu will show on *contextmenu* event on desktop and *hold* event on touch devices.
 Could be any pointer/mouse/touch event, also several, separated by spaces.
 
-#### Show the ContextMenu on left click
+#### Example - Show the ContextMenu on left click
 
     <div id="target">Target</div>
     <ul id="context-menu">
@@ -852,7 +864,7 @@ Could be any pointer/mouse/touch event, also several, separated by spaces.
 
 Specifies the element on which ContextMenu should open. The default element is the document body.
 
-#### Show the ContextMenu on element with ID target
+#### Example - Show the ContextMenu on element with ID target
 
     <div id="target">Target</div>
     <ul id="context-menu">

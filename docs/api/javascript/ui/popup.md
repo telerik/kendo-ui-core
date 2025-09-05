@@ -17,6 +17,8 @@ Configures the margins, which will be added to the popup size, if its position s
 
 The property takes effect only if [`collision`](/api/javascript/ui/popup#configuration-collision) is set to `"fit"` for the respective dimension (`width` or `height`).
 
+#### Example
+
     <div style="height:500px;">&nbsp;</div>
     <p style="text-align:right;"><input id="datepicker" /></p>
 
@@ -92,9 +94,35 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <div id="popup">CONTENT</div>
+    <script>
+    $("#popup").kendoPopup({
+      animation: {
+       close: {
+         effects: "fadeOut zoom:out"
+       }
+      }
+    }).data("kendoPopup").open();
+    </script>
+
 ### animation.close.duration `Number`
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <div id="popup">CONTENT</div>
+    <script>
+    $("#popup").kendoPopup({
+      animation: {
+       close: {
+         duration: 500
+       }
+      }
+    }).data("kendoPopup").open();
+    </script>
 
 ### animation.open `Object`
 
@@ -120,9 +148,35 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <div id="popup">CONTENT</div>
+    <script>
+    $("#popup").kendoPopup({
+      animation: {
+       open: {
+         effects: "fadeIn zoom:in"
+       }
+      }
+    }).data("kendoPopup").open();
+    </script>
+
 ### animation.open.duration `Number`
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <div id="popup">CONTENT</div>
+    <script>
+    $("#popup").kendoPopup({
+      animation: {
+       open: {
+         duration: 1000
+       }
+      }
+    }).data("kendoPopup").open();
+    </script>
 
 ### anchor `String|jQuery`
 
@@ -162,6 +216,8 @@ Which element the popup will be appended to. The element needs to be relatively 
 Configures how the popup should behave when it cannot be properly displayed and fully visible, if its `origin` and `position` settings are obeyed.
 
 Valid values are: `"fit"`, `"flip"`, `"flip fit"` and `"fit flip"`. "Fit" allows the popup to be shifted (moved) until it is fully visible. "Flip" allows the popup to switch its position, according to its anchor. If two words are used, the first one applies to the vertical dimension and the second one - to the horizontal dimension. If one word is used, the setting is applied to both dimensions.
+
+#### Example
 
     <div style="height:500px;">&nbsp;</div>
     <p style="text-align:right;"><input id="datepicker" /></p>

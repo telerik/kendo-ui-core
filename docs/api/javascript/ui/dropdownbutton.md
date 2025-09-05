@@ -128,9 +128,65 @@ Specifies the menu buttons of the **DropDownButton**.
 
 Adds custom attributes to the LI element of the menu button.
 
+#### Example
+
+    <button id="dropdownbutton" type="button">Actions</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { 
+                    text: "Save", 
+                    attributes: { 
+                        "data-action": "save",
+                        "data-priority": "high",
+                        "title": "Save the current document"
+                    }
+                },
+                { 
+                    text: "Export", 
+                    attributes: { 
+                        "data-action": "export",
+                        "class": "export-item"
+                    }
+                }
+            ]
+        });
+    </script>
+
 ### items.click `Function`
 
 Adds unique click callback for the menu item.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">File</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { 
+                    text: "New",
+                    click: function(e) {
+                        console.log("New file clicked");
+                        alert("Creating new file...");
+                    }
+                },
+                { 
+                    text: "Open",
+                    click: function(e) {
+                        console.log("Open file clicked", e);
+                        alert("Opening file dialog...");
+                    }
+                },
+                { 
+                    text: "Save",
+                    click: function(e) {
+                        console.log("Save clicked", e.item);
+                        alert("File saved successfully!");
+                    }
+                }
+            ]
+        });
+    </script>
 
 ### items.data `Function`
 
@@ -178,32 +234,162 @@ Adds a custom data callback to be added to the context of menu item - useful to 
 
 Toggles the enabled state of the item.
 
+#### Example
+
+    <button id="dropdownbutton" type="button">Actions</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Edit", enabled: true },
+                { text: "Delete", enabled: false },  // This item will be disabled
+                { text: "Copy", enabled: true },
+                { text: "Archive", enabled: false }  // This item will be disabled
+            ]
+        });
+    </script>
+
 ### items.hidden `Boolean` *(default: false)*
 
 Indicates wether the item should hidden.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">View</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Show Details", hidden: false },  // This item will be visible
+                { text: "Advanced Options", hidden: true },  // This item will be hidden
+                { text: "Export", hidden: false },
+                { text: "Debug Mode", hidden: true }  // This item will be hidden
+            ]
+        });
+    </script>
 
 ### items.icon `String`
 
 Specifies the icon of the item.
 
+#### Example
+
+    <button id="dropdownbutton" type="button">Tools</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Settings", icon: "gear" },
+                { text: "Save", icon: "save" },
+                { text: "Print", icon: "print" },
+                { text: "Email", icon: "email" }
+            ]
+        });
+    </script>
+
 ### items.id `String`
 
 Specifies the id of the item.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Actions</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { id: "new-item", text: "New" },
+                { id: "edit-item", text: "Edit" },
+                { id: "delete-item", text: "Delete" },
+                { id: "duplicate-item", text: "Duplicate" }
+            ]
+        });
+        
+        // Later you can access items by their id
+        var dropdownbutton = $("#dropdownbutton").data("kendoDropDownButton");
+        console.log("Item with id 'edit-item':", dropdownbutton.items().filter('[data-id="edit-item"]'));
+    </script>
 
 ### items.imageUrl `String`
 
 Specifies the image of the item.
 
+#### Example
+
+    <button id="dropdownbutton" type="button">Social</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { 
+                    text: "Facebook", 
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/facebook.png" 
+                },
+                { 
+                    text: "Twitter", 
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/twitter.png" 
+                },
+                { 
+                    text: "LinkedIn", 
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/linkedin.png" 
+                }
+            ]
+        });
+    </script>
+
 ### items.spriteCssClass `String`
 
 Specifies custom css class added to the sprite icon element of the item.
 
+#### Example
+
+    <style>
+        .custom-icon { width: 16px; height: 16px; background-color: #ff6358; }
+        .warning-icon { width: 16px; height: 16px; background-color: #ffa500; }
+        .success-icon { width: 16px; height: 16px; background-color: #28a745; }
+    </style>
+    <button id="dropdownbutton" type="button">Status</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Error", spriteCssClass: "custom-icon" },
+                { text: "Warning", spriteCssClass: "warning-icon" },
+                { text: "Success", spriteCssClass: "success-icon" }
+            ]
+        });
+    </script>
+
 ### items.text `String`
 
 Specifies the text of the item.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Choose Language</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "English" },
+                { text: "Español" },
+                { text: "Français" },
+                { text: "Deutsch" },
+                { text: "日本語" }
+            ]
+        });
+    </script>
+
 ### items.url `String`
 
 Specifies the url of the item - it will render `a` element and will navigate the browser on click.
+
+#### Example
+
+    <button id="dropdownbutton" type="button">Quick Links</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Google", url: "https://www.google.com" },
+                { text: "Kendo UI Demos", url: "https://demos.telerik.com/kendo-ui/" },
+                { text: "Documentation", url: "https://docs.telerik.com/kendo-ui/" },
+                { text: "Support", url: "https://www.telerik.com/support/kendo-ui" }
+            ]
+        });
+    </script>
 
 ### itemTemplate `String|Function`
 
@@ -228,9 +414,51 @@ Specifies a custom template for the menu items.
 The options that will be used for the popup initialization. For more details about the available options
 refer to [Popup](/api/javascript/ui/popup) documentation.
 
+#### Example
+
+    <button id="dropdownbutton" type="button">Options</button>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Option 1" },
+                { text: "Option 2" },
+                { text: "Option 3" }
+            ],
+            popup: {
+                origin: "bottom left",
+                position: "top left",
+                anchor: "left",
+                appendTo: "body",
+                animation: {
+                    open: { effects: "fadeIn" },
+                    close: { effects: "fadeOut" }
+                }
+            }
+        });
+    </script>
+
 ### popup.appendTo `String` *(default: document.body)*
 
 Defines a jQuery selector that will be used to find a container element, where the popup will be appended to. The element needs to be relatively positioned.
+
+#### Example
+
+    <div id="container" style="position: relative; width: 500px; height: 300px; border: 1px solid #ccc;">
+        <p>This is a container with relative positioning</p>
+        <button id="dropdownbutton" type="button">Actions</button>
+    </div>
+    <script>
+        $("#dropdownbutton").kendoDropDownButton({
+            items: [
+                { text: "Edit" },
+                { text: "Delete" },
+                { text: "Archive" }
+            ],
+            popup: {
+                appendTo: "#container"  // Popup will be appended to the container div
+            }
+        });
+    </script>
 
 ### rounded `String` *(default: 'medium')*
 

@@ -30,19 +30,9 @@ If this property is enabled and you have configured `min` and/or `max` values, a
 
 ### culture `String`*(default: "en-US")*
 
- Specifies the culture info used by the widget.
+Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>`
 
-#### Example - specify German culture internationalization
-
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
-    -->
+#### Example - specify a culture
 
     <input id="numerictextbox" />
     <script>
@@ -134,6 +124,14 @@ Compare with the [`decimals`](/api/javascript/ui/numerictextbox#configuration-de
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        inputMode: "decimal"
+    });
+    </script>
 
 ### label `String|Function|Object` *(default: null)*
 

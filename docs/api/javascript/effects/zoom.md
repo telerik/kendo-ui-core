@@ -38,6 +38,20 @@ Supported directions are `in` and `out`.
 
 The direction of the effect. Accepted values are `"in"` or `"out"`.
 
+#### Example
+
+    <div id="element">
+        This element will zoom
+    </div>
+
+    <script>
+        // Zoom in
+        kendo.fx($("#element")).zoom("in").play();
+        
+        // Zoom out
+        kendo.fx($("#element")).zoom("out").play();
+    </script>
+
 ## Methods
 
 ### startValue
@@ -46,6 +60,16 @@ Sets the initial **scale** value of the element.
 1 means the element will be displayed its real size.
 2 means the element will be scaled twice.
 0.1 (or less) means that the element will be zoomed out.
+
+#### Example
+
+    <div id="element">
+        This element will start at 0.5 scale
+    </div>
+
+    <script>
+        kendo.fx($("#element")).zoom("in").startValue(0.5).play();
+    </script>
 
 #### Zooming an element out, starting from 50%
 
@@ -74,6 +98,16 @@ Sets the initial **scale** value of the element.
 1 means the element will be displayed its real size.
 2 means the element will be scaled twice.
 0.1 (or less) means that the element will be zoomed out.
+
+#### Example
+
+    <div id="element">
+        This element will end at 2x scale
+    </div>
+
+    <script>
+        kendo.fx($("#element")).zoom("in").endValue(2).play();
+    </script>
 
 #### Zooming an element in to 50% scale
 

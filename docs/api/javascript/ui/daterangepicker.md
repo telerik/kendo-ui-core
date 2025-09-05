@@ -41,13 +41,42 @@ Specifies whether the calendar popup should close automatically when a range is 
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <div id="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        adaptiveMode: "auto"
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <div id="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Date Range"
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <div id="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        adaptiveMode: "auto",
+        adaptiveSubtitle: "Choose start and end dates"
+    });
+    </script>
 
 ### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
@@ -110,19 +139,9 @@ If this configuration is enabled, a clear button will appear in the date inputs 
 
 ### culture `String`*(default: "en-US")*
 
- Specifies the culture info used by the widget.
+Specifies the culture info used by the component. A valid kendo culture file must be added to the page in order for the example to work. `<script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>`
 
-#### Example - specify German culture internationalization
-
-    <!--
-        TODO: Add the kendo.culture.de-DE.min.js file as it is required!
-
-        Here is a sample script tag:
-        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
-
-        For more information check this help topic:
-        https://docs.telerik.com/kendo-ui/framework/globalization/overview
-    -->
+#### Example - specify a culture
 
     <div id="daterangepicker"></div>
     <script>
@@ -322,6 +341,15 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <div id="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        inputMode: "numeric"
+    });
+    </script>
+
 
 ### max `Date`*(default: Date(2099, 11, 31))*
 
@@ -398,6 +426,18 @@ Allows customization of the end label text.
 ### month `Object`
 
 Templates for the cells rendered in the calendar "month" view.
+
+#### Example
+
+    <div id="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        month: {
+            content: (data) => `<div>${data.value}</div>`,
+            empty: "<span>-</span>"
+        }
+    });
+    </script>
 
 ### month.content `String`
 
@@ -512,6 +552,18 @@ If set to `true` a week of the year will be shown on the left side of the calend
 ### range `Object`
 
 Configures the Kendo UI DateRangePicker range settings.
+
+#### Example
+
+    <div id="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        range: {
+            start: new Date(2024, 0, 15),
+            end: new Date(2024, 0, 25)
+        }
+    });
+    </script>
 
 ### range.start `Date`
 

@@ -16,6 +16,30 @@ Represents the Kendo UI Gantt widget. Inherits from [Widget](/api/javascript/ui/
 
 The configuration of the assignments of the gantt resources. An assignment is a one-to-one mapping between a gantt task and a gantt resource containing the number of units for which a resource is assigned to a task.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") },
+            { id: 2, title: "Task 2", start: new Date("2023/1/6"), end: new Date("2023/1/10") }
+        ],
+        resources: {
+            dataSource: [
+                { id: 1, name: "Resource 1", color: "red" },
+                { id: 2, name: "Resource 2", color: "blue" }
+            ]
+        },
+        assignments: {
+            dataSource: [
+                { taskId: 1, resourceId: 1, units: 1 },
+                { taskId: 2, resourceId: 2, units: 0.5 }
+            ]
+        }
+    });
+    </script>
+
 ### assignments.dataSource `Object|Array|kendo.data.DataSource`
 
 The data source which contains assignment data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -2737,7 +2761,7 @@ The height of the widget. Numeric values are treated as pixels.
 
 The width of the task list. Numeric values are treated as pixels.
 
-##### Example
+#### Example
 
     <div id="gantt"></div>
     <script>
@@ -2758,9 +2782,54 @@ The width of the task list. Numeric values are treated as pixels.
 
 The configuration of the Gantt messages. Use this option to customize or localize the Gantt messages.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            actions: {
+                addChild: "Add Child Task",
+                append: "Add Task",
+                insertAfter: "Add Below",
+                insertBefore: "Add Above",
+                pdf: "Export to PDF"
+            },
+            editor: {
+                addNew: "Add new task",
+                name: "Title",
+                percentCompleteHint: "% complete"
+            }
+        }
+    });
+    </script>
+
 ### messages.actions `Object`
 
 The configuration of the Gantt action messages. Use this option to customize or localize the Gantt action messages.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            actions: {
+                addChild: "Add Child Task",
+                append: "Add Task",
+                insertAfter: "Add Below",
+                insertBefore: "Add Above",
+                pdf: "Export to PDF"
+            }
+        }
+    });
+    </script>
 
 ### messages.actions.addChild `String` *(default: "Add Child")*
 
@@ -3055,6 +3124,26 @@ The text similar to "Delete" displayed in Gantt.
 ### messages.editor `Object`
 
 The configuration of the Gantt editor messages. Use this option to customize or localize the Gantt editor messages.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                editorTitle: "Task Editor",
+                start: "Start Date",
+                end: "End Date",
+                title: "Task Title",
+                percentComplete: "Progress"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.assignButton `String` *(default: "Assign")*
 
@@ -3430,81 +3519,403 @@ The text similar to "Units" displayed in Gantt task editor.
 
 The text that will be rendered in the Create button of the Dependencies and Assignments edit tables.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                addNew: "Create New"
+            }
+        }
+    });
+    </script>
+
 ### messages.editor.name `String` *(default: "Name")*
 
 The text that will be rendered as a title of the Predecessor and Successor columns in the Dependencies edit tables, and the Dependency column in the Assignments edit table.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                name: "Task Name"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.percentCompleteHint `String` *(default: "value from 0 to 1")*
 
 The hint text that will be rendered for the percentCompleted NumericTextBox on the popup edit Form.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                percentCompleteHint: "Enter value between 0 and 100"
+            }
+        }
+    });
+    </script>
+
 ### messages.editor.remove `String` *(default: "Remove")*
 
 The text that will be rendered in the Remove button of the Dependencies and Assignments edit tables.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                remove: "Delete"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.actualStart `String` *(default: "Actual Start")*
 
 The label text of the start DateTimePicker editor when the planned editors are also present on the form.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                actualStart: "Real Start Date"
+            }
+        }
+    });
+    </script>
+
 ### messages.editor.actualEnd `String` *(default: "Actual End")*
 
 The label text of the end DateTimePicker editor when the planned editors are also present on the form.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                actualEnd: "Real End Date"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.parentOptionLabel `String` *(default: "-None-")*
 
 The optionLabel of the parent DropDownList editor.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                parentOptionLabel: "No Parent"
+            }
+        }
+    });
+    </script>
+
 ### messages.editor.general `String` *(default: "General")*
 
 The text used for the main (general) tab on the edit popup TabStrip.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                general: "Basic Info"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.predecessors `String` *(default: "Predecessors")*
 
 The text used for the predecessors tab on the edit popup TabStrip.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                predecessors: "Dependencies"
+            }
+        }
+    });
+    </script>
+
 ### messages.editor.successors `String` *(default: "Successors")*
 
 The text used for the successors tab on the edit popup TabStrip.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                successors: "Following Tasks"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.other `String` *(default: "Other")*
 
 The text used for the other tab on the edit popup TabStrip.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                other: "Additional"
+            }
+        }
+    });
+    </script>
+
 ### messages.editor.dependencyType `String` *(default: "Type")*
 
 The text that will be rendered as a title of the Type column in the Dependencies edit tables.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            editor: {
+                dependencyType: "Dependency Type"
+            }
+        }
+    });
+    </script>
 
 ### messages.plannedTasks `Object`
 
 The configuration of the Gantt messages for Planned tasks.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                switchText: "Show Planned Tasks",
+                offsetTooltipAdvanced: "Completed earlier",
+                offsetTooltipDelay: "Completed later"
+            }
+        }
+    });
+    </script>
+
 ### messages.plannedTasks.switchText `String` *(default: "Planned Tasks")*
 
 The text that would be displayed on the switch allowing the user to turn on and off the PlannedTasks view in the Gantt Timeline.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                switchText: "Show Planned Tasks"
+            }
+        }
+    });
+    </script>
 
 ### messages.plannedTasks.offsetTooltipAdvanced `String` *(default: "Met deadline earlier")*
 
 The text rendered in the Tooltip that would be displayed for tasks which have finished in advance compared to their plannedEnd.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                offsetTooltipAdvanced: "Completed ahead of schedule"
+            }
+        }
+    });
+    </script>
+
 ### messages.plannedTasks.offsetTooltipDelay `String` *(default: "Delay")*
 
 The text rendered in the Tooltip that would be displayed for tasks which have finished with delay compared to their plannedEnd.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                offsetTooltipDelay: "Behind schedule"
+            }
+        }
+    });
+    </script>
 
 ### messages.plannedTasks.seconds `String` *(default: "seconds")*
 
 The text for "seconds" displayed in the Advanced/Delayed Tooltip (see above).
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                seconds: "sec"
+            }
+        }
+    });
+    </script>
+
 ### messages.plannedTasks.minutes `String` *(default: "minutes")*
 
 The text for "minutes" displayed in the Advanced/Delayed Tooltip (see above).
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                minutes: "min"
+            }
+        }
+    });
+    </script>
 
 ### messages.plannedTasks.hours `String` *(default: "hours")*
 
 The text for "hours" displayed in the Advanced/Delayed Tooltip (see above).
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                hours: "hrs"
+            }
+        }
+    });
+    </script>
+
 ### messages.plannedTasks.days `String` *(default: "days")*
 
 The text for "days" displayed in the Advanced/Delayed Tooltip (see above).
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            plannedTasks: {
+                days: "d"
+            }
+        }
+    });
+    </script>
 
 ### messages.save `String` *(default: "Save")*
 
@@ -3555,6 +3966,25 @@ The aria-label of the View select element.
 ### messages.views `Object`
 
 The configuration of the Gantt view messages. Use this option to customize or localize the Gantt view messages.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        messages: {
+            views: {
+                day: "Daily View",
+                week: "Weekly View",
+                month: "Monthly View",
+                year: "Yearly View"
+            }
+        }
+    });
+    </script>
 
 ### messages.views.day `String` *(default: "Day")*
 
@@ -3710,6 +4140,24 @@ The text similar to "Year" displayed as Gantt "year" view title.
 
 Configures the Kendo UI Gantt PDF export settings.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            author: "John Doe",
+            title: "Project Schedule",
+            subject: "Gantt Chart Export",
+            keywords: "project, schedule, gantt"
+        }
+    });
+    </script>
+
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
@@ -3740,12 +4188,42 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            autoPrint: true
+        }
+    });
+    </script>
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
 It's also possible to pass a CSS selector as argument. All matching links will be ignored.
 
 > Available in versions 2015.3.1020 and later
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            avoidLinks: true
+        }
+    });
+    </script>
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -3825,13 +4303,59 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/gantt#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            forceProxy: true,
+            proxyURL: "/save"
+        }
+    });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            jpegQuality: 0.8
+        }
+    });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            keepPNG: true
+        }
+    });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -3918,17 +4442,85 @@ units are "mm", "cm", "in" and "pt" (default).
 
 The bottom margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            margin: {
+                bottom: 20
+            }
+        }
+    });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            margin: {
+                left: 15
+            }
+        }
+    });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            margin: {
+                right: 15
+            }
+        }
+    });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        toolbar: ["pdf"],
+        pdf: {
+            margin: {
+                top: 25
+            }
+        }
+    });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -4086,6 +4678,21 @@ Sets the title field of the PDF file in the Document Properties. Not to be mista
 ### range `Object`
 
 Configures the Kendo UI Gantt range settings.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        range: {
+            start: new Date("2023/1/1"),
+            end: new Date("2023/12/31")
+        }
+    });
+    </script>
 
 ### range.start `Date`
 
@@ -4594,6 +5201,23 @@ If set to `false` the gantt will not display the task tooltip. By default the ta
 The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 By default the Kendo UI Gantt widget displays "day", "week", and "month" views.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        views: [
+            "day",
+            "week", 
+            { type: "month", selected: true },
+            "year"
+        ]
+    });
+    </script>
+
 ### views.date `Date`
 
 If set to some date and it is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
@@ -4628,6 +5252,26 @@ Overrides the [date](/api/javascript/ui/gantt#configuration-date) option of the 
 ### views.range `Object`
 
 Configures the view range settings.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        views: [
+            {
+                type: "month",
+                range: {
+                    start: new Date("2023/1/1"),
+                    end: new Date("2023/12/31")
+                }
+            }
+        ]
+    });
+    </script>
 
 ### views.range.start `Date`
 
@@ -4692,6 +5336,23 @@ Overrides the [range.end](/api/javascript/ui/gantt#configuration-range.end) opti
 ### views.type `String`
 
 The type of the view. The built-in views are: "day", "week", "month" and "year".
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        views: [
+            { type: "day" },
+            { type: "week" },
+            { type: "month" },
+            { type: "year" }
+        ]
+    });
+    </script>
 
 ### views.selected `Boolean` *(default: false)*
 
@@ -4992,6 +5653,30 @@ The format used to display the start and end dates in the resize tooltip.
 The configuration of the gantt resource(s). A gantt resource is optional metadata that can be associated
 with a gantt task.
 
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+        dataSource: [
+            { id: 1, title: "Task 1", start: new Date("2023/1/1"), end: new Date("2023/1/5") }
+        ],
+        resources: {
+            dataSource: [
+                { id: 1, name: "Resource 1", color: "#ff6666" },
+                { id: 2, name: "Resource 2", color: "#66ff66" }
+            ],
+            dataTextField: "name",
+            dataColorField: "color"
+        },
+        assignments: {
+            dataSource: [
+                { taskId: 1, resourceId: 1, units: 1 }
+            ]
+        }
+    });
+    </script>
+
 ### resources.dataFormatField `String` *(default: "format")*
 
 The field of the resource data item containing the format of the resource value, which could be assigned to a gantt task.
@@ -5173,6 +5858,8 @@ The field of the gantt task which contains the assigned resource objects.
 ### rowHeight `Number|String`
 
 The height of the table rows. Numeric values are treated as pixels.
+
+#### Example
 
     <div id="gantt"></div>
     <script>

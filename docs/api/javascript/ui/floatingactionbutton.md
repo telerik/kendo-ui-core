@@ -73,9 +73,35 @@ Specifies the horizontal and vertical offset of the FloatingActionButton.
 
 Specifies the initial horizontal offset of the FloatingActionButton. Numeric values are treated as pixels. String values can specify pixels, percentages, ems, or other valid values.
 
+#### Example
+
+    <div id="fab"></div>
+    <script>
+    $("#fab").kendoFloatingActionButton({
+        align: 'top start',
+        alignOffset: {
+            x: 100,
+            y: 50
+        }
+    });
+    </script>
+
 ### alignOffset.y `Number|String`
 
 Specifies the initial vertical offset of the FloatingActionButton. Numeric values are treated as pixels. String values can specify pixels, percentages, ems or other valid values.
+
+#### Example
+
+    <div id="fab"></div>
+    <script>
+    $("#fab").kendoFloatingActionButton({
+        align: 'bottom end',
+        alignOffset: {
+            x: 30,
+            y: 80
+        }
+    });
+    </script>
 
 ### enabled `Boolean` *(default: true)*
 
@@ -95,6 +121,22 @@ Specifies whether the FloatingActionButton is enabled (true) or disabled (false)
 ### fillMode `String` *(default: 'solid')*
 
 Controls how the color is applied to the button. Valid values are: `"solid"`, and `"none"`.
+
+#### Example
+
+    <div id="fab-solid"></div>
+    <div id="fab-none"></div>
+    <script>
+    $("#fab-solid").kendoFloatingActionButton({
+        icon: "plus",
+        fillMode: "solid"
+    });
+    
+    $("#fab-none").kendoFloatingActionButton({
+        icon: "plus",
+        fillMode: "none"
+    });
+    </script>
 
 ### icon `String` *(default: "")*
 

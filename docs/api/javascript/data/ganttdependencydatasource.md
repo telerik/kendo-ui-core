@@ -17,6 +17,35 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 The schema configuration of the `GanttDependencyDataSource`.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.GanttDependencyDataSource({
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/service/v2/core/GanttDependencies",
+          type: "POST",
+          contentType: "application/json"
+        }
+      },
+      schema: {
+        model: {
+          id: "id",
+          fields: {
+            id: { from: "ID", type: "number" },
+            predecessorId: { from: "PredecessorID", type: "number" },
+            successorId: { from: "SuccessorID", type: "number" },
+            type: { from: "Type", type: "number" }
+          }
+        }
+      }
+    });
+    dataSource.fetch(function() {
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("Schema configured successfully");
+    });
+    </script>
+
 ### schema.model `Object`
 
 The model configuration of the `GanttDependencyDataSource`. See [`GanttDependency`](/api/framework/ganttdependency#configuration) for more information.

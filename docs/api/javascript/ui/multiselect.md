@@ -15,13 +15,55 @@ Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/javascri
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option value="1">Item 1</option>
+        <option value="2">Item 2</option>
+        <option value="3">Item 3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        adaptiveMode: "auto"
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option value="1">Item 1</option>
+        <option value="2">Item 2</option>
+        <option value="3">Item 3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Items"
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option value="1">Item 1</option>
+        <option value="2">Item 2</option>
+        <option value="3">Item 3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Items",
+        adaptiveSubtitle: "Choose multiple options"
+    });
+    </script>
 
 ### animation `Boolean|Object`
 
@@ -64,6 +106,8 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 ### animation.close `Object`
 
+The animation configuration for closing the suggestion popup. This object can contain properties such as `effects` and `duration` that define how the popup will close when it becomes hidden. The close animation is played when the user selects an item, clicks outside the widget, or when the popup is programmatically closed.
+
 #### Example - configure the close animation
 
     <select id="multiselect" multiple="multiple">
@@ -87,9 +131,41 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      animation: {
+       close: {
+         effects: "fadeOut zoom:out"
+       }
+      }
+    });
+    </script>
+
 ### animation.close.duration `Number` *(default: 100)*
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      animation: {
+       close: {
+         duration: 500
+       }
+      }
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -118,9 +194,41 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      animation: {
+       open: {
+         effects: "fadeIn zoom:in"
+       }
+      }
+    });
+    </script>
+
 ### animation.open.duration `Number` *(default: 200)*
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      animation: {
+       open: {
+         duration: 600
+       }
+      }
+    });
+    </script>
 
 ### autoBind `Boolean`*(default: true)*
 
@@ -420,6 +528,8 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
+#### Example
+
     <select id="customers" style="width: 400px;"></select>
     <script>
         $(document).ready(function() {
@@ -468,6 +578,19 @@ The widget instance.
 ### inputMode `String`*(default: "text")*
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option value="1">Item 1</option>
+        <option value="2">Item 2</option>
+        <option value="3">Item 3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        inputMode: "email"
+    });
+    </script>
 
 
 ### label `String|Function|Object` *(default: null)*
@@ -588,6 +711,8 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
+
+#### Example
 
     <select id="customers" style="width: 400px;"></select>
     <script>
@@ -1621,6 +1746,26 @@ The changes introduced with the Kendo UI R3 2016 release enable you to determine
 
 For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
 
+#### Example
+
+    <select id="multiselect"></select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        dataTextField: "ContactName",
+        dataValueField: "CustomerID",
+        virtual: {
+            itemHeight: 26,
+            mapValueTo: "dataItem"
+        },
+        dataSource: {
+            transport: {
+                read: "https://demos.telerik.com/service/v2/core/Customers"
+            },
+            pageSize: 80
+        }
+    });
+    </script>
+
 ### virtual.valueMapper `Function`*(default: null)*
 
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
@@ -1953,6 +2098,20 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 #### Returns
 
 `Array` The currently rendered dropdown list items (`<li>` elements).
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    var multiselect = $("#multiselect").kendoMultiSelect().data("kendoMultiSelect");
+    
+    // Get the items
+    var items = multiselect.items();
+    console.log(items);
+    </script>
 
 ### open
 

@@ -16,13 +16,42 @@ Represents the Kendo UI TimePicker. Inherits from [Widget](/api/javascript/ui/wi
 
 Specifies the adaptive rendering of the component. The supported values are: `none` *(default)*, `auto`.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        adaptiveMode: "auto"
+    });
+    </script>
+
 ### adaptiveTitle `String`
 
 Allows customization of the title's text in the adaptive view of the component.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        adaptiveMode: "auto",
+        adaptiveTitle: "Select Time"
+    });
+    </script>
+
 ### adaptiveSubtitle `String`
 
 Allows customization of the subtitle's text in the adaptive view of the component.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        adaptiveMode: "auto",
+        adaptiveSubtitle: "Choose preferred time"
+    });
+    </script>
 
 ### animation `Boolean|Object`
 
@@ -81,9 +110,37 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        animation: {
+            close: {
+                effects: "fadeOut zoom:out",
+                duration: 500
+            }
+        }
+    });
+    </script>
+
 ### animation.close.duration `Number`
 
 The duration of the close animation in milliseconds.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        animation: {
+            close: {
+                effects: "fadeOut",
+                duration: 1000
+            }
+        }
+    });
+    </script>
 
 ### animation.open `Object`
 
@@ -109,9 +166,37 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        animation: {
+            open: {
+                effects: "fadeIn zoom:in",
+                duration: 400
+            }
+        }
+    });
+    </script>
+
 ### animation.open.duration `Number`
 
 The duration of the open animation in milliseconds.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        animation: {
+            open: {
+                effects: "slideDown",
+                duration: 600
+            }
+        }
+    });
+    </script>
 
 ### autoAdjust `Boolean` *(default: true)*
 
@@ -266,6 +351,14 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) of the inner `<input />` element. It is used to specify the type of on-screen keyboard that should be displayed when the user focuses the input.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        inputMode: "numeric"
+    });
+    </script>
 
 ### label `String|Function|Object` *(default: null)*
 
@@ -589,33 +682,145 @@ The messages that DateInput uses.  Use it to customize or localize the placehold
 
 The placeholder for the years part.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                year: "yyyy"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.month `String` *(default: "month")*
 
 The placeholder for the months part.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                month: "mm"
+            }
+        }
+    });
+    </script>
 
 ### messages.dateInput.day `String` *(default: "day")*
 
 The placeholder for the day of the month part.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                day: "dd"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.weekday `String` *(default: "day of the week")*
 
 The placeholder for the day of the week part.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                weekday: "day"
+            }
+        }
+    });
+    </script>
 
 ### messages.dateInput.hour `String` *(default: "hours")*
 
 The placeholder for the hours part.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                hour: "hh"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.minute `String` *(default: "minutes")*
 
 The placeholder for the minutes part.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                minute: "mm"
+            }
+        }
+    });
+    </script>
 
 ### messages.dateInput.second `String` *(default: "seconds")*
 
 The placeholder for the seconds part.
 
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                second: "ss"
+            }
+        }
+    });
+    </script>
+
 ### messages.dateInput.dayperiod `String` *(default: "AM/PM")*
 
 The placeholder for the AM/PM part.
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true,
+        messages: {
+            dateInput: {
+                dayperiod: "AM/PM"
+            }
+        }
+    });
+    </script>
 
 ### min `Date`*(default: "00:00")*
 

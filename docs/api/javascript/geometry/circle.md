@@ -147,10 +147,34 @@ The radius of the circle
 
 The location of the circle center.
 
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([10, 10], 20);
+    console.log(circle.center); // Point {x: 10, y: 10}
+    
+    // Access center coordinates
+    console.log(circle.center.x); // 10
+    console.log(circle.center.y); // 10
+    </script>
+
 
 ### radius `Number`
 
 The radius of the circle.
+
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([10, 10], 25);
+    console.log(circle.radius); // 25
+    
+    // Create circle with different radius
+    var largeCircle = new geom.Circle([0, 0], 50);
+    console.log(largeCircle.radius); // 50
+    </script>
 
 
 ## Methods
@@ -170,6 +194,23 @@ Transformation matrix to apply.
 
 `kendo.geometry.Rect` The bounding box after applying the transformation matrix.
 
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([50, 50], 25);
+    
+    // Get bounding box without transformation
+    var matrix = geom.Matrix.unit();
+    var boundingBox = circle.bbox(matrix);
+    console.log(boundingBox); // Rect with dimensions covering the circle
+    
+    // Get bounding box with scaling transformation
+    var scaleMatrix = geom.Matrix.scale(2, 2);
+    var scaledBoundingBox = circle.bbox(scaleMatrix);
+    console.log(scaledBoundingBox); // Larger bounding box due to scaling
+    </script>
+
 
 ### clone
 
@@ -178,6 +219,23 @@ Creates a new instance with the same center and radius.
 #### Returns
 
 `kendo.geometry.Circle` A new Circle instance with the same center and radius.
+
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var originalCircle = new geom.Circle([10, 20], 15);
+    var clonedCircle = originalCircle.clone();
+    
+    console.log(clonedCircle.center.x); // 10
+    console.log(clonedCircle.center.y); // 20
+    console.log(clonedCircle.radius); // 15
+    
+    // Verify they are separate instances
+    originalCircle.setRadius(30);
+    console.log(originalCircle.radius); // 30
+    console.log(clonedCircle.radius); // 15 (unchanged)
+    </script>
 
 
 ### equals
@@ -194,6 +252,20 @@ The circle to compare with.
 
 `Boolean` true if the point coordinates match; false otherwise.
 
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle1 = new geom.Circle([10, 20], 15);
+    var circle2 = new geom.Circle([10, 20], 15);
+    var circle3 = new geom.Circle([10, 20], 20);
+    var circle4 = new geom.Circle([5, 20], 15);
+    
+    console.log(circle1.equals(circle2)); // true (same center and radius)
+    console.log(circle1.equals(circle3)); // false (different radius)
+    console.log(circle1.equals(circle4)); // false (different center)
+    </script>
+
 
 ### getCenter
 
@@ -203,6 +275,18 @@ Gets the circle center location.
 
 `kendo.geometry.Point` The location of the circle center.
 
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([25, 35], 10);
+    var centerPoint = circle.getCenter();
+    
+    console.log(centerPoint.x); // 25
+    console.log(centerPoint.y); // 35
+    console.log(centerPoint instanceof geom.Point); // true
+    </script>
+
 
 ### getRadius
 
@@ -211,6 +295,17 @@ Gets the circle radius.
 #### Returns
 
 `Number` The radius of the circle.
+
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([10, 10], 42);
+    var radius = circle.getRadius();
+    
+    console.log(radius); // 42
+    console.log(typeof radius); // "number"
+    </script>
 
 
 ### pointAt
@@ -228,6 +323,28 @@ Negative values or values greater than 360 will be normalized.
 
 `kendo.geometry.Point` The point on the circle's circumference.
 
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([0, 0], 10);
+    
+    // Get point at 0 degrees (rightmost point)
+    var rightPoint = circle.pointAt(0);
+    console.log(rightPoint.x); // 10
+    console.log(rightPoint.y); // 0
+    
+    // Get point at 90 degrees (bottom point)
+    var bottomPoint = circle.pointAt(90);
+    console.log(Math.round(bottomPoint.x)); // 0
+    console.log(Math.round(bottomPoint.y)); // 10
+    
+    // Get point at 180 degrees (leftmost point)
+    var leftPoint = circle.pointAt(180);
+    console.log(Math.round(leftPoint.x)); // -10
+    console.log(Math.round(leftPoint.y)); // 0
+    </script>
+
 
 ### setCenter
 
@@ -243,6 +360,27 @@ The new center Point or equivalent [x, y] array.
 
 `kendo.geometry.Point` The location of the circle center.
 
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([10, 10], 5);
+    
+    console.log(circle.center.x); // 10
+    console.log(circle.center.y); // 10
+    
+    // Set new center using array notation
+    circle.setCenter([25, 30]);
+    console.log(circle.center.x); // 25
+    console.log(circle.center.y); // 30
+    
+    // Set new center using Point instance
+    var newPoint = new geom.Point(50, 60);
+    circle.setCenter(newPoint);
+    console.log(circle.center.x); // 50
+    console.log(circle.center.y); // 60
+    </script>
+
 
 ### setRadius
 
@@ -257,4 +395,24 @@ The new circle radius.
 #### Returns
 
 `kendo.geometry.Circle` The current circle instance.
+
+#### Example
+
+    <script>
+    var geom = kendo.geometry;
+    var circle = new geom.Circle([10, 10], 5);
+    
+    console.log(circle.radius); // 5
+    
+    // Set new radius
+    var result = circle.setRadius(15);
+    console.log(circle.radius); // 15
+    console.log(result === circle); // true (returns the same instance)
+    
+    // Chain method calls
+    circle.setRadius(25).setCenter([20, 20]);
+    console.log(circle.radius); // 25
+    console.log(circle.center.x); // 20
+    console.log(circle.center.y); // 20
+    </script>
 

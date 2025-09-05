@@ -16,7 +16,7 @@ Represents the Kendo UI Drawer widget. Inherits from [Widget](/api/javascript/ui
 
 Specifies if the Drawer will be automatically collapsed when an item is clicked.
 
-#### Specifying autoCollapse
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -36,6 +36,8 @@ Specifies if the Drawer will be automatically collapsed when an item is clicked.
 
 Specifies if the Drawer will be expanded by default.
 
+#### Example
+
     <div id="drawer">
       <div>Content area content.</div>
     </div>
@@ -52,7 +54,7 @@ Specifies if the Drawer will be expanded by default.
 
 The position of the drawer. Can be `left` (default) or `right`.
 
-#### Right positioned drawer
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -72,7 +74,7 @@ The position of the drawer. Can be `left` (default) or `right`.
 
 Determines how the Kendo UI Drawer will interact with the associated content. The default one (overlay) will simply overlap the associated content with overlay effect. On the other hand "push" mode will show the drawer next to associated cotent. The associated content will shrink its content.
 
-#### Push mode
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -93,7 +95,7 @@ Determines how the Kendo UI Drawer will interact with the associated content. Th
 
 If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
 
-#### Navigation
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -115,7 +117,7 @@ If set to `true` the use could navigate the widget using the keyboard navigation
 
 Specifies the drawer's content.
 
-#### Template example
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -158,7 +160,7 @@ Specifies the minimum height for the drawer in push mode. The overlay mode takes
 
 Enables or configures the mini mode for the Kendo UI Drawer. This is a compact view that is displayed when the Kendo UI Drawer is collapsed. Usually it used to show only the icons when the drawer content contains icon and text for an item. When set to `true` it uses the main template.
 
-#### Mini mode example
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -178,7 +180,7 @@ Enables or configures the mini mode for the Kendo UI Drawer. This is a compact v
 
 Defines a specific width for the Kendo UI Drawer when in mini mode.
 
-#### Mini mode width example
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -200,7 +202,7 @@ Defines a specific width for the Kendo UI Drawer when in mini mode.
 
 Defines a specific template for the Kendo UI Drawer when in mini mode.
 
-#### Template example
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>
@@ -240,11 +242,27 @@ If set to `false`, swiping the associated content will not activate the drawer. 
 
 `swipeToOpen` should be disabled for browsers, which use side swiping gestures for back/forward navigation, such as iOS Safari. Otherwise, users should swipe from an inner part of the view, and not from the view edge.
 
+#### Example
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var drawerInstance = $("#drawer").kendoDrawer({
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                swipeToOpen: false
+            }).data("kendoDrawer");
+
+            drawerInstance.show();
+        });
+    </script>
+
 ### width `Number`
 
 Defines a specific width for the Kendo UI Drawer when expanded.
 
-#### width example
+#### Example
 
     <div id="drawer">
         <div>Content area content.</div>

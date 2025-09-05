@@ -14,6 +14,23 @@ Represents a Map marker with title and location.
 
 The marker location on the map. Coordinates are listed as `[Latitude, Longitude]`.
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589], // Boston coordinates
+            title: "Boston"
+        }]
+    });
+    </script>
+
 ### shape `String` *(default: "pinTarget")*
 
 The marker shape. The following pre-defined marker shapes are available:
@@ -24,17 +41,93 @@ The marker shape. The following pre-defined marker shapes are available:
 Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
 For example "pinTarget" is rendered as "k-i-marker-pin-target".
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            shape: "pin",
+            title: "Boston with pin shape"
+        }]
+    });
+    </script>
+
 ### title `String` *(default: "pinTarget")*
 
 The marker title. Displayed as browser tooltip.
+
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            title: "Visit Boston - Historical City"
+        }]
+    });
+    </script>
 
 ### tooltip `Object`
 
 Kendo UI Tooltip options for this marker.
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            tooltip: {
+                content: "Boston, Massachusetts",
+                position: "top",
+                showAfter: 200
+            }
+        }]
+    });
+    </script>
+
 ### tooltip.autoHide `Boolean`*(default: true)*
 
 Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.
+
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            tooltip: {
+                content: "This tooltip won't auto-hide",
+                autoHide: false
+            }
+        }]
+    });
+    </script>
 
 ### tooltip.animation `Object`
 
@@ -289,6 +382,29 @@ Specifies a URL or request options that the tooltip should load its content from
 a container iframe element is automatically created. This behavior may change in future
 versions, so it is advisable to always use the [iframe configuration option](#iframe).
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            tooltip: {
+                content: {
+                    url: "/marker-details.html"
+                },
+                width: 300,
+                height: 200
+            }
+        }]
+    });
+    </script>
+
 ### tooltip.template `String|Template`
 
 The [template](/api/framework/kendo#methods-template) which renders the tooltip content.
@@ -300,13 +416,82 @@ The fields which can be used in the template are:
 
 > Setting a template disables the content option.
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            title: "Boston",
+            tooltip: {
+                template: (data) => `
+                    <div>
+                        <strong>Location:</strong> ${data.marker.title}<br>
+                        <strong>Coordinates:</strong> ${data.location.lat}, ${data.location.lng}
+                    </div>
+                `
+            }
+        }]
+    });
+    </script>
+
 ### tooltip.callout `Boolean`*(default:true)*
 
 Specifies if the tooltip callout will be displayed.
 
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            tooltip: {
+                content: "Tooltip without callout",
+                callout: false
+            }
+        }]
+    });
+    </script>
+
 ### tooltip.iframe `Boolean`
 
 Explicitly states whether content iframe should be created.
+
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            tooltip: {
+                content: {
+                    url: "https://example.com/marker-info"
+                },
+                iframe: true,
+                width: 400,
+                height: 300
+            }
+        }]
+    });
+    </script>
 
 ### tooltip.height `Number`*(default: Infinity)*
 
@@ -450,4 +635,25 @@ The marker location on the map. Coordinates are listed as `[Latitude, Longitude]
 
 #### Returns
 `kendo.dataviz.map.Location` The current location of the Marker
+
+#### Example
+
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        layers: [{
+            type: "tile",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }],
+        markers: [{
+            location: [42.3601, 71.0589],
+            title: "Boston"
+        }],
+        markerActivate: function (e) {
+            var currentLocation = e.marker.location();
+            console.log("Current location:", currentLocation);
+        }
+    });    
+    </script>
 

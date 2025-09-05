@@ -15,6 +15,40 @@ The `kendo.data.TreeListModel` class represents a data item from the [kendo.data
 
 The name of the Model's parentId field. The Kendo UI TreeList distinguishes the root items based on the `parentId` field. If the `schema.model.fields.[parentIdField]` is nullable, root items with be items whose `parentId` field values are `null`. If the `schema.model.fields.[parentIdField]` is *not* nullable, root items will be items which have a default value for their data type.
 
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+    var dataSource = new kendo.data.TreeListDataSource({
+        data: [
+            { id: 1, name: "John Doe", parentId: null },
+            { id: 2, name: "Jane Smith", parentId: 1 },
+            { id: 3, name: "Bob Johnson", parentId: 1 },
+            { id: 4, name: "Alice Brown", parentId: 2 }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId",
+                fields: {
+                    parentId: { type: "number", nullable: true }
+                }
+            }
+        }
+    });
+
+    $("#treeList").kendoTreeList({
+        dataSource: dataSource,
+        columns: ["name"]
+    });
+
+    // Access the parentId configuration
+    var model = dataSource.options.schema.model;
+    
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log("ParentId field configuration:", model.parentId);
+    </script>
+
 ## Fields
 
 ### hasChildren `Boolean`
@@ -69,6 +103,44 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
 ### loaded
 
 Gets or sets the loaded flag of the TreeList. Setting the loaded flag to `false` allows reloading of child items.
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+    var dataSource = new kendo.data.TreeListDataSource({
+        data: [
+            { id: 1, name: "John Doe", parentId: null },
+            { id: 2, name: "Jane Smith", parentId: 1 },
+            { id: 3, name: "Bob Johnson", parentId: 1 }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId"
+            }
+        }
+    });
+
+    $("#treeList").kendoTreeList({
+        dataSource: dataSource,
+        columns: ["name"]
+    });
+
+    dataSource.read().then(function() {
+        var rootItem = dataSource.at(0);
+        
+        // Check if the item is loaded
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Item loaded status:", rootItem.loaded());
+        
+        // Set loaded to false to allow reloading
+        rootItem.loaded(false);
+        
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Item loaded status after setting to false:", rootItem.loaded());
+    });
+    </script>
 
 ## Events
 

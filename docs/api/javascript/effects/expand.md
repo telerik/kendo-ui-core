@@ -38,3 +38,17 @@ Playing the effect in reverse will collapse the element to zero size and hide it
 ### direction `String`
 
 The direction in which the element will be expanded. Either `horizontal` or `vertical`.
+
+#### Example
+
+    <div id="element" style="width:200px; height: 200px; background: blue;">
+        Element to expand
+    </div>
+
+    <script>
+        // Expand horizontally
+        kendo.fx($("#element")).expand("horizontal").play();
+        
+        // Or expand vertically
+        // kendo.fx($("#element")).expand("vertical").play();
+    </script>

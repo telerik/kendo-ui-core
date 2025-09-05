@@ -151,25 +151,145 @@ Specifies position of the badge relative to button. Valid position options are: 
 
 `items.badge.align` works in conjunction with [`items.badge.position`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeposition).
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Save",
+                badge: {
+                    text: "NEW",
+                    position: "edge",
+                    align: "top end"
+                }
+            },
+            {
+                text: "Delete",
+                badge: {
+                    text: "5",
+                    position: "edge", 
+                    align: "bottom start"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.cutoutBorder `Boolean` *(default: false)*
 
 Specifies wether or not to render additional "cutout" border around the badge.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Save",
+                badge: {
+                    text: "1",
+                    cutoutBorder: true
+                }
+            },
+            {
+                text: "Delete",
+                badge: {
+                    text: "2",
+                    cutoutBorder: false
+                }
+            }
+        ]
+    });
+    </script>
 
 
 ### items.badge.fill `String` *(default: 'solid')*
 
 Specifies the structure of a badge. Valid options are `solid` (default) and `outline`.
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Solid Badge",
+                badge: {
+                    text: "5",
+                    fill: "solid"
+                }
+            },
+            {
+                text: "Outline Badge",
+                badge: {
+                    text: "10",
+                    fill: "outline"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.icon `String` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Alert",
+                badge: {
+                    icon: "warning"
+                }
+            },
+            {
+                text: "Success",
+                badge: {
+                    icon: "check"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.max `Number` *(default: Infinity)*
 
 If `text` is a number, it will cap that number.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Messages",
+                badge: {
+                    text: 150,
+                    max: 99
+                }
+            },
+            {
+                text: "Notifications", 
+                badge: {
+                    text: 25,
+                    max: 50
+                }
+            }
+        ]
+    });
+    </script>
 
 
 ### items.badge.position `String` *(default: 'edge')*
@@ -178,6 +298,39 @@ Specifies position of the badge relative to the edge of the button. Valid placem
 
 Note: position configuration, other than `inline` requires the badge to be aligned. See [`items.badge.align`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgealign) for more details.
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Inline",
+                badge: {
+                    text: "NEW",
+                    position: "inline"
+                }
+            },
+            {
+                text: "Edge",
+                badge: {
+                    text: "5",
+                    position: "edge",
+                    align: "top end"
+                }
+            },
+            {
+                text: "Inside",
+                badge: {
+                    text: "!",
+                    position: "inside",
+                    align: "top start"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.shape `String` *(default: 'rounded')*
 
@@ -185,30 +338,214 @@ Note: position configuration, other than `inline` requires the badge to be align
 Specifies the shape of the badge. 
 Valid options are `rectangle`, `rounded`, `pill`, `circle`, `dot`.
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Rectangle",
+                badge: {
+                    text: "1",
+                    shape: "rectangle"
+                }
+            },
+            {
+                text: "Rounded",
+                badge: {
+                    text: "2",
+                    shape: "rounded"
+                }
+            },
+            {
+                text: "Circle",
+                badge: {
+                    text: "3",
+                    shape: "circle"
+                }
+            },
+            {
+                text: "Dot",
+                badge: {
+                    shape: "dot"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.size  `String` *(default: 'medium')*
 
 Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Small",
+                badge: {
+                    text: "S",
+                    size: "small"
+                }
+            },
+            {
+                text: "Medium",
+                badge: {
+                    text: "M",
+                    size: "medium"
+                }
+            },
+            {
+                text: "Large",
+                badge: {
+                    text: "L",
+                    size: "large"
+                }
+            }
+        ]
+    });
+    </script>
 
 
 ### items.badge.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the content of the badge.
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Custom Template",
+                badge: {
+                    template: (data) => `<strong>${data.value}</strong>`,
+                    text: "NEW"
+                }
+            },
+            {
+                text: "Function Template",
+                badge: {
+                    template: function(data) {
+                        return `<i class="k-icon k-i-star"></i> ${data.value}`;
+                    },
+                    text: "5"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.text `String|Number` *(default: '')*
 
 The text of the badge. Valid input includes `string`, `number` or `object` with `toString` method. Default is empty string.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "String Text",
+                badge: {
+                    text: "NEW"
+                }
+            },
+            {
+                text: "Number Text",
+                badge: {
+                    text: 42
+                }
+            },
+            {
+                text: "Object Text",
+                badge: {
+                    text: { toString: function() { return "OBJ"; } }
+                }
+            }
+        ]
+    });
+    </script>
 
 
 ### items.badge.themeColor `String` *(default: 'secondary')*
 
 Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
 
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Primary",
+                badge: {
+                    text: "1",
+                    themeColor: "primary"
+                }
+            },
+            {
+                text: "Success",
+                badge: {
+                    text: "2",
+                    themeColor: "success"
+                }
+            },
+            {
+                text: "Warning",
+                badge: {
+                    text: "3",
+                    themeColor: "warning"
+                }
+            },
+            {
+                text: "Error",
+                badge: {
+                    text: "4",
+                    themeColor: "error"
+                }
+            }
+        ]
+    });
+    </script>
+
 
 ### items.badge.visible `Boolean` *(default: true)*
 
 If set to false the badge will not be displayed.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+        items: [
+            {
+                text: "Visible Badge",
+                badge: {
+                    text: "SHOW",
+                    visible: true
+                }
+            },
+            {
+                text: "Hidden Badge",
+                badge: {
+                    text: "HIDE",
+                    visible: false
+                }
+            }
+        ]
+    });
+    </script>
 
 
 ### items.enabled `Boolean` *(default: true)*
@@ -408,6 +745,14 @@ Controls the main color applied to the buttons in the Group. Valid values are:  
 ## Methods
 
 ### badge
+
+Gets or sets the badge of a button within the ButtonGroup. This method supports several usage scenarios:
+
+- **Get badge value**: When called with only the button parameter, returns the current badge text  
+- **Set badge value**: When called with a button and string/number value, updates the badge text  
+- **Create badge**: If the button doesn't have a badge, creates a new one with the specified value  
+- **Remove badge**: When called with `false` as the value parameter, completely removes the badge from the button  
+- **Handle zero**: Properly handles zero (0) as a valid badge value
 
 #### Parameters
 

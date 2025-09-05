@@ -238,6 +238,8 @@ Opens the responsive panel.
 
 Triggered before the responsive panel is closed. Cancellable.
 
+#### Example
+
 #### Attach close event handler during initialization
 
     <nav id="navigation">
@@ -295,6 +297,8 @@ Triggered before the responsive panel is closed. Cancellable.
 ### open
 
 Triggered before the responsive panel is opened. Cancellable.
+
+#### Example
 
 #### Attach open event handler during initialization
 

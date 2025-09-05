@@ -85,25 +85,121 @@ Provides configuration options for the messages present in the **Wizard** widget
 
 Specifies text to be rendered in the "Done" button on the final step.
 
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        messages: {
+            done: "Complete"
+        }
+    });
+    </script>
+
 ### messages.next `String` *(default: "Next")*
 
 Specifies text to be rendered in the "Next" button on each step.
+
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        messages: {
+            next: "Continue"
+        }
+    });
+    </script>
 
 ### messages.of `String` *(default: "of")*
 
 Specifies text to be rendered in the Pager element.
 
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        messages: {
+            of: "out of"
+        }
+    });
+    </script>
+
 ### messages.previous `String` *(default: "Previous")*
 
 Specifies text to be rendered in the "Previous" button on each step.
+
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        messages: {
+            previous: "Back"
+        }
+    });
+    </script>
 
 ### messages.reset `String` *(default: "Reset")*
 
 Specifies text to be rendered in the "Reset" button on each step.
 
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        messages: {
+            reset: "Clear All"
+        }
+    });
+    </script>
+
 ### messages.step `String` *(default: "Step")*
 
 Specifies text to be rendered in the Pager element.
+
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        messages: {
+            step: "Phase"
+        }
+    });
+    </script>
 
 ### pager `Boolean` *(default: true)*
 
@@ -142,6 +238,23 @@ Indicates whether the step content will be reloaded on each navigation to given 
 ### stepper `Object`
 
 Provides configuration options for the [Stepper](/api/javascript/ui/stepper) instance of the **Wizard** widget.
+
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            { title: "Initial step" },
+            { title: "Second step" },
+            { title: "Final step" }
+        ],
+        stepper: {
+            indicator: false,
+            linear: false
+        }
+    });
+    </script>
 
 ### stepper.indicator `Boolean` *(default: true)*
 
@@ -271,6 +384,31 @@ Indicates whether navigation to previous Step will trigger current Step Form val
 ### steps `Array`
 
 Array of steps to be rendered in the **Wizard**.
+
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            {
+                title: "Personal Information",
+                content: "<div>Enter your personal details</div>",
+                icon: "user"
+            },
+            {
+                title: "Contact Information", 
+                content: "<div>Enter your contact details</div>",
+                icon: "email"
+            },
+            {
+                title: "Review",
+                content: "<div>Review your information</div>",
+                icon: "check"
+            }
+        ]
+    });
+    </script>
 
 ### steps.buttons `Array`
 
@@ -543,6 +681,44 @@ Specifies whether the step is enabled or not.
 ### steps.form `Object`
 
 Defines the [Form](/api/javascript/ui/form) widget configuration, which will populate the **Wizard** step content.
+
+#### Example
+
+    <div id="wizard"></div>
+    <script>
+    $("#wizard").kendoWizard({
+        steps: [
+            {
+                title: "Personal Information",
+                form: {
+                    formData: {
+                        firstName: "",
+                        lastName: "",
+                        email: ""
+                    },
+                    items: [
+                        { field: "firstName", label: "First Name:", validation: { required: true } },
+                        { field: "lastName", label: "Last Name:", validation: { required: true } },
+                        { field: "email", label: "Email:", validation: { required: true, email: true } }
+                    ]
+                }
+            },
+            {
+                title: "Contact Information",
+                form: {
+                    formData: {
+                        phone: "",
+                        address: ""
+                    },
+                    items: [
+                        { field: "phone", label: "Phone:", validation: { required: true } },
+                        { field: "address", label: "Address:", validation: { required: true } }
+                    ]
+                }
+            }
+        ]
+    });
+    </script>
 
 ### steps.icon `String`
 

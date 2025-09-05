@@ -842,9 +842,58 @@ The data item field to group by.
 
 When set to true, dataSource treats groups as items during pagination.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { name: "John", team: "A", score: 10 },
+        { name: "Jane", team: "A", score: 20 },
+        { name: "Bob", team: "B", score: 15 },
+        { name: "Alice", team: "B", score: 25 }
+      ],
+      group: { field: "team" },
+      pageSize: 2,
+      groupPaging: true
+    });
+    
+    $("#grid").kendoGrid({
+      dataSource: dataSource,
+      pageable: true,
+      groupable: true
+    });
+    </script>
+
 ### inPlaceSort `Boolean` *(default: false)*
 
 If set to `true`, the original `Array` used as [`data`](/api/javascript/data/datasource#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](/api/javascript/data/datasource#configuration-data) option.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    var originalArray = [
+      { name: "John", age: 25 },
+      { name: "Jane", age: 30 },
+      { name: "Bob", age: 20 }
+    ];
+    
+    var dataSource = new kendo.data.DataSource({
+      data: originalArray,
+      inPlaceSort: true,
+      sort: { field: "name", dir: "asc" }
+    });
+    
+    dataSource.read();
+    
+    // The original array is now sorted in place
+    console.log(originalArray[0].name); // "Bob"
+    
+    $("#grid").kendoGrid({
+      dataSource: dataSource
+    });
+    </script>
 
 ### offlineStorage `String|Object`
 
@@ -1128,6 +1177,31 @@ The field from the server response which contains the data items. Can be set to 
 ### schema.errors `Function|String` *(default: "errors")*
 
 The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](/api/javascript/data/datasource/events/error) event will be fired.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/service/error-response",
+          dataType: "json"
+        }
+      },
+      schema: {
+        data: "data",
+        errors: "errors"
+      },
+      error: function(e) {
+        console.log("Error occurred: " + e.errors);
+      }
+    });
+    
+    $("#grid").kendoGrid({
+      dataSource: dataSource
+    });
+    </script>
 
 > If this option is set and the server response contains that field, then the `error` event will be fired. The `errors` field of the event argument will contain the errors returned by the server.
 
@@ -1776,6 +1850,39 @@ Local data sources are bound to a JavaScript array via the [`data`](/api/javascr
 
 The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) options.
 
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      type: "odata-v4",
+      batch: true,
+      transport: {
+        read: {
+          url: "https://services.odata.org/V4/OData/OData.svc/Products"
+        },
+        batch: {
+          url: "https://services.odata.org/V4/OData/OData.svc/$batch",
+          contentType: "multipart/mixed"
+        }
+      },
+      schema: {
+        model: {
+          id: "ID",
+          fields: {
+            ID: { type: "number" },
+            Name: { type: "string" }
+          }
+        }
+      }
+    });
+    
+    $("#grid").kendoGrid({
+      dataSource: dataSource,
+      editable: true
+    });
+    </script>
+
 ### transport.batch.url `String|Function`
 
 > This option is configurable for the [odata-v4 data source `type`](/api/javascript/data/datasource/configuration/type) in [`batch`](/api/javascript/data/datasource/configuration/batch) mode.
@@ -1783,6 +1890,40 @@ The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/
 The [odata-v4 batch `endpoint`](https://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398359) to which the request is sent.
 
 If set to a function, the data source will invoke it and use the result as the URL.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      type: "odata-v4",
+      batch: true,
+      transport: {
+        read: {
+          url: "https://services.odata.org/V4/OData/OData.svc/Products"
+        },
+        batch: {
+          url: function() {
+            return "https://services.odata.org/V4/OData/OData.svc/$batch";
+          }
+        }
+      },
+      schema: {
+        model: {
+          id: "ID",
+          fields: {
+            ID: { type: "number" },
+            Name: { type: "string" }
+          }
+        }
+      }
+    });
+    
+    $("#grid").kendoGrid({
+      dataSource: dataSource,
+      editable: true
+    });
+    </script>
 
 ### transport.cache `Boolean` *(default: false)*
 
@@ -2465,7 +2606,9 @@ The supported values are:
     var dataSource = new kendo.data.DataSource({
       transport: {
         create: {
-          url: "https://demos.telerik.com/service/v2/core/products/create"
+          url: "https://demos.telerik.com/service/v2/core/products/create",
+          type: "POST",
+          contentType: "application/json"
         },
         parameterMap: function(data, type) {
           return kendo.stringify(data);
@@ -2504,51 +2647,73 @@ which should follow the `schema.data` configuration.
 A function that should be invoked to notify the data source about updated data items that are pushed from the server. Accepts a single argument - the object pushed from the server
 which should follow the `schema.data` configuration.
 
-```pseudo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
-    <script>
-    var hubUrl = "https://demos.telerik.com/service/v2/signalr/hubs";
-    var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
-    var hub = connection.createHubProxy("productHub");
-    var hubStart = connection.start({ jsonp: true });
-    var dataSource = new kendo.data.DataSource({
-    transport: {
-      push: function(callbacks) {
-        hub.on("create", function(result) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-          console.log("push create");
-          callbacks.pushCreate(result);
-        });
-        hub.on("update", function(result) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-          console.log("push update");
-          callbacks.pushUpdate(result);
-        });
-        hub.on("destroy", function(result) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-          console.log("push destroy");
-          callbacks.pushDestroy(result);
-        });
-      }
-    },
-    schema: {
-        model: {
-          id: "ID",
-          fields: {
-            "ID": { editable: false },
-            "CreatedAt": { type: "date" },
-            "UnitPrice": { type: "number" }
-          }
-        }
-      }
-    });
+#### Example
 
-    dataSource.fetch(function() {
-      /* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(dataSource.data());
-    });
+    <script>
+      $.when(
+        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"),
+      ).done(function () {
+        var hubUrl = "https://demos.telerik.com/service/v2/signalr/products";
+        var hub = new signalR.HubConnectionBuilder()
+          .withUrl(hubUrl, {
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets
+          })
+          .build();
+
+        var hubStart = hub.start()
+          .then(function (e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("Hub started");
+          })
+          .catch(function (err) {
+            return console.error(err.toString());
+          });
+
+        var dataSource = new kendo.data.DataSource({
+          type: "signalr",
+          autoSync: true,
+          push: function (e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("Push", e);
+          },
+          schema: {
+            model: {
+              id: "ID",
+              fields: {
+                "ID": { editable: false, nullable: true },
+                "CreatedAt": { type: "date" },
+                "UnitPrice": { type: "number" }
+              }
+            }
+          },
+          sort: [{ field: "CreatedAt", dir: "desc" }],
+          transport: {
+            signalr: {
+              promise: hubStart,
+              hub: hub,
+              server: {
+                read: "read",
+                update: "update",
+                destroy: "destroy",
+                create: "create"
+              },
+              client: {
+                read: "read",
+                update: "update",
+                destroy: "destroy",
+                create: "create"
+              }
+            }
+          }
+        });
+
+        dataSource.fetch(() => {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log("Data fetched", dataSource.view());
+        })
+      });
     </script>
-```
 
 ### transport.read `Object|String|Function`
 
@@ -2859,55 +3024,461 @@ It is recommended to get familiar with the SignalR [JavaScript API](https://www.
 
 Specifies the client-side CRUD methods of the SignalR hub.
 
+#### Example
+
+```pseudo
+  <script>
+  var connection = new signalR.HubConnectionBuilder()
+      .withUrl("/dataHub")
+      .build();
+  
+  var dataSource = new kendo.data.DataSource({
+    transport: {
+      signalr: {
+        promise: connection.start(),
+        hub: connection,
+        client: {
+          create: "itemCreated",
+          destroy: "itemDestroyed", 
+          read: "itemRead",
+          update: "itemUpdated"
+        },
+        server: {
+          create: "createItem",
+          destroy: "destroyItem",
+          read: "readItems",
+          update: "updateItem"
+        }
+      }
+    }
+  });
+  </script>
+```
+
 ### transport.signalr.client.create `String`
 
 Specifies the name of the client-side method of the SignalR hub responsible for creating data items.
+
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            create: "itemCreated"
+          },
+          server: {
+            create: "createItem"
+          }
+        }
+      }
+    });
+    
+    // Listen for created items from server
+    connection.on("itemCreated", function(item) {
+      console.log("Item created:", item);
+    });
+    </script>
+```
 
 ### transport.signalr.client.destroy `String`
 
 Specifies the name of the client-side method of the SignalR hub responsible for destroying data items.
 
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            destroy: "itemDeleted"
+          },
+          server: {
+            destroy: "deleteItem"
+          }
+        }
+      }
+    });
+    
+    // Listen for deleted items from server
+    connection.on("itemDeleted", function(item) {
+      console.log("Item deleted:", item);
+    });
+    </script>
+```
+
 ### transport.signalr.client.read `String`
 
 Specifies the name of the client-side method of the SignalR hub responsible for reading data items.
+
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            read: "dataRead"
+          },
+          server: {
+            read: "getData"
+          }
+        }
+      }
+    });
+    
+    // Listen for data from server
+    connection.on("dataRead", function(data) {
+      console.log("Data received:", data);
+    });
+    </script>
+```
 
 ### transport.signalr.client.update `String`
 
 Specifies the name of the client-side method of the SignalR hub responsible for updating data items.
 
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            update: "itemUpdated"
+          },
+          server: {
+            update: "updateItem"
+          }
+        }
+      }
+    });
+    
+    // Listen for updated items from server
+    connection.on("itemUpdated", function(item) {
+      console.log("Item updated:", item);
+    });
+    </script>
+```
+
 ### transport.signalr.hub `Object`
 
 The SignalR hub object returned by the `createHubProxy` method (or `signalR.HubConnection` for ASP.NET Core SignalR). The `hub` option is mandatory.
+
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            read: "dataReceived"
+          },
+          server: {
+            read: "getData"
+          }
+        }
+      }
+    });
+    </script>
+```
 
 ### transport.signalr.promise `Object`
 
 The promise returned by the `start` method of the SignalR connection. The `promise` option is mandatory.
 
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var connectionPromise = connection.start();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connectionPromise,
+          hub: connection,
+          client: {
+            read: "dataReceived"
+          },
+          server: {
+            read: "getData"
+          }
+        }
+      }
+    });
+    
+    connectionPromise.then(function() {
+      console.log("SignalR connection established");
+    });
+    </script>
+```
+
 ### transport.signalr.server `Object`
 
 Specifies the server-side CRUD methods of the SignalR hub.
+
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            create: "itemCreated",
+            destroy: "itemDeleted",
+            read: "dataReceived",
+            update: "itemUpdated"
+          },
+          server: {
+            create: "CreateItem",
+            destroy: "DeleteItem", 
+            read: "GetData",
+            update: "UpdateItem"
+          }
+        }
+      }
+    });
+    </script>
+```
 
 ### transport.signalr.server.create `String`
 
 Specifies the name of the server-side method of the SignalR hub responsible for creating data items.
 
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            create: "itemCreated"
+          },
+          server: {
+            create: "CreateItem"
+          }
+        }
+      }
+    });
+    
+    // When a new item is added, it will call the CreateItem method on the server
+    dataSource.add({ name: "New Item", value: 100 });
+    </script>
+```
+
 ### transport.signalr.server.destroy `String`
 
 Specifies the name of the server-side method of the SignalR hub responsible for destroying data items.
+
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            destroy: "itemDeleted"
+          },
+          server: {
+            destroy: "DeleteItem"
+          }
+        }
+      }
+    });
+    
+    // When an item is removed, it will call the DeleteItem method on the server
+    var item = dataSource.get(1);
+    if (item) {
+      dataSource.remove(item);
+    }
+    </script>
+```
 
 ### transport.signalr.server.read `String`
 
 Specifies the name of the server-side method of the SignalR hub responsible for reading data items.
 
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            read: "dataReceived"
+          },
+          server: {
+            read: "GetData"
+          }
+        }
+      }
+    });
+    
+    // When dataSource.read() is called, it will invoke the GetData method on the server
+    dataSource.read();
+    </script>
+```
+
 ### transport.signalr.server.update `String`
 
 Specifies the name of the server-side method of the SignalR hub responsible for updating data items.
+
+#### Example
+
+```pseudo
+    <script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/dataHub")
+        .build();
+    
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        signalr: {
+          promise: connection.start(),
+          hub: connection,
+          client: {
+            update: "itemUpdated"
+          },
+          server: {
+            update: "UpdateItem"
+          }
+        }
+      }
+    });
+    
+    // When an item is modified and sync() is called, it will call UpdateItem on the server
+    var item = dataSource.get(1);
+    if (item) {
+      item.set("name", "Updated Name");
+      dataSource.sync();
+    }
+    </script>
+```
 
 ### transport.submit `Function`
 
 A function that will handle create, update and delete operations in a single batch when custom transport is used, that is, the `transport.read` is defined as a function.
 
 The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        read: function(e) {
+          // Custom read implementation
+          $.ajax({
+            url: "/api/data",
+            success: function(result) {
+              e.success(result);
+            }
+          });
+        },
+        submit: function(e) {
+          // Handle all CRUD operations in batch
+          var models = e.data.models;
+          var operations = [];
+          
+          for (var i = 0; i < models.length; i++) {
+            var model = models[i];
+            if (model.isNew()) {
+              operations.push({ type: "create", data: model });
+            } else if (model.dirty) {
+              operations.push({ type: "update", data: model });
+            }
+          }
+          
+          // Send batch operations to server
+          $.ajax({
+            url: "/api/batch",
+            type: "POST",
+            data: JSON.stringify(operations),
+            contentType: "application/json",
+            success: function() {
+              e.success();
+            }
+          });
+        }
+      }
+    });
+    
+    $("#grid").kendoGrid({
+      dataSource: dataSource,
+      editable: true
+    });
+    </script>
 
 > This function will only be invoked when the DataSource is in its [batch mode](/api/javascript/data/datasource#configuration-batch).
 

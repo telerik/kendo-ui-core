@@ -70,13 +70,52 @@ The border of the barcode area.
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        border: {
+            color: "red"
+        }
+    });
+    </script>
+
 ### border.dashType `String` *(default: "solid")*
 
 The dash type of the border.
 
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        border: {
+            dashType: "dash"
+        }
+    });
+    </script>
+
 ### border.width `Number` *(default: 0)*
 
 The width of the border.
+
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        border: {
+            width: 2
+        }
+    });
+    </script>
 
 ### checksum `Boolean` *(default: false)*
 
@@ -149,17 +188,69 @@ The padding of the barcode.
 
 The bottom padding of the barcode.
 
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        padding: {
+            bottom: 20
+        }
+    });
+    </script>
+
 ### padding.left `Number` *(default: 0)*
 
 The left padding of the barcode.
+
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        padding: {
+            left: 15
+        }
+    });
+    </script>
 
 ### padding.right `Number` *(default: 0)*
 
 The right padding of the barcode.
 
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        padding: {
+            right: 25
+        }
+    });
+    </script>
+
 ### padding.top `Number` *(default: 0)*
 
 The top padding of the barcode.
+
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        padding: {
+            top: 30
+        }
+    });
+    </script>
 
 ### text `Object`
 
@@ -182,6 +273,19 @@ Can be set to a JavaScript object which represents the text configuration.
 ### text.color `String` *(default: "black")*
 
 The color of the text. Any valid CSS color string will work here, including hex and rgb.
+
+#### Example
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+        width: 300,
+        value: "123456",
+        text: {
+            color: "blue"
+        }
+    });
+    </script>
 
 ### text.font `String` *(default: "16px Consolas, Monaco, Sans Mono, monospace, sans-serif")*
 

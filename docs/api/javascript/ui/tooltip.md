@@ -286,6 +286,16 @@ Specifies a selector for the elements within the container which will display th
 
 Explicitly states whether a content `iframe` will be created.
 
+#### Example
+
+    <span id="target" title="Tooltip content">Some content</span>
+    <script>
+    $("#target").kendoTooltip({
+        iframe: true,
+        content: "<strong>HTML content</strong> that may contain scripts"
+    });
+    </script>
+
 ### height `Number`*(default: Infinity)*
 
 The height (in pixels) of the Tooltip.
@@ -445,6 +455,22 @@ Specifies the offset (in pixels) between the Tooltip and the anchor. If the `cal
 ### popup `kendo.ui.Popup`
 
 Contains the Kendo UI [`Popup`](/api/javascript/ui/popup) instance which manages the showing and hiding of the tooltips at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
+
+#### Example
+
+    <span id="target" title="Tooltip content">Some content</span>
+    <script>
+    $("#target").kendoTooltip({
+        show: function(e) {
+            // Access the popup instance
+            var popup = this.popup;
+            console.log("Tooltip popup instance:", popup);
+            
+            // Apply custom CSS class to popup wrapper
+            popup.wrapper.addClass("custom-tooltip");
+        }
+    });
+    </script>
 
 ## Methods
 

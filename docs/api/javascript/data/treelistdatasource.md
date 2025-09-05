@@ -20,6 +20,32 @@ See the [DataSource configuration](/api/javascript/data/datasource#configuration
 
 The schema configuration of the TreeListDataSource.
 
+#### Example
+
+    <script>
+      var dataSource = new kendo.data.TreeListDataSource({
+        data: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", Phone: "(555) 924-9726", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", Phone: "(438) 738-4935", parentId: 1 },
+          { id: 3, Name: "Priscilla Frank", Position: "Chief Product Officer", Phone: "(217) 280-5300", parentId: 1 }
+        ],
+        schema: {
+          model: {
+            id: "id",
+            parentId: "parentId",
+            expanded: true,
+            fields: {
+              Name: { type: "string" },
+              Position: { type: "string" },
+              Phone: { type: "string" }
+            }
+          }
+        }
+      });
+
+      dataSource.read();
+    </script>
+
 ### schema.model `Object`
 
 The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel](/api/javascript/data/treelistmodel) for more info.

@@ -222,6 +222,25 @@ A value that determines how many columns will the tile item span.
 
 Holds the configuration settings for the header.
 
+#### Example
+
+    <div id="tilelayout"></div>
+    <script>
+    $("#tilelayout").kendoTileLayout({
+        containers: [
+            {
+                colSpan: 2,
+                rowSpan: 1,
+                bodyTemplate: "<p>Container with header configuration</p>",
+                header: {
+                    template: "<h3>Custom Header</h3>"
+                }
+            }
+        ],
+        columns: 4
+    });
+    </script>
+
 ### containers.header.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) that will be rendered as a header.
@@ -371,6 +390,36 @@ A value that determines how many rows will the tile item span.
 ### gap `Object`
 
 An object holding values that determine the spacing between the layout items horizontally and vertically.
+
+#### Example
+
+    <div id="tilelayout"></div>
+    <script>
+    $("#tilelayout").kendoTileLayout({
+        containers: [
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                bodyTemplate: "<p>Item 1</p>"
+            },
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                bodyTemplate: "<p>Item 2</p>"
+            },
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                bodyTemplate: "<p>Item 3</p>"
+            }
+        ],
+        columns: 3,
+        gap: {
+            columns: 20,
+            rows: 15
+        }
+    });
+    </script>
 
 ### gap.columns `Number`
 

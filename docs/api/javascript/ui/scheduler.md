@@ -822,6 +822,79 @@ Sets the command which will be displayed in the scheduler footer. Currently only
 
 The configuration of the scheduler resource(s) grouping.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: [
+            "day",
+            { type: "workWeek", selected: true },
+            "week",
+            "month"
+        ],
+        timezone: "Etc/UTC",
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/meetings",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "meetingID",
+                    fields: {
+                        meetingID: { from: "MeetingID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        roomId: { from: "RoomID", nullable: true },
+                        attendees: { from: "Attendees", nullable: true },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        },
+        group: {
+            resources: ["Rooms", "Attendees"],
+            orientation: "horizontal"
+        },
+        resources: [
+            {
+                field: "roomId",
+                name: "Rooms",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                    { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                ],
+                title: "Room"
+            },
+            {
+                field: "attendees",
+                name: "Attendees",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#f8a398" },
+                    { text: "Bob", value: 2, color: "#51a0ed" },
+                    { text: "Charlie", value: 3, color: "#56ca85" }
+                ],
+                multiple: true,
+                title: "Attendees"
+            }
+        ]
+    });
+    </script>
+
 ### group.date `Boolean` *(default: false)*
 
 If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
@@ -1101,6 +1174,38 @@ Constraints the maximum date which can be selected via the scheduler navigation.
 ### messages `Object`
 
 The configuration of the scheduler messages. Use this option to customize or localize the scheduler messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        messages: {
+            allDay: "Full day",
+            ariaEventLabel: "Event at {0:M/d/yyyy h:mm tt}",
+            ariaSlotLabel: "Time slot",
+            cancel: "Abort",
+            deleteWindowTitle: "Remove event",
+            destroy: "Remove",
+            save: "Store",
+            today: "Current day",
+            defaultRowText: "All events"
+        }
+    });
+    </script>
 
 ### messages.allDay `String`
 
@@ -1632,6 +1737,34 @@ The text similar to "Today" displayed in scheduler.
 
 The configuration of the scheduler editable messages. Use this option to customize or localize the scheduler editable messages.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        messages: {
+            editable: {
+                confirmation: "Are you sure you want to delete this event?",
+                destroy: "Delete",
+                save: "Save"
+            }
+        }
+    });
+    </script>
+
 ### messages.editable.confirmation `String`
 
 The text similar to "Are you sure you want to delete this event?" displayed in scheduler.
@@ -1666,6 +1799,44 @@ The text similar to "Are you sure you want to delete this event?" displayed in s
 ### messages.editor `Object`
 
 The configuration of the scheduler editor messages. Use this option to customize or localize the scheduler editor messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        messages: {
+            editor: {
+                allDayEvent: "Full day event",
+                description: "Event description",
+                editorTitle: "Event Editor",
+                end: "End time",
+                endTimezone: "End timezone",
+                repeat: "Recurrence",
+                separateTimezones: "Use separate start and end time zones",
+                start: "Start time",
+                startTimezone: "Start timezone",
+                timezone: "Timezone",
+                timezoneEditorButton: "Time zone",
+                timezoneEditorTitle: "Time zones",
+                title: "Event title"
+            }
+        }
+    });
+    </script>
 
 ### messages.editor.allDayEvent `String`
 
@@ -2009,13 +2180,116 @@ The text similar to "Title of the event" displayed in the scheduler event editor
 
 The configuration of the scheduler recurrence editor messages. Use this option to customize or localize the scheduler recurrence editor messages.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting",
+                recurrenceRule: "FREQ=WEEKLY;BYDAY=MO"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                cancel: "Cancel",
+                headerTitle: "Repeat",
+                frequencies: {
+                    never: "Never",
+                    hourly: "Hourly",
+                    daily: "Daily",
+                    weekly: "Weekly",
+                    monthly: "Monthly",
+                    yearly: "Yearly"
+                },
+                daily: {
+                    repeatEvery: "Repeat every: ",
+                    interval: " day(s)"
+                },
+                weekly: {
+                    repeatEvery: "Repeat every: ",
+                    interval: " week(s) on:",
+                    repeatOn: "Repeat on:"
+                },
+                update: "Update"
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.cancel `String`
 
 Applicable in Scheduler Adaptive rendering scenario. The text for the cancel button on the scheduler recurrence editor header.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting",
+                recurrenceRule: "FREQ=WEEKLY;BYDAY=MO"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                cancel: "Abort"
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.daily `Object`
 
 The configuration of the scheduler recurrence editor daily messages. Use this option to customize or localize the scheduler recurrence editor daily messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Daily Meeting",
+                recurrenceRule: "FREQ=DAILY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                daily: {
+                    repeatEvery: "Repeat every: ",
+                    interval: " day(s)"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.daily.interval `String`
 
@@ -2076,6 +2350,40 @@ The text similar to "Repeat every: " displayed in the scheduler recurrence edito
 ### messages.recurrenceEditor.end `Object`
 
 The configuration of the scheduler recurrence editor end messages. Use this option to customize or localize the scheduler recurrence editor end messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Weekly Meeting",
+                recurrenceRule: "FREQ=WEEKLY;COUNT=10"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                end: {
+                    after: "After ",
+                    occurrence: " occurrence(s)",
+                    label: "End",
+                    never: "Never",
+                    mobileLabel: "Ends",
+                    on: "On "
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.end.after `String`
 
@@ -2251,9 +2559,70 @@ The text similar to "On " displayed in the scheduler recurrence editor.
 
 Applicable in Scheduler Adaptive rendering scenario. The text for the endTitle (end repeat on) on the scheduler recurrence editor.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Meeting",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                endTitle: "End Repeat"
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.frequencies `Object`
 
 The configuration of the scheduler recurrence editor frequencies messages. Use this option to customize or localize the scheduler recurrence editor frequencies messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Event",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                frequencies: {
+                    never: "Never",
+                    hourly: "Hourly",
+                    daily: "Daily",
+                    weekly: "Weekly",
+                    monthly: "Monthly",
+                    yearly: "Yearly"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.frequencies.daily `String`
 
@@ -2399,9 +2768,69 @@ The text similar to "Yearly" displayed in the scheduler recurrence editor.
 
 Applicable in Scheduler Adaptive rendering scenario. The text for the headerTitle (text in the header) on the scheduler recurrence editor.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Meeting",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                headerTitle: "Edit Recurrence"
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.monthly `Object`
 
 The configuration of the scheduler recurrence editor monthly messages. Use this option to customize or localize the scheduler recurrence editor monthly messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Monthly Meeting",
+                recurrenceRule: "FREQ=MONTHLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                monthly: {
+                    day: "Day ",
+                    interval: " month(s)",
+                    of: " of ",
+                    repeatEvery: "Repeat every: ",
+                    repeatOn: "Repeat on: "
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.monthly.day `String`
 
@@ -2547,6 +2976,39 @@ The text similar to "Repeat on: " displayed in the scheduler recurrence editor.
 
 The configuration of the scheduler recurrence editor `offsetPositions` messages. Use this option to customize or localize the scheduler recurrence editor `offsetPositions` messages.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Monthly Meeting",
+                recurrenceRule: "FREQ=MONTHLY;BYSETPOS=1;BYDAY=MO"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                offsetPositions: {
+                    first: "first",
+                    second: "second",
+                    third: "third",
+                    fourth: "fourth",
+                    last: "last"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.offsetPositions.first `String`
 
 The text similar to "first" displayed in the scheduler recurrence editor.
@@ -2691,17 +3153,129 @@ The text similar to "last" displayed in the scheduler recurrence editor.
 
 The text of the Recurence editor dropdown title.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Meeting",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                recurrenceEditorTitle: "Edit Recurrence"
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.repeatTitle `String`
 
 Applicable in Scheduler Adaptive rendering scenario. The text for the repeatTitle (repeat on) on the scheduler recurrence editor.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Meeting",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                repeatTitle: "Repeat On"
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.update `String`
 
 Applicable in Scheduler Adaptive rendering scenario. The text for the update button on the scheduler recurrence editor header.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Meeting",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                update: "Update"
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.weekly `Object`
 
 The configuration of the scheduler recurrence editor weekly messages. Use this option to customize or localize the scheduler recurrence editor weekly messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Weekly Meeting",
+                recurrenceRule: "FREQ=WEEKLY;BYDAY=MO"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                weekly: {
+                    interval: " week(s) on:",
+                    repeatEvery: "Repeat every: ",
+                    repeatOn: "Repeat on:"
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.weekly.interval `String`
 
@@ -2791,6 +3365,37 @@ The text similar to "Repeat on: " displayed in the scheduler recurrence editor.
 
 The configuration of the scheduler recurrence editor week days messages. Use these options to customize or localize the scheduler recurrence editor weekdays messages.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Weekly Meeting",
+                recurrenceRule: "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                weekdays: {
+                    day: "day",
+                    weekday: "weekday",
+                    weekend: "weekend day"
+                }
+            }
+        }
+    });
+    </script>
+
 ### messages.recurrenceEditor.weekdays.day `String`
 
 The text similar to "day" displayed in the repeat by section of the monthly recurrence pattern.
@@ -2878,6 +3483,40 @@ The text similar to "weekend" displayed in the repeat by section of the monthly 
 ### messages.recurrenceEditor.yearly `Object`
 
 The configuration of the scheduler recurrence editor yearly messages. Use this option to customize or localize the scheduler recurrence editor yearly messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Annual Meeting",
+                recurrenceRule: "FREQ=YEARLY"
+            }
+        ],
+        messages: {
+            recurrenceEditor: {
+                yearly: {
+                    day: "day",
+                    interval: " year(s)",
+                    month: "month",
+                    of: " of ",
+                    repeatEvery: "Repeat every: ",
+                    repeatOn: "Repeat on: "
+                }
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceEditor.yearly.day `String`
 
@@ -3050,6 +3689,40 @@ The text similar to " year(s)" displayed in the scheduler recurrence editor.
 ### messages.recurrenceMessages `Object`
 
 The configuration of the scheduler recurrence messages. Use this option to customize or localize the scheduler recurrence messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Recurring Meeting",
+                recurrenceRule: "FREQ=WEEKLY"
+            }
+        ],
+        messages: {
+            recurrenceMessages: {
+                deleteRecurring: "Do you want to delete only this event occurrence or the whole series?",
+                deleteWindowOccurrence: "Delete current occurrence",
+                deleteWindowSeries: "Delete the series",
+                deleteWindowTitle: "Delete Recurring Item",
+                editRecurring: "Do you want to edit only this event occurrence or the whole series?",
+                editWindowOccurrence: "Edit current occurrence",
+                editWindowSeries: "Edit the series",
+                editWindowTitle: "Edit Recurring Item"
+            }
+        }
+    });
+    </script>
 
 ### messages.recurrenceMessages.deleteRecurring `String`
 
@@ -3313,6 +3986,36 @@ The Search input title and placeholder text.
 ### messages.views `Object`
 
 The configuration of the scheduler views messages. Use this option to customize or localize the scheduler views messages.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "workWeek", "week", "month", "agenda"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        messages: {
+            views: {
+                day: "Day",
+                week: "Week",
+                workWeek: "Work Week",
+                agenda: "Agenda",
+                month: "Month"
+            }
+        }
+    });
+    </script>
 
 ### messages.views.day `String`
 
@@ -3771,6 +4474,46 @@ If set to `false` the ongoing events will be highlighted in the scheduler [timez
 
 Configures the Kendo UI Scheduler PDF export settings.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            author: "John Doe",
+            creator: "Scheduler App",
+            date: new Date(),
+            fileName: "Scheduler.pdf",
+            forceProxy: true,
+            keywords: "scheduler export",
+            landscape: true,
+            margin: {
+                bottom: "1cm",
+                left: "1cm",
+                right: "1cm", 
+                top: "1cm"
+            },
+            paperSize: "A4",
+            subject: "Scheduler Export",
+            title: "My Schedule"
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
+
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
@@ -3802,12 +4545,62 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            autoPrint: true
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
 It's also possible to pass a CSS selector as argument. All matching links will be ignored.
 
 > Available in versions 2015.3.1020 and later
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            avoidLinks: true
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
@@ -3887,13 +4680,89 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/scheduler#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            forceProxy: true,
+            proxyURL: "/save"
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            jpegQuality: 0.8
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            keepPNG: true
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -3980,17 +4849,125 @@ units are "mm", "cm", "in" and "pt" (default).
 
 The bottom margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            margin: {
+                bottom: "2cm"
+            }
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            margin: {
+                left: "1.5cm"
+            }
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            margin: {
+                right: "1.5cm"
+            }
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        pdf: {
+            margin: {
+                top: "2cm"
+            }
+        },
+        toolbar: ["pdf"]
+    });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
@@ -4149,6 +5126,75 @@ Sets the title of the PDF file.
 
 The configuration of the scheduler resource(s). A scheduler resource is optional metadata that can be associated
 with a scheduler event.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: [
+            "day",
+            { type: "workWeek", selected: true },
+            "week",
+            "month"
+        ],
+        timezone: "Etc/UTC",
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/meetings",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "meetingID",
+                    fields: {
+                        meetingID: { from: "MeetingID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        roomId: { from: "RoomID", nullable: true },
+                        attendees: { from: "Attendees", nullable: true },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        },
+        resources: [
+            {
+                field: "roomId",
+                name: "Rooms",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                    { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                ],
+                title: "Room"
+            },
+            {
+                field: "attendees",
+                name: "Attendees",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#f8a398" },
+                    { text: "Bob", value: 2, color: "#51a0ed" },
+                    { text: "Charlie", value: 3, color: "#56ca85" }
+                ],
+                multiple: true,
+                title: "Attendees"
+            }
+        ]
+    });
+    </script>
 
 ### resources.dataColorField `String` *(default: "color")*
 
@@ -5057,6 +6103,30 @@ By using the `items.mobile.navigation` field, you can specify any kind and numbe
 
 The name of the command.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        toolbar: [
+            { name: "pdf" },
+            { name: "today" }
+        ]
+    });
+    </script>
 
 ### views `Array`
 
@@ -5874,6 +6944,72 @@ The fields which can be used in the template are:
 
 The configuration of the view resource(s) grouping.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        timezone: "Etc/UTC",
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/meetings",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "meetingID",
+                    fields: {
+                        meetingID: { from: "MeetingID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        roomId: { from: "RoomID", nullable: true },
+                        attendees: { from: "Attendees", nullable: true },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        },
+        views: [
+            {
+                type: "workWeek",
+                selected: true,
+                group: {
+                    resources: ["Rooms", "Attendees"],
+                    orientation: "horizontal"
+                }
+            }
+        ],
+        resources: [
+            {
+                field: "roomId",
+                name: "Rooms",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                    { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                ],
+                title: "Room"
+            },
+            {
+                field: "attendees", 
+                name: "Attendees",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#f8a398" },
+                    { text: "Bob", value: 2, color: "#51a0ed" }
+                ],
+                multiple: true,
+                title: "Attendees"
+            }
+        ]
+    });
+    </script>
+
 ### views.group.date `Boolean` *(default: false)*
 
 If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
@@ -6224,6 +7360,36 @@ Contains two placeholders - "{0}" and "{1}" which represent the start and end da
 ### views.selectedShortDateFormat `String`
 
 The format used to display the selected date when viewport is narrow, and the date is displayed in short ("d") format by default. Uses [kendo.format](/api/javascript/kendo/methods/format).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            }
+        ],
+        views: [
+            {
+                type: "day",
+                selectedShortDateFormat: "dd/MM"
+            },
+            {
+                type: "week",
+                selectedShortDateFormat: "MMM dd"
+            }
+        ]
+    });
+    </script>
 
 ### views.showWorkHours `Boolean` *(default: false)*
 
@@ -6816,6 +7982,42 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
 
 The resources of the widget. Configured via the [resources](/api/javascript/ui/scheduler#configuration-resources) option.
 
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting",
+                roomId: 1
+            }
+        ],
+        resources: [
+            {
+                field: "roomId",
+                name: "Rooms",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                    { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                ],
+                title: "Room"
+            }
+        ]
+    });
+    
+    var scheduler = $("#scheduler").data("kendoScheduler");
+    console.log("Resources:", scheduler.resources);
+    </script>
+
 ### calendar `kendo.ui.Calendar`
 
 The [Calendar widget](/api/javascript/ui/calendar) of the Scheduler. The toolbar Calendar widget allows navigation directly to the chosen date. It will only be available after it has been opened for the first time.
@@ -7011,6 +8213,38 @@ The event which should be put in edit mode. Also accepts a string which is the `
 ### items
 
 Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+        date: new Date("2022/6/13"),
+        startTime: new Date("2022/6/13 07:00 AM"),
+        height: 600,
+        views: ["day", "week"],
+        timezone: "Etc/UTC",
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2022/6/13 10:00 AM"),
+                end: new Date("2022/6/13 11:00 AM"),
+                title: "Team Meeting"
+            },
+            {
+                id: 2,
+                start: new Date("2022/6/13 14:00 PM"),
+                end: new Date("2022/6/13 15:00 PM"),
+                title: "Project Review"
+            }
+        ]
+    });
+    
+    var scheduler = $("#scheduler").data("kendoScheduler");
+    var items = scheduler.items();
+    console.log("Number of event elements:", items.length);
+    console.log("First event element:", items[0]);
+    </script>
 
 #### Returns
 

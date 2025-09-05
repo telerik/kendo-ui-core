@@ -18,6 +18,38 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 The schema configuration of the GanttDataSource.
 
+#### Example
+
+    <script>
+    var dataSource = new kendo.data.GanttDataSource({
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/service/v2/core/GanttTasks",
+          type: "POST",
+          contentType: "application/json"
+        }
+      },
+      schema: {
+        model: {
+          id: "id",
+          fields: {
+            id: { type: "number" },
+            title: { type: "string" },
+            start: { type: "date" },
+            end: { type: "date" },
+            parentId: { type: "number", nullable: true }
+          }
+        },
+        data: "data",
+        total: "total"
+      }
+    });
+    dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("Data loaded:", this.data().length + " tasks");
+    });
+    </script>
+
 ### schema.model `Object`
 
 The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework/gantttask#configuration) for more information.

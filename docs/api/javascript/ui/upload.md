@@ -250,6 +250,19 @@ Controls whether to send credentials (cookies, headers) for cross-site requests.
 
 > If the browser does not support the File API, `async.withCredentials` is ignored.
 
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <script>
+        $("#files").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                withCredentials: false
+            }
+        });
+    </script>
+
 ### directory `Boolean` *(default: false)*
 
 Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The `directory` setting is available only in browsers which support [`webkitdirectory`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
@@ -370,13 +383,70 @@ Each file object in the array has to contain the following properties:
 
 The extension of the initial file.
 
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <script>
+        var files = [
+            { name: "Document.pdf", extension: ".pdf", size: 98366 },
+            { name: "Image.jpg", extension: ".jpg", size: 10300 }
+        ];
+
+        $("#files").kendoUpload({
+            async: {
+                saveUrl: "Home/Save",
+                removeUrl: "Home/Remove",
+                autoUpload: true
+            },
+            files: files
+        });
+    </script>
+
 ### files.name `String`
 
 The name of the initial file.
 
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <script>
+        var files = [
+            { name: "Report.docx", extension: ".docx", size: 45128 },
+            { name: "Presentation.pptx", extension: ".pptx", size: 78521 }
+        ];
+
+        $("#files").kendoUpload({
+            async: {
+                saveUrl: "Home/Save",
+                removeUrl: "Home/Remove",
+                autoUpload: true
+            },
+            files: files
+        });
+    </script>
+
 ### files.size `Number`
 
 The size of the initial file.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <script>
+        var files = [
+            { name: "Manual.pdf", extension: ".pdf", size: 1024000 },
+            { name: "Photo.png", extension: ".png", size: 256000 }
+        ];
+
+        $("#files").kendoUpload({
+            async: {
+                saveUrl: "Home/Save",
+                removeUrl: "Home/Remove",
+                autoUpload: true
+            },
+            files: files
+        });
+    </script>
 
 ### localization `Object`
 

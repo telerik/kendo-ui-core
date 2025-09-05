@@ -49,11 +49,49 @@ The element **should be positioned absolutely/relatively**, and contain two chil
 
 The axis of the page turn. Supported axes are `"horizontal"` and `"vertical"`.
 
+#### Example
+
+    <div id="container">
+        <div class="back-page">Back Page</div>
+        <div class="front-page">Front Page</div>
+    </div>
+    <script>
+    // Horizontal page turn
+    kendo.fx($("#container")).pageturn("horizontal", $(".front-page"), $(".back-page")).play();
+    
+    // Vertical page turn
+    kendo.fx($("#container")).pageturn("vertical", $(".front-page"), $(".back-page")).play();
+    </script>
+
 ### face `jQuery`
 
 The initially visible element in the container.
 
+#### Example
+
+    <div id="container">
+        <div class="back-content">This will be revealed</div>
+        <div class="face-content">This is initially visible</div>
+    </div>
+    <script>
+    var face = $(".face-content");
+    var back = $(".back-content");
+    kendo.fx($("#container")).pageturn("horizontal", face, back).play();
+    </script>
+
 ### back `jQuery`
 
 The finally visible element in the container.
+
+#### Example
+
+    <div id="container">
+        <div class="hidden-page">This will be shown after the page turn</div>
+        <div class="visible-page">This is currently visible</div>
+    </div>
+    <script>
+    var face = $(".visible-page");
+    var back = $(".hidden-page");
+    kendo.fx($("#container")).pageturn("vertical", face, back).duration(1500).play();
+    </script>
 

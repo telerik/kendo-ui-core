@@ -16,33 +16,155 @@ Represents the Kendo UI RangeSlider widget. Inherits from [Widget](/api/javascri
 The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: The allied `largeStep` will also set large tick for every large step.
 
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            largeStep: 10,
+            min: 0,
+            max: 100,
+            selectionStart: 20,
+            selectionEnd: 60
+        });
+    </script>
+
 ### leftDragHandleTitle `String`*(default: "drag")*
 
 The title of the left drag handle of the **RangeSlider**.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            leftDragHandleTitle: "Start Value",
+            rightDragHandleTitle: "End Value",
+            selectionStart: 20,
+            selectionEnd: 60
+        });
+    </script>
 
 ### max `Number`*(default: 10)*
 
 The maximum value of the **RangeSlider**.
 
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            min: 0,
+            max: 200,
+            selectionStart: 50,
+            selectionEnd: 150
+        });
+    </script>
+
 ### min `Number`*(default: 0)*
 
 The minimum value of the **RangeSlider**.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            min: 10,
+            max: 100,
+            selectionStart: 25,
+            selectionEnd: 75
+        });
+    </script>
 
 ### orientation `String`*(default: "horizontal")*
 
 The orientation of a **RangeSlider** - `"horizontal"` or `"vertical"`.
 
+#### Example
+
+    <div id="rangeslider" style="height: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            orientation: "vertical",
+            min: 0,
+            max: 100,
+            selectionStart: 20,
+            selectionEnd: 80
+        });
+    </script>
+
 ### rightDragHandleTitle `String`*(default: "drag")*
 
 The title of the right drag handle of the **RangeSlider**.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            leftDragHandleTitle: "Minimum",
+            rightDragHandleTitle: "Maximum",
+            selectionStart: 10,
+            selectionEnd: 80
+        });
+    </script>
 
 ### selectionEnd `Number`
 
 The selection end value of the **RangeSlider**.
 
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            min: 0,
+            max: 100,
+            selectionStart: 25,
+            selectionEnd: 75
+        });
+    </script>
+
 ### selectionStart `Number`
 
 The selection start value of the **RangeSlider**.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            min: 0,
+            max: 100,
+            selectionStart: 30,
+            selectionEnd: 70
+        });
+    </script>
 
 ### smallStep `Number`*(default: 1)*
 
@@ -50,9 +172,44 @@ The small step value of the **RangeSlider**. The underlying value will be change
 user (1) clicks on the increase or decrease buttons of the **RangeSlider**, (2) presses the
 arrow keys (the drag handle must be focused), or (3) drags the drag handle.
 
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            smallStep: 2,
+            largeStep: 20,
+            min: 0,
+            max: 100,
+            selectionStart: 20,
+            selectionEnd: 60
+        });
+    </script>
+
 ### tickPlacement `String`*(default: "both")*
 
 Denotes the location of the tick marks in the **RangeSlider**. The available options are:
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            tickPlacement: "topLeft",
+            min: 0,
+            max: 100,
+            selectionStart: 25,
+            selectionEnd: 75,
+            smallStep: 5,
+            largeStep: 25
+        });
+    </script>
 
 #### *"topLeft"*
 
@@ -75,14 +232,69 @@ Tick marks are not visible.
 
 Configuration of the **RangeSlider** tooltip.
 
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            tooltip: {
+                enabled: true,
+                format: "Value: {0}%"
+            },
+            min: 0,
+            max: 100,
+            selectionStart: 30,
+            selectionEnd: 70
+        });
+    </script>
+
 ### tooltip.enabled `Boolean`*(default: true)*
 
 Disables (**false**) or enables (**true**) the tooltip of the **RangeSlider**.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            tooltip: {
+                enabled: false
+            },
+            min: 0,
+            max: 100,
+            selectionStart: 25,
+            selectionEnd: 75
+        });
+    </script>
 
 ### tooltip.format `String`*(default: "{0}")*
 
 Format string for the text of the tooltip. Note: The applied format will also influence the appearance of
 the **RangeSlider** tick labels.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            tooltip: {
+                format: "n2"
+            },
+            min: 0,
+            max: 100,
+            selectionStart: 12.345,
+            selectionEnd: 67.890
+        });
+    </script>
 
 ### tooltip.template `String`
 
@@ -90,6 +302,24 @@ Template of the tooltip.
 
 *   **selectionStart** - the current selectionStart.
 *   **selectionEnd** - the current selectionEnd.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            tooltip: {
+                template: (data) => `Range: ${data.selectionStart} - ${data.selectionEnd}`
+            },
+            min: 0,
+            max: 100,
+            selectionStart: 20,
+            selectionEnd: 80
+        });
+    </script>
 
 ## Methods
 
@@ -237,6 +467,26 @@ Adjusts the RangeSlider layout to match the size of the container.
 
 Fires when the RangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
 
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            change: function(e) {
+                console.log("Range changed to:", e.value);
+                console.log("Start value:", e.value[0]);
+                console.log("End value:", e.value[1]);
+            },
+            min: 0,
+            max: 100,
+            selectionStart: 20,
+            selectionEnd: 80
+        });
+    </script>
+
 #### Event Data
 
 ##### e.value `Array`
@@ -246,6 +496,26 @@ Represents the updated array of values of the first and second drag handle.
 ### slide
 
 Fires when the user drags the drag handle to a new position.
+
+#### Example
+
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $("#rangeslider").kendoRangeSlider({
+            slide: function(e) {
+                console.log("Sliding - current positions:", e.value);
+                console.log("Start position:", e.value[0]);
+                console.log("End position:", e.value[1]);
+            },
+            min: 0,
+            max: 100,
+            selectionStart: 30,
+            selectionEnd: 70
+        });
+    </script>
 
 #### Event Data
 

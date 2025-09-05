@@ -603,11 +603,61 @@ Sets specific height for the event in horizontal mode.
 
 > This setting is supported only in horizontal mode.
 
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $("#timeline").kendoTimeline({
+        dataSource: [
+            {
+                date: new Date(2020, 10, 10),
+                title: "Barcelona \u0026 Tenerife",
+                subtitle: "Spain",
+                description: "The 2020 Spanish election",
+                altField: "Canary Islands"
+            },
+            {
+                date: new Date(2020, 10, 15),
+                title: "United States",
+                subtitle: "Elections",
+                description: "The 2020 US election"
+            }
+        ],
+        orientation: "horizontal",
+        eventHeight: 400
+    });
+    </script>
+
 ### eventWidth `Number`*(default: 400)*
 
 Sets specific width for the event in vertical mode.
 
 > This method is supported only in vertical mode.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $("#timeline").kendoTimeline({
+        dataSource: [
+            {
+                date: new Date(2020, 10, 10),
+                title: "Barcelona \u0026 Tenerife",
+                subtitle: "Spain",
+                description: "The 2020 Spanish election",
+                altField: "Canary Islands"
+            },
+            {
+                date: new Date(2020, 10, 15),
+                title: "United States",
+                subtitle: "Elections",
+                description: "The 2020 US election"
+            }
+        ],
+        orientation: "vertical",
+        eventWidth: 500
+    });
+    </script>
 
 ### navigatable `Boolean`*(default: false)*
 
@@ -1048,6 +1098,31 @@ If invoked, prevents the change action.
 ### dataBound
 
 Fires when the Timeline is bound to data.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $("#timeline").kendoTimeline({
+        dataSource: [
+            {
+                date: new Date(2020, 10, 10),
+                title: "Barcelona \u0026 Tenerife",
+                subtitle: "Spain",
+                description: "The 2020 Spanish election"
+            },
+            {
+                date: new Date(2020, 10, 15),
+                title: "United States",
+                subtitle: "Elections",
+                description: "The 2020 US election"
+            }
+        ],
+        dataBound: function(e) {
+            console.log("Timeline data bound");
+        }
+    });
+    </script>
 
 #### Event Data
 

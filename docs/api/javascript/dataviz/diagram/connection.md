@@ -43,21 +43,126 @@ Defines the options for the label displayed on the connection path.
 
 The color of the connection content text.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Connection",
+          color: "red"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### content.fontFamily `String`
 
 The font family of the connection content text.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Connection",
+          fontFamily: "Arial"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### content.fontSize `Number`
 
 The font size of the connection content text.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Connection",
+          fontSize: 16
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### content.fontStyle `String`
 
 The font style of the connection content text.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Connection",
+          fontStyle: "italic"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### content.fontWeight `String`
 
 The font weight of the connection content text.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Connection",
+          fontWeight: "bold"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### content.template `String|Function`
 
@@ -67,9 +172,51 @@ The fields which can be used in the template are:
 
 * dataItem - the data item, in case a field has been specified
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          template: function(dataItem){
+            return `Connection --->`
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### content.text `String`
 
 The static text displayed on the connection.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Custom Connection Text"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### content.visual `Function`
 
@@ -130,9 +277,45 @@ Specifies the name of the source shape connector that should be used by default.
 
 The absolute point (X-coordinate), if any, that the connection is originating from.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+
+      var connection = new kendo.dataviz.diagram.Connection({
+        fromX: 100,
+        fromY: 150,
+        toX: 300,
+        toY: 200,
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### fromY `Number`
 
 The absolute point (Y-coordinate), if any, that the connection is originating from.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+
+      var connection = new kendo.dataviz.diagram.Connection({
+        fromX: 150,
+        fromY: 100,
+        toX: 350,
+        toY: 250,
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### stroke `Object`
 
@@ -165,6 +348,26 @@ Defines the stroke configuration.
 
 Defines the stroke or line color of the connection.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        stroke: {
+          color: "blue"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### stroke.dashType `String`
 
 Specifies the stroke dash type.
@@ -179,17 +382,103 @@ The following dash types are supported:
 * "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
 * "solid" - A solid line
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        stroke: {
+          dashType: "dot"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### stroke.width `Number`
 
 Defines the stroke width of the connection.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        stroke: {
+          width: 3
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### hover `Object`
 
 Defines the hover configuration.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        hover: {
+          stroke: {
+            color: "orange",
+            width: 2
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### hover.stroke `Object`
 
 Defines the hover stroke configuration.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        hover: {
+          stroke: {
+            color: "red",
+            width: 3
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### hover.stroke.color `String`
 
@@ -252,29 +541,187 @@ The connection start cap configuration or type name.
 
 The connection start cap fill options or color.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          fill: "red"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### startCap.fill.color `String` *(default: "black")*
 
 The connection start cap fill color.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          fill: {
+            color: "green"
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### startCap.fill.opacity
 
 The connection start cap fill opacity.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          fill: {
+            color: "blue",
+            opacity: 0.5
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### startCap.stroke `String|Object`
 
 The connection start cap stroke options or color.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          stroke: "red"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### startCap.stroke.color `String`
 
 The connection start cap stroke color.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          stroke: {
+            color: "purple"
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### startCap.stroke.dashType `String`
 
 The connection start cap stroke dash type.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          stroke: {
+            dashType: "dash"
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### startCap.stroke.width `Number`
 
 The connection start cap stroke width.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "arrow",
+          stroke: {
+            width: 3
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### startCap.type `String` *(default: "none")*
 
@@ -285,6 +732,26 @@ The supported values are:
 * "none": no cap
 * "ArrowStart": a filled arrow
 * "FilledCircle": a filled circle
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        startCap: {
+          type: "FilledCircle"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### endCap `String|Object`
 
@@ -316,29 +783,187 @@ The connection end cap configuration or type name.
 
 The connection end cap fill options or color.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          fill: "orange"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### endCap.fill.color `String` *(default: "black")*
 
 The connection end cap fill color.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          fill: {
+            color: "purple"
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### endCap.fill.opacity
 
 The connection end cap fill opacity.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          fill: {
+            color: "yellow",
+            opacity: 0.7
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### endCap.stroke `String|Object`
 
 The connection end cap stroke options or color.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          stroke: "black"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### endCap.stroke.color `String`
 
 The connection end cap stroke color.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          stroke: {
+            color: "cyan"
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### endCap.stroke.dashType `String`
 
 The connection end cap stroke dash type.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          stroke: {
+            dashType: "dot"
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### endCap.stroke.width `Number`
 
 The connection end cap stroke width.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "ArrowEnd",
+          stroke: {
+            width: 4
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### endCap.type `String` *(default: "none")*
 
@@ -349,6 +974,26 @@ The supported values are:
 * "none": no cap
 * "ArrowEnd": a filled arrow
 * "FilledCircle": a filled circle
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        endCap: {
+          type: "FilledCircle"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### points `Array`
 
@@ -399,6 +1044,28 @@ Sets the X coordinate of the point.
 
 Sets the Y coordinate of the point.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      var Point = kendo.dataviz.diagram.Point;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        points: [
+          new Point(200, 50),
+          new Point(250, 150)
+        ],
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### selectable `Boolean` *(default: true)*
 
 Specifies if the connection can be selected.
@@ -444,9 +1111,45 @@ Specifies the name of the target shape connector that should be used by default.
 
 The absolute point (X-coordinate), if any, that the connection is pointing to.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+
+      var connection = new kendo.dataviz.diagram.Connection({
+        fromX: 50,
+        fromY: 100,
+        toX: 250,
+        toY: 150,
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+
 ### toY `Number`
 
 The absolute point (Y-coordinate), if any, that the connection is pointing to.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+
+      var connection = new kendo.dataviz.diagram.Connection({
+        fromX: 75,
+        fromY: 50,
+        toX: 275,
+        toY: 200,
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
 
 ### type `String`
 

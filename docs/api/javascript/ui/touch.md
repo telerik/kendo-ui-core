@@ -235,6 +235,23 @@ Prepares the **Touch** for safe removal from DOM. Detaches all event handlers an
 
 > **Important:** This method does not remove the Touch element from DOM.
 
+#### Example
+
+    <div id="touch">Touch me</div>
+    <script>
+    var touch = $("#touch").kendoTouch({
+        tap: function(e) {
+            console.log("Touch tapped");
+        }
+    });
+    
+    // Get the Touch widget instance
+    var touchWidget = touch.data("kendoTouch");
+    
+    // Destroy the Touch widget
+    touchWidget.destroy();
+    </script>
+
 ## Events
 
 ### touchstart

@@ -30,8 +30,36 @@ Draws a bitmap image with a given source URL into the specified [rectangle](/api
 ### src `String`
 The source URL of the image.
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
+
 ### rect `kendo.geometry.Rect`
 A rectangle defining the position and size of the image.
+
+#### Example
+
+    <div id="surface" style="width: 300px; height: 200px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([50, 30], [200, 120]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 ## Configuration
 
@@ -39,30 +67,147 @@ A rectangle defining the position and size of the image.
 The element clipping path.
 Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        var clipPath = new draw.Path();
+        clipPath.moveTo(60, 60).lineTo(160, 60).lineTo(160, 160).lineTo(60, 160).close();
+        image.clip(clipPath);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
+
 ### cursor `String`
 The element cursor.
 Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        image.cursor = "pointer";
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 ### opacity `Number`
 The element opacity.
 Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        image.opacity = 0.5;
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
+
 ### tooltip `kendo.drawing.TooltipOptions`
 The tooltip options of the shape.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        image.tooltip = {
+            content: "Beautiful Tenerife landscape"
+        };
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+        <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [150, 100]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        image.transform(geom.transform().rotate(30, [85, 60]));
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
+
 ### visible `Boolean`
 A flag, indicating if the element is visible.
 Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        image.visible = false; // Image will not be visible
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+        
+        setTimeout(function() {
+            image.visible = true; // Make image visible after 2 seconds
+        }, 2000);
+    </script>
 
 ## Methods
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
 Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        var bbox = image.bbox();
+        console.log("Bounding box:", bbox.origin.x, bbox.origin.y, bbox.size.width, bbox.size.height);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with transformations applied.
@@ -71,6 +216,26 @@ Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
 ### clip
 Gets or sets the element clipping path.
 Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        var clipPath = new draw.Path();
+        clipPath.moveTo(50, 50).lineTo(150, 50).lineTo(150, 150).lineTo(50, 150).close();
+        
+        image.clip(clipPath);
+        console.log("Clip path set:", image.clip());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 #### Parameters
 
@@ -85,11 +250,52 @@ The element clipping path.
 Returns the bounding box of the element with clipping and transformations applied.
 Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        var clipPath = new draw.Path();
+        clipPath.moveTo(50, 50).lineTo(150, 50).lineTo(150, 150).lineTo(50, 150).close();
+        image.clip(clipPath);
+        
+        var clippedBBox = image.clippedBBox();
+        console.log("Clipped bounding box:", clippedBBox);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
+
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
 
 ### containsPoint
 Returns true if the shape contains the specified point.
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([50, 50], [150, 100]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        var point1 = new geom.Point(100, 80);
+        var point2 = new geom.Point(250, 200);
+        
+        console.log("Point 1 in image:", image.containsPoint(point1)); // Should return true
+        console.log("Point 2 in image:", image.containsPoint(point2)); // Should return false
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 #### Parameters
 
@@ -102,6 +308,24 @@ The point that should be checked.
 ### opacity
 Gets or sets the element opacity.
 Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        console.log("Initial opacity:", image.opacity()); // Default is 1
+        image.opacity(0.3);
+        console.log("New opacity:", image.opacity());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
 
 #### Parameters
 
@@ -185,6 +409,24 @@ The new image rectangle.
 Gets or sets the transformation of the element.
 Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
 
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([50, 50], [100, 80]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        var transform = geom.transform().rotate(45, [100, 90]).scale(1.2, 1.2);
+        image.transform(transform);
+        console.log("Transform applied:", image.transform());
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+    </script>
+
 #### Parameters
 
 ##### transform `kendo.geometry.Transformation`
@@ -198,6 +440,32 @@ The transformation to apply to the element.
 ### visible
 Gets or sets the visibility of the element.
 Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
+
+#### Example
+
+    <div id="surface" style="width: 250px; height: 250px;"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var rect = new geom.Rect([10, 10], [200, 150]);
+        var image = new draw.Image("https://demos.telerik.com/kendo-ui/content/web/editor/tenerife.png", rect);
+        
+        console.log("Initial visibility:", image.visible()); // Default is true
+        
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(image);
+        
+        setTimeout(function() {
+            image.visible(false);
+            console.log("Visibility after hiding:", image.visible());
+        }, 1000);
+        
+        setTimeout(function() {
+            image.visible(true);
+            console.log("Visibility after showing:", image.visible());
+        }, 2000);
+    </script>
 
 #### Parameters
 

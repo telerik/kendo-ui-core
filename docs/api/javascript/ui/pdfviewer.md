@@ -74,9 +74,37 @@ Specifies the default file to be displayed.
 
 Specifies the the URL where the predefined Adobe CMaps are located. Further info in [the PDF.js API ref](https://github.com/mozilla/pdf.js/blob/master/src/display/api.js#L117).
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+            file: {
+                cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/cmaps/",
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### pdfjsProcessing.file.cMapPacked `Boolean`
 
 Specifies if the Adobe CMaps are binary packed. Further info in [the PDF.js API ref](https://github.com/mozilla/pdf.js/blob/master/src/display/api.js#L119).
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+            file: {
+                cMapPacked: true,
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### pdfjsProcessing.file.data `Blob | byte[] | String`
 
@@ -131,6 +159,7 @@ Specifies the DPL configuration options. For a complete demo and a backend imple
 
 #### Example
 
+```pseudo
     <div id="pdfviewer"></div>
     <script type="module">
         $("#pdfviewer").kendoPDFViewer({
@@ -152,42 +181,218 @@ Specifies the DPL configuration options. For a complete demo and a backend imple
             }
         });
     </script>
+```
 
 ### dplProcessing.read `Object`
 
 Specifies the configuration of the jQuery.ajax to make an HTTP request to the remote service.
 
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/read",
+                type: "POST",
+                dataType: "json"
+            }
+        }
+    });
+    </script>
+```
+
 ### dplProcessing.read.url `String`
 
 Specifies the url to which the request is sent.
+
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/documents/read"
+            }
+        }
+    });
+    </script>
+```
 
 ### dplProcessing.read.pageField `String` *(default: 'pageNumber')*
 
 Specifies the page field parameter submitted to the read url. It is used in scenario with `loadOnDemand` when requests are sent for each page.
 
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/read",
+                pageField: "page"
+            },
+            loadOnDemand: true
+        }
+    });
+    </script>
+```
+
 ### dplProcessing.read.type `String` *(default: 'GET')*
 Specifies the type of the request.
+
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/read",
+                type: "POST"
+            }
+        }
+    });
+    </script>
+```
 
 ### dplProcessing.read.dataType `String`
 The type of result expected from the server. Used values are "json" and "jsonp". The PDFViewer expects a json to render the geometries.
 
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/read",
+                dataType: "json"
+            }
+        }
+    });
+    </script>
+```
+
 ### dplProcessing.upload `Object`
 Specifies the configuration of the jQuery.ajax to make an HTTP POST request to the remote service.
+
+#### Example
+
+```psuedo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            upload: {
+                url: "/api/pdfviewer/upload",
+                saveField: "document"
+            }
+        }
+    });
+    </script>
+```
 
 ### dplProcessing.upload.url `String`
 Specifies the url that will receive the submitted file. The handler must accept `POST` requests.
 
+#### Example
+
+```psuedo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            upload: {
+                url: "/api/pdfviewer/documents/upload"
+            }
+        }
+    });
+    </script>
+```
+
 ### dplProcessing.upload.saveField `String` *(default: 'file')*
 Specifies the name of the form field which is submitted to saveUrl.
+
+#### Example
+
+```psuedo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            upload: {
+                url: "/api/pdfviewer/upload",
+                saveField: "pdfFile"
+            }
+        }
+    });
+    </script>
+```
 
 ### dplProcessing.download `Object`
 Specifies the download configuration.
 
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            download: {
+                url: "/api/pdfviewer/download"
+            }
+        }
+    });
+    </script>
+```
+
 ### dplProcessing.download.url `String`
 Specifies the download action url  that will be navigated to.
 
+#### Example
+
+```psuedo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            download: {
+                url: "/api/pdfviewer/documents/download"
+            }
+        }
+    });
+    </script>
+```
+
 ### dplProcessing.loadOnDemand `Boolean` *(default: false)*
 Specifies whether read requests should be sent for each page. Note that on the server the `pageField` should be nullable.
+
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/read",
+                pageField: "pageNumber"
+            },
+            loadOnDemand: true
+        }
+    });
+    </script>
+```
 
 ### width `Number|String` *(default: 1000)*
 
@@ -233,11 +438,61 @@ Specifies the default page size if no PDF is displayed in the PDFViewer. The pag
 
 ### defaultPageSize.width `Number` *(default: 794)*
 
+Specifies the default width in pixels for PDF pages when no document is loaded. The page will be automatically scaled to fit the viewer's dimensions while maintaining aspect ratio.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        defaultPageSize: {
+            width: 600
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### defaultPageSize.height `Number` *(default: 1123)*
+
+Specifies the default height in pixels for PDF pages when no document is loaded. The page will be automatically scaled to fit the viewer's dimensions while maintaining aspect ratio.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        defaultPageSize: {
+            height: 900
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### page `Number` *(default: 1)*
 
 The selected page number in the viewer.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        page: 3,
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### scale `Number`
 
@@ -307,6 +562,24 @@ Specifies the zoom rate that could be applied to the pages. Used when zooming on
 
 Defines the page surface options. This setting is available only for DPL Processing. The page render a drawing [Surface](/api/javascript/drawing/surface) and all of its configuration options could be defined.
 
+#### Example
+
+```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        view: {
+            type: "svg"
+        },
+        dplProcessing: {
+            read: {
+                url: "/api/pdfviewer/read"
+            }
+        }
+    });
+    </script>
+```
+
 ### view.type `String` *(default: "canvas")*
 
 Defines the surface type. It accepts `canvas` or `svg`. This option is supported only for DPL.
@@ -327,17 +600,41 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
 Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items` and `overflow` configuration. Inherits [Kendo UI Toolbar](/api/javascript/ui/toolbar).
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: ["pager", "spacer", "open", "download"],
+            contextMenu: false
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.contextMenu `Boolean` *(default: false)*
 
 When this option is set to true, the toolbar will render a dropdown button as its first item. The dropdown will contain the `open`, `download` and `print` tools instead of them being rendered on the right-side of the toolbar.
 
-    <div id="pdf-viewer"></div>
+#### Example
+
+    <div id="pdfviewer"></div>
     <script type="module">
-        $("#pdf-viewer").kendoPDFViewer({
-            toolbar: {
-                contextMenu: true
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            contextMenu: true
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
             }
-        });
+        }
+    });
     </script>
 
 ### toolbar.items `Array`
@@ -400,7 +697,50 @@ Apart from the built-in tools, the PDFViewer fully exposes the [ToolBar.items AP
 
 ### toolbar.items.type `String`
 
+Specifies the type of toolbar item to be rendered. Supported types include `button`, `separator`, `spacer`, `splitButton`, `buttonGroup`, and `template` as defined by the ToolBar component.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                { type: "button", text: "Custom Action" },
+                { type: "separator" },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.overflow `String`
+
+Specifies the overflow behavior of the toolbar item. Accepts `auto`, `never`, or `always` to control when the item appears in the toolbar's overflow menu.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                { type: "button", text: "Custom", overflow: "always" },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.command `String`
 
@@ -412,6 +752,25 @@ Default commands in the PDF Viewer are:
 * `EnableSelectionCommand`
 * `EnablePanCommand`
 * `ExportCommand`
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                { type: "pager", command: "PageChangeCommand" },
+                { type: "button", text: "Download", command: "DownloadCommand" }
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 * `PrintCommand`
 * `OpenSearchCommand`
 * `ZoomCommand`
@@ -419,17 +778,134 @@ Default commands in the PDF Viewer are:
 ### toolbar.items.name `String`
 Specifies the tool's name. Tool definition will be taken from the default collection - `kendo.pdfviewer.DefaultTools`
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                { name: "pager" },
+                { name: "zoom" },
+                { name: "open" }
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.click `Function`
 Specifies the click event handler of the button.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Custom",
+                    click: function(e) {
+                        console.log("Custom button clicked");
+                    }
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.toggle `Function`
 Specifies the toggle event handler of the button. Applicable only for commands of type `button` and `togglable: true`.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Toggle",
+                    togglable: true,
+                    toggle: function(e) {
+                        console.log("Toggle state: " + e.checked);
+                    }
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.togglable `Boolean` *(default: false)*
 Specifies if the button is togglable, e.g. has a selected and unselected state.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Selection Mode",
+                    togglable: true,
+                    command: "EnableSelectionCommand"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.text `String`
 Sets the text of the button.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "My Custom Action"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.template `String|Function`
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
@@ -453,35 +929,289 @@ Specifies what element will be added in the ToolBar wrapper. Items with template
 ### toolbar.items.showText `String` *(default: "both")*
 Specifies where the text will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Open File",
+                    command: "OpenCommand",
+                    showText: "toolbar"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.primary `Boolean` *(default: false)*
 Specifies whether the button is primary. Primary buttons receive different styling.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Important Action",
+                    primary: true
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.attributes `Object`
 Specifies the HTML attributes of a ToolBar button.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Custom",
+                    attributes: {
+                        "data-action": "custom",
+                        "title": "Custom Action"
+                    }
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.enable `Boolean` *(default: true)*
 Specifies whether the control is initially enabled or disabled. Default value is "true".
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Disabled",
+                    enable: false
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.hidden `Boolean` *(default: false)*
 Determines if a button is visible or hidden. By default buttons are visible.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Hidden Button",
+                    hidden: true
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.spriteCssClass `String`
 Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Custom Icon",
+                    spriteCssClass: "k-icon k-i-star"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.imageUrl `String`
 If set, the ToolBar will render an image with the specified URL in the button.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Custom Image",
+                    imageUrl: "/content/shared/icons/sports/snowboarding.png"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.showIcon `String` *(default: "both")*
 Specifies where the button icon will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Download",
+                    icon: "download",
+                    showIcon: "toolbar"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### toolbar.items.icon `String`
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Print",
+                    icon: "print"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.items.id `String`
 Specifies the ID of the button.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            items: [
+                {
+                    type: "button",
+                    text: "Custom",
+                    id: "my-custom-button"
+                },
+                "pager"
+            ]
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### toolbar.overflow `Object`
 Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) configuration for the toolbar.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 
 ### toolbar.overflow.mode `String` *(default: "menu")*
@@ -492,6 +1222,24 @@ Defines the overflow mode. The available options are:
 - `"section"` — Groups items into collapsible sections.
 - `"none"` — Disables overflow handling; items may be cut off.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            overflow: {
+                mode: "scroll"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 
 ### toolbar.overflow.scrollButtons `String` *(default: "auto")*
 
@@ -499,6 +1247,25 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 - `"auto"` — Displays scroll buttons only when needed.
 - `"hidden"` — Hides the scroll buttons at all times.
 - `"visible"` — Always shows the scroll buttons.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollButtons: "visible"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 
 ### toolbar.overflow.scrollButtonsPosition `String` *(default: "split")*
@@ -508,46 +1275,399 @@ Defines the placement of scroll buttons. The available options are:
 - `"start"` — Scroll buttons appear only at the start of the toolbar.
 - `"end"` — Scroll buttons appear only at the end of the toolbar.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollButtonsPosition: "end"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 
 ### toolbar.overflow.scrollDistance `Number` *(default: 50)*
 
 Specifies the distance (in pixels) the toolbar scrolls when a scroll button is clicked.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        toolbar: {
+            overflow: {
+                mode: "scroll",
+                scrollDistance: 100
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 
 ### messages `Object`
 
 Specifies the localization messages of the PDFViewer.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            defaultFileName: "My Document",
+            toolbar: {
+                open: "Abrir",
+                download: "Descargar"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.defaultFileName `String` *(default: "Document")*
 
 Specifies the default file name used for `Download`.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            defaultFileName: "MyPDFDocument"
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar `Object`
 Specifies the localization messages of the toolbar.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                open: "Open File",
+                download: "Download PDF",
+                print: "Print Document"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.contextMenu `String`  *(default: "Menu")*
+
+Specifies the text for the toolbar's context menu button when contextMenu is enabled. This button contains the overflow menu with open, download, and print tools.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                contextMenu: "Menú"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### messages.toolbar.open `String`  *(default: "Open")*
 
+Specifies the text displayed for the open file tool in the toolbar. This tool allows users to browse and select PDF files from their local file system.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                open: "Abrir Archivo"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.exportAs `String`  *(default: "Export")*
+
+Specifies the text displayed for the export tool in the toolbar when using DPL processing. This tool enables users to export individual pages as PNG or SVG files.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                exportAs: "Exportar Como"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### messages.toolbar.download `String` *(default: "Download")*
 
+Specifies the text displayed for the download tool in the toolbar. This tool allows users to download the currently loaded PDF file to their local file system.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                download: "Descargar"
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.pager `Object`
+
+Specifies the localization messages for the pager component in the toolbar. Contains text for navigation buttons and page information display.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    first: "Primera página",
+                    previous: "Página anterior",
+                    next: "Página siguiente",
+                    last: "Última página"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### messages.toolbar.pager.first `String`  *(default: "Go to the first page")*
 
+Specifies the tooltip text for the "first page" navigation button in the pager toolbar. This button navigates to the first page of the PDF document.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    first: "Ir a la primera página"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.pager.previous `String` *(default: "Go to the previous page")*
+
+Specifies the tooltip text for the "previous page" navigation button in the pager toolbar. This button navigates to the previous page of the PDF document.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    previous: "Ir a la página anterior"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### messages.toolbar.pager.next `String` *(default: "Go to the next page")*
 
+Specifies the tooltip text for the "next page" navigation button in the pager toolbar. This button navigates to the next page of the PDF document.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    next: "Ir a la página siguiente"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.pager.last `String` *(default: "Go to the last page")*
+
+Specifies the tooltip text for the "last page" navigation button in the pager toolbar. This button navigates to the last page of the PDF document.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    last: "Ir a la última página"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### messages.toolbar.pager.of `String` *(default: "of")*
 
+Specifies the text used in the pager's page information display (e.g., "page 1 of 10"). This appears between the current page number and total page count.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    of: "de"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.pager.page `String` *(default: "page")*
 
+Specifies the singular form of the word "page" used in the pager's status display when there is only one page (e.g., "page 1 of 1").
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    page: "página"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
+
 ### messages.toolbar.pager.pages `String` *(default: "pages")*
+
+Specifies the plural form of the word "pages" used in the pager's status display when there are multiple pages (e.g., "page 1 of 10 pages").
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+    $("#pdfviewer").kendoPDFViewer({
+        messages: {
+            toolbar: {
+                pager: {
+                    pages: "páginas"
+                }
+            }
+        },
+        pdfjsProcessing: {
+            file: {
+                url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        }
+    });
+    </script>
 
 ### messages.toolbar.print `String` *(default: "Print")*
 
@@ -630,6 +1750,29 @@ Specifies the localization messages of the toolbar.
     </script>
 
 ### messages.toolbar.zoom `Object`
+
+Specifies the localization messages for the zoom tool dropdown in the toolbar. Contains text for various zoom options including predefined zoom levels and zoom controls.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          toolbar: {
+            zoom: {
+              actualWidth: "Actual Width",
+              autoWidth: "Auto Width",
+              fitWidth: "Fit Width",
+              pageWidth: "Page Width"
+            }
+          }
+        }
+      });
+    </script>
 
 ### messages.toolbar.zoom.actualWidth `String` *(default: "Actual Width")*
 
@@ -790,43 +1933,559 @@ Specifies the localization messages of the toolbar.
 
 ### messages.errorMessages `Object`
 
+Specifies the localization messages for various error scenarios that can occur during PDF processing and display. These messages are shown to users when errors are encountered.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          errorMessages: {
+            notSupported: "Only PDF files are allowed.",
+            parseError: "PDF file failed to process.",
+            notFound: "File was not found.",
+            popupBlocked: "Popup was blocked."
+          }
+        }
+      });
+    </script>
+
 ### messages.errorMessages.notSupported  `String` *(default: "Only pdf files allowed.")*
+
+Specifies the error message displayed when a user attempts to open a file that is not a PDF format. This validation occurs during file selection or upload.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          errorMessages: {
+            notSupported: "Custom message: Only PDF files are allowed."
+          }
+        }
+      });
+    </script>
 
 ### messages.errorMessages.parseError  `String` *(default: "PDF file fails to process.")*
 
+Specifies the error message displayed when the PDF processing library fails to parse or render the PDF file due to corruption, unsupported features, or internal errors.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          errorMessages: {
+            parseError: "Custom message: PDF file failed to process."
+          }
+        }
+      });
+    </script>
+
 ### messages.errorMessages.notFound  `String` *(default: "File is not found.")*
+
+Specifies the error message displayed when the specified PDF file URL returns a 404 error or the file cannot be located at the provided path.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          errorMessages: {
+            notFound: "Custom message: File was not found."
+          }
+        }
+      });
+    </script>
 
 ### messages.errorMessages.popupBlocked  `String` *(default: "Popup is blocked.")*
 
+Specifies the error message displayed when browser popup blockers prevent the PDF viewer from opening new windows for print or download operations.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          errorMessages: {
+            popupBlocked: "Custom message: Popup was blocked."
+          }
+        }
+      });
+    </script>
+
 ### messages.dialogs `Object`
+
+Specifies the localization messages for various dialog windows used by the PDF viewer, including export dialogs, search panels, and common dialog buttons.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              title: "Export Document...",
+              defaultFileName: "MyDocument"
+            },
+            okText: "OK",
+            save: "Save",
+            cancel: "Cancel"
+          }
+        }
+      });
+    </script>
 
 ### messages.dialogs.exportAsDialog `Object`
 
+Specifies the localization messages for the export dialog that appears when using DPL processing. Contains text for dialog elements including title, file format options, and form labels.
+
+#### Example
+
+  ```pseudo  
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              title: "Export Document...",
+              defaultFileName: "MyDocument",
+              pdf: "PDF Format (.pdf)",
+              png: "PNG Format (.png)",
+              svg: "SVG Format (.svg)",
+              labels: {
+                fileName: "File Name",
+                saveAsType: "Save as Type",
+                page: "Page"
+              }
+            }
+          }
+        }
+      });
+    </script>
+  ```
+
 ### messages.dialogs.exportAsDialog.title `String` *(default: "Export...")*
+
+Specifies the title text displayed in the export dialog header when users choose to export PDF pages in different formats.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              title: "Custom Export Dialog Title"
+            }
+          }
+        }
+      });
+    </script>
+  ```
 
 ### messages.dialogs.exportAsDialog.defaultFileName `String` *(default: "Document")*
 
+Specifies the default filename shown in the export dialog's file name input field when no specific document name is available.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              defaultFileName: "MyCustomDocument"
+            }
+          }
+        }
+      });
+    </script>
+  ```
+
 ### messages.dialogs.exportAsDialog.pdf `String` *(default: "Portable Document Format (.pdf)")*
+
+Specifies the display text for the PDF export format option in the export dialog's file type dropdown list.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              pdf: "PDF Format (.pdf)"
+            }
+          }
+        }
+      });
+    </script>
+  ```
 
 ### messages.dialogs.exportAsDialog.png `String` *(default: "Portable Network Graphics (.png)")*
 
+Specifies the display text for the PNG export format option in the export dialog's file type dropdown list.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              png: "PNG Format (.png)"
+            }
+          }
+        }
+      });
+    </script>
+  ```
+
 ### messages.dialogs.exportAsDialog.svg `String` *(default: "Scalable Vector Graphics (.svg)")*
+
+Specifies the display text for the SVG export format option in the export dialog's file type dropdown list.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              svg: "SVG Format (.svg)"
+            }
+          }
+        }
+      });
+    </script>
+  ```
 
 ### messages.dialogs.exportAsDialog.labels `Object`
 
+Specifies the localization messages for form field labels within the export dialog, including file name input, format selection, and page selection controls.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              labels: {
+                fileName: "File Name",
+                saveAsType: "Save as Type",
+                page: "Page"
+              }
+            }
+          }
+        }
+      });
+    </script>
+  ```
+
 ### messages.dialogs.exportAsDialog.labels.fileName `String`  *(default: "File name")*
+
+Specifies the label text for the filename input field in the export dialog where users enter the desired output filename.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              labels: {
+                fileName: "Custom File Name Label"
+              }
+            }
+          }
+        }
+      });
+    </script>
+  ```
 
 ### messages.dialogs.exportAsDialog.labels.saveAsType `String`  *(default: "Save as")*
 
+Specifies the label text for the file format selection dropdown in the export dialog where users choose the export format (`PDF`, `PNG`, or `SVG`).
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              labels: {
+                saveAsType: "Custom Save As Type Label"
+              }
+            }
+          }
+        }
+      });
+    </script>
+  ```
+
 ### messages.dialogs.exportAsDialog.labels.page `String`  *(default: "Page")*
+
+Specifies the label text for the page selection control in the export dialog where users specify which page to export when using single-page export formats.
+
+#### Example
+
+  ```pseudo
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        dplProcessing: {
+          read: {
+            url: ""
+          },
+          download: {
+            url: ""
+          },
+          upload: {
+            url: ""
+          }
+        },
+        messages: {
+          dialogs: {
+            exportAsDialog: {
+              labels: {
+                page: "Custom Page Label"
+              }
+            }
+          }
+        }
+      });
+    </script>
+  ```
 
 ### messages.dialogs.okText `String`  *(default: "OK")*
 
+Specifies the text for the confirmation button in dialog windows. This button is used to confirm actions and close dialogs with positive results.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          dialogs: {
+            okText: "Accept"
+          }
+        }
+      });
+    </script>
+
 ### messages.dialogs.save `String`  *(default: "Save")*
+
+Specifies the text for the save/download button in export and file dialogs. This button initiates the file save or download operation.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          dialogs: {
+            save: "Download"
+          }
+        }
+      });
+    </script>
 
 ### messages.dialogs.cancel `String`  *(default: "Cancel")*
 
+Specifies the text for the cancel button in dialog windows. This button closes dialogs without performing any action or saving changes.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          dialogs: {
+            cancel: "Close"
+          }
+        }
+      });
+    </script>
+
 ### messages.dialogs.search `Object`
+
+Specifies the localization messages for the search dialog that appears when users perform text searches within PDF documents. Contains text for search controls and navigation buttons.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          dialogs: {
+            search: {
+              close: "Close",
+              dragHandle: "Drag search",
+              inputLabel: "Search Text",
+              matchCase: "Match Case",
+              next: "Next Match",
+              previous: "Previous Match",
+              of: " of {0}"
+            }
+          }
+        }
+      });
+    </script>
 
 ### messages.dialogs.search.close `String` *(default: "Close")*
 
@@ -849,6 +2508,26 @@ Specifies the localization messages of the toolbar.
     </script>
 
 ### messages.dialogs.search.dragHandle `String` *(default: "Drag search")*
+
+Specifies the tooltip text for the drag handle element of the search dialog. This allows users to reposition the search dialog by dragging it to different locations.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        messages: {
+          dialogs: {
+            search: {
+              dragHandle: "Custom Drag Handle Message"
+            }
+          }
+        }
+      });
+    </script>
 
 ### messages.dialogs.search.inputLabel `String` *(default: "Search Text")*
 
@@ -1238,6 +2917,20 @@ Destroys the widget.
 ### render
 
 Fires when a page is rendered
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script type="module">
+      $("#pdfviewer").kendoPDFViewer({
+        pdfjsProcessing: {
+          file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+        },
+        render: function (e) {
+          console.log("Page rendered:", e.page);
+        }
+      });
+    </script>
 
 #### Event Data
 

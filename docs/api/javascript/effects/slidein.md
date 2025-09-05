@@ -26,6 +26,26 @@ Playing the effect in reverse will slide the element out of its position.
 
 The direction to which the sliding will occur.  Supported directions are `left`, `right`, `up` and `down`.
 
+#### Example
+
+    <div id="foo">
+        I will slide in from different directions
+    </div>
+
+    <script>
+        // Slide in from left
+        kendo.fx($("#foo")).slideIn("left").play();
+        
+        // Slide in from right
+        // kendo.fx($("#foo")).slideIn("right").play();
+        
+        // Slide in from up
+        // kendo.fx($("#foo")).slideIn("up").play();
+        
+        // Slide in from down
+        // kendo.fx($("#foo")).slideIn("down").play();
+    </script>
+
 ## Sliding an element up
 
     <div id="foo">

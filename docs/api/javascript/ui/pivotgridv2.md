@@ -108,8 +108,10 @@ If set to `true` the user could navigate the component using the keyboard naviga
     <div id="pivotgrid"></div>
     <script>
     $("#pivotgrid").kendoPivotGridV2({
-        navigatable: true,
-        height: 550,
+        excel: {
+            fileName: "Sales-Report.xlsx",
+            forceProxy: true
+        },
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
@@ -131,6 +133,31 @@ If set to `true` the user could navigate the component using the keyboard naviga
 ### excel `Object`
 
 Configures the Kendo UI PivotGridV2 Excel export settings.
+
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        excel: {
+            fileName: "Sales-Report.xlsx",
+            forceProxy: true
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
 
 ### excel.fileName `String` *(default: "Export.xslx")*
 
@@ -209,6 +236,32 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
 ### excel.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgridv2#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        excel: {
+            fileName: "Sales-Report.xlsx",
+            forceProxy: true,
+            proxyURL: "/save"
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ### excel.proxyURL `String` *(default: null)*
 
 The URL of the server side proxy which will stream the file to the end user.
@@ -263,6 +316,37 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 
 Configures the Kendo UI PivotGridV2 PDF export settings.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            fileName: "Sales-Report.pdf",
+            autoPrint: true,
+            margin: {
+                top: "2cm",
+                left: "1cm",
+                right: "1cm",
+                bottom: "1cm"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
@@ -296,10 +380,60 @@ The author of the PDF document.
 ### pdf.autoPrint `Boolean` *(default: false)*
 Specifies if the Print dialog should be opened immediately after loading the document.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            fileName: "Sales-Report.pdf",
+            autoPrint: true
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 > **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
 
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
+
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            fileName: "Sales-Report.pdf",
+            avoidLinks: true
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
 
 It's also possible to pass a CSS selector as argument. All matching links will be ignored.
 
@@ -393,13 +527,89 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgridv2#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            fileName: "Sales-Report.pdf",
+            forceProxy: true,
+            proxyURL: "/save"
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ### pdf.jpegQuality  `Number` *(default: 0.92)*
 
 Specifies the quality of the images within the exported file, from 0 to 1.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            fileName: "Sales-Report.pdf",
+            jpegQuality: 0.5
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ### pdf.keepPNG `Boolean` *(default: false)*
 
 If set to true all PNG images contained in the exported file will be kept in PNG format.
+
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            fileName: "Sales-Report.pdf",
+            keepPNG: true
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -498,17 +708,121 @@ units are "mm", "cm", "in" and "pt" (default).
 
 The bottom margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            margin: {
+                bottom: "2cm"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ### pdf.margin.left `Number|String` *(default: 0)*
 
 The left margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            margin: {
+                left: "1cm"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
 The right margin. Numbers are considered as "pt" units.
 
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            margin: {
+                right: "1cm"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ### pdf.margin.top `Number|String` *(default: 0)*
 
 The top margin. Numbers are considered as "pt" units.
+
+#### Example
+
+    <div id="pivotgrid"></div>
+    <script>
+    $("#pivotgrid").kendoPivotGridV2({
+        pdf: {
+            margin: {
+                top: "2cm"
+            }
+        },
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 

@@ -1301,6 +1301,43 @@ Defines the number of columns to be applied if current width of the form is betw
 
 Defines the width of the gutters between the columns / rows.
 
+#### Example
+
+    <form id="myForm"></form>
+    <script>
+    $(document).ready(function () {
+        $("#myForm").kendoForm({
+            formData: {
+                FirstName: "John",
+                LastName: "Doe",
+                Email: "john.doe@email.com"
+            },
+            items: [{
+                type: "group",
+                label: "Personal Information",
+                layout: "grid",
+                grid: {
+                    cols: 2,
+                    gutter: 20
+                },
+                items: [{
+                    field: "FirstName",
+                    label: "First Name:",
+                    validation: { required: true }
+                }, {
+                    field: "LastName", 
+                    label: "Last Name:",
+                    validation: { required: true }
+                }, {
+                    field: "Email",
+                    label: "Email:",
+                    validation: { required: true, email: true }
+                }]
+            }]
+        });
+    });
+    </script>
+
 ### items.grid.gutter.rows `String|Number|Array`
 
 Defines the width of the gutters between the rows.
@@ -2121,9 +2158,91 @@ Specify the layout of Form content. Valid options are:
 
 > Note: Grid layout is supported only on modern browsers. Even so, not all browsers that support grid layout support all features.
 
+#### Example
+
+    <form id="myForm"></form>
+    <script>
+    $(document).ready(function () {
+        $("#myForm").kendoForm({
+            formData: {
+                FirstName: "John",
+                LastName: "Doe",
+                Email: "john.doe@email.com",
+                Age: 25
+            },
+            layout: "grid",
+            grid: {
+                cols: 2,
+                gutter: 16
+            },
+            items: [{
+                field: "FirstName",
+                label: "First Name:",
+                validation: { required: true }
+            }, {
+                field: "LastName",
+                label: "Last Name:", 
+                validation: { required: true }
+            }, {
+                field: "Email",
+                label: "Email:",
+                validation: { required: true, email: true }
+            }, {
+                field: "Age",
+                label: "Age:",
+                validation: { required: true }
+            }]
+        });
+    });
+    </script>
+
 ### grid `Object`
 
 Grid layout settings.
+
+#### Example
+
+    <form id="myForm"></form>
+    <script>
+    $(document).ready(function () {
+        $("#myForm").kendoForm({
+            formData: {
+                FirstName: "John",
+                LastName: "Doe",
+                Email: "john.doe@email.com",
+                Phone: "123-456-7890",
+                Address: "123 Main St"
+            },
+            layout: "grid",
+            grid: {
+                cols: [1, 2],
+                gutter: {
+                    cols: 20,
+                    rows: 10
+                }
+            },
+            items: [{
+                field: "FirstName",
+                label: "First Name:",
+                validation: { required: true }
+            }, {
+                field: "LastName",
+                label: "Last Name:",
+                validation: { required: true }
+            }, {
+                field: "Email", 
+                label: "Email:",
+                validation: { required: true, email: true }
+            }, {
+                field: "Phone",
+                label: "Phone:"
+            }, {
+                field: "Address",
+                label: "Address:"
+            }]
+        });
+    });
+    </script>
 
 ### grid.cols `Number|Array`
 
@@ -2327,6 +2446,46 @@ Defines the number of columns to be applied if current width of the form is betw
 ### grid.gutter `Number|String|Object`
 
 Defines the width of the gutters between the columns / rows.
+
+#### Example
+
+    <form id="myForm"></form>
+    <script>
+    $(document).ready(function () {
+        $("#myForm").kendoForm({
+            formData: {
+                FirstName: "John",
+                LastName: "Doe", 
+                Email: "john.doe@email.com",
+                Phone: "123-456-7890"
+            },
+            layout: "grid",
+            grid: {
+                cols: 2,
+                gutter: {
+                    cols: 20,
+                    rows: 15
+                }
+            },
+            items: [{
+                field: "FirstName",
+                label: "First Name:",
+                validation: { required: true }
+            }, {
+                field: "LastName",
+                label: "Last Name:",
+                validation: { required: true }
+            }, {
+                field: "Email",
+                label: "Email:",
+                validation: { required: true, email: true }
+            }, {
+                field: "Phone",
+                label: "Phone:"
+            }]
+        });
+    });
+    </script>
 
 ### grid.gutter.rows `String|Number|Array`
 

@@ -124,9 +124,45 @@ Defines the stroke configuration.
 
 Defines the color of the shape's stroke.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Shape with Red Stroke"
+            },
+            stroke: {
+                color: "red",
+                width: 2
+            }
+        }]
+    });
+    </script>
+
 ### stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape's stroke.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Shape with Thick Stroke"
+            },
+            stroke: {
+                color: "blue",
+                width: 5
+            }
+        }]
+    });
+    </script>
 
 ### stroke.dashType `String`
 
@@ -138,6 +174,25 @@ The following dash types are supported:
 * "dashDot" - a line consisting of a repeating pattern of dash-dot
 * "dot" - a line consisting of dots
 * "longDash" - a line consisting of a repeating pattern of long-dash
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Dashed Stroke"
+            },
+            stroke: {
+                color: "green",
+                width: 2,
+                dashType: "dash"
+            }
+        }]
+    });
+    </script>
 * "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
@@ -326,9 +381,44 @@ Defines the fill options of the shape.
 
 Defines the fill color of the shape.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Colored Shape"
+            },
+            fill: {
+                color: "#ff6600"
+            }
+        }]
+    });
+    </script>
+
 ### fill.opacity `Number` *(default: 1)*
 
 Defines the fill opacity of the shape.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Semi-transparent Shape"
+            },
+            fill: {
+                color: "red",
+                opacity: 0.5
+            }
+        }]
+    });
+    </script>
 
 ### fill.gradient `Object`
 
@@ -374,14 +464,89 @@ The type of the gradient. Supported values are:
 * linear
 * radial
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Linear Gradient"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 1],
+                    stops: [
+                        { offset: 0, color: "red" },
+                        { offset: 1, color: "blue" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
+
 ### fill.gradient.center `Array`
 The center of the radial gradient.
 
 Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Radial Gradient"
+            },
+            fill: {
+                gradient: {
+                    type: "radial",
+                    center: [0.5, 0.5],
+                    radius: 0.8,
+                    stops: [
+                        { offset: 0, color: "yellow" },
+                        { offset: 1, color: "orange" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
+
 ### fill.gradient.radius `Number` *(default: 1)*
 The radius of the radial gradient relative to the shape bounding box.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Small Gradient Radius"
+            },
+            fill: {
+                gradient: {
+                    type: "radial",
+                    center: [0.5, 0.5],
+                    radius: 0.3,
+                    stops: [
+                        { offset: 0, color: "white" },
+                        { offset: 1, color: "black" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
 
 ### fill.gradient.start `Array`
 The start point of the linear gradient.
@@ -389,33 +554,189 @@ The start point of the linear gradient.
 Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Linear Gradient Start"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 0],
+                    stops: [
+                        { offset: 0, color: "green" },
+                        { offset: 1, color: "lime" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
+
 ### fill.gradient.end `Array`
 The end point of the linear gradient.
 
 Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Diagonal Gradient"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 1],
+                    stops: [
+                        { offset: 0, color: "purple" },
+                        { offset: 1, color: "pink" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
+
 ### fill.gradient.stops `Array`
 The array of gradient color stops.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Multi-Stop Gradient"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 0],
+                    stops: [
+                        { offset: 0, color: "red" },
+                        { offset: 0.3, color: "yellow" },
+                        { offset: 0.7, color: "green" },
+                        { offset: 1, color: "blue" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
 
 ### fill.gradient.stops.offset `Number`
 The stop offset from the start of the element.
 Ranges from 0 (start of gradient) to 1 (end of gradient).
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Custom Offsets"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 0],
+                    stops: [
+                        { offset: 0, color: "black" },
+                        { offset: 0.2, color: "gray" },
+                        { offset: 0.8, color: "lightgray" },
+                        { offset: 1, color: "white" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
+
 ### fill.gradient.stops.color `String`
 The color in any of the following formats.
 
 | Format         | Description
-| ---            | --- | ---
+|:---            |:---
 | red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 
 Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Color Stop Example"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 0],
+                    stops: [
+                        { offset: 0, color: "#ff0000" },
+                        { offset: 0.5, color: "rgb(0, 255, 0)" },
+                        { offset: 1, color: "blue" }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
+
 ### fill.gradient.stops.opacity `Number`
 The fill opacity.
 Ranges from 0 (completely transparent) to 1 (completely opaque).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Opacity Gradient"
+            },
+            fill: {
+                gradient: {
+                    type: "linear",
+                    start: [0, 0],
+                    end: [1, 0],
+                    stops: [
+                        { offset: 0, color: "red", opacity: 1 },
+                        { offset: 0.5, color: "red", opacity: 0.5 },
+                        { offset: 1, color: "red", opacity: 0 }
+                    ]
+                }
+            }
+        }]
+    });
+    </script>
 
 ### hover `Object`
 
@@ -447,13 +768,79 @@ Defines the hover configuration.
 
 Defines the hover fill options of the shape.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover over me"
+            },
+            hover: {
+                fill: {
+                    color: "yellow",
+                    opacity: 0.8
+                }
+            }
+        }]
+    });
+    </script>
+
 ### hover.fill.color `String`
 
 Defines the hover fill color of the shape.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover changes color"
+            },
+            fill: {
+                color: "blue"
+            },
+            hover: {
+                fill: {
+                    color: "red"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### hover.fill.opacity `Number` *(default: 1)*
 
 Defines the hover fill opacity of the shape.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover changes opacity"
+            },
+            fill: {
+                color: "green",
+                opacity: 1
+            },
+            hover: {
+                fill: {
+                    color: "green",
+                    opacity: 0.3
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectors `Array`
 
@@ -497,9 +884,51 @@ The connector name. Predefined names include:
 * "left" - left connector.
 * "auto" - auto connector.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Shape with Named Connectors"
+            },
+            connectors: [
+                { name: "top" },
+                { name: "right" },
+                { name: "bottom" },
+                { name: "left" }
+            ]
+        }]
+    });
+    </script>
+
 ### connectors.position `Function`
 
 The function that positions the connector.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Custom Positioned Connectors"
+            },
+            connectors: [{
+                position: function(shape) {
+                    return new kendo.dataviz.diagram.Point(
+                        shape.bounds().center().x,
+                        shape.bounds().y
+                    );
+                }
+            }]
+        }]
+    });
+    </script>
 
 ### rotation `Object`
 
@@ -528,6 +957,23 @@ The shape rotation settings.
 ### rotation.angle `Number` *(default: 0)*
 
 The rotation angle.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Rotated Shape"
+            },
+            rotation: {
+                angle: 45
+            }
+        }]
+    });
+    </script>
 
 ### content `Object`
 
@@ -563,29 +1009,135 @@ Defines the shapes content settings.
 
 The alignment of the text inside the shape. You can do combinations between "top", "middle" and "bottom" for vertical align and "right", "center" and "left" for horizontal align. For example, "top right", "middle left", "bottom center", and so on.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            width: 150,
+            height: 100,
+            content: {
+                text: "Right Aligned Text",
+                align: "middle right"
+            }
+        }]
+    });
+    </script>
+
 ### content.color `String`
 
 The color of the shape content text.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Red Text",
+                color: "red"
+            }
+        }]
+    });
+    </script>
 
 ### content.fontFamily `String`
 
 The font family of the shape content text.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Arial Font",
+                fontFamily: "Arial, sans-serif"
+            }
+        }]
+    });
+    </script>
+
 ### content.fontSize `Number`
 
 The font size of the shape content text.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Large Text",
+                fontSize: 18
+            }
+        }]
+    });
+    </script>
 
 ### content.fontStyle `String`
 
 The font style of the shape content text.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Italic Text",
+                fontStyle: "italic"
+            }
+        }]
+    });
+    </script>
+
 ### content.fontWeight `String`
 
 The font weight of the shape content text.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Bold Text",
+                fontWeight: "bold"
+            }
+        }]
+    });
+    </script>
+
 ### content.text `String`
 
 The text displayed in the shape.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hello World!"
+            }
+        }]
+    });
+    </script>
 
 ### selectable `Boolean` *(default: true)*
 
@@ -699,69 +1251,420 @@ Defines default options for the shape connectors.
 
 Defines the width of the shape connectors.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Wide Connectors"
+            },
+            connectorDefaults: {
+                width: 15
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.height `Number` *(default: 8)*
 
 Defines the height of the shape connectors.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Tall Connectors"
+            },
+            connectorDefaults: {
+                height: 12
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.hover `Object`
 
 Defines the hover configuration of the shape connectors.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Connectors"
+            },
+            connectorDefaults: {
+                hover: {
+                    fill: {
+                        color: "yellow"
+                    },
+                    stroke: {
+                        color: "red",
+                        width: 2
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.hover.fill `String|Object`
 
 Defines the hover fill options of the shape connectors.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Fill Hover"
+            },
+            connectorDefaults: {
+                hover: {
+                    fill: {
+                        color: "orange",
+                        opacity: 0.7
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.hover.fill.color `String`
 
 Defines the hover fill color of the shape connectors.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Fill Color"
+            },
+            connectorDefaults: {
+                hover: {
+                    fill: {
+                        color: "cyan"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.hover.fill.opacity `Number` *(default: 1)*
 
 Defines the hover fill opacity of the shape connectors.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Fill Opacity"
+            },
+            connectorDefaults: {
+                hover: {
+                    fill: {
+                        color: "purple",
+                        opacity: 0.4
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.hover.stroke `String|Object`
 
 Defines the hover stroke options of the shape connectors.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Stroke"
+            },
+            connectorDefaults: {
+                hover: {
+                    stroke: {
+                        color: "red",
+                        width: 3,
+                        dashType: "dash"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.hover.stroke.color `String` *(default: "Black")*
 
 Defines the hover stroke color.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Stroke Color"
+            },
+            connectorDefaults: {
+                hover: {
+                    stroke: {
+                        color: "magenta"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.hover.stroke.dashType `String`
 
 The hover stroke dash type.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Dash Type"
+            },
+            connectorDefaults: {
+                hover: {
+                    stroke: {
+                        color: "green",
+                        dashType: "dot"
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.hover.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke on hover.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Hover Stroke Width"
+            },
+            connectorDefaults: {
+                hover: {
+                    stroke: {
+                        color: "blue",
+                        width: 4
+                    }
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.fill `String|Object`
 
 Defines the fill options of the shape connectors.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Fill"
+            },
+            connectorDefaults: {
+                fill: {
+                    color: "lightblue",
+                    opacity: 0.8
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.fill.color `String`
 
 Defines the fill color of the shape connectors.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Fill Color"
+            },
+            connectorDefaults: {
+                fill: {
+                    color: "gold"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.fill.opacity `Number` *(default: 1)*
 
 Defines the fill opacity of the shape connectors.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Fill Opacity"
+            },
+            connectorDefaults: {
+                fill: {
+                    color: "red",
+                    opacity: 0.6
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.stroke `String|Object`
 
 Defines the stroke options of the shape connectors.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Stroke"
+            },
+            connectorDefaults: {
+                stroke: {
+                    color: "navy",
+                    width: 2,
+                    dashType: "dashDot"
+                }
+            }
+        }]
+    });
+    </script>
 
 ### connectorDefaults.stroke.color `String` *(default: "Black")*
 
 Defines the stroke color.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Stroke Color"
+            },
+            connectorDefaults: {
+                stroke: {
+                    color: "brown"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.stroke.dashType `String`
 
 The stroke dash type.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Dash Type"
+            },
+            connectorDefaults: {
+                stroke: {
+                    color: "teal",
+                    dashType: "longDash"
+                }
+            }
+        }]
+    });
+    </script>
+
 ### connectorDefaults.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Connector Stroke Width"
+            },
+            connectorDefaults: {
+                stroke: {
+                    color: "maroon",
+                    width: 3
+                }
+            }
+        }]
+    });
+    </script>
 
 ## Fields
 
@@ -1169,6 +2072,37 @@ Renders the shape with the given options. It redefines the options and redraws t
 
 ##### options `Object`
 The object containing a subset of options to change. Follows the same structure as the [configuration](#configuration).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: {
+                text: "Original Shape"
+            },
+            fill: {
+                color: "blue"
+            }
+        }],
+        dataBound: function(e) {
+          setTimeout(function () {
+                 var shape = e.sender.shapes[0];
+                 // Redraw shape with new options
+                 shape.redraw({
+                     fill: {
+                         color: "red"
+                     },
+                     content: {
+                         text: "Redrawn Shape"
+                     }
+                 });
+          }, 2000);
+        }
+    });
+    </script>
 
 ##### Example - Redraw shape with new options
 

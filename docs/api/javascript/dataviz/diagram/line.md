@@ -13,17 +13,93 @@ This represents a single, straight line.
 
 Defines the stroke configuration.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 50
+        }],
+        connections: [{
+            from: { x: 200, y: 125 },
+            to: { x: 300, y: 125 },
+            stroke: {
+                color: "#ff6358",
+                width: 3
+            }
+        }]
+    });
+    </script>
+
 ### stroke.color `String`
 
 Defines the line color.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 50
+        }],
+        connections: [{
+            from: { x: 200, y: 125 },
+            to: { x: 300, y: 125 },
+            stroke: {
+                color: "#ff6358"
+            }
+        }]
+    });
+    </script>
 
 ### stroke.width `Number`
 
 Defines the line width.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 50
+        }],
+        connections: [{
+            from: { x: 200, y: 125 },
+            to: { x: 300, y: 125 },
+            stroke: {
+                width: 5
+            }
+        }]
+    });
+    </script>
+
 ### from `Object`
 
 The first point of the line.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+            from: { x: 100, y: 150 },
+            to: { x: 300, y: 150 }
+        }]
+    });
+    </script>
 
 #### x `Number`
 
@@ -36,6 +112,18 @@ The Y position of first point.
 ### to `Object`
 
 The second point of the line.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+            from: { x: 100, y: 150 },
+            to: { x: 300, y: 200 }
+        }]
+    });
+    </script>
 
 #### x `Number`
 
@@ -51,33 +139,79 @@ The Y position of second point.
 
 The drawing element used to draw the line.
 
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+            from: { x: 100, y: 150 },
+            to: { x: 300, y: 150 }
+        }]
+    });
+    
+    var diagram = $("#diagram").getKendoDiagram();
+    var connection = diagram.connections[0];
+    console.log("Drawing element:", connection.drawingElement);
+    </script>
+
 ## Methods
 
 ### position
-Get or sets the element position.
+Sets the element position.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+            from: { x: 100, y: 150 },
+            to: { x: 300, y: 150 }
+        }]
+    });
+    
+    var diagram = $("#diagram").getKendoDiagram();
+    var connection = diagram.connections[0];
+    
+    // Set new position
+    connection.position({ x: 50, y: 100 });
+    </script>
 
 #### Parameters
 
 ##### offset `kendo.dataviz.diagram.Point`
 The origin of the element.
 
-
-### rotate
-Rotates the element with the specified parameters.
-
-#### Parameters
-
-##### angle `Number`
-The angle of rotation in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-
-##### center `kendo.dataviz.diagram.Point`
-The center of rotation.
-
-
 ### visible
 Gets or sets the visibility of the current element.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+            from: { x: 100, y: 150 },
+            to: { x: 300, y: 150 }
+        }]
+    });
+    
+    var diagram = $("#diagram").getKendoDiagram();
+    var connection = diagram.connections[0];
+    
+    // Get current visibility
+    var isVisible = connection.visible();
+    console.log("Is visible:", isVisible);
+    
+    // Hide the connection
+    connection.visible(false);
+    
+    // Show the connection again
+    setTimeout(function() {
+        connection.visible(true);
+    }, 2000);
+    </script>
 
 #### Parameters
 

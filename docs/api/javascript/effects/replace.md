@@ -59,7 +59,40 @@ Replaces given element with another one, using CSS class defined transition.
 
 The current element which will be hidden when the transition ends.
 
+#### Example
+
+    <div id="container">
+        <div id="currentElement">Current Content</div>
+        <div id="nextElement" style="display: none">Next Content</div>
+    </div>
+    <script>
+    // The current element is the one that will be replaced
+    var currentEl = $("#currentElement");
+    kendo.fx(currentEl).replace("#nextElement", "fade").run();
+    </script>
+
 ### transitionClass `string`
 
 The transition class name. Passing `swap` will result in `k-fx-swap` class set to the **common container element**.
+
+#### Example
+
+    <style>
+        .k-fx-custom.k-fx-start .k-fx-next {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .k-fx-custom.k-fx-end .k-fx-current {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    </style>
+    <div id="container">
+        <div id="element1">Element 1</div>
+        <div id="element2" style="display: none">Element 2</div>
+    </div>
+    <script>
+    // Use custom transition class name
+    kendo.fx("#element1").replace("#element2", "custom").run();
+    </script>
 

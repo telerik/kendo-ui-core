@@ -40,26 +40,83 @@ Specifies alignment of the badge relative to button. Valid position options are:
 
 `badge.align` works in conjunction with [`badge.position`](/api/javascript/ui/button/configuration/badge.position).
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "5",
+          position: "edge",
+          align: "top end"
+        }
+      });
+    </script>
 
 ### badge.cutoutBorder `Boolean` *(default: false)*
 
 Specifies wether or not to render additional "cutout" border around the badge.
 
+#### Example
 
-### badge.fill `String` *(default: 'solid')*
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "New",
+          cutoutBorder: true
+        }
+      });
+    </script>
+
+### badge.fillMode `String` *(default: 'solid')*
 
 Specifies how theme colors apply to a badge. Valid options are `solid` (default) and `outline`.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "3",
+          fillMode: "outline",
+          themeColor: "primary"
+        }
+      });
+    </script>
 
 ### badge.icon `String` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          icon: "check",
+          themeColor: "success"
+        }
+      });
+    </script>
 
 ### badge.max `Number` *(default: Infinity)*
 
 If `text` is a number, it will cap that number.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: 150,
+          max: 99
+        }
+      });
+    </script>
 
 ### badge.position `String` *(default: 'edge')*
 
@@ -67,30 +124,99 @@ Specifies position of the badge relative to the edge of the button. Valid placem
 
 Note: position configuration, other than `inline`, requires the badge to be aligned. See [`badge.align`](/api/javascript/ui/button/configuration/badge.align) for more details.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "8",
+          position: "inside",
+          align: "bottom end"
+        }
+      });
+    </script>
 
 ### badge.shape `String` *(default: 'rounded')*
 
 Specifies the shape of the badge. Valid options are: `rectangle`, `rounded`, `pill`, `circle`, `dot`.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "7",
+          shape: "circle"
+        }
+      });
+    </script>
+
 ### badge.size  `String` *(default: 'medium')*
 
 Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
+
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "10",
+          size: "large"
+        }
+      });
+    </script>
 
 ### badge.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the content of the badge.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          template: (data) => `${data.value}+`,
+          text: 42
+        }
+      });
+    </script>
 
 ### badge.text `String|Number` *(default: '')*
 
 The text of the badge. Valid input includes `string`, `number` or `object` with `toString` method. Default is empty string.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "New",
+          themeColor: "info"
+        }
+      });
+    </script>
 
 
 ### badge.themeColor `String` *(default: 'secondary')*
 
 Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: "Alert",
+          themeColor: "warning"
+        }
+      });
+    </script>
 
 ### badge.visible `Boolean` *(default: true)*
 

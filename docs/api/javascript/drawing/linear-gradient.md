@@ -51,11 +51,68 @@ Represents a linear color gradient.
 ### options `Object`
 The configuration of this LinearGradient.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var options = {
+        start: [0, 0],
+        end: [1, 0],
+        stops: [{
+          offset: 0,
+          color: "#0066cc"
+        }, {
+          offset: 1,
+          color: "#66ccff"
+        }]
+      };
+
+      var gradient = new draw.LinearGradient(options);
+      var rect = new geom.Rect([10, 10], [200, 100]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: null
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
+
 ## Configuration
 
 ### stops `Array`
 The color stops of the gradient.
 Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var gradient = new draw.LinearGradient({
+        start: [0, 0],
+        end: [1, 1],
+        stops: [
+          { offset: 0, color: "#ff0000", opacity: 1 },
+          { offset: 0.5, color: "#ffff00", opacity: 0.8 },
+          { offset: 1, color: "#00ff00", opacity: 0.6 }
+        ]
+      });
+
+      var rect = new geom.Rect([10, 10], [200, 100]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: { color: "#000000", width: 2 }
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
 
 ## Fields
 
@@ -63,11 +120,71 @@ Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradi
 The array of gradient color stops.
 Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var gradient = new draw.LinearGradient({
+        start: [0, 0],
+        end: [1, 0],
+        stops: [
+          { offset: 0, color: "#333333" },
+          { offset: 1, color: "#cccccc" }
+        ]
+      });
+
+      // Access the stops field
+      console.log("Number of stops:", gradient.stops.length);
+      console.log("First stop color:", gradient.stops[0].color());
+
+      var rect = new geom.Rect([10, 10], [200, 80]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: null
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
+
 ## Methods
 
 ### addStop
 Adds a color stop to the gradient.
 Inherited from [Gradient.addStop](/api/javascript/drawing/gradient/methods/addstop)
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var gradient = new draw.LinearGradient({
+        start: [0, 0],
+        end: [1, 0],
+        stops: [
+          { offset: 0, color: "#ff0000" },
+          { offset: 1, color: "#0000ff" }
+        ]
+      });
+
+      gradient.addStop(0.5, "#ffff00", 0.8);
+      var newStop = gradient.stops[2];
+      console.log("Added stop at offset:", newStop.options.offset);
+
+      var rect = new geom.Rect([10, 10], [200, 80]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: null
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -86,6 +203,39 @@ The fill opacity.
 ### end
 Gets or sets the end point of the gradient.
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var gradient = new draw.LinearGradient({
+        start: [0, 0],
+        end: [1, 0],
+        stops: [
+          { offset: 0, color: "#ff6600" },
+          { offset: 1, color: "#ffcc00" }
+        ]
+      });
+
+      // Get the current end point
+      console.log("Current end point:", gradient.end());
+
+      // Change the end point to create a vertical gradient
+      gradient.end([0, 1]);
+      console.log("New end point:", gradient.end());
+
+      var rect = new geom.Rect([10, 10], [150, 150]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: { color: "#000000", width: 1 }
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
+
 #### Parameters
 
 ##### end `Array|kendo.geometry.Point`
@@ -100,6 +250,39 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 
 ### start
 Gets or sets the start point of the gradient.
+
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var gradient = new draw.LinearGradient({
+        start: [0, 0],
+        end: [1, 1],
+        stops: [
+          { offset: 0, color: "#009900" },
+          { offset: 1, color: "#66ff66" }
+        ]
+      });
+
+      // Get the current start point
+      console.log("Current start point:", gradient.start());
+
+      // Change the start point to start from center
+      gradient.start([0.5, 0.5]);
+      console.log("New start point:", gradient.start());
+
+      var rect = new geom.Rect([10, 10], [180, 120]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: { color: "#006600", width: 2 }
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
 
 #### Parameters
 
@@ -117,8 +300,41 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 Removes a color stop from the gradient.
 Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient/methods/removestop)
 
+#### Example
+
+    <div id="surface"></div>
+    <script>
+      var draw = kendo.drawing;
+      var geom = kendo.geometry;
+
+      var gradient = new draw.LinearGradient({
+        start: [0, 0],
+        end: [1, 0],
+        stops: [
+          { offset: 0, color: "#ff0000" },
+          { offset: 0.5, color: "#ffff00" },
+          { offset: 1, color: "#0000ff" }
+        ]
+      });
+
+      console.log("Initial stops count:", gradient.stops.length);
+
+      // Remove the middle stop
+      var middleStop = gradient.stops[1];
+      gradient.removeStop(middleStop);
+      console.log("Stops count after removal:", gradient.stops.length);
+
+      var rect = new geom.Rect([10, 10], [200, 80]);
+      var path = draw.Path.fromRect(rect, {
+        fill: gradient,
+        stroke: null
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
+
 #### Parameters
 
 ##### stop `kendo.drawing.GradientStop`
 The gradient color stop to remove.
-

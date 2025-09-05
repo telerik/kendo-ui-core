@@ -123,6 +123,28 @@ Defines the orientation of the split pane. Available options are `horizontal` or
 
 An array of pane definitions.
 
+#### Example
+    
+    <div style="height:500px; width:1000px">
+        <div id="dockmanager"></div>
+    </div>
+    <script>
+    $("#dockmanager").kendoDockManager({
+        rootPane: {
+            type: "split",
+            panes: [{
+                type: "content",
+                title: "First Pane",
+                content: "Content of the first pane"
+            }, {
+                type: "content",
+                title: "Second Pane",
+                content: "Content of the second pane"
+            }]
+        }
+    });
+    </script>
+
 ### rootPane.panes.closeable `Boolean` *(default: true)*
 
 Specifies if the pane can be closed. Available only for panes of type `content`.
@@ -210,6 +232,34 @@ Specifies if the pane can be docked and allow inner docking of other panes. Acce
 ### rootPane.panes.dockable.dock `Boolean` *(default: true)*
 
 Specifies if the pane is docked. Available only for panes of type `content`.
+
+#### Example
+    
+    <div style="height:500px; width:1000px">
+        <div id="dockmanager"></div>
+    </div>
+    <script>
+    $("#dockmanager").kendoDockManager({
+        rootPane: {
+            type: "split",
+            panes: [{
+                type: "content",
+                title: "Docked Pane",
+                content: "This pane is docked",
+                dockable: {
+                    dock: true
+                }
+            }, {
+                type: "content",
+                title: "Undocked Pane",
+                content: "This pane is not docked",
+                dockable: {
+                    dock: false
+                }
+            }]
+        }
+    });
+    </script>
 
 ### rootPane.panes.dockable.innerDock `Boolean` *(default: true)*
 
@@ -331,6 +381,31 @@ Specifies the orientation of a split pane. Supported values are "horizontal" and
 ### rootPane.panes.panes `Array`
 
 Specifies an array of pane definitions.
+
+#### Example
+    
+    <div style="height:500px; width:1000px">
+        <div id="dockmanager"></div>
+    </div>
+    <script>
+    $("#dockmanager").kendoDockManager({
+        rootPane: {
+            type: "split",
+            panes: [{
+                type: "tab",
+                panes: [{
+                    type: "content",
+                    title: "Tab 1",
+                    content: "Content of Tab 1"
+                }, {
+                    type: "content",
+                    title: "Tab 2",
+                    content: "Content of Tab 2"
+                }]
+            }]
+        }
+    });
+    </script>
 
 ### rootPane.panes.selected `Number`
 
@@ -513,6 +588,30 @@ Specifies the type of the pane. Available options are `tab`, `split` or `content
 ### rootPane.panes.unpinnable `Object|Boolean` *(default: true)*
 
 Specifies if the pane can be pinned/unpinnned. Available only for panes of type `content`.
+
+#### Example
+    
+    <div style="height:500px; width:1000px">
+        <div id="dockmanager"></div>
+    </div>
+    <script>
+    $("#dockmanager").kendoDockManager({
+        rootPane: {
+            type: "split",
+            panes: [{
+                type: "content",
+                title: "Unpinnable Pane",
+                content: "This pane can be unpinned",
+                unpinnable: true
+            }, {
+                type: "content",
+                title: "Non-Unpinnable Pane",
+                content: "This pane cannot be unpinned",
+                unpinnable: false
+            }]
+        }
+    });
+    </script>
 
 ### rootPane.panes.unpinnable.unpinned `Boolean` *(default: true)*
 
@@ -958,6 +1057,8 @@ Triggered when a pane is dragged.
     </script>
 
 ### dragEnd
+
+Triggered when a pane drag ends.
 
 #### Example - subscribing to the dragEnd event during initialization
 

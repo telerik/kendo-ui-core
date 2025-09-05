@@ -39,6 +39,20 @@ Returns the internal data collection
 
 `Array` Returns plain JavaScript array which represents the internal data collection
 
+#### Example
+
+    <script>
+        var query = new kendo.data.Query([
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Bob Smith", age: 25 }
+        ]);
+        
+        var dataArray = query.toArray();
+        // the result can be seen in the browser console.
+        console.log(dataArray);
+    </script>
+
 ### skip
 
 Skip a given amount it items
@@ -53,6 +67,22 @@ The number of items that should be skipped
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query with the first `count` elements of the list skipped
 
+#### Example
+
+    <script>
+        var query = new kendo.data.Query([
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Bob Smith", age: 25 },
+            { name: "Alice Johnson", age: 28 }
+        ]);
+        
+        var skippedQuery = query.skip(2);
+        var result = skippedQuery.toArray();
+        // the result can be seen in the browser console.
+        console.log(result); // Will contain only Bob Smith and Alice Johnson
+    </script>
+
 ### take
 
 Take a given amount it items
@@ -66,6 +96,22 @@ The number of items that should be taken
 #### Returns
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query containing only the first `count` elements of the list
+
+#### Example
+
+    <script>
+        var query = new kendo.data.Query([
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Bob Smith", age: 25 },
+            { name: "Alice Johnson", age: 28 }
+        ]);
+        
+        var limitedQuery = query.take(2);
+        var result = limitedQuery.toArray();
+        // the result can be seen in the browser console.
+        console.log(result); // Will contain only Jane Doe and John Doe
+    </script>
 
 ### select
 
@@ -118,6 +164,22 @@ The sort order (direction). The supported values are "asc" (ascending order) and
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query containing the sorted collection
 
+#### Example
+
+    <script>
+        const query = new kendo.data.Query([
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+            { name: "Bob Smith", age: 25 },
+            { name: "Alice Johnson", age: 28 }
+        ]);
+        
+        const sortedQuery = query.order("age", "desc");
+        const result = sortedQuery.toArray();
+        // the result can be seen in the browser console.
+        console.log(result); // Will be sorted by age in ascending order
+    </script>
+
 ### filter
 
 Returns a copy of the list filtered according to the expression
@@ -132,6 +194,28 @@ The filter configuration. Accepts the same values as the [filter](/api/javascrip
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query containing the filtered collection
 
+#### Example
+
+    <script>
+        var query = new kendo.data.Query([
+            { name: "Jane Doe", age: 30, department: "Sales" },
+            { name: "John Doe", age: 33, department: "IT" },
+            { name: "Bob Smith", age: 25, department: "Sales" },
+            { name: "Alice Johnson", age: 28, department: "Marketing" }
+        ]);
+        
+        var filteredQuery = query.filter({
+            logic: "and",
+            filters: [
+                { field: "age", operator: "gte", value: 28 },
+                { field: "department", operator: "eq", value: "Sales" }
+            ]
+        });
+        var result = filteredQuery.toArray();
+        // the result can be seen in the browser console.
+        console.log(result); // Will contain only Jane Doe (age >= 28 and department = Sales)
+    </script>
+
 ### groupBy
 
 Returns a copy of the list grouped according to the descriptor
@@ -145,6 +229,24 @@ The grouping configuration. Accepts the same values as the [group](/api/javascri
 #### Returns
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query containing the grouped collection
+
+#### Example
+
+    <script>
+        var query = new kendo.data.Query([
+            { name: "Jane Doe", age: 30, department: "Sales" },
+            { name: "John Doe", age: 33, department: "IT" },
+            { name: "Bob Smith", age: 25, department: "Sales" },
+            { name: "Alice Johnson", age: 28, department: "Marketing" }
+        ]);
+        
+        var groupedQuery = query.groupBy({
+            field: "department"
+        });
+        var result = groupedQuery.toArray();
+        // the result can be seen in the browser console.
+        console.log(result); // Will be grouped by department
+    </script>
 
 ## Class Methods
 

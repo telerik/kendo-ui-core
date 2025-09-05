@@ -172,6 +172,21 @@ The color that should be set as the current value
 
 `kendo.Color` the current value
 
+#### Example
+
+    <div id="colorpalette"></div>
+    <script>
+    $("#colorpalette").kendoColorPalette();
+    var colorpalette = $("#colorpalette").data("kendoColorPalette");
+    
+    // set the selected color
+    colorpalette.color(kendo.Color.fromBytes(255, 0, 0));
+    
+    // get the selected color
+    var selectedColor = colorpalette.color();
+    console.log("Selected color:", selectedColor.toHex());
+    </script>
+
 ### enable
 
 Enables or disables the widget.

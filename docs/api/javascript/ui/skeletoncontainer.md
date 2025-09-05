@@ -53,6 +53,41 @@ Defines a value determining whether the items will be animated. Valid options ar
 
 Defines the settings for the CSS Grid used for layouting the skeleton shapes.
 
+#### Example
+
+    <div id="skeleton"></div>
+    <script>
+    $("#skeleton").kendoSkeletonContainer({
+        width: 400,
+        height: 300,
+        grid: {
+            columns: 3,
+            rows: 2,
+            gap: {
+                columns: 10,
+                rows: 15
+            },
+            items: [
+                {
+                    colStart: 1,
+                    colSpan: 1,
+                    rowStart: 1,
+                    rowSpan: 1,
+                    shape: "rectangle"
+                },
+                {
+                    colStart: 2,
+                    colSpan: 1,
+                    rowStart: 1,
+                    rowSpan: 1,
+                    shape: "rectangle"
+                }
+            ]
+        },
+        animation: "wave"
+    });
+    </script>
+
 ### grid.columns `Number`
 
 Defines the number of columns.
@@ -89,6 +124,41 @@ Defines the number of columns.
 ### grid.gap `Object`
 
 An object holding values that determine the spacing between the skeleton items horizontally and vertically.
+
+#### Example
+
+    <div id="skeleton"></div>
+    <script>
+    $("#skeleton").kendoSkeletonContainer({
+        width: 300,
+        height: 250,
+        grid: {
+            columns: 4,
+            rows: 3,
+            gap: {
+                columns: 8,
+                rows: 12
+            },
+            items: [
+                {
+                    colStart: 1,
+                    colSpan: 1,
+                    rowStart: 1,
+                    rowSpan: 1,
+                    shape: "rectangle"
+                },
+                {
+                    colStart: 2,
+                    colSpan: 1,
+                    rowStart: 1,
+                    rowSpan: 1,
+                    shape: "rectangle"
+                }
+            ]
+        },
+        animation: "pulse"
+    });
+    </script>
 
 ### grid.gap.columns `Number`
 

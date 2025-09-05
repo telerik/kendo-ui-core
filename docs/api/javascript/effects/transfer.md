@@ -31,3 +31,18 @@ Scales and repositions the element on top of the provided target. The element an
 
 The target element to transfer to.
 
+#### Example
+
+    <div id="source" style="width: 100px; height: 100px; position: absolute; border: 1px solid blue; background: lightblue;">
+        Source
+    </div>
+
+    <div id="destination" style="width: 50px; height: 50px; position: absolute; left: 200px; top: 50px; border: 1px solid red; background: lightcoral;">
+        Target
+    </div>
+
+    <script>
+        // Transfer the source element to the destination target
+        kendo.fx($("#source")).transfer($("#destination")).play();
+    </script>
+
