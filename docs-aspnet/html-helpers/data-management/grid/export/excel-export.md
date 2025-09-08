@@ -326,6 +326,7 @@ Also, note the difference between the `.Hidden()` and `.Visible()` properties of
 
 ## Known Limitations
 
+* During export, the Grid initializes a new instance of its DataSource based on the original configuration. This triggers an additional `read` request to fetch the data, regardless of whether the [`AllPages`](#exporting-all-data) option is enabled or disabled. The behavior ensures that the export process does not alter the state of the original DataSource.
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
 * The maximum size of the exported file has a system-specific limit. For large data sets, use the server-side solution which is provided by the [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) as part of the [Document Processing Library](https://docs.telerik.com/devtools/document-processing/introduction).
 * Exporting the Grid to Excel in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `ProxyURL` configuration section](/api/kendo.mvc.ui.fluent/gridexcel{% if site.core %}settings{% endif %}builder#proxyurlsystemstring).
