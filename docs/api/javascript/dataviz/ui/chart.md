@@ -20179,11 +20179,6 @@ The color of the highlighted marker.
       }]
     });
     </script>
-          data: [1, 2, 3]
-        }]
-      });
-    </script>
-```
 
 
 ### series.highlight.opacity `Number`
