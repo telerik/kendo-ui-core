@@ -60,16 +60,6 @@ If set to `true`, the widget will enter fullscreen mode.
 
 #### Example
 
-    <div id="mediaplayer"></div>
-    <script>
-    $("#mediaplayer").kendoMediaPlayer({
-        fullScreen: true,
-        media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
-    });
-    </script>
-
-#### Enable fullscreen
-
 ```pseudo
     <div id="mediaplayer"></div>
     <script>

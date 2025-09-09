@@ -11013,8 +11013,8 @@ The rotation angle of the markers.
 
 #### Example
 
-<div id="stockChart"></div>
-  <script>
+    <div id="stockChart"></div>
+    <script>
     $(document).ready(function () {
     // Sample local stock data
       var stockData = [
@@ -11071,7 +11071,7 @@ The rotation angle of the markers.
           }
       });
 	});
-  </script>
+    </script>
 
 ### navigator.series.markers.type `String`*(default: "circle")*
 
@@ -11296,7 +11296,7 @@ The supported values are:
 
 #### Example
 
-<div id="stockChart"></div>
+    <div id="stockChart"></div>
     <script>
       $(document).ready(function () {
       // Sample local stock data
@@ -11780,7 +11780,7 @@ Indicates that the series should be stacked in a group with the specified name.
             }
         });
   	});
-  </script>
+    </script>
 
 ### navigator.series.tooltip `Object`
 
@@ -14531,7 +14531,7 @@ The dash type of the border.
 
 #### Example
 
-<div id="stockChart"></div>
+    <div id="stockChart"></div>
     <script>
       $(document).ready(function () {
       // Sample local stock data
@@ -14586,7 +14586,7 @@ The dash type of the border.
             }
         });
   	});
-  </script>
+    </script>
 
 #### *"solid"*
 
@@ -14622,7 +14622,7 @@ The width of the border.
 
 #### Example
 
-<div id="stockChart"></div>
+    <div id="stockChart"></div>
     <script>
       $(document).ready(function () {
       // Sample local stock data
@@ -14677,7 +14677,7 @@ The width of the border.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.title.color `String`
 
@@ -14685,7 +14685,7 @@ The text color of the title. Any valid CSS color string will work here, includin
 
 #### Example
 
-<div id="stockChart"></div>
+    <div id="stockChart"></div>
     <script>
       $(document).ready(function () {
       // Sample local stock data
@@ -14740,7 +14740,7 @@ The text color of the title. Any valid CSS color string will work here, includin
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.title.font `String`*(default: "16px Arial,Helvetica,sans-serif")*
 
@@ -14799,7 +14799,7 @@ The font style of the title.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.title.margin `Number|Object`*(default: 5)*
 
@@ -14858,7 +14858,7 @@ The margin of the title.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.title.position `String`*(default: "center")*
 
@@ -14917,7 +14917,7 @@ The position of the title.
             }
         });
   	});
-  </script>
+    </script>
 
 #### *"top"*
 
@@ -14996,7 +14996,7 @@ The rotation angle of the title.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.title.text `String`
 
@@ -15054,7 +15054,7 @@ The text of the title.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.title.visible `Boolean`*(default: true)*
 
@@ -15113,7 +15113,7 @@ The visibility of the title.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.type `String`*(default: "category")*
 
@@ -15169,7 +15169,7 @@ The axis type.
             }
         });
   	});
-  </script>
+    </script>
 
 #### *"category"*
 
@@ -15237,7 +15237,7 @@ either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configurat
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps.days `Array` *(default: [1, 2, 3])*
 
@@ -15295,7 +15295,7 @@ The days unit steps.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps.hours `Array` *(default: [1, 2, 3])*
 
@@ -15353,7 +15353,7 @@ The hours unit steps.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps.minutes `Array` *(default: [1, 2, 5, 15, 30])*
 
@@ -15411,7 +15411,7 @@ The minutes unit steps.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps.months `Array` *(default: [1, 2, 3, 6])*
 
@@ -15469,7 +15469,7 @@ The months unit steps.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps.weeks `Array` *(default: [1, 2])*
 
@@ -15527,7 +15527,7 @@ The weeks unit steps.
             }
         });
   	});
-  </script>
+    </script>
 
 ### categoryAxis.autoBaseUnitSteps.years `Array` *(default: [1, 2, 3, 5, 10, 25, 50])*
 

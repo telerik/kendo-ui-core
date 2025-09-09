@@ -289,8 +289,7 @@ The configuration which is used when the data source discovers the schema inform
 * If the value of `transport.discover` is a string, the data source uses this string as the URL of the remote service.
 * If the value of `transport.discover` is omitted, the data source uses `transport.read` for schema discovery.
 
-#### Example
-
+```pseudo
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
@@ -299,7 +298,8 @@ The configuration which is used when the data source discovers the schema inform
           catalog: "Adventure Works DW 2008R2",
           cube: "Adventure Works"
         },
-        discover: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+        // The endpoint that returns the schema info for the cube
+        discover: "endpoint-returning-info-about-the-cube",
         read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
       },
       schema: {
@@ -308,30 +308,6 @@ The configuration which is used when the data source discovers the schema inform
     });
     dataSource.schemaDimensions().done(function(dimensions) {
       /* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(dimensions.length);
-    });
-    </script>
-
-#### Set the discover remote service
-
-```pseudo
-    <script>
-    var dataSource = new kendo.data.PivotDataSource({
-      type: "xmla",
-      transport: {
-        connection: {
-            catalog: "Adventure Works DW 2008R2",
-            cube: "Adventure Works"
-        },
-        discover: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
-        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
-      },
-      schema: {
-        type: "xmla"
-      }
-    });
-    dataSource.schemaDimensions().done(function(dimensions) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dimensions.length);
     });
     </script>

@@ -317,16 +317,16 @@ Specifies the image of the item.
         $("#dropdownbutton").kendoDropDownButton({
             items: [
                 { 
-                    text: "Facebook", 
-                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/facebook.png" 
+                    text: "Image", 
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/photo.png" 
                 },
                 { 
-                    text: "Twitter", 
-                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/twitter.png" 
+                    text: "Video", 
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/video.png" 
                 },
                 { 
-                    text: "LinkedIn", 
-                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/linkedin.png" 
+                    text: "Volume", 
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/speaker.png" 
                 }
             ]
         });

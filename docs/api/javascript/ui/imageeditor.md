@@ -1622,8 +1622,7 @@ Fired when an error happened with the image loading.
 
 The widget instance which fired the event.
 
-#### Example
-
+```pseudo
     <div id="imageEditor"></div>
     <script>
     $("#imageEditor").kendoImageEditor({
@@ -1634,5 +1633,5 @@ The widget instance which fired the event.
         }
     });
     </script>
-
+```
 

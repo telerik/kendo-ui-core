@@ -1178,8 +1178,7 @@ The field from the server response which contains the data items. Can be set to 
 
 The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](/api/javascript/data/datasource/events/error) event will be fired.
 
-#### Example
-
+```pseudo
     <div id="grid"></div>
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1202,6 +1201,7 @@ The field from the server response which contains server-side errors. Can be set
       dataSource: dataSource
     });
     </script>
+```
 
 > If this option is set and the server response contains that field, then the `error` event will be fired. The `errors` field of the event argument will contain the errors returned by the server.
 
@@ -3431,8 +3431,7 @@ A function that will handle create, update and delete operations in a single bat
 
 The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
 
-#### Example
-
+```pseudo
     <div id="grid"></div>
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -3479,6 +3478,7 @@ The `transport.create`, `transport.update`, and `transport.delete` operations wi
       editable: true
     });
     </script>
+```
 
 > This function will only be invoked when the DataSource is in its [batch mode](/api/javascript/data/datasource#configuration-batch).
 

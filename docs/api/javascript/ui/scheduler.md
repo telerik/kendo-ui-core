@@ -827,8 +827,8 @@ The configuration of the scheduler resource(s) grouping.
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/13"),
-        startTime: new Date("2022/6/13 07:00 AM"),
+        date: new Date("2024/6/10"),
+        startTime: new Date("2024/6/10 07:00 AM"),
         height: 600,
         views: [
             "day",
@@ -841,7 +841,7 @@ The configuration of the scheduler resource(s) grouping.
             batch: true,
             transport: {
                 read: {
-                    url: "//demos.telerik.com/kendo-ui/service/meetings",
+                    url: "https://demos.telerik.com/service/v2/core/meetings",
                     dataType: "jsonp"
                 }
             },
@@ -5132,8 +5132,8 @@ with a scheduler event.
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/13"),
-        startTime: new Date("2022/6/13 07:00 AM"),
+        date: new Date("2024/6/10"),
+        startTime: new Date("2024/6/10 07:00 AM"),
         height: 600,
         views: [
             "day",
@@ -5146,8 +5146,7 @@ with a scheduler event.
             batch: true,
             transport: {
                 read: {
-                    url: "//demos.telerik.com/kendo-ui/service/meetings",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings", 
                 }
             },
             schema: {
@@ -6949,16 +6948,15 @@ The configuration of the view resource(s) grouping.
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/13"),
-        startTime: new Date("2022/6/13 07:00 AM"),
+        date: new Date("2024/6/10"),
+        startTime: new Date("2024/6/10 07:00 AM"),
         height: 600,
         timezone: "Etc/UTC",
         dataSource: {
             batch: true,
             transport: {
                 read: {
-                    url: "//demos.telerik.com/kendo-ui/service/meetings",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings", 
                 }
             },
             schema: {

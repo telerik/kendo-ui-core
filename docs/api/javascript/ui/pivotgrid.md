@@ -175,14 +175,22 @@ Configures the Kendo UI PivotGrid Excel export settings.
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -278,14 +286,22 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/p
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -359,15 +375,24 @@ Configures the Kendo UI PivotGrid PDF export settings.
         height: 550,
         dataSource: {
             type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
-            measures: ["[Measures].[Internet Sales Amount]"],
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+            rows: [{ name: "[Geography].[City]" }],
+            measures: [
+                { name: "[Measures].[Internet Revenue Status]", type: "status" }, //KPI Status measure that will render kpiStatusTemplate
+                { name: "[Measures].[Internet Revenue Trend]", type: "trend" } //KPI Trend measure that will render kpiTrendTemplate
+            ],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+            },
+            schema: {
+                type: "xmla"
+            },
+            error: function (e) {
+                alert("error: " + kendo.stringify(e.errors[0]));
             }
         }
     });
@@ -595,19 +620,28 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/p
         pdf: {
             forceProxy: true,
             proxyURL: "/save"
+            //configure a valid endpoint which will export the file 
         },
         height: 550,
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -625,18 +659,27 @@ Specifies the quality of the images within the exported file, from 0 to 1.
         pdf: {
             jpegQuality: 0.8
         },
-        height: 550,
+        height: 580,
         dataSource: {
             type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
-            measures: ["[Measures].[Internet Sales Amount]"],
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+            rows: [{ name: "[Geography].[City]" }],
+            measures: [
+                { name: "[Measures].[Internet Revenue Status]", type: "status" }, //KPI Status measure that will render kpiStatusTemplate
+                { name: "[Measures].[Internet Revenue Trend]", type: "trend" } //KPI Trend measure that will render kpiTrendTemplate
+            ],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+            },
+            schema: {
+                type: "xmla"
+            },
+            error: function (e) {
+                alert("error: " + kendo.stringify(e.errors[0]));
             }
         }
     });
@@ -657,15 +700,24 @@ If set to true all PNG images contained in the exported file will be kept in PNG
         height: 550,
         dataSource: {
             type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
-            measures: ["[Measures].[Internet Sales Amount]"],
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+            rows: [{ name: "[Geography].[City]" }],
+            measures: [
+                { name: "[Measures].[Internet Revenue Status]", type: "status" }, //KPI Status measure that will render kpiStatusTemplate
+                { name: "[Measures].[Internet Revenue Trend]", type: "trend" } //KPI Trend measure that will render kpiTrendTemplate
+            ],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
+            },
+            schema: {
+                type: "xmla"
+            },
+            error: function (e) {
+                alert("error: " + kendo.stringify(e.errors[0]));
             }
         }
     });
@@ -806,14 +858,22 @@ The bottom margin. Numbers are considered as "pt" units.
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -837,14 +897,22 @@ The left margin. Numbers are considered as "pt" units.
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -868,14 +936,22 @@ The right margin. Numbers are considered as "pt" units.
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -899,14 +975,22 @@ The top margin. Numbers are considered as "pt" units.
         dataSource: {
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Category]", expand: true }],
+            rows: [{ name: "[Product].[Product]" }],
             measures: ["[Measures].[Internet Sales Amount]"],
             transport: {
                 connection: {
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
