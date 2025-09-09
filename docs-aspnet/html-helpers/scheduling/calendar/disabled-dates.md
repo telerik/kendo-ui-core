@@ -34,6 +34,17 @@ When you set an array, list the days that will be disabled by using the first le
 ```
 {% endif %}
 
+To apply a new filter or update an existing after initialisation use setOptions
+
+```HtmlHelper
+<script>
+	var calendar = $('#calendar').data('kendoDatePicker');
+	var options = calendar.options;
+	options.disableDates = ["mo", "sa"]; // Filters Monday & Saturday
+	calendar.setOptions(options);
+</script>
+```
+
 ## Adding a Function
 
 When you add a function, determine its return value as `true` for the date that is disabled.
