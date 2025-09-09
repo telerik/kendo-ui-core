@@ -15658,21 +15658,29 @@ Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/vir
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: {
-        type: "odata",
-        transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        loaderType:"skeleton",
+        dataSource: {
+            type: "odata-v4",
+            serverPaging: true,
+            serverSorting: true,
+            pageSize: 100,
+            transport: {
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
+            }
         },
-        pageSize: 50
-      },
-      height: 400,
-      scrollable: {
-        virtual: "rows"
-      }
+        height: 543,
+        scrollable: {
+            virtual: true
+        },
+        sortable: true,
+        columns: [
+            { field: "OrderID", title: "Order ID", width: 110 },
+            { field: "CustomerID", title: "Customer ID", width: 130},
+            { field: "ShipName", title: "Ship Name", width: 280 },
+            { field: "ShipAddress", title: "Ship Address" },
+            { field: "ShipCity", title: "Ship City", width: 160 },
+            { field: "ShipCountry", title: "Ship Country", width: 160 }
+        ]
     });
     </script>
 
@@ -15686,23 +15694,19 @@ If set to `true` the grid will always display a single page of data. Scrolling t
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: {
-        type: "odata",
-        transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+      $("#grid").kendoGrid({
+        columns: [{ field: "ProductName" }, { field: "UnitPrice" }],
+        dataSource: {
+          transport: {
+            read: "https://demos.telerik.com/service/v2/core/Products",
+          },
+          pageSize: 20,
         },
-        pageSize: 50
-      },
-      height: 400,
-      scrollable: {
-        endless: true
-      }
-    });
+        height: 400,
+        scrollable: {
+          endless: true,
+        },
+      });
     </script>
 
 ### search `Object`

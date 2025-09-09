@@ -18,8 +18,8 @@ Gets or sets the Navigator selected date range.
 
 #### Example
 
-<div id="stock-chart"></div>
-  <script>
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
       dataSource: {
         data: [
@@ -54,7 +54,7 @@ Gets or sets the Navigator selected date range.
       var selectedRange = navigator.select();
       console.log("Current range:", selectedRange.from, "to", selectedRange.to);
     }, 1000);    
-  </script>
+    </script>
 
 ##### Example - Set selected range
     <input id="fromDate" />

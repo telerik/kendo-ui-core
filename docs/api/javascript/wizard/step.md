@@ -60,7 +60,7 @@ If contentUrl is set for the step, loads the **Step** content from remote.
         steps: [
             {
                 title: "Dynamic Step",
-                contentUrl: "/api/wizard/step-content"
+                contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html"
             },
             {
                 title: "Second Step",
