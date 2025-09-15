@@ -50,6 +50,8 @@ The following example demonstrates how to group the ComboBox data by country.
 ```
 {% endif %}
 
+>  Group headers are not displayed in the ComboBox if all items belong to a single group.
+
 ## See Also
 
 * [Grouping by the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/grouping)
