@@ -185,6 +185,8 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 | Rendering and styling | You can customize the appearance of the Grid by [configuring its rows]({% slug rows_aspnetcore_grid_widget %}), initializing the Grid from a [hidden container]({% slug hidden_containers_aspnetcore_grid %}), using [adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %}), and setting its [height]({% slug height_aspnetcore_grid %}) and [width]({% slug width_grid_aspnetcore %}). |
 | [Globalization]({% slug globalization_grid_aspnetcore %}) | The Grid provides globalization through the combination of [localization]({% slug localization_aspnetcore_grid %}) with [internationalization]({% slug intl_aspnetcore_grid %}) and [right-to-left support]({% slug rtl_aspnetcore_grid %}).|
 | [Accessibility]({% slug htmlhelpers_grid_accessibility %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_grid %}) for faster navigation. |
+| [AI Toolbar Assistant]({% slug ai_toolbar_tool_core_grid %}) | The Grid provides a built-in AI Assistant toolbar tool that allows users to interact with the Grid using natural language prompts. |
+| [Custom AI Column]({% slug custom_ai_column_core_grid %}) | The Grid can be enhanced with a custom AI-powered column that provides personalized insights, summaries, and explanations for individual rows. |
 
 ## Next Steps
 
