@@ -348,6 +348,22 @@ Specifies the maximum number of characters allowed in the textarea.
     });
     </script>
 
+### promptTextArea.maxRows `Number` *(default: null)*
+
+Specifies the maximum number of visible rows to which the textarea can auto-resize. Used in combination with `resize: "auto"`.
+
+#### Example
+
+    <div id="aiprompt"></div>
+    <script>
+    $("#aiprompt").kendoAIPrompt({
+        promptTextArea: {
+            resize: "auto",
+            maxRows: 3
+        }
+    });
+    </script>
+
 ### promptTextArea.overflow `String`
 
 Specifies the overflow behavior. Available options: `"auto"`, `"hidden"`, `"visible"`, `"scroll"`.
@@ -380,7 +396,7 @@ Specifies the placeholder text for the textarea.
 
 ### promptTextArea.resize `String`
 
-Specifies the resize behavior. Available options: `"none"`, `"both"`, `"horizontal"`, `"vertical"`.
+Specifies the resize behavior. Available options: `"none"`, `"both"`, `"horizontal"`, `"vertical"`, `"auto"`.
 
 #### Example
 

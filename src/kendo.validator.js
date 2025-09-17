@@ -22,6 +22,7 @@ export const __meta__ = {
         MESSAGEBOX = "k-messagebox k-messagebox-error",
         INPUTINNER = ".k-input-inner",
         UPLOADBUTTONWRAPPER = ".k-upload-button-wrap",
+        CHECKBOXWRAPPER= ".k-checkbox-wrap",
         INPUTWRAPPER = ".k-input",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
@@ -728,6 +729,7 @@ export const __meta__ = {
                 containerElement = this._containerElement,
                 inputs = containerElement.find(that._inputSelector);
             let sorted = [];
+            let checkBoxNames = [];
 
             for (let idx = 0, length = inputs.length; idx < length; idx++) {
                 let input = $(inputs[idx]);
@@ -736,10 +738,19 @@ export const __meta__ = {
                     // Add current name if:
                     // - not present so far;
                     // - present but not part of CheckBoxGroup or RadioGroup.
+
                     if (sorted.indexOf(input.attr(NAME)) === -1 ||
                         (input.closest(".k-checkbox-list").length === 0 &&
                         input.closest(".k-radio-list").length === 0)) {
-                            sorted.push(input.attr(NAME));
+                            if (input.parents(CHECKBOXWRAPPER).length) {
+                                checkBoxNames.push(input.attr(NAME));
+                                sorted.push(input.attr(NAME));
+                            }
+                            else {
+                                if (!checkBoxNames.includes(input.attr(NAME))) {
+                                    sorted.push(input.attr(NAME));
+                                }
+                            }
                     }
                 }
             }
