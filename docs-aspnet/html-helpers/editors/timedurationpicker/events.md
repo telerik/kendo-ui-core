@@ -3,7 +3,7 @@ title: Events
 page_title: TimeDurationPicker Events
 description: "Learn how to handle the events of the Telerik UI TimeDurationPicker component for {{ site.framework }}."
 slug: htmlhelpers_timedurationpickerhelper_events
-position: 7
+position: 8
 ---
 
 # TimeDurationPicker Events
