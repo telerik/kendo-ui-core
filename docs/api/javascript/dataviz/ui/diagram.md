@@ -9820,10 +9820,21 @@ Defines the thickness or width of the shape stroke.
 
 Specifies the type of the Shape using any of the built-in shape type.
 
-* "rectangle": this is the default option
-* "circle": a circle/ellipse
-* "image": an image
-* "text": some text
+* `rectangle`: this is the default option
+* `circle`: a circle/ellipse
+* `image`: an image
+* `text`: some text
+
+Or common workflow shapes as: 
+
+* `Terminator`: Start and end points of the workflow.
+* `Process`: Standard processing steps or actions.
+* `Decision`: Decision points with Yes/No or True/False branches.
+* `Document`: Document creation or data output.
+* `PredefinedProcess`: Subroutines or predefined operations.
+* `Database`:Database operations or data storage.
+* `Delay`:Wait periods or time-based operations.
+* `ManualOperation`:Manual tasks requiring human intervention.
 
 #### Example - making all Diagram shapes circles by default
 
@@ -12595,9 +12606,21 @@ Defines the thickness or width of the shape stroke.
 
 Specifies the type of the Shape using any of the built-in shape type.
 
-* "rectangle" - The default option
-* "circle" - A circle/ellipse
-* "image" - An image
+* `rectangle`: this is the default option
+* `circle`: a circle/ellipse
+* `image`: an image
+* `text`: some text
+
+Or common workflow shapes as: 
+
+* `Terminator`: Start and end points of the workflow.
+* `Process`: Standard processing steps or actions.
+* `Decision`: Decision points with Yes/No or True/False branches.
+* `Document`: Document creation or data output.
+* `PredefinedProcess`: Subroutines or predefined operations.
+* `Database`:Database operations or data storage.
+* `Delay`:Wait periods or time-based operations.
+* `ManualOperation`:Manual tasks requiring human intervention.
 
 #### Example - customizing shape types
 
