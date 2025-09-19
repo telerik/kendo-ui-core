@@ -421,9 +421,13 @@ export const __meta__ = {
                 inputs = containerElement.find(this._inputSelector);
 
                 containerElement.find(UPLOADBUTTONWRAPPER).each(function() {
-                    let firstFileInput = $(this).find("input[type='file']").first();
+                    let uploadContainer = $($(this).parents(".k-upload")[0]),
+                        firstFileInput = $(this).find("input:hidden[type='file']").first();
+
                     if (firstFileInput.length) {
-                        Array.prototype.push.call(inputs, firstFileInput[0]);
+                        if (uploadContainer.length && !uploadContainer.hasClass("k-disabled")) {
+                            Array.prototype.push.call(inputs, firstFileInput[0]);
+                        }
                     }
                 });
 
