@@ -10,6 +10,16 @@ position: 1
 
 This article lists the breaking or important changes in the 2025 releases of {{ site.product }}.
 
+## {{ site.product }} Q4 2025
+
+### DateRangePicker
+
+The DateRangePicker will be initialized through a root `span` element.
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `<div class="k-daterangepicker"></div>`    | `<span class="k-daterangepicker"></span>` |
+
 ## {{ site.product }} Q3 2025 (2025.3.825)
 
 ### Chat
