@@ -141,75 +141,230 @@ Additionally, you can use the `server-operation` or `.ServerOperation` property 
 ```
 
 ## WebAPI DataSource
+  
+The WebAPI DataSource maps the CRUD operations to standard HTTP verbs (`GET`, `POST`, `PUT`, `DELETE`) and supports the following data operations:
 
-The WebAPI DataSource type of data binding is designed for WebAPI projects and works in the same way as the Ajax data source.
+- Paging  
+- Sorting  
+- Filtering  
+- Grouping and Aggregates  
 
 ```HtmlHelper
-     @(Html.Kendo().DataSource<OrderViewModel>()
-        .Name("myDataSource")
-        .WebApi(dataSource =>
+@(Html.Kendo().DataSource<ProductViewModel>()
+    .Name("myDataSource")
+    .WebApi(webapi =>
+    {
+        webapi.Read(read => read.Action("Get", "Product"));
+        webapi.Create(create => create.Action("Post", "Product"));
+        webapi.Update(update => update.Action("Put", "Product", new { id = "{0}" }));
+        webapi.Destroy(destroy => destroy.Action("Delete", "Product", new { id = "{0}" }));
+        webapi.Model(model =>
         {
-          dataSource
-            .Read(read => read.Action("Get", "Product"))
-	    	.Create(create => create.Action("Post", "Product"))
-	    	.Update(update => update.Action("Put", "Product", new { id = "{0}"} ))
-	    	.Destroy(destroy => destroy.Action("DELETE", "Product", new { id = "{0}" }))
-            .PageSize(2)
-            .ServerOperation(true)
-            .Model(model =>
-            {
-                model.Id(field => field.OrderID);
-                model.Field(field => field.OrderID).Editable(false);
-            });
-        })
-    )
-
-    <script>
-        $(document).ready(function () {
-            myDataSource.read(); // A GET request will be sent to the ProductController Get action
+            model.Id(p => p.ProductID);
+            model.Field(p => p.ProductName).DefaultValue("New Product");
         });
-    </script>  
+    })
+)
+
+<script>
+    $(document).ready(function () {
+        myDataSource.read(); // A GET request will be sent to api/product
+    });
+</script>
 ```
 {% if site.core %}
 ```TagHelper
-    <!-- When you use the WebAPI DataSource type of data binding in an editable Grid, define the field types in the `schema` to use the correct editors for the field. -->
+@addTagHelper *, Kendo.Mvc
 
-    <kendo-datasource name="myDataSource" type="DataSourceTagHelperType.WebApi" server-operation="true" page-size="2">
-        <transport>
-            <read url="/api/product" action="get"/>
-            <update url="/api/product/{0}" action="put" />
-            <create url="/api/product" action="post"/>
-            <destroy url="/api/product/{0}" action="delete"/>
-        </transport>
-        <schema>
-            <model id="OrderID">
-                <fields>
-                    <field name="OrderID" type="number" editable="false"></field>
-                </fields>
-            </model>
-        </schema>
-    </kendo-datasource>
+<kendo-datasource name="myDataSource" type="DataSourceTagHelperType.WebApi">
+    <transport>
+        <read url="/aspnet-core/api/product" type="GET"/>
+        <create url="/aspnet-core/api/product" type="POST"/>
+        <update url="/aspnet-core/api/product/{0}" type="PUT"/>
+        <destroy url="/aspnet-core/api/product/{0}" type="DELETE"/>
+    </transport>
+    <schema>
+        <model id="ProductID">
+            <fields>
+                <field name="ProductID" type="number" editable="false"></field>
+                <field name="ProductName" type="string" default-value="New Product"></field>
+                <field name="UnitPrice" type="number"></field>
+                <field name="UnitsInStock" type="number"></field>
+                <field name="Discontinued" type="boolean"></field>
+            </fields>
+        </model>
+    </schema>
+</kendo-datasource>
 
-    <script>
-        $(document).ready(function () {
-            myDataSource.read(); // A GET request will be sent to the ProductController Get action
-        });
-    </script> 
+<script>
+    $(document).ready(function () {
+        myDataSource.read(); // A GET request will be sent to api/product
+    });
+</script>
+```
+```C# ProductController
+[ApiController]
+[Route("api/[controller]")]
+public class ProductController : Controller
+{
+    private readonly IProductService service;
+
+    public ProductController(IProductService productService)
+    {
+        service = productService;
+    }
+
+    // GET: api/product
+    [HttpGet]
+    public DataSourceResult Get([DataSourceRequest] DataSourceRequest request)
+    {
+        return service.Read().ToDataSourceResult(request);
+    }
+
+    // POST: api/product
+    [HttpPost]
+    public IActionResult Post([FromForm] ProductViewModel product)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(
+                ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(error => error.ErrorMessage)
+            );
+        }
+
+        service.Create(product);
+
+        return new ObjectResult(
+            new DataSourceResult
+            {
+                Data = new[] { product },
+                Total = 1
+            }
+        );
+    }
+
+    // PUT: api/product/{id}
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromForm] ProductViewModel product)
+    {
+        if (ModelState.IsValid && id == product.ProductID)
+        {
+            try
+            {
+                service.Update(product);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        return BadRequest(
+            ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(error => error.ErrorMessage)
+        );
+    }
+
+    // DELETE: api/product/{id}
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        try
+        {
+            service.Destroy(new ProductViewModel { ProductID = id });
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return NotFound();
+        }
+
+        return Ok();
+    }
+}
 ```
 {% endif %}
+{% if site.mvc %}
 ```C# ProductController
-
-    [HttpGet]
-	public DataSourceResult Get([DataSourceRequest]DataSourceRequest request)
+public class ProductController : System.Web.Http.ApiController
+{
+    ProductService service;
+    public ProductController()
     {
-        // Orders can be IQueriable or IEnumerable.
-        // The result is a filtered, paged, grouped, and sorted collection.
-        var result = orders.ToDataSourceResult(request);
-
-        // response object : { AggregateResults: [], Data: [{},{}], Errors: null, Total: 7 }
-        return result;
+        service = new ProductService(new DemoDBContext());
     }
+    protected override void Dispose(bool disposing)
+    {
+        service.Dispose();
+        base.Dispose(disposing);
+    }
+    // GET api/product
+    public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
+    {
+        return service.Read().ToDataSourceResult(request);
+    }
+    // POST api/product
+    public HttpResponseMessage Post(ProductViewModel product)
+    {
+        if (ModelState.IsValid)
+        {
+            service.Create(product);
+            var response = Request.CreateResponse(HttpStatusCode.Created, new DataSourceResult { Data = new[] { product }, Total = 1 });
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = product.ProductID }));
+            return response;
+        }
+        else
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, errors);
+        }
+    }
+    // PUT api/product/5
+    public HttpResponseMessage Put(int id, ProductViewModel product)
+    {
+        if (ModelState.IsValid && id == product.ProductID)
+        {
+            try
+            {
+                service.Update(product);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        else
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, errors);
+        }
+    }
+    // DELETE api/product/5
+    public HttpResponseMessage Delete(int id)
+    {
+        ProductViewModel product = service.Read().FirstOrDefault(p => p.ProductID == id);
+        if (product == null)
+        {
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+        try
+        {
+            service.Destroy(product);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+        return Request.CreateResponse(HttpStatusCode.OK, product);
+    }
+}
 ```
+{% endif %}
 
 ## Custom DataSource
 
