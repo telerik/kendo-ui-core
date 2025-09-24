@@ -342,6 +342,6 @@ You can continue experimenting with the code sample above by running it in the T
 
 ## See Also
 * [Basic Usage of the TreeMap for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treemap)
-* [Client-Side API of the TreeMap](https://docs.telerik.com/kendo-ui/api/javascript/ui/treemap)
+* [Client-Side API of the TreeMap](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/treemap)
 * [Server-Side API of the TreeMap](/api/map)
 * [Knowledge Base Section](/knowledge-base)

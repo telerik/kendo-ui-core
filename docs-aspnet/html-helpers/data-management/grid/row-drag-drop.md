@@ -108,6 +108,8 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
 
 You can move items from one instance of the Grid to another by handling the [`RowReorder` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/rowreorder) of the Grid. It fires on reordering for both Grid instances and allows you to access and modify their data sources. Both Grids must be bound to the same model.
 
+> Dragging and dropping a row into an empty Grid requires a custom implementation that adds a placeholder row to the target Grid.
+
 For a runnable example, refer to the [demo on drag and drop by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/drag-drop).
 
 ## Row Click-Move-Click
@@ -252,6 +254,8 @@ The {{site.product}} Grid exposes a [RowReorder](/api/kendo.mvc.ui.fluent/gridev
 
 You can reorder the rows through the keyboard when the `Navigatable()` method is enabled.
 
+On mobile devices, the Drag and Drop functionality activates on `hold` & `slide` of the row.
+
 The example below demonstrates how to drag and drop the Grid rows by using the keys `Ctrl + Up/Down`.
 
 ```HtmlHelper
@@ -294,9 +298,13 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 ```
 {% endif %}
 
+When the [`Multiple` selection]({% slug htmlhelpers_grid_aspnetcore_selection%}#select-modes
+) option is enabled for the Grid rows, the user can drag and drop the selected rows through the `Ctrl` + `Mouse left-click` combination.
+
 ## Known Limitations
 
 * Any DataSource operations (for example, sorting, filtering, grouping, and so on) that involve rendering rows in a different order than their natural one are not supported.
+* The Drag and Drop functionality in combination with the [selection feature]({% slug htmlhelpers_grid_aspnetcore_selection%}) is not supported in Microsoft Internet Explorer.
 
 ## See Also
 

@@ -181,7 +181,7 @@ For the complete implementation of the suggested approach, refer to [the project
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Telerik UI for {{ site.framework }} Grid Templates](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/templates/overview)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}

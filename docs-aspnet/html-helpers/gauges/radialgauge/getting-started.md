@@ -125,7 +125,7 @@ You can reference the Radial Gauge instances that you have created and build on 
         });
     ```
 
-1. Use the [Radial Gauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/radialgauge#methods) to control the behavior of the component. In this example, you will use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/radialgauge/methods/value) method to change the value of the Radial Gauge when the user presses the ArrowUp or ArrowDown keyboard buttons.
+1. Use the [Radial Gauge client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/radialgauge#methods) to control the behavior of the component. In this example, you will use the [`value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/radialgauge/methods/value) method to change the value of the Radial Gauge when the user presses the `ArrowUp` or `ArrowDown` keyboard buttons.
 
     ```JavaScript
         $("body").on("keydown",function(e){
@@ -159,6 +159,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Radial Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge)
-* [Client-Side API of the Radial Gauge](https://docs.telerik.com/kendo-ui/api/javascript/ui/radialgauge)
+* [Client-Side API of the Radial Gauge](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/radialgauge)
 * [Server-Side API of the Radial Gauge](/api/radialgauge)
 * [Knowledge Base Section](/knowledge-base)
