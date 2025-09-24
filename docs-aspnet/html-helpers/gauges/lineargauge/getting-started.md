@@ -186,7 +186,7 @@ You can reference the Linear Gauge instances that you have created and build on 
         });
     ```
 
-1. Use the [Linear Gauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/lineargauge#methods) to control the behavior of the component. In this example, you will use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/lineargauge/methods/value) method to change the value of the Linear Gauge every second to ensure that the visualized thermometer is exact.
+1. Use the [Linear Gauge client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/lineargauge#methods) to control the behavior of the component. In this example, you will use the [`value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/lineargauge/methods/value) method to change the value of the Linear Gauge every second.
 
     ```JavaScript
         setInterval(function(){

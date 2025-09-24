@@ -9,7 +9,7 @@ position: 4
 # Drag and Drop Overview
 
 
-The FileManager provides inbuilt Drag and Drop functionality, which allows dragging and dropping files from the FileManager view(GridView, ListView) to the TreeView and vice versa. The functionality is enabled by default and it can be controlled by the `draggable` option.
+The FileManager provides inbuilt Drag and Drop functionality, which allows dragging and dropping files from the FileManager view(GridView, ListView) to the TreeView and vice versa. The functionality is enabled by default and it can be controlled by the `draggable` option. To prevent conflicts between selection and drag-and-drop operations, which both respond to mouse events, drag operations are initiated only after the mouse button is held down for a minimum of 150 milliseconds.
 
 
 The following example demonstrated how to disable the Drag and Drop functionality of the FileManager:

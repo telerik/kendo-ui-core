@@ -269,6 +269,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [Use Remote Binding for the markers of the Map]({% slug htmlhelpers_map_remote_binding_markers %})
 ## See Also
 * [Using the API of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/api)
-* [Client-Side API of the Map](https://docs.telerik.com/kendo-ui/api/javascript/ui/map)
+* [Client-Side API of the Map](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/map)
 * [Server-Side API of the Map](/api/map)
 * [Knowledge Base Section](/knowledge-base)
