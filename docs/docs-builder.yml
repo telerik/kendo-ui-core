@@ -2093,3 +2093,6 @@ redirects:
 
 - from: ^/controls/grid/appearance$
   to: /controls/grid/appearance/height
+
+- from: "^/controls/([a-z0-9-]+(?:/[a-z0-9-]+)?)$"
+  to: "/controls/$1/overview"
