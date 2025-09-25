@@ -870,3 +870,6 @@ redirects:
 
 - from: "^/tag-helpers/(.*)$"
   to: "/html-helpers/$1"
+
+- from: "^/html-helpers/([a-z0-9-]+(?:/[a-z0-9-]+)?)$"
+  to: "/html-helpers/$1/overview"
